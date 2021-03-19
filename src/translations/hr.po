@@ -101,7 +101,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 popisi izvođenja (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -275,7 +275,7 @@ msgstr "&Godina"
 msgid "(different across multiple songs)"
 msgstr "(različito kroz više pjesama)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr ", od "
 
@@ -508,7 +508,7 @@ msgstr "Dodajte radnju"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Dodaj sve pjesme iz direktorija i svih njegovih poddirektorija"
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "Dodajte novi stream..."
 
@@ -553,7 +553,7 @@ msgstr "Dodajte novu mapu"
 msgid "Add podcast"
 msgstr "Dodajte podcast"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "Dodajte podcast..."
 
@@ -633,11 +633,11 @@ msgstr "Dodajte oznaku godine pjesme"
 msgid "Add stream..."
 msgstr "Dodajte stream..."
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "Dodaj na Spotify popis izvođenja"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "Dodaj u Spotify ocjenjeno"
 
@@ -654,7 +654,7 @@ msgstr "Dodajte u popis izvođenja"
 msgid "Add to the queue"
 msgstr "Se odabrati za reprodukciju i dodati na popis izvođenja"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -719,7 +719,7 @@ msgstr "Izvođač albuma"
 msgid "Album cover"
 msgstr "Omot albuma"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "Album info na jamendo.com..."
 
@@ -1082,7 +1082,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Podrška za CUE listu"
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "Prekini preuzimanje"
 
@@ -1356,7 +1356,7 @@ msgstr "Skladatelj"
 msgid "Configure %1..."
 msgstr "Konfiguracija %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "Podesi Magnatune..."
 
@@ -1364,11 +1364,11 @@ msgstr "Podesi Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Podesi prečace"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "Podesite Spotify ..."
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Podesi Subsonic..."
 
@@ -1381,13 +1381,13 @@ msgid "Configure library..."
 msgstr "Podesi fonoteku..."
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "Podesite podcaste..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1402,7 +1402,7 @@ msgstr "Spoji Wii Daljinski upravljač koristeći aktiviraj/deaktiviraj naredbu"
 msgid "Connect device"
 msgstr "Spoji uređaj"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Spajanje Spotify-a"
 
@@ -1449,7 +1449,7 @@ msgstr "Konvertiraj lossless datoteke"
 msgid "Copy to clipboard"
 msgstr "Kopiraj u međuspremnik"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopirajte na uređaj..."
@@ -1673,7 +1673,7 @@ msgstr "Pauza između vizualizacija"
 msgid "Delete"
 msgstr "Obriši"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
@@ -1828,8 +1828,8 @@ msgstr "Prikaži zaslonski prikaz (OSD)"
 msgid "Do a full library rescan"
 msgstr "Pretražite ponovno cijelu fonoteku"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "Pokreni potpuno ponovno pretraživanje"
 
@@ -1846,7 +1846,7 @@ msgstr "Ne konvertiraj glazbu"
 msgid "Do not overwrite"
 msgstr "Nemoj prepisati"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1875,8 +1875,8 @@ msgstr "Ne sviraj naizmjenično"
 msgid "Don't stop!"
 msgstr "Ne zaustavljaj!"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "Donirajte"
 
@@ -1892,7 +1892,7 @@ msgstr "Dvostruk klik na pjesmu u popisu izvođenja će..."
 msgid "Double clicking a song will..."
 msgstr "Dvostrukim klikom pjesma će..."
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1914,8 +1914,8 @@ msgstr "Učlani se"
 msgid "Download new episodes automatically"
 msgstr "Preuzmi automatski nove epizode"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Zahtjev preuzimanja"
 
@@ -1931,15 +1931,15 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "Preuzmi ovaj album"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "Preuzmi ovaj album..."
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "Preuzmi ovaj nastavak"
 
@@ -1947,21 +1947,21 @@ msgstr "Preuzmi ovaj nastavak"
 msgid "Download..."
 msgstr "Preuzmi..."
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Preuzimanje (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Preuzimanje Icecast direktorija"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "Preuzimanje  Jamendo kataloga"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Preuzimanje Magnatune kataloga"
 
@@ -2001,7 +2001,7 @@ msgstr "Trajanje"
 msgid "Dynamic mode is on"
 msgstr "Dinamičan način je uključen"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Dinamičan naizmjeničan mix"
 
@@ -2035,7 +2035,7 @@ msgstr "Uredite informacije o pjesmi..."
 msgid "Edit tracks information..."
 msgstr "Uredite informacije pjesama..."
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Uredite ..."
 
@@ -2131,7 +2131,7 @@ msgstr "Upišite ovu IP adresu u aplikaciju za spajanje na Clementine."
 msgid "Entire collection"
 msgstr "Cijelu kolekciju"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr "Informacije epizode"
 
@@ -2311,7 +2311,7 @@ msgstr "Neuspjelo dohvaćanje direktorija"
 msgid "Failed to fetch podcasts"
 msgstr "Neuspjelo preuzimanje podcasta"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2323,7 +2323,7 @@ msgstr ""
 msgid "Failed to load podcast"
 msgstr "Neuspjelo učitavanje podcasta"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2334,7 +2334,7 @@ msgstr ""
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Neuspjela raščlamba XML-a za ovaj RSS izvor"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2367,7 +2367,7 @@ msgstr "Preuzmi automatski"
 msgid "Fetch completed"
 msgstr "Preuzimanje završeno"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Dohvaćanje Subsonic fonoteke"
 
@@ -2515,7 +2515,7 @@ msgstr "Broj sličica"
 msgid "Frames per buffer"
 msgstr "Okvira po međuspremniku"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr ""
 
@@ -2554,25 +2554,25 @@ msgstr "Opće postavke"
 msgid "Genre"
 msgstr "Vrsta glazbe"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr "Nabavi URL za dijeljenje ove Spotify pjesme"
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr "Nabavi URL za dijeljenje ovog popisa izvođenja"
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "Pribavljanje kanala"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2783,7 +2783,7 @@ msgid ""
 "time a song finishes."
 msgstr "U dinamičkom modu nove pjesme će biti izabrane i dodane u popis izvođenja svaki puta kada je pjesma odsvirana."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "Pristigle poruke"
 
@@ -2819,7 +2819,7 @@ msgstr "Pojačaj glasnoću zvuka za <value> posto"
 msgid "Increase volume"
 msgstr "Pojačaj glasnoću zvuka"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indeksiranje %1"
@@ -2897,27 +2897,27 @@ msgstr "Neispravan ključ sesije"
 msgid "Invert Selection"
 msgstr "Obrni odabir"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "Jamendo najslušanija pjesma"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "Jamendo top pjesma"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Jamendo top pjesma mjeseca"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo top pjesma tjedna"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "Jamendo baza podataka"
 
@@ -3210,7 +3210,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3236,7 +3236,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Učinite tako!"
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "Učini popis izvođenja dostupnim kada je povezivanje prekinuto"
 
@@ -3261,11 +3261,11 @@ msgstr "Ručno"
 msgid "Manufacturer"
 msgstr "Proizvođač"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Označi kao preslušano"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "Označi kao novo"
 
@@ -3456,7 +3456,7 @@ msgstr "Nove pjesme"
 msgid "New tracks will be added automatically."
 msgstr "Nova pjesma bit će automatski dodana."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr ""
 
@@ -3654,12 +3654,12 @@ msgid "Opacity"
 msgstr "Zasjenjenost"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otvori %1 u pregledniku"
@@ -3801,7 +3801,7 @@ msgstr "Prepiši samo manje"
 msgid "Owner"
 msgstr "Vlasnik"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "Raščlanjivanje Jamendo kataloga"
 
@@ -3946,13 +3946,13 @@ msgstr "Stanje dodatka:"
 msgid "Podcast Information"
 msgstr "Informacije podcasta"
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr "Informacije podcasta"
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcasti"
@@ -4137,11 +4137,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Kiša"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr ""
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr ""
 
@@ -4182,7 +4182,7 @@ msgstr "Ocjena"
 msgid "Really cancel?"
 msgstr "Stvarno želite prekinuti?"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr ""
 
@@ -4190,19 +4190,19 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Ograničenje preusmjeravanja je premašeno, potvrdite podešavanje poslužitelja."
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Osvježi katalog"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "Osvježi kanale"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "Osvježi popis stanica"
 
@@ -4231,7 +4231,7 @@ msgstr "Zapamti od prošlog &pokretanja"
 msgid "Remember my choice"
 msgstr "Zapamti moj izbor"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4253,7 +4253,7 @@ msgstr "Ukloni duplikate iz popisa izvođenja"
 msgid "Remove folder"
 msgstr "Uklonite mapu"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Uklonite iz popisa izvođenja"
 
@@ -4521,15 +4521,15 @@ msgstr "Traži"
 msgid "Search Icecast stations"
 msgstr "Pretražite Icecast stanice"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "Icecast Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "Pretražite Magnatune stanice"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Subsonic pretraživanje"
 
@@ -4574,7 +4574,7 @@ msgstr "Način pretraživanja"
 msgid "Search options"
 msgstr "Mogućnosti pretraživanja"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "Rezultati pretrage"
 
@@ -4987,11 +4987,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Spotify greška prijave"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr "URL Spotify popisa izvođenja"
 
@@ -4999,7 +4999,7 @@ msgstr "URL Spotify popisa izvođenja"
 msgid "Spotify plugin"
 msgstr "Spotify dodatak"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr "URL Spotify pjesama"
 
@@ -5007,11 +5007,11 @@ msgstr "URL Spotify pjesama"
 msgid "Standard"
 msgstr "Standardno"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "Sa zvjezdicom"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr ""
 
@@ -5027,7 +5027,7 @@ msgstr "Pokrenite popis izvođenja koji se trenutno izvodi"
 msgid "Start transcoding"
 msgstr "Započni enkôdiranje"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5110,7 +5110,7 @@ msgstr "Streaming račun"
 msgid "Subscribers"
 msgstr "Pretplatnici"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -5155,15 +5155,15 @@ msgstr "Podržani formati"
 msgid "Synchronize statistics to files now"
 msgstr "Uskaldi statistiku s datotekama odmah"
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "Usklađivanje Spotify ulaznog spremnika"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "Usklađivanje Spotify popisa izvođenja"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "Usklađivanje Spotify pjesama označenim zvjezdicama"
 
@@ -5297,7 +5297,7 @@ msgstr "Treća razina"
 msgid "Third level"
 msgstr "Treća razina"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5395,11 +5395,11 @@ msgstr "Sutra"
 msgid "Too many redirects"
 msgstr "Previše preusmjeravanja"
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "Najpopularnije pjesme"
 
@@ -5527,7 +5527,7 @@ msgid "Unskip track"
 msgstr "Ukloni preskakanje pjesme"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "Otkažite pretplatu"
 
@@ -5535,7 +5535,7 @@ msgstr "Otkažite pretplatu"
 msgid "Upcoming Concerts"
 msgstr "Nadolazeći koncerti"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "Nadopuni sve podcaste"
 
@@ -5547,7 +5547,7 @@ msgstr "Nadopuni promjene u mapi fonoteke"
 msgid "Update the library when Clementine starts"
 msgstr "Nadopuni fonoteku kada se Clementine pokrene"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "Nadopuni ovaj podcast"
 
@@ -5965,7 +5965,7 @@ msgstr "Nemate Spotify Premium račun."
 msgid "You do not have an active subscription"
 msgstr "Nemate aktivnu pretplatu"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6003,7 +6003,7 @@ msgid "Your library is empty!"
 msgstr "Vaša fonoteka je prazna!"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "Vaši radio streamovi"
 

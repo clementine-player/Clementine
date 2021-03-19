@@ -102,7 +102,7 @@ msgstr "%1 trên %2"
 msgid "%1 playlists (%2)"
 msgstr "Danh sách %1 (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -276,7 +276,7 @@ msgstr "&Năm"
 msgid "(different across multiple songs)"
 msgstr "(mỗi bài mỗi khác)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr ", bởi"
 
@@ -509,7 +509,7 @@ msgstr "Thêm hành động"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Thêm tất cả các bài hát từ một thư mục và tất cả các thư mục con"
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "Thêm luồng dữ liệu khác..."
 
@@ -554,7 +554,7 @@ msgstr "Thêm thư mục mới..."
 msgid "Add podcast"
 msgstr "Thêm podcast"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "Thêm podcast..."
 
@@ -634,11 +634,11 @@ msgstr "Thêm thẻ năm của bài hát"
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "Thêm vào danh sách Spotify"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "Thêm vào Spotify và đánh dấu sao"
 
@@ -655,7 +655,7 @@ msgstr "Thêm vào danh sách"
 msgid "Add to the queue"
 msgstr "Thêm vào danh sách đợi"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -720,7 +720,7 @@ msgstr "Nghệ sĩ của Album"
 msgid "Album cover"
 msgstr "Ảnh bìa"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "Thông tin của album trên jamendo.com..."
 
@@ -1083,7 +1083,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Hỗ trợ danh sách CUE"
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "Hủy tải về"
 
@@ -1357,7 +1357,7 @@ msgstr "Soạn nhạc"
 msgid "Configure %1..."
 msgstr "Cấu hình %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "Cấu hình Magnatune..."
 
@@ -1365,11 +1365,11 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Cấu hình Subsonic..."
 
@@ -1382,13 +1382,13 @@ msgid "Configure library..."
 msgstr "Cấu hình thư viện..."
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "Cấu hình podcast..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1403,7 +1403,7 @@ msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Kết nối đến Spotify"
 
@@ -1450,7 +1450,7 @@ msgstr "Chuyển đổi tập tin lossless"
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Chép vào thiết bị..."
@@ -1674,7 +1674,7 @@ msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 msgid "Delete"
 msgstr "Xóa"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "Xóa dữ liệu đã tải về"
 
@@ -1829,8 +1829,8 @@ msgstr "Hiện hộp thông báo trên màn hình"
 msgid "Do a full library rescan"
 msgstr "Quét toàn bộ thư viện"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "Quét lại toàn bộ"
 
@@ -1847,7 +1847,7 @@ msgstr "Không chuyển đổi bất kì bản nhạc nào"
 msgid "Do not overwrite"
 msgstr "Không ghi đè"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1876,8 +1876,8 @@ msgstr "Không phát ngẫu nhiên"
 msgid "Don't stop!"
 msgstr "Không dừng lại!"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "Quyên góp"
 
@@ -1893,7 +1893,7 @@ msgstr "Nhấn đúp chuột vào bài hát trong danh sách sẽ..."
 msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1915,8 +1915,8 @@ msgstr "Tải với tư cách thành viên"
 msgid "Download new episodes automatically"
 msgstr "Tự động tải về các tập mới"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Đợi tải về"
 
@@ -1932,15 +1932,15 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "Tải album này"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "Tải album này..."
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "Tải tập này"
 
@@ -1948,21 +1948,21 @@ msgstr "Tải tập này"
 msgid "Download..."
 msgstr "Tải về..."
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Đang tải (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Đang tải thư mục Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "Đang tải mục lục Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Đang tải mục lục Magnatune"
 
@@ -2002,7 +2002,7 @@ msgstr "Thời lượng"
 msgid "Dynamic mode is on"
 msgstr "Chế độ năng động đã bật"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Hòa trộn âm thanh động ngẫu nhiên"
 
@@ -2036,7 +2036,7 @@ msgstr "Sửa thông tin bài hát..."
 msgid "Edit tracks information..."
 msgstr "Sửa thông tin bài hát..."
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Cập nhật..."
 
@@ -2132,7 +2132,7 @@ msgstr "Nhập IP này vào ứng dụng để kết nối đến Clementine."
 msgid "Entire collection"
 msgstr "Trọn bộ sưu tập"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr ""
 
@@ -2312,7 +2312,7 @@ msgstr "Lỗi tải thư mục"
 msgid "Failed to fetch podcasts"
 msgstr "Lỗi lấy podcast"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2324,7 +2324,7 @@ msgstr ""
 msgid "Failed to load podcast"
 msgstr "Lỗi nạp podcast"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2335,7 +2335,7 @@ msgstr ""
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Lỗi phân tích XML cho nguồn tin RSS"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2368,7 +2368,7 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Đang tải thư viện Subsonic"
 
@@ -2516,7 +2516,7 @@ msgstr "Tần số khung hình"
 msgid "Frames per buffer"
 msgstr "Số khung mỗi lần tạo bộ đệm"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr ""
 
@@ -2555,25 +2555,25 @@ msgstr "Thiết lập chung"
 msgid "Genre"
 msgstr "Thể loại"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr "Lấy URL để chia sẻ bài này"
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr "Lấy URL để chia sẻ danh sách này"
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "Đang tải các kênh"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2784,7 +2784,7 @@ msgid ""
 "time a song finishes."
 msgstr "Trong chế độ năng động, các bài hát mới sẽ được chọn và thêm vào danh sách mỗi khi một bài hát được phát xong."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "Hộp thư đến"
 
@@ -2820,7 +2820,7 @@ msgstr "Tăng <value>  phần trăm âm lượng"
 msgid "Increase volume"
 msgstr "Tăng âm lượng"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "Đang đánh chỉ mục %1"
@@ -2898,27 +2898,27 @@ msgstr "Khoá phiên chạy không hợp lệ"
 msgid "Invert Selection"
 msgstr "Đảo ngược lựa chọn"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "Những bài hát được nghe nhiều nhất trên Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "Những bài hát đầu bảng trên Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Những bài hát đầu bảng trong tháng trên Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Những bài hát đầu bảng trong tuần trên Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "Cơ sở dữ liệu Jamendo"
 
@@ -3211,7 +3211,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3237,7 +3237,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
@@ -3262,11 +3262,11 @@ msgstr "Thủ công"
 msgid "Manufacturer"
 msgstr "Nhà sản xuất"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Đánh dấu là đã nghe"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "Đánh dấu mới"
 
@@ -3457,7 +3457,7 @@ msgstr "Bài hát mới"
 msgid "New tracks will be added automatically."
 msgstr "Những bài hát mới sẽ được tự động thêm vào."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr ""
 
@@ -3655,12 +3655,12 @@ msgid "Opacity"
 msgstr "Độ mờ"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Mở %1 bằng trình duyệt"
@@ -3802,7 +3802,7 @@ msgstr "Chỉ ghi đè ảnh nhỏ hơn"
 msgid "Owner"
 msgstr "Sở hữu"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "Đang phân tích mục lục Jamendo"
 
@@ -3947,13 +3947,13 @@ msgstr "Trạng thái phần mở rộng:"
 msgid "Podcast Information"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcast"
@@ -4138,11 +4138,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Mưa"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr ""
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr ""
 
@@ -4183,7 +4183,7 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr ""
 
@@ -4191,19 +4191,19 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Đã vượt số lượng chuyển hướng, hãy kiểm tra cấu hình máy chủ."
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Cập nhật mục lục"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "Cập nhật kênh"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "Cập nhật danh sách đài"
 
@@ -4232,7 +4232,7 @@ msgstr ""
 msgid "Remember my choice"
 msgstr "Nhớ lựa chọn của tôi"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4254,7 +4254,7 @@ msgstr "Loại bỏ mục trùng nhau khỏi d.sách"
 msgid "Remove folder"
 msgstr "Loại bỏ thư mục"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
 
@@ -4522,15 +4522,15 @@ msgstr "Tìm kiếm"
 msgid "Search Icecast stations"
 msgstr "Tìm trên Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "Tìm trên Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "Tìm trên Magnatune"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Tìm trên Subsonic"
 
@@ -4575,7 +4575,7 @@ msgstr "Chế độ tìm kiếm"
 msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
@@ -4988,11 +4988,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Lỗi đăng nhập Spotify"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr "URL của danh sách Spotify"
 
@@ -5000,7 +5000,7 @@ msgstr "URL của danh sách Spotify"
 msgid "Spotify plugin"
 msgstr "Phần hỗ trợ Spotify"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr "URL của bài hát trên Spotify"
 
@@ -5008,11 +5008,11 @@ msgstr "URL của bài hát trên Spotify"
 msgid "Standard"
 msgstr "Chuẩn"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "Đã đánh giá"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr ""
 
@@ -5028,7 +5028,7 @@ msgstr "Bắt đầu danh sách đang phát"
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5111,7 +5111,7 @@ msgstr "Truyền tải thông tin thành viên"
 msgid "Subscribers"
 msgstr "Người đăng kí"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -5156,15 +5156,15 @@ msgstr "Các định dạng được hỗ trợ"
 msgid "Synchronize statistics to files now"
 msgstr "Đồng bộ thống kê vào tập tin ngay"
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "Đang đồng bộ hộp thư đến Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "Đang đồng bộ danh sách Spotify"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
@@ -5298,7 +5298,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Mức độ ba"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5396,11 +5396,11 @@ msgstr "Ngày mai"
 msgid "Too many redirects"
 msgstr "Quá nhiều chuyển hướng"
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "Những bài đứng đầu"
 
@@ -5528,7 +5528,7 @@ msgid "Unskip track"
 msgstr "Hủy bỏ qua bài hát"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "Hủy đăng kí"
 
@@ -5536,7 +5536,7 @@ msgstr "Hủy đăng kí"
 msgid "Upcoming Concerts"
 msgstr "Các buổi hòa nhạc sắp diễn ra"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "Cập nhật tất cả podcast"
 
@@ -5548,7 +5548,7 @@ msgstr "Cập nhập thư mục thư viện đã thay đổi"
 msgid "Update the library when Clementine starts"
 msgstr "Cập nhật thư viện khi Clementine khởi động"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "Cập nhật podcast này"
 
@@ -5966,7 +5966,7 @@ msgstr "Bạn không có tài khoản cao cấp của Spotify."
 msgid "You do not have an active subscription"
 msgstr "Bạn không có một đăng kí được kích hoạt"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6004,7 +6004,7 @@ msgid "Your library is empty!"
 msgstr "Thư viện của bạn chưa có gì!"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "Kênh phát thanh của bạn"
 

@@ -102,7 +102,7 @@ msgstr "%1 در %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 لیست‌پخش (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -276,7 +276,7 @@ msgstr "سال"
 msgid "(different across multiple songs)"
 msgstr "(متفاوت میان چند آهنگ)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr "، توسط"
 
@@ -509,7 +509,7 @@ msgstr "افزودن کنش"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "افزودن جریان دیگر..."
 
@@ -554,7 +554,7 @@ msgstr "افزودن پوشه‌ی نو..."
 msgid "Add podcast"
 msgstr "افزودن پادکست"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "افزودن پادکست..."
 
@@ -634,11 +634,11 @@ msgstr "افزودن برچسب سال آهنگ"
 msgid "Add stream..."
 msgstr "افزودن جریان..."
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "افزودن به فهرست پخش Spotify"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "افزودن به ستاره‌دارهای Spotify"
 
@@ -655,7 +655,7 @@ msgstr "افزودن به لیست‌پخش"
 msgid "Add to the queue"
 msgstr "افزودن به صف"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -720,7 +720,7 @@ msgstr "هنرمند آلبوم"
 msgid "Album cover"
 msgstr "جلد آلبوم"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "دانستنی‌های آلبوم در جامندو..."
 
@@ -1083,7 +1083,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "پشتیبانی از سیاهه"
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "لغو دانلود"
 
@@ -1357,7 +1357,7 @@ msgstr "تنظیم‌کننده"
 msgid "Configure %1..."
 msgstr "پیکربندی %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "پیکربندی مگناتیون..."
 
@@ -1365,11 +1365,11 @@ msgstr "پیکربندی مگناتیون..."
 msgid "Configure Shortcuts"
 msgstr "پیکربندی میان‌برها"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "پیکربندی اسپاتیفای..."
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "پیکربندی ساب‌سونیک..."
 
@@ -1382,13 +1382,13 @@ msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "پیکربندی پادکست..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1403,7 +1403,7 @@ msgstr "کنترل Wii را با استفاده از کنش پویا/ناپوی�
 msgid "Connect device"
 msgstr "اتصال دستگاه"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "اتصال به اسپاتیفای"
 
@@ -1450,7 +1450,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
@@ -1674,7 +1674,7 @@ msgstr "تأخیر بین فرتورسازیها"
 msgid "Delete"
 msgstr "پاک‌کردن"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
@@ -1829,8 +1829,8 @@ msgstr "نمایش نمایش پرده‌ای"
 msgid "Do a full library rescan"
 msgstr "انجام وارسی دوباره‌ی کامل کتابخانه"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "انجام یک بازنگری کامل"
 
@@ -1847,7 +1847,7 @@ msgstr "هیچ آهنگی را تبدیل نکن"
 msgid "Do not overwrite"
 msgstr "رونویسی نکنید"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1876,8 +1876,8 @@ msgstr "پخش مرتب"
 msgid "Don't stop!"
 msgstr "نایست!"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "اهدا کردن"
 
@@ -1893,7 +1893,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1915,8 +1915,8 @@ msgstr "بارگیری هموندی"
 msgid "Download new episodes automatically"
 msgstr "بارگیری خودکار داستان‌های تازه"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "صف بارگیری"
 
@@ -1932,15 +1932,15 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "بارگیری این آلبوم"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "بارگیری این آلبوم..."
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "بارگیری این داستان"
 
@@ -1948,21 +1948,21 @@ msgstr "بارگیری این داستان"
 msgid "Download..."
 msgstr "بارگیری..."
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "درحال بارگیری (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "بارگیری پوشه‌ی آیس‌کست"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "بارگیری کاتالوگ جامندو"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "بارگیری کاتالوگ مگناتیون"
 
@@ -2002,7 +2002,7 @@ msgstr "مدت زمان"
 msgid "Dynamic mode is on"
 msgstr "سبک دینامیک پویاست"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "درهم‌ریختن تصادفی دینامیک"
 
@@ -2036,7 +2036,7 @@ msgstr "ویرایش دانستنی‌های ترک..."
 msgid "Edit tracks information..."
 msgstr "ویرایش دانستنی‌های ترک‌ها..."
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "ویرایش...."
 
@@ -2132,7 +2132,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "همه‌ی مجموعه"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr ""
 
@@ -2312,7 +2312,7 @@ msgstr "ناتوان در واکشی پوشه"
 msgid "Failed to fetch podcasts"
 msgstr "ناتوان در واکشی پادکست"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2324,7 +2324,7 @@ msgstr ""
 msgid "Failed to load podcast"
 msgstr "ناتوان در بارگذاری پادکست"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2335,7 +2335,7 @@ msgstr ""
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "ناتوان در موشکافی XML برای خوراک RSS"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2368,7 +2368,7 @@ msgstr "واکشی خودکار"
 msgid "Fetch completed"
 msgstr "واکشی کامل شد"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "واکشی کتابخانه‌ی ساب‌سونیک"
 
@@ -2516,7 +2516,7 @@ msgstr "آهنگ فریم"
 msgid "Frames per buffer"
 msgstr "فریم در هر بافر"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr ""
 
@@ -2555,25 +2555,25 @@ msgstr "تنظیم‌های عمومی"
 msgid "Genre"
 msgstr "ژانر"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr ""
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "دریافت کانال"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2784,7 +2784,7 @@ msgid ""
 "time a song finishes."
 msgstr "در سبک دینامیک پس از پایان هر آهنگ، ترک‌های تازه برگزیده و به لیست‌پخش افزوده می‌شوند."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "صندوق ورودی"
 
@@ -2820,7 +2820,7 @@ msgstr "افزایش بلندی <value> درصد"
 msgid "Increase volume"
 msgstr "افزایش صدا"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "نمایه‌گذاری %1"
@@ -2898,27 +2898,27 @@ msgstr "کلید جلسه‌ی نامعتبر"
 msgid "Invert Selection"
 msgstr "معکوس کردن گزینش‌شده‌ها"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "جامندو"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "ترک‌های بیشتر شنیده شده‌ی جامندو"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "ترک‌های برتر جامندو"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "ترک‌های برتر ماه جامندو"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "ترک‌های برتر هفته‌ی جامندو"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "پایگاه داده‌ی جامندو"
 
@@ -3211,7 +3211,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "مگناتیون"
@@ -3237,7 +3237,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "این کار رو بکنید!"
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "لیست‌پخش را بیرون‌خط در دسترس بگذار"
 
@@ -3262,11 +3262,11 @@ msgstr "دستی"
 msgid "Manufacturer"
 msgstr "تولید‌کننده"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "نشان‌گذاری شنیده شده"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "نشان‌گذاری تازه"
 
@@ -3457,7 +3457,7 @@ msgstr "آهنگ‌‌های تازه"
 msgid "New tracks will be added automatically."
 msgstr "ترک‌های تازه خودکار اضافه می‌شوند."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr ""
 
@@ -3655,12 +3655,12 @@ msgid "Opacity"
 msgstr "تاری"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "گشودن %1 در مرورگر"
@@ -3802,7 +3802,7 @@ msgstr ""
 msgid "Owner"
 msgstr "دارنده"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "بررسی کاتالوگ جامندو"
 
@@ -3947,13 +3947,13 @@ msgstr "وضعیت افزونه"
 msgid "Podcast Information"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "پادکست"
@@ -4138,11 +4138,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "باران"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr ""
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr ""
 
@@ -4183,7 +4183,7 @@ msgstr "رتبه‌بندی"
 msgid "Really cancel?"
 msgstr "واقعا کنسل شود؟"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr ""
 
@@ -4191,19 +4191,19 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "بازخوانی کاتالوگ"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "بازخوانی کانالها"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "بازخوانی لیست ایستگاه‌ها"
 
@@ -4232,7 +4232,7 @@ msgstr ""
 msgid "Remember my choice"
 msgstr "انتخاب من را به یاد بیاور"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4254,7 +4254,7 @@ msgstr "پاک‌کردن تکراری‌ها از لیست‌پخش"
 msgid "Remove folder"
 msgstr "پاک کردن پوشه"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
@@ -4522,15 +4522,15 @@ msgstr "جستجو"
 msgid "Search Icecast stations"
 msgstr "جستجوی ایستگاه‌های آیس‌کست"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "جستجوی جامندو"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "جستجوی مگناتیون"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "جستجوی ساب‌سونیک"
 
@@ -4575,7 +4575,7 @@ msgstr "سبک جستجو"
 msgid "Search options"
 msgstr "گزینه‌های جستجو"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "دستاورد جستجو"
 
@@ -4988,11 +4988,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "خطای ورود به سیستم اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -5000,7 +5000,7 @@ msgstr ""
 msgid "Spotify plugin"
 msgstr "افزونه‌ی اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -5008,11 +5008,11 @@ msgstr ""
 msgid "Standard"
 msgstr "استاندارد"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "ستاره‌دار"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr ""
 
@@ -5028,7 +5028,7 @@ msgstr "شروع لیست‌پخش در حال پخش"
 msgid "Start transcoding"
 msgstr "آغاز تراکد"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5111,7 +5111,7 @@ msgstr "هموندی جریان"
 msgid "Subscribers"
 msgstr "هموندی‌ها"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "ساب‌سونیک"
@@ -5156,15 +5156,15 @@ msgstr "فرمت‌های قابل پشتیبانی"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "همگام‌سازی صندوق ورودی اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "همگام‌سازی لیست‌پخش اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "همگام‌سازی ترک‌های ستاره‌دار اسپاتیفای"
 
@@ -5298,7 +5298,7 @@ msgstr ""
 msgid "Third level"
 msgstr "طبقه‌ی سوم"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5396,11 +5396,11 @@ msgstr "فردا"
 msgid "Too many redirects"
 msgstr "بیش از اندازه بازگردانی‌ها"
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "ترک‌های برتر"
 
@@ -5528,7 +5528,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "لغو هموندی"
 
@@ -5536,7 +5536,7 @@ msgstr "لغو هموندی"
 msgid "Upcoming Concerts"
 msgstr "کنسرت‌های پیش‌رو"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "به‌روز رسانی همه‌ی پادکست‌ها"
 
@@ -5548,7 +5548,7 @@ msgstr "تغییرات پوشه‌های کتابخانه را به‌روز ب�
 msgid "Update the library when Clementine starts"
 msgstr "زمانی که کلمنتاین شروع می‌شود کتابخانه را به‌روز کن"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "به‌روز رسانی این پادکست"
 
@@ -5966,7 +5966,7 @@ msgstr "شما اکانت برجسته‌ی اسپاتیفای ندارید."
 msgid "You do not have an active subscription"
 msgstr "شما هیچ هموندی پویایی ندارید"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6004,7 +6004,7 @@ msgid "Your library is empty!"
 msgstr "کتابخانه‌ی شما تهی است!"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "جریان‌های رادیویی شما"
 

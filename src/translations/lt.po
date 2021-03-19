@@ -101,7 +101,7 @@ msgstr "%1 šaltinyje %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 grojaraščiai (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -275,7 +275,7 @@ msgstr "&Metai"
 msgid "(different across multiple songs)"
 msgstr "(skirtinga daugelyje dainų)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr ", pagal "
 
@@ -508,7 +508,7 @@ msgstr "Pridėti veiksmą"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Pridėti visus takelius iš katalogo ir visų jo vidinių katalogų"
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "Pridėti kitą srautą..."
 
@@ -553,7 +553,7 @@ msgstr "Pridėti naują aplanką..."
 msgid "Add podcast"
 msgstr "Pridėti tinklalaidę"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "Pridėti tinklalaidę..."
 
@@ -633,11 +633,11 @@ msgstr "Pridėti žymę kūrionio metams"
 msgid "Add stream..."
 msgstr "Pridėti srautą..."
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "Pridėti į Spotify grojaraščius"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
@@ -654,7 +654,7 @@ msgstr "Įdėti į grojaraštį"
 msgid "Add to the queue"
 msgstr "Įdėti į eilę"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -719,7 +719,7 @@ msgstr "Albumo atlikėjas"
 msgid "Album cover"
 msgstr "Albumo viršelis"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "Albumo info iš jamendo.com..."
 
@@ -1082,7 +1082,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "\"CUE sheet\" palaikymas"
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "Atšaukti atsiuntimą"
 
@@ -1356,7 +1356,7 @@ msgstr "Kompozitorius"
 msgid "Configure %1..."
 msgstr "Konfigūruoti %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "Konfigūruoti „Magnatune“..."
 
@@ -1364,11 +1364,11 @@ msgstr "Konfigūruoti „Magnatune“..."
 msgid "Configure Shortcuts"
 msgstr "Konfigūruoti sparčiuosius klavišus"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "Konfigūruoti Spotify..."
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Konfigūruoti subsonix"
 
@@ -1381,13 +1381,13 @@ msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "Konfigūruoti tinklalaides... "
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1402,7 +1402,7 @@ msgstr "Prijungti Wii pultą naudojant aktyvuoti/deaktyvuoti veiksmą"
 msgid "Connect device"
 msgstr "Prijungti įrenginį"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Jungiamasi prie Spotify"
 
@@ -1449,7 +1449,7 @@ msgstr "Konvertuoti nenuostolingus failus"
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
@@ -1673,7 +1673,7 @@ msgstr "Delsa tarp vizualizacijų"
 msgid "Delete"
 msgstr "Trinti"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
@@ -1828,8 +1828,8 @@ msgstr "Rodyti OSD"
 msgid "Do a full library rescan"
 msgstr "Pilnai perskenuoti fonoteką"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "Atlikti pilną perskenavimą"
 
@@ -1846,7 +1846,7 @@ msgstr "Nekonvertuoti jokios muzikos"
 msgid "Do not overwrite"
 msgstr "Ne perrašyti"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1875,8 +1875,8 @@ msgstr "Nemaišyti"
 msgid "Don't stop!"
 msgstr "Nesustoti!"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "Paremti pinigais"
 
@@ -1892,7 +1892,7 @@ msgstr "Du kartus spustelėjus dainą grojaraštyje..."
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1914,8 +1914,8 @@ msgstr "Atsiųsti narystę"
 msgid "Download new episodes automatically"
 msgstr "Atsisiųsti naujus epizodus automatiškai"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Atsiuntimas eilėje"
 
@@ -1931,15 +1931,15 @@ msgstr "Atsisiųsti originalią Android programėlę"
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "Atsisiųsti šį albumą"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1947,21 +1947,21 @@ msgstr "Atsiųsti šį epizodą"
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Atsiunčiama (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Atsiunčiamas Icecast aplankas"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "Atsiunčiamas Jamendo katalogas"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Atsiunčiamas  Magnatune katalogas"
 
@@ -2001,7 +2001,7 @@ msgstr "Trukmė"
 msgid "Dynamic mode is on"
 msgstr "Dinaminė veiksena yra įjungta"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Dinaminis atsitiktinis maišymas"
 
@@ -2035,7 +2035,7 @@ msgstr "Taisyti takelio informaciją..."
 msgid "Edit tracks information..."
 msgstr "Taisyti takelių informaciją..."
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Keisti..."
 
@@ -2131,7 +2131,7 @@ msgstr "Programoje įveskite šį adresą ir prisijungsite prie Clementine."
 msgid "Entire collection"
 msgstr "Visa kolekcija"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr "Epizodo informacija"
 
@@ -2311,7 +2311,7 @@ msgstr "Nepavyko atsiųsti direktorijos"
 msgid "Failed to fetch podcasts"
 msgstr "Nepavyko gauti tinklalaidžių"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2323,7 +2323,7 @@ msgstr "Nepavyko gauti kanalų sąrašo:\n%1"
 msgid "Failed to load podcast"
 msgstr "Nepavyko įkelti tinklalaidės"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2334,7 +2334,7 @@ msgstr "Nepavyko išnagrinėti %1 atsakymo:\n%2"
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Nepavyko apdoroti XML šiam RSS srautui"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2367,7 +2367,7 @@ msgstr "Gauti automatiškai"
 msgid "Fetch completed"
 msgstr "Parsiuntimas baigtas"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Gaunama Subsonic biblioteka"
 
@@ -2515,7 +2515,7 @@ msgstr "Kadrų dažnis"
 msgid "Frames per buffer"
 msgstr "Kadrai per buferį"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr "Dažnai groti albumai"
 
@@ -2554,25 +2554,25 @@ msgstr "Pagrindiniai nustatymai"
 msgid "Genre"
 msgstr "Žanras"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr "Gauti URL, kad dalintis šia Spotify daina"
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr "Gauti URL, kad dalintis šiuo grojaraščiu"
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "gaunami kanalai"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2783,7 +2783,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dinamiškame režime nauji kūriniais bus parinkti ir pridėti į grojaraštį kaskart, kai dabar grojamas kūrinys baigsis."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "Gautieji"
 
@@ -2819,7 +2819,7 @@ msgstr "Pagarsinti <value> procentais"
 msgid "Increase volume"
 msgstr "Pagarsinti"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indeksuojama %1"
@@ -2897,27 +2897,27 @@ msgstr "Netinkamas sesijos raktas"
 msgid "Invert Selection"
 msgstr "Invertuoti Pasirinkimą"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "Jamendo Daugiausia klausyti takeliai"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "Jamendo Top takeliai"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Jamendo mėnesio Top takeliai"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo savaitės Top takelia"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "Jamendo duomenų bazė"
 
@@ -3210,7 +3210,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3236,7 +3236,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Padaryti tai taip!"
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "Padaryti šį grojaraštį prieinamą atsijungus"
 
@@ -3261,11 +3261,11 @@ msgstr "Rankiniu būdu"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "Pažymėti kaip naują"
 
@@ -3456,7 +3456,7 @@ msgstr "Naujos dainos"
 msgid "New tracks will be added automatically."
 msgstr "Nauji takeliai bus pridėti automatiškai."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr "Naujausi albumai"
 
@@ -3654,12 +3654,12 @@ msgid "Opacity"
 msgstr "Permatomumas"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Atverti %1 naršyklėje"
@@ -3801,7 +3801,7 @@ msgstr "Perrašyti tik mažesnius"
 msgid "Owner"
 msgstr "Savininkas"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "Apdorojamas Jamendo katalogas"
 
@@ -3946,13 +3946,13 @@ msgstr "Plėtinio būklė:"
 msgid "Podcast Information"
 msgstr "Tinklalaidės informacija"
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr "Tinklalaidės informacija"
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Tinklalaidės"
@@ -4137,11 +4137,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Lietus"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr "Atsitiktiniai albumai"
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr "Atsitiktinės dainos"
 
@@ -4182,7 +4182,7 @@ msgstr "Įvertinimas"
 msgid "Really cancel?"
 msgstr "Tikrai atšaukti?"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr "Paskiausiai groti albumai"
 
@@ -4190,19 +4190,19 @@ msgstr "Paskiausiai groti albumai"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Pasiekta nukreipimo riba, patikrinkite serverio konfigūraciją."
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Atnaujinti katalogus"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "Atnaujinti kanalus"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "Atnaujinti stočių sąrašą"
 
@@ -4231,7 +4231,7 @@ msgstr "Prisiminti iš paskutinio &karto"
 msgid "Remember my choice"
 msgstr "Įsiminti mano pasirinkimą"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4253,7 +4253,7 @@ msgstr "Pašalinti dublikatus iš grojaraščio"
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
 
@@ -4521,15 +4521,15 @@ msgstr "Paieška"
 msgid "Search Icecast stations"
 msgstr "Ieškoti Icecast stočių"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "Ieškoti Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "Ieškoti Magnatune"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Ieškoti subsonic"
 
@@ -4574,7 +4574,7 @@ msgstr "Paieškos veiksena"
 msgid "Search options"
 msgstr "Paieškos parinktys"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "Paieškos rezultatai"
 
@@ -4987,11 +4987,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Spotify prisijungimo klaida"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr "Spotify grojaraščio URL"
 
@@ -4999,7 +4999,7 @@ msgstr "Spotify grojaraščio URL"
 msgid "Spotify plugin"
 msgstr "Spotify plėtinys"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr "Spotify dainos URL"
 
@@ -5007,11 +5007,11 @@ msgstr "Spotify dainos URL"
 msgid "Standard"
 msgstr "Standartinis"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "Su žvaigždute"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr "Albumai su žvaigždute"
 
@@ -5027,7 +5027,7 @@ msgstr "Pradėti grajaraštį nuo dabar grojančio"
 msgid "Start transcoding"
 msgstr "Perkoduoti"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5110,7 +5110,7 @@ msgstr "Transliavimo narystė"
 msgid "Subscribers"
 msgstr "Prenumeratoriai"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -5155,15 +5155,15 @@ msgstr "Palaikomi formatai"
 msgid "Synchronize statistics to files now"
 msgstr "Sinchronizuoti statistiką į failus dabar"
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "Atnaujinama Spotify dėžutė"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "Atnaujinama Spotify grojaraštis"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "Atnaujinama Spotify pažymėti kūriniai"
 
@@ -5297,7 +5297,7 @@ msgstr "Trečias lygis"
 msgid "Third level"
 msgstr "Trečias lygis"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5395,11 +5395,11 @@ msgstr "Rytoj"
 msgid "Too many redirects"
 msgstr "Per daug peradresavimų."
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr "Aukščiausiai įvertinti albumai"
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "Top takeliai"
 
@@ -5527,7 +5527,7 @@ msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
@@ -5535,7 +5535,7 @@ msgstr "Nebeprenumeruoti"
 msgid "Upcoming Concerts"
 msgstr "Artėjantys koncertai"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "Atnaujinti visas tinklalaides"
 
@@ -5547,7 +5547,7 @@ msgstr "Atnaujinti pakeistus fonotekos katalogus"
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "Atnaujinti šią tinklalaidę"
 
@@ -5965,7 +5965,7 @@ msgstr "Jūs neturite Spotify Premium paskyros."
 msgid "You do not have an active subscription"
 msgstr "Jūs neturite aktyvios prenumeratos"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6003,7 +6003,7 @@ msgid "Your library is empty!"
 msgstr "Jūsų fonoteka yra tuščia!"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "Tavo radijo srautai"
 

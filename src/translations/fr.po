@@ -143,7 +143,7 @@ msgstr "%1 sur %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listes de lecture (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -317,7 +317,7 @@ msgstr "&Année"
 msgid "(different across multiple songs)"
 msgstr "(différent pour plusieurs morceaux)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr ", par "
 
@@ -550,7 +550,7 @@ msgstr "Ajouter une action"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Ajouter toutes les pistes d'un répertoire et de tous ses sous-répertoires"
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "Ajouter un autre flux..."
 
@@ -595,7 +595,7 @@ msgstr "Ajouter un nouveau dossier..."
 msgid "Add podcast"
 msgstr "Ajouter un podcast"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "Ajouter un podcast..."
 
@@ -675,11 +675,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "Ajouter aux listes de lecture Spotify"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "Ajouter aux préférés de Spotify"
 
@@ -696,7 +696,7 @@ msgstr "Ajouter à la liste de lecture"
 msgid "Add to the queue"
 msgstr "Ajouter à la liste d'attente"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -761,7 +761,7 @@ msgstr "Artiste de l'album"
 msgid "Album cover"
 msgstr "Pochette d'album"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "Informations de l'album sur jamendo.com..."
 
@@ -1124,7 +1124,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Support des CUE sheet."
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "Annuler le téléchargement"
 
@@ -1398,7 +1398,7 @@ msgstr "Compositeur"
 msgid "Configure %1..."
 msgstr "Configurer %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "Configurer Magnatune..."
 
@@ -1406,11 +1406,11 @@ msgstr "Configurer Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurer les raccourcis clavier"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "Configurer Spotify…"
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Configurer Subsonic..."
 
@@ -1423,13 +1423,13 @@ msgid "Configure library..."
 msgstr "Configurer votre bibliothèque..."
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "Configurer les podcasts..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1444,7 +1444,7 @@ msgstr "Connecter Wii Remote en utilisant l'action activer/désactiver"
 msgid "Connect device"
 msgstr "Connexion du périphérique"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Connexion à Spotify"
 
@@ -1491,7 +1491,7 @@ msgstr "Convertir les fichiers sans perte"
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Copier sur le périphérique"
@@ -1715,7 +1715,7 @@ msgstr "Délai entre les visualisations"
 msgid "Delete"
 msgstr "Supprimer"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "Effacer les données téléchargées"
 
@@ -1870,8 +1870,8 @@ msgstr "Afficher le menu à l'écran"
 msgid "Do a full library rescan"
 msgstr "Refaire une analyse complète de la bibliothèque"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "Faire une nouvelle analyse complète"
 
@@ -1888,7 +1888,7 @@ msgstr "Ne pas convertir la musique"
 msgid "Do not overwrite"
 msgstr "Ne pas écraser"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1917,8 +1917,8 @@ msgstr "Aléatoire : désactivé"
 msgid "Don't stop!"
 msgstr "Ne pas arrêter !"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "Faire un don"
 
@@ -1934,7 +1934,7 @@ msgstr "Double cliquer sur une musique dans la playlist va..."
 msgid "Double clicking a song will..."
 msgstr "Double-cliquer sur un morceau..."
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1956,8 +1956,8 @@ msgstr "Adhésion au téléchargement"
 msgid "Download new episodes automatically"
 msgstr "Télécharger les nouveaux épisodes automatiquement"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Téléchargement en file"
 
@@ -1973,15 +1973,15 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "Télécharger cet album"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "Télécharger cet album..."
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "Télécharger cet épisode"
 
@@ -1989,21 +1989,21 @@ msgstr "Télécharger cet épisode"
 msgid "Download..."
 msgstr "Télécharger..."
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Téléchargement (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Téléchargement du catalogue d'Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "Téléchargement du catalogue de Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Téléchargement du catalogue Magnatune"
 
@@ -2043,7 +2043,7 @@ msgstr "Durée"
 msgid "Dynamic mode is on"
 msgstr "Le mode dynamique est activé"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Mix aléatoire dynamique"
 
@@ -2077,7 +2077,7 @@ msgstr "Modifier la description de la piste..."
 msgid "Edit tracks information..."
 msgstr "Modifier la description des pistes..."
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Éditer..."
 
@@ -2173,7 +2173,7 @@ msgstr "Saisissez cette adresse IP dans l'application pour vous connecter à Cle
 msgid "Entire collection"
 msgstr "Collection complète"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr "Informations sur l'épisode"
 
@@ -2353,7 +2353,7 @@ msgstr "La récupération du répertoire a échoué"
 msgid "Failed to fetch podcasts"
 msgstr "La récupération des podcasts a échoué"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2365,7 +2365,7 @@ msgstr "Échec de la récupération de la liste de la station :\n%1"
 msgid "Failed to load podcast"
 msgstr "Le chargement du podcast a échoué"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2376,7 +2376,7 @@ msgstr "Échec d'analyse de la réponse %1 :\n%2"
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "La lecture du flux RSS a échoué"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2409,7 +2409,7 @@ msgstr "Récupérer automatiquement"
 msgid "Fetch completed"
 msgstr "Téléchargement terminé"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Récupération de la bibliothèque Subsonic"
 
@@ -2557,7 +2557,7 @@ msgstr "Images par seconde"
 msgid "Frames per buffer"
 msgstr "Images par tampon"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr "Albums les plus Écoutés"
 
@@ -2596,25 +2596,25 @@ msgstr "Configuration générale"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr "Obtenir une URL pour partager ce morceau Spotify"
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr "Obtenir une URL pour partager cette liste de lecture"
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "Récupération des canaux"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2825,7 +2825,7 @@ msgid ""
 "time a song finishes."
 msgstr "En mode dynamique, de nouvelles pistes seront choisies et ajoutées à la fin de la liste de lecture chaque fois qu'un morceau se terminera."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "Boîte de réception"
 
@@ -2861,7 +2861,7 @@ msgstr "Augmenter le volume de <valeur> pour-cent"
 msgid "Increase volume"
 msgstr "Augmenter le volume"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indexation de %1"
@@ -2939,27 +2939,27 @@ msgstr "Clé de session invalide"
 msgid "Invert Selection"
 msgstr "Inverser la sélection"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "Morceaux les plus écoutés de Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "Meilleurs morceaux Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Meilleurs morceaux Jamendo du mois"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Meilleurs morceaux Jamendo de la semaine"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "Base de données Jamendo"
 
@@ -3252,7 +3252,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3278,7 +3278,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Ainsi soit-il!"
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "Rendre la liste de lecture accessible hors ligne"
 
@@ -3303,11 +3303,11 @@ msgstr "Manuellement"
 msgid "Manufacturer"
 msgstr "Fabricant"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Marquer comme lu"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "Marquer comme nouveau"
 
@@ -3498,7 +3498,7 @@ msgstr "Nouveaux morceaux"
 msgid "New tracks will be added automatically."
 msgstr "De nouvelles pistes seront ajoutées automatiquement."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr "Albums les plus Récents"
 
@@ -3696,12 +3696,12 @@ msgid "Opacity"
 msgstr "Opacité"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Ouvrir %1 dans le navigateur"
@@ -3843,7 +3843,7 @@ msgstr "Écraser uniquement les plus petits"
 msgid "Owner"
 msgstr "Propriétaire"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "Analyse du catalogue Jamendo"
 
@@ -3988,13 +3988,13 @@ msgstr "État du module externe :"
 msgid "Podcast Information"
 msgstr "Informations sur le podcast"
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr "Informations sur le podcast"
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcasts"
@@ -4179,11 +4179,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Pluie"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr "Albums Aléatoires"
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr "Morceaux Aléatoires"
 
@@ -4224,7 +4224,7 @@ msgstr "Note"
 msgid "Really cancel?"
 msgstr "Êtes-vous sûr de vouloir annuler ?"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr "Albums Écoutés Récemment"
 
@@ -4232,19 +4232,19 @@ msgstr "Albums Écoutés Récemment"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Limite de redirection excédée, vérifiez la configuration serveur."
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Mettre à jour le catalogue"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "Mettre à jour les canaux"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "Mettre à jour la liste des stations"
 
@@ -4273,7 +4273,7 @@ msgstr "Souvenir de la dernière fois"
 msgid "Remember my choice"
 msgstr "Se souvenir de mon choix"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4295,7 +4295,7 @@ msgstr "Supprimer les doublons de la liste de lecture"
 msgid "Remove folder"
 msgstr "Supprimer un dossier"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
@@ -4563,15 +4563,15 @@ msgstr "Recherche"
 msgid "Search Icecast stations"
 msgstr "Rechercher des stations Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "Recherche Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "Recherche Magnatune"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Recherche Subsonic"
 
@@ -4616,7 +4616,7 @@ msgstr "Mode de recherche"
 msgid "Search options"
 msgstr "Options de recherche"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -5029,11 +5029,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Erreur lors de la connexion à Spotify"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr "URL de la liste de lecture Spotify"
 
@@ -5041,7 +5041,7 @@ msgstr "URL de la liste de lecture Spotify"
 msgid "Spotify plugin"
 msgstr "Module externe Spotify"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr "URL du morceau Spotify"
 
@@ -5049,11 +5049,11 @@ msgstr "URL du morceau Spotify"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "Sélection"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr "Albums Préférés"
 
@@ -5069,7 +5069,7 @@ msgstr "Commencer la liste de lecture jouée actuellement"
 msgid "Start transcoding"
 msgstr "Démarrer transcodage"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5152,7 +5152,7 @@ msgstr "Membres de streaming"
 msgid "Subscribers"
 msgstr "Abonnés"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -5197,15 +5197,15 @@ msgstr "Formats supportés"
 msgid "Synchronize statistics to files now"
 msgstr "Synchroniser les statistiques vers les fichiers maintenant"
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "Synchronisation de la boîte de réception Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "Synchronisation de la liste de lecture Spotify"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronisation des morceaux Spotify préférés"
 
@@ -5339,7 +5339,7 @@ msgstr "Troisième niveau"
 msgid "Third level"
 msgstr "Troisième niveau"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5437,11 +5437,11 @@ msgstr "Demain"
 msgid "Too many redirects"
 msgstr "Trop de redirections"
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr "Albums Les Mieux Notés"
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "Top titres"
 
@@ -5569,7 +5569,7 @@ msgid "Unskip track"
 msgstr "Ne pas passer la piste"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "Se désinscrire"
 
@@ -5577,7 +5577,7 @@ msgstr "Se désinscrire"
 msgid "Upcoming Concerts"
 msgstr "Concerts à venir"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "Mettre à jour tous les podcasts"
 
@@ -5589,7 +5589,7 @@ msgstr "Mettre à jour les dossiers de la bibliothèque"
 msgid "Update the library when Clementine starts"
 msgstr "Mettre à jour la bibliothèque quand Clementine démarre"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "Mettre à jour ce podcast"
 
@@ -6007,7 +6007,7 @@ msgstr "Vous n'avez pas de compte Spotify Premium."
 msgid "You do not have an active subscription"
 msgstr "Vous n'avez pas d'abonnement actif"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6045,7 +6045,7 @@ msgid "Your library is empty!"
 msgstr "Votre bibliothèque est vide !"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "Vos flux radio"
 

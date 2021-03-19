@@ -107,7 +107,7 @@ msgstr "%1, %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 lejátszólista (%2)"
 
-#: internet/core/internetservice.cpp:151
+#: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -281,7 +281,7 @@ msgstr "É&v"
 msgid "(different across multiple songs)"
 msgstr "(különbözik több számnál)"
 
-#: internet/spotify/spotifyservice.cpp:472
+#: internet/spotify/spotifyservice.cpp:471
 msgid ", by "
 msgstr ", "
 
@@ -514,7 +514,7 @@ msgstr "Művelet felvétele"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Minden szám hozzáadása a mappából és almappáiból"
 
-#: internet/internetradio/savedradio.cpp:118
+#: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
 msgstr "Új közvetítés hozzáadása"
 
@@ -559,7 +559,7 @@ msgstr "Új mappa hozzáadása…"
 msgid "Add podcast"
 msgstr "Podcast hozzáadása"
 
-#: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
+#: internet/podcasts/podcastservice.cpp:420 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
 msgstr "Podcast hozzáadása…"
 
@@ -639,11 +639,11 @@ msgstr "Szám éve címke hozzáadása"
 msgid "Add stream..."
 msgstr "Közvetítés hozzáadása…"
 
-#: internet/spotify/spotifyservice.cpp:626
+#: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
 msgstr "Hozzáadás a Spotify lejátszólistához"
 
-#: internet/spotify/spotifyservice.cpp:618
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify starred"
 msgstr "Hozzáadás a Spotify-on csillagozottakhoz"
 
@@ -660,7 +660,7 @@ msgstr "Hozzáadás a lejátszólistához"
 msgid "Add to the queue"
 msgstr "Sorbaállítás"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:307
+#: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
 msgstr ""
 
@@ -725,7 +725,7 @@ msgstr "Albumelőadó"
 msgid "Album cover"
 msgstr "Albumborító"
 
-#: internet/jamendo/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
 msgstr "Album információ a jamendo.com-ról…"
 
@@ -1088,7 +1088,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "CUE-fájl támogatás"
 
-#: internet/podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:445
 msgid "Cancel download"
 msgstr "Letöltés megszakítása"
 
@@ -1362,7 +1362,7 @@ msgstr "Zeneszerző"
 msgid "Configure %1..."
 msgstr "%1 beállítása…"
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
 msgstr "Magnatune beállítása…"
 
@@ -1370,11 +1370,11 @@ msgstr "Magnatune beállítása…"
 msgid "Configure Shortcuts"
 msgstr "Billentyűkombinációk beállítása"
 
-#: internet/spotify/spotifyservice.cpp:925
+#: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
 msgstr "Spotify beállítása…"
 
-#: internet/subsonic/subsonicservice.cpp:148
+#: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Subsonic beállítása…"
 
@@ -1387,13 +1387,13 @@ msgid "Configure library..."
 msgstr "Zenetár beállítása…"
 
 #: internet/podcasts/addpodcastdialog.cpp:78
-#: internet/podcasts/podcastservice.cpp:460
+#: internet/podcasts/podcastservice.cpp:459
 msgid "Configure podcasts..."
 msgstr "Podcastok beállítása…"
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/radiobrowser/radiobrowserservice.cpp:296
+#: internet/radiobrowser/radiobrowserservice.cpp:295
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1408,7 +1408,7 @@ msgstr "Wii távvezérlő csatlakoztatása az aktiválás/deaktiválás művelet
 msgid "Connect device"
 msgstr "Eszköz csatlakoztatása"
 
-#: internet/spotify/spotifyservice.cpp:296
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Csatlakozás a Spotifyhoz"
 
@@ -1455,7 +1455,7 @@ msgstr "Veszteségmentes fájlok átalakítása"
 msgid "Copy to clipboard"
 msgstr "Másolás vágólapra"
 
-#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
+#: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
 #: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Másolás eszközre…"
@@ -1679,7 +1679,7 @@ msgstr "Megjelenítések között váltás ideje"
 msgid "Delete"
 msgstr "Törlés"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:440
 msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
@@ -1834,8 +1834,8 @@ msgstr "OSD megjelenítése"
 msgid "Do a full library rescan"
 msgstr "Teljes zenetár újraolvasása"
 
-#: internet/core/cloudfileservice.cpp:255
-#: internet/core/cloudfileservice.cpp:262
+#: internet/core/cloudfileservice.cpp:246
+#: internet/core/cloudfileservice.cpp:253
 msgid "Do a full rescan"
 msgstr "Teljes zenetár újraolvasása"
 
@@ -1852,7 +1852,7 @@ msgstr "Ne alakítson át egyetlen számot sem"
 msgid "Do not overwrite"
 msgstr "Ne írja felül"
 
-#: internet/core/cloudfileservice.cpp:256
+#: internet/core/cloudfileservice.cpp:247
 #, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1881,8 +1881,8 @@ msgstr "Ne keverje össze"
 msgid "Don't stop!"
 msgstr "Ne álljon meg!"
 
-#: internet/somafm/somafmservice.cpp:107
-#: internet/intergalacticfm/intergalacticfmservice.cpp:107
+#: internet/somafm/somafmservice.cpp:106
+#: internet/intergalacticfm/intergalacticfmservice.cpp:104
 msgid "Donate"
 msgstr "Adakozás"
 
@@ -1898,7 +1898,7 @@ msgstr "Dupla kattintásra egy számon…"
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon…"
 
-#: internet/podcasts/podcastservice.cpp:550
+#: internet/podcasts/podcastservice.cpp:549
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1920,8 +1920,8 @@ msgstr "Tagsági információk betöltése"
 msgid "Download new episodes automatically"
 msgstr "Új epizódok automatikus letöltése"
 
-#: internet/podcasts/podcastservice.cpp:295
-#: internet/podcasts/podcastservice.cpp:334
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Letöltés sorba állítva"
 
@@ -1937,15 +1937,15 @@ msgstr "Az eredeti androidos alkalmazás letöltése"
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "A távvezérlő letöltése asztali gépre, Androidra és iOS-re"
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
 msgstr "Album letöltése"
 
-#: internet/jamendo/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:423
 msgid "Download this album..."
 msgstr "Album letöltése…"
 
-#: internet/podcasts/podcastservice.cpp:552
+#: internet/podcasts/podcastservice.cpp:551
 msgid "Download this episode"
 msgstr "Epizód letöltése"
 
@@ -1953,21 +1953,21 @@ msgstr "Epizód letöltése"
 msgid "Download..."
 msgstr "Letöltés…"
 
-#: internet/podcasts/podcastservice.cpp:303
-#: internet/podcasts/podcastservice.cpp:343
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Letöltés (%1%)…"
 
-#: internet/icecast/icecastservice.cpp:100
+#: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Icecast könyvtár letöltése"
 
-#: internet/jamendo/jamendoservice.cpp:199
+#: internet/jamendo/jamendoservice.cpp:198
 msgid "Downloading Jamendo catalogue"
 msgstr "Jamendo katalógus letöltése"
 
-#: internet/magnatune/magnatuneservice.cpp:158
+#: internet/magnatune/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Magnatune katalógus letöltése"
 
@@ -2007,7 +2007,7 @@ msgstr "Időtartam"
 msgid "Dynamic mode is on"
 msgstr "Dinamikus mód bekapcsolva"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Dinamikus véletlenszerű mix"
 
@@ -2041,7 +2041,7 @@ msgstr "Száminformációk szerkesztése…"
 msgid "Edit tracks information..."
 msgstr "Száminformációk szerkesztése…"
 
-#: internet/internetradio/savedradio.cpp:113
+#: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Szerkesztés…"
 
@@ -2137,7 +2137,7 @@ msgstr "Írja be ezt az IP-t az alkalmazásban a Clementine-hoz kapcsolódáshoz
 msgid "Entire collection"
 msgstr "A teljes gyűjtemény"
 
-#: internet/podcasts/podcastservice.cpp:532
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Episode information"
 msgstr "Epizód információk"
 
@@ -2317,7 +2317,7 @@ msgstr "A mappa lekérése sikertelen"
 msgid "Failed to fetch podcasts"
 msgstr "A podcastok lekérése sikertelen"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:130
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2329,7 +2329,7 @@ msgstr "A csatornalista lekérése sikertelen:\n%1"
 msgid "Failed to load podcast"
 msgstr "A podcast betöltése sikertelen"
 
-#: internet/core/internetservice.cpp:158
+#: internet/core/internetservice.cpp:167
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2340,7 +2340,7 @@ msgstr "A(z) %1 válasz feldolgozása sikertelen:\n%2"
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "A RSS hírforrás XML-ének feldolgozása sikertelen"
 
-#: internet/icecast/icecastservice.cpp:128
+#: internet/icecast/icecastservice.cpp:127
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
@@ -2373,7 +2373,7 @@ msgstr "Letöltés automatikusan"
 msgid "Fetch completed"
 msgstr "Letöltés sikeres"
 
-#: internet/subsonic/subsonicservice.cpp:294
+#: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "A Subsonic könyvtár lekérése"
 
@@ -2521,7 +2521,7 @@ msgstr "Képkockasebesség"
 msgid "Frames per buffer"
 msgstr "Képkockák pufferenként"
 
-#: internet/subsonic/subsonicservice.cpp:107
+#: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
 msgstr "Gyakran játszott albumok"
 
@@ -2560,25 +2560,25 @@ msgstr "Általános beállítások"
 msgid "Genre"
 msgstr "Műfaj"
 
-#: internet/spotify/spotifyservice.cpp:642
-#: internet/spotify/spotifyservice.cpp:685
+#: internet/spotify/spotifyservice.cpp:641
+#: internet/spotify/spotifyservice.cpp:684
 msgid "Get a URL to share this Spotify song"
 msgstr "URL lekérése ezen Grooveshark szám megosztásához"
 
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:673
 msgid "Get a URL to share this playlist"
 msgstr "URL lekérése a lejátszólista megosztásához"
 
-#: internet/somafm/somafmservice.cpp:120
-#: internet/intergalacticfm/intergalacticfmservice.cpp:120
-#: internet/radiobrowser/radiobrowserservice.cpp:207
-#: internet/radiobrowser/radiobrowserservice.cpp:243
-#: internet/radiobrowser/radiobrowserservice.cpp:261
-#: internet/radiobrowser/radiobrowserservice.cpp:391
+#: internet/somafm/somafmservice.cpp:119
+#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/radiobrowser/radiobrowserservice.cpp:206
+#: internet/radiobrowser/radiobrowserservice.cpp:242
+#: internet/radiobrowser/radiobrowserservice.cpp:260
+#: internet/radiobrowser/radiobrowserservice.cpp:390
 msgid "Getting channels"
 msgstr "Csatornák betöltése"
 
-#: internet/radiobrowser/radiobrowserservice.cpp:416
+#: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
 msgstr ""
 
@@ -2789,7 +2789,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dinamikus módban új számok lesznek kiválasztva és hozzáadva a lejátszólistához, amikor egy zeneszám véget ér."
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Inbox"
 msgstr "Beérkezett üzenetek"
 
@@ -2825,7 +2825,7 @@ msgstr "Hangerő növelése <value> százalékkal"
 msgid "Increase volume"
 msgstr "Hangerő növelése"
 
-#: internet/core/cloudfileservice.cpp:160
+#: internet/core/cloudfileservice.cpp:151
 #, qt-format
 msgid "Indexing %1"
 msgstr "%1 indexelése"
@@ -2903,27 +2903,27 @@ msgstr "Érvénytelen munkamenetkulcs"
 msgid "Invert Selection"
 msgstr "Kijelölés megfordítása"
 
-#: internet/jamendo/jamendoservice.cpp:137
+#: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:122
+#: internet/jamendo/jamendoservice.cpp:121
 msgid "Jamendo Most Listened Tracks"
 msgstr "Legtöbbet hallgatott számok a Jamendon"
 
-#: internet/jamendo/jamendoservice.cpp:119
+#: internet/jamendo/jamendoservice.cpp:118
 msgid "Jamendo Top Tracks"
 msgstr "Legnépszerűbb számok a Jamendon"
 
-#: internet/jamendo/jamendoservice.cpp:113
+#: internet/jamendo/jamendoservice.cpp:112
 msgid "Jamendo Top Tracks of the Month"
 msgstr "A hónap legnépszerűbb számai a Jamedon"
 
-#: internet/jamendo/jamendoservice.cpp:116
+#: internet/jamendo/jamendoservice.cpp:115
 msgid "Jamendo Top Tracks of the Week"
 msgstr "A Jamendo legnépszerűbb számai a héten"
 
-#: internet/jamendo/jamendoservice.cpp:179
+#: internet/jamendo/jamendoservice.cpp:178
 msgid "Jamendo database"
 msgstr "Jamendo adatbázis"
 
@@ -3216,7 +3216,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:106
+#: internet/magnatune/magnatuneservice.cpp:105
 #: ../bin/src/ui_magnatunesettingspage.h:153
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3242,7 +3242,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Csinálják!"
 
-#: internet/spotify/spotifyservice.cpp:672
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Make playlist available offline"
 msgstr "Lejátszólista elérhetővé tétele offline módban is"
 
@@ -3267,11 +3267,11 @@ msgstr "Kézzel"
 msgid "Manufacturer"
 msgstr "Gyártó"
 
-#: internet/podcasts/podcastservice.cpp:455 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:454 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Megjelölés meghallgatottként"
 
-#: internet/podcasts/podcastservice.cpp:454
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Mark as new"
 msgstr "Megjelölés újként"
 
@@ -3462,7 +3462,7 @@ msgstr "Új számok"
 msgid "New tracks will be added automatically."
 msgstr "Az új számok automatikusan fel lesznek véve."
 
-#: internet/subsonic/subsonicservice.cpp:101
+#: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
 msgstr "Legújabb albumok"
 
@@ -3660,12 +3660,12 @@ msgid "Opacity"
 msgstr "Átlátszatlanság"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:305
-#: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:283
-#: internet/somafm/somafmservice.cpp:102
-#: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/radiobrowser/radiobrowserservice.cpp:289
+#: internet/icecast/icecastservice.cpp:304
+#: internet/jamendo/jamendoservice.cpp:426
+#: internet/magnatune/magnatuneservice.cpp:282
+#: internet/somafm/somafmservice.cpp:101
+#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/radiobrowser/radiobrowserservice.cpp:288
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "%1 megnyitása a böngészőben"
@@ -3807,7 +3807,7 @@ msgstr "Csak a kisebbeket írja felül"
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: internet/jamendo/jamendoservice.cpp:226
+#: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
 msgstr "Jamendo katalógus feldolgozása"
 
@@ -3952,13 +3952,13 @@ msgstr "Beépülő állapota:"
 msgid "Podcast Information"
 msgstr "Podcast információk"
 
-#: internet/podcasts/podcastservice.cpp:438
-#: internet/podcasts/podcastservice.cpp:535
-#: internet/podcasts/podcastservice.cpp:539
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:534
+#: internet/podcasts/podcastservice.cpp:538
 msgid "Podcast information"
 msgstr "Podcast információk"
 
-#: internet/podcasts/podcastservice.cpp:133
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcastok"
@@ -4143,11 +4143,11 @@ msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Eső"
 
-#: internet/subsonic/subsonicservice.cpp:104
+#: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
 msgstr "Véletlenszerű albumok"
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
 msgstr "Véletlenszerű számok"
 
@@ -4188,7 +4188,7 @@ msgstr "Értékelés"
 msgid "Really cancel?"
 msgstr "Tényleg megszakítja?"
 
-#: internet/subsonic/subsonicservice.cpp:115
+#: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
 msgstr "Nemrég játszott albumok"
 
@@ -4196,19 +4196,19 @@ msgstr "Nemrég játszott albumok"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Az átirányítási korlát elérve, ellenőrizze a kiszolgálóbeállításokat."
 
-#: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:144
+#: internet/jamendo/jamendoservice.cpp:429
+#: internet/magnatune/magnatuneservice.cpp:285
+#: internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Katalógus frissítése"
 
-#: internet/somafm/somafmservice.cpp:111
-#: internet/intergalacticfm/intergalacticfmservice.cpp:111
-#: internet/radiobrowser/radiobrowserservice.cpp:293
+#: internet/somafm/somafmservice.cpp:110
+#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/radiobrowser/radiobrowserservice.cpp:292
 msgid "Refresh channels"
 msgstr "Csatornák frissítése"
 
-#: internet/icecast/icecastservice.cpp:308
+#: internet/icecast/icecastservice.cpp:307
 msgid "Refresh station list"
 msgstr "Állomáslista frissítése"
 
@@ -4237,7 +4237,7 @@ msgstr "Ahogy &legutoljára volt"
 msgid "Remember my choice"
 msgstr "Választás megjegyzése"
 
-#: internet/internetradio/savedradio.cpp:110
+#: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4259,7 +4259,7 @@ msgstr "Ismétlődések eltávolítása a lejátszólistáról"
 msgid "Remove folder"
 msgstr "Mappa eltávolítása"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:684
+#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Eltávolítás a lejátszólistáról"
 
@@ -4527,15 +4527,15 @@ msgstr "Keresés"
 msgid "Search Icecast stations"
 msgstr "Icecast állomások keresése"
 
-#: internet/jamendo/jamendoservice.cpp:437
+#: internet/jamendo/jamendoservice.cpp:436
 msgid "Search Jamendo"
 msgstr "Keresés a Jamendón"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
 msgstr "Keresés a Magnatune-on"
 
-#: internet/subsonic/subsonicservice.cpp:128
+#: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Keresés a Subsonicban"
 
@@ -4580,7 +4580,7 @@ msgstr "Keresési mód"
 msgid "Search options"
 msgstr "Keresési beállítások"
 
-#: internet/spotify/spotifyservice.cpp:400
+#: internet/spotify/spotifyservice.cpp:399
 msgid "Search results"
 msgstr "Találatok"
 
@@ -4993,11 +4993,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:220
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Hiba a Spotifyra való bejelentkezéskor"
 
-#: internet/spotify/spotifyservice.cpp:850
+#: internet/spotify/spotifyservice.cpp:849
 msgid "Spotify playlist's URL"
 msgstr "Spotify lejátszólista URL"
 
@@ -5005,7 +5005,7 @@ msgstr "Spotify lejátszólista URL"
 msgid "Spotify plugin"
 msgstr "Spotify beépülő"
 
-#: internet/spotify/spotifyservice.cpp:841
+#: internet/spotify/spotifyservice.cpp:840
 msgid "Spotify song's URL"
 msgstr "Spotify szám URL"
 
@@ -5013,11 +5013,11 @@ msgstr "Spotify szám URL"
 msgid "Standard"
 msgstr "Normál"
 
-#: internet/spotify/spotifyservice.cpp:409
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Starred"
 msgstr "Kedvenc"
 
-#: internet/subsonic/subsonicservice.cpp:119
+#: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
 msgstr "Csillagozott albumok"
 
@@ -5033,7 +5033,7 @@ msgstr "Az éppen játszott lejátszólista indítása"
 msgid "Start transcoding"
 msgstr "Átkódolás indítása"
 
-#: internet/spotify/spotifyservice.cpp:402
+#: internet/spotify/spotifyservice.cpp:401
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5116,7 +5116,7 @@ msgstr "Közvetítési tagság"
 msgid "Subscribers"
 msgstr "Feliratkozók"
 
-#: internet/subsonic/subsonicservice.cpp:155
+#: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -5161,15 +5161,15 @@ msgstr "Támogatott formátumok"
 msgid "Synchronize statistics to files now"
 msgstr "Statisztikák mentése a fájlokba"
 
-#: internet/spotify/spotifyservice.cpp:710
+#: internet/spotify/spotifyservice.cpp:709
 msgid "Syncing Spotify inbox"
 msgstr "Spotify üzenetek szinkronizálása"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:703
 msgid "Syncing Spotify playlist"
 msgstr "Spotify lejátszólista szinkronizálása"
 
-#: internet/spotify/spotifyservice.cpp:715
+#: internet/spotify/spotifyservice.cpp:714
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify-on csillagozott számok szinkronizálása"
 
@@ -5303,7 +5303,7 @@ msgstr "Harmadik szint"
 msgid "Third level"
 msgstr "Harmadik szint"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:179
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5401,11 +5401,11 @@ msgstr "Holnap"
 msgid "Too many redirects"
 msgstr "Túl sok átirányítás"
 
-#: internet/subsonic/subsonicservice.cpp:111
+#: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr "Legmagasabbra értékelt albumok"
 
-#: internet/spotify/spotifyservice.cpp:423
+#: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
 msgstr "Népszerű számok"
 
@@ -5533,7 +5533,7 @@ msgid "Unskip track"
 msgstr "Szám lejátszása"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:448
 msgid "Unsubscribe"
 msgstr "Leiratkozás"
 
@@ -5541,7 +5541,7 @@ msgstr "Leiratkozás"
 msgid "Upcoming Concerts"
 msgstr "Következő koncertek"
 
-#: internet/podcasts/podcastservice.cpp:423
+#: internet/podcasts/podcastservice.cpp:422
 msgid "Update all podcasts"
 msgstr "Összes podcast frissítése"
 
@@ -5553,7 +5553,7 @@ msgstr "Megváltozott zenetárbeli könyvtárak frissítése"
 msgid "Update the library when Clementine starts"
 msgstr "Zenetár frissítése a Clementine indításakor"
 
-#: internet/podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:431
 msgid "Update this podcast"
 msgstr "Podcast frissítése"
 
@@ -5971,7 +5971,7 @@ msgstr "Nincs Spotify prémium fiókja."
 msgid "You do not have an active subscription"
 msgstr "Nincs aktív feliratkozása"
 
-#: internet/spotify/spotifyservice.cpp:205
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -6009,7 +6009,7 @@ msgid "Your library is empty!"
 msgstr "A zenetára üres!"
 
 #: globalsearch/savedradiosearchprovider.cpp:27
-#: internet/internetradio/savedradio.cpp:54
+#: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
 msgstr "A rádióközvetítései"
 
