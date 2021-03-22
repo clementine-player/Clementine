@@ -17,9 +17,20 @@
 
 #include "settingscategory.h"
 
+#include "settingspage.h"
+
 SettingsCategory::SettingsCategory(const QString& name, SettingsDialog* dialog)
     : dialog_(dialog) {
   setText(0, name);
   setData(0, SettingsDialog::Role_IsSeparator, true);
   setFlags(Qt::ItemIsEnabled);
+}
+
+SettingsCategory::SettingsCategory(SettingsDialog::Page id, SettingsPage* page,
+                                   SettingsDialog* dialog)
+    : dialog_(dialog) {
+  setText(0, page->windowTitle());
+  setData(0, SettingsDialog::Role_IsSeparator, true);
+  setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  dialog->AddPageToStack(id, page, this);
 }

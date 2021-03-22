@@ -137,6 +137,10 @@ class SettingsDialog : public QDialog {
   void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = nullptr);
 
  private:
+  friend class SettingsCategory;
+  void AddPageToStack(Page id, SettingsPage* page, QTreeWidgetItem* item);
+
+ private:
   Application* app_;
   LibraryDirectoryModel* model_;
   GlobalShortcuts* manager_;

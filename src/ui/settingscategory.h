@@ -22,9 +22,13 @@
 
 #include "settingsdialog.h"
 
+class SettingsPage;
+
 class SettingsCategory : public QTreeWidgetItem {
  public:
   SettingsCategory(const QString& name, SettingsDialog* dialog);
+  SettingsCategory(SettingsDialog::Page id, SettingsPage* page,
+                   SettingsDialog* dialog);
 
  protected:
   SettingsDialog* dialog_;

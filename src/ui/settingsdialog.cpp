@@ -114,7 +114,8 @@ void SettingsItemDelegate::paint(QPainter* painter,
 
   if (is_separator) {
     GroupedIconView::DrawHeader(painter, option.rect, option.font,
-                                option.palette, index.data().toString(), false);
+                                option.palette, index.data().toString(),
+                                option.state & QStyle::State_Selected);
   } else {
     QStyledItemDelegate::paint(painter, option, index);
   }
@@ -168,11 +169,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
 
-  AddPage(Page_InternetShow, new InternetShowSettingsPage(this), iface);
-
   // Internet providers
+  InternetShowSettingsPage* internet_page = new InternetShowSettingsPage(this);
   SettingsCategory* providers =
-      new SettingsCategory(tr("Internet providers"), this);
+      new SettingsCategory(Page_InternetShow, internet_page, this);
   AddCategory(providers);
 
 #ifdef HAVE_LIBLASTFM
@@ -254,6 +254,11 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page,
 
   parent->addChild(item);
 
+  AddPageToStack(id, page, item);
+}
+
+void SettingsDialog::AddPageToStack(Page id, SettingsPage* page,
+                                    QTreeWidgetItem* item) {
   // Create a scroll area containing the page
   QScrollArea* area = new QScrollArea;
   area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -345,7 +350,8 @@ void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
   for (const PageData& data : pages_.values()) {
     if (data.item_ == item) {
       ui_->stacked_widget->setCurrentWidget(data.scroll_area_);
-      break;
+      return;
     }
   }
+  qLog(Debug) << "Didn't find page for item!";
 }
