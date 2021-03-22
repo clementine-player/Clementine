@@ -3061,6 +3061,7 @@ void MainWindow::ScrobbleError(int value) {
 
 void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
                                            QString line2) {
+  qLog(Debug) << "Handling notification preview";
   if (!app_->playlist_manager()->current()->GetAllSongs().isEmpty()) {
     // Show a preview notification for the first song in the current playlist
     osd_->ShowPreview(

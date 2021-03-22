@@ -19,6 +19,7 @@
 #define NOTIFICATIONSSETTINGSPAGE_H
 
 #include "settingspage.h"
+#include "widgets/osd.h"
 
 class Ui_NotificationsSettingsPage;
 
@@ -35,6 +36,9 @@ class NotificationsSettingsPage : public SettingsPage {
  protected:
   void hideEvent(QHideEvent*);
   void showEvent(QShowEvent*);
+
+ signals:
+  void NotificationPreview(OSD::Behaviour, QString, QString);
 
  private slots:
   void NotificationTypeChanged();

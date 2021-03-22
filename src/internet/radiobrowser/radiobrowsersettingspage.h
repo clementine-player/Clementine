@@ -18,6 +18,8 @@
 #ifndef INTERNET_RADIOBROWSER_RADIOBROWSERSETTINGSPAGE_H_
 #define INTERNET_RADIOBROWSER_RADIOBROWSERSETTINGSPAGE_H_
 
+#include <memory>
+
 #include "radiobrowserservice.h"
 #include "ui/settingspage.h"
 #include "ui_radiobrowsersettingspage.h"

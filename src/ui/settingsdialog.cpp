@@ -146,7 +146,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
 
 #ifdef HAVE_WIIMOTEDEV
-  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
+  WiimoteSettingsPage* wii_page = new WiimoteSettingsPage(this);
+  AddPage(Page_Wiimotedev, wii_page, general);
+  connect(wii_page, SIGNAL(SetWiimotedevInterfaceActived(bool)),
+          SIGNAL(SetWiimotedevInterfaceActived(bool)));
 #endif
 
   // User interface
@@ -155,7 +158,14 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
   AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
   AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
-  AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
+
+  NotificationsSettingsPage* notification_page =
+      new NotificationsSettingsPage(this);
+  AddPage(Page_Notifications, notification_page, iface);
+  connect(notification_page,
+          SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
+          SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
+
   AddPage(Page_InternetShow, new InternetShowSettingsPage(this), iface);
 
   // Internet providers
@@ -233,12 +243,6 @@ QTreeWidgetItem* SettingsDialog::AddCategory(const QString& name) {
 void SettingsDialog::AddPage(Page id, SettingsPage* page,
                              QTreeWidgetItem* parent) {
   if (!parent) parent = ui_->list->invisibleRootItem();
-
-  // Connect page's signals to the settings dialog's signals
-  connect(page, SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
-          SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
-  connect(page, SIGNAL(SetWiimotedevInterfaceActived(bool)),
-          SIGNAL(SetWiimotedevInterfaceActived(bool)));
 
   // Create the list item
   QTreeWidgetItem* item = new QTreeWidgetItem;
