@@ -139,6 +139,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Playback, new PlaybackSettingsPage(this), general);
   AddPage(Page_Behaviour, new BehaviourSettingsPage(this), general);
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
+  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this),
+          general);
   AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
   AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
   AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
@@ -193,8 +195,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),
-          providers);
-  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this),
           providers);
   AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
