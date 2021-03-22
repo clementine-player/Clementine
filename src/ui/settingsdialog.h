@@ -49,6 +49,8 @@ class SettingsItemDelegate : public QStyledItemDelegate {
              const QModelIndex& index) const;
 };
 
+class SettingsCategory;
+
 class SettingsDialog : public QDialog {
   Q_OBJECT
 
@@ -131,7 +133,7 @@ class SettingsDialog : public QDialog {
     SettingsPage* page_;
   };
 
-  QTreeWidgetItem* AddCategory(const QString& name);
+  void AddCategory(SettingsCategory* category);
   void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = nullptr);
 
  private:
