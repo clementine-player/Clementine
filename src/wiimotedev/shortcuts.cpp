@@ -19,6 +19,7 @@
 
 #include <QSettings>
 
+#include "core/logging.h"
 #include "wiimotedev/consts.h"
 
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
@@ -56,6 +57,8 @@ WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window,
 }
 
 void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
+  qLog(Debug) << "Wiimote interface activated" << actived;
+
   if (!QDBusConnection::systemBus().isConnected()) return;
 
   // http://code.google.com/p/clementine-player/issues/detail?id=670

@@ -21,6 +21,7 @@
 
 #include <QModelIndex>
 #include <QWidget>
+#include <memory>
 
 #include "ui/settingspage.h"
 

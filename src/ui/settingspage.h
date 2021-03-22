@@ -20,8 +20,6 @@
 
 #include <QWidget>
 
-#include "widgets/osd.h"
-
 class SettingsDialog;
 
 class SettingsPage : public QWidget {
@@ -44,10 +42,6 @@ class SettingsPage : public QWidget {
 
   // The dialog that this page belongs to.
   SettingsDialog* dialog() const { return dialog_; }
-
- signals:
-  void NotificationPreview(OSD::Behaviour, QString, QString);
-  void SetWiimotedevInterfaceActived(bool);
 
  protected:
   void showEvent(QShowEvent* event);

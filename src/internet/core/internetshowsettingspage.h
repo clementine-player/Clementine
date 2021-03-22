@@ -20,6 +20,7 @@
 #define INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_
 
 #include <QIcon>
+#include <memory>
 
 #include "ui/settingspage.h"
 #include "ui_internetshowsettingspage.h"
