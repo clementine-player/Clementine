@@ -363,6 +363,7 @@ set(SOURCES
   ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
   ui/screensaver.cpp
+  ui/settingscategory.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/splash.cpp
@@ -659,6 +660,7 @@ set(HEADERS
   ui/organiseerrordialog.h
   ui/playbacksettingspage.h
   ui/qtsystemtrayicon.h
+  ui/settingscategory.h
   ui/settingsdialog.h
   ui/settingspage.h
   ui/standarditemiconloader.h

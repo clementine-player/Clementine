@@ -44,6 +44,7 @@
 #include "notificationssettingspage.h"
 #include "playbacksettingspage.h"
 #include "playlist/playlistview.h"
+#include "settingscategory.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
 #include "ui_settingsdialog.h"
@@ -134,8 +135,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   ui_->setupUi(this);
   ui_->list->setItemDelegate(new SettingsItemDelegate(this));
 
-  QTreeWidgetItem* general = AddCategory(tr("General"));
-
+  SettingsCategory* general = new SettingsCategory(tr("General"), this);
+  AddCategory(general);
   AddPage(Page_Playback, new PlaybackSettingsPage(this), general);
   AddPage(Page_Behaviour, new BehaviourSettingsPage(this), general);
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
@@ -153,7 +154,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 #endif
 
   // User interface
-  QTreeWidgetItem* iface = AddCategory(tr("User interface"));
+  SettingsCategory* iface = new SettingsCategory(tr("User interface"), this);
+  AddCategory(iface);
   AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
   AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
   AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
@@ -169,7 +171,9 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_InternetShow, new InternetShowSettingsPage(this), iface);
 
   // Internet providers
-  QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
+  SettingsCategory* providers =
+      new SettingsCategory(tr("Internet providers"), this);
+  AddCategory(providers);
 
 #ifdef HAVE_LIBLASTFM
   AddPage(Page_Lastfm, new LastFMSettingsPage(this), providers);
@@ -228,16 +232,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
 SettingsDialog::~SettingsDialog() { delete ui_; }
 
-QTreeWidgetItem* SettingsDialog::AddCategory(const QString& name) {
-  QTreeWidgetItem* item = new QTreeWidgetItem;
-  item->setText(0, name);
-  item->setData(0, Role_IsSeparator, true);
-  item->setFlags(Qt::ItemIsEnabled);
-
-  ui_->list->invisibleRootItem()->addChild(item);
-  item->setExpanded(true);
-
-  return item;
+void SettingsDialog::AddCategory(SettingsCategory* category) {
+  ui_->list->invisibleRootItem()->addChild(category);
+  // This must not be called before it's added to the parent.
+  category->setExpanded(true);
 }
 
 void SettingsDialog::AddPage(Page id, SettingsPage* page,
