@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-16 11:15+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-03-22 13:42+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -850,17 +850,17 @@ msgstr "Aplica compressió per evitar el «clipping»"
 #: ui/equalizer.cpp:223
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Esteu segur que voleu suprimir la predefinició «%1»?"
+msgstr "Segur que voleu suprimir la predefinició «%1»?"
 
 #: ui/edittagdialog.cpp:807
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Esteu segur que voleu reinicialitzar les estadístiques d’aquesta cançó?"
+msgstr "Segur que voleu reinicialitzar les estadístiques d’aquesta cançó?"
 
 #: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr "Esteu segur que voleu escriure les estadístiques de les cançons en tots els fitxers de la vostra col·lecció?"
+msgstr "Segur que voleu escriure les estadístiques de les cançons en tots els fitxers de la vostra col·lecció?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1380
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
@@ -1276,7 +1276,7 @@ msgstr "Feu clic aquí per afegir música"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr "Feu clic aquí per marcar aquesta llista com a favorita i afegir-la al panell «Llistes de reproducció» de la barra lateral"
+msgstr "Feu clic aquí per a marcar aquesta llista com a preferida i afegir-la al panell «Llistes de reproducció» de la barra lateral"
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
@@ -2357,7 +2357,7 @@ msgstr "Ràpid"
 
 #: library/library.cpp:92
 msgid "Favourite tracks"
-msgstr "Peces favorites"
+msgstr "Peces preferides"
 
 #: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
@@ -2373,7 +2373,7 @@ msgstr "S'han acabat d'obtenir les dades"
 
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
-msgstr "S’està recollint la col·lecció de l’Subsonic"
+msgstr "S’està recollint la col·lecció del Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:83
 msgid "Fetching cover error"
@@ -2578,7 +2578,7 @@ msgstr "S’estan obtenint els canals"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
-msgstr ""
+msgstr "S’està obtenint l’emissora"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2801,11 +2801,11 @@ msgstr "Inclou totes les cançons"
 
 #: internet/subsonic/subsonicsettingspage.cpp:110
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr "La versió del protocol REST de Subsonic és incompatible. El client ha d’actualitzar-se."
+msgstr "La versió del protocol REST del Subsonic és incompatible. El client ha d’actualitzar-se."
 
 #: internet/subsonic/subsonicsettingspage.cpp:115
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr "La versió del protocol REST de Subsonic és incompatible. El servidor ha d’actualitzar-se."
+msgstr "La versió del protocol REST del Subsonic és incompatible. El servidor ha d’actualitzar-se."
 
 #: internet/subsonic/subsonicsettingspage.cpp:156
 msgid "Incomplete configuration, please ensure all fields are populated."
@@ -4350,7 +4350,7 @@ msgstr "Reinicia la peça, o canvia a l’anterior si no han transcorregut 8 seg
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
-msgstr ""
+msgstr "Restaura el servidor per defecte"
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4535,7 +4535,7 @@ msgstr "Cerca al Magnatune"
 
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
-msgstr "Cerca a Subsonic"
+msgstr "Cerca al Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:80
 msgid "Search automatically"
@@ -4964,7 +4964,7 @@ msgstr "Ordena per gènere (segons la popularitat)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by station name"
-msgstr "Ordena pel nom de l'emissora"
+msgstr "Ordena pel nom de l’emissora"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -5104,7 +5104,7 @@ msgstr "Detalls del flux"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr "Per la transmissió de dades des d’un servidor de Subsonic es requereix una llicència de servidor vàlida, una vegada que transcorrin 30 dies."
+msgstr "Per a la transmissió de dades des d’un servidor del Subsonic es requereix una llicència de servidor vàlida, una vegada que transcorrin 30 dies."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
@@ -5233,7 +5233,7 @@ msgstr "L’adreça que heu sol·licitat no conté cap imatge."
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr "Ha acabat el període de prova del servidor de Subsonic. Feu una donació per a obtenir una clau de llicència. Visiteu subsonic.org para més detalls."
+msgstr "Ha acabat el període de prova del servidor del Subsonic. Feu una donació per a obtenir una clau de llicència. Visiteu subsonic.org per a més detalls."
 
 #: ui/mainwindow.cpp:2804
 msgid ""
@@ -5911,13 +5911,13 @@ msgstr "Sou a punt de baixar els següents àlbums"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Esteu segur que voleu suprimir %1 llistes de reproducció de les vostres llistes favorites?"
+msgstr "Segur que voleu suprimir %1 llistes de reproducció de les vostres llistes preferides?"
 
 #: playlist/playlisttabbar.cpp:187
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Sou a punt de suprimir una llista de reproducció que no heu desat com a favorita: la llista de reproducció se suprimirà (aquesta acció és irreversible).\nEsteu segur que voleu continuar?"
+msgstr "Sou a punt de suprimir una llista de reproducció que no heu desat com a preferida: la llista de reproducció se suprimirà (aquesta acció és irreversible).\nSegur que voleu continuar?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
