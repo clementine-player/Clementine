@@ -65,13 +65,17 @@ int GroupedIconView::header_height() const { return default_header_height_; }
 
 void GroupedIconView::DrawHeader(QPainter* painter, const QRect& rect,
                                  const QFont& font, const QPalette& palette,
-                                 const QString& text) {
+                                 const QString& text, bool selected) {
   painter->save();
 
   // Bold font
   QFont bold_font(font);
   bold_font.setBold(true);
   QFontMetrics metrics(bold_font);
+
+  if (selected) {
+    painter->fillRect(rect, palette.highlight());
+  }
 
   QRect text_rect(rect);
   text_rect.setHeight(metrics.height());
@@ -291,7 +295,8 @@ void GroupedIconView::paintEvent(QPaintEvent* e) {
     DrawHeader(&painter,
                header_rect.translated(-horizontalOffset(), -verticalOffset()),
                font(), palette(),
-               model()->index(header.first_row, 0).data(Role_Group).toString());
+               model()->index(header.first_row, 0).data(Role_Group).toString(),
+               false);
   }
 }
 

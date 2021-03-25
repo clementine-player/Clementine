@@ -64,7 +64,7 @@ class GroupedIconView : public QListView {
 
   static void DrawHeader(QPainter* painter, const QRect& rect,
                          const QFont& font, const QPalette& palette,
-                         const QString& text);
+                         const QString& text, bool selected);
 
  protected:
   virtual int header_height() const;
