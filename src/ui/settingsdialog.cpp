@@ -114,7 +114,7 @@ void SettingsItemDelegate::paint(QPainter* painter,
 
   if (is_separator) {
     GroupedIconView::DrawHeader(painter, option.rect, option.font,
-                                option.palette, index.data().toString());
+                                option.palette, index.data().toString(), false);
   } else {
     QStyledItemDelegate::paint(painter, option, index);
   }
