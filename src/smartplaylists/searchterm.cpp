@@ -74,8 +74,10 @@ QString SearchTerm::ToSql() const {
   }
 
   // File paths need some extra processing since they are stored as
-  // encoded urls in the database.
+  // encoded urls in the database. In some versions of sqlite, the
+  // LIKE function doesn't handle the blob form, so cast it to TEXT.
   if (field_ == Field_Filepath) {
+    col = "CAST (" + col + " AS TEXT)";
     if (operator_ == Op_StartsWith || operator_ == Op_Equals) {
       value = QUrl::fromLocalFile(value).toEncoded();
     } else {
