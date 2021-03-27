@@ -71,6 +71,7 @@ QList<Branch> BranchList = {
      RadioBrowserService::Type_Top100}};
 
 QString SearchUrl = "%1/json/stations/byname/%2?limit=%3";
+QString StationDetailsUrl = "%1/json/stations/byuuid?uuids=%2";
 QString PlayClickUrl = "%1/json/url/%2";
 
 void ReadStation(const QJsonObject& item, RadioBrowserService::StreamList* ret,
@@ -408,7 +409,7 @@ void RadioBrowserService::Search(int search_id, const QString& query,
 
 void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
   QString determinedUrl =
-      PlayClickUrl.arg(main_server_url_, original_url.path());
+      StationDetailsUrl.arg(main_server_url_, original_url.path());
   QUrl url(determinedUrl);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
@@ -419,9 +420,28 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
     reply->deleteLater();
     QJsonDocument document = ParseJsonReply(reply);
 
-    QJsonObject item = document.object();
+    StreamList list;
+    QJsonArray contents = document.array();
+    QJsonValue item = contents.first();
+    if (item.isUndefined()) return;
+
+    Song ret;
+    ret.set_valid(true);
+    ret.set_title(item["name"].toString());
     QUrl url(item["url"].toString());
-    emit StationUrlResolved(original_url, url);
+    ret.set_url(url);
+    ret.set_art_automatic(item["favicon"].toString());
+
+    emit StreamMetadataFound(original_url, ret);
+    emit StationUrlResolved(original_url, ret.url());
+
+    // inform the server that we played the station
+    QString determinedUrl =
+        PlayClickUrl.arg(main_server_url_, original_url.path());
+    QUrl playUrl(determinedUrl);
+    QNetworkReply* playReply = network_->get(QNetworkRequest(playUrl));
+    connect(playReply, &QNetworkReply::finished,
+            [=] { playReply->deleteLater(); });
   });
 }
 
