@@ -23,6 +23,13 @@
 
 namespace smart_playlists {
 
+const char* kEscClause = " ESCAPE '#'";
+
+// Replace % and _ with #% and #_
+static QString Escape(QString term) {
+  return term.replace(QRegExp("([%_#])"), "#\\1");
+}
+
 SearchTerm::SearchTerm() : field_(Field_Title), operator_(Op_Equals) {}
 
 SearchTerm::SearchTerm(Field field, Operator op, const QVariant& value)
@@ -87,16 +94,16 @@ QString SearchTerm::ToSql() const {
 
   switch (operator_) {
     case Op_Contains:
-      return col + " LIKE '%" + value + "%'";
+      return col + " LIKE '%" + Escape(value) + "%'" + kEscClause;
     case Op_NotContains:
-      return col + " NOT LIKE '%" + value + "%'";
+      return col + " NOT LIKE '%" + Escape(value) + "%'" + kEscClause;
     case Op_StartsWith:
-      return col + " LIKE '" + value + "%'";
+      return col + " LIKE '" + Escape(value) + "%'" + kEscClause;
     case Op_EndsWith:
-      return col + " LIKE '%" + value + "'";
+      return col + " LIKE '%" + Escape(value) + "'" + kEscClause;
     case Op_Equals:
       if (TypeOf(field_) == Type_Text)
-        return col + " LIKE '" + value + "'";
+        return col + " LIKE '" + Escape(value) + "'" + kEscClause;
       else if (TypeOf(field_) == Type_Rating || TypeOf(field_) == Type_Date ||
                TypeOf(field_) == Type_Time)
         return col + " = " + value;
