@@ -146,6 +146,8 @@ RadioBrowserService::RadioBrowserService(Application* app,
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(
       new RadioBrowserSearchProvider(app_, this, this));
+  connect(app_->player(), SIGNAL(SongChangeRequestProcessed(QUrl, bool)), this,
+          SLOT(SongChangeRequestProcessed(QUrl, bool)));
 }
 
 QStandardItem* RadioBrowserService::CreateRootItem() {
@@ -422,8 +424,11 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
 
     StreamList list;
     QJsonArray contents = document.array();
-    QJsonValue item = contents.first();
-    if (item.isUndefined()) return;
+    QJsonObject item = contents.first().toObject();
+    if (item.isEmpty()) {
+      emit StationUrlResolved(original_url, QUrl());
+      return;
+    }
 
     Song ret;
     ret.set_valid(true);
@@ -434,15 +439,19 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
 
     emit StreamMetadataFound(original_url, ret);
     emit StationUrlResolved(original_url, ret.url());
-
-    // inform the server that we played the station
-    QString determinedUrl =
-        PlayClickUrl.arg(main_server_url_, original_url.path());
-    QUrl playUrl(determinedUrl);
-    QNetworkReply* playReply = network_->get(QNetworkRequest(playUrl));
-    connect(playReply, &QNetworkReply::finished,
-            [=] { playReply->deleteLater(); });
   });
+}
+
+void RadioBrowserService::SongChangeRequestProcessed(const QUrl& url,
+                                                     bool valid) {
+  if (!valid || url.scheme() != url_handler_->scheme()) return;
+
+  // inform the server that the station is playing
+  QString determinedUrl = PlayClickUrl.arg(main_server_url_, url.path());
+  QUrl playUrl(determinedUrl);
+  QNetworkReply* playReply = network_->get(QNetworkRequest(playUrl));
+  connect(playReply, &QNetworkReply::finished,
+          [=] { playReply->deleteLater(); });
 }
 
 void RadioBrowserService::AddToSavedRadio(bool checked) {

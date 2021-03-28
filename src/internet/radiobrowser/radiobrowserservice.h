@@ -85,6 +85,7 @@ class RadioBrowserService : public InternetService {
 
  public slots:
   void ReloadSettings() override;
+  void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
  private slots:
   void LazyPopulate(QStandardItem* item) override;
