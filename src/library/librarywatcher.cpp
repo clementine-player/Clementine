@@ -230,6 +230,7 @@ void LibraryWatcher::WatchList::Add(const Directory& dir) {
 
 void LibraryWatcher::AddDirectory(const Directory& dir,
                                   const SubdirectoryList& subdirs) {
+  qLog(Debug) << "Add directory" << dir.GetPath();
   watched_dirs_.Add(dir);
   const WatchedDir& new_dir = watched_dirs_.list_[dir.id];
 
@@ -878,8 +879,21 @@ void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
   for (const WatchedDir& dir : watched_dirs_.list_.values()) {
+    qLog(Debug) << "Scanning library directory" << dir.GetPath();
     ScanTransaction transaction(this, dir, incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
+
+    // On Linux systems, if the library directory is deleted then re-created,
+    // inotify won't find it. This could be corrected by watching parent
+    // directories, but not worth the complexity for an edge case.
+    if (subdirs.isEmpty()) {
+      qLog(Debug) << "Library directory wasn't in subdir list.";
+      Subdirectory subdir;
+      subdir.path = dir.GetPath();
+      subdir.directory_id = dir.GetId();
+      subdirs << subdir;
+    }
+
     transaction.AddToProgressMax(subdirs.count());
 
     for (const Subdirectory& subdir : subdirs) {
