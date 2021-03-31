@@ -31,6 +31,9 @@ struct Directory {
     return path == other.path && id == other.id;
   }
 
+  const QString& GetPath() const { return path; }
+  int GetId() const { return id; }
+
   QString path;
   int id;
 };
@@ -41,6 +44,10 @@ Q_DECLARE_METATYPE(DirectoryList)
 
 struct Subdirectory {
   Subdirectory() : directory_id(-1), mtime(0) {}
+
+  int GetDirectoryId() const { return directory_id; }
+  const QString& GetPath() const { return path; }
+  uint GetMtime() const { return mtime; }
 
   int directory_id;
   QString path;
