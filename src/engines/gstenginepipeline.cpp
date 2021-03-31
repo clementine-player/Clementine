@@ -15,6 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// To turn on logging of bus callbacks, run Clementine with:
+// --log-levels GstEnginePipelineCallbacks:3
+
 #include "gstenginepipeline.h"
 
 #include <QCoreApplication>
@@ -878,18 +881,23 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   GstCaps* caps = gst_pad_get_current_caps(pad);
   if (caps) {
     gchar* caps_str = gst_caps_to_string(caps);
-    qLog(Debug) << "Current caps:" << caps_str;
+    qLog(Debug) << "Initial decoder caps:" << caps_str;
     g_free(caps_str);
 
-    QString fmt = GetAudioFormat(caps);
+    if (instance->pipeline_is_initialised_) {
+      qLog(Debug)
+          << "Ignoring native format since pipeline is already running.";
+    } else {
+      QString fmt = GetAudioFormat(caps);
 
-    // The output branch only handles F32LE and S16LE. If the source is S16LE,
-    // then use that throughout the pipeline. Otherwise, use F32LE.
-    if (fmt != "S16LE") {
-      GstCaps* new_caps = gst_caps_new_simple("audio/x-raw", "format",
-                                              G_TYPE_STRING, "F32LE", nullptr);
-      g_object_set(instance->capsfilter_, "caps", new_caps, nullptr);
-      gst_caps_unref(new_caps);
+      // The output branch only handles F32LE and S16LE. If the source is S16LE,
+      // then use that throughout the pipeline. Otherwise, use F32LE.
+      if (fmt != "S16LE") {
+        GstCaps* new_caps = gst_caps_new_simple(
+            "audio/x-raw", "format", G_TYPE_STRING, "F32LE", nullptr);
+        g_object_set(instance->capsfilter_, "caps", new_caps, nullptr);
+        gst_caps_unref(new_caps);
+      }
     }
     gst_caps_unref(caps);
   }
@@ -1133,11 +1141,6 @@ void GstEnginePipeline::TransitionToNext() {
   GstElement* old_decode_bin = uridecodebin_;
 
   ignore_tags_ = true;
-
-  // Reset the caps filter
-  GstCaps* new_caps = gst_caps_new_any();
-  g_object_set(capsfilter_, "caps", new_caps, nullptr);
-  gst_caps_unref(new_caps);
 
   if (!ReplaceDecodeBin(next_.url_)) {
     qLog(Error) << "ReplaceDecodeBin failed with " << next_.url_;
