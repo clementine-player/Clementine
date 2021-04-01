@@ -23,6 +23,9 @@
 class InternetSettingsCategory : public SettingsCategory {
  public:
   InternetSettingsCategory(SettingsDialog* dialog);
+
+ private:
+  void AddChildren();
 };
 
 #endif  // INTERNETSETTINGSCATEGORY_H
