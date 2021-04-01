@@ -26,6 +26,7 @@ class RatingPainter {
   RatingPainter();
 
   static const int kStarCount = 5;
+  static const int kStarStates = kStarCount * 2 + 1;
   static const int kStarSize = 16;
   static QRect Contents(const QRect& rect);
   static double RatingForPos(const QPoint& pos, const QRect& rect);
@@ -33,7 +34,8 @@ class RatingPainter {
   void Paint(QPainter* painter, const QRect& rect, float rating) const;
 
  private:
-  QPixmap stars_[kStarCount * 2 + 1];
+  // Pixmap for 0 to kStarCount stars in 1/2 star increments
+  QPixmap star_maps_[kStarStates];
 };
 
 class RatingWidget : public QWidget {
