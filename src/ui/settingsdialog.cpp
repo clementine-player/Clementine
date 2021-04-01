@@ -31,7 +31,7 @@
 #include "globalsearch/globalsearchsettingspage.h"
 #include "globalshortcutssettingspage.h"
 #include "iconloader.h"
-#include "internet/core/internetshowsettingspage.h"
+#include "internet/core/internetsettingscategory.h"
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
@@ -170,9 +170,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
 
   // Internet providers
-  InternetShowSettingsPage* internet_page = new InternetShowSettingsPage(this);
-  SettingsCategory* providers =
-      new SettingsCategory(Page_InternetShow, internet_page, this);
+  SettingsCategory* providers = new InternetSettingsCategory(this);
   AddCategory(providers);
 
 #ifdef HAVE_LIBLASTFM

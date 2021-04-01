@@ -173,6 +173,7 @@ set(SOURCES
   internet/core/internetmodel.cpp
   internet/core/internetplaylistitem.cpp
   internet/core/internetservice.cpp
+  internet/core/internetsettingscategory.cpp
   internet/core/internetshowsettingspage.cpp
   internet/core/internetview.cpp
   internet/core/internetviewcontainer.cpp
