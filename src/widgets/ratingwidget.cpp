@@ -34,14 +34,14 @@ RatingPainter::RatingPainter() {
   QIcon star_off = IconLoader::Load("star-off", IconLoader::Other);
   QPixmap off(star_off.pixmap(star_off.availableSizes().last()));
 
-  // Generate the 10 states, better to do it now than on the fly
-  for (int i = 0; i < kStarCount * 2 + 1; ++i) {
+  // Generate the 11 states, better to do it now than on the fly
+  for (int i = 0; i < kStarStates; ++i) {
     const float rating = float(i) / 2.0;
 
     // Clear the pixmap
-    stars_[i] = QPixmap(kStarSize * kStarCount, kStarSize);
-    stars_[i].fill(Qt::transparent);
-    QPainter p(&stars_[i]);
+    star_maps_[i] = QPixmap(kStarSize * kStarCount, kStarSize);
+    star_maps_[i].fill(Qt::transparent);
+    QPainter p(&star_maps_[i]);
 
     // Draw the stars
     int x = 0;
@@ -79,6 +79,10 @@ double RatingPainter::RatingForPos(const QPoint& pos, const QRect& rect) {
   const QRect contents = Contents(rect);
   const double raw = double(pos.x() - contents.left()) / contents.width();
 
+  // Check if the position was to the right or left of the rectangle.
+  if (raw < 0) return 0;
+  if (raw > 1) return 1;
+
   // Round to the nearest 0.1
   return double(int(raw * kStarCount * 2 + 0.5)) / (kStarCount * 2);
 }
@@ -93,7 +97,7 @@ void RatingPainter::Paint(QPainter* painter, const QRect& rect,
 
   // Draw the stars
   const int star = qBound(0, int(rating * 2.0 + 0.5), kStarCount * 2);
-  painter->drawPixmap(QRect(pos, size), stars_[star],
+  painter->drawPixmap(QRect(pos, size), star_maps_[star],
                       QRect(QPoint(0, 0), size));
 }
 
