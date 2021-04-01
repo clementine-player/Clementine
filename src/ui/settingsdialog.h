@@ -134,7 +134,6 @@ class SettingsDialog : public QDialog {
   };
 
   void AddCategory(SettingsCategory* category);
-  void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = nullptr);
 
  private:
   friend class SettingsCategory;

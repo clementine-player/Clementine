@@ -30,6 +30,8 @@ class SettingsCategory : public QTreeWidgetItem {
   SettingsCategory(SettingsDialog::Page id, SettingsPage* page,
                    SettingsDialog* dialog);
 
+  void AddPage(SettingsDialog::Page id, SettingsPage* page);
+
  protected:
   SettingsDialog* dialog_;
 };
