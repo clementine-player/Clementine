@@ -32,11 +32,6 @@
 #include "globalshortcutssettingspage.h"
 #include "iconloader.h"
 #include "internet/core/internetsettingscategory.h"
-#include "internet/digitally/digitallyimportedsettingspage.h"
-#include "internet/magnatune/magnatunesettingspage.h"
-#include "internet/podcasts/podcastsettingspage.h"
-#include "internet/radiobrowser/radiobrowsersettingspage.h"
-#include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "mainwindow.h"
 #include "networkproxysettingspage.h"
@@ -51,36 +46,8 @@
 #include "widgets/groupediconview.h"
 #include "widgets/osdpretty.h"
 
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmsettingspage.h"
-#endif
-
 #ifdef HAVE_WIIMOTEDEV
 #include "wiimotedev/wiimotesettingspage.h"
-#endif
-
-#ifdef HAVE_GOOGLE_DRIVE
-#include "internet/googledrive/googledrivesettingspage.h"
-#endif
-
-#ifdef HAVE_DROPBOX
-#include "internet/dropbox/dropboxsettingspage.h"
-#endif
-
-#ifdef HAVE_BOX
-#include "internet/box/boxsettingspage.h"
-#endif
-
-#ifdef HAVE_SKYDRIVE
-#include "internet/skydrive/skydrivesettingspage.h"
-#endif
-
-#ifdef HAVE_SEAFILE
-#include "internet/seafile/seafilesettingspage.h"
-#endif
-
-#ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifysettingspage.h"
 #endif
 
 #include <QAbstractButton>
@@ -169,50 +136,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
 
-  // Internet providers
-  SettingsCategory* providers = new InternetSettingsCategory(this);
-  AddCategory(providers);
-
-#ifdef HAVE_LIBLASTFM
-  providers->AddPage(Page_Lastfm, new LastFMSettingsPage(this));
-#endif
-
-#ifdef HAVE_GOOGLE_DRIVE
-  providers->AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this));
-#endif
-
-#ifdef HAVE_DROPBOX
-  providers->AddPage(Page_Dropbox, new DropboxSettingsPage(this));
-#endif
-
-#ifdef HAVE_BOX
-  providers->AddPage(Page_Box, new BoxSettingsPage(this));
-#endif
-
-#ifdef HAVE_SKYDRIVE
-  providers->AddPage(Page_Skydrive, new SkydriveSettingsPage(this));
-#endif
-
-#ifdef HAVE_SPOTIFY
-  providers->AddPage(Page_Spotify, new SpotifySettingsPage(this));
-#endif
-
-#ifdef HAVE_SEAFILE
-  providers->AddPage(Page_Seafile, new SeafileSettingsPage(this));
-#endif
-
-#ifdef HAVE_AMAZON_CLOUD_DRIVE
-  providers->AddPage(Page_AmazonCloudDrive, new AmazonSettingsPage(this));
-#endif
-
-  providers->AddPage(Page_Magnatune, new MagnatuneSettingsPage(this));
-  providers->AddPage(Page_DigitallyImported,
-                     new DigitallyImportedSettingsPage(this));
-  providers->AddPage(Page_Subsonic, new SubsonicSettingsPage(this));
-  providers->AddPage(Page_Podcasts, new PodcastSettingsPage(this));
-  providers->AddPage(Page_RadioBrowser, new RadioBrowserSettingsPage(this));
-
-  providers->sortChildren(0, Qt::AscendingOrder);
+  // Internet services category
+  AddCategory(new InternetSettingsCategory(this));
 
   // List box
   connect(ui_->list,

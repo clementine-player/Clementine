@@ -17,8 +17,89 @@
 
 #include "internetsettingscategory.h"
 
+#include "internet/digitally/digitallyimportedsettingspage.h"
+#include "internet/magnatune/magnatunesettingspage.h"
+#include "internet/podcasts/podcastsettingspage.h"
+#include "internet/radiobrowser/radiobrowsersettingspage.h"
+#include "internet/subsonic/subsonicsettingspage.h"
 #include "internetshowsettingspage.h"
+
+#ifdef HAVE_LIBLASTFM
+#include "internet/lastfm/lastfmsettingspage.h"
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+#include "internet/googledrive/googledrivesettingspage.h"
+#endif
+
+#ifdef HAVE_DROPBOX
+#include "internet/dropbox/dropboxsettingspage.h"
+#endif
+
+#ifdef HAVE_BOX
+#include "internet/box/boxsettingspage.h"
+#endif
+
+#ifdef HAVE_SKYDRIVE
+#include "internet/skydrive/skydrivesettingspage.h"
+#endif
+
+#ifdef HAVE_SEAFILE
+#include "internet/seafile/seafilesettingspage.h"
+#endif
+
+#ifdef HAVE_SPOTIFY
+#include "internet/spotify/spotifysettingspage.h"
+#endif
 
 InternetSettingsCategory::InternetSettingsCategory(SettingsDialog* dialog)
     : SettingsCategory(SettingsDialog::Page_InternetShow,
-                       new InternetShowSettingsPage(dialog), dialog) {}
+                       new InternetShowSettingsPage(dialog), dialog) {
+  AddChildren();
+}
+
+void InternetSettingsCategory::AddChildren() {
+#ifdef HAVE_LIBLASTFM
+  AddPage(SettingsDialog::Page_Lastfm, new LastFMSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+  AddPage(SettingsDialog::Page_GoogleDrive,
+          new GoogleDriveSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_DROPBOX
+  AddPage(SettingsDialog::Page_Dropbox, new DropboxSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_BOX
+  AddPage(SettingsDialog::Page_Box, new BoxSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_SKYDRIVE
+  AddPage(SettingsDialog::Page_Skydrive, new SkydriveSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_SPOTIFY
+  AddPage(SettingsDialog::Page_Spotify, new SpotifySettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_SEAFILE
+  AddPage(SettingsDialog::Page_Seafile, new SeafileSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_AMAZON_CLOUD_DRIVE
+  AddPage(SettingsDialog::Page_AmazonCloudDrive,
+          new AmazonSettingsPage(dialog_));
+#endif
+
+  AddPage(SettingsDialog::Page_Magnatune, new MagnatuneSettingsPage(dialog_));
+  AddPage(SettingsDialog::Page_DigitallyImported,
+          new DigitallyImportedSettingsPage(dialog_));
+  AddPage(SettingsDialog::Page_Subsonic, new SubsonicSettingsPage(dialog_));
+  AddPage(SettingsDialog::Page_Podcasts, new PodcastSettingsPage(dialog_));
+  AddPage(SettingsDialog::Page_RadioBrowser,
+          new RadioBrowserSettingsPage(dialog_));
+
+  sortChildren(0, Qt::AscendingOrder);
+}
