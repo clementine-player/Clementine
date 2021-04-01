@@ -34,3 +34,19 @@ SettingsCategory::SettingsCategory(SettingsDialog::Page id, SettingsPage* page,
   setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   dialog->AddPageToStack(id, page, this);
 }
+
+void SettingsCategory::AddPage(SettingsDialog::Page id, SettingsPage* page) {
+  // Create the list item
+  QTreeWidgetItem* item = new QTreeWidgetItem;
+  item->setText(0, page->windowTitle());
+  item->setIcon(0, page->windowIcon());
+  item->setData(0, SettingsDialog::Role_IsSeparator, false);
+
+  if (!page->IsEnabled()) {
+    item->setFlags(Qt::NoItemFlags);
+  }
+
+  addChild(item);
+
+  dialog_->AddPageToStack(id, page, item);
+}

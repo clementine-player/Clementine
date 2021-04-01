@@ -138,18 +138,18 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
   SettingsCategory* general = new SettingsCategory(tr("General"), this);
   AddCategory(general);
-  AddPage(Page_Playback, new PlaybackSettingsPage(this), general);
-  AddPage(Page_Behaviour, new BehaviourSettingsPage(this), general);
-  AddPage(Page_Library, new LibrarySettingsPage(this), general);
-  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this),
-          general);
-  AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
-  AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
-  AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
+  general->AddPage(Page_Playback, new PlaybackSettingsPage(this));
+  general->AddPage(Page_Behaviour, new BehaviourSettingsPage(this));
+  general->AddPage(Page_Library, new LibrarySettingsPage(this));
+  general->AddPage(Page_BackgroundStreams,
+                   new BackgroundStreamsSettingsPage(this));
+  general->AddPage(Page_Proxy, new NetworkProxySettingsPage(this));
+  general->AddPage(Page_Transcoding, new TranscoderSettingsPage(this));
+  general->AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this));
 
 #ifdef HAVE_WIIMOTEDEV
   WiimoteSettingsPage* wii_page = new WiimoteSettingsPage(this);
-  AddPage(Page_Wiimotedev, wii_page, general);
+  general->AddPage(Page_Wiimotedev, wii_page);
   connect(wii_page, SIGNAL(SetWiimotedevInterfaceActived(bool)),
           SIGNAL(SetWiimotedevInterfaceActived(bool)));
 #endif
@@ -157,14 +157,14 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   // User interface
   SettingsCategory* iface = new SettingsCategory(tr("User interface"), this);
   AddCategory(iface);
-  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
-  AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
-  AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
-  AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
+  iface->AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this));
+  iface->AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this));
+  iface->AddPage(Page_Appearance, new AppearanceSettingsPage(this));
+  iface->AddPage(Page_SongInformation, new SongInfoSettingsPage(this));
 
   NotificationsSettingsPage* notification_page =
       new NotificationsSettingsPage(this);
-  AddPage(Page_Notifications, notification_page, iface);
+  iface->AddPage(Page_Notifications, notification_page);
   connect(notification_page,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
@@ -176,43 +176,43 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddCategory(providers);
 
 #ifdef HAVE_LIBLASTFM
-  AddPage(Page_Lastfm, new LastFMSettingsPage(this), providers);
+  providers->AddPage(Page_Lastfm, new LastFMSettingsPage(this));
 #endif
 
 #ifdef HAVE_GOOGLE_DRIVE
-  AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
+  providers->AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this));
 #endif
 
 #ifdef HAVE_DROPBOX
-  AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
+  providers->AddPage(Page_Dropbox, new DropboxSettingsPage(this));
 #endif
 
 #ifdef HAVE_BOX
-  AddPage(Page_Box, new BoxSettingsPage(this), providers);
+  providers->AddPage(Page_Box, new BoxSettingsPage(this));
 #endif
 
 #ifdef HAVE_SKYDRIVE
-  AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
+  providers->AddPage(Page_Skydrive, new SkydriveSettingsPage(this));
 #endif
 
 #ifdef HAVE_SPOTIFY
-  AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
+  providers->AddPage(Page_Spotify, new SpotifySettingsPage(this));
 #endif
 
 #ifdef HAVE_SEAFILE
-  AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
+  providers->AddPage(Page_Seafile, new SeafileSettingsPage(this));
 #endif
 
 #ifdef HAVE_AMAZON_CLOUD_DRIVE
-  AddPage(Page_AmazonCloudDrive, new AmazonSettingsPage(this), providers);
+  providers->AddPage(Page_AmazonCloudDrive, new AmazonSettingsPage(this));
 #endif
 
-  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
-  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),
-          providers);
-  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
-  AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
-  AddPage(Page_RadioBrowser, new RadioBrowserSettingsPage(this), providers);
+  providers->AddPage(Page_Magnatune, new MagnatuneSettingsPage(this));
+  providers->AddPage(Page_DigitallyImported,
+                     new DigitallyImportedSettingsPage(this));
+  providers->AddPage(Page_Subsonic, new SubsonicSettingsPage(this));
+  providers->AddPage(Page_Podcasts, new PodcastSettingsPage(this));
+  providers->AddPage(Page_RadioBrowser, new RadioBrowserSettingsPage(this));
 
   providers->sortChildren(0, Qt::AscendingOrder);
 
@@ -236,25 +236,6 @@ void SettingsDialog::AddCategory(SettingsCategory* category) {
   ui_->list->invisibleRootItem()->addChild(category);
   // This must not be called before it's added to the parent.
   category->setExpanded(true);
-}
-
-void SettingsDialog::AddPage(Page id, SettingsPage* page,
-                             QTreeWidgetItem* parent) {
-  if (!parent) parent = ui_->list->invisibleRootItem();
-
-  // Create the list item
-  QTreeWidgetItem* item = new QTreeWidgetItem;
-  item->setText(0, page->windowTitle());
-  item->setIcon(0, page->windowIcon());
-  item->setData(0, Role_IsSeparator, false);
-
-  if (!page->IsEnabled()) {
-    item->setFlags(Qt::NoItemFlags);
-  }
-
-  parent->addChild(item);
-
-  AddPageToStack(id, page, item);
 }
 
 void SettingsDialog::AddPageToStack(Page id, SettingsPage* page,
