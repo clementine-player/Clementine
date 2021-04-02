@@ -464,6 +464,11 @@ bool GstEnginePipeline::InitAudioBin() {
   // Link the trunk to the tee via filter.
   gst_element_link_many(tee_src, capsfilter_, tee_, nullptr);
 
+  // If the user has selected a format, then set it now.
+  if (format_ != GstEngine::kOutFormatDetect) {
+    SetOutputFormat(format_);
+  }
+
   // Link the analyzer output of the tee
   gst_element_link(probe_queue, probe_converter);
 
@@ -884,7 +889,9 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
     qLog(Debug) << "Initial decoder caps:" << caps_str;
     g_free(caps_str);
 
-    if (instance->pipeline_is_initialised_) {
+    if (instance->format_ != GstEngine::kOutFormatDetect) {
+      // Caps were set when the pipeline was constructed.
+    } else if (instance->pipeline_is_initialised_) {
       qLog(Debug)
           << "Ignoring native format since pipeline is already running.";
     } else {
@@ -892,11 +899,10 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
 
       // The output branch only handles F32LE and S16LE. If the source is S16LE,
       // then use that throughout the pipeline. Otherwise, use F32LE.
-      if (fmt != "S16LE") {
-        GstCaps* new_caps = gst_caps_new_simple(
-            "audio/x-raw", "format", G_TYPE_STRING, "F32LE", nullptr);
-        g_object_set(instance->capsfilter_, "caps", new_caps, nullptr);
-        gst_caps_unref(new_caps);
+      if (fmt == GstEngine::kOutFormatS16LE) {
+        instance->SetOutputFormat(GstEngine::kOutFormatS16LE);
+      } else {
+        instance->SetOutputFormat(GstEngine::kOutFormatF32LE);
       }
     }
     gst_caps_unref(caps);
@@ -1295,6 +1301,14 @@ void GstEnginePipeline::SetVolumeModifier(qreal mod) {
 void GstEnginePipeline::UpdateVolume() {
   float vol = double(volume_percent_) * 0.01 * volume_modifier_;
   g_object_set(G_OBJECT(volume_), "volume", vol, nullptr);
+}
+
+void GstEnginePipeline::SetOutputFormat(const QString& format) {
+  qLog(Debug) << "Setting format to" << format;
+  GstCaps* new_caps = gst_caps_new_simple(
+      "audio/x-raw", "format", G_TYPE_STRING, format.toUtf8().data(), nullptr);
+  g_object_set(capsfilter_, "caps", new_caps, nullptr);
+  gst_caps_unref(new_caps);
 }
 
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,

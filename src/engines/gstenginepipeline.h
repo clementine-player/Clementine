@@ -51,6 +51,7 @@ class GstEnginePipeline : public GstPipelineBase {
   void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
   void set_sample_rate(int rate);
+  void set_format(const QString& format) { format_ = format; }
 
   // Creates the pipeline, returns false on error
   bool InitFromReq(const MediaPlaybackRequest& req, qint64 end_nanosec);
@@ -153,6 +154,7 @@ class GstEnginePipeline : public GstPipelineBase {
   void UpdateVolume();
   void UpdateEqualizer();
   void UpdateStereoBalance();
+  void SetOutputFormat(const QString& format);
   bool ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
 
@@ -215,6 +217,7 @@ class GstEnginePipeline : public GstPipelineBase {
 
   bool mono_playback_;
   int sample_rate_;
+  QString format_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.

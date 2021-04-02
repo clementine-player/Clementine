@@ -85,7 +85,11 @@ using std::unique_ptr;
 using std::vector;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
+const char* GstEngine::kSettingFormat = "format";
 const char* GstEngine::kAutoSink = "autoaudiosink";
+const char* GstEngine::kOutFormatDetect = "";
+const char* GstEngine::kOutFormatS16LE = "S16LE";
+const char* GstEngine::kOutFormatF32LE = "F32LE";
 const char* GstEngine::kHypnotoadPipeline =
     "audiotestsrc wave=6 ! "
     "audioecho intensity=1 delay=50000000 ! "
@@ -239,6 +243,8 @@ void GstEngine::ReloadSettings() {
 
   mono_playback_ = s.value("monoplayback", false).toBool();
   sample_rate_ = s.value("samplerate", kAutoSampleRate).toInt();
+  format_ = s.value(GstEngine::kSettingFormat, GstEngine::kOutFormatDetect)
+                .toString();
 }
 
 qint64 GstEngine::position_nanosec() const {
@@ -819,6 +825,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_buffer_min_fill(buffer_min_fill_);
   ret->set_mono_playback(mono_playback_);
   ret->set_sample_rate(sample_rate_);
+  ret->set_format(format_);
 
   ret->AddBufferConsumer(this);
   for (BufferConsumer* consumer : buffer_consumers_) {

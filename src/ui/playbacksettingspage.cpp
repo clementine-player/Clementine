@@ -50,6 +50,10 @@ PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
   ui_->sample_rate->setItemData(2, 48000);
   ui_->sample_rate->setItemData(3, 96000);
   ui_->sample_rate->setItemData(4, 192000);
+
+  ui_->output_format->setItemData(0, GstEngine::kOutFormatDetect);
+  ui_->output_format->setItemData(1, GstEngine::kOutFormatS16LE);
+  ui_->output_format->setItemData(2, GstEngine::kOutFormatF32LE);
 }
 
 PlaybackSettingsPage::~PlaybackSettingsPage() { delete ui_; }
@@ -116,6 +120,9 @@ void PlaybackSettingsPage::Load() {
   ui_->mono_playback->setChecked(s.value("monoplayback", false).toBool());
   ui_->sample_rate->setCurrentIndex(ui_->sample_rate->findData(
       s.value("samplerate", GstEngine::kAutoSampleRate).toInt()));
+  ui_->output_format->setCurrentIndex(ui_->output_format->findData(
+      s.value(GstEngine::kSettingFormat, GstEngine::kOutFormatDetect)
+          .toString()));
   ui_->buffer_min_fill->setValue(s.value("bufferminfill", 33).toInt());
   s.endGroup();
 }
@@ -153,6 +160,9 @@ void PlaybackSettingsPage::Save() {
   s.setValue(
       "samplerate",
       ui_->sample_rate->itemData(ui_->sample_rate->currentIndex()).toInt());
+  s.setValue(GstEngine::kSettingFormat,
+             ui_->output_format->itemData(ui_->output_format->currentIndex())
+                 .toString());
   s.setValue("bufferminfill", ui_->buffer_min_fill->value());
   s.endGroup();
 }
