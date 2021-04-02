@@ -73,7 +73,11 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   typedef QList<OutputDetails> OutputDetailsList;
 
   static const int kAutoSampleRate = -1;
+  static const char* kOutFormatDetect;
+  static const char* kOutFormatS16LE;
+  static const char* kOutFormatF32LE;
   static const char* kSettingsGroup;
+  static const char* kSettingFormat;
   static const char* kAutoSink;
 
   bool Init();
@@ -223,6 +227,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   bool mono_playback_;
   int sample_rate_;
+  QString format_;
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;

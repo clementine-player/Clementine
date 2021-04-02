@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>667</height>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,16 @@
       <item>
        <widget class="QWidget" name="fading_options" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -193,7 +202,16 @@
          <bool>false</bool>
         </property>
         <layout class="QFormLayout" name="formLayout_4">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="0" column="0">
@@ -336,16 +354,6 @@
         </item>
        </layout>
       </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QCheckBox" name="mono_playback">
-        <property name="toolTip">
-         <string>Changing mono playback preference will be effective for the next playing songs</string>
-        </property>
-        <property name="text">
-         <string>Mono playback</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
        <widget class="QLabel" name="sample_rate_label">
         <property name="text">
@@ -354,7 +362,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <layout class="QHBoxLayout" name="sample_rate_layout">
         <item>
          <widget class="QComboBox" name="sample_rate">
           <property name="sizePolicy">
@@ -404,6 +412,65 @@
         </item>
         <item>
          <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="output_format_label">
+        <property name="text">
+         <string>Format</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QCheckBox" name="mono_playback">
+        <property name="toolTip">
+         <string>Changing mono playback preference will be effective for the next playing songs</string>
+        </property>
+        <property name="text">
+         <string>Mono playback</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <layout class="QHBoxLayout" name="output_format_layout">
+        <item>
+         <widget class="QComboBox" name="output_format">
+          <property name="toolTip">
+           <string>The format is only updated when a pipeline starts.</string>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::AdjustToContents</enum>
+          </property>
+          <item>
+           <property name="text">
+            <string>Detect</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>S16LE (16-bit)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>F32LE (32-bit)</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
