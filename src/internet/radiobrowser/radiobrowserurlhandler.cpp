@@ -28,7 +28,9 @@ RadioBrowserUrlHandler::RadioBrowserUrlHandler(Application* app,
                                                RadioBrowserService* service,
                                                QObject* parent)
     : UrlHandler(parent), app_(app), service_(service) {
-  connect(service_, &RadioBrowserService::StationUrlResolved, this,
+  connect(service_, &RadioBrowserService::StationUrlResolveFailed, this,
+          &RadioBrowserUrlHandler::LoadStationFailed);
+  connect(service_, &RadioBrowserService::StreamMetadataFound, this,
           &RadioBrowserUrlHandler::LoadStationFinished);
 }
 
@@ -43,13 +45,13 @@ UrlHandler::LoadResult RadioBrowserUrlHandler::StartLoading(const QUrl& url) {
   return LoadResult(url, LoadResult::WillLoadAsynchronously);
 }
 
+void RadioBrowserUrlHandler::LoadStationFailed(const QUrl& original_url) {
+  qLog(Error) << "Error loading" << original_url;
+  emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
+}
+
 void RadioBrowserUrlHandler::LoadStationFinished(const QUrl& original_url,
-                                                 const QUrl& url) {
-  if (url.isValid()) {
-    emit AsyncLoadComplete(
-        LoadResult(original_url, LoadResult::TrackAvailable, url));
-  } else {
-    qLog(Error) << "Error loading" << original_url;
-    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
-  }
+                                                 const Song& song) {
+  emit AsyncLoadComplete(
+      LoadResult(original_url, LoadResult::TrackAvailable, song.url()));
 }
