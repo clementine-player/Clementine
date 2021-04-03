@@ -81,7 +81,7 @@ class RadioBrowserService : public InternetService {
 
  signals:
   void SearchFinished(int search_id, RadioBrowserService::StreamList streams);
-  void StationUrlResolved(const QUrl& original_url, const QUrl& url);
+  void StationUrlResolveFailed(const QUrl& original_url);
 
  public slots:
   void ReloadSettings() override;

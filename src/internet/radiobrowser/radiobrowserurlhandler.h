@@ -18,6 +18,7 @@
 #ifndef INTERNET_RADIOBROWSER_RADIOBROWSERURLHANDLER_H_
 #define INTERNET_RADIOBROWSER_RADIOBROWSERURLHANDLER_H_
 
+#include "core/song.h"
 #include "core/urlhandler.h"
 #include "ui/iconloader.h"
 
@@ -36,7 +37,8 @@ class RadioBrowserUrlHandler : public UrlHandler {
   LoadResult StartLoading(const QUrl& url);
 
  private slots:
-  void LoadStationFinished(const QUrl& original_url, const QUrl& url);
+  void LoadStationFinished(const QUrl& original_url, const Song& song);
+  void LoadStationFailed(const QUrl& original_url);
 
  private:
   Application* app_;

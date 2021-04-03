@@ -43,8 +43,8 @@ Q_DECLARE_METATYPE(QStandardItem*)
 namespace {
 struct Branch {
   QString name;
-  QString listUrl;
-  QString itemsUrl;
+  QString list_url;
+  QString items_url;
   RadioBrowserService::Type type;
 };
 
@@ -187,8 +187,8 @@ void RadioBrowserService::RefreshRootItem() {
         IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
     item->setText(branch.name);
     item->setData(branch.type, InternetModel::Role_Type);
-    item->setData(branch.listUrl, RadioBrowserService::Role_ListUrl);
-    item->setData(branch.itemsUrl, RadioBrowserService::Role_ItemsUrl);
+    item->setData(branch.list_url, RadioBrowserService::Role_ListUrl);
+    item->setData(branch.items_url, RadioBrowserService::Role_ItemsUrl);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     root_->appendRow(item);
   }
@@ -200,10 +200,10 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
     return;
   }
 
-  QString determinedUrl = item->data(RadioBrowserService::Role_ListUrl)
-                              .toString()
-                              .arg(main_server_url_);
-  QUrl url(determinedUrl);
+  QString determined_url = item->data(RadioBrowserService::Role_ListUrl)
+                               .toString()
+                               .arg(main_server_url_);
+  QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
@@ -236,10 +236,10 @@ void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
   }
 
   QStandardItem* parent = item->parent();
-  QString determinedUrl = parent->data(RadioBrowserService::Role_ItemsUrl)
-                              .toString()
-                              .arg(main_server_url_, item->text());
-  QUrl url(determinedUrl);
+  QString determined_url = parent->data(RadioBrowserService::Role_ItemsUrl)
+                               .toString()
+                               .arg(main_server_url_, item->text());
+  QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
@@ -254,10 +254,10 @@ void RadioBrowserService::RefreshTop100(QStandardItem* item) {
     return;
   }
 
-  QString determinedUrl = item->data(RadioBrowserService::Role_ItemsUrl)
-                              .toString()
-                              .arg(main_server_url_);
-  QUrl url(determinedUrl);
+  QString determined_url = item->data(RadioBrowserService::Role_ItemsUrl)
+                               .toString()
+                               .arg(main_server_url_);
+  QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
@@ -386,8 +386,8 @@ void RadioBrowserService::ShowConfig() {
 
 void RadioBrowserService::Search(int search_id, const QString& query,
                                  const int limit) {
-  QString determinedUrl = SearchUrl.arg(main_server_url_, query).arg(limit);
-  QUrl url(determinedUrl);
+  QString determined_url = SearchUrl.arg(main_server_url_, query).arg(limit);
+  QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
@@ -410,9 +410,9 @@ void RadioBrowserService::Search(int search_id, const QString& query,
 }
 
 void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
-  QString determinedUrl =
+  QString determined_url =
       StationDetailsUrl.arg(main_server_url_, original_url.path());
-  QUrl url(determinedUrl);
+  QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting station"));
@@ -426,7 +426,7 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
     QJsonArray contents = document.array();
     QJsonObject item = contents.first().toObject();
     if (item.isEmpty()) {
-      emit StationUrlResolved(original_url, QUrl());
+      emit StationUrlResolveFailed(original_url);
       return;
     }
 
@@ -438,7 +438,6 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
     ret.set_art_automatic(item["favicon"].toString());
 
     emit StreamMetadataFound(original_url, ret);
-    emit StationUrlResolved(original_url, ret.url());
   });
 }
 
@@ -447,8 +446,8 @@ void RadioBrowserService::SongChangeRequestProcessed(const QUrl& url,
   if (!valid || url.scheme() != url_handler_->scheme()) return;
 
   // inform the server that the station is playing
-  QString determinedUrl = PlayClickUrl.arg(main_server_url_, url.path());
-  QUrl playUrl(determinedUrl);
+  QString determined_url = PlayClickUrl.arg(main_server_url_, url.path());
+  QUrl playUrl(determined_url);
   QNetworkReply* playReply = network_->get(QNetworkRequest(playUrl));
   connect(playReply, &QNetworkReply::finished,
           [=] { playReply->deleteLater(); });
