@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-04-03 15:28+0000\n"
+"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,9 +56,9 @@ msgstr "zile"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr "ms"
 
@@ -317,7 +317,7 @@ msgstr "1 piesă"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -325,11 +325,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -337,7 +337,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 de piese aleatorii"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -665,7 +665,7 @@ msgstr "Adaugă la coadă"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:306
 msgid "Add to your radio streams"
-msgstr ""
+msgstr "Adaugă la fluxurile radio"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -713,7 +713,7 @@ msgstr "După copiere..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (intensitate sunet ideală pentru toate piesele)"
 
@@ -848,7 +848,7 @@ msgstr "Adaugă în lista de redare curentă"
 msgid "Append to the playlist"
 msgstr "Adăuga în lista de redare"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicați compresia pentru a preveni tăierea"
 
@@ -894,7 +894,7 @@ msgstr "Întrea&bă când se salvează"
 msgid "Audio format"
 msgstr "Format audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Ieșire audio"
 
@@ -914,7 +914,7 @@ msgid "Authors"
 msgstr "Autori"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Automat"
 
@@ -1059,11 +1059,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Navighează..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Durată memorie tampon"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Se încarcă memoria tampon"
 
@@ -1123,11 +1123,11 @@ msgstr "Schimba melodia redată în prezent"
 msgid "Change the language"
 msgstr "Schimbă limba"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Schimbările vor fi efectuate când începe redarea următoarei melodii"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1153,7 +1153,7 @@ msgstr "Verifică după actualizări..."
 msgid "Choose a name for your smart playlist"
 msgstr "Alegeți un nume pentru lista de redare inteligentă"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Alege automat"
 
@@ -1569,11 +1569,11 @@ msgstr "Coperți de la %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Creează o nouă listă de redare cu fișierele/URL-urile"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Estompare-încrucișată când se schimbă automat piesele"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Estompare-încrucișată când se schimbă manual piesele"
 
@@ -1664,7 +1664,7 @@ msgstr "Scade volumul"
 msgid "Default background image"
 msgstr "Imagine de fundal implicită"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispozitiv implicit pe %1"
@@ -1744,6 +1744,10 @@ msgstr "Destinație"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalii..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr "Detectează"
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -1861,7 +1865,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "Efectuând o rescanare completă va duce la pierderi de metadate salvate în Clementine precum coperțile, numărul de redări și evaluările. Clementine va rescana toată muzica din %1 ceea ce va dura ceva timp."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2234,7 +2238,7 @@ msgstr "La fiecare 6 ore"
 msgid "Every hour"
 msgstr "La fiecare oră"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceptând între piesele de pe același album sau în aceeași filă CUE"
 
@@ -2276,6 +2280,10 @@ msgstr "Export terminat"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "S-au exportat %1 coperți din %2 (%3 omise)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr "F32LE (32-biți)"
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2287,20 +2295,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Estompare ieșire la întrerupere / estompare la reluare"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Estompare ieșire la oprirea unei piese"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Se estompează"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Durata estompării"
 
@@ -2511,6 +2519,7 @@ msgid "Form"
 msgstr "Formular"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Format"
@@ -2583,7 +2592,7 @@ msgstr "Obținere canalele"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:415
 msgid "Getting station"
-msgstr ""
+msgstr "Se obține stația"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -3312,7 +3321,7 @@ msgstr "Tip abonare"
 msgid "Minimum bitrate"
 msgstr "Rată de biți minimă"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Umplere minimă a memoriei tampon"
 
@@ -3336,7 +3345,7 @@ msgstr "Monitorizează colecția pentru schimbări"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Redare mono"
 
@@ -3782,7 +3791,7 @@ msgstr "Alte opțiuni"
 msgid "Output"
 msgstr "Ieșire"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Dispozitiv de ieșire"
 
@@ -3903,7 +3912,7 @@ msgstr "Redă piesa a <n>a din lista de redare"
 msgid "Play/Pause"
 msgstr "Redare/Pauză"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Redare"
 
@@ -3975,7 +3984,7 @@ msgstr "Durată afișare "
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Preamplificare"
 
@@ -4125,13 +4134,13 @@ msgstr "Adaugă în coadă piesa"
 msgid "Quickly rate the playing track"
 msgstr "Evaluați rapid piesa în curs de redare"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (egalizare loudness pentru toate piesele)"
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:80
 msgid "RadioBrowser"
-msgstr ""
+msgstr "NavigatorRadio"
 
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
@@ -4316,11 +4325,11 @@ msgstr "Înlocui lista de redare"
 msgid "Replaces spaces with underscores"
 msgstr "Înlocuiește spațiul cu subliniere"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Redă Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Redă modul Gain"
 
@@ -4351,7 +4360,7 @@ msgstr "Repornește piesa sau redă piesa precedentă după 8 secunde de la porn
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
-msgstr ""
+msgstr "Restabilește la serverul implicit"
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4393,6 +4402,10 @@ msgstr "Dosarul rădăcină care va fi navigabil de la distanță prin rețea"
 msgid "Run"
 msgstr "Rulează"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr "S16LE (16-biți)"
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4416,7 +4429,7 @@ msgid "Safely remove the device after copying"
 msgstr "Scoate în siguranță dispozitivul după copiere"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Rată de eșantionare"
@@ -4730,7 +4743,7 @@ msgstr "Arată"
 msgid "Show OSD"
 msgstr "Arată OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Arată o animație luminoasă pe piesa curentă"
 
@@ -4897,7 +4910,7 @@ msgstr "Omite numărătoarea"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Omite fișierele cu aceste extensii (separate prin virgulă, majuscule nesemnificative)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5217,6 +5230,10 @@ msgstr "Directorul %1 nu este valid"
 #: songinfo/streamdiscoverer.cpp:119
 msgid "The discoverer is busy"
 msgstr "Descoperitorul este ocupat"
+
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr "Formatul este actualizat numai când linia de asamblare începe."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5590,7 +5607,7 @@ msgstr "Utilizați scurtăturile pe tastatură Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Utilizează culori psihedelice"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Utilizează metadate Replay Gain când sunt disponibile"
 
@@ -6075,7 +6092,7 @@ msgstr "bpm"
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr ""
+msgstr "listă de valori separate prin virgulă ale extensiilor permise ce vor fi vizibile la distanță prin rețea (ex: m3u,mp3,flac,ogg,wav)"
 
 #: smartplaylists/searchterm.cpp:258
 msgid "contains"

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/davidsansome/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,9 +47,9 @@ msgstr "dager"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr "Normaliseringsmodus"
 
@@ -308,7 +308,7 @@ msgstr "1 spor"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -316,11 +316,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -328,7 +328,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 tilfeldige spor"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -704,7 +704,7 @@ msgstr "Etter kopiering…"
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideell lydstyrkeutgjevning for alle spor)"
 
@@ -839,7 +839,7 @@ msgstr "Legg til i gjeldende spilleliste"
 msgid "Append to the playlist"
 msgstr "Legg til i spillelista"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Legg til kompressor, for å unngå klipping"
 
@@ -885,7 +885,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "Lydformat"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Lyd-utenhet"
 
@@ -905,7 +905,7 @@ msgid "Authors"
 msgstr "Utviklere"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Automatisk"
 
@@ -1050,11 +1050,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Bla gjennom…"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Mellomlagringslengde"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Mellomlagring"
 
@@ -1114,11 +1114,11 @@ msgstr "Bytt låten som spilles"
 msgid "Change the language"
 msgstr "Endre språk"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Endringer vil utføres når neste sang begynner å spille"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1144,7 +1144,7 @@ msgstr "Se etter oppdateringer…"
 msgid "Choose a name for your smart playlist"
 msgstr "Sett et navn på den smarte spillelisten"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Velg automatisk"
 
@@ -1560,11 +1560,11 @@ msgstr "Omslag fra %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Opprett ny spilleliste med filer/URL-er"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Miks overgang når spor skiftes automatisk"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Mikse overgang når du skifter spor selv"
 
@@ -1655,7 +1655,7 @@ msgstr "Demp lydstyrken"
 msgid "Default background image"
 msgstr "Forvalgt bakgrunnsbilde"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Forvalgt enhet på %1"
@@ -1735,6 +1735,10 @@ msgstr "Mål"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detaljer…"
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2225,7 +2229,7 @@ msgstr "Hver sjette time"
 msgid "Every hour"
 msgstr "Hver time"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Unntatt mellom spor fra samme album eller CUE-fil"
 
@@ -2267,6 +2271,10 @@ msgstr "Eksport fullført"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 av %2 omslag eksportert (hoppet over %3)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr ""
@@ -2278,20 +2286,20 @@ msgstr ""
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Ton ut/inn ved pause/start"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Ton ut når sporet stoppes"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Ton inn/ut"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Tonings-varighet"
 
@@ -2502,6 +2510,7 @@ msgid "Form"
 msgstr "Skjema"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Format"
@@ -3303,7 +3312,7 @@ msgstr "Type medlemskap"
 msgid "Minimum bitrate"
 msgstr "Minimal bitrate"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Minimum mellomlagerutfylling"
 
@@ -3327,7 +3336,7 @@ msgstr "Overvåk endringer i biblioteket"
 msgid "Monkey's Audio"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Spill av i mono"
 
@@ -3773,7 +3782,7 @@ msgstr "Andre innstillinger"
 msgid "Output"
 msgstr "Utgang"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Ut-enhet"
 
@@ -3894,7 +3903,7 @@ msgstr "Spill av <n>ende spor i spillelista"
 msgid "Play/Pause"
 msgstr "Spill av/Pause"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Avspilling"
 
@@ -3966,7 +3975,7 @@ msgstr "Oppsprettsvinduets varighet"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Forforsterker"
 
@@ -4116,7 +4125,7 @@ msgstr "Legg spor i kø"
 msgid "Quickly rate the playing track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (lik lydstyrkeutgjevning for alle spor)"
 
@@ -4307,11 +4316,11 @@ msgstr "Erstatt spillelista"
 msgid "Replaces spaces with underscores"
 msgstr "Erstatt mellomrom med understrek"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Normalisering"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "ReplayGain-modus"
 
@@ -4384,6 +4393,10 @@ msgstr ""
 msgid "Run"
 msgstr "Kjør"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr ""
@@ -4407,7 +4420,7 @@ msgid "Safely remove the device after copying"
 msgstr "Kjør trygg fjerning av enhet etter kopiering"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Samplingsrate"
@@ -4721,7 +4734,7 @@ msgstr "Vis"
 msgid "Show OSD"
 msgstr "Vis skjermbildeoverlegg"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Vis aura rundt gjeldende spor"
 
@@ -5209,6 +5222,10 @@ msgstr "Mappa %1 er ugyldig"
 msgid "The discoverer is busy"
 msgstr "Oppdageren er opptatt"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Den andre verdien må være større enn den første!"
@@ -5581,7 +5598,7 @@ msgstr "Bruk hurtigtaster fra Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Bruk psykedeliske farger"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Bruk normaliserings-metadata hvis tilgjengelig"
 

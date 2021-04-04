@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 18:08+0000\n"
-"Last-Translator: Adolfo Jayme-Barrientos\n"
+"PO-Revision-Date: 2021-04-03 15:48+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,9 +51,9 @@ msgstr " dies"
 msgid " kbps"
 msgstr " kb/s"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " ms"
 
@@ -312,7 +312,7 @@ msgstr "1 peça"
 msgid "128k MP3"
 msgstr "MP3 de 128k"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192.000 Hz"
 
@@ -320,11 +320,11 @@ msgstr "192.000 Hz"
 msgid "40%"
 msgstr "40 %"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44.100 Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48.000 Hz"
 
@@ -332,7 +332,7 @@ msgstr "48.000 Hz"
 msgid "50 random tracks"
 msgstr "50 peces a l’atzar"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96.000 Hz"
 
@@ -708,7 +708,7 @@ msgstr "Després de copiar…"
 msgid "Album"
 msgstr "Àlbum"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Àlbum (volum ideal per a totes les peces)"
 
@@ -843,7 +843,7 @@ msgstr "Afegeix a la llista de reproducció actual"
 msgid "Append to the playlist"
 msgstr "Afegeix a la llista de reproducció"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Aplica compressió per evitar el «clipping»"
 
@@ -889,7 +889,7 @@ msgstr "&Pregunta en desar"
 msgid "Audio format"
 msgstr "Format d’àudio"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Sortida d’àudio"
 
@@ -909,7 +909,7 @@ msgid "Authors"
 msgstr "Autors"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Auto"
 
@@ -1054,11 +1054,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Explora…"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -1118,11 +1118,11 @@ msgstr "Canvia la cançó que s’està reproduint ara"
 msgid "Change the language"
 msgstr "Canvia l’idioma"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Els canvis surtiran efecte en reproduir-se la propera cançó"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1148,7 +1148,7 @@ msgstr "Comprova si hi ha actualitzacions…"
 msgid "Choose a name for your smart playlist"
 msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Tria automàticament"
 
@@ -1564,11 +1564,11 @@ msgstr "Cobertes de %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Crea una nova llista de reproducció amb arxius i adreces URL"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Fusiona el so quan es canviï la peça automàticament"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Fusiona el so quan es canviï la peça manualment"
 
@@ -1659,7 +1659,7 @@ msgstr "Redueix el volum"
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositiu per defecte a %1"
@@ -1739,6 +1739,10 @@ msgstr "Destí"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalls…"
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr "Detecta"
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2229,7 +2233,7 @@ msgstr "Cada 6 hores"
 msgid "Every hour"
 msgstr "Cada hora"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepte entre peces del mateix àlbum o del mateix full CUE"
 
@@ -2271,6 +2275,10 @@ msgstr "Ha finalitzat l’exportació"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "S’han exportat %1 cobertes de %2 (s’hi han omès %3)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr "F32LE (32 bits)"
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2282,20 +2290,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Atenua el volum en pausar i en reprendre"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Esvaeix el so en parar una peça"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Esvaïment"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Durada de l’esvaïment"
 
@@ -2506,6 +2514,7 @@ msgid "Form"
 msgstr "Formulari"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Format"
@@ -3307,7 +3316,7 @@ msgstr "Tipus d’afiliació"
 msgid "Minimum bitrate"
 msgstr "Taxa de bits mínima"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Valor mínim de memòria"
 
@@ -3331,7 +3340,7 @@ msgstr "Monitoritza els canvis a la col·lecció"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Reproducció monofònica"
 
@@ -3777,7 +3786,7 @@ msgstr "Altres opcions"
 msgid "Output"
 msgstr "Sortida"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Perifèric de sortida"
 
@@ -3898,7 +3907,7 @@ msgstr "Reprodueix la <n>a cançó de la llista de reproducció"
 msgid "Play/Pause"
 msgstr "Reprodueix/Pausa"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Reproducció"
 
@@ -3970,7 +3979,7 @@ msgstr "Duració de la finestra emergent"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Preamplificador"
 
@@ -4120,7 +4129,7 @@ msgstr "Afegeix la peça a la cua"
 msgid "Quickly rate the playing track"
 msgstr "Valora ràpidament la peça que s'està reproduint"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Ràdio (mateix volum per a totes les peces)"
 
@@ -4311,11 +4320,11 @@ msgstr "Substitueix la llista de reproducció"
 msgid "Replaces spaces with underscores"
 msgstr "Reemplaça els espais amb guions baixos"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Mode de l’Replay Gain"
 
@@ -4388,6 +4397,10 @@ msgstr "Carpeta que es podrà navegar des de la xarxa remota"
 msgid "Run"
 msgstr "Executa"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr "S16LE (16 bits)"
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4411,7 +4424,7 @@ msgid "Safely remove the device after copying"
 msgstr "Treure el dispositiu amb seguretat després de copiar"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Freqüència de mostreig"
@@ -4725,7 +4738,7 @@ msgstr "Mostrar"
 msgid "Show OSD"
 msgstr "Mostra l'OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Mostra una animació destacant la peça actual"
 
@@ -5213,6 +5226,10 @@ msgstr "El directori %1 no es vàlid"
 msgid "The discoverer is busy"
 msgstr "El descobridor està ocupat"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr "El format només s'actualitza quan comença una pipeline."
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "El segon valor ha de ser major que el primer!"
@@ -5585,7 +5602,7 @@ msgstr "Utilitza les dreceres de teclat del Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Utilitza colors psicodèlics"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Utilitza les metadades Replay Gain si estan disponibles"
 

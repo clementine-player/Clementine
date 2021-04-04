@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/davidsansome/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,9 +53,9 @@ msgstr " dagen"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " msec"
 
@@ -314,7 +314,7 @@ msgstr "1 nummer"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192.000Hz"
 
@@ -322,11 +322,11 @@ msgstr "192.000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44.100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48.000Hz"
 
@@ -334,7 +334,7 @@ msgstr "48.000Hz"
 msgid "50 random tracks"
 msgstr "50 willekeurige nummers"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96.000Hz"
 
@@ -710,7 +710,7 @@ msgstr "Na het kopiëren…"
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideaal volume voor alle nummers)"
 
@@ -845,7 +845,7 @@ msgstr "Aan huidige afspeellijst toevoegen"
 msgid "Append to the playlist"
 msgstr "Aan de afspeellijst toevoegen"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Compressie toepassen om vervorming te voorkomen"
 
@@ -891,7 +891,7 @@ msgstr "Vraag bij opslaan"
 msgid "Audio format"
 msgstr "Audioformaat"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Audiouitvoer"
 
@@ -911,7 +911,7 @@ msgid "Authors"
 msgstr "Auteurs"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Automatisch"
 
@@ -1056,11 +1056,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Bladeren…"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Buffer duur"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Bufferen"
 
@@ -1120,11 +1120,11 @@ msgstr "Het huidige nummer veranderen"
 msgid "Change the language"
 msgstr "De taal wijzigen"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Veranderingen worden doorgevoerd als het volgende nummer begint te spelen"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1150,7 +1150,7 @@ msgstr "Naar updates zoeken…"
 msgid "Choose a name for your smart playlist"
 msgstr "Kies een naam voor uw slimme-afspeellijst"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Automatisch kiezen"
 
@@ -1566,11 +1566,11 @@ msgstr "Albumhoes van %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Creëer een nieuwe afspeellijst aan de hand van bestanden en/of URLS"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Cross-fade wanneer automatisch van nummer veranderd wordt"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Cross-fade wanneer handmatig van nummer veranderd wordt"
 
@@ -1661,7 +1661,7 @@ msgstr "Volume verlagen"
 msgid "Default background image"
 msgstr "Standaard achtergrondafbeelding"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standaard apparaat op %1"
@@ -1741,6 +1741,10 @@ msgstr "Bestemming"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Details…"
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2231,7 +2235,7 @@ msgstr "Elke 6 uur"
 msgid "Every hour"
 msgstr "Elk uur"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Behalve tussen nummers van hetzelfde album of in dezelfde CUE-sheet"
 
@@ -2273,6 +2277,10 @@ msgstr "Klaar me exporteren"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 van %2 albumhoezen geëxporteerd (%3 overgeslagen)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr ""
@@ -2284,20 +2292,20 @@ msgstr ""
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Uitvagen bij pauze / Invagen bij hervatten"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Uitvagen bij stoppen van een nummer"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Uitvagen"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Uitvaagduur"
 
@@ -2508,6 +2516,7 @@ msgid "Form"
 msgstr "Formulier"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Formaat"
@@ -3309,7 +3318,7 @@ msgstr "Type lidmaatschap"
 msgid "Minimum bitrate"
 msgstr "Minimale bitrate"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Minimale buffervulling"
 
@@ -3333,7 +3342,7 @@ msgstr "De bibliotheek op wijzigingen blijven controleren"
 msgid "Monkey's Audio"
 msgstr "De Audio van een Aap"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Mono afspelen"
 
@@ -3779,7 +3788,7 @@ msgstr "Overige opties"
 msgid "Output"
 msgstr "Output"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Uitvoer apparaat"
 
@@ -3900,7 +3909,7 @@ msgstr "De <n>de/ste track in de afspeellijst afspelen"
 msgid "Play/Pause"
 msgstr "Afspelen/pauzeren"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Weergave"
 
@@ -3972,7 +3981,7 @@ msgstr "Pop-up duur"
 msgid "Port"
 msgstr "Poort"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Voorversterking"
 
@@ -4122,7 +4131,7 @@ msgstr "Nummer in de wachtrij plaatsen"
 msgid "Quickly rate the playing track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (gelijk volume voor alle nummers)"
 
@@ -4313,11 +4322,11 @@ msgstr "Afspeellijst vervangen"
 msgid "Replaces spaces with underscores"
 msgstr "Vervangt spaties door underscores"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Replay Gain modus"
 
@@ -4390,6 +4399,10 @@ msgstr ""
 msgid "Run"
 msgstr "Uitvoeren"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4413,7 +4426,7 @@ msgid "Safely remove the device after copying"
 msgstr "Apparaat veilig verwijderen na het kopiëren"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Samplerate"
@@ -4727,7 +4740,7 @@ msgstr "Weergeven"
 msgid "Show OSD"
 msgstr "Infoschermvenster weergeven"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Een oplichtende animatie weergeven op het huidige nummer"
 
@@ -5215,6 +5228,10 @@ msgstr "De map %1 is niet geldig"
 msgid "The discoverer is busy"
 msgstr "De ontdekker is bezig"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "De tweede waarde moet groter zijn dan de eerste!"
@@ -5587,7 +5604,7 @@ msgstr "Gnome-sneltoetsen gebruiken"
 msgid "Use Psychedelic Colors"
 msgstr "Gebruik psychedelische kleuren"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Replay Gain-metadata gebruiken, als deze beschikbaar is"
 

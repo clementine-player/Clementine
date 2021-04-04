@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-02 07:25+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,9 +47,9 @@ msgstr "päeva"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " msek"
 
@@ -308,7 +308,7 @@ msgstr "1 lugu"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -316,11 +316,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -328,7 +328,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 juhuslikku lugu"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -704,7 +704,7 @@ msgstr "Pärast kopeerimist..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (kõigil radadel ideaalne valjus)"
 
@@ -839,7 +839,7 @@ msgstr "Lisa käesolevasse esitusloendisse"
 msgid "Append to the playlist"
 msgstr "Lisa esitusloendisse"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Kompressori kasutamine ülevõimenduse vältimiseks"
 
@@ -885,7 +885,7 @@ msgstr "&Küsi salvestamisel"
 msgid "Audio format"
 msgstr "Heli vorming"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Heliväljund"
 
@@ -905,7 +905,7 @@ msgid "Authors"
 msgstr "Autorid"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Auto"
 
@@ -1050,11 +1050,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Sirvi..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Puhvri kestus"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Puhvedamine"
 
@@ -1114,11 +1114,11 @@ msgstr "Muuda hetkel esitatavat lugu"
 msgid "Change the language"
 msgstr "Muuda keelt"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Muutused jõustuvad kui järgmise loo esitamine algab"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1144,7 +1144,7 @@ msgstr "Kontrolli uuendusi..."
 msgid "Choose a name for your smart playlist"
 msgstr "Vali nimi oma nutika esitusloendi jaoks"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Vali automaatselt"
 
@@ -1560,11 +1560,11 @@ msgstr "Kaanepildid %1'st"
 msgid "Create a new playlist with files/URLs"
 msgstr "Loo failidest/urlidest uus esitusloend"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Lugude automaatsel vahetamisel ristsulata heli"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Lugude käsitsi vahetamisel ristsulata heli"
 
@@ -1655,7 +1655,7 @@ msgstr "Heli vaiksemaks"
 msgid "Default background image"
 msgstr "Vaikimisi taustapilt"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Vaikimisi seade asukohas %1"
@@ -1735,6 +1735,10 @@ msgstr "Sihtkoht"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Üksikasjad..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2225,7 +2229,7 @@ msgstr "Iga 6 tunni järel"
 msgid "Every hour"
 msgstr "Kord tunnis"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Välja arvatud samal albumil või samas asukohatabelis asuvate lugude vahel"
 
@@ -2267,6 +2271,10 @@ msgstr "Eksport on valmis"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Eksportisin %1 kaanepilti %2'st (%3 jäi vahele)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2278,20 +2286,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Summuta heli pausi puhul ja valjenda jätkamisel"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Heli sumbumine loo peatamisel"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Hajumine"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Hajumise kestus"
 
@@ -2502,6 +2510,7 @@ msgid "Form"
 msgstr "Vorm"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Vorming"
@@ -3303,7 +3312,7 @@ msgstr "Liikmelisuse tüüp"
 msgid "Minimum bitrate"
 msgstr "Vähim bitikiirus"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Puhvri täituvuse alampiir"
 
@@ -3327,7 +3336,7 @@ msgstr "Jälgi muutusi helikogus"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Mono taasesitus"
 
@@ -3773,7 +3782,7 @@ msgstr "Muud valikud"
 msgid "Output"
 msgstr "Väljund"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Väljundseade"
 
@@ -3894,7 +3903,7 @@ msgstr "Esita nimekirjast lugu #<n>"
 msgid "Play/Pause"
 msgstr "Esita/paus"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Taasesitus"
 
@@ -3966,7 +3975,7 @@ msgstr "Hüpikakna kestus"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Eelmoonutus"
 
@@ -4116,7 +4125,7 @@ msgstr "Lisa järjekorda"
 msgid "Quickly rate the playing track"
 msgstr "Anna kiiresti hinnang hetkel esitatavale palale"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Raadio (kõigil paladel võrdne valjus)"
 
@@ -4307,11 +4316,11 @@ msgstr "Asenda esitusloend"
 msgid "Replaces spaces with underscores"
 msgstr "Asendab tühikud alakriipsuga"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Esitusvaljuse tundlikkus"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Esitusvaljuse tundlikkuse režiim"
 
@@ -4384,6 +4393,10 @@ msgstr "Juurkaust, alates millest on failid sirvitavad üle võrgu toimiva kaugh
 msgid "Run"
 msgstr "Käivita"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4407,7 +4420,7 @@ msgid "Safely remove the device after copying"
 msgstr "Peale kopeerimist lahuta seade turvaliselt"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Diskreetimissagedus"
@@ -4721,7 +4734,7 @@ msgstr "Näita"
 msgid "Show OSD"
 msgstr "Näita ekraanimenüüd"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Näita hetkel mängiva pala kohal helendavat kuma"
 
@@ -5209,6 +5222,10 @@ msgstr "Kaust %1 ei ole korrektne"
 msgid "The discoverer is busy"
 msgstr "Lugude otsija on hõivatud"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Teine väärtus peab olema suurem kui esimene!"
@@ -5581,7 +5598,7 @@ msgstr "Kasuta Gnome kiirklahve"
 msgid "Use Psychedelic Colors"
 msgstr "Kasuta psühhedeelseid värve"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Kui esitusvaljuse tundlikkuse metainfo on failis olemas, siis kasuta seda"
 

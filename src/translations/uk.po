@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 18:50+0000\n"
+"PO-Revision-Date: 2021-04-03 15:12+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,9 +44,9 @@ msgstr " днів"
 msgid " kbps"
 msgstr " кб/с"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " мс"
 
@@ -305,7 +305,7 @@ msgstr "1 композиція"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192000 Гц"
 
@@ -313,11 +313,11 @@ msgstr "192000 Гц"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44100 Гц"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48000 Гц"
 
@@ -325,7 +325,7 @@ msgstr "48000 Гц"
 msgid "50 random tracks"
 msgstr "50 випадкових композиційдоріжок"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96000 Гц"
 
@@ -701,7 +701,7 @@ msgstr "Після копіювання…"
 msgid "Album"
 msgstr "Альбом"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідеальна гучність для всіх композицій)"
 
@@ -836,7 +836,7 @@ msgstr "Додати до списку відтворення"
 msgid "Append to the playlist"
 msgstr "Додати  до списку відтворення"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Застосувати стиснення для запобігання зрізанню"
 
@@ -882,7 +882,7 @@ msgstr "&Питати при збереженні"
 msgid "Audio format"
 msgstr "Аудіо-формат"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Виведення звуку"
 
@@ -902,7 +902,7 @@ msgid "Authors"
 msgstr "Автори"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Автоматично"
 
@@ -1047,11 +1047,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Огляд…"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1111,11 +1111,11 @@ msgstr "Змінити поточну відтворювану композиц�
 msgid "Change the language"
 msgstr "Змінити мову"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Зміни набудуть чинності на початку відтворення наступної композиції"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1141,7 +1141,7 @@ msgstr "Перевірити оновлення…"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1557,11 +1557,11 @@ msgstr "Обкладинки з %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Створити список відтворення із файлами або адресами"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Перехресне згасання під час автоматичної зміни композицій"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Перехресне згасання під час ручної зміни композицій"
 
@@ -1652,7 +1652,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -1732,6 +1732,10 @@ msgstr "Призначення"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Детальніше…"
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr "Виявити"
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2222,7 +2226,7 @@ msgstr "Кожні 6 годин"
 msgid "Every hour"
 msgstr "Кожну годину"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Крім як між треками на одному альбомі, або в тому ж CUE листі"
 
@@ -2264,6 +2268,10 @@ msgstr "Експортування завершено"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Експортовано %1 обкладинок з %2 (%3 пропущено)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr "F32LE (32-бітовий)"
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2275,20 +2283,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Зтишувати під час призупинення і робити голоснішим під час відновлення"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Згасання під час зупинки відтворення"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Згасання"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Тривалість згасання"
 
@@ -2499,6 +2507,7 @@ msgid "Form"
 msgstr "Форма"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Формат"
@@ -3300,7 +3309,7 @@ msgstr "Тип членства"
 msgid "Minimum bitrate"
 msgstr "Найменша бітова швидкість"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Мінімальне заповнення буфера"
 
@@ -3324,7 +3333,7 @@ msgstr "Стежити за змінами у фонотеці"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Відтворення у режимі моно"
 
@@ -3770,7 +3779,7 @@ msgstr "Інші налаштування"
 msgid "Output"
 msgstr "Результат"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
@@ -3891,7 +3900,7 @@ msgstr "Відтворити <n> композицію у списку відтв
 msgid "Play/Pause"
 msgstr "Відтворити/Призупинити"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Відтворення"
 
@@ -3963,7 +3972,7 @@ msgstr "Тривалість виринаючого повідомлення"
 msgid "Port"
 msgstr "Порт"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Підсилення"
 
@@ -4113,7 +4122,7 @@ msgstr "Додати композицію до черги"
 msgid "Quickly rate the playing track"
 msgstr "Швидко оцінити відтворювану композицію"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радіо (однакова гучність всіх композицій)"
 
@@ -4304,11 +4313,11 @@ msgstr "Замінити список відтворення"
 msgid "Replaces spaces with underscores"
 msgstr "Замінити пробіли підкресленнями"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Режим вирівнювання гучності"
 
@@ -4381,6 +4390,10 @@ msgstr "Коренева тека, яка буде доступною для п�
 msgid "Run"
 msgstr "Виконати"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr "S16LE (16-бітовий)"
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4404,7 +4417,7 @@ msgid "Safely remove the device after copying"
 msgstr "Безпечне вилучення пристрою після копіювання"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Частота вибірки"
@@ -4718,7 +4731,7 @@ msgstr "Показати"
 msgid "Show OSD"
 msgstr "Показувати OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Показувати для поточної композиції блимаючу анімацію"
 
@@ -5206,6 +5219,10 @@ msgstr "Тека %1 не чинна"
 msgid "The discoverer is busy"
 msgstr "Засіб вивчення зайнято"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr "Формат буде оновлено лише після запуску конвеєра обробки."
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Друге значення має бути більшим за перше!"
@@ -5578,7 +5595,7 @@ msgstr "Використовувати комбінації клавіш Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Психоделічні кольори"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Використовувати метадані Replay Gain, якщо такі є"
 

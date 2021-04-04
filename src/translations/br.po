@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,9 +49,9 @@ msgstr " devez"
 msgid " kbps"
 msgstr " kbde"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " me"
 
@@ -310,7 +310,7 @@ msgstr "1 ton"
 msgid "128k MP3"
 msgstr "MP3 128k"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -318,11 +318,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -330,7 +330,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 ton dre zegouezh"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -706,7 +706,7 @@ msgstr "Goude an eiladur..."
 msgid "Album"
 msgstr "Albom"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
@@ -841,7 +841,7 @@ msgstr "Ouzhpennañ d'ar roll seniñ lennet"
 msgid "Append to the playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Koazhañ a-benn mirout ouzh an troc'hadennoù"
 
@@ -887,7 +887,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "Mentrezh Aodio"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Ezkas son"
 
@@ -907,7 +907,7 @@ msgid "Authors"
 msgstr "Aozerien"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Emgefreek"
 
@@ -1052,11 +1052,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Furchal..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Padelezh ar stoker"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "O lakaat er memor skurzer"
 
@@ -1116,11 +1116,11 @@ msgstr "O kemmañ an ton o vezañ lennet"
 msgid "Change the language"
 msgstr "Kemmañ ar yezh"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Arloet e vo ar c'hemmadennoù pa vo kroget da lenn an ton o tont"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1146,7 +1146,7 @@ msgstr "Klask hizivadurioù..."
 msgid "Choose a name for your smart playlist"
 msgstr "Choazit un anv evit ho roll seniñ spredek"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Choaz ent emgefreek"
 
@@ -1562,11 +1562,11 @@ msgstr "Goloioù adalek %1"
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Lakaat un treveuz pa vez kemmet ar roud ent emgefreek"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Lakaat un treveuz pa vez kemmet ar roudoù gant an dorn"
 
@@ -1657,7 +1657,7 @@ msgstr "Digreskiñ an ampled"
 msgid "Default background image"
 msgstr "Skeudenn drekleur dre ziouer"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Trobarzhell dre ziouer war %1"
@@ -1737,6 +1737,10 @@ msgstr "Pal"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Munudoù..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2227,7 +2231,7 @@ msgstr "Bep 6 eurvezh"
 msgid "Every hour"
 msgstr "Bep eurvezh"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "War-bouezh etre ar roudoù eus ar memes albom pe eus ar memes follenn CUE"
 
@@ -2269,6 +2273,10 @@ msgstr "Ezporzhiadur echuet"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Ezporzhiet %1 golo war %2 (%3 tremenet)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr ""
@@ -2280,20 +2288,20 @@ msgstr ""
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Izelaat ar son tamm-ha-tamm evit an ehan / Uhelat evit adkregiñ"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Echuiñ gant un treveuz pa vez paouezet ur roud"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Arveuz"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Padelezh an arveuz"
 
@@ -2504,6 +2512,7 @@ msgid "Form"
 msgstr "Form"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Mentrezh"
@@ -3305,7 +3314,7 @@ msgstr "Doare emezeladur"
 msgid "Minimum bitrate"
 msgstr "Fonnder izelañ"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Leuniadur minimum ar skurzer"
 
@@ -3329,7 +3338,7 @@ msgstr "Evezhiañ kemmadurioù ar sonaoueg"
 msgid "Monkey's Audio"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Lenn e mono"
 
@@ -3775,7 +3784,7 @@ msgstr "Dibarzhioù all"
 msgid "Output"
 msgstr "Ezkas"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Trobarzhell ezkas"
 
@@ -3896,7 +3905,7 @@ msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 msgid "Play/Pause"
 msgstr "Lenn/Ehan"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Lenn sonerezh"
 
@@ -3968,7 +3977,7 @@ msgstr "Padelezh ar popup"
 msgid "Port"
 msgstr "Porzh"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Rak-ampled"
 
@@ -4118,7 +4127,7 @@ msgstr "Lakaat ar roud da heul"
 msgid "Quickly rate the playing track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Skingomz (Ampled kevatal evit an holl roudoù)"
 
@@ -4309,11 +4318,11 @@ msgstr "Eillec'hiañ ar roll seniñ"
 msgid "Replaces spaces with underscores"
 msgstr "Eillec'hiañ esaoù gant is-linennoù"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Doare Replay Gain"
 
@@ -4386,6 +4395,10 @@ msgstr ""
 msgid "Run"
 msgstr "Seveniñ"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr ""
@@ -4409,7 +4422,7 @@ msgid "Safely remove the device after copying"
 msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Standilhonañ"
@@ -4723,7 +4736,7 @@ msgstr "Diskouez"
 msgid "Show OSD"
 msgstr "Diskouez OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Lugerniñ ar roud o vezañ lennet"
 
@@ -5211,6 +5224,10 @@ msgstr "An teuliad %1 a zo direizh"
 msgid "The discoverer is busy"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "An eil talvoud a rank bezañ uheloc'h eget an hini kentañ"
@@ -5583,7 +5600,7 @@ msgstr "Implij berradennoù Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Ober gant livioù psikedelek"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Implij metaroadenn Replay Gain ma 'z eo posubl"
 

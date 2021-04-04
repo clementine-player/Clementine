@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/davidsansome/clementine/language/lv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,9 +47,9 @@ msgstr "dienas"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " ms"
 
@@ -308,7 +308,7 @@ msgstr "1 dziesma"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -316,11 +316,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -328,7 +328,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 nejaušas dziesmas"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -704,7 +704,7 @@ msgstr "Pēc kopēšanas..."
 msgid "Album"
 msgstr "Albums"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albums (ideāls skaļums visiem celiņiem)"
 
@@ -839,7 +839,7 @@ msgstr "Papildināt pašreizējo atskaņošanas sarakstu"
 msgid "Append to the playlist"
 msgstr "Papildināt atskaņošanas sarakstu"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Saspiest, lai izvairītos no izgriešanas"
 
@@ -885,7 +885,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "Audio formāts"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Audio izvade"
 
@@ -905,7 +905,7 @@ msgid "Authors"
 msgstr "Autori"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Automātiski"
 
@@ -1050,11 +1050,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Pārlūkot..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr ""
 
@@ -1114,11 +1114,11 @@ msgstr "Mainīt pašreiz skanošo dziesmu"
 msgid "Change the language"
 msgstr "Mainīt valodu"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Izmaiņas sāks darboties līdz ar nākamās dziesmas sākšanos"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1144,7 +1144,7 @@ msgstr "Pārbaudīt atjauninājumus..."
 msgid "Choose a name for your smart playlist"
 msgstr "Izvēlieties nosaukumu gudrajam atskaņošanas sarakstam"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Izvēlēties automātiski"
 
@@ -1560,11 +1560,11 @@ msgstr "Vāciņi no %1"
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Izmantot laidenu pāreju, kad dziesmas pārslēdzas automātiski"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Izmantot laidenu pāreju, kad dziesmas pārslēdz lietotājs"
 
@@ -1655,7 +1655,7 @@ msgstr "Samazināt skaļumu"
 msgid "Default background image"
 msgstr "Noklusējuma fona attēls"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1735,6 +1735,10 @@ msgstr "Galamērķis"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detaļas..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2225,7 +2229,7 @@ msgstr "Katras 6 stundas"
 msgid "Every hour"
 msgstr "Katru stundu"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr ""
 
@@ -2267,6 +2271,10 @@ msgstr "Eksportēšana pabeigta"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr ""
@@ -2278,20 +2286,20 @@ msgstr ""
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Laideni noklusināt apturot dziesmu"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Pāreja"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Pārejas garums"
 
@@ -2502,6 +2510,7 @@ msgid "Form"
 msgstr "Forma"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Formāts"
@@ -3303,7 +3312,7 @@ msgstr "Dalības tips"
 msgid "Minimum bitrate"
 msgstr "Minimālais bitreits"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3327,7 +3336,7 @@ msgstr "Pārlūkot izmaiņas bibliotēkā"
 msgid "Monkey's Audio"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Mono atskaņošana"
 
@@ -3773,7 +3782,7 @@ msgstr "Citas opcijas"
 msgid "Output"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr ""
 
@@ -3894,7 +3903,7 @@ msgstr "Atskaņot <n> dziesmu no dziesmu listes"
 msgid "Play/Pause"
 msgstr "Atskaņot/Pauzēt"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Atskaņošana"
 
@@ -3966,7 +3975,7 @@ msgstr "Paziņojuma ilgums"
 msgid "Port"
 msgstr "Ports"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Priekšpastiprinājums"
 
@@ -4116,7 +4125,7 @@ msgstr "Ierindot dziesmu"
 msgid "Quickly rate the playing track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (ekvivalents skaļums visiem celiņiem)"
 
@@ -4307,11 +4316,11 @@ msgstr "Aizstāt dziesmu listi"
 msgid "Replaces spaces with underscores"
 msgstr "Aizstāj atstarpes ar pasvītrojumiem"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Atskaņošanas skaļums"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4384,6 +4393,10 @@ msgstr ""
 msgid "Run"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr ""
@@ -4407,7 +4420,7 @@ msgid "Safely remove the device after copying"
 msgstr "Saudzīgi atvienot ierīci pēc kopēšanas"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Nolašu ātrums"
@@ -4721,7 +4734,7 @@ msgstr "Parādit"
 msgid "Show OSD"
 msgstr "Parādīt paziņojumu"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Rādīt kvēlojošu animāciju pašreizējai dziesmai."
 
@@ -5209,6 +5222,10 @@ msgstr "Nederīga mape %1"
 msgid "The discoverer is busy"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Otrajai vērtībai jābūt lielākai par pirmo!"
@@ -5581,7 +5598,7 @@ msgstr "Izmantot Gnome saīšņu taustiņus"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Izmantot atskaņošanas skaļuma datus, ja pieejami"
 

@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 17:23+0000\n"
+"PO-Revision-Date: 2021-04-03 13:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,9 +49,9 @@ msgstr "ימים"
 msgid " kbps"
 msgstr "קילו בתים לשניה"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " מילישניות"
 
@@ -310,7 +310,7 @@ msgstr "רצועה אחת"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr ""
 
@@ -318,11 +318,11 @@ msgstr ""
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "50 random tracks"
 msgstr "50 רצועות אקראיות"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr ""
 
@@ -706,7 +706,7 @@ msgstr "אחרי העתקה..."
 msgid "Album"
 msgstr "אלבום"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "אלבום (עצמת שמע אידאלית לכל הרצועות)"
 
@@ -841,7 +841,7 @@ msgstr "הוספה לרשימת ההשמעה הנוכחית"
 msgid "Append to the playlist"
 msgstr "הוספת לרשימת ההשמעה"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "הפעלת כיווץ כדי למנוע חיתוך"
 
@@ -887,7 +887,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "להמיר לתבנית"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr ""
 
@@ -907,7 +907,7 @@ msgid "Authors"
 msgstr "יוצרים"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "אוטומטי"
 
@@ -1052,11 +1052,11 @@ msgstr "קופסא"
 msgid "Browse..."
 msgstr "עיון..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "משך הבאפר (buffer)"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "באגירה"
 
@@ -1116,11 +1116,11 @@ msgstr ""
 msgid "Change the language"
 msgstr "שינוי השפה"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1146,7 +1146,7 @@ msgstr "בדיקת עדכונים..."
 msgid "Choose a name for your smart playlist"
 msgstr "נא לבחור בשם עבור רשימת ההשמעה החכמה"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "בחירה אוטומטית"
 
@@ -1562,11 +1562,11 @@ msgstr "עטיפות מ־%1"
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "מעבר באמצעות עמעום בין רצועות, בהחלפה אוטומטית של רצועות"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "מעבר באמצעות עמעום בין רצועות, בהחלפה ידנית של רצועות"
 
@@ -1657,7 +1657,7 @@ msgstr "הנמכת עצמת השמע"
 msgid "Default background image"
 msgstr "תמונת בררת המחדל לרקע"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1737,6 +1737,10 @@ msgstr "יעד"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "פרטים..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr ""
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2227,7 +2231,7 @@ msgstr "בכל 6 שעות"
 msgid "Every hour"
 msgstr "בכל שעה"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "מלבד בין שירים באותו אלבום או אותו CUE sheet"
 
@@ -2269,6 +2273,10 @@ msgstr ""
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "ייצא %1 עטיפות מתוך %2(%3 דולגו)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr ""
@@ -2280,20 +2288,20 @@ msgstr ""
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "עמעום המוזיקה בעצירת רצועה"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "עמעום מוזיקה"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "משך זמן עמעום המוזיקה"
 
@@ -2504,6 +2512,7 @@ msgid "Form"
 msgstr "טופס"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "תבנית"
@@ -3305,7 +3314,7 @@ msgstr "סוג חברות"
 msgid "Minimum bitrate"
 msgstr "קצב סיביות מזערי"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3329,7 +3338,7 @@ msgstr "מעקב אחר שינויים בספרייה"
 msgid "Monkey's Audio"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "השמעת מונו"
 
@@ -3775,7 +3784,7 @@ msgstr "אפשרויות נוספות"
 msgid "Output"
 msgstr "פלט"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "התקן פלט"
 
@@ -3896,7 +3905,7 @@ msgstr "נגן הרצועה ה־<n> מרשימת ההשמעה"
 msgid "Play/Pause"
 msgstr "ניגון/השהייה"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "השמעה"
 
@@ -3968,7 +3977,7 @@ msgstr "משך זמן חלונית קופצת"
 msgid "Port"
 msgstr "פתחה"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "הגברה טרומית"
 
@@ -4118,7 +4127,7 @@ msgstr "הוספת הרצועה לתור"
 msgid "Quickly rate the playing track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "רדיו (עצמה זהה לכל הרצועות)"
 
@@ -4309,11 +4318,11 @@ msgstr "החלפת רשימת ההשמעה"
 msgid "Replaces spaces with underscores"
 msgstr "החלפת רווחים עם קו תחתון"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "הגברת ניגון חוזר"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4386,6 +4395,10 @@ msgstr ""
 msgid "Run"
 msgstr "הרצה"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr ""
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr ""
@@ -4409,7 +4422,7 @@ msgid "Safely remove the device after copying"
 msgstr "הסרת ההתקן באופן בטוח לאחר סיום ההעתקה"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "קצב הדגימה"
@@ -4723,7 +4736,7 @@ msgstr "הצגה"
 msgid "Show OSD"
 msgstr "הצגת חיווי המסך"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "הנפשה זוהרת על הרצועה הנוכחית"
 
@@ -5211,6 +5224,10 @@ msgstr "התיקייה %1 לא חוקית"
 msgid "The discoverer is busy"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "הערך השני חייב להיות גדול יותר מהערך הראשון!"
@@ -5583,7 +5600,7 @@ msgstr "השתמש בקיצורי המקלדת של גנום"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "שימוש במידע נוסף על הגברת ניגון חוזר אם זמין"
 

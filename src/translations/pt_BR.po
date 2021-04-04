@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 19:34+0000\n"
+"PO-Revision-Date: 2021-04-03 15:23+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,9 +54,9 @@ msgstr "dias"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " ms"
 
@@ -315,7 +315,7 @@ msgstr "1 faixa"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192.000Hz"
 
@@ -323,11 +323,11 @@ msgstr "192.000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44.100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48.000Hz"
 
@@ -335,7 +335,7 @@ msgstr "48.000Hz"
 msgid "50 random tracks"
 msgstr "50 faixas aleatórias"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96.000Hz"
 
@@ -711,7 +711,7 @@ msgstr "Depois de copiar..."
 msgid "Album"
 msgstr "Álbum"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Álbum (volume ideal para todas as faixas)"
 
@@ -846,7 +846,7 @@ msgstr "Adicionar à lista de reprodução atual"
 msgid "Append to the playlist"
 msgstr "Anexar ao fim da lista de reprodução"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicar compressão para prevenir picos"
 
@@ -892,7 +892,7 @@ msgstr "Per&guntar ao salvar"
 msgid "Audio format"
 msgstr "Formato de áudio"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Saída de áudio"
 
@@ -912,7 +912,7 @@ msgid "Authors"
 msgstr "Autores"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Automático"
 
@@ -1057,11 +1057,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Procurar..."
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Duração do buffer"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Armazenando em buffer"
 
@@ -1121,11 +1121,11 @@ msgstr "Trocar a música em reprodução"
 msgid "Change the language"
 msgstr "Alterar idioma"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "As alterações entrarão em vigor quando a próxima música iniciar"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1151,7 +1151,7 @@ msgstr "Procurar por atualizações..."
 msgid "Choose a name for your smart playlist"
 msgstr "Escolha um nome para sua lista inteligente"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Escolher automaticamente"
 
@@ -1567,11 +1567,11 @@ msgstr "Capas do %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Criar uma nova lista de reprodução contendo arquivos/URLs"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Transição suave quando mudar de faixa automaticamente"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Transição suave quando mudar de faixa manualmente"
 
@@ -1662,7 +1662,7 @@ msgstr "Diminuir volume"
 msgid "Default background image"
 msgstr "Imagem de fundo padrão"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo padrão em %1"
@@ -1742,6 +1742,10 @@ msgstr "Destino"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalhes..."
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr "Detetar"
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2232,7 +2236,7 @@ msgstr "A cada 6 horas"
 msgid "Every hour"
 msgstr "A cada hora"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceto entre as faixas do mesmo álbum ou lista CUE"
 
@@ -2274,6 +2278,10 @@ msgstr "Exportação terminou"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exportado %1 capa(s) de %2 (%3 pulado)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr "F32LE (32-bit)"
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2285,20 +2293,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Desvanecer ao pausar / Voltar gradualmente ao retomar"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Diminuir o som gradativamente quando terminar uma faixa"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Diminuindo"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Duração da dimunuição"
 
@@ -2509,6 +2517,7 @@ msgid "Form"
 msgstr "Formulário"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Formato"
@@ -3310,7 +3319,7 @@ msgstr "Tipo de conta"
 msgid "Minimum bitrate"
 msgstr "Taxa de bits mínima"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Preenchimento mínimo do buffer"
 
@@ -3334,7 +3343,7 @@ msgstr "Vigiar mudanças na biblioteca"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Saída Mono"
 
@@ -3780,7 +3789,7 @@ msgstr "Outras opções"
 msgid "Output"
 msgstr "Saída"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Dispositivo de saída"
 
@@ -3901,7 +3910,7 @@ msgstr "Tocar a <n>ª faixa da lista"
 msgid "Play/Pause"
 msgstr "Reproduzir/pausar"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Reproduzir"
 
@@ -3973,7 +3982,7 @@ msgstr "Duração do aviso"
 msgid "Port"
 msgstr "Porta"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Pré-amplificação"
 
@@ -4123,7 +4132,7 @@ msgstr "Colocar a faixa na fila"
 msgid "Quickly rate the playing track"
 msgstr "Avaliar a faixa atual rapidamente"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Rádio (volume igual para todas as faixas)"
 
@@ -4314,11 +4323,11 @@ msgstr "Substituir a lista de reprodução"
 msgid "Replaces spaces with underscores"
 msgstr "Substituir espaços com sublinhados"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Modo ReplayGain"
 
@@ -4391,6 +4400,10 @@ msgstr "Pasta raiz que será acessível remotamente"
 msgid "Run"
 msgstr "Executar"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr "S16LE (16-bit)"
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4414,7 +4427,7 @@ msgid "Safely remove the device after copying"
 msgstr "Remover o dispositivo com segurança após copiar"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Taxa de amostragem"
@@ -4728,7 +4741,7 @@ msgstr "Exibir"
 msgid "Show OSD"
 msgstr "Mostrar aviso na tela"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Mostrar animação na faixa atual"
 
@@ -5216,6 +5229,10 @@ msgstr "O diretório %1 não é válido"
 msgid "The discoverer is busy"
 msgstr "O detector está ocupado"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr "O formato é atualizado apenas quando um canalizador inicia."
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "O segundo valor tem que ser maior que o primeiro!"
@@ -5588,7 +5605,7 @@ msgstr "Usar teclas de atalho do Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Usar cores psicodélicas"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Usar metadados Replay Gain, se estiver disponível"
 

@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-31 21:19+0000\n"
+"PO-Revision-Date: 2021-04-03 15:11+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,9 +71,9 @@ msgstr " дней"
 msgid " kbps"
 msgstr " кбит/с"
 
-#: ../bin/src/ui_playbacksettingspage.h:349
-#: ../bin/src/ui_playbacksettingspage.h:352
-#: ../bin/src/ui_playbacksettingspage.h:366
+#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
 msgstr " мс"
 
@@ -332,7 +332,7 @@ msgstr "1 трек"
 msgid "128k MP3"
 msgstr "128 кбит/c MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:380
+#: ../bin/src/ui_playbacksettingspage.h:400
 msgid "192,000Hz"
 msgstr "192 000 Гц"
 
@@ -340,11 +340,11 @@ msgstr "192 000 Гц"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:397
 msgid "44,100Hz"
 msgstr "44 100 Гц"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:398
 msgid "48,000Hz"
 msgstr "48 000 Гц"
 
@@ -352,7 +352,7 @@ msgstr "48 000 Гц"
 msgid "50 random tracks"
 msgstr "50 случайных треков"
 
-#: ../bin/src/ui_playbacksettingspage.h:379
+#: ../bin/src/ui_playbacksettingspage.h:399
 msgid "96,000Hz"
 msgstr "96 000 Гц"
 
@@ -728,7 +728,7 @@ msgstr "После копирования…"
 msgid "Album"
 msgstr "Альбом"
 
-#: ../bin/src/ui_playbacksettingspage.h:359
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (идеальная громкость всех треков)"
 
@@ -863,7 +863,7 @@ msgstr "Добавить в текущий плейлист"
 msgid "Append to the playlist"
 msgstr "Добавить в плейлист"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Apply compression to prevent clipping"
 msgstr "Применить сжатие для предотвращения искажений"
 
@@ -909,7 +909,7 @@ msgstr "Сп&рашивать при сохранении"
 msgid "Audio format"
 msgstr "Формат аудио"
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Audio output"
 msgstr "Вывод звука"
 
@@ -929,7 +929,7 @@ msgid "Authors"
 msgstr "Авторы"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:396
 msgid "Auto"
 msgstr "Авто"
 
@@ -1074,11 +1074,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Обзор…"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:389
 msgid "Buffer duration"
 msgstr "Размер буфера"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:938
 msgid "Buffering"
 msgstr "Буферизация"
 
@@ -1138,11 +1138,11 @@ msgstr "Сменить текущий трек"
 msgid "Change the language"
 msgstr "Сменить язык"
 
-#: ../bin/src/ui_playbacksettingspage.h:383
+#: ../bin/src/ui_playbacksettingspage.h:403
 msgid "Changes will take place when the next song starts playing"
 msgstr "Изменения вступят в силу со следующей песни"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: ../bin/src/ui_playbacksettingspage.h:407
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1168,7 +1168,7 @@ msgstr "Проверить обновления…"
 msgid "Choose a name for your smart playlist"
 msgstr "Выберите название умного плейлиста"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:959
 msgid "Choose automatically"
 msgstr "Выбирать автоматически"
 
@@ -1584,11 +1584,11 @@ msgstr "Обложки из %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Создать новый плейлист с файлами/адресами"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Перекрёстное затухание при автоматической смене трека"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid "Cross-fade when changing tracks manually"
 msgstr "Перекрёстное затухание при ручной смене трека"
 
@@ -1679,7 +1679,7 @@ msgstr "Уменьшить громкость"
 msgid "Default background image"
 msgstr "Стандартное фоновое изображение"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:985
 #, qt-format
 msgid "Default device on %1"
 msgstr "Стандартное для %1"
@@ -1759,6 +1759,10 @@ msgstr "Назначение"
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Подробнее…"
+
+#: ../bin/src/ui_playbacksettingspage.h:412
+msgid "Detect"
+msgstr "Определить"
 
 #: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
 msgid "Device"
@@ -2011,7 +2015,7 @@ msgstr "График дампа"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr "График дампа Pipeline"
+msgstr "График дампа канала обработки"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2249,7 +2253,7 @@ msgstr "Каждые 6 часов"
 msgid "Every hour"
 msgstr "Каждый час"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Кроме треков с одного и того же альбома или CUE-файла"
 
@@ -2291,6 +2295,10 @@ msgstr "Экспорт завершён"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Экспортировано %1 обложек из %2 (%3 пропущено)"
 
+#: ../bin/src/ui_playbacksettingspage.h:414
+msgid "F32LE (32-bit)"
+msgstr "F32LE (32-bit)"
+
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
 msgstr "F9"
@@ -2302,20 +2310,20 @@ msgstr "F9"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:350
+#: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
 msgstr "Затухание при паузе / нарастание при продолжении воспроизведения"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
 msgstr "Приглушать звук при остановке воспроизведения"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
 msgstr "Затухание звука"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
@@ -2526,6 +2534,7 @@ msgid "Form"
 msgstr "Форма"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_playbacksettingspage.h:405
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Format"
 msgstr "Формат"
@@ -3327,7 +3336,7 @@ msgstr "Тип подписки"
 msgid "Minimum bitrate"
 msgstr "Минимальный битрейт"
 
-#: ../bin/src/ui_playbacksettingspage.h:367
+#: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
 msgstr "Мин. заполнение буфера"
 
@@ -3351,7 +3360,7 @@ msgstr "Следить за изменениями фонотеки"
 msgid "Monkey's Audio"
 msgstr "Monkey's Audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:372
+#: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
 msgstr "Режим моно"
 
@@ -3797,7 +3806,7 @@ msgstr "Другие настройки"
 msgid "Output"
 msgstr "Вывод"
 
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:388
 msgid "Output device"
 msgstr "Устройство вывода"
 
@@ -3864,7 +3873,7 @@ msgstr "Исполнитель"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr "Pipeline"
+msgstr "Канал обработки"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
@@ -3918,7 +3927,7 @@ msgstr "Воспроизвести <n>-ную композицию в плейл
 msgid "Play/Pause"
 msgstr "Воспроизведение/Пауза"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Playback"
 msgstr "Проигрывание"
 
@@ -3990,7 +3999,7 @@ msgstr "Длительность отображения"
 msgid "Port"
 msgstr "Порт"
 
-#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:361
+#: ui/equalizer.cpp:45 ../bin/src/ui_playbacksettingspage.h:385
 msgid "Pre-amp"
 msgstr "Предусиление"
 
@@ -4140,7 +4149,7 @@ msgstr "Добавить трек в очередь"
 msgid "Quickly rate the playing track"
 msgstr "Быстрая оценка текущего трека"
 
-#: ../bin/src/ui_playbacksettingspage.h:358
+#: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (одинаковая громкость для всех треков)"
 
@@ -4331,11 +4340,11 @@ msgstr "Заменить плейлист"
 msgid "Replaces spaces with underscores"
 msgstr "Заменять пробелы подчеркиванием"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
 msgstr "Нормализация громкости"
 
-#: ../bin/src/ui_playbacksettingspage.h:355
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "Replay Gain mode"
 msgstr "Режим нормализации"
 
@@ -4408,6 +4417,10 @@ msgstr "Корневая папка будет видна через сетев�
 msgid "Run"
 msgstr "Выполнить"
 
+#: ../bin/src/ui_playbacksettingspage.h:413
+msgid "S16LE (16-bit)"
+msgstr "S16LE (16-bit)"
+
 #: core/song.cpp:455
 msgid "SNES SPC700"
 msgstr "SNES SPC700"
@@ -4431,7 +4444,7 @@ msgid "Safely remove the device after copying"
 msgstr "Безопасно извлечь устройство после копирования"
 
 #: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
-#: ../bin/src/ui_playbacksettingspage.h:373
+#: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Частота"
@@ -4745,7 +4758,7 @@ msgstr "Показать"
 msgid "Show OSD"
 msgstr "Показывать OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
 msgstr "Подсвечивать проигрываемый трек"
 
@@ -5233,6 +5246,10 @@ msgstr "Каталог %1 неправильный"
 msgid "The discoverer is busy"
 msgstr "Искатель занят"
 
+#: ../bin/src/ui_playbacksettingspage.h:417
+msgid "The format is only updated when a pipeline starts."
+msgstr "Формат обновляется только при старте канала обработки."
+
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Второе значение должно быть выше первого!"
@@ -5605,7 +5622,7 @@ msgstr "Использовать горячие клавиши Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Психоделические цвета"
 
-#: ../bin/src/ui_playbacksettingspage.h:354
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Использовать значения из тегов по возможности"
 
