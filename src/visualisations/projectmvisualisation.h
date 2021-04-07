@@ -29,12 +29,14 @@ class projectM;
 
 class ProjectMPresetModel;
 
+class VisualisationContainer;
+
 class QTemporaryFile;
 
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
  public:
-  ProjectMVisualisation(QObject* parent = nullptr);
+  ProjectMVisualisation(VisualisationContainer* container);
   ~ProjectMVisualisation();
 
   enum Mode {
@@ -87,6 +89,12 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   std::vector<int> default_rating_list_;
 
   int texture_size_;
+  // As of version 5.6, Qt supports automatic scaling for high-DPI displays. We
+  // need to know the pixel ratio so that we can convert coordinates for
+  // projectM.
+  // https://doc.qt.io/qt-5/highdpi.html
+  qreal pixel_ratio_;
+  VisualisationContainer* container_;
 };
 
 #endif  // PROJECTMVISUALISATION_H

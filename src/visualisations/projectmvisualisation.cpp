@@ -48,12 +48,14 @@
 #include <GL/gl.h>
 #endif
 
-ProjectMVisualisation::ProjectMVisualisation(QObject* parent)
-    : QGraphicsScene(parent),
+ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
+    : QGraphicsScene(container),
       preset_model_(nullptr),
       mode_(Random),
       duration_(15),
-      texture_size_(512) {
+      texture_size_(512),
+      pixel_ratio_(container->devicePixelRatio()),
+      container_(container) {
   connect(this, SIGNAL(sceneRectChanged(QRectF)),
           SLOT(SceneRectChanged(QRectF)));
 
@@ -143,14 +145,21 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
     InitProjectM();
   }
 
-  projectm_->projectM_resetGL(sceneRect().width(), sceneRect().height());
+  projectm_->projectM_resetGL(sceneRect().width() * pixel_ratio_,
+                              sceneRect().height() * pixel_ratio_);
   projectm_->renderFrame();
 
   p->endNativePainting();
 }
 
 void ProjectMVisualisation::SceneRectChanged(const QRectF& rect) {
-  if (projectm_) projectm_->projectM_resetGL(rect.width(), rect.height());
+  // NOTE: This should be updated on a QScreen dpi change signal. Accessing the
+  // QScreen becomes a lot easier in Qt 5.14 with QWidget::screen().
+  pixel_ratio_ = container_->devicePixelRatio();
+
+  if (projectm_)
+    projectm_->projectM_resetGL(rect.width() * pixel_ratio_,
+                                rect.height() * pixel_ratio_);
 }
 
 void ProjectMVisualisation::SetTextureSize(int size) {
