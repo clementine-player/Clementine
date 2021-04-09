@@ -30,6 +30,10 @@
 #include <QUrl>
 #include <QtDebug>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #include "config.h"
 #include "core/logging.h"
 
@@ -158,7 +162,13 @@ void CrashSender::RedirectFinished() {
   // Find a boundary that doesn't exist in the file
   QByteArray boundary;
   forever {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     boundary = "--------------" + QString::number(qrand(), 16).toAscii();
+#else
+    boundary =
+        "--------------" +
+        QString::number(QRandomGenerator::global()->generate(), 16).toAscii();
+#endif
     if (!file_data.contains(boundary)) {
       break;
     }

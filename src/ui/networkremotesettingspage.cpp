@@ -25,6 +25,10 @@
 #include <QUrl>
 #include <algorithm>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #include "core/application.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/networkremotehelper.h"
@@ -106,7 +110,13 @@ void NetworkRemoteSettingsPage::Load() {
 
   // Auth Code, 5 digits
   ui_->use_auth_code->setChecked(s.value("use_auth_code", false).toBool());
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   ui_->auth_code->setValue(s.value("auth_code", qrand() % 100000).toInt());
+#else
+  ui_->auth_code->setValue(
+      s.value("auth_code", QRandomGenerator::global()->bounded(100000))
+          .toInt());
+#endif
 
   ui_->allow_downloads->setChecked(s.value("allow_downloads", false).toBool());
   ui_->convert_lossless->setChecked(
