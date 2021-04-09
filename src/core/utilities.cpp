@@ -52,6 +52,10 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #if defined(Q_OS_UNIX)
 #include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
@@ -533,7 +537,11 @@ bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget) {
 
 quint16 PickUnusedPort() {
   forever {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     const quint16 port = 49152 + qrand() % 16384;
+#else
+    const quint16 port = QRandomGenerator::global()->bounded(49152, 65536);
+#endif
 
     QTcpServer server;
     if (server.listen(QHostAddress::Any, port)) {

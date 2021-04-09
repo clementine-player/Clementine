@@ -39,10 +39,13 @@ int main(int argc, char** argv) {
     return 1;
   }
 
+// Use QRandomGenerator starting in 5.10.
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   // Seed random number generator
   timeval time;
   gettimeofday(&time, nullptr);
   qsrand((time.tv_sec * 1000) + (time.tv_usec / 1000));
+#endif
 
   logging::Init();
   qLog(Info) << "TagReader worker connecting to" << args[1];

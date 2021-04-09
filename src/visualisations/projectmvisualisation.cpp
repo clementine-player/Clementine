@@ -34,6 +34,10 @@
 #include "projectmpresetmodel.h"
 #include "visualisationcontainer.h"
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #ifdef USE_SYSTEM_PROJECTM
 #include <libprojectM/projectM.hpp>
 #else
@@ -125,7 +129,13 @@ void ProjectMVisualisation::InitProjectM() {
 
   // Start at a random preset.
   if (projectm_->getPlaylistSize() > 0) {
-    projectm_->selectPreset(qrand() % projectm_->getPlaylistSize(), true);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+    int selection = qrand() % projectm_->getPlaylistSize();
+#else
+    int selection =
+        QRandomGenerator::global()->bounded(projectm_->getPlaylistSize());
+#endif
+    projectm_->selectPreset(selection, true);
   }
 
   if (font_path.isNull()) {

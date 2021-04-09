@@ -34,6 +34,10 @@
 #include <memory>
 #include <unordered_map>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -2032,8 +2036,11 @@ void Playlist::Shuffle() {
 
   const int count = items_.count();
   for (int i = begin; i < count; ++i) {
-    int new_pos = i + (rand() % (count - i));
-
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+    int new_pos = i + (qrand() % (count - i));
+#else
+    int new_pos = QRandomGenerator::global()->bounded(i, count);
+#endif
     std::swap(new_items[i], new_items[new_pos]);
   }
 

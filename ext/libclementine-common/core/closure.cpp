@@ -19,6 +19,10 @@
 
 #include "core/timeconstants.h"
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 namespace _detail {
 
 ClosureBase::ClosureBase(ObjectHelper* helper) : helper_(helper) {}
@@ -67,6 +71,11 @@ void DoAfter(QObject* receiver, const char* slot, int msec) {
 }
 
 void DoInAMinuteOrSo(QObject* receiver, const char* slot) {
+  // qrand is deprecated in 5.15
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   int msec = (60 + (qrand() % 60)) * kMsecPerSec;
+#else
+  int msec = QRandomGenerator::global()->bounded(60, 120) * kMsecPerSec;
+#endif
   DoAfter(receiver, slot, msec);
 }

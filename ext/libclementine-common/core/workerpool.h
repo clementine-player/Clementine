@@ -29,6 +29,10 @@
 #include <QQueue>
 #include <QThread>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #include "clementine-config.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -270,7 +274,12 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
 
   // Create a server, find an unused name and start listening
   forever {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     const int unique_number = qrand() ^ ((int)(quint64(this) & 0xFFFFFFFF));
+#else
+    // The global generator is securely seeded.
+    const int unique_number = QRandomGenerator::global()->generate();
+#endif
     const QString name =
         QString("%1_%2").arg(local_server_name_).arg(unique_number);
 

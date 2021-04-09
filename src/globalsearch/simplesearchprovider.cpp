@@ -20,6 +20,10 @@
 #include "core/logging.h"
 #include "playlist/songmimedata.h"
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 const int SimpleSearchProvider::kDefaultResultLimit = 6;
 
 SimpleSearchProvider::Item::Item(const QString& title, const QUrl& url,
@@ -109,7 +113,12 @@ QStringList SimpleSearchProvider::GetSuggestions(int count) {
       break;
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     const Item& item = items_[qrand() % items_.count()];
+#else
+    const Item& item =
+        items_[QRandomGenerator::global()->bounded(items_.count())];
+#endif
     if (!item.keyword_.isEmpty()) ret << item.keyword_;
     if (!item.metadata_.title().isEmpty()) ret << item.metadata_.title();
   }

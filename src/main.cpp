@@ -321,8 +321,13 @@ int main(int argc, char* argv[]) {
 
   // Seed the random number generators.
   time_t t = time(nullptr);
+  // rand is still used in 3rdParty
   srand(t);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+  // Deprecated in 1.15. Starting in 5.10, QRandomGenerator::global provides a
+  // securely seeded PRNG.
   qsrand(t);
+#endif
 
   IncreaseFDLimit();
 

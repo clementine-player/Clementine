@@ -19,6 +19,10 @@
 
 #include <QStack>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
+
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "library/librarybackend.h"
@@ -100,7 +104,11 @@ QStringList LibrarySearchProvider::GetSuggestions(int count) {
     LibraryQuery q;
     q.SetColumnSpec("artist, album");
     q.SetIncludeUnavailable(true);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     q.AddWhere("ROWID", qrand() % largest_rowid);
+#else
+    q.AddWhere("ROWID", QRandomGenerator::global()->bounded(largest_rowid));
+#endif
     q.SetLimit(1);
 
     if (!backend_->ExecQuery(&q) || !q.Next()) {
@@ -111,7 +119,11 @@ QStringList LibrarySearchProvider::GetSuggestions(int count) {
     const QString album = q.Value(1).toString();
 
     if (!artist.isEmpty() && !album.isEmpty())
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
       ret << ((qrand() % 2 == 0) ? artist : album);
+#else
+      ret << (QRandomGenerator::global()->bounded(2) == 0 ? artist : album);
+#endif
     else if (!artist.isEmpty())
       ret << artist;
     else if (!album.isEmpty())
