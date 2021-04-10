@@ -37,7 +37,7 @@ class QueuedItemDelegate : public QStyledItemDelegate {
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;
   void DrawBox(QPainter* painter, const QRect& line_rect, const QFont& font,
-               const QString& text, int width = -1) const;
+               const QString& text, int width = -1, float opacity = 1.0) const;
 
   int queue_indicator_size(const QModelIndex& index) const;
 

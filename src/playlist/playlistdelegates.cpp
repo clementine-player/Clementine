@@ -69,19 +69,16 @@ void QueuedItemDelegate::paint(QPainter* painter,
       opacity /= kQueueOpacitySteps;
       opacity *= 1.0 - kQueueOpacityLowerBound;
       opacity += kQueueOpacityLowerBound;
-      painter->setOpacity(opacity);
 
       DrawBox(painter, option.rect, option.font, QString::number(queue_pos + 1),
-              kQueueBoxLength);
-
-      painter->setOpacity(1.0);
+              kQueueBoxLength, opacity);
     }
   }
 }
 
 void QueuedItemDelegate::DrawBox(QPainter* painter, const QRect& line_rect,
                                  const QFont& font, const QString& text,
-                                 int width) const {
+                                 int width, float opacity) const {
   QFont smaller = font;
   smaller.setPointSize(smaller.pointSize() - 1);
   smaller.setBold(true);
@@ -101,6 +98,11 @@ void QueuedItemDelegate::DrawBox(QPainter* painter, const QRect& line_rect,
   gradient.setColorAt(0.0, kQueueBoxGradientColor1);
   gradient.setColorAt(1.0, kQueueBoxGradientColor2);
 
+  // Push painter state
+  painter->save();
+
+  painter->setOpacity(opacity);
+
   // Turn on antialiasing
   painter->setRenderHint(QPainter::Antialiasing);
 
@@ -114,6 +116,9 @@ void QueuedItemDelegate::DrawBox(QPainter* painter, const QRect& line_rect,
   painter->setFont(smaller);
   painter->drawText(rect, Qt::AlignCenter, text);
   painter->translate(-0.5, -0.5);
+
+  // Pop painter state
+  painter->restore();
 }
 
 int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
