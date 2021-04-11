@@ -67,7 +67,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-03 13:08+0000\n"
+"PO-Revision-Date: 2021-04-10 14:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1623,21 +1623,17 @@ msgstr "Überblenden bei automatischem Titelwechsel"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Überblenden bei manuellem Titelwechsel"
 
+#: ../bin/src/ui_queuemanager.h:148
+msgid "Ctrl+Down"
+msgstr ""
+
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "Strg+K"
 
-#: ../bin/src/ui_savedgroupingmanager.h:106
+#: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
 msgstr "Strg+Oben"
-
-#: ../bin/src/ui_queuemanager.h:142
-msgid "Ctrl+"
-msgstr "Strg+"
-
-#: ../bin/src/ui_queuemanager.h:148
-msgid "Ctrl+"
-msgstr "Strg+"
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -3481,7 +3477,7 @@ msgstr "Netzwerkvermittlung"
 msgid "Network Remote"
 msgstr "Netzwerkfernsteuerung"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:534
+#: playlist/playlistdelegates.cpp:300 ui/edittagdialog.cpp:534
 msgid "Never"
 msgstr "Niemals"
 
@@ -5566,7 +5562,7 @@ msgstr "Konnte %1 nicht herunterladen (%2)"
 
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
-#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
+#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
 #: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
@@ -6288,7 +6284,7 @@ msgstr "Titel sortieren"
 msgid "starts with"
 msgstr "beginnt mit"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "Anhalten"
 

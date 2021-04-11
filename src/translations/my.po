@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-03 13:08+0000\n"
+"PO-Revision-Date: 2021-04-10 14:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/davidsansome/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1563,21 +1563,17 @@ msgstr "တေးသံလမ်းကြောများအလိုအလျ
 msgid "Cross-fade when changing tracks manually"
 msgstr "တေးသံလမ်းကြောများလက်အားသံုးပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
+#: ../bin/src/ui_queuemanager.h:148
+msgid "Ctrl+Down"
+msgstr ""
+
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "ကွန်+ကေ"
 
-#: ../bin/src/ui_savedgroupingmanager.h:106
+#: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
 msgstr "ကွန်+အပေါ်"
-
-#: ../bin/src/ui_queuemanager.h:142
-msgid "Ctrl+"
-msgstr ""
-
-#: ../bin/src/ui_queuemanager.h:148
-msgid "Ctrl+"
-msgstr ""
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -3421,7 +3417,7 @@ msgstr "ကွန်ရက်ပရောက်ဇီ"
 msgid "Network Remote"
 msgstr "ကွန်ရက်အဝေးထိန်း"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:534
+#: playlist/playlistdelegates.cpp:300 ui/edittagdialog.cpp:534
 msgid "Never"
 msgstr "ဘယ်သောအခါမှ"
 
@@ -5506,7 +5502,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
-#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
+#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
 #: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
@@ -6228,7 +6224,7 @@ msgstr "သီချင်းများမျိုးတူစု"
 msgid "starts with"
 msgstr "နှင့်စတင်"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "ရပ်"
 

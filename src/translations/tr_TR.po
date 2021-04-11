@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-05 07:23+0000\n"
-"Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
+"PO-Revision-Date: 2021-04-10 14:08+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1599,21 +1599,17 @@ msgstr "Parça değiştirirken otomatik olarak çapraz geçiş yap"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Parça değiştirirken elle çapraz geçiş yap"
 
+#: ../bin/src/ui_queuemanager.h:148
+msgid "Ctrl+Down"
+msgstr ""
+
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_savedgroupingmanager.h:106
+#: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
-
-#: ../bin/src/ui_queuemanager.h:142
-msgid "Ctrl+"
-msgstr "Ctrl+"
-
-#: ../bin/src/ui_queuemanager.h:148
-msgid "Ctrl+"
-msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -3457,7 +3453,7 @@ msgstr "Vekil Sunucu"
 msgid "Network Remote"
 msgstr "Ağ Denetimi"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:534
+#: playlist/playlistdelegates.cpp:300 ui/edittagdialog.cpp:534
 msgid "Never"
 msgstr "Hiçbir zaman"
 
@@ -5542,7 +5538,7 @@ msgstr "%1 indirilemedi (%2)"
 
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
-#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
+#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
 #: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
@@ -6264,7 +6260,7 @@ msgstr "şarkıları sırala"
 msgid "starts with"
 msgstr "şununla başlıyor"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "durdur"
 

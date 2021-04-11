@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-03 15:12+0000\n"
+"PO-Revision-Date: 2021-04-10 16:27+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1565,21 +1565,17 @@ msgstr "Перехресне згасання під час автоматичн
 msgid "Cross-fade when changing tracks manually"
 msgstr "Перехресне згасання під час ручної зміни композицій"
 
+#: ../bin/src/ui_queuemanager.h:148
+msgid "Ctrl+Down"
+msgstr "Ctrl+↓"
+
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_savedgroupingmanager.h:106
+#: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
-msgstr "Ctrl+Вгору"
-
-#: ../bin/src/ui_queuemanager.h:142
-msgid "Ctrl+"
-msgstr "Ctrl+"
-
-#: ../bin/src/ui_queuemanager.h:148
-msgid "Ctrl+"
-msgstr "Ctrl+"
+msgstr "Ctrl+↑"
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -3423,7 +3419,7 @@ msgstr "Проксі мережі"
 msgid "Network Remote"
 msgstr "Дистанційне керування з мережі"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:534
+#: playlist/playlistdelegates.cpp:300 ui/edittagdialog.cpp:534
 msgid "Never"
 msgstr "Ніколи"
 
@@ -5508,7 +5504,7 @@ msgstr "Не вдалось завантажити %1 (%2)"
 
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
-#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
+#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
 #: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
@@ -6230,7 +6226,7 @@ msgstr "впорядкувати композиції"
 msgid "starts with"
 msgstr "починається з"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "зупинити"
 

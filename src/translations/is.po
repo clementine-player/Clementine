@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-04-03 13:08+0000\n"
+"PO-Revision-Date: 2021-04-10 14:08+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1569,21 +1569,17 @@ msgstr "Kross-deyfa þegar skipt er sjálfvirkt milli laga"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Kross-deyfa þegar skipt er handvirkt milli laga"
 
+#: ../bin/src/ui_queuemanager.h:148
+msgid "Ctrl+Down"
+msgstr ""
+
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_savedgroupingmanager.h:106
+#: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
-
-#: ../bin/src/ui_queuemanager.h:142
-msgid "Ctrl+"
-msgstr "Ctrl+"
-
-#: ../bin/src/ui_queuemanager.h:148
-msgid "Ctrl+"
-msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -3427,7 +3423,7 @@ msgstr "Milliþjónn á netkerfi"
 msgid "Network Remote"
 msgstr "Fjarstýring um netkerfi"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:534
+#: playlist/playlistdelegates.cpp:300 ui/edittagdialog.cpp:534
 msgid "Never"
 msgstr "Aldrei"
 
@@ -5512,7 +5508,7 @@ msgstr "Tekst ekki að sækja %1 (%2)"
 
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
-#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
+#: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
 #: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
@@ -6234,7 +6230,7 @@ msgstr "raða lögum"
 msgid "starts with"
 msgstr "byrjar á"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "stöðva"
 
