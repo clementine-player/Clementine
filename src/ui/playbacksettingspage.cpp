@@ -63,12 +63,14 @@ void PlaybackSettingsPage::Load() {
 
   ui_->gst_output->clear();
   for (const GstEngine::OutputDetails& output : engine->GetOutputsList()) {
-    // Strip components off the icon name until we find one.
-    QStringList components = output.icon_name.split("-");
     QIcon icon;
-    while (icon.isNull() && !components.isEmpty()) {
-      icon = IconLoader::Load(components.join("-"), IconLoader::Base);
-      components.removeLast();
+    if (!output.icon_name.isEmpty()) {
+      // Strip components off the icon name until we find one.
+      QStringList components = output.icon_name.split("-");
+      while (icon.isNull() && !components.isEmpty()) {
+        icon = IconLoader::Load(components.join("-"), IconLoader::Base);
+        components.removeLast();
+      }
     }
 
     ui_->gst_output->addItem(icon, output.description,
