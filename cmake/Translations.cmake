@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0.0)
 
 set (XGETTEXT_OPTIONS --qt --keyword=tr:1,2c --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format
     --keyword=trUtf8 --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format

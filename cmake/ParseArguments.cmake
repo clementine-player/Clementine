@@ -1,6 +1,6 @@
 # From http://www.cmake.org/Wiki/CMakeMacroParseArguments
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0.0)
 
 MACRO(PARSE_ARGUMENTS prefix arg_names option_names)
   SET(DEFAULT_ARGS)
