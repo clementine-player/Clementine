@@ -52,7 +52,6 @@ if(HAVE_SPOTIFY)
   include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
 endif(HAVE_SPOTIFY)
 
-cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 
 if(HAVE_TRANSLATIONS)
