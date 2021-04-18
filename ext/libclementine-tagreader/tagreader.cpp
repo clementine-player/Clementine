@@ -454,72 +454,74 @@ void TagReader::ReadFile(const QString& filename,
                  dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     if (file->tag()) {
       TagLib::MP4::Tag* mp4_tag = file->tag();
-      const TagLib::MP4::ItemListMap& items = mp4_tag->itemListMap();
+      TagLib::MP4::Item item;
 
       // Find album artists
-      TagLib::MP4::ItemListMap::ConstIterator it = items.find("aART");
-      if (it != items.end()) {
-        TagLib::StringList album_artists = it->second.toStringList();
+      item = mp4_tag->item("aART");
+      if (item.isValid()) {
+        TagLib::StringList album_artists = item.toStringList();
         if (!album_artists.isEmpty()) {
           Decode(album_artists.front(), nullptr, song->mutable_albumartist());
         }
       }
 
       // Find album cover art
-      if (items.find("covr") != items.end()) {
+      item = mp4_tag->item("covr");
+      if (item.isValid()) {
         song->set_art_automatic(kEmbeddedCover);
       }
 
-      if (items.contains("disk")) {
-        disc = TStringToQString(
-            TagLib::String::number(items["disk"].toIntPair().first));
+      item = mp4_tag->item("disk");
+      if (item.isValid()) {
+        disc = TStringToQString(TagLib::String::number(item.toIntPair().first));
       }
 
-      if (items.contains(kMP4_FMPS_Rating_ID)) {
+      item = mp4_tag->item(kMP4_FMPS_Rating_ID);
+      if (item.isValid()) {
         float rating =
-            TStringToQString(
-                items[kMP4_FMPS_Rating_ID].toStringList().toString('\n'))
-                .toFloat();
+            TStringToQString(item.toStringList().toString('\n')).toFloat();
         if (song->rating() <= 0 && rating > 0) {
           song->set_rating(rating);
         }
       }
-      if (items.contains(kMP4_FMPS_Playcount_ID)) {
+      item = mp4_tag->item(kMP4_FMPS_Playcount_ID);
+      if (item.isValid()) {
         int playcount =
-            TStringToQString(
-                items[kMP4_FMPS_Playcount_ID].toStringList().toString('\n'))
-                .toFloat();
+            TStringToQString(item.toStringList().toString('\n')).toFloat();
         if (song->playcount() <= 0 && playcount > 0) {
           song->set_playcount(playcount);
         }
       }
-      if (items.contains(kMP4_FMPS_Playcount_ID)) {
-        int score = TStringToQString(
-                        items[kMP4_FMPS_Score_ID].toStringList().toString('\n'))
-                        .toFloat() *
-                    100;
+      item = mp4_tag->item(kMP4_FMPS_Score_ID);
+      if (item.isValid()) {
+        int score =
+            TStringToQString(item.toStringList().toString('\n')).toFloat() *
+            100;
         if (song->score() <= 0 && score > 0) {
           song->set_score(score);
         }
       }
 
-      if (items.contains("\251wrt")) {
-        Decode(items["\251wrt"].toStringList().toString(", "), nullptr,
+      item = mp4_tag->item("\251wrt");
+      if (item.isValid()) {
+        Decode(item.toStringList().toString(", "), nullptr,
                song->mutable_composer());
       }
-      if (items.contains("\251grp")) {
-        Decode(items["\251grp"].toStringList().toString(" "), nullptr,
+      item = mp4_tag->item("\251grp");
+      if (item.isValid()) {
+        Decode(item.toStringList().toString(" "), nullptr,
                song->mutable_grouping());
       }
-      if (items.contains("\251lyr")) {
-        Decode(items["\251lyr"].toStringList().toString(" "), nullptr,
+      item = mp4_tag->item("\251lyr");
+      if (item.isValid()) {
+        Decode(item.toStringList().toString(" "), nullptr,
                song->mutable_lyrics());
       }
 
-      if (items.contains(kMP4_OriginalYear_ID)) {
+      item = mp4_tag->item(kMP4_OriginalYear_ID);
+      if (item.isValid()) {
         song->set_originalyear(
-            TStringToQString(
-                items[kMP4_OriginalYear_ID].toStringList().toString('\n'))
+            TStringToQString(item.toStringList().toString('\n'))
                 .left(4)
                 .toInt());
       }
@@ -801,11 +803,11 @@ void TagReader::SetVorbisComments(
 
   vorbis_comments->addField("ALBUMARTIST",
                             StdStringToTaglibString(song.albumartist()), true);
-  vorbis_comments->removeField("ALBUM ARTIST");
+  vorbis_comments->removeFields("ALBUM ARTIST");
 
   vorbis_comments->addField("LYRICS", StdStringToTaglibString(song.lyrics()),
                             true);
-  vorbis_comments->removeField("UNSYNCEDLYRICS");
+  vorbis_comments->removeFields("UNSYNCEDLYRICS");
 }
 
 void TagReader::SetFMPSStatisticsVorbisComments(
@@ -943,16 +945,17 @@ bool TagReader::SaveFile(const QString& filename,
   } else if (TagLib::MP4::File* file =
                  dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
-    tag->itemListMap()["disk"] =
-        TagLib::MP4::Item(song.disc() <= 0 - 1 ? 0 : song.disc(), 0);
-    tag->itemListMap()["tmpo"] = TagLib::StringList(
-        song.bpm() <= 0 - 1 ? "0" : TagLib::String::number(song.bpm()));
-    tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer().c_str());
-    tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping().c_str());
-    tag->itemListMap()["\251lyr"] = TagLib::StringList(song.lyrics().c_str());
-    tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
-    tag->itemListMap()["cpil"] =
-        TagLib::StringList(song.compilation() ? "1" : "0");
+    tag->setItem("disk",
+                 TagLib::MP4::Item(song.disc() <= 0 - 1 ? 0 : song.disc(), 0));
+    tag->setItem("tmpo",
+                 TagLib::StringList(song.bpm() <= 0 - 1
+                                        ? "0"
+                                        : TagLib::String::number(song.bpm())));
+    tag->setItem("\251wrt", TagLib::StringList(song.composer().c_str()));
+    tag->setItem("\251grp", TagLib::StringList(song.grouping().c_str()));
+    tag->setItem("\251lyr", TagLib::StringList(song.lyrics().c_str()));
+    tag->setItem("aART", TagLib::StringList(song.albumartist().c_str()));
+    tag->setItem("cpil", TagLib::StringList(song.compilation() ? "1" : "0"));
   } else if (TagLib::APE::File* file =
                  dynamic_cast<TagLib::APE::File*>(fileref->file())) {
     saveApeTag(file->APETag(true));
@@ -1052,11 +1055,12 @@ bool TagReader::SaveSongStatisticsToFile(
                dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
     if (song.score())
-      tag->itemListMap()[kMP4_FMPS_Score_ID] = TagLib::MP4::Item(
-          QStringToTaglibString(QString::number(song.score() / 100.0)));
+      tag->setItem(kMP4_FMPS_Score_ID,
+                   TagLib::MP4::Item(QStringToTaglibString(
+                       QString::number(song.score() / 100.0))));
     if (song.playcount())
-      tag->itemListMap()[kMP4_FMPS_Playcount_ID] =
-          TagLib::MP4::Item(TagLib::String::number(song.playcount()));
+      tag->setItem(kMP4_FMPS_Playcount_ID,
+                   TagLib::MP4::Item(TagLib::String::number(song.playcount())));
   } else if (TagLib::APE::File* file =
                  dynamic_cast<TagLib::APE::File*>(fileref->file())) {
     saveApeSongStats(file->APETag(true));
@@ -1138,8 +1142,8 @@ bool TagReader::SaveSongRatingToFile(
   else if (TagLib::MP4::File* file =
                dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
-    tag->itemListMap()[kMP4_FMPS_Rating_ID] = TagLib::StringList(
-        QStringToTaglibString(QString::number(song.rating())));
+    tag->setItem(kMP4_FMPS_Rating_ID, TagLib::StringList(QStringToTaglibString(
+                                          QString::number(song.rating()))));
   } else if (TagLib::APE::File* file =
                  dynamic_cast<TagLib::APE::File*>(fileref->file())) {
     saveApeSongRating(file->APETag(true));
@@ -1373,10 +1377,9 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
   TagLib::MP4::File* aac_file = dynamic_cast<TagLib::MP4::File*>(ref.file());
   if (aac_file) {
     TagLib::MP4::Tag* tag = aac_file->tag();
-    const TagLib::MP4::ItemListMap& items = tag->itemListMap();
-    TagLib::MP4::ItemListMap::ConstIterator it = items.find("covr");
-    if (it != items.end()) {
-      const TagLib::MP4::CoverArtList& art_list = it->second.toCoverArtList();
+    TagLib::MP4::Item item = tag->item("covr");
+    if (item.isValid()) {
+      const TagLib::MP4::CoverArtList& art_list = item.toCoverArtList();
 
       if (!art_list.isEmpty()) {
         // Just take the first one for now
