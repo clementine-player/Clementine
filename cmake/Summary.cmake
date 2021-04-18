@@ -1,5 +1,3 @@
-cmake_policy(SET CMP0012 NEW)
-
 set(summary_willbuild "")
 set(summary_willnotbuild "")
 
