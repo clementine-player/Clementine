@@ -290,7 +290,12 @@ QString CXXDemangle(const QString& mangled_function) {
 }
 
 QString DarwinDemangle(const QString& symbol) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  QStringList split = symbol.split(' ', Qt::SkipEmptyParts);
+#else
+  // This split method is deprecated in Qt 5.14
   QStringList split = symbol.split(' ', QString::SkipEmptyParts);
+#endif
   QString mangled_function = split[3];
   return CXXDemangle(mangled_function);
 }
