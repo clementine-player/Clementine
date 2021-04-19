@@ -20,7 +20,7 @@
 			<annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="MprisPlaylistList"/>
 		</method>
 		<signal name='PlaylistChanged'>
-			<arg name='Playlist' type='(oss)' />
+			<arg direction='in' name='Playlist' type='(oss)' />
 			<annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="MprisPlaylist" />
 		</signal>
 		<annotation name="org.qtproject.QtDBus.QtTypeName" value="MaybePlaylist" />

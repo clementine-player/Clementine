@@ -8,7 +8,7 @@
     </method>
     <signal name="InterfacesAdded">
       <arg name="object" type="o"/>
-      <arg name="interfaces" type="a{sa{sv}}"/>
+      <arg name="interfaces" type="a{sa{sv}}" direction="in"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="InterfacesAndProperties"/>
     </signal>
     <signal name="InterfacesRemoved">
