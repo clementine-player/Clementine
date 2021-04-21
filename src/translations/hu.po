@@ -87,12 +87,12 @@ msgstr "%1 album"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 #, qt-format
 msgid "%1 days"
 msgstr "%1 nap"
 
-#: core/utilities.cpp:146
+#: core/utilities.cpp:150
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 nappal ezelőtt"
@@ -301,7 +301,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 msgid "1 day"
 msgstr "1 nap"
 
@@ -701,7 +701,7 @@ msgstr "Utána"
 msgid "After copying..."
 msgstr "Másolás után…"
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1382
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
 #: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -714,7 +714,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideális hangerő minden számhoz)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1397
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
@@ -808,7 +808,7 @@ msgstr "Mindig indítsa el a lejátszást"
 msgid "An error occurred loading the iTunes database"
 msgstr "Hiba történt az iTunes adatbázis betöltése közben"
 
-#: playlist/playlist.cpp:453 ui/edittagdialog.cpp:707
+#: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hiba történt a metaadatok ide írásakor: „%1”"
@@ -864,7 +864,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Biztos, hogy beleírja a szám statisztikáit az összes a zenetárban szereplő fájlba?"
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1380
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -947,7 +947,7 @@ msgstr "Átlagos képméret"
 msgid "BBC Podcasts"
 msgstr "BBC podcastok"
 
-#: playlist/playlist.cpp:1417 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1004,7 +1004,7 @@ msgstr "Legjobb"
 msgid "Biography"
 msgstr "Életrajz"
 
-#: playlist/playlist.cpp:1419 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:707
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "Bitráta"
@@ -1252,7 +1252,7 @@ msgid ""
 "an account</a>."
 msgstr "A Clementine képes szinkronizálni feliratkozásait más számítógépekkel és podcast alkalmazásokkal.  <a href=\"https://gpodder.net/register/\">Készítsen egy felhasználót</a>."
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:146
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1338,7 +1338,7 @@ msgstr "A sorrendezésnél mellőzendő előtagszavak vesszővel elválasztott l
 msgid "Command"
 msgstr "Parancs"
 
-#: playlist/playlist.cpp:1436 smartplaylists/searchterm.cpp:395
+#: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
 #: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Megjegyzés"
@@ -1351,7 +1351,7 @@ msgstr "Címkék automatikus kiegészítése"
 msgid "Complete tags automatically..."
 msgstr "Címkék automatikus kiegészítése…"
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1399
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
@@ -1625,11 +1625,11 @@ msgstr "Adatbázis-sérülés észlelhető. További információkért olvassa e
 msgid "Date"
 msgstr "Dátum"
 
-#: playlist/playlist.cpp:1433 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1437 ../bin/src/ui_edittagdialog.h:716
 msgid "Date created"
 msgstr "Létrehozás dátuma"
 
-#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1435 ../bin/src/ui_edittagdialog.h:715
 msgid "Date modified"
 msgstr "Módosítás dátuma"
 
@@ -1809,7 +1809,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Letiltva"
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1388
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
@@ -2402,11 +2402,11 @@ msgstr "Fájlkiterjesztés"
 msgid "File formats"
 msgstr "Fájlformátumok"
 
-#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:717
 msgid "File name"
 msgstr "Fájlnév"
 
-#: playlist/playlist.cpp:1425
+#: playlist/playlist.cpp:1429
 msgid "File name (without path)"
 msgstr "Fájlnév (útvonal nélkül)"
 
@@ -2414,11 +2414,11 @@ msgstr "Fájlnév (útvonal nélkül)"
 msgid "File paths"
 msgstr "Fájlútvonalak"
 
-#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:711
 msgid "File size"
 msgstr "Fájlméret"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1429
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1433
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:713
 msgid "File type"
@@ -2558,7 +2558,7 @@ msgstr "Általános"
 msgid "General settings"
 msgstr "Általános beállítások"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1395
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
@@ -2657,7 +2657,7 @@ msgstr "Műfaj/Album szerint"
 msgid "Group by Genre/Artist/Album"
 msgstr "Műfaj/Előadó/Album szerint"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1403
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
 #: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
@@ -2778,12 +2778,12 @@ msgstr "Képek (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Képek (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:162
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 napon belül"
 
-#: core/utilities.cpp:161
+#: core/utilities.cpp:165
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 héten belül"
@@ -2997,7 +2997,7 @@ msgstr "Nagy oldalsáv"
 msgid "Last played"
 msgstr "Utoljára lejátszva"
 
-#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:708
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Utoljára lejátszva"
@@ -3034,7 +3034,7 @@ msgstr "Legkevésbé kedvelt számok"
 msgid "Left"
 msgstr "Balra"
 
-#: playlist/playlist.cpp:1384 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Időtartam"
@@ -3322,7 +3322,7 @@ msgstr "Minimum puffer"
 msgid "Missing plugins"
 msgstr "Hiányzó bővítmények"
 
-#: visualisations/projectmvisualisation.cpp:135
+#: visualisations/projectmvisualisation.cpp:145
 msgid "Missing projectM presets"
 msgstr "Hiányzó projectM beállítások"
 
@@ -3346,7 +3346,7 @@ msgstr "Mono lejátszás"
 msgid "Months"
 msgstr "Hónap"
 
-#: playlist/playlist.cpp:1440
+#: playlist/playlist.cpp:1444
 msgid "Mood"
 msgstr "Hangulat"
 
@@ -3484,7 +3484,7 @@ msgstr "Következő album"
 msgid "Next track"
 msgstr "Következő szám"
 
-#: core/utilities.cpp:159
+#: core/utilities.cpp:163
 msgid "Next week"
 msgstr "Következő héten"
 
@@ -3842,7 +3842,7 @@ msgstr "Lejátszás szüneteltetése"
 msgid "Paused"
 msgstr "Szüneteltetve"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1401
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
 #: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
@@ -3872,7 +3872,7 @@ msgstr "Egyszerű oldalsáv"
 msgid "Play"
 msgstr "Lejátszás"
 
-#: playlist/playlist.cpp:1408 ../bin/src/ui_edittagdialog.h:704
+#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
 msgstr "Lejátszások száma"
 
@@ -4180,7 +4180,7 @@ msgstr "A most játszott szám értékelése 4 csillaggal"
 msgid "Rate the current song 5 stars"
 msgstr "A most játszott szám értékelése 5 csillaggal"
 
-#: playlist/playlist.cpp:1406 ../bin/src/ui_edittagdialog.h:712
+#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
 msgstr "Értékelés"
 
@@ -4421,7 +4421,7 @@ msgstr "Eszköz biztonságos eltávolítása"
 msgid "Safely remove the device after copying"
 msgstr "Eszköz biztonságos eltávolítása másolás után"
 
-#: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1425 ../bin/src/ui_edittagdialog.h:709
 #: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
@@ -4501,7 +4501,7 @@ msgstr "Skálázható mintavételezési profil (SSR)"
 msgid "Scale size"
 msgstr "Skála méret"
 
-#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:710
 msgid "Score"
 msgstr "Pontszám"
 
@@ -4897,7 +4897,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Léptetés vissza a lejátszólistában"
 
-#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Kihagyások száma"
 
@@ -4981,7 +4981,7 @@ msgstr "Számok rendezése"
 msgid "Sorting"
 msgstr "Rendezés"
 
-#: playlist/playlist.cpp:1438
+#: playlist/playlist.cpp:1442
 msgid "Source"
 msgstr "Forrás"
 
@@ -5372,13 +5372,13 @@ msgstr "Ez az eszköztípus nem támogatott: %1"
 msgid "Time step"
 msgstr "Idő lépés"
 
-#: playlist/playlist.cpp:1378 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Cím"
 
-#: core/utilities.cpp:144 core/utilities.cpp:156
+#: core/utilities.cpp:148 core/utilities.cpp:160
 msgid "Today"
 msgstr "Ma"
 
@@ -5402,7 +5402,7 @@ msgstr "Scrobble funkció be/ki"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "OSD láthatósága be/ki"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:161
 msgid "Tomorrow"
 msgstr "Holnap"
 
@@ -5434,7 +5434,7 @@ msgstr "Összes hálózati kérés"
 msgid "Trac&k"
 msgstr "Szá&m"
 
-#: playlist/playlist.cpp:1386 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Szám"
@@ -5890,7 +5890,7 @@ msgstr "Metaadatok írása"
 msgid "Wrong username or password."
 msgstr "Érvénytelen felhasználói név vagy jelszó."
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1390
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
@@ -5902,7 +5902,7 @@ msgstr "Év"
 msgid "Year - Album"
 msgstr "Év – Album"
 
-#: playlist/playlist.cpp:1392
+#: playlist/playlist.cpp:1396
 msgid "Year - original"
 msgstr "Év – eredeti"
 
@@ -5910,7 +5910,7 @@ msgstr "Év – eredeti"
 msgid "Years"
 msgstr "Év"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:149
 msgid "Yesterday"
 msgstr "Tegnap"
 
@@ -5947,7 +5947,7 @@ msgstr "Bejelentkezett."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Megváltoztathatja a számok zenetárban való rendezésének módját."
 
-#: ui/networkremotesettingspage.cpp:162
+#: ui/networkremotesettingspage.cpp:172
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "

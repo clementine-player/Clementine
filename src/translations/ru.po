@@ -105,12 +105,12 @@ msgstr "%1 альбомов"
 msgid "%1 dB"
 msgstr "%1 дБ"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 #, qt-format
 msgid "%1 days"
 msgstr "%1 дней"
 
-#: core/utilities.cpp:146
+#: core/utilities.cpp:150
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 дней назад"
@@ -319,7 +319,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 msgid "1 day"
 msgstr "1 день"
 
@@ -719,7 +719,7 @@ msgstr "После "
 msgid "After copying..."
 msgstr "После копирования…"
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1382
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
 #: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -732,7 +732,7 @@ msgstr "Альбом"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (идеальная громкость всех треков)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1397
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
@@ -826,7 +826,7 @@ msgstr "Всегда начинать воспроизведение"
 msgid "An error occurred loading the iTunes database"
 msgstr "Произошла ошибка при загрузке данных iTunes"
 
-#: playlist/playlist.cpp:453 ui/edittagdialog.cpp:707
+#: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ошибка при записи мета-данных в '%1'"
@@ -882,7 +882,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Вы действительно хотите записывать статистику во все файлы вашей фонотеки?"
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1380
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -965,7 +965,7 @@ msgstr "Средний размер изображений"
 msgid "BBC Podcasts"
 msgstr "Подкасты BBC"
 
-#: playlist/playlist.cpp:1417 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "Ударов в минуту"
@@ -1022,7 +1022,7 @@ msgstr "Лучшее"
 msgid "Biography"
 msgstr "Биография"
 
-#: playlist/playlist.cpp:1419 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:707
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "Битрейт"
@@ -1270,7 +1270,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine может синхронизировать ваши подписки с другими компьютерами и приложениями. <a href=\"https://gpodder.net/register/\">Создать аккаунт</a>."
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:146
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1356,7 +1356,7 @@ msgstr "Разделённый запятыми список префиксны�
 msgid "Command"
 msgstr "Команда"
 
-#: playlist/playlist.cpp:1436 smartplaylists/searchterm.cpp:395
+#: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
 #: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Комментарий"
@@ -1369,7 +1369,7 @@ msgstr "Заполнить поля автоматически"
 msgid "Complete tags automatically..."
 msgstr "Заполнить теги автоматически"
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1399
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
@@ -1643,11 +1643,11 @@ msgstr "Обнаружен сбой в базе данных. Инструкци
 msgid "Date"
 msgstr "Дата"
 
-#: playlist/playlist.cpp:1433 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1437 ../bin/src/ui_edittagdialog.h:716
 msgid "Date created"
 msgstr "Дата создания"
 
-#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1435 ../bin/src/ui_edittagdialog.h:715
 msgid "Date modified"
 msgstr "Дата изменения"
 
@@ -1827,7 +1827,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Отключено"
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1388
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
@@ -2420,11 +2420,11 @@ msgstr "Расширение файла"
 msgid "File formats"
 msgstr "Форматы файлов"
 
-#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:717
 msgid "File name"
 msgstr "Полное имя файла"
 
-#: playlist/playlist.cpp:1425
+#: playlist/playlist.cpp:1429
 msgid "File name (without path)"
 msgstr "Имя файла"
 
@@ -2432,11 +2432,11 @@ msgstr "Имя файла"
 msgid "File paths"
 msgstr "Пути файлов"
 
-#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:711
 msgid "File size"
 msgstr "Размер файла"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1429
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1433
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:713
 msgid "File type"
@@ -2576,7 +2576,7 @@ msgstr "Общие"
 msgid "General settings"
 msgstr "Общие настройки"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1395
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
@@ -2675,7 +2675,7 @@ msgstr "Группировать по жанру/альбому"
 msgid "Group by Genre/Artist/Album"
 msgstr "Группировать по жанру/исполнителю/альбому"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1403
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
 #: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
@@ -2796,12 +2796,12 @@ msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:162
 #, qt-format
 msgid "In %1 days"
 msgstr "В течение %1 дней"
 
-#: core/utilities.cpp:161
+#: core/utilities.cpp:165
 #, qt-format
 msgid "In %1 weeks"
 msgstr "В течение %1 недель"
@@ -3015,7 +3015,7 @@ msgstr "Широкая боковая панель"
 msgid "Last played"
 msgstr "Последнее проигрывание"
 
-#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:708
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Последнее проигрывание"
@@ -3052,7 +3052,7 @@ msgstr "Нелюбимые треки"
 msgid "Left"
 msgstr "Левый канал"
 
-#: playlist/playlist.cpp:1384 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Длина"
@@ -3340,7 +3340,7 @@ msgstr "Мин. заполнение буфера"
 msgid "Missing plugins"
 msgstr "Отсутствуют плагины"
 
-#: visualisations/projectmvisualisation.cpp:135
+#: visualisations/projectmvisualisation.cpp:145
 msgid "Missing projectM presets"
 msgstr "Предустановки projectM не найдены"
 
@@ -3364,7 +3364,7 @@ msgstr "Режим моно"
 msgid "Months"
 msgstr "Месяцев"
 
-#: playlist/playlist.cpp:1440
+#: playlist/playlist.cpp:1444
 msgid "Mood"
 msgstr "Тон"
 
@@ -3502,7 +3502,7 @@ msgstr "Следующий альбом"
 msgid "Next track"
 msgstr "Следующий трек"
 
-#: core/utilities.cpp:159
+#: core/utilities.cpp:163
 msgid "Next week"
 msgstr "На следующей неделе"
 
@@ -3860,7 +3860,7 @@ msgstr "Приостановить воспроизведение"
 msgid "Paused"
 msgstr "Приостановлен"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1401
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
 #: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
@@ -3890,7 +3890,7 @@ msgstr "Нормальная боковая панель"
 msgid "Play"
 msgstr "Воспроизвести"
 
-#: playlist/playlist.cpp:1408 ../bin/src/ui_edittagdialog.h:704
+#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
 msgstr "Количество проигрываний"
 
@@ -4198,7 +4198,7 @@ msgstr "Оценка текущей песни 4 звезды"
 msgid "Rate the current song 5 stars"
 msgstr "Оценка текущей песни 5 звёзд"
 
-#: playlist/playlist.cpp:1406 ../bin/src/ui_edittagdialog.h:712
+#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
 msgstr "Рейтинг"
 
@@ -4439,7 +4439,7 @@ msgstr "Безопасно извлечь устройство"
 msgid "Safely remove the device after copying"
 msgstr "Безопасно извлечь устройство после копирования"
 
-#: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1425 ../bin/src/ui_edittagdialog.h:709
 #: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
@@ -4519,7 +4519,7 @@ msgstr "Профиль Scalable sampling rate (SSR)"
 msgid "Scale size"
 msgstr "Размер масштабирования"
 
-#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:710
 msgid "Score"
 msgstr "Счёт"
 
@@ -4915,7 +4915,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr "Переместить назад в плейлисте"
 
-#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Количество пропусков"
 
@@ -4999,7 +4999,7 @@ msgstr "Сортировать песни по"
 msgid "Sorting"
 msgstr "Сортировка"
 
-#: playlist/playlist.cpp:1438
+#: playlist/playlist.cpp:1442
 msgid "Source"
 msgstr "Источник"
 
@@ -5390,13 +5390,13 @@ msgstr "Не поддерживаемый тип устройства: %1"
 msgid "Time step"
 msgstr "Шаг времени"
 
-#: playlist/playlist.cpp:1378 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Название"
 
-#: core/utilities.cpp:144 core/utilities.cpp:156
+#: core/utilities.cpp:148 core/utilities.cpp:160
 msgid "Today"
 msgstr "Сегодня"
 
@@ -5420,7 +5420,7 @@ msgstr "Вкл./откл. скробблинг"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость OSD"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:161
 msgid "Tomorrow"
 msgstr "Завтра"
 
@@ -5452,7 +5452,7 @@ msgstr "Всего выполнено сетевых запросов"
 msgid "Trac&k"
 msgstr "&Трек"
 
-#: playlist/playlist.cpp:1386 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Трек"
@@ -5908,7 +5908,7 @@ msgstr "Записывать мета-данные"
 msgid "Wrong username or password."
 msgstr "Неверное имя или пароль."
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1390
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
@@ -5920,7 +5920,7 @@ msgstr "Год"
 msgid "Year - Album"
 msgstr "Год - Альбом"
 
-#: playlist/playlist.cpp:1392
+#: playlist/playlist.cpp:1396
 msgid "Year - original"
 msgstr "Год оригинала"
 
@@ -5928,7 +5928,7 @@ msgstr "Год оригинала"
 msgid "Years"
 msgstr "Годы"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:149
 msgid "Yesterday"
 msgstr "Вчера"
 
@@ -5965,7 +5965,7 @@ msgstr "Вы вошли в систему."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Можно изменить способ организации композиций в фонотеке."
 
-#: ui/networkremotesettingspage.cpp:162
+#: ui/networkremotesettingspage.cpp:172
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "

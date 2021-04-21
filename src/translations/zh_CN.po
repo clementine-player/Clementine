@@ -91,12 +91,12 @@ msgstr "%1 个专辑"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 #, qt-format
 msgid "%1 days"
 msgstr "%1 天"
 
-#: core/utilities.cpp:146
+#: core/utilities.cpp:150
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 天前"
@@ -305,7 +305,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:123
+#: core/utilities.cpp:127
 msgid "1 day"
 msgstr "1 天"
 
@@ -705,7 +705,7 @@ msgstr "之后 "
 msgid "After copying..."
 msgstr "复制后..."
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1382
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
 #: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -718,7 +718,7 @@ msgstr "专辑"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "专辑(所有曲目采用合适音量)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1397
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
@@ -812,7 +812,7 @@ msgstr "总是开始播放"
 msgid "An error occurred loading the iTunes database"
 msgstr "加载 iTunes 数据库时出错"
 
-#: playlist/playlist.cpp:453 ui/edittagdialog.cpp:707
+#: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "向 '%1' 写入元数据时出错"
@@ -868,7 +868,7 @@ msgid ""
 "the songs of your library?"
 msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌曲文件?"
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1380
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -951,7 +951,7 @@ msgstr "图片平均大小"
 msgid "BBC Podcasts"
 msgstr "BBC 播客"
 
-#: playlist/playlist.cpp:1417 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1008,7 +1008,7 @@ msgstr "最佳"
 msgid "Biography"
 msgstr "档案"
 
-#: playlist/playlist.cpp:1419 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:707
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "位速率"
@@ -1256,7 +1256,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine 能够同步您在不同计算机和播客程序订阅的博客。<a href=\"https://gpodder.net/register/\">创建新帐户</a>。"
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:146
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1342,7 +1342,7 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: playlist/playlist.cpp:1436 smartplaylists/searchterm.cpp:395
+#: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
 #: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "备注"
@@ -1355,7 +1355,7 @@ msgstr "自动补全标签"
 msgid "Complete tags automatically..."
 msgstr "自动补全标签..."
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1399
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
@@ -1629,11 +1629,11 @@ msgstr "检测到数据库损坏。恢复数据库的方法请参考 https://git
 msgid "Date"
 msgstr "日期"
 
-#: playlist/playlist.cpp:1433 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1437 ../bin/src/ui_edittagdialog.h:716
 msgid "Date created"
 msgstr "创建日期"
 
-#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1435 ../bin/src/ui_edittagdialog.h:715
 msgid "Date modified"
 msgstr "修改日期"
 
@@ -1813,7 +1813,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "关闭"
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1388
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
@@ -2406,11 +2406,11 @@ msgstr "文件扩展名"
 msgid "File formats"
 msgstr "文件格式"
 
-#: playlist/playlist.cpp:1423 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:717
 msgid "File name"
 msgstr "文件名"
 
-#: playlist/playlist.cpp:1425
+#: playlist/playlist.cpp:1429
 msgid "File name (without path)"
 msgstr "文件名(无路径)"
 
@@ -2418,11 +2418,11 @@ msgstr "文件名(无路径)"
 msgid "File paths"
 msgstr "文件路径"
 
-#: playlist/playlist.cpp:1427 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:711
 msgid "File size"
 msgstr "文件大小"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1429
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1433
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:713
 msgid "File type"
@@ -2562,7 +2562,7 @@ msgstr "一般"
 msgid "General settings"
 msgstr "常规设置"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1395
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
@@ -2661,7 +2661,7 @@ msgstr "按流派/专辑分组"
 msgid "Group by Genre/Artist/Album"
 msgstr "按流派/艺人/专辑分组"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1403
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
 #: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
@@ -2782,12 +2782,12 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:162
 #, qt-format
 msgid "In %1 days"
 msgstr "在 %1 天内"
 
-#: core/utilities.cpp:161
+#: core/utilities.cpp:165
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 周内"
@@ -3001,7 +3001,7 @@ msgstr "大侧边栏"
 msgid "Last played"
 msgstr "最近播放"
 
-#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:708
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "上次播放的"
@@ -3038,7 +3038,7 @@ msgstr "最不喜欢的曲目"
 msgid "Left"
 msgstr "左"
 
-#: playlist/playlist.cpp:1384 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "长度"
@@ -3326,7 +3326,7 @@ msgstr "最小缓冲填充"
 msgid "Missing plugins"
 msgstr "缺少插件"
 
-#: visualisations/projectmvisualisation.cpp:135
+#: visualisations/projectmvisualisation.cpp:145
 msgid "Missing projectM presets"
 msgstr "projectM 设置缺失"
 
@@ -3350,7 +3350,7 @@ msgstr "单曲循环"
 msgid "Months"
 msgstr "月"
 
-#: playlist/playlist.cpp:1440
+#: playlist/playlist.cpp:1444
 msgid "Mood"
 msgstr "心情"
 
@@ -3488,7 +3488,7 @@ msgstr ""
 msgid "Next track"
 msgstr "下一个曲目"
 
-#: core/utilities.cpp:159
+#: core/utilities.cpp:163
 msgid "Next week"
 msgstr "下一周"
 
@@ -3846,7 +3846,7 @@ msgstr "暂停播放"
 msgid "Paused"
 msgstr "已暂停"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1401
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
 #: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
@@ -3876,7 +3876,7 @@ msgstr "普通侧边栏"
 msgid "Play"
 msgstr "播放"
 
-#: playlist/playlist.cpp:1408 ../bin/src/ui_edittagdialog.h:704
+#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
 msgstr "播放计数"
 
@@ -4184,7 +4184,7 @@ msgstr "给当前曲目评级为四星"
 msgid "Rate the current song 5 stars"
 msgstr "给当前曲目评级为五星"
 
-#: playlist/playlist.cpp:1406 ../bin/src/ui_edittagdialog.h:712
+#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
 msgstr "评级"
 
@@ -4425,7 +4425,7 @@ msgstr "安全移除设备"
 msgid "Safely remove the device after copying"
 msgstr "复制后安全移除设备"
 
-#: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1425 ../bin/src/ui_edittagdialog.h:709
 #: ../bin/src/ui_playbacksettingspage.h:393
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
@@ -4505,7 +4505,7 @@ msgstr "可变采样频率 (SSR)"
 msgid "Scale size"
 msgstr "缩放"
 
-#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:710
 msgid "Score"
 msgstr "得分"
 
@@ -4901,7 +4901,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "在播放列表中后退"
 
-#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "跳过计数"
 
@@ -4985,7 +4985,7 @@ msgstr "排序曲目"
 msgid "Sorting"
 msgstr "正在排序"
 
-#: playlist/playlist.cpp:1438
+#: playlist/playlist.cpp:1442
 msgid "Source"
 msgstr "来源"
 
@@ -5376,13 +5376,13 @@ msgstr "这种设备不被支持： %1"
 msgid "Time step"
 msgstr "时间步长"
 
-#: playlist/playlist.cpp:1378 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "标题"
 
-#: core/utilities.cpp:144 core/utilities.cpp:156
+#: core/utilities.cpp:148 core/utilities.cpp:160
 msgid "Today"
 msgstr "今日"
 
@@ -5406,7 +5406,7 @@ msgstr "切换歌曲记录"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "切换 OSD 可见性"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:161
 msgid "Tomorrow"
 msgstr "明天"
 
@@ -5438,7 +5438,7 @@ msgstr "已发出网络连接总数"
 msgid "Trac&k"
 msgstr "曲目(&k)"
 
-#: playlist/playlist.cpp:1386 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "曲目"
@@ -5894,7 +5894,7 @@ msgstr "写入元数据"
 msgid "Wrong username or password."
 msgstr "用户名密码错误。"
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1390
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
@@ -5906,7 +5906,7 @@ msgstr "年份"
 msgid "Year - Album"
 msgstr "年份 - 专辑"
 
-#: playlist/playlist.cpp:1392
+#: playlist/playlist.cpp:1396
 msgid "Year - original"
 msgstr ""
 
@@ -5914,7 +5914,7 @@ msgstr ""
 msgid "Years"
 msgstr "年"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:149
 msgid "Yesterday"
 msgstr "昨天"
 
@@ -5951,7 +5951,7 @@ msgstr "您已经登录。"
 msgid "You can change the way the songs in the library are organised."
 msgstr "您可以更改媒体库中音乐的组织形式。"
 
-#: ui/networkremotesettingspage.cpp:162
+#: ui/networkremotesettingspage.cpp:172
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
