@@ -278,7 +278,7 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
     const int unique_number = qrand() ^ ((int)(quint64(this) & 0xFFFFFFFF));
 #else
     // The global generator is securely seeded.
-    const int unique_number = QRandomGenerator::global()->generate();
+    const unsigned int unique_number = QRandomGenerator::global()->generate();
 #endif
     const QString name =
         QString("%1_%2").arg(local_server_name_).arg(unique_number);
