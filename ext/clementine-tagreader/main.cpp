@@ -60,8 +60,6 @@ int main(int argc, char** argv) {
 
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/certs/godaddy-root.pem", QSsl::Pem));
-  QSslSocket::addDefaultCaCertificates(QSslCertificate::fromPath(
-      ":/certs/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
 
   TagReaderWorker worker(&socket);
 
