@@ -24,8 +24,8 @@
 			<arg name='CurrentTrack' type='o'/>
 		</signal>
 		<signal name='TrackAdded'>
-			<arg direction='in' name='Metadata' type='a{sv}'/>
-			<annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
+			<arg name='Metadata' type='a{sv}'/>
+			<annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="TrackMetadata"/>
 			<arg name='AfterTrack' type='o'/>
 		</signal>
 		<signal name='TrackRemoved'>
@@ -33,8 +33,8 @@
 		</signal>
 		<signal name='TrackMetadataChanged'>
 			<arg name='TrackId' type='o'/>
-			<arg direction='in' name='Metadata' type='a{sv}'/>
-			<annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
+			<arg name='Metadata' type='a{sv}'/>
+			<annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="TrackMetadata"/>
 		</signal>
 		<property name='Tracks' type='ao' access='read'/>
 		<property name='CanEditTracks' type='b' access='read'/>
