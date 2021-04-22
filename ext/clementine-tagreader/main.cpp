@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QLocalSocket>
+#include <QSslConfiguration>
 #include <QSslSocket>
 #include <QStringList>
 #include <iostream>
@@ -58,8 +59,15 @@ int main(int argc, char** argv) {
     return 1;
   }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  // This method is marked deprecated in 5.15.
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/certs/godaddy-root.pem", QSsl::Pem));
+#else
+  QSslConfiguration config = QSslConfiguration::defaultConfiguration();
+  config.addCaCertificates(":/certs/godaddy-root.pem", QSsl::Pem);
+  QSslConfiguration::setDefaultConfiguration(config);
+#endif
 
   TagReaderWorker worker(&socket);
 
