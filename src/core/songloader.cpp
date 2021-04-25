@@ -213,7 +213,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
-  if (QFileInfo(filename).isDir()) {
+    QFileInfo info = QFileInfo(filename);
+    if (info.isDir()) {
     LoadLocalDirectory(filename);
     return Success;
   }
@@ -239,7 +240,8 @@ SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
     qLog(Debug) << "Parsing using" << parser->name();
 
     // It's a playlist!
-    LoadPlaylist(parser, filename);
+    file.reset();
+    songs_ = parser->Load(&file, filename, info.path());
     return Success;
   }
 
@@ -292,12 +294,6 @@ void SongLoader::EffectiveSongLoad(Song* song) {
     QString filename = song->url().toLocalFile();
     TagReaderClient::Instance()->ReadFileBlocking(filename, song);
   }
-}
-
-void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
-  QFile file(filename);
-  file.open(QIODevice::ReadOnly);
-  songs_ = parser->Load(&file, filename, QFileInfo(filename).path());
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {
@@ -643,7 +639,7 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
   // it returns false.
 
   NetworkAccessManager manager;
-  QNetworkRequest req = QNetworkRequest(url);
+  QNetworkRequest req(url);
 
   // Getting headers:
   QNetworkReply* const headers_reply = manager.head(req);
@@ -674,21 +670,6 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
     return false;
   }
 
-  // Save them to a temporary file...
-  QString playlist_filename =
-      Utilities::SaveToTemporaryFile(data_reply->readAll());
-  if (playlist_filename.isEmpty()) {
-    qLog(Error) << url.toString()
-                << "could not write contents to temporary file";
-    return false;
-  }
-
-  qLog(Debug) << url.toString() << "with MIME" << mime_type << "loading from"
-              << playlist_filename;
-
-  // ...and load it.
-  LoadPlaylist(parser, playlist_filename);
-
-  QFile(playlist_filename).remove();
+  songs_ = parser->Load(data_reply, QString(), QString());
   return true;
 }

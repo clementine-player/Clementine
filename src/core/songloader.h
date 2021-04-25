@@ -104,7 +104,6 @@ class SongLoader : public QObject {
   void EffectiveSongLoad(Song* song);
   Result LoadLocalPartial(const QString& filename);
   void LoadLocalDirectory(const QString& filename);
-  void LoadPlaylist(ParserBase* parser, const QString& filename);
 
   void AddAsRawStream();
 
