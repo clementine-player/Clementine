@@ -213,8 +213,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
-    QFileInfo info = QFileInfo(filename);
-    if (info.isDir()) {
+  QFileInfo info = QFileInfo(filename);
+  if (info.isDir()) {
     LoadLocalDirectory(filename);
     return Success;
   }
