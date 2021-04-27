@@ -672,6 +672,6 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
 
   qLog(Debug) << "Loading" << url.toString() << "with MIME" << mime_type;
 
-  songs_ = parser->Load(data_reply, QString(), QString());
+  songs_ = parser->Load(data_reply);
   return true;
 }
