@@ -213,7 +213,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
-  QFileInfo info = QFileInfo(filename);
+  QFileInfo info(filename);
   if (info.isDir()) {
     LoadLocalDirectory(filename);
     return Success;
@@ -254,7 +254,7 @@ SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));
-    for (Song song : song_list) {
+    for (Song& song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
     return Success;
@@ -633,8 +633,7 @@ void SongLoader::StopTypefindAsync(bool success) {
 
 bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
   // This function makes a remote request for the given URL and, if its MIME
-  // type corresponds to a known playlist type, saves the content to a
-  // temporary file, loads it, and returns true.
+  // type corresponds to a known playlist type, it loads it, and returns true.
   // If the URL does not point to a playlist file we could handle,
   // it returns false.
 
