@@ -99,7 +99,7 @@ class GioLister : public DeviceLister {
     QString mount_path;
     QString mount_uri;
     QString mount_name;
-    QStringList mount_icon_names;
+    QVariantList mount_icon_names;
     QString mount_uuid;
     quint64 filesystem_size;
     quint64 filesystem_free;
