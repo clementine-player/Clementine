@@ -79,8 +79,8 @@ class DeviceLister : public QObject {
   QUrl MakeUrlFromLocalPath(const QString& path) const;
   bool IsIpod(const QString& path) const;
 
-  QStringList GuessIconForPath(const QString& path);
-  QStringList GuessIconForModel(const QString& vendor, const QString& model);
+  QVariantList GuessIconForPath(const QString& path);
+  QVariantList GuessIconForModel(const QString& vendor, const QString& model);
 
  protected:
   QThread* thread_;

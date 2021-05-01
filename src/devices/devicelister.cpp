@@ -19,7 +19,6 @@
 
 #include <QDir>
 #include <QFile>
-#include <QStringList>
 #include <QThread>
 #include <QtDebug>
 
@@ -171,8 +170,8 @@ bool DeviceLister::IsIpod(const QString& path) const {
          QFile::exists(path + "/iTunes/iTunes_Control");
 }
 
-QStringList DeviceLister::GuessIconForPath(const QString& path) {
-  QStringList ret;
+QVariantList DeviceLister::GuessIconForPath(const QString& path) {
+  QVariantList ret;
 
 #ifdef HAVE_LIBGPOD
   if (IsIpod(path)) {
@@ -200,9 +199,9 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
   return ret;
 }
 
-QStringList DeviceLister::GuessIconForModel(const QString& vendor,
-                                            const QString& model) {
-  QStringList ret;
+QVariantList DeviceLister::GuessIconForModel(const QString& vendor,
+                                             const QString& model) {
+  QVariantList ret;
   if (vendor.startsWith("Google") && model.contains("Nexus")) {
     ret << "phone-google-nexus-one";
   }
