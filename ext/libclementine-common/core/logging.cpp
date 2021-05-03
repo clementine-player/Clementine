@@ -198,25 +198,30 @@ void SetLevels(const QString& levels) {
   }
 }
 
+static QString ExtractFunctionName(const QString& pretty_function) {
+  // https://gcc.gnu.org/onlinedocs/gcc/Function-Names.html
+  // For example "void a::sub(int)", this returns "a::sub".
+
+  const int end = pretty_function.indexOf('(');
+  // If end is -1, then this will search from end of the string.
+  const int start = pretty_function.lastIndexOf(' ', end) + 1;
+  return pretty_function.mid(start, end == -1 ? -1 : end - start);
+}
+
 static QString ParsePrettyFunction(const char* pretty_function) {
   // Get the class name out of the function name.
-  QString class_name = pretty_function;
-  const int paren = class_name.indexOf('(');
-  if (paren != -1) {
-    const int colons = class_name.lastIndexOf("::", paren);
-    if (colons != -1) {
-      class_name = class_name.left(colons);
+  const QString name = ExtractFunctionName(pretty_function);
+
+  const int colons = name.lastIndexOf("::");
+  if (colons != -1) {
+    if (!name.startsWith("{anonymous}")) {
+      return name.left(colons);
     } else {
-      class_name = class_name.left(paren);
+      return name.mid(colons + 2);
     }
+  } else {
+    return name;
   }
-
-  const int space = class_name.lastIndexOf(' ');
-  if (space != -1) {
-    class_name = class_name.mid(space + 1);
-  }
-
-  return class_name;
 }
 
 template <class T>
