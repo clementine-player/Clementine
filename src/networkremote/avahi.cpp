@@ -39,7 +39,9 @@ void AddService(const QString domain, const QString type, const QByteArray name,
                << "is set to 'yes' in avahi-daemon.conf";
     return;
   }
-  qLog(Debug) << path_reply.error();
+  if (path_reply.isError()) {
+    qLog(Debug) << path_reply.error();
+  }
   OrgFreedesktopAvahiEntryGroupInterface* entry_group_interface =
       new OrgFreedesktopAvahiEntryGroupInterface("org.freedesktop.Avahi",
                                                  path_reply.value().path(),
@@ -75,7 +77,11 @@ void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface) {
 }
 
 void LogCommit(QDBusPendingReply<> reply) {
-  qLog(Debug) << "Remote interface published on Avahi:" << reply.error();
+  if (reply.isError()) {
+    qLog(Debug) << "Commit error:" << reply.error();
+  } else {
+    qLog(Debug) << "Remote interface published on Avahi.";
+  }
 }
 
 }  // namespace
