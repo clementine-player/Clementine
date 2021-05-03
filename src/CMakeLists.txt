@@ -1342,6 +1342,7 @@ if(HAVE_MOODBAR)
 endif()
 
 if(HAVE_LIBMTP)
+  link_directories(${LIBMTP_LIBRARY_DIRS})
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)
 
