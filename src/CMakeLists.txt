@@ -1307,6 +1307,7 @@ if(HAVE_LIBLASTFM)
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
+  link_directories(${LIBGPOD_LIBRARY_DIRS})
   target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})
 endif(HAVE_LIBGPOD)
 
