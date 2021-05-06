@@ -291,10 +291,6 @@ optional_component(WIIMOTEDEV ON "Wiimote support"
   DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
-optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
-  DEPENDS "D-Bus support" Qt5DBus_FOUND
-)
-
 optional_component(UDISKS2 ON "Devices: UDisks2 backend"
   DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
