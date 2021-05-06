@@ -66,7 +66,7 @@ class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
         transcode_format_(Song::Type_Unknown),
         task_percentage_(-1) {}
 
-  // A device can be discovered in different ways (devicekit, gio, etc.)
+  // A device can be discovered in different ways (udisks2, gio, etc.)
   // Sometimes the same device is discovered more than once.  In this case
   // the device will have multiple "backends".
   struct Backend {

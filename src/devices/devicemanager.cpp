@@ -38,7 +38,6 @@
 #include "core/utilities.h"
 #include "devicedatabasebackend.h"
 #include "deviceinfo.h"
-#include "devicekitlister.h"
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
 #include "ui/iconloader.h"
@@ -96,9 +95,6 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
 // CD devices are detected via the DiskArbitration framework instead on Darwin.
 #if defined(HAVE_AUDIOCD) && !defined(Q_OS_DARWIN)
   AddLister(new CddaLister);
-#endif
-#ifdef HAVE_DEVICEKIT
-  AddLister(new DeviceKitLister);
 #endif
 #ifdef HAVE_UDISKS2
   AddLister(new Udisks2Lister);
