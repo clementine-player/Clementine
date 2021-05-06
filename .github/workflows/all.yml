@@ -890,6 +890,31 @@ jobs:
       - uses: actions/checkout@v1.2.0
       - name: Install dependencies
         run: brew bundle
+
+      - name: Build libgpod
+        shell: bash
+        env:
+          PERL_MM_USE_DEFAULT: 1
+        run: |
+          sudo cpan install XML::Parser
+          wget https://downloads.sourceforge.net/project/gtkpod/libgpod/libgpod-0.8/libgpod-0.8.3.tar.bz2
+          tar -xvf libgpod-0.8.3.tar.bz2
+          cd libgpod-0.8.3
+          wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/autogen.sh
+          wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/patch-tools-generic-callout.c.diff
+          wget http://files.strawberrymusicplayer.org/patches/libgpod-libplist.patch
+          patch -p0 < patch-tools-generic-callout.c.diff
+          patch -p1 < libgpod-libplist.patch
+          chmod u+x autogen.sh
+          ./autogen.sh
+          ./configure --disable-more-warnings \
+                      --disable-silent-rules \
+                      --disable-udev \
+                      --disable-pygobject \
+                      --with-python=no
+          make -j2
+          sudo make install
+
       - name: Fix liblastfm includes
         run: ln -s /usr/local/include/lastfm /usr/local/include/lastfm5
       - name: cmake
