@@ -1411,7 +1411,7 @@ msgstr "설정..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "사용/중지 실행으로 Wii 원격 연결"
 
-#: devices/devicemanager.cpp:266 devices/devicemanager.cpp:271
+#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
 msgid "Connect device"
 msgstr "장치 연결"
 
@@ -1609,7 +1609,7 @@ msgstr "사용자 정의 메시지 설정"
 msgid "Custom..."
 msgstr "사용자 정의..."
 
-#: devices/devicekitlister.cpp:126 devices/udisks2lister.cpp:81
+#: devices/udisks2lister.cpp:81
 msgid "D-Bus path"
 msgstr "D-Bus 패스"
 
@@ -1749,7 +1749,7 @@ msgstr "세부 내용..."
 msgid "Detect"
 msgstr "검색"
 
-#: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
+#: devices/giolister.cpp:182
 msgid "Device"
 msgstr "장치"
 
@@ -2759,7 +2759,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "활성화된 경우, 재생 목록 보기에서 선택한 노래를 클릭하면 태그 값을 직접 편집할 수 있습니다"
 
-#: devices/devicemanager.cpp:522 devices/devicemanager.cpp:534
+#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -3374,7 +3374,7 @@ msgstr "자주 재생됨"
 msgid "Mount point"
 msgstr "마운트 지점"
 
-#: devices/devicekitlister.cpp:128 devices/udisks2lister.cpp:83
+#: devices/udisks2lister.cpp:83
 msgid "Mount points"
 msgstr "마운트 지점"
 
@@ -4673,7 +4673,7 @@ msgstr "시각화 선택..."
 msgid "Select..."
 msgstr "선택..."
 
-#: devices/devicekitlister.cpp:127 devices/udisks2lister.cpp:82
+#: devices/udisks2lister.cpp:82
 msgid "Serial number"
 msgstr "시리얼 넘버"
 
@@ -5343,20 +5343,20 @@ msgstr "Clementine이 지원하는 파일 형식을 보려면 먼저 이 장치�
 msgid "This device supports the following file formats:"
 msgstr "이 장치는 다음의 파일 형식을 지원합니다:"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
 msgid "This device will not work properly"
 msgstr "이 기기는 완벽하게 작동하지 않을 수 있음."
 
-#: devices/devicemanager.cpp:519
+#: devices/devicemanager.cpp:515
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
-#: devices/devicemanager.cpp:531
+#: devices/devicemanager.cpp:527
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
-#: devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:263
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5370,7 +5370,7 @@ msgstr "이 옵션은 환경설정의 \"동작\" 에서 변경할 수 있습니�
 msgid "This stream is for paid subscribers only"
 msgstr "이 스트림은 유료 subscribers만 사용할 수 있습니다"
 
-#: devices/devicemanager.cpp:548
+#: devices/devicemanager.cpp:544
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "이 장치의 형태는 지원되지 않습니다: %1"

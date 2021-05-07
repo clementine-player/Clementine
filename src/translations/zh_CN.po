@@ -1408,7 +1408,7 @@ msgstr "配置..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "连接 Wii 遥控器"
 
-#: devices/devicemanager.cpp:266 devices/devicemanager.cpp:271
+#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
 msgid "Connect device"
 msgstr "连接设备"
 
@@ -1606,7 +1606,7 @@ msgstr "自定义消息设置"
 msgid "Custom..."
 msgstr "自定义..."
 
-#: devices/devicekitlister.cpp:126 devices/udisks2lister.cpp:81
+#: devices/udisks2lister.cpp:81
 msgid "D-Bus path"
 msgstr "D-Bus 路径"
 
@@ -1746,7 +1746,7 @@ msgstr "详情..."
 msgid "Detect"
 msgstr ""
 
-#: devices/devicekitlister.cpp:129 devices/giolister.cpp:182
+#: devices/giolister.cpp:182
 msgid "Device"
 msgstr "设备"
 
@@ -2756,7 +2756,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "如果选择启用，在播放列表中点击一个已选择的歌曲则会直接打开标签编辑"
 
-#: devices/devicemanager.cpp:522 devices/devicemanager.cpp:534
+#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -3371,7 +3371,7 @@ msgstr "最常播放"
 msgid "Mount point"
 msgstr "挂载点"
 
-#: devices/devicekitlister.cpp:128 devices/udisks2lister.cpp:83
+#: devices/udisks2lister.cpp:83
 msgid "Mount points"
 msgstr "挂载点"
 
@@ -4670,7 +4670,7 @@ msgstr "选择视觉效果..."
 msgid "Select..."
 msgstr "选择……"
 
-#: devices/devicekitlister.cpp:127 devices/udisks2lister.cpp:82
+#: devices/udisks2lister.cpp:82
 msgid "Serial number"
 msgstr "序列号"
 
@@ -5340,20 +5340,20 @@ msgstr "此设备必须在连接并打开之前，Clementine可以检测它支�
 msgid "This device supports the following file formats:"
 msgstr "该设备支持以下文件格式:"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
 msgid "This device will not work properly"
 msgstr "这个设备将不会正常工作"
 
-#: devices/devicemanager.cpp:519
+#: devices/devicemanager.cpp:515
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "这个一部 MTP 设备，但是您可以通过 Clementine 来编辑而无需 libmtp 的支持。"
 
-#: devices/devicemanager.cpp:531
+#: devices/devicemanager.cpp:527
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "这是 iPod 设备，但 Clementine 编译时未包含 libgpod 支持。"
 
-#: devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:263
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5367,7 +5367,7 @@ msgstr "这些选项可以在“行为”设置中修改"
 msgid "This stream is for paid subscribers only"
 msgstr "该流媒体只有付费用户才能收听"
 
-#: devices/devicemanager.cpp:548
+#: devices/devicemanager.cpp:544
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "这种设备不被支持： %1"
