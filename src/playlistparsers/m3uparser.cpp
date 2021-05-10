@@ -18,6 +18,8 @@
 #include "m3uparser.h"
 
 #include <QBuffer>
+#include <QRegExp>
+#include <QTextCodec>
 #include <QtDebug>
 
 #include "core/logging.h"
@@ -34,22 +36,21 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
   M3UType type = STANDARD;
   Metadata current_metadata;
 
-  QString data = QString::fromUtf8(device->readAll());
-  data.replace('\r', '\n');
-  data.replace("\n\n", "\n");
-  QByteArray bytes = data.toUtf8();
-  QBuffer buffer(&bytes);
-  buffer.open(QIODevice::ReadOnly);
+  // Unicode auto-detection is enabled in QTextStream by default.
+  QTextStream playlist_stream(device);
+  QString data = playlist_stream.readAll();
+  qLog(Debug) << "Detected codec" << playlist_stream.codec()->name();
 
-  QString line = QString::fromUtf8(buffer.readLine()).trimmed();
-  if (line.startsWith("#EXTM3U")) {
-    // This is in extended M3U format.
-    type = EXTENDED;
-    line = QString::fromUtf8(buffer.readLine()).trimmed();
-  }
+  // iTune playlists use \r newlines. These aren't handled by the Qt readLine
+  // methods.
+  QStringList lines = data.split(QRegExp("\n|\r|\r\n"));
 
-  forever {
-    if (line.startsWith('#')) {
+  for (int i = 0; i < lines.count(); i++) {
+    QString line = lines[i].trimmed();
+    if (i == 0 && line.startsWith("#EXTM3U")) {
+      // This is in extended M3U format.
+      type = EXTENDED;
+    } else if (line.startsWith('#')) {
       // Extended info or comment.
       if (type == EXTENDED && line.startsWith("#EXT")) {
         if (!ParseMetadata(line, &current_metadata)) {
@@ -71,10 +72,6 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
 
       current_metadata = Metadata();
     }
-    if (buffer.atEnd()) {
-      break;
-    }
-    line = QString::fromUtf8(buffer.readLine()).trimmed();
   }
 
   return ret;
