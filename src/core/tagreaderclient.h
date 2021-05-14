@@ -21,6 +21,8 @@
 #ifndef CORE_TAGREADERCLIENT_H_
 #define CORE_TAGREADERCLIENT_H_
 
+#include <memory.h>
+
 #include <QStringList>
 
 #include "core/messagehandler.h"
@@ -30,12 +32,14 @@
 
 class QLocalServer;
 class QProcess;
+class SongPathParser;
 
 class TagReaderClient : public QObject {
   Q_OBJECT
 
  public:
   explicit TagReaderClient(QObject* parent = nullptr);
+  virtual ~TagReaderClient();
 
   typedef AbstractMessageHandler<cpb::tagreader::Message> HandlerType;
   typedef HandlerType::ReplyType ReplyType;
@@ -79,6 +83,7 @@ class TagReaderClient : public QObject {
 
   WorkerPool<HandlerType>* worker_pool_;
   QList<cpb::tagreader::Message> message_queue_;
+  std::unique_ptr<SongPathParser> path_parser_;
 };
 
 typedef TagReaderClient::ReplyType TagReaderReply;
