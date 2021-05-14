@@ -98,6 +98,7 @@ set(SOURCES
   core/signalchecker.cpp
   core/song.cpp
   core/songloader.cpp
+  core/songpathparser.cpp
   core/stylesheetloader.cpp
   core/tagreaderclient.cpp
   core/taskmanager.cpp

@@ -126,66 +126,7 @@ namespace {
 const char* kMP4_OriginalYear_ID = "----:com.apple.iTunes:ORIGINAL YEAR";
 const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
-
-// Helpers for GuessArtistAndTitle()
-QString WithoutExtension(const QString& s) {
-  if (s.isEmpty()) return s;
-  const int i = s.lastIndexOf('.');
-  if (i < 0) return s;
-  return s.left(i);
-}
-
-QString ReplaceUnderscoresWithSpaces(const QString& s) {
-  QString ret(s);
-  ret.replace('_', ' ');
-  return ret;
-}
-
 }  // namespace
-
-void TagReader::GuessArtistAndTitle(cpb::tagreader::SongMetadata* song) const {
-  QString artist = QString::fromStdString(song->artist());
-  QString title = QString::fromStdString(song->title());
-  const QString bn = QString::fromStdString(song->basefilename());
-  if (!artist.isEmpty() || !title.isEmpty()) return;
-  if (bn.isEmpty()) return;
-
-  QRegExp rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
-  if (rx.indexIn(bn) >= 0) {
-    artist = rx.cap(1);
-    title = rx.cap(2);
-  } else {
-    title = WithoutExtension(bn);
-  }
-
-  artist = ReplaceUnderscoresWithSpaces(artist);
-  title = ReplaceUnderscoresWithSpaces(title);
-  artist = artist.trimmed();
-  title = title.trimmed();
-  if (!artist.isEmpty()) {
-    song->set_artist(artist.toUtf8().data());
-  }
-  if (!title.isEmpty()) {
-    song->set_title(title.toUtf8().data());
-  }
-}
-
-void TagReader::GuessAlbum(const QFileInfo& info,
-                           cpb::tagreader::SongMetadata* song) const {
-  QString album = QString::fromStdString(song->album());
-  if (!album.isEmpty()) return;
-  const QString str_dir = info.absoluteDir().absolutePath();
-  if (str_dir.isEmpty()) return;
-  const QFileInfo dir(str_dir);
-  const QString dir_bn = dir.baseName();
-  if (dir_bn.isEmpty()) return;
-  album = ReplaceUnderscoresWithSpaces(dir_bn);
-  album = album.trimmed();
-  if (album.isEmpty()) return;
-  const QString al = album.toLower();
-  if (al == "various" || al == "downloads" || al == "music") return;
-  song->set_album(album.toUtf8().data());
-}
 
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory), kEmbeddedCover("(embedded)") {}
@@ -233,8 +174,6 @@ void TagReader::ReadFile(const QString& filename,
 
     // Try fallback -- GME filetypes
     GME::ReadFile(info, song);
-    GuessArtistAndTitle(song);
-    GuessAlbum(info, song);
     return;
   }
 
@@ -248,8 +187,6 @@ void TagReader::ReadFile(const QString& filename,
     song->set_track(tag->track());
     song->set_valid(true);
   }
-  GuessArtistAndTitle(song);
-  GuessAlbum(info, song);
 
   QString disc;
   QString compilation;
