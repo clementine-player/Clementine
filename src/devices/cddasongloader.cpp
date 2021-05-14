@@ -49,6 +49,7 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
 void CddaSongLoader::LoadSongs() {
   QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
 }
+
 void CddaSongLoader::LoadSongsFromCdda() {
   QMutexLocker locker(&mutex_load_);
   cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
@@ -155,6 +156,8 @@ void CddaSongLoader::LoadSongsFromCdda() {
           songs[i++].set_length_nanosec(duration);
         }
       }
+      g_list_free(entries);
+      gst_toc_unref(toc);
     }
     gst_message_unref(msg_toc);
   }
@@ -172,9 +175,10 @@ void CddaSongLoader::LoadSongsFromCdda() {
       emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
 
       g_free(string_mb);
-      gst_message_unref(msg_tag);
-      gst_tag_list_free(tags);
     }
+
+    gst_message_unref(msg_tag);
+    gst_tag_list_free(tags);
   }
 
   gst_element_set_state(pipeline, GST_STATE_NULL);
