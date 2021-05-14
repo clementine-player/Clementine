@@ -47,7 +47,6 @@ Ripper::Ripper(QObject* parent)
       files_tagged_(0) {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
 
-  connect(this, SIGNAL(RippingComplete()), transcoder_, SLOT(Start()));
   connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
           SLOT(TranscodingJobComplete(QString, QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()),
@@ -252,6 +251,7 @@ void Ripper::Rip() {
     transcoder_->AddJob(it->temporary_filename, it->preset,
                         it->transcoded_filename);
   }
+  transcoder_->Start();
   emit(RippingComplete());
 }
 
