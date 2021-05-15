@@ -57,7 +57,8 @@ class RipCDDialog : public QDialog {
   void Cancelled();
   void SetupProgressBarLimits(int min, int max);
   void UpdateProgressBar(int progress);
-  // Initializes track list table based on preliminary song list with durations but without metadata.
+  // Initializes track list table based on preliminary song list with durations
+  // but without metadata.
   void BuildTrackListTable(const SongList& songs);
   // Update track list based on metadata.
   void UpdateTrackListTable(const SongList& songs);

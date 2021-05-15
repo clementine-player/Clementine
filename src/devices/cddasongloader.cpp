@@ -123,12 +123,12 @@ void CddaSongLoader::LoadSongsFromCdda() {
   GstMessage* msg = nullptr;
   GstMessage* msg_toc = nullptr;
   GstMessage* msg_tag = nullptr;
-  GstMessageType msg_filter = static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
-  while ((msg = gst_bus_timed_pop_filtered(
-              GST_ELEMENT_BUS(pipeline), 10 * GST_SECOND,
-              msg_filter))) {
-
-    msg_filter = static_cast<GstMessageType>(static_cast<int>(msg_filter) ^ static_cast<int>(GST_MESSAGE_TYPE(msg)));
+  GstMessageType msg_filter =
+      static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
+  while ((msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
+                                           10 * GST_SECOND, msg_filter))) {
+    msg_filter = static_cast<GstMessageType>(
+        static_cast<int>(msg_filter) ^ static_cast<int>(GST_MESSAGE_TYPE(msg)));
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
       if (msg_toc)
         gst_message_unref(msg_toc);  // Shouldn't happen, but just in case

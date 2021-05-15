@@ -284,7 +284,8 @@ void RipCDDialog::UpdateTrackListTable(const SongList& songs) {
   if (track_names_.length() == songs.length()) {
     BuildTrackListTable(songs);
   } else {
-    qLog(Error) << "Number of tracks in metadata does not match number of songs on disc!";
+    qLog(Error) << "Number of tracks in metadata does not match number of "
+                   "songs on disc!";
   }
 }
 
