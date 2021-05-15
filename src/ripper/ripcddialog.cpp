@@ -60,7 +60,6 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       loader_(new CddaSongLoader(QUrl(), this)),
       mediaChangedWatchingThread_(*this),
       mutex_() {
-
   QMutexLocker l(&mutex_);
   // Init
   ui_->setupUi(this);
@@ -138,7 +137,8 @@ RipCDDialog::RipCDDialog(QWidget* parent)
 }
 
 RipCDDialog::~RipCDDialog() {
-  QMutexLocker l(&mutex_);  // ensure now one is holding a lock on the mutex when destroying..
+  QMutexLocker l(&mutex_);  // ensure now one is holding a lock on the mutex
+                            // when destroying..
 }
 
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
@@ -344,8 +344,9 @@ void RipCDDialog::ResetDialog() {
   ui_->discLineEdit->clear();
 }
 
-RipCDDialog::MediaChangedPollingThread::MediaChangedPollingThread(RipCDDialog& dialog)
-  : QThread(&dialog), dialog_(dialog) { }
+RipCDDialog::MediaChangedPollingThread::MediaChangedPollingThread(
+    RipCDDialog& dialog)
+    : QThread(&dialog), dialog_(dialog) {}
 
 RipCDDialog::MediaChangedPollingThread::~MediaChangedPollingThread() {
   requestInterruption();
@@ -354,13 +355,13 @@ RipCDDialog::MediaChangedPollingThread::~MediaChangedPollingThread() {
 
 void RipCDDialog::MediaChangedPollingThread::run() {
   while (!isInterruptionRequested()) {
-      if (dialog_.ripper_->MediaChanged()) {
-        qLog(Debug) << "media changed!";
-        dialog_.ResetDialog();
-        if (dialog_.CheckCDIOIsValid()) {
-          dialog_.loader_->LoadSongs();
-        }
+    if (dialog_.ripper_->MediaChanged()) {
+      qLog(Debug) << "media changed!";
+      dialog_.ResetDialog();
+      if (dialog_.CheckCDIOIsValid()) {
+        dialog_.loader_->LoadSongs();
       }
+    }
     msleep(500);
   }
 }

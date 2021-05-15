@@ -77,15 +77,14 @@ class RipCDDialog : public QDialog {
   void MediaChangedPoller();
 
   class MediaChangedPollingThread : public QThread {
-
-  public:
+   public:
     MediaChangedPollingThread(RipCDDialog& dialog);
     ~MediaChangedPollingThread() override;
 
-  protected:
+   protected:
     void run() override;
 
-  private:
+   private:
     RipCDDialog& dialog_;
   };
 
