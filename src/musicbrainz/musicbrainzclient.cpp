@@ -156,7 +156,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
             ret << track;
           }
         }
-        break; // stop after consuming one medium with correct discid!
+        break;  // stop after consuming one medium with correct discid!
       } else {
         Utilities::ConsumeCurrentElement(&reader);
       }
