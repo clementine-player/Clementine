@@ -128,6 +128,7 @@ class Ripper : public QObject {
   int files_tagged_;
   QList<TrackInformation> tracks_;
   AlbumInformation album_;
+  mutable QMutex cdio_mutex_;
 };
 
 #endif  // SRC_RIPPER_RIPPER_H_

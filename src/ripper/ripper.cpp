@@ -54,7 +54,10 @@ Ripper::Ripper(QObject* parent)
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
 }
 
-Ripper::~Ripper() { cdio_destroy(cdio_); }
+Ripper::~Ripper() {
+  QMutexLocker cdio_lock(&cdio_mutex_);
+  cdio_destroy(cdio_);
+}
 
 void Ripper::AddTrack(int track_number, const QString& title,
                       const QString& transcoded_filename,
@@ -79,6 +82,7 @@ void Ripper::SetAlbumInformation(const QString& album, const QString& artist,
 }
 
 int Ripper::TracksOnDisc() const {
+  QMutexLocker cdio_lock(&cdio_mutex_);
   int number_of_tracks = cdio_get_num_tracks(cdio_);
   // Return zero tracks if there is an error, e.g. no medium found.
   if (number_of_tracks == CDIO_INVALID_TRACK) number_of_tracks = 0;
@@ -90,6 +94,7 @@ int Ripper::AddedTracks() const { return tracks_.length(); }
 void Ripper::ClearTracks() { tracks_.clear(); }
 
 bool Ripper::CheckCDIOIsValid() {
+  QMutexLocker cdio_lock(&cdio_mutex_);
   if (cdio_) {
     cdio_destroy(cdio_);
   }
@@ -103,6 +108,7 @@ bool Ripper::CheckCDIOIsValid() {
 }
 
 bool Ripper::MediaChanged() const {
+  QMutexLocker cdio_lock(&cdio_mutex_);
   return cdio_ && cdio_get_media_changed(cdio_);
 }
 
@@ -213,6 +219,8 @@ void Ripper::Rip() {
 
   // Set up progress bar
   UpdateProgress();
+
+  QMutexLocker cdio_lock(&cdio_mutex_);
 
   for (QList<TrackInformation>::iterator it = tracks_.begin();
        it != tracks_.end(); ++it) {

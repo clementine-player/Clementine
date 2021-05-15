@@ -57,7 +57,11 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
       working_(false),
-      loader_(new CddaSongLoader(QUrl(), this)) {
+      loader_(new CddaSongLoader(QUrl(), this)),
+      mediaChangedWatchingThread_(*this),
+      mutex_() {
+
+  QMutexLocker l(&mutex_);
   // Init
   ui_->setupUi(this);
 
@@ -128,9 +132,14 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       break;
     }
   }
+
+  // Start thread for polling
+  mediaChangedWatchingThread_.start();
 }
 
-RipCDDialog::~RipCDDialog() {}
+RipCDDialog::~RipCDDialog() {
+  QMutexLocker l(&mutex_);  // ensure now one is holding a lock on the mutex when destroying..
+}
 
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
 
@@ -257,6 +266,7 @@ void RipCDDialog::UpdateProgressBar(int progress) {
 }
 
 void RipCDDialog::BuildTrackListTable(const SongList& songs) {
+  QMutexLocker l(&mutex_);
   checkboxes_.clear();
   track_names_.clear();
 
@@ -282,6 +292,7 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
 
 void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
   Q_ASSERT(songs.length() > 0);
+  QMutexLocker l(&mutex_);
 
   const Song& song = songs.first();
   ui_->albumLineEdit->setText(song.album());
@@ -324,10 +335,32 @@ QString RipCDDialog::ParseFileFormatString(const QString& file_format,
 }
 
 void RipCDDialog::ResetDialog() {
+  QMutexLocker l(&mutex_);
   ui_->tableWidget->setRowCount(0);
   ui_->albumLineEdit->clear();
   ui_->artistLineEdit->clear();
   ui_->genreLineEdit->clear();
   ui_->yearLineEdit->clear();
   ui_->discLineEdit->clear();
+}
+
+RipCDDialog::MediaChangedPollingThread::MediaChangedPollingThread(RipCDDialog& dialog)
+  : QThread(&dialog), dialog_(dialog) { }
+
+RipCDDialog::MediaChangedPollingThread::~MediaChangedPollingThread() {
+  requestInterruption();
+  wait();
+}
+
+void RipCDDialog::MediaChangedPollingThread::run() {
+  while (!isInterruptionRequested()) {
+      if (dialog_.ripper_->MediaChanged()) {
+        qLog(Debug) << "media changed!";
+        dialog_.ResetDialog();
+        if (dialog_.CheckCDIOIsValid()) {
+          dialog_.loader_->LoadSongs();
+        }
+      }
+    msleep(500);
+  }
 }

@@ -20,6 +20,7 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QThread>
 #include <memory>
 
 #include "core/song.h"
@@ -73,6 +74,21 @@ class RipCDDialog : public QDialog {
   void SetWorking(bool working);
   void ResetDialog();
 
+  void MediaChangedPoller();
+
+  class MediaChangedPollingThread : public QThread {
+
+  public:
+    MediaChangedPollingThread(RipCDDialog& dialog);
+    ~MediaChangedPollingThread() override;
+
+  protected:
+    void run() override;
+
+  private:
+    RipCDDialog& dialog_;
+  };
+
   QList<QCheckBox*> checkboxes_;
   QList<QLineEdit*> track_names_;
   QString last_add_dir_;
@@ -83,5 +99,7 @@ class RipCDDialog : public QDialog {
   Ripper* ripper_;
   bool working_;
   CddaSongLoader* loader_;
+  MediaChangedPollingThread mediaChangedWatchingThread_;
+  QMutex mutex_;  // mutex to control access to track list/metadata updates
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_
