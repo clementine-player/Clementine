@@ -121,8 +121,8 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
-          SLOT(JobComplete(QString, QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
+          SLOT(JobComplete(QUrl, QString, bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 }
@@ -162,7 +162,8 @@ void TranscodeDialog::Start() {
     QFileInfo input_fileinfo(
         file_model->index(i, 0).data(Qt::UserRole).toString());
     QString output_filename = GetOutputFileName(input_fileinfo, preset);
-    transcoder_->AddJob(input_fileinfo.filePath(), preset, output_filename);
+    transcoder_->AddJob(QUrl::fromLocalFile(input_fileinfo.filePath()), preset,
+                        output_filename);
   }
 
   // Set up the progressbar
@@ -195,7 +196,7 @@ void TranscodeDialog::PipelineDumpAction(bool checked) {
   }
 }
 
-void TranscodeDialog::JobComplete(const QString& input, const QString& output,
+void TranscodeDialog::JobComplete(const QUrl& input, const QString& output,
                                   bool success) {
   if (success)
     finished_success_++;
@@ -210,7 +211,7 @@ void TranscodeDialog::JobComplete(const QString& input, const QString& output,
 void TranscodeDialog::UpdateProgress() {
   int progress = (finished_success_ + finished_failed_) * 100;
 
-  QMap<QString, float> current_jobs = transcoder_->GetProgress();
+  QMap<QUrl, float> current_jobs = transcoder_->GetProgress();
   for (float value : current_jobs.values()) {
     progress += qBound(0, int(value * 100), 99);
   }

@@ -19,6 +19,7 @@
 
 #include <QFile>
 #include <QMutexLocker>
+#include <QUrl>
 #include <QtConcurrentRun>
 
 #include "core/closure.h"
@@ -47,8 +48,8 @@ Ripper::Ripper(CdIo_t* cdio, QObject* parent)
       finished_failed_(0),
       files_tagged_(0) {
   Q_ASSERT(cdio_);  // TODO: error handling
-  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
-          SLOT(TranscodingJobComplete(QString, QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
+          SLOT(TranscodingJobComplete(QUrl, QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()),
           SLOT(AllTranscodingJobsComplete()));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
@@ -111,7 +112,7 @@ void Ripper::Cancel() {
   emit Cancelled();
 }
 
-void Ripper::TranscodingJobComplete(const QString& input, const QString& output,
+void Ripper::TranscodingJobComplete(const QUrl& input, const QString& output,
                                     bool success) {
   if (success)
     finished_success_++;
@@ -125,7 +126,8 @@ void Ripper::TranscodingJobComplete(const QString& input, const QString& output,
   // file later on.
   for (QList<TrackInformation>::iterator it = tracks_.begin();
        it != tracks_.end(); ++it) {
-    if (it->temporary_filename == input) {
+    Q_ASSERT(input.isLocalFile());
+    if (it->temporary_filename == input.toLocalFile()) {
       it->transcoded_filename = output;
     }
   }
@@ -232,7 +234,7 @@ void Ripper::Rip() {
     UpdateProgress();
 
     it->temporary_filename = filename;
-    transcoder_->AddJob(it->temporary_filename, it->preset,
+    transcoder_->AddJob(QUrl::fromLocalFile(it->temporary_filename), it->preset,
                         it->transcoded_filename, it->overwrite_existing);
   }
   transcoder_->Start();
@@ -249,7 +251,7 @@ void Ripper::SetupProgressInterval() {
 
 void Ripper::UpdateProgress() {
   int progress = (finished_success_ + finished_failed_) * 100;
-  QMap<QString, float> current_jobs = transcoder_->GetProgress();
+  QMap<QUrl, float> current_jobs = transcoder_->GetProgress();
   for (float value : current_jobs.values()) {
     progress += qBound(0, static_cast<int>(value * 100), 99);
   }

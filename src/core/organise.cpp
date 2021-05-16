@@ -74,8 +74,8 @@ void Organise::Start() {
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
-  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
-          SLOT(FileTranscoded(QString, QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
+          SLOT(FileTranscoded(QUrl, QString, bool)));
 
   moveToThread(thread_);
   thread_->start();
@@ -177,7 +177,7 @@ void Organise::ProcessSomeFiles() {
         // Start the transcoding - this will happen in the background and
         // FileTranscoded() will get called when it's done.  At that point the
         // task will get re-added to the pending queue with the new filename.
-        transcoder_->AddJob(task.song_info_.song_.url().toLocalFile(), preset,
+        transcoder_->AddJob(task.song_info_.song_.url(), preset,
                             task.transcoded_filename_);
         transcoder_->Start();
         continue;
@@ -262,11 +262,12 @@ void Organise::UpdateProgress() {
   const int total = task_count_ * 100;
 
   // Update transcoding progress
-  QMap<QString, float> transcode_progress = transcoder_->GetProgress();
-  for (const QString& filename : transcode_progress.keys()) {
+  QMap<QUrl, float> transcode_progress = transcoder_->GetProgress();
+  for (const QUrl& fileurl : transcode_progress.keys()) {
+    QString filename = fileurl.toLocalFile();
     if (!tasks_transcoding_.contains(filename)) continue;
     tasks_transcoding_[filename].transcode_progress_ =
-        transcode_progress[filename];
+        transcode_progress[fileurl];
   }
 
   // Count the progress of all tasks that are in the queue.  Files that need
@@ -287,14 +288,17 @@ void Organise::UpdateProgress() {
   task_manager_->SetTaskProgress(task_id_, progress, total);
 }
 
-void Organise::FileTranscoded(const QString& input, const QString& output,
+void Organise::FileTranscoded(const QUrl& input, const QString& output,
                               bool success) {
-  qLog(Info) << "File finished" << input << success;
+  Q_ASSERT(input.isLocalFile());  // organise only handles local files
+  QString input_file_path = input.toLocalFile();
+
+  qLog(Info) << "File finished" << input_file_path << success;
   transcode_progress_timer_.stop();
 
-  Task task = tasks_transcoding_.take(input);
+  Task task = tasks_transcoding_.take(input_file_path);
   if (!success) {
-    files_with_errors_ << input;
+    files_with_errors_ << input_file_path;
   } else {
     tasks_pending_ << task;
   }
