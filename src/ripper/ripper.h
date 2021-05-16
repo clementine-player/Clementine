@@ -94,7 +94,6 @@ class Ripper : public QObject {
     QString title;
     QString transcoded_filename;
     TranscoderPreset preset;
-    QString temporary_filename;
     bool overwrite_existing;
   };
 
@@ -109,16 +108,13 @@ class Ripper : public QObject {
     Song::FileType type;
   };
 
-  void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   void Rip();
   void SetupProgressInterval();
   void UpdateProgress();
-  void RemoveTemporaryDirectory();
   void TagFiles();
 
   CdIo_t* cdio_;
   Transcoder* transcoder_;
-  QString temporary_directory_;
   bool cancel_requested_;
   QMutex mutex_;
   int finished_success_;
