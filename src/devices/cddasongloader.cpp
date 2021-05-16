@@ -156,7 +156,6 @@ void CddaSongLoader::LoadSongsFromCdda() {
           songs[i++].set_length_nanosec(duration);
         }
       }
-      g_list_free(entries);
       gst_toc_unref(toc);
     }
     gst_message_unref(msg_toc);
