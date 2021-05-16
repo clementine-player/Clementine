@@ -121,63 +121,54 @@ void CddaSongLoader::LoadSongsFromCdda() {
 
   // Get TOC and TAG messages
   GstMessage* msg = nullptr;
-  GstMessage* msg_toc = nullptr;
-  GstMessage* msg_tag = nullptr;
   GstMessageType msg_filter =
       static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
-  while ((msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
+  while (msg_filter &&
+         (msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
                                            10 * GST_SECOND, msg_filter))) {
-    msg_filter = static_cast<GstMessageType>(
-        static_cast<int>(msg_filter) ^ static_cast<int>(GST_MESSAGE_TYPE(msg)));
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
-      if (msg_toc)
-        gst_message_unref(msg_toc);  // Shouldn't happen, but just in case
-      msg_toc = msg;
-    } else if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TAG) {
-      if (msg_tag) gst_message_unref(msg_tag);
-      msg_tag = msg;
-    }
-  }
-
-  // Handle TOC message: get tracks duration
-  if (msg_toc) {
-    GstToc* toc;
-    gst_message_parse_toc(msg_toc, &toc, nullptr);
-    if (toc) {
-      GList* entries = gst_toc_get_entries(toc);
-      if (entries && songs.size() <= g_list_length(entries)) {
-        int i = 0;
-        for (GList* node = entries; node != nullptr; node = node->next) {
-          GstTocEntry* entry = static_cast<GstTocEntry*>(node->data);
-          quint64 duration = 0;
-          gint64 start, stop;
-          if (gst_toc_entry_get_start_stop_times(entry, &start, &stop))
-            duration = stop - start;
-          songs[i++].set_length_nanosec(duration);
+      // Handle TOC message: get tracks duration
+      GstToc* toc;
+      gst_message_parse_toc(msg, &toc, nullptr);
+      if (toc) {
+        GList* entries = gst_toc_get_entries(toc);
+        if (entries && songs.size() <= g_list_length(entries)) {
+          int i = 0;
+          for (GList* node = entries; node != nullptr; node = node->next) {
+            GstTocEntry* entry = static_cast<GstTocEntry*>(node->data);
+            quint64 duration = 0;
+            gint64 start, stop;
+            if (gst_toc_entry_get_start_stop_times(entry, &start, &stop))
+              duration = stop - start;
+            songs[i++].set_length_nanosec(duration);
+          }
+          gst_toc_unref(toc);
         }
+        msg_filter = static_cast<GstMessageType>(static_cast<int>(msg_filter) ^
+                                                 GST_MESSAGE_TOC);
       }
-      gst_toc_unref(toc);
+      emit SongsDurationLoaded(songs);
+
+    } else if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TAG) {
+      // Handle TAG message: generate MusicBrainz DiscId
+
+      GstTagList* tags = nullptr;
+      gst_message_parse_tag(msg, &tags);
+      char* string_mb = nullptr;
+      if (gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
+                                  &string_mb)) {
+        QString musicbrainz_discid(string_mb);
+        qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
+        emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
+
+        g_free(string_mb);
+
+        msg_filter = static_cast<GstMessageType>(static_cast<int>(msg_filter) ^
+                                                 GST_MESSAGE_TAG);
+      }
+      gst_tag_list_free(tags);
     }
-    gst_message_unref(msg_toc);
-  }
-  emit SongsDurationLoaded(songs);
-
-  // Handle TAG message: generate MusicBrainz DiscId
-  if (msg_tag) {
-    GstTagList* tags = nullptr;
-    gst_message_parse_tag(msg_tag, &tags);
-    char* string_mb = nullptr;
-    if (gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
-                                &string_mb)) {
-      QString musicbrainz_discid(string_mb);
-      qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
-      emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
-
-      g_free(string_mb);
-    }
-
-    gst_message_unref(msg_tag);
-    gst_tag_list_free(tags);
+    gst_message_unref(msg);
   }
 
   gst_element_set_state(pipeline, GST_STATE_NULL);
