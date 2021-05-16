@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2021, Jim Broadus <jbroadus@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,32 +15,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BEHAVIOURSETTINGSPAGE_H
-#define BEHAVIOURSETTINGSPAGE_H
-
-#include <QMap>
+#ifndef SONGMETADATASETTINGSPAGE_H
+#define SONGMETADATASETTINGSPAGE_H
 
 #include "settingspage.h"
 
-class Ui_BehaviourSettingsPage;
+class Ui_SongMetadataSettingsPage;
 
-class BehaviourSettingsPage : public SettingsPage {
+class SongMetadataSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  BehaviourSettingsPage(SettingsDialog* dialog);
-  ~BehaviourSettingsPage();
+  SongMetadataSettingsPage(SettingsDialog* dialog);
+  ~SongMetadataSettingsPage();
 
   void Load();
   void Save();
 
  private slots:
-  void ShowTrayIconToggled(bool on);
+  void MaxNumProcsTagClientsChanged(int value);
 
  private:
-  Ui_BehaviourSettingsPage* ui_;
-
-  QMap<QString, QString> language_map_;
+  Ui_SongMetadataSettingsPage* ui_;
 };
 
-#endif  // BEHAVIOURSETTINGSPAGE_H
+#endif  // SONGMETADATASETTINGSPAGE_H

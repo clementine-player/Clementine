@@ -64,6 +64,7 @@ class SettingsDialog : public QDialog {
     Page_Playback,
     Page_Behaviour,
     Page_Library,
+    Page_SongMetadata,
     Page_BackgroundStreams,
     Page_Proxy,
     Page_Transcoding,
