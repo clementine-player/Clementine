@@ -53,16 +53,16 @@ SongSender::SongSender(Application* app, RemoteClient* client)
   }
   qLog(Debug) << "Transcoder preset" << transcoder_preset_.codec_mimetype_;
 
-  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
-          SLOT(TranscodeJobComplete(QString, QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
+          SLOT(TranscodeJobComplete(QUrl, QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(StartTransfer()));
 
   total_transcode_ = 0;
 }
 
 SongSender::~SongSender() {
-  disconnect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)), this,
-             SLOT(TranscodeJobComplete(QString, QString, bool)));
+  disconnect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)), this,
+             SLOT(TranscodeJobComplete(QUrl, QString, bool)));
   disconnect(transcoder_, SIGNAL(AllJobsComplete()), this,
              SLOT(StartTransfer()));
   transcoder_->Cancel();
@@ -110,11 +110,11 @@ void SongSender::TranscodeLosslessFiles() {
     if (!item.song_.IsFileLossless()) continue;
 
     // Add the file to the transcoder
-    QString local_file = item.song_.url().toLocalFile();
+    QUrl local_file = item.song_.url();
 
     transcoder_->AddTemporaryJob(local_file, transcoder_preset_);
 
-    qLog(Debug) << "transcoding" << local_file;
+    qLog(Debug) << "transcoding" << local_file.toLocalFile();
     total_transcode_++;
   }
 
@@ -126,13 +126,14 @@ void SongSender::TranscodeLosslessFiles() {
   }
 }
 
-void SongSender::TranscodeJobComplete(const QString& input,
-                                      const QString& output, bool success) {
-  qLog(Debug) << input << "transcoded to" << output << success;
+void SongSender::TranscodeJobComplete(const QUrl& input, const QString& output,
+                                      bool success) {
+  Q_ASSERT(input.isLocalFile());  // songsender only handles local files
+  qLog(Debug) << input.toLocalFile() << "transcoded to" << output << success;
 
   // If it wasn't successful send original file
   if (success) {
-    transcoder_map_.insert(input, output);
+    transcoder_map_.insert(input.toLocalFile(), output);
   }
 
   SendTranscoderStatus();

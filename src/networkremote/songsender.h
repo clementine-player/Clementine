@@ -34,7 +34,7 @@ class SongSender : public QObject {
   void ResponseSongOffer(bool accepted);
 
  private slots:
-  void TranscodeJobComplete(const QString& input, const QString& output,
+  void TranscodeJobComplete(const QUrl& input, const QString& output,
                             bool success);
   void StartTransfer();
 

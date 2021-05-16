@@ -67,8 +67,7 @@ class Organise : public QObject {
 
  private slots:
   void ProcessSomeFiles();
-  void FileTranscoded(const QString& input, const QString& output,
-                      bool success);
+  void FileTranscoded(const QUrl& input, const QString& output, bool success);
 
  private:
   void SetSongProgress(float progress, bool transcoded = false);

@@ -24,6 +24,7 @@
 #include <QMetaType>
 #include <QObject>
 #include <QStringList>
+#include <QUrl>
 #include <memory>
 
 #include "core/song.h"
@@ -70,12 +71,12 @@ class Transcoder : public QObject {
   int max_threads() const { return max_threads_; }
   void set_max_threads(int count) { max_threads_ = count; }
 
-  void AddJob(const QString& input, const TranscoderPreset& preset,
+  void AddJob(const QUrl& input, const TranscoderPreset& preset,
               const QString& output = QString(),
               bool overwrite_existing = false);
-  void AddTemporaryJob(const QString& input, const TranscoderPreset& preset);
+  void AddTemporaryJob(const QUrl& input, const TranscoderPreset& preset);
 
-  QMap<QString, float> GetProgress() const;
+  QMap<QUrl, float> GetProgress() const;
   int QueuedJobsCount() const { return queued_jobs_.count(); }
 
   GstPipelineModel* model() { return model_; }
@@ -86,7 +87,7 @@ class Transcoder : public QObject {
 
   static QString GetEncoderFactoryForMimeType(const QString& mime_type);
  signals:
-  void JobComplete(const QString& input, const QString& output, bool success);
+  void JobComplete(const QUrl& input, const QString& output, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
 
@@ -96,7 +97,7 @@ class Transcoder : public QObject {
  private:
   // The description of a file to transcode - lives in the main thread.
   struct Job {
-    QString input;
+    QUrl input;
     QString output;
     TranscoderPreset preset;
   };

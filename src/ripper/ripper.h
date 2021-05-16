@@ -73,7 +73,7 @@ class Ripper : public QObject {
   void Cancel();
 
  private slots:
-  void TranscodingJobComplete(const QString& input, const QString& output,
+  void TranscodingJobComplete(const QUrl& input, const QString& output,
                               bool success);
   void AllTranscodingJobsComplete();
   void LogLine(const QString& message);
