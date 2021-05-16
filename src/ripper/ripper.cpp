@@ -26,6 +26,7 @@
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
+#include "devices/cddadevice.h"
 #include "transcoder/transcoder.h"
 
 // winspool.h defines this :(
@@ -48,6 +49,9 @@ Ripper::Ripper(CdIo_t* cdio, QObject* parent)
       finished_failed_(0),
       files_tagged_(0) {
   Q_ASSERT(cdio_);  // TODO: error handling
+
+  transcoder_->set_max_threads(1);  // we want transcoder to read only one song
+                                    // at once from disc to prevent seeking
   connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
           SLOT(TranscodingJobComplete(QUrl, QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()),
@@ -108,8 +112,7 @@ void Ripper::Cancel() {
     cancel_requested_ = true;
   }
   transcoder_->Cancel();
-  RemoveTemporaryDirectory();
-  emit Cancelled();
+  emit(Cancelled());
 }
 
 void Ripper::TranscodingJobComplete(const QUrl& input, const QString& output,
@@ -120,72 +123,23 @@ void Ripper::TranscodingJobComplete(const QUrl& input, const QString& output,
     finished_failed_++;
   UpdateProgress();
 
-  // The the transcoder does not overwrite files. Instead, it changes
+  // The transcoder does not necessarily overwrite files. If not, it changes
   // the name of the output file. We need to update the transcoded
   // filename for the corresponding track so that we tag the correct
   // file later on.
   for (QList<TrackInformation>::iterator it = tracks_.begin();
        it != tracks_.end(); ++it) {
-    Q_ASSERT(input.isLocalFile());
-    if (it->temporary_filename == input.toLocalFile()) {
+    QUrl track_url =
+        CddaDevice::TrackStrToUrl(QString("cdda://%1").arg(it->track_number));
+    if (track_url == input) {
       it->transcoded_filename = output;
     }
   }
 }
 
-void Ripper::AllTranscodingJobsComplete() {
-  RemoveTemporaryDirectory();
-  TagFiles();
-}
+void Ripper::AllTranscodingJobsComplete() { TagFiles(); }
 
 void Ripper::LogLine(const QString& message) { qLog(Debug) << message; }
-
-/*
- * WAV Header documentation
- * as taken from:
- * http://www.topherlee.com/software/pcm-tut-wavformat.html
- * Pos   Value   Description
- * 0-3 | "RIFF" |  Marks the file as a riff file.
- *              |  Characters are each 1 byte long.
- * 4-7 | File size (integer) | Size of the overall file - 8 bytes,
- *                           | in bytes (32-bit integer).
- * 8-11  | "WAVE" | File Type Header. For our purposes,
- *                | it always equals "WAVE".
- * 13-16 | "fmt " | Format chunk marker. Includes trailing null.
- * 17-20 |  16   | Length of format data as listed above
- * 21-22 |   1   | Type of format (1 is PCM) - 2 byte integer
- * 23-24 |   2   | Number of Channels - 2 byte integer
- * 25-28 | 44100 | Sample Rate - 32 byte integer. Common values
- *               | are 44100 (CD), 48000 (DAT).
- *               | Sample Rate = Number of Samples per second, or Hertz.
- * 29-32 | 176400 |  (Sample Rate * BitsPerSample * Channels) / 8.
- * 33-34 | 4 |  (BitsPerSample * Channels) / 8.1 - 8 bit mono2 - 8 bit stereo/16
- * bit mono4 - 16 bit stereo
- * 35-36 | 16 |  Bits per sample
- * 37-40 | "data" | "data" chunk header.
- *                | Marks the beginning of the data section.
- * 41-44 | File size (data) | Size of the data section.
- */
-void Ripper::WriteWAVHeader(QFile* stream, int32_t i_bytecount) {
-  QDataStream data_stream(stream);
-  data_stream.setByteOrder(QDataStream::LittleEndian);
-  // sizeof() - 1 to avoid including "\0" in the file too
-  data_stream.writeRawData(kWavHeaderRiffMarker,
-                           sizeof(kWavHeaderRiffMarker) - 1); /* 0-3 */
-  data_stream << qint32(i_bytecount + 44 - 8);                /* 4-7 */
-  data_stream.writeRawData(kWavFileTypeFormatChunk,
-                           sizeof(kWavFileTypeFormatChunk) - 1); /*  8-15 */
-  data_stream << (qint32)16;                                     /* 16-19 */
-  data_stream << (qint16)1;                                      /* 20-21 */
-  data_stream << (qint16)2;                                      /* 22-23 */
-  data_stream << (qint32)44100;                                  /* 24-27 */
-  data_stream << (qint32)(44100 * 2 * 2);                        /* 28-31 */
-  data_stream << (qint16)4;                                      /* 32-33 */
-  data_stream << (qint16)16;                                     /* 34-35 */
-  data_stream.writeRawData(kWavDataString,
-                           sizeof(kWavDataString) - 1); /* 36-39 */
-  data_stream << (qint32)i_bytecount;                   /* 40-43 */
-}
 
 void Ripper::Rip() {
   if (tracks_.isEmpty()) {
@@ -193,7 +147,6 @@ void Ripper::Rip() {
     return;
   }
 
-  temporary_directory_ = Utilities::MakeTempDir() + "/";
   finished_success_ = 0;
   finished_failed_ = 0;
 
@@ -202,50 +155,17 @@ void Ripper::Rip() {
 
   for (QList<TrackInformation>::iterator it = tracks_.begin();
        it != tracks_.end(); ++it) {
-    QString filename =
-        QString("%1%2.wav").arg(temporary_directory_).arg(it->track_number);
-    QFile destination_file(filename);
-    destination_file.open(QIODevice::WriteOnly);
-
-    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, it->track_number);
-    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, it->track_number);
-    WriteWAVHeader(&destination_file,
-                   (i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
-
-    QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW, '\0');
-    for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
-      {
-        QMutexLocker l(&mutex_);
-        if (cancel_requested_) {
-          qLog(Debug) << "CD ripping canceled.";
-          return;
-        }
-      }
-      if (cdio_read_audio_sector(cdio_, buffered_input_bytes.data(),
-                                 i_cursor) == DRIVER_OP_SUCCESS) {
-        destination_file.write(buffered_input_bytes.data(),
-                               buffered_input_bytes.size());
-      } else {
-        qLog(Error) << "CD read error";
-        break;
-      }
-    }
-    finished_success_++;
-    UpdateProgress();
-
-    it->temporary_filename = filename;
-    transcoder_->AddJob(QUrl::fromLocalFile(it->temporary_filename), it->preset,
-                        it->transcoded_filename, it->overwrite_existing);
+    QUrl track_url =
+        CddaDevice::TrackStrToUrl(QString("cdda://%1").arg(it->track_number));
+    transcoder_->AddJob(track_url, it->preset, it->transcoded_filename);
   }
   transcoder_->Start();
   emit RippingComplete();
 }
 
-// The progress interval is [0, 200*AddedTracks()], where the first
-// half corresponds to the CD ripping and the second half corresponds
-// to the transcoding.
+// The progress interval is [0, 100*AddedTracks()].
 void Ripper::SetupProgressInterval() {
-  int max = AddedTracks() * 2 * 100;
+  int max = AddedTracks() * 100;
   emit ProgressInterval(0, max);
 }
 
@@ -257,12 +177,6 @@ void Ripper::UpdateProgress() {
   }
   emit Progress(progress);
   qLog(Debug) << "Progress:" << progress;
-}
-
-void Ripper::RemoveTemporaryDirectory() {
-  if (!temporary_directory_.isEmpty())
-    Utilities::RemoveRecursive(temporary_directory_);
-  temporary_directory_.clear();
 }
 
 void Ripper::TagFiles() {
