@@ -41,6 +41,7 @@
 #include "playlist/playlistview.h"
 #include "settingscategory.h"
 #include "songinfo/songinfosettingspage.h"
+#include "songmetadatasettingspage.h"
 #include "transcoder/transcodersettingspage.h"
 #include "ui_settingsdialog.h"
 #include "widgets/groupediconview.h"
@@ -108,6 +109,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   general->AddPage(Page_Playback, new PlaybackSettingsPage(this));
   general->AddPage(Page_Behaviour, new BehaviourSettingsPage(this));
   general->AddPage(Page_Library, new LibrarySettingsPage(this));
+  general->AddPage(Page_SongMetadata, new SongMetadataSettingsPage(this));
   general->AddPage(Page_BackgroundStreams,
                    new BackgroundStreamsSettingsPage(this));
   general->AddPage(Page_Proxy, new NetworkProxySettingsPage(this));

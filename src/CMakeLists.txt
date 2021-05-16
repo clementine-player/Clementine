@@ -368,6 +368,7 @@ set(SOURCES
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/splash.cpp
+  ui/songmetadatasettingspage.cpp
   ui/standarditemiconloader.cpp
   ui/streamdetailsdialog.cpp
   ui/systemtrayicon.cpp
@@ -664,6 +665,7 @@ set(HEADERS
   ui/settingscategory.h
   ui/settingsdialog.h
   ui/settingspage.h
+  ui/songmetadatasettingspage.h
   ui/standarditemiconloader.h
   ui/streamdetailsdialog.h
   ui/systemtrayicon.h
@@ -796,6 +798,7 @@ set(UI
   ui/organiseerrordialog.ui
   ui/playbacksettingspage.ui
   ui/settingsdialog.ui
+  ui/songmetadatasettingspage.ui
   ui/streamdetailsdialog.ui
   ui/trackselectiondialog.ui
 
