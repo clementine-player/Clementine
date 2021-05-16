@@ -85,7 +85,6 @@ class RipCDDialog : public QDialog {
   Ripper* ripper_;
   bool working_;
   CddaSongLoader* loader_;
-  QMutex mutex_;  // mutex to control access to track list/metadata updates
   QBasicTimer media_changed_timer_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

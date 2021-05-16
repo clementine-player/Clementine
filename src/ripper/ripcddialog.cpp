@@ -58,9 +58,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       ripper_(new Ripper(this)),
       working_(false),
       loader_(new CddaSongLoader(QUrl(), this)),
-      mutex_(),
       media_changed_timer_() {
-  QMutexLocker l(&mutex_);
   // Init
   ui_->setupUi(this);
 
@@ -136,10 +134,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   media_changed_timer_.start(500, this);
 }
 
-RipCDDialog::~RipCDDialog() {
-  QMutexLocker l(&mutex_);  // ensure noone is holding a lock on the mutex
-                            // when destroying..
-}
+RipCDDialog::~RipCDDialog() {}
 
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
 
@@ -266,7 +261,6 @@ void RipCDDialog::UpdateProgressBar(int progress) {
 }
 
 void RipCDDialog::BuildTrackListTable(const SongList& songs) {
-  QMutexLocker l(&mutex_);
   checkboxes_.clear();
   track_names_.clear();
 
@@ -292,7 +286,6 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
 
 void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
   Q_ASSERT(songs.length() > 0);
-  QMutexLocker l(&mutex_);
 
   const Song& song = songs.first();
   ui_->albumLineEdit->setText(song.album());
@@ -335,7 +328,6 @@ QString RipCDDialog::ParseFileFormatString(const QString& file_format,
 }
 
 void RipCDDialog::ResetDialog() {
-  QMutexLocker l(&mutex_);
   ui_->tableWidget->setRowCount(0);
   ui_->albumLineEdit->clear();
   ui_->artistLineEdit->clear();
