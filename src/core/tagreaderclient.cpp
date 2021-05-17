@@ -58,6 +58,8 @@ TagReaderClient::~TagReaderClient() {}
 
 void TagReaderClient::Start() { worker_pool_->Start(); }
 
+void TagReaderClient::ReloadSettings() { path_parser_->ReloadSettings(); }
+
 void TagReaderClient::WorkerFailedToStart() {
   qLog(Error) << "The" << kWorkerExecutableName << "executable was not found"
               << "in the current directory or on the PATH.  Clementine will"

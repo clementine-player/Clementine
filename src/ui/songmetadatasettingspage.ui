@@ -57,6 +57,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="guess_metadata">
+     <property name="toolTip">
+      <string>Try to extract title, artist, and album from file path.</string>
+     </property>
+     <property name="text">
+      <string>Try to guess missing metadata</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

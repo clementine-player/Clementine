@@ -21,6 +21,8 @@
 #include <QThread>
 
 #include "core/player.h"
+#include "core/songpathparser.h"
+#include "core/tagreaderclient.h"
 #include "ui/iconloader.h"
 #include "ui_songmetadatasettingspage.h"
 
@@ -52,6 +54,14 @@ void SongMetadataSettingsPage::Load() {
       QString::number(max_numprocs_tagclients));
 
   s.endGroup();
+
+  s.beginGroup(SongPathParser::kSongMetadataSettingsGroup);
+  bool guess = s.value(SongPathParser::kGuessMetadataSetting,
+                       SongPathParser::kGuessMetadataSettingDefault)
+                   .toBool();
+  ui_->guess_metadata->setCheckState(guess ? Qt::Checked : Qt::Unchecked);
+
+  s.endGroup();
 }
 
 void SongMetadataSettingsPage::Save() {
@@ -61,6 +71,15 @@ void SongMetadataSettingsPage::Save() {
   s.setValue("max_numprocs_tagclients", ui_->max_numprocs_tagclients->value());
 
   s.endGroup();
+
+  s.beginGroup(SongPathParser::kSongMetadataSettingsGroup);
+
+  s.setValue(SongPathParser::kGuessMetadataSetting,
+             ui_->guess_metadata->checkState() != Qt::Unchecked);
+
+  s.endGroup();
+
+  TagReaderClient::Instance()->ReloadSettings();
 }
 
 void SongMetadataSettingsPage::MaxNumProcsTagClientsChanged(int value) {

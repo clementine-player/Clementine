@@ -47,6 +47,7 @@ class TagReaderClient : public QObject {
   static const char* kWorkerExecutableName;
 
   void Start();
+  void ReloadSettings();
 
   ReplyType* ReadFile(const QString& filename);
   ReplyType* SaveFile(const QString& filename, const Song& metadata);
