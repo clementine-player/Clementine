@@ -142,13 +142,12 @@ void CddaSongLoader::LoadSongsFromCdda() {
               duration = stop - start;
             songs[i++].set_length_nanosec(duration);
           }
-          gst_toc_unref(toc);
+          emit SongsDurationLoaded(songs);
+          msg_filter = static_cast<GstMessageType>(
+              static_cast<int>(msg_filter) ^ GST_MESSAGE_TOC);
         }
-        msg_filter = static_cast<GstMessageType>(static_cast<int>(msg_filter) ^
-                                                 GST_MESSAGE_TOC);
+        gst_toc_unref(toc);
       }
-      emit SongsDurationLoaded(songs);
-
     } else if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TAG) {
       // Handle TAG message: generate MusicBrainz DiscId
 
@@ -158,11 +157,10 @@ void CddaSongLoader::LoadSongsFromCdda() {
       if (gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
                                   &string_mb)) {
         QString musicbrainz_discid(string_mb);
-        qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
-        emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
-
         g_free(string_mb);
 
+        qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
+        emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
         msg_filter = static_cast<GstMessageType>(static_cast<int>(msg_filter) ^
                                                  GST_MESSAGE_TAG);
       }
