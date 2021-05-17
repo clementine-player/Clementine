@@ -165,6 +165,10 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
       break;
     }
   }
+  if (reader.hasError()) {
+    qLog(Error) << "Received a reply from musicbrainz.org for" << discid
+                << " but the XML was not well-formed.";
+  }
 
   // If we parsed a year, copy it to the tracks.
   if (year > 0) {
