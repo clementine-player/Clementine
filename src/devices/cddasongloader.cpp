@@ -156,7 +156,7 @@ void CddaSongLoader::LoadSongsFromCdda() {
       char* string_mb = nullptr;
       if (gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
                                   &string_mb)) {
-        QString musicbrainz_discid(string_mb);
+        QString musicbrainz_discid = QString::fromUtf8(string_mb);
         g_free(string_mb);
 
         qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
