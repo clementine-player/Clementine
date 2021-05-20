@@ -33,6 +33,11 @@ CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
 }
 
 CddaSongLoader::~CddaSongLoader() {
+  // The LoadSongsFromCdda methods runs concurrently in a thread and we need to wait for it to terminate.
+  // There's no guarantee that it has terminated when destructor is invoked.
+  // However, it locks mutex_load_ for its entire lifetime, so if we can get a lock, we now it has terminated
+  // and can safely destroy cdio_ and our own class instance.
+  QMutexLocker l(&mutex_load_);
   if (cdio_) cdio_destroy(cdio_);
 }
 
