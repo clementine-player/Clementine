@@ -295,7 +295,7 @@ void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
   const Song& song = songs.first();
   ui_->albumLineEdit->setText(song.album());
   ui_->artistLineEdit->setText(song.artist());
-  ui_->yearLineEdit->setText(QString::number(song.year()));
+  ui_->yearLineEdit->setText(song.PrettyYear());
 }
 
 void RipCDDialog::SetWorking(bool working) {

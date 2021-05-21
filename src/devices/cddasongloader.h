@@ -18,9 +18,9 @@
 #ifndef CDDASONGLOADER_H
 #define CDDASONGLOADER_H
 
+#include <QFuture>
 #include <QObject>
 #include <QUrl>
-#include <QFuture>
 
 // These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
@@ -60,6 +60,8 @@ class CddaSongLoader : public QObject {
  private:
   QUrl GetUrlFromTrack(int track_number) const;
   void LoadSongsFromCdda();
+  // Parse gstreamer taglist for a song
+  bool ParseSongTags(SongList& songs, GstTagList* tags);
 
   QUrl url_;
   GstElement* cdda_;
