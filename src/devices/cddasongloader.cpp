@@ -30,15 +30,20 @@ CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
     : QObject(parent), url_(url), cdda_(nullptr), cdio_(nullptr) {
   connect(this, SIGNAL(MusicBrainzDiscIdLoaded(const QString&)),
           SLOT(LoadAudioCDTags(const QString&)));
+
+  cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
+  if (cdio_ == nullptr) {
+    qLog(Error) << "could not open cdio device";
+    // todo: resource acquisiton failed! handle this somehow. throw exception?
+  }
 }
 
 CddaSongLoader::~CddaSongLoader() {
   // The LoadSongsFromCdda methods runs concurrently in a thread and we need to wait for it to terminate.
   // There's no guarantee that it has terminated when destructor is invoked.
-  // However, it locks mutex_load_ for its entire lifetime, so if we can get a lock, we now it has terminated
-  // and can safely destroy cdio_ and our own class instance.
-  QMutexLocker l(&mutex_load_);
-  if (cdio_) cdio_destroy(cdio_);
+  loading_future_.waitForFinished();
+  Q_ASSERT(cdio_);
+  cdio_destroy(cdio_);
 }
 
 QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
@@ -52,15 +57,11 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
 }
 
 void CddaSongLoader::LoadSongs() {
-  QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
+  loading_future_ = QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
 }
 
 void CddaSongLoader::LoadSongsFromCdda() {
-  QMutexLocker locker(&mutex_load_);
-  cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
-  if (cdio_ == nullptr) {
-    return;
-  }
+
   // Create gstreamer cdda element
   GError* error = nullptr;
   cdda_ = gst_element_make_from_uri(GST_URI_SRC, "cdda://", nullptr, &error);
@@ -219,13 +220,9 @@ void CddaSongLoader::AudioCDTagsLoaded(
 }
 
 bool CddaSongLoader::HasChanged() {
-  if ((cdio_ && cdda_) && cdio_get_media_changed(cdio_) != 1) {
+  Q_ASSERT(cdio_);
+  if (cdio_get_media_changed(cdio_) != 1) {
     return false;
   }
-  // Check if mutex is already token (i.e. init is already taking place)
-  if (!mutex_load_.tryLock()) {
-    return false;
-  }
-  mutex_load_.unlock();
   return true;
 }

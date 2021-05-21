@@ -18,9 +18,9 @@
 #ifndef CDDASONGLOADER_H
 #define CDDASONGLOADER_H
 
-#include <QMutex>
 #include <QObject>
 #include <QUrl>
+#include <QFuture>
 
 // These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
@@ -64,7 +64,7 @@ class CddaSongLoader : public QObject {
   QUrl url_;
   GstElement* cdda_;
   CdIo_t* cdio_;
-  QMutex mutex_load_;
+  QFuture<void> loading_future_;
 };
 
 #endif  // CDDASONGLOADER_H
