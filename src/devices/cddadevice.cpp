@@ -32,11 +32,7 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
       cdio_(nullptr),
       disc_changed_timer_(),
       cdda_song_loader_(url) {
-  connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsDurationLoaded(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsMetadataLoaded(SongList)), this,
+  connect(&cdda_song_loader_, SIGNAL(SongsUpdated(SongList)), this,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));

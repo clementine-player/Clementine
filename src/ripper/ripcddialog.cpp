@@ -343,10 +343,7 @@ void RipCDDialog::DeviceSelected(int device_index) {
   loader_ = cdda_device_->loader();
   Q_ASSERT(loader_);
 
-  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
-          SLOT(SongsLoaded(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(SongsLoaded(SongList)));
+  connect(loader_, SIGNAL(SongsUpdated(SongList)), SLOT(SongsLoaded(SongList)));
 
   // load songs from new SongLoader
   loader_->LoadSongs();
@@ -434,8 +431,12 @@ void RipCDDialog::UpdateMetadataEdits() {
 
   const Song& song = songs_.first();
   ui_->albumLineEdit->setText(song.album());
-  ui_->artistLineEdit->setText(song.artist());
-  ui_->yearLineEdit->setText(QString::number(song.year()));
+  if (!song.artist().isEmpty())
+    ui_->artistLineEdit->setText(song.artist());
+  else
+    ui_->artistLineEdit->setText(song.albumartist());
+  ui_->yearLineEdit->setText(song.PrettyYear());
+  ui_->genreLineEdit->setText(song.genre());
 }
 
 void RipCDDialog::DiscChanged() { ResetDialog(); }
