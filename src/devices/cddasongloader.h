@@ -26,6 +26,8 @@
 #include <cdio/cdio.h>
 #include <gst/audio/gstaudiocdsrc.h>
 
+#include <atomic>
+
 #include "core/song.h"
 #include "musicbrainz/musicbrainzclient.h"
 
@@ -67,6 +69,7 @@ class CddaSongLoader : public QObject {
   GstElement* cdda_;
   CdIo_t* cdio_;
   QFuture<void> loading_future_;
+  std::atomic<bool> may_load_;
 };
 
 #endif  // CDDASONGLOADER_H

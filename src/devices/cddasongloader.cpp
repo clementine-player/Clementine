@@ -27,7 +27,11 @@
 #include "core/timeconstants.h"
 
 CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
-    : QObject(parent), url_(url), cdda_(nullptr), cdio_(nullptr) {
+    : QObject(parent),
+      url_(url),
+      cdda_(nullptr),
+      cdio_(nullptr),
+      may_load_(true) {
   connect(this, SIGNAL(MusicBrainzDiscIdLoaded(const QString&)),
           SLOT(LoadAudioCDTags(const QString&)));
 
@@ -40,6 +44,7 @@ CddaSongLoader::~CddaSongLoader() {
   // The LoadSongsFromCdda methods runs concurrently in a thread and we need to
   // wait for it to terminate. There's no guarantee that it has terminated when
   // destructor is invoked.
+  may_load_ = false;
   loading_future_.waitForFinished();
   Q_ASSERT(cdio_);
   cdio_destroy(cdio_);
@@ -123,6 +128,8 @@ bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags) {
 }
 
 void CddaSongLoader::LoadSongsFromCdda() {
+  if (!may_load_) return;
+
   // Create gstreamer cdda element
   GError* error = nullptr;
   GstElement* cdda_ = gst_element_factory_make("cdiocddasrc", nullptr);
@@ -191,7 +198,7 @@ void CddaSongLoader::LoadSongsFromCdda() {
   GstMessageType msg_filter =
       static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
   QString musicbrainz_discid;
-  while (msg_filter &&
+  while (may_load_ && msg_filter &&
          (msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
                                            10 * GST_SECOND, msg_filter))) {
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
@@ -255,8 +262,8 @@ void CddaSongLoader::LoadSongsFromCdda() {
   }
   emit SongsMetadataLoaded(taggedSongList);
 
-  Q_ASSERT(!musicbrainz_discid.isEmpty());
-  emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
+  if (!musicbrainz_discid.isEmpty())
+    emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
 
   // cleanup
   gst_element_set_state(pipeline, GST_STATE_NULL);
