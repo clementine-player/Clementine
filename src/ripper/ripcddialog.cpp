@@ -90,12 +90,10 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
+  connect(loader_, SIGNAL(SongsUpdated(SongList)),
           SLOT(BuildTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(UpdateTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
+  connect(loader_, SIGNAL(SongsUpdated(SongList)),
+          SLOT(SetAlbumMetadata(SongList)));
 
   connect(ripper_, SIGNAL(Finished()), SLOT(Finished()));
   connect(ripper_, SIGNAL(Cancelled()), SLOT(Cancelled()));
@@ -280,16 +278,7 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
   }
 }
 
-void RipCDDialog::UpdateTrackListTable(const SongList& songs) {
-  if (track_names_.length() == songs.length()) {
-    BuildTrackListTable(songs);
-  } else {
-    qLog(Error) << "Number of tracks in metadata does not match number of "
-                   "songs on disc!";
-  }
-}
-
-void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
+void RipCDDialog::SetAlbumMetadata(const SongList& songs) {
   Q_ASSERT(songs.length() > 0);
 
   const Song& song = songs.first();

@@ -38,8 +38,8 @@ class CddaDevice : public ConnectedDevice {
                          Application* app, int database_id, bool first_time);
   ~CddaDevice();
 
-  void Init();
-  void Refresh();
+  void Init() override;
+  void Refresh() override;
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
 

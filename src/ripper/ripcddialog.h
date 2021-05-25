@@ -60,10 +60,8 @@ class RipCDDialog : public QDialog {
   // Initializes track list table based on preliminary song list with durations
   // but without metadata.
   void BuildTrackListTable(const SongList& songs);
-  // Update track list based on metadata.
-  void UpdateTrackListTable(const SongList& songs);
   // Update album information with metadata.
-  void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
+  void SetAlbumMetadata(const SongList& songs);
 
  private:
   static const char* kSettingsGroup;
