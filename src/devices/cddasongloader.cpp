@@ -76,7 +76,7 @@ void CddaSongLoader::LoadSongs() {
           QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
     }
   } else
-    emit SongsUpdated(disc_.tracks);
+    emit SongsUpdated(disc_.tracks, true);
 }
 
 bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags) {
@@ -325,13 +325,13 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
     if (song.year() == -1) song.set_year(new_song_info.year_);
   }
 
-  emit SongsUpdated(disc_.tracks);
+  emit SongsUpdated(disc_.tracks, false);
 }
 
 void CddaSongLoader::SetDiscTracks(const SongList& songs) {
   disc_.tracks = songs;
   disc_.has_been_read = true;
-  emit SongsUpdated(disc_.tracks);
+  emit SongsUpdated(disc_.tracks, true);
 }
 
 bool CddaSongLoader::HasChanged() {

@@ -90,10 +90,10 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-  connect(loader_, SIGNAL(SongsUpdated(SongList)),
-          SLOT(BuildTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsUpdated(SongList)),
-          SLOT(SetAlbumMetadata(SongList)));
+  connect(loader_, SIGNAL(SongsUpdated(SongList, bool)),
+          SLOT(BuildTrackListTable(SongList, bool)));
+  connect(loader_, SIGNAL(SongsUpdated(SongList, bool)),
+          SLOT(SetAlbumMetadata(SongList, bool)));
 
   connect(ripper_, SIGNAL(Finished()), SLOT(Finished()));
   connect(ripper_, SIGNAL(Cancelled()), SLOT(Cancelled()));
@@ -254,7 +254,8 @@ void RipCDDialog::UpdateProgressBar(int progress) {
   ui_->progress_bar->setValue(progress);
 }
 
-void RipCDDialog::BuildTrackListTable(const SongList& songs) {
+void RipCDDialog::BuildTrackListTable(const SongList& songs,
+                                      bool further_updates_possible) {
   checkboxes_.clear();
   track_names_.clear();
 
@@ -278,7 +279,8 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
   }
 }
 
-void RipCDDialog::SetAlbumMetadata(const SongList& songs) {
+void RipCDDialog::SetAlbumMetadata(const SongList& songs,
+                                   bool further_updates_possible) {
   Q_ASSERT(songs.length() > 0);
 
   const Song& song = songs.first();

@@ -28,8 +28,8 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
       cdda_song_loader_(url) {
-  connect(&cdda_song_loader_, SIGNAL(SongsUpdated(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
+  connect(&cdda_song_loader_, SIGNAL(SongsUpdated(SongList, bool)), this,
+          SLOT(SongsLoaded(SongList, bool)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
 }
@@ -45,7 +45,8 @@ void CddaDevice::Init() {
 
 void CddaDevice::Refresh() { Init(); }
 
-void CddaDevice::SongsLoaded(const SongList& songs) {
+void CddaDevice::SongsLoaded(const SongList& songs,
+                             bool further_updates_possible) {
   model_->Reset();
   emit SongsDiscovered(songs);
   song_count_ = songs.size();
