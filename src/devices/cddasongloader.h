@@ -52,8 +52,12 @@ class CddaSongLoader : public QObject {
   // Emitted whenever information about tracks were updated.
   // Guarantees consistency with previous updates, i.e., consumers can rely
   // entirely on the updated list and do not have to merge metadata. May be
-  // emitted multiple times during reading the disc.
+  // emitted multiple times during reading the disc as long as the Finished
+  // signal was not emitted.
   void SongsUpdated(const SongList& songs);
+  // Emitted when no further updates will follow; guaranteed to be emitted
+  // at some point.
+  void Finished();
 
   // The following signals are mostly for internal processing; other classes
   // can get all relevant updates by just connecting to SongsUpdated. However,

@@ -148,6 +148,8 @@ bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags,
 }
 
 void CddaSongLoader::LoadSongsFromCdda() {
+  SongList initial_song_list;
+
   if (!may_load_) return;
   // Create gstreamer cdda element
   GError* error = nullptr;
@@ -156,6 +158,8 @@ void CddaSongLoader::LoadSongsFromCdda() {
     qLog(Error) << error->code << QString::fromLocal8Bit(error->message);
   }
   if (cdda_ == nullptr) {
+    emit SongsLoaded(initial_song_list);
+    emit Finished();
     return;
   }
 
@@ -175,6 +179,9 @@ void CddaSongLoader::LoadSongsFromCdda() {
           GST_STATE_CHANGE_FAILURE) {
     gst_element_set_state(cdda_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(cdda_));
+
+    emit SongsLoaded(initial_song_list);
+    emit Finished();
     return;
   }
 
@@ -184,10 +191,12 @@ void CddaSongLoader::LoadSongsFromCdda() {
   if (!gst_element_query_duration(cdda_, track_fmt, &num_tracks)) {
     qLog(Error) << "Error while querying cdda GstElement for track count";
     gst_object_unref(GST_OBJECT(cdda_));
+
+    emit SongsLoaded(initial_song_list);
+    emit Finished();
     return;
   }
 
-  SongList initial_song_list;
   for (int track_number = 1; track_number <= num_tracks; track_number++) {
     // Init song
     Song song;
@@ -260,9 +269,6 @@ void CddaSongLoader::LoadSongsFromCdda() {
         musicbrainz_discid = QString::fromUtf8(string_mb);
         g_free(string_mb);
         qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
-        // emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
-        // for now, we'll invoke musicbrainz only after having read all CD-TEXT
-        // tags and emitted a message for it
       }
 
       gint track_number_from_tags;  // track number contained in the tag message
@@ -310,6 +316,10 @@ void CddaSongLoader::LoadSongsFromCdda() {
 
   if (!musicbrainz_discid.isEmpty())
     emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
+  else {
+    // no musicbrainz id was loaded, no further udpates will follow
+    emit Finished();
+  }
 
   // cleanup
   gst_element_set_state(pipeline, GST_STATE_NULL);
@@ -334,12 +344,18 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
   MusicBrainzClient* musicbrainz_client =
       qobject_cast<MusicBrainzClient*>(sender());
   musicbrainz_client->deleteLater();
-  if (results.empty()) return;
+  if (results.empty()) {
+    // no real update; signal that no further updates will follow now
+    emit Finished();
+    return;
+  }
 
   if (disc_.tracks.length() != results.length()) {
     qLog(Warning) << "Number of tracks in metadata does not match number of "
                      "songs on disc!";
-    return;  // no idea how to recover; just do nothing
+    // no idea how to recover; signal that no further updates will follow now
+    emit Finished();
+    return;
   }
 
   for (int i = 0; i < results.length(); ++i) {
@@ -357,7 +373,8 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
   }
   disc_.has_titles = true;
 
-  emit SongsUpdated(disc_.tracks);
+  emit SongsMetadataLoaded(disc_.tracks);
+  emit Finished();  // no further updates will follow
 }
 
 void CddaSongLoader::SetDiscTracks(const SongList& songs, bool has_titles) {
