@@ -37,13 +37,15 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
 CddaDevice::~CddaDevice() {}
 
 void CddaDevice::Init() {
+  Refresh();
+}
+
+void CddaDevice::Refresh() {
   song_count_ = 0;  // Reset song count, in case it was already set
   cdda_song_loader_.LoadSongs();  // will not perform costly operations if media
                                   // has not changed since last time, but result
                                   // in call to SongsLoaded again
 }
-
-void CddaDevice::Refresh() { Init(); }
 
 void CddaDevice::SongsLoaded(const SongList& songs,
                              bool further_updates_possible) {

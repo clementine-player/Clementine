@@ -49,8 +49,6 @@ class CddaSongLoader : public QObject {
   // but actual loading from disc will only occur if the medium was changed
   // since the last time LoadSongs() was called.
   void LoadSongs();
-  // Returns true if the medium/disc has changed since the last check.
-  bool HasChanged();
 
  signals:
   // Emitted whenever information about tracks were updated.
@@ -93,6 +91,8 @@ class CddaSongLoader : public QObject {
   void LoadSongsFromCdda();
   // Parse gstreamer taglist for a song
   bool ParseSongTags(SongList& songs, GstTagList* tags);
+  // Returns true if the medium/disc has changed since the last check.
+  bool HasChanged();
 
   struct Disc {
     SongList tracks;
