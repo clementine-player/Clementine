@@ -36,9 +36,7 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
 
 CddaDevice::~CddaDevice() {}
 
-void CddaDevice::Init() {
-  Refresh();
-}
+void CddaDevice::Init() { Refresh(); }
 
 void CddaDevice::Refresh() {
   song_count_ = 0;  // Reset song count, in case it was already set
