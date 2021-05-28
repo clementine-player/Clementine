@@ -317,8 +317,8 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
     Song& song = disc_.tracks[i];
 
     if (!disc_.has_titles) song.set_title(new_song_info.title_);
-    if (song.album().isEmpty()) song.set_album(new_song_info.album_);
-    if (song.artist().isEmpty()) song.set_artist(new_song_info.artist_);
+    if (song.album().isEmpty()) song.set_album(album);
+    if (song.artist().isEmpty()) song.set_artist(artist);
 
     if (song.length_nanosec() == -1)
       song.set_length_nanosec(new_song_info.duration_msec_ * kNsecPerMsec);

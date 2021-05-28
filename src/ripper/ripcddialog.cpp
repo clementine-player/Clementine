@@ -284,18 +284,13 @@ void RipCDDialog::SetAlbumMetadata(const SongList& songs,
   Q_ASSERT(songs.length() > 0);
 
   const Song& song = songs.first();
-  if (ui_->albumLineEdit->text().isEmpty())
-    ui_->albumLineEdit->setText(song.album());
-  if (ui_->artistLineEdit->text().isEmpty()) {
-    if (song.artist().isEmpty())
-      ui_->artistLineEdit->setText(song.artist());
-    else
-      ui_->artistLineEdit->setText(song.albumartist());
-  }
-  if (ui_->yearLineEdit->text().isEmpty())
-    ui_->yearLineEdit->setText(song.PrettyYear());
-  if (ui_->genreLineEdit->text().isEmpty())
-    ui_->genreLineEdit->setText(song.genre());
+  ui_->albumLineEdit->setText(song.album());
+  if (!song.artist().isEmpty())
+    ui_->artistLineEdit->setText(song.artist());
+  else
+    ui_->artistLineEdit->setText(song.albumartist());
+  ui_->yearLineEdit->setText(song.PrettyYear());
+  ui_->genreLineEdit->setText(song.genre());
 }
 
 void RipCDDialog::SetWorking(bool working) {
