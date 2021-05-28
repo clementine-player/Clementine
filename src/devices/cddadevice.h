@@ -61,9 +61,11 @@ class CddaDevice : public ConnectedDevice {
 
  private slots:
   void SongsLoaded(const SongList& songs, bool further_updates_possible);
+  void DiscChanged();
 
  private:
   CddaSongLoader cdda_song_loader_;
+  bool update_in_progress_;  // currently expecting ongoing updates of songs
 };
 
 #endif

@@ -78,6 +78,7 @@ void CddaSongLoader::LoadSongs() {
   // can rely on cached information
   if (!disc_.has_been_read || HasChanged()) {
     disc_.has_been_read = true;
+    emit DiscChanged();
     loading_future_ =
         QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
   } else

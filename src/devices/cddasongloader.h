@@ -58,6 +58,11 @@ class CddaSongLoader : public QObject {
   // further_updates_possible argument will be set to false if no more updates
   // will occur.
   void SongsUpdated(const SongList& songs, bool further_updates_possible);
+  // Emitted when a change of disc is detected.
+  // Currently this can only happen as a response to calling LoadSongs, but
+  // consumer should not rely on this. Guaranteed to be emitted before any
+  // SongsUpdated signals for the new disc.
+  void DiscChanged();
 
   // The following signals are mostly for internal processing; other classes
   // can get all relevant updates by just connecting to SongsUpdated. However,
