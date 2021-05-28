@@ -38,8 +38,8 @@ class CddaDevice : public ConnectedDevice {
                          Application* app, int database_id, bool first_time);
   ~CddaDevice();
 
-  void Init();
-  void Refresh();
+  void Init() override;
+  void Refresh() override;
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
 
@@ -60,10 +60,12 @@ class CddaDevice : public ConnectedDevice {
   void SongsDiscovered(const SongList& songs);
 
  private slots:
-  void SongsLoaded(const SongList& songs);
+  void SongsLoaded(const SongList& songs, bool further_updates_possible);
+  void DiscChanged();
 
  private:
   CddaSongLoader cdda_song_loader_;
+  bool update_in_progress_;  // currently expecting ongoing updates of songs
 };
 
 #endif

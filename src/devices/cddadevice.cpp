@@ -27,13 +27,11 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        Application* app, int database_id, bool first_time)
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
-      cdda_song_loader_(url) {
-  connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsDurationLoaded(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsMetadataLoaded(SongList)), this,
-          SLOT(SongsLoaded(SongList)));
+      cdda_song_loader_(url),
+      update_in_progress_(false) {
+  connect(&cdda_song_loader_, SIGNAL(SongsUpdated(SongList, bool)), this,
+          SLOT(SongsLoaded(SongList, bool)));
+  connect(&cdda_song_loader_, SIGNAL(DiscChanged()), this, SLOT(DiscChanged()));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
 }
@@ -41,19 +39,24 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
 CddaDevice::~CddaDevice() {}
 
 void CddaDevice::Init() {
-  song_count_ = 0;  // Reset song count, in case it was already set
-  cdda_song_loader_.LoadSongs();
+  Q_ASSERT(song_count_ == 0);
+  Refresh();
 }
 
 void CddaDevice::Refresh() {
-  if (!cdda_song_loader_.HasChanged()) {
-    return;
-  }
-  Init();
+  cdda_song_loader_.LoadSongs();  // will not perform costly operations if media
+                                  // has not changed since last time, but
+                                  // results in call to SongsLoaded again
 }
 
-void CddaDevice::SongsLoaded(const SongList& songs) {
-  model_->Reset();
-  emit SongsDiscovered(songs);
-  song_count_ = songs.size();
+void CddaDevice::SongsLoaded(const SongList& songs,
+                             bool further_updates_possible) {
+  if (update_in_progress_ && !further_updates_possible) {
+    update_in_progress_ = false;
+    model_->Reset();
+    song_count_ = songs.size();
+    emit SongsDiscovered(songs);
+  }
 }
+
+void CddaDevice::DiscChanged() { update_in_progress_ = true; }
