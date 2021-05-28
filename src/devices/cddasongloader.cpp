@@ -49,7 +49,7 @@ CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
 }
 
 CddaSongLoader::~CddaSongLoader() {
-  // The LoadSongsFromCdda methods runs concurrently in a thread and we need to
+  // The LoadSongsFromCdda method runs concurrently in a thread and we need to
   // wait for it to terminate. There's no guarantee that it has terminated when
   // destructor is invoked.
   may_load_ = false;
@@ -69,12 +69,17 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
 }
 
 void CddaSongLoader::LoadSongs() {
+  // first, make sure we are not already reading the disc,
+  // in which case we do nothing and just wait for that
+  // to finish and advertise results
+  if (loading_future_.isRunning()) return;
+
+  // if not currently reading, figure out if we need to or
+  // can rely on cached information
   if (!disc_.has_been_read || HasChanged()) {
-    if (!loading_future_.isRunning()) {
-      disc_.has_been_read = true;
-      loading_future_ =
-          QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
-    }
+    disc_.has_been_read = true;
+    loading_future_ =
+        QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
   } else
     emit SongsUpdated(disc_.tracks, false);
   // we have all information ready, no further updates follow
