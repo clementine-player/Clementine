@@ -310,7 +310,12 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
   MusicBrainzClient* musicbrainz_client =
       qobject_cast<MusicBrainzClient*>(sender());
   musicbrainz_client->deleteLater();
-  if (results.empty()) return;
+  if (results.empty()) {
+    // no real update, but we have to signal that
+    // no further updates will follow now
+    emit SongsUpdated(disc_.tracks, false);
+    return;
+  }
 
   if (disc_.tracks.length() != results.length()) {
     qLog(Warning) << "Number of tracks in metadata does not match number of "
