@@ -24,6 +24,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QSettings>
+#include <QTimer>
 #include <QUrl>
 #include <algorithm>
 
@@ -130,8 +131,9 @@ RipCDDialog::RipCDDialog(QWidget* parent)
     }
   }
 
-  // Start thread for polling
-  media_changed_timer_.start(500, this);
+  // Start timer for polling
+  connect(&media_changed_timer_, SIGNAL(timeout()), SLOT(CheckMediaChanged()));
+  media_changed_timer_.start(500);
 }
 
 RipCDDialog::~RipCDDialog() {}
@@ -336,9 +338,8 @@ void RipCDDialog::ResetDialog() {
   ui_->discLineEdit->clear();
 }
 
-void RipCDDialog::timerEvent(QTimerEvent* e) {
+void RipCDDialog::CheckMediaChanged() {
   if (ripper_->MediaChanged()) {
-    qLog(Debug) << "media changed!";
     ResetDialog();
     if (CheckCDIOIsValid()) {
       loader_->LoadSongs();

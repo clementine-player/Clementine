@@ -18,7 +18,6 @@
 #ifndef SRC_RIPPER_RIPCDDIALOG_H_
 #define SRC_RIPPER_RIPCDDIALOG_H_
 
-#include <QBasicTimer>
 #include <QDialog>
 #include <QFile>
 #include <memory>
@@ -26,6 +25,7 @@
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 
+class QTimer;
 class QCheckBox;
 class QCloseEvent;
 class QLineEdit;
@@ -46,7 +46,6 @@ class RipCDDialog : public QDialog {
  protected:
   void closeEvent(QCloseEvent* event);
   void showEvent(QShowEvent* event);
-  void timerEvent(QTimerEvent* e);
 
  private slots:
   void ClickedRipButton();
@@ -61,6 +60,7 @@ class RipCDDialog : public QDialog {
   void UpdateProgressBar(int progress);
   void BuildTrackListTable(const SongList& songs);
   void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
+  void CheckMediaChanged();
 
  private:
   static const char* kSettingsGroup;
@@ -85,6 +85,6 @@ class RipCDDialog : public QDialog {
   Ripper* ripper_;
   bool working_;
   CddaSongLoader* loader_;
-  QBasicTimer media_changed_timer_;
+  QTimer media_changed_timer_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_
