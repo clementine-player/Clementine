@@ -95,7 +95,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
           SLOT(BuildTrackListTable(SongList)));
   connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(BuildTrackListTable(SongList)));
+          SLOT(UpdateTrackListTable(SongList)));
   connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
           SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
 
@@ -283,6 +283,15 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
     ui_->tableWidget->setCellWidget(current_row, kTrackDurationColumn,
                                     new QLabel(song.PrettyLength()));
     current_row++;
+  }
+}
+
+void RipCDDialog::UpdateTrackListTable(const SongList& songs) {
+  if (track_names_.length() == songs.length()) {
+    BuildTrackListTable(songs);
+  } else {
+    qLog(Error) << "Number of tracks in metadata does not match number of "
+                   "songs on disc!";
   }
 }
 

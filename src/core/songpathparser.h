@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2021, Jim Broadus <jbroadus@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,32 +15,29 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BEHAVIOURSETTINGSPAGE_H
-#define BEHAVIOURSETTINGSPAGE_H
+#ifndef CORE_SONGPATHPARSER_H_
+#define CORE_SONGPATHPARSER_H_
 
-#include <QMap>
+#include <QString>
 
-#include "settingspage.h"
+class Song;
 
-class Ui_BehaviourSettingsPage;
-
-class BehaviourSettingsPage : public SettingsPage {
-  Q_OBJECT
-
+class SongPathParser {
  public:
-  BehaviourSettingsPage(SettingsDialog* dialog);
-  ~BehaviourSettingsPage();
+  SongPathParser();
 
-  void Load();
-  void Save();
+  static const char* kSongMetadataSettingsGroup;
+  static const char* kGuessMetadataSetting;
+  static const bool kGuessMetadataSettingDefault;
 
- private slots:
-  void ShowTrayIconToggled(bool on);
+  void GuessMissingFields(Song* song, QString path);
+  void ReloadSettings();
 
  private:
-  Ui_BehaviourSettingsPage* ui_;
+  void GuessArtistAndTitle(Song* song);
+  void GuessAlbum(const QString& path, Song* song);
 
-  QMap<QString, QString> language_map_;
+  bool guess_metadata_;
 };
 
-#endif  // BEHAVIOURSETTINGSPAGE_H
+#endif  // CORE_SONGPATHPARSER_H_

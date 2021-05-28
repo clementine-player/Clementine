@@ -21,19 +21,24 @@
 #include "tagreaderclient.h"
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QProcess>
 #include <QTcpServer>
 #include <QThread>
 #include <QUrl>
 
 #include "player.h"
+#include "songpathparser.h"
 
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;
 
 TagReaderClient::TagReaderClient(QObject* parent)
-    : QObject(parent), worker_pool_(new WorkerPool<HandlerType>(this)) {
+    : QObject(parent),
+      worker_pool_(new WorkerPool<HandlerType>(this)),
+      path_parser_(new SongPathParser()) {
   sInstance = this;
   setObjectName("Tag reader client");
 
@@ -49,7 +54,11 @@ TagReaderClient::TagReaderClient(QObject* parent)
           SLOT(WorkerFailedToStart()));
 }
 
+TagReaderClient::~TagReaderClient() {}
+
 void TagReaderClient::Start() { worker_pool_->Start(); }
+
+void TagReaderClient::ReloadSettings() { path_parser_->ReloadSettings(); }
 
 void TagReaderClient::WorkerFailedToStart() {
   qLog(Error) << "The" << kWorkerExecutableName << "executable was not found"
@@ -156,6 +165,7 @@ void TagReaderClient::ReadFileBlocking(const QString& filename, Song* song) {
   TagReaderReply* reply = ReadFile(filename);
   if (reply->WaitForFinished()) {
     song->InitFromProtobuf(reply->message().read_file_response().metadata());
+    path_parser_->GuessMissingFields(song, filename);
   }
   reply->deleteLater();
 }

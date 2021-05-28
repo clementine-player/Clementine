@@ -156,6 +156,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
             ret << track;
           }
         }
+        break;  // stop after consuming one medium with correct discid!
       } else {
         Utilities::ConsumeCurrentElement(&reader);
       }
@@ -163,6 +164,10 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
                reader.name() == "medium-list") {
       break;
     }
+  }
+  if (reader.hasError()) {
+    qLog(Error) << "Received a reply from musicbrainz.org for" << discid
+                << " but the XML was not well-formed.";
   }
 
   // If we parsed a year, copy it to the tracks.

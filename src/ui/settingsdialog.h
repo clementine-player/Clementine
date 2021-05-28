@@ -60,24 +60,30 @@ class SettingsDialog : public QDialog {
   ~SettingsDialog();
 
   enum Page {
+    // General
     Page_Playback,
     Page_Behaviour,
+    Page_Library,
+    Page_SongMetadata,
+    Page_BackgroundStreams,
+    Page_Proxy,
+    Page_Transcoding,
+    Page_NetworkRemote,
+    Page_Wiimotedev,
+
+    // User interface
     Page_SongInformation,
     Page_GlobalShortcuts,
     Page_GlobalSearch,
     Page_Appearance,
-    Page_NetworkRemote,
     Page_Notifications,
-    Page_Library,
+
+    // Internet services
+    Page_InternetShow,
     Page_Lastfm,
     Page_Spotify,
     Page_Magnatune,
     Page_DigitallyImported,
-    Page_BackgroundStreams,
-    Page_Proxy,
-    Page_Transcoding,
-    Page_Remote,
-    Page_Wiimotedev,
     Page_Subsonic,
     Page_Podcasts,
     Page_GoogleDrive,
@@ -85,7 +91,6 @@ class SettingsDialog : public QDialog {
     Page_Skydrive,
     Page_Box,
     Page_Seafile,
-    Page_InternetShow,
     Page_AmazonCloudDrive,
     Page_RadioBrowser,
   };
