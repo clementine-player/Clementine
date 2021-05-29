@@ -23,7 +23,6 @@
 #include <QUrl>
 
 // These must come after Qt includes (issue 3247)
-#include <cdio/cdio.h>
 #include <gst/audio/gstaudiocdsrc.h>
 
 #include "core/song.h"
@@ -44,7 +43,6 @@ class CddaSongLoader : public QObject {
   // Signals declared below will be emitted anytime new information will be
   // available.
   void LoadSongs();
-  bool HasChanged();
 
  signals:
   void SongsLoaded(const SongList& songs);
@@ -63,7 +61,6 @@ class CddaSongLoader : public QObject {
 
   QUrl url_;
   GstElement* cdda_;
-  CdIo_t* cdio_;
   QMutex mutex_load_;
 };
 

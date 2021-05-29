@@ -25,6 +25,7 @@
 #include <gst/audio/gstaudiocdsrc.h>
 
 #include "cddasongloader.h"
+#include "cddevice.h"
 #include "connecteddevice.h"
 #include "core/song.h"
 #include "musicbrainz/musicbrainzclient.h"
@@ -61,8 +62,10 @@ class CddaDevice : public ConnectedDevice {
 
  private slots:
   void SongsLoaded(const SongList& songs);
+  void LoadSongs();
 
  private:
+  CdDevice cd_device_;
   CddaSongLoader cdda_song_loader_;
 };
 
