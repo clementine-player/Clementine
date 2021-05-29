@@ -27,14 +27,12 @@
 #include "core/timeconstants.h"
 
 CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
-    : QObject(parent), url_(url), cdda_(nullptr), cdio_(nullptr) {
+    : QObject(parent), url_(url), cdda_(nullptr) {
   connect(this, SIGNAL(MusicBrainzDiscIdLoaded(const QString&)),
           SLOT(LoadAudioCDTags(const QString&)));
 }
 
-CddaSongLoader::~CddaSongLoader() {
-  if (cdio_) cdio_destroy(cdio_);
-}
+CddaSongLoader::~CddaSongLoader() {}
 
 QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
   QString track;
@@ -52,10 +50,7 @@ void CddaSongLoader::LoadSongs() {
 
 void CddaSongLoader::LoadSongsFromCdda() {
   QMutexLocker locker(&mutex_load_);
-  cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
-  if (cdio_ == nullptr) {
-    return;
-  }
+
   // Create gstreamer cdda element
   GError* error = nullptr;
   cdda_ = gst_element_make_from_uri(GST_URI_SRC, "cdda://", nullptr, &error);
@@ -211,16 +206,4 @@ void CddaSongLoader::AudioCDTagsLoaded(
     songs << song;
   }
   emit SongsMetadataLoaded(songs);
-}
-
-bool CddaSongLoader::HasChanged() {
-  if ((cdio_ && cdda_) && cdio_get_media_changed(cdio_) != 1) {
-    return false;
-  }
-  // Check if mutex is already token (i.e. init is already taking place)
-  if (!mutex_load_.tryLock()) {
-    return false;
-  }
-  mutex_load_.unlock();
-  return true;
 }

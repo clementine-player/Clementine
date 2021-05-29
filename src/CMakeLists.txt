@@ -1100,12 +1100,14 @@ optional_source(HAVE_AUDIOCD
     devices/cddadevice.cpp
     devices/cddalister.cpp
     devices/cddasongloader.cpp
+    devices/cddevice.cpp
     ripper/ripcddialog.cpp
     ripper/ripper.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
     devices/cddasongloader.h
+    devices/cddevice.h
     ripper/ripcddialog.h
     ripper/ripper.h
   UI

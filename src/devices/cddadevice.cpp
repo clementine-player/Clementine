@@ -27,6 +27,7 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        Application* app, int database_id, bool first_time)
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
+      cd_device_(url),
       cdda_song_loader_(url) {
   connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)), this,
           SLOT(SongsLoaded(SongList)));
@@ -36,20 +37,18 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
+  connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(LoadSongs()));
 }
 
 CddaDevice::~CddaDevice() {}
 
-void CddaDevice::Init() {
+void CddaDevice::Init() { LoadSongs(); }
+
+void CddaDevice::Refresh() {}
+
+void CddaDevice::LoadSongs() {
   song_count_ = 0;  // Reset song count, in case it was already set
   cdda_song_loader_.LoadSongs();
-}
-
-void CddaDevice::Refresh() {
-  if (!cdda_song_loader_.HasChanged()) {
-    return;
-  }
-  Init();
 }
 
 void CddaDevice::SongsLoaded(const SongList& songs) {
