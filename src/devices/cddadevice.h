@@ -43,6 +43,7 @@ class CddaDevice : public ConnectedDevice {
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
   CddaSongLoader* loader();
+  CdIo_t* raw_cdio();  // TODO: not ideal, but Ripper needs this currently
   void WatchForDiscChanges(bool watch);
 
   static const int kDiscChangePollingIntervalMs;

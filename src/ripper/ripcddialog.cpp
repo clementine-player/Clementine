@@ -56,10 +56,10 @@ RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
                          QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_RipCDDialog),
-      ripper_(new Ripper(this)),
       working_(false),
       cdda_device_(std::move(cdda_device)),
-      loader_(cdda_device_->loader()) {
+      loader_(cdda_device_->loader()),
+      ripper_(new Ripper(cdda_device_->raw_cdio(), this)) {
   Q_ASSERT(cdda_device_);
   // Init
   ui_->setupUi(this);

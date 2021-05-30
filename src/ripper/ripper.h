@@ -40,7 +40,7 @@ class Ripper : public QObject {
   Q_OBJECT
 
  public:
-  explicit Ripper(QObject* parent = nullptr);
+  explicit Ripper(CdIo_t* cdio, QObject* parent = nullptr);
   ~Ripper();
 
   // Adds a track to the rip list if the track number corresponds to a
@@ -60,10 +60,6 @@ class Ripper : public QObject {
   int AddedTracks() const;
   // Clears the rip list.
   void ClearTracks();
-  // Returns true if a cd device was successfully opened.
-  bool CheckCDIOIsValid();
-  // Returns true if the cd media has changed.
-  bool MediaChanged() const;
 
  signals:
   void Finished();

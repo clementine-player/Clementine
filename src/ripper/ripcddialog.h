@@ -42,7 +42,6 @@ class RipCDDialog : public QDialog {
   explicit RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
                        QWidget* parent = nullptr);
   ~RipCDDialog();
-  bool CheckCDIOIsValid();
 
  protected:
   void closeEvent(QCloseEvent* event);
@@ -88,9 +87,9 @@ class RipCDDialog : public QDialog {
   QPushButton* close_button_;
   QPushButton* rip_button_;
   std::unique_ptr<Ui_RipCDDialog> ui_;
-  Ripper* ripper_;
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
   CddaSongLoader* loader_;
+  Ripper* ripper_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_
