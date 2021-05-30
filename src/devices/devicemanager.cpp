@@ -191,7 +191,6 @@ QVariant DeviceManager::data(const QModelIndex& idx, int role) const {
 
       if (info->size_)
         text = text + QString(" (%1)").arg(Utilities::PrettySize(info->size_));
-      if (info->device_.get()) info->device_->Refresh();
       return text;
     }
 
