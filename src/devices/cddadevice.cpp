@@ -55,6 +55,8 @@ void CddaDevice::Init() { LoadSongs(); }
 
 void CddaDevice::Refresh() {}
 
+CddaSongLoader* CddaDevice::loader() { return &cdda_song_loader_; }
+
 void CddaDevice::WatchForDiscChanges(bool watch) {
   if (watch && !disc_changed_timer_.isActive())
     disc_changed_timer_.start(CddaDevice::kDiscChangePollingIntervalMs);

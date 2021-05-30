@@ -90,7 +90,7 @@ class RipCDDialog : public QDialog {
   std::unique_ptr<Ui_RipCDDialog> ui_;
   Ripper* ripper_;
   bool working_;
-  CddaSongLoader* loader_;
   std::shared_ptr<CddaDevice> cdda_device_;
+  CddaSongLoader* loader_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

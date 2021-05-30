@@ -58,10 +58,9 @@ RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
       working_(false),
-      loader_(nullptr),
-      cdda_device_(std::move(cdda_device)) {
+      cdda_device_(std::move(cdda_device)),
+      loader_(cdda_device_->loader()) {
   Q_ASSERT(cdda_device_);
-  loader_ = new CddaSongLoader(cdda_device_->url(), this);
   // Init
   ui_->setupUi(this);
 
