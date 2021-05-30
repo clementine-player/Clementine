@@ -38,8 +38,7 @@ class CddaDevice : public ConnectedDevice {
                          bool watch_for_disc_changes = true);
   ~CddaDevice();
 
-  void Init();
-  void Refresh();
+  void Init() override;
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
   CddaSongLoader* loader();

@@ -53,8 +53,6 @@ CddaDevice::~CddaDevice() {
 
 void CddaDevice::Init() { LoadSongs(); }
 
-void CddaDevice::Refresh() {}
-
 CddaSongLoader* CddaDevice::loader() { return &cdda_song_loader_; }
 
 CdIo_t* CddaDevice::raw_cdio() { return cdio_; }
