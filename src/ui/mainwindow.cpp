@@ -57,7 +57,9 @@
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#ifdef HAVE_AUDIOCD
 #include "devices/cddadevice.h"
+#endif
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
