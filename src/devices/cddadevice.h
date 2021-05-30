@@ -18,17 +18,15 @@
 #ifndef CDDADEVICE_H
 #define CDDADEVICE_H
 
-#include <QMutex>
+#include <QTimer>
+#include <QUrl>
 
 // These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
-#include <gst/audio/gstaudiocdsrc.h>
 
 #include "cddasongloader.h"
-#include "cddevice.h"
 #include "connecteddevice.h"
 #include "core/song.h"
-#include "musicbrainz/musicbrainzclient.h"
 
 class CddaDevice : public ConnectedDevice {
   Q_OBJECT
@@ -36,14 +34,17 @@ class CddaDevice : public ConnectedDevice {
  public:
   Q_INVOKABLE CddaDevice(const QUrl& url, DeviceLister* lister,
                          const QString& unique_id, DeviceManager* manager,
-                         Application* app, int database_id, bool first_time);
+                         Application* app, int database_id, bool first_time,
+                         bool watch_for_disc_changes = true);
   ~CddaDevice();
 
   void Init();
   void Refresh();
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
+  void WatchForDiscChanges(bool watch);
 
+  static const int kDiscChangePollingIntervalMs;
   static QStringList url_schemes() { return QStringList() << "cdda"; }
 
   // QUrl interprets a single number as an ip address, so the QString cdda://1
@@ -63,12 +64,13 @@ class CddaDevice : public ConnectedDevice {
 
  private slots:
   void SongsLoaded(const SongList& songs);
-  void DiscChangeDetected();
+  void CheckDiscChanged();
 
  private:
   void LoadSongs();
 
-  CdDevice cd_device_;
+  CdIo_t* cdio_;
+  QTimer disc_changed_timer_;
   CddaSongLoader cdda_song_loader_;
 };
 

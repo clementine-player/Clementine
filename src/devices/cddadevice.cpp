@@ -17,18 +17,19 @@
 
 #include "cddadevice.h"
 
-#include <QMutexLocker>
-
-#include "core/song.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
+const int CddaDevice::kDiscChangePollingIntervalMs = 500;
+
 CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
-                       Application* app, int database_id, bool first_time)
+                       Application* app, int database_id, bool first_time,
+                       bool watch_for_disc_changes)
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
-      cd_device_(url),
+      cdio_(nullptr),
+      disc_changed_timer_(),
       cdda_song_loader_(url) {
   connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)), this,
           SLOT(SongsLoaded(SongList)));
@@ -38,14 +39,28 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
-  connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(DiscChangeDetected()));
+  //   connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(DiscChangeDetected()));
+  cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
+  Q_ASSERT(cdio_);  // todo: error handling?
+  connect(&disc_changed_timer_, SIGNAL(timeout()), SLOT(CheckDiscChanged()));
+  WatchForDiscChanges(watch_for_disc_changes);
 }
 
-CddaDevice::~CddaDevice() {}
+CddaDevice::~CddaDevice() {
+  Q_ASSERT(cdio_);
+  cdio_destroy(cdio_);
+}
 
 void CddaDevice::Init() { LoadSongs(); }
 
 void CddaDevice::Refresh() {}
+
+void CddaDevice::WatchForDiscChanges(bool watch) {
+  if (watch && !disc_changed_timer_.isActive())
+    disc_changed_timer_.start(CddaDevice::kDiscChangePollingIntervalMs);
+  else if (!watch && disc_changed_timer_.isActive())
+    disc_changed_timer_.stop();
+}
 
 void CddaDevice::LoadSongs() { cdda_song_loader_.LoadSongs(); }
 
@@ -55,10 +70,13 @@ void CddaDevice::SongsLoaded(const SongList& songs) {
   song_count_ = songs.size();
 }
 
-void CddaDevice::DiscChangeDetected() {
-  emit DiscChanged();
-  song_count_ = 0;
-  SongList no_songs;
-  SongsLoaded(no_songs);
-  LoadSongs();
+void CddaDevice::CheckDiscChanged() {
+  Q_ASSERT(cdio_);
+  if (cdio_get_media_changed(cdio_) == 1) {
+    emit DiscChanged();
+    song_count_ = 0;
+    SongList no_songs;
+    SongsLoaded(no_songs);
+    LoadSongs();
+  }
 }
