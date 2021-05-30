@@ -33,12 +33,14 @@ class QShowEvent;
 class CddaSongLoader;
 class Ripper;
 class Ui_RipCDDialog;
+class CddaDevice;
 
 class RipCDDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit RipCDDialog(QWidget* parent = nullptr);
+  explicit RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
+                       QWidget* parent = nullptr);
   ~RipCDDialog();
   bool CheckCDIOIsValid();
 
@@ -64,6 +66,7 @@ class RipCDDialog : public QDialog {
   void UpdateTrackListTable(const SongList& songs);
   // Update album information with metadata.
   void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
+  void DiscChanged();
 
  private:
   static const char* kSettingsGroup;
@@ -88,5 +91,6 @@ class RipCDDialog : public QDialog {
   Ripper* ripper_;
   bool working_;
   CddaSongLoader* loader_;
+  std::shared_ptr<CddaDevice> cdda_device_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

@@ -348,6 +348,26 @@ DeviceInfo* DeviceManager::FindEquivalentDevice(DeviceInfo* info) const {
   return nullptr;
 }
 
+QList<DeviceInfo*> DeviceManager::FindDeviceByUrlSchemes(
+    QStringList url_schemes) const {
+  QList<DeviceInfo*> matches;
+  for (DeviceInfo* device_info : devices_) {
+    for (const DeviceInfo::Backend& backend : device_info->backends_) {
+      if (!backend.lister_) continue;
+
+      QList<QUrl> device_urls =
+          backend.lister_->MakeDeviceUrls(backend.unique_id_);
+      for (const QUrl& url : device_urls) {
+        if (url_schemes.contains(url.scheme())) {
+          matches << device_info;
+          break;
+        }
+      }
+    }
+  }
+  return matches;
+}
+
 void DeviceManager::PhysicalDeviceAdded(const QString& id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 

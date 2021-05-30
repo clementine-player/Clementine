@@ -19,6 +19,7 @@
 
 #include <QMutexLocker>
 
+#include "core/song.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -37,7 +38,7 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
-  connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(LoadSongs()));
+  connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(DiscChangeDetected()));
 }
 
 CddaDevice::~CddaDevice() {}
@@ -46,13 +47,18 @@ void CddaDevice::Init() { LoadSongs(); }
 
 void CddaDevice::Refresh() {}
 
-void CddaDevice::LoadSongs() {
-  song_count_ = 0;  // Reset song count, in case it was already set
-  cdda_song_loader_.LoadSongs();
-}
+void CddaDevice::LoadSongs() { cdda_song_loader_.LoadSongs(); }
 
 void CddaDevice::SongsLoaded(const SongList& songs) {
   model_->Reset();
   emit SongsDiscovered(songs);
   song_count_ = songs.size();
+}
+
+void CddaDevice::DiscChangeDetected() {
+  emit DiscChanged();
+  song_count_ = 0;
+  SongList no_songs;
+  SongsLoaded(no_songs);
+  LoadSongs();
 }

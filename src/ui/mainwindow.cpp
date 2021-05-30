@@ -22,6 +22,7 @@
 #include <QFileDialog>
 #include <QFileSystemModel>
 #include <QLinearGradient>
+#include <QList>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPainter>
@@ -56,6 +57,7 @@
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "devices/cddadevice.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
@@ -2217,15 +2219,33 @@ void MainWindow::AddStreamAccepted() {
 void MainWindow::OpenRipCDDialog() {
 #ifdef HAVE_AUDIOCD
   if (!rip_cd_dialog_) {
-    rip_cd_dialog_.reset(new RipCDDialog);
+    QList<DeviceInfo*> cd_device_infos =
+        app_->device_manager()->FindDeviceByUrlSchemes(
+            CddaDevice::url_schemes());
+    std::shared_ptr<ConnectedDevice> device;
+    if (!cd_device_infos.isEmpty()) {
+      DeviceInfo* device_info =
+          cd_device_infos[0];  // TODO: currently just picking the first cd
+                               // drive; what if there are several?
+      device = app_->device_manager()->Connect(
+          device_info);  // connect the device; will do nothing if already
+                         // connected
+    }
+
+    if (!device) {
+      QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
+                            tr("Failed reading CD drive"));
+      cdio_fail.exec();
+      return;
+    }
+
+    std::shared_ptr<CddaDevice> cdda_device =
+        std::dynamic_pointer_cast<CddaDevice>(device);
+    Q_ASSERT(cdda_device);  // since we are requesting for cdda devices, the
+                            // cast must work; assert it
+    rip_cd_dialog_.reset(new RipCDDialog(std::move(cdda_device)));
   }
-  if (rip_cd_dialog_->CheckCDIOIsValid()) {
-    rip_cd_dialog_->show();
-  } else {
-    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
-                          tr("Failed reading CD drive"));
-    cdio_fail.exec();
-  }
+  rip_cd_dialog_->show();
 #endif
 }
 

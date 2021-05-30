@@ -59,12 +59,15 @@ class CddaDevice : public ConnectedDevice {
 
  signals:
   void SongsDiscovered(const SongList& songs);
+  void DiscChanged();
 
  private slots:
   void SongsLoaded(const SongList& songs);
-  void LoadSongs();
+  void DiscChangeDetected();
 
  private:
+  void LoadSongs();
+
   CdDevice cd_device_;
   CddaSongLoader cdda_song_loader_;
 };
