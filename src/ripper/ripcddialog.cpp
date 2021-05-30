@@ -30,13 +30,13 @@
 #include "config.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
+#include "devices/cddadevice.h"
 #include "devices/cddasongloader.h"
 #include "ripper/ripper.h"
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "ui_ripcddialog.h"
-
 namespace {
 bool ComparePresetsByName(const TranscoderPreset& left,
                           const TranscoderPreset& right) {
@@ -52,12 +52,16 @@ const int kTrackDurationColumn = 3;
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
 
-RipCDDialog::RipCDDialog(QWidget* parent)
+RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
+                         QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
       working_(false),
-      loader_(new CddaSongLoader(QUrl(), this)) {
+      loader_(nullptr),
+      cdda_device_(std::move(cdda_device)) {
+  Q_ASSERT(cdda_device_);
+  loader_ = new CddaSongLoader(cdda_device_->url(), this);
   // Init
   ui_->setupUi(this);
 
@@ -128,11 +132,11 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       break;
     }
   }
+
+  connect(cdda_device_.get(), SIGNAL(DiscChanged()), SLOT(DiscChanged()));
 }
 
 RipCDDialog::~RipCDDialog() {}
-
-bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
 
 void RipCDDialog::closeEvent(QCloseEvent* event) {
   if (working_) {
@@ -149,17 +153,6 @@ void RipCDDialog::showEvent(QShowEvent* event) {
 }
 
 void RipCDDialog::ClickedRipButton() {
-  if (ripper_->MediaChanged()) {
-    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error Ripping CD"),
-                          tr("Media has changed. Reloading"));
-    cdio_fail.exec();
-    ResetDialog();
-    if (CheckCDIOIsValid()) {
-      loader_->LoadSongs();
-    }
-    return;
-  }
-
   // Add tracks and album information to the ripper.
   ripper_->ClearTracks();
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
@@ -297,6 +290,8 @@ void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
   ui_->artistLineEdit->setText(song.artist());
   ui_->yearLineEdit->setText(QString::number(song.year()));
 }
+
+void RipCDDialog::DiscChanged() { ResetDialog(); }
 
 void RipCDDialog::SetWorking(bool working) {
   working_ = working;
