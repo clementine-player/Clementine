@@ -135,8 +135,9 @@ void RipCDDialog::closeEvent(QCloseEvent* event) {
 }
 
 void RipCDDialog::showEvent(QShowEvent* event) {
-  ResetDialog();
-  if (loader_) loader_->LoadSongs();
+  // No need to refresh track list here anymore. On first open this is initiated
+  // by InitializeDevices(). Afterwards track list is always updates when a disc
+  // change is detected due to working through CddaDevice
   if (!working_) {
     ui_->progress_group->hide();
   }
