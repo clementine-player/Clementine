@@ -18,12 +18,14 @@
 #ifndef CDDASONGLOADER_H
 #define CDDASONGLOADER_H
 
-#include <QMutex>
+#include <QFuture>
 #include <QObject>
 #include <QUrl>
 
 // These must come after Qt includes (issue 3247)
 #include <gst/audio/gstaudiocdsrc.h>
+
+#include <atomic>
 
 #include "core/song.h"
 #include "musicbrainz/musicbrainzclient.h"
@@ -61,7 +63,8 @@ class CddaSongLoader : public QObject {
 
   QUrl url_;
   GstElement* cdda_;
-  QMutex mutex_load_;
+  QFuture<void> loading_future_;
+  std::atomic<bool> may_load_;
 };
 
 #endif  // CDDASONGLOADER_H

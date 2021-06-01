@@ -27,12 +27,18 @@
 #include "core/timeconstants.h"
 
 CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
-    : QObject(parent), url_(url), cdda_(nullptr) {
+    : QObject(parent), url_(url), cdda_(nullptr), may_load_(true) {
   connect(this, SIGNAL(MusicBrainzDiscIdLoaded(const QString&)),
           SLOT(LoadAudioCDTags(const QString&)));
 }
 
-CddaSongLoader::~CddaSongLoader() {}
+CddaSongLoader::~CddaSongLoader() {
+  // The LoadSongsFromCdda methods runs concurrently in a thread and we need to
+  // wait for it to terminate. There's no guarantee that it has terminated when
+  // destructor is invoked.
+  may_load_ = false;
+  loading_future_.waitForFinished();
+}
 
 QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
   QString track;
@@ -45,11 +51,15 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
 }
 
 void CddaSongLoader::LoadSongs() {
-  QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
+  // only dispatch a new thread for loading tracks if not already running.
+  if (!loading_future_.isRunning()) {
+    loading_future_ =
+        QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
+  }
 }
 
 void CddaSongLoader::LoadSongsFromCdda() {
-  QMutexLocker locker(&mutex_load_);
+  if (!may_load_) return;
 
   // Create gstreamer cdda element
   GError* error = nullptr;
@@ -118,7 +128,8 @@ void CddaSongLoader::LoadSongsFromCdda() {
   GstMessage* msg = nullptr;
   GstMessageType msg_filter =
       static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
-  while (msg_filter &&
+  QString musicbrainz_discid;
+  while (may_load_ && msg_filter &&
          (msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
                                            10 * GST_SECOND, msg_filter))) {
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
