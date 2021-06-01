@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
  Copyright 2014, Andre Siviero <altsiviero@gmail.com>
+ Copyright 2021, Lukas Prediger <lumip@lumip.de>
 
  Clementine is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@
 #include "core/tagreaderclient.h"
 #include "devices/cddadevice.h"
 #include "devices/cddasongloader.h"
+#include "devices/devicemanager.h"
 #include "ripper/ripper.h"
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
@@ -52,15 +54,15 @@ const int kTrackDurationColumn = 3;
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
 
-RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
-                         QWidget* parent)
+RipCDDialog::RipCDDialog(DeviceManager& device_manager, QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_RipCDDialog),
+      device_manager_(device_manager),
+      cdda_devices_(
+          device_manager.FindDeviceByUrlSchemes(CddaDevice::url_schemes())),
       working_(false),
-      cdda_device_(std::move(cdda_device)),
-      loader_(cdda_device_->loader()),
-      ripper_(new Ripper(cdda_device_->raw_cdio(), this)) {
-  Q_ASSERT(cdda_device_);
+      cdda_device_(),
+      loader_(nullptr) {
   // Init
   ui_->setupUi(this);
 
@@ -82,29 +84,20 @@ RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
   cancel_button_->hide();
   ui_->progress_group->hide();
 
+  rip_button_->setEnabled(false);  // will be enabled by DeviceSelected if a
+                                   // valid device is selected
+
+  InitializeDevices();
+
   connect(ui_->select_all_button, SIGNAL(clicked()), SLOT(SelectAll()));
   connect(ui_->select_none_button, SIGNAL(clicked()), SLOT(SelectNone()));
   connect(ui_->invert_selection_button, SIGNAL(clicked()),
           SLOT(InvertSelection()));
   connect(rip_button_, SIGNAL(clicked()), SLOT(ClickedRipButton()));
-  connect(cancel_button_, SIGNAL(clicked()), ripper_, SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
-
-  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
-          SLOT(BuildTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(UpdateTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
-
-  connect(ripper_, SIGNAL(Finished()), SLOT(Finished()));
-  connect(ripper_, SIGNAL(Cancelled()), SLOT(Cancelled()));
-  connect(ripper_, SIGNAL(ProgressInterval(int, int)),
-          SLOT(SetupProgressBarLimits(int, int)));
-  connect(ripper_, SIGNAL(Progress(int)), SLOT(UpdateProgressBar(int)));
 
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
@@ -131,8 +124,6 @@ RipCDDialog::RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
       break;
     }
   }
-
-  connect(cdda_device_.get(), SIGNAL(DiscChanged()), SLOT(DiscChanged()));
 }
 
 RipCDDialog::~RipCDDialog() {}
@@ -145,15 +136,56 @@ void RipCDDialog::closeEvent(QCloseEvent* event) {
 
 void RipCDDialog::showEvent(QShowEvent* event) {
   ResetDialog();
-  loader_->LoadSongs();
+  if (loader_) loader_->LoadSongs();
   if (!working_) {
     ui_->progress_group->hide();
   }
 }
 
+void RipCDDialog::InitializeDevices() {
+  Q_ASSERT(!cdda_device_);
+
+  // add all devices to drop down selection
+  for (const DeviceInfo* device_info : cdda_devices_) {
+    ui_->cd_drive_selection->addItem(device_info->friendly_name_);
+  }
+  // ensure that selecting the first device below will emit a
+  // currentIndexChanged signal
+  ui_->cd_drive_selection->setCurrentIndex(-1);
+
+  connect(ui_->cd_drive_selection, SIGNAL(currentIndexChanged(int)),
+          SLOT(DeviceSelected(int)));
+
+  // look for any already connected device, guess that might be the one the user
+  // is interested in and make it the active selection
+  for (int i = 0; i < cdda_devices_.size(); ++i) {
+    DeviceInfo* device_info = cdda_devices_[i];
+    if (device_info->device_) {
+      // found one!
+      ui_->cd_drive_selection->setCurrentIndex(i);
+      return;
+    }
+  }
+
+  // there is no device that is already connected; just select the first one
+  if (!cdda_devices_.isEmpty()) ui_->cd_drive_selection->setCurrentIndex(0);
+}
+
 void RipCDDialog::ClickedRipButton() {
+  Q_ASSERT(cdda_device_);
+
+  // create and connect Ripper instance for this task
+  Ripper* ripper = new Ripper(cdda_device_->raw_cdio(), this);
+  connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
+
+  connect(ripper, SIGNAL(Finished()), SLOT(Finished()));
+  connect(ripper, SIGNAL(Cancelled()), SLOT(Cancelled()));
+  connect(ripper, SIGNAL(ProgressInterval(int, int)),
+          SLOT(SetupProgressBarLimits(int, int)));
+  connect(ripper, SIGNAL(Progress(int)), SLOT(UpdateProgressBar(int)));
+
   // Add tracks and album information to the ripper.
-  ripper_->ClearTracks();
+  ripper->ClearTracks();
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
   for (int i = 1; i <= ui_->tableWidget->rowCount(); ++i) {
@@ -163,15 +195,15 @@ void RipCDDialog::ClickedRipButton() {
     QString transcoded_filename = GetOutputFileName(
         ParseFileFormatString(ui_->format_filename->text(), i));
     QString title = track_names_.value(i - 1)->text();
-    ripper_->AddTrack(i, title, transcoded_filename, preset);
+    ripper->AddTrack(i, title, transcoded_filename, preset);
   }
-  ripper_->SetAlbumInformation(
+  ripper->SetAlbumInformation(
       ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
       ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
       ui_->discLineEdit->text().toInt(), preset.type_);
 
   SetWorking(true);
-  ripper_->Start();
+  ripper->Start();
 }
 
 void RipCDDialog::Options() {
@@ -233,11 +265,57 @@ void RipCDDialog::InvertSelection() {
   }
 }
 
-void RipCDDialog::Finished() { SetWorking(false); }
+void RipCDDialog::DeviceSelected(int device_index) {
+  // disconnecting from previous loader and device, if any
+  if (loader_) disconnect(loader_, nullptr, this, nullptr);
+  if (cdda_device_) disconnect(cdda_device_.get(), nullptr, this, nullptr);
+
+  ResetDialog();
+  if (device_index < 0)
+    return;  // Invalid selection, probably no devices around
+
+  Q_ASSERT(device_index < cdda_devices_.size());
+
+  DeviceInfo* device_info = cdda_devices_[device_index];
+  std::shared_ptr<ConnectedDevice> device =
+      device_manager_.Connect(device_info);
+  cdda_device_ = std::dynamic_pointer_cast<CddaDevice>(device);
+  if (!cdda_device_) {
+    rip_button_->setEnabled(false);
+    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
+                          tr("Failed reading CD drive"));
+    cdio_fail.exec();
+    return;
+  }
+
+  connect(cdda_device_.get(), SIGNAL(DiscChanged()), SLOT(DiscChanged()));
+
+  // get SongLoader from device and connect signals
+  loader_ = cdda_device_->loader();
+  Q_ASSERT(loader_);
+
+  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
+          SLOT(BuildTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
+          SLOT(UpdateTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
+          SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
+
+  // load songs from new SongLoader
+  loader_->LoadSongs();
+  rip_button_->setEnabled(true);
+}
+
+void RipCDDialog::Finished() {
+  SetWorking(false);
+  Ripper* ripper = dynamic_cast<Ripper*>(sender());
+  Q_ASSERT(ripper);
+  ripper->deleteLater();
+}
 
 void RipCDDialog::Cancelled() {
   ui_->progress_bar->setValue(0);
-  SetWorking(false);
+  Finished();
 }
 
 void RipCDDialog::SetupProgressBarLimits(int min, int max) {

@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
  Copyright 2014, Andre Siviero <altsiviero@gmail.com>
+ Copyright 2021, Lukas Prediger <lumip@lumip.de>
 
  Clementine is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -34,12 +35,14 @@ class CddaSongLoader;
 class Ripper;
 class Ui_RipCDDialog;
 class CddaDevice;
+class DeviceManager;
+class DeviceInfo;
 
 class RipCDDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit RipCDDialog(std::shared_ptr<CddaDevice> cdda_device,
+  explicit RipCDDialog(DeviceManager& device_manager,
                        QWidget* parent = nullptr);
   ~RipCDDialog();
 
@@ -54,6 +57,7 @@ class RipCDDialog : public QDialog {
   void SelectAll();
   void SelectNone();
   void InvertSelection();
+  void DeviceSelected(int device_index);
   void Finished();
   void Cancelled();
   void SetupProgressBarLimits(int min, int max);
@@ -79,6 +83,7 @@ class RipCDDialog : public QDialog {
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void ResetDialog();
+  void InitializeDevices();
 
   QList<QCheckBox*> checkboxes_;
   QList<QLineEdit*> track_names_;
@@ -87,9 +92,10 @@ class RipCDDialog : public QDialog {
   QPushButton* close_button_;
   QPushButton* rip_button_;
   std::unique_ptr<Ui_RipCDDialog> ui_;
+  DeviceManager& device_manager_;
+  QList<DeviceInfo*> cdda_devices_;
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
   CddaSongLoader* loader_;
-  Ripper* ripper_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_
