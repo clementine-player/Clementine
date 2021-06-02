@@ -17,6 +17,7 @@
 
 #include "cddadevice.h"
 
+#include "deviceerror.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -41,7 +42,10 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsDiscovered(SongList)));
   //   connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(DiscChangeDetected()));
   cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
-  Q_ASSERT(cdio_);  // todo: error handling?
+  if (!cdio_) {
+    throw DeviceError(url.toString(),
+                      "Cannot open device: cdio_open returned nullptr");
+  }
   connect(&disc_changed_timer_, SIGNAL(timeout()), SLOT(CheckDiscChanged()));
   WatchForDiscChanges(watch_for_disc_changes);
 }

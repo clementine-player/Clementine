@@ -59,7 +59,7 @@ RipCDDialog::RipCDDialog(DeviceManager& device_manager, QWidget* parent)
       ui_(new Ui_RipCDDialog),
       device_manager_(device_manager),
       cdda_devices_(
-          device_manager.FindDeviceByUrlSchemes(CddaDevice::url_schemes())),
+          device_manager.FindDevicesByUrlSchemes(CddaDevice::url_schemes())),
       working_(false),
       cdda_device_(),
       loader_(nullptr) {
