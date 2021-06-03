@@ -45,6 +45,7 @@ class CddaSongLoader : public QObject {
   // Signals declared below will be emitted anytime new information will be
   // available.
   void LoadSongs();
+  bool IsActive() const;
 
  signals:
   void SongsLoaded(const SongList& songs);

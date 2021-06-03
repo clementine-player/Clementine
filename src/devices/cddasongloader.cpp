@@ -50,9 +50,11 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
   return CddaDevice::TrackStrToUrl(track);
 }
 
+bool CddaSongLoader::IsActive() const { return loading_future_.isRunning(); }
+
 void CddaSongLoader::LoadSongs() {
   // only dispatch a new thread for loading tracks if not already running.
-  if (!loading_future_.isRunning()) {
+  if (!IsActive()) {
     loading_future_ =
         QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
   }

@@ -77,6 +77,10 @@ void CddaDevice::SongsLoaded(const SongList& songs) {
 }
 
 void CddaDevice::CheckDiscChanged() {
+  // do nothing if loader is currently reading;
+  // we'd just block until it's finished
+  if (cdda_song_loader_.IsActive()) return;
+
   Q_ASSERT(cdio_);
   if (cdio_get_media_changed(cdio_) == 1) {
     emit DiscChanged();
