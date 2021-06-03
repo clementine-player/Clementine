@@ -862,6 +862,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           ui_->action_stop_after_this_track, SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(Next()), ui_->action_next_track,
           SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(NextAlbum()), ui_->action_next_album,
+          SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(Previous()), ui_->action_previous_track,
           SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(IncVolume()), app_->player(),
