@@ -47,8 +47,8 @@ class RipCDDialog : public QDialog {
   ~RipCDDialog();
 
  protected:
-  void closeEvent(QCloseEvent* event);
-  void showEvent(QShowEvent* event);
+  void closeEvent(QCloseEvent* event) override;
+  void showEvent(QShowEvent* event) override;
 
  private slots:
   void ClickedRipButton();
