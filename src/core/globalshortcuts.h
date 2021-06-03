@@ -66,6 +66,7 @@ class GlobalShortcuts : public QWidget {
   void Stop();
   void StopAfter();
   void Next();
+  void NextAlbum();
   void Previous();
   void IncVolume();
   void DecVolume();
