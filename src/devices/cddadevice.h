@@ -19,7 +19,6 @@
 #define CDDADEVICE_H
 
 #include <QTimer>
-#include <QUrl>
 
 // These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
@@ -27,6 +26,8 @@
 #include "cddasongloader.h"
 #include "connecteddevice.h"
 #include "core/song.h"
+
+class QUrl;
 
 class CddaDevice : public ConnectedDevice {
   Q_OBJECT
