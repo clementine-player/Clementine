@@ -17,6 +17,8 @@
 
 #include "cddadevice.h"
 
+#include <QUrl>
+
 #include "deviceerror.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -40,7 +42,6 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
-  //   connect(&cd_device_, SIGNAL(DiscChanged()), SLOT(DiscChangeDetected()));
   cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
   if (!cdio_) {
     throw DeviceError(url.toString(),
