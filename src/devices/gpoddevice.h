@@ -37,7 +37,7 @@ class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
                          Application* app, int database_id, bool first_time);
   ~GPodDevice();
 
-  void Init();
+  bool Init() override;
 
   static QStringList url_schemes() { return QStringList() << "ipod"; }
 

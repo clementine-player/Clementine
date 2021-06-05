@@ -33,17 +33,25 @@ class CddaDevice : public ConnectedDevice {
   Q_OBJECT
 
  public:
+  // Initializes the CddaDevice but does not open a handle to the device.
+  // Using code MUST call Init() after construction before calling and
+  // check that it returns true any other methods, to ensure that a valid
+  // device handle was correctly opened. Using class methods without
+  // a valid device handle is undefined behavior and might result in crashes.
   Q_INVOKABLE CddaDevice(const QUrl& url, DeviceLister* lister,
                          const QString& unique_id, DeviceManager* manager,
                          Application* app, int database_id, bool first_time,
                          bool watch_for_disc_changes = true);
   ~CddaDevice();
 
-  void Init() override;
+  bool Init() override;
   bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
   bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
   CddaSongLoader* loader();
+  // Access to the raw cdio device handle.
   CdIo_t* raw_cdio();  // TODO: not ideal, but Ripper needs this currently
+  // Check whether a valid device handle was opened.
+  bool IsValid() const;
   void WatchForDiscChanges(bool watch);
 
   static const int kDiscChangePollingIntervalMs;

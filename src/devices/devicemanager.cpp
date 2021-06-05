@@ -37,7 +37,6 @@
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "devicedatabasebackend.h"
-#include "deviceerror.h"
 #include "deviceinfo.h"
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
@@ -566,24 +565,24 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(DeviceInfo* info) {
     return ret;
   }
 
-  try {
-    QMetaObject meta_object = device_classes_.value(device_url.scheme());
-    QObject* instance = meta_object.newInstance(
-        Q_ARG(QUrl, device_url),
-        Q_ARG(DeviceLister*, info->BestBackend()->lister_),
-        Q_ARG(QString, info->BestBackend()->unique_id_),
-        Q_ARG(DeviceManager*, this), Q_ARG(Application*, app_),
-        Q_ARG(int, info->database_id_), Q_ARG(bool, first_time));
-    ret.reset(static_cast<ConnectedDevice*>(instance));
-  } catch (const DeviceError& e) {
-    qLog(Warning) << "Could not create device: " << e.what();
-    return ret;
-  }
+  QMetaObject meta_object = device_classes_.value(device_url.scheme());
+  QObject* instance = meta_object.newInstance(
+      Q_ARG(QUrl, device_url),
+      Q_ARG(DeviceLister*, info->BestBackend()->lister_),
+      Q_ARG(QString, info->BestBackend()->unique_id_),
+      Q_ARG(DeviceManager*, this), Q_ARG(Application*, app_),
+      Q_ARG(int, info->database_id_), Q_ARG(bool, first_time));
+  ret.reset(static_cast<ConnectedDevice*>(instance));
 
   if (!ret) {
     qLog(Warning) << "Could not create device for" << device_url.toString();
   } else {
-    ret->Init();
+    if (!ret->Init()) {
+      qLog(Warning) << "Could not initialize device for "
+                    << device_url.toString();
+      ret.reset();
+      return ret;
+    }
 
     info->device_ = ret;
     QModelIndex idx = ItemToIndex(info);

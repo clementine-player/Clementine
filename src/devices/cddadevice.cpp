@@ -19,7 +19,6 @@
 
 #include <QUrl>
 
-#include "deviceerror.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -42,25 +41,31 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
           SLOT(SongsLoaded(SongList)));
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
-  cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
-  if (!cdio_) {
-    throw DeviceError(url.toString(),
-                      "Cannot open device: cdio_open returned nullptr");
-  }
   connect(&disc_changed_timer_, SIGNAL(timeout()), SLOT(CheckDiscChanged()));
   WatchForDiscChanges(watch_for_disc_changes);
 }
 
 CddaDevice::~CddaDevice() {
-  Q_ASSERT(cdio_);
-  cdio_destroy(cdio_);
+  if (cdio_) {
+    cdio_destroy(cdio_);
+    cdio_ = nullptr;
+  }
 }
 
-void CddaDevice::Init() { LoadSongs(); }
+bool CddaDevice::Init() {
+  if (!cdio_) {
+    cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
+    if (!cdio_) return false;
+    LoadSongs();
+  }
+  return true;
+}
 
 CddaSongLoader* CddaDevice::loader() { return &cdda_song_loader_; }
 
 CdIo_t* CddaDevice::raw_cdio() { return cdio_; }
+
+bool CddaDevice::IsValid() const { return (cdio_ != nullptr); }
 
 void CddaDevice::WatchForDiscChanges(bool watch) {
   if (watch && !disc_changed_timer_.isActive())
@@ -78,11 +83,12 @@ void CddaDevice::SongsLoaded(const SongList& songs) {
 }
 
 void CddaDevice::CheckDiscChanged() {
+  if (!cdio_) return;  // do nothing if not initialized
+
   // do nothing if loader is currently reading;
   // we'd just block until it's finished
   if (cdda_song_loader_.IsActive()) return;
 
-  Q_ASSERT(cdio_);
   if (cdio_get_media_changed(cdio_) == 1) {
     emit DiscChanged();
     song_count_ = 0;

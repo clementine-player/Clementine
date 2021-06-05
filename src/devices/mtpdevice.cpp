@@ -47,7 +47,7 @@ MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
 
 MtpDevice::~MtpDevice() {}
 
-void MtpDevice::Init() {
+bool MtpDevice::Init() {
   InitBackendDirectory("/", first_time_, false);
   model_->Init();
 
@@ -59,6 +59,8 @@ void MtpDevice::Init() {
   connect(loader_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
   connect(loader_, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
+
+  return true;
 }
 
 void MtpDevice::ConnectAsync() {

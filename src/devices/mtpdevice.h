@@ -43,7 +43,7 @@ class MtpDevice : public ConnectedDevice {
                          << "gphoto2";
   }
 
-  void Init();
+  bool Init() override;
   void ConnectAsync();
 
   bool GetSupportedFiletypes(QList<Song::FileType>* ret);

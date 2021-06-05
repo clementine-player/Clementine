@@ -122,7 +122,6 @@ set(SOURCES
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
-  devices/deviceerror.cpp
   devices/devicelister.cpp
   devices/devicemanager.cpp
   devices/deviceproperties.cpp
@@ -458,7 +457,6 @@ set(HEADERS
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
-  devices/deviceerror.h
   devices/devicelister.h
   devices/devicemanager.h
   devices/deviceproperties.h
