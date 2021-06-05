@@ -69,9 +69,10 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
   connect(watcher_, &LibraryWatcher::Error, app, &Application::AddError);
 }
 
-void FilesystemDevice::Init() {
+bool FilesystemDevice::Init() {
   InitBackendDirectory(url_.toLocalFile(), first_time_);
   model_->Init();
+  return true;
 }
 
 FilesystemDevice::~FilesystemDevice() {
