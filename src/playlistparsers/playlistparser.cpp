@@ -129,6 +129,7 @@ SongList PlaylistParser::LoadFromFile(const QString& filename) const {
   // Find a parser that supports this file extension
   ParserBase* parser = ParserForExtension(info.suffix());
   if (!parser) {
+    emit Error(tr("Unknown filetype: %1").arg(filename));
     qLog(Warning) << "Unknown filetype:" << filename;
     return SongList();
   }
@@ -159,6 +160,7 @@ void PlaylistParser::Save(const SongList& songs, const QString& filename,
   // Find a parser that supports this file extension
   ParserBase* parser = ParserForExtension(info.suffix());
   if (!parser) {
+    emit Error(tr("Unknown filetype: %1").arg(filename));
     qLog(Warning) << "Unknown filetype:" << filename;
     return;
   }
