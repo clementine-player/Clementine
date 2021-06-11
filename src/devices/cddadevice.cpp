@@ -26,8 +26,7 @@ const int CddaDevice::kDiscChangePollingIntervalMs = 500;
 
 CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
-                       Application* app, int database_id, bool first_time,
-                       bool watch_for_disc_changes)
+                       Application* app, int database_id, bool first_time)
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
       cdio_(nullptr),
@@ -42,7 +41,6 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
   connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
           SLOT(SongsDiscovered(SongList)));
   connect(&disc_changed_timer_, SIGNAL(timeout()), SLOT(CheckDiscChanged()));
-  WatchForDiscChanges(watch_for_disc_changes);
 }
 
 CddaDevice::~CddaDevice() {
@@ -57,6 +55,7 @@ bool CddaDevice::Init() {
     cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
     if (!cdio_) return false;
     LoadSongs();
+    WatchForDiscChanges(true);
   }
   return true;
 }

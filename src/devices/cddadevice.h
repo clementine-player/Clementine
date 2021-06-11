@@ -40,8 +40,7 @@ class CddaDevice : public ConnectedDevice {
   // a valid device handle is undefined behavior and might result in crashes.
   Q_INVOKABLE CddaDevice(const QUrl& url, DeviceLister* lister,
                          const QString& unique_id, DeviceManager* manager,
-                         Application* app, int database_id, bool first_time,
-                         bool watch_for_disc_changes = true);
+                         Application* app, int database_id, bool first_time);
   ~CddaDevice();
 
   bool Init() override;
