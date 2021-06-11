@@ -348,7 +348,9 @@ qint64 CueParser::IndexToMarker(const QString& index) const {
 
 void CueParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
-  // TODO
+  // TODO: Not yet implemented. Cue files represent tracks within a single
+  //       file, so the song list would need to be composed properly.
+  emit Error(tr("Saving cue files is not yet supported."));
 }
 
 // Looks for a track starting with one of the .cue's keywords.

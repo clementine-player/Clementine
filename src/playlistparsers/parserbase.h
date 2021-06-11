@@ -55,6 +55,9 @@ class ParserBase : public QObject {
       const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
       Playlist::Path path_type = Playlist::Path_Automatic) const = 0;
 
+ signals:
+  void Error(const QString& msg) const;
+
  protected:
   // Loads a song.  If filename_or_url is a URL (with a scheme other than
   // "file") then it is set on the song and the song marked as a stream.
