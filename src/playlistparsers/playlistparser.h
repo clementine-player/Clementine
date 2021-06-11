@@ -59,6 +59,8 @@ class PlaylistParser : public QObject {
   void Error(const QString& msg) const;
 
  private:
+  void AddParser(ParserBase* parser);
+
   QString FilterForParser(const ParserBase* parser,
                           QStringList* all_extensions = nullptr) const;
 
