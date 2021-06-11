@@ -79,6 +79,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsDiscovered(SongList)));
 
+  connect(parser_, SIGNAL(Error(QString)), this, SIGNAL(Error(QString)));
   for (const PlaylistBackend::Playlist& p :
        playlist_backend->GetAllOpenPlaylists()) {
     AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
