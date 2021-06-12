@@ -902,9 +902,8 @@ jobs:
           cd libgpod-0.8.3
           wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/autogen.sh
           wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/patch-tools-generic-callout.c.diff
-          wget http://files.strawberrymusicplayer.org/patches/libgpod-libplist.patch
           patch -p0 < patch-tools-generic-callout.c.diff
-          patch -p1 < libgpod-libplist.patch
+          patch -p1 < $GITHUB_WORKSPACE/3rdparty/libgpod/patches/0001-Look-for-libplist-2.0.patch
           chmod u+x autogen.sh
           ./autogen.sh
           ./configure --disable-more-warnings \
