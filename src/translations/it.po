@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-05-24 16:54+0000\n"
+"PO-Revision-Date: 2021-06-11 14:17+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/davidsansome/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgstr "%1 giorni fa"
 msgid "%1 on %2"
 msgstr "%1 di %2"
 
-#: playlistparsers/playlistparser.cpp:89
+#: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 scalette (%2)"
@@ -149,7 +149,7 @@ msgstr "%1: modulo Wiimotedev"
 msgid "%L1 other listeners"
 msgstr "%L1 altri ascoltatori"
 
-#: playlist/playlistmanager.cpp:439
+#: playlist/playlistmanager.cpp:440
 #, qt-format
 msgid "%L1 selected of"
 msgstr "%L1 selezionate di"
@@ -159,7 +159,7 @@ msgstr "%L1 selezionate di"
 msgid "%L1 total plays"
 msgstr "%L1 riproduzioni totali"
 
-#: playlist/playlistmanager.cpp:445
+#: playlist/playlistmanager.cpp:446
 #, qt-format
 msgid "%L1 tracks"
 msgstr "%L1 tracce"
@@ -299,7 +299,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "un giorno"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:446 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "una traccia"
 
@@ -756,7 +756,7 @@ msgstr "Tutti gli artisti"
 msgid "All files (*)"
 msgstr "Tutti i file (*)"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:81
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Tutte le scalette (%1)"
@@ -1498,7 +1498,7 @@ msgstr "Impossibile ottenere i dettagli"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Impossibile accedere a Last.fm. Prova ancora."
 
-#: playlist/playlistmanager.cpp:170
+#: playlist/playlistmanager.cpp:171
 msgid "Couldn't create playlist"
 msgstr "Impossibile creare la scaletta"
 
@@ -3908,8 +3908,8 @@ msgid "Player options"
 msgstr "Opzioni del lettore"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
-#: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:89 playlist/playlistmanager.cpp:158
+#: playlist/playlistmanager.cpp:538 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Scaletta"
 
@@ -4450,7 +4450,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Salva la scaletta"
 
-#: playlist/playlistmanager.cpp:238
+#: playlist/playlistmanager.cpp:239
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Salva la scaletta"
@@ -4478,6 +4478,10 @@ msgstr "Salva questo flusso nella scheda Internet"
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
 msgstr "Gestore raggruppamenti salvati"
+
+#: playlistparsers/cueparser.cpp:353
+msgid "Saving cue files is not yet supported."
+msgstr "Il salvataggio dei file cue non è ancora supportato."
 
 #: library/library.cpp:202
 msgid "Saving songs statistics into songs files"
@@ -5520,7 +5524,7 @@ msgstr "Impossibile scaricare %1 (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
-#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
+#: playlist/playlistmanager.cpp:545 playlist/playlistmanager.cpp:546
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5534,6 +5538,12 @@ msgstr "Tipo di contenuto sconosciuto"
 #: internet/lastfm/lastfmservice.cpp:308
 msgid "Unknown error"
 msgstr "Errore sconosciuto"
+
+#: playlistparsers/playlistparser.cpp:137
+#: playlistparsers/playlistparser.cpp:168
+#, qt-format
+msgid "Unknown filetype: %1"
+msgstr "Tipo di file sconosciuto: %1"
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Unset cover"
@@ -5704,7 +5714,7 @@ msgid "Variable bit rate"
 msgstr "Bitrate variabile"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:557 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Artisti vari"
 

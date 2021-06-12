@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-05-24 14:36+0000\n"
+"PO-Revision-Date: 2021-06-11 09:29+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/davidsansome/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgstr "duela %1 egun"
 msgid "%1 on %2"
 msgstr "%1 %2-tik"
 
-#: playlistparsers/playlistparser.cpp:89
+#: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 erreprodukzio-zerrenda (%2)"
@@ -148,7 +148,7 @@ msgstr "%1: Wiimotedev modulua"
 msgid "%L1 other listeners"
 msgstr "%L1 gainontzeko entzule"
 
-#: playlist/playlistmanager.cpp:439
+#: playlist/playlistmanager.cpp:440
 #, qt-format
 msgid "%L1 selected of"
 msgstr ""
@@ -158,7 +158,7 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr "%L1 erreprodukzio guztira"
 
-#: playlist/playlistmanager.cpp:445
+#: playlist/playlistmanager.cpp:446
 #, qt-format
 msgid "%L1 tracks"
 msgstr ""
@@ -298,7 +298,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "Egun 1"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:446 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "Pista 1"
 
@@ -755,7 +755,7 @@ msgstr "Artista guztiak"
 msgid "All files (*)"
 msgstr "Fitxategi guztiak (*)"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:81
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Erreprodukzio-zerrenda guztiak (%1)"
@@ -1497,7 +1497,7 @@ msgstr ""
 msgid "Could not log in to Last.fm. Please try again."
 msgstr ""
 
-#: playlist/playlistmanager.cpp:170
+#: playlist/playlistmanager.cpp:171
 msgid "Couldn't create playlist"
 msgstr ""
 
@@ -3907,8 +3907,8 @@ msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
-#: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:89 playlist/playlistmanager.cpp:158
+#: playlist/playlistmanager.cpp:538 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -4449,7 +4449,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:238
+#: playlist/playlistmanager.cpp:239
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4476,6 +4476,10 @@ msgstr "Gorde jario hau Internet fitxan"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
+msgstr ""
+
+#: playlistparsers/cueparser.cpp:353
+msgid "Saving cue files is not yet supported."
 msgstr ""
 
 #: library/library.cpp:202
@@ -5519,7 +5523,7 @@ msgstr "Ezin izan da %1 deskargatu (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
-#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
+#: playlist/playlistmanager.cpp:545 playlist/playlistmanager.cpp:546
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5533,6 +5537,12 @@ msgstr "Eduki-mota ezezaguna"
 #: internet/lastfm/lastfmservice.cpp:308
 msgid "Unknown error"
 msgstr "Errore ezezaguna"
+
+#: playlistparsers/playlistparser.cpp:137
+#: playlistparsers/playlistparser.cpp:168
+#, qt-format
+msgid "Unknown filetype: %1"
+msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Unset cover"
@@ -5703,7 +5713,7 @@ msgid "Variable bit rate"
 msgstr "Bit-tasa aldakorra"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:557 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Hainbat artista"
 
