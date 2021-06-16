@@ -54,15 +54,16 @@ const int kTrackDurationColumn = 3;
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
 
-RipCDDialog::RipCDDialog(DeviceManager& device_manager, QWidget* parent)
+RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_RipCDDialog),
       device_manager_(device_manager),
       cdda_devices_(
-          device_manager.FindDevicesByUrlSchemes(CddaDevice::url_schemes())),
+          device_manager->FindDevicesByUrlSchemes(CddaDevice::url_schemes())),
       working_(false),
       cdda_device_(),
       loader_(nullptr) {
+  Q_ASSERT(device_manager);
   // Init
   ui_->setupUi(this);
 
@@ -179,8 +180,10 @@ void RipCDDialog::ClickedRipButton() {
   Ripper* ripper = new Ripper(cdda_device_->raw_cdio(), this);
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
 
-  connect(ripper, SIGNAL(Finished()), SLOT(Finished()));
-  connect(ripper, SIGNAL(Cancelled()), SLOT(Cancelled()));
+  connect(ripper, &Ripper::Finished, this,
+          [this, ripper]() { this->Finished(ripper); });
+  connect(ripper, &Ripper::Cancelled, this,
+          [this, ripper]() { this->Cancelled(ripper); });
   connect(ripper, SIGNAL(ProgressInterval(int, int)),
           SLOT(SetupProgressBarLimits(int, int)));
   connect(ripper, SIGNAL(Progress(int)), SLOT(UpdateProgressBar(int)));
@@ -279,7 +282,7 @@ void RipCDDialog::DeviceSelected(int device_index) {
 
   DeviceInfo* device_info = cdda_devices_[device_index];
   std::shared_ptr<ConnectedDevice> device =
-      device_manager_.Connect(device_info);
+      device_manager_->Connect(device_info);
   cdda_device_ = std::dynamic_pointer_cast<CddaDevice>(device);
   if (!cdda_device_) {
     rip_button_->setEnabled(false);
@@ -307,16 +310,14 @@ void RipCDDialog::DeviceSelected(int device_index) {
   rip_button_->setEnabled(true);
 }
 
-void RipCDDialog::Finished() {
+void RipCDDialog::Finished(Ripper* ripper) {
   SetWorking(false);
-  Ripper* ripper = dynamic_cast<Ripper*>(sender());
-  Q_ASSERT(ripper);
   ripper->deleteLater();
 }
 
-void RipCDDialog::Cancelled() {
+void RipCDDialog::Cancelled(Ripper* ripper) {
   ui_->progress_bar->setValue(0);
-  Finished();
+  Finished(ripper);
 }
 
 void RipCDDialog::SetupProgressBarLimits(int min, int max) {

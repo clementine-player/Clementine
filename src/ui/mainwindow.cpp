@@ -2219,7 +2219,7 @@ void MainWindow::OpenRipCDDialog() {
 #ifdef HAVE_AUDIOCD
   if (!rip_cd_dialog_) {
     Q_ASSERT(app_->device_manager());
-    rip_cd_dialog_.reset(new RipCDDialog(*(app_->device_manager())));
+    rip_cd_dialog_.reset(new RipCDDialog(app_->device_manager()));
   }
   rip_cd_dialog_->show();
 #endif

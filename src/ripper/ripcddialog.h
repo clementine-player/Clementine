@@ -40,7 +40,7 @@ class RipCDDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit RipCDDialog(DeviceManager& device_manager,
+  explicit RipCDDialog(DeviceManager* device_manager,
                        QWidget* parent = nullptr);
   ~RipCDDialog();
 
@@ -56,8 +56,8 @@ class RipCDDialog : public QDialog {
   void SelectNone();
   void InvertSelection();
   void DeviceSelected(int device_index);
-  void Finished();
-  void Cancelled();
+  void Finished(Ripper* ripper);
+  void Cancelled(Ripper* ripper);
   void SetupProgressBarLimits(int min, int max);
   void UpdateProgressBar(int progress);
   // Initializes track list table based on preliminary song list with durations
@@ -90,7 +90,7 @@ class RipCDDialog : public QDialog {
   QPushButton* close_button_;
   QPushButton* rip_button_;
   std::unique_ptr<Ui_RipCDDialog> ui_;
-  DeviceManager& device_manager_;
+  DeviceManager* device_manager_;
   QList<DeviceInfo*> cdda_devices_;
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
