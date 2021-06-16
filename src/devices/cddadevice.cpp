@@ -22,7 +22,7 @@
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
-const int CddaDevice::kDiscChangePollingIntervalMs = 500;
+const int kDiscChangePollingIntervalMs = 500;
 
 CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
@@ -68,7 +68,7 @@ bool CddaDevice::IsValid() const { return (cdio_ != nullptr); }
 
 void CddaDevice::WatchForDiscChanges(bool watch) {
   if (watch && !disc_changed_timer_.isActive())
-    disc_changed_timer_.start(CddaDevice::kDiscChangePollingIntervalMs);
+    disc_changed_timer_.start(kDiscChangePollingIntervalMs);
   else if (!watch && disc_changed_timer_.isActive())
     disc_changed_timer_.stop();
 }

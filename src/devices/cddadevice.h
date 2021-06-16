@@ -53,7 +53,6 @@ class CddaDevice : public ConnectedDevice {
   bool IsValid() const;
   void WatchForDiscChanges(bool watch);
 
-  static const int kDiscChangePollingIntervalMs;
   static QStringList url_schemes() { return QStringList() << "cdda"; }
 
   // QUrl interprets a single number as an ip address, so the QString cdda://1
