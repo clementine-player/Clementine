@@ -50,9 +50,12 @@ class UrlHandler : public QObject {
 
       // There was a track available.  Its url is in media_url.
       TrackAvailable,
+
+      // Failed to resolve URL.
+      Error
     };
 
-    LoadResult(const QUrl& original_url, Type type = NoMoreTracks,
+    LoadResult(const QUrl& original_url, Type type,
                const QUrl& media_url = QUrl(), qint64 length_nanosec_ = -1);
 
     // The url that the playlist item has in Url().
@@ -73,11 +76,13 @@ class UrlHandler : public QObject {
 
   // Called by the Player when a song starts loading - gives the handler
   // a chance to do something clever to get a playable track.
-  virtual LoadResult StartLoading(const QUrl& url) { return LoadResult(url); }
+  virtual LoadResult StartLoading(const QUrl& url) = 0;
 
   // Called by the player when a song finishes - gives the handler a chance to
   // get another track to play.
-  virtual LoadResult LoadNext(const QUrl& url) { return LoadResult(url); }
+  virtual LoadResult LoadNext(const QUrl& url) {
+    return LoadResult(url, LoadResult::NoMoreTracks);
+  }
 
   // Functions to be warned when something happen to a track handled by
   // UrlHandler.

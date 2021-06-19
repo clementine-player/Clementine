@@ -66,7 +66,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   if (reply->error() != QNetworkReply::NoError) {
     // TODO((David Sansome): Error handling
     qLog(Error) << reply->errorString();
-    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
+    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::Error));
     return;
   }
 
@@ -79,7 +79,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   // Failed to get playlist?
   if (songs.count() == 0) {
     qLog(Error) << "Error loading" << scheme() << "playlist";
-    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
+    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::Error));
     return;
   }
 

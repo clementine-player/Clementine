@@ -202,6 +202,8 @@ class Player : public PlayerInterface {
   // Returns true if we were supposed to stop after this track.
   bool HandleStopAfter();
 
+  void HandleInvalidItem(const QUrl& url);
+
  private:
   Application* app_;
   Scrobbler* lastfm_;
