@@ -165,6 +165,13 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
       // We'll get called again later with either NoMoreTracks or TrackAvailable
       loading_async_ = result.original_url_;
       break;
+
+    case UrlHandler::LoadResult::Error:
+      qLog(Debug) << "URL handler error for" << result.original_url_;
+      nb_errors_received_++;
+      loading_async_ = QUrl();
+      HandleInvalidItem(result.original_url_);
+      break;
   }
 }
 
@@ -651,6 +658,7 @@ void Player::TrackAboutToEnd() {
     UrlHandler::LoadResult result = handler->LoadNext(req.RequestUrl());
     switch (result.type_) {
       case UrlHandler::LoadResult::NoMoreTracks:
+      case UrlHandler::LoadResult::Error:
         return;
 
       case UrlHandler::LoadResult::WillLoadAsynchronously:
@@ -674,8 +682,12 @@ void Player::ValidMediaRequested(const MediaPlaybackRequest& req) {
 }
 
 void Player::InvalidMediaRequested(const MediaPlaybackRequest& req) {
+  HandleInvalidItem(req.RequestUrl());
+}
+
+void Player::HandleInvalidItem(const QUrl& url) {
   // first send the notification to others...
-  emit SongChangeRequestProcessed(req.RequestUrl(), false);
+  emit SongChangeRequestProcessed(url, false);
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
 

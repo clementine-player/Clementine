@@ -47,7 +47,7 @@ UrlHandler::LoadResult RadioBrowserUrlHandler::StartLoading(const QUrl& url) {
 
 void RadioBrowserUrlHandler::LoadStationFailed(const QUrl& original_url) {
   qLog(Error) << "Error loading" << original_url;
-  emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
+  emit AsyncLoadComplete(LoadResult(original_url, LoadResult::Error));
 }
 
 void RadioBrowserUrlHandler::LoadStationFinished(const QUrl& original_url,

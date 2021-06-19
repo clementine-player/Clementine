@@ -51,15 +51,14 @@ QIcon DigitallyImportedUrlHandler::icon() const {
 
 UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(
     const QUrl& url) {
-  LoadResult ret(url);
   if (task_id_ != -1) {
-    return ret;
+    // Already loading.
+    return LoadResult(url, LoadResult::NoMoreTracks);
   }
 
   if (!service_->is_premium_account()) {
     service_->StreamError(tr("A premium account is required"));
-    ret.type_ = LoadResult::NoMoreTracks;
-    return ret;
+    return LoadResult(url, LoadResult::Error);
   }
 
   // Start loading the station
@@ -73,8 +72,7 @@ UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(
   // Tell the user what's happening
   task_id_ = app_->task_manager()->StartTask(tr("Loading stream"));
 
-  ret.type_ = LoadResult::WillLoadAsynchronously;
-  return ret;
+  return LoadResult(url, LoadResult::WillLoadAsynchronously);
 }
 
 void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
@@ -94,7 +92,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
   // Failed to get playlist?
   if (songs.count() == 0) {
     service_->StreamError(tr("Error loading di.fm playlist"));
-    emit AsyncLoadComplete(LoadResult(last_original_url_));
+    emit AsyncLoadComplete(LoadResult(last_original_url_, LoadResult::Error));
     return;
   }
 

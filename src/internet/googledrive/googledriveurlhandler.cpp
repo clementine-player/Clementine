@@ -28,8 +28,8 @@ GoogleDriveUrlHandler::GoogleDriveUrlHandler(GoogleDriveService* service,
 UrlHandler::LoadResult GoogleDriveUrlHandler::StartLoading(const QUrl& url) {
   QString file_id = url.path().remove(QChar('/'));
   QUrl real_url = service_->GetStreamingUrlFromSongId(file_id);
-  LoadResult::Type type = real_url.isValid() ? LoadResult::TrackAvailable
-                                             : LoadResult::NoMoreTracks;
+  LoadResult::Type type =
+      real_url.isValid() ? LoadResult::TrackAvailable : LoadResult::Error;
   LoadResult res(url, type, real_url);
   res.auth_header_ = service_->client()->GetAuthHeader();
   return res;
