@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 11:50+0000\n"
+"PO-Revision-Date: 2021-06-21 17:41+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -540,7 +540,7 @@ msgstr "Добавить другой поток…"
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -560,8 +560,8 @@ msgstr "Добавить файл…"
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "Добавить папку"
 
@@ -665,7 +665,7 @@ msgstr "Добавить в плейлисты Spotify"
 msgid "Add to Spotify starred"
 msgstr "Добавить в оценённые Spotify"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "Добавить в другой плейлист"
 
@@ -724,7 +724,7 @@ msgstr "После копирования…"
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "Альбом"
 
@@ -759,7 +759,7 @@ msgstr "Альбомы без обложек"
 msgid "All"
 msgstr "Все"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Все файлы (*)"
 
@@ -887,11 +887,11 @@ msgstr "Вы действительно хотите записывать ста
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "Исполнитель"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "Артист"
 
@@ -905,7 +905,7 @@ msgstr "Сп&рашивать при сохранении"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "Формат аудио"
 
@@ -1098,6 +1098,10 @@ msgstr "Клавиши"
 msgid "CBC Podcasts"
 msgstr "Подкасты CBC"
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr "CD-привод"
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "CDDA"
@@ -1160,7 +1164,7 @@ msgstr "Проверять новые выпуски"
 msgid "Check for updates"
 msgstr "Проверить обновления"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "Проверить обновления…"
 
@@ -1400,7 +1404,7 @@ msgstr "Настроить Subsonic…"
 msgid "Configure global search..."
 msgstr "Настроить глобальный поиск…"
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "Настроить фонотеку…"
 
@@ -1422,7 +1426,7 @@ msgstr "Настроить…"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Подключать пульт Wii при активации/деактивации"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Подключить носитель"
 
@@ -1474,11 +1478,11 @@ msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Копировать на носитель"
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Копировать в фонотеку…"
@@ -1698,7 +1702,7 @@ msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1706,7 +1710,7 @@ msgstr "Удалить файлы"
 msgid "Delete from device..."
 msgstr "Удалить с носителя"
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Удалить с диска…"
@@ -1739,16 +1743,16 @@ msgstr "Удаление файлов"
 msgid "Depth"
 msgstr "Глубина"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "Убрать выбранные треки из очереди"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "Убрать трек из очереди"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "Назначение"
 
@@ -1776,11 +1780,11 @@ msgstr "Имя носителя"
 msgid "Device properties..."
 msgstr "Свойства носителя…"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "Носители"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "Диалоговое окно"
 
@@ -1830,7 +1834,7 @@ msgstr "Отключено"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "Диск"
 
@@ -2017,7 +2021,7 @@ msgstr "График дампа канала обработки"
 msgid "Dump To Logs"
 msgstr "Выгрузить в журналы"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "Длительность"
 
@@ -2033,7 +2037,7 @@ msgstr "Случайный динамичный микс"
 msgid "Edit smart playlist..."
 msgstr "Изменить умный плейлист…"
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Изменить тег «%1»…"
@@ -2172,14 +2176,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "Ошибка"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr "Ошибка конвертирования CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2204,7 +2204,7 @@ msgid "Error loading %1"
 msgstr "Ошибка загрузки %1"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "Ошибка при загрузке плейлиста di.fm"
 
@@ -2323,7 +2323,7 @@ msgstr "Затухание звука"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr "Не удалось прочесть CD-привод"
 
@@ -2408,7 +2408,7 @@ msgstr "Ошибка получения обложки"
 msgid "Fetching playlist items"
 msgstr "Получение элементов плейлиста"
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "Формат файла"
 
@@ -2446,7 +2446,7 @@ msgstr "Тип файла"
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "Файлы"
 
@@ -2579,7 +2579,7 @@ msgstr "Общие настройки"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "Жанр"
 
@@ -2770,7 +2770,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Если включить, то клик по выбранной песне в плейлисте позволит редактировать тег напрямую"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2857,7 +2857,7 @@ msgstr "Индексация %1"
 msgid "Information"
 msgstr "Информация"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr "Настройки ввода"
 
@@ -2873,7 +2873,7 @@ msgstr "Установлен"
 msgid "Integrity check"
 msgstr "Проверка целостности"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "Интернет"
 
@@ -2918,7 +2918,7 @@ msgstr "Неверная служба"
 msgid "Invalid session key"
 msgstr "Неверный ключ сессии"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr "Инвертировать выбор"
 
@@ -3057,7 +3057,7 @@ msgstr "Левый канал"
 msgid "Length"
 msgstr "Длина"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Фонотека"
@@ -3066,7 +3066,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Расширенная группировка фонотеки"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "Уведомление о сканировании фонотеки"
 
@@ -3126,7 +3126,7 @@ msgstr "Загрузка умного плейлиста"
 msgid "Loading songs"
 msgstr "Загрузка песен"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3310,10 +3310,6 @@ msgstr "Максимальный битрейт"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr "Максимальное число дочерних процессов для обработки тегов (требуется перезапуск)"
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr "Источник медиа сменился. Перезагрузка"
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3394,7 +3390,7 @@ msgstr "Точки монтирования"
 msgid "Move down"
 msgstr "Переместить вниз"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Переместить в фонотеку…"
 
@@ -3403,7 +3399,7 @@ msgstr "Переместить в фонотеку…"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Музыка"
 
@@ -3465,7 +3461,7 @@ msgstr "Никогда не начинать воспроизведение"
 msgid "New folder"
 msgstr "Новая папка"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "Новый плейлист"
 
@@ -3547,7 +3543,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не была скопирована на устройство"
 
@@ -3751,7 +3747,7 @@ msgstr "Оптимизировать по качеству"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "Настройки…"
 
@@ -3763,7 +3759,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядочить файлы"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "Упорядочить файлы…"
 
@@ -3806,7 +3802,7 @@ msgstr "Вывод"
 msgid "Output device"
 msgstr "Устройство вывода"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "Настройки вывода"
 
@@ -3847,7 +3843,7 @@ msgstr "Вечеринка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Пауза"
@@ -3883,8 +3879,8 @@ msgstr "Пиксель"
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3907,11 +3903,11 @@ msgstr "Воспроизвести если остановлено, приост
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если ничего не проигрывается"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr "Воспроизвести следующий"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
@@ -3950,7 +3946,7 @@ msgstr "Настройки плейлиста"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "Списки"
 
@@ -4082,7 +4078,7 @@ msgstr "Вывести информацию о версии"
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "Ход выполнения"
 
@@ -4132,12 +4128,12 @@ msgstr "Опрашиваем устройство…"
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "Выбранные треки в очередь"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Добавить трек в очередь"
 
@@ -4389,11 +4385,11 @@ msgstr "Вернуться в Clementine"
 msgid "Right"
 msgstr "Правый канал"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "Конвертировать"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "Конвертировать CD"
 
@@ -4545,7 +4541,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Поиск"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Поиск"
@@ -4570,7 +4566,7 @@ msgstr "Поиск в Subsonic"
 msgid "Search automatically"
 msgstr "Искать автоматически"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr "Поиск альбома"
 
@@ -4583,7 +4579,7 @@ msgstr "Поиск обложек альбомов…"
 msgid "Search for anything"
 msgstr "Поиск чего-либо"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr "Поиск исполнителя"
 
@@ -4644,11 +4640,11 @@ msgstr "Перемотать текущую трек на абсолютную �
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Перемотка с помощью горячих клавиш клавиатуры или  колеса мыши"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "Отменить выбор"
 
@@ -4684,7 +4680,7 @@ msgstr "Выбрать визуализации"
 msgid "Select visualizations..."
 msgstr "Выбрать визуализации…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Выбрать…"
 
@@ -4710,7 +4706,7 @@ msgstr "Информация о сервере"
 msgid "Service offline"
 msgstr "Служба недоступна"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в «%2»…"
@@ -4794,7 +4790,7 @@ msgstr "Показывать OSD"
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "Показать все композиции"
 
@@ -4814,12 +4810,12 @@ msgstr "Показывать разделители"
 msgid "Show fullsize..."
 msgstr "Показать в полный размер…"
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Открыть в диспетчере файлов"
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr "Показать в фонотеке…"
 
@@ -4831,11 +4827,11 @@ msgstr "Показать в «Различных исполнителях»"
 msgid "Show moodbar"
 msgstr "Показывать индикатор тона"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "Показывать только повторяющиеся"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "Показывать только без тегов"
 
@@ -4931,7 +4927,7 @@ msgstr "Пропускать файлы со этими расширениями
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперёд в плейлисте"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr "Пропустить выбранные треки"
 
@@ -4939,7 +4935,7 @@ msgstr "Пропустить выбранные треки"
 msgid "Skip to the next album"
 msgstr "Перейти к следующему альбому"
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr "Пропустить трек"
 
@@ -4975,7 +4971,7 @@ msgstr "Тексты песен"
 msgid "Song Metadata"
 msgstr "Мета-данные песни"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "Песня"
 
@@ -5052,7 +5048,7 @@ msgstr "Оценённые"
 msgid "Starred Albums"
 msgstr "Оценённые альбомы"
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr "Начать конвертирование"
 
@@ -5096,7 +5092,7 @@ msgstr "Останавливать после каждого трека"
 msgid "Stop after every track"
 msgstr "Останавливать после каждого трека"
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "Остановить после этого трека"
 
@@ -5272,7 +5268,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5314,7 +5310,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут удалены с устройства. Вы действительно хотите продолжить?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5362,20 +5358,20 @@ msgstr "Устройство должно быть подключено и от�
 msgid "This device supports the following file formats:"
 msgstr "Это устройство поддерживает следующие форматы:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "Это устройство не будет работать правильно"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Это MTP устройство, а ваша версия Clementine скомпилирована без поддержки libmtp."
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Это iPod, а вы скомпилировали Clementine без поддержки libgpod."
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5389,7 +5385,7 @@ msgstr "Эта опция может быть изменена в настрой
 msgid "This stream is for paid subscribers only"
 msgstr "Поток только для платных подписчиков"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Не поддерживаемый тип устройства: %1"
@@ -5400,7 +5396,7 @@ msgstr "Шаг времени"
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "Название"
 
@@ -5416,7 +5412,7 @@ msgstr "Включить OSD"
 msgid "Toggle fullscreen"
 msgstr "Развернуть на весь экран"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -5461,7 +5457,7 @@ msgid "Trac&k"
 msgstr "&Трек"
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "Трек"
 
@@ -5573,11 +5569,11 @@ msgstr "Неизвестный тип файла: %1"
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr "Не пропускать выбранные треки"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr "Не пропускать трек"
 
@@ -5914,7 +5910,7 @@ msgid ""
 "well?"
 msgstr "Хотите ли вы переместить и другие песни из этого альбома в «Различные исполнители»?"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -5933,7 +5929,7 @@ msgstr "Неверное имя или пароль."
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "Год"
 

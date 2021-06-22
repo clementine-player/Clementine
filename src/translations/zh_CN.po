@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 09:29+0000\n"
+"PO-Revision-Date: 2021-06-21 12:02+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -526,7 +526,7 @@ msgstr "添加其他流媒体..."
 msgid "Add directory..."
 msgstr "添加目录..."
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "添加文件"
 
@@ -546,8 +546,8 @@ msgstr "添加文件..."
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "添加文件夹"
 
@@ -651,7 +651,7 @@ msgstr "添加到 Spotify 播放列表"
 msgid "Add to Spotify starred"
 msgstr "添加到 Spotify 收藏"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "添加到另一播放列表"
 
@@ -710,7 +710,7 @@ msgstr "复制后..."
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "专辑"
 
@@ -745,7 +745,7 @@ msgstr "无封面的专辑"
 msgid "All"
 msgstr "所有"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "全部文件 (*)"
 
@@ -873,11 +873,11 @@ msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "歌手"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "歌手信息"
 
@@ -891,7 +891,7 @@ msgstr "保存时询问"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "音频格式"
 
@@ -1084,6 +1084,10 @@ msgstr "按钮"
 msgid "CBC Podcasts"
 msgstr ""
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr ""
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "CDDA"
@@ -1146,7 +1150,7 @@ msgstr "检测新节目"
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "检查更新..."
 
@@ -1386,7 +1390,7 @@ msgstr "配置 Subsonic..."
 msgid "Configure global search..."
 msgstr "配置全局搜索…"
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "配置媒体库..."
 
@@ -1408,7 +1412,7 @@ msgstr "配置..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "连接 Wii 遥控器"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "连接设备"
 
@@ -1460,11 +1464,11 @@ msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "复制到设备..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "复制到媒体库..."
@@ -1684,7 +1688,7 @@ msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "删除文件"
 
@@ -1692,7 +1696,7 @@ msgstr "删除文件"
 msgid "Delete from device..."
 msgstr "从设备删除..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "从硬盘删除..."
@@ -1725,16 +1729,16 @@ msgstr "删除文件"
 msgid "Depth"
 msgstr "深度"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "移除选定曲目"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "移除曲目"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "目标"
 
@@ -1762,11 +1766,11 @@ msgstr "设备名称"
 msgid "Device properties..."
 msgstr "设备属性..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "设备"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "对话框"
 
@@ -1816,7 +1820,7 @@ msgstr "关闭"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "盘片"
 
@@ -2003,7 +2007,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "长度"
 
@@ -2019,7 +2023,7 @@ msgstr "动态随机混音"
 msgid "Edit smart playlist..."
 msgstr "编辑智能播放列表..."
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "编辑标签 \"%1\"..."
@@ -2158,14 +2162,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相当于 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "错误"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr "CD抓轨出错"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2190,7 +2190,7 @@ msgid "Error loading %1"
 msgstr "载入 %1 出错"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "读取di.fm播放列表错误"
 
@@ -2309,7 +2309,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出时长"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr "读取 CD 失败"
 
@@ -2394,7 +2394,7 @@ msgstr "获取封面出错"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "文件格式"
 
@@ -2432,7 +2432,7 @@ msgstr "文件类型"
 msgid "Filename"
 msgstr "文件名"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "文件"
 
@@ -2565,7 +2565,7 @@ msgstr "常规设置"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "流派"
 
@@ -2756,7 +2756,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "如果选择启用，在播放列表中点击一个已选择的歌曲则会直接打开标签编辑"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2843,7 +2843,7 @@ msgstr "正在索引 %1"
 msgid "Information"
 msgstr "信息"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr "输入选项"
 
@@ -2859,7 +2859,7 @@ msgstr "已安装"
 msgid "Integrity check"
 msgstr "完整性检验"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "互联网"
 
@@ -2904,7 +2904,7 @@ msgstr "服务无效"
 msgid "Invalid session key"
 msgstr "会话钥匙无效"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr "反选"
 
@@ -3043,7 +3043,7 @@ msgstr "左"
 msgid "Length"
 msgstr "长度"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "媒体库"
@@ -3052,7 +3052,7 @@ msgstr "媒体库"
 msgid "Library advanced grouping"
 msgstr "媒体库高级分组"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "重新扫描媒体库提示"
 
@@ -3112,7 +3112,7 @@ msgstr "正在载入智能播放列表"
 msgid "Loading songs"
 msgstr "加载曲目"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3296,10 +3296,6 @@ msgstr "最大位速率"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr "媒体库已改变，重新载入中"
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3380,7 +3376,7 @@ msgstr "挂载点"
 msgid "Move down"
 msgstr "下移"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "移动至媒体库..."
 
@@ -3389,7 +3385,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "音乐"
 
@@ -3451,7 +3447,7 @@ msgstr "从未播放"
 msgid "New folder"
 msgstr "创建新文件夹"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "新建播放列表"
 
@@ -3533,7 +3529,7 @@ msgstr "无短块"
 msgid "None"
 msgstr "无"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
@@ -3737,7 +3733,7 @@ msgstr "为质量优化"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "选项..."
 
@@ -3749,7 +3745,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "组织文件"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "组织文件..."
 
@@ -3792,7 +3788,7 @@ msgstr "输出"
 msgid "Output device"
 msgstr "输出设备"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "输出选项"
 
@@ -3833,7 +3829,7 @@ msgstr "晚会"
 msgid "Password"
 msgstr "密码"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "暂停"
@@ -3869,8 +3865,8 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3893,11 +3889,11 @@ msgstr "若停止则播放，若播放则停止"
 msgid "Play if there is nothing already playing"
 msgstr "如无歌曲播放则自动播放添加的歌曲"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr "播放下一首"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr "在下一首播放所选曲目"
 
@@ -3936,7 +3932,7 @@ msgstr "播放列表选项"
 msgid "Playlist type"
 msgstr "播放列表类型"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "播放列表"
 
@@ -4068,7 +4064,7 @@ msgstr "输出版本信息"
 msgid "Profile"
 msgstr "档案"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "进度"
 
@@ -4118,12 +4114,12 @@ msgstr "正在查询设备..."
 msgid "Queue Manager"
 msgstr "队列管理器"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "将选定曲目加入队列"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "加入队列"
 
@@ -4375,11 +4371,11 @@ msgstr "回到Clementine"
 msgid "Right"
 msgstr "右"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "抓轨"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "CD 抓轨"
 
@@ -4531,7 +4527,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "搜索"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "搜索"
@@ -4556,7 +4552,7 @@ msgstr "搜索 Subsonic"
 msgid "Search automatically"
 msgstr "自动搜索"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr "搜索专辑"
 
@@ -4569,7 +4565,7 @@ msgstr "搜索专辑封面..."
 msgid "Search for anything"
 msgstr "搜索一切"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr "搜索艺术家"
 
@@ -4630,11 +4626,11 @@ msgstr "当前播放的曲目快进/快退至指定时间点"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "使用键盘快捷键或者鼠标滑轮进行寻位"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "选择全部"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "不选择"
 
@@ -4670,7 +4666,7 @@ msgstr "选择视觉效果"
 msgid "Select visualizations..."
 msgstr "选择视觉效果..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "选择……"
 
@@ -4696,7 +4692,7 @@ msgstr "服务器详情"
 msgid "Service offline"
 msgstr "服务离线"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
@@ -4780,7 +4776,7 @@ msgstr "显示漂亮的 OSD"
 msgid "Show above status bar"
 msgstr "在状态栏之上显示"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "显示所有歌曲"
 
@@ -4800,12 +4796,12 @@ msgstr "显示分频器"
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "在文件管理器中打开..."
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr "在媒体库中显示"
 
@@ -4817,11 +4813,11 @@ msgstr "在群星中显示"
 msgid "Show moodbar"
 msgstr "显示心情指示条"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "只显示重复"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "只显示未加标签的"
 
@@ -4917,7 +4913,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中前进"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr "跳过所选择的曲目"
 
@@ -4925,7 +4921,7 @@ msgstr "跳过所选择的曲目"
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr "跳过曲目"
 
@@ -4961,7 +4957,7 @@ msgstr "曲目信息"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "曲目信息"
 
@@ -5038,7 +5034,7 @@ msgstr "用星号标记"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr "开始抓轨"
 
@@ -5082,7 +5078,7 @@ msgstr "播放完每个曲目后停止"
 msgid "Stop after every track"
 msgstr "播放每个曲目前停止"
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "在此曲目后停止"
 
@@ -5258,7 +5254,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic 服务器的试用期已过。请捐助来获得许可文件。详情请访问 subsonic.org 。"
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5300,7 +5296,7 @@ msgid ""
 "continue?"
 msgstr "将从设备中删除这些文件.确定删除吗?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5348,20 +5344,20 @@ msgstr "此设备必须在连接并打开之前，Clementine可以检测它支�
 msgid "This device supports the following file formats:"
 msgstr "该设备支持以下文件格式:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "这个设备将不会正常工作"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "这个一部 MTP 设备，但是您可以通过 Clementine 来编辑而无需 libmtp 的支持。"
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "这是 iPod 设备，但 Clementine 编译时未包含 libgpod 支持。"
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5375,7 +5371,7 @@ msgstr "这些选项可以在“行为”设置中修改"
 msgid "This stream is for paid subscribers only"
 msgstr "该流媒体只有付费用户才能收听"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "这种设备不被支持： %1"
@@ -5386,7 +5382,7 @@ msgstr "时间步长"
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "标题"
 
@@ -5402,7 +5398,7 @@ msgstr "切换漂亮的 OSD"
 msgid "Toggle fullscreen"
 msgstr "切换全屏"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "切换队列状态"
 
@@ -5447,7 +5443,7 @@ msgid "Trac&k"
 msgstr "曲目(&k)"
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "曲目"
 
@@ -5559,11 +5555,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "撤销封面"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr "取消略过的选定曲目"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
@@ -5900,7 +5896,7 @@ msgid ""
 "well?"
 msgstr "您想要把此专辑的其它歌曲移动到 群星?"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "您要立即做个全部重新扫描？"
 
@@ -5919,7 +5915,7 @@ msgstr "用户名密码错误。"
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "年份"
 

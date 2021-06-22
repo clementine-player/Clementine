@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 09:29+0000\n"
+"PO-Revision-Date: 2021-06-21 12:02+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/davidsansome/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,7 +515,7 @@ msgstr "Dodaj drugi tok..."
 msgid "Add directory..."
 msgstr "Dodaj fasciklu..."
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "Dodavanje fajla"
 
@@ -535,8 +535,8 @@ msgstr "Dodaj fajl..."
 msgid "Add files to transcode"
 msgstr "Dodavanje fajlova za prekodiranje"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "Dodavanje fascikle"
 
@@ -640,7 +640,7 @@ msgstr "Dodaj u Spotifaj liste numera"
 msgid "Add to Spotify starred"
 msgstr "Dodaj na Spotifaj ocenjeno"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "Dodaj u drugu listu"
 
@@ -699,7 +699,7 @@ msgstr "Nakon kopiranja:"
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "album"
 
@@ -734,7 +734,7 @@ msgstr "Albumi bez omota"
 msgid "All"
 msgstr "Sve"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Svi fajlovi (*)"
 
@@ -862,11 +862,11 @@ msgstr "Želite li zaista da upišete statistiku pesme u fajl pesme za sve pesme
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "izvođač"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "Podaci o izvođaču"
 
@@ -880,7 +880,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "Format zvuka"
 
@@ -1073,6 +1073,10 @@ msgstr "dugmad"
 msgid "CBC Podcasts"
 msgstr ""
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr ""
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "CDDA"
@@ -1135,7 +1139,7 @@ msgstr "Traži nove epizode"
 msgid "Check for updates"
 msgstr "Potraži nadogradnje"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "Potraži nadogradnje..."
 
@@ -1375,7 +1379,7 @@ msgstr "Podesi Subsonik..."
 msgid "Configure global search..."
 msgstr "Podesi opštu pretragu..."
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "Podesi biblioteku..."
 
@@ -1397,7 +1401,7 @@ msgstr "Podesi..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Poveži Wii daljinske koristeći radnje uključeno/isključeno"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Poveži uređaj"
 
@@ -1449,11 +1453,11 @@ msgid "Copy to clipboard"
 msgstr "Kopiraj na klipbord"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopiraj na uređaj...."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Kopiraj u biblioteku..."
@@ -1673,7 +1677,7 @@ msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Brisanje fajlova"
 
@@ -1681,7 +1685,7 @@ msgstr "Brisanje fajlova"
 msgid "Delete from device..."
 msgstr "Obriši sa uređaja..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Obriši sa diska..."
@@ -1714,16 +1718,16 @@ msgstr "Brišem fajlove"
 msgid "Depth"
 msgstr "Dubina"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "Izbaci izabrane numere iz reda"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "Izbaci numeru iz reda"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "Odredište"
 
@@ -1751,11 +1755,11 @@ msgstr "Ime uređaja"
 msgid "Device properties..."
 msgstr "Svojstva uređaja..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "Uređaji"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "Dijalog"
 
@@ -1805,7 +1809,7 @@ msgstr "Onemogućen"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "disk"
 
@@ -1992,7 +1996,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "Trajanje"
 
@@ -2008,7 +2012,7 @@ msgstr "Dinamički nasumični miks"
 msgid "Edit smart playlist..."
 msgstr "Uredi pametnu listu..."
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznaku „%1“..."
@@ -2147,14 +2151,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Isto kao i --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "Greška"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr "Greška pri čupanju CD-a"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2179,7 +2179,7 @@ msgid "Error loading %1"
 msgstr "Greška učitavanja %1"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "Greška učitavanja di.fm liste numera"
 
@@ -2298,7 +2298,7 @@ msgstr "Utapanje"
 msgid "Fading duration"
 msgstr "Trajanje pretapanja"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr "Neuspeh čitanja CD uređaja"
 
@@ -2383,7 +2383,7 @@ msgstr "Greška dobavljanja omota"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "Format fajla"
 
@@ -2421,7 +2421,7 @@ msgstr "tip fajla"
 msgid "Filename"
 msgstr "ime fajla"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "Fajlovi"
 
@@ -2554,7 +2554,7 @@ msgstr "Opšte postavke"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "žanr"
 
@@ -2745,7 +2745,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Dozvoljava uređivanje oznake direktno u prikazu liste numera klikom na pesmu"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2832,7 +2832,7 @@ msgstr "Indeksiram %1"
 msgid "Information"
 msgstr "Podaci"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr "Opcije ulaza"
 
@@ -2848,7 +2848,7 @@ msgstr "instaliran"
 msgid "Integrity check"
 msgstr "Provera integriteta"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "Internet"
 
@@ -2893,7 +2893,7 @@ msgstr "Neispravan servis"
 msgid "Invalid session key"
 msgstr "Nevažeći ključ sesije"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr "Obrni izbor"
 
@@ -3032,7 +3032,7 @@ msgstr "Levo"
 msgid "Length"
 msgstr "dužina"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Biblioteka"
@@ -3041,7 +3041,7 @@ msgstr "Biblioteka"
 msgid "Library advanced grouping"
 msgstr "Napredno grupisanje biblioteke"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "Obaveštenje o ponovnom skeniranju biblioteke"
 
@@ -3101,7 +3101,7 @@ msgstr "Učitavam pametnu listu"
 msgid "Loading songs"
 msgstr "Učitavam pesme"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3285,10 +3285,6 @@ msgstr "Najveći bitski protok"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr "Medij je promenjen. Učitavam ponovo"
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3369,7 +3365,7 @@ msgstr "Tačke montiranja"
 msgid "Move down"
 msgstr "Pomeri dole"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Premesti u biblioteku"
 
@@ -3378,7 +3374,7 @@ msgstr "Premesti u biblioteku"
 msgid "Move up"
 msgstr "Pomeri gore"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muzika"
 
@@ -3440,7 +3436,7 @@ msgstr "neće početi puštanje"
 msgid "New folder"
 msgstr "Nova fascikla"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "Nova lista numera"
 
@@ -3522,7 +3518,7 @@ msgstr "bez kratkih blokova"
 msgid "None"
 msgstr "ništa"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nijedna od izabranih pesama nije pogodna za kopiranje na uređaj"
 
@@ -3726,7 +3722,7 @@ msgstr "Optimizuj kvalitet"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "Opcije..."
 
@@ -3738,7 +3734,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizovanje fajlova"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "Organizuj fajlove..."
 
@@ -3781,7 +3777,7 @@ msgstr "Izlaz"
 msgid "Output device"
 msgstr "Uređaj izlaza"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "Opcije izlaza"
 
@@ -3822,7 +3818,7 @@ msgstr "žurka"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pauziraj"
@@ -3858,8 +3854,8 @@ msgstr "piksela"
 msgid "Plain sidebar"
 msgstr "Obična traka"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3882,11 +3878,11 @@ msgstr "Pusti ako je zaustavljeno, zaustavi ako se pušta"
 msgid "Play if there is nothing already playing"
 msgstr "počeće puštanje ako trenutno ništa nije pušteno"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr "Pusti sledeće"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr "Pusti obeležene numere sledeće"
 
@@ -3925,7 +3921,7 @@ msgstr "Opcije liste numera"
 msgid "Playlist type"
 msgstr "Tip liste"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "Liste numera"
 
@@ -4057,7 +4053,7 @@ msgstr "Prikaži podatke o izdanju"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "Napredak"
 
@@ -4107,12 +4103,12 @@ msgstr "Ispitujem uređaj..."
 msgid "Queue Manager"
 msgstr "Menadžer redosleda"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "Stavi u red izabrane numere"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Stavi numeru u red"
 
@@ -4364,11 +4360,11 @@ msgstr "Vratite se na Klementinu"
 msgid "Right"
 msgstr "Desno"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "čupaj"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "Čupanje CD-a"
 
@@ -4520,7 +4516,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Traži"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Pretraga"
@@ -4545,7 +4541,7 @@ msgstr "Traži na Subsoniku"
 msgid "Search automatically"
 msgstr "Traži automatski"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr "Traži album"
 
@@ -4558,7 +4554,7 @@ msgstr "Traži omote albuma..."
 msgid "Search for anything"
 msgstr "Traži bilo šta"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr "Traži izvođača"
 
@@ -4619,11 +4615,11 @@ msgstr "Idi na položaj tekuće numere za apsolutni iznos"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Biranje položaja prečicom tastature ili točkićem miša"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "Izaberi sve"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "Očisti izbor"
 
@@ -4659,7 +4655,7 @@ msgstr "Izbor vizuelizacija"
 msgid "Select visualizations..."
 msgstr "Izaberi vizuelizacije..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Izaberi..."
 
@@ -4685,7 +4681,7 @@ msgstr "Detalji servera"
 msgid "Service offline"
 msgstr "Servis van mreže"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Promeni %1 u „%2“..."
@@ -4769,7 +4765,7 @@ msgstr "Lepi OSD"
 msgid "Show above status bar"
 msgstr "Prikaži iznad trake stanja"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "Prikaži sve pesme"
 
@@ -4789,12 +4785,12 @@ msgstr "Prikaži razdvajače"
 msgid "Show fullsize..."
 msgstr "Puna veličina..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Prikaži u menadžeru fajlova"
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr "Prikaži u biblioteci..."
 
@@ -4806,11 +4802,11 @@ msgstr "Prikazuj u raznim izvođačima"
 msgid "Show moodbar"
 msgstr "Prikaži raspoloženje"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "Prikaži samo duplikate"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "Prikaži samo neoznačene"
 
@@ -4906,7 +4902,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unapred u listi numera"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr "Preskoči izabrane numere"
 
@@ -4914,7 +4910,7 @@ msgstr "Preskoči izabrane numere"
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr "Preskoči numeru"
 
@@ -4950,7 +4946,7 @@ msgstr "Podaci o pesmi"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "Podaci o pesmi"
 
@@ -5027,7 +5023,7 @@ msgstr "Sa zvezdicom"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr "Počni čupanje"
 
@@ -5071,7 +5067,7 @@ msgstr "Zaustavi posle svake numere"
 msgid "Stop after every track"
 msgstr "Zaustavljanje posle svake numere"
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "Zaustavi posle ove numere"
 
@@ -5247,7 +5243,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Probni period za Subsonikov server je istekao. Donirajte da biste dobili licencni ključ. Posetite subsonic.org za više detalja."
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5289,7 +5285,7 @@ msgid ""
 "continue?"
 msgstr "Ovi fajlovi će biti obrisani sa uređaja, želite li zaista da nastavite?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5337,20 +5333,20 @@ msgstr "Ovaj uređaj mora biti povezan i otvoren pre nego što Klementina može 
 msgid "This device supports the following file formats:"
 msgstr "Ovaj uređaj podržava sledeće formate fajlova:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "Ovaj uređaj neće raditi ispravno"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Ovo je MTP uređaj, ali vi ste kompilovali Klementinu bez libmtp podrške."
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Ovo je Ajpod, ali vi ste kompilovali Klementinu bez libgpod podrške."
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5364,7 +5360,7 @@ msgstr "Ovu opciju možete izmeniti u postavkama „Ponašanja“"
 msgid "This stream is for paid subscribers only"
 msgstr "Ovaj tok je samo za pretplatnike"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Ovaj tip uređaja nije podržan: %1"
@@ -5375,7 +5371,7 @@ msgstr "Vremenski korak"
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "naslov"
 
@@ -5391,7 +5387,7 @@ msgstr "Lepi OSD"
 msgid "Toggle fullscreen"
 msgstr "Ceo ekran"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "Menjaj stanje redosleda"
 
@@ -5436,7 +5432,7 @@ msgid "Trac&k"
 msgstr "&Numera"
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "numera"
 
@@ -5548,11 +5544,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Ukloni omot"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr "Ukloni preskakanje numera"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr "Ukloni preskakanje"
 
@@ -5889,7 +5885,7 @@ msgid ""
 "well?"
 msgstr "Želite li da pomerite i ostale pesme iz ovog albuma u razne izvođače takođe?"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "Želite li sada da pokrenete potpuno skeniranje?"
 
@@ -5908,7 +5904,7 @@ msgstr "Pogrešno korisničko ime ili lozinka."
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "godina"
 

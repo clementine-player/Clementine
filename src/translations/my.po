@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 09:29+0000\n"
+"PO-Revision-Date: 2021-06-21 12:02+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/davidsansome/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -511,7 +511,7 @@ msgstr "သီချင်းစီးကြောင်းနောက်တစ
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "ဖိုင်ထည့်"
 
@@ -531,8 +531,8 @@ msgstr "ဖိုင်ထည့်..."
 msgid "Add files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲရန်ထည့်ပါ"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "ဖိုင်တွဲထည့်"
 
@@ -636,7 +636,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
@@ -695,7 +695,7 @@ msgstr "ကူးယူပြီးနောက်..."
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "အယ်လဘမ်"
 
@@ -730,7 +730,7 @@ msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 msgid "All"
 msgstr ""
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "ဖိုင်များအားလံုး(*)"
 
@@ -858,11 +858,11 @@ msgstr "သီချင်းတိုက်သီချင်းများအ
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "အနုပညာရှင်"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "အနုပညာရှင်အချက်အလက်"
 
@@ -876,7 +876,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "အသံပုံစံ"
 
@@ -1069,6 +1069,10 @@ msgstr "ခလုတ်များ"
 msgid "CBC Podcasts"
 msgstr ""
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr ""
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "စီဒီဒီအေ"
@@ -1131,7 +1135,7 @@ msgstr "တွဲအသစ်များစစ်ဆေးခြင်း"
 msgid "Check for updates"
 msgstr "မွမ်းမံများစစ်ဆေးခြင်း"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "မွမ်းမံများစစ်ဆေးခြင်း..."
 
@@ -1371,7 +1375,7 @@ msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
 msgid "Configure global search..."
 msgstr "အနှံ့ရှာဖွေပုံစံပြင်..."
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "သီချင်းတိုက်ပုံစံပြင်..."
 
@@ -1393,7 +1397,7 @@ msgstr "ပုံစံပြင်..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "သက်ဝင်လှုပ်ရှား/သက်ဝင်မလှုပ်ရှားလုပ်ဆောင်ချက်သံုး၍ဝီအဝေးထိန်းကိုချိတ်ဆက်"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "ပစ္စည်းချိတ်ဆက်"
 
@@ -1445,11 +1449,11 @@ msgid "Copy to clipboard"
 msgstr "အောက်ခံကတ်ပြားသို့ကူးယူ"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "ပစ္စည်းသို့ကူးယူ"
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "သီချင်းတိုက်သို့ကူးယူ..."
@@ -1669,7 +1673,7 @@ msgid "Delete downloaded data"
 msgstr "ကူးဆွဲပြီးအချက်အလက်ပယ်ဖျက်"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "ဖိုင်များပယ်ဖျက်"
 
@@ -1677,7 +1681,7 @@ msgstr "ဖိုင်များပယ်ဖျက်"
 msgid "Delete from device..."
 msgstr "ပစ္စည်းမှပယ်ဖျက်..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "ဓာတ်ပြားမှပယ်ဖျက်..."
@@ -1710,16 +1714,16 @@ msgstr "ဖိုင်များပယ်ဖျက်နေ"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများမစီတန်း"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "တေးသံလမ်းကြောမစီတန်း"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "သွားမည့်နေရာ"
 
@@ -1747,11 +1751,11 @@ msgstr "ပစ္စည်းနာမည်"
 msgid "Device properties..."
 msgstr "ပစ္စည်းဂုဏ်သတ္တိများ..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "ပစ္စည်းများ"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "စကားပြော"
 
@@ -1801,7 +1805,7 @@ msgstr "မလုပ်ဆောင်စေ"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "ချပ်ပြားဝိုင်း"
 
@@ -1988,7 +1992,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "ကြာချိန်"
 
@@ -2004,7 +2008,7 @@ msgstr "ကျပန်းရောသမမွှေအရှင်"
 msgid "Edit smart playlist..."
 msgstr "ချက်ချာသီချင်းစာရင်းပြင်ဆင်..."
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "အမည်ပြင်ဆင် \"%1\"..."
@@ -2143,14 +2147,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent to --log-levels *:3တူညီ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "အမှားပြ"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr ""
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2175,7 +2175,7 @@ msgid "Error loading %1"
 msgstr "ထည့်သွင်းခြင်းအမှားပြ %1"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "ဒီအိုင်.အက်ဖ်အမ်သီချင်းစာရင်းထည့်သွင်းအမှားပြ"
 
@@ -2294,7 +2294,7 @@ msgstr "အရောင်မှိန်"
 msgid "Fading duration"
 msgstr "အရောင်မှိန်ကြာချိန်"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2379,7 +2379,7 @@ msgstr "အဖုံးအမှားယူဆောင်နေ"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "ဖိုင်ပုံစံ"
 
@@ -2417,7 +2417,7 @@ msgstr "ဖိုင်အမျိုးအစား"
 msgid "Filename"
 msgstr "ဖိုင်နာမည်"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "ဖိုင်များ"
 
@@ -2550,7 +2550,7 @@ msgstr "အထွေထွေချိန်ညှိချက်"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "အမျိုးအစား"
 
@@ -2741,7 +2741,7 @@ msgid ""
 "edit the tag value directly"
 msgstr ""
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2828,7 +2828,7 @@ msgstr "ရည်ညွှန်းခြင်း %1"
 msgid "Information"
 msgstr "အချက်အလက်"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr ""
 
@@ -2844,7 +2844,7 @@ msgstr "သွင်းပြီး"
 msgid "Integrity check"
 msgstr "ခိုင်မြဲမှုစစ်ဆေး"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "အင်တာနက်"
 
@@ -2889,7 +2889,7 @@ msgstr "ဝန်ဆောင်မှုမမှန်"
 msgid "Invalid session key"
 msgstr "စစ်ဆေးခြင်းသော့မမှန်"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr ""
 
@@ -3028,7 +3028,7 @@ msgstr "ဘယ်"
 msgid "Length"
 msgstr "အလျား"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "သီချင်းတိုက်"
@@ -3037,7 +3037,7 @@ msgstr "သီချင်းတိုက်"
 msgid "Library advanced grouping"
 msgstr "သီချင်းတိုက်အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "သီချင်းတိုက်ပြန်လည်ဖတ်ရှုအကြောင်းကြားစာ"
 
@@ -3097,7 +3097,7 @@ msgstr "ချက်ချာသီချင်းစာရင်းထည့်
 msgid "Loading songs"
 msgstr "သီချင်းများထည့်သွင်းနေ"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3281,10 +3281,6 @@ msgstr "အများဆုံးဘစ်နှုန်း"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr ""
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3365,7 +3361,7 @@ msgstr "အမှတ်များစီစဉ်"
 msgid "Move down"
 msgstr "အောက်သို့ရွှေ့"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 
@@ -3374,7 +3370,7 @@ msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3436,7 +3432,7 @@ msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 msgid "New folder"
 msgstr "ဖိုင်တွဲအသစ်"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "သီချင်းစာရင်းအသစ်"
 
@@ -3518,7 +3514,7 @@ msgstr "ဘလောက်တိုများမရှိ"
 msgid "None"
 msgstr "ဘယ်တစ်ခုမျှ"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "ရွေးချယ်ပြီးသီချင်းများတစ်ခုမှပစ္စည်းသို့ကူးယူရန်မသင့်တော်"
 
@@ -3722,7 +3718,7 @@ msgstr "အရည်အသွေးအတွက်ဆောင်ရွက်"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "ရွေးပိုင်ခွင့်များ..."
 
@@ -3734,7 +3730,7 @@ msgstr "တေး"
 msgid "Organise Files"
 msgstr "ဖိုင်များစုစည်း"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "ဖိုင်များစုစည်း..."
 
@@ -3777,7 +3773,7 @@ msgstr "ပေးပို့"
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "ပေးပို့ရွေးပိုင်ခွင့်များ"
 
@@ -3818,7 +3814,7 @@ msgstr "အဖွဲ့"
 msgid "Password"
 msgstr "စကားဝှက်"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "ရပ်တန့်"
@@ -3854,8 +3850,8 @@ msgstr "အစက်အပြောက်"
 msgid "Plain sidebar"
 msgstr "ဘေးတိုင်ရိုးရိုး"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3878,11 +3874,11 @@ msgstr "ရပ်တန့်ပြီးလျှင်ဖွင့်၊ ဖ�
 msgid "Play if there is nothing already playing"
 msgstr "ဘယ်သီချင်းမှဖွင့်မနေလျှင်စတင်ဖွင့်"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3921,7 +3917,7 @@ msgstr "သီချင်းစာရင်းရွေးပိုင်ခွ
 msgid "Playlist type"
 msgstr "သီချင်းစာရင်းအမျိုးအစား"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "သီချင်းစာရင်းများ"
 
@@ -4053,7 +4049,7 @@ msgstr "ပုံစံအချက်အလက်ဖော်ပြ"
 msgid "Profile"
 msgstr "အကြောင်း"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "အခြေအနေ"
 
@@ -4103,12 +4099,12 @@ msgstr "ပစ္စည်းမေးမြန်းခြင်း..."
 msgid "Queue Manager"
 msgstr "စီတန်းမန်နေဂျာ"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများစီတန်း"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "တေးသံလမ်းကြောစီတန်း"
 
@@ -4360,11 +4356,11 @@ msgstr "ကလီမန်တိုင်းသို့ပြန်သွား
 msgid "Right"
 msgstr "ညာ"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "တင်သွင်း"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "စီဒီတင်သွင်း"
 
@@ -4516,7 +4512,7 @@ msgstr ""
 msgid "Search"
 msgstr "ရှာဖွေ"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "ရှာဖွေ"
@@ -4541,7 +4537,7 @@ msgstr "ဆပ်ဆိုးနစ်ရှာဖွေ"
 msgid "Search automatically"
 msgstr "အလိုအလျောက်ရှာဖွေ"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr ""
 
@@ -4554,7 +4550,7 @@ msgstr "အယ်လဘမ်အဖုံးများအားရှာဖွ
 msgid "Search for anything"
 msgstr "တစ်စုံတစ်ရာဖြစ်ဖြစ်ရှာဖွေ"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr ""
 
@@ -4615,11 +4611,11 @@ msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြ
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "အားလံုးရွေးချယ်"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "တစ်ခုမျှမရွေးချယ်"
 
@@ -4655,7 +4651,7 @@ msgstr "ပုံဖော်ကြည့်ခြင်းများရွေ
 msgid "Select visualizations..."
 msgstr "ပုံဖော်ကြည့်ခြင်းများရွေးချယ်..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "ရွေးချယ်..."
 
@@ -4681,7 +4677,7 @@ msgstr "ဆာဗာအသေးစိတ်အကြောင်းအရာမ
 msgid "Service offline"
 msgstr "အောဖ့်လိုင်းဝန်ဆောင်မှု"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 မှ \"%2\" ထိန်းညှိ..."
@@ -4765,7 +4761,7 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Show above status bar"
 msgstr "အခြေအနေပြတိုင်အပေါ်မှာပြသ"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "သီချင်းများအားလံုးပြသ"
 
@@ -4785,12 +4781,12 @@ msgstr "ခွဲခြားမှုများပြသ"
 msgid "Show fullsize..."
 msgstr "အရွယ်အပြည့်ပြသ..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "ဖိုင်ဘရောက်ဇာထဲမှာပြသ..."
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr ""
 
@@ -4802,11 +4798,11 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 msgid "Show moodbar"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပြသ"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "ပုံတူများသာပြသ"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "အမည်မရှိများသာပြသ"
 
@@ -4902,7 +4898,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "စာရင်းရှိရှေ့သို့များခုန်ကျော်"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -4910,7 +4906,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr ""
 
@@ -4946,7 +4942,7 @@ msgstr "သီချင်းအချက်အလက်"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "သီချင်းအချက်အလက်"
 
@@ -5023,7 +5019,7 @@ msgstr "ကြည့်ခဲ့ပြီး"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr ""
 
@@ -5067,7 +5063,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "ဒီတေးသံလမ်းကြောပြီးနောက်ရပ်"
 
@@ -5243,7 +5239,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "ဆပ်ဆိုးနစ်ဆာဗာအစမ်းသံုးကာလပြီးဆံုး။ လိုင်စင်ကီးရယူရန်ငွေလှုပါ။ အသေးစိတ်အကြောင်းအရာများအတွက် subsonic.org သို့လည်ပတ်ပါ။"
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5285,7 +5281,7 @@ msgid ""
 "continue?"
 msgstr "ပစ္စည်းမှယခုဖို်င်များအားလံုးပယ်ဖျက်မည်၊ လုပ်ဆောင်မည်လား?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5333,20 +5329,20 @@ msgstr "မည်သည့်ပံုစံလက်ခံကြောင်း
 msgid "This device supports the following file formats:"
 msgstr "အောက်ဖော်ပြပါဖိုင်ပံုစံများကိုယခုပစ္စည်းလက်ခံ:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "ဒီပစ္စည်းသေချာစွာအလုပ်လုပ်မည်မဟုတ်"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "ယခုသည်အမ်တီပီပစ္စည်း၊ ကလီမန်တိုင်းကိုအယ်အိုင်ဘီအမ်တီပီအထောက်အကူမပါဘဲသင်အသုံးပြုထား။"
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "ယခုသည်အိုင်ပေါ့ပစ္စည်း၊ ကလီမန်တိုင်းကိုအယ်အိုင်ဘီဂျီပီအိုဒီအထောက်အကူမပါဘဲသင်အသုံးပြုထား။"
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5360,7 +5356,7 @@ msgstr "ယခုရွေးပိုင်ခွင့်ကိုလုပ်
 msgid "This stream is for paid subscribers only"
 msgstr "ယခုသီချင်းစီးကြောင်းသည်အခကြေးပေးမှာယူသူများအတွက်သာ"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "ယခုပစ္စည်းအမျိုးအစားမလက်ခံ: %1"
@@ -5371,7 +5367,7 @@ msgstr ""
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "ခေါင်းစဉ်"
 
@@ -5387,7 +5383,7 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Toggle fullscreen"
 msgstr "ဖန်သားပြင်အပြည့်ဖွင့်ပိတ်လုပ်"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "စီတန်းအခြေအနေဖွင့်ပိတ်လုပ်"
 
@@ -5432,7 +5428,7 @@ msgid "Trac&k"
 msgstr ""
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "တေးသံလမ်းကြော"
 
@@ -5544,11 +5540,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "အဖုံးမသတ်မှတ်"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr ""
 
@@ -5885,7 +5881,7 @@ msgid ""
 "well?"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးသို့ယခုအယ်လဘမ်မှတစ်ခြားသီချင်းများကိုရွှေ့"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြန်လည်ဖတ်ရှု?"
 
@@ -5904,7 +5900,7 @@ msgstr "အသင်းဝင်အမည်နှင့်/သို့စက�
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "နှစ်"
 

@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 13:52+0000\n"
+"PO-Revision-Date: 2021-06-21 18:33+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -525,7 +525,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -545,8 +545,8 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "Přidat složku"
 
@@ -650,7 +650,7 @@ msgstr "Přidat do seznamů skladeb Spotify"
 msgid "Add to Spotify starred"
 msgstr "Přidat do Spotify s hvězdičkou"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -709,7 +709,7 @@ msgstr "Po zkopírování..."
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "Album"
 
@@ -744,7 +744,7 @@ msgstr "Alba bez obalů"
 msgid "All"
 msgstr "Vše"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Všechny soubory (*)"
 
@@ -872,11 +872,11 @@ msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech p
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "Umělec"
 
@@ -890,7 +890,7 @@ msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "Zvukový formát"
 
@@ -1083,6 +1083,10 @@ msgstr "Tlačítka"
 msgid "CBC Podcasts"
 msgstr "Záznamy CBC"
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr "Mechanika CD"
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "CDDA"
@@ -1145,7 +1149,7 @@ msgstr "Podívat se po nových dílech"
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
@@ -1385,7 +1389,7 @@ msgstr "Nastavit Subsonic..."
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
@@ -1407,7 +1411,7 @@ msgstr "Nastavit..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Připojit dálkový ovladač Wii pomocí činnosti zapnout/vypnout"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Připojit zařízení"
 
@@ -1459,11 +1463,11 @@ msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1683,7 +1687,7 @@ msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1691,7 +1695,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1724,16 +1728,16 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "Cíl"
 
@@ -1761,11 +1765,11 @@ msgstr "Název zařízení"
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "Zařízení"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "Dialog"
 
@@ -1815,7 +1819,7 @@ msgstr "Zakázáno"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "Disk"
 
@@ -2002,7 +2006,7 @@ msgstr "Vypsat rourový graf"
 msgid "Dump To Logs"
 msgstr "Vypsat v zápisech"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "Doba trvání"
 
@@ -2018,7 +2022,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2157,14 +2161,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "Chyba"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr "Chyba při vytahování skladeb z CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2189,7 +2189,7 @@ msgid "Error loading %1"
 msgstr "Chyba při nahrávání %1"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "Chyba při nahrávání seznamu skladeb di.fm"
 
@@ -2308,7 +2308,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2393,7 +2393,7 @@ msgstr "Chyba při stahování obalu"
 msgid "Fetching playlist items"
 msgstr "Natahují se položky seznamu skladeb"
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "Souborový formát"
 
@@ -2431,7 +2431,7 @@ msgstr "Typ souboru"
 msgid "Filename"
 msgstr "Název souboru"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "Soubory"
 
@@ -2564,7 +2564,7 @@ msgstr "Obecná nastavení"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "Žánr"
 
@@ -2755,7 +2755,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Pokud je zapnuto, po klepnutí na vybranou píseň v seznamu skladeb můžete upravit hodnotu značky přímo"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2842,7 +2842,7 @@ msgstr "Rejstříkování %1"
 msgid "Information"
 msgstr "Informace"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr "Vstupní volby"
 
@@ -2858,7 +2858,7 @@ msgstr "Nainstalován"
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "Internet"
 
@@ -2903,7 +2903,7 @@ msgstr "Neplatná služba"
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
@@ -3042,7 +3042,7 @@ msgstr "Vlevo"
 msgid "Length"
 msgstr "Délka"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Sbírka"
@@ -3051,7 +3051,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3111,7 +3111,7 @@ msgstr "Nahrává se chytrý seznam skladeb"
 msgid "Loading songs"
 msgstr "Nahrávají se písně"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3295,10 +3295,6 @@ msgstr "Nejvyšší datový tok"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr "Největší počet podprocesů pro zacházení se značkami (vyžaduje opětovné spuštění)"
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr "Médium se změnilo. Načítá se znovu."
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3379,7 +3375,7 @@ msgstr "Přípojné body"
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3388,7 +3384,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Hudba"
 
@@ -3450,7 +3446,7 @@ msgstr "Nikdy nezačít přehrávání"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3532,7 +3528,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3736,7 +3732,7 @@ msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "Volby..."
 
@@ -3748,7 +3744,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3791,7 +3787,7 @@ msgstr "Výstup"
 msgid "Output device"
 msgstr "Výstupní zařízení"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "Možnosti výstupu"
 
@@ -3832,7 +3828,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3868,8 +3864,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3892,11 +3888,11 @@ msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr "Přehrát další"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
@@ -3935,7 +3931,7 @@ msgstr "Nastavení seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -4067,7 +4063,7 @@ msgstr "Vypsat informaci o verzi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "Průběh"
 
@@ -4117,12 +4113,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4374,11 +4370,11 @@ msgstr "Návrat do Clementine"
 msgid "Right"
 msgstr "Vpravo"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "Vytáhnout"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "Vytáhnout skladby z CD"
 
@@ -4530,7 +4526,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledat"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
@@ -4555,7 +4551,7 @@ msgstr "Vyhledat Subsonic"
 msgid "Search automatically"
 msgstr "Hledat automaticky"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr "Hledat album"
 
@@ -4568,7 +4564,7 @@ msgstr "Hledat obaly alb..."
 msgid "Search for anything"
 msgstr "Hledat vše"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr "Hledat umělce"
 
@@ -4629,11 +4625,11 @@ msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Posunování pomocí klávesové zkratky nebo kolečka myši"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "Nevybrat žádnou skladbu"
 
@@ -4669,7 +4665,7 @@ msgstr "Vybrat vizualizace"
 msgid "Select visualizations..."
 msgstr "Vybrat vizualizace..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Vybrat..."
 
@@ -4695,7 +4691,7 @@ msgstr "Podrobnosti o serveru"
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4779,7 +4775,7 @@ msgstr "Ukazovat OSD"
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4799,12 +4795,12 @@ msgstr "Ukazovat oddělovače"
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr "Ukazovat ve sbírce..."
 
@@ -4816,11 +4812,11 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Ukázat náladový proužek"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "Ukázat pouze zdvojené"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
@@ -4916,7 +4912,7 @@ msgstr "Přeskočit soubory s těmito příponami (odděleny čárkou, rozlišuj
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
@@ -4924,7 +4920,7 @@ msgstr "Přeskočit vybrané skladby"
 msgid "Skip to the next album"
 msgstr "Skočit na další album"
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -4960,7 +4956,7 @@ msgstr "Informace o písni"
 msgid "Song Metadata"
 msgstr "Popisná data k písni"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "Píseň"
 
@@ -5037,7 +5033,7 @@ msgstr "S hvězdičkou"
 msgid "Starred Albums"
 msgstr "Alba s hvězdičkami"
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
@@ -5081,7 +5077,7 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after every track"
 msgstr "Zastavit po každé skladbě"
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -5257,7 +5253,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5299,7 +5295,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5347,20 +5343,20 @@ msgstr "Pro zjištění podporovaných formátů souborů je zařízení nejdř�
 msgid "This device supports the following file formats:"
 msgstr "Toto zařízení podporuje následující formáty souborů:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "Toto zařízení nebude pracovat správně"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Toto je zařízení MTP, ale Clementine byl sestaven bez podpory pro libmtp."
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Toto je zařízení iPod, ale Clementine byl sestaven bez podpory pro libgpod."
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5374,7 +5370,7 @@ msgstr "Tuto volbu lze změnit v nastavení Chování"
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zařízení není podporován: %1"
@@ -5385,7 +5381,7 @@ msgstr "Časový krok"
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "Název"
 
@@ -5401,7 +5397,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5446,7 +5442,7 @@ msgid "Trac&k"
 msgstr "Skla&dby"
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "Skladba"
 
@@ -5558,11 +5554,11 @@ msgstr "Neznámý typ souboru: %1"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5899,7 +5895,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -5918,7 +5914,7 @@ msgstr "Nesprávné uživatelské jméno nebo heslo."
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "Rok"
 

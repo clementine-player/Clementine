@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-11 09:29+0000\n"
+"PO-Revision-Date: 2021-06-21 12:02+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -514,7 +514,7 @@ msgstr "Tambah strim lain..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:2171
+#: ui/mainwindow.cpp:2172
 msgid "Add file"
 msgstr "Tambah fail"
 
@@ -534,8 +534,8 @@ msgstr "Tambah fail..."
 msgid "Add files to transcode"
 msgstr "Tambah fail-fail untuk transkod"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2198
-#: ripper/ripcddialog.cpp:200
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: ripper/ripcddialog.cpp:228
 msgid "Add folder"
 msgstr "Tambah folder"
 
@@ -639,7 +639,7 @@ msgstr "Tambah ke senarai main Spotify"
 msgid "Add to Spotify starred"
 msgstr "Tambah ke Spotify dibintangi"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
 msgstr "Tambahkan ke senarai main lain"
 
@@ -698,7 +698,7 @@ msgstr "Selepas menyalin..."
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
 msgid "Album"
 msgstr "Album"
 
@@ -733,7 +733,7 @@ msgstr "Album tanpa kulit muka"
 msgid "All"
 msgstr "Semua"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Semua Fail (*)"
 
@@ -861,11 +861,11 @@ msgstr "Anda pasti mahu menulis statistik lagu ke dalam fail lagu untuk semua la
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
 msgid "Artist"
 msgstr "Artis"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "Info artis"
 
@@ -879,7 +879,7 @@ msgstr "Tan&ya bila menyimpan"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:322
+#: ../bin/src/ui_ripcddialog.h:352
 msgid "Audio format"
 msgstr "Format audio"
 
@@ -1072,6 +1072,10 @@ msgstr "Bebutang"
 msgid "CBC Podcasts"
 msgstr ""
 
+#: ../bin/src/ui_ripcddialog.h:330
+msgid "CD Drive"
+msgstr ""
+
 #: core/song.cpp:453
 msgid "CDDA"
 msgstr "CDDA"
@@ -1134,7 +1138,7 @@ msgstr "Periksa episod baharu"
 msgid "Check for updates"
 msgstr "Periksa kemaskini"
 
-#: ui/mainwindow.cpp:850
+#: ui/mainwindow.cpp:851
 msgid "Check for updates..."
 msgstr "Periksa kemaskini..."
 
@@ -1374,7 +1378,7 @@ msgstr "Konfigur Subsonic..."
 msgid "Configure global search..."
 msgstr "Konfigure gelintar sejagat..."
 
-#: ui/mainwindow.cpp:681
+#: ui/mainwindow.cpp:682
 msgid "Configure library..."
 msgstr "Konfigur pustaka..."
 
@@ -1396,7 +1400,7 @@ msgstr "Konfigur..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Sambung Wii Remotes melalui tindakan aktif/nyahaktif"
 
-#: devices/devicemanager.cpp:262 devices/devicemanager.cpp:267
+#: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Sambung peranti"
 
@@ -1448,11 +1452,11 @@ msgid "Copy to clipboard"
 msgstr "Salin ke papan keratan"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:443
-#: ui/mainwindow.cpp:741 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Salin ke peranti..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:731
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Salin ke pustaka..."
@@ -1672,7 +1676,7 @@ msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2552 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Padam fail"
 
@@ -1680,7 +1684,7 @@ msgstr "Padam fail"
 msgid "Delete from device..."
 msgstr "Padam dari peranti..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:744
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Padam dari cakera..."
@@ -1713,16 +1717,16 @@ msgstr "Memadam fail-fail"
 msgid "Depth"
 msgstr "Kedalaman"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1886
 msgid "Dequeue selected tracks"
 msgstr "Nyahbaris gilir trek terpilih"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1884
 msgid "Dequeue track"
 msgstr "Nyahbaris gilir trek"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:320
+#: ../bin/src/ui_ripcddialog.h:350
 msgid "Destination"
 msgstr "Destinasi"
 
@@ -1750,11 +1754,11 @@ msgstr "Nama peranti"
 msgid "Device properties..."
 msgstr "Ciri-ciri peranti..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "Peranti-peranti"
 
-#: ../bin/src/ui_ripcddialog.h:299
+#: ../bin/src/ui_ripcddialog.h:328
 msgid "Dialog"
 msgstr "Dialog"
 
@@ -1804,7 +1808,7 @@ msgstr "Dilumpuhkan"
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
 msgid "Disc"
 msgstr "Cakera"
 
@@ -1991,7 +1995,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
 msgid "Duration"
 msgstr "Jangkamasa"
 
@@ -2007,7 +2011,7 @@ msgstr "Campuran rawak dinamik"
 msgid "Edit smart playlist..."
 msgstr "Sunting senarai main pintar..."
 
-#: ui/mainwindow.cpp:1935
+#: ui/mainwindow.cpp:1936
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting tag \"%1\"..."
@@ -2146,14 +2150,10 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2227 ui/mainwindow.cpp:2505
-#: ui/mainwindow.cpp:2683
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
+#: ripper/ripcddialog.cpp:289
 msgid "Error"
 msgstr "Ralat"
-
-#: ripper/ripcddialog.cpp:153
-msgid "Error Ripping CD"
-msgstr "Ralat Meretas CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2178,7 +2178,7 @@ msgid "Error loading %1"
 msgstr "Ralat memuatkan %1"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:201
-#: internet/digitally/digitallyimportedurlhandler.cpp:96
+#: internet/digitally/digitallyimportedurlhandler.cpp:94
 msgid "Error loading di.fm playlist"
 msgstr "Ralat memuatkan senarai main di.fm"
 
@@ -2297,7 +2297,7 @@ msgstr "Peresapan"
 msgid "Fading duration"
 msgstr "Jangkamasa peresapan"
 
-#: ui/mainwindow.cpp:2228
+#: ripper/ripcddialog.cpp:290
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca pemacu CD"
 
@@ -2382,7 +2382,7 @@ msgstr "Mendapatkan ralat kulit muka"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:319
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "File Format"
 msgstr "Format Fail"
 
@@ -2420,7 +2420,7 @@ msgstr "Jenis fail"
 msgid "Filename"
 msgstr "Namafail"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "Fail"
 
@@ -2553,7 +2553,7 @@ msgstr "Tetapan am"
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Genre"
 msgstr "Genre"
 
@@ -2744,7 +2744,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Jika diaktifkan, mengklik lagu terpilih dalam paparan senarai main akan benarkan anda sunting nilai tag secara langsung"
 
-#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:530
+#: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2831,7 +2831,7 @@ msgstr "Mengindeks %1"
 msgid "Information"
 msgstr "Maklumat"
 
-#: ../bin/src/ui_ripcddialog.h:300
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Input options"
 msgstr "Pilihan input"
 
@@ -2847,7 +2847,7 @@ msgstr "Terpasang"
 msgid "Integrity check"
 msgstr "Semakan integriti"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "Internet"
 
@@ -2892,7 +2892,7 @@ msgstr "Perkhidmatan tidak sah"
 msgid "Invalid session key"
 msgstr "Kunci sesi tidak sah"
 
-#: ../bin/src/ui_ripcddialog.h:311
+#: ../bin/src/ui_ripcddialog.h:333
 msgid "Invert Selection"
 msgstr "Songsang Pemilihan"
 
@@ -3031,7 +3031,7 @@ msgstr "Kiri"
 msgid "Length"
 msgstr "Jangkamasa"
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Pustaka"
@@ -3040,7 +3040,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan lanjutan pustaka"
 
-#: ui/mainwindow.cpp:2815
+#: ui/mainwindow.cpp:2811
 msgid "Library rescan notice"
 msgstr "Notis imbas semula pustaka"
 
@@ -3100,7 +3100,7 @@ msgstr "Memuatkan senarai main pintar"
 msgid "Loading songs"
 msgstr "Memuatkan lagu"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:74
+#: internet/digitally/digitallyimportedurlhandler.cpp:73
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
@@ -3284,10 +3284,6 @@ msgstr "Kadar bit maksimum"
 msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:154
-msgid "Media has changed. Reloading"
-msgstr "Media telah berubah. Memuat semula"
-
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3368,7 +3364,7 @@ msgstr "Titik lekap"
 msgid "Move down"
 msgstr "Alih ke bawah"
 
-#: ui/mainwindow.cpp:734 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:735 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Alih ke pustaka..."
 
@@ -3377,7 +3373,7 @@ msgstr "Alih ke pustaka..."
 msgid "Move up"
 msgstr "Alih ke atas"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muzik"
 
@@ -3439,7 +3435,7 @@ msgstr "Tidak sesekali mula dimainkan"
 msgid "New folder"
 msgstr "Folder baharu"
 
-#: ui/mainwindow.cpp:1989 ../bin/src/ui_mainwindow.h:759
+#: ui/mainwindow.cpp:1990 ../bin/src/ui_mainwindow.h:759
 msgid "New playlist"
 msgstr "Senarai main baharu"
 
@@ -3521,7 +3517,7 @@ msgstr "Tiada blok pendek"
 msgid "None"
 msgstr "Tiada"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2506 ui/mainwindow.cpp:2684
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tiada satupun lagu yang dipilih sesuai untuk disalin ke peranti"
 
@@ -3725,7 +3721,7 @@ msgstr "Optimumkan untuk kualiti"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:321
+#: ../bin/src/ui_ripcddialog.h:351
 msgid "Options..."
 msgstr "Pilihan..."
 
@@ -3737,7 +3733,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aturkan Fail"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:737
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
 msgstr "Urus fail..."
 
@@ -3780,7 +3776,7 @@ msgstr "Output"
 msgid "Output device"
 msgstr "Peranti output"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
 msgid "Output options"
 msgstr "Pilihan output"
 
@@ -3821,7 +3817,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Kata laluan"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1192 ui/mainwindow.cpp:1780
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1193 ui/mainwindow.cpp:1781
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Jeda"
@@ -3857,8 +3853,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Palang sisi biasa"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:698 ui/mainwindow.cpp:1156
-#: ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1784 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:699 ui/mainwindow.cpp:1157
+#: ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1785 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
@@ -3881,11 +3877,11 @@ msgstr "Main sekiranya telah dihenti, jeda sekiranya dimainkan"
 msgid "Play if there is nothing already playing"
 msgstr "Main sekiranya tiada apa yang tersedia dimainkan"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1896
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1897
 msgid "Play next"
 msgstr "Main berikutnya"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1895
 msgid "Play selected tracks next"
 msgstr "Main trek terpilih berikutnya"
 
@@ -3924,7 +3920,7 @@ msgstr "Pilihan senarai main"
 msgid "Playlist type"
 msgstr "Jenis senarai main"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "Senarai main"
 
@@ -4056,7 +4052,7 @@ msgstr "Cetak maklumat versi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
 msgid "Progress"
 msgstr "Kemajuan"
 
@@ -4106,12 +4102,12 @@ msgstr "Menanya peranti..."
 msgid "Queue Manager"
 msgstr "Pengurus Baris Gilir"
 
-#: ui/mainwindow.cpp:1889
+#: ui/mainwindow.cpp:1890
 msgid "Queue selected tracks"
 msgstr "Baris gilir trek terpilih"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1887
+#: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Baris gilir trek"
 
@@ -4363,11 +4359,11 @@ msgstr "Kembali ke Clementine"
 msgid "Right"
 msgstr "Kanan"
 
-#: ../bin/src/ui_ripcddialog.h:302
+#: ../bin/src/ui_ripcddialog.h:335
 msgid "Rip"
 msgstr "Retas"
 
-#: ripper/ripcddialog.cpp:106
+#: ripper/ripcddialog.cpp:103
 msgid "Rip CD"
 msgstr "Retas CD"
 
@@ -4519,7 +4515,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Gelintar"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Gelintar"
@@ -4544,7 +4540,7 @@ msgstr "Gelintar Subsonic"
 msgid "Search automatically"
 msgstr "Gelintar secara automatik"
 
-#: ui/mainwindow.cpp:718
+#: ui/mainwindow.cpp:719
 msgid "Search for album"
 msgstr "Gelintar album"
 
@@ -4557,7 +4553,7 @@ msgstr "Gelintar kulit album..."
 msgid "Search for anything"
 msgstr "Gelintar apa saja"
 
-#: ui/mainwindow.cpp:715
+#: ui/mainwindow.cpp:716
 msgid "Search for artist"
 msgstr "Gelintar artis"
 
@@ -4618,11 +4614,11 @@ msgstr "Jangkau trek semasa dimainkan ke kedudukan mutlak"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Menjangkau gunakan pintasan papan kekunci atau roda tetikus"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:309
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
 msgid "Select All"
 msgstr "Pilih semua"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:310
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
 msgid "Select None"
 msgstr "Pilih Tiada"
 
@@ -4658,7 +4654,7 @@ msgstr "Pilih pengvisualan"
 msgid "Select visualizations..."
 msgstr "Pilih pengvisualan..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Pilih..."
 
@@ -4684,7 +4680,7 @@ msgstr "Perincian pelayan"
 msgid "Service offline"
 msgstr "Perkhidmatan di luar talian"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1935
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
@@ -4768,7 +4764,7 @@ msgstr "Tunjuk OSD menarik"
 msgid "Show above status bar"
 msgstr "Tunjuk di atas palang status"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:666
 msgid "Show all songs"
 msgstr "Tunjuk semua lagu"
 
@@ -4788,12 +4784,12 @@ msgstr "Tunjuk pembahagi"
 msgid "Show fullsize..."
 msgstr "Tunjuk saiz penuh..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:747
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:748
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Tunjuk dalam pelayar fail..."
 
-#: ui/mainwindow.cpp:749
+#: ui/mainwindow.cpp:750
 msgid "Show in library..."
 msgstr "Tunjuk dalam pustaka...."
 
@@ -4805,11 +4801,11 @@ msgstr "Tunjuk dalam artis pelbagai"
 msgid "Show moodbar"
 msgstr "Tunjuk palang suasana"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:668
 msgid "Show only duplicates"
 msgstr "Hanya tunjuk pendua"
 
-#: ui/mainwindow.cpp:669
+#: ui/mainwindow.cpp:670
 msgid "Show only untagged"
 msgstr "Tunjuk hanya tidak ditag"
 
@@ -4905,7 +4901,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Langkau maju dalam senarai main"
 
-#: ui/mainwindow.cpp:1905
+#: ui/mainwindow.cpp:1906
 msgid "Skip selected tracks"
 msgstr "Langkau trek terpilih"
 
@@ -4913,7 +4909,7 @@ msgstr "Langkau trek terpilih"
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1903
+#: ui/mainwindow.cpp:1904
 msgid "Skip track"
 msgstr "Langkau trek"
 
@@ -4949,7 +4945,7 @@ msgstr "Maklumat Lagu"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "Maklumat lagu"
 
@@ -5026,7 +5022,7 @@ msgstr "Disukai"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:73
+#: ripper/ripcddialog.cpp:79
 msgid "Start ripping"
 msgstr "Mula meretas"
 
@@ -5070,7 +5066,7 @@ msgstr "Henti selepas setiap trek"
 msgid "Stop after every track"
 msgstr "Henti selepas setiap trek"
 
-#: ui/mainwindow.cpp:702 ../bin/src/ui_mainwindow.h:729
+#: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
 msgstr "Henti selepas trek ini"
 
@@ -5246,7 +5242,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Tempoh percubaan pelayan Subsonic telah tamat. Sila beri derma untuk dapatkan kunci lesen. Lawati subsonic untuk perincian."
 
-#: ui/mainwindow.cpp:2806
+#: ui/mainwindow.cpp:2802
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5288,7 +5284,7 @@ msgid ""
 "continue?"
 msgstr "Fail ini akan dipadam dari peranti, anda pasti untuk meneruskan?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2553 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2549 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5336,20 +5332,20 @@ msgstr "Peranti ini mesti disambung dan dibuka sebelum Clementine boleh lihat fo
 msgid "This device supports the following file formats:"
 msgstr "Peranti ini menyokong format fail berikut:"
 
-#: devices/devicemanager.cpp:514 devices/devicemanager.cpp:526
+#: devices/devicemanager.cpp:533 devices/devicemanager.cpp:545
 msgid "This device will not work properly"
 msgstr "Peranti ini tidak akan berfungsi dengan baik"
 
-#: devices/devicemanager.cpp:515
+#: devices/devicemanager.cpp:534
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Ini ialah peranti MTP, tapi anda telah mengkompil Clementine tanpa sokongan libmtp."
 
-#: devices/devicemanager.cpp:527
+#: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Ini ialah iPod, tapi anda telah mengkompil Clementine tanpa sokongan libgpod."
 
-#: devices/devicemanager.cpp:263
+#: devices/devicemanager.cpp:262
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5363,7 +5359,7 @@ msgstr "Pilihan ini boleh diubah dalam keutamaan \"Kelakuan\""
 msgid "This stream is for paid subscribers only"
 msgstr "Strim ini untuk pelanggan berbayar sahaja"
 
-#: devices/devicemanager.cpp:544
+#: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Peranti jenis ini tidak disokong: %1"
@@ -5374,7 +5370,7 @@ msgstr "Langkah masa"
 
 #: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:306
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
 msgid "Title"
 msgstr "Tajuk"
 
@@ -5390,7 +5386,7 @@ msgstr "Togol OSD Menarik"
 msgid "Toggle fullscreen"
 msgstr "Togol skrin penuh"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1892
 msgid "Toggle queue status"
 msgstr "Togol status baris gilir"
 
@@ -5435,7 +5431,7 @@ msgid "Trac&k"
 msgstr "Tre&k"
 
 #: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
 msgid "Track"
 msgstr "Trek"
 
@@ -5547,11 +5543,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Nyahtetap kulit muka"
 
-#: ui/mainwindow.cpp:1901
+#: ui/mainwindow.cpp:1902
 msgid "Unskip selected tracks"
 msgstr "Jangan langkau trek terpilih"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1900
 msgid "Unskip track"
 msgstr "Jangan langkau trek"
 
@@ -5888,7 +5884,7 @@ msgid ""
 "well?"
 msgstr "Anda mahu alih lagu lain dalam album ini ke Artis Pelbagai juga?"
 
-#: ui/mainwindow.cpp:2813
+#: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
 msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 
@@ -5907,7 +5903,7 @@ msgstr "Nama pengguna atau kata laluan salah"
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
 msgid "Year"
 msgstr "Tahun"
 
