@@ -21,6 +21,7 @@
 #include "core/utilities.h"
 #include "transcoder.h"
 #include "transcoderoptionsaac.h"
+#include "transcoderoptionsavaac.h"
 #include "transcoderoptionserror.h"
 #include "transcoderoptionsfdkaac.h"
 #include "transcoderoptionsflac.h"
@@ -76,7 +77,9 @@ TranscoderOptionsInterface* TranscoderOptionsDialog::MakeOptionsPage(
   QString element = Transcoder::GetEncoderFactoryForMimeType(mime_type);
 
   qLog(Debug) << "Options for element" << element;
-  if (element == "flacenc") {
+  if (element == "avenc_aac") {
+    return new TranscoderOptionsAvAAC(parent);
+  } else if (element == "flacenc") {
     return new TranscoderOptionsFlac(parent);
   } else if (element == "faac") {
     return new TranscoderOptionsAAC(parent);
