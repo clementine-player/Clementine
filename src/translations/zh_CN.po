@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 12:02+0000\n"
+"PO-Revision-Date: 2021-06-27 15:10+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,11 +39,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\n您可以通过点击播放列表名称旁的星标来收藏播放列表\n\n收藏的播放列表将被保存至此"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr ""
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr "天"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1016,6 +1021,7 @@ msgstr "位速率"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2083,6 +2089,10 @@ msgstr "在搜索结果中启用以下来源。结果将按以下顺序显示。
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "启用/禁用 Last.fm 的音乐记录"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "编码复杂度"
@@ -2365,6 +2375,10 @@ msgstr "写入新自动标签 ‘%1’ 失败"
 msgid "Fast"
 msgstr "快速"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr ""
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "收藏的曲目"
@@ -2501,6 +2515,7 @@ msgstr "忘记设备将从列表删除该设备.如果下次您再次插入该�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4697,6 +4712,7 @@ msgstr "服务离线"
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr ""
@@ -5468,7 +5484,7 @@ msgstr "正在转码 %1 个文件，占用线程 %2 个"
 msgid "Transcoding options"
 msgstr "转码设置"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr ""
@@ -5492,6 +5508,10 @@ msgstr "Turbine"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "关闭"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr ""
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5653,6 +5673,10 @@ msgstr "使用认证"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "使用位速率管理引擎"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

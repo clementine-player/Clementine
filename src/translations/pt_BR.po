@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 14:25+0000\n"
+"PO-Revision-Date: 2021-06-27 22:37+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,11 +36,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nVocê pode adicionar às favoritas a lista de reprodução clicando no ícone estrela, próximo ao nome da lista de reprodução\n\nLista de reproduções favoritas serão salvas aqui"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr "Método ANMR (experimental)"
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr "dias"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1013,6 +1018,7 @@ msgstr "Taxa de bits"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2080,6 +2086,10 @@ msgstr "Habilitar fontes abaixo para incluí-las nos resultados da pesquisa. | |
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Ativar/Desativar Last.fm scrobbling"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr "Codificador"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "Complexidade de codificação"
@@ -2362,6 +2372,10 @@ msgstr "Falha ao escrever novas etiquetas automáticas em '%1'"
 msgid "Fast"
 msgstr "Rápida"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr "Busca rápida"
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "Faixas preferidas"
@@ -2498,6 +2512,7 @@ msgstr "Esquecer um dispositivo irá removê-lo desta lista e o Clementine terá
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4694,6 +4709,7 @@ msgstr "Serviço indisponível"
 msgid "Set %1 to \"%2\"..."
 msgstr "Mudar %1 para \"%2\"..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr "Determinar a taxa"
@@ -5465,7 +5481,7 @@ msgstr "Convertendo %1 arquivos usando %2 núcleos"
 msgid "Transcoding options"
 msgstr "Opção de conversão"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr "Opções de transcodificação - %1"
@@ -5489,6 +5505,10 @@ msgstr "Turbina"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "Desligar"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr "Método de busca de dois ciclos"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5650,6 +5670,10 @@ msgstr "Usar autenticação"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "Configurar taxa de bits"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr "Usar taxa de bits padrão"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

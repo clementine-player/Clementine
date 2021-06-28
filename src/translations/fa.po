@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 12:02+0000\n"
+"PO-Revision-Date: 2021-06-27 15:10+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/davidsansome/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nشما می‌توانید فهرست پخش‌های مورد علاقهٔ خود را با کلیک روی آیکون ستاره در کنار نام آن‌ها انتخاب کنید\n\nلیست پخش‌های مورد علاقه اینجا ذخیره خواهند شد"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr ""
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr " روز"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1007,6 +1012,7 @@ msgstr "ضرب آهنگ"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2074,6 +2080,10 @@ msgstr "در پایین سرچشمه‌ها را پویا کنید تا در ج�
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "پویا/ناپویاسازی واکشی لست‌‌اف‌ام"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "پیچیدگی رمزینه"
@@ -2356,6 +2366,10 @@ msgstr ""
 msgid "Fast"
 msgstr "تند"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr ""
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "ترک‌های برگزیده"
@@ -2492,6 +2506,7 @@ msgstr "انصراف یک دستگاه آن را از این لیست پاک م�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4688,6 +4703,7 @@ msgstr "سرویس برون‌خط"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr ""
@@ -5459,7 +5475,7 @@ msgstr "تراکدکردن فایلهای %1 با استفاده از سرنخ�
 msgid "Transcoding options"
 msgstr "گزینه‌های تراکد"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr ""
@@ -5483,6 +5499,10 @@ msgstr "توربین"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "خاموش"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr ""
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5644,6 +5664,10 @@ msgstr "بکار بردن سندیت"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "بکار بردن موتور مدیریتی ضرباهنگ"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

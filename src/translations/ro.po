@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 12:02+0000\n"
+"PO-Revision-Date: 2021-06-27 15:10+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,11 +38,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nPuteți favoriza liste de redare apăsând clic pe iconița steluță de lângă numele listei de redare\n\nListele de redare favorizate vor fi salvate aici"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr ""
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr "zile"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1015,6 +1020,7 @@ msgstr "Rată de biți"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2082,6 +2088,10 @@ msgstr "Activați sursele de mai jos pentru a le include în rezultatul căutăr
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Activează/dezactivează scrobbling Last.fm"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "Complexitate codare"
@@ -2364,6 +2374,10 @@ msgstr "S-a eșuat la scrierea noilor etichete automate la '%1'"
 msgid "Fast"
 msgstr "Rapid"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr ""
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "Piese favorite"
@@ -2500,6 +2514,7 @@ msgstr "Omiterea unui dispozitiv va determina eliminarea lui din aceasta listă,
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4696,6 +4711,7 @@ msgstr "Serviciu offline"
 msgid "Set %1 to \"%2\"..."
 msgstr "Setează %1 la „%2”..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr "Stabilește rata țintă"
@@ -5467,7 +5483,7 @@ msgstr "Se transcodifică %1 utilizând %2 fire de execuție"
 msgid "Transcoding options"
 msgstr "Opțiuni transcodificare"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr "Opțiuni transcodare - %1"
@@ -5491,6 +5507,10 @@ msgstr "Turbină"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "Oprește"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr ""
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5652,6 +5672,10 @@ msgstr "Utilizează autentificarea"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "Utilizează motorul de administrare a ratei de biți"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

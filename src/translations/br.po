@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 12:02+0000\n"
+"PO-Revision-Date: 2021-06-27 15:10+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,11 +31,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nGallout a rit merkañ rolloù seniñ en ur glikañ war ar steredennig e-kichen anv ar roll seniñ\n\nAr rolloù seniñ merket a vo enrollet aze"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr ""
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr " devez"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1008,6 +1013,7 @@ msgstr "Fonnder"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2075,6 +2081,10 @@ msgstr "Gweredekaat ar mammennoù dindan evit lakaat anezho e disoc'h an enklask
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "(Di)gweredekaat scrobbling Last.fm"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "Kemplezh enkodiñ"
@@ -2357,6 +2367,10 @@ msgstr "C'hwitadenn war skrivañ klavioù emgefreek nevez da '%1'"
 msgid "Fast"
 msgstr "Trumm"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr ""
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
@@ -2493,6 +2507,7 @@ msgstr "Disoñjal un drobarzhell a denn anezhi eus al listenn-mañ ha rediet e v
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4689,6 +4704,7 @@ msgstr "Servij ezlinenn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr ""
@@ -5460,7 +5476,7 @@ msgstr "O transkodiñ %1 restr oc'h implij %2 threads"
 msgid "Transcoding options"
 msgstr "Dibarzhioù transkodiñ"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr ""
@@ -5484,6 +5500,10 @@ msgstr "Turbin"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "Lazhañ"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr ""
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5645,6 +5665,10 @@ msgstr "Implij ar c'jennaskañ"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "Implij al lusker managment dre bitrate"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

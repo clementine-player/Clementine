@@ -26,8 +26,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 12:02+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-06-27 20:03+0000\n"
+"Last-Translator: JungHee Lee <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,11 +43,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\n재생목록 왼쪽의 별모양 아이콘을 클릭해서 즐겨찾기에 추가할 수 있습니다.\n\n즐겨찾기는 여기에 저장됩니다."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr "ANMR 방법 (실험적)"
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr "일"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -348,7 +353,7 @@ msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">프리미엄으로 업그레이드하기</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">지금 프리미엄으로 업그레이드하기</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
@@ -945,7 +950,7 @@ msgstr "이용 가능"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 msgid "Average bitrate"
-msgstr "평균 비트 전송률"
+msgstr "평균 비트레이트"
 
 #: covers/coversearchstatisticsdialog.cpp:72
 msgid "Average image size"
@@ -1020,6 +1025,7 @@ msgstr "비트 전송률"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -1027,7 +1033,7 @@ msgstr "비트 전송률"
 #: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
-msgstr "비트 전송률"
+msgstr "비트레이트"
 
 #: ui/organisedialog.cpp:79
 msgctxt "Refers to bitrate in file organise dialog."
@@ -1090,7 +1096,7 @@ msgstr "CBC 팟캐스트"
 
 #: ../bin/src/ui_ripcddialog.h:330
 msgid "CD Drive"
-msgstr ""
+msgstr "CD 드라이브"
 
 #: core/song.cpp:453
 msgid "CDDA"
@@ -1445,7 +1451,7 @@ msgstr "콘솔"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
 msgid "Constant bitrate"
-msgstr "순간 비트 전송률"
+msgstr "고정 비트레이트"
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
@@ -2087,6 +2093,10 @@ msgstr "검색 결과에 아래의 소스들을 포함시킵니다. 검색 결�
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm 스크로블 켜기/끄기"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr "인코더"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "인코딩 복잡도"
@@ -2369,6 +2379,10 @@ msgstr "'%1'에 새 자동 태그 쓰기 실패"
 msgid "Fast"
 msgstr "빠른"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr "빠른 검색"
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "좋아하는 곡"
@@ -2505,6 +2519,7 @@ msgstr "장치를 잊으면 이 목록에서 장치가 제거되고 클레멘타
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -3294,7 +3309,7 @@ msgstr "하나 이상의 검색조건 일치 (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:208
 msgid "Maximum bitrate"
-msgstr "최고 비트 전송률"
+msgstr "최대 비트레이트"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:92
 msgid "Maximum number of child processes for tag handling (requires restart)"
@@ -3316,7 +3331,7 @@ msgstr "멤버쉽 유형"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
 msgid "Minimum bitrate"
-msgstr "최저 비트 전송률"
+msgstr "최저 비트레이트"
 
 #: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
@@ -3729,7 +3744,7 @@ msgstr "작업이 실패됨"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 msgid "Optimize for bitrate"
-msgstr "비트 전송률 최적화"
+msgstr "비트레이트에 최적화"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
 msgid "Optimize for quality"
@@ -4010,7 +4025,7 @@ msgstr "선호하는 오디오 형식"
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Preferred bitrate"
-msgstr "선호하는 비트 전송률"
+msgstr "선호하는 비트레이트"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4701,6 +4716,7 @@ msgstr "서비스 오프라인"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1을 \"%2\"로 설정..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr "대상 전송속도 지정"
@@ -5204,7 +5220,7 @@ msgstr "태그 가져오기"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Target bitrate"
-msgstr "대상 비트 전송속도"
+msgstr "대상 비트레이트"
 
 #: ui/equalizer.cpp:157
 msgid "Techno"
@@ -5472,7 +5488,7 @@ msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
 msgid "Transcoding options"
 msgstr "변환 옵션"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr "변환 옵션 - %1"
@@ -5496,6 +5512,10 @@ msgstr "터빈"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "끄기"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr "두 개의 루프 검색 방법"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5656,7 +5676,11 @@ msgstr "인증 사용"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
-msgstr "비트 전송률 관리 엔진 사용"
+msgstr "비트레이트 관리 엔진 사용"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr "기본 비트레이트 사용"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

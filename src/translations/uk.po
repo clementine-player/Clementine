@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 14:21+0000\n"
+"PO-Revision-Date: 2021-06-27 17:21+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +26,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nЗробити список відтворення улюбленим можна натисканням піктограми із зіркою, розташованої поряд з пунктом з назвою списку\n\nУлюблені списки відтворення буде збережено тут"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr " Спосіб ANMR (експериментальний)"
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr " днів"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1003,6 +1008,7 @@ msgstr "Бітова швидкість"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2070,6 +2076,10 @@ msgstr "Включити наведені нижче адреси до джер�
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Увімкнути/вимкнути скроблінг в Last.fm"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr "Кодувальник"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "Складність кодування"
@@ -2352,6 +2362,10 @@ msgstr "Не вдалося записати нові автоматичні м�
 msgid "Fast"
 msgstr "Швидко"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr "Швидкий пошук"
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "Улюблені композиції"
@@ -2488,6 +2502,7 @@ msgstr "Забування пристрою вилучає його з цьог�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4684,6 +4699,7 @@ msgstr "Служба вимкнена"
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr "Встановити цільову частоту"
@@ -5455,7 +5471,7 @@ msgstr "Перекодовано %1 файлів, використовуючи %
 msgid "Transcoding options"
 msgstr "Налаштування перекодування"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr "Параметри перекодування — %1"
@@ -5479,6 +5495,10 @@ msgstr "Турбіна"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "Вимкнути"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr "Двоциклічний спосіб пошуку"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5640,6 +5660,10 @@ msgstr "Використовувати автентифікацію"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "Використати двигун контролю бітової швидкості"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr "Типова бітова швидкість"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"

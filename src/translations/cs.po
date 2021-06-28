@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-21 18:33+0000\n"
+"PO-Revision-Date: 2021-06-27 17:45+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,11 +38,16 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nSeznamy skladeb můžete označit jako oblíbené klepnutím na hvězdičku vedle názvu seznamu skladeb\n\nOblíbené seznamy skladeb budou uloženy zde"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:130
+msgid " ANMR method (experimental)"
+msgstr " Metoda ANMR (pokusné)"
+
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
 msgstr "dnů"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsavaac.h:135
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
@@ -1015,6 +1020,7 @@ msgstr "Datový tok"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsavaac.h:131
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
@@ -2082,6 +2088,10 @@ msgstr "Povolit zdroje níže pro jejich zahrnutí ve výsledcích hledání.  V
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Povolit/zakázat odesílání informací o přehrávání na Last.fm"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:127
+msgid "Encoder"
+msgstr "Kodér"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
 msgstr "Složitost kódování"
@@ -2364,6 +2374,10 @@ msgstr "Nepodařilo se zapsat nové automatické značky do '%1'"
 msgid "Fast"
 msgstr "Rychlý"
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:128
+msgid "Fast search"
+msgstr "Rychlé hledání"
+
 #: library/library.cpp:92
 msgid "Favourite tracks"
 msgstr "Oblíbené skladby"
@@ -2500,6 +2514,7 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionsavaac.h:126
 #: ../bin/src/ui_transcoderoptionserror.h:56
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
@@ -4696,6 +4711,7 @@ msgstr "Služba není dostupná"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
 
+#: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
 msgstr "Nastavit cílový tok"
@@ -5467,7 +5483,7 @@ msgstr "Převádí se %1 souborů s %2 procesy"
 msgid "Transcoding options"
 msgstr "Volby překódování"
 
-#: transcoder/transcoderoptionsdialog.cpp:42
+#: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
 msgstr "Volby překódování - %1"
@@ -5491,6 +5507,10 @@ msgstr "Turbína"
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Turn off"
 msgstr "Vypnout"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:129
+msgid "Two loop searching method"
+msgstr "Metoda hledání se dvěma smyčkami"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5652,6 +5672,10 @@ msgstr "Použít ověření"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
 msgstr "Použít stroj na správu datového toku"
+
+#: ../bin/src/ui_transcoderoptionsavaac.h:132
+msgid "Use default bitrate"
+msgstr "Použít výchozí datový tok"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"
