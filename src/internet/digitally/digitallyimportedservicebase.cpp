@@ -127,7 +127,7 @@ void DigitallyImportedServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   if (!is_premium_account()) {
-    ShowSettingsDialog();
+    ShowConfig();
     return;
   }
 
@@ -180,8 +180,7 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
                              SLOT(ForceRefreshStreams()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                             tr("Configure..."), this,
-                             SLOT(ShowSettingsDialog()));
+                             tr("Configure..."), this, SLOT(ShowConfig()));
   }
 
   context_menu_->popup(global_pos);
@@ -204,7 +203,7 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished(QNetworkReply* reply) {
   }
 }
 
-void DigitallyImportedServiceBase::ShowSettingsDialog() {
+void DigitallyImportedServiceBase::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_DigitallyImported);
 }
 

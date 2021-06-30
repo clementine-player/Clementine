@@ -76,7 +76,7 @@ void DropboxService::Connect() {
   if (has_credentials()) {
     RequestFileList();
   } else {
-    ShowSettingsDialog();
+    ShowConfig();
   }
 }
 

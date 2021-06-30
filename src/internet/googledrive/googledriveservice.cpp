@@ -226,8 +226,7 @@ void GoogleDriveService::PopulateContextMenu() {
   context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Cover Manager"), this, SLOT(ShowCoverManager()));
   context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                           tr("Configure..."), this,
-                           SLOT(ShowSettingsDialog()));
+                           tr("Configure..."), this, SLOT(ShowConfig()));
 }
 
 void GoogleDriveService::UpdateContextMenu() {
