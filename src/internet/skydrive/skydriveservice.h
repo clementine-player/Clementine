@@ -37,13 +37,13 @@ class SkydriveService : public CloudFileService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-  virtual bool has_credentials() const;
+  virtual bool has_credentials() const override;
   QUrl GetStreamingUrlFromSongId(const QString& song_id);
 
   QString GetScheme() const { return "onedrive"; }
 
  public slots:
-  virtual void Connect();
+  virtual void Connect() override;
   void ForgetCredentials();
 
  private slots:

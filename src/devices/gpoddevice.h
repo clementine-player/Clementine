@@ -41,15 +41,15 @@ class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
 
   static QStringList url_schemes() { return QStringList() << "ipod"; }
 
-  bool GetSupportedFiletypes(QList<Song::FileType>* ret);
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret) override;
 
-  bool StartCopy(QList<Song::FileType>* supported_types);
-  bool CopyToStorage(const CopyJob& job);
-  void FinishCopy(bool success);
+  bool StartCopy(QList<Song::FileType>* supported_types) override;
+  bool CopyToStorage(const CopyJob& job) override;
+  void FinishCopy(bool success) override;
 
-  void StartDelete();
-  bool DeleteFromStorage(const DeleteJob& job);
-  void FinishDelete(bool success);
+  void StartDelete() override;
+  bool DeleteFromStorage(const DeleteJob& job) override;
+  void FinishDelete(bool success) override;
 
  protected slots:
   void LoadFinished(Itdb_iTunesDB* db);
