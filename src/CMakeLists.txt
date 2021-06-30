@@ -888,12 +888,16 @@ optional_source(HAVE_SPOTIFY
     internet/spotify/spotifyserver.cpp
     internet/spotify/spotifyservice.cpp
     internet/spotify/spotifysettingspage.cpp
+    internet/spotifywebapi/spotifywebapiservice.cpp
     globalsearch/spotifysearchprovider.cpp
+    globalsearch/spotifywebapisearchprovider.cpp
   HEADERS
     globalsearch/spotifysearchprovider.h
+    globalsearch/spotifywebapisearchprovider.h
     internet/spotify/spotifyserver.h
     internet/spotify/spotifyservice.h
     internet/spotify/spotifysettingspage.h
+    internet/spotifywebapi/spotifywebapiservice.h
   UI
     internet/spotify/spotifysettingspage.ui
 )

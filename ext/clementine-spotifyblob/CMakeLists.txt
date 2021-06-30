@@ -1,4 +1,4 @@
-include_directories(${SPOTIFY_INCLUDE_DIRS})
+include_directories(${LIBSPOTIFY_INCLUDE_DIRS})
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -8,7 +8,7 @@ include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations -Wno-unused-local-typedefs -Wno-unused-private-field -Wno-unknown-warning-option")
 
-link_directories(${SPOTIFY_LIBRARY_DIRS})
+link_directories(${LIBSPOTIFY_LIBRARY_DIRS})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
