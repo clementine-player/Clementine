@@ -114,7 +114,7 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
     hints["image_data"] = QVariant(image);
   }
 
-  hints["desktop-entry"] = QVariant("clementine");
+  hints["desktop-entry"] = QVariant("org.clementine_player.Clementine");
   hints["transient"] = QVariant(true);
 
   int id = 0;
