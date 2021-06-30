@@ -45,9 +45,7 @@ class CddaDevice : public ConnectedDevice {
 
   bool Init() override;
   bool CopyToStorage(const MusicStorage::CopyJob&) override { return false; }
-  bool DeleteFromStorage(const MusicStorage::DeleteJob&) override {
-    return false;
-  }
+  bool DeleteFromStorage(const MusicStorage::DeleteJob&) override { return false; }
   CddaSongLoader* loader();
   // Access to the raw cdio device handle.
   CdIo_t* raw_cdio();  // TODO: not ideal, but Ripper needs this currently
