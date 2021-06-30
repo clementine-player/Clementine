@@ -53,7 +53,7 @@ class CloudFileService : public InternetService {
   void AllIndexingTasksFinished();
 
  public slots:
-  void ShowSettingsDialog();
+  void ShowConfig() override;
 
  protected:
   virtual void Connect() = 0;

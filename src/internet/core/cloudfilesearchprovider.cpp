@@ -34,7 +34,7 @@ bool CloudFileSearchProvider::IsLoggedIn() {
   return service_->has_credentials();
 }
 
-void CloudFileSearchProvider::ShowConfig() { service_->ShowSettingsDialog(); }
+void CloudFileSearchProvider::ShowConfig() { service_->ShowConfig(); }
 
 InternetService* CloudFileSearchProvider::internet_service() {
   return service_;

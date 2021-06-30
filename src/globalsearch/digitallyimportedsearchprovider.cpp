@@ -52,6 +52,4 @@ void DigitallyImportedSearchProvider::RecreateItems() {
   SetItems(items);
 }
 
-void DigitallyImportedSearchProvider::ShowConfig() {
-  service_->ShowSettingsDialog();
-}
+void DigitallyImportedSearchProvider::ShowConfig() { service_->ShowConfig(); }

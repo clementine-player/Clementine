@@ -84,7 +84,7 @@ void CloudFileService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
       if (!has_credentials()) {
-        ShowSettingsDialog();
+        ShowConfig();
       } else {
         Connect();
       }
@@ -103,8 +103,7 @@ void CloudFileService::PopulateContextMenu() {
                            tr("Cover Manager"), this, SLOT(ShowCoverManager()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                           tr("Configure..."), this,
-                           SLOT(ShowSettingsDialog()));
+                           tr("Configure..."), this, SLOT(ShowConfig()));
 }
 
 void CloudFileService::ShowCoverManager() {
@@ -122,7 +121,7 @@ void CloudFileService::AddToPlaylist(QMimeData* mime) {
                                              QModelIndex());
 }
 
-void CloudFileService::ShowSettingsDialog() {
+void CloudFileService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(settings_page_);
 }
 

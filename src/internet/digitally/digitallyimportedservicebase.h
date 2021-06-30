@@ -65,7 +65,7 @@ class DigitallyImportedServiceBase : public InternetService {
                        Song* song) const;
 
  public slots:
-  void ShowSettingsDialog();
+  void ShowConfig() override;
 
  signals:
   void StreamsChanged();

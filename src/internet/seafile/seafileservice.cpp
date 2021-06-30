@@ -218,7 +218,7 @@ void SeafileService::Connect() {
   if (has_credentials()) {
     UpdateLibraries();
   } else {
-    ShowSettingsDialog();
+    ShowConfig();
   }
 }
 
