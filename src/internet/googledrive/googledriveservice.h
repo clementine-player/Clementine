@@ -39,7 +39,7 @@ class GoogleDriveService : public CloudFileService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-  virtual bool has_credentials() const;
+  virtual bool has_credentials() const override;
 
   google_drive::Client* client() const { return client_; }
   QString refresh_token() const;
@@ -47,7 +47,7 @@ class GoogleDriveService : public CloudFileService {
   QUrl GetStreamingUrlFromSongId(const QString& file_id);
 
  public slots:
-  void Connect();
+  void Connect() override;
   void ForgetCredentials();
 
  signals:
