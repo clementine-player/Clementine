@@ -101,6 +101,7 @@ jobs:
       - build_hirsute_64
       - build_mac
       - build_mingw
+      - build_snap
       - build_source
       - build_stretch_64
     steps:
@@ -748,6 +749,24 @@ jobs:
         with:
           name: release_focal_64
           path: bin/clementine_*.deb
+  
+  build_snap:
+    name: Build Snap
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1.2.0
+      - uses: snapcore/action-build@v1
+        id: snapcraft
+      - uses: snapcore/action-publish@v1
+        if: github.ref == 'refs/heads/master'
+        with:
+          store_login: ${{ secrets.SNAP_STORE_LOGIN }}
+          snap: ${{ steps.snapcraft.outputs.snap }}
+          release: edge
+      - uses: actions/upload-artifact@v2
+        with:
+          name: release_snap
+          path: ${{ steps.snapcraft.outputs.snap }}
 
   build_groovy_64:
     name: Build Ubuntu Groovy 64-bit deb

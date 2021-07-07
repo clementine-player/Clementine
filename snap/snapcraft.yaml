@@ -1,5 +1,5 @@
 name: clementine
-version: '1.3.1.31+git'
+adopt-info: clementine
 summary: modern music player
 description: |
   Clementine is a modern music player and library organizer
@@ -8,8 +8,12 @@ grade: stable
 confinement: strict
 base: core18
 
-parts:
+architectures:
+  - build-on: amd64
+  - build-on: i386
+  - build-on: arm64
 
+parts:
   desktop-qt5:
     build-packages:
       - build-essential
@@ -37,7 +41,6 @@ parts:
       - oxygen-icon-theme
       - breeze-icon-theme
       - try: [appmenu-qt5]
-
   alsa-lib:
     plugin: autotools
     source: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.1.5.tar.bz2
@@ -60,11 +63,10 @@ parts:
       - -usr/share/alsa/alsa.conf
       - -usr/share/alsa/pcm
       - -usr/share/alsa/topology/broadwell
-
   clementine:
     plugin: cmake
     source-type: git
-    source: https://github.com/clementine-player/Clementine
+    source: .
     after:
       - alsa-lib
       - desktop-qt5
@@ -74,7 +76,7 @@ parts:
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
       sed -i 's|Icon=clementine|Icon=/usr/share/icons/hicolor/scalable/apps/clementine\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
       sed -i 's|TryExec=.*|TryExec=/snap/bin/clementine|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
-
+      snapcraftctl set-version "$(cat $SNAPCRAFT_PART_BUILD/src/version.h | grep CLEMENTINE_VERSION_DISPLAY | awk '{ print $3 }' | tr -d '"' | cut -d "-" -f1-2)"
     build-packages:
       - cmake
       - make
@@ -110,7 +112,6 @@ parts:
       - libglew-dev
       - libcrypto++-dev
       - libsparsehash-dev
-
     stage-packages:
       - libstdc++6
       - libgcc1
@@ -166,14 +167,37 @@ parts:
       - gstreamer1.0-libav
       - dbus-x11
       - projectm-data
+      - qtwayland5
+      - libqtcore4 # Attempt to get Spotify to work
+      - glibc-source # Attempt to get Spotify to work
+      - plasma-integration
+      - kde-style-breeze
+      - qt5-gtk-platformtheme
+
+plugs:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
 
 apps:
   clementine:
-    command: desktop-launch $SNAP/usr/bin/clementine
+    command: bin/desktop-launch $SNAP/usr/bin/clementine
     desktop: usr/share/applications/clementine.desktop
     environment:
       ALSA_CONFIG_PATH: /snap/$SNAPCRAFT_PROJECT_NAME/current/usr/share/alsa/alsa.conf
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+      DISABLE_WAYLAND: 1
+      KDE_FORK_SLAVES: 1
+      PATH: "$PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/kf5"
     plugs:
       - home
       - udisks2
@@ -185,7 +209,7 @@ apps:
       - x11
       - wayland
       - alsa
-      - pulseaudio
+      - audio-playback
       - removable-media
       - optical-drive
       - raw-usb
@@ -194,9 +218,8 @@ apps:
       - unity7
     slots:
       - mpris
-
   clementine-tagreader:
-    command: clementine-tagreader
+    command: usr/bin/clementine-tagreader
     plugs:
       - network
       - network-manager-observe
