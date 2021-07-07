@@ -403,6 +403,7 @@ set(SOURCES
   widgets/progressitemdelegate.cpp
   widgets/ratingwidget.cpp
   widgets/renametablineedit.cpp
+  widgets/scrollmessagebox.cpp
   widgets/sliderwidget.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
@@ -699,6 +700,7 @@ set(HEADERS
   widgets/progressitemdelegate.h
   widgets/ratingwidget.h
   widgets/renametablineedit.h
+  widgets/scrollmessagebox.h
   widgets/sliderwidget.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h
