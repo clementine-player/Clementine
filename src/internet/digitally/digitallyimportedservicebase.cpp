@@ -126,7 +126,7 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
 void DigitallyImportedServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
-  if (!is_premium_account()) {
+  if (ConfigRequired()) {
     ShowConfig();
     return;
   }

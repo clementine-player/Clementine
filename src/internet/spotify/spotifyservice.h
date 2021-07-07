@@ -92,6 +92,8 @@ class SpotifyService : public InternetService {
   LoginState login_state() const { return login_state_; }
   bool IsLoggedIn() const { return login_state_ == LoginState_LoggedIn; }
 
+  bool ConfigRequired() override { return !IsLoggedIn(); }
+
   static void SongFromProtobuf(const cpb::spotify::Track& track, Song* song);
 
  signals:

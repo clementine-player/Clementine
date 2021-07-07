@@ -103,6 +103,10 @@ class SubsonicService : public InternetService {
 
   LoginState login_state() const { return login_state_; }
 
+  bool ConfigRequired() override {
+    return login_state() != LoginState_Loggedin;
+  }
+
   // Subsonic API methods
   void Ping();
 

@@ -88,6 +88,8 @@ class InternetService : public QObject {
 
   virtual QString Icon() { return QString(); }
 
+  virtual bool ConfigRequired() { return false; }
+
  signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);

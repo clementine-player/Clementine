@@ -168,7 +168,7 @@ void SubsonicService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
       library_model_->Init();
-      if (login_state() != LoginState_Loggedin) {
+      if (ConfigRequired()) {
         ShowConfig();
       } else if (total_song_count_ == 0 && !load_database_task_id_) {
         ReloadDatabase();
