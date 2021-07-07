@@ -83,7 +83,7 @@ QStandardItem* CloudFileService::CreateRootItem() {
 void CloudFileService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      if (!has_credentials()) {
+      if (ConfigRequired()) {
         ShowConfig();
       } else {
         Connect();
