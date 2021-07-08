@@ -86,6 +86,7 @@ class PlaylistTabBar : public QTabBar {
   void PlaylistManagerInitialized();
   void TabMoved();
   void Save();
+  void ExpandNames();
 
  private:
   PlaylistManager* manager_;
@@ -96,6 +97,8 @@ class PlaylistTabBar : public QTabBar {
   QAction* rename_;
   QAction* close_;
   QAction* save_;
+  QAction* expand_;
+  QAction* elide_;
 
   QBasicTimer drag_hover_timer_;
   int drag_hover_tab_;
