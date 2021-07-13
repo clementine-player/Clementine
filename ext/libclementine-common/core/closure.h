@@ -202,8 +202,8 @@ template <typename T, typename... Args>
 _detail::ClosureBase* NewClosure(QFuture<T> future, QObject* receiver,
                                  const char* slot, const Args&... args) {
   QFutureWatcher<T>* watcher = new QFutureWatcher<T>;
-  watcher->setFuture(future);
   QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  watcher->setFuture(future);
   return NewClosure(watcher, SIGNAL(finished()), receiver, slot, args...);
 }
 
@@ -211,8 +211,8 @@ template <typename T, typename F, typename... Args>
 _detail::ClosureBase* NewClosure(QFuture<T> future, const F& callback,
                                  const Args&... args) {
   QFutureWatcher<T>* watcher = new QFutureWatcher<T>;
-  watcher->setFuture(future);
   QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  watcher->setFuture(future);
   return NewClosure(watcher, SIGNAL(finished()), callback, args...);
 }
 
