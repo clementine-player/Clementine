@@ -107,7 +107,7 @@ void Ripper::Cancel() {
   }
   transcoder_->Cancel();
   RemoveTemporaryDirectory();
-  emit(Cancelled());
+  emit Cancelled();
 }
 
 void Ripper::TranscodingJobComplete(const QString& input, const QString& output,
@@ -235,7 +235,7 @@ void Ripper::Rip() {
                         it->transcoded_filename);
   }
   transcoder_->Start();
-  emit(RippingComplete());
+  emit RippingComplete();
 }
 
 // The progress interval is [0, 200*AddedTracks()], where the first
@@ -289,7 +289,7 @@ void Ripper::FileTagged(TagReaderReply* reply) {
               << "files";
   if (files_tagged_ == tracks_.length()) {
     qLog(Debug) << "CD ripper finished.";
-    emit(Finished());
+    emit Finished();
   }
 
   reply->deleteLater();

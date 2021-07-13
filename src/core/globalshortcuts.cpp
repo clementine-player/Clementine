@@ -119,7 +119,7 @@ void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name,
                                         const QKeySequence& default_key) {
   Shortcut shortcut = AddShortcut(id, name, default_key);
   connect(shortcut.action, &QAction::triggered,
-          [this, rating]() { RateCurrentSong(rating); });
+          [this, rating]() { emit RateCurrentSong(rating); });
 }
 
 GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(

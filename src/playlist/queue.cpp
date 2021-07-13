@@ -242,7 +242,7 @@ void Queue::Clear() {
 }
 
 void Queue::Move(const QList<int>& proxy_rows, int pos) {
-  layoutAboutToBeChanged();
+  emit layoutAboutToBeChanged();
   QList<QPersistentModelIndex> moved_items;
 
   // Take the items out of the list first, keeping track of whether the
@@ -279,7 +279,7 @@ void Queue::Move(const QList<int>& proxy_rows, int pos) {
     }
   }
 
-  layoutChanged();
+  emit layoutChanged();
 }
 
 void Queue::MoveUp(int row) { Move(QList<int>() << row, row - 1); }
@@ -400,7 +400,7 @@ void Queue::Remove(QList<int>& proxy_rows) {
   std::stable_sort(proxy_rows.begin(), proxy_rows.end());
 
   // reflects immediately changes in the playlist
-  layoutAboutToBeChanged();
+  emit layoutAboutToBeChanged();
 
   int removed_rows = 0;
   for (int row : proxy_rows) {
@@ -412,5 +412,5 @@ void Queue::Remove(QList<int>& proxy_rows) {
     removed_rows++;
   }
 
-  layoutChanged();
+  emit layoutChanged();
 }

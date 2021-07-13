@@ -57,7 +57,7 @@ UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(
   }
 
   if (!service_->is_premium_account()) {
-    service_->StreamError(tr("A premium account is required"));
+    emit service_->StreamError(tr("A premium account is required"));
     return LoadResult(url, LoadResult::Error);
   }
 
@@ -91,7 +91,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
 
   // Failed to get playlist?
   if (songs.count() == 0) {
-    service_->StreamError(tr("Error loading di.fm playlist"));
+    emit service_->StreamError(tr("Error loading di.fm playlist"));
     emit AsyncLoadComplete(LoadResult(last_original_url_, LoadResult::Error));
     return;
   }
