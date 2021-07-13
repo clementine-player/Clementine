@@ -146,18 +146,18 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
                                                  GstElement* bin) {
   SuitableElement best = FindBestElementForMimeType(element_type, mime_type);
   if (best.name_.isEmpty()) {
-    LogLine(tr("Suitable element not found"));
+    emit LogLine(tr("Suitable element not found"));
     return nullptr;
   }
 
-  LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));
+  emit LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));
 
   if (best.name_ == "lamemp3enc") {
     // Special case: we need to add xingmux and id3v2mux to the pipeline when
     // using lamemp3enc because it doesn't write the VBR or ID3v2 headers
     // itself.
 
-    LogLine("Adding xingmux and id3v2mux to the pipeline");
+    emit LogLine("Adding xingmux and id3v2mux to the pipeline");
 
     // Create the bin
     GstElement* mp3bin = gst_bin_new("mp3bin");
@@ -461,16 +461,17 @@ bool Transcoder::StartJob(const Job& job) {
   if (!src || !decode || !convert || !sink) return false;
 
   if (!codec && !job.preset.codec_mimetype_.isEmpty()) {
-    LogLine(tr("Couldn't find an encoder for %1, check you have the correct "
-               "GStreamer plugins installed")
-                .arg(job.preset.codec_mimetype_));
+    emit LogLine(
+        tr("Couldn't find an encoder for %1, check you have the correct "
+           "GStreamer plugins installed")
+            .arg(job.preset.codec_mimetype_));
     return false;
   }
 
   if (!muxer && !job.preset.muxer_mimetype_.isEmpty()) {
-    LogLine(tr("Couldn't find a muxer for %1, check you have the correct "
-               "GStreamer plugins installed")
-                .arg(job.preset.muxer_mimetype_));
+    emit LogLine(tr("Couldn't find a muxer for %1, check you have the correct "
+                    "GStreamer plugins installed")
+                     .arg(job.preset.muxer_mimetype_));
     return false;
   }
 
@@ -618,8 +619,8 @@ void Transcoder::SetElementProperties(const QString& name, GObject* object) {
     const QVariant value = s.value(property->name);
     if (value.isNull()) continue;
 
-    LogLine(QString("Setting %1 property: %2 = %3")
-                .arg(name, property->name, value.toString()));
+    emit LogLine(QString("Setting %1 property: %2 = %3")
+                     .arg(name, property->name, value.toString()));
 
     switch (property->value_type) {
       case G_TYPE_DOUBLE:

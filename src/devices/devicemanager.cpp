@@ -681,7 +681,7 @@ void DeviceManager::Forget(QModelIndex idx) {
     info->LoadIcon(info->BestBackend()->lister_->DeviceIcons(id),
                    info->friendly_name_);
 
-    dataChanged(idx, idx);
+    emit dataChanged(idx, idx);
   }
 }
 
