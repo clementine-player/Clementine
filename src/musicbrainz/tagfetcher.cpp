@@ -50,9 +50,9 @@ void TagFetcher::StartFetch(const SongList& songs) {
 
   QFuture<QString> future = QtConcurrent::mapped(songs_, GetFingerprint);
   fingerprint_watcher_ = new QFutureWatcher<QString>(this);
-  fingerprint_watcher_->setFuture(future);
   connect(fingerprint_watcher_, SIGNAL(resultReadyAt(int)),
           SLOT(FingerprintFound(int)));
+  fingerprint_watcher_->setFuture(future);
 
   for (const Song& song : songs) {
     emit Progress(song, tr("Fingerprinting song"));
