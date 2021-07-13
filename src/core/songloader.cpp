@@ -421,6 +421,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   CHECKED_GCONNECT(typefind, "have-type", &TypeFound, this);
   gst_bus_set_sync_handler(bus, BusCallbackSync, this, NULL);
   gst_bus_add_watch(bus, BusCallback, this);
+  gst_object_unref(bus);
 
   // Add a probe to the sink so we can capture the data if it's a playlist
   GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
