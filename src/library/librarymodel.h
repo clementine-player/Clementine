@@ -46,7 +46,6 @@ class QSettings;
 
 class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
-  Q_ENUMS(GroupBy)
 
  public:
   LibraryModel(std::shared_ptr<LibraryBackend> backend, Application* app,
@@ -91,6 +90,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_OriginalYearAlbum = 13,
     GroupBy_OriginalYear = 14,
   };
+  Q_ENUM(GroupBy)
 
   struct Grouping {
     Grouping(GroupBy f = GroupBy_None, GroupBy s = GroupBy_None,
