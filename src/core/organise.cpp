@@ -70,7 +70,7 @@ void Organise::Start() {
   if (thread_) return;
 
   task_id_ = task_manager_->StartTask(tr("Organising files"));
-  task_manager_->SetTaskBlocksLibraryScans(true);
+  task_manager_->SetTaskBlocksLibraryScans(task_id_);
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
