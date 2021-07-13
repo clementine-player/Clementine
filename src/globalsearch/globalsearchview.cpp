@@ -448,37 +448,39 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
 }
 
 bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
-  context_menu_ = new QMenu(this);
-  context_actions_ << context_menu_->addAction(
-      IconLoader::Load("media-playback-start", IconLoader::Base),
-      tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
-  context_actions_ << context_menu_->addAction(
-      IconLoader::Load("media-playback-start", IconLoader::Base),
-      tr("Replace current playlist"), this, SLOT(LoadSelected()));
-  context_actions_ << context_menu_->addAction(
-      IconLoader::Load("document-new", IconLoader::Base),
-      tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
-
-  context_menu_->addSeparator();
-  context_actions_ << context_menu_->addAction(
-      IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"), this,
-      SLOT(AddSelectedToPlaylistEnqueue()));
-
-  context_menu_->addSeparator();
-
-  if (ui_->results->selectionModel() &&
-      ui_->results->selectionModel()->selectedRows().length() == 1) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu(this);
     context_actions_ << context_menu_->addAction(
-        IconLoader::Load("system-search", IconLoader::Base),
-        tr("Search for this"), this, SLOT(SearchForThis()));
-  }
+        IconLoader::Load("media-playback-start", IconLoader::Base),
+        tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
+    context_actions_ << context_menu_->addAction(
+        IconLoader::Load("media-playback-start", IconLoader::Base),
+        tr("Replace current playlist"), this, SLOT(LoadSelected()));
+    context_actions_ << context_menu_->addAction(
+        IconLoader::Load("document-new", IconLoader::Base),
+        tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
 
-  context_menu_->addSeparator();
-  context_menu_->addMenu(tr("Group by"))
-      ->addActions(group_by_actions_->actions());
-  context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                           tr("Configure global search..."), this,
-                           SLOT(OpenSettingsDialog()));
+    context_menu_->addSeparator();
+    context_actions_ << context_menu_->addAction(
+        IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"), this,
+        SLOT(AddSelectedToPlaylistEnqueue()));
+
+    context_menu_->addSeparator();
+
+    if (ui_->results->selectionModel() &&
+        ui_->results->selectionModel()->selectedRows().length() == 1) {
+      context_actions_ << context_menu_->addAction(
+          IconLoader::Load("system-search", IconLoader::Base),
+          tr("Search for this"), this, SLOT(SearchForThis()));
+    }
+
+    context_menu_->addSeparator();
+    context_menu_->addMenu(tr("Group by"))
+        ->addActions(group_by_actions_->actions());
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                             tr("Configure global search..."), this,
+                             SLOT(OpenSettingsDialog()));
+  }
 
   const bool enable_context_actions =
       ui_->results->selectionModel() &&
