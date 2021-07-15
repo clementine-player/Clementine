@@ -33,7 +33,7 @@
 # jb78180 <jblum66@gmail.com>, 2014-2016,2018
 # jb78180 <jblum66@gmail.com>, 2012
 # Jikan <jikan@jikan.fr>, 2015
-# jipux, 2014-2017,2020
+# jipux, 2014-2017,2020-2021
 # Le Gall Nicolas <contact@nlegall.fr>, 2014
 # Marco Costa <mmarcottulio@gmail.com>, 2012
 # Mathieu Carron <mathcarron@gmail.com>, 2016
@@ -54,8 +54,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-08 18:40+0000\n"
-"Last-Translator: Tubuntu\n"
+"PO-Revision-Date: 2021-07-14 15:09+0000\n"
+"Last-Translator: jipux\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -876,7 +876,7 @@ msgstr "Apparence"
 msgid "Append files/URLs to the playlist"
 msgstr "Ajouter des fichiers/URLs à la liste de lecture"
 
-#: devices/deviceview.cpp:212 globalsearch/globalsearchview.cpp:454
+#: devices/deviceview.cpp:212 globalsearch/globalsearchview.cpp:455
 #: internet/core/internetservice.cpp:51 library/libraryview.cpp:382
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1424,7 +1424,7 @@ msgstr "Configurer Spotify…"
 msgid "Configure Subsonic..."
 msgstr "Configurer Subsonic..."
 
-#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
+#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
 msgstr "Configurer la recherche globale..."
 
@@ -1554,14 +1554,14 @@ msgstr "Impossible de se connecter à Last.fm. Veuillez réessayer."
 msgid "Couldn't create playlist"
 msgstr "La liste de lecture n'a pas pu être créée"
 
-#: transcoder/transcoder.cpp:471
+#: transcoder/transcoder.cpp:472
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Impossible de trouver un multiplexeur pour %1, vérifiez que les bons modules externes GStreamer sont installés."
 
-#: transcoder/transcoder.cpp:464
+#: transcoder/transcoder.cpp:465
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2325,7 +2325,7 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:276
 #: transcoder/transcodersettingspage.cpp:30
@@ -2409,7 +2409,7 @@ msgstr "Rapide"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:128
 msgid "Fast search"
-msgstr ""
+msgstr "Recherche rapide"
 
 #: library/library.cpp:92
 msgid "Favourite tracks"
@@ -2484,7 +2484,7 @@ msgstr "Fichiers"
 
 #: ../bin/src/ui_networkremotesettingspage.h:376
 msgid "Files root folder"
-msgstr ""
+msgstr "Dossier racine des fichiers"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2676,7 +2676,7 @@ msgstr "Griser les morceaux qui n'existent plus dans mes listes de lecture"
 msgid "Group Library by..."
 msgstr "Grouper la Bibliothèque par..."
 
-#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:85
+#: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:85
 msgid "Group by"
 msgstr "Grouper par"
 
@@ -3524,7 +3524,7 @@ msgstr "Suivant"
 
 #: core/globalshortcuts.cpp:61 ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Album suivant"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3558,7 +3558,7 @@ msgstr "Aucune correspondance trouvée. Videz le champ de recherche pour affiche
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
-msgstr ""
+msgstr "Pas de réglage disponible pour ce type"
 
 #: transcoder/transcoderoptionserror.cpp:42
 #, qt-format
@@ -3746,7 +3746,7 @@ msgstr "Ouvrir un fichier..."
 msgid "Open in Google Drive"
 msgstr "Ouvrir dans Google Drive"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:460
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:461
 #: internet/core/internetservice.cpp:65 library/libraryview.cpp:388
 #: widgets/fileviewlist.cpp:37
 msgid "Open in new playlist"
@@ -4165,14 +4165,14 @@ msgstr "Gestionnaire de file d'attente"
 msgid "Queue selected tracks"
 msgstr "Mettre les pistes sélectionnées en liste d'attente"
 
-#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
+#: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
 #: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Mettre cette piste en liste d'attente"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Noter rapidement la piste jouée"
 
 #: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
@@ -4351,7 +4351,7 @@ msgstr "Répéter la liste de lecture"
 msgid "Repeat track"
 msgstr "Répéter la piste"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:457
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:458
 #: internet/core/internetservice.cpp:58 library/libraryview.cpp:385
 #: widgets/fileviewlist.cpp:35
 msgid "Replace current playlist"
@@ -4400,7 +4400,7 @@ msgstr "Redémarre le morceau ou lit le morceau précédent si utilisé durant l
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
-msgstr ""
+msgstr "Restaurer le serveur par défaut"
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4436,7 +4436,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Dossier racine visible visible depuis le réseau à distance"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4444,7 +4444,7 @@ msgstr "Lancer"
 
 #: ../bin/src/ui_playbacksettingspage.h:413
 msgid "S16LE (16-bit)"
-msgstr ""
+msgstr "S16LE (16-bit)"
 
 #: core/song.cpp:455
 msgid "SNES SPC700"
@@ -4616,7 +4616,7 @@ msgstr "Recherche globale"
 msgid "Search for artist"
 msgstr "Rechercher l'artiste"
 
-#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:400
+#: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:400
 msgid "Search for this"
 msgstr "Rechercher cela"
 
@@ -4683,11 +4683,11 @@ msgstr "Ne rien sélectionner"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Sélectionner le répertoire"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Sélectionner le fichier"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4747,7 +4747,7 @@ msgstr "Définir %1 à la valeur « %2 »..."
 #: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
-msgstr ""
+msgstr "Définir le taux souhaité"
 
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
@@ -4967,7 +4967,7 @@ msgstr "Passer les pistes sélectionnées"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "Passer à l'album suivant"
 
 #: ui/mainwindow.cpp:1904
 msgid "Skip track"
@@ -5003,7 +5003,7 @@ msgstr "Informations sur le morceau"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:91
 msgid "Song Metadata"
-msgstr ""
+msgstr "Meta-données du morceau"
 
 #: ui/mainwindow.cpp:287
 msgid "Song info"
@@ -5197,7 +5197,7 @@ msgstr "Tags suggérés"
 
 #: transcoder/transcoder.cpp:149
 msgid "Suitable element not found"
-msgstr ""
+msgstr "Aucun élément convenable trouvé"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5501,7 +5501,7 @@ msgstr "Transcoder de la musique"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Détails du convertisseur"
 
 #: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
@@ -5519,7 +5519,7 @@ msgstr "Option de transcodage"
 #: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr ""
+msgstr "Options de conversion - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5527,11 +5527,11 @@ msgstr "TrueAudio"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:96
 msgid "Try to extract title, artist, and album from file path."
-msgstr ""
+msgstr "Tenter d'extraire le titre, l'artiste et l'album du chemin"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:98
 msgid "Try to guess missing metadata"
-msgstr ""
+msgstr "Tenter de deviner les meta-données manquantes"
 
 #: analyzers/turbine.cpp:35
 msgid "Turbine"
@@ -5601,7 +5601,7 @@ msgstr "Erreur de type inconnu"
 #: playlistparsers/playlistparser.cpp:168
 #, qt-format
 msgid "Unknown filetype: %1"
-msgstr ""
+msgstr "Type de fichier inconnu : %1"
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Unset cover"
@@ -5708,7 +5708,7 @@ msgstr "Utiliser le moteur de gestion du débit"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:132
 msgid "Use default bitrate"
-msgstr ""
+msgstr "Utilise le taux par défaut"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"
@@ -6031,7 +6031,7 @@ msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
 "remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
 "<b>Windows</b><br/>"
-msgstr ""
+msgstr "Vous trouverez <a href=\"%1\">ici sur GitHub</a> la nouvelle plateform croisée a distance.<br/>Disponible pour <b>Linux</b>, <b>MacOS</b> et <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""

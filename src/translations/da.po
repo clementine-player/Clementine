@@ -25,7 +25,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-13 20:07+0000\n"
+"PO-Revision-Date: 2021-07-14 17:50+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/davidsansome/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -847,7 +847,7 @@ msgstr "Udseende"
 msgid "Append files/URLs to the playlist"
 msgstr "Tilføj filer/adresser til afspilningslisten"
 
-#: devices/deviceview.cpp:212 globalsearch/globalsearchview.cpp:454
+#: devices/deviceview.cpp:212 globalsearch/globalsearchview.cpp:455
 #: internet/core/internetservice.cpp:51 library/libraryview.cpp:382
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -937,7 +937,7 @@ msgstr "Automatisk opdatering"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:101
 msgid "Automatically determine based on sample rate."
-msgstr ""
+msgstr "Beslut automatisk baseret på samplingsrate."
 
 #: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
@@ -1395,7 +1395,7 @@ msgstr "Konfigurer Spotify ..."
 msgid "Configure Subsonic..."
 msgstr "Konfigurer Subsonic ..."
 
-#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
+#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
 msgstr "Konfigurer blobal søgning ..."
 
@@ -1525,14 +1525,14 @@ msgstr "Kunne ikke logge ind på Last.fm. Prøv igen."
 msgid "Couldn't create playlist"
 msgstr "Kunne ikke oprette afspilningsliste"
 
-#: transcoder/transcoder.cpp:471
+#: transcoder/transcoder.cpp:472
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Kunne ikke finde muxer for %1, tjek at du har de rigtige GStreamer-plugins installeret"
 
-#: transcoder/transcoder.cpp:464
+#: transcoder/transcoder.cpp:465
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1875,7 +1875,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "Hvis der foretages en fuld genskanning, så mistes metadata du har gemt i Clementine såsom omslag, antal afspilninger og bedømmelser. Clementine genskanner al din musik i %1 hvilket kan tage noget tid."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -1952,7 +1952,7 @@ msgstr "Download den originale Android-app"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Download fjernen for skriveborde, Android og iOS."
 
 #: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
@@ -2006,11 +2006,11 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Dump graf"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Dump pipelinegraf"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2118,7 +2118,7 @@ msgstr "Indtast en adresse hvorfra omslag skal hentes fra internettet:"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Enter a filename for exported covers (no extension):"
-msgstr "Indtast et filnavn for eksporterede omslag (ingen udvidelse):"
+msgstr "Indtast et filnavn for eksporterede omslag (ingen endelse):"
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -2417,7 +2417,7 @@ msgstr "Filformat"
 
 #: ui/organisedialog.cpp:81
 msgid "File extension"
-msgstr "File suffiks"
+msgstr "Filendelse"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "File formats"
@@ -2647,7 +2647,7 @@ msgstr "Giv ikkeeksisterende sange gråtone i mine afspilningslister"
 msgid "Group Library by..."
 msgstr "Gruppér bibliotek efter ..."
 
-#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:85
+#: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:85
 msgid "Group by"
 msgstr "Grupper efter"
 
@@ -3413,7 +3413,7 @@ msgstr "Musikbibliotek"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Musikendelser som er synlige fjernt"
 
 #: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:768
@@ -3529,7 +3529,7 @@ msgstr "Ingen match fundet. Ryd søgefeltet for at vise hele afspilningslisten i
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
-msgstr ""
+msgstr "Ingen indstillinger tilgængelige for denne type."
 
 #: transcoder/transcoderoptionserror.cpp:42
 #, qt-format
@@ -3717,7 +3717,7 @@ msgstr "Åbn fil ..."
 msgid "Open in Google Drive"
 msgstr "Åbn på Google Drev"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:460
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:461
 #: internet/core/internetservice.cpp:65 library/libraryview.cpp:388
 #: widgets/fileviewlist.cpp:37
 msgid "Open in new playlist"
@@ -3869,11 +3869,11 @@ msgstr "Kunstner"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Pipeline"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "Pipelines"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -3896,7 +3896,7 @@ msgstr "Antal gange afspillet"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr "Afspil givne spilleliste"
+msgstr "Afspil givne afspilningsliste"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -4136,7 +4136,7 @@ msgstr "Køhåndtering"
 msgid "Queue selected tracks"
 msgstr "Sæt valgte spor i kø"
 
-#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
+#: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
 #: ui/mainwindow.cpp:1888
 msgid "Queue track"
 msgstr "Sæt spor i kø"
@@ -4322,7 +4322,7 @@ msgstr "Gentag afspilningsliste"
 msgid "Repeat track"
 msgstr "Gentag spor"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:457
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:458
 #: internet/core/internetservice.cpp:58 library/libraryview.cpp:385
 #: widgets/fileviewlist.cpp:35
 msgid "Replace current playlist"
@@ -4407,7 +4407,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Rodmappe som kan gennemses fra netværksfjernen"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4505,7 +4505,7 @@ msgstr "Gemt grupperingshåndtering"
 
 #: playlistparsers/cueparser.cpp:355
 msgid "Saving cue files is not yet supported."
-msgstr ""
+msgstr "Gemme cur-files understøttes ikke endnu."
 
 #: library/library.cpp:202
 msgid "Saving songs statistics into songs files"
@@ -4587,7 +4587,7 @@ msgstr "Søg efter noget"
 msgid "Search for artist"
 msgstr "Søg efter kunstner"
 
-#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:400
+#: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:400
 msgid "Search for this"
 msgstr "Søg efter denne"
 
@@ -4718,7 +4718,7 @@ msgstr "Sæt %1 til »%2« …"
 #: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
-msgstr ""
+msgstr "Indstil målhastighed"
 
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
@@ -4926,7 +4926,7 @@ msgstr "Antal gange sprunget over"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Spring over filer med disse endelser (kommasepareret, der skelnes mellem store og små bogstaver)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5253,7 +5253,7 @@ msgstr "Søgefunktionen er optaget"
 
 #: ../bin/src/ui_playbacksettingspage.h:417
 msgid "The format is only updated when a pipeline starts."
-msgstr ""
+msgstr "Formatet opdateres kun når en pipeline startes."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5498,7 +5498,7 @@ msgstr "TrueAudio"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:96
 msgid "Try to extract title, artist, and album from file path."
-msgstr ""
+msgstr "Prøv at udtrække titel, kunstner og album fra filstien."
 
 #: ../bin/src/ui_songmetadatasettingspage.h:98
 msgid "Try to guess missing metadata"
@@ -5514,7 +5514,7 @@ msgstr "Slå fra"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:129
 msgid "Two loop searching method"
-msgstr ""
+msgstr "Søgemetode med to løkker"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5811,7 +5811,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Advarsel: Komperimeringsniveauet er uden for hvad der kan streames af undersættet. Det betyder at en dekoder måske ikke vil være i stand til at starte afspilningen midt i streamet. Det kan også påvirke ydelse af hardwaredekodere."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
@@ -6002,7 +6002,7 @@ msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
 "remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
 "<b>Windows</b><br/>"
-msgstr ""
+msgstr "<a href=\"%1\">Her på GitHub</a> kan du finde den nye fjerne der virker på flere platforme.<br/>Den er tilgængelig på <b>Linux</b>, <b>MacOS</b> og <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6134,7 +6134,7 @@ msgstr "bpm"
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr ""
+msgstr "kommasepareret liste over tilladte endelser som vil være synlige fra netværksfjernen (f.eks.: m3u,mp3,flac,ogg,wav)"
 
 #: smartplaylists/searchterm.cpp:258
 msgid "contains"
@@ -6142,7 +6142,7 @@ msgstr "indeholder"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "skrivebordsfjern"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
