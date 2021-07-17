@@ -7,7 +7,7 @@ import polib
 import re
 
 PO_GLOB = 'src/translations/*.po'
-DESKTOP_PATH = 'dist/clementine.desktop'
+DESKTOP_PATH = 'dist/org.clementine_player.Clementine.desktop'
 
 class ConfigParser(object):
   """

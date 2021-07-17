@@ -22,7 +22,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/windows/clementine.nsi.in
 
 
 # windows/windres.rc is done by src/CMakeLists.txt
-
+set(APP_ID "org.clementine_player.Clementine")
 if(EXISTS /etc/lsb-release)
   file(READ "/etc/lsb-release" LSB_RELEASE_CONTENTS)
   string(REGEX MATCH "DISTRIB_ID=Ubuntu" IS_UBUNTU ${LSB_RELEASE_CONTENTS})
@@ -40,20 +40,20 @@ option(INSTALL_UBUNTU_ICONS "Install the Ubuntu themed monochrome panel icons" $
 if (NOT APPLE)
   install(FILES clementine_64.png
     DESTINATION share/icons/hicolor/64x64/apps/
-    RENAME clementine.png
+    RENAME ${APP_ID}.png
   )
 
   install(FILES clementine_128.png
     DESTINATION share/icons/hicolor/128x128/apps/
-    RENAME clementine.png
+    RENAME ${APP_ID}.png
   )
 
   install(FILES ../data/icon.svg
     DESTINATION share/icons/hicolor/scalable/apps/
-    RENAME clementine.svg
+    RENAME ${APP_ID}.svg
   )
 
-  install(FILES clementine.desktop
+  install(FILES ${APP_ID}.desktop
     DESTINATION share/applications
   )
 
@@ -64,7 +64,7 @@ if (NOT APPLE)
     DESTINATION share/kservices5
   )
 
-  install(FILES clementine.appdata.xml
+  install(FILES ${APP_ID}.appdata.xml
     DESTINATION share/metainfo
   )
 

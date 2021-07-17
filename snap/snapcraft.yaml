@@ -72,8 +72,8 @@ parts:
       cmake ../src -DCMAKE_INSTALL_PREFIX=/usr
       make -j $(getconf _NPROCESSORS_ONLN)
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-      sed -i 's|Icon=clementine|Icon=/usr/share/icons/hicolor/scalable/apps/clementine\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
-      sed -i 's|TryExec=.*|TryExec=/snap/bin/clementine|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
+      sed -i 's|Icon=clementine|Icon=/usr/share/icons/hicolor/scalable/apps/clementine\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/org.clementine_player.Clementine.desktop
+      sed -i 's|TryExec=.*|TryExec=/snap/bin/clementine|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/org.clementine_player.Clementine.desktop
 
     build-packages:
       - cmake
@@ -170,7 +170,7 @@ parts:
 apps:
   clementine:
     command: desktop-launch $SNAP/usr/bin/clementine
-    desktop: usr/share/applications/clementine.desktop
+    desktop: usr/share/applications/org.clementine_player.Clementine.desktop
     environment:
       ALSA_CONFIG_PATH: /snap/$SNAPCRAFT_PROJECT_NAME/current/usr/share/alsa/alsa.conf
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
