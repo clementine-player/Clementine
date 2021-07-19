@@ -30,7 +30,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-06-27 15:10+0000\n"
+"PO-Revision-Date: 2021-07-18 09:55+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,6 +114,13 @@ msgstr "%1 ημέρες"
 msgid "%1 days ago"
 msgstr "%1 ημέρες πριν"
 
+#: internet/spotifywebapi/spotifywebapiservice.cpp:178
+#, qt-format
+msgid ""
+"%1 failed to decode as gzip stream:\n"
+"%2"
+msgstr ""
+
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -125,6 +132,7 @@ msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
 #: internet/core/internetservice.cpp:160
+#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -2356,6 +2364,7 @@ msgid "Failed to load podcast"
 msgstr "Αποτυχία φόρτωσης της διαδικτυακής εκπομπής"
 
 #: internet/core/internetservice.cpp:167
+#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
