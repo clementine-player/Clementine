@@ -119,6 +119,7 @@ class PodcastService : public InternetService {
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreatePodcastEpisodeItem(const PodcastEpisode& episode);
+  void RemovePodcastItem(QStandardItem* item);
 
   QModelIndex MapToMergedModel(const QModelIndex& index) const;
 
