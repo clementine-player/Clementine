@@ -395,6 +395,20 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
   return item;
 }
 
+void PodcastService::RemovePodcastItem(QStandardItem* item) {
+  // Remove any episode ID -> item mappings for the episodes in this podcast.
+  for (int i = 0; i < item->rowCount(); ++i) {
+    QStandardItem* episode_item = item->child(i);
+    const int episode_id =
+        episode_item->data(Role_Episode).value<PodcastEpisode>().database_id();
+
+    episodes_by_database_id_.remove(episode_id);
+  }
+
+  // Remove this podcast's row
+  model_->removeRow(item->row());
+}
+
 QStandardItem* PodcastService::CreatePodcastEpisodeItem(
     const PodcastEpisode& episode) {
   QStandardItem* item = new QStandardItem;
@@ -621,18 +635,7 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
   QStandardItem* item = podcasts_by_database_id_.take(podcast.database_id());
   if (item) {
-    // Remove any episode ID -> item mappings for the episodes in this podcast.
-    for (int i = 0; i < item->rowCount(); ++i) {
-      QStandardItem* episode_item = item->child(i);
-      const int episode_id = episode_item->data(Role_Episode)
-                                 .value<PodcastEpisode>()
-                                 .database_id();
-
-      episodes_by_database_id_.remove(episode_id);
-    }
-
-    // Remove this episode's row
-    model_->removeRow(item->row());
+    RemovePodcastItem(item);
   }
 }
 
@@ -859,6 +862,6 @@ void PodcastService::ReloadPodcast(const Podcast& podcast) {
   }
   QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
 
-  model_->invisibleRootItem()->removeRow(item->row());
+  RemovePodcastItem(item);
   model_->invisibleRootItem()->appendRow(CreatePodcastItem(podcast));
 }
