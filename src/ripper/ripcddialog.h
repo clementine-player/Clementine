@@ -29,7 +29,6 @@ class QCloseEvent;
 class QLineEdit;
 class QShowEvent;
 
-class CddaSongLoader;
 class Ripper;
 class Ui_RipCDDialog;
 class CddaDevice;
@@ -90,7 +89,6 @@ class RipCDDialog : public QDialog {
   QList<DeviceInfo*> cdda_devices_;
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
-  CddaSongLoader* loader_;
   SongList songs_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

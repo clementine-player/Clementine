@@ -63,8 +63,7 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
       cdda_devices_(
           device_manager->FindDevicesByUrlSchemes(CddaDevice::url_schemes())),
       working_(false),
-      cdda_device_(),
-      loader_(nullptr) {
+      cdda_device_() {
   Q_ASSERT(device_manager);
   // Init
   ui_->setupUi(this);
@@ -314,8 +313,7 @@ void RipCDDialog::InvertSelection() {
 }
 
 void RipCDDialog::DeviceSelected(int device_index) {
-  // disconnecting from previous loader and device, if any
-  if (loader_) disconnect(loader_, nullptr, this, nullptr);
+  // disconnecting from previous device, if any
   if (cdda_device_) disconnect(cdda_device_.get(), nullptr, this, nullptr);
 
   ResetDialog();
@@ -338,15 +336,9 @@ void RipCDDialog::DeviceSelected(int device_index) {
   }
 
   connect(cdda_device_.get(), SIGNAL(DiscChanged()), SLOT(DiscChanged()));
-
-  // get SongLoader from device and connect signals
-  loader_ = cdda_device_->loader();
-  Q_ASSERT(loader_);
-
-  connect(loader_, SIGNAL(SongsUpdated(SongList)), SLOT(SongsLoaded(SongList)));
-
-  // load songs from new SongLoader
-  loader_->LoadSongs();
+  connect(cdda_device_.get(), SIGNAL(SongsDiscovered(SongList)),
+          SLOT(SongsLoaded(SongList)));
+  cdda_device_->LoadSongs();
 }
 
 void RipCDDialog::Finished(Ripper* ripper) {
