@@ -78,6 +78,8 @@ class CddaDevice : public ConnectedDevice {
   void CheckDiscChanged();
 
  private:
+  void ForceLoadSongs();
+
   CdIo_t* cdio_;
   QTimer disc_changed_timer_;
   CddaSongLoader cdda_song_loader_;

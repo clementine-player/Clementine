@@ -48,6 +48,10 @@ class CddaSongLoader : public QObject {
   void LoadSongs();
   bool IsActive() const;
 
+  // The list of currently cached tracks. This gets updated during calls
+  // LoadSongs() is called. Not thread-safe.
+  SongList cached_tracks() const;
+
  signals:
   // Emitted whenever information about tracks were updated.
   // Guarantees consistency with previous updates, i.e., consumers can rely
