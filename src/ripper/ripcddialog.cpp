@@ -94,8 +94,6 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
       false);  // will be enabled by signal handlers if a valid device is
                // selected by user and a list of tracks is loaded
 
-  InitializeDevices();
-
   connect(ui_->select_all_button, SIGNAL(clicked()), SLOT(SelectAll()));
   connect(ui_->select_none_button, SIGNAL(clicked()), SLOT(SelectNone()));
   connect(ui_->invert_selection_button, SIGNAL(clicked()),
@@ -152,6 +150,8 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
           SLOT(YearEditChanged(const QString&)));
   connect(ui_->discLineEdit, SIGNAL(textEdited(const QString&)),
           SLOT(DiscEditChanged(const QString&)));
+
+  InitializeDevices();
 }
 
 RipCDDialog::~RipCDDialog() {}
