@@ -26,6 +26,7 @@
 #include <QVBoxLayout>
 #include <QXmlStreamWriter>
 
+#include "api-keys.h"
 #include "core/logging.h"
 #include "songkickconcertwidget.h"
 #include "ui/iconloader.h"
@@ -35,7 +36,7 @@ const char* kSongkickArtistCalendarUrl =
     "https://api.songkick.com/api/3.0/artists/%1/calendar.json";
 const char* kSongkickArtistSearchUrl =
     "https://api.songkick.com/api/3.0/search/artists.json";
-const char* kSongkickApiKey = "8rgKfy1WU6IlJFfN";
+const char* kSongkickApiKey = SONGKICK_API_KEY;
 }  // namespace
 
 SongkickConcerts::SongkickConcerts() {

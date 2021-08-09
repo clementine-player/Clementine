@@ -18,6 +18,7 @@
 
 #include "dropboxsettingspage.h"
 
+#include "api-keys.h"
 #include "core/application.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/oauthenticator.h"
@@ -30,7 +31,7 @@ namespace {
 static const char* kOAuthEndpoint =
     "https://www.dropbox.com/1/oauth2/authorize";
 static const char* kOAuthClientId = "qh6ca27eclt9p2k";
-static const char* kOAuthClientSecret = "pg7y68h5efap8r6";
+static const char* kOAuthClientSecret = DROPBOX_CLIENT_SECRET;
 static const char* kOAuthTokenEndpoint =
     "https://api.dropboxapi.com/1/oauth2/token";
 static const char* kOAuthScope = "";

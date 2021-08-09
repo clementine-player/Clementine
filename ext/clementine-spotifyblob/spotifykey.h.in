@@ -19,19 +19,11 @@
 // compatible.
 
 // The Spotify terms of service require that application keys are not
-// accessible to third parties.  Therefore this application key is heavily
-// encrypted here in the source to prevent third parties from viewing it.
-// It is most definitely not base64 encoded.
+// accessible to third parties. Therefore the API key is held as a Github
+// secret and inserted here during the build process. If you need
+// to supply a custom API key for local testing, set it as the SPOTIFY_API_KEY
+// environment variable during cmake configuration and it will be imported here.
 
-static const char* kSpotifyApiKey =
-    "AVlOrvJkKx8T+LEsCk+Kyl24I0MSsjohZAtMFzm2O5Lms1bmAWFWgdZaHkpypzSJPmSd+"
-    "Wi50wwg"
-    "JwVCU0sq4Lep1zB4t6Z8h26NK6+z8gmkHVkV9DRPkRgebcUkWTDTflwVPKWF4+"
-    "gdRjUwprsqBw6O"
-    "iofRLJzeKaxbmaUGqkSkxVLOiXC9lxylNq6ju7Q7uY8u8XkDUsVM3YIxiWy2+EM7I/"
-    "lhatzT9xrq"
-    "rxHe2lg7CzOwF5kuFdwgmi8MQ72xTYXIKnNlOry/"
-    "hJDlN9lKxkbUBLh+pzbYvO92S2fYKK5PAHvX"
-    "5+SmSBGbh6dlpHeCGqb8MPdaeZ5I1YxMcDkxa2+tbLA/Muat7gKA9u57TFCtYjun/u/i/"
-    "ONwdBIQ"
-    "rePzXZjipO32kYmQAiCkN1p8sgQEcF43QxaVwXGo2X0rRnJf";
+#define SPOTIFY_API_KEY_BASE64 "$ENV{SPOTIFY_API_KEY}"
+
+static const char* kSpotifyApiKey = SPOTIFY_API_KEY_BASE64;

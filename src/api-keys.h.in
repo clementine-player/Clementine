@@ -1,0 +1,35 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef API_KEYS_H
+#define API_KEYS_H
+
+// API keys must not be included in the plain. Therefore the API keys are held as 
+// Github secrets and inserted here during the build process. If you need
+// to supply a custom API key for local testing, set it as the corresponding
+// environment variable during cmake configuration and it will be imported here.
+
+#define BOX_SERVICE_CLIENT_SECRET "$ENV{BOX_SERVICE_CLIENT_SECRET}"
+#define DISCOGS_API_ACCESS_KEY_BASE64 "$ENV{DISCOGS_API_ACCESS_KEY}"
+#define DISCOGS_API_SECRET_KEY_BASE64 "$ENV{DISCOGS_API_SECRET_KEY}"
+#define DROPBOX_CLIENT_SECRET "$ENV{DROPBOX_CLIENT_SECRET}"
+#define FLICKR_API_KEY "$ENV{FLICKR_API_KEY}"
+#define GOOGLE_DRIVE_CLIENT_SECRET "$ENV{GOOGLE_DRIVE_CLIENT_SECRET}"
+#define LASTFM_API_KEY "$ENV{LASTFM_API_KEY}"
+#define LASTFM_API_SECRET "$ENV{LASTFM_API_SECRET}"
+#define SONGKICK_API_KEY "$ENV{SONGKICK_API_KEY}"
+
+#endif // API_KEYS_H

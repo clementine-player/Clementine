@@ -46,6 +46,7 @@
 #include <lastfm5/RadioStation>
 #endif
 
+#include "api-keys.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -72,8 +73,8 @@ uint qHash(const lastfm::Track& track) {
 const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
-const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
-const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
+const char* LastFMService::kApiKey = LASTFM_API_KEY;
+const char* LastFMService::kSecret = LASTFM_API_SECRET;
 const char* LastFMService::kAuthLoginUrl =
     "https://www.last.fm/api/auth/?api_key=%1&token=%2";
 

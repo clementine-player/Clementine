@@ -23,6 +23,7 @@
 #include <QJsonObject>
 #include <QUrlQuery>
 
+#include "api-keys.h"
 #include "core/application.h"
 #include "core/player.h"
 #include "core/waitforsignal.h"
@@ -37,7 +38,7 @@ const char* BoxService::kSettingsGroup = "Box";
 namespace {
 
 static const char* kClientId = "gbswb9wp7gjyldc3qrw68h2rk68jaf4h";
-static const char* kClientSecret = "pZ6cUCQz5X0xaWoPVbCDg6GpmfTtz73s";
+static const char* kClientSecret = BOX_SERVICE_CLIENT_SECRET;
 
 static const char* kOAuthEndpoint = "https://api.box.com/oauth2/authorize";
 static const char* kOAuthTokenEndpoint = "https://api.box.com/oauth2/token";

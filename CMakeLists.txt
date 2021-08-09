@@ -478,6 +478,8 @@ endif()
 # Global configuration
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/clementine-config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/include/clementine-config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/api-keys.h.in
+               ${CMAKE_CURRENT_BINARY_DIR}/src/api-keys.h)
 
 # Uninstall support
 configure_file(

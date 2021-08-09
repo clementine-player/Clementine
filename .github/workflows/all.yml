@@ -187,6 +187,16 @@ jobs:
       image: fedora:34
     env:
       RPM_BUILD_NCPUS: "2"
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         run: >
@@ -257,6 +267,16 @@ jobs:
       image: fedora:33
     env:
       RPM_BUILD_NCPUS: "2"
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         run: >
@@ -327,6 +347,16 @@ jobs:
       image: eu.gcr.io/clementine-data/mingw-w64:latest
     env:
       PKG_CONFIG_PATH: /target/lib/pkgconfig
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Fix liblastfm includes
         run: ln -s /target/include/lastfm /target/include/lastfm5
@@ -516,6 +546,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: debian:stretch
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         run: >
@@ -574,6 +615,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: ubuntu:bionic
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         env:
@@ -632,6 +684,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: debian:buster
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         run: >
@@ -690,6 +753,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: ubuntu:focal
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         env:
@@ -754,6 +828,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: ubuntu:groovy
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         env:
@@ -821,6 +906,17 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       image: ubuntu:hirsute
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - name: Install dependencies
         env:
@@ -886,6 +982,17 @@ jobs:
   build_mac:
     name: Build Mac DMG
     runs-on: macos-10.15
+    env:
+      BOX_SERVICE_CLIENT_SECRET: ${{ secrets.BOX_SERVICE_CLIENT_SECRET }}
+      DISCOGS_API_ACCESS_KEY: ${{ secrets.DISCOGS_API_ACCESS_KEY }}
+      DISCOGS_API_SECRET_KEY: ${{ secrets.DISCOGS_API_SECRET_KEY }}
+      DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
+      FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
+      SONGKICK_API_KEY: ${{ secrets.SONGKICK_API_KEY }}
+      SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
     steps:
       - uses: actions/checkout@v1.2.0
       - name: Install dependencies

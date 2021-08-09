@@ -39,6 +39,7 @@ class KittenLoader : public AlbumCoverLoader {
   void FetchMoreKittens();
 
  private:
+  static const char* kFlickrApiKey;
   static const char* kFlickrKittenUrl;
   static const char* kFlickrPhotoUrl;
 

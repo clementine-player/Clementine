@@ -26,6 +26,7 @@
 #include <QJsonValue>
 #include <QUrlQuery>
 
+#include "api-keys.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -50,7 +51,7 @@ static const char* kOAuthScope =
     "https://www.googleapis.com/auth/drive.readonly "
     "https://www.googleapis.com/auth/userinfo.email";
 static const char* kClientId = "679260893280.apps.googleusercontent.com";
-static const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
+static const char* kClientSecret = GOOGLE_DRIVE_CLIENT_SECRET;
 }  // namespace
 
 QStringList File::parent_ids() const {

@@ -24,13 +24,16 @@
 #include <QNetworkRequest>
 #include <QXmlStreamReader>
 
+#include "api-keys.h"
 #include "core/closure.h"
 #include "core/network.h"
+
+const char* FlickrApiKey = FLICKR_API_KEY;
 
 const char* KittenLoader::kFlickrKittenUrl =
     "https://api.flickr.com/services/rest/"
     "?method=flickr.photos.search"
-    "&api_key=808b52887b3cc7fe098abd62f6ed1745"
+    "&api_key=%1"
     "&group_id=99442622@N00"
     "&sort=random"
     "&safe_search=1"
@@ -62,7 +65,8 @@ quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
 }
 
 void KittenLoader::FetchMoreKittens() {
-  QNetworkRequest req = QNetworkRequest(QUrl(kFlickrKittenUrl));
+  QNetworkRequest req =
+      QNetworkRequest(QUrl(QString(kFlickrKittenUrl).arg(FlickrApiKey)));
   QNetworkReply* reply = network_->get(req);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(KittensRetrieved(QNetworkReply*)), reply);

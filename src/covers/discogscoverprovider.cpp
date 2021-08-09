@@ -30,6 +30,7 @@
 #include <QUrlQuery>
 #include <QVariant>
 
+#include "api-keys.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -40,10 +41,8 @@ const char* DiscogsCoverProvider::kUrlSearch =
 const char* DiscogsCoverProvider::kUrlReleases =
     "https://api.discogs.com/releases";
 
-const char* DiscogsCoverProvider::kAccessKeyB64 =
-    "YVR4Yk5JTnlmUkhFY0pTaldid2c=";
-const char* DiscogsCoverProvider::kSecretKeyB64 =
-    "QkJNb2tMVXVUVFhSRWRUVmZDc0ZGamZmSWRjdHZRVno=";
+const char* DiscogsCoverProvider::kAccessKeyB64 = DISCOGS_API_ACCESS_KEY_BASE64;
+const char* DiscogsCoverProvider::kSecretKeyB64 = DISCOGS_API_SECRET_KEY_BASE64;
 
 DiscogsCoverProvider::DiscogsCoverProvider(QObject* parent)
     : CoverProvider("Discogs", false, parent),
