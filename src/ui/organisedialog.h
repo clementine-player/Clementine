@@ -25,7 +25,6 @@
 #include <memory>
 
 #include "core/organise.h"
-#include "core/organiseformat.h"
 #include "core/song.h"
 #include "gtest/gtest_prod.h"
 #include "library/librarybackend.h"
@@ -75,7 +74,6 @@ class OrganiseDialog : public QDialog {
  private slots:
   void Reset();
 
-  void InsertTag(const QString& tag);
   void UpdatePreviews();
 
   void DestDataChanged(const QModelIndex& begin, const QModelIndex& end);
@@ -94,8 +92,6 @@ class OrganiseDialog : public QDialog {
   LibraryBackend* backend_;
 
   QMetaObject::Connection model_connection_;
-
-  OrganiseFormat format_;
 
   QFuture<SongList> songs_future_;
   SongList songs_;

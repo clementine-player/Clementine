@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <QFileInfo>
+#include <QHash>
 #include <QPalette>
 #include <QUrl>
 
@@ -141,6 +142,27 @@ QString OrganiseFormat::GetFilenameForSong(const Song& song) const {
   }
 
   return parts.join("/");
+}
+
+QStringList OrganiseFormat::GetFilenamesForSongs(const SongList& songs) const {
+  // Check if we will have multiple files with the same name.
+  // If so, they will erase each other if the overwrite flag is set.
+  // Better to rename them: e.g. foo.bar -> foo(2).bar
+  QHash<QString, int> filenames;
+  QStringList new_filenames;
+
+  for (const Song& song : songs) {
+    QString new_filename = GetFilenameForSong(song);
+    if (filenames.contains(new_filename)) {
+      QString song_number = QString::number(++filenames[new_filename]);
+      new_filename = Utilities::PathWithoutFilenameExtension(new_filename) +
+                     "(" + song_number + ")." +
+                     QFileInfo(new_filename).suffix();
+    }
+    filenames.insert(new_filename, 1);
+    new_filenames << new_filename;
+  }
+  return new_filenames;
 }
 
 QString OrganiseFormat::ParseBlock(QString block, const Song& song,
