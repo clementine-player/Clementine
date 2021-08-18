@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>588</width>
-    <height>525</height>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,77 +64,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="naming_group">
-     <property name="title">
-      <string>Naming options</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="LineTextEdit" name="naming">
-          <property name="toolTip">
-           <string>&lt;p&gt;Tokens start with %, for example: %artist %album %title &lt;/p&gt;
-
-&lt;p&gt;If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.&lt;/p&gt;</string>
-          </property>
-          <property name="lineWrapMode">
-           <enum>QTextEdit::NoWrap</enum>
-          </property>
-          <property name="acceptRichText">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="insert">
-          <property name="text">
-           <string>Insert...</string>
-          </property>
-          <property name="popupMode">
-           <enum>QToolButton::InstantPopup</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="replace_the">
-        <property name="text">
-         <string>Ignore &quot;The&quot; in artist names</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="replace_spaces">
-        <property name="text">
-         <string>Replaces spaces with underscores</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="replace_ascii">
-        <property name="text">
-         <string>Restrict to ASCII characters</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="overwrite">
-        <property name="text">
-         <string>Overwrite existing files</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="mark_as_listened">
-        <property name="text">
-         <string>Mark as listened</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    <widget class="FileNameFormatWidget" name="naming_group" native="true"/>
    </item>
    <item>
     <widget class="QGroupBox" name="preview_group">
@@ -152,7 +82,16 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -165,7 +104,16 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -228,14 +176,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>LineTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>widgets/linetextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>BusyIndicator</class>
    <extends>QWidget</extends>
    <header>widgets/busyindicator.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FileNameFormatWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/filenameformatwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -243,12 +192,6 @@
   <tabstop>destination</tabstop>
   <tabstop>aftercopying</tabstop>
   <tabstop>eject_after</tabstop>
-  <tabstop>naming</tabstop>
-  <tabstop>insert</tabstop>
-  <tabstop>replace_the</tabstop>
-  <tabstop>replace_spaces</tabstop>
-  <tabstop>replace_ascii</tabstop>
-  <tabstop>overwrite</tabstop>
   <tabstop>button_box</tabstop>
  </tabstops>
  <resources>

@@ -20,6 +20,7 @@
 #ifndef CORE_ORGANISEFORMAT_H_
 #define CORE_ORGANISEFORMAT_H_
 
+#include <QStringList>
 #include <QSyntaxHighlighter>
 #include <QTextEdit>
 #include <QValidator>
@@ -55,6 +56,7 @@ class OrganiseFormat {
 
   bool IsValid() const;
   QString GetFilenameForSong(const Song& song) const;
+  QStringList GetFilenamesForSongs(const SongList& songs) const;
 
   class Validator : public QValidator {
    public:

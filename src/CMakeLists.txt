@@ -385,6 +385,7 @@ set(SOURCES
   widgets/errordialog.cpp
   widgets/fancytabwidget.cpp
   widgets/favoritewidget.cpp
+  widgets/filenameformatwidget.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/forcescrollperpixel.cpp
@@ -683,6 +684,7 @@ set(HEADERS
   widgets/errordialog.h
   widgets/fancytabwidget.h
   widgets/favoritewidget.h
+  widgets/filenameformatwidget.h
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
@@ -807,6 +809,7 @@ set(UI
 
   widgets/equalizerslider.ui
   widgets/errordialog.ui
+  widgets/filenameformatwidget.ui
   widgets/fileview.ui
   widgets/loginstatewidget.ui
   widgets/osdpretty.ui

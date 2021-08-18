@@ -57,52 +57,11 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager,
   ui_->aftercopying->setItemIcon(
       1, IconLoader::Load("edit-delete", IconLoader::Base));
 
-  // Valid tags
-  QMap<QString, QString> tags;
-  tags[tr("Title")] = "title";
-  tags[tr("Album")] = "album";
-  tags[tr("Artist")] = "artist";
-  tags[tr("Artist's initial")] = "artistinitial";
-  tags[tr("Album artist")] = "albumartist";
-  tags[tr("Composer")] = "composer";
-  tags[tr("Performer")] = "performer";
-  tags[tr("Grouping")] = "grouping";
-  tags[tr("Lyrics")] = "lyrics";
-  tags[tr("Track")] = "track";
-  tags[tr("Disc")] = "disc";
-  tags[tr("BPM")] = "bpm";
-  tags[tr("Year")] = "year";
-  tags[tr("Original year")] = "originalyear";
-  tags[tr("Genre")] = "genre";
-  tags[tr("Comment")] = "comment";
-  tags[tr("Length")] = "length";
-  tags[tr("Bitrate", "Refers to bitrate in file organise dialog.")] = "bitrate";
-  tags[tr("Samplerate")] = "samplerate";
-  tags[tr("File extension")] = "extension";
-
-  // Naming scheme input field
-  new OrganiseFormat::SyntaxHighlighter(ui_->naming);
-
   connect(ui_->destination, SIGNAL(currentIndexChanged(int)),
           SLOT(UpdatePreviews()));
-  connect(ui_->naming, SIGNAL(textChanged()), SLOT(UpdatePreviews()));
-  connect(ui_->replace_ascii, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
-  connect(ui_->replace_the, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
-  connect(ui_->replace_spaces, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
-
-  // Get the titles of the tags to put in the insert menu
-  QStringList tag_titles = tags.keys();
-  std::stable_sort(tag_titles.begin(), tag_titles.end());
-
-  // Build the insert menu
-  QMenu* tag_menu = new QMenu(this);
-  for (const QString& title : tag_titles) {
-    QAction* action = tag_menu->addAction(title);
-    QString tag = tags[title];
-    connect(action, &QAction::triggered, [this, tag]() { InsertTag(tag); });
-  }
-
-  ui_->insert->setMenu(tag_menu);
+  connect(ui_->naming_group, SIGNAL(OptionChanged()), SLOT(UpdatePreviews()));
+  connect(ui_->naming_group, SIGNAL(FormatStringChanged()),
+          SLOT(UpdatePreviews()));
 }
 
 OrganiseDialog::~OrganiseDialog() { delete ui_; }
@@ -209,28 +168,14 @@ void OrganiseDialog::SetCopy(bool copy) {
   ui_->aftercopying->setCurrentIndex(copy ? 0 : 1);
 }
 
-void OrganiseDialog::InsertTag(const QString& tag) {
-  ui_->naming->insertPlainText("%" + tag);
-}
-
 Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
     const SongList& songs, const OrganiseFormat& format) {
-  // Check if we will have multiple files with the same name.
-  // If so, they will erase each other if the overwrite flag is set.
-  // Better to rename them: e.g. foo.bar -> foo(2).bar
-  QHash<QString, int> filenames;
-  Organise::NewSongInfoList new_songs_info;
+  QStringList new_filenames = format.GetFilenamesForSongs(songs);
+  Q_ASSERT(new_filenames.length() == songs.length());
 
-  for (const Song& song : songs) {
-    QString new_filename = format.GetFilenameForSong(song);
-    if (filenames.contains(new_filename)) {
-      QString song_number = QString::number(++filenames[new_filename]);
-      new_filename = Utilities::PathWithoutFilenameExtension(new_filename) +
-                     "(" + song_number + ")." +
-                     QFileInfo(new_filename).suffix();
-    }
-    filenames.insert(new_filename, 1);
-    new_songs_info << Organise::NewSongInfo(song, new_filename);
+  Organise::NewSongInfoList new_songs_info;
+  for (int i = 0; i < new_filenames.length(); ++i) {
+    new_songs_info << Organise::NewSongInfo(songs[i], new_filenames[i]);
   }
   return new_songs_info;
 }
@@ -265,11 +210,8 @@ void OrganiseDialog::UpdatePreviews() {
     ui_->free_space->set_total_bytes(capacity);
   }
 
-  // Update the format object
-  format_.set_format(ui_->naming->toPlainText());
-  format_.set_replace_non_ascii(ui_->replace_ascii->isChecked());
-  format_.set_replace_spaces(ui_->replace_spaces->isChecked());
-  format_.set_replace_the(ui_->replace_the->isChecked());
+  // Get updated format object
+  OrganiseFormat format = ui_->naming_group->format();
 
   // If this is set to Transcode_Always, then the user has selected transcode,
   // so we can be fairly certain that the device supports the selected format.
@@ -278,14 +220,14 @@ void OrganiseDialog::UpdatePreviews() {
   // the preview will be incorrect.
   if (storage &&
       storage->GetTranscodeMode() == MusicStorage::Transcode_Always) {
-    const Song::FileType format = storage->GetTranscodeFormat();
-    TranscoderPreset preset = Transcoder::PresetForFileType(format);
-    format_.add_tag_override("extension", preset.extension_);
+    const Song::FileType file_format = storage->GetTranscodeFormat();
+    TranscoderPreset preset = Transcoder::PresetForFileType(file_format);
+    format.add_tag_override("extension", preset.extension_);
   } else {
-    format_.reset_tag_overrides();
+    format.reset_tag_overrides();
   }
 
-  const bool format_valid = !has_local_destination || format_.IsValid();
+  const bool format_valid = !has_local_destination || format.IsValid();
 
   // Are we gonna enable the ok button?
   bool ok = format_valid && !songs_.isEmpty();
@@ -294,7 +236,7 @@ void OrganiseDialog::UpdatePreviews() {
   ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(ok);
   if (!format_valid) return;
 
-  new_songs_info_ = ComputeNewSongsFilenames(songs_, format_);
+  new_songs_info_ = ComputeNewSongsFilenames(songs_, format);
 
   // Update the previews
   ui_->preview->clear();
@@ -325,12 +267,7 @@ void OrganiseDialog::DestDataChanged(const QModelIndex& begin,
 QSize OrganiseDialog::sizeHint() const { return QSize(650, 0); }
 
 void OrganiseDialog::Reset() {
-  ui_->naming->setPlainText(kDefaultFormat);
-  ui_->replace_ascii->setChecked(false);
-  ui_->replace_spaces->setChecked(false);
-  ui_->replace_the->setChecked(false);
-  ui_->overwrite->setChecked(false);
-  ui_->mark_as_listened->setChecked(false);
+  ui_->naming_group->Reset();
   ui_->eject_after->setChecked(false);
 }
 
@@ -339,13 +276,6 @@ void OrganiseDialog::showEvent(QShowEvent*) {
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  ui_->naming->setPlainText(s.value("format", kDefaultFormat).toString());
-  ui_->replace_ascii->setChecked(s.value("replace_ascii", false).toBool());
-  ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
-  ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
-  ui_->overwrite->setChecked(s.value("overwrite", false).toBool());
-  ui_->mark_as_listened->setChecked(
-      s.value("mark_as_listened", false).toBool());
   ui_->eject_after->setChecked(s.value("eject_after", false).toBool());
 
   QString destination = s.value("destination").toString();
@@ -358,14 +288,9 @@ void OrganiseDialog::showEvent(QShowEvent*) {
 void OrganiseDialog::accept() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("format", ui_->naming->toPlainText());
-  s.setValue("replace_ascii", ui_->replace_ascii->isChecked());
-  s.setValue("replace_spaces", ui_->replace_spaces->isChecked());
-  s.setValue("replace_the", ui_->replace_the->isChecked());
-  s.setValue("overwrite", ui_->overwrite->isChecked());
-  s.setValue("mark_as_listened", ui_->overwrite->isChecked());
   s.setValue("destination", ui_->destination->currentText());
   s.setValue("eject_after", ui_->eject_after->isChecked());
+  ui_->naming_group->StoreSettings();
 
   const QModelIndex destination =
       ui_->destination->model()->index(ui_->destination->currentIndex(), 0);
@@ -377,14 +302,16 @@ void OrganiseDialog::accept() {
 
   // Reset the extension override if we set it. Organise should correctly set
   // the Song object.
-  format_.reset_tag_overrides();
+  OrganiseFormat format = ui_->naming_group->format();
+  format.reset_tag_overrides();
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;
-  Organise* organise = new Organise(
-      task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
-      ui_->mark_as_listened->isChecked(), new_songs_info_,
-      ui_->eject_after->isChecked());
+  Organise* organise =
+      new Organise(task_manager_, storage, format, copy,
+                   ui_->naming_group->overwrite_existing(),
+                   ui_->naming_group->mark_as_listened(), new_songs_info_,
+                   ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
   connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
