@@ -488,6 +488,10 @@ bool Transcoder::StartJob(const Job& job) {
   g_object_set(src, "location", job.input.toUtf8().constData(), nullptr);
   g_object_set(sink, "location", job.output.toUtf8().constData(), nullptr);
 
+  // Create target directory, if it does not exist
+  QFileInfo output_file_path(job.output);
+  output_file_path.dir().mkpath(".");
+
   // Set callbacks
   state->convert_element_ = convert;
 
