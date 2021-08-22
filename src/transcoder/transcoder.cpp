@@ -319,7 +319,7 @@ Song::FileType Transcoder::PickBestFormat(QList<Song::FileType> supported) {
 }
 
 void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
-                        const QString& output) {
+                        const QString& output, bool overwrite_existing) {
   Job job;
   job.input = input;
   job.preset = preset;
@@ -331,8 +331,8 @@ void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
   else
     job.output = input.section('.', 0, -2) + '.' + preset.extension_;
 
-  // Never overwrite existing files
-  if (QFile::exists(job.output)) {
+  // Don't overwrite existing files if overwrite_existing is not set
+  if (!overwrite_existing && QFile::exists(job.output)) {
     for (int i = 0;; ++i) {
       QString new_filename = QString("%1.%2.%3")
                                  .arg(job.output.section('.', 0, -2))

@@ -71,7 +71,8 @@ class Transcoder : public QObject {
   void set_max_threads(int count) { max_threads_ = count; }
 
   void AddJob(const QString& input, const TranscoderPreset& preset,
-              const QString& output = QString());
+              const QString& output = QString(),
+              bool overwrite_existing = false);
   void AddTemporaryJob(const QString& input, const TranscoderPreset& preset);
 
   QMap<QString, float> GetProgress() const;
