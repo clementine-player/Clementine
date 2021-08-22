@@ -27,9 +27,12 @@
 
 #include "core/song.h"
 
+class TranscoderPreset;
+
 class OrganiseFormat {
  public:
   explicit OrganiseFormat(const QString& format = QString());
+  OrganiseFormat(const OrganiseFormat& format) = default;
 
   static const char* kTagPattern;
   static const char* kBlockPattern;
@@ -55,7 +58,10 @@ class OrganiseFormat {
   void reset_tag_overrides() { tag_overrides_.clear(); }
 
   bool IsValid() const;
-  QString GetFilenameForSong(const Song& song) const;
+  QString GetFilenameForSong(const Song& song, QString prefix_path = "") const;
+  QString GetFilenameForSong(const Song& song,
+                             const TranscoderPreset& transcoder_preset,
+                             QString prefix_path = "") const;
   QStringList GetFilenamesForSongs(const SongList& songs) const;
 
   class Validator : public QValidator {

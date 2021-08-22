@@ -21,6 +21,12 @@
        <layout class="QHBoxLayout" name="innerHorizontalLayout">
         <item>
          <widget class="LineTextEdit" name="naming">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string>&lt;p&gt;Tokens start with %, for example: %artist %album %title &lt;/p&gt;
 

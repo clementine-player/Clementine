@@ -48,7 +48,7 @@ class Ripper : public QObject {
   // chosen TranscoderPreset.
   void AddTrack(int track_number, const QString& title,
                 const QString& transcoded_filename,
-                const TranscoderPreset& preset);
+                const TranscoderPreset& preset, bool overwrite_existing);
   // Sets album metadata. This information is used when tagging the
   // final files.
   void SetAlbumInformation(const QString& album, const QString& artist,
@@ -83,17 +83,19 @@ class Ripper : public QObject {
   struct TrackInformation {
     TrackInformation(int track_number, const QString& title,
                      const QString& transcoded_filename,
-                     const TranscoderPreset& preset)
+                     const TranscoderPreset& preset, bool overwrite_existing)
         : track_number(track_number),
           title(title),
           transcoded_filename(transcoded_filename),
-          preset(preset) {}
+          preset(preset),
+          overwrite_existing(overwrite_existing) {}
 
     int track_number;
     QString title;
     QString transcoded_filename;
     TranscoderPreset preset;
     QString temporary_filename;
+    bool overwrite_existing;
   };
 
   struct AlbumInformation {

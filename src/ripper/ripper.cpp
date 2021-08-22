@@ -58,12 +58,13 @@ Ripper::~Ripper() {}
 
 void Ripper::AddTrack(int track_number, const QString& title,
                       const QString& transcoded_filename,
-                      const TranscoderPreset& preset) {
+                      const TranscoderPreset& preset, bool overwrite_existing) {
   if (track_number < 1 || track_number > TracksOnDisc()) {
     qLog(Warning) << "Invalid track number:" << track_number << "Ignoring";
     return;
   }
-  TrackInformation track(track_number, title, transcoded_filename, preset);
+  TrackInformation track(track_number, title, transcoded_filename, preset,
+                         overwrite_existing);
   tracks_.append(track);
 }
 
@@ -232,7 +233,7 @@ void Ripper::Rip() {
 
     it->temporary_filename = filename;
     transcoder_->AddJob(it->temporary_filename, it->preset,
-                        it->transcoded_filename);
+                        it->transcoded_filename, it->overwrite_existing);
   }
   transcoder_->Start();
   emit RippingComplete();

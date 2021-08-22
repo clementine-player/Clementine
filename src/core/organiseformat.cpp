@@ -31,6 +31,7 @@
 #include "core/arraysize.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "transcoder/transcoder.h"
 
 const char* OrganiseFormat::kTagPattern = "\\%([a-zA-Z]*)";
 const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
@@ -97,7 +98,8 @@ bool OrganiseFormat::IsValid() const {
   return v.validate(format_copy, pos) == QValidator::Acceptable;
 }
 
-QString OrganiseFormat::GetFilenameForSong(const Song& song) const {
+QString OrganiseFormat::GetFilenameForSong(const Song& song,
+                                           QString prefix_path) const {
   QString filename = ParseBlock(format_, song);
 
   if (QFileInfo(filename).completeBaseName().isEmpty()) {
@@ -141,7 +143,18 @@ QString OrganiseFormat::GetFilenameForSong(const Song& song) const {
     }
   }
 
+  if (!prefix_path.isEmpty()) parts.insert(0, prefix_path);
+
   return parts.join("/");
+}
+
+QString OrganiseFormat::GetFilenameForSong(
+    const Song& song, const TranscoderPreset& transcoder_preset,
+    QString prefix_path) const {
+  OrganiseFormat format(*this);
+  format.add_tag_override("extension", transcoder_preset.extension_);
+
+  return format.GetFilenameForSong(song, prefix_path);
 }
 
 QStringList OrganiseFormat::GetFilenamesForSongs(const SongList& songs) const {
