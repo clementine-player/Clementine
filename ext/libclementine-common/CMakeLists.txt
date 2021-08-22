@@ -39,3 +39,6 @@ target_link_libraries(libclementine-common
   ${TAGLIB_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
 )
+
+find_package(Backtrace)
+configure_file(core/conf_backtrace.h.in conf_backtrace.h)

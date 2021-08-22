@@ -1,0 +1,4 @@
+#cmakedefine Backtrace_FOUND
+#ifdef Backtrace_FOUND
+#include <@Backtrace_HEADER@>
+#endif

@@ -21,9 +21,7 @@
 #include <cxxabi.h>
 
 #include <QtGlobal>
-#ifdef Q_OS_UNIX
-#include <execinfo.h>
-#endif
+#include "conf_backtrace.h"
 
 #include <glib.h>
 
@@ -325,7 +323,7 @@ QString DemangleSymbol(const QString& symbol) {
 }
 
 void DumpStackTrace() {
-#ifdef Q_OS_UNIX
+#ifdef Backtrace_FOUND
   void* callstack[128];
   int callstack_size =
       backtrace(reinterpret_cast<void**>(&callstack), sizeof(callstack));
