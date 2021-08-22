@@ -60,31 +60,24 @@ class RipCDDialog : public QDialog {
   void Cancelled(Ripper* ripper);
   void SetupProgressBarLimits(int min, int max);
   void UpdateProgressBar(int progress);
-  // Initializes track list table based on preliminary song list with durations
-  // but without metadata.
-  void BuildTrackListTable(const SongList& songs);
-  // Update track list based on metadata.
-  void UpdateTrackListTable(const SongList& songs);
+  void UpdateTrackList(const SongList& songs);
   // Update album information with metadata.
   void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
   void DiscChanged();
+  void FormatStringUpdated();
 
  private:
   static const char* kSettingsGroup;
   static const int kMaxDestinationItems;
 
-  // Constructs a filename from the given base name with a path taken
-  // from the ui dialog and an extension that corresponds to the audio
-  // format chosen in the ui.
   void AddDestinationDirectory(QString dir);
-  QString GetOutputFileName(const QString& basename) const;
-  QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void ResetDialog();
   void InitializeDevices();
+  void EnableIfPossible();
+  void UpdateTrackListTable();
 
   QList<QCheckBox*> checkboxes_;
-  QList<QLineEdit*> track_names_;
   QString last_add_dir_;
   QPushButton* cancel_button_;
   QPushButton* close_button_;
@@ -95,5 +88,6 @@ class RipCDDialog : public QDialog {
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
   CddaSongLoader* loader_;
+  SongList songs_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

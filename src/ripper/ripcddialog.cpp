@@ -30,6 +30,7 @@
 
 #include "config.h"
 #include "core/logging.h"
+#include "core/organiseformat.h"
 #include "core/tagreaderclient.h"
 #include "devices/cddadevice.h"
 #include "devices/cddasongloader.h"
@@ -85,8 +86,9 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
   cancel_button_->hide();
   ui_->progress_group->hide();
 
-  rip_button_->setEnabled(false);  // will be enabled by DeviceSelected if a
-                                   // valid device is selected
+  rip_button_->setEnabled(
+      false);  // will be enabled by signal handlers if a valid device is
+               // selected by user and a list of tracks is loaded
 
   InitializeDevices();
 
@@ -99,6 +101,9 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
 
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
+
+  connect(ui_->naming_group, SIGNAL(FormatStringChanged()),
+          SLOT(FormatStringUpdated()));
 
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
@@ -176,6 +181,14 @@ void RipCDDialog::InitializeDevices() {
 void RipCDDialog::ClickedRipButton() {
   Q_ASSERT(cdda_device_);
 
+  OrganiseFormat format = ui_->naming_group->format();
+  Q_ASSERT(format.IsValid());
+
+  ui_->naming_group->StoreSettings();
+
+  QFileInfo path(
+      ui_->destination->itemData(ui_->destination->currentIndex()).toString());
+
   // create and connect Ripper instance for this task
   Ripper* ripper = new Ripper(cdda_device_->raw_cdio(), this);
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
@@ -196,11 +209,13 @@ void RipCDDialog::ClickedRipButton() {
     if (!checkboxes_.value(i - 1)->isChecked()) {
       continue;
     }
-    QString transcoded_filename = GetOutputFileName(
-        ParseFileFormatString(ui_->format_filename->text(), i));
-    QString title = track_names_.value(i - 1)->text();
-    ripper->AddTrack(i, title, transcoded_filename, preset);
+    Song& song = songs_[i - 1];
+    QString transcoded_filename = format.GetFilenameForSong(
+        song, preset, /*prefix_path=*/path.filePath());
+    ripper->AddTrack(i, song.title(), transcoded_filename, preset,
+                     ui_->naming_group->overwrite_existing());
   }
+
   ripper->SetAlbumInformation(
       ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
       ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
@@ -275,6 +290,7 @@ void RipCDDialog::DeviceSelected(int device_index) {
   if (cdda_device_) disconnect(cdda_device_.get(), nullptr, this, nullptr);
 
   ResetDialog();
+  EnableIfPossible();
   if (device_index < 0)
     return;  // Invalid selection, probably no devices around
 
@@ -299,15 +315,14 @@ void RipCDDialog::DeviceSelected(int device_index) {
   Q_ASSERT(loader_);
 
   connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
-          SLOT(BuildTrackListTable(SongList)));
+          SLOT(UpdateTrackList(SongList)));
   connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(UpdateTrackListTable(SongList)));
+          SLOT(UpdateTrackList(SongList)));
   connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
           SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
 
   // load songs from new SongLoader
   loader_->LoadSongs();
-  rip_button_->setEnabled(true);
 }
 
 void RipCDDialog::Finished(Ripper* ripper) {
@@ -328,13 +343,24 @@ void RipCDDialog::UpdateProgressBar(int progress) {
   ui_->progress_bar->setValue(progress);
 }
 
-void RipCDDialog::BuildTrackListTable(const SongList& songs) {
-  checkboxes_.clear();
-  track_names_.clear();
+void RipCDDialog::UpdateTrackList(const SongList& songs) {
+  if (songs_.isEmpty() || songs_.length() == songs.length()) {
+    songs_ = songs;
+    UpdateTrackListTable();
+  } else {
+    qLog(Error) << "Number of tracks in metadata does not match number of "
+                   "songs on disc!";
+  }
+  EnableIfPossible();
+}
 
-  ui_->tableWidget->setRowCount(songs.length());
+void RipCDDialog::UpdateTrackListTable() {
+  checkboxes_.clear();
+
+  ui_->tableWidget->clear();
+  ui_->tableWidget->setRowCount(songs_.length());
   int current_row = 0;
-  for (const Song& song : songs) {
+  for (const Song& song : songs_) {
     QCheckBox* checkbox = new QCheckBox(ui_->tableWidget);
     checkbox->setCheckState(Qt::Checked);
     checkboxes_.append(checkbox);
@@ -343,21 +369,15 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
                                     new QLabel(QString::number(song.track())));
     QLineEdit* line_edit_track_title =
         new QLineEdit(song.title(), ui_->tableWidget);
-    track_names_.append(line_edit_track_title);
+    connect(line_edit_track_title, &QLineEdit::textChanged,
+            [this, current_row](const QString& text) {
+              songs_[current_row].set_title(text);
+            });
     ui_->tableWidget->setCellWidget(current_row, kTrackTitleColumn,
                                     line_edit_track_title);
     ui_->tableWidget->setCellWidget(current_row, kTrackDurationColumn,
                                     new QLabel(song.PrettyLength()));
     current_row++;
-  }
-}
-
-void RipCDDialog::UpdateTrackListTable(const SongList& songs) {
-  if (track_names_.length() == songs.length()) {
-    BuildTrackListTable(songs);
-  } else {
-    qLog(Error) << "Number of tracks in metadata does not match number of "
-                   "songs on disc!";
   }
 }
 
@@ -382,35 +402,19 @@ void RipCDDialog::SetWorking(bool working) {
   ui_->progress_group->setVisible(true);
 }
 
-QString RipCDDialog::GetOutputFileName(const QString& basename) const {
-  QFileInfo path(
-      ui_->destination->itemData(ui_->destination->currentIndex()).toString());
-  QString extension = ui_->format->itemData(ui_->format->currentIndex())
-                          .value<TranscoderPreset>()
-                          .extension_;
-  return path.filePath() + '/' + basename + '.' + extension;
-}
-
-QString RipCDDialog::ParseFileFormatString(const QString& file_format,
-                                           int track_no) const {
-  QString to_return = file_format;
-  to_return.replace(QString("%artist"), ui_->artistLineEdit->text());
-  to_return.replace(QString("%album"), ui_->albumLineEdit->text());
-  to_return.replace(QString("%disc"), ui_->discLineEdit->text());
-  to_return.replace(QString("%genre"), ui_->genreLineEdit->text());
-  to_return.replace(QString("%year"), ui_->yearLineEdit->text());
-  to_return.replace(QString("%title"),
-                    track_names_.value(track_no - 1)->text());
-  to_return.replace(QString("%track"), QString::number(track_no));
-
-  return to_return;
-}
-
 void RipCDDialog::ResetDialog() {
+  songs_.clear();
   ui_->tableWidget->setRowCount(0);
   ui_->albumLineEdit->clear();
   ui_->artistLineEdit->clear();
   ui_->genreLineEdit->clear();
   ui_->yearLineEdit->clear();
   ui_->discLineEdit->clear();
+}
+
+void RipCDDialog::FormatStringUpdated() { EnableIfPossible(); }
+
+void RipCDDialog::EnableIfPossible() {
+  rip_button_->setEnabled(!songs_.isEmpty() &&
+                          ui_->naming_group->format().IsValid());
 }
