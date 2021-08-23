@@ -65,6 +65,7 @@ class RipCDDialog : public QDialog {
   void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
   void DiscChanged();
   void FormatStringUpdated();
+  void UpdateFileNamePreviews();
 
  private:
   static const char* kSettingsGroup;

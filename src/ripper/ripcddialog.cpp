@@ -50,6 +50,7 @@ const int kCheckboxColumn = 0;
 const int kTrackNumberColumn = 1;
 const int kTrackTitleColumn = 2;
 const int kTrackDurationColumn = 3;
+const int kTrackFilenamePreviewColumn = 4;
 }  // namespace
 
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
@@ -74,7 +75,11 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
   ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
       kTrackNumberColumn, QHeaderView::ResizeToContents);
   ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
-      kTrackTitleColumn, QHeaderView::Stretch);
+      kTrackDurationColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
+      kTrackTitleColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
+      kTrackFilenamePreviewColumn, QHeaderView::Stretch);
 
   // Add a rip button
   rip_button_ = ui_->button_box->addButton(tr("Start ripping"),
@@ -104,6 +109,8 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
 
   connect(ui_->naming_group, SIGNAL(FormatStringChanged()),
           SLOT(FormatStringUpdated()));
+  connect(ui_->naming_group, SIGNAL(OptionChanged()),
+          SLOT(FormatStringUpdated()));
 
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
@@ -130,6 +137,9 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
       break;
     }
   }
+
+  connect(ui_->format, SIGNAL(currentIndexChanged(int)),
+          SLOT(UpdateFileNamePreviews));
 }
 
 RipCDDialog::~RipCDDialog() {}
@@ -372,11 +382,31 @@ void RipCDDialog::UpdateTrackListTable() {
     connect(line_edit_track_title, &QLineEdit::textChanged,
             [this, current_row](const QString& text) {
               songs_[current_row].set_title(text);
+              UpdateFileNamePreviews();
             });
     ui_->tableWidget->setCellWidget(current_row, kTrackTitleColumn,
                                     line_edit_track_title);
     ui_->tableWidget->setCellWidget(current_row, kTrackDurationColumn,
                                     new QLabel(song.PrettyLength()));
+    current_row++;
+  }
+  UpdateFileNamePreviews();
+}
+
+void RipCDDialog::UpdateFileNamePreviews() {
+  OrganiseFormat format = ui_->naming_group->format();
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
+
+  int current_row = 0;
+  for (const Song& song : songs_) {
+    if (format.IsValid())
+      ui_->tableWidget->setCellWidget(
+          current_row, kTrackFilenamePreviewColumn,
+          new QLabel(format.GetFilenameForSong(song, preset)));
+    else
+      ui_->tableWidget->setCellWidget(current_row, kTrackFilenamePreviewColumn,
+                                      new QLabel(tr("Invalid format")));
     current_row++;
   }
 }
@@ -412,7 +442,10 @@ void RipCDDialog::ResetDialog() {
   ui_->discLineEdit->clear();
 }
 
-void RipCDDialog::FormatStringUpdated() { EnableIfPossible(); }
+void RipCDDialog::FormatStringUpdated() {
+  UpdateFileNamePreviews();
+  EnableIfPossible();
+}
 
 void RipCDDialog::EnableIfPossible() {
   rip_button_->setEnabled(!songs_.isEmpty() &&
