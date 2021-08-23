@@ -68,6 +68,7 @@ bool CddaSongLoader::IsActive() const { return loading_future_.isRunning(); }
 void CddaSongLoader::LoadSongs() {
   // only dispatch a new thread for loading tracks if not already running.
   if (!IsActive()) {
+    QMutexLocker lock(&disc_mutex_);
     disc_ = Disc();
     loading_future_ =
         QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
@@ -350,37 +351,45 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
     return;
   }
 
-  if (disc_.tracks.length() != results.length()) {
-    qLog(Warning) << "Number of tracks in metadata does not match number of "
-                     "songs on disc!";
-    // no idea how to recover; signal that no further updates will follow now
-    emit Finished();
-    return;
+  {
+    QMutexLocker lock(&disc_mutex_);
+
+    if (disc_.tracks.length() != results.length()) {
+      qLog(Warning) << "Number of tracks in metadata does not match number of "
+                       "songs on disc!";
+      // no idea how to recover; signal that no further updates will follow now
+      emit Finished();
+      return;
+    }
+
+    for (int i = 0; i < results.length(); ++i) {
+      const MusicBrainzClient::Result& new_song_info = results[i];
+      Song& song = disc_.tracks[i];
+
+      if (!disc_.has_titles) song.set_title(new_song_info.title_);
+      if (song.album().isEmpty()) song.set_album(album);
+      if (song.artist().isEmpty()) song.set_artist(artist);
+
+      if (song.length_nanosec() == -1)
+        song.set_length_nanosec(new_song_info.duration_msec_ * kNsecPerMsec);
+      if (song.track() < 1) song.set_track(new_song_info.track_);
+      if (song.year() == -1) song.set_year(new_song_info.year_);
+    }
+    disc_.has_titles = true;
   }
-
-  for (int i = 0; i < results.length(); ++i) {
-    const MusicBrainzClient::Result& new_song_info = results[i];
-    Song& song = disc_.tracks[i];
-
-    if (!disc_.has_titles) song.set_title(new_song_info.title_);
-    if (song.album().isEmpty()) song.set_album(album);
-    if (song.artist().isEmpty()) song.set_artist(artist);
-
-    if (song.length_nanosec() == -1)
-      song.set_length_nanosec(new_song_info.duration_msec_ * kNsecPerMsec);
-    if (song.track() < 1) song.set_track(new_song_info.track_);
-    if (song.year() == -1) song.set_year(new_song_info.year_);
-  }
-  disc_.has_titles = true;
 
   emit SongsMetadataLoaded(disc_.tracks);
   emit Finished();  // no further updates will follow
 }
 
 void CddaSongLoader::SetDiscTracks(const SongList& songs, bool has_titles) {
+  QMutexLocker lock(&disc_mutex_);
   disc_.tracks = songs;
   disc_.has_titles = has_titles;
   emit SongsUpdated(disc_.tracks);
 }
 
-SongList CddaSongLoader::cached_tracks() const { return disc_.tracks; }
+SongList CddaSongLoader::cached_tracks() const {
+  QMutexLocker lock(&disc_mutex_);
+  return disc_.tracks;
+}

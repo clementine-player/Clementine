@@ -335,10 +335,12 @@ void RipCDDialog::DeviceSelected(int device_index) {
     return;
   }
 
+  SongList songs = cdda_device_->songs();
+  SongsLoaded(songs);
+
   connect(cdda_device_.get(), SIGNAL(DiscChanged()), SLOT(DiscChanged()));
   connect(cdda_device_.get(), SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsLoaded(SongList)));
-  cdda_device_->LoadSongs();
 }
 
 void RipCDDialog::Finished(Ripper* ripper) {
