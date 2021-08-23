@@ -54,7 +54,7 @@ class CddaDevice : public ConnectedDevice {
   // Check whether a valid device handle was opened.
   bool IsValid() const;
   void WatchForDiscChanges(bool watch);
-  void LoadSongs();
+  SongList songs() const;
 
   static QStringList url_schemes() { return QStringList() << "cdda"; }
 
@@ -79,7 +79,7 @@ class CddaDevice : public ConnectedDevice {
   void CheckDiscChanged();
 
  private:
-  void ForceLoadSongs();
+  void LoadSongs();
 
   CdIo_t* cdio_;
   QTimer disc_changed_timer_;

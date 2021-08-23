@@ -48,8 +48,8 @@ class CddaSongLoader : public QObject {
   void LoadSongs();
   bool IsActive() const;
 
-  // The list of currently cached tracks. This gets updated during calls
-  // LoadSongs() is called. Not thread-safe.
+  // The list of currently cached tracks. This gets updated when
+  // LoadSongs() is called.
   SongList cached_tracks() const;
 
  signals:
@@ -110,6 +110,7 @@ class CddaSongLoader : public QObject {
   QFuture<void> loading_future_;
   std::atomic<bool> may_load_;
   Disc disc_;
+  mutable QMutex disc_mutex_;
 };
 
 #endif  // CDDASONGLOADER_H
