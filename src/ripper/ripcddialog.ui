@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>522</width>
+    <width>600</width>
     <height>800</height>
    </rect>
   </property>
@@ -119,13 +119,16 @@
            </sizepolicy>
           </property>
           <property name="columnCount">
-           <number>4</number>
+           <number>5</number>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>10</number>
+           <number>4</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>20</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -151,6 +154,11 @@
           <column>
            <property name="text">
             <string>Duration</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Filename Preview</string>
            </property>
           </column>
          </widget>
