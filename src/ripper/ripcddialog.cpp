@@ -129,10 +129,12 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
   s.beginGroup(kSettingsGroup);
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
 
-  QString last_output_format = s.value("last_output_format", "ogg").toString();
+  QString last_output_format =
+      s.value("last_output_format", "audio/x-vorbis").toString();
+  qLog(Debug) << "last_output_format loaded: " << last_output_format;
   for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
-        ui_->format->itemData(i).value<TranscoderPreset>().extension_) {
+        ui_->format->itemData(i).value<TranscoderPreset>().codec_mimetype_) {
       ui_->format->setCurrentIndex(i);
       break;
     }
@@ -194,8 +196,6 @@ void RipCDDialog::ClickedRipButton() {
   OrganiseFormat format = ui_->naming_group->format();
   Q_ASSERT(format.IsValid());
 
-  ui_->naming_group->StoreSettings();
-
   QFileInfo path(
       ui_->destination->itemData(ui_->destination->currentIndex()).toString());
 
@@ -233,6 +233,14 @@ void RipCDDialog::ClickedRipButton() {
 
   SetWorking(true);
   ripper->Start();
+
+  // store settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("last_output_format", preset.codec_mimetype_);
+  qLog(Debug) << "last_output_format stored: " << preset.codec_mimetype_;
+
+  ui_->naming_group->StoreSettings();
 }
 
 void RipCDDialog::Options() {
