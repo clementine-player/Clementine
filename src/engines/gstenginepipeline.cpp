@@ -440,7 +440,7 @@ bool GstEnginePipeline::InitAudioBin() {
   gst_element_link(queue_, audioconvert_);
 
   GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                        "S16LE", NULL);
+                                        "S16LE", nullptr);
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
   gst_caps_unref(caps16);
 

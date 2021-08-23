@@ -82,7 +82,7 @@ QString Chromaprinter::CreateFingerprint() {
   // Chromaprint expects mono 16-bit ints at a sample rate of 11025Hz.
   GstCaps* caps = gst_caps_new_simple(
       "audio/x-raw", "format", G_TYPE_STRING, "S16LE", "channels", G_TYPE_INT,
-      kDecodeChannels, "rate", G_TYPE_INT, kDecodeRate, NULL);
+      kDecodeChannels, "rate", G_TYPE_INT, kDecodeRate, nullptr);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
 
