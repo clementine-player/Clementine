@@ -113,7 +113,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
         << "Error:"
         << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()
         << "http status code received";
-    qLog(Error) << reply->readAll();
+    if (reply->isOpen()) qLog(Error) << reply->readAll();
     emit Finished(artist, album, ret);
     return;
   }
