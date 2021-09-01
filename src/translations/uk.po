@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-19 05:26+0000\n"
+"PO-Revision-Date: 2021-08-31 11:44+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,7 +389,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr "<p>У цій статті використано матеріали зі статті Вікіпедії <a href=\"%1\">%2</a>, які оприлюднено за умов дотримання <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License 3.0</a>.</p>"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -547,7 +547,7 @@ msgid "Add files to transcode"
 msgstr "Додати файли для перекодування"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "Додати теку"
 
@@ -701,16 +701,16 @@ msgstr "Розширене групування…"
 msgid "After "
 msgstr "Після "
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "Після копіювання…"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "Альбом"
 
@@ -719,7 +719,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідеальна гучність для всіх композицій)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -869,11 +869,11 @@ msgid ""
 msgstr "Ви справді хочете записати статистичні дані до всіх файлів композицій у вашій бібліотеці?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "Виконавець"
 
@@ -881,7 +881,7 @@ msgstr "Виконавець"
 msgid "Artist info"
 msgstr "Виконавець"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "Ініціали виконавця"
 
@@ -891,7 +891,7 @@ msgstr "&Питати при збереженні"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Аудіо-формат"
 
@@ -951,7 +951,7 @@ msgstr "Середній розмір малюнку"
 msgid "BBC Podcasts"
 msgstr "Подкасти BBC"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "Бітів за хвилину"
@@ -1026,7 +1026,7 @@ msgstr "Бітова швидкість"
 msgid "Bitrate"
 msgstr "Бітова швидкість"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Бітова швидкість"
@@ -1085,7 +1085,7 @@ msgstr "Кнопки"
 msgid "CBC Podcasts"
 msgstr "Подкасти CBC"
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr "CD-зчитувач"
 
@@ -1348,7 +1348,7 @@ msgid "Command"
 msgstr "Команда"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Коментар"
 
@@ -1361,7 +1361,7 @@ msgid "Complete tags automatically..."
 msgstr "Заповнити мітки автоматично…"
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Композитор"
@@ -1718,7 +1718,7 @@ msgstr "Видалити розумний список відтворення"
 msgid "Delete the currently playing song"
 msgstr "Вилучити поточну відтворювану композицію"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "Вилучити оригінальні файли"
 
@@ -1738,8 +1738,8 @@ msgstr "Вилучити з черги вибрані композиції"
 msgid "Dequeue track"
 msgstr "Вилучити композицію з черги"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Призначення"
 
@@ -1771,7 +1771,7 @@ msgstr "Налаштування пристрою…"
 msgid "Devices"
 msgstr "Пристрої"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "Діалогове вікно"
 
@@ -1819,9 +1819,9 @@ msgid "Disabled"
 msgstr "Вимкнено"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "Диск"
 
@@ -2008,7 +2008,7 @@ msgstr "Створити дамп графу каналу обробки"
 msgid "Dump To Logs"
 msgstr "Записати до журналу"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "Тривалість"
 
@@ -2168,7 +2168,7 @@ msgstr "Відповідає --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "Помилка"
 
@@ -2314,7 +2314,7 @@ msgstr "Згасання"
 msgid "Fading duration"
 msgstr "Тривалість згасання"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "Не вдалося виконати читання з простою читання компакт-дисків"
 
@@ -2404,11 +2404,7 @@ msgstr "Не вдалося отримати обкладинку"
 msgid "Fetching playlist items"
 msgstr "Отримуємо записи списку відтворення"
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "Формат файлів"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "Розширення файлу"
 
@@ -2441,6 +2437,10 @@ msgstr "Тип файлу"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Назва файлу"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr "Перегляд назви файла"
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2574,9 +2574,9 @@ msgid "General settings"
 msgstr "Загальні налаштування"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Жанр"
 
@@ -2673,7 +2673,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Групувати за жанром/Виконавцем/альбомом"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Групування"
@@ -2777,7 +2777,7 @@ msgstr "Якщо продовжите, цей пристрій буде прац
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Якщо ви знаєте URL подкасту, введіть його та натисніть Вперед."
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "Ігнорувати «The» в іменах виконавців"
 
@@ -2854,11 +2854,11 @@ msgstr "Індексуємо %1"
 msgid "Information"
 msgstr "Інформація"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "Налаштування вхідних даних"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Вставити…"
 
@@ -2891,7 +2891,7 @@ msgstr "Неправильний ключ API"
 msgid "Invalid URL"
 msgstr "Некоректна адреса"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "Не чинний формат"
 
@@ -2915,7 +2915,7 @@ msgstr "Нечинна служба"
 msgid "Invalid session key"
 msgstr "Неправильний ключ сеансу"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Інвертувати позначення"
 
@@ -2967,7 +2967,7 @@ msgstr "Тримати кнопки %1 секунд…"
 msgid "Keep running in the background when the window is closed"
 msgstr "Продовжувати виконання у фоні коли вікно зачинено"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "Зберегти оригінальні файли"
 
@@ -3049,7 +3049,7 @@ msgstr "Найменш улюблені композиції"
 msgid "Left"
 msgstr "Ліворуч"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Тривалість"
@@ -3140,7 +3140,7 @@ msgstr "Завантажую дані композицій"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "Завантаження…"
 
@@ -3194,7 +3194,8 @@ msgstr "Низька (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Профіль низької складності (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Тексти пісень"
 
@@ -3283,7 +3284,8 @@ msgstr "Вручну"
 msgid "Manufacturer"
 msgstr "Виробник"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "Позначити як прослуханий"
 
@@ -3423,7 +3425,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Назва"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "Налаштування найменування"
 
@@ -3744,7 +3746,7 @@ msgstr "Оптимізувати для якості"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Налаштування…"
 
@@ -3752,7 +3754,7 @@ msgstr "Налаштування…"
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
@@ -3768,7 +3770,7 @@ msgstr "Упорядкування файлів"
 msgid "Original tags"
 msgstr "Початкові мітки"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3799,7 +3801,7 @@ msgstr "Результат"
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Налаштування виведення"
 
@@ -3807,7 +3809,7 @@ msgstr "Налаштування виведення"
 msgid "Overwrite all"
 msgstr "Перезаписати все"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "Перезаписати існуючі файли"
 
@@ -3854,7 +3856,7 @@ msgid "Paused"
 msgstr "Призупинено"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4054,7 +4056,7 @@ msgstr "Налаштування OSD"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "Перегляд"
 
@@ -4075,7 +4077,7 @@ msgstr "Відобразити дані про версію"
 msgid "Profile"
 msgstr "Профіль"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Поступ"
 
@@ -4325,7 +4327,7 @@ msgstr "Замінити список відтворення"
 msgid "Replace the playlist"
 msgstr "Замінити список відтворення"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "Замінити пробіли підкресленнями"
 
@@ -4366,7 +4368,7 @@ msgstr "Повторно відтворити композицію або від
 msgid "Restore Default Server"
 msgstr "Відновити типовий сервер"
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
 
@@ -4382,11 +4384,11 @@ msgstr "Повернутися до Clementine"
 msgid "Right"
 msgstr "Праворуч"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "Оцифрувати"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "Оцифрувати КД"
 
@@ -4428,7 +4430,7 @@ msgstr "Помилка під час спроби встановлення з’
 msgid "Safely remove device"
 msgstr "Безпечно вилучити пристрій"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "Безпечне вилучення пристрою після копіювання"
 
@@ -4438,7 +4440,7 @@ msgstr "Безпечне вилучення пристрою після копі
 msgid "Sample rate"
 msgstr "Частота вибірки"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "Частота вибірки"
 
@@ -4637,11 +4639,11 @@ msgstr "Перемотати поточну композицію на абсол
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Позиціювання за допомогою клавіатурного скорочення або коліщатка миші"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "Вибрати все"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "Скасувати вибір"
 
@@ -5046,7 +5048,7 @@ msgstr "Оцінені"
 msgid "Starred Albums"
 msgstr "Альбоми із зірками"
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "Почати оцифрування"
 
@@ -5392,9 +5394,9 @@ msgstr "Цей тип пристрою не підтримується: %1"
 msgid "Time step"
 msgstr "Крок за часом"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "Назва"
 
@@ -5454,8 +5456,8 @@ msgstr "Всього зроблено запитів до мережі"
 msgid "Trac&k"
 msgstr "Ко&мпозиція"
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Композиція"
 
@@ -5933,9 +5935,9 @@ msgid "Wrong username or password."
 msgstr "Помилкове ім’я користувача або пароль."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "Рік"
 

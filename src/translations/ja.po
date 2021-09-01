@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-18 09:55+0000\n"
+"PO-Revision-Date: 2021-08-31 09:33+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,7 +401,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -559,7 +559,7 @@ msgid "Add files to transcode"
 msgstr "変換するファイルを追加"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "フォルダーを追加"
 
@@ -713,16 +713,16 @@ msgstr "高度なグループ化..."
 msgid "After "
 msgstr "後"
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "コピー後..."
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "アルバム"
 
@@ -731,7 +731,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "アルバム (すべてのトラックで最適な音量)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -881,11 +881,11 @@ msgid ""
 msgstr "ライブラリーのすべての曲の統計情報を曲ファイルに保存してもよろしいですか?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "アーティスト"
 
@@ -893,7 +893,7 @@ msgstr "アーティスト"
 msgid "Artist info"
 msgstr "アーティストの情報"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "アーティストの頭文字"
 
@@ -903,7 +903,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "オーディオ形式"
 
@@ -963,7 +963,7 @@ msgstr "平均画像サイズ"
 msgid "BBC Podcasts"
 msgstr "BBC ポッドキャスト"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1038,7 +1038,7 @@ msgstr "ビットレート"
 msgid "Bitrate"
 msgstr "ビットレート"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "ビットレート"
@@ -1097,7 +1097,7 @@ msgstr "ボタン"
 msgid "CBC Podcasts"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr ""
 
@@ -1360,7 +1360,7 @@ msgid "Command"
 msgstr ""
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "コメント"
 
@@ -1373,7 +1373,7 @@ msgid "Complete tags automatically..."
 msgstr "タグを自動補完..."
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "作曲者"
@@ -1730,7 +1730,7 @@ msgstr "スマートプレイリストを削除"
 msgid "Delete the currently playing song"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "元のファイルを削除する"
 
@@ -1750,8 +1750,8 @@ msgstr "選択されたトラックをキューから削除する"
 msgid "Dequeue track"
 msgstr "トラックをキューから削除"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "フォルダー"
 
@@ -1783,7 +1783,7 @@ msgstr "デバイスのプロパティ..."
 msgid "Devices"
 msgstr "デバイス"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "ダイアログ"
 
@@ -1831,9 +1831,9 @@ msgid "Disabled"
 msgstr "無効"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "ディスク"
 
@@ -2020,7 +2020,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "長さ"
 
@@ -2180,7 +2180,7 @@ msgstr "--log-levels *:3 と同じ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "エラー"
 
@@ -2326,7 +2326,7 @@ msgstr "フェード"
 msgid "Fading duration"
 msgstr "フェードの長さ"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "CD ドライブの読み込みが失敗しました"
 
@@ -2416,11 +2416,7 @@ msgstr "カバーの取得エラー"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "ファイル形式"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "ファイル拡張子"
 
@@ -2453,6 +2449,10 @@ msgstr "ファイルの種類"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "ファイル名"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr ""
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2586,9 +2586,9 @@ msgid "General settings"
 msgstr "全般設定"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "ジャンル"
 
@@ -2685,7 +2685,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "ジャンル/アーティスト/アルバムでグループ化"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "分類"
@@ -2789,7 +2789,7 @@ msgstr "続行すると、このデバイスは低速で動作しコピーされ
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "ポッドキャストの URL がある場合は、下に入力して進むを押してください。"
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "アーティスト名の「The」を無視する"
 
@@ -2866,11 +2866,11 @@ msgstr "%1 のインデックスを作成しています。"
 msgid "Information"
 msgstr "情報"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "入力オプション"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "挿入..."
 
@@ -2903,7 +2903,7 @@ msgstr "不正な API キーです"
 msgid "Invalid URL"
 msgstr "不正なURLです"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "不正な形式です"
 
@@ -2927,7 +2927,7 @@ msgstr "不正なサービスです"
 msgid "Invalid session key"
 msgstr "不正なセッションキーです"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "選択を反転する"
 
@@ -2979,7 +2979,7 @@ msgstr "ボタンを %1 秒長押し..."
 msgid "Keep running in the background when the window is closed"
 msgstr "ウィンドウを閉じたときバックグラウンドで起動し続ける"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "元のファイルを保持する"
 
@@ -3061,7 +3061,7 @@ msgstr "嫌いなトラック"
 msgid "Left"
 msgstr "左"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "長さ"
@@ -3152,7 +3152,7 @@ msgstr "トラック情報の読み込み中"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "読み込んでいます..."
 
@@ -3206,7 +3206,8 @@ msgstr "低 (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Low Complexity プロファイル (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "歌詞"
 
@@ -3295,7 +3296,8 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造元"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "視聴済みマークを付ける"
 
@@ -3435,7 +3437,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "名前"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "名前のオプション"
 
@@ -3756,7 +3758,7 @@ msgstr "品質を最適化"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "オプション..."
 
@@ -3764,7 +3766,7 @@ msgstr "オプション..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "ファイルの整理"
 
@@ -3780,7 +3782,7 @@ msgstr "ファイルの整理中"
 msgid "Original tags"
 msgstr "元のタグ"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3811,7 +3813,7 @@ msgstr "出力"
 msgid "Output device"
 msgstr "出力デバイス"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "出力のオプション"
 
@@ -3819,7 +3821,7 @@ msgstr "出力のオプション"
 msgid "Overwrite all"
 msgstr "すべて上書きする"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "既存のファイルを上書きする"
 
@@ -3866,7 +3868,7 @@ msgid "Paused"
 msgstr "一時停止中"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4066,7 +4068,7 @@ msgstr "Pretty OSD のオプション"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -4087,7 +4089,7 @@ msgstr "バージョン情報を出力"
 msgid "Profile"
 msgstr "プロファイル"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "進行状況"
 
@@ -4337,7 +4339,7 @@ msgstr "現在のプレイリストを置き換える"
 msgid "Replace the playlist"
 msgstr "プレイリストを置き換える"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "スペースをアンダースコアに置換する"
 
@@ -4378,7 +4380,7 @@ msgstr "トラックを再開 (開始8秒以内なら前のトラックを再生
 msgid "Restore Default Server"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 文字に限定する"
 
@@ -4394,11 +4396,11 @@ msgstr "Clementine に戻る"
 msgid "Right"
 msgstr "右"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "リッピングする"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "CD をリッピングする"
 
@@ -4440,7 +4442,7 @@ msgstr "SSL ハンドシェークエラーです。サーバーの設定を確�
 msgid "Safely remove device"
 msgstr "デバイスを安全に取り外す"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "コピー後にデバイスを安全に取り外す"
 
@@ -4450,7 +4452,7 @@ msgstr "コピー後にデバイスを安全に取り外す"
 msgid "Sample rate"
 msgstr "サンプルレート"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "サンプルレート"
 
@@ -4649,11 +4651,11 @@ msgstr "現在再生中のトラックの絶対的な位置へシークする"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "キーボードショートカットまたはマウスホイールを使ってシークする"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "すべて選択"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "選択しない"
 
@@ -5058,7 +5060,7 @@ msgstr "星付き"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "リッピングを開始する"
 
@@ -5404,9 +5406,9 @@ msgstr "この種類のデバイスはサポートされていません: %1"
 msgid "Time step"
 msgstr "時間刻み"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "タイトル"
 
@@ -5466,8 +5468,8 @@ msgstr "合計ネットワーク要求回数"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "トラック"
 
@@ -5945,9 +5947,9 @@ msgid "Wrong username or password."
 msgstr "ユーザー名またはパスワードが違います。"
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "年"
 

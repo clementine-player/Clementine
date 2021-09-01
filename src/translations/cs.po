@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-19 06:35+0000\n"
+"PO-Revision-Date: 2021-08-31 13:45+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,7 +401,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr "<p>Tento článek používá údaje z článku na Wikipedii <a href=\"%1\">%2</a>, který je vydán pod <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License 3.0</a>.</p>"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -559,7 +559,7 @@ msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "Přidat složku"
 
@@ -713,16 +713,16 @@ msgstr "Pokročilé seskupování..."
 msgid "After "
 msgstr "Po "
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "Po zkopírování..."
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "Album"
 
@@ -731,7 +731,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideální hlasitost pro všechny skladby)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -881,11 +881,11 @@ msgid ""
 msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech písní ve vaší sbírce?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "Umělec"
 
@@ -893,7 +893,7 @@ msgstr "Umělec"
 msgid "Artist info"
 msgstr "Umělec"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "Začáteční písmena umělce"
 
@@ -903,7 +903,7 @@ msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Zvukový formát"
 
@@ -963,7 +963,7 @@ msgstr "Průměrná velikost obrázku"
 msgid "BBC Podcasts"
 msgstr "Záznamy BBC"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "ÚZM"
@@ -1038,7 +1038,7 @@ msgstr "Datový tok"
 msgid "Bitrate"
 msgstr "Datový tok"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Datový tok"
@@ -1097,7 +1097,7 @@ msgstr "Tlačítka"
 msgid "CBC Podcasts"
 msgstr "Záznamy CBC"
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr "Mechanika CD"
 
@@ -1360,7 +1360,7 @@ msgid "Command"
 msgstr "Příkaz"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Poznámka"
 
@@ -1373,7 +1373,7 @@ msgid "Complete tags automatically..."
 msgstr "Doplnit značky automaticky..."
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Skladatel"
@@ -1730,7 +1730,7 @@ msgstr "Smazat chytrý seznam skladeb"
 msgid "Delete the currently playing song"
 msgstr "Smazat nyní přehrávanou píseň"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "Smazat původní soubory"
 
@@ -1750,8 +1750,8 @@ msgstr "Odstranit vybrané skladby z řady"
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Cíl"
 
@@ -1783,7 +1783,7 @@ msgstr "Vlastnosti zařízení..."
 msgid "Devices"
 msgstr "Zařízení"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "Dialog"
 
@@ -1831,9 +1831,9 @@ msgid "Disabled"
 msgstr "Zakázáno"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "Disk"
 
@@ -2020,7 +2020,7 @@ msgstr "Vypsat rourový graf"
 msgid "Dump To Logs"
 msgstr "Vypsat v zápisech"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "Doba trvání"
 
@@ -2180,7 +2180,7 @@ msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "Chyba"
 
@@ -2326,7 +2326,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2416,11 +2416,7 @@ msgstr "Chyba při stahování obalu"
 msgid "Fetching playlist items"
 msgstr "Natahují se položky seznamu skladeb"
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "Souborový formát"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "Přípona souboru"
 
@@ -2453,6 +2449,10 @@ msgstr "Typ souboru"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Název souboru"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr "Náhled názvu souboru"
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2586,9 +2586,9 @@ msgid "General settings"
 msgstr "Obecná nastavení"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Žánr"
 
@@ -2685,7 +2685,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Seskupovat podle žánru/umělce/alba"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Seskupení"
@@ -2789,7 +2789,7 @@ msgstr "Budete-li pokračovat, toto zařízení bude pracovat pomalu a písně n
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Pokud znáte adresu (URL) zvukového záznamu, zadejte ji níže a stiskněte Jít."
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "Nevšímat si 'The' ve jménech umělců"
 
@@ -2866,11 +2866,11 @@ msgstr "Rejstříkování %1"
 msgid "Information"
 msgstr "Informace"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "Vstupní volby"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Vložit..."
 
@@ -2903,7 +2903,7 @@ msgstr "Neplatný klíč API"
 msgid "Invalid URL"
 msgstr "Neplatná adresa (URL)"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "Neplatný formát"
 
@@ -2927,7 +2927,7 @@ msgstr "Neplatná služba"
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
@@ -2979,7 +2979,7 @@ msgstr "Držet tlačítka po %1 sekund..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Při zavření okna nechat běžet na pozadí"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "Zachovat původní soubory"
 
@@ -3061,7 +3061,7 @@ msgstr "Nejméně oblíbené skladby"
 msgid "Left"
 msgstr "Vlevo"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Délka"
@@ -3152,7 +3152,7 @@ msgstr "Nahrávají se informace o skladbě"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "Nahrává se..."
 
@@ -3206,7 +3206,8 @@ msgstr "Nízké (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Nízkosložitostní profil"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Texty písní"
 
@@ -3295,7 +3296,8 @@ msgstr "Ručně"
 msgid "Manufacturer"
 msgstr "Výrobce"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "Označit jako poslechnuté"
 
@@ -3435,7 +3437,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Název"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "Volby pro pojmenování"
 
@@ -3756,7 +3758,7 @@ msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Volby..."
 
@@ -3764,7 +3766,7 @@ msgstr "Volby..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
@@ -3780,7 +3782,7 @@ msgstr "Uspořádávají se soubory"
 msgid "Original tags"
 msgstr "Původní značky"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3811,7 +3813,7 @@ msgstr "Výstup"
 msgid "Output device"
 msgstr "Výstupní zařízení"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Možnosti výstupu"
 
@@ -3819,7 +3821,7 @@ msgstr "Možnosti výstupu"
 msgid "Overwrite all"
 msgstr "Přepsat vše"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "Přepsat existující soubory"
 
@@ -3866,7 +3868,7 @@ msgid "Paused"
 msgstr "Pozastaveno"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4066,7 +4068,7 @@ msgstr "Možnosti vzhledu OSD"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "Náhled"
 
@@ -4087,7 +4089,7 @@ msgstr "Vypsat informaci o verzi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Průběh"
 
@@ -4337,7 +4339,7 @@ msgstr "Nahradit současný seznam skladeb"
 msgid "Replace the playlist"
 msgstr "Nahradit seznam skladeb"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "Nahradí mezery podtržítky"
 
@@ -4378,7 +4380,7 @@ msgstr "Spustit znovu přehrávání skladby, nebo přehrávat předchozí sklad
 msgid "Restore Default Server"
 msgstr "Obnovit výchozí server"
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "Omezit na znaky &ASCII"
 
@@ -4394,11 +4396,11 @@ msgstr "Návrat do Clementine"
 msgid "Right"
 msgstr "Vpravo"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "Vytáhnout"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "Vytáhnout skladby z CD"
 
@@ -4440,7 +4442,7 @@ msgstr "Chyba inicializace SSL, ověřte nastavení serveru. Volba SSLv3 níže 
 msgid "Safely remove device"
 msgstr "Bezpečně odebrat zařízení"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "Po dokončení kopírování bezpečně odebrat zařízení"
 
@@ -4450,7 +4452,7 @@ msgstr "Po dokončení kopírování bezpečně odebrat zařízení"
 msgid "Sample rate"
 msgstr "Vzorkovací kmitočet"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "Vzorkovací frekvence"
 
@@ -4649,11 +4651,11 @@ msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Posunování pomocí klávesové zkratky nebo kolečka myši"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "Nevybrat žádnou skladbu"
 
@@ -5058,7 +5060,7 @@ msgstr "S hvězdičkou"
 msgid "Starred Albums"
 msgstr "Alba s hvězdičkami"
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
@@ -5404,9 +5406,9 @@ msgstr "Tento typ zařízení není podporován: %1"
 msgid "Time step"
 msgstr "Časový krok"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "Název"
 
@@ -5466,8 +5468,8 @@ msgstr "Celkem uskutečněno síťových požadavků"
 msgid "Trac&k"
 msgstr "Skla&dby"
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Skladba"
 
@@ -5945,9 +5947,9 @@ msgid "Wrong username or password."
 msgstr "Nesprávné uživatelské jméno nebo heslo."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "Rok"
 

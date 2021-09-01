@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-18 09:55+0000\n"
+"PO-Revision-Date: 2021-08-31 09:33+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/davidsansome/clementine/language/be/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -391,7 +391,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -549,7 +549,7 @@ msgid "Add files to transcode"
 msgstr "Дадаць файлы для перакадаваньня"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "Дадаць каталёг"
 
@@ -703,16 +703,16 @@ msgstr "Пашыраная сартоўка"
 msgid "After "
 msgstr "Пасьля"
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "Пасьля капіяваньня..."
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "Альбом"
 
@@ -721,7 +721,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідэальная гучнасьць для ўсіх трэкаў)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -871,11 +871,11 @@ msgid ""
 msgstr ""
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "Выканаўца"
 
@@ -883,7 +883,7 @@ msgstr "Выканаўца"
 msgid "Artist info"
 msgstr "Пра Артыста"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "Ініцыялы выканаўцы"
 
@@ -893,7 +893,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Фармат аўдыё"
 
@@ -953,7 +953,7 @@ msgstr "Прыкладны памер выявы"
 msgid "BBC Podcasts"
 msgstr "Подкасты BBC"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1028,7 +1028,7 @@ msgstr "Бітрэйт"
 msgid "Bitrate"
 msgstr "Бітрэйт"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr ""
@@ -1087,7 +1087,7 @@ msgstr "Клявішы"
 msgid "CBC Podcasts"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr ""
 
@@ -1350,7 +1350,7 @@ msgid "Command"
 msgstr ""
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Камэнтар"
 
@@ -1363,7 +1363,7 @@ msgid "Complete tags automatically..."
 msgstr "Аўтаматычна запоўніць тэгі..."
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Кампазытар"
@@ -1720,7 +1720,7 @@ msgstr "Выдаліць смарт-плэйліст"
 msgid "Delete the currently playing song"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "Выдаліць арыгінальныя файлы"
 
@@ -1740,8 +1740,8 @@ msgstr "Прыбраць з чаргі абраныя трэкі"
 msgid "Dequeue track"
 msgstr "Прыбраць трэк з чаргі "
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Назначэньне"
 
@@ -1773,7 +1773,7 @@ msgstr "Уласьцівасьці прылады..."
 msgid "Devices"
 msgstr "Прылады"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr ""
 
@@ -1821,9 +1821,9 @@ msgid "Disabled"
 msgstr ""
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "Дыск"
 
@@ -2010,7 +2010,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr ""
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr ""
 
@@ -2170,7 +2170,7 @@ msgstr "Аналягічна --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "Памылка"
 
@@ -2316,7 +2316,7 @@ msgstr "Згасаньне"
 msgid "Fading duration"
 msgstr "Працягласьць згасаньня"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2406,11 +2406,7 @@ msgstr "Памылка пошуку вокладкі"
 msgid "Fetching playlist items"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr ""
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "Пашырэньне файлу"
 
@@ -2443,6 +2439,10 @@ msgstr "Тып файлу"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Имя файлу"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr ""
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2576,9 +2576,9 @@ msgid "General settings"
 msgstr "Агульныя налады"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Жанр"
 
@@ -2675,7 +2675,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Сартаваць па Жанр/Выканаўца/Альбом"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Групаваньне"
@@ -2779,7 +2779,7 @@ msgstr "Калі працягваць, то прылада будзе праца
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Калі вы ведаеце URL подкасту, уведзьце яго сюды і націсьніце Go."
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "Ігнараваць \"The\" ў імені выканаўцы"
 
@@ -2856,11 +2856,11 @@ msgstr "Індэксуем %1"
 msgid "Information"
 msgstr "Сьведкі"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Устаўка"
 
@@ -2893,7 +2893,7 @@ msgstr "Нявправільны ключ API"
 msgid "Invalid URL"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "Няверны фармат"
 
@@ -2917,7 +2917,7 @@ msgstr "Няправільная служба"
 msgid "Invalid session key"
 msgstr "Няправільны ключ сэсіі"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr ""
 
@@ -2969,7 +2969,7 @@ msgstr "Адлюстроўваць кнопкі на працягу %1 сэку�
 msgid "Keep running in the background when the window is closed"
 msgstr "Працягваць працу ў фонавым рэжыме, калі вакно зачыненае"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "Захаваць арыгінальныя файлы"
 
@@ -3051,7 +3051,7 @@ msgstr "Найменш улюбёныя трэкі"
 msgid "Left"
 msgstr "Левы"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Працягласьць"
@@ -3142,7 +3142,7 @@ msgstr "Загрузка інфармацыі пра трэк"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "Загрузка..."
 
@@ -3196,7 +3196,8 @@ msgstr "Нізкая (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Профіль нізкай складанасьці (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Тэксты песень"
 
@@ -3285,7 +3286,8 @@ msgstr "Самастойна"
 msgid "Manufacturer"
 msgstr "Вытворца"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "Пазначыць як праслуханае"
 
@@ -3425,7 +3427,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "Налады называньня"
 
@@ -3746,7 +3748,7 @@ msgstr "Аптымізаваць па якасьці"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Опцыі..."
 
@@ -3754,7 +3756,7 @@ msgstr "Опцыі..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "Упарадкаваць файлы"
 
@@ -3770,7 +3772,7 @@ msgstr "Арганізацыя файлаў"
 msgid "Original tags"
 msgstr "Першапачатковыя тэгі"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3801,7 +3803,7 @@ msgstr ""
 msgid "Output device"
 msgstr "Вывадная прылада"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Опцыі вываду"
 
@@ -3809,7 +3811,7 @@ msgstr "Опцыі вываду"
 msgid "Overwrite all"
 msgstr "Перазапісаць усё"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "Перазапісаць існыя файлы"
 
@@ -3856,7 +3858,7 @@ msgid "Paused"
 msgstr "Прыпынены"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4056,7 +4058,7 @@ msgstr "Парамэтры OSD"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "Перадагляд"
 
@@ -4077,7 +4079,7 @@ msgstr "Вывесьці інфармацыю аб вэрсіі"
 msgid "Profile"
 msgstr "Профіль"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Прагрэс"
 
@@ -4327,7 +4329,7 @@ msgstr "Замяніць бягучы плэйліст"
 msgid "Replace the playlist"
 msgstr "Замяніць плэйліст"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "Замяняць прагалы падкрэсьліваньнем"
 
@@ -4368,7 +4370,7 @@ msgstr ""
 msgid "Restore Default Server"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "Абмежаваць толькі сымбалямі ASCII"
 
@@ -4384,11 +4386,11 @@ msgstr "Вярнуцца ў Clementine."
 msgid "Right"
 msgstr "Правы"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr ""
 
@@ -4430,7 +4432,7 @@ msgstr ""
 msgid "Safely remove device"
 msgstr "Бясьпечна выняць прыладу"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "Бясьпечна выняць прыладу пасьля капіяваньня"
 
@@ -4440,7 +4442,7 @@ msgstr "Бясьпечна выняць прыладу пасьля капіяв
 msgid "Sample rate"
 msgstr "Чашчыня"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "Чашчыня дыскрэтызацыі"
 
@@ -4639,11 +4641,11 @@ msgstr "Пераматаць бягучы трэк на абсалютную п�
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "Абраць усё"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "Адмяніць выбар"
 
@@ -5048,7 +5050,7 @@ msgstr "Ацэненыя"
 msgid "Starred Albums"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr ""
 
@@ -5394,9 +5396,9 @@ msgstr "Гэты тып прылады не падтрымліваецца: %1"
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "Назва"
 
@@ -5456,8 +5458,8 @@ msgstr "Выканана сеткавых запытаў увогуле"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Трэк"
 
@@ -5935,9 +5937,9 @@ msgid "Wrong username or password."
 msgstr "Няправільнае імя ці пароль."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "Год"
 

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-18 09:55+0000\n"
+"PO-Revision-Date: 2021-08-31 09:33+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -390,7 +390,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr "<p>本文章內容取自維基百科相關條目<a href=\"%1\">%2</a>以以下授權條款釋出 <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License 3.0</a>.</p>"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -548,7 +548,7 @@ msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "加入資料夾"
 
@@ -702,16 +702,16 @@ msgstr "進階歸類…"
 msgid "After "
 msgstr "幾天之後"
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "複製後 …"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "專輯"
 
@@ -720,7 +720,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "專輯（為所有音軌取得理想音量）"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -870,11 +870,11 @@ msgid ""
 msgstr "確定要將歌曲統計數據寫入所有媒體櫃中的音樂檔案嗎？"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "演出者"
 
@@ -882,7 +882,7 @@ msgstr "演出者"
 msgid "Artist info"
 msgstr "演出者"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "演唱者簽署"
 
@@ -892,7 +892,7 @@ msgstr "儲存前詢問(&K)"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "音訊格式"
 
@@ -952,7 +952,7 @@ msgstr "平均圖片大小"
 msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1027,7 +1027,7 @@ msgstr "位元率"
 msgid "Bitrate"
 msgstr "位元率"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "位元率"
@@ -1086,7 +1086,7 @@ msgstr "按鈕"
 msgid "CBC Podcasts"
 msgstr "CBC Podcasts"
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr ""
 
@@ -1349,7 +1349,7 @@ msgid "Command"
 msgstr "指令"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "評論"
 
@@ -1362,7 +1362,7 @@ msgid "Complete tags automatically..."
 msgstr "標籤完全自動分類…"
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "作曲家"
@@ -1719,7 +1719,7 @@ msgstr "刪除智慧型播放清單"
 msgid "Delete the currently playing song"
 msgstr "刪除目前播放的歌曲"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "刪除原本的檔案"
 
@@ -1739,8 +1739,8 @@ msgstr "將選取的音軌移出佇列中"
 msgid "Dequeue track"
 msgstr "將音軌移出佇列中"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "目的地"
 
@@ -1772,7 +1772,7 @@ msgstr "裝置屬性…"
 msgid "Devices"
 msgstr "裝置"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "對話視窗"
 
@@ -1820,9 +1820,9 @@ msgid "Disabled"
 msgstr "停用"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "唱片"
 
@@ -2009,7 +2009,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr "傾印至紀錄檔"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "長度"
 
@@ -2169,7 +2169,7 @@ msgstr "相當於 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "錯誤"
 
@@ -2315,7 +2315,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出持續時間"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "無法讀取 CD 光碟機"
 
@@ -2405,11 +2405,7 @@ msgstr "取得封面出錯"
 msgid "Fetching playlist items"
 msgstr "擷取播放清單項目"
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "檔案格式"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "副檔名"
 
@@ -2442,6 +2438,10 @@ msgstr "檔案型態"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "檔名"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr ""
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2575,9 +2575,9 @@ msgid "General settings"
 msgstr "一般設定"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "風格"
 
@@ -2674,7 +2674,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "依風格/演出者/專輯歸類"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "群組"
@@ -2778,7 +2778,7 @@ msgstr "如果您要繼續，此裝置將會變慢且可能無法複製歌曲"
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "如果您知道一個 podcast 的網址，在下面輸入並按下「前往」。"
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "忽視在演出者名字中的“The”"
 
@@ -2855,11 +2855,11 @@ msgstr "索引 %1"
 msgid "Information"
 msgstr "資訊"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "輸入選項"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "插入…"
 
@@ -2892,7 +2892,7 @@ msgstr "無效的 API key"
 msgid "Invalid URL"
 msgstr "無效的網址"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "無效的格式"
 
@@ -2916,7 +2916,7 @@ msgstr "無效的服務"
 msgid "Invalid session key"
 msgstr "無效對稱金鑰"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "反向選擇"
 
@@ -2968,7 +2968,7 @@ msgstr "按住按鈕 %1 秒…"
 msgid "Keep running in the background when the window is closed"
 msgstr "視窗關閉後依然在背景執行"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "保留原本的檔案"
 
@@ -3050,7 +3050,7 @@ msgstr "最不喜歡的曲目"
 msgid "Left"
 msgstr "左"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "長度"
@@ -3141,7 +3141,7 @@ msgstr "載入音軌資訊"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "載入中…"
 
@@ -3195,7 +3195,8 @@ msgstr "低 (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "低複雜度規格 (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "歌詞"
 
@@ -3284,7 +3285,8 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造商"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "標記為聽過的"
 
@@ -3424,7 +3426,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "名稱"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "命名選項"
 
@@ -3745,7 +3747,7 @@ msgstr "最佳化品質"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "選項…"
 
@@ -3753,7 +3755,7 @@ msgstr "選項…"
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "組織檔案"
 
@@ -3769,7 +3771,7 @@ msgstr "組織檔案中"
 msgid "Original tags"
 msgstr "原來的標籤"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3800,7 +3802,7 @@ msgstr "輸出"
 msgid "Output device"
 msgstr "輸出裝置"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "輸出選項"
 
@@ -3808,7 +3810,7 @@ msgstr "輸出選項"
 msgid "Overwrite all"
 msgstr "取代全部"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "覆寫現有的檔案"
 
@@ -3855,7 +3857,7 @@ msgid "Paused"
 msgstr "已暫停"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4055,7 +4057,7 @@ msgstr "漂亮的 OSD 選項"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "預覽"
 
@@ -4076,7 +4078,7 @@ msgstr "印出版本資訊"
 msgid "Profile"
 msgstr "規格"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "進展"
 
@@ -4326,7 +4328,7 @@ msgstr "取代目前播放清單"
 msgid "Replace the playlist"
 msgstr "取代播放清單"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "用底線取代空格"
 
@@ -4367,7 +4369,7 @@ msgstr "重新播放曲目，若在開始播放 8 秒內則播放上一首"
 msgid "Restore Default Server"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
@@ -4383,11 +4385,11 @@ msgstr "回到 Clementine"
 msgid "Right"
 msgstr "右"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "轉拷"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "轉拷 CD"
 
@@ -4429,7 +4431,7 @@ msgstr "SSL 交握錯誤，請檢查伺服器設定。以下的 SSLv3 參數也�
 msgid "Safely remove device"
 msgstr "安全地移除裝置"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "在複製之後，安全的移除裝置"
 
@@ -4439,7 +4441,7 @@ msgstr "在複製之後，安全的移除裝置"
 msgid "Sample rate"
 msgstr "取樣頻率"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "取樣頻率"
 
@@ -4638,11 +4640,11 @@ msgstr "藉由絕對位置尋找現在播放的曲目"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "當用滑鼠滾輪或鍵盤快捷鍵快轉時"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "選擇全部"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "不選取"
 
@@ -5047,7 +5049,7 @@ msgstr "已標記星號"
 msgid "Starred Albums"
 msgstr "打星的專輯"
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "開始轉拷"
 
@@ -5393,9 +5395,9 @@ msgstr "這種裝置不被支援： %1"
 msgid "Time step"
 msgstr "步進時數"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "標題"
 
@@ -5455,8 +5457,8 @@ msgstr "總發送網路請求"
 msgid "Trac&k"
 msgstr "曲目(&K)"
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "歌曲"
 
@@ -5934,9 +5936,9 @@ msgid "Wrong username or password."
 msgstr "使用者名稱或密碼錯誤"
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "年份"
 

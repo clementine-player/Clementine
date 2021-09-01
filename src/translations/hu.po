@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-18 09:55+0000\n"
+"PO-Revision-Date: 2021-08-31 09:33+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -398,7 +398,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr "<p>Ez a cikk felhasználja a következő Wikipédia cikket: <a href=\"%1\">%2</a>, amely a <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Nevezd meg! – Így add tovább! 3.0</a> licenc alatt érhető el.</p>"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -556,7 +556,7 @@ msgid "Add files to transcode"
 msgstr "Fájlok felvétele átkódoláshoz"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "Mappa hozzáadása"
 
@@ -710,16 +710,16 @@ msgstr "Speciális csoportosítás…"
 msgid "After "
 msgstr "Utána"
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "Másolás után…"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "Album"
 
@@ -728,7 +728,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideális hangerő minden számhoz)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -878,11 +878,11 @@ msgid ""
 msgstr "Biztos, hogy beleírja a szám statisztikáit az összes a zenetárban szereplő fájlba?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "Előadó"
 
@@ -890,7 +890,7 @@ msgstr "Előadó"
 msgid "Artist info"
 msgstr "Előadó infó"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "Előadó monogramja"
 
@@ -900,7 +900,7 @@ msgstr "&Kérdezzen rá mentéskor"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Hangformátum"
 
@@ -960,7 +960,7 @@ msgstr "Átlagos képméret"
 msgid "BBC Podcasts"
 msgstr "BBC podcastok"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1035,7 +1035,7 @@ msgstr "Bitráta"
 msgid "Bitrate"
 msgstr "Bitráta"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Bitráta"
@@ -1094,7 +1094,7 @@ msgstr "Gombok"
 msgid "CBC Podcasts"
 msgstr "CBC podcastok"
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr "CD-meghajtó"
 
@@ -1357,7 +1357,7 @@ msgid "Command"
 msgstr "Parancs"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Megjegyzés"
 
@@ -1370,7 +1370,7 @@ msgid "Complete tags automatically..."
 msgstr "Címkék automatikus kiegészítése…"
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Zeneszerző"
@@ -1727,7 +1727,7 @@ msgstr "Intelligens lejátszólista törlése"
 msgid "Delete the currently playing song"
 msgstr "Az éppen játszott szám törlése"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "Az eredeti fájlok törlése"
 
@@ -1747,8 +1747,8 @@ msgstr "Kiválasztott számok törlése a sorból"
 msgid "Dequeue track"
 msgstr "Szám törlése a sorból"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Cél"
 
@@ -1780,7 +1780,7 @@ msgstr "Eszköztulajdonságok…"
 msgid "Devices"
 msgstr "Eszközök"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "Párbeszéd"
 
@@ -1828,9 +1828,9 @@ msgid "Disabled"
 msgstr "Letiltva"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "Lemez"
 
@@ -2017,7 +2017,7 @@ msgstr "Futószalag grafikon eldobása"
 msgid "Dump To Logs"
 msgstr "Kiírás a naplókba"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "Időtartam"
 
@@ -2177,7 +2177,7 @@ msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "Hiba"
 
@@ -2323,7 +2323,7 @@ msgstr "Elhalkulás"
 msgid "Fading duration"
 msgstr "Elhalkulás hossza"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "Nem lehet olvasni a CD meghajtót"
 
@@ -2413,11 +2413,7 @@ msgstr "Hiba a borító lekérésekor"
 msgid "Fetching playlist items"
 msgstr "Lejátszólista elemeinek lekérése"
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "Fájlformátum"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "Fájlkiterjesztés"
 
@@ -2450,6 +2446,10 @@ msgstr "Fájltípus"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Fájlnév"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr ""
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2583,9 +2583,9 @@ msgid "General settings"
 msgstr "Általános beállítások"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Műfaj"
 
@@ -2682,7 +2682,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Műfaj/Előadó/Album szerint"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Csoportosítás"
@@ -2786,7 +2786,7 @@ msgstr "Ha folytatja, az eszköz lassan fog működni és a rá másolt számok 
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Ha tudja a podcast URL-jét, akkor írja be és nyomja meg az Ugrás gombot."
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "A \"The\" mellőzése az előadónevekben"
 
@@ -2863,11 +2863,11 @@ msgstr "%1 indexelése"
 msgid "Information"
 msgstr "Információ"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "Bemenet beállításai"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Beszúrás…"
 
@@ -2900,7 +2900,7 @@ msgstr "Érvénytelen API-kulcs"
 msgid "Invalid URL"
 msgstr "Érvénytelen URL"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "Érvénytelen formátum"
 
@@ -2924,7 +2924,7 @@ msgstr "Érvénytelen szolgáltatás"
 msgid "Invalid session key"
 msgstr "Érvénytelen munkamenetkulcs"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Kijelölés megfordítása"
 
@@ -2976,7 +2976,7 @@ msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 msgid "Keep running in the background when the window is closed"
 msgstr "Futás a háttérben bezárt ablak esetén is"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "Eredeti fájlok megőrzése"
 
@@ -3058,7 +3058,7 @@ msgstr "Legkevésbé kedvelt számok"
 msgid "Left"
 msgstr "Balra"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Időtartam"
@@ -3149,7 +3149,7 @@ msgstr "Száminformációk betöltése"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "Betöltés…"
 
@@ -3203,7 +3203,8 @@ msgstr "Alacsony (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Alacsony komplexitású profil (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Dalszövegek"
 
@@ -3292,7 +3293,8 @@ msgstr "Kézzel"
 msgid "Manufacturer"
 msgstr "Gyártó"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "Megjelölés meghallgatottként"
 
@@ -3432,7 +3434,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Név"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "Elnevezési beállítások"
 
@@ -3753,7 +3755,7 @@ msgstr "Optimalizálás minőségre"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Beállítások…"
 
@@ -3761,7 +3763,7 @@ msgstr "Beállítások…"
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "Fájlok rendezése"
 
@@ -3777,7 +3779,7 @@ msgstr "Fájlok rendezés alatt"
 msgid "Original tags"
 msgstr "Eredeti címkék"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3808,7 +3810,7 @@ msgstr "Kimenet"
 msgid "Output device"
 msgstr "Kimeneti eszköz"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Kimenet beállításai"
 
@@ -3816,7 +3818,7 @@ msgstr "Kimenet beállításai"
 msgid "Overwrite all"
 msgstr "Mindet felülírja"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "Létező fájlok felülírása"
 
@@ -3863,7 +3865,7 @@ msgid "Paused"
 msgstr "Szüneteltetve"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4063,7 +4065,7 @@ msgstr "Pretty OSD beállítások"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "Előnézet"
 
@@ -4084,7 +4086,7 @@ msgstr "Verzió információ megjelenítése…"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Folyamat"
 
@@ -4334,7 +4336,7 @@ msgstr "Jelenlegi lejátszólista cseréje"
 msgid "Replace the playlist"
 msgstr "Lejátszólista cseréje"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "Szóközök alulvonásokkal való helyettesítése"
 
@@ -4375,7 +4377,7 @@ msgstr "Szám újraindítása, vagy az előző szám lejátszása, ha 8 másodpe
 msgid "Restore Default Server"
 msgstr "Alapértelmezett szerver helyreállítása"
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "Korlátozás ASCII karakterekre"
 
@@ -4391,11 +4393,11 @@ msgstr "Visszatérés a Clementine-hoz"
 msgid "Right"
 msgstr "Jobbra"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "Beolvasás"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "CD beolvasása"
 
@@ -4437,7 +4439,7 @@ msgstr "SSL hiba, ellenőrizze a kiszolgáló beállításait. A lenti SSLv3 be�
 msgid "Safely remove device"
 msgstr "Eszköz biztonságos eltávolítása"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "Eszköz biztonságos eltávolítása másolás után"
 
@@ -4447,7 +4449,7 @@ msgstr "Eszköz biztonságos eltávolítása másolás után"
 msgid "Sample rate"
 msgstr "Mintavételi sűrűség"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "Mintavétel"
 
@@ -4646,11 +4648,11 @@ msgstr "A lejátszott szám adott pozícióra léptetése"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Keresés billentyűparanccsal, vagy egérgörgővel"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "Összes kiválasztása"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "Kiválasztás megszüntetése"
 
@@ -5055,7 +5057,7 @@ msgstr "Kedvenc"
 msgid "Starred Albums"
 msgstr "Csillagozott albumok"
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "Beolvasás indítása"
 
@@ -5401,9 +5403,9 @@ msgstr "Ez az eszköztípus nem támogatott: %1"
 msgid "Time step"
 msgstr "Idő lépés"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "Cím"
 
@@ -5463,8 +5465,8 @@ msgstr "Összes hálózati kérés"
 msgid "Trac&k"
 msgstr "Szá&m"
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Szám"
 
@@ -5942,9 +5944,9 @@ msgid "Wrong username or password."
 msgstr "Érvénytelen felhasználói név vagy jelszó."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "Év"
 

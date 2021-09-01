@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-07-18 09:55+0000\n"
+"PO-Revision-Date: 2021-08-31 09:33+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -392,7 +392,7 @@ msgid ""
 " Attribution-Share-Alike License 3.0</a>.</p>"
 msgstr "<p>Šiame straipsnyje yra naudojama medžiaga iš Vikipedijos straipsnio <a href=\"%1\">%2</a>, kuris yra išleistas pagal <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons priskyrimo-analogiško platinimo licenciją 3.0</a>.</p>"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_filenameformatwidget.h:120
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -550,7 +550,7 @@ msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
-#: ripper/ripcddialog.cpp:228
+#: ripper/ripcddialog.cpp:261
 msgid "Add folder"
 msgstr "Pridėti aplanką"
 
@@ -704,16 +704,16 @@ msgstr "Platesnis grupavimas..."
 msgid "After "
 msgstr "Po"
 
-#: ../bin/src/ui_organisedialog.h:241
+#: ../bin/src/ui_organisedialog.h:180
 msgid "After copying..."
 msgstr "Po kopijavimo..."
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1386
-#: ui/organisedialog.cpp:63 ../bin/src/ui_groupbydialog.h:128
+#: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:128
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
 #: ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
-#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:344
+#: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:342
 msgid "Album"
 msgstr "Albumas"
 
@@ -722,7 +722,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Albumas (idealus garsumas visoms dainoms)"
 
 #: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1401
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:130
+#: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
@@ -872,11 +872,11 @@ msgid ""
 msgstr "Ar tikrai norite įrašyti dainos statistiką į dainos failą visoms dainoms Jūsų fonotekoje?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1384
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:129
+#: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
 #: ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:343
 msgid "Artist"
 msgstr "Atlikėjas"
 
@@ -884,7 +884,7 @@ msgstr "Atlikėjas"
 msgid "Artist info"
 msgstr "Atlikėjo info"
 
-#: ui/organisedialog.cpp:65
+#: widgets/filenameformatwidget.cpp:50
 msgid "Artist's initial"
 msgstr "Atlikėjo inicialai"
 
@@ -894,7 +894,7 @@ msgstr "K&lausti įrašant"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:371
-#: ../bin/src/ui_ripcddialog.h:352
+#: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Garso formatas"
 
@@ -954,7 +954,7 @@ msgstr "Vidutinis paveikslo dydis"
 msgid "BBC Podcasts"
 msgstr "BBC tinklalaidės"
 
-#: playlist/playlist.cpp:1421 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1421 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "BPM"
@@ -1029,7 +1029,7 @@ msgstr "Bitų greitis"
 msgid "Bitrate"
 msgstr "Bitų dažnis"
 
-#: ui/organisedialog.cpp:79
+#: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Pralaidumas"
@@ -1088,7 +1088,7 @@ msgstr "Mygtukai"
 msgid "CBC Podcasts"
 msgstr "CBC tinklalaidės"
 
-#: ../bin/src/ui_ripcddialog.h:330
+#: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
 msgstr ""
 
@@ -1351,7 +1351,7 @@ msgid "Command"
 msgstr "Komanda"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
-#: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
+#: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Komentaras"
 
@@ -1364,7 +1364,7 @@ msgid "Complete tags automatically..."
 msgstr "Pabaigti žymes automatiškai..."
 
 #: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1403
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:131
+#: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Kompozitorius"
@@ -1721,7 +1721,7 @@ msgstr "Ištrinti išmanųjį grojaraštį"
 msgid "Delete the currently playing song"
 msgstr "Ištrinti šiuo metu grojamą dainą"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
 msgstr "Ištrinti originalius failus"
 
@@ -1741,8 +1741,8 @@ msgstr "Iš eilės pažymėtus takelius"
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
-#: ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Kopijuoti į aplanką"
 
@@ -1774,7 +1774,7 @@ msgstr "Įrenginio savybės..."
 msgid "Devices"
 msgstr "Įrenginiai"
 
-#: ../bin/src/ui_ripcddialog.h:328
+#: ../bin/src/ui_ripcddialog.h:324
 msgid "Dialog"
 msgstr "Dialogas"
 
@@ -1822,9 +1822,9 @@ msgid "Disabled"
 msgstr "Išjungta"
 
 #: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:139
+#: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:343
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:341
 msgid "Disc"
 msgstr "Diskas"
 
@@ -2011,7 +2011,7 @@ msgstr ""
 msgid "Dump To Logs"
 msgstr "Iškloti į žurnalus"
 
-#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:341
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "Trukmė"
 
@@ -2171,7 +2171,7 @@ msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
 #: library/libraryview.cpp:671 ui/mainwindow.cpp:2501 ui/mainwindow.cpp:2679
-#: ripper/ripcddialog.cpp:289
+#: ripper/ripcddialog.cpp:323
 msgid "Error"
 msgstr "Klaida"
 
@@ -2317,7 +2317,7 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ripper/ripcddialog.cpp:290
+#: ripper/ripcddialog.cpp:324
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
@@ -2407,11 +2407,7 @@ msgstr "Viršelio atsiuntimo klaida"
 msgid "Fetching playlist items"
 msgstr "Gaunami grojaraščio elementai"
 
-#: ../bin/src/ui_ripcddialog.h:349
-msgid "File Format"
-msgstr "Failo Formatas"
-
-#: ui/organisedialog.cpp:81
+#: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
 msgstr "Failo plėtinys"
 
@@ -2444,6 +2440,10 @@ msgstr "Failo tipas"
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Failopavadinimas"
+
+#: ../bin/src/ui_ripcddialog.h:339
+msgid "Filename Preview"
+msgstr ""
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2577,9 +2577,9 @@ msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
 #: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1399
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:133
+#: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_ripcddialog.h:346
+#: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Žanras"
 
@@ -2676,7 +2676,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Grupuoti pagal Žanrą/Atlikėją/Albumą"
 
 #: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1407
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:141
+#: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Grupavimas"
@@ -2780,7 +2780,7 @@ msgstr "Jei tęsite, šis įrenginys dirbs lėtai ir nukopijuotos dainos gali ne
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Jei žinote tinklalaidės URL, įveskite jį ir spauskite „Eiti“."
 
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
 msgstr "Nepaisyti \"The\" atlikėjų varduose"
 
@@ -2857,11 +2857,11 @@ msgstr "Indeksuojama %1"
 msgid "Information"
 msgstr "Informacija"
 
-#: ../bin/src/ui_ripcddialog.h:329
+#: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
 msgstr "Įvesties parinktys"
 
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Įterpti..."
 
@@ -2894,7 +2894,7 @@ msgstr "Netinkamas API raktas"
 msgid "Invalid URL"
 msgstr "Netinkamas URL"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:275 ripper/ripcddialog.cpp:417
 msgid "Invalid format"
 msgstr "Netinkamas formatas"
 
@@ -2918,7 +2918,7 @@ msgstr "Netinkama paslauga"
 msgid "Invalid session key"
 msgstr "Netinkamas sesijos raktas"
 
-#: ../bin/src/ui_ripcddialog.h:333
+#: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Invertuoti Pasirinkimą"
 
@@ -2970,7 +2970,7 @@ msgstr "Laikyti mygtukus %1 sekundžių..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Veikti fone kai langas užveriamas"
 
-#: ../bin/src/ui_organisedialog.h:244
+#: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
 msgstr "Palikti originialius failus"
 
@@ -3052,7 +3052,7 @@ msgstr "Mažiausiai populiarūs takeliai"
 msgid "Left"
 msgstr "Kairė"
 
-#: playlist/playlist.cpp:1388 ui/organisedialog.cpp:78
+#: playlist/playlist.cpp:1388 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Trukmė"
@@ -3143,7 +3143,7 @@ msgstr "Įkeliama kūrinio informacija"
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:179
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:188
 msgid "Loading..."
 msgstr "Įkeliama..."
 
@@ -3197,7 +3197,8 @@ msgstr "Žema (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Žemo sudėtingumo profilis (LC)"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_songinfosettingspage.h:158
+#: widgets/filenameformatwidget.cpp:55
+#: ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Dainų žodžiai"
 
@@ -3286,7 +3287,8 @@ msgstr "Rankiniu būdu"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: internet/podcasts/podcastservice.cpp:468 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:468
+#: ../bin/src/ui_filenameformatwidget.h:129
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
@@ -3426,7 +3428,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: ../bin/src/ui_organisedialog.h:248
+#: ../bin/src/ui_filenameformatwidget.h:118
 msgid "Naming options"
 msgstr "Pavadinimų parinktys"
 
@@ -3747,7 +3749,7 @@ msgstr "Optimizuoti kokybei"
 
 #: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_ripcddialog.h:351
+#: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Parinktys..."
 
@@ -3755,7 +3757,7 @@ msgstr "Parinktys..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
 msgstr "Tvarkyti failus"
 
@@ -3771,7 +3773,7 @@ msgstr "Tvarkomi failai"
 msgid "Original tags"
 msgstr "Originalios žymės"
 
-#: library/savedgroupingmanager.cpp:102 ui/organisedialog.cpp:75
+#: library/savedgroupingmanager.cpp:102 widgets/filenameformatwidget.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3802,7 +3804,7 @@ msgstr "Išvestis"
 msgid "Output device"
 msgstr "Išvesties įrenginys"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:347
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Išvesties parinktys"
 
@@ -3810,7 +3812,7 @@ msgstr "Išvesties parinktys"
 msgid "Overwrite all"
 msgstr "Perrašyti viską"
 
-#: ../bin/src/ui_organisedialog.h:258
+#: ../bin/src/ui_filenameformatwidget.h:128
 msgid "Overwrite existing files"
 msgstr "Perrašyti egzistuojančius failus"
 
@@ -3857,7 +3859,7 @@ msgid "Paused"
 msgstr "Pristabdyta"
 
 #: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1405
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:140
+#: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
@@ -4057,7 +4059,7 @@ msgstr "Gražaus OSD parinktys"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
-#: ../bin/src/ui_organisedialog.h:260
+#: ../bin/src/ui_organisedialog.h:187
 msgid "Preview"
 msgstr "Peržiūra"
 
@@ -4078,7 +4080,7 @@ msgstr "Išvesti versijos informaciją"
 msgid "Profile"
 msgstr "Profilis"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:353
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Progresas"
 
@@ -4328,7 +4330,7 @@ msgstr "Pakeisti esamą griojaraštį"
 msgid "Replace the playlist"
 msgstr "Pakeisti grojaraštį"
 
-#: ../bin/src/ui_organisedialog.h:256
+#: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
 msgstr "Pakeisti tarpus pabraukimo simboliais"
 
@@ -4369,7 +4371,7 @@ msgstr "Paleisti takelį, arba groti ankstesnį per 8 sekundes po paleidimo."
 msgid "Restore Default Server"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:257
+#: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
 msgstr "Naudoti tik SCII simbolius"
 
@@ -4385,11 +4387,11 @@ msgstr "Grįžti į Clementine"
 msgid "Right"
 msgstr "Dešinė"
 
-#: ../bin/src/ui_ripcddialog.h:335
+#: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
 msgstr "Perrašyti"
 
-#: ripper/ripcddialog.cpp:103
+#: ripper/ripcddialog.cpp:115
 msgid "Rip CD"
 msgstr "Perrašyti CD"
 
@@ -4431,7 +4433,7 @@ msgstr "SSL komunikacijos klaida, patikrinkite serverio konfigūraciją. SSLv3 p
 msgid "Safely remove device"
 msgstr "Saugiai pašalinti įrenginį"
 
-#: ../bin/src/ui_organisedialog.h:247
+#: ../bin/src/ui_organisedialog.h:186
 msgid "Safely remove the device after copying"
 msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 
@@ -4441,7 +4443,7 @@ msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 msgid "Sample rate"
 msgstr "Išrankos dažnis"
 
-#: ui/organisedialog.cpp:80
+#: widgets/filenameformatwidget.cpp:65
 msgid "Samplerate"
 msgstr "Išrankosdažnis"
 
@@ -4640,11 +4642,11 @@ msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Persukimas, naudojant klaviatūros sparčiuosius klavišus ar pelės ratuką"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:331
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
 msgstr "Pažymėti visus"
 
-#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:332
+#: visualisations/visualisationselector.cpp:39 ../bin/src/ui_ripcddialog.h:328
 msgid "Select None"
 msgstr "N"
 
@@ -5049,7 +5051,7 @@ msgstr "Su žvaigždute"
 msgid "Starred Albums"
 msgstr "Albumai su žvaigždute"
 
-#: ripper/ripcddialog.cpp:79
+#: ripper/ripcddialog.cpp:85
 msgid "Start ripping"
 msgstr "Pradėti perrašymą"
 
@@ -5395,9 +5397,9 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 msgid "Time step"
 msgstr "Žingsnio trukmė"
 
-#: playlist/playlist.cpp:1382 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1382 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:141 ../bin/src/ui_edittagdialog.h:720
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:339
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
 msgstr "Pavadinimas"
 
@@ -5457,8 +5459,8 @@ msgstr "Viso tinklo užklausų padaryta"
 msgid "Trac&k"
 msgstr "Ta&kelis"
 
-#: playlist/playlist.cpp:1390 ui/organisedialog.cpp:71
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:337
+#: playlist/playlist.cpp:1390 widgets/filenameformatwidget.cpp:56
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Takelis"
 
@@ -5936,9 +5938,9 @@ msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:134
+#: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:342
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
 msgid "Year"
 msgstr "Metai"
 
