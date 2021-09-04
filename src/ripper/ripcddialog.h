@@ -60,12 +60,14 @@ class RipCDDialog : public QDialog {
   void Cancelled(Ripper* ripper);
   void SetupProgressBarLimits(int min, int max);
   void UpdateProgressBar(int progress);
-  void UpdateTrackList(const SongList& songs);
-  // Update album information with metadata.
-  void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
+  void SongsLoaded(const SongList& songs);
   void DiscChanged();
   void FormatStringUpdated();
   void UpdateFileNamePreviews();
+  void DiscEditChanged(const QString& disc_string);
+  void YearEditChanged(const QString& year_string);
+  void UpdateMetadataEdits();
+  void UpdateMetadataFromGUI();
 
  private:
   static const char* kSettingsGroup;
