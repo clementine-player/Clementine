@@ -141,7 +141,18 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
   }
 
   connect(ui_->format, SIGNAL(currentIndexChanged(int)),
-          SLOT(UpdateFileNamePreviews));
+          SLOT(UpdateFileNamePreviews()));
+
+  connect(ui_->artistLineEdit, SIGNAL(textEdited(const QString&)),
+          SLOT(UpdateMetadataFromGUI()));
+  connect(ui_->albumLineEdit, SIGNAL(textEdited(const QString&)),
+          SLOT(UpdateMetadataFromGUI()));
+  connect(ui_->genreLineEdit, SIGNAL(textEdited(const QString&)),
+          SLOT(UpdateMetadataFromGUI()));
+  connect(ui_->yearLineEdit, SIGNAL(textEdited(const QString&)),
+          SLOT(YearEditChanged(const QString&)));
+  connect(ui_->discLineEdit, SIGNAL(textEdited(const QString&)),
+          SLOT(DiscEditChanged(const QString&)));
 }
 
 RipCDDialog::~RipCDDialog() {}
@@ -333,11 +344,9 @@ void RipCDDialog::DeviceSelected(int device_index) {
   Q_ASSERT(loader_);
 
   connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
-          SLOT(UpdateTrackList(SongList)));
+          SLOT(SongsLoaded(SongList)));
   connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(UpdateTrackList(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-          SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
+          SLOT(SongsLoaded(SongList)));
 
   // load songs from new SongLoader
   loader_->LoadSongs();
@@ -361,10 +370,11 @@ void RipCDDialog::UpdateProgressBar(int progress) {
   ui_->progress_bar->setValue(progress);
 }
 
-void RipCDDialog::UpdateTrackList(const SongList& songs) {
+void RipCDDialog::SongsLoaded(const SongList& songs) {
   if (songs_.isEmpty() || songs_.length() == songs.length()) {
     songs_ = songs;
     UpdateTrackListTable();
+    UpdateMetadataEdits();
   } else {
     qLog(Error) << "Number of tracks in metadata does not match number of "
                    "songs on disc!";
@@ -419,10 +429,10 @@ void RipCDDialog::UpdateFileNamePreviews() {
   }
 }
 
-void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
-  Q_ASSERT(songs.length() > 0);
+void RipCDDialog::UpdateMetadataEdits() {
+  if (songs_.length() <= 0) return;
 
-  const Song& song = songs.first();
+  const Song& song = songs_.first();
   ui_->albumLineEdit->setText(song.album());
   ui_->artistLineEdit->setText(song.artist());
   ui_->yearLineEdit->setText(QString::number(song.year()));
@@ -456,6 +466,72 @@ void RipCDDialog::FormatStringUpdated() {
 }
 
 void RipCDDialog::EnableIfPossible() {
+  bool disc_ok;
+  ui_->discLineEdit->text().toInt(&disc_ok);
+  disc_ok |= ui_->discLineEdit->text().isEmpty();
+
+  bool year_ok;
+  ui_->yearLineEdit->text().toInt(&year_ok);
+  year_ok |= ui_->yearLineEdit->text().isEmpty();
+
   rip_button_->setEnabled(!songs_.isEmpty() &&
-                          ui_->naming_group->format().IsValid());
+                          ui_->naming_group->format().IsValid() && disc_ok &&
+                          year_ok);
+}
+
+void RipCDDialog::DiscEditChanged(const QString& disc_string) {
+  bool disc_ok = false;
+  disc_string.toInt(&disc_ok);
+
+  bool is_valid = disc_string.isEmpty() || disc_ok;
+
+  QString style;
+  if (!is_valid) {
+    style = "color: red;";
+  } else {
+    UpdateMetadataFromGUI();
+  }
+  ui_->discLineEdit->setStyleSheet(style);
+  EnableIfPossible();
+}
+
+void RipCDDialog::YearEditChanged(const QString& year_string) {
+  bool year_ok = false;
+  year_string.toInt(&year_ok);
+
+  bool is_valid = year_string.isEmpty() || year_ok;
+
+  QString style;
+  if (!is_valid) {
+    style = "color: red;";
+  } else {
+    UpdateMetadataFromGUI();
+  }
+  ui_->yearLineEdit->setStyleSheet(style);
+  EnableIfPossible();
+}
+
+void RipCDDialog::UpdateMetadataFromGUI() {
+  QString artist = ui_->artistLineEdit->text();
+  QString album = ui_->albumLineEdit->text();
+  QString genre = ui_->genreLineEdit->text();
+  bool disc_ok = false;
+  int disc = ui_->discLineEdit->text().toInt(&disc_ok);
+  bool year_ok = false;
+  int year = ui_->yearLineEdit->text().toInt(&year_ok);
+
+  for (Song& song : songs_) {
+    song.set_artist(artist);
+    song.set_album(album);
+    song.set_genre(genre);
+    if (disc_ok)
+      song.set_disc(disc);
+    else
+      song.set_disc(-1);
+    if (year_ok)
+      song.set_year(year);
+    else
+      song.set_year(-1);
+  }
+  UpdateFileNamePreviews();
 }
