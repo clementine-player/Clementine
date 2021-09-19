@@ -16,10 +16,10 @@ jobs:
         run: >
           apt-get update && apt-get install -y
           git
-          python-pip
+          python3-pip
           ssh
       - name: Install tx
-        run: pip install transifex-client==0.13.9
+        run: pip3 install transifex-client==0.13.9
       - name: Checkout
         uses: actions/checkout@v1.2.0
       - name: Switch to master
