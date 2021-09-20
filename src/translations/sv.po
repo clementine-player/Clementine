@@ -32,7 +32,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 20:53+0000\n"
+"PO-Revision-Date: 2021-09-19 09:17+0000\n"
 "Last-Translator: Jonatan Nyberg <jonatan@autistici.org>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +121,7 @@ msgstr "%1 dagar sedan"
 msgid ""
 "%1 failed to decode as gzip stream:\n"
 "%2"
-msgstr "%1 misslyckades med att avkoda som gzip-ström:\n%2"
+msgstr "%1 misslyckades med att avkoda som gzip-flöde:\n%2"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -185,7 +185,7 @@ msgstr "%L1 andra lyssnare"
 #: playlist/playlistmanager.cpp:440
 #, qt-format
 msgid "%L1 selected of"
-msgstr "%L1 vald(a) av"
+msgstr "%L1 valda av"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -270,7 +270,7 @@ msgstr "&Musik"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:187
 msgid "&None"
-msgstr "I&nga"
+msgstr "I&ngen"
 
 #: ../bin/src/ui_mainwindow.h:794
 msgid "&Playlist"
@@ -527,7 +527,7 @@ msgstr "Lägg till poddsändning"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
-msgstr "Lägg till ström"
+msgstr "Lägg till flöde"
 
 #: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Add a new line if supported by the notification type"
@@ -543,7 +543,7 @@ msgstr "Lägg till alla låtar från en mapp och alla dess undermappar"
 
 #: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
-msgstr "Lägg till en annan ström..."
+msgstr "Lägg till ett annat flöde..."
 
 #: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
@@ -664,7 +664,7 @@ msgstr "Lägg till tagg för år"
 
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
-msgstr "Lägg till ström..."
+msgstr "Lägg till flöde..."
 
 #: internet/spotify/spotifyservice.cpp:625
 msgid "Add to Spotify playlists"
@@ -689,7 +689,7 @@ msgstr "Lägga till i kön"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:309
 msgid "Add to your radio streams"
-msgstr "Lägg till i dina radioströmmar"
+msgstr "Lägg till i dina radioflöden"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -981,7 +981,7 @@ msgstr "Slag/minut"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:55
 msgid "Background Streams"
-msgstr "Bakgrundsströmmar"
+msgstr "Bakgrundsflöden"
 
 #: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background color"
@@ -1517,7 +1517,7 @@ msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har all
 #: songinfo/streamdiscoverer.cpp:98
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr "Kunde inte upptäcka en ljudström i %1"
+msgstr "Kunde inte upptäcka ett ljudflöde i %1"
 
 #: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
@@ -2159,7 +2159,7 @@ msgstr "Ange söktermer här"
 
 #: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Ange webbadressen till en internetradioström:"
+msgstr "Ange webbadressen till ett internetradioflöde:"
 
 #: playlist/playlistlistcontainer.cpp:263
 msgid "Enter the name of the folder"
@@ -2627,7 +2627,7 @@ msgstr "Får station"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
-msgstr "Hämtar strömmar"
+msgstr "Hämtar flöden"
 
 #: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
@@ -3150,7 +3150,7 @@ msgstr "Läser in låtar"
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
-msgstr "Läser in ström"
+msgstr "Läser in flöde"
 
 #: playlist/songloaderinserter.cpp:137 ui/edittagdialog.cpp:252
 msgid "Loading tracks"
@@ -3563,7 +3563,7 @@ msgstr "Inga korta block"
 #: library/savedgroupingmanager.cpp:60 ../bin/src/ui_groupbydialog.h:127
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:165
 msgid "None"
-msgstr "Inga"
+msgstr "Ingen"
 
 #: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
@@ -4251,7 +4251,7 @@ msgstr "Uppdatera kanallistan"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
-msgstr "Uppdatera strömmar"
+msgstr "Uppdatera flöden"
 
 #: ui/equalizer.cpp:147
 msgid "Reggae"
@@ -4515,7 +4515,7 @@ msgstr "Spara statistik i filtaggar om möjligt"
 
 #: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
-msgstr "Spara den här strömmen i fliken Internet"
+msgstr "Spara det här flödet i fliken Internet"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
@@ -5146,21 +5146,21 @@ msgstr "Stoppad"
 
 #: core/song.cpp:462
 msgid "Stream"
-msgstr "Ström"
+msgstr "Flöde"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr "Strömdetaljer"
+msgstr "Flödesdetaljer"
 
 #: internet/subsonic/subsonicsettingspage.cpp:52
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr "För att strömma från en Subsonic-server krävs en giltig serverlicens efter en 30 dagars provperiod."
+msgstr "För att flöda från en Subsonic-server krävs en giltig serverlicens efter en 30 dagars provperiod."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
-msgstr "Strömningsmedlemskap"
+msgstr "Flödesmedlemskap"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Subscribers"
@@ -5406,7 +5406,7 @@ msgstr "Detta alternativ kan ändras i inställningarna för \"Beteende\""
 
 #: internet/lastfm/lastfmservice.cpp:289
 msgid "This stream is for paid subscribers only"
-msgstr "Den här strömmen är endast för betalande prenumeranter"
+msgstr "Det här flödet är endast för betalande prenumeranter"
 
 #: devices/devicemanager.cpp:563
 #, qt-format
@@ -5784,7 +5784,7 @@ msgstr "Visa"
 
 #: ../bin/src/ui_mainwindow.h:780
 msgid "View Stream Details"
-msgstr "Visa strömdetaljer"
+msgstr "Visa flödesdetaljer"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
@@ -5829,7 +5829,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr "Varning: Denna komprimeringsnivå ligger utanför den strömningsbara delmängden. Detta innebär att en avkodare kanske inte kan börja spela den i mitten av strömmen. Det kan också påverka prestanda för hårdvaruavkodare."
+msgstr "Varning: Denna komprimeringsnivå ligger utanför den flödesbara delmängden. Detta innebär att en avkodare kanske inte kan börja spela den i mitten av flödet. Det kan också påverka prestanda för hårdvaruavkodare."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
@@ -6030,7 +6030,7 @@ msgstr "Du kan lyssna på Magnatune-låtar gratis utan ett konto. Köp av ett me
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Du kan lyssna på bakgrundsströmmar samtidigt som du lyssnar på annan musik."
+msgstr "Du kan lyssna på bakgrundsflöden samtidigt som du lyssnar på annan musik."
 
 #: ../bin/src/ui_wiimotesettingspage.h:174
 msgid ""
@@ -6087,7 +6087,7 @@ msgstr "Ditt bibliotek är tomt!"
 #: globalsearch/savedradiosearchprovider.cpp:27
 #: internet/internetradio/savedradio.cpp:52
 msgid "Your radio streams"
-msgstr "Dina radioströmmar"
+msgstr "Dina radioflöden"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:89
 #, qt-format
