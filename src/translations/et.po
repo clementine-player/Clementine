@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-09-01 19:34+0000\n"
+"PO-Revision-Date: 2021-09-22 09:07+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1126,7 +1126,7 @@ msgstr "Muuda segamise viisi"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
-msgstr "Muuda hetkel esitatavat lugu"
+msgstr "Vaheta hetkel esitatavat lugu"
 
 #: core/commandlineoptions.cpp:186
 msgid "Change the language"
@@ -1140,7 +1140,7 @@ msgstr "Muutused jõustuvad kui järgmise loo esitamine algab"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr "Mono taasesituse seadistuse muutmine jõustub alates järgmisest mängitavast loost"
+msgstr "Mono taasesituse seadistuse muutmine jõustub alates järgmisest esitatavast loost"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1235,7 +1235,7 @@ msgstr "Clementine visualiseeringud"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Clementine võib automaatselt teisendada kopeeritava muusika vormingu selliseks, mida see seade suudab mängida."
+msgstr "Clementine võib automaatselt teisendada kopeeritava muusika vormingu selliseks, mida see seade suudab esitada."
 
 #: ../bin/src/ui_boxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Box"
@@ -1268,7 +1268,7 @@ msgstr "Clementine võib sünkroniseerida sinu tellimuste loendit sinu teiste ar
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Clementine ei suutnud laadida mitte ühtegi projectM visualiseerimist. Palun kontrolli et oleksid Clementine paigaldanud korrektselt."
+msgstr "Clementine ei suutnud laadida mitte ühtegi projectM visualiseerimist. Palun kontrolli et oleksid Clementine'i paigaldanud korrektselt."
 
 #: widgets/prettyimage.cpp:196
 msgid "Clementine image viewer"
@@ -1453,7 +1453,7 @@ msgstr "Konverteeri kõik failid"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Convert any music that the device can't play"
-msgstr "Konverteeri kõik muusika, mida see seade ei suuda mängida"
+msgstr "Konverteeri kõik muusika, mida see seade ei suuda esitada"
 
 #: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
@@ -1549,12 +1549,12 @@ msgstr "Kaanepildi haldur"
 
 #: ui/edittagdialog.cpp:487
 msgid "Cover art from embedded image"
-msgstr "Kaanepilt laetud põimitud pildist"
+msgstr "Kaanepilt põimitud pildi alusel"
 
 #: ui/edittagdialog.cpp:489
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr "Kaanepilt automaatselt laetud %1'st"
+msgstr "Kaanepilt on automaatselt laaditud asukohast %1"
 
 #: ui/edittagdialog.cpp:481
 msgid "Cover art manually unset"
@@ -1689,7 +1689,7 @@ msgstr "Kustuta"
 
 #: internet/podcasts/podcastservice.cpp:454
 msgid "Delete downloaded data"
-msgstr "Kustuta allalaetud andmed"
+msgstr "Kustuta allalaaditud andmed"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
 #: ui/mainwindow.cpp:2548 widgets/fileview.cpp:189
@@ -2213,7 +2213,7 @@ msgstr "Viga audio CD laadimisel"
 
 #: library/library.cpp:70
 msgid "Ever played"
-msgstr "Kunagi mänginud"
+msgstr "Läbi aegade esitatud"
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Every 10 minutes"
@@ -2388,7 +2388,7 @@ msgstr "Tõmba puuduvad kaanepildid"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
-msgstr "Lae võrgust automaatselt"
+msgstr "Laadi võrgust automaatselt"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:74
 msgid "Fetch completed"
@@ -2396,7 +2396,7 @@ msgstr "Võrgust laadimine on valmis"
 
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
-msgstr "Laen alla Subsonic'u  kataloogi."
+msgstr "Laadin alla Subsonic'u kataloogi"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:83
 msgid "Fetching cover error"
@@ -2405,7 +2405,7 @@ msgstr "Viga kaanepildi laadimisel"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr "Laen esitusloendi kirjeid"
+msgstr "Laadin esitusloendi kirjeid"
 
 #: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
@@ -3001,11 +3001,11 @@ msgstr "Albumi suur kaanepilt"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr "Lae albumi kaanepilti (lisateabega)"
+msgstr "Albumi suur kaanepilt (lisateabega)"
 
 #: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (no details)"
-msgstr "Lae albumi kaanepilti (ilma lisateabeta)"
+msgstr "Albumi suur kaanepilt (ilma lisateabeta)"
 
 #: widgets/fancytabwidget.cpp:430
 msgid "Large sidebar"
@@ -3088,11 +3088,11 @@ msgstr "Laadi"
 
 #: ../bin/src/ui_coverfromurldialog.h:101
 msgid "Load cover from URL"
-msgstr "Laadi kaanepilt URL-ilt"
+msgstr "Laadi kaanepilt võrguaadressilt"
 
 #: ui/albumcoverchoicecontroller.cpp:71
 msgid "Load cover from URL..."
-msgstr "Laadi kaanepilt URL-ilt.."
+msgstr "Laadi kaanepilt võrguaadressilt..."
 
 #: ui/albumcoverchoicecontroller.cpp:111
 msgid "Load cover from disk"
@@ -3243,11 +3243,11 @@ msgstr "Magnatune"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:127
 msgid "Magnatune Download"
-msgstr "Magnatune allalaadimine"
+msgstr "Allalaadimine Magnatune'st"
 
 #: widgets/osd.cpp:198
 msgid "Magnatune download finished"
-msgstr "Magnatune alla laaditud"
+msgstr "Meedia on Magnatune'st alla laaditud"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:133
 msgid "Main profile (MAIN)"
@@ -3377,7 +3377,7 @@ msgstr "Meeleoluribad"
 
 #: library/library.cpp:88
 msgid "Most played"
-msgstr "Enim mängitud"
+msgstr "Enim esitatud"
 
 #: devices/giolister.cpp:181
 msgid "Mount point"
@@ -3559,7 +3559,7 @@ msgstr "Tavaline blokitüüp"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr "Tavaline kestus (vähemalt 4 minutit või pool loo pikkusest)"
+msgstr "Tavalist kestust (vähemalt 4 minutit või pool loo pikkusest)"
 
 #: playlist/playlistsequence.cpp:204
 msgid "Not available while using a dynamic playlist"
@@ -3592,7 +3592,7 @@ msgstr "Paigaldamata"
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
-msgstr "Pole sisse logitud"
+msgstr "Sa pole sisse loginud"
 
 #: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
@@ -3608,7 +3608,7 @@ msgstr "Teavitused"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
-msgstr "Hetkel mängib"
+msgstr "Hetkel on esitamisel"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
 msgid "Number of episodes to show"
@@ -3886,7 +3886,7 @@ msgstr "Täielik külgriba"
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Play"
-msgstr "Mängi"
+msgstr "Esita"
 
 #: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
@@ -3898,7 +3898,7 @@ msgstr "Esita antud loendit"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
-msgstr "Mängi, kui on peatatud, paus, kui mängitakse"
+msgstr "Esita, kui on peatatud, pane pausile, kui esitamisel"
 
 #: ../bin/src/ui_behavioursettingspage.h:383
 #: ../bin/src/ui_behavioursettingspage.h:403
@@ -4051,7 +4051,7 @@ msgstr "Vajuta klahvikombinatsiooni %1 kasutamiseks..."
 
 #: ../bin/src/ui_behavioursettingspage.h:386
 msgid "Pressing \"Previous\" in player will..."
-msgstr "Muusikamängijas \"Eelmise loo\" nupu vajutamisel..."
+msgstr "Meediamängijas „Eelmise loo“ nupu vajutamisel..."
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Pretty OSD options"
@@ -4365,7 +4365,7 @@ msgstr "Alusta sama loo esitamist ja uuel vajutusel hüppa eelmise loo juurde"
 #: core/commandlineoptions.cpp:176
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr "Alusta loo mängimist uuesti või alusta eelmise loo mängimist, kui algusest on möödunud kuni 8 sekundit."
+msgstr "Alusta loo esitamist uuesti või alusta eelmise loo esitamist, kui algusest on möödunud kuni 8 sekundit."
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
@@ -4732,7 +4732,7 @@ msgstr "Sätted"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr "Lühike kestus (vähemalt 1 minut või pool loo pikkusest)"
+msgstr "Lühikest kestust (vähemalt 1 minut või pool loo pikkusest)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgid "Shortcut"
@@ -4759,7 +4759,7 @@ msgstr "Näita ekraanimenüüd"
 
 #: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
-msgstr "Näita hetkel mängiva pala kohal helendavat kuma"
+msgstr "Näita hetkel esitatava pala kohal helendavat kuma"
 
 #: ../bin/src/ui_appearancesettingspage.h:319
 msgid "Show a moodbar in the track progress bar"
