@@ -40,15 +40,15 @@ const char kWavFileTypeFormatChunk[] = "WAVEfmt ";
 const char kWavDataString[] = "data";
 }  // namespace
 
-Ripper::Ripper(CdIo_t* cdio, QObject* parent)
+Ripper::Ripper(int track_count, QObject* parent)
     : QObject(parent),
-      cdio_(cdio),
+      track_count_(track_count),
       transcoder_(new Transcoder(this)),
       cancel_requested_(false),
       finished_success_(0),
       finished_failed_(0),
       files_tagged_(0) {
-  Q_ASSERT(cdio_);  // TODO: error handling
+  Q_ASSERT(track_count >= 0);
 
   transcoder_->set_max_threads(1);  // we want transcoder to read only one song
                                     // at once from disc to prevent seeking
@@ -84,12 +84,7 @@ void Ripper::SetAlbumInformation(const QString& album, const QString& artist,
   album_.type = type;
 }
 
-int Ripper::TracksOnDisc() const {
-  int number_of_tracks = cdio_get_num_tracks(cdio_);
-  // Return zero tracks if there is an error, e.g. no medium found.
-  if (number_of_tracks == CDIO_INVALID_TRACK) number_of_tracks = 0;
-  return number_of_tracks;
-}
+int Ripper::TracksOnDisc() const { return track_count_; }
 
 int Ripper::AddedTracks() const { return tracks_.length(); }
 

@@ -40,7 +40,7 @@ class Ripper : public QObject {
   Q_OBJECT
 
  public:
-  explicit Ripper(CdIo_t* cdio, QObject* parent = nullptr);
+  explicit Ripper(int track_count, QObject* parent = nullptr);
   ~Ripper();
 
   // Adds a track to the rip list if the track number corresponds to a
@@ -113,7 +113,7 @@ class Ripper : public QObject {
   void UpdateProgress();
   void TagFiles();
 
-  CdIo_t* cdio_;
+  int track_count_;
   Transcoder* transcoder_;
   bool cancel_requested_;
   QMutex mutex_;

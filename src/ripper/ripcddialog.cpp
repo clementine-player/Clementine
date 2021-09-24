@@ -210,7 +210,7 @@ void RipCDDialog::ClickedRipButton() {
       ui_->destination->itemData(ui_->destination->currentIndex()).toString());
 
   // create and connect Ripper instance for this task
-  Ripper* ripper = new Ripper(cdda_device_->raw_cdio(), this);
+  Ripper* ripper = new Ripper(cdda_device_->song_count(), this);
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
 
   connect(ripper, &Ripper::Finished, this,
