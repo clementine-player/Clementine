@@ -49,8 +49,6 @@ class CddaDevice : public ConnectedDevice {
     return false;
   }
   CddaSongLoader* loader();
-  // Access to the raw cdio device handle.
-  CdIo_t* raw_cdio();  // TODO: not ideal, but Ripper needs this currently
   // Check whether a valid device handle was opened.
   bool IsValid() const;
   void WatchForDiscChanges(bool watch);

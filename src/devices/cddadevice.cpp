@@ -60,8 +60,6 @@ bool CddaDevice::Init() {
 
 CddaSongLoader* CddaDevice::loader() { return &cdda_song_loader_; }
 
-CdIo_t* CddaDevice::raw_cdio() { return cdio_; }
-
 bool CddaDevice::IsValid() const { return (cdio_ != nullptr); }
 
 void CddaDevice::WatchForDiscChanges(bool watch) {
