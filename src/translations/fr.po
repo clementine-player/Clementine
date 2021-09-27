@@ -54,8 +54,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-09-26 09:59+0000\n"
+"Last-Translator: jipux\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,7 +143,7 @@ msgstr "Il y a %1 jours"
 msgid ""
 "%1 failed to decode as gzip stream:\n"
 "%2"
-msgstr ""
+msgstr "Échec de décodage du flux %1 en mode GZIP :\n%2"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -1985,11 +1985,11 @@ msgstr "Télécharger paramètres"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Télécharger l'application Android originale :"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Télécharger l'application à distance pour ordinateur, Android ou iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
@@ -2131,7 +2131,7 @@ msgstr "Activer/désactiver le scrobbling Last.fm"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:127
 msgid "Encoder"
-msgstr ""
+msgstr "Décodeur"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
@@ -2485,7 +2485,7 @@ msgstr "Nom du fichier"
 
 #: ../bin/src/ui_ripcddialog.h:339
 msgid "Filename Preview"
-msgstr ""
+msgstr "Pré-visualisation du nom du fichier"
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2645,7 +2645,7 @@ msgstr "Récupération des canaux"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:418
 msgid "Getting station"
-msgstr ""
+msgstr "Atteindre la station"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -3453,7 +3453,7 @@ msgstr "Bibliothèque musicale"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Formats musicaux visibles à distance"
 
 #: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:768
@@ -3576,7 +3576,7 @@ msgstr "Pas de réglage disponible pour ce type"
 msgid ""
 "No settings page available for encoder element <b>%1</b>. Please report this"
 " issue:<br><a href=\"%2\">%2</a>"
-msgstr ""
+msgstr "Aucune paraméage disponible pour cet élément d'encodage <b>%1</b>. Merci de rapporter ce problème :<br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -4545,7 +4545,7 @@ msgstr "Gestionnaire des regroupements enregistrés"
 
 #: playlistparsers/cueparser.cpp:355
 msgid "Saving cue files is not yet supported."
-msgstr ""
+msgstr "L'enregisrtemint des fichiers CUE n'est pas encore supporté."
 
 #: library/library.cpp:202
 msgid "Saving songs statistics into songs files"
@@ -4966,7 +4966,7 @@ msgstr "Compteur de morceaux sautés"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Ignorer les fichiers avec ces extensions (séparation par une virgule, non sensible à la casse)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5554,7 +5554,7 @@ msgstr "Éteindre"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:129
 msgid "Two loop searching method"
-msgstr ""
+msgstr "Méthode de recherche à deux boucles"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5566,7 +5566,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "URL de son Logo :"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5851,7 +5851,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Attention : ce niveau de compression n'est dans dans le spectre diffusable. Il se peut que certains décodeurs ne puissent le lire. Cela peut également dégrader les performances des décodeurs matériels."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
@@ -6174,7 +6174,7 @@ msgstr "bpm"
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr ""
+msgstr "Liste des extensions autorisées, séparées par virgules, qui seront visibles depuis le réseau distant (ex : m3u,mp3,flac,ogg,wav)"
 
 #: smartplaylists/searchterm.cpp:258
 msgid "contains"
@@ -6182,7 +6182,7 @@ msgstr "contient"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "bureau à distance"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6292,7 +6292,7 @@ msgstr "options"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "ou scannez le QR code :"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
