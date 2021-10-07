@@ -294,8 +294,6 @@ class GstEnginePipeline : public GstPipelineBase {
   GstPad* tee_probe_pad_;
   GstPad* tee_audio_pad_;
 
-  uint bus_cb_id_;
-
   QThreadPool set_state_threadpool_;
 
   GstSegment last_decodebin_segment_;

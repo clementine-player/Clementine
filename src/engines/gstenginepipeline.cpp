@@ -499,7 +499,7 @@ bool GstEnginePipeline::InitAudioBin() {
   gst_object_unref(pad);
   GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
   gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
-  bus_cb_id_ = gst_bus_add_watch(bus, BusCallback, this);
+  gst_bus_add_watch(bus, BusCallback, this);
   gst_object_unref(bus);
 
   return true;
@@ -567,10 +567,11 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
     GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+    gst_bus_remove_watch(bus);
+
     gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
     gst_object_unref(bus);
 
-    g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
 
     if (tee_) {
