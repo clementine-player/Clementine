@@ -2,72 +2,72 @@ Source: clementine
 Section: sound
 Priority: optional
 Maintainer: David Sansome <me@davidsansome.com>
-Build-Depends: debhelper (>= 7),
-               make,
-               cmake,
-               gcc,
-               protobuf-compiler,
-               libglib2.0-dev,
-               libdbus-1-dev,
-               libprotobuf-dev,
-               libboost-dev,
-               libsqlite3-dev,
+Build-Depends: cmake (>= 2.6),
+               debhelper-compat (= 13),
                libasound2-dev,
-               libpulse-dev,
-               libtag1-dev,
-               libqt5-dev,
-               qt5-dev-tools,
-               qtbase5-dev,
-               qtbase5-dev-tools,
-               qtbase5-private-dev,
-               libqt5x11extras5-dev,
-               libqt5opengl5-dev,
+               libboost-dev,
+               libboost-serialization-dev,
+               libcdio-dev,
+               libchromaprint-dev,
+               libcrypto++-dev,
+               libfftw3-dev,
+               libglew-dev,
+               libgpod-dev,
                libgstreamer1.0-dev,
                libgstreamer-plugins-base1.0-dev,
-               libcdio-dev,
-               libgpod-dev,
-               libimobiledevice-dev,
-               libmtp-dev,
-               libplist-dev,
-               libusbmuxd-dev,
-               libchromaprint-dev,
                liblastfm5-dev,
-               libcrypto++-dev,
-               libglew-dev,
-               libfftw3-dev,
+               libmtp-dev,
+               libmygpo-qt-dev (>= 1.1.0-1~),
+               libprotobuf-dev,
+               libpulse-dev,
+               libqt5opengl5-dev,
+               libqt5sql5-sqlite,
+               libqt5webkit5-dev,
+               libqt5x11extras5-dev,
                libsparsehash-dev,
-               libmygpo-qt-dev (>= 1.0.7),
-               libprojectm-dev (>= 2.0.1+dfsg-6)
-Standards-Version: 3.9.8
+               libsqlite3-dev,
+               libtag1-dev (>= 1.8),
+               protobuf-compiler,
+               qtbase5-private-dev,
+               qttools5-dev,
+Standards-Version: 4.5.0
 Homepage: http://www.clementine-player.org/
+Vcs-Git: https://salsa.debian.org/thomaspi-guest/pkg-clementine.git
+Vcs-Browser: https://salsa.debian.org/thomaspi-guest/pkg-clementine
 
 Package: clementine
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
-         libsqlite3-0,
          gstreamer1.0-plugins-base,
          gstreamer1.0-plugins-good,
-         gstreamer1.0-plugins-ugly,
-         gstreamer1.0-alsa,
-         gstreamer1.0-pulseaudio,
-         libprojectm-data | projectm-data
-Description: Modern music player and library organiser inspired by Amarok 1.4
- Clementine focuses on a fast and easy-to-use interface for searching and
- playing your music.
+         gstreamer1.0-plugins-ugly
+Recommends: gstreamer1.0-alsa | gstreamer1.0-pulseaudio
+Suggests: gstreamer1.0-plugins-bad
+Description: modern music player and library organizer
+ Clementine is a multiplatform music player focusing on a fast and
+ easy-to-use interface for searching and playing your music.
  .
- Features include:
-   * Search and play your local music library
-   * Listen to internet radio from Last.fm, SomaFM, IntergalacticFM, Magnatune,
-     Jamendo and Icecast
-   * Create smart playlists and dynamic playlists
-   * Tabbed playlists, import and export M3U, XSPF, PLS, ASX and CUE
-   * Visualisations from projectM
-   * Lyrics and artist biographies and photos
-   * Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AAC
-   * Edit tags on MP3 and OGG files, organise your music
-   * Download missing album cover art from Last.fm
-   * Cross-platform - works on Windows, Mac OS X and Linux
-   * Native desktop notifications on Linux (libnotify) and Mac OS X (Growl)
-   * Remote control using a Wii Remote, MPRIS or the command-line
-   * Copy music to your iPod, iPhone, MTP or mass-storage USB player
-   * Queue manager
+ Summary of included features :
+  - Search and play your local music library.
+  - Listen to internet radio from ROCKRADIO.com, RadioTunes.com,
+    IntergalacticFM, SomaFM, Magnatune, Jamendo, Digitally Imported,
+    ClassicalRadio.com, JAZZRADIO.com, Icecast and Subsonic servers.
+  - Search and play songs you've uploaded to SeaFile, Box, Dropbox, Google
+    Drive, and OneDrive.
+  - Create smart playlists and dynamic playlists.
+  - Tabbed playlists, import and export M3U, XSPF, PLS and ASX.
+  - CUE sheet support.
+  - Play audio CDs.
+  - Visualisations from projectM.
+  - Lyrics and artist biographies and photos.
+  - Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AAC.
+  - Edit tags on MP3 and OGG files, organise your music.
+  - Fetch missing tags from MusicBrainz.
+  - Discover and download Podcasts.
+  - Download missing album cover art from Last.fm.
+  - Native desktop notifications using libnotify.
+  - Remote control using an Android device, a Wii Remote, MPRIS or the
+    command-line.
+  - Copy music to your iPod, iPhone, MTP or mass-storage USB player.
+  - Queue manager.
+ .
