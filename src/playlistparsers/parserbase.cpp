@@ -53,10 +53,12 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
   // was created on/for, using replace() lets playlists work on any platform.
   filename = filename.replace('\\', '/');
 
-  // Make the path absolute
+  // Make the path absolute and clean it
   if (!QDir::isAbsolutePath(filename)) {
     filename = dir.absoluteFilePath(filename);
   }
+
+  filename = QDir::cleanPath(filename);
 
   const QUrl url = QUrl::fromLocalFile(filename);
 
