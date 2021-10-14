@@ -3,7 +3,7 @@ Section: sound
 Priority: optional
 Maintainer: David Sansome <me@davidsansome.com>
 Build-Depends: cmake (>= 2.6),
-               debhelper-compat (= 13),
+               debhelper,
                libasound2-dev,
                libboost-dev,
                libboost-serialization-dev,
