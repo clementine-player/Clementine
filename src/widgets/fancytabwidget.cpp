@@ -38,7 +38,7 @@ const QSize FancyTabWidget::TabSize_LargeSidebar = QSize(70, 47);
 class FancyTabBar : public QTabBar {
  private:
   int mouseHoverTabIndex = -1;
-  QMap<QWidget*, QString> labelCache;
+  bool isTextHiddenInToolTip = false;
 
  public:
   explicit FancyTabBar(QWidget* parent = 0) : QTabBar(parent) {
@@ -96,20 +96,22 @@ class FancyTabBar : public QTabBar {
       verticalTextTabs = true;
 
     // Restore any label text that was hidden/cached for the IconOnlyTabs mode
-    if (labelCache.count() > 0 &&
+    if (isTextHiddenInToolTip &&
         tabWidget->mode() != FancyTabWidget::Mode_IconOnlyTabs) {
       for (int i = 0; i < count(); i++) {
-        setTabText(i, labelCache[tabWidget->widget(i)]);
+        setTabText(i, tabToolTip(i));
+        setTabToolTip(i, "");
       }
-      labelCache.clear();
+      isTextHiddenInToolTip = false;
     }
     if (tabWidget->mode() != FancyTabWidget::Mode_LargeSidebar &&
         tabWidget->mode() != FancyTabWidget::Mode_SmallSidebar) {
       // Cache and hide label text for IconOnlyTabs mode
       if (tabWidget->mode() == FancyTabWidget::Mode_IconOnlyTabs &&
-          labelCache.count() == 0) {
+          !isTextHiddenInToolTip) {
         for (int i = 0; i < count(); i++) {
-          labelCache[tabWidget->widget(i)] = tabText(i);
+          isTextHiddenInToolTip = true;
+          setTabToolTip(i, tabText(i));
           setTabText(i, "");
         }
       }
