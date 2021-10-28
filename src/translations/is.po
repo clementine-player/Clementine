@@ -9,12 +9,12 @@
 # Kristján Magnússon, 2016
 # Kristján Magnússon, 2016
 # Össur Ingi Jónsson <ossur.ingi@gmail.com>, 2016
-# Sveinn í Felli <sv1@fellsnet.is>, 2017-2019
+# Sveinn í Felli <sv1@fellsnet.is>, 2017-2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-10-27 20:00+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgstr "\n\nÞú getur gert spilunarlista að uppáhaldi með því að smella �
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:130
 msgid " ANMR method (experimental)"
-msgstr ""
+msgstr " ANMR aðferð (á tilraunastigi)"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
@@ -102,7 +102,7 @@ msgstr "%1 dögum síðan"
 msgid ""
 "%1 failed to decode as gzip stream:\n"
 "%2"
-msgstr ""
+msgstr "%1 tókst ekki að kóða sem gzip-streymi:\n%2"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -120,7 +120,7 @@ msgstr "%1 lagalistar (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 beiðni brást:\n%2"
 
 #: devices/deviceview.cpp:122
 #, qt-format
@@ -166,7 +166,7 @@ msgstr "%L1 aðrir hlustendur"
 #: playlist/playlistmanager.cpp:440
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "%L1 valið af"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -176,7 +176,7 @@ msgstr "%L1 spilanir alls"
 #: playlist/playlistmanager.cpp:446
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 lög"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1087,11 +1087,11 @@ msgstr "Hnappar"
 
 #: internet/podcasts/addpodcastdialog.cpp:95
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC-hlaðvörp"
 
 #: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
-msgstr ""
+msgstr "CD-drif"
 
 #: core/song.cpp:453
 msgid "CDDA"
@@ -1349,7 +1349,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Skipun"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
@@ -1471,7 +1471,7 @@ msgstr "Afrita á klippispjald"
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
 #: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
-msgstr "Afrita til tæki..."
+msgstr "Afrita á tæki..."
 
 #: devices/deviceview.cpp:222 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:41
@@ -1502,7 +1502,7 @@ msgstr "Fann engan hljóðstraum í %1"
 
 #: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Gat ekki fundið Google Drive skrá."
 
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
@@ -1589,7 +1589,7 @@ msgstr "Kross-deyfa þegar skipt er handvirkt milli laga"
 
 #: ../bin/src/ui_queuemanager.h:148
 msgid "Ctrl+Down"
-msgstr ""
+msgstr "Ctrl+Niður"
 
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
@@ -1625,7 +1625,7 @@ msgstr "Dans"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Gagnagrunnur"
 
 #: core/database.cpp:629
 msgid ""
@@ -1699,12 +1699,12 @@ msgstr "Eyða skrám"
 
 #: devices/deviceview.cpp:225
 msgid "Delete from device..."
-msgstr "Eyða frá tæki..."
+msgstr "Eyða af tæki..."
 
 #: library/libraryview.cpp:421 ui/mainwindow.cpp:745
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
-msgstr "Eyða frá diski..."
+msgstr "Eyða af diski..."
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Delete played episodes"
@@ -1753,7 +1753,7 @@ msgstr "Nánar..."
 
 #: ../bin/src/ui_playbacksettingspage.h:412
 msgid "Detect"
-msgstr ""
+msgstr "Finna"
 
 #: devices/giolister.cpp:182
 msgid "Device"
@@ -2010,7 +2010,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Demba í atvikaskrár"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
@@ -2090,7 +2090,7 @@ msgstr "Gera virka/óvirka skráningu Last.fm á hlustunarvenjum"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:127
 msgid "Encoder"
-msgstr ""
+msgstr "Kóðari"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Encoding complexity"
@@ -2288,11 +2288,11 @@ msgstr "Flutti út %1 umslög af %2 (%3 sleppt)"
 
 #: ../bin/src/ui_playbacksettingspage.h:414
 msgid "F32LE (32-bit)"
-msgstr ""
+msgstr "F32LE (32-bita)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:276
 #: transcoder/transcodersettingspage.cpp:30
@@ -2377,7 +2377,7 @@ msgstr "Hratt"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:128
 msgid "Fast search"
-msgstr ""
+msgstr "Hröð leit"
 
 #: library/library.cpp:92
 msgid "Favourite tracks"
@@ -2444,7 +2444,7 @@ msgstr "Skráarheiti"
 
 #: ../bin/src/ui_ripcddialog.h:339
 msgid "Filename Preview"
-msgstr ""
+msgstr "Forskoðun skráarheitis"
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2452,7 +2452,7 @@ msgstr "Gögn"
 
 #: ../bin/src/ui_networkremotesettingspage.h:376
 msgid "Files root folder"
-msgstr ""
+msgstr "Rótarmappa skráa"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2547,7 +2547,7 @@ msgstr "Rammar í biðminni"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Oft spilaðar hljómplötur"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3170,7 +3170,7 @@ msgstr "Innskráning mistókst"
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "Atvikaskrár"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3482,7 +3482,7 @@ msgstr "Nýjum lögum verður sjálfvirkt bætt við."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
-msgstr ""
+msgstr "Nýjustu hljómplötur"
 
 #: library/library.cpp:96
 msgid "Newest tracks"
@@ -3494,7 +3494,7 @@ msgstr "Næst"
 
 #: core/globalshortcuts.cpp:61 ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Næsta hljómplata"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3617,7 +3617,7 @@ msgstr "Fjöldi þátta sem á að sýna"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:93
 msgid "Number of processes:"
-msgstr ""
+msgstr "Fjöldi ferla:"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "OSD Preview"
@@ -4108,7 +4108,7 @@ msgstr "Spila lög í tilviljunarkenndri röð"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:92
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4163,11 +4163,11 @@ msgstr "Rigning"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
-msgstr ""
+msgstr "Tilviljunarkenndar hljómplötur"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
-msgstr ""
+msgstr "Tilviljunarkennd lög"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4208,7 +4208,7 @@ msgstr "Ertu viss um að þú viljir hætta við?"
 
 #: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Nýlega spilaðar hljómplötur"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4370,7 +4370,7 @@ msgstr ""
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
-msgstr ""
+msgstr "Endurheimta sjálfgefinn netþjón"
 
 #: ../bin/src/ui_filenameformatwidget.h:127
 msgid "Restrict to ASCII characters"
@@ -4414,7 +4414,7 @@ msgstr "Keyra"
 
 #: ../bin/src/ui_playbacksettingspage.h:413
 msgid "S16LE (16-bit)"
-msgstr ""
+msgstr "S16LE (16-bita)"
 
 #: core/song.cpp:455
 msgid "SNES SPC700"
@@ -4653,11 +4653,11 @@ msgstr "Velja ekkert"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Veldu möppu"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Veldu skrá"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4937,7 +4937,7 @@ msgstr "Sleppa völdum lögum"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "Hoppa yfir í næstu hljómplötu"
 
 #: ui/mainwindow.cpp:1904
 msgid "Skip track"
@@ -4973,7 +4973,7 @@ msgstr "Upplýsingar um lag"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:91
 msgid "Song Metadata"
-msgstr ""
+msgstr "Lýsigögn lags"
 
 #: ui/mainwindow.cpp:287
 msgid "Song info"
@@ -5050,7 +5050,7 @@ msgstr "Stjörnumerkt"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
-msgstr ""
+msgstr "Stjörnumerktar hljómplötur"
 
 #: ripper/ripcddialog.cpp:84
 msgid "Start ripping"
@@ -5110,7 +5110,7 @@ msgstr "Stöðva afspilun eftir núverandi lag"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Stöðva afspilun ef lag spilast ekki"
 
 #: core/globalshortcuts.cpp:57
 msgid "Stop playing after current track"
@@ -5438,7 +5438,7 @@ msgstr "Of margar endurbeiningar"
 
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Hljómplötur með hæstu einkunn"
 
 #: internet/spotify/spotifyservice.cpp:422
 msgid "Top tracks"
@@ -5471,7 +5471,7 @@ msgstr "Umkóða tónlist"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Nánar um umkóðara"
 
 #: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
@@ -5489,7 +5489,7 @@ msgstr "Valkostir umkóðunar"
 #: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr ""
+msgstr "Valkostir umkóðunar - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5525,7 +5525,7 @@ msgstr "Vefslóð"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "Slóð á kennimerki þess:"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5571,7 +5571,7 @@ msgstr "Óþekkt villa"
 #: playlistparsers/playlistparser.cpp:168
 #, qt-format
 msgid "Unknown filetype: %1"
-msgstr ""
+msgstr "Óþekkt skráategund: %1"
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Unset cover"
@@ -5674,11 +5674,11 @@ msgstr "Nota auðkenningu"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
-msgstr ""
+msgstr "Nota bitahraðaumsýslukerfi"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:132
 msgid "Use default bitrate"
-msgstr ""
+msgstr "Nota sjálfgefinn bitahraða"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"
@@ -5952,7 +5952,7 @@ msgstr "Ár - Hljómplata"
 
 #: playlist/playlist.cpp:1396
 msgid "Year - original"
-msgstr ""
+msgstr "Ár - upprunalegt"
 
 #: smartplaylists/searchterm.cpp:436
 msgid "Years"
@@ -6160,7 +6160,7 @@ msgstr "inniheldur ekki"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "demba"
 
 #: smartplaylists/searchterm.cpp:274
 msgid "empty"
@@ -6251,7 +6251,7 @@ msgstr "valkostir"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "eða skannaðu QR-kóðann:"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
