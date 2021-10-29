@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-10-27 20:00+0000\n"
+"PO-Revision-Date: 2021-10-28 15:54+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr " kb/sek"
 #: ../bin/src/ui_playbacksettingspage.h:376
 #: ../bin/src/ui_playbacksettingspage.h:390
 msgid " ms"
-msgstr " msek"
+msgstr " m/sek"
 
 #: ../bin/src/ui_songinfosettingspage.h:156
 msgid " pt"
@@ -670,7 +670,7 @@ msgstr "Bæta við biðröð"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:309
 msgid "Add to your radio streams"
-msgstr ""
+msgstr "Bæta í útvarpsstreymin þín"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -933,7 +933,7 @@ msgstr "Sjálfvirk uppfærsla"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:101
 msgid "Automatically determine based on sample rate."
-msgstr ""
+msgstr "Greina sjálfvirkt út frá safntíðni."
 
 #: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
@@ -990,7 +990,7 @@ msgstr "Banna (skráningu Last.fm á hlustunarvenjum)"
 
 #: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
-msgstr ""
+msgstr "Súlugreining"
 
 #: ../bin/src/ui_notificationssettingspage.h:462
 msgid "Basic Blue"
@@ -1037,7 +1037,7 @@ msgstr "Bitahraði"
 
 #: analyzers/blockanalyzer.cpp:43
 msgid "Block analyzer"
-msgstr "Greining blokka"
+msgstr "Blokkagreining"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Block type"
@@ -1053,7 +1053,7 @@ msgstr "Meginmál"
 
 #: analyzers/boomanalyzer.cpp:37
 msgid "Boom analyzer"
-msgstr ""
+msgstr "Tíðnigreining"
 
 #: ../bin/src/ui_boxsettingspage.h:99
 msgid "Box"
@@ -1944,11 +1944,11 @@ msgstr "Niðurhalsstillingar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Ná í upprunalega Android-forritið"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Ná í fjarstýringuna fyrir vinnutölvur, Android og iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
@@ -2339,7 +2339,7 @@ msgstr "Mistókst að sækja hlaðvörp"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Mistókst að ná í rásalista:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2352,7 +2352,7 @@ msgstr "Mistókst að lesa inn hlaðvarp"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Mistókst að þátta %1 svar:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2363,7 +2363,7 @@ msgstr "Gat ekki þáttað XML-skrána fyrir þetta RSS-streymi"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Mistókst að uppfæra icecast-möppu:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2406,7 +2406,7 @@ msgstr "Villa við að ná í umslag"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Sæki færslur á spilunarlista"
 
 #: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
@@ -2604,7 +2604,7 @@ msgstr "Sæki rásir"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:418
 msgid "Getting station"
-msgstr ""
+msgstr "Sæki útvarpsstöð"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -3528,7 +3528,7 @@ msgstr "Engar samsvaranir fundust. Hreinsaðu leitarreitinn til að birta allt s
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
-msgstr ""
+msgstr "Engar stillingar tiltækar fyrir þessa tegund."
 
 #: transcoder/transcoderoptionserror.cpp:42
 #, qt-format
@@ -3560,7 +3560,7 @@ msgstr "Venjuleg blokkartegund"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Venjuleg tímalengd (amk 4 mínútur eða hálf lengd lagsins)"
 
 #: playlist/playlistsequence.cpp:204
 msgid "Not available while using a dynamic playlist"
@@ -3895,7 +3895,7 @@ msgstr "Hversu oft spilað"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr ""
+msgstr "Spila uppgefinn spilunarlista"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -4717,7 +4717,7 @@ msgstr "Setja %1 sem \"%2\"..."
 #: ../bin/src/ui_transcoderoptionsavaac.h:133
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
-msgstr ""
+msgstr "Stilla ákjósanlegan hraða"
 
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
@@ -4733,7 +4733,7 @@ msgstr "Stillingar"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Stuttur tími (amk 1 mínúta eða hálf lengd lagsins)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgid "Shortcut"
@@ -4925,7 +4925,7 @@ msgstr "Sleppa talningu"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Sleppa skrám með þessar skráaendingar (aðgreint með kommu, ekki háð há/lágstöfum)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
