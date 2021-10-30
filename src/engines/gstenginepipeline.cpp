@@ -613,7 +613,7 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg,
       break;
   }
 
-  return FALSE;
+  return TRUE;
 }
 
 GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
