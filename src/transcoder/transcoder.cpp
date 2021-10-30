@@ -432,6 +432,11 @@ void Transcoder::JobState::ReportError(GstMessage* msg) {
   g_error_free(error);
   free(debugs);
 
+  // clean up output file if it was already created
+  if (QFile::exists(job_.output)) {
+    QFile::remove(job_.output);
+  }
+
   emit parent_->LogLine(
       tr("Error processing %1: %2")
           .arg(UrlToLocalFileIfPossible(job_.input), message));
