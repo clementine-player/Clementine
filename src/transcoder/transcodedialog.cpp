@@ -98,6 +98,9 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
     }
   }
 
+  ui_->remove_original->setChecked(
+      s.value("overwrite_existing", false).toBool());
+
   // Add a start button
   start_button_ = ui_->button_box->addButton(tr("Start transcoding"),
                                              QDialogButtonBox::ActionRole);
@@ -183,6 +186,7 @@ void TranscodeDialog::Start() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("last_output_format", preset.codec_mimetype_);
+  s.setValue("overwrite_existing", ui_->remove_original->isChecked());
 }
 
 void TranscodeDialog::Cancel() {
@@ -206,6 +210,23 @@ void TranscodeDialog::JobComplete(const QUrl& input, const QString& output,
 
   UpdateStatusText();
   UpdateProgress();
+
+  bool overwrite_existing = ui_->remove_original->isChecked();
+
+  if (success && overwrite_existing && input.isLocalFile()) {
+    QFileInfo input_fileinfo(input.toLocalFile());
+    QFileInfo output_fileinfo(output);
+
+    bool same_extension = input_fileinfo.suffix() == output_fileinfo.suffix();
+    bool same_path =
+        input_fileinfo.absolutePath() == output_fileinfo.absolutePath();
+
+    QFile(input_fileinfo.absoluteFilePath()).remove();
+    if (same_path && same_extension) {
+      QFile(output_fileinfo.absoluteFilePath())
+          .rename(input_fileinfo.fileName());
+    }
+  }
 }
 
 void TranscodeDialog::UpdateProgress() {
