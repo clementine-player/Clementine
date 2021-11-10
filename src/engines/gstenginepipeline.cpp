@@ -1146,6 +1146,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
 
 void GstEnginePipeline::TransitionToNext() {
   GstElement* old_decode_bin = uridecodebin_;
+  gst_object_ref(old_decode_bin);
 
   ignore_tags_ = true;
 
