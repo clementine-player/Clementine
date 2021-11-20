@@ -211,13 +211,14 @@ void TranscodeDialog::JobComplete(const QString& input, const QString& output,
   UpdateProgress();
 
   bool overwrite_existing = ui_->remove_original->isChecked();
-  QFileInfo input_fileinfo(input);
-  QFileInfo output_fileinfo(output);
-  bool same_extension = input_fileinfo.suffix() == output_fileinfo.suffix();
-  bool same_path =
-      input_fileinfo.absolutePath() == output_fileinfo.absolutePath();
 
   if (success && overwrite_existing) {
+    QFileInfo input_fileinfo(input);
+    QFileInfo output_fileinfo(output);
+    bool same_extension = input_fileinfo.suffix() == output_fileinfo.suffix();
+    bool same_path =
+        input_fileinfo.absolutePath() == output_fileinfo.absolutePath();
+
     QFile(input).remove();
     if (same_path && same_extension) {
       QFile(output).rename(input);
