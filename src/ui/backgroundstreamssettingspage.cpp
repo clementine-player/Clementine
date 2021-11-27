@@ -27,19 +27,24 @@
 
 BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(
     SettingsDialog* dialog)
-    : SettingsPage(dialog), ui_(new Ui_BackgroundStreamsSettingsPage) {
+    : SettingsPage(dialog),
+      ui_(new Ui_BackgroundStreamsSettingsPage),
+      loaded_(false) {
   ui_->setupUi(this);
   setWindowIcon(
       IconLoader::Load("weather-showers-scattered", IconLoader::Base));
-
-  for (const QString& name : dialog->background_streams()->streams()) {
-    AddStream(name);
-  }
 }
 
 BackgroundStreamsSettingsPage::~BackgroundStreamsSettingsPage() { delete ui_; }
 
-void BackgroundStreamsSettingsPage::Load() {}
+void BackgroundStreamsSettingsPage::Load() {
+  if (!loaded_ and dialog()->background_streams()) {
+    for (const QString& name : dialog()->background_streams()->streams()) {
+      AddStream(name);
+    }
+    loaded_ = true;
+  }
+}
 
 void BackgroundStreamsSettingsPage::Save() {
   dialog()->background_streams()->SaveStreams();

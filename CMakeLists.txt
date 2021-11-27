@@ -330,6 +330,8 @@ optional_component(VISUALISATIONS ON "Visualisations"
   DEPENDS "opengl" OPENGL_FOUND
 )
 
+optional_component(BACKGROUND_STREAMS ON "Background streams")
+
 optional_component(TRANSLATIONS ON "Translations"
   DEPENDS "gettext" GETTEXT_XGETTEXT_EXECUTABLE
   DEPENDS "Qt5LinguistTools" Qt5LinguistTools_FOUND

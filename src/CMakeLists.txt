@@ -71,7 +71,6 @@ set(SOURCES
 
   core/appearance.cpp
   core/application.cpp
-  core/backgroundstreams.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
@@ -344,7 +343,6 @@ set(SOURCES
   ui/albumcovermanagerlist.cpp
   ui/albumcoversearcher.cpp
   ui/appearancesettingspage.cpp
-  ui/backgroundstreamssettingspage.cpp
   ui/behavioursettingspage.cpp
   ui/console.cpp
   ui/coverfromurldialog.cpp
@@ -390,7 +388,6 @@ set(SOURCES
   widgets/fileviewlist.cpp
   widgets/forcescrollperpixel.cpp
   widgets/freespacebar.cpp
-  widgets/fullscreenhypnotoad.cpp
   widgets/groupediconview.cpp
   widgets/lineedit.cpp
   widgets/linetextedit.cpp
@@ -425,7 +422,6 @@ set(HEADERS
   analyzers/turbine.h
 
   core/application.h
-  core/backgroundstreams.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
@@ -647,7 +643,6 @@ set(HEADERS
   ui/albumcovermanagerlist.h
   ui/albumcoversearcher.h
   ui/appearancesettingspage.h
-  ui/backgroundstreamssettingspage.h
   ui/behavioursettingspage.h
   ui/console.h
   ui/coverfromurldialog.h
@@ -786,7 +781,6 @@ set(UI
   ui/albumcovermanager.ui
   ui/albumcoversearcher.ui
   ui/appearancesettingspage.ui
-  ui/backgroundstreamssettingspage.ui
   ui/behavioursettingspage.ui
   ui/console.ui
   ui/coverfromurldialog.ui
@@ -845,6 +839,20 @@ if (HAVE_TRANSLATIONS)
 endif(HAVE_TRANSLATIONS)
 
 option(USE_INSTALL_PREFIX "Look for data in CMAKE_INSTALL_PREFIX" ON)
+
+# Background streams
+optional_source(HAVE_BACKGROUND_STREAMS
+  SOURCES
+    core/backgroundstreams.cpp
+    ui/backgroundstreamssettingspage.cpp
+    widgets/fullscreenhypnotoad.cpp
+  HEADERS
+    core/backgroundstreams.h
+    ui/backgroundstreamssettingspage.h
+    widgets/fullscreenhypnotoad.h
+  UI
+    ui/backgroundstreamssettingspage.ui
+)
 
 # Visualisations
 optional_source(HAVE_VISUALISATIONS

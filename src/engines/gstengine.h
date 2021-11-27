@@ -32,6 +32,7 @@
 #include <QTimerEvent>
 #include <memory>
 
+#include "config.h"
 #include "bufferconsumer.h"
 #include "core/timeconstants.h"
 #include "enginebase.h"
@@ -84,9 +85,11 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void EnsureInitialised() { initialising_.waitForFinished(); }
   void InitialiseGstreamer();
 
+#ifdef HAVE_BACKGROUND_STREAMS
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
   void SetBackgroundStreamVolume(int id, int volume);
+#endif
 
   qint64 position_nanosec() const;
   qint64 length_nanosec() const;
@@ -152,8 +155,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void FadeoutFinished();
   void FadeoutPauseFinished();
   void SeekNow();
+#ifdef HAVE_BACKGROUND_STREAMS
   void BackgroundStreamFinished();
   void BackgroundStreamPlayDone(QFuture<GstStateChangeReturn>, int);
+#endif
   void PlayDone(QFuture<GstStateChangeReturn> future, const quint64, const int);
 
   void BufferingStarted();
@@ -182,7 +187,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   void UpdateScope(int chunk_length);
 
+#ifdef HAVE_BACKGROUND_STREAMS
   int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
+#endif
 
   bool IsCurrentPipeline(int id);
 
@@ -240,7 +247,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int timer_id_;
   int next_element_id_;
 
+#ifdef HAVE_BACKGROUND_STREAMS
   QHash<int, std::shared_ptr<GstEnginePipeline>> background_streams_;
+#endif
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
