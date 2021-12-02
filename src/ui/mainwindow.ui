@@ -541,9 +541,6 @@
     <property name="title">
      <string>&amp;Extras</string>
     </property>
-    <addaction name="action_rain"/>
-    <addaction name="action_hypnotoad"/>
-    <addaction name="action_enterprise"/>
     <addaction name="action_kittens"/>
     <addaction name="action_console"/>
     <addaction name="separator"/>
@@ -733,30 +730,6 @@
   <action name="action_cover_manager">
    <property name="text">
     <string>Cover Manager</string>
-   </property>
-  </action>
-  <action name="action_rain">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string comment="Label for button to enable/disable rain background sound.">Rain</string>
-   </property>
-  </action>
-  <action name="action_hypnotoad">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string comment="Label for button to enable/disable Hypnotoad background sound.">All Glory to the Hypnotoad!</string>
-   </property>
-  </action>
-  <action name="action_enterprise">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string comment="Label for button to enable/disable Enterprise background sound.">Make it so!</string>
    </property>
   </action>
   <action name="action_kittens">

@@ -396,14 +396,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       IconLoader::Load("document-save", IconLoader::Base));
   ui_->action_full_library_scan->setIcon(
       IconLoader::Load("view-refresh", IconLoader::Base));
-#ifdef HAVE_BACKGROUND_STREAMS
-  ui_->action_rain->setIcon(
-      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
-  ui_->action_hypnotoad->setIcon(
-      IconLoader::Load("hypnotoad", IconLoader::Base));
-  ui_->action_enterprise->setIcon(
-    IconLoader::Load("enterprise", IconLoader::Base));
-#endif
   ui_->action_kittens->setIcon(IconLoader::Load("kittens", IconLoader::Base));
   ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
 
@@ -501,15 +493,29 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(this, SIGNAL(NewDebugConsole(Console*)), app_,
           SIGNAL(NewDebugConsole(Console*)));
 
+  // Add menus for background streams
 #ifdef HAVE_BACKGROUND_STREAMS
-  background_streams_->AddAction("Rain", ui_->action_rain);
-  background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
-  background_streams_->AddAction("Make it so!", ui_->action_enterprise);
-#else
-  ui_->action_rain->setVisible(false);
-  ui_->action_hypnotoad->setVisible(false);
-  ui_->action_enterprise->setVisible(false);
-#endif // HAVE_BACKGROUND_STREAMS
+  QAction* action_rain =
+      ui_->menu_extras->addAction(tr("Rain"));
+  action_rain->setIcon(
+      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
+  action_rain->setCheckable(true);
+  background_streams_->AddAction("Rain", action_rain);
+
+  QAction* action_hypnotoad =
+      ui_->menu_extras->addAction(tr("All Glory to the Hypnotoad!"));
+  action_hypnotoad->setIcon(
+      IconLoader::Load("hypnotoad", IconLoader::Base));
+  action_hypnotoad->setCheckable(true);
+  background_streams_->AddAction("Hypnotoad", action_hypnotoad);
+
+    QAction* action_enterprise =
+      ui_->menu_extras->addAction(tr("Make it so!"));
+  action_enterprise->setIcon(
+      IconLoader::Load("enterprise", IconLoader::Base));
+  action_enterprise->setCheckable(true);
+  background_streams_->AddAction("Make it so!", action_enterprise);
+#endif
 
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(
@@ -951,7 +957,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
           SLOT(NowPlayingWidgetPositionChanged(bool)));
 #ifdef HAVE_BACKGROUND_STREAMS
-  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing,
+  connect(action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing,
           SLOT(AllHail(bool)));
 #endif
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing,
