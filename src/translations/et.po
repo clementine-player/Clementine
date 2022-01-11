@@ -181,19 +181,19 @@ msgstr "%L1 pala"
 msgid "%filename%"
 msgstr "%failinimi%"
 
-#: transcoder/transcodedialog.cpp:236
+#: transcoder/transcodedialog.cpp:237
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n ebaõnnestus"
 
-#: transcoder/transcodedialog.cpp:231
+#: transcoder/transcodedialog.cpp:232
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n lõpetatud"
 
-#: transcoder/transcodedialog.cpp:225
+#: transcoder/transcodedialog.cpp:226
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -546,11 +546,11 @@ msgstr "Lisa fail(id) transkodeerimiseks"
 msgid "Add file..."
 msgstr "Lisa fail..."
 
-#: transcoder/transcodedialog.cpp:246
+#: transcoder/transcodedialog.cpp:247
 msgid "Add files to transcode"
 msgstr "Lisa failid transkodeerimiseks"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Lisa kaust"
@@ -1488,7 +1488,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Ei saanud ühendust Subsonic'u serveriga. Kontrolli serveri URL'i. Näiteks http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:63
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1521,14 +1521,14 @@ msgstr "Last.fm teenusesse sisselogimine ebaõnnestus. Palun proovi uuesti."
 msgid "Couldn't create playlist"
 msgstr "Ei suutnud luua esitusloendit"
 
-#: transcoder/transcoder.cpp:472
+#: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ei leidnud mukserit %1 jaoks, palun kontrolli et arvutis oleks paigaldatud õiged GStreamer'i pistikprogrammid"
 
-#: transcoder/transcoder.cpp:465
+#: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2203,7 +2203,7 @@ msgstr "Viga %1 laadimisel"
 msgid "Error loading di.fm playlist"
 msgstr "Viga di.fm esitusloendi laadimisel"
 
-#: transcoder/transcoder.cpp:436
+#: transcoder/transcoder.cpp:441
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Viga %1 töötlemisel: %2"
@@ -2294,7 +2294,7 @@ msgstr "F32LE (32-bitine)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: core/song.cpp:429 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
@@ -3212,11 +3212,11 @@ msgstr "Laulusõnad saidilt %1"
 msgid "Lyrics from the tag"
 msgstr "Helifaili salvestatud laulusõnad"
 
-#: transcoder/transcoder.cpp:278
+#: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: core/song.cpp:435 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3402,7 +3402,7 @@ msgstr "Tõsta helikogusse..."
 msgid "Move up"
 msgstr "Liiguta üles"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muusika"
 
@@ -3631,19 +3631,19 @@ msgstr "Väljas"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:286
+#: transcoder/transcoder.cpp:290
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:292
+#: core/song.cpp:443 transcoder/transcoder.cpp:296
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:289
+#: core/song.cpp:439 transcoder/transcoder.cpp:293
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:283
+#: core/song.cpp:441 transcoder/transcoder.cpp:287
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3700,7 +3700,7 @@ msgstr "Ava OPML fail"
 msgid "Open OPML file..."
 msgstr "Ava OPML fail..."
 
-#: transcoder/transcodedialog.cpp:263
+#: transcoder/transcodedialog.cpp:264
 msgid "Open a directory to import music from"
 msgstr "Ava kaust kust importida muusikat"
 
@@ -5070,7 +5070,7 @@ msgid ""
 "list"
 msgstr "Kirjuta midagi ülalolevasse otsingukasti ja näe vastvaid otsingutulemusi loendina"
 
-#: transcoder/transcoder.cpp:443
+#: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
 msgstr "Käivitatakse %1"
@@ -5156,7 +5156,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Õnnestus edukalt!"
 
-#: transcoder/transcoder.cpp:204
+#: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Edukalt kirjutasin %1"
@@ -5165,7 +5165,7 @@ msgstr "Edukalt kirjutasin %1"
 msgid "Suggested tags"
 msgstr "Soovituslikud sildid"
 
-#: transcoder/transcoder.cpp:149
+#: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
 msgstr "Sobivat elementi ei leidunud"
 
@@ -5812,7 +5812,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Hoiatus: See pakkimistihedus ei ole voogedastuse jaoks sobilik. See tähendab, et dekodeerija ei pruugi suuta seda poole esituse pealt mängima hakata. Samuti ei pruugi see konkreetne variant olla toetatud raudvaralistes dekodeerijates - seal kas esitus ei toimi üldse või toimib vigaselt. "
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:298
+#: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
 msgstr "Wav"
 
@@ -5908,7 +5908,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:295
+#: core/song.cpp:427 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

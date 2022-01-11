@@ -195,19 +195,19 @@ msgstr "%L1곡"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:236
+#: transcoder/transcodedialog.cpp:237
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 실패"
 
-#: transcoder/transcodedialog.cpp:231
+#: transcoder/transcodedialog.cpp:232
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 끝냄"
 
-#: transcoder/transcodedialog.cpp:225
+#: transcoder/transcodedialog.cpp:226
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -560,11 +560,11 @@ msgstr "변환기에 파일(들) 추가"
 msgid "Add file..."
 msgstr "파일 추가..."
 
-#: transcoder/transcodedialog.cpp:246
+#: transcoder/transcodedialog.cpp:247
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "폴더 추가"
@@ -1502,7 +1502,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Subsonic에 접속할 수 없습니다. 서버 URL을 확인 하세요. 예시:http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:63
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1535,14 +1535,14 @@ msgstr "Last.fm에 로그인 할 수 없습니다. 다시 시도하세요."
 msgid "Couldn't create playlist"
 msgstr "재생목록을 생성할수 없습니다."
 
-#: transcoder/transcoder.cpp:472
+#: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 먹서를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
-#: transcoder/transcoder.cpp:465
+#: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2217,7 +2217,7 @@ msgstr "%1 불러오기 오류"
 msgid "Error loading di.fm playlist"
 msgstr "dl.fm 재생목록 불러오기 오류"
 
-#: transcoder/transcoder.cpp:436
+#: transcoder/transcoder.cpp:441
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1: %2 처리 오류"
@@ -2308,7 +2308,7 @@ msgstr "F32LE (32 비트)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: core/song.cpp:429 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
@@ -3226,11 +3226,11 @@ msgstr "%1 의 가사"
 msgid "Lyrics from the tag"
 msgstr "태그로부터의 가사"
 
-#: transcoder/transcoder.cpp:278
+#: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: core/song.cpp:435 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3416,7 +3416,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "음악"
 
@@ -3645,19 +3645,19 @@ msgstr "꺼짐"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:286
+#: transcoder/transcoder.cpp:290
 msgid "Ogg Flac"
 msgstr "OGG Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:292
+#: core/song.cpp:443 transcoder/transcoder.cpp:296
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:289
+#: core/song.cpp:439 transcoder/transcoder.cpp:293
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:283
+#: core/song.cpp:441 transcoder/transcoder.cpp:287
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3714,7 +3714,7 @@ msgstr "OPML 파일 열기"
 msgid "Open OPML file..."
 msgstr "OPML 파일 열기"
 
-#: transcoder/transcodedialog.cpp:263
+#: transcoder/transcodedialog.cpp:264
 msgid "Open a directory to import music from"
 msgstr "음악을 가져올 디렉토리 열기"
 
@@ -5084,7 +5084,7 @@ msgid ""
 "list"
 msgstr "이 검색 결과 목록을 채우기 위해 위의 검색 창에 무언가를 입력하십시오."
 
-#: transcoder/transcoder.cpp:443
+#: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 시작중"
@@ -5170,7 +5170,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "성공!"
 
-#: transcoder/transcoder.cpp:204
+#: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 작성 완료"
@@ -5179,7 +5179,7 @@ msgstr "%1 작성 완료"
 msgid "Suggested tags"
 msgstr "제안된 태그"
 
-#: transcoder/transcoder.cpp:149
+#: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
 msgstr "적합한 요소를 찾을 수 없음"
 
@@ -5826,7 +5826,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "경고: 이 압축 수준은 스트리밍 가능한 하위 집합을 벗어납니다. 이는 디코더가 스트림 중간에 재생을 시작할 수 없음을 의미합니다. 또한 하드웨어 디코더의 성능에 영향을 미칠 수 있습니다."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:298
+#: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
 msgstr "Wav"
 
@@ -5922,7 +5922,7 @@ msgstr "윈도우 미디어 40k"
 msgid "Windows Media 64k"
 msgstr "윈도우 미디어 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:295
+#: core/song.cpp:427 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
 msgstr "윈도우 미디어 오디오"
 

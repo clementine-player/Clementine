@@ -204,19 +204,19 @@ msgstr "%L1 parça"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:236
+#: transcoder/transcodedialog.cpp:237
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#: transcoder/transcodedialog.cpp:231
+#: transcoder/transcodedialog.cpp:232
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#: transcoder/transcodedialog.cpp:225
+#: transcoder/transcodedialog.cpp:226
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -569,11 +569,11 @@ msgstr "Dosyayı/dosyaları dönüştürücüye ekle"
 msgid "Add file..."
 msgstr "Dosya ekle..."
 
-#: transcoder/transcodedialog.cpp:246
+#: transcoder/transcodedialog.cpp:247
 msgid "Add files to transcode"
 msgstr "Dönüştürülecek dosyaları ekle"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Klasör ekle"
@@ -1511,7 +1511,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Subsonic'e bağlanılamadı, sunucu adresini kontrol edin. Örnek: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:63
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1544,14 +1544,14 @@ msgstr "Last.fm'de oturum açılamadı. Lütfen tekrar deneyin."
 msgid "Couldn't create playlist"
 msgstr "Çalma listesi oluşturulamadı"
 
-#: transcoder/transcoder.cpp:472
+#: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup olmadığını kontrol edin"
 
-#: transcoder/transcoder.cpp:465
+#: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2226,7 +2226,7 @@ msgstr "%1 yüklenirken hata"
 msgid "Error loading di.fm playlist"
 msgstr "di.fm oynatma listesi yüklenirken hata oluştu"
 
-#: transcoder/transcoder.cpp:436
+#: transcoder/transcoder.cpp:441
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1 işlenirken hata: %2"
@@ -2317,7 +2317,7 @@ msgstr "F32LE (32-bit)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: core/song.cpp:429 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
@@ -3235,11 +3235,11 @@ msgstr "%1 sitesinden şarkı sözleri"
 msgid "Lyrics from the tag"
 msgstr "Etiketinden şarkı sözleri"
 
-#: transcoder/transcoder.cpp:278
+#: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: core/song.cpp:435 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3425,7 +3425,7 @@ msgstr "Kütüphaneye taşı..."
 msgid "Move up"
 msgstr "Yukarı taşı"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Müzik"
 
@@ -3654,19 +3654,19 @@ msgstr "Kapalı"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:286
+#: transcoder/transcoder.cpp:290
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:292
+#: core/song.cpp:443 transcoder/transcoder.cpp:296
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:289
+#: core/song.cpp:439 transcoder/transcoder.cpp:293
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:283
+#: core/song.cpp:441 transcoder/transcoder.cpp:287
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3723,7 +3723,7 @@ msgstr "OPML dosyası aç"
 msgid "Open OPML file..."
 msgstr "OPML dosyasını aç..."
 
-#: transcoder/transcodedialog.cpp:263
+#: transcoder/transcodedialog.cpp:264
 msgid "Open a directory to import music from"
 msgstr "Müziğin içe aktarılacağı bir dizin aç"
 
@@ -5093,7 +5093,7 @@ msgid ""
 "list"
 msgstr "Bu arama sonuçları listesini doldurmak için yukarıdaki arama kutusuna bir şeyler yazmaya başlayın"
 
-#: transcoder/transcoder.cpp:443
+#: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 Başlatılıyor"
@@ -5179,7 +5179,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Başarılı!"
 
-#: transcoder/transcoder.cpp:204
+#: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 başarıyla yazıldı"
@@ -5188,7 +5188,7 @@ msgstr "%1 başarıyla yazıldı"
 msgid "Suggested tags"
 msgstr "Önerilen etiketler"
 
-#: transcoder/transcoder.cpp:149
+#: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
 msgstr "Uygun eleman bulunamadı"
 
@@ -5835,7 +5835,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Uyarı: Bu sıkıştırma düzeyi, yayınlanabilir alt kümenin dışındadır. Bu, bir kod çözücünün akışın ortasında oynatmaya başlayamayacağı anlamına gelir. Ayrıca donanım kod çözücülerinin performansını da etkileyebilir."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:298
+#: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
 msgstr "Wav"
 
@@ -5931,7 +5931,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Medya 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:295
+#: core/song.cpp:427 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

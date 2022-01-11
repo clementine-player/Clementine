@@ -179,19 +179,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%檔案名稱%"
 
-#: transcoder/transcodedialog.cpp:236
+#: transcoder/transcodedialog.cpp:237
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 失敗"
 
-#: transcoder/transcodedialog.cpp:231
+#: transcoder/transcodedialog.cpp:232
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#: transcoder/transcodedialog.cpp:225
+#: transcoder/transcodedialog.cpp:226
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -544,11 +544,11 @@ msgstr "加入檔案以便轉碼"
 msgid "Add file..."
 msgstr "加入檔案…"
 
-#: transcoder/transcodedialog.cpp:246
+#: transcoder/transcodedialog.cpp:247
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "加入資料夾"
@@ -1486,7 +1486,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "無法連線至 Subsonic，請檢查伺服器網址，如：http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:63
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1519,14 +1519,14 @@ msgstr "無法登入 Last.fm，請再試一次。"
 msgid "Couldn't create playlist"
 msgstr "無法建立播放清單"
 
-#: transcoder/transcoder.cpp:472
+#: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "無法為%1找到混合器，請確認已正確安裝 GStreamer 外掛。"
 
-#: transcoder/transcoder.cpp:465
+#: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2201,7 +2201,7 @@ msgstr "錯誤載入 %1"
 msgid "Error loading di.fm playlist"
 msgstr "載入 di.fm 播放清單錯誤"
 
-#: transcoder/transcoder.cpp:436
+#: transcoder/transcoder.cpp:441
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "處理 %1 錯誤: %2"
@@ -2292,7 +2292,7 @@ msgstr ""
 msgid "F9"
 msgstr ""
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: core/song.cpp:429 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
@@ -3210,11 +3210,11 @@ msgstr "歌詞來自 %1"
 msgid "Lyrics from the tag"
 msgstr "標籤中的歌詞"
 
-#: transcoder/transcoder.cpp:278
+#: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: core/song.cpp:435 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3400,7 +3400,7 @@ msgstr "移到媒體櫃…"
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "音樂"
 
@@ -3629,19 +3629,19 @@ msgstr "關"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:286
+#: transcoder/transcoder.cpp:290
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:292
+#: core/song.cpp:443 transcoder/transcoder.cpp:296
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:289
+#: core/song.cpp:439 transcoder/transcoder.cpp:293
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:283
+#: core/song.cpp:441 transcoder/transcoder.cpp:287
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3698,7 +3698,7 @@ msgstr "開啟 OPML 檔案"
 msgid "Open OPML file..."
 msgstr "開啟 OPML 檔案…"
 
-#: transcoder/transcodedialog.cpp:263
+#: transcoder/transcodedialog.cpp:264
 msgid "Open a directory to import music from"
 msgstr "選擇目錄以從內匯入音樂"
 
@@ -5068,7 +5068,7 @@ msgid ""
 "list"
 msgstr "開始在上面的搜尋欄內輸入一些東西，以填滿搜尋結果清單"
 
-#: transcoder/transcoder.cpp:443
+#: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
 msgstr "標記星號 %1"
@@ -5154,7 +5154,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr ""
 
-#: transcoder/transcoder.cpp:204
+#: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
 msgstr "成功寫入 %1"
@@ -5163,7 +5163,7 @@ msgstr "成功寫入 %1"
 msgid "Suggested tags"
 msgstr "建議標籤"
 
-#: transcoder/transcoder.cpp:149
+#: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
 msgstr ""
 
@@ -5810,7 +5810,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:298
+#: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
 msgstr "Wav"
 
@@ -5906,7 +5906,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:295
+#: core/song.cpp:427 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
 msgstr "Windows Media 音訊"
 

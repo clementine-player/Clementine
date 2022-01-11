@@ -182,19 +182,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:236
+#: transcoder/transcodedialog.cpp:237
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#: transcoder/transcodedialog.cpp:231
+#: transcoder/transcodedialog.cpp:232
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#: transcoder/transcodedialog.cpp:225
+#: transcoder/transcodedialog.cpp:226
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -547,11 +547,11 @@ msgstr "Thêm (các) tập tin vào bộ chuyển mã"
 msgid "Add file..."
 msgstr "Thêm tập tin..."
 
-#: transcoder/transcodedialog.cpp:246
+#: transcoder/transcodedialog.cpp:247
 msgid "Add files to transcode"
 msgstr "Thêm các tập tin để chuyển mã"
 
-#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Thêm thư mục"
@@ -1489,7 +1489,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Không thể kết nối đến Subsonic, kiểm tra URL của máy chủ. Ví dụ: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:63
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1522,14 +1522,14 @@ msgstr "Không thể đăng nhập vào Last.fm. Hãy thử lại sau."
 msgid "Couldn't create playlist"
 msgstr "Không thể tạo danh sách"
 
-#: transcoder/transcoder.cpp:472
+#: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: transcoder/transcoder.cpp:465
+#: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2204,7 +2204,7 @@ msgstr "Lỗi nạp %1"
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
 
-#: transcoder/transcoder.cpp:436
+#: transcoder/transcoder.cpp:441
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Lỗi xử lý %1: %2"
@@ -2295,7 +2295,7 @@ msgstr ""
 msgid "F9"
 msgstr ""
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: core/song.cpp:429 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
@@ -3213,11 +3213,11 @@ msgstr "Lời bài hát từ %1"
 msgid "Lyrics from the tag"
 msgstr "Lời bài hát từ thẻ"
 
-#: transcoder/transcoder.cpp:278
+#: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: core/song.cpp:435 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3403,7 +3403,7 @@ msgstr "Dời vào thư viện..."
 msgid "Move up"
 msgstr "Chuyển lên"
 
-#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Nhạc"
 
@@ -3632,19 +3632,19 @@ msgstr "Tắt"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:286
+#: transcoder/transcoder.cpp:290
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:292
+#: core/song.cpp:443 transcoder/transcoder.cpp:296
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:289
+#: core/song.cpp:439 transcoder/transcoder.cpp:293
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:283
+#: core/song.cpp:441 transcoder/transcoder.cpp:287
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3701,7 +3701,7 @@ msgstr "Mở tập tin OPML"
 msgid "Open OPML file..."
 msgstr "Mở tập tin OPML..."
 
-#: transcoder/transcodedialog.cpp:263
+#: transcoder/transcodedialog.cpp:264
 msgid "Open a directory to import music from"
 msgstr "Mở một thư mục để thêm nhạc"
 
@@ -5071,7 +5071,7 @@ msgid ""
 "list"
 msgstr "Gõ gì đó vào ô tìm kiếm"
 
-#: transcoder/transcoder.cpp:443
+#: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
 msgstr "Bắt đầu %1"
@@ -5157,7 +5157,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Thành công!"
 
-#: transcoder/transcoder.cpp:204
+#: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
@@ -5166,7 +5166,7 @@ msgstr "Đã ghi vào %1"
 msgid "Suggested tags"
 msgstr "Thẻ được đề nghị"
 
-#: transcoder/transcoder.cpp:149
+#: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
 msgstr ""
 
@@ -5813,7 +5813,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:298
+#: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
 msgstr "Wav"
 
@@ -5909,7 +5909,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:295
+#: core/song.cpp:427 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
