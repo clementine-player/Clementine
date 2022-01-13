@@ -45,4 +45,4 @@ Compile and install:
     sudo make install
 
 See the Wiki for more instructions and a list of dependencies:
-https://github.com/clementine-player/Clementine/wiki/Compiling-from-Source
+https://github.com/clementine-player/Clementine/wiki#compiling-and-installing-clementine
