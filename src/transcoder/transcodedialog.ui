@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>499</width>
-    <height>482</height>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -162,16 +162,6 @@
        <widget class="QPushButton" name="select">
         <property name="text">
          <string>Select...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="remove_original">
-        <property name="toolTip">
-         <string>If enabled the original files will be removed. If transcoded files have the same file extension and the destination is the same directory as the original files, the original files will be replaced.</string>
-        </property>
-        <property name="text">
-         <string>Remove or replace original files </string>
         </property>
        </widget>
       </item>
