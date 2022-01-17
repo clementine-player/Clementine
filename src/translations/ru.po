@@ -8,7 +8,7 @@
 # Alexander, 2012
 # Alexander Vysotskiy <loki13gm@gmail.com>, 2012
 # Andrei Demin <Andrei.Demin1996@gmail.com>, 2014
-# Andrei Stepanov <adem4ik@gmail.com>, 2014-2021
+# Andrei Stepanov <adem4ik@gmail.com>, 2014-2022
 # Andy Dufrane <>, 2012
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # Camellan <camellan@yandex.ru>, 2018
@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-11-01 03:20+0000\n"
+"PO-Revision-Date: 2022-01-16 09:59+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -843,7 +843,7 @@ msgstr "Произошла ошибка при загрузке данных iTu
 #: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Ошибка при записи мета-данных в '%1'"
+msgstr "Ошибка при записи метаданных в '%1'"
 
 #: internet/subsonic/subsonicsettingspage.cpp:127
 msgid "An unspecified error occurred."
@@ -957,7 +957,7 @@ msgstr "Автоматическое обновление"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:101
 msgid "Automatically determine based on sample rate."
-msgstr "Определять автоматически на основе частоты дискретизации."
+msgstr "Автоопределение на основе частоты дискретизации."
 
 #: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
@@ -1173,7 +1173,7 @@ msgstr "Каналы"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
-msgstr "Проверять новые выпуски"
+msgstr "Проверять новые эпизоды"
 
 #: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
@@ -1401,7 +1401,7 @@ msgstr "Настроить %1…"
 
 #: internet/magnatune/magnatuneservice.cpp:289
 msgid "Configure Magnatune..."
-msgstr "Настройка Magnatune…"
+msgstr "Настроить Magnatune…"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "Configure Shortcuts"
@@ -1409,7 +1409,7 @@ msgstr "Горячие клавиши"
 
 #: internet/spotify/spotifyservice.cpp:924
 msgid "Configure Spotify..."
-msgstr "Настройка Spotify…"
+msgstr "Настроить Spotify…"
 
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
@@ -1732,7 +1732,7 @@ msgstr "Удалить с диска…"
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Delete played episodes"
-msgstr "Удалять прослушанные выпуски"
+msgstr "Удалять прослушанные эпизоды"
 
 #: ui/equalizer.cpp:222 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
@@ -1907,7 +1907,7 @@ msgstr "Не показывать в «Различных исполнителя
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid "Don't show listened episodes"
-msgstr "Не показывать прослушанные выпуски"
+msgstr "Не показывать прослушанные эпизоды"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
@@ -1939,7 +1939,7 @@ msgstr "Двойной щелчок по песне…"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
-msgstr "Загрузить %n выпусков"
+msgstr "Загрузить %n эпизодов"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:275
 msgid "Download directory"
@@ -1947,7 +1947,7 @@ msgstr "Каталог загрузок"
 
 #: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Download episodes to"
-msgstr "Загружать выпуски в"
+msgstr "Загружать эпизоды в"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Download membership"
@@ -1955,7 +1955,7 @@ msgstr "Подписка для загрузки"
 
 #: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Download new episodes automatically"
-msgstr "Загружать новые выпуски автоматически"
+msgstr "Загружать новые эпизоды автоматически"
 
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
@@ -1984,7 +1984,7 @@ msgstr "Загрузить этот альбом"
 
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
-msgstr "Загрузить этот выпуск"
+msgstr "Загрузить этот эпизод"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Download..."
@@ -1994,7 +1994,7 @@ msgstr "Загрузить…"
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr "Загрузка (%1%)…"
+msgstr "Загружается (%1%)…"
 
 #: internet/icecast/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
@@ -3637,7 +3637,7 @@ msgstr "Сейчас проигрывается"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
 msgid "Number of episodes to show"
-msgstr "Количество показываемых выпусков"
+msgstr "Число эпизодов для показа"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:93
 msgid "Number of processes:"
@@ -3915,7 +3915,7 @@ msgstr "Воспроизвести"
 
 #: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
-msgstr "Количество проигрываний"
+msgstr "Число проигрываний"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
@@ -4945,11 +4945,11 @@ msgstr "Переместить назад в плейлисте"
 
 #: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
-msgstr "Количество пропусков"
+msgstr "Число пропусков"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr "Пропускать файлы со этими расширениями (разделять запятыми, нечувствительны к регистру)"
+msgstr "Пропускать файлы с этими расширениями (разделять запятыми, нечувствительны к регистру)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -4997,7 +4997,7 @@ msgstr "Тексты песен"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:91
 msgid "Song Metadata"
-msgstr "Мета-данные песни"
+msgstr "Метаданные песни"
 
 #: ui/mainwindow.cpp:287
 msgid "Song info"
@@ -5346,7 +5346,7 @@ msgstr "Эти файлы будут окончательно удалены с 
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
-msgstr "В этих каталогах будет выполнен поиск музыки при создании вашей фонотеки"
+msgstr "В этих папках происходит поиск музыки для создания вашей фонотеки"
 
 #: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
@@ -5525,7 +5525,7 @@ msgstr "Попробовать извлечь название, исполнит
 
 #: ../bin/src/ui_songmetadatasettingspage.h:98
 msgid "Try to guess missing metadata"
-msgstr "Попробовать угадать недостающие мета-данные"
+msgstr "Попробовать угадать недостающие метаданные"
 
 #: analyzers/turbine.cpp:35
 msgid "Turbine"
@@ -5956,7 +5956,7 @@ msgstr "Записать все статистические данные в ф�
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Write metadata"
-msgstr "Записывать мета-данные"
+msgstr "Записывать метаданные"
 
 #: internet/subsonic/subsonicsettingspage.cpp:105
 msgid "Wrong username or password."
