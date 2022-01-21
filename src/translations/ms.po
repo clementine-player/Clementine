@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,19 +179,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n gagal"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n telah selesai"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -516,7 +516,7 @@ msgstr "Tambah baris baru jika disokong oleh jenis pemberitahuan"
 msgid "Add action"
 msgstr "Tambah tindakan"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Tambah semua trek dari direktori dan semua subdirektorinya"
 
@@ -524,7 +524,7 @@ msgstr "Tambah semua trek dari direktori dan semua subdirektorinya"
 msgid "Add another stream..."
 msgstr "Tambah strim lain..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
@@ -540,15 +540,15 @@ msgstr "Tambah fail ke transkoder"
 msgid "Add file(s) to transcoder"
 msgstr "Tambah fail ke transkoder"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Tambah fail..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Tambah fail-fail untuk transkod"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -793,7 +793,7 @@ msgstr "Benarkan muat turun"
 msgid "Allow mid/side encoding"
 msgstr "Benarka pengekodan mid/sisi"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Bersama-sama yang asal"
 
@@ -891,7 +891,7 @@ msgstr "Nama awal artis"
 msgid "As&k when saving"
 msgstr "Tan&ya bila menyimpan"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1740,12 +1740,12 @@ msgstr "Nyahbaris gilir trek terpilih"
 msgid "Dequeue track"
 msgstr "Nyahbaris gilir trek"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Destinasi"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Perincian..."
 
@@ -1798,7 +1798,7 @@ msgid "Direct internet connection"
 msgstr "Sambungan internet terus"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Direktori"
 
@@ -2436,7 +2436,7 @@ msgstr "Saiz fail"
 msgid "File type"
 msgstr "Jenis fail"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Namafail"
 
@@ -2452,7 +2452,7 @@ msgstr "Fail"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Fail untuk ditranskod"
 
@@ -2768,6 +2768,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Jika diaktifkan, mengklik lagu terpilih dalam paparan senarai main akan benarkan anda sunting nilai tag secara langsung"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3400,7 +3407,7 @@ msgstr "Alih ke pustaka..."
 msgid "Move up"
 msgstr "Alih ke atas"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muzik"
 
@@ -3698,7 +3705,7 @@ msgstr "Buka fail OPML"
 msgid "Open OPML file..."
 msgstr "Buka fail OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Buka satu direktori untuk mengimport muzik darinya"
 
@@ -3746,7 +3753,7 @@ msgstr "Optimumkan untuk kadar bit"
 msgid "Optimize for quality"
 msgstr "Optimumkan untuk kualiti"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3803,7 +3810,7 @@ msgstr "Output"
 msgid "Output device"
 msgstr "Peranti output"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Pilihan output"
 
@@ -4079,7 +4086,7 @@ msgstr "Cetak maklumat versi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Kemajuan"
 
@@ -4255,7 +4262,7 @@ msgstr "Ingat pilihan saya"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Buang"
 
@@ -4278,6 +4285,10 @@ msgstr "Buang folder"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Buang dari senarai main"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4681,7 +4692,7 @@ msgstr "Pilih pengvisualan"
 msgid "Select visualizations..."
 msgstr "Pilih pengvisualan..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Pilih..."
 
@@ -5058,7 +5069,7 @@ msgstr "Mula meretas"
 msgid "Start the playlist currently playing"
 msgstr "Mulakan senarai main semasa dimainkan"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Mulakan transkod"
 
@@ -5463,7 +5474,7 @@ msgstr "Tre&k"
 msgid "Track"
 msgstr "Trek"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Transkod Muzik"
 

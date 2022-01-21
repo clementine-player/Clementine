@@ -5,11 +5,11 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Sergii Galashyn <trovich@gmail.com>, 2011-2012
-# Yuri Chornoivan <yurchor@ukr.net>, 2011-2021
+# Yuri Chornoivan <yurchor@ukr.net>, 2011-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 11:44+0000\n"
+"PO-Revision-Date: 2022-01-20 12:34+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -178,19 +178,19 @@ msgstr "%L1 композицій"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n з помилкою"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n завершено"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -515,7 +515,7 @@ msgstr "Додати новий рядок, якщо підтримується 
 msgid "Add action"
 msgstr "Додати дію"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Додати усі композиції з каталогу та усіх його підкаталогів"
 
@@ -523,7 +523,7 @@ msgstr "Додати усі композиції з каталогу та усі
 msgid "Add another stream..."
 msgstr "Додати інший потік…"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Додати теку…"
 
@@ -539,15 +539,15 @@ msgstr "Додати файл для перекодування"
 msgid "Add file(s) to transcoder"
 msgstr "Додати файли для перекодування"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Додати файл…"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Додати файли для перекодування"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Додати теку"
@@ -792,7 +792,7 @@ msgstr "Дозволити отримання"
 msgid "Allow mid/side encoding"
 msgstr "Дозволити mid/side кодування"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Разом з оригіналами"
 
@@ -890,7 +890,7 @@ msgstr "Ініціали виконавця"
 msgid "As&k when saving"
 msgstr "&Питати при збереженні"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1739,12 +1739,12 @@ msgstr "Вилучити з черги вибрані композиції"
 msgid "Dequeue track"
 msgstr "Вилучити композицію з черги"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Призначення"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Детальніше…"
 
@@ -1797,7 +1797,7 @@ msgid "Direct internet connection"
 msgstr "Пряме з'єднання з Інтернет"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Тека"
 
@@ -2435,7 +2435,7 @@ msgstr "Розмір файлу"
 msgid "File type"
 msgstr "Тип файлу"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Назва файлу"
 
@@ -2451,7 +2451,7 @@ msgstr "Файли"
 msgid "Files root folder"
 msgstr "Коренева тека файлів"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Файли для перекодування"
 
@@ -2767,6 +2767,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Якщо буде позначено, ви зможете редагувати значення мітки композиції у списку відтворення простим клацанням на відповідному записі."
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Якщо позначено, початкові файли буде вилучено. Якщо перекодовані файли матимуть такий самий суфікс назви, що і початкові, і зберігатимуться у тому самому каталозі, початкові файли буде заміщено новими."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3399,7 +3406,7 @@ msgstr "Перемістити до фонотеки…"
 msgid "Move up"
 msgstr "Перемістити вгору"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Музика"
 
@@ -3697,7 +3704,7 @@ msgstr "Відкрити файл OPML"
 msgid "Open OPML file..."
 msgstr "Відкрити файл OPML…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Відкрити каталог для імпортування музичних творів"
 
@@ -3745,7 +3752,7 @@ msgstr "Оптимізувати для бітової швидкості"
 msgid "Optimize for quality"
 msgstr "Оптимізувати для якості"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3802,7 +3809,7 @@ msgstr "Результат"
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Налаштування виведення"
 
@@ -4078,7 +4085,7 @@ msgstr "Відобразити дані про версію"
 msgid "Profile"
 msgstr "Профіль"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Поступ"
 
@@ -4254,7 +4261,7 @@ msgstr "Запам’ятати вибір"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -4277,6 +4284,10 @@ msgstr "Вилучити теку"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Вилучити зі списку відтворення"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Вилучити або замінити початкові файли"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4680,7 +4691,7 @@ msgstr "Вибрати візуалізації"
 msgid "Select visualizations..."
 msgstr "Вибрати візуалізації…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Вибрати…"
 
@@ -5057,7 +5068,7 @@ msgstr "Почати оцифрування"
 msgid "Start the playlist currently playing"
 msgstr "Запустити список відтворення, що відтворюється на цей час"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Почати перекодування"
 
@@ -5462,7 +5473,7 @@ msgstr "Ко&мпозиція"
 msgid "Track"
 msgstr "Композиція"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Перекодування музики"
 

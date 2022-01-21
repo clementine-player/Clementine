@@ -15,13 +15,13 @@
 # Pavel Fric <fripohled.blogspot.com>, 2010
 # Pavel Fric <fripohled@blogspot.com>, 2004,2010
 # fri, 2011-2012
-# fri, 2013-2021
+# fri, 2013-2022
 # fri, 2011-2012
 # mandarinki <this.mail.sucks@mail.bg>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 13:45+0000\n"
+"PO-Revision-Date: 2022-01-20 14:19+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,19 +190,19 @@ msgstr "%L1 skladeb"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "nepodařilo se %n"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "dokončeno %n"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -527,7 +527,7 @@ msgstr "Přidat nový řádek, je-li to podporováno typem oznámení"
 msgid "Add action"
 msgstr "Přidat činnost"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Přidat všechny skladby z adresáři a všech jeho podadresářů"
 
@@ -535,7 +535,7 @@ msgstr "Přidat všechny skladby z adresáři a všech jeho podadresářů"
 msgid "Add another stream..."
 msgstr "Přidat další proud..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
@@ -551,15 +551,15 @@ msgstr "Přidat soubor k překódování"
 msgid "Add file(s) to transcoder"
 msgstr "Přidat soubor(y) k překódování"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Přidat soubor..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -804,7 +804,7 @@ msgstr "Povolit stahování"
 msgid "Allow mid/side encoding"
 msgstr "Povolit kódování střed/kraj"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Vedle původních"
 
@@ -902,7 +902,7 @@ msgstr "Začáteční písmena umělce"
 msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1751,12 +1751,12 @@ msgstr "Odstranit vybrané skladby z řady"
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Cíl"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Podrobnosti..."
 
@@ -1809,7 +1809,7 @@ msgid "Direct internet connection"
 msgstr "Přímé připojení k internetu"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Složka"
 
@@ -2447,7 +2447,7 @@ msgstr "Velikost souboru"
 msgid "File type"
 msgstr "Typ souboru"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Název souboru"
 
@@ -2463,7 +2463,7 @@ msgstr "Soubory"
 msgid "Files root folder"
 msgstr "Základní složka pro soubory"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Soubory k překódování"
 
@@ -2779,6 +2779,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Pokud je zapnuto, po klepnutí na vybranou píseň v seznamu skladeb můžete upravit hodnotu značky přímo"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Pokud je povoleno, původní soubory budou odstraněny. Pokud mají překódované soubory stejnou souborovou příponu a cílem je stejný adresář, v němž jsou původní soubory, původní soubory budou nahrazeny."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3411,7 +3418,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Hudba"
 
@@ -3709,7 +3716,7 @@ msgstr "Otevřít soubor OPML"
 msgid "Open OPML file..."
 msgstr "Otevřít soubor OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Otevřít adresář a zavést hudbu v něm"
 
@@ -3757,7 +3764,7 @@ msgstr "Optimalizovat s ohledem na datový tok"
 msgid "Optimize for quality"
 msgstr "Optimalizovat s ohledem na kvalitu"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3814,7 +3821,7 @@ msgstr "Výstup"
 msgid "Output device"
 msgstr "Výstupní zařízení"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Možnosti výstupu"
 
@@ -4090,7 +4097,7 @@ msgstr "Vypsat informaci o verzi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Průběh"
 
@@ -4266,7 +4273,7 @@ msgstr "Zapamatovat si moji volbu"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Odstranit"
 
@@ -4289,6 +4296,10 @@ msgstr "Odstranit složku"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Odstranit ze seznamu skladeb"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Odstranit nebo nahradit původní soubory"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4692,7 +4703,7 @@ msgstr "Vybrat vizualizace"
 msgid "Select visualizations..."
 msgstr "Vybrat vizualizace..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Vybrat..."
 
@@ -5069,7 +5080,7 @@ msgstr "Začít vytahovat"
 msgid "Start the playlist currently playing"
 msgstr "Přehrát současnou skladbu v seznamu skladeb"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Převést"
 
@@ -5474,7 +5485,7 @@ msgstr "Skla&dby"
 msgid "Track"
 msgstr "Skladba"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Převést hudbu"
 

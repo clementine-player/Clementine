@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,19 +182,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -519,7 +519,7 @@ msgstr "Thêm một dòng mới nếu được hỗ trợ từ kiểu thông bá
 msgid "Add action"
 msgstr "Thêm hành động"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Thêm tất cả các bài hát từ một thư mục và tất cả các thư mục con"
 
@@ -527,7 +527,7 @@ msgstr "Thêm tất cả các bài hát từ một thư mục và tất cả cá
 msgid "Add another stream..."
 msgstr "Thêm luồng dữ liệu khác..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Thêm thư mục..."
 
@@ -543,15 +543,15 @@ msgstr "Thêm tập tin vào bộ chuyển mã"
 msgid "Add file(s) to transcoder"
 msgstr "Thêm (các) tập tin vào bộ chuyển mã"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Thêm tập tin..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Thêm các tập tin để chuyển mã"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Thêm thư mục"
@@ -796,7 +796,7 @@ msgstr "Cho phép tải về"
 msgid "Allow mid/side encoding"
 msgstr "Cho phép mã hóa song song"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Thư mục chứa tập tin gốc"
 
@@ -894,7 +894,7 @@ msgstr "Tên viết tắt của nghệ sĩ"
 msgid "As&k when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1743,12 +1743,12 @@ msgstr "Loại các bài đã chọn khỏi danh sách chờ"
 msgid "Dequeue track"
 msgstr "Loại bài hát khỏi d.sách chờ"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Xuất ra"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Chi tiết..."
 
@@ -1801,7 +1801,7 @@ msgid "Direct internet connection"
 msgstr "Nối mạng trực tiếp"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Thư mục"
 
@@ -2439,7 +2439,7 @@ msgstr "Dung lượng"
 msgid "File type"
 msgstr "Loại tập tin"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Tên tập tin"
 
@@ -2455,7 +2455,7 @@ msgstr "Tập tin"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Tập tin để chuyển mã"
 
@@ -2771,6 +2771,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Nếu bật, bạn có thể sửa thông tin bài hát trực tiếp bằng cách nhấn vào bài đã chọn trong danh sách"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3403,7 +3410,7 @@ msgstr "Dời vào thư viện..."
 msgid "Move up"
 msgstr "Chuyển lên"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Nhạc"
 
@@ -3701,7 +3708,7 @@ msgstr "Mở tập tin OPML"
 msgid "Open OPML file..."
 msgstr "Mở tập tin OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Mở một thư mục để thêm nhạc"
 
@@ -3749,7 +3756,7 @@ msgstr "Tối ưu cho bitrate"
 msgid "Optimize for quality"
 msgstr "Tối ưu cho chất lượng"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3806,7 +3813,7 @@ msgstr "Ngõ ra"
 msgid "Output device"
 msgstr "Thiết bị xuất"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Tùy chọn xuất"
 
@@ -4082,7 +4089,7 @@ msgstr "Hiển thị thông tin phiên bản"
 msgid "Profile"
 msgstr "Hồ sơ"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Tiến độ"
 
@@ -4258,7 +4265,7 @@ msgstr "Nhớ lựa chọn của tôi"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Loại bỏ"
 
@@ -4281,6 +4288,10 @@ msgstr "Loại bỏ thư mục"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4684,7 +4695,7 @@ msgstr "Chọn hiệu ứng hình ảnh ảo"
 msgid "Select visualizations..."
 msgstr "Chọn hiệu ứng hình ảnh ảo..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Chọn..."
 
@@ -5061,7 +5072,7 @@ msgstr "Bắt đầu sao chép"
 msgid "Start the playlist currently playing"
 msgstr "Bắt đầu danh sách đang phát"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
@@ -5466,7 +5477,7 @@ msgstr ""
 msgid "Track"
 msgstr "Bài hát"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Chuyển mã nhạc"
 

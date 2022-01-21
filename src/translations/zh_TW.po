@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,19 +179,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%檔案名稱%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 失敗"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -516,7 +516,7 @@ msgstr "如果通知類型支援的話新增一行"
 msgid "Add action"
 msgstr "加入功能"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "從一個目錄及其所有子目錄新增音軌"
 
@@ -524,7 +524,7 @@ msgstr "從一個目錄及其所有子目錄新增音軌"
 msgid "Add another stream..."
 msgstr "加入其它的網路串流"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "加入目錄…"
 
@@ -540,15 +540,15 @@ msgstr "加入檔案以便轉碼"
 msgid "Add file(s) to transcoder"
 msgstr "加入檔案以便轉碼"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "加入檔案…"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "加入資料夾"
@@ -793,7 +793,7 @@ msgstr "允許下載"
 msgid "Allow mid/side encoding"
 msgstr "允許 M/S (Mid/Side) 編碼技術"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "與原本的一起"
 
@@ -891,7 +891,7 @@ msgstr "演唱者簽署"
 msgid "As&k when saving"
 msgstr "儲存前詢問(&K)"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1740,12 +1740,12 @@ msgstr "將選取的音軌移出佇列中"
 msgid "Dequeue track"
 msgstr "將音軌移出佇列中"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "目的地"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "詳情…"
 
@@ -1798,7 +1798,7 @@ msgid "Direct internet connection"
 msgstr "直接連接到網際網路"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "目錄"
 
@@ -2436,7 +2436,7 @@ msgstr "檔案大小"
 msgid "File type"
 msgstr "檔案型態"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "檔名"
 
@@ -2452,7 +2452,7 @@ msgstr "檔案"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "要轉碼的檔案"
 
@@ -2768,6 +2768,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "啟用後，您就能藉由點選播放清單界面中的欄位直接編輯歌曲標籤。"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3400,7 +3407,7 @@ msgstr "移到媒體櫃…"
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "音樂"
 
@@ -3698,7 +3705,7 @@ msgstr "開啟 OPML 檔案"
 msgid "Open OPML file..."
 msgstr "開啟 OPML 檔案…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "選擇目錄以從內匯入音樂"
 
@@ -3746,7 +3753,7 @@ msgstr "最佳化位元率"
 msgid "Optimize for quality"
 msgstr "最佳化品質"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3803,7 +3810,7 @@ msgstr "輸出"
 msgid "Output device"
 msgstr "輸出裝置"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "輸出選項"
 
@@ -4079,7 +4086,7 @@ msgstr "印出版本資訊"
 msgid "Profile"
 msgstr "規格"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "進展"
 
@@ -4255,7 +4262,7 @@ msgstr "記得我的選擇"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "移除"
 
@@ -4278,6 +4285,10 @@ msgstr "移除資料夾"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4681,7 +4692,7 @@ msgstr "選取視覺化"
 msgid "Select visualizations..."
 msgstr "選取視覺化…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "選擇…"
 
@@ -5058,7 +5069,7 @@ msgstr "開始轉拷"
 msgid "Start the playlist currently playing"
 msgstr "開始播放目前播放清單"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "開始轉碼"
 
@@ -5463,7 +5474,7 @@ msgstr "曲目(&K)"
 msgid "Track"
 msgstr "歌曲"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "音樂轉碼"
 

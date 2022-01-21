@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/davidsansome/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,19 +180,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n-(e)k huts egin du"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n amaituta"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -517,7 +517,7 @@ msgstr "Lerro berria gehitu jakinarazpen motak onartzen badu"
 msgid "Add action"
 msgstr "Gehitu ekintza"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -525,7 +525,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "Gehitu beste jario bat..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Gehitu direktorioa..."
 
@@ -541,15 +541,15 @@ msgstr ""
 msgid "Add file(s) to transcoder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Gehitu fitxategia..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Gehitu transkodetzeko fitxategiak"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Gehitu karpeta"
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "Mid/side kodeketa baimendu"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Jatorrizkoekin batera"
 
@@ -892,7 +892,7 @@ msgstr "Artistaren inizialak"
 msgid "As&k when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1741,12 +1741,12 @@ msgstr "Atera aukeraturiko pistak ilaratik"
 msgid "Dequeue track"
 msgstr "Atera pista ilaratik"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Helmuga"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Xehetasunak..."
 
@@ -1799,7 +1799,7 @@ msgid "Direct internet connection"
 msgstr "Internet-konexio zuzena"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Direktorioa"
 
@@ -2437,7 +2437,7 @@ msgstr "Fitxategi-tamaina"
 msgid "File type"
 msgstr "Fitxategi-mota"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Fitxategi-izena"
 
@@ -2453,7 +2453,7 @@ msgstr "Fitxategiak"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Transkodetzeko fitxategiak"
 
@@ -2768,6 +2768,13 @@ msgstr "Abestia identifikatzen"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
+msgstr ""
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
 msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
@@ -3401,7 +3408,7 @@ msgstr "Eraman bildumara..."
 msgid "Move up"
 msgstr "Eraman gora"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Musika"
 
@@ -3699,7 +3706,7 @@ msgstr "OPML fitxategia ireki"
 msgid "Open OPML file..."
 msgstr "OPML fitxategia ireki"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -3747,7 +3754,7 @@ msgstr "Bit-tasarako optimizatu"
 msgid "Optimize for quality"
 msgstr "Kalitaterako optimizatu"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3804,7 +3811,7 @@ msgstr ""
 msgid "Output device"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Irteerako aukerak"
 
@@ -4080,7 +4087,7 @@ msgstr "Bertsio-informazioa erakutsi"
 msgid "Profile"
 msgstr "Profila"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Aurrerapena"
 
@@ -4256,7 +4263,7 @@ msgstr ""
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Kendu"
 
@@ -4279,6 +4286,10 @@ msgstr "Kendu karpeta"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Kendu erreprodukzio-zerrendatik"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4682,7 +4693,7 @@ msgstr "Hautatu bistaratzeak"
 msgid "Select visualizations..."
 msgstr "Hautatu bistaratzeak..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr ""
 
@@ -5059,7 +5070,7 @@ msgstr ""
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Hasi transkodetzen"
 
@@ -5464,7 +5475,7 @@ msgstr ""
 msgid "Track"
 msgstr "Pista"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Transkodetu musika"
 

@@ -10,13 +10,13 @@
 # Adolfo Jayme-Barrientos, 2013
 # Adolfo Jayme-Barrientos, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Juanjo, 2016-2021
+# Juanjo, 2016-2022
 # davidsansome <me@davidsansome.com>, 2013
 # Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011-2014,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 12:28+0000\n"
+"PO-Revision-Date: 2022-01-20 14:03+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -185,19 +185,19 @@ msgstr "%L1 peces"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -522,7 +522,7 @@ msgstr "Afegeix una línia nova si és compatible amb el tipus de notificació"
 msgid "Add action"
 msgstr "Afegeix una acció"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Afegeix totes les peces des d’una carpeta y las seves subcarpetes"
 
@@ -530,7 +530,7 @@ msgstr "Afegeix totes les peces des d’una carpeta y las seves subcarpetes"
 msgid "Add another stream..."
 msgstr "Afegeix un altre flux…"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Afegeix un directori…"
 
@@ -546,15 +546,15 @@ msgstr "Afegeix un fitxer al convertidor"
 msgid "Add file(s) to transcoder"
 msgstr "Afegeix fitxer(s) al convertidor"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Afegeix un fitxer…"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Afegeix fitxers per a convertir-los"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
@@ -799,7 +799,7 @@ msgstr "Permet les baixades"
 msgid "Allow mid/side encoding"
 msgstr "Permet la codificació centre/costats"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Al costat dels originals"
 
@@ -897,7 +897,7 @@ msgstr "Inicials de l’artista"
 msgid "As&k when saving"
 msgstr "&Pregunta en desar"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1746,12 +1746,12 @@ msgstr "Treu de la cua les peces seleccionades"
 msgid "Dequeue track"
 msgstr "Treu de la cua la peça"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Destí"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Detalls…"
 
@@ -1804,7 +1804,7 @@ msgid "Direct internet connection"
 msgstr "Connexió directa a Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Directori"
 
@@ -2442,7 +2442,7 @@ msgstr "Mida del fitxer"
 msgid "File type"
 msgstr "Tipus de fitxer"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Nom de fitxer"
 
@@ -2458,7 +2458,7 @@ msgstr "Fitxers"
 msgid "Files root folder"
 msgstr "Carpeta arrel dels fitxers"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Fitxers per convertir"
 
@@ -2774,6 +2774,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "En habilitar aquesta opció, podreu fer clic en la cançó seleccionada de la llista de reproducció i editar els valors directament"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Si està activat, els fitxers originals es trauran. Si els fitxers transcodificats tenen la mateixa extensió i la carpeta de destinació és la mateixa, els fitxers originals es substituiran."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3406,7 +3413,7 @@ msgstr "Mou a la col·lecció…"
 msgid "Move up"
 msgstr "Mou cap amunt"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Música"
 
@@ -3704,7 +3711,7 @@ msgstr "Obre un fitxer OPML"
 msgid "Open OPML file..."
 msgstr "Obre un fitxer OPML…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Obriu una carpeta des d’on s’importarà la música"
 
@@ -3752,7 +3759,7 @@ msgstr "Optimitza la taxa de bits"
 msgid "Optimize for quality"
 msgstr "Optimitza la qualitat"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3809,7 +3816,7 @@ msgstr "Sortida"
 msgid "Output device"
 msgstr "Perifèric de sortida"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Opcions de sortida"
 
@@ -4085,7 +4092,7 @@ msgstr "Mostra la informació de la versió"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Progrés"
 
@@ -4261,7 +4268,7 @@ msgstr "Recorda la meva elecció"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Suprimeix"
 
@@ -4284,6 +4291,10 @@ msgstr "Suprimeix carpeta"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Suprimeix de la llista de reproducció"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Treu o substitueix els fitxers originals"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4687,7 +4698,7 @@ msgstr "Seleccioneu visualitzacions"
 msgid "Select visualizations..."
 msgstr "Seleccioneu visualitzacions..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Navega…"
 
@@ -5064,7 +5075,7 @@ msgstr "Inicia la captura"
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que s'està reproduint"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Inicia la conversió"
 
@@ -5469,7 +5480,7 @@ msgstr "&Peça"
 msgid "Track"
 msgstr "Peça"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Converteix música"
 

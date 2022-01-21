@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/davidsansome/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,19 +187,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -524,7 +524,7 @@ msgstr "Een nieuwe regel toevoegen, als dit door het notificatie-type ondersteun
 msgid "Add action"
 msgstr "Actie toevoegen"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Voeg alle nummers van een pad en alle onderliggende paden toe"
 
@@ -532,7 +532,7 @@ msgstr "Voeg alle nummers van een pad en alle onderliggende paden toe"
 msgid "Add another stream..."
 msgstr "Nog een radiostream toevoegen…"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Map toevoegen…"
 
@@ -548,15 +548,15 @@ msgstr "Bestand toevoegen voor conversie."
 msgid "Add file(s) to transcoder"
 msgstr "Bestand(en) toevoegen voor conversie."
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Bestand toevoegen…"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Te converteren bestanden toevoegen"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Map toevoegen"
@@ -801,7 +801,7 @@ msgstr "Downloads toestaan"
 msgid "Allow mid/side encoding"
 msgstr "Sta mid/side-encoding toe"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Bij het origineel"
 
@@ -899,7 +899,7 @@ msgstr "Initiaal van artiest"
 msgid "As&k when saving"
 msgstr "Vraag bij opslaan"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1748,12 +1748,12 @@ msgstr "Geselecteerde nummers uit wachtrij verwijderen"
 msgid "Dequeue track"
 msgstr "Nummer uit wachtrij verwijderen"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Bestemming"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Details…"
 
@@ -1806,7 +1806,7 @@ msgid "Direct internet connection"
 msgstr "Directe internetverbinding"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Map"
 
@@ -2444,7 +2444,7 @@ msgstr "Bestandsgrootte"
 msgid "File type"
 msgstr "Bestandstype"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Bestandsnaam"
 
@@ -2460,7 +2460,7 @@ msgstr "Bestanden"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Te converteren bestanden"
 
@@ -2776,6 +2776,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Indien geactiveerd, zal door het aanklikken van een geselecteerd nummer in de afspeellijst je de labelwaarde direct kunnen bewerken."
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3408,7 +3415,7 @@ msgstr "Naar bibliotheek verplaatsen…"
 msgid "Move up"
 msgstr "Omhoog verplaatsen"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muziek"
 
@@ -3706,7 +3713,7 @@ msgstr "OML bestand openen"
 msgid "Open OPML file..."
 msgstr "OML-bestand openen…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Open een pad om muziek uit te importeren"
 
@@ -3754,7 +3761,7 @@ msgstr "Optimaliseer voor bitrate"
 msgid "Optimize for quality"
 msgstr "Optimaliseer voor kwaliteit"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3811,7 +3818,7 @@ msgstr "Output"
 msgid "Output device"
 msgstr "Uitvoer apparaat"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Uitvoeropties"
 
@@ -4087,7 +4094,7 @@ msgstr "Versie-informatie uitprinten"
 msgid "Profile"
 msgstr "Profiel"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Voortgang"
 
@@ -4263,7 +4270,7 @@ msgstr "Onthoud mijn keuze"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -4286,6 +4293,10 @@ msgstr "Map verwijderen"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Uit afspeellijst verwijderen"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4689,7 +4700,7 @@ msgstr "Visualisaties kiezen"
 msgid "Select visualizations..."
 msgstr "Visualisaties kiezen…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Selecteren…"
 
@@ -5066,7 +5077,7 @@ msgstr "Begin met rippen"
 msgid "Start the playlist currently playing"
 msgstr "Momenteel spelende afspeellijst starten"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Converteren starten"
 
@@ -5471,7 +5482,7 @@ msgstr "Nummer"
 msgid "Track"
 msgstr "Nummer"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Muziek converteren"
 

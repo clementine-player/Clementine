@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-10-14 08:58+0000\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -181,19 +181,19 @@ msgstr "%L1 pjesama"
 msgid "%filename%"
 msgstr "%fnaziv datoteke%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n završeno"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -518,7 +518,7 @@ msgstr "Dodaj novu liniju ako je podržana od vrste obavijesti"
 msgid "Add action"
 msgstr "Dodajte radnju"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Dodaj sve pjesme iz direktorija i svih njegovih poddirektorija"
 
@@ -526,7 +526,7 @@ msgstr "Dodaj sve pjesme iz direktorija i svih njegovih poddirektorija"
 msgid "Add another stream..."
 msgstr "Dodajte novi stream..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Dodajte direktorij..."
 
@@ -542,15 +542,15 @@ msgstr "Dodaj datoteku u enkôder"
 msgid "Add file(s) to transcoder"
 msgstr "Dodaj datoteku(e) u enkôder"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Dodajte datoteku..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Dodajte datoteku za transkôdiranje..."
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Dodajte mapu"
@@ -795,7 +795,7 @@ msgstr "Dopusti preuzimanja"
 msgid "Allow mid/side encoding"
 msgstr "Dopusti mid/side enkôdiranje"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Pokraj izvornika"
 
@@ -893,7 +893,7 @@ msgstr "Prvi izvođač"
 msgid "As&k when saving"
 msgstr "Pita&j prilikom spremanja"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1742,12 +1742,12 @@ msgstr "Uklonite označenu pjesmu s reprodukcije"
 msgid "Dequeue track"
 msgstr "Uklonite označenu pjesmu za reprodukciju"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Odredište"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Pojedinosti..."
 
@@ -1800,7 +1800,7 @@ msgid "Direct internet connection"
 msgstr "Izravan pristup internetu"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Direktorij"
 
@@ -2438,7 +2438,7 @@ msgstr "Veličina datoteke"
 msgid "File type"
 msgstr "Vrsta datoteke"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Naziv datoteke"
 
@@ -2454,7 +2454,7 @@ msgstr "Datoteke"
 msgid "Files root folder"
 msgstr "Datoteke korijenskog direktorija"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Datoteke za enkôdiranje"
 
@@ -2770,6 +2770,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Ako je aktivirano, klikom na odabranu pjesmu u popisu izvođenja dopustit će vam izravno uređivanje oznake"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3402,7 +3409,7 @@ msgstr "Premjesti u fonoteku..."
 msgid "Move up"
 msgstr "Pomakni gore"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Glazba"
 
@@ -3700,7 +3707,7 @@ msgstr "Otvori OPML datoteku"
 msgid "Open OPML file..."
 msgstr "Otvori OPML datoteku..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Otvori direktorij za uvoz glazbe iz"
 
@@ -3748,7 +3755,7 @@ msgstr "Podesite brzinu prijenosa"
 msgid "Optimize for quality"
 msgstr "Podesite kvalitetu"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3805,7 +3812,7 @@ msgstr "Izlaz"
 msgid "Output device"
 msgstr "Izlazni uređaj"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Izlazne mogućnosti"
 
@@ -4081,7 +4088,7 @@ msgstr "Ispiši podatke o verziji"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Napredak"
 
@@ -4257,7 +4264,7 @@ msgstr "Zapamti moj izbor"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Uklonite"
 
@@ -4280,6 +4287,10 @@ msgstr "Uklonite mapu"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Uklonite iz popisa izvođenja"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4683,7 +4694,7 @@ msgstr "Odaberite vizualizaciju"
 msgid "Select visualizations..."
 msgstr "Odaberite vizualizaciju..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Odaberi..."
 
@@ -5060,7 +5071,7 @@ msgstr "Pokreni ripanje"
 msgid "Start the playlist currently playing"
 msgstr "Pokrenite popis izvođenja koji se trenutno izvodi"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Započni enkôdiranje"
 
@@ -5465,7 +5476,7 @@ msgstr "Broj &pjesme"
 msgid "Track"
 msgstr "Broj"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Enkôdiranje glazbe"
 

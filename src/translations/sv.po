@@ -32,8 +32,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-12-12 09:05+0000\n"
-"Last-Translator: Jonatan Nyberg <jonatan@autistici.org>\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -201,19 +201,19 @@ msgstr "%L1 spår"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n misslyckades"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n är klar"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -538,7 +538,7 @@ msgstr "Lägg till en ny rad om det stöds av aviseringstypen"
 msgid "Add action"
 msgstr "Lägg till åtgärd"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Lägg till alla låtar från en mapp och alla dess undermappar"
 
@@ -546,7 +546,7 @@ msgstr "Lägg till alla låtar från en mapp och alla dess undermappar"
 msgid "Add another stream..."
 msgstr "Lägg till ett annat flöde..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Lägg till mapp..."
 
@@ -562,15 +562,15 @@ msgstr "Lägg till fil i omkodaren"
 msgid "Add file(s) to transcoder"
 msgstr "Lägg till fil(er) i omkodaren"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Lägg till fil..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Lägg till filer för omkodning"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Lägg till mapp"
@@ -815,7 +815,7 @@ msgstr "Tillåt hämtningar"
 msgid "Allow mid/side encoding"
 msgstr "Tillåt mellan-/sidokodning"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Vid sidan av originalen"
 
@@ -913,7 +913,7 @@ msgstr "Artistens initialer"
 msgid "As&k when saving"
 msgstr "Frå&ga när du sparar"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1762,12 +1762,12 @@ msgstr "Ta bort valda spår från kön"
 msgid "Dequeue track"
 msgstr "Ta bort spår från kön"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Destination"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Detaljer..."
 
@@ -1820,7 +1820,7 @@ msgid "Direct internet connection"
 msgstr "Direkt internetanslutning"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Mapp"
 
@@ -2458,7 +2458,7 @@ msgstr "Filstorlek"
 msgid "File type"
 msgstr "Filtyp"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Filnamn"
 
@@ -2474,7 +2474,7 @@ msgstr "Filer"
 msgid "Files root folder"
 msgstr "Rotmapp för filer"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Filer för omkodning"
 
@@ -2790,6 +2790,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Om aktiverad så kan du klicka på en markerad sång i spellistan för att redigera taggvärdet direkt"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3422,7 +3429,7 @@ msgstr "Flytta till biblioteket..."
 msgid "Move up"
 msgstr "Flytta uppåt"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Musik"
 
@@ -3720,7 +3727,7 @@ msgstr "Öppna OPML-fil"
 msgid "Open OPML file..."
 msgstr "Öppna OPML-fil..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Öppna en mapp att importera musik från"
 
@@ -3768,7 +3775,7 @@ msgstr "Optimera för bitfrekvens"
 msgid "Optimize for quality"
 msgstr "Optimera för kvalitet"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3825,7 +3832,7 @@ msgstr "Utgång"
 msgid "Output device"
 msgstr "Utgångsenhet"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Alternativ för utdata"
 
@@ -4101,7 +4108,7 @@ msgstr "Visa versionsinformation"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Förlopp"
 
@@ -4277,7 +4284,7 @@ msgstr "Kom ihåg mitt val"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Ta bort"
 
@@ -4300,6 +4307,10 @@ msgstr "Ta bort mapp"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Ta bort från spellista"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4703,7 +4714,7 @@ msgstr "Välj visualiseringar"
 msgid "Select visualizations..."
 msgstr "Välj visualiseringar..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Välj..."
 
@@ -5080,7 +5091,7 @@ msgstr "Starta kopiering"
 msgid "Start the playlist currently playing"
 msgstr "Starta spellistan som nu spelas"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
@@ -5485,7 +5496,7 @@ msgstr "Spå&r"
 msgid "Track"
 msgstr "Spår"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Omkoda musik"
 

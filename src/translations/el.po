@@ -31,8 +31,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2022-01-07 07:58+0000\n"
-"Last-Translator: Dimitrios Glentadakis <dglent@free.fr>\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -200,19 +200,19 @@ msgstr "%L1 κομμάτια"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -537,7 +537,7 @@ msgstr "Προσθήκη νέας γραμμής αν υποστηρίζεται
 msgid "Add action"
 msgstr "Προσθήκη ενέργειας"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Προσθήκη όλων των κομματιών από έναν κατάλογο και όλους τους υποκαταλόγους του"
 
@@ -545,7 +545,7 @@ msgstr "Προσθήκη όλων των κομματιών από έναν κα
 msgid "Add another stream..."
 msgstr "Προσθήκη άλλης ροής..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
 
@@ -561,15 +561,15 @@ msgstr "Προσθήκη αρχείου για διακωδικοποίηση"
 msgid "Add file(s) to transcoder"
 msgstr "Προσθήκη αρχείου(ων) για διακωδικοποίηση"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Προσθήκη αρχείου..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Προσθήκη αρχείων για επανακωδικοποίηση"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Προσθήκη φακέλου"
@@ -814,7 +814,7 @@ msgstr "Επιτρέπονται λήψεις"
 msgid "Allow mid/side encoding"
 msgstr "Επιτρέψτε μέση/πλάγια κωδικοποίηση"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Παράλληλα με τα πρωτότυπα"
 
@@ -912,7 +912,7 @@ msgstr "Αρχικά του καλλιτέχνη"
 msgid "As&k when saving"
 msgstr "Ε&ρώτηση κατά την αποθήκευση"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1761,12 +1761,12 @@ msgstr "Αφαίρεση των επιλεγμένων κομματιών από
 msgid "Dequeue track"
 msgstr "Αφαίρεση του κομματιού από την λίστα αναμονής"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Προορισμός"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Λεπτομέρειες..."
 
@@ -1819,7 +1819,7 @@ msgid "Direct internet connection"
 msgstr "Απευθείας σύνδεση στο διαδίκτυο"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Κατάλογος"
 
@@ -2457,7 +2457,7 @@ msgstr "Μέγεθος αρχείου"
 msgid "File type"
 msgstr "Τύπος αρχείου"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Όνομα αρχείου"
 
@@ -2473,7 +2473,7 @@ msgstr "Αρχεία"
 msgid "Files root folder"
 msgstr " Φάκελος με Θεμελιώδες Αρχεία"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Αρχεία προς αλλαγή του τύπου συμπίεσης"
 
@@ -2789,6 +2789,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Αν ενεργοποιηθεί, κάνοντας κλικ σε ένα επιλεγμένο τραγούδι στην όψη λίστα αναπαραγωγής θα σας επιτρέψει να επεξεργαστείτε άμεσα την τιμή της ετικέτας"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3421,7 +3428,7 @@ msgstr "Μετακίνηση στην βιβλιοθήκη..."
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Μουσική"
 
@@ -3719,7 +3726,7 @@ msgstr "Άνοιγμα αρχείου OPML"
 msgid "Open OPML file..."
 msgstr "Άνοιγμα αρχείου OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Άνοιγμα ένος κατάλογου για εισάγωγη μουσικής από"
 
@@ -3767,7 +3774,7 @@ msgstr "Βελτιστοποίηση για ρυθμό bit"
 msgid "Optimize for quality"
 msgstr "Βελτιστοποίηση για ποιότητα"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3824,7 +3831,7 @@ msgstr "Έξοδος"
 msgid "Output device"
 msgstr "Συσκευή εξόδου"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Επιλογές εξόδου"
 
@@ -4100,7 +4107,7 @@ msgstr "Εκτύπωση πληροφοριών έκδοσης"
 msgid "Profile"
 msgstr "Προφίλ"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Πρόοδος"
 
@@ -4276,7 +4283,7 @@ msgstr "Απομνημόνευση της επιλογής μου"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Αφαίρεση"
 
@@ -4299,6 +4306,10 @@ msgstr "Αφαίρεση φακέλου"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Αφαίρεση από την λίστα"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4702,7 +4713,7 @@ msgstr "Επιλογή οπτικών τεχνασμάτων"
 msgid "Select visualizations..."
 msgstr "Επιλογή οπτικών τεχνασμάτων..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Επιλογή..."
 
@@ -5079,7 +5090,7 @@ msgstr "Έναρξη αντιγραφής"
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Εκκίνηση διακωδικοποίησης"
 
@@ -5484,7 +5495,7 @@ msgstr "Κο&μμάτι"
 msgid "Track"
 msgstr "Κομμάτι"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Διακωδικοποίηση μουσικής"
 

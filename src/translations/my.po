@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/davidsansome/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,19 +176,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n ဖွင့်မရ"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n ပြီးဆံုး"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -513,7 +513,7 @@ msgstr "သတိပေးချက်ပုံစံလက်ခံပါကလ
 msgid "Add action"
 msgstr "လုပ်ဆောင်ချက်ထည့်ပါ"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -521,7 +521,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "သီချင်းစီးကြောင်းနောက်တစ်ခုထည့်..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
@@ -537,15 +537,15 @@ msgstr "ဖိုင်များကိုပံုစံပြောင်း
 msgid "Add file(s) to transcoder"
 msgstr "ဖိုင်(များ)ကိုပံုစံပြောင်းလဲသူသို့ထည့်ပါ"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "ဖိုင်ထည့်..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲရန်ထည့်ပါ"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "ဖိုင်တွဲထည့်"
@@ -790,7 +790,7 @@ msgstr "ကူးဆွဲများခွင့်ပြု"
 msgid "Allow mid/side encoding"
 msgstr "အလယ်/ဘေးကုဒ်ပြောင်းခွင့်ပြု"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "မူရင်းများနှင့်အတူ"
 
@@ -888,7 +888,7 @@ msgstr "အနုပညာရှင်အမည်၏အစ"
 msgid "As&k when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1737,12 +1737,12 @@ msgstr "ရွေးချယ်တေးသံလမ်းကြောမျာ
 msgid "Dequeue track"
 msgstr "တေးသံလမ်းကြောမစီတန်း"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "သွားမည့်နေရာ"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "အသေးစိတ်အကြောင်းအရာများ..."
 
@@ -1795,7 +1795,7 @@ msgid "Direct internet connection"
 msgstr "အင်တာနက်တိုက်ရိုက်ဆက်သွယ်မှု"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "ဖိုင်လမ်းညွှန်"
 
@@ -2433,7 +2433,7 @@ msgstr "ဖိုင်ပမာဏ"
 msgid "File type"
 msgstr "ဖိုင်အမျိုးအစား"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "ဖိုင်နာမည်"
 
@@ -2449,7 +2449,7 @@ msgstr "ဖိုင်များ"
 msgid "Files root folder"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲ"
 
@@ -2764,6 +2764,13 @@ msgstr "သီချင်းများစစ်ရွေးနေ"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
+msgstr ""
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
 msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
@@ -3397,7 +3404,7 @@ msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3695,7 +3702,7 @@ msgstr "အိုပီအမ်အယ်ဖိုင်ဖွင့်"
 msgid "Open OPML file..."
 msgstr "အိုပီအမ်အယ်ဖိုင်ဖွင့်..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -3743,7 +3750,7 @@ msgstr "ဘစ်နှုန်းအတွက်ဆောင်ရွက်"
 msgid "Optimize for quality"
 msgstr "အရည်အသွေးအတွက်ဆောင်ရွက်"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3800,7 +3807,7 @@ msgstr "ပေးပို့"
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "ပေးပို့ရွေးပိုင်ခွင့်များ"
 
@@ -4076,7 +4083,7 @@ msgstr "ပုံစံအချက်အလက်ဖော်ပြ"
 msgid "Profile"
 msgstr "အကြောင်း"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "အခြေအနေ"
 
@@ -4252,7 +4259,7 @@ msgstr ""
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "ဖယ်ရှား"
 
@@ -4275,6 +4282,10 @@ msgstr "ဖိုင်တွဲဖယ်ရှား"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4678,7 +4689,7 @@ msgstr "ပုံဖော်ကြည့်ခြင်းများရွေ
 msgid "Select visualizations..."
 msgstr "ပုံဖော်ကြည့်ခြင်းများရွေးချယ်..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "ရွေးချယ်..."
 
@@ -5055,7 +5066,7 @@ msgstr ""
 msgid "Start the playlist currently playing"
 msgstr "လက်ရှိဖွင့်ဆဲသီချင်းစာရင်းစတင်"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်းစတင်"
 
@@ -5460,7 +5471,7 @@ msgstr ""
 msgid "Track"
 msgstr "တေးသံလမ်းကြော"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "ဂီတပံုစံပြောင်းလဲခြင်း"
 

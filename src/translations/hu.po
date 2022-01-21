@@ -5,7 +5,7 @@
 # Translators:
 # andrewtranslates <andrewtranslates@aol.com>, 2014
 # Balázs Meskó <meskobalazs@mailbox.org>, 2015-2019
-# Balázs Meskó <meskobalazs@mailbox.org>, 2020-2021
+# Balázs Meskó <meskobalazs@mailbox.org>, 2020-2022
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # gyeben <gyonkibendeguz@gmail.com>, 2012
 # 1942ffb5e9d049d89a8409ca10a60f49, 2012
@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 09:33+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2022-01-20 14:09+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr "ANMR eljárás (kísérleti)"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
-msgstr " napok"
+msgstr " nap"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsavaac.h:135
@@ -79,7 +79,7 @@ msgstr " másodperc"
 
 #: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
-msgstr " számok"
+msgstr " szám"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -107,7 +107,7 @@ msgstr "%1 nappal ezelőtt"
 msgid ""
 "%1 failed to decode as gzip stream:\n"
 "%2"
-msgstr ""
+msgstr "A(z) %1 gzip adatfolyamként történő dekódolása sikertelen:\n%2"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -187,19 +187,19 @@ msgstr "%L1 szám"
 msgid "%filename%"
 msgstr "%fájlnév%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n sikertelen"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -524,7 +524,7 @@ msgstr "Sortörés hozzáadása ha az értesítés támogatja"
 msgid "Add action"
 msgstr "Művelet felvétele"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Minden szám hozzáadása a mappából és almappáiból"
 
@@ -532,7 +532,7 @@ msgstr "Minden szám hozzáadása a mappából és almappáiból"
 msgid "Add another stream..."
 msgstr "Új közvetítés hozzáadása"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Mappa hozzáadása"
 
@@ -548,15 +548,15 @@ msgstr "Fájl hozzáadása az átkódoláshoz"
 msgid "Add file(s) to transcoder"
 msgstr "Fájl(ok) hozzáadása az átkódoláshoz"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Fájl hozzáadása"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Fájlok felvétele átkódoláshoz"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Mappa hozzáadása"
@@ -801,7 +801,7 @@ msgstr "Letöltések engedélyezése"
 msgid "Allow mid/side encoding"
 msgstr "Mid/side kódolás engedélyezése"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Az eredetiek mellett"
 
@@ -899,7 +899,7 @@ msgstr "Előadó monogramja"
 msgid "As&k when saving"
 msgstr "&Kérdezzen rá mentéskor"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1748,12 +1748,12 @@ msgstr "Kiválasztott számok törlése a sorból"
 msgid "Dequeue track"
 msgstr "Szám törlése a sorból"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Cél"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Részletek…"
 
@@ -1806,7 +1806,7 @@ msgid "Direct internet connection"
 msgstr "Közvetlen internetkapcsolat"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Könyvtár"
 
@@ -2444,13 +2444,13 @@ msgstr "Fájlméret"
 msgid "File type"
 msgstr "Fájltípus"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Fájlnév"
 
 #: ../bin/src/ui_ripcddialog.h:339
 msgid "Filename Preview"
-msgstr ""
+msgstr "Fájlnév előnézete"
 
 #: ui/mainwindow.cpp:273
 msgid "Files"
@@ -2460,7 +2460,7 @@ msgstr "Fájlok"
 msgid "Files root folder"
 msgstr "Fájlok gyökérmappája"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Átkódolandó fájlok"
 
@@ -2776,6 +2776,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Aktiválásakor a kiválasztott szám címkéje szerkeszthető lesz kiválasztáskor"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Ha engedélyezett, akkor az eredeti fájlok törölve lesznek. Ha az átkódolt fájlok kiterjesztése és mappája is ugyanaz mint az eredeti fájloké, akkor az eredeti fájlok le lesznek cserélve."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3408,7 +3415,7 @@ msgstr "Áthelyezés a zenetárba…"
 msgid "Move up"
 msgstr "Mozgatás felfelé"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Zene"
 
@@ -3706,7 +3713,7 @@ msgstr "OPML-fájl megnyitása"
 msgid "Open OPML file..."
 msgstr "OPML-fájl megnyitása…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Könyvtár megnyitása zene importáláshoz"
 
@@ -3754,7 +3761,7 @@ msgstr "Optimalizálás bitrátára"
 msgid "Optimize for quality"
 msgstr "Optimalizálás minőségre"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3811,7 +3818,7 @@ msgstr "Kimenet"
 msgid "Output device"
 msgstr "Kimeneti eszköz"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Kimenet beállításai"
 
@@ -4087,7 +4094,7 @@ msgstr "Verzió információ megjelenítése…"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Folyamat"
 
@@ -4263,7 +4270,7 @@ msgstr "Választás megjegyzése"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -4286,6 +4293,10 @@ msgstr "Mappa eltávolítása"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Eltávolítás a lejátszólistáról"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Eredeti fájlok eltávolítása vagy lecserélése"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4689,7 +4700,7 @@ msgstr "Megjelenítések kiválasztása"
 msgid "Select visualizations..."
 msgstr "Megjelenítések kiválasztása…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Kiválasztás…"
 
@@ -5066,7 +5077,7 @@ msgstr "Beolvasás indítása"
 msgid "Start the playlist currently playing"
 msgstr "Az éppen játszott lejátszólista indítása"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Átkódolás indítása"
 
@@ -5471,7 +5482,7 @@ msgstr "Szá&m"
 msgid "Track"
 msgstr "Szám"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Zene átkódolása"
 

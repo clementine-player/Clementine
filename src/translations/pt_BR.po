@@ -6,7 +6,7 @@
 # Alexandro Casanova <shorterfire@gmail.com>, 2013-2014
 # Amilton Pereira cavalcante <amiltonpc@gmail.com>, 2013
 # bedi1982 <bedi.com@gmail.com>, 2012
-# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014-2021
+# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014-2022
 # carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Gustavo Brito Sampaio <gbritosampaio@gmail.com>, 2014
@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 16:47+0000\n"
+"PO-Revision-Date: 2022-01-20 15:54+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -188,19 +188,19 @@ msgstr "%L1 faixas"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n falhou"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n finalizado"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -525,7 +525,7 @@ msgstr "Adicionar uma nova linha se suportado pelo tipo de notificação"
 msgid "Add action"
 msgstr "Adicionar ação"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Adicionar todas as faixas de uma pasta e de suas subpastas"
 
@@ -533,7 +533,7 @@ msgstr "Adicionar todas as faixas de uma pasta e de suas subpastas"
 msgid "Add another stream..."
 msgstr "Adicionar outro canal..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Adicionar diretório..."
 
@@ -549,15 +549,15 @@ msgstr "Adicionar arquivo para conversor"
 msgid "Add file(s) to transcoder"
 msgstr "Adicionar arquivo(s) para conversor"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Adicionar arquivo..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Adicionar arquivos para converter"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Adicionar pasta"
@@ -802,7 +802,7 @@ msgstr "Permitir downloads"
 msgid "Allow mid/side encoding"
 msgstr "Permitir codificação mid/side"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Juntamente com os originais"
 
@@ -900,7 +900,7 @@ msgstr "Inicial do artista"
 msgid "As&k when saving"
 msgstr "Per&guntar ao salvar"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1749,12 +1749,12 @@ msgstr "Retirar faixas selecionadas da fila"
 msgid "Dequeue track"
 msgstr "Retirar faixa da fila"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Destino"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Detalhes..."
 
@@ -1807,7 +1807,7 @@ msgid "Direct internet connection"
 msgstr "Conexão direta à Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Diretório"
 
@@ -2445,7 +2445,7 @@ msgstr "Tamanho do arquivo"
 msgid "File type"
 msgstr "Tipo de arquivo"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Nome do arquivo"
 
@@ -2461,7 +2461,7 @@ msgstr "Arquivos"
 msgid "Files root folder"
 msgstr "Pasta raiz de arquivos"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Arquivos para converter"
 
@@ -2777,6 +2777,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Caso ativado, ao clicar numa música na lista de reprodução, você poderá editar diretamente os valores de sua etiqueta."
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Se habilitado, os arquivos originais serão removidos. Se os arquivos transcodificados possuírem a mesma extensão e o destino for o mesmo diretório dos arquivos originais, eles serão substituídos."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3409,7 +3416,7 @@ msgstr "Mover para biblioteca..."
 msgid "Move up"
 msgstr "Para cima"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Música"
 
@@ -3707,7 +3714,7 @@ msgstr "Abrir arquivo OPML"
 msgid "Open OPML file..."
 msgstr "Abrir arquivo OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Abrir uma pasta para importar músicas"
 
@@ -3755,7 +3762,7 @@ msgstr "Otimizar por taxa de bits"
 msgid "Optimize for quality"
 msgstr "Otimizar por qualidade"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3812,7 +3819,7 @@ msgstr "Saída"
 msgid "Output device"
 msgstr "Dispositivo de saída"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Opções de Saída"
 
@@ -4088,7 +4095,7 @@ msgstr "Imprimir informação da versão"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Andamento"
 
@@ -4264,7 +4271,7 @@ msgstr "Lembrar-se da minha escolha"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Remover"
 
@@ -4287,6 +4294,10 @@ msgstr "Remover pasta"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Remover da lista de reprodução"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Remover ou substituir os arquivos originais"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4690,7 +4701,7 @@ msgstr "Selecionar visualizações"
 msgid "Select visualizations..."
 msgstr "Selecione as visualizações..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Selecionar..."
 
@@ -5067,7 +5078,7 @@ msgstr "Iniciar conversão"
 msgid "Start the playlist currently playing"
 msgstr "Iniciar a lista que está em execução"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Começar conversão"
 
@@ -5472,7 +5483,7 @@ msgstr "&Faixa"
 msgid "Track"
 msgstr "Faixa"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Converter Música"
 

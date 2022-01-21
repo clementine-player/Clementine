@@ -10,7 +10,7 @@
 # AzuraMeta <azura.meta@gmail.com>, 2011
 # 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # CD <cstl@vivaldi.net>, 2015-2016
-# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019-2021
+# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019-2022
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # ilixandr <ilixandr@gmail.com>, 2014
@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-08-31 19:36+0000\n"
+"PO-Revision-Date: 2022-01-20 14:55+0000\n"
 "Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,19 +190,19 @@ msgstr "%L1 piese"
 msgid "%filename%"
 msgstr "%nume fișier%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -527,7 +527,7 @@ msgstr "Adaugă o linie nouă dacă este acceptată de tipul de notificare"
 msgid "Add action"
 msgstr "Adaugă acțiune"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Adaugă toate piesele dintr-un director și din toate subdirectoarele sale"
 
@@ -535,7 +535,7 @@ msgstr "Adaugă toate piesele dintr-un director și din toate subdirectoarele sa
 msgid "Add another stream..."
 msgstr "Adaugă alt flux..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Adăugare dosar..."
 
@@ -551,15 +551,15 @@ msgstr "Adaugă fișier la transcodor"
 msgid "Add file(s) to transcoder"
 msgstr "Adaugă fișier(e) la transcodor"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Adaugă fișier..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Adaugă fișiere pentru transcodat"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Adăugare dosar"
@@ -804,7 +804,7 @@ msgstr "Permite descărcări"
 msgid "Allow mid/side encoding"
 msgstr "Permite codarea mijloc/părți"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Lângă originale"
 
@@ -902,7 +902,7 @@ msgstr "Inițială artist"
 msgid "As&k when saving"
 msgstr "Întrea&bă când se salvează"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1751,12 +1751,12 @@ msgstr "Elimină din coadă piesele selectate"
 msgid "Dequeue track"
 msgstr "Elimină din coadă piesa"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Destinație"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Detalii..."
 
@@ -1809,7 +1809,7 @@ msgid "Direct internet connection"
 msgstr "Conexiune directă la internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Director"
 
@@ -2447,7 +2447,7 @@ msgstr "Dimensiune fișier"
 msgid "File type"
 msgstr "Tip fișier"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Nume fișier"
 
@@ -2463,7 +2463,7 @@ msgstr "Fișiere"
 msgid "Files root folder"
 msgstr "Dosarul rădăcină al fișierelor"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Fișiere de transcodat"
 
@@ -2779,6 +2779,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Dacă această opțiune este activă, un clic pe melodia selectată în lista de redare va permite editarea directă a valorii etichetei"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Dacă este activată, fișierele originale vor fi eliminate. Dacă fișierele transcodate au aceeași extensie și destinația în același director ca fișierele originale, fișierele originale vor fi înlocuite."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3411,7 +3418,7 @@ msgstr "Mută în colecție..."
 msgid "Move up"
 msgstr "Mută în sus"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Muzică"
 
@@ -3709,7 +3716,7 @@ msgstr "Deschide fișier OPML"
 msgid "Open OPML file..."
 msgstr "Deschide fișier OPML..."
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Deschide un director pentru a se importa muzica din el"
 
@@ -3757,7 +3764,7 @@ msgstr "Optimizează pentru rata de biți"
 msgid "Optimize for quality"
 msgstr "Optimizează pentru calitate"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3814,7 +3821,7 @@ msgstr "Ieșire"
 msgid "Output device"
 msgstr "Dispozitiv de ieșire"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Opțiuni ieșire"
 
@@ -4090,7 +4097,7 @@ msgstr "Tipărește informația versiunii"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Progres"
 
@@ -4266,7 +4273,7 @@ msgstr "Ține minte alegerea mea"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Elimină"
 
@@ -4289,6 +4296,10 @@ msgstr "Elimină dosar"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Elimină din lista de redare"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Elimină sau înlocuiește fișierele originale"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4692,7 +4703,7 @@ msgstr "Selectați vizualizările"
 msgid "Select visualizations..."
 msgstr "Selectați vizualizările..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Selectați..."
 
@@ -5069,7 +5080,7 @@ msgstr "Pornire extragere"
 msgid "Start the playlist currently playing"
 msgstr "Pornește lista de redare curent redată"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Pornire transcodificare"
 
@@ -5474,7 +5485,7 @@ msgstr "Pie&să"
 msgid "Track"
 msgstr "Piesă"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Transcodează muzica"
 

@@ -26,8 +26,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-09-05 14:34+0000\n"
-"Last-Translator: Jung Hee Lee <daemul72@gmail.com>\n"
+"PO-Revision-Date: 2022-01-20 11:56+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -195,19 +195,19 @@ msgstr "%L1곡"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 실패"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 끝냄"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -532,7 +532,7 @@ msgstr "알림 유형에서 지원하는 경우 새 줄 추가"
 msgid "Add action"
 msgstr "동작 추가"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "디렉토리의 모든 곡 및 모든 하위 디렉터리 추가"
 
@@ -540,7 +540,7 @@ msgstr "디렉토리의 모든 곡 및 모든 하위 디렉터리 추가"
 msgid "Add another stream..."
 msgstr "다른 스트림 추가..."
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "디렉토리 추가..."
 
@@ -556,15 +556,15 @@ msgstr "변환기에 파일 추가"
 msgid "Add file(s) to transcoder"
 msgstr "변환기에 파일(들) 추가"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "파일 추가..."
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "폴더 추가"
@@ -809,7 +809,7 @@ msgstr "다운로드 허용"
 msgid "Allow mid/side encoding"
 msgstr "중간/측면 인코딩 허용"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "원본과 함께"
 
@@ -907,7 +907,7 @@ msgstr "아티스트 이니셜"
 msgid "As&k when saving"
 msgstr "저장할 때 묻기(&K)"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1756,12 +1756,12 @@ msgstr "선택한 곡을 대기열에서 해제"
 msgid "Dequeue track"
 msgstr "곡을 대기열에서 해제"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "대상"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "세부 내용..."
 
@@ -1814,7 +1814,7 @@ msgid "Direct internet connection"
 msgstr "직접 인터넷 연결"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "디렉토리"
 
@@ -2452,7 +2452,7 @@ msgstr "파일 크기"
 msgid "File type"
 msgstr "파일 유형"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "파일이름"
 
@@ -2468,7 +2468,7 @@ msgstr "파일"
 msgid "Files root folder"
 msgstr "파일 루트 폴더"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "변환할 파일들"
 
@@ -2784,6 +2784,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "활성화된 경우, 재생 목록 보기에서 선택한 노래를 클릭하면 태그 값을 직접 편집할 수 있습니다"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr ""
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3416,7 +3423,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "음악"
 
@@ -3714,7 +3721,7 @@ msgstr "OPML 파일 열기"
 msgid "Open OPML file..."
 msgstr "OPML 파일 열기"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "음악을 가져올 디렉토리 열기"
 
@@ -3762,7 +3769,7 @@ msgstr "비트레이트에 최적화"
 msgid "Optimize for quality"
 msgstr "음질 최적화"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3819,7 +3826,7 @@ msgstr "출력"
 msgid "Output device"
 msgstr "출력 장치"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "저장 옵션"
 
@@ -4095,7 +4102,7 @@ msgstr "버전 정보 출력"
 msgid "Profile"
 msgstr "프로필"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "진행"
 
@@ -4271,7 +4278,7 @@ msgstr "나의 선택을 기억"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "제거"
 
@@ -4294,6 +4301,10 @@ msgstr "폴더 제거"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "재생목록에서 제거"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4697,7 +4708,7 @@ msgstr "시각화 선택"
 msgid "Select visualizations..."
 msgstr "시각화 선택..."
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "선택..."
 
@@ -5074,7 +5085,7 @@ msgstr "추출 시작"
 msgid "Start the playlist currently playing"
 msgstr "현재 재생중인 재생목록 시작"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "변환 시작"
 
@@ -5479,7 +5490,7 @@ msgstr "곡(&K)"
 msgid "Track"
 msgstr "곡"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "음악 변환"
 

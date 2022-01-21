@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2022-01-16 09:59+0000\n"
+"PO-Revision-Date: 2022-01-20 14:20+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -205,19 +205,19 @@ msgstr "%L1 треков"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:237
+#: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#: transcoder/transcodedialog.cpp:232
+#: transcoder/transcodedialog.cpp:253
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n завершено"
 
-#: transcoder/transcodedialog.cpp:226
+#: transcoder/transcodedialog.cpp:247
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -542,7 +542,7 @@ msgstr "Добавить новую строку, если поддержива�
 msgid "Add action"
 msgstr "Добавить действие"
 
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Добавить все треки из папки и её подпапок"
 
@@ -550,7 +550,7 @@ msgstr "Добавить все треки из папки и её подпап�
 msgid "Add another stream..."
 msgstr "Добавить другой поток…"
 
-#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:229
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
@@ -566,15 +566,15 @@ msgstr "Конвертировать файл"
 msgid "Add file(s) to transcoder"
 msgstr "Конвертировать файл(ы)"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
+#: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
 msgstr "Добавить файл…"
 
-#: transcoder/transcodedialog.cpp:247
+#: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:328 ui/mainwindow.cpp:2199
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:271
 msgid "Add folder"
 msgstr "Добавить папку"
@@ -819,7 +819,7 @@ msgstr "Разрешить загрузки"
 msgid "Allow mid/side encoding"
 msgstr "Разрешить mid/side кодирование"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
 msgstr "Вместе с оригиналами"
 
@@ -917,7 +917,7 @@ msgstr "Инициалы исполнителя"
 msgid "As&k when saving"
 msgstr "Сп&рашивать при сохранении"
 
-#: ../bin/src/ui_transcodedialog.h:225
+#: ../bin/src/ui_transcodedialog.h:232
 #: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
@@ -1766,12 +1766,12 @@ msgstr "Убрать выбранные треки из очереди"
 msgid "Dequeue track"
 msgstr "Убрать трек из очереди"
 
-#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:179
+#: ../bin/src/ui_transcodedialog.h:234 ../bin/src/ui_organisedialog.h:179
 #: ../bin/src/ui_ripcddialog.h:346
 msgid "Destination"
 msgstr "Назначение"
 
-#: ../bin/src/ui_transcodedialog.h:234
+#: ../bin/src/ui_transcodedialog.h:245
 msgid "Details..."
 msgstr "Подробнее…"
 
@@ -1824,7 +1824,7 @@ msgid "Direct internet connection"
 msgstr "Прямое соединение с Интернетом"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Directory"
 msgstr "Каталог"
 
@@ -2462,7 +2462,7 @@ msgstr "Размер файла"
 msgid "File type"
 msgstr "Тип файла"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:224
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -2478,7 +2478,7 @@ msgstr "Файлы"
 msgid "Files root folder"
 msgstr "Файлы корневой папки"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Files to transcode"
 msgstr "Файлы для конвертации"
 
@@ -2794,6 +2794,13 @@ msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Если включить, то клик по выбранной песне в плейлисте позволит редактировать тег напрямую"
+
+#: ../bin/src/ui_transcodedialog.h:241
+msgid ""
+"If enabled the original files will be removed. If transcoded files have the "
+"same file extension and the destination is the same directory as the "
+"original files, the original files will be replaced."
+msgstr "Если включено, исходные файлы будут удалены. Если перекодированные файлы имеют то же расширение и место назначения, что и исходные, то исходные файлы будут заменены."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -3426,7 +3433,7 @@ msgstr "Переместить в фонотеку…"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:249 ui/mainwindow.cpp:2174
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2174
 msgid "Music"
 msgstr "Музыка"
 
@@ -3724,7 +3731,7 @@ msgstr "Открыть файл OPML"
 msgid "Open OPML file..."
 msgstr "Открыть файл OPML…"
 
-#: transcoder/transcodedialog.cpp:264
+#: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
 msgstr "Открыть папку для импортирования музыки"
 
@@ -3772,7 +3779,7 @@ msgstr "Оптимизировать по битрейту"
 msgid "Optimize for quality"
 msgstr "Оптимизировать по качеству"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:233
 #: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
@@ -3829,7 +3836,7 @@ msgstr "Вывод"
 msgid "Output device"
 msgstr "Устройство вывода"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:345
+#: ../bin/src/ui_transcodedialog.h:231 ../bin/src/ui_ripcddialog.h:345
 msgid "Output options"
 msgstr "Настройки вывода"
 
@@ -4105,7 +4112,7 @@ msgstr "Вывести информацию о версии"
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:350
+#: ../bin/src/ui_transcodedialog.h:244 ../bin/src/ui_ripcddialog.h:350
 msgid "Progress"
 msgstr "Ход выполнения"
 
@@ -4281,7 +4288,7 @@ msgstr "Запомнить мой выбор"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
-#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Remove"
 msgstr "Удалить"
 
@@ -4304,6 +4311,10 @@ msgstr "Удалить папку"
 #: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
 msgid "Remove from playlist"
 msgstr "Удалить из плейлиста"
+
+#: ../bin/src/ui_transcodedialog.h:243
+msgid "Remove or replace original files "
+msgstr "Удалить или заменить исходные файлы"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4707,7 +4718,7 @@ msgstr "Выбрать визуализации"
 msgid "Select visualizations..."
 msgstr "Выбрать визуализации…"
 
-#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:348
+#: ../bin/src/ui_transcodedialog.h:239 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Выбрать…"
 
@@ -5084,7 +5095,7 @@ msgstr "Начать конвертирование"
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас плейлист"
 
-#: transcoder/transcodedialog.cpp:102
+#: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Конвертировать"
 
@@ -5489,7 +5500,7 @@ msgstr "&Трек"
 msgid "Track"
 msgstr "Трек"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:756
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_mainwindow.h:756
 msgid "Transcode Music"
 msgstr "Конвертер музыки"
 
