@@ -20,6 +20,7 @@
 #define SRC_RIPPER_RIPCDDIALOG_H_
 
 #include <QDialog>
+#include <QTimer>
 #include <memory>
 
 #include "core/song.h"
@@ -55,10 +56,7 @@ class RipCDDialog : public QDialog {
   void SelectNone();
   void InvertSelection();
   void DeviceSelected(int device_index);
-  void Finished(Ripper* ripper);
-  void Cancelled(Ripper* ripper);
-  void SetupProgressBarLimits(int min, int max);
-  void UpdateProgressBar(int progress);
+  void Finished(Ripper& ripper, float progress_to_display);
   void SongsLoaded(const SongList& songs);
   void DiscChanged();
   void FormatStringUpdated();
@@ -67,10 +65,12 @@ class RipCDDialog : public QDialog {
   void YearEditChanged(const QString& year_string);
   void UpdateMetadataEdits();
   void UpdateMetadataFromGUI();
+  void TranscodingProgressTimeout(Ripper& ripper);
 
  private:
   static const char* kSettingsGroup;
   static const int kMaxDestinationItems;
+  static const int kTranscodingProgressIntervalMs;
 
   void AddDestinationDirectory(QString dir);
   void SetWorking(bool working);
@@ -90,5 +90,7 @@ class RipCDDialog : public QDialog {
   bool working_;
   std::shared_ptr<CddaDevice> cdda_device_;
   SongList songs_;
+  QTimer transcoding_progress_timer_;
+  QMetaObject::Connection transcoding_progress_timer_connection_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

@@ -22,6 +22,7 @@
 
 #include <QMutex>
 #include <QObject>
+#include <QTimer>
 
 #include "core/song.h"
 #include "core/tagreaderclient.h"
@@ -60,12 +61,17 @@ class Ripper : public QObject {
   int AddedTracks() const;
   // Clears the rip list.
   void ClearTracks();
+  // Returns the current progress of the ripping process for all tracks as a
+  // floating point number between 0 and 1.
+  float GetProgress() const;
 
  signals:
+  // Emitted when the full process, i.e., ripping, transcoding and tagging, is
+  // completed or has failed.
   void Finished();
   void Cancelled();
-  void ProgressInterval(int min, int max);
-  void Progress(int progress);
+  // Emitted when ripping and transcoding files is completed, but files still
+  // need to be tagged.
   void RippingComplete();
 
  public slots:
