@@ -55,6 +55,7 @@ const int kTrackFilenamePreviewColumn = 4;
 
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
+const int RipCDDialog::kTranscodingProgressIntervalMs = 500;
 
 RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
     : QDialog(parent),
@@ -63,7 +64,8 @@ RipCDDialog::RipCDDialog(DeviceManager* device_manager, QWidget* parent)
       cdda_devices_(
           device_manager->FindDevicesByUrlSchemes(CddaDevice::url_schemes())),
       working_(false),
-      cdda_device_() {
+      cdda_device_(),
+      transcoding_progress_timer_(this) {
   Q_ASSERT(device_manager);
   // Init
   ui_->setupUi(this);
@@ -211,15 +213,24 @@ void RipCDDialog::ClickedRipButton() {
 
   // create and connect Ripper instance for this task
   Ripper* ripper = new Ripper(cdda_device_->song_count(), this);
+  if (!ripper) {
+    qLog(Error) << "Could not create Ripper instance";
+    return;
+  }
+
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
 
-  connect(ripper, &Ripper::Finished, this,
-          [this, ripper]() { this->Finished(ripper); });
-  connect(ripper, &Ripper::Cancelled, this,
-          [this, ripper]() { this->Cancelled(ripper); });
-  connect(ripper, SIGNAL(ProgressInterval(int, int)),
-          SLOT(SetupProgressBarLimits(int, int)));
-  connect(ripper, SIGNAL(Progress(int)), SLOT(UpdateProgressBar(int)));
+  connect(ripper, &Ripper::Finished, this, [this, ripper]() {
+    this->Finished(*ripper, /*progress_to_display = */ 1.0f);
+  });
+  connect(ripper, &Ripper::Cancelled, this, [this, ripper]() {
+    this->Finished(*ripper, /*progress_to_display = */ 0.0f);
+  });
+
+  ui_->progress_bar->setRange(0, 100);
+  transcoding_progress_timer_connection_ =
+      connect(&transcoding_progress_timer_, &QTimer::timeout, this,
+              [this, ripper]() { this->TranscodingProgressTimeout(*ripper); });
 
   // Add tracks and album information to the ripper.
   ripper->ClearTracks();
@@ -243,6 +254,7 @@ void RipCDDialog::ClickedRipButton() {
 
   SetWorking(true);
   ripper->Start();
+  transcoding_progress_timer_.start(kTranscodingProgressIntervalMs);
 
   // store settings
   QSettings s;
@@ -343,21 +355,13 @@ void RipCDDialog::DeviceSelected(int device_index) {
           SLOT(SongsLoaded(SongList)));
 }
 
-void RipCDDialog::Finished(Ripper* ripper) {
+void RipCDDialog::Finished(Ripper& ripper, float progress_to_display) {
   SetWorking(false);
-  ripper->deleteLater();
-}
+  ripper.deleteLater();
+  transcoding_progress_timer_.stop();
+  disconnect(transcoding_progress_timer_connection_);
 
-void RipCDDialog::Cancelled(Ripper* ripper) {
-  ui_->progress_bar->setValue(0);
-  Finished(ripper);
-}
-
-void RipCDDialog::SetupProgressBarLimits(int min, int max) {
-  ui_->progress_bar->setRange(min, max);
-}
-
-void RipCDDialog::UpdateProgressBar(int progress) {
+  int progress = qBound(0, static_cast<int>(progress_to_display * 100.0f), 100);
   ui_->progress_bar->setValue(progress);
 }
 
@@ -529,4 +533,12 @@ void RipCDDialog::UpdateMetadataFromGUI() {
       song.set_year(-1);
   }
   UpdateFileNamePreviews();
+}
+
+void RipCDDialog::TranscodingProgressTimeout(Ripper& ripper) {
+  if (working_) {
+    int progress =
+        qBound(0, static_cast<int>(ripper.GetProgress() * 100.0f), 100);
+    ui_->progress_bar->setValue(progress);
+  }
 }

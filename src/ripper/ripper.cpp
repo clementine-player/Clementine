@@ -95,7 +95,6 @@ void Ripper::Start() {
     QMutexLocker l(&mutex_);
     cancel_requested_ = false;
   }
-  SetupProgressInterval();
 
   qLog(Debug) << "Ripping" << AddedTracks() << "tracks.";
   QtConcurrent::run(this, &Ripper::Rip);
@@ -116,7 +115,6 @@ void Ripper::TranscodingJobComplete(const QUrl& input, const QString& output,
     finished_success_++;
   else
     finished_failed_++;
-  UpdateProgress();
 
   // The transcoder does not necessarily overwrite files. If not, it changes
   // the name of the output file. We need to update the transcoded
@@ -145,9 +143,6 @@ void Ripper::Rip() {
   finished_success_ = 0;
   finished_failed_ = 0;
 
-  // Set up progress bar
-  UpdateProgress();
-
   for (QList<TrackInformation>::iterator it = tracks_.begin();
        it != tracks_.end(); ++it) {
     QUrl track_url =
@@ -158,20 +153,15 @@ void Ripper::Rip() {
   emit RippingComplete();
 }
 
-// The progress interval is [0, 100*AddedTracks()].
-void Ripper::SetupProgressInterval() {
-  int max = AddedTracks() * 100;
-  emit ProgressInterval(0, max);
-}
+float Ripper::GetProgress() const {
+  float progress = finished_success_ + finished_failed_;
+  QList<float> current_job_progress_ = transcoder_->GetProgress().values();
+  progress += std::accumulate(current_job_progress_.begin(),
+                              current_job_progress_.end(), 0.0f);
+  progress /= AddedTracks();
 
-void Ripper::UpdateProgress() {
-  int progress = (finished_success_ + finished_failed_) * 100;
-  QMap<QUrl, float> current_jobs = transcoder_->GetProgress();
-  for (float value : current_jobs.values()) {
-    progress += qBound(0, static_cast<int>(value * 100), 99);
-  }
-  emit Progress(progress);
-  qLog(Debug) << "Progress:" << progress;
+  qLog(Debug) << "Progress: " << progress;
+  return progress;
 }
 
 void Ripper::TagFiles() {
