@@ -154,11 +154,14 @@ void Ripper::Rip() {
 }
 
 float Ripper::GetProgress() const {
+  int added_tracks = AddedTracks();
+  if (added_tracks == 0) return 1.0f;
+
   float progress = finished_success_ + finished_failed_;
   QList<float> current_job_progress_ = transcoder_->GetProgress().values();
   progress += std::accumulate(current_job_progress_.begin(),
                               current_job_progress_.end(), 0.0f);
-  progress /= AddedTracks();
+  progress /= added_tracks;
 
   qLog(Debug) << "Progress: " << progress;
   return progress;

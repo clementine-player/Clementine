@@ -213,10 +213,6 @@ void RipCDDialog::ClickedRipButton() {
 
   // create and connect Ripper instance for this task
   Ripper* ripper = new Ripper(cdda_device_->song_count(), this);
-  if (!ripper) {
-    qLog(Error) << "Could not create Ripper instance";
-    return;
-  }
 
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
 
