@@ -217,16 +217,16 @@ void RipCDDialog::ClickedRipButton() {
   connect(cancel_button_, SIGNAL(clicked()), ripper, SLOT(Cancel()));
 
   connect(ripper, &Ripper::Finished, this, [this, ripper]() {
-    this->Finished(*ripper, /*progress_to_display = */ 1.0f);
+    this->Finished(ripper, /*progress_to_display = */ 1.0f);
   });
   connect(ripper, &Ripper::Cancelled, this, [this, ripper]() {
-    this->Finished(*ripper, /*progress_to_display = */ 0.0f);
+    this->Finished(ripper, /*progress_to_display = */ 0.0f);
   });
 
   ui_->progress_bar->setRange(0, 100);
   transcoding_progress_timer_connection_ =
       connect(&transcoding_progress_timer_, &QTimer::timeout, this,
-              [this, ripper]() { this->TranscodingProgressTimeout(*ripper); });
+              [this, ripper]() { this->TranscodingProgressTimeout(ripper); });
 
   // Add tracks and album information to the ripper.
   ripper->ClearTracks();
@@ -351,9 +351,9 @@ void RipCDDialog::DeviceSelected(int device_index) {
           SLOT(SongsLoaded(SongList)));
 }
 
-void RipCDDialog::Finished(Ripper& ripper, float progress_to_display) {
+void RipCDDialog::Finished(Ripper* ripper, float progress_to_display) {
   SetWorking(false);
-  ripper.deleteLater();
+  ripper->deleteLater();
   transcoding_progress_timer_.stop();
   disconnect(transcoding_progress_timer_connection_);
 
@@ -531,10 +531,10 @@ void RipCDDialog::UpdateMetadataFromGUI() {
   UpdateFileNamePreviews();
 }
 
-void RipCDDialog::TranscodingProgressTimeout(Ripper& ripper) {
+void RipCDDialog::TranscodingProgressTimeout(Ripper* ripper) {
   if (working_) {
     int progress =
-        qBound(0, static_cast<int>(ripper.GetProgress() * 100.0f), 100);
+        qBound(0, static_cast<int>(ripper->GetProgress() * 100.0f), 100);
     ui_->progress_bar->setValue(progress);
   }
 }

@@ -56,7 +56,7 @@ class RipCDDialog : public QDialog {
   void SelectNone();
   void InvertSelection();
   void DeviceSelected(int device_index);
-  void Finished(Ripper& ripper, float progress_to_display);
+  void Finished(Ripper* ripper, float progress_to_display);
   void SongsLoaded(const SongList& songs);
   void DiscChanged();
   void FormatStringUpdated();
@@ -65,7 +65,7 @@ class RipCDDialog : public QDialog {
   void YearEditChanged(const QString& year_string);
   void UpdateMetadataEdits();
   void UpdateMetadataFromGUI();
-  void TranscodingProgressTimeout(Ripper& ripper);
+  void TranscodingProgressTimeout(Ripper* ripper);
 
  private:
   static const char* kSettingsGroup;
