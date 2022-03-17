@@ -120,6 +120,11 @@ return_song:
 
 void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&,
                      Playlist::Path path_type) const {
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
+  s.endGroup();
+
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -129,12 +134,14 @@ void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&,
     writer.writeAttribute("version", "3.0");
     for (const Song& song : songs) {
       StreamElement entry("entry", &writer);
-      writer.writeTextElement("title", song.title());
+      if (!song.title().isEmpty() && writeMetadata) {
+        writer.writeTextElement("title", song.title());
+      }
       {
         StreamElement ref("ref", &writer);
         writer.writeAttribute("href", song.url().toString());
       }
-      if (!song.artist().isEmpty()) {
+      if (!song.artist().isEmpty() && writeMetadata) {
         writer.writeTextElement("author", song.artist());
       }
     }
