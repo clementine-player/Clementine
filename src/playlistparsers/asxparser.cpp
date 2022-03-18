@@ -126,12 +126,11 @@ void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&,
   s.endGroup();
 
   QXmlStreamWriter writer(device);
+  writer.writeStartElement("asx");
+  writer.writeAttribute("version", "3.0");
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
-  writer.writeStartDocument();
   {
-    StreamElement asx("asx", &writer);
-    writer.writeAttribute("version", "3.0");
     for (const Song& song : songs) {
       StreamElement entry("entry", &writer);
       if (!song.title().isEmpty() && writeMetadata) {
@@ -146,7 +145,7 @@ void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&,
       }
     }
   }
-  writer.writeEndDocument();
+  writer.writeEndElement();
 }
 
 bool ASXParser::TryMagic(const QByteArray& data) const {
