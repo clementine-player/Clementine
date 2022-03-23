@@ -262,7 +262,7 @@ msgstr "С&лева"
 
 #: playlist/playlistheader.cpp:35
 msgid "&Lock Rating"
-msgstr "&Заблокировать рейтинг"
+msgstr "&Заблокировать оценку"
 
 #: ../bin/src/ui_edittagdialog.h:732
 msgid "&Lyrics"
@@ -302,7 +302,7 @@ msgstr "&Подгонять по размеру окна"
 
 #: ../bin/src/ui_mainwindow.h:797
 msgid "&Tools"
-msgstr "&Инструменты"
+msgstr "С&ервис"
 
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "&Year"
@@ -318,7 +318,7 @@ msgstr ", от"
 
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
-msgstr "…и всех создателей Amarok"
+msgstr "…и всем создателям Amarok"
 
 #: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
@@ -381,7 +381,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr "<html><head/><body><p>Если не отмечено, то Clementine попытается сохранить ваши рейтинги и другие статистические данные только в отдельной базе данных без изменения ваших файлов.</p><p>Если отмечено, то статистика будет сохранена как в базе данных, так и прямо в файле каждый раз при их изменении.</p><p>Имейте в виду, что это может не работать для каждого формата и, поскольку стандартов для этого нет, другие музыкальные проигрыватели могут не прочесть их.</p></body></html>"
+msgstr "<html><head/><body><p>Если не отмечено, то Clementine попытается сохранить ваши оценки и другие статистические данные только в отдельной базе данных без изменения ваших файлов.</p><p>Если отмечено, то статистика будет сохранена как в базе данных, так и прямо в файле каждый раз при их изменении.</p><p>Имейте в виду, что это может не работать для каждого формата и, поскольку стандартов для этого нет, другие музыкальные проигрыватели могут не прочесть их.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
@@ -405,7 +405,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p>Рейтинги и статистика песен будут записаны в теги всех музыкальных файлов вашей фонотеки.</p><p>Это не требуется, если параметр &quot;Сохранять рейтинги и статистику в теги файла&quot; был включён постоянно.</p></body></html>"
+msgstr "<html><head/><body><p>Оценки и статистика песен будут записаны в теги всех музыкальных файлов вашей фонотеки.</p><p>Это не требуется, если параметр &quot;Сохранять рейтинги и статистику в теги файла&quot; был включён постоянно.</p></body></html>"
 
 #: songinfo/artistbiography.cpp:279
 #, qt-format
@@ -422,11 +422,11 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
+msgstr "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
-msgstr "Требуется премиум аккаунт Spotify."
+msgstr "Требуется премиум-аккаунт Spotify."
 
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
@@ -511,7 +511,7 @@ msgstr "Данные учётной записи"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Account details (Premium)"
-msgstr "Данные учётной записи (Премиум)"
+msgstr "Данные учётной записи (премиум)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:181
 msgid "Action"
@@ -613,7 +613,7 @@ msgstr "Добавить тег «Исполнитель»"
 
 #: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Add song auto score"
-msgstr "Добавить автоподсчёт воспроизведений"
+msgstr "Добавить автоматический балл песне"
 
 #: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add song composer tag"
@@ -649,7 +649,7 @@ msgstr "Добавить число воспроизведений"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Add song rating"
-msgstr "Добавить рейтинг"
+msgstr "Добавить оценку песне"
 
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Add song skip count"
@@ -801,7 +801,7 @@ msgstr "Все плейлисты (%1)"
 
 #: ui/about.cpp:86
 msgid "All the translators"
-msgstr "Всех переводчиков"
+msgstr "Всем переводчикам"
 
 #: library/library.cpp:102
 msgid "All tracks"
@@ -884,7 +884,7 @@ msgstr "Применить сжатие для предотвращения ис
 #: ui/equalizer.cpp:223
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Вы действительно хотите удалить профиль «%1»?"
+msgstr "Вы действительно хотите удалить предустановку «%1»?"
 
 #: ui/edittagdialog.cpp:807
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1522,7 +1522,7 @@ msgstr "Невозможно создать элемент GStreamer «%1» - у
 #: songinfo/streamdiscoverer.cpp:98
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr "Не удалось определить поток аудио в течении %1"
+msgstr "Не удалось определить поток аудио в течение %1"
 
 #: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
@@ -1736,7 +1736,7 @@ msgstr "Удалять прослушанные эпизоды"
 
 #: ui/equalizer.cpp:222 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
-msgstr "Удалить профиль"
+msgstr "Удалить предустановку"
 
 #: library/libraryview.cpp:410
 msgid "Delete smart playlist"
@@ -1777,7 +1777,7 @@ msgstr "Подробнее…"
 
 #: ../bin/src/ui_playbacksettingspage.h:412
 msgid "Detect"
-msgstr "Определить"
+msgstr "Определять"
 
 #: devices/giolister.cpp:182
 msgid "Device"
@@ -1895,7 +1895,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr "После полного пересканирования потеряются все метаданные, сохранённые в Clementine, такие как обложки, счётчик воспроизведений и рейтинги. Clementine так же пересканирует всю вашу музыку в %1, что может потребовать некоторое время."
+msgstr "После полного пересканирования потеряются все метаданные, сохранённые в Clementine, такие как обложки, счётчик воспроизведений и оценки. Clementine так же пересканирует всю вашу музыку в %1, что может занять некоторое время."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2331,7 +2331,7 @@ msgstr "Затухание при паузе / нарастание при пр�
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
-msgstr "Приглушать звук при остановке воспроизведения"
+msgstr "Затухание при остановке трека"
 
 #: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Fading"
@@ -2666,11 +2666,11 @@ msgstr "Отмечать серым несуществующие песни в �
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
-msgstr "Сгруппировать фонотеку по…"
+msgstr "Группировать фонотеку по…"
 
 #: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:85
 msgid "Group by"
-msgstr "Сгруппировать по"
+msgstr "Группировать по"
 
 #: library/libraryfilterwidget.cpp:145
 msgid "Group by Album"
@@ -2810,7 +2810,7 @@ msgstr "При продолжении, устройство будет рабо�
 
 #: ../bin/src/ui_addpodcastbyurl.h:73
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "Если вы знаете адрес подкаста, введите его сюда и нажмите Перейти."
+msgstr "Если вы знаете адрес подкаста, введите его сюда и нажмите «Перейти»."
 
 #: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Ignore \"The\" in artist names"
@@ -2952,7 +2952,7 @@ msgstr "Неверный ключ сессии"
 
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
-msgstr "Инвертировать выбор"
+msgstr "Обратить выбор"
 
 #: internet/jamendo/jamendoservice.cpp:136
 msgid "Jamendo"
@@ -3555,7 +3555,7 @@ msgstr "Без длинных блоков"
 #: playlist/playlistcontainer.cpp:406
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
+msgstr "Совпадения не найдены. Очистите строку поиска, чтобы увидеть плейлист снова."
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
@@ -3652,7 +3652,7 @@ msgstr "Число процессов:"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "OSD Preview"
-msgstr "Предпросмотр OSD"
+msgstr "Предпросмотр экранного меню"
 
 #: widgets/osd.cpp:175
 msgid "Off"
@@ -3791,11 +3791,11 @@ msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:178
 msgid "Organise Files"
-msgstr "Упорядочить файлы"
+msgstr "Организовать файлы"
 
 #: library/libraryview.cpp:415 ui/mainwindow.cpp:738
 msgid "Organise files..."
-msgstr "Упорядочить файлы…"
+msgstr "Организовать файлы…"
 
 #: core/organise.cpp:72
 msgid "Organising files"
@@ -4066,7 +4066,7 @@ msgstr "Премиум-тип аудио"
 
 #: ../bin/src/ui_equalizer.h:163
 msgid "Preset:"
-msgstr "Профиль:"
+msgstr "Предустановка:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:120
 msgid "Press a button combination to use for"
@@ -4087,7 +4087,7 @@ msgstr "Нажатие кнопки «Предыдущий» осуществи�
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Pretty OSD options"
-msgstr "Настройки OSD"
+msgstr "Настройки экранного меню"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
@@ -4230,7 +4230,7 @@ msgstr "Оценка текущей песни 5 звёзд"
 
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
-msgstr "Рейтинг"
+msgstr "Оценка"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
 #: ui/albumcovermanager.cpp:214
@@ -4368,7 +4368,7 @@ msgstr "Заменить плейлист"
 
 #: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
-msgstr "Заменять пробелы подчеркиванием"
+msgstr "Заменять пробелы подчёркиванием"
 
 #: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
@@ -4396,7 +4396,7 @@ msgstr "Сбросить счётчики воспроизведения"
 
 #: ../bin/src/ui_behavioursettingspage.h:390
 msgid "Restart song, then jump to previous if pressed again"
-msgstr "Перезапустит песню при повторном переходе к предыдущей "
+msgstr "Перезапуск песни, затем переход к предыдущей при повторном нажатии"
 
 #: core/commandlineoptions.cpp:176
 msgid ""
@@ -4519,11 +4519,11 @@ msgstr "Сохранить плейлист…"
 
 #: ui/equalizer.cpp:206 ../bin/src/ui_equalizer.h:165
 msgid "Save preset"
-msgstr "Сохранить профиль"
+msgstr "Сохранить предустановку"
 
 #: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
-msgstr "Записывать рейтинги в теги файлов, если возможно"
+msgstr "Записывать оценки в теги файлов, если возможно"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
@@ -4559,7 +4559,7 @@ msgstr "Размер масштабирования"
 
 #: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:710
 msgid "Score"
-msgstr "Счёт"
+msgstr "Балл"
 
 #: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
@@ -4594,7 +4594,7 @@ msgstr "Поиск в Jamendo"
 
 #: internet/magnatune/magnatuneservice.cpp:294
 msgid "Search Magnatune"
-msgstr "Поиск на Magnatune"
+msgstr "Поиск в Magnatune"
 
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
@@ -4627,7 +4627,7 @@ msgstr "Поиск этого"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
-msgstr "Поиск на gpodder.net"
+msgstr "Поиск в gpodder.net"
 
 #: ../bin/src/ui_itunessearchpage.h:72
 msgid "Search iTunes"
@@ -4676,7 +4676,7 @@ msgstr "Перемотать текущую трек на абсолютную �
 
 #: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Seeking using a keyboard shortcut or mouse wheel"
-msgstr "Перемотка с помощью горячих клавиш клавиатуры или  колеса мыши"
+msgstr "Перемотка с помощью горячих клавиш клавиатуры или колеса мыши"
 
 #: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
@@ -4791,7 +4791,7 @@ msgstr "Показать"
 
 #: core/globalshortcuts.cpp:71 wiimotedev/wiimotesettingspage.cpp:123
 msgid "Show OSD"
-msgstr "Показывать OSD"
+msgstr "Показывать экранное меню"
 
 #: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
@@ -4823,7 +4823,7 @@ msgstr "Всплывающие сообщения из системного ло
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a pretty OSD"
-msgstr "Показывать OSD"
+msgstr "Показывать модное экранное меню"
 
 #: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
@@ -5133,7 +5133,7 @@ msgstr "Останавливать после каждого трека"
 
 #: ui/mainwindow.cpp:703 ../bin/src/ui_mainwindow.h:729
 msgid "Stop after this track"
-msgstr "Остановить после этого трека"
+msgstr "Стоп после этого трека"
 
 #: core/commandlineoptions.cpp:163
 msgid "Stop playback"
@@ -5265,7 +5265,7 @@ msgstr "Свойства текста"
 
 #: ui/about.cpp:80
 msgid "Thanks to"
-msgstr "Благодарим за помощь"
+msgstr "Благодарность за помощь"
 
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
@@ -5445,7 +5445,7 @@ msgstr "Сегодня"
 
 #: core/globalshortcuts.cpp:73
 msgid "Toggle Pretty OSD"
-msgstr "Включить OSD"
+msgstr "Включить модное экранное меню"
 
 #: visualisations/visualisationcontainer.cpp:103
 msgid "Toggle fullscreen"
@@ -5560,7 +5560,7 @@ msgstr "Адрес"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr "Адрес его логотипа:"
+msgstr "Адрес логотипа:"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5635,7 +5635,7 @@ msgstr "Обновить все подкасты"
 
 #: ../bin/src/ui_mainwindow.h:764
 msgid "Update changed library folders"
-msgstr "Сканировать обновлённые папки"
+msgstr "Обновить изменения папок фонотеки"
 
 #: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
@@ -5869,7 +5869,7 @@ msgstr "При запуске Clementine"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr "При подсчёте количества проигрываний использовать"
+msgstr "При подсчёте числа воспроизведений использовать"
 
 #: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
@@ -6028,7 +6028,7 @@ msgstr "Вы вошли в систему."
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
-msgstr "Можно изменить способ организации композиций в фонотеке."
+msgstr "Вы можете изменить способ организации композиций в фонотеке."
 
 #: ui/networkremotesettingspage.cpp:172
 #, qt-format
