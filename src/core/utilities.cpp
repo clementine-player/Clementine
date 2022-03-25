@@ -725,8 +725,11 @@ bool UrlOnSameDriveAsClementine(const QUrl& url) {
   if (url.scheme() != "file") return false;
 
 #ifdef Q_OS_WIN
+  QUrl canUrl =
+      QUrl::fromLocalFile(QFileInfo(url.toLocalFile()).canonicalFilePath());
   QUrl appUrl = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
-  if (url.toLocalFile().left(1) == appUrl.toLocalFile().left(1))
+
+  if (canUrl.toLocalFile().left(1) == appUrl.toLocalFile().left(1))
     return true;
   else
     return false;
