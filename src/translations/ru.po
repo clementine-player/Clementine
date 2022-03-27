@@ -397,7 +397,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr "<html><head/><body><p>Начните с название поля для ограничения поиска по этому полю. Напр., <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Кино</span> ищет в фонотеке всех исполнителей со словом «Кино», <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> ищет в фонотеке треки, проигранные хотя бы два раза, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> ищет в фонотеке треки, проигранные за последние 180 минут.</p><p><span style=\" font-weight:600;\">Доступные поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
+msgstr "<html><head/><body><p>Начните с название поля для ограничения поиска по этому полю. Например: <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Кино</span> ищет в фонотеке всех исполнителей со словом «Кино», <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> ищет в фонотеке треки, проигранные хотя бы два раза, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> ищет в фонотеке треки, проигранные за последние 180 минут.</p><p><span style=\" font-weight:600;\">Доступные поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
@@ -422,7 +422,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
+msgstr "<p>Токены начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
@@ -661,7 +661,7 @@ msgstr "Добавить тег «Название»"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Add song track tag"
-msgstr "Добавить тег «Номер трека»"
+msgstr "Добавить тег «Трек» песни"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song year tag"
@@ -843,7 +843,7 @@ msgstr "Произошла ошибка при загрузке данных iTu
 #: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Ошибка при записи метаданных в '%1'"
+msgstr "Ошибка при записи метаданных в «%1»"
 
 #: internet/subsonic/subsonicsettingspage.cpp:127
 msgid "An unspecified error occurred."
@@ -1151,7 +1151,7 @@ msgstr "Сменить режим перемешивания"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
-msgstr "Сменить текущий трек"
+msgstr "Сменить активный трек"
 
 #: core/commandlineoptions.cpp:186
 msgid "Change the language"
@@ -1165,7 +1165,7 @@ msgstr "Изменения вступят в силу со следующей п
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr "Изменение настроек воспроизведения моно подействует со следующей композиции"
+msgstr "Смена настройки воспроизведения моно подействует со следующей композиции"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1222,7 +1222,7 @@ msgstr "Выберите сайты, используемые Clementine для 
 
 #: ui/equalizer.cpp:113
 msgid "Classical"
-msgstr "Классическая"
+msgstr "Классика"
 
 #: ../bin/src/ui_podcastsettingspage.h:267
 msgid "Cleaning up"
@@ -1353,7 +1353,7 @@ msgstr "Закрытие этого окна остановит поиск об�
 
 #: ui/equalizer.cpp:115
 msgid "Club"
-msgstr "Клубная"
+msgstr "Клуб"
 
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Co&mposer"
@@ -1478,7 +1478,7 @@ msgstr "Конвертировать всю музыку"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Convert any music that the device can't play"
-msgstr "Конвертировать всю музыку, не поддерживаемую носителем."
+msgstr "Конвертировать всю музыку, которую может проигрывать носитель"
 
 #: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
@@ -1613,7 +1613,7 @@ msgstr "Перекрёстное затухание при ручной смен
 
 #: ../bin/src/ui_queuemanager.h:148
 msgid "Ctrl+Down"
-msgstr "Ctrl+Down"
+msgstr "Ctrl+Вниз"
 
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
@@ -1645,7 +1645,7 @@ msgstr "Путь D-Bus"
 
 #: ui/equalizer.cpp:117
 msgid "Dance"
-msgstr "Танцевальная"
+msgstr "Танец"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
@@ -1744,7 +1744,7 @@ msgstr "Удалить умный плейлист"
 
 #: core/commandlineoptions.cpp:191
 msgid "Delete the currently playing song"
-msgstr "Удалить текущий трек"
+msgstr "Удалить активный трек"
 
 #: ../bin/src/ui_organisedialog.h:184
 msgid "Delete the original files"
@@ -2026,11 +2026,11 @@ msgstr "Дабстеп"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr "График дампа"
+msgstr "График выгрузки"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr "График дампа канала обработки"
+msgstr "График выгрузки канала обработки"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2312,7 +2312,7 @@ msgstr "Экспортировано %1 обложек из %2 (%3 пропущ�
 
 #: ../bin/src/ui_playbacksettingspage.h:414
 msgid "F32LE (32-bit)"
-msgstr "F32LE (32-bit)"
+msgstr "F32LE (32 бита)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
@@ -2430,7 +2430,7 @@ msgstr "Ошибка получения обложки"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr "Получение элементов плейлиста"
+msgstr "Получение объектов плейлиста"
 
 #: widgets/filenameformatwidget.cpp:66
 msgid "File extension"
@@ -2678,7 +2678,7 @@ msgstr "Группировать по альбомам"
 
 #: library/libraryfilterwidget.cpp:137
 msgid "Group by Album artist/Album"
-msgstr "Группировать по исполнителю альбома/альбому"
+msgstr "Группировать по артисту альбома/альбому"
 
 #: library/libraryfilterwidget.cpp:130
 msgid "Group by Artist"
@@ -2984,7 +2984,7 @@ msgstr "Немедленный переход к предыдущей песне
 
 #: ../bin/src/ui_mainwindow.h:758
 msgid "Jump to the currently playing track"
-msgstr "Перейти к текущему треку"
+msgstr "Перейти к активному треку"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #, qt-format
@@ -3000,7 +3000,7 @@ msgstr "Показывать кнопки в течение %1 секунд…"
 
 #: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Keep running in the background when the window is closed"
-msgstr "Продолжить работу в фоновом режиме при закрытии окна"
+msgstr "Продолжить работу в фоне по закрытию окна"
 
 #: ../bin/src/ui_organisedialog.h:183
 msgid "Keep the original files"
@@ -3575,11 +3575,11 @@ msgstr "Без коротких блоков"
 #: library/savedgroupingmanager.cpp:60 ../bin/src/ui_groupbydialog.h:127
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:165
 msgid "None"
-msgstr "Ничего"
+msgstr "Нет"
 
 #: library/libraryview.cpp:672 ui/mainwindow.cpp:2502 ui/mainwindow.cpp:2680
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr "Ни одна из выбранных песен не была скопирована на устройство"
+msgstr "Ни одна из выбранных песен не подошла для копирования на носитель"
 
 #: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
@@ -3733,7 +3733,7 @@ msgstr "Открыть файл OPML…"
 
 #: transcoder/transcodedialog.cpp:285
 msgid "Open a directory to import music from"
-msgstr "Открыть папку для импортирования музыки"
+msgstr "Открыть папку для импорта музыки"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid "Open device"
@@ -3799,7 +3799,7 @@ msgstr "Организовать файлы…"
 
 #: core/organise.cpp:72
 msgid "Organising files"
-msgstr "Упорядочивание файлов"
+msgstr "Организация файлов"
 
 #: ui/trackselectiondialog.cpp:163
 msgid "Original tags"
@@ -4087,7 +4087,7 @@ msgstr "Нажатие кнопки «Предыдущий» осуществи�
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Pretty OSD options"
-msgstr "Настройки экранного меню"
+msgstr "Настройки модного экранного меню"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
@@ -4135,7 +4135,7 @@ msgstr "Нажмите на кнопку пульта Wii"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
-msgstr "Разбросать композиции в случайном порядке"
+msgstr "Перемешать порядок песен"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
@@ -4156,7 +4156,7 @@ msgstr "Качество"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
-msgstr "Опрашиваем устройство…"
+msgstr "Производится опрос носителя…"
 
 #: ../bin/src/ui_queuemanager.h:137 ../bin/src/ui_mainwindow.h:766
 msgid "Queue Manager"
@@ -4173,7 +4173,7 @@ msgstr "Добавить трек в очередь"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr "Быстрая оценка текущего трека"
+msgstr "Быстрая оценка активного трека"
 
 #: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
@@ -4239,7 +4239,7 @@ msgstr "Действительно отменить?"
 
 #: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
-msgstr "Недавние альбомы"
+msgstr "Недавние прослушанные альбомы"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4280,7 +4280,7 @@ msgstr "Запомнить движение пульта Wii"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr "Восстановить преды&дущее состояние"
+msgstr "Вернуть преды&дущее состояние"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4368,7 +4368,7 @@ msgstr "Заменить плейлист"
 
 #: ../bin/src/ui_filenameformatwidget.h:126
 msgid "Replaces spaces with underscores"
-msgstr "Заменять пробелы подчёркиванием"
+msgstr "Заменять пробелы на нижнее подчёркивание"
 
 #: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Replay Gain"
@@ -4449,7 +4449,7 @@ msgstr "Выполнить"
 
 #: ../bin/src/ui_playbacksettingspage.h:413
 msgid "S16LE (16-bit)"
-msgstr "S16LE (16-bit)"
+msgstr "S16LE (16 бит)"
 
 #: core/song.cpp:455
 msgid "SNES SPC700"
@@ -4523,11 +4523,11 @@ msgstr "Сохранить предустановку"
 
 #: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
-msgstr "Записывать оценки в теги файлов, если возможно"
+msgstr "Записывать оценки в теги файлов по возможности"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
-msgstr "Записывать статистику в теги файлов, если возможно"
+msgstr "Записывать статистику в теги файлов по возможности"
 
 #: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
@@ -4668,11 +4668,11 @@ msgstr "Перемотка вперёд"
 
 #: core/commandlineoptions.cpp:174
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Перемотать текущий трек на относительную позицию"
+msgstr "Перемотать активный трек на относительную позицию"
 
 #: core/commandlineoptions.cpp:172
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Перемотать текущую трек на абсолютную позицию"
+msgstr "Перемотать активный трек на абсолютную позицию"
 
 #: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Seeking using a keyboard shortcut or mouse wheel"
@@ -4704,7 +4704,7 @@ msgstr "Выбрать фоновое изображение"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Select best possible match"
-msgstr "Выбрать самые подходящие результаты"
+msgstr "Выберите наиболее подходящее совпадение"
 
 #: ../bin/src/ui_appearancesettingspage.h:301
 msgid "Select foreground color:"
@@ -4795,7 +4795,7 @@ msgstr "Показать экранное меню"
 
 #: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Show a glowing animation on the current track"
-msgstr "Подсвечивать проигрываемый трек"
+msgstr "Подсвечивать анимацией активный трек"
 
 #: ../bin/src/ui_appearancesettingspage.h:319
 msgid "Show a moodbar in the track progress bar"
@@ -5202,7 +5202,7 @@ msgstr "Предлагаемые теги"
 
 #: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
-msgstr "Подходящий элемент не найден"
+msgstr "Подходящий объект не найден"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5245,7 +5245,7 @@ msgstr "Системные цвета"
 
 #: widgets/fancytabwidget.cpp:435
 msgid "Tabs on top"
-msgstr "Вкладки вверху"
+msgstr "Вкладки сверху"
 
 #: ../bin/src/ui_trackselectiondialog.h:203
 msgid "Tag fetcher"
@@ -5265,7 +5265,7 @@ msgstr "Свойства текста"
 
 #: ui/about.cpp:80
 msgid "Thanks to"
-msgstr "Благодарность за помощь"
+msgstr "Благодарности"
 
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
@@ -5274,7 +5274,7 @@ msgstr "Команда «%1» не может быть выполнена"
 
 #: ../bin/src/ui_appearancesettingspage.h:308
 msgid "The album cover of the currently playing song"
-msgstr "Обложка альбома текущей композиции"
+msgstr "Обложка альбома активной композиции"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:98
 #, qt-format
@@ -5363,7 +5363,7 @@ msgstr "В этих папках происходит поиск музыки д
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Эти настройки используются в окне «Конвертация музыки» и при конвертировании музыки перед копированием на устройство."
+msgstr "Эти настройки используются в окне «Конвертация музыки» и при конвертировании музыки перед копированием на носитель."
 
 #: library/savedgroupingmanager.cpp:39
 msgid "Third Level"
@@ -5445,7 +5445,7 @@ msgstr "Сегодня"
 
 #: core/globalshortcuts.cpp:73
 msgid "Toggle Pretty OSD"
-msgstr "Включить модное экранное меню"
+msgstr "Переключить модное экранное меню"
 
 #: visualisations/visualisationcontainer.cpp:103
 msgid "Toggle fullscreen"
@@ -5669,7 +5669,7 @@ msgstr "Использование"
 
 #: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
-msgstr "По возможности использовать тег «Артист альбома»"
+msgstr "Использовать тег «Артист альбома» по возможности"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Use Gnome's shortcut keys"
@@ -5681,7 +5681,7 @@ msgstr "Психоделические цвета"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Использовать значения из тегов по возможности"
+msgstr "Использовать метаданные нормализации по возможности"
 
 #: ../bin/src/ui_subsonicsettingspage.h:135
 msgid "Use SSLv3"
@@ -5816,7 +5816,7 @@ msgstr "Настройки визуализации"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Voice activity detection"
-msgstr "Определение голоса"
+msgstr "Обнаружение голосовой активности"
 
 #: widgets/osd.cpp:188
 #, qt-format
@@ -5959,7 +5959,7 @@ msgstr "Хотите ли вы переместить и другие песни
 
 #: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
-msgstr "Желаете запустить повторное сканирование?"
+msgstr "Желаете запустить полное пересканирование сейчас?"
 
 #: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
@@ -6300,7 +6300,7 @@ msgstr "удаление %n песен"
 
 #: smartplaylists/searchterm.cpp:412
 msgid "shortest first"
-msgstr "сначала кратчайший"
+msgstr "сначала короткий"
 
 #: playlist/playlistundocommands.cpp:111
 msgid "shuffle songs"
