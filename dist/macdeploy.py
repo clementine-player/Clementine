@@ -66,7 +66,6 @@ GSTREAMER_PLUGINS = [
     'libgstisomp4.dylib',
     'libgstlame.dylib',
     'libgstlibav.dylib',
-    'libgstmms.dylib',
     # TODO: Bring back Musepack support.
     'libgstogg.dylib',
     'libgstopus.dylib',
