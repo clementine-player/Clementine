@@ -48,7 +48,7 @@ binary-arch: install
 	dh_installchangelogs 
 	dh_installmenu
 	dh_installdocs
-	dh_gconf
+	dh_installgsettings
 	dh_link
 	dh_strip
 	dh_compress
