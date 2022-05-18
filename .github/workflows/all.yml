@@ -858,6 +858,8 @@ jobs:
           qttools5-dev
           ssh
       - uses: actions/checkout@v1.2.0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
         working-directory: bin
         run: >
