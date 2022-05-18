@@ -124,14 +124,15 @@ if(FORCE_GIT_REVISION)
   set(GIT_INFO_RESULT 0)
 else(FORCE_GIT_REVISION)
   find_program(GIT_EXECUTABLE git)
+  message(STATUS "Found git: ${GIT_EXECUTABLE}")
 
   if(NOT GIT_EXECUTABLE-NOTFOUND)
     execute_process(COMMAND ${GIT_EXECUTABLE} describe
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV
-        ERROR_QUIET
         OUTPUT_STRIP_TRAILING_WHITESPACE)
+    message(STATUS "git describe (${GIT_INFO_RESULT}) $ ${GIT_REV}")
   endif()
 endif()
 
