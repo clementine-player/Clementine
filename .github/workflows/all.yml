@@ -630,7 +630,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=stretch
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
@@ -688,7 +687,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=bionic
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
@@ -747,7 +745,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=bullseye
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
@@ -805,7 +802,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=buster
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
@@ -869,7 +865,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=focal
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
@@ -936,7 +931,6 @@ jobs:
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
           -DDEB_DIST=jammy
-          -DFORCE_GIT_VERSION=
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
