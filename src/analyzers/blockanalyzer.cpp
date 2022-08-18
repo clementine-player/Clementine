@@ -5,6 +5,7 @@
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2022, Andrew Reading <andrew@areading.me>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -34,32 +35,32 @@
 
 const uint BlockAnalyzer::kHeight = 2;
 const uint BlockAnalyzer::kWidth = 4;
-const uint BlockAnalyzer::kMinRows = 3;       // arbituary
-const uint BlockAnalyzer::kMinColumns = 32;   // arbituary
+const uint BlockAnalyzer::kMinRows = 3;       // arbitrary
+const uint BlockAnalyzer::kMaxRows = 256;     // arbitrary
+const uint BlockAnalyzer::kMinColumns = 32;   // arbitrary
 const uint BlockAnalyzer::kMaxColumns = 256;  // must be 2**n
 const uint BlockAnalyzer::kFadeSize = 90;
+const uint BlockAnalyzer::kFadeInitial = 32;
 
 const char* BlockAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Block analyzer");
 
 BlockAnalyzer::BlockAnalyzer(QWidget* parent)
     : Analyzer::Base(parent, 9),
+      scope_(kMinColumns),
       columns_(0),
       rows_(0),
       y_(0),
-      barPixmap_(1, 1),
-      topBarPixmap_(kWidth, kHeight),
-      scope_(kMinColumns),
-      store_(1 << 8, 0),
-      fade_bars_(kFadeSize),
-      fade_pos_(1 << 8, 50),
-      fade_intensity_(1 << 8, 32) {
+      canvas_(),
+      rthresh_(kMaxRows + 1, 0.f),
+      bg_grad_(kMaxRows + 1, 0),
+      fade_bars_(kFadeSize, 0),
+      bandinfo_(kMaxColumns) {
+  // Right and bottom edges are 1px padding.
   setMinimumSize(kMinColumns * (kWidth + 1) - 1, kMinRows * (kHeight + 1) - 1);
-  // -1 is padding, no drawing takes place there
   setMaximumWidth(kMaxColumns * (kWidth + 1) - 1);
 
-  // mxcl says null pixmaps cause crashes, so let's play it safe
-  for (uint i = 0; i < kFadeSize; ++i) fade_bars_[i] = QPixmap(1, 1);
+  setAttribute(Qt::WA_OpaquePaintEvent, true);
 }
 
 BlockAnalyzer::~BlockAnalyzer() {}
@@ -67,56 +68,53 @@ BlockAnalyzer::~BlockAnalyzer() {}
 void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
   QWidget::resizeEvent(e);
 
-  background_ = QPixmap(size());
-  canvas_ = QPixmap(size());
-
-  const uint oldRows = rows_;
+  uint newRows, newCols;
 
   // all is explained in analyze()..
   // +1 to counter -1 in maxSizes, trust me we need this!
-  columns_ = qMin(
-      static_cast<uint>(static_cast<double>(width() + 1) / (kWidth + 1)) + 1,
-      kMaxColumns);
-  rows_ = static_cast<uint>(static_cast<double>(height() + 1) / (kHeight + 1));
+  newCols = 1 + (width() + 1) / (kWidth + 1);
+  newRows = 0 + (height() + 1) / (kHeight + 1);
+  newCols = qMin(kMaxColumns, qMax(kMinColumns, newCols));
+  newRows = qMin(kMaxRows, qMax(kMinRows, newRows));
 
-  // this is the y-offset for drawing from the top of the widget
-  y_ = (height() - (rows_ * (kHeight + 1)) + 2) / 2;
+  if (newCols != columns_) {
+    columns_ = newCols;
+    scope_.resize(columns_);
 
-  scope_.resize(columns_);
+    updateBandSize(columns_);
+    bandinfo_.fill(FHTBand());
+  }
 
-  if (rows_ != oldRows) {
-    barPixmap_ = QPixmap(kWidth, rows_ * (kHeight + 1));
+  if (rows_ != newRows) {
+    rows_ = newRows;
 
-    for (uint i = 0; i < kFadeSize; ++i)
-      fade_bars_[i] = QPixmap(kWidth, rows_ * (kHeight + 1));
+    // this is the y-offset for drawing from the top of the widget
+    y_ = (height() - (rows_ * (kHeight + 1)) + 2) / 2;
 
-    yscale_.resize(rows_ + 1);
-
-    const uint PRE = 1,
-               PRO = 1;  // PRE and PRO allow us to restrict the range somewhat
+    const float PRE = 1.f,
+                PRO =
+                    1.f,  // PRE and PRO allow us to restrict the range somewhat
+        SCL = log10f(PRE + PRO + (1.f * rows_));
 
     for (uint z = 0; z < rows_; ++z)
-      yscale_[z] = 1 - (log10(PRE + z) / log10(PRE + rows_ + PRO));
+      rthresh_[z] = 1.f - log10f(PRE + (1.f * z)) / SCL;
 
-    yscale_[rows_] = 0;
+    rthresh_[rows_] = 0.f;
 
     determineStep();
     paletteChange(palette());
   }
 
-  updateBandSize(columns_);
-  drawBackground();
+  canvas_ = QImage(columns_ * (kWidth + 1), rows_ * (kHeight + 1),
+                   QImage::Format_ARGB32_Premultiplied);
+  canvas_.fill(pad_color_);
 }
 
 void BlockAnalyzer::determineStep() {
-  // falltime is dependent on rowcount due to our digital resolution (ie we have
-  // boxes/blocks of pixels)
-  // I calculated the value 30 based on some trial and error
-
+  // falltime is dependent on rowcount
   // the fall time of 30 is too slow on framerates above 50fps
-  const double fallTime = timeout() < 20 ? 20 * rows_ : 30 * rows_;
-
-  step_ = static_cast<double>(rows_ * timeout()) / fallTime;
+  const float rFallTime = 1.f / (timeout() < 20 ? 20.f : 30.f);
+  step_ = timeout() * rFallTime;
 }
 
 void BlockAnalyzer::framerateChanged() {  // virtual
@@ -124,10 +122,10 @@ void BlockAnalyzer::framerateChanged() {  // virtual
 }
 
 void BlockAnalyzer::transform(Analyzer::Scope& s) {
-  for (uint x = 0; x < s.size(); ++x) s[x] *= 2;
+  for (uint x = 0; x < s.size(); ++x) s[x] *= 2.f;
 
   fht_->spectrum(s.data());
-  fht_->scale(s.data(), 1.0 / 20);
+  fht_->scale(s.data(), 1.f / 20.f);
 
   // the second half is pretty dull, so only show it if the user has a large
   // analyzer
@@ -138,77 +136,225 @@ void BlockAnalyzer::transform(Analyzer::Scope& s) {
 
 void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
                             bool new_frame) {
-  // y = 2 3 2 1 0 2
-  //     . . . . # .
-  //     . . . # # .
-  //     # . # # # #
-  //     # # # # # #
-  //
-  // visual aid for how this analyzer works.
-  // y represents the number of blanks
-  // y starts from the top and increases in units of blocks
+  float yf;
+  uint x, y;
 
-  // yscale_ looks similar to: { 0.7, 0.5, 0.25, 0.15, 0.1, 0 }
-  // if it contains 6 elements there are 5 rows in the analyzer
+  if (p.paintEngine() == 0) return;
+  if (canvas_.isNull()) return;
+
+  p.setCompositionMode(QPainter::CompositionMode_Source);
 
   if (!new_frame) {
-    p.drawPixmap(0, 0, canvas_);
+    p.drawImage(0, 0, canvas_, 0, 0, width(), height(), Qt::NoFormatConversion);
     return;
   }
 
-  QPainter canvas_painter(&canvas_);
-
   Analyzer::interpolate(s, scope_);
 
-  // update the graphics with the new colour
-  if (psychedelic_enabled_) {
-    paletteChange(QPalette());
-  }
+  // Update the color palettes.
+  if (psychedelic_enabled_) paletteChange(QPalette());
 
-  // Paint the background
-  canvas_painter.drawPixmap(0, 0, background_);
+  // Visual Aid
+  //
+  // This analyzer maintains a list of intensity thresholds for each row of
+  // the analyzer. For each frequency band (represented column-wise, one per
+  // band), the spectral power calculation obtained from the analyzer scope
+  // output is compared against these thresholds to determine the row indices
+  // at which the regions become active. While inactive regions are dark,
+  // active regions and all those below the corresponding transition region
+  // are "lit up".
+  //
+  // So, where
+  //     . indicates block is inactive/dark
+  //     # indicates block is active  /lit,
+  // what is drawn is (for example)
+  //
+  //    COLUMNS/Bands
+  //     . . . . # .    R
+  //     . . . # # .    O
+  //     # . # # # #    W
+  //     # # # # # #    S
+  //
+  // y = 2 3 2 1 0 2
+  //
+  // Here y is the row index for which the intensity threshold is met, with
+  // 0 indicating the topmost row. The nRows+1 intensity values are stored
+  // in rthresh_[], sorted in decreasing order (the top, y=0 region would
+  // be the most spectrally intense); the additional, final value is always
+  // zero and exists mostly as a sort of loop optimization.
+  //
+  // For the above illustration, rthresh_[] might have values similar to
+  //     { 0.7, 0.5, 0.25, 0.15, 0.1, 0 }
+  //
+  // Now, consider two "frames" that occur sequentially after each other. Where
+  //     . indicates block is inactive/dark
+  //     o indicates block is inactive/dark and fading out (was active)
+  //     # indicates block is active  /lit,
+  //   [ ] indicates block is the bar topper
+  //
+  //         frame 1        ====>        frame 2
+  //      COLUMNS/Bands               COLUMNS/Bands
+  //     .  .  .  . [#] .     R     .  .  .  .  o  .
+  //     .  .  . [#] #  .     O     .  . [#] o [#] .
+  //    [#] . [#] #  # [#]    W     o  .  #  o  # [#]
+  //     # [#] #  #  #  #     S    [#] o  # [#] #  #
+  //
+  //     2  3  2  1  0  2  = B_y =  3  4  1  1  1  2
+  //
+  // After a previously active region becomes inactive, for a period of time
+  // it is drawn in a color that darkens over time. These are based upon the
+  // the current color scheme and get stored within fade_bars_[].
+  // Additionally, a rowwise gradient is applied to active bands to help keep
+  // the spectrum display visually interesting, with colors darkening as
+  // intensities decrease -- that is, as rthresh_[] values decrease. The
+  // inactive-active transition area is drawn with the brightest color and
+  // acts as a "bar topper"; this topper should visually rise and fall over
+  // time.
+  //
+  // As in the transition example above, bands (columns) are drawn vertically
+  // from top to bottom, progressing from left to right. Supposing Y_r is the
+  // row coordinate, B_y is the band coordinate, and
+  //   0 <= Y_r,B_y < nRows <= kMaxRows,
+  // the drawing procedure for each band can be described as follows:
+  //   a. Y_r < B_y
+  //        First the '.' regions that have not been recently active are
+  //        darkened (background). This is determined via the band's
+  //        fade_intensity and fade_row values.
+  //   b. Y_r < B_y
+  //        Recently active areas are drawn using a special darkening-fade
+  //        color, until either some number of frames have elapsed or they
+  //        became active since the countdown began.
+  //   c. Y_r = B_y
+  //        The transition region is drawn as a bar topper.
+  //   d. Y_r > B_y < nRows
+  //        Each subsequent region below the transition region should be active.
+  //        Draw these using a gradient that darkens as Y_r -> nRows.
+  // The logic for these can be found in the colorFromRowAndBand() function.
+  //
 
-  for (uint y, x = 0; x < scope_.size(); ++x) {
-    // determine y
-    for (y = 0; scope_[x] < yscale_[y]; ++y) continue;
+  // Update band information.
+  for (x = 0; x < scope_.size(); ++x) {
+    const float& bandthr = scope_[x];
+    FHTBand& band = bandinfo_[x];
 
-    // this is opposite to what you'd think, higher than y
-    // means the bar is lower than y (physically)
-    if (static_cast<float>(y) > store_[x])
-      y = static_cast<int>(store_[x] += step_);
-    else
-      store_[x] = y;
-
-    // if y is lower than fade_pos_, then the bar has exceeded the kHeight of
-    // the fadeout
-    // if the fadeout is quite faded now, then display the new one
-    if (y <= fade_pos_[x] /*|| fade_intensity_[x] < kFadeSize / 3*/) {
-      fade_pos_[x] = y;
-      fade_intensity_[x] = kFadeSize;
+    // Calculate activity transition row values.
+    //   Note:   rows_ < rthresh_.size()
+    for (y = 0; y < rows_; ++y) {
+      if (bandthr >= rthresh_[y]) break;
     }
 
-    if (fade_intensity_[x] > 0) {
-      const uint offset = --fade_intensity_[x];
-      const uint y = y_ + (fade_pos_[x] * (kHeight + 1));
-      canvas_painter.drawPixmap(x * (kWidth + 1), y, fade_bars_[offset], 0, 0,
-                                kWidth, height() - y);
+    // y <= band height :: band matches or exceeds power from last frame.
+    // y >  band height :: band lost power since last frame.
+    if ((yf = 1.f * y) <= band.height) {
+      band.height = yf;
+      band.row = y;
+    } else {
+      // This band has lost power since the last-recorded maximal threshold
+      // value. Gradually decrease this until it meets the current value.
+      band.height += step_;
+      band.row = y = static_cast<uint>(band.height);
     }
 
-    if (fade_intensity_[x] == 0) fade_pos_[x] = rows_;
+    // y <= band fade_row :: the current threshold exceeds the previously-
+    // marked position in which to begin fade-out. Use the current position
+    // as a new marker and start/restart fade_intensity, the fade-out period
+    // counter.
+    if (y <= band.fade_row) {
+      band.fade_row = y;
+      band.fade_intensity = kFadeSize;
+    }
 
-    // REMEMBER: y is a number from 0 to rows_, 0 means all blocks are glowing,
-    // rows_ means none are
-    canvas_painter.drawPixmap(x * (kWidth + 1), y * (kHeight + 1) + y_, *bar(),
-                              0, y * (kHeight + 1), bar()->width(),
-                              bar()->height());
+    // Check the fade-out period counter. If expired (i.e., <= 0), the
+    // fade-out effect is complete. Otherwise, continue downcounting and
+    // select the next color for the fade-out sequence.
+    if (band.fade_intensity <= 0) {
+      // fade_intensity <= 0: Done with fade out effect (time expired).
+      band.fade_row = rows_;
+      band.fade_coloridx = 0;
+    } else {
+      // fade_intensity >  0: Continue effect; continue color change.
+      band.fade_coloridx = --band.fade_intensity;
+    }
   }
 
-  for (uint x = 0; x < store_.size(); ++x)
-    canvas_painter.drawPixmap(x * (kWidth + 1),
-                              static_cast<int>(store_[x]) * (kHeight + 1) + y_,
-                              topBarPixmap_);
+  // A block will be drawn and colored according to each band (column) of
+  // the FHT spectrum data. This block is a kWidth x kHeight region, along
+  // with 1-px of padding on its right and bottom.
+  //
+  //            Conditional (FHTBand)           Block State / Color
+  //            =====================           ===================
+  //         0   <  y < fade_row & fade-out     : Inactive  / BG color
+  //    fade_row <  y < row      & fade-out     : Fade-out  / darkening
+  //         0   <  y < row      & no fade-out  : Inactive  / BG color
+  //    row      == y                           : Threshold / FG color
+  //    row      <  y < rows_                   : Active    / Vert. gradient
+  //          {1-px padding region}             : Padding   / Pad color
+  //
 
-  p.drawPixmap(0, 0, canvas_);
+  //
+  // Paint the canvas in one go in order to mimize cache thrashing.
+  //
+  QRgb* line;       // Current scanline.
+  uint px_w, px_h;  // Current width and height in pixels (just to avoid cast).
+  uint to_x;        // [0, width())   Current and ending x pixel coordinate.
+  uint to_y;        // [0, height())  Current and ending y pixel coordinate.
+  uint blk_r;       // [0, rows_)     Current block's row.
+  uint blk_c;       // [0, columns_)  Current block's column.
+
+  quint32 padcolor = pad_color_.rgba();
+  quint32 blkcolor;
+
+  px_w = static_cast<uint>(width());
+  px_h = static_cast<uint>(height());
+
+  // Draw empty top padding, if needed (when y_ > 0. weird window size?).
+  for (y = 0; y < y_; ++y) {
+    line = reinterpret_cast<QRgb*>(canvas_.scanLine(y));
+    for (x = 0; x < px_w; line[x++] = padcolor)
+      ;
+  }
+
+  // Draw the texture in one shot, iterating in a row-major fashion.
+  for (blk_r = 0; blk_r < rows_; ++blk_r) {
+    to_y = qMin(y + kHeight, px_h);
+
+    // This block may take several 1-px high scanlines. Each column needs
+    // to be filled accordingly for each of these rows.
+    for (; y < to_y; ++y) {
+      line = reinterpret_cast<QRgb*>(canvas_.scanLine(y));
+
+      for (x = 0, blk_c = 0; blk_c < columns_; ++blk_c) {
+        to_x = qMin(x + kWidth, px_w);
+
+        // Draw [x, to_x], then padding on the right.
+        blkcolor = colorFromRowAndBand(blk_r, bandinfo_[blk_c]);
+
+        for (; x < to_x; line[x++] = blkcolor)
+          ;
+        if (x < px_w) line[x++] = padcolor;
+      }
+
+      // If extra space remains in line, fill to the right edge.
+      for (; x < px_w; line[x++] = padcolor)
+        ;
+    }
+
+    // Draw a full line of padding below the just-drawn region (if in bounds).
+    if (y < px_h) {
+      line = reinterpret_cast<QRgb*>(canvas_.scanLine(y++));
+      for (x = 0; x < px_w; line[x++] = padcolor)
+        ;
+    }
+  }
+
+  // If not at bottom boundary yet, pad remaining lines.
+  while (y < px_h) {
+    line = reinterpret_cast<QRgb*>(canvas_.scanLine(y++));
+    for (x = 0; x < px_w; line[x++] = padcolor)
+      ;
+  }
+
+  p.drawImage(0, 0, canvas_, 0, 0, width(), height(), Qt::NoFormatConversion);
 }
 
 static inline void adjustToLimits(int& b, int& f, uint& amount) {
@@ -248,7 +394,8 @@ void BlockAnalyzer::psychedelicModeChanged(bool enabled) {
  * It won't modify the hue of fg unless absolutely necessary
  * @return the adjusted form of fg
  */
-QColor ensureContrast(const QColor& bg, const QColor& fg, uint _amount = 150) {
+static QColor ensureContrast(const QColor& bg, const QColor& fg,
+                             uint _amount = 150) {
   class OutputOnExit {
    public:
     explicit OutputOnExit(const QColor& color) : c(color) {}
@@ -335,85 +482,58 @@ QColor ensureContrast(const QColor& bg, const QColor& fg, uint _amount = 150) {
 }
 
 void BlockAnalyzer::paletteChange(const QPalette&) {
-  const QColor bg = palette().color(QPalette::Background);
-  QColor fg;
+  QColor bg, bgdark, fg;
 
-  if (psychedelic_enabled_) {
+  bg = palette().color(QPalette::Background);
+  bgdark = bg.darker(112);
+
+  if (psychedelic_enabled_)
     fg = getPsychedelicColor(scope_, 10, 75);
-  } else {
+  else
     fg = ensureContrast(bg, palette().color(QPalette::Highlight));
+
+  fg_color_ = fg;
+  bg_color_ = bgdark;
+  pad_color_ = bg;
+
+  // Calculate background gradient colors.
+  {
+    const float dr = 15.f * (bg.red() - fg.red()) / (16.f * rows_);
+    const float dg = 15.f * (bg.green() - fg.green()) / (16.f * rows_);
+    const float db = 15.f * (bg.blue() - fg.blue()) / (16.f * rows_);
+
+    for (uint y = 0; y < rows_; ++y) {
+      bg_grad_[y] = qRgba(fg.red() + static_cast<int>(dr * y),
+                          fg.green() + static_cast<int>(dg * y),
+                          fg.blue() + static_cast<int>(db * y), 255);
+    }
+
+    bg_grad_[rows_] = bg.rgba();
   }
 
-  topBarPixmap_.fill(fg);
-
-  const double dr =
-      15 * static_cast<double>(bg.red() - fg.red()) / (rows_ * 16);
-  const double dg =
-      15 * static_cast<double>(bg.green() - fg.green()) / (rows_ * 16);
-  const double db =
-      15 * static_cast<double>(bg.blue() - fg.blue()) / (rows_ * 16);
-  const int r = fg.red(), g = fg.green(), b = fg.blue();
-
-  bar()->fill(bg);
-
-  QPainter p(bar());
-
-  for (int y = 0; static_cast<uint>(y) < rows_; ++y)
-    // graduate the fg color
-    p.fillRect(
-        0, y * (kHeight + 1), kWidth, kHeight,
-        QColor(r + static_cast<int>(dr * y), g + static_cast<int>(dg * y),
-               b + static_cast<int>(db * y)));
-
+  // make a complimentary fadebar colour
+  // TODO(John Maguire): dark is not always correct, dumbo!
   {
-    const QColor bg = palette().color(QPalette::Background).darker(112);
-
-    // make a complimentary fadebar colour
-    // TODO(John Maguire): dark is not always correct, dumbo!
     int h, s, v;
-    palette().color(QPalette::Background).darker(150).getHsv(&h, &s, &v);
-    const QColor fg(QColor::fromHsv(h + 120, s, v));
 
-    const double dr = fg.red() - bg.red();
-    const double dg = fg.green() - bg.green();
-    const double db = fg.blue() - bg.blue();
-    const int r = bg.red(), g = bg.green(), b = bg.blue();
+    bg.darker(150).getHsv(&h, &s, &v);
+    fg = QColor::fromHsv(h + 120, s, v);
 
-    // Precalculate all fade-bar pixmaps
+    const float r = 1.f * bgdark.red();
+    const float g = 1.f * bgdark.green();
+    const float b = 1.f * bgdark.blue();
+    const float dr = 1.f * fg.red() - r;
+    const float dg = 1.f * fg.green() - g;
+    const float db = 1.f * fg.blue() - b;
+
+    const float fFscl = 1. * kFadeSize;
+    const float frlogFscl = 1.f / log10f(fFscl);
+
     for (uint y = 0; y < kFadeSize; ++y) {
-      fade_bars_[y].fill(palette().color(QPalette::Background));
-      QPainter f(&fade_bars_[y]);
-      for (int z = 0; static_cast<uint>(z) < rows_; ++z) {
-        const double Y = 1.0 - (log10(kFadeSize - y) / log10(kFadeSize));
-        f.fillRect(
-            0, z * (kHeight + 1), kWidth, kHeight,
-            QColor(r + static_cast<int>(dr * Y), g + static_cast<int>(dg * Y),
-                   b + static_cast<int>(db * Y)));
-      }
+      const float lrY = 1.f - (frlogFscl * log10f(fFscl - y));
+      fade_bars_[y] =
+          qRgba(static_cast<int>(r + lrY * dr), static_cast<int>(g + lrY * dg),
+                static_cast<int>(b + lrY * db), 255);
     }
   }
-
-  drawBackground();
-}
-
-void BlockAnalyzer::drawBackground() {
-  if (background_.isNull()) {
-    return;
-  }
-
-  const QColor bg = palette().color(QPalette::Background);
-  const QColor bgdark = bg.darker(112);
-
-  background_.fill(bg);
-
-  QPainter p(&background_);
-
-  if (p.paintEngine() == 0) {
-    return;
-  }
-
-  for (int x = 0; (uint)x < columns_; ++x)
-    for (int y = 0; (uint)y < rows_; ++y)
-      p.fillRect(x * (kWidth + 1), y * (kHeight + 1) + y_, kWidth, kHeight,
-                 bgdark);
 }
