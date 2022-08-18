@@ -65,13 +65,15 @@ Analyzer::Base::Base(QWidget* parent, uint scopeSize)
       timeout_(40),  // msec
       fht_(new FHT(scopeSize)),
       engine_(nullptr),
-      lastScope_(512),
+      lastScope_(),
       new_frame_(false),
       is_playing_(false),
       barkband_table_(),
       prev_color_index_(0),
       bands_(0),
-      psychedelic_enabled_(false) {}
+      psychedelic_enabled_(false) {
+  lastScope_.resize(fht_->size());
+}
 
 void Analyzer::Base::hideEvent(QHideEvent*) { timer_.stop(); }
 
