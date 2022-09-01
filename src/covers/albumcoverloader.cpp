@@ -34,9 +34,6 @@
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
-#ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifyservice.h"
-#endif
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     : QObject(parent),
@@ -180,31 +177,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
     remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
-  }
-#ifdef HAVE_SPOTIFY
-  else if (filename.toLower().startsWith("spotify://image/")) {
-    // HACK: we should add generic image URL handlers
-    SpotifyService* spotify = InternetModel::Service<SpotifyService>();
-
-    if (!connected_spotify_) {
-      connect(spotify, SIGNAL(ImageLoaded(QString, QImage)),
-              SLOT(SpotifyImageLoaded(QString, QImage)));
-      connected_spotify_ = true;
-    }
-
-    QString id = QUrl(filename).path();
-    if (id.startsWith('/')) {
-      id.remove(0, 1);
-    }
-    remote_spotify_tasks_.insert(id, task);
-
-    // Need to schedule this in the spotify service's thread
-    QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
-                              Q_ARG(QString, id));
-    return TryLoadResult(true, false, QImage());
-  }
-#endif
-  else if (filename.isEmpty()) {
+  } else if (filename.isEmpty()) {
     // Avoid "QFSFileEngine::open: No file name specified" messages if we know
     // that the filename is empty
     return TryLoadResult(false, false, task.options.default_output_image_);
@@ -215,18 +188,6 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
       false, !image.isNull(),
       image.isNull() ? task.options.default_output_image_ : image);
 }
-
-#ifdef HAVE_SPOTIFY
-void AlbumCoverLoader::SpotifyImageLoaded(const QString& id,
-                                          const QImage& image) {
-  if (!remote_spotify_tasks_.contains(id)) return;
-
-  Task task = remote_spotify_tasks_.take(id);
-  QImage scaled = ScaleAndPad(task.options, image);
-  emit ImageLoaded(task.id, scaled);
-  emit ImageLoaded(task.id, scaled, image);
-}
-#endif
 
 void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
   reply->deleteLater();

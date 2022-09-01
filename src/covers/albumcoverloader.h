@@ -67,9 +67,6 @@ class AlbumCoverLoader : public QObject {
  protected slots:
   void ProcessTasks();
   void RemoteFetchFinished(QNetworkReply* reply);
-#ifdef HAVE_SPOTIFY
-  void SpotifyImageLoaded(const QString& url, const QImage& image);
-#endif
 
  protected:
   enum State {

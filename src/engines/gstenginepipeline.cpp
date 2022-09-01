@@ -39,10 +39,6 @@
 #include "devices/cddadevice.h"
 #endif
 #include "internet/core/internetmodel.h"
-#ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifyserver.h"
-#include "internet/spotify/spotifyservice.h"
-#endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
@@ -171,58 +167,14 @@ QByteArray GstEnginePipeline::GstUriFromUrl(const QUrl& url) {
 
 GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
   GstElement* new_bin = nullptr;
-#ifdef HAVE_SPOTIFY
-  if (url.scheme() == "spotify") {
-    new_bin = gst_bin_new("spotify_bin");
-    if (!new_bin) return nullptr;
-
-    // Create elements
-    GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
-    if (!src) {
-      gst_object_unref(GST_OBJECT(new_bin));
-      return nullptr;
-    }
-    GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!gdp) {
-      gst_object_unref(GST_OBJECT(new_bin));
-      return nullptr;
-    }
-
-    // Pick a port number
-    const int port = Utilities::PickUnusedPort();
-    g_object_set(G_OBJECT(src), "host", "127.0.0.1", nullptr);
-    g_object_set(G_OBJECT(src), "port", port, nullptr);
-
-    // Link the elements
-    gst_element_link(src, gdp);
-
-    // Add a ghost pad
-    GstPad* pad = gst_element_get_static_pad(gdp, "src");
-    gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
-    gst_object_unref(GST_OBJECT(pad));
-
-    // Tell spotify to start sending data to us.
-    SpotifyServer* spotify_server =
-        InternetModel::Service<SpotifyService>()->server();
-    // Need to schedule this in the spotify server's thread
-    QMetaObject::invokeMethod(
-        spotify_server, "StartPlayback", Qt::QueuedConnection,
-        Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
-  } else {
-#endif
-    QByteArray uri = GstUriFromUrl(url);
-    new_bin = engine_->CreateElement("uridecodebin");
-    if (!new_bin) return nullptr;
-    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
-                     this);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback,
-                     this);
-#ifdef HAVE_SPOTIFY
-  }
-#endif
-
+  QByteArray uri = GstUriFromUrl(url);
+  new_bin = engine_->CreateElement("uridecodebin");
+  if (!new_bin) return nullptr;
+  g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
+  CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback, this);
+  CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
+  CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback,
+                   this);
   return new_bin;
 }
 
@@ -1199,26 +1151,6 @@ GstState GstEnginePipeline::state() const {
 }
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
-#ifdef HAVE_SPOTIFY
-  if (current_.url_.scheme() == "spotify" && !buffering_) {
-    const GstState current_state = this->state();
-
-    if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
-      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
-
-      // Need to schedule this in the spotify service's thread
-      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                Q_ARG(bool, true));
-    } else if (state == GST_STATE_PLAYING &&
-               current_state == GST_STATE_PAUSED) {
-      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
-
-      // Need to schedule this in the spotify service's thread
-      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                Q_ARG(bool, false));
-    }
-  }
-#endif
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }

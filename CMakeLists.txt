@@ -60,7 +60,6 @@ find_library(PROTOBUF_STATIC_LIBRARY libprotobuf.a libprotobuf)
 
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
-pkg_search_module(CRYPTOPP cryptopp libcrypto++)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
@@ -75,7 +74,6 @@ pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(LIBSPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
@@ -167,12 +165,6 @@ endif()
 
 if (APPLE)
   find_library(SPARKLE Sparkle)
-  find_library(LIBSPOTIFY libspotify)
-
-  if(LIBSPOTIFY_FOUND)
-    set(LIBSPOTIFY_INCLUDE_DIRS ${LIBSPOTIFY})
-    set(LIBSPOTIFY_LIBRARIES ${LIBSPOTIFY})
-  endif(LIBSPOTIFY_FOUND)
 
   add_subdirectory(3rdparty/SPMediaKeyTap)
   set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
@@ -296,19 +288,6 @@ optional_component(UDISKS2 ON "Devices: UDisks2 backend"
   DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
-optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
-  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-  DEPENDS "libspotify" LIBSPOTIFY_FOUND
-)
-
-if (CRYPTOPP_FOUND OR HAVE_SPOTIFY_BLOB)
-  set(CRYPTOPP_OR_HAVE_SPOTIFY_BLOB ON)
-endif()
-
-optional_component(SPOTIFY ON "Spotify support"
-  DEPENDS "cryptopp or spotify blob" CRYPTOPP_OR_HAVE_SPOTIFY_BLOB
-)
-
 optional_component(MOODBAR ON "Moodbar support"
   DEPENDS "fftw3" FFTW3_FOUND
 )
@@ -339,13 +318,6 @@ option(USE_BUNDLE "Bundle macos/windows dependencies" ON)
 if (APPLE AND USE_BUNDLE AND NOT USE_BUNDLE_DIR)
   set(USE_BUNDLE_DIR "../PlugIns")
 endif()
-
-if(CRYPTOPP_FOUND)
-  set(HAVE_CRYPTOPP ON)
-  if(HAVE_SPOTIFY)
-    set(HAVE_SPOTIFY_DOWNLOADER ON)
-  endif(HAVE_SPOTIFY)
-endif(CRYPTOPP_FOUND)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -454,9 +426,6 @@ add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
 add_subdirectory(ext/libclementine-remote)
-if(HAVE_SPOTIFY)
-  add_subdirectory(ext/libclementine-spotifyblob)
-endif(HAVE_SPOTIFY)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
@@ -466,10 +435,6 @@ endif(WITH_DEBIAN)
 if(HAVE_BREAKPAD)
   add_subdirectory(3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
-
-if(HAVE_SPOTIFY_BLOB)
-  add_subdirectory(ext/clementine-spotifyblob)
-endif(HAVE_SPOTIFY_BLOB)
 
 if(HAVE_MOODBAR)
   add_subdirectory(gst/moodbar)

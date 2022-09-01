@@ -60,10 +60,6 @@
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
 #endif
-#ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifyservice.h"
-#include "internet/spotifywebapi/spotifywebapiservice.h"
-#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -99,10 +95,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new SomaFMService(app, this));
   AddService(new IntergalacticFMService(app, this));
   AddService(new RadioBrowserService(app, this));
-#ifdef HAVE_SPOTIFY
-  AddService(new SpotifyService(app, this));
-  AddService(new SpotifyWebApiService(app, this));
-#endif
   AddService(new SubsonicService(app, this));
 #ifdef HAVE_BOX
   AddService(new BoxService(app, this));

@@ -47,10 +47,6 @@ include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
-if(HAVE_SPOTIFY)
-  include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
-  include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
-endif(HAVE_SPOTIFY)
 
 include(../cmake/ParseArguments.cmake)
 
@@ -885,37 +881,6 @@ optional_source(HAVE_LIBLASTFM
     internet/lastfm/lastfmsettingspage.ui
 )
 
-# Spotify support
-optional_source(HAVE_SPOTIFY
-  SOURCES
-    internet/spotify/spotifyserver.cpp
-    internet/spotify/spotifyservice.cpp
-    internet/spotify/spotifysettingspage.cpp
-    internet/spotifywebapi/spotifywebapiservice.cpp
-    globalsearch/spotifysearchprovider.cpp
-    globalsearch/spotifywebapisearchprovider.cpp
-  HEADERS
-    globalsearch/spotifysearchprovider.h
-    globalsearch/spotifywebapisearchprovider.h
-    internet/spotify/spotifyserver.h
-    internet/spotify/spotifyservice.h
-    internet/spotify/spotifysettingspage.h
-    internet/spotifywebapi/spotifywebapiservice.h
-  UI
-    internet/spotify/spotifysettingspage.ui
-)
-
-if(HAVE_SPOTIFY)
-  optional_source(HAVE_SPOTIFY_DOWNLOADER
-    SOURCES
-      internet/spotify/spotifyblobdownloader.cpp
-    HEADERS
-      internet/spotify/spotifyblobdownloader.h
-    INCLUDE_DIRECTORIES
-      ${CRYPTOPP_INCLUDE_DIRS}
-  )
-endif(HAVE_SPOTIFY)
-
 # Platform specific - OS X
 optional_source(APPLE
   INCLUDE_DIRECTORIES
@@ -1353,17 +1318,6 @@ if(HAVE_BREAKPAD)
   endif (LINUX)
 endif(HAVE_BREAKPAD)
 
-if(HAVE_SPOTIFY)
-  target_link_libraries(clementine_lib clementine-spotifyblob-messages)
-endif(HAVE_SPOTIFY)
-
-if(HAVE_SPOTIFY_DOWNLOADER)
-  target_link_libraries(clementine_lib
-    ${CRYPTOPP_LIBRARIES}
-  )
-  link_directories(${CRYPTOPP_LIBRARY_DIRS})
-endif(HAVE_SPOTIFY_DOWNLOADER)
-
 if(HAVE_LIBPULSE)
   target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
 endif()
@@ -1451,9 +1405,6 @@ target_link_libraries(clementine
 )
 
 # macdeploy.py relies on the blob being built first.
-if(HAVE_SPOTIFY_BLOB)
-  add_dependencies(clementine clementine-spotifyblob)
-endif(HAVE_SPOTIFY_BLOB)
 add_dependencies(clementine clementine-tagreader)
 
 set_target_properties(clementine PROPERTIES
