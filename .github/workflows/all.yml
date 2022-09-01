@@ -68,6 +68,8 @@ jobs:
         run: pip3 install transifex-client==0.13.9
       - name: Checkout
         uses: actions/checkout@v1.2.0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: tx init
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
