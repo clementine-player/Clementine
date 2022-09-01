@@ -10,7 +10,7 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
   push_translations:
     name: Push translation sources to Transifex
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:bionic
     steps:
@@ -91,7 +91,7 @@ jobs:
 
   create_release:
     name: Create GitHub Release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     if: github.ref == 'refs/heads/master'
     needs:
       - build_bionic_64
@@ -126,7 +126,7 @@ jobs:
 
   build_source:
     name: Build source tarball
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:focal
     steps:
@@ -186,7 +186,7 @@ jobs:
 
   build_fedora_36:
     name: Build Fedora 36 RPM
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: fedora:36
     env:
@@ -258,7 +258,7 @@ jobs:
 
   build_fedora_35:
     name: Build Fedora 35 RPM
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: fedora:35
     env:
@@ -330,7 +330,7 @@ jobs:
 
   build_mingw:
     name: Build Windows Installer
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: eu.gcr.io/clementine-data/mingw-w64:latest
     env:
@@ -523,7 +523,7 @@ jobs:
 
   build_stretch_64:
     name: Build Debian Stretch 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: debian:stretch
     steps:
@@ -582,7 +582,7 @@ jobs:
 
   build_bionic_64:
     name: Build Ubuntu Bionic 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:bionic
     steps:
@@ -641,7 +641,7 @@ jobs:
 
   build_bullseye_64:
     name: Build Debian Bullseye 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: debian:bullseye
     steps:
@@ -701,7 +701,7 @@ jobs:
 
   build_buster_64:
     name: Build Debian Buster 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: debian:buster
     steps:
@@ -760,7 +760,7 @@ jobs:
 
   build_focal_64:
     name: Build Ubuntu Focal 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:focal
     steps:
@@ -825,7 +825,7 @@ jobs:
 
   build_jammy_64:
     name: Build Ubuntu Jammy 64-bit deb
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:jammy
     steps:
