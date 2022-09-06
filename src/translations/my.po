@@ -91,13 +91,6 @@ msgstr "%1 နေ့များ"
 msgid "%1 days ago"
 msgstr "%1 လွန်ခဲ့သောနေ့များ"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -109,7 +102,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -283,10 +275,6 @@ msgstr ""
 msgid "(different across multiple songs)"
 msgstr "(အမျိုးမျိုးသောသီချင်းများပေါင်းစုံဖြတ်၍)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ""
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...နှင့်အမာရော့ခ်ကူညီသူများအားလံုး"
@@ -395,10 +383,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>နှင့်အတူတိုကင်များစတင် %, ဥပမာ: %artist %album %title </p>⏎ ⏎ <p>အကယ်၍သင်တွန့်လိမ်တွန့်ကွင်းများနှင့်တိုကင်ပါဝင်သောစာသားအပိုင်းများကိုဝိုင်းလျှင်၊ အကယ်၍တိုကင်ကအလွတ်ဖြစ်နေလျှင်အဲဒီအပိုင်းကိုဖုံးကွယ်။</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "စပေါ့တီဖိုင်းအရစ်ကျစနစ်စာရင်းတစ်ခုလိုအပ်။"
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "မှန်ကန်သောကုဒ်ထည့်သွင်းနိုင်မှသာအသံုးပြုသူဆက်သွယ်နိုင်။"
@@ -476,7 +460,6 @@ msgstr "အကြွင်းမဲ့"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "စာရင်းအသေးစိတ်အကြောင်းအရာများ"
 
@@ -641,14 +624,6 @@ msgstr "သီချင်းနှစ်အမည်ထည့်"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "သီချင်းစီးကြောင်းထည့်..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr ""
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1030,7 +1005,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "ဘစ်နှုန်း"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "ဘလောက်စိစစ်သူ"
 
@@ -1378,10 +1353,6 @@ msgstr "မက်နာကျွန်းပုံစံပြင်..."
 msgid "Configure Shortcuts"
 msgstr "အတိုကောက်များပုံစံပြင်"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "စပေါ့တီဖိုင်ပုံစံပြင်..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
@@ -1415,10 +1386,6 @@ msgstr "သက်ဝင်လှုပ်ရှား/သက်ဝင်မလ�
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "ပစ္စည်းချိတ်ဆက်"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "စပေါ့တီဖိုင်သို့ချိတ်ဆက်"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1957,10 +1924,6 @@ msgstr "ဒီအယ်လဘမ်ကူးဆွဲ..."
 msgid "Download this episode"
 msgstr "ဒီတွဲကူးဆွဲ"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "ကူးဆွဲ..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2342,7 +2305,6 @@ msgid "Failed to load podcast"
 msgstr "ပို့စ်ကဒ်များထည့်သွင်းခြင်းမရ"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2477,10 +2439,6 @@ msgstr ""
 msgid "Font size"
 msgstr "ဖွန်ပမာဏ"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "လိုင်စင်အကြောင်းများကြောင့်စပေါ့တီဖိုင်အထောက်အကူသည်ဖြည့်စွက်ပရိုဂရမ်တွင်ပါဝင်။"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "အတင်းမိုနိကုဒ်ပြောင်း"
@@ -2578,15 +2536,6 @@ msgstr "အထွေထွေချိန်ညှိချက်"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "အမျိုးအစား"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr ""
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2815,10 +2764,6 @@ msgid ""
 "time a song finishes."
 msgstr "စနစ်အရှင်ထဲတွင်တေးသံလမ်းကြောများရွေးချယ်ပြီးသီချင်းတစ်ပုဒ်ပြီးတိုင်းတေးသံလမ်းကြောထဲသို့ထည့်သွင်း။"
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "စာတိုက်ပံုး"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "သတိပေးချက်တွင်အယ်လဘမ်အနုပညာထည့်သွင်းစေ"
@@ -2867,10 +2812,6 @@ msgstr ""
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "ထည့်သွင်း..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "သွင်းပြီး"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3162,7 +3103,6 @@ msgstr "ဖိုင်များ/ယူအာအလ်များထည့�
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "ဖွင့်ဝင်"
 
@@ -3264,10 +3204,6 @@ msgstr "အဲဒီကဲ့သို့လုပ်"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "အဲဒီကဲ့သို့လုပ်"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "သီချင်းစာရင်းအောဖ့်လိုင်းသုံးလုပ်"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3588,10 +3524,6 @@ msgstr "အသင်းဝင်များလုံလောက်မှုမ
 msgid "Not enough neighbors"
 msgstr "အိမ်နီးနားချင်းများလုံလောက်မှုမရှိ"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "မသွင်းထား"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3844,7 +3776,6 @@ msgstr "အဖွဲ့"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "စကားဝှက်"
 
@@ -3964,10 +3895,6 @@ msgstr "ဘရောက်ဇာကိုပိတ်ပြီးကလီမန
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "ဖြည့်စွက်ပရိုဂရမ်အခြေအနေ:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
@@ -4007,7 +3934,6 @@ msgstr "လိုလားချက်"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "လိုလားချက်များ"
 
@@ -4022,10 +3948,6 @@ msgstr "နှစ်သက်သောအယ်လဘမ်အနုပညာဖ
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "နှစ်သက်သောအသံပုံစံ"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "နှစ်သက်သောဘစ်နှုန်း"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4279,7 +4201,7 @@ msgstr "သီချင်းစာရင်းမှပုံတူများ
 msgid "Remove folder"
 msgstr "ဖိုင်တွဲဖယ်ရှား"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
 
@@ -4611,10 +4533,6 @@ msgstr "စနစ်ရှာဖွေ"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "ရှာဖွေရွေးပိုင်ခွင့်များ"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "ရလဒ်များရှာဖွေ"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5026,33 +4944,9 @@ msgstr "ရင်းမြစ်များ"
 msgid "Speex"
 msgstr "စဖိစ်"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "စပေါ့တီဖိုင်"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "စပေါ့တီဖိုင်းဖွင့်ဝင်အမှားပြ"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr ""
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr ""
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "အဆင့်အတန်း"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "ကြည့်ခဲ့ပြီး"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5069,12 +4963,6 @@ msgstr "လက်ရှိဖွင့်ဆဲသီချင်းစာရင
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်းစတင်"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "ရှာဖွေရလဒ်များစာရင်းများကိုဖြည့်ရန်ရှာဖွေနေရာတွင်တစ်ခုခုရိုက်ထည့်ပါ"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5197,18 +5085,6 @@ msgstr "လက်ခံပုံစံများ"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "ယခုကိန်းဂဏန်းအချက်အလက်များကိုဖိုင်များသို့လိုက်လျောညီထွေဖြစ်ရန်လုပ်"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "စပေါ့တီဖိုင်စာတိုက်ပံုးညီတူညှိ"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "စပေါ့တီဖိုင်သီချင်းစာရင်းညီတူညှိ"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "စပေါ့တီဖိုင်ကြည့်ခဲ့ပြီးတေးသံလမ်းကြောများညီတူညှိ"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5445,10 +5321,6 @@ msgstr "ဦးတည်ရာပြောင်းများများပြ
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "ထိပ်တန်းတေးသံများ"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5714,10 +5586,6 @@ msgstr "မူလစနစ်ပံုစံအရောင်သတ်မှတ
 msgid "Use the system proxy settings"
 msgstr "စနစ်ပရောက်ဇီချိန်ညှိချက်သံုး"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "အသံပမာဏပုံမှန်ပြုလုပ်မှုအသုံးပြု"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "အသုံးပြုပြီး"
@@ -5730,7 +5598,6 @@ msgstr "အသံုးပြုသူမျက်နှာပြင်"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "အသင်းဝင်အမည်"
 
@@ -6026,23 +5893,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "ဝီအဝေးထိန်းကိုကလီမန်တိုင်းတွင်အဝေးထိန်းချုပ်ကိရိယာကဲ့သို့အသံုးပြုနိုင်။ <a href=\"http://www.clementine-player.org/wiimote\">ကလီမန်တိုင်းဝီကီစာမျက်နှာတွင်ကြည့်ရှုပါ</a>အချက်အလက်များအတွက် ⏎\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "သင့်ဆီမှာစပေါ့တီဖိုင်းအရစ်ကျစနစ်စာရင်းတစ်ခုမရှိပါ။"
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "သင့်ဆီတွင်မှာယူနေခြင်းမရှိပါ"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "စပေါ့တီဖိုင်းမှထွက်ပြီးဖြစ်၍ချိန်ညှိချက်အရေးအသားတွင်စကားဝှက်ပြန်ထည့်ပါ။"
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "စပေါ့တီဖိုင်းမှထွက်ပြီးဖြစ်၍စကားဝှက်ပြန်ထည့်ပါ။"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6084,10 +5937,6 @@ msgstr "သင့်လိုလျှောက်နာမည်ပေးပိ
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "အိုးပန်းဂျီအယ်အထောက်အကူသင့်စနစ်တွင်မရှိပုံဖော်ကြည့်ခြင်းများမရနိုင်။"
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "သင့်အသင်းဝင်အမည်သို့စကားဝှက်မမှန်"
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6201,9 +6050,6 @@ msgid "in the last"
 msgstr "နောက်ဆံုးမှာ"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "တစ်စက္ကန့်ကီလိုဘိုက်နှုန်း"
 

@@ -97,13 +97,6 @@ msgstr "%1 dagar"
 msgid "%1 days ago"
 msgstr "%1 dögum síðan"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr "%1 tókst ekki að kóða sem gzip-streymi:\n%2"
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -115,7 +108,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 lagalistar (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -289,10 +281,6 @@ msgstr "Á&r"
 msgid "(different across multiple songs)"
 msgstr "(breytilegt yfir mörg lög)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ", eftir "
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...og allir stuðningsaðilar Amarok"
@@ -401,10 +389,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Breytur byrja á %, til dæmis: %artist %album %title </p>\n\n<p>Ef þú setur slaufusviga { } í kringum hluta textans sem inniheldur breytuna verður sá hluti falinn ef stakið er ekki til.</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "Krafist er Spotify Premium aðgangs."
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Forrit getur einungis tengst ef réttur kóði er settur inn."
@@ -482,7 +466,6 @@ msgstr "Algildar"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Nánar um notanda"
 
@@ -647,14 +630,6 @@ msgstr "Bæta við merki með ártali lags"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "Bæta við streymi..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "Bæta við Spotify-spilunarlista"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "Bæta við Spotify-stjörnumerkt"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1036,7 +1011,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Bitahraði"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "Blokkagreining"
 
@@ -1384,10 +1359,6 @@ msgstr "Stilla Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Stilla flýtilykla"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "Stilla Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Stilla Subsonic..."
@@ -1421,10 +1392,6 @@ msgstr "Tengdu Wii-remote fjarstýringar með virkja/afvirkja aðgerð"
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Tengja tæki"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "Tengist við Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1963,10 +1930,6 @@ msgstr "Sækja þessa hljómplötu..."
 msgid "Download this episode"
 msgstr "Sækja þennan þátt"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "Sækja..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2348,7 +2311,6 @@ msgid "Failed to load podcast"
 msgstr "Mistókst að lesa inn hlaðvarp"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2483,10 +2445,6 @@ msgstr "Laga umslag að breidd"
 msgid "Font size"
 msgstr "Leturstærð"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Vegna vandamála með notkunarleyfi er stuðningur við Spotify hafður í sérstakri viðbót."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "Þvinga einóma-kóðun"
@@ -2584,15 +2542,6 @@ msgstr "Almennar stillingar"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Tónlistarstíll"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr "Náðu í slóð til að deila þessu Spotify-lagi"
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr "Náðu í slóð til að deila þessum lagalista"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2821,10 +2770,6 @@ msgid ""
 "time a song finishes."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "Innhólf"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "Hafa með umslagsmynd í tilkynningunni"
@@ -2873,10 +2818,6 @@ msgstr "Valkostir inntaks"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Setja inn..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "Uppsett"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3168,7 +3109,6 @@ msgstr "Hleður inn skrám/slóðum, skiptir út núverandi lagalista"
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Skrá inn"
 
@@ -3270,10 +3210,6 @@ msgstr "Láta það vaða!"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Láta það vaða!"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "Gera spilunarlista tiltækan án nettengingar"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3594,10 +3530,6 @@ msgstr "Ekki nógu margir meðlimir"
 msgid "Not enough neighbors"
 msgstr "Ekki nógu margir nágrannar"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "Ekki uppsett"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3850,7 +3782,6 @@ msgstr "Partý"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Lykilorð"
 
@@ -3970,10 +3901,6 @@ msgstr "Lokaðu vafranum og farðu til baka í Clementine."
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Opnaðu þessa slóð í vafranum þínum: <a href=\"%1\">%1</a>"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "Staða viðbótar:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "Upplýsingar um hlaðvarp"
@@ -4013,7 +3940,6 @@ msgstr "Kjörstilling"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Kjörstillingar"
 
@@ -4028,10 +3954,6 @@ msgstr "Umbeðin skráarheiti umslagsmynda (aðgreind með kommu)"
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "Umbeðið hljóðsnið"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "Umbeðinn bitahraði"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4285,7 +4207,7 @@ msgstr "Fjarlægja tvítök af spilunarlistanum"
 msgid "Remove folder"
 msgstr "Fjarlægja möppu"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "Fjarlægja af spilunarlistanum"
 
@@ -4617,10 +4539,6 @@ msgstr "Leitarhamur"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Valkostir leitar"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "Leitarniðurstöður"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5032,33 +4950,9 @@ msgstr "Efnisveitur"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Villa við innskráningu í Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr "Slóð á spilunarlista í Spotify"
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Spotify viðbót"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr "Slóð á lag í Spotify"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Staðlað"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "Stjörnumerkt"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5075,12 +4969,6 @@ msgstr ""
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Hefja umkóðun"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "Byrjaðu að skrifa í leitarreitinn hér fyrir ofan og niðurstöðurnar munu birtast sjálfkrafa"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5203,18 +5091,6 @@ msgstr "Studd snið"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Samræma núna tölfræði við skrár"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "Samstilli innhólf Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "Samstilli spilunarlista Spotify"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "Samstilli stjörnumerkt lög í Spotify"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5451,10 +5327,6 @@ msgstr "Of margar endurbeiningar"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr "Hljómplötur með hæstu einkunn"
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "Efstu lög"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5720,10 +5592,6 @@ msgstr "Nota sjálfgefið litastef kerfisins"
 msgid "Use the system proxy settings"
 msgstr "Nota stillingar kerfis fyrir milliþjón (proxy)"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "Nota jöfnun hljóðstyrks"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "Notað"
@@ -5736,7 +5604,6 @@ msgstr "Notandaviðmót"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Notandanafn"
 
@@ -6032,23 +5899,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Þú getur notað Wii-fjarstýringu til að stjórna Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Skoðaðu síðuna á wiki-vef Clementine</a> til að sjá nánari upplýsingar.\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "Þú ert ekki með Spotify Premium aðgang."
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "Þú ert ekki með virka áskrift"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "Þú hefur verið skráð(ur) út af Spotify, settu aftur inn lykilorðið þitt í stillingaglugganum."
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Þú hefur verið skráð(ur) út af Spotify, settu aftur inn lykilorðið þitt."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6090,10 +5943,6 @@ msgstr "Hlustunarvenjur þínar: %1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Kerfið þitt styður ekki OpenGL, sjóngervingar eru ekki tiltækar."
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "Notandanafnið eða lykilorðið þitt voru ekki rétt."
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6207,9 +6056,6 @@ msgid "in the last"
 msgstr "í seinustu"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 

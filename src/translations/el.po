@@ -115,13 +115,6 @@ msgstr "%1 ημέρες"
 msgid "%1 days ago"
 msgstr "%1 ημέρες πριν"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr "%1 αποτυχία αποκωδικοποίησης ως ροή gzip:\n%2"
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -133,7 +126,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -307,10 +299,6 @@ msgstr "&Έτος"
 msgid "(different across multiple songs)"
 msgstr "(διαφορετικό μεταξύ πολλαπλών τραγουδιών)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ", από"
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...και σε όλους τους συνεισφέροντες του Amarok"
@@ -419,10 +407,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Τα αναγνωριστικά αρχίζουν με %, για παράδειγμα:%καλλιτέχνης %δίσκος %τίτλος</p>\n\n<p>Αν εσωκλείσετε ένα κείμενο που περιέχει ένα αναγνωριστικό σε άγκιστρα {}, το τμήμα αυτό δεν θα είναι ορατό αν λείπει το αναγνωριστικό</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "Απαιτείται ένας ανώτερος λογαριασμός Spotify."
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ένας πελάτης μπορεί να συνδεθεί, μόνο αν έχει εισαχθεί ο σωστός κωδικός."
@@ -500,7 +484,6 @@ msgstr "Απόλυτο"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Λεπτομέρειες λογαριασμού"
 
@@ -665,14 +648,6 @@ msgstr "Προσθήκη ετικέτας χρονολογίας τραγουδ�
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "Προσθήκη ροής..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "Προσθήκη στην λίστα αναπαραγωγής Spotify"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "Προσθήκη για Spotify πρωταγωνίστησε"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1054,7 +1029,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Ρυθμός bit"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "Πλοκάδα"
 
@@ -1402,10 +1377,6 @@ msgstr "Ρύθμιση του Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Ρύθμιση συντομεύσεων"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "Ρύθμιση του Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Ρύθμιση του Subsonic..."
@@ -1439,10 +1410,6 @@ msgstr "Σύνδεση των χειριστηρίων Wii χρησιμοποι�
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Σύνδεση συσκευής"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "Σύνδεση στο Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1981,10 +1948,6 @@ msgstr "Μεταφόρτωση αυτού του δίσκου..."
 msgid "Download this episode"
 msgstr "Λήψη αυτού του επεισοδίου"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "Λήψη..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2366,7 +2329,6 @@ msgid "Failed to load podcast"
 msgstr "Αποτυχία φόρτωσης της διαδικτυακής εκπομπής"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2501,10 +2463,6 @@ msgstr "Τοποθετήστε το καπάκι για πλάτος"
 msgid "Font size"
 msgstr "Μέγεθος γραμματοσειράς"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Για λόγους αδειοδότησης η υποστήριξη για το Spotify γίνεται ξεχωριστά."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "Επιβολή κωδικοποίησης mono"
@@ -2602,15 +2560,6 @@ msgstr "Γενικές ρυθμίσεις"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Είδος"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr "Λήψη URL για να μοιραστείτε αυτο το Spotify τραγούδι"
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr "Λήψη URL για να μοιραστείτε αυτή την λίστα αναπαραγωγής"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2795,7 +2744,7 @@ msgid ""
 "If enabled the original files will be removed. If transcoded files have the "
 "same file extension and the destination is the same directory as the "
 "original files, the original files will be replaced."
-msgstr ""
+msgstr "Αν είναι ενεργοποιημένο τα αρχικά αρχεία θα αφαιρεθούν. Αν τα διακωδικοποιημένα αρχεία έχουν την ίδια επέκταση αρχείου και ο κατάλογος προορισμού είναι ο ίδιος, τα αρχικά αρχεία θα αντικατασταθούν."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -2838,10 +2787,6 @@ msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
 msgstr "Στην δυναμική λειτουργία νέα κομμάτια θα επιλέγονται και τοποθετούνται στην λίστα κάθε φορά που ένα τραγούδι τελειώνει."
-
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "Εισερχόμενα"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
@@ -2891,10 +2836,6 @@ msgstr "Επιλογές εισόδου"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Εισαγωγή..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "Εγκατεστημένο"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3186,7 +3127,6 @@ msgstr "Φορτώνει αρχεία/URL, αντικαθιστώντας την
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Είσοδος"
 
@@ -3288,10 +3228,6 @@ msgstr "Κάνε το!"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Κάνε το!"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "Η λίστα να είναι διαθέσιμη και εκτός σύνδεσης"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3612,10 +3548,6 @@ msgstr "Δεν υπάρχουν αρκετά μέλη"
 msgid "Not enough neighbors"
 msgstr "Δεν υπάρχουν αρκετοί γείτονες"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "Μη εγκατεστημένο"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3868,7 +3800,6 @@ msgstr "Πάρτι"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Συνθηματικό"
 
@@ -3988,10 +3919,6 @@ msgstr "Παρακαλώ κλείστε τον περιηγητή σας και 
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Παρακαλώ ανοίξτε τον σύνδεσμο στον φυλλομετρητή σας: <a href=\"%1\">%1</a>"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "Κατάσταση πρόσθετου:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "Πληροφορίες διαδικτυακής εκπομπής"
@@ -4031,7 +3958,6 @@ msgstr "Προτιμήσεις"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
@@ -4046,10 +3972,6 @@ msgstr "Προτιμώμενα ονόματα αρχείων φιλοτεχνη�
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "Προτιμώμενη ηχητική διαμόρφωση"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "Προτιμώμενος ρυθμός bit "
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4303,13 +4225,13 @@ msgstr "Αφαίρεση διπλότυπων από την λίστα"
 msgid "Remove folder"
 msgstr "Αφαίρεση φακέλου"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "Αφαίρεση από την λίστα"
 
 #: ../bin/src/ui_transcodedialog.h:243
 msgid "Remove or replace original files "
-msgstr ""
+msgstr "Αφαίρεση ή αντικατάσταση των αρχικών αρχείων"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4635,10 +4557,6 @@ msgstr "Λειτουργία αναζήτησης"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Επιλογές εύρεσης"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "Εύρεση αποτελεσμάτων"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5050,33 +4968,9 @@ msgstr "Πηγές"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Σφάλμα εισόδου στο Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr "Spotify λίστα αναπαραγωγής"
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Πρόσθετο Spotify"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr "Spotify URL του τραγουδιού"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Τυπικό"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "Με αστέρι"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5093,12 +4987,6 @@ msgstr "Εκκίνηση της λίστας αναπαραγωγής που π�
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Εκκίνηση διακωδικοποίησης"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "Ξεκίνα να γράφεις κάτι στο κουτί εύρεσης παραπάνω για να γεμίσει αυτή η λίστα εύρεσης αποτελεσμάτων"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5221,18 +5109,6 @@ msgstr "Υποστηριζόμενες μορφές"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Συγχρονισμός των στατιστικών σε αρχεία τώρα"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "Συγχρονισμός εισερχομένων του Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "Συγχρονισμός λίστας του Spotify"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "Συγχρονισμός κομματιών επισημασμένων με αστέρι του Spotify"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5469,10 +5345,6 @@ msgstr "Πάρα πολλές ανακατευθύνσεις"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr "Υψηλότερα βαθμολογημένοι δίσκοι"
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "Κορυφαία κομμάτια"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5738,10 +5610,6 @@ msgstr "Χρήση προκαθορισμένου χρώματος συστήμ�
 msgid "Use the system proxy settings"
 msgstr "Χρήση ρυθμίσεων του διαμεσολαβητή του συστήματος"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "Χρήση κανονικοποίησης ήχου"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "Σε χρήση"
@@ -5754,7 +5622,6 @@ msgstr "Διασύνδεση χρήστη"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
@@ -6050,23 +5917,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Μπορείτε να χρησιμοποιήσετε χειριστήριο Wii σαν τηλεχειριστήριο για τον Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Δείτε την σχετική σελίδα στο wiki του Clementine</a> για περισσότερες πληροφορίες.\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "Δεν έχετε έναν Ανώτερο λογαριασμό στο Spotify."
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "Δεν έχετε κάποια ενεργή συνδρομή"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "Έχετε εξέλθει από το Spotify, παρακαλώ εισάγετε πάλι τον κωδικό σας στις ρυθμίσεις."
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Έχετε εξέλθει από το Spotify, παρακαλώ εισάγετε πάλι τον κωδικό σας."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6108,10 +5961,6 @@ msgstr "Τα scrobbles σας: %1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Το σύστημα σας δεν έχει υποστήριξη OpenGL, τα οπτικά εφέ δεν είναι διαθέσιμα."
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "Το όνομα χρήστη ή το συνθηματικό ήταν λανθασμένο."
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6225,9 +6074,6 @@ msgid "in the last"
 msgstr "εντός των τελευταίων"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 

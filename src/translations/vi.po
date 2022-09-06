@@ -97,13 +97,6 @@ msgstr "%1 ngày"
 msgid "%1 days ago"
 msgstr "%1 ngày trước"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -115,7 +108,6 @@ msgid "%1 playlists (%2)"
 msgstr "Danh sách %1 (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -289,10 +281,6 @@ msgstr "&Năm"
 msgid "(different across multiple songs)"
 msgstr "(mỗi bài mỗi khác)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ", bởi"
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...và tất cả cộng tác viên của Amarok"
@@ -401,10 +389,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Các dấu bắt đầu là %, ví dụ: %artist %album %title </p>\n\n<p>Nếu bạn quét chọn đoạn văn bản chứa dấu ngoặc nhọn, đoạn đó sẽ bị ẩn đi nếu dấu bắt đầu rỗng.<p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "Cần có tài khoản cao cấp của Spotify."
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Máy khách được kết nối chỉ khi nhập đúng mã."
@@ -482,7 +466,6 @@ msgstr "Tuyệt đối"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Chi tiết tài khoản"
 
@@ -647,14 +630,6 @@ msgstr "Thêm thẻ năm của bài hát"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "Thêm vào danh sách Spotify"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "Thêm vào Spotify và đánh dấu sao"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1036,7 +1011,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "Phân tích theo các khối vuông"
 
@@ -1384,10 +1359,6 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "Cấu hình Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Cấu hình Subsonic..."
@@ -1421,10 +1392,6 @@ msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "Kết nối đến Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1963,10 +1930,6 @@ msgstr "Tải album này..."
 msgid "Download this episode"
 msgstr "Tải tập này"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "Tải về..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2348,7 +2311,6 @@ msgid "Failed to load podcast"
 msgstr "Lỗi nạp podcast"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2483,10 +2445,6 @@ msgstr "Hiện ảnh bìa vừa chiều rộng"
 msgid "Font size"
 msgstr "Kích cỡ phông chữ"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Vì lí do giấy phép nên Spotify được hỗ trợ thông qua một phần mở rộng."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "Buộc mã hóa đơn kênh"
@@ -2584,15 +2542,6 @@ msgstr "Thiết lập chung"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Thể loại"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr "Lấy URL để chia sẻ bài này"
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr "Lấy URL để chia sẻ danh sách này"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2821,10 +2770,6 @@ msgid ""
 "time a song finishes."
 msgstr "Trong chế độ năng động, các bài hát mới sẽ được chọn và thêm vào danh sách mỗi khi một bài hát được phát xong."
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "Hộp thư đến"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "Kèm theo ảnh bìa trong thông báo"
@@ -2873,10 +2818,6 @@ msgstr "Tùy chọn nhập liệu"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Nhập..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "Đã cài đặt"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3168,7 +3109,6 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Đăng nhập"
 
@@ -3270,10 +3210,6 @@ msgstr "Make it so!"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "Danh sách sẵn sàng ngoại tuyến"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3594,10 +3530,6 @@ msgstr "Chưa đủ thành viên"
 msgid "Not enough neighbors"
 msgstr "Chưa đủ những người lân cận"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "Chưa cài đặt"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3850,7 +3782,6 @@ msgstr "Party"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Mật khẩu"
 
@@ -3970,10 +3901,6 @@ msgstr "Hãy đóng trình duyệt và trở lại Clementine."
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "Trạng thái phần mở rộng:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
@@ -4013,7 +3940,6 @@ msgstr "Tùy chỉnh"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Tùy chỉnh"
 
@@ -4028,10 +3954,6 @@ msgstr "Tìm ảnh bìa với tên tập tin có chứa các từ sau (phân cá
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "Định dạng âm thanh được ưu tiên"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "Bitrate ưu tiên"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4285,7 +4207,7 @@ msgstr "Loại bỏ mục trùng nhau khỏi d.sách"
 msgid "Remove folder"
 msgstr "Loại bỏ thư mục"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
 
@@ -4617,10 +4539,6 @@ msgstr "Chế độ tìm kiếm"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "Kết quả tìm kiếm"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5032,33 +4950,9 @@ msgstr "Nguồn"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Lỗi đăng nhập Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr "URL của danh sách Spotify"
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Phần hỗ trợ Spotify"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr "URL của bài hát trên Spotify"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Chuẩn"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "Đã đánh giá"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5075,12 +4969,6 @@ msgstr "Bắt đầu danh sách đang phát"
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "Gõ gì đó vào ô tìm kiếm"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5203,18 +5091,6 @@ msgstr "Các định dạng được hỗ trợ"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Đồng bộ thống kê vào tập tin ngay"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "Đang đồng bộ hộp thư đến Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "Đang đồng bộ danh sách Spotify"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5451,10 +5327,6 @@ msgstr "Quá nhiều chuyển hướng"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "Những bài đứng đầu"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5720,10 +5592,6 @@ msgstr "Dùng thiết lập màu mặc định của hệ thống"
 msgid "Use the system proxy settings"
 msgstr "Sử dụng thiết lập proxy của hệ thống"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "Sử dụng cân bằng âm lượng"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "Đã dùng"
@@ -5736,7 +5604,6 @@ msgstr "Giao diện người dùng"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Tên người dùng"
 
@@ -6032,23 +5899,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Bạn có thể điều khiển Clementine từ xa với tay cầm Wii.  <a href=\"http://www.clementine-player.org/wiimote\">Xem bài viết trên Clementine wiki<a> để biết thêm chi tiết.\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "Bạn không có tài khoản cao cấp của Spotify."
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "Bạn không có một đăng kí được kích hoạt"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu trong hộp thoại Thiết lập."
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6090,10 +5943,6 @@ msgstr "Thông tin bài hát của bạn: %1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Hệ thống của bạn không hỗ trợ OpenGL, hiệu ứng hình ảnh ảo không chạy được."
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "Tên người dùng hay mật khẩu không đúng."
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6207,9 +6056,6 @@ msgid "in the last"
 msgstr "cuối"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 

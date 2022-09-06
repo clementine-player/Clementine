@@ -92,13 +92,6 @@ msgstr "%1 dana"
 msgid "%1 days ago"
 msgstr "prije %1 dana"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -110,7 +103,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 popisa pjesama (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -284,10 +276,6 @@ msgstr ""
 msgid "(different across multiple songs)"
 msgstr "(različito među više pjesama)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ""
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...i svim Amarok pomagačima"
@@ -396,10 +384,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Žetoni počinju sa %,, na primjer: 1%umjetnik 1%album 2%naziv </p>\n<p>Ako okružite dijelove teksta koji sadrže žeton s kovrčavim zagradama, taj odjeljak će biti skriven ako je žeton prazan.</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "Potreban je račun od Spotify Premium."
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
@@ -477,7 +461,6 @@ msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Detalji o nalogu"
 
@@ -642,14 +625,6 @@ msgstr "Dodajte oznaku godine pjesme"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "Dodaj tok..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr ""
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1031,7 +1006,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr ""
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "Analizator blokova"
 
@@ -1379,10 +1354,6 @@ msgstr "Podesi Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Podesi prečice"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "Konfiguriši Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr ""
@@ -1416,10 +1387,6 @@ msgstr "Spoji Wii daljinski koristeći akciju aktivacija/de-aktivacija"
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Spoji uređaj"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "Spajanje na Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1958,10 +1925,6 @@ msgstr "Preuzmi ovaj album..."
 msgid "Download this episode"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "Skinuti..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2343,7 +2306,6 @@ msgid "Failed to load podcast"
 msgstr ""
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2478,10 +2440,6 @@ msgstr ""
 msgid "Font size"
 msgstr "Veličina fonta"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Iz razloga licenciranja podrška za Spotify se nalazi u zasebnom dodatku."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "Prisiluj mono enkodiranje"
@@ -2579,15 +2537,6 @@ msgstr "Opće postavke"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Žanr"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr ""
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2816,10 +2765,6 @@ msgid ""
 "time a song finishes."
 msgstr "U dinamičnom režimu će se birati nove pjesme i dodavati na playlistu svaki put kada se pjesma završi."
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "Inbox"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "U obavještenju uračunajte okvir albuma"
@@ -2868,10 +2813,6 @@ msgstr ""
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Unesite..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "Instalirano"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3163,7 +3104,6 @@ msgstr "Učitava dodatke/URL-ove, mijenjajući trenutnu playlistu"
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Upis"
 
@@ -3265,10 +3205,6 @@ msgstr ""
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "Nek je dostupna playlista van mreže"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3589,10 +3525,6 @@ msgstr "Nema dovoljno članova"
 msgid "Not enough neighbors"
 msgstr "Nema dovoljno komšija"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "Nije instalisano"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3845,7 +3777,6 @@ msgstr "Zabava"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Šifra"
 
@@ -3965,10 +3896,6 @@ msgstr ""
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "Status dodatka:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
@@ -4008,7 +3935,6 @@ msgstr ""
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Povlašćanja"
 
@@ -4023,10 +3949,6 @@ msgstr "Povlašćena imena datoteka slika od albuma (razdvojeno zarezom)"
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "Povlašćeni format za audio"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4280,7 +4202,7 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Skloni fasciklu"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "Skloni iz playliste"
 
@@ -4612,10 +4534,6 @@ msgstr "Tip traženja"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Opcije za traženje"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5027,33 +4945,9 @@ msgstr ""
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Greška tokom upisivanja u Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr ""
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Spotify dodatak"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr ""
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Standardno"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "Označeno zvjezdicom"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5070,12 +4964,6 @@ msgstr "Započni trenutno pokrenutu playlistu"
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Započni transkodiranje"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr ""
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5198,18 +5086,6 @@ msgstr "Podržani formati"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "Sinkronizuje se inbox za Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "Sinkronizuje se Spotify playlista"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "Sinkronizuju se ozvježđeni Spotify snimci"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5445,10 +5321,6 @@ msgstr ""
 
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
 msgstr ""
 
 #: ../bin/src/ui_albumcovermanager.h:226
@@ -5715,10 +5587,6 @@ msgstr ""
 msgid "Use the system proxy settings"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr ""
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr ""
@@ -5731,7 +5599,6 @@ msgstr ""
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr ""
 
@@ -6027,22 +5894,8 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr ""
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr ""
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr ""
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr ""
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
@@ -6084,10 +5937,6 @@ msgstr ""
 
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:407
@@ -6202,9 +6051,6 @@ msgid "in the last"
 msgstr ""
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr ""
 

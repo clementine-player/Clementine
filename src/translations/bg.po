@@ -99,13 +99,6 @@ msgstr "%1 дни"
 msgid "%1 days ago"
 msgstr "Преди %1 дни"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -117,7 +110,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 списъци с песни (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -291,10 +283,6 @@ msgstr ""
 msgid "(different across multiple songs)"
 msgstr "(различен по време на множество песни)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ", от"
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "... и всички сътрудници от Amarok"
@@ -403,10 +391,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Признаците започват с %, например: %artist %album %title </p>\n\n<p>Ако оградите част от текста, съдържаща признак, с къдрави скоби, тази част ще се скрива, ако признакът е празен.</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "Необходим е Spotify  Premium акаунт."
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клиент може да се свърже само ако е въведен правилният код."
@@ -484,7 +468,6 @@ msgstr "Абосолютен"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Данни за акаунта"
 
@@ -649,14 +632,6 @@ msgstr "Добавяне на етикет за година на песен"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "Добавяне на поток..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "Добавяне към списъците с песни от Spotify"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "Добавяне към оценените песни от Spotify"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1038,7 +1013,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Поток в битове"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "Блоков анализатор"
 
@@ -1386,10 +1361,6 @@ msgstr "Настройване на Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Настройване на бързите клавиши"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "Настройване на Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "Конфигурация на Subsonic..."
@@ -1423,10 +1394,6 @@ msgstr "Свържете Wii дистанционни чрез действие�
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "Свързване на устройство"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "Свързване към Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1965,10 +1932,6 @@ msgstr "Сваляне на този албум..."
 msgid "Download this episode"
 msgstr "Свали този епизод"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "Изтегляне..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2350,7 +2313,6 @@ msgid "Failed to load podcast"
 msgstr "Не успях да заредя подкаст"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2485,10 +2447,6 @@ msgstr "Сместване на обложката в ширината"
 msgid "Font size"
 msgstr "Размер на шрифта"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Поради причини, свързани с лицензирането, поддръжката на Spotify е като отделна приставка."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "Принудително кодиране в моно"
@@ -2586,15 +2544,6 @@ msgstr "Общи настройки"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Жанр"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr "Вземете линк за споделяне на тази песен в Spotify"
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr "Вземете линк за споделяне на този плейлист"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2823,10 +2772,6 @@ msgid ""
 "time a song finishes."
 msgstr "В динамичен режим новите песни ще бъдат избирани и добавяни към списъка с песни всеки път, когато свърши песента."
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "Входящи"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "Включване на обложката в известяването"
@@ -2875,10 +2820,6 @@ msgstr "Входни настройки"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "Вмъкване..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "Инсталирани"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3170,7 +3111,6 @@ msgstr "Зареждане на файлове/URL адреси, заместв�
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Влизане"
 
@@ -3272,10 +3212,6 @@ msgstr "Направи го така!"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Нека бъде!"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "Списъкът с песни да е наличен в режим извън мрежа"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3596,10 +3532,6 @@ msgstr "Недостатъчно членове"
 msgid "Not enough neighbors"
 msgstr "Недостатъчно съседи"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "Не е инсталиран"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3852,7 +3784,6 @@ msgstr "Парти"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Парола"
 
@@ -3972,10 +3903,6 @@ msgstr "Моля изберете вашия браузър и се върнет
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Моля отворете този линк в браузера си: <a href=\"%1\">%1</a>"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "Състояние на приставката:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
@@ -4015,7 +3942,6 @@ msgstr "Настройка"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Настройки"
 
@@ -4030,10 +3956,6 @@ msgstr "Предпочитани файлови разширения за обл
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "Предпочитан аудио формат"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "Предпочитан битов поток"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4287,7 +4209,7 @@ msgstr "Премахни дублиранията от плейлиста"
 msgid "Remove folder"
 msgstr "Премахни папката"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "Премахване от списъка с песни"
 
@@ -4619,10 +4541,6 @@ msgstr "Режим \"Търсене\""
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Опции при търсене"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "Резултати от търсенето"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5034,33 +4952,9 @@ msgstr "Източници"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Грешка в вписване в Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr "URL на плейлист в Spotify"
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Приставка за Spotify"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr "Линк към песента в Spotify"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Стандартно"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "Със звезда"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5077,12 +4971,6 @@ msgstr "Стартиране на текущо възпроизвеждания 
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "Начало на прекодирането"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "Започнете да пишете нещо в кутията за търсене отгоре, за да запълните списъка с резултати от търсенето"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5205,18 +5093,6 @@ msgstr "Поддържани формати"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизирай статистиките към файловете сега"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "Синхронизиране на входящата кутия на Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "Синхронизиране на списъка с песни от Spotify"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "Синхронизиране на оценените песни от Spotify"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5453,10 +5329,6 @@ msgstr "Твърде много пренасочвания"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "Топ песни"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5722,10 +5594,6 @@ msgstr "Използване на подразбиращите се за сис�
 msgid "Use the system proxy settings"
 msgstr "Използвай системните прокси настройки"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "Използване на нормализация на звука"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "Използван"
@@ -5738,7 +5606,6 @@ msgstr "Потребителски интерфейс"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Потребителско име"
 
@@ -6034,23 +5901,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Можете да използвате Wii Remote като дистанционно за Clementine.<a href=\"http://www.clementine-player.org/wiimote\">Вижте Wiki страницата на Clementine</a> за повече информация.\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "Нямате Spotify Premium акаунт."
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "Нямате активен абонамент"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "Отписан сте от Spotify, моля въведете отново паролата си в Настройки."
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Изписан сте от Spotify, моля въведете паролата си отново"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6092,10 +5945,6 @@ msgstr "Вашите слушания: %1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "В системата Ви липсва OpenGL поддръжка, визуализациите са недостъпни."
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "Вашето потребителско име или парола не съвпада."
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6209,9 +6058,6 @@ msgid "in the last"
 msgstr "в последните"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "килобита/сек"
 

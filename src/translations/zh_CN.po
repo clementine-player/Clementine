@@ -8,6 +8,7 @@
 # Weibing Chen <bingmou2004@gmail.com>, 2012
 # xaojan <cxiaojian@gmail.com>, 2012
 # davidsansome <me@davidsansome.com>, 2010,2014
+# du haoran <dududu233@outlook.com>, 2022
 # 0xCLOVER <hexclover@outlook.com>, 2020
 # mabier <ma_120420@msn.com>, 2014
 # Tong Hui <tonghuix@gmail.com>, 2016-2017
@@ -23,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: 0xCLOVER <hexclover@outlook.com>, 2020\n"
+"Last-Translator: du haoran <dududu233@outlook.com>, 2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -106,13 +107,6 @@ msgstr "%1 天"
 msgid "%1 days ago"
 msgstr "%1 天前"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -124,7 +118,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 播放列表 (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -298,10 +291,6 @@ msgstr "年份(&Y)"
 msgid "(different across multiple songs)"
 msgstr "(多个曲目间不同)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr ", - "
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...和所有 Amarok 的贡献者"
@@ -410,10 +399,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>变量标记以%开头，例如: %artist %album %title </p>\n\n<p>如果您用花括号\"{}\"将含有标记的部分文本括起来，此部分在标记内容为空时将自动隐藏。</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "需要一个 Spotify 的付费账户。"
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "只有在输入正确代码后，客户端才能连接。"
@@ -491,7 +476,6 @@ msgstr "绝对"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "帐号详情"
 
@@ -656,14 +640,6 @@ msgstr "添加歌曲年份标签"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "添加流媒体..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "添加到 Spotify 播放列表"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "添加到 Spotify 收藏"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1045,7 +1021,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "比特率"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "块状分析器"
 
@@ -1101,7 +1077,7 @@ msgstr ""
 
 #: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
-msgstr ""
+msgstr "CD 驱动器"
 
 #: core/song.cpp:453
 msgid "CDDA"
@@ -1359,7 +1335,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "命令"
 
 #: playlist/playlist.cpp:1440 smartplaylists/searchterm.cpp:395
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:719
@@ -1392,10 +1368,6 @@ msgstr "配置 Magnatune..."
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "Configure Shortcuts"
 msgstr "配置快捷键"
-
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "配置Spotify..."
 
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
@@ -1430,10 +1402,6 @@ msgstr "连接 Wii 遥控器"
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "连接设备"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr "连接Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1512,7 +1480,7 @@ msgstr "不能在 %1 检测到音频流"
 
 #: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "找不到 Google Drive 文件。"
 
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
@@ -1599,7 +1567,7 @@ msgstr "手动换曲时淡入淡出"
 
 #: ../bin/src/ui_queuemanager.h:148
 msgid "Ctrl+Down"
-msgstr ""
+msgstr "Ctrl+Down"
 
 #: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
@@ -1635,7 +1603,7 @@ msgstr "舞曲"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 #: core/database.cpp:629
 msgid ""
@@ -1763,7 +1731,7 @@ msgstr "详情..."
 
 #: ../bin/src/ui_playbacksettingspage.h:412
 msgid "Detect"
-msgstr ""
+msgstr "检测"
 
 #: devices/giolister.cpp:182
 msgid "Device"
@@ -1881,7 +1849,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "进行一次完整的的重新扫描可能会令您丢失一些已经在 Clementine 中保存的元数据，例如封面、播放计数和评级。Clementine 将会重新扫描 %1 中的音乐，可能需要花费一些时间。"
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -1954,11 +1922,11 @@ msgstr "下载设置"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "下载 Android 应用"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "下载为桌面端、Android和 iOS 的控制端"
 
 #: internet/magnatune/magnatuneservice.cpp:278
 msgid "Download this album"
@@ -1971,10 +1939,6 @@ msgstr "下载此专辑..."
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
 msgstr "下载此节目"
-
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "下载..."
 
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
@@ -2357,7 +2321,6 @@ msgid "Failed to load podcast"
 msgstr "无法读取播客"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2492,10 +2455,6 @@ msgstr "适应封面到等宽"
 msgid "Font size"
 msgstr "字号"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "由于许可证原因 Spotify 支持位于单独的插件中。"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "强制单声道编码"
@@ -2557,7 +2516,7 @@ msgstr "每次缓冲帧数"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "最常播放"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2593,15 +2552,6 @@ msgstr "常规设置"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "流派"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr "获取一个分享该 Spotify 音乐的网址"
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr "获取一个分享该播放列表的网址"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2830,10 +2780,6 @@ msgid ""
 "time a song finishes."
 msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值。"
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "收件夹"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "在通知中加入专辑封面"
@@ -2882,10 +2828,6 @@ msgstr "输入选项"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "插入..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "已安装"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3177,7 +3119,6 @@ msgstr "载入文件或URL，替换当前播放列表"
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "登录"
 
@@ -3279,10 +3220,6 @@ msgstr "就这样吧！"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "定时响铃！"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "播放列表离线可用"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3603,10 +3540,6 @@ msgstr "会员不足"
 msgid "Not enough neighbors"
 msgstr "邻居不足"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "未安装"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3859,7 +3792,6 @@ msgstr "晚会"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "密码"
 
@@ -3979,10 +3911,6 @@ msgstr "请关闭你的浏览器，回到 Clementine。"
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "请在您的浏览器打开这个网址: <a href=\"%1\">%1</a>"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "插件状态:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "播客信息"
@@ -4022,7 +3950,6 @@ msgstr "首选项"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "首选项"
 
@@ -4037,10 +3964,6 @@ msgstr "专辑封面的文件名(逗号分隔)"
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "首选音乐格式"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "偏好的比特率"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4294,7 +4217,7 @@ msgstr "从播放列表中移除重复项"
 msgid "Remove folder"
 msgstr "删除文件夹"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "从播放列表中移除"
 
@@ -4626,10 +4549,6 @@ msgstr "搜索模式"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "搜索选项"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "搜索结果"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5041,33 +4960,9 @@ msgstr "来源"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "Spotify 登录失败"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr "Spotify 播放列表地址"
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "Spotify插件"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr "Spotify 歌曲地址"
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "标准"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "用星号标记"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5084,12 +4979,6 @@ msgstr "开始播放当前播放列表"
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "开始转换"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "请在上方搜索栏中输入一些词条，来充实搜索结果列表"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5212,18 +5101,6 @@ msgstr "支持的格式"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "立即同步统计数据至文件"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "同步 Spotify 收件箱"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "同步 Spotify 播放列表"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "同步 Spotify 星号标记的曲目"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5460,10 +5337,6 @@ msgstr "太多的重定向"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "热门曲目"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5729,10 +5602,6 @@ msgstr "使用系统默认颜色集"
 msgid "Use the system proxy settings"
 msgstr "使用系统代理设置"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "使用音量标准化"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "已使用"
@@ -5745,7 +5614,6 @@ msgstr "用户界面"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "用户名"
 
@@ -6041,23 +5909,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "您可以使用Wii遥控器来控制 Clementine。<a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> 获取详细信息。\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "您没有Spotify付费账户。"
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "您没有活动订阅"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "您已经登出了 Spotify，请在设置对话框中重新输入您的密码。"
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "您已经登出了 Spotify，请重新输入您的密码。"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6099,10 +5953,6 @@ msgstr "提交的音轨:%1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "您的系统缺少OpenGL支持，可视化效果不可用。"
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "您的用户名或密码不正确。"
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6216,9 +6066,6 @@ msgid "in the last"
 msgstr "最后"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 

@@ -100,13 +100,6 @@ msgstr "%1 أيام"
 msgid "%1 days ago"
 msgstr "%1 مند أيام"
 
-#: internet/spotifywebapi/spotifywebapiservice.cpp:178
-#, qt-format
-msgid ""
-"%1 failed to decode as gzip stream:\n"
-"%2"
-msgstr ""
-
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
@@ -118,7 +111,6 @@ msgid "%1 playlists (%2)"
 msgstr "%1 قوائم التشغيل (%2)"
 
 #: internet/core/internetservice.cpp:160
-#: internet/spotifywebapi/spotifywebapiservice.cpp:166
 #, qt-format
 msgid ""
 "%1 request failed:\n"
@@ -292,10 +284,6 @@ msgstr "&سنة"
 msgid "(different across multiple songs)"
 msgstr "(مختلفة عبر أغنيات متعددة)"
 
-#: internet/spotify/spotifyservice.cpp:471
-msgid ", by "
-msgstr "، بقرب"
-
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
 msgstr "...وكل المساهمين في أماروك"
@@ -404,10 +392,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>النطاقات تبدأ بـ %، مثلا: %artist %album %title </p>\n<p>إن استخدمت معقوفات للإحاطة بقطعة نص تحتوي على نطاق ما، سيتم إخفاء تلك القطعة النصية إن كان النطاق فارغا.</p>"
 
-#: internet/spotify/spotifysettingspage.cpp:166
-msgid "A Spotify Premium account is required."
-msgstr "يجب أن تتوفر على حساب في Spotify"
-
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "لا يمكن لعميل الاتصال، إلا إن أدخل شفرة صحيحة."
@@ -485,7 +469,6 @@ msgstr "مُطلق"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_seafilesettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "معلومات الحساب"
 
@@ -650,14 +633,6 @@ msgstr "أضف وسم سنة المقطع"
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
 msgstr "أضف رابط انترنت..."
-
-#: internet/spotify/spotifyservice.cpp:625
-msgid "Add to Spotify playlists"
-msgstr "إضافة لقائمات تشغيل Spotify"
-
-#: internet/spotify/spotifyservice.cpp:617
-msgid "Add to Spotify starred"
-msgstr "إضافة للمميزة على Spotify"
 
 #: ui/mainwindow.cpp:1973
 msgid "Add to another playlist"
@@ -1039,7 +1014,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "معدل البت"
 
-#: analyzers/blockanalyzer.cpp:43
+#: analyzers/blockanalyzer.cpp:46
 msgid "Block analyzer"
 msgstr "محلل الأجزاء"
 
@@ -1387,10 +1362,6 @@ msgstr "إعدادات Magnature"
 msgid "Configure Shortcuts"
 msgstr "إعدادات اختصارات لوحة المفاتيح"
 
-#: internet/spotify/spotifyservice.cpp:924
-msgid "Configure Spotify..."
-msgstr "إعدادات Spotify..."
-
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
 msgstr "إعدادات Subsonic..."
@@ -1424,10 +1395,6 @@ msgstr "أوصل بأداة التحكم عن بعد لـ Wii بواسطة عم�
 #: devices/devicemanager.cpp:261 devices/devicemanager.cpp:266
 msgid "Connect device"
 msgstr "وصل الجهاز"
-
-#: internet/spotify/spotifyservice.cpp:295
-msgid "Connecting to Spotify"
-msgstr " جاري الاتصال بـ Spotify"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1966,10 +1933,6 @@ msgstr "حمل هذا الألبوم..."
 msgid "Download this episode"
 msgstr "حمل هذه الحلقة"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
-msgid "Download..."
-msgstr "حمل..."
-
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
@@ -2351,7 +2314,6 @@ msgid "Failed to load podcast"
 msgstr "فشل تحميل البودكاست"
 
 #: internet/core/internetservice.cpp:167
-#: internet/spotifywebapi/spotifywebapiservice.cpp:191
 #, qt-format
 msgid ""
 "Failed to parse %1 response:\n"
@@ -2486,10 +2448,6 @@ msgstr ""
 msgid "Font size"
 msgstr "حجم الخط"
 
-#: ../bin/src/ui_spotifysettingspage.h:212
-msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "لدواعي تتعلق بالرخصة، دعم Spotify متوفر في ملحق منفصل."
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
 msgstr "أجبر ترميز مونو"
@@ -2587,15 +2545,6 @@ msgstr "إعدادات عامة"
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "النوع"
-
-#: internet/spotify/spotifyservice.cpp:641
-#: internet/spotify/spotifyservice.cpp:684
-msgid "Get a URL to share this Spotify song"
-msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:673
-msgid "Get a URL to share this playlist"
-msgstr ""
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:117
@@ -2824,10 +2773,6 @@ msgid ""
 "time a song finishes."
 msgstr "في النمط الديناميكي سيتم اختيار مقاطع جديدة وإضافتها لقائمة التشغيل كلما انتهى تشغيل المقطع."
 
-#: internet/spotify/spotifyservice.cpp:416
-msgid "Inbox"
-msgstr "صندوق البريد"
-
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
 msgstr "ضمن غلاف الألبوم في التنبيهات"
@@ -2876,10 +2821,6 @@ msgstr "خيارات المدخل"
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Insert..."
 msgstr "إدارج..."
-
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Installed"
-msgstr "مثبت"
 
 #: core/database.cpp:613
 msgid "Integrity check"
@@ -3171,7 +3112,6 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "تسجيل الدخول"
 
@@ -3273,10 +3213,6 @@ msgstr "فلتكن  هكذا!"
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "اجعلها كذلك!"
-
-#: internet/spotify/spotifyservice.cpp:671
-msgid "Make playlist available offline"
-msgstr "اجعل قائمة التشغيل متاحة دون اتصال"
 
 #: internet/lastfm/lastfmservice.cpp:304
 msgid "Malformed response"
@@ -3597,10 +3533,6 @@ msgstr "عدد الأعضاء غير كافٍ"
 msgid "Not enough neighbors"
 msgstr "عدد الجيران غير كافٍ"
 
-#: internet/spotify/spotifysettingspage.cpp:75
-msgid "Not installed"
-msgstr "غير مثبت"
-
 #: globalsearch/globalsearchsettingspage.cpp:123
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
@@ -3853,7 +3785,6 @@ msgstr "حفلة"
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "كلمة السر"
 
@@ -3973,10 +3904,6 @@ msgstr "الرجاء إغلاق متصفحك والعودة إلى كلمنتا�
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
-#: ../bin/src/ui_spotifysettingspage.h:213
-msgid "Plugin status:"
-msgstr "حالة الملحق:"
-
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
@@ -4016,7 +3943,6 @@ msgstr "التفضيلات"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
-#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "التفضيلات"
 
@@ -4031,10 +3957,6 @@ msgstr "الأسماء المفضلة لأغلفة الألبومات (استخ�
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
 msgstr "صيغة الصوت المفضلة"
-
-#: ../bin/src/ui_spotifysettingspage.h:216
-msgid "Preferred bitrate"
-msgstr "الصبيب المفضل"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
@@ -4288,7 +4210,7 @@ msgstr "احذف المقاطع المكررة من قائمة التشغيل"
 msgid "Remove folder"
 msgstr "أزل الملف"
 
-#: ../bin/src/ui_mainwindow.h:754 internet/spotify/spotifyservice.cpp:683
+#: ../bin/src/ui_mainwindow.h:754
 msgid "Remove from playlist"
 msgstr "احذف من قائمة التشغيل"
 
@@ -4620,10 +4542,6 @@ msgstr "نمط البحث"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "إعدادات البحث"
-
-#: internet/spotify/spotifyservice.cpp:399
-msgid "Search results"
-msgstr "نتائج البحث"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:121
@@ -5035,33 +4953,9 @@ msgstr "المصادر"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:206
-msgid "Spotify"
-msgstr "Spotify"
-
-#: internet/spotify/spotifyservice.cpp:219
-msgid "Spotify login error"
-msgstr "خطأ بتسجيل الدخول لـ Spotify"
-
-#: internet/spotify/spotifyservice.cpp:849
-msgid "Spotify playlist's URL"
-msgstr ""
-
-#: ../bin/src/ui_spotifysettingspage.h:211
-msgid "Spotify plugin"
-msgstr "ملحق Spotify"
-
-#: internet/spotify/spotifyservice.cpp:840
-msgid "Spotify song's URL"
-msgstr ""
-
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "قياسي"
-
-#: internet/spotify/spotifyservice.cpp:408
-msgid "Starred"
-msgstr "مميز"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5078,12 +4972,6 @@ msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
 msgstr "ابدأ التحويل"
-
-#: internet/spotify/spotifyservice.cpp:401
-msgid ""
-"Start typing something on the search box above to fill this search results "
-"list"
-msgstr "ابدأ بكتابة شيء ما في خانة البحث أعلاه لملء هذه اللائحة من النتائج"
 
 #: transcoder/transcoder.cpp:448
 #, qt-format
@@ -5206,18 +5094,6 @@ msgstr "الصيغ المدعومة"
 #: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "زامن الإحصائيات مع الملفات الآن"
-
-#: internet/spotify/spotifyservice.cpp:709
-msgid "Syncing Spotify inbox"
-msgstr "مزامنة صندوق بريد Spotify"
-
-#: internet/spotify/spotifyservice.cpp:703
-msgid "Syncing Spotify playlist"
-msgstr "مزامنة قائمة تشغيل Spotify"
-
-#: internet/spotify/spotifyservice.cpp:714
-msgid "Syncing Spotify starred tracks"
-msgstr "مزامنة مقاطع Spotify المميزة"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5454,10 +5330,6 @@ msgstr "إعادات توجيه كثيرة جدا"
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
 msgstr ""
-
-#: internet/spotify/spotifyservice.cpp:422
-msgid "Top tracks"
-msgstr "أفضل المقاطع"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5723,10 +5595,6 @@ msgstr "استخدم تجميعة ألوان النظام"
 msgid "Use the system proxy settings"
 msgstr "استخدام إعدادات النظام للبروكسي"
 
-#: ../bin/src/ui_spotifysettingspage.h:217
-msgid "Use volume normalisation"
-msgstr "استخدم تسوية الصوت"
-
 #: widgets/freespacebar.cpp:48
 msgid "Used"
 msgstr "مستعمل"
@@ -5739,7 +5607,6 @@ msgstr "واجهة المستخدم"
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
-#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "اسم المستخدم"
 
@@ -6035,23 +5902,9 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "يمكنك استعمال أداة التحكم عن بعد لـ Wii كأداة تحكم عن بعد بكلمنتاين. <a href=\"http://www.clementine-player.org/wiimote\">شاهد هذه الصفحة في توثيق كلمنتاين</a> لمزيد كم المعلومات.\n"
 
-#: internet/spotify/spotifysettingspage.cpp:149
-msgid "You do not have a Spotify Premium account."
-msgstr "لا تملك حساب Spotify مدفوع."
-
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "ليس لديك اشتراك مفعل"
-
-#: internet/spotify/spotifyservice.cpp:204
-msgid ""
-"You have been logged out of Spotify, please re-enter your password in the "
-"Settings dialog."
-msgstr "لقد تم تسجيل خروجك من Spotify، الرجاء إعادة إدخال كلمة السر في نافذة الإعدادات."
-
-#: internet/spotify/spotifysettingspage.cpp:160
-msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "لقد تم تسجيل خروجك من Spotify، الرجاء إعادة إدخال كلمة السر."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -6093,10 +5946,6 @@ msgstr " نقل معلومات الاستماع: %1"
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "لا يتوفر نظامك على دعم OpenGL، لهذا التأثيرات المرئية غير متاحة."
-
-#: internet/spotify/spotifysettingspage.cpp:155
-msgid "Your username or password was incorrect."
-msgstr "اسم المستخدم أو كلمة السر  خاطئة."
 
 #: smartplaylists/searchterm.cpp:407
 msgid "Z-A"
@@ -6210,9 +6059,6 @@ msgid "in the last"
 msgstr "من بين اخر المقاطع المشغلة"
 
 #: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:506
-#: internet/spotify/spotifysettingspage.cpp:62
-#: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 
