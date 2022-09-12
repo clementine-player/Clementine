@@ -318,7 +318,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:315
 msgid "0px"
-msgstr "0px"
+msgstr "0 пикс"
 
 #: core/utilities.cpp:127
 msgid "1 day"
@@ -734,7 +734,7 @@ msgstr "Обложка альбома"
 
 #: internet/jamendo/jamendoservice.cpp:420
 msgid "Album info on jamendo.com..."
-msgstr "Информация об альбоме на jamendo.com…"
+msgstr "Сведения об альбоме на jamendo.com…"
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -755,7 +755,7 @@ msgstr "Все файлы (*)"
 #: ../bin/src/ui_mainwindow.h:748
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr "Cлава Гипножабе!"
+msgstr "Слава Гипножабе!"
 
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
@@ -818,7 +818,7 @@ msgstr "Произошла ошибка при загрузке данных iTu
 #: playlist/playlist.cpp:457 ui/edittagdialog.cpp:707
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Ошибка при записи метаданных в «%1»"
+msgstr "Произошла ошибка при записи метаданных в «%1»"
 
 #: internet/subsonic/subsonicsettingspage.cpp:127
 msgid "An unspecified error occurred."
@@ -1052,7 +1052,7 @@ msgstr "Содержимое"
 
 #: analyzers/boomanalyzer.cpp:37
 msgid "Boom analyzer"
-msgstr "Плавающий анализатор"
+msgstr "Подъёмный анализатор"
 
 #: ../bin/src/ui_boxsettingspage.h:99
 msgid "Box"
@@ -1247,7 +1247,7 @@ msgstr "Clementine может проигрывать музыку, загруж�
 
 #: ../bin/src/ui_googledrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine может проигрывать музыку с Google Диска"
+msgstr "Clementine может проигрывать музыку, загруженную вами в Google Диск"
 
 #: ../bin/src/ui_skydrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to OneDrive"
@@ -1612,7 +1612,7 @@ msgstr "Путь D-Bus"
 
 #: ui/equalizer.cpp:117
 msgid "Dance"
-msgstr "Танец"
+msgstr "Танцевальная"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
@@ -1841,7 +1841,7 @@ msgstr "Полное пересканирование фонотеки"
 #: internet/core/cloudfileservice.cpp:245
 #: internet/core/cloudfileservice.cpp:252
 msgid "Do a full rescan"
-msgstr "Полность пересканировать"
+msgstr "Пересканировать полностью"
 
 #: internet/googledrive/googledriveservice.cpp:224
 #: internet/skydrive/skydriveservice.cpp:216
@@ -2030,16 +2030,16 @@ msgstr "Править теги"
 
 #: ../bin/src/ui_edittagdialog.h:699
 msgid "Edit track information"
-msgstr "Править сведения трека"
+msgstr "Править данные трека"
 
 #: library/libraryview.cpp:426 widgets/fileviewlist.cpp:52
 #: ../bin/src/ui_mainwindow.h:735
 msgid "Edit track information..."
-msgstr "Править сведения трека…"
+msgstr "Править данные трека…"
 
 #: library/libraryview.cpp:429
 msgid "Edit tracks information..."
-msgstr "Править сведения треков…"
+msgstr "Править данные треков…"
 
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
@@ -2047,7 +2047,7 @@ msgstr "Править…"
 
 #: ../bin/src/ui_seafilesettingspage.h:171
 msgid "Email"
-msgstr "Адрес эл. почты"
+msgstr "Эл. почта"
 
 #: ../bin/src/ui_wiimotesettingspage.h:173
 msgid "Enable Wii Remote support"
@@ -2093,7 +2093,7 @@ msgstr "Режим кодирования"
 
 #: ../bin/src/ui_addpodcastbyurl.h:72
 msgid "Enter a URL"
-msgstr "Введите адрес"
+msgstr "Ввести адрес"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Enter a URL to download a cover from the Internet:"
@@ -2290,7 +2290,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:374
 msgid "Fade out on pause / fade in on resume"
-msgstr "Затухание при паузе / нарастание при продолжении воспроизведения"
+msgstr "Затухание при паузе / нарастание при возобновлении"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid "Fade out when stopping a track"
@@ -2597,7 +2597,7 @@ msgstr "Перейти к следующему плейлисту"
 
 #: ../bin/src/ui_mainwindow.h:763
 msgid "Go to previous playlist tab"
-msgstr "Перейти к предудыщему плейлисту"
+msgstr "Перейти к предыдущему плейлисту"
 
 #: ../bin/src/ui_googledrivesettingspage.h:99
 msgid "Google Drive"
@@ -2700,7 +2700,7 @@ msgstr "Высокое"
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
-msgstr "Высокая (%1 fps)"
+msgstr "Высокая (%1 к/с)"
 
 #: visualisations/visualisationcontainer.cpp:121
 msgid "High (1024x1024)"
@@ -2974,11 +2974,11 @@ msgstr "Крупная обложка альбома"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr "Крупная обложка (сведения снизу)"
+msgstr "Крупная обложка (данные снизу)"
 
 #: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (no details)"
-msgstr "Крупная обложка (без сведений)"
+msgstr "Крупная обложка (без данных)"
 
 #: widgets/fancytabwidget.cpp:432
 msgid "Large sidebar"
@@ -3159,7 +3159,7 @@ msgstr "В любимые (скорбблер Last.fm)"
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr "Низкая (%1 fps)"
+msgstr "Низкая (%1 к/с)"
 
 #: visualisations/visualisationcontainer.cpp:119
 msgid "Low (256x256)"
@@ -3284,7 +3284,7 @@ msgstr "Максимум дочерних процессов для обрабо
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr "Средняя (%1 fps)"
+msgstr "Средняя (%1 к/с)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Medium (512x512)"
@@ -3300,7 +3300,7 @@ msgstr "Минимальный битрейт"
 
 #: ../bin/src/ui_playbacksettingspage.h:391
 msgid "Minimum buffer fill"
-msgstr "Мин. заполнение буфера"
+msgstr "Мин. уровень буфера"
 
 #: songinfo/streamdiscoverer.cpp:121
 msgid "Missing plugins"
@@ -3560,7 +3560,7 @@ msgstr "Вход не выполнен"
 
 #: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
-msgstr "Не подключено - щелкните дважды для подключения"
+msgstr "Не подключено - щёлкните дважды для подключения"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Notification type"
@@ -4009,7 +4009,7 @@ msgstr "Нажатие кнопки «Предыдущий» осуществи�
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Pretty OSD options"
-msgstr "Параметры красивого экранного меню"
+msgstr "Параметры модного экранного меню"
 
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_songinfosettingspage.h:157
 #: ../bin/src/ui_notificationssettingspage.h:452
@@ -4128,27 +4128,27 @@ msgstr "Случайная визуализация"
 
 #: core/globalshortcuts.cpp:90
 msgid "Rate the current song 0 stars"
-msgstr "Оценка текущей песни 0 звёзд"
+msgstr "Оценить текущую песню на 0 звёзд"
 
 #: core/globalshortcuts.cpp:91
 msgid "Rate the current song 1 star"
-msgstr "Оценка текущей песни 1 звезда"
+msgstr "Оценить текущую песню на 1 звезду"
 
 #: core/globalshortcuts.cpp:92
 msgid "Rate the current song 2 stars"
-msgstr "Оценка текущей песни 2 звезды"
+msgstr "Оценить текущую песню на 2 звезды"
 
 #: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
-msgstr "Оценка текущей песни 3 звезды"
+msgstr "Оценить текущую песню на 3 звезды"
 
 #: core/globalshortcuts.cpp:94
 msgid "Rate the current song 4 stars"
-msgstr "Оценка текущей песни 4 звезды"
+msgstr "Оценить текущую песню на 4 звезды"
 
 #: core/globalshortcuts.cpp:95
 msgid "Rate the current song 5 stars"
-msgstr "Оценка текущей песни 5 звёзд"
+msgstr "Оценить текущую песню на 5 звёзд"
 
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
@@ -4248,7 +4248,7 @@ msgstr "Удалить плейлисты"
 
 #: ../bin/src/ui_mainwindow.h:779
 msgid "Remove unavailable tracks from playlist"
-msgstr "Убрать пропавшие треки списка"
+msgstr "Убрать недоступные треки"
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Rename playlist"
@@ -4351,11 +4351,11 @@ msgstr "Извлечь данные"
 
 #: ripper/ripcddialog.cpp:114
 msgid "Rip CD"
-msgstr "Извлечь данные CD"
+msgstr "Извлечь данные с CD"
 
 #: ../bin/src/ui_mainwindow.h:778
 msgid "Rip audio CD"
-msgstr "Извлечение аудио с CD"
+msgstr "Извлечь данные с аудио-CD"
 
 #: ui/equalizer.cpp:149
 msgid "Rock"
@@ -4489,7 +4489,7 @@ msgstr "Скробблить прослушиваемые треки"
 
 #: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Scroll over icon to change track"
-msgstr "Переключать трек по скроллингу над значком"
+msgstr "Переключать трек по прокрутке колеса над значком"
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
@@ -4737,11 +4737,11 @@ msgstr "Уведомлять о приостановке проигрывани�
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a popup from the system tray"
-msgstr "Всплывающие сообщения из системного лотка"
+msgstr "Показывать всплывающие сообщения из трея"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a pretty OSD"
-msgstr "Показывать красивое экранное меню"
+msgstr "Показывать модное экранное меню"
 
 #: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
@@ -4802,7 +4802,7 @@ msgstr "Показать поисковые подсказки"
 
 #: ../bin/src/ui_mainwindow.h:781
 msgid "Show sidebar"
-msgstr "Показать боковую панель"
+msgstr "Показывать боковую панель"
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4810,7 +4810,7 @@ msgstr "Показывать кнопку «В любимые»"
 
 #: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
-msgstr "Показывать кнопку скробблинга в главном окне"
+msgstr "Показывать кнопку скробблера в главном окне"
 
 #: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Show tray icon"
@@ -4975,7 +4975,7 @@ msgstr "Speex"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
-msgstr "Стандартнoe"
+msgstr "Стандартное"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
@@ -5101,7 +5101,7 @@ msgstr "Сводка"
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr "Очень высокая (%1 fps)"
+msgstr "Очень высокая (%1 к/с)"
 
 #: visualisations/visualisationcontainer.cpp:122
 msgid "Super high (2048x2048)"
@@ -5284,7 +5284,7 @@ msgstr "Это MTP устройство, а ваша версия Clementine с�
 
 #: devices/devicemanager.cpp:546
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "Это iPod, а вы скомпилировали Clementine без поддержки libgpod."
+msgstr "Это iPod, а ваша версия Clementine скомпилирована без поддержки libgpod."
 
 #: devices/devicemanager.cpp:262
 msgid ""
@@ -5321,7 +5321,7 @@ msgstr "Сегодня"
 
 #: core/globalshortcuts.cpp:73
 msgid "Toggle Pretty OSD"
-msgstr "Показать/скрыть экранное меню"
+msgstr "Показать/скрыть модное экранное меню"
 
 #: visualisations/visualisationcontainer.cpp:103
 msgid "Toggle fullscreen"
@@ -5337,7 +5337,7 @@ msgstr "Вкл./откл. скробблинг"
 
 #: core/commandlineoptions.cpp:185
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr "Переключить видимость OSD"
+msgstr "Переключить видимость модного экранного меню"
 
 #: core/utilities.cpp:161
 msgid "Tomorrow"
@@ -5408,7 +5408,7 @@ msgstr "Постараться извлечь название, артиста �
 
 #: ../bin/src/ui_songmetadatasettingspage.h:98
 msgid "Try to guess missing metadata"
-msgstr "Попытаться угадать недостающие метаданные"
+msgstr "Пытаться угадывать недостающие метаданные"
 
 #: analyzers/turbine.cpp:35
 msgid "Turbine"
@@ -5444,7 +5444,7 @@ msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
-msgstr "Ультраширокая полоса пропускания (UWB)"
+msgstr "Сверхширокая полоса пропускания (UWB)"
 
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
@@ -6132,7 +6132,7 @@ msgstr "параметры"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr "или отсканируйте QR-код:"
+msgstr "или сканируйте QR-код: "
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
