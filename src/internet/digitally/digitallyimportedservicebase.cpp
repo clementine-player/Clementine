@@ -259,7 +259,7 @@ RockRadioService::RockRadioService(Application* app, InternetModel* model,
     : DigitallyImportedServiceBase(
           "RockRadio", "ROCKRADIO.com", QUrl("http://www.rockradio.com"),
           IconLoader::Load("rockradio", IconLoader::Provider), "rockradio", app,
-          model, false, parent) {}
+          model, true, parent) {}
 
 ClassicalRadioService::ClassicalRadioService(Application* app,
                                              InternetModel* model,
@@ -268,4 +268,4 @@ ClassicalRadioService::ClassicalRadioService(Application* app,
           "ClassicalRadio", "ClassicalRadio.com",
           QUrl("http://www.classicalradio.com"),
           IconLoader::Load("digitallyimported", IconLoader::Provider),
-          "classicalradio", app, model, false, parent) {}
+          "classicalradio", app, model, true, parent) {}
