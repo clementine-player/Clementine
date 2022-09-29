@@ -10,11 +10,12 @@
 # Kristján Magnússon, 2016
 # Össur Ingi Jónsson <ossur.ingi@gmail.com>, 2016
 # Sveinn í Felli <sv1@fellsnet.is>, 2017-2019,2021
+# Sveinn í Felli <sv1@fellsnet.is>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2017-2019,2021\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2022\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +29,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr "\n\nÞú getur gert spilunarlista að uppáhaldi með því að smella á stjörnuna næst nafni spilunarlistans\n\nUppáhalds-spilunarlistar verða vistaðir hér"
+msgstr "\n\nÞú getur gert spilunarlista að eftirlæti með því að smella á stjörnuna næst nafni spilunarlistans\n\nEftirlætis-spilunarlistar verða vistaðir hér"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:130
 msgid " ANMR method (experimental)"
@@ -127,12 +128,12 @@ msgstr "%1 lög"
 #: smartplaylists/searchpreview.cpp:122
 #, qt-format
 msgid "%1 songs found"
-msgstr "%1 lög fundin"
+msgstr "%1 lög fundust"
 
 #: smartplaylists/searchpreview.cpp:118
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1 lög fundin (sýni %2)"
+msgstr "%1 lög fundust (birti %2)"
 
 #: playlist/queue.cpp:228
 #, qt-format
@@ -769,7 +770,7 @@ msgstr "Leyfa niðurhöl"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Allow mid/side encoding"
-msgstr ""
+msgstr "Leyfa Mid/Side-kóðun"
 
 #: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
@@ -1267,7 +1268,7 @@ msgstr "Smelltu hér til að bæta við tónlist"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Smelltu hér til að setja þennan spilunarlista í eftirlæti, þannig að hann verði vistaður og haldist aðgengilegur í gegnum \"Spilunarlistar\"-spjaldið vinstra megin"
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
@@ -1321,7 +1322,7 @@ msgstr "Kommu-aðgreindur listi klasi:stig, stig eru 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma separated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Listi, aðgreindur með kommum, yfir orð í forskeytum sem á að hunsa við röðun"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
@@ -1475,7 +1476,7 @@ msgstr "Gat ekki fundið Google Drive skrá."
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
 msgid "Could not find a suitable encoder element for <b>%1</b>."
-msgstr ""
+msgstr "Gat ekki fundið hentuga kóðunareiningu fyrir <b>%1</b>."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1966,11 +1967,11 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Skrifa graf"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Skrifa graf leiðslu"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2344,7 +2345,7 @@ msgstr "Hröð leit"
 
 #: library/library.cpp:92
 msgid "Favourite tracks"
-msgstr "Uppáhaldslög"
+msgstr "Eftirlætislög"
 
 #: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
@@ -2719,7 +2720,7 @@ msgstr "Greini lag"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr ""
+msgstr "Ef þetta er virkt, mun smellur á valið lag í spilunarlistanum gera þér kleift að breyta beint gilfi merkisins"
 
 #: ../bin/src/ui_transcodedialog.h:241
 msgid ""
@@ -3255,7 +3256,7 @@ msgstr "Hámarks bitahraði"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:92
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Hámarksfjöldi undirferla við meðhöndlun merkja (krefst endurræsingar)"
 
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
@@ -3297,7 +3298,7 @@ msgstr "Fylgjast með breytingum á tónlistarsafni"
 
 #: core/song.cpp:459
 msgid "Monkey's Audio"
-msgstr ""
+msgstr "Monkey hljóðskrá"
 
 #: ../bin/src/ui_playbacksettingspage.h:409
 msgid "Mono playback"
@@ -3807,11 +3808,11 @@ msgstr "Flytjandi"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Leiðsla"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "Leiðslur"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -4072,7 +4073,7 @@ msgstr "Setja í biðröð"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Gefa lagi í spilun einkunn á fljótlegan hátt"
 
 #: ../bin/src/ui_playbacksettingspage.h:382
 msgid "Radio (equal loudness for all tracks)"
@@ -4080,7 +4081,7 @@ msgstr "Útvarp (jafn hljóðstyrkur fyrir öll lög)"
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:80
 msgid "RadioBrowser"
-msgstr ""
+msgstr "Útvarpsvafri"
 
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
@@ -4213,7 +4214,7 @@ msgstr "Fjarlægja af spilunarlistanum"
 
 #: ../bin/src/ui_transcodedialog.h:243
 msgid "Remove or replace original files "
-msgstr ""
+msgstr "Fjarlægja eða skipta út upprunalegum skrám"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4300,7 +4301,7 @@ msgstr "Endurræsa lag, síðan hoppa í fyrra lag ef ýtt er aftur"
 #: core/commandlineoptions.cpp:176
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Enduræsa lagið, eða spila fyrra lag ef það er innan 8 sekúndna frá upphafi þess."
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:83
 msgid "Restore Default Server"
@@ -4340,7 +4341,7 @@ msgstr "Rokk"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Grunnmappa sem verður hægt að flakka úr í nettengdri fjarstýringu"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4362,7 +4363,7 @@ msgstr "SOCKS milliþjónn"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "Villa í SSL-handabandi, skoðaðu uppsetningu þjónsins. SSLv3-valkosturinn hér fyrir neðan gæti leyst sum vandamál."
 
 #: devices/deviceview.cpp:200
 msgid "Safely remove device"
@@ -4438,7 +4439,7 @@ msgstr ""
 
 #: playlistparsers/cueparser.cpp:355
 msgid "Saving cue files is not yet supported."
-msgstr ""
+msgstr "Vistun CUE-skráa er ekki ennþá studd."
 
 #: library/library.cpp:202
 msgid "Saving songs statistics into songs files"
@@ -4450,7 +4451,7 @@ msgstr "Vista lög"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "Snið fyrir kvarðanlega safntíðni (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Scale size"
@@ -4964,7 +4965,7 @@ msgstr "Hefja afritun"
 
 #: core/commandlineoptions.cpp:161
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Ræsa spilunarlistann sem er núna í spilun"
 
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
@@ -5136,11 +5137,11 @@ msgstr "Mappan %1 er ógild"
 
 #: songinfo/streamdiscoverer.cpp:119
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Leitarkerfið er upptekið"
 
 #: ../bin/src/ui_playbacksettingspage.h:417
 msgid "The format is only updated when a pipeline starts."
-msgstr ""
+msgstr "Sniðið er aðeins uppfært þegar leiðsla (pipeline) fer í gang."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5397,7 +5398,7 @@ msgstr "Slökkva"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:129
 msgid "Two loop searching method"
-msgstr ""
+msgstr "Tveggja-umferða leitaraðferð"
 
 #: devices/giolister.cpp:183
 msgid "URI"
@@ -5530,7 +5531,7 @@ msgstr "Nota hugvíkkandi liti"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Nota lýsigögn fyrir mögnun endurspilunar ef þau eru tiltæk"
 
 #: ../bin/src/ui_subsonicsettingspage.h:135
 msgid "Use SSLv3"
@@ -5578,7 +5579,7 @@ msgstr "Nota kerfistáknmyndir"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Nota tímabundna hljóðmótun (noise shaping)"
 
 #: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Use the system default"
@@ -5880,7 +5881,7 @@ msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
 "remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
 "<b>Windows</b><br/>"
-msgstr ""
+msgstr "Þú getur fundið nýju fjölkerfa fjarstýringuna <a href=\"%1\">hér á GitHub</a>.<br/>Hún er til fyrir <b>Linux</b>, <b>MacOS</b> og <b>Windows</b> stýrikerfin.<br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -5912,7 +5913,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span "
 "style=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Þú þarft að fara í kerfisstillingarnar þínar og leyfa Clementine að \"<span style=\"font-style:italic\">stýra tölvunni þinni</span>\" til þess að geta notað altækar flýtileiðir í Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:367
 msgid "You will need to restart Clementine if you change the language."
@@ -6002,7 +6003,7 @@ msgstr "inniheldur"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
