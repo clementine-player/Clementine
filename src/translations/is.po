@@ -347,7 +347,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Ef ekki er merkt við þetta, mun Clementine reyna að vista einkunnirnar þínar og aðra tölfræði einungis í sérstakan gagnagrunn án þess að eiga við skrárnar þínar.</p><p>Ef er merkt við þetta, verður tölfræðin vistuð bæði í gagnagrunn og beint í skrárnar í hvert skipti sem eitthvaðp breytist.</p><p>Athugaðu að ekki er víst að þetta virki fyrir öll skráasnið og, þar sem ekki er enn til neinn fullkominn staðall fyrir þetta, aðrir tónlistarspilarar gætu ekki náð að lesa merkin eða skrárnar.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
@@ -363,7 +363,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Settu heiti á gagnasviði framan við orð til að takmarka leitina við það gagnasvið, t.d. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bubbi</span> leitar í safninu að öllum flytjendum sem innihalda orðið Bubbi, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> leitar í safninu að lögum sem hafa verið spiluð a.m.k. tvisvar, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> leitar í safninu að lögum sem hafa verið spiluð á síðustu 180 mínútum.</p><p><span style=\" font-weight:600;\">Tiltæk gagnasvið: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
@@ -371,7 +371,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Þetta mun skrifa einkunnir og tölfræði allra laga í safninu inn í skráamerki.</p><p>Þetta er ekki nauðsynlegt ef valkostirnir um að vista einkunnir og tölfræði í skráamerkjum hafa alltaf verið virkir.</p></body></html>"
 
 #: songinfo/artistbiography.cpp:279
 #, qt-format
@@ -404,7 +404,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
+msgstr "Snjall spilunarlisti er breytilegur listi með lögum úr safninu þínu. Til eru mismunandi gerðir snjallra spilunarlista sem bjóða upp á mismunandi leiðir við val á lögum."
 
 #: smartplaylists/querywizardplugin.cpp:159
 msgid ""
@@ -1840,7 +1840,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "Full endurskönnun safns mun glata öllum þeim lýsigögnum sem þú hefur vistað í Clementine, eins og umslagsmyndum, fjölda spilana og einkunnum. Clementine mun endurskanna alla tónlistina þína í %1 sem gæti tekið nokkurn tíma."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2698,7 +2698,7 @@ msgstr "Klukkustundir"
 
 #: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
-msgstr "Hypnotoad"
+msgstr "Hypnotoad-dýrðin"
 
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "I don't have a Magnatune account"
@@ -2727,7 +2727,7 @@ msgid ""
 "If enabled the original files will be removed. If transcoded files have the "
 "same file extension and the destination is the same directory as the "
 "original files, the original files will be replaced."
-msgstr ""
+msgstr "Ef þetta er virkt, munu upprunalegar skrár verða fjarlægðar. Ef umkóðaðar skrár eru með sömu skráaendingu og ef móttökumappan er sú sama og upprunalegar skrár eru í, verður upprunalegu skránum skipt út."
 
 #: devices/devicemanager.cpp:537 devices/devicemanager.cpp:549
 msgid ""
@@ -2769,7 +2769,7 @@ msgstr "Á %1 viku"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
+msgstr "Í breytilegum ham verða ný lög valin og bætt við spilunarlistann í hvert skipti sem spilun á lagi lýkur."
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
@@ -3357,7 +3357,7 @@ msgstr "Tónlistarsafn"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Tónlistarviðbætur sýnilegar fjartengt"
 
 #: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:768
@@ -3480,7 +3480,7 @@ msgstr "Engar stillingar tiltækar fyrir þessa tegund."
 msgid ""
 "No settings page available for encoder element <b>%1</b>. Please report this"
 " issue:<br><a href=\"%2\">%2</a>"
-msgstr ""
+msgstr "Engin stillingasíða tiltæk fyrir kóðunareininguna <b>%1</b>. Endilega tilkynntu þetta vandamál:<br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -4435,7 +4435,7 @@ msgstr "Vista þetta streymi á internet-flipann"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "Umsýsla vistaðrar hópunar"
 
 #: playlistparsers/cueparser.cpp:355
 msgid "Saving cue files is not yet supported."
@@ -5038,11 +5038,11 @@ msgstr "Upplýsingar um streymi"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "Streymi af Subsonic-miðlara krefst gilds leyfis fyrir miðlarann eftir að 30-daga prófunartímabili lýkur."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
-msgstr "Aðild að streymi"
+msgstr "Áskrift að streymi"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Subscribers"
@@ -5079,11 +5079,11 @@ msgstr "Samantekt"
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr "Mjög mikill (%1 r/sek)"
+msgstr "Mjög mikið (%1 r/sek)"
 
 #: visualisations/visualisationcontainer.cpp:122
 msgid "Super high (2048x2048)"
-msgstr "Mjög há (2048x2048)"
+msgstr "Mjög hátt (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:373
 msgid "Supported formats"
@@ -5159,7 +5159,7 @@ msgstr "Slóðin sem þú baðst um vísar ekki á mynd!"
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Prófunartímabili fyrir Subsonic-miðlarann er lokið. Leggðu fram fjárstuðning til að fá leyfislykil. Skoðaðu subsonic.org til að sjá nánari upplýsingar."
 
 #: ui/mainwindow.cpp:2802
 msgid ""
@@ -5315,7 +5315,7 @@ msgstr "Víxla af/á skráningu á hlustunarvenjum (scrobbling)"
 
 #: core/commandlineoptions.cpp:185
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "Víxla sýnileika fegraða OSD-stjórntextans af/á"
 
 #: core/utilities.cpp:161
 msgid "Tomorrow"
@@ -5690,7 +5690,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Aðvörun: Þetta þjöppunarstig er utan streymanlegra marka. Þetta þýðir að afkóðari gæti mögulega ekki byrjað að spila í miðju streymi. Þetta gæti líka haft áhrif á afköst vélbúnaðarafkóðara."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:302
 msgid "Wav"
@@ -5720,7 +5720,7 @@ msgstr "Við að reikna fjölda spilana skal nota"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
+msgstr "Þegar leitað er að umslagsmyndum mun Clementine leita fyrst að heitum myndskráa sem innihalda eitt af þessum orðum.\nEf engar samsvaranir finnast, verður notast víð stærstu myndina í möppunni."
 
 #: ../bin/src/ui_behavioursettingspage.h:416
 msgid "When saving a playlist, file paths should be"
@@ -5800,7 +5800,7 @@ msgstr "Án umslags:"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Viltu einnig færa hin lögin á þessari hljómplötu yfir í 'Ýmsir flytjendur'?"
 
 #: ui/mainwindow.cpp:2809
 msgid "Would you like to run a full rescan right now?"
