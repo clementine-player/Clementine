@@ -66,8 +66,6 @@ void PLSParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
   QTextStream s(device);
   s << "[playlist]" << endl;
-  s << "Version=2" << endl;
-  s << "NumberOfEntries=" << songs.count() << endl;
 
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
@@ -85,6 +83,9 @@ void PLSParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
 
     ++n;
   }
+
+  s << "NumberOfEntries=" << songs.count() << endl;
+  s << "Version=2" << endl;
 }
 
 bool PLSParser::TryMagic(const QByteArray& data) const {
