@@ -97,8 +97,8 @@ jobs:
       - build_bionic_64
       - build_bullseye_64
       - build_buster_64
-      - build_fedora_35
       - build_fedora_36
+      - build_fedora_37
       - build_focal_64
       - build_jammy_64
       - build_kinetic_64
@@ -257,11 +257,11 @@ jobs:
           name: release_fedora_36
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
-  build_fedora_35:
-    name: Build Fedora 35 RPM
+  build_fedora_37:
+    name: Build Fedora 37 RPM
     runs-on: ubuntu-22.04
     container:
-      image: fedora:35
+      image: fedora:37
     env:
       RPM_BUILD_NCPUS: "2"
     steps:
@@ -326,7 +326,7 @@ jobs:
         run: rpmbuild -ba ../dist/clementine.spec
       - uses: actions/upload-artifact@v2
         with:
-          name: release_fedora_35
+          name: release_fedora_37
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_mingw:
