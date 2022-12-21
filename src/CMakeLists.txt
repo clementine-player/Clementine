@@ -1268,7 +1268,6 @@ target_link_libraries(clementine_lib
   ${SQLITE_LIBRARIES}
 
   Qocoa
-  z
 )
 
 link_directories(
@@ -1351,7 +1350,6 @@ target_link_libraries(clementine_lib qsqlite)
 if (WIN32)
   target_link_libraries(clementine_lib
     protobuf
-    ${ZLIB_LIBRARIES}
     tinysvcmdns
     dsound
   )

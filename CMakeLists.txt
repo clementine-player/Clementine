@@ -76,9 +76,7 @@ pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(TAGLIB taglib)
 
-if (WIN32)
-  find_package(ZLIB REQUIRED)
-endif (WIN32)
+find_package(ZLIB REQUIRED)
 
 find_library(LASTFM5_LIBRARIES lastfm5)
 find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)

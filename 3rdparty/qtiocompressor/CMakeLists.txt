@@ -15,4 +15,4 @@ ADD_LIBRARY(qtiocompressor STATIC
     ${IOCOMPRESSOR-SOURCES-MOC}
 )
 
-target_link_libraries(qtiocompressor Qt5::Core)
+target_link_libraries(qtiocompressor Qt5::Core ${ZLIB_LIBRARIES})
