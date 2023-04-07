@@ -6,7 +6,7 @@ on:
 jobs:
   pull_translations:
     name: Pull translations from Transifex
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     container:
       image: ubuntu:bionic
     steps:
