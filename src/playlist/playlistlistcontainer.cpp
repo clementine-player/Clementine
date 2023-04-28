@@ -24,16 +24,22 @@
 #include <QPainter>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
+#include <QFileDialog>
+#include <QDirIterator>
 #include <iostream>
 
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
+#include "core/utilities.h"
 #include "playlist.h"
 #include "playlistlistmodel.h"
 #include "playlistmanager.h"
 #include "ui/iconloader.h"
 #include "ui_playlistlistcontainer.h"
+#include "playlistparsers/playlistparser.h"
+
+const char* PlaylistListContainer::kSettingsGroup = "PlaylistList";
 
 /* This filter proxy will:
  - Accept all ancestors if at least a single child matches
@@ -146,6 +152,7 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
       action_new_folder_(new QAction(this)),
       action_remove_(new QAction(this)),
       action_save_playlist_(new QAction(this)),
+      action_bulk_import_playlists_(new QAction(this)),
       model_(new PlaylistListModel(this)),
       proxy_(new PlaylistListFilterProxyModel(this)),
       loaded_icons_(false),
@@ -158,16 +165,20 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
   action_remove_->setText(tr("Delete"));
   action_save_playlist_->setText(
       tr("Save playlist", "Save playlist menu action."));
+  action_bulk_import_playlists_->setText(tr("Bulk Import Playlists"));
 
   ui_->new_folder->setDefaultAction(action_new_folder_);
   ui_->remove->setDefaultAction(action_remove_);
   ui_->save_playlist->setDefaultAction(action_save_playlist_);
+  ui_->bulk_import_playlists->setDefaultAction(action_bulk_import_playlists_);
+
 
   connect(action_new_folder_, SIGNAL(triggered()), SLOT(NewFolderClicked()));
   connect(action_remove_, SIGNAL(triggered()), SLOT(DeleteClicked()));
   connect(action_save_playlist_, SIGNAL(triggered()), SLOT(SavePlaylist()));
   connect(model_, SIGNAL(PlaylistPathChanged(int, QString)),
           SLOT(PlaylistPathChanged(int, QString)));
+  connect(action_bulk_import_playlists_, SIGNAL(triggered()), SLOT(BulkImportPlaylists()));
 
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
@@ -182,6 +193,9 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
 
   connect(ui_->search, SIGNAL(textChanged(QString)),
           SLOT(SearchTextEdited(QString)));
+
+  //access to global settings using the QSettings object. Use this to get data about last opened folder etc.
+  settings_.beginGroup(kSettingsGroup);
 }
 
 PlaylistListContainer::~PlaylistListContainer() { delete ui_; }
@@ -198,6 +212,8 @@ void PlaylistListContainer::showEvent(QShowEvent* e) {
   action_remove_->setIcon(IconLoader::Load("edit-delete", IconLoader::Base));
   action_save_playlist_->setIcon(
       IconLoader::Load("document-save", IconLoader::Base));
+  action_bulk_import_playlists_->setIcon(
+      IconLoader::Load("document-open-folder", IconLoader::Base));
 
   model_->SetIcons(IconLoader::Load("view-media-playlist", IconLoader::Base),
                    IconLoader::Load("folder", IconLoader::Base));
@@ -327,6 +343,86 @@ void PlaylistListContainer::SavePlaylist() {
     QStandardItem* item = model_->PlaylistById(playlist_id);
     QString playlist_name = item ? item->text() : tr("Playlist");
     app_->playlist_manager()->SaveWithUI(playlist_id, playlist_name);
+  }
+}
+
+/*
+Open filepicker and Use QDirIterator to recursively find subdirectories
+within the chosen directory. create an empty 
+*/
+void PlaylistListContainer::BulkImportPlaylists() {
+  QString base_path(settings_.value("last_path", Utilities::GetConfigPath(
+                                           Utilities::Path_DefaultMusicLibrary)).toString());
+  base_path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), base_path);
+
+  if (base_path.isNull()) {
+    return;
+  }
+
+  //Create Root Folder
+  QFileInfo child_info(base_path);
+  QStandardItem* root_folder = model_->NewFolder(child_info.fileName());
+  model_->invisibleRootItem()->appendRow(root_folder);
+
+  bulk_imported_id_list_ = new QList<int>();
+  bulk_imported_count_ = 0;
+
+  RecursivelyCreateSubfolders(root_folder, base_path, child_info.baseName());
+
+  settings_.setValue("last_path", base_path);
+}
+
+void PlaylistListContainer::RecursivelyCreateSubfolders(QStandardItem* parent_folder, QString path, QString ui_path){
+  QStringList filters;
+  filters = app_->playlist_manager()->parser()->file_extensions();
+  for(int i=0; i<filters.count(); i++){
+    filters[i] = "*." + filters[i];
+  }
+
+  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot);
+  while(it.hasNext()) {
+    QString child(it.next());
+    QFileInfo child_info(child);
+    if (child_info.isDir()) {
+      QStandardItem* folder = model_->NewFolder(child_info.fileName());
+      parent_folder->appendRow(folder);
+      RecursivelyCreateSubfolders(folder, child_info.absoluteFilePath(), ui_path + "/" + child_info.baseName());
+    }else if(child_info.isFile()){
+      if(QDir::match(filters, child_info.fileName())){
+        bulk_imported_count_++;
+        int id = app_->playlist_manager()->LoadBulkPlaylists(child, ui_path);
+        Playlist* playlist = app_->playlist_manager()->playlist(id);
+        connect(playlist, SIGNAL(PlaylistSongsLoaded(int)), SLOT(BulkImportPlaylistsCallback(int)));
+        PlaylistPathChanged(id, ui_path);
+      }
+    }
+  }
+}
+
+/*
+* After the bulk imported playlist has asynchronously had its songs
+* loaded, add it to the list of finished playlists
+* once the quota has been filled, close the temporary tabs
+*/
+void PlaylistListContainer::BulkImportPlaylistsCallback (int id){
+  if(bulk_imported_count_ == 0){
+    return;
+  }
+  if(bulk_imported_id_list_->contains(id)){
+    return;
+  }
+  app_->playlist_manager()->BulkImportPlaylistsCallback(id);
+  const QString& name = app_->playlist_manager()->GetPlaylistName(id);
+  AddPlaylist(id, name, true);
+  bulk_imported_id_list_->append(id);
+  if(bulk_imported_id_list_->count() == bulk_imported_count_){
+    //clean up tabs
+    for(qsizetype i =0; i < bulk_imported_id_list_->count(); i++){
+      app_->playlist_manager()->Close(bulk_imported_id_list_->at(i));
+    }
+    app_->playlist_manager()->ChangePlaylistOrder(app_->playlist_manager()->GetAllPlaylistIds());
+    bulk_imported_count_ = 0;
+    bulk_imported_id_list_ = new QList<int>();
   }
 }
 
@@ -473,6 +569,7 @@ void PlaylistListContainer::contextMenuEvent(QContextMenuEvent* e) {
     menu_->addAction(action_remove_);
     menu_->addSeparator();
     menu_->addAction(action_save_playlist_);
+    menu_->addAction(action_bulk_import_playlists_);
   }
   menu_->popup(e->globalPos());
 }

@@ -55,6 +55,7 @@ class PlaylistManagerInterface : public QObject {
 
   // Returns the collection of playlists managed by this PlaylistManager.
   virtual QList<Playlist*> GetAllPlaylists() const = 0;
+  virtual QList<int> GetAllPlaylistIds() const = 0;
   // Grays out and reloads all deleted songs in all playlists.
   virtual void InvalidateDeletedSongs() = 0;
   // Removes all deleted songs from all playlists.
@@ -151,6 +152,7 @@ class PlaylistManager : public PlaylistManagerInterface {
 
   // Returns the collection of playlists managed by this PlaylistManager.
   QList<Playlist*> GetAllPlaylists() const;
+  QList<int> GetAllPlaylistIds() const;
   // Grays out and reloads all deleted songs in all playlists.
   void InvalidateDeletedSongs();
   // Removes all deleted songs from all playlists.
@@ -185,6 +187,8 @@ class PlaylistManager : public PlaylistManagerInterface {
           const QString& special_type = QString());
   void Load(const QString& filename);
   void Save(int id, const QString& filename, Playlist::Path path_type);
+  int LoadBulkPlaylists(const QString& filename, const QString& ui_path);
+  void BulkImportPlaylistsCallback(int id);
   // Display a file dialog to let user choose a file before saving the file
   void SaveWithUI(int id, const QString& playlist_name);
   void Rename(int id, const QString& new_name);
