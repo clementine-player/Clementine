@@ -32,7 +32,7 @@ class QtSystemTrayIcon : public SystemTrayIcon {
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
                  QAction* stop_after, QAction* next, QAction* mute,
-                 QAction* love, QAction* quit);
+                 QAction* show_hide, QAction* love, QAction* quit);
   bool IsVisible() const;
   void SetVisible(bool visible);
 
@@ -64,6 +64,7 @@ class QtSystemTrayIcon : public SystemTrayIcon {
   QAction* action_stop_;
   QAction* action_stop_after_this_track_;
   QAction* action_mute_;
+  QAction* action_show_hide_;
   QAction* action_love_;
 
   QPixmap orange_icon_;

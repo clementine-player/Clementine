@@ -565,6 +565,7 @@
     <addaction name="action_configure"/>
     <addaction name="separator"/>
     <addaction name="action_toggle_show_sidebar"/>
+    <addaction name="action_show_hide"/>
    </widget>
    <addaction name="menu_music"/>
    <addaction name="menu_playlist"/>
@@ -876,6 +877,14 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+M</string>
+   </property>
+  </action>
+  <action name="action_show_hide">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show/Hide Clementine</string>
    </property>
   </action>
   <action name="action_full_library_scan">
