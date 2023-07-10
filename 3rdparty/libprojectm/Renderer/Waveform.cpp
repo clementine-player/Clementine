@@ -17,7 +17,10 @@
 
 #include "Waveform.hpp"
 #include <algorithm>
+#include <functional>
 #include "BeatDetect.hpp"
+
+using std::placeholders::_1;
 
 typedef float floatPair[2];
 typedef float floatTriple[3];
@@ -65,8 +68,8 @@ void Waveform::Draw(RenderContext &context)
 			float mult= scaling*( spectrum ? 0.015f :1.0f);
 
 
-				std::transform(&value1[0],&value1[samples],&value1[0],std::bind2nd(std::multiplies<float>(),mult));
-				std::transform(&value2[0],&value2[samples],&value2[0],std::bind2nd(std::multiplies<float>(),mult));
+				std::transform(&value1[0],&value1[samples],&value1[0],std::bind(std::multiplies<float>(),_1, mult));
+				std::transform(&value2[0],&value2[samples],&value2[0],std::bind(std::multiplies<float>(),_1,mult));
 
 			WaveformContext waveContext(samples, context.beatDetect);
 

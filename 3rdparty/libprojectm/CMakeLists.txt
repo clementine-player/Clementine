@@ -175,7 +175,7 @@ if(BUNDLE_PROJECTM_PRESETS)
       configure_file(
         "${preset}"
         "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/${PRESET_NAME}"
-        COPY_ONLY
+        COPYONLY
       )
     endforeach (preset)
   else (APPLE)

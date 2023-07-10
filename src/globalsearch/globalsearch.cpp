@@ -17,11 +17,13 @@
 
 #include "globalsearch.h"
 
+#include <algorithm>
+#include <random>
+
 #include <QSettings>
 #include <QStringBuilder>
 #include <QTimerEvent>
 #include <QUrl>
-#include <algorithm>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -371,7 +373,9 @@ QStringList GlobalSearch::GetSuggestions(int count) {
   }
 
   // Randomize the suggestions
-  std::random_shuffle(ret.begin(), ret.end());
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(ret.begin(), ret.end(), g);
 
   // Only return the first count
   while (ret.length() > count) {

@@ -1244,6 +1244,11 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
+set_property(
+  TARGET clementine_lib
+  PROPERTY CXX_STANDARD 17
+)
+
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader

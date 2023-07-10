@@ -15,6 +15,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+#include <random>
 
 namespace omptl
 {
@@ -463,14 +464,15 @@ template <class RandomAccessIterator>
 void random_shuffle(RandomAccessIterator first, RandomAccessIterator last,
       const unsigned P)
 {
-	return ::std::random_shuffle(first, last);
+	std::random_device rd;
+	return ::std::shuffle(first, last, std::mt19937(rd()));
 }
 
 template <class RandomAccessIterator, class RandomNumberGenerator>
 void random_shuffle(RandomAccessIterator first, RandomAccessIterator last,
                     RandomNumberGenerator &rgen, const unsigned P)
 {
-	return ::std::random_shuffle(first, last, rgen);
+	return ::std::shuffle(first, last, rgen);
 }
 
 template <class ForwardIterator, class T>

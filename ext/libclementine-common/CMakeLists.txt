@@ -33,6 +33,11 @@ add_library(libclementine-common STATIC
   ${MOC}
 )
 
+set_property(
+  TARGET libclementine-common
+  PROPERTY CXX_STANDARD 17
+)
+
 target_link_libraries(libclementine-common
   Qt5::Core
   Qt5::Network

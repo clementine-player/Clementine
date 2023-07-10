@@ -35,11 +35,11 @@ STRIP_PREFIX = [
     '@@HOMEBREW_CELLAR@@/qt5/5.8.0_1/lib/',
 ]
 
-LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH = ['/opt/homebrew/lib', '/target', '/target/lib', '/usr/local/lib', '/sw/lib']
 
 GSTREAMER_PLUGINS = [
     # Core plugins
-    'libgstapp.dylib',
+    'libgstapp-1.0.dylib',
     'libgstaudioconvert.dylib',
     'libgstaudiofx.dylib',
     'libgstaudiotestsrc.dylib',
@@ -88,10 +88,12 @@ GSTREAMER_PLUGINS = [
 ]
 
 GSTREAMER_SEARCH_PATH = [
+    '/opt/homebrew/lib',
     '/usr/local/lib/gstreamer-1.0',
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
     '/usr/local/opt/gstreamer/libexec/gstreamer-1.0',
+    '/opt/homebrew/Cellar/gstreamer/1.22.4/libexec/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
@@ -110,6 +112,7 @@ QT_PLUGINS = [
     'styles/libqmacstyle.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = [
+    '/opt/homebrew/Cellar/qt@5/5.15.10/plugins',
     '/usr/local/opt/qt5/plugins',
     '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
@@ -117,6 +120,7 @@ QT_PLUGINS_SEARCH_PATH = [
 ]
 
 GIO_MODULES_SEARCH_PATH = [
+  '/opt/homebrew/lib/gio/modules',
   '/usr/local/lib/gio/modules',
   '/target/lib/gio/modules',
 ]
@@ -199,6 +203,12 @@ def GetBrokenLibraries(binary):
     elif re.match(r'Breakpad', line):
       continue  # Manually added by cmake.
     elif re.match(r'^\s*@loader_path', line):
+      abs_path = os.path.join(
+        os.path.dirname(binary),
+        *os.path.split(line)[1:],
+      )
+      broken_libs['libs'].append(abs_path)
+    elif re.match(r'^\s*@rpath', line):
       abs_path = os.path.join(
         os.path.dirname(binary),
         *os.path.split(line)[1:],
