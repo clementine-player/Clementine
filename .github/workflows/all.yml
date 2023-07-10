@@ -106,7 +106,7 @@ jobs:
       - build_focal_64
       - build_jammy_64
       - build_kinetic_64
-      - build_mac
+      # - build_mac
       - build_mingw
       - build_source
     steps:
@@ -978,6 +978,7 @@ jobs:
           path: bin/clementine_*.deb
 
   build_mac:
+    if: false
     name: Build Mac DMG
     runs-on: macos-10.15
     steps:
