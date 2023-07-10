@@ -24,11 +24,16 @@ jobs:
 
   push_translations:
     name: Push translation sources to Transifex
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-22.04
     container:
       image: ubuntu:bionic
     steps:
+      - uses: supplypike/setup-bin@v3
+        with:
+          uri: https://github.com/transifex/cli/releases/download/v1.6.7/tx-linux-amd64.tar.gz
+          name: tx
+          version: 1.6.7
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -64,8 +69,6 @@ jobs:
           qttools5-dev
           libsparsehash-dev
           ssh
-      - name: Install tx
-        run: pip3 install transifex-client==0.13.9
       - name: Checkout
         uses: actions/checkout@v1.2.0
       - name: git hackery
@@ -73,7 +76,7 @@ jobs:
       - name: tx init
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
-        run: tx init --no-interactive --force
+        run: tx init
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -83,7 +86,7 @@ jobs:
       - name: tx config
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
-        run: tx config mapping --execute -r clementine.clementineplayer -f src/translations/translations.pot -s en -t PO --expression 'src/translations/<lang>.po'
+        run: tx add --organization davidsansome --project clementine --resource clementineplayer --file-filter 'src/translations/<lang>.po' --type PO src/translations/en.po
       - name: tx push
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
