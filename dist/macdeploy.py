@@ -89,11 +89,12 @@ GSTREAMER_PLUGINS = [
 
 GSTREAMER_SEARCH_PATH = [
     '/opt/homebrew/lib',
+    '/opt/homebrew/opt/gstreamer/libexec/gstreamer-1.0',
+    '/usr/local/lib',
     '/usr/local/lib/gstreamer-1.0',
+    '/usr/local/opt/gstreamer/libexec/gstreamer-1.0',
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
-    '/usr/local/opt/gstreamer/libexec/gstreamer-1.0',
-    '/opt/homebrew/Cellar/gstreamer/1.22.4/libexec/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
