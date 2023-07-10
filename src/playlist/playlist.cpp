@@ -17,12 +17,6 @@
 
 #include "playlist.h"
 
-#include <algorithm>
-#include <functional>
-#include <memory>
-#include <random>
-#include <unordered_map>
-
 #include <QApplication>
 #include <QBuffer>
 #include <QCoreApplication>
@@ -35,6 +29,11 @@
 #include <QUndoStack>
 #include <QtConcurrentRun>
 #include <QtDebug>
+#include <algorithm>
+#include <functional>
+#include <memory>
+#include <random>
+#include <unordered_map>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QRandomGenerator>
@@ -2107,8 +2106,7 @@ void Playlist::ReshuffleIndices() {
 
       // Shuffle them
       QStringList shuffled_album_keys = album_key_set.values();
-      std::shuffle(shuffled_album_keys.begin(),
-                   shuffled_album_keys.end(),
+      std::shuffle(shuffled_album_keys.begin(), shuffled_album_keys.end(),
                    std::mt19937(rd()));
 
       // If the user is currently playing a song, force its album to be first

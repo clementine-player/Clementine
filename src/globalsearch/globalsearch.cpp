@@ -17,13 +17,12 @@
 
 #include "globalsearch.h"
 
-#include <algorithm>
-#include <random>
-
 #include <QSettings>
 #include <QStringBuilder>
 #include <QTimerEvent>
 #include <QUrl>
+#include <algorithm>
+#include <random>
 
 #include "core/application.h"
 #include "core/logging.h"
