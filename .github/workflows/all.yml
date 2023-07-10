@@ -980,7 +980,7 @@ jobs:
   build_mac:
     if: false
     name: Build Mac DMG
-    runs-on: macos-10.15
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v1.2.0
       - name: git hackery
@@ -1020,7 +1020,6 @@ jobs:
           Qt5LinguistTools_DIR: /usr/local/opt/qt5/lib/cmake/Qt5LinguistTools
           GST_SCANNER_PATH: /usr/local/opt/gstreamer/libexec/gstreamer-1.0/gst-plugin-scanner
           GST_PLUGIN_PATH: /usr/local/lib/gstreamer-1.0
-          DEVELOPER_DIR: /Applications/Xcode_10.3.app/Contents/Developer
         working-directory: bin
         run: >
           cmake ..
@@ -1030,6 +1029,7 @@ jobs:
           -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/opt/gettext/bin/msgmerge
           -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/opt/gettext/bin/msgfmt
           -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/opt/gettext/bin/xgettext
+          -DDEVELOPER_DIR=$(xcode-select -p)
       - name: make
         working-directory: bin
         run: make -j2
