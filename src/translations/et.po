@@ -5,7 +5,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Priit Jõerüüt <transifex@joeruut.com>, 2019
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2022
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2023
 # Rivo Zängov <eraser@eraser.ee>, 2011-2012,2018
 # spil <spil99@hotmail.com>, 2013
 # Руслан <nasretdinov.r.r@ya.ru>, 2013
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2022\n"
-"Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2023\n"
+"Language-Team: Estonian (http://app.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: et\n"
@@ -386,7 +386,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>Asendusmärkid algavad %'ga, näiteks %artist, %album %title</p>\n\n<p>Kui Kui ümbritsed asendusmärkidega tekstilõigu looksulgudega, siis see tekstilõik jäetakse kuvamata, kui asendusmärgi väärtus on tühi.</p>"
 
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
@@ -519,11 +519,11 @@ msgstr "Lisa fail"
 
 #: ../bin/src/ui_mainwindow.h:776
 msgid "Add file to transcoder"
-msgstr "Lisa fail transkodeerimiseks"
+msgstr "Lisa fail kodeeringu muutmiseks"
 
 #: ../bin/src/ui_mainwindow.h:774
 msgid "Add file(s) to transcoder"
-msgstr "Lisa fail(id) transkodeerimiseks"
+msgstr "Lisa fail(id) kodeeringu muutmiseks"
 
 #: ../bin/src/ui_transcodedialog.h:225 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
@@ -531,7 +531,7 @@ msgstr "Lisa fail..."
 
 #: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
-msgstr "Lisa failid transkodeerimiseks"
+msgstr "Lisa failid kodeeringu muutmiseks"
 
 #: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2199
 #: ripper/ripcddialog.cpp:279
@@ -768,7 +768,7 @@ msgstr "Luba allalaadimine"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Allow mid/side encoding"
-msgstr ""
+msgstr "Luba keskmist/külgmist kodeerimist (mid/side encoding)"
 
 #: ../bin/src/ui_transcodedialog.h:237
 msgid "Alongside the originals"
@@ -1965,11 +1965,11 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Salvesta andmed"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Salvesta kodeerimise konveieri andmed"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -3478,7 +3478,7 @@ msgstr "Selle tüübile seadistused puuduvad"
 msgid ""
 "No settings page available for encoder element <b>%1</b>. Please report this"
 " issue:<br><a href=\"%2\">%2</a>"
-msgstr "Kodeerija komponendi<b>%1</b> jaoks puudub seadistuste leht. Palun teata sellest veast <br><a href=\"%2\">%2</a>"
+msgstr "Kodeerija komponendi <b>%1</b> jaoks puudub seadistuste vaade. Palun teata sellest veast <br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3806,11 +3806,11 @@ msgstr "Esineja"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Kodeerimise konveier"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "Kodeerimise konveierid"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -4972,7 +4972,7 @@ msgstr "Alusta kodeerimist"
 #: transcoder/transcoder.cpp:448
 #, qt-format
 msgid "Starting %1"
-msgstr "Käivitatakse %1"
+msgstr "Alustame kodeerimist: %1"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:128
 msgid "Starting..."
@@ -5058,7 +5058,7 @@ msgstr "Õnnestus edukalt!"
 #: transcoder/transcoder.cpp:209
 #, qt-format
 msgid "Successfully written %1"
-msgstr "Edukalt kirjutasin %1"
+msgstr "Kodeerimine õnnestus: %1"
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
@@ -5139,7 +5139,7 @@ msgstr "Lugude otsija on hõivatud"
 
 #: ../bin/src/ui_playbacksettingspage.h:417
 msgid "The format is only updated when a pipeline starts."
-msgstr ""
+msgstr "Vormingut uuendatakse alles siis kui kodeerimise konveier alustab tööd."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5354,7 +5354,7 @@ msgstr "Muuda muusikafailide kodeeringut"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr "Transkodeerimise teave"
+msgstr "Kodeeringu muutmise teave"
 
 #: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
@@ -5363,16 +5363,16 @@ msgstr "Kodeerimine"
 #: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "Kasutades %2 lõime transkodeerin %1 faili"
+msgstr "Kasutades %2 lõime muudame %1 faili kodeeringut"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
-msgstr "Transkodeerimise valikud"
+msgstr "Kodeeringu muutmise valikud"
 
 #: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr "Transkodeerimise valikud - %1"
+msgstr "Kodeeringu muutmise valikud - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5896,7 +5896,7 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "Sa võid kasutada oma Wii pulti Clementine kaugjuhtimispuldina. Täpsema teave leiad <a href=\"http://www.clementine-player.org/wiimote\">sellelt Clementine wiki lehelt</a>.\n"
+msgstr "Sa võid kasutada oma Wii pulti Clementine kaugjuhtimispuldina. Täpsema teabe leiad <a href=\"http://www.clementine-player.org/wiimote\">sellelt Clementine wiki lehelt</a>.\n"
 
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
@@ -6001,7 +6001,7 @@ msgstr "sisaldab"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "Kaugtöölaud"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206

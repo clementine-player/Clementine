@@ -5,7 +5,7 @@
 # Translators:
 # Andrei Stepanov, 2014
 # al42and <al42and@gmail.com>, 2012
-# Alexander, 2012
+# Iavael, 2012
 # Alexander Vysotskiy <loki13gm@gmail.com>, 2012
 # Andrei Demin <Andrei.Demin1996@gmail.com>, 2014
 # Andrei Stepanov, 2014-2023
@@ -38,7 +38,7 @@ msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
 "Last-Translator: Andrei Stepanov, 2014-2023\n"
-"Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
+"Language-Team: Russian (http://app.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
@@ -55,7 +55,7 @@ msgstr "\n\nВы можете добавить плейлист в избран�
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:130
 msgid " ANMR method (experimental)"
-msgstr " Метод ANMR (экспериментальный)"
+msgstr " Метод ANMR (пробный)"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
@@ -128,7 +128,7 @@ msgstr "%1 на %2"
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "%1 плейлистов (%2)"
+msgstr "Плейлисты %1 (%2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -369,7 +369,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr "<html><head/><body><p>Если не отмечено, то Clementine попытается сохранить ваши оценки и другие статистические данные только в отдельной базе данных без изменения ваших файлов.</p><p>Если отмечено, то статистика будет сохранена как в базе данных, так и прямо в файле каждый раз при их изменении.</p><p>Имейте в виду, что это может не работать для каждого формата и, поскольку стандартов для этого нет, другие музыкальные проигрыватели могут не прочесть их.</p></body></html>"
+msgstr "<html><head/><body><p>Если не отмечено, то Clementine попытается сохранить ваши оценки и другие статистические данные только в отдельной базе данных без изменения ваших файлов.</p><p>Если отмечено, то статистика будет сохранена как в базе данных, так и прямо в файл при каждом её изменении.</p><p>Имейте в виду, что это может работать не для каждого формата и, поскольку стандартов для этого нет, другие музыкальные проигрыватели могут не прочесть их.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
@@ -410,7 +410,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Токены начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна при пустом токене</p>"
+msgstr "<p>Токены начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна при пустом токене.</p>"
 
 #: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
@@ -1596,7 +1596,7 @@ msgstr "Пользовательская"
 
 #: ../bin/src/ui_appearancesettingspage.h:312
 msgid "Custom image:"
-msgstr "Собственное изображение:"
+msgstr "Своё изображение:"
 
 #: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Custom message settings"
@@ -3089,7 +3089,7 @@ msgstr "Загрузка устройства MTP"
 
 #: devices/gpodloader.cpp:46
 msgid "Loading iPod database"
-msgstr "Загрузка база данных iPod"
+msgstr "Загружается база данных iPod"
 
 #: smartplaylists/generatorinserter.cpp:48
 msgid "Loading smart playlist"
@@ -4318,7 +4318,7 @@ msgstr "Сбросить счётчики прослушивания"
 
 #: ../bin/src/ui_behavioursettingspage.h:390
 msgid "Restart song, then jump to previous if pressed again"
-msgstr "Перезапуск песни, затем переход к предыдущей при повторном нажатии"
+msgstr "Перезапуск песни, при повторном нажатии — переход к предыдущей"
 
 #: core/commandlineoptions.cpp:176
 msgid ""
@@ -5872,13 +5872,13 @@ msgstr "Вы собираетесь скачать следующие альбо
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Вы собираетесь удалить %1 плейлистов из избранных, уверены?"
+msgstr "Вы хотите удалить %1 плейлистов из избранных, уверены?"
 
 #: playlist/playlisttabbar.cpp:187
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Вы собираетесь удалить плейлист, не являющийся избранным: список будет удалён (это действие необратимо).\nХотите продолжить?"
+msgstr "Вы хотите убрать плейлист, не являющийся избранным: список удалится полностью (действие необратимо).\nПродолжить?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
