@@ -90,10 +90,8 @@ void SongInfoView::ReloadSettings() {
 
   QVariantList default_order;
   default_order << "lyrics.wikia.com"
-                << "lyricstime.com"
                 << "lyricsreg.com"
                 << "lyricsmania.com"
-                << "metrolyrics.com"
                 << "azlyrics.com"
                 << "songlyrics.com"
                 << "elyrics.net"
@@ -101,7 +99,6 @@ void SongInfoView::ReloadSettings() {
                 << "lyrics.com"
                 << "lyricsbay.com"
                 << "directlyrics.com"
-                << "loudson.gs"
                 << "teksty.org"
                 << "tekstowo.pl (Polish translations)"
                 << "vagalume.uol.com.br"
