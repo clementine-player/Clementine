@@ -88,17 +88,6 @@
       <item begin="&lt;/a" end="&gt;"/>
     </exclude>
   </provider>   
-  <provider name="hindilyrics.net (Bollywood songs)" title="{title} ({album})" charset="utf-8" url="http://www.hindilyrics.net/lyrics/of-{Title}.html">
-    <urlFormat replace=" _@;\/&quot;'()[]" with="%20"/>
-    <urlFormat replace="?" with=""/>
-    <extract>
-      <item begin="&lt;div class=nm&gt;Movie&lt;/div&gt;:" end="&lt;/pre&gt;"/>
-    </extract>
-    <exclude>
-      <item begin="&lt;span class=" end="&quot;&gt;"/>
-    </exclude>
-    <invalidIndicator value="Couldn't find that page."/>
-  </provider>
   <provider name="letras.mus.br" title="" charset="utf-8" url="https://www.letras.mus.br/winamp.php?musica={title}&amp;artista={artist}">
     <urlFormat replace="_@,;&amp;\/&quot;" with="_"/>
     <urlFormat replace=" " with="+"/>
@@ -113,13 +102,6 @@
       <item tag="&lt;response&gt;"/>
     </extract>
     <invalidIndicator value="ERROR"/>
-  </provider>
-  <provider name="loudson.gs" title="" charset="utf-8" url="http://www.loudson.gs/{a}/{artist}/{album}/{title}">
-    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
-    <urlFormat replace="." with=""/>
-    <extract>
-      <item tag="&lt;div class=&quot;middle_col_TracksLyrics &quot;&gt;"/>
-    </extract>
   </provider>
   <provider name="lyrics.com" title="{artist} - {title} Lyrics" charset="utf-8" url="http://www.lyrics.com/lyrics/{artist}/{title}.html">
     <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
@@ -194,14 +176,6 @@
     </extract>
     <invalidIndicator value="Page not Found"/>
   </provider>
-  <provider name="lyricstime.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.lyricstime.com/{artist}-{title}-lyrics.html">
-    <urlFormat replace=" _@,;&amp;\/&quot;'" with="-"/>
-    <urlFormat replace="." with=""/>
-    <extract>
-      <item tag="&lt;div id=&quot;songlyrics&quot; &gt;"/>
-      <item tag="&lt;p&gt;"/>
-    </extract>
-  </provider>
   <provider name="lyriki.com" title="" charset="utf-8" url="http://www.lyriki.com/{artist}:{title}">
     <urlFormat replace=" _@,;&amp;\/&quot;" with="_"/>
     <urlFormat replace="." with=""/>
@@ -209,20 +183,6 @@
       <item begin="&lt;/table&gt;" end="&lt;div class=&quot;printfooter&quot;&gt;"/>
       <item tag="&lt;p&gt;"/>
     </extract>
-  </provider>
-  <provider name="metrolyrics.com" title="{artist} - {title} LYRICS" charset="utf-8" url="http://www.metrolyrics.com/{title}-lyrics-{artist}.html">
-    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
-    <urlFormat replace="'." with=""/>
-    <extract>
-      <item tag="&lt;span id=&quot;lyrics&quot;&gt;"/>
-    </extract>
-    <extract>
-      <item tag="&lt;div id=&quot;lyrics&quot;&gt;"/>
-    </extract>
-    <exclude>
-      <item tag="&lt;h5&gt;"/>
-    </exclude>
-    <invalidIndicator value="These lyrics are missing"/>
   </provider>
   <provider name="mp3lyrics.org" title="{artist} &amp;quot;{title}&amp;quot; Lyrics" charset="utf-8" url="http://www.mp3lyrics.org/{a}/{artist}/{title}/">
     <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
@@ -250,13 +210,6 @@
       <item begin=" data-reactid=&quot;" end="&quot;&gt;"/>
     </exclude>
     <invalidIndicator value="We couldn't find that page."/>
-  </provider>
-  <provider name="seeklyrics.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.seeklyrics.com/lyrics/{Artist}/{Title}.html">
-    <urlFormat replace=" _@,;&amp;\/'&quot;" with="-"/>
-    <urlFormat replace="." with=""/>
-    <extract>
-      <item tag="&lt;div id=&quot;songlyrics&quot;&gt;"/>
-    </extract>
   </provider>
   <provider name="songlyrics.com" title="{title} LYRICS - {artist}" charset="utf-8" url="http://www.songlyrics.com/{artist}/{title}-lyrics/">
     <urlFormat replace=" ._@,;&amp;\/&quot;" with="-"/>
