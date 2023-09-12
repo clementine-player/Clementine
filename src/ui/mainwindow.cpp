@@ -1262,10 +1262,14 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
 
     const qint64 seconds_left = (length - position) / kNsecPerSec;
     const qint64 seconds_total = length / kNsecPerSec;
+    const qint64 seconds_listened = position / kNsecPerSec;
 
     if (((0.05 * seconds_total > 60 && percentage < 0.98) ||
          percentage < 0.95) &&
-        seconds_left > 5) {  // Never count the skip if under 5 seconds left
+        (seconds_left > 5 &&
+         5 < seconds_listened)) {  // Never count the skip if under 5 seconds
+                                   // left. Or we haven't listened for more than
+                                   // 5 seconds.
       app_->library_backend()->IncrementSkipCountAsync(song.id(), percentage);
     }
   }
