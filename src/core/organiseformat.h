@@ -27,7 +27,7 @@
 
 #include "core/song.h"
 
-class TranscoderPreset;
+struct TranscoderPreset;
 
 class OrganiseFormat {
  public:
