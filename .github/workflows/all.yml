@@ -231,6 +231,7 @@ jobs:
           qt5-qtbase-devel
           qt5-qtx11extras-devel
           qt5-rpm-macros
+          qtsingleapplication-qt5-devel
           rpmdevtools
           sha2-devel
           sparsehash-devel
@@ -242,7 +243,7 @@ jobs:
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
         working-directory: bin
-        run: cmake ..
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
@@ -303,6 +304,7 @@ jobs:
           qt5-qtbase-devel
           qt5-qtx11extras-devel
           qt5-rpm-macros
+          qtsingleapplication-qt5-devel
           rpmdevtools
           sha2-devel
           sparsehash-devel
@@ -314,7 +316,7 @@ jobs:
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
         working-directory: bin
-        run: cmake ..
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
@@ -375,6 +377,7 @@ jobs:
           qt5-qtbase-devel
           qt5-qtx11extras-devel
           qt5-rpm-macros
+          qtsingleapplication-qt5-devel
           rpmdevtools
           sha2-devel
           sparsehash-devel
@@ -386,7 +389,7 @@ jobs:
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
         working-directory: bin
-        run: cmake ..
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
