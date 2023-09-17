@@ -347,11 +347,13 @@ include_directories("3rdparty/qsqlite")
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.
-option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
+option(USE_SYSTEM_QTSINGLEAPPLICATION "Use the system-provided QtSingleApplication library (needs to have clementine patches, but these seem to be in Qt5)" OFF)
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
-  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES qt5/QtSolutions)
-  find_library(QTSINGLEAPPLICATION_LIBRARIES Qt5Solutions_SingleApplication-2.6)
-  find_library(QTSINGLECOREAPPLICATION_LIBRARIES Qt5Solutions_SingleCoreApplication-2.6)
+  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES qt5/QtSolutions REQUIRED)
+  find_library(QTSINGLEAPPLICATION_LIBRARIES Qt5Solutions_SingleApplication-2.6 REQUIRED)
+  add_library(qtsingleapplication INTERFACE)
+  target_link_libraries(qtsingleapplication INTERFACE QTSINGLEAPPLICATION_LIBRARIES)
+  target_include_directories(qtsingleapplication INTERFACE QTSINGLEAPPLICATION_INCLUDE_DIRS)
 else(USE_SYSTEM_QTSINGLEAPPLICATION)
   add_subdirectory(3rdparty/qtsingleapplication)
   set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
