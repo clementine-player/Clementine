@@ -1729,13 +1729,11 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
   endRemoveRows();
 
   QList<int>::iterator it = virtual_items_.begin();
-  int i = 0;
   while (it != virtual_items_.end()) {
     if (*it >= items_.count())
       it = virtual_items_.erase(it);
     else
       ++it;
-    ++i;
   }
 
   // Reset current_virtual_index_

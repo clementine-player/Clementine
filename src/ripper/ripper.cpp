@@ -34,12 +34,6 @@
 #undef AddJob
 #endif
 
-namespace {
-const char kWavHeaderRiffMarker[] = "RIFF";
-const char kWavFileTypeFormatChunk[] = "WAVEfmt ";
-const char kWavDataString[] = "data";
-}  // namespace
-
 Ripper::Ripper(int track_count, QObject* parent)
     : QObject(parent),
       track_count_(track_count),
