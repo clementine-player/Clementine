@@ -38,7 +38,7 @@ class MagnatuneService : public InternetService {
 
  public:
   MagnatuneService(Application* app, InternetModel* parent);
-  ~MagnatuneService();
+  ~MagnatuneService() override;
 
   // Values are saved in QSettings and are indices into the combo box in
   // MagnatuneConfig
@@ -71,14 +71,14 @@ class MagnatuneService : public InternetService {
 
   static QString ReadElementText(QXmlStreamReader& reader);
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
 
-  void ShowContextMenu(const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  QWidget* HeaderWidget() const;
+  QWidget* HeaderWidget() const override;
 
-  void ReloadSettings();
+  void ReloadSettings() override;
 
   // Magnatune specific stuff
   MembershipType membership_type() const { return membership_; }
@@ -99,7 +99,7 @@ class MagnatuneService : public InternetService {
 
   void Download();
   void Homepage();
-  void ShowConfig();
+  void ShowConfig() override;
 
  private:
   void EnsureMenuCreated();

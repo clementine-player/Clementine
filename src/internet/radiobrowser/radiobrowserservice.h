@@ -35,7 +35,7 @@ class RadioBrowserService : public InternetService {
 
  public:
   RadioBrowserService(Application* app, InternetModel* parent);
-  ~RadioBrowserService(){};
+  ~RadioBrowserService() override{};
 
   enum ItemType {
     Type_Stream = 2000,

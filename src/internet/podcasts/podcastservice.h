@@ -44,7 +44,7 @@ class PodcastService : public InternetService {
 
  public:
   PodcastService(Application* app, InternetModel* parent);
-  ~PodcastService();
+  ~PodcastService() override;
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -57,12 +57,12 @@ class PodcastService : public InternetService {
 
   enum Role { Role_Podcast = InternetModel::RoleCount, Role_Episode };
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* parent);
-  bool has_initial_load_settings() const { return true; }
-  void ShowContextMenu(const QPoint& global_pos);
-  void ReloadSettings();
-  void InitialLoadSettings();
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* parent) override;
+  bool has_initial_load_settings() const override { return true; }
+  void ShowContextMenu(const QPoint& global_pos) override;
+  void ReloadSettings() override;
+  void InitialLoadSettings() override;
   // Called by SongLoader when the user adds a Podcast URL directly.  Adds a
   // subscription to the podcast and displays it in the UI.  If the QVariant
   // contains an OPML file then this displays it in the Add Podcast dialog.
@@ -81,7 +81,7 @@ class PodcastService : public InternetService {
   void DeleteDownloadedData();
   void SetNew();
   void SetListened();
-  void ShowConfig();
+  void ShowConfig() override;
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);

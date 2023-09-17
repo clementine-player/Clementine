@@ -43,14 +43,14 @@ class JamendoService : public InternetService {
 
  public:
   JamendoService(Application* app, InternetModel* parent);
-  ~JamendoService();
+  ~JamendoService() override;
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
 
-  void ShowContextMenu(const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  QWidget* HeaderWidget() const;
+  QWidget* HeaderWidget() const override;
 
   LibraryBackend* library_backend() const { return library_backend_.get(); }
 
