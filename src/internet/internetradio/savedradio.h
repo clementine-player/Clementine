@@ -34,7 +34,7 @@ class SavedRadio : public InternetService {
 
  public:
   SavedRadio(Application* app, InternetModel* parent);
-  ~SavedRadio();
+  ~SavedRadio() override;
 
   enum ItemType {
     Type_Stream = 2000,
@@ -57,10 +57,10 @@ class SavedRadio : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
 
-  void ShowContextMenu(const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos) override;
 
   void Add(const QUrl& url, const QString& name = QString(),
            const QUrl& url_logo = QUrl());

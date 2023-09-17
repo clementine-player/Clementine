@@ -39,7 +39,7 @@ class IntergalacticFMServiceBase : public InternetService {
                              const QString& name, const QUrl& channel_list_url,
                              const QUrl& homepage_url,
                              const QUrl& donate_page_url, const QIcon& icon);
-  ~IntergalacticFMServiceBase();
+  ~IntergalacticFMServiceBase() override;
 
   enum ItemType {
     Type_Stream = 2000,
@@ -59,14 +59,14 @@ class IntergalacticFMServiceBase : public InternetService {
   const QString& url_scheme() const { return url_scheme_; }
   const QIcon& icon() const { return icon_; }
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
-  void ShowContextMenu(const QPoint& global_pos);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  PlaylistItem::Options playlistitem_options() const;
+  PlaylistItem::Options playlistitem_options() const override;
   QNetworkAccessManager* network() const { return network_; }
 
-  void ReloadSettings();
+  void ReloadSettings() override;
 
   bool IsStreamListStale() const { return streams_.IsStale(); }
   StreamList Streams();

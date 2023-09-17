@@ -42,7 +42,7 @@ class SubsonicService : public InternetService {
 
  public:
   SubsonicService(Application* app, InternetModel* parent);
-  ~SubsonicService();
+  ~SubsonicService() override;
 
   enum LoginState {
     LoginState_Loggedin,
@@ -90,11 +90,11 @@ class SubsonicService : public InternetService {
   bool IsConfigured() const;
   bool IsAmpache() const;
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
-  void ShowContextMenu(const QPoint& global_pos);
-  QWidget* HeaderWidget() const;
-  void ReloadSettings();
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
+  void ShowContextMenu(const QPoint& global_pos) override;
+  QWidget* HeaderWidget() const override;
+  void ReloadSettings() override;
 
   void Login();
   void Login(const QString& server, const QString& username,
@@ -175,7 +175,7 @@ class SubsonicService : public InternetService {
   void OnLoginStateChanged(SubsonicService::LoginState newstate);
   void OnPingFinished(QNetworkReply* reply);
 
-  void ShowConfig();
+  void ShowConfig() override;
 };
 
 class SubsonicLibraryScanner : public QObject {
@@ -184,7 +184,7 @@ class SubsonicLibraryScanner : public QObject {
  public:
   explicit SubsonicLibraryScanner(SubsonicService* service,
                                   QObject* parent = nullptr);
-  ~SubsonicLibraryScanner();
+  ~SubsonicLibraryScanner() override;
 
   void Scan();
   const SongList& GetSongs() const { return songs_; }

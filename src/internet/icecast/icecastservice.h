@@ -40,7 +40,7 @@ class IcecastService : public InternetService {
 
  public:
   IcecastService(Application* app, InternetModel* parent);
-  ~IcecastService();
+  ~IcecastService() override;
 
   static const char* kServiceName;
   static const char* kDirectoryUrl;
@@ -51,12 +51,12 @@ class IcecastService : public InternetService {
     Type_Genre,
   };
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* item) override;
 
-  void ShowContextMenu(const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  QWidget* HeaderWidget() const;
+  QWidget* HeaderWidget() const override;
 
  private slots:
   void LoadDirectory();

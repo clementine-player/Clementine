@@ -41,16 +41,16 @@ class DigitallyImportedServiceBase : public InternetService {
                                const QString& api_service_name,
                                Application* app, InternetModel* model,
                                bool has_premium, QObject* parent = nullptr);
-  ~DigitallyImportedServiceBase();
+  ~DigitallyImportedServiceBase() override;
 
   static const char* kSettingsGroup;
   static const int kStreamsCacheDurationSecs;
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QPoint& global_pos);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* parent) override;
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  void ReloadSettings();
+  void ReloadSettings() override;
 
   bool is_premium_account() const;
 
