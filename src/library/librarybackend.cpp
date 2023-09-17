@@ -896,7 +896,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
   QString last_artist;
   QString last_album_artist;
   while (query.Next()) {
-    bool compilation = query.Value(3).toBool() | query.Value(4).toBool();
+    bool compilation = query.Value(3).toBool() || query.Value(4).toBool();
 
     Album info;
     info.artist = compilation ? QString() : query.Value(1).toString();
