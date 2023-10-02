@@ -15,7 +15,7 @@
 # Ji yul Kim <kjy00302@gmail.com>, 2015
 # JungHee Lee <daemul72@gmail.com>, 2023
 # JungHee Lee <daemul72@gmail.com>, 2021-2022
-# JungHee Lee <daemul72@gmail.com>, 2020-2021
+# JungHee Lee <daemul72@gmail.com>, 2020-2021,2023
 # 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2016,2019,2022
 # Park Jeongyong <kladess@gmail.com>, 2013
 # Park Jeongyong <kladess@gmail.com>, 2014-2015
@@ -30,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-09 10:24+0000\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2023\n"
+"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2020-2021,2023\n"
 "Language-Team: Korean (http://app.transifex.com/davidsansome/clementine/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,7 @@ msgstr "%1 재생목록 (%2)"
 
 #, qt-format
 msgid "%1 selected of"
-msgstr ""
+msgstr "다음 중 %1곡 선택됨"
 
 #, qt-format
 msgid "%1 song"
@@ -101,7 +101,7 @@ msgstr "%1 전송됨"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr "%1: Wii 리모컨 모듈"
+msgstr "%1: Wiimotedev 모듈"
 
 #, qt-format
 msgid "%L1 other listeners"
@@ -113,11 +113,11 @@ msgstr "총 %L1번 재생"
 
 #, c-format
 msgid "%n failed"
-msgstr "%n 실패"
+msgstr "%n 실패함"
 
 #, c-format
 msgid "%n finished"
-msgstr "%n 끝냄"
+msgstr "%n 완료됨"
 
 #, c-format
 msgid "%n remaining"
@@ -130,7 +130,7 @@ msgid "&Center"
 msgstr "가운데(&C)"
 
 msgid "&Custom"
-msgstr "사용자 정의(&C)"
+msgstr "사용자 지정(&C)"
 
 msgid "&Help"
 msgstr "도움말(&H)"
@@ -197,7 +197,7 @@ msgid ""
 msgstr "<p>토큰은 %로 시작되며, 예제: %artist %album %title </p>\n\n<p>만약 중괄호를 포함하고 있는 토큰을 포함한 텍스트 섹션을 감싸고 있고 토큰이 비어 있다면, 그 해당 섹션은 감춰질 것입니다.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "Grooveshark Anywhere 계정이 필요합니다."
 
 msgid "A Spotify Premium account is required."
 msgstr "Spotify 프리미엄 계정이 필요합니다."
@@ -231,20 +231,20 @@ msgid "AIFF"
 msgstr "AIFF"
 
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr "최면두꺼비에게 모든 영광을!"
+msgstr "최면 두꺼비에게 모든 영광을"
 
 #, qt-format
 msgid "About %1"
 msgstr "%1 정보"
 
 msgid "About Clementine..."
-msgstr "클레멘타인 정보..."
+msgstr "Clementine 정보..."
 
 msgid "About Qt..."
 msgstr "Qt 정보"
 
 msgid "Account details"
-msgstr "계정 정보"
+msgstr "계정 상세정보"
 
 msgid "Account details (Premium)"
 msgstr "계정 상세정보 (프리미엄)"
@@ -253,7 +253,7 @@ msgid "Action"
 msgstr "동작"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Wii 리모컨 활성/비활성"
 
 msgid "Add Stream"
 msgstr "스트림 추가하기"
@@ -394,7 +394,7 @@ msgid "All Files (*)"
 msgstr "모든 파일 (*)"
 
 msgid "All Glory to the Hypnotoad!"
-msgstr "Hypnotoad에게 모든 영광을!"
+msgstr "최면 두꺼비에게 모든 영광을!"
 
 msgid "All albums"
 msgstr "모든 앨범"
@@ -433,7 +433,7 @@ msgstr "항상 재생 시작"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "클레멘타인에서 Spotify를 사용하려면 추가 플러그인이 필요합니다. 지금 다운로드하여 설치하시겠습니까?"
+msgstr "Clementine에서 Spotify를 사용하려면 추가 플러그인이 필요합니다. 지금 다운로드하여 설치하시겠습니까?"
 
 msgid "An error occurred copying the iTunes database from the device"
 msgstr "장치에서 iTunes 데이터베이스를 복사하는 중 오류가 발생했습니다"
@@ -450,7 +450,7 @@ msgstr "'%1'에 메타데이터를 쓰던 중 오류 발생"
 
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
-msgstr ""
+msgstr "알 수 없는 last.fm 오류 발생함: %1"
 
 msgid "And:"
 msgstr "이에 더하여:"
@@ -538,7 +538,7 @@ msgid "Background opacity"
 msgstr "배경 투명도"
 
 msgid "Ban"
-msgstr ""
+msgstr "싫어요"
 
 msgid "Bar analyzer"
 msgstr "막대"
@@ -554,7 +554,7 @@ msgstr "최고"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "1의 약력"
 
 msgid "Bit rate"
 msgstr "비트 전송률"
@@ -639,7 +639,7 @@ msgstr "소책자 표지 고르기"
 
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "가사를 검색할때 클레멘타인이 사용할 웹 사이트를 선택합니다."
+msgstr "가사를 검색할때 Clementine이 사용할 웹 사이트를 선택합니다."
 
 msgid "Classical"
 msgstr "클래식"
@@ -651,47 +651,47 @@ msgid "Clear playlist"
 msgstr "재생목록 비우기"
 
 msgid "Clementine"
-msgstr "클레멘타인"
+msgstr "Clementine"
 
 msgid "Clementine Error"
-msgstr "클레멘타인 오류"
+msgstr "Clementine 오류"
 
 msgid "Clementine Orange"
-msgstr "클레멘타인 오렌지"
+msgstr "Clementine 오렌지"
 
 msgid "Clementine Visualization"
-msgstr "클레멘타인 시각화"
+msgstr "Clementine 시각화"
 
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "클레멘타인은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
+msgstr "Clementine은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr "클레멘타인은 안드로이드폰으로 원격 제어가 가능합니다. 이 기능을 사용하려면 사용자의 휴대폰에 구성된 것과 동일한 Google 계정으로 로그인하세요."
+msgstr "Clementine은 안드로이드폰으로 원격 제어가 가능합니다. 이 기능을 사용하려면 사용자의 휴대폰에 구성된 것과 동일한 Google 계정으로 로그인하세요."
 
 msgid "Clementine can show a message when the track changes."
-msgstr "클레멘타인은 트랙이 변경될 때 메시지를 표시할 수 있습니다."
+msgstr "Clementine은 트랙이 변경될 때 메시지를 표시할 수 있습니다."
 
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "클레멘타인이 projectM 시각화를 불러올 수 없습니다. 클레멘타인이 제대로 설치되었는지 확인하십시오."
+msgstr "Clementine이 projectM 시각화를 불러올 수 없습니다. Clementine이 제대로 설치되었는지 확인하십시오."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr "연결에 문제가 있어 클레멘타인이 구독 상태를 가져올 수 없습니다. 재생된 트랙은 캐시되어 나중에 Last.fm으로 전송됩니다."
+msgstr "연결에 문제가 있어 Clementine이 구독 상태를 가져올 수 없습니다. 재생된 트랙은 캐시되어 나중에 Last.fm으로 전송됩니다."
 
 msgid "Clementine image viewer"
-msgstr "클레멘타인 이미지 뷰어"
+msgstr "Clementine 이미지 뷰어"
 
 msgid "Clementine was unable to find results for this file"
-msgstr "클레멘타인은 이 파일의 결과를 검색할 수 없습니다"
+msgstr "Clementine은 이 파일의 결과를 검색할 수 없습니다"
 
 msgid "Click here to add some music"
 msgstr "음악을 추가하려면 여기를 클릭하세요"
@@ -760,7 +760,7 @@ msgid "Connect device"
 msgstr "장치 연결"
 
 msgid "Connecting to Spotify"
-msgstr ""
+msgstr "Spotify에 연결하기"
 
 msgid "Constant bitrate"
 msgstr "고정 비트레이트"
@@ -799,7 +799,7 @@ msgid ""
 msgstr "%1 인코더를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "last.fm 라디오 방송국을 불러올 수 없습니다."
 
 #, qt-format
 msgid "Couldn't open output file %1"
@@ -920,7 +920,7 @@ msgid "De&fault"
 msgstr "기본값(&F)"
 
 msgid "Decrease the volume by 4%"
-msgstr ""
+msgstr "4% 단위로 음량 줄이기"
 
 msgid "Decrease volume"
 msgstr "음량 줄이기"
@@ -962,7 +962,7 @@ msgid "Destination"
 msgstr "대상"
 
 msgid "Details..."
-msgstr "세부 내용..."
+msgstr "상세정보..."
 
 msgid "Device"
 msgstr "장치"
@@ -1016,7 +1016,7 @@ msgid "Display options"
 msgstr "옵션 표시"
 
 msgid "Display the global search popup"
-msgstr ""
+msgstr "글로벌 검색 팝업 화면표시"
 
 msgid "Display the on-screen-display"
 msgstr "OSD 표시"
@@ -1119,10 +1119,10 @@ msgid "Enable equalizer"
 msgstr "이퀄라이저 사용"
 
 msgid "Enable playlist background image"
-msgstr ""
+msgstr "재생목록 배경 이미지 활성화"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "클레멘타인이 활성화 되었을 때에만 단축키 사용가능"
+msgstr "Clementine이 활성화 되었을 때에만 단축키 사용가능"
 
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm 스크로블 켜기/끄기"
@@ -1144,7 +1144,7 @@ msgstr "새로운 재생목록 이름을 입력하세요"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
+msgstr "Last.fm 라디오 청취를 시작하려면 <b>아티스트</b>나 <b>태그</b>를 입력하세요."
 
 msgid "Enter search terms here"
 msgstr "여기에 검색할 단어를 입력하세요"
@@ -1177,7 +1177,7 @@ msgid "Error deleting songs"
 msgstr "곡 삭제중 오류"
 
 msgid "Error downloading Spotify plugin"
-msgstr ""
+msgstr "Spotify 플러그인 다운로드 중 오류"
 
 #, qt-format
 msgid "Error loading %1"
@@ -1316,7 +1316,7 @@ msgstr "장치를 잃어버림"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "장치를 잊으면 이 목록에서 장치가 제거되고 클레멘타인이 다음에 장치를 연결할 때 모든 곡을 다시 검색해야 합니다."
+msgstr "장치를 잊으면 이 목록에서 장치가 제거되고 Clementine이 다음에 장치를 연결할 때 모든 곡을 다시 검색해야 합니다."
 
 msgid "Form"
 msgstr "형식"
@@ -1331,7 +1331,7 @@ msgid "Frames per buffer"
 msgstr "프레임/"
 
 msgid "Friends"
-msgstr ""
+msgstr "친구"
 
 msgid "Full Bass"
 msgstr "베이스 최대"
@@ -1343,7 +1343,7 @@ msgid "Full Treble"
 msgstr "트레블 최대"
 
 msgid "GStreamer audio engine"
-msgstr ""
+msgstr "GStreamer 오디오 엔진"
 
 msgid "General settings"
 msgstr "일반 "
@@ -1361,7 +1361,7 @@ msgid "Give it a name:"
 msgstr "이름 지정:"
 
 msgid "Global search"
-msgstr ""
+msgstr "글로벌 검색"
 
 msgid "Go to next playlist tab"
 msgstr "다음 재생목록 탭으로 가기"
@@ -1432,13 +1432,13 @@ msgid "High (1024x1024)"
 msgstr "높음 (1024x1024)"
 
 msgid "High (35 fps)"
-msgstr ""
+msgstr "높음 (35 fps)"
 
 msgid "Hours"
 msgstr "시간"
 
 msgid "Hypnotoad"
-msgstr "최면두꺼비"
+msgstr "최면 두꺼비"
 
 msgid "I don't have a Magnatune account"
 msgstr "Magnatune 계정을 가지고 있지 않습니다."
@@ -1460,7 +1460,7 @@ msgstr "계속 한다면, 이 장치가 느리게 작동하고 복사한 곡이 
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
-msgstr ""
+msgstr "두 대 이상의 컴퓨터에서 리모컨을 사용하는 경우 이 이름은 휴대폰에서 연결할 컴퓨터를 선택하는 데 도움이 됩니다."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "아티스트 이름에서 \"The\" 제거"
@@ -1477,7 +1477,7 @@ msgid ""
 msgstr "동적 모드에서는 노래가 끝날 때마다 새로운 트랙이 선택되어 재생 목록에 추가됩니다."
 
 msgid "Inbox"
-msgstr ""
+msgstr "받은 편지함"
 
 msgid "Include album art in the notification"
 msgstr "알림에 앨범 아트 포함"
@@ -1486,7 +1486,7 @@ msgid "Include all songs"
 msgstr "모든 곡 포함"
 
 msgid "Increase the volume by 4%"
-msgstr ""
+msgstr "4% 단위로 음량 올리기"
 
 msgid "Increase volume"
 msgstr "음량 올리기"
@@ -1507,10 +1507,10 @@ msgid "Invalid API key"
 msgstr "잘못된 API "
 
 msgid "Invalid SKY.fm username or password"
-msgstr ""
+msgstr "잘못된 SKY.fm 사용자이름 또는 비밀번호"
 
 msgid "Invalid di.fm username or password"
-msgstr ""
+msgstr "잘못된 di.fm 사용자이름 또는 비밀번호"
 
 msgid "Invalid format"
 msgstr "잘못된 형식"
@@ -1569,7 +1569,7 @@ msgid "Keep the original files"
 msgstr "원본 파일들 "
 
 msgid "Kittens"
-msgstr ""
+msgstr "새끼 고양이"
 
 msgid "Language"
 msgstr "언어"
@@ -1578,7 +1578,7 @@ msgid "Laptop/Headphones"
 msgstr "노트북/헤드폰"
 
 msgid "Large Hall"
-msgstr "거대한 홀"
+msgstr "대강당"
 
 msgid "Large album cover"
 msgstr "큰 앨범 표지"
@@ -1587,14 +1587,14 @@ msgid "Large sidebar"
 msgstr "큰 사이드바"
 
 msgid "Last played"
-msgstr "마지막으로 재생됨"
+msgstr "가장 최근 재생됨"
 
 msgid "Last.fm"
 msgstr "Last.fm"
 
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
-msgstr ""
+msgstr "Last.fm 사용자 지정 라디오: %1"
 
 #, qt-format
 msgid "Last.fm Library - %1"
@@ -1642,7 +1642,7 @@ msgid "Least favourite tracks"
 msgstr "가장 선호하지 않는 트랙"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
+msgstr "기본값을 사용하려면 비워 두세요. 예시: \"/dev/dsp\", \"front\" 등."
 
 msgid "Length"
 msgstr "길이"
@@ -1730,7 +1730,7 @@ msgid "Low (%1 fps)"
 msgstr "낮음 (%1fps)"
 
 msgid "Low (15 fps)"
-msgstr ""
+msgstr "낮음 (15 fps)"
 
 msgid "Low (256x256)"
 msgstr "낮음 (256x256)"
@@ -1773,7 +1773,7 @@ msgid "Main profile (MAIN)"
 msgstr "메인 프로필 (MAIN)"
 
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "재생목록을 오프라인에서 사용 가능하게 만들기"
 
 msgid "Malformed response"
 msgstr "잘못된 응답"
@@ -1798,7 +1798,7 @@ msgid "Medium (%1 fps)"
 msgstr "중간 (%1 fps)"
 
 msgid "Medium (25 fps)"
-msgstr ""
+msgstr "중간 (25 fps)"
 
 msgid "Medium (512x512)"
 msgstr "중간 (512x512)"
@@ -1843,7 +1843,7 @@ msgid "&Music"
 msgstr "음악(&M)"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
+msgstr "음악 (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "음악 라이브러리"
@@ -2004,25 +2004,25 @@ msgid "Open device"
 msgstr "장치 열기"
 
 msgid "Open dir.xiph.org in browser"
-msgstr ""
+msgstr "브라우저에서 dir.xiph.org 열기"
 
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
 
 msgid "Open jamendo.com in browser"
-msgstr ""
+msgstr "브라우저에서 jamendo.com 열기"
 
 msgid "Open magnatune.com in browser"
-msgstr ""
+msgstr "브라우저에서 magnatune.com 열기"
 
 msgid "Open media..."
-msgstr ""
+msgstr "미디어 열기..."
 
 msgid "Open somafm.com in browser"
-msgstr ""
+msgstr "브라우저에서 somafm.com 열기"
 
 msgid "Open intergalacticfm.com in browser"
-msgstr ""
+msgstr "브라우저에서 intergalacticfm.com 열기"
 
 msgid "Open..."
 msgstr "열기..."
@@ -2097,16 +2097,16 @@ msgid "Play Artist or Tag"
 msgstr "아티스트 또는 태그 재생하기"
 
 msgid "Play artist radio..."
-msgstr ""
+msgstr "아티스트 라디오 재생하기..."
 
 msgid "Play count"
 msgstr "재생 횟수"
 
 msgid "Play custom radio..."
-msgstr ""
+msgstr "사용자 지정 라디오 재생하기..."
 
 msgid "Play from my Library"
-msgstr ""
+msgstr "내 라이브러리에서 재생하기"
 
 msgid "Play if stopped, pause if playing"
 msgstr "중지중일때 재생, 재생중일때 중지"
@@ -2115,13 +2115,13 @@ msgid "Play if there is nothing already playing"
 msgstr "이미 재생되는 곡이 없다면 재생"
 
 msgid "Play last.fm artist radio"
-msgstr ""
+msgstr "last.fm 아티스트 라디오 재생하기"
 
 msgid "Play last.fm tag radio"
-msgstr ""
+msgstr "last.fm 태그 라디오 재생하기"
 
 msgid "Play tag radio..."
-msgstr ""
+msgstr "태그 라디오 재생하기..."
 
 msgid "Play the <n>th track in the playlist"
 msgstr "재생목록의 <n>번째 트랙 재생하기"
@@ -2133,10 +2133,10 @@ msgid "Playback"
 msgstr "재생"
 
 msgid "Player name"
-msgstr ""
+msgstr "재생기 이름"
 
 msgid "Player options"
-msgstr "플레이어 옵션"
+msgstr "재생기 옵션"
 
 msgid "&Playlist"
 msgstr "재생목록(&P)"
@@ -2148,13 +2148,13 @@ msgid "Playlist options"
 msgstr "재생목록 옵션"
 
 msgid "Playlist search"
-msgstr ""
+msgstr "재생목록 검색"
 
 msgid "Playlist type"
 msgstr "재생목록 유형"
 
 msgid "Plugin status:"
-msgstr ""
+msgstr "플러그인 상태:"
 
 msgid "Pop"
 msgstr "팝"
@@ -2278,7 +2278,7 @@ msgid "Refresh channels"
 msgstr "채널 새로고침"
 
 msgid "Refresh friends list"
-msgstr ""
+msgstr "친구 목록 새로고침"
 
 msgid "Refresh station list"
 msgstr "방송국 목록 새로고침"
@@ -2293,10 +2293,10 @@ msgid "Remember Wii remote swing"
 msgstr "Wii 리모컨 스윙 기억하기"
 
 msgid "Remember from last time"
-msgstr ""
+msgstr "마지막 시간부터 기억하기"
 
 msgid "Remote Control"
-msgstr ""
+msgstr "원격 제어"
 
 msgid "Remove"
 msgstr "제거"
@@ -2338,7 +2338,7 @@ msgid "Repeat track"
 msgstr "트랙 반복하기"
 
 msgid "Replace and play now"
-msgstr ""
+msgstr "지금 교체하고 재생하기"
 
 msgid "Replace current playlist"
 msgstr "현재 재생목록 교체"
@@ -2395,7 +2395,7 @@ msgid "Save image"
 msgstr "그림 저장"
 
 msgid "Save playlist"
-msgstr ""
+msgstr "재생목록 저장하기"
 
 msgid "Save playlist..."
 msgstr "재생목록 저장..."
@@ -2422,10 +2422,10 @@ msgid "Search"
 msgstr "검색"
 
 msgid "Search Grooveshark"
-msgstr ""
+msgstr "Grooveshark 검색하기"
 
 msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "Grooveshark 검색하기 (새 탭 열림)"
 
 msgid "Search Icecast stations"
 msgstr "Icecast 방송국 검색"
@@ -2437,13 +2437,13 @@ msgid "Search Magnatune"
 msgstr "Magnature 검색"
 
 msgid "Search Spotify"
-msgstr ""
+msgstr "Spotify 검색하기"
 
 msgid "Search Spotify (opens a new tab)"
-msgstr ""
+msgstr "Spotify 검색하기 (새 탭 열림)"
 
 msgid "Search Spotify (opens a new tab)..."
-msgstr ""
+msgstr "Spotify 검색하기 (새 탭 열림)..."
 
 msgid "Search for album covers..."
 msgstr "앨범 표지 검색..."
@@ -2521,7 +2521,7 @@ msgid "Show"
 msgstr "표시"
 
 msgid "Show Global Search Popup"
-msgstr ""
+msgstr "글로벌 검색 팝업 표시하기"
 
 msgid "Show OSD"
 msgstr "OSD 표시"
@@ -2536,7 +2536,7 @@ msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "반복/순서 섞기 모드를 변경할 때 알림 표시"
 
 msgid "Show a notification when I change the volume"
-msgstr "볼륨 변경시 알림 표시"
+msgstr "음량 변경시 알림 표시"
 
 msgid "Show a popup from the system tray"
 msgstr "시스템 트레이에서 팝업 표시"
@@ -2566,7 +2566,7 @@ msgid "Show in file browser..."
 msgstr "파일 브라우져에서 표시..."
 
 msgid "Show in various artists"
-msgstr "다양한 아티스트에서 표시"
+msgstr "다양한 아티스트에서 표시하기"
 
 msgid "Show only duplicates"
 msgstr "복사본만 표시"
@@ -2576,10 +2576,10 @@ msgstr "태그되지 않은 것만 표시"
 
 #, qt-format
 msgid "Show results from %1"
-msgstr ""
+msgstr "%1의 결과 표시하기"
 
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
+msgstr "\"좋아요\"와 \"싫어요\"버튼 표시하기"
 
 msgid "Show the scrobble button in the main window"
 msgstr "메인 창에서 청취기록 버튼 표시"
@@ -2597,7 +2597,7 @@ msgid "Shuffle all"
 msgstr "모두 순서 섞기"
 
 msgid "Shuffle by album"
-msgstr ""
+msgstr "앨범별로 순서섞기"
 
 msgid "&Shuffle mode"
 msgstr "순서 섞기 모드(&S)"
@@ -2612,7 +2612,7 @@ msgid "Signing in..."
 msgstr "로그인..."
 
 msgid "Similar artists"
-msgstr ""
+msgstr "비슷한 아티스트"
 
 msgid "Ska"
 msgstr "스카"
@@ -2690,7 +2690,7 @@ msgid "Standard"
 msgstr "표준"
 
 msgid "Starred"
-msgstr ""
+msgstr "별점"
 
 msgid "Start the playlist currently playing"
 msgstr "현재 재생중인 재생목록 시작"
@@ -2699,10 +2699,10 @@ msgid "Start transcoding"
 msgstr "변환 시작"
 
 msgid "Start typing in the search box above to find music on Grooveshark."
-msgstr ""
+msgstr "Grooveshark에서 음악을 찾으려면 위의 검색창에 입력을 시작하세요."
 
 msgid "Start typing in the search box above to find music on Spotify."
-msgstr ""
+msgstr "Spotify에서 음악을 찾으려면 위의 검색창에 입력을 시작하세요."
 
 #, qt-format
 msgid "Starting %1"
@@ -2750,19 +2750,19 @@ msgid "Super high (%1 fps)"
 msgstr "아주 높음 (%1 fps)"
 
 msgid "Super high (60 fps)"
-msgstr ""
+msgstr "아주 높음 (60 fps)"
 
 msgid "Supported formats"
 msgstr "지원가능한 형식"
 
 msgid "Switch provider"
-msgstr ""
+msgstr "제공자 전환하기"
 
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "Spotify 받은 편지함 동기화하기"
 
 msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "Spotify 재생목록 동기화하기"
 
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify 별표 표시된 트랙 동기화하는 중"
@@ -2801,7 +2801,7 @@ msgstr "%1 디렉터리가 유효하지 않습니다."
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "'%1' 재생목록이 비어 있거나 불러올 수 없습니다."
 
 msgid "The second value must be greater than the first one!"
 msgstr "두 번재 값이 반드시 첫 번째 값 보다 커야 합니다!"
@@ -2815,7 +2815,7 @@ msgstr "요청하신 사이트는 이미지가 아닙니다!"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "방금 업데이트한 클레멘타인 버전은 아래 나열된 새 기능으로 인해 전체 라이브러리를 다시 검색해야 합니다:"
+msgstr "방금 업데이트한 Clementine 버전은 아래 나열된 새 기능으로 인해 전체 라이브러리를 다시 검색해야 합니다:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatune 으로부터 메타데이터를 가져오는데 문제가 발생했습니다"
@@ -2861,7 +2861,7 @@ msgstr "이 앨범은 요청된 형식이 아닙니다."
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "클레멘타인이 지원하는 파일 형식을 보려면 먼저 이 장치를 연결하고 열어야 합니다."
+msgstr "Clementine이 지원하는 파일 형식을 보려면 먼저 이 장치를 연결하고 열어야 합니다."
 
 msgid "This device supports the following file formats:"
 msgstr "이 장치는 다음의 파일 형식을 지원합니다:"
@@ -2871,15 +2871,15 @@ msgstr "이 기기는 완벽하게 작동하지 않을 수 있음."
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 클레멘타인이 컴파일 되었습니다."
+msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 클레멘타인이 컴파일 되었습니다."
+msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "이 장치는 처음 연결 되었습니다. 클레멘타인은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
+msgstr "이 장치는 처음 연결 되었습니다. Clementine은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
 
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
@@ -2980,7 +2980,7 @@ msgid "Update changed library folders"
 msgstr "변경된 라이브러리 폴더 업데이트"
 
 msgid "Update the library when Clementine starts"
-msgstr "클레멘타인이 시작될 때 라이브러리 업데이트"
+msgstr "Clementine이 시작될 때 라이브러리 업데이트"
 
 #, qt-format
 msgid "Updating %1"
@@ -3034,7 +3034,7 @@ msgstr "사용 됨"
 
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "사용자 %1님은 Grooveshark Anywhere 계정이 없습니다"
 
 msgid "Username"
 msgstr "사용자이름"
@@ -3049,7 +3049,7 @@ msgid "Variable bit rate"
 msgstr "가변 비트 전송률"
 
 msgid "Various Artists"
-msgstr ""
+msgstr "다양한 아티스트"
 
 msgid "Various artists"
 msgstr "다양한 아티스트"
@@ -3078,7 +3078,7 @@ msgid "Volume %1%"
 msgstr "음량 %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "음량 이름"
 
 msgid "Vorbis"
 msgstr "Vorbis"
@@ -3096,12 +3096,12 @@ msgid "Weeks"
 msgstr "주"
 
 msgid "When Clementine starts"
-msgstr "클레멘타인이 시작할 때"
+msgstr "Clementine이 시작할 때"
 
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "앨범 아트를 찾을 때, 클레멘타인은 먼저 이러한 단어 중 하나가 포함된 사진 파일을 찾습니다\n일치하는 항목이 없으면 디렉터리에서 가장 큰 이미지를 사용합니다."
+msgstr "앨범 아트를 찾을 때, Clementine은 먼저 이러한 단어 중 하나가 포함된 사진 파일을 찾습니다\n일치하는 항목이 없으면 디렉터리에서 가장 큰 이미지를 사용합니다."
 
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC 주소"
@@ -3111,7 +3111,7 @@ msgstr "광대역 (WB)"
 
 #, qt-format
 msgid "Wii Remote %1: actived"
-msgstr ""
+msgstr "Wii 리모컨 %1: 활성화됨"
 
 #, qt-format
 msgid "Wii Remote %1: connected"
@@ -3196,16 +3196,16 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr "무료로 트랙을 스크롤할 수 있지만, <span style=\" font-weight:600;\">유료 구독자</span>만 클레멘타인에서 Last.fm 라디오를 스트리밍할 수 있습니다."
+msgstr "무료로 트랙을 스크롤할 수 있지만, <span style=\" font-weight:600;\">유료 구독자</span>만 Clementine에서 Last.fm 라디오를 스트리밍할 수 있습니다."
 
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "클레멘타인에서 Wii 리모컨을 사용할 수 있습니다. 자세한 내용은 <a href=\"http://www.clementine-player.org/wiimote\">클레멘타인 위키 페이지를 참조하십시오</a>.\n"
+msgstr "Clementine에서 Wii 리모컨을 사용할 수 있습니다. 자세한 내용은 <a href=\"http://www.clementine-player.org/wiimote\">Clementine 위키 페이지를 참조하십시오</a>.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "Grooveshark Anywhere 계정이 없습니다."
 
 msgid "You do not have a Spotify Premium account."
 msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
@@ -3213,10 +3213,10 @@ msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
 msgid ""
 "You have selected a Premium-only audio type but do not have any account "
 "details entered"
-msgstr "프리미엄 전용 오디오 유형을 선택했지만 계정 세부정보를 입력하지 않았습니다."
+msgstr "프리미엄 전용 오디오 유형을 선택했지만 계정 상세정보를 입력하지 않았습니다."
 
 msgid "You have selected an invalid audio type setting"
-msgstr ""
+msgstr "잘못된 오디오 유형 설정을 선택했습니다"
 
 msgid "You love this track"
 msgstr "당신은 이 트랙을 좋아합니다"
@@ -3225,25 +3225,25 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Clementine에서 전역 바로가기를 사용하려면 시스템 환경설정을 실행하고 \"<span style=\" font-style:italic;\">보조 장치에 대한 액세스 활성화</span>\"를 켜야 합니다."
 
 msgid "You will need to restart Clementine if you change the language."
-msgstr "언어를 변경을 하였다면 클레멘타인을 재시작 해야합니다."
+msgstr "언어를 변경을 하였다면 Clementine을 재시작 해야합니다."
 
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr ""
+msgstr "Last.fm 가입자가 아니기 때문에 Last.fm 라디오 방송국을 재생할 수 없습니다."
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
-msgstr ""
+msgstr "<b>%1</b>(으)로 로그인하셨습니다"
 
 msgid "Your Google credentials were incorrect"
-msgstr ""
+msgstr "사용자의 Google 자격 증명이 잘못되었습니다"
 
 msgid "Your Last.fm credentials were incorrect"
-msgstr ""
+msgstr "사용자의 Last.fm 자격 증명이 올바르지 않습니다"
 
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune의 계정정보가 잘 못 되었습니다."
@@ -3252,7 +3252,7 @@ msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
-msgstr ""
+msgstr "사용자의 gstreamer 설치에 'ofa' 플러그인이 없습니다. 이는 자동 태그 가져오기에 필요합니다. 'gstreamer-plugins-bad' 패키지를 설치해 보세요."
 
 msgid "Your library is empty!"
 msgstr "사용자의 라이브러리가 비어 있습니다!"
@@ -3265,7 +3265,7 @@ msgid "Your scrobbles: %1"
 msgstr "사용자의 청취 기록: %1"
 
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "사용자의 사용자이름 또는 비밀번호가 잘못되었습니다."
 
 msgid "Z-A"
 msgstr "Z-A"
@@ -3324,7 +3324,7 @@ msgid "greater than"
 msgstr "보다 큼"
 
 msgid "in the last"
-msgstr "마지막으로"
+msgstr "마지막에 있음"
 
 msgid "kbps"
 msgstr "kbps"
@@ -3333,25 +3333,25 @@ msgid "less than"
 msgstr "보다 작음"
 
 msgid "longest first"
-msgstr "가장 긴 순서"
+msgstr "가장 긴 것부터 먼저"
 
 msgid "move songs"
 msgstr "곡 이동하기"
 
 msgid "newest first"
-msgstr "가장 최신 순서"
+msgstr "최신 것부터 먼저"
 
 msgid "not equals"
 msgstr "같지 않음"
 
 msgid "not in the last"
-msgstr "마지막에 두지 않기"
+msgstr "마지막에 없음"
 
 msgid "not on"
-msgstr "켜지 않기"
+msgstr "켜지 않음"
 
 msgid "oldest first"
-msgstr "가장 오래된 순서"
+msgstr "가장 오래된 것부터 먼저"
 
 msgid "on"
 msgstr "켜기"
@@ -3367,10 +3367,10 @@ msgid "remove %n songs"
 msgstr "%n곡 제거"
 
 msgid "shortest first"
-msgstr "가장 짧은 순서"
+msgstr "가장 짧은 것부터 먼저"
 
 msgid "smallest first"
-msgstr "가장 작은 순서"
+msgstr "가장 작은 것부터 먼저"
 
 msgid "starts with"
 msgstr "시작:"
