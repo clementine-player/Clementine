@@ -530,6 +530,11 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
 
   // Read song information
   while (reader.readNextStartElement()) {
+    // skip multi-artist and multi-genre tags
+    if ((reader.name() == "artists") || (reader.name() == "genres")) {
+      reader.skipCurrentElement();
+      continue;
+    }
     if (reader.name() != "song") {
       ParsingError("song tag expected. Aborting scan.");
       return;
