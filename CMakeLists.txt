@@ -390,8 +390,8 @@ endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
 # QtIoCompressor isn't patched, so we can use a system version if it's
 # available
-find_path(QTIOCOMPRESSOR_INCLUDE_DIRS qtiocompressor.h PATH_SUFFIXES QtSolutions)
-find_library(QTIOCOMPRESSOR_LIBRARIES QtSolutions_IOCompressor-2.3)
+find_path(QTIOCOMPRESSOR_INCLUDE_DIRS qtiocompressor.h PATH_SUFFIXES qt5/QtSolutions)
+find_library(QTIOCOMPRESSOR_LIBRARIES Qt5Solutions_IOCompressor-2.3)
 if(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
   add_subdirectory(3rdparty/qtiocompressor)
   set(QTIOCOMPRESSOR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtiocompressor)
