@@ -93,7 +93,7 @@ void ProjectMVisualisation::InitProjectM() {
     if (!QFile::exists(path)) continue;
 
     // Don't use empty directories
-    if (QDir(path).entryList(QDir::Files | QDir::NoDotAndDotDot).isEmpty())
+    if (QDir(path).entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot).isEmpty())
       continue;
 
     preset_path = path;
