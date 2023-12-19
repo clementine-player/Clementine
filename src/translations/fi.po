@@ -180,7 +180,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Tietueet alkavat %-merkillä, esimerkiksi: %artist %album %title </p>\n\n<p>Jos ympäröit tietueen sisältävän tekstin aaltosulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
+msgstr "<p>Tietueet alkavat % merkillä, esim: %artist %album %title </p>\n\n<p>Jos ympäröit sisältävän tekstin sulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Edellyttää Grooveshark Anywhere tiliä."
@@ -278,16 +278,16 @@ msgid "Add new folder..."
 msgstr "Lisää uusi kansio..."
 
 msgid "Add search term"
-msgstr "Lisää hakutermi"
+msgstr "Lisää hakuehto"
 
 msgid "Add song album tag"
 msgstr "Lisää tunniste levyn nimi"
 
 msgid "Add song albumartist tag"
-msgstr "Lisää tunniste levyn esittäjä"
+msgstr "Lisää kappaleen levyn tunniste"
 
 msgid "Add song artist tag"
-msgstr "Lisää tunniste kappaleen esittäjä"
+msgstr "Lisää kappaleen esittäjä tunniste"
 
 msgid "Add song composer tag"
 msgstr "Lisää tunniste kappaleen säveltäjä"
@@ -362,7 +362,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Albumi (ihanteellinen voimakkuus kaikille kappaleille)"
 
 msgid "Album artist"
-msgstr "Albumin esittäjä"
+msgstr "Levyn esittäjä"
 
 msgid "Album info on jamendo.com..."
 msgstr "Albumin tiedot jamendo.comissa..."
@@ -425,7 +425,7 @@ msgid "An error occurred copying the iTunes database from the device"
 msgstr "iTunes-tietokantaa kopioitaessa laitteesta tapahtui virhe"
 
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr "iTunes-tietokannan kopiointi laitteeseen päättyi virheeseen"
+msgstr "iTunes-tietokannan kopiointi päättyi virheeseen"
 
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes-tietokantaa ladatessa tapahtui virhe"
@@ -479,7 +479,7 @@ msgid "Artist's initial"
 msgstr "Esittäjän nimen ensimmäinen kirjain"
 
 msgid "Audio format"
-msgstr "Äänimuoto"
+msgstr "Audio formaatti"
 
 msgid "Audio type"
 msgstr "Audio tyyppi"
@@ -603,7 +603,7 @@ msgid "Check for updates..."
 msgstr "Tarkista päivitykset..."
 
 msgid "Choose a name for your smart playlist"
-msgstr "Anna nimi älykkäälle soittolistalle"
+msgstr "Anna nimi soittolistalle"
 
 msgid "Choose automatically"
 msgstr "Valitse automaattisesti"
@@ -728,7 +728,7 @@ msgid "Configure Magnatune..."
 msgstr "Magnatune-asetukset..."
 
 msgid "Configure Shortcuts"
-msgstr "Pikanäppäinten asetukset"
+msgstr "Pikanäppäimet"
 
 msgid "Configure Spotify..."
 msgstr "Spotify asetukset..."
@@ -792,7 +792,7 @@ msgid "Couldn't open output file %1"
 msgstr "Ei voitu avata kohdetiedostoa %1"
 
 msgid "Cover Manager"
-msgstr "Kansikuvaselain"
+msgstr "Kansikuvat"
 
 msgid "Cover art from embedded image"
 msgstr "Kansikuva sulautetusta kuvasta"
@@ -1026,10 +1026,10 @@ msgid "Don't stop!"
 msgstr "Älä lopeta!"
 
 msgid "Double click to open"
-msgstr "Kaksoisnapsauta avataksesi"
+msgstr "Avaa painamalla kahdesti"
 
 msgid "Double clicking a song will..."
-msgstr "Kappaleen kaksoisnapsautus..."
+msgstr "Kappaleen painaminen kahdesti..."
 
 msgid "Download directory"
 msgstr "Latauskansio"
@@ -1130,13 +1130,13 @@ msgstr "Anna uusi nimi tälle soittolistalle"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Anna <b>esittäjä</b> tai <b>tunniste</b> ja aloita Last.fm radion kuuntelu."
+msgstr "Anna <b>artisti</b> tai <b>tunniste</b> ja kuuntele Last.fm radiota."
 
 msgid "Enter search terms here"
 msgstr "Etsi tästä"
 
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Anna suoratoiston osoite:"
+msgstr "Anna url-osoite:"
 
 msgid "Entire collection"
 msgstr "Koko kokoelma"
@@ -1387,16 +1387,16 @@ msgid "Group by Artist"
 msgstr "Järjestä esittäjän mukaan"
 
 msgid "Group by Artist/Album"
-msgstr "Järjestä esittäjän/albumin mukaan"
+msgstr "Järjestä esittäjän/levyn mukaan"
 
 msgid "Group by Artist/Year - Album"
-msgstr "Järjestä esittäjän/vuoden - albumin mukaan"
+msgstr "Järjestä esittäjän/vuoden mukaan"
 
 msgid "Group by Genre/Album"
 msgstr "Järjestä tyylin/albumin mukaan"
 
 msgid "Group by Genre/Artist/Album"
-msgstr "Järjestä tyylin/esittäjän/albumin mukaan"
+msgstr "Järjestä tyylin/esittäjän/levyn mukaan"
 
 msgid "HTTP proxy"
 msgstr "HTTP-välityspalvelin"
@@ -1449,7 +1449,7 @@ msgid ""
 msgstr "Jos käytät ohjainta useammassa kuin yhdessä tietokoneessa, tämä nimi auttaa sinua valitsemaan puhelimen, johon haluat muodostaa yhteyden."
 
 msgid "Ignore \"The\" in artist names"
-msgstr "Älä huomioi sanaa \"The\" esiintyjien nimissä"
+msgstr "Älä huomioi sanaa \"The\" esittäjän nimissä"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Kuvat (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -1538,7 +1538,7 @@ msgid "Jamendo database"
 msgstr "Jamendo-tietokanta"
 
 msgid "Jump to the currently playing track"
-msgstr "Näytä parhaillaan soiva kappale"
+msgstr "Näytä soiva kappale"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
@@ -1643,7 +1643,7 @@ msgid "Library rescan notice"
 msgstr "Ilmoitus kirjaston läpikäynnistä"
 
 msgid "Library search"
-msgstr "Kirjastohaku"
+msgstr "Haku kirjastosta"
 
 msgid "Limits"
 msgstr "Rajat"
@@ -1771,7 +1771,7 @@ msgid "Manufacturer"
 msgstr "Valmistaja"
 
 msgid "Match every search term (AND)"
-msgstr "Täyttää jokaisen hakuehdon (AND)"
+msgstr "Täsmää jokaiseen hakuehtoon (AND)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Täyttää yhden tai useampia hakuehtoja (OR)"
@@ -1917,7 +1917,7 @@ msgstr "Ei pitkiä lohkoja"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Ei osumia haulle. Tyhjennä hakukenttä näyttääksesi koko soittolistan uudelleen."
+msgstr "Ei osumia. Tyhjennä hakukenttä ja koko soittolista näytetään uudelleen."
 
 msgid "No short blocks"
 msgstr "Ei lyhyitä lohkoja"
@@ -1953,7 +1953,7 @@ msgid "Not installed"
 msgstr "Ei asennettu"
 
 msgid "Not mounted - double click to mount"
-msgstr "Ei liitetty - kaksoisnapsauta liittääksesi"
+msgstr "Ei liitetty - paina kahdesti ja yhdistä"
 
 msgid "Notification type"
 msgstr "Ilmoituksen tyyppi"
@@ -1984,7 +1984,7 @@ msgid "Open %1 in browser"
 msgstr "Avaa %1 selaimessa"
 
 msgid "Open &audio CD..."
-msgstr "Avaa &ääni-CD..."
+msgstr "Avaa &audio CD..."
 
 msgid "Open device"
 msgstr "Avaa laite"
@@ -2083,7 +2083,7 @@ msgid "Play Artist or Tag"
 msgstr "Toista esittäjä tai tunniste"
 
 msgid "Play artist radio..."
-msgstr "Toista esittäjä radiota..."
+msgstr "Toista esittäjää radiosta..."
 
 msgid "Play count"
 msgstr "Soittokertoja"
@@ -2101,7 +2101,7 @@ msgid "Play if there is nothing already playing"
 msgstr "Aloita toisto, jos mikään ei soi parhaillaan"
 
 msgid "Play last.fm artist radio"
-msgstr "Toista last.fm esittäjä radiota"
+msgstr "Toista esittäjää last.fm radiosta"
 
 msgid "Play last.fm tag radio"
 msgstr "Toista last.fm tunniste radiota"
@@ -2164,7 +2164,7 @@ msgid "Preferred album art filenames (comma separated)"
 msgstr "Ensisijainen tiedostonimi albumikuvitukselle (pilkuin eroteltu)"
 
 msgid "Preferred audio format"
-msgstr "Ensisijainen äänimuoto"
+msgstr "Ensisijainen audio formaatti"
 
 msgid "Preferred format"
 msgstr "Ensisijainen muoto"
@@ -2204,7 +2204,7 @@ msgid "Progress"
 msgstr "Edistyminen"
 
 msgid "Push Wiiremote button"
-msgstr "Paina Wii Remoten nappia"
+msgstr "Paina Wii Remote nappia"
 
 msgid "Put songs in a random order"
 msgstr "Aseta kappaleet satunnaiseen järjestykseen"
@@ -2555,7 +2555,7 @@ msgid "Show in various artists"
 msgstr "Näytä kohdassa \"Useita esittäjiä\""
 
 msgid "Show only duplicates"
-msgstr "Näytä vain kaksoiskappaleet"
+msgstr "Näytä kaksoiskappaleet"
 
 msgid "Show only untagged"
 msgstr "Näytä vain vailla tunnistetta olevat"
@@ -2643,10 +2643,10 @@ msgid "Sorry"
 msgstr "Pahoittelut"
 
 msgid "Sort by genre (alphabetically)"
-msgstr "Järjestä tyylin mukaan (aakkosjärjestyksessä)"
+msgstr "Järjestä tyyli (aakkosjen mukaan)"
 
 msgid "Sort by genre (by popularity)"
-msgstr "Järjestä tyylin mukaan (Järjestä suosion mukaan)"
+msgstr "Järjestä tyyli (suosion mukaan)"
 
 msgid "Sort by station name"
 msgstr "Järjestä aseman nimen mukaan"
@@ -2682,13 +2682,13 @@ msgid "Start the playlist currently playing"
 msgstr "Käynnistä toistettava soittolista"
 
 msgid "Start transcoding"
-msgstr "Aloita muunnos"
+msgstr "Aloita muuntaminen"
 
 msgid "Start typing in the search box above to find music on Grooveshark."
-msgstr "Kirjoita yllä olevaan hakukenttään ja löydät musiikkia Grooveshark:sta."
+msgstr "Kirjoita hakukenttään ja löydät musiikkia Grooveshark:sta."
 
 msgid "Start typing in the search box above to find music on Spotify."
-msgstr "Kirjoita yllä olevaan hakukenttään ja löydät musiikkia Spotify:sta."
+msgstr "Kirjoita hakukenttään ja löydät musiikkia Spotify:sta."
 
 #, qt-format
 msgid "Starting %1"
@@ -2742,7 +2742,7 @@ msgid "Supported formats"
 msgstr "Tuetut muodot"
 
 msgid "Switch provider"
-msgstr "Vaihda palveluntarjoajaa"
+msgstr "Vaihda palvelua"
 
 msgid "Syncing Spotify inbox"
 msgstr "Synkronoi Spotify saapuneet"
@@ -2839,7 +2839,7 @@ msgstr "Kolmas taso"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr "Tämä toiminto luo tietokannan, jonka koko voi olla jopa 150 megatavua.\nHaluatko silti jatkaa?"
+msgstr "Tämä luo tietokannan, jonka koko voi olla jopa 150 megatavua.\nHaluatko jatkaa?"
 
 msgid "This album is not available in the requested format"
 msgstr "Tämä albumi ei ole saatavilla haluamassasi muodossa"
@@ -2922,7 +2922,7 @@ msgid "Transcoder Log"
 msgstr "Muunnosloki"
 
 msgid "Transcoding"
-msgstr "Muunnos"
+msgstr "Muuntaminen"
 
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
@@ -3132,7 +3132,7 @@ msgid "Windows Media 64k (Premium only)"
 msgstr "Windows Media 64k (vain Premium)"
 
 msgid "Windows Media audio"
-msgstr "Windows Media -ääni"
+msgstr "Windows Media audio"
 
 msgid "Would you like to run a full rescan right now?"
 msgstr "Haluatko suorittaa kirjaston läpikäynnin nyt?"
@@ -3176,7 +3176,7 @@ msgid ""
 msgstr "Voit kuunnella Magnatune-kappaleita ilmaiseksi ilman tunnusta. Jäsenyyden osto poistaa viestit kappaleiden lopusta."
 
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Voit kuunnella taustaääniä samalla kun kuuntelet haluamaasi kappaletta."
+msgstr "Voit kuulla taustaääniä samanaikaisesti muun musiikin kanssa."
 
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
