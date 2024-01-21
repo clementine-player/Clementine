@@ -26,7 +26,9 @@
 
 class AlbumCoverChoiceController;
 class Application;
+#ifdef HAVE_BACKGROUND_STREAMS
 class FullscreenHypnotoad;
+#endif
 class KittenLoader;
 
 class QAction;
@@ -71,7 +73,10 @@ class NowPlayingWidget : public QWidget {
 
  public slots:
   void Stopped();
+
+#ifdef HAVE_BACKGROUND_STREAMS
   void AllHail(bool hypnotoad);
+#endif
   void EnableKittens(bool aww);
 
  protected:
@@ -104,7 +109,9 @@ class NowPlayingWidget : public QWidget {
   void ShowCover();
   void SearchCoverAutomatically();
 
+#ifdef HAVE_BACKGROUND_STREAMS
   void Bask();
+#endif
 
   void AutomaticCoverSearchDone();
 
@@ -147,10 +154,12 @@ class NowPlayingWidget : public QWidget {
   QPixmap previous_track_;
   qreal previous_track_opacity_;
 
+#ifdef HAVE_BACKGROUND_STREAMS
   static const char* kHypnotoadPath;
   QAction* bask_in_his_glory_action_;
   std::unique_ptr<QMovie> hypnotoad_;
   std::unique_ptr<FullscreenHypnotoad> big_hypnotoad_;
+#endif
 
   std::unique_ptr<QMovie> spinner_animation_;
   bool downloading_covers_;

@@ -18,11 +18,13 @@
 #include "settingsdialog.h"
 
 #include "appearancesettingspage.h"
+#ifdef HAVE_BACKGROUND_STREAMS
 #include "backgroundstreamssettingspage.h"
+#include "core/backgroundstreams.h"
+#endif
 #include "behavioursettingspage.h"
 #include "config.h"
 #include "core/application.h"
-#include "core/backgroundstreams.h"
 #include "core/logging.h"
 #include "core/networkproxyfactory.h"
 #include "core/player.h"
@@ -89,14 +91,13 @@ void SettingsItemDelegate::paint(QPainter* painter,
   }
 }
 
-SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
-                               QWidget* parent)
+SettingsDialog::SettingsDialog(Application* app, QWidget* parent)
     : QDialog(parent),
       app_(app),
       model_(app_->directory_model()),
       gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
       song_info_view_(nullptr),
-      streams_(streams),
+      background_streams_(nullptr),
       global_search_(app_->global_search()),
       appearance_(app_->appearance()),
       ui_(new Ui_SettingsDialog),
@@ -110,8 +111,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   general->AddPage(Page_Behaviour, new BehaviourSettingsPage(this));
   general->AddPage(Page_Library, new LibrarySettingsPage(this));
   general->AddPage(Page_SongMetadata, new SongMetadataSettingsPage(this));
+#ifdef HAVE_BACKGROUND_STREAMS
   general->AddPage(Page_BackgroundStreams,
                    new BackgroundStreamsSettingsPage(this));
+#endif
   general->AddPage(Page_Proxy, new NetworkProxySettingsPage(this));
   general->AddPage(Page_Transcoding, new TranscoderSettingsPage(this));
   general->AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this));

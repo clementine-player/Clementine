@@ -39,7 +39,9 @@
 
 #include "core/appearance.h"
 #include "core/application.h"
+#ifdef HAVE_BACKGROUND_STREAMS
 #include "core/backgroundstreams.h"
+#endif
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/deletefiles.h"
@@ -310,8 +312,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Start initialising the player
   qLog(Debug) << "Initialising player";
   app_->player()->Init();
+#ifdef HAVE_BACKGROUND_STREAMS
   background_streams_ = new BackgroundStreams(app_->player()->engine(), this);
   background_streams_->LoadStreams();
+#endif
 
   // Models
   qLog(Debug) << "Creating models";
@@ -392,13 +396,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       IconLoader::Load("document-save", IconLoader::Base));
   ui_->action_full_library_scan->setIcon(
       IconLoader::Load("view-refresh", IconLoader::Base));
-  ui_->action_rain->setIcon(
-      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
-  ui_->action_hypnotoad->setIcon(
-      IconLoader::Load("hypnotoad", IconLoader::Base));
   ui_->action_kittens->setIcon(IconLoader::Load("kittens", IconLoader::Base));
-  ui_->action_enterprise->setIcon(
-      IconLoader::Load("enterprise", IconLoader::Base));
   ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
 
   // File view connections
@@ -495,9 +493,29 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(this, SIGNAL(NewDebugConsole(Console*)), app_,
           SIGNAL(NewDebugConsole(Console*)));
 
-  background_streams_->AddAction("Rain", ui_->action_rain);
-  background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
-  background_streams_->AddAction("Make it so!", ui_->action_enterprise);
+  // Add menus for background streams
+#ifdef HAVE_BACKGROUND_STREAMS
+  QAction* action_rain =
+      ui_->menu_extras->addAction(tr("Rain"));
+  action_rain->setIcon(
+      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
+  action_rain->setCheckable(true);
+  background_streams_->AddAction("Rain", action_rain);
+
+  QAction* action_hypnotoad =
+      ui_->menu_extras->addAction(tr("All Glory to the Hypnotoad!"));
+  action_hypnotoad->setIcon(
+      IconLoader::Load("hypnotoad", IconLoader::Base));
+  action_hypnotoad->setCheckable(true);
+  background_streams_->AddAction("Hypnotoad", action_hypnotoad);
+
+    QAction* action_enterprise =
+      ui_->menu_extras->addAction(tr("Make it so!"));
+  action_enterprise->setIcon(
+      IconLoader::Load("enterprise", IconLoader::Base));
+  action_enterprise->setCheckable(true);
+  background_streams_->AddAction("Make it so!", action_enterprise);
+#endif
 
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(
@@ -938,8 +956,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(app_->player(), SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
   connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
           SLOT(NowPlayingWidgetPositionChanged(bool)));
-  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing,
+#ifdef HAVE_BACKGROUND_STREAMS
+  connect(action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing,
           SLOT(AllHail(bool)));
+#endif
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing,
           SLOT(EnableKittens(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), app_->network_remote(),
@@ -2718,10 +2738,12 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
 void MainWindow::ShowCoverManager() { cover_manager_->show(); }
 
 SettingsDialog* MainWindow::CreateSettingsDialog() {
-  SettingsDialog* settings_dialog =
-      new SettingsDialog(app_, background_streams_);
+  SettingsDialog* settings_dialog = new SettingsDialog(app_);
   settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
   settings_dialog->SetSongInfoView(song_info_view_);
+#ifdef HAVE_BACKGROUND_STREAMS
+  settings_dialog->SetBackgroundStreams(background_streams_);
+#endif
 
   // Settings
   connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));

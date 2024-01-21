@@ -41,6 +41,7 @@ class BackgroundStreamsSettingsPage : public SettingsPage {
 
  private:
   Ui_BackgroundStreamsSettingsPage* ui_;
+  bool loaded_;
 };
 
 #endif  // BACKGROUNDSTREAMSSETTINGSPAGE_H

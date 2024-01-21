@@ -55,8 +55,7 @@ class SettingsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  SettingsDialog(Application* app, BackgroundStreams* streams,
-                 QWidget* parent = nullptr);
+  SettingsDialog(Application* app, QWidget* parent = nullptr);
   ~SettingsDialog();
 
   enum Page {
@@ -101,6 +100,7 @@ class SettingsDialog : public QDialog {
     manager_ = manager;
   }
   void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
+  void SetBackgroundStreams(BackgroundStreams* streams) { background_streams_ = streams; }
 
   bool is_loading_settings() const { return loading_settings_; }
 
@@ -109,7 +109,7 @@ class SettingsDialog : public QDialog {
   GlobalShortcuts* global_shortcuts_manager() const { return manager_; }
   const GstEngine* gst_engine() const { return gst_engine_; }
   SongInfoView* song_info_view() const { return song_info_view_; }
-  BackgroundStreams* background_streams() const { return streams_; }
+  BackgroundStreams* background_streams() const { return background_streams_; }
   GlobalSearch* global_search() const { return global_search_; }
   Appearance* appearance() const { return appearance_; }
 
@@ -149,7 +149,7 @@ class SettingsDialog : public QDialog {
   GlobalShortcuts* manager_;
   const GstEngine* gst_engine_;
   SongInfoView* song_info_view_;
-  BackgroundStreams* streams_;
+  BackgroundStreams* background_streams_;
   GlobalSearch* global_search_;
   Appearance* appearance_;
 

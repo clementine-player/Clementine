@@ -90,6 +90,8 @@ const char* GstEngine::kAutoSink = "autoaudiosink";
 const char* GstEngine::kOutFormatDetect = "";
 const char* GstEngine::kOutFormatS16LE = "S16LE";
 const char* GstEngine::kOutFormatF32LE = "F32LE";
+
+#ifdef HAVE_BACKGROUND_STREAMS
 const char* GstEngine::kHypnotoadPipeline =
     "audiotestsrc wave=6 ! "
     "audioecho intensity=1 delay=50000000 ! "
@@ -100,6 +102,7 @@ const char* GstEngine::kHypnotoadPipeline =
 const char* GstEngine::kEnterprisePipeline =
     "audiotestsrc wave=5 ! "
     "audiocheblimit mode=0 cutoff=120";
+#endif // HAVE_BACKGROUND_STREAMS
 
 GstEngine::GstEngine(Application* app)
     : Engine::Base(),
@@ -850,19 +853,25 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(
     const MediaPlaybackRequest& req, qint64 end_nanosec) {
   shared_ptr<GstEnginePipeline> ret = CreatePipeline();
 
+#ifdef HAVE_BACKGROUND_STREAMS
   if (req.url_.scheme() == "hypnotoad") {
     if (!ret->InitFromString(kHypnotoadPipeline)) {
       qLog(Error) << "Could not initialize pipeline" << kHypnotoadPipeline;
       ret.reset();
     }
-  } else if (req.url_.scheme() == "enterprise") {
+    return ret;
+  }
+  if (req.url_.scheme() == "enterprise") {
     if (!ret->InitFromString(kEnterprisePipeline)) {
       qLog(Error) << "Could not initialize pipeline" << kEnterprisePipeline;
       ret.reset();
     }
-  } else {
-    if (!ret->InitFromReq(req, end_nanosec)) ret.reset();
+    return ret;
   }
+#endif // HAVE_BACKGROUND_STREAMS
+
+  if (!ret->InitFromReq(req, end_nanosec))
+    ret.reset();
 
   return ret;
 }
@@ -876,6 +885,8 @@ void GstEngine::RemoveBufferConsumer(BufferConsumer* consumer) {
   buffer_consumers_.removeAll(consumer);
   if (current_pipeline_) current_pipeline_->RemoveBufferConsumer(consumer);
 }
+
+#ifdef HAVE_BACKGROUND_STREAMS
 
 int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   // We don't want to get metadata messages or end notifications.
@@ -929,6 +940,8 @@ void GstEngine::SetBackgroundStreamVolume(int id, int volume) {
   Q_ASSERT(pipeline);
   pipeline->SetVolume(volume);
 }
+
+#endif // HAVE_BACKGROUND_STREAMS
 
 void GstEngine::BufferingStarted() {
   if (buffering_task_id_ != -1) {

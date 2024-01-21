@@ -35,7 +35,9 @@
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
 #include "covers/kittenloader.h"
+#ifdef HAVE_BACKGROUND_STREAMS
 #include "fullscreenhypnotoad.h"
+#endif
 #include "library/librarybackend.h"
 #include "networkremote/networkremote.h"
 #include "ui/albumcoverchoicecontroller.h"
@@ -43,7 +45,9 @@
 
 const char* NowPlayingWidget::kSettingsGroup = "NowPlayingWidget";
 
+#ifdef HAVE_BACKGROUND_STREAMS
 const char* NowPlayingWidget::kHypnotoadPath = ":/hypnotoad.gif";
+#endif
 
 // Space between the cover and the details in small mode
 const int NowPlayingWidget::kPadding = 2;
@@ -76,7 +80,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
       fade_animation_(new QTimeLine(1000, this)),
       details_(new QTextDocument(this)),
       previous_track_opacity_(0.0),
+#ifdef HAVE_BACKGROUND_STREAMS
       bask_in_his_glory_action_(nullptr),
+#endif
       downloading_covers_(false),
       aww_(false),
       kittens_(nullptr),
@@ -142,10 +148,12 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   above_statusbar_action_->setChecked(
       s.value("above_status_bar", false).toBool());
 
+#ifdef HAVE_BACKGROUND_STREAMS
   bask_in_his_glory_action_ =
       menu_->addAction(tr("ALL GLORY TO THE HYPNOTOAD"));
   bask_in_his_glory_action_->setVisible(false);
   connect(bask_in_his_glory_action_, SIGNAL(triggered()), SLOT(Bask()));
+#endif // HAVE_BACKGROUND_STREAMS
 
   // Animations
   connect(show_hide_animation_, SIGNAL(frameChanged(int)),
@@ -377,10 +385,14 @@ void NowPlayingWidget::paintEvent(QPaintEvent* e) {
 void NowPlayingWidget::DrawContents(QPainter* p) {
   switch (mode_) {
     case SmallSongDetails:
+
+#ifdef HAVE_BACKGROUND_STREAMS
       if (hypnotoad_) {
         p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_,
                       hypnotoad_->currentPixmap());
-      } else {
+      } else 
+#endif
+      {
         // Draw the cover
         p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
         if (downloading_covers_) {
@@ -406,10 +418,13 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
                   Qt::black);
 
       // Draw the cover
+#ifdef HAVE_BACKGROUND_STREAMS
       if (hypnotoad_) {
         p->drawPixmap(x_offset, kTopBorder, total_size, total_size,
                       hypnotoad_->currentPixmap());
-      } else {
+      } else 
+#endif
+      {
         p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
         if (downloading_covers_) {
           p->drawPixmap(x_offset + 45, 35, 16, 16,
@@ -448,10 +463,13 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
                   Qt::black);
 
       // Draw the cover
+#ifdef HAVE_BACKGROUND_STREAMS
       if (hypnotoad_) {
         p->drawPixmap(x_offset, kTopBorder, total_size, total_size,
                       hypnotoad_->currentPixmap());
-      } else {
+      } else 
+#endif
+      {
         p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
         if (downloading_covers_) {
           p->drawPixmap(x_offset + 45, 35, 16, 16,
@@ -477,10 +495,13 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       }
 
       // Draw the cover
+#ifdef HAVE_BACKGROUND_STREAMS
       if (hypnotoad_) {
         p->drawPixmap(x_offset, kTopBorder, cover_size, cover_size,
                       hypnotoad_->currentPixmap());
-      } else {
+      } else 
+#endif
+      {
         p->drawPixmap(x_offset, kTopBorder, cover_size, cover_size, cover_);
         if (downloading_covers_) {
           p->drawPixmap(x_offset + 45, 35, 16, 16,
@@ -554,7 +575,9 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
         !art_is_not_set);
   }
 
+#ifdef HAVE_BACKGROUND_STREAMS
   bask_in_his_glory_action_->setVisible(static_cast<bool>(hypnotoad_));
+#endif
 
   // show the menu
   menu_->popup(mapToGlobal(e->pos()));
@@ -562,7 +585,12 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
 
 void NowPlayingWidget::mouseReleaseEvent(QMouseEvent* e) {
   // Same behaviour as right-click > Show Fullsize
-  if (e->button() == Qt::LeftButton && !aww_ && !hypnotoad_.get()) {
+  bool can_show_cover = true;
+  if (aww_) can_show_cover = false;
+#ifdef HAVE_BACKGROUND_STREAMS
+  if (hypnotoad_.get()) can_show_cover = false;
+#endif
+  if (e->button() == Qt::LeftButton && can_show_cover) {
     ShowCover();
   }
 }
@@ -589,6 +617,8 @@ void NowPlayingWidget::FitCoverWidth(bool fit) {
   s.setValue("fit_cover_width", fit_width_);
 }
 
+#ifdef HAVE_BACKGROUND_STREAMS
+
 void NowPlayingWidget::AllHail(bool hypnotoad) {
   if (hypnotoad) {
     hypnotoad_.reset(new QMovie(kHypnotoadPath, QByteArray(), this));
@@ -600,6 +630,8 @@ void NowPlayingWidget::AllHail(bool hypnotoad) {
     update();
   }
 }
+
+#endif // HAVE_BACKGROUND_STREAMS
 
 void NowPlayingWidget::EnableKittens(bool aww) {
   if (!kittens_ && aww) {
@@ -649,6 +681,8 @@ void NowPlayingWidget::SearchCoverAutomatically() {
   GetCoverAutomatically();
 }
 
+#ifdef HAVE_BACKGROUND_STREAMS
+
 void NowPlayingWidget::Bask() {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
   QScreen* screen = QWidget::screen();
@@ -661,6 +695,8 @@ void NowPlayingWidget::Bask() {
   if (screen) big_hypnotoad_->setGeometry(screen->availableGeometry());
   big_hypnotoad_->showFullScreen();
 }
+
+#endif // HAVE_BACKGROUND_STREAMS
 
 void NowPlayingWidget::dragEnterEvent(QDragEnterEvent* e) {
   if (AlbumCoverChoiceController::CanAcceptDrag(e)) {
