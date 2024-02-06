@@ -41,7 +41,7 @@ Compile and install:
 
     cd bin
     cmake ..
-    make -jd$(proc)
+    make -j$(nproc)
     sudo make install
 
 See the Wiki for more instructions and a list of dependencies:
