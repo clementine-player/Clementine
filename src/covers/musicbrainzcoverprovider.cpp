@@ -26,7 +26,7 @@
 #include "core/closure.h"
 #include "core/network.h"
 
-using std::mem_fun;
+using std::mem_fn;
 
 namespace {
 
@@ -89,7 +89,7 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
 void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
   int finished_count = std::count_if(replies.constBegin(), replies.constEnd(),
-                                     mem_fun(&QNetworkReply::isFinished));
+                                     mem_fn(&QNetworkReply::isFinished));
   if (finished_count == replies.size()) {
     QString cover_name = cover_names_.take(id);
     QList<CoverSearchResult> results;
