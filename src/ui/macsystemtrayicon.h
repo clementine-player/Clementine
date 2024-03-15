@@ -33,7 +33,7 @@ class MacSystemTrayIcon : public SystemTrayIcon {
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
                  QAction* stop_after, QAction* next, QAction* mute,
-                 QAction* love, QAction* quit);
+                 QAction* show_hide, QAction* love, QAction* quit);
 
   void SetNowPlaying(const Song& song, const QString& image_path);
   void ClearNowPlaying();

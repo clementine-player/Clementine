@@ -430,6 +430,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()),
           SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), app_->player(), SLOT(Mute()));
+  connect(ui_->action_show_hide, SIGNAL(triggered()), SLOT(ToggleShowHide()));
+
 #ifdef HAVE_LIBLASTFM
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), app_->scrobbler(),
@@ -825,7 +827,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
     tray_icon_->SetupMenu(ui_->action_previous_track, ui_->action_play_pause,
                           ui_->action_stop, ui_->action_stop_after_this_track,
                           ui_->action_next_track, ui_->action_mute,
-                          ui_->action_love, ui_->action_quit);
+                          ui_->action_show_hide, ui_->action_love, ui_->action_quit);
     connect(tray_icon_, SIGNAL(PlayPause()), app_->player(), SLOT(PlayPause()));
     connect(tray_icon_, SIGNAL(SeekForward()), app_->player(),
             SLOT(SeekForward()));
