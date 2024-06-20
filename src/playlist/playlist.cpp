@@ -1241,6 +1241,7 @@ void Playlist::UpdateItems(const SongList& songs) {
       }
     }
   }
+  connect(backend_,SIGNAL(PlaylistSaved(int)),SIGNAL(PlaylistSongsLoaded(int)));
   Save();
 }
 
