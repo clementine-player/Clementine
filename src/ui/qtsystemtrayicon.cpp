@@ -36,6 +36,7 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
       action_stop_(nullptr),
       action_stop_after_this_track_(nullptr),
       action_mute_(nullptr),
+      action_show_hide_(nullptr),
       action_love_(nullptr) {
   QIcon theme_icon = IconLoader::Load("clementine-panel", IconLoader::Base);
   QIcon theme_icon_grey =
@@ -103,8 +104,8 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
 
 void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
                                  QAction* stop, QAction* stop_after,
-                                 QAction* next, QAction* mute, QAction* love,
-                                 QAction* quit) {
+                                 QAction* next, QAction* mute, QAction* show_hide, 
+                                 QAction* love, QAction* quit) {
   // Creating new actions and connecting them to old ones. This allows us to
   // use old actions without displaying shortcuts that can not be used when
   // Clementine's window is hidden
@@ -123,6 +124,8 @@ void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
       menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
   action_mute_->setCheckable(true);
   action_mute_->setChecked(mute->isChecked());
+  action_show_hide_ = 
+      menu_->addAction(show_hide->icon(), show_hide->text(), show_hide, SLOT(trigger()));
 
   menu_->addSeparator();
 #ifdef HAVE_LIBLASTFM
