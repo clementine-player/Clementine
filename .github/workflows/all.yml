@@ -110,7 +110,7 @@ jobs:
       - build_source
     steps:
       - uses: actions/checkout@v1.2.0
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: release_artifacts
       - name: Create draft pre-release
