@@ -27,22 +27,26 @@
 #endif
 
 #include <QDir>
+#include <QDirIterator>
 #include <QtDebug>
+#include <set>
 
 ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                                          QObject* parent)
     : QAbstractItemModel(parent), vis_(vis) {
   // Find presets
-  QDir preset_dir(vis_->preset_url());
-  QStringList presets(
-      preset_dir.entryList(QStringList() << "*.milk"
-                                         << "*.prjm",
+  QDirIterator it(vis_->preset_url(),
+                  QStringList() << "*.milk" << "*.prjm",
                            QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
-                           QDir::Name | QDir::IgnoreCase));
+                           QDirIterator::Subdirectories);
+  std::set<std::pair<QString, QString>> files;
+  while (it.hasNext()) {
+    it.next();
+    files.insert({it.filePath(), it.fileName()});
+  }
 
-  for (const QString& filename : presets) {
-    all_presets_ << Preset(preset_dir.absoluteFilePath(filename), filename,
-                           false);
+  for (const auto& [filePath, fileName] : files) {
+    all_presets_ << Preset(filePath, fileName, false);
   }
 }
 
