@@ -32,6 +32,11 @@ target_link_libraries(clementine-tagreader
   z
 )
 
+set_property(
+  TARGET clementine-tagreader
+  PROPERTY CXX_STANDARD 17
+)
+
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
   target_link_libraries(clementine-tagreader
     execinfo

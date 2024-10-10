@@ -28,16 +28,24 @@ optional_source(HAVE_GOOGLE_DRIVE
 
 qt5_wrap_cpp(MOC ${HEADERS})
 
-protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${MESSAGES})
-
 add_library(libclementine-tagreader STATIC
-  ${PROTO_SOURCES}
   ${SOURCES}
   ${MOC}
 )
 
+protobuf_generate(
+  LANGUAGE cpp
+  TARGET libclementine-tagreader
+  PROTOS ${MESSAGES}
+)
+
+set_property(
+  TARGET libclementine-tagreader
+  PROPERTY CXX_STANDARD 17
+)
+
 target_link_libraries(libclementine-tagreader
-  ${PROTOBUF_LIBRARY}
+  protobuf::libprotobuf
   libclementine-common
 )
 
