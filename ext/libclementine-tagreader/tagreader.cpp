@@ -198,7 +198,7 @@ void TagReader::ReadFile(const QString& filename,
     // Find album artists
     TagLib::APE::ItemListMap::ConstIterator it = items.find("ALBUM ARTIST");
     if (it != items.end()) {
-      TagLib::StringList album_artists = it->second.toStringList();
+      TagLib::StringList album_artists = it->second.values();
       if (!album_artists.isEmpty()) {
         Decode(album_artists.front(), nullptr, song->mutable_albumartist());
       }
@@ -243,22 +243,22 @@ void TagReader::ReadFile(const QString& filename,
     }
 
     if (items.contains("BPM")) {
-      Decode(items["BPM"].toStringList().toString(", "), nullptr,
+      Decode(items["BPM"].values().toString(", "), nullptr,
              song->mutable_performer());
     }
 
     if (items.contains("PERFORMER")) {
-      Decode(items["PERFORMER"].toStringList().toString(", "), nullptr,
+      Decode(items["PERFORMER"].values().toString(", "), nullptr,
              song->mutable_performer());
     }
 
     if (items.contains("COMPOSER")) {
-      Decode(items["COMPOSER"].toStringList().toString(", "), nullptr,
+      Decode(items["COMPOSER"].values().toString(", "), nullptr,
              song->mutable_composer());
     }
 
     if (items.contains("GROUPING")) {
-      Decode(items["GROUPING"].toStringList().toString(" "), nullptr,
+      Decode(items["GROUPING"].values().toString(" "), nullptr,
              song->mutable_grouping());
     }
 
@@ -565,8 +565,8 @@ void TagReader::ReadFile(const QString& filename,
   if (fileref->audioProperties()) {
     song->set_bitrate(fileref->audioProperties()->bitrate());
     song->set_samplerate(fileref->audioProperties()->sampleRate());
-    song->set_length_nanosec(fileref->audioProperties()->length() *
-                             kNsecPerSec);
+    song->set_length_nanosec(fileref->audioProperties()->lengthInMilliseconds() *
+                             kNsecPerMsec);
   }
 
   // Get the filetype if we can
@@ -1376,9 +1376,9 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" &&
       title.endsWith(".mp3", Qt::CaseInsensitive)) {
-    tag.reset(new TagLib::MPEG::File(stream.get(),
-                                     TagLib::ID3v2::FrameFactory::instance(),
-                                     TagLib::AudioProperties::Accurate));
+    tag.reset(new TagLib::MPEG::File(stream.get(), true,
+                                     TagLib::AudioProperties::Accurate,
+                                     TagLib::ID3v2::FrameFactory::instance()));
   } else if (mime_type == "audio/mp4" ||
              (mime_type == "audio/mpeg" &&
               title.endsWith(".m4a", Qt::CaseInsensitive))) {
@@ -1398,9 +1398,9 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                                             TagLib::AudioProperties::Accurate));
   } else if (mime_type == "application/x-flac" || mime_type == "audio/flac" ||
              mime_type == "audio/x-flac") {
-    tag.reset(new TagLib::FLAC::File(stream.get(),
-                                     TagLib::ID3v2::FrameFactory::instance(),
-                                     true, TagLib::AudioProperties::Accurate));
+    tag.reset(new TagLib::FLAC::File(stream.get(), true,
+                                     TagLib::AudioProperties::Accurate,
+                                     TagLib::ID3v2::FrameFactory::instance()));
   } else if (mime_type == "audio/x-ms-wma") {
     tag.reset(new TagLib::ASF::File(stream.get(), true,
                                     TagLib::AudioProperties::Accurate));
@@ -1431,7 +1431,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
     song->set_type(cpb::tagreader::SongMetadata_Type_STREAM);
 
     if (tag->audioProperties()) {
-      song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
+      song->set_length_nanosec(tag->audioProperties()->lengthInMilliseconds() * kNsecPerMsec);
     }
     return true;
   }
