@@ -97,7 +97,6 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.ref == 'refs/heads/master'
     needs:
-      - build_bionic_64
       - build_bullseye_64
       - build_buster_64
       - build_fedora_36
@@ -602,65 +601,6 @@ jobs:
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
-
-  build_bionic_64:
-    name: Build Ubuntu Bionic 64-bit deb
-    runs-on: ubuntu-24.04
-    container:
-      image: ubuntu:bionic
-    steps:
-      - name: Install dependencies
-        env:
-          DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          build-essential
-          cmake
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libcdio-dev
-          libchromaprint-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libglew1.5-dev
-          libglib2.0-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          liblastfm5-dev
-          libmtp-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt5x11extras5-dev
-          libsqlite3-dev
-          libtag1-dev
-          pkg-config
-          protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
-          libsparsehash-dev
-          ssh
-      - uses: actions/checkout@v1.2.0
-      - name: git hackery
-        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
-      - name: cmake
-        working-directory: bin
-        run: >
-          cmake ..
-          -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
-          -DDEB_DIST=bionic
-          -DENABLE_SPOTIFY_BLOB=OFF
-      - name: make
-        working-directory: bin
-        run : make -j2 deb
-      - uses: actions/upload-artifact@v4
-        with:
-          name: release_bionic_64
-          path: bin/clementine_*.deb
 
   build_bullseye_64:
     name: Build Debian Bullseye 64-bit deb
