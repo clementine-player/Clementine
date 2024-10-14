@@ -27,13 +27,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-24.04
     container:
-      image: ubuntu:bionic
+      image: ubuntu:noble
     steps:
       - uses: supplypike/setup-bin@v3
         with:
-          uri: https://github.com/transifex/cli/releases/download/v1.6.7/tx-linux-amd64.tar.gz
+          uri: https://github.com/transifex/cli/releases/download/v1.6.17/tx-linux-amd64.tar.gz
           name: tx
-          version: 1.6.7
+          version: 1.6.17
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -49,7 +49,7 @@ jobs:
           libchromaprint-dev
           libdbus-1-dev
           libfftw3-dev
-          libglew1.5-dev
+          libglew-dev
           libglib2.0-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
