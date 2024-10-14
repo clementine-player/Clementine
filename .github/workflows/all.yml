@@ -99,9 +99,8 @@ jobs:
     needs:
       - build_bullseye_64
       - build_buster_64
-      - build_fedora_36
-      - build_fedora_37
-      - build_fedora_38
+      - build_fedora_39
+      - build_fedora_40
       - build_focal_64
       - build_jammy_64
       - build_noble_64
@@ -196,11 +195,11 @@ jobs:
           name: release_source
           path: bin/clementine-*.tar.xz
 
-  build_fedora_36:
-    name: Build Fedora 36 RPM
+  build_fedora_39:
+    name: Build Fedora 39 RPM
     runs-on: ubuntu-24.04
     container:
-      image: fedora:36
+      image: fedora:39
     env:
       RPM_BUILD_NCPUS: "2"
     steps:
@@ -267,14 +266,14 @@ jobs:
         run: rpmbuild -ba ../dist/clementine.spec
       - uses: actions/upload-artifact@v4
         with:
-          name: release_fedora_36
+          name: release_fedora_39
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
-  build_fedora_37:
-    name: Build Fedora 37 RPM
+  build_fedora_40:
+    name: Build Fedora 40 RPM
     runs-on: ubuntu-24.04
     container:
-      image: fedora:37
+      image: fedora:40
     env:
       RPM_BUILD_NCPUS: "2"
     steps:
@@ -341,83 +340,8 @@ jobs:
         run: rpmbuild -ba ../dist/clementine.spec
       - uses: actions/upload-artifact@v4
         with:
-          name: release_fedora_37
+          name: release_fedora_40
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
-
-  build_fedora_38:
-    name: Build Fedora 38 RPM
-    runs-on: ubuntu-24.04
-    container:
-      image: fedora:38
-    env:
-      RPM_BUILD_NCPUS: "2"
-    steps:
-      - name: Install dependencies
-        run: >
-          dnf install --assumeyes
-          @development-tools
-          alsa-lib-devel
-          boost-devel
-          cmake
-          cryptopp-devel
-          dbus-devel
-          desktop-file-utils
-          fftw-devel
-          gcc-c++
-          gettext
-          git
-          glew-devel
-          gstreamer1-devel
-          gstreamer1-plugins-base-devel
-          hicolor-icon-theme
-          libappstream-glib
-          libcdio-devel
-          libchromaprint-devel
-          libgpod-devel
-          liblastfm-qt5-devel
-          libmtp-devel
-          libnotify-devel
-          openssh
-          pkgconfig
-          protobuf-compiler
-          protobuf-devel
-          pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
-          rpmdevtools
-          sha2-devel
-          sparsehash-devel
-          sqlite-devel
-          taglib-devel
-          tar
-      - uses: actions/checkout@v1.2.0
-      - name: git hackery
-        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
-      - name: cmake
-        working-directory: bin
-        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
-      - name: Build source tarball
-        working-directory: bin
-        run: ../dist/maketarball.sh
-      - name: Create rpmbuild directory
-        run: mkdir -p ~/rpmbuild/SOURCES
-      - name: Move source tarball
-        working-directory: bin
-        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
-      - name: Build RPM
-        working-directory: bin
-        run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
-        with:
-          name: release_fedora_38
-          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
-
 
   build_mingw:
     name: Build Windows Installer
