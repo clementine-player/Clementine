@@ -108,24 +108,33 @@ jobs:
       # - build_mac
       - build_mingw
       - build_source
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v1.2.0
       - uses: actions/download-artifact@v4
         with:
           path: release_artifacts
       - name: Create draft pre-release
+        id: tag_name
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
-          assets=()
-          for asset in $(find release_artifacts -type f); do
-            echo "Adding asset: ${asset}"
-            assets+=("-a" "$asset")
-          done
-          hub release create -p "${assets[@]}" -m "$VERSION" -t "$GITHUB_SHA" "$VERSION"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Create draft pre-release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: ${{ steps.tag_name.outputs.version }}
+          tag_name: ${{ steps.tag_name.outputs.version }}
+          files: "release_artifacts/**/*"
+          fail_on_unmatched_files: true
+          draft: true
+          prerelease: true
 
   build_source:
     name: Build source tarball
