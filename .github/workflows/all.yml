@@ -110,7 +110,7 @@ jobs:
       - build_source
     steps:
       - uses: actions/checkout@v1.2.0
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           path: release_artifacts
       - name: Create draft pre-release
@@ -182,7 +182,7 @@ jobs:
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
@@ -256,7 +256,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_fedora_36
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -330,7 +330,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_fedora_37
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -404,7 +404,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_fedora_38
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -598,7 +598,7 @@ jobs:
       - name: Build Windows installer
         working-directory: dist/windows
         run: makensis clementine.nsi
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
@@ -657,7 +657,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_bionic_64
           path: bin/clementine_*.deb
@@ -717,7 +717,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_bullseye_64
           path: bin/clementine_*.deb
@@ -776,7 +776,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_buster_64
           path: bin/clementine_*.deb
@@ -841,7 +841,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_focal_64
           path: bin/clementine_*.deb
@@ -909,7 +909,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_jammy_64
           path: bin/clementine_*.deb
@@ -976,7 +976,7 @@ jobs:
       - name: Build DMG
         working-directory: bin
         run: make dmg
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: release_mac
           path: bin/clementine-*.dmg
