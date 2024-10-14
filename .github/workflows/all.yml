@@ -132,8 +132,8 @@ jobs:
           tag_name: ${{ steps.tag_name.outputs.version }}
           files: "release_artifacts/**/*"
           fail_on_unmatched_files: true
-          draft: true
-          prerelease: true
+          draft: false
+          prerelease: false
 
   build_source:
     name: Build source tarball
