@@ -69,7 +69,7 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
     if (index.column() == 0)
       urls << QUrl::fromLocalFile(static_cast<QFileSystemModel*>(model())
                                       ->fileInfo(index)
-                                      .canonicalFilePath());
+                                      .absoluteFilePath());
   }
   return urls;
 }
