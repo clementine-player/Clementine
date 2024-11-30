@@ -6,14 +6,27 @@ set(MESSAGES
   remotecontrolmessages.proto
 )
 
-protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${MESSAGES})
+add_library(libclementine-remote STATIC)
 
-add_library(libclementine-remote STATIC
-  ${PROTO_SOURCES}
+protobuf_generate(
+  LANGUAGE cpp
+  TARGET libclementine-remote
+  PROTOS ${MESSAGES}
 )
 
+set_property(
+  TARGET libclementine-remote
+  PROPERTY CXX_STANDARD 17
+)
+
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
 target_link_libraries(libclementine-remote
-  ${PROTOBUF_LIBRARY}
+  protobuf::libprotobuf
   libclementine-common
 )
 

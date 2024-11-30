@@ -32,6 +32,7 @@
 #include <algorithm>
 #include <functional>
 #include <memory>
+#include <random>
 #include <unordered_map>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
@@ -2077,6 +2078,8 @@ void Playlist::ReshuffleIndices() {
   if (current_virtual_index_ != -1)
     std::advance(begin, current_virtual_index_ + 1);
 
+  std::random_device rd;
+
   switch (playlist_sequence_->shuffle_mode()) {
     case PlaylistSequence::Shuffle_Off:
       // Handled above.
@@ -2084,7 +2087,7 @@ void Playlist::ReshuffleIndices() {
 
     case PlaylistSequence::Shuffle_All:
     case PlaylistSequence::Shuffle_InsideAlbum:
-      std::random_shuffle(begin, end);
+      std::shuffle(begin, end, std::mt19937(rd()));
       break;
 
     case PlaylistSequence::Shuffle_Albums: {
@@ -2101,8 +2104,8 @@ void Playlist::ReshuffleIndices() {
 
       // Shuffle them
       QStringList shuffled_album_keys = album_key_set.values();
-      std::random_shuffle(shuffled_album_keys.begin(),
-                          shuffled_album_keys.end());
+      std::shuffle(shuffled_album_keys.begin(), shuffled_album_keys.end(),
+                   std::mt19937(rd()));
 
       // If the user is currently playing a song, force its album to be first
       // Or if the song was not playing but it was selected, force its album
