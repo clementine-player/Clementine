@@ -173,6 +173,12 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
 
   settings.endGroup();
 
+  settings.beginGroup(kSettingsGroup);
+
+  grey_unfound_ = settings.value("greyoutdeleted", false).toBool();
+
+  settings.endGroup();
+
   qLog(Debug) << "k_max_scrobble_point"
               << (max_play_count_point_nsecs_ / kNsecPerSec);
 }
@@ -1223,6 +1229,9 @@ void Playlist::UpdateItems(const SongList& songs) {
         } else {
           new_item = PlaylistItemPtr(new SongPlaylistItem(song));
         }
+        if (grey_unfound_ && !song.is_valid()) {
+          new_item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
+        }
         items_[i] = new_item;
         emit dataChanged(index(i, 0), index(i, ColumnCount - 1));
         // Also update undo actions
@@ -1626,11 +1635,7 @@ void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
 
   emit RestoreFinished();
 
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  // should we gray out deleted songs asynchronously on startup?
-  if (s.value("greyoutdeleted", false).toBool()) {
+  if (grey_unfound_) {
     QtConcurrent::run(this, &Playlist::InvalidateDeletedSongs);
   }
 }
