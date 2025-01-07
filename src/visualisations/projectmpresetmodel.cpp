@@ -35,9 +35,12 @@ ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                                          QObject* parent)
     : QAbstractItemModel(parent), vis_(vis) {
   // Find presets
-  QDirIterator it(vis_->preset_url(), QStringList() << "*.milk" << "*.prjm",
+  QDirIterator it(vis_->preset_url(),
+                  QStringList() << "*.milk"
+                                << "*.prjm",
                   QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                   QDirIterator::Subdirectories);
+  // std::set makes them sorted
   std::set<std::pair<QString, QString>> files;
   while (it.hasNext()) {
     it.next();
