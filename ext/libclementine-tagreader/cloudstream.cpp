@@ -91,7 +91,11 @@ void CloudStream::Precache() {
   clear();
 }
 
+#if (TAGLIB_MAJOR_VERSION == 2)
 TagLib::ByteVector CloudStream::readBlock(size_t length) {
+#else
+TagLib::ByteVector CloudStream::readBlock(ulong length) {
+#endif
   const uint start = cursor_;
   const uint end = qMin(cursor_ + length - 1, length_ - 1);
 
@@ -144,11 +148,19 @@ void CloudStream::writeBlock(const TagLib::ByteVector&) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
+#if (TAGLIB_MAJOR_VERSION == 2)
 void CloudStream::insert(const TagLib::ByteVector&, TagLib::offset_t, size_t) {
+#else
+void CloudStream::insert(const TagLib::ByteVector&, ulong, ulong) {
+#endif
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
+#if (TAGLIB_MAJOR_VERSION == 2)
 void CloudStream::removeBlock(TagLib::offset_t, size_t) {
+#else
+void CloudStream::removeBlock(ulong, ulong) {
+#endif
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
@@ -159,7 +171,11 @@ bool CloudStream::readOnly() const {
 
 bool CloudStream::isOpen() const { return true; }
 
+#if (TAGLIB_MAJOR_VERSION == 2)
 void CloudStream::seek(TagLib::offset_t offset, TagLib::IOStream::Position p) {
+#else
+void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
+#endif
   switch (p) {
     case TagLib::IOStream::Beginning:
       cursor_ = offset;
@@ -178,11 +194,19 @@ void CloudStream::seek(TagLib::offset_t offset, TagLib::IOStream::Position p) {
 
 void CloudStream::clear() { cursor_ = 0; }
 
+#if (TAGLIB_MAJOR_VERSION == 2)
 TagLib::offset_t CloudStream::tell() const { return cursor_; }
 
 TagLib::offset_t CloudStream::length() { return length_; }
 
 void CloudStream::truncate(TagLib::offset_t) {
+#else
+long CloudStream::tell() const { return cursor_; }
+
+long CloudStream::length() { return length_; }
+
+void CloudStream::truncate(long) {
+#endif
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
