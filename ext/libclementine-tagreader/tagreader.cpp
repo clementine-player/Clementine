@@ -1376,9 +1376,15 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" &&
       title.endsWith(".mp3", Qt::CaseInsensitive)) {
+#if (TAGLIB_MAJOR_VERSION == 2)
     tag.reset(new TagLib::MPEG::File(stream.get(), true,
                                      TagLib::AudioProperties::Accurate,
                                      TagLib::ID3v2::FrameFactory::instance()));
+#else
+    tag.reset(new TagLib::MPEG::File(stream.get(),
+                                     TagLib::ID3v2::FrameFactory::instance(),
+                                     TagLib::AudioProperties::Accurate));
+#endif
   } else if (mime_type == "audio/mp4" ||
              (mime_type == "audio/mpeg" &&
               title.endsWith(".m4a", Qt::CaseInsensitive))) {
@@ -1398,9 +1404,15 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                                             TagLib::AudioProperties::Accurate));
   } else if (mime_type == "application/x-flac" || mime_type == "audio/flac" ||
              mime_type == "audio/x-flac") {
+#if (TAGLIB_MAJOR_VERSION == 2)
     tag.reset(new TagLib::FLAC::File(stream.get(), true,
                                      TagLib::AudioProperties::Accurate,
                                      TagLib::ID3v2::FrameFactory::instance()));
+#else
+    tag.reset(new TagLib::FLAC::File(stream.get(),
+                                     TagLib::ID3v2::FrameFactory::instance(),
+                                     true, TagLib::AudioProperties::Accurate));
+#endif
   } else if (mime_type == "audio/x-ms-wma") {
     tag.reset(new TagLib::ASF::File(stream.get(), true,
                                     TagLib::AudioProperties::Accurate));
