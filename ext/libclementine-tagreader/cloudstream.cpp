@@ -97,7 +97,7 @@ TagLib::ByteVector CloudStream::readBlock(size_t length) {
 TagLib::ByteVector CloudStream::readBlock(ulong length) {
 #endif
   const uint start = cursor_;
-  const uint end = qMin(cursor_ + length - 1, length_ - 1);
+  const uint end = qMin((size_t)(cursor_ + length - 1), (size_t)(length_ - 1));
 
   if (end < start) {
     return TagLib::ByteVector();
@@ -187,7 +187,7 @@ void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
 
     case TagLib::IOStream::End:
       // This should really not have qAbs(), but OGG reading needs it.
-      cursor_ = qMax(0UL, length_ - qAbs(offset));
+      cursor_ = qMax(0UL, (unsigned long)(length_ - qAbs(offset)));
       break;
   }
 }
