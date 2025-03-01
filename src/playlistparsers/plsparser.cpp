@@ -66,17 +66,26 @@ void PLSParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
   QTextStream s(device);
   s << "[playlist]" << endl;
-  s << "Version=2" << endl;
-  s << "NumberOfEntries=" << songs.count() << endl;
+
+  QSettings settings;
+  settings.beginGroup(Playlist::kSettingsGroup);
+  bool writeMetadata = settings.value(Playlist::kWriteMetadata, true).toBool();
+  settings.endGroup();
 
   int n = 1;
   for (const Song& song : songs) {
     s << "File" << n << "=" << URLOrFilename(song.url(), dir, path_type)
       << endl;
-    s << "Title" << n << "=" << song.title() << endl;
-    s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
+    if (writeMetadata) {
+      s << "Title" << n << "=" << song.title() << endl;
+      s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
+    }
+
     ++n;
   }
+
+  s << "NumberOfEntries=" << songs.count() << endl;
+  s << "Version=2" << endl;
 }
 
 bool PLSParser::TryMagic(const QByteArray& data) const {
