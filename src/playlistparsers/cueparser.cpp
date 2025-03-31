@@ -227,8 +227,30 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
   // finalize parsing songs
   for (int i = 0; i < entries.length(); i++) {
     CueEntry entry = entries.at(i);
+    Song song;
 
-    Song song = LoadSong(entry.file, IndexToMarker(entry.index), dir);
+    // override song metadata with metadata from the multi-file cue if the song
+    // isn't found in the library
+    if (files == 1) {
+      song = LoadSong(entry.file, IndexToMarker(entry.index), dir);
+    } else {
+      song = LoadSong(entry.file, 0, dir);
+
+      if (!song.is_library_song()) {
+        song.set_title(entry.title);
+        song.set_artist(entry.PrettyArtist());
+        song.set_album(entry.album);
+        song.set_albumartist(entry.album_artist);
+        song.set_genre(entry.genre);
+        song.set_year(entry.date.toInt());
+        song.set_composer(entry.PrettyComposer());
+        song.set_disc(entry.disc.toInt());
+      }
+
+      ret << song;
+
+      continue;
+    }
 
     // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
     if (cue_mtime.isValid()) {
@@ -239,10 +261,8 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
     // overwrite the stuff, we may have read from the file or library, using
     // the current .cue metadata
 
-    // set track number only in single-file mode
-    if (files == 1) {
-      song.set_track(i + 1);
-    }
+    // set track number
+    song.set_track(i + 1);
 
     // the last TRACK for every FILE gets it's 'end' marker from the media
     // file's
