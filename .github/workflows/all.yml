@@ -101,8 +101,9 @@ jobs:
     needs:
       - build_bullseye_64
       - build_bookworm_64
-      - build_fedora_39
       - build_fedora_40
+      - build_fedora_41
+      - build_fedora_42
       - build_focal_64
       - build_jammy_64
       - build_noble_64
@@ -201,82 +202,6 @@ jobs:
           name: release_source
           path: bin/clementine-*.tar.xz
 
-  build_fedora_39:
-    name: Build Fedora 39 RPM
-    runs-on: ubuntu-24.04
-    container:
-      image: fedora:39
-    env:
-      RPM_BUILD_NCPUS: "2"
-    steps:
-      - name: Install dependencies
-        run: >
-          dnf install --assumeyes
-          @development-tools
-          alsa-lib-devel
-          boost-devel
-          cmake
-          cryptopp
-          cryptopp-devel
-          dbus-devel
-          desktop-file-utils
-          fftw-devel
-          gcc-c++
-          gettext
-          git
-          glew-devel
-          gstreamer1-devel
-          gstreamer1-plugins-base-devel
-          hicolor-icon-theme
-          libappstream-glib
-          libcdio-devel
-          libchromaprint-devel
-          libgpod-devel
-          liblastfm-qt5-devel
-          libmtp-devel
-          libnotify-devel
-          openssh
-          pkgconfig
-          protobuf-compiler
-          protobuf-devel
-          pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
-          rpmdevtools
-          sparsehash-devel
-          sqlite-devel
-          taglib-devel
-          tar
-      - uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: 0
-      - name: git hackery
-        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
-      - name: cmake
-        working-directory: bin
-        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
-      - name: Build source tarball
-        working-directory: bin
-        run: ../dist/maketarball.sh
-      - name: Create rpmbuild directory
-        run: mkdir -p ~/rpmbuild/SOURCES
-      - name: Move source tarball
-        working-directory: bin
-        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
-      - name: Build RPM
-        working-directory: bin
-        run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
-        with:
-          name: release_fedora_39
-          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
-
   build_fedora_40:
     name: Build Fedora 40 RPM
     runs-on: ubuntu-24.04
@@ -351,6 +276,158 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: release_fedora_40
+          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+  build_fedora_41:
+    name: Build Fedora 41 RPM
+    runs-on: ubuntu-24.04
+    container:
+      image: fedora:41
+    env:
+      RPM_BUILD_NCPUS: "2"
+    steps:
+      - name: Install dependencies
+        run: >
+          dnf install --assumeyes
+          @development-tools
+          alsa-lib-devel
+          boost-devel
+          cmake
+          cryptopp
+          cryptopp-devel
+          dbus-devel
+          desktop-file-utils
+          fftw-devel
+          gcc-c++
+          gettext
+          git
+          glew-devel
+          gstreamer1-devel
+          gstreamer1-plugins-base-devel
+          hicolor-icon-theme
+          libappstream-glib
+          libcdio-devel
+          libchromaprint-devel
+          libgpod-devel
+          liblastfm-qt5-devel
+          libmtp-devel
+          libnotify-devel
+          openssh
+          pkgconfig
+          protobuf-compiler
+          protobuf-devel
+          pulseaudio-libs-devel
+          qca-qt5-devel
+          qca-qt5-ossl
+          qt5-linguist
+          qt5-qtbase-devel
+          qt5-qtx11extras-devel
+          qt5-rpm-macros
+          qtsingleapplication-qt5-devel
+          qtsinglecoreapplication-qt5-devel
+          rpmdevtools
+          sparsehash-devel
+          sqlite-devel
+          taglib-devel
+          tar
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      - name: cmake
+        working-directory: bin
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+      - name: Build source tarball
+        working-directory: bin
+        run: ../dist/maketarball.sh
+      - name: Create rpmbuild directory
+        run: mkdir -p ~/rpmbuild/SOURCES
+      - name: Move source tarball
+        working-directory: bin
+        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - name: Build RPM
+        working-directory: bin
+        run: rpmbuild -ba ../dist/clementine.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release_fedora_41
+          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+  build_fedora_42:
+    name: Build Fedora 42 RPM
+    runs-on: ubuntu-24.04
+    container:
+      image: fedora:42
+    env:
+      RPM_BUILD_NCPUS: "2"
+    steps:
+      - name: Install dependencies
+        run: >
+          dnf install --assumeyes
+          @development-tools
+          alsa-lib-devel
+          boost-devel
+          cmake
+          cryptopp
+          cryptopp-devel
+          dbus-devel
+          desktop-file-utils
+          fftw-devel
+          gcc-c++
+          gettext
+          git
+          glew-devel
+          gstreamer1-devel
+          gstreamer1-plugins-base-devel
+          hicolor-icon-theme
+          libappstream-glib
+          libcdio-devel
+          libchromaprint-devel
+          libgpod-devel
+          liblastfm-qt5-devel
+          libmtp-devel
+          libnotify-devel
+          openssh
+          pkgconfig
+          protobuf-compiler
+          protobuf-devel
+          pulseaudio-libs-devel
+          qca-qt5-devel
+          qca-qt5-ossl
+          qt5-linguist
+          qt5-qtbase-devel
+          qt5-qtx11extras-devel
+          qt5-rpm-macros
+          qtsingleapplication-qt5-devel
+          qtsinglecoreapplication-qt5-devel
+          rpmdevtools
+          sparsehash-devel
+          sqlite-devel
+          taglib-devel
+          tar
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      - name: cmake
+        working-directory: bin
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+      - name: Build source tarball
+        working-directory: bin
+        run: ../dist/maketarball.sh
+      - name: Create rpmbuild directory
+        run: mkdir -p ~/rpmbuild/SOURCES
+      - name: Move source tarball
+        working-directory: bin
+        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - name: Build RPM
+        working-directory: bin
+        run: rpmbuild -ba ../dist/clementine.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release_fedora_42
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_mingw:
