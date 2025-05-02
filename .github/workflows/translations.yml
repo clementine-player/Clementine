@@ -23,7 +23,9 @@ jobs:
           git
           ssh
       - name: Checkout
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: Switch to master

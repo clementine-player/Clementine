@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.2
       - name: clang-format
         uses: clementine-player/clang-format-lint-action@master
         with:
@@ -70,7 +70,9 @@ jobs:
           libsparsehash-dev
           ssh
       - name: Checkout
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: tx init
@@ -110,7 +112,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
           path: release_artifacts
@@ -181,7 +185,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -247,7 +253,9 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -321,7 +329,9 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -353,7 +363,9 @@ jobs:
     steps:
       - name: Fix liblastfm includes
         run: ln -s /target/include/lastfm /target/include/lastfm5
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -577,7 +589,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -636,7 +650,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -701,7 +717,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -769,7 +787,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -837,7 +857,9 @@ jobs:
           qttools5-dev-tools
           qttools5-dev
           ssh
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: cmake
@@ -861,7 +883,9 @@ jobs:
     name: Build Mac DMG
     runs-on: macos-10.15
     steps:
-      - uses: actions/checkout@v1.2.0
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: Install dependencies
