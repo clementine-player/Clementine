@@ -1,6 +1,11 @@
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations -Wno-unused-local-typedefs -Wno-unused-private-field -Wno-unknown-warning-option -Wno-maybe-uninitialized")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations -Wno-unused-local-typedefs -Wno-maybe-uninitialized")
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  # using regular Clang or AppleClang
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option")
+endif()
 
 option(BUILD_WERROR "Build with -Werror" ON)
 
