@@ -1,7 +1,5 @@
-cmake_minimum_required(VERSION 3.13.0)
+cmake_minimum_required(VERSION 3.30.0)
 project(clementine)
-
-cmake_policy(SET CMP0053 OLD)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
