@@ -7,7 +7,7 @@
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2017
 # a7748bcad10e5362cde501dd23ae3236_e731813 <24e2b45b257ca9fe69576dec7943da7e_49266>, 2013-2014
 # a7748bcad10e5362cde501dd23ae3236_e731813 <24e2b45b257ca9fe69576dec7943da7e_49266>, 2013
-# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2019-2023
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2019-2023,2025
 # Lasse Liehu-Inui <larso@gmx.com>, 2014
 # Moonwrist <moonwrist@moonwrist.org>, 2011, 2012
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-09 10:24+0000\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2019-2023\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2019-2023,2025\n"
 "Language-Team: Finnish (http://app.transifex.com/davidsansome/clementine/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,13 +245,13 @@ msgid "Add Stream"
 msgstr "Lisää suoratoisto"
 
 msgid "Add a new line if supported by the notification type"
-msgstr "Lisää uusi rivi, jos ilmoitustyyppi sen sallii"
+msgstr "Lisää uusi rivi, jos ilmoitukset tukee sitä"
 
 msgid "Add action"
 msgstr "Lisää toiminto"
 
 msgid "Add and play now"
-msgstr "Lisää ja toista nyt"
+msgstr "Lisää ja toista heti"
 
 msgid "Add another stream..."
 msgstr "Lisää toinen suoratoisto..."
@@ -281,40 +281,40 @@ msgid "Add search term"
 msgstr "Lisää hakuehto"
 
 msgid "Add song album tag"
-msgstr "Lisää tunniste levyn nimi"
+msgstr "Lisää kappaleen albumitunniste"
 
 msgid "Add song albumartist tag"
-msgstr "Lisää kappaleen levyn tunniste"
+msgstr "Lisää kappaleen albumiartistitunniste"
 
 msgid "Add song artist tag"
-msgstr "Lisää kappaleen esittäjä tunniste"
+msgstr "Lisää kappaleen artistitunniste"
 
 msgid "Add song composer tag"
-msgstr "Lisää tunniste kappaleen säveltäjä"
+msgstr "Lisää kappaleen säveltäjätunniste"
 
 msgid "Add song disc tag"
-msgstr "Lisää levyn numeron tunniste"
+msgstr "Lisää kappaleen levytunniste"
 
 msgid "Add song genre tag"
-msgstr "Lisää tunniste kappaleen kategoria"
+msgstr "Lisää kappaleen kategoriatunniste"
 
 msgid "Add song length tag"
-msgstr "Lisää tunniste kappaleen kesto"
+msgstr "Lisää kappaleen kestotunniste"
 
 msgid "Add song play count"
 msgstr "Lisää kappaleen toistolaskuri"
 
 msgid "Add song skip count"
-msgstr "Lisää kappaleen keskeyttämislaskuri"
+msgstr "Lisää kappaleen ohituslaskuri"
 
 msgid "Add song title tag"
-msgstr "Lisää tunniste kappaleen nimi"
+msgstr "Lisää kappaleen nimitunniste"
 
 msgid "Add song track tag"
-msgstr "Lisää tunniste "
+msgstr "Lisää kappaleen raitatunniste"
 
 msgid "Add song year tag"
-msgstr "Lisää kappaleen levytysvuoden tunniste"
+msgstr "Lisää kappaleen vuositunniste"
 
 msgid "Add stream..."
 msgstr "Lisää suoratoisto..."
@@ -365,7 +365,7 @@ msgid "Album artist"
 msgstr "Levyn esittäjä"
 
 msgid "Album info on jamendo.com..."
-msgstr "Albumin tiedot jamendo.comissa..."
+msgstr "Albumin tiedot jamendo.com..."
 
 msgid "Albumartist"
 msgstr "Levyn esittäjä"
@@ -467,7 +467,7 @@ msgid "Artist"
 msgstr "Esittäjä"
 
 msgid "Artist info"
-msgstr "Esittäjätiedot"
+msgstr "Artisti"
 
 msgid "Artist radio"
 msgstr "Esittäjä radio"
@@ -479,7 +479,7 @@ msgid "Artist's initial"
 msgstr "Esittäjän nimen ensimmäinen kirjain"
 
 msgid "Audio format"
-msgstr "Audio formaatti"
+msgstr "Audiomuoto"
 
 msgid "Audio type"
 msgstr "Audio tyyppi"
@@ -625,7 +625,7 @@ msgstr "Valitse kansi manuaalisesti"
 
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Valitse sivustot, joilta haluat Clementinen etsivän sanoituksia."
+msgstr "Valitse sivustot, joilta Clementinen hakee sanoituksia."
 
 msgid "Classical"
 msgstr "Classical"
@@ -651,7 +651,7 @@ msgstr "Clementinen visualisointi"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Clementine voi automaattisesti muuntaa tähän laitteeseen kopioitavan musiikin sen ymmärtämään muotoon."
+msgstr "Clementine voi automaattisesti muuntaa laitteeseen kopioitavan musiikin sen ymmärtämään muotoon."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
@@ -680,7 +680,7 @@ msgid "Clementine was unable to find results for this file"
 msgstr "Clementine ei löytänyt tuloksia tälle tiedostolle"
 
 msgid "Click here to add some music"
-msgstr "Napsauta lisätäksesi musiikkia"
+msgstr "Paina ja lisää musiikkia"
 
 msgid "Click to toggle between remaining time and total time"
 msgstr "Napsauta vaihtaaksesi näkymää: aikaa jäljellä / kokonaisaika"
@@ -695,7 +695,7 @@ msgid "Closing this window will cancel the download."
 msgstr "Tämän ikkunan sulkeminen peruu latauksen."
 
 msgid "Closing this window will stop searching for album covers."
-msgstr "Tämän ikkunan sulkeminen lopettaa albumikansien etsimisen."
+msgstr "Ikkunan sulkeminen lopettaa albumien kansien etsinnän."
 
 msgid "Club"
 msgstr "Club"
@@ -752,16 +752,16 @@ msgid "Constant bitrate"
 msgstr "Pysyvä bittinopeus"
 
 msgid "Convert all music"
-msgstr "Muunna kaikki musiikki"
+msgstr "Muunna kaikki"
 
 msgid "Convert any music that the device can't play"
-msgstr "Muuta musiikki, jota laite ei voi muuten toistaa"
+msgstr "Muunna kaikki, jota laite ei pysty toistamaan"
 
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
 
 msgid "Copy to library..."
-msgstr "Kopioi kirjastoon"
+msgstr "Kopioi kirjastoon..."
 
 msgid "Copying iPod database"
 msgstr "iPod-tietokantaa kopioidaan"
@@ -792,7 +792,7 @@ msgid "Couldn't open output file %1"
 msgstr "Ei voitu avata kohdetiedostoa %1"
 
 msgid "Cover Manager"
-msgstr "Kansikuvat"
+msgstr "Kansikuvahaku"
 
 msgid "Cover art from embedded image"
 msgstr "Kansikuva sulautetusta kuvasta"
@@ -816,10 +816,10 @@ msgid "Covers from %1"
 msgstr "Kansikuvat kohteesta %1"
 
 msgid "Cross-fade when changing tracks automatically"
-msgstr "Ristiinhäivytä kappaleet, kun kappale vaihtuu automaattisesti"
+msgstr "Ristihäivytys kappaleita automaattisesti vaihdettaessa"
 
 msgid "Cross-fade when changing tracks manually"
-msgstr "Ristiinhäivytä kappaleet, kun käyttäjä vaihtaa kappaletta"
+msgstr "Ristihäivytys käyttäjän vaihtaessa kappaleita"
 
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
@@ -1002,16 +1002,16 @@ msgid "Display options"
 msgstr "Näkymäasetukset"
 
 msgid "Display the global search popup"
-msgstr "Näytä hakemisen ponnahdusikkuna"
+msgstr "Näytä haun ponnahdusikkuna"
 
 msgid "Display the on-screen-display"
 msgstr "Näytä kuvaruutunäyttö"
 
 msgid "Do a full library rescan"
-msgstr "Tee kirjaston täydellinen läpikäynti"
+msgstr "Tee kirjaston läpikäynti"
 
 msgid "Do not convert any music"
-msgstr "Älä muunna mitään musiikkia"
+msgstr "Älä muunna mitään"
 
 msgid "Don't repeat"
 msgstr "Älä kertaa"
@@ -1133,7 +1133,7 @@ msgid ""
 msgstr "Anna <b>artisti</b> tai <b>tunniste</b> ja kuuntele Last.fm radiota."
 
 msgid "Enter search terms here"
-msgstr "Etsi tästä"
+msgstr "Kirjoita hakusanat tähän"
 
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Anna url-osoite:"
@@ -1210,10 +1210,10 @@ msgid "FLAC"
 msgstr "FLAC"
 
 msgid "Fade out when stopping a track"
-msgstr "Häivytä, kun kappale pysäytetään"
+msgstr "Häivytä kun kappale pysäytetään"
 
 msgid "Fading"
-msgstr "Häivytys"
+msgstr "Häivyttäminen"
 
 msgid "Fading duration"
 msgstr "Häivytyksen kesto"
@@ -1273,10 +1273,10 @@ msgid "Filesystem type"
 msgstr "Tiedostojärjestelmän tyyppi"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Etsi kirjastosta kappaleet, jotka sopivat hakuehtoihisi."
+msgstr "Hae kirjastoston kappaleet, jotka sopivat hakuehtoihin."
 
 msgid "Fingerprinting song"
-msgstr "Luodaan sormenjälkeä kappaleesta..."
+msgstr "Luodaan sormenjälkeä"
 
 msgid "Finish"
 msgstr "Valmis"
@@ -1538,7 +1538,7 @@ msgid "Jamendo database"
 msgstr "Jamendo-tietokanta"
 
 msgid "Jump to the currently playing track"
-msgstr "Näytä soiva kappale"
+msgstr "Hyppää toistettavaan kappaleeseen"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
@@ -1694,7 +1694,7 @@ msgid "Loading tracks"
 msgstr "Ladataan kappaleita"
 
 msgid "Loading tracks info"
-msgstr "Lataa kappaleen tietoja"
+msgstr "Kappaleiden tietoja ladataan"
 
 msgid "Loading..."
 msgstr "Ladataan..."
@@ -1771,10 +1771,10 @@ msgid "Manufacturer"
 msgstr "Valmistaja"
 
 msgid "Match every search term (AND)"
-msgstr "Täsmää jokaiseen hakuehtoon (AND)"
+msgstr "Hakee kaikki hakusanat (AND)"
 
 msgid "Match one or more search terms (OR)"
-msgstr "Täyttää yhden tai useampia hakuehtoja (OR)"
+msgstr "Vastaa yhtä tai useampaa hakutermiä (OR)"
 
 msgid "Maximum bitrate"
 msgstr "Suurin bittinopeus"
@@ -1838,7 +1838,7 @@ msgid "Mute"
 msgstr "Vaimenna"
 
 msgid "My Last.fm Library"
-msgstr "Last.fm minun kirjasto"
+msgstr "Last.fm kirjastoni"
 
 msgid "My Last.fm Mix Radio"
 msgstr "Minun Last.fm Mix Radio"
@@ -1886,7 +1886,7 @@ msgid "Never played"
 msgstr "Ei koskaan soitettu"
 
 msgid "Never start playing"
-msgstr "Älä koskaan aloita toistoa"
+msgstr "Älä aloita toistoa"
 
 msgid "New playlist"
 msgstr "Uusi soittolista"
@@ -1907,7 +1907,7 @@ msgid "Next"
 msgstr "Seuraava"
 
 msgid "Next track"
-msgstr "Seuraava kappale"
+msgstr "Seuraava"
 
 msgid "No analyzer"
 msgstr "Ei visualisointia"
@@ -1917,7 +1917,7 @@ msgstr "Ei pitkiä lohkoja"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Ei osumia. Tyhjennä hakukenttä ja koko soittolista näytetään uudelleen."
+msgstr "Ei osumia. Tyhjennä hakukenttä niin koko soittolista näkyy uudelleen."
 
 msgid "No short blocks"
 msgstr "Ei lyhyitä lohkoja"
@@ -1947,13 +1947,13 @@ msgid "Not enough members"
 msgstr "Ei riittävästi jäseniä"
 
 msgid "Not enough neighbors"
-msgstr "Ei tarpeeksi naapureita"
+msgstr "Ei riittävästi naapureita"
 
 msgid "Not installed"
 msgstr "Ei asennettu"
 
 msgid "Not mounted - double click to mount"
-msgstr "Ei liitetty - paina kahdesti ja yhdistä"
+msgstr "Ei liitetty - yhdistä painamalla kahdesti"
 
 msgid "Notification type"
 msgstr "Ilmoituksen tyyppi"
@@ -1962,7 +1962,7 @@ msgid "Notifications"
 msgstr "Ilmoitukset"
 
 msgid "Now Playing"
-msgstr "Nyt soi"
+msgstr "Toistetaan"
 
 msgid "OSD Preview"
 msgstr "Kuvaruutunäytön esikatselu"
@@ -2092,10 +2092,10 @@ msgid "Play custom radio..."
 msgstr "Toista omaa radiota..."
 
 msgid "Play from my Library"
-msgstr "Toista minun kirjastoa"
+msgstr "Toista kirjastostani"
 
 msgid "Play if stopped, pause if playing"
-msgstr "Aloittaa tai pysäyttää soittamisen"
+msgstr "Toista jos pysäytetty, pysäytä jos toistat"
 
 msgid "Play if there is nothing already playing"
 msgstr "Aloita toisto, jos mikään ei soi parhaillaan"
@@ -2134,7 +2134,7 @@ msgid "Playlist options"
 msgstr "Soittolistan valinnat"
 
 msgid "Playlist search"
-msgstr "Soittolistan haku"
+msgstr "Soittolistahaku"
 
 msgid "Playlist type"
 msgstr "Soittolistan tyyppi"
@@ -2164,7 +2164,7 @@ msgid "Preferred album art filenames (comma separated)"
 msgstr "Ensisijainen tiedostonimi albumikuvitukselle (pilkuin eroteltu)"
 
 msgid "Preferred audio format"
-msgstr "Ensisijainen audio formaatti"
+msgstr "Ensisijainen audiomuoto"
 
 msgid "Preferred format"
 msgstr "Ensisijainen muoto"
@@ -2192,7 +2192,7 @@ msgid "Previous"
 msgstr "Edellinen"
 
 msgid "Previous track"
-msgstr "Edellinen kappale"
+msgstr "Edellinen"
 
 msgid "Print out version information"
 msgstr "Tulosta versiotiedot"
@@ -2216,7 +2216,7 @@ msgid "Querying device..."
 msgstr "Kysytään tietoja laitteelta..."
 
 msgid "Queue Manager"
-msgstr "Jonohallinta"
+msgstr "Soittojono"
 
 msgid "Queue selected tracks"
 msgstr "Aseta valitut kappaleet jonoon"
@@ -2405,34 +2405,34 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Lähetä kappaletiedot kuuntelemistani kappaleista"
 
 msgid "Search"
-msgstr "Etsi"
+msgstr "Haku"
 
 msgid "Search Grooveshark"
-msgstr "Grooveshark haku"
+msgstr "Hae Groovesharkista"
 
 msgid "Search Grooveshark (opens a new tab)"
-msgstr "Grooveshark haku (avautuu uuteen välilehteen)"
+msgstr "Hae Groovesharkista (avaa uuden välilehden)"
 
 msgid "Search Icecast stations"
-msgstr "Etsi Icecast-asemia"
+msgstr "Hae Icecastista"
 
 msgid "Search Jamendo"
-msgstr "Etsi Jamendosta"
+msgstr "Hae Jamendosta"
 
 msgid "Search Magnatune"
-msgstr "Etsi Magnatunesta"
+msgstr "Hae Magnatunesta"
 
 msgid "Search Spotify"
-msgstr "Spotify haku"
+msgstr "Hae Spotifysta"
 
 msgid "Search Spotify (opens a new tab)"
-msgstr "Spotify haku (avautuu uuteen välilehteen)"
+msgstr "Hae Spotifysta (avaa uuden välilehden)"
 
 msgid "Search Spotify (opens a new tab)..."
-msgstr "Spotify haku (avautuu uuteen välilehteen)..."
+msgstr "Hae Spotifysta (avaa uuden välilehden)..."
 
 msgid "Search for album covers..."
-msgstr "Etsi kansikuvia..."
+msgstr "Hae kansikuvia..."
 
 msgid "Search mode"
 msgstr "Hakutapa"
@@ -2453,10 +2453,10 @@ msgid "Seek forward"
 msgstr "Siirry eteenpäin"
 
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Siirry nykyisessä kappaleessa suhteellinen määrä"
+msgstr "Kelaa toistettavaa kappaletta suhteellisen määrän"
 
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Siirry nykyisessä kappaleessa tiettyyn kohtaan"
+msgstr "Kelaa toistettavaa kappaletta tiettyyn kohtaan"
 
 msgid "Select All"
 msgstr "Valitse kaikki"
@@ -2507,7 +2507,7 @@ msgid "Show"
 msgstr "Näytä"
 
 msgid "Show Global Search Popup"
-msgstr "Näytä hakemisen ponnahdusikkuna"
+msgstr "Näytä hakuikkuna"
 
 msgid "Show OSD"
 msgstr "Näytä kappaletiedot näytöllä"
@@ -2622,7 +2622,7 @@ msgid "Smart playlist"
 msgstr "Älykäs soittolista"
 
 msgid "Smart playlists"
-msgstr "Älykkäät soittolistat"
+msgstr "Älykkäitä soittolistoja"
 
 msgid "Soft"
 msgstr "Soft"
@@ -2631,7 +2631,7 @@ msgid "Soft Rock"
 msgstr "Soft Rock"
 
 msgid "Song Information"
-msgstr "Kappaletiedot"
+msgstr "Kappale"
 
 msgid "Song info"
 msgstr "Kappaletiedot"
@@ -2679,16 +2679,16 @@ msgid "Starred"
 msgstr "Tähtiä"
 
 msgid "Start the playlist currently playing"
-msgstr "Käynnistä toistettava soittolista"
+msgstr "Aloita tällä hetkellä toistettava soittolista"
 
 msgid "Start transcoding"
 msgstr "Aloita muuntaminen"
 
 msgid "Start typing in the search box above to find music on Grooveshark."
-msgstr "Kirjoita hakukenttään ja löydät musiikkia Grooveshark:sta."
+msgstr "Kirjoita hakukenttään ja löydä Grooveshark musiikkia."
 
 msgid "Start typing in the search box above to find music on Spotify."
-msgstr "Kirjoita hakukenttään ja löydät musiikkia Spotify:sta."
+msgstr "Kirjoita hakukenttään ja löydä Spotify musiikkia."
 
 #, qt-format
 msgid "Starting %1"
@@ -2698,22 +2698,22 @@ msgid "Starting..."
 msgstr "Aloittaa ..."
 
 msgid "Stop"
-msgstr "Pysäytä"
+msgstr "Lopeta"
 
 msgid "Stop after"
 msgstr "Lopeta jälkeen"
 
 msgid "Stop after this track"
-msgstr "Pysäytä toistettavan kappaleen jälkeen"
+msgstr "Lopeta kappaleen jälkeen"
 
 msgid "Stop playback"
-msgstr "Pysäytä toisto"
+msgstr "Lopeta toisto"
 
 msgid "Stop playing after current track"
-msgstr "Lopeta soitto nykyisen kappaleen jälkeen"
+msgstr "Lopeta toisto kappaleen jälkeen"
 
 msgid "Stopped"
-msgstr "Pysäytetty"
+msgstr "Lopetettu"
 
 msgid "Stream"
 msgstr "Suoratoisto"
@@ -2787,7 +2787,7 @@ msgstr "Kansio %1 ei ole kelvollinen"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Soittolista \"%1\" oli tyhjä tai sitä ei voitu ladata."
+msgstr "Soittolista \"%1\" oli tyhjä tai sitä ei voi ladata."
 
 msgid "The second value must be greater than the first one!"
 msgstr "Toisen arvo pitää olla suurempi kuin ensimmäinen!"
@@ -2801,7 +2801,7 @@ msgstr "Hakemasi sivu ei ole kuva!"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Versio, johon juuri päivitit Clementinen, vaatii kirjaston täydellisen läpikäynnin alla listattujen uusien ominaisuuksien vuoksi:"
+msgstr "Versio, johon juuri päivitit Clementinen, vaatii kirjaston läpikäynnin alla mainittujen uusien ominaisuuksien vuoksi:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Metatietojen hakemisessa Magnatune palvelusta ilmeni virhe"
@@ -2826,7 +2826,7 @@ msgid ""
 msgstr "Nämä tiedostot poistetaan laitteelta, haluatko varmasti jatkaa?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Seuraavista kansioista lisätään musiikkia kirjastoa varten"
+msgstr "Näistä kansioista etsitään musiikkia kirjastoosi."
 
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
@@ -2842,12 +2842,12 @@ msgid ""
 msgstr "Tämä luo tietokannan, jonka koko voi olla jopa 150 megatavua.\nHaluatko jatkaa?"
 
 msgid "This album is not available in the requested format"
-msgstr "Tämä albumi ei ole saatavilla haluamassasi muodossa"
+msgstr "Albumi ei ole saatavilla haluamassasi muodossa"
 
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Laitteen tulee olla yhdistettynä ja avattuna, jotta Clementine voi tarkistaa, mitä tiedostomuotoja laite tukee."
+msgstr "Laitteen tulee olla yhdistettynä ja avattuna, jotta Clementine voi tarkistaa, mitä laite tukee."
 
 msgid "This device supports the following file formats:"
 msgstr "Laite tukee seuraavia tiedostomuotoja:"
@@ -2865,12 +2865,12 @@ msgstr "Kyseessä on iPod, mutta Clementine on käännetty ilman libgpod-tukea."
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Kytkit tämän laitteen tähän tietokoneeseen ensimmäistä kertaa. Clementine etsii musiikkitiedostoja laitteesta - tämä saattaa kestää hetken."
+msgstr "Kytkit tämän laitteen tietokoneeseen ensimmäistä kertaa. Clementine etsii laitteesta musiikkia. Tämä voi kestää jonkin aikaa."
 
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr "Tämä soittolista poistetaan, toimintoa ei voi kumota. Haluatko jatkaa?"
+msgstr "Tämä soittolista poistetaan. Haluatko jatkaa?"
 
 msgid "This stream is for paid subscribers only"
 msgstr "Suoratoisto on tarjolla vain maksaville asiakkaille"
@@ -2966,7 +2966,7 @@ msgid "Update changed library folders"
 msgstr "Päivitä muuttuneet kirjastokansiot"
 
 msgid "Update the library when Clementine starts"
-msgstr "Päivitä kirjasto Clementine käynnistyessä"
+msgstr "Päivitä kirjasto Clementinen käynnistyessä"
 
 #, qt-format
 msgid "Updating %1"
@@ -3026,7 +3026,7 @@ msgid "Username"
 msgstr "Käyttäjätunnus"
 
 msgid "Using the menu to add a song will..."
-msgstr "Valikon avulla kappaleen lisäys..."
+msgstr "Kappaleen lisääminen valikon avulla..."
 
 msgid "VBR MP3"
 msgstr "VBR MP3"
@@ -3082,7 +3082,7 @@ msgid "Weeks"
 msgstr "Viikkoa"
 
 msgid "When Clementine starts"
-msgstr "Clementinen käynnistyessä"
+msgstr "Kun Clementine käynnistyy"
 
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
@@ -3153,7 +3153,7 @@ msgid "You are about to download the following albums"
 msgstr "Olet aikeissa ladata seuraavat albumit"
 
 msgid "You are not signed in."
-msgstr "Et ole kirjautunut sisään"
+msgstr "Et kirjautuneena"
 
 #, qt-format
 msgid "You are signed in as %1."
@@ -3214,12 +3214,12 @@ msgid ""
 msgstr "Avaa Järjestelmäasetukset -> Käyttöapu ja ota käyttön \"<span style=\" font-style:italic;\">Salli pääsy apulaitteisiin</span>\" käyttääksesi Clementinen yleisiä pikanäppäimiä."
 
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Clementine tulee käynnistää uudelleen, jos vaihdat kieltä."
+msgstr "Käynnistä Clementine uudelleen jos vaihdat kieltä."
 
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr "Et voi kuunnella Last.fmradiota, jos et ole Last.fm tilaaja."
+msgstr "Et voi kuunnella Last.fm radiota, jos et ole Last.fm tilaaja."
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -3334,7 +3334,7 @@ msgid "not in the last"
 msgstr "ei viimeisenä"
 
 msgid "not on"
-msgstr "pois päältä"
+msgstr "ei päällä"
 
 msgid "oldest first"
 msgstr "vanhin ensin"
@@ -3362,7 +3362,7 @@ msgid "starts with"
 msgstr "alkaa"
 
 msgid "stop"
-msgstr "pysäytä"
+msgstr "lopeta"
 
 #, qt-format
 msgid "track %1"
