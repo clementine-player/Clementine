@@ -71,10 +71,7 @@ SongList ASXParser::Load(QIODevice* device, const QString& playlist_path,
   }
 
   while (!reader.atEnd() && Utilities::ParseUntilElement(&reader, "entry")) {
-    Song song = ParseTrack(&reader, dir);
-    if (song.is_valid()) {
-      ret << song;
-    }
+    ret << ParseTrack(&reader, dir);
   }
   return ret;
 }
@@ -111,10 +108,14 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
 return_song:
   Song song = LoadSong(ref, 0, dir);
 
-  // Override metadata with what was in the playlist
-  song.set_title(title);
-  song.set_artist(artist);
-  song.set_album(album);
+  // Override metadata with what was in the playlist if the song is not in the
+  // library.
+  if (!song.is_library_song()) {
+    song.set_title(title);
+    song.set_artist(artist);
+    song.set_album(album);
+  }
+
   return song;
 }
 
