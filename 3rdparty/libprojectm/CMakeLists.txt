@@ -1,16 +1,8 @@
 PROJECT(projectM)
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.10.0)
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The projectM core library.")
 
 include(CheckCXXCompilerFlag)
-
-cmake_policy(SET CMP0005 OLD)
-
-# This policy was only added in cmake 2.8.4
-if (CMAKE_VERSION VERSION_GREATER "2.8.3")
-  cmake_policy(SET CMP0017 OLD)
-endif (CMAKE_VERSION VERSION_GREATER "2.8.3")
-
 
 set(USE_DEVIL OFF)
 set(USE_FBO ON)
