@@ -19,6 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMenu>
 #include <QSettings>
 #include <QSystemTrayIcon>
 #include <memory>
@@ -28,6 +29,7 @@
 #include "core/mac_startup.h"
 #include "core/tagreaderclient.h"
 #include "engines/engine_fwd.h"
+#include "engines/audiobackendmanager.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
 #include "songinfo/streamdiscoverer.h"
@@ -56,6 +58,10 @@ class ErrorDialog;
 class FileView;
 class GlobalSearch;
 class GlobalSearchView;
+
+// AIMP-style enhanced playlist classes
+class AimpPlaylistContainer;
+class AimpSmartPlaylistManager;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
@@ -154,6 +160,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NewDebugConsole(Console* console);
  private slots:
+  void ShowAudioBackendMenu();
+  void ShowBackendConfigurationDialog(const QString& backend_name = QString());
   void SetNextAlbumEnabled(PlaylistSequence::RepeatMode mode);
   void FilePathChanged(const QString& path);
 
@@ -190,6 +198,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void SearchForAlbum();
 
   void PlaylistCopyToLibrary();
+  void NewSmartPlaylist();
   void PlaylistMoveToLibrary();
   void PlaylistCopyToDevice();
   void PlaylistOrganiseSelected(bool copy);
@@ -314,6 +323,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
  private:
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
+  
+  // Audio Backend Management
+  QMenu* audio_backend_menu_ = nullptr;
 
   Application* app_;
   SystemTrayIcon* tray_icon_;

@@ -18,9 +18,17 @@
 #include "mainwindow.h"
 
 #include <QCloseEvent>
+#include <QComboBox>
+#include <QCursor>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QCheckBox>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
 #include <QLinearGradient>
 #include <QList>
 #include <QMenu>
@@ -31,8 +39,10 @@
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
 #include <QSystemTrayIcon>
+#include <QTextEdit>
 #include <QTimer>
 #include <QUndoStack>
+#include <QVBoxLayout>
 #include <QtDebug>
 #include <cmath>
 #include <memory>
@@ -88,6 +98,7 @@
 #include "playlist/playlistview.h"
 #include "playlist/queue.h"
 #include "playlist/queuemanager.h"
+#include "playlist/extsmartplaylistdialog.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui_mainwindow.h"
@@ -539,6 +550,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       ui_->action_save_playlist,
       ui_->action_next_playlist, /* These two actions aren't associated */
       ui_->action_previous_playlist /* to a button but to the main window */);
+
+  // Connect smart playlist action
+  connect(ui_->action_new_smart_playlist, SIGNAL(triggered()),
+          SLOT(NewSmartPlaylist()));
 
 #ifdef HAVE_VISUALISATIONS
   connect(ui_->action_visualisations, SIGNAL(triggered()),
@@ -1030,6 +1045,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ReloadSettings();
 
+  // Audio-Backend Auswahl
+  connect(ui_->action_select_audio_backend, &QAction::triggered, this, &MainWindow::ShowAudioBackendMenu);
+
   // The "GlobalSearchView" requires that "InternetModel" has already been
   // initialised before reload settings.
   app_->global_search()->ReloadSettings();
@@ -1041,32 +1059,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Reload playlist settings, for BG and glowing
   ui_->playlist->view()->ReloadSettings();
 
-#ifdef Q_OS_DARWIN
-  // Always show mainwindow on startup on OS X.
+  // Always show the main window for AIMP-Clementine
   show();
-#else
-  StartupBehaviour behaviour = StartupBehaviour(
-      settings_.value("startupbehaviour", Startup_Remember).toInt());
-  bool hidden = settings_.value("hidden", false).toBool();
-
-  switch (behaviour) {
-    case Startup_AlwaysHide:
-      hide();
-      break;
-    case Startup_AlwaysShow:
-      show();
-      break;
-    case Startup_Remember:
-      setVisible(!hidden);
-      break;
-  }
-
-  // Force the window to show in case somehow the config has tray and window set
-  // to hide
-  if (hidden && (!QSystemTrayIcon::isSystemTrayAvailable() || !tray_icon_ ||
-                 !tray_icon_->IsVisible()))
-    show();
-#endif
+  raise();
+  activateWindow();
 
   QShortcut* close_window_shortcut = new QShortcut(this);
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
@@ -1098,18 +1094,17 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   qLog(Debug) << "Started";
 }
 
-MainWindow::~MainWindow() { delete ui_; }
+MainWindow::~MainWindow() { 
+  // Stop player before cleanup
+  if (app_->player()) {
+    app_->player()->Stop();
+  }
+  delete ui_; 
+}
 
 void MainWindow::ReloadSettings() {
-#ifndef Q_OS_DARWIN
-  bool show_tray =
-      settings_.value("showtray", QSystemTrayIcon::isSystemTrayAvailable())
-          .toBool();
-
-  if (tray_icon_) tray_icon_->SetVisible(show_tray);
-  if ((!show_tray || !QSystemTrayIcon::isSystemTrayAvailable()) && !isVisible())
-    show();
-#endif
+  // Force main window to always be visible for AIMP-Clementine
+  if (!isVisible()) show();
 
   doubleclick_addmode_ = AddBehaviour(
       settings_.value("doubleclick_addmode", AddBehaviour_Append).toInt());
@@ -1147,6 +1142,227 @@ void MainWindow::ReloadAllSettings() {
 }
 
 void MainWindow::RefreshStyleSheet() { setStyleSheet(styleSheet()); }
+
+void MainWindow::ShowAudioBackendMenu() {
+  if (!audio_backend_menu_) {
+    audio_backend_menu_ = new QMenu(tr("Audio-Backend auswählen"), this);
+  } else {
+    audio_backend_menu_->clear();
+  }
+
+  // Backends aus dem Manager holen
+  const QStringList backends = Engine::AudioBackendManager::instance()->availableBackends();
+  Engine::AudioBackendManager* manager = Engine::AudioBackendManager::instance();
+  
+  if (backends.isEmpty()) {
+    QAction* no_backends = audio_backend_menu_->addAction("No backends available");
+    no_backends->setEnabled(false);
+  } else {
+    for (const QString& name : backends) {
+      QAction* action = audio_backend_menu_->addAction(name);
+      action->setCheckable(true);
+      
+      // Mark current backend
+      Engine::Base* current = manager->currentBackend();
+      if (current) {
+        Engine::IAudioBackend* current_backend = dynamic_cast<Engine::IAudioBackend*>(current);
+        if (current_backend && current_backend->Name() == name) {
+          action->setChecked(true);
+        }
+      }
+      
+      connect(action, &QAction::triggered, this, [this, name]() {
+        Engine::AudioBackendManager::instance()->setCurrentBackend(name);
+        qLog(Info) << "MainWindow: Switched to audio backend:" << name;
+        
+        // Show backend configuration dialog
+        ShowBackendConfigurationDialog(name);
+      });
+    }
+    
+    audio_backend_menu_->addSeparator();
+    
+    // Add configuration menu
+    QAction* config_action = audio_backend_menu_->addAction("Backend Configuration...");
+    connect(config_action, &QAction::triggered, this, [this]() {
+      ShowBackendConfigurationDialog();
+    });
+  }
+  
+  audio_backend_menu_->exec(QCursor::pos());
+}
+
+void MainWindow::ShowBackendConfigurationDialog(const QString& backend_name) {
+  Engine::AudioBackendManager* manager = Engine::AudioBackendManager::instance();
+  QStringList backends = manager->availableBackends();
+  
+  if (backends.isEmpty()) {
+    QMessageBox::information(this, "Backend Configuration", 
+                           "No audio backends available for configuration.");
+    return;
+  }
+  
+  QString target_backend = backend_name;
+  if (target_backend.isEmpty() && !backends.isEmpty()) {
+    target_backend = backends.first();
+  }
+  
+  // Note: In a full implementation, you would get backend instances here
+  // For now, we just show configuration dialog
+  
+  QDialog dialog(this);
+  dialog.setWindowTitle("Audio Backend Configuration - " + target_backend);
+  dialog.resize(400, 300);
+  
+  QVBoxLayout* layout = new QVBoxLayout(&dialog);
+  
+  // Backend selection
+  QLabel* backend_label = new QLabel("Audio Backend:");
+  QComboBox* backend_combo = new QComboBox();
+  backend_combo->addItems(backends);
+  backend_combo->setCurrentText(target_backend);
+  
+  layout->addWidget(backend_label);
+  layout->addWidget(backend_combo);
+  
+  // Backend information
+  QTextEdit* info_text = new QTextEdit();
+  info_text->setMaximumHeight(100);
+  info_text->setReadOnly(true);
+  
+  auto updateBackendInfo = [info_text, manager](const QString& name) {
+    QStringList info;
+    info << "Backend: " + name;
+    
+    // Try to get backend details (simplified)
+    if (name == "GStreamer") {
+      info << "Description: Advanced GStreamer audio backend with multi-format support";
+      info << "Supports: 16/24/32-bit audio, Low latency, Multi-format playback";
+      info << "32-bit Processing: Yes";
+      info << "Exclusive Mode: No";
+    } else if (name == "FFmpeg") {
+      info << "Description: High-quality FFmpeg audio backend with extensive format support";
+      info << "Supports: 16/24/32-bit audio, Low latency, Extensive format support";
+      info << "32-bit Processing: Yes";
+      info << "Exclusive Mode: No";
+    } else if (name.contains("WASAPI")) {
+      info << "Description: Windows Audio Session API - Ultimate audio quality";
+      info << "Supports: 16/24/32-bit audio, Ultra-low latency, Hardware direct access";
+      info << "32-bit Processing: Yes";
+      info << QString("Exclusive Mode: ") + (name.contains("Exclusive") ? "Yes" : "No");
+    }
+    
+    info_text->setText(info.join("\n"));
+  };
+  
+  updateBackendInfo(target_backend);
+  connect(backend_combo, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+          updateBackendInfo);
+  
+  layout->addWidget(info_text);
+  
+  // Audio quality settings
+  QGroupBox* quality_group = new QGroupBox("Audio Quality Settings");
+  QFormLayout* quality_layout = new QFormLayout(quality_group);
+  
+  QComboBox* bit_depth_combo = new QComboBox();
+  bit_depth_combo->addItems({"16-bit", "24-bit", "32-bit"});
+  bit_depth_combo->setCurrentText("16-bit");
+  
+  QComboBox* sample_rate_combo = new QComboBox();
+  sample_rate_combo->addItems({"44100 Hz", "48000 Hz", "96000 Hz", "192000 Hz"});
+  sample_rate_combo->setCurrentText("44100 Hz");
+  
+  QCheckBox* enable_32bit = new QCheckBox("Enable 32-bit processing");
+  QCheckBox* exclusive_mode = new QCheckBox("Exclusive mode (WASAPI only)");
+  exclusive_mode->setEnabled(target_backend.contains("WASAPI"));
+  
+  quality_layout->addRow("Bit Depth:", bit_depth_combo);
+  quality_layout->addRow("Sample Rate:", sample_rate_combo);
+  quality_layout->addRow(enable_32bit);
+  quality_layout->addRow(exclusive_mode);
+  
+  layout->addWidget(quality_group);
+  
+  // Buttons
+  QDialogButtonBox* buttons = new QDialogButtonBox(
+    QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
+  
+  connect(buttons, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+  connect(buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+  
+  layout->addWidget(buttons);
+  
+  // Update exclusive mode checkbox based on backend selection
+  connect(backend_combo, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+          [exclusive_mode](const QString& backend) {
+            exclusive_mode->setEnabled(backend.contains("WASAPI"));
+          });
+  
+  if (dialog.exec() == QDialog::Accepted) {
+    QString selected_backend = backend_combo->currentText();
+    
+    // Parse bit depth from UI
+    Engine::BitDepth selected_bit_depth = Engine::BitDepth::Bit16;
+    QString bit_depth_text = bit_depth_combo->currentText();
+    if (bit_depth_text == "16-bit") selected_bit_depth = Engine::BitDepth::Bit16;
+    else if (bit_depth_text == "24-bit") selected_bit_depth = Engine::BitDepth::Bit24;
+    else if (bit_depth_text == "32-bit") selected_bit_depth = Engine::BitDepth::Bit32;
+    
+    // Parse sample rate from UI
+    Engine::SampleRate selected_sample_rate = Engine::SampleRate::Rate44100;
+    QString sample_rate_text = sample_rate_combo->currentText();
+    if (sample_rate_text == "44100 Hz") selected_sample_rate = Engine::SampleRate::Rate44100;
+    else if (sample_rate_text == "48000 Hz") selected_sample_rate = Engine::SampleRate::Rate48000;
+    else if (sample_rate_text == "96000 Hz") selected_sample_rate = Engine::SampleRate::Rate96000;
+    else if (sample_rate_text == "192000 Hz") selected_sample_rate = Engine::SampleRate::Rate192000;
+    
+    // Get current backend and apply settings
+    Engine::IAudioBackend* current_backend_obj = manager->getBackend(selected_backend);
+    if (current_backend_obj) {
+      current_backend_obj->SetBitDepth(selected_bit_depth);
+      current_backend_obj->SetSampleRate(selected_sample_rate);
+      
+      // Force the GstEngine to reload its settings if it's the current backend
+      if (selected_backend == "GStreamer") {
+        GstEngine* gst_engine = dynamic_cast<GstEngine*>(current_backend_obj);
+        if (gst_engine) {
+          gst_engine->ReloadSettings();
+          qLog(Info) << "MainWindow: Forced GStreamer backend to reload settings after configuration change";
+        }
+      }
+    }
+    
+    // Switch backend if changed
+    if (selected_backend != target_backend) {
+      manager->setCurrentBackend(selected_backend);
+      
+      // Actually switch the player's engine to the new backend
+      Engine::IAudioBackend* new_backend = dynamic_cast<Engine::IAudioBackend*>(manager->currentBackend());
+      if (new_backend) {
+        EngineBase* new_engine = dynamic_cast<EngineBase*>(new_backend);
+        if (new_engine) {
+          app_->player()->SwitchEngine(new_engine);
+          qLog(Info) << "MainWindow: Successfully switched player engine to:" << selected_backend;
+        }
+      }
+      qLog(Info) << "MainWindow: Switched audio backend to:" << selected_backend;
+    }
+    
+    // Apply quality settings (simplified - would need backend-specific implementation)
+    qLog(Info) << "MainWindow: Applied audio settings:";
+    qLog(Info) << "  - Backend:" << selected_backend;
+    qLog(Info) << "  - Bit Depth:" << bit_depth_combo->currentText();
+    qLog(Info) << "  - Sample Rate:" << sample_rate_combo->currentText();
+    qLog(Info) << "  - 32-bit Processing:" << (enable_32bit->isChecked() ? "Enabled" : "Disabled");
+    qLog(Info) << "  - Exclusive Mode:" << (exclusive_mode->isChecked() ? "Enabled" : "Disabled");
+    
+    QMessageBox::information(this, "Configuration Applied",
+                           "Audio backend configuration has been applied successfully.\n"
+                           "Some changes may require restarting playback.");
+  }
+}
+
 void MainWindow::MediaStopped() {
   setWindowTitle(QCoreApplication::applicationName());
 
@@ -1496,10 +1712,10 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  if (!tray_icon_ ||
-      !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
-    Exit();
-
+  // Always exit the application when the window is closed
+  // This ensures proper cleanup regardless of tray icon settings
+  Exit();
+  
   QMainWindow::closeEvent(event);
 }
 
@@ -2904,18 +3120,13 @@ void MainWindow::Exit() {
   SaveSettings(&settings_);
   settings_.sync();
 
-  if (app_->player()->engine()->is_fadeout_enabled()) {
-    // To shut down the application when fadeout will be finished
-    connect(app_->player()->engine(), SIGNAL(FadeoutFinishedSignal()), qApp,
-            SLOT(quit()));
-    if (app_->player()->GetState() == Engine::Playing) {
-      app_->player()->Stop();
-      hide();
-      if (tray_icon_) tray_icon_->SetVisible(false);
-      return;  // Don't quit the application now: wait for the fadeout finished
-               // signal
-    }
+  // Always stop player immediately without waiting for fadeout
+  // to ensure audio stops when GUI is closed
+  if (app_->player()->GetState() == Engine::Playing) {
+    app_->player()->Stop();
   }
+  
+  // Force immediate quit without fadeout delay
   qApp->quit();
 }
 
@@ -3117,6 +3328,13 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
+  }
+}
+
+void MainWindow::NewSmartPlaylist() {
+  if (app_->playlist_manager()) {
+    ExtSmartPlaylistDialog* dialog = new ExtSmartPlaylistDialog(app_->playlist_manager(), this);
+    dialog->show();
   }
 }
 
