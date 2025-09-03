@@ -98,6 +98,9 @@ set(SOURCES
   core/settingsprovider.cpp
   core/signalchecker.cpp
   core/song.cpp
+  
+  playlist/extsmartplaylistdialog.cpp
+  playlist/extsmartplaylistdialog.h
   core/songloader.cpp
   core/songpathparser.cpp
   core/stylesheetloader.cpp
@@ -134,7 +137,10 @@ set(SOURCES
 
   engines/devicefinder.cpp
   engines/enginebase.cpp
+  engines/audiobackendmanager.cpp
   engines/gstengine.cpp
+  engines/ffmpegengine.cpp
+  engines/wasapiengine.cpp
   engines/gstenginedebug.cpp
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
@@ -253,6 +259,10 @@ set(SOURCES
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
   playlist/songplaylistitem.cpp
+  
+  # Enhanced playlist features
+  playlist/extsmartplaylistdialog.cpp
+  playlist/extsmartplaylistdialog.h
 
   playlistparsers/asxparser.cpp
   playlistparsers/asxiniparser.cpp
@@ -471,7 +481,11 @@ set(HEADERS
   devices/deviceinfo.h
 
   engines/enginebase.h
+  engines/audiobackendmanager.h
+  engines/iaudiobackend.h
   engines/gstengine.h
+  engines/ffmpegengine.h
+  engines/wasapiengine.h
   engines/gstenginedebug.h
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
@@ -570,6 +584,9 @@ set(HEADERS
   playlist/queuemanager.h
   playlist/songloaderinserter.h
   playlist/songmimedata.h
+  
+  # Enhanced playlist headers
+  playlist/extsmartplaylistdialog.h
 
   playlistparsers/asxparser.h
   playlistparsers/asxiniparser.h
@@ -746,6 +763,7 @@ set(UI
   playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
+  playlist/extsmartplaylistdialog.ui
 
   internet/podcasts/addpodcastbyurl.ui
   internet/podcasts/addpodcastdialog.ui
@@ -1271,6 +1289,12 @@ target_link_libraries(clementine_lib
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
+
+  # FFmpeg libraries for FFmpegEngine
+  avformat
+  avcodec
+  avutil
+  swresample
 
   Qocoa
 )

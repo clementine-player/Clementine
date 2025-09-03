@@ -417,8 +417,12 @@ bool GstEnginePipeline::InitAudioBin() {
   gst_element_link_many(tee_src, capsfilter_, tee_, nullptr);
 
   // If the user has selected a format, then set it now.
+  qLog(Debug) << "Pipeline initialization: format_=" << format_;
   if (format_ != GstEngine::kOutFormatDetect) {
+    qLog(Info) << "Pipeline initialization: Using configured format:" << format_;
     SetOutputFormat(format_);
+  } else {
+    qLog(Debug) << "Pipeline initialization: Using format detection (format_ == kOutFormatDetect)";
   }
 
   // Link the analyzer output of the tee
@@ -843,7 +847,9 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
     g_free(caps_str);
 
     if (instance->format_ != GstEngine::kOutFormatDetect) {
-      // Caps were set when the pipeline was constructed.
+      // Backend has configured a specific format - use it regardless of source format
+      qLog(Info) << "NewPadCallback: Using configured backend format:" << instance->format_;
+      instance->SetOutputFormat(instance->format_);
     } else if (instance->pipeline_is_initialised_) {
       qLog(Debug)
           << "Ignoring native format since pipeline is already running.";
@@ -1242,6 +1248,26 @@ void GstEnginePipeline::SetOutputFormat(const QString& format) {
       "audio/x-raw", "format", G_TYPE_STRING, format.toUtf8().data(), nullptr);
   g_object_set(capsfilter_, "caps", new_caps, nullptr);
   gst_caps_unref(new_caps);
+}
+
+void GstEnginePipeline::UpdateAudioFormat(const QString& format) {
+  qLog(Info) << "Runtime format update to:" << format;
+  format_ = format;
+  
+  // If we have an active audio processing pipeline, update its format
+  if (capsfilter_ && pipeline_is_initialised_) {
+    qLog(Info) << "Updating capsfilter format to:" << format;
+    SetOutputFormat(format);
+    
+    // Force pipeline to process the format change by briefly pausing and resuming
+    if (state() == GST_STATE_PLAYING) {
+      qLog(Debug) << "Briefly pausing pipeline to apply format change";
+      gst_element_set_state(pipeline_, GST_STATE_PAUSED);
+      // Give GStreamer time to process the state change
+      gst_element_get_state(pipeline_, nullptr, nullptr, GST_CLOCK_TIME_NONE);
+      gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+    }
+  }
 }
 
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,

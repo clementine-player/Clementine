@@ -140,6 +140,7 @@ add_test_file(scopedtransaction_test.cpp false)
 #add_test_file(songloader_test.cpp false)
 add_test_file(songplaylistitem_test.cpp false)
 add_test_file(song_test.cpp false)
+
 add_test_file(translations_test.cpp false)
 add_test_file(utilities_test.cpp false)
 add_test_file(xspfparser_test.cpp false)

@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 3.13.0)
+
+# Setup Qt5 first
+find_package(Qt5 REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
+
 project(clementine)
 
 cmake_policy(SET CMP0053 OLD)

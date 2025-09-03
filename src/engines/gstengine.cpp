@@ -89,6 +89,7 @@ const char* GstEngine::kSettingFormat = "format";
 const char* GstEngine::kAutoSink = "autoaudiosink";
 const char* GstEngine::kOutFormatDetect = "";
 const char* GstEngine::kOutFormatS16LE = "S16LE";
+const char* GstEngine::kOutFormatS24LE = "S24LE";
 const char* GstEngine::kOutFormatF32LE = "F32LE";
 const char* GstEngine::kHypnotoadPipeline =
     "audiotestsrc wave=6 ! "
@@ -122,7 +123,11 @@ GstEngine::GstEngine(Application* app)
       is_fading_out_to_pause_(false),
       has_faded_out_(false),
       scope_chunk_(0),
-      have_new_buffer_(false) {
+      have_new_buffer_(false),
+      current_bit_depth_(Engine::BitDepth::Bit16),
+      current_sample_rate_(Engine::SampleRate::Rate44100),
+      enable_32bit_processing_(false),
+      playback_mode_(Engine::PlaybackMode::BitPerfect) {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
@@ -142,7 +147,11 @@ GstEngine::GstEngine(Application* app)
 GstEngine::~GstEngine() {
   EnsureInitialised();
 
-  current_pipeline_.reset();
+  // Properly stop and cleanup pipeline before destruction
+  if (current_pipeline_) {
+    current_pipeline_->SetState(GST_STATE_NULL);
+    current_pipeline_.reset();
+  }
 
   qDeleteAll(device_finders_);
 
@@ -245,6 +254,41 @@ void GstEngine::ReloadSettings() {
   sample_rate_ = s.value("samplerate", kAutoSampleRate).toInt();
   format_ = s.value(GstEngine::kSettingFormat, GstEngine::kOutFormatDetect)
                 .toString();
+
+  // Load backend configuration
+  current_bit_depth_ = static_cast<Engine::BitDepth>(s.value("bitdepth", (int)Engine::BitDepth::Bit16).toInt());
+  current_sample_rate_ = static_cast<Engine::SampleRate>(s.value("backend_samplerate", (int)Engine::SampleRate::Rate44100).toInt());
+  enable_32bit_processing_ = s.value("32bit_processing", false).toBool();
+  playback_mode_ = static_cast<Engine::PlaybackMode>(s.value("playback_mode", (int)Engine::PlaybackMode::BitPerfect).toInt());
+  
+  // Update GStreamer sample_rate_ from backend setting
+  if ((int)current_sample_rate_ != kAutoSampleRate) {
+    sample_rate_ = (int)current_sample_rate_;
+  }
+  
+  // Apply format based on playback mode
+  if (playback_mode_ == Engine::PlaybackMode::BitPerfect) {
+    format_ = kOutFormatDetect; // Let GStreamer auto-detect source format
+    qLog(Info) << "GStreamer: BitPerfect mode enabled - using source format";
+  } else {
+    // Apply bit depth to format
+    switch (current_bit_depth_) {
+    case Engine::BitDepth::Bit16:
+      format_ = kOutFormatS16LE;
+      break;
+    case Engine::BitDepth::Bit24:
+      format_ = kOutFormatS24LE;
+      break;
+    case Engine::BitDepth::Bit32:
+      format_ = kOutFormatF32LE;
+      break;
+    }
+  }
+  
+  qLog(Info) << "GStreamer: Loaded settings - BitDepth:" << (int)current_bit_depth_ 
+             << "SampleRate:" << (int)current_sample_rate_ 
+             << "PlaybackMode:" << (playback_mode_ == Engine::PlaybackMode::BitPerfect ? "BitPerfect" : "Standard")
+             << "Format:" << format_;
 }
 
 qint64 GstEngine::position_nanosec() const {
@@ -994,4 +1038,146 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
 
 void GstEngine::NewDebugConsole(Console* console) {
   console->AddPage(new GstEngineDebug(this), "GstEngine");
+}
+
+// Extended Audio Backend Interface Implementation
+
+Engine::OutputType GstEngine::GetOutputType() const {
+#ifdef Q_OS_LINUX
+  if (sink_ == "pulsesink") {
+    return Engine::OutputType::PulseAudio;
+  }
+#endif
+  return Engine::OutputType::ALSA;
+}
+
+QStringList GstEngine::SupportedFormats() const {
+  // Extended format support through GStreamer
+  return QStringList() 
+    << "MP3" << "OGG" << "FLAC" << "AAC" << "M4A" << "WMA" << "WAV" 
+    << "AIFF" << "APE" << "MPC" << "TTA" << "WV" << "AC3" << "DTS";
+}
+
+QList<Engine::BitDepth> GstEngine::SupportedBitDepths() const {
+  return QList<Engine::BitDepth>()
+    << Engine::BitDepth::Bit16
+    << Engine::BitDepth::Bit24
+    << Engine::BitDepth::Bit32;
+}
+
+QList<Engine::SampleRate> GstEngine::SupportedSampleRates() const {
+  return QList<Engine::SampleRate>()
+    << Engine::SampleRate::Rate44100
+    << Engine::SampleRate::Rate48000
+    << Engine::SampleRate::Rate96000
+    << Engine::SampleRate::Rate192000;
+}
+
+void GstEngine::SetBitDepth(Engine::BitDepth depth) {
+  current_bit_depth_ = depth;
+  
+  // Only apply format in Standard mode, BitPerfect uses source format
+  if (playback_mode_ == Engine::PlaybackMode::Standard) {
+    // Update the GStreamer format setting
+    switch (depth) {
+    case Engine::BitDepth::Bit16:
+      format_ = kOutFormatS16LE;
+      enable_32bit_processing_ = false;
+      qLog(Info) << "GStreamer: Set bit depth to 16-bit (S16LE)";
+      break;
+    case Engine::BitDepth::Bit24:
+      format_ = kOutFormatS24LE; // Use proper 24-bit format
+      enable_32bit_processing_ = false;
+      qLog(Info) << "GStreamer: Set bit depth to 24-bit (S24LE)";
+      break;
+    case Engine::BitDepth::Bit32:
+      format_ = kOutFormatF32LE; // Use F32LE for high-quality 32-bit processing
+      enable_32bit_processing_ = true;
+      qLog(Info) << "GStreamer: Set bit depth to 32-bit (F32LE)";
+      break;
+    }
+    
+    // Apply to existing pipeline if active (only in Standard mode)
+    if (current_pipeline_) {
+      qLog(Info) << "GStreamer: Updating active pipeline format to:" << format_;
+      current_pipeline_->set_format(format_);
+      // For runtime format changes, we need to update the pipeline's audio processing chain
+      current_pipeline_->UpdateAudioFormat(format_);
+    }
+  } else {
+    qLog(Info) << "GStreamer: BitPerfect mode - bit depth setting ignored, using source format";
+  }
+  
+  // Save setting
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("bitdepth", (int)depth);
+}
+
+Engine::BitDepth GstEngine::GetCurrentBitDepth() const {
+  return current_bit_depth_;
+}
+
+void GstEngine::SetSampleRate(Engine::SampleRate rate) {
+  current_sample_rate_ = rate;
+  
+  // Update the GStreamer sample rate setting
+  sample_rate_ = (int)rate;
+  
+  // Apply to existing pipeline if active
+  if (current_pipeline_) {
+    current_pipeline_->set_sample_rate(sample_rate_);
+    qLog(Info) << "GStreamer: Set sample rate to" << (int)rate << "Hz";
+  } else {
+    qLog(Info) << "GStreamer: Sample rate" << (int)rate << "Hz will be applied to next pipeline";
+  }
+  
+  // Save setting to QSettings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("backend_samplerate", (int)rate);
+}
+
+Engine::SampleRate GstEngine::GetCurrentSampleRate() const {
+  return current_sample_rate_;
+}
+
+// Bitperfect playback methods
+void GstEngine::SetPlaybackMode(Engine::PlaybackMode mode) {
+  playback_mode_ = mode;
+  
+  if (mode == Engine::PlaybackMode::BitPerfect) {
+    format_ = kOutFormatDetect; // Auto-detect source format
+    qLog(Info) << "GStreamer: Enabled BitPerfect mode - using source format";
+  } else {
+    // Standard mode - apply configured format
+    switch (current_bit_depth_) {
+    case Engine::BitDepth::Bit16:
+      format_ = kOutFormatS16LE;
+      break;
+    case Engine::BitDepth::Bit24:
+      format_ = kOutFormatS24LE;
+      break;
+    case Engine::BitDepth::Bit32:
+      format_ = kOutFormatF32LE;
+      break;
+    }
+    qLog(Info) << "GStreamer: Enabled Standard mode - using configured format:" << format_;
+  }
+  
+  // Apply to existing pipeline if active
+  if (current_pipeline_) {
+    qLog(Info) << "GStreamer: Updating active pipeline to" << (mode == Engine::PlaybackMode::BitPerfect ? "BitPerfect" : "Standard") << "mode";
+    current_pipeline_->set_format(format_);
+    current_pipeline_->UpdateAudioFormat(format_);
+  }
+  
+  // Save setting
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("playback_mode", (int)mode);
+}
+
+Engine::PlaybackMode GstEngine::GetPlaybackMode() const {
+  return playback_mode_;
 }
