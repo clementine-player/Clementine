@@ -556,6 +556,7 @@
    <addaction name="action_cover_manager"/>
    <addaction name="action_queue_manager"/>
    <addaction name="action_equalizer"/>
+   <addaction name="action_stem_mixer"/>
    <addaction name="action_visualisations"/>
    <addaction name="action_transcode"/>
    <addaction name="action_rip_audio_cd"/>
@@ -792,6 +793,11 @@
   <action name="action_equalizer">
    <property name="text">
     <string>Equalizer</string>
+   </property>
+  </action>
+  <action name="action_stem_mixer">
+   <property name="text">
+    <string>AI Stem Mixer</string>
    </property>
   </action>
   <action name="action_transcode">

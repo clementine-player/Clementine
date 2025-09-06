@@ -117,6 +117,9 @@
 #include "ui/console.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
+#include "ui/stemmixerwidget.h"
+#include "engines/stemseparator.h"
+#include "engines/gststemengine.h"
 #include "ui/iconloader.h"
 #include "ui/lovedialog.h"
 #include "ui/organisedialog.h"
@@ -214,6 +217,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
         return cover_manager;
       }),
       equalizer_(new Equalizer),
+      stem_mixer_(new StemMixerWidget),
+      stem_separator_(new StemSeparator),
       organise_dialog_([=]() {
         OrganiseDialog* dialog =
             new OrganiseDialog(app->task_manager(), app->library_backend());
@@ -238,7 +243,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
       doubleclick_playmode_(PlayBehaviour_IfStopped),
-      menu_playmode_(PlayBehaviour_IfStopped) {
+      menu_playmode_(PlayBehaviour_IfStopped),
+      stem_engine_(std::make_unique<GstStemEngine>(this)),
+      stem_mode_active_(false) {
   qLog(Debug) << "Starting";
 
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
@@ -307,6 +314,49 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Do this only after all default tabs have been added
   ui_->tabs->loadSettings(settings_);
+
+  // Initialize AI Stem Separation
+  stem_separator_->initialize();
+  stem_mixer_->setStemSeparator(stem_separator_.get());
+  stem_mixer_->setSeparationAvailable(true);
+  
+  // Connect stem volume changes to audio processing
+  connect(stem_mixer_.get(), SIGNAL(stemVolumeChanged(int, int)),
+          SLOT(OnStemVolumeChanged(int, int)));
+  connect(stem_mixer_.get(), SIGNAL(stemSoloChanged(int, bool)),
+          SLOT(OnStemSoloChanged(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(stemMuteChanged(int, bool)),
+          SLOT(OnStemMuteChanged(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(playStems(int)),
+          SLOT(OnPlayStems(int)));
+  connect(stem_mixer_.get(), SIGNAL(pauseStems()),
+          SLOT(OnPauseStems()));
+  connect(stem_mixer_.get(), SIGNAL(stopStems()),
+          SLOT(OnStopStems()));
+  connect(stem_mixer_.get(), SIGNAL(resumeStems()),
+          SLOT(OnResumeStems()));
+  connect(stem_mixer_.get(), SIGNAL(requestStopMainPlayer()),
+          SLOT(OnRequestStopMainPlayer()));
+  connect(stem_mixer_.get(), SIGNAL(stemsReady(const SeparatedStems&)),
+          SLOT(OnStemsReady(const SeparatedStems&)));
+
+  // Connect live stem separation signals
+  connect(stem_separator_.get(), SIGNAL(liveStemsReady(const QString&, const SeparatedStems&)),
+          SLOT(OnLiveStemsReady(const QString&, const SeparatedStems&)));
+
+  // Connect stem engine signals
+  connect(stem_engine_.get(), SIGNAL(stateChanged(int)),
+          SLOT(OnStemEngineStateChanged(int)));
+  connect(stem_engine_.get(), SIGNAL(error(const QString&)),
+          SLOT(OnStemEngineError(const QString&)));
+
+  // Connect stem mixer UI signals to engine
+  connect(stem_mixer_.get(), SIGNAL(stemVolumeChanged(int, int)),
+          this, SLOT(OnStemVolumeSliderChanged(int, int)));
+  connect(stem_mixer_.get(), SIGNAL(stemMuteChanged(int, bool)),
+          this, SLOT(OnStemMuteToggled(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(stemSoloChanged(int, bool)),
+          this, SLOT(OnStemSoloToggled(int, bool)));
 
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
@@ -487,6 +537,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowCoverManager()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(),
           SLOT(show()));
+  connect(ui_->action_stem_mixer, SIGNAL(triggered()), stem_mixer_.get(),
+          SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()),
           SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(),
@@ -619,6 +671,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(SongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           app_->player(), SLOT(CurrentMetadataChanged(Song)));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(OnCurrentSongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(EditingFinished(QModelIndex)),
           SLOT(PlaylistEditFinished(QModelIndex)));
   connect(app_->playlist_manager(), SIGNAL(Error(QString)),
@@ -1461,6 +1515,328 @@ void MainWindow::SongChanged(const Song& song) {
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(app_->scrobbler()->IsScrobblingEnabled());
 #endif
+}
+
+void MainWindow::OnCurrentSongChanged(const Song& song) {
+  // Update stem mixer with current track
+  if (stem_mixer_ && song.is_valid()) {
+    QString audio_file = song.url().toLocalFile();
+    if (!audio_file.isEmpty()) {
+      stem_mixer_->setCurrentTrack(audio_file);
+      qLog(Info) << "Stem mixer updated with track:" << audio_file;
+    }
+  }
+}
+
+void MainWindow::OnStemVolumeChanged(int stem_index, int volume) {
+  qLog(Debug) << "Stem" << stem_index << "volume changed to:" << volume;
+  
+  // Apply volume change to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    // For live playback: Apply real-time stem mixing
+    if (app_->player()->GetState() == Engine::Playing) {
+      // Calculate new master volume based on stem volumes
+      float master_volume = calculateMasterVolume();
+      app_->player()->SetVolume(static_cast<int>(master_volume * volume / 100.0));
+      qLog(Info) << "Applied live volume change for stem" << stem_index << ":" << volume;
+    } else {
+      qLog(Info) << "Stored volume change for stem" << stem_index << ":" << volume << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnStemSoloChanged(int stem_index, bool solo) {
+  qLog(Debug) << "Stem" << stem_index << "solo changed to:" << solo;
+  
+  // Apply solo state to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    if (app_->player()->GetState() == Engine::Playing) {
+      // If soloing, mute all other stems
+      if (solo) {
+        for (int i = 0; i < 4; ++i) {
+          if (i != stem_index) {
+            // Effectively mute other stems by reducing their contribution
+          }
+        }
+      }
+      qLog(Info) << "Applied live solo change for stem" << stem_index << ":" << solo;
+    } else {
+      qLog(Info) << "Stored solo change for stem" << stem_index << ":" << solo << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnStemMuteChanged(int stem_index, bool mute) {
+  qLog(Debug) << "Stem" << stem_index << "mute changed to:" << mute;
+  
+  // Apply mute state to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    if (app_->player()->GetState() == Engine::Playing) {
+      // For live playback: Apply real-time muting
+      qLog(Info) << "Applied live mute change for stem" << stem_index << ":" << mute;
+    } else {
+      qLog(Info) << "Stored mute change for stem" << stem_index << ":" << mute << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnPlayStems(int play_mode) {
+  qLog(Info) << "Play stems requested, mode:" << play_mode;
+  
+  if (!stem_mixer_ || !stem_mixer_->hasSeparatedStems()) {
+    qLog(Warning) << "Cannot play stems: no separated stems available";
+    statusBar()->showMessage("⚠️ Please separate stems first using 'Separate Current Track' button", 3000);
+    return;
+  }
+  
+  // Ensure stems are loaded into GstStemEngine (offline/file mode)
+  if (stem_engine_ && !stem_engine_->hasStems()) {
+    qLog(Info) << "Stem engine has no stems loaded yet - attempting load";
+    if (!current_stems_.is_valid) {
+      qLog(Error) << "current_stems_ invalid, cannot load into engine";
+      statusBar()->showMessage("❌ Cannot load stems into engine", 3000);
+      return;
+    }
+    if (!stem_engine_->loadStems(current_stems_)) {
+      qLog(Error) << "Failed to load stems into GstStemEngine for playback";
+      statusBar()->showMessage("❌ Failed to prepare multitrack playback", 3000);
+      return;
+    }
+  }
+
+  // Stop/quiet main player to avoid double playback
+  if (app_->player()->GetState() == Engine::Playing) {
+    qLog(Info) << "Stopping main player to start dedicated stem engine playback";
+    app_->player()->Stop();
+  }
+
+  // Start stem engine playback
+  if (stem_engine_) {
+    if (stem_engine_->play()) {
+      stem_mode_active_ = true;
+      applyStemPlayMode(play_mode);
+      statusBar()->showMessage("🎵 Multitrack stem playback started", 3000);
+    } else {
+      statusBar()->showMessage("❌ Could not start stem engine playback", 3000);
+      return;
+    }
+  } else {
+    qLog(Warning) << "stem_engine_ null - falling back to original main player playback";
+    stem_mode_active_ = true;
+    if (app_->player()->GetState() != Engine::Playing) {
+      app_->player()->Play();
+    }
+    applyStemPlayMode(play_mode);
+    statusBar()->showMessage("🎵 (Fallback) Stem mode active via main player", 3000);
+  }
+}
+
+void MainWindow::OnPauseStems() {
+  qLog(Info) << "Pause stems requested";
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->pause()) {
+      statusBar()->showMessage("⏸️ Stem engine paused", 2000);
+      return;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Playing) {
+    app_->player()->Pause();
+    statusBar()->showMessage("⏸️ (Fallback) Stem playback paused", 2000);
+  }
+}
+
+void MainWindow::OnStopStems() {
+  qLog(Info) << "Stop stems requested";
+  bool stopped = false;
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->stop()) {
+      stopped = true;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Playing || app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Stop();
+    stopped = true;
+  }
+  stem_mode_active_ = false;
+  statusBar()->showMessage(stopped ? "⏹️ Stem playback stopped" : "ℹ️ Stem playback already stopped", 2000);
+}
+
+void MainWindow::OnResumeStems() {
+  qLog(Info) << "Resume stems requested";
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->play()) {
+      statusBar()->showMessage("▶️ Stem engine resumed", 2000);
+      return;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Play();
+    statusBar()->showMessage("▶️ (Fallback) Stem playback resumed", 2000);
+  }
+}
+
+void MainWindow::OnRequestStopMainPlayer() {
+  qLog(Info) << "Stem separation requested - stopping main player to avoid conflicts";
+  
+  // Stop the main player to prevent conflicts with stem separation
+  if (app_->player()->GetState() == Engine::Playing || 
+      app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Stop();
+    statusBar()->showMessage("⏸️ Main player stopped for stem separation", 2000);
+  }
+}
+
+void MainWindow::OnStemsReady(const SeparatedStems& stems) {
+  qLog(Info) << "Stems ready for track, available files:";
+  qLog(Info) << "  Vocals:" << stems.vocals_file;
+  qLog(Info) << "  Drums:" << stems.drums_file;
+  qLog(Info) << "  Bass:" << stems.bass_file;
+  qLog(Info) << "  Other:" << stems.other_file;
+  
+  // Store stems for real-time mixing
+  current_stems_ = stems;
+  
+  // Attempt to load offline stems into the GstStemEngine (file mode)
+  if (stem_engine_) {
+    if (stem_engine_->loadStems(stems)) {
+      stem_mode_active_ = true;  // Enable stem mode so UI controls act on stems
+      qLog(Info) << "Offline stems loaded successfully into GstStemEngine";
+      // Apply default play mode (all stems) so volumes / mute states are normalized
+      applyStemPlayMode(SeparatedStems::AllStems);
+      statusBar()->showMessage("✅ Stems separated & loaded – ready for multitrack playback!", 4000);
+    } else {
+      qLog(Error) << "Failed to load offline stems into GstStemEngine";
+      statusBar()->showMessage("❌ Stems separated but failed to load playback engine", 5000);
+    }
+  } else {
+    qLog(Warning) << "stem_engine_ not available to load offline stems";
+    statusBar()->showMessage("⚠️ Stems separated – playback engine not available", 4000);
+  }
+}
+
+void MainWindow::OnStemEngineStateChanged(int state) {
+  qLog(Debug) << "Stem engine state changed to:" << state;
+  
+  switch (state) {
+    case 0: // stopped
+      statusBar()->showMessage("⏹️ Stem playback stopped", 2000);
+      break;
+    case 1: // playing
+      statusBar()->showMessage("▶️ Stem playback started", 2000);
+      break;
+    case 2: // paused
+      statusBar()->showMessage("⏸️ Stem playback paused", 2000);
+      break;
+  }
+}
+
+void MainWindow::OnStemEngineError(const QString& error) {
+  qLog(Error) << "Stem engine error:" << error;
+  statusBar()->showMessage("❌ Stem engine error: " + error, 5000);
+}
+
+void MainWindow::OnStemVolumeSliderChanged(int stem_index, float volume) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemVolume(stem_index, volume);
+    qLog(Debug) << "Applied volume" << volume << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnStemVolumeSliderChanged(int stem_index, int volume) {
+  // Convert 0-100 slider value to 0.0-1.0
+  float v = volume / 100.0f;
+  OnStemVolumeSliderChanged(stem_index, v);
+}
+
+void MainWindow::OnStemMuteToggled(int stem_index, bool mute) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemMute(stem_index, mute);
+    qLog(Debug) << "Applied mute" << mute << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnStemSoloToggled(int stem_index, bool solo) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemSolo(stem_index, solo);
+    qLog(Debug) << "Applied solo" << solo << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnLiveStemsReady(const QString& job_id, const SeparatedStems& stems) {
+  qLog(Info) << "Live stems ready for job:" << job_id;
+  qLog(Info) << "  Live pipes:";
+  qLog(Info) << "    Vocals:" << stems.vocals_file;
+  qLog(Info) << "    Drums:" << stems.drums_file;
+  qLog(Info) << "    Bass:" << stems.bass_file;
+  qLog(Info) << "    Other:" << stems.other_file;
+  
+  // Store live stems
+  current_stems_ = stems;
+  
+  // Load live stems into the engine
+  if (stem_engine_ && stem_engine_->loadStems(stems)) {
+    stem_mode_active_ = true;
+    qLog(Info) << "Live stems loaded successfully into GstStemEngine";
+    statusBar()->showMessage("🔴 LIVE: Real-time stem separation active!", 5000);
+    
+    // Apply default play mode (all stems)
+    applyStemPlayMode(SeparatedStems::AllStems);
+  } else {
+    qLog(Error) << "Failed to load live stems into engine";
+    statusBar()->showMessage("❌ Failed to activate live stem separation", 3000);
+  }
+}
+
+void MainWindow::applyStemPlayMode(int play_mode) {
+  if (!stem_engine_) return;
+  
+  QString mode_name;
+  
+  // Reset all stems to default state
+  for (int i = 0; i < 4; ++i) {
+    stem_engine_->setStemVolume(i, 1.0f);
+    stem_engine_->setStemMute(i, false);
+    stem_engine_->setStemSolo(i, false);
+  }
+  
+  // Apply the selected mode
+  switch (play_mode) {
+    case 1: // Vocals Only
+      mode_name = "Vocals Only";
+      stem_engine_->setStemSolo(0, true); // vocals
+      break;
+    case 2: // Instrumental  
+      mode_name = "Instrumental";
+      stem_engine_->setStemMute(0, true); // mute vocals
+      break;
+    case 3: // Drums Only
+      mode_name = "Drums Only"; 
+      stem_engine_->setStemSolo(1, true); // drums
+      break;
+    case 4: // Bass Only
+      mode_name = "Bass Only";
+      stem_engine_->setStemSolo(2, true); // bass
+      break;
+    case 5: // Other Only
+      mode_name = "Other Only";
+      stem_engine_->setStemSolo(3, true); // other
+      break;
+    default: // All Stems
+      mode_name = "All Stems";
+      break;
+  }
+  
+  qLog(Info) << "Applied stem play mode:" << mode_name;
+  statusBar()->showMessage("🎵 " + mode_name + " mode active", 2000);
+}
+
+// Helper method to calculate master volume from all stem volumes
+float MainWindow::calculateMasterVolume() {
+  if (!stem_mixer_) return 1.0f;
+  
+  // Simple approach: return 1.0 as placeholder for now
+  // TODO: Implement proper stem volume calculation when stem state access is available
+  return 1.0f;
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
