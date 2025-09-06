@@ -43,11 +43,14 @@ System Requirements
 - Python 3.8+ with pip and venv
 - PyTorch and Demucs libraries (auto-installed)
 
-#### Raspberry Pi (Experimental)
-- Raspberry Pi 4 or newer
-- Raspberry Pi OS (64-bit) or compatible distribution
-- 2GB RAM minimum recommended
-- Hardware audio output enabled
+#### Raspberry Pi Support
+- **Minimum**: Raspberry Pi 5 (8GB) - **Recommended for AI stem separation**
+- **Alternative**: Raspberry Pi 4 (8GB) - Limited AI performance, basic playback only
+- **OS**: Raspberry Pi OS (64-bit) Bookworm or newer
+- **RAM**: 8GB minimum (AI stem separation requires 4-6GB RAM)
+- **Storage**: 32GB+ SD Card (Class 10 or better) + USB 3.0 SSD recommended
+- **Audio**: Hardware audio output enabled (HDMI/3.5mm/USB DAC)
+- **Performance Note**: AI stem separation is CPU-intensive and may take 5-10x longer than x86_64 systems
 
 Opening an issue
 ----------------
