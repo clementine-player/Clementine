@@ -105,32 +105,16 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
             if (ok) {
               AddWhere(columntoken, doubleVal, op);
             }
+          } else if (columntoken == "length") {
+            double seconds = GetSecondsFromToken(val);
+            if (seconds > 0) {
+              double nanoseconds = seconds * 1000000000;
+              AddWhere(columntoken, nanoseconds, op);
+            }
           } else if (columntoken == "filetype") {
             AddWhere(columntoken, kFiletypeId[val]);
           } else if (Song::kDateColumns.contains(columntoken)) {
-            int seconds = 0;
-            QString tmp = "";
-            QString allowedChars = "smhd";
-            for (QChar c : val) {
-              if (c.isDigit()) {
-                tmp.append(c);
-              } else if (allowedChars.contains(c)) {
-                bool ok;
-                int intVal = tmp.toInt(&ok);
-                tmp = "";
-                if (ok) {
-                  if (c == 's') {
-                    seconds += intVal;
-                  } else if (c == 'm') {
-                    seconds += intVal * 60;
-                  } else if (c == 'h') {
-                    seconds += intVal * 60 * 60;
-                  } else if (c == 'd') {
-                    seconds += intVal * 60 * 60 * 24;
-                  }
-                }
-              }
-            }
+            int seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
               int now = QDateTime::currentDateTime().toTime_t();
               QString dt = QString("(%1-%2)").arg(now).arg(columntoken);
@@ -179,6 +163,33 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   if (options.query_mode() == QueryOptions::QueryMode_Untagged) {
     where_clauses_ << "(artist = '' OR album = '' OR title ='')";
   }
+}
+
+int LibraryQuery::GetSecondsFromToken(QString val) {
+  int seconds = 0;
+  QString tmp = "";
+  QString allowedChars = "smhd";
+  for (QChar c : val) {
+    if (c.isDigit()) {
+      tmp.append(c);
+    } else if (allowedChars.contains(c)) {
+      bool ok;
+      int intVal = tmp.toInt(&ok);
+      tmp = "";
+      if (ok) {
+        if (c == 's') {
+          seconds += intVal;
+        } else if (c == 'm') {
+          seconds += intVal * 60;
+        } else if (c == 'h') {
+          seconds += intVal * 60 * 60;
+        } else if (c == 'd') {
+          seconds += intVal * 60 * 60 * 24;
+        }
+      }
+    }
+  }
+  return seconds;
 }
 
 QString LibraryQuery::GetInnerQuery() {
