@@ -35,6 +35,7 @@
 #include "bufferconsumer.h"
 #include "core/timeconstants.h"
 #include "enginebase.h"
+#include "iaudiobackend.h"
 
 class QTimer;
 class QTimerEvent;
@@ -56,12 +57,39 @@ typedef struct _GTlsDatabase GTlsDatabase;
  * @short GStreamer engine plugin
  * @author Mark Kretschmann <markey@web.de>
  */
-class GstEngine : public Engine::Base, public BufferConsumer {
+class GstEngine : public Engine::Base, public Engine::IAudioBackend, public BufferConsumer {
   Q_OBJECT
 
  public:
   GstEngine(Application* app);
   ~GstEngine();
+  
+  // IAudioBackend interface implementation
+  QString Name() const override { return "GStreamer"; }
+  QString Description() const override { return "Advanced GStreamer audio backend with multi-format support"; }
+  bool IsAvailable() const override { return true; }
+  
+  // Extended Backend Features
+  Engine::OutputType GetOutputType() const override;
+  QStringList SupportedFormats() const override;
+  QList<Engine::BitDepth> SupportedBitDepths() const override;
+  QList<Engine::SampleRate> SupportedSampleRates() const override;
+  
+  // Audio Processing Capabilities
+  bool Supports32BitProcessing() const override { return true; }
+  bool SupportsExclusiveMode() const override { return false; }
+  bool SupportsLowLatency() const override { return true; }
+  
+  // Quality settings
+  void SetBitDepth(Engine::BitDepth depth) override;
+  Engine::BitDepth GetCurrentBitDepth() const override;
+  void SetSampleRate(Engine::SampleRate rate) override;
+  Engine::SampleRate GetCurrentSampleRate() const override;
+  
+  // Bitperfect playback
+  void SetPlaybackMode(Engine::PlaybackMode mode) override;
+  Engine::PlaybackMode GetPlaybackMode() const override;
+  bool SupportsBitPerfect() const override { return true; }
 
   struct OutputDetails {
     QString description;
@@ -75,6 +103,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const int kAutoSampleRate = -1;
   static const char* kOutFormatDetect;
   static const char* kOutFormatS16LE;
+  static const char* kOutFormatS24LE;
   static const char* kOutFormatF32LE;
   static const char* kSettingsGroup;
   static const char* kSettingFormat;
@@ -250,6 +279,12 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int scope_chunks_;
 
   QList<DeviceFinder*> device_finders_;
+
+  // Extended Backend Configuration
+  Engine::BitDepth current_bit_depth_;
+  Engine::SampleRate current_sample_rate_;
+  bool enable_32bit_processing_;
+  Engine::PlaybackMode playback_mode_;  // Standard or BitPerfect
 
 #ifdef Q_OS_DARWIN
   GTlsDatabase* tls_database_;
