@@ -10,10 +10,13 @@ Clementine Extended is a modern music player and library organizer with AI-power
 - **Quick Presets**: One-click karaoke, instrumental, and single-stem modes
 - **GStreamer Integration**: Seamless multitrack playback with zero-latency mixing
 
-- [Latest Release](https://github.com/clementine-player/Clementine/releases/latest)
-- [Latest Pre-Releases](https://github.com/clementine-player/Clementine/releases)
-- Website: http://www.clementine-player.org/
-- Github: https://github.com/clementine-player/Clementine
+### 📦 Download Options
+- **🚀 [Latest Release v0.0.4](https://github.com/Wacken2012/Clementine-Extendet/releases/latest)** - Stable AppImage (228MB)
+- **💾 [AppImage Download](https://github.com/Wacken2012/Clementine-Extendet/releases/latest/download/Clementine_Extended-x86_64.AppImage)** - Portable, works on any Linux distro
+
+### 🔗 Links
+- Original Website: http://www.clementine-player.org/
+- Extended Version: https://github.com/Wacken2012/Clementine-Extendet
 
 System Requirements
 ----------------
@@ -79,13 +82,13 @@ Compiling from source
 
 Get the code (if you haven't already):
 
-    git clone https://github.com/clementine-player/Clementine.git && cd Clementine
+    git clone https://github.com/Wacken2012/Clementine-Extendet.git && cd Clementine-Extendet
 
 Setup Python environment for AI features:
 
     python3 -m venv stem_separation_env
     source stem_separation_env/bin/activate
-    pip install torch demucs
+    pip install torch demucs soundfile librosa audioread
 
 Compile and install:
 
