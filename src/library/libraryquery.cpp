@@ -51,6 +51,10 @@ const QMap<QString, Song::FileType> kFiletypeId = QMap<QString, Song::FileType>(
                                       {"stream", Song::Type_Stream},
                                       {"unknown", Song::Type_Unknown}});
 
+const int kNsecsPerSec = 1e9;
+const QString kAllowedChars = "smhd";
+const int kSecsPerDay = 60 * 60 * 24;
+
 LibraryQuery::LibraryQuery(const QueryOptions& options)
     : include_unavailable_(false), join_with_fts_(false), limit_(-1) {
   if (!options.filter().isEmpty()) {
@@ -108,7 +112,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
           } else if (columntoken == "length") {
             double seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
-              double nanoseconds = seconds * 1000000000;
+              double nanoseconds = seconds * kNsecsPerSec;
               AddWhere(columntoken, nanoseconds, op);
             }
           } else if (columntoken == "filetype") {
@@ -165,15 +169,14 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   }
 }
 
-int LibraryQuery::GetSecondsFromToken(QString val) {
+int LibraryQuery::GetSecondsFromToken(QString& val) const {
   int seconds = 0;
   QString tmp = "";
-  QString allowedChars = "smhd";
   for (QChar c : val) {
     if (c.isDigit()) {
       tmp.append(c);
-    } else if (allowedChars.contains(c)) {
-      bool ok;
+    } else if (kAllowedChars.contains(c)) {
+      bool ok = false;
       int intVal = tmp.toInt(&ok);
       tmp = "";
       if (ok) {
@@ -184,7 +187,7 @@ int LibraryQuery::GetSecondsFromToken(QString val) {
         } else if (c == 'h') {
           seconds += intVal * 60 * 60;
         } else if (c == 'd') {
-          seconds += intVal * 60 * 60 * 24;
+          seconds += intVal * kSecsPerDay;
         }
       }
     }
