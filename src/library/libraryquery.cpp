@@ -22,6 +22,7 @@
 #include <QtDebug>
 
 #include "core/song.h"
+#include "core/timeconstants.h"
 
 QueryOptions::QueryOptions() : max_age_(-1), query_mode_(QueryMode_All) {}
 
@@ -51,9 +52,7 @@ const QMap<QString, Song::FileType> kFiletypeId = QMap<QString, Song::FileType>(
                                       {"stream", Song::Type_Stream},
                                       {"unknown", Song::Type_Unknown}});
 
-const int kNsecsPerSec = 1e9;
 const QString kAllowedChars = "smhd";
-const int kSecsPerDay = 60 * 60 * 24;
 
 LibraryQuery::LibraryQuery(const QueryOptions& options)
     : include_unavailable_(false), join_with_fts_(false), limit_(-1) {
@@ -110,9 +109,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
               AddWhere(columntoken, doubleVal, op);
             }
           } else if (columntoken == "length") {
-            double seconds = GetSecondsFromToken(val);
+            qint64 seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
-              double nanoseconds = seconds * kNsecsPerSec;
+              qint64 nanoseconds = seconds * kNsecPerSec;
               AddWhere(columntoken, nanoseconds, op);
             }
           } else if (columntoken == "filetype") {
