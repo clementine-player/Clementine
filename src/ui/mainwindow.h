@@ -19,6 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMenu>
 #include <QSettings>
 #include <QSystemTrayIcon>
 #include <memory>
@@ -27,7 +28,11 @@
 #include "core/lazy.h"
 #include "core/mac_startup.h"
 #include "core/tagreaderclient.h"
+#include "ui/stemmixerwidget.h"
+#include "engines/stemseparator.h"
+#include "engines/gststemengine.h"
 #include "engines/engine_fwd.h"
+#include "engines/audiobackendmanager.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
 #include "songinfo/streamdiscoverer.h"
@@ -56,6 +61,10 @@ class ErrorDialog;
 class FileView;
 class GlobalSearch;
 class GlobalSearchView;
+
+// AIMP-style enhanced playlist classes
+class AimpPlaylistContainer;
+class AimpSmartPlaylistManager;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
@@ -75,6 +84,10 @@ class RipCDDialog;
 class Song;
 class SongInfoBase;
 class SongInfoView;
+class StemMixerWidget;
+class StemSeparator;
+class GstStemEngine;
+struct SeparatedStems;
 class StreamDetailsDialog;
 class SystemTrayIcon;
 class TagFetcher;
@@ -154,6 +167,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NewDebugConsole(Console* console);
  private slots:
+  void ShowAudioBackendMenu();
+  void ShowBackendConfigurationDialog(const QString& backend_name = QString());
   void SetNextAlbumEnabled(PlaylistSequence::RepeatMode mode);
   void FilePathChanged(const QString& path);
 
@@ -190,6 +205,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void SearchForAlbum();
 
   void PlaylistCopyToLibrary();
+  void NewSmartPlaylist();
   void PlaylistMoveToLibrary();
   void PlaylistCopyToDevice();
   void PlaylistOrganiseSelected(bool copy);
@@ -204,6 +220,23 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void StopAfterCurrent();
 
   void SongChanged(const Song& song);
+  void OnCurrentSongChanged(const Song& song);
+  void OnStemVolumeChanged(int stem_index, int volume);
+  void OnStemSoloChanged(int stem_index, bool solo);
+  void OnStemMuteChanged(int stem_index, bool mute);
+  void OnPlayStems(int play_mode);
+  void OnPauseStems();
+  void OnStopStems();
+  void OnResumeStems();
+  void OnRequestStopMainPlayer(); // New slot to stop main player
+  void OnStemsReady(const SeparatedStems& stems);
+  void OnLiveStemsReady(const QString& job_id, const SeparatedStems& stems);  // New live slot
+  void OnStemEngineStateChanged(int state);
+  void OnStemEngineError(const QString& error);
+  void OnStemVolumeSliderChanged(int stem_index, float volume);
+  void OnStemVolumeSliderChanged(int stem_index, int volume); // overload for signal(int,int)
+  void OnStemMuteToggled(int stem_index, bool mute);
+  void OnStemSoloToggled(int stem_index, bool solo);
   void VolumeChanged(int volume);
 
   void CopyFilesToLibrary(const QList<QUrl>& urls);
@@ -302,6 +335,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private:
   void ConnectInfoView(SongInfoBase* view);
+  float calculateMasterVolume();  // Helper for stem volume calculation
+  void applyStemPlayMode(int play_mode);  // Apply stem playback mode
 
   void ApplyAddBehaviour(AddBehaviour b, MimeData* data) const;
   void ApplyPlayBehaviour(PlayBehaviour b, MimeData* data) const;
@@ -314,6 +349,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
  private:
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
+  
+  // Audio Backend Management
+  QMenu* audio_backend_menu_ = nullptr;
 
   Application* app_;
   SystemTrayIcon* tray_icon_;
@@ -343,6 +381,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Lazy<AddStreamDialog> add_stream_dialog_;
   Lazy<AlbumCoverManager> cover_manager_;
   std::unique_ptr<Equalizer> equalizer_;
+  std::unique_ptr<StemMixerWidget> stem_mixer_;
+  std::unique_ptr<StemSeparator> stem_separator_;
   Lazy<TranscodeDialog> transcode_dialog_;
   Lazy<ErrorDialog> error_dialog_;
   Lazy<OrganiseDialog> organise_dialog_;
@@ -406,6 +446,11 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;
+  
+  // AI Stem separation and real-time mixing
+  std::unique_ptr<GstStemEngine> stem_engine_;
+  bool stem_mode_active_;
+  SeparatedStems current_stems_;
 };
 
 #endif  // MAINWINDOW_H
