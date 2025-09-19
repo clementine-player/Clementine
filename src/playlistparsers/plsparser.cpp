@@ -43,19 +43,21 @@ SongList PLSParser::Load(QIODevice* device, const QString& playlist_path,
     if (key.startsWith("file")) {
       Song song = LoadSong(value, 0, dir);
 
-      // Use the title and length we've already loaded if any
-      if (!songs[n].title().isEmpty()) song.set_title(songs[n].title());
-      if (songs[n].length_nanosec() != -1)
-        song.set_length_nanosec(songs[n].length_nanosec());
+      // Use the title and length we've already loaded if any and only if the
+      // song is not in the library.
+      if (!song.is_library_song()) {
+        if (!songs[n].title().isEmpty()) song.set_title(songs[n].title());
+        if (songs[n].length_nanosec() != -1)
+          song.set_length_nanosec(songs[n].length_nanosec());
+      }
 
       songs[n] = song;
     } else if (key.startsWith("title")) {
-      songs[n].set_title(value);
+      if (!songs[n].is_library_song()) songs[n].set_title(value);
     } else if (key.startsWith("length")) {
       qint64 seconds = value.toLongLong();
-      if (seconds > 0) {
+      if ((seconds > 0) && !songs[n].is_library_song())
         songs[n].set_length_nanosec(seconds * kNsecPerSec);
-      }
     }
   }
 
