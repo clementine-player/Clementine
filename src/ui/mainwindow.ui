@@ -520,6 +520,7 @@
     <addaction name="action_repeat_mode"/>
     <addaction name="separator"/>
     <addaction name="action_new_playlist"/>
+    <addaction name="action_new_smart_playlist"/>
     <addaction name="action_save_playlist"/>
     <addaction name="action_load_playlist"/>
     <addaction name="separator"/>
@@ -548,24 +549,26 @@
     <addaction name="action_console"/>
     <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menu_tools">
-    <property name="title">
-     <string>&amp;Tools</string>
-    </property>
-    <addaction name="action_cover_manager"/>
-    <addaction name="action_queue_manager"/>
-    <addaction name="action_equalizer"/>
-    <addaction name="action_visualisations"/>
-    <addaction name="action_transcode"/>
-    <addaction name="action_rip_audio_cd"/>
-    <addaction name="separator"/>
-    <addaction name="action_update_library"/>
-    <addaction name="action_full_library_scan"/>
-    <addaction name="separator"/>
-    <addaction name="action_configure"/>
-    <addaction name="separator"/>
-    <addaction name="action_toggle_show_sidebar"/>
-   </widget>
+  <widget class="QMenu" name="menu_tools">
+   <property name="title">
+    <string>&amp;Tools</string>
+   </property>
+   <addaction name="action_cover_manager"/>
+   <addaction name="action_queue_manager"/>
+   <addaction name="action_equalizer"/>
+   <addaction name="action_stem_mixer"/>
+   <addaction name="action_visualisations"/>
+   <addaction name="action_transcode"/>
+   <addaction name="action_rip_audio_cd"/>
+   <addaction name="separator"/>
+   <addaction name="action_update_library"/>
+   <addaction name="action_full_library_scan"/>
+   <addaction name="separator"/>
+   <addaction name="action_select_audio_backend"/>
+   <addaction name="action_configure"/>
+   <addaction name="separator"/>
+   <addaction name="action_toggle_show_sidebar"/>
+  </widget>
    <addaction name="menu_music"/>
    <addaction name="menu_playlist"/>
    <addaction name="menu_tools"/>
@@ -784,12 +787,17 @@
   </action>
   <action name="action_remove_from_playlist">
    <property name="text">
-    <string>Remove from playlist</string>
+    <string>Aus Wiedergabeliste entfernen</string>
    </property>
   </action>
   <action name="action_equalizer">
    <property name="text">
     <string>Equalizer</string>
+   </property>
+  </action>
+  <action name="action_stem_mixer">
+   <property name="text">
+    <string>AI Stem Mixer</string>
    </property>
   </action>
   <action name="action_transcode">
@@ -810,12 +818,20 @@
     <string notr="true">Ctrl+J</string>
    </property>
   </action>
-  <action name="action_new_playlist">
+    <action name="action_new_playlist">
    <property name="text">
     <string>New playlist</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Ctrl+N</string>
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="action_new_smart_playlist">
+   <property name="text">
+    <string>New smart playlist...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+N</string>
    </property>
   </action>
   <action name="action_save_playlist">
@@ -911,7 +927,7 @@
   </action>
   <action name="action_remove_duplicates">
    <property name="text">
-    <string>Remove duplicates from playlist</string>
+    <string>Duplikate aus Wiedergabeliste entfernen</string>
    </property>
   </action>
   <action name="action_add_files_to_transcoder">
@@ -935,7 +951,7 @@
   </action>
   <action name="action_remove_unavailable">
    <property name="text">
-    <string>Remove unavailable tracks from playlist</string>
+    <string>Nicht verfügbare Titel aus Wiedergabeliste entfernen</string>
    </property>
   </action>
   <action name="action_view_stream_details">
@@ -963,6 +979,11 @@
    </property>
    <property name="shortcut">
     <string>F9</string>
+   </property>
+  </action>
+  <action name="action_select_audio_backend">
+   <property name="text">
+    <string>Audio-Backend auswählen...</string>
    </property>
   </action>
  </widget>

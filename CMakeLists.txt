@@ -1,5 +1,22 @@
 cmake_minimum_required(VERSION 3.13.0)
-project(clementine)
+
+# Setup Qt5 first
+find_package(Qt5 REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
+
+project(clementine VERSION 0.0.4)
+
+# CPack configuration
+set(CPACK_PACKAGE_NAME "clementine-extended")
+set(CPACK_PACKAGE_VENDOR "Clementine Team")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Clementine Music Player - Extended Edition with AI Stem Separation")
+set(CPACK_PACKAGE_VERSION "0.0.4-experimental")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_PATCH "4")
+set(CPACK_PACKAGE_CONTACT "stefanstratmann@yahoo.de")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Stefan Stratmann")
+set(CPACK_DEBIAN_PACKAGE_SECTION "sound")
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 cmake_policy(SET CMP0053 OLD)
 
@@ -67,12 +84,13 @@ pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
-pkg_check_modules(GSTREAMER REQUIRED gstreamer-1.0)
-pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
-pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
-pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
-pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
-pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
+# GStreamer disabled for Windows cross-compilation
+# pkg_check_modules(GSTREAMER REQUIRED gstreamer-1.0)
+# pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
+# pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
+# pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
+# pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
+# pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
@@ -81,6 +99,24 @@ pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(TAGLIB taglib)
 
 find_package(ZLIB REQUIRED)
+
+# Python for AI stem separation (legacy)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+
+# ONNX Runtime for native C++ AI stem separation
+set(ONNXRUNTIME_ROOT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/onnxruntime-linux-x64-1.16.3")
+set(ONNXRUNTIME_INCLUDE_DIRS "${ONNXRUNTIME_ROOT_PATH}/include")
+set(ONNXRUNTIME_LIBRARIES "${ONNXRUNTIME_ROOT_PATH}/lib/libonnxruntime.so")
+
+if(EXISTS ${ONNXRUNTIME_LIBRARIES})
+    message(STATUS "✅ Found ONNX Runtime: ${ONNXRUNTIME_LIBRARIES}")
+    set(HAVE_ONNXRUNTIME 1)
+else()
+    message(WARNING "⚠️ ONNX Runtime not found - falling back to Python backend")
+    set(HAVE_ONNXRUNTIME 0)
+endif()
+
+set(CMAKE_CXX_STANDARD 17)  # ONNX Runtime requires C++17
 
 find_library(LASTFM5_LIBRARIES lastfm5)
 find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
@@ -461,6 +497,18 @@ configure_file(
 
 add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+
+# summary of what was found
+summary_show()
+
+# Configure installation
+install(TARGETS clementine RUNTIME DESTINATION bin)
+install(FILES dist/clementine.desktop DESTINATION share/applications)
+install(FILES dist/clementine.appdata.xml DESTINATION share/metainfo)
+install(FILES dist/icons/clementine.svg DESTINATION share/icons/hicolor/scalable/apps)
+
+# Include CPack for package generation
+include(CPack)
 
 # Show a summary of what we have enabled
 summary_show()

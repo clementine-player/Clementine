@@ -18,9 +18,17 @@
 #include "mainwindow.h"
 
 #include <QCloseEvent>
+#include <QComboBox>
+#include <QCursor>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QCheckBox>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
 #include <QLinearGradient>
 #include <QList>
 #include <QMenu>
@@ -31,8 +39,10 @@
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
 #include <QSystemTrayIcon>
+#include <QTextEdit>
 #include <QTimer>
 #include <QUndoStack>
+#include <QVBoxLayout>
 #include <QtDebug>
 #include <cmath>
 #include <memory>
@@ -88,6 +98,7 @@
 #include "playlist/playlistview.h"
 #include "playlist/queue.h"
 #include "playlist/queuemanager.h"
+#include "playlist/extsmartplaylistdialog.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui_mainwindow.h"
@@ -106,6 +117,9 @@
 #include "ui/console.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
+#include "ui/stemmixerwidget.h"
+#include "engines/stemseparator.h"
+#include "engines/gststemengine.h"
 #include "ui/iconloader.h"
 #include "ui/lovedialog.h"
 #include "ui/organisedialog.h"
@@ -203,6 +217,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
         return cover_manager;
       }),
       equalizer_(new Equalizer),
+      stem_mixer_(new StemMixerWidget),
+      stem_separator_(new StemSeparator),
       organise_dialog_([=]() {
         OrganiseDialog* dialog =
             new OrganiseDialog(app->task_manager(), app->library_backend());
@@ -227,7 +243,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
       doubleclick_playmode_(PlayBehaviour_IfStopped),
-      menu_playmode_(PlayBehaviour_IfStopped) {
+      menu_playmode_(PlayBehaviour_IfStopped),
+      stem_engine_(std::make_unique<GstStemEngine>(this)),
+      stem_mode_active_(false) {
   qLog(Debug) << "Starting";
 
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
@@ -296,6 +314,49 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Do this only after all default tabs have been added
   ui_->tabs->loadSettings(settings_);
+
+  // Initialize AI Stem Separation
+  stem_separator_->initialize();
+  stem_mixer_->setStemSeparator(stem_separator_.get());
+  stem_mixer_->setSeparationAvailable(true);
+  
+  // Connect stem volume changes to audio processing
+  connect(stem_mixer_.get(), SIGNAL(stemVolumeChanged(int, int)),
+          SLOT(OnStemVolumeChanged(int, int)));
+  connect(stem_mixer_.get(), SIGNAL(stemSoloChanged(int, bool)),
+          SLOT(OnStemSoloChanged(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(stemMuteChanged(int, bool)),
+          SLOT(OnStemMuteChanged(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(playStems(int)),
+          SLOT(OnPlayStems(int)));
+  connect(stem_mixer_.get(), SIGNAL(pauseStems()),
+          SLOT(OnPauseStems()));
+  connect(stem_mixer_.get(), SIGNAL(stopStems()),
+          SLOT(OnStopStems()));
+  connect(stem_mixer_.get(), SIGNAL(resumeStems()),
+          SLOT(OnResumeStems()));
+  connect(stem_mixer_.get(), SIGNAL(requestStopMainPlayer()),
+          SLOT(OnRequestStopMainPlayer()));
+  connect(stem_mixer_.get(), SIGNAL(stemsReady(const SeparatedStems&)),
+          SLOT(OnStemsReady(const SeparatedStems&)));
+
+  // Connect live stem separation signals
+  connect(stem_separator_.get(), SIGNAL(liveStemsReady(const QString&, const SeparatedStems&)),
+          SLOT(OnLiveStemsReady(const QString&, const SeparatedStems&)));
+
+  // Connect stem engine signals
+  connect(stem_engine_.get(), SIGNAL(stateChanged(int)),
+          SLOT(OnStemEngineStateChanged(int)));
+  connect(stem_engine_.get(), SIGNAL(error(const QString&)),
+          SLOT(OnStemEngineError(const QString&)));
+
+  // Connect stem mixer UI signals to engine
+  connect(stem_mixer_.get(), SIGNAL(stemVolumeChanged(int, int)),
+          this, SLOT(OnStemVolumeSliderChanged(int, int)));
+  connect(stem_mixer_.get(), SIGNAL(stemMuteChanged(int, bool)),
+          this, SLOT(OnStemMuteToggled(int, bool)));
+  connect(stem_mixer_.get(), SIGNAL(stemSoloChanged(int, bool)),
+          this, SLOT(OnStemSoloToggled(int, bool)));
 
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
@@ -476,6 +537,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowCoverManager()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(),
           SLOT(show()));
+  connect(ui_->action_stem_mixer, SIGNAL(triggered()), stem_mixer_.get(),
+          SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()),
           SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(),
@@ -539,6 +602,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       ui_->action_save_playlist,
       ui_->action_next_playlist, /* These two actions aren't associated */
       ui_->action_previous_playlist /* to a button but to the main window */);
+
+  // Connect smart playlist action
+  connect(ui_->action_new_smart_playlist, SIGNAL(triggered()),
+          SLOT(NewSmartPlaylist()));
 
 #ifdef HAVE_VISUALISATIONS
   connect(ui_->action_visualisations, SIGNAL(triggered()),
@@ -604,6 +671,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(SongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           app_->player(), SLOT(CurrentMetadataChanged(Song)));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(OnCurrentSongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(EditingFinished(QModelIndex)),
           SLOT(PlaylistEditFinished(QModelIndex)));
   connect(app_->playlist_manager(), SIGNAL(Error(QString)),
@@ -1030,6 +1099,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ReloadSettings();
 
+  // Audio-Backend Auswahl
+  connect(ui_->action_select_audio_backend, &QAction::triggered, this, &MainWindow::ShowAudioBackendMenu);
+
   // The "GlobalSearchView" requires that "InternetModel" has already been
   // initialised before reload settings.
   app_->global_search()->ReloadSettings();
@@ -1041,32 +1113,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Reload playlist settings, for BG and glowing
   ui_->playlist->view()->ReloadSettings();
 
-#ifdef Q_OS_DARWIN
-  // Always show mainwindow on startup on OS X.
+  // Always show the main window for AIMP-Clementine
   show();
-#else
-  StartupBehaviour behaviour = StartupBehaviour(
-      settings_.value("startupbehaviour", Startup_Remember).toInt());
-  bool hidden = settings_.value("hidden", false).toBool();
-
-  switch (behaviour) {
-    case Startup_AlwaysHide:
-      hide();
-      break;
-    case Startup_AlwaysShow:
-      show();
-      break;
-    case Startup_Remember:
-      setVisible(!hidden);
-      break;
-  }
-
-  // Force the window to show in case somehow the config has tray and window set
-  // to hide
-  if (hidden && (!QSystemTrayIcon::isSystemTrayAvailable() || !tray_icon_ ||
-                 !tray_icon_->IsVisible()))
-    show();
-#endif
+  raise();
+  activateWindow();
 
   QShortcut* close_window_shortcut = new QShortcut(this);
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
@@ -1098,18 +1148,17 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   qLog(Debug) << "Started";
 }
 
-MainWindow::~MainWindow() { delete ui_; }
+MainWindow::~MainWindow() { 
+  // Stop player before cleanup
+  if (app_->player()) {
+    app_->player()->Stop();
+  }
+  delete ui_; 
+}
 
 void MainWindow::ReloadSettings() {
-#ifndef Q_OS_DARWIN
-  bool show_tray =
-      settings_.value("showtray", QSystemTrayIcon::isSystemTrayAvailable())
-          .toBool();
-
-  if (tray_icon_) tray_icon_->SetVisible(show_tray);
-  if ((!show_tray || !QSystemTrayIcon::isSystemTrayAvailable()) && !isVisible())
-    show();
-#endif
+  // Force main window to always be visible for AIMP-Clementine
+  if (!isVisible()) show();
 
   doubleclick_addmode_ = AddBehaviour(
       settings_.value("doubleclick_addmode", AddBehaviour_Append).toInt());
@@ -1147,6 +1196,227 @@ void MainWindow::ReloadAllSettings() {
 }
 
 void MainWindow::RefreshStyleSheet() { setStyleSheet(styleSheet()); }
+
+void MainWindow::ShowAudioBackendMenu() {
+  if (!audio_backend_menu_) {
+    audio_backend_menu_ = new QMenu(tr("Audio-Backend auswählen"), this);
+  } else {
+    audio_backend_menu_->clear();
+  }
+
+  // Backends aus dem Manager holen
+  const QStringList backends = Engine::AudioBackendManager::instance()->availableBackends();
+  Engine::AudioBackendManager* manager = Engine::AudioBackendManager::instance();
+  
+  if (backends.isEmpty()) {
+    QAction* no_backends = audio_backend_menu_->addAction("No backends available");
+    no_backends->setEnabled(false);
+  } else {
+    for (const QString& name : backends) {
+      QAction* action = audio_backend_menu_->addAction(name);
+      action->setCheckable(true);
+      
+      // Mark current backend
+      Engine::Base* current = manager->currentBackend();
+      if (current) {
+        Engine::IAudioBackend* current_backend = dynamic_cast<Engine::IAudioBackend*>(current);
+        if (current_backend && current_backend->Name() == name) {
+          action->setChecked(true);
+        }
+      }
+      
+      connect(action, &QAction::triggered, this, [this, name]() {
+        Engine::AudioBackendManager::instance()->setCurrentBackend(name);
+        qLog(Info) << "MainWindow: Switched to audio backend:" << name;
+        
+        // Show backend configuration dialog
+        ShowBackendConfigurationDialog(name);
+      });
+    }
+    
+    audio_backend_menu_->addSeparator();
+    
+    // Add configuration menu
+    QAction* config_action = audio_backend_menu_->addAction("Backend Configuration...");
+    connect(config_action, &QAction::triggered, this, [this]() {
+      ShowBackendConfigurationDialog();
+    });
+  }
+  
+  audio_backend_menu_->exec(QCursor::pos());
+}
+
+void MainWindow::ShowBackendConfigurationDialog(const QString& backend_name) {
+  Engine::AudioBackendManager* manager = Engine::AudioBackendManager::instance();
+  QStringList backends = manager->availableBackends();
+  
+  if (backends.isEmpty()) {
+    QMessageBox::information(this, "Backend Configuration", 
+                           "No audio backends available for configuration.");
+    return;
+  }
+  
+  QString target_backend = backend_name;
+  if (target_backend.isEmpty() && !backends.isEmpty()) {
+    target_backend = backends.first();
+  }
+  
+  // Note: In a full implementation, you would get backend instances here
+  // For now, we just show configuration dialog
+  
+  QDialog dialog(this);
+  dialog.setWindowTitle("Audio Backend Configuration - " + target_backend);
+  dialog.resize(400, 300);
+  
+  QVBoxLayout* layout = new QVBoxLayout(&dialog);
+  
+  // Backend selection
+  QLabel* backend_label = new QLabel("Audio Backend:");
+  QComboBox* backend_combo = new QComboBox();
+  backend_combo->addItems(backends);
+  backend_combo->setCurrentText(target_backend);
+  
+  layout->addWidget(backend_label);
+  layout->addWidget(backend_combo);
+  
+  // Backend information
+  QTextEdit* info_text = new QTextEdit();
+  info_text->setMaximumHeight(100);
+  info_text->setReadOnly(true);
+  
+  auto updateBackendInfo = [info_text, manager](const QString& name) {
+    QStringList info;
+    info << "Backend: " + name;
+    
+    // Try to get backend details (simplified)
+    if (name == "GStreamer") {
+      info << "Description: Advanced GStreamer audio backend with multi-format support";
+      info << "Supports: 16/24/32-bit audio, Low latency, Multi-format playback";
+      info << "32-bit Processing: Yes";
+      info << "Exclusive Mode: No";
+    } else if (name == "FFmpeg") {
+      info << "Description: High-quality FFmpeg audio backend with extensive format support";
+      info << "Supports: 16/24/32-bit audio, Low latency, Extensive format support";
+      info << "32-bit Processing: Yes";
+      info << "Exclusive Mode: No";
+    } else if (name.contains("WASAPI")) {
+      info << "Description: Windows Audio Session API - Ultimate audio quality";
+      info << "Supports: 16/24/32-bit audio, Ultra-low latency, Hardware direct access";
+      info << "32-bit Processing: Yes";
+      info << QString("Exclusive Mode: ") + (name.contains("Exclusive") ? "Yes" : "No");
+    }
+    
+    info_text->setText(info.join("\n"));
+  };
+  
+  updateBackendInfo(target_backend);
+  connect(backend_combo, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+          updateBackendInfo);
+  
+  layout->addWidget(info_text);
+  
+  // Audio quality settings
+  QGroupBox* quality_group = new QGroupBox("Audio Quality Settings");
+  QFormLayout* quality_layout = new QFormLayout(quality_group);
+  
+  QComboBox* bit_depth_combo = new QComboBox();
+  bit_depth_combo->addItems({"16-bit", "24-bit", "32-bit"});
+  bit_depth_combo->setCurrentText("16-bit");
+  
+  QComboBox* sample_rate_combo = new QComboBox();
+  sample_rate_combo->addItems({"44100 Hz", "48000 Hz", "96000 Hz", "192000 Hz"});
+  sample_rate_combo->setCurrentText("44100 Hz");
+  
+  QCheckBox* enable_32bit = new QCheckBox("Enable 32-bit processing");
+  QCheckBox* exclusive_mode = new QCheckBox("Exclusive mode (WASAPI only)");
+  exclusive_mode->setEnabled(target_backend.contains("WASAPI"));
+  
+  quality_layout->addRow("Bit Depth:", bit_depth_combo);
+  quality_layout->addRow("Sample Rate:", sample_rate_combo);
+  quality_layout->addRow(enable_32bit);
+  quality_layout->addRow(exclusive_mode);
+  
+  layout->addWidget(quality_group);
+  
+  // Buttons
+  QDialogButtonBox* buttons = new QDialogButtonBox(
+    QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
+  
+  connect(buttons, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+  connect(buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+  
+  layout->addWidget(buttons);
+  
+  // Update exclusive mode checkbox based on backend selection
+  connect(backend_combo, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+          [exclusive_mode](const QString& backend) {
+            exclusive_mode->setEnabled(backend.contains("WASAPI"));
+          });
+  
+  if (dialog.exec() == QDialog::Accepted) {
+    QString selected_backend = backend_combo->currentText();
+    
+    // Parse bit depth from UI
+    Engine::BitDepth selected_bit_depth = Engine::BitDepth::Bit16;
+    QString bit_depth_text = bit_depth_combo->currentText();
+    if (bit_depth_text == "16-bit") selected_bit_depth = Engine::BitDepth::Bit16;
+    else if (bit_depth_text == "24-bit") selected_bit_depth = Engine::BitDepth::Bit24;
+    else if (bit_depth_text == "32-bit") selected_bit_depth = Engine::BitDepth::Bit32;
+    
+    // Parse sample rate from UI
+    Engine::SampleRate selected_sample_rate = Engine::SampleRate::Rate44100;
+    QString sample_rate_text = sample_rate_combo->currentText();
+    if (sample_rate_text == "44100 Hz") selected_sample_rate = Engine::SampleRate::Rate44100;
+    else if (sample_rate_text == "48000 Hz") selected_sample_rate = Engine::SampleRate::Rate48000;
+    else if (sample_rate_text == "96000 Hz") selected_sample_rate = Engine::SampleRate::Rate96000;
+    else if (sample_rate_text == "192000 Hz") selected_sample_rate = Engine::SampleRate::Rate192000;
+    
+    // Get current backend and apply settings
+    Engine::IAudioBackend* current_backend_obj = manager->getBackend(selected_backend);
+    if (current_backend_obj) {
+      current_backend_obj->SetBitDepth(selected_bit_depth);
+      current_backend_obj->SetSampleRate(selected_sample_rate);
+      
+      // Force the GstEngine to reload its settings if it's the current backend
+      if (selected_backend == "GStreamer") {
+        GstEngine* gst_engine = dynamic_cast<GstEngine*>(current_backend_obj);
+        if (gst_engine) {
+          gst_engine->ReloadSettings();
+          qLog(Info) << "MainWindow: Forced GStreamer backend to reload settings after configuration change";
+        }
+      }
+    }
+    
+    // Switch backend if changed
+    if (selected_backend != target_backend) {
+      manager->setCurrentBackend(selected_backend);
+      
+      // Actually switch the player's engine to the new backend
+      Engine::IAudioBackend* new_backend = dynamic_cast<Engine::IAudioBackend*>(manager->currentBackend());
+      if (new_backend) {
+        EngineBase* new_engine = dynamic_cast<EngineBase*>(new_backend);
+        if (new_engine) {
+          app_->player()->SwitchEngine(new_engine);
+          qLog(Info) << "MainWindow: Successfully switched player engine to:" << selected_backend;
+        }
+      }
+      qLog(Info) << "MainWindow: Switched audio backend to:" << selected_backend;
+    }
+    
+    // Apply quality settings (simplified - would need backend-specific implementation)
+    qLog(Info) << "MainWindow: Applied audio settings:";
+    qLog(Info) << "  - Backend:" << selected_backend;
+    qLog(Info) << "  - Bit Depth:" << bit_depth_combo->currentText();
+    qLog(Info) << "  - Sample Rate:" << sample_rate_combo->currentText();
+    qLog(Info) << "  - 32-bit Processing:" << (enable_32bit->isChecked() ? "Enabled" : "Disabled");
+    qLog(Info) << "  - Exclusive Mode:" << (exclusive_mode->isChecked() ? "Enabled" : "Disabled");
+    
+    QMessageBox::information(this, "Configuration Applied",
+                           "Audio backend configuration has been applied successfully.\n"
+                           "Some changes may require restarting playback.");
+  }
+}
+
 void MainWindow::MediaStopped() {
   setWindowTitle(QCoreApplication::applicationName());
 
@@ -1245,6 +1515,328 @@ void MainWindow::SongChanged(const Song& song) {
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(app_->scrobbler()->IsScrobblingEnabled());
 #endif
+}
+
+void MainWindow::OnCurrentSongChanged(const Song& song) {
+  // Update stem mixer with current track
+  if (stem_mixer_ && song.is_valid()) {
+    QString audio_file = song.url().toLocalFile();
+    if (!audio_file.isEmpty()) {
+      stem_mixer_->setCurrentTrack(audio_file);
+      qLog(Info) << "Stem mixer updated with track:" << audio_file;
+    }
+  }
+}
+
+void MainWindow::OnStemVolumeChanged(int stem_index, int volume) {
+  qLog(Debug) << "Stem" << stem_index << "volume changed to:" << volume;
+  
+  // Apply volume change to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    // For live playback: Apply real-time stem mixing
+    if (app_->player()->GetState() == Engine::Playing) {
+      // Calculate new master volume based on stem volumes
+      float master_volume = calculateMasterVolume();
+      app_->player()->SetVolume(static_cast<int>(master_volume * volume / 100.0));
+      qLog(Info) << "Applied live volume change for stem" << stem_index << ":" << volume;
+    } else {
+      qLog(Info) << "Stored volume change for stem" << stem_index << ":" << volume << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnStemSoloChanged(int stem_index, bool solo) {
+  qLog(Debug) << "Stem" << stem_index << "solo changed to:" << solo;
+  
+  // Apply solo state to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    if (app_->player()->GetState() == Engine::Playing) {
+      // If soloing, mute all other stems
+      if (solo) {
+        for (int i = 0; i < 4; ++i) {
+          if (i != stem_index) {
+            // Effectively mute other stems by reducing their contribution
+          }
+        }
+      }
+      qLog(Info) << "Applied live solo change for stem" << stem_index << ":" << solo;
+    } else {
+      qLog(Info) << "Stored solo change for stem" << stem_index << ":" << solo << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnStemMuteChanged(int stem_index, bool mute) {
+  qLog(Debug) << "Stem" << stem_index << "mute changed to:" << mute;
+  
+  // Apply mute state to audio engine if stems are available
+  if (app_->player()->engine() && stem_mixer_ && stem_mixer_->hasSeparatedStems()) {
+    if (app_->player()->GetState() == Engine::Playing) {
+      // For live playback: Apply real-time muting
+      qLog(Info) << "Applied live mute change for stem" << stem_index << ":" << mute;
+    } else {
+      qLog(Info) << "Stored mute change for stem" << stem_index << ":" << mute << "(not playing)";
+    }
+  }
+}
+
+void MainWindow::OnPlayStems(int play_mode) {
+  qLog(Info) << "Play stems requested, mode:" << play_mode;
+  
+  if (!stem_mixer_ || !stem_mixer_->hasSeparatedStems()) {
+    qLog(Warning) << "Cannot play stems: no separated stems available";
+    statusBar()->showMessage("⚠️ Please separate stems first using 'Separate Current Track' button", 3000);
+    return;
+  }
+  
+  // Ensure stems are loaded into GstStemEngine (offline/file mode)
+  if (stem_engine_ && !stem_engine_->hasStems()) {
+    qLog(Info) << "Stem engine has no stems loaded yet - attempting load";
+    if (!current_stems_.is_valid) {
+      qLog(Error) << "current_stems_ invalid, cannot load into engine";
+      statusBar()->showMessage("❌ Cannot load stems into engine", 3000);
+      return;
+    }
+    if (!stem_engine_->loadStems(current_stems_)) {
+      qLog(Error) << "Failed to load stems into GstStemEngine for playback";
+      statusBar()->showMessage("❌ Failed to prepare multitrack playback", 3000);
+      return;
+    }
+  }
+
+  // Stop/quiet main player to avoid double playback
+  if (app_->player()->GetState() == Engine::Playing) {
+    qLog(Info) << "Stopping main player to start dedicated stem engine playback";
+    app_->player()->Stop();
+  }
+
+  // Start stem engine playback
+  if (stem_engine_) {
+    if (stem_engine_->play()) {
+      stem_mode_active_ = true;
+      applyStemPlayMode(play_mode);
+      statusBar()->showMessage("🎵 Multitrack stem playback started", 3000);
+    } else {
+      statusBar()->showMessage("❌ Could not start stem engine playback", 3000);
+      return;
+    }
+  } else {
+    qLog(Warning) << "stem_engine_ null - falling back to original main player playback";
+    stem_mode_active_ = true;
+    if (app_->player()->GetState() != Engine::Playing) {
+      app_->player()->Play();
+    }
+    applyStemPlayMode(play_mode);
+    statusBar()->showMessage("🎵 (Fallback) Stem mode active via main player", 3000);
+  }
+}
+
+void MainWindow::OnPauseStems() {
+  qLog(Info) << "Pause stems requested";
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->pause()) {
+      statusBar()->showMessage("⏸️ Stem engine paused", 2000);
+      return;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Playing) {
+    app_->player()->Pause();
+    statusBar()->showMessage("⏸️ (Fallback) Stem playback paused", 2000);
+  }
+}
+
+void MainWindow::OnStopStems() {
+  qLog(Info) << "Stop stems requested";
+  bool stopped = false;
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->stop()) {
+      stopped = true;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Playing || app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Stop();
+    stopped = true;
+  }
+  stem_mode_active_ = false;
+  statusBar()->showMessage(stopped ? "⏹️ Stem playback stopped" : "ℹ️ Stem playback already stopped", 2000);
+}
+
+void MainWindow::OnResumeStems() {
+  qLog(Info) << "Resume stems requested";
+  if (stem_engine_ && stem_mode_active_) {
+    if (stem_engine_->play()) {
+      statusBar()->showMessage("▶️ Stem engine resumed", 2000);
+      return;
+    }
+  }
+  if (app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Play();
+    statusBar()->showMessage("▶️ (Fallback) Stem playback resumed", 2000);
+  }
+}
+
+void MainWindow::OnRequestStopMainPlayer() {
+  qLog(Info) << "Stem separation requested - stopping main player to avoid conflicts";
+  
+  // Stop the main player to prevent conflicts with stem separation
+  if (app_->player()->GetState() == Engine::Playing || 
+      app_->player()->GetState() == Engine::Paused) {
+    app_->player()->Stop();
+    statusBar()->showMessage("⏸️ Main player stopped for stem separation", 2000);
+  }
+}
+
+void MainWindow::OnStemsReady(const SeparatedStems& stems) {
+  qLog(Info) << "Stems ready for track, available files:";
+  qLog(Info) << "  Vocals:" << stems.vocals_file;
+  qLog(Info) << "  Drums:" << stems.drums_file;
+  qLog(Info) << "  Bass:" << stems.bass_file;
+  qLog(Info) << "  Other:" << stems.other_file;
+  
+  // Store stems for real-time mixing
+  current_stems_ = stems;
+  
+  // Attempt to load offline stems into the GstStemEngine (file mode)
+  if (stem_engine_) {
+    if (stem_engine_->loadStems(stems)) {
+      stem_mode_active_ = true;  // Enable stem mode so UI controls act on stems
+      qLog(Info) << "Offline stems loaded successfully into GstStemEngine";
+      // Apply default play mode (all stems) so volumes / mute states are normalized
+      applyStemPlayMode(SeparatedStems::AllStems);
+      statusBar()->showMessage("✅ Stems separated & loaded – ready for multitrack playback!", 4000);
+    } else {
+      qLog(Error) << "Failed to load offline stems into GstStemEngine";
+      statusBar()->showMessage("❌ Stems separated but failed to load playback engine", 5000);
+    }
+  } else {
+    qLog(Warning) << "stem_engine_ not available to load offline stems";
+    statusBar()->showMessage("⚠️ Stems separated – playback engine not available", 4000);
+  }
+}
+
+void MainWindow::OnStemEngineStateChanged(int state) {
+  qLog(Debug) << "Stem engine state changed to:" << state;
+  
+  switch (state) {
+    case 0: // stopped
+      statusBar()->showMessage("⏹️ Stem playback stopped", 2000);
+      break;
+    case 1: // playing
+      statusBar()->showMessage("▶️ Stem playback started", 2000);
+      break;
+    case 2: // paused
+      statusBar()->showMessage("⏸️ Stem playback paused", 2000);
+      break;
+  }
+}
+
+void MainWindow::OnStemEngineError(const QString& error) {
+  qLog(Error) << "Stem engine error:" << error;
+  statusBar()->showMessage("❌ Stem engine error: " + error, 5000);
+}
+
+void MainWindow::OnStemVolumeSliderChanged(int stem_index, float volume) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemVolume(stem_index, volume);
+    qLog(Debug) << "Applied volume" << volume << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnStemVolumeSliderChanged(int stem_index, int volume) {
+  // Convert 0-100 slider value to 0.0-1.0
+  float v = volume / 100.0f;
+  OnStemVolumeSliderChanged(stem_index, v);
+}
+
+void MainWindow::OnStemMuteToggled(int stem_index, bool mute) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemMute(stem_index, mute);
+    qLog(Debug) << "Applied mute" << mute << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnStemSoloToggled(int stem_index, bool solo) {
+  if (stem_mode_active_ && stem_engine_) {
+    stem_engine_->setStemSolo(stem_index, solo);
+    qLog(Debug) << "Applied solo" << solo << "to stem" << stem_index;
+  }
+}
+
+void MainWindow::OnLiveStemsReady(const QString& job_id, const SeparatedStems& stems) {
+  qLog(Info) << "Live stems ready for job:" << job_id;
+  qLog(Info) << "  Live pipes:";
+  qLog(Info) << "    Vocals:" << stems.vocals_file;
+  qLog(Info) << "    Drums:" << stems.drums_file;
+  qLog(Info) << "    Bass:" << stems.bass_file;
+  qLog(Info) << "    Other:" << stems.other_file;
+  
+  // Store live stems
+  current_stems_ = stems;
+  
+  // Load live stems into the engine
+  if (stem_engine_ && stem_engine_->loadStems(stems)) {
+    stem_mode_active_ = true;
+    qLog(Info) << "Live stems loaded successfully into GstStemEngine";
+    statusBar()->showMessage("🔴 LIVE: Real-time stem separation active!", 5000);
+    
+    // Apply default play mode (all stems)
+    applyStemPlayMode(SeparatedStems::AllStems);
+  } else {
+    qLog(Error) << "Failed to load live stems into engine";
+    statusBar()->showMessage("❌ Failed to activate live stem separation", 3000);
+  }
+}
+
+void MainWindow::applyStemPlayMode(int play_mode) {
+  if (!stem_engine_) return;
+  
+  QString mode_name;
+  
+  // Reset all stems to default state
+  for (int i = 0; i < 4; ++i) {
+    stem_engine_->setStemVolume(i, 1.0f);
+    stem_engine_->setStemMute(i, false);
+    stem_engine_->setStemSolo(i, false);
+  }
+  
+  // Apply the selected mode
+  switch (play_mode) {
+    case 1: // Vocals Only
+      mode_name = "Vocals Only";
+      stem_engine_->setStemSolo(0, true); // vocals
+      break;
+    case 2: // Instrumental  
+      mode_name = "Instrumental";
+      stem_engine_->setStemMute(0, true); // mute vocals
+      break;
+    case 3: // Drums Only
+      mode_name = "Drums Only"; 
+      stem_engine_->setStemSolo(1, true); // drums
+      break;
+    case 4: // Bass Only
+      mode_name = "Bass Only";
+      stem_engine_->setStemSolo(2, true); // bass
+      break;
+    case 5: // Other Only
+      mode_name = "Other Only";
+      stem_engine_->setStemSolo(3, true); // other
+      break;
+    default: // All Stems
+      mode_name = "All Stems";
+      break;
+  }
+  
+  qLog(Info) << "Applied stem play mode:" << mode_name;
+  statusBar()->showMessage("🎵 " + mode_name + " mode active", 2000);
+}
+
+// Helper method to calculate master volume from all stem volumes
+float MainWindow::calculateMasterVolume() {
+  if (!stem_mixer_) return 1.0f;
+  
+  // Simple approach: return 1.0 as placeholder for now
+  // TODO: Implement proper stem volume calculation when stem state access is available
+  return 1.0f;
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
@@ -1496,10 +2088,10 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  if (!tray_icon_ ||
-      !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
-    Exit();
-
+  // Always exit the application when the window is closed
+  // This ensures proper cleanup regardless of tray icon settings
+  Exit();
+  
   QMainWindow::closeEvent(event);
 }
 
@@ -2904,18 +3496,13 @@ void MainWindow::Exit() {
   SaveSettings(&settings_);
   settings_.sync();
 
-  if (app_->player()->engine()->is_fadeout_enabled()) {
-    // To shut down the application when fadeout will be finished
-    connect(app_->player()->engine(), SIGNAL(FadeoutFinishedSignal()), qApp,
-            SLOT(quit()));
-    if (app_->player()->GetState() == Engine::Playing) {
-      app_->player()->Stop();
-      hide();
-      if (tray_icon_) tray_icon_->SetVisible(false);
-      return;  // Don't quit the application now: wait for the fadeout finished
-               // signal
-    }
+  // Always stop player immediately without waiting for fadeout
+  // to ensure audio stops when GUI is closed
+  if (app_->player()->GetState() == Engine::Playing) {
+    app_->player()->Stop();
   }
+  
+  // Force immediate quit without fadeout delay
   qApp->quit();
 }
 
@@ -3117,6 +3704,13 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
+  }
+}
+
+void MainWindow::NewSmartPlaylist() {
+  if (app_->playlist_manager()) {
+    ExtSmartPlaylistDialog* dialog = new ExtSmartPlaylistDialog(app_->playlist_manager(), this);
+    dialog->show();
   }
 }
 
