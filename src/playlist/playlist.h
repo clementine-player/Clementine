@@ -471,6 +471,8 @@ class Playlist : public QAbstractListModel {
 
   // Cancel async restore if songs are already replaced
   bool cancel_restore_;
+
+  bool grey_unfound_;
 };
 
 // QDataStream& operator <<(QDataStream&, const Playlist*);

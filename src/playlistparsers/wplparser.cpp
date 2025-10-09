@@ -55,10 +55,7 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
         if (name == "media") {
           QStringRef src = reader->attributes().value("src");
           if (!src.isEmpty()) {
-            Song song = LoadSong(src.toString(), 0, dir);
-            if (song.is_valid()) {
-              songs->append(song);
-            }
+            songs->append(LoadSong(src.toString(), 0, dir));
           }
         } else {
           Utilities::ConsumeCurrentElement(reader);

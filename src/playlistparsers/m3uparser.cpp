@@ -59,15 +59,20 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
       }
     } else if (!line.isEmpty()) {
       Song song = LoadSong(line, 0, dir);
-      if (!current_metadata.title.isEmpty()) {
-        song.set_title(current_metadata.title);
+
+      // Override metadata from playlist if the song is not in the library.
+      if (!song.is_library_song()) {
+        if (!current_metadata.title.isEmpty()) {
+          song.set_title(current_metadata.title);
+        }
+        if (!current_metadata.artist.isEmpty()) {
+          song.set_artist(current_metadata.artist);
+        }
+        if (current_metadata.length > 0) {
+          song.set_length_nanosec(current_metadata.length);
+        }
       }
-      if (!current_metadata.artist.isEmpty()) {
-        song.set_artist(current_metadata.artist);
-      }
-      if (current_metadata.length > 0) {
-        song.set_length_nanosec(current_metadata.length);
-      }
+
       ret << song;
 
       current_metadata = Metadata();
