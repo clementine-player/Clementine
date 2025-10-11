@@ -837,21 +837,29 @@ bool TagReader::SaveFile(const QString& filename,
                                             ? QString()
                                             : QString::number(song.bpm())),
                   true);
-    tag->setItem("composer",
-                 TagLib::APE::Item(
-                     "composer", TagLib::StringList(song.composer().c_str())));
-    tag->setItem("grouping",
-                 TagLib::APE::Item(
-                     "grouping", TagLib::StringList(song.grouping().c_str())));
-    tag->setItem("performer",
-                 TagLib::APE::Item("performer", TagLib::StringList(
-                                                    song.performer().c_str())));
+    tag->setItem(
+        "composer",
+        TagLib::APE::Item(
+            "composer",
+            TagLib::StringList(StdStringToTaglibString(song.composer()))));
+    tag->setItem(
+        "grouping",
+        TagLib::APE::Item(
+            "grouping",
+            TagLib::StringList(StdStringToTaglibString(song.grouping()))));
+    tag->setItem(
+        "performer",
+        TagLib::APE::Item(
+            "performer",
+            TagLib::StringList(StdStringToTaglibString(song.performer()))));
     tag->setItem(
         "album artist",
-        TagLib::APE::Item("album artist",
-                          TagLib::StringList(song.albumartist().c_str())));
-    tag->setItem("lyrics",
-                 TagLib::APE::Item("lyrics", TagLib::String(song.lyrics())));
+        TagLib::APE::Item(
+            "album artist",
+            TagLib::StringList(StdStringToTaglibString(song.albumartist()))));
+    tag->setItem(
+        "lyrics",
+        TagLib::APE::Item("lyrics", StdStringToTaglibString(song.lyrics())));
     tag->addValue("compilation",
                   QStringToTaglibString(song.compilation() ? QString::number(1)
                                                            : QString()),
@@ -888,10 +896,14 @@ bool TagReader::SaveFile(const QString& filename,
                  TagLib::StringList(song.bpm() <= 0 - 1
                                         ? "0"
                                         : TagLib::String::number(song.bpm())));
-    tag->setItem("\251wrt", TagLib::StringList(song.composer().c_str()));
-    tag->setItem("\251grp", TagLib::StringList(song.grouping().c_str()));
-    tag->setItem("\251lyr", TagLib::StringList(song.lyrics().c_str()));
-    tag->setItem("aART", TagLib::StringList(song.albumartist().c_str()));
+    tag->setItem("\251wrt",
+                 TagLib::StringList(StdStringToTaglibString(song.composer())));
+    tag->setItem("\251grp",
+                 TagLib::StringList(StdStringToTaglibString(song.grouping())));
+    tag->setItem("\251lyr",
+                 TagLib::StringList(StdStringToTaglibString(song.lyrics())));
+    tag->setItem("aART", TagLib::StringList(
+                             StdStringToTaglibString(song.albumartist())));
     tag->setItem("cpil", TagLib::StringList(song.compilation() ? "1" : "0"));
   } else if (TagLib::APE::File* file =
                  dynamic_cast<TagLib::APE::File*>(fileref->file())) {
