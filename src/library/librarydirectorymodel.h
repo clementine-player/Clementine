@@ -32,6 +32,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
  public:
   LibraryDirectoryModel(std::shared_ptr<LibraryBackend> backend,
+                        std::shared_ptr<DirectoryManager> directory_manager,
                         QObject* parent = nullptr);
   ~LibraryDirectoryModel();
 
@@ -51,6 +52,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
   QIcon dir_icon_;
   std::shared_ptr<LibraryBackend> backend_;
+  std::shared_ptr<DirectoryManager> directory_manager_;
   QList<std::shared_ptr<MusicStorage>> storage_;
 };
 
