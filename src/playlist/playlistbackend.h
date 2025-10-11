@@ -79,7 +79,9 @@ class PlaylistBackend : public QObject {
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items,
                     int last_played, smart_playlists::GeneratorPtr dynamic);
-
+ signals:
+  void PlaylistSaved(int id);
+  
  private:
   struct NewSongFromQueryState {
     QHash<QString, SongList> cached_cues_;

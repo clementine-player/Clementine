@@ -343,6 +343,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   if (db_->CheckErrors(update)) return;
 
   transaction.Commit();
+  emit PlaylistSaved(playlist);
 }
 
 int PlaylistBackend::CreatePlaylist(const QString& name,

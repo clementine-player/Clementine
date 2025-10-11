@@ -101,6 +101,16 @@ QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   return result;
 }
 
+QList<int> PlaylistManager::GetAllPlaylistIds() const {
+  QList<int> result;
+
+  for (const int data : playlists_.keys()) {
+    result.append(data);
+  }
+
+  return result;
+}
+
 QItemSelection PlaylistManager::selection(int id) const {
   QMap<int, Data>::const_iterator it = playlists_.find(id);
   return it->selection;
@@ -193,6 +203,35 @@ void PlaylistManager::Save(int id, const QString& filename,
                SLOT(ItemsLoadedForSavePlaylist(QFuture<SongList>, QString,
                                                Playlist::Path)),
                future, filename, path_type);
+  }
+}
+
+int PlaylistManager::LoadBulkPlaylists(const QString& filename, const QString& ui_path){
+    QFileInfo info(filename);
+
+  int id = playlist_backend_->CreatePlaylist(info.baseName(), QString());
+
+  if (id == -1) {
+    emit Error(tr("Couldn't create playlist"));
+    return id;
+  }
+
+  Playlist* playlist =
+      AddPlaylist(id, info.baseName(), QString(), ui_path, false);
+
+  QList<QUrl> urls;
+  playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
+
+  return id;
+}
+
+void PlaylistManager::BulkImportPlaylistsCallback(int id){
+  if (playlists_.contains(id)) {
+    // If playlists_ contains this playlist, its means it's opened: star or
+    // unstar it.
+    bool favorite = true;
+    playlist_backend_->FavoritePlaylist(id, favorite);
+    playlists_[id].p->set_favorite(favorite);
   }
 }
 

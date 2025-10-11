@@ -373,6 +373,9 @@ class Playlist : public QAbstractListModel {
   // Signals that the queue has changed, meaning that the remaining queued
   // items should update their position.
   void QueueChanged();
+  // Signals that the playlist has finished asynchronously loading songs
+  // the playlist can now be safely processed or closed
+  void PlaylistSongsLoaded(int id);
 
  private:
   void SetCurrentIsPaused(bool paused);
