@@ -308,7 +308,7 @@ bool CommandlineOptions::Parse() {
     QString value = QFile::decodeName(argv_[i]);
     QFileInfo file_info(value);
     if (file_info.exists())
-      urls_ << QUrl::fromLocalFile(file_info.canonicalFilePath());
+      urls_ << QUrl::fromLocalFile(file_info.absoluteFilePath());
     else
       urls_ << QUrl::fromUserInput(value);
   }

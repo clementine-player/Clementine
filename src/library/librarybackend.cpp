@@ -218,11 +218,11 @@ void LibraryBackend::UpdateTotalSongCount() {
 }
 
 void LibraryBackend::AddDirectory(const QString& path) {
-  QString canonical_path = QFileInfo(path).canonicalFilePath();
-  QString db_path = canonical_path;
+  QString absolute_path = QFileInfo(path).absoluteFilePath();
+  QString db_path = absolute_path;
 
   if (Application::kIsPortable && Utilities::UrlOnSameDriveAsClementine(
-                                      QUrl::fromLocalFile(canonical_path))) {
+                                      QUrl::fromLocalFile(absolute_path))) {
     db_path = Utilities::GetRelativePathToClementineBin(db_path);
     qLog(Debug) << "db_path" << db_path;
   }
@@ -239,7 +239,7 @@ void LibraryBackend::AddDirectory(const QString& path) {
   if (db_->CheckErrors(q)) return;
 
   Directory dir;
-  dir.path = canonical_path;
+  dir.path = absolute_path;
   dir.id = q.lastInsertId().toInt();
 
   emit DirectoryDiscovered(dir, SubdirectoryList());
