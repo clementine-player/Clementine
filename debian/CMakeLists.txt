@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.16)
 
 execute_process(COMMAND env LC_ALL=C date "+%a, %-d %b %Y %H:%M:%S %z"
                 OUTPUT_VARIABLE DEB_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)

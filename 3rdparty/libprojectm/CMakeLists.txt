@@ -1,5 +1,5 @@
 PROJECT(projectM)
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.16.0)
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The projectM core library.")
 
 include(CheckCXXCompilerFlag)
