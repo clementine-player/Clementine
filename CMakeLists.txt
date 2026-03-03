@@ -257,6 +257,32 @@ optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
+optional_component(MEGA ON "Mega support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
+# MEGA SDK API key. Register at https://mega.nz/sdk to obtain one.
+set(MEGA_API_KEY "" CACHE STRING "MEGA SDK API key (register at https://mega.nz/sdk)")
+
+if(HAVE_MEGA)
+  # Build MEGA SDK as a subdirectory with minimal features.
+  # We only need the core library + libuv HTTP streaming server.
+  set(ENABLE_SYNC OFF CACHE BOOL "" FORCE)
+  set(ENABLE_CHAT OFF CACHE BOOL "" FORCE)
+  set(USE_FREEIMAGE OFF CACHE BOOL "" FORCE)
+  set(USE_FFMPEG OFF CACHE BOOL "" FORCE)
+  set(USE_PDFIUM OFF CACHE BOOL "" FORCE)
+  set(USE_READLINE OFF CACHE BOOL "" FORCE)
+  set(USE_LIBUV ON CACHE BOOL "" FORCE)
+  set(ENABLE_SDKLIB_EXAMPLES OFF CACHE BOOL "" FORCE)
+  set(ENABLE_SDKLIB_TESTS OFF CACHE BOOL "" FORCE)
+  set(ENABLE_ISOLATED_GFX OFF CACHE BOOL "" FORCE)
+  set(ENABLE_SDKLIB_WERROR OFF CACHE BOOL "" FORCE)
+  set(ENABLE_DRIVE_NOTIFICATIONS OFF CACHE BOOL "" FORCE)
+  add_subdirectory(3rdparty/mega-sdk)
+endif()
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
