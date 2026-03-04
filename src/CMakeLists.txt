@@ -1352,8 +1352,7 @@ if(HAVE_MEGA)
                     "-DMEGA_API_KEY=yourkey to cmake.")
   endif()
 
-  # SDKlib is a static library, so its PRIVATE dependencies must be
-  # explicitly linked by the consuming target.
+  # Link against the system-installed MEGA SDK and its dependencies.
   find_package(OpenSSL REQUIRED)
   find_package(ICU COMPONENTS i18n uc data REQUIRED)
   pkg_check_modules(MEGA_CURL REQUIRED IMPORTED_TARGET libcurl)
@@ -1361,8 +1360,9 @@ if(HAVE_MEGA)
   pkg_check_modules(MEGA_SQLITE3 REQUIRED IMPORTED_TARGET sqlite3)
   pkg_check_modules(MEGA_UV REQUIRED IMPORTED_TARGET libuv)
   pkg_check_modules(MEGA_CRYPTOPP REQUIRED IMPORTED_TARGET libcrypto++)
+  target_include_directories(clementine_lib PRIVATE ${MEGA_SDK_INCLUDE_DIR})
   target_link_libraries(clementine_lib
-    MEGA::SDKlib
+    ${MEGA_SDK_LIBRARY}
     OpenSSL::SSL OpenSSL::Crypto
     ICU::i18n ICU::uc ICU::data
     PkgConfig::MEGA_CURL

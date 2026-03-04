@@ -266,21 +266,16 @@ optional_component(MEGA ON "Mega support"
 set(MEGA_API_KEY "" CACHE STRING "MEGA SDK API key (register at https://mega.nz/sdk)")
 
 if(HAVE_MEGA)
-  # Build MEGA SDK as a subdirectory with minimal features.
-  # We only need the core library + libuv HTTP streaming server.
-  set(ENABLE_SYNC OFF CACHE BOOL "" FORCE)
-  set(ENABLE_CHAT OFF CACHE BOOL "" FORCE)
-  set(USE_FREEIMAGE OFF CACHE BOOL "" FORCE)
-  set(USE_FFMPEG OFF CACHE BOOL "" FORCE)
-  set(USE_PDFIUM OFF CACHE BOOL "" FORCE)
-  set(USE_READLINE OFF CACHE BOOL "" FORCE)
-  set(USE_LIBUV ON CACHE BOOL "" FORCE)
-  set(ENABLE_SDKLIB_EXAMPLES OFF CACHE BOOL "" FORCE)
-  set(ENABLE_SDKLIB_TESTS OFF CACHE BOOL "" FORCE)
-  set(ENABLE_ISOLATED_GFX OFF CACHE BOOL "" FORCE)
-  set(ENABLE_SDKLIB_WERROR OFF CACHE BOOL "" FORCE)
-  set(ENABLE_DRIVE_NOTIFICATIONS OFF CACHE BOOL "" FORCE)
-  add_subdirectory(3rdparty/mega-sdk)
+  # Detect system-installed MEGA SDK.
+  # Install from https://github.com/meganz/sdk or your distro's package.
+  find_path(MEGA_SDK_INCLUDE_DIR megaapi.h PATH_SUFFIXES mega)
+  find_library(MEGA_SDK_LIBRARY NAMES mega)
+  if(NOT MEGA_SDK_INCLUDE_DIR OR NOT MEGA_SDK_LIBRARY)
+    message(WARNING "MEGA SDK not found. Install the MEGA SDK system library "
+                    "(https://github.com/meganz/sdk) or set MEGA_SDK_INCLUDE_DIR "
+                    "and MEGA_SDK_LIBRARY manually. Disabling MEGA support.")
+    set(HAVE_MEGA OFF)
+  endif()
 endif()
 
 optional_component(AUDIOCD ON "Devices: Audio CD support"
