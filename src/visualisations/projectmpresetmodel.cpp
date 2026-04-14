@@ -17,19 +17,12 @@
 
 #include "projectmpresetmodel.h"
 
-#include "config.h"
-#include "projectmvisualisation.h"
-
-#ifdef USE_SYSTEM_PROJECTM
-#include <libprojectM/projectM.hpp>
-#else
-#include "projectM.hpp"
-#endif
-
 #include <QDir>
 #include <QDirIterator>
 #include <QtDebug>
 #include <set>
+
+#include "projectmvisualisation.h"
 
 ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                                          QObject* parent)

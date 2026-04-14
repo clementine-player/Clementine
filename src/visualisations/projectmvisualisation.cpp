@@ -26,23 +26,12 @@
 #include <QPaintEngine>
 #include <QPainter>
 #include <QSettings>
-#include <QTemporaryFile>
 #include <QTimerEvent>
 #include <QtDebug>
 
 #include "config.h"
 #include "projectmpresetmodel.h"
 #include "visualisationcontainer.h"
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-#include <QRandomGenerator>
-#endif
-
-#ifdef USE_SYSTEM_PROJECTM
-#include <libprojectM/projectM.hpp>
-#else
-#include "projectM.hpp"
-#endif
 
 #ifdef Q_OS_MAC
 #include <OpenGL/gl.h>
@@ -54,6 +43,8 @@
 
 ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
     : QGraphicsScene(container),
+      projectm_(nullptr),
+      playlist_(nullptr),
       preset_model_(nullptr),
       mode_(Random),
       duration_(15),
@@ -62,12 +53,18 @@ ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
       container_(container) {
   connect(this, SIGNAL(sceneRectChanged(QRectF)),
           SLOT(SceneRectChanged(QRectF)));
-
-  for (int i = 0; i < TOTAL_RATING_TYPES; ++i)
-    default_rating_list_.push_back(3);
 }
 
-ProjectMVisualisation::~ProjectMVisualisation() {}
+ProjectMVisualisation::~ProjectMVisualisation() {
+  if (playlist_) {
+    projectm_playlist_destroy(playlist_);
+    playlist_ = nullptr;
+  }
+  if (projectm_) {
+    projectm_destroy(projectm_);
+    projectm_ = nullptr;
+  }
+}
 
 void ProjectMVisualisation::InitProjectM() {
   // Find the projectM presets
@@ -88,7 +85,6 @@ void ProjectMVisualisation::InitProjectM() {
   paths.prepend(mac::GetResourcesPath() + "/projectm-presets");
 #endif
 
-  QString preset_path;
   for (const QString& path : paths) {
     if (!QFile::exists(path)) continue;
 
@@ -98,49 +94,43 @@ void ProjectMVisualisation::InitProjectM() {
             .isEmpty())
       continue;
 
-    preset_path = path;
+    preset_path_ = path;
     break;
   }
 
-  // Write an empty font out to a temporary directory.  libprojectM dies if it's
-  // compiled with FTGL support and you pass it an empty font URL, so we have
-  // to give it a dummy font even though we won't use it.
-  temporary_font_.reset(QTemporaryFile::createLocalFile(":blank.ttf"));
-  const QString font_path = temporary_font_->fileName();
+  // Create projectM instance
+  projectm_ = projectm_create();
+  if (!projectm_) {
+    qWarning("Failed to create projectM instance");
+    return;
+  }
 
-  // Create projectM settings
-  projectM::Settings s;
-  s.meshX = 32;
-  s.meshY = 24;
-  s.textureSize = texture_size_;
-  s.fps = 35;
-  s.windowWidth = 512;
-  s.windowHeight = 512;
-  s.smoothPresetDuration = 5;
-  s.presetDuration = duration_;
-  s.presetURL = preset_path.toStdString();
-  s.shuffleEnabled = true;
-  s.easterEgg = 0;  // ??
-  s.softCutRatingsEnabled = false;
-  s.menuFontURL = font_path.toStdString();
-  s.titleFontURL = font_path.toStdString();
+  // Configure rendering parameters
+  projectm_set_mesh_size(projectm_, 32, 24);
+  projectm_set_fps(projectm_, 35);
+  projectm_set_soft_cut_duration(projectm_, 5.0);
+  projectm_set_preset_duration(projectm_, static_cast<double>(duration_));
+  projectm_set_hard_cut_enabled(projectm_, false);
 
-  projectm_.reset(new projectM(s));
+  size_t w = static_cast<size_t>(sceneRect().width() * pixel_ratio_);
+  size_t h = static_cast<size_t>(sceneRect().height() * pixel_ratio_);
+  if (w == 0) w = 512;
+  if (h == 0) h = 512;
+  projectm_set_window_size(projectm_, w, h);
+
+  // Create playlist manager
+  playlist_ = projectm_playlist_create(projectm_);
+  projectm_playlist_set_shuffle(playlist_, true);
+
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
 
   // Start at a random preset.
-  if (projectm_->getPlaylistSize() > 0) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-    int selection = qrand() % projectm_->getPlaylistSize();
-#else
-    int selection =
-        QRandomGenerator::global()->bounded(projectm_->getPlaylistSize());
-#endif
-    projectm_->selectPreset(selection, true);
+  if (projectm_playlist_size(playlist_) > 0) {
+    projectm_playlist_play_next(playlist_, true);
   }
 
-  if (font_path.isNull()) {
+  if (preset_path_.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
     QMessageBox::warning(
@@ -157,33 +147,33 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
     InitProjectM();
   }
 
-  projectm_->projectM_resetGL(sceneRect().width() * pixel_ratio_,
-                              sceneRect().height() * pixel_ratio_);
-  projectm_->renderFrame();
+  if (projectm_) {
+    projectm_opengl_render_frame(projectm_);
+  }
 
   p->endNativePainting();
 }
 
 void ProjectMVisualisation::SceneRectChanged(const QRectF& rect) {
-  // NOTE: This should be updated on a QScreen dpi change signal. Accessing the
-  // QScreen becomes a lot easier in Qt 5.14 with QWidget::screen().
   pixel_ratio_ = container_->devicePixelRatio();
 
-  if (projectm_)
-    projectm_->projectM_resetGL(rect.width() * pixel_ratio_,
-                                rect.height() * pixel_ratio_);
+  if (projectm_) {
+    projectm_set_window_size(projectm_,
+                             static_cast<size_t>(rect.width() * pixel_ratio_),
+                             static_cast<size_t>(rect.height() * pixel_ratio_));
+  }
 }
 
 void ProjectMVisualisation::SetTextureSize(int size) {
   texture_size_ = size;
-
-  if (projectm_) projectm_->changeTextureSize(texture_size_);
+  // projectM 4.x manages texture sizes internally
 }
 
 void ProjectMVisualisation::SetDuration(int seconds) {
   duration_ = seconds;
 
-  if (projectm_) projectm_->changePresetDuration(duration_);
+  if (projectm_)
+    projectm_set_preset_duration(projectm_, static_cast<double>(duration_));
 
   Save();
 }
@@ -191,11 +181,12 @@ void ProjectMVisualisation::SetDuration(int seconds) {
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
   GstMapInfo map;
   gst_buffer_map(buffer, &map, GST_MAP_READ);
-  const int samples_per_channel = map.size / sizeof(short) / 2;
-  const short* data = reinterpret_cast<short*>(map.data);
+  const unsigned int samples_per_channel = map.size / sizeof(int16_t) / 2;
+  const int16_t* data = reinterpret_cast<const int16_t*>(map.data);
 
   if (projectm_) {
-    projectm_->pcm()->addPCM16Data(data, samples_per_channel);
+    projectm_pcm_add_int16(projectm_, data, samples_per_channel,
+                           PROJECTM_STEREO);
   }
 
   gst_buffer_unmap(buffer, &map);
@@ -204,13 +195,14 @@ void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
 
 void ProjectMVisualisation::SetSelected(const QStringList& paths,
                                         bool selected) {
+  if (!playlist_) return;
+
   for (const QString& path : paths) {
     int index = IndexOfPreset(path);
     if (selected && index == -1) {
-      projectm_->addPresetURL(path.toStdString(), std::string(),
-                              default_rating_list_);
+      projectm_playlist_add_preset(playlist_, path.toUtf8().constData(), false);
     } else if (!selected && index != -1) {
-      projectm_->removePreset(index);
+      projectm_playlist_remove_preset(playlist_, static_cast<uint32_t>(index));
     }
   }
 
@@ -218,13 +210,21 @@ void ProjectMVisualisation::SetSelected(const QStringList& paths,
 }
 
 void ProjectMVisualisation::ClearSelected() {
-  projectm_->clearPlaylist();
+  if (playlist_) projectm_playlist_clear(playlist_);
   Save();
 }
 
 int ProjectMVisualisation::IndexOfPreset(const QString& path) const {
-  for (uint i = 0; i < projectm_->getPlaylistSize(); ++i) {
-    if (QString::fromStdString(projectm_->getPresetURL(i)) == path) return i;
+  if (!playlist_) return -1;
+
+  uint32_t size = projectm_playlist_size(playlist_);
+  for (uint32_t i = 0; i < size; ++i) {
+    char* item = projectm_playlist_item(playlist_, i);
+    if (item) {
+      bool match = (QString::fromUtf8(item) == path);
+      projectm_playlist_free_string(item);
+      if (match) return static_cast<int>(i);
+    }
   }
   return -1;
 }
@@ -235,26 +235,32 @@ void ProjectMVisualisation::Load() {
   mode_ = Mode(s.value("mode", 0).toInt());
   duration_ = s.value("duration", duration_).toInt();
 
-  projectm_->changePresetDuration(duration_);
-  projectm_->clearPlaylist();
-  switch (mode_) {
-    case Random:
-      for (int i = 0; i < preset_model_->all_presets_.count(); ++i) {
-        projectm_->addPresetURL(
-            preset_model_->all_presets_[i].path_.toStdString(), std::string(),
-            default_rating_list_);
-        preset_model_->all_presets_[i].selected_ = true;
-      }
-      break;
+  if (projectm_)
+    projectm_set_preset_duration(projectm_, static_cast<double>(duration_));
 
-    case FromList: {
-      QStringList paths(s.value("preset_paths").toStringList());
-      for (const QString& path : paths) {
-        projectm_->addPresetURL(path.toStdString(), std::string(),
-                                default_rating_list_);
-        preset_model_->MarkSelected(path, true);
+  if (playlist_) {
+    projectm_playlist_clear(playlist_);
+    switch (mode_) {
+      case Random:
+        for (int i = 0; i < preset_model_->all_presets_.count(); ++i) {
+          projectm_playlist_add_preset(
+              playlist_,
+              preset_model_->all_presets_[i].path_.toUtf8().constData(), false);
+          preset_model_->all_presets_[i].selected_ = true;
+        }
+        break;
+
+      case FromList: {
+        QStringList paths(s.value("preset_paths").toStringList());
+        for (const QString& path : paths) {
+          projectm_playlist_add_preset(playlist_, path.toUtf8().constData(),
+                                       false);
+          preset_model_->MarkSelected(path, true);
+        }
       }
     }
+
+    projectm_playlist_set_shuffle(playlist_, true);
   }
 }
 
@@ -278,22 +284,16 @@ void ProjectMVisualisation::SetMode(Mode mode) {
   Save();
 }
 
-QString ProjectMVisualisation::preset_url() const {
-  return QString::fromStdString(projectm_->settings().presetURL);
-}
+QString ProjectMVisualisation::preset_url() const { return preset_path_; }
 
 void ProjectMVisualisation::SetImmediatePreset(const QString& path) {
-  int index = IndexOfPreset(path);
-  if (index == -1) {
-    index = projectm_->addPresetURL(path.toStdString(), std::string(),
-                                    default_rating_list_);
-  }
-
-  projectm_->selectPreset(index, true);
+  if (!projectm_) return;
+  projectm_load_preset_file(projectm_, path.toUtf8().constData(), true);
 }
 
 void ProjectMVisualisation::Lock(bool lock) {
-  projectm_->setPresetLock(lock);
+  if (!projectm_) return;
+  projectm_set_preset_locked(projectm_, lock);
 
   if (!lock) Load();
 }
