@@ -19,16 +19,9 @@
 
 #include <QPushButton>
 
-#include "config.h"
 #include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
 #include "ui_visualisationselector.h"
-
-#ifdef USE_SYSTEM_PROJECTM
-#include <libprojectM/projectM.hpp>
-#else
-#include "projectM.hpp"
-#endif
 
 VisualisationSelector::VisualisationSelector(QWidget* parent)
     : QDialog(parent), ui_(new Ui_VisualisationSelector), vis_(nullptr) {

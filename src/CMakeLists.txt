@@ -36,7 +36,6 @@ include_directories(${MYGPOQT5_INCLUDE_DIRS})
 if (HAVE_VISUALISATIONS)
   find_package(OpenGL REQUIRED)
   include_directories(${OPENGL_INCLUDE_DIR})
-  include_directories(${LIBPROJECTM_INCLUDE_DIRS})
 endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
@@ -1282,7 +1281,7 @@ link_directories(
 )
 
 if(HAVE_VISUALISATIONS)
-  target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
+  target_link_libraries(clementine_lib libprojectM::projectM libprojectM::playlist)
 endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)

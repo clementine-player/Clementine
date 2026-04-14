@@ -98,7 +98,7 @@ Features include:
 
 %build
 cd bin
-%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DFORCE_GIT_REVISION=@GIT_REV@
+%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DFORCE_GIT_REVISION=@GIT_REV@
 %{cmake_build}
 
 %install
@@ -115,7 +115,6 @@ rm -f $RPM_BUILD_ROOT/usr/share/icons/ubuntu-mono-{dark,light}/apps/24/clementin
 %dir %{_datadir}/metainfo/
 %{_datadir}/metainfo/org.clementine_player.Clementine.appdata.xml
 %{_datadir}/applications/org.clementine_player.Clementine.desktop
-%{_datadir}/clementine/projectm-presets
 %{_datadir}/kservices5/clementine-itms.protocol
 %{_datadir}/kservices5/clementine-itpc.protocol
 %{_datadir}/kservices5/clementine-feed.protocol

@@ -18,20 +18,18 @@
 #ifndef PROJECTMVISUALISATION_H
 #define PROJECTMVISUALISATION_H
 
+#include <projectM-4/playlist.h>
+#include <projectM-4/projectM.h>
+
 #include <QBasicTimer>
 #include <QGraphicsScene>
 #include <QSet>
-#include <memory>
 
 #include "engines/bufferconsumer.h"
-
-class projectM;
 
 class ProjectMPresetModel;
 
 class VisualisationContainer;
-
-class QTemporaryFile;
 
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
@@ -79,14 +77,13 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   int IndexOfPreset(const QString& path) const;
 
  private:
-  std::unique_ptr<projectM> projectm_;
+  projectm_handle projectm_;
+  projectm_playlist_handle playlist_;
   ProjectMPresetModel* preset_model_;
   Mode mode_;
   int duration_;
 
-  std::unique_ptr<QTemporaryFile> temporary_font_;
-
-  std::vector<int> default_rating_list_;
+  QString preset_path_;
 
   int texture_size_;
   // As of version 5.6, Qt supports automatic scaling for high-DPI displays. We
