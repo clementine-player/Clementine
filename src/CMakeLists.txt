@@ -1281,7 +1281,7 @@ link_directories(
 )
 
 if(HAVE_VISUALISATIONS)
-  target_link_libraries(clementine_lib libprojectM::projectM libprojectM::playlist)
+  target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)

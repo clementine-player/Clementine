@@ -1,0 +1,60 @@
+#include "MilkdropStaticShaders.hpp"
+
+#include <projectM-opengl.h>
+
+#include <cstring>
+#include <stdexcept>
+
+namespace libprojectM {
+namespace MilkdropPreset {
+
+@STATIC_SHADER_CONTENTS@
+
+MilkdropStaticShaders::MilkdropStaticShaders(bool useGLES)
+    : m_useGLES(useGLES)
+{
+    m_GLSLVersion = Renderer::Shader::GetShaderLanguageVersion();
+
+    if (m_GLSLVersion.major == 0)
+    {
+        throw std::runtime_error("Could not retrieve OpenGL shader language version. Is OpenGL available and the context initialized?");
+    }
+    if (m_GLSLVersion.major < 3)
+    {
+        throw std::runtime_error("OpenGL shader language version 3 or higher is required, but not available in the current context.");
+    }
+
+    if (m_useGLES)
+    {
+        // If GLES is enabled, use the embedded specification language variant.
+        m_versionHeader = "#version 300 es";
+        m_GLSLGeneratorVersion = M4::GLSLGenerator::Version::Version_300_ES;
+    }
+    else
+    {
+        m_versionHeader = "#version 330";
+        m_GLSLGeneratorVersion = M4::GLSLGenerator::Version::Version_330;
+    }
+}
+
+std::string MilkdropStaticShaders::AddVersionHeader(std::string shader_text)
+{
+    return m_versionHeader + "\n" + shader_text;
+}
+
+#define DECLARE_SHADER_ACCESSOR(name)              \
+    std::string MilkdropStaticShaders::Get##name()       \
+    {                                              \
+        return AddVersionHeader(k##name##Glsl330); \
+    }
+
+#define DECLARE_SHADER_ACCESSOR_NO_HEADER(name) \
+    std::string MilkdropStaticShaders::Get##name()    \
+    {                                           \
+        return k##name##Glsl330;                \
+    }
+
+@STATIC_SHADER_ACCESSOR_DEFINITIONS@
+
+} // namespace MilkdropPreset
+} // namespace libprojectM

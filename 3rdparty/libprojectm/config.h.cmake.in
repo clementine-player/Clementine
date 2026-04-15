@@ -1,0 +1,15 @@
+#pragma once
+
+/* Define USE_GLES */
+#cmakedefine USE_GLES
+
+/* Define PROJECTM_USE_THREADS */
+#cmakedefine01 PROJECTM_USE_THREADS
+
+/* Version number of package */
+#define VERSION "@libprojectM_VERSION@"
+
+/* Boost or std filesystem API support */
+#cmakedefine PROJECTM_FILESYSTEM_USE_BOOST
+#define PROJECTM_FILESYSTEM_NAMESPACE @PROJECTM_FILESYSTEM_NAMESPACE@
+#define PROJECTM_FILESYSTEM_INCLUDE @PROJECTM_FILESYSTEM_INCLUDE@
