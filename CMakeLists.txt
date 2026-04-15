@@ -352,6 +352,18 @@ if(HAVE_VISUALISATIONS)
     add_subdirectory(3rdparty/libprojectm)
     set(LIBPROJECTM_LIBRARIES projectM projectM_playlist)
   endif()
+
+  # On Windows, projectM 4.x (up to 4.1.x) requires glewInit() to be called
+  # before creating a projectM instance. GLEW targets are populated either by
+  # the bundled build above or, for the system case, we find it here.
+  if(WIN32)
+    if(NOT TARGET GLEW::glew AND NOT TARGET GLEW::glew_s)
+      find_package(GLEW QUIET)
+    endif()
+    if(TARGET GLEW::glew OR TARGET GLEW::glew_s)
+      set(HAVE_GLEW_FOR_PROJECTM ON)
+    endif()
+  endif()
 endif(HAVE_VISUALISATIONS)
 
 
