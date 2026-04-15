@@ -1,0 +1,7 @@
+# pkg-config file install script. Executed during install phase of the library.
+
+set(CMAKE_INSTALL_LIBDIR "@CMAKE_INSTALL_LIBDIR@")
+set(CMAKE_INSTALL_INCLUDEDIR "@CMAKE_INSTALL_INCLUDEDIR@")
+set(PROJECT_VERSION "@PROJECT_VERSION@")
+set(PROJECTM_EVAL_FLOAT_SIZE "@PROJECTM_EVAL_FLOAT_SIZE@")
+configure_file(@CMAKE_CURRENT_SOURCE_DIR@/projectm-eval.pc.in ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkgconfig/projectm-eval.pc @ONLY)
