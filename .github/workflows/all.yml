@@ -373,6 +373,7 @@ jobs:
           cmake ..
           -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
           -DCMAKE_BUILD_TYPE=Release
+          -DGLEW_SHARED_LIBRARY_RELEASE=/target/bin/glew32.dll
       - name: make
         working-directory: bin
         run: make -j2

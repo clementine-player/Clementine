@@ -17,6 +17,16 @@
 
 #include "projectmvisualisation.h"
 
+#include "config.h"
+#include "projectmpresetmodel.h"
+#include "visualisationcontainer.h"
+
+// GLEW must be included before any other OpenGL headers.
+// Required on Windows for projectM 4.x up to 4.1.x.
+#ifdef HAVE_GLEW_FOR_PROJECTM
+#include <GL/glew.h>
+#endif
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -28,10 +38,6 @@
 #include <QSettings>
 #include <QTimerEvent>
 #include <QtDebug>
-
-#include "config.h"
-#include "projectmpresetmodel.h"
-#include "visualisationcontainer.h"
 
 #ifdef Q_OS_MAC
 #include <OpenGL/gl.h>
@@ -97,6 +103,16 @@ void ProjectMVisualisation::InitProjectM() {
     preset_path_ = path;
     break;
   }
+
+#ifdef HAVE_GLEW_FOR_PROJECTM
+  // projectM 4.1.x and earlier on Windows requires GLEW to be initialised
+  // before the projectM instance is created.
+  GLenum glew_err = glewInit();
+  if (glew_err != GLEW_OK) {
+    qWarning("GLEW initialization failed: %s",
+             reinterpret_cast<const char*>(glewGetErrorString(glew_err)));
+  }
+#endif
 
   // Create projectM instance
   projectm_ = projectm_create();
