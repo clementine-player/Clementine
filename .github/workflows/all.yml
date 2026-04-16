@@ -142,7 +142,7 @@ jobs:
     name: Build source tarball
     runs-on: ubuntu-24.04
     container:
-      image: ubuntu:jammy
+      image: ubuntu:noble
     steps:
       - name: Install dependencies
         env:
@@ -162,7 +162,7 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
-          libglew1.5-dev
+          libglew-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
