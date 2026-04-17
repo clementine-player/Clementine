@@ -136,6 +136,9 @@ class Player : public PlayerInterface {
   EngineBase* engine() const { return engine_.get(); }
   Engine::State GetState() const { return last_state_; }
   int GetVolume() const;
+  
+  // Backend switching
+  void SwitchEngine(EngineBase* new_engine);
 
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
   PlaylistItemPtr GetItemAt(int pos) const;
@@ -215,6 +218,10 @@ class Player : public PlayerInterface {
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
   int nb_errors_received_;
+  
+  // Backend switching support
+  void ConnectEngine(EngineBase* new_engine);
+  void DisconnectEngine();
 
   QMap<QString, UrlHandler*> url_handlers_;
 

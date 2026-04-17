@@ -53,6 +53,9 @@ include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
+# Python include directories for AI stem separation
+include_directories(${Python3_INCLUDE_DIRS})
+
 include(../cmake/ParseArguments.cmake)
 
 if(HAVE_TRANSLATIONS)
@@ -98,6 +101,9 @@ set(SOURCES
   core/settingsprovider.cpp
   core/signalchecker.cpp
   core/song.cpp
+  
+  playlist/extsmartplaylistdialog.cpp
+  playlist/extsmartplaylistdialog.h
   core/songloader.cpp
   core/songpathparser.cpp
   core/stylesheetloader.cpp
@@ -134,12 +140,19 @@ set(SOURCES
 
   engines/devicefinder.cpp
   engines/enginebase.cpp
+  engines/audiobackendmanager.cpp
   engines/gstengine.cpp
+  engines/ffmpegengine.cpp
+  engines/wasapiengine.cpp
   engines/gstenginedebug.cpp
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
   engines/gstpipelinebase.cpp
   engines/pipelineview.cpp
+  engines/stemseparator.cpp
+  engines/gststemengine.cpp
+  # engines/torchstemengine.cpp  # Removed in favor of ONNX Runtime
+  engines/onnxstemengine.cpp
 
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
@@ -253,6 +266,10 @@ set(SOURCES
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
   playlist/songplaylistitem.cpp
+  
+  # Enhanced playlist features
+  playlist/extsmartplaylistdialog.cpp
+  playlist/extsmartplaylistdialog.h
 
   playlistparsers/asxparser.cpp
   playlistparsers/asxiniparser.cpp
@@ -357,6 +374,8 @@ set(SOURCES
   ui/globalshortcutgrabber.cpp
   ui/globalshortcutssettingspage.cpp
   ui/iconloader.cpp
+  ui/stemmixerwidget.cpp
+  ui/pythonstemcontroller.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
   ui/networkremotesettingspage.cpp
@@ -471,12 +490,20 @@ set(HEADERS
   devices/deviceinfo.h
 
   engines/enginebase.h
+  engines/audiobackendmanager.h
+  engines/iaudiobackend.h
   engines/gstengine.h
+  engines/ffmpegengine.h
+  engines/wasapiengine.h
   engines/gstenginedebug.h
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
   engines/gstpipelinebase.h
   engines/pipelineview.h
+  engines/stemseparator.h
+  engines/gststemengine.h
+  # engines/torchstemengine.h  # Removed in favor of ONNX Runtime
+  engines/onnxstemengine.h
 
   globalsearch/globalsearch.h
   globalsearch/globalsearchmodel.h
@@ -570,6 +597,9 @@ set(HEADERS
   playlist/queuemanager.h
   playlist/songloaderinserter.h
   playlist/songmimedata.h
+  
+  # Enhanced playlist headers
+  playlist/extsmartplaylistdialog.h
 
   playlistparsers/asxparser.h
   playlistparsers/asxiniparser.h
@@ -659,6 +689,8 @@ set(HEADERS
   ui/globalshortcutgrabber.h
   ui/globalshortcutssettingspage.h
   ui/mainwindow.h
+  ui/stemmixerwidget.h
+  ui/pythonstemcontroller.h
   ui/networkproxysettingspage.h
   ui/networkremotesettingspage.h
   ui/notificationssettingspage.h
@@ -746,6 +778,7 @@ set(UI
   playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
+  playlist/extsmartplaylistdialog.ui
 
   internet/podcasts/addpodcastbyurl.ui
   internet/podcasts/addpodcastdialog.ui
@@ -1272,6 +1305,12 @@ target_link_libraries(clementine_lib
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
 
+  # FFmpeg libraries for FFmpegEngine
+  avformat
+  avcodec
+  avutil
+  swresample
+
   Qocoa
 )
 
@@ -1351,6 +1390,20 @@ endif (APPLE)
 
 set(3RDPARTY_SQLITE_LIBRARY qsqlite)
 target_link_libraries(clementine_lib qsqlite)
+
+# Python libraries for AI stem separation (legacy)
+target_link_libraries(clementine_lib Python3::Python)
+
+# ONNX Runtime for native C++ AI stem separation
+if(HAVE_ONNXRUNTIME)
+    target_include_directories(clementine_lib PRIVATE ${ONNXRUNTIME_INCLUDE_DIRS})
+    target_link_libraries(clementine_lib ${ONNXRUNTIME_LIBRARIES})
+    target_compile_definitions(clementine_lib PRIVATE HAVE_ONNXRUNTIME=1)
+    message(STATUS "✅ ONNX Runtime integration enabled")
+else()
+    target_compile_definitions(clementine_lib PRIVATE HAVE_ONNXRUNTIME=0)
+    message(STATUS "⚠️ ONNX Runtime disabled - using Python fallback")
+endif()
 
 if (WIN32)
   target_link_libraries(clementine_lib

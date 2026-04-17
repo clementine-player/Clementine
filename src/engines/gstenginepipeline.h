@@ -52,6 +52,7 @@ class GstEnginePipeline : public GstPipelineBase {
   void set_mono_playback(bool enabled);
   void set_sample_rate(int rate);
   void set_format(const QString& format) { format_ = format; }
+  void UpdateAudioFormat(const QString& format);
 
   // Creates the pipeline, returns false on error
   bool InitFromReq(const MediaPlaybackRequest& req, qint64 end_nanosec);

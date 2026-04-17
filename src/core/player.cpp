@@ -39,6 +39,9 @@
 #include "core/urlhandler.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "engines/ffmpegengine.h"
+#include "engines/wasapiengine.h"
+#include "engines/audiobackendmanager.h"
 #include "library/librarybackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistitem.h"
@@ -56,7 +59,7 @@ Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
       lastfm_(nullptr),
-      engine_(new GstEngine(app_)),
+      engine_(nullptr),  // Will be set by backend manager
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),
@@ -66,17 +69,121 @@ Player::Player(Application* app, QObject* parent)
       seek_step_sec_(10) {
   settings_.beginGroup("Player");
 
+  // Register all available audio backends
+  Engine::AudioBackendManager* backend_manager = Engine::AudioBackendManager::instance();
+  
+  // 1. Register GStreamer backend (primary, stable)
+  GstEngine* gst_engine = new GstEngine(app_);
+  backend_manager->registerBackend(dynamic_cast<Engine::IAudioBackend*>(gst_engine));
+  
+  // 2. Register FFmpeg backend if available (DISABLED - still in development)
+  /*
+  FFmpegEngine* ffmpeg_engine = new FFmpegEngine(app_);
+  if (ffmpeg_engine->IsAvailable()) {
+    backend_manager->registerBackend(ffmpeg_engine);
+    qLog(Info) << "Player: FFmpeg backend registered successfully";
+  } else {
+    delete ffmpeg_engine;
+    qLog(Warning) << "Player: FFmpeg backend not available";
+  }
+  */
+  qLog(Info) << "Player: FFmpeg backend disabled (still in development)";
+  
+  // 3. Register WASAPI backend if available (Windows only)
+  WASAPIEngine* wasapi_engine = new WASAPIEngine(app_);
+  if (wasapi_engine->IsAvailable()) {
+    backend_manager->registerBackend(wasapi_engine);
+    qLog(Info) << "Player: WASAPI backend registered successfully";
+  } else {
+    delete wasapi_engine;
+    qLog(Warning) << "Player: WASAPI backend not available on this platform";
+  }
+  
+  qLog(Info) << "Player: Registered" << backend_manager->availableBackends().size() << "audio backends";
+
+  // Select initial backend (GStreamer as default)
+  Engine::IAudioBackend* initial_backend = dynamic_cast<Engine::IAudioBackend*>(gst_engine);
+  if (initial_backend) {
+    backend_manager->setCurrentBackend(initial_backend->Name());
+    engine_.reset(dynamic_cast<EngineBase*>(initial_backend));
+    qLog(Info) << "Player: Using GStreamer as default audio backend";
+  }
+  
+  if (!engine_) {
+    qFatal("No audio backend available!");
+  }
+
+  ConnectEngine(engine_.get());
   SetVolume(settings_.value("volume", 50).toInt());
-
-  connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
-
-  connect(engine_.get(), SIGNAL(ValidMediaRequested(MediaPlaybackRequest)),
-          SLOT(ValidMediaRequested(MediaPlaybackRequest)));
-  connect(engine_.get(), SIGNAL(InvalidMediaRequested(MediaPlaybackRequest)),
-          SLOT(InvalidMediaRequested(MediaPlaybackRequest)));
 }
 
-Player::~Player() {}
+Player::~Player() {
+  // Ensure proper cleanup when Player is destroyed
+  if (engine_) {
+    engine_->Stop();
+    DisconnectEngine();
+    engine_.reset();
+  }
+}
+
+void Player::ConnectEngine(EngineBase* new_engine) {
+  if (!new_engine) return;
+  
+  connect(new_engine, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(new_engine, SIGNAL(ValidMediaRequested(MediaPlaybackRequest)),
+          SLOT(ValidMediaRequested(MediaPlaybackRequest)));
+  connect(new_engine, SIGNAL(InvalidMediaRequested(MediaPlaybackRequest)),
+          SLOT(InvalidMediaRequested(MediaPlaybackRequest)));
+  
+  // Additional connections that are made in Init()
+  if (new_engine->state() != Engine::Empty) {  // Already initialized
+    connect(new_engine, SIGNAL(StateChanged(Engine::State)),
+            SLOT(EngineStateChanged(Engine::State)));
+    connect(new_engine, SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
+    connect(new_engine, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
+    connect(new_engine, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
+            SLOT(CurrentMetadataChanged(Engine::SimpleMetaBundle)));
+  }
+}
+
+void Player::DisconnectEngine() {
+  if (!engine_) return;
+  
+  // Disconnect all signals from the current engine
+  disconnect(engine_.get(), nullptr, this, nullptr);
+}
+
+void Player::SwitchEngine(EngineBase* new_engine) {
+  if (!new_engine || new_engine == engine_.get()) return;
+  
+  qLog(Info) << "Player: Switching audio engine to:" << 
+    dynamic_cast<Engine::IAudioBackend*>(new_engine)->Name();
+  
+  // Store current state
+  int current_volume = engine_ ? engine_->volume() : 50;
+  
+  // Disconnect and stop current engine
+  DisconnectEngine();
+  if (engine_) {
+    engine_->Stop();
+  }
+  
+  // Switch to new engine
+  engine_.reset(new_engine);
+  ConnectEngine(engine_.get());
+  
+  // Initialize new engine if needed
+  if (engine_->state() == Engine::Empty) {
+    engine_->Init();
+  }
+  
+  // Restore settings
+  engine_->SetVolume(current_volume);
+  engine_->ReloadSettings();
+  
+  qLog(Info) << "Player: Successfully switched to" << 
+    dynamic_cast<Engine::IAudioBackend*>(new_engine)->Name();
+}
 
 void Player::Init() {
   if (!engine_->Init()) qFatal("Error initialising audio engine");
