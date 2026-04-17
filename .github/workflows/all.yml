@@ -382,7 +382,7 @@ jobs:
       - name: Copy base runtime DLLs
         run: >
           cp
-          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_sjlj-1.dll
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_dw2-1.dll
           /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
           /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
           dist/windows
@@ -436,7 +436,7 @@ jobs:
             libp11-kit-0.dll
             libpcre-1.dll
             libplist.dll
-            libprotobuf-17.dll
+            libprotobuf-32.dll
             libpsl-5.dll
             libssl-1_1.dll
             libsoup-2.4-1.dll
