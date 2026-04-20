@@ -142,7 +142,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
                                           actions_.count(), buttons);
     if (hr != S_OK) qLog(Debug) << "Failed to add buttons" << hex << DWORD(hr);
     for (int i = 0; i < actions_.count(); i++) {
-      if (buttons[i].hIcon > 0) DestroyIcon(buttons[i].hIcon);
+      if (buttons[i].hIcon != 0) DestroyIcon(buttons[i].hIcon);
     }
   } else if (msg->message == WM_COMMAND) {
     const int button_id = LOWORD(msg->wParam);
@@ -169,7 +169,7 @@ void Windows7ThumbBar::ActionChanged() {
 
     button->iId = i;
     SetupButton(action, button);
-    if (buttons->hIcon > 0) DestroyIcon(buttons->hIcon);
+    if (buttons->hIcon != 0) DestroyIcon(buttons->hIcon);
   }
 
   taskbar_list->ThumbBarUpdateButtons((HWND)widget_->winId(), actions_.count(),
