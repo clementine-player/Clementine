@@ -540,6 +540,13 @@ jobs:
           libgstwavpack.dll
           libgstwavparse.dll
           ${GITHUB_WORKSPACE}/dist/windows/gstreamer-plugins
+      - name: Download projectM presets
+        run: |
+          git clone --depth=1 https://github.com/projectM-visualizer/presets-cream-of-the-crop \
+            3rdparty/libprojectm/presets-cream
+          rm -rf 3rdparty/libprojectm/presets-cream/.git
+          rm -f 3rdparty/libprojectm/presets-cream/LICENSE.md \
+            3rdparty/libprojectm/presets-cream/README.md
       - name: Build Windows installer
         working-directory: dist/windows
         run: makensis clementine.nsi
