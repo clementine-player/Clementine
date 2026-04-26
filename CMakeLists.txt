@@ -255,6 +255,27 @@ optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
+optional_component(MEGA ON "Mega support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
+# MEGA SDK API key. Register at https://mega.nz/sdk to obtain one.
+set(MEGA_API_KEY "" CACHE STRING "MEGA SDK API key (register at https://mega.nz/sdk)")
+
+if(HAVE_MEGA)
+  # Detect system-installed MEGA SDK.
+  # Install from https://github.com/meganz/sdk or your distro's package.
+  find_path(MEGA_SDK_INCLUDE_DIR megaapi.h PATH_SUFFIXES mega)
+  find_library(MEGA_SDK_LIBRARY NAMES mega)
+  if(NOT MEGA_SDK_INCLUDE_DIR OR NOT MEGA_SDK_LIBRARY)
+    message(WARNING "MEGA SDK not found. Install the MEGA SDK system library "
+                    "(https://github.com/meganz/sdk) or set MEGA_SDK_INCLUDE_DIR "
+                    "and MEGA_SDK_LIBRARY manually. Disabling MEGA support.")
+    set(HAVE_MEGA OFF)
+  endif()
+endif()
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )

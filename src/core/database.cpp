@@ -47,7 +47,7 @@
 #include "utilities.h"
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 51;
+const int Database::kSchemaVersion = 52;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
