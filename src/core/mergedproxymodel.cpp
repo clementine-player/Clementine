@@ -35,6 +35,13 @@ using std::placeholders::_2;
 #include <boost/multi_index/ordered_index.hpp>
 #include <boost/multi_index_container.hpp>
 
+// Suppress probable false positive stringop-overflow warning in GCC when
+// initializing boost::multi_index bucket arrays (seen in Fedora 44+)
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 using boost::multi_index::hashed_unique;
 using boost::multi_index::identity;
 using boost::multi_index::indexed_by;
@@ -77,6 +84,10 @@ MergedProxyModel::MergedProxyModel(QObject* parent)
     : QAbstractProxyModel(parent),
       resetting_model_(nullptr),
       p_(new MergedProxyModelPrivate) {}
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
 
 MergedProxyModel::~MergedProxyModel() { DeleteAllMappings(); }
 
