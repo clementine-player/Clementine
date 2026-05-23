@@ -2083,9 +2083,12 @@ void Playlist::ReshuffleIndices() {
       break;
 
     case PlaylistSequence::Shuffle_All:
-    case PlaylistSequence::Shuffle_InsideAlbum:
-      std::random_shuffle(begin, end);
+    case PlaylistSequence::Shuffle_InsideAlbum: {
+      static std::random_device rd;
+      static std::mt19937 gen(rd());
+      std::shuffle(begin, end, gen);
       break;
+    }
 
     case PlaylistSequence::Shuffle_Albums: {
       QMap<int, QString> album_keys;  // real index -> key
@@ -2101,8 +2104,10 @@ void Playlist::ReshuffleIndices() {
 
       // Shuffle them
       QStringList shuffled_album_keys = album_key_set.values();
-      std::random_shuffle(shuffled_album_keys.begin(),
-                          shuffled_album_keys.end());
+
+      static std::random_device rd;
+      static std::mt19937 gen(rd());
+      std::shuffle(shuffled_album_keys.begin(), shuffled_album_keys.end(), gen);
 
       // If the user is currently playing a song, force its album to be first
       // Or if the song was not playing but it was selected, force its album

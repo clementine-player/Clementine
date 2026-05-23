@@ -22,6 +22,7 @@
 #include <QTimerEvent>
 #include <QUrl>
 #include <algorithm>
+#include <random>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -370,8 +371,10 @@ QStringList GlobalSearch::GetSuggestions(int count) {
     }
   }
 
+  static std::random_device rd;
+  static std::mt19937 gen(rd());
   // Randomize the suggestions
-  std::random_shuffle(ret.begin(), ret.end());
+  std::shuffle(ret.begin(), ret.end(), gen);
 
   // Only return the first count
   while (ret.length() > count) {
