@@ -27,6 +27,7 @@ target_link_libraries(clementine-tagreader
   ${TAGLIB_LIBRARIES}
   libclementine-common
   libclementine-tagreader
+  protobuf::libprotobuf
   Qt5::Core
   Qt5::Network
   z
