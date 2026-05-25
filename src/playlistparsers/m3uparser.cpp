@@ -103,12 +103,14 @@ bool M3UParser::ParseMetadata(const QString& line,
 
 void M3UParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
-  device->write("#EXTM3U\n");
-
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
   bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
   s.endGroup();
+
+  if (writeMetadata) {
+    device->write("#EXTM3U\n");
+  }
 
   for (const Song& song : songs) {
     if (song.url().isEmpty()) {
