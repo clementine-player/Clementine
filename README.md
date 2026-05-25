@@ -44,5 +44,16 @@ Compile and install:
     make -j$(nproc)
     sudo make install
 
+How to build with MEGA support:
+1. Install MEGA SDK system-wide first
+
+        git clone https://github.com/meganz/sdk.git
+        cd sdk && cmake -B build && cmake --build build && sudo cmake --install build
+
+2. Build Clementine
+    
+        cmake -B build -DMEGA_API_KEY="yourkey" ..
+        cmake --build build
+
 See the Wiki for more instructions and a list of dependencies:
 https://github.com/clementine-player/Clementine/wiki#compiling-and-installing-clementine
