@@ -27,6 +27,7 @@
 
 class Application;
 class Database;
+class DirectoryManager;
 class LibraryBackend;
 class LibraryModel;
 class LibraryDirectoryModel;
@@ -80,6 +81,7 @@ class Library : public QObject {
  private:
   Application* app_;
   std::shared_ptr<LibraryBackend> backend_;
+  std::shared_ptr<DirectoryManager> directory_manager_;
   LibraryModel* model_;
   LibraryDirectoryModel* dir_model_;
 
