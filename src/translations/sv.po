@@ -6,15 +6,15 @@
 # 4fff29bf2144a5ade1f177b3cb0fa94f_e26f81b <8aaac529e19310f91db345b379a819f4_211709>, 2014
 # 4fff29bf2144a5ade1f177b3cb0fa94f_e26f81b <8aaac529e19310f91db345b379a819f4_211709>, 2014
 # Christian Svensson <chris.sv88@gmail.com>, 2013
-# Karl Jonatan Nyberg, 2026
+# Jonatan Nyberg, 2026
 # Daniel Sandman <revoltism@gmail.com>, 2012
 # elfa <thomas.elfstrom@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Hoven1 <thomas.hofverberg@tavelsjo.se>, 2012
-# Karl Jonatan Nyberg, 2017,2021-2023,2025
-# Karl Jonatan Nyberg, 2019-2021
+# Jonatan Nyberg, 2017,2021-2023,2025-2026
+# Jonatan Nyberg, 2019-2021
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2021
-# Karl Jonatan Nyberg, 2026
+# Jonatan Nyberg, 2026
 # Kristian <kristianm24@gmail.com>, 2012-2017
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <lovaren@gmail.com>, 2014,2017
@@ -37,7 +37,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-09 10:24+0000\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Karl Jonatan Nyberg, 2026\n"
+"Last-Translator: Jonatan Nyberg, 2017,2021-2023,2025-2026\n"
 "Language-Team: Swedish (http://app.transifex.com/davidsansome/clementine/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -201,7 +201,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>En variabel påbörjas med %, till exempel: %artist %album %title </p>\n\n<p>Om du omgärdar en variabel med klammerparenteser (måsvingar), så kommer den inte att visas om variabeln är tom.</p>"
+msgstr "<p>Variabler börjar med %, till exempel %artist, %album och %title </p>\n\n<p>Om du omgärdar en variabel med klammerparenteser (måsvingar), så kommer den inte att visas om variabeln är tom.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Ett Grooveshark Anywhere-konto krävs."
@@ -466,7 +466,7 @@ msgid "Appearance"
 msgstr "Utseende"
 
 msgid "Append files/URLs to the playlist"
-msgstr "Lägg till filer/URL:er till spellistan"
+msgstr "Lägg till filer/URL:er i spellistan"
 
 msgid "Append to current playlist"
 msgstr "Lägg till i aktuell spellista"
@@ -713,10 +713,10 @@ msgid "Close visualization"
 msgstr "Stäng visualisering"
 
 msgid "Closing this window will cancel the download."
-msgstr "Stängning av det här fönstret kommer att avbryta hämtningen."
+msgstr "Om du stänger det här fönstret avbryts hämtningen."
 
 msgid "Closing this window will stop searching for album covers."
-msgstr "Stängning av det här fönstret kommer att stoppa sökningen efter albumomslag."
+msgstr "Om du stänger det här fönstret avbryts sökningen efter albumomslag."
 
 msgid "Club"
 msgstr "Klubb"
@@ -966,7 +966,7 @@ msgid "Dequeue track"
 msgstr "Ta bort spår från kön"
 
 msgid "Destination"
-msgstr "Destination"
+msgstr "Mål"
 
 msgid "Details..."
 msgstr "Detaljer..."
@@ -1050,7 +1050,7 @@ msgid "Double click to open"
 msgstr "Dubbelklicka för att öppna"
 
 msgid "Double clicking a song will..."
-msgstr "Dubbelklicka på en låt kommer att..."
+msgstr "När du dubbelklickar på en låt..."
 
 msgid "Download directory"
 msgstr "Hämtningsmapp"
@@ -1123,7 +1123,7 @@ msgid "Enable Wii Remote support"
 msgstr "Aktivera stöd för Wii-kontroll"
 
 msgid "Enable equalizer"
-msgstr "Aktivera frekvenskorrigerare"
+msgstr "Aktivera frekvenskorrigering"
 
 msgid "Enable playlist background image"
 msgstr "Aktivera bakgrundsbild för spellistan"
@@ -1163,7 +1163,7 @@ msgid "Entire collection"
 msgstr "Hela samlingen"
 
 msgid "Equalizer"
-msgstr "Frekvenskorrigerare"
+msgstr "Frekvenskorrigering"
 
 msgid "Equivalent to --log-levels *:1"
 msgstr "Motsvarar --log-levels *:1"
@@ -1323,7 +1323,7 @@ msgstr "Glöm enhet"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Om en enhet glöms kommer den att tas bort från den här listan och Clementine kommer att behöva skanna om alla låtar nästa gång du ansluter den."
+msgstr "När du glömmer en enhet tas den bort från listan, och Clementine måste skanna om alla låtar nästa gång du ansluter den."
 
 msgid "Form"
 msgstr "Formulär"
@@ -1730,7 +1730,7 @@ msgid "Long term prediction profile (LTP)"
 msgstr "Långsiktig förutsägelseprofil (LTP)"
 
 msgid "Love"
-msgstr "Älska"
+msgstr "Gilla"
 
 #, qt-format
 msgid "Low (%1 fps)"
@@ -2586,7 +2586,7 @@ msgid "Show results from %1"
 msgstr "Visa resultat från %1"
 
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Visa knapparna \"Älska\" och \"Blockera\""
+msgstr "Visa knapparna \"Gilla\" och \"Blockera\""
 
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbla-knappen i huvudfönstret"
@@ -2839,15 +2839,15 @@ msgstr "Fel uppstod vid borttagning av några låtar. Följande filer kunde inte
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Dessa filer kommer att tas bort från disken, är du säker på att du vill fortsätta?"
+msgstr "Dessa filer kommer att tas bort från disken. Är du säker på att du vill fortsätta?"
 
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr "Dessa filer kommer att tas bort från enheten, är du säker på att du vill fortsätta?"
+msgstr "Dessa filer kommer att tas bort från enheten. Är du säker på att du vill fortsätta?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Dessa mappar kommer att skannas för musik att fylla upp ditt bibliotek"
+msgstr "Dessa mappar kommer att skannas efter musik för att skapa ditt bibliotek"
 
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
@@ -2965,7 +2965,7 @@ msgid "URI"
 msgstr "URI"
 
 msgid "URL(s)"
-msgstr "URL(er)"
+msgstr "URL:er"
 
 msgid "Ultra wide band (UWB)"
 msgstr "Ultrabredband (UWB)"
@@ -3047,7 +3047,7 @@ msgid "Username"
 msgstr "Användarnamn"
 
 msgid "Using the menu to add a song will..."
-msgstr "Om du lägger till en låt via menyn kommer det att..."
+msgstr "När du lägger till en låt via menyn..."
 
 msgid "VBR MP3"
 msgstr "VBR MP3"
@@ -3226,7 +3226,7 @@ msgid "You have selected an invalid audio type setting"
 msgstr "Du har valt en ogiltig ljudtypsinställning"
 
 msgid "You love this track"
-msgstr "Du älskar det här spåret"
+msgstr "Du gillar det här spåret"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
