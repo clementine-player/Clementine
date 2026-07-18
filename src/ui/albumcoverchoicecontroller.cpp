@@ -45,9 +45,9 @@
 #include "ui/iconloader.h"
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
-    "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
+    "Images (*.png *.jpg *.jpeg *.jxl *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
 const char* AlbumCoverChoiceController::kSaveImageFileFilter =
-    QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)");
+    QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.jxl *.bmp *.xpm *.pbm *.ppm *.xbm)");
 const char* AlbumCoverChoiceController::kAllFilesFilter =
     QT_TR_NOOP("All files (*)");
 
@@ -342,6 +342,7 @@ bool AlbumCoverChoiceController::IsKnownImageExtension(const QString& suffix) {
     (*sImageExtensions) << "png"
                         << "jpg"
                         << "jpeg"
+                        << "jxl"
                         << "bmp"
                         << "gif"
                         << "xpm"
