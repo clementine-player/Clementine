@@ -1198,6 +1198,20 @@ optional_source(HAVE_SEAFILE
     internet/seafile/seafilesettingspage.ui
 )
 
+# Mega support
+optional_source(HAVE_MEGA
+  SOURCES
+    internet/mega/megaservice.cpp
+    internet/mega/megasettingspage.cpp
+    internet/mega/megaurlhandler.cpp
+  HEADERS
+    internet/mega/megaservice.h
+    internet/mega/megasettingspage.h
+    internet/mega/megaurlhandler.h
+  UI
+    internet/mega/megasettingspage.ui
+)
+
 # Pulse audio integration
 optional_source(HAVE_LIBPULSE
   INCLUDE_DIRECTORIES
@@ -1324,6 +1338,39 @@ endif(HAVE_BREAKPAD)
 if(HAVE_LIBPULSE)
   target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
 endif()
+
+if(HAVE_MEGA)
+  # Pass the MEGA API key as a compile definition.
+  # Builders must supply -DMEGA_API_KEY="yourkey" at configure time.
+  # Register at https://mega.nz/sdk to obtain an API key.
+  if(MEGA_API_KEY)
+    target_compile_definitions(clementine_lib PRIVATE MEGA_API_KEY="${MEGA_API_KEY}")
+  else()
+    message(WARNING "MEGA_API_KEY not set. MEGA integration will not work at runtime. "
+                    "Register at https://mega.nz/sdk to obtain one, then pass "
+                    "-DMEGA_API_KEY=yourkey to cmake.")
+  endif()
+
+  # Link against the system-installed MEGA SDK and its dependencies.
+  find_package(OpenSSL REQUIRED)
+  find_package(ICU COMPONENTS i18n uc data REQUIRED)
+  pkg_check_modules(MEGA_CURL REQUIRED IMPORTED_TARGET libcurl)
+  pkg_check_modules(MEGA_SODIUM REQUIRED IMPORTED_TARGET libsodium)
+  pkg_check_modules(MEGA_SQLITE3 REQUIRED IMPORTED_TARGET sqlite3)
+  pkg_check_modules(MEGA_UV REQUIRED IMPORTED_TARGET libuv)
+  pkg_check_modules(MEGA_CRYPTOPP REQUIRED IMPORTED_TARGET libcrypto++)
+  target_include_directories(clementine_lib PRIVATE ${MEGA_SDK_INCLUDE_DIR})
+  target_link_libraries(clementine_lib
+    ${MEGA_SDK_LIBRARY}
+    OpenSSL::SSL OpenSSL::Crypto
+    ICU::i18n ICU::uc ICU::data
+    PkgConfig::MEGA_CURL
+    PkgConfig::MEGA_SODIUM
+    PkgConfig::MEGA_SQLITE3
+    PkgConfig::MEGA_UV
+    PkgConfig::MEGA_CRYPTOPP
+  )
+endif(HAVE_MEGA)
 
 if(HAVE_ALSA)
   target_link_libraries(clementine_lib ${ALSA_LIBRARIES})

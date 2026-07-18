@@ -90,6 +90,7 @@ class SettingsDialog : public QDialog {
     Page_Dropbox,
     Page_Skydrive,
     Page_Box,
+    Page_Mega,
     Page_Seafile,
     Page_AmazonCloudDrive,
     Page_RadioBrowser,
