@@ -70,6 +70,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
 
   if (sValidImages.isEmpty()) {
     sValidImages << "jpg"
+                 << "jxl"
                  << "png"
                  << "gif"
                  << "jpeg";
