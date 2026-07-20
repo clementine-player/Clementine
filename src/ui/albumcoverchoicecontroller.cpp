@@ -45,9 +45,10 @@
 #include "ui/iconloader.h"
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
-    "Images (*.png *.jpg *.jpeg *.jxl *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
-const char* AlbumCoverChoiceController::kSaveImageFileFilter =
-    QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.jxl *.bmp *.xpm *.pbm *.ppm *.xbm)");
+    "Images (*.png *.jpg *.jpeg *.jxl *.bmp *.gif *.xpm *.pbm *.pgm *.ppm "
+    "*.xbm)");
+const char* AlbumCoverChoiceController::kSaveImageFileFilter = QT_TR_NOOP(
+    "Images (*.png *.jpg *.jpeg *.jxl *.bmp *.xpm *.pbm *.ppm *.xbm)");
 const char* AlbumCoverChoiceController::kAllFilesFilter =
     QT_TR_NOOP("All files (*)");
 
