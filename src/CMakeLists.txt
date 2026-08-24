@@ -1436,11 +1436,26 @@ if (APPLE)
                                                   WORLD_READ WORLD_EXECUTE)
   endif (HAVE_BREAKPAD)
 
+  # macdeploy.py's install_name_tool rewrites invalidate whatever ad-hoc
+  # signature Homebrew shipped on each copied dylib/framework. On Apple
+  # Silicon the kernel refuses to load any Mach-O with an invalid (not just
+  # missing) signature, so the app is unlaunchable until everything is
+  # re-signed - even just ad-hoc, with no Developer ID configured. That's
+  # why codesign.py always runs here, not only when producing a
+  # distributable build.
+  if (APPLE_DEVELOPER_ID)
+    set(CLEMENTINE_CODESIGN_IDENTITY ${APPLE_DEVELOPER_ID})
+  else()
+    set(CLEMENTINE_CODESIGN_IDENTITY "-")
+  endif()
+
   if (USE_BUNDLE)
     add_custom_command(TARGET clementine
       POST_BUILD
       COMMAND
       ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
+      COMMAND
+      ${CMAKE_CURRENT_SOURCE_DIR}/../dist/codesign.py ${CLEMENTINE_CODESIGN_IDENTITY} ${PROJECT_BINARY_DIR}/clementine.app ${CMAKE_CURRENT_SOURCE_DIR}/../dist/entitlements.plist
       WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
     )
   endif(USE_BUNDLE)
@@ -1454,16 +1469,39 @@ if (APPLE)
   add_custom_target(clementine-breakpad
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
+  # `clementine` is already signed with APPLE_DEVELOPER_ID (or ad-hoc, see
+  # above) as part of its own POST_BUILD step. APPLE_NOTARIZE_PROFILE (a
+  # notarytool keychain profile name, see dist/notarize.py) additionally
+  # submits the signed app/dmg to Apple's notary service and staples the
+  # ticket - required for the app to run cleanly on other people's Macs.
+  # Both cache vars are optional - without them `make dmg` still produces a
+  # (locally-runnable, ad-hoc-signed) dmg for other devs without a
+  # certificate.
+  set(CLEMENTINE_APP_TARGET clementine)
+
+  # `sign` re-signs an already-built app with a real Developer ID without a
+  # full rebuild, e.g. to turn a local ad-hoc dev build into a distributable
+  # one after the fact.
   if (APPLE_DEVELOPER_ID)
     add_custom_target(
       sign
       COMMAND
-      ${PROJECT_SOURCE_DIR}/dist/codesign.py ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app
+      ${PROJECT_SOURCE_DIR}/dist/codesign.py ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app ${PROJECT_SOURCE_DIR}/dist/entitlements.plist
       DEPENDS clementine
       VERBATIM
     )
-  endif()
 
+    if (APPLE_NOTARIZE_PROFILE)
+      add_custom_target(
+        notarize-app
+        COMMAND
+        ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_PROFILE} ${PROJECT_BINARY_DIR}/clementine.app
+        DEPENDS clementine
+        VERBATIM
+      )
+      set(CLEMENTINE_APP_TARGET notarize-app)
+    endif()
+  endif()
 
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
@@ -1472,11 +1510,21 @@ if (APPLE)
     COMMAND ${CMAKE_COMMAND} -E rename
       ${PROJECT_BINARY_DIR}/clementine.dmg
       ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
-    DEPENDS clementine
+    DEPENDS ${CLEMENTINE_APP_TARGET}
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
   add_custom_target(dmg
     DEPENDS ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg)
+
+  if (APPLE_NOTARIZE_PROFILE)
+    add_custom_target(
+      notarize-dmg
+      COMMAND
+      ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_PROFILE} ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
+      DEPENDS dmg
+      VERBATIM
+    )
+  endif()
 else (APPLE)
   install(TARGETS clementine
     RUNTIME DESTINATION bin

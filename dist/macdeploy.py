@@ -15,15 +15,31 @@
 #  You should have received a copy of the GNU General Public License
 #  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 
-from distutils import spawn
 import logging
 import os
 import re
+import shutil
 import subprocess
 import sys
 import traceback
 
 LOGGER = logging.getLogger('macdeploy')
+
+
+def GetHomebrewPrefixes():
+  # Apple Silicon uses /opt/homebrew, Intel uses /usr/local; support both so
+  # this script doesn't need to know which one built the dependencies.
+  prefixes = []
+  env_prefix = os.environ.get('HOMEBREW_PREFIX')
+  if env_prefix:
+    prefixes.append(env_prefix)
+  for candidate in ('/opt/homebrew', '/usr/local'):
+    if candidate not in prefixes and os.path.isdir(candidate):
+      prefixes.append(candidate)
+  return prefixes or ['/usr/local']
+
+
+HOMEBREW_PREFIXES = GetHomebrewPrefixes()
 
 FRAMEWORK_SEARCH_PATH = [
     '/target', '/target/lib', '/Library/Frameworks',
@@ -35,7 +51,9 @@ STRIP_PREFIX = [
     '@@HOMEBREW_CELLAR@@/qt5/5.8.0_1/lib/',
 ]
 
-LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/sw/lib'] + [
+    os.path.join(prefix, 'lib') for prefix in HOMEBREW_PREFIXES
+]
 
 GSTREAMER_PLUGINS = [
     # Core plugins
@@ -88,11 +106,15 @@ GSTREAMER_PLUGINS = [
 ]
 
 GSTREAMER_SEARCH_PATH = [
-    '/usr/local/lib/gstreamer-1.0',
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
-    '/usr/local/opt/gstreamer/libexec/gstreamer-1.0',
 ]
+for _prefix in HOMEBREW_PREFIXES:
+  GSTREAMER_SEARCH_PATH += [
+      os.path.join(_prefix, 'lib/gstreamer-1.0'),
+      os.path.join(_prefix, 'opt/gstreamer/lib/gstreamer-1.0'),
+      os.path.join(_prefix, 'opt/gstreamer/libexec/gstreamer-1.0'),
+  ]
 
 QT_PLUGINS = [
     #'accessible/libqtaccessiblewidgets.dylib',
@@ -109,26 +131,25 @@ QT_PLUGINS = [
     'platforms/libqcocoa.dylib',
     'styles/libqmacstyle.dylib',
 ]
-QT_PLUGINS_SEARCH_PATH = [
-    '/usr/local/opt/qt5/plugins',
-    '/target/plugins',
-    '/usr/local/Trolltech/Qt-4.7.0/plugins',
-    '/Developer/Applications/Qt/plugins',
-]
+QT_PLUGINS_SEARCH_PATH = ['/target/plugins']
+for _prefix in HOMEBREW_PREFIXES:
+  QT_PLUGINS_SEARCH_PATH += [
+      os.path.join(_prefix, 'opt/qt@5/plugins'),
+      os.path.join(_prefix, 'opt/qt5/plugins'),
+  ]
 
-GIO_MODULES_SEARCH_PATH = [
-  '/usr/local/lib/gio/modules',
-  '/target/lib/gio/modules',
+GIO_MODULES_SEARCH_PATH = ['/target/lib/gio/modules'] + [
+    os.path.join(prefix, 'lib/gio/modules') for prefix in HOMEBREW_PREFIXES
 ]
 
 INSTALL_NAME_TOOL_APPLE = 'install_name_tool'
 INSTALL_NAME_TOOL_CROSS = 'x86_64-apple-darwin-%s' % INSTALL_NAME_TOOL_APPLE
-INSTALL_NAME_TOOL = INSTALL_NAME_TOOL_CROSS if spawn.find_executable(
+INSTALL_NAME_TOOL = INSTALL_NAME_TOOL_CROSS if shutil.which(
     INSTALL_NAME_TOOL_CROSS) else INSTALL_NAME_TOOL_APPLE
 
 OTOOL_APPLE = 'otool'
 OTOOL_CROSS = 'x86_64-apple-darwin-%s' % OTOOL_APPLE
-OTOOL = OTOOL_CROSS if spawn.find_executable(OTOOL_CROSS) else OTOOL_APPLE
+OTOOL = OTOOL_CROSS if shutil.which(OTOOL_CROSS) else OTOOL_APPLE
 
 
 class Error(Exception):
@@ -208,7 +229,10 @@ def GetBrokenLibraries(binary):
       # Potentially already fixed library
       relative_path = os.path.join(*line.split('/')[3:])
       if not os.path.exists(os.path.join(frameworks_dir, relative_path)):
-        broken_libs['frameworks'].append(relative_path)
+        if re.search(r'\w+\.framework', line):
+          broken_libs['frameworks'].append(relative_path)
+        else:
+          broken_libs['libs'].append(relative_path)
     elif re.search(r'\w+\.framework', line):
       broken_libs['frameworks'].append(line)
     else:
@@ -231,9 +255,49 @@ def FindFramework(path):
   raise CouldNotFindFrameworkError(path)
 
 
-def FindLibrary(path):
+def GetRPaths(binary):
+  output = subprocess.Popen(
+      [OTOOL, '-l', binary], stdout=subprocess.PIPE).communicate()[0].decode('utf-8')
+  lines = output.split('\n')
+  rpaths = []
+  for i, line in enumerate(lines):
+    if line.strip() == 'cmd LC_RPATH':
+      for candidate in lines[i:i + 5]:
+        m = re.match(r'\s*path (.*) \(offset \d+\)', candidate)
+        if m:
+          rpaths.append(m.group(1))
+          break
+  return rpaths
+
+
+def ResolveRPath(path, referencing_binary):
+  # @rpath entries are resolved against the LC_RPATH commands of the binary
+  # that references them - most commonly @loader_path, meaning "the
+  # directory containing the referencing binary itself".
+  suffix = path[len('@rpath/'):]
+  for rpath in GetRPaths(referencing_binary):
+    if rpath.startswith('@loader_path'):
+      rpath_dir = os.path.normpath(os.path.join(
+          os.path.dirname(referencing_binary), rpath[len('@loader_path'):].lstrip('/')))
+    elif rpath.startswith('@'):
+      continue  # @executable_path etc. isn't meaningful pre-bundling.
+    else:
+      rpath_dir = rpath
+    candidate = os.path.join(rpath_dir, suffix)
+    if os.path.exists(candidate):
+      return candidate
+  return None
+
+
+def FindLibrary(path, referencing_binary=None):
   if os.path.exists(path):
     return path
+  if path.startswith('@rpath/') and referencing_binary:
+    resolved = ResolveRPath(path, referencing_binary)
+    if resolved:
+      LOGGER.debug("Found library '%s' via rpath of '%s'", path,
+                    referencing_binary)
+      return resolved
   for search_path in LIBRARY_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):
@@ -243,21 +307,28 @@ def FindLibrary(path):
   raise CouldNotFindFrameworkError(path)
 
 
-def FixAllLibraries(broken_libs):
+def FixAllLibraries(broken_libs, referencing_binary=None):
   for framework in broken_libs['frameworks']:
     FixFramework(framework)
   for lib in broken_libs['libs']:
-    FixLibrary(lib)
+    FixLibrary(lib, referencing_binary)
 
 
 def FixFramework(path):
-  if path in fixed_frameworks:
+  abs_path = FindFramework(path)
+  # Homebrew paths often reach the same real framework through different
+  # symlinked prefixes (e.g. .../opt/qt@5/... vs .../Cellar/qt@5/5.x/...),
+  # so dedupe by real path rather than the literal string - otherwise the
+  # same framework gets copied twice, and the interleaved copy/symlink
+  # commands from the two passes can corrupt each other's output (e.g.
+  # produce a self-referential Versions/5/5 symlink).
+  real_path = os.path.realpath(abs_path)
+  if real_path in fixed_frameworks:
     return
   else:
-    fixed_frameworks.add(path)
-  abs_path = FindFramework(path)
+    fixed_frameworks.add(real_path)
   broken_libs = GetBrokenLibraries(abs_path)
-  FixAllLibraries(broken_libs)
+  FixAllLibraries(broken_libs, abs_path)
 
   new_path = CopyFramework(abs_path)
   id = os.sep.join(new_path.split(os.sep)[3:])
@@ -268,15 +339,17 @@ def FixFramework(path):
     FixLibraryInstallPath(library, new_path)
 
 
-def FixLibrary(path):
-  if path in fixed_libraries or FindSystemLibrary(os.path.basename(
-      path)) is not None:
+def FixLibrary(path, referencing_binary=None):
+  if FindSystemLibrary(os.path.basename(path)) is not None:
+    return
+  abs_path = FindLibrary(path, referencing_binary)
+  real_path = os.path.realpath(abs_path)
+  if real_path in fixed_libraries:
     return
   else:
-    fixed_libraries.add(path)
-  abs_path = FindLibrary(path)
+    fixed_libraries.add(real_path)
   broken_libs = GetBrokenLibraries(abs_path)
-  FixAllLibraries(broken_libs)
+  FixAllLibraries(broken_libs, abs_path)
 
   new_path = CopyLibrary(abs_path)
   FixLibraryId(new_path)
@@ -288,7 +361,7 @@ def FixLibrary(path):
 
 def FixPlugin(abs_path, subdir):
   broken_libs = GetBrokenLibraries(abs_path)
-  FixAllLibraries(broken_libs)
+  FixAllLibraries(broken_libs, abs_path)
 
   new_path = CopyPlugin(abs_path, subdir)
   for framework in broken_libs['frameworks']:
@@ -299,7 +372,7 @@ def FixPlugin(abs_path, subdir):
 
 def FixBinary(path):
   broken_libs = GetBrokenLibraries(path)
-  FixAllLibraries(broken_libs)
+  FixAllLibraries(broken_libs, path)
   for framework in broken_libs['frameworks']:
     FixFrameworkInstallPath(framework, path)
   for library in broken_libs['libs']:
