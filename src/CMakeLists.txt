@@ -1477,26 +1477,31 @@ if (APPLE)
   # Both cache vars are optional - without them `make dmg` still produces a
   # (locally-runnable, ad-hoc-signed) dmg for other devs without a
   # certificate.
-  set(CLEMENTINE_APP_TARGET clementine)
 
-  # `sign` re-signs an already-built app with a real Developer ID without a
-  # full rebuild, e.g. to turn a local ad-hoc dev build into a distributable
-  # one after the fact.
+  # `sign` re-seals the app bundle with whatever identity is configured
+  # (ad-hoc by default, same as the POST_BUILD step above). It's always
+  # defined, not just when APPLE_DEVELOPER_ID is set, because `make install`
+  # (which copies clementine.icns/qt.conf/cacert.pem/sparkle_pub.pem into
+  # Contents/Resources) adds files to the bundle *after* POST_BUILD already
+  # sealed it, invalidating that signature - so packaging needs to re-sign
+  # after install, and this target is what does that (and also serves as a
+  # manual re-sign-without-rebuild convenience for local dev).
+  add_custom_target(
+    sign
+    COMMAND
+    ${PROJECT_SOURCE_DIR}/dist/codesign.py ${CLEMENTINE_CODESIGN_IDENTITY} ${PROJECT_BINARY_DIR}/clementine.app ${PROJECT_SOURCE_DIR}/dist/entitlements.plist
+    DEPENDS clementine
+    VERBATIM
+  )
+  set(CLEMENTINE_APP_TARGET sign)
+
   if (APPLE_DEVELOPER_ID)
-    add_custom_target(
-      sign
-      COMMAND
-      ${PROJECT_SOURCE_DIR}/dist/codesign.py ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app ${PROJECT_SOURCE_DIR}/dist/entitlements.plist
-      DEPENDS clementine
-      VERBATIM
-    )
-
     if (APPLE_NOTARIZE_PROFILE)
       add_custom_target(
         notarize-app
         COMMAND
         ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_PROFILE} ${PROJECT_BINARY_DIR}/clementine.app
-        DEPENDS clementine
+        DEPENDS sign
         VERBATIM
       )
       set(CLEMENTINE_APP_TARGET notarize-app)

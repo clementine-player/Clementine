@@ -105,7 +105,7 @@ jobs:
       - build_fedora_43
       - build_jammy_64
       - build_noble_64
-      # - build_mac
+      - build_mac
       - build_mingw
       - build_source
     permissions:
@@ -820,69 +820,35 @@ jobs:
           path: bin/clementine_*.deb
 
   build_mac:
-    if: false
     name: Build Mac DMG
-    runs-on: macos-10.15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      - name: git hackery
-        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       - name: Install dependencies
         run: brew bundle
-
-      - name: Build libgpod
-        shell: bash
-        env:
-          PERL_MM_USE_DEFAULT: 1
-        run: |
-          sudo cpan install XML::Parser
-          wget https://downloads.sourceforge.net/project/gtkpod/libgpod/libgpod-0.8/libgpod-0.8.3.tar.bz2
-          tar -xvf libgpod-0.8.3.tar.bz2
-          cd libgpod-0.8.3
-          wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/autogen.sh
-          wget https://raw.githubusercontent.com/macports/macports-ports/master/multimedia/libgpod/files/patch-tools-generic-callout.c.diff
-          patch -p0 < patch-tools-generic-callout.c.diff
-          patch -p1 < $GITHUB_WORKSPACE/3rdparty/libgpod/patches/0001-Look-for-libplist-2.0.patch
-          chmod u+x autogen.sh
-          ./autogen.sh
-          ./configure --disable-more-warnings \
-                      --disable-silent-rules \
-                      --disable-udev \
-                      --disable-pygobject \
-                      --with-python=no
-          make -j2
-          sudo make install
-
-      - name: Fix liblastfm includes
-        run: ln -s /usr/local/include/lastfm /usr/local/include/lastfm5
+      - name: Fix liblastfm include path
+        run: ln -sf "$(brew --prefix)/include/lastfm" "$(brew --prefix)/include/lastfm5"
       - name: cmake
-        env:
-          PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
-          Qt5_DIR: /usr/local/opt/qt5/lib/cmake/Qt5
-          Qt5LinguistTools_DIR: /usr/local/opt/qt5/lib/cmake/Qt5LinguistTools
-          GST_SCANNER_PATH: /usr/local/opt/gstreamer/libexec/gstreamer-1.0/gst-plugin-scanner
-          GST_PLUGIN_PATH: /usr/local/lib/gstreamer-1.0
-          DEVELOPER_DIR: /Applications/Xcode_10.3.app/Contents/Developer
         working-directory: bin
-        run: >
-          cmake ..
-          -Wno-dev
-          -DCMAKE_BUILD_TYPE=Release
-          -DCMAKE_OSX_ARCHITECTURES=x86_64
-          -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/opt/gettext/bin/msgmerge
-          -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/opt/gettext/bin/msgfmt
-          -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/opt/gettext/bin/xgettext
-      - name: make
-        working-directory: bin
-        run: make -j2
+        run: |
+          BREW_PREFIX="$(brew --prefix)"
+          cmake .. \
+            -Wno-dev \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_LIBGPOD=OFF \
+            -DQt5_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5" \
+            -DQt5LinguistTools_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5LinguistTools" \
+            -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
+            -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
+            -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext"
       - name: Copy icon files and resources
         working-directory: bin
         run: make install
       - name: Build DMG
         working-directory: bin
-        run: make dmg
+        run: make dmg -j$(sysctl -n hw.ncpu)
       - uses: actions/upload-artifact@v4
         with:
           name: release_mac
