@@ -25,15 +25,51 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 API_KEY_PATH="$(mktemp)"
-trap 'rm -f "$API_KEY_PATH"' EXIT
+ADC_PATCHED_PATH="$(mktemp)"
+trap 'rm -f "$API_KEY_PATH" "$ADC_PATCHED_PATH"' EXIT
 
-echo "Fetching App Store Connect API key from Secret Manager..." >&2
-gcloud secrets versions access latest \
-  --project="$PROJECT_ID" \
-  --secret=apple-appstoreconnect-api-key \
-  > "$API_KEY_PATH"
+# renew_signing_cert deliberately needs interactive Apple ID auth instead
+# (see fastlane/Fastfile) - match's api_key_path option falls back to
+# reading this env var even when a lane doesn't pass it explicitly in code,
+# so it has to be genuinely unset here (not just left unexported by us -
+# it may already be exported in the calling shell from earlier testing).
+if [[ "$LANE" == "renew_signing_cert" ]]; then
+  unset APP_STORE_CONNECT_API_KEY_PATH
+else
+  echo "Fetching App Store Connect API key from Secret Manager..." >&2
+  gcloud secrets versions access latest \
+    --project="$PROJECT_ID" \
+    --secret=apple-appstoreconnect-api-key \
+    > "$API_KEY_PATH"
 
-export APP_STORE_CONNECT_API_KEY_PATH="$API_KEY_PATH"
+  export APP_STORE_CONNECT_API_KEY_PATH="$API_KEY_PATH"
+fi
+
+# match's own Application Default Credentials auto-detection calls
+# Google::Auth.get_application_default with no scope, which crashes
+# specifically for locally-impersonated ADC (gcloud auth
+# application-default login --impersonate-service-account=...) since that
+# credential type fails fast without one - silently, since match swallows
+# the exception and falls back to its interactive "create a gc_keys.json"
+# flow. Pointing match at the credentials file directly instead skips that
+# broken pre-check; the actual GCS client library loads the same file
+# correctly (with a proper scope). Works for both: locally this is gcloud's
+# well-known ADC path, in CI it's whatever google-github-actions/auth wrote.
+#
+# match separately insists that whatever keys file it's given contains a
+# top-level "project_id" field (true of a real downloaded service account
+# key, not of an ADC/impersonation credentials file) - so patch a copy
+# rather than pointing at the ADC file directly.
+ADC_SOURCE_PATH="${GOOGLE_APPLICATION_CREDENTIALS:-$HOME/.config/gcloud/application_default_credentials.json}"
+PROJECT_ID="$PROJECT_ID" ADC_SOURCE_PATH="$ADC_SOURCE_PATH" ADC_PATCHED_PATH="$ADC_PATCHED_PATH" python3 -c '
+import json, os
+with open(os.environ["ADC_SOURCE_PATH"]) as f:
+    creds = json.load(f)
+creds.setdefault("project_id", os.environ["PROJECT_ID"])
+with open(os.environ["ADC_PATCHED_PATH"], "w") as f:
+    json.dump(creds, f)
+'
+export MATCH_GOOGLE_CLOUD_KEYS_FILE="$ADC_PATCHED_PATH"
 
 echo "Installing signing certificate via fastlane ($LANE)..." >&2
 bundle exec fastlane "$LANE" 1>&2

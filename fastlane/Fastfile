@@ -12,11 +12,18 @@ platform :mac do
 
   desc "Generate a new Developer ID certificate, replacing the stored one. Maintainers only - run deliberately to renew/rotate."
   lane :renew_signing_cert do
+    # Deliberately not using api_key_path here: creating a Developer ID
+    # certificate is restricted by Apple to the Account Holder, and (per
+    # fastlane's own match source) that operation isn't reliably available
+    # through App Store Connect API key auth regardless of the key's role -
+    # it needs an actual interactive Apple ID login (password + 2FA, can't
+    # be scripted). The everyday readonly signing_cert lane above doesn't
+    # hit this, so it keeps using the API key. See dist/CODE_SIGNING.md.
     match(
       type: "developer_id",
       readonly: false,
       force: true,
-      api_key_path: ENV["APP_STORE_CONNECT_API_KEY_PATH"],
+      username: ENV["FASTLANE_USER"],
     )
   end
 end
