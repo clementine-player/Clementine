@@ -826,8 +826,21 @@ jobs:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      - name: Trust Homebrew sources
-        run: brew trust --formula tomahawk-player/tomahawkqt5/liblastfm
+      - name: Tap and trust tomahawk-player/tomahawkqt5
+        run: |
+          brew tap tomahawk-player/tomahawkqt5
+          brew trust --formula tomahawk-player/tomahawkqt5/liblastfm
+      # liblastfm (from that tap) has a pre-3.5 cmake_minimum_required that
+      # modern CMake refuses to configure outright. CMake's own fix is
+      # -DCMAKE_POLICY_VERSION_MINIMUM=3.5, but `brew` re-execs itself
+      # through `env -i` with a hardcoded variable allowlist before Ruby
+      # even starts (see `brew`'s own source), so there's no way to get an
+      # arbitrary env var into a formula's build - patching the flag
+      # directly into the tapped formula is the only way.
+      - name: Patch liblastfm formula for modern CMake
+        run: |
+          FORMULA="$(brew --repo tomahawk-player/tomahawkqt5)/liblastfm.rb"
+          sed -i '' 's/args << "-DBUILD_TESTS=OFF"/&\n    args << "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"/' "$FORMULA"
       - name: Install dependencies
         run: brew bundle
       - name: Fix liblastfm include path
