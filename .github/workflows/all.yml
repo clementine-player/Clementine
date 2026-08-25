@@ -822,6 +822,13 @@ jobs:
   build_mac:
     name: Build Mac DMG
     runs-on: macos-26
+    # id-token: write is what lets the "Authenticate to GCP" step below
+    # trade a GitHub OIDC token for short-lived GCP credentials (Workload
+    # Identity Federation, no static key involved) - see
+    # dist/CODE_SIGNING.md.
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4.2.2
         with:
@@ -845,6 +852,50 @@ jobs:
         run: brew bundle
       - name: Fix liblastfm include path
         run: ln -sf "$(brew --prefix)/include/lastfm" "$(brew --prefix)/include/lastfm5"
+
+      # Real Developer ID signing runs for pushes to master (release builds)
+      # and for PRs opened from branches *within this repo* - so the
+      # signing path itself is testable pre-merge, not just after landing
+      # on master. Fork PRs are excluded: github.repository (used by the
+      # WIF trust policy in dist/gcp_iam_setup.sh) is always the base repo
+      # for pull_request events, even from forks, so that alone can't tell
+      # them apart - head.repo.full_name is the field that actually
+      # reflects fork vs. same-repo, and it comes from GitHub's own event
+      # data, not anything a PR author controls. See dist/CODE_SIGNING.md
+      # for the one-time setup this depends on.
+      - name: Check signing eligibility
+        id: signing
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]] \
+            || [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Authenticate to GCP
+        if: steps.signing.outputs.enabled == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          # Fill in after running dist/gcp_iam_setup.sh (it prints this).
+          workload_identity_provider: projects/611551928920/locations/global/workloadIdentityPools/github-actions/providers/clementine-mac-signing
+          service_account: mac-signing@clementine-data.iam.gserviceaccount.com
+      - name: Set up gcloud
+        if: steps.signing.outputs.enabled == 'true'
+        uses: google-github-actions/setup-gcloud@v2
+      - name: Set up Ruby
+        if: steps.signing.outputs.enabled == 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          # Pinned (rather than relying on whatever the runner image ships)
+          # so it always matches the Ruby that generated Gemfile.lock.
+          ruby-version: "4.0.6"
+          bundler-cache: true
+      - name: Install signing certificate
+        if: steps.signing.outputs.enabled == 'true'
+        env:
+          FASTLANE_TEAM_ID: ${{ vars.FASTLANE_TEAM_ID }}
+        run: dist/setup_signing.sh
+
       - name: cmake
         working-directory: bin
         run: |
@@ -857,7 +908,8 @@ jobs:
             -DQt5LinguistTools_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5LinguistTools" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
-            -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext"
+            -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
+            ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"}
       - name: Copy icon files and resources
         working-directory: bin
         run: make install
