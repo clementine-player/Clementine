@@ -1,4 +1,8 @@
 type("developer_id")
+# Not actually meaningful for a Developer ID cert (it isn't app-specific
+# the way App Store provisioning is), but match requires *some* value here
+# regardless of cert type - Clementine's real bundle ID, from Info.plist.in.
+app_identifier("org.clementine-player.clementine")
 
 storage_mode("google_cloud")
 google_cloud_bucket_name("clementine-macos-signing")
