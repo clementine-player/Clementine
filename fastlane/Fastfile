@@ -1,0 +1,22 @@
+default_platform(:mac)
+
+platform :mac do
+  desc "Install the Developer ID signing certificate into the local/CI keychain. Never creates a new one - see renew_signing_cert."
+  lane :signing_cert do
+    match(
+      type: "developer_id",
+      readonly: true,
+      api_key_path: ENV["APP_STORE_CONNECT_API_KEY_PATH"],
+    )
+  end
+
+  desc "Generate a new Developer ID certificate, replacing the stored one. Maintainers only - run deliberately to renew/rotate."
+  lane :renew_signing_cert do
+    match(
+      type: "developer_id",
+      readonly: false,
+      force: true,
+      api_key_path: ENV["APP_STORE_CONNECT_API_KEY_PATH"],
+    )
+  end
+end
