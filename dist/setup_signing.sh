@@ -35,12 +35,6 @@ gcloud secrets versions access latest \
 
 export APP_STORE_CONNECT_API_KEY_PATH="$API_KEY_PATH"
 
-echo "Fetching match encryption passphrase from Secret Manager..." >&2
-export MATCH_PASSWORD
-MATCH_PASSWORD="$(gcloud secrets versions access latest \
-  --project="$PROJECT_ID" \
-  --secret=fastlane-match-password)"
-
 echo "Installing signing certificate via fastlane ($LANE)..." >&2
 bundle exec fastlane "$LANE" 1>&2
 

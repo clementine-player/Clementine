@@ -6,17 +6,20 @@ PRs, forks - fall back to ad-hoc signing automatically (see
 `src/CMakeLists.txt`), so none of this is required to build Clementine.
 
 The certificate itself is generated and stored by [fastlane
-match](https://docs.fastlane.tools/actions/match/), encrypted, in the
+match](https://docs.fastlane.tools/actions/match/) in the
 `clementine-macos-signing` GCS bucket. Local maintainers and CI both fetch
 and install it the same way, by running `dist/setup_signing.sh` - that's the
 one script that does it, so there's no separate "CI process" to keep in
 sync with the local one.
 
-Access to the bucket, and to the two secrets it depends on, goes through a
-single GCP service account (`mac-signing@clementine-data.iam.gserviceaccount.com`).
-Nobody and nothing holds a static key for it: CI impersonates it via
-Workload Identity Federation (GitHub OIDC token traded for short-lived GCP
-credentials), and maintainers impersonate it via their own Google login.
+Unlike match's git/S3 backends, its `google_cloud` storage mode doesn't
+encrypt the certificate client-side - confidentiality comes entirely from
+the bucket's IAM. That's why access to it, and to the one secret it depends
+on, goes through a single GCP service account
+(`mac-signing@clementine-data.iam.gserviceaccount.com`). Nobody and nothing
+holds a static key for it: CI impersonates it via Workload Identity
+Federation (GitHub OIDC token traded for short-lived GCP credentials), and
+maintainers impersonate it via their own Google login.
 
 ## One-time setup (project admin)
 
@@ -33,24 +36,20 @@ credentials), and maintainers impersonate it via their own Google login.
 
 2. **GCP infrastructure** - review and run `dist/gcp_iam_setup.sh` yourself
    (fill in `MAINTAINER_EMAILS` first for anyone who needs local signing).
-   It creates the bucket, the two Secret Manager secrets (empty), the
-   service account, and the Workload Identity Federation pool/provider
-   scoped to only the `clementine-player/Clementine` repo. It prints a
+   It creates the bucket, the empty Secret Manager secret, the service
+   account, and the Workload Identity Federation pool/provider scoped to
+   only the `clementine-player/Clementine` repo. It prints a
    `workload_identity_provider` value at the end - paste that into
    `.github/workflows/all.yml`'s `build_mac` job (`<GCP_PROJECT_NUMBER>`
    placeholder).
 
-3. **Fill in the two secrets** it created, using the values from step 1:
+3. **Fill in the secret** it created, using the values from step 1 - a
+   single JSON blob with all three App Store Connect API key fields:
 
    ```sh
-   # A single JSON blob with all three App Store Connect API key fields:
    cat <<EOF | gcloud secrets versions add apple-appstoreconnect-api-key --project=clementine-data --data-file=-
    {"key_id": "ISSUER_KEY_ID", "issuer_id": "ISSUER_ID", "key": "$(cat AuthKey.p8)"}
    EOF
-
-   # Any strong random passphrase - this is match's own encryption key for
-   # the bucket contents, unrelated to Apple:
-   openssl rand -base64 32 | gcloud secrets versions add fastlane-match-password --project=clementine-data --data-file=-
    ```
 
 4. Set the `FASTLANE_TEAM_ID` repository variable (Settings → Secrets and
@@ -85,8 +84,9 @@ cmake .. -DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"
 
 ## CI
 
-Runs automatically on every push to `master` (not on PRs/forks) - see the
-`build_mac` job. Nothing to do.
+Runs automatically on every push to `master` and on PRs opened from
+branches within this repo (not forks) - see the `Check signing eligibility`
+step in the `build_mac` job. Nothing to do.
 
 ## Renewing/rotating the certificate
 
