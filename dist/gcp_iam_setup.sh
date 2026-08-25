@@ -4,12 +4,15 @@
 # project runs this once. See dist/CODE_SIGNING.md for the full picture.
 #
 # Creates:
-#   - A GCS bucket holding the fastlane-match-encrypted signing certificate
-#   - Two empty Secret Manager secrets (values added separately, by hand -
-#     see dist/CODE_SIGNING.md, since this script shouldn't handle raw
-#     credential material)
+#   - A GCS bucket holding the signing certificate (confidentiality comes
+#     from this bucket's IAM alone - fastlane match doesn't encrypt
+#     certificates client-side in "google_cloud" storage mode, unlike its
+#     git/S3 backends, so there's no separate passphrase secret here)
+#   - An empty Secret Manager secret for the Apple API key (value added
+#     separately, by hand - see dist/CODE_SIGNING.md, since this script
+#     shouldn't handle raw credential material)
 #   - A dedicated service account that's the ONLY identity with direct
-#     access to the bucket/secrets
+#     access to the bucket/secret
 #   - Workload Identity Federation so GitHub Actions (build_mac, pushes to
 #     master only) can impersonate that service account without any
 #     long-lived key ever existing
@@ -49,24 +52,19 @@ gcloud storage buckets create "gs://${BUCKET_NAME}" \
   --uniform-bucket-level-access
 gcloud storage buckets update "gs://${BUCKET_NAME}" --versioning
 
-echo "==> Creating Secret Manager secrets (empty - add values by hand, see dist/CODE_SIGNING.md)"
+echo "==> Creating Secret Manager secret (empty - add its value by hand, see dist/CODE_SIGNING.md)"
 gcloud secrets create apple-appstoreconnect-api-key --project="$PROJECT_ID" --replication-policy=automatic
-gcloud secrets create fastlane-match-password --project="$PROJECT_ID" --replication-policy=automatic
 
 echo "==> Creating mac-signing service account"
 gcloud iam service-accounts create "$SERVICE_ACCOUNT_ID" \
   --project="$PROJECT_ID" \
   --display-name="macOS code signing (fastlane match + Secret Manager)"
 
-echo "==> Granting the service account access to its bucket and secrets"
+echo "==> Granting the service account access to its bucket and secret"
 gcloud storage buckets add-iam-policy-binding "gs://${BUCKET_NAME}" \
   --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
   --role="roles/storage.objectAdmin"
 gcloud secrets add-iam-policy-binding apple-appstoreconnect-api-key \
-  --project="$PROJECT_ID" \
-  --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
-  --role="roles/secretmanager.secretAccessor"
-gcloud secrets add-iam-policy-binding fastlane-match-password \
   --project="$PROJECT_ID" \
   --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
   --role="roles/secretmanager.secretAccessor"
