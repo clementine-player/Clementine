@@ -61,9 +61,12 @@ gcloud iam service-accounts create "$SERVICE_ACCOUNT_ID" \
   --display-name="macOS code signing (fastlane match + Secret Manager)"
 
 echo "==> Granting the service account access to its bucket and secret"
+# storage.admin, not just objectAdmin: fastlane match does a bucket
+# metadata lookup (storage.buckets.get) before touching any objects, which
+# objectAdmin doesn't cover. Scoped to just this one bucket, not project-wide.
 gcloud storage buckets add-iam-policy-binding "gs://${BUCKET_NAME}" \
   --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
-  --role="roles/storage.objectAdmin"
+  --role="roles/storage.admin"
 gcloud secrets add-iam-policy-binding apple-appstoreconnect-api-key \
   --project="$PROJECT_ID" \
   --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
