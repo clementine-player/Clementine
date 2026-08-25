@@ -6,20 +6,12 @@
 #         the build directory
 ################################################################################
 
-
-#if [ -z $VERSION ]
-#then
-#    echo VERSION must be set
-#    exit 2
-#fi
-
 if [ -z "$1" ]
 then
     echo "Please pass the bundle.app directory as the first parameter."
     exit 3
 fi
 ################################################################################
-
 
 NAME=$(basename "$1" | perl -pe 's/(.*).app/\1/')
 IN="$1"
@@ -38,21 +30,19 @@ cp ../dist/dmg_background.png "$TMP/.background/background.png"
 cp ../dist/DS_Store.in "$TMP/.DS_Store"
 chmod go-rwx "$TMP/.DS_Store"
 ln -s /Applications "$TMP/Applications"
-# copies the prepared bundle into the dir that will become the DMG 
+# copies the prepared bundle into the dir that will become the DMG
 cp -R "$IN" "$TMP"
 
 # create
-hdiutil makehybrid -hfs -hfs-volume-name Clementine -hfs-openfolder "$TMP" "$TMP" -o tmp.dmg
-hdiutil convert -format UDZO -imagekey zlib-level=9 tmp.dmg -o "$OUT"
-
-# cleanup
-rm tmp.dmg
-
-#hdiutil create -srcfolder "$TMP" \
-#               -format UDZO -imagekey zlib-level=9 \
-#               -scrub \
-#               "$OUT" \
-#               || die "Error creating DMG :("
+# APFS, not HFS+ (the old `hdiutil makehybrid -hfs` approach this replaced):
+# HFS+ volumes carry a native per-file Finder-info catalog field that gets
+# exposed as a com.apple.FinderInfo xattr on every file, and that attribute
+# survives copying out of the mounted image - which fails `codesign
+# --strict` (and therefore Gatekeeper) on the signed app inside. APFS
+# doesn't have this legacy baggage, and this is also just a single
+# `hdiutil create` call instead of the old makehybrid+convert two-step
+# hybrid-CD-era dance.
+hdiutil create -volname Clementine -srcfolder "$TMP" -ov -format UDZO -imagekey zlib-level=9 -fs APFS "$OUT"
 
 # done !
 echo 'DMG size:' `du -hs "$OUT" | awk '{print $1}'`
