@@ -3,6 +3,14 @@ type("developer_id")
 # the way App Store provisioning is), but match requires *some* value here
 # regardless of cert type - Clementine's real bundle ID, from Info.plist.in.
 app_identifier("org.clementine-player.clementine")
+# Developer ID distribution (outside the App Store) doesn't use
+# provisioning profiles at all - without this, match tries to generate one
+# anyway and fails, since our app_identifier isn't a real registered App ID
+# in the portal (it doesn't need to be, for this cert type).
+skip_provisioning_profiles(true)
+# Defaults to true on macOS with Xcode 11+ and would create an unrelated
+# "Apple Development" cert alongside - we only want the Developer ID one.
+generate_apple_certs(false)
 
 storage_mode("google_cloud")
 google_cloud_bucket_name("clementine-macos-signing")
