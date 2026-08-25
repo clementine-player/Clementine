@@ -1457,6 +1457,11 @@ if (APPLE)
       COMMAND
       ${CMAKE_CURRENT_SOURCE_DIR}/../dist/codesign.py ${CLEMENTINE_CODESIGN_IDENTITY} ${PROJECT_BINARY_DIR}/clementine.app ${CMAKE_CURRENT_SOURCE_DIR}/../dist/entitlements.plist
       WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+      # Real Developer ID identities look like "Developer ID Application:
+      # Name (TEAMID)" - without VERBATIM, CMake's Makefile generator
+      # doesn't reliably shell-escape the parentheses in that string, which
+      # breaks the generated `sh -c` command with a syntax error.
+      VERBATIM
     )
   endif(USE_BUNDLE)
 
