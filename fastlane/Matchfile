@@ -2,6 +2,16 @@ type("developer_id")
 
 storage_mode("google_cloud")
 google_cloud_bucket_name("clementine-macos-signing")
+# Without this, match only checks for Application Default Credentials (set
+# up via `gcloud auth application-default login` locally, or Workload
+# Identity Federation in CI - see dist/CODE_SIGNING.md) when it knows the
+# project ID; otherwise it jumps straight to an interactive
+# "create a gc_keys.json" prompt, which crashes non-interactive CI runs.
+google_cloud_project_id("clementine-data")
+# Even after finding ADC, match still asks an interactive
+# "use these credentials?" confirmation unless told not to - same reasoning
+# as above.
+skip_google_cloud_account_confirmation(true)
 
 # Apple Developer Team ID (Membership page on developer.apple.com). Same
 # value locally (export FASTLANE_TEAM_ID=... in your shell profile) and in
