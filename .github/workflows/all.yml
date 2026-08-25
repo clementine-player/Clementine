@@ -432,192 +432,75 @@ jobs:
 
   build_mingw:
     name: Build Windows Installer
-    runs-on: ubuntu-24.04
-    container:
-      image: eu.gcr.io/clementine-data/mingw-w64:latest
-    env:
-      PKG_CONFIG_PATH: /target/lib/pkgconfig
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
-      - name: Fix liblastfm includes
-        run: ln -s /target/include/lastfm /target/include/lastfm5
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
+
+      # windows-latest has dropped NSIS from its preinstalled software list
+      # on some recent runner images, so install it explicitly rather than
+      # relying on it being there.
+      - name: Install NSIS
+        shell: pwsh
+        run: |
+          choco install nsis --no-progress -y
+          # The choco package doesn't register makensis on PATH itself, so
+          # do it here - GITHUB_PATH additions apply to every later step in
+          # the job regardless of which shell that step uses.
+          $nsisDir = "${env:ProgramFiles(x86)}\NSIS"
+          if (-not (Test-Path "$nsisDir\makensis.exe")) {
+            throw "makensis.exe not found under $nsisDir after choco install"
+          }
+          Add-Content -Path $env:GITHUB_PATH -Value $nsisDir
+
+      - name: Set up MSYS2 (mingw64)
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            base-devel
+            git
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-ntldd
+            mingw-w64-x86_64-pkgconf
+            mingw-w64-x86_64-qt5
+            mingw-w64-x86_64-taglib
+            mingw-w64-x86_64-boost
+            mingw-w64-x86_64-protobuf
+            mingw-w64-x86_64-sqlite3
+            mingw-w64-x86_64-glew
+            mingw-w64-x86_64-fftw
+            mingw-w64-x86_64-chromaprint
+            mingw-w64-x86_64-libcdio
+            mingw-w64-x86_64-sparsehash
+            mingw-w64-x86_64-gettext
+            mingw-w64-x86_64-gstreamer
+            mingw-w64-x86_64-gst-plugins-base
+            mingw-w64-x86_64-gst-plugins-good
+            mingw-w64-x86_64-gst-plugins-bad
+            mingw-w64-x86_64-gst-plugins-ugly
+            mingw-w64-x86_64-gst-libav
+
+      # These aren't confirmed to exist as MSYS2 mingw64 packages (libmtp in
+      # particular). Failing softly here just means CMake's optional_component
+      # machinery disables the corresponding feature instead of failing the
+      # whole build - see the job summary in the PR/commit this came from.
+      # liblastfm and libgpod are not attempted at all: neither is packaged
+      # for MSYS2 mingw64, so Last.fm scrobbling and iPod classic support are
+      # disabled on this build variant for now.
+      - name: Install optional dependencies (best-effort)
+        run: pacman --noconfirm -S --needed mingw-w64-x86_64-libmtp || true
+
       - name: git hackery
-        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
-      - name: cmake
-        working-directory: bin
-        run: >
-          cmake ..
-          -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
-          -DCMAKE_BUILD_TYPE=Release
-          -DGLEW_SHARED_LIBRARY_RELEASE=/target/bin/glew32.dll
-      - name: make
-        working-directory: bin
-        run: make -j2
-      - name: Copy output exes
-        working-directory: dist/windows
-        run: cp ../../bin/*.exe .
-      - name: Copy base runtime DLLs
-        run: >
-          cp
-          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_dw2-1.dll
-          /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
-          /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
-          dist/windows
-      - name: Copy DLL depdendencies
-        working-directory: /target/bin
-        run: >
-            cp
-            glew32.dll
-            libcdio-19.dll
-            libchromaprint.dll
-            libcrypto-1_1.dll
-            libfaad-2.dll
-            libffi-7.dll
-            libfftw3-3.dll
-            libFLAC-8.dll
-            libgcrypt-20.dll
-            libgio-2.0-0.dll
-            libglib-2.0-0.dll
-            libgmodule-2.0-0.dll
-            libgmp-10.dll
-            libgnutls-30.dll
-            libgobject-2.0-0.dll
-            libgpg-error-0.dll
-            libgpod.dll
-            libgstapp-1.0-0.dll
-            libgstaudio-1.0-0.dll
-            libgstbase-1.0-0.dll
-            libgstfft-1.0-0.dll
-            libgstnet-1.0-0.dll
-            libgstpbutils-1.0-0.dll
-            libgstreamer-1.0-0.dll
-            libgstriff-1.0-0.dll
-            libgstrtp-1.0-0.dll
-            libgstrtsp-1.0-0.dll
-            libgstsdp-1.0-0.dll
-            libgsttag-1.0-0.dll
-            libgstvideo-1.0-0.dll
-            libgthread-2.0-0.dll
-            libhogweed-6.dll
-            libiconv-2.dll
-            libintl-8.dll
-            liblastfm5.dll
-            libmms-0.dll
-            libmp3lame-0.dll
-            libnettle-8.dll
-            libogg-0.dll
-            liboil-0.3-0.dll
-            libopus-0.dll
-            liborc-0.4-0.dll
-            liborc-test-0.4-0.dll
-            libp11-kit-0.dll
-            libpcre-1.dll
-            libplist.dll
-            libprotobuf-32.dll
-            libpsl-5.dll
-            libssl-1_1.dll
-            libsoup-2.4-1.dll
-            libspeex-1.dll
-            libspotify.dll
-            libsqlite3-0.dll
-            libtag.dll
-            libtasn1-6.dll
-            libunistring-2.dll
-            libvorbis-0.dll
-            libvorbisenc-2.dll
-            libxml2-2.dll
-            libwavpack-1.dll
-            Qt5Concurrent.dll
-            Qt5Core.dll
-            Qt5Gui.dll
-            Qt5Network.dll
-            Qt5OpenGL.dll
-            Qt5Sql.dll
-            Qt5Svg.dll
-            Qt5Widgets.dll
-            Qt5WinExtras.dll
-            Qt5Xml.dll
-            zlib1.dll
-            ${GITHUB_WORKSPACE}/dist/windows
-      - run: mkdir dist/windows/imageformats
-      - name: Copy Qt imageformat plugin DLLs
-        working-directory: /target/plugins
-        run: >
-          cp
-          imageformats/qgif.dll
-          imageformats/qjpeg.dll
-          imageformats/qsvg.dll
-          ${GITHUB_WORKSPACE}/dist/windows/imageformats
-      - run: mkdir dist/windows/platforms
-      - name: Copy Qt platforms plugin DLLs
-        working-directory: /target/plugins
-        run: >
-          cp
-          platforms/qwindows.dll
-          ${GITHUB_WORKSPACE}/dist/windows/platforms
-      - run: mkdir dist/windows/styles
-      - name: Copy Qt style plugin DLLs
-        working-directory: /target/plugins
-        run: >
-          cp
-          styles/qwindowsvistastyle.dll
-          ${GITHUB_WORKSPACE}/dist/windows/styles
-      - run: mkdir dist/windows/gio-modules
-      - name: Copy GIO modules
-        run: cp /target/lib/gio/modules/libgiognutls.dll dist/windows/gio-modules
-      - run: mkdir dist/windows/gstreamer-plugins
-      - name: Copy gstreamer plugins
-        working-directory: /target/lib/gstreamer-1.0
-        run: >
-          cp
-          libgstaiff.dll
-          libgstapetag.dll
-          libgstapp.dll
-          libgstasf.dll
-          libgstasfmux.dll
-          libgstaudioconvert.dll
-          libgstaudiofx.dll
-          libgstaudioparsers.dll
-          libgstaudioresample.dll
-          libgstaudiotestsrc.dll
-          libgstautodetect.dll
-          libgstcdio.dll
-          libgstcoreelements.dll
-          libgstdirectsound.dll
-          libgstequalizer.dll
-          libgstfaad.dll
-          libgstflac.dll
-          libgstgdp.dll
-          libgstgio.dll
-          libgsticydemux.dll
-          libgstid3demux.dll
-          libgstid3tag.dll
-          libgstisomp4.dll
-          libgstlame.dll
-          libgstlibav.dll
-          libgstmms.dll
-          libgstogg.dll
-          libgstopus.dll
-          libgstopusparse.dll
-          libgstpbtypes.dll
-          libgstplayback.dll
-          libgstreplaygain.dll
-          libgstrtp.dll
-          libgstrtsp.dll
-          libgstsoup.dll
-          libgstspectrum.dll
-          libgstspeex.dll
-          libgsttaglib.dll
-          libgsttcp.dll
-          libgsttypefindfunctions.dll
-          libgstudp.dll
-          libgstvolume.dll
-          libgstvorbis.dll
-          libgstwavpack.dll
-          libgstwavparse.dll
-          ${GITHUB_WORKSPACE}/dist/windows/gstreamer-plugins
+        run: git config --global --add safe.directory "$(cygpath -u "$GITHUB_WORKSPACE")"
+
       - name: Download projectM presets
         run: |
           git clone --depth=1 https://github.com/projectM-visualizer/presets-cream-of-the-crop \
@@ -625,9 +508,94 @@ jobs:
           rm -rf 3rdparty/libprojectm/presets-cream/.git
           rm -f 3rdparty/libprojectm/presets-cream/LICENSE.md \
             3rdparty/libprojectm/presets-cream/README.md
-      - name: Build Windows installer
+
+      - name: cmake
+        working-directory: bin
+        run: >
+          cmake .. -G Ninja
+          -DCMAKE_BUILD_TYPE=Release
+
+      - name: build
+        working-directory: bin
+        run: cmake --build .
+
+      - name: Copy output exes
         working-directory: dist/windows
+        run: cp ../../bin/*.exe .
+
+      # Direct + transitive linked DLL dependencies are discovered from the
+      # built binaries themselves rather than hardcoded by name/version, since
+      # exact mingw64 package sonames drift with every MSYS2 update. This
+      # doesn't catch plugins loaded via dlopen() at runtime (Qt platform
+      # plugins, GStreamer elements, GIO modules) - those are copied
+      # separately below, same as the old pipeline did.
+      - name: Collect runtime DLL dependencies
+        working-directory: dist/windows
+        run: |
+          set -x
+          which ntldd
+          ls -la
+          : > raw_deps.txt
+          for exe in *.exe; do
+            echo "== ntldd -R $exe =="
+            ntldd -R "$exe" >> raw_deps.txt 2>&1 \
+              || echo "ntldd exited non-zero for $exe (continuing, see output above/below)"
+          done
+          echo "---- raw ntldd output ----"
+          cat raw_deps.txt
+          # ntldd prints native Windows paths (backslash-separated, drive
+          # letter, e.g. D:\a\_temp\msys64\mingw64\bin\libfoo.dll) rather than
+          # the /mingw64/... POSIX path - match on "mingw64\bin" or
+          # "mingw64/bin" regardless of separator, then re-resolve each hit
+          # against the canonical POSIX /mingw64/bin path rather than passing
+          # the raw backslash path to cp.
+          grep '=>' raw_deps.txt | awk '{print $3}' \
+            | grep -i 'mingw64[\\/]bin[\\/]' \
+            | sed 's/^.*[\\/]//' \
+            | sort -u > mingw_deps.txt || true
+          echo "---- mingw64 DLLs to bundle ----"
+          cat mingw_deps.txt
+          if [ ! -s mingw_deps.txt ]; then
+            echo "::error::No mingw64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
+            exit 1
+          fi
+          while IFS= read -r name; do
+            cp -n -v "/mingw64/bin/$name" .
+          done < mingw_deps.txt
+          rm -f raw_deps.txt mingw_deps.txt
+
+      - name: Copy Qt plugin DLLs
+        working-directory: dist/windows
+        run: |
+          set -e
+          mkdir -p platforms styles imageformats
+          cp /mingw64/share/qt5/plugins/platforms/qwindows.dll platforms/
+          cp /mingw64/share/qt5/plugins/styles/qwindowsvistastyle.dll styles/
+          cp /mingw64/share/qt5/plugins/imageformats/qgif.dll \
+             /mingw64/share/qt5/plugins/imageformats/qjpeg.dll \
+             /mingw64/share/qt5/plugins/imageformats/qsvg.dll \
+             imageformats/
+
+      - name: Copy GIO modules
+        working-directory: dist/windows
+        run: |
+          mkdir -p gio-modules
+          cp /mingw64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
+
+      - name: Copy GStreamer plugins
+        working-directory: dist/windows
+        run: |
+          mkdir -p gstreamer-plugins
+          cp /mingw64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+
+      - name: Build Windows installer
+        # makensis was installed via choco onto the Windows-wide PATH, not
+        # the MSYS2 one (MSYS2's shell rebuilds its own minimal PATH rather
+        # than inheriting the runner's), so run this step outside msys2.
+        shell: pwsh
         run: makensis clementine.nsi
+        working-directory: dist/windows
+
       - uses: actions/upload-artifact@v4
         with:
           name: release_mingw
