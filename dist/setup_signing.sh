@@ -28,6 +28,42 @@ API_KEY_PATH="$(mktemp)"
 ADC_PATCHED_PATH="$(mktemp)"
 trap 'rm -f "$API_KEY_PATH" "$ADC_PATCHED_PATH"' EXIT
 
+# A dedicated keychain rather than the ambient default one: codesign
+# accessing a real (non-ad-hoc) private key needs the keychain's unlock
+# password to pre-authorize access via `security set-key-partition-list` -
+# fastlane's own keychain importer tries this automatically, but silently
+# no-ops without a known password, and codesign then hangs forever on an
+# interactive access-control prompt that has nowhere to display in CI.
+# Using our own keychain means we always know that password, instead of
+# depending on the ambient login keychain's (which we don't actually know,
+# and shouldn't rely on regardless).
+#
+# Deliberately NOT cleaned up when this script exits: the actual `codesign`
+# calls that need this identity happen afterward, in the separate `cmake`/
+# `make` build step - not here. Recreated fresh (deleted first if already
+# present) on every run instead, so re-running doesn't accumulate keychains
+# or leave a stale one in the search list; in CI the whole VM is thrown
+# away after the job anyway.
+KEYCHAIN_PATH="$HOME/Library/Keychains/clementine-signing.keychain-db"
+KEYCHAIN_PASSWORD="$(uuidgen)"
+
+echo "Setting up the signing keychain..." >&2
+security delete-keychain "$KEYCHAIN_PATH" 2>/dev/null || true
+security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+ORIGINAL_KEYCHAINS=()
+while IFS= read -r line; do
+  ORIGINAL_KEYCHAINS+=("$line")
+done < <(security list-keychains -d user | sed -E 's/^ *"(.*)"$/\1/')
+if [[ ! " ${ORIGINAL_KEYCHAINS[*]} " == *" $KEYCHAIN_PATH "* ]]; then
+  security list-keychains -d user -s "$KEYCHAIN_PATH" "${ORIGINAL_KEYCHAINS[@]}"
+fi
+
+export MATCH_KEYCHAIN_NAME="$KEYCHAIN_PATH"
+export MATCH_KEYCHAIN_PASSWORD="$KEYCHAIN_PASSWORD"
+
 # renew_signing_cert deliberately needs interactive Apple ID auth instead
 # (see fastlane/Fastfile) - match's api_key_path option falls back to
 # reading this env var even when a lane doesn't pass it explicitly in code,
