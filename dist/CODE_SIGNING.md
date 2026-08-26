@@ -107,6 +107,15 @@ Runs automatically on every push to `master` and on PRs opened from
 branches within this repo (not forks) - see the `Check signing eligibility`
 step in the `build_mac` job. Nothing to do.
 
+This also notarizes the build (submits the signed app and dmg to Apple's
+notary service and staples the ticket) automatically - see
+`APPLE_NOTARIZE_API_KEY_PATH` in `src/CMakeLists.txt`/`dist/notarize.py` and
+the `Notarize DMG` step. `dist/setup_signing.sh` only wires that variable up
+in CI (via `$GITHUB_ENV`); local builds stay ad-hoc/Developer-ID-signed but
+unnotarized by default. To test notarization locally, pass
+`-DAPPLE_NOTARIZE_API_KEY_PATH=<path to the same API key JSON>` to `cmake`
+yourself.
+
 ## Renewing/rotating the certificate
 
 Run the same command as one-time-setup step 5. Must be the Account Holder,

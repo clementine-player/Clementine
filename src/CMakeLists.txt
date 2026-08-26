@@ -1475,10 +1475,11 @@ if (APPLE)
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
   # `clementine` is already signed with APPLE_DEVELOPER_ID (or ad-hoc, see
-  # above) as part of its own POST_BUILD step. APPLE_NOTARIZE_PROFILE (a
-  # notarytool keychain profile name, see dist/notarize.py) additionally
-  # submits the signed app/dmg to Apple's notary service and staples the
-  # ticket - required for the app to run cleanly on other people's Macs.
+  # above) as part of its own POST_BUILD step. APPLE_NOTARIZE_API_KEY_PATH
+  # (path to an App Store Connect API key JSON file, see dist/notarize.py)
+  # additionally submits the signed app/dmg to Apple's notary service and
+  # staples the ticket - required for the app to run cleanly on other
+  # people's Macs.
   # Both cache vars are optional - without them `make dmg` still produces a
   # (locally-runnable, ad-hoc-signed) dmg for other devs without a
   # certificate.
@@ -1501,11 +1502,11 @@ if (APPLE)
   set(CLEMENTINE_APP_TARGET sign)
 
   if (APPLE_DEVELOPER_ID)
-    if (APPLE_NOTARIZE_PROFILE)
+    if (APPLE_NOTARIZE_API_KEY_PATH)
       add_custom_target(
         notarize-app
         COMMAND
-        ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_PROFILE} ${PROJECT_BINARY_DIR}/clementine.app
+        ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_API_KEY_PATH} ${PROJECT_BINARY_DIR}/clementine.app
         DEPENDS sign
         VERBATIM
       )
@@ -1526,11 +1527,11 @@ if (APPLE)
   add_custom_target(dmg
     DEPENDS ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg)
 
-  if (APPLE_NOTARIZE_PROFILE)
+  if (APPLE_NOTARIZE_API_KEY_PATH)
     add_custom_target(
       notarize-dmg
       COMMAND
-      ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_PROFILE} ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
+      ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_API_KEY_PATH} ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
       DEPENDS dmg
       VERBATIM
     )

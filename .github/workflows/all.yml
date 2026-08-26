@@ -909,13 +909,18 @@ jobs:
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
-            ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"}
+            ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"} \
+            ${APPLE_NOTARIZE_API_KEY_PATH:+-DAPPLE_NOTARIZE_API_KEY_PATH="$APPLE_NOTARIZE_API_KEY_PATH"}
       - name: Copy icon files and resources
         working-directory: bin
         run: make install
       - name: Build DMG
         working-directory: bin
         run: make dmg -j$(sysctl -n hw.ncpu)
+      - name: Notarize DMG
+        if: steps.signing.outputs.enabled == 'true'
+        working-directory: bin
+        run: make notarize-dmg
       - uses: actions/upload-artifact@v4
         with:
           name: release_mac

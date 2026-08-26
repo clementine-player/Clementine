@@ -28,6 +28,15 @@ API_KEY_PATH="$(mktemp)"
 ADC_PATCHED_PATH="$(mktemp)"
 trap 'rm -f "$API_KEY_PATH" "$ADC_PATCHED_PATH"' EXIT
 
+# Unlike API_KEY_PATH/ADC_PATCHED_PATH above, this path is NOT torn down
+# when this script exits: dist/notarize.py (invoked later from the
+# separate cmake/make build step, via APPLE_NOTARIZE_API_KEY_PATH) needs
+# the same App Store Connect API key material afterward - same
+# "deliberately not cleaned up" reasoning as KEYCHAIN_PATH below. Only
+# ever written to when GITHUB_ENV is set (CI only, see below) - local/
+# maintainer builds don't get notarization wired up automatically.
+NOTARIZE_API_KEY_PATH="$HOME/.clementine-notarize-api-key.json"
+
 # A dedicated keychain rather than the ambient default one: codesign
 # accessing a real (non-ad-hoc) private key needs the keychain's unlock
 # password to pre-authorize access via `security set-key-partition-list` -
@@ -79,6 +88,12 @@ else
     > "$API_KEY_PATH"
 
   export APP_STORE_CONNECT_API_KEY_PATH="$API_KEY_PATH"
+
+  if [[ -n "${GITHUB_ENV:-}" ]]; then
+    cp "$API_KEY_PATH" "$NOTARIZE_API_KEY_PATH"
+    chmod 600 "$NOTARIZE_API_KEY_PATH"
+    echo "APPLE_NOTARIZE_API_KEY_PATH=$NOTARIZE_API_KEY_PATH" >> "$GITHUB_ENV"
+  fi
 fi
 
 # match's own Application Default Credentials auto-detection calls
