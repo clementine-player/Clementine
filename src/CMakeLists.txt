@@ -15,6 +15,25 @@ if(BUILD_WERROR)
   endif (LINUX)
 endif(BUILD_WERROR)
 
+# GCC 15 miscomputes a bound (18446744073709551608, i.e. -8 as unsigned)
+# from pointer arithmetic on an empty container inside boost::multi_index's
+# bucket_array constructor, inlined into MergedProxyModelPrivate's
+# constructor - a known class of GCC false positive in heavily-templated
+# code, not a real bug. It's flagged under more than one warning name
+# (seen so far: -Wstringop-overflow, -Warray-bounds), so more may surface.
+# Scoped to just this file for normal compiles...
+set_source_files_properties(core/mergedproxymodel.cpp PROPERTIES
+  COMPILE_OPTIONS "-Wno-stringop-overflow;-Wno-array-bounds")
+# ...but distro-hardened Linux builds (e.g. Fedora's rpmbuild specs) also
+# enable LTO, which re-diagnoses the same inlined code at the final link
+# step using the linker's own flags - not the per-file COMPILE_OPTIONS
+# above - so the suppression has to be repeated here too, or LTO relinking
+# fails with the identical error despite every object file having compiled
+# cleanly.
+if (LINUX)
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wno-stringop-overflow -Wno-array-bounds")
+endif (LINUX)
+
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
 
