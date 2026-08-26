@@ -49,26 +49,37 @@ jobs:
           libchromaprint-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
           libglib2.0-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
           python3-pip
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           libsparsehash-dev
           ssh
+          # liblastfm and libmygpo-qt have no Qt6 build in any Debian/Ubuntu
+          # repo yet. liblastfm's optional_component degrades gracefully when
+          # missing; libmygpo-qt5 (gpodder sync) falls back to the vendored
+          # 3rdparty/libmygpo-qt5 copy in that case, so both are simply
+          # omitted here rather than installed as Qt5-linked libraries.
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -164,28 +175,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
+          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
+          # push_translations above for how CMake handles their absence.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -233,27 +250,32 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
+          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
+          # liblastfm has no Qt6 build on Fedora (optional_component degrades
+          # gracefully), and QCA was unused dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -309,27 +331,32 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
+          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
+          # liblastfm has no Qt6 build on Fedora (optional_component degrades
+          # gracefully), and QCA was unused dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -385,27 +412,32 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
+          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
+          # liblastfm has no Qt6 build on Fedora (optional_component degrades
+          # gracefully), and QCA was unused dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -624,24 +656,31 @@ jobs:
           libfftw3-dev
           libglew-dev
           libglib2.0-dev
+          libgl1-mesa-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          qt6-5compat-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # liblastfm and libmygpo-qt have no Qt6 build anywhere yet - see
+          # the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -686,24 +725,31 @@ jobs:
           libfftw3-dev
           libglew-dev
           libglib2.0-dev
+          libgl1-mesa-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          qt6-5compat-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # liblastfm and libmygpo-qt have no Qt6 build anywhere yet - see
+          # the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -752,28 +798,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
+          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
+          # push_translations above for how CMake handles their absence.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -822,28 +874,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
+          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
+          # push_translations above for how CMake handles their absence.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -892,28 +950,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
+          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
+          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
+          # push_translations above for how CMake handles their absence.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -949,25 +1013,13 @@ jobs:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      - name: Tap and trust tomahawk-player/tomahawkqt5
-        run: |
-          brew tap tomahawk-player/tomahawkqt5
-          brew trust --formula tomahawk-player/tomahawkqt5/liblastfm
-      # liblastfm (from that tap) has a pre-3.5 cmake_minimum_required that
-      # modern CMake refuses to configure outright. CMake's own fix is
-      # -DCMAKE_POLICY_VERSION_MINIMUM=3.5, but `brew` re-execs itself
-      # through `env -i` with a hardcoded variable allowlist before Ruby
-      # even starts (see `brew`'s own source), so there's no way to get an
-      # arbitrary env var into a formula's build - patching the flag
-      # directly into the tapped formula is the only way.
-      - name: Patch liblastfm formula for modern CMake
-        run: |
-          FORMULA="$(brew --repo tomahawk-player/tomahawkqt5)/liblastfm.rb"
-          sed -i '' 's/args << "-DBUILD_TESTS=OFF"/&\n    args << "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"/' "$FORMULA"
+      # liblastfm (Last.fm scrobbling) has no Qt6 build published anywhere,
+      # including the tomahawk-player/tomahawkqt5 tap this job used to pull
+      # a Qt5-linked liblastfm from - that can't safely link into a Qt6
+      # executable. CMake's optional_component degrades gracefully when
+      # liblastfm is missing, so it's simply not installed here.
       - name: Install dependencies
         run: brew bundle
-      - name: Fix liblastfm include path
-        run: ln -sf "$(brew --prefix)/include/lastfm" "$(brew --prefix)/include/lastfm5"
 
       # Real Developer ID signing runs for pushes to master (release builds)
       # and for PRs opened from branches *within this repo* - so the
@@ -1020,8 +1072,7 @@ jobs:
             -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
             -DENABLE_LIBGPOD=OFF \
-            -DQt5_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5" \
-            -DQt5LinguistTools_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5LinguistTools" \
+            -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
