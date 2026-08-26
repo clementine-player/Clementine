@@ -90,7 +90,8 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
 #ifdef Q_OS_WIN32
   if (button_created_message_id_ == 0) {
     // Compute the value for the TaskbarButtonCreated message
-    button_created_message_id_ = RegisterWindowMessage("TaskbarButtonCreated");
+    button_created_message_id_ =
+        RegisterWindowMessage(L"TaskbarButtonCreated");
     qLog(Debug) << "TaskbarButtonCreated message ID registered"
                 << button_created_message_id_;
   }
@@ -115,7 +116,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     hr = CoCreateInstance(CLSID_ITaskbarList, nullptr, CLSCTX_ALL,
                           IID_ITaskbarList3, (void**)&taskbar_list_);
     if (hr != S_OK) {
-      qLog(Warning) << "Error creating the ITaskbarList3 interface" << hex
+      qLog(Warning) << "Error creating the ITaskbarList3 interface" << Qt::hex
                     << DWORD(hr);
       return;
     }
@@ -124,7 +125,8 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
         reinterpret_cast<ITaskbarList3*>(taskbar_list_);
     hr = taskbar_list->HrInit();
     if (hr != S_OK) {
-      qLog(Warning) << "Error initialising taskbar list" << hex << DWORD(hr);
+      qLog(Warning) << "Error initialising taskbar list" << Qt::hex
+                    << DWORD(hr);
       taskbar_list->Release();
       taskbar_list_ = nullptr;
       return;
@@ -143,7 +145,8 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     qLog(Debug) << "Adding buttons";
     hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(),
                                           actions_.count(), buttons);
-    if (hr != S_OK) qLog(Debug) << "Failed to add buttons" << hex << DWORD(hr);
+    if (hr != S_OK)
+      qLog(Debug) << "Failed to add buttons" << Qt::hex << DWORD(hr);
     for (int i = 0; i < actions_.count(); i++) {
       if (buttons[i].hIcon != 0) DestroyIcon(buttons[i].hIcon);
     }
