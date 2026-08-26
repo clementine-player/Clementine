@@ -197,9 +197,13 @@ quint64 FileSystemCapacity(const QString& path) {
     return quint64(fs_info.f_blocks) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
-  if (GetDiskFreeSpaceEx(
-          QDir::toNativeSeparators(path).toLocal8Bit().constData(), nullptr,
-          &ret, nullptr) != 0)
+  // GetDiskFreeSpaceEx resolves to the wide GetDiskFreeSpaceExW under the
+  // UNICODE builds this project uses on Windows, so it needs an LPCWSTR, not
+  // a narrow (toLocal8Bit()) string - QString::utf16() is UTF-16 and
+  // binary-compatible with wchar_t* on Windows.
+  if (GetDiskFreeSpaceEx(reinterpret_cast<LPCWSTR>(
+                             QDir::toNativeSeparators(path).utf16()),
+                         nullptr, &ret, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -213,9 +217,9 @@ quint64 FileSystemFreeSpace(const QString& path) {
     return quint64(fs_info.f_bavail) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
-  if (GetDiskFreeSpaceEx(
-          QDir::toNativeSeparators(path).toLocal8Bit().constData(), &ret,
-          nullptr, nullptr) != 0)
+  if (GetDiskFreeSpaceEx(reinterpret_cast<LPCWSTR>(
+                             QDir::toNativeSeparators(path).utf16()),
+                         &ret, nullptr, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
