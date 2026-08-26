@@ -75,7 +75,7 @@ void KittenLoader::KittensRetrieved(QNetworkReply* reply) {
   while (!reader.atEnd()) {
     reader.readNext();
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
-      if (reader.name() == "photo") {
+      if (reader.name() == QLatin1String("photo")) {
         QXmlStreamAttributes attrs = reader.attributes();
         QStringView farm_id = attrs.value("farm");
         QStringView photo_id = attrs.value("id");

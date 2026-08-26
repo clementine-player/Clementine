@@ -48,7 +48,7 @@ QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(
   while (!reader.atEnd()) {
     reader.readNext();
 
-    if (reader.name() == "provider") {
+    if (reader.name() == QLatin1String("provider")) {
       SongInfoProvider* provider = ParseProvider(&reader);
       if (provider) {
         provider->moveToThread(thread_);
@@ -76,13 +76,13 @@ SongInfoProvider* UltimateLyricsReader::ParseProvider(
     if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      if (reader->name() == "extract")
+      if (reader->name() == QLatin1String("extract"))
         scraper->add_extract_rule(ParseRule(reader));
-      else if (reader->name() == "exclude")
+      else if (reader->name() == QLatin1String("exclude"))
         scraper->add_exclude_rule(ParseRule(reader));
-      else if (reader->name() == "invalidIndicator")
+      else if (reader->name() == QLatin1String("invalidIndicator"))
         scraper->add_invalid_indicator(ParseInvalidIndicator(reader));
-      else if (reader->name() == "urlFormat") {
+      else if (reader->name() == QLatin1String("urlFormat")) {
         scraper->add_url_format(
             reader->attributes().value("replace").toString(),
             reader->attributes().value("with").toString());
@@ -104,7 +104,7 @@ UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(
     if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      if (reader->name() == "item") {
+      if (reader->name() == QLatin1String("item")) {
         QXmlStreamAttributes attr = reader->attributes();
         if (attr.hasAttribute("tag"))
           ret << UltimateLyricsProvider::RuleItem(attr.value("tag").toString(),

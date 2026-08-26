@@ -52,7 +52,7 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
     switch (type) {
       case QXmlStreamReader::StartElement: {
         QStringView name = reader->name();
-        if (name == "media") {
+        if (name == QLatin1String("media")) {
           QStringView src = reader->attributes().value("src");
           if (!src.isEmpty()) {
             Song song = LoadSong(src.toString(), 0, dir);
@@ -66,7 +66,7 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
         break;
       }
       case QXmlStreamReader::EndElement: {
-        if (reader->name() == "seq") {
+        if (reader->name() == QLatin1String("seq")) {
           return;
         }
         break;

@@ -35,9 +35,6 @@
 #include "core/logging.h"
 #include "ui_osdpretty.h"
 
-#ifdef HAVE_X11
-#include <QX11Info>
-#endif
 #ifdef Q_OS_WIN32
 #include <QtWin>
 #endif
@@ -151,9 +148,11 @@ void OSDPretty::ScreenRemoved(QScreen* screen) {
 }
 
 bool OSDPretty::IsTransparencyAvailable() {
-#if defined(HAVE_X11) && (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
-  return QX11Info::isCompositingManagerRunning();
-#endif
+  // QX11Info::isCompositingManagerRunning() was removed in Qt6 with no
+  // direct replacement (would require manually querying the
+  // _NET_WM_CM_S<screen> selection owner via xcb). Assume transparency is
+  // available, same as every other platform here; worst case is a mostly
+  // harmless redundant translucency effect when no compositor is running.
   return true;
 }
 

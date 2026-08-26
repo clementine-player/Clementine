@@ -138,7 +138,7 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
     reader.readNext();
 
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == "channel") {
+        reader.name() == QLatin1String("channel")) {
       ReadChannel(reader, &list);
     }
   }
@@ -166,19 +166,19 @@ void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader,
         return;
 
       case QXmlStreamReader::StartElement:
-        if (reader.name() == "title") {
+        if (reader.name() == QLatin1String("title")) {
           stream.title_ = reader.readElementText();
-        } else if (reader.name() == "dj") {
+        } else if (reader.name() == QLatin1String("dj")) {
           stream.dj_ = reader.readElementText();
-        } else if (reader.name() == "fastpls" &&
-                   reader.attributes().value("format") == "mp3") {
+        } else if (reader.name() == QLatin1String("fastpls") &&
+                   reader.attributes().value("format") == QLatin1String("mp3")) {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 
           stream.url_ = url;
           found = true;
-        } else if (!found && reader.name() == "highestpls" &&
-                   reader.attributes().value("format") == "mp3") {
+        } else if (!found && reader.name() == QLatin1String("highestpls") &&
+                   reader.attributes().value("format") == QLatin1String("mp3")) {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 

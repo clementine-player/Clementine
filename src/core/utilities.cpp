@@ -37,6 +37,7 @@
 #include <QMetaEnum>
 #include <QMouseEvent>
 #include <QRegularExpression>
+#include <QStandardPaths>
 #include <QStringList>
 #include <QTcpServer>
 #include <QTemporaryFile>

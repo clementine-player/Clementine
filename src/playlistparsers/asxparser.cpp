@@ -91,17 +91,17 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
     switch (type) {
       case QXmlStreamReader::StartElement: {
         QStringView name = reader->name();
-        if (name == "ref") {
+        if (name == QLatin1String("ref")) {
           ref = reader->attributes().value("href").toString();
-        } else if (name == "title") {
+        } else if (name == QLatin1String("title")) {
           title = reader->readElementText();
-        } else if (name == "author") {
+        } else if (name == QLatin1String("author")) {
           artist = reader->readElementText();
         }
         break;
       }
       case QXmlStreamReader::EndElement: {
-        if (reader->name() == "entry") {
+        if (reader->name() == QLatin1String("entry")) {
           goto return_song;
         }
         break;

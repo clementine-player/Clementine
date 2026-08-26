@@ -21,6 +21,11 @@
 #include <memory>
 
 #include "songinfobase.h"
+// Needed complete (not just forward-declared) so that Qt6's automatic
+// metatype registration for the UltimateLyricsParsed(QFuture<QList<
+// SongInfoProvider*>>) signal below can determine whether SongInfoProvider
+// derives from QObject.
+#include "songinfoprovider.h"
 
 class UltimateLyricsProvider;
 class UltimateLyricsReader;

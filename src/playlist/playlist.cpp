@@ -1633,7 +1633,7 @@ void Playlist::ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>> future)
 
   // should we gray out deleted songs asynchronously on startup?
   if (s.value("greyoutdeleted", false).toBool()) {
-    QtConcurrent::run(&Playlist::InvalidateDeletedSongs, this);
+    (void)QtConcurrent::run(&Playlist::InvalidateDeletedSongs, this);
   }
 }
 

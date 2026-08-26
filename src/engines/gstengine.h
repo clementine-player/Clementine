@@ -30,6 +30,7 @@
 #include <QString>
 #include <QStringList>
 #include <QTimerEvent>
+#include <QVariant>
 #include <memory>
 
 #include "bufferconsumer.h"

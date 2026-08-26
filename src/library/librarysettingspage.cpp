@@ -165,6 +165,6 @@ void LibrarySettingsPage::WriteAllSongsStatisticsToFiles() {
   if (confirmation_dialog.exec() != QMessageBox::Yes) {
     return;
   }
-  QtConcurrent::run(&Library::WriteAllSongsStatisticsToFiles,
-                    dialog()->app()->library());
+  (void)QtConcurrent::run(&Library::WriteAllSongsStatisticsToFiles,
+                          dialog()->app()->library());
 }

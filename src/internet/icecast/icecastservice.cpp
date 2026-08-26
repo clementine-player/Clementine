@@ -241,7 +241,7 @@ IcecastBackend::StationList IcecastService::ParseDirectory(
   while (!reader.atEnd()) {
     reader.readNext();
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == "entry") {
+        reader.name() == QLatin1String("entry")) {
       stations << ReadStation(&reader);
     }
   }
@@ -261,13 +261,13 @@ IcecastBackend::Station IcecastService::ReadStation(
       QString value =
           reader->readElementText(QXmlStreamReader::SkipChildElements);
 
-      if (name == "server_name") station.name = value;
-      if (name == "listen_url") station.url = QUrl(value);
-      if (name == "server_type") station.mime_type = value;
-      if (name == "bitrate") station.bitrate = value.toInt();
-      if (name == "channels") station.channels = value.toInt();
-      if (name == "samplerate") station.samplerate = value.toInt();
-      if (name == "genre")
+      if (name == QLatin1String("server_name")) station.name = value;
+      if (name == QLatin1String("listen_url")) station.url = QUrl(value);
+      if (name == QLatin1String("server_type")) station.mime_type = value;
+      if (name == QLatin1String("bitrate")) station.bitrate = value.toInt();
+      if (name == QLatin1String("channels")) station.channels = value.toInt();
+      if (name == QLatin1String("samplerate")) station.samplerate = value.toInt();
+      if (name == QLatin1String("genre"))
         station.genre =
             FilterGenres(value.split(' ', Qt::SkipEmptyParts))[0];
     }

@@ -189,7 +189,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
     reader.readNext();
 
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == "Track") {
+        reader.name() == QLatin1String("Track")) {
       songs << ReadTrack(reader);
     }
   }
@@ -211,17 +211,17 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       QStringView name = reader.name();
       QString value = ReadElementText(reader);
 
-      if (name == "artist") song.set_artist(value);
-      if (name == "albumname") song.set_album(value);
-      if (name == "trackname") song.set_title(value);
-      if (name == "tracknum") song.set_track(value.toInt());
-      if (name == "year") song.set_year(value.toInt());
-      if (name == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
-      if (name == "seconds")
+      if (name == QLatin1String("artist")) song.set_artist(value);
+      if (name == QLatin1String("albumname")) song.set_album(value);
+      if (name == QLatin1String("trackname")) song.set_title(value);
+      if (name == QLatin1String("tracknum")) song.set_track(value.toInt());
+      if (name == QLatin1String("year")) song.set_year(value.toInt());
+      if (name == QLatin1String("magnatunegenres")) song.set_genre(value.section(',', 0, 0));
+      if (name == QLatin1String("seconds"))
         song.set_length_nanosec(value.toInt() * kNsecPerSec);
-      if (name == "cover_small") song.set_art_automatic(value);
-      if (name == "albumsku") song.set_comment(value);
-      if (name == "url") {
+      if (name == QLatin1String("cover_small")) song.set_art_automatic(value);
+      if (name == QLatin1String("albumsku")) song.set_comment(value);
+      if (name == QLatin1String("url")) {
         QUrl url;
         // Magnatune's URLs are already encoded
         url.setUrl(value.toLocal8Bit());

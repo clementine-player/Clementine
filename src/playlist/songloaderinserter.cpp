@@ -72,7 +72,7 @@ void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
     InsertSongs();
     deleteLater();
   } else {
-    QtConcurrent::run(&SongLoaderInserter::AsyncLoad, this);
+    (void)QtConcurrent::run(&SongLoaderInserter::AsyncLoad, this);
   }
 }
 

@@ -82,7 +82,7 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     lineEdit->setMinimumSize(width, height);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(lineEdit);
 
     lineEdit->installEventFilter(this);

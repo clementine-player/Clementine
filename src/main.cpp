@@ -431,7 +431,7 @@ int main(int argc, char* argv[]) {
   // initialised in the main thread.  It fixes issue 3265 but nobody knows why.
   // Don't remove this unless you can reproduce the error that it fixes.
   ParseAProto();
-  QtConcurrent::run(&ParseAProto);
+  (void)QtConcurrent::run(&ParseAProto);
 
   Application app;
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));

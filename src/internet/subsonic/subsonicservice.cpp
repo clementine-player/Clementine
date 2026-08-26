@@ -338,11 +338,11 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   } else {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
-    is_ampache_ = (reader.attributes().value("type") == "ampache");
+    is_ampache_ = (reader.attributes().value("type") == QLatin1String("ampache"));
     QStringView status = reader.attributes().value("status");
     int http_status_code =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if (status == "ok") {
+    if (status == QLatin1String("ok")) {
       login_state_ = LoginState_Loggedin;
     } else if (http_status_code >= 300 && http_status_code <= 399) {
       // Received a redirect status code, follow up on it.
@@ -443,12 +443,12 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
 
-  if (reader.name() != "subsonic-response") {
+  if (reader.name() != QLatin1String("subsonic-response")) {
     ParsingError("Not a subsonic-response. Aborting scan.");
     return;
   }
 
-  if (reader.attributes().value("status") != "ok") {
+  if (reader.attributes().value("status") != QLatin1String("ok")) {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
 
@@ -468,13 +468,13 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   int albums_added = 0;
   if (!skip_read_albums) {
     reader.readNextStartElement();
-    if (reader.name() != "albumList2") {
+    if (reader.name() != QLatin1String("albumList2")) {
       ParsingError("albumList2 tag expected. Aborting scan.");
       return;
     }
 
     while (reader.readNextStartElement()) {
-      if (reader.name() != "album") {
+      if (reader.name() != QLatin1String("album")) {
         ParsingError("album tag expected. Aborting scan.");
         return;
       }
@@ -509,19 +509,19 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
 
-  if (reader.name() != "subsonic-response") {
+  if (reader.name() != QLatin1String("subsonic-response")) {
     ParsingError("Not a subsonic-response. Aborting scan.");
     return;
   }
 
-  if (reader.attributes().value("status") != "ok") {
+  if (reader.attributes().value("status") != QLatin1String("ok")) {
     // TODO(Alan Briolat): error handling
     return;
   }
 
   // Read album information
   reader.readNextStartElement();
-  if (reader.name() != "album") {
+  if (reader.name() != QLatin1String("album")) {
     ParsingError("album tag expected. Aborting scan.");
     return;
   }
@@ -531,11 +531,11 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   // Read song information
   while (reader.readNextStartElement()) {
     // skip multi-artist and multi-genre tags
-    if ((reader.name() == "artists") || (reader.name() == "genres")) {
+    if ((reader.name() == QLatin1String("artists")) || (reader.name() == QLatin1String("genres"))) {
       reader.skipCurrentElement();
       continue;
     }
-    if (reader.name() != "song") {
+    if (reader.name() != QLatin1String("song")) {
       ParsingError("song tag expected. Aborting scan.");
       return;
     }

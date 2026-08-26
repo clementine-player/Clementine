@@ -29,7 +29,7 @@
 ** <http://libqxt.org>  <foundation@libqxt.org>
 *****************************************************************************/
 
-#include <QX11Info>
+#include <QGuiApplication>
 #include <xcb/xcb.h>
 #include <QVector>
 #include <X11/Xlib.h>
@@ -87,7 +87,11 @@ class QxtX11Data {
 public:
     QxtX11Data()
     {
-        m_display = QX11Info::display();
+        // QX11Info was removed in Qt6; the display handle is now obtained via
+        // the QNativeInterface::QX11Application native interface instead.
+        auto* x11App =
+            qGuiApp->nativeInterface<QNativeInterface::QX11Application>();
+        m_display = x11App ? x11App->display() : nullptr;
     }
 
     bool isValid()
@@ -150,8 +154,13 @@ bool QxtGlobalShortcutPrivate::eventFilter(void *message)
         unsigned int keycode = key->keycode;
         unsigned int keystate = key->state;
 #else
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+bool QxtGlobalShortcutPrivate::nativeEventFilter(const QByteArray & eventType,
+    void *message, qintptr *result)
+#else
 bool QxtGlobalShortcutPrivate::nativeEventFilter(const QByteArray & eventType,
     void *message, long *result)
+#endif
 {
     Q_UNUSED(result);
 
