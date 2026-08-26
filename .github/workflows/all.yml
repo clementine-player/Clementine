@@ -10,6 +10,7 @@ on:
 jobs:
   lint:
     name: Lint
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -24,7 +25,7 @@ jobs:
 
   push_translations:
     name: Push translation sources to Transifex
-    if: github.ref == 'refs/heads/master'
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -108,7 +109,7 @@ jobs:
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-24.04
-    if: github.ref == 'refs/heads/master'
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     needs:
       - build_bookworm_64
       - build_trixie_64
@@ -153,6 +154,7 @@ jobs:
 
   build_source:
     name: Build source tarball
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -221,6 +223,7 @@ jobs:
 
   build_fedora_42:
     name: Build Fedora 42 RPM
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:42
@@ -302,6 +305,7 @@ jobs:
 
   build_fedora_43:
     name: Build Fedora 43 RPM
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:43
@@ -383,6 +387,7 @@ jobs:
 
   build_fedora_44:
     name: Build Fedora 44 RPM
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:44
@@ -641,6 +646,7 @@ jobs:
 
   build_bookworm_64:
     name: Build Debian Bookworm 64-bit deb
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: debian:bookworm
@@ -710,6 +716,7 @@ jobs:
 
   build_trixie_64:
     name: Build Debian Trixie 64-bit deb
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: debian:trixie
@@ -779,6 +786,7 @@ jobs:
 
   build_jammy_64:
     name: Build Ubuntu Jammy 64-bit deb
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:jammy
@@ -855,6 +863,7 @@ jobs:
 
   build_noble_64:
     name: Build Ubuntu Noble 64-bit deb
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -931,6 +940,7 @@ jobs:
 
   build_resolute_64:
     name: Build Ubuntu Resolute 64-bit deb
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:resolute
@@ -1007,6 +1017,7 @@ jobs:
 
   build_mac:
     name: Build Mac DMG
+    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: macos-26
     # id-token: write is what lets the "Authenticate to GCP" step below
     # trade a GitHub OIDC token for short-lived GCP credentials (Workload
