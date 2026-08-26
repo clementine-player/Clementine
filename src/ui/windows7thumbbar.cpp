@@ -18,6 +18,7 @@
 #include "windows7thumbbar.h"
 
 #include <QAction>
+#include <QImage>
 #include <QtDebug>
 
 #include "core/logging.h"
@@ -59,12 +60,14 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 
 #ifdef Q_OS_WIN32
 
-extern HICON qt_pixmapToWinHICON(const QPixmap& p);
-
 static void SetupButton(const QAction* action, THUMBBUTTON* button) {
   if (action) {
-    button->hIcon =
-        qt_pixmapToWinHICON(action->icon().pixmap(Windows7ThumbBar::kIconSize));
+    // qt_pixmapToWinHICON() was an undocumented private Qt5 symbol; QImage
+    // ::toHICON() is the public, documented replacement Qt6 provides for it.
+    button->hIcon = action->icon()
+                        .pixmap(Windows7ThumbBar::kIconSize)
+                        .toImage()
+                        .toHICON();
     button->dwFlags = action->isEnabled() ? THBF_ENABLED : THBF_DISABLED;
     // This is unsafe - doesn't obey 260-char restriction
     action->text().toWCharArray(button->szTip);

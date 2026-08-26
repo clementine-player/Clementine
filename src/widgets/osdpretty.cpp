@@ -36,11 +36,9 @@
 #include "ui_osdpretty.h"
 
 #ifdef Q_OS_WIN32
-#include <QtWin>
-#endif
-
-#ifdef Q_OS_WIN32
 #include <windows.h>
+// dwmapi.h depends on types from windows.h, so it must come after.
+#include <dwmapi.h>
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
@@ -404,8 +402,15 @@ void OSDPretty::Reposition() {
   }
 
 #ifdef Q_OS_WIN32
-  // On windows, enable blurbehind on the masked area
-  QtWin::enableBlurBehindWindow(this, QRegion(mask));
+  // QtWinExtras (QtWin::enableBlurBehindWindow) has no Qt6 equivalent, so
+  // call the underlying DWM API directly instead. This blurs the whole
+  // window rather than just the masked region, which is fine here since the
+  // OSD window is already sized to its content.
+  DWM_BLURBEHIND bb = {0};
+  bb.dwFlags = DWM_BB_ENABLE;
+  bb.fEnable = TRUE;
+  bb.hRgnBlur = nullptr;
+  DwmEnableBlurBehindWindow(reinterpret_cast<HWND>(winId()), &bb);
 #endif
 }
 

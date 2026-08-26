@@ -1375,6 +1375,7 @@ if (WIN32)
     protobuf
     tinysvcmdns
     dsound
+    dwmapi
   )
 endif (WIN32)
 

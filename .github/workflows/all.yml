@@ -502,7 +502,10 @@ jobs:
             mingw-w64-x86_64-ninja
             mingw-w64-x86_64-ntldd
             mingw-w64-x86_64-pkgconf
-            mingw-w64-x86_64-qt5
+            mingw-w64-x86_64-qt6-base
+            mingw-w64-x86_64-qt6-5compat
+            mingw-w64-x86_64-qt6-tools
+            mingw-w64-x86_64-qt6-svg
             mingw-w64-x86_64-taglib
             mingw-w64-x86_64-boost
             mingw-w64-x86_64-protobuf
@@ -601,11 +604,14 @@ jobs:
         run: |
           set -e
           mkdir -p platforms styles imageformats
-          cp /mingw64/share/qt5/plugins/platforms/qwindows.dll platforms/
-          cp /mingw64/share/qt5/plugins/styles/qwindowsvistastyle.dll styles/
-          cp /mingw64/share/qt5/plugins/imageformats/qgif.dll \
-             /mingw64/share/qt5/plugins/imageformats/qjpeg.dll \
-             /mingw64/share/qt5/plugins/imageformats/qsvg.dll \
+          cp /mingw64/share/qt6/plugins/platforms/qwindows.dll platforms/
+          # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
+          # a single qmodernwindowsstyle.dll that covers both the
+          # "windowsvista" and "windows11" styles.
+          cp /mingw64/share/qt6/plugins/styles/qmodernwindowsstyle.dll styles/
+          cp /mingw64/share/qt6/plugins/imageformats/qgif.dll \
+             /mingw64/share/qt6/plugins/imageformats/qjpeg.dll \
+             /mingw64/share/qt6/plugins/imageformats/qsvg.dll \
              imageformats/
 
       - name: Copy GIO modules
