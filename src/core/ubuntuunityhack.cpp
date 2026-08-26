@@ -43,7 +43,7 @@ UbuntuUnityHack::UbuntuUnityHack(QObject* parent) : QObject(parent) {
   // not running on a system with unity
   QProcess* get = new QProcess(this);
   connect(get, SIGNAL(finished(int)), SLOT(GetFinished(int)));
-  connect(get, SIGNAL(error(QProcess::ProcessError)), SLOT(GetError()));
+  connect(get, SIGNAL(errorOccurred(QProcess::ProcessError)), SLOT(GetError()));
   get->start(kGSettingsFileName,
              QStringList() << "get" << kUnityPanel << kUnitySystrayWhitelist);
 }

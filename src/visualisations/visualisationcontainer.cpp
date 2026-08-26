@@ -17,14 +17,17 @@
 
 #include "visualisationcontainer.h"
 
-#include <QGLWidget>
+#include <QActionGroup>
 #include <QGraphicsProxyWidget>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
+#include <QOpenGLContext>
+#include <QOpenGLWidget>
 #include <QSettings>
 #include <QShortcut>
+#include <QSurfaceFormat>
 #include <QtDebug>
 
 #include "config.h"
@@ -79,7 +82,11 @@ void VisualisationContainer::Init() {
 
   // Set up the graphics view
   setScene(vis_);
-  setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+  QOpenGLWidget* gl_widget = new QOpenGLWidget();
+  QSurfaceFormat format;
+  format.setSamples(4);
+  gl_widget->setFormat(format);
+  setViewport(gl_widget);
   setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -155,7 +162,8 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
 void VisualisationContainer::showEvent(QShowEvent* e) {
   qLog(Debug) << "Showing visualization";
   if (!initialised_) {
-    if (!QGLFormat::hasOpenGL()) {
+    QOpenGLContext test_context;
+    if (!test_context.create()) {
       hide();
       QMessageBox::warning(this, tr("Clementine Visualization"),
                            tr("Your system is missing OpenGL support, "
@@ -234,7 +242,7 @@ void VisualisationContainer::ChangeOverlayOpacity(qreal value) {
     viewport()->unsetCursor();
 }
 
-void VisualisationContainer::enterEvent(QEvent* e) {
+void VisualisationContainer::enterEvent(QEnterEvent* e) {
   QGraphicsView::enterEvent(e);
   overlay_->SetVisible(true);
 }

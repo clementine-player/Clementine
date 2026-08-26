@@ -21,6 +21,7 @@
 #include <QFileInfo>
 #include <QFuture>
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <QtConcurrentRun>
 #include <QtDebug>
 
@@ -188,7 +189,7 @@ void PlaylistManager::Save(int id, const QString& filename,
     // triggered
     // from the left side bar and the playlist isn't loaded.
     QFuture<QList<Song>> future = QtConcurrent::run(
-        playlist_backend_, &PlaylistBackend::GetPlaylistSongs, id);
+        &PlaylistBackend::GetPlaylistSongs, playlist_backend_, id);
     NewClosure(future, this,
                SLOT(ItemsLoadedForSavePlaylist(QFuture<SongList>, QString,
                                                Playlist::Path)),
@@ -213,7 +214,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
       settings.value("last_save_filter", parser()->default_filter()).toString();
 
   QString suggested_filename = playlist_name;
-  suggested_filename.replace(QRegExp("\\W"), "");
+  suggested_filename.replace(QRegularExpression("\\W"), "");
 
   qLog(Debug) << "Using extension:" << extension;
 

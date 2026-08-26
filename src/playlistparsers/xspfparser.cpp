@@ -20,7 +20,6 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
-#include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
 
@@ -59,7 +58,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        QStringRef name = reader->name();
+        QStringView name = reader->name();
         if (name == "location") {
           location = reader->readElementText();
         } else if (name == "title") {

@@ -21,7 +21,7 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMenu>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QTimer>
 
@@ -48,7 +48,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
   QString available_fields = (Song::kFtsColumns + Song::kIntColumns +
                               Song::kFloatColumns + Song::kDateColumns)
                                  .join(", ")
-                                 .replace(QRegExp("\\bfts"), "");
+                                 .replace(QRegularExpression("\\bfts"), "");
   ui_->filter->setToolTip(ui_->filter->toolTip().arg(available_fields));
 
   connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));

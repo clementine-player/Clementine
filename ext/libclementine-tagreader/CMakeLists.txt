@@ -24,7 +24,7 @@ optional_source(HAVE_GOOGLE_DRIVE
     cloudstream.h
 )
 
-qt5_wrap_cpp(MOC ${HEADERS})
+qt6_wrap_cpp(MOC ${HEADERS})
 
 add_library(libclementine-tagreader STATIC
   ${MESSAGES}
@@ -37,5 +37,6 @@ protobuf_generate(TARGET libclementine-tagreader LANGUAGE cpp)
 target_link_libraries(libclementine-tagreader
   libclementine-common
   protobuf::libprotobuf
+  Qt6::Core5Compat
 )
 

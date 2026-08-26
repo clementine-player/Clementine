@@ -18,6 +18,7 @@
 #include "suggestionwidget.h"
 
 #include <QMouseEvent>
+#include <QRegularExpression>
 
 #include "ui/iconloader.h"
 #include "ui_suggestionwidget.h"
@@ -58,7 +59,7 @@ bool SuggestionWidget::eventFilter(QObject* object, QEvent* event) {
       QMouseEvent* e = static_cast<QMouseEvent*>(event);
       if (e->button() == Qt::LeftButton) {
         QString text = ui_->name->text();
-        text.replace(QRegExp("\\W"), " ");
+        text.replace(QRegularExpression("\\W"), " ");
 
         emit SuggestionClicked(text.simplified());
       }

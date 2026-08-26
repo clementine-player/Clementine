@@ -17,6 +17,7 @@
 
 #include "tracksliderslider.h"
 
+#include <QEnterEvent>
 #include <QMouseEvent>
 #include <QStyle>
 #include <QStyleOptionSlider>
@@ -47,8 +48,8 @@ void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
     int abs_buttons = style()->styleHint(QStyle::SH_Slider_AbsoluteSetButtons);
     if (abs_buttons & Qt::LeftButton)
       new_button = Qt::LeftButton;
-    else if (abs_buttons & Qt::MidButton)
-      new_button = Qt::MidButton;
+    else if (abs_buttons & Qt::MiddleButton)
+      new_button = Qt::MiddleButton;
     else if (abs_buttons & Qt::RightButton)
       new_button = Qt::RightButton;
   }
@@ -98,7 +99,7 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
 }
 
 void TrackSliderSlider::wheelEvent(QWheelEvent* e) {
-  if (e->delta() < 0) {
+  if (e->angleDelta().y() < 0) {
     emit SeekBackward();
   } else {
     emit SeekForward();
@@ -106,7 +107,7 @@ void TrackSliderSlider::wheelEvent(QWheelEvent* e) {
   e->accept();
 }
 
-void TrackSliderSlider::enterEvent(QEvent* e) {
+void TrackSliderSlider::enterEvent(QEnterEvent* e) {
   QSlider::enterEvent(e);
   if (isEnabled()) {
     popup_->show();

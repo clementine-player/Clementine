@@ -64,7 +64,7 @@ bool DeviceListPrivate::parse( const QVariant& data )
         DevicePtr ptr( new Device( var, this ) );
         m_devicesList.append( ptr );
         QVariant v;
-        v.setValue<DevicePtr>( ptr );
+        v.setValue<DevicePtr>( DevicePtr( ptr ) );
         devList.append( v );
     }
     m_devices = devList;

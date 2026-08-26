@@ -188,7 +188,7 @@ void OutgoingDataCreator::SendClementineInfo() {
   QString version =
       QString("%1 %2").arg(QCoreApplication::applicationName(),
                            QCoreApplication::applicationVersion());
-  info->set_version(version.toLatin1());
+  info->set_version(version.toLatin1().toStdString());
   info->set_allow_downloads(allow_downloads_);
   SendDataToClients(&msg);
 }

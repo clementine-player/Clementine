@@ -22,7 +22,6 @@
 #include <QList>
 #include <QObject>
 #include <QQueue>
-#include <QRegExp>
 #include <QSet>
 
 #include "core/network.h"

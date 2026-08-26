@@ -83,7 +83,7 @@ void QueuedItemDelegate::DrawBox(QPainter* painter, const QRect& line_rect,
   smaller.setPointSize(smaller.pointSize() - 1);
   smaller.setBold(true);
 
-  if (width == -1) width = QFontMetrics(font).width(text + "  ");
+  if (width == -1) width = QFontMetrics(font).horizontalAdvance(text + "  ");
 
   QRect rect(line_rect);
   rect.setLeft(rect.right() - width - kQueueBoxBorder);
@@ -288,7 +288,7 @@ QString DateItemDelegate::displayText(const QVariant& value,
 
   if (!ok || time == -1) return QString();
 
-  return QDateTime::fromTime_t(time).toString(
+  return QDateTime::fromSecsSinceEpoch(time).toString(
       QLocale::system().dateTimeFormat(QLocale::ShortFormat));
 }
 

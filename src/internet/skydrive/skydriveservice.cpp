@@ -182,10 +182,10 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
       song.set_url(url);
       song.set_ctime(
           QDateTime::fromString(item["createdDateTime"].toString(), Qt::ISODate)
-              .toTime_t());
+              .toSecsSinceEpoch());
       song.set_mtime(QDateTime::fromString(
                          item["lastModifiedDateTime"].toString(), Qt::ISODate)
-                         .toTime_t());
+                         .toSecsSinceEpoch());
       song.set_comment(item["description"].toString());
       song.set_filesize(item["size"].toInt());
       song.set_title(name);

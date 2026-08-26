@@ -1092,7 +1092,7 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
     if (item->IsLocalLibraryItem()) {
       int id = item->Metadata().id();
       if (id != -1) {
-        library_items_by_id_.insertMulti(id, item);
+        library_items_by_id_.insert(id, item);
       }
     }
 
@@ -1219,7 +1219,7 @@ void Playlist::UpdateItems(const SongList& songs) {
         PlaylistItemPtr new_item;
         if (song.is_library_song()) {
           new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
-          library_items_by_id_.insertMulti(song.id(), new_item);
+          library_items_by_id_.insert(song.id(), new_item);
         } else {
           new_item = PlaylistItemPtr(new SongPlaylistItem(song));
         }
@@ -1571,12 +1571,14 @@ void Playlist::Restore() {
 
   cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
-      QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
-             future);
+      QtConcurrent::run(&PlaylistBackend::GetPlaylistItems, backend_, id_);
+  NewClosure(
+      future, this,
+      SLOT(ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
+      future);
 }
 
-void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+void Playlist::ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
   if (cancel_restore_) return;
 
   PlaylistItemList items = future.result();
@@ -1631,7 +1633,7 @@ void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
 
   // should we gray out deleted songs asynchronously on startup?
   if (s.value("greyoutdeleted", false).toBool()) {
-    QtConcurrent::run(this, &Playlist::InvalidateDeletedSongs);
+    QtConcurrent::run(&Playlist::InvalidateDeletedSongs, this);
   }
 }
 

@@ -11,7 +11,7 @@ set(QXT-MOC-HEADERS
 )
 
 include_directories(${X11_INCLUDE_DIR})
-include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
+include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 
 if(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_win.cpp)
@@ -21,15 +21,14 @@ else(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_x11.cpp)
 endif(WIN32)
 
-QT5_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
+QT6_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
 
 ADD_LIBRARY(qxt STATIC
   ${QXT-SOURCES}
   ${QXT-SOURCES-MOC}
 )
 
-if(WIN32)
-  target_link_libraries(qxt Qt5::Core Qt5::Widgets)
-else(WIN32)
-  target_link_libraries(qxt Qt5::Core Qt5::Widgets Qt5::X11Extras)
-endif(WIN32)
+# Qt6 has no X11Extras module. qxtglobalshortcut_x11.cpp's QX11Info usage and
+# nativeEventFilter() long*->qintptr* signature change still need reworking
+# for Qt6 (tracked separately) - this only fixes the CMake side.
+target_link_libraries(qxt Qt6::Core Qt6::Widgets)

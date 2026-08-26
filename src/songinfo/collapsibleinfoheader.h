@@ -52,7 +52,7 @@ class CollapsibleInfoHeader : public QWidget {
   void ExpandedToggled(bool expanded);
 
  protected:
-  void enterEvent(QEvent*);
+  void enterEvent(QEnterEvent*);
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent* e);
   void mouseReleaseEvent(QMouseEvent*);

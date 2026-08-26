@@ -225,7 +225,7 @@ void JamendoService::DownloadDirectoryFinished() {
       app_->task_manager()->StartTask(tr("Parsing Jamendo catalogue"));
 
   QFuture<void> future =
-      QtConcurrent::run(this, &JamendoService::ParseDirectory, gzip);
+      QtConcurrent::run(&JamendoService::ParseDirectory, this, gzip);
   NewClosure(future, this, SLOT(ParseDirectoryFinished()));
 }
 
@@ -307,7 +307,7 @@ SongList JamendoService::ReadArtist(QXmlStreamReader* reader,
     reader->readNext();
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
       if (name == "name") {
         current_artist = reader->readElementText().trimmed();
       } else if (name == "album") {
@@ -369,7 +369,7 @@ Song JamendoService::ReadTrack(const QString& artist, const QString& album,
   while (!reader->atEnd()) {
     reader->readNext();
     if (reader->isStartElement()) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
       if (name == "name") {
         song.set_title(reader->readElementText().trimmed());
       } else if (name == "duration") {

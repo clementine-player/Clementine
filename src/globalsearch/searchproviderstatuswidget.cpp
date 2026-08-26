@@ -46,9 +46,10 @@ SearchProviderStatusWidget::SearchProviderStatusWidget(
     const QString disabled_text =
         tr("Disabled", "Refers to search provider's status.");
     const QString not_logged_in_text = tr("Not logged in");
-    const int disabled_width = fontMetrics().width("    ") +
-                               qMax(fontMetrics().width(disabled_text),
-                                    fontMetrics().width(not_logged_in_text));
+    const int disabled_width =
+        fontMetrics().horizontalAdvance("    ") +
+        qMax(fontMetrics().horizontalAdvance(disabled_text),
+             fontMetrics().horizontalAdvance(not_logged_in_text));
 
     ui_->disabled_reason->setMinimumWidth(disabled_width);
     ui_->disabled_reason->setText(logged_in ? disabled_text

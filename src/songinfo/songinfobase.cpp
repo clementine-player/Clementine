@@ -18,6 +18,7 @@
 #include "songinfobase.h"
 
 #include <QFile>
+#include <QMultiMap>
 #include <QScrollArea>
 #include <QSettings>
 #include <QSpacerItem>
@@ -168,11 +169,11 @@ void SongInfoBase::CollapseSections() {
   //     by the user before then hide all sections in that type and show only
   //     the ones that are explicitly shown.
 
-  QMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
+  QMultiMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
   QSet<CollapsibleInfoPane::Data::Type> has_user_preference_;
   for (CollapsibleInfoPane* pane : sections_) {
     const CollapsibleInfoPane::Data::Type type = pane->data().type_;
-    types_.insertMulti(type, pane);
+    types_.insert(type, pane);
 
     QVariant preference = s.value(pane->data().id_);
     if (preference.isValid()) {

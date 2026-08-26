@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QNetworkReply>
+#include <QRegularExpression>
 #include <QSet>
 #include <QUrlQuery>
 #include <QXmlStreamReader>
@@ -129,13 +130,15 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
   while (!reader.atEnd()) {
     QXmlStreamReader::TokenType type = reader.readNext();
     if (type == QXmlStreamReader::StartElement) {
-      QStringRef name = reader.name();
+      QStringView name = reader.name();
       if (name == "title") {
         album = reader.readElementText();
       } else if (name == "date") {
-        QRegExp regex(kDateRegex);
-        if (regex.indexIn(reader.readElementText()) == 0) {
-          year = regex.cap(0).toInt();
+        static const QRegularExpression regex(kDateRegex);
+        const QRegularExpressionMatch match =
+            regex.match(reader.readElementText());
+        if (match.hasMatch() && match.capturedStart() == 0) {
+          year = match.captured(0).toInt();
         }
       } else if (name == "artist-credit") {
         ParseArtist(&reader, &artist);
@@ -276,7 +279,7 @@ MusicBrainzClient::Result MusicBrainzClient::ParseTrackFromDisc(
     QXmlStreamReader::TokenType type = reader->readNext();
 
     if (type == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
       if (name == "position") {
         result.track_ = reader->readElementText().toInt();
       } else if (name == "length") {
@@ -303,7 +306,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(
     QXmlStreamReader::TokenType type = reader->readNext();
 
     if (type == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
 
       if (name == "title") {
         result.title_ = reader->readElementText();
@@ -364,15 +367,17 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
     QXmlStreamReader::TokenType type = reader->readNext();
 
     if (type == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
       if (name == "title") {
         ret.album_ = reader->readElementText();
       } else if (name == "status") {
         ret.SetStatusFromString(reader->readElementText());
       } else if (name == "date") {
-        QRegExp regex(kDateRegex);
-        if (regex.indexIn(reader->readElementText()) == 0) {
-          ret.year_ = regex.cap(0).toInt();
+        static const QRegularExpression regex(kDateRegex);
+        const QRegularExpressionMatch match =
+            regex.match(reader->readElementText());
+        if (match.hasMatch() && match.capturedStart() == 0) {
+          ret.year_ = match.captured(0).toInt();
         }
       } else if (name == "track-list") {
         ret.track_ =
@@ -393,7 +398,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
     const ResultList& results, UniqueResultsSortOption opt) {
   ResultList ret;
   if (opt == SortResults) {
-    ret = QSet<Result>::fromList(results).values();
+    ret = QSet<Result>(results.begin(), results.end()).values();
     std::sort(ret.begin(), ret.end());
   } else {  // KeepOriginalOrder
     // Qt doesn't provide a ordered set (QSet "stores values in an unspecified

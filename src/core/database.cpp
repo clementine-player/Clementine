@@ -31,6 +31,7 @@
 #include <QDir>
 #include <QLibrary>
 #include <QLibraryInfo>
+#include <QRegularExpression>
 #include <QSqlDriver>
 #include <QSqlQuery>
 #include <QThread>
@@ -211,7 +212,6 @@ Database::Database(Application* app, QObject* parent,
                    const QString& database_name)
     : QObject(parent),
       app_(app),
-      mutex_(QMutex::Recursive),
       injected_database_name_(database_name),
       query_hash_(0),
       startup_schema_version_(-1) {
@@ -515,7 +515,7 @@ void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
 void Database::ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
                                   int schema_version, bool in_transaction) {
   // Run each command
-  const QStringList commands(schema.split(QRegExp("; *\n\n")));
+  const QStringList commands(schema.split(QRegularExpression("; *\n\n")));
 
   // We don't want this list to reflect possible DB schema changes
   // so we initialize it before executing any statements.

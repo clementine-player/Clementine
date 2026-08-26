@@ -73,9 +73,9 @@ QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
   // certainly be self-signed.
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
-  if (usesslv3) {
-    sslconfig.setProtocol(QSsl::SslV3);
-  }
+  // QSsl::SslV3 was removed in Qt6 (SSLv3 is broken and unsupported by
+  // any modern TLS stack); usesslv3 is kept as a settable option but has
+  // no effect any more.
   request.setSslConfiguration(sslconfig);
   QNetworkReply* reply = network.get(request);
   return reply;

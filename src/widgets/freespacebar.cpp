@@ -68,7 +68,7 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
   // Create the reflected pixmap
   QImage reflection(reflection_rect.size(),
                     QImage::Format_ARGB32_Premultiplied);
-  reflection.fill(palette().color(QPalette::Background).rgba());
+  reflection.fill(palette().color(QPalette::Window).rgba());
   QPainter p(&reflection);
 
   // Set up the transformation
@@ -100,7 +100,7 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
 
 void FreeSpaceBar::DrawBar(QPainter* p, const QRect& r) {
   p->setRenderHint(QPainter::Antialiasing, true);
-  p->setRenderHint(QPainter::HighQualityAntialiasing, true);
+  p->setRenderHint(QPainter::Antialiasing, true);
 
   QRect bar_rect(r);
   bar_rect.setWidth(float(bar_rect.width()) * (float(total_ - free_) / total_));
@@ -175,7 +175,7 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
   int text_width = 0;
   for (const Label& label : labels) {
     text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
-                  small_metrics.width(label.text);
+                  small_metrics.horizontalAdvance(label.text);
   }
 
   // Draw the text
@@ -192,12 +192,12 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
     p->drawRect(box);
 
     QRect text(x + kLabelBoxSize + kLabelBoxPadding, r.top(),
-               small_metrics.width(label.text), r.height());
+               small_metrics.horizontalAdvance(label.text), r.height());
     p->setPen(light ? label.color.darker() : label.color);
     p->drawText(text, Qt::AlignCenter, label.text);
 
     x += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
-         small_metrics.width(label.text);
+         small_metrics.horizontalAdvance(label.text);
   }
 }
 

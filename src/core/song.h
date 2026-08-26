@@ -37,6 +37,8 @@
 #include "config.h"
 #include "engines/engine_fwd.h"
 
+class QTextCodec;
+
 namespace cpb {
 namespace tagreader {
 class SongMetadata;

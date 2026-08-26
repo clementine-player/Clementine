@@ -78,7 +78,7 @@ void BoomAnalyzer::resizeEvent(QResizeEvent* e) {
 
   barPixmap_ = QPixmap(kColumnWidth - 2, HEIGHT);
   canvas_ = QPixmap(size());
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
 
   QPainter p(&barPixmap_);
   for (uint y = 0; y < HEIGHT; ++y) {
@@ -110,7 +110,7 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   const uint MAX_HEIGHT = height() - 1;
 
   QPainter canvas_painter(&canvas_);
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
 
   Analyzer::interpolate(scope, scope_);
 

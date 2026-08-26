@@ -17,6 +17,7 @@
 
 #include "mainwindow.h"
 
+#include <QActionGroup>
 #include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -918,7 +919,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Statusbar widgets
   ui_->playlist_summary->setMinimumWidth(
-      QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
+      QFontMetrics(font())
+          .horizontalAdvance("WW selected of WW tracks - [ WW:WW ]"));
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)),
           SLOT(TaskCountChanged(int)));

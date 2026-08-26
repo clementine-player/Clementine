@@ -55,7 +55,7 @@ class SearchTermWidget : public QWidget {
 
  protected:
   void showEvent(QShowEvent*);
-  void enterEvent(QEvent*);
+  void enterEvent(QEnterEvent*);
   void leaveEvent(QEvent*);
   void resizeEvent(QResizeEvent*);
 

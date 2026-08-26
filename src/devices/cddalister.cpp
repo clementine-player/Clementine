@@ -17,6 +17,7 @@
 
 #include <QFileInfo>
 #include <QMutex>
+#include <QRegularExpression>
 #include <QThread>
 #include <QWaitCondition>
 
@@ -108,7 +109,7 @@ void CddaLister::Init() {
     // Every track is detected as a separate device on Darwin. The raw disk
     // looks
     // like /dev/rdisk1
-    if (!device.contains(QRegExp("^/dev/rdisk[0-9]$"))) {
+    if (!device.contains(QRegularExpression("^/dev/rdisk[0-9]$"))) {
       continue;
     }
 #endif

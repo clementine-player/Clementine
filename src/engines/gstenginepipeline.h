@@ -22,6 +22,7 @@
 #include <QFuture>
 #include <QMutex>
 #include <QThreadPool>
+#include <QEasingCurve>
 #include <QTimeLine>
 #include <QUrl>
 #include <memory>
@@ -71,7 +72,7 @@ class GstEnginePipeline : public GstPipelineBase {
   void SetStereoBalance(float value);
   void StartFader(qint64 duration_nanosec,
                   QTimeLine::Direction direction = QTimeLine::Forward,
-                  QTimeLine::CurveShape shape = QTimeLine::LinearCurve,
+                  QEasingCurve::Type shape = QEasingCurve::Linear,
                   bool use_fudge_timer = true);
 
   // If this is set then it will be loaded automatically when playback finishes

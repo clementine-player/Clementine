@@ -22,6 +22,7 @@
 #define COVERS_ALBUMCOVERFETCHERSEARCH_H_
 
 #include <QMap>
+#include <QMultiMap>
 #include <QObject>
 
 #include "albumcoverfetcher.h"
@@ -90,7 +91,7 @@ class AlbumCoverFetcherSearch : public QObject {
 
   // QMap is sorted by key (score).  Values are (provider_name, image)
   typedef QPair<QString, QImage> CandidateImage;
-  QMap<float, CandidateImage> candidate_images_;
+  QMultiMap<float, CandidateImage> candidate_images_;
 
   QNetworkAccessManager* network_;
 

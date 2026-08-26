@@ -77,10 +77,10 @@ void KittenLoader::KittensRetrieved(QNetworkReply* reply) {
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
       if (reader.name() == "photo") {
         QXmlStreamAttributes attrs = reader.attributes();
-        QStringRef farm_id = attrs.value("farm");
-        QStringRef photo_id = attrs.value("id");
-        QStringRef secret = attrs.value("secret");
-        QStringRef server = attrs.value("server");
+        QStringView farm_id = attrs.value("farm");
+        QStringView photo_id = attrs.value("id");
+        QStringView secret = attrs.value("secret");
+        QStringView server = attrs.value("server");
         QString photo_url = QString(kFlickrPhotoUrl)
                                 .arg(farm_id.toString())
                                 .arg(server.toString())

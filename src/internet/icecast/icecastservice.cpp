@@ -25,7 +25,7 @@
 #include <QMenu>
 #include <QMultiHash>
 #include <QNetworkReply>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QtConcurrentRun>
 #include <algorithm>
 
@@ -131,10 +131,11 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
   }
 
   QFuture<IcecastBackend::StationList> future =
-      QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
+      QtConcurrent::run(&IcecastService::ParseDirectory, this, reply);
   NewClosure(
       future, this,
-      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>, int)),
+      SLOT(ParseDirectoryFinished(QFuture<QList<IcecastBackend::Station>>,
+                                  int)),
       future, task_id);
 }
 
@@ -176,11 +177,11 @@ QStringList FilterGenres(const QStringList& genres) {
   for (const QString& genre : genres) {
     if (genre.length() < 2) continue;
     if (genre.contains("ÃÂ")) continue;  // Broken unicode.
-    if (genre.contains(QRegExp("^#x[0-9a-f][0-9a-f]")))
+    if (genre.contains(QRegularExpression("^#x[0-9a-f][0-9a-f]")))
       continue;  // Broken XML entities.
 
     // Convert 80 -> 80s.
-    if (genre.contains(QRegExp("^[0-9]0$"))) {
+    if (genre.contains(QRegularExpression("^[0-9]0$"))) {
       ret << genre + 's';
     } else {
       ret << genre;
@@ -195,7 +196,7 @@ QStringList FilterGenres(const QStringList& genres) {
 }  // namespace
 
 void IcecastService::ParseDirectoryFinished(
-    QFuture<IcecastBackend::StationList> future, int task_id) {
+    QFuture<QList<IcecastBackend::Station>> future, int task_id) {
   IcecastBackend::StationList all_stations = future.result();
   sort(all_stations.begin(), all_stations.end(),
        StationSorter<IcecastBackend::Station>());
@@ -215,7 +216,8 @@ void IcecastService::ParseDirectoryFinished(
     genres.insert(s.genre, &s);
   }
 
-  QSet<QString> genre_set = genres.keys().toSet();
+  const QList<QString> genre_keys = genres.keys();
+  QSet<QString> genre_set(genre_keys.begin(), genre_keys.end());
 
   // Merge genres with only 1 or 2 stations into "Other".
   for (const QString& genre : genre_set) {
@@ -255,7 +257,7 @@ IcecastBackend::Station IcecastService::ReadStation(
     if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
+      QStringView name = reader->name();
       QString value =
           reader->readElementText(QXmlStreamReader::SkipChildElements);
 
@@ -267,7 +269,7 @@ IcecastBackend::Station IcecastService::ReadStation(
       if (name == "samplerate") station.samplerate = value.toInt();
       if (name == "genre")
         station.genre =
-            FilterGenres(value.split(' ', QString::SkipEmptyParts))[0];
+            FilterGenres(value.split(' ', Qt::SkipEmptyParts))[0];
     }
   }
 

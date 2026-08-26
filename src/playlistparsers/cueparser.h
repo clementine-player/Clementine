@@ -18,7 +18,6 @@
 #ifndef CUEPARSER_H
 #define CUEPARSER_H
 
-#include <QRegExp>
 
 #include "parserbase.h"
 

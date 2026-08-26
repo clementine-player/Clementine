@@ -22,6 +22,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QLocale>
+#include <QRegularExpression>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -182,13 +183,15 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
                                            CountdownLatch* latch) {
   latch->Wait();
   qLog(Debug) << wikipedia_url;
-  QRegExp regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
-  if (regex.indexIn(wikipedia_url) == -1) {
+  static const QRegularExpression regex(
+      "([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
+  const QRegularExpressionMatch match = regex.match(wikipedia_url);
+  if (!match.hasMatch()) {
     emit Finished(id);
     return;
   }
-  QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
-  QString language = regex.cap(1);
+  QString wiki_title = QUrl::fromPercentEncoding(match.captured(2).toUtf8());
+  QString language = match.captured(1);
   QUrl url(QString(kWikipediaImageListUrl).arg(language));
   QUrlQuery url_query(url);
   url_query.addQueryItem("titles", wiki_title);
@@ -237,13 +240,15 @@ void ArtistBiography::FetchWikipediaArticle(int id,
                                             const QString& wikipedia_url,
                                             CountdownLatch* latch) {
   latch->Wait();
-  QRegExp regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
-  if (regex.indexIn(wikipedia_url) == -1) {
+  static const QRegularExpression regex(
+      "([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
+  const QRegularExpressionMatch match = regex.match(wikipedia_url);
+  if (!match.hasMatch()) {
     emit Finished(id);
     return;
   }
-  QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
-  QString language = regex.cap(1);
+  QString wiki_title = QUrl::fromPercentEncoding(match.captured(2).toUtf8());
+  QString language = match.captured(1);
 
   QUrl url(QString(kWikipediaExtractUrl).arg(language));
   QUrlQuery url_query(url);

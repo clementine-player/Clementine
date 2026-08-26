@@ -18,6 +18,7 @@
 #include "searchprovider.h"
 
 #include <QPainter>
+#include <QRegularExpression>
 #include <QUrl>
 #include <QtConcurrentRun>
 
@@ -48,7 +49,7 @@ void SearchProvider::SetHint(Hint hint, bool set) {
 }
 
 QStringList SearchProvider::TokenizeQuery(const QString& query) {
-  QStringList tokens(query.split(QRegExp("\\s+")));
+  QStringList tokens(query.split(QRegularExpression("\\s+")));
 
   for (QStringList::iterator it = tokens.begin(); it != tokens.end(); ++it) {
     (*it).remove('(');
@@ -80,14 +81,15 @@ BlockingSearchProvider::BlockingSearchProvider(Application* app,
 
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
   QFuture<ResultList> future =
-      QtConcurrent::run(this, &BlockingSearchProvider::Search, id, query);
+      QtConcurrent::run(&BlockingSearchProvider::Search, this, id, query);
   NewClosure(future, this,
-             SLOT(BlockingSearchFinished(QFuture<ResultList>, int)), future,
-             id);
+             SLOT(BlockingSearchFinished(QFuture<QList<SearchProvider::Result>>,
+                                         int)),
+             future, id);
 }
 
-void BlockingSearchProvider::BlockingSearchFinished(QFuture<ResultList> future,
-                                                    const int id) {
+void BlockingSearchProvider::BlockingSearchFinished(
+    QFuture<QList<SearchProvider::Result>> future, const int id) {
   emit ResultsAvailable(id, future.result());
   emit SearchFinished(id);
 }

@@ -196,7 +196,7 @@ bool KGlobalAccelShortcutBackend::RegisterAction(const QString& name,
   }
 
   QStringList action_id = GetId(name, action);
-  name_to_action_.insertMulti(IdActionUniqueName(action_id), action);
+  name_to_action_.insert(IdActionUniqueName(action_id), action);
   iface_->doRegister(action_id);
 
   return true;

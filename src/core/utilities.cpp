@@ -36,6 +36,7 @@
 #include <QIODevice>
 #include <QMetaEnum>
 #include <QMouseEvent>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTcpServer>
 #include <QTemporaryFile>
@@ -140,7 +141,7 @@ QString WordyTimeNanosec(qint64 nanoseconds) {
 
 QString Ago(int seconds_since_epoch, const QLocale& locale) {
   const QDateTime now = QDateTime::currentDateTime();
-  const QDateTime then = QDateTime::fromTime_t(seconds_since_epoch);
+  const QDateTime then = QDateTime::fromSecsSinceEpoch(seconds_since_epoch);
   const int days_ago = then.date().daysTo(now.date());
   const QString time =
       then.time().toString(locale.timeFormat(QLocale::ShortFormat));
@@ -467,18 +468,24 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
   }
   if (Md5_Algo == method) {
     return QCryptographicHash::hash(
-        outer_padding + QCryptographicHash::hash(inner_padding + data,
-                                                 QCryptographicHash::Md5),
+        QByteArray(outer_padding +
+                   QCryptographicHash::hash(
+                       QByteArray(inner_padding + data),
+                       QCryptographicHash::Md5)),
         QCryptographicHash::Md5);
   } else if (Sha1_Algo == method) {
     return QCryptographicHash::hash(
-        outer_padding + QCryptographicHash::hash(inner_padding + data,
-                                                 QCryptographicHash::Sha1),
+        QByteArray(outer_padding +
+                   QCryptographicHash::hash(
+                       QByteArray(inner_padding + data),
+                       QCryptographicHash::Sha1)),
         QCryptographicHash::Sha1);
   } else {  // Sha256_Algo, currently default
     return QCryptographicHash::hash(
-        outer_padding + QCryptographicHash::hash(inner_padding + data,
-                                                 QCryptographicHash::Sha256),
+        QByteArray(outer_padding +
+                   QCryptographicHash::hash(
+                       QByteArray(inner_padding + data),
+                       QCryptographicHash::Sha256)),
         QCryptographicHash::Sha256);
   }
 }
@@ -583,9 +590,10 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 }
 
 QDateTime ParseRFC822DateTime(const QString& text) {
-  QRegExp regexp(
+  static const QRegularExpression regexp(
       "(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (regexp.indexIn(text) == -1) {
+  const QRegularExpressionMatch match = regexp.match(text);
+  if (!match.hasMatch()) {
     return QDateTime();
   }
 
@@ -617,13 +625,15 @@ QDateTime ParseRFC822DateTime(const QString& text) {
   monthmap["November"] = 11;
   monthmap["December"] = 12;
 
-  const QDate date(regexp.cap(static_cast<int>(MatchNames::YEARS)).toInt(),
-                   monthmap[regexp.cap(static_cast<int>(MatchNames::MONTHS))],
-                   regexp.cap(static_cast<int>(MatchNames::DAYS)).toInt());
+  const QDate date(
+      match.captured(static_cast<int>(MatchNames::YEARS)).toInt(),
+      monthmap[match.captured(static_cast<int>(MatchNames::MONTHS))],
+      match.captured(static_cast<int>(MatchNames::DAYS)).toInt());
 
-  const QTime time(regexp.cap(static_cast<int>(MatchNames::HOURS)).toInt(),
-                   regexp.cap(static_cast<int>(MatchNames::MINUTES)).toInt(),
-                   regexp.cap(static_cast<int>(MatchNames::SECONDS)).toInt());
+  const QTime time(
+      match.captured(static_cast<int>(MatchNames::HOURS)).toInt(),
+      match.captured(static_cast<int>(MatchNames::MINUTES)).toInt(),
+      match.captured(static_cast<int>(MatchNames::SECONDS)).toInt());
 
   return QDateTime(date, time);
 }
@@ -773,7 +783,7 @@ QByteArray GetUriForGstreamer(const QUrl& url) {
 
 QString ScrubUrlQueries(const QString& str) {
   // If the URL isn't followed by whitespace, this will eat extra characters.
-  QRegExp rx("((?:http|https)://\\S*\\?)\\S*");
+  QRegularExpression rx("((?:http|https)://\\S*\\?)\\S*");
   // QString::replace is non const, so operate on a copy.
   return QString(str).replace(rx, "\\1 (query removed)");
 }

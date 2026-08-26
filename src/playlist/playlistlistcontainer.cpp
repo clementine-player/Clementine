@@ -22,6 +22,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QPainter>
+#include <QRegularExpression>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <iostream>
@@ -60,9 +61,9 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
 
   QList<QModelIndex> expandList;
 
-  void setFilterRegExp(const QRegExp& regExp) {
+  void setFilterRegExp(const QRegularExpression& regExp) {
     expandList.clear();
-    QSortFilterProxyModel::setFilterRegExp(regExp);
+    QSortFilterProxyModel::setFilterRegularExpression(regExp);
   }
 
   void refreshExpanded(QTreeView* tree) {
@@ -368,12 +369,12 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 }
 
 void PlaylistListContainer::SearchTextEdited(const QString& text) {
-  QRegExp regexp(text);
-  regexp.setCaseSensitivity(Qt::CaseInsensitive);
+  QRegularExpression regexp(text,
+                            QRegularExpression::CaseInsensitiveOption);
 
   proxy_->setFilterRegExp(regexp);
 
-  if (regexp.isEmpty()) {
+  if (text.isEmpty()) {
     ui_->tree->collapseAll();
   } else {
     proxy_->refreshExpanded(ui_->tree);

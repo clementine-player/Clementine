@@ -56,7 +56,7 @@ inline void AddMetadata(const QString& key, const QDateTime& metadata,
 }
 
 inline QString AsMPRISDateTimeType(uint time) {
-  return time != -1 ? QDateTime::fromTime_t(time).toString(Qt::ISODate) : "";
+  return time != -1 ? QDateTime::fromSecsSinceEpoch(time).toString(Qt::ISODate) : "";
 }
 
 }  // namespace mpris

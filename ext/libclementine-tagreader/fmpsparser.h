@@ -18,7 +18,8 @@
 #ifndef FMPSPARSER_H
 #define FMPSPARSER_H
 
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QStringRef>
 #include <QVariantList>
 
 class FMPSParser {
@@ -49,9 +50,9 @@ class FMPSParser {
   int ParseListListRef(const QStringRef& data, Result* ret) const;
 
  private:
-  QRegExp float_re_;
-  QRegExp string_re_;
-  QRegExp escape_re_;
+  QRegularExpression float_re_;
+  QRegularExpression string_re_;
+  QRegularExpression escape_re_;
   Result result_;
 };
 

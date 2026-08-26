@@ -20,9 +20,9 @@
 #include <QBuffer>
 #include <QDateTime>
 #include <QFileInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QStringBuilder>
-#include <QTextCodec>
+#include <QStringConverter>
 #include <QTextStream>
 #include <QtDebug>
 
@@ -54,8 +54,9 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
   SongList ret;
 
   QTextStream text_stream(device);
-  text_stream.setCodec(QTextCodec::codecForUtfText(
-      device->peek(1024), QTextCodec::codecForName("UTF-8")));
+  text_stream.setEncoding(
+      QStringConverter::encodingForData(device->peek(1024))
+          .value_or(QStringConverter::Utf8));
 
   QString dir_path = dir.absolutePath();
   // read the first line already
@@ -232,7 +233,8 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
     // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
     if (cue_mtime.isValid()) {
-      song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
+      song.set_mtime(
+          qMax(static_cast<uint>(cue_mtime.toSecsSinceEpoch()), song.mtime()));
     }
     song.set_cue_path(playlist_path);
 
@@ -271,13 +273,15 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 // line into logical parts and getting rid of all the unnecessary whitespaces
 // and quoting.
 QStringList CueParser::SplitCueLine(const QString& line) const {
-  QRegExp line_regexp(kFileLineRegExp);
-  if (!line_regexp.exactMatch(line.trimmed())) {
+  static const QRegularExpression line_regexp(
+      QRegularExpression::anchoredPattern(kFileLineRegExp));
+  const QRegularExpressionMatch match = line_regexp.match(line.trimmed());
+  if (!match.hasMatch()) {
     return QStringList();
   }
 
   // let's remove the empty entries while we're at it
-  return line_regexp.capturedTexts().filter(QRegExp(".+")).mid(1, -1);
+  return match.capturedTexts().filter(QRegularExpression(".+")).mid(1, -1);
 }
 
 // Updates the song with data from the .cue entry. This one mustn't be used for
@@ -335,13 +339,15 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
 }
 
 qint64 CueParser::IndexToMarker(const QString& index) const {
-  QRegExp index_regexp(kIndexRegExp);
-  if (!index_regexp.exactMatch(index)) {
+  static const QRegularExpression index_regexp(
+      QRegularExpression::anchoredPattern(kIndexRegExp));
+  const QRegularExpressionMatch match = index_regexp.match(index);
+  if (!match.hasMatch()) {
     qLog(Warning) << "Could not parse index" << index;
     return -1;
   }
 
-  QStringList splitted = index_regexp.capturedTexts().mid(1, -1);
+  QStringList splitted = match.capturedTexts().mid(1, -1);
   qlonglong frames = splitted.at(0).toLongLong() * 60 * 75 +
                      splitted.at(1).toLongLong() * 75 +
                      splitted.at(2).toLongLong();

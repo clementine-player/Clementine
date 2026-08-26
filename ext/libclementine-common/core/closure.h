@@ -25,6 +25,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMetaMethod>
+#include <QMetaType>
 #include <QObject>
 #include <QSharedPointer>
 #include <QTimer>
@@ -77,7 +78,20 @@ void Unpack(QList<QGenericArgument>*);
 
 template <typename Arg>
 void Unpack(QList<QGenericArgument>* list, const Arg& arg) {
-  list->append(Q_ARG(Arg, arg));
+  // Not Q_ARG: in Qt6 that macro feeds the newer typed invokeMethod overload
+  // and returns QMetaMethodArgument, not QGenericArgument. QArgument<T> is
+  // what Q_ARG used to expand to and is what the legacy positional
+  // QMetaObject::invokeMethod(..., QGenericArgument, ...) overload below
+  // still needs.
+  //
+  // Also not QT_STRINGIFY(Arg): that stringifies the literal token "Arg"
+  // (this function's own template parameter name), not whatever type Arg is
+  // instantiated with - macros expand before templates are instantiated.
+  // Qt5's QMetaMethod::invoke() tolerated the resulting bogus "Arg" type
+  // name for this direct (non-queued) invocation path, but Qt6 validates it
+  // and rejects the call ("cannot convert formal parameter"). Ask QMetaType
+  // for the real name instead.
+  list->append(QArgument<Arg>(QMetaType::fromType<Arg>().name(), arg));
 }
 
 template <typename Head, typename... Tail>

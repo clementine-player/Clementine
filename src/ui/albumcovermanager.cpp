@@ -234,8 +234,9 @@ void AlbumCoverManager::closeEvent(QCloseEvent* e) {
 }
 
 void AlbumCoverManager::CancelRequests() {
+  const QList<quint64> keys = cover_loading_tasks_.keys();
   app_->album_cover_loader()->CancelTasks(
-      QSet<quint64>::fromList(cover_loading_tasks_.keys()));
+      QSet<quint64>(keys.begin(), keys.end()));
   cover_loading_tasks_.clear();
 
   cover_exporter_->Cancel();

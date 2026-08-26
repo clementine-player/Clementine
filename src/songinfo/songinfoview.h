@@ -49,9 +49,14 @@ class SongInfoView : public SongInfoBase {
  private:
   SongInfoProvider* ProviderByName(const QString& name) const;
 
-  typedef QList<SongInfoProvider*> ProviderList;
  private slots:
-  void UltimateLyricsParsed(QFuture<ProviderList> future);
+  // Written as the fully expanded type rather than the ProviderList typedef:
+  // QMetaMethod::invoke() (used by NewClosure(), see core/closure.h) needs
+  // this signature's text to match QMetaType::fromType<>().name()'s
+  // canonical (alias-resolved) form of the argument's actual type, or the
+  // invoke silently fails - this wasn't an issue under Qt5, which didn't
+  // validate the name.
+  void UltimateLyricsParsed(QFuture<QList<SongInfoProvider*>> future);
 
  private:
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;

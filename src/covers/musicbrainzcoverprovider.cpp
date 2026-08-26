@@ -67,7 +67,7 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
   while (!reader.atEnd()) {
     QXmlStreamReader::TokenType type = reader.readNext();
     if (type == QXmlStreamReader::StartElement && reader.name() == "release") {
-      QStringRef release_id = reader.attributes().value("id");
+      QStringView release_id = reader.attributes().value("id");
       if (!release_id.isEmpty()) {
         releases.append(release_id.toString());
       }

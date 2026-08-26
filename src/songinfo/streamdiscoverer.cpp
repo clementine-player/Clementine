@@ -14,7 +14,7 @@ StreamDiscoverer::StreamDiscoverer() : QObject(nullptr) {
   // Setting up a discoverer:
   discoverer_ = gst_discoverer_new(kDiscoveryTimeoutS * GST_SECOND, NULL);
   if (discoverer_ == NULL) {
-    qLog(Error) << "Error creating discoverer" << endl;
+    qLog(Error) << "Error creating discoverer";
     return;
   }
 
@@ -36,7 +36,7 @@ void StreamDiscoverer::Discover(const QString& url) {
   qLog(Debug) << "Discover" << url;
   if (!gst_discoverer_discover_uri_async(discoverer_,
                                          url.toStdString().c_str())) {
-    qLog(Error) << "Failed to start discovering" << url << endl;
+    qLog(Error) << "Failed to start discovering" << url;
     return;
   }
   WaitForSignal(this, SIGNAL(DiscoverFinished()));
@@ -52,7 +52,7 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
   GstDiscovererResult result = gst_discoverer_info_get_result(info);
   if (result != GST_DISCOVERER_OK) {
     QString error_message = GSTdiscovererErrorMessage(result);
-    qLog(Error) << "Discovery failed:" << error_message << endl;
+    qLog(Error) << "Discovery failed:" << error_message;
     emit instance->Error(
         tr("Error discovering %1: %2").arg(discovered_url).arg(error_message));
     return;
@@ -63,7 +63,7 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
   GList* audio_streams = gst_discoverer_info_get_audio_streams(info);
 
   if (audio_streams != nullptr) {
-    qLog(Debug) << "Discovery successful" << endl;
+    qLog(Debug) << "Discovery successful";
     // We found a valid audio stream, extracting and saving its info:
     GstDiscovererStreamInfo* stream_audio_info =
         (GstDiscovererStreamInfo*)g_list_first(audio_streams)->data;

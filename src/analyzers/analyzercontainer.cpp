@@ -132,7 +132,7 @@ void AnalyzerContainer::mouseDoubleClickEvent(QMouseEvent*) {
 }
 
 void AnalyzerContainer::wheelEvent(QWheelEvent* e) {
-  emit WheelEvent(e->delta());
+  emit WheelEvent(e->angleDelta().y());
 }
 
 void AnalyzerContainer::SetEngine(EngineBase* engine) {

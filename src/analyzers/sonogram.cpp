@@ -45,7 +45,7 @@ void Sonogram::resizeEvent(QResizeEvent* e) {
 #endif
 
   canvas_ = QPixmap(size());
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
   updateBandSize(scope_size_);
 }
 
@@ -76,7 +76,7 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
     c = getPsychedelicColor(s, 20, 100);
     for (int y = height() - 1; y;) {
       if (it >= end || *it < .005) {
-        c = palette().color(QPalette::Background);
+        c = palette().color(QPalette::Window);
       } else if (*it < .05) {
         c.setHsv(c.hue(), c.saturation(), 255 - static_cast<int>(*it * 4000.0));
       } else if (*it < 1.0) {
@@ -93,7 +93,7 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
   } else {
     for (int y = height() - 1; y;) {
       if (it >= end || *it < .005)
-        c = palette().color(QPalette::Background);
+        c = palette().color(QPalette::Window);
       else if (*it < .05)
         c.setHsv(95, 255, 255 - static_cast<int>(*it * 4000.0));
       else if (*it < 1.0)

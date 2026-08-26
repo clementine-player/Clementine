@@ -18,6 +18,7 @@
 #include "behavioursettingspage.h"
 
 #include <QDir>
+#include <QRegularExpression>
 #include <QSystemTrayIcon>
 #include <algorithm>
 
@@ -66,12 +67,14 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   // compiled in translations.
   QDir dir(":/translations/");
   QStringList codes(dir.entryList(QStringList() << "*.qm"));
-  QRegExp lang_re("^clementine_(.*).qm$");
+  static const QRegularExpression lang_re(
+      QRegularExpression::anchoredPattern("^clementine_(.*).qm$"));
   for (const QString& filename : codes) {
     // The regex captures the "ru" from "clementine_ru.qm"
-    if (!lang_re.exactMatch(filename)) continue;
+    const QRegularExpressionMatch match = lang_re.match(filename);
+    if (!match.hasMatch()) continue;
 
-    QString code = lang_re.cap(1);
+    QString code = match.captured(1);
     QString lookup_code = QString(code)
                               .replace("@latin", "_Latn")
                               .replace("_CN", "_Hans_CN")

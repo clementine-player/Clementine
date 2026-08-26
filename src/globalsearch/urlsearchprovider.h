@@ -18,7 +18,7 @@
 #ifndef URLSEARCHPROVIDER_H
 #define URLSEARCHPROVIDER_H
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "searchprovider.h"
 
@@ -33,7 +33,7 @@ class UrlSearchProvider : public SearchProvider {
 
  private:
   static const char* kUrlRegex;
-  QRegExp url_regex_;
+  QRegularExpression url_regex_;
 
   QImage image_;
 };

@@ -58,7 +58,6 @@
 QT_BEGIN_NAMESPACE
 
 class QVariant;
-template <typename T> class QVector;
 
 class ClementineSqlCachedResultPrivate;
 

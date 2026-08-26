@@ -69,7 +69,7 @@ set(TESTUTILS-MOC-HEADERS
   testobjectdecorators.h
 )
 
-qt5_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
+qt6_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
 add_library(test_utils STATIC EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils ${GMOCK_LIBRARIES} ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
@@ -83,7 +83,7 @@ add_custom_target(build_tests
 )
 add_dependencies(clementine_test build_tests)
 
-qt5_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
+qt6_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
 
 add_library(test_gui_main STATIC EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_gui_main clementine_lib)
@@ -99,7 +99,7 @@ macro(add_test_file test_source gui_required)
       EXCLUDE_FROM_ALL
       ${test_source}
     )
-    target_link_libraries(${TEST_NAME} ${GMOCK_LIBRARIES} clementine_lib test_utils Qt5::Test)
+    target_link_libraries(${TEST_NAME} ${GMOCK_LIBRARIES} clementine_lib test_utils Qt6::Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
       target_link_libraries(${TEST_NAME} test_gui_main)

@@ -20,6 +20,7 @@
 
 #include <QSlider>
 
+class QEnterEvent;
 class TrackSliderPopup;
 
 // It's the slider inside the TrackSliderSlider
@@ -40,7 +41,7 @@ class TrackSliderSlider : public QSlider {
   void mouseReleaseEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
   void wheelEvent(QWheelEvent* e);
-  void enterEvent(QEvent*);
+  void enterEvent(QEnterEvent*);
   void leaveEvent(QEvent*);
   void keyPressEvent(QKeyEvent* event);
 

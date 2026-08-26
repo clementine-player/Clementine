@@ -28,6 +28,7 @@
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTextStream>
 #include <QtMessageHandler>
@@ -297,18 +298,19 @@ QString DarwinDemangle(const QString& symbol) {
   QStringList split = symbol.split(' ', Qt::SkipEmptyParts);
 #else
   // This split method is deprecated in Qt 5.14
-  QStringList split = symbol.split(' ', QString::SkipEmptyParts);
+  QStringList split = symbol.split(' ', Qt::SkipEmptyParts);
 #endif
   QString mangled_function = split[3];
   return CXXDemangle(mangled_function);
 }
 
 QString LinuxDemangle(const QString& symbol) {
-  QRegExp regex("\\(([^+]+)");
-  if (!symbol.contains(regex)) {
+  static const QRegularExpression regex("\\(([^+]+)");
+  QRegularExpressionMatch match = regex.match(symbol);
+  if (!match.hasMatch()) {
     return symbol;
   }
-  QString mangled_function = regex.cap(1);
+  QString mangled_function = match.captured(1);
   return CXXDemangle(mangled_function);
 }
 

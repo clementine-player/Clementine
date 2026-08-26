@@ -17,7 +17,7 @@
 
 #include "ultimatelyricslyric.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 UltimateLyricsLyric::UltimateLyricsLyric(QObject* parent)
     : QTextDocument(parent) {}
@@ -26,15 +26,16 @@ void UltimateLyricsLyric::SetHtml(const QString& html) {
   QString copy(html.trimmed());
 
   // Simplify newlines
-  copy.replace(QRegExp("\\r\\n?"), "\n");
+  copy.replace(QRegularExpression("\\r\\n?"), "\n");
 
   // Convert two or more newlines to <p>, convert single newlines to <br>
-  copy.replace(QRegExp("([^>])([\\t ]*\\n){2,}"), "\\1<p>");
-  copy.replace(QRegExp("([^>])[\\t ]*\\n"), "\\1<br>");
+  copy.replace(QRegularExpression("([^>])([\\t ]*\\n){2,}"), "\\1<p>");
+  copy.replace(QRegularExpression("([^>])[\\t ]*\\n"), "\\1<br>");
 
   // Strip any newlines from the end
-  copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"),
-               "");
+  copy.replace(
+      QRegularExpression("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"),
+      "");
 
   setHtml(copy);
 }

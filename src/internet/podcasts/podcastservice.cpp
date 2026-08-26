@@ -751,7 +751,7 @@ void PodcastService::ShowConfig() {
 void PodcastService::CurrentSongChanged(const Song& metadata) {
   // This does two db queries, and we are called on every song change, so run
   // this off the main thread.
-  QtConcurrent::run(this, &PodcastService::UpdatePodcastListenedStateAsync,
+  QtConcurrent::run(&PodcastService::UpdatePodcastListenedStateAsync, this,
                     metadata);
 }
 

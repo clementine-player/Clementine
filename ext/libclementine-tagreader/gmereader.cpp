@@ -193,7 +193,7 @@ void GME::VGM::Read(const QFileInfo& file_info,
   QByteArray gd3Data = file.read(gd3_length);
   QTextStream fileTagStream(gd3Data, QIODevice::ReadOnly);
   // Stored as 16 bit UTF string, two bytes per letter.
-  fileTagStream.setCodec("UTF-16");
+  fileTagStream.setEncoding(QStringConverter::Utf16);
   QStringList strings = fileTagStream.readLine(0).split(QChar('\0'));
   if (strings.count() < 10) return;
 

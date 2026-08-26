@@ -35,7 +35,7 @@ MultiLoadingIndicator::MultiLoadingIndicator(QWidget* parent)
 
 QSize MultiLoadingIndicator::sizeHint() const {
   const int width = kHorizontalPadding * 2 + spinner_->sizeHint().width() +
-                    kSpacing + fontMetrics().width(text_);
+                    kSpacing + fontMetrics().horizontalAdvance(text_);
   const int height = kVerticalPadding * 2 + qMax(spinner_->sizeHint().height(),
                                                  fontMetrics().height());
 

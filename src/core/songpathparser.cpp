@@ -19,6 +19,7 @@
 
 #include <QDir>
 #include <QFileInfo>
+#include <QRegularExpression>
 #include <QSettings>
 
 #include "core/logging.h"
@@ -59,10 +60,11 @@ void SongPathParser::GuessArtistAndTitle(Song* song) {
   if (!artist.isEmpty() || !title.isEmpty()) return;
   if (bn.isEmpty()) return;
 
-  QRegExp rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
-  if (rx.indexIn(bn) >= 0) {
-    artist = rx.cap(1);
-    title = rx.cap(2);
+  static const QRegularExpression rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
+  QRegularExpressionMatch match = rx.match(bn);
+  if (match.hasMatch()) {
+    artist = match.captured(1);
+    title = match.captured(2);
   } else {
     title = WithoutExtension(bn);
   }

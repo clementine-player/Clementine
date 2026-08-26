@@ -241,7 +241,7 @@ void SearchTermWidget::SetActive(bool active) {
   }
 }
 
-void SearchTermWidget::enterEvent(QEvent*) {
+void SearchTermWidget::enterEvent(QEnterEvent*) {
   if (!overlay_ || !isEnabled()) return;
 
   animation_->stop();
@@ -311,7 +311,7 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
         ui_->date_type_relative->setCurrentIndex(term.date_);
       } else if (ui_->value_stack->currentWidget() == ui_->page_date) {
         ui_->value_date->setDateTime(
-            QDateTime::fromTime_t(term.value_.toInt()));
+            QDateTime::fromSecsSinceEpoch(term.value_.toInt()));
       }
       break;
 
@@ -345,7 +345,7 @@ SearchTerm SearchTermWidget::Term() const {
   } else if (value_page == ui_->page_number) {
     ret.value_ = ui_->value_number->value();
   } else if (value_page == ui_->page_date) {
-    ret.value_ = ui_->value_date->dateTime().toTime_t();
+    ret.value_ = ui_->value_date->dateTime().toSecsSinceEpoch();
   } else if (value_page == ui_->page_time) {
     ret.value_ = QTime(0, 0).secsTo(ui_->value_time->time());
   } else if (value_page == ui_->page_rating) {
@@ -432,7 +432,7 @@ void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   p.drawRoundedRect(rect(), 5, 5);
 
   // Geometry
-  const QSize contents_size(kIconSize + kSpacing + fontMetrics().width(text_),
+  const QSize contents_size(kIconSize + kSpacing + fontMetrics().horizontalAdvance(text_),
                             qMax(kIconSize, fontMetrics().height()));
   const QRect contents(QPoint((width() - contents_size.width()) / 2,
                               (height() - contents_size.height()) / 2),

@@ -484,7 +484,7 @@ static QColor ensureContrast(const QColor& bg, const QColor& fg,
 void BlockAnalyzer::paletteChange(const QPalette&) {
   QColor bg, bgdark, fg;
 
-  bg = palette().color(QPalette::Background);
+  bg = palette().color(QPalette::Window);
   bgdark = bg.darker(112);
 
   if (psychedelic_enabled_)

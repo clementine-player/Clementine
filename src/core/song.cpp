@@ -32,7 +32,6 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QLatin1Literal>
 #include <QSharedData>
 #include <QSqlQuery>
 #include <QTextCodec>

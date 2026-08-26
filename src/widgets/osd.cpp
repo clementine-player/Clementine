@@ -30,6 +30,7 @@
 #endif
 
 #include <QCoreApplication>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QtDebug>
 
@@ -114,26 +115,25 @@ void OSD::AlbumArtLoaded(const Song& song, const QString& uri,
     if (song.disc() > 0) message_parts << tr("disc %1").arg(song.disc());
     if (song.track() > 0) message_parts << tr("track %1").arg(song.track());
   } else {
-    QRegExp variable_replacer("[%][a-z]+[%]");
+    static const QRegularExpression variable_replacer("[%][a-z]+[%]");
     summary = custom_text1_;
     QString message(custom_text2_);
 
     // Replace the first line
     int pos = 0;
-    variable_replacer.indexIn(custom_text1_);
-    while ((pos = variable_replacer.indexIn(custom_text1_, pos)) != -1) {
-      QStringList captured = variable_replacer.capturedTexts();
-      summary.replace(captured[0], ReplaceVariable(captured[0], song));
-      pos += variable_replacer.matchedLength();
+    QRegularExpressionMatch match;
+    while ((match = variable_replacer.match(custom_text1_, pos)).hasMatch()) {
+      const QString captured = match.captured(0);
+      summary.replace(captured, ReplaceVariable(captured, song));
+      pos = match.capturedStart() + match.capturedLength();
     }
 
     // Replace the second line
     pos = 0;
-    variable_replacer.indexIn(custom_text2_);
-    while ((pos = variable_replacer.indexIn(custom_text2_, pos)) != -1) {
-      QStringList captured = variable_replacer.capturedTexts();
-      message.replace(captured[0], ReplaceVariable(captured[0], song));
-      pos += variable_replacer.matchedLength();
+    while ((match = variable_replacer.match(custom_text2_, pos)).hasMatch()) {
+      const QString captured = match.captured(0);
+      message.replace(captured, ReplaceVariable(captured, song));
+      pos = match.capturedStart() + match.capturedLength();
     }
     message_parts << message;
   }

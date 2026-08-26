@@ -60,7 +60,7 @@ void SizeOverlayDelegate::paint(QPainter* painter,
 
   const QFontMetrics metrics(font);
 
-  const int text_width = metrics.width(text);
+  const int text_width = metrics.horizontalAdvance(text);
 
   const QRect icon_rect(option.rect.left(), option.rect.top(),
                         option.rect.width(), option.rect.width());

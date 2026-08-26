@@ -25,6 +25,7 @@
 #include <string>
 
 #include <QDebug>
+#include <QIODevice>
 
 #ifdef QT_NO_DEBUG_STREAM
 #define qLog(level) \

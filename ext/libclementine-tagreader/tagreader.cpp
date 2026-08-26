@@ -151,8 +151,8 @@ void TagReader::ReadFile(const QString& filename,
   qint64 btime = info.created().toSecsSinceEpoch();
 #else
   // Legacy 32bit API.
-  uint mtime = info.lastModified().toTime_t();
-  uint btime = info.created().toTime_t();
+  uint mtime = info.lastModified().toSecsSinceEpoch();
+  uint btime = info.created().toSecsSinceEpoch();
 #endif
 
   song->set_mtime(mtime);

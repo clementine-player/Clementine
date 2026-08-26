@@ -167,8 +167,8 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
     Song song;
     // Add some extra tags from the Google Drive metadata.
     song.set_etag(file.etag().remove('"'));
-    song.set_mtime(file.modified_date().toTime_t());
-    song.set_ctime(file.created_date().toTime_t());
+    song.set_mtime(file.modified_date().toSecsSinceEpoch());
+    song.set_ctime(file.created_date().toSecsSinceEpoch());
     song.set_comment(file.description());
     song.set_directory_id(0);
     song.set_url(QUrl(url));

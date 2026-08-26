@@ -95,11 +95,11 @@ void LibrarySettingsPage::Save() {
   s.setValue("monitor", ui_->monitor->isChecked());
 
   QString filter_text = ui_->cover_art_patterns->text();
-  QStringList filters = filter_text.split(',', QString::SkipEmptyParts);
+  QStringList filters = filter_text.split(',', Qt::SkipEmptyParts);
   s.setValue("cover_art_patterns", filters);
 
   QString skip_extensions = ui_->skip_extensions->text();
-  QStringList extensions = skip_extensions.split(',', QString::SkipEmptyParts);
+  QStringList extensions = skip_extensions.split(',', Qt::SkipEmptyParts);
   s.setValue("skip_file_extensions", extensions);
 
   s.endGroup();
@@ -165,6 +165,6 @@ void LibrarySettingsPage::WriteAllSongsStatisticsToFiles() {
   if (confirmation_dialog.exec() != QMessageBox::Yes) {
     return;
   }
-  QtConcurrent::run(dialog()->app()->library(),
-                    &Library::WriteAllSongsStatisticsToFiles);
+  QtConcurrent::run(&Library::WriteAllSongsStatisticsToFiles,
+                    dialog()->app()->library());
 }

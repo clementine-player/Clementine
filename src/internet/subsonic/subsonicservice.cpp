@@ -275,9 +275,9 @@ QNetworkReply* SubsonicService::Send(const QUrl& url) {
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(verifycert_ ? QSslSocket::VerifyPeer
                                           : QSslSocket::VerifyNone);
-  if (usesslv3_) {
-    sslconfig.setProtocol(QSsl::SslV3);
-  }
+  // QSsl::SslV3 was removed in Qt6 (SSLv3 is broken and unsupported by
+  // any modern TLS stack); usesslv3_ is kept as a settable option but has
+  // no effect any more.
   request.setSslConfiguration(sslconfig);
   QNetworkReply* reply = network_->get(request);
   return reply;
@@ -339,7 +339,7 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
     is_ampache_ = (reader.attributes().value("type") == "ampache");
-    QStringRef status = reader.attributes().value("status");
+    QStringView status = reader.attributes().value("status");
     int http_status_code =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (status == "ok") {

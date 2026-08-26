@@ -38,10 +38,11 @@ const char* SongInfoView::kSettingsGroup = "SongInfo";
 SongInfoView::SongInfoView(QWidget* parent)
     : SongInfoBase(parent), ultimate_reader_(new UltimateLyricsReader(this)) {
   // Parse the ultimate lyrics xml file in the background
-  QFuture<ProviderList> future =
-      QtConcurrent::run(ultimate_reader_.get(), &UltimateLyricsReader::Parse,
+  QFuture<QList<SongInfoProvider*>> future =
+      QtConcurrent::run(&UltimateLyricsReader::Parse, ultimate_reader_.get(),
                         QString(":lyrics/ultimate_providers.xml"));
-  NewClosure(future, this, SLOT(UltimateLyricsParsed(QFuture<ProviderList>)),
+  NewClosure(future, this,
+             SLOT(UltimateLyricsParsed(QFuture<QList<SongInfoProvider*>>)),
              future);
 
 #ifdef HAVE_LIBLASTFM
@@ -52,7 +53,8 @@ SongInfoView::SongInfoView(QWidget* parent)
 
 SongInfoView::~SongInfoView() {}
 
-void SongInfoView::UltimateLyricsParsed(QFuture<ProviderList> future) {
+void SongInfoView::UltimateLyricsParsed(
+    QFuture<QList<SongInfoProvider*>> future) {
   for (SongInfoProvider* provider : future.result()) {
     fetcher_->AddProvider(provider);
   }

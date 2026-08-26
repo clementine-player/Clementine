@@ -6,7 +6,7 @@ set(HEADERS
     qprogressindicatorspinning.h
 )
 
-qt5_wrap_cpp(MOC_SOURCES ${HEADERS})
+qt6_wrap_cpp(MOC_SOURCES ${HEADERS})
 
 if(APPLE)
     list(APPEND SOURCES
@@ -23,15 +23,13 @@ else()
     set(RESOURCES
         qprogressindicatorspinning_nonmac.qrc
     )
-    qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
+    qt6_add_resources(RESOURCES_SOURCES ${RESOURCES})
 endif()
 
 add_library(Qocoa STATIC
     ${SOURCES} ${MOC_SOURCES} ${RESOURCES_SOURCES}
 )
 
-if(APPLE)
-  target_link_libraries(Qocoa Qt5::Widgets Qt5::MacExtras)
-else()
-  target_link_libraries(Qocoa Qt5::Widgets)
-endif()
+# Qt6 has no MacExtras module; nothing in this library's .mm files actually
+# used its API (it was just linked, unused).
+target_link_libraries(Qocoa Qt6::Widgets)

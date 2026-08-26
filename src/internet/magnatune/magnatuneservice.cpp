@@ -208,7 +208,7 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
     if (reader.tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
-      QStringRef name = reader.name();
+      QStringView name = reader.name();
       QString value = ReadElementText(reader);
 
       if (name == "artist") song.set_artist(value);

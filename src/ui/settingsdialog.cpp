@@ -104,6 +104,13 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   ui_->setupUi(this);
   ui_->list->setItemDelegate(new SettingsItemDelegate(this));
 
+  // uic's generated setupUi() types its parameter as the .ui file's nominal
+  // base class (QDialog), so a .ui-file <connections> entry targeting a
+  // SettingsDialog-only slot like this one can't resolve at compile time -
+  // connect it explicitly here instead.
+  connect(ui_->buttonBox, SIGNAL(clicked(QAbstractButton*)),
+          SLOT(DialogButtonClicked(QAbstractButton*)));
+
   SettingsCategory* general = new SettingsCategory(tr("General"), this);
   AddCategory(general);
   general->AddPage(Page_Playback, new PlaybackSettingsPage(this));

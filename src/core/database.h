@@ -29,6 +29,7 @@
 #include <QMap>
 #include <QMutex>
 #include <QObject>
+#include <QRecursiveMutex>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QStringList>
@@ -67,7 +68,7 @@ class Database : public QObject {
 
   QSqlDatabase Connect();
   bool CheckErrors(const QSqlQuery& query);
-  QMutex* Mutex() { return &mutex_; }
+  QRecursiveMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
   void ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
@@ -112,7 +113,7 @@ class Database : public QObject {
 
   QString directory_;
   QMutex connect_mutex_;
-  QMutex mutex_;
+  QRecursiveMutex mutex_;
 
   // This ID makes the QSqlDatabase name unique to the object as well as the
   // thread

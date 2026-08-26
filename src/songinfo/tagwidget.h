@@ -50,7 +50,7 @@ class TagWidgetTag : public QWidget {
   void Clicked();
 
  protected:
-  void enterEvent(QEvent*);
+  void enterEvent(QEnterEvent*);
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent*);
   void mouseReleaseEvent(QMouseEvent*);

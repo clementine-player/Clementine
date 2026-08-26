@@ -44,11 +44,17 @@ HOMEBREW_PREFIXES = GetHomebrewPrefixes()
 FRAMEWORK_SEARCH_PATH = [
     '/target', '/target/lib', '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
+] + [
+    # Homebrew's "qt" formula symlinks every Qt module's framework bundle
+    # into its own lib/ dir (e.g. opt/qt/lib/QtCore.framework), regardless
+    # of which per-module formula (qtbase, qtsvg, ...) actually owns it.
+    os.path.join(prefix, 'opt/qt/lib') for prefix in HOMEBREW_PREFIXES
 ]
 
 STRIP_PREFIX = [
     '@@HOMEBREW_PREFIX@@/opt/qt5/lib/',
     '@@HOMEBREW_CELLAR@@/qt5/5.8.0_1/lib/',
+    '@rpath/',
 ]
 
 LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/sw/lib'] + [
@@ -134,6 +140,12 @@ QT_PLUGINS = [
 QT_PLUGINS_SEARCH_PATH = ['/target/plugins']
 for _prefix in HOMEBREW_PREFIXES:
   QT_PLUGINS_SEARCH_PATH += [
+      # Homebrew's Qt6 formulas each keep their own plugins under their own
+      # keg's share/qt/plugins (e.g. qtbase owns platforms/styles/most
+      # imageformats, qtsvg owns iconengines/svg) rather than one aggregated
+      # plugins/ dir like Qt5's qt@5 formula had.
+      os.path.join(_prefix, 'opt/qtbase/share/qt/plugins'),
+      os.path.join(_prefix, 'opt/qtsvg/share/qt/plugins'),
       os.path.join(_prefix, 'opt/qt@5/plugins'),
       os.path.join(_prefix, 'opt/qt5/plugins'),
   ]
@@ -194,11 +206,25 @@ bundle_name = os.path.basename(bundle_dir).split('.')[0]
 commands = []
 
 frameworks_dir = os.path.join(bundle_dir, 'Contents', 'Frameworks')
-commands.append(['mkdir', '-p', frameworks_dir])
 resources_dir = os.path.join(bundle_dir, 'Contents', 'Resources')
-commands.append(['mkdir', '-p', resources_dir])
 plugins_dir = os.path.join(bundle_dir, 'Contents', 'PlugIns')
 binary = os.path.join(bundle_dir, 'Contents', 'MacOS', bundle_name)
+
+# This script's own commands (cp/ln -sf) aren't idempotent against a
+# Frameworks/PlugIns tree it already populated on a previous run: copying a
+# framework's Resources into a destination that already has one, or
+# re-linking Versions/Current on top of an existing chain, can produce
+# self-referential entries (e.g. Versions/A/A) or symlink loops ("too many
+# levels of symbolic links") instead of just overwriting cleanly. Wipe and
+# recreate them fresh on every run rather than trying to merge into
+# whatever's already there. Not resources_dir - that's also where `make
+# install` places icons/Info.plist/etc. before this script runs, and this
+# script only ever adds to it (qt_menu.nib, framework Info.plists), never
+# removes, so it doesn't have the same stale-content problem.
+subprocess.check_call(['rm', '-rf', frameworks_dir])
+subprocess.check_call(['rm', '-rf', plugins_dir])
+commands.append(['mkdir', '-p', frameworks_dir])
+commands.append(['mkdir', '-p', resources_dir])
 
 fixed_libraries = set()
 fixed_frameworks = set()
@@ -425,7 +451,16 @@ def CopyFramework(src_binary):
   #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
   #   Sparkle has Resources/*
   #   Qt* have Resources/Info.plist
-  resources_src = os.path.join(src_base, 'Resources')
+  #
+  # Deliberately os.path.join(src_base, 'Versions', version, 'Resources')
+  # rather than os.path.join(src_base, 'Resources'): the latter goes through
+  # the framework's top-level "Resources -> Versions/Current/Resources"
+  # symlink, which - since dest_dir below is this same framework's own
+  # Versions/<version> directory - can make `cp -r` copy part of the
+  # framework's own Versions/<version> tree into itself (e.g. a
+  # self-referential Versions/A/A or a nested Resources/Resources symlink).
+  # Using the already-resolved version dir directly sidesteps that.
+  resources_src = os.path.join(src_base, 'Versions', version, 'Resources')
   menu_nib = os.path.join(resources_src, 'qt_menu.nib')
   if os.path.exists(menu_nib):
     LOGGER.info("Copying qt_menu.nib '%s'", menu_nib)

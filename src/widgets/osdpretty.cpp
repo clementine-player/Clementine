@@ -125,8 +125,11 @@ OSDPretty::OSDPretty(Mode mode, QWidget* parent)
 
   // Set the margins to allow for the drop shadow
   QBoxLayout* l = static_cast<QBoxLayout*>(layout());
-  int margin = l->margin() + kDropShadowSize;
-  l->setMargin(margin);
+  const QMargins old_margins = l->contentsMargins();
+  l->setContentsMargins(old_margins.left() + kDropShadowSize,
+                        old_margins.top() + kDropShadowSize,
+                        old_margins.right() + kDropShadowSize,
+                        old_margins.bottom() + kDropShadowSize);
 
   connect(qApp, SIGNAL(screenAdded(QScreen*)), this,
           SLOT(ScreenAdded(QScreen*)));
@@ -211,7 +214,6 @@ QRect OSDPretty::BoxBorder() const {
 void OSDPretty::paintEvent(QPaintEvent*) {
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
-  p.setRenderHint(QPainter::HighQualityAntialiasing);
 
   QRect box(BoxBorder());
 
@@ -408,7 +410,7 @@ void OSDPretty::Reposition() {
 #endif
 }
 
-void OSDPretty::enterEvent(QEvent*) {
+void OSDPretty::enterEvent(QEnterEvent*) {
   if (mode_ == Mode_Popup) setWindowOpacity(0.25);
 }
 

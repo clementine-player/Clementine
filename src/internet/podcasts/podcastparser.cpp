@@ -20,6 +20,7 @@
 #include "podcastparser.h"
 
 #include <QDateTime>
+#include <QRegularExpression>
 #include <QXmlStreamReader>
 
 #include "core/logging.h"
@@ -54,7 +55,8 @@ bool PodcastParser::SupportsContentType(const QString& content_type) const {
 
 bool PodcastParser::TryMagic(const QByteArray& data) const {
   QString str(QString::fromUtf8(data));
-  return str.contains(QRegExp("<rss\\b")) || str.contains(QRegExp("<opml\\b"));
+  return str.contains(QRegularExpression("<rss\\b")) ||
+         str.contains(QRegularExpression("<opml\\b"));
 }
 
 QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
@@ -63,7 +65,7 @@ QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader.name();
+        const QStringView name = reader.name();
         if (name == "rss") {
           Podcast podcast;
           if (!ParseRss(&reader, &podcast)) {
@@ -107,7 +109,7 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         const QString lower_namespace =
             reader->namespaceUri().toString().toLower();
 
@@ -150,7 +152,7 @@ void PodcastParser::ParseImage(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         if (name == "url") {
           ret->set_image_url_large(
               QUrl::fromEncoded(reader->readElementText().toLatin1()));
@@ -175,7 +177,7 @@ void PodcastParser::ParseItunesOwner(QXmlStreamReader* reader,
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         if (name == "name") {
           ret->set_owner_name(reader->readElementText());
         } else if (name == "email") {
@@ -202,7 +204,7 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         const QString lower_namespace =
             reader->namespaceUri().toString().toLower();
 
@@ -295,7 +297,7 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader,
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         if (name != "outline") {
           Utilities::ConsumeCurrentElement(reader);
           continue;

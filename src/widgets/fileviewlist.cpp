@@ -141,7 +141,7 @@ void FileViewList::mousePressEvent(QMouseEvent* e) {
       emit Forward();
       break;
     // enqueue to playlist with middleClick
-    case Qt::MidButton: {
+    case Qt::MiddleButton: {
       QListView::mousePressEvent(e);
 
       // we need to update the menu selection

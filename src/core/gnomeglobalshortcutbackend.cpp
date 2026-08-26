@@ -72,9 +72,9 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
     return false;
   }
 
-  QDBusPendingReply<> reply =
-      interface_->GrabMediaPlayerKeys(QCoreApplication::applicationName(),
-                                      QDateTime::currentDateTime().toTime_t());
+  QDBusPendingReply<> reply = interface_->GrabMediaPlayerKeys(
+      QCoreApplication::applicationName(),
+      static_cast<uint>(QDateTime::currentDateTime().toSecsSinceEpoch()));
 
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this,

@@ -23,6 +23,7 @@
 #include "metatypes.h"
 
 #include <QFileInfo>
+#include <QMap>
 #include <QMetaType>
 #include <QNetworkCookie>
 
@@ -88,6 +89,12 @@ void RegisterMetaTypes() {
   qRegisterMetaType<QList<PodcastEpisode>>("QList<PodcastEpisode>");
   qRegisterMetaType<QList<Podcast>>("QList<Podcast>");
   qRegisterMetaType<QList<QNetworkCookie>>("QList<QNetworkCookie>");
+  // QMap<int,int> has built-in QDataStream support, so this doesn't need
+  // qRegisterMetaTypeStreamOperators (removed in Qt6 anyway) - it just needs
+  // a name mapping so QVariant::load() can resolve old settings values that
+  // were serialized under this legacy alias ("ColumnAlignmentMap" is what
+  // playlistheader.cpp historically saved column-alignment settings as).
+  qRegisterMetaType<QMap<int, int>>("ColumnAlignmentMap");
   qRegisterMetaType<QList<Song>>("QList<Song>");
   qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
@@ -101,14 +108,9 @@ void RegisterMetaTypes() {
       "IntergalacticFMService::Stream");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Song>("Song");
-  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(
-      "DigitallyImportedClient::Channel");
-  qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaTypeStreamOperators<QMap<int, int>>("ColumnAlignmentMap");
-  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>(
-      "SomaFMService::Stream");
-  qRegisterMetaTypeStreamOperators<IntergalacticFMService::Stream>(
-      "IntergalacticFMService::Stream");
+  // qRegisterMetaTypeStreamOperators<T>() was removed in Qt6: QDataStream
+  // support for a Q_DECLARE_METATYPE'd type with operator<</>> is now
+  // detected and registered automatically, no explicit call needed.
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");

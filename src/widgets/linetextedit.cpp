@@ -32,7 +32,7 @@ QSize LineTextEdit::sizeHint() const {
 
   static const int kMargin = 5;
   int h = 2 * kMargin + qMax(fm.height(), 14);
-  int w = 2 * kMargin + fm.width("W") * 15;
+  int w = 2 * kMargin + fm.horizontalAdvance("W") * 15;
 
   return QSize(w, h);
 }

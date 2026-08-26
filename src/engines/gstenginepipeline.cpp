@@ -23,7 +23,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QPair>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <limits>
 
 #include "bufferconsumer.h"
@@ -700,10 +700,10 @@ namespace {
  * cartcutId="0"
  */
 QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
-  QRegExp re("(.*) - text=\"([^\"]+)");
-  re.indexIn(tag);
-  if (re.capturedTexts().length() >= 3) {
-    return qMakePair(re.cap(1), re.cap(2));
+  static const QRegularExpression re("(.*) - text=\"([^\"]+)");
+  const QRegularExpressionMatch match = re.match(tag);
+  if (match.hasMatch()) {
+    return qMakePair(match.captured(1), match.captured(2));
   }
   return qMakePair(tag, QString());
 }
@@ -1246,7 +1246,7 @@ void GstEnginePipeline::SetOutputFormat(const QString& format) {
 
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,
                                    QTimeLine::Direction direction,
-                                   QTimeLine::CurveShape shape,
+                                   QEasingCurve::Type shape,
                                    bool use_fudge_timer) {
   const int duration_msec = duration_nanosec / kNsecPerMsec;
 
@@ -1270,7 +1270,7 @@ void GstEnginePipeline::StartFader(qint64 duration_nanosec,
           SLOT(SetVolumeModifier(qreal)));
   connect(fader_.get(), SIGNAL(finished()), SLOT(FaderTimelineFinished()));
   fader_->setDirection(direction);
-  fader_->setCurveShape(shape);
+  fader_->setEasingCurve(shape);
   fader_->setCurrentTime(start_time);
   fader_->resume();
 

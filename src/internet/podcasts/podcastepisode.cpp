@@ -142,7 +142,7 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->title_ = query.value(2).toString();
   d->description_ = query.value(3).toString();
   d->author_ = query.value(4).toString();
-  d->publication_date_ = QDateTime::fromTime_t(query.value(5).toUInt());
+  d->publication_date_ = QDateTime::fromSecsSinceEpoch(query.value(5).toUInt());
   d->duration_secs_ = query.value(6).toInt();
   d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
   d->listened_ = query.value(8).toBool();
@@ -154,7 +154,7 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   if (query.value(9).toUInt() == std::numeric_limits<unsigned int>::max()) {
     d->listened_date_ = QDateTime();
   } else {
-    d->listened_date_ = QDateTime::fromTime_t(query.value(9).toUInt());
+    d->listened_date_ = QDateTime::fromSecsSinceEpoch(query.value(9).toUInt());
   }
 
   d->downloaded_ = query.value(10).toBool();
@@ -169,11 +169,11 @@ void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":title", d->title_);
   query->bindValue(":description", d->description_);
   query->bindValue(":author", d->author_);
-  query->bindValue(":publication_date", d->publication_date_.toTime_t());
+  query->bindValue(":publication_date", d->publication_date_.toSecsSinceEpoch());
   query->bindValue(":duration_secs", d->duration_secs_);
   query->bindValue(":url", d->url_.toEncoded());
   query->bindValue(":listened", d->listened_);
-  query->bindValue(":listened_date", d->listened_date_.toTime_t());
+  query->bindValue(":listened_date", d->listened_date_.toSecsSinceEpoch());
   query->bindValue(":downloaded", d->downloaded_);
   query->bindValue(":local_url", d->local_url_.toEncoded());
 
@@ -193,14 +193,14 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
   ret.set_id(database_id());
-  ret.set_ctime(publication_date().toTime_t());
+  ret.set_ctime(publication_date().toSecsSinceEpoch());
   ret.set_genre(QString("Podcast"));
   ret.set_genre_id3(186);
 
   if (listened() && listened_date().isValid()) {
-    ret.set_mtime(listened_date().toTime_t());
+    ret.set_mtime(listened_date().toSecsSinceEpoch());
   } else {
-    ret.set_mtime(publication_date().toTime_t());
+    ret.set_mtime(publication_date().toSecsSinceEpoch());
   }
 
   if (ret.length_nanosec() < 0) {

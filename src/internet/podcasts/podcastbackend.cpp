@@ -148,7 +148,7 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
 
   for (const PodcastEpisode& episode : episodes) {
     q.bindValue(":listened", episode.listened());
-    q.bindValue(":listened_date", episode.listened_date().toTime_t());
+    q.bindValue(":listened_date", episode.listened_date().toSecsSinceEpoch());
     q.bindValue(":downloaded", episode.downloaded());
     q.bindValue(":local_url", episode.local_url().toEncoded());
     q.bindValue(":id", episode.database_id());
@@ -313,7 +313,7 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(
             " FROM podcast_episodes"
             " WHERE downloaded = 'true'"
             "   AND listened_date <= :max_listened_date");
-  q.bindValue(":max_listened_date", max_listened_date.toTime_t());
+  q.bindValue(":max_listened_date", max_listened_date.toSecsSinceEpoch());
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 

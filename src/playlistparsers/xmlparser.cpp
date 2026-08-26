@@ -20,7 +20,6 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
-#include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
 
