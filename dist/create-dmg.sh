@@ -30,8 +30,13 @@ cp ../dist/dmg_background.png "$TMP/.background/background.png"
 cp ../dist/DS_Store.in "$TMP/.DS_Store"
 chmod go-rwx "$TMP/.DS_Store"
 ln -s /Applications "$TMP/Applications"
-# copies the prepared bundle into the dir that will become the DMG
-cp -R "$IN" "$TMP"
+# Copies the prepared bundle into the dir that will become the DMG, renamed
+# to "Clementine.app" (capital C, matching DS_Store.in's icon layout) with
+# its extension hidden in Finder - otherwise Finder shows the on-disk name
+# "clementine.app" verbatim, which overflows its icon label in the DMG
+# window.
+cp -R "$IN" "$TMP/Clementine.app"
+SetFile -a E "$TMP/Clementine.app"
 
 # create
 # APFS, not HFS+ (the old `hdiutil makehybrid -hfs` approach this replaced):
