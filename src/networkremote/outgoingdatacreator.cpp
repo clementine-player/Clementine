@@ -632,7 +632,7 @@ void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   QByteArray sha1 = Utilities::Sha1File(file).toHex();
   qLog(Debug) << "Library sha1" << sha1;
 
-  file.open(QIODevice::ReadOnly);
+  (void)file.open(QIODevice::ReadOnly);
 
   QByteArray data;
   cpb::remote::Message msg;

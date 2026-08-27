@@ -42,7 +42,7 @@ SongInfoSettingsPage::SongInfoSettingsPage(SettingsDialog* dialog)
           SLOT(ItemChanged(QListWidgetItem*)));
 
   QFile song_info_preview(":/lumberjacksong.txt");
-  song_info_preview.open(QIODevice::ReadOnly);
+  (void)song_info_preview.open(QIODevice::ReadOnly);
   ui_->song_info_font_preview->setText(
       QString::fromUtf8(song_info_preview.readAll()));
 

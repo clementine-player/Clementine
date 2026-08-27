@@ -246,7 +246,7 @@ void SongSender::SendSingleSong(DownloadItem download_item) {
   QByteArray sha1 = Utilities::Sha1File(file).toHex();
   qLog(Debug) << "sha1 for file" << local_file << "=" << sha1;
 
-  file.open(QIODevice::ReadOnly);
+  (void)file.open(QIODevice::ReadOnly);
 
   QByteArray data;
   cpb::remote::Message msg;
