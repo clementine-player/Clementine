@@ -271,8 +271,8 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
   } else {
     const int new_height = (double)desktop_height * 0.85;
     if (new_height < label->pixmap().height()) {
-      label->setPixmap(label->pixmap().scaledToHeight(
-          new_height, Qt::SmoothTransformation));
+      label->setPixmap(
+          label->pixmap().scaledToHeight(new_height, Qt::SmoothTransformation));
     }
   }
 

@@ -132,11 +132,10 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(&IcecastService::ParseDirectory, this, reply);
-  NewClosure(
-      future, this,
-      SLOT(ParseDirectoryFinished(QFuture<QList<IcecastBackend::Station>>,
-                                  int)),
-      future, task_id);
+  NewClosure(future, this,
+             SLOT(ParseDirectoryFinished(
+                 QFuture<QList<IcecastBackend::Station>>, int)),
+             future, task_id);
 }
 
 namespace {
@@ -266,10 +265,10 @@ IcecastBackend::Station IcecastService::ReadStation(
       if (name == QLatin1String("server_type")) station.mime_type = value;
       if (name == QLatin1String("bitrate")) station.bitrate = value.toInt();
       if (name == QLatin1String("channels")) station.channels = value.toInt();
-      if (name == QLatin1String("samplerate")) station.samplerate = value.toInt();
+      if (name == QLatin1String("samplerate"))
+        station.samplerate = value.toInt();
       if (name == QLatin1String("genre"))
-        station.genre =
-            FilterGenres(value.split(' ', Qt::SkipEmptyParts))[0];
+        station.genre = FilterGenres(value.split(' ', Qt::SkipEmptyParts))[0];
     }
   }
 

@@ -142,7 +142,8 @@ void LoginStateWidget::SetExpires(const QDate& expires) {
   ui_->expires->setVisible(expires.isValid());
 
   if (expires.isValid()) {
-    const QString expires_text = QLocale().toString(expires, QLocale::LongFormat);
+    const QString expires_text =
+        QLocale().toString(expires, QLocale::LongFormat);
     ui_->expires_label->setText(
         tr("Expires on %1").arg("<b>" + expires_text + "</b>"));
   }

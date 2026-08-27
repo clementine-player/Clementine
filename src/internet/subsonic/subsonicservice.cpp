@@ -338,7 +338,8 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   } else {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
-    is_ampache_ = (reader.attributes().value("type") == QLatin1String("ampache"));
+    is_ampache_ =
+        (reader.attributes().value("type") == QLatin1String("ampache"));
     QStringView status = reader.attributes().value("status");
     int http_status_code =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -531,7 +532,8 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   // Read song information
   while (reader.readNextStartElement()) {
     // skip multi-artist and multi-genre tags
-    if ((reader.name() == QLatin1String("artists")) || (reader.name() == QLatin1String("genres"))) {
+    if ((reader.name() == QLatin1String("artists")) ||
+        (reader.name() == QLatin1String("genres"))) {
       reader.skipCurrentElement();
       continue;
     }

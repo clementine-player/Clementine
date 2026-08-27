@@ -432,8 +432,9 @@ void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   p.drawRoundedRect(rect(), 5, 5);
 
   // Geometry
-  const QSize contents_size(kIconSize + kSpacing + fontMetrics().horizontalAdvance(text_),
-                            qMax(kIconSize, fontMetrics().height()));
+  const QSize contents_size(
+      kIconSize + kSpacing + fontMetrics().horizontalAdvance(text_),
+      qMax(kIconSize, fontMetrics().height()));
   const QRect contents(QPoint((width() - contents_size.width()) / 2,
                               (height() - contents_size.height()) / 2),
                        contents_size);

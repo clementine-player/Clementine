@@ -54,9 +54,8 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
   SongList ret;
 
   QTextStream text_stream(device);
-  text_stream.setEncoding(
-      QStringConverter::encodingForData(device->peek(1024))
-          .value_or(QStringConverter::Utf8));
+  text_stream.setEncoding(QStringConverter::encodingForData(device->peek(1024))
+                              .value_or(QStringConverter::Utf8));
 
   QString dir_path = dir.absolutePath();
   // read the first line already

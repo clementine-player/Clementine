@@ -70,7 +70,7 @@ void TrackSliderPopup::paintEvent(QPaintEvent*) {
 void TrackSliderPopup::UpdatePixmap() {
   const int text_width =
       qMax(font_metrics_.horizontalAdvance(text_),
-          small_font_metrics_.horizontalAdvance(small_text_));
+           small_font_metrics_.horizontalAdvance(small_text_));
   const QRect text_rect1(kBlurRadius + kTextMargin, kBlurRadius + kTextMargin,
                          text_width + 2, font_metrics_.height());
   const QRect text_rect2(kBlurRadius + kTextMargin, text_rect1.bottom(),

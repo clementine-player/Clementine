@@ -411,7 +411,8 @@ bool GLAnalyzer3::loadTexture(QString fileName, GLuint& textureID) {
   if (!tmp.load(fileName)) return false;
 
   // convert it to suitable format (flipped RGBA)
-  QImage texture = tmp.convertToFormat(QImage::Format_RGBA8888).mirrored(false, true);
+  QImage texture =
+      tmp.convertToFormat(QImage::Format_RGBA8888).mirrored(false, true);
   if (texture.isNull()) return false;
 
   // get texture number and bind loaded image to that texture

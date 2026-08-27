@@ -313,7 +313,8 @@ SongList JamendoService::ReadArtist(QXmlStreamReader* reader,
       } else if (name == QLatin1String("album")) {
         ret << ReadAlbum(current_artist, reader, track_ids);
       }
-    } else if (reader->isEndElement() && reader->name() == QLatin1String("artist")) {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("artist")) {
       break;
     }
   }
@@ -343,7 +344,8 @@ SongList JamendoService::ReadAlbum(const QString& artist,
         ret << ReadTrack(artist, current_album, cover, current_album_id, reader,
                          track_ids);
       }
-    } else if (reader->isEndElement() && reader->name() == QLatin1String("album")) {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("album")) {
       break;
     }
   }
@@ -394,7 +396,8 @@ Song JamendoService::ReadTrack(const QString& artist, const QString& album,
         // Rely on songs getting added in this exact order
         track_ids->append(id);
       }
-    } else if (reader->isEndElement() && reader->name() == QLatin1String("track")) {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("track")) {
       break;
     }
   }

@@ -150,7 +150,8 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
 
   while (!reader.atEnd()) {
     QXmlStreamReader::TokenType token = reader.readNext();
-    if (token == QXmlStreamReader::StartElement && reader.name() == QLatin1String("medium")) {
+    if (token == QXmlStreamReader::StartElement &&
+        reader.name() == QLatin1String("medium")) {
       // Get the medium with a matching discid.
       if (MediumHasDiscid(discid, &reader)) {
         ResultList tracks = ParseMedium(&reader);
@@ -236,7 +237,8 @@ bool MusicBrainzClient::MediumHasDiscid(const QString& discid,
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
 
-    if (type == QXmlStreamReader::StartElement && reader->name() == QLatin1String("disc") &&
+    if (type == QXmlStreamReader::StartElement &&
+        reader->name() == QLatin1String("disc") &&
         reader->attributes().value("id").toString() == discid) {
       return true;
     } else if (type == QXmlStreamReader::EndElement &&
@@ -289,7 +291,8 @@ MusicBrainzClient::Result MusicBrainzClient::ParseTrackFromDisc(
       }
     }
 
-    if (type == QXmlStreamReader::EndElement && reader->name() == QLatin1String("track")) {
+    if (type == QXmlStreamReader::EndElement &&
+        reader->name() == QLatin1String("track")) {
       break;
     }
   }
@@ -319,7 +322,8 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(
       }
     }
 
-    if (type == QXmlStreamReader::EndElement && reader->name() == QLatin1String("recording")) {
+    if (type == QXmlStreamReader::EndElement &&
+        reader->name() == QLatin1String("recording")) {
       break;
     }
   }
@@ -348,7 +352,8 @@ void MusicBrainzClient::ParseArtist(QXmlStreamReader* reader, QString* artist) {
       join_phrase = reader->attributes().value("joinphrase").toString();
     }
 
-    if (type == QXmlStreamReader::StartElement && reader->name() == QLatin1String("name")) {
+    if (type == QXmlStreamReader::StartElement &&
+        reader->name() == QLatin1String("name")) {
       *artist += reader->readElementText() + join_phrase;
     }
 
@@ -386,7 +391,8 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
       }
     }
 
-    if (type == QXmlStreamReader::EndElement && reader->name() == QLatin1String("release")) {
+    if (type == QXmlStreamReader::EndElement &&
+        reader->name() == QLatin1String("release")) {
       break;
     }
   }

@@ -183,8 +183,7 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
                                            CountdownLatch* latch) {
   latch->Wait();
   qLog(Debug) << wikipedia_url;
-  static const QRegularExpression regex(
-      "([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
+  static const QRegularExpression regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   const QRegularExpressionMatch match = regex.match(wikipedia_url);
   if (!match.hasMatch()) {
     emit Finished(id);
@@ -240,8 +239,7 @@ void ArtistBiography::FetchWikipediaArticle(int id,
                                             const QString& wikipedia_url,
                                             CountdownLatch* latch) {
   latch->Wait();
-  static const QRegularExpression regex(
-      "([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
+  static const QRegularExpression regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   const QRegularExpressionMatch match = regex.match(wikipedia_url);
   if (!match.hasMatch()) {
     emit Finished(id);

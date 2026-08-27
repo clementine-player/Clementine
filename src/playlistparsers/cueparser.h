@@ -18,7 +18,6 @@
 #ifndef CUEPARSER_H
 #define CUEPARSER_H
 
-
 #include "parserbase.h"
 
 // This parser will try to detect the real encoding of a .cue file but there's

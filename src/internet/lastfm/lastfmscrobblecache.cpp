@@ -54,9 +54,10 @@ void LastFmScrobbleCache::Load() {
     track.duration_secs = obj["duration_secs"].toInt();
     track.timestamp =
         QDateTime::fromSecsSinceEpoch(obj["timestamp"].toInteger());
-    track.source = obj["source"].toInt() == LastFmTrack::NonPersonalisedBroadcast
-                       ? LastFmTrack::NonPersonalisedBroadcast
-                       : LastFmTrack::Player;
+    track.source =
+        obj["source"].toInt() == LastFmTrack::NonPersonalisedBroadcast
+            ? LastFmTrack::NonPersonalisedBroadcast
+            : LastFmTrack::Player;
     tracks_ << track;
   }
 }
@@ -93,6 +94,7 @@ void LastFmScrobbleCache::Add(const LastFmTrack& track) {
 }
 
 void LastFmScrobbleCache::RemoveFirst(int count) {
-  tracks_.erase(tracks_.begin(), tracks_.begin() + qMin(count, tracks_.count()));
+  tracks_.erase(tracks_.begin(),
+                tracks_.begin() + qMin(count, tracks_.count()));
   Save();
 }

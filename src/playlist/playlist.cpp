@@ -1572,13 +1572,13 @@ void Playlist::Restore() {
   cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(&PlaylistBackend::GetPlaylistItems, backend_, id_);
-  NewClosure(
-      future, this,
-      SLOT(ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
-      future);
+  NewClosure(future, this,
+             SLOT(ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
+             future);
 }
 
-void Playlist::ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
+void Playlist::ItemsLoaded(
+    QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
   if (cancel_restore_) return;
 
   PlaylistItemList items = future.result();

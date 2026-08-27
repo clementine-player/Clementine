@@ -369,8 +369,7 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 }
 
 void PlaylistListContainer::SearchTextEdited(const QString& text) {
-  QRegularExpression regexp(text,
-                            QRegularExpression::CaseInsensitiveOption);
+  QRegularExpression regexp(text, QRegularExpression::CaseInsensitiveOption);
 
   proxy_->setFilterRegExp(regexp);
 

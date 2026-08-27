@@ -475,7 +475,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file,
                                               const QString& image,
                                               ScanTransaction* t) {
   QFile cue(matching_cue);
-  cue.open(QIODevice::ReadOnly);
+  (void)cue.open(QIODevice::ReadOnly);
 
   SongList old_sections = backend_->GetSongsByUrl(QUrl::fromLocalFile(file));
 
@@ -547,7 +547,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     if (cues_processed->contains(matching_cue)) return song_list;
 
     QFile cue(matching_cue);
-    cue.open(QIODevice::ReadOnly);
+    (void)cue.open(QIODevice::ReadOnly);
 
     // Ignore FILEs pointing to other media files. Also, watch out for incorrect
     // media files. Playlist parser for CUEs considers every entry in sheet

@@ -269,8 +269,8 @@ QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
   }
 
   if (replace_the_ && (tag == "artist" || tag == "albumartist"))
-    value.replace(QRegularExpression(
-                      "^the\\s+", QRegularExpression::CaseInsensitiveOption),
+    value.replace(QRegularExpression("^the\\s+",
+                                     QRegularExpression::CaseInsensitiveOption),
                   "");
 
   if (value == "0" || value == "-1") value = "";

@@ -66,7 +66,7 @@ void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
 
 void LocalRedirectServer::WriteTemplate(QTcpSocket* socket) const {
   QFile page_file(":oauthsuccess.html");
-  page_file.open(QIODevice::ReadOnly);
+  (void)page_file.open(QIODevice::ReadOnly);
   QString page_data = QString::fromUtf8(page_file.readAll());
 
   static const QRegularExpression tr_regexp("tr\\(\"([^\"]+)\"\\)");

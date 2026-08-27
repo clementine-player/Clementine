@@ -530,11 +530,11 @@ void EditTagDialog::UpdateStatisticsTab(const Song& song) {
   ui_->score->setText(QString::number(qMax(0, song.score())));
   ui_->rating->set_rating(song.rating());
 
-  ui_->lastplayed->setText(song.lastplayed() <= 0
-                               ? tr("Never")
-                               : QDateTime::fromSecsSinceEpoch(song.lastplayed())
-                                     .toString(QLocale::system().dateTimeFormat(
-                                         QLocale::LongFormat)));
+  ui_->lastplayed->setText(
+      song.lastplayed() <= 0 ? tr("Never")
+                             : QDateTime::fromSecsSinceEpoch(song.lastplayed())
+                                   .toString(QLocale::system().dateTimeFormat(
+                                       QLocale::LongFormat)));
 }
 
 void EditTagDialog::ArtLoaded(quint64 id, const QImage& scaled,

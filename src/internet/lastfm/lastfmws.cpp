@@ -18,10 +18,10 @@
 #include "lastfmws.h"
 
 #include <QCryptographicHash>
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QUrl>
-#include <QNetworkAccessManager>
 #include <QUrlQuery>
 
 namespace LastFmWs {
@@ -80,8 +80,8 @@ QNetworkReply* Post(QMap<QString, QString> params) {
   QNetworkRequest request((QUrl(kEndpoint)));
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/x-www-form-urlencoded");
-  return g_network->post(
-      request, ToQuery(params).toString(QUrl::FullyEncoded).toUtf8());
+  return g_network->post(request,
+                         ToQuery(params).toString(QUrl::FullyEncoded).toUtf8());
 }
 
 }  // namespace LastFmWs

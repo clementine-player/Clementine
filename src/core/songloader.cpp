@@ -245,7 +245,7 @@ SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   if (QFile::exists(matching_cue)) {
     // it's a cue - create virtual tracks
     QFile cue(matching_cue);
-    cue.open(QIODevice::ReadOnly);
+    (void)cue.open(QIODevice::ReadOnly);
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));

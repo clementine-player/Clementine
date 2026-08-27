@@ -148,7 +148,8 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   }
 
   if (options.max_age() != -1) {
-    int cutoff = QDateTime::currentDateTime().toSecsSinceEpoch() - options.max_age();
+    int cutoff =
+        QDateTime::currentDateTime().toSecsSinceEpoch() - options.max_age();
 
     where_clauses_ << "ctime > ?";
     bound_values_ << cutoff;
@@ -288,7 +289,8 @@ QVariant LibraryQuery::Value(int column) const { return query_.value(column); }
 
 bool QueryOptions::Matches(const Song& song) const {
   if (max_age_ != -1) {
-    const uint cutoff = QDateTime::currentDateTime().toSecsSinceEpoch() - max_age_;
+    const uint cutoff =
+        QDateTime::currentDateTime().toSecsSinceEpoch() - max_age_;
     if (song.ctime() <= cutoff) return false;
   }
 

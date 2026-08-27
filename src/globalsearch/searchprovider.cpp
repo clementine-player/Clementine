@@ -82,10 +82,10 @@ BlockingSearchProvider::BlockingSearchProvider(Application* app,
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
   QFuture<ResultList> future =
       QtConcurrent::run(&BlockingSearchProvider::Search, this, id, query);
-  NewClosure(future, this,
-             SLOT(BlockingSearchFinished(QFuture<QList<SearchProvider::Result>>,
-                                         int)),
-             future, id);
+  NewClosure(
+      future, this,
+      SLOT(BlockingSearchFinished(QFuture<QList<SearchProvider::Result>>, int)),
+      future, id);
 }
 
 void BlockingSearchProvider::BlockingSearchFinished(

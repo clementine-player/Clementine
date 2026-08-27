@@ -46,7 +46,7 @@ SongList ASXParser::Load(QIODevice* device, const QString& playlist_path,
   QRegularExpressionMatch match;
   while ((match = ex.match(data, index)).hasMatch()) {
     data.replace(match.captured(1).toLocal8Bit(),
-                match.captured(1).toLower().toLocal8Bit());
+                 match.captured(1).toLower().toLocal8Bit());
     index = match.capturedStart() + match.capturedLength();
   }
 

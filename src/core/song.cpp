@@ -28,6 +28,9 @@
 
 #include "song.h"
 
+#include <fileref.h>
+#include <id3v1genres.h>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -39,9 +42,6 @@
 #include <QVariant>
 #include <QtConcurrentRun>
 #include <algorithm>
-
-#include <fileref.h>
-#include <id3v1genres.h>
 
 #ifdef HAVE_LIBGPOD
 #include <gpod/itdb.h>

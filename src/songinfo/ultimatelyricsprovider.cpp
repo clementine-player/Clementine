@@ -294,8 +294,7 @@ void UltimateLyricsProvider::ReplaceField(const QString& tag,
   // Apply URL character replacement
   QString value_copy(value);
   for (const UrlFormat& format : url_formats_) {
-    QRegularExpression re("[" + QRegularExpression::escape(format.first) +
-                          "]");
+    QRegularExpression re("[" + QRegularExpression::escape(format.first) + "]");
     value_copy.replace(re, format.second);
   }
 

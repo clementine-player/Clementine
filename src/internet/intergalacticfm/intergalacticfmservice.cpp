@@ -171,14 +171,16 @@ void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader,
         } else if (reader.name() == QLatin1String("dj")) {
           stream.dj_ = reader.readElementText();
         } else if (reader.name() == QLatin1String("fastpls") &&
-                   reader.attributes().value("format") == QLatin1String("mp3")) {
+                   reader.attributes().value("format") ==
+                       QLatin1String("mp3")) {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 
           stream.url_ = url;
           found = true;
         } else if (!found && reader.name() == QLatin1String("highestpls") &&
-                   reader.attributes().value("format") == QLatin1String("mp3")) {
+                   reader.attributes().value("format") ==
+                       QLatin1String("mp3")) {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 

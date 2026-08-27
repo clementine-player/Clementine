@@ -120,14 +120,15 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
               QUrl::fromEncoded(reader->readElementText().toLatin1()));
         } else if (name == QLatin1String("description")) {
           ret->set_description(reader->readElementText());
-        } else if (name == QLatin1String("owner") && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("owner") &&
+                   lower_namespace == kItunesNamespace) {
           ParseItunesOwner(reader, ret);
         } else if (name == QLatin1String("image")) {
           ParseImage(reader, ret);
         } else if (name == QLatin1String("copyright")) {
           ret->set_copyright(reader->readElementText());
-        } else if (name == QLatin1String("link") && lower_namespace == kAtomNamespace &&
-                   ret->url().isEmpty() &&
+        } else if (name == QLatin1String("link") &&
+                   lower_namespace == kAtomNamespace && ret->url().isEmpty() &&
                    reader->attributes().value("rel") == QLatin1String("self")) {
           ret->set_url(QUrl::fromEncoded(reader->readElementText().toLatin1()));
         } else if (name == QLatin1String("item")) {
@@ -221,7 +222,8 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
                 << Utilities::MakeBugReportUrl(
                        QString("[podcast] Unable to parse date: %1").arg(date));
           }
-        } else if (name == QLatin1String("duration") && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("duration") &&
+                   lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
           QStringList parts = reader->readElementText().split(':');
           if (parts.count() == 2) {
@@ -246,7 +248,8 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
             episode.set_url(url);
           }
           Utilities::ConsumeCurrentElement(reader);
-        } else if (name == QLatin1String("author") && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("author") &&
+                   lower_namespace == kItunesNamespace) {
           episode.set_author(reader->readElementText());
         } else {
           Utilities::ConsumeCurrentElement(reader);

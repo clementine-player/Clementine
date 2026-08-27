@@ -216,7 +216,8 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       if (name == QLatin1String("trackname")) song.set_title(value);
       if (name == QLatin1String("tracknum")) song.set_track(value.toInt());
       if (name == QLatin1String("year")) song.set_year(value.toInt());
-      if (name == QLatin1String("magnatunegenres")) song.set_genre(value.section(',', 0, 0));
+      if (name == QLatin1String("magnatunegenres"))
+        song.set_genre(value.section(',', 0, 0));
       if (name == QLatin1String("seconds"))
         song.set_length_nanosec(value.toInt() * kNsecPerSec);
       if (name == QLatin1String("cover_small")) song.set_art_automatic(value);

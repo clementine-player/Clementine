@@ -910,9 +910,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   app_->player()->engine()->SetStereoBalance(equalizer_->stereo_balance());
 
   // Statusbar widgets
-  ui_->playlist_summary->setMinimumWidth(
-      QFontMetrics(font())
-          .horizontalAdvance("WW selected of WW tracks - [ WW:WW ]"));
+  ui_->playlist_summary->setMinimumWidth(QFontMetrics(font()).horizontalAdvance(
+      "WW selected of WW tracks - [ WW:WW ]"));
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)),
           SLOT(TaskCountChanged(int)));
@@ -1584,7 +1583,7 @@ void MainWindow::UpdateTrackPosition() {
 
     if (tray_icon_) tray_icon_->SetProgress(double(position) / length * 100);
 
-// if we're waiting for the scrobble point, update the icon
+    // if we're waiting for the scrobble point, update the icon
     if (position < scrobble_point &&
         playlist->get_lastfm_status() == Playlist::LastFM_New &&
         last_fm_enabled) {

@@ -252,7 +252,7 @@ PlaylistItemPtr PlaylistBackend::RestoreCueData(
 
     if (!state->cached_cues_.contains(cue_path)) {
       QFile cue(cue_path);
-      cue.open(QIODevice::ReadOnly);
+      (void)cue.open(QIODevice::ReadOnly);
 
       song_list =
           cue_parser.Load(&cue, cue_path, QDir(cue_path.section('/', 0, -2)));

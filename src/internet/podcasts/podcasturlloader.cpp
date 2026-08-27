@@ -34,8 +34,9 @@ PodcastUrlLoader::PodcastUrlLoader(QObject* parent)
     : QObject(parent),
       network_(new NetworkAccessManager(this)),
       parser_(new PodcastParser),
-      html_link_re_("<link (.*)>", QRegularExpression::CaseInsensitiveOption |
-                                       QRegularExpression::InvertedGreedinessOption),
+      html_link_re_("<link (.*)>",
+                    QRegularExpression::CaseInsensitiveOption |
+                        QRegularExpression::InvertedGreedinessOption),
       html_link_rel_re_("rel\\s*=\\s*['\"]?\\s*alternate"),
       html_link_type_re_("type\\s*=\\s*['\"]?([^'\" ]+)"),
       html_link_href_re_("href\\s*=\\s*['\"]?([^'\" ]+)") {}
@@ -190,8 +191,8 @@ void PodcastUrlLoader::RequestFinished(RequestState* state,
 
       const QRegularExpressionMatch type_match = html_link_type_re_.match(link);
       const QRegularExpressionMatch href_match = html_link_href_re_.match(link);
-      if (!html_link_rel_re_.match(link).hasMatch() ||
-          !type_match.hasMatch() || !href_match.hasMatch()) {
+      if (!html_link_rel_re_.match(link).hasMatch() || !type_match.hasMatch() ||
+          !href_match.hasMatch()) {
         continue;
       }
 

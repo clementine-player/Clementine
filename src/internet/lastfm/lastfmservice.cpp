@@ -184,8 +184,8 @@ void LastFMService::SignOut() {
 }
 
 LastFmTrack LastFMService::TrackFromSong(const Song& song) const {
-  if (song.title() == last_track_.title && song.artist() == last_track_.artist &&
-      song.album() == last_track_.album)
+  if (song.title() == last_track_.title &&
+      song.artist() == last_track_.artist && song.album() == last_track_.album)
     return last_track_;
 
   return song.ToLastFmTrack(PreferAlbumArtist());
@@ -231,8 +231,7 @@ void LastFMService::NowPlaying(const Song& song) {
   params["artist"] = track.artist;
   params["track"] = track.title;
   if (!track.album.isEmpty()) params["album"] = track.album;
-  if (!track.album_artist.isEmpty())
-    params["albumArtist"] = track.album_artist;
+  if (!track.album_artist.isEmpty()) params["albumArtist"] = track.album_artist;
   if (track.track_number > 0)
     params["trackNumber"] = QString::number(track.track_number);
   if (track.duration_secs > 0)

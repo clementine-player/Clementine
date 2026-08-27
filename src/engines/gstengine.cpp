@@ -614,8 +614,8 @@ void GstEngine::Unpause() {
     if (has_faded_out_) {
       disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
       current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                    QTimeLine::Forward,
-                                    QEasingCurve::InOutQuad, false);
+                                    QTimeLine::Forward, QEasingCurve::InOutQuad,
+                                    false);
       has_faded_out_ = false;
     }
 

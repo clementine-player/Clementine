@@ -201,9 +201,9 @@ quint64 FileSystemCapacity(const QString& path) {
   // UNICODE builds this project uses on Windows, so it needs an LPCWSTR, not
   // a narrow (toLocal8Bit()) string - QString::utf16() is UTF-16 and
   // binary-compatible with wchar_t* on Windows.
-  if (GetDiskFreeSpaceEx(reinterpret_cast<LPCWSTR>(
-                             QDir::toNativeSeparators(path).utf16()),
-                         nullptr, &ret, nullptr) != 0)
+  if (GetDiskFreeSpaceEx(
+          reinterpret_cast<LPCWSTR>(QDir::toNativeSeparators(path).utf16()),
+          nullptr, &ret, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -217,9 +217,9 @@ quint64 FileSystemFreeSpace(const QString& path) {
     return quint64(fs_info.f_bavail) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
-  if (GetDiskFreeSpaceEx(reinterpret_cast<LPCWSTR>(
-                             QDir::toNativeSeparators(path).utf16()),
-                         &ret, nullptr, nullptr) != 0)
+  if (GetDiskFreeSpaceEx(
+          reinterpret_cast<LPCWSTR>(QDir::toNativeSeparators(path).utf16()),
+          &ret, nullptr, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -232,7 +232,7 @@ QString MakeTempDir(const QString template_name) {
     QTemporaryFile tempfile;
     if (!template_name.isEmpty()) tempfile.setFileTemplate(template_name);
 
-    tempfile.open();
+    (void)tempfile.open();
     path = tempfile.fileName();
   }
 
@@ -248,7 +248,7 @@ QString GetTemporaryFileName() {
     QTemporaryFile tempfile;
     // Do not delete the file, we want to do something with it
     tempfile.setAutoRemove(false);
-    tempfile.open();
+    (void)tempfile.open();
     file = tempfile.fileName();
   }
 
@@ -474,23 +474,20 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
   if (Md5_Algo == method) {
     return QCryptographicHash::hash(
         QByteArray(outer_padding +
-                   QCryptographicHash::hash(
-                       QByteArray(inner_padding + data),
-                       QCryptographicHash::Md5)),
+                   QCryptographicHash::hash(QByteArray(inner_padding + data),
+                                            QCryptographicHash::Md5)),
         QCryptographicHash::Md5);
   } else if (Sha1_Algo == method) {
     return QCryptographicHash::hash(
         QByteArray(outer_padding +
-                   QCryptographicHash::hash(
-                       QByteArray(inner_padding + data),
-                       QCryptographicHash::Sha1)),
+                   QCryptographicHash::hash(QByteArray(inner_padding + data),
+                                            QCryptographicHash::Sha1)),
         QCryptographicHash::Sha1);
   } else {  // Sha256_Algo, currently default
     return QCryptographicHash::hash(
         QByteArray(outer_padding +
-                   QCryptographicHash::hash(
-                       QByteArray(inner_padding + data),
-                       QCryptographicHash::Sha256)),
+                   QCryptographicHash::hash(QByteArray(inner_padding + data),
+                                            QCryptographicHash::Sha256)),
         QCryptographicHash::Sha256);
   }
 }
@@ -509,7 +506,7 @@ QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
 
 // File must not be open and will be closed afterwards!
 QByteArray Sha1File(QFile& file) {
-  file.open(QIODevice::ReadOnly);
+  (void)file.open(QIODevice::ReadOnly);
   QCryptographicHash hash(QCryptographicHash::Sha1);
   QByteArray data;
 

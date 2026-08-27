@@ -243,8 +243,8 @@ void BoxService::MaybeAddFileEntry(const QJsonObject& entry) {
   song.set_url(url);
   song.set_ctime(
       QDateTime::fromString(entry["created_at"].toString()).toSecsSinceEpoch());
-  song.set_mtime(
-      QDateTime::fromString(entry["modified_at"].toString()).toSecsSinceEpoch());
+  song.set_mtime(QDateTime::fromString(entry["modified_at"].toString())
+                     .toSecsSinceEpoch());
   song.set_filesize(entry["size"].toInt());
   song.set_title(entry["name"].toString());
 

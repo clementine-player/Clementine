@@ -64,10 +64,8 @@ static void SetupButton(const QAction* action, THUMBBUTTON* button) {
   if (action) {
     // qt_pixmapToWinHICON() was an undocumented private Qt5 symbol; QImage
     // ::toHICON() is the public, documented replacement Qt6 provides for it.
-    button->hIcon = action->icon()
-                        .pixmap(Windows7ThumbBar::kIconSize)
-                        .toImage()
-                        .toHICON();
+    button->hIcon =
+        action->icon().pixmap(Windows7ThumbBar::kIconSize).toImage().toHICON();
     button->dwFlags = action->isEnabled() ? THBF_ENABLED : THBF_DISABLED;
     // This is unsafe - doesn't obey 260-char restriction
     action->text().toWCharArray(button->szTip);
@@ -90,8 +88,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
 #ifdef Q_OS_WIN32
   if (button_created_message_id_ == 0) {
     // Compute the value for the TaskbarButtonCreated message
-    button_created_message_id_ =
-        RegisterWindowMessage(L"TaskbarButtonCreated");
+    button_created_message_id_ = RegisterWindowMessage(L"TaskbarButtonCreated");
     qLog(Debug) << "TaskbarButtonCreated message ID registered"
                 << button_created_message_id_;
   }

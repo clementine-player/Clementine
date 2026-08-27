@@ -19,10 +19,10 @@
 #define GSTENGINEPIPELINE_H
 
 #include <QBasicTimer>
+#include <QEasingCurve>
 #include <QFuture>
 #include <QMutex>
 #include <QThreadPool>
-#include <QEasingCurve>
 #include <QTimeLine>
 #include <QUrl>
 #include <memory>

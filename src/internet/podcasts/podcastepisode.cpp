@@ -169,7 +169,8 @@ void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":title", d->title_);
   query->bindValue(":description", d->description_);
   query->bindValue(":author", d->author_);
-  query->bindValue(":publication_date", d->publication_date_.toSecsSinceEpoch());
+  query->bindValue(":publication_date",
+                   d->publication_date_.toSecsSinceEpoch());
   query->bindValue(":duration_secs", d->duration_secs_);
   query->bindValue(":url", d->url_.toEncoded());
   query->bindValue(":listened", d->listened_);

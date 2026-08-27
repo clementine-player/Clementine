@@ -101,11 +101,10 @@ void PrettyImage::ImageFetched(RedirectFollower* follower) {
     // which overload to take the address of. Capture by value to preserve the
     // original semantics of passing image_ (and the computed size) as
     // snapshots into the background task.
-    QFuture<QImage> future = QtConcurrent::run(
-        [image = image_, size = image_size()]() {
-          return image.scaled(size, Qt::KeepAspectRatio,
-                              Qt::SmoothTransformation);
-        });
+    QFuture<QImage> future = QtConcurrent::run([image = image_,
+                                                size = image_size()]() {
+      return image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    });
     NewClosure(future, this, SLOT(ImageScaled(QFuture<QImage>)), future);
   }
 }

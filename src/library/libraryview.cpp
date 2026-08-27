@@ -595,7 +595,8 @@ void LibraryView::ShowInVarious(bool on) {
   }
 
   const QList<QString> album_keys = albums.keys();
-  for (const QString& album : QSet<QString>(album_keys.begin(), album_keys.end())) {
+  for (const QString& album :
+       QSet<QString>(album_keys.begin(), album_keys.end())) {
     app_->library_backend()->ForceCompilation(album, albums.values(album), on);
   }
 }

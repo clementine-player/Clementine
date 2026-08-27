@@ -56,8 +56,10 @@ DidYouMean::DidYouMean(QWidget* buddy, QWidget* parent)
   press_enter_ = "(" + tr("press enter") + ")";
 
   // Texts' sizes
-  did_you_mean_size_ = QFontMetrics(normal_font_).horizontalAdvance(did_you_mean_);
-  press_enter_size_ = QFontMetrics(press_enter_font_).horizontalAdvance(press_enter_);
+  did_you_mean_size_ =
+      QFontMetrics(normal_font_).horizontalAdvance(did_you_mean_);
+  press_enter_size_ =
+      QFontMetrics(press_enter_font_).horizontalAdvance(press_enter_);
 }
 
 bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
@@ -115,10 +117,11 @@ void DidYouMean::UpdateGeometry() {
   // Resize to len(text to display) + total number of padding added +
   // size(close button), so the "Did you mean" widget is always fully displayed
 
-  resize(QSize(did_you_mean_size_ +
-                   QFontMetrics(correction_font_).horizontalAdvance(correction_ + "  ") +
-                   press_enter_size_ + kPadding * 6 + close_->width(),
-               height));
+  resize(QSize(
+      did_you_mean_size_ +
+          QFontMetrics(correction_font_).horizontalAdvance(correction_ + "  ") +
+          press_enter_size_ + kPadding * 6 + close_->width(),
+      height));
 
   close_->move(kPadding, kPadding);
   close_->resize(text_height, text_height);
@@ -142,7 +145,8 @@ void DidYouMean::paintEvent(QPaintEvent*) {
   // Text
   p.setFont(normal_font_);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, did_you_mean_);
-  text_rect.setLeft(text_rect.left() + p.fontMetrics().horizontalAdvance(did_you_mean_));
+  text_rect.setLeft(text_rect.left() +
+                    p.fontMetrics().horizontalAdvance(did_you_mean_));
 
   p.setFont(correction_font_);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, correction_);

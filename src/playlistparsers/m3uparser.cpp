@@ -40,7 +40,7 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
   QTextStream playlist_stream(device);
   QString data = playlist_stream.readAll();
   qLog(Debug) << "Detected codec"
-             << QStringConverter::nameForEncoding(playlist_stream.encoding());
+              << QStringConverter::nameForEncoding(playlist_stream.encoding());
 
   // iTune playlists use \r newlines. These aren't handled by the Qt readLine
   // methods.
