@@ -57,9 +57,6 @@ if (HAVE_VISUALISATIONS)
   include_directories(${OPENGL_INCLUDE_DIR})
 endif(HAVE_VISUALISATIONS)
 
-if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM5_INCLUDE_DIRS})
-endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
@@ -884,24 +881,28 @@ optional_source(HAVE_VISUALISATIONS
     visualisations/visualisationselector.ui
 )
 
-# Lastfm
-optional_source(HAVE_LIBLASTFM
-  SOURCES
-    covers/lastfmcoverprovider.cpp
-    internet/lastfm/fixlastfm.cpp
-    internet/lastfm/lastfmcompat.cpp
-    internet/lastfm/lastfmservice.cpp
-    internet/lastfm/lastfmsettingspage.cpp
-    songinfo/lastfmtrackinfoprovider.cpp
-    songinfo/tagwidget.cpp
-  HEADERS
-    covers/lastfmcoverprovider.h
-    internet/lastfm/lastfmservice.h
-    internet/lastfm/lastfmsettingspage.h
-    songinfo/lastfmtrackinfoprovider.h
-    songinfo/tagwidget.h
-  UI
-    internet/lastfm/lastfmsettingspage.ui
+# Lastfm - talks directly to the Last.fm web service API over
+# QNetworkAccessManager; no external library dependency, so unlike the other
+# optional_source blocks here, this one is unconditional.
+list(APPEND SOURCES
+  covers/lastfmcoverprovider.cpp
+  internet/lastfm/lastfmscrobblecache.cpp
+  internet/lastfm/lastfmservice.cpp
+  internet/lastfm/lastfmsettingspage.cpp
+  internet/lastfm/lastfmws.cpp
+  internet/lastfm/lastfmxmlquery.cpp
+  songinfo/lastfmtrackinfoprovider.cpp
+  songinfo/tagwidget.cpp
+)
+list(APPEND HEADERS
+  covers/lastfmcoverprovider.h
+  internet/lastfm/lastfmservice.h
+  internet/lastfm/lastfmsettingspage.h
+  songinfo/lastfmtrackinfoprovider.h
+  songinfo/tagwidget.h
+)
+list(APPEND UI
+  internet/lastfm/lastfmsettingspage.ui
 )
 
 # Platform specific - OS X
@@ -1302,10 +1303,6 @@ link_directories(
 if(HAVE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(HAVE_VISUALISATIONS)
-
-if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
-endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
   link_directories(${LIBGPOD_LIBRARY_DIRS})

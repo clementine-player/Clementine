@@ -81,10 +81,6 @@ pkg_check_modules(TAGLIB taglib)
 
 find_package(ZLIB REQUIRED)
 
-find_library(LASTFM5_LIBRARIES lastfm5)
-find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
-find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
-
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
 # QT
@@ -142,10 +138,6 @@ else()
   add_subdirectory(3rdparty/utf8-cpp)
   add_subdirectory(3rdparty/taglib)
   add_definitions(-DTAGLIB_STATIC)
-endif()
-
-if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
-  set(HAVE_LIBLASTFM1 ON)
 endif()
 
 if (APPLE)
@@ -255,10 +247,6 @@ optional_component(GIO ON "Devices: GIO device backend"
 
 optional_component(LIBMTP ON "Devices: MTP support"
   DEPENDS "libmtp" LIBMTP_FOUND
-)
-
-optional_component(LIBLASTFM ON "Last.fm support"
-  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"

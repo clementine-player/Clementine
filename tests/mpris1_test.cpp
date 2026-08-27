@@ -22,9 +22,6 @@
 #include "core/song.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
-#ifdef HAVE_LIBLASTFM
-  #include "internet/lastfm/lastfmcompat.h"
-#endif
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

@@ -25,13 +25,10 @@
 #include "core/timeconstants.h"
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
+#include "internet/lastfm/lastfmservice.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmservice.h"
-#endif
 
 IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   // load settings initially and sign up for updates
@@ -89,9 +86,7 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   connect(this, SIGNAL(RateCurrentSong(double)), playlist_manager,
           SLOT(RateCurrentSong(double)));
 
-#ifdef HAVE_LIBLASTFM
   connect(this, SIGNAL(Love()), app_->scrobbler(), SLOT(Love()));
-#endif
 }
 
 IncomingDataParser::~IncomingDataParser() {}

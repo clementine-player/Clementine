@@ -41,7 +41,6 @@
 #include "core/utilities.h"
 #include "core/waitforsignal.h"
 #include "internet/core/internetmodel.h"
-#include "internet/lastfm/fixlastfm.h"
 #include "internet/podcasts/podcastparser.h"
 #include "internet/podcasts/podcastservice.h"
 #include "internet/podcasts/podcasturlloader.h"

@@ -43,9 +43,8 @@ BuildRequires:  pkgconfig(Qt6OpenGLWidgets)
 BuildRequires:  pkgconfig(Qt6DBus)
 BuildRequires:  pkgconfig(Qt6Test)
 BuildRequires:  pkgconfig(Qt6Core5Compat)
-# liblastfm has no Qt6 build in any Fedora repo yet, so Last.fm scrobbling is
-# unavailable here; CMake's optional_component degrades gracefully when it's
-# missing (see CMakeLists.txt).
+# liblastfm isn't a dependency any more - Last.fm scrobbling talks directly
+# to the web service API now (src/internet/lastfm/lastfmws.*).
 BuildRequires:  pkgconfig(gstreamer-1.0)
 BuildRequires:  pkgconfig(gstreamer-app-1.0)
 BuildRequires:  pkgconfig(gstreamer-audio-1.0)

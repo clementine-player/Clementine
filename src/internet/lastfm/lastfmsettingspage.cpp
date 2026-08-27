@@ -21,8 +21,6 @@
 
 #include "lastfmsettingspage.h"
 
-#include <lastfm5/ws.h>
-
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QSettings>
@@ -30,6 +28,7 @@
 #include "core/application.h"
 #include "internet/core/internetmodel.h"
 #include "lastfmservice.h"
+#include "lastfmws.h"
 #include "ui/iconloader.h"
 #include "ui_lastfmsettingspage.h"
 
@@ -109,5 +108,5 @@ void LastFMSettingsPage::Logout() {
 void LastFMSettingsPage::RefreshControls(bool authenticated) {
   ui_->login_state->SetLoggedIn(
       authenticated ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
-      lastfm::ws::Username);
+      LastFmWs::username);
 }

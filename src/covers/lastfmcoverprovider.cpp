@@ -26,7 +26,8 @@
 #include "albumcoverfetcher.h"
 #include "core/closure.h"
 #include "coverprovider.h"
-#include "internet/lastfm/lastfmcompat.h"
+#include "internet/lastfm/lastfmws.h"
+#include "internet/lastfm/lastfmxmlquery.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
     : CoverProvider("last.fm", true, parent) {}
@@ -37,7 +38,7 @@ bool LastFmCoverProvider::StartSearch(const QString& artist,
   params["method"] = "album.search";
   params["album"] = album + " " + artist;
 
-  QNetworkReply* reply = lastfm::ws::post(params);
+  QNetworkReply* reply = LastFmWs::Post(params);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(QueryFinished(QNetworkReply*, int)), reply, id);
 
@@ -49,13 +50,13 @@ void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
 
   CoverSearchResults results;
 
-  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
+  LastFmXmlQuery query;
+  if (query.Parse(reply->readAll())) {
     // parse the list of search results
-    QList<lastfm::XmlQuery> elements =
+    QList<LastFmXmlQuery> elements =
         query["results"]["albummatches"].children("album");
 
-    for (const lastfm::XmlQuery& element : elements) {
+    for (const LastFmXmlQuery& element : elements) {
       CoverSearchResult result;
       result.description =
           element["artist"].text() + " - " + element["name"].text();

@@ -136,6 +136,13 @@ QT_PLUGINS = [
     'imageformats/libqsvg.dylib',
     'platforms/libqcocoa.dylib',
     'styles/libqmacstyle.dylib',
+    # Qt6 moved TLS support out of QtNetwork and into a plugin. Without one
+    # bundled, every HTTPS request (cover art, Last.fm, podcasts, internet
+    # radio) silently fails with "No functional TLS backend was found".
+    # libqsecuretransportbackend uses macOS's native Security framework, so
+    # unlike libqopensslbackend it needs no separate OpenSSL dylibs bundled
+    # alongside it.
+    'tls/libqsecuretransportbackend.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = ['/target/plugins']
 for _prefix in HOMEBREW_PREFIXES:

@@ -18,9 +18,7 @@
 #include "config.h"
 #include "tagreader.h"
 #include "core/song.h"
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmcompat.h"
-#endif
+#include "internet/lastfm/lastfmtrack.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -80,22 +78,15 @@ class SongTest : public ::testing::Test {
   }
 };
 
-#ifdef HAVE_LIBLASTFM
-TEST_F(SongTest, InitsFromLastFM) {
+TEST_F(SongTest, ConvertsToLastFmTrack) {
   Song song;
-  lastfm::MutableTrack track;
-  track.setTitle("Foo");
-  lastfm::Artist artist("Bar");
-  track.setArtist(artist);
-  lastfm::Album album(artist, "Baz");
-  track.setAlbum(album);
+  song.Init("Foo", "Bar", "Baz", 0);
 
-  song.InitFromLastFM(track);
-  EXPECT_EQ("Foo", song.title());
-  EXPECT_EQ("Baz", song.album());
-  EXPECT_EQ("Bar", song.artist());
+  LastFmTrack track = song.ToLastFmTrack(false);
+  EXPECT_EQ("Foo", track.title);
+  EXPECT_EQ("Bar", track.artist);
+  EXPECT_EQ("Baz", track.album);
 }
-#endif  // HAVE_LIBLASTFM
 
 /*TEST_F(SongTest, InitsFromFile) {
   QTemporaryFile temp;

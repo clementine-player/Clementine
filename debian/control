@@ -41,10 +41,11 @@ Build-Depends: debhelper (>= 7),
                libfftw3-dev,
                libsparsehash-dev,
                libprojectm-dev (>= 2.0.1+dfsg-6)
-# liblastfm and libmygpo-qt have no Qt6 build in Debian/Ubuntu yet.
-# liblastfm's optional_component degrades gracefully when it's missing;
-# libmygpo-qt5 (gpodder sync) falls back to the vendored
-# 3rdparty/libmygpo-qt5 copy - see CMakeLists.txt.
+# liblastfm isn't a dependency any more - Last.fm scrobbling talks directly
+# to the web service API now (src/internet/lastfm/lastfmws.*), since
+# liblastfm has no Qt6 build anywhere. libmygpo-qt has no Qt6 build either;
+# gpodder sync falls back to the vendored 3rdparty/libmygpo-qt5 copy - see
+# CMakeLists.txt.
 #
 # qt6-5compat-dev is Debian's package name for Qt6's Core5Compat module;
 # Ubuntu (jammy/noble/resolute) instead calls it libqt6core5compat6-dev -

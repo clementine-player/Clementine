@@ -17,8 +17,7 @@
 
 #include "core/albumcoverfetcher.h"
 #include "core/networkaccessmanager.h"
-
-#include <lastfm5/ws.h>
+#include "internet/lastfm/lastfmws.h"
 
 #include <QCoreApplication>
 #include <QEventLoop>
@@ -32,11 +31,11 @@ namespace {
 class AlbumCoverFetcherTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
-    lastfm::ws::ApiKey = "foobar";
+    LastFmWs::api_key = "foobar";
 
-    // Lastfm takes ownership of this.
+    // LastFmWs takes ownership of this.
     mock_network_ = new MockNetworkAccessManager;
-    lastfm::setNetworkAccessManager(mock_network_);
+    LastFmWs::SetNetworkAccessManager(mock_network_);
   }
 
   void SetUp() {

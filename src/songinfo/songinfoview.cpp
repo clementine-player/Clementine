@@ -24,14 +24,11 @@
 
 #include "config.h"
 #include "core/closure.h"
+#include "songinfo/lastfmtrackinfoprovider.h"
 #include "songinfo/songinfoprovider.h"
 #include "songinfo/taglyricsinfoprovider.h"
 #include "songinfo/ultimatelyricsprovider.h"
 #include "songinfo/ultimatelyricsreader.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "songinfo/lastfmtrackinfoprovider.h"
-#endif
 
 const char* SongInfoView::kSettingsGroup = "SongInfo";
 
@@ -45,9 +42,7 @@ SongInfoView::SongInfoView(QWidget* parent)
              SLOT(UltimateLyricsParsed(QFuture<QList<SongInfoProvider*>>)),
              future);
 
-#ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
-#endif
   fetcher_->AddProvider(new TagLyricsInfoProvider);
 }
 

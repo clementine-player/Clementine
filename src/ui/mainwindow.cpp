@@ -129,9 +129,7 @@
 #include "ui/macsystemtrayicon.h"
 #endif
 
-#ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/lastfmservice.h"
-#endif
 
 #ifdef HAVE_WIIMOTEDEV
 #include "wiimotedev/shortcuts.h"
@@ -431,11 +429,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()),
           SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), app_->player(), SLOT(Mute()));
-#ifdef HAVE_LIBLASTFM
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
-#endif
 
   connect(ui_->action_clear_playlist, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(ClearCurrent()));
@@ -792,7 +788,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(AddToPlaylist(QMimeData*)));
   connect(app_->internet_model(), SIGNAL(ScrollToIndex(QModelIndex)),
           SLOT(ScrollToInternetIndex(QModelIndex)));
-#ifdef HAVE_LIBLASTFM
   connect(app_->scrobbler(), SIGNAL(ButtonVisibilityChanged(bool)),
           SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(app_->scrobbler(), SIGNAL(ScrobbleButtonVisibilityChanged(bool)),
@@ -801,7 +796,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ScrobblingEnabledChanged(bool)));
   connect(app_->scrobbler(), SIGNAL(ScrobbledRadioStream()),
           SLOT(ScrobbledRadioStream()));
-#endif
   connect(app_->internet_model()->Service<MagnatuneService>(),
           SIGNAL(DownloadFinished(QStringList)), osd_,
           SLOT(MagnatuneDownloadFinished(QStringList)));
@@ -882,12 +876,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowOSD()));
   connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), app_->player(),
           SLOT(TogglePrettyOSD()));
-#ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
   connect(global_shortcuts_, SIGNAL(Love()), app_->scrobbler(), SLOT(Love()));
   connect(global_shortcuts_, SIGNAL(Ban()), app_->scrobbler(), SLOT(Ban()));
-#endif
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)),
           app_->playlist_manager(), SLOT(RateCurrentSong(int)));
@@ -989,7 +981,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
           SLOT(SetNextAlbumEnabled(PlaylistSequence::RepeatMode)));
 
-#ifdef HAVE_LIBLASTFM
   connect(app_->scrobbler(), SIGNAL(CachedToScrobble()),
           SLOT(CachedToScrobble()));
   connect(app_->scrobbler(), SIGNAL(ScrobbleError(int)),
@@ -998,10 +989,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   LastFMButtonVisibilityChanged(app_->scrobbler()->AreButtonsVisible());
   ScrobbleButtonVisibilityChanged(app_->scrobbler()->IsScrobbleButtonVisible());
   ScrobblingEnabledChanged(app_->scrobbler()->IsScrobblingEnabled());
-#else
-  LastFMButtonVisibilityChanged(false);
-  ScrobbleButtonVisibilityChanged(false);
-#endif
 
   // Load settings
   qLog(Debug) << "Loading settings";
@@ -1219,15 +1206,11 @@ void MainWindow::MediaPlaying() {
     ui_->action_love->setEnabled(false);
   }
 
-#ifdef HAVE_LIBLASTFM
   if (tray_icon_) {
     const bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
     tray_icon_->LastFMButtonLoveStateChanged(enable_love);
     tray_icon_->SetPlaying(enable_play_pause, enable_love);
   }
-#else
-  if (tray_icon_) tray_icon_->SetPlaying(enable_play_pause);
-#endif
 
   track_position_timer_->start();
   track_slider_timer_->start();
@@ -1243,10 +1226,8 @@ void MainWindow::SongChanged(const Song& song) {
   setWindowTitle(song.PrettyTitleWithArtist());
   if (tray_icon_) tray_icon_->SetProgress(0);
 
-#ifdef HAVE_LIBLASTFM
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(app_->scrobbler()->IsScrobblingEnabled());
-#endif
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
@@ -1277,7 +1258,6 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   }
 }
 
-#ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(value);
@@ -1296,7 +1276,6 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   ui_->action_love->setEnabled(value);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(value);
 }
-#endif
 
 void MainWindow::LastFMButtonVisibilityChanged(bool value) {
   ui_->action_love->setVisible(value);
@@ -1316,9 +1295,7 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
       ui_->action_toggle_scrobbling->setIcon(
           IconLoader::Load("as", IconLoader::Lastfm));
     } else {
-#ifdef HAVE_LIBLASTFM
       SetToggleScrobblingIcon(app_->scrobbler()->IsScrobblingEnabled());
-#endif
     }
   }
 }
@@ -1563,7 +1540,6 @@ void MainWindow::UpdateTrackPosition() {
     return;
   }
 
-#ifdef HAVE_LIBLASTFM
   // Time to scrobble?
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                app_->scrobbler()->IsScrobblingEnabled() &&
@@ -1577,7 +1553,6 @@ void MainWindow::UpdateTrackPosition() {
       }
     }
   }
-#endif
 
   if (position >= play_count_point) {
     // Update the play count for the song if it's from the library
@@ -1610,14 +1585,12 @@ void MainWindow::UpdateTrackPosition() {
     if (tray_icon_) tray_icon_->SetProgress(double(position) / length * 100);
 
 // if we're waiting for the scrobble point, update the icon
-#ifdef HAVE_LIBLASTFM
     if (position < scrobble_point &&
         playlist->get_lastfm_status() == Playlist::LastFM_New &&
         last_fm_enabled) {
       ui_->action_toggle_scrobbling->setIcon(
           CreateOverlayedIcon(position, scrobble_point));
     }
-#endif
   }
 }
 
@@ -1633,12 +1606,10 @@ void MainWindow::UpdateTrackSliderPosition() {
   ui_->track_slider->SetValue(slider_position, slider_length);
 }
 
-#ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(true);
 }
-#endif
 
 void MainWindow::Love() {
   Playlist* active_playlist = app_->playlist_manager()->active();
@@ -1650,11 +1621,9 @@ void MainWindow::Love() {
   }
 
   if (IsLastFmEnabled()) {
-#ifdef HAVE_LIBLASTFM
     app_->scrobbler()->Love();
     ui_->action_love->setEnabled(false);
     if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
-#endif
   } else if (item->IsLocalLibraryItem()) {
     const Song& song = item->Metadata();
     if (!song.is_valid() || song.id() == -1) return;
@@ -3013,16 +2982,11 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
 }
 
 bool MainWindow::IsLastFmEnabled() {
-#ifdef HAVE_LIBLASTFM
   return ui_->action_toggle_scrobbling->isVisible() &&
          app_->scrobbler()->IsScrobblingEnabled() &&
          app_->scrobbler()->IsAuthenticated();
-#else
-  return false;
-#endif
 }
 
-#ifdef HAVE_LIBLASTFM
 void MainWindow::CachedToScrobble() {
   const bool last_fm_enabled = IsLastFmEnabled();
 
@@ -3061,7 +3025,6 @@ void MainWindow::ScrobbleError(int value) {
       break;
   }
 }
-#endif
 
 void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
                                            QString line2) {

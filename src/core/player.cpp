@@ -39,14 +39,11 @@
 #include "core/urlhandler.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "internet/lastfm/lastfmservice.h"
 #include "library/librarybackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmservice.h"
-#endif
 
 using std::shared_ptr;
 
@@ -92,9 +89,7 @@ void Player::Init() {
 
   ReloadSettings();
 
-#ifdef HAVE_LIBLASTFM
   lastfm_ = app_->scrobbler();
-#endif
 }
 
 void Player::ReloadSettings() {
@@ -362,9 +357,7 @@ void Player::RestartOrPrevious() {
 }
 
 void Player::Stop(bool stop_after) {
-#ifdef HAVE_LIBLASTFM
   lastfm_->Scrobble();
-#endif
 
   engine_->Stop(stop_after);
   app_->playlist_manager()->active()->set_current_row(-1);
@@ -489,10 +482,8 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change,
                   current_item_->Metadata().beginning_nanosec(),
                   current_item_->Metadata().end_nanosec());
 
-#ifdef HAVE_LIBLASTFM
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(current_item_->Metadata());
-#endif
   }
 }
 
@@ -501,10 +492,8 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
   // song was reloaded) so we push the latest version into Engine
   engine_->RefreshMarkers(metadata.beginning_nanosec(), metadata.end_nanosec());
 
-#ifdef HAVE_LIBLASTFM
   lastfm_->Scrobble();
   lastfm_->NowPlaying(metadata);
-#endif
 }
 
 void Player::SeekTo(int seconds) {

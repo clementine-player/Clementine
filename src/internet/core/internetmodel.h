@@ -39,9 +39,7 @@ class InternetService;
 class SettingsDialog;
 class TaskManager;
 
-#ifdef HAVE_LIBLASTFM
 class LastFMService;
-#endif
 
 class InternetModel : public QStandardItemModel {
   Q_OBJECT

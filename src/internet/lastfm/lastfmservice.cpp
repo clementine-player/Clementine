@@ -6,6 +6,7 @@
    Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
    Copyright 2012, Harald Sitter <sitter@kde.org>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,30 +22,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// StringBuilder is activated to speed-up QString concatenation. As explained
-// here:
-// http://labs.qt.nokia.com/2011/06/13/string-concatenation-with-qstringbuilder/
-// this cause some compilation errors in some cases. As Lasfm library inlines
-// some functions in their includes files, which aren't compatible with
-// QStringBuilder, we undef it here
-#include <QtGlobal>
-#undef QT_USE_QSTRINGBUILDER
-
-#include <QCryptographicHash>
-#include <QDesktopServices>
-#include <QMenu>
-#include <QMessageBox>
-#include <QSettings>
-#include <QUrlQuery>
-#include <algorithm>
-
 #include "lastfmservice.h"
 
-#ifdef HAVE_LIBLASTFM1
-#include <lastfm5/RadioStation.h>
-#else
-#include <lastfm5/RadioStation>
-#endif
+#include <QDesktopServices>
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QSettings>
+#include <QUrlQuery>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -52,30 +36,21 @@
 #include "core/network.h"
 #include "core/player.h"
 #include "core/song.h"
-#include "core/taskmanager.h"
-#include "covers/coverproviders.h"
-#include "covers/lastfmcoverprovider.h"
-#include "internet/core/internetmodel.h"
-#include "internet/core/internetplaylistitem.h"
 #include "internet/core/localredirectserver.h"
-#include "lastfmcompat.h"
-#include "ui/iconloader.h"
+#include "lastfmscrobblecache.h"
+#include "lastfmws.h"
+#include "lastfmxmlquery.h"
 #include "ui/settingsdialog.h"
 
-using lastfm::XmlQuery;
-
-uint qHash(const lastfm::Track& track) {
-  return qHash(track.title()) ^ qHash(track.artist().name()) ^
-         qHash(track.album().title());
-}
+namespace {
+// Last.fm won't accept a scrobble for a track shorter than this.
+const int kScrobbleTimeMinSecs = 31;
+}  // namespace
 
 const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
-const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
-const char* LastFMService::kAuthLoginUrl =
-    "https://www.last.fm/api/auth/?api_key=%1&token=%2";
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
@@ -83,10 +58,6 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       connection_problems_(false),
       app_(app),
       network_(new NetworkAccessManager) {
-#ifdef HAVE_LIBLASTFM1
-  lastfm::ws::setScheme(lastfm::ws::Https);
-#endif
-
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
@@ -100,8 +71,8 @@ void LastFMService::ReloadSettings() {
   bool scrobbling_enabled_old = scrobbling_enabled_;
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  lastfm::ws::Username = settings.value("Username").toString();
-  lastfm::ws::SessionKey = settings.value("Session").toString();
+  LastFmWs::username = settings.value("Username").toString();
+  LastFmWs::session_key = settings.value("Session").toString();
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ =
@@ -121,7 +92,7 @@ void LastFMService::ShowConfig() {
 }
 
 bool LastFMService::IsAuthenticated() const {
-  return !lastfm::ws::SessionKey.isEmpty();
+  return !LastFmWs::session_key.isEmpty();
 }
 
 bool LastFMService::IsSubscriber() const {
@@ -129,20 +100,6 @@ bool LastFMService::IsSubscriber() const {
   settings.beginGroup(kSettingsGroup);
   return settings.value("Subscriber", false).toBool();
 }
-
-namespace {
-QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
-  std::sort(params.begin(), params.end());
-  QString to_sign;
-  for (const auto& p : params) {
-    to_sign += p.first;
-    to_sign += p.second;
-  }
-  to_sign += LastFMService::kSecret;
-  return QCryptographicHash::hash(to_sign.toUtf8(), QCryptographicHash::Md5)
-      .toHex();
-}
-}  // namespace
 
 void LastFMService::Authenticate() {
   QUrl url("https://www.last.fm/api/auth/");
@@ -161,13 +118,17 @@ void LastFMService::Authenticate() {
     const QUrl& url = server->request_url();
     QString token = QUrlQuery(url).queryItemValue("token");
 
+    QMap<QString, QString> params;
+    params["api_key"] = kApiKey;
+    params["method"] = "auth.getSession";
+    params["token"] = token;
+    params["api_sig"] = LastFmWs::Sign(params);
+
     QUrl session_url("https://ws.audioscrobbler.com/2.0/");
     QUrlQuery session_url_query;
-    session_url_query.addQueryItem("api_key", kApiKey);
-    session_url_query.addQueryItem("method", "auth.getSession");
-    session_url_query.addQueryItem("token", token);
-    session_url_query.addQueryItem(
-        "api_sig", SignApiRequest(session_url_query.queryItems()));
+    for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
+      session_url_query.addQueryItem(it.key(), it.value());
+    }
     session_url.setQuery(session_url_query);
 
     QNetworkReply* reply = network_->get(QNetworkRequest(session_url));
@@ -190,34 +151,30 @@ void LastFMService::Authenticate() {
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  // Parse the reply
-  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
-    lastfm::ws::Username = lfm["session"]["name"].text();
-    lastfm::ws::SessionKey = lfm["session"]["key"].text();
+  LastFmXmlQuery lfm;
+  if (lfm.Parse(reply->readAll())) {
+    LastFmWs::username = lfm["session"]["name"].text();
+    LastFmWs::session_key = lfm["session"]["key"].text();
     QString subscribed = lfm["session"]["subscriber"].text();
     const bool is_subscriber = (subscribed.toInt() == 1);
 
     // Save the session key
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
-    settings.setValue("Username", lastfm::ws::Username);
-    settings.setValue("Session", lastfm::ws::SessionKey);
+    settings.setValue("Username", LastFmWs::username);
+    settings.setValue("Session", LastFmWs::session_key);
     settings.setValue("Subscriber", is_subscriber);
   } else {
     emit AuthenticationComplete(false);
     return;
   }
 
-  // Invalidate the scrobbler - it will get recreated later
-  scrobbler_.reset(nullptr);
-
   emit AuthenticationComplete(true);
 }
 
 void LastFMService::SignOut() {
-  lastfm::ws::Username.clear();
-  lastfm::ws::SessionKey.clear();
+  LastFmWs::username.clear();
+  LastFmWs::session_key.clear();
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
@@ -226,215 +183,159 @@ void LastFMService::SignOut() {
   settings.setValue("Session", QString());
 }
 
-void LastFMService::UpdateSubscriberStatus() {
-  QMap<QString, QString> params;
-  params["method"] = "user.getInfo";
-  params["user"] = lastfm::ws::Username;
-
-  QNetworkReply* reply = lastfm::ws::post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(UpdateSubscriberStatusFinished(QNetworkReply*)), reply);
-}
-
-void LastFMService::UpdateSubscriberStatusFinished(QNetworkReply* reply) {
-  reply->deleteLater();
-
-  bool is_subscriber = false;
-
-  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm,
-                                 &connection_problems_)) {
-    QString subscriber = lfm["user"]["subscriber"].text();
-    is_subscriber = (subscriber.toInt() == 1);
-
-    QSettings settings;
-    settings.beginGroup(kSettingsGroup);
-    settings.setValue("Subscriber", is_subscriber);
-    qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
-  }
-
-  emit UpdatedSubscriberStatus(is_subscriber);
-}
-
-QUrl LastFMService::FixupUrl(const QUrl& url) {
-  QUrl ret;
-  ret.setUrl(url.toEncoded().replace(
-      "USERNAME", QUrl::toPercentEncoding(lastfm::ws::Username)));
-  return ret;
-}
-
-QString LastFMService::ErrorString(lastfm::ws::Error error) const {
-  switch (error) {
-    case lastfm::ws::InvalidService:
-      return tr("Invalid service");
-    case lastfm::ws::InvalidMethod:
-      return tr("Invalid method");
-    case lastfm::ws::AuthenticationFailed:
-      return tr("Authentication failed");
-    case lastfm::ws::InvalidFormat:
-      return tr("Invalid format");
-    case lastfm::ws::InvalidParameters:
-      return tr("Invalid parameters");
-    case lastfm::ws::InvalidResourceSpecified:
-      return tr("Invalid resource specified");
-    case lastfm::ws::OperationFailed:
-      return tr("Operation failed");
-    case lastfm::ws::InvalidSessionKey:
-      return tr("Invalid session key");
-    case lastfm::ws::InvalidApiKey:
-      return tr("Invalid API key");
-    case lastfm::ws::ServiceOffline:
-      return tr("Service offline");
-    case lastfm::ws::SubscribersOnly:
-      return tr("This stream is for paid subscribers only");
-
-    case lastfm::ws::TryAgainLater:
-      return tr("Last.fm is currently busy, please try again in a few minutes");
-
-    case lastfm::ws::NotEnoughContent:
-      return tr("Not enough content");
-    case lastfm::ws::NotEnoughMembers:
-      return tr("Not enough members");
-    case lastfm::ws::NotEnoughFans:
-      return tr("Not enough fans");
-    case lastfm::ws::NotEnoughNeighbours:
-      return tr("Not enough neighbors");
-
-    case lastfm::ws::MalformedResponse:
-      return tr("Malformed response");
-
-    case lastfm::ws::UnknownError:
-    default:
-      return tr("Unknown error");
-  }
-}
-
-bool LastFMService::InitScrobbler() {
-  if (!IsAuthenticated() || !IsScrobblingEnabled()) return false;
-
-  if (!scrobbler_)
-    scrobbler_.reset(new lastfm::Audioscrobbler(kAudioscrobblerClientId));
-
-// reemit the signal since the sender is private
-#ifdef HAVE_LIBLASTFM1
-  connect(scrobbler_.get(), SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
-          SIGNAL(ScrobbleSubmitted()));
-  connect(scrobbler_.get(), SIGNAL(nowPlayingError(int, QString)),
-          SIGNAL(ScrobbleError(int)));
-#else
-  connect(scrobbler_.get(), SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
-#endif
-  return true;
-}
-
-void LastFMService::ScrobblerStatus(int value) {
-  switch (value) {
-    case 2:
-    case 3:
-      emit CachedToScrobble();
-      break;
-
-    default:
-      emit ScrobbleError(value);
-      break;
-  }
-}
-
-lastfm::Track LastFMService::TrackFromSong(const Song& song) const {
-  if (song.title() == last_track_.title() &&
-      song.artist() == last_track_.artist() &&
-      song.album() == last_track_.album())
+LastFmTrack LastFMService::TrackFromSong(const Song& song) const {
+  if (song.title() == last_track_.title && song.artist() == last_track_.artist &&
+      song.album() == last_track_.album)
     return last_track_;
 
-  lastfm::Track ret;
-  song.ToLastFM(&ret, PreferAlbumArtist());
-  return ret;
+  return song.ToLastFmTrack(PreferAlbumArtist());
 }
 
 void LastFMService::NowPlaying(const Song& song) {
-  if (!InitScrobbler()) return;
+  if (!IsAuthenticated() || !IsScrobblingEnabled()) return;
 
-  // Scrobbling streams is difficult if we don't have length of each individual
-  // part.  In Song::ToLastFm we set the Track's source to
+  // Scrobbling streams is difficult if we don't have the length of each
+  // individual part. Song::ToLastFmTrack sets the track's source to
   // NonPersonalisedBroadcast if it's such a stream, so we have to scrobble it
   // when we change to a different track, but only if enough time has elapsed
   // since it started playing.
-  if (!last_track_.isNull() &&
-      last_track_.source() == lastfm::Track::NonPersonalisedBroadcast) {
+  if (last_track_.is_valid() &&
+      last_track_.source == LastFmTrack::NonPersonalisedBroadcast) {
     const int duration_secs =
-        last_track_.timestamp().secsTo(QDateTime::currentDateTime());
-    if (duration_secs >= lastfm::compat::ScrobbleTimeMin()) {
-      lastfm::MutableTrack mtrack(last_track_);
-      mtrack.setDuration(duration_secs);
+        last_track_.timestamp.secsTo(QDateTime::currentDateTime());
+    if (duration_secs >= kScrobbleTimeMinSecs) {
+      LastFmTrack finished_track = last_track_;
+      finished_track.duration_secs = duration_secs;
 
-      qLog(Info) << "Scrobbling stream track" << mtrack.title() << "length"
-                 << duration_secs;
-      scrobbler_->cache(mtrack);
-      scrobbler_->submit();
+      qLog(Info) << "Scrobbling stream track" << finished_track.title
+                 << "length" << duration_secs;
+      LastFmScrobbleCache(LastFmWs::username).Add(finished_track);
+      Scrobble();
 
       emit ScrobbledRadioStream();
     }
   }
 
-  lastfm::MutableTrack mtrack(TrackFromSong(song));
-  mtrack.stamp();
+  LastFmTrack track = TrackFromSong(song);
+  track.timestamp = QDateTime::currentDateTime();
   already_cached_to_scrobble_ = false;
-  last_track_ = mtrack;
+  last_track_ = track;
 
-#ifndef HAVE_LIBLASTFM1
-  // Check immediately if the song is valid
-  Scrobble::Invalidity invalidity;
-  if (!lastfm::Scrobble(last_track_).isValid(&invalidity)) {
-    // for now just notify this, we can also see the cause
+  if (!track.is_valid()) {
     emit ScrobbleError(-1);
     return;
   }
-#else
-// TODO(John Maguire): validity was removed from liblastfm1 but might reappear,
-// it should have
-// no impact as we get a different error when actually trying to scrobble.
-#endif
 
-  scrobbler_->nowPlaying(mtrack);
+  QMap<QString, QString> params;
+  params["method"] = "track.updateNowPlaying";
+  params["artist"] = track.artist;
+  params["track"] = track.title;
+  if (!track.album.isEmpty()) params["album"] = track.album;
+  if (!track.album_artist.isEmpty())
+    params["albumArtist"] = track.album_artist;
+  if (track.track_number > 0)
+    params["trackNumber"] = QString::number(track.track_number);
+  if (track.duration_secs > 0)
+    params["duration"] = QString::number(track.duration_secs);
+
+  QNetworkReply* reply = LastFmWs::Post(params);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(NowPlayingReplyFinished(QNetworkReply*)), reply);
+}
+
+void LastFMService::NowPlayingReplyFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+  LastFmXmlQuery lfm;
+  if (!lfm.Parse(reply->readAll())) {
+    emit ScrobbleError(-1);
+  }
 }
 
 void LastFMService::CacheSong(int scrobble_point) {
-  if (!InitScrobbler()) return;
+  if (!IsAuthenticated() || !IsScrobblingEnabled()) return;
 
   if (!already_cached_to_scrobble_ && scrobble_point) {
     qLog(Info) << "Caching song to scrobble at" << scrobble_point;
-    scrobbler_->cache(last_track_);
+    LastFmScrobbleCache(LastFmWs::username).Add(last_track_);
     already_cached_to_scrobble_ = true;
   }
   emit CachedToScrobble();
 }
 
 void LastFMService::Scrobble() {
-  if (!InitScrobbler()) return;
+  if (!IsAuthenticated() || !IsScrobblingEnabled()) return;
 
-  lastfm::compat::ScrobbleCache cache(lastfm::ws::Username);
+  LastFmScrobbleCache cache(LastFmWs::username);
   qLog(Debug) << "There are" << cache.tracks().count()
               << "tracks in the last.fm cache before submit request.";
 
   // Let's mark a track as cached, useful when the connection is down
   emit ScrobbleError(30);
-  if (!cache.tracks().isEmpty()) scrobbler_->submit();
+  if (cache.isEmpty()) return;
+
+  // Last.fm allows submitting up to 50 tracks in a single request.
+  const QList<LastFmTrack> tracks = cache.tracks();
+  const int batch_size = qMin(tracks.count(), 50);
+
+  QMap<QString, QString> params;
+  params["method"] = "track.scrobble";
+  for (int i = 0; i < batch_size; ++i) {
+    const LastFmTrack& track = tracks.at(i);
+    const QString suffix = QString("[%1]").arg(i);
+    params["artist" + suffix] = track.artist;
+    params["track" + suffix] = track.title;
+    params["timestamp" + suffix] =
+        QString::number(track.timestamp.toSecsSinceEpoch());
+    if (!track.album.isEmpty()) params["album" + suffix] = track.album;
+    if (!track.album_artist.isEmpty())
+      params["albumArtist" + suffix] = track.album_artist;
+    if (track.track_number > 0)
+      params["trackNumber" + suffix] = QString::number(track.track_number);
+    if (track.duration_secs > 0)
+      params["duration" + suffix] = QString::number(track.duration_secs);
+    params["chosenByUser" + suffix] =
+        track.source == LastFmTrack::Player ? "1" : "0";
+  }
+
+  QNetworkReply* reply = LastFmWs::Post(params);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ScrobbleReplyFinished(QNetworkReply*, int)), reply,
+             batch_size);
+}
+
+void LastFMService::ScrobbleReplyFinished(QNetworkReply* reply,
+                                          int submitted_count) {
+  reply->deleteLater();
+
+  LastFmXmlQuery lfm;
+  if (lfm.Parse(reply->readAll())) {
+    LastFmScrobbleCache(LastFmWs::username).RemoveFirst(submitted_count);
+    emit ScrobbleSubmitted();
+  } else {
+    emit ScrobbleError(-1);
+  }
 }
 
 void LastFMService::Love() {
   if (!IsAuthenticated()) ShowConfig();
 
-  lastfm::MutableTrack mtrack(last_track_);
-  mtrack.love();
-  last_track_ = mtrack;
+  QMap<QString, QString> params;
+  params["method"] = "track.love";
+  params["artist"] = last_track_.artist;
+  params["track"] = last_track_.title;
+  QNetworkReply* reply = LastFmWs::Post(params);
+  connect(reply, SIGNAL(finished()), reply, SLOT(deleteLater()));
 }
 
 void LastFMService::Ban() {
   if (!IsAuthenticated()) ShowConfig();
 
-  lastfm::MutableTrack mtrack(last_track_);
-  mtrack.ban();
-  last_track_ = mtrack;
+  QMap<QString, QString> params;
+  params["method"] = "track.ban";
+  params["artist"] = last_track_.artist;
+  params["track"] = last_track_.title;
+  QNetworkReply* reply = LastFmWs::Post(params);
+  connect(reply, SIGNAL(finished()), reply, SLOT(deleteLater()));
 
   CacheSong(0);
   Scrobble();

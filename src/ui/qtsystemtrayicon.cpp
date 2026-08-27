@@ -125,12 +125,10 @@ void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
   action_mute_->setChecked(mute->isChecked());
 
   menu_->addSeparator();
-#ifdef HAVE_LIBLASTFM
   action_love_ =
       menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
   action_love_->setVisible(love->isVisible());
   action_love_->setEnabled(love->isEnabled());
-#endif
 
   menu_->addSeparator();
   menu_->addAction(quit->icon(), quit->text(), quit, SLOT(trigger()));
@@ -184,9 +182,7 @@ void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
       IconLoader::Load("media-playback-pause", IconLoader::Base));
   action_play_pause_->setText(tr("Pause"));
   action_play_pause_->setEnabled(enable_play_pause);
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(enable_love);
-#endif
 }
 
 void QtSystemTrayIcon::SetStopped() {
@@ -200,21 +196,15 @@ void QtSystemTrayIcon::SetStopped() {
 
   action_play_pause_->setEnabled(true);
 
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(false);
-#endif
 }
 
 void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
   action_love_->setVisible(value);
-#endif
 }
 
 void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(value);
-#endif
 }
 
 void QtSystemTrayIcon::MuteButtonStateChanged(bool value) {

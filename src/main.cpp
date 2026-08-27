@@ -78,11 +78,8 @@
 #include <sys/sysctl.h>
 #endif
 
-#ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/lastfmservice.h"
-#else
-class LastFMService;
-#endif
+#include "internet/lastfm/lastfmws.h"
 
 #ifdef HAVE_DBUS
 #include <QDBusArgument>
@@ -333,11 +330,9 @@ int main(int argc, char* argv[]) {
 
   QtSingleApplication a(argc, argv);
 
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
+  LastFmWs::api_key = LastFMService::kApiKey;
+  LastFmWs::shared_secret = LastFMService::kSecret;
+  LastFmWs::SetNetworkAccessManager(new NetworkAccessManager);
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.

@@ -10,7 +10,6 @@ on:
 jobs:
   lint:
     name: Lint
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -25,7 +24,7 @@ jobs:
 
   push_translations:
     name: Push translation sources to Transifex
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -76,11 +75,11 @@ jobs:
           qt6-tools-dev-tools
           libsparsehash-dev
           ssh
-          # liblastfm and libmygpo-qt have no Qt6 build in any Debian/Ubuntu
-          # repo yet. liblastfm's optional_component degrades gracefully when
-          # missing; libmygpo-qt5 (gpodder sync) falls back to the vendored
-          # 3rdparty/libmygpo-qt5 copy in that case, so both are simply
-          # omitted here rather than installed as Qt5-linked libraries.
+          # liblastfm isn't a dependency any more - Last.fm scrobbling talks
+          # directly to the web service API now (see
+          # src/internet/lastfm/lastfmws.*). libmygpo-qt still has no Qt6
+          # build anywhere, so gpodder sync falls back to the vendored
+          # 3rdparty/libmygpo-qt5 copy instead.
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -109,7 +108,7 @@ jobs:
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-24.04
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
+    if: github.ref == 'refs/heads/master'
     needs:
       - build_bookworm_64
       - build_trixie_64
@@ -154,7 +153,6 @@ jobs:
 
   build_source:
     name: Build source tarball
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -202,9 +200,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
-          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
-          # push_translations above for how CMake handles their absence.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -223,7 +220,6 @@ jobs:
 
   build_fedora_42:
     name: Build Fedora 42 RPM
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:42
@@ -276,9 +272,9 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
-          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
-          # liblastfm has no Qt6 build on Fedora (optional_component degrades
-          # gracefully), and QCA was unused dead weight in this list already.
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -305,7 +301,6 @@ jobs:
 
   build_fedora_43:
     name: Build Fedora 43 RPM
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:43
@@ -358,9 +353,9 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
-          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
-          # liblastfm has no Qt6 build on Fedora (optional_component degrades
-          # gracefully), and QCA was unused dead weight in this list already.
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -387,7 +382,6 @@ jobs:
 
   build_fedora_44:
     name: Build Fedora 44 RPM
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: fedora:44
@@ -440,9 +434,9 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
-          # liblastfm and the QCA qt5 plugins have no equivalent needed here:
-          # liblastfm has no Qt6 build on Fedora (optional_component degrades
-          # gracefully), and QCA was unused dead weight in this list already.
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -532,9 +526,10 @@ jobs:
       # particular). Failing softly here just means CMake's optional_component
       # machinery disables the corresponding feature instead of failing the
       # whole build - see the job summary in the PR/commit this came from.
-      # liblastfm and libgpod are not attempted at all: neither is packaged
-      # for MSYS2 mingw64, so Last.fm scrobbling and iPod classic support are
-      # disabled on this build variant for now.
+      # libgpod isn't attempted at all: it's not packaged for MSYS2 mingw64,
+      # so iPod classic support is disabled on this build variant for now.
+      # (Last.fm scrobbling talks directly to the web service API now - see
+      # src/internet/lastfm/lastfmws.* - so it needs no package here at all.)
       - name: Install optional dependencies (best-effort)
         run: pacman --noconfirm -S --needed mingw-w64-x86_64-libmtp || true
 
@@ -608,7 +603,7 @@ jobs:
         working-directory: dist/windows
         run: |
           set -e
-          mkdir -p platforms styles imageformats
+          mkdir -p platforms styles imageformats tls
           cp /mingw64/share/qt6/plugins/platforms/qwindows.dll platforms/
           # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
           # a single qmodernwindowsstyle.dll that covers both the
@@ -618,6 +613,11 @@ jobs:
              /mingw64/share/qt6/plugins/imageformats/qjpeg.dll \
              /mingw64/share/qt6/plugins/imageformats/qsvg.dll \
              imageformats/
+          # Qt6 moved TLS support out of QtNetwork and into a plugin.
+          # qschannelbackend uses Windows' native Secure Channel, so unlike
+          # the qopensslbackend alternative it needs no separate OpenSSL DLLs
+          # bundled alongside it.
+          cp /mingw64/share/qt6/plugins/tls/qschannelbackend.dll tls/
 
       - name: Copy GIO modules
         working-directory: dist/windows
@@ -646,7 +646,6 @@ jobs:
 
   build_bookworm_64:
     name: Build Debian Bookworm 64-bit deb
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: debian:bookworm
@@ -691,8 +690,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # liblastfm and libmygpo-qt have no Qt6 build anywhere yet - see
-          # the note in push_translations above.
+          # liblastfm and libmygpo-qt: see the note in push_translations
+          # above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -716,7 +715,6 @@ jobs:
 
   build_trixie_64:
     name: Build Debian Trixie 64-bit deb
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: debian:trixie
@@ -761,8 +759,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # liblastfm and libmygpo-qt have no Qt6 build anywhere yet - see
-          # the note in push_translations above.
+          # liblastfm and libmygpo-qt: see the note in push_translations
+          # above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -786,7 +784,6 @@ jobs:
 
   build_jammy_64:
     name: Build Ubuntu Jammy 64-bit deb
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:jammy
@@ -837,9 +834,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
-          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
-          # push_translations above for how CMake handles their absence.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -863,7 +859,6 @@ jobs:
 
   build_noble_64:
     name: Build Ubuntu Noble 64-bit deb
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -914,9 +909,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
-          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
-          # push_translations above for how CMake handles their absence.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -940,7 +934,6 @@ jobs:
 
   build_resolute_64:
     name: Build Ubuntu Resolute 64-bit deb
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:resolute
@@ -991,9 +984,8 @@ jobs:
           qt6-tools-dev
           qt6-tools-dev-tools
           ssh
-          # QCA is unused by CMakeLists.txt (dead dependency); liblastfm and
-          # libmygpo-qt have no Qt6 build anywhere yet - see the note in
-          # push_translations above for how CMake handles their absence.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -1017,7 +1009,6 @@ jobs:
 
   build_mac:
     name: Build Mac DMG
-    if: false # TEMP: other jobs disabled while iterating on build_mingw
     runs-on: macos-26
     # id-token: write is what lets the "Authenticate to GCP" step below
     # trade a GitHub OIDC token for short-lived GCP credentials (Workload
@@ -1030,11 +1021,10 @@ jobs:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      # liblastfm (Last.fm scrobbling) has no Qt6 build published anywhere,
-      # including the tomahawk-player/tomahawkqt5 tap this job used to pull
-      # a Qt5-linked liblastfm from - that can't safely link into a Qt6
-      # executable. CMake's optional_component degrades gracefully when
-      # liblastfm is missing, so it's simply not installed here.
+      # liblastfm is no longer a dependency at all: Last.fm scrobbling talks
+      # directly to the web service API now (src/internet/lastfm/lastfmws.*),
+      # so the tomahawk-player/tomahawkqt5 tap this job used to pull a
+      # Qt5-linked liblastfm from isn't needed any more either.
       - name: Install dependencies
         run: brew bundle
 
