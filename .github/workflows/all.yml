@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.1
       - name: clang-format
         uses: clementine-player/clang-format-lint-action@master
         with:
@@ -81,7 +81,7 @@ jobs:
           # build anywhere, so gpodder sync falls back to the vendored
           # 3rdparty/libmygpo-qt5 copy instead.
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -124,10 +124,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8.0.1
         with:
           path: release_artifacts
       - name: Create draft pre-release
@@ -202,7 +202,7 @@ jobs:
           ssh
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -213,7 +213,7 @@ jobs:
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
@@ -275,7 +275,7 @@ jobs:
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -294,7 +294,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_42
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -356,7 +356,7 @@ jobs:
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -375,7 +375,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_43
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -437,7 +437,7 @@ jobs:
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -456,7 +456,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_44
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -468,7 +468,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -639,7 +639,7 @@ jobs:
         run: makensis clementine.nsi
         working-directory: dist/windows
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
@@ -692,7 +692,7 @@ jobs:
           ssh
           # liblastfm and libmygpo-qt: see the note in push_translations
           # above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -708,7 +708,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_bookworm_64
           path: bin/clementine_*.deb
@@ -761,7 +761,7 @@ jobs:
           ssh
           # liblastfm and libmygpo-qt: see the note in push_translations
           # above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -777,7 +777,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_trixie_64
           path: bin/clementine_*.deb
@@ -836,7 +836,7 @@ jobs:
           ssh
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -852,7 +852,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_jammy_64
           path: bin/clementine_*.deb
@@ -911,7 +911,7 @@ jobs:
           ssh
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -927,7 +927,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_noble_64
           path: bin/clementine_*.deb
@@ -986,7 +986,7 @@ jobs:
           ssh
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -1002,7 +1002,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_resolute_64
           path: bin/clementine_*.deb
@@ -1018,7 +1018,7 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       # liblastfm is no longer a dependency at all: Last.fm scrobbling talks
@@ -1049,14 +1049,14 @@ jobs:
           fi
       - name: Authenticate to GCP
         if: steps.signing.outputs.enabled == 'true'
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@v3
         with:
           # Fill in after running dist/gcp_iam_setup.sh (it prints this).
           workload_identity_provider: projects/611551928920/locations/global/workloadIdentityPools/github-actions/providers/clementine-mac-signing
           service_account: mac-signing@clementine-data.iam.gserviceaccount.com
       - name: Set up gcloud
         if: steps.signing.outputs.enabled == 'true'
-        uses: google-github-actions/setup-gcloud@v2
+        uses: google-github-actions/setup-gcloud@v3
       - name: Set up Ruby
         if: steps.signing.outputs.enabled == 'true'
         uses: ruby/setup-ruby@v1
@@ -1095,7 +1095,7 @@ jobs:
         if: steps.signing.outputs.enabled == 'true'
         working-directory: bin
         run: make notarize-dmg
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_mac
           path: bin/clementine-*.dmg
