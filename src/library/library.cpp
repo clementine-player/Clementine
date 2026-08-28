@@ -39,6 +39,7 @@ Library::Library(Application* app, QObject* parent)
     : QObject(parent),
       app_(app),
       backend_(nullptr),
+      directory_manager_(new DirectoryManager),
       model_(nullptr),
       watcher_(nullptr),
       watcher_thread_(nullptr),
@@ -57,7 +58,7 @@ Library::Library(Application* app, QObject* parent)
   using smart_playlists::SearchTerm;
 
   model_ = new LibraryModel(backend_, app_, this);
-  dir_model_ = new LibraryDirectoryModel(backend_, this);
+  dir_model_ = new LibraryDirectoryModel(backend_, directory_manager_, this);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(
       LibraryModel::DefaultGenerators()
@@ -172,7 +173,7 @@ void Library::Init() {
   connect(app_->player(), SIGNAL(Stopped()), SLOT(Stopped()));
 
   // This will start the watcher checking for updates
-  backend_->LoadDirectoriesAsync();
+  backend_->LoadDirectoriesAsync(directory_manager_.get());
 }
 
 void Library::IncrementalScan() { watcher_->IncrementalScanAsync(); }
