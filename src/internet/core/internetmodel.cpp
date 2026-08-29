@@ -60,6 +60,9 @@
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
 #endif
+#ifdef HAVE_MEGA
+#include "internet/mega/megaservice.h"
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -110,6 +113,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
+#endif
+#ifdef HAVE_MEGA
+  AddService(new MegaService(app, this));
 #endif
 
   invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);

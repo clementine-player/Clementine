@@ -148,6 +148,11 @@ add_test_file(concurrentrun_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
 add_test_file(sqlite_test.cpp false)
 
+if(HAVE_MEGA)
+  add_test_file(megaservice_test.cpp false)
+  target_include_directories(megaservice_test PRIVATE ${MEGA_SDK_INCLUDE_DIR})
+endif(HAVE_MEGA)
+
 #if(LINUX AND HAVE_DBUS)
 #  add_test_file(mpris1_test.cpp true)
 #endif(LINUX AND HAVE_DBUS)
