@@ -79,14 +79,19 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
 
 void WplParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
+  s.endGroup();
+
   QXmlStreamWriter writer(device);
+  writer.writeProcessingInstruction("wpl", "version=\"1.0\"");
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
-  writer.writeProcessingInstruction("wpl", "version=\"1.0\"");
 
   StreamElement smil("smil", &writer);
 
-  {
+  if (writeMetadata) {
     StreamElement head("head", &writer);
     WriteMeta("Generator", "Clementine -- " CLEMENTINE_VERSION_DISPLAY,
               &writer);
