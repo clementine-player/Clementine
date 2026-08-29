@@ -18,6 +18,7 @@
 #ifndef PLAYLISTLISTCONTAINER_H
 #define PLAYLISTLISTCONTAINER_H
 
+#include <QSettings>
 #include <QWidget>
 
 #include "playlistbackend.h"
@@ -42,6 +43,8 @@ class PlaylistListContainer : public QWidget {
 
   void SetApplication(Application* app);
 
+  static const char* kSettingsGroup;
+
  protected:
   void showEvent(QShowEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
@@ -63,6 +66,9 @@ class PlaylistListContainer : public QWidget {
                    const QString* ui_path = nullptr);
   void RemovePlaylist(int id);
   void SavePlaylist();
+  void BulkImportPlaylists();
+  void RecursivelyCreateSubfolders(QStandardItem* parent_folder, QString path, QString ui_path);
+  void BulkImportPlaylistsCallback (int id);
   void PlaylistFavoriteStateChanged(int id, bool favorite);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
@@ -89,6 +95,7 @@ class PlaylistListContainer : public QWidget {
   QAction* action_new_folder_;
   QAction* action_remove_;
   QAction* action_save_playlist_;
+  QAction* action_bulk_import_playlists_;
 
   PlaylistListModel* model_;
   PlaylistListFilterProxyModel* proxy_;
@@ -97,6 +104,12 @@ class PlaylistListContainer : public QWidget {
   QIcon padded_play_icon_;
 
   int active_playlist_id_;
+
+  QSettings settings_;
+
+  QList<int>* bulk_imported_id_list_;
+  int bulk_imported_count_;
+  int debug_count_;
 };
 
 #endif  // PLAYLISTLISTCONTAINER_H
