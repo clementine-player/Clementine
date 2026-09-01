@@ -101,8 +101,8 @@ void GoogleDriveService::MigrateLegacyCredentials() {
   if (!s.value("refresh_token").toString().isEmpty() &&
       s.value("scope_version").toInt() < kScopeVersion) {
     qLog(Info) << "Google Drive was linked with the old full-Drive access "
-                 "scope; clearing stored credentials so the user can "
-                 "reconnect using the new file picker.";
+                  "scope; clearing stored credentials so the user can "
+                  "reconnect using the new file picker.";
     s.remove("refresh_token");
     s.remove("user_email");
     s.remove("cursor");
@@ -216,7 +216,7 @@ void GoogleDriveService::AuthorizeAndPickFinished(
   response->deleteLater();
 
   qLog(Debug) << "AuthorizeAndPick finished: picked ids ="
-             << response->picked_file_ids();
+              << response->picked_file_ids();
 
   // Save the refresh token, same as a plain ConnectFinished() would.
   QSettings s;
@@ -233,10 +233,9 @@ void GoogleDriveService::AuthorizeAndPickFinished(
   // AddPickedItemFinished).
   for (const QString& id : response->picked_file_ids()) {
     google_drive::GetFileResponse* file_response = client_->GetFile(id);
-    NewClosure(
-        file_response, SIGNAL(Finished()), this,
-        SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
-        file_response);
+    NewClosure(file_response, SIGNAL(Finished()), this,
+               SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
+               file_response);
   }
 
   // Also check for any changes since we last synced.
@@ -248,9 +247,9 @@ void GoogleDriveService::AddPickedItemFinished(
   response->deleteLater();
 
   qLog(Debug) << "GetFile finished for picked item" << response->file_id()
-             << ": had_error =" << response->had_error()
-             << ", title =" << response->file().title()
-             << ", mime type =" << response->file().mime_type();
+              << ": had_error =" << response->had_error()
+              << ", title =" << response->file().title()
+              << ", mime type =" << response->file().mime_type();
 
   if (response->had_error()) {
     return;
@@ -297,10 +296,9 @@ void GoogleDriveService::ListChanges(const QString& cursor) {
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(
-      changes_response, SIGNAL(Finished()), this,
-      SLOT(ListChangesFinished(google_drive::ListChangesResponse*, int)),
-      changes_response, task_id);
+  NewClosure(changes_response, SIGNAL(Finished()), this,
+             SLOT(ListChangesFinished(google_drive::ListChangesResponse*, int)),
+             changes_response, task_id);
 }
 
 void GoogleDriveService::ListChangesFinished(
@@ -371,7 +369,7 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
 
   for (const google_drive::File& file : files) {
     qLog(Debug) << "  " << file.id() << file.title() << file.mime_type()
-               << "supported =" << IsSupportedMimeType(file.mime_type());
+                << "supported =" << IsSupportedMimeType(file.mime_type());
 
     if (!IsSupportedMimeType(file.mime_type())) {
       continue;
@@ -491,10 +489,9 @@ void GoogleDriveService::DoFullRescan() {
   for (const PickedItem& item : picked_items_) {
     google_drive::GetFileResponse* response =
         client_->GetFile(item.id, item.resource_key);
-    NewClosure(
-        response, SIGNAL(Finished()), this,
-        SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
-        response);
+    NewClosure(response, SIGNAL(Finished()), this,
+               SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
+               response);
   }
 
   // Establish a fresh cursor so future CheckForUpdates() calls only look at

@@ -93,10 +93,9 @@ ConnectResponse* Client::Connect(const QString& refresh_token) {
 
   oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
 
-  NewClosure(
-      oauth, SIGNAL(Finished()), this,
-      SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)),
-      ret, oauth);
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
+             oauth);
   return ret;
 }
 
@@ -116,10 +115,9 @@ ConnectResponse* Client::AuthorizeAndPick(const QStringList& mime_types) {
   oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope,
                             extra_params);
 
-  NewClosure(
-      oauth, SIGNAL(Finished()), this,
-      SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)),
-      ret, oauth);
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
+             oauth);
   return ret;
 }
 
@@ -138,8 +136,8 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,
-            SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
-            response, reply);
+             SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
+             response, reply);
 }
 
 void Client::FetchUserInfoFinished(ConnectResponse* response,
@@ -175,9 +173,8 @@ void Client::AddResourceKeyHeader(QNetworkRequest* request,
   if (resource_key.isEmpty()) {
     return;
   }
-  request->setRawHeader(
-      "X-Goog-Drive-Resource-Keys",
-      QString("%1/%2").arg(file_id, resource_key).toUtf8());
+  request->setRawHeader("X-Goog-Drive-Resource-Keys",
+                        QString("%1/%2").arg(file_id, resource_key).toUtf8());
 }
 
 GetFileResponse* Client::GetFile(const QString& file_id,
@@ -193,7 +190,7 @@ GetFileResponse* Client::GetFile(const QString& file_id,
   url.setQuery(url_query);
 
   qLog(Debug) << "GetFile" << file_id << "url =" << url
-             << ", resource key =" << resource_key;
+              << ", resource key =" << resource_key;
 
   QNetworkRequest request = QNetworkRequest(url);
   AddAuthorizationHeader(&request);
@@ -204,8 +201,8 @@ GetFileResponse* Client::GetFile(const QString& file_id,
 
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), this,
-            SLOT(GetFileFinished(GetFileResponse*, QNetworkReply*)), ret,
-            reply);
+             SLOT(GetFileFinished(GetFileResponse*, QNetworkReply*)), ret,
+             reply);
 
   return ret;
 }
@@ -217,7 +214,7 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
   const QVariant status =
       reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
   qLog(Debug) << "GetFile" << response->file_id_ << "-> HTTP status" << status
-             << ", url =" << reply->url() << ", body =" << data;
+              << ", url =" << reply->url() << ", body =" << data;
 
   if (status != 200) {
     // A Drive API error is still valid JSON (eg. {"error": {...}}), so this
@@ -225,11 +222,11 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
     // otherwise callers see an empty-but-"successful" File.
     qLog(Error) << "Failed to fetch file with ID" << response->file_id_ << data;
     qLog(Debug) << "GetFile" << response->file_id_
-               << "response headers:" << reply->rawHeaderPairs()
-               << ", request had Authorization header:"
-               << reply->request().hasRawHeader("Authorization")
-               << ", request had resource key header:"
-               << reply->request().hasRawHeader("X-Goog-Drive-Resource-Keys");
+                << "response headers:" << reply->rawHeaderPairs()
+                << ", request had Authorization header:"
+                << reply->request().hasRawHeader("Authorization")
+                << ", request had resource key header:"
+                << reply->request().hasRawHeader("X-Goog-Drive-Resource-Keys");
     response->had_error_ = true;
     emit response->Finished();
     return;
@@ -271,8 +268,8 @@ void Client::RequestStartPageToken(ListChangesResponse* response) {
 
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), this,
-            SLOT(StartPageTokenFinished(ListChangesResponse*, QNetworkReply*)),
-            response, reply);
+             SLOT(StartPageTokenFinished(ListChangesResponse*, QNetworkReply*)),
+             response, reply);
 }
 
 void Client::StartPageTokenFinished(ListChangesResponse* response,
@@ -283,7 +280,7 @@ void Client::StartPageTokenFinished(ListChangesResponse* response,
   const QVariant status =
       reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
   qLog(Debug) << "startPageToken -> HTTP status" << status
-             << ", body =" << data;
+              << ", body =" << data;
 
   if (status != 200) {
     qLog(Error) << "Failed to get a Google Drive change cursor" << data;
@@ -301,7 +298,7 @@ void Client::StartPageTokenFinished(ListChangesResponse* response,
 
   response->next_cursor_ = document.object().value("startPageToken").toString();
   qLog(Debug) << "Established Google Drive change cursor:"
-             << response->next_cursor_;
+              << response->next_cursor_;
   emit response->Finished();
 }
 
@@ -316,21 +313,21 @@ void Client::MakeListChangesRequest(ListChangesResponse* response,
   url_query.addQueryItem(
       "fields",
       QString("nextPageToken,newStartPageToken,changes(fileId,removed,"
-             "file(%1,trashed))")
+              "file(%1,trashed))")
           .arg(kFileFields));
 
   url.setQuery(url_query);
 
   qLog(Debug) << "Requesting changes at page token:" << page_token
-             << ", url =" << url;
+              << ", url =" << url;
 
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), this,
-            SLOT(ListChangesFinished(ListChangesResponse*, QNetworkReply*)),
-            response, reply);
+             SLOT(ListChangesFinished(ListChangesResponse*, QNetworkReply*)),
+             response, reply);
 }
 
 void Client::ListChangesFinished(ListChangesResponse* response,
@@ -341,7 +338,7 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   const QVariant status =
       reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
   qLog(Debug) << "ListChanges cursor =" << response->cursor()
-             << "-> HTTP status" << status << ", url =" << reply->url();
+              << "-> HTTP status" << status << ", url =" << reply->url();
 
   if (status != 200) {
     // A Drive API error is still valid JSON, so this has to be checked
@@ -385,12 +382,12 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   }
 
   qLog(Debug) << "ListChanges parsed"
-             << json_result.value("changes").toArray().size()
-             << "item(s):" << files.size() << "found," << files_deleted.size()
-             << "deleted; newStartPageToken ="
-             << json_result.value("newStartPageToken").toString()
-             << ", nextPageToken ="
-             << json_result.value("nextPageToken").toString();
+              << json_result.value("changes").toArray().size()
+              << "item(s):" << files.size() << "found," << files_deleted.size()
+              << "deleted; newStartPageToken ="
+              << json_result.value("newStartPageToken").toString()
+              << ", nextPageToken ="
+              << json_result.value("nextPageToken").toString();
 
   emit response->FilesFound(files);
   emit response->FilesDeleted(files_deleted);

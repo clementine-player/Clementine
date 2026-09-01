@@ -131,7 +131,8 @@ void GoogleDriveSettingsPage::RemoveItemClicked() {
 void GoogleDriveSettingsPage::UpdatePickedItems() {
   ui_->picked_items_list->clear();
 
-  for (const GoogleDriveService::PickedItem& picked : service_->picked_items()) {
+  for (const GoogleDriveService::PickedItem& picked :
+       service_->picked_items()) {
     QListWidgetItem* item =
         new QListWidgetItem(picked.title, ui_->picked_items_list);
     item->setData(kPickedItemIdRole, picked.id);

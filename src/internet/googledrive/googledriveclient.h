@@ -163,7 +163,7 @@ class Client : public QObject {
   // |resource_key| is required to access some Drive items (mostly ones
   // shared via link before Sept. 2021) even with a valid access grant.
   GetFileResponse* GetFile(const QString& file_id,
-                          const QString& resource_key = QString());
+                           const QString& resource_key = QString());
   ListChangesResponse* ListChanges(const QString& cursor);
 
   QByteArray GetAuthHeader() const;
