@@ -567,47 +567,6 @@ jobs:
         working-directory: dist/windows
         run: cp ../../bin/*.exe .
 
-      # Direct + transitive linked DLL dependencies are discovered from the
-      # built binaries themselves rather than hardcoded by name/version, since
-      # exact mingw64 package sonames drift with every MSYS2 update. This
-      # doesn't catch plugins loaded via dlopen() at runtime (Qt platform
-      # plugins, GStreamer elements, GIO modules) - those are copied
-      # separately below, same as the old pipeline did.
-      - name: Collect runtime DLL dependencies
-        working-directory: dist/windows
-        run: |
-          set -x
-          which ntldd
-          ls -la
-          : > raw_deps.txt
-          for exe in *.exe; do
-            echo "== ntldd -R $exe =="
-            ntldd -R "$exe" >> raw_deps.txt 2>&1 \
-              || echo "ntldd exited non-zero for $exe (continuing, see output above/below)"
-          done
-          echo "---- raw ntldd output ----"
-          cat raw_deps.txt
-          # ntldd prints native Windows paths (backslash-separated, drive
-          # letter, e.g. D:\a\_temp\msys64\mingw64\bin\libfoo.dll) rather than
-          # the /mingw64/... POSIX path - match on "mingw64\bin" or
-          # "mingw64/bin" regardless of separator, then re-resolve each hit
-          # against the canonical POSIX /mingw64/bin path rather than passing
-          # the raw backslash path to cp.
-          grep '=>' raw_deps.txt | awk '{print $3}' \
-            | grep -i 'mingw64[\\/]bin[\\/]' \
-            | sed 's/^.*[\\/]//' \
-            | sort -u > mingw_deps.txt || true
-          echo "---- mingw64 DLLs to bundle ----"
-          cat mingw_deps.txt
-          if [ ! -s mingw_deps.txt ]; then
-            echo "::error::No mingw64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
-            exit 1
-          fi
-          while IFS= read -r name; do
-            cp -n -v "/mingw64/bin/$name" .
-          done < mingw_deps.txt
-          rm -f raw_deps.txt mingw_deps.txt
-
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
         run: |
@@ -639,6 +598,55 @@ jobs:
         run: |
           mkdir -p gstreamer-plugins
           cp /mingw64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+
+      # Direct + transitive linked DLL dependencies are discovered from the
+      # built binaries themselves rather than hardcoded by name/version, since
+      # exact mingw64 package sonames drift with every MSYS2 update. This has
+      # to run after every plugin-copying step above, and walk those plugin
+      # DLLs too, not just the .exes - a plugin loaded via dlopen() at
+      # runtime (Qt platform plugins, GStreamer elements, GIO modules) can
+      # depend on a mingw64 DLL nothing else in the app needs (eg.
+      # gstreamer-plugins/libgstaudiofx.dll needs liborc, which no .exe here
+      # links against), and that DLL then silently isn't there at runtime -
+      # GStreamer just drops the one plugin that needed it rather than
+      # erroring at startup, which is a much more confusing failure to debug
+      # than a missing DLL would be.
+      - name: Collect runtime DLL dependencies
+        working-directory: dist/windows
+        run: |
+          set -x
+          which ntldd
+          ls -la
+          : > raw_deps.txt
+          for dll in *.exe platforms/*.dll styles/*.dll imageformats/*.dll \
+              tls/*.dll gio-modules/*.dll gstreamer-plugins/*.dll; do
+            [ -e "$dll" ] || continue
+            echo "== ntldd -R $dll =="
+            ntldd -R "$dll" >> raw_deps.txt 2>&1 \
+              || echo "ntldd exited non-zero for $dll (continuing, see output above/below)"
+          done
+          echo "---- raw ntldd output ----"
+          cat raw_deps.txt
+          # ntldd prints native Windows paths (backslash-separated, drive
+          # letter, e.g. D:\a\_temp\msys64\mingw64\bin\libfoo.dll) rather than
+          # the /mingw64/... POSIX path - match on "mingw64\bin" or
+          # "mingw64/bin" regardless of separator, then re-resolve each hit
+          # against the canonical POSIX /mingw64/bin path rather than passing
+          # the raw backslash path to cp.
+          grep '=>' raw_deps.txt | awk '{print $3}' \
+            | grep -i 'mingw64[\\/]bin[\\/]' \
+            | sed 's/^.*[\\/]//' \
+            | sort -u > mingw_deps.txt || true
+          echo "---- mingw64 DLLs to bundle ----"
+          cat mingw_deps.txt
+          if [ ! -s mingw_deps.txt ]; then
+            echo "::error::No mingw64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
+            exit 1
+          fi
+          while IFS= read -r name; do
+            cp -n -v "/mingw64/bin/$name" .
+          done < mingw_deps.txt
+          rm -f raw_deps.txt mingw_deps.txt
 
       - name: Build Windows installer
         # makensis was installed via choco onto the Windows-wide PATH, not
