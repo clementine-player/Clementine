@@ -648,6 +648,22 @@ jobs:
           done < mingw_deps.txt
           rm -f raw_deps.txt mingw_deps.txt
 
+      # Runs the actual packaged binary (not a dev build) end to end through
+      # real playback, so a plugin/dependency that's missing or broken only
+      # in the *packaged* app - which a successful build can't catch, and
+      # which is exactly how both the libsoup rpath bug and the missing
+      # liborc/libgstfft dependencies above were found - fails CI instead of
+      # surfacing later as a user report. See --play-and-exit in
+      # src/core/commandlineoptions.cpp/src/main.cpp.
+      - name: Smoke test - local playback
+        working-directory: dist/windows
+        run: ./clementine.exe --play-and-exit 30 ../../tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        working-directory: dist/windows
+        run: >
+          ./clementine.exe --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - name: Build Windows installer
         # makensis was installed via choco onto the Windows-wide PATH, not
         # the MSYS2 one (MSYS2's shell rebuilds its own minimal PATH rather
@@ -1108,6 +1124,23 @@ jobs:
       - name: Build DMG
         working-directory: bin
         run: make dmg -j$(sysctl -n hw.ncpu)
+
+      # Runs the actual packaged .app (not a dev build) end to end through
+      # real playback, so a plugin/dependency that's missing or broken only
+      # in the *packaged* app - which a successful build can't catch, and
+      # which is exactly how the libsoup rpath bug in dist/macdeploy.py was
+      # found - fails CI instead of surfacing later as a user report. See
+      # --play-and-exit in src/core/commandlineoptions.cpp/src/main.cpp.
+      # Runs before notarization/upload so a broken build fails fast.
+      - name: Smoke test - local playback
+        working-directory: bin
+        run: ./clementine.app/Contents/MacOS/clementine --play-and-exit 30 ../tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        working-directory: bin
+        run: >
+          ./clementine.app/Contents/MacOS/clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - name: Notarize DMG
         if: steps.signing.outputs.enabled == 'true'
         working-directory: bin

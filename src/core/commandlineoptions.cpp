@@ -87,6 +87,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       delete_current_track_(false),
       show_osd_(false),
       toggle_pretty_osd_(false),
+      play_and_exit_timeout_secs_(-1),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -141,6 +142,11 @@ bool CommandlineOptions::Parse() {
       {"log-levels", required_argument, 0, LogLevels},
       {"version", no_argument, 0, Version},
       {"delete-current", no_argument, 0, 'x'},
+      // Undocumented/CI-only: play a single URL headlessly (no window) and
+      // exit with a status reflecting whether playback actually started -
+      // see main.cpp's RunPlayAndExit(). Deliberately left out of
+      // kHelpText.
+      {"play-and-exit", required_argument, 0, PlayAndExit},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -297,6 +303,11 @@ bool CommandlineOptions::Parse() {
         delete_current_track_ = true;
         break;
 
+      case PlayAndExit:
+        play_and_exit_timeout_secs_ = QString(optarg).toInt(&ok);
+        if (!ok) play_and_exit_timeout_secs_ = -1;
+        break;
+
       case '?':
       default:
         return false;
@@ -356,7 +367,8 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
   s << qint32(a.player_action_) << qint32(a.url_list_action_) << a.set_volume_
     << a.volume_modifier_ << a.seek_to_ << a.seek_by_ << a.play_track_at_
     << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_
-    << a.delete_current_track_ << a.playlist_name_;
+    << a.delete_current_track_ << a.playlist_name_
+    << a.play_and_exit_timeout_secs_;
 
   return s;
 }
@@ -367,7 +379,8 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
   s >> player_action >> url_list_action >> a.set_volume_ >>
       a.volume_modifier_ >> a.seek_to_ >> a.seek_by_ >> a.play_track_at_ >>
       a.show_osd_ >> a.urls_ >> a.log_levels_ >> a.toggle_pretty_osd_ >>
-      a.delete_current_track_ >> a.playlist_name_;
+      a.delete_current_track_ >> a.playlist_name_ >>
+      a.play_and_exit_timeout_secs_;
   a.player_action_ = CommandlineOptions::PlayerAction(player_action);
   a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 

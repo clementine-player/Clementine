@@ -36,6 +36,7 @@
 #include <gst/gst.h>
 
 #include <QDir>
+#include <QEventLoop>
 #include <QFont>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
@@ -44,6 +45,7 @@
 #include <QSslSocket>
 #include <QSysInfo>
 #include <QTextCodec>
+#include <QTimer>
 #include <QTranslator>
 #include <QtConcurrentRun>
 #include <QtDebug>
@@ -58,11 +60,15 @@
 #include "core/metatypes.h"
 #include "core/network.h"
 #include "core/networkproxyfactory.h"
+#include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "engines/enginebase.h"
+#include "playlist/playlistcontainer.h"
+#include "playlist/playlistmanager.h"
+#include "playlist/playlistsequence.h"
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
 #include "smartplaylists/generator.h"
@@ -220,6 +226,88 @@ void CheckPortable() {
     return;
   }
   qLog(Info) << "Using default config locations.";
+}
+
+// Loads and plays a single URL headlessly (no window), then returns once
+// playback either starts successfully or fails - for CI smoke-testing that
+// the packaged app's bundled GStreamer plugins actually resolve at runtime.
+// See --play-and-exit in commandlineoptions.cpp. Exit codes: 0 = playback
+// started (and didn't immediately error); 1 = a playback error was reported;
+// 2 = timed out before playback ever started.
+int RunPlayAndExit(Application* app, const CommandlineOptions& options) {
+  if (options.urls().isEmpty()) {
+    qLog(Error) << "--play-and-exit requires a file or URL argument";
+    return 2;
+  }
+
+  // Avoid a real audio device being the difference between pass and fail -
+  // this is checking that the plugins bundled for the packaged app resolve
+  // and run, not that a CI runner has working audio hardware.
+  {
+    QSettings s;
+    s.beginGroup("GstEngine");
+    s.setValue("sink", "fakesink");
+  }
+
+  app->player()->Init();
+  // PlaylistManager::Init() unconditionally dereferences both of these (eg.
+  // Playlist::set_sequence() reads the PlaylistSequence's shuffle mode) -
+  // nullptr crashes immediately. Neither is ever shown, so real (if
+  // headless) instances are enough to satisfy that without needing a real
+  // window.
+  PlaylistSequence sequence;
+  PlaylistContainer container;
+  app->playlist_manager()->Init(app->library_backend(),
+                                app->playlist_backend(), &sequence,
+                                &container);
+
+  // InsertUrls(..., play_now=true) below only emits PlayRequested(index) -
+  // MainWindow::PlayIndex() is normally what turns that into an actual
+  // Player::PlayAt() call, but there's no MainWindow here, so replicate its
+  // relevant half directly.
+  QObject::connect(app->playlist_manager(), &PlaylistManagerInterface::PlayRequested,
+                   [app](const QModelIndex& index) {
+                     if (!index.isValid()) return;
+                     app->playlist_manager()->SetActiveToCurrent();
+                     app->player()->PlayAt(index.row(), Engine::Manual, true);
+                   });
+
+  QEventLoop loop;
+  int result = 2;
+
+  QTimer overall_timeout;
+  overall_timeout.setSingleShot(true);
+  QObject::connect(&overall_timeout, &QTimer::timeout, [&]() {
+    qLog(Error) << "Timed out waiting for playback to start";
+    loop.quit();
+  });
+  overall_timeout.start(options.play_and_exit_timeout_secs() * 1000);
+
+  QTimer grace_period;
+  grace_period.setSingleShot(true);
+  QObject::connect(&grace_period, &QTimer::timeout, [&]() {
+    result = 0;
+    loop.quit();
+  });
+
+  QObject::connect(app->player(), &PlayerInterface::Playing, [&]() {
+    qLog(Info) << "Playback started, waiting to confirm it doesn't "
+                  "immediately error out";
+    grace_period.start(3000);
+  });
+  QObject::connect(app->player(), &PlayerInterface::Error,
+                   [&](const QString& message) {
+                     qLog(Error) << "Playback error:" << message;
+                     result = 1;
+                     loop.quit();
+                   });
+
+  app->playlist_manager()->InsertUrls(app->playlist_manager()->current_id(),
+                                      options.urls(), -1,
+                                      /*play_now=*/true, /*enqueue=*/false);
+
+  loop.exec();
+  return result;
 }
 
 }  // namespace
@@ -431,6 +519,10 @@ int main(int argc, char* argv[]) {
   Application app;
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
+
+  if (options.play_and_exit_timeout_secs() > 0) {
+    return RunPlayAndExit(&app, options);
+  }
 
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(
