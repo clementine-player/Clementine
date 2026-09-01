@@ -37,6 +37,8 @@
 #include "config.h"
 #include "engines/engine_fwd.h"
 
+class QTextCodec;
+
 namespace cpb {
 namespace tagreader {
 class SongMetadata;
@@ -54,11 +56,7 @@ struct _Itdb_Track;
 struct LIBMTP_track_struct;
 #endif
 
-#ifdef HAVE_LIBLASTFM
-namespace lastfm {
-class Track;
-}
-#endif
+struct LastFmTrack;
 
 class SqlRow;
 
@@ -129,9 +127,6 @@ class Song {
       const QString& filename);  // Just store the filename: incomplete but fast
   void InitArtManual();  // Check if there is already a art in the cache and
                          // store the filename in art_manual
-#ifdef HAVE_LIBLASTFM
-  void InitFromLastFM(const lastfm::Track& track);
-#endif
 
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
@@ -155,9 +150,7 @@ class Song {
   // Save
   void BindToQuery(QSqlQuery* query) const;
   void BindToFtsQuery(QSqlQuery* query) const;
-#ifdef HAVE_LIBLASTFM
-  void ToLastFM(lastfm::Track* track, bool prefer_album_artist) const;
-#endif
+  LastFmTrack ToLastFmTrack(bool prefer_album_artist) const;
   void ToXesam(QVariantMap* map) const;
   void ToProtobuf(cpb::tagreader::SongMetadata* pb) const;
 

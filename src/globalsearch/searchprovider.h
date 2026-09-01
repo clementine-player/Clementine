@@ -209,7 +209,13 @@ class BlockingSearchProvider : public SearchProvider {
   virtual ResultList Search(int id, const QString& query) = 0;
 
  private slots:
-  void BlockingSearchFinished(QFuture<ResultList> future, const int id);
+  // Fully expanded type, not the ResultList typedef: QMetaMethod::invoke()
+  // (used by NewClosure(), see core/closure.h) needs this signature's text
+  // to match QMetaType::fromType<>().name()'s canonical (alias-resolved)
+  // form of the argument's actual type, or the invoke silently fails - this
+  // wasn't an issue under Qt5, which didn't validate the name.
+  void BlockingSearchFinished(QFuture<QList<SearchProvider::Result>> future,
+                              const int id);
 };
 
 Q_DECLARE_METATYPE(SearchProvider*)

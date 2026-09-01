@@ -96,13 +96,13 @@ void WidgetFadeHelper::CaptureParent() {
 
   const QString loading_text = tr("Loading...");
   const QSize loading_size(
-      kLoadingPadding * 2 + loading_font_metrics.width(loading_text),
+      kLoadingPadding * 2 +
+          loading_font_metrics.horizontalAdvance(loading_text),
       kLoadingPadding * 2 + loading_font_metrics.height());
   const QRect loading_rect((blurred.width() - loading_size.width()) / 2, 100,
                            loading_size.width(), loading_size.height());
 
   blur_painter.setRenderHint(QPainter::Antialiasing);
-  blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
   blur_painter.translate(0.5, 0.5);
   blur_painter.setPen(QColor(200, 200, 200, 255));

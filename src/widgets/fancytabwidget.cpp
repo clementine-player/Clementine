@@ -17,6 +17,7 @@
 
 #include "fancytabwidget.h"
 
+#include <QActionGroup>
 #include <QDebug>
 #include <QMenu>
 #include <QMouseEvent>

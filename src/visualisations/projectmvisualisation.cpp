@@ -30,7 +30,6 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
-#include <QGLWidget>
 #include <QGraphicsView>
 #include <QMessageBox>
 #include <QPaintEngine>

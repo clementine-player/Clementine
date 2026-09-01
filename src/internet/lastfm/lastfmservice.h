@@ -5,6 +5,7 @@
    Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
    Copyright 2012, Harald Sitter <sitter@kde.org>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,20 +26,12 @@
 
 #include <memory>
 
-namespace lastfm {
-class Track;
-}
-
-#include <QtGlobal>
-uint qHash(const lastfm::Track& track);
-
 #include "internet/core/scrobbler.h"
-#include "lastfmcompat.h"
+#include "lastfmtrack.h"
 
 class Application;
-class LastFMUrlHandler;
 class NetworkAccessManager;
-class QAction;
+class QNetworkReply;
 class Song;
 
 class LastFMService : public Scrobbler {
@@ -50,10 +43,8 @@ class LastFMService : public Scrobbler {
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
-  static const char* kAudioscrobblerClientId;
   static const char* kApiKey;
   static const char* kSecret;
-  static const char* kAuthLoginUrl;
 
   void ReloadSettings();
 
@@ -70,7 +61,6 @@ class LastFMService : public Scrobbler {
 
   void Authenticate();
   void SignOut();
-  void UpdateSubscriberStatus();
 
  public slots:
   void NowPlaying(const Song& song);
@@ -89,38 +79,26 @@ class LastFMService : public Scrobbler {
   void PreferAlbumArtistChanged(bool value);
   void CachedToScrobble();
   void ScrobbleError(int value);
-  void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
 
   void SavedItemsChanged();
 
  private slots:
   void AuthenticateReplyFinished(QNetworkReply* reply);
-  void UpdateSubscriberStatusFinished(QNetworkReply* reply);
-
-  void ScrobblerStatus(int value);
-
- private:
-  QString ErrorString(lastfm::ws::Error error) const;
-  bool InitScrobbler();
-  lastfm::Track TrackFromSong(const Song& song) const;
-
-  static QUrl FixupUrl(const QUrl& url);
+  void NowPlayingReplyFinished(QNetworkReply* reply);
+  void ScrobbleReplyFinished(QNetworkReply* reply, int submitted_count);
 
  private:
-  std::unique_ptr<lastfm::Audioscrobbler> scrobbler_;
-  lastfm::Track last_track_;
-  lastfm::Track next_metadata_;
+  LastFmTrack TrackFromSong(const Song& song) const;
+
+ private:
+  LastFmTrack last_track_;
   bool already_cached_to_scrobble_{false};
-
-  QUrl last_url_;
 
   bool scrobbling_enabled_;
   bool buttons_visible_;
   bool scrobble_button_visible_;
   bool prefer_albumartist_;
-
-  QHash<lastfm::Track, QString> art_urls_;
 
   // Useful to inform the user that we can't scrobble right now
   bool connection_problems_;

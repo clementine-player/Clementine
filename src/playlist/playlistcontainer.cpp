@@ -212,7 +212,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   emit ViewSelectionModelChanged();
 
   // Update filter
-  ui_->filter->setText(playlist->proxy()->filterRegExp().pattern());
+  ui_->filter->setText(playlist->proxy()->filterRegularExpression().pattern());
 
   // Update the no matches label
   connect(playlist_->proxy(), SIGNAL(modelReset()),

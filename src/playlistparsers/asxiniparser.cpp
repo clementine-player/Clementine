@@ -53,11 +53,12 @@ SongList AsxIniParser::Load(QIODevice* device, const QString& playlist_path,
 void AsxIniParser::Save(const SongList& songs, QIODevice* device,
                         const QDir& dir, Playlist::Path path_type) const {
   QTextStream s(device);
-  s << "[Reference]" << endl;
+  s << "[Reference]" << Qt::endl;
 
   int n = 1;
   for (const Song& song : songs) {
-    s << "Ref" << n << "=" << URLOrFilename(song.url(), dir, path_type) << endl;
+    s << "Ref" << n << "=" << URLOrFilename(song.url(), dir, path_type)
+      << Qt::endl;
     ++n;
   }
 }

@@ -69,7 +69,8 @@ void TrackSliderPopup::paintEvent(QPaintEvent*) {
 
 void TrackSliderPopup::UpdatePixmap() {
   const int text_width =
-      qMax(font_metrics_.width(text_), small_font_metrics_.width(small_text_));
+      qMax(font_metrics_.horizontalAdvance(text_),
+           small_font_metrics_.horizontalAdvance(small_text_));
   const QRect text_rect1(kBlurRadius + kTextMargin, kBlurRadius + kTextMargin,
                          text_width + 2, font_metrics_.height());
   const QRect text_rect2(kBlurRadius + kTextMargin, text_rect1.bottom(),
@@ -102,7 +103,6 @@ void TrackSliderPopup::UpdatePixmap() {
     background_cache_.fill(Qt::transparent);
     QPainter p(&background_cache_);
     p.setRenderHint(QPainter::Antialiasing);
-    p.setRenderHint(QPainter::HighQualityAntialiasing);
 
     // Draw the shadow to a different image
     QImage blur_source(total_rect.size(), QImage::Format_ARGB32);
@@ -110,7 +110,6 @@ void TrackSliderPopup::UpdatePixmap() {
 
     QPainter blur_painter(&blur_source);
     blur_painter.setRenderHint(QPainter::Antialiasing);
-    blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
     blur_painter.setBrush(bg_color_2);
     blur_painter.drawRoundedRect(bubble_rect, kBorderRadius, kBorderRadius);
     blur_painter.drawPolygon(pointy);
@@ -149,7 +148,6 @@ void TrackSliderPopup::UpdatePixmap() {
   pixmap_.fill(Qt::transparent);
   QPainter p(&pixmap_);
   p.setRenderHint(QPainter::Antialiasing);
-  p.setRenderHint(QPainter::HighQualityAntialiasing);
 
   // Background
   p.drawPixmap(total_rect.topLeft(), background_cache_);

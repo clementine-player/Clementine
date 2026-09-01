@@ -19,7 +19,6 @@
 #include "seafiletree.h"
 
 #include <QDir>
-#include <QRegExp>
 #include <QStringList>
 
 #include "core/logging.h"
@@ -145,7 +144,7 @@ SeafileTree::TreeItem* SeafileTree::FindFromAbsolutePath(const QString& library,
     return nullptr;
   }
 
-  QStringList path_parts = path.split("/", QString::SkipEmptyParts);
+  QStringList path_parts = path.split("/", Qt::SkipEmptyParts);
 
   for (const QString& part : path_parts) {
     node_item = node_item->FindChild(part);

@@ -143,7 +143,7 @@ void StyleHelper::verticalGradient(QPainter* painter, const QRect& spanRect,
     ;
 
     QPixmap pixmap;
-    if (!QPixmapCache::find(key, pixmap)) {
+    if (!QPixmapCache::find(key, &pixmap)) {
       pixmap = QPixmap(clipRect.size());
       QPainter p(&pixmap);
       QRect rect(0, 0, clipRect.width(), clipRect.height());
@@ -169,7 +169,7 @@ void StyleHelper::drawIconWithShadow(const QIcon& icon, const QRect& rect,
                            .arg(iconMode)
                            .arg(rect.height());
 
-  if (!QPixmapCache::find(pixmapName, cache)) {
+  if (!QPixmapCache::find(pixmapName, &cache)) {
     QPixmap px = icon.pixmap(rect.size());
     cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
     cache.fill(Qt::transparent);

@@ -21,6 +21,7 @@
 #define CORE_APPEARANCE_H_
 
 #include <QColor>
+#include <QObject>
 #include <QPalette>
 
 class Appearance : public QObject {

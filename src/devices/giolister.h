@@ -138,7 +138,7 @@ class GioLister : public DeviceLister {
   QString FindUniqueIdByVolume(GVolume* volume) const;
 
   template <typename T>
-  T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
+  T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::* field);
 
  private slots:
   void DoMountDevice(const QString& id, int request_id);
@@ -154,7 +154,7 @@ class GioLister : public DeviceLister {
 };
 
 template <typename T>
-T GioLister::LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field) {
+T GioLister::LockAndGetDeviceInfo(const QString& id, T DeviceInfo::* field) {
   QMutexLocker l(&mutex_);
   if (!devices_.contains(id)) return T();
 

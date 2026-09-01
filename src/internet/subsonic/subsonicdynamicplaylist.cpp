@@ -73,9 +73,9 @@ QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
   // certainly be self-signed.
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
-  if (usesslv3) {
-    sslconfig.setProtocol(QSsl::SslV3);
-  }
+  // QSsl::SslV3 was removed in Qt6 (SSLv3 is broken and unsupported by
+  // any modern TLS stack); usesslv3 is kept as a settable option but has
+  // no effect any more.
   request.setSslConfiguration(sslconfig);
   QNetworkReply* reply = network.get(request);
   return reply;
@@ -122,12 +122,12 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
-  if (reader.name() != "subsonic-response") {
+  if (reader.name() != QLatin1String("subsonic-response")) {
     qLog(Warning) << "Not a subsonic-response, aboring playlist fetch";
     return items;
   }
 
-  if (reader.attributes().value("status") != "ok") {
+  if (reader.attributes().value("status") != QLatin1String("ok")) {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
     qLog(Warning) << "An error occurred fetching data.  Code: " << error
@@ -137,13 +137,13 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
   }
 
   reader.readNextStartElement();
-  if (reader.name() != "randomSongs") {
+  if (reader.name() != QLatin1String("randomSongs")) {
     qLog(Warning) << "randomSongs tag expected.  Aborting playlist fetch";
     return items;
   }
 
   while (reader.readNextStartElement()) {
-    if (reader.name() != "song") {
+    if (reader.name() != QLatin1String("song")) {
       qLog(Warning) << "song tag expected. Skipping song";
       reader.skipCurrentElement();
       continue;
@@ -190,12 +190,12 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
-  if (reader.name() != "subsonic-response") {
+  if (reader.name() != QLatin1String("subsonic-response")) {
     qLog(Warning) << "Not a subsonic-response, aboring playlist fetch";
     return items;
   }
 
-  if (reader.attributes().value("status") != "ok") {
+  if (reader.attributes().value("status") != QLatin1String("ok")) {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
     qLog(Warning) << "An error occurred fetching data.  Code: " << error
@@ -205,13 +205,13 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
   }
 
   reader.readNextStartElement();
-  if (reader.name() != "albumList") {
+  if (reader.name() != QLatin1String("albumList")) {
     qLog(Warning) << "albumList tag expected.  Aboring playlist fetch";
     return items;
   }
 
   while (reader.readNextStartElement()) {
-    if (reader.name() != "album") {
+    if (reader.name() != QLatin1String("album")) {
       qLog(Warning) << "album tag expected. Skipping album";
       reader.skipCurrentElement();
       continue;
@@ -250,19 +250,19 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
 
-  if (reader.name() != "subsonic-response") {
+  if (reader.name() != QLatin1String("subsonic-response")) {
     qLog(Warning) << "Not a subsonic-response. Aborting playlist fetch.";
     return;
   }
 
-  if (reader.attributes().value("status") != "ok") {
+  if (reader.attributes().value("status") != QLatin1String("ok")) {
     qLog(Warning) << "Status not okay. Aborting playlist fetch.";
     return;
   }
 
   // Read album information
   reader.readNextStartElement();
-  if (reader.name() != "album") {
+  if (reader.name() != QLatin1String("album")) {
     qLog(Warning) << "album tag expected. Aborting playlist fetch.";
     return;
   }
@@ -271,7 +271,7 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
 
   // Read song information
   while (reader.readNextStartElement()) {
-    if (reader.name() != "song") {
+    if (reader.name() != QLatin1String("song")) {
       qLog(Warning) << "song tag expected. Skipping song";
       reader.skipCurrentElement();
       continue;

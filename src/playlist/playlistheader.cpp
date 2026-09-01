@@ -17,6 +17,7 @@
 
 #include "playlistheader.h"
 
+#include <QActionGroup>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QSettings>
@@ -138,7 +139,7 @@ void PlaylistHeader::ToggleVisible(int section) {
   emit SectionVisibilityChanged(section, !isSectionHidden(section));
 }
 
-void PlaylistHeader::enterEvent(QEvent*) { emit MouseEntered(); }
+void PlaylistHeader::enterEvent(QEnterEvent*) { emit MouseEntered(); }
 
 void PlaylistHeader::ToggleRatingEditStatus() {
   emit SectionRatingLockStatusChanged(rating_lock_->isChecked());

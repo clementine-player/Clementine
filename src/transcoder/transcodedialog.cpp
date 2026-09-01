@@ -289,7 +289,7 @@ void TranscodeDialog::Import() {
 
   QStringList filenames;
   QStringList audioTypes =
-      QString(FileView::kFileFilter).split(" ", QString::SkipEmptyParts);
+      QString(FileView::kFileFilter).split(" ", Qt::SkipEmptyParts);
   QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable,
                      QDirIterator::Subdirectories);
 

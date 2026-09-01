@@ -264,7 +264,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
   song.set_etag(data["rev"].toString());
   song.set_mtime(
       QDateTime::fromString(data["server_modified"].toString(), Qt::ISODate)
-          .toTime_t());
+          .toSecsSinceEpoch());
   song.set_title(info.fileName());
   song.set_filesize(data["size"].toInt());
   song.set_ctime(0);

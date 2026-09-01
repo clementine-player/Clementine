@@ -256,7 +256,7 @@ void TrackSelectionDialog::accept() {
 
     // Save tags in the background
     QFuture<void> future =
-        QtConcurrent::run(this, &TrackSelectionDialog::SaveData, data_);
+        QtConcurrent::run(&TrackSelectionDialog::SaveData, this, data_);
     NewClosure(future, this, SLOT(AcceptFinished()));
     return;
   }

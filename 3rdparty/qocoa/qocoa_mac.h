@@ -21,12 +21,39 @@ THE SOFTWARE.
 */
 
 #include <AppKit/NSImage.h>
+#include <AppKit/NSView.h>
 #include <Foundation/NSString.h>
 #include <QImage>
-#include <QMacCocoaViewContainer>
 #include <QPixmap>
 #include <QString>
 #include <QVBoxLayout>
+#include <QWidget>
+
+// Qt5's QtMacExtras module (and QMacCocoaViewContainer with it) has no Qt6
+// equivalent, so this is a small local replacement: force the QWidget to get
+// a native NSView (via WA_NativeWindow + winId()), then add the wrapped
+// Cocoa view as a subview and let AppKit's own autoresizing mask keep it
+// sized to match, rather than reimplementing QMacCocoaViewContainer's
+// internal resize-event plumbing.
+class QMacCocoaViewContainer : public QWidget {
+public:
+  explicit QMacCocoaViewContainer(void* cocoaViewToWrap, QWidget* parent = nullptr)
+      : QWidget(parent), cocoaView_(static_cast<NSView*>(cocoaViewToWrap)) {
+    setAttribute(Qt::WA_NativeWindow);
+    NSView* qtView = reinterpret_cast<NSView*>(winId());
+    [qtView addSubview:cocoaView_];
+    [cocoaView_ setFrame:[qtView bounds]];
+    [cocoaView_ setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
+  }
+
+  QSize sizeHint() const override {
+    const NSSize fitting = [cocoaView_ fittingSize];
+    return QSize(fitting.width, fitting.height);
+  }
+
+private:
+  NSView* cocoaView_;
+};
 
 static inline NSString* fromQString(const QString &string)
 {
@@ -51,6 +78,6 @@ static inline NSImage* fromQPixmap(const QPixmap &pixmap)
 static inline void setupLayout(NSView* cocoaView, QWidget* parent) {
   parent->setAttribute(Qt::WA_NativeWindow);
   QVBoxLayout* layout = new QVBoxLayout(parent);
-  layout->setMargin(0);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->addWidget(new QMacCocoaViewContainer(cocoaView, parent));
 }

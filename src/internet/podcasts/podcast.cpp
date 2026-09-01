@@ -145,7 +145,7 @@ void Podcast::InitFromQuery(const QSqlQuery& query) {
   d->author_ = query.value(8).toString();
   d->owner_name_ = query.value(9).toString();
   d->owner_email_ = query.value(10).toString();
-  d->last_updated_ = QDateTime::fromTime_t(query.value(11).toUInt());
+  d->last_updated_ = QDateTime::fromSecsSinceEpoch(query.value(11).toUInt());
   d->last_update_error_ = query.value(12).toString();
 
   QDataStream extra_stream(query.value(13).toByteArray());
@@ -163,7 +163,7 @@ void Podcast::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":author", d->author_);
   query->bindValue(":owner_name", d->owner_name_);
   query->bindValue(":owner_email", d->owner_email_);
-  query->bindValue(":last_updated", d->last_updated_.toTime_t());
+  query->bindValue(":last_updated", d->last_updated_.toSecsSinceEpoch());
   query->bindValue(":last_update_error", d->last_update_error_);
 
   QByteArray extra;

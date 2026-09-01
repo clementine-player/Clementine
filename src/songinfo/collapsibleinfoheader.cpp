@@ -57,7 +57,7 @@ void CollapsibleInfoHeader::SetExpanded(bool expanded) {
     emit Collapsed();
 }
 
-void CollapsibleInfoHeader::enterEvent(QEvent*) {
+void CollapsibleInfoHeader::enterEvent(QEnterEvent*) {
   hovering_ = true;
   if (!expanded_) {
     animation_->stop();

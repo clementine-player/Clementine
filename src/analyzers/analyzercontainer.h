@@ -23,6 +23,7 @@
 #ifndef ANALYZERS_ANALYZERCONTAINER_H_
 #define ANALYZERS_ANALYZERCONTAINER_H_
 
+#include <QActionGroup>
 #include <QMenu>
 #include <QWidget>
 

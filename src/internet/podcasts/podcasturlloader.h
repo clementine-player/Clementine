@@ -21,7 +21,7 @@
 #define INTERNET_PODCASTS_PODCASTURLLOADER_H_
 
 #include <QObject>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "opmlcontainer.h"
 #include "podcast.h"
@@ -104,11 +104,11 @@ class PodcastUrlLoader : public QObject {
   QNetworkAccessManager* network_;
   PodcastParser* parser_;
 
-  QRegExp html_link_re_;
-  QRegExp whitespace_re_;
-  QRegExp html_link_rel_re_;
-  QRegExp html_link_type_re_;
-  QRegExp html_link_href_re_;
+  QRegularExpression html_link_re_;
+  QRegularExpression whitespace_re_;
+  QRegularExpression html_link_rel_re_;
+  QRegularExpression html_link_type_re_;
+  QRegularExpression html_link_href_re_;
 };
 
 #endif  // INTERNET_PODCASTS_PODCASTURLLOADER_H_

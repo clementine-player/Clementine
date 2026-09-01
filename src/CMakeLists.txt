@@ -57,9 +57,6 @@ if (HAVE_VISUALISATIONS)
   include_directories(${OPENGL_INCLUDE_DIR})
 endif(HAVE_VISUALISATIONS)
 
-if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM5_INCLUDE_DIRS})
-endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
@@ -884,24 +881,28 @@ optional_source(HAVE_VISUALISATIONS
     visualisations/visualisationselector.ui
 )
 
-# Lastfm
-optional_source(HAVE_LIBLASTFM
-  SOURCES
-    covers/lastfmcoverprovider.cpp
-    internet/lastfm/fixlastfm.cpp
-    internet/lastfm/lastfmcompat.cpp
-    internet/lastfm/lastfmservice.cpp
-    internet/lastfm/lastfmsettingspage.cpp
-    songinfo/lastfmtrackinfoprovider.cpp
-    songinfo/tagwidget.cpp
-  HEADERS
-    covers/lastfmcoverprovider.h
-    internet/lastfm/lastfmservice.h
-    internet/lastfm/lastfmsettingspage.h
-    songinfo/lastfmtrackinfoprovider.h
-    songinfo/tagwidget.h
-  UI
-    internet/lastfm/lastfmsettingspage.ui
+# Lastfm - talks directly to the Last.fm web service API over
+# QNetworkAccessManager; no external library dependency, so unlike the other
+# optional_source blocks here, this one is unconditional.
+list(APPEND SOURCES
+  covers/lastfmcoverprovider.cpp
+  internet/lastfm/lastfmscrobblecache.cpp
+  internet/lastfm/lastfmservice.cpp
+  internet/lastfm/lastfmsettingspage.cpp
+  internet/lastfm/lastfmws.cpp
+  internet/lastfm/lastfmxmlquery.cpp
+  songinfo/lastfmtrackinfoprovider.cpp
+  songinfo/tagwidget.cpp
+)
+list(APPEND HEADERS
+  covers/lastfmcoverprovider.h
+  internet/lastfm/lastfmservice.h
+  internet/lastfm/lastfmsettingspage.h
+  songinfo/lastfmtrackinfoprovider.h
+  songinfo/tagwidget.h
+)
+list(APPEND UI
+  internet/lastfm/lastfmsettingspage.ui
 )
 
 # Platform specific - OS X
@@ -952,37 +953,37 @@ if(UNIX AND HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS 2.0 DBUS interfaces
-  qt5_add_dbus_adaptor(SOURCES
+  qt6_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
-  qt5_add_dbus_adaptor(SOURCES
+  qt6_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
-  qt5_add_dbus_adaptor(SOURCES
+  qt6_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # MPRIS 2.1 DBUS interfaces
-  qt5_add_dbus_adaptor(SOURCES
+  qt6_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
-  qt5_add_dbus_interface(SOURCES
+  qt6_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
   # org.gnome.SettingsDaemon interface
-  qt5_add_dbus_interface(SOURCES
+  qt6_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
   # org.kde.KGlobalAccel interfaces
   # these are taken from the KGlobalAccel sources (LGPL 2.1)
-  qt5_add_dbus_interface(SOURCES
+  qt6_add_dbus_interface(SOURCES
           dbus/org.kde.KGlobalAccel.xml
           dbus/kglobalaccel)
-  qt5_add_dbus_interface(SOURCES
+  qt6_add_dbus_interface(SOURCES
           dbus/org.kde.kglobalaccel.Component.xml
           dbus/kglobalaccelcomponent)
 
@@ -1025,26 +1026,26 @@ if(UNIX AND HAVE_DBUS)
           PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
       set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
           PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
-      qt5_add_dbus_interface(SOURCES
+      qt6_add_dbus_interface(SOURCES
           dbus/org.freedesktop.DBus.ObjectManager.xml
           dbus/objectmanager)
-      qt5_add_dbus_interface(SOURCES
+      qt6_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Filesystem.xml
           dbus/udisks2filesystem)
-      qt5_add_dbus_interface(SOURCES
+      qt6_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Block.xml
           dbus/udisks2block)
-      qt5_add_dbus_interface(SOURCES
+      qt6_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Drive.xml
           dbus/udisks2drive)
-      qt5_add_dbus_interface(SOURCES
+      qt6_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Job.xml
           dbus/udisks2job)
   endif(HAVE_UDISKS2)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    qt5_add_dbus_interface(SOURCES
+    qt6_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
@@ -1240,9 +1241,9 @@ optional_source(LINUX
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
-qt5_wrap_cpp(MOC ${HEADERS})
-qt5_wrap_ui(UIC ${UI})
-qt5_add_resources(QRC ${RESOURCES})
+qt6_wrap_cpp(MOC ${HEADERS})
+qt6_wrap_ui(UIC ${UI})
+qt6_add_resources(QRC ${RESOURCES})
 
 if(HAVE_TRANSLATIONS)
   add_pot(POT
@@ -1302,10 +1303,6 @@ link_directories(
 if(HAVE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(HAVE_VISUALISATIONS)
-
-if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
-endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
   link_directories(${LIBGPOD_LIBRARY_DIRS})
@@ -1375,6 +1372,7 @@ if (WIN32)
     protobuf
     tinysvcmdns
     dsound
+    dwmapi
   )
 endif (WIN32)
 

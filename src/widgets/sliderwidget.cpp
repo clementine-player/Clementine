@@ -49,7 +49,7 @@ void Amarok::Slider::wheelEvent(QWheelEvent* e) {
   }
 
   // Position Slider (horizontal)
-  int step = e->delta() * 1500 / 18;
+  int step = e->angleDelta().y() * 1500 / 18;
   int nval = qBound(minimum(), QSlider::value() + step, maximum());
 
   QSlider::setValue(nval);
@@ -218,7 +218,7 @@ void Amarok::VolumeSlider::generateGradient() {
 
   QLinearGradient gradient(gradient_image.rect().topLeft(),
                            gradient_image.rect().topRight());
-  gradient.setColorAt(0, palette().color(QPalette::Background));
+  gradient.setColorAt(0, palette().color(QPalette::Window));
   gradient.setColorAt(1, palette().color(QPalette::Highlight));
   p.fillRect(gradient_image.rect(), QBrush(gradient));
 
@@ -273,7 +273,10 @@ void Amarok::VolumeSlider::slideEvent(QMouseEvent* e) {
 }
 
 void Amarok::VolumeSlider::wheelEvent(QWheelEvent* e) {
-  const uint step = e->delta() / (e->orientation() == Qt::Vertical ? 30 : -30);
+  const QPoint angle_delta = e->angleDelta();
+  const bool vertical = angle_delta.y() != 0;
+  const int raw_delta = vertical ? angle_delta.y() : angle_delta.x();
+  const uint step = raw_delta / (vertical ? 30 : -30);
   QSlider::setValue(QSlider::value() + step);
   emit sliderReleased(value());
 }
@@ -313,7 +316,7 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
              QString::number(value()) + '%');
 }
 
-void Amarok::VolumeSlider::enterEvent(QEvent*) {
+void Amarok::VolumeSlider::enterEvent(QEnterEvent*) {
   m_animEnter = true;
   m_animCount = 0;
 

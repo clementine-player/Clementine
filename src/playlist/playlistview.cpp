@@ -43,7 +43,6 @@
 #include "playlist.h"
 #include "playlistdelegates.h"
 #include "playlistheader.h"
-#include "ui/iconloader.h"
 #include "ui/qt_blurimage.h"
 
 #ifdef HAVE_MOODBAR
@@ -78,7 +77,7 @@ void PlaylistProxyStyle::drawControl(ControlElement element,
     const QFontMetrics& font_metrics = header_option->fontMetrics;
 
     // spaces added to make transition less abrupt
-    if (rect.width() < font_metrics.width(text + "  ")) {
+    if (rect.width() < font_metrics.horizontalAdvance(text + "  ")) {
       const Playlist::Column column =
           static_cast<Playlist::Column>(header_option->section);
       QStyleOptionHeader new_option(*header_option);
@@ -147,14 +146,15 @@ PlaylistView::PlaylistView(QWidget* parent)
   setStyle(style_);
   setMouseTracking(true);
 
-  QIcon currenttrack_play =
-      IconLoader::Load("currenttrack_play", IconLoader::Other);
-  currenttrack_play_ =
-      currenttrack_play.pixmap(currenttrack_play.actualSize(QSize(32, 32)));
-  QIcon currenttrack_pause =
-      IconLoader::Load("currenttrack_pause", IconLoader::Other);
-  currenttrack_pause_ =
-      currenttrack_pause.pixmap(currenttrack_pause.actualSize(QSize(32, 32)));
+  // Loaded as a plain QPixmap rather than through
+  // QIcon::pixmap(actualSize(QSize(32, 32))): these assets are added via
+  // IconLoader without an explicit registered size, and Qt6 (unlike Qt5)
+  // treats such an icon as freely scalable, so actualSize() there returns
+  // the full 32x32 request instead of this PNG's native 12x12 - the
+  // play/pause triangle then rendered oversized and got clipped by the
+  // playlist row.
+  currenttrack_play_ = QPixmap(":/currenttrack_play.png");
+  currenttrack_pause_ = QPixmap(":/currenttrack_pause.png");
 
   connect(header_, SIGNAL(sectionResized(int, int, int)),
           SLOT(DirtyGeometry()));
@@ -571,7 +571,17 @@ void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
   cached_current_row_row_ = index.row();
 
   option.rect.moveTo(0, 0);
-  cached_current_row_ = QPixmap(option.rect.size());
+  // Without setDevicePixelRatio, this pixmap is allocated at exactly
+  // option.rect.size() *physical* pixels but treated as if that were its
+  // logical size too - on a HiDPI screen that's only half (or less) the
+  // real resolution, so the text/decorations drawn into it below come out
+  // soft, then get upscaled again by the drawPixmap(opt.rect, ...) call in
+  // drawRow() that blits this back at full logical size. Every other
+  // (non-current) row skips this cache and paints straight to the screen,
+  // which is why only the current row looks blurry.
+  const qreal dpr = devicePixelRatioF();
+  cached_current_row_ = QPixmap(option.rect.size() * dpr);
+  cached_current_row_.setDevicePixelRatio(dpr);
   cached_current_row_.fill(Qt::transparent);
 
   QPainter p(&cached_current_row_);

@@ -34,13 +34,12 @@ PodcastUrlLoader::PodcastUrlLoader(QObject* parent)
     : QObject(parent),
       network_(new NetworkAccessManager(this)),
       parser_(new PodcastParser),
-      html_link_re_("<link (.*)>"),
+      html_link_re_("<link (.*)>",
+                    QRegularExpression::CaseInsensitiveOption |
+                        QRegularExpression::InvertedGreedinessOption),
       html_link_rel_re_("rel\\s*=\\s*['\"]?\\s*alternate"),
       html_link_type_re_("type\\s*=\\s*['\"]?([^'\" ]+)"),
-      html_link_href_re_("href\\s*=\\s*['\"]?([^'\" ]+)") {
-  html_link_re_.setMinimal(true);
-  html_link_re_.setCaseSensitivity(Qt::CaseInsensitive);
-}
+      html_link_href_re_("href\\s*=\\s*['\"]?([^'\" ]+)") {}
 
 PodcastUrlLoader::~PodcastUrlLoader() { delete parser_; }
 
@@ -185,19 +184,21 @@ void PodcastUrlLoader::RequestFinished(RequestState* state,
     // I don't want a full HTML parser here, so do this the dirty way.
     const QString page_text = QString::fromUtf8(reply->readAll());
     int pos = 0;
-    while ((pos = html_link_re_.indexIn(page_text, pos)) != -1) {
-      const QString link = html_link_re_.cap(1).toLower();
-      pos += html_link_re_.matchedLength();
+    QRegularExpressionMatch link_match;
+    while ((link_match = html_link_re_.match(page_text, pos)).hasMatch()) {
+      const QString link = link_match.captured(1).toLower();
+      pos = link_match.capturedStart() + link_match.capturedLength();
 
-      if (html_link_rel_re_.indexIn(link) == -1 ||
-          html_link_type_re_.indexIn(link) == -1 ||
-          html_link_href_re_.indexIn(link) == -1) {
+      const QRegularExpressionMatch type_match = html_link_type_re_.match(link);
+      const QRegularExpressionMatch href_match = html_link_href_re_.match(link);
+      if (!html_link_rel_re_.match(link).hasMatch() || !type_match.hasMatch() ||
+          !href_match.hasMatch()) {
         continue;
       }
 
-      const QString link_type = html_link_type_re_.cap(1);
+      const QString link_type = type_match.captured(1);
       const QString href =
-          Utilities::DecodeHtmlEntities(html_link_href_re_.cap(1));
+          Utilities::DecodeHtmlEntities(href_match.captured(1));
 
       if (parser_->supported_mime_types().contains(link_type)) {
         NextRequest(QUrl(href), state);

@@ -24,7 +24,7 @@
 #include <QList>
 #include <QObject>
 #include <QQueue>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 #include <memory>
 
@@ -113,7 +113,7 @@ class PodcastDownloader : public QObject {
   PodcastBackend* backend_;
   QNetworkAccessManager* network_;
 
-  QRegExp disallowed_filename_characters_;
+  QRegularExpression disallowed_filename_characters_;
 
   bool auto_download_;
   QString download_dir_;

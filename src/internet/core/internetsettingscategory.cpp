@@ -18,15 +18,12 @@
 #include "internetsettingscategory.h"
 
 #include "internet/digitally/digitallyimportedsettingspage.h"
+#include "internet/lastfm/lastfmsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
 #include "internet/radiobrowser/radiobrowsersettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "internetshowsettingspage.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmsettingspage.h"
-#endif
 
 #ifdef HAVE_GOOGLE_DRIVE
 #include "internet/googledrive/googledrivesettingspage.h"
@@ -59,9 +56,7 @@ InternetSettingsCategory::InternetSettingsCategory(SettingsDialog* dialog)
 }
 
 void InternetSettingsCategory::AddChildren() {
-#ifdef HAVE_LIBLASTFM
   AddPage(SettingsDialog::Page_Lastfm, new LastFMSettingsPage(dialog_));
-#endif
 
 #ifdef HAVE_GOOGLE_DRIVE
   AddPage(SettingsDialog::Page_GoogleDrive,

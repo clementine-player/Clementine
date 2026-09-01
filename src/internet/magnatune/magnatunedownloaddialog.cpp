@@ -26,6 +26,7 @@
 #include <QMetaEnum>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
+#include <QRegularExpression>
 #include <QSet>
 #include <QSettings>
 #include <QUrlQuery>
@@ -192,14 +193,15 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   }
 
   // Parse the XML (lol) to find the URL
-  QRegExp re(QString("<%1>([^<]+)</%2>").arg(type, type));
-  if (re.indexIn(data) == -1) {
+  QRegularExpression re(QString("<%1>([^<]+)</%2>").arg(type, type));
+  const QRegularExpressionMatch match = re.match(data);
+  if (!match.hasMatch()) {
     ShowError(tr("This album is not available in the requested format"));
     return;
   }
 
   // Munge the URL a bit
-  QString url_text = Utilities::DecodeHtmlEntities(re.cap(1));
+  QString url_text = Utilities::DecodeHtmlEntities(match.captured(1));
 
   QUrl url = QUrl(url_text);
   url.setUserName(service_->username());

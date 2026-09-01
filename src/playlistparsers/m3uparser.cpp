@@ -18,8 +18,8 @@
 #include "m3uparser.h"
 
 #include <QBuffer>
-#include <QRegExp>
-#include <QTextCodec>
+#include <QRegularExpression>
+#include <QStringConverter>
 #include <QtDebug>
 
 #include "core/logging.h"
@@ -39,11 +39,12 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
   // Unicode auto-detection is enabled in QTextStream by default.
   QTextStream playlist_stream(device);
   QString data = playlist_stream.readAll();
-  qLog(Debug) << "Detected codec" << playlist_stream.codec()->name();
+  qLog(Debug) << "Detected codec"
+              << QStringConverter::nameForEncoding(playlist_stream.encoding());
 
   // iTune playlists use \r newlines. These aren't handled by the Qt readLine
   // methods.
-  QStringList lines = data.split(QRegExp("\n|\r|\r\n"));
+  QStringList lines = data.split(QRegularExpression("\n|\r|\r\n"));
 
   for (int i = 0; i < lines.count(); i++) {
     QString line = lines[i].trimmed();

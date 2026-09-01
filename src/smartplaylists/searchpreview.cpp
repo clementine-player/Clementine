@@ -91,11 +91,14 @@ void SearchPreview::RunSearch(const Search& search) {
   ui_->busy_container->show();
   ui_->count_label->hide();
   QFuture<PlaylistItemList> future = QtConcurrent::run(DoRunSearch, generator_);
-  NewClosure(future, this, SLOT(SearchFinished(QFuture<PlaylistItemList>)),
-             future);
+  NewClosure(
+      future, this,
+      SLOT(SearchFinished(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
+      future);
 }
 
-void SearchPreview::SearchFinished(QFuture<PlaylistItemList> future) {
+void SearchPreview::SearchFinished(
+    QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
   last_search_ =
       std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();

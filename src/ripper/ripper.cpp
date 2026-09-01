@@ -91,7 +91,7 @@ void Ripper::Start() {
   }
 
   qLog(Debug) << "Ripping" << AddedTracks() << "tracks.";
-  QtConcurrent::run(this, &Ripper::Rip);
+  (void)QtConcurrent::run(&Ripper::Rip, this);
 }
 
 void Ripper::Cancel() {

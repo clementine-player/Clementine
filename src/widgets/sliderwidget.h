@@ -101,7 +101,7 @@ class VolumeSlider : public Slider {
 
  protected:
   virtual void paintEvent(QPaintEvent*);
-  virtual void enterEvent(QEvent*);
+  virtual void enterEvent(QEnterEvent*);
   virtual void leaveEvent(QEvent*);
   virtual void paletteChange(const QPalette&);
   virtual void slideEvent(QMouseEvent*);

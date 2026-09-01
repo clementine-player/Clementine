@@ -35,7 +35,7 @@ SongMetadataSettingsPage::SongMetadataSettingsPage(SettingsDialog* dialog)
           SLOT(MaxNumProcsTagClientsChanged(int)));
   ui_->max_numprocs_tagclients_value_label->setMinimumWidth(
       QFontMetrics(ui_->max_numprocs_tagclients_value_label->font())
-          .width("WWW"));
+          .horizontalAdvance("WWW"));
 
   // Limit max tag clients to number of CPU cores.
   ui_->max_numprocs_tagclients->setMaximum(QThread::idealThreadCount());

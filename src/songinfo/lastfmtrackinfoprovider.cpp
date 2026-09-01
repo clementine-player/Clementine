@@ -17,7 +17,9 @@
 
 #include "lastfmtrackinfoprovider.h"
 
-#include "internet/lastfm/lastfmcompat.h"
+#include <QNetworkReply>
+
+#include "internet/lastfm/lastfmws.h"
 #include "songinfotextview.h"
 #include "songplaystats.h"
 #include "tagwidget.h"
@@ -29,10 +31,9 @@ void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
   params["track"] = metadata.title();
   params["artist"] = metadata.artist();
 
-  if (!lastfm::ws::Username.isEmpty())
-    params["username"] = lastfm::ws::Username;
+  if (!LastFmWs::username.isEmpty()) params["username"] = LastFmWs::username;
 
-  QNetworkReply* reply = lastfm::ws::get(params);
+  QNetworkReply* reply = LastFmWs::Get(params);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
   requests_[reply] = id;
 }
@@ -48,8 +49,8 @@ void LastfmTrackInfoProvider::RequestFinished() {
     return;
   }
 
-  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
+  LastFmXmlQuery query;
+  if (query.Parse(reply->readAll())) {
     GetPlayCounts(id, query);
     GetWiki(id, query);
     GetTags(id, query);
@@ -58,7 +59,7 @@ void LastfmTrackInfoProvider::RequestFinished() {
   emit Finished(id);
 }
 
-void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
+void LastfmTrackInfoProvider::GetPlayCounts(int id, const LastFmXmlQuery& q) {
   // Parse the response
   const int listeners = q["track"]["listeners"].text().toInt();
   const int playcount = q["track"]["playcount"].text().toInt();
@@ -99,7 +100,7 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
   emit InfoReady(id, data);
 }
 
-void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
+void LastfmTrackInfoProvider::GetWiki(int id, const LastFmXmlQuery& q) {
   // Parse the response
   if (q["track"].children("wiki").isEmpty()) return;  // No wiki element
 
@@ -121,7 +122,7 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   emit InfoReady(id, data);
 }
 
-void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
+void LastfmTrackInfoProvider::GetTags(int id, const LastFmXmlQuery& q) {
   // Parse the response
   if (q["track"].children("toptags").isEmpty() ||
       q["track"]["toptags"].children("tag").isEmpty())
@@ -138,7 +139,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
 
   widget->SetIcon(data.icon_);
 
-  for (const lastfm::XmlQuery& e : q["track"]["toptags"].children("tag")) {
+  for (const LastFmXmlQuery& e : q["track"]["toptags"].children("tag")) {
     widget->AddTag(e["name"].text());
   }
 

@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QNetworkReply>
+#include <QRegularExpression>
 #include <QTextCodec>
 #include <QThread>
 
@@ -209,10 +210,11 @@ QString UltimateLyricsProvider::ExtractUrl(const QString& source,
 
 QString UltimateLyricsProvider::ExtractXmlTag(const QString& source,
                                               const QString& tag) {
-  QRegExp re("<(\\w+).*>");  // ಠ_ಠ
-  if (re.indexIn(tag) == -1) return QString();
+  static const QRegularExpression re("<(\\w+).*>");  // ಠ_ಠ
+  const QRegularExpressionMatch match = re.match(tag);
+  if (!match.hasMatch()) return QString();
 
-  return Extract(source, tag, "</" + re.cap(1) + ">");
+  return Extract(source, tag, "</" + match.captured(1) + ">");
 }
 
 QString UltimateLyricsProvider::Extract(const QString& source,
@@ -241,10 +243,11 @@ void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule,
 
 QString UltimateLyricsProvider::ExcludeXmlTag(const QString& source,
                                               const QString& tag) {
-  QRegExp re("<(\\w+).*>");  // ಠ_ಠ
-  if (re.indexIn(tag) == -1) return source;
+  static const QRegularExpression re("<(\\w+).*>");  // ಠ_ಠ
+  const QRegularExpressionMatch match = re.match(tag);
+  if (!match.hasMatch()) return source;
 
-  return Exclude(source, tag, "</" + re.cap(1) + ">");
+  return Exclude(source, tag, "</" + match.captured(1) + ">");
 }
 
 QString UltimateLyricsProvider::Exclude(const QString& source,
@@ -291,7 +294,7 @@ void UltimateLyricsProvider::ReplaceField(const QString& tag,
   // Apply URL character replacement
   QString value_copy(value);
   for (const UrlFormat& format : url_formats_) {
-    QRegExp re("[" + QRegExp::escape(format.first) + "]");
+    QRegularExpression re("[" + QRegularExpression::escape(format.first) + "]");
     value_copy.replace(re, format.second);
   }
 

@@ -21,7 +21,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QUrl>
 #include <QXmlStreamReader>
 #include <QtDebug>
@@ -40,23 +40,26 @@ SongList ASXParser::Load(QIODevice* device, const QString& playlist_path,
   // ASX looks a lot like xml, but doesn't require tags to be case sensitive,
   // meaning we have to accept things like: <Abstract>...</abstract>
   // We use a dirty way to achieve this: we make all tags lower case
-  QRegExp ex("(<[/]?[^>]*[A-Z]+[^>]*>)");
-  ex.setCaseSensitivity(Qt::CaseInsensitive);
+  QRegularExpression ex("(<[/]?[^>]*[A-Z]+[^>]*>)",
+                        QRegularExpression::CaseInsensitiveOption);
   int index = 0;
-  while ((index = ex.indexIn(data, index)) != -1) {
-    data.replace(ex.cap(1).toLocal8Bit(), ex.cap(1).toLower().toLocal8Bit());
-    index += ex.matchedLength();
+  QRegularExpressionMatch match;
+  while ((match = ex.match(data, index)).hasMatch()) {
+    data.replace(match.captured(1).toLocal8Bit(),
+                 match.captured(1).toLower().toLocal8Bit());
+    index = match.capturedStart() + match.capturedLength();
   }
 
   // Some playlists have unescaped & characters in URLs :(
   ex.setPattern("(href\\s*=\\s*\")([^\"]+)\"");
   index = 0;
-  while ((index = ex.indexIn(data, index)) != -1) {
-    QString url = ex.cap(2);
-    url.replace(QRegExp("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
+  while ((match = ex.match(data, index)).hasMatch()) {
+    QString url = match.captured(2);
+    url.replace(QRegularExpression("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
 
-    QByteArray replacement = QString(ex.cap(1) + url + "\"").toLocal8Bit();
-    data.replace(ex.cap(0).toLocal8Bit(), replacement);
+    QByteArray replacement =
+        QString(match.captured(1) + url + "\"").toLocal8Bit();
+    data.replace(match.captured(0).toLocal8Bit(), replacement);
     index += replacement.length();
   }
 
@@ -87,18 +90,18 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
 
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        QStringRef name = reader->name();
-        if (name == "ref") {
+        QStringView name = reader->name();
+        if (name == QLatin1String("ref")) {
           ref = reader->attributes().value("href").toString();
-        } else if (name == "title") {
+        } else if (name == QLatin1String("title")) {
           title = reader->readElementText();
-        } else if (name == "author") {
+        } else if (name == QLatin1String("author")) {
           artist = reader->readElementText();
         }
         break;
       }
       case QXmlStreamReader::EndElement: {
-        if (reader->name() == "entry") {
+        if (reader->name() == QLatin1String("entry")) {
           goto return_song;
         }
         break;

@@ -70,13 +70,13 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
   if (event->type() == QEvent::Wheel) {
     QWheelEvent* e = static_cast<QWheelEvent*>(event);
     if (e->modifiers() == Qt::ShiftModifier) {
-      if (e->delta() > 0) {
+      if (e->angleDelta().y() > 0) {
         emit SeekForward();
       } else {
         emit SeekBackward();
       }
     } else if (e->modifiers() == Qt::ControlModifier) {
-      if (e->delta() < 0) {
+      if (e->angleDelta().y() < 0) {
         emit NextTrack();
       } else {
         emit PreviousTrack();
@@ -86,13 +86,13 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
       s.beginGroup(MainWindow::kSettingsGroup);
       bool prev_next_track = s.value("scrolltrayicon").toBool();
       if (prev_next_track) {
-        if (e->delta() < 0) {
+        if (e->angleDelta().y() < 0) {
           emit NextTrack();
         } else {
           emit PreviousTrack();
         }
       } else {
-        emit ChangeVolume(e->delta());
+        emit ChangeVolume(e->angleDelta().y());
       }
     }
     return true;
@@ -125,12 +125,10 @@ void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
   action_mute_->setChecked(mute->isChecked());
 
   menu_->addSeparator();
-#ifdef HAVE_LIBLASTFM
   action_love_ =
       menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
   action_love_->setVisible(love->isVisible());
   action_love_->setEnabled(love->isEnabled());
-#endif
 
   menu_->addSeparator();
   menu_->addAction(quit->icon(), quit->text(), quit, SLOT(trigger()));
@@ -184,9 +182,7 @@ void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
       IconLoader::Load("media-playback-pause", IconLoader::Base));
   action_play_pause_->setText(tr("Pause"));
   action_play_pause_->setEnabled(enable_play_pause);
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(enable_love);
-#endif
 }
 
 void QtSystemTrayIcon::SetStopped() {
@@ -200,21 +196,15 @@ void QtSystemTrayIcon::SetStopped() {
 
   action_play_pause_->setEnabled(true);
 
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(false);
-#endif
 }
 
 void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
   action_love_->setVisible(value);
-#endif
 }
 
 void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(value);
-#endif
 }
 
 void QtSystemTrayIcon::MuteButtonStateChanged(bool value) {

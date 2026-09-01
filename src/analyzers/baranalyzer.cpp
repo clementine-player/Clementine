@@ -36,7 +36,7 @@ const char* BarAnalyzer::kName =
 
 BarAnalyzer::BarAnalyzer(QWidget* parent) : Analyzer::Base(parent, 8) {
   // roof pixmaps don't depend on size() so we do in the ctor
-  bg_ = parent->palette().color(QPalette::Background);
+  bg_ = parent->palette().color(QPalette::Window);
 
   QColor fg(parent->palette().color(QPalette::Highlight).lighter(150));
 
@@ -81,7 +81,7 @@ void BarAnalyzer::init() {
   pixBarGradient_ = QPixmap(height() * kColumnWidth, height());
   pixCompose_ = QPixmap(size());
   canvas_ = QPixmap(size());
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
 
   updateBandSize(band_count_);
   colorChanged();
@@ -139,7 +139,7 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
     colorChanged();
   }
 
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
 
   for (uint i = 0, x = 0, y2; i < scope_.size(); ++i, x += kColumnWidth + 1) {
     // assign pre[log10]'d value

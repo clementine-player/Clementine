@@ -17,6 +17,7 @@
 
 #include "fmpsparser.h"
 
+#include <QChar>
 #include <QStringList>
 #include <QtDebug>
 #include <functional>
@@ -65,8 +66,8 @@ static int ParseContainer(const QStringRef& data, F f, QList<T>* ret) {
     pos += matched_len;
 
     // Expect two separators in a row
-    if (pos + 2 <= data.length() && data.at(pos) == Separator &&
-        data.at(pos + 1) == Separator) {
+    if (pos + 2 <= data.length() && data.at(pos) == QLatin1Char(Separator) &&
+        data.at(pos + 1) == QLatin1Char(Separator)) {
       pos += 2;
     } else {
       break;
@@ -85,20 +86,24 @@ bool FMPSParser::Parse(const QString& data) {
 
 int FMPSParser::ParseValueRef(const QStringRef& data, QVariant* ret) const {
   // Try to match a float
-  int pos = float_re_.indexIn(*data.string(), data.position());
-  if (pos == data.position()) {
-    *ret = float_re_.cap(1).toDouble();
-    return float_re_.matchedLength();
+  QRegularExpressionMatch float_match =
+      float_re_.match(*data.string(), data.position());
+  if (float_match.hasMatch() &&
+      float_match.capturedStart() == data.position()) {
+    *ret = float_match.captured(1).toDouble();
+    return float_match.capturedLength();
   }
 
   // Otherwise try to match a string
-  pos = string_re_.indexIn(*data.string(), data.position());
-  if (pos == data.position()) {
+  QRegularExpressionMatch string_match =
+      string_re_.match(*data.string(), data.position());
+  if (string_match.hasMatch() &&
+      string_match.capturedStart() == data.position()) {
     // Replace escape sequences with their actual characters
-    QString value = string_re_.cap(1);
+    QString value = string_match.captured(1);
     value.replace(escape_re_, "\\1");
     *ret = value;
-    return string_re_.matchedLength();
+    return string_match.capturedLength();
   }
 
   return -1;

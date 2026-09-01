@@ -41,7 +41,7 @@ QProgressIndicatorSpinning::QProgressIndicatorSpinning(QWidget *parent,
     : QWidget(parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     QSize size(thickness, thickness);
     QMovie *movie = new QMovie(this);

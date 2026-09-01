@@ -77,7 +77,7 @@ void FileChooserWidget::Init(const QString& initialPath) {
   connect(changePath, &QAbstractButton::clicked, this,
           &FileChooserWidget::ChooseFile);
   changePath->setFixedWidth(
-      2 * changePath->fontMetrics().width(QLatin1String(" ... ")));
+      2 * changePath->fontMetrics().horizontalAdvance(QLatin1String(" ... ")));
 
   layout_->addWidget(changePath);
   layout_->setContentsMargins(2, 0, 2, 0);

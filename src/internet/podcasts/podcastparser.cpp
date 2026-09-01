@@ -20,6 +20,7 @@
 #include "podcastparser.h"
 
 #include <QDateTime>
+#include <QRegularExpression>
 #include <QXmlStreamReader>
 
 #include "core/logging.h"
@@ -54,7 +55,8 @@ bool PodcastParser::SupportsContentType(const QString& content_type) const {
 
 bool PodcastParser::TryMagic(const QByteArray& data) const {
   QString str(QString::fromUtf8(data));
-  return str.contains(QRegExp("<rss\\b")) || str.contains(QRegExp("<opml\\b"));
+  return str.contains(QRegularExpression("<rss\\b")) ||
+         str.contains(QRegularExpression("<opml\\b"));
 }
 
 QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
@@ -63,8 +65,8 @@ QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader.name();
-        if (name == "rss") {
+        const QStringView name = reader.name();
+        if (name == QLatin1String("rss")) {
           Podcast podcast;
           if (!ParseRss(&reader, &podcast)) {
             return QVariant();
@@ -72,7 +74,7 @@ QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
             podcast.set_url(url);
             return QVariant::fromValue(podcast);
           }
-        } else if (name == "opml") {
+        } else if (name == QLatin1String("opml")) {
           OpmlContainer container;
           if (!ParseOpml(&reader, &container)) {
             return QVariant();
@@ -107,28 +109,29 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         const QString lower_namespace =
             reader->namespaceUri().toString().toLower();
 
-        if (name == "title") {
+        if (name == QLatin1String("title")) {
           ret->set_title(reader->readElementText());
-        } else if (name == "link" && lower_namespace.isEmpty()) {
+        } else if (name == QLatin1String("link") && lower_namespace.isEmpty()) {
           ret->set_link(
               QUrl::fromEncoded(reader->readElementText().toLatin1()));
-        } else if (name == "description") {
+        } else if (name == QLatin1String("description")) {
           ret->set_description(reader->readElementText());
-        } else if (name == "owner" && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("owner") &&
+                   lower_namespace == kItunesNamespace) {
           ParseItunesOwner(reader, ret);
-        } else if (name == "image") {
+        } else if (name == QLatin1String("image")) {
           ParseImage(reader, ret);
-        } else if (name == "copyright") {
+        } else if (name == QLatin1String("copyright")) {
           ret->set_copyright(reader->readElementText());
-        } else if (name == "link" && lower_namespace == kAtomNamespace &&
-                   ret->url().isEmpty() &&
-                   reader->attributes().value("rel") == "self") {
+        } else if (name == QLatin1String("link") &&
+                   lower_namespace == kAtomNamespace && ret->url().isEmpty() &&
+                   reader->attributes().value("rel") == QLatin1String("self")) {
           ret->set_url(QUrl::fromEncoded(reader->readElementText().toLatin1()));
-        } else if (name == "item") {
+        } else if (name == QLatin1String("item")) {
           ParseItem(reader, ret);
         } else {
           Utilities::ConsumeCurrentElement(reader);
@@ -150,8 +153,8 @@ void PodcastParser::ParseImage(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        if (name == "url") {
+        const QStringView name = reader->name();
+        if (name == QLatin1String("url")) {
           ret->set_image_url_large(
               QUrl::fromEncoded(reader->readElementText().toLatin1()));
         } else {
@@ -175,10 +178,10 @@ void PodcastParser::ParseItunesOwner(QXmlStreamReader* reader,
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        if (name == "name") {
+        const QStringView name = reader->name();
+        if (name == QLatin1String("name")) {
           ret->set_owner_name(reader->readElementText());
-        } else if (name == "email") {
+        } else if (name == QLatin1String("email")) {
           ret->set_owner_email(reader->readElementText());
         } else {
           Utilities::ConsumeCurrentElement(reader);
@@ -202,15 +205,15 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
+        const QStringView name = reader->name();
         const QString lower_namespace =
             reader->namespaceUri().toString().toLower();
 
-        if (name == "title") {
+        if (name == QLatin1String("title")) {
           episode.set_title(reader->readElementText());
-        } else if (name == "description") {
+        } else if (name == QLatin1String("description")) {
           episode.set_description(reader->readElementText());
-        } else if (name == "pubDate") {
+        } else if (name == QLatin1String("pubDate")) {
           QString date = reader->readElementText();
           episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
           if (!episode.publication_date().isValid()) {
@@ -219,7 +222,8 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
                 << Utilities::MakeBugReportUrl(
                        QString("[podcast] Unable to parse date: %1").arg(date));
           }
-        } else if (name == "duration" && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("duration") &&
+                   lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
           QStringList parts = reader->readElementText().split(':');
           if (parts.count() == 2) {
@@ -228,7 +232,7 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
             episode.set_duration_secs(parts[0].toInt() * 60 * 60 +
                                       parts[1].toInt() * 60 + parts[2].toInt());
           }
-        } else if (name == "enclosure") {
+        } else if (name == QLatin1String("enclosure")) {
           const QString type = reader->attributes().value("type").toString();
           const QUrl url = QUrl::fromEncoded(
               reader->attributes().value("url").toString().toLatin1());
@@ -244,7 +248,8 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
             episode.set_url(url);
           }
           Utilities::ConsumeCurrentElement(reader);
-        } else if (name == "author" && lower_namespace == kItunesNamespace) {
+        } else if (name == QLatin1String("author") &&
+                   lower_namespace == kItunesNamespace) {
           episode.set_author(reader->readElementText());
         } else {
           Utilities::ConsumeCurrentElement(reader);
@@ -295,8 +300,8 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader,
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        if (name != "outline") {
+        const QStringView name = reader->name();
+        if (name != QLatin1String("outline")) {
           Utilities::ConsumeCurrentElement(reader);
           continue;
         }

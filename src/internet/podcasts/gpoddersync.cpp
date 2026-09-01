@@ -155,7 +155,7 @@ void GPodderSync::GetUpdatesNow() {
 
   qlonglong timestamp = 0;
   if (last_successful_get_.isValid()) {
-    timestamp = last_successful_get_.toTime_t();
+    timestamp = last_successful_get_.toSecsSinceEpoch();
   }
 
   mygpo::DeviceUpdatesPtr reply(

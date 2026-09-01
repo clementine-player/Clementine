@@ -82,7 +82,8 @@ void StandardItemIconLoader::RowsAboutToBeRemoved(const QModelIndex& parent,
 }
 
 void StandardItemIconLoader::ModelReset() {
-  cover_loader_->CancelTasks(QSet<quint64>::fromList(pending_covers_.keys()));
+  const QList<quint64> keys = pending_covers_.keys();
+  cover_loader_->CancelTasks(QSet<quint64>(keys.begin(), keys.end()));
   pending_covers_.clear();
 }
 

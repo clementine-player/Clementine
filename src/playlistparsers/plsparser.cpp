@@ -17,6 +17,7 @@
 
 #include "plsparser.h"
 
+#include <QRegularExpression>
 #include <QTextStream>
 #include <QtDebug>
 
@@ -29,7 +30,7 @@ PLSParser::PLSParser(LibraryBackendInterface* library, QObject* parent)
 SongList PLSParser::Load(QIODevice* device, const QString& playlist_path,
                          const QDir& dir) const {
   QMap<int, Song> songs;
-  QRegExp n_re("\\d+$");
+  static const QRegularExpression n_re("\\d+$");
 
   while (!device->atEnd()) {
     QString line = QString::fromUtf8(device->readLine()).trimmed();
@@ -37,8 +38,8 @@ SongList PLSParser::Load(QIODevice* device, const QString& playlist_path,
     QString key = line.left(equals).toLower();
     QString value = line.mid(equals + 1);
 
-    n_re.indexIn(key);
-    int n = n_re.cap(0).toInt();
+    const QRegularExpressionMatch match = n_re.match(key);
+    int n = match.captured(0).toInt();
 
     if (key.startsWith("file")) {
       Song song = LoadSong(value, 0, dir);
@@ -65,16 +66,17 @@ SongList PLSParser::Load(QIODevice* device, const QString& playlist_path,
 void PLSParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                      Playlist::Path path_type) const {
   QTextStream s(device);
-  s << "[playlist]" << endl;
-  s << "Version=2" << endl;
-  s << "NumberOfEntries=" << songs.count() << endl;
+  s << "[playlist]" << Qt::endl;
+  s << "Version=2" << Qt::endl;
+  s << "NumberOfEntries=" << songs.count() << Qt::endl;
 
   int n = 1;
   for (const Song& song : songs) {
     s << "File" << n << "=" << URLOrFilename(song.url(), dir, path_type)
-      << endl;
-    s << "Title" << n << "=" << song.title() << endl;
-    s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
+      << Qt::endl;
+    s << "Title" << n << "=" << song.title() << Qt::endl;
+    s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec
+      << Qt::endl;
     ++n;
   }
 }

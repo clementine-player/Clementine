@@ -17,6 +17,7 @@
 
 #include "moodbarproxystyle.h"
 
+#include <QActionGroup>
 #include <QContextMenuEvent>
 #include <QEvent>
 #include <QMenu>
@@ -192,7 +193,7 @@ void MoodbarProxyStyle::Render(ComplexControl control,
         // Draw the normal slider into the fade source pixmap.
         fade_source_ = QPixmap(option->rect.size());
         fade_source_.fill(
-            option->palette.color(QPalette::Active, QPalette::Background));
+            option->palette.color(QPalette::Active, QPalette::Window));
 
         QPainter p(&fade_source_);
         QStyleOptionSlider opt_copy(*option);
@@ -340,8 +341,8 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
   p.drawRect(border_rect.adjusted(0, 0, -1, -1));
 
   // Draw the outer bit
-  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
-                kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Window), kMarginSize,
+                Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
 
   p.drawRect(rect.adjusted(1, 1, -2, -2));
 

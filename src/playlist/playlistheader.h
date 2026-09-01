@@ -33,7 +33,7 @@ class PlaylistHeader : public StretchHeaderView {
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
-  void enterEvent(QEvent*);
+  void enterEvent(QEnterEvent*);
 
  signals:
   void SectionVisibilityChanged(int logical, bool visible);

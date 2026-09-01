@@ -17,6 +17,7 @@
 
 #include "moodbarrenderer.h"
 
+#include <QObject>
 #include <QPainter>
 #include <QPalette>
 

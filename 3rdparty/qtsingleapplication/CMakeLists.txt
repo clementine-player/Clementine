@@ -18,11 +18,11 @@ elseif(WIN32)
   set(SINGLEAPP-SOURCES ${SINGLEAPP-SOURCES} qtlockedfile_unix.cpp)
 endif(WIN32)
 
-QT5_WRAP_CPP(SINGLEAPP-SOURCES-MOC ${SINGLEAPP-MOC-HEADERS})
+QT6_WRAP_CPP(SINGLEAPP-SOURCES-MOC ${SINGLEAPP-MOC-HEADERS})
 
 ADD_LIBRARY(qtsingleapplication STATIC
     ${SINGLEAPP-SOURCES}
     ${SINGLEAPP-SOURCES-MOC}
 )
 
-target_link_libraries(qtsingleapplication Qt5::Core Qt5::Widgets Qt5::Network)
+target_link_libraries(qtsingleapplication Qt6::Core Qt6::Widgets Qt6::Network)

@@ -19,13 +19,21 @@ include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
+# Test executables link against clementine_lib, which requires these at
+# link time. src/CMakeLists.txt sets up the same link_directories() for
+# clementine_lib itself, but that call is scoped to that directory and
+# doesn't reach targets defined here.
+link_directories(
+  ${CHROMAPRINT_LIBRARY_DIRS}
+  ${GSTREAMER_APP_LIBRARY_DIRS}
+  ${GLEW_LIBRARY_DIRS}
+  ${LIBGPOD_LIBRARY_DIRS}
+  ${LIBMTP_LIBRARY_DIRS}
+)
+
 if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
 endif(HAVE_LIBGPOD)
-
-if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
-endif(HAVE_LIBLASTFM)
 
 if(NOT USE_SYSTEM_GMOCK)
   set(GTEST-SOURCES
@@ -69,7 +77,7 @@ set(TESTUTILS-MOC-HEADERS
   testobjectdecorators.h
 )
 
-qt5_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
+qt6_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
 add_library(test_utils STATIC EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils ${GMOCK_LIBRARIES} ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
@@ -83,7 +91,7 @@ add_custom_target(build_tests
 )
 add_dependencies(clementine_test build_tests)
 
-qt5_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
+qt6_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
 
 add_library(test_gui_main STATIC EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_gui_main clementine_lib)
@@ -99,7 +107,7 @@ macro(add_test_file test_source gui_required)
       EXCLUDE_FROM_ALL
       ${test_source}
     )
-    target_link_libraries(${TEST_NAME} ${GMOCK_LIBRARIES} clementine_lib test_utils Qt5::Test)
+    target_link_libraries(${TEST_NAME} ${GMOCK_LIBRARIES} clementine_lib test_utils Qt6::Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
       target_link_libraries(${TEST_NAME} test_gui_main)
@@ -127,6 +135,9 @@ add_test_file(asxiniparser_test.cpp false)
 #add_test_file(database_test.cpp false)
 #add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
+if(HAVE_GOOGLE_DRIVE)
+  add_test_file(googledriveclient_test.cpp false)
+endif(HAVE_GOOGLE_DRIVE)
 #add_test_file(librarybackend_test.cpp false)
 #add_test_file(librarymodel_test.cpp true)
 #add_test_file(m3uparser_test.cpp false)

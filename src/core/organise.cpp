@@ -83,7 +83,7 @@ void Organise::Start() {
 
 void Organise::ProcessSomeFiles() {
   if (!started_) {
-    transcode_temp_name_.open();
+    (void)transcode_temp_name_.open();
 
     if (!destination_->StartCopy(&supported_filetypes_)) {
       // Failed to start - mark everything as failed :(

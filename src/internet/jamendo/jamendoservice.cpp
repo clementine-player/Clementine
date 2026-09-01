@@ -225,7 +225,7 @@ void JamendoService::DownloadDirectoryFinished() {
       app_->task_manager()->StartTask(tr("Parsing Jamendo catalogue"));
 
   QFuture<void> future =
-      QtConcurrent::run(this, &JamendoService::ParseDirectory, gzip);
+      QtConcurrent::run(&JamendoService::ParseDirectory, this, gzip);
   NewClosure(future, this, SLOT(ParseDirectoryFinished()));
 }
 
@@ -248,7 +248,7 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
   while (!reader.atEnd()) {
     reader.readNext();
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == "artist") {
+        reader.name() == QLatin1String("artist")) {
       songs << ReadArtist(&reader, &track_ids);
     }
 
@@ -307,13 +307,14 @@ SongList JamendoService::ReadArtist(QXmlStreamReader* reader,
     reader->readNext();
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      QStringRef name = reader->name();
-      if (name == "name") {
+      QStringView name = reader->name();
+      if (name == QLatin1String("name")) {
         current_artist = reader->readElementText().trimmed();
-      } else if (name == "album") {
+      } else if (name == QLatin1String("album")) {
         ret << ReadAlbum(current_artist, reader, track_ids);
       }
-    } else if (reader->isEndElement() && reader->name() == "artist") {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("artist")) {
       break;
     }
   }
@@ -333,17 +334,18 @@ SongList JamendoService::ReadAlbum(const QString& artist,
     reader->readNext();
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      if (reader->name() == "name") {
+      if (reader->name() == QLatin1String("name")) {
         current_album = reader->readElementText().trimmed();
-      } else if (reader->name() == "id") {
+      } else if (reader->name() == QLatin1String("id")) {
         QString id = reader->readElementText();
         cover = QString(kAlbumCoverUrl).arg(id);
         current_album_id = id.toInt();
-      } else if (reader->name() == "track") {
+      } else if (reader->name() == QLatin1String("track")) {
         ret << ReadTrack(artist, current_album, cover, current_album_id, reader,
                          track_ids);
       }
-    } else if (reader->isEndElement() && reader->name() == "album") {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("album")) {
       break;
     }
   }
@@ -369,19 +371,19 @@ Song JamendoService::ReadTrack(const QString& artist, const QString& album,
   while (!reader->atEnd()) {
     reader->readNext();
     if (reader->isStartElement()) {
-      QStringRef name = reader->name();
-      if (name == "name") {
+      QStringView name = reader->name();
+      if (name == QLatin1String("name")) {
         song.set_title(reader->readElementText().trimmed());
-      } else if (name == "duration") {
+      } else if (name == QLatin1String("duration")) {
         const int length = reader->readElementText().toFloat();
         song.set_length_nanosec(length * kNsecPerSec);
-      } else if (name == "id3genre") {
+      } else if (name == QLatin1String("id3genre")) {
         int genre_id = reader->readElementText().toInt();
         // In theory, genre 0 is "blues"; in practice it's invalid.
         if (genre_id != 0) {
           song.set_genre_id3(genre_id);
         }
-      } else if (name == "id") {
+      } else if (name == QLatin1String("id")) {
         QString id_text = reader->readElementText();
         int id = id_text.toInt();
         if (id == 0) continue;
@@ -394,7 +396,8 @@ Song JamendoService::ReadTrack(const QString& artist, const QString& album,
         // Rely on songs getting added in this exact order
         track_ids->append(id);
       }
-    } else if (reader->isEndElement() && reader->name() == "track") {
+    } else if (reader->isEndElement() &&
+               reader->name() == QLatin1String("track")) {
       break;
     }
   }

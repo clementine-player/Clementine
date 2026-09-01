@@ -36,11 +36,13 @@
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
 #include "covers/discogscoverprovider.h"
+#include "covers/lastfmcoverprovider.h"
 #include "covers/musicbrainzcoverprovider.h"
 #include "devices/devicemanager.h"
 #include "globalsearch/globalsearch.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/scrobbler.h"
+#include "internet/lastfm/lastfmservice.h"
 #include "internet/podcasts/gpoddersync.h"
 #include "internet/podcasts/podcastbackend.h"
 #include "internet/podcasts/podcastdeleter.h"
@@ -55,11 +57,6 @@
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "ui/splash.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "covers/lastfmcoverprovider.h"
-#include "internet/lastfm/lastfmservice.h"
-#endif  // HAVE_LIBLASTFM
 
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbarcontroller.h"
@@ -118,9 +115,7 @@ class ApplicationImpl {
           // Initialize the repository of cover providers.
           cover_providers->AddProvider(new MusicbrainzCoverProvider);
           cover_providers->AddProvider(new DiscogsCoverProvider);
-#ifdef HAVE_LIBLASTFM
           cover_providers->AddProvider(new LastFmCoverProvider(app));
-#endif
           return cover_providers;
         }),
         task_manager_([=]() { return new TaskManager(app); }),
@@ -163,13 +158,7 @@ class ApplicationImpl {
             },
             [=](NetworkRemote* remote) { remote->deleteLater(); }),
         network_remote_helper_([=]() { return new NetworkRemoteHelper(app); }),
-        scrobbler_([=]() {
-#ifdef HAVE_LIBLASTFM
-          return new LastFMService(app, app);
-#else
-          return nullptr;
-#endif
-        }) {
+        scrobbler_([=]() { return new LastFMService(app, app); }) {
   }
 
   QTimer settings_timer_;

@@ -71,7 +71,7 @@ void CddaSongLoader::LoadSongs() {
     QMutexLocker lock(&disc_mutex_);
     disc_ = Disc();
     loading_future_ =
-        QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
+        QtConcurrent::run(&CddaSongLoader::LoadSongsFromCdda, this);
   }
 }
 

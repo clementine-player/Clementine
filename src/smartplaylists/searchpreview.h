@@ -50,7 +50,9 @@ class SearchPreview : public QWidget {
   void RunSearch(const Search& search);
 
  private slots:
-  void SearchFinished(QFuture<PlaylistItemList> future);
+  // Fully expanded type, not the PlaylistItemList typedef: see the comment
+  // on Playlist::ItemsLoaded's declaration for why.
+  void SearchFinished(QFuture<QList<std::shared_ptr<PlaylistItem>>> future);
 
  private:
   Ui_SmartPlaylistSearchPreview* ui_;

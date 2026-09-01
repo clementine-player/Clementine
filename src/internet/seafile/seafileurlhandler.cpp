@@ -18,6 +18,8 @@
 
 #include "seafileurlhandler.h"
 
+#include <QRegularExpression>
+
 #include "seafileservice.h"
 
 SeafileUrlHandler::SeafileUrlHandler(SeafileService* service, QObject* parent)
@@ -25,14 +27,15 @@ SeafileUrlHandler::SeafileUrlHandler(SeafileService* service, QObject* parent)
 
 UrlHandler::LoadResult SeafileUrlHandler::StartLoading(const QUrl& url) {
   QString file_library_and_path = url.path();
-  QRegExp reg("/([^/]+)(/.*)$");
+  static const QRegularExpression reg("/([^/]+)(/.*)$");
 
-  if (reg.indexIn(file_library_and_path) == -1) {
+  const QRegularExpressionMatch match = reg.match(file_library_and_path);
+  if (!match.hasMatch()) {
     qLog(Debug) << "Can't find repo and file path in " << url;
   }
 
-  QString library = reg.cap(1);
-  QString filepath = reg.cap(2);
+  QString library = match.captured(1);
+  QString filepath = match.captured(2);
 
   QUrl real_url = service_->GetStreamingUrlFromSongId(library, filepath);
 

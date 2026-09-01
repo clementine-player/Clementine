@@ -37,12 +37,14 @@ PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
   connect(ui_->buffer_min_fill, SIGNAL(valueChanged(int)),
           SLOT(BufferMinFillChanged(int)));
   ui_->buffer_min_fill_value_label->setMinimumWidth(
-      QFontMetrics(ui_->buffer_min_fill_value_label->font()).width("WW%"));
+      QFontMetrics(ui_->buffer_min_fill_value_label->font())
+          .horizontalAdvance("WW%"));
 
   connect(ui_->replaygain_preamp, SIGNAL(valueChanged(int)),
           SLOT(RgPreampChanged(int)));
   ui_->replaygain_preamp_label->setMinimumWidth(
-      QFontMetrics(ui_->replaygain_preamp_label->font()).width("-WW.W dB"));
+      QFontMetrics(ui_->replaygain_preamp_label->font())
+          .horizontalAdvance("-WW.W dB"));
   RgPreampChanged(ui_->replaygain_preamp->value());
 
   ui_->sample_rate->setItemData(0, GstEngine::kAutoSampleRate);

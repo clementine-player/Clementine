@@ -33,40 +33,45 @@
 
 using namespace google_drive;
 
-const char* File::kFolderMimeType = "application/vnd.google-apps.folder";
-
 namespace {
 static const char* kGoogleDriveFile =
-    "https://www.googleapis.com/drive/v2/files/%1";
+    "https://www.googleapis.com/drive/v3/files/%1";
 static const char* kGoogleDriveChanges =
-    "https://www.googleapis.com/drive/v2/changes";
-static const char* kGoogleOAuthUserInfoEndpoint =
-    "https://www.googleapis.com/oauth2/v1/userinfo";
+    "https://www.googleapis.com/drive/v3/changes";
+static const char* kGoogleDriveStartPageToken =
+    "https://www.googleapis.com/drive/v3/changes/startPageToken";
+// Fields requested on every file resource we read - see File's accessors.
+static const char* kFileFields =
+    "id,name,mimeType,description,size,modifiedTime,createdTime,version";
+// Introspects a token to find out what it's for - works for any valid
+// token regardless of scope, unlike the old oauth2/v1/userinfo endpoint,
+// which needed the userinfo.email scope we can no longer request (see
+// kOAuthScope below).
+static const char* kGoogleTokenInfoEndpoint =
+    "https://www.googleapis.com/oauth2/v1/tokeninfo";
 
 static const char* kOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
 static const char* kOAuthTokenEndpoint =
     "https://accounts.google.com/o/oauth2/token";
-static const char* kOAuthScope =
-    "https://www.googleapis.com/auth/drive.readonly "
-    "https://www.googleapis.com/auth/userinfo.email";
+// drive.file only grants access to files the user explicitly picks
+// (see Client::AuthorizeAndPick) - unlike drive.readonly it is not a
+// sensitive scope, so it doesn't require Google app verification. Google's
+// desktop-app Picker flow requires this to be the only scope requested:
+// https://developers.google.com/workspace/drive/picker/guides/desktop-mobile-picker
+static const char* kOAuthScope = "https://www.googleapis.com/auth/drive.file";
 static const char* kClientId = "679260893280.apps.googleusercontent.com";
 static const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
 }  // namespace
 
-QStringList File::parent_ids() const {
-  QStringList ret;
-
-  for (const QVariant& var : data_["parents"].toList()) {
-    QVariantMap map(var.toMap());
-
-    if (map["isRoot"].toBool()) {
-      ret << QString();
-    } else {
-      ret << map["id"].toString();
-    }
-  }
-
-  return ret;
+QUrl File::download_url() const {
+  QUrl url(QString(kGoogleDriveFile).arg(id()));
+  QUrlQuery url_query;
+  url_query.addQueryItem("alt", "media");
+  // Same as GetFile()'s metadata request: content requests for a file
+  // inside a Shared Drive 404 without this even with a valid grant.
+  url_query.addQueryItem("supportsAllDrives", "true");
+  url.setQuery(url_query);
+  return url;
 }
 
 ConnectResponse::ConnectResponse(QObject* parent) : QObject(parent) {}
@@ -77,19 +82,38 @@ GetFileResponse::GetFileResponse(const QString& file_id, QObject* parent)
 ListChangesResponse::ListChangesResponse(const QString& cursor, QObject* parent)
     : QObject(parent), cursor_(cursor) {}
 
-Client::Client(QObject* parent)
-    : QObject(parent), network_(new NetworkAccessManager(this)) {}
+Client::Client(QObject* parent, QNetworkAccessManager* network)
+    : QObject(parent),
+      network_(network ? network : new NetworkAccessManager(this)) {}
 
 ConnectResponse* Client::Connect(const QString& refresh_token) {
   ConnectResponse* ret = new ConnectResponse(this);
   OAuthenticator* oauth = new OAuthenticator(
       kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
 
-  if (refresh_token.isEmpty()) {
-    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
-  } else {
-    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
+  oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
+
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
+             oauth);
+  return ret;
+}
+
+ConnectResponse* Client::AuthorizeAndPick(const QStringList& mime_types) {
+  ConnectResponse* ret = new ConnectResponse(this);
+  OAuthenticator* oauth = new OAuthenticator(
+      kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
+
+  QUrlQuery extra_params;
+  extra_params.addQueryItem("prompt", "consent");
+  extra_params.addQueryItem("trigger_onepick", "true");
+  extra_params.addQueryItem("allow_multiple", "true");
+  if (!mime_types.isEmpty()) {
+    extra_params.addQueryItem("mimetypes", mime_types.join(","));
   }
+
+  oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope,
+                            extra_params);
 
   NewClosure(oauth, SIGNAL(Finished()), this,
              SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
@@ -102,12 +126,15 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   access_token_ = oauth->access_token();
   expiry_time_ = oauth->expiry_time();
   response->refresh_token_ = oauth->refresh_token();
+  response->picked_file_ids_ =
+      oauth->picked_file_ids().split(',', Qt::SkipEmptyParts);
 
-  // Fetch user email.
-  QUrl url(kGoogleOAuthUserInfoEndpoint);
-  QNetworkRequest request(url);
-  AddAuthorizationHeader(&request);
-  QNetworkReply* reply = network_->get(request);
+  // Introspect the token to get the user's email.
+  QUrl url(kGoogleTokenInfoEndpoint);
+  QUrlQuery url_query;
+  url_query.addQueryItem("access_token", access_token_);
+  url.setQuery(url_query);
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
              response, reply);
@@ -117,12 +144,12 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
                                    QNetworkReply* reply) {
   reply->deleteLater();
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
-    qLog(Warning) << "Failed to get user info" << reply->readAll();
+    qLog(Warning) << "Failed to get token info" << reply->readAll();
   } else {
     QJsonParseError error;
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
     if (error.error != QJsonParseError::NoError) {
-      qLog(Error) << "Failed to parse user info reply";
+      qLog(Error) << "Failed to parse token info reply";
       return;
     }
 
@@ -140,13 +167,34 @@ void Client::AddAuthorizationHeader(QNetworkRequest* request) const {
   request->setRawHeader("Authorization", GetAuthHeader());
 }
 
-GetFileResponse* Client::GetFile(const QString& file_id) {
+void Client::AddResourceKeyHeader(QNetworkRequest* request,
+                                  const QString& file_id,
+                                  const QString& resource_key) const {
+  if (resource_key.isEmpty()) {
+    return;
+  }
+  request->setRawHeader("X-Goog-Drive-Resource-Keys",
+                        QString("%1/%2").arg(file_id, resource_key).toUtf8());
+}
+
+GetFileResponse* Client::GetFile(const QString& file_id,
+                                 const QString& resource_key) {
   GetFileResponse* ret = new GetFileResponse(file_id, this);
 
   QUrl url(QString(kGoogleDriveFile).arg(file_id));
+  QUrlQuery url_query(url);
+  // Requests for files inside a Shared Drive 404 without this even with a
+  // valid grant.
+  url_query.addQueryItem("supportsAllDrives", "true");
+  url_query.addQueryItem("fields", kFileFields);
+  url.setQuery(url_query);
+
+  qLog(Debug) << "GetFile" << file_id << "url =" << url
+              << ", resource key =" << resource_key;
 
   QNetworkRequest request = QNetworkRequest(url);
   AddAuthorizationHeader(&request);
+  AddResourceKeyHeader(&request, file_id, resource_key);
   // Never cache these requests as we will get out of date download URLs.
   request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                        QNetworkRequest::AlwaysNetwork);
@@ -162,8 +210,30 @@ GetFileResponse* Client::GetFile(const QString& file_id) {
 void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
   reply->deleteLater();
 
+  const QByteArray data = reply->readAll();
+  const QVariant status =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  qLog(Debug) << "GetFile" << response->file_id_ << "-> HTTP status" << status
+              << ", url =" << reply->url() << ", body =" << data;
+
+  if (status != 200) {
+    // A Drive API error is still valid JSON (eg. {"error": {...}}), so this
+    // has to be checked before treating a parseable body as success -
+    // otherwise callers see an empty-but-"successful" File.
+    qLog(Error) << "Failed to fetch file with ID" << response->file_id_ << data;
+    qLog(Debug) << "GetFile" << response->file_id_
+                << "response headers:" << reply->rawHeaderPairs()
+                << ", request had Authorization header:"
+                << reply->request().hasRawHeader("Authorization")
+                << ", request had resource key header:"
+                << reply->request().hasRawHeader("X-Goog-Drive-Resource-Keys");
+    response->had_error_ = true;
+    emit response->Finished();
+    return;
+  }
+
   QJsonParseError error;
-  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument document = QJsonDocument::fromJson(data, &error);
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to fetch file with ID" << response->file_id_;
     response->had_error_ = true;
@@ -177,24 +247,79 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
 
 ListChangesResponse* Client::ListChanges(const QString& cursor) {
   ListChangesResponse* ret = new ListChangesResponse(cursor, this);
-  MakeListChangesRequest(ret);
+  if (cursor.isEmpty()) {
+    RequestStartPageToken(ret);
+  } else {
+    MakeListChangesRequest(ret, cursor);
+  }
   return ret;
+}
+
+void Client::RequestStartPageToken(ListChangesResponse* response) {
+  QUrl url(kGoogleDriveStartPageToken);
+  QUrlQuery url_query;
+  url_query.addQueryItem("supportsAllDrives", "true");
+  url.setQuery(url_query);
+
+  qLog(Debug) << "Requesting a Google Drive change cursor:" << url;
+
+  QNetworkRequest request(url);
+  AddAuthorizationHeader(&request);
+
+  QNetworkReply* reply = network_->get(request);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(StartPageTokenFinished(ListChangesResponse*, QNetworkReply*)),
+             response, reply);
+}
+
+void Client::StartPageTokenFinished(ListChangesResponse* response,
+                                    QNetworkReply* reply) {
+  reply->deleteLater();
+
+  const QByteArray data = reply->readAll();
+  const QVariant status =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  qLog(Debug) << "startPageToken -> HTTP status" << status
+              << ", body =" << data;
+
+  if (status != 200) {
+    qLog(Error) << "Failed to get a Google Drive change cursor" << data;
+    emit response->Finished();
+    return;
+  }
+
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(data, &error);
+  if (error.error != QJsonParseError::NoError) {
+    qLog(Error) << "Failed to parse startPageToken reply";
+    emit response->Finished();
+    return;
+  }
+
+  response->next_cursor_ = document.object().value("startPageToken").toString();
+  qLog(Debug) << "Established Google Drive change cursor:"
+              << response->next_cursor_;
+  emit response->Finished();
 }
 
 void Client::MakeListChangesRequest(ListChangesResponse* response,
                                     const QString& page_token) {
   QUrl url(kGoogleDriveChanges);
   QUrlQuery url_query;
-  if (!response->cursor().isEmpty()) {
-    url_query.addQueryItem("startChangeId", response->cursor());
-  }
-  if (!page_token.isEmpty()) {
-    url_query.addQueryItem("pageToken", page_token);
-  }
+  url_query.addQueryItem("pageToken", page_token);
+  // Changes to files inside a Shared Drive aren't reported without these.
+  url_query.addQueryItem("supportsAllDrives", "true");
+  url_query.addQueryItem("includeItemsFromAllDrives", "true");
+  url_query.addQueryItem(
+      "fields",
+      QString("nextPageToken,newStartPageToken,changes(fileId,removed,"
+              "file(%1,trashed))")
+          .arg(kFileFields));
 
   url.setQuery(url_query);
 
-  qLog(Debug) << "Requesting changes at:" << response->cursor() << page_token;
+  qLog(Debug) << "Requesting changes at page token:" << page_token
+              << ", url =" << url;
 
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
@@ -209,8 +334,23 @@ void Client::ListChangesFinished(ListChangesResponse* response,
                                  QNetworkReply* reply) {
   reply->deleteLater();
 
+  const QByteArray data = reply->readAll();
+  const QVariant status =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  qLog(Debug) << "ListChanges cursor =" << response->cursor()
+              << "-> HTTP status" << status << ", url =" << reply->url();
+
+  if (status != 200) {
+    // A Drive API error is still valid JSON, so this has to be checked
+    // before parsing - otherwise an error response is silently treated as
+    // "zero changes" instead of being reported.
+    qLog(Error) << "Failed to fetch changes" << response->cursor() << data;
+    emit response->Finished();
+    return;
+  }
+
   QJsonParseError error;
-  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument document = QJsonDocument::fromJson(data, &error);
   // TODO(John Maguire): Put this on a separate thread as the response could be
   // large.
   if (error.error != QJsonParseError::NoError) {
@@ -220,25 +360,34 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   }
 
   QJsonObject json_result = document.object();
-  if (json_result.contains("largestChangeId")) {
-    response->next_cursor_ = json_result["largestChangeId"].toString();
+  // Only present on the last page.
+  if (json_result.contains("newStartPageToken")) {
+    response->next_cursor_ = json_result.value("newStartPageToken").toString();
   }
 
   // Emit the FilesFound signal for the files in the response.
   FileList files;
   QList<QUrl> files_deleted;
-  for (const QJsonValue& v : json_result["items"].toArray()) {
+  for (const QJsonValue& v : json_result.value("changes").toArray()) {
     QJsonObject change = v.toObject();
-    if (change["deleted"].toBool() ||
-        change["file"].toObject()["labels"].toObject()["trashed"].toBool()) {
+    QJsonObject file = change.value("file").toObject();
+    if (change.value("removed").toBool() || file.value("trashed").toBool()) {
       QUrl url;
       url.setScheme("googledrive");
-      url.setPath("/" + change["fileId"].toString());
+      url.setPath("/" + change.value("fileId").toString());
       files_deleted << url;
     } else {
-      files << File(change["file"].toObject().toVariantMap());
+      files << File(file.toVariantMap());
     }
   }
+
+  qLog(Debug) << "ListChanges parsed"
+              << json_result.value("changes").toArray().size()
+              << "item(s):" << files.size() << "found," << files_deleted.size()
+              << "deleted; newStartPageToken ="
+              << json_result.value("newStartPageToken").toString()
+              << ", nextPageToken ="
+              << json_result.value("nextPageToken").toString();
 
   emit response->FilesFound(files);
   emit response->FilesDeleted(files_deleted);

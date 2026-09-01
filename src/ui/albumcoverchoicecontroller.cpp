@@ -244,8 +244,8 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
       song.art_automatic(), song.art_manual(), song.url().toLocalFile()));
 
   // add (WxHpx) to the title before possibly resizing
-  title_text += " (" + QString::number(label->pixmap()->width()) + "x" +
-                QString::number(label->pixmap()->height()) + "px)";
+  title_text += " (" + QString::number(label->pixmap().width()) + "x" +
+                QString::number(label->pixmap().height()) + "px)";
 
   // if the cover is larger than the screen, resize the window
   // 85% seems to be enough to account for title bar and taskbar etc.
@@ -264,20 +264,20 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
   // resize differently if monitor is in portrait mode
   if (desktop_width < desktop_height) {
     const int new_width = (double)desktop_width * 0.95;
-    if (new_width < label->pixmap()->width()) {
+    if (new_width < label->pixmap().width()) {
       label->setPixmap(
-          label->pixmap()->scaledToWidth(new_width, Qt::SmoothTransformation));
+          label->pixmap().scaledToWidth(new_width, Qt::SmoothTransformation));
     }
   } else {
     const int new_height = (double)desktop_height * 0.85;
-    if (new_height < label->pixmap()->height()) {
-      label->setPixmap(label->pixmap()->scaledToHeight(
-          new_height, Qt::SmoothTransformation));
+    if (new_height < label->pixmap().height()) {
+      label->setPixmap(
+          label->pixmap().scaledToHeight(new_height, Qt::SmoothTransformation));
     }
   }
 
   dialog->setWindowTitle(title_text);
-  dialog->setFixedSize(label->pixmap()->size());
+  dialog->setFixedSize(label->pixmap().size());
   dialog->show();
 
   return dialog;

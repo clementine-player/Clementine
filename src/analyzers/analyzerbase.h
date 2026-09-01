@@ -42,7 +42,6 @@
 #include "fht.h"
 
 #ifdef HAVE_OPENGL
-#include <QGLWidget>
 #ifdef Q_OS_MACX
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>

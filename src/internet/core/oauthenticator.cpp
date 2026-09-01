@@ -46,7 +46,8 @@ OAuthenticator::OAuthenticator(const QString& client_id,
 
 void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
                                         const QString& token_endpoint,
-                                        const QString& scope) {
+                                        const QString& scope,
+                                        const QUrlQuery& extra_params) {
   token_endpoint_ = QUrl(token_endpoint);
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
@@ -55,6 +56,9 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
   QUrlQuery url_query;
   url_query.addQueryItem("response_type", "code");
   url_query.addQueryItem("client_id", client_id_);
+  for (const auto& item : extra_params.queryItems()) {
+    url_query.addQueryItem(item.first, item.second);
+  }
   QUrl redirect_url;
   QUrlQuery redirect_url_query;
 
@@ -88,8 +92,13 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
-  RequestAccessToken(QUrlQuery(request_url).queryItemValue("code").toUtf8(),
-                     url);
+  QUrlQuery request_query(request_url);
+  // FullyDecoded: the default (PrettyDecoded) deliberately leaves
+  // delimiter-like %-escapes (eg. %2C for a comma) encoded, which would
+  // otherwise corrupt a later split(',') on this value.
+  picked_file_ids_ =
+      request_query.queryItemValue("picked_file_ids", QUrl::FullyDecoded);
+  RequestAccessToken(request_query.queryItemValue("code").toUtf8(), url);
 }
 
 QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {

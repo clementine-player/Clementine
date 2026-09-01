@@ -57,7 +57,7 @@ void ObjectHelper::Invoked() {
   deleteLater();
 }
 
-void Unpack(QList<QGenericArgument>*) {}
+void Unpack(QList<QGenericArgument>*, const QList<QByteArray>&, int) {}
 
 }  // namespace _detail
 

@@ -151,7 +151,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
       display_text = s.performer();
       // fallthrough
     case LibraryModel::GroupBy_Disc:
-      display_text = s.disc();
+      display_text = QString::number(s.disc());
       // fallthrough
     case LibraryModel::GroupBy_Grouping:
       display_text = s.grouping();
@@ -178,7 +178,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
       break;
 
     case LibraryModel::GroupBy_Bitrate:
-      display_text = QString(s.bitrate(), 1);
+      display_text = QString::number(s.bitrate());
       sort_text = display_text;
       break;
 

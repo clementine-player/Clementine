@@ -29,7 +29,6 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
-#include <QRegExp>
 #include <QSettings>
 #include <QTimeLine>
 #include <QTimer>
@@ -160,7 +159,7 @@ bool GstEngine::Init() {
     qputenv("GST_DEBUG_DUMP_DOT_DIR", path);
   }
 
-  initialising_ = QtConcurrent::run(this, &GstEngine::InitialiseGstreamer);
+  initialising_ = QtConcurrent::run(&GstEngine::InitialiseGstreamer, this);
   return true;
 }
 
@@ -465,10 +464,10 @@ void GstEngine::StartFadeoutPause() {
 
   fadeout_pause_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
                                       QTimeLine::Backward,
-                                      QTimeLine::EaseInOutCurve, false);
+                                      QEasingCurve::InOutQuad, false);
   if (fadeout_pipeline_ && fadeout_pipeline_->state() == GST_STATE_PLAYING) {
     fadeout_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                  QTimeLine::Backward, QTimeLine::LinearCurve,
+                                  QTimeLine::Backward, QEasingCurve::Linear,
                                   false);
   }
   connect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()),
@@ -584,7 +583,7 @@ void GstEngine::Pause() {
   if (is_fading_out_to_pause_) {
     disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
     current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                  QTimeLine::Forward, QTimeLine::EaseInOutCurve,
+                                  QTimeLine::Forward, QEasingCurve::InOutQuad,
                                   false);
     is_fading_out_to_pause_ = false;
     has_faded_out_ = false;
@@ -615,8 +614,8 @@ void GstEngine::Unpause() {
     if (has_faded_out_) {
       disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
       current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                    QTimeLine::Forward,
-                                    QTimeLine::EaseInOutCurve, false);
+                                    QTimeLine::Forward, QEasingCurve::InOutQuad,
+                                    false);
       has_faded_out_ = false;
     }
 
@@ -720,7 +719,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   // try to reload the URL in case of a drop of the connection
   if (domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_SEEK) {
-    if (Load(playback_req_, 0, false, 0, 0)) {
+    if (Load(playback_req_, Engine::TrackChangeFlags(), false, 0, 0)) {
       current_pipeline_->SetState(GST_STATE_PLAYING);
 
       return;

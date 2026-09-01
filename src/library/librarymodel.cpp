@@ -23,6 +23,7 @@
 #include <QNetworkCacheMetaData>
 #include <QNetworkDiskCache>
 #include <QPixmapCache>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QStringList>
 #include <QUrl>
@@ -246,10 +247,10 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
                                   song.album());
             break;
           case GroupBy_FileType:
-            key = song.filetype();
+            key = song.TextForFiletype();
             break;
           case GroupBy_Bitrate:
-            key = song.bitrate();
+            key = QString::number(song.bitrate());
             break;
           case GroupBy_None:
             qLog(Error) << "GroupBy_None";
@@ -769,7 +770,7 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 
 void LibraryModel::ResetAsync() {
   QFuture<LibraryModel::QueryResult> future =
-      QtConcurrent::run(&thread_pool_, this, &LibraryModel::RunQuery, root_);
+      QtConcurrent::run(&thread_pool_, &LibraryModel::RunQuery, this, root_);
   NewClosure(future, this,
              SLOT(ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult>)),
              future);
@@ -1198,7 +1199,7 @@ QString LibraryModel::SortText(QString text) {
   } else {
     text = text.toLower();
   }
-  text = text.remove(QRegExp("[^\\w ]"));
+  text = text.remove(QRegularExpression("[^\\w ]"));
 
   return text;
 }

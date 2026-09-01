@@ -21,7 +21,7 @@
 #include <QApplication>
 #include <QBuffer>
 #include <QFile>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QStyle>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -66,20 +66,20 @@ void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
 
 void LocalRedirectServer::WriteTemplate(QTcpSocket* socket) const {
   QFile page_file(":oauthsuccess.html");
-  page_file.open(QIODevice::ReadOnly);
+  (void)page_file.open(QIODevice::ReadOnly);
   QString page_data = QString::fromUtf8(page_file.readAll());
 
-  QRegExp tr_regexp("tr\\(\"([^\"]+)\"\\)");
+  static const QRegularExpression tr_regexp("tr\\(\"([^\"]+)\"\\)");
   int offset = 0;
-  forever {
-    offset = tr_regexp.indexIn(page_data, offset);
-    if (offset == -1) {
+  while (true) {
+    const QRegularExpressionMatch match = tr_regexp.match(page_data, offset);
+    if (!match.hasMatch()) {
       break;
     }
 
-    page_data.replace(offset, tr_regexp.matchedLength(),
-                      tr(tr_regexp.cap(1).toUtf8()));
-    offset += tr_regexp.matchedLength();
+    page_data.replace(match.capturedStart(), match.capturedLength(),
+                      tr(match.captured(1).toUtf8()));
+    offset = match.capturedStart() + match.capturedLength();
   }
 
   QBuffer image_buffer;

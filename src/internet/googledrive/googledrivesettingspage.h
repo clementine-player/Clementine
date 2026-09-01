@@ -45,6 +45,9 @@ class GoogleDriveSettingsPage : public SettingsPage {
   void LoginClicked();
   void LogoutClicked();
   void Connected();
+  void AddFilesClicked();
+  void RemoveItemClicked();
+  void UpdatePickedItems();
 
  private:
   Ui_GoogleDriveSettingsPage* ui_;

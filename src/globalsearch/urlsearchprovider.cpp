@@ -48,5 +48,6 @@ void UrlSearchProvider::LoadArtAsync(int id, const Result&) {
 }
 
 bool UrlSearchProvider::LooksLikeUrl(const QString& query) const {
-  return url_regex_.indexIn(query) == 0;
+  const QRegularExpressionMatch match = url_regex_.match(query);
+  return match.hasMatch() && match.capturedStart() == 0;
 }

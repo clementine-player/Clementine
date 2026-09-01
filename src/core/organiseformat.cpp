@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QHash>
 #include <QPalette>
+#include <QRegularExpression>
 #include <QUrl>
 
 #include "core/arraysize.h"
@@ -112,17 +113,17 @@ QString OrganiseFormat::GetFilenameForSong(const Song& song,
         Utilities::PathWithoutFilenameExtension(filename) + song.basefilename();
   }
 
-  if (replace_spaces_) filename.replace(QRegExp("\\s"), "_");
+  if (replace_spaces_) filename.replace(QRegularExpression("\\s"), "_");
 
   if (replace_non_ascii_) {
     QString stripped;
     for (int i = 0; i < filename.length(); ++i) {
-      const QCharRef c = filename[i];
-      if (c < 128) {
+      const QChar c = filename[i];
+      if (c.unicode() < 128) {
         stripped.append(c);
       } else {
         const QString decomposition = c.decomposition();
-        if (!decomposition.isEmpty() && decomposition[0] < 128)
+        if (!decomposition.isEmpty() && decomposition[0].unicode() < 128)
           stripped.append(decomposition[0]);
         else
           stripped.append("_");
@@ -180,30 +181,33 @@ QStringList OrganiseFormat::GetFilenamesForSongs(const SongList& songs) const {
 
 QString OrganiseFormat::ParseBlock(QString block, const Song& song,
                                    bool* any_empty) const {
-  QRegExp tag_regexp(kTagPattern);
-  QRegExp block_regexp(kBlockPattern);
+  static const QRegularExpression tag_regexp(kTagPattern);
+  static const QRegularExpression block_regexp(kBlockPattern);
 
   // Find any blocks first
   int pos = 0;
-  while ((pos = block_regexp.indexIn(block, pos)) != -1) {
+  QRegularExpressionMatch match;
+  while ((match = block_regexp.match(block, pos)).hasMatch()) {
+    pos = match.capturedStart();
     // Recursively parse the block
     bool empty = false;
-    QString value = ParseBlock(block_regexp.cap(1), song, &empty);
+    QString value = ParseBlock(match.captured(1), song, &empty);
     if (empty) value = "";
 
     // Replace the block's value
-    block.replace(pos, block_regexp.matchedLength(), value);
+    block.replace(pos, match.capturedLength(), value);
     pos += value.length();
   }
 
   // Now look for tags
   bool empty = false;
   pos = 0;
-  while ((pos = tag_regexp.indexIn(block, pos)) != -1) {
-    QString value = TagValue(tag_regexp.cap(1), song);
+  while ((match = tag_regexp.match(block, pos)).hasMatch()) {
+    pos = match.capturedStart();
+    QString value = TagValue(match.captured(1), song);
     if (value.isEmpty()) empty = true;
 
-    block.replace(pos, tag_regexp.matchedLength(), value);
+    block.replace(pos, match.capturedLength(), value);
     pos += value.length();
   }
 
@@ -255,7 +259,9 @@ QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
   else if (tag == "artistinitial") {
     value = song.effective_albumartist().trimmed();
     if (replace_the_ && !value.isEmpty())
-      value.replace(QRegExp("^the\\s+", Qt::CaseInsensitive), "");
+      value.replace(QRegularExpression(
+                        "^the\\s+", QRegularExpression::CaseInsensitiveOption),
+                    "");
     if (!value.isEmpty()) value = value[0].toUpper();
   } else if (tag == "albumartist") {
     value = song.is_compilation() ? "Various Artists"
@@ -263,7 +269,9 @@ QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
   }
 
   if (replace_the_ && (tag == "artist" || tag == "albumartist"))
-    value.replace(QRegExp("^the\\s+", Qt::CaseInsensitive), "");
+    value.replace(QRegularExpression("^the\\s+",
+                                     QRegularExpression::CaseInsensitiveOption),
+                  "");
 
   if (value == "0" || value == "-1") value = "";
 
@@ -282,7 +290,7 @@ OrganiseFormat::Validator::Validator(QObject* parent) : QValidator(parent) {}
 
 QValidator::State OrganiseFormat::Validator::validate(QString& input,
                                                       int&) const {
-  QRegExp tag_regexp(kTagPattern);
+  static const QRegularExpression tag_regexp(kTagPattern);
 
   // Make sure all the blocks match up
   int block_level = 0;
@@ -299,11 +307,12 @@ QValidator::State OrganiseFormat::Validator::validate(QString& input,
 
   // Make sure the tags are valid
   int pos = 0;
-  while ((pos = tag_regexp.indexIn(input, pos)) != -1) {
-    if (!OrganiseFormat::kKnownTags.contains(tag_regexp.cap(1)))
+  QRegularExpressionMatch match;
+  while ((match = tag_regexp.match(input, pos)).hasMatch()) {
+    if (!OrganiseFormat::kKnownTags.contains(match.captured(1)))
       return QValidator::Invalid;
 
-    pos += tag_regexp.matchedLength();
+    pos = match.capturedStart() + match.capturedLength();
   }
 
   return QValidator::Acceptable;
@@ -326,8 +335,8 @@ void OrganiseFormat::SyntaxHighlighter::highlightBlock(const QString& text) {
   const QRgb invalid_tag_color =
       light ? kInvalidTagColorLight : kInvalidTagColorDark;
 
-  QRegExp tag_regexp(kTagPattern);
-  QRegExp block_regexp(kBlockPattern);
+  static const QRegularExpression tag_regexp(kTagPattern);
+  static const QRegularExpression block_regexp(kBlockPattern);
 
   QTextCharFormat block_format;
   block_format.setBackground(QColor(block_color));
@@ -337,22 +346,25 @@ void OrganiseFormat::SyntaxHighlighter::highlightBlock(const QString& text) {
 
   // Blocks
   int pos = 0;
-  while ((pos = block_regexp.indexIn(text, pos)) != -1) {
-    setFormat(pos, block_regexp.matchedLength(), block_format);
+  QRegularExpressionMatch match;
+  while ((match = block_regexp.match(text, pos)).hasMatch()) {
+    pos = match.capturedStart();
+    setFormat(pos, match.capturedLength(), block_format);
 
-    pos += block_regexp.matchedLength();
+    pos += match.capturedLength();
   }
 
   // Tags
   pos = 0;
-  while ((pos = tag_regexp.indexIn(text, pos)) != -1) {
+  while ((match = tag_regexp.match(text, pos)).hasMatch()) {
+    pos = match.capturedStart();
     QTextCharFormat f = format(pos);
     f.setForeground(
-        QColor(OrganiseFormat::kKnownTags.contains(tag_regexp.cap(1))
+        QColor(OrganiseFormat::kKnownTags.contains(match.captured(1))
                    ? valid_tag_color
                    : invalid_tag_color));
 
-    setFormat(pos, tag_regexp.matchedLength(), f);
-    pos += tag_regexp.matchedLength();
+    setFormat(pos, match.capturedLength(), f);
+    pos += match.capturedLength();
   }
 }

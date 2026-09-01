@@ -191,7 +191,7 @@ void AlbumCoverFetcherSearch::ProviderCoverFetchFinished(
       qLog(Info) << "Error decoding image data from" << reply->url();
     } else {
       const float score = ScoreImage(image);
-      candidate_images_.insertMulti(score, CandidateImage(provider, image));
+      candidate_images_.insert(score, CandidateImage(provider, image));
 
       qLog(Debug) << reply->url() << "scored" << score;
     }

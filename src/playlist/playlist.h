@@ -37,7 +37,6 @@ class TaskManager;
 
 class QSortFilterProxyModel;
 class QUndoStack;
-class QStringList;
 
 namespace PlaylistUndoCommands {
 class InsertItems;
@@ -414,7 +413,13 @@ class Playlist : public QAbstractListModel {
   void SongSaveComplete(TagReaderReply* reply,
                         const QPersistentModelIndex& index);
   void ItemReloadComplete(const QPersistentModelIndex& index);
-  void ItemsLoaded(QFuture<PlaylistItemList> future);
+  // Written as the fully expanded type rather than the PlaylistItemList
+  // typedef: QMetaMethod::invoke() (used by NewClosure(), see
+  // core/closure.h) needs this signature's text to match
+  // QMetaType::fromType<>().name()'s canonical (alias-resolved) form of the
+  // argument's actual type, or the invoke silently fails - this wasn't an
+  // issue under Qt5, which didn't validate the name.
+  void ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>> future);
   void SongInsertVetoListenerDestroyed();
 
  private:

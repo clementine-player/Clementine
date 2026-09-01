@@ -1131,7 +1131,7 @@ void LibraryBackend::IncrementPlayCount(int id) {
                     "              score = " +
                     QString(kNewScoreSql).arg("1.0") + " WHERE ROWID = :id")
                 .arg(songs_table_));
-  q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
+  q.bindValue(":now", QDateTime::currentDateTime().toSecsSinceEpoch());
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;

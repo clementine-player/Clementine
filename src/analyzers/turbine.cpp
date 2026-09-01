@@ -44,7 +44,7 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   const uint kMaxHeight = hd2 - 1;
 
   QPainter canvas_painter(&canvas_);
-  canvas_.fill(palette().color(QPalette::Background));
+  canvas_.fill(palette().color(QPalette::Window));
 
   Analyzer::interpolate(scope, scope_);
 

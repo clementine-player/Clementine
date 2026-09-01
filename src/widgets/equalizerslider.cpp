@@ -27,7 +27,7 @@ EqualizerSlider::EqualizerSlider(const QString& label, QWidget* parent)
   ui_->band->setText(label);  // Band [Hz]
 
   QFontMetrics fm = ui_->gain->fontMetrics();
-  int longestLabelWidth = fm.width(tr("%1 dB").arg(-99.99));
+  int longestLabelWidth = fm.horizontalAdvance(tr("%1 dB").arg(-99.99));
   ui_->gain->setMinimumWidth(longestLabelWidth);
   ui_->gain->setText(tr("%1 dB").arg(0));  // Gain [dB]
 

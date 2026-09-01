@@ -35,15 +35,10 @@
 #include "core/logging.h"
 #include "ui_osdpretty.h"
 
-#ifdef HAVE_X11
-#include <QX11Info>
-#endif
-#ifdef Q_OS_WIN32
-#include <QtWin>
-#endif
-
 #ifdef Q_OS_WIN32
 #include <windows.h>
+// dwmapi.h depends on types from windows.h, so it must come after.
+#include <dwmapi.h>
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
@@ -125,8 +120,11 @@ OSDPretty::OSDPretty(Mode mode, QWidget* parent)
 
   // Set the margins to allow for the drop shadow
   QBoxLayout* l = static_cast<QBoxLayout*>(layout());
-  int margin = l->margin() + kDropShadowSize;
-  l->setMargin(margin);
+  const QMargins old_margins = l->contentsMargins();
+  l->setContentsMargins(old_margins.left() + kDropShadowSize,
+                        old_margins.top() + kDropShadowSize,
+                        old_margins.right() + kDropShadowSize,
+                        old_margins.bottom() + kDropShadowSize);
 
   connect(qApp, SIGNAL(screenAdded(QScreen*)), this,
           SLOT(ScreenAdded(QScreen*)));
@@ -148,9 +146,11 @@ void OSDPretty::ScreenRemoved(QScreen* screen) {
 }
 
 bool OSDPretty::IsTransparencyAvailable() {
-#if defined(HAVE_X11) && (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
-  return QX11Info::isCompositingManagerRunning();
-#endif
+  // QX11Info::isCompositingManagerRunning() was removed in Qt6 with no
+  // direct replacement (would require manually querying the
+  // _NET_WM_CM_S<screen> selection owner via xcb). Assume transparency is
+  // available, same as every other platform here; worst case is a mostly
+  // harmless redundant translucency effect when no compositor is running.
   return true;
 }
 
@@ -211,7 +211,6 @@ QRect OSDPretty::BoxBorder() const {
 void OSDPretty::paintEvent(QPaintEvent*) {
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
-  p.setRenderHint(QPainter::HighQualityAntialiasing);
 
   QRect box(BoxBorder());
 
@@ -403,12 +402,19 @@ void OSDPretty::Reposition() {
   }
 
 #ifdef Q_OS_WIN32
-  // On windows, enable blurbehind on the masked area
-  QtWin::enableBlurBehindWindow(this, QRegion(mask));
+  // QtWinExtras (QtWin::enableBlurBehindWindow) has no Qt6 equivalent, so
+  // call the underlying DWM API directly instead. This blurs the whole
+  // window rather than just the masked region, which is fine here since the
+  // OSD window is already sized to its content.
+  DWM_BLURBEHIND bb = {0};
+  bb.dwFlags = DWM_BB_ENABLE;
+  bb.fEnable = TRUE;
+  bb.hRgnBlur = nullptr;
+  DwmEnableBlurBehindWindow(reinterpret_cast<HWND>(winId()), &bb);
 #endif
 }
 
-void OSDPretty::enterEvent(QEvent*) {
+void OSDPretty::enterEvent(QEnterEvent*) {
   if (mode_ == Mode_Popup) setWindowOpacity(0.25);
 }
 

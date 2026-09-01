@@ -28,4 +28,4 @@ target_link_libraries(gstmoodbar
   ${FFTW3_FFTW_LIBRARY}
 )
 
-target_link_libraries(gstmoodbar Qt5::Core)
+target_link_libraries(gstmoodbar Qt6::Core)

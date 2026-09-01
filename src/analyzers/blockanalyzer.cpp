@@ -310,8 +310,7 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   // Draw empty top padding, if needed (when y_ > 0. weird window size?).
   for (y = 0; y < y_; ++y) {
     line = reinterpret_cast<QRgb*>(canvas_.scanLine(y));
-    for (x = 0; x < px_w; line[x++] = padcolor)
-      ;
+    for (x = 0; x < px_w; line[x++] = padcolor);
   }
 
   // Draw the texture in one shot, iterating in a row-major fashion.
@@ -329,29 +328,25 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
         // Draw [x, to_x], then padding on the right.
         blkcolor = colorFromRowAndBand(blk_r, bandinfo_[blk_c]);
 
-        for (; x < to_x; line[x++] = blkcolor)
-          ;
+        for (; x < to_x; line[x++] = blkcolor);
         if (x < px_w) line[x++] = padcolor;
       }
 
       // If extra space remains in line, fill to the right edge.
-      for (; x < px_w; line[x++] = padcolor)
-        ;
+      for (; x < px_w; line[x++] = padcolor);
     }
 
     // Draw a full line of padding below the just-drawn region (if in bounds).
     if (y < px_h) {
       line = reinterpret_cast<QRgb*>(canvas_.scanLine(y++));
-      for (x = 0; x < px_w; line[x++] = padcolor)
-        ;
+      for (x = 0; x < px_w; line[x++] = padcolor);
     }
   }
 
   // If not at bottom boundary yet, pad remaining lines.
   while (y < px_h) {
     line = reinterpret_cast<QRgb*>(canvas_.scanLine(y++));
-    for (x = 0; x < px_w; line[x++] = padcolor)
-      ;
+    for (x = 0; x < px_w; line[x++] = padcolor);
   }
 
   p.drawImage(0, 0, canvas_, 0, 0, width(), height(), Qt::NoFormatConversion);
@@ -484,7 +479,7 @@ static QColor ensureContrast(const QColor& bg, const QColor& fg,
 void BlockAnalyzer::paletteChange(const QPalette&) {
   QColor bg, bgdark, fg;
 
-  bg = palette().color(QPalette::Background);
+  bg = palette().color(QPalette::Window);
   bgdark = bg.darker(112);
 
   if (psychedelic_enabled_)

@@ -18,6 +18,7 @@
 #include "giolister.h"
 
 #include <QFile>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QUrlQuery>
 #include <QtDebug>
@@ -196,18 +197,19 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
   }
 
   // gphoto2 gives invalid hostnames with []:, characters in
-  uri.replace(QRegExp("//\\[usb:(\\d+),(\\d+)\\]"), "//usb-\\1-\\2");
+  uri.replace(QRegularExpression("//\\[usb:(\\d+),(\\d+)\\]"), "//usb-\\1-\\2");
 
   QUrl url(uri);
 
   QList<QUrl> ret;
 
   if (url.isValid()) {
-    QRegExp device_re("usb/(\\d+)/(\\d+)");
-    if (device_re.indexIn(unix_device) >= 0) {
+    static const QRegularExpression device_re("usb/(\\d+)/(\\d+)");
+    const QRegularExpressionMatch match = device_re.match(unix_device);
+    if (match.hasMatch()) {
       QUrlQuery url_query(url);
-      url_query.addQueryItem("busnum", device_re.cap(1));
-      url_query.addQueryItem("devnum", device_re.cap(2));
+      url_query.addQueryItem("busnum", match.captured(1));
+      url_query.addQueryItem("devnum", match.captured(2));
       url.setQuery(url_query);
     }
 

@@ -25,6 +25,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMetaMethod>
+#include <QMetaType>
 #include <QObject>
 #include <QSharedPointer>
 #include <QTimer>
@@ -71,20 +72,54 @@ class ObjectHelper : public QObject {
 };
 
 // Helpers for unpacking a variadic template list.
+//
+// Not Q_ARG: in Qt6 that macro feeds the newer typed invokeMethod overload
+// and returns QMetaMethodArgument, not QGenericArgument. QArgument<T> is
+// what Q_ARG used to expand to and is what the legacy positional
+// QMetaObject::invokeMethod(..., QGenericArgument, ...) overload below
+// still needs.
+//
+// Also not QT_STRINGIFY(Arg): that stringifies the literal token "Arg"
+// (this function's own template parameter name), not whatever type Arg is
+// instantiated with - macros expand before templates are instantiated.
+//
+// Each argument is labelled with the type name |expected_types| says this
+// slot parameter was actually registered with (from the receiver's
+// QMetaMethod, computed once in Closure::Call below), not the canonical
+// name QMetaType reports for Arg. Those differ whenever the slot's declared
+// parameter type is a typedef alias, or is spelled with different
+// namespace qualification than Arg's canonical spelling (eg. a nested
+// typedef, or a type declared inside a namespace that the calling .cpp
+// reaches via `using namespace`) - same real type, different text. Qt5's
+// QMetaMethod::invoke() tolerated that text mismatch; Qt6 validates it and
+// rejects the call ("cannot convert formal parameter"). Since this is still
+// the exact same object/pointer either way, using the slot's own expected
+// spelling for the validation check is always at least as correct as the
+// canonical one - it's what the callee's generated thunk actually expects
+// to see. (The |expected_types| list falls short only if the caller bound
+// more arguments than the slot actually declares, which indexOfSlot()
+// wouldn't have matched in the first place; the canonical name is kept as a
+// fallback for that edge case.)
 
 // Base case of no arguments.
-void Unpack(QList<QGenericArgument>*);
+void Unpack(QList<QGenericArgument>*, const QList<QByteArray>&, int);
 
 template <typename Arg>
-void Unpack(QList<QGenericArgument>* list, const Arg& arg) {
-  list->append(Q_ARG(Arg, arg));
+void Unpack(QList<QGenericArgument>* list,
+           const QList<QByteArray>& expected_types, int index,
+           const Arg& arg) {
+  const char* type_name = index < expected_types.size()
+                              ? expected_types.at(index).constData()
+                              : QMetaType::fromType<Arg>().name();
+  list->append(QArgument<Arg>(type_name, arg));
 }
 
 template <typename Head, typename... Tail>
-void Unpack(QList<QGenericArgument>* list, const Head& head,
-            const Tail&... tail) {
-  Unpack(list, head);
-  Unpack(list, tail...);
+void Unpack(QList<QGenericArgument>* list,
+           const QList<QByteArray>& expected_types, int index,
+           const Head& head, const Tail&... tail) {
+  Unpack(list, expected_types, index, head);
+  Unpack(list, expected_types, index + 1, tail...);
 }
 
 template <typename... Args>
@@ -112,8 +147,11 @@ class Closure : public ClosureBase {
 
  private:
   void Call(const Args&... args) {
+    // Kept alive for the rest of this function: the QGenericArguments built
+    // below hold raw pointers into these QByteArrays' data (see Unpack()).
+    const QList<QByteArray> expected_types = slot_.parameterTypes();
     QList<QGenericArgument> arg_list;
-    Unpack(&arg_list, args...);
+    Unpack(&arg_list, expected_types, 0, args...);
 
     slot_.invoke(receiver_,
                  arg_list.size() > 0 ? arg_list[0] : QGenericArgument(),

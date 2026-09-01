@@ -25,7 +25,7 @@ DeviceViewContainer::DeviceViewContainer(QWidget* parent)
   ui_->setupUi(this);
 
   QPalette palette(ui_->windows_is_broken_frame->palette());
-  palette.setColor(QPalette::Background, QColor(255, 255, 222));
+  palette.setColor(QPalette::Window, QColor(255, 255, 222));
   ui_->windows_is_broken_frame->setPalette(palette);
 
 #ifdef Q_OS_WIN

@@ -132,7 +132,7 @@ QStandardItem* PlaylistListModel::FolderByPath(const QString& path) {
   // inefficient but maintaining a path -> item map is difficult.
   QStandardItem* parent = invisibleRootItem();
 
-  const QStringList parts = path.split('/', QString::SkipEmptyParts);
+  const QStringList parts = path.split('/', Qt::SkipEmptyParts);
   for (const QString& part : parts) {
     QStandardItem* matching_child = nullptr;
 

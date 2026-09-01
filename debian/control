@@ -15,13 +15,18 @@ Build-Depends: debhelper (>= 7),
                libasound2-dev,
                libpulse-dev,
                libtag1-dev,
-               libqt5-dev,
-               qt5-dev-tools,
-               qtbase5-dev,
-               qtbase5-dev-tools,
-               qtbase5-private-dev,
-               libqt5x11extras5-dev,
-               libqt5opengl5-dev,
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-base-private-dev,
+               qt6-tools-dev,
+               qt6-tools-dev-tools,
+               qt6-l10n-tools,
+               qt6-5compat-dev,
+               libqt6opengl6-dev,
+               libglx-dev,
+               libgl1-mesa-dev,
+               libx11-dev,
+               libxcb1-dev,
                libgstreamer1.0-dev,
                libgstreamer-plugins-base1.0-dev,
                libcdio-dev,
@@ -31,13 +36,22 @@ Build-Depends: debhelper (>= 7),
                libplist-dev,
                libusbmuxd-dev,
                libchromaprint-dev,
-               liblastfm5-dev,
                libcrypto++-dev,
                libglew-dev,
                libfftw3-dev,
                libsparsehash-dev,
-               libmygpo-qt-dev (>= 1.0.7),
                libprojectm-dev (>= 2.0.1+dfsg-6)
+# liblastfm isn't a dependency any more - Last.fm scrobbling talks directly
+# to the web service API now (src/internet/lastfm/lastfmws.*), since
+# liblastfm has no Qt6 build anywhere. libmygpo-qt has no Qt6 build either;
+# gpodder sync falls back to the vendored 3rdparty/libmygpo-qt5 copy - see
+# CMakeLists.txt.
+#
+# qt6-5compat-dev is Debian's package name for Qt6's Core5Compat module;
+# Ubuntu (jammy/noble/resolute) instead calls it libqt6core5compat6-dev -
+# see the per-distro install lists in .github/workflows/all.yml, which are
+# what actually drives each CI build (dpkg-buildpackage's -d flag skips
+# Build-Depends checking here, so this listing doesn't gate the build).
 Standards-Version: 3.9.8
 Homepage: http://www.clementine-player.org/
 

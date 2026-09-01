@@ -225,10 +225,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void LastFMButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void SetToggleScrobblingIcon(bool value);
-#ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
   void ScrobbledRadioStream();
-#endif
   void Love();
 
   void TaskCountChanged(int count);
@@ -258,10 +256,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void ShowCoverManager();
   bool IsLastFmEnabled();
-#ifdef HAVE_LIBLASTFM
   void CachedToScrobble();
   void ScrobbleError(int value);
-#endif
   void ShowAboutDialog();
   void ShowTranscodeDialog();
   void ShowErrorDialog(const QString& message);

@@ -285,7 +285,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   }
 
   if (!t->ignores_mtime() && !force_noincremental && t->is_incremental() &&
-      subdir.mtime == path_info.lastModified().toTime_t()) {
+      subdir.mtime == path_info.lastModified().toSecsSinceEpoch()) {
     // The directory hasn't changed since last time
     t->AddToProgress(1);
     return;
@@ -325,7 +325,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
         Subdirectory new_subdir;
         new_subdir.directory_id = -1;
         new_subdir.path = child;
-        new_subdir.mtime = child_info.lastModified().toTime_t();
+        new_subdir.mtime = child_info.lastModified().toSecsSinceEpoch();
         my_new_subdirs << new_subdir;
       }
     } else {
@@ -381,7 +381,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       // qMax(media_file_mtime, cue_sheet_mtime)
       bool changed =
           (matching_song.mtime() !=
-           qMax(file_info.lastModified().toTime_t(), song_cue_mtime)) ||
+           qMax(static_cast<uint>(file_info.lastModified().toSecsSinceEpoch()),
+                song_cue_mtime)) ||
           cue_deleted || cue_added;
 
       // Also want to look to see whether the album art has changed
@@ -445,7 +446,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   Subdirectory updated_subdir;
   updated_subdir.directory_id = t->dir_id();
   updated_subdir.mtime =
-      path_info.exists() ? path_info.lastModified().toTime_t() : 0;
+      path_info.exists() ? path_info.lastModified().toSecsSinceEpoch() : 0;
   updated_subdir.path = path;
 
   if (subdir.directory_id == -1)
@@ -474,7 +475,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file,
                                               const QString& image,
                                               ScanTransaction* t) {
   QFile cue(matching_cue);
-  cue.open(QIODevice::ReadOnly);
+  (void)cue.open(QIODevice::ReadOnly);
 
   SongList old_sections = backend_->GetSongsByUrl(QUrl::fromLocalFile(file));
 
@@ -546,7 +547,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     if (cues_processed->contains(matching_cue)) return song_list;
 
     QFile cue(matching_cue);
-    cue.open(QIODevice::ReadOnly);
+    (void)cue.open(QIODevice::ReadOnly);
 
     // Ignore FILEs pointing to other media files. Also, watch out for incorrect
     // media files. Playlist parser for CUEs considers every entry in sheet
@@ -621,7 +622,7 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
 
   const QDateTime cue_last_modified = file_info.lastModified();
 
-  return cue_last_modified.isValid() ? cue_last_modified.toTime_t() : 0;
+  return cue_last_modified.isValid() ? cue_last_modified.toSecsSinceEpoch() : 0;
 }
 
 void LibraryWatcher::AddWatch(const Directory& dir, const QString& path) {

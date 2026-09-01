@@ -17,7 +17,7 @@ set(SQLITE-MOC-HEADERS
 
 set(SQLITE-WIN32-RESOURCES qsqlite_resource.rc)
 
-qt5_wrap_cpp(SQLITE-SOURCES-MOC ${SQLITE-MOC-HEADERS})
+qt6_wrap_cpp(SQLITE-SOURCES-MOC ${SQLITE-MOC-HEADERS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -45,6 +45,6 @@ add_library(qsqlite STATIC
 set_property(TARGET qsqlite PROPERTY QT_STATICPLUGIN 1)
 
 target_link_libraries(qsqlite
-    Qt5::Core Qt5::Sql
+    Qt6::Core Qt6::Sql
     ${SQLITE_LIBRARIES}
 )

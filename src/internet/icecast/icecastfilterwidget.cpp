@@ -19,6 +19,7 @@
 
 #include "icecastfilterwidget.h"
 
+#include <QActionGroup>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QSettings>

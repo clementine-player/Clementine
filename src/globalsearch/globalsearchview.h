@@ -18,6 +18,7 @@
 #ifndef GLOBALSEARCHVIEW_H
 #define GLOBALSEARCHVIEW_H
 
+#include <QActionGroup>
 #include <QWidget>
 
 #include "library/librarymodel.h"

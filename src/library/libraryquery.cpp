@@ -18,6 +18,7 @@
 #include "libraryquery.h"
 
 #include <QDateTime>
+#include <QRegularExpression>
 #include <QSqlError>
 #include <QtDebug>
 
@@ -68,7 +69,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
 
     // Split on whitespace
     QStringList tokens(
-        options.filter().split(QRegExp("\\s+"), QString::SkipEmptyParts));
+        options.filter().split(QRegularExpression("\\s+"), Qt::SkipEmptyParts));
     QString query;
     for (QString token : tokens) {
       token.remove('(');
@@ -88,12 +89,15 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
           query += "fts" + columntoken + ":" + subtoken + "* ";
         } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
           // We need to extract the operator and the value from the subtoken
-          QRegExp operatorRe("^(" + kNumericCompOperators.join("|") + ")(.*)");
+          QRegularExpression operatorRe("^(" + kNumericCompOperators.join("|") +
+                                        ")(.*)");
           QString op = "=";        // default if no operator given
           QString val = subtoken;  // whole subtoken is the value if no operator
-          if (operatorRe.indexIn(subtoken) != -1) {
-            op = operatorRe.cap(1);
-            val = operatorRe.cap(2);
+          const QRegularExpressionMatch operator_match =
+              operatorRe.match(subtoken);
+          if (operator_match.hasMatch()) {
+            op = operator_match.captured(1);
+            val = operator_match.captured(2);
           }
 
           if (Song::kIntColumns.contains(columntoken)) {
@@ -119,7 +123,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
           } else if (Song::kDateColumns.contains(columntoken)) {
             int seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
-              int now = QDateTime::currentDateTime().toTime_t();
+              int now = QDateTime::currentDateTime().toSecsSinceEpoch();
               QString dt = QString("(%1-%2)").arg(now).arg(columntoken);
               AddWhere(dt, seconds, op);
             }
@@ -144,7 +148,8 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   }
 
   if (options.max_age() != -1) {
-    int cutoff = QDateTime::currentDateTime().toTime_t() - options.max_age();
+    int cutoff =
+        QDateTime::currentDateTime().toSecsSinceEpoch() - options.max_age();
 
     where_clauses_ << "ctime > ?";
     bound_values_ << cutoff;
@@ -284,7 +289,8 @@ QVariant LibraryQuery::Value(int column) const { return query_.value(column); }
 
 bool QueryOptions::Matches(const Song& song) const {
   if (max_age_ != -1) {
-    const uint cutoff = QDateTime::currentDateTime().toTime_t() - max_age_;
+    const uint cutoff =
+        QDateTime::currentDateTime().toSecsSinceEpoch() - max_age_;
     if (song.ctime() <= cutoff) return false;
   }
 

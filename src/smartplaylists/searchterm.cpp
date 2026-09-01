@@ -17,6 +17,7 @@
 
 #include "searchterm.h"
 
+#include <QRegularExpression>
 #include <QUrl>
 
 #include "playlist/playlist.h"
@@ -27,7 +28,7 @@ const char* kEscClause = " ESCAPE '#'";
 
 // Replace % and _ with #% and #_
 static QString Escape(QString term) {
-  return term.replace(QRegExp("([%_#])"), "#\\1");
+  return term.replace(QRegularExpression("([%_#])"), "#\\1");
 }
 
 SearchTerm::SearchTerm() : field_(Field_Title), operator_(Op_Equals) {}

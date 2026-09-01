@@ -62,7 +62,12 @@ class IcecastService : public InternetService {
   void LoadDirectory();
   void Homepage();
   void DownloadDirectoryFinished(QNetworkReply* reply, int task_id);
-  void ParseDirectoryFinished(QFuture<IcecastBackend::StationList> future,
+  // Fully expanded type, not the StationList typedef: QMetaMethod::invoke()
+  // (used by NewClosure(), see core/closure.h) needs this signature's text
+  // to match QMetaType::fromType<>().name()'s canonical (alias-resolved)
+  // form of the argument's actual type, or the invoke silently fails - this
+  // wasn't an issue under Qt5, which didn't validate the name.
+  void ParseDirectoryFinished(QFuture<QList<IcecastBackend::Station>> future,
                               int task_id);
 
  private:

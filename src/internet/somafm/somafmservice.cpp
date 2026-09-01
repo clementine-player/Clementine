@@ -140,7 +140,7 @@ void SomaFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
     reader.readNext();
 
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == "channel") {
+        reader.name() == QLatin1String("channel")) {
       ReadChannel(reader, &list);
     }
   }
@@ -166,12 +166,13 @@ void SomaFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
         return;
 
       case QXmlStreamReader::StartElement:
-        if (reader.name() == "title") {
+        if (reader.name() == QLatin1String("title")) {
           stream.title_ = reader.readElementText();
-        } else if (reader.name() == "dj") {
+        } else if (reader.name() == QLatin1String("dj")) {
           stream.dj_ = reader.readElementText();
-        } else if (reader.name() == "highestpls" &&
-                   reader.attributes().value("format") == "aac") {
+        } else if (reader.name() == QLatin1String("highestpls") &&
+                   reader.attributes().value("format") ==
+                       QLatin1String("aac")) {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 

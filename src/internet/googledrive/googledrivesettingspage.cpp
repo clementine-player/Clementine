@@ -19,6 +19,7 @@
 
 #include "googledrivesettingspage.h"
 
+#include <QListWidgetItem>
 #include <QSortFilterProxyModel>
 
 #include "core/application.h"
@@ -29,6 +30,12 @@
 #include "ui/settingsdialog.h"
 #include "ui_googledrivesettingspage.h"
 
+namespace {
+// Matches PickedItem::id, stashed on each QListWidgetItem so RemoveItem()
+// knows what to forget.
+const int kPickedItemIdRole = Qt::UserRole;
+}  // namespace
+
 GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::GoogleDriveSettingsPage),
@@ -38,10 +45,15 @@ GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
   setWindowIcon(IconLoader::Load("googledrive", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
+  ui_->drive_items_container->setVisible(false);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
+  connect(ui_->add_files_button, SIGNAL(clicked()), SLOT(AddFilesClicked()));
+  connect(ui_->remove_item_button, SIGNAL(clicked()),
+          SLOT(RemoveItemClicked()));
   connect(service_, SIGNAL(Connected()), SLOT(Connected()));
+  connect(service_, SIGNAL(PickedItemsChanged()), SLOT(UpdatePickedItems()));
 
   dialog()->installEventFilter(this);
 }
@@ -55,9 +67,17 @@ void GoogleDriveSettingsPage::Load() {
   const QString user_email = s.value("user_email").toString();
   const QString refresh_token = s.value("refresh_token").toString();
 
-  if (!user_email.isEmpty() && !refresh_token.isEmpty()) {
+  // refresh_token is what actually determines whether we're connected (see
+  // GoogleDriveService::has_credentials()) - user_email is just display
+  // info and shouldn't gate this, or a hiccup fetching it (eg. a failed
+  // tokeninfo request) would leave the page permanently showing "logged
+  // out" despite functioning normally otherwise.
+  if (!refresh_token.isEmpty()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
+    ui_->drive_items_container->setVisible(true);
   }
+
+  UpdatePickedItems();
 }
 
 void GoogleDriveSettingsPage::Save() {
@@ -66,7 +86,10 @@ void GoogleDriveSettingsPage::Save() {
 }
 
 void GoogleDriveSettingsPage::LoginClicked() {
-  service_->Connect();
+  // There's no separate "just log in" step under drive.file scope - a login
+  // without picking anything grants access to nothing, so this performs the
+  // same combined OAuth+Picker flow as "Add files" below.
+  service_->AddFiles();
   ui_->login_button->setEnabled(false);
 }
 
@@ -82,6 +105,7 @@ bool GoogleDriveSettingsPage::eventFilter(QObject* object, QEvent* event) {
 void GoogleDriveSettingsPage::LogoutClicked() {
   service_->ForgetCredentials();
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+  ui_->drive_items_container->setVisible(false);
 }
 
 void GoogleDriveSettingsPage::Connected() {
@@ -91,4 +115,26 @@ void GoogleDriveSettingsPage::Connected() {
   const QString user_email = s.value("user_email").toString();
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
+  ui_->drive_items_container->setVisible(true);
+}
+
+void GoogleDriveSettingsPage::AddFilesClicked() { service_->AddFiles(); }
+
+void GoogleDriveSettingsPage::RemoveItemClicked() {
+  QListWidgetItem* item = ui_->picked_items_list->currentItem();
+  if (!item) {
+    return;
+  }
+  service_->RemoveItem(item->data(kPickedItemIdRole).toString());
+}
+
+void GoogleDriveSettingsPage::UpdatePickedItems() {
+  ui_->picked_items_list->clear();
+
+  for (const GoogleDriveService::PickedItem& picked :
+       service_->picked_items()) {
+    QListWidgetItem* item =
+        new QListWidgetItem(picked.title, ui_->picked_items_list);
+    item->setData(kPickedItemIdRole, picked.id);
+  }
 }

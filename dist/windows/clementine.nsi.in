@@ -383,6 +383,12 @@ Section "Qt style plugins" styles
   File "styles\*.dll"
 SectionEnd
 
+Section "Qt TLS backend" tls
+  SetOutPath "$INSTDIR\tls"
+
+  File "tls\*.dll"
+SectionEnd
+
 Section "GIO modules" gio-modules
   SetOutPath "$INSTDIR\gio-modules"
 
@@ -459,6 +465,7 @@ Section "Uninstall"
   Delete "$INSTDIR\platforms\*.dll"
   Delete "$INSTDIR\styles\*.dll"
   Delete "$INSTDIR\imageformats\*.dll"
+  Delete "$INSTDIR\tls\*.dll"
   Delete "$INSTDIR\gio-modules\*.dll"
   Delete "$INSTDIR\gstreamer-plugins\*.dll"
 
@@ -471,6 +478,7 @@ Section "Uninstall"
   RMDir "$INSTDIR\imageformats"
   RMDir "$INSTDIR\styles"
   RMDir "$INSTDIR\platforms"
+  RMDir "$INSTDIR\tls"
   RMDir "$INSTDIR\gio-modules"
   RMDir "$INSTDIR"
 

@@ -20,7 +20,6 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
-#include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
 
@@ -59,38 +58,38 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
-        QStringRef name = reader->name();
-        if (name == "location") {
+        QStringView name = reader->name();
+        if (name == QLatin1String("location")) {
           location = reader->readElementText();
-        } else if (name == "title") {
+        } else if (name == QLatin1String("title")) {
           title = reader->readElementText();
-        } else if (name == "creator") {
+        } else if (name == QLatin1String("creator")) {
           artist = reader->readElementText();
-        } else if (name == "album") {
+        } else if (name == QLatin1String("album")) {
           album = reader->readElementText();
-        } else if (name == "image") {
+        } else if (name == QLatin1String("image")) {
           art = reader->readElementText();
-        } else if (name == "duration") {  // in milliseconds.
+        } else if (name == QLatin1String("duration")) {  // in milliseconds.
           const QString duration = reader->readElementText();
           bool ok = false;
           nanosec = duration.toInt(&ok) * kNsecPerMsec;
           if (!ok) {
             nanosec = -1;
           }
-        } else if (name == "trackNum") {
+        } else if (name == QLatin1String("trackNum")) {
           const QString track_num_str = reader->readElementText();
           bool ok = false;
           track_num = track_num_str.toInt(&ok);
           if (!ok || track_num < 1) {
             track_num = -1;
           }
-        } else if (name == "info") {
+        } else if (name == QLatin1String("info")) {
           // TODO: Do something with extra info?
         }
         break;
       }
       case QXmlStreamReader::EndElement: {
-        if (reader->name() == "track") {
+        if (reader->name() == QLatin1String("track")) {
           goto return_song;
         }
       }

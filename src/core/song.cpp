@@ -28,11 +28,13 @@
 
 #include "song.h"
 
+#include <fileref.h>
+#include <id3v1genres.h>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QLatin1Literal>
 #include <QSharedData>
 #include <QSqlQuery>
 #include <QTextCodec>
@@ -40,18 +42,6 @@
 #include <QVariant>
 #include <QtConcurrentRun>
 #include <algorithm>
-
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/fixlastfm.h"
-#ifdef HAVE_LIBLASTFM1
-#include <lastfm5/Track.h>
-#else
-#include <lastfm5/Track>
-#endif
-#endif
-
-#include <fileref.h>
-#include <id3v1genres.h>
 
 #ifdef HAVE_LIBGPOD
 #include <gpod/itdb.h>
@@ -70,6 +60,7 @@
 #include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
 #include "gmereader.h"
+#include "internet/lastfm/lastfmtrack.h"
 #include "library/sqlrow.h"
 #include "tagreadermessages.pb.h"
 #include "widgets/trackslider.h"
@@ -717,20 +708,6 @@ void Song::InitArtManual() {
   }
 }
 
-#ifdef HAVE_LIBLASTFM
-void Song::InitFromLastFM(const lastfm::Track& track) {
-  d->valid_ = true;
-  d->filetype_ = Type_Stream;
-
-  d->title_ = track.title();
-  d->album_ = track.album();
-  d->artist_ = track.artist();
-  d->track_ = track.trackNumber();
-
-  set_length_nanosec(track.duration() * kNsecPerSec);
-}
-#endif  // HAVE_LIBLASTFM
-
 #ifdef HAVE_LIBGPOD
 void Song::InitFromItdb(const Itdb_Track* track, const QString& prefix) {
   d->valid_ = true;
@@ -1025,30 +1002,25 @@ void Song::BindToFtsQuery(QSqlQuery* query) const {
   query->bindValue(":ftsyear", d->year_);
 }
 
-#ifdef HAVE_LIBLASTFM
-void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
-  lastfm::MutableTrack mtrack(*track);
+LastFmTrack Song::ToLastFmTrack(bool prefer_album_artist) const {
+  LastFmTrack track;
 
   if (prefer_album_artist && !d->albumartist_.isEmpty()) {
-    mtrack.setArtist(d->albumartist_);
+    track.artist = d->albumartist_;
   } else {
-    mtrack.setArtist(d->artist_);
+    track.artist = d->artist_;
   }
-#if LASTFM_MAJOR_VERSION >= 1
-  mtrack.setAlbumArtist(d->albumartist_);
-#endif
-  mtrack.setAlbum(d->album_);
-  mtrack.setTitle(d->title_);
-  mtrack.setDuration(length_nanosec() / kNsecPerSec);
-  mtrack.setTrackNumber(d->track_);
+  track.album_artist = d->albumartist_;
+  track.album = d->album_;
+  track.title = d->title_;
+  track.duration_secs = length_nanosec() / kNsecPerSec;
+  track.track_number = d->track_;
 
-  if (d->filetype_ == Type_Stream && d->end_ == -1) {
-    mtrack.setSource(lastfm::Track::NonPersonalisedBroadcast);
-  } else {
-    mtrack.setSource(lastfm::Track::Player);
-  }
+  track.source = (d->filetype_ == Type_Stream && d->end_ == -1)
+                     ? LastFmTrack::NonPersonalisedBroadcast
+                     : LastFmTrack::Player;
+  return track;
 }
-#endif  // HAVE_LIBLASTFM
 
 QString Song::PrettyRating() const {
   float rating = d->rating_;

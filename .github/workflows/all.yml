@@ -13,13 +13,22 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.1
+      - name: Install clang-format
+        # clementine-player/clang-format-lint-action only bundles clang-format
+        # up to v9, which disagrees with newer versions (eg. the one Homebrew
+        # ships) on some formatting decisions. Pin to a specific pip-published
+        # version instead, and match it locally for the same output as this
+        # job - see dist/format.py.
+        run: pip install clang-format==23.1.0
       - name: clang-format
-        uses: clementine-player/clang-format-lint-action@master
-        with:
-          style: "{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}"
-          source: ./src
-          clangFormatVersion: 9
+        run: |
+          find src -type f \( -name '*.c' -o -name '*.h' -o -name '*.C' -o -name '*.H' \
+              -o -name '*.cpp' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \
+              -o -name '*.c++' -o -name '*.h++' -o -name '*.cxx' -o -name '*.hxx' \) -print0 \
+            | xargs -0 clang-format \
+                -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
+                --dry-run --Werror
 
 
   push_translations:
@@ -49,28 +58,39 @@ jobs:
           libchromaprint-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
           libglib2.0-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
           python3-pip
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           libsparsehash-dev
           ssh
+          # liblastfm isn't a dependency any more - Last.fm scrobbling talks
+          # directly to the web service API now (see
+          # src/internet/lastfm/lastfmws.*). libmygpo-qt still has no Qt6
+          # build anywhere, so gpodder sync falls back to the vendored
+          # 3rdparty/libmygpo-qt5 copy instead.
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -113,10 +133,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8.0.1
         with:
           path: release_artifacts
       - name: Create draft pre-release
@@ -164,29 +184,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -197,7 +222,7 @@ jobs:
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
@@ -233,28 +258,33 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
-      - uses: actions/checkout@v4.2.2
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -273,7 +303,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_42
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -309,28 +339,33 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
-      - uses: actions/checkout@v4.2.2
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -349,7 +384,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_43
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -385,28 +420,33 @@ jobs:
           libcdio-devel
           libchromaprint-devel
           libgpod-devel
-          liblastfm-qt5-devel
           libmtp-devel
           libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
           openssh
           pkgconfig
           protobuf-compiler
           protobuf-devel
           pulseaudio-libs-devel
-          qca-qt5-devel
-          qca-qt5-ossl
-          qt5-linguist
-          qt5-qtbase-devel
-          qt5-qtx11extras-devel
-          qt5-rpm-macros
-          qtsingleapplication-qt5-devel
-          qtsinglecoreapplication-qt5-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
           rpmdevtools
           sparsehash-devel
           sqlite-devel
           taglib-devel
           tar
-      - uses: actions/checkout@v4.2.2
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -425,7 +465,7 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_44
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -437,7 +477,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -470,7 +510,10 @@ jobs:
             mingw-w64-x86_64-ninja
             mingw-w64-x86_64-ntldd
             mingw-w64-x86_64-pkgconf
-            mingw-w64-x86_64-qt5
+            mingw-w64-x86_64-qt6-base
+            mingw-w64-x86_64-qt6-5compat
+            mingw-w64-x86_64-qt6-tools
+            mingw-w64-x86_64-qt6-svg
             mingw-w64-x86_64-taglib
             mingw-w64-x86_64-boost
             mingw-w64-x86_64-protobuf
@@ -492,9 +535,10 @@ jobs:
       # particular). Failing softly here just means CMake's optional_component
       # machinery disables the corresponding feature instead of failing the
       # whole build - see the job summary in the PR/commit this came from.
-      # liblastfm and libgpod are not attempted at all: neither is packaged
-      # for MSYS2 mingw64, so Last.fm scrobbling and iPod classic support are
-      # disabled on this build variant for now.
+      # libgpod isn't attempted at all: it's not packaged for MSYS2 mingw64,
+      # so iPod classic support is disabled on this build variant for now.
+      # (Last.fm scrobbling talks directly to the web service API now - see
+      # src/internet/lastfm/lastfmws.* - so it needs no package here at all.)
       - name: Install optional dependencies (best-effort)
         run: pacman --noconfirm -S --needed mingw-w64-x86_64-libmtp || true
 
@@ -523,12 +567,50 @@ jobs:
         working-directory: dist/windows
         run: cp ../../bin/*.exe .
 
+      - name: Copy Qt plugin DLLs
+        working-directory: dist/windows
+        run: |
+          set -e
+          mkdir -p platforms styles imageformats tls
+          cp /mingw64/share/qt6/plugins/platforms/qwindows.dll platforms/
+          # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
+          # a single qmodernwindowsstyle.dll that covers both the
+          # "windowsvista" and "windows11" styles.
+          cp /mingw64/share/qt6/plugins/styles/qmodernwindowsstyle.dll styles/
+          cp /mingw64/share/qt6/plugins/imageformats/qgif.dll \
+             /mingw64/share/qt6/plugins/imageformats/qjpeg.dll \
+             /mingw64/share/qt6/plugins/imageformats/qsvg.dll \
+             imageformats/
+          # Qt6 moved TLS support out of QtNetwork and into a plugin.
+          # qschannelbackend uses Windows' native Secure Channel, so unlike
+          # the qopensslbackend alternative it needs no separate OpenSSL DLLs
+          # bundled alongside it.
+          cp /mingw64/share/qt6/plugins/tls/qschannelbackend.dll tls/
+
+      - name: Copy GIO modules
+        working-directory: dist/windows
+        run: |
+          mkdir -p gio-modules
+          cp /mingw64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
+
+      - name: Copy GStreamer plugins
+        working-directory: dist/windows
+        run: |
+          mkdir -p gstreamer-plugins
+          cp /mingw64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+
       # Direct + transitive linked DLL dependencies are discovered from the
       # built binaries themselves rather than hardcoded by name/version, since
-      # exact mingw64 package sonames drift with every MSYS2 update. This
-      # doesn't catch plugins loaded via dlopen() at runtime (Qt platform
-      # plugins, GStreamer elements, GIO modules) - those are copied
-      # separately below, same as the old pipeline did.
+      # exact mingw64 package sonames drift with every MSYS2 update. This has
+      # to run after every plugin-copying step above, and walk those plugin
+      # DLLs too, not just the .exes - a plugin loaded via dlopen() at
+      # runtime (Qt platform plugins, GStreamer elements, GIO modules) can
+      # depend on a mingw64 DLL nothing else in the app needs (eg.
+      # gstreamer-plugins/libgstaudiofx.dll needs liborc, which no .exe here
+      # links against), and that DLL then silently isn't there at runtime -
+      # GStreamer just drops the one plugin that needed it rather than
+      # erroring at startup, which is a much more confusing failure to debug
+      # than a missing DLL would be.
       - name: Collect runtime DLL dependencies
         working-directory: dist/windows
         run: |
@@ -536,10 +618,12 @@ jobs:
           which ntldd
           ls -la
           : > raw_deps.txt
-          for exe in *.exe; do
-            echo "== ntldd -R $exe =="
-            ntldd -R "$exe" >> raw_deps.txt 2>&1 \
-              || echo "ntldd exited non-zero for $exe (continuing, see output above/below)"
+          for dll in *.exe platforms/*.dll styles/*.dll imageformats/*.dll \
+              tls/*.dll gio-modules/*.dll gstreamer-plugins/*.dll; do
+            [ -e "$dll" ] || continue
+            echo "== ntldd -R $dll =="
+            ntldd -R "$dll" >> raw_deps.txt 2>&1 \
+              || echo "ntldd exited non-zero for $dll (continuing, see output above/below)"
           done
           echo "---- raw ntldd output ----"
           cat raw_deps.txt
@@ -564,29 +648,21 @@ jobs:
           done < mingw_deps.txt
           rm -f raw_deps.txt mingw_deps.txt
 
-      - name: Copy Qt plugin DLLs
+      # Runs the actual packaged binary (not a dev build) end to end through
+      # real playback, so a plugin/dependency that's missing or broken only
+      # in the *packaged* app - which a successful build can't catch, and
+      # which is exactly how both the libsoup rpath bug and the missing
+      # liborc/libgstfft dependencies above were found - fails CI instead of
+      # surfacing later as a user report. See --play-and-exit in
+      # src/core/commandlineoptions.cpp/src/main.cpp.
+      - name: Smoke test - local playback
         working-directory: dist/windows
-        run: |
-          set -e
-          mkdir -p platforms styles imageformats
-          cp /mingw64/share/qt5/plugins/platforms/qwindows.dll platforms/
-          cp /mingw64/share/qt5/plugins/styles/qwindowsvistastyle.dll styles/
-          cp /mingw64/share/qt5/plugins/imageformats/qgif.dll \
-             /mingw64/share/qt5/plugins/imageformats/qjpeg.dll \
-             /mingw64/share/qt5/plugins/imageformats/qsvg.dll \
-             imageformats/
-
-      - name: Copy GIO modules
+        run: ./clementine.exe --play-and-exit 30 ../../tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
         working-directory: dist/windows
-        run: |
-          mkdir -p gio-modules
-          cp /mingw64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
-
-      - name: Copy GStreamer plugins
-        working-directory: dist/windows
-        run: |
-          mkdir -p gstreamer-plugins
-          cp /mingw64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+        run: >
+          ./clementine.exe --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
       - name: Build Windows installer
         # makensis was installed via choco onto the Windows-wide PATH, not
@@ -596,7 +672,7 @@ jobs:
         run: makensis clementine.nsi
         working-directory: dist/windows
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
@@ -624,25 +700,32 @@ jobs:
           libfftw3-dev
           libglew-dev
           libglib2.0-dev
+          libgl1-mesa-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          qt6-5compat-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # liblastfm and libmygpo-qt: see the note in push_translations
+          # above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -658,7 +741,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_bookworm_64
           path: bin/clementine_*.deb
@@ -686,25 +769,32 @@ jobs:
           libfftw3-dev
           libglew-dev
           libglib2.0-dev
+          libgl1-mesa-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libprotobuf-dev
           libpulse-dev
-          libqt5x11extras5-dev
+          qt6-5compat-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
+          libx11-dev
+          libxcb1-dev
           pkg-config
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # liblastfm and libmygpo-qt: see the note in push_translations
+          # above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -720,7 +810,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_trixie_64
           path: bin/clementine_*.deb
@@ -752,29 +842,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -790,7 +885,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_jammy_64
           path: bin/clementine_*.deb
@@ -822,29 +917,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -860,7 +960,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_noble_64
           path: bin/clementine_*.deb
@@ -892,29 +992,34 @@ jobs:
           libcrypto++-dev
           libdbus-1-dev
           libfftw3-dev
+          libgl1-mesa-dev
           libglew-dev
+          libglx-dev
           libgpod-dev
           libgstreamer-plugins-base1.0-dev
           libgstreamer1.0-dev
-          liblastfm5-dev
           libmtp-dev
-          libmygpo-qt-dev
           libplist-dev
           libprotobuf-dev
           libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
           libsparsehash-dev
           libsqlite3-dev
           libtag1-dev
           libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
           protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
           ssh
-      - uses: actions/checkout@v4.2.2
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
+          # libmygpo-qt: see the note in push_translations above.
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -930,7 +1035,7 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_resolute_64
           path: bin/clementine_*.deb
@@ -946,28 +1051,15 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - name: Tap and trust tomahawk-player/tomahawkqt5
-        run: |
-          brew tap tomahawk-player/tomahawkqt5
-          brew trust --formula tomahawk-player/tomahawkqt5/liblastfm
-      # liblastfm (from that tap) has a pre-3.5 cmake_minimum_required that
-      # modern CMake refuses to configure outright. CMake's own fix is
-      # -DCMAKE_POLICY_VERSION_MINIMUM=3.5, but `brew` re-execs itself
-      # through `env -i` with a hardcoded variable allowlist before Ruby
-      # even starts (see `brew`'s own source), so there's no way to get an
-      # arbitrary env var into a formula's build - patching the flag
-      # directly into the tapped formula is the only way.
-      - name: Patch liblastfm formula for modern CMake
-        run: |
-          FORMULA="$(brew --repo tomahawk-player/tomahawkqt5)/liblastfm.rb"
-          sed -i '' 's/args << "-DBUILD_TESTS=OFF"/&\n    args << "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"/' "$FORMULA"
+      # liblastfm is no longer a dependency at all: Last.fm scrobbling talks
+      # directly to the web service API now (src/internet/lastfm/lastfmws.*),
+      # so the tomahawk-player/tomahawkqt5 tap this job used to pull a
+      # Qt5-linked liblastfm from isn't needed any more either.
       - name: Install dependencies
         run: brew bundle
-      - name: Fix liblastfm include path
-        run: ln -sf "$(brew --prefix)/include/lastfm" "$(brew --prefix)/include/lastfm5"
 
       # Real Developer ID signing runs for pushes to master (release builds)
       # and for PRs opened from branches *within this repo* - so the
@@ -990,14 +1082,14 @@ jobs:
           fi
       - name: Authenticate to GCP
         if: steps.signing.outputs.enabled == 'true'
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@v3
         with:
           # Fill in after running dist/gcp_iam_setup.sh (it prints this).
           workload_identity_provider: projects/611551928920/locations/global/workloadIdentityPools/github-actions/providers/clementine-mac-signing
           service_account: mac-signing@clementine-data.iam.gserviceaccount.com
       - name: Set up gcloud
         if: steps.signing.outputs.enabled == 'true'
-        uses: google-github-actions/setup-gcloud@v2
+        uses: google-github-actions/setup-gcloud@v3
       - name: Set up Ruby
         if: steps.signing.outputs.enabled == 'true'
         uses: ruby/setup-ruby@v1
@@ -1020,8 +1112,7 @@ jobs:
             -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
             -DENABLE_LIBGPOD=OFF \
-            -DQt5_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5" \
-            -DQt5LinguistTools_DIR="${BREW_PREFIX}/opt/qt@5/lib/cmake/Qt5LinguistTools" \
+            -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
@@ -1033,11 +1124,28 @@ jobs:
       - name: Build DMG
         working-directory: bin
         run: make dmg -j$(sysctl -n hw.ncpu)
+
+      # Runs the actual packaged .app (not a dev build) end to end through
+      # real playback, so a plugin/dependency that's missing or broken only
+      # in the *packaged* app - which a successful build can't catch, and
+      # which is exactly how the libsoup rpath bug in dist/macdeploy.py was
+      # found - fails CI instead of surfacing later as a user report. See
+      # --play-and-exit in src/core/commandlineoptions.cpp/src/main.cpp.
+      # Runs before notarization/upload so a broken build fails fast.
+      - name: Smoke test - local playback
+        working-directory: bin
+        run: ./clementine.app/Contents/MacOS/clementine --play-and-exit 30 ../tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        working-directory: bin
+        run: >
+          ./clementine.app/Contents/MacOS/clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - name: Notarize DMG
         if: steps.signing.outputs.enabled == 'true'
         working-directory: bin
         run: make notarize-dmg
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_mac
           path: bin/clementine-*.dmg

@@ -257,7 +257,7 @@ void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
 
   // Reload tags in the background
   QFuture<QList<Data>> future =
-      QtConcurrent::run(this, &EditTagDialog::LoadData, s);
+      QtConcurrent::run(&EditTagDialog::LoadData, this, s);
   NewClosure(future, this,
              SLOT(SetSongsFinished(QFuture<QList<EditTagDialog::Data>>)),
              future);
@@ -464,7 +464,7 @@ static void SetDate(QLabel* label, uint time) {
   if (time == std::numeric_limits<uint>::max()) {  // -1
     label->setText(QObject::tr("Unknown"));
   } else {
-    label->setText(QDateTime::fromTime_t(time).toString(
+    label->setText(QDateTime::fromSecsSinceEpoch(time).toString(
         QLocale::system().dateTimeFormat(QLocale::LongFormat)));
   }
 }
@@ -530,11 +530,11 @@ void EditTagDialog::UpdateStatisticsTab(const Song& song) {
   ui_->score->setText(QString::number(qMax(0, song.score())));
   ui_->rating->set_rating(song.rating());
 
-  ui_->lastplayed->setText(song.lastplayed() <= 0
-                               ? tr("Never")
-                               : QDateTime::fromTime_t(song.lastplayed())
-                                     .toString(QLocale::system().dateTimeFormat(
-                                         QLocale::LongFormat)));
+  ui_->lastplayed->setText(
+      song.lastplayed() <= 0 ? tr("Never")
+                             : QDateTime::fromSecsSinceEpoch(song.lastplayed())
+                                   .toString(QLocale::system().dateTimeFormat(
+                                       QLocale::LongFormat)));
 }
 
 void EditTagDialog::ArtLoaded(quint64 id, const QImage& scaled,
@@ -716,7 +716,7 @@ void EditTagDialog::accept() {
 
   // Save tags in the background
   QFuture<void> future =
-      QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
+      QtConcurrent::run(&EditTagDialog::SaveData, this, data_);
   NewClosure(future, this, SLOT(AcceptFinished()));
 }
 

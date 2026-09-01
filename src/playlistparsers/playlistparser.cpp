@@ -141,7 +141,7 @@ SongList PlaylistParser::LoadFromFile(const QString& filename) const {
 
   // Open the file
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  (void)file.open(QIODevice::ReadOnly);
 
   return parser->Load(&file, filename, info.absolutePath());
 }
@@ -172,7 +172,7 @@ void PlaylistParser::Save(const SongList& songs, const QString& filename,
 
   // Open the file
   QFile file(filename);
-  file.open(QIODevice::WriteOnly);
+  (void)file.open(QIODevice::WriteOnly);
 
   return parser->Save(songs, &file, info.absolutePath(), path_type);
 }

@@ -58,7 +58,7 @@ void TagWidgetTag::set_background_opacity(float opacity) {
   update();
 }
 
-void TagWidgetTag::enterEvent(QEvent*) {
+void TagWidgetTag::enterEvent(QEnterEvent*) {
   animation_->stop();
   animation_->setEndValue(1.0);
   animation_->setDuration(80);

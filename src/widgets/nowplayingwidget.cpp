@@ -17,6 +17,7 @@
 
 #include "nowplayingwidget.h"
 
+#include <QActionGroup>
 #include <QGuiApplication>
 #include <QMenu>
 #include <QMovie>

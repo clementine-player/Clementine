@@ -64,6 +64,8 @@ public:
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     static QAbstractEventDispatcher::EventFilter prevEventFilter;
     static bool eventFilter(void* message);
+#elif QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    virtual bool nativeEventFilter(const QByteArray & eventType, void * message, qintptr * result);
 #else
     virtual bool nativeEventFilter(const QByteArray & eventType, void * message, long * result);
 #endif // QT_VERSION < QT_VERSION_CHECK(5,0,0)

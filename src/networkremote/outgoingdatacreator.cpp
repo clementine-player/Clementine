@@ -188,7 +188,7 @@ void OutgoingDataCreator::SendClementineInfo() {
   QString version =
       QString("%1 %2").arg(QCoreApplication::applicationName(),
                            QCoreApplication::applicationVersion());
-  info->set_version(version.toLatin1());
+  info->set_version(version.toLatin1().toStdString());
   info->set_allow_downloads(allow_downloads_);
   SendDataToClients(&msg);
 }
@@ -632,7 +632,7 @@ void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   QByteArray sha1 = Utilities::Sha1File(file).toHex();
   qLog(Debug) << "Library sha1" << sha1;
 
-  file.open(QIODevice::ReadOnly);
+  (void)file.open(QIODevice::ReadOnly);
 
   QByteArray data;
   cpb::remote::Message msg;
