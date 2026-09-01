@@ -107,9 +107,9 @@ class InternetService : public QObject {
 
  protected:
   // Called once when context menu is created
-  virtual void PopulateContextMenu(){};
+  virtual void PopulateContextMenu() {};
   // Called every time context menu is shown
-  virtual void UpdateContextMenu(){};
+  virtual void UpdateContextMenu() {};
 
   // Returns all the playlist insertion related QActions (see below).
   QList<QAction*> GetPlaylistActions();

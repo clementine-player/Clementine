@@ -28,8 +28,8 @@ class TranscoderOptionsError : public TranscoderOptionsInterface {
                          QWidget* parent = nullptr);
   ~TranscoderOptionsError();
 
-  void Load(){};
-  void Save(){};
+  void Load() {};
+  void Save() {};
 
  private:
   Ui_TranscoderOptionsError* ui_;

@@ -38,7 +38,7 @@ class MoodbarBuilder {
   };
 
   int BandFrequency(int band) const;
-  static void Normalize(QList<Rgb>* vals, double Rgb::*member);
+  static void Normalize(QList<Rgb>* vals, double Rgb::* member);
 
   QList<uint> barkband_table_;
   int bands_;

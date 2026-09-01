@@ -29,7 +29,7 @@ class RadioBrowserSettingsPage : public SettingsPage {
 
  public:
   explicit RadioBrowserSettingsPage(SettingsDialog* dialog);
-  ~RadioBrowserSettingsPage(){};
+  ~RadioBrowserSettingsPage() {};
 
   void Load();
   void Save();

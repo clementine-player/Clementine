@@ -170,7 +170,7 @@ class TagCompletionItemDelegate : public PlaylistDelegateBase {
  public:
   TagCompletionItemDelegate(QObject* parent, LibraryBackend* backend,
                             Playlist::Column column)
-      : PlaylistDelegateBase(parent), backend_(backend), column_(column){};
+      : PlaylistDelegateBase(parent), backend_(backend), column_(column) {};
 
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
                         const QModelIndex& index) const;

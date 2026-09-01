@@ -14,12 +14,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
+      - name: Install clang-format
+        # clementine-player/clang-format-lint-action only bundles clang-format
+        # up to v9, which disagrees with newer versions (eg. the one Homebrew
+        # ships) on some formatting decisions. Pin to a specific pip-published
+        # version instead, and match it locally for the same output as this
+        # job - see dist/format.py.
+        run: pip install clang-format==23.1.0
       - name: clang-format
-        uses: clementine-player/clang-format-lint-action@master
-        with:
-          style: "{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}"
-          source: ./src
-          clangFormatVersion: 9
+        run: |
+          find src -type f \( -name '*.c' -o -name '*.h' -o -name '*.C' -o -name '*.H' \
+              -o -name '*.cpp' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \
+              -o -name '*.c++' -o -name '*.h++' -o -name '*.cxx' -o -name '*.hxx' \) -print0 \
+            | xargs -0 clang-format \
+                -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
+                --dry-run --Werror
 
 
   push_translations:

@@ -79,7 +79,7 @@ void MoodbarBuilder::AddFrame(const double* magnitudes, int size) {
   frames_.append(Rgb(sqrt(rgb[0]), sqrt(rgb[1]), sqrt(rgb[2])));
 }
 
-void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::*member) {
+void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::* member) {
   double mini = vals->at(0).*member;
   double maxi = vals->at(0).*member;
   for (int i = 1; i < vals->count(); i++) {
