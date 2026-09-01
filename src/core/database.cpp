@@ -514,8 +514,15 @@ void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
 
 void Database::ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
                                   int schema_version, bool in_transaction) {
-  // Run each command
-  const QStringList commands(schema.split(QRegularExpression("; *\n\n")));
+  // Run each command. Normalize line endings first regardless of what this
+  // string's actual source was (a checked-out file, in practice) - the "\n\n"
+  // below won't match a "\r\n\r\n", which silently glues every statement in
+  // the file into a single multi-statement command that Qt's SQLite driver
+  // then refuses to execute at all.
+  QString normalized_schema = schema;
+  normalized_schema.replace("\r\n", "\n");
+  const QStringList commands(
+      normalized_schema.split(QRegularExpression("; *\n\n")));
 
   // We don't want this list to reflect possible DB schema changes
   // so we initialize it before executing any statements.
