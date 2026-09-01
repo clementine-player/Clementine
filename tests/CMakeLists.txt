@@ -19,6 +19,18 @@ include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
+# Test executables link against clementine_lib, which requires these at
+# link time. src/CMakeLists.txt sets up the same link_directories() for
+# clementine_lib itself, but that call is scoped to that directory and
+# doesn't reach targets defined here.
+link_directories(
+  ${CHROMAPRINT_LIBRARY_DIRS}
+  ${GSTREAMER_APP_LIBRARY_DIRS}
+  ${GLEW_LIBRARY_DIRS}
+  ${LIBGPOD_LIBRARY_DIRS}
+  ${LIBMTP_LIBRARY_DIRS}
+)
+
 if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
 endif(HAVE_LIBGPOD)
@@ -123,6 +135,9 @@ add_test_file(asxiniparser_test.cpp false)
 #add_test_file(database_test.cpp false)
 #add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
+if(HAVE_GOOGLE_DRIVE)
+  add_test_file(googledriveclient_test.cpp false)
+endif(HAVE_GOOGLE_DRIVE)
 #add_test_file(librarybackend_test.cpp false)
 #add_test_file(librarymodel_test.cpp true)
 #add_test_file(m3uparser_test.cpp false)

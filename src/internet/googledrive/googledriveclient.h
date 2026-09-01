@@ -36,42 +36,36 @@ namespace google_drive {
 
 class Client;
 
-// Holds the metadata for a file on Google Drive.
+// Holds the metadata for a file on Google Drive (Drive API v3 File
+// resource - see Client::GetFile/ListChanges, which both request exactly
+// the fields read below via a "fields=" parameter).
 class File {
  public:
   explicit File(const QVariantMap& data = QVariantMap()) : data_(data) {}
 
-  static const char* kFolderMimeType;
-
   QString id() const { return data_["id"].toString(); }
-  QString etag() const { return data_["etag"].toString(); }
-  QString title() const { return data_["title"].toString(); }
+  // v3 has no generic per-version etag; "version" is a monotonically
+  // increasing int64 (encoded as a string, per Google API convention) that
+  // serves the same change-detection purpose.
+  QString etag() const { return data_["version"].toString(); }
+  QString title() const { return data_["name"].toString(); }
   QString mime_type() const { return data_["mimeType"].toString(); }
   QString description() const { return data_["description"].toString(); }
-  qint64 size() const { return data_["fileSize"].toUInt(); }
-  QUrl download_url() const { return data_["downloadUrl"].toUrl(); }
-  QUrl alternate_link() const { return data_["alternateLink"].toUrl(); }
+  qint64 size() const { return data_["size"].toString().toLongLong(); }
+  // v3 dropped the v2 "downloadUrl" field - content is fetched from the
+  // same file resource endpoint with alt=media, still requiring the same
+  // Authorization header used for metadata requests (see
+  // GoogleDriveService::FilesFound / GetStreamingUrlFromSongId, which
+  // already pass that header alongside this URL).
+  QUrl download_url() const;
 
   QDateTime modified_date() const {
-    return QDateTime::fromString(data_["modifiedDate"].toString(), Qt::ISODate);
+    return QDateTime::fromString(data_["modifiedTime"].toString(), Qt::ISODate);
   }
 
   QDateTime created_date() const {
-    return QDateTime::fromString(data_["createdDate"].toString(), Qt::ISODate);
+    return QDateTime::fromString(data_["createdTime"].toString(), Qt::ISODate);
   }
-
-  bool is_folder() const { return mime_type() == kFolderMimeType; }
-  QStringList parent_ids() const;
-
-  bool has_label(const QString& name) const {
-    return data_["labels"].toMap()[name].toBool();
-  }
-
-  bool is_starred() const { return has_label("starred"); }
-  bool is_hidden() const { return has_label("hidden"); }
-  bool is_trashed() const { return has_label("trashed"); }
-  bool is_restricted() const { return has_label("restricted"); }
-  bool is_viewed() const { return has_label("viewed"); }
 
  private:
   QVariantMap data_;
@@ -86,6 +80,9 @@ class ConnectResponse : public QObject {
  public:
   const QString& refresh_token() const { return refresh_token_; }
   const QString& user_email() const { return user_email_; }
+  // Only ever populated by Client::AuthorizeAndPick - empty for a plain
+  // Client::Connect() (silent refresh, or a login with no picking).
+  const QStringList& picked_file_ids() const { return picked_file_ids_; }
 
  signals:
   void Finished();
@@ -94,6 +91,7 @@ class ConnectResponse : public QObject {
   explicit ConnectResponse(QObject* parent);
   QString refresh_token_;
   QString user_email_;
+  QStringList picked_file_ids_;
 };
 
 class GetFileResponse : public QObject {
@@ -138,15 +136,34 @@ class Client : public QObject {
   Q_OBJECT
 
  public:
-  explicit Client(QObject* parent = nullptr);
+  // The second argument allows for specifying a custom network access
+  // manager. It is used in tests. Ownership of network is not transferred.
+  explicit Client(QObject* parent = nullptr,
+                  QNetworkAccessManager* network = nullptr);
 
   bool is_authenticated() const;
   const QString& access_token() const { return access_token_; }
 
   void ForgetCredentials();
 
-  ConnectResponse* Connect(const QString& refresh_token = QString());
-  GetFileResponse* GetFile(const QString& file_id);
+  // Silent reconnect: requires an existing refresh_token and never opens a
+  // browser. Used for background/session reconnects only - grants nothing
+  // new, since drive.file access can only ever be extended via
+  // AuthorizeAndPick.
+  ConnectResponse* Connect(const QString& refresh_token);
+  // Performs Google's combined OAuth-consent + Picker "One Pick" flow
+  // required to get drive.file access to specific files on a desktop app
+  // (see
+  // https://developers.google.com/workspace/drive/picker/guides/desktop-mobile-picker).
+  // Always opens the system browser, even if already connected - a plain
+  // login without picking anything grants access to nothing at all under
+  // drive.file scope. Returns a fresh refresh token plus whatever the user
+  // picked, via ConnectResponse::picked_file_ids().
+  ConnectResponse* AuthorizeAndPick(const QStringList& mime_types);
+  // |resource_key| is required to access some Drive items (mostly ones
+  // shared via link before Sept. 2021) even with a valid access grant.
+  GetFileResponse* GetFile(const QString& file_id,
+                          const QString& resource_key = QString());
   ListChangesResponse* ListChanges(const QString& cursor);
 
   QByteArray GetAuthHeader() const;
@@ -159,11 +176,22 @@ class Client : public QObject {
   void FetchUserInfoFinished(ConnectResponse* response, QNetworkReply* reply);
   void GetFileFinished(GetFileResponse* response, QNetworkReply* reply);
   void ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply);
+  void StartPageTokenFinished(ListChangesResponse* response,
+                              QNetworkReply* reply);
 
  private:
   void AddAuthorizationHeader(QNetworkRequest* request) const;
+  void AddResourceKeyHeader(QNetworkRequest* request, const QString& file_id,
+                            const QString& resource_key) const;
+  // v3's Changes API has no "list everything since account creation"
+  // concept the way v2's empty startChangeId did - a cursor must first be
+  // established via changes/startPageToken. That's fine for us: picked
+  // files are already indexed directly (see GoogleDriveService::
+  // AddPickedItemFinished), so Changes only ever needs to track things
+  // going forward from here.
+  void RequestStartPageToken(ListChangesResponse* response);
   void MakeListChangesRequest(ListChangesResponse* response,
-                              const QString& page_token = QString());
+                              const QString& page_token);
 
  private:
   QNetworkAccessManager* network_;

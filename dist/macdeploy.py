@@ -322,6 +322,55 @@ def ResolveRPath(path, referencing_binary):
   return None
 
 
+def FixAbsoluteRPaths(source_path, target_path):
+  # Every LC_LOAD_DYLIB dependency gets rewritten to an @executable_path-
+  # relative path above, but a binary's LC_RPATH *search* entries are left
+  # untouched by that - so an absolute one (always a leftover from the
+  # original Homebrew build, eg. "/opt/homebrew/opt/libsoup/lib") survives
+  # straight into the bundle. That's inert for the dependencies we already
+  # rewrote, but it's live ammunition for anything that does a bare-filename
+  # dlopen() at runtime instead of linking normally (eg. GStreamer's
+  # libgstsoup plugin probing for "libsoup-3.0.0.dylib"/"libsoup-2.4.1.dylib"
+  # to pick a libsoup major version) - dyld resolves that search via the
+  # loading binary's own rpaths, lands on the unrelinked Homebrew copy, and
+  # that copy in turn pulls in Homebrew's own glib/gobject/gio/gmodule
+  # straight from the Cellar. Two independent copies of glib's GObject type
+  # registry end up loaded in the same process, which is what produces the
+  # "class/signal/property already implemented" GLib-GObject warnings and
+  # silently breaks anything downstream of it.
+  #
+  # Rather than just deleting these, redirect the first one to
+  # "@executable_path/../Frameworks" (deleting any further ones, since
+  # install_name_tool refuses to add a second identical rpath) - a bare
+  # dlopen() like libgstsoup's above still needs *some* rpath to find its
+  # (now bundled and relinked) dependency by leaf name; pointing that search
+  # at our own Frameworks dir keeps it working without reaching outside the
+  # bundle. Computed from source_path since target_path may only exist once
+  # the queued `cp` command above actually runs.
+  bundle_rpath = '@executable_path/../Frameworks'
+  existing_rpaths = GetRPaths(source_path)
+  have_bundle_rpath = bundle_rpath in existing_rpaths
+  changed = False
+  for rpath in existing_rpaths:
+    if rpath.startswith('@'):
+      continue
+    changed = True
+    if have_bundle_rpath:
+      LOGGER.info("Removing stale absolute rpath '%s' from '%s'", rpath,
+                  target_path)
+      commands.append(
+          [INSTALL_NAME_TOOL, '-delete_rpath', rpath, target_path])
+    else:
+      LOGGER.info("Redirecting stale absolute rpath '%s' to '%s' in '%s'",
+                  rpath, bundle_rpath, target_path)
+      commands.append(
+          [INSTALL_NAME_TOOL, '-rpath', rpath, bundle_rpath, target_path])
+      have_bundle_rpath = True
+  if changed:
+    # -rpath/-delete_rpath invalidate any existing code signature.
+    commands.append(['codesign', '--force', '-s', '-', target_path])
+
+
 def FindLibrary(path, referencing_binary=None):
   if os.path.exists(path):
     return path
@@ -370,6 +419,7 @@ def FixFramework(path):
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
+  FixAbsoluteRPaths(abs_path, new_path)
 
 
 def FixLibrary(path, referencing_binary=None):
@@ -390,6 +440,7 @@ def FixLibrary(path, referencing_binary=None):
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
+  FixAbsoluteRPaths(abs_path, new_path)
 
 
 def FixPlugin(abs_path, subdir):
@@ -401,6 +452,7 @@ def FixPlugin(abs_path, subdir):
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
+  FixAbsoluteRPaths(abs_path, new_path)
 
 
 def FixBinary(path):
@@ -410,6 +462,7 @@ def FixBinary(path):
     FixFrameworkInstallPath(framework, path)
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, path)
+  FixAbsoluteRPaths(path, path)
 
 
 def CopyLibrary(path):
@@ -581,6 +634,66 @@ def FindGioModule(name):
   raise CouldNotFindGioModuleError(name)
 
 
+def PatchGioModuleDefaultDir(bundle_dir):
+  # The bundled libgio is a straight copy of Homebrew's own build, so it
+  # carries Homebrew's install prefix baked in as its compiled-in *default*
+  # GIO module directory (eg. "/opt/homebrew/lib/gio/modules") - this is a
+  # plain C string constant, not something main.cpp's GIO_EXTRA_MODULES env
+  # var (which only *adds* a search directory) can override or suppress.
+  # At startup GIO scans both directories unconditionally, finds Homebrew's
+  # own glib-networking module in its default dir, and loads it - pulling
+  # in the *system* libgio-2.0.0.dylib as that module's own dependency
+  # alongside the bundled one. Two copies of glib's GObject type registry
+  # in one process causes exactly the "signal invalid for this instance
+  # type" / "no property named" GLib-GObject errors, silently breaking
+  # anything that goes through the GIO-based TLS backend (eg. HTTPS
+  # streaming via souphttpsrc) despite no visible error.
+  #
+  # Neutralise it the way other GTK-on-macOS bundlers handle this: patch
+  # that one compiled-in path string in place to something that resolves
+  # to no modules at all, so the mandatory default-directory scan just
+  # finds nothing there.
+  path = os.path.join(frameworks_dir, 'libgio-2.0.0.dylib')
+  if not os.path.exists(path):
+    return
+
+  with open(path, 'rb') as f:
+    data = bytearray(f.read())
+
+  replacement = b'/dev/null\x00'
+  patched = False
+  for prefix in HOMEBREW_PREFIXES:
+    target = ('%s/lib/gio/modules' % prefix).encode('utf-8') + b'\x00'
+    idx = data.find(target)
+    if idx == -1:
+      continue
+    if len(replacement) > len(target):
+      LOGGER.warning(
+          "Can't patch GIO module dir in '%s': replacement string longer "
+          'than target (%d > %d)', path, len(replacement), len(target))
+      continue
+    padded = replacement + b'\x00' * (len(target) - len(replacement))
+    data[idx:idx + len(target)] = padded
+    patched = True
+    LOGGER.info("Patched default GIO module dir in '%s' (was '%s')", path,
+               target.decode('utf-8').rstrip('\x00'))
+
+  if not patched:
+    LOGGER.warning(
+        "Could not find a Homebrew GIO module dir string to patch in '%s' "
+        '(searched prefixes: %s) - if HTTPS streaming misbehaves with '
+        'GLib-GObject warnings about GVolumeMonitor/GLocalFileMonitor, '
+        "this is why.", path, HOMEBREW_PREFIXES)
+    return
+
+  with open(path, 'wb') as f:
+    f.write(data)
+
+  # Binary-patching the file's contents invalidates any existing code
+  # signature; re-sign ad-hoc so it still loads.
+  subprocess.check_call(['codesign', '--force', '-s', '-', path])
+
+
 def main():
   logging.basicConfig(
       filename='macdeploy.log',
@@ -594,6 +707,14 @@ def main():
 
   FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
   FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
+
+  # libgstsoup.dylib doesn't declare libsoup as a normal LC_LOAD_DYLIB
+  # dependency - it dlopen()s "libsoup-3.0.0.dylib"/"libsoup-2.4.1.dylib" by
+  # bare filename at runtime, to pick whichever libsoup major version is
+  # available. That means GetBrokenLibraries() never sees it while walking
+  # libgstsoup's declared dependencies, so it has to be bundled explicitly
+  # here rather than being picked up automatically like everything else.
+  FixLibrary('libsoup-3.0.0.dylib')
 
   try:
     FixPlugin('clementine-spotifyblob', '.')
@@ -615,6 +736,11 @@ def main():
   for command in commands:
     p = subprocess.Popen(command)
     os.waitpid(p.pid, 0)
+
+  # Must run after the commands above: it needs libgio-2.0.0.dylib to
+  # already be sitting in frameworks_dir, which happens via a queued `cp`
+  # command like everything else copied here.
+  PatchGioModuleDefaultDir(bundle_dir)
 
 
 if __name__ == "__main__":

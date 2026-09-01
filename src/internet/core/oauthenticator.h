@@ -23,6 +23,7 @@
 
 #include <QDateTime>
 #include <QObject>
+#include <QUrlQuery>
 
 #include "core/network.h"
 
@@ -48,8 +49,13 @@ class OAuthenticator : public QObject {
 
   OAuthenticator(const QString& client_id, const QString& client_secret,
                  RedirectStyle redirect, QObject* parent = nullptr);
+  // |extra_params| lets callers add extra query items to the authorisation
+  // URL beyond the standard OAuth ones (eg. Google's Picker "One Pick" flow
+  // for desktop apps needs prompt=consent&trigger_onepick=true - see
+  // https://developers.google.com/workspace/drive/picker/guides/desktop-mobile-picker).
   void StartAuthorisation(const QString& oauth_endpoint,
-                          const QString& token_endpoint, const QString& scope);
+                          const QString& token_endpoint, const QString& scope,
+                          const QUrlQuery& extra_params = QUrlQuery());
   void RefreshAuthorisation(const QString& token_endpoint,
                             const QString& refresh_token);
 
@@ -60,6 +66,11 @@ class OAuthenticator : public QObject {
   const QString& refresh_token() const { return refresh_token_; }
 
   const QDateTime& expiry_time() const { return expiry_time_; }
+
+  // Extra data some services (eg. Google's Picker "One Pick" flow) return
+  // alongside the authorisation code on the same redirect. Empty unless the
+  // caller asked for it via |extra_params| and the service supports it.
+  const QString& picked_file_ids() const { return picked_file_ids_; }
 
  signals:
   void Finished();
@@ -82,6 +93,7 @@ class OAuthenticator : public QObject {
   QString access_token_;
   QString refresh_token_;
   QDateTime expiry_time_;
+  QString picked_file_ids_;
 
   const QString client_id_;
   const QString client_secret_;

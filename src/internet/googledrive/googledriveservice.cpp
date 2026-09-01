@@ -31,6 +31,7 @@
 #include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
+#include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
@@ -50,6 +51,20 @@ namespace {
 
 static const char* kDriveEditFileUrl = "https://docs.google.com/file/d/%1/edit";
 static const char* kServiceId = "google_drive";
+
+// Bumped whenever the requested OAuth scope changes in a way that requires
+// existing users to reconnect (see MigrateLegacyCredentials). Version 2
+// switched from the broad "drive.readonly" scope to "drive.file", which
+// only grants access to items picked via the Google Picker.
+static const int kScopeVersion = 2;
+
+// Mime types the picker's file view is restricted to. Keep in sync with
+// CloudFileService::IsSupportedMimeType.
+QStringList PickableMimeTypes() {
+  return QStringList() << "audio/ogg" << "audio/mpeg" << "audio/mp4"
+                       << "audio/flac" << "audio/x-flac" << "application/ogg"
+                       << "application/x-flac" << "audio/x-ms-wma";
+}
 }  // namespace
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
@@ -57,10 +72,15 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
                        IconLoader::Load("googledrive", IconLoader::Provider),
                        SettingsDialog::Page_GoogleDrive),
       client_(new google_drive::Client(this)),
+      connect_in_progress_(false),
+      scan_in_progress_(false),
       open_in_drive_action_(nullptr),
       update_action_(nullptr),
       full_rescan_action_(nullptr) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
+
+  MigrateLegacyCredentials();
+  LoadPickedItems();
 }
 
 bool GoogleDriveService::has_credentials() const {
@@ -74,7 +94,94 @@ QString GoogleDriveService::refresh_token() const {
   return s.value("refresh_token").toString();
 }
 
+void GoogleDriveService::MigrateLegacyCredentials() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  if (!s.value("refresh_token").toString().isEmpty() &&
+      s.value("scope_version").toInt() < kScopeVersion) {
+    qLog(Info) << "Google Drive was linked with the old full-Drive access "
+                 "scope; clearing stored credentials so the user can "
+                 "reconnect using the new file picker.";
+    s.remove("refresh_token");
+    s.remove("user_email");
+    s.remove("cursor");
+  }
+}
+
+void GoogleDriveService::LoadPickedItems() {
+  picked_items_.clear();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  const int count = s.beginReadArray("picked_items");
+  for (int i = 0; i < count; ++i) {
+    s.setArrayIndex(i);
+    PickedItem item;
+    item.id = s.value("id").toString();
+    item.title = s.value("title").toString();
+    item.resource_key = s.value("resource_key").toString();
+    picked_items_ << item;
+  }
+  s.endArray();
+}
+
+void GoogleDriveService::SavePickedItems() const {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.beginWriteArray("picked_items", picked_items_.size());
+  for (int i = 0; i < picked_items_.size(); ++i) {
+    s.setArrayIndex(i);
+    s.setValue("id", picked_items_[i].id);
+    s.setValue("title", picked_items_[i].title);
+    s.setValue("resource_key", picked_items_[i].resource_key);
+  }
+  s.endArray();
+}
+
+void GoogleDriveService::AddPickedItem(const QString& id, const QString& title,
+                                       const QString& resource_key) {
+  for (const PickedItem& item : picked_items_) {
+    if (item.id == id) {
+      // Already tracking this file (eg. the user re-picked it, or this is
+      // a full rescan re-adding it).
+      return;
+    }
+  }
+
+  PickedItem item;
+  item.id = id;
+  item.title = title;
+  item.resource_key = resource_key;
+  picked_items_ << item;
+
+  SavePickedItems();
+  emit PickedItemsChanged();
+}
+
 void GoogleDriveService::Connect() {
+  if (refresh_token().isEmpty()) {
+    // Nothing to silently reconnect with - drive.file access can only ever
+    // be granted via the combined OAuth+Picker flow in AddFiles(), so
+    // there's no "just log in" step to fall back to here. Callers that
+    // need to block until connected (EnsureConnected()) check for this
+    // themselves rather than waiting on a signal that would never come.
+    qLog(Debug) << "Google Drive: no stored credentials to reconnect with";
+    return;
+  }
+  if (connect_in_progress_) {
+    // Already connecting - EnsureConnected()'s nested event loop can let
+    // this get called again reentrantly while that's still in flight. The
+    // waiters - including any nested EnsureConnected() event loop - all get
+    // unblocked by the in-flight call's own Authenticated() signal, so
+    // there's nothing more to do here.
+    qLog(Debug) << "Google Drive Connect() already in progress, ignoring";
+    return;
+  }
+  connect_in_progress_ = true;
+
   google_drive::ConnectResponse* response = client_->Connect(refresh_token());
   NewClosure(response, SIGNAL(Finished()), this,
              SLOT(ConnectFinished(google_drive::ConnectResponse*)), response);
@@ -88,23 +195,119 @@ void GoogleDriveService::ForgetCredentials() {
 
   s.remove("refresh_token");
   s.remove("user_email");
+  s.remove("scope_version");
+  s.remove("cursor");
+  s.remove("picked_items");
+
+  picked_items_.clear();
+  emit PickedItemsChanged();
+}
+
+void GoogleDriveService::AddFiles() {
+  google_drive::ConnectResponse* response =
+      client_->AuthorizeAndPick(PickableMimeTypes());
+  NewClosure(response, SIGNAL(Finished()), this,
+             SLOT(AuthorizeAndPickFinished(google_drive::ConnectResponse*)),
+             response);
+}
+
+void GoogleDriveService::AuthorizeAndPickFinished(
+    google_drive::ConnectResponse* response) {
+  response->deleteLater();
+
+  qLog(Debug) << "AuthorizeAndPick finished: picked ids ="
+             << response->picked_file_ids();
+
+  // Save the refresh token, same as a plain ConnectFinished() would.
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("refresh_token", response->refresh_token());
+  s.setValue("scope_version", kScopeVersion);
+  if (!response->user_email().isEmpty()) {
+    s.setValue("user_email", response->user_email());
+  }
+
+  emit Connected();
+
+  // The redirect only gives us ids - fetch each one's metadata (see
+  // AddPickedItemFinished).
+  for (const QString& id : response->picked_file_ids()) {
+    google_drive::GetFileResponse* file_response = client_->GetFile(id);
+    NewClosure(
+        file_response, SIGNAL(Finished()), this,
+        SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
+        file_response);
+  }
+
+  // Also check for any changes since we last synced.
+  CheckForUpdates();
+}
+
+void GoogleDriveService::AddPickedItemFinished(
+    google_drive::GetFileResponse* response) {
+  response->deleteLater();
+
+  qLog(Debug) << "GetFile finished for picked item" << response->file_id()
+             << ": had_error =" << response->had_error()
+             << ", title =" << response->file().title()
+             << ", mime type =" << response->file().mime_type();
+
+  if (response->had_error()) {
+    return;
+  }
+
+  // No resource key here: this is only ever reached for items the current
+  // AuthorizeAndPick redirect (or a rescan of an already-tracked item, in
+  // which case AddPickedItem() below is a no-op since it's already tracked
+  // - see DoFullRescan()) returned, and that flow doesn't hand one back.
+  AddPickedItem(response->file_id(), response->file().title(), QString());
+  FilesFound(google_drive::FileList() << response->file());
+}
+
+void GoogleDriveService::RemoveItem(const QString& id) {
+  for (int i = 0; i < picked_items_.size(); ++i) {
+    if (picked_items_[i].id == id) {
+      picked_items_.removeAt(i);
+      break;
+    }
+  }
+
+  SavePickedItems();
+  emit PickedItemsChanged();
+
+  // Simplest correct way to make sure the library no longer contains
+  // anything from the removed file: reindex everything that's still picked
+  // from scratch.
+  DoFullRescan();
 }
 
 void GoogleDriveService::ListChanges(const QString& cursor) {
+  if (scan_in_progress_) {
+    qLog(Debug) << "Google Drive scan already in progress, ignoring";
+    return;
+  }
+  scan_in_progress_ = true;
+
+  const int task_id =
+      task_manager_->StartTask(tr("Checking Google Drive for changes..."));
+
   google_drive::ListChangesResponse* changes_response =
       client_->ListChanges(cursor);
   connect(changes_response, SIGNAL(FilesFound(QList<google_drive::File>)),
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(changes_response, SIGNAL(Finished()), this,
-             SLOT(ListChangesFinished(google_drive::ListChangesResponse*)),
-             changes_response);
+  NewClosure(
+      changes_response, SIGNAL(Finished()), this,
+      SLOT(ListChangesFinished(google_drive::ListChangesResponse*, int)),
+      changes_response, task_id);
 }
 
 void GoogleDriveService::ListChangesFinished(
-    google_drive::ListChangesResponse* changes_response) {
+    google_drive::ListChangesResponse* changes_response, int task_id) {
   changes_response->deleteLater();
+  task_manager_->SetTaskFinished(task_id);
+  scan_in_progress_ = false;
 
   const QString cursor = changes_response->next_cursor();
   if (is_indexing()) {
@@ -126,11 +329,13 @@ void GoogleDriveService::SaveCursor(const QString& cursor) {
 void GoogleDriveService::ConnectFinished(
     google_drive::ConnectResponse* response) {
   response->deleteLater();
+  connect_in_progress_ = false;
 
   // Save the refresh token
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("refresh_token", response->refresh_token());
+  s.setValue("scope_version", kScopeVersion);
 
   if (!response->user_email().isEmpty()) {
     // We only fetch the user's email address the first time we authenticate.
@@ -147,6 +352,13 @@ void GoogleDriveService::EnsureConnected() {
   if (client_->is_authenticated()) {
     return;
   }
+  if (refresh_token().isEmpty()) {
+    // Nothing Connect() can do here (see its own early-return) - avoid
+    // blocking forever below waiting for an Authenticated() that will never
+    // come.
+    qLog(Warning) << "Google Drive: cannot ensure connection, not linked yet";
+    return;
+  }
 
   QEventLoop loop;
   connect(client_, SIGNAL(Authenticated()), &loop, SLOT(quit()));
@@ -155,7 +367,12 @@ void GoogleDriveService::EnsureConnected() {
 }
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
+  qLog(Debug) << "FilesFound:" << files.size() << "file(s)";
+
   for (const google_drive::File& file : files) {
+    qLog(Debug) << "  " << file.id() << file.title() << file.mime_type()
+               << "supported =" << IsSupportedMimeType(file.mime_type());
+
     if (!IsSupportedMimeType(file.mime_type())) {
       continue;
     }
@@ -268,6 +485,20 @@ void GoogleDriveService::DoFullRescan() {
 
   library_backend_->DeleteAll();
 
+  // The Changes API only reports changes going forward from a cursor, so it
+  // can't backfill a picked item's existing content - re-fetch everything
+  // we currently know about directly instead.
+  for (const PickedItem& item : picked_items_) {
+    google_drive::GetFileResponse* response =
+        client_->GetFile(item.id, item.resource_key);
+    NewClosure(
+        response, SIGNAL(Finished()), this,
+        SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
+        response);
+  }
+
+  // Establish a fresh cursor so future CheckForUpdates() calls only look at
+  // changes from this point on.
   ListChanges(QString());
 }
 
