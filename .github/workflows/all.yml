@@ -658,11 +658,109 @@ jobs:
       - name: Smoke test - local playback
         working-directory: dist/windows
         run: ./clementine.exe --play-and-exit 30 ../../tests/data/beep.mp3
+      # ----------------------------------------------------------------
+      # TEMPORARY: diagnosing the Windows HTTPS smoke test failure.
+      # souphttpsrc fails having posted no error of its own - all we get is
+      # gstbasesrc's generic "Internal data stream error" - so there is
+      # nothing to work from. These controls establish which layer is
+      # actually broken before the smoke test runs, and the smoke test then
+      # runs with full GStreamer/libsoup/GnuTLS logging. The same fetch
+      # succeeds on macOS, so this is Windows-specific. Remove this block
+      # once the cause is found and fixed.
+      # ----------------------------------------------------------------
+      - name: Diagnose HTTPS - layer isolation controls
+        working-directory: dist/windows
+        continue-on-error: true
+        env:
+          URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+        run: |
+          echo "===== 1. OS level: can the runner reach the host over TLS? ====="
+          # Separates "this machine can't talk to github" from anything to do
+          # with GStreamer or our packaging.
+          curl -v --max-time 60 -o /dev/null "$URL" || echo ">>> curl FAILED"
+
+          echo "===== 2. System GStreamer (NOT our bundle) over HTTPS ====="
+          # If this fails too then HTTPS is broken in this GStreamer build or
+          # on this runner generally, and packaging isn't the culprit.
+          GST_DEBUG=souphttpsrc:6 timeout 90 gst-launch-1.0 \
+            souphttpsrc location="$URL" ! fakesink \
+            || echo ">>> system gst-launch FAILED"
+
+          echo "===== 3. Bundled plugins over HTTPS ====="
+          # The same fetch forced through the DLLs we actually ship. If 2
+          # passes and this fails, it's our bundle.
+          GST_PLUGIN_PATH="$PWD/gstreamer-plugins" \
+          GST_PLUGIN_SYSTEM_PATH="$PWD/gstreamer-plugins" \
+          GIO_EXTRA_MODULES="$PWD/gio-modules" \
+          GST_DEBUG=souphttpsrc:6 timeout 90 gst-launch-1.0 \
+            souphttpsrc location="$URL" ! fakesink \
+            || echo ">>> bundled gst-launch FAILED"
+
+          echo "===== 4. Does the bundled soup plugin load at all? ====="
+          GST_PLUGIN_PATH="$PWD/gstreamer-plugins" \
+          GST_PLUGIN_SYSTEM_PATH="$PWD/gstreamer-plugins" \
+            gst-inspect-1.0 souphttpsrc \
+            || echo ">>> bundled souphttpsrc inspect FAILED"
+
+          echo "===== 5. GIO TLS modules, bundled vs system ====="
+          # The runner has MSYS2 installed, so GLib can find a TLS backend at
+          # its compiled-in path even when ours is missing - which is exactly
+          # why a broken bundle can still look fine here.
+          ls -la gio-modules/ || true
+          ls -la /mingw64/lib/gio/modules/ || true
+
+          echo "===== 6. Is the bundle self-sufficient? (MSYS2 hidden) ====="
+          # Windows has no DYLD_PRINT_LIBRARIES, so rather than trace every
+          # load, remove the thing that makes tracing interesting: run with
+          # /mingw64/bin off PATH, leaving only the DLLs we ship next to the
+          # exe. That's the environment a real user's installer produces. If
+          # HTTPS works with MSYS2 on PATH and breaks without it, something
+          # in the HTTPS path is being satisfied by the runner's MSYS2 tree
+          # and is missing from the bundle.
+          /usr/bin/timeout 90 /usr/bin/env PATH="/c/Windows/system32:/c/Windows" \
+            ./clementine.exe --play-and-exit 30 "$URL"
+          echo ">>> bundle-only HTTPS exit code: $?"
+
       - name: Smoke test - HTTPS playback
         working-directory: dist/windows
+        env:
+          # Maximum detail from everything on the HTTPS path, over a low
+          # global baseline so the extra logging doesn't slow startup enough
+          # to skew the 30s budget. Goes to a file rather than stdout since
+          # it's large - the steps below filter and upload it.
+          GST_DEBUG: "*:3,souphttpsrc:9,souploader:9,soup*:9,basesrc:6,typefindfunctions:5,decodebin:4,uridecodebin:4,GST_BUS:4,GST_PLUGIN_LOADING:6,GST_REGISTRY:4"
+          GST_DEBUG_FILE: gst-https.log
+          GST_DEBUG_NO_COLOR: "1"
+          SOUP_DEBUG: "3"
+          GNUTLS_DEBUG_LEVEL: "9"
+          G_MESSAGES_DEBUG: all
         run: >
           ./clementine.exe --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
+      - name: Diagnose HTTPS - dump debug log
+        # always(), so this still runs on the failure it exists to explain.
+        if: always()
+        working-directory: dist/windows
+        run: |
+          if [ ! -f gst-https.log ]; then
+            echo "no gst-https.log was produced"
+            exit 0
+          fi
+          echo "---- size ----"
+          wc -c gst-https.log
+          echo "---- soup / TLS / connection lines ----"
+          grep -inE "soup|tls|ssl|cert|gnutls|proxy|resolv|connect|refus|handshake|error" \
+            gst-https.log | head -500 || true
+          echo "---- last 300 lines ----"
+          tail -300 gst-https.log
+
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: windows_https_debug
+          path: dist/windows/gst-https.log
+          if-no-files-found: warn
 
       - name: Build Windows installer
         # makensis was installed via choco onto the Windows-wide PATH, not
