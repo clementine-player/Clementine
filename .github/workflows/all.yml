@@ -408,6 +408,27 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
+      # See the fedora 42 job for why this installs and runs the .rpm, and
+      # why it uses beep.ogg rather than beep.mp3.
+      - name: Install built package
+        run: dnf install --assumeyes ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.ogg
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_43
@@ -489,6 +510,27 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
+      # See the fedora 42 job for why this installs and runs the .rpm, and
+      # why it uses beep.ogg rather than beep.mp3.
+      - name: Install built package
+        run: dnf install --assumeyes ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.ogg
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_44
@@ -865,6 +907,28 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
+      # See the bookworm job for why this installs and runs the .deb rather
+      # than the build tree, and what the headless setup is for.
+      - name: Install built package
+        working-directory: bin
+        run: apt-get install -y ./clementine_*.deb
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_trixie_64
@@ -940,6 +1004,28 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
+      # See the bookworm job for why this installs and runs the .deb rather
+      # than the build tree, and what the headless setup is for.
+      - name: Install built package
+        working-directory: bin
+        run: apt-get install -y ./clementine_*.deb
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_jammy_64
@@ -1015,6 +1101,28 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
+      # See the bookworm job for why this installs and runs the .deb rather
+      # than the build tree, and what the headless setup is for.
+      - name: Install built package
+        working-directory: bin
+        run: apt-get install -y ./clementine_*.deb
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_noble_64
@@ -1090,6 +1198,28 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
+      # See the bookworm job for why this installs and runs the .deb rather
+      # than the build tree, and what the headless setup is for.
+      - name: Install built package
+        working-directory: bin
+        run: apt-get install -y ./clementine_*.deb
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_resolute_64
