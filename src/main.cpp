@@ -302,6 +302,18 @@ int RunPlayAndExit(Application* app, const CommandlineOptions& options) {
                      loop.quit();
                    });
 
+  // Failures before playback ever starts - an unreachable URL, a missing TLS
+  // backend, an unparseable stream - surface as PlaylistManager::Error rather
+  // than PlayerInterface::Error, which only ever fires once the engine is
+  // running. Without this the harness sat out its whole timeout and reported a
+  // misleading "timed out" for what was really an immediate load error.
+  QObject::connect(app->playlist_manager(), &PlaylistManagerInterface::Error,
+                   [&](const QString& message) {
+                     qLog(Error) << "Load error:" << message;
+                     result = 1;
+                     loop.quit();
+                   });
+
   app->playlist_manager()->InsertUrls(app->playlist_manager()->current_id(),
                                       options.urls(), -1,
                                       /*play_now=*/true, /*enqueue=*/false);
@@ -458,6 +470,17 @@ int main(int argc, char* argv[]) {
 
   SetGstreamerEnvironment();
 
+// Registers the GIO modules bundled next to the exe - on Windows that's
+// glib-networking's TLS backend, which libsoup needs before it can negotiate
+// HTTPS at all. This has to happen before the --play-and-exit early return
+// below: without it souphttpsrc fails immediately on https:// URLs, so the
+// smoke test broke while the real app - which reaches this either way - was
+// fine. macOS gets the same modules via GIO_EXTRA_MODULES in
+// SetGstreamerEnvironment() above, which is why it was never affected.
+#ifdef HAVE_GIO
+  ScanGIOModulePath();
+#endif
+
 // Set the permissions on the config file on Unix - it can contain passwords
 // for internet services so it's important that other users can't read it.
 // On Windows these are stored in the registry instead.
@@ -549,9 +572,6 @@ int main(int argc, char* argv[]) {
 #ifdef Q_OS_DARWIN
   mac::EnableFullScreen(w);
 #endif  // Q_OS_DARWIN
-#ifdef HAVE_GIO
-  ScanGIOModulePath();
-#endif
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

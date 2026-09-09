@@ -432,7 +432,13 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   // Wait until loading is finished
   loop.exec();
-  return Success;
+
+  // success_ is what StopTypefindAsync() recorded for how the pipeline
+  // actually ended. Returning Success unconditionally here hid every remote
+  // failure - a load that errored out leaves songs_ empty, so the caller
+  // inserted nothing and never learned why. Report it so SongLoaderInserter
+  // emits Error() and the message reaches the UI (and --play-and-exit).
+  return success_ ? Success : Error;
 }
 
 void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
