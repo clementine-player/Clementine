@@ -186,9 +186,13 @@ void SetGstreamerEnvironment() {
 // souphttpsrc with "TLS support is not available" - internet radio and
 // podcasts included. A dev machine hides this, because there GLib resolves to
 // a real MSYS2/Homebrew module directory that does have the backend.
-// ScanGIOModulePath() below is not an alternative: directories registered
-// with g_io_modules_scan_all_in_directory() aren't consulted by
-// g_tls_backend_get_default().
+//
+// This has to stay the only way the bundled modules get registered. Pointing
+// g_io_modules_scan_all_in_directory() at the same directory as well makes
+// GLib build a second GIOModule per file, and the duplicate type registration
+// then fails outright - "Two different plugins tried to register
+// 'GTlsBackendGnutls'" - leaving no usable backend, exactly as if the modules
+// were missing.
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
   SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
                                   USE_BUNDLE_DIR + "/gio-modules");
@@ -337,29 +341,6 @@ int RunPlayAndExit(Application* app, const CommandlineOptions& options) {
 
 }  // namespace
 
-#ifdef HAVE_GIO
-#undef signals  // Clashes with GIO, and not needed in this file
-#include <gio/gio.h>
-
-namespace {
-
-void ScanGIOModulePath() {
-  QString gio_module_path;
-
-#if defined(Q_OS_WIN32)
-  gio_module_path = QCoreApplication::applicationDirPath() + "/gio-modules";
-#endif
-
-  if (!gio_module_path.isEmpty()) {
-    qLog(Debug) << "Adding GIO module path:" << gio_module_path;
-    QByteArray bytes = gio_module_path.toLocal8Bit();
-    g_io_modules_scan_all_in_directory(bytes.data());
-  }
-}
-
-}  // namespace
-#endif  // HAVE_GIO
-
 int main(int argc, char* argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -482,17 +463,6 @@ int main(int argc, char* argv[]) {
 #endif
 
   SetGstreamerEnvironment();
-
-// Registers the GIO modules bundled next to the exe - on Windows that's
-// glib-networking's TLS backend, which libsoup needs before it can negotiate
-// HTTPS at all. This has to happen before the --play-and-exit early return
-// below: without it souphttpsrc fails immediately on https:// URLs, so the
-// smoke test broke while the real app - which reaches this either way - was
-// fine. macOS gets the same modules via GIO_EXTRA_MODULES in
-// SetGstreamerEnvironment() above, which is why it was never affected.
-#ifdef HAVE_GIO
-  ScanGIOModulePath();
-#endif
 
 // Set the permissions on the config file on Unix - it can contain passwords
 // for internet services so it's important that other users can't read it.
