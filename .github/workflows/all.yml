@@ -303,6 +303,30 @@ jobs:
       - name: Build RPM
         working-directory: bin
         run: rpmbuild -ba ../dist/clementine.spec
+
+      # See the equivalent steps in the debian jobs. beep.ogg rather than
+      # beep.mp3 here because dist/clementine.spec.in explicitly Requires a
+      # vorbis decoder, whereas nothing in it guarantees an mp3 one - testing
+      # mp3 would be testing a dependency the package never claimed.
+      - name: Install built package
+        run: dnf install --assumeyes ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.ogg
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_fedora_42
@@ -741,6 +765,37 @@ jobs:
       - name: make
         working-directory: bin
         run : make -j2 deb
+
+      # Same rationale as the windows/mac smoke tests further up: run the
+      # actual packaged artifact rather than the build tree. Installing the
+      # .deb with apt resolves the Depends in debian/control for real, so a
+      # runtime dependency that's declared wrong fails here instead of
+      # reaching users - the linux equivalent of the missing-DLL class of bug
+      # the windows smoke test was added for.
+      - name: Install built package
+        working-directory: bin
+        run: apt-get install -y ./clementine_*.deb
+
+      # The container has neither an X server nor a sound card. offscreen
+      # gives Qt a platform plugin, and a null ALSA default gives
+      # autoaudiosink a device it can actually open, so the real sink
+      # selection path still runs rather than being stubbed out.
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: release_bookworm_64
