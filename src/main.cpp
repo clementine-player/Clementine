@@ -179,9 +179,22 @@ void SetGstreamerEnvironment() {
     SetEnv("GST_REGISTRY", registry_filename);
   }
 
+// GLib resolves its GIO module directory relative to wherever libgio itself
+// was loaded from. With a bundled copy sitting next to the exe that comes out
+// as <appdir>/../lib/gio/modules, which exists in neither bundle, so GLib
+// finds no TLS backend at all and every https:// stream fails inside
+// souphttpsrc with "TLS support is not available" - internet radio and
+// podcasts included. A dev machine hides this, because there GLib resolves to
+// a real MSYS2/Homebrew module directory that does have the backend.
+// ScanGIOModulePath() below is not an alternative: directories registered
+// with g_io_modules_scan_all_in_directory() aren't consulted by
+// g_tls_backend_get_default().
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
   SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
                                   USE_BUNDLE_DIR + "/gio-modules");
+#elif defined(Q_OS_WIN32)
+  SetEnv("GIO_EXTRA_MODULES",
+         QCoreApplication::applicationDirPath() + "/gio-modules");
 #endif
 
   SetEnv("PULSE_PROP_media.role", "music");
