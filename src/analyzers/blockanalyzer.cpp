@@ -512,7 +512,10 @@ void BlockAnalyzer::paletteChange(const QPalette&) {
     int h, s, v;
 
     bg.darker(150).getHsv(&h, &s, &v);
-    fg = QColor::fromHsv(h + 120, s, v);
+    // Wrap rather than just adding: hue is only valid up to 359, so any
+    // background hue of 240 or more (a blue-grey window, as in the dark
+    // theme) would otherwise produce an invalid colour and a runtime warning.
+    fg = QColor::fromHsv((h + 120) % 360, s, v);
 
     const float r = 1.f * bgdark.red();
     const float g = 1.f * bgdark.green();

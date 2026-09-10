@@ -134,8 +134,9 @@ void DidYouMean::paintEvent(QPaintEvent*) {
   QColor bg(palette().color(QPalette::Inactive, QPalette::ToolTipBase));
   p.fillRect(0, 0, width() - 1, height() - 1, bg);
 
-  // Border
-  p.setPen(Qt::black);
+  // Border. Taken from the palette rather than hardcoded black so it stays
+  // visible against a dark tooltip background.
+  p.setPen(palette().color(QPalette::Inactive, QPalette::ToolTipText));
   p.drawRect(0, 0, width() - 1, height() - 1);
 
   // Text rectangle

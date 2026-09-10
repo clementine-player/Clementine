@@ -18,6 +18,7 @@
 #ifndef APPEARANCESETTINGSPAGE_H
 #define APPEARANCESETTINGSPAGE_H
 
+#include "core/appearance.h"
 #include "playlist/playlistview.h"
 #include "settingspage.h"
 
@@ -40,6 +41,7 @@ class AppearanceSettingsPage : public SettingsPage {
   void SelectForegroundColor();
   void SelectBackgroundColor();
   void UseCustomColorSetOptionChanged(bool);
+  void ThemeModeChanged(int);
   void SelectBackgroundImage();
   void BlurLevelChanged(int);
   void OpacityLevelChanged(int);
@@ -59,6 +61,7 @@ class AppearanceSettingsPage : public SettingsPage {
 
   Ui_AppearanceSettingsPage* ui_;
   bool original_use_a_custom_color_set_;
+  Appearance::ThemeMode original_theme_mode_;
   QColor original_foreground_color_;
   QColor original_background_color_;
   QColor current_foreground_color_;

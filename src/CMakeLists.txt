@@ -440,6 +440,7 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
+  core/appearance.h
   core/application.h
   core/backgroundstreams.h
   core/crashreporting.h

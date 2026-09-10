@@ -51,6 +51,7 @@
 #include <QtDebug>
 
 #include "config.h"
+#include "core/appearance.h"
 #include "core/application.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
@@ -525,6 +526,16 @@ int main(int argc, char* argv[]) {
   Application app;
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
+
+  // Apply the theme before any widgets exist. Qt bakes the palette into
+  // stylesheet-styled widgets when it polishes them, and a widget that isn't
+  // in the main window's hierarchy never gets re-polished when the application
+  // palette changes later - the library and icecast filter boxes are built as
+  // top-level widgets, so doing this after they were constructed left them
+  // with black-on-dark text. The system palette has to be recorded first,
+  // while it's still what Qt handed us, so Appearance can go back to it.
+  const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
+  app.appearance()->LoadUserTheme();
 
   if (options.play_and_exit_timeout_secs() > 0) {
     return RunPlayAndExit(&app, options);

@@ -943,12 +943,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
     ui_->action_console->setVisible(false);
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
-  // Load theme
-  // This is tricky: we need to save the default/system palette now, before
-  // loading user preferred theme (which will override it), to be able to
-  // restore it later
-  const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
-  app_->appearance()->LoadUserTheme();
+  // The theme is applied in main(), before any widgets are constructed - see
+  // the comment there for why it can't wait until here.
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
@@ -1307,7 +1303,16 @@ void MainWindow::SaveSettings(QSettings* settings) {
   settings->endGroup();
 }
 
-void MainWindow::changeEvent(QEvent*) {
+void MainWindow::changeEvent(QEvent* e) {
+  if (e && e->type() == QEvent::PaletteChange) {
+    // The sidebar paints itself from a base colour derived from the palette
+    // rather than going through the style, and StyleHelper caches that colour,
+    // so it has to be recomputed whenever the palette changes. Without this,
+    // switching theme leaves the sidebar drawn in the old theme's colour until
+    // the next restart. Kept in sync with the initial call in the constructor.
+    StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
+    ui_->tabs->update();
+  }
   dirty_geometry_ = true;
   app_->DirtySettings();
 }

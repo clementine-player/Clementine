@@ -21,6 +21,49 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_theme">
+        <item>
+         <widget class="QLabel" name="theme_label">
+          <property name="text">
+           <string>Theme:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="theme_mode">
+          <item>
+           <property name="text">
+            <string>Follow system</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Light</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dark</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="theme_spacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QRadioButton" name="use_system_color_set">
         <property name="text">
          <string>Use the system default color set</string>

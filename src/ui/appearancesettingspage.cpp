@@ -63,6 +63,8 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
           SLOT(SelectBackgroundColor()));
   connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)),
           SLOT(UseCustomColorSetOptionChanged(bool)));
+  connect(ui_->theme_mode, SIGNAL(currentIndexChanged(int)),
+          SLOT(ThemeModeChanged(int)));
 
   connect(ui_->select_background_image_filename_button, SIGNAL(pressed()),
           SLOT(SelectBackgroundImage()));
@@ -97,6 +99,10 @@ void AppearanceSettingsPage::Load() {
   // able to restore colors
   original_use_a_custom_color_set_ =
       s.value(Appearance::kUseCustomColorSet, false).toBool();
+
+  original_theme_mode_ = dialog()->appearance()->theme_mode();
+  // The combo's rows are in ThemeMode order, so the index is the enum value.
+  ui_->theme_mode->setCurrentIndex(original_theme_mode_);
 
   original_foreground_color_ =
       s.value(Appearance::kForegroundColor, p.color(QPalette::WindowText))
@@ -166,6 +172,7 @@ void AppearanceSettingsPage::Save() {
   s.beginGroup(Appearance::kSettingsGroup);
   bool use_a_custom_color_set = ui_->use_a_custom_color_set->isChecked();
   s.setValue(Appearance::kUseCustomColorSet, use_a_custom_color_set);
+  s.setValue(Appearance::kThemeMode, ui_->theme_mode->currentIndex());
   if (use_a_custom_color_set) {
     s.setValue(Appearance::kBackgroundColor, current_background_color_);
     s.setValue(Appearance::kForegroundColor, current_foreground_color_);
@@ -207,6 +214,9 @@ void AppearanceSettingsPage::Save() {
 }
 
 void AppearanceSettingsPage::Cancel() {
+  // Put the theme back first - it reapplies the base palette, which would
+  // otherwise overwrite the custom colours restored just below.
+  dialog()->appearance()->SetThemeMode(original_theme_mode_);
   if (original_use_a_custom_color_set_) {
     dialog()->appearance()->ChangeForegroundColor(original_foreground_color_);
     dialog()->appearance()->ChangeBackgroundColor(original_background_color_);
@@ -242,6 +252,12 @@ void AppearanceSettingsPage::UseCustomColorSetOptionChanged(bool checked) {
   } else {
     dialog()->appearance()->ResetToSystemDefaultTheme();
   }
+}
+
+void AppearanceSettingsPage::ThemeModeChanged(int index) {
+  // Applied but not saved, so the dialog's Cancel can still put it back.
+  dialog()->appearance()->SetThemeMode(
+      static_cast<Appearance::ThemeMode>(index));
 }
 
 void AppearanceSettingsPage::InitColorSelectorsColors() {
