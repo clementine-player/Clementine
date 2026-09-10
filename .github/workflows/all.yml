@@ -317,10 +317,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.ogg
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -419,10 +421,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.ogg
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -521,10 +525,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.ogg
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -722,9 +728,11 @@ jobs:
       # surfacing later as a user report. See --play-and-exit in
       # src/core/commandlineoptions.cpp/src/main.cpp.
       - name: Smoke test - local playback
+        timeout-minutes: 5
         working-directory: dist/windows
         run: ./clementine.exe --play-and-exit 30 ../../tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         working-directory: dist/windows
         run: >
           ./clementine.exe --play-and-exit 30
@@ -828,10 +836,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -919,10 +929,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -1016,10 +1028,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -1113,10 +1127,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -1210,10 +1226,12 @@ jobs:
             > /etc/asound.conf
 
       - name: Smoke test - local playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: clementine --play-and-exit 30 tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         env:
           QT_QPA_PLATFORM: offscreen
         run: >
@@ -1318,9 +1336,11 @@ jobs:
       # --play-and-exit in src/core/commandlineoptions.cpp/src/main.cpp.
       # Runs before notarization/upload so a broken build fails fast.
       - name: Smoke test - local playback
+        timeout-minutes: 5
         working-directory: bin
         run: ./clementine.app/Contents/MacOS/clementine --play-and-exit 30 ../tests/data/beep.mp3
       - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
         working-directory: bin
         run: >
           ./clementine.app/Contents/MacOS/clementine --play-and-exit 30
