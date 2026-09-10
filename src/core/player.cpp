@@ -36,6 +36,7 @@
 #include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/tagreaderclient.h"
 #include "core/urlhandler.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
@@ -75,7 +76,23 @@ Player::Player(Application* app, QObject* parent)
 
 Player::~Player() {}
 
+void Player::EngineInitialised() {
+  // Starting the tagreader pool forks a worker process per thread. Doing that
+  // while gstreamer is spawning gst-plugin-scanner lets a worker inherit the
+  // scanner's status pipe, which isn't close-on-exec; because the workers are
+  // long-lived the parent's read() on that pipe then never reaches EOF and
+  // gst_init() never returns. Waiting until gstreamer has finished means the
+  // two spawning phases can't overlap. Messages queue in WorkerPool until the
+  // workers connect, so nothing is lost by starting late.
+  app_->tag_reader_client()->Start();
+}
+
 void Player::Init() {
+  // Connect before Init() starts the asynchronous initialisation, otherwise a
+  // fast init could finish before we are listening and the tagreader workers
+  // would never be started at all.
+  connect(engine_.get(), SIGNAL(Initialised()), SLOT(EngineInitialised()));
+
   if (!engine_->Init()) qFatal("Error initialising audio engine");
 
   connect(engine_.get(), SIGNAL(StateChanged(Engine::State)),

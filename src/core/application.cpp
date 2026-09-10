@@ -85,7 +85,10 @@ class ApplicationImpl {
         tag_reader_client_([=]() {
           TagReaderClient* client = new TagReaderClient(app);
           app->MoveToNewThread(client);
-          client->Start();
+          // Deliberately not Start()ed here - that spawns the worker
+          // processes, and they must not be forked while gstreamer is
+          // spawning gst-plugin-scanner. Player::Init() starts them once
+          // gstreamer says it's done.
           return client;
         }),
         database_([=]() {

@@ -163,8 +163,33 @@ bool GstEngine::Init() {
   return true;
 }
 
+void GstEngine::EnsureInitialised() {
+  initialising_.waitForFinished();
+
+  // gst_init() aborts the process itself when it fails; gst_init_check() hands
+  // the failure back so the decision is ours. It's still fatal - there is no
+  // usable audio engine without gstreamer - but it's our message and our exit,
+  // and it happens somewhere we can reason about rather than inside a library.
+  if (!initialisation_error_.isEmpty()) {
+    qFatal("Error initialising audio engine: %s",
+           initialisation_error_.toLocal8Bit().constData());
+  }
+}
+
 void GstEngine::InitialiseGstreamer() {
-  gst_init(nullptr, nullptr);
+  GError* error = nullptr;
+  if (!gst_init_check(nullptr, nullptr, &error)) {
+    initialisation_error_ = error && error->message
+                                ? QString::fromUtf8(error->message)
+                                : QString("gst_init_check() failed");
+    if (error) g_error_free(error);
+    qLog(Error) << "gstreamer initialisation failed:" << initialisation_error_;
+    // Nothing below here is meaningful without an initialised gstreamer, but
+    // still fall through to the emit: it reports that the spawning phase is
+    // over, which the tagreader pool is waiting on either way.
+    emit Initialised();
+    return;
+  }
 
   gst_pb_utils_init();
 
@@ -217,6 +242,8 @@ void GstEngine::InitialiseGstreamer() {
 
     device_finders_.append(finder);
   }
+
+  emit Initialised();
 }
 
 void GstEngine::ReloadSettings() {

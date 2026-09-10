@@ -82,7 +82,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const char* kAutoSink;
 
   bool Init();
-  void EnsureInitialised() { initialising_.waitForFinished(); }
+  void EnsureInitialised();
   void InitialiseGstreamer();
 
   int AddBackgroundStream(const QUrl& url);
@@ -100,6 +100,13 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer* buffer, int pipeline_id);
+
+ signals:
+  // Emitted from the worker thread once InitialiseGstreamer() has finished,
+  // whether or not it succeeded. It means gstreamer is done spawning helper
+  // processes, which is what TagReaderClient waits for before starting its own
+  // - see Player::Init().
+  void Initialised();
 
  public slots:
   void StartPreloading(const MediaPlaybackRequest& req, bool force_stop_at_end,
@@ -199,6 +206,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int buffering_task_id_;
 
   QFuture<void> initialising_;
+  // Set by InitialiseGstreamer() on the worker thread when gst_init_check()
+  // fails; only read after initialising_ has finished, which orders the two.
+  QString initialisation_error_;
 
   QString sink_;
   QVariant device_;

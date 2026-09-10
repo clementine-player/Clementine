@@ -176,6 +176,7 @@ class Player : public PlayerInterface {
   void TogglePrettyOSD();
 
  private slots:
+  void EngineInitialised();
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
   void TrackAboutToEnd();
