@@ -43,6 +43,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSslSocket>
+#include <QSurfaceFormat>
 #include <QSysInfo>
 #include <QTextCodec>
 #include <QTimer>
@@ -422,6 +423,18 @@ int main(int argc, char* argv[]) {
 #endif
 
   IncreaseFDLimit();
+
+  // Qt builds the top-level window's backing store from the default surface
+  // format; left unset it picks the platform default, which on EGL is OpenGL
+  // ES, and a QOpenGLWidget is then never composited into the window. Setting
+  // the format on the widget alone isn't enough, and this must happen before
+  // QApplication exists. No alpha, or the desktop shows through.
+  QSurfaceFormat surface_format;
+  surface_format.setRenderableType(QSurfaceFormat::OpenGL);
+  surface_format.setVersion(3, 3);
+  surface_format.setProfile(QSurfaceFormat::CoreProfile);
+  surface_format.setAlphaBufferSize(0);
+  QSurfaceFormat::setDefaultFormat(surface_format);
 
   QtSingleApplication a(argc, argv);
 

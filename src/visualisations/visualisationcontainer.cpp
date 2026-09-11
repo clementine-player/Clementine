@@ -83,9 +83,6 @@ void VisualisationContainer::Init() {
   // Set up the graphics view
   setScene(vis_);
   QOpenGLWidget* gl_widget = new QOpenGLWidget();
-  QSurfaceFormat format;
-  format.setSamples(4);
-  gl_widget->setFormat(format);
   setViewport(gl_widget);
   setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -153,6 +150,11 @@ void VisualisationContainer::AddQualityMenuItem(const QString& name, int value,
   connect(action, &QAction::triggered, [this, value]() { SetQuality(value); });
 }
 
+uint32_t VisualisationContainer::CurrentFramebufferObject() const {
+  QOpenGLContext* context = QOpenGLContext::currentContext();
+  return context ? context->defaultFramebufferObject() : 0;
+}
+
 void VisualisationContainer::SetEngine(GstEngine* engine) {
   engine_ = engine;
 
@@ -171,8 +173,10 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
                            QMessageBox::Close);
       return;
     }
-    Init();
+    // Set before Init(): its setViewport() call re-enters showEvent(), and a
+    // second Init() would delete the viewport the first is still using.
     initialised_ = true;
+    Init();
   }
 
   QGraphicsView::showEvent(e);

@@ -17,10 +17,6 @@
 
 #include "projectmvisualisation.h"
 
-#include "config.h"
-#include "projectmpresetmodel.h"
-#include "visualisationcontainer.h"
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -31,6 +27,10 @@
 #include <QSettings>
 #include <QTimerEvent>
 #include <QtDebug>
+
+#include "config.h"
+#include "projectmpresetmodel.h"
+#include "visualisationcontainer.h"
 
 #ifdef Q_OS_MAC
 #include <OpenGL/gl.h>
@@ -147,7 +147,11 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
   }
 
   if (projectm_) {
-    projectm_opengl_render_frame(projectm_);
+    // A QOpenGLWidget doesn't draw to FBO 0, so plain
+    // projectm_opengl_render_frame() would composite somewhere never shown.
+    // Needs projectM >= 4.2.0.
+    projectm_opengl_render_frame_fbo(projectm_,
+                                     container_->CurrentFramebufferObject());
   }
 
   p->endNativePainting();
