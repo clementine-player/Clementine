@@ -1,10 +1,11 @@
 /**
  * @file types.h
- * @copyright 2003-2023 projectM Team
+ * @copyright 2003-2025 projectM Team
  * @brief Types and enumerations used in the other API headers.
+ * @since 4.0.0
  *
  * projectM -- Milkdrop-esque visualisation SDK
- * Copyright (C)2003-2023 projectM Team
+ * Copyright (C)2003-2024 projectM Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -40,6 +41,7 @@ typedef struct projectm* projectm_handle; //!< A pointer to the opaque projectM 
 
 /**
  * For specifying audio data format.
+ * @since 4.0.0
  */
 typedef enum
 {
@@ -49,6 +51,7 @@ typedef enum
 
 /**
  * Placeholder values that can be used to address channel indices in PCM data arrays.
+ * @since 4.0.0
  */
 typedef enum
 {
@@ -60,6 +63,7 @@ typedef enum
 
 /**
  * Waveform render types used in the touch start method.
+ * @since 4.0.0
  */
 typedef enum
 {
@@ -74,7 +78,21 @@ typedef enum
     PROJECTM_TOUCH_TYPE_DOUBLE_LINE      //!< Draws a double-line waveform.
 } projectm_touch_type;
 
+/**
+ * Log level constants for use with the logging API functions.
+ * @since 4.2.0
+ */
+typedef enum
+{
+    PROJECTM_LOG_LEVEL_NOTSET = 0, //!< No specific log level, use default (INFO).
+    PROJECTM_LOG_LEVEL_TRACE = 1,  //!< Verbose trace logging. Only enabled in debug builds by default.
+    PROJECTM_LOG_LEVEL_DEBUG = 2,  //!< Development-related debug logging. Only enabled in debug builds by default.
+    PROJECTM_LOG_LEVEL_INFO = 3,   //!< Informational messages.
+    PROJECTM_LOG_LEVEL_WARN = 4,   //!< Warnings about non-critical issues.
+    PROJECTM_LOG_LEVEL_ERROR = 5,  //!< Recoverable errors, e.g. shader compilation or I/O errors.
+    PROJECTM_LOG_LEVEL_FATAL = 6   //!< Irrecoverable errors preventing projectM from working.
+} projectm_log_level;
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
-

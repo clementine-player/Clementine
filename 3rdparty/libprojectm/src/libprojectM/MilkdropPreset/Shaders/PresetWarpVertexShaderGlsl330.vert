@@ -14,17 +14,18 @@ precision mediump float;
 #define invAspectY aspect.w
 
 layout(location = 0) in vec2 vertex_position;
-layout(location = 1) in vec2 rad_ang;
-layout(location = 2) in vec4 transforms;
-layout(location = 3) in vec2 warp_center;
-layout(location = 4) in vec2 warp_distance;
-layout(location = 5) in vec2 stretch;
+layout(location = 3) in vec2 rad_ang;
+layout(location = 4) in vec4 transforms;
+layout(location = 5) in vec2 warp_center;
+layout(location = 6) in vec2 warp_distance;
+layout(location = 7) in vec2 stretch;
 
 uniform mat4 vertex_transformation;
 uniform vec4 aspect;
 uniform float warpTime;
 uniform float warpScaleInverse;
 uniform vec4 warpFactors;
+uniform vec2 texelOffset;
 uniform float decay;
 
 out vec4 frag_COLOR;
@@ -42,8 +43,8 @@ void main() {
     float v = pos.y * aspectY * 0.5 * zoom2Inverse + 0.5;
 
     // original UV coordinates
-    vec2 uv_original = vec2(pos.x * 0.5 + 0.5,
-                            pos.y * 0.5 + 0.5);
+    vec2 uv_original = vec2(pos.x * 0.5 + 0.5 + texelOffset.x,
+                            pos.y * 0.5 + 0.5 + texelOffset.y);
 
     // Stretch on X, Y
     u = (u - warp_center.x) / stretch.x + warp_center.x;
@@ -71,6 +72,10 @@ void main() {
     // Undo aspect ratio fix
     u = (u - 0.5) * invAspectX + 0.5;
     v = (v - 0.5) * invAspectY + 0.5;
+
+    // Final half-texel translation
+    u += texelOffset.x;
+    v += texelOffset.y;
 
     frag_COLOR = vec4(decay, decay, decay, 1.0);
     frag_TEXCOORD0.xy = vec2(u, v);

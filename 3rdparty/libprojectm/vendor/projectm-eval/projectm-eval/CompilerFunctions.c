@@ -16,6 +16,7 @@
 /* Called by yyparse on error. */
 void prjm_eval_error(PRJM_EVAL_LTYPE* loc, prjm_eval_compiler_context_t* cctx, yyscan_t yyscanner, char const* s)
 {
+    free(cctx->error.error);
     cctx->error.error = strdup(s);
     cctx->error.line = loc->first_line;
     cctx->error.column_start = loc->first_column;

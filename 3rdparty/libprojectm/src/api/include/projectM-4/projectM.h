@@ -1,7 +1,8 @@
 /**
  * @file projectM.h
- * @copyright 2003-2023 projectM Team
+ * @copyright 2003-2025 projectM Team
  * @brief Convenience include file that includes all other API headers.
+ * @since 4.0.0
  *
  * projectM -- Milkdrop-esque visualisation SDK
  *
@@ -28,8 +29,10 @@
 #include "projectM-4/callbacks.h"
 #include "projectM-4/core.h"
 #include "projectM-4/debug.h"
+#include "projectM-4/logging.h"
 #include "projectM-4/memory.h"
 #include "projectM-4/parameters.h"
 #include "projectM-4/render_opengl.h"
 #include "projectM-4/touch.h"
 #include "projectM-4/version.h"
+#include "projectM-4/user_sprites.h"

@@ -2283,6 +2283,20 @@ bool HLSLParser::ParseBinaryExpression(int priority, HLSLExpression*& expression
         }
         else
         {
+            // Before breaking, consume end char if needed and check for more operators
+            if( needsExpressionEndChar != 0 )
+            {
+                if( !Expect(needsExpressionEndChar) )
+                    return false;
+                needsExpressionEndChar = 0;
+
+                // After consuming end char, check if there's a binary operator to continue
+                if (AcceptBinaryOperator(priority, binaryOp))
+                {
+                    acceptBinaryOp = true;
+                    continue;
+                }
+            }
             break;
         }
 
@@ -3600,7 +3614,7 @@ bool HLSLParser::ApplyPreprocessor(const char* fileName, const char* buffer, siz
     isCodeActive.push(true);
     m_tokenizer = HLSLTokenizer(fileName, buffer, length);
     sourcePreprocessed.clear();
-    while (m_tokenizer.GetToken() != HLSLToken_EndOfStream)
+    while (m_tokenizer.GetToken() != HLSLToken_EndOfStream && !isCodeActive.empty())
     {
         bool addOriginalSource = true;
 

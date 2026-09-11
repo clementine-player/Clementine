@@ -13,9 +13,15 @@ add_library(hlslparser OBJECT
         src/HLSLTree.h
         )
 
+target_link_libraries(hlslparser
+        PRIVATE
+        projectM_api # For projectM_cxx_export.h, required by Logging.hpp
+        )
+
 target_include_directories(hlslparser
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/src
         )
 
 set_target_properties(hlslparser PROPERTIES

@@ -1,10 +1,11 @@
 /**
  * @file core.h
- * @copyright 2003-2023 projectM Team
+ * @copyright 2003-2025 projectM Team
  * @brief Core functions to instantiate, destroy and control projectM.
+ * @since 4.0.0
  *
  * projectM -- Milkdrop-esque visualisation SDK
- * Copyright (C)2003-2023 projectM Team
+ * Copyright (C)2003-2024 projectM Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,15 +33,49 @@ extern "C" {
 #endif
 
 /**
+ * @brief Callback function for resolving function pointers.
+ *
+ * This callback functions is used to resolve platform-dependent GL function pointers.
+ *
+ * @param name The name of the function to resolve.
+ * @param user_data A user-defined data pointer that is passed along with the load proc call,
+ *                  e.g. context information.
+ * @since 4.2.0
+ */
+typedef void* (*projectm_load_proc)(const char* name, void* user_data);
+
+/**
  * @brief Creates a new projectM instance.
  *
  * If this function returns NULL, in most cases the OpenGL context is not initialized, not made
  * current or insufficient to render projectM visuals.
  *
+ * The OpenGL resolver is initialized on the first call to either projectm_create() or projectm_create_with_opengl_load_proc().
+ * All projectM instances share the same resolver.
+ *
  * @return A projectM handle for the newly created instance that must be used in subsequent API calls.
  *         NULL if the instance could not be created successfully.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT projectm_handle projectm_create();
+
+/**
+ * @brief Creates a new projectM instance using the given function to resolve GL api functions.
+ *
+ * The load_proc function accepts a function name and a user data pointer.
+ * If this function returns NULL, in most cases the OpenGL context is not initialized, not made
+ * current or insufficient to render projectM visuals.
+ *
+ * The OpenGL resolver is initialized on the first call to either projectm_create() or projectm_create_with_opengl_load_proc().
+ * All projectM instances share the same resolver, and subsequent calls ignore the provided load_proc.
+ *
+ * @param load_proc Callback function used to resolve OpenGL function pointers. Optional, may be NULL.
+ * @param user_data Custom user data pointer to pass along to the load_proc call, e.g. context information. Optional, may be NULL.
+ * @return A projectM handle for the newly created instance that must be used in subsequent API calls.
+ *         NULL if the instance could not be created successfully.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT projectm_handle projectm_create_with_opengl_load_proc(projectm_load_proc load_proc, void* user_data);
 
 /**
  * @brief Destroys the given instance and frees the resources.
@@ -48,6 +83,7 @@ PROJECTM_EXPORT projectm_handle projectm_create();
  * After destroying the handle, it must not be used for any other calls to the API.
  *
  * @param instance A handle returned by projectm_create() or projectm_create_settings().
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_destroy(projectm_handle instance);
 
@@ -67,6 +103,7 @@ PROJECTM_EXPORT void projectm_destroy(projectm_handle instance);
  * @param instance The projectM instance handle.
  * @param filename The preset filename or URL to load.
  * @param smooth_transition If true, the new preset is smoothly blended over.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_load_preset_file(projectm_handle instance, const char* filename,
                                                bool smooth_transition);
@@ -83,6 +120,7 @@ PROJECTM_EXPORT void projectm_load_preset_file(projectm_handle instance, const c
  * @param instance The projectM instance handle.
  * @param data The preset contents to load.
  * @param smooth_transition If true, the new preset is smoothly blended over.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_load_preset_data(projectm_handle instance, const char* data,
                                                bool smooth_transition);
@@ -94,6 +132,7 @@ PROJECTM_EXPORT void projectm_load_preset_data(projectm_handle instance, const c
  * Can cause a small delay/lag in rendering. Only use if texture paths were changed.
  *
  * @param instance The projectM instance handle.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_reset_textures(projectm_handle instance);
 
@@ -105,6 +144,7 @@ PROJECTM_EXPORT void projectm_reset_textures(projectm_handle instance);
  * @param major A pointer to an int that will be set to the major version.
  * @param minor A pointer to an int that will be set to the minor version.
  * @param patch A pointer to an int that will be set to the patch version.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_get_version_components(int* major, int* minor, int* patch);
 
@@ -115,6 +155,7 @@ PROJECTM_EXPORT void projectm_get_version_components(int* major, int* minor, int
  * needed.
  *
  * @return The library version in the format major.minor.patch.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT char* projectm_get_version_string();
 
@@ -127,6 +168,7 @@ PROJECTM_EXPORT char* projectm_get_version_string();
  * needed.
  *
  * @return The VCS revision number the projectM library was built from.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT char* projectm_get_vcs_version_string();
 

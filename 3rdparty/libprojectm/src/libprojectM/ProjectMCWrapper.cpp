@@ -1,8 +1,18 @@
 #include "ProjectMCWrapper.hpp"
 
+#include "Renderer/Platform/GladLoader.hpp"
+
 #include <projectM-4/projectM.h>
 
+#include <Logging.hpp>
+
 #include <Audio/AudioConstants.hpp>
+#include <Renderer/Platform/GLResolver.hpp>
+
+#include <projectM-4/parameters.h>
+#include <projectM-4/render_opengl.h>
+
+#include <exception>
 
 #include <cstring>
 #include <sstream>
@@ -23,7 +33,7 @@ void projectMWrapper::PresetSwitchFailedEvent(const std::string& presetFilename,
     if (m_presetSwitchFailedEventCallback)
     {
         m_presetSwitchFailedEventCallback(presetFilename.c_str(),
-                                         failureMessage.c_str(), m_presetSwitchFailedEventUserData);
+                                          failureMessage.c_str(), m_presetSwitchFailedEventUserData);
     }
 }
 
@@ -34,7 +44,7 @@ libprojectM::projectMWrapper* handle_to_instance(projectm_handle instance)
     return reinterpret_cast<libprojectM::projectMWrapper*>(instance);
 }
 
-char* projectm_alloc_string(unsigned int length)
+PROJECTM_EXPORT char* projectm_alloc_string(unsigned int length)
 {
     try
     {
@@ -46,7 +56,7 @@ char* projectm_alloc_string(unsigned int length)
     }
 }
 
-char* projectm_alloc_string_from_std_string(const std::string& str)
+PROJECTM_EXPORT char* projectm_alloc_string_from_std_string(const std::string& str)
 {
     auto pointer = projectm_alloc_string(static_cast<uint32_t>(str.length() + 1));
     if (pointer)
@@ -63,13 +73,41 @@ void projectm_free_string(const char* str)
 
 projectm_handle projectm_create()
 {
+    return projectm_create_with_opengl_load_proc(nullptr, nullptr);
+}
+
+projectm_handle projectm_create_with_opengl_load_proc(void* (*load_proc)(const char*, void*), void* user_data)
+{
+    using libprojectM::Logging;
+
     try
     {
-        auto projectMInstance = new libprojectM::projectMWrapper();
+        // Init resolver to discover gl function pointers (guarded internally, valid to call multiple times)
+        // Note: only the initial load_proc will be used, parameters on subsequent calls are ignored
+        if (!libprojectM::Renderer::Platform::GLResolver::Instance().Initialize(load_proc, user_data))
+        {
+            return nullptr;
+        }
+
+        // Check GL requirements and init GLAD (guarded internally, valid to call multiple times)
+        if (!libprojectM::Renderer::Platform::GladLoader::Instance().Initialize())
+        {
+            return nullptr;
+        }
+
+        // create projectM
+        auto* projectMInstance = new libprojectM::projectMWrapper();
         return reinterpret_cast<projectm_handle>(projectMInstance);
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("projectm_create_with_opengl_load_proc caught exception:");
+        LOG_ERROR(e.what());
+        return nullptr;
     }
     catch (...)
     {
+        LOG_ERROR("projectm_create_with_opengl_load_proc caught unknown exception");
         return nullptr;
     }
 }
@@ -109,6 +147,39 @@ void projectm_set_preset_switch_failed_event_callback(projectm_handle instance,
     auto projectMInstance = handle_to_instance(instance);
     projectMInstance->m_presetSwitchFailedEventCallback = callback;
     projectMInstance->m_presetSwitchFailedEventUserData = user_data;
+}
+
+void projectm_set_texture_load_event_callback(projectm_handle instance,
+                                              projectm_texture_load_event callback, void* user_data)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->m_textureLoadEventCallback = callback;
+    projectMInstance->m_textureLoadEventUserData = user_data;
+
+    if (callback != nullptr)
+    {
+        // Create a wrapper lambda that bridges C callback to C++ callback
+        projectMInstance->SetTextureLoadCallback(
+            [projectMInstance](const std::string& textureName, libprojectM::Renderer::TextureLoadData& data) {
+                if (projectMInstance->m_textureLoadEventCallback)
+                {
+                    projectm_texture_load_data cData{};
+                    projectMInstance->m_textureLoadEventCallback(
+                        textureName.c_str(), &cData, projectMInstance->m_textureLoadEventUserData);
+
+                    // Copy data from C structure to C++ structure
+                    data.data = cData.data;
+                    data.width = cData.width;
+                    data.height = cData.height;
+                    data.channels = cData.channels;
+                    data.textureId = cData.texture_id;
+                }
+            });
+    }
+    else
+    {
+        projectMInstance->SetTextureLoadCallback(nullptr);
+    }
 }
 
 void projectm_set_texture_search_paths(projectm_handle instance,
@@ -169,6 +240,30 @@ void projectm_opengl_render_frame(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);
     projectMInstance->RenderFrame();
+}
+
+void projectm_opengl_render_frame_fbo(projectm_handle instance, uint32_t framebuffer_object_id)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->RenderFrame(framebuffer_object_id);
+}
+
+void projectm_opengl_burn_texture(projectm_handle instance, uint32_t texture, int left, int top, int width, int height)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->BurnInTexture(texture, left, top, width, height);
+}
+
+void projectm_set_frame_time(projectm_handle instance, double seconds_since_first_frame)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetFrameTime(seconds_since_first_frame);
+}
+
+double projectm_get_last_frame_time(projectm_handle instance)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    return projectMInstance->GetFrameTime();
 }
 
 void projectm_set_beat_sensitivity(projectm_handle instance, float sensitivity)
@@ -250,6 +345,18 @@ void projectm_get_mesh_size(projectm_handle instance, size_t* width, size_t* hei
     projectMInstance->MeshSize(w, h);
     *width = static_cast<size_t>(w);
     *height = static_cast<size_t>(h);
+}
+
+void projectm_set_texel_offset(projectm_handle instance, float offset_X, float offset_y)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetTexelOffsets(offset_X, offset_y);
+}
+
+void projectm_get_texel_offset(projectm_handle instance, float* offset_X, float* offset_y)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->TexelOffsets(*offset_X, *offset_y);
 }
 
 void projectm_set_mesh_size(projectm_handle instance, size_t width, size_t height)
@@ -343,6 +450,18 @@ void projectm_set_window_size(projectm_handle instance, size_t width, size_t hei
     projectMInstance->SetWindowSize(static_cast<uint32_t>(width), static_cast<uint32_t>(height));
 }
 
+void projectm_set_preset_start_clean(projectm_handle instance, bool enabled)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetPresetStartClean(enabled);
+}
+
+bool projectm_get_preset_start_clean(projectm_handle instance)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    return projectMInstance->PresetStartClean();
+}
+
 unsigned int projectm_pcm_get_max_samples()
 {
     return libprojectM::Audio::WaveformSamples;
@@ -374,4 +493,95 @@ auto projectm_pcm_add_uint8(projectm_handle instance, const uint8_t* samples, un
 auto projectm_write_debug_image_on_next_frame(projectm_handle, const char*) -> void
 {
     // UNIMPLEMENTED
+}
+
+uint32_t projectm_sprite_create(projectm_handle instance, const char* type, const char* code)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    return projectMInstance->AddUserSprite(type, code);
+}
+
+void projectm_sprite_destroy(projectm_handle instance, uint32_t sprite_id)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    projectMInstance->DestroyUserSprite(sprite_id);
+}
+
+void projectm_sprite_destroy_all(projectm_handle instance)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    projectMInstance->DestroyAllUserSprites();
+}
+
+uint32_t projectm_sprite_get_sprite_count(projectm_handle instance)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    return projectMInstance->UserSpriteCount();
+}
+
+void projectm_sprite_get_sprite_ids(projectm_handle instance, uint32_t* sprite_ids)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    auto spriteIdList = projectMInstance->UserSpriteIdentifiers();
+    for (const auto& spriteId : spriteIdList)
+    {
+        *sprite_ids = spriteId;
+        sprite_ids++;
+    }
+}
+
+void projectm_sprite_set_max_sprites(projectm_handle instance, uint32_t max_sprites)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    projectMInstance->SetUserSpriteLimit(max_sprites);
+}
+
+uint32_t projectm_sprite_get_max_sprites(projectm_handle instance)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    return projectMInstance->UserSpriteLimit();
+}
+
+double projectm_sprite_get_var(projectm_handle instance, uint32_t sprite_id, const char* var_name)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    return projectMInstance->UserSpriteGetVariableValue(sprite_id, var_name);
+}
+
+void projectm_sprite_set_var(projectm_handle instance, uint32_t sprite_id, const char* var_name, double value)
+{
+    auto* projectMInstance = handle_to_instance(instance);
+
+    projectMInstance->UserSpriteSetVariableValue(sprite_id, var_name, value);
+}
+void projectm_set_log_callback(projectm_log_callback callback, bool current_thread_only, void* user_data)
+{
+    if (current_thread_only)
+    {
+        libprojectM::Logging::SetThreadCallback({reinterpret_cast<libprojectM::Logging::CallbackFunction>(callback), user_data});
+    }
+    else
+    {
+        libprojectM::Logging::SetGlobalCallback({reinterpret_cast<libprojectM::Logging::CallbackFunction>(callback), user_data});
+    }
+}
+
+void projectm_set_log_level(projectm_log_level log_level, bool current_thread_only)
+{
+    if (current_thread_only)
+    {
+        libprojectM::Logging::SetThreadLogLevel(static_cast<libprojectM::Logging::LogLevel>(log_level));
+    }
+    else
+    {
+        libprojectM::Logging::SetGlobalLogLevel(static_cast<libprojectM::Logging::LogLevel>(log_level));
+    }
 }

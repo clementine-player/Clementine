@@ -1,4 +1,6 @@
-#include "PCM.hpp"
+#include "Audio/PCM.hpp"
+
+#include <mutex>
 
 namespace libprojectM {
 namespace Audio {
@@ -17,6 +19,7 @@ void PCM::AddToBuffer(
         return;
     }
 
+    std::lock_guard<std::mutex> lock(m_pcmMutex);
     for (size_t i = 0; i < sampleCount; i++)
     {
         size_t const bufferOffset = (m_start + i) % AudioBufferSamples;
@@ -48,22 +51,32 @@ void PCM::Add(int16_t const* const samples, uint32_t channels, size_t const coun
 
 void PCM::UpdateFrameAudioData(double secondsSinceLastFrame, uint32_t frame)
 {
-    // 1. Copy audio data from input buffer
-    CopyNewWaveformData(m_inputBufferL, m_waveformL);
-    CopyNewWaveformData(m_inputBufferR, m_waveformR);
+    // 1. Copy audio data from input buffer (lock to prevent tearing with audio thread writes)
+    {
+        std::lock_guard<std::mutex> lock(m_pcmMutex);
+        CopyNewWaveformData(m_inputBufferL, m_waveformL);
+        CopyNewWaveformData(m_inputBufferR, m_waveformR);
+    }
 
     // 2. Update spectrum analyzer data for both channels
     UpdateSpectrum(m_waveformL, m_spectrumL);
     UpdateSpectrum(m_waveformR, m_spectrumR);
+
+    // Beat detection should reflect both channels; average L+R into a mono spectrum.
+    SpectrumBuffer monoSpectrum{};
+    for (size_t sample = 0; sample < SpectrumSamples; sample++)
+    {
+        monoSpectrum[sample] = 0.5f * (m_spectrumL[sample] + m_spectrumR[sample]);
+    }
 
     // 3. Align waveforms
     m_alignL.Align(m_waveformL);
     m_alignR.Align(m_waveformR);
 
     // 4. Update beat detection values
-    m_bass.Update(m_spectrumL, secondsSinceLastFrame, frame);
-    m_middles.Update(m_spectrumL, secondsSinceLastFrame, frame);
-    m_treble.Update(m_spectrumL, secondsSinceLastFrame, frame);
+    m_bass.Update(monoSpectrum, secondsSinceLastFrame, frame);
+    m_middles.Update(monoSpectrum, secondsSinceLastFrame, frame);
+    m_treble.Update(monoSpectrum, secondsSinceLastFrame, frame);
 
 }
 
@@ -110,7 +123,7 @@ void PCM::UpdateSpectrum(const WaveformBuffer& waveformData, SpectrumBuffer& spe
 
 void PCM::CopyNewWaveformData(const WaveformBuffer& source, WaveformBuffer& destination)
 {
-    auto const bufferStartIndex = m_start.load();
+    auto const bufferStartIndex = m_start;
 
     for (size_t i = 0; i < AudioBufferSamples; i++)
     {

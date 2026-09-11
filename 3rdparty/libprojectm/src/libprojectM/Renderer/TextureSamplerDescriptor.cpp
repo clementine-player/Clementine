@@ -1,6 +1,6 @@
-#include "TextureSamplerDescriptor.hpp"
+#include "Renderer/TextureSamplerDescriptor.hpp"
 
-#include "TextureManager.hpp"
+#include "Renderer/TextureManager.hpp"
 
 #include <utility>
 
@@ -20,7 +20,7 @@ TextureSamplerDescriptor::TextureSamplerDescriptor(const std::shared_ptr<class T
 
 auto TextureSamplerDescriptor::Empty() const -> bool
 {
-    return m_texture->Empty();
+    return !m_texture || m_texture->Empty();
 }
 
 void TextureSamplerDescriptor::Bind(GLint unit, const Shader& shader) const

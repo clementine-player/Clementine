@@ -21,6 +21,7 @@
 
 #include "ProjectM.hpp"
 
+#include "Logging.hpp"
 #include "Preset.hpp"
 #include "PresetFactoryManager.hpp"
 #include "TimeKeeper.hpp"
@@ -29,8 +30,11 @@
 
 #include <Renderer/CopyTexture.hpp>
 #include <Renderer/PresetTransition.hpp>
+#include <Renderer/ShaderCache.hpp>
 #include <Renderer/TextureManager.hpp>
 #include <Renderer/TransitionShaderManager.hpp>
+
+#include <UserSprites/SpriteManager.hpp>
 
 namespace libprojectM {
 
@@ -62,6 +66,7 @@ void ProjectM::LoadPresetFile(const std::string& presetFilename, bool smoothTran
     }
     catch (const std::exception& ex)
     {
+        LOG_ERROR(ex.what());
         PresetSwitchFailedEvent(presetFilename, ex.what());
     }
 }
@@ -75,6 +80,7 @@ void ProjectM::LoadPresetData(std::istream& presetData, bool smoothTransition)
     }
     catch (const std::exception& ex)
     {
+        LOG_ERROR(ex.what());
         PresetSwitchFailedEvent("", ex.what());
     }
 }
@@ -83,14 +89,31 @@ void ProjectM::SetTexturePaths(std::vector<std::string> texturePaths)
 {
     m_textureSearchPaths = std::move(texturePaths);
     m_textureManager = std::make_unique<Renderer::TextureManager>(m_textureSearchPaths);
+    if (m_textureLoadCallback)
+    {
+        m_textureManager->SetTextureLoadCallback(m_textureLoadCallback);
+    }
 }
 
 void ProjectM::ResetTextures()
 {
     m_textureManager = std::make_unique<Renderer::TextureManager>(m_textureSearchPaths);
+    if (m_textureLoadCallback)
+    {
+        m_textureManager->SetTextureLoadCallback(m_textureLoadCallback);
+    }
 }
 
-void ProjectM::RenderFrame()
+void ProjectM::SetTextureLoadCallback(Renderer::TextureLoadCallback callback)
+{
+    m_textureLoadCallback = std::move(callback);
+    if (m_textureManager)
+    {
+        m_textureManager->SetTextureLoadCallback(m_textureLoadCallback);
+    }
+}
+
+void ProjectM::RenderFrame(uint32_t targetFramebufferObject /*= 0*/)
 {
     // Don't render if window area is zero.
     if (m_windowWidth == 0 || m_windowHeight == 0)
@@ -150,7 +173,7 @@ void ProjectM::RenderFrame()
 
     if (m_transition != nullptr && m_transitioningPreset != nullptr)
     {
-        if (m_transition->IsDone())
+        if (m_transition->IsDone(m_timeKeeper->GetFrameTime()))
         {
             m_activePreset = std::move(m_transitioningPreset);
             m_transitioningPreset.reset();
@@ -166,17 +189,31 @@ void ProjectM::RenderFrame()
     // ToDo: Call the to-be-implemented render method in Renderer
     m_activePreset->RenderFrame(audioData, renderContext);
 
-    // ToDo: Allow external apps to provide a custom target framebuffer.
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, static_cast<GLuint>(targetFramebufferObject));
+    glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
+
+#ifdef USE_GLES
+    // On WebGL2 / Chrome ANGLE, the default framebuffer's draw buffer must
+    // be explicitly set to GL_BACK after preset rendering, which may leave
+    // per-FBO draw buffer state that leaks into FBO 0 on some drivers.
+    if (targetFramebufferObject == 0)
+    {
+        GLenum backBuf = GL_BACK;
+        glDrawBuffers(1, &backBuf);
+    }
+#endif
 
     if (m_transition != nullptr && m_transitioningPreset != nullptr)
     {
-        m_transition->Draw(*m_activePreset, *m_transitioningPreset, renderContext, audioData);
+        m_transition->Draw(*m_activePreset, *m_transitioningPreset, renderContext, audioData, m_timeKeeper->GetFrameTime());
     }
     else
     {
-        m_textureCopier->Draw(m_activePreset->OutputTexture(), false, false);
+        m_textureCopier->Draw(*renderContext.shaderCache, m_activePreset->OutputTexture(), false, false);
     }
+
+    // Draw user sprites
+    m_spriteManager->Draw(audioData, renderContext, targetFramebufferObject, {m_activePreset, m_transitioningPreset});
 
     m_frameCount++;
     m_previousFrameVolume = audioData.vol;
@@ -184,30 +221,55 @@ void ProjectM::RenderFrame()
 
 void ProjectM::Initialize()
 {
-    /** Initialise start time */
+    // Check OpenGL first before allocating any additional memory.
+    CheckGLSLVersion();
+
     m_timeKeeper = std::make_unique<TimeKeeper>(m_presetDuration,
                                                 m_softCutDuration,
                                                 m_hardCutDuration,
                                                 m_easterEgg);
 
-    /** Nullify frame stash */
-
-    /** Initialise per-pixel matrix calculations */
-    /** We need to initialise this before the builtin param db otherwise bass/mid etc won't bind correctly */
     m_textureManager = std::make_unique<Renderer::TextureManager>(m_textureSearchPaths);
+    m_shaderCache = std::make_unique<Renderer::ShaderCache>();
 
     m_transitionShaderManager = std::make_unique<Renderer::TransitionShaderManager>();
 
     m_textureCopier = std::make_unique<Renderer::CopyTexture>();
 
-    m_presetFactoryManager->initialize();
+    m_spriteManager = std::make_unique<UserSprites::SpriteManager>();
 
-    /* Set the seed to the current time in seconds */
-    srand(time(nullptr));
+    m_presetFactoryManager->initialize();
 
     LoadIdlePreset();
 
     m_timeKeeper->StartPreset();
+}
+
+void ProjectM::CheckGLSLVersion()
+{
+    auto glslVersion = Renderer::Shader::GetShaderLanguageVersion();
+
+    if (glslVersion.major == 0)
+    {
+        std::string error = "Could not retrieve OpenGL shader language version. Is OpenGL available and the context initialized?";
+        LOG_FATAL(error);
+        throw std::runtime_error(error);
+    }
+#ifdef USE_GLES
+    if (glslVersion.major < 3)
+    {
+        std::string error = "OpenGL ES shading language version 3.00 or higher is required, but the current context only provides version " + std::to_string(glslVersion.major) + "." + std::to_string(glslVersion.minor) + ".";
+        LOG_FATAL(error);
+        throw std::runtime_error(error);
+    }
+#else
+    if (glslVersion.major < 3 || (glslVersion.major == 3 && glslVersion.minor < 30))
+    {
+        std::string error = "OpenGL shading language version 3.30 or higher is required, but the current context only provides version " + std::to_string(glslVersion.major) + "." + std::to_string(glslVersion.minor) + ".";
+        LOG_FATAL(error);
+        throw std::runtime_error(error);
+    }
+#endif
 }
 
 void ProjectM::LoadIdlePreset()
@@ -241,7 +303,7 @@ void ProjectM::StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hard
         m_transition.reset();
     }
 
-    if (m_activePreset)
+    if (m_activePreset && !m_presetStartClean)
     {
         preset->DrawInitialImage(m_activePreset->OutputTexture(), GetRenderContext());
     }
@@ -255,7 +317,7 @@ void ProjectM::StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hard
     {
         m_transitioningPreset = std::move(preset);
         m_timeKeeper->StartSmoothing();
-        m_transition = std::make_unique<Renderer::PresetTransition>(m_transitionShaderManager->RandomTransition(), m_softCutDuration);
+        m_transition = std::make_unique<Renderer::PresetTransition>(m_transitionShaderManager->RandomTransition(), m_softCutDuration, m_timeKeeper->GetFrameTime());
     }
 }
 
@@ -269,6 +331,68 @@ auto ProjectM::WindowHeight() -> int
     return m_windowHeight;
 }
 
+auto ProjectM::AddUserSprite(const std::string& type, const std::string& spriteData) -> uint32_t
+{
+    return m_spriteManager->Spawn(type, spriteData, GetRenderContext());
+}
+
+void ProjectM::DestroyUserSprite(uint32_t spriteIdentifier)
+{
+    m_spriteManager->Destroy(spriteIdentifier);
+}
+
+void ProjectM::DestroyAllUserSprites()
+{
+    m_spriteManager->DestroyAll();
+}
+
+auto ProjectM::UserSpriteCount() const -> uint32_t
+{
+    return m_spriteManager->ActiveSpriteCount();
+}
+
+void ProjectM::SetUserSpriteLimit(uint32_t maxSprites)
+{
+    m_spriteManager->SpriteSlots(maxSprites);
+}
+
+auto ProjectM::UserSpriteLimit() const -> uint32_t
+{
+    return m_spriteManager->SpriteSlots();
+}
+
+auto ProjectM::UserSpriteIdentifiers() const -> std::vector<uint32_t>
+{
+    return m_spriteManager->ActiveSpriteIdentifiers();
+}
+
+auto ProjectM::UserSpriteGetVariableValue(uint32_t spriteId, const std::string& variableName) const -> double
+{
+    return m_spriteManager->GetSpriteVariableValue(spriteId, variableName);
+}
+
+void ProjectM::UserSpriteSetVariableValue(uint32_t spriteId, const std::string& variableName, double value)
+{
+    m_spriteManager->SetSpriteVariableValue(spriteId, variableName, value);
+}
+
+void ProjectM::BurnInTexture(uint32_t openGlTextureId, int left, int top, int width, int height)
+{
+    if (m_activePreset)
+    {
+        m_activePreset->BindFramebuffer();
+        m_textureCopier->Draw(*m_shaderCache, openGlTextureId, m_windowWidth, m_windowHeight, left, top, width, height);
+    }
+
+    if (m_transitioningPreset)
+    {
+        m_transitioningPreset->BindFramebuffer();
+        m_textureCopier->Draw(*m_shaderCache, openGlTextureId, m_windowWidth, m_windowHeight, left, top, width, height);
+    }
+
+    Renderer::Framebuffer::Unbind();
+}
+
 void ProjectM::SetPresetLocked(bool locked)
 {
     // ToDo: Add a preset switch timer separate from the display timer and reset to 0 when
@@ -280,6 +404,26 @@ void ProjectM::SetPresetLocked(bool locked)
 auto ProjectM::PresetLocked() const -> bool
 {
     return m_presetLocked;
+}
+
+void ProjectM::SetPresetStartClean(bool enabled)
+{
+    m_presetStartClean = enabled;
+}
+
+auto ProjectM::PresetStartClean() const -> bool
+{
+    return m_presetStartClean;
+}
+
+void ProjectM::SetFrameTime(double secondsSinceStart)
+{
+    m_timeKeeper->SetFrameTime(secondsSinceStart);
+}
+
+double ProjectM::GetFrameTime()
+{
+    return m_timeKeeper->GetFrameTime();
 }
 
 void ProjectM::SetBeatSensitivity(float sensitivity)
@@ -398,8 +542,20 @@ void ProjectM::SetMeshSize(uint32_t meshResolutionX, uint32_t meshResolutionY)
     }
 
     // Constrain per-pixel mesh size to sensible limits
-    m_meshX = std::max(8u, std::min(400u, m_meshX));
-    m_meshY = std::max(8u, std::min(400u, m_meshY));
+    m_meshX = std::max(8u, std::min(300u, m_meshX));
+    m_meshY = std::max(8u, std::min(300u, m_meshY));
+}
+
+void ProjectM::TexelOffsets(float& texelOffsetX, float& texelOffsetY) const
+{
+    texelOffsetX = m_texelOffsetX;
+    texelOffsetY = m_texelOffsetY;
+}
+
+void ProjectM::SetTexelOffsets(float texelOffsetX, float texelOffsetY)
+{
+    m_texelOffsetX = texelOffsetX;
+    m_texelOffsetY = texelOffsetY;
 }
 
 auto ProjectM::PCM() -> libprojectM::Audio::PCM&
@@ -440,9 +596,24 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
     ctx.aspectY = (m_windowWidth > m_windowHeight) ? static_cast<float>(m_windowHeight) / static_cast<float>(m_windowWidth) : 1.0f;
     ctx.invAspectX = 1.0f / ctx.aspectX;
     ctx.invAspectY = 1.0f / ctx.aspectY;
+
     ctx.perPixelMeshX = static_cast<int>(m_meshX);
     ctx.perPixelMeshY = static_cast<int>(m_meshY);
+
+    ctx.texelOffsetX = m_texelOffsetX;
+    ctx.texelOffsetY = m_texelOffsetY;
+
     ctx.textureManager = m_textureManager.get();
+    ctx.shaderCache = m_shaderCache.get();
+
+    if (m_transition)
+    {
+        ctx.blendProgress = m_transition->Progress(ctx.time);
+    }
+    else
+    {
+        ctx.blendProgress = 0.0;
+    }
 
     return ctx;
 }

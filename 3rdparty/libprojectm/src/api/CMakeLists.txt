@@ -1,28 +1,5 @@
 add_library(projectM_api INTERFACE)
 
-target_sources(projectM_api
-        PRIVATE
-        "${PROJECTM_EXPORT_HEADER}"
-        include/projectM-4/audio.h
-        include/projectM-4/callbacks.h
-        include/projectM-4/debug.h
-        include/projectM-4/memory.h
-        include/projectM-4/projectM.h
-        include/projectM-4/types.h
-        )
-
-set_target_properties(projectM_api PROPERTIES
-        EXPORT_NAME API
-        FOLDER libprojectM
-        )
-
-target_include_directories(projectM_api
-        INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>"
-        "$<INSTALL_INTERFACE:${PROJECTM_INCLUDE_DIR}>"
-        )
-
 configure_file(version.h.in "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/version.h" @ONLY)
 
 include(GenerateExportHeader)
@@ -33,6 +10,61 @@ generate_export_header(projectM_api
         BASE_NAME projectM
         EXPORT_FILE_NAME "${PROJECTM_EXPORT_HEADER}"
         )
+
+# Always generate the header, but we only install it if the C++ interface is actually enabled.
+set(PROJECTM_CXX_EXPORT_HEADER "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/projectM_cxx_export.h")
+
+generate_export_header(projectM_api
+        BASE_NAME projectM_CXX
+        EXPORT_FILE_NAME "${PROJECTM_CXX_EXPORT_HEADER}"
+        )
+
+set(PROJECTM_PUBLIC_HEADERS
+        "${PROJECTM_EXPORT_HEADER}"
+        "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/version.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/audio.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/callbacks.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/core.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/debug.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/logging.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/memory.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/parameters.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/projectM.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/render_opengl.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/touch.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/types.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/projectM-4/user_sprites.h"
+        )
+
+if(ENABLE_CXX_INTERFACE)
+    list(APPEND PROJECTM_PUBLIC_HEADERS ${PROJECTM_CXX_EXPORT_HEADER})
+endif()
+
+target_sources(projectM_api
+        PRIVATE
+        ${PROJECTM_PUBLIC_HEADERS}
+        )
+
+set_target_properties(projectM_api PROPERTIES
+        EXPORT_NAME API
+        FOLDER libprojectM
+        PUBLIC_HEADER "${PROJECTM_PUBLIC_HEADERS}"
+        )
+
+target_include_directories(projectM_api
+        INTERFACE
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>"
+        "$<INSTALL_INTERFACE:${PROJECTM_INCLUDE_DIR}>"
+        )
+
+if(NOT BUILD_SHARED_LIBS)
+    target_compile_definitions(projectM_api
+            INTERFACE
+            PROJECTM_STATIC_DEFINE
+            PROJECTM_CXX_STATIC_DEFINE
+            )
+endif()
 
 if(NOT BUILD_SHARED_LIBS)
     target_compile_definitions(projectM_api
@@ -52,18 +84,6 @@ if(ENABLE_INSTALL)
             RUNTIME DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Runtime
             ARCHIVE DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Devel
             PUBLIC_HEADER DESTINATION "${PROJECTM_INCLUDE_DIR}/projectM-4" COMPONENT Devel
-            )
-
-    install(FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/projectM_export.h"
-            "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/version.h"
-            DESTINATION "${PROJECTM_INCLUDE_DIR}/projectM-4"
-            COMPONENT Devel
-            )
-
-    install(DIRECTORY include/projectM-4
-            DESTINATION "${PROJECTM_INCLUDE_DIR}"
-            COMPONENT Devel
             )
 
 endif()

@@ -1,10 +1,10 @@
 /**
  * @file render_opengl.h
- * @copyright 2003-2023 projectM Team
+ * @copyright 2003-2025 projectM Team
  * @brief Functions to configure and render projectM visuals using OpenGL.
  *
  * projectM -- Milkdrop-esque visualisation SDK
- * Copyright (C)2003-2023 projectM Team
+ * Copyright (C)2003-2024 projectM Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,12 +34,34 @@ extern "C" {
 /**
  * @brief Renders a single frame.
  *
- * @note Separate two-pass frame rendering is currently not supported by the C API as it is rarely used
- *       and also depends on the loaded preset.
- *
  * @param instance The projectM instance handle.
+ * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_opengl_render_frame(projectm_handle instance);
+
+/**
+ * @brief Renders a single frame into a user-defined framebuffer object.
+ *
+ * @param instance The projectM instance handle.
+ * @param framebuffer_object_id The OpenGL FBO ID to render to.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_opengl_render_frame_fbo(projectm_handle instance, uint32_t framebuffer_object_id);
+
+/**
+ * @brief Burn-in the provided texture into the active preset(s) main texture.
+ *
+ * During transitions, the image is drawn onto both active presets.
+ *
+ * @param instance The projectM instance handle.
+ * @param texture The OpenGL texture ID to draw onto the current preset.
+ * @param left The left offset in screen coordinates.
+ * @param top The top offset in screen coordinates.
+ * @param width The width in screen coordinates. Negative values will flip the image horizontally.
+ * @param height The height in screen coordinates. Negative values will flip the image vertically.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_opengl_burn_texture(projectm_handle instance, uint32_t texture, int left, int top, int width, int height);
 
 #ifdef __cplusplus
 } // extern "C"

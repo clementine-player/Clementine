@@ -4,7 +4,7 @@
 [![Emscripten Build Status](https://github.com/projectM-visualizer/projectm/actions/workflows/build_emscripten.yml/badge.svg?branch=master)](https://github.com/projectM-visualizer/projectm/actions/workflows/build_emscripten.yml)
 [![Android Build Status](https://github.com/projectM-visualizer/projectm/actions/workflows/build_android.yml/badge.svg?branch=master)](https://github.com/projectM-visualizer/projectm/actions/workflows/build_android.yml)
 
-![Discord Shield](https://discordapp.com/api/guilds/737206408482914387/widget.png?style=shield) [Chat with us on Discord](https://discord.gg/mMrxAqaa3W)
+![Discord Shield](https://discordapp.com/api/guilds/737206408482914387/widget.png?style=shield) [Chat with us on Discord](https://discord.gg/N9DyQfCH4j)
 
 ![Logo](https://github.com/projectM-visualizer/projectm/raw/master/docs/web/logo.png)
 
@@ -29,24 +29,21 @@ source-code and binary releases of the projectM development libraries and header
 
 ### End-User Applications
 
-**Important**: projectM is currently undergoing heavy development, so the available end-user frontends are either
-outdated or unavailable. We've released a few development previews, which are not feature-complete and may have bugs. As
-soon as we've finished the current modernization of libprojectM, we'll release new and tested versions of most of the
-frontends listed below, while we may remove or replace some of those which are no longer maintained by their original
-developers.
+**Important**: projectM is currently undergoing heavy development. The available end-user frontends are
+development previews, which are not feature-complete and may have bugs.
 
-##### Windows
+#### Windows
 
-- Standalone (currently only available as
-  a [development preview](https://github.com/kblaschke/frontend-sdl2/releases/tag/2.0-windows-pre1))
+- Standalone ([projectMSDL 2.0 pre-release](https://github.com/projectM-visualizer/frontend-sdl-cpp/releases))
 - [Steam](https://store.steampowered.com/app/1358800/projectM_Music_Visualizer/) (Same as standalone development
   preview)
-- [Windows Store](https://www.microsoft.com/store/apps/9NDCVH0VCWJN) (Old 3.1.12 release )
+- [Windows Store](https://www.microsoft.com/store/apps/9NDCVH0VCWJN) (Old 3.1.12 release)
 
 #### macOS
 
-- Standalone (currently only available as
-  a [development preview](https://github.com/kblaschke/frontend-sdl2/releases/tag/2.0-macos-pre1))
+- Standalone
+  - [C++ app pre-release](https://github.com/projectM-visualizer/frontend-sdl-cpp/releases)
+  - [Rust app development preview (signed)](https://github.com/projectM-visualizer/frontend-sdl-rust/releases/tag/v0.1.0)
 - [Steam](https://store.steampowered.com/app/1358800/projectM_Music_Visualizer/) (Old 3.1.12 release)
 - Music.app Plugin  (currently only available as an
   _unsigned_ [development preview](https://github.com/kblaschke/frontend-music-plug-in/releases/tag/v3.0-pre1))
@@ -54,9 +51,8 @@ developers.
 
 #### Linux
 
-- Standalone (currently only available as
-  a [development preview](https://github.com/kblaschke/frontend-sdl2/releases/tag/2.0-linux-pre1) for Ubuntu 22.04 and
-  compatible distributions)
+- Standalone ([projectMSDL 2.0 pre-release](https://github.com/projectM-visualizer/frontend-sdl-cpp/releases), also
+  available as `.deb` and `.tar.gz`)
 - [Steam](https://store.steampowered.com/app/1358800/projectM_Music_Visualizer/) (Same as standalone development
   preview)
 
@@ -80,19 +76,22 @@ Store. Any bug reports in the projectM issue tracker regarding the apps will be 
 Source code and other resources, mostly aimed at developers.
 
 - [Library source code](https://github.com/projectM-visualizer/projectm/) (this repository)
-- [Qt5](https://www.qt.io/) based [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) and JACK desktop
-  apps [as source code for Linux](https://github.com/projectM-visualizer/frontend-qt), currently broken and needs some
-  updating (help wanted!).
+- [GStreamer plugin](https://github.com/projectM-visualizer/gst-projectm/)
+- [Qt](https://www.qt.io/) based (Qt5/Qt6) desktop apps for Linux with
+  [PipeWire](https://pipewire.org/), [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) and JACK audio
+  backends ([source code](https://github.com/projectM-visualizer/frontend-qt), requires libprojectM 4.x).
 - [ALSA, XMMS, Winamp, JACK](https://sourceforge.net/projects/projectm/files/) (legacy 2.x sources for historic
   purposes, unmaintained since 2012)
 
 ### Discord chat
 
-[Chat with us on Discord!](https://discord.gg/mMrxAqaa3W)
+[Chat with us on Discord!](https://discord.gg/N9DyQfCH4j)
 
-### Demo Video
+### Click For Demo Videos
 
-[![](http://img.youtube.com/vi/2dSam8zwSFw/0.jpg)](http://www.youtube.com/watch?v=2dSam8zwSFw "Demo")
+<a href="https://www.youtube.com/watch?v=jJmLQGhYWys&list=PLFLkbObX4o6TK1jGL6pm1wMwvq2FXnpYJ">
+  <img src="https://i3.ytimg.com/vi/QlfqpVvo4zM/maxresdefault.jpg" width="800" alt="4k ProjectM render demo playlist" />
+</a>
 
 ### Presets
 
@@ -114,8 +113,7 @@ separate repositories in the projectM repository list:
 Included with projectM are the bltc201, Milkdrop 1 and 2, projectM, tryptonaut and yin collections. You can grab these
 presets [here](http://spiegelmc.com/pub/projectm_presets.zip).
 
-You can also download an enormous 41,000 preset pack of
-presets [here](https://mischa.lol/projectM/presets_community.zip) (123MB zipped).
+You can also download an enormous 130k+ presets from the MegaPack [here](https://drive.google.com/file/d/1DlszoqMG-pc5v1Bo9x4NhemGPiwT-0pv/view) (4.08GB zipped, incl. textures).
 
 ### Also Featured In
 
@@ -158,7 +156,10 @@ development team. Please report bugs in those applications to their respective d
 
 # Building from source
 
-See [BUILDING.md](BUILDING.md) and
+See [the build guide](https://github.com/projectM-visualizer/projectm/blob/master/docs/building.rst) for
+instructions on building libprojectM from source, including the full CMake reference,
+[the Emscripten guide](https://github.com/projectM-visualizer/projectm/blob/master/docs/emscripten.rst) for
+WebAssembly builds, and
 the [developer documentation in the wiki](https://github.com/projectM-visualizer/projectm/wiki/Building-libprojectM).
 
 # Using the library
@@ -176,11 +177,11 @@ the [projectM organization's repositories](https://github.com/projectM-visualize
 
 ---
 
-# Todo
+# See Also
 
-- Improve projectM using the recently-released Milkdrop source (WIP).
-- Update the various implementations using libprojectM.
-- Update downstream projects with new versions.
+- [GStreamer plugin for offline rendering](https://github.com/projectM-visualizer/gst-projectm/)
+- [ProjectM Rust Crate](https://crates.io/crates/projectm)
+- [Milkdrop evaluation library](https://github.com/projectM-visualizer/projectm-eval)
 
 ---
 
@@ -202,7 +203,7 @@ and findings to the existing issue instead of opening a new ticket.
 
 ## Get in contact with us
 
-[Chat with us on Discord.](https://discord.gg/mMrxAqaa3W)
+[Chat with us on Discord.](https://discord.gg/N9DyQfCH4j)
 
 ## Contribute to projectM
 
@@ -213,6 +214,8 @@ Before starting to write code, please take your time to read
 the [contribution guidelines](https://github.com/projectM-visualizer/projectm/wiki#contributing-to-projectm) in our
 wiki.
 
+Come talk to the dev team on Discord.
+
 ## Package Maintainers
 
 If you maintain packages of libprojectM, we are happy to work with you! Please note well:
@@ -222,8 +225,9 @@ If you maintain packages of libprojectM, we are happy to work with you! Please n
 - Many of the frontend applications are likely outdated and of less utility than the core library. If you desire to use
   them or depend on them, please file an issue in the respective repository so we can help update them.
 - The "canonical" application for actually viewing the visualizations is
-  now [projectM-SDL](https://github.com/projectM-visualizer/frontend-sdl2), based on libSDL2 because it supports audio
-  input and is completely cross-platform.
+  now [projectMSDL](https://github.com/projectM-visualizer/frontend-sdl-cpp), based on libSDL2 because it supports
+  audio input and is completely cross-platform.
+- If you like Rust, there is a [SDL3 rust frontend](https://github.com/projectM-visualizer/frontend-sdl-rust) in the works looking for contributors.
 - This is an open source project! If you don't like something, feel free to contribute improvements!
 - Yes, you are looking at the official version. This is not a fork.
 
@@ -243,3 +247,7 @@ please check all parts of the software to be compatible with your specific proje
 
 More information for developers is available from
 the [projectM Wiki](https://github.com/projectM-visualizer/projectm/wiki).
+
+## Star History
+
+[![Star History Chart](https://star-history.dera.page/svg?repos=projectM-visualizer/projectm&type=Date)](https://star-history.dera.page/#projectM-visualizer/projectm&Date)

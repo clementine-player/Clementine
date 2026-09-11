@@ -2,7 +2,22 @@ if(NOT ENABLE_PLAYLIST)
     return()
 endif()
 
+set(PROJECTM_PLAYLIST_EXPORT_HEADER "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/projectM_playlist_export.h")
+
+set(PROJECTM_PLAYLIST_PUBLIC_HEADERS
+        "${PROJECTM_PLAYLIST_EXPORT_HEADER}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_callbacks.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_core.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_filter.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_items.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_memory.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_playback.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/api/projectM-4/playlist_types.h"
+        )
+
 add_library(projectM_playlist_main OBJECT
+        ${PROJECTM_PLAYLIST_PUBLIC_HEADERS}
         Filter.cpp
         Filter.hpp
         Item.cpp
@@ -11,14 +26,6 @@ add_library(projectM_playlist_main OBJECT
         Playlist.hpp
         PlaylistCWrapper.cpp
         PlaylistCWrapper.hpp
-        api/projectM-4/playlist.h
-        api/projectM-4/playlist_callbacks.h
-        api/projectM-4/playlist_core.h
-        api/projectM-4/playlist_filter.h
-        api/projectM-4/playlist_items.h
-        api/projectM-4/playlist_memory.h
-        api/projectM-4/playlist_playback.h
-        api/projectM-4/playlist_types.h
         )
 
 target_include_directories(projectM_playlist_main
@@ -45,6 +52,7 @@ set_target_properties(projectM_playlist PROPERTIES
         EXPORT_NAME playlist
         FOLDER libprojectM
         OUTPUT_NAME ${PROJECTM_LIBRARY_BASE_OUTPUT_NAME}-playlist
+        PUBLIC_HEADER "${PROJECTM_PLAYLIST_PUBLIC_HEADERS}"
         )
 
 target_include_directories(projectM_playlist
@@ -63,14 +71,32 @@ target_link_libraries(projectM_playlist
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(projectM_playlist
             PRIVATE
-            projectM_playlist_EXPORTS
+            projectM_api_EXPORTS
             )
 
     target_link_libraries(projectM_playlist
             PUBLIC
             ${CMAKE_DL_LIBS}
             )
+
+    if(ENABLE_MACOS_FRAMEWORK)
+        include(MacOSFramework)
+
+        create_macos_framework(
+                TARGET projectM_playlist
+                FRAMEWORK_NAME ${PROJECTM_LIBRARY_BASE_OUTPUT_NAME}-playlist
+                IDENTIFIER com.github.projectm-visualizer.projectM-playlist
+                VERSION "${PROJECT_VERSION}"
+                C_HEADERS ${PROJECTM_PLAYLIST_PUBLIC_HEADERS}
+                # Headers use #include "projectM-4/..." so we need to match that path
+                HEADER_SUBDIR "projectM-4"
+        )
+    endif()
 else()
+    target_compile_definitions(projectM_playlist_main
+            PUBLIC
+            PROJECTM_STATIC_DEFINE
+            )
     target_compile_definitions(projectM_playlist
             PUBLIC
             PROJECTM_STATIC_DEFINE
@@ -84,8 +110,6 @@ endif()
 
 include(GenerateExportHeader)
 
-set(PROJECTM_PLAYLIST_EXPORT_HEADER "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/projectM_playlist_export.h")
-
 generate_export_header(projectM_playlist
         BASE_NAME projectM_playlist
         EXPORT_FILE_NAME "${PROJECTM_PLAYLIST_EXPORT_HEADER}"
@@ -95,57 +119,55 @@ add_library(libprojectM::playlist ALIAS projectM_playlist)
 
 if(ENABLE_INSTALL)
 
-    install(TARGETS projectM_playlist
-            EXPORT libprojectMPlaylist
-            LIBRARY DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Runtime
-            RUNTIME DESTINATION "${PROJECTM_RUNTIME_DIR}" COMPONENT Runtime
-            ARCHIVE DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Devel
-            PUBLIC_HEADER DESTINATION "${PROJECTM_INCLUDE_DIR}/projectM-4" COMPONENT Devel
-            )
+    if(ENABLE_MACOS_FRAMEWORK)
+        # Install the manually-built framework
+        install_macos_framework(
+                TARGET projectM_playlist
+                DESTINATION "${PROJECTM_LIB_DIR}"
+                COMPONENT Runtime
+        )
+        # Frameworks are used directly without CMake find_package, so skip target exports
+    else()
+        install(TARGETS projectM_playlist
+                EXPORT libprojectMPlaylist
+                LIBRARY DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Runtime
+                RUNTIME DESTINATION "${PROJECTM_RUNTIME_DIR}" COMPONENT Runtime
+                ARCHIVE DESTINATION "${PROJECTM_LIB_DIR}" COMPONENT Devel
+                PUBLIC_HEADER DESTINATION "${PROJECTM_INCLUDE_DIR}/projectM-4" COMPONENT Devel
+                )
 
-    install(FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/include/projectM-4/projectM_playlist_export.h"
-            DESTINATION "${PROJECTM_INCLUDE_DIR}/projectM-4"
-            COMPONENT Devel
-            )
+        # For use from an installed package (system install, vcpkg, homebrew etc.)
+        include(CMakePackageConfigHelpers)
 
-    install(DIRECTORY api/projectM-4
-            DESTINATION "${PROJECTM_INCLUDE_DIR}"
-            COMPONENT Devel
-            )
+        write_basic_package_version_file(
+                "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfigVersion.cmake"
+                VERSION ${PROJECT_VERSION}
+                COMPATIBILITY AnyNewerVersion
+                )
 
+        configure_package_config_file(projectM4PlaylistConfig.cmake.in
+                "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfig.cmake"
+                INSTALL_DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
+                PATH_VARS PROJECTM_BIN_DIR PROJECTM_INCLUDE_DIR
+                )
 
-    # For use from an installed package (system install, vcpkg, homebrew etc.)
-    include(CMakePackageConfigHelpers)
+        install(FILES
+                "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfigVersion.cmake"
+                "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfig.cmake"
+                DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
+                COMPONENT Devel
+                )
 
-    write_basic_package_version_file(
-            "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfigVersion.cmake"
-            VERSION ${PROJECT_VERSION}
-            COMPATIBILITY AnyNewerVersion
-            )
+        install(EXPORT libprojectMPlaylist
+                FILE projectM4PlaylistTargets.cmake
+                NAMESPACE libprojectM::
+                DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
+                COMPONENT Devel
+                )
+    endif()
 
-    configure_package_config_file(projectM4PlaylistConfig.cmake.in
-            "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfig.cmake"
-            INSTALL_DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
-            PATH_VARS PROJECTM_BIN_DIR PROJECTM_INCLUDE_DIR
-            )
-
-    install(FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfigVersion.cmake"
-            "${CMAKE_CURRENT_BINARY_DIR}/libprojectMPlaylist/projectM4PlaylistConfig.cmake"
-            DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
-            COMPONENT Devel
-            )
-
-    install(EXPORT libprojectMPlaylist
-            FILE projectM4PlaylistTargets.cmake
-            NAMESPACE libprojectM::
-            DESTINATION "${PROJECTM_LIB_DIR}/cmake/projectM4Playlist"
-            COMPONENT Devel
-            )
-
-    # pkg-config export, only supported on UNIX systems.
-    if(UNIX)
+    # pkg-config export, only supported on UNIX systems (not for frameworks).
+    if(UNIX AND NOT ENABLE_MACOS_FRAMEWORK)
         include(GeneratePkgConfigFiles)
 
         if(ENABLE_BOOST_FILESYSTEM)
@@ -154,7 +176,7 @@ if(ENABLE_INSTALL)
             # into pkgconfig's expected format.
             # We will just assume the build uses Boost from the default location (e.g. not a custom CMAKE_PREFIX_PATH) and
             # the library name is correct.
-            set(PKGCONFIG_LIBS "${PKGCONFIG_LIBS} -l:boost_filesystem")
+            set(PKGCONFIG_LIBS "${PKGCONFIG_LIBS} -lboost_filesystem")
         endif()
 
         set(PKGCONFIG_PACKAGE_NAME "${PROJECTM_LIBRARY_BASE_OUTPUT_NAME}-playlist")

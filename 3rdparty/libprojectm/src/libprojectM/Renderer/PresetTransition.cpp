@@ -1,51 +1,53 @@
-#include "PresetTransition.hpp"
+#include "Renderer/PresetTransition.hpp"
 
-#include "TextureManager.hpp"
+#include "Renderer/TextureManager.hpp"
 
-#include <array>
+#include <algorithm>
 #include <cmath>
-#include <cstddef>
 
 namespace libprojectM {
 namespace Renderer {
 
 constexpr double PI = 3.14159265358979323846;
 
-PresetTransition::PresetTransition(const std::shared_ptr<Shader>& transitionShader, double durationSeconds)
-    : m_transitionShader(transitionShader)
+PresetTransition::PresetTransition(const std::shared_ptr<Shader>& transitionShader, double durationSeconds, double transitionStartTime)
+    : m_mesh(VertexBufferUsage::StaticDraw)
+    , m_transitionShader(transitionShader)
     , m_durationSeconds(durationSeconds)
+    , m_transitionStartTime(transitionStartTime)
 {
+    m_mesh.SetRenderPrimitiveType(Mesh::PrimitiveType::TriangleStrip);
+
+    m_mesh.Vertices().Set({{-1.0f, 1.0f},
+                           {1.0f, 1.0f},
+                           {-1.0f, -1.0f},
+                           {1.0f, -1.0f}});
+
+    m_mesh.Indices().Set({0, 1, 2, 3});
+
+    m_mesh.Update();
+
     std::mt19937 rand32(m_randomDevice());
     m_staticRandomValues = {rand32(), rand32(), rand32(), rand32()};
-
-    RenderItem::Init();
 }
 
-void PresetTransition::InitVertexAttrib()
+auto PresetTransition::IsDone(double currentFrameTime) const -> bool
 {
-    static const std::array<RenderItem::Point, 4> points{{{-1.0f, 1.0f},
-                                                          {1.0f, 1.0f},
-                                                          {-1.0f, -1.0f},
-                                                          {1.0f, -1.0f}}};
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Point), reinterpret_cast<void*>(offsetof(Point, x))); // Position
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points.data(), GL_STATIC_DRAW);
-}
-
-auto PresetTransition::IsDone() const -> bool
-{
-    const auto secondsSinceStart = std::chrono::duration<double>(std::chrono::system_clock::now() - m_transitionStartTime).count();
+    const auto secondsSinceStart = currentFrameTime - m_transitionStartTime;
     return m_durationSeconds <= 0.0 || secondsSinceStart >= m_durationSeconds;
+}
+
+auto PresetTransition::Progress(double currentFrameTime) const -> double
+{
+    return std::min(std::max((currentFrameTime - m_transitionStartTime) / m_durationSeconds, 0.0), 1.0);
 }
 
 void PresetTransition::Draw(const Preset& oldPreset,
                             const Preset& newPreset,
                             const RenderContext& context,
-                            const libprojectM::Audio::FrameAudioData& audioData)
+                            const libprojectM::Audio::FrameAudioData& audioData,
+                            double currentFrameTime)
 {
-    using namespace std::chrono_literals;
-
     if (m_transitionShader == nullptr)
     {
         return;
@@ -54,7 +56,7 @@ void PresetTransition::Draw(const Preset& oldPreset,
     std::mt19937 rand32(m_randomDevice());
 
     // Calculate progress values
-    const auto secondsSinceStart = std::chrono::duration<double>(std::chrono::system_clock::now() - m_transitionStartTime).count();
+    const auto secondsSinceStart = currentFrameTime - m_transitionStartTime;
 
     // If duration is zero,
     double linearProgress{1.0};
@@ -81,7 +83,7 @@ void PresetTransition::Draw(const Preset& oldPreset,
                                                             m_durationSeconds});
 
     m_transitionShader->SetUniformFloat2("timeParams", {secondsSinceStart,
-                                                        std::chrono::duration<float>(std::chrono::system_clock::now() - m_lastFrameTime).count()});
+                                                        currentFrameTime - m_lastFrameTime});
 
     m_transitionShader->SetUniformInt4("iRandStatic", m_staticRandomValues);
 
@@ -114,9 +116,7 @@ void PresetTransition::Draw(const Preset& oldPreset,
     }
 
     // Render the transition quad
-    glBindVertexArray(m_vaoID);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glBindVertexArray(0);
+    m_mesh.Draw();
 
     // Clean up
     oldPreset.OutputTexture()->Unbind(0);
@@ -127,10 +127,11 @@ void PresetTransition::Draw(const Preset& oldPreset,
         noiseDescriptors[i - 2].Unbind(textureUnit);
     }
 
+    Mesh::Unbind();
     Shader::Unbind();
 
     // Update last frame time.
-    m_lastFrameTime = std::chrono::system_clock::now();
+    m_lastFrameTime = currentFrameTime;
 }
 
 } // namespace Renderer

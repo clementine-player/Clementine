@@ -8,5 +8,5 @@ sysconfdir=${prefix}/
 Name: projectm-eval
 Version: @PROJECT_VERSION@
 Description: projectM Expression Evaluation Library
-Libs: -L${libdir} -l:projectM_eval
+Libs: -L${libdir} -lprojectM_eval
 Cflags: -I${includedir} -DPRJM_F_SIZE=@PROJECTM_EVAL_FLOAT_SIZE@

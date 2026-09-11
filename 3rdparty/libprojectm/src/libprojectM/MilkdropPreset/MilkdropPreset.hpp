@@ -27,7 +27,6 @@
 #include "CustomShape.hpp"
 #include "CustomWaveform.hpp"
 #include "DarkenCenter.hpp"
-#include "Filters.hpp"
 #include "FinalComposite.hpp"
 #include "MotionVectors.hpp"
 #include "PerFrameContext.hpp"
@@ -39,16 +38,15 @@
 #include <Renderer/CopyTexture.hpp>
 #include <Renderer/Framebuffer.hpp>
 
-#include <cassert>
-#include <map>
 #include <memory>
 #include <string>
 
 namespace libprojectM {
+class PresetFileParser;
+
 namespace MilkdropPreset {
 
 class Factory;
-class PresetFileParser;
 
 class MilkdropPreset : public ::libprojectM::Preset
 {
@@ -85,6 +83,8 @@ public:
     auto OutputTexture() const -> std::shared_ptr<Renderer::Texture> override;
 
     void DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image, const Renderer::RenderContext& renderContext) override;
+
+    void BindFramebuffer() override;
 
 private:
     void PerFrameUpdate();

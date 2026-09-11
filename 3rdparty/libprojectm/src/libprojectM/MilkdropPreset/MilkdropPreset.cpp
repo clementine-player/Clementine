@@ -25,9 +25,7 @@
 #include "MilkdropPresetExceptions.hpp"
 #include "PresetFileParser.hpp"
 
-#ifdef MILKDROP_PRESET_DEBUG
-#include <iostream>
-#endif
+#include <Logging.hpp>
 
 namespace libprojectM {
 namespace MilkdropPreset {
@@ -59,6 +57,8 @@ void MilkdropPreset::Initialize(const Renderer::RenderContext& renderContext)
 {
     assert(renderContext.textureManager);
     m_state.renderContext = renderContext;
+    m_state.blurTexture.Initialize(renderContext);
+    m_state.LoadShaders();
 
     // Initialize variables and code now we have a proper render state.
     CompileCodeAndRunInitExpressions();
@@ -103,7 +103,7 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
     }
 
     // y-flip the previous frame and assign the flipped texture as "main"
-    m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
+    m_flipTexture.Draw(*renderContext.shaderCache, m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
     m_state.mainTexture = m_flipTexture.Texture();
 
     // We now draw to the current framebuffer.
@@ -143,10 +143,8 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
     }
     m_border.Draw(m_perFrameContext);
 
-    // Todo: Song title anim would go here
-
     // y-flip the image for final compositing again
-    m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0), nullptr, true, false);
+    m_flipTexture.Draw(*renderContext.shaderCache, m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0), nullptr, true, false);
     m_state.mainTexture = m_flipTexture.Texture();
 
     // We no longer need the previous frame image, use it to render the final composite.
@@ -155,12 +153,10 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
 
     m_finalComposite.Draw(m_state, m_perFrameContext);
 
-    // ToDo: Draw user sprites (can have evaluated code)
-
     if (!m_finalComposite.HasCompositeShader())
     {
         // Flip texture again in "previous" framebuffer as old-school effects are still upside down.
-        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), m_framebuffer, m_previousFrameBuffer, true, false);
+        m_flipTexture.Draw(*renderContext.shaderCache, m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), m_framebuffer, m_previousFrameBuffer, true, false);
     }
 
     // Swap framebuffer IDs for the next frame.
@@ -180,7 +176,15 @@ void MilkdropPreset::DrawInitialImage(const std::shared_ptr<Renderer::Texture>& 
     m_framebuffer.SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);
 
     // Render to previous framebuffer, as this is the image used to draw the next frame on.
-    m_flipTexture.Draw(image, m_framebuffer, m_previousFrameBuffer);
+    m_flipTexture.Draw(*renderContext.shaderCache, image, m_framebuffer, m_previousFrameBuffer);
+}
+
+void MilkdropPreset::BindFramebuffer()
+{
+    if (m_framebuffer.Width() > 0 && m_framebuffer.Height() > 0)
+    {
+        m_framebuffer.BindDraw(m_previousFrameBuffer);
+    }
 }
 
 void MilkdropPreset::PerFrameUpdate()
@@ -199,9 +203,7 @@ void MilkdropPreset::PerFrameUpdate()
 
 void MilkdropPreset::Load(const std::string& pathname)
 {
-#ifdef MILKDROP_PRESET_DEBUG
-    std::cerr << "[Preset] Loading preset from file \"" << pathname << "\"." << std::endl;
-#endif
+    LOG_DEBUG("[MilkdropPreset] Loading preset from file \"" + pathname + "\".")
 
     SetFilename(ParseFilename(pathname));
 
@@ -209,10 +211,9 @@ void MilkdropPreset::Load(const std::string& pathname)
 
     if (!parser.Read(pathname))
     {
-#ifdef MILKDROP_PRESET_DEBUG
-        std::cerr << "[Preset] Could not parse preset file." << std::endl;
-#endif
-        throw MilkdropPresetLoadException("Could not parse preset file \"" + pathname + "\"");
+        const std::string error = "[MilkdropPreset] Could not parse preset file \"" + pathname + "\".";
+        LOG_ERROR(error)
+        throw MilkdropPresetLoadException(error);
     }
 
     InitializePreset(parser);
@@ -220,18 +221,15 @@ void MilkdropPreset::Load(const std::string& pathname)
 
 void MilkdropPreset::Load(std::istream& stream)
 {
-#ifdef MILKDROP_PRESET_DEBUG
-    std::cerr << "[Preset] Loading preset from stream." << std::endl;
-#endif
+    LOG_DEBUG("[MilkdropPreset] Loading preset from stream.");
 
     PresetFileParser parser;
 
     if (!parser.Read(stream))
     {
-#ifdef MILKDROP_PRESET_DEBUG
-        std::cerr << "[Preset] Could not parse preset data." << std::endl;
-#endif
-        throw MilkdropPresetLoadException("Could not parse preset data.");
+        const std::string error =  "[MilkdropPreset] Could not parse preset data.";
+        LOG_ERROR(error)
+        throw MilkdropPresetLoadException(error);
     }
 
     InitializePreset(parser);
@@ -313,6 +311,7 @@ auto MilkdropPreset::ParseFilename(const std::string& filename) -> std::string
 
     return filename.substr(start + 1, filename.length());
 }
+
 
 } // namespace MilkdropPreset
 } // namespace libprojectM

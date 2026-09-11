@@ -10,27 +10,16 @@ set(TRANSITION_SHADER_FILES
         TransitionShaders/TransitionShaderMainGlsl330.frag
         )
 
-string(REPLACE ";" "\\;" TRANSITION_SHADER_FILES_ARG "${TRANSITION_SHADER_FILES}")
-add_custom_command(OUTPUT
-        ${CMAKE_CURRENT_BINARY_DIR}/BuiltInTransitionsResources.hpp
-
-        COMMAND ${CMAKE_COMMAND}
-
-        ARGS
-        -D SHADER_FILES="${TRANSITION_SHADER_FILES_ARG}"
-        -D OUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}
-        -P ${CMAKE_CURRENT_SOURCE_DIR}/GenerateBuiltInTransitionsResources.cmake
-
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        DEPENDS # Files watched for changes:
+include(GenerateShaderResources)
+generate_shader_resources(${CMAKE_CURRENT_BINARY_DIR}/BuiltInTransitionsResources.hpp
         ${TRANSITION_SHADER_FILES}
-        BuiltInTransitionsResources.hpp.in
-        GenerateBuiltInTransitionsResources.cmake
         )
 
 add_library(Renderer OBJECT
         ${CMAKE_CURRENT_BINARY_DIR}/BuiltInTransitionsResources.hpp
-        BuiltInTransitionsResources.hpp.in
+        BlendMode.cpp
+        BlendMode.hpp
+        Color.hpp
         CopyTexture.cpp
         CopyTexture.hpp
         FileScanner.cpp
@@ -38,17 +27,29 @@ add_library(Renderer OBJECT
         Framebuffer.cpp
         Framebuffer.hpp
         IdleTextures.hpp
+        Mesh.cpp
+        Mesh.hpp
         MilkdropNoise.cpp
         MilkdropNoise.hpp
+        OpenGL.h
+        Platform/DynamicLibrary.cpp
+        Platform/DynamicLibrary.hpp
+        Platform/GladLoader.cpp
+        Platform/GladLoader.hpp
+        Platform/GLProbe.cpp
+        Platform/GLProbe.hpp
+        Platform/GLResolver.cpp
+        Platform/GLResolver.hpp
+        Point.hpp
         PresetTransition.cpp
         PresetTransition.hpp
         RenderContext.hpp
-        RenderItem.cpp
-        RenderItem.hpp
         Sampler.cpp
         Sampler.hpp
         Shader.cpp
         Shader.hpp
+        ShaderCache.cpp
+        ShaderCache.hpp
         Texture.cpp
         Texture.hpp
         TextureAttachment.cpp
@@ -57,9 +58,20 @@ add_library(Renderer OBJECT
         TextureManager.hpp
         TextureSamplerDescriptor.cpp
         TextureSamplerDescriptor.hpp
+        TextureUV.hpp
         TransitionShaderManager.cpp
         TransitionShaderManager.hpp
-        )
+        VertexArray.hpp
+        VertexBuffer.hpp
+        VertexBufferUsage.cpp
+        VertexBufferUsage.hpp
+        VertexIndexArray.cpp
+        VertexIndexArray.hpp
+        Platform/DynamicLibrary_win32.cpp
+        Platform/DynamicLibrary_posix.cpp
+        Platform/DynamicLibrary_emscripten.cpp
+        Platform/PlatformLibraryNames.hpp
+)
 
 target_include_directories(Renderer
         PRIVATE
@@ -73,11 +85,40 @@ target_link_libraries(Renderer
         PRIVATE
         libprojectM::API # For export header
         PUBLIC
-        GLM::GLM
+        glm::glm
         hlslparser
-        SOIL2
+        stb_image
+        glad
+        ${PROJECTM_OPENGL_LIBRARIES}
         )
+
+if(PROJECTM_FILESYSTEM_USE_BOOST)
+    target_link_libraries(Renderer
+        PRIVATE
+        ${PROJECTM_FILESYSTEM_LIBRARY}
+    )
+endif()
 
 set_target_properties(Renderer PROPERTIES
         FOLDER libprojectM
         )
+
+if(BUILD_SHARED_LIBS)
+    if(ENABLE_CXX_INTERFACE)
+        target_compile_definitions(Renderer
+                PRIVATE
+                projectM_api_EXPORTS
+                )
+    else()
+        target_compile_definitions(Renderer
+                PRIVATE
+                PROJECTM_CXX_STATIC_DEFINE
+                )
+    endif()
+else()
+    target_compile_definitions(Renderer
+            PRIVATE
+            PROJECTM_STATIC_DEFINE
+            PROJECTM_CXX_STATIC_DEFINE
+            )
+endif()

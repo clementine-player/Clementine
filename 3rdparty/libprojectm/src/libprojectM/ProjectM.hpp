@@ -20,12 +20,15 @@
  */
 #pragma once
 
-#include <projectM-4/projectM_export.h>
+#include <projectM-4/projectM_cxx_export.h>
 
 #include <Renderer/RenderContext.hpp>
+#include <Renderer/TextureTypes.hpp>
 
 #include <Audio/PCM.hpp>
 
+#include <cstdint>
+#include <istream>
 #include <memory>
 #include <string>
 #include <vector>
@@ -37,17 +40,27 @@ class CopyTexture;
 class PresetTransition;
 class Renderer;
 class TextureManager;
+class ShaderCache;
 class TransitionShaderManager;
 } // namespace Renderer
+
+namespace UserSprites {
+class SpriteManager;
+} // namespace UserSprites
 
 class Preset;
 class PresetFactoryManager;
 class TimeKeeper;
 
-class PROJECTM_EXPORT ProjectM
+class PROJECTM_CXX_EXPORT ProjectM
 {
 public:
     ProjectM();
+
+    ProjectM(const ProjectM& other) = delete;
+    ProjectM(ProjectM&& other) noexcept = delete;
+    auto operator=(const ProjectM& other) -> ProjectM& = delete;
+    auto operator=(ProjectM&& other) noexcept -> ProjectM& = delete;
 
     virtual ~ProjectM();
 
@@ -101,7 +114,29 @@ public:
 
     void ResetTextures();
 
-    void RenderFrame();
+    /**
+     * @brief Sets a callback function for loading textures from non-filesystem sources.
+     * @param callback The callback function, or nullptr to disable.
+     */
+    void SetTextureLoadCallback(Renderer::TextureLoadCallback callback);
+
+    void RenderFrame(uint32_t targetFramebufferObject = 0);
+
+    /**
+     * @brief Sets a user-specified time for rendering the next frame
+     * Negative values will make projectM use the system clock instead.
+     * @param secondsSinceStart Fractional seconds since rendering the first frame.
+     */
+    void SetFrameTime(double secondsSinceStart);
+
+    /**
+     * @brief Gets the time of the last frame rendered.
+     * @note This will not return the value set with SetFrameTime, but the actual time used to render the last frame.
+     *       If a user-specified frame time was set, this value is returned. Otherwise, the frame time measured via the
+     *       system clock will be returned.
+     * @return Seconds elapsed rendering the last frame since starting projectM.
+     */
+    auto GetFrameTime() -> double;
 
     void SetBeatSensitivity(float sensitivity);
 
@@ -155,6 +190,10 @@ public:
 
     void SetMeshSize(uint32_t meshResolutionX, uint32_t meshResolutionY);
 
+    void TexelOffsets(float& texelOffsetX, float& texelOffsetY) const;
+
+    void SetTexelOffsets(float texelOffsetX, float texelOffsetY);
+
     void Touch(float touchX, float touchY, int pressure, int touchType);
 
     void TouchDrag(float touchX, float touchY, int pressure);
@@ -169,14 +208,99 @@ public:
     /// Returns true if the active preset is locked
     auto PresetLocked() const -> bool;
 
+    /**
+     * @brief Sets whether newly loaded presets should start with a clean (black) canvas.
+     * @param enabled True to start with a clean canvas, false to copy the previous frame.
+     */
+    void SetPresetStartClean(bool enabled);
+
+    /**
+     * @brief Returns whether newly loaded presets start with a clean canvas.
+     * @return True if presets start with a clean canvas.
+     */
+    auto PresetStartClean() const -> bool;
+
     auto PCM() -> Audio::PCM&;
 
     auto WindowWidth() -> int;
 
     auto WindowHeight() -> int;
 
+    /**
+     * @brief Creates a new user sprite.
+     * @param type The type of the sprite to create.
+     * @param spriteData The type-dependent sprite data.
+     * @return A unique, non-zero sprite identifier if the sprite was created successfully,
+     *         or zero if any error occurred or the sprite limit was reached.
+     */
+    auto AddUserSprite(const std::string& type, const std::string& spriteData) -> uint32_t;
+
+    /**
+     * @brief Destroys a single sprite using its identifier.
+     * @param spriteIdentifier The identifier of the sprite to destroy.
+     */
+    void DestroyUserSprite(uint32_t spriteIdentifier);
+
+    /**
+     * @brief Destroys all active user sprites.
+     */
+    void DestroyAllUserSprites();
+
+    /**
+     * @brief Returns the current user sprite count.
+     * @return The number of currently active user sprites.
+     */
+    auto UserSpriteCount() const -> uint32_t;
+
+    /**
+     * @brief Sets a new limit for user sprites.
+     * Any sprites above the new limit will be removed in order, oldest first.
+     * @param maxSprites The new sprite limit. 0 disables sprites, 16 is the default.
+     */
+    void SetUserSpriteLimit(uint32_t maxSprites);
+
+    /**
+     * @brief Returns the current user sprite display limit.
+     * @return The current user sprite limit.
+     */
+    auto UserSpriteLimit() const -> uint32_t;
+
+    /**
+     * @brief Returns a list of identifiers for all active user sprites.
+     * @return A list of all active user sprite identifiers, ordered by age (oldest first).
+     */
+    auto UserSpriteIdentifiers() const -> std::vector<uint32_t>;
+
+    /**
+     * @brief Returns the current value of a variable in a user sprite's expression code.
+     * @param spriteId The sprite ID to retrieve the value for.
+     * @param variableName The variable to retrieve the value for.
+     * @return The value of the requested variable and sprite.
+     */
+    auto UserSpriteGetVariableValue(uint32_t spriteId, const std::string& variableName) const -> double;
+
+    /**
+     * @brief Set the value of a variable in a user sprite's expression code.
+     * @param spriteId The sprite ID to set the value for.
+     * @param variableName The variable to set the value for.
+     * @param value The new value.
+     */
+    void UserSpriteSetVariableValue(uint32_t spriteId, const std::string& variableName, double value);
+
+    /**
+     * @brief Draws the given texture on the active preset's main texture to get a "burn-in" effect.
+     * @param openGlTextureId The OpenGL texture to draw onto the active preset(s).
+     * @param left Left coordinate in pixels on the destination texture.
+     * @param top Top coordinate in pixels on the destination texture.
+     * @param width Width of the final image on the destination texture in pixels, can be negative to flip it horizontally.
+     * @param height Height of the final image on the destination texture in pixels, can be negative to flip it vertically.
+     */
+    void BurnInTexture(uint32_t openGlTextureId, int left, int top, int width, int height);
+
 private:
     void Initialize();
+
+    void CheckGLSLVersion();
 
     void StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hardCut);
 
@@ -184,11 +308,11 @@ private:
 
     auto GetRenderContext() -> Renderer::RenderContext;
 
-    uint32_t m_meshX{32};              //!< Per-point mesh horizontal resolution.
-    uint32_t m_meshY{24};              //!< Per-point mesh vertical resolution.
-    uint32_t m_targetFps{35};          //!< Target frames per second.
-    uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
-    uint32_t m_windowHeight{0};           //!< EvaluateFrameData window height. If 0, nothing is rendered.
+    uint32_t m_meshX{32};            //!< Per-point mesh horizontal resolution.
+    uint32_t m_meshY{24};            //!< Per-point mesh vertical resolution.
+    uint32_t m_targetFps{35};        //!< Target frames per second.
+    uint32_t m_windowWidth{0};       //!< EvaluateFrameData window width. If 0, nothing is rendered.
+    uint32_t m_windowHeight{0};      //!< EvaluateFrameData window height. If 0, nothing is rendered.
     double m_presetDuration{30.0};   //!< Preset duration in seconds.
     double m_softCutDuration{3.0};   //!< Soft cut transition time.
     double m_hardCutDuration{20.0};  //!< Time after which a hard cut can happen at the earliest.
@@ -198,25 +322,31 @@ private:
     bool m_aspectCorrection{true};   //!< If true, corrects aspect ratio for non-rectangular windows.
     float m_easterEgg{1.0};          //!< Random preset duration modifier. See TimeKeeper class.
     float m_previousFrameVolume{};   //!< Volume in previous frame, used for hard cuts.
+    float m_texelOffsetX{0.0};       //!< Horizontal warp shader texel offset
+    float m_texelOffsetY{0.0};       //!< Vertical warp shader texel offset
 
-    std::vector<std::string> m_textureSearchPaths; ///!< List of paths to search for texture files
+    std::vector<std::string> m_textureSearchPaths;     ///!< List of paths to search for texture files
+    Renderer::TextureLoadCallback m_textureLoadCallback; //!< Optional callback for loading textures from non-filesystem sources.
 
     /** Timing information */
     int m_frameCount{0}; //!< Rendered frame count since start
 
     bool m_presetLocked{false};         //!< If true, the preset change event will not be sent.
     bool m_presetChangeNotified{false}; //!< Stores whether the user has been notified that projectM wants to switch the preset.
+    bool m_presetStartClean{false};     //!< If true, new presets start with a black canvas instead of the previous frame.
 
     std::unique_ptr<PresetFactoryManager> m_presetFactoryManager; //!< Provides access to all available preset factories.
 
     Audio::PCM m_audioStorage;                                                    //!< Audio data buffer and analyzer instance.
     std::unique_ptr<Renderer::TextureManager> m_textureManager;                   //!< The texture manager.
+    std::unique_ptr<Renderer::ShaderCache> m_shaderCache;                         //!< The global shader cache.
     std::unique_ptr<Renderer::TransitionShaderManager> m_transitionShaderManager; //!< The transition shader manager.
     std::unique_ptr<Renderer::CopyTexture> m_textureCopier;                       //!< Class that copies textures 1:1 to another texture or framebuffer.
     std::unique_ptr<Preset> m_activePreset;                                       //!< Currently loaded preset.
     std::unique_ptr<Preset> m_transitioningPreset;                                //!< Destination preset when smooth preset switching.
     std::unique_ptr<Renderer::PresetTransition> m_transition;                     //!< Transition effect used for blending.
     std::unique_ptr<TimeKeeper> m_timeKeeper;                                     //!< Keeps the different timers used to render and switch presets.
+    std::unique_ptr<UserSprites::SpriteManager> m_spriteManager;                  //!< Manages all types of user sprites.
 };
 
 } // namespace libprojectM

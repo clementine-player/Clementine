@@ -573,9 +573,13 @@ TEST_F(TreeFunctions, LogicalNotOperator)
     bnotNode->func(bnotNode, &valuePointer);
     EXPECT_PRJM_F_EQ(*valuePointer, 1.0) << "!0";
 
-    var1->value = 0.00000000001;
+    var1->value = 0.0001;
     bnotNode->func(bnotNode, &valuePointer);
-    EXPECT_PRJM_F_EQ(*valuePointer, 0.0) << "!0.00000000001";
+    EXPECT_PRJM_F_EQ(*valuePointer, 0.0) << "!0.0001";
+
+    var1->value = 0.000009; // Slightly below "closefac"
+    bnotNode->func(bnotNode, &valuePointer);
+    EXPECT_PRJM_F_EQ(*valuePointer, 1.0) << "!0.000009";
 
     var1->value = -1.0;
     bnotNode->func(bnotNode, &valuePointer);

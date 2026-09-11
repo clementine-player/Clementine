@@ -113,17 +113,7 @@ static prjm_eval_function_def_t intrinsic_function_table[] = {
         assert(ctx->func)
 
 /* Allowed error for float/double comparisons to exact values */
-#define COMPARE_CLOSEFACTOR 0.00001
-static const PRJM_EVAL_F close_factor = COMPARE_CLOSEFACTOR;
-
-/* These factors are not exactly as close to zero as their ns-eel2 equivalents, but that shouldn't
- * matter too much. In ns-eel2, the value is represented as binary 0x00000000FFFFFFFF for doubles.
- */
-#if PRJM_F_SIZE == 4
-static const PRJM_EVAL_F close_factor_low = 1e-41;
-#else
-static const PRJM_EVAL_F close_factor_low = 1e-300;
-#endif
+#define COMPARE_CLOSEFACTOR ((PRJM_EVAL_F)0.00001)
 
 /* Maximum number of loop iterations */
 #define MAX_LOOP_COUNT 1048576
@@ -297,7 +287,7 @@ prjm_eval_function_decl(execute_while)
     do
     {
         invoke_arg(0, &value_ptr);
-    } while (fabs(*value_ptr) > close_factor_low && --loop_count_int);
+    } while (fabs(*value_ptr) > COMPARE_CLOSEFACTOR && --loop_count_int);
 
     assign_ret_ref(value_ptr);
 }
@@ -436,7 +426,7 @@ prjm_eval_function_decl(bnot)
 
     invoke_arg(0, &value_ptr);
 
-    assign_ret_val(fabs(*value_ptr) < close_factor_low ? 1.0 : 0.0);
+    assign_ret_val(fabs(*value_ptr) < COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
 }
 
 prjm_eval_function_decl(equal)
@@ -451,7 +441,7 @@ prjm_eval_function_decl(equal)
     invoke_arg(0, &val1_ptr);
     invoke_arg(1, &val2_ptr);
 
-    assign_ret_val(fabs(*val1_ptr - *val2_ptr) < close_factor_low ? 1.0 : 0.0);
+    assign_ret_val(fabs(*val1_ptr - *val2_ptr) < COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
 }
 
 prjm_eval_function_decl(notequal)
@@ -465,7 +455,7 @@ prjm_eval_function_decl(notequal)
     invoke_arg(0, &val1_ptr);
     invoke_arg(1, &val2_ptr);
 
-    assign_ret_val(fabs(*val1_ptr - *val2_ptr) > close_factor_low ? 1.0 : 0.0);
+    assign_ret_val(fabs(*val1_ptr - *val2_ptr) > COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
 }
 
 prjm_eval_function_decl(below)
@@ -585,7 +575,7 @@ prjm_eval_function_decl(div)
     invoke_arg(0, &val1_ptr);
     invoke_arg(1, &val2_ptr);
 
-    if(fabs(*val2_ptr) < close_factor_low)
+    if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
     {
         assign_ret_val(0.0);
         return;
@@ -630,11 +620,11 @@ prjm_eval_function_decl(boolean_and_op)
      */
     invoke_arg(0, &val1_ptr);
 
-    if (fabs(*val1_ptr) > close_factor_low)
+    if (fabs(*val1_ptr) > COMPARE_CLOSEFACTOR)
     {
         invoke_arg(1, &val2_ptr);
 
-        assign_ret_val(fabs(*val2_ptr) > close_factor_low ? 1.0 : 0.0);
+        assign_ret_val(fabs(*val2_ptr) > COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
     }
     else
     {
@@ -657,11 +647,11 @@ prjm_eval_function_decl(boolean_or_op)
      */
     invoke_arg(0, &val1_ptr);
 
-    if (fabs(*val1_ptr) < close_factor_low)
+    if (fabs(*val1_ptr) < COMPARE_CLOSEFACTOR)
     {
         invoke_arg(1, &val2_ptr);
 
-        assign_ret_val(fabs(*val2_ptr) > close_factor_low ? 1.0 : 0.0);
+        assign_ret_val(fabs(*val2_ptr) > COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
     }
     else
     {
@@ -682,7 +672,7 @@ prjm_eval_function_decl(boolean_and_func)
     invoke_arg(1, &val2_ptr);
 
     /* This function also uses the larger close factor! */
-    assign_ret_val(fabs(*val1_ptr) > close_factor && fabs(*val2_ptr) > close_factor ? 1.0 : 0.0);
+    assign_ret_val(fabs(*val1_ptr) > COMPARE_CLOSEFACTOR && fabs(*val2_ptr) > COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
 }
 
 prjm_eval_function_decl(boolean_or_func)
@@ -698,7 +688,7 @@ prjm_eval_function_decl(boolean_or_func)
     invoke_arg(1, &val2_ptr);
 
     /* This function also uses the larger close factor! */
-    assign_ret_val(fabs(*val1_ptr) > close_factor || fabs(*val2_ptr) > close_factor ? 1.0 : 0.0);
+    assign_ret_val(fabs(*val1_ptr) > COMPARE_CLOSEFACTOR || fabs(*val2_ptr) > COMPARE_CLOSEFACTOR ? 1.0 : 0.0);
 }
 
 prjm_eval_function_decl(neg)
@@ -762,7 +752,7 @@ prjm_eval_function_decl(div_op)
     invoke_arg(0, ret_val);
     invoke_arg(1, &val2_ptr);
 
-    if(fabs(*val2_ptr) < close_factor_low)
+    if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
     {
         assign_ret_val(0.0);
         return;
@@ -856,7 +846,7 @@ prjm_eval_function_decl(pow_op)
     invoke_arg(0, ret_val);
     invoke_arg(1, &val2_ptr);
 
-    if(fabs(**ret_val) < close_factor_low && *val2_ptr < 0)
+    if(fabs(**ret_val) < COMPARE_CLOSEFACTOR && *val2_ptr < 0)
     {
         assign_ret_val(.0);
         return;
@@ -992,7 +982,7 @@ prjm_eval_function_decl(pow)
     invoke_arg(0, &math_arg1_ptr);
     invoke_arg(1, &math_arg2_ptr);
 
-    if (fabs(*math_arg1_ptr) < close_factor_low && *math_arg2_ptr < 0)
+    if (fabs(*math_arg1_ptr) < COMPARE_CLOSEFACTOR && *math_arg2_ptr < 0)
     {
         assign_ret_val(.0);
         return;
@@ -1088,7 +1078,7 @@ prjm_eval_function_decl(sigmoid)
     invoke_arg(1, &math_arg2_ptr);
 
     double t = (1 + exp((double) -(*math_arg1_ptr) * (*math_arg2_ptr)));
-    assign_ret_val((PRJM_EVAL_F) (fabs(t) > close_factor ? 1.0 / t : .0));
+    assign_ret_val((PRJM_EVAL_F) (fabs(t) > COMPARE_CLOSEFACTOR ? 1.0 / t : .0));
 }
 
 prjm_eval_function_decl(sqr)

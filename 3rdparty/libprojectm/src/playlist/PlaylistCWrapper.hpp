@@ -83,6 +83,14 @@ public:
                                                void* userData);
 
     /**
+     * @brief Sets the preset load callback.
+     * @param callback The callback pointer.
+     * @param userData The callback context data.
+     */
+    virtual void SetPresetLoadCallback(projectm_playlist_preset_load_event callback,
+                                       void* userData);
+
+    /**
      * @brief Sets the last navigation direction used to switch a preset.
      * This is used when retrying on a failed preset load, keeping the same direction/logic as in the original switch.
      * @param direction The direction.
@@ -98,8 +106,10 @@ public:
 private:
     projectm_handle m_projectMInstance{nullptr}; //!< The projectM instance handle this instance is connected to.
 
-    uint32_t m_presetSwitchRetryCount{5};  //!< Number of switch retries before sending the failure event to the application.
-    uint32_t m_presetSwitchFailedCount{0}; //!< Number of retries since the last preset switch.
+    uint32_t m_presetSwitchRetryCount{500}; //!< Number of switch retries before sending the failure event to the application.
+    bool m_lastPresetSwitchFailed{false};   //!< Indicates that the last preset switch has failed.
+    std::string m_lastFailedPresetFileName; //!< File name of the last failed preset.
+    std::string m_lastFailedPresetError;    //!< Error message of the last failure.
 
     bool m_hardCutRequested{false}; //!< Stores the type of the last requested switch attempt.
 
@@ -108,6 +118,9 @@ private:
 
     projectm_playlist_preset_switch_failed_event m_presetSwitchFailedEventCallback{nullptr}; //!< Preset switch failed callback pointer set by the application.
     void* m_presetSwitchFailedEventUserData{nullptr};                                        //!< Context data pointer set by the application.
+
+    projectm_playlist_preset_load_event m_presetLoadEventCallback{nullptr}; //!< Preset load callback pointer set by the application.
+    void* m_presetLoadEventUserData{nullptr};                               //!< Context data pointer set by the application.
 
     NavigationDirection m_lastNavigationDirection{NavigationDirection::Next}; //!< Last direction used to switch a preset.
 };

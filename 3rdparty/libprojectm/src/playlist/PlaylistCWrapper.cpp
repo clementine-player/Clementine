@@ -62,6 +62,11 @@ void PlaylistCWrapper::OnPresetSwitchFailed(const char* presetFilename, const ch
     }
 
     auto* playlist = reinterpret_cast<PlaylistCWrapper*>(userData);
+
+    playlist->m_lastPresetSwitchFailed = true;
+    playlist->m_lastFailedPresetFileName = presetFilename;
+    playlist->m_lastFailedPresetError = message;
+
     auto lastDirection = playlist->GetLastNavigationDirection();
 
     if (lastDirection != NavigationDirection::Last)
@@ -69,38 +74,6 @@ void PlaylistCWrapper::OnPresetSwitchFailed(const char* presetFilename, const ch
         // Don't let the user go back to a broken preset.
         playlist->RemoveLastHistoryEntry();
     }
-
-    // Preset switch may fail due to broken presets, retry a few times before giving up.
-    if (playlist->m_presetSwitchFailedCount >= playlist->m_presetSwitchRetryCount)
-    {
-        if (playlist->m_presetSwitchFailedEventCallback != nullptr)
-        {
-            playlist->m_presetSwitchFailedEventCallback(presetFilename, message,
-                                                        playlist->m_presetSwitchFailedEventUserData);
-        }
-
-        return;
-    }
-
-    playlist->m_presetSwitchFailedCount++;
-
-    uint32_t playlistIndex{};
-    switch (lastDirection)
-    {
-        case NavigationDirection::Previous:
-            playlistIndex = playlist->PreviousPresetIndex();
-            break;
-
-        case NavigationDirection::Next:
-            playlistIndex = playlist->NextPresetIndex();
-            break;
-
-        case NavigationDirection::Last:
-            playlistIndex = playlist->LastPresetIndex();
-            break;
-    }
-
-    playlist->PlayPresetIndex(playlistIndex, playlist->m_hardCutRequested, false);
 }
 
 
@@ -130,24 +103,87 @@ void PlaylistCWrapper::SetPresetSwitchFailedCallback(projectm_playlist_preset_sw
 }
 
 
+void PlaylistCWrapper::SetPresetLoadCallback(projectm_playlist_preset_load_event callback, void* userData)
+{
+    m_presetLoadEventCallback = callback;
+    m_presetLoadEventUserData = userData;
+}
+
+
 void PlaylistCWrapper::PlayPresetIndex(uint32_t index, bool hardCut, bool resetFailureCount)
 {
-    if (resetFailureCount)
-    {
-        m_presetSwitchFailedCount = 0;
-    }
-
     m_hardCutRequested = hardCut;
 
-    const auto& playlistItems = Items();
+    auto& playlistItems = Items();
 
-    if (playlistItems.size() <= index)
+    uint32_t failedCount = 0;
+    while (true)
     {
-        return;
-    }
+        if (playlistItems.size() <= index)
+        {
+            return;
+        }
 
-    projectm_load_preset_file(m_projectMInstance,
-                              playlistItems.at(index).Filename().c_str(), !hardCut);
+        const auto& filename = playlistItems.at(index).Filename();
+
+        // If a preset load callback is set, give the application a chance to handle loading
+        if (m_presetLoadEventCallback != nullptr)
+        {
+            if (m_presetLoadEventCallback(index, filename.c_str(), hardCut, m_presetLoadEventUserData))
+            {
+                // Application handled the load - return without further action.
+                // The app is responsible for calling projectm_load_preset_file/data,
+                // handling errors, and firing the switched event when ready.
+                return;
+            }
+        }
+
+        // Default behavior: load from filesystem
+        projectm_load_preset_file(m_projectMInstance, filename.c_str(), !hardCut);
+
+        if (!m_lastPresetSwitchFailed)
+        {
+            break;
+        }
+
+        failedCount++;
+
+        if (failedCount >= m_presetSwitchRetryCount)
+        {
+            if (m_presetSwitchFailedEventCallback != nullptr)
+            {
+                m_presetSwitchFailedEventCallback(m_lastFailedPresetFileName.c_str(),
+                                                  m_lastFailedPresetError.c_str(),
+                                                  m_presetSwitchFailedEventUserData);
+            }
+
+            return;
+        }
+
+        m_lastPresetSwitchFailed = false;
+
+        // Remove failed preset from playlist
+        RemoveItem(index);
+
+        if (playlistItems.empty())
+        {
+            return;
+        }
+
+        // Set next index to proper value depending on navigation
+        switch (GetLastNavigationDirection())
+        {
+            case NavigationDirection::Last:
+                index = LastPresetIndex();
+                break;
+            case NavigationDirection::Next:
+                index = NextPresetIndex();
+                break;
+            case NavigationDirection::Previous:
+                index = PreviousPresetIndex();
+                break;
+        }
+    }
 
     if (m_presetSwitchedEventCallback != nullptr)
     {
@@ -156,13 +192,13 @@ void PlaylistCWrapper::PlayPresetIndex(uint32_t index, bool hardCut, bool resetF
 }
 
 
-void PlaylistCWrapper::SetLastNavigationDirection(PlaylistCWrapper::NavigationDirection direction)
+void PlaylistCWrapper::SetLastNavigationDirection(NavigationDirection direction)
 {
     m_lastNavigationDirection = direction;
 }
 
 
-auto PlaylistCWrapper::GetLastNavigationDirection() const -> PlaylistCWrapper::NavigationDirection
+auto PlaylistCWrapper::GetLastNavigationDirection() const -> NavigationDirection
 {
     return m_lastNavigationDirection;
 }
@@ -234,6 +270,15 @@ void projectm_playlist_set_preset_switch_failed_event_callback(projectm_playlist
 }
 
 
+void projectm_playlist_set_preset_load_event_callback(projectm_playlist_handle instance,
+                                                      projectm_playlist_preset_load_event callback,
+                                                      void* user_data)
+{
+    auto* playlist = playlist_handle_to_instance(instance);
+    playlist->SetPresetLoadCallback(callback, user_data);
+}
+
+
 void projectm_playlist_connect(projectm_playlist_handle instance, projectm_handle projectm_instance)
 {
     auto* playlist = playlist_handle_to_instance(instance);
@@ -263,7 +308,7 @@ auto projectm_playlist_items(projectm_playlist_handle instance, uint32_t start, 
 
     if (start >= items.size())
     {
-        auto* array = new char* [1] {};
+        auto* array = new char*[1]{};
         return array;
     }
 
