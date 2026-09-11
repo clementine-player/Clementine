@@ -453,7 +453,15 @@ void PlaylistView::ReloadBarPixmaps() {
 
 QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
   QImage image(filename);
-  image = image.scaledToHeight(row_height_, Qt::SmoothTransformation);
+  // scaledToHeight() rounds the derived width down, so the 1px-wide mid bar
+  // becomes a null image at smaller row heights and painting into it warns
+  // once per glow step.
+  if (!image.isNull() && row_height_ > 0) {
+    const int width =
+        qMax(1, qRound(image.width() * row_height_ / double(image.height())));
+    image = image.scaled(width, row_height_, Qt::IgnoreAspectRatio,
+                         Qt::SmoothTransformation);
+  }
 
   // Colour the bar with the palette colour
   QPainter p(&image);
