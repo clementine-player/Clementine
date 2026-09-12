@@ -619,11 +619,14 @@ jobs:
 
       - name: Download projectM presets
         run: |
-          git clone --depth=1 https://github.com/projectM-visualizer/presets-cream-of-the-crop \
-            3rdparty/libprojectm/presets-cream
+          # pinned so every platform ships the same presets
+          PRESETS_SHA=0180df21f5e0bd39b9060cc5de420ed2f1f9e509
+          git init -q 3rdparty/libprojectm/presets-cream
+          git -C 3rdparty/libprojectm/presets-cream fetch -q --depth=1 \
+            https://github.com/projectM-visualizer/presets-cream-of-the-crop.git \
+            "$PRESETS_SHA"
+          git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
-          rm -f 3rdparty/libprojectm/presets-cream/LICENSE.md \
-            3rdparty/libprojectm/presets-cream/README.md
 
       - name: cmake
         working-directory: bin
@@ -1306,6 +1309,17 @@ jobs:
         env:
           FASTLANE_TEAM_ID: ${{ vars.FASTLANE_TEAM_ID }}
         run: dist/setup_signing.sh
+
+      - name: Download projectM presets
+        run: |
+          # pinned so every platform ships the same presets
+          PRESETS_SHA=0180df21f5e0bd39b9060cc5de420ed2f1f9e509
+          git init -q 3rdparty/libprojectm/presets-cream
+          git -C 3rdparty/libprojectm/presets-cream fetch -q --depth=1 \
+            https://github.com/projectM-visualizer/presets-cream-of-the-crop.git \
+            "$PRESETS_SHA"
+          git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
+          rm -rf 3rdparty/libprojectm/presets-cream/.git
 
       - name: cmake
         working-directory: bin

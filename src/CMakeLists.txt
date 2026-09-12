@@ -1441,6 +1441,14 @@ if (APPLE)
   install(FILES ../dist/cacert.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
+  # projectM presets, fetched by CI. Optional, so a local build without them
+  # still configures; the app falls back to projectM's built-in idle preset.
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/libprojectm/presets-cream")
+    install(DIRECTORY ../3rdparty/libprojectm/presets-cream/
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets"
+      FILES_MATCHING PATTERN "*.milk")
+  endif()
+
   if (HAVE_BREAKPAD)
     install(DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
