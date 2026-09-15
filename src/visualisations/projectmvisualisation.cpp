@@ -146,6 +146,12 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
     InitProjectM();
   }
 
+  if (projectm_ && !pending_preset_.isNull()) {
+    projectm_load_preset_file(projectm_, pending_preset_.toUtf8().constData(),
+                              true);
+    pending_preset_.clear();
+  }
+
   if (projectm_) {
     // A QOpenGLWidget doesn't draw to FBO 0, so plain
     // projectm_opengl_render_frame() would composite somewhere never shown.
@@ -290,8 +296,7 @@ void ProjectMVisualisation::SetMode(Mode mode) {
 QString ProjectMVisualisation::preset_url() const { return preset_path_; }
 
 void ProjectMVisualisation::SetImmediatePreset(const QString& path) {
-  if (!projectm_) return;
-  projectm_load_preset_file(projectm_, path.toUtf8().constData(), true);
+  pending_preset_ = path;
 }
 
 void ProjectMVisualisation::Lock(bool lock) {
