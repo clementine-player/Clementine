@@ -60,7 +60,7 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image) {
   arg.beginStructure();
   arg << i.width();
   arg << i.height();
-  arg << i.bytesPerLine();
+  arg << static_cast<int>(i.bytesPerLine());
   arg << i.hasAlphaChannel();
   int channels = i.isGrayscale() ? 1 : (i.hasAlphaChannel() ? 4 : 3);
   arg << i.depth() / channels;
