@@ -45,6 +45,10 @@
 #include "internet/seafile/seafilesettingspage.h"
 #endif
 
+#ifdef HAVE_MEGA
+#include "internet/mega/megasettingspage.h"
+#endif
+
 #ifdef HAVE_SPOTIFY
 #include "internet/spotify/spotifysettingspage.h"
 #endif
@@ -81,6 +85,10 @@ void InternetSettingsCategory::AddChildren() {
 
 #ifdef HAVE_SEAFILE
   AddPage(SettingsDialog::Page_Seafile, new SeafileSettingsPage(dialog_));
+#endif
+
+#ifdef HAVE_MEGA
+  AddPage(SettingsDialog::Page_Mega, new MegaSettingsPage(dialog_));
 #endif
 
 #ifdef HAVE_AMAZON_CLOUD_DRIVE
