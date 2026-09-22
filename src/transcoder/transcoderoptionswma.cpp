@@ -21,7 +21,7 @@
 
 #include "ui_transcoderoptionswma.h"
 
-const char* TranscoderOptionsWma::kSettingsGroup = "Transcoder/ffenc_wmav2";
+const char* TranscoderOptionsWma::kSettingsGroup = "Transcoder/avenc_wmav2";
 
 TranscoderOptionsWma::TranscoderOptionsWma(QWidget* parent)
     : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsWma) {
