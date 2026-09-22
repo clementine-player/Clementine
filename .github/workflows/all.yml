@@ -228,8 +228,18 @@ jobs:
           path: bin/clementine-*.tar.xz
 
   build_fedora_42:
-    name: Build Fedora 42 RPM
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Fedora 42 RPM
+            runner: ubuntu-24.04
+            artifact: release_fedora_42
+          - name: Build Fedora 42 aarch64 RPM
+            runner: ubuntu-24.04-arm
+            artifact: release_fedora_42_aarch64
+    runs-on: ${{ matrix.runner }}
     container:
       image: fedora:42
     env:
@@ -331,12 +341,22 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_fedora_42
+          name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_fedora_43:
-    name: Build Fedora 43 RPM
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Fedora 43 RPM
+            runner: ubuntu-24.04
+            artifact: release_fedora_43
+          - name: Build Fedora 43 aarch64 RPM
+            runner: ubuntu-24.04-arm
+            artifact: release_fedora_43_aarch64
+    runs-on: ${{ matrix.runner }}
     container:
       image: fedora:43
     env:
@@ -435,12 +455,22 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_fedora_43
+          name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_fedora_44:
-    name: Build Fedora 44 RPM
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Fedora 44 RPM
+            runner: ubuntu-24.04
+            artifact: release_fedora_44
+          - name: Build Fedora 44 aarch64 RPM
+            runner: ubuntu-24.04-arm
+            artifact: release_fedora_44_aarch64
+    runs-on: ${{ matrix.runner }}
     container:
       image: fedora:44
     env:
@@ -539,7 +569,7 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_fedora_44
+          name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_mingw:
@@ -755,8 +785,18 @@ jobs:
           path: dist/windows/ClementineSetup*.exe
 
   build_bookworm_64:
-    name: Build Debian Bookworm 64-bit deb
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Debian Bookworm 64-bit deb
+            runner: ubuntu-24.04
+            artifact: release_bookworm_64
+          - name: Build Debian Bookworm arm64 deb
+            runner: ubuntu-24.04-arm
+            artifact: release_bookworm_arm64
+    runs-on: ${{ matrix.runner }}
     container:
       image: debian:bookworm
     steps:
@@ -812,7 +852,6 @@ jobs:
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
           -DDEB_DIST=bookworm
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
@@ -853,12 +892,22 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_bookworm_64
+          name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
 
   build_trixie_64:
-    name: Build Debian Trixie 64-bit deb
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Debian Trixie 64-bit deb
+            runner: ubuntu-24.04
+            artifact: release_trixie_64
+          - name: Build Debian Trixie arm64 deb
+            runner: ubuntu-24.04-arm
+            artifact: release_trixie_arm64
+    runs-on: ${{ matrix.runner }}
     container:
       image: debian:trixie
     steps:
@@ -914,7 +963,6 @@ jobs:
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
           -DDEB_DIST=trixie
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
@@ -946,12 +994,22 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_trixie_64
+          name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
 
   build_jammy_64:
-    name: Build Ubuntu Jammy 64-bit deb
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Ubuntu Jammy 64-bit deb
+            runner: ubuntu-24.04
+            artifact: release_jammy_64
+          - name: Build Ubuntu Jammy arm64 deb
+            runner: ubuntu-24.04-arm
+            artifact: release_jammy_arm64
+    runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:jammy
     steps:
@@ -1044,12 +1102,22 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_jammy_64
+          name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
 
   build_noble_64:
-    name: Build Ubuntu Noble 64-bit deb
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Ubuntu Noble 64-bit deb
+            runner: ubuntu-24.04
+            artifact: release_noble_64
+          - name: Build Ubuntu Noble arm64 deb
+            runner: ubuntu-24.04-arm
+            artifact: release_noble_arm64
+    runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:noble
     steps:
@@ -1142,7 +1210,7 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_noble_64
+          name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
 
   build_resolute_64:
