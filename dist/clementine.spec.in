@@ -62,7 +62,7 @@ BuildRequires:  pkgconfig(libudf)
 # GStreamer codec dependencies
 Requires:       gstreamer1-plugins-ugly-free
 
-%ifarch x86_64
+%if 0%{?__isa_bits} == 64
 Requires:       gstreamer1(decoder-audio/x-vorbis)()(64bit)
 Requires:       gstreamer1(decoder-audio/x-flac)()(64bit)
 Requires:       gstreamer1(decoder-audio/x-speex)()(64bit)
