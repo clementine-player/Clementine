@@ -39,6 +39,7 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QStringList>
+#include <QSysInfo>
 #include <QTcpServer>
 #include <QTemporaryFile>
 #include <QUrl>
@@ -53,6 +54,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
+#include "version.h"
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QRandomGenerator>
@@ -791,11 +793,14 @@ QString ScrubUrlQueries(const QString& str) {
 }
 
 QString MakeBugReportUrl(const QString& title) {
-  // Example:
-  // https://github.com/clementine-player/Clementine/issues/new?title=New%20bug
+  // Opens .github/ISSUE_TEMPLATE/bug_report.yml; other keys prefill the form
+  // fields with those ids.
   QUrl url("https://github.com/clementine-player/Clementine/issues/new");
   QUrlQuery query;
+  query.addQueryItem("template", "bug_report.yml");
   query.addQueryItem("title", title);
+  query.addQueryItem("version", CLEMENTINE_VERSION_DISPLAY);
+  query.addQueryItem("os", QSysInfo::prettyProductName());
   url.setQuery(query);
   return url.toString(QUrl::FullyEncoded);
 }
