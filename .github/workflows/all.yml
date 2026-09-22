@@ -7,6 +7,11 @@ on:
     branches:
       - master
 
+# The Linux containers default to the plain C locale, which makes every Qt
+# tool and the smoke tests warn that Qt is switching to C.UTF-8.
+env:
+  LANG: C.UTF-8
+
 jobs:
   lint:
     name: Lint
