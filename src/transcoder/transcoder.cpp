@@ -269,7 +269,7 @@ QString Transcoder::MimeType(CodecType type) {
     case Codec_Opus:
       return "audio/x-opus";
     case Codec_Wma:
-      return "audio/x-wma";
+      return "audio/x-wma, wmaversion=(int)2";
   }
   return "unknown";
 }

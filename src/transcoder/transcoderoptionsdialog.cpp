@@ -95,7 +95,7 @@ TranscoderOptionsInterface* TranscoderOptionsDialog::MakeOptionsPage(
     return new TranscoderOptionsOpus(parent);
   } else if (element == "speexenc") {
     return new TranscoderOptionsSpeex(parent);
-  } else if (element == "ffenc_wmav2") {
+  } else if (element == "avenc_wmav2") {
     return new TranscoderOptionsWma(parent);
   } else {
     return new TranscoderOptionsError(mime_type, element, parent);
