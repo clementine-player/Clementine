@@ -108,7 +108,7 @@ jobs:
       - name: tx config
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
-        run: tx add --organization davidsansome --project clementine --resource clementineplayer --file-filter 'src/translations/<lang>.po' --type PO src/translations/en.po
+        run: tx add --organization davidsansome --project clementine --resource clementineplayer --file-filter 'src/translations/<lang>.po' --type PO src/translations/translations.pot
       - name: tx push
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
