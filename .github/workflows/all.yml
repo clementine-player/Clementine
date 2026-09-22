@@ -1013,7 +1013,6 @@ jobs:
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
           -DDEB_DIST=jammy
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
@@ -1112,7 +1111,6 @@ jobs:
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
           -DDEB_DIST=noble
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
@@ -1148,8 +1146,18 @@ jobs:
           path: bin/clementine_*.deb
 
   build_resolute_64:
-    name: Build Ubuntu Resolute 64-bit deb
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Ubuntu Resolute 64-bit deb
+            runner: ubuntu-24.04
+            artifact: release_resolute_64
+          - name: Build Ubuntu Resolute arm64 deb
+            runner: ubuntu-24.04-arm
+            artifact: release_resolute_arm64
+    runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:resolute
     steps:
@@ -1211,7 +1219,6 @@ jobs:
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
           -DDEB_DIST=resolute
           -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
@@ -1243,7 +1250,7 @@ jobs:
 
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: release_resolute_64
+          name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
 
   build_mac:
