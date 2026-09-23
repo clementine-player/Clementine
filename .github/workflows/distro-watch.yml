@@ -86,7 +86,10 @@ jobs:
           anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
           anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           github_token: ${{ github.token }}
-          claude_args: --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
+          claude_args: |
+            --model claude-sonnet-5
+            --max-turns 30
+            --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
           prompt: |
             Add CI for ${{ steps.check.outputs.name }} (container image
             `${{ steps.check.outputs.image }}`) to .github/workflows/all.yml.
@@ -112,7 +115,10 @@ jobs:
           anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
           anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           github_token: ${{ github.token }}
-          claude_args: --allowedTools "Read,Edit,Write,Glob,Grep"
+          claude_args: |
+            --model claude-sonnet-5
+            --max-turns 10
+            --allowedTools "Read,Edit,Write,Glob,Grep"
           prompt: |
             ${{ steps.check.outputs.name }} (container image
             `${{ steps.check.outputs.image }}`) is end-of-life. Remove it from
