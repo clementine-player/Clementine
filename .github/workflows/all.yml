@@ -1448,3 +1448,29 @@ jobs:
         with:
           name: release_mac
           path: bin/clementine-*.dmg
+
+  # The single required status check for master: it passes only when every
+  # job above did. Adding or removing a build job means editing this list
+  # rather than the branch protection settings.
+  ci:
+    name: CI
+    if: always()
+    needs:
+      - lint
+      - build_source
+      - build_bookworm_64
+      - build_trixie_64
+      - build_jammy_64
+      - build_noble_64
+      - build_resolute_64
+      - build_fedora_42
+      - build_fedora_43
+      - build_fedora_44
+      - build_mac
+      - build_mingw
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check the jobs it depends on
+        run: |
+          echo '${{ toJSON(needs) }}' | tee /dev/stderr |
+            jq -e 'all(.[]; .result == "success" or .result == "skipped")'
