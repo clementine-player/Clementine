@@ -46,13 +46,17 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget* widget) {
   // Replace %palette-role with actual colours
   QPalette p(widget->palette());
 
-  QColor alt = p.color(QPalette::AlternateBase);
-  alt.setAlpha(50);
+  // The alternate row colour is made translucent so the playlist's background
+  // image shows through it. Cap the opacity rather than overwriting it: some
+  // styles (windows11) already supply a faint translucent tint - black at a
+  // few percent - and forcing that to 50% turns it into a dark grey.
+  const QColor alt = p.color(QPalette::AlternateBase);
+  const int alt_alpha_percent = qRound(qMin(alt.alphaF(), 0.5f) * 100);
   contents.replace("%palette-alternate-base", QString("rgba(%1,%2,%3,%4%)")
                                                   .arg(alt.red())
                                                   .arg(alt.green())
                                                   .arg(alt.blue())
-                                                  .arg(alt.alpha()));
+                                                  .arg(alt_alpha_percent));
 
   ReplaceColor(&contents, "Window", p, QPalette::Window);
   ReplaceColor(&contents, "Background", p, QPalette::Window);
