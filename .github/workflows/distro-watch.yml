@@ -11,19 +11,31 @@
 #      Generate a private key.
 #   2. Install the app on clementine-player, "Only select repositories":
 #      Clementine.
-#   3. In this repository's Settings > Secrets and variables > Actions, add:
-#      - variable DISTRO_BOT_CLIENT_ID: the app's client ID
-#      - secret DISTRO_BOT_PRIVATE_KEY: the private key (.pem contents)
-#      - secret CLAUDE_CODE_OAUTH_TOKEN: from `claude setup-token`
-#   4. Don't add the app to any ruleset or branch protection bypass list.
-#   5. Try it with `gh workflow run distro-watch` once this is on master.
+#   3. In the Claude Console (Settings > Workload identity), register
+#      https://token.actions.githubusercontent.com as an issuer (JWKS source
+#      "discovery"), create a service account, and create a federation rule
+#      for that service account matching subjects that start with
+#      "repo:clementine-player/Clementine:". Claude then authenticates with
+#      the workflow's OIDC token, so there's no API key or subscription token
+#      to store or renew.
+#   4. In this repository's Settings > Secrets and variables > Actions, add:
+#      - secret DISTRO_BOT_PRIVATE_KEY: the GitHub App's private key (.pem)
+#      - variable DISTRO_BOT_CLIENT_ID: the GitHub App's client ID
+#      - variables ANTHROPIC_FEDERATION_RULE_ID (fdrl_...),
+#        ANTHROPIC_ORGANIZATION_ID (a UUID) and
+#        ANTHROPIC_SERVICE_ACCOUNT_ID (svac_...) from step 3. These are
+#        identifiers rather than credentials.
+#   5. Don't add the GitHub App to any ruleset or branch protection bypass
+#      list.
+#   6. Try it with `gh workflow run distro-watch` once this is on master.
 #
 # Security boundaries:
 #   - The `propose` job can't write to GitHub: it only has a read-only
 #     GITHUB_TOKEN, and the checkout keeps no credentials. Claude runs there
-#     and can read the Claude token and anything public, nothing else. When
-#     removing a release it has no shell; adding one needs a shell to check
-#     package names in the new release's container.
+#     and can read public data and a short-lived Claude API token scoped to
+#     the service account above, nothing else. When removing a release it has
+#     no shell; adding one needs a shell to check package names in the new
+#     release's container.
 #   - Claude's only output is a patch artifact. The `open-pr` job applies it to
 #     a clean checkout on a fresh runner, so nothing Claude left on its runner
 #     (git hooks, processes) can reach the app token, and rejects any patch
@@ -50,6 +62,9 @@ jobs:
     name: Propose a distro release change
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write  # exchanged for Claude API access, see above
     outputs:
       action: ${{ steps.check.outputs.action }}
       name: ${{ steps.check.outputs.name }}
@@ -67,7 +82,9 @@ jobs:
         if: steps.check.outputs.action == 'add'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_federation_rule_id: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           github_token: ${{ github.token }}
           claude_args: --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
           prompt: |
@@ -91,7 +108,9 @@ jobs:
         if: steps.check.outputs.action == 'remove'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_federation_rule_id: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           github_token: ${{ github.token }}
           claude_args: --allowedTools "Read,Edit,Write,Glob,Grep"
           prompt: |
