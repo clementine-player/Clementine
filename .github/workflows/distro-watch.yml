@@ -97,7 +97,8 @@ jobs:
             - Copy the newest existing job for the same distro, keeping its
               structure (including any matrix), steps and smoke tests. Use the
               same naming pattern for the job ID, display name and artifacts.
-            - Add the new job to create_release's `needs`.
+            - Add the new job to the `needs` of both create_release and the
+              `ci` job, which is master's required status check.
             - Check every package in its install step exists in the new
               release, e.g. `docker run --rm ${{ steps.check.outputs.image }}`
               with `dnf install --assumeno` or `apt-get update && apt-get
@@ -125,7 +126,8 @@ jobs:
             .github/workflows/all.yml.
 
             - Delete the build job(s) that use this image, and remove them
-              from create_release's `needs`.
+              from the `needs` of both create_release and the `ci` job, which
+              is master's required status check.
             - If any other job uses the image (e.g. to build the source
               tarball), don't delete it: switch it to the newest release of
               the same distro that CI still builds, and say so.
