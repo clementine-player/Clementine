@@ -1,0 +1,198 @@
+# Keeps the Linux releases CI builds in all.yml current: weekly, it finds one
+# release to add (newly released) or remove (end-of-life) with
+# dist/check-new-distros.py, has Claude edit all.yml, and opens a PR from a
+# dedicated GitHub App for a maintainer to review.
+#
+# One-time setup:
+#   1. Create a GitHub App under the clementine-player organisation (Settings >
+#      Developer settings > GitHub Apps), e.g. "clementine-distro-bot":
+#      webhook disabled; repository permissions Contents, Pull requests and
+#      Workflows set to Read & write; installable on this account only.
+#      Generate a private key.
+#   2. Install the app on clementine-player, "Only select repositories":
+#      Clementine.
+#   3. In this repository's Settings > Secrets and variables > Actions, add:
+#      - variable DISTRO_BOT_CLIENT_ID: the app's client ID
+#      - secret DISTRO_BOT_PRIVATE_KEY: the private key (.pem contents)
+#      - secret CLAUDE_CODE_OAUTH_TOKEN: from `claude setup-token`
+#   4. Don't add the app to any ruleset or branch protection bypass list.
+#   5. Try it with `gh workflow run distro-watch` once this is on master.
+#
+# Security boundaries:
+#   - The `propose` job can't write to GitHub: it only has a read-only
+#     GITHUB_TOKEN, and the checkout keeps no credentials. Claude runs there
+#     and can read the Claude token and anything public, nothing else. When
+#     removing a release it has no shell; adding one needs a shell to check
+#     package names in the new release's container.
+#   - Claude's only output is a patch artifact. The `open-pr` job applies it to
+#     a clean checkout on a fresh runner, so nothing Claude left on its runner
+#     (git hooks, processes) can reach the app token, and rejects any patch
+#     that touches anything but .github/workflows/all.yml.
+#   - The app token is minted only in `open-pr`, is scoped to this repository
+#     with the three permissions above, and expires after an hour. The app's
+#     private key never reaches Claude.
+#   - A maintainer reviews every PR before it can merge. Note that the PR's CI
+#     runs the PR's own all.yml with this repository's secrets, so review the
+#     diff before approving any CI runs that need them, or keep those secrets
+#     in environments restricted to master.
+
+name: distro-watch
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  propose:
+    name: Propose a distro release change
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      action: ${{ steps.check.outputs.action }}
+      name: ${{ steps.check.outputs.name }}
+      branch: ${{ steps.check.outputs.branch }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Find a release to add or remove
+        id: check
+        run: dist/check-new-distros.py >> "$GITHUB_OUTPUT"
+
+      - name: Add the release with Claude
+        if: steps.check.outputs.action == 'add'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
+          prompt: |
+            Add CI for ${{ steps.check.outputs.name }} (container image
+            `${{ steps.check.outputs.image }}`) to .github/workflows/all.yml.
+
+            - Copy the newest existing job for the same distro, keeping its
+              structure (including any matrix), steps and smoke tests. Use the
+              same naming pattern for the job ID, display name and artifacts.
+            - Add the new job to create_release's `needs`.
+            - Check every package in its install step exists in the new
+              release, e.g. `docker run --rm ${{ steps.check.outputs.image }}`
+              with `dnf install --assumeno` or `apt-get update && apt-get
+              install --dry-run`. Replace renamed or removed packages.
+            - Edit only .github/workflows/all.yml. Do not commit or push.
+            - Write a short pull request description to
+              ${{ runner.temp }}/pr-body.md: what was added, any package
+              changes and why, and anything you're unsure about.
+
+      - name: Remove the release with Claude
+        if: steps.check.outputs.action == 'remove'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: --allowedTools "Read,Edit,Write,Glob,Grep"
+          prompt: |
+            ${{ steps.check.outputs.name }} (container image
+            `${{ steps.check.outputs.image }}`) is end-of-life. Remove it from
+            .github/workflows/all.yml.
+
+            - Delete the build job(s) that use this image, and remove them
+              from create_release's `needs`.
+            - If any other job uses the image (e.g. to build the source
+              tarball), don't delete it: switch it to the newest release of
+              the same distro that CI still builds, and say so.
+            - Edit only .github/workflows/all.yml. Do not commit or push.
+            - Write a short pull request description to
+              ${{ runner.temp }}/pr-body.md: what was removed and why, and
+              anything else you changed.
+
+      - name: Save the change as a patch
+        if: steps.check.outputs.action != ''
+        run: |
+          mkdir -p "$RUNNER_TEMP/change"
+          git add -A
+          git diff --cached --binary > "$RUNNER_TEMP/change/change.patch"
+          if [ -s "$RUNNER_TEMP/pr-body.md" ]; then
+            cp "$RUNNER_TEMP/pr-body.md" "$RUNNER_TEMP/change/"
+          fi
+
+      - if: steps.check.outputs.action != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: distro-watch-change
+          path: ${{ runner.temp }}/change/
+
+  open-pr:
+    name: Open the pull request
+    needs: propose
+    if: needs.propose.outputs.action != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: distro-watch-change
+          path: ${{ runner.temp }}/change
+
+      - name: Apply and check the change
+        id: apply
+        env:
+          PATCH: ${{ runner.temp }}/change/change.patch
+        run: |
+          if [ ! -s "$PATCH" ]; then
+            echo "::warning::Claude made no changes"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git apply --index "$PATCH"
+          changed=$(git diff --cached --name-only)
+          if [ "$changed" != .github/workflows/all.yml ]; then
+            echo "::error::The change touches more than all.yml: $changed"
+            exit 1
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Mint app token
+        if: steps.apply.outputs.changed == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@v3.2.0
+        with:
+          client-id: ${{ vars.DISTRO_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.DISTRO_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+          permission-workflows: write
+
+      - name: Push and open the pull request
+        if: steps.apply.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          ACTION: ${{ needs.propose.outputs.action }}
+          NAME: ${{ needs.propose.outputs.name }}
+          BRANCH: ${{ needs.propose.outputs.branch }}
+          BODY: ${{ runner.temp }}/change/pr-body.md
+        run: |
+          if [ "$ACTION" = add ]; then
+            title="Add CI for $NAME"
+          else
+            title="Remove CI for $NAME (end-of-life)"
+          fi
+
+          user_id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)
+          git switch -c "$BRANCH"
+          git -c user.name="${APP_SLUG}[bot]" \
+              -c user.email="${user_id}+${APP_SLUG}[bot]@users.noreply.github.com" \
+              commit -qm "$title"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$BRANCH"
+
+          [ -s "$BODY" ] || echo "$title." > "$BODY"
+          gh pr create --base master --head "$BRANCH" \
+            --title "$title" --body-file "$BODY" --reviewer hatstand
