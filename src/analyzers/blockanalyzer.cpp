@@ -30,6 +30,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QResizeEvent>
+#include <QtMath>
 #include <cmath>
 #include <cstdlib>
 
@@ -51,6 +52,9 @@ BlockAnalyzer::BlockAnalyzer(QWidget* parent)
       columns_(0),
       rows_(0),
       y_(0),
+      block_w_(kWidth),
+      block_h_(kHeight),
+      pad_(1),
       canvas_(),
       rthresh_(kMaxRows + 1, 0.f),
       bg_grad_(kMaxRows + 1, 0),
@@ -67,13 +71,29 @@ BlockAnalyzer::~BlockAnalyzer() {}
 
 void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
   QWidget::resizeEvent(e);
+  updateLayout();
+}
+
+void BlockAnalyzer::updateLayout() {
+  // Lay the blocks out in device pixels. Laid out in logical pixels, a
+  // fractional scale factor (150%, say) stretches the canvas when it's drawn,
+  // so each 1px gap comes out alternately 1 and 2 device pixels wide and the
+  // blocks look uneven. Rounding every dimension to whole device pixels keeps
+  // all the blocks and gaps identical.
+  const qreal dpr = devicePixelRatioF();
+  block_w_ = qMax(1, qRound(kWidth * dpr));
+  block_h_ = qMax(1, qRound(kHeight * dpr));
+  pad_ = qMax(1, qRound(dpr));
+
+  const uint px_w = qCeil(width() * dpr);
+  const uint px_h = qCeil(height() * dpr);
 
   uint newRows, newCols;
 
   // all is explained in analyze()..
-  // +1 to counter -1 in maxSizes, trust me we need this!
-  newCols = 1 + (width() + 1) / (kWidth + 1);
-  newRows = 0 + (height() + 1) / (kHeight + 1);
+  // +pad_ to counter -1 in maxSizes, trust me we need this!
+  newCols = 1 + (px_w + pad_) / (block_w_ + pad_);
+  newRows = 0 + (px_h + pad_) / (block_h_ + pad_);
   newCols = qMin(kMaxColumns, qMax(kMinColumns, newCols));
   newRows = qMin(kMaxRows, qMax(kMinRows, newRows));
 
@@ -87,9 +107,6 @@ void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
 
   if (rows_ != newRows) {
     rows_ = newRows;
-
-    // this is the y-offset for drawing from the top of the widget
-    y_ = (height() - (rows_ * (kHeight + 1)) + 2) / 2;
 
     const float PRE = 1.f,
                 PRO =
@@ -105,8 +122,13 @@ void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
     paletteChange(palette());
   }
 
-  canvas_ = QImage(columns_ * (kWidth + 1), rows_ * (kHeight + 1),
-                   QImage::Format_ARGB32_Premultiplied);
+  // this is the y-offset for drawing from the top of the widget. The height
+  // can change without the row count changing, so work it out every time.
+  const int blocks_h = rows_ * (block_h_ + pad_) - pad_;
+  y_ = qMax(0, (static_cast<int>(px_h) - blocks_h) / 2);
+
+  canvas_ = QImage(px_w, px_h, QImage::Format_ARGB32_Premultiplied);
+  canvas_.setDevicePixelRatio(dpr);
   canvas_.fill(pad_color_);
 }
 
@@ -140,12 +162,16 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   uint x, y;
 
   if (p.paintEngine() == 0) return;
+
+  // Moving the window to a screen with a different scale factor doesn't
+  // resize the widget, so catch it here.
+  if (canvas_.devicePixelRatio() != devicePixelRatioF()) updateLayout();
   if (canvas_.isNull()) return;
 
   p.setCompositionMode(QPainter::CompositionMode_Source);
 
   if (!new_frame) {
-    p.drawImage(0, 0, canvas_, 0, 0, width(), height(), Qt::NoFormatConversion);
+    p.drawImage(QPoint(0, 0), canvas_);
     return;
   }
 
@@ -278,8 +304,9 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   }
 
   // A block will be drawn and colored according to each band (column) of
-  // the FHT spectrum data. This block is a kWidth x kHeight region, along
-  // with 1-px of padding on its right and bottom.
+  // the FHT spectrum data. This block is a block_w_ x block_h_ region, along
+  // with pad_ px of padding on its right and bottom (kWidth x kHeight and
+  // 1px, scaled to device pixels).
   //
   //            Conditional (FHTBand)           Block State / Color
   //            =====================           ===================
@@ -296,16 +323,16 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   //
   QRgb* line;       // Current scanline.
   uint px_w, px_h;  // Current width and height in pixels (just to avoid cast).
-  uint to_x;        // [0, width())   Current and ending x pixel coordinate.
-  uint to_y;        // [0, height())  Current and ending y pixel coordinate.
+  uint to_x;        // [0, px_w)      Current and ending x pixel coordinate.
+  uint to_y;        // [0, px_h)      Current and ending y pixel coordinate.
   uint blk_r;       // [0, rows_)     Current block's row.
   uint blk_c;       // [0, columns_)  Current block's column.
 
   quint32 padcolor = pad_color_.rgba();
   quint32 blkcolor;
 
-  px_w = static_cast<uint>(width());
-  px_h = static_cast<uint>(height());
+  px_w = static_cast<uint>(canvas_.width());
+  px_h = static_cast<uint>(canvas_.height());
 
   // Draw empty top padding, if needed (when y_ > 0. weird window size?).
   for (y = 0; y < y_; ++y) {
@@ -315,7 +342,7 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
 
   // Draw the texture in one shot, iterating in a row-major fashion.
   for (blk_r = 0; blk_r < rows_; ++blk_r) {
-    to_y = qMin(y + kHeight, px_h);
+    to_y = qMin(y + block_h_, px_h);
 
     // This block may take several 1-px high scanlines. Each column needs
     // to be filled accordingly for each of these rows.
@@ -323,22 +350,23 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
       line = reinterpret_cast<QRgb*>(canvas_.scanLine(y));
 
       for (x = 0, blk_c = 0; blk_c < columns_; ++blk_c) {
-        to_x = qMin(x + kWidth, px_w);
+        to_x = qMin(x + block_w_, px_w);
 
         // Draw [x, to_x], then padding on the right.
         blkcolor = colorFromRowAndBand(blk_r, bandinfo_[blk_c]);
 
         for (; x < to_x; line[x++] = blkcolor);
-        if (x < px_w) line[x++] = padcolor;
+        to_x = qMin(x + pad_, px_w);
+        for (; x < to_x; line[x++] = padcolor);
       }
 
       // If extra space remains in line, fill to the right edge.
       for (; x < px_w; line[x++] = padcolor);
     }
 
-    // Draw a full line of padding below the just-drawn region (if in bounds).
-    if (y < px_h) {
-      line = reinterpret_cast<QRgb*>(canvas_.scanLine(y++));
+    // Draw full lines of padding below the just-drawn region (if in bounds).
+    for (to_y = qMin(y + pad_, px_h); y < to_y; ++y) {
+      line = reinterpret_cast<QRgb*>(canvas_.scanLine(y));
       for (x = 0; x < px_w; line[x++] = padcolor);
     }
   }
@@ -349,7 +377,7 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     for (x = 0; x < px_w; line[x++] = padcolor);
   }
 
-  p.drawImage(0, 0, canvas_, 0, 0, width(), height(), Qt::NoFormatConversion);
+  p.drawImage(QPoint(0, 0), canvas_);
 }
 
 static inline void adjustToLimits(int& b, int& f, uint& amount) {

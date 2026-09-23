@@ -63,6 +63,8 @@ class BlockAnalyzer : public Analyzer::Base {
   void determineStep();
 
  private:
+  void updateLayout();
+
   struct FHTBand {
     FHTBand()
         : height(0.f),
@@ -87,7 +89,10 @@ class BlockAnalyzer : public Analyzer::Base {
 
   uint columns_;  // Number of columns of blocks.
   uint rows_;     // Number of rows of blocks.
-  uint y_;        // y-offset from top of widget.
+  uint y_;        // y-offset from top of widget, in device pixels.
+  uint block_w_;  // Block width in device pixels.
+  uint block_h_;  // Block height in device pixels.
+  uint pad_;      // Gap between blocks in device pixels.
   float step_;    // Rows to fall per frame (during inactivity).
 
   QColor fg_color_;   // Foreground/Active block color.
