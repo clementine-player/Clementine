@@ -28,6 +28,53 @@
 #include "core/song.h"
 #include "iconloader.h"
 
+#ifdef Q_OS_WIN32
+#include <windows.h>
+#include <shellapi.h>
+
+namespace {
+
+// Qt creates a hidden window for each tray icon and registers the icon with
+// the shell using that window and an ID of 0.  QSystemTrayIcon::showMessage
+// gives us no way to set NIIF_NOSOUND, so we find that window and send the
+// balloon ourselves.
+BOOL CALLBACK FindTrayIconWindow(HWND hwnd, LPARAM lparam) {
+  wchar_t title[64];
+  if (GetWindowTextW(hwnd, title, 64) &&
+      wcscmp(title, L"QTrayIconMessageWindow") == 0) {
+    *reinterpret_cast<HWND*>(lparam) = hwnd;
+    return FALSE;
+  }
+  return TRUE;
+}
+
+bool ShowSilentPopup(const QString& summary, const QString& message,
+                     int timeout) {
+  HWND hwnd = nullptr;
+  EnumThreadWindows(GetCurrentThreadId(), FindTrayIconWindow,
+                    reinterpret_cast<LPARAM>(&hwnd));
+  if (!hwnd) return false;
+
+  NOTIFYICONDATAW nid;
+  memset(&nid, 0, sizeof(nid));
+  nid.cbSize = sizeof(nid);
+  nid.hWnd = hwnd;
+  nid.uID = 0;
+  nid.uFlags = NIF_INFO | NIF_SHOWTIP;
+  nid.dwInfoFlags = NIIF_INFO | NIIF_NOSOUND;
+  nid.uTimeout = timeout <= 0 ? 10000 : timeout;
+
+  // The shell won't show a balloon with an empty message.
+  const QString text = message.isEmpty() ? QStringLiteral(" ") : message;
+  text.left(255).toWCharArray(nid.szInfo);
+  summary.left(63).toWCharArray(nid.szInfoTitle);
+
+  return Shell_NotifyIconW(NIM_MODIFY, &nid);
+}
+
+}  // namespace
+#endif  // Q_OS_WIN32
+
 QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
     : SystemTrayIcon(parent),
       tray_(new QSystemTrayIcon(this)),
@@ -154,6 +201,9 @@ void QtSystemTrayIcon::Clicked(QSystemTrayIcon::ActivationReason reason) {
 
 void QtSystemTrayIcon::ShowPopup(const QString& summary, const QString& message,
                                  int timeout) {
+#ifdef Q_OS_WIN32
+  if (ShowSilentPopup(summary, message, timeout)) return;
+#endif
   tray_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout);
 }
 
