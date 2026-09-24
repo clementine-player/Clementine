@@ -110,6 +110,10 @@ QIcon PlaylistSequence::AddDesaturatedIcon(const QIcon& icon) {
 
 QPixmap PlaylistSequence::DesaturatedPixmap(const QPixmap& pixmap) {
   QPixmap ret(pixmap.size());
+  // pixmap.size() is in device pixels: without this the copy claims to be
+  // that many logical pixels and ends up drawn at half size on a hidpi
+  // screen.
+  ret.setDevicePixelRatio(pixmap.devicePixelRatio());
   ret.fill(Qt::transparent);
 
   QPainter p(&ret);
