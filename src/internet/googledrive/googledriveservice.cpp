@@ -183,7 +183,7 @@ void GoogleDriveService::Connect() {
   connect_in_progress_ = true;
 
   google_drive::ConnectResponse* response = client_->Connect(refresh_token());
-  NewClosure(response, &ConnectResponse::Finished, this,
+  NewClosure(response, &google_drive::ConnectResponse::Finished, this,
              &GoogleDriveService::ConnectFinished, response);
 }
 
@@ -206,7 +206,7 @@ void GoogleDriveService::ForgetCredentials() {
 void GoogleDriveService::AddFiles() {
   google_drive::ConnectResponse* response =
       client_->AuthorizeAndPick(PickableMimeTypes());
-  NewClosure(response, &ConnectResponse::Finished, this,
+  NewClosure(response, &google_drive::ConnectResponse::Finished, this,
              &GoogleDriveService::AuthorizeAndPickFinished, response);
 }
 
@@ -232,7 +232,7 @@ void GoogleDriveService::AuthorizeAndPickFinished(
   // AddPickedItemFinished).
   for (const QString& id : response->picked_file_ids()) {
     google_drive::GetFileResponse* file_response = client_->GetFile(id);
-    NewClosure(file_response, &GetFileResponse::Finished, this,
+    NewClosure(file_response, &google_drive::GetFileResponse::Finished, this,
                &GoogleDriveService::AddPickedItemFinished, file_response);
   }
 
@@ -294,7 +294,7 @@ void GoogleDriveService::ListChanges(const QString& cursor) {
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(changes_response, &ListChangesResponse::Finished, this,
+  NewClosure(changes_response, &google_drive::ListChangesResponse::Finished, this,
              &GoogleDriveService::ListChangesFinished, changes_response,
              task_id);
 }
@@ -487,7 +487,7 @@ void GoogleDriveService::DoFullRescan() {
   for (const PickedItem& item : picked_items_) {
     google_drive::GetFileResponse* response =
         client_->GetFile(item.id, item.resource_key);
-    NewClosure(response, &GetFileResponse::Finished, this,
+    NewClosure(response, &google_drive::GetFileResponse::Finished, this,
                &GoogleDriveService::AddPickedItemFinished, response);
   }
 
