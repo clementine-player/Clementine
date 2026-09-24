@@ -138,7 +138,7 @@ void MagnatuneDownloadDialog::DownloadNext() {
 
   current_reply_ = network_->get(QNetworkRequest(url));
 
-  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)),
+  connect(current_reply_, SIGNAL(errorOccurred(QNetworkReply::NetworkError)),
           SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(MetadataFinished()));
 }
@@ -212,7 +212,7 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   // Start the actual download
   current_reply_ = network_->get(QNetworkRequest(url));
 
-  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)),
+  connect(current_reply_, SIGNAL(errorOccurred(QNetworkReply::NetworkError)),
           SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(DownloadFinished()));
   connect(current_reply_, SIGNAL(downloadProgress(qint64, qint64)),
