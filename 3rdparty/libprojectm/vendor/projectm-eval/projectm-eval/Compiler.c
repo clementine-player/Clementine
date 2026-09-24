@@ -1636,7 +1636,7 @@ static YYLTYPE yyloc_default
 YYLTYPE yylloc = yyloc_default;
 
     /* Number of syntax errors so far.  */
-    int yynerrs = 0;
+    int yynerrs YY_ATTRIBUTE_UNUSED = 0;
 
     yy_state_fast_t yystate = 0;
     /* Number of tokens to shift before error messages enabled.  */
