@@ -493,7 +493,6 @@ jobs:
       image: fedora:43
     env:
       RPM_BUILD_NCPUS: "2"
-    env:
       CCACHE_DIR: /ccache
       # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
       # a directory whose name changes with every commit. Rewriting paths
@@ -649,7 +648,6 @@ jobs:
       image: fedora:44
     env:
       RPM_BUILD_NCPUS: "2"
-    env:
       CCACHE_DIR: /ccache
       # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
       # a directory whose name changes with every commit. Rewriting paths
