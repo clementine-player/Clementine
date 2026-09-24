@@ -1554,11 +1554,15 @@ if (APPLE)
     DEPENDS ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg)
 
   if (APPLE_NOTARIZE_API_KEY_PATH)
+    # Deliberately no DEPENDS: `dmg` reaches the app through notarize-app,
+    # and a custom target is always out of date, so depending on it here
+    # submitted the app to Apple a second time - three round trips per
+    # build instead of two. Run `make dmg` first (CI does); the notary
+    # service will reject a missing file clearly enough if you don't.
     add_custom_target(
       notarize-dmg
       COMMAND
       ${PROJECT_SOURCE_DIR}/dist/notarize.py ${APPLE_NOTARIZE_API_KEY_PATH} ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
-      DEPENDS dmg
       VERBATIM
     )
   endif()
