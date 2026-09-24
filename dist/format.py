@@ -77,24 +77,27 @@ def main():
       # Probably a deletion
       continue
 
-    with open(path, encoding='utf-8') as fh:
+    # Work with raw bytes so that non-ASCII characters and line endings are
+    # preserved exactly, regardless of the platform's default encoding.
+    with open(path, 'rb') as fh:
       original = fh.read()
 
     formatted = subprocess.run(
         [args.clang_format_executable, '-style=' + style, path],
-        capture_output=True, text=True, check=True).stdout
+        capture_output=True, check=True).stdout
 
     if original == formatted:
       print('%s: formatting is correct!' % filename, file=sys.stderr)
       continue
 
     diff = list(difflib.unified_diff(
-        original.split('\n'), formatted.split('\n'),
+        original.decode('utf-8', 'replace').splitlines(),
+        formatted.decode('utf-8', 'replace').splitlines(),
         os.path.join('a', filename), os.path.join('b', filename),
         lineterm=''))
 
     if args.inplace:
-      with open(path, 'w', encoding='utf-8') as fh:
+      with open(path, 'wb') as fh:
         fh.write(formatted)
 
       print('%s: %d insertion(s), %d deletion(s)' % (
@@ -103,7 +106,11 @@ def main():
           sum(1 for x in diff if x.startswith('-'))), file=sys.stderr)
     else:
       had_diff = True
-      print('\n'.join(diff))
+      # Write UTF-8 directly, since the console's encoding may not be able to
+      # represent every character.
+      sys.stdout.flush()
+      sys.stdout.buffer.write(('\n'.join(diff) + '\n').encode('utf-8'))
+      sys.stdout.buffer.flush()
 
   return 1 if had_diff else 0
 
