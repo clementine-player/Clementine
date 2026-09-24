@@ -13,7 +13,6 @@ set(SOURCES
 )
 
 set(HEADERS
-  core/closure.h
   core/latch.h
   core/messagehandler.h
   core/messagereply.h

@@ -68,13 +68,24 @@ TemporaryResource::TemporaryResource(const QString& filename) {
 
 TestQObject::TestQObject(QObject* parent)
   : QObject(parent),
-    invoked_(0) {
+    invoked_(0),
+    number_(0) {
 }
 
 void TestQObject::Emit() {
   emit Emitted();
 }
 
+void TestQObject::EmitWithArgs(int number, const QString& text) {
+  emit EmittedWithArgs(number, text);
+}
+
 void TestQObject::Invoke() {
   ++invoked_;
+}
+
+void TestQObject::InvokeWithArgs(int number, const QString& text) {
+  ++invoked_;
+  number_ = number;
+  text_ = text;
 }

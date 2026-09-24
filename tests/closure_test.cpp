@@ -1,145 +1,219 @@
 #include "gtest/gtest.h"
 
-#include <functional>
-#include <memory>
-
-#include <QCoreApplication>
-#include <QPointer>
-#include <QSharedPointer>
-#include <QSignalSpy>
+#include <QEventLoop>
+#include <QFuture>
+#include <QPromise>
+#include <QString>
 
 #include "config.h"
 #include "core/closure.h"
 #include "test_utils.h"
 
-TEST(ClosureTest, ClosureInvokesReceiver) {
-  TestQObject sender;
-  TestQObject receiver;
-  _detail::ClosureBase* closure = NewClosure(
-      &sender, SIGNAL(Emitted()),
-      &receiver, SLOT(Invoke()));
-  EXPECT_EQ(0, receiver.invoked());
-  sender.Emit();
-  EXPECT_EQ(1, receiver.invoked());
-}
-
-TEST(ClosureTest, ClosureDeletesSelf) {
-  TestQObject sender;
-  TestQObject receiver;
-  _detail::ClosureBase* closure = NewClosure(
-      &sender, SIGNAL(Emitted()),
-      &receiver, SLOT(Invoke()));
-  _detail::ObjectHelper* helper = closure->helper();
-  QSignalSpy spy(helper, SIGNAL(destroyed()));
-  EXPECT_EQ(0, receiver.invoked());
-  sender.Emit();
-  EXPECT_EQ(1, receiver.invoked());
-
-  EXPECT_EQ(0, spy.count());
-  QEventLoop loop;
-  QObject::connect(helper, SIGNAL(destroyed()), &loop, SLOT(quit()));
-  loop.exec();
-  EXPECT_EQ(1, spy.count());
-}
-
-TEST(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
-  TestQObject receiver;
-  TestQObject* sender;
-  std::unique_ptr<QSignalSpy> spy;
-  QPointer<_detail::ObjectHelper> closure;
-  {
-    QSharedPointer<TestQObject> sender_shared(new TestQObject);
-    sender = sender_shared.data();
-    closure = QPointer<_detail::ObjectHelper>(NewClosure(
-        sender_shared, SIGNAL(Emitted()),
-        &receiver, SLOT(Invoke()))->helper());
-    spy.reset(new QSignalSpy(sender, SIGNAL(destroyed())));
-  }
-  ASSERT_EQ(0, receiver.invoked());
-  sender->Emit();
-  ASSERT_EQ(1, receiver.invoked());
-
-  ASSERT_EQ(0, spy->count());
-  QEventLoop loop;
-  QObject::connect(sender, SIGNAL(destroyed()), &loop, SLOT(quit()));
-  loop.exec();
-  ASSERT_EQ(1, spy->count());
-  EXPECT_TRUE(closure.isNull());
-}
-
 namespace {
 
-void Foo(bool* called, int question, int* answer) {
-  *called = true;
-  *answer = question;
+// Runs the event loop until |done| is set, or until it gives up.
+void SpinUntil(const bool& done) {
+  QEventLoop loop;
+  QTimer giving_up;
+  giving_up.setSingleShot(true);
+  QObject::connect(&giving_up, &QTimer::timeout, &loop, &QEventLoop::quit);
+  giving_up.start(5000);
+  while (!done && giving_up.isActive()) {
+    loop.processEvents(QEventLoop::AllEvents, 10);
+  }
 }
 
 }  // namespace
 
-TEST(ClosureTest, ClosureWorksWithFunctionPointers) {
-  TestQObject sender;
-  bool called = false;
-  int question = 42;
-  int answer = 0;
-  NewClosure(
-      &sender, SIGNAL(Emitted()),
-      &Foo, &called, question, &answer);
-  EXPECT_FALSE(called);
-  sender.Emit();
-  EXPECT_TRUE(called);
-  EXPECT_EQ(question, answer);
-}
-
-TEST(ClosureTest, ClosureWorksWithStandardFunctions) {
-  TestQObject sender;
-  bool called = false;
-  int question = 42;
-  int answer = 0;
-  std::function<void(bool*,int,int*)> callback(&Foo);
-  NewClosure(
-      &sender, SIGNAL(Emitted()),
-      callback, &called, question, &answer);
-  EXPECT_FALSE(called);
-  sender.Emit();
-  EXPECT_TRUE(called);
-  EXPECT_EQ(question, answer);
-}
-
+// The rules the overloads enforce, asserted in both directions. A receiver
+// takes what the sender reports followed by the bound arguments, and nothing
+// else compiles.
 namespace {
 
-class Bar {
- public:
-  explicit Bar(int a) : foo_(a) {}
-  bool Foo(int* answer) {
-    *answer = foo_;
-    return true;
-  }
+using Invoke = decltype(&TestQObject::Invoke);
+using InvokeWithArgs = decltype(&TestQObject::InvokeWithArgs);
 
- private:
-  int foo_;
-};
+// Signal arguments reach the receiver...
+static_assert(_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int,
+                                       QString>);
+// ... and leaving them off is what a lambda is for.
+static_assert(!_detail::ReceiverAccepts<Invoke, TestQObject, int, QString>);
 
-}
+// Bound arguments follow the signal's own.
+static_assert(_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int,
+                                       QString>);
+static_assert(!_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, QString,
+                                        int>);
 
-TEST(ClosureTest, ClosureWorksWithMemberFunctionPointers) {
+// A receiver of no arguments suits a signal that reports none.
+static_assert(_detail::ReceiverAccepts<Invoke, TestQObject>);
+
+// Callables follow the same rule, without the receiver.
+static_assert(_detail::CallableAccepts<void (*)(int, QString), int, QString>);
+static_assert(!_detail::CallableAccepts<void (*)(int), int, QString>);
+
+// A future's result reaches the callable, unless it is a QFuture<void>.
+static_assert(_detail::TakesFutureResult<int, void (*)(int)>::value);
+static_assert(!_detail::TakesFutureResult<int, void (*)()>::value);
+static_assert(_detail::TakesFutureResult<void, void (*)()>::value);
+static_assert(!_detail::TakesFutureResult<void, void (*)(int)>::value);
+
+// ... followed by the bound arguments.
+static_assert(_detail::TakesFutureResult<int, void (*)(int, QString),
+                                         QString>::value);
+static_assert(!_detail::TakesFutureResult<int, void (*)(int), QString>::value);
+
+}  // namespace
+
+TEST(ClosureTest, CallsReceiver) {
   TestQObject sender;
-  Bar receiver(42);
-  int q = 1;
-  NewClosure(
-      &sender, SIGNAL(Emitted()),
-      &receiver, &Bar::Foo, &q);
-  EXPECT_EQ(1, q);
+  TestQObject receiver;
+  NewClosure(&sender, &TestQObject::Emitted, &receiver, &TestQObject::Invoke);
+  EXPECT_EQ(0, receiver.invoked());
   sender.Emit();
-  EXPECT_EQ(42, q);
+  EXPECT_EQ(1, receiver.invoked());
 }
 
-TEST(ClosureTest, ClosureCallsLambda) {
+TEST(ClosureTest, CallsReceiverOnlyOnce) {
   TestQObject sender;
+  TestQObject receiver;
+  NewClosure(&sender, &TestQObject::Emitted, &receiver, &TestQObject::Invoke);
+  sender.Emit();
+  sender.Emit();
+  EXPECT_EQ(1, receiver.invoked());
+}
+
+TEST(ClosureTest, ForwardsSignalArguments) {
+  TestQObject sender;
+  TestQObject receiver;
+  NewClosure(&sender, &TestQObject::EmittedWithArgs, &receiver,
+             &TestQObject::InvokeWithArgs);
+  sender.EmitWithArgs(42, "towel");
+  EXPECT_EQ(1, receiver.invoked());
+  EXPECT_EQ(42, receiver.number());
+  EXPECT_EQ("towel", receiver.text());
+}
+
+TEST(ClosureTest, PassesBoundArguments) {
+  TestQObject sender;
+  TestQObject context;
+  int answer = 0;
+  NewClosure(
+      &sender, &TestQObject::Emitted, &context,
+      [&answer](int bound) { answer = bound; }, 42);
+  EXPECT_EQ(0, answer);
+  sender.Emit();
+  EXPECT_EQ(42, answer);
+}
+
+TEST(ClosureTest, PassesSignalArgumentsBeforeBoundOnes) {
+  TestQObject sender;
+  TestQObject context;
+  QString seen;
+  NewClosure(
+      &sender, &TestQObject::EmittedWithArgs, &context,
+      [&seen](int number, const QString& text, const QString& bound) {
+        seen = QString("%1 %2 %3").arg(number).arg(text, bound);
+      },
+      QString("bound"));
+  sender.EmitWithArgs(42, "signal");
+  EXPECT_EQ("42 signal bound", seen);
+}
+
+TEST(ClosureTest, BoundArgumentsAreCopied) {
+  TestQObject sender;
+  TestQObject context;
+  QString seen;
+  QString bound("before");
+  NewClosure(
+      &sender, &TestQObject::Emitted, &context,
+      [&seen](const QString& value) { seen = value; }, bound);
+  bound = "after";
+  sender.Emit();
+  EXPECT_EQ("before", seen);
+}
+
+TEST(ClosureTest, StopsWhenReceiverIsDestroyed) {
+  TestQObject sender;
+  TestQObject* receiver = new TestQObject;
   bool called = false;
-  NewClosure(
-      &sender, SIGNAL(Emitted()),
-      [&called] () { called = true; });
-  EXPECT_FALSE(called);
+  NewClosure(&sender, &TestQObject::Emitted, receiver,
+             [&called]() { called = true; });
+  delete receiver;
   sender.Emit();
-  EXPECT_TRUE(called);
+  EXPECT_FALSE(called);
+}
+
+TEST(ClosureTest, PassesFutureResult) {
+  TestQObject receiver;
+  QPromise<int> promise;
+  QFuture<int> future = promise.future();
+
+  bool called = false;
+  int answer = 0;
+  NewClosure(future, &receiver, [&](int result) {
+    answer = result;
+    called = true;
+  });
+  EXPECT_FALSE(called);
+
+  promise.start();
+  promise.addResult(42);
+  promise.finish();
+
+  SpinUntil(called);
+  EXPECT_EQ(42, answer);
+}
+
+TEST(ClosureTest, PassesFutureResultBeforeBoundArguments) {
+  TestQObject receiver;
+  QPromise<int> promise;
+  QFuture<int> future = promise.future();
+
+  NewClosure(future, &receiver, &TestQObject::InvokeWithArgs,
+             QString("bound"));
+
+  promise.start();
+  promise.addResult(42);
+  promise.finish();
+
+  bool done = false;
+  DoAfter(&receiver, [&done]() { done = true; }, std::chrono::milliseconds(50));
+  SpinUntil(done);
+  EXPECT_EQ(42, receiver.number());
+  EXPECT_EQ("bound", receiver.text());
+}
+
+TEST(ClosureTest, VoidFuturePassesOnlyBoundArguments) {
+  TestQObject receiver;
+  QPromise<void> promise;
+  QFuture<void> future = promise.future();
+
+  bool called = false;
+  int answer = 0;
+  NewClosure(
+      future, &receiver,
+      [&](int bound) {
+        answer = bound;
+        called = true;
+      },
+      42);
+
+  promise.start();
+  promise.finish();
+
+  SpinUntil(called);
+  EXPECT_EQ(42, answer);
+}
+
+TEST(ClosureTest, DoAfterCallsReceiver) {
+  TestQObject receiver;
+  DoAfter(&receiver, &TestQObject::Invoke, std::chrono::milliseconds(1));
+  EXPECT_EQ(0, receiver.invoked());
+
+  bool done = false;
+  DoAfter(
+      &receiver, [&done]() { done = true; }, std::chrono::milliseconds(50));
+  SpinUntil(done);
+  EXPECT_EQ(1, receiver.invoked());
 }
