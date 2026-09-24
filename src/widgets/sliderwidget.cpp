@@ -190,6 +190,19 @@ Amarok::PrettySlider::sizeHint() const
 /// CLASS VolumeSlider
 //////////////////////////////////////////////////////////////////////////////////////////
 
+namespace {
+// Size of the volume slider's artwork, in logical pixels.
+const QSize kVolumePixmapSize(112, 36);
+
+// The wedge that the volume level fills.
+QPolygon VolumeWedge() {
+  QPolygon poly;
+  poly << QPoint(6, 21) << QPoint(104, 21) << QPoint(104, 7) << QPoint(6, 16)
+       << QPoint(6, 21);
+  return poly;
+}
+}  // namespace
+
 Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
     : Amarok::Slider(Qt::Horizontal, parent, max),
       m_animCount(0),
@@ -204,29 +217,38 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
   drawVolumeSliderHandle();
   generateGradient();
 
-  setMinimumWidth(m_pixmapInset.width());
-  setMinimumHeight(m_pixmapInset.height());
+  setMinimumSize(kVolumePixmapSize);
 
   connect(m_animTimer, SIGNAL(timeout()), this, SLOT(slotAnimTimer()));
 }
 
+QPixmap Amarok::VolumeSlider::createVolumePixmap() const {
+  // Drawn at the screen's resolution rather than scaled up to it afterwards,
+  // which on a fractional scale factor turns the wedge's sloping top edge
+  // into a staircase.
+  const qreal dpr = devicePixelRatioF();
+  QPixmap pixmap(kVolumePixmapSize * dpr);
+  pixmap.setDevicePixelRatio(dpr);
+  pixmap.fill(Qt::transparent);
+  return pixmap;
+}
+
 void Amarok::VolumeSlider::generateGradient() {
-  const QImage mask(":volumeslider-gradient.png");
+  QPixmap pixmap = createVolumePixmap();
+  QPainter p(&pixmap);
+  p.setRenderHint(QPainter::Antialiasing);
 
-  QImage gradient_image(mask.size(), QImage::Format_ARGB32_Premultiplied);
-  QPainter p(&gradient_image);
-
-  QLinearGradient gradient(gradient_image.rect().topLeft(),
-                           gradient_image.rect().topRight());
+  QLinearGradient gradient(QPointF(0, 0),
+                           QPointF(kVolumePixmapSize.width(), 0));
   gradient.setColorAt(0, palette().color(QPalette::Window));
   gradient.setColorAt(1, palette().color(QPalette::Highlight));
-  p.fillRect(gradient_image.rect(), QBrush(gradient));
 
-  p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-  p.drawImage(0, 0, mask);
+  QPainterPath path;
+  path.addPolygon(VolumeWedge());
+  p.fillPath(path, gradient);
   p.end();
 
-  m_pixmapGradient = QPixmap::fromImage(gradient_image);
+  m_pixmapGradient = pixmap;
 }
 
 void Amarok::VolumeSlider::slotAnimTimer()  // SLOT
@@ -287,6 +309,13 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
   const int padding = 7;
   const int offset = int(double((width() - 2 * padding) * value()) / maximum());
 
+  // Moving to a screen with a different scale factor needs both pixmaps
+  // redrawing at the new resolution.
+  if (m_pixmapInset.devicePixelRatio() != devicePixelRatioF()) {
+    m_pixmapInset = drawVolumePixmap();
+    generateGradient();
+  }
+
   // If theme changed since last paintEvent, redraw the volume pixmap with new
   // theme colors
   if (m_previous_theme_text_color != palette().color(QPalette::WindowText)) {
@@ -300,7 +329,11 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
     m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
   }
 
-  p.drawPixmap(0, 0, m_pixmapGradient, 0, 0, offset + padding, 0);
+  // The source rectangle is in the pixmap's device pixels.
+  const qreal gradient_dpr = m_pixmapGradient.devicePixelRatio();
+  p.drawPixmap(QPointF(0, 0), m_pixmapGradient,
+               QRectF(0, 0, (offset + padding) * gradient_dpr,
+                      m_pixmapGradient.height()));
   p.drawPixmap(0, 0, m_pixmapInset);
   p.drawPixmap(offset - m_handlePixmaps[0].width() / 2 + padding, 0,
                m_handlePixmaps[m_animCount]);
@@ -336,8 +369,7 @@ void Amarok::VolumeSlider::paletteChange(const QPalette&) {
 }
 
 QPixmap Amarok::VolumeSlider::drawVolumePixmap() const {
-  QPixmap pixmap(112, 36);
-  pixmap.fill(Qt::transparent);
+  QPixmap pixmap = createVolumePixmap();
   QPainter painter(&pixmap);
   QPen pen(palette().color(QPalette::WindowText), 0.3, Qt::SolidLine,
            Qt::RoundCap, Qt::RoundJoin);
@@ -346,12 +378,7 @@ QPixmap Amarok::VolumeSlider::drawVolumePixmap() const {
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
   // Draw volume control pixmap
-  QPolygon poly;
-  poly << QPoint(6, 21) << QPoint(104, 21) << QPoint(104, 7) << QPoint(6, 16)
-       << QPoint(6, 21);
-  QPainterPath path;
-  path.addPolygon(poly);
-  painter.drawPolygon(poly);
+  painter.drawPolygon(VolumeWedge());
   painter.drawLine(6, 29, 104, 29);
   // Return QPixmap
   return pixmap;

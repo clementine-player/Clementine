@@ -113,6 +113,7 @@ class VolumeSlider : public Slider {
   virtual void slotAnimTimer();
 
  private:
+  QPixmap createVolumePixmap() const;
   void generateGradient();
   QPixmap drawVolumePixmap() const;
   void drawVolumeSliderHandle();
