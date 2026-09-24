@@ -122,6 +122,9 @@ class SettingsDialog : public QDialog {
   // QWidget
   void showEvent(QShowEvent* e);
 
+  // QObject
+  bool eventFilter(QObject* object, QEvent* event);
+
  signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
@@ -138,6 +141,9 @@ class SettingsDialog : public QDialog {
   };
 
   void AddCategory(SettingsCategory* category);
+
+  // Combo boxes, sliders and spin boxes don't react to the mouse wheel.
+  static bool IgnoresWheelEvents(const QWidget* widget);
 
  private:
   friend class SettingsCategory;
