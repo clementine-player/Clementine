@@ -823,6 +823,15 @@ jobs:
     defaults:
       run:
         shell: msys2 {0}
+    env:
+      # A Windows path: actions/cache runs outside the MSYS2 shell, and the
+      # mingw ccache is a native Win32 binary, so both understand this one.
+      CCACHE_DIR: ${{ runner.temp }}\ccache
+      CCACHE_MAXSIZE: 250M
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -853,6 +862,7 @@ jobs:
             base-devel
             git
             mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-ccache
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-ninja
             mingw-w64-x86_64-ntldd
@@ -903,6 +913,14 @@ jobs:
           git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: ${{ runner.temp }}\ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
@@ -1028,6 +1046,15 @@ jobs:
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
+      - name: ccache statistics
+        if: always()
+        run: ccache --show-stats || true
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: ${{ runner.temp }}\ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_bookworm_64:
     name: ${{ matrix.name }}
@@ -1874,6 +1901,17 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      CCACHE_DIR: ${{ runner.temp }}/ccache
+      CCACHE_MAXSIZE: 250M
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # .mm files build as Objective-C++; which language CMake assigns them
+      # decides which of these it reads, so set both.
+      CMAKE_OBJC_COMPILER_LAUNCHER: ccache
+      CMAKE_OBJCXX_COMPILER_LAUNCHER: ccache
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -1948,6 +1986,14 @@ jobs:
           git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: ${{ runner.temp }}/ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: |
@@ -2006,6 +2052,15 @@ jobs:
         with:
           name: release_mac
           path: bin/clementine-*.dmg
+      - name: ccache statistics
+        if: always()
+        run: ccache --show-stats || true
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: ${{ runner.temp }}/ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   # The single required status check for master: it passes only when every
   # job above did. Adding or removing a build job means editing this list
