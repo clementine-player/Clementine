@@ -27,6 +27,7 @@ SetCompressor /SOLID lzma
 !include "MUI2.nsh"
 !include "FileAssociation.nsh"
 !include "Capabilities.nsh"
+@NORMAL@!include "AppUserModelId.nsh"
 
 !define MUI_ICON "clementine.ico"
 
@@ -412,6 +413,7 @@ SectionEnd
 @NORMAL@
 @NORMAL@  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
 @NORMAL@  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\clementine.exe"
+@NORMAL@  !insertmacro SetShortcutAppUserModelId "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
 @NORMAL@  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
 @NORMAL@SectionEnd
 
