@@ -243,8 +243,8 @@ void SubsonicService::Login(const QString& server, const QString& username,
 
 void SubsonicService::Ping() {
   QNetworkReply* reply = Send(BuildRequestUrl("ping"));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(OnPingFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SubsonicService::OnPingFinished, reply);
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
@@ -569,8 +569,8 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
   url_query.addQueryItem("offset", QString::number(offset));
   url.setQuery(url_query);
   QNetworkReply* reply = service_->Send(url);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(OnGetAlbumListFinished(QNetworkReply*, int)), reply, offset);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SubsonicLibraryScanner::OnGetAlbumListFinished, reply, offset);
 }
 
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
@@ -582,8 +582,8 @@ void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   }
   url.setQuery(url_query);
   QNetworkReply* reply = service_->Send(url);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SubsonicLibraryScanner::OnGetAlbumFinished, reply);
   pending_requests_.insert(reply);
 }
 

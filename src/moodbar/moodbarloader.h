@@ -54,7 +54,8 @@ class MoodbarLoader : public QObject {
  private slots:
   void ReloadSettings();
 
-  void RequestFinished(MoodbarPipeline* request, const QUrl& filename);
+  void RequestFinished(bool success, MoodbarPipeline* request,
+                       const QUrl& filename);
   void MaybeTakeNextRequest();
 
  private:

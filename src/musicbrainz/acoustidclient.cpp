@@ -60,8 +60,8 @@ void AcoustidClient::Start(int id, const QString& fingerprint,
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RequestFinished(QNetworkReply*, int)), reply, id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &AcoustidClient::RequestFinished, reply, id);
   requests_[id] = reply;
 
   timeouts_->AddReply(reply);

@@ -410,7 +410,7 @@ class Playlist : public QAbstractListModel {
   void TracksDequeued();
   void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
-  void SongSaveComplete(TagReaderReply* reply,
+  void SongSaveComplete(bool success, TagReaderReply* reply,
                         const QPersistentModelIndex& index);
   void ItemReloadComplete(const QPersistentModelIndex& index);
   // Written as the fully expanded type rather than the PlaylistItemList
@@ -419,7 +419,7 @@ class Playlist : public QAbstractListModel {
   // QMetaType::fromType<>().name()'s canonical (alias-resolved) form of the
   // argument's actual type, or the invoke silently fails - this wasn't an
   // issue under Qt5, which didn't validate the name.
-  void ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>> future);
+  void ItemsLoaded(PlaylistItemList items);
   void SongInsertVetoListenerDestroyed();
 
  private:

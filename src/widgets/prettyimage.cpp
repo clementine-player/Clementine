@@ -66,8 +66,8 @@ void PrettyImage::LazyLoad() {
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
   RedirectFollower* follower = new RedirectFollower(reply);
   state_ = State_Fetching;
-  NewClosure(follower, SIGNAL(finished()), this,
-             SLOT(ImageFetched(RedirectFollower*)), follower);
+  NewClosure(follower, &RedirectFollower::finished, this,
+             &PrettyImage::ImageFetched, follower);
 }
 
 QSize PrettyImage::image_size() const {
@@ -105,12 +105,12 @@ void PrettyImage::ImageFetched(RedirectFollower* follower) {
                                                 size = image_size()]() {
       return image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     });
-    NewClosure(future, this, SLOT(ImageScaled(QFuture<QImage>)), future);
+    NewClosure(future, this, &PrettyImage::ImageScaled);
   }
 }
 
-void PrettyImage::ImageScaled(QFuture<QImage> future) {
-  thumbnail_ = QPixmap::fromImage(future.result());
+void PrettyImage::ImageScaled(const QImage& image) {
+  thumbnail_ = QPixmap::fromImage(image);
   state_ = State_Finished;
 
   updateGeometry();

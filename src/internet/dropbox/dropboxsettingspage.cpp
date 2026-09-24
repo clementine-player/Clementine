@@ -74,8 +74,8 @@ void DropboxSettingsPage::LoginClicked() {
       new OAuthenticator(kOAuthClientId, kOAuthClientSecret,
                          OAuthenticator::RedirectStyle::REMOTE_WITH_STATE);
   connect(authenticator, SIGNAL(Finished()), SLOT(Connected()));
-  NewClosure(authenticator, SIGNAL(Finished()), service_,
-             SLOT(AuthenticationFinished(OAuthenticator*)), authenticator);
+  NewClosure(authenticator, &OAuthenticator::Finished, service_,
+             &DropboxService::AuthenticationFinished, authenticator);
   authenticator->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint,
                                     kOAuthScope);
 

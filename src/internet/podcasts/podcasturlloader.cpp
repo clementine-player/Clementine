@@ -126,9 +126,8 @@ void PodcastUrlLoader::NextRequest(const QUrl& url, RequestState* state) {
                    QNetworkRequest::AlwaysNetwork);
   QNetworkReply* network_reply = network_->get(req);
 
-  NewClosure(network_reply, SIGNAL(finished()), this,
-             SLOT(RequestFinished(RequestState*, QNetworkReply*)), state,
-             network_reply);
+  NewClosure(network_reply, &QNetworkReply::finished, this,
+             &PodcastUrlLoader::RequestFinished, state, network_reply);
 }
 
 void PodcastUrlLoader::RequestFinished(RequestState* state,

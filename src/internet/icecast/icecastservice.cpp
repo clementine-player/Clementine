@@ -106,9 +106,8 @@ void IcecastService::RequestDirectory(const QUrl& url, int task_id) {
                    QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(DownloadDirectoryFinished(QNetworkReply*, int)), reply,
-             task_id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &IcecastService::DownloadDirectoryFinished, reply, task_id);
 }
 
 void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
@@ -132,10 +131,7 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(&IcecastService::ParseDirectory, this, reply);
-  NewClosure(future, this,
-             SLOT(ParseDirectoryFinished(
-                 QFuture<QList<IcecastBackend::Station>>, int)),
-             future, task_id);
+  NewClosure(future, this, &IcecastService::ParseDirectoryFinished, task_id);
 }
 
 namespace {
@@ -195,8 +191,7 @@ QStringList FilterGenres(const QStringList& genres) {
 }  // namespace
 
 void IcecastService::ParseDirectoryFinished(
-    QFuture<QList<IcecastBackend::Station>> future, int task_id) {
-  IcecastBackend::StationList all_stations = future.result();
+    IcecastBackend::StationList all_stations, int task_id) {
   sort(all_stations.begin(), all_stations.end(),
        StationSorter<IcecastBackend::Station>());
   // Remove duplicates by name. These tend to be multiple URLs for the same

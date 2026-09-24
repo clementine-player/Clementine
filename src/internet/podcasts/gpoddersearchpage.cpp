@@ -47,12 +47,12 @@ void GPodderSearchPage::SearchClicked() {
   emit Busy(true);
 
   mygpo::PodcastListPtr list(api_->search(ui_->query->text()));
-  NewClosure(list, SIGNAL(finished()), this,
-             SLOT(SearchFinished(mygpo::PodcastListPtr)), list);
-  NewClosure(list, SIGNAL(parseError()), this,
-             SLOT(SearchFailed(mygpo::PodcastListPtr)), list);
-  NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)), this,
-             SLOT(SearchFailed(mygpo::PodcastListPtr)), list);
+  NewClosure(list.data(), &mygpo::PodcastList::finished, this,
+             &GPodderSearchPage::SearchFinished, list);
+  NewClosure(list.data(), &mygpo::PodcastList::parseError, this,
+             &GPodderSearchPage::SearchFailed, list);
+  NewClosure(list.data(), &mygpo::PodcastList::requestError, this,
+             [this, list](QNetworkReply::NetworkError) { SearchFailed(list); });
 }
 
 void GPodderSearchPage::SearchFinished(mygpo::PodcastListPtr list) {

@@ -38,9 +38,7 @@ SongInfoView::SongInfoView(QWidget* parent)
   QFuture<QList<SongInfoProvider*>> future =
       QtConcurrent::run(&UltimateLyricsReader::Parse, ultimate_reader_.get(),
                         QString(":lyrics/ultimate_providers.xml"));
-  NewClosure(future, this,
-             SLOT(UltimateLyricsParsed(QFuture<QList<SongInfoProvider*>>)),
-             future);
+  NewClosure(future, this, &SongInfoView::UltimateLyricsParsed);
 
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
   fetcher_->AddProvider(new TagLyricsInfoProvider);
@@ -49,8 +47,8 @@ SongInfoView::SongInfoView(QWidget* parent)
 SongInfoView::~SongInfoView() {}
 
 void SongInfoView::UltimateLyricsParsed(
-    QFuture<QList<SongInfoProvider*>> future) {
-  for (SongInfoProvider* provider : future.result()) {
+    const QList<SongInfoProvider*>& providers) {
+  for (SongInfoProvider* provider : providers) {
     fetcher_->AddProvider(provider);
   }
 

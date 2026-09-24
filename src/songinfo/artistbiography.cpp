@@ -74,7 +74,7 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
 
-  NewClosure(reply, SIGNAL(finished()), [this, reply, id]() {
+  NewClosure(reply, &QNetworkReply::finished, this, [this, reply, id]() {
     reply->deleteLater();
 
     QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll());
@@ -110,7 +110,7 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
       latch->CountDown();
     }
 
-    NewClosure(latch, SIGNAL(Done()), [this, id, latch]() {
+    NewClosure(latch, &CountdownLatch::Done, this, [this, id, latch]() {
       latch->deleteLater();
       emit Finished(id);
     });
@@ -200,39 +200,43 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), [this, id, reply, language, latch]() {
-    reply->deleteLater();
-
-    QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll());
-    QJsonObject response = json_document.object();
-
-    QStringList image_titles = ExtractImageTitles(response);
-
-    for (const QString& image_title : image_titles) {
-      latch->Wait();
-      QUrl url(QString(kWikipediaImageInfoUrl).arg(language));
-      QUrlQuery url_query(url);
-      url_query.addQueryItem("titles", image_title);
-      url.setQuery(url_query);
-      qLog(Debug) << "Image info:" << url;
-
-      QNetworkRequest request(url);
-      QNetworkReply* reply = network_->get(request);
-      NewClosure(reply, SIGNAL(finished()), [this, id, reply, latch]() {
+  NewClosure(
+      reply, &QNetworkReply::finished, this,
+      [this, id, reply, language, latch]() {
         reply->deleteLater();
+
         QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject json = json_document.object();
-        QUrl url = ExtractImageUrl(json);
-        qLog(Debug) << "Found wikipedia image url:" << url;
-        if (!url.isEmpty()) {
-          emit ImageReady(id, url);
+        QJsonObject response = json_document.object();
+
+        QStringList image_titles = ExtractImageTitles(response);
+
+        for (const QString& image_title : image_titles) {
+          latch->Wait();
+          QUrl url(QString(kWikipediaImageInfoUrl).arg(language));
+          QUrlQuery url_query(url);
+          url_query.addQueryItem("titles", image_title);
+          url.setQuery(url_query);
+          qLog(Debug) << "Image info:" << url;
+
+          QNetworkRequest request(url);
+          QNetworkReply* reply = network_->get(request);
+          NewClosure(reply, &QNetworkReply::finished, this,
+                     [this, id, reply, latch]() {
+                       reply->deleteLater();
+                       QJsonDocument json_document =
+                           QJsonDocument::fromJson(reply->readAll());
+                       QJsonObject json = json_document.object();
+                       QUrl url = ExtractImageUrl(json);
+                       qLog(Debug) << "Found wikipedia image url:" << url;
+                       if (!url.isEmpty()) {
+                         emit ImageReady(id, url);
+                       }
+                       latch->CountDown();
+                     });
         }
+
         latch->CountDown();
       });
-    }
-
-    latch->CountDown();
-  });
 }
 
 void ArtistBiography::FetchWikipediaArticle(int id,
@@ -258,7 +262,7 @@ void ArtistBiography::FetchWikipediaArticle(int id,
   qLog(Debug) << "Article url:" << url;
 
   NewClosure(
-      reply, SIGNAL(finished()),
+      reply, &QNetworkReply::finished, this,
       [this, id, reply, wikipedia_url, wiki_title, latch]() {
         reply->deleteLater();
 

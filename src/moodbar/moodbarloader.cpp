@@ -119,8 +119,8 @@ MoodbarLoader::Result MoodbarLoader::Load(const QUrl& url, QByteArray* data,
   // There was no existing file, analyze the audio file and create one.
   MoodbarPipeline* pipeline = new MoodbarPipeline(url);
   pipeline->moveToThread(thread_);
-  NewClosure(pipeline, SIGNAL(Finished(bool)), this,
-             SLOT(RequestFinished(MoodbarPipeline*, QUrl)), pipeline, url);
+  NewClosure(pipeline, &MoodbarPipeline::Finished, this,
+             &MoodbarLoader::RequestFinished, pipeline, url);
 
   requests_[url] = pipeline;
   queued_requests_ << url;
@@ -146,10 +146,11 @@ void MoodbarLoader::MaybeTakeNextRequest() {
   QMetaObject::invokeMethod(requests_[url], "Start", Qt::QueuedConnection);
 }
 
-void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
+void MoodbarLoader::RequestFinished(bool success, MoodbarPipeline* request,
+                                    const QUrl& url) {
   Q_ASSERT(QThread::currentThread() == qApp->thread());
 
-  if (request->success()) {
+  if (success) {
     qLog(Info) << "Moodbar data generated successfully for"
                << url.toLocalFile();
 

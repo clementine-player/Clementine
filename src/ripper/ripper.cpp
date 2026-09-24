@@ -177,12 +177,12 @@ void Ripper::TagFiles() {
 
     TagReaderReply* reply =
         TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
-    NewClosure(reply, SIGNAL(Finished(bool)), this,
-               SLOT(FileTagged(TagReaderReply*)), reply);
+    NewClosure(reply, &TagReaderReply::Finished, this, &Ripper::FileTagged,
+               reply);
   }
 }
 
-void Ripper::FileTagged(TagReaderReply* reply) {
+void Ripper::FileTagged(bool success, TagReaderReply* reply) {
   files_tagged_++;
   qLog(Debug) << "Tagged" << files_tagged_ << "of" << tracks_.length()
               << "files";

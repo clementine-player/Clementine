@@ -59,8 +59,8 @@ void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
     QNetworkRequest req(url);
 
     QNetworkReply* reply = network_->get(req);
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(RequestFinished(QNetworkReply*, int, int)), reply, id,
+    NewClosure(reply, &QNetworkReply::finished, this,
+               &MusicBrainzClient::RequestFinished, reply, id,
                request_number++);
     requests_.insert(id, reply);
 
@@ -85,9 +85,8 @@ void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(DiscIdRequestFinished(const QString&, QNetworkReply*)),
-             discid, reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &MusicBrainzClient::DiscIdRequestFinished, discid, reply);
 
   timeouts_->AddReply(reply);
 }

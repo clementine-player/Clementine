@@ -101,8 +101,9 @@ void DigitallyImportedServiceBase::ForceRefreshStreams() {
   int task_id = app_->task_manager()->StartTask(tr("Getting streams"));
 
   QNetworkReply* reply = api_client_->GetChannelList();
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshStreamsFinished(QNetworkReply*, int)), reply, task_id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &DigitallyImportedServiceBase::RefreshStreamsFinished, reply,
+             task_id);
 }
 
 void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
@@ -228,8 +229,8 @@ void DigitallyImportedServiceBase::LoadStation(const QString& key) {
   qLog(Debug) << "Getting playlist URL" << playlist_url;
 
   QNetworkReply* reply = network_->get(QNetworkRequest(playlist_url));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LoadPlaylistFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &DigitallyImportedServiceBase::LoadPlaylistFinished, reply);
 }
 
 DigitallyImportedService::DigitallyImportedService(Application* app,

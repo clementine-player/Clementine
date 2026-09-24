@@ -86,8 +86,8 @@ void SkydriveService::Connect() {
     oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
   }
 
-  NewClosure(oauth, SIGNAL(Finished()), this,
-             SLOT(ConnectFinished(OAuthenticator*)), oauth);
+  NewClosure(oauth, &OAuthenticator::Finished, this,
+             &SkydriveService::ConnectFinished, oauth);
 }
 
 void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
@@ -109,8 +109,8 @@ void SkydriveService::FetchUserInfo() {
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SkydriveService::FetchUserInfoFinished, reply);
 }
 
 QByteArray SkydriveService::GetAuthHeader() const {
@@ -149,8 +149,8 @@ void SkydriveService::ListFiles(const QString& folder) {
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ListFilesFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SkydriveService::ListFilesFinished, reply);
 }
 
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {

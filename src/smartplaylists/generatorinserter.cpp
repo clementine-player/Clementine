@@ -58,15 +58,10 @@ void GeneratorInserter::Load(Playlist* destination, int row, bool play_now,
 
   QFuture<PlaylistItemList> future =
       QtConcurrent::run(Generate, generator, dynamic_count);
-  NewClosure(future, this,
-             SLOT(Finished(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
-             future);
+  NewClosure(future, this, &GeneratorInserter::Finished);
 }
 
-void GeneratorInserter::Finished(
-    QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
-  PlaylistItemList items = future.result();
-
+void GeneratorInserter::Finished(PlaylistItemList items) {
   if (items.isEmpty()) {
     if (is_dynamic_) {
       destination_->TurnOffDynamicPlaylist();

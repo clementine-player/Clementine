@@ -109,8 +109,8 @@ void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
                      .arg(QString::number(kStaticMapWidth),
                           QString::number(kStaticMapHeight), lat, lng));
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(MapLoaded(QNetworkReply*)),
-             reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SongKickConcertWidget::MapLoaded, reply);
 }
 
 void SongKickConcertWidget::MapLoaded(QNetworkReply* reply) {

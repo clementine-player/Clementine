@@ -50,8 +50,8 @@ bool MusicbrainzCoverProvider::StartSearch(const QString& artist,
   QNetworkRequest request(url);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ReleaseSearchFinished(QNetworkReply*, int)), reply, id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &MusicbrainzCoverProvider::ReleaseSearchFinished, reply, id);
 
   cover_names_[id] = QString("%1 - %2").arg(artist, album);
   return true;
@@ -79,8 +79,8 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
     QUrl url(QString(kAlbumCoverUrl).arg(release_id));
     QNetworkReply* reply = network_->head(QNetworkRequest(url));
     image_checks_.insert(id, reply);
-    NewClosure(reply, SIGNAL(finished()), this, SLOT(ImageCheckFinished(int)),
-               id);
+    NewClosure(reply, &QNetworkReply::finished, this,
+               &MusicbrainzCoverProvider::ImageCheckFinished, id);
   }
 }
 

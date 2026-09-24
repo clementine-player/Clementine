@@ -108,24 +108,22 @@ void PodcastUpdater::SubscriptionAdded(const Podcast& podcast) {
 
 void PodcastUpdater::UpdatePodcastNow(const Podcast& podcast) {
   PodcastUrlLoaderReply* reply = loader_->Load(podcast.url());
-  NewClosure(reply, SIGNAL(Finished(bool)), this,
-             SLOT(PodcastLoaded(PodcastUrlLoaderReply*, Podcast, bool)), reply,
-             podcast, false);
+  NewClosure(reply, &PodcastUrlLoaderReply::Finished, this,
+             &PodcastUpdater::PodcastLoaded, reply, podcast, false);
 }
 
 void PodcastUpdater::UpdateAllPodcastsNow() {
   for (const Podcast& podcast :
        app_->podcast_backend()->GetAllSubscriptions()) {
     PodcastUrlLoaderReply* reply = loader_->Load(podcast.url());
-    NewClosure(reply, SIGNAL(Finished(bool)), this,
-               SLOT(PodcastLoaded(PodcastUrlLoaderReply*, Podcast, bool)),
-               reply, podcast, true);
+    NewClosure(reply, &PodcastUrlLoaderReply::Finished, this,
+               &PodcastUpdater::PodcastLoaded, reply, podcast, true);
 
     pending_replies_++;
   }
 }
 
-void PodcastUpdater::PodcastLoaded(PodcastUrlLoaderReply* reply,
+void PodcastUpdater::PodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
                                    const Podcast& podcast, bool one_of_many) {
   reply->deleteLater();
 
@@ -139,7 +137,7 @@ void PodcastUpdater::PodcastLoaded(PodcastUrlLoaderReply* reply,
     }
   }
 
-  if (!reply->is_success()) {
+  if (!success) {
     qLog(Warning) << "Error fetching podcast at" << podcast.url() << ":"
                   << reply->error_text();
     return;

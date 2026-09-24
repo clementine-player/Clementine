@@ -77,8 +77,8 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
       static_cast<uint>(QDateTime::currentDateTime().toSecsSinceEpoch()));
 
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
-  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this,
-             SLOT(RegisterFinished(QDBusPendingCallWatcher*)), watcher);
+  NewClosure(watcher, &QDBusPendingCallWatcher::finished, this,
+             &GnomeGlobalShortcutBackend::RegisterFinished);
 
   return true;
 #else  // HAVE_DBUS

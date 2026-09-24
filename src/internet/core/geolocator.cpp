@@ -86,8 +86,8 @@ Geolocator::Geolocator(QObject* parent) : QObject(parent) {}
 void Geolocator::Geolocate() {
   QNetworkRequest req = QNetworkRequest(QUrl(kUrl));
   QNetworkReply* reply = network_.get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RequestFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &Geolocator::RequestFinished, reply);
 }
 
 void Geolocator::RequestFinished(QNetworkReply* reply) {

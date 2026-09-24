@@ -160,12 +160,12 @@ void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
       authorisation);
   pending_tagreader_replies_.append(reply);
 
-  NewClosure(reply, SIGNAL(Finished(bool)), this,
-             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)), reply,
-             metadata);
+  NewClosure(reply, &TagReaderReply::Finished, this,
+             &CloudFileService::ReadTagsFinished, reply, metadata);
 }
 
-void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
+void CloudFileService::ReadTagsFinished(bool success,
+                                        TagReaderClient::ReplyType* reply,
                                         const Song& metadata) {
   int index_reply;
 

@@ -116,8 +116,9 @@ void IntergalacticFMServiceBase::ForceRefreshStreams() {
   QNetworkReply* reply = network_->get(QNetworkRequest(channel_list_url_));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshStreamsFinished(QNetworkReply*, int)), reply, task_id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &IntergalacticFMServiceBase::RefreshStreamsFinished, reply,
+             task_id);
 }
 
 void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,

@@ -48,12 +48,14 @@ void GPodderTopTagsPage::Show() {
     done_initial_load_ = true;
 
     mygpo::TagListPtr tag_list(api_->topTags(kMaxTagCount));
-    NewClosure(tag_list, SIGNAL(finished()), this,
-               SLOT(TagListLoaded(mygpo::TagListPtr)), tag_list);
-    NewClosure(tag_list, SIGNAL(parseError()), this,
-               SLOT(TagListFailed(mygpo::TagListPtr)), tag_list);
-    NewClosure(tag_list, SIGNAL(requestError(QNetworkReply::NetworkError)),
-               this, SLOT(TagListFailed(mygpo::TagListPtr)), tag_list);
+    NewClosure(tag_list.data(), &mygpo::TagList::finished, this,
+               &GPodderTopTagsPage::TagListLoaded, tag_list);
+    NewClosure(tag_list.data(), &mygpo::TagList::parseError, this,
+               &GPodderTopTagsPage::TagListFailed, tag_list);
+    NewClosure(tag_list.data(), &mygpo::TagList::requestError, this,
+               [this, tag_list](QNetworkReply::NetworkError) {
+                 TagListFailed(tag_list);
+               });
   }
 }
 

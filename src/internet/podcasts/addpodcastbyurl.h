@@ -44,7 +44,7 @@ class AddPodcastByUrl : public AddPodcastPage {
 
  private slots:
   void GoClicked();
-  void RequestFinished(PodcastUrlLoaderReply* reply);
+  void RequestFinished(bool success, PodcastUrlLoaderReply* reply);
 
  private:
   Ui_AddPodcastByUrl* ui_;

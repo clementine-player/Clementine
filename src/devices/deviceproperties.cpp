@@ -223,8 +223,7 @@ void DeviceProperties::UpdateFormats() {
 
     QFuture<bool> future = QtConcurrent::run(std::bind(
         &ConnectedDevice::GetSupportedFiletypes, device, &supported_formats_));
-    NewClosure(future, this, SLOT(UpdateFormatsFinished(QFuture<bool>)),
-               future);
+    NewClosure(future, this, &DeviceProperties::UpdateFormatsFinished);
 
     ui_->formats_stack->setCurrentWidget(ui_->formats_page_loading);
     updating_formats_ = true;
@@ -260,7 +259,7 @@ void DeviceProperties::accept() {
 
 void DeviceProperties::OpenDevice() { manager_->Connect(index_); }
 
-void DeviceProperties::UpdateFormatsFinished(QFuture<bool> future) {
+void DeviceProperties::UpdateFormatsFinished(bool success) {
   updating_formats_ = false;
 
   // Check if the device was disconnected while the thread was running. In that
@@ -270,7 +269,7 @@ void DeviceProperties::UpdateFormatsFinished(QFuture<bool> future) {
     return;
   }
 
-  if (!future.result()) {
+  if (!success) {
     supported_formats_.clear();
   }
 

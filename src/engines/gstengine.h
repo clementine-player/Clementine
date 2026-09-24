@@ -161,8 +161,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void FadeoutPauseFinished();
   void SeekNow();
   void BackgroundStreamFinished();
-  void BackgroundStreamPlayDone(QFuture<GstStateChangeReturn>, int);
-  void PlayDone(QFuture<GstStateChangeReturn> future, const quint64, const int);
+  void BackgroundStreamPlayDone(GstStateChangeReturn, int);
+  void PlayDone(GstStateChangeReturn, const quint64, const int);
 
   void BufferingStarted();
   void BufferingProgress(int percent);

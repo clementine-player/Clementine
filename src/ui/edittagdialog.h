@@ -83,7 +83,7 @@ class EditTagDialog : public QDialog {
   };
 
  private slots:
-  void SetSongsFinished(QFuture<QList<EditTagDialog::Data>> future);
+  void SetSongsFinished(const QList<EditTagDialog::Data>& data);
   void AcceptFinished();
 
   void SelectionChanged();

@@ -110,9 +110,8 @@ void GPodderSync::Login(const QString& username, const QString& password,
   QNetworkReply* reply = api_->renameDevice(
       username, DeviceId(), device_name,
       Utilities::IsLaptop() ? mygpo::Device::LAPTOP : mygpo::Device::DESKTOP);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LoginFinished(QNetworkReply*, QString, QString)), reply,
-             username, password);
+  NewClosure(reply, &QNetworkReply::finished, this, &GPodderSync::LoginFinished,
+             reply, username, password);
 }
 
 void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
@@ -160,8 +159,8 @@ void GPodderSync::GetUpdatesNow() {
 
   mygpo::DeviceUpdatesPtr reply(
       api_->deviceUpdates(username_, DeviceId(), timestamp));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr)), reply);
+  NewClosure(reply.data(), &mygpo::DeviceUpdates::finished, this,
+             &GPodderSync::DeviceUpdatesFinished, reply);
   connect(reply.data(), SIGNAL(parseError()), SLOT(DeviceUpdatesParseError()));
   connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
           SLOT(DeviceUpdatesRequestError(QNetworkReply::NetworkError)));
@@ -199,10 +198,9 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
     // Start loading the podcast.  Remember actions and apply them after we
     // have a list of the episodes.
     PodcastUrlLoaderReply* loader_reply = loader_->Load(url);
-    NewClosure(loader_reply, SIGNAL(Finished(bool)), this,
-               SLOT(NewPodcastLoaded(PodcastUrlLoaderReply*, QUrl,
-                                     QList<mygpo::EpisodePtr>)),
-               loader_reply, url, episodes_by_podcast[url]);
+    NewClosure(loader_reply, &PodcastUrlLoaderReply::Finished, this,
+               &GPodderSync::NewPodcastLoaded, loader_reply, url,
+               episodes_by_podcast[url]);
   }
 
   // Unsubscribe from podcasts that were removed.
@@ -217,12 +215,12 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   s.setValue("gpodder_last_get", last_successful_get_);
 }
 
-void GPodderSync::NewPodcastLoaded(PodcastUrlLoaderReply* reply,
+void GPodderSync::NewPodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
                                    const QUrl& url,
                                    const QList<mygpo::EpisodePtr>& actions) {
   reply->deleteLater();
 
-  if (!reply->is_success()) {
+  if (!success) {
     qLog(Warning) << "Error fetching podcast at" << url << ":"
                   << reply->error_text();
     return;
@@ -349,9 +347,8 @@ void GPodderSync::FlushUpdateQueue() {
 
   qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(AddRemoveFinished(mygpo::AddRemoveResultPtr, QList<QUrl>)),
-             reply, all_urls.values());
+  NewClosure(reply.data(), &mygpo::AddRemoveResult::finished, this,
+             &GPodderSync::AddRemoveFinished, reply, all_urls.values());
   connect(reply.data(), SIGNAL(parseError()), SLOT(AddRemoveParseError()));
   connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
           SLOT(AddRemoveRequestError(QNetworkReply::NetworkError)));

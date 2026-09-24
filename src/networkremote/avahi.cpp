@@ -22,8 +22,10 @@ void Avahi::PublishInternal(const QString& domain, const QString& type,
       "org.freedesktop.Avahi", "/", QDBusConnection::systemBus());
   QDBusPendingReply<QDBusObjectPath> reply = server_interface.EntryGroupNew();
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply);
-  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), &AddService,
-             domain, type, name, port, reply);
+  NewClosure(watcher, &QDBusPendingCallWatcher::finished, watcher,
+             [domain, type, name, port, reply](QDBusPendingCallWatcher*) {
+               AddService(domain, type, name, port, reply);
+             });
   QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), watcher,
                    SLOT(deleteLater()));
 }
@@ -58,8 +60,10 @@ void AddService(const QString domain, const QString type, const QByteArray name,
       port,                  // Port our service is running on
       QList<QByteArray>());  // TXT record
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply);
-  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), &Commit,
-             entry_group_interface);
+  NewClosure(watcher, &QDBusPendingCallWatcher::finished, watcher,
+             [entry_group_interface](QDBusPendingCallWatcher*) {
+               Commit(entry_group_interface);
+             });
 
   QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), watcher,
                    SLOT(deleteLater()));
@@ -72,8 +76,8 @@ void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface) {
                    SLOT(deleteLater()));
   QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
                    interface, SLOT(deleteLater()));
-  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), &LogCommit,
-             reply);
+  NewClosure(watcher, &QDBusPendingCallWatcher::finished, watcher,
+             [reply](QDBusPendingCallWatcher*) { LogCommit(reply); });
 }
 
 void LogCommit(QDBusPendingReply<> reply) {

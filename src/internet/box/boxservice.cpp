@@ -90,8 +90,8 @@ void BoxService::Connect() {
     oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, QString());
   }
 
-  NewClosure(oauth, SIGNAL(Finished()), this,
-             SLOT(ConnectFinished(OAuthenticator*)), oauth);
+  NewClosure(oauth, &OAuthenticator::Finished, this,
+             &BoxService::ConnectFinished, oauth);
 }
 
 void BoxService::ConnectFinished(OAuthenticator* oauth) {
@@ -110,8 +110,8 @@ void BoxService::ConnectFinished(OAuthenticator* oauth) {
     AddAuthorizationHeader(&request);
 
     QNetworkReply* reply = network_->get(request);
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
+    NewClosure(reply, &QNetworkReply::finished, this,
+               &BoxService::FetchUserInfoFinished, reply);
   } else {
     emit Connected();
   }
@@ -170,8 +170,8 @@ void BoxService::InitialiseEventsCursor() {
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(InitialiseEventsFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &BoxService::InitialiseEventsFinished, reply);
 }
 
 void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
@@ -203,9 +203,8 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id,
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchFolderItemsFinished(QNetworkReply*, int)), reply,
-             folder_id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &BoxService::FetchFolderItemsFinished, reply, folder_id);
 }
 
 void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
@@ -250,9 +249,8 @@ void BoxService::MaybeAddFileEntry(const QJsonObject& entry) {
 
   // This is actually a redirect. Follow it now.
   QNetworkReply* reply = FetchContentUrlForFile(entry["id"].toString());
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RedirectFollowed(QNetworkReply*, Song, QString)), reply, song,
-             mime_type);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &BoxService::RedirectFollowed, reply, song, mime_type);
 }
 
 QNetworkReply* BoxService::FetchContentUrlForFile(const QString& file_id) {
@@ -286,8 +284,8 @@ void BoxService::UpdateFilesFromCursor(const QString& cursor) {
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchEventsFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &BoxService::FetchEventsFinished, reply);
 }
 
 void BoxService::FetchEventsFinished(QNetworkReply* reply) {

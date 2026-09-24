@@ -58,8 +58,8 @@ void ITunesSearchPage::SearchClicked() {
   url.setQuery(url_query);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(SearchFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &ITunesSearchPage::SearchFinished, reply);
 }
 
 void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {

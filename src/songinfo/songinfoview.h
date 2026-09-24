@@ -61,7 +61,7 @@ class SongInfoView : public SongInfoBase {
   // canonical (alias-resolved) form of the argument's actual type, or the
   // invoke silently fails - this wasn't an issue under Qt5, which didn't
   // validate the name.
-  void UltimateLyricsParsed(QFuture<QList<SongInfoProvider*>> future);
+  void UltimateLyricsParsed(const QList<SongInfoProvider*>& providers);
 
  private:
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;

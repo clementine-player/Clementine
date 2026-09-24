@@ -47,8 +47,8 @@ void LocalRedirectServer::NewConnection() {
   server_->close();
 
   QByteArray buffer;
-  NewClosure(socket, SIGNAL(readyRead()), this,
-             SLOT(ReadyRead(QTcpSocket*, QByteArray)), socket, buffer);
+  NewClosure(socket, &QTcpSocket::readyRead, this,
+             &LocalRedirectServer::ReadyRead, socket, buffer);
 }
 
 void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
@@ -59,8 +59,8 @@ void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
     request_url_ = ParseUrlFromRequest(buffer);
     emit Finished();
   } else {
-    NewClosure(socket, SIGNAL(readyRead()), this,
-               SLOT(ReadyReady(QTcpSocket*, QByteArray)), socket, buffer);
+    NewClosure(socket, &QTcpSocket::readyRead, this,
+               &LocalRedirectServer::ReadyRead, socket, buffer);
   }
 }
 

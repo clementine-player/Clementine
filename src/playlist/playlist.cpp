@@ -438,20 +438,19 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     TagReaderReply* reply =
         TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
 
-    NewClosure(reply, SIGNAL(Finished(bool)), this,
-               SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
-               reply, QPersistentModelIndex(index));
+    NewClosure(reply, &TagReaderReply::Finished, this,
+               &Playlist::SongSaveComplete, reply,
+               QPersistentModelIndex(index));
   }
   return true;
 }
 
-void Playlist::SongSaveComplete(TagReaderReply* reply,
+void Playlist::SongSaveComplete(bool success, TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
-  if (reply->is_successful() && index.isValid()) {
+  if (success && index.isValid()) {
     if (reply->message().save_file_response().success()) {
       QFuture<void> future = item_at(index.row())->BackgroundReload();
-      NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
-                 index);
+      NewClosure(future, this, &Playlist::ItemReloadComplete, index);
     } else {
       emit Error(
           tr("An error occurred writing metadata to '%1'")
@@ -1572,16 +1571,11 @@ void Playlist::Restore() {
   cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(&PlaylistBackend::GetPlaylistItems, backend_, id_);
-  NewClosure(future, this,
-             SLOT(ItemsLoaded(QFuture<QList<std::shared_ptr<PlaylistItem>>>)),
-             future);
+  NewClosure(future, this, &Playlist::ItemsLoaded);
 }
 
-void Playlist::ItemsLoaded(
-    QFuture<QList<std::shared_ptr<PlaylistItem>>> future) {
+void Playlist::ItemsLoaded(PlaylistItemList items) {
   if (cancel_restore_) return;
-
-  PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those

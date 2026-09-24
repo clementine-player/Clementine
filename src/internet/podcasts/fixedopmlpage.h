@@ -38,7 +38,7 @@ class FixedOpmlPage : public AddPodcastPage {
   void Show();
 
  private slots:
-  void LoadFinished(PodcastUrlLoaderReply* reply);
+  void LoadFinished(bool success, PodcastUrlLoaderReply* reply);
 
  private:
   PodcastUrlLoader* loader_;

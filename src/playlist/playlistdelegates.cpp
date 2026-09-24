@@ -402,14 +402,12 @@ TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column,
     : QCompleter(editor), editor_(editor) {
   QFuture<TagCompletionModel*> future =
       QtConcurrent::run(&InitCompletionModel, backend, column);
-  NewClosure(future, this, SLOT(ModelReady(QFuture<TagCompletionModel*>)),
-             future);
+  NewClosure(future, this, &TagCompleter::ModelReady);
 }
 
 TagCompleter::~TagCompleter() { model()->deleteLater(); }
 
-void TagCompleter::ModelReady(QFuture<TagCompletionModel*> future) {
-  TagCompletionModel* model = future.result();
+void TagCompleter::ModelReady(TagCompletionModel* model) {
   setModel(model);
   setCaseSensitivity(Qt::CaseInsensitive);
   editor_->setCompleter(this);

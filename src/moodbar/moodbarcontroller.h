@@ -38,7 +38,8 @@ class MoodbarController : public QObject {
  private slots:
   void CurrentSongChanged(const Song& song);
   void PlaybackStopped();
-  void AsyncLoadComplete(MoodbarPipeline* pipeline, const QUrl& url);
+  void AsyncLoadComplete(bool success, MoodbarPipeline* pipeline,
+                         const QUrl& url);
 
  private:
   Application* app_;

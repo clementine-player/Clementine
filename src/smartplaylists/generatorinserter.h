@@ -49,7 +49,7 @@ class GeneratorInserter : public QObject {
  private slots:
   // Fully expanded type, not the PlaylistItemList typedef: see the comment
   // on Playlist::ItemsLoaded's declaration for why.
-  void Finished(QFuture<QList<std::shared_ptr<PlaylistItem>>> future);
+  void Finished(PlaylistItemList items);
 
  private:
   TaskManager* task_manager_;

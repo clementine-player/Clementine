@@ -157,8 +157,8 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
 
     RedirectFollower* image_reply =
         new RedirectFollower(network_->get(QNetworkRequest(result.image_url)));
-    NewClosure(image_reply, SIGNAL(finished()), this,
-               SLOT(ProviderCoverFetchFinished(RedirectFollower*)),
+    NewClosure(image_reply, &RedirectFollower::finished, this,
+               &AlbumCoverFetcherSearch::ProviderCoverFetchFinished,
                image_reply);
     pending_image_loads_[image_reply] = result.provider;
     image_load_timeout_->AddReply(image_reply);
