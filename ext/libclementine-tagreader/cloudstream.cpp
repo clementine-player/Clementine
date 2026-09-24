@@ -56,13 +56,13 @@ bool CloudStream::CheckCache(int start, int end) {
 }
 
 void CloudStream::FillCache(int start, TagLib::ByteVector data) {
-  for (int i = 0; i < data.size(); ++i) {
+  for (int i = 0; i < static_cast<int>(data.size()); ++i) {
     cache_.set(start + i, data[i]);
   }
 }
 
 TagLib::ByteVector CloudStream::GetCached(int start, int end) {
-  const uint size = end - start + 1;
+  const int size = end - start + 1;
   TagLib::ByteVector ret(size);
   for (int i = 0; i < size; ++i) {
     ret[i] = cache_.get(start + i);

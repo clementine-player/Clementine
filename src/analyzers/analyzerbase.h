@@ -42,7 +42,7 @@
 #include "fht.h"
 
 #ifdef HAVE_OPENGL
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MACOS
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #else

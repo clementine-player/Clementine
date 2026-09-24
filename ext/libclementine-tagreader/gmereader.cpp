@@ -107,8 +107,8 @@ void GME::SPC::Read(const QFileInfo& file_info,
         QByteArray arr = file.read(4);
         if (arr.size() < 4) break;
 
-        qint8 id = arr[0];
-        qint8 type = arr[1];
+        // arr[0] and arr[1] are the id and type, which this skips over
+        // along with the value itself.
         qint16 length = arr[2] | (arr[3] << 8);
 
         file.read(GetNextMemAddressAlign32bit(length));
