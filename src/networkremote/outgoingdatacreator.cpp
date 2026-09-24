@@ -706,6 +706,11 @@ void OutgoingDataCreator::ResultsAvailable(
 
   GlobalSearchRequest search_request = global_search_result_map_.value(id);
   RemoteClient* client = search_request.client_;
+  if (!client) {
+    // The client disconnected while the search was running.
+    global_search_result_map_.remove(id);
+    return;
+  }
   QImage null_img;
 
   cpb::remote::Message msg;
@@ -741,6 +746,7 @@ void OutgoingDataCreator::SearchFinished(int id) {
   if (!global_search_result_map_.contains(id)) return;
 
   GlobalSearchRequest req = global_search_result_map_.take(id);
+  if (!req.client_) return;
 
   // Send status message
   cpb::remote::Message msg;
