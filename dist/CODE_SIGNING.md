@@ -113,7 +113,13 @@ DMGs people download. It waits on Apple, which usually answers within ten
 minutes but has taken hours, so it stays off the pull request path; the
 submission is capped at 30 minutes in `dist/notarize.py` and the step at 45.
 See `APPLE_NOTARIZE_API_KEY_PATH` in
-`src/CMakeLists.txt`/`dist/notarize.py` and the `Notarize DMG` step. `dist/setup_signing.sh` only wires that variable up
+`src/CMakeLists.txt`/`dist/notarize.py` and the `Notarize DMG` step.
+
+The app and the dmg are submitted separately - the app during `make dmg`, so
+the dmg ships an app with its own stapled ticket, and then the dmg itself.
+`make notarize-dmg` therefore expects `make dmg` to have run already; it
+deliberately doesn't depend on it, because that dependency ran through the
+always-out-of-date `notarize-app` target and submitted the app twice. `dist/setup_signing.sh` only wires that variable up
 in CI (via `$GITHUB_ENV`); local builds stay ad-hoc/Developer-ID-signed but
 unnotarized by default. To test notarization locally, pass
 `-DAPPLE_NOTARIZE_API_KEY_PATH=<path to the same API key JSON>` to `cmake`
