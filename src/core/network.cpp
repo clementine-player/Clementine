@@ -193,7 +193,7 @@ RedirectFollower::RedirectFollower(QNetworkReply* first_reply,
 
 void RedirectFollower::ConnectReply(QNetworkReply* reply) {
   connect(reply, SIGNAL(readyRead()), SLOT(ReadyRead()));
-  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+  connect(reply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)),
           SIGNAL(error(QNetworkReply::NetworkError)));
   connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
           SIGNAL(downloadProgress(qint64, qint64)));
