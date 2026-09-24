@@ -130,7 +130,7 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* s_ctx) {
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
 
-  NewClosure(reply, SIGNAL(error(QNetworkReply::NetworkError)), this,
+  NewClosure(reply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this,
              SLOT(SearchRequestError(QNetworkReply::NetworkError,
                                      QNetworkReply*, int)),
              reply, s_ctx->id);
@@ -177,7 +177,7 @@ void DiscogsCoverProvider::SendReleaseRequest(
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
 
-  NewClosure(reply, SIGNAL(error(QNetworkReply::NetworkError)), this,
+  NewClosure(reply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this,
              SLOT(ReleaseRequestError(QNetworkReply::NetworkError,
                                       QNetworkReply*, int, int)),
              reply, s_ctx->id, r_ctx->id);
