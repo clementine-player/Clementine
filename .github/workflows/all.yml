@@ -12,6 +12,13 @@ on:
 env:
   LANG: C.UTF-8
 
+# Pushing again to a pull request makes the run in progress pointless, so
+# stop it. Runs on master are left alone - each one produces the release
+# artifacts for that commit.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint:
     name: Lint
@@ -34,6 +41,84 @@ jobs:
             | xargs -0 clang-format \
                 -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
                 --dry-run --Werror
+
+
+  test:
+    name: Test
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:resolute
+    steps:
+      - name: Install dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        # The same set as the Resolute build below, minus the Debian
+        # packaging tools - this job builds the test binaries, not a .deb.
+        run: >
+          apt-get update && apt-get install -y
+          cmake
+          g++
+          gettext
+          git
+          libasound2-dev
+          libboost-dev
+          libboost-serialization-dev
+          libcdio-cdda2
+          libcdio-dev
+          libchromaprint-dev
+          libcrypto++-dev
+          libdbus-1-dev
+          libfftw3-dev
+          libgl1-mesa-dev
+          libglew-dev
+          libglx-dev
+          libgpod-dev
+          libgstreamer-plugins-base1.0-dev
+          libgstreamer1.0-dev
+          libmtp-dev
+          libplist-dev
+          libprotobuf-dev
+          libpulse-dev
+          libqt6core5compat6-dev
+          libqt6opengl6-dev
+          libsparsehash-dev
+          libsqlite3-dev
+          libtag1-dev
+          libusbmuxd-dev
+          libx11-dev
+          libxcb1-dev
+          protobuf-compiler
+          qt6-base-dev
+          qt6-base-private-dev
+          qt6-l10n-tools
+          qt6-tools-dev
+          qt6-tools-dev-tools
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      - name: cmake
+        working-directory: bin
+        run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
+      - name: Build tests
+        working-directory: bin
+        # build_tests builds every test binary without running any of them;
+        # the clementine_test target runs each one as it is built, which
+        # stops at the first failure and reports nothing about the rest.
+        run: make -j2 build_tests
+      - name: Run tests
+        working-directory: bin/tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          status=0
+          for test in $(find . -maxdepth 1 -type f -executable -name '*_test' | sort); do
+            echo "::group::${test#./}"
+            ./"${test}" || status=1
+            echo "::endgroup::"
+          done
+          exit ${status}
 
 
   push_translations:
@@ -166,6 +251,9 @@ jobs:
 
   build_source:
     name: Build source tarball
+    needs:
+      - lint
+      - test
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -233,6 +321,9 @@ jobs:
 
   build_fedora_43:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -347,6 +438,9 @@ jobs:
 
   build_fedora_44:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -461,6 +555,9 @@ jobs:
 
   build_mingw:
     name: Build Windows Installer
+    needs:
+      - lint
+      - test
     runs-on: windows-latest
     defaults:
       run:
@@ -673,6 +770,9 @@ jobs:
 
   build_bookworm_64:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -784,6 +884,9 @@ jobs:
 
   build_trixie_64:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -886,6 +989,9 @@ jobs:
 
   build_jammy_64:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -994,6 +1100,9 @@ jobs:
 
   build_noble_64:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -1102,6 +1211,9 @@ jobs:
 
   build_resolute_64:
     name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
     strategy:
       fail-fast: false
       matrix:
@@ -1210,6 +1322,9 @@ jobs:
 
   build_mac:
     name: Build Mac DMG
+    needs:
+      - lint
+      - test
     runs-on: macos-26
     # id-token: write is what lets the "Authenticate to GCP" step below
     # trade a GitHub OIDC token for short-lived GCP credentials (Workload
@@ -1339,6 +1454,7 @@ jobs:
     if: always()
     needs:
       - lint
+      - test
       - build_source
       - build_bookworm_64
       - build_trixie_64
