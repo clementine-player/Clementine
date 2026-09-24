@@ -136,6 +136,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
@@ -279,6 +284,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -449,6 +459,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -573,6 +588,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -728,6 +748,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -1102,6 +1127,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
@@ -1267,6 +1297,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
@@ -1429,6 +1464,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
@@ -1591,6 +1631,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
@@ -1753,6 +1798,11 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
       - name: cmake
         working-directory: bin
         run: >
