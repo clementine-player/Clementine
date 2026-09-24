@@ -52,10 +52,14 @@
 #endif
 
 #include <QAbstractButton>
+#include <QAbstractSpinBox>
+#include <QComboBox>
 #include <QPainter>
 #include <QPushButton>
 #include <QScreen>
 #include <QScrollArea>
+#include <QScrollBar>
+#include <QSlider>
 #include <QWindow>
 
 SettingsItemDelegate::SettingsItemDelegate(QObject* parent)
@@ -180,6 +184,13 @@ void SettingsDialog::AddPageToStack(Page id, SettingsPage* page,
   area->setFrameShape(QFrame::NoFrame);
   area->setMinimumWidth(page->layout()->minimumSize().width());
 
+  // Stop value widgets from stealing wheel events while scrolling the page.
+  for (QWidget* widget : page->findChildren<QWidget*>()) {
+    if (IgnoresWheelEvents(widget)) {
+      widget->installEventFilter(this);
+    }
+  }
+
   // Add the page to the stack
   ui_->stacked_widget->addWidget(area);
 
@@ -189,6 +200,29 @@ void SettingsDialog::AddPageToStack(Page id, SettingsPage* page,
   data.scroll_area_ = area;
   data.page_ = page;
   pages_[id] = data;
+}
+
+bool SettingsDialog::IgnoresWheelEvents(const QWidget* widget) {
+  return qobject_cast<const QComboBox*>(widget) ||
+         qobject_cast<const QSlider*>(widget) ||
+         qobject_cast<const QAbstractSpinBox*>(widget);
+}
+
+bool SettingsDialog::eventFilter(QObject* object, QEvent* event) {
+  if (event->type() == QEvent::Wheel) {
+    QWidget* widget = qobject_cast<QWidget*>(object);
+    if (widget && widget->window() == this && IgnoresWheelEvents(widget)) {
+      // Scroll the page containing the widget instead of changing its value.
+      for (QWidget* w = widget->parentWidget(); w; w = w->parentWidget()) {
+        if (QScrollArea* area = qobject_cast<QScrollArea*>(w)) {
+          QCoreApplication::sendEvent(area->verticalScrollBar(), event);
+          break;
+        }
+      }
+      return true;
+    }
+  }
+  return QDialog::eventFilter(object, event);
 }
 
 void SettingsDialog::accept() {
