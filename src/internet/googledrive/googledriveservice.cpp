@@ -294,8 +294,8 @@ void GoogleDriveService::ListChanges(const QString& cursor) {
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(changes_response, &google_drive::ListChangesResponse::Finished, this,
-             &GoogleDriveService::ListChangesFinished, changes_response,
+  NewClosure(changes_response, &google_drive::ListChangesResponse::Finished,
+             this, &GoogleDriveService::ListChangesFinished, changes_response,
              task_id);
 }
 
