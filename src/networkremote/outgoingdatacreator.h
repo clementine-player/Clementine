@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QList>
 #include <QMap>
+#include <QPointer>
 #include <QQueue>
 #include <QTcpSocket>
 #include <QTimer>
@@ -32,7 +33,9 @@ typedef QList<SongInfoProvider*> ProviderList;
 struct GlobalSearchRequest {
   int id_;
   QString query_;
-  RemoteClient* client_;
+  // Clients are deleted when they disconnect, which can happen before the
+  // search finishes; QPointer turns null instead of dangling.
+  QPointer<RemoteClient> client_;
   GlobalSearchRequest() : id_(-1), client_(nullptr) {}
   GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
       : id_(i), query_(q), client_(c) {}
