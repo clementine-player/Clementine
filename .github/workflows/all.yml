@@ -1897,6 +1897,14 @@ jobs:
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
             ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"} \
             ${APPLE_NOTARIZE_API_KEY_PATH:+-DAPPLE_NOTARIZE_API_KEY_PATH="$APPLE_NOTARIZE_API_KEY_PATH"}
+      # Explicit, and parallel: `make install` builds everything it hasn't
+      # already as a side effect, and with no -j it did so one file at a
+      # time - 33 minutes of compiling inside a step named after copying
+      # some icons.
+      - name: make
+        working-directory: bin
+        run: make -j$(sysctl -n hw.ncpu)
+
       - name: Copy icon files and resources
         working-directory: bin
         run: make install
