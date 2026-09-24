@@ -5,7 +5,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Priit Jõerüüt <transifex@joeruut.com>, 2019
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2024
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2024,2026
 # Rivo Zängov <eraser@eraser.ee>, 2011-2012,2018
 # spil <spil99@hotmail.com>, 2013
 # Руслан <nasretdinov.r.r@ya.ru>, 2013
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2024\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2024,2026\n"
 "Language-Team: Estonian (http://app.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,15 +27,15 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nKui klõpsid tähe ikooni esitusloendi ees, siis sa võid märkida selle esitusloendi oma lemmikuks.\n\nLemmikuks märgitud esitusloendid salvestatakse siia."
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:127
 msgid " ANMR method (experimental)"
-msgstr ""
+msgstr "ANMR meetod (katseline)"
 
 #: ../bin/src/ui_podcastsettingspage.h:273
 msgid " days"
-msgstr ""
+msgstr "päeva"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:133
 #: ../bin/src/ui_transcoderoptionsavaac.h:132
@@ -64,7 +64,7 @@ msgstr " punkti"
 
 #: ../bin/src/ui_behavioursettingspage.h:414
 msgid " s"
-msgstr ""
+msgstr "sek"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:114
@@ -84,7 +84,7 @@ msgstr "%1 albumit"
 #: widgets/equalizerslider.cpp:44
 #, qt-format
 msgid "%1 dB"
-msgstr ""
+msgstr "%1 dB"
 
 #: core/utilities.cpp:131
 #, qt-format
@@ -99,7 +99,7 @@ msgstr "%1 päeva tagasi"
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 arvutis %2"
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
@@ -111,7 +111,7 @@ msgstr "%1 lugude nimekirja (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 päring ei õnnestunud:\n%2"
 
 #: devices/deviceview.cpp:122
 #, qt-format
@@ -157,7 +157,7 @@ msgstr "%L1 muud kuulajat"
 #: playlist/playlistmanager.cpp:441
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "Valitud %L1  / "
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 #, qt-format
@@ -167,11 +167,11 @@ msgstr "Kokku %L1 esituskorda"
 #: playlist/playlistmanager.cpp:447
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 lugu"
 
 #: ../bin/src/ui_notificationssettingspage.h:433
 msgid "%filename%"
-msgstr ""
+msgstr "%failinimi%"
 
 #: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
@@ -209,7 +209,7 @@ msgstr "Lisad"
 
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "&Grouping"
-msgstr ""
+msgstr "&Rühmitamine"
 
 #: ../bin/src/ui_mainwindow.h:794
 msgid "&Help"
@@ -230,11 +230,11 @@ msgstr "&Vasakule"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr ""
+msgstr "&Lukusta hinnang"
 
 #: ../bin/src/ui_edittagdialog.h:731
 msgid "&Lyrics"
-msgstr ""
+msgstr "&Laulusõnad"
 
 #: ../bin/src/ui_mainwindow.h:792
 msgid "&Music"
@@ -286,7 +286,7 @@ msgstr "..ja kõik Amaroki toetajad"
 
 #: ../bin/src/ui_albumcovermanager.h:227 ../bin/src/ui_albumcovermanager.h:228
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:66 ../bin/src/ui_trackslider.h:70
 msgid "0:00:00"
@@ -294,7 +294,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:344
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:131
 msgid "1 day"
@@ -311,19 +311,19 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_playbacksettingspage.h:403
 msgid "192,000Hz"
-msgstr ""
+msgstr "192,000Hz"
 
 #: ../bin/src/ui_appearancesettingspage.h:346
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: ../bin/src/ui_playbacksettingspage.h:400
 msgid "44,100Hz"
-msgstr ""
+msgstr "44,100Hz"
 
 #: ../bin/src/ui_playbacksettingspage.h:401
 msgid "48,000Hz"
-msgstr ""
+msgstr "48,000Hz"
 
 #: library/library.cpp:66
 msgid "50 random tracks"
@@ -331,7 +331,7 @@ msgstr "50 juhuslikku lugu"
 
 #: ../bin/src/ui_playbacksettingspage.h:402
 msgid "96,000Hz"
-msgstr ""
+msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:169
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -345,7 +345,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kui see valik pole aktiivne, siis Clementine püüab salvestada sinu antud lugude hindeid ja muud statistikat eraldi andmebaasi ning ei muuda sinu faile.</p><p>Kui see valik on aktiivne, siis ta salvestab statistikat nii andmebaasi kui faili niipea, kui selles osas on muutusi.</p><p>Aga palun arvesta et selline funktsionaalsus ei pruugi toimida kõikide failivormingutega ning kuna puuduvad vastavad avalikud standardid, siis muud meediamängijad ei pruugi osata seda infot lugeda ja kasutada.</p></body></html> "
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 #, qt-format
@@ -361,7 +361,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kui soovid otsingut piirata konkreetse väljaga, siis sisesta see otsingusõna prefiksina, näiteks <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Kuld</span> otsib muusikakogust esitajaid, kelle nimes leidub Kuld ning <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> otsib muusikakogust lugusid, mida on esitatud vähemalt kaks korda või <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> otsib lugusid, mida on esitatud viimase 180 minuti jooksul.</p><p><span style=\" font-weight:600;\">Kasutatavad väljad: </span> <span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid ""
@@ -369,7 +369,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Sellele nupule vajutades kirjutatakse hinnangud ja statistika kõikide sinu muusikakogu failide andmeväljadesse.</p><p>Selle nupu klõpsimine ei  ole vajalik, kui &quot;Kui võimalik, siis salvesta statistika faili siltidena&quot; valik on pidevalt aktiivne.</p></body></html>"
 
 #: songinfo/artistbiography.cpp:282
 #, qt-format
@@ -515,15 +515,15 @@ msgstr "Lisa kaust..."
 
 #: ui/mainwindow.cpp:2151
 msgid "Add file"
-msgstr ""
+msgstr "Lisa fail"
 
 #: ../bin/src/ui_mainwindow.h:775
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Lisa fail kodeeringu muutmiseks"
 
 #: ../bin/src/ui_mainwindow.h:773
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Lisa fail(id) kodeeringu muutmiseks"
 
 #: ../bin/src/ui_transcodedialog.h:226 ../bin/src/ui_mainwindow.h:741
 msgid "Add file..."
@@ -535,7 +535,7 @@ msgstr "Lisa failid kodeeringu muutmiseks"
 
 #: ../bin/src/ui_googledrivesettingspage.h:148
 msgid "Add files..."
-msgstr ""
+msgstr "Lisa failid..."
 
 #: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2178
 #: ripper/ripcddialog.cpp:279
@@ -552,11 +552,11 @@ msgstr "Lisa uus kaust..."
 
 #: ../bin/src/ui_addpodcastdialog.h:177
 msgid "Add podcast"
-msgstr ""
+msgstr "Lisa taskuhääling"
 
 #: internet/podcasts/podcastservice.cpp:434 ../bin/src/ui_mainwindow.h:771
 msgid "Add podcast..."
-msgstr ""
+msgstr "Lisa taskuhääling..."
 
 #: smartplaylists/searchtermwidget.cpp:385
 msgid "Add search term"
@@ -1013,7 +1013,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr ""
 
-#: analyzers/blockanalyzer.cpp:46
+#: analyzers/blockanalyzer.cpp:47
 msgid "Block analyzer"
 msgstr "Blokk-analüsaator"
 
@@ -2031,7 +2031,7 @@ msgstr "Muuda loo infot..."
 
 #: library/libraryview.cpp:429
 msgid "Edit tracks information..."
-msgstr ""
+msgstr "Muuda lugude teavet..."
 
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
