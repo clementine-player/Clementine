@@ -45,6 +45,10 @@ def Notarize(path, api_key_path):
         '--key-id', api_key['key_id'],
         '--issuer', api_key['issuer_id'],
         '--wait',
+        # --wait on its own waits forever. Apple's service usually answers
+        # in under ten minutes; when it doesn't, failing is more useful
+        # than holding a runner until the job's six-hour limit.
+        '--timeout', '30m',
     ])
   finally:
     os.remove(key_path)

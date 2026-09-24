@@ -1839,14 +1839,23 @@ jobs:
       # reflects fork vs. same-repo, and it comes from GitHub's own event
       # data, not anything a PR author controls. See dist/CODE_SIGNING.md
       # for the one-time setup this depends on.
+      #
+      # Notarizing is narrower still: only pushes to master, the builds
+      # whose DMGs people actually download. It waits on Apple's service,
+      # which has hung for two hours where it usually takes eight minutes,
+      # and that is not a thing to put in front of every pull request.
       - name: Check signing eligibility
         id: signing
         run: |
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]] \
-            || [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "notarize=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "notarize=false" >> "$GITHUB_OUTPUT"
           else
             echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "notarize=false" >> "$GITHUB_OUTPUT"
           fi
       - name: Authenticate to GCP
         if: steps.signing.outputs.enabled == 'true'
@@ -1923,7 +1932,10 @@ jobs:
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
       - name: Notarize DMG
-        if: steps.signing.outputs.enabled == 'true'
+        if: steps.signing.outputs.notarize == 'true'
+        # A backstop around the whole step, so a hang in stapling after
+        # notarytool returns is bounded too.
+        timeout-minutes: 45
         working-directory: bin
         run: make notarize-dmg
       - uses: actions/upload-artifact@v7.0.1
