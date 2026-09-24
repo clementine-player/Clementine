@@ -48,6 +48,20 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:resolute
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         env:
@@ -56,6 +70,7 @@ jobs:
         # packaging tools - this job builds the test binaries, not a .deb.
         run: |
           packages="
+            ccache
             cmake
             g++
             gettext
@@ -93,6 +108,7 @@ jobs:
             qt6-l10n-tools
             qt6-tools-dev
             qt6-tools-dev-tools
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -111,6 +127,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-test-${{ github.sha }}
+          restore-keys: ccache-test-
       - name: cmake
         working-directory: bin
         run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
@@ -134,7 +159,19 @@ jobs:
             echo "::endgroup::"
           done
           exit ${status}
-
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-test-${{ github.sha }}
 
   push_translations:
     name: Push translation sources to Transifex
@@ -142,6 +179,20 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - uses: supplypike/setup-bin@v3
         with:
@@ -159,6 +210,7 @@ jobs:
           # 3rdparty/libmygpo-qt5 copy instead.
           packages="
             build-essential
+            ccache
             cmake
             gettext
             git
@@ -194,6 +246,7 @@ jobs:
             qt6-tools-dev-tools
             libsparsehash-dev
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -217,6 +270,15 @@ jobs:
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
         run: tx init
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-translations-${{ github.sha }}
+          restore-keys: ccache-translations-
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -231,6 +293,19 @@ jobs:
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
         run: tx push -s
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-translations-${{ github.sha }}
 
   create_release:
     name: Create GitHub Release
@@ -285,6 +360,20 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         env:
@@ -293,6 +382,7 @@ jobs:
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
           packages="
+            ccache
             cmake
             fakeroot
             gettext
@@ -331,6 +421,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -349,6 +440,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-source-${{ github.sha }}
+          restore-keys: ccache-source-
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -359,6 +459,19 @@ jobs:
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-source-${{ github.sha }}
 
   build_fedora_43:
     name: ${{ matrix.name }}
@@ -380,13 +493,30 @@ jobs:
       image: fedora:43
     env:
       RPM_BUILD_NCPUS: "2"
+    env:
+      CCACHE_DIR: /ccache
+      # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
+      # a directory whose name changes with every commit. Rewriting paths
+      # under HOME relative to the build directory takes the version back
+      # out of the hash.
+      CCACHE_BASEDIR: /root
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         run: >
           dnf install --assumeyes
+          zstd
           @development-tools
           alsa-lib-devel
           boost-devel
+          ccache
           cmake
           cryptopp
           cryptopp-devel
@@ -435,6 +565,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -476,6 +615,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_fedora_44:
     name: ${{ matrix.name }}
@@ -497,13 +649,30 @@ jobs:
       image: fedora:44
     env:
       RPM_BUILD_NCPUS: "2"
+    env:
+      CCACHE_DIR: /ccache
+      # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
+      # a directory whose name changes with every commit. Rewriting paths
+      # under HOME relative to the build directory takes the version back
+      # out of the hash.
+      CCACHE_BASEDIR: /root
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         run: >
           dnf install --assumeyes
+          zstd
           @development-tools
           alsa-lib-devel
           boost-devel
+          ccache
           cmake
           cryptopp
           cryptopp-devel
@@ -552,6 +721,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -593,6 +771,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_mingw:
     name: Build Windows Installer
@@ -827,6 +1018,20 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: debian:bookworm
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         run: |
@@ -834,6 +1039,7 @@ jobs:
           # above.
           packages="
             build-essential
+            ccache
             cmake
             debhelper
             gettext
@@ -870,6 +1076,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -888,6 +1095,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -935,6 +1151,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_trixie_64:
     name: ${{ matrix.name }}
@@ -954,6 +1183,20 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: debian:trixie
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         run: |
@@ -961,6 +1204,7 @@ jobs:
           # above.
           packages="
             build-essential
+            ccache
             cmake
             debhelper
             gettext
@@ -997,6 +1241,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -1015,6 +1260,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1053,6 +1307,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_jammy_64:
     name: ${{ matrix.name }}
@@ -1072,6 +1339,20 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:jammy
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         env:
@@ -1080,6 +1361,7 @@ jobs:
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
           packages="
+            ccache
             cmake
             dpkg-dev
             debhelper
@@ -1121,6 +1403,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -1139,6 +1422,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1177,6 +1469,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_noble_64:
     name: ${{ matrix.name }}
@@ -1196,6 +1501,20 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:noble
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         env:
@@ -1204,6 +1523,7 @@ jobs:
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
           packages="
+            ccache
             cmake
             dpkg-dev
             debhelper
@@ -1245,6 +1565,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -1263,6 +1584,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1301,6 +1631,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_resolute_64:
     name: ${{ matrix.name }}
@@ -1320,6 +1663,20 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: ubuntu:resolute
+    env:
+      CCACHE_DIR: /ccache
+      # Absolute paths reach the hash through -I flags, the generated
+      # sources and the preprocessor's line markers, so without this a
+      # build at a different path misses everything.
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 250M
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
       - name: Install dependencies
         env:
@@ -1328,6 +1685,7 @@ jobs:
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
           packages="
+            ccache
             cmake
             dpkg-dev
             debhelper
@@ -1369,6 +1727,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zstd
           "
           # The archives sometimes rotate a package out between the index
           # apt-get update fetched and the download of the .deb itself,
@@ -1387,6 +1746,15 @@ jobs:
           fetch-depth: 0
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one - from this branch, or from
+      # master for a pull request's first run.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          restore-keys: ccache-${{ matrix.artifact }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1425,6 +1793,19 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt.
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
 
   build_mac:
     name: Build Mac DMG
