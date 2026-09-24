@@ -214,7 +214,9 @@ void ParseAProto() {
       "4202d20416d6269656e74204c6f756e67652e6d786dc001c7a7efd104c801bad685e4"
       "04d001eeca32");
   cpb::tagreader::Message message;
-  message.ParseFromArray(data.constData(), data.size());
+  if (!message.ParseFromArray(data.constData(), data.size())) {
+    qLog(Warning) << "Failed to parse the warm-up protobuf message";
+  }
 }
 
 void CheckPortable() {

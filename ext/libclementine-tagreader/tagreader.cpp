@@ -335,7 +335,7 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["APIC"].isEmpty()) song->set_art_automatic(kEmbeddedCover);
 
       // Find a suitable comment tag.  For now we ignore iTunNORM comments.
-      for (int i = 0; i < map["COMM"].size(); ++i) {
+      for (uint i = 0; i < map["COMM"].size(); ++i) {
         const TagLib::ID3v2::CommentsFrame* frame =
             dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
 
@@ -346,7 +346,7 @@ void TagReader::ReadFile(const QString& filename,
       }
 
       // Parse FMPS frames
-      for (int i = 0; i < map["TXXX"].size(); ++i) {
+      for (uint i = 0; i < map["TXXX"].size(); ++i) {
         const TagLib::ID3v2::UserTextIdentificationFrame* frame =
             dynamic_cast<const TagLib::ID3v2::UserTextIdentificationFrame*>(
                 map["TXXX"][i]);
@@ -621,33 +621,33 @@ void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
   QVariant var;
   if (name == "FMPS_Rating") {
     var = parser.result()[0][0];
-    if (var.type() == QVariant::Double) {
+    if (var.typeId() == QMetaType::Double) {
       song->set_rating(var.toDouble());
     }
   } else if (name == "FMPS_Rating_User") {
     // Take a user rating only if there's no rating already set
     if (song->rating() == -1 && parser.result()[0].count() >= 2) {
       var = parser.result()[0][1];
-      if (var.type() == QVariant::Double) {
+      if (var.typeId() == QMetaType::Double) {
         song->set_rating(var.toDouble());
       }
     }
   } else if (name == "FMPS_PlayCount") {
     var = parser.result()[0][0];
-    if (var.type() == QVariant::Double) {
+    if (var.typeId() == QMetaType::Double) {
       song->set_playcount(var.toDouble());
     }
   } else if (name == "FMPS_PlayCount_User") {
     // Take a user playcount only if there's no playcount already set
     if (song->playcount() == 0 && parser.result()[0].count() >= 2) {
       var = parser.result()[0][1];
-      if (var.type() == QVariant::Double) {
+      if (var.typeId() == QMetaType::Double) {
         song->set_playcount(var.toDouble());
       }
     }
   } else if (name == "FMPS_Rating_Amarok_Score") {
     var = parser.result()[0][0];
-    if (var.type() == QVariant::Double) {
+    if (var.typeId() == QMetaType::Double) {
       song->set_score(var.toFloat() * 100);
     }
   }
@@ -1336,7 +1336,7 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
       TagLib::ByteVector data = it->second.binaryData();
 
       int pos = data.find('\0') + 1;
-      if ((pos > 0) && (pos < data.size())) {
+      if ((pos > 0) && (pos < static_cast<int>(data.size()))) {
         cover = QByteArray(data.data() + pos, data.size() - pos);
       }
     }

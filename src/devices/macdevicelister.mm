@@ -338,8 +338,8 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
 
   scoped_nsobject<NSDictionary> properties((NSDictionary*)DADiskCopyDescription(disk));
 
-  NSString* kind = [properties objectForKey:(NSString*)kDADiskDescriptionMediaKindKey];
 #ifdef HAVE_AUDIOCD
+  NSString* kind = [properties objectForKey:(NSString*)kDADiskDescriptionMediaKindKey];
   if (kind && strcmp([kind UTF8String], kIOCDMediaClass) == 0) {
     // CD inserted.
     QString bsd_name = QString::fromLatin1(DADiskGetBSDName(disk));
