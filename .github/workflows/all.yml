@@ -134,8 +134,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-test-${{ github.sha }}
-          restore-keys: ccache-test-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
@@ -171,7 +171,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-test-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   push_translations:
     name: Push translation sources to Transifex
@@ -277,8 +277,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-translations-${{ github.sha }}
-          restore-keys: ccache-translations-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -305,7 +305,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-translations-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   create_release:
     name: Create GitHub Release
@@ -447,8 +447,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-source-${{ github.sha }}
-          restore-keys: ccache-source-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: cmake ..
@@ -471,7 +471,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-source-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_fedora_43:
     name: ${{ matrix.name }}
@@ -572,8 +572,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -627,7 +627,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_fedora_44:
     name: ${{ matrix.name }}
@@ -728,8 +728,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
@@ -783,7 +783,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_mingw:
     name: Build Windows Installer
@@ -1102,8 +1102,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1163,7 +1163,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_trixie_64:
     name: ${{ matrix.name }}
@@ -1267,8 +1267,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1319,7 +1319,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_jammy_64:
     name: ${{ matrix.name }}
@@ -1429,8 +1429,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1481,7 +1481,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_noble_64:
     name: ${{ matrix.name }}
@@ -1591,8 +1591,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1643,7 +1643,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_resolute_64:
     name: ${{ matrix.name }}
@@ -1753,8 +1753,8 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
-          restore-keys: ccache-${{ matrix.artifact }}-
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: cmake
         working-directory: bin
         run: >
@@ -1805,7 +1805,7 @@ jobs:
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
-          key: ccache-${{ matrix.artifact }}-${{ github.sha }}
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_mac:
     name: Build Mac DMG
