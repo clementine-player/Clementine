@@ -238,7 +238,8 @@ void Amarok::VolumeSlider::generateGradient() {
   QPainter p(&pixmap);
   p.setRenderHint(QPainter::Antialiasing);
 
-  QLinearGradient gradient(QPointF(0, 0), QPointF(kVolumePixmapSize.width(), 0));
+  QLinearGradient gradient(QPointF(0, 0),
+                           QPointF(kVolumePixmapSize.width(), 0));
   gradient.setColorAt(0, palette().color(QPalette::Window));
   gradient.setColorAt(1, palette().color(QPalette::Highlight));
 
