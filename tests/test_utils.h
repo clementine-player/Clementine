@@ -22,6 +22,7 @@
 
 #include <QMetaType>
 #include <QModelIndex>
+#include <QString>
 #include <QTemporaryFile>
 
 class QNetworkRequest;
@@ -68,17 +69,24 @@ class TestQObject : public QObject {
   TestQObject(QObject* parent = 0);
 
   void Emit();
+  void EmitWithArgs(int number, const QString& text);
 
   int invoked() const { return invoked_; }
+  int number() const { return number_; }
+  QString text() const { return text_; }
 
  signals:
   void Emitted();
+  void EmittedWithArgs(int number, const QString& text);
 
  public slots:
   void Invoke();
+  void InvokeWithArgs(int number, const QString& text);
 
  private:
   int invoked_;
+  int number_;
+  QString text_;
 };
 
 #endif  // TEST_UTILS_H
