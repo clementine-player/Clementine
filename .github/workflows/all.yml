@@ -106,7 +106,9 @@ jobs:
         # build_tests builds every test binary without running any of them;
         # the clementine_test target runs each one as it is built, which
         # stops at the first failure and reports nothing about the rest.
-        run: make -j2 build_tests
+        # The other jobs use -j2; this one is on the critical path for
+        # everything else, so use the whole runner.
+        run: make -j$(nproc) build_tests
       - name: Run tests
         working-directory: bin/tests
         env:
