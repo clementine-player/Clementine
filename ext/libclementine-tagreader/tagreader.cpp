@@ -68,6 +68,14 @@
 #define TAGLIB_HAS_FLAC_PICTURELIST
 #endif
 
+// Taglib 1.x announced its optional ASF and MP4 support with these, defined
+// in taglib_config.h. Taglib 2 always builds both and dropped the header, so
+// without this everything below guarded by them disappears.
+#if TAGLIB_MAJOR_VERSION >= 2
+#define TAGLIB_WITH_ASF 1
+#define TAGLIB_WITH_MP4 1
+#endif
+
 #ifdef HAVE_GOOGLE_DRIVE
 #include "cloudstream.h"
 #endif
