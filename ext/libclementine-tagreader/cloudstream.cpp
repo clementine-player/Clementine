@@ -63,7 +63,9 @@ void CloudStream::FillCache(int start, TagLib::ByteVector data) {
 
 TagLib::ByteVector CloudStream::GetCached(int start, int end) {
   const int size = end - start + 1;
-  TagLib::ByteVector ret(size);
+  // Cast: taglib 2 also has a ByteVector(char) overload, so an int is
+  // ambiguous.
+  TagLib::ByteVector ret(static_cast<unsigned int>(size));
   for (int i = 0; i < size; ++i) {
     ret[i] = cache_.get(start + i);
   }
