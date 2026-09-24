@@ -54,45 +54,58 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         # The same set as the Resolute build below, minus the Debian
         # packaging tools - this job builds the test binaries, not a .deb.
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          g++
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          libx11-dev
-          libxcb1-dev
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
+        run: |
+          packages="
+            cmake
+            g++
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            libx11-dev
+            libxcb1-dev
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -138,49 +151,62 @@ jobs:
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          build-essential
-          cmake
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libcdio-dev
-          libchromaprint-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglib2.0-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsqlite3-dev
-          libtag1-dev
-          libx11-dev
-          libxcb1-dev
-          pkg-config
-          protobuf-compiler
-          python3-pip
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          libsparsehash-dev
-          ssh
+        run: |
           # liblastfm isn't a dependency any more - Last.fm scrobbling talks
           # directly to the web service API now (see
           # src/internet/lastfm/lastfmws.*). libmygpo-qt still has no Qt6
           # build anywhere, so gpodder sync falls back to the vendored
           # 3rdparty/libmygpo-qt5 copy instead.
+          packages="
+            build-essential
+            cmake
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libcdio-dev
+            libchromaprint-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglib2.0-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsqlite3-dev
+            libtag1-dev
+            libx11-dev
+            libxcb1-dev
+            pkg-config
+            protobuf-compiler
+            python3-pip
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            libsparsehash-dev
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - name: Checkout
         uses: actions/checkout@v7.0.1
         with:
@@ -263,48 +289,61 @@ jobs:
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          fakeroot
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          libx11-dev
-          libxcb1-dev
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
+          packages="
+            cmake
+            fakeroot
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            libx11-dev
+            libxcb1-dev
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -790,47 +829,60 @@ jobs:
       image: debian:bookworm
     steps:
       - name: Install dependencies
-        run: >
-          apt-get update && apt-get install -y
-          build-essential
-          cmake
-          debhelper
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libglew-dev
-          libglib2.0-dev
-          libgl1-mesa-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libprotobuf-dev
-          libpulse-dev
-          qt6-5compat-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libx11-dev
-          libxcb1-dev
-          pkg-config
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # liblastfm and libmygpo-qt: see the note in push_translations
           # above.
+          packages="
+            build-essential
+            cmake
+            debhelper
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew-dev
+            libglib2.0-dev
+            libgl1-mesa-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libprotobuf-dev
+            libpulse-dev
+            qt6-5compat-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libx11-dev
+            libxcb1-dev
+            pkg-config
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -904,47 +956,60 @@ jobs:
       image: debian:trixie
     steps:
       - name: Install dependencies
-        run: >
-          apt-get update && apt-get install -y
-          build-essential
-          cmake
-          debhelper
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libglew-dev
-          libglib2.0-dev
-          libgl1-mesa-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libprotobuf-dev
-          libpulse-dev
-          qt6-5compat-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libx11-dev
-          libxcb1-dev
-          pkg-config
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # liblastfm and libmygpo-qt: see the note in push_translations
           # above.
+          packages="
+            build-essential
+            cmake
+            debhelper
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew-dev
+            libglib2.0-dev
+            libgl1-mesa-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libprotobuf-dev
+            libpulse-dev
+            qt6-5compat-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libx11-dev
+            libxcb1-dev
+            pkg-config
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -1011,51 +1076,64 @@ jobs:
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          dpkg-dev
-          debhelper
-          fakeroot
-          g++
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          libx11-dev
-          libxcb1-dev
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
+          packages="
+            cmake
+            dpkg-dev
+            debhelper
+            fakeroot
+            g++
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            libx11-dev
+            libxcb1-dev
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -1122,51 +1200,64 @@ jobs:
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          dpkg-dev
-          debhelper
-          fakeroot
-          g++
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          libx11-dev
-          libxcb1-dev
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
+          packages="
+            cmake
+            dpkg-dev
+            debhelper
+            fakeroot
+            g++
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            libx11-dev
+            libxcb1-dev
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
@@ -1233,51 +1324,64 @@ jobs:
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          dpkg-dev
-          debhelper
-          fakeroot
-          g++
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libgl1-mesa-dev
-          libglew-dev
-          libglx-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          libmtp-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqt6core5compat6-dev
-          libqt6opengl6-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          libx11-dev
-          libxcb1-dev
-          protobuf-compiler
-          qt6-base-dev
-          qt6-base-private-dev
-          qt6-l10n-tools
-          qt6-tools-dev
-          qt6-tools-dev-tools
-          ssh
+        run: |
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
+          packages="
+            cmake
+            dpkg-dev
+            debhelper
+            fakeroot
+            g++
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libgl1-mesa-dev
+            libglew-dev
+            libglx-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            libmtp-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqt6core5compat6-dev
+            libqt6opengl6-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            libx11-dev
+            libxcb1-dev
+            protobuf-compiler
+            qt6-base-dev
+            qt6-base-private-dev
+            qt6-l10n-tools
+            qt6-tools-dev
+            qt6-tools-dev-tools
+            ssh
+          "
+          # The archives sometimes rotate a package out between the index
+          # apt-get update fetched and the download of the .deb itself,
+          # which fails the whole step with a 404. Refreshing the index
+          # and trying again picks up the replacement.
+          for attempt in 1 2 3; do
+            if apt-get update && apt-get install -y $packages; then
+              exit 0
+            fi
+            echo "apt-get failed (attempt ${attempt} of 3)"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
