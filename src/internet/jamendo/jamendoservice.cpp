@@ -226,7 +226,7 @@ void JamendoService::DownloadDirectoryFinished() {
 
   QFuture<void> future =
       QtConcurrent::run(&JamendoService::ParseDirectory, this, gzip);
-  NewClosure(future, this, SLOT(ParseDirectoryFinished()));
+  NewClosure(future, this, &JamendoService::ParseDirectoryFinished);
 }
 
 void JamendoService::ParseDirectory(QIODevice* device) const {

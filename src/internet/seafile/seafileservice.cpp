@@ -152,8 +152,8 @@ void SeafileService::GetLibraries() {
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(GetLibrariesFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SeafileService::GetLibrariesFinished, reply);
 }
 
 void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
@@ -192,8 +192,8 @@ void SeafileService::ChangeLibrary(const QString& new_library) {
     qLog(Debug) << "Want to change the Seafile library, but Clementine waits "
                    "the previous indexing...";
     changing_libary_ = true;
-    NewClosure(this, SIGNAL(UpdatingLibrariesFinishedSignal()), this,
-               SLOT(ChangeLibrary(QString)), new_library);
+    NewClosure(this, &SeafileService::UpdatingLibrariesFinishedSignal, this,
+               &SeafileService::ChangeLibrary, new_library);
     return;
   }
 
@@ -310,10 +310,9 @@ void SeafileService::FetchAndCheckFolderItems(const SeafileTree::Entry& library,
   StartTaskInProgress();
 
   QNetworkReply* reply = PrepareFetchFolderItems(library.id(), path);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchAndCheckFolderItemsFinished(
-                 QNetworkReply*, SeafileTree::Entry, QString)),
-             reply, library, path);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SeafileService::FetchAndCheckFolderItemsFinished, reply, library,
+             path);
 }
 
 void SeafileService::FetchAndCheckFolderItemsFinished(
@@ -361,10 +360,9 @@ void SeafileService::AddRecursivelyFolderItems(const QString& library,
   StartTaskInProgress();
 
   QNetworkReply* reply = PrepareFetchFolderItems(library, path);
-  NewClosure(
-      reply, SIGNAL(finished()), this,
-      SLOT(AddRecursivelyFolderItemsFinished(QNetworkReply*, QString, QString)),
-      reply, library, path);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SeafileService::AddRecursivelyFolderItemsFinished, reply, library,
+             path);
 }
 
 void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
@@ -437,10 +435,9 @@ void SeafileService::MaybeAddFileEntry(const QString& entry_name,
 
   // Get the details of the entry
   QNetworkReply* reply = PrepareFetchContentForFile(library, path + entry_name);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(MaybeAddFileEntryInProgress(QNetworkReply*, QString, QString,
-                                              QString)),
-             reply, library, path, mime_type);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SeafileService::MaybeAddFileEntryInProgress, reply, library, path,
+             mime_type);
 }
 
 void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
@@ -472,10 +469,9 @@ void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
   // Get the download url of the entry
   reply = PrepareFetchContentUrlForFile(
       library, path + json_entry_detail["name"].toString());
-  NewClosure(
-      reply, SIGNAL(finished()), this,
-      SLOT(FetchContentUrlForFileFinished(QNetworkReply*, Song, QString)),
-      reply, song, mime_type);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &SeafileService::FetchContentUrlForFileFinished, reply, song,
+             mime_type);
 }
 
 QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(

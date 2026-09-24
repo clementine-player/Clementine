@@ -44,9 +44,9 @@ class MoodbarItemDelegate : public QItemDelegate {
  private slots:
   void ReloadSettings();
 
-  void DataLoaded(const QUrl& url, MoodbarPipeline* pipeline);
-  void ColorsLoaded(const QUrl& url, QFuture<ColorVector> future);
-  void ImageLoaded(const QUrl& url, QFuture<QImage> future);
+  void DataLoaded(bool success, const QUrl& url, MoodbarPipeline* pipeline);
+  void ColorsLoaded(const ColorVector& colors, const QUrl& url);
+  void ImageLoaded(const QImage& loaded_image, const QUrl& url);
 
  private:
   struct Data {

@@ -58,7 +58,7 @@ class PrettyImage : public QWidget {
 
  private slots:
   void ImageFetched(RedirectFollower* reply);
-  void ImageScaled(QFuture<QImage> future);
+  void ImageScaled(const QImage& image);
 
  private:
   enum State {

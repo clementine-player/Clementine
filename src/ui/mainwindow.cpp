@@ -1375,8 +1375,8 @@ void MainWindow::ResumePlayback() {
              this, SLOT(ResumePlayback()));
 
   if (saved_playback_state_ == Engine::Paused) {
-    NewClosure(app_->player(), SIGNAL(Playing()), app_->player(),
-               SLOT(PlayPause()));
+    NewClosure(app_->player(), &PlayerInterface::Playing, app_->player(),
+               &Player::PlayPause);
   }
 
   app_->player()->Play();
@@ -2077,17 +2077,17 @@ void MainWindow::RenumberTracks() {
       TagReaderReply* reply =
           TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
 
-      NewClosure(reply, SIGNAL(Finished(bool)), this,
-                 SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
-                 reply, QPersistentModelIndex(source_index));
+      NewClosure(reply, &TagReaderReply::Finished, this,
+                 &MainWindow::SongSaveComplete, reply,
+                 QPersistentModelIndex(source_index));
     }
     track++;
   }
 }
 
-void MainWindow::SongSaveComplete(TagReaderReply* reply,
+void MainWindow::SongSaveComplete(bool success, TagReaderReply* reply,
                                   const QPersistentModelIndex& index) {
-  if (reply->is_successful() && index.isValid()) {
+  if (success && index.isValid()) {
     app_->playlist_manager()->current()->ReloadItems(QList<int>()
                                                      << index.row());
   }
@@ -2113,9 +2113,9 @@ void MainWindow::SelectionSetValue() {
       TagReaderReply* reply =
           TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
 
-      NewClosure(reply, SIGNAL(Finished(bool)), this,
-                 SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
-                 reply, QPersistentModelIndex(source_index));
+      NewClosure(reply, &TagReaderReply::Finished, this,
+                 &MainWindow::SongSaveComplete, reply,
+                 QPersistentModelIndex(source_index));
     }
   }
 }

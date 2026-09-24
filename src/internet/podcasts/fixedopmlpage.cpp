@@ -42,16 +42,16 @@ void FixedOpmlPage::Show() {
     done_initial_load_ = true;
 
     PodcastUrlLoaderReply* reply = loader_->Load(opml_url_);
-    NewClosure(reply, SIGNAL(Finished(bool)), this,
-               SLOT(LoadFinished(PodcastUrlLoaderReply*)), reply);
+    NewClosure(reply, &PodcastUrlLoaderReply::Finished, this,
+               &FixedOpmlPage::LoadFinished, reply);
   }
 }
 
-void FixedOpmlPage::LoadFinished(PodcastUrlLoaderReply* reply) {
+void FixedOpmlPage::LoadFinished(bool success, PodcastUrlLoaderReply* reply) {
   reply->deleteLater();
   emit Busy(false);
 
-  if (!reply->is_success()) {
+  if (!success) {
     QMessageBox::warning(this, tr("Failed to load podcast"),
                          reply->error_text(), QMessageBox::Close);
     return;

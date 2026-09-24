@@ -73,7 +73,7 @@ class CloudFileService : public InternetService {
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
-  void ReadTagsFinished(TagReaderClient::ReplyType* reply,
+  void ReadTagsFinished(bool success, TagReaderClient::ReplyType* reply,
                         const Song& metadata);
   void FullRescanRequested();
   virtual void DoFullRescan() {}

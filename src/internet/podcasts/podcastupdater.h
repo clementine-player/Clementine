@@ -48,8 +48,8 @@ class PodcastUpdater : public QObject {
   void ReloadSettings();
 
   void SubscriptionAdded(const Podcast& podcast);
-  void PodcastLoaded(PodcastUrlLoaderReply* reply, const Podcast& podcast,
-                     bool one_of_many);
+  void PodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
+                     const Podcast& podcast, bool one_of_many);
 
  private:
   void RestartTimer();

@@ -130,12 +130,10 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* s_ctx) {
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
 
-  NewClosure(reply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this,
-             SLOT(SearchRequestError(QNetworkReply::NetworkError,
-                                     QNetworkReply*, int)),
-             reply, s_ctx->id);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(HandleSearchReply(QNetworkReply*, int)), reply, s_ctx->id);
+  NewClosure(reply, &QNetworkReply::errorOccurred, this,
+             &DiscogsCoverProvider::SearchRequestError, reply, s_ctx->id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &DiscogsCoverProvider::HandleSearchReply, reply, s_ctx->id);
 }
 
 void DiscogsCoverProvider::SendReleaseRequest(
@@ -177,13 +175,12 @@ void DiscogsCoverProvider::SendReleaseRequest(
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
 
-  NewClosure(reply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this,
-             SLOT(ReleaseRequestError(QNetworkReply::NetworkError,
-                                      QNetworkReply*, int, int)),
-             reply, s_ctx->id, r_ctx->id);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(HandleReleaseReply(QNetworkReply*, int, int)), reply,
-             s_ctx->id, r_ctx->id);
+  NewClosure(reply, &QNetworkReply::errorOccurred, this,
+             &DiscogsCoverProvider::ReleaseRequestError, reply, s_ctx->id,
+             r_ctx->id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &DiscogsCoverProvider::HandleReleaseReply, reply, s_ctx->id,
+             r_ctx->id);
 }
 
 void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int s_id) {

@@ -771,15 +771,10 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 void LibraryModel::ResetAsync() {
   QFuture<LibraryModel::QueryResult> future =
       QtConcurrent::run(&thread_pool_, &LibraryModel::RunQuery, this, root_);
-  NewClosure(future, this,
-             SLOT(ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult>)),
-             future);
+  NewClosure(future, this, &LibraryModel::ResetAsyncQueryFinished);
 }
 
-void LibraryModel::ResetAsyncQueryFinished(
-    QFuture<LibraryModel::QueryResult> future) {
-  const struct QueryResult result = future.result();
-
+void LibraryModel::ResetAsyncQueryFinished(const QueryResult& result) {
   BeginReset();
   root_->lazy_loaded = true;
 

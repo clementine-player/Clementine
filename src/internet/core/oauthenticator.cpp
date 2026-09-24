@@ -83,8 +83,8 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 
   url.setQuery(url_query);
 
-  NewClosure(server, SIGNAL(Finished()), this, &OAuthenticator::RedirectArrived,
-             server, redirect_url);
+  NewClosure(server, &LocalRedirectServer::Finished, this,
+             &OAuthenticator::RedirectArrived, server, redirect_url);
 
   QDesktopServices::openUrl(url);
 }
@@ -138,8 +138,8 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
   QNetworkReply* reply = network_.post(request, post_data.toUtf8());
   connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
           SLOT(SslErrors(QList<QSslError>)));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchAccessTokenFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &OAuthenticator::FetchAccessTokenFinished, reply);
 }
 
 void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
@@ -190,8 +190,8 @@ void OAuthenticator::RefreshAuthorisation(const QString& token_endpoint,
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/x-www-form-urlencoded");
   QNetworkReply* reply = network_.post(request, post_data.toUtf8());
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshAccessTokenFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &OAuthenticator::RefreshAccessTokenFinished, reply);
 }
 
 void OAuthenticator::SetExpiryTime(int expires_in_seconds) {

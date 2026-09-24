@@ -151,10 +151,10 @@ void NetworkTimeouts::AddReply(RedirectFollower* reply) {
     return;
   }
 
-  NewClosure(reply, SIGNAL(destroyed()), this,
-             SLOT(RedirectFinished(RedirectFollower*)), reply);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RedirectFinished(RedirectFollower*)), reply);
+  NewClosure(reply, &RedirectFollower::destroyed, this,
+             [this, reply](QObject*) { RedirectFinished(reply); });
+  NewClosure(reply, &RedirectFollower::finished, this,
+             &NetworkTimeouts::RedirectFinished, reply);
   redirect_timers_[reply] = startTimer(timeout_msec_);
 }
 

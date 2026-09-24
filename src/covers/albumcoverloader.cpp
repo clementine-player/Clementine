@@ -172,8 +172,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
       filename.toLower().startsWith("https://")) {
     QUrl url(filename);
     QNetworkReply* reply = network_->get(QNetworkRequest(url));
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(RemoteFetchFinished(QNetworkReply*)), reply);
+    NewClosure(reply, &QNetworkReply::finished, this,
+               &AlbumCoverLoader::RemoteFetchFinished, reply);
 
     remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
@@ -204,8 +204,8 @@ void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
     QNetworkRequest request = reply->request();
     request.setUrl(redirect.toUrl());
     QNetworkReply* redirected_reply = network_->get(request);
-    NewClosure(redirected_reply, SIGNAL(finished()), this,
-               SLOT(RemoteFetchFinished(QNetworkReply*)), redirected_reply);
+    NewClosure(redirected_reply, &QNetworkReply::finished, this,
+               &AlbumCoverLoader::RemoteFetchFinished, redirected_reply);
 
     remote_tasks_.insert(redirected_reply, task);
     return;

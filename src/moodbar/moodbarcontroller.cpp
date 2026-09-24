@@ -52,9 +52,8 @@ void MoodbarController::CurrentSongChanged(const Song& song) {
       // bar.  Our slot will be called when the data is actually loaded.
       emit CurrentMoodbarDataChanged(QByteArray());
 
-      NewClosure(pipeline, SIGNAL(Finished(bool)), this,
-                 SLOT(AsyncLoadComplete(MoodbarPipeline*, QUrl)), pipeline,
-                 song.url());
+      NewClosure(pipeline, &MoodbarPipeline::Finished, this,
+                 &MoodbarController::AsyncLoadComplete, pipeline, song.url());
       break;
   }
 }
@@ -63,7 +62,8 @@ void MoodbarController::PlaybackStopped() {
   emit CurrentMoodbarDataChanged(QByteArray());
 }
 
-void MoodbarController::AsyncLoadComplete(MoodbarPipeline* pipeline,
+void MoodbarController::AsyncLoadComplete(bool success,
+                                          MoodbarPipeline* pipeline,
                                           const QUrl& url) {
   // Is this song still playing?
   PlaylistItemPtr current_item = app_->player()->GetCurrentItem();

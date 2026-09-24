@@ -83,7 +83,8 @@ class GPodderSync : public QObject {
   void DeviceUpdatesParseError();
   void DeviceUpdatesRequestError(QNetworkReply::NetworkError error);
 
-  void NewPodcastLoaded(PodcastUrlLoaderReply* reply, const QUrl& url,
+  void NewPodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
+                        const QUrl& url,
                         const QList<mygpo::EpisodePtr>& actions);
 
   void ApplyActions(const QList<mygpo::EpisodePtr>& actions,

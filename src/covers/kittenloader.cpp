@@ -64,8 +64,8 @@ quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
 void KittenLoader::FetchMoreKittens() {
   QNetworkRequest req = QNetworkRequest(QUrl(kFlickrKittenUrl));
   QNetworkReply* reply = network_->get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(KittensRetrieved(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &KittenLoader::KittensRetrieved, reply);
 }
 
 void KittenLoader::KittensRetrieved(QNetworkReply* reply) {

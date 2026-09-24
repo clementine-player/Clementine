@@ -122,7 +122,8 @@ bool OrganiseDialog::SetUrls(const QList<QUrl>& urls) {
 bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
   songs_future_ =
       QtConcurrent::run(&OrganiseDialog::LoadSongsBlocking, this, filenames);
-  NewClosure(songs_future_, [=]() { SetSongs(songs_future_.result()); });
+  NewClosure(songs_future_, this,
+             [this](const SongList& songs) { SetSongs(songs); });
 
   SetLoadingSongs(true);
   return true;

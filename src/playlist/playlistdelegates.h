@@ -160,7 +160,7 @@ class TagCompleter : public QCompleter {
   ~TagCompleter();
 
  private slots:
-  void ModelReady(QFuture<TagCompletionModel*> future);
+  void ModelReady(TagCompletionModel* model);
 
  private:
   QLineEdit* editor_;

@@ -112,7 +112,7 @@ void LastFMService::Authenticate() {
   url_query.addQueryItem("cb", server->url().toString());
   url.setQuery(url_query);
 
-  NewClosure(server, SIGNAL(Finished()), [this, server]() {
+  NewClosure(server, &LocalRedirectServer::Finished, this, [this, server]() {
     server->deleteLater();
 
     const QUrl& url = server->request_url();
@@ -132,8 +132,8 @@ void LastFMService::Authenticate() {
     session_url.setQuery(session_url_query);
 
     QNetworkReply* reply = network_->get(QNetworkRequest(session_url));
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
+    NewClosure(reply, &QNetworkReply::finished, this,
+               &LastFMService::AuthenticateReplyFinished, reply);
   });
 
   if (!QDesktopServices::openUrl(url)) {
@@ -238,8 +238,8 @@ void LastFMService::NowPlaying(const Song& song) {
     params["duration"] = QString::number(track.duration_secs);
 
   QNetworkReply* reply = LastFmWs::Post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(NowPlayingReplyFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &LastFMService::NowPlayingReplyFinished, reply);
 }
 
 void LastFMService::NowPlayingReplyFinished(QNetworkReply* reply) {
@@ -297,9 +297,8 @@ void LastFMService::Scrobble() {
   }
 
   QNetworkReply* reply = LastFmWs::Post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ScrobbleReplyFinished(QNetworkReply*, int)), reply,
-             batch_size);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &LastFMService::ScrobbleReplyFinished, reply, batch_size);
 }
 
 void LastFMService::ScrobbleReplyFinished(QNetworkReply* reply,

@@ -61,15 +61,14 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   mygpo::PodcastListPtr list(api_->podcastsOfTag(
       GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
 
-  NewClosure(list, SIGNAL(finished()), this,
-             SLOT(PodcastsOfTagFinished(QModelIndex, mygpo::PodcastList*)),
-             parent, list.data());
-  NewClosure(list, SIGNAL(parseError()), this,
-             SLOT(PodcastsOfTagFailed(QModelIndex, mygpo::PodcastList*)),
-             parent, list.data());
-  NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)), this,
-             SLOT(PodcastsOfTagFailed(QModelIndex, mygpo::PodcastList*)),
-             parent, list.data());
+  NewClosure(list.data(), &mygpo::PodcastList::finished, this,
+             &GPodderTopTagsModel::PodcastsOfTagFinished, parent, list.data());
+  NewClosure(list.data(), &mygpo::PodcastList::parseError, this,
+             &GPodderTopTagsModel::PodcastsOfTagFailed, parent, list.data());
+  NewClosure(list.data(), &mygpo::PodcastList::requestError, this,
+             [this, parent, list](QNetworkReply::NetworkError) {
+               PodcastsOfTagFailed(parent, list.data());
+             });
 }
 
 void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,

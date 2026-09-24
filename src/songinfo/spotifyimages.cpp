@@ -37,7 +37,7 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
+  NewClosure(reply, &QNetworkReply::finished, this, [this, id, reply]() {
     reply->deleteLater();
 
     QJsonParseError error;

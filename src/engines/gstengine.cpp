@@ -509,9 +509,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 
   QFuture<GstStateChangeReturn> future =
       current_pipeline_->SetState(GST_STATE_PLAYING);
-  NewClosure(future, this,
-             SLOT(PlayDone(QFuture<GstStateChangeReturn>, quint64, int)),
-             future, offset_nanosec, current_pipeline_->id());
+  NewClosure(future, this, &GstEngine::PlayDone, offset_nanosec,
+             current_pipeline_->id());
 
   if (is_fading_out_to_pause_) {
     current_pipeline_->SetState(GST_STATE_PAUSED);
@@ -520,10 +519,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
   return true;
 }
 
-void GstEngine::PlayDone(QFuture<GstStateChangeReturn> future,
-                         const quint64 offset_nanosec, const int pipeline_id) {
-  GstStateChangeReturn ret = future.result();
-
+void GstEngine::PlayDone(GstStateChangeReturn ret, const quint64 offset_nanosec,
+                         const int pipeline_id) {
   if (!IsCurrentPipeline(pipeline_id)) return;
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
@@ -915,16 +912,12 @@ int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   background_streams_[stream_id] = pipeline;
 
   QFuture<GstStateChangeReturn> future = pipeline->SetState(GST_STATE_PLAYING);
-  NewClosure(future, this,
-             SLOT(BackgroundStreamPlayDone(QFuture<GstStateChangeReturn>, int)),
-             future, stream_id);
+  NewClosure(future, this, &GstEngine::BackgroundStreamPlayDone, stream_id);
   return stream_id;
 }
 
-void GstEngine::BackgroundStreamPlayDone(QFuture<GstStateChangeReturn> future,
+void GstEngine::BackgroundStreamPlayDone(GstStateChangeReturn ret,
                                          int stream_id) {
-  GstStateChangeReturn ret = future.result();
-
   if (ret == GST_STATE_CHANGE_FAILURE) {
     qLog(Warning) << "Could not set thread to PLAYING.";
     background_streams_.remove(stream_id);

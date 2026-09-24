@@ -90,8 +90,8 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   enqueue_next_ = enqueue_next;
 
   SongLoader* loader = new SongLoader(library_, player_, this);
-  NewClosure(loader, SIGNAL(AudioCDTracksLoaded()), this,
-             SLOT(AudioCDTracksLoaded(SongLoader*)), loader);
+  NewClosure(loader, &SongLoader::AudioCDTracksLoaded, this,
+             &SongLoaderInserter::AudioCDTracksLoaded, loader);
   connect(loader, SIGNAL(LoadAudioCDFinished(bool)),
           SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";

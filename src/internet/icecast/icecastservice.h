@@ -67,7 +67,7 @@ class IcecastService : public InternetService {
   // to match QMetaType::fromType<>().name()'s canonical (alias-resolved)
   // form of the argument's actual type, or the invoke silently fails - this
   // wasn't an issue under Qt5, which didn't validate the name.
-  void ParseDirectoryFinished(QFuture<QList<IcecastBackend::Station>> future,
+  void ParseDirectoryFinished(IcecastBackend::StationList all_stations,
                               int task_id);
 
  private:

@@ -190,17 +190,15 @@ void PlaylistManager::Save(int id, const QString& filename,
     // from the left side bar and the playlist isn't loaded.
     QFuture<QList<Song>> future = QtConcurrent::run(
         &PlaylistBackend::GetPlaylistSongs, playlist_backend_, id);
-    NewClosure(future, this,
-               SLOT(ItemsLoadedForSavePlaylist(QFuture<SongList>, QString,
-                                               Playlist::Path)),
-               future, filename, path_type);
+    NewClosure(future, this, &PlaylistManager::ItemsLoadedForSavePlaylist,
+               filename, path_type);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(QFuture<SongList> future,
+void PlaylistManager::ItemsLoadedForSavePlaylist(const SongList& songs,
                                                  const QString& filename,
                                                  Playlist::Path path_type) {
-  parser_->Save(future.result(), filename, path_type);
+  parser_->Save(songs, filename, path_type);
 }
 
 void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {

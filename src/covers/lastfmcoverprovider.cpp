@@ -39,8 +39,8 @@ bool LastFmCoverProvider::StartSearch(const QString& artist,
   params["album"] = album + " " + artist;
 
   QNetworkReply* reply = LastFmWs::Post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(QueryFinished(QNetworkReply*, int)), reply, id);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &LastFmCoverProvider::QueryFinished, reply, id);
 
   return true;
 }

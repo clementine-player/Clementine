@@ -83,7 +83,7 @@ class Ripper : public QObject {
                               bool success);
   void AllTranscodingJobsComplete();
   void LogLine(const QString& message);
-  void FileTagged(TagReaderReply* reply);
+  void FileTagged(bool success, TagReaderReply* reply);
 
  private:
   struct TrackInformation {

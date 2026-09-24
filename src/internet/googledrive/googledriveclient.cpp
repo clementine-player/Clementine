@@ -93,9 +93,8 @@ ConnectResponse* Client::Connect(const QString& refresh_token) {
 
   oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
 
-  NewClosure(oauth, SIGNAL(Finished()), this,
-             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
-             oauth);
+  NewClosure(oauth, &OAuthenticator::Finished, this, &Client::ConnectFinished,
+             ret, oauth);
   return ret;
 }
 
@@ -115,9 +114,8 @@ ConnectResponse* Client::AuthorizeAndPick(const QStringList& mime_types) {
   oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope,
                             extra_params);
 
-  NewClosure(oauth, SIGNAL(Finished()), this,
-             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
-             oauth);
+  NewClosure(oauth, &OAuthenticator::Finished, this, &Client::ConnectFinished,
+             ret, oauth);
   return ret;
 }
 
@@ -135,9 +133,8 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   url_query.addQueryItem("access_token", access_token_);
   url.setQuery(url_query);
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
-             response, reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &Client::FetchUserInfoFinished, response, reply);
 }
 
 void Client::FetchUserInfoFinished(ConnectResponse* response,
@@ -200,9 +197,8 @@ GetFileResponse* Client::GetFile(const QString& file_id,
                        QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(GetFileFinished(GetFileResponse*, QNetworkReply*)), ret,
-             reply);
+  NewClosure(reply, &QNetworkReply::finished, this, &Client::GetFileFinished,
+             ret, reply);
 
   return ret;
 }
@@ -267,9 +263,8 @@ void Client::RequestStartPageToken(ListChangesResponse* response) {
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(StartPageTokenFinished(ListChangesResponse*, QNetworkReply*)),
-             response, reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &Client::StartPageTokenFinished, response, reply);
 }
 
 void Client::StartPageTokenFinished(ListChangesResponse* response,
@@ -325,9 +320,8 @@ void Client::MakeListChangesRequest(ListChangesResponse* response,
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ListChangesFinished(ListChangesResponse*, QNetworkReply*)),
-             response, reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &Client::ListChangesFinished, response, reply);
 }
 
 void Client::ListChangesFinished(ListChangesResponse* response,

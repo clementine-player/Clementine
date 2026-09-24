@@ -58,16 +58,17 @@ void AddPodcastByUrl::GoClicked() {
   PodcastUrlLoaderReply* reply = loader_->Load(ui_->url->text());
   ui_->url->setText(reply->url().toString());
 
-  NewClosure(reply, SIGNAL(Finished(bool)), this,
-             SLOT(RequestFinished(PodcastUrlLoaderReply*)), reply);
+  NewClosure(reply, &PodcastUrlLoaderReply::Finished, this,
+             &AddPodcastByUrl::RequestFinished, reply);
 }
 
-void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
+void AddPodcastByUrl::RequestFinished(bool success,
+                                      PodcastUrlLoaderReply* reply) {
   reply->deleteLater();
 
   emit Busy(false);
 
-  if (!reply->is_success()) {
+  if (!success) {
     QMessageBox::warning(this, tr("Failed to load podcast"),
                          reply->error_text(), QMessageBox::Close);
     return;

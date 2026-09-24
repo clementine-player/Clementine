@@ -201,7 +201,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void TotalSongCountUpdatedSlot(int count);
 
   // Called after ResetAsync
-  void ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult> future);
+  void ResetAsyncQueryFinished(const QueryResult& result);
 
   void AlbumArtLoaded(quint64 id, const QImage& image);
 

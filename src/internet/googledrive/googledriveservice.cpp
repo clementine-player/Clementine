@@ -183,8 +183,8 @@ void GoogleDriveService::Connect() {
   connect_in_progress_ = true;
 
   google_drive::ConnectResponse* response = client_->Connect(refresh_token());
-  NewClosure(response, SIGNAL(Finished()), this,
-             SLOT(ConnectFinished(google_drive::ConnectResponse*)), response);
+  NewClosure(response, &ConnectResponse::Finished, this,
+             &GoogleDriveService::ConnectFinished, response);
 }
 
 void GoogleDriveService::ForgetCredentials() {
@@ -206,9 +206,8 @@ void GoogleDriveService::ForgetCredentials() {
 void GoogleDriveService::AddFiles() {
   google_drive::ConnectResponse* response =
       client_->AuthorizeAndPick(PickableMimeTypes());
-  NewClosure(response, SIGNAL(Finished()), this,
-             SLOT(AuthorizeAndPickFinished(google_drive::ConnectResponse*)),
-             response);
+  NewClosure(response, &ConnectResponse::Finished, this,
+             &GoogleDriveService::AuthorizeAndPickFinished, response);
 }
 
 void GoogleDriveService::AuthorizeAndPickFinished(
@@ -233,9 +232,8 @@ void GoogleDriveService::AuthorizeAndPickFinished(
   // AddPickedItemFinished).
   for (const QString& id : response->picked_file_ids()) {
     google_drive::GetFileResponse* file_response = client_->GetFile(id);
-    NewClosure(file_response, SIGNAL(Finished()), this,
-               SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
-               file_response);
+    NewClosure(file_response, &GetFileResponse::Finished, this,
+               &GoogleDriveService::AddPickedItemFinished, file_response);
   }
 
   // Also check for any changes since we last synced.
@@ -296,9 +294,9 @@ void GoogleDriveService::ListChanges(const QString& cursor) {
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(changes_response, SIGNAL(Finished()), this,
-             SLOT(ListChangesFinished(google_drive::ListChangesResponse*, int)),
-             changes_response, task_id);
+  NewClosure(changes_response, &ListChangesResponse::Finished, this,
+             &GoogleDriveService::ListChangesFinished, changes_response,
+             task_id);
 }
 
 void GoogleDriveService::ListChangesFinished(
@@ -311,8 +309,8 @@ void GoogleDriveService::ListChangesFinished(
   if (is_indexing()) {
     // Only save the cursor after all the songs have been indexed - that way if
     // Clementine is closed it'll resume next time.
-    NewClosure(this, SIGNAL(AllIndexingTasksFinished()), this,
-               SLOT(SaveCursor(QString)), cursor);
+    NewClosure(this, &CloudFileService::AllIndexingTasksFinished, this,
+               &GoogleDriveService::SaveCursor, cursor);
   } else {
     SaveCursor(cursor);
   }
@@ -489,9 +487,8 @@ void GoogleDriveService::DoFullRescan() {
   for (const PickedItem& item : picked_items_) {
     google_drive::GetFileResponse* response =
         client_->GetFile(item.id, item.resource_key);
-    NewClosure(response, SIGNAL(Finished()), this,
-               SLOT(AddPickedItemFinished(google_drive::GetFileResponse*)),
-               response);
+    NewClosure(response, &GetFileResponse::Finished, this,
+               &GoogleDriveService::AddPickedItemFinished, response);
   }
 
   // Establish a fresh cursor so future CheckForUpdates() calls only look at

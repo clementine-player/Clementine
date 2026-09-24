@@ -56,8 +56,8 @@ void DigitallyImportedSettingsPage::Login() {
 
   QNetworkReply* reply =
       client_->Auth(ui_->username->text(), ui_->password->text());
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LoginFinished(QNetworkReply*)), reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &DigitallyImportedSettingsPage::LoginFinished, reply);
 }
 
 void DigitallyImportedSettingsPage::LoginFinished(QNetworkReply* reply) {

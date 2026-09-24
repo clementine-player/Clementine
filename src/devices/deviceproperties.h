@@ -48,7 +48,7 @@ class DeviceProperties : public QDialog {
  private slots:
   void ModelChanged();
   void OpenDevice();
-  void UpdateFormatsFinished(QFuture<bool> future);
+  void UpdateFormatsFinished(bool success);
 
  private:
   Ui_DeviceProperties* ui_;
