@@ -717,7 +717,6 @@ def main():
   FixLibrary('libsoup-3.0.0.dylib')
 
   try:
-    FixPlugin('clementine-spotifyblob', '.')
     FixPlugin('clementine-tagreader', '.')
   except:
     print('Failed to find blob: %s' % traceback.format_exc())
