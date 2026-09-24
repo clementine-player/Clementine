@@ -30,6 +30,7 @@
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
+// shellapi.h depends on types from windows.h, so it must come after.
 #include <shellapi.h>
 
 namespace {
