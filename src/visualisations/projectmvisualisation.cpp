@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QPaintEngine>
 #include <QPainter>
+#include <QResource>
 #include <QSettings>
 #include <QTimerEvent>
 #include <QtDebug>
@@ -39,6 +40,10 @@
 #else
 #include <GL/gl.h>
 #endif
+
+namespace {
+const char kResourcePresetPath[] = ":/projectm-presets";
+}  // namespace
 
 ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
     : QGraphicsScene(container),
@@ -78,10 +83,22 @@ void ProjectMVisualisation::InitProjectM() {
                       << "/usr/share/projectM/presets"
                       << "/usr/local/share/projectM/presets";
 
+#if defined(Q_OS_WIN32) || defined(Q_OS_MAC)
 #if defined(Q_OS_WIN32)
-  paths.prepend(QCoreApplication::applicationDirPath() + "/projectm-presets");
-#elif defined(Q_OS_MAC)
-  paths.prepend(mac::GetResourcesPath() + "/projectm-presets");
+  const QString bundled_path =
+      QCoreApplication::applicationDirPath() + "/projectm-presets";
+#else
+  const QString bundled_path = mac::GetResourcesPath() + "/projectm-presets";
+#endif
+  paths.prepend(bundled_path);
+
+  // The bundled presets are packed into one resource file by
+  // cmake/ProjectMPresets.cmake, because installing ~10,000 small files is
+  // slow.
+  if (!QFile::exists(kResourcePresetPath)) {
+    QResource::registerResource(bundled_path + ".rcc");
+  }
+  paths.prepend(kResourcePresetPath);
 #endif
 
   for (const QString& path : paths) {
@@ -120,6 +137,8 @@ void ProjectMVisualisation::InitProjectM() {
   // Create playlist manager
   playlist_ = projectm_playlist_create(projectm_);
   projectm_playlist_set_shuffle(playlist_, true);
+  projectm_playlist_set_preset_load_event_callback(
+      playlist_, &ProjectMVisualisation::PresetLoadCallback, this);
 
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
@@ -147,8 +166,7 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
   }
 
   if (projectm_ && !pending_preset_.isNull()) {
-    projectm_load_preset_file(projectm_, pending_preset_.toUtf8().constData(),
-                              true);
+    LoadPreset(pending_preset_, true);
     pending_preset_.clear();
   }
 
@@ -161,6 +179,36 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
   }
 
   p->endNativePainting();
+}
+
+void ProjectMVisualisation::LoadPreset(const QString& path,
+                                       bool smooth_transition) {
+  // projectM can't open files inside a Qt resource, so read those ourselves.
+  if (!path.startsWith(kResourcePresetPath)) {
+    projectm_load_preset_file(projectm_, path.toUtf8().constData(),
+                              smooth_transition);
+    return;
+  }
+
+  QFile file(path);
+  if (!file.open(QIODevice::ReadOnly)) {
+    qWarning() << "Failed to open projectM preset" << path;
+    return;
+  }
+  projectm_load_preset_data(projectm_, file.readAll().constData(),
+                            smooth_transition);
+}
+
+bool ProjectMVisualisation::PresetLoadCallback(unsigned int,
+                                               const char* filename,
+                                               bool hard_cut, void* user_data) {
+  const QString path = QString::fromUtf8(filename);
+  // Let the playlist load plain files itself, so it keeps retrying the next
+  // preset when one fails.
+  if (!path.startsWith(kResourcePresetPath)) return false;
+
+  static_cast<ProjectMVisualisation*>(user_data)->LoadPreset(path, !hard_cut);
+  return true;
 }
 
 void ProjectMVisualisation::SceneRectChanged(const QRectF& rect) {
@@ -260,8 +308,9 @@ void ProjectMVisualisation::Load() {
         break;
 
       case FromList: {
-        QStringList paths(s.value("preset_paths").toStringList());
-        for (const QString& path : paths) {
+        QStringList keys(s.value("preset_paths").toStringList());
+        for (const QString& key : keys) {
+          const QString path = PresetPath(key);
           projectm_playlist_add_preset(playlist_, path.toUtf8().constData(),
                                        false);
           preset_model_->MarkSelected(path, true);
@@ -274,18 +323,38 @@ void ProjectMVisualisation::Load() {
 }
 
 void ProjectMVisualisation::Save() {
-  QStringList paths;
+  QStringList keys;
 
   for (const ProjectMPresetModel::Preset& preset :
        preset_model_->all_presets_) {
-    if (preset.selected_) paths << preset.path_;
+    if (preset.selected_) keys << PresetKey(preset.path_);
   }
 
   QSettings s;
   s.beginGroup(VisualisationContainer::kSettingsGroup);
-  s.setValue("preset_paths", paths);
+  s.setValue("preset_paths", keys);
   s.setValue("mode", mode_);
   s.setValue("duration", duration_);
+}
+
+QString ProjectMVisualisation::PresetKey(const QString& path) const {
+  if (!preset_path_.isEmpty() && path.startsWith(preset_path_ + "/")) {
+    return path.mid(preset_path_.length() + 1);
+  }
+  return path;
+}
+
+QString ProjectMVisualisation::PresetPath(const QString& key) const {
+  if (preset_path_.isEmpty()) return key;
+  if (QDir::isRelativePath(key)) return preset_path_ + "/" + key;
+
+  // Older versions saved absolute paths into the projectm-presets directory
+  // that the presets are now packed from.
+  const QString old_dir = "/projectm-presets/";
+  const int i = key.lastIndexOf(old_dir);
+  if (i != -1) return preset_path_ + "/" + key.mid(i + old_dir.length());
+
+  return key;
 }
 
 void ProjectMVisualisation::SetMode(Mode mode) {
