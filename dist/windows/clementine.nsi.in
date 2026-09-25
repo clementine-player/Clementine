@@ -8,7 +8,7 @@
 !define PRODUCT_WEB_SITE "http://www.clementine-player.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-@NORMAL@!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
+@NORMAL@!define PRODUCT_INSTALL_DIR "$PROGRAMFILES64\Clementine"
 @PORTABLE@!define PRODUCT_INSTALL_DIR "C:\Clementine"
 
 ; Set Application Capabilities info
@@ -25,6 +25,7 @@
 SetCompressor /SOLID lzma
 !addplugindir nsisplugins
 !include "MUI2.nsh"
+!include "FileFunc.nsh"
 !include "FileAssociation.nsh"
 !include "Capabilities.nsh"
 @NORMAL@!include "AppUserModelId.nsh"
@@ -108,9 +109,6 @@ Name "${PRODUCT_NAME}"
 OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_SPARKLE@.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 
-; Get the path where Clementine was installed previously and set it as default path
-InstallDirRegKey ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
-
 ShowInstDetails show
 ShowUnInstDetails show
 @NORMAL@RequestExecutionLevel admin
@@ -120,7 +118,20 @@ ShowUnInstDetails show
 Function CheckPreviousInstall
 
   ReadRegStr $R0 ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
+  StrCmp $R0 "" 0 found
+
+  ; Older versions installed into Program Files (x86) and registered
+  ; themselves in the 32-bit registry view, so look there too.
+  SetRegView 32
+  ReadRegStr $R0 ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
+  SetRegView 64
   StrCmp $R0 "" done
+
+found:
+  ; Install over the previous location, unless it was the old 32-bit default.
+  ${GetParent} $R0 $R1
+  StrCmp $R1 "$PROGRAMFILES32\Clementine" +2
+    StrCpy $INSTDIR $R1
 
   MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
   "${PRODUCT_NAME} is already installed. $\n$\nClick `OK` to remove the \
@@ -140,8 +151,14 @@ Function .onInit
 
   !insertmacro MUI_LANGDLL_DISPLAY
 
+  ; Clementine is 64-bit, so keep its registry entries out of WOW6432Node.
+  SetRegView 64
   Call CheckPreviousInstall
 
+FunctionEnd
+
+Function un.onInit
+  SetRegView 64
 FunctionEnd
 
 Function RunClementine
