@@ -28,6 +28,7 @@
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QLoggingCategory>
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTextStream>
@@ -166,6 +167,14 @@ void Init() {
   if (!sOriginalMessageHandler) {
     sOriginalMessageHandler = qInstallMessageHandler(MessageHandler);
   }
+
+  // qLog hands every level to Qt as a debug message in the default category,
+  // and does its own filtering (see SetLevels). Some distros - Fedora, for
+  // one - ship a qtlogging.ini with *.debug=false, which drops all of it,
+  // warnings and errors included, before it gets that far. Rules set here
+  // outrank that file but not QT_LOGGING_RULES, so it can still be turned
+  // off, and Qt's own categories are left as they were.
+  QLoggingCategory::setFilterRules("default.debug=true");
 }
 
 void SetLevels(const QString& levels) {
