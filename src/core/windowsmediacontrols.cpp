@@ -18,6 +18,10 @@
 #include "windowsmediacontrols.h"
 
 // windows.h must come before the other Windows headers.
+// clang-format off
+#include <windows.h>
+// clang-format on
+
 #include <propkey.h>
 #include <propsys.h>
 #include <propvarutil.h>
@@ -26,7 +30,6 @@
 #include <shellapi.h>
 #include <shlwapi.h>
 #include <systemmediatransportcontrolsinterop.h>
-#include <windows.h>
 #include <windows.media.h>
 #include <windows.storage.streams.h>
 #include <wrl/client.h>
