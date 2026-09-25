@@ -46,7 +46,7 @@ class VisualisationOverlay : public QWidget {
 
  signals:
   void OpacityChanged(qreal value);
-  void ShowPopupMenu(const QPoint& pos);
+  void ShowPopupMenu(const QPoint& global_pos);
 
  protected:
   // QWidget

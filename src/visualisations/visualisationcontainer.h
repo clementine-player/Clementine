@@ -84,7 +84,7 @@ class VisualisationContainer : public QGraphicsView {
 
  private slots:
   void ChangeOverlayOpacity(qreal value);
-  void ShowPopupMenu(const QPoint& pos);
+  void ShowPopupMenu(const QPoint& global_pos);
   void ToggleFullscreen();
   void SetFps(int fps);
   void SetQuality(int size);
