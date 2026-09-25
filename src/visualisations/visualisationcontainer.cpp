@@ -268,7 +268,7 @@ void VisualisationContainer::mouseDoubleClickEvent(QMouseEvent* e) {
 
 void VisualisationContainer::contextMenuEvent(QContextMenuEvent* event) {
   QGraphicsView::contextMenuEvent(event);
-  ShowPopupMenu(event->pos());
+  ShowPopupMenu(event->globalPos());
 }
 
 void VisualisationContainer::keyReleaseEvent(QKeyEvent* event) {
@@ -303,8 +303,8 @@ void VisualisationContainer::SetFps(int fps) {
   update_timer_.start(1000 / fps_, this);
 }
 
-void VisualisationContainer::ShowPopupMenu(const QPoint& pos) {
-  menu_->popup(mapToGlobal(pos));
+void VisualisationContainer::ShowPopupMenu(const QPoint& global_pos) {
+  menu_->popup(global_pos);
 }
 
 void VisualisationContainer::SetQuality(int size) {

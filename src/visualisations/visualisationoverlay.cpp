@@ -17,6 +17,7 @@
 
 #include "visualisationoverlay.h"
 
+#include <QCursor>
 #include <QGraphicsProxyWidget>
 #include <QMouseEvent>
 #include <QTimeLine>
@@ -62,8 +63,9 @@ void VisualisationOverlay::SetActions(QAction* previous, QAction* play_pause,
 }
 
 void VisualisationOverlay::ShowSettingsMenu() {
-  emit ShowPopupMenu(
-      ui_->settings->mapToGlobal(ui_->settings->rect().bottomLeft()));
+  // This widget lives inside a QGraphicsProxyWidget, so mapToGlobal() maps
+  // through the proxy's offscreen window rather than the real one.
+  emit ShowPopupMenu(QCursor::pos());
 }
 
 void VisualisationOverlay::timerEvent(QTimerEvent* e) {
