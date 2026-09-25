@@ -826,7 +826,9 @@ jobs:
     env:
       # A Windows path: actions/cache runs outside the MSYS2 shell, and the
       # mingw ccache is a native Win32 binary, so both understand this one.
-      CCACHE_DIR: ${{ runner.temp }}\ccache
+      # Under the workspace rather than runner.temp, because the runner
+      # context isn't available at job level.
+      CCACHE_DIR: ${{ github.workspace }}\.ccache
       CCACHE_MAXSIZE: 250M
       CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
       CCACHE_BASEDIR: ${{ github.workspace }}
@@ -916,7 +918,7 @@ jobs:
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
-          path: ${{ runner.temp }}\ccache
+          path: ${{ github.workspace }}\.ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: Reset ccache statistics
@@ -1053,7 +1055,7 @@ jobs:
         if: always()
         uses: actions/cache/save@v6.1.0
         with:
-          path: ${{ runner.temp }}\ccache
+          path: ${{ github.workspace }}\.ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   build_bookworm_64:
@@ -1902,7 +1904,10 @@ jobs:
       id-token: write
       contents: read
     env:
-      CCACHE_DIR: ${{ runner.temp }}/ccache
+      # Under the workspace rather than runner.temp, because the runner
+      # context isn't available at job level. Nothing in this job packages
+      # the workspace root - the DMG is built from bin/clementine.app.
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
       CCACHE_MAXSIZE: 250M
       CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
       CCACHE_BASEDIR: ${{ github.workspace }}
@@ -1989,7 +1994,7 @@ jobs:
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
-          path: ${{ runner.temp }}/ccache
+          path: ${{ github.workspace }}/.ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
           restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
       - name: Reset ccache statistics
@@ -2059,7 +2064,7 @@ jobs:
         if: always()
         uses: actions/cache/save@v6.1.0
         with:
-          path: ${{ runner.temp }}/ccache
+          path: ${{ github.workspace }}/.ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   # The single required status check for master: it passes only when every
