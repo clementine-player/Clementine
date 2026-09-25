@@ -18,16 +18,15 @@
 #include "windowsmediacontrols.h"
 
 // windows.h must come before the other Windows headers.
-#include <windows.h>
-
 #include <propkey.h>
 #include <propsys.h>
 #include <propvarutil.h>
 #include <roapi.h>
-#include <shellapi.h>
 #include <shcore.h>
+#include <shellapi.h>
 #include <shlwapi.h>
 #include <systemmediatransportcontrolsinterop.h>
+#include <windows.h>
 #include <windows.media.h>
 #include <windows.storage.streams.h>
 #include <wrl/client.h>
@@ -84,8 +83,8 @@ typedef ITypedEventHandler<SystemMediaTransportControls*,
 template <typename Setter>
 HRESULT PutString(const QString& str, Setter setter) {
   HString hstring;
-  HRESULT hr = hstring.Set(reinterpret_cast<const wchar_t*>(str.utf16()),
-                           str.length());
+  HRESULT hr =
+      hstring.Set(reinterpret_cast<const wchar_t*>(str.utf16()), str.length());
   if (FAILED(hr)) return hr;
   return setter(hstring.Get());
 }
@@ -196,9 +195,8 @@ WindowsMediaControls::WindowsMediaControls(Application* app, QObject* parent)
   window_class.lpszClassName = kWindowClassName;
   RegisterClassExW(&window_class);
 
-  d_->hwnd = CreateWindowExW(0, kWindowClassName, L"Clementine",
-                             WS_OVERLAPPED, 0, 0, 0, 0, nullptr, nullptr,
-                             instance, nullptr);
+  d_->hwnd = CreateWindowExW(0, kWindowClassName, L"Clementine", WS_OVERLAPPED,
+                             0, 0, 0, 0, nullptr, nullptr, instance, nullptr);
   if (!d_->hwnd) {
     qLog(Error) << "Failed to create window for media controls"
                 << GetLastError();
@@ -345,12 +343,10 @@ void WindowsMediaControls::UpdateMetadata(const Song& song,
 
   ComPtr<IMusicDisplayProperties> properties;
   if (SUCCEEDED(updater->get_MusicProperties(&properties))) {
-    PutString(song.PrettyTitle(), [&properties](HSTRING s) {
-      return properties->put_Title(s);
-    });
-    PutString(song.artist(), [&properties](HSTRING s) {
-      return properties->put_Artist(s);
-    });
+    PutString(song.PrettyTitle(),
+              [&properties](HSTRING s) { return properties->put_Title(s); });
+    PutString(song.artist(),
+              [&properties](HSTRING s) { return properties->put_Artist(s); });
     PutString(song.effective_albumartist(), [&properties](HSTRING s) {
       return properties->put_AlbumArtist(s);
     });
