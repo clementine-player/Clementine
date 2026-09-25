@@ -46,3 +46,22 @@ Compile and install:
 
 See the Wiki for more instructions and a list of dependencies:
 https://github.com/clementine-player/Clementine/wiki#compiling-and-installing-clementine
+
+Formatting your changes
+-----------------------
+
+CI checks that C++ code under `src/` is formatted with clang-format 23.1.0.
+Other versions format some code differently, so install that exact version
+with [uv](https://docs.astral.sh/uv/) (or `pipx`), which puts it on your PATH:
+
+    uv tool install clang-format==23.1.0
+
+If uv warns that its tool directory isn't on your PATH, run
+`uv tool update-shell` and open a new terminal.
+
+Then reformat the files you've changed since `origin/master`:
+
+    dist/format.py -i
+
+Claude Code does this automatically after each edit, using a hook in
+`.claude/settings.json`.

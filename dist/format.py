@@ -10,6 +10,12 @@ import shutil
 import subprocess
 import sys
 
+# Keep these in sync with the clang-format step in .github/workflows/all.yml.
+CLANG_FORMAT_VERSION = '23.1.0'
+STYLE = '{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}'
+EXTENSIONS = ['c', 'h', 'C', 'H', 'cpp', 'hpp', 'cc', 'hh', 'c++', 'h++',
+              'cxx', 'hxx']
+
 
 def main():
   parser = argparse.ArgumentParser(
@@ -22,8 +28,7 @@ def main():
   parser.add_argument('--source', default='src',
       help='only reformat files under this directory (matches CI\'s scope)')
   parser.add_argument('--extension', action='append', metavar='EXT',
-      default=['c', 'h', 'C', 'H', 'cpp', 'hpp', 'cc', 'hh', 'c++', 'h++',
-                'cxx', 'hxx'],
+      default=EXTENSIONS,
       help='file extensions to reformat')
   parser.add_argument('-i', dest='inplace', action='store_true',
       help='edit files inplace instead of showing a diff')
@@ -34,9 +39,10 @@ def main():
 
   if shutil.which(args.clang_format_executable) is None:
     print('%s: could not find clang-format executable %r - install it '
-          '(eg. `brew install clang-format`) or pass '
+          '(`uv tool install clang-format==%s`) or pass '
           '--clang-format-executable' % (
-              sys.argv[0], args.clang_format_executable), file=sys.stderr)
+              sys.argv[0], args.clang_format_executable,
+              CLANG_FORMAT_VERSION), file=sys.stderr)
     return 1
 
   try:
@@ -64,8 +70,6 @@ def main():
   if args.files:
     changed_files = args.files
 
-  style = '{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}'
-
   had_diff = False
 
   for filename in changed_files:
@@ -83,7 +87,7 @@ def main():
       original = fh.read()
 
     formatted = subprocess.run(
-        [args.clang_format_executable, '-style=' + style, path],
+        [args.clang_format_executable, '-style=' + STYLE, path],
         capture_output=True, check=True).stdout
 
     if original == formatted:
