@@ -20,6 +20,7 @@
 
 #include <QByteArray>
 #include <QObject>
+#include <QPointer>
 
 #include "internet/plex/plexparser.h"
 
@@ -60,7 +61,9 @@ class PlexNotificationListener : public QObject {
   void ScheduleReconnect();
 
   PlexService* service_;
-  QNetworkReply* reply_;
+  // The service's network manager owns the reply and may delete it first
+  // when the service is destroyed.
+  QPointer<QNetworkReply> reply_;
   PlexEventStreamParser parser_;
   QTimer* watchdog_;
   QTimer* reconnect_timer_;

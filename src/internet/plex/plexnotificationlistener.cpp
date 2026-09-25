@@ -57,7 +57,6 @@ PlexNotificationListener::PlexNotificationListener(PlexService* service,
                                                    QObject* parent)
     : QObject(parent),
       service_(service),
-      reply_(nullptr),
       watchdog_(new QTimer(this)),
       reconnect_timer_(new QTimer(this)),
       backoff_msec_(kInitialBackoffMsec),
