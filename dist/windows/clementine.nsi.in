@@ -23,9 +23,7 @@
 !define CAPABILITIES_SHOW_ICONS "Command to show icons"
 
 SetCompressor /SOLID lzma
-!addplugindir nsisplugins
 !include "MUI2.nsh"
-!include "FileAssociation.nsh"
 !include "Capabilities.nsh"
 @NORMAL@!include "AppUserModelId.nsh"
 
@@ -144,8 +142,10 @@ Function .onInit
 
 FunctionEnd
 
+; The installer runs elevated, so launch Clementine through Explorer to have
+; it run as the logged-in user rather than inheriting admin rights.
 Function RunClementine
-  ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe" ""
+  Exec '"$WINDIR\explorer.exe" "$INSTDIR\clementine.exe"'
 FunctionEnd
 
 Section "Delete old files" oldfiles
@@ -313,57 +313,35 @@ Section "Clementine" Clementine
   ; Create data folder to enable portable mode
 @PORTABLE@ CreateDirectory $INSTDIR\data
 
-  ; Check the OS.  If Vista or newer, use Default Programs
-@NORMAL@  nsisos::osversion
-@NORMAL@  StrCpy $R0 $0
-@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
-
-@NORMAL@  HasDefaultPrograms:
-@NORMAL@    ; Register Clementine with Default Programs
-@NORMAL@    Var /GLOBAL AppIcon
-@NORMAL@    Var /GLOBAL AppExe
-@NORMAL@    StrCpy $AppExe "$INSTDIR\clementine.exe"
-@NORMAL@    StrCpy $AppIcon "$INSTDIR\clementine.ico"
+@NORMAL@  ; Register Clementine with Default Programs
+@NORMAL@  Var /GLOBAL AppIcon
+@NORMAL@  Var /GLOBAL AppExe
+@NORMAL@  StrCpy $AppExe "$INSTDIR\clementine.exe"
+@NORMAL@  StrCpy $AppIcon "$INSTDIR\clementine.ico"
 @NORMAL@
-@NORMAL@    ${RegisterCapabilities}
+@NORMAL@  ${RegisterCapabilities}
 @NORMAL@
-@NORMAL@    ${RegisterMediaType} ".mp3" $AppExe $AppIcon "MP3 Audio File"
-@NORMAL@    ${RegisterMediaType} ".flac" $AppExe $AppIcon "FLAC Audio File"
-@NORMAL@    ${RegisterMediaType} ".ogg" $AppExe $AppIcon "OGG Audio File"
-@NORMAL@    ${RegisterMediaType} ".spx" $AppExe $AppIcon "OGG Speex Audio File"
-@NORMAL@    ${RegisterMediaType} ".m4a" $AppExe $AppIcon "MP4 Audio File"
-@NORMAL@    ${RegisterMediaType} ".aac" $AppExe $AppIcon "AAC Audio File"
-@NORMAL@    ${RegisterMediaType} ".wma" $AppExe $AppIcon "WMA Audio File"
-@NORMAL@    ${RegisterMediaType} ".wav" $AppExe $AppIcon "WAV Audio File"
+@NORMAL@  ${RegisterMediaType} ".mp3" $AppExe $AppIcon "MP3 Audio File"
+@NORMAL@  ${RegisterMediaType} ".flac" $AppExe $AppIcon "FLAC Audio File"
+@NORMAL@  ${RegisterMediaType} ".ogg" $AppExe $AppIcon "OGG Audio File"
+@NORMAL@  ${RegisterMediaType} ".spx" $AppExe $AppIcon "OGG Speex Audio File"
+@NORMAL@  ${RegisterMediaType} ".m4a" $AppExe $AppIcon "MP4 Audio File"
+@NORMAL@  ${RegisterMediaType} ".aac" $AppExe $AppIcon "AAC Audio File"
+@NORMAL@  ${RegisterMediaType} ".wma" $AppExe $AppIcon "WMA Audio File"
+@NORMAL@  ${RegisterMediaType} ".wav" $AppExe $AppIcon "WAV Audio File"
 @NORMAL@
-@NORMAL@    ${RegisterMediaType} ".pls" $AppExe $AppIcon "PLS Audio File"
-@NORMAL@    ${RegisterMediaType} ".m3u" $AppExe $AppIcon "M3U Audio File"
-@NORMAL@    ${RegisterMediaType} ".xspf" $AppExe $AppIcon "XSPF Audio File"
-@NORMAL@    ${RegisterMediaType} ".asx" $AppExe $AppIcon "Windows Media Audio/Video playlist"
+@NORMAL@  ${RegisterMediaType} ".pls" $AppExe $AppIcon "PLS Audio File"
+@NORMAL@  ${RegisterMediaType} ".m3u" $AppExe $AppIcon "M3U Audio File"
+@NORMAL@  ${RegisterMediaType} ".xspf" $AppExe $AppIcon "XSPF Audio File"
+@NORMAL@  ${RegisterMediaType} ".asx" $AppExe $AppIcon "Windows Media Audio/Video playlist"
 @NORMAL@
-@NORMAL@    ${RegisterMimeType} "audio/mp3" "mp3" "{cd3afa76-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/mp4" "m4a" "{cd3afa7c-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/x-ms-wma" "wma" "{cd3afa84-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/wav" "wav" "{cd3afa7b-b84f-48f0-9393-7edc34128127}"
+@NORMAL@  ${RegisterMimeType} "audio/mp3" "mp3" "{cd3afa76-b84f-48f0-9393-7edc34128127}"
+@NORMAL@  ${RegisterMimeType} "audio/mp4" "m4a" "{cd3afa7c-b84f-48f0-9393-7edc34128127}"
+@NORMAL@  ${RegisterMimeType} "audio/x-ms-wma" "wma" "{cd3afa84-b84f-48f0-9393-7edc34128127}"
+@NORMAL@  ${RegisterMimeType} "audio/wav" "wav" "{cd3afa7b-b84f-48f0-9393-7edc34128127}"
 @NORMAL@
-@NORMAL@    ${RegisterMimeType} "audio/mpegurl" "m3u" "{cd3afa78-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "application/x-wmplayer" "asx" "{cd3afa96-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    Goto done
-@NORMAL@  NoDefaultPrograms:
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".mp3" "MP3 Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".flac" "FLAC Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".ogg" "OGG Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".spx" "OGG Speex Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".m4a" "MP4 Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".aac" "AAC Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".wma" "WMA Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".wav" "WAV Audio File"
-@NORMAL@
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".pls" "PLS Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
-@NORMAL@  done:
+@NORMAL@  ${RegisterMimeType} "audio/mpegurl" "m3u" "{cd3afa78-b84f-48f0-9393-7edc34128127}"
+@NORMAL@  ${RegisterMimeType} "application/x-wmplayer" "asx" "{cd3afa96-b84f-48f0-9393-7edc34128127}"
 SectionEnd
 
 Section "Qt image format plugins" imageformats
@@ -435,28 +413,13 @@ Section "Uninstaller"
 SectionEnd
 
 Section "Uninstall"
-  ; Kill clementine.exe if it's running
-  ; This calling convention is retarded...
-  StrCpy $0 "clementine.exe"
-  KillProc::FindProcesses
-  StrCmp $1 "-1" wooops
-
-  StrCmp $0 "0" completed
-  
-  DetailPrint "Killing running clementine.exe..."
-
-  StrCpy $0 "clementine.exe"
-  KillProc::KillProcesses
-  StrCmp $1 "-1" wooops
-
-  Sleep 2000
-  Goto completed
-
-  wooops:
-  DetailPrint "-> Error: Something went wrong while killing running clementine.exe"
-  Abort
-
-  completed:
+  ; Kill clementine.exe if it's running.  taskkill exits with 0 only if it
+  ; found and killed something.
+  nsExec::Exec 'taskkill /F /T /IM clementine.exe'
+  Pop $0
+  StrCmp $0 "0" 0 +3
+    DetailPrint "Killed running clementine.exe"
+    Sleep 2000
 
   ; Delete all the files
   Delete "$INSTDIR\clementine.exe"
@@ -498,29 +461,6 @@ Section "Uninstall"
   ; Remove the entry from 'installed programs list'
 @NORMAL@  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
-  ; Check the OS.  If Vista or newer, use Default Programs
-@NORMAL@  nsisos::osversion
-@NORMAL@  StrCpy $R0 $0
-@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
-
-@NORMAL@  HasDefaultPrograms:
-    ; Unregister from Default Programs
-@NORMAL@    ${UnRegisterCapabilities}
-@NORMAL@    Goto done
-@NORMAL@  NoDefaultPrograms:
-    ; Remove file associations
-@NORMAL@    ${unregisterExtension} ".mp3" "MP3 Audio File"
-@NORMAL@    ${unregisterExtension} ".flac" "FLAC Audio File"
-@NORMAL@    ${unregisterExtension} ".ogg" "OGG Audio File"
-@NORMAL@    ${unregisterExtension} ".spx" "OGG Speex Audio File"
-@NORMAL@    ${unregisterExtension} ".mp4" "MP4 Audio File"
-@NORMAL@    ${unregisterExtension} ".aac" "AAC Audio File"
-@NORMAL@    ${unregisterExtension} ".wma" "WMA Audio File"
-@NORMAL@    ${unregisterExtension} ".wav" "WAV Audio File"
-@NORMAL@
-@NORMAL@    ${unregisterExtension} ".pls" "PLS Audio File"
-@NORMAL@    ${unregisterExtension} ".m3u" "M3U Audio File"
-@NORMAL@    ${unregisterExtension} ".xspf" "XSPF Audio File"
-@NORMAL@    ${unregisterExtension} ".asx" "Windows Media Audio/Video playlist"
-@NORMAL@  done:
+  ; Unregister from Default Programs
+@NORMAL@  ${UnRegisterCapabilities}
 SectionEnd
