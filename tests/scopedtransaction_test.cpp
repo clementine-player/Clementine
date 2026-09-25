@@ -57,11 +57,11 @@ TEST_F(ScopedTransactionTest, OpensATransaction) {
 }
 
 TEST_F(ScopedTransactionTest, RollbackOnDtor) {
-  database_.exec("CREATE TABLE foo (bar INTEGER)");
+  ASSERT_TRUE(QSqlQuery(database_).exec("CREATE TABLE foo (bar INTEGER)"));
 
   {
     ScopedTransaction t(&database_);
-    database_.exec("INSERT INTO foo (bar) VALUES (42)");
+    ASSERT_TRUE(QSqlQuery(database_).exec("INSERT INTO foo (bar) VALUES (42)"));
 
     QSqlQuery q(database_);
     q.prepare("SELECT * FROM foo");
@@ -77,11 +77,11 @@ TEST_F(ScopedTransactionTest, RollbackOnDtor) {
 }
 
 TEST_F(ScopedTransactionTest, Commit) {
-  database_.exec("CREATE TABLE foo (bar INTEGER)");
+  ASSERT_TRUE(QSqlQuery(database_).exec("CREATE TABLE foo (bar INTEGER)"));
 
   {
     ScopedTransaction t(&database_);
-    database_.exec("INSERT INTO foo (bar) VALUES (42)");
+    ASSERT_TRUE(QSqlQuery(database_).exec("INSERT INTO foo (bar) VALUES (42)"));
     t.Commit();
   }
 

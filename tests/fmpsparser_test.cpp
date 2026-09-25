@@ -31,65 +31,65 @@ TEST_F(FMPSParserTest, ParseFloats) {
   QVariant value;
 
   EXPECT_EQ(1, parser_.ParseValue("0", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(0, value.toDouble());
 
   EXPECT_EQ(3, parser_.ParseValue("123", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(123, value.toDouble());
 
   EXPECT_EQ(3, parser_.ParseValue("0.0", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(0, value.toDouble());
 
   EXPECT_EQ(2, parser_.ParseValue("-1", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(-1, value.toDouble());
 
   EXPECT_EQ(5, parser_.ParseValue("-1.23", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(-1.23, value.toDouble());
 
   EXPECT_EQ(4, parser_.ParseValue("+123", &value));
-  EXPECT_EQ(QVariant::Double, value.type());
+  EXPECT_EQ(QMetaType::Double, value.typeId());
   EXPECT_EQ(123, value.toDouble());
 
   parser_.ParseValue("1.", &value);
-  EXPECT_NE(QVariant::Double, value.type());
+  EXPECT_NE(QMetaType::Double, value.typeId());
 
   parser_.ParseValue("abc", &value);
-  EXPECT_NE(QVariant::Double, value.type());
+  EXPECT_NE(QMetaType::Double, value.typeId());
 }
 
 TEST_F(FMPSParserTest, ParseStrings) {
   QVariant value;
 
   EXPECT_EQ(3, parser_.ParseValue("abc", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("abc", value.toString());
 
   EXPECT_EQ(8, parser_.ParseValue("foo\\\\bar", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("foo\\bar", value.toString());
 
   EXPECT_EQ(8, parser_.ParseValue("foo\\:bar", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("foo:bar", value.toString());
 
   EXPECT_EQ(8, parser_.ParseValue("foo\\;bar", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("foo;bar", value.toString());
 
   EXPECT_EQ(12, parser_.ParseValue("foo\\\\\\:\\;bar", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("foo\\:;bar", value.toString());
 
   EXPECT_EQ(2, parser_.ParseValue("1.", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("1.", value.toString());
 
   EXPECT_EQ(5, parser_.ParseValue("1.abc", &value));
-  EXPECT_EQ(QVariant::String, value.type());
+  EXPECT_EQ(QMetaType::QString, value.typeId());
   EXPECT_EQ("1.abc", value.toString());
 
   EXPECT_EQ(-1, parser_.ParseValue("foo\\bar", &value));

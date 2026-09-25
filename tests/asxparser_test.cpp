@@ -117,7 +117,7 @@ TEST_F(ASXParserTest, SavesSong) {
 
 TEST_F(ASXParserTest, ParsesSomaFM) {
   QFile somafm(":/testdata/secretagent.asx");
-  somafm.open(QIODevice::ReadOnly);
+  ASSERT_TRUE(somafm.open(QIODevice::ReadOnly));
 
   ASXParser parser(nullptr);
   SongList songs = parser.Load(&somafm);

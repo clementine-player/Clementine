@@ -27,7 +27,7 @@ TEST(Translations, Basic) {
   ASSERT_TRUE(QFile::exists(":/translations/clementine_es.qm"));
 
   PoTranslator t;
-  t.load("clementine_es.qm", ":/translations");
+  ASSERT_TRUE(t.load("clementine_es.qm", ":/translations"));
 
   EXPECT_EQ(QString::fromUtf8("Fonoteca"),
             t.translate("MainWindow", "Library"));
