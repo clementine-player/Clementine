@@ -97,7 +97,14 @@ Features include:
   * Queue manager
 
 %prep
-%setup -q -n %{name}-@CLEMENTINE_VERSION_SPARKLE@
+# Unpack into a directory whose name stays the same from one commit to the
+# next. The tarball's own top-level directory is named after git describe,
+# and a build directory that's renamed on every commit ends up in the debug
+# info, which ccache folds into its hash - so CI's cache never hit. -C strips
+# that top-level directory; debugedit still maps whatever the build directory
+# is called to /usr/src/debug/<name>-<version>-<release>.<arch>, so the
+# debuginfo and debugsource packages come out the same.
+%setup -q -n %{name} -C
 
 
 %build

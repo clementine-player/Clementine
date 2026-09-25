@@ -509,12 +509,15 @@ jobs:
     env:
       RPM_BUILD_NCPUS: "2"
       CCACHE_DIR: /ccache
-      # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
-      # a directory whose name changes with every commit. Rewriting paths
-      # under HOME relative to the build directory takes the version back
-      # out of the hash.
-      CCACHE_BASEDIR: /root
-      CCACHE_MAXSIZE: 250M
+      # The spec unpacks into a fixed directory name, so the build path
+      # stays the same between commits; see %prep in
+      # dist/clementine.spec.in for why that matters. No CCACHE_BASEDIR:
+      # it can't help here, because with -g ccache hashes the absolute
+      # working directory regardless.
+      #
+      # Much larger than the other jobs: rpmbuild compiles with -g and LTO,
+      # and one build's objects come to about 850MB even compressed.
+      CCACHE_MAXSIZE: 1G
       # A fresh checkout stamps every file with the current time, which
       # ccache's direct mode would otherwise treat as too new to trust.
       CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
@@ -669,12 +672,15 @@ jobs:
     env:
       RPM_BUILD_NCPUS: "2"
       CCACHE_DIR: /ccache
-      # rpmbuild compiles in ~/rpmbuild/BUILD/clementine-<git describe>/,
-      # a directory whose name changes with every commit. Rewriting paths
-      # under HOME relative to the build directory takes the version back
-      # out of the hash.
-      CCACHE_BASEDIR: /root
-      CCACHE_MAXSIZE: 250M
+      # The spec unpacks into a fixed directory name, so the build path
+      # stays the same between commits; see %prep in
+      # dist/clementine.spec.in for why that matters. No CCACHE_BASEDIR:
+      # it can't help here, because with -g ccache hashes the absolute
+      # working directory regardless.
+      #
+      # Much larger than the other jobs: rpmbuild compiles with -g and LTO,
+      # and one build's objects come to about 850MB even compressed.
+      CCACHE_MAXSIZE: 1G
       # A fresh checkout stamps every file with the current time, which
       # ccache's direct mode would otherwise treat as too new to trust.
       CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
