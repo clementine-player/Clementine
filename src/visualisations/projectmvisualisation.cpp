@@ -25,6 +25,7 @@
 #include <QPaintEngine>
 #include <QPainter>
 #include <QSettings>
+#include <QTimer>
 #include <QTimerEvent>
 #include <QtDebug>
 
@@ -132,10 +133,14 @@ void ProjectMVisualisation::InitProjectM() {
   if (preset_path_.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
-    QMessageBox::warning(
-        nullptr, tr("Missing projectM presets"),
-        tr("Clementine could not load any projectM visualisations.  Check that "
-           "you have installed Clementine properly."));
+    // We're inside drawBackground() here. A modal dialog's event loop would
+    // disturb the GL state, and projectM would then crash rendering this frame.
+    QTimer::singleShot(0, this, []() {
+      QMessageBox::warning(
+          nullptr, tr("Missing projectM presets"),
+          tr("Clementine could not load any projectM visualisations.  Check "
+             "that you have installed Clementine properly."));
+    });
   }
 }
 
