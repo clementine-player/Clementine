@@ -20,6 +20,7 @@
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/lastfm/lastfmsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
+#include "internet/plex/plexsettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
 #include "internet/radiobrowser/radiobrowsersettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
@@ -92,6 +93,7 @@ void InternetSettingsCategory::AddChildren() {
   AddPage(SettingsDialog::Page_DigitallyImported,
           new DigitallyImportedSettingsPage(dialog_));
   AddPage(SettingsDialog::Page_Subsonic, new SubsonicSettingsPage(dialog_));
+  AddPage(SettingsDialog::Page_Plex, new PlexSettingsPage(dialog_));
   AddPage(SettingsDialog::Page_Podcasts, new PodcastSettingsPage(dialog_));
   AddPage(SettingsDialog::Page_RadioBrowser,
           new RadioBrowserSettingsPage(dialog_));

@@ -39,6 +39,7 @@
 #include "internet/internetradio/savedradio.h"
 #include "internet/jamendo/jamendoservice.h"
 #include "internet/magnatune/magnatuneservice.h"
+#include "internet/plex/plexservice.h"
 #include "internet/podcasts/podcastservice.h"
 #include "internet/radiobrowser/radiobrowserservice.h"
 #include "internet/somafm/somafmservice.h"
@@ -96,6 +97,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new IntergalacticFMService(app, this));
   AddService(new RadioBrowserService(app, this));
   AddService(new SubsonicService(app, this));
+  AddService(new PlexService(app, this));
 #ifdef HAVE_BOX
   AddService(new BoxService(app, this));
 #endif

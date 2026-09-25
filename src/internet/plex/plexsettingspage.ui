@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PlexSettingsPage</class>
+ <widget class="QWidget" name="PlexSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>505</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Plex</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="LoginStateWidget" name="login_state" native="true"/>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="sign_in_group">
+     <property name="title">
+      <string>Sign in</string>
+     </property>
+     <layout class="QVBoxLayout" name="sign_in_layout">
+      <item>
+       <widget class="QLabel" name="sign_in_help">
+        <property name="text">
+         <string>Clementine will open plex.tv in your browser. Sign in there and allow Clementine to access your account.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="sign_in_buttons">
+        <item>
+         <widget class="QPushButton" name="sign_in">
+          <property name="text">
+           <string>Sign in with Plex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="check_pin">
+          <property name="text">
+           <string>I've signed in</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="sign_in_spacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="sign_in_status">
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="server_group">
+     <property name="title">
+      <string>Server</string>
+     </property>
+     <layout class="QFormLayout" name="server_layout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="server_label">
+        <property name="text">
+         <string>Plex Media Server</string>
+        </property>
+        <property name="buddy">
+         <cstring>server</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="server"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="verify_cert">
+        <property name="text">
+         <string>Verify server certificate</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LoginStateWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/loginstatewidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>sign_in</tabstop>
+  <tabstop>check_pin</tabstop>
+  <tabstop>server</tabstop>
+  <tabstop>verify_cert</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
