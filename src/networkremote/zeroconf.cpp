@@ -14,6 +14,7 @@
 #include "tinysvcmdns.h"
 #endif
 
+#include <QNetworkInterface>
 #include <QTextCodec>
 
 Zeroconf* Zeroconf::sInstance = nullptr;
@@ -52,7 +53,25 @@ QByteArray Zeroconf::TruncateName(const QString& name) {
 }
 
 void Zeroconf::Publish(const QString& domain, const QString& type,
-                       const QString& name, quint16 port) {
+                       const QString& name, quint16 port,
+                       const QList<QHostAddress>& addresses) {
+  Unpublish();
   QByteArray truncated_name = TruncateName(name);
-  PublishInternal(domain, type, truncated_name, port);
+  PublishInternal(domain, type, truncated_name, port, addresses);
+  published_ = true;
+}
+
+void Zeroconf::Unpublish() {
+  if (!published_) return;
+  UnpublishInternal();
+  published_ = false;
+}
+
+int Zeroconf::InterfaceIndexOf(const QHostAddress& address) {
+  for (const QNetworkInterface& iface : QNetworkInterface::allInterfaces()) {
+    for (const QNetworkAddressEntry& entry : iface.addressEntries()) {
+      if (entry.ip() == address) return iface.index();
+    }
+  }
+  return -1;
 }

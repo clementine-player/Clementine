@@ -121,6 +121,7 @@ void NetworkRemote::StartServer() {
     qLog(Warning) << "Network remote enabled, but no listen address is chosen";
   }
 
+  QList<QHostAddress> listening;
   for (const QHostAddress& address : addresses) {
     std::unique_ptr<QTcpServer> server(new QTcpServer);
     server->setProxy(QNetworkProxy::NoProxy);
@@ -129,6 +130,7 @@ void NetworkRemote::StartServer() {
 
     if (server->listen(address, port_)) {
       qLog(Info) << "Listening on" << address.toString() << "port" << port_;
+      listening << address;
     } else if (listen_on_all_addresses_) {
       // See ListenAddresses: one of the two wildcard servers failing is
       // normal.
@@ -142,13 +144,27 @@ void NetworkRemote::StartServer() {
   }
 
   if (Zeroconf::GetZeroconf()) {
-    QString name = QString("Clementine on %1").arg(QHostInfo::localHostName());
-    Zeroconf::GetZeroconf()->Publish("local", "_clementine._tcp", name, port_);
+    // Advertise only where something is listening, so remotes aren't sent to
+    // an address that refuses them. That includes a chosen address that
+    // couldn't be bound, such as a VPN's while it's down.
+    if (!listen_on_all_addresses_ && listening.isEmpty()) {
+      qLog(Warning) << "Not listening on any address, so not advertising";
+    } else {
+      QString name =
+          QString("Clementine on %1").arg(QHostInfo::localHostName());
+      Zeroconf::GetZeroconf()->Publish(
+          "local", "_clementine._tcp", name, port_,
+          listen_on_all_addresses_ ? QList<QHostAddress>() : listening);
+    }
   }
 }
 
 void NetworkRemote::StopServer() {
   if (servers_.empty()) return;
+
+  if (Zeroconf::GetZeroconf()) {
+    Zeroconf::GetZeroconf()->Unpublish();
+  }
 
   if (outgoing_data_creator_) {
     outgoing_data_creator_->DisconnectAllClients();
