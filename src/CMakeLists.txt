@@ -1437,6 +1437,18 @@ set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
 )
 
+# projectM presets, fetched by CI, packed into one file next to the exe.
+# Optional, so a local build without them still configures; the app falls
+# back to projectM's built-in idle preset.
+set(PROJECTM_PRESETS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/libprojectm/presets-cream")
+set(PROJECTM_PRESETS_RCC "${CMAKE_BINARY_DIR}/projectm-presets.rcc")
+if (HAVE_VISUALISATIONS AND (WIN32 OR APPLE) AND EXISTS "${PROJECTM_PRESETS_DIR}")
+  include(${CMAKE_SOURCE_DIR}/cmake/ProjectMPresets.cmake)
+  add_projectm_presets_rcc(projectm-presets
+    "${PROJECTM_PRESETS_DIR}" "${PROJECTM_PRESETS_RCC}")
+  set(HAVE_PROJECTM_PRESETS_RCC ON)
+endif ()
+
 if (APPLE)
   install(FILES ../dist/clementine.icns
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
@@ -1447,12 +1459,9 @@ if (APPLE)
   install(FILES ../dist/cacert.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
-  # projectM presets, fetched by CI. Optional, so a local build without them
-  # still configures; the app falls back to projectM's built-in idle preset.
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/libprojectm/presets-cream")
-    install(DIRECTORY ../3rdparty/libprojectm/presets-cream/
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets"
-      FILES_MATCHING PATTERN "*.milk")
+  if (HAVE_PROJECTM_PRESETS_RCC)
+    install(FILES "${PROJECTM_PRESETS_RCC}"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   endif()
 
   if (HAVE_BREAKPAD)
