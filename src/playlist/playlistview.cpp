@@ -1019,7 +1019,12 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
 
   if (drop_indicator_row_ != -1) {
     if (cached_tree_.isNull()) {
-      cached_tree_ = QPixmap(size());
+      // Allocate at device pixel resolution, same as cached_current_row_ -
+      // otherwise the whole playlist goes blurry on HiDPI screens while
+      // something is being dragged over it.
+      const qreal dpr = devicePixelRatioF();
+      cached_tree_ = QPixmap(size() * dpr);
+      cached_tree_.setDevicePixelRatio(dpr);
       cached_tree_.fill(Qt::transparent);
 
       QPainter cache_painter(&cached_tree_);
