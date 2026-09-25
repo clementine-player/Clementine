@@ -938,10 +938,13 @@ endif()
 # Platform specific - Windows
 optional_source(WIN32
   SOURCES
+    core/windowsmediacontrols.cpp
     engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
     ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
+  HEADERS
+    core/windowsmediacontrols.h
   INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
 )
@@ -1374,6 +1377,9 @@ if (WIN32)
     tinysvcmdns
     dsound
     dwmapi
+    runtimeobject
+    shcore
+    shlwapi
   )
 endif (WIN32)
 

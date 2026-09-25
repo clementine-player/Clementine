@@ -100,6 +100,10 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
+#ifdef Q_OS_WIN32
+#include "core/windowsmediacontrols.h"
+#endif
+
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
@@ -574,6 +578,9 @@ int main(int argc, char* argv[]) {
 
 #ifdef HAVE_DBUS
   mpris::Mpris mpris(&app);
+#endif
+#ifdef Q_OS_WIN32
+  WindowsMediaControls media_controls(&app);
 #endif
 
   // Window
