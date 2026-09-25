@@ -209,6 +209,14 @@ set(SOURCES
   internet/somafm/somafmurlhandler.cpp
   internet/intergalacticfm/intergalacticfmservice.cpp
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
+  internet/plex/plexauthenticator.cpp
+  internet/plex/plexlibraryscanner.cpp
+  internet/plex/plexnotificationlistener.cpp
+  internet/plex/plexparser.cpp
+  internet/plex/plexplaybackreporter.cpp
+  internet/plex/plexservice.cpp
+  internet/plex/plexsettingspage.cpp
+  internet/plex/plexurlhandler.cpp
   internet/radiobrowser/radiobrowserservice.cpp
   internet/radiobrowser/radiobrowsersettingspage.cpp
   internet/radiobrowser/radiobrowserurlhandler.cpp
@@ -533,6 +541,13 @@ set(HEADERS
   internet/somafm/somafmurlhandler.h
   internet/intergalacticfm/intergalacticfmservice.h
   internet/intergalacticfm/intergalacticfmurlhandler.h
+  internet/plex/plexauthenticator.h
+  internet/plex/plexlibraryscanner.h
+  internet/plex/plexnotificationlistener.h
+  internet/plex/plexplaybackreporter.h
+  internet/plex/plexservice.h
+  internet/plex/plexsettingspage.h
+  internet/plex/plexurlhandler.h
   internet/radiobrowser/radiobrowserservice.h
   internet/radiobrowser/radiobrowsersettingspage.h
   internet/radiobrowser/radiobrowserurlhandler.h
@@ -747,6 +762,7 @@ set(UI
   internet/magnatune/magnatunedownloaddialog.ui
   internet/magnatune/magnatunesettingspage.ui
   internet/core/searchboxwidget.ui
+  internet/plex/plexsettingspage.ui
   internet/subsonic/subsonicsettingspage.ui
   internet/radiobrowser/radiobrowsersettingspage.ui
 
