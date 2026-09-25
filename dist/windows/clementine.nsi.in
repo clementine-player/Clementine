@@ -403,8 +403,11 @@ Section "Gstreamer plugins" gstreamer-plugins
 SectionEnd
 
 Section "projectM presets" projectm-presets
-  SetOutPath "$INSTDIR\projectm-presets"
-  File /r "..\..\3rdparty\libprojectm\presets-cream\"
+  ; Older versions installed every preset as a separate file.
+  RMDir /r "$INSTDIR\projectm-presets"
+
+  SetOutPath "$INSTDIR"
+  File "projectm-presets.rcc"
 SectionEnd
 
 @NORMAL@Section "Start menu items" startmenu
@@ -471,6 +474,7 @@ Section "Uninstall"
   Delete "$INSTDIR\gio-modules\*.dll"
   Delete "$INSTDIR\gstreamer-plugins\*.dll"
 
+  Delete "$INSTDIR\projectm-presets.rcc"
   RMDir /r "$INSTDIR\projectm-presets"
 
   Delete "$INSTDIR\Uninstall.exe"

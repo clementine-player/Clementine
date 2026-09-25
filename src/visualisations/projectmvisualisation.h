@@ -74,6 +74,15 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   void Load();
   void Save();
 
+  void LoadPreset(const QString& path, bool smooth_transition);
+  static bool PresetLoadCallback(unsigned int index, const char* filename,
+                                 bool hard_cut, void* user_data);
+
+  // Presets are saved relative to preset_path_, so the selection survives it
+  // moving.
+  QString PresetKey(const QString& path) const;
+  QString PresetPath(const QString& key) const;
+
   int IndexOfPreset(const QString& path) const;
 
  private:

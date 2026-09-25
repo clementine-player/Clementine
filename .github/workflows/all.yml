@@ -933,9 +933,9 @@ jobs:
         working-directory: bin
         run: cmake --build .
 
-      - name: Copy output exes
+      - name: Copy build outputs
         working-directory: dist/windows
-        run: cp ../../bin/*.exe .
+        run: cp ../../bin/*.exe ../../bin/projectm-presets.rcc .
 
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
