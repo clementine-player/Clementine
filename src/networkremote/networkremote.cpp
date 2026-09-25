@@ -51,12 +51,35 @@ void NetworkRemote::ReadSettings() {
   // Use only non public ips must be true be default
   only_non_public_ip_ = s.value("only_non_public_ip", true).toBool();
 
+  listen_on_all_addresses_ = s.value("listen_on_all_addresses", true).toBool();
+  listen_addresses_ = s.value("listen_addresses").toStringList();
+
   s.endGroup();
 }
 
+QList<QHostAddress> NetworkRemote::ListenAddresses(bool all,
+                                                   const QStringList& chosen) {
+  if (all) {
+    // Any is dual-stack, so it covers IPv6 too. The separate AnyIPv6 server
+    // is left from Qt 4, where Any meant IPv4 only; on a dual-stack system
+    // it fails to bind alongside Any, which is expected.
+    return {QHostAddress(QHostAddress::Any),
+            QHostAddress(QHostAddress::AnyIPv6)};
+  }
+
+  QList<QHostAddress> addresses;
+  for (const QString& text : chosen) {
+    QHostAddress address(text);
+    if (address.isNull()) {
+      qLog(Warning) << "Ignoring a listen address that doesn't parse:" << text;
+      continue;
+    }
+    addresses << address;
+  }
+  return addresses;
+}
+
 void NetworkRemote::SetupServer() {
-  server_.reset(new QTcpServer());
-  server_ipv6_.reset(new QTcpServer());
   incoming_data_parser_.reset(new IncomingDataParser(app_));
   outgoing_data_creator_.reset(new OutgoingDataCreator(app_));
 
@@ -66,12 +89,6 @@ void NetworkRemote::SetupServer() {
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           outgoing_data_creator_.get(),
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
-
-  // Only connect the signals once
-  connect(server_.get(), SIGNAL(newConnection()), this,
-          SLOT(AcceptConnection()));
-  connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
-          SLOT(AcceptConnection()));
 
   connect(incoming_data_parser_.get(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
@@ -91,15 +108,38 @@ void NetworkRemote::StartServer() {
     return;
   }
 
+  if (!servers_.empty()) {
+    // Already running; ReloadSettings stops the servers before restarting.
+    return;
+  }
+
   qLog(Info) << "Starting network remote";
 
-  server_->setProxy(QNetworkProxy::NoProxy);
-  server_ipv6_->setProxy(QNetworkProxy::NoProxy);
+  const QList<QHostAddress> addresses =
+      ListenAddresses(listen_on_all_addresses_, listen_addresses_);
+  if (addresses.isEmpty()) {
+    qLog(Warning) << "Network remote enabled, but no listen address is chosen";
+  }
 
-  server_->listen(QHostAddress::Any, port_);
-  server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
+  for (const QHostAddress& address : addresses) {
+    std::unique_ptr<QTcpServer> server(new QTcpServer);
+    server->setProxy(QNetworkProxy::NoProxy);
+    connect(server.get(), SIGNAL(newConnection()), this,
+            SLOT(AcceptConnection()));
 
-  qLog(Info) << "Listening on port " << port_;
+    if (server->listen(address, port_)) {
+      qLog(Info) << "Listening on" << address.toString() << "port" << port_;
+    } else if (listen_on_all_addresses_) {
+      // See ListenAddresses: one of the two wildcard servers failing is
+      // normal.
+      qLog(Debug) << "Couldn't listen on" << address.toString() << "port"
+                  << port_ << ":" << server->errorString();
+    } else {
+      qLog(Warning) << "Couldn't listen on" << address.toString() << "port"
+                    << port_ << ":" << server->errorString();
+    }
+    servers_.push_back(std::move(server));
+  }
 
   if (Zeroconf::GetZeroconf()) {
     QString name = QString("Clementine on %1").arg(QHostInfo::localHostName());
@@ -108,13 +148,15 @@ void NetworkRemote::StartServer() {
 }
 
 void NetworkRemote::StopServer() {
-  if (server_->isListening()) {
-    outgoing_data_creator_.get()->DisconnectAllClients();
-    server_->close();
-    server_ipv6_->close();
-    qDeleteAll(clients_);
-    clients_.clear();
+  if (servers_.empty()) return;
+
+  if (outgoing_data_creator_) {
+    outgoing_data_creator_->DisconnectAllClients();
   }
+  // Deleting a server closes it.
+  servers_.clear();
+  qDeleteAll(clients_);
+  clients_.clear();
 }
 
 void NetworkRemote::ReloadSettings() {

@@ -102,21 +102,47 @@
        </widget>
       </item>
       <item row="9" column="0">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label_listen_addresses">
         <property name="toolTip">
-         <string>Enter this IP in the App to connect to Clementine.</string>
+         <string>Enter one of these addresses in the app to connect to Clementine.</string>
         </property>
         <property name="text">
-         <string>Your IP address:</string>
+         <string>Listen on</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
        </widget>
       </item>
       <item row="9" column="1">
-       <widget class="QLabel" name="ip_address">
-        <property name="text">
-         <string notr="true">127.0.0.1</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="listen_addresses_layout">
+        <item>
+         <widget class="QCheckBox" name="listen_on_all_addresses">
+          <property name="text">
+           <string>All addresses</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listen_addresses">
+          <property name="toolTip">
+           <string>Enter one of these addresses in the app to connect to Clementine.</string>
+          </property>
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>120</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="3" column="0">
        <widget class="QCheckBox" name="allow_downloads">

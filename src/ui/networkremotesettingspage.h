@@ -18,6 +18,8 @@
 #ifndef NETWORKREMOTESETTINGSPAGE_H
 #define NETWORKREMOTESETTINGSPAGE_H
 
+#include <QStringList>
+
 #include "settingspage.h"
 
 class Ui_NetworkRemoteSettingsPage;
@@ -39,6 +41,11 @@ class NetworkRemoteSettingsPage : public SettingsPage {
   void Options();
 
  private:
+  // Fills the listen address list with this machine's addresses, checking
+  // the ones in |chosen|. Chosen addresses that aren't currently present -
+  // a VPN that's down, say - are kept, so saving doesn't quietly drop them.
+  void PopulateListenAddresses(const QStringList& chosen);
+
   static const char* kPlayStoreUrl;
   static const char* kPlayStoreUrl2;
   static const char* kAppleStoreUrl;
