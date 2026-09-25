@@ -18,6 +18,7 @@
 #include "test_utils.h"
 
 #include <QDir>
+#include <QHostAddress>
 #include <QNetworkRequest>
 #include <QString>
 #include <QUrl>
@@ -37,6 +38,11 @@ std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req) {
   return stream;
 }
 
+std::ostream& operator<<(std::ostream& stream, const QHostAddress& address) {
+  stream << address.toString().toStdString();
+  return stream;
+}
+
 std::ostream& operator <<(std::ostream& stream, const QVariant& var) {
   stream << var.toString().toStdString();
   return stream;
@@ -52,6 +58,10 @@ void PrintTo(const ::QVariant& var, std::ostream& os) {
 
 void PrintTo(const ::QUrl& url, std::ostream& os) {
   os << url.toString().toStdString();
+}
+
+void PrintTo(const ::QHostAddress& address, std::ostream& os) {
+  os << address.toString().toStdString();
 }
 
 TemporaryResource::TemporaryResource(const QString& filename) {

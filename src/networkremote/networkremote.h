@@ -3,7 +3,9 @@
 
 #include <QList>
 #include <QObject>
+#include <QStringList>
 #include <memory>
+#include <vector>
 
 class Application;
 class IncomingDataParser;
@@ -25,6 +27,11 @@ class NetworkRemote : public QObject {
   explicit NetworkRemote(Application* app, QObject* parent = nullptr);
   ~NetworkRemote();
 
+  // What to listen on: every address when |all| is set, otherwise the
+  // addresses in |chosen| that parse, in the order given.
+  static QList<QHostAddress> ListenAddresses(bool all,
+                                             const QStringList& chosen);
+
  signals:
   void AddToPlaylistSignal(QMimeData* data);
   void SetCurrentPlaylist(int id);
@@ -38,14 +45,16 @@ class NetworkRemote : public QObject {
   void SendKitten(quint64 id, const QImage& kitten);
 
  private:
-  std::unique_ptr<QTcpServer> server_;
-  std::unique_ptr<QTcpServer> server_ipv6_;
+  // One per address being listened on.
+  std::vector<std::unique_ptr<QTcpServer>> servers_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
 
   quint16 port_;
   bool use_remote_;
   bool only_non_public_ip_;
+  bool listen_on_all_addresses_;
+  QStringList listen_addresses_;
   bool signals_connected_;
   Application* app_;
 

@@ -25,6 +25,7 @@
 #include <QString>
 #include <QTemporaryFile>
 
+class QHostAddress;
 class QNetworkRequest;
 class QString;
 class QUrl;
@@ -34,6 +35,7 @@ std::ostream& operator <<(std::ostream& stream, const QString& str);
 std::ostream& operator <<(std::ostream& stream, const QVariant& var);
 std::ostream& operator <<(std::ostream& stream, const QUrl& url);
 std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req);
+std::ostream& operator<<(std::ostream& stream, const QHostAddress& address);
 
 template <typename T>
 std::ostream& operator <<(std::ostream& stream, const QList<T>& list) {
@@ -48,6 +50,7 @@ std::ostream& operator <<(std::ostream& stream, const QList<T>& list) {
 void PrintTo(const ::QString& str, std::ostream& os);
 void PrintTo(const ::QVariant& var, std::ostream& os);
 void PrintTo(const ::QUrl& url, std::ostream& os);
+void PrintTo(const ::QHostAddress& address, std::ostream& os);
 
 #define EXPOSE_SIGNAL0(n) \
     void Emit##n() { emit n(); }

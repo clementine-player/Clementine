@@ -58,6 +58,9 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
   setWindowIcon(IconLoader::Load("ipodtouchicon", IconLoader::Base));
 
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
+  connect(ui_->listen_on_all_addresses, &QCheckBox::toggled,
+          ui_->listen_addresses,
+          [this](bool all) { ui_->listen_addresses->setEnabled(!all); });
 
   ui_->play_store->installEventFilter(this);
   ui_->play_store_2->installEventFilter(this);
@@ -108,6 +111,11 @@ void NetworkRemoteSettingsPage::Load() {
   ui_->only_non_public_ip->setChecked(
       s.value("only_non_public_ip", true).toBool());
 
+  ui_->listen_on_all_addresses->setChecked(
+      s.value("listen_on_all_addresses", true).toBool());
+  ui_->listen_addresses->setEnabled(!ui_->listen_on_all_addresses->isChecked());
+  PopulateListenAddresses(s.value("listen_addresses").toStringList());
+
   // Auth Code, 5 digits
   ui_->use_auth_code->setChecked(s.value("use_auth_code", false).toBool());
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
@@ -142,21 +150,6 @@ void NetworkRemoteSettingsPage::Load() {
 
   s.endGroup();
 
-  // Get local ip addresses
-  QString ip_addresses;
-  QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
-  for (const QHostAddress& address : addresses) {
-    // TODO: Add ipv6 support to tinysvcmdns.
-    if (address.protocol() == QAbstractSocket::IPv4Protocol &&
-        !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
-      if (!ip_addresses.isEmpty()) {
-        ip_addresses.append(", ");
-      }
-      ip_addresses.append(address.toString());
-    }
-  }
-  ui_->ip_address->setText(ip_addresses);
-
   // Get the right play store badge for this language.
   QString language = dialog()->app()->language_without_region();
 
@@ -176,6 +169,44 @@ void NetworkRemoteSettingsPage::Load() {
   ui_->desktop_remote->setWordWrap(true);
 }
 
+void NetworkRemoteSettingsPage::PopulateListenAddresses(
+    const QStringList& chosen) {
+  ui_->listen_addresses->clear();
+
+  QStringList present;
+  for (const QNetworkInterface& iface : QNetworkInterface::allInterfaces()) {
+    if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
+
+    for (const QNetworkAddressEntry& entry : iface.addressEntries()) {
+      const QHostAddress address = entry.ip();
+      // Binding to a link-local IPv6 address needs its scope as well, and
+      // nobody types one of those into a phone anyway.
+      if (address.protocol() == QAbstractSocket::IPv6Protocol &&
+          address.isLinkLocal()) {
+        continue;
+      }
+
+      const QString text = address.toString();
+      present << text;
+      QListWidgetItem* item = new QListWidgetItem(
+          QString("%1 (%2)").arg(text, iface.humanReadableName()),
+          ui_->listen_addresses);
+      item->setData(Qt::UserRole, text);
+      item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+      item->setCheckState(chosen.contains(text) ? Qt::Checked : Qt::Unchecked);
+    }
+  }
+
+  for (const QString& text : chosen) {
+    if (present.contains(text)) continue;
+    QListWidgetItem* item = new QListWidgetItem(
+        tr("%1 (not currently available)").arg(text), ui_->listen_addresses);
+    item->setData(Qt::UserRole, text);
+    item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+    item->setCheckState(Qt::Checked);
+  }
+}
+
 void NetworkRemoteSettingsPage::Save() {
   QSettings s;
 
@@ -183,6 +214,16 @@ void NetworkRemoteSettingsPage::Save() {
   s.setValue("port", ui_->remote_port->value());
   s.setValue("use_remote", ui_->use_remote->isChecked());
   s.setValue("only_non_public_ip", ui_->only_non_public_ip->isChecked());
+  s.setValue("listen_on_all_addresses",
+             ui_->listen_on_all_addresses->isChecked());
+  QStringList listen_addresses;
+  for (int i = 0; i < ui_->listen_addresses->count(); ++i) {
+    const QListWidgetItem* item = ui_->listen_addresses->item(i);
+    if (item->checkState() == Qt::Checked) {
+      listen_addresses << item->data(Qt::UserRole).toString();
+    }
+  }
+  s.setValue("listen_addresses", listen_addresses);
   s.setValue("use_auth_code", ui_->use_auth_code->isChecked());
   s.setValue("auth_code", ui_->auth_code->value());
   s.setValue("allow_downloads", ui_->allow_downloads->isChecked());
