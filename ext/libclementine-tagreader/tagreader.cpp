@@ -1391,7 +1391,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
 #else
     tag.reset(new TagLib::MPEG::File(stream.get(),
                                      TagLib::ID3v2::FrameFactory::instance(),
-                                     TagLib::AudioProperties::Accurate));
+                                     true, TagLib::AudioProperties::Accurate));
 #endif
   } else if (mime_type == "audio/mp4" ||
              (mime_type == "audio/mpeg" &&

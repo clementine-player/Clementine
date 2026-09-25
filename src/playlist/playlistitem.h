@@ -103,7 +103,7 @@ class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
   };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {
-    return QVariant(QVariant::String);
+    return QVariant(QMetaType::fromType<QString>());
   }
   virtual Song DatabaseSongMetadata() const { return Song(); }
 

@@ -17,6 +17,8 @@
 
 #include "test_utils.h"
 
+#include "gtest/gtest.h"
+
 #include <QDir>
 #include <QHostAddress>
 #include <QNetworkRequest>
@@ -67,10 +69,10 @@ void PrintTo(const ::QHostAddress& address, std::ostream& os) {
 TemporaryResource::TemporaryResource(const QString& filename) {
   setFileTemplate(QDir::tempPath() + "/clementine_test-XXXXXX." +
                   filename.section('.', -1, -1));
-  open();
+  EXPECT_TRUE(open());
 
   QFile resource(filename);
-  resource.open(QIODevice::ReadOnly);
+  EXPECT_TRUE(resource.open(QIODevice::ReadOnly));
   write(resource.readAll());
 
   reset();

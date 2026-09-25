@@ -34,7 +34,7 @@ protected:
 
 TEST_F(AsxIniParserTest, ParsesBasicTrackList) {
   QFile file(":/testdata/test.asxini");
-  file.open(QIODevice::ReadOnly);
+  ASSERT_TRUE(file.open(QIODevice::ReadOnly));
 
   SongList songs = parser_.Load(&file, "", QDir());
   ASSERT_EQ(2, songs.length());
@@ -46,7 +46,7 @@ TEST_F(AsxIniParserTest, ParsesBasicTrackList) {
 
 TEST_F(AsxIniParserTest, Magic) {
   QFile file(":/testdata/test.asxini");
-  file.open(QIODevice::ReadOnly);
+  ASSERT_TRUE(file.open(QIODevice::ReadOnly));
 
   EXPECT_TRUE(parser_.TryMagic(file.read(PlaylistParser::kMagicSize)));
 }

@@ -46,7 +46,7 @@ class MusicBrainzClientTest : public ::testing::Test {
   // Reads the data from a file into a QByteArray and returns it.
   QByteArray ReadDataFromFile(const QString& filename) {
     QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+    EXPECT_TRUE(file.open(QIODevice::ReadOnly));
     QByteArray data = file.readAll();
     return data;
   }

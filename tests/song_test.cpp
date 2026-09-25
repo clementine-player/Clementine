@@ -165,10 +165,10 @@ TEST_F(SongTest, FMPSUnrated) {
 
     // Compare files
     QFile orig_file(test_filename);
-    orig_file.open(QIODevice::ReadOnly);
+    ASSERT_TRUE(orig_file.open(QIODevice::ReadOnly));
     QByteArray orig_file_data = orig_file.readAll();
     QFile temp_file(r.fileName());
-    temp_file.open(QIODevice::ReadOnly);
+    ASSERT_TRUE(temp_file.open(QIODevice::ReadOnly));
     QByteArray temp_file_data = temp_file.readAll();
     EXPECT_TRUE(!orig_file_data.isEmpty());
     EXPECT_TRUE(!temp_file_data.isEmpty());

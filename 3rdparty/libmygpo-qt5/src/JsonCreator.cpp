@@ -30,9 +30,13 @@
 
 #include "qjsonwrapper/Json.h"
 
+#include <limits>
+
 using namespace mygpo;
 
-static qulonglong c_maxlonglong = (2^64)-1;
+// The largest qulonglong, standing for "not set". This was (2^64)-1, but ^ is
+// XOR, so that came to 65 - making a genuine 65 indistinguishable from unset.
+static qulonglong c_maxlonglong = std::numeric_limits<qulonglong>::max();
 
 QByteArray JsonCreator::addRemoveSubsToJSON( const QList< QUrl >& add, const QList< QUrl >& remove )
 {
