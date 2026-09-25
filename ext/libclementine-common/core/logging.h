@@ -65,6 +65,11 @@ enum Level {
 void Init();
 void SetLevels(const QString& levels);
 
+// Says how to turn debug messages back on, if Qt's logging rules have turned
+// them off - Fedora's qtlogging.ini does. Qt reads its rules when the
+// QCoreApplication is created, so call this after that.
+void MentionDisabledDebug();
+
 void DumpStackTrace();
 
 QDebug CreateLoggerFatal(int line, const char* pretty_function,

@@ -69,6 +69,7 @@ const char* CommandlineOptions::kHelpText =
     "      --quiet                 %30\n"
     "      --verbose               %31\n"
     "      --log-levels <levels>   %32\n"
+    "                              %35\n"
     "      --version               %33\n"
     "  -x, --delete-current        %34\n";
 
@@ -194,7 +195,10 @@ bool CommandlineOptions::Parse() {
                      tr("Equivalent to --log-levels *:3"),
                      tr("Comma separated list of class:level, level is 0-3"))
                 .arg(tr("Print out version information"),
-                     tr("Delete the currently playing song"));
+                     tr("Delete the currently playing song"),
+                     tr("Qt's logging rules can turn debug messages off; "
+                        "QT_LOGGING_RULES=clementine.debug=true turns them "
+                        "back on"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;

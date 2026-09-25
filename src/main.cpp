@@ -444,6 +444,9 @@ int main(int argc, char* argv[]) {
 
   QtSingleApplication a(argc, argv);
 
+  // Now that Qt has read its logging rules.
+  logging::MentionDisabledDebug();
+
   LastFmWs::api_key = LastFMService::kApiKey;
   LastFmWs::shared_secret = LastFMService::kSecret;
   LastFmWs::SetNetworkAccessManager(new NetworkAccessManager);
