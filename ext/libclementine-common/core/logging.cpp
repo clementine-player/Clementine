@@ -49,6 +49,10 @@ const char* kDefaultLogLevels =
     "NetworkRequests:2,"
     "*:3";
 
+// Everything logged with qLog goes out under this category, so that Qt's
+// logging rules (QT_LOGGING_RULES, qtlogging.ini) apply to it by name.
+Q_LOGGING_CATEGORY(lcClementine, "clementine")
+
 static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
 static QtMessageHandler sOriginalMessageHandler = nullptr;
@@ -84,6 +88,7 @@ class DebugBase : public QDebug {
  public:
   DebugBase() : QDebug(sNullDevice) {}
   DebugBase(QtMsgType t) : QDebug(t) {}
+  explicit DebugBase(const QDebug& debug) : QDebug(debug) {}
   T& space() { return static_cast<T&>(QDebug::space()); }
   T& noSpace() { return static_cast<T&>(QDebug::nospace()); }
 };
@@ -91,6 +96,10 @@ class DebugBase : public QDebug {
 // Debug message will be store in a buffer.
 class BufferedDebug : public DebugBase<BufferedDebug> {
  public:
+  // Formats Qt's own messages, which Qt's rules have already let through.
+  static bool Enabled(QtMsgType) { return true; }
+  static BufferedDebug Make(QtMsgType type) { return BufferedDebug(type); }
+
   BufferedDebug() : DebugBase() {}
   BufferedDebug(QtMsgType t) : DebugBase(), buf_(new QBuffer, later_deleter) {
     buf_->open(QIODevice::WriteOnly);
@@ -112,8 +121,36 @@ class BufferedDebug : public DebugBase<BufferedDebug> {
 // Debug message will be logged immediately.
 class LoggedDebug : public DebugBase<LoggedDebug> {
  public:
+  static bool Enabled(QtMsgType type) {
+    return type == QtFatalMsg || lcClementine().isEnabled(type);
+  }
+
+  // Sent through a QMessageLogger in our category, so that Qt treats it as
+  // ours rather than as the default category's.
+  static LoggedDebug Make(QtMsgType type) {
+    const QMessageLogger logger(nullptr, 0, nullptr,
+                                lcClementine().categoryName());
+    switch (type) {
+      case QtCriticalMsg:
+        return LoggedDebug(logger.critical());
+      case QtWarningMsg:
+        return LoggedDebug(logger.warning());
+      case QtInfoMsg:
+        return LoggedDebug(logger.info());
+      case QtDebugMsg:
+        return LoggedDebug(logger.debug());
+      case QtFatalMsg:
+      default:
+        // QMessageLogger::fatal() only returns a stream from Qt 6.5, and Qt
+        // never filters fatal messages anyway.
+        return LoggedDebug(QDebug(QtFatalMsg));
+    }
+  }
+
   LoggedDebug() : DebugBase() {}
-  LoggedDebug(QtMsgType t) : DebugBase(t) { nospace() << kMessageHandlerMagic; }
+  explicit LoggedDebug(const QDebug& debug) : DebugBase(debug) {
+    nospace() << kMessageHandlerMagic;
+  }
 };
 
 static void MessageHandler(QtMsgType type, const QMessageLogContext& context,
@@ -133,6 +170,9 @@ static void MessageHandler(QtMsgType type, const QMessageLogContext& context,
       break;
     case QtWarningMsg:
       level = Level_Warning;
+      break;
+    case QtInfoMsg:
+      level = Level_Info;
       break;
     case QtDebugMsg:
     default:
@@ -167,14 +207,15 @@ void Init() {
   if (!sOriginalMessageHandler) {
     sOriginalMessageHandler = qInstallMessageHandler(MessageHandler);
   }
+}
 
-  // qLog hands every level to Qt as a debug message in the default category,
-  // and does its own filtering (see SetLevels). Some distros - Fedora, for
-  // one - ship a qtlogging.ini with *.debug=false, which drops all of it,
-  // warnings and errors included, before it gets that far. Rules set here
-  // outrank that file but not QT_LOGGING_RULES, so it can still be turned
-  // off, and Qt's own categories are left as they were.
-  QLoggingCategory::setFilterRules("default.debug=true");
+void MentionDisabledDebug() {
+#ifndef QT_NO_DEBUG_OUTPUT
+  if (!lcClementine().isDebugEnabled()) {
+    qLog(Info) << "Debug messages are turned off by Qt's logging rules. To "
+                  "see them, run with QT_LOGGING_RULES=clementine.debug=true";
+  }
+#endif
 }
 
 void SetLevels(const QString& levels) {
@@ -275,11 +316,28 @@ static T CreateLogger(Level level, const QString& class_name, int line,
   }
 
   QtMsgType type = QtDebugMsg;
-  if (level == Level_Fatal) {
-    type = QtFatalMsg;
+  switch (level) {
+    case Level_Fatal:
+      type = QtFatalMsg;
+      break;
+    case Level_Error:
+      type = QtCriticalMsg;
+      break;
+    case Level_Warning:
+      type = QtWarningMsg;
+      break;
+    case Level_Info:
+      type = QtInfoMsg;
+      break;
+    case Level_Debug:
+      type = QtDebugMsg;
+      break;
+  }
+  if (!T::Enabled(type)) {
+    return T();
   }
 
-  T ret(type);
+  T ret = T::Make(type);
   ret.nospace() << QDateTime::currentDateTime()
                        .toString("hh:mm:ss.zzz")
                        .toLatin1()
