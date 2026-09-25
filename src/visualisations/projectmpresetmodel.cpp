@@ -27,6 +27,10 @@
 ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                                          QObject* parent)
     : QAbstractItemModel(parent), vis_(vis) {
+  // With no preset directory QDirIterator would recurse through the current
+  // working directory instead.
+  if (vis_->preset_url().isEmpty()) return;
+
   // Find presets
   QDirIterator it(vis_->preset_url(),
                   QStringList() << "*.milk"
