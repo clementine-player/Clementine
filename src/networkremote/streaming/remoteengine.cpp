@@ -70,7 +70,7 @@ RemoteEngine::RemoteEngine(Application* app, const RendererEndpoint& endpoint,
   s.beginGroup(NetworkRemote::kSettingsGroup);
   settings_.transcode_lossless = s.value("convert_lossless", false).toBool();
 
-  qLog(Info) << "Renderer" << display_name_ << "accepts" << caps_.mime_types
+  qLog(Info) << "Renderer" << display_name_ << "accepts" << caps_.mime_types()
              << "gapless" << caps_.gapless;
 }
 

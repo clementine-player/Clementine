@@ -46,7 +46,7 @@ cr watch                 # print state, position and output changes
 | Option | Effect |
 |---|---|
 | `--player null\|ffplay` | `ffplay` plays the audio. `null` only fetches the stream, logging the HTTP status, type, length and ranges it gets. |
-| `--mime TYPE` | A format the renderer accepts; repeat for more. `--mime audio/mpeg` alone makes Clementine encode everything that isn't MP3. |
+| `--format FORMAT` | A format the renderer accepts; repeat for more. It's a MIME type, optionally with `codecs=`, plus two limits of this tool's own: `rates=` (the sample rates it plays) and `channels=` (the most channels). For example `--format "audio/flac; rates=44100,48000; channels=2"`. `--format audio/mpeg` alone makes Clementine encode everything that isn't MP3. |
 | `--max-bitrate KBPS` | Asks Clementine to keep streams under this bitrate. |
 | `--gapless` | Accepts `RENDER_PRELOAD` and starts the next item without a gap. Only the `null` player uses it. |
 | `--take-over` | Makes this renderer the active output as soon as it connects. |
