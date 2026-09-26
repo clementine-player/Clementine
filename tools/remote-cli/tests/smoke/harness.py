@@ -46,11 +46,16 @@ def has_gst_element(name: str) -> bool:
 
 
 class Clementine:
-    """A Clementine with a throwaway profile, listening on 127.0.0.1 only."""
+    """A Clementine with a throwaway profile, listening on 127.0.0.1 only.
 
-    def __init__(self, binary: Path, root: Path) -> None:
+    Remote streaming is allowed in its settings. It's only turned on with
+    |streaming|, which passes --experimental-remote-streaming.
+    """
+
+    def __init__(self, binary: Path, root: Path, streaming: bool = True) -> None:
         self.binary = binary
         self.root = root
+        self.streaming = streaming
         self.port = free_port()
         self.log_path = root / "clementine.log"
         self.process: subprocess.Popen[bytes] | None = None
@@ -91,8 +96,11 @@ sink={sink}
             QT_QPA_PLATFORM="offscreen",
             DBUS_SESSION_BUS_ADDRESS="disabled:",
         )
+        args = [str(self.binary), "--log-levels", "*:3"]
+        if self.streaming:
+            args.append("--experimental-remote-streaming")
         self.process = subprocess.Popen(
-            [str(self.binary), "--log-levels", "*:3"],
+            args,
             env=env,
             stdout=self.log_path.open("wb"),
             stderr=subprocess.STDOUT,

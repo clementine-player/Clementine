@@ -13,8 +13,16 @@ recompiled whenever the `.proto` changes.
 
 ## Setting up Clementine
 
-In *Settings → Network Remote*, turn on *Use a network remote control* and
-*Allow playing on remote devices*. Note the port (5500 by default).
+Remote playback is a prototype, so it's only there when Clementine is started
+with a flag:
+
+```sh
+clementine --experimental-remote-streaming
+```
+
+Then in *Settings → Network Remote*, turn on *Use a network remote control* and
+*Allow playing on remote devices*; the second checkbox is hidden without the
+flag. Note the port (5500 by default).
 
 Connect using this machine's LAN address rather than `127.0.0.1`: with *Only
 allow connections from the local network* on, Clementine currently refuses

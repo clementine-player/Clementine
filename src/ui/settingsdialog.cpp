@@ -27,7 +27,6 @@
 #include "core/networkproxyfactory.h"
 #include "core/player.h"
 #include "engines/enginebase.h"
-#include "engines/enginerouter.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearchsettingspage.h"
 #include "globalshortcutssettingspage.h"
@@ -99,8 +98,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
     : QDialog(parent),
       app_(app),
       model_(app_->directory_model()),
-      gst_engine_(qobject_cast<EngineRouter*>(app_->player()->engine())
-                      ->local_engine()),
+      gst_engine_(app_->player()->gst_engine()),
       song_info_view_(nullptr),
       streams_(streams),
       global_search_(app_->global_search()),

@@ -63,11 +63,22 @@ def music(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     return tracks
 
 
-@pytest.fixture
-def clementine(tmp_path: Path) -> Iterator[Clementine]:
-    instance = Clementine(Path(os.environ["CLEMENTINE_BINARY"]), tmp_path / "profile")
+def _run(root: Path, streaming: bool) -> Iterator[Clementine]:
+    instance = Clementine(Path(os.environ["CLEMENTINE_BINARY"]), root, streaming)
     instance.start()
     yield instance
     instance.stop()
     # Shown by pytest only when the test failed.
     print(f"--- Clementine log ({instance.log_path}) ---\n{instance.log_tail()}")
+
+
+@pytest.fixture
+def clementine(tmp_path: Path) -> Iterator[Clementine]:
+    """Clementine with --experimental-remote-streaming."""
+    yield from _run(tmp_path / "profile", streaming=True)
+
+
+@pytest.fixture
+def clementine_without_streaming(tmp_path: Path) -> Iterator[Clementine]:
+    """Clementine as it runs without the flag, with the setting still on."""
+    yield from _run(tmp_path / "profile", streaming=False)

@@ -51,11 +51,22 @@ using std::shared_ptr;
 
 const char* Player::kSettingsGroup = "Player";
 
+namespace {
+
+EngineBase* CreateEngine(Application* app) {
+  GstEngine* local = new GstEngine(app);
+  // Remote playback routes the engine between outputs; see EngineRouter.
+  if (Application::RemoteStreamingEnabled()) return new EngineRouter(local);
+  return local;
+}
+
+}  // namespace
+
 Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
       lastfm_(nullptr),
-      engine_(new EngineRouter(new GstEngine(app_))),
+      engine_(CreateEngine(app_)),
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),
@@ -76,6 +87,13 @@ Player::Player(Application* app, QObject* parent)
 }
 
 Player::~Player() {}
+
+GstEngine* Player::gst_engine() const {
+  if (EngineRouter* router = qobject_cast<EngineRouter*>(engine_.get())) {
+    return router->local_engine();
+  }
+  return qobject_cast<GstEngine*>(engine_.get());
+}
 
 void Player::EngineInitialised() {
   // Starting the tagreader pool forks a worker process per thread. Doing that

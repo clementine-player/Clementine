@@ -40,6 +40,7 @@
 #include "playlist/playlistitem.h"
 
 class Application;
+class GstEngine;
 class MediaPlaybackRequest;
 class Scrobbler;
 
@@ -134,6 +135,9 @@ class Player : public PlayerInterface {
   void Init();
 
   EngineBase* engine() const { return engine_.get(); }
+  // The engine that plays on this computer, even when engine() routes to
+  // another output.
+  GstEngine* gst_engine() const;
   Engine::State GetState() const { return last_state_; }
   int GetVolume() const;
 
