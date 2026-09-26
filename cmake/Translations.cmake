@@ -18,6 +18,14 @@ macro(add_pot outfiles header pot)
     list(APPEND add_pot_sources ${_relative_filename})
   endforeach(_filename)
 
+  # Pass the sources in a file rather than on the command line, which on
+  # Windows is limited to 32767 characters and was nearly full. GENERATE only
+  # rewrites the file when the list changes, so the .pot isn't rebuilt on every
+  # cmake run.
+  set(add_pot_list ${CMAKE_CURRENT_BINARY_DIR}/pot-sources.txt)
+  string(REPLACE ";" "\n" add_pot_list_content "${add_pot_sources}")
+  file(GENERATE OUTPUT ${add_pot_list} CONTENT "${add_pot_list_content}\n")
+
   # Generate the .pot
   add_custom_command(
     OUTPUT ${pot}
@@ -25,9 +33,9 @@ macro(add_pot outfiles header pot)
     COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
         ${XGETTEXT_OPTIONS} -s -C --omit-header
         --output=${CMAKE_CURRENT_BINARY_DIR}/pot.temp
-        ${add_pot_sources}
+        --files-from=${add_pot_list}
     COMMAND cat ${header} ${CMAKE_CURRENT_BINARY_DIR}/pot.temp > ${pot}
-    DEPENDS ${add_pot_sources} ${header}
+    DEPENDS ${add_pot_sources} ${header} ${add_pot_list}
   )
 
   list(APPEND ${outfiles} ${pot})
