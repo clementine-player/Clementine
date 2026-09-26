@@ -87,17 +87,38 @@ void SplitMime(const QString& mime, QString* type, QString* codecs) {
 
 }  // namespace
 
+const int RendererCaps::kMaxFormats = 32;
+const int RendererCaps::kMaxSampleRates = 32;
+const int RendererCaps::kMaxMimeTypeLength = 128;
+const int RendererCaps::kMaxSampleRateHz = 1536000;
+const int RendererCaps::kMaxChannels = 64;
+
 RendererCaps RendererCaps::FromProto(
     const cpb::remote::RendererCapabilities& pb) {
   RendererCaps caps;
   for (const cpb::remote::AudioFormat& pb_format : pb.formats()) {
+    if (caps.formats.size() >= kMaxFormats) break;
+    if (pb_format.mime_type().empty() ||
+        pb_format.mime_type().size() > size_t(kMaxMimeTypeLength)) {
+      continue;
+    }
+
     Format format;
     format.mime_type = QString::fromStdString(pb_format.mime_type());
-    for (int hz : pb_format.sample_rates_hz()) format.sample_rates_hz << hz;
-    format.max_channels = pb_format.max_channels();
+    for (int hz : pb_format.sample_rates_hz()) {
+      if (format.sample_rates_hz.size() >= kMaxSampleRates) break;
+      if (hz > 0 && hz <= kMaxSampleRateHz) format.sample_rates_hz << hz;
+    }
+    // An empty list means any rate, so a format whose rates were all invalid
+    // must not become one that accepts everything.
+    if (pb_format.sample_rates_hz_size() > 0 &&
+        format.sample_rates_hz.isEmpty()) {
+      continue;
+    }
+    format.max_channels = qBound(0, pb_format.max_channels(), kMaxChannels);
     caps.formats << format;
   }
-  caps.max_bitrate_kbps = pb.max_bitrate_kbps();
+  caps.max_bitrate_kbps = qMax(0, pb.max_bitrate_kbps());
   for (int feature : pb.features()) {
     switch (feature) {
       case cpb::remote::RENDERER_FEATURE_GAPLESS:

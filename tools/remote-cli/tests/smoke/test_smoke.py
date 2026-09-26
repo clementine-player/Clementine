@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import functools
 import socket
 from collections.abc import Callable, Coroutine
@@ -300,3 +301,117 @@ async def test_media_urls_are_guarded(
         with _connect_from(HOST, clementine.port) as garbage:
             garbage.sendall(b"\x7fhello\r\n\r\n")
             assert _read_all(garbage) == b""
+
+
+def _status_line(sock: socket.socket) -> bytes:
+    """Reads just the first line of a response, leaving the rest unread."""
+    line = b""
+    while not line.endswith(b"\r\n"):
+        chunk = sock.recv(1)
+        if not chunk:
+            break
+        line += chunk
+    return line.strip()
+
+
+@run_async
+async def test_pipelines_per_renderer_are_limited(
+    clementine: Clementine, music: dict[str, Path]
+) -> None:
+    async with (
+        Controller(clementine.port) as controller,
+        TestRenderer(clementine.port, formats=["audio/mpeg"]) as renderer,
+    ):
+        await renderer.take_over(controller)
+        await controller.add(music["ten-minutes.flac"])
+        item = (await renderer.wait(Loaded)).item
+        assert item.mode == pb.STREAM_MODE_PIPELINE
+        await renderer.fetched(item.url)
+        await asyncio.sleep(0.5)
+
+        path = httpx.URL(item.url).path
+        request = f"GET {path} HTTP/1.1\r\nHost: x\r\n\r\n".encode()
+        held: list[socket.socket] = []
+        try:
+            statuses = []
+            for _ in range(3):
+                sock = _connect_from(HOST, clementine.port)
+                held.append(sock)
+                sock.sendall(request)
+                statuses.append(_status_line(sock))
+            # Two pipelines at once, and the rest are refused until one ends.
+            assert statuses[:2] == [b"HTTP/1.1 200 OK"] * 2
+            assert statuses[2] == b"HTTP/1.1 429 Too Many Requests"
+
+            held.pop(0).close()
+            await asyncio.sleep(1)
+            with _connect_from(HOST, clementine.port) as again:
+                again.sendall(request)
+                assert _status_line(again) == b"HTTP/1.1 200 OK"
+        finally:
+            for sock in held:
+                sock.close()
+
+
+@run_async
+async def test_start_positions_are_clamped(
+    clementine: Clementine, music: dict[str, Path], tmp_path: Path
+) -> None:
+    async with (
+        Controller(clementine.port) as controller,
+        TestRenderer(clementine.port, formats=["audio/mpeg"]) as renderer,
+    ):
+        await renderer.take_over(controller)
+        await controller.add(music["tone.flac"])
+        item = (await renderer.wait(Loaded)).item
+
+        async with httpx.AsyncClient() as client:
+            for start in ("-5000", "99999999999999999999", "banana"):
+                response = await client.get(f"{item.url}?t={start}")
+                assert response.status_code == 200, start
+                assert decoded_seconds(response.content, tmp_path) == pytest.approx(
+                    3.0, abs=LENGTH_TOLERANCE
+                ), start
+            # Past the end: nothing left to play, but no overflow either.
+            past = await client.get(f"{item.url}?t={2**63 - 1}")
+            assert past.status_code == 200
+            assert len(past.content) < 10_000
+
+
+@run_async
+async def test_a_renderer_id_cant_be_taken_from_another_address(
+    clementine: Clementine, music: dict[str, Path]
+) -> None:
+    try:
+        _connect_from("127.0.0.2", clementine.port).close()
+    except OSError:
+        pytest.skip("can't connect from 127.0.0.2 here")
+
+    async with (
+        Controller(clementine.port) as controller,
+        TestRenderer(clementine.port, renderer_id="shared") as original,
+    ):
+        await original.take_over(controller)
+        async with TestRenderer(
+            clementine.port, renderer_id="shared", local_address="127.0.0.2"
+        ) as impostor:
+            await asyncio.sleep(1)
+            await controller.add(music["tone.mp3"])
+            await original.wait(Loaded)
+            assert impostor.all(Loaded) == []
+            ids = [o.output_id for o in controller.outputs]
+            assert ids.count("shared") == 1
+
+
+@run_async
+async def test_oversized_request_heads_are_answered_once(
+    clementine: Clementine,
+) -> None:
+    with _connect_from(HOST, clementine.port) as sock:
+        sock.sendall(b"GET /" + b"a" * 3000)
+        for _ in range(3):
+            await asyncio.sleep(0.2)
+            with contextlib.suppress(OSError):
+                sock.sendall(b"a" * 3000)
+        response = _read_all(sock)
+    assert response.count(b"HTTP/1.1 431") == 1

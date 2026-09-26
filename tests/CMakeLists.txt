@@ -16,6 +16,8 @@ include_directories(${CMAKE_SOURCE_DIR}/ext/clementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 

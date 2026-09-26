@@ -46,9 +46,11 @@ QString PipelineResponder::Description(const StreamPlan& plan) {
       .arg(kMaxQueuedBuffers);
 }
 
-PipelineResponder::PipelineResponder(QTcpSocket* socket, const StreamItem& item,
-                                     qint64 start_ms, bool head_only)
-    : socket_(socket),
+PipelineResponder::PipelineResponder(QTcpSocket* socket,
+                                     const QByteArray& token,
+                                     const StreamItem& item, qint64 start_ms,
+                                     bool head_only, QObject* parent)
+    : StreamResponder(socket, token, Pipeline, parent),
       item_(item),
       start_nanosec_(item.plan.beginning_nanosec + start_ms * kNsecPerMsec),
       stop_nanosec_(-1),
@@ -58,9 +60,6 @@ PipelineResponder::PipelineResponder(QTcpSocket* socket, const StreamItem& item,
       waiting_to_seek_(false),
       head_written_(false),
       finished_(false) {
-  socket_->setParent(this);
-  connect(socket_, SIGNAL(disconnected()), SLOT(deleteLater()));
-
   if (head_only) {
     WriteHead();
     socket_->disconnectFromHost();

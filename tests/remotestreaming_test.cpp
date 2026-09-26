@@ -20,6 +20,7 @@
 #include "networkremote/streaming/mediahttpserver.h"
 #include "networkremote/streaming/pipelineresponder.h"
 #include "networkremote/streaming/streamplanner.h"
+#include "remotecontrolmessages.pb.h"
 #include "test_utils.h"
 
 namespace {
@@ -67,6 +68,52 @@ TEST(RendererCapsTest, ContainerWithoutCodecsAcceptsAnyCodec) {
   EXPECT_TRUE(caps.Accepts("audio/ogg; codecs=opus"));
   EXPECT_TRUE(caps.Accepts("audio/ogg; codecs=vorbis"));
   EXPECT_FALSE(caps.Accepts("audio/mpeg"));
+}
+
+TEST(RendererCapsTest, FromProtoDropsWhatsOutOfRange) {
+  cpb::remote::RendererCapabilities pb;
+  for (int i = 0; i < RendererCaps::kMaxFormats + 10; ++i) {
+    pb.add_formats()->set_mime_type("audio/mpeg");
+  }
+  cpb::remote::AudioFormat* first = pb.mutable_formats(0);
+  first->add_sample_rates_hz(-44100);
+  first->add_sample_rates_hz(0);
+  first->add_sample_rates_hz(48000);
+  first->add_sample_rates_hz(RendererCaps::kMaxSampleRateHz + 1);
+  for (int i = 0; i < RendererCaps::kMaxSampleRates + 10; ++i) {
+    first->add_sample_rates_hz(8000 + i);
+  }
+  first->set_max_channels(-2);
+  pb.mutable_formats(1)->set_max_channels(1000);
+  pb.set_max_bitrate_kbps(-5);
+
+  RendererCaps caps = RendererCaps::FromProto(pb);
+  ASSERT_EQ(RendererCaps::kMaxFormats, caps.formats.size());
+  const QList<int>& rates = caps.formats[0].sample_rates_hz;
+  EXPECT_EQ(RendererCaps::kMaxSampleRates, rates.size());
+  EXPECT_EQ(48000, rates[0]);
+  for (int hz : rates) {
+    EXPECT_GT(hz, 0);
+    EXPECT_LE(hz, RendererCaps::kMaxSampleRateHz);
+  }
+  EXPECT_EQ(0, caps.formats[0].max_channels);
+  EXPECT_EQ(RendererCaps::kMaxChannels, caps.formats[1].max_channels);
+  EXPECT_EQ(0, caps.max_bitrate_kbps);
+}
+
+TEST(RendererCapsTest, FromProtoDropsFormatsWithOnlyInvalidRates) {
+  // An empty list would mean "any rate", which is the opposite of what the
+  // renderer sent.
+  cpb::remote::RendererCapabilities pb;
+  cpb::remote::AudioFormat* bad = pb.add_formats();
+  bad->set_mime_type("audio/flac");
+  bad->add_sample_rates_hz(-1);
+  pb.add_formats()->set_mime_type(std::string(1000, 'x'));
+  pb.add_formats()->set_mime_type("audio/mpeg");
+
+  RendererCaps caps = RendererCaps::FromProto(pb);
+  ASSERT_EQ(1, caps.formats.size());
+  EXPECT_EQ("audio/mpeg", caps.formats[0].mime_type);
 }
 
 TEST(RendererCapsTest, CodecsMustMatch) {

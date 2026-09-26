@@ -26,6 +26,13 @@
 
 const char* RendererRegistry::kLocalOutputId = "local";
 
+namespace {
+// Client-chosen strings kept for as long as the renderer is connected, and
+// shown in output pickers.
+const int kMaxRendererIdLength = 128;
+const int kMaxDisplayNameLength = 64;
+}  // namespace
+
 RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
     : app_(app), router_(router), items_(new StreamItemTable) {
   connect(router_, SIGNAL(OutputsChanged()), SLOT(RouterOutputsChanged()));
@@ -46,25 +53,45 @@ void RendererRegistry::RegisterRenderer(int client_id, const QByteArray& data,
   if (!caps.ParseFromArray(data.constData(), data.size())) return;
 
   const QString id = QString::fromStdString(caps.renderer_id());
-  if (id.isEmpty() || id == kLocalOutputId) {
+  if (id.isEmpty() || id == kLocalOutputId ||
+      id.size() > kMaxRendererIdLength) {
     qLog(Warning) << "Ignoring a renderer without a usable renderer_id";
     return;
   }
-  if (!router_) return;
-
-  // A renderer that reconnects replaces its old registration.
-  for (RemoteEngine* engine : engines_) {
-    if (engine->renderer_id() == id || engine->client_id() == client_id) {
-      Remove(engine);
-      break;
-    }
+  if (caps.display_name().size() > kMaxDisplayNameLength) {
+    caps.set_display_name(QString::fromStdString(caps.display_name())
+                              .left(kMaxDisplayNameLength)
+                              .toStdString());
   }
+  if (!router_) return;
 
   RendererEndpoint endpoint;
   endpoint.client_id = client_id;
   endpoint.local_address = QHostAddress(local_address);
   endpoint.local_port = local_port;
   endpoint.peer_address = QHostAddress(peer_address);
+
+  for (RemoteEngine* engine : engines_) {
+    if (engine->client_id() == client_id) {
+      Remove(engine);
+      break;
+    }
+    if (engine->renderer_id() != id) continue;
+
+    // A renderer reconnecting from the same address replaces its old
+    // registration, which may not have noticed its connection drop yet.
+    // Another device can't take over its id, and with it the SET_OUTPUT
+    // requests meant for it.
+    if (NormalisedAddress(engine->peer_address()) !=
+        NormalisedAddress(endpoint.peer_address)) {
+      qLog(Warning) << "Renderer id" << id << "is already used by"
+                    << engine->peer_address().toString()
+                    << "- ignoring the one from" << peer_address;
+      return;
+    }
+    Remove(engine);
+    break;
+  }
 
   RemoteEngine* engine =
       new RemoteEngine(app_, endpoint, caps, items_.get(), this);
