@@ -32,6 +32,9 @@ class NetworkRemote : public QObject {
   static QList<QHostAddress> ListenAddresses(bool all,
                                              const QStringList& chosen);
 
+  // Whether a client at |address| counts as on the local network.
+  static bool IpIsPrivate(const QHostAddress& address);
+
  signals:
   void AddToPlaylistSignal(QMimeData* data);
   void SetCurrentPlaylist(int id);
@@ -63,7 +66,6 @@ class NetworkRemote : public QObject {
   void StopServer();
   void ReadSettings();
   void CreateRemoteClient(QTcpSocket* client_socket);
-  bool IpIsPrivate(const QHostAddress& address);
 };
 
 #endif  // NETWORKREMOTE_H
