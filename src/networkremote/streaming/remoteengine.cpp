@@ -435,7 +435,10 @@ void RemoteEngine::HandleError(const cpb::remote::RendererError& error) {
   // The renderer said it could play the original but couldn't: try once
   // more with the pipeline encoding to something it certainly asked for.
   if (!current_retried_) {
-    const qint64 position_ms = position_nanosec() / kNsecPerMsec;
+    // If it never started, retry from where it was loaded; the interpolated
+    // position has been counting since the load.
+    const qint64 position_ms =
+        valid_emitted_ ? position_nanosec() / kNsecPerMsec : position_ms_;
     StreamItem retry = MakeItem(current_.req, current_.song, true);
     if (retry.plan.mode != StreamPlan::Unplayable) {
       current_ = retry;

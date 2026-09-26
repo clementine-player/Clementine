@@ -207,7 +207,7 @@ async def cmd_render(args) -> None:
         f" accepting {'; '.join(describe(f) for f in caps.formats)}"
     )
 
-    renderer = Renderer(conn, args.player, args.gapless, log)
+    renderer = Renderer(conn, args.player, args.gapless, log, args.fail_format)
     if args.take_over:
         await conn.send(
             pb.SET_OUTPUT,
@@ -270,6 +270,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="a format we can play, as a MIME type with optional rates= and"
         ' channels= limits, e.g. "audio/flac; rates=44100,48000; channels=2".'
         f" Repeat for more (default: {', '.join(DEFAULT_FORMATS)})",
+    )
+    p.add_argument(
+        "--fail-format",
+        action="append",
+        type=parse_format,
+        metavar="FORMAT",
+        help="report an error instead of playing items in this format, as if"
+        " the player couldn't decode them; Clementine should retry them"
+        " encoded to another format. For testing. Repeat for more",
     )
     p.add_argument("--max-bitrate", type=int, help="in kbps")
     p.add_argument(

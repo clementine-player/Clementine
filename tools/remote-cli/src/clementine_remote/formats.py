@@ -51,6 +51,27 @@ def parse_format(text: str) -> pb.AudioFormat:
     return audio_format
 
 
+def _split_mime(mime_type: str) -> tuple[str, str]:
+    """'audio/ogg; codecs=opus' -> ('audio/ogg', 'opus')"""
+    parts = [part.strip() for part in mime_type.split(";")]
+    codecs = ""
+    for param in parts[1:]:
+        name, _, value = param.partition("=")
+        if name.strip().lower() == "codecs":
+            codecs = value.strip().strip('"').lower()
+    return parts[0].lower(), codecs
+
+
+def matches(audio_format: pb.AudioFormat, mime_type: str) -> bool:
+    """Whether |audio_format| covers |mime_type|, as Clementine decides it.
+
+    An entry without codecs= covers any codec in that container.
+    """
+    want_type, want_codecs = _split_mime(mime_type)
+    have_type, have_codecs = _split_mime(audio_format.mime_type)
+    return have_type == want_type and (not have_codecs or have_codecs == want_codecs)
+
+
 def describe(audio_format: pb.AudioFormat) -> str:
     text = audio_format.mime_type
     if audio_format.sample_rates_hz:

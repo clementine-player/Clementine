@@ -6,6 +6,7 @@ import asyncio
 import time
 
 from .connection import Connection
+from .formats import matches
 from .players import PLAYERS, Player
 from .proto import pb
 
@@ -40,10 +41,20 @@ class Clock:
 
 
 class Renderer:
-    def __init__(self, conn: Connection, player_name: str, gapless: bool, log):
+    def __init__(
+        self,
+        conn: Connection,
+        player_name: str,
+        gapless: bool,
+        log,
+        fail_formats: list[pb.AudioFormat] | None = None,
+    ):
         self.conn = conn
         self.log = log
         self.gapless = gapless
+        # Items in these formats are refused as if the player couldn't play
+        # them, to exercise Clementine's retry through its pipeline.
+        self.fail_formats = fail_formats or []
         self.player: Player = PLAYERS[player_name](log, self._ended, self._error)
         self.item: pb.RenderItem | None = None
         self.preloaded: pb.RenderItem | None = None
@@ -98,16 +109,18 @@ class Renderer:
         self.log(f"item {ended.item_id} ended")
 
         if self.preloaded:
-            # Start the next item straight away, then tell Clementine; it
-            # recognises the item it preloaded and doesn't reload it.
+            # Move on to the preloaded item. Clementine recognises it and
+            # doesn't reload it. It hears about the switch first, so an error
+            # starting the new item is about the item it now considers
+            # current.
             self.item, self.preloaded = self.preloaded, None
             self.clock.set(0, True)
-            await self._start_player(self.item, 0, True)
             await self.conn.send(
                 pb.RENDERER_TRACK_ENDED,
                 renderer_track_ended=pb.RendererTrackEnded(item_id=ended.item_id),
             )
-            await self.send_status()
+            if await self._start_player(self.item, 0, True):
+                await self.send_status()
             return
 
         self.clock.set(0, False)
@@ -132,9 +145,16 @@ class Renderer:
 
     async def _start_player(
         self, item: pb.RenderItem, start_ms: int, playing: bool
-    ) -> None:
+    ) -> bool:
+        """Starts |item|, or reports an error if it's in a --fail-format."""
+        if any(matches(f, item.mime_type) for f in self.fail_formats):
+            self.clock.set(start_ms, False)
+            await self.player.stop()
+            await self._error(f"refusing {item.mime_type} (--fail-format)")
+            return False
         byte_range = item.seek_method == pb.SEEK_METHOD_BYTE_RANGE
         await self.player.load(item.url, start_ms, playing, byte_range, item.length_ms)
+        return True
 
     def describe(self, item: pb.RenderItem) -> str:
         song = item.song
@@ -157,7 +177,8 @@ class Renderer:
             )
             self.log(f"  {load.item.url}")
             self.clock.set(load.start_ms, playing)
-            await self._start_player(load.item, load.start_ms, playing)
+            if not await self._start_player(load.item, load.start_ms, playing):
+                return
             await self.set_state(
                 pb.RENDERER_STATE_PLAYING if playing else pb.RENDERER_STATE_PAUSED
             )
