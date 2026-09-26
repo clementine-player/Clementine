@@ -899,3 +899,110 @@ handshake per seek, which is negligible.
 **When to revisit.** If TLS is added later (§5.0), HTTP/2 comes almost for
 free through ALPN, as long as the TLS stack already provides it. That is the
 point to reconsider, although the gain for this traffic would still be small.
+
+## Appendix B: a web client
+
+This appendix isn't part of the plan. It records what a browser-based
+remote would involve, so the choices above don't rule it out.
+
+### Transport
+
+Browsers can't open raw TCP, so a web client needs a WebSocket. It fits the
+shared port (§5.0) without a new port:
+
+- The HTTP handler reads the request line and headers with `peek`, without
+  consuming them, and routes by path: `/api/ws` to a WebSocket, `/s/...` to
+  media, `/` to the web app.
+- For `/api/ws` it hands the untouched socket to
+  `QWebSocketServer::handleConnection(QTcpSocket*)`, which performs the
+  handshake. This adds a dependency on `Qt6::WebSockets`.
+- Each WebSocket message carries one existing `cpb::remote::Message`.
+  WebSocket already delimits messages, so the 4-byte length prefix is
+  dropped. The browser decodes it with a proto2-capable library such as
+  protobuf-es.
+- `RemoteClient` gets a transport interface with two implementations, the
+  existing framed TCP and WebSocket. `IncomingDataParser`,
+  `OutgoingDataCreator`, authentication, keep-alive and the renderer
+  messages don't change.
+
+### Serving the app
+
+Clementine has to serve the web app itself, from Qt resources at `/`:
+
+- **Mixed content.** A page served over HTTPS (for example a hosted copy on
+  GitHub Pages) isn't allowed to open a plain `ws://` connection, so a hosted
+  client would need TLS on Clementine first.
+- **Same origin.** Served from Clementine, the app shares an origin with the
+  WebSocket and media URLs. No CORS is needed, and the Origin check below is
+  a simple equality test.
+- **Versions.** The app always matches the server's protocol version.
+- **Discovery.** Browsers can't do mDNS. The user types `host:5500`, or scans
+  a QR code shown on the remote settings page.
+
+### The browser as a renderer
+
+An `<audio>` element can play both delivery modes: Direct with Range
+requests, and the Pipeline's chunked responses. `canPlayType()` fills in
+`RendererCapabilities.mime_types`. This gives "Play on this browser" with
+nothing to install, and is the easiest way to test streaming end to end.
+Browsers bring their own limits, though:
+
+- **Autoplay.** Browsers block audio that starts without a user gesture on
+  the page. A `RENDER_LOAD` with `LOAD_START_STATE_PLAYING` sent from another
+  controller fails until the user has interacted with the browser tab. The
+  page must unlock playback on the first click (the "Play on this browser"
+  button does that), and report `RENDERER_ERROR_SCOPE_TRANSIENT` with a clear
+  message when a play attempt is refused.
+- **No gapless playback.** `<audio>` leaves a gap between tracks, so the
+  renderer must not declare `RENDERER_FEATURE_GAPLESS`. Media Source
+  Extensions or Web Audio could close the gap later, at a cost in
+  complexity.
+- **Background tabs and phones.** Browsers throttle timers in background
+  tabs (less so while audio plays), which can delay the 1 Hz
+  `RendererStatus`. Mobile browsers may suspend a page entirely when it goes
+  to the background, which drops the connection. `RemoteEngine` must
+  tolerate late status reports (the position is interpolated, §4.2), and a
+  dropped renderer falls back to local output as for any other renderer.
+- **Formats vary by browser.** Safari's support for Ogg and Opus in
+  particular differs from Chrome's and Firefox's. Capabilities come from
+  `canPlayType()` at runtime, never from a fixed list per browser.
+
+### Security
+
+Browsers change the threat model. Any page open in a browser on the LAN can
+open `ws://192.168.1.10:5500`: WebSockets aren't bound by the same-origin
+policy, and the connection comes from a private address, so
+`only_non_public_ip` lets it through. So:
+
+- **Check Origin.** Accept WebSocket upgrades only from Clementine's own
+  origin.
+- **Check Host.** Accept only Host headers that name one of Clementine's own
+  addresses or host names, to block DNS rebinding.
+- **Rate-limit the auth code.** A script could otherwise try every five-digit
+  code in minutes. Limit failed attempts per address, with an increasing
+  delay.
+- **Keep tokens out of URLs.** The auth code is exchanged for the session
+  token from §9. It is sent in the first WebSocket message and kept in
+  `sessionStorage`. Media URLs carry it by design (§5), so they must not be
+  logged, and the page sets `Referrer-Policy: no-referrer`.
+- The same checks also protect the media endpoints, because a malicious page
+  could otherwise probe them too.
+
+### Existing messages that don't suit a browser
+
+The web client can reuse most of the protocol as it is, but not all of it:
+
+- **`GET_LIBRARY`** sends the whole library as a SQLite database in chunks.
+  A browser could read it only by loading SQLite compiled to WebAssembly,
+  and a large library is a big download to a phone. A web client would want
+  paged library queries (artists, albums, search) instead.
+- **`DOWNLOAD_SONGS`** sends files as `SONG_FILE_CHUNK` messages, which a
+  browser would have to reassemble in memory. Downloads should instead be
+  plain HTTP responses from the media endpoint, which the browser saves
+  natively.
+- **Album art** arrives as bytes inside `SongMetadata.art`. That works, but
+  an image URL on the same server would let the browser cache art.
+
+Those are the pieces to design before a web client is practical. The
+transport itself is the small part.
+
