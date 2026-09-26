@@ -1,7 +1,9 @@
 #ifndef REMOTECLIENT_H
 #define REMOTECLIENT_H
 
+#include <QHostAddress>
 #include <QTcpSocket>
+#include <atomic>
 
 #include "core/application.h"
 #include "remotecontrolmessages.pb.h"
@@ -27,11 +29,20 @@ class RemoteClient : public QObject {
   }
   bool allow_downloads() const { return allow_downloads_; }
 
+  // Unique for the life of the process, so other threads can refer to a
+  // client without holding a pointer to it.
+  int id() const { return id_; }
+  QHostAddress local_address() const { return client_->localAddress(); }
+  quint16 local_port() const { return client_->localPort(); }
+  QHostAddress peer_address() const { return client_->peerAddress(); }
+
  private slots:
   void IncomingData();
+  void SocketDisconnected();
 
  signals:
   void Parse(const cpb::remote::Message& msg);
+  void Disconnected(int id);
 
  private:
   void ParseMessage(const QByteArray& data);
@@ -39,7 +50,10 @@ class RemoteClient : public QObject {
   // Sends data to client without check if authenticated
   void SendDataToClient(cpb::remote::Message* msg);
 
+  static std::atomic<int> sNextId;
+
   Application* app_;
+  const int id_;
 
   bool use_auth_code_;
   int auth_code_;

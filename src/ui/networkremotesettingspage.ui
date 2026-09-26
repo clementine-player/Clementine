@@ -154,6 +154,16 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="allow_streaming">
+        <property name="toolTip">
+         <string>Let a connected device act as the speaker: Clementine keeps the playlist and streams the audio to it.</string>
+        </property>
+        <property name="text">
+         <string>Allow playing on remote devices</string>
+        </property>
+       </widget>
+      </item>
       <item row="7" column="0" colspan="2">
        <widget class="QGroupBox" name="download_settings_container">
         <property name="enabled">

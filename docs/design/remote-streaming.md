@@ -1,6 +1,6 @@
 # Design: streaming to remote devices through the network remote
 
-Status: proposal
+Status: proposal, with a prototype (see §14)
 Scope: `src/networkremote`, `src/engines`, `src/core/player`,
 `ext/libclementine-remote/remotecontrolmessages.proto`
 
@@ -177,7 +177,7 @@ friends return false) unless it is using live-mix mode (§5.4).
 Losing the renderer (socket closed, or keep-alive timeout reusing
 `OutgoingDataCreator`'s keep-alive) makes the router fall back to local
 output, **paused** at the last reported position. Audio that suddenly starts
-on the computer would be a bad surprise. `OUTPUT_CHANGED` tells controllers
+on the computer would be a bad surprise. `OUTPUTS` tells controllers
 what happened.
 
 ### 4.3 `StreamPlanner`: choosing stream or restream
@@ -448,9 +448,8 @@ alone, and new code doesn't reuse them where a new enum fits better (see
 enum MsgType {
   // ...existing values...
 
-  // Controller/renderer -> server
-  REGISTER_RENDERER     = 300;
-  UNREGISTER_RENDERER   = 301;
+  // Renderer -> server. A renderer registers by setting
+  // RequestConnect.renderer, and unregisters by disconnecting.
   RENDERER_STATUS       = 302;  // periodic (1 Hz while playing) + on change
   RENDERER_TRACK_ENDED  = 303;
   RENDERER_ERROR        = 304;
@@ -466,9 +465,9 @@ enum MsgType {
   RENDER_SEEK           = 325;
   RENDER_SET_VOLUME     = 326;
 
-  // Server -> all clients
+  // Server -> all clients, whenever an output is added or removed or the
+  // active one changes. Also the reply to REQUEST_OUTPUTS.
   OUTPUTS               = 340;
-  OUTPUT_CHANGED        = 341;
 }
 
 // Optional abilities of the server, sent in ResponseClementineInfo.
@@ -537,7 +536,7 @@ message Output {
   optional OutputState state = 3;
 }
 
-// Every output, sent with OUTPUTS and OUTPUT_CHANGED.
+// Every output, sent with OUTPUTS.
 message ResponseOutputs {
   repeated Output outputs = 1;
 }
@@ -594,6 +593,8 @@ enum LoadStartState {
 // Load an item now, replacing whatever is playing.
 message RequestRenderLoad {
   optional RenderItem item = 1;
+  // Where to start. For SEEK_METHOD_NEW_URL items, item.url already starts
+  // there; for SEEK_METHOD_BYTE_RANGE items the renderer seeks to it.
   optional int64 start_ms = 2;
   optional LoadStartState start_state = 3;
 }
@@ -707,7 +708,7 @@ src/engines/enginerouter.{h,cpp}           EngineRouter (Engine::Base)
 src/engines/gstpipelinehelpers.{h,cpp}     source setup (headers, user agent) and RG/EQ/balance elements, shared by GstEnginePipeline and GstStreamPipeline
 src/networkremote/streaming/
     remoteengine.{h,cpp}                   RemoteEngine (Engine::Base)
-    rendererregistry.{h,cpp}               renderer_id -> RemoteEngine; owns OUTPUTS/OUTPUT_CHANGED
+    rendererregistry.{h,cpp}               renderer_id -> RemoteEngine; owns OUTPUTS
     streamplanner.{h,cpp}                  pure planning logic
     protocolsniffer.{h,cpp}                first-byte routing of accepted sockets (§5.0)
     mediahttpserver.{h,cpp}                HTTP request parsing, token check, dispatch
@@ -785,12 +786,12 @@ Changes to existing files:
 
 | Case | Behaviour |
 |------|-----------|
-| Renderer disconnects mid-track | Fall back to local, paused at the last position. Send `OUTPUT_CHANGED` |
+| Renderer disconnects mid-track | Fall back to local, paused at the last position. Send `OUTPUTS` |
 | Renderer reports a track-level error | `Error` + `InvalidMediaRequested`. `Player` skips to the next track, as it does locally |
 | The same track fails Direct because the codec was advertised but doesn't actually decode | Renderer sends `RENDERER_ERROR` with `RENDERER_ERROR_SCOPE_ITEM`. `RemoteEngine` tries the same item once more through the Pipeline with Encode, before reporting an error |
 | Stream metadata changes (radio) | The Pipeline emits the tags into `MetaData`, so titles update as they do for local playback |
 | Clementine quits while playing remotely | `RENDER_STOP`, then the usual `DISCONNECT{Server_Shutdown}` |
-| Two controllers choose different outputs | Last write wins. Everyone gets `OUTPUT_CHANGED` |
+| Two controllers choose different outputs | Last write wins. Everyone gets `OUTPUTS` |
 | Hand-off during Pipeline playback | New `RENDER_LOAD` with `start_ms`. The server makes a fresh pipeline seeked to that point |
 | Stop after current, repeat, shuffle, queue | Unchanged. They are `Player`/`PlaylistSequence` logic above the engine |
 | Scrobbling / play counts | Unchanged. They use `Player`'s position and state signals, which the router drives |
@@ -851,6 +852,43 @@ Changes to existing files:
    on mobile? This design keeps the renderer passive. That is simpler and
    keeps one source of truth, at the cost of a gap if the control connection
    is down exactly when a track ends. `RENDER_PRELOAD` reduces the risk.
+
+## 14. Prototype
+
+A prototype of Phases 1 and 2 is on this branch, with a Python command line
+client in `tools/remote-cli` that can act as a renderer or a controller.
+Where it differs from the design above:
+
+- **Threads.** `NetworkRemote`, its `RemoteClient`s and `MediaHttpServer`
+  run on the network remote's own thread, while the `Player` and its
+  engines run on the main thread. `RendererRegistry` and the
+  `RemoteEngine`s live on the main thread and talk to the network thread
+  through queued signals carrying serialized messages and client ids.
+  `StreamItemTable` (mutex-guarded) is how the HTTP side sees which items a
+  token may fetch.
+- **Registration.** There are no `REGISTER_RENDERER`/`UNREGISTER_RENDERER`
+  or `OUTPUT_CHANGED` messages: a client registers with
+  `RequestConnect.renderer`, unregisters by disconnecting, and `OUTPUTS` is
+  broadcast on every change.
+- **HTTP.** One request per connection (`Connection: close`) rather than
+  keep-alive. HTTP/2 clients get `400`.
+- **Encoders.** The Pipeline's encoders are a short fixed list in
+  `StreamPlanner` (Opus in Ogg, MP3, Vorbis in Ogg), not the transcoder
+  presets. Passthrough is only chosen when the song's file type is known,
+  which internet services often don't set.
+- **Not done yet.** Applying EQ and ReplayGain on remote output, the output
+  picker in Clementine's own window, the Pipeline's tee into the
+  analyzer, and resource limits per session. Handing paused playback to the
+  local engine plays for a moment before it pauses, because `GstEngine` can't
+  load paused.
+
+Tested end to end against a Clementine with an isolated configuration:
+Direct streaming of MP3, FLAC and Ogg with Range seeks; Pipeline encoding
+FLAC and Vorbis to MP3, with `?t=` seeks; the remux descriptions for MP3,
+FLAC, Vorbis, Opus and AAC (checked with `gst-launch`); pause and resume;
+moving playback to the local output and back at the same position; falling
+back to local, paused, when the renderer disconnects; gapless preloading;
+and the `ffplay` renderer.
 
 ## Appendix A: HTTP/2
 
@@ -1005,4 +1043,3 @@ The web client can reuse most of the protocol as it is, but not all of it:
 
 Those are the pieces to design before a web client is practical. The
 transport itself is the small part.
-

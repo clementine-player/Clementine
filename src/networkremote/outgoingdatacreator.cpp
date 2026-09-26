@@ -190,6 +190,9 @@ void OutgoingDataCreator::SendClementineInfo() {
                            QCoreApplication::applicationVersion());
   info->set_version(version.toLatin1().toStdString());
   info->set_allow_downloads(allow_downloads_);
+  if (streaming_enabled_) {
+    info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
+  }
   SendDataToClients(&msg);
 }
 

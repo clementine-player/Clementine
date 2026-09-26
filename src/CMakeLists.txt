@@ -149,6 +149,7 @@ set(SOURCES
 
   engines/devicefinder.cpp
   engines/enginebase.cpp
+  engines/enginerouter.cpp
   engines/gstengine.cpp
   engines/gstenginedebug.cpp
   engines/gstenginepipeline.cpp
@@ -251,6 +252,13 @@ set(SOURCES
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
   networkremote/songsender.cpp
+  networkremote/streaming/directresponder.cpp
+  networkremote/streaming/mediahttpserver.cpp
+  networkremote/streaming/pipelineresponder.cpp
+  networkremote/streaming/remoteengine.cpp
+  networkremote/streaming/rendererregistry.cpp
+  networkremote/streaming/streamitemtable.cpp
+  networkremote/streaming/streamplanner.cpp
   networkremote/zeroconf.cpp
 
   playlist/dbplaylistitem.cpp
@@ -495,6 +503,7 @@ set(HEADERS
   devices/deviceinfo.h
 
   engines/enginebase.h
+  engines/enginerouter.h
   engines/gstengine.h
   engines/gstenginedebug.h
   engines/gstenginepipeline.h
@@ -578,6 +587,11 @@ set(HEADERS
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
   networkremote/songsender.h
+  networkremote/streaming/directresponder.h
+  networkremote/streaming/mediahttpserver.h
+  networkremote/streaming/pipelineresponder.h
+  networkremote/streaming/remoteengine.h
+  networkremote/streaming/rendererregistry.h
 
   playlist/dbplaylistitem.h
   playlist/dynamicplaylistcontrols.h

@@ -18,6 +18,7 @@ class IncomingDataParser : public QObject {
   void SetRemoteRootFiles(const QString& files_root_folder) {
     files_root_folder_ = files_root_folder;
   }
+  void SetStreamingEnabled(bool enabled) { streaming_enabled_ = enabled; }
 
  public slots:
   void Parse(const cpb::remote::Message& msg);
@@ -69,11 +70,19 @@ class IncomingDataParser : public QObject {
   void AddToPlaylistSignal(QMimeData* data);
   void SetCurrentPlaylist(int id);
 
+  // Remote playback. These cross to the main thread, so they carry
+  // serialized messages and client ids.
+  void RendererConnected(int client_id, const QByteArray& caps,
+                         const QString& local_address, quint16 local_port,
+                         const QString& peer_address);
+  void RendererMessage(int client_id, const QByteArray& data);
+
  private:
   Application* app_;
   bool close_connection_;
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
   QString files_root_folder_;
+  bool streaming_enabled_ = false;
 
   void GetPlaylistSongs(const cpb::remote::Message& msg);
   void ChangeSong(const cpb::remote::Message& msg);
