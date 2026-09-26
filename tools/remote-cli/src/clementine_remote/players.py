@@ -18,6 +18,8 @@ import httpx
 Log = Callable[[str], None]
 Callback = Callable[[], Awaitable[None]]
 ErrorCallback = Callable[[str], Awaitable[None]]
+# Called with an event name and its details, for tests to observe.
+EventCallback = Callable[..., None]
 
 
 def with_start(url: str, start_ms: int) -> str:
@@ -36,10 +38,17 @@ class Player:
     # renderer ends tracks when its clock passes their length.
     reports_end = False
 
-    def __init__(self, log: Log, on_end: Callback, on_error: ErrorCallback):
+    def __init__(
+        self,
+        log: Log,
+        on_end: Callback,
+        on_error: ErrorCallback,
+        on_event: EventCallback | None = None,
+    ):
         self.log = log
         self.on_end = on_end
         self.on_error = on_error
+        self.on_event = on_event or (lambda name, **details: None)
         self.volume = 100
 
     async def load(
@@ -59,8 +68,11 @@ class Player:
 
 
 class NullPlayer(Player):
-    def __init__(self, log: Log, on_end: Callback, on_error: ErrorCallback):
-        super().__init__(log, on_end, on_error)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Keep each response's body in the "fetched" event, for tests that
+        # check what Clementine sent.
+        self.keep_bodies = False
         self._client = httpx.AsyncClient(timeout=httpx.Timeout(30.0, read=None))
         self._task: asyncio.Task | None = None
         self._url = ""
@@ -86,6 +98,7 @@ class NullPlayer(Player):
     async def _fetch(self, url: str, headers: dict[str, str]) -> None:
         started = time.monotonic()
         received = 0
+        body = bytearray()
         try:
             async with self._client.stream("GET", url, headers=headers) as response:
                 length = response.headers.get("content-length")
@@ -100,14 +113,31 @@ class NullPlayer(Player):
                     )
                 )
                 if response.status_code >= 400:
+                    self.on_event(
+                        "fetched",
+                        url=url,
+                        status=response.status_code,
+                        headers=dict(response.headers),
+                        body=b"",
+                    )
                     await self.on_error(f"HTTP {response.status_code} for {url}")
                     return
                 if length and response.status_code == 200:
                     self._size = int(length)
                 async for chunk in response.aiter_raw():
                     received += len(chunk)
+                    if self.keep_bodies:
+                        body += chunk
             elapsed = time.monotonic() - started
             self.log(f"fetched {received} bytes in {elapsed:.1f}s")
+            self.on_event(
+                "fetched",
+                url=url,
+                status=response.status_code,
+                headers=dict(response.headers),
+                body=bytes(body),
+                size=received,
+            )
         except asyncio.CancelledError:
             raise
         except httpx.HTTPError as e:
@@ -136,8 +166,8 @@ class NullPlayer(Player):
 class FfplayPlayer(Player):
     reports_end = True
 
-    def __init__(self, log: Log, on_end: Callback, on_error: ErrorCallback):
-        super().__init__(log, on_end, on_error)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         if not shutil.which("ffplay"):
             raise SystemExit("ffplay isn't installed; try --player null")
         self._process: asyncio.subprocess.Process | None = None

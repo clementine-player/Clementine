@@ -163,10 +163,10 @@ async def cmd_watch(args) -> None:
         if t == pb.CURRENT_METAINFO:
             song = msg.response_current_metadata.song_metadata
             log(f"now playing: {song.artist} - {song.title}")
-        elif t == pb.ENGINE_STATE_CHANGED:
-            log(
-                f"state: {pb.EngineState.Name(msg.response_engine_state_changed.state)}"
-            )
+        elif t in (pb.PLAY, pb.PAUSE, pb.STOP):
+            # Clementine reports state changes with these, not
+            # ENGINE_STATE_CHANGED.
+            log(f"state: {pb.MsgType.Name(t).lower()}")
         elif t == pb.UPDATE_TRACK_POSITION:
             log(f"position: {msg.response_update_track_position.position}s")
         elif t == pb.OUTPUTS:
