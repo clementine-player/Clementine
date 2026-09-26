@@ -167,7 +167,7 @@ signals.
 | `StateChanged`               | from `RENDERER_STATUS.state`                              |
 | `TrackAboutToEnd`            | generated locally from the interpolated position (same logic as `EmitAboutToEnd`) |
 | `TrackEnded`                 | `RENDERER_TRACK_ENDED` (with the item id, so late reports are ignored) |
-| `Error` / `InvalidMediaRequested` | `RENDERER_ERROR`, which makes `Player` skip exactly as it does for local errors |
+| `Error` / `InvalidMediaRequested` | `RENDERER_ERROR`, by scope: an item error makes `Player` skip exactly as it does for local errors, a transient one reloads at the last position, a renderer error falls back to local output |
 | `ValidMediaRequested`        | first `RENDERER_STATUS` in state Playing for that item id |
 
 Crossfade and fade-out need two decoders mixed in one place, which a renderer
@@ -396,10 +396,50 @@ shouldn't be the default. Direct and Pipeline are Phase 1 and 2.
 ## 6. Protocol changes
 
 All changes add to the existing messages, so existing clients and servers are
-unaffected. `Message.version` goes from 21 to 22. Clients check
-`ResponseClementineInfo.supports_rendering` before using any of it, and the
-server only offers rendering to clients whose `RequestConnect` includes
-`renderer`.
+unaffected. `Message.version` goes from 21 to 22. Clients check for
+`SERVER_FEATURE_RENDERING` in `ResponseClementineInfo.features` before using
+any of it, and the server only offers rendering to clients whose
+`RequestConnect` includes `renderer`.
+
+### 6.1 Conventions for new definitions
+
+New definitions follow buf's `STANDARD` lint rules where they apply to a
+proto2 file with no services, plus two house rules:
+
+- **Enums, not bools.** A bool can only ever mean two things. Anything that
+  might grow a third answer is an enum, and a set of on/off capabilities is a
+  `repeated` enum of features. A new capability is then a new enum value,
+  not a new field that every client has to learn about.
+- **The first value of every enum is `<ENUM_NAME>_UNSPECIFIED = 0`**
+  (`ENUM_FIRST_VALUE_ZERO`, `ENUM_ZERO_VALUE_SUFFIX`). In proto2 this
+  matters even more than in proto3: an `optional` enum field that is unset,
+  *or* that holds a value the reader's older copy of the schema doesn't
+  know, reads back as the first declared value. With `_UNSPECIFIED` first,
+  "not sent" and "sent something I don't understand" both land on a value
+  that means "unknown", never on a real choice made by accident. Readers
+  treat `_UNSPECIFIED` as "use the safe default".
+- **Every value carries its enum's name as a prefix** (`ENUM_VALUE_PREFIX`),
+  in `UPPER_SNAKE_CASE`. Enum values share the package's scope in C++, and
+  the file already has top-level names like `UNKNOWN`, `Playing` and
+  `Idle`, so unprefixed new values would sooner or later collide.
+- **No bare scalars in `Message`.** Each new payload is its own message,
+  even when it holds a single field today, so it can grow without a new
+  `Message` field.
+- **Units in field names** (`_ms`, `_hz`, `_kbps`), `lower_snake_case`
+  fields, `PascalCase` messages and enums, and a leading comment on every new
+  message, enum and value (buf's `COMMENTS` category).
+- Field numbers are never reused. A removed field or value is `reserved`.
+
+**The one exception is `MsgType`.** Its existing values have no prefix and
+aren't renamed here, because renaming generated identifiers would break
+every client's source even though the wire format wouldn't change. New
+`MsgType` values follow the existing style so the enum stays consistent;
+`UNKNOWN = 0` already plays the part of its `_UNSPECIFIED`. The same goes for
+the other existing enums (`EngineState`, `RepeatMode`, ...): they are left
+alone, and new code doesn't reuse them where a new enum fits better (see
+`RendererState`).
+
+### 6.2 Definitions
 
 ```proto
 enum MsgType {
@@ -428,69 +468,190 @@ enum MsgType {
   OUTPUT_CHANGED        = 341;
 }
 
+// Optional abilities of the server, sent in ResponseClementineInfo.
+enum ServerFeature {
+  SERVER_FEATURE_UNSPECIFIED = 0;
+  // The server can send playback to renderers (streaming is enabled).
+  SERVER_FEATURE_RENDERING = 1;
+}
+
+// Optional abilities of a renderer, beyond decoding its mime_types.
+enum RendererFeature {
+  RENDERER_FEATURE_UNSPECIFIED = 0;
+  // Can queue a RENDER_PRELOAD item and start it without a gap.
+  RENDERER_FEATURE_GAPLESS = 1;
+  // Sends HTTP Range requests, so it can seek in Direct streams itself.
+  RENDERER_FEATURE_HTTP_RANGE = 2;
+}
+
+// What a renderer can play. Sent when it registers.
 message RendererCapabilities {
-  optional string renderer_id = 1;    // stable per install (UUID), used for "remember"
-  optional string display_name = 2;   // "Pixel 9", "Kitchen tablet"
-  repeated string mime_types = 3;     // "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg"
-  optional int32 max_sample_rate = 4;
+  // Stable per install (a UUID), so a renderer is recognised after reconnecting.
+  optional string renderer_id = 1;
+  // Shown in output pickers: "Pixel 9", "Kitchen tablet".
+  optional string display_name = 2;
+  // Formats it can decode: "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg".
+  // Strings rather than an enum, because the set is open-ended and already
+  // standardised.
+  repeated string mime_types = 3;
+  optional int32 max_sample_rate_hz = 4;
   optional int32 max_channels = 5;
-  optional bool gapless = 6;          // can queue RENDER_PRELOAD
-  optional bool http_range = 7;       // honours Range (Direct seeking)
-  optional int32 max_bitrate_kbps = 8;// e.g. "on mobile data"
+  // Unknown values are ignored by the server.
+  repeated RendererFeature features = 6;
+  // Upper limit the renderer wants, for example on mobile data. Unset or 0
+  // means no limit.
+  optional int32 max_bitrate_kbps = 7;
 }
 
 message RequestConnect {
   // ...existing fields 1..3...
-  optional RendererCapabilities renderer = 4;  // present => wants to be a renderer
+  // Present when the client also wants to act as a renderer.
+  optional RendererCapabilities renderer = 4;
 }
 
 message ResponseClementineInfo {
   // ...existing fields 1..4...
-  optional bool supports_rendering = 5;  // server has streaming enabled
+  // Unknown values are ignored by clients.
+  repeated ServerFeature features = 5;
 }
 
+// Whether an output can be used right now.
+enum OutputState {
+  OUTPUT_STATE_UNSPECIFIED = 0;
+  // Connected and can be chosen.
+  OUTPUT_STATE_AVAILABLE = 1;
+  // Playback is being handed over to it.
+  OUTPUT_STATE_ACTIVATING = 2;
+  // The current output.
+  OUTPUT_STATE_ACTIVE = 3;
+}
+
+// One place playback can go: this computer or a renderer.
 message Output {
-  optional string output_id = 1;      // "local" or renderer_id
+  // "local" for this computer, otherwise the renderer_id.
+  optional string output_id = 1;
   optional string display_name = 2;
-  optional bool active = 3;
+  optional OutputState state = 3;
 }
-message ResponseOutputs { repeated Output outputs = 1; }
-message RequestSetOutput { optional string output_id = 1; }
 
-enum StreamMode { STREAM_DIRECT = 0; STREAM_PIPELINE = 1; }
+// Every output, sent with OUTPUTS and OUTPUT_CHANGED.
+message ResponseOutputs {
+  repeated Output outputs = 1;
+}
 
+// A controller asks for playback to move to another output.
+message RequestSetOutput {
+  optional string output_id = 1;
+}
+
+// How the server delivers an item. Informational for the renderer; how to
+// seek is given separately by SeekMethod.
+enum StreamMode {
+  STREAM_MODE_UNSPECIFIED = 0;
+  // The original file, byte for byte.
+  STREAM_MODE_DIRECT = 1;
+  // Output of a GStreamer pipeline, remuxed or encoded.
+  STREAM_MODE_PIPELINE = 2;
+}
+
+// How a renderer seeks within an item.
+enum SeekMethod {
+  // Treat as SEEK_METHOD_NONE.
+  SEEK_METHOD_UNSPECIFIED = 0;
+  // Not seekable, for example live radio.
+  SEEK_METHOD_NONE = 1;
+  // Seek within the current URL using HTTP Range requests.
+  SEEK_METHOD_BYTE_RANGE = 2;
+  // Load the url given in RequestRenderSeek.
+  SEEK_METHOD_NEW_URL = 3;
+}
+
+// One track, as the renderer should fetch and present it.
 message RenderItem {
   optional int32 item_id = 1;
-  optional string url = 2;            // http://host:5500/s/<token>/<item_id>
+  // http://host:5500/s/<token>/<item_id>
+  optional string url = 2;
   optional string mime_type = 3;
   optional StreamMode mode = 4;
+  // Unset for items with no known length, such as radio.
   optional int64 length_ms = 5;
-  optional bool seek_by_url = 6;      // true for Pipeline: use RENDER_SEEK.url
-  optional SongMetadata song = 7;     // for lock screen / notification UI
+  optional SeekMethod seek_method = 6;
+  // For the lock screen and notification UI.
+  optional SongMetadata song = 7;
 }
 
+// What a renderer does once an item has loaded.
+enum LoadStartState {
+  // Treat as LOAD_START_STATE_PAUSED.
+  LOAD_START_STATE_UNSPECIFIED = 0;
+  LOAD_START_STATE_PAUSED = 1;
+  LOAD_START_STATE_PLAYING = 2;
+}
+
+// Load an item now, replacing whatever is playing.
 message RequestRenderLoad {
   optional RenderItem item = 1;
   optional int64 start_ms = 2;
-  optional bool play = 3;
+  optional LoadStartState start_state = 3;
 }
+
+// Queue the item that follows the current one.
+message RequestRenderPreload {
+  optional RenderItem item = 1;
+}
+
 message RequestRenderSeek {
   optional int32 item_id = 1;
   optional int64 position_ms = 2;
-  optional string url = 3;            // set when item.seek_by_url
+  // Set when the item's seek_method is SEEK_METHOD_NEW_URL.
+  optional string url = 3;
 }
-message RequestRenderVolume { optional int32 volume = 1; }  // 0..100
 
+message RequestRenderVolume {
+  // 0..100
+  optional int32 volume = 1;
+}
+
+// A renderer's playback state. Separate from EngineState because a renderer
+// has states the local engine doesn't report, such as buffering.
+enum RendererState {
+  RENDERER_STATE_UNSPECIFIED = 0;
+  RENDERER_STATE_IDLE = 1;
+  RENDERER_STATE_LOADING = 2;
+  RENDERER_STATE_BUFFERING = 3;
+  RENDERER_STATE_PLAYING = 4;
+  RENDERER_STATE_PAUSED = 5;
+}
+
+// Sent at 1 Hz while playing, and whenever the state changes.
 message RendererStatus {
   optional int32 item_id = 1;
-  optional EngineState state = 2;
+  optional RendererState state = 2;
   optional int64 position_ms = 3;
   optional int32 buffered_percent = 4;
 }
+
+// The item finished playing to its end.
+message RendererTrackEnded {
+  optional int32 item_id = 1;
+}
+
+// What an error affects, and so what the server does about it.
+enum RendererErrorScope {
+  // Treat as RENDERER_ERROR_SCOPE_ITEM.
+  RENDERER_ERROR_SCOPE_UNSPECIFIED = 0;
+  // This item can't be played. Retry through the pipeline or skip it.
+  RENDERER_ERROR_SCOPE_ITEM = 1;
+  // A temporary problem, such as a network drop. Reload at the last position.
+  RENDERER_ERROR_SCOPE_TRANSIENT = 2;
+  // The renderer can't continue. Fall back to local output.
+  RENDERER_ERROR_SCOPE_RENDERER = 3;
+}
+
 message RendererError {
   optional int32 item_id = 1;
   optional string message = 2;
-  optional bool fatal = 3;            // false => track-level, skip; true => drop renderer
+  optional RendererErrorScope scope = 3;
 }
 
 message Message {
@@ -499,16 +660,22 @@ message Message {
   optional ResponseOutputs response_outputs = 61;
   optional RequestSetOutput request_set_output = 62;
   optional RequestRenderLoad request_render_load = 63;
-  optional RenderItem request_render_preload = 64;
+  optional RequestRenderPreload request_render_preload = 64;
   optional RequestRenderSeek request_render_seek = 65;
   optional RequestRenderVolume request_render_volume = 66;
   optional RendererStatus renderer_status = 67;
   optional RendererError renderer_error = 68;
-  optional int32 renderer_track_ended_item_id = 69;
+  optional RendererTrackEnded renderer_track_ended = 69;
 }
 ```
 
-Notes
+Every `_UNSPECIFIED` has a stated meaning, so a reader never has to guess:
+the comment on the value says what to do (for example, an unspecified
+`LoadStartState` stays paused, which is the safe choice). Where no comment
+says otherwise, `_UNSPECIFIED` means the sender didn't say, and the message is
+handled as if the field were absent.
+
+### 6.3 Notes
 
 - The renderer uses its **existing control connection**, so authentication,
   keep-alive and disconnect handling work as they do now. A device can be a
@@ -521,7 +688,14 @@ Notes
 - Existing `UPDATE_TRACK_POSITION`, `ENGINE_STATE_CHANGED` and
   `CURRENT_METAINFO` still go to all clients. They are driven by
   `EngineRouter`, so controllers show the remote renderer's position without
-  any changes.
+  any changes. `RemoteEngine` maps `RendererState` onto `Engine::State` for
+  them (loading and buffering count as playing).
+- To check the new definitions, CI can run `buf lint` with `STANDARD` and
+  `COMMENTS` on the proto file, with the existing definitions listed in
+  `ignore_only` so only new ones are held to the rules. The file's location
+  also fails `PACKAGE_DIRECTORY_MATCH` (package `cpb.remote` in
+  `ext/libclementine-remote/`); moving it is out of scope, so that rule is
+  excluded too.
 
 ## 7. Code layout
 
@@ -551,7 +725,8 @@ Changes to existing files:
   session token.
 - `IncomingDataParser`: handle the new message types and pass them to the
   registry.
-- `OutgoingDataCreator::SendClementineInfo`: set `supports_rendering`.
+- `OutgoingDataCreator::SendClementineInfo`: add `SERVER_FEATURE_RENDERING` to
+  `features`.
 - `SettingsDialog`, `MainWindow`: `qobject_cast<GstEngine*>` becomes
   `EngineRouter::local_engine()`.
 - `networkremotesettingspage.ui`: add a "Streaming" group (§8).
@@ -609,7 +784,7 @@ Changes to existing files:
 |------|-----------|
 | Renderer disconnects mid-track | Fall back to local, paused at the last position. Send `OUTPUT_CHANGED` |
 | Renderer reports a track-level error | `Error` + `InvalidMediaRequested`. `Player` skips to the next track, as it does locally |
-| The same track fails Direct because the codec was advertised but doesn't actually decode | Renderer sends `RENDERER_ERROR{fatal=false}`. `RemoteEngine` tries the same item once more through the Pipeline with Encode, before reporting an error |
+| The same track fails Direct because the codec was advertised but doesn't actually decode | Renderer sends `RENDERER_ERROR` with `RENDERER_ERROR_SCOPE_ITEM`. `RemoteEngine` tries the same item once more through the Pipeline with Encode, before reporting an error |
 | Stream metadata changes (radio) | The Pipeline emits the tags into `MetaData`, so titles update as they do for local playback |
 | Clementine quits while playing remotely | `RENDER_STOP`, then the usual `DISCONNECT{Server_Shutdown}` |
 | Two controllers choose different outputs | Last write wins. Everyone gets `OUTPUT_CHANGED` |
@@ -649,8 +824,8 @@ Changes to existing files:
 - `remoteengine_test.cpp`: a fake renderer over a local socket speaking the
   new messages. Covers position interpolation, stale `item_id` reports being
   ignored, and disconnect falling back to local.
-- Extend `networkremote_test.cpp` to check that `supports_rendering` is only
-  advertised when enabled.
+- Extend `networkremote_test.cpp` to check that `SERVER_FEATURE_RENDERING` is
+  only advertised when enabled.
 - `protocolsniffer_test.cpp`: first byte `0x00`–`0x08` goes to the remote,
   `A`–`Z` to HTTP only when streaming is on, anything else is closed; a
   first byte that arrives in a separate TCP segment from the rest; the
