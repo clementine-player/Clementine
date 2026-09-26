@@ -20,8 +20,9 @@ It covers two cases:
 
 - **Streaming**: the device plays the original file, which Clementine serves
   over HTTP. This covers most of a local library.
-- **Restreaming**: Clementine resolves, decodes or re-encodes the source and
-  serves the result, because the device couldn't play the original. That
+- **Restreaming**: Clementine fetches the source through a GStreamer
+  pipeline and serves the result, remuxed as-is when the device can play the
+  codec and re-encoded when it can't. That
   covers internet services that need Clementine's credentials, CD audio,
   tracks cut from a cue sheet, formats the device can't decode, and audio
   that should carry Clementine's EQ and ReplayGain.
@@ -113,7 +114,7 @@ Two things follow from this:
                       │                                                  ▼                │
  Renderer             │                                            MediaHttpServer (:5500) │
  (phone, PC, ...)  ◄──┼─ protobuf :5500  RENDER_LOAD{url} ◄── RemoteEngine               │
-                   ───┼─ HTTP :5500 GET /s/<token>/<item> ► Direct | Proxy | Transcode    │
+                   ───┼─ HTTP :5500 GET /s/<token>/<item> ► Direct | Pipeline             │
                       └───────────────────────────────────────────────────────────────────┘
 ```
 
@@ -142,7 +143,7 @@ Rules:
 - Background streams (`AddBackgroundStream`) always use the local
   `GstEngine`. They are ambience sounds, not part of the playlist.
 - `scope()` comes from the active engine. A remote engine returns an empty
-  scope unless it is transcoding (§5.3), where it can feed buffers.
+  scope unless it is using the Pipeline with Encode (§5.2), where it can feed buffers.
 - The two `qobject_cast<GstEngine*>` call sites change to
   `router->local_engine()`.
 - The selected output is saved in `QSettings` (`NetworkRemote/output`), but
@@ -189,35 +190,52 @@ Plan StreamPlanner::Plan(const MediaPlaybackRequest& req, const Song& song,
                          const RendererCaps& caps, const StreamSettings& s);
 
 struct Plan {
-  enum Mode { Direct, Proxy, Transcode };
+  enum Mode { Direct, Pipeline };
   Mode mode;
+  // Pipeline only: remux the source's own codec, or decode and encode.
+  enum Output { Passthrough, Encode };
+  Output output;
+  TranscoderPreset preset;    // Encode only
   QString mime_type;          // what the renderer will receive
-  TranscoderPreset preset;    // Transcode only
   qint64 length_nanosec;      // known length, used for seek bars and ?t=
 };
 ```
 
-The first rule that matches wins:
+There are only two modes, and two questions decide them.
 
-| # | Condition | Mode |
-|---|-----------|------|
-| 1 | The user wants DSP applied remotely (`apply_dsp`) and EQ or ReplayGain is on | Transcode |
-| 2 | `song.has_cue()`, or a begin/end marker is set (a track cut from a larger file) | Transcode |
-| 3 | `song.is_cdda()`, or the media URL scheme isn't file/http(s) | Transcode |
-| 4 | The codec isn't in `caps.codecs`, or the sample rate or channel count is above what the renderer supports | Transcode |
-| 5 | `song.IsFileLossless()` and `s.transcode_lossless` (the same setting downloads use) | Transcode |
-| 6 | The file's bitrate is above `s.max_bitrate_kbps` (if set) | Transcode |
-| 7 | Local file | **Direct** |
-| 8 | http(s) URL that has headers (`Authorization`) or that the renderer said it can't reach | **Proxy** |
-| 9 | Other http(s) URL (for example an internet radio stream) | Proxy by default. Handing the renderer the raw URL is an option (`s.allow_raw_urls`), but it reveals the URL and loses control of the stream |
+**1. Can the file be served byte-for-byte (Direct)?** Only when all of these
+hold:
 
-"Stream" in the request means Direct. "Restream" means Proxy (the same bytes,
-fetched by Clementine with Clementine's credentials) or Transcode (decoded by
-Clementine and encoded again).
+- it is a local file, with no cue sheet and no begin/end markers,
+- its codec, sample rate and channel count are in the renderer's
+  capabilities,
+- DSP isn't being applied remotely (`apply_dsp` off, or EQ and ReplayGain
+  both off),
+- it isn't lossless with `s.transcode_lossless` on (the setting downloads
+  already use), and
+- its bitrate isn't above `s.max_bitrate_kbps` (if set).
+
+**2. Otherwise it goes through the Pipeline. Remux or encode?** Passthrough
+when the source's codec is in the renderer's capabilities *and* has an entry
+in the remux table (§5.2) *and* no DSP, markers or bitrate cap is in force.
+Anything else is encoded: CD audio (already PCM), cue tracks, codecs the
+renderer can't play, codecs with no remux entry, DSP, lossless-to-lossy and
+bitrate caps.
+
+So internet services, Google Drive files and radio usually end up as
+Pipeline + Passthrough: the same bytes, fetched by Clementine with
+Clementine's credentials.
+
+Handing a renderer the raw upstream URL of a header-less stream stays an
+opt-in (`s.allow_raw_urls`, off by default), because it reveals the URL and
+loses stream titles and control of the stream.
+
+"Stream" in the request means Direct. "Restream" means Pipeline, in either
+of its outputs.
 
 ## 5. Delivery modes
 
-All three are served by `MediaHttpServer`, a small HTTP/1.1 handler that
+Both modes are served by `MediaHttpServer`, a small HTTP/1.1 handler that
 shares the remote's existing port (5500 by default) with the protobuf
 protocol. That means one port to open in a firewall, one Zeroconf record,
 and the same listen addresses and `only_non_public_ip` check with no extra
@@ -277,56 +295,90 @@ enumerate the library through this server, and path traversal isn't possible.
 - Reads happen in chunks driven by `bytesWritten`. The whole file is never
   loaded into memory, unlike `SongSender::SendSingleSong`.
 
-### 5.2 Proxy: restreaming bytes
+### 5.2 Pipeline: restreaming everything else
 
-- When a request arrives, `MediaHttpServer` opens an upstream request with
-  `QNetworkAccessManager` (so the app's proxy settings apply) and adds
-  `req.headers_` (for example `Authorization`, the header
-  `UrlHandler::LoadResult::auth_header_` provides). It forwards the renderer's
-  `Range` header and relays the status, `Content-Type`, `Content-Length` and
-  `Content-Range`.
-- It uses back-pressure: it reads from the upstream reply only while the
-  socket's `bytesToWrite()` is below a high-water mark. The reply's
-  `readBufferSize` is capped.
-- A short-lived signed URL, such as the one Subsonic's or Plex's `UrlHandler`
-  gives, is resolved again with `Player`'s `UrlHandler` if the upstream
-  returns 401 or 403 in the middle of a stream, then the request is retried
-  once.
-- Live radio (no `Content-Length`) is relayed as chunked transfer. Metadata
-  that arrives in the stream (`MetaData` signals from `GstEngine`) isn't
-  available in Proxy mode. §10 covers this.
-
-### 5.3 Transcode: restreaming decoded audio
-
-A new `GstStreamPipeline : GstPipelineBase` is built for each request:
+Everything that isn't Direct goes through one kind of pipeline. A new
+`GstStreamPipeline : GstPipelineBase` is built for each request:
 
 ```
-uridecodebin(uri=req.MediaUrl, extra-headers=req.headers_)
-  ! audioconvert ! [rgvolume ! rglimiter]  ! [equalizer-nbands ! audiopanorama]
-  ! audioresample ! capsfilter(rate/channels <= caps)
-  ! <preset encoder> ! <preset muxer> ! appsink
+uridecodebin(uri = req.MediaUrl, caps = raw | <passthrough caps>)
+  ├─ Passthrough: <parser> ! <muxer> ! appsink
+  └─ Encode:      audioconvert ! [rgvolume ! rglimiter] ! [equalizer-nbands ! audiopanorama]
+                  ! audioresample ! capsfilter(rate/channels <= caps)
+                  ! <preset encoder> ! <preset muxer> ! appsink
 ```
 
-- The encoder and muxer come from the **existing `TranscoderPreset`s**, the
-  ones already offered for downloads (Ogg Vorbis/Opus, MP3, AAC/M4A, FLAC),
-  so there are no new format lists to maintain. The default is Opus in Ogg at
-  128 kbps when the renderer lists it, otherwise MP3 at 192 kbps.
-- The ReplayGain, EQ and balance elements are made with the same helper
-  `GstEnginePipeline::InitAudioBin` uses. That code moves into a shared
-  function so local and remote playback sound the same.
-- Begin and end markers (cue tracks) become a segment seek on the decoder,
-  the same way `GstEnginePipeline` handles them.
-- Transcoded output can't be byte-ranged, so seeking uses `?t=<ms>`. The
-  renderer gets `RENDER_SEEK{position, url}` with a new URL, and the server
-  starts a new pipeline that seeks to `t` before going to PLAYING. The
-  response has no `Content-Length` and `Accept-Ranges: none`. Length comes
-  from `Song::length_nanosec` in `RENDER_LOAD`, so the renderer's seek bar is
-  still correct.
-- CPU use is bounded: at most one active transcode per renderer, plus one to
-  preload the next track. The pipeline pauses when `appsink` gets ahead of
-  the socket by more than N seconds of audio.
-- The pipeline can optionally tee into `BufferConsumer`, so the analyzer and
-  moodbar in Clementine's window keep moving while it plays remotely.
+`uridecodebin`'s `caps` property sets the format at which it stops decoding.
+With the source's compressed caps added to it, `uridecodebin` hands over
+parsed but undecoded audio, so Passthrough costs about as much CPU as a
+proxy. There is one pipeline and one response path, with two tails.
+
+**Fetching the source.** The pipeline sets up its source with the same
+`SourceSetupCallback` logic as `GstEnginePipeline` (moved into a shared
+helper). That code already sets `extra-headers` (for example the
+`Authorization` header `UrlHandler::LoadResult::auth_header_` provides) and
+`user-agent` on the source element. The consequences:
+
+- Credentials stay in Clementine, with no separate HTTP relay to write.
+- Seeking in a remote file works: the HTTP source sends its own Range
+  requests upstream when the pipeline seeks.
+- Radio stream titles (ICY and in-stream tags) come out of the pipeline as
+  tags and go into `MetaData`, just as they do for local playback.
+- A short-lived signed URL (Subsonic's or Plex's `UrlHandler`) that returns
+  401 or 403 mid-stream is resolved again through `Player`'s `UrlHandler`,
+  and the pipeline is rebuilt once at the current position.
+
+**Passthrough: the remux table.** Passthrough has to produce a container a
+renderer can play as a stream:
+
+| Source codec | Parser → output | MIME type |
+|---|---|---|
+| MP3 | `mpegaudioparse` → raw MP3 | `audio/mpeg` |
+| AAC (MP4/M4A or ADTS) | `aacparse` → ADTS | `audio/aac` |
+| FLAC | `flacparse` → raw FLAC | `audio/flac` |
+| Vorbis, Opus | `vorbisparse`/`opusparse` → `oggmux` | `audio/ogg` |
+| anything else | — | Encode instead |
+
+Remuxing can drop the gapless information some containers carry (MP4's
+`iTunSMPB`, the LAME/Xing header). That is acceptable here, because it only
+happens for sources that couldn't be served Direct anyway. It is also why
+local files the renderer can play are never remuxed (§5.1).
+
+**Encode.** The encoder and muxer come from the **existing
+`TranscoderPreset`s**, the ones already offered for downloads (Ogg
+Vorbis/Opus, MP3, AAC/M4A, FLAC), so there are no new format lists to
+maintain. The default is Opus in Ogg at 128 kbps when the renderer lists it,
+otherwise MP3 at 192 kbps. The ReplayGain, EQ and balance elements are made
+with the same helper `GstEnginePipeline::InitAudioBin` uses. That code moves
+into a shared function so local and remote playback sound the same. Begin
+and end markers (cue tracks) become a segment seek on the decoder, the same
+way `GstEnginePipeline` handles them.
+
+**Common to both outputs:**
+
+- The output has no known length, so seeking uses `?t=<ms>`. The renderer
+  gets `RENDER_SEEK{position, url}` with a new URL, and the server starts a
+  new pipeline that seeks to `t` before going to PLAYING. The response is
+  chunked, with no `Content-Length` and `Accept-Ranges: none`. Length comes
+  from `Song::length_nanosec` in `RENDER_LOAD`, so the renderer's seek bar
+  is still correct. Live radio simply has no length.
+- `appsink` runs with `sync=false`, so a file-backed pipeline can run faster
+  than real time. The renderer can buffer ahead, but not as freely as with
+  Direct (§5.1): the pipeline pauses when it is more than 60 s of audio ahead
+  of what the socket has sent.
+- Resources are bounded: at most one active pipeline per renderer, plus one
+  to preload the next track.
+- The Encode tail can optionally tee raw audio into `BufferConsumer`, so the
+  analyzer and moodbar in Clementine's window keep moving while it plays
+  remotely.
+
+**Why Direct is still a separate mode.** A file served byte-for-byte has a
+`Content-Length` and Range support, so the renderer seeks instantly without
+asking Clementine and can buffer the whole track quickly. That matters on
+phones, where a Wi-Fi drop or the laptop sleeping mid-track shouldn't stop
+playback. The original file also keeps its gapless and duration metadata,
+is bit-perfect, and is what DLNA renderers (Phase 3) handle best. It is also
+the most common case, and it costs a `QFile` plus Range parsing.
 
 ### 5.4 Live mix (later phase)
 
@@ -339,7 +391,7 @@ output option for "remote mixed stream".
 Costs: 2–5 s of latency between a control action and what the user hears,
 position that has to be adjusted for the renderer's buffer, and no native
 seeking on the renderer. It is worth having for "party mode", but it
-shouldn't be the default. Direct, Proxy and Transcode are Phase 1 and 2.
+shouldn't be the default. Direct and Pipeline are Phase 1 and 2.
 
 ## 6. Protocol changes
 
@@ -405,7 +457,7 @@ message Output {
 message ResponseOutputs { repeated Output outputs = 1; }
 message RequestSetOutput { optional string output_id = 1; }
 
-enum StreamMode { STREAM_DIRECT = 0; STREAM_PROXY = 1; STREAM_TRANSCODE = 2; }
+enum StreamMode { STREAM_DIRECT = 0; STREAM_PIPELINE = 1; }
 
 message RenderItem {
   optional int32 item_id = 1;
@@ -413,7 +465,7 @@ message RenderItem {
   optional string mime_type = 3;
   optional StreamMode mode = 4;
   optional int64 length_ms = 5;
-  optional bool seek_by_url = 6;      // true for Transcode: use RENDER_SEEK.url
+  optional bool seek_by_url = 6;      // true for Pipeline: use RENDER_SEEK.url
   optional SongMetadata song = 7;     // for lock screen / notification UI
 }
 
@@ -475,7 +527,7 @@ Notes
 
 ```
 src/engines/enginerouter.{h,cpp}           EngineRouter (Engine::Base)
-src/engines/gstaudiobinhelper.{h,cpp}      RG/EQ/balance elements shared by GstEnginePipeline and GstStreamPipeline
+src/engines/gstpipelinehelpers.{h,cpp}     source setup (headers, user agent) and RG/EQ/balance elements, shared by GstEnginePipeline and GstStreamPipeline
 src/networkremote/streaming/
     remoteengine.{h,cpp}                   RemoteEngine (Engine::Base)
     rendererregistry.{h,cpp}               renderer_id -> RemoteEngine; owns OUTPUTS/OUTPUT_CHANGED
@@ -483,8 +535,7 @@ src/networkremote/streaming/
     protocolsniffer.{h,cpp}                first-byte routing of accepted sockets (§5.0)
     mediahttpserver.{h,cpp}                HTTP request parsing, token check, dispatch
     directresponder.{h,cpp}                file + Range
-    proxyresponder.{h,cpp}                 QNetworkAccessManager relay
-    transcoderesponder.{h,cpp}             owns a GstStreamPipeline, appsink -> socket
+    pipelineresponder.{h,cpp}              owns a GstStreamPipeline, appsink -> socket
     gststreampipeline.{h,cpp}              GstPipelineBase subclass
 src/ui/outputpicker.{h,cpp}                toolbar button + menu: "This computer", renderers
 ```
@@ -517,7 +568,7 @@ Changes to existing files:
   - *When the device can't play a file, convert to:* \[transcoder preset\]
     (reuses the preset list downloads already show)
   - *Always convert lossless files* (shares the setting with downloads)
-  - *Apply equalizer and ReplayGain on remote devices* (forces Transcode)
+  - *Apply equalizer and ReplayGain on remote devices* (forces the Pipeline to encode)
   - *Maximum bitrate* (none / 320 / 192 / 128 kbps)
 - The status bar shows "Playing on \<device\>" while a remote output is
   active.
@@ -537,7 +588,7 @@ Changes to existing files:
   resolve within their own session, and only for the current and next
   items. Without a live authenticated control connection, the HTTP server
   serves nothing.
-- **Credentials stay in Clementine.** In Proxy and Transcode mode the renderer
+- **Credentials stay in Clementine.** In Pipeline mode the renderer
   gets Clementine's URL, never the upstream URL or its `Authorization`
   header. Raw-URL handoff (`allow_raw_urls`) only applies to URLs without
   headers, and it is off by default.
@@ -545,7 +596,7 @@ Changes to existing files:
   sidesteps the whole class of traversal bugs `files_root_folder` handling
   has to guard against.
 - **Resource limits.** A cap on concurrent HTTP responses per session (4), on
-  transcodes per renderer (2) and on header size (8 KiB). Idle sockets time
+  pipelines per renderer (2) and on header size (8 KiB). Idle sockets time
   out after 30 s.
 - **Known weakness, unchanged.** The remote's auth code is a short number
   sent in plaintext. This design doesn't make that worse. Tokens are only
@@ -558,11 +609,11 @@ Changes to existing files:
 |------|-----------|
 | Renderer disconnects mid-track | Fall back to local, paused at the last position. Send `OUTPUT_CHANGED` |
 | Renderer reports a track-level error | `Error` + `InvalidMediaRequested`. `Player` skips to the next track, as it does locally |
-| The same track fails Direct because the codec was advertised but doesn't actually decode | Renderer sends `RENDERER_ERROR{fatal=false}`. `RemoteEngine` tries the same item once more, forcing Transcode, before reporting an error |
-| Stream metadata changes (radio) in Proxy mode | Not available. `RemoteEngine` switches radio to Transcode when "show stream titles" matters (setting TBD), because the decoder then emits tags into `MetaData` |
+| The same track fails Direct because the codec was advertised but doesn't actually decode | Renderer sends `RENDERER_ERROR{fatal=false}`. `RemoteEngine` tries the same item once more through the Pipeline with Encode, before reporting an error |
+| Stream metadata changes (radio) | The Pipeline emits the tags into `MetaData`, so titles update as they do for local playback |
 | Clementine quits while playing remotely | `RENDER_STOP`, then the usual `DISCONNECT{Server_Shutdown}` |
 | Two controllers choose different outputs | Last write wins. Everyone gets `OUTPUT_CHANGED` |
-| Hand-off during Transcode | New `RENDER_LOAD` with `start_ms`. The server makes a fresh pipeline seeked to that point |
+| Hand-off during Pipeline playback | New `RENDER_LOAD` with `start_ms`. The server makes a fresh pipeline seeked to that point |
 | Stop after current, repeat, shuffle, queue | Unchanged. They are `Player`/`PlaylistSequence` logic above the engine |
 | Scrobbling / play counts | Unchanged. They use `Player`'s position and state signals, which the router drives |
 
@@ -570,11 +621,12 @@ Changes to existing files:
 
 1. **Phase 1: streaming local files.** Protocol v22, `EngineRouter`,
    `RemoteEngine`, `RendererRegistry`, `MediaHttpServer` with Direct only,
-   `StreamPlanner` rules 7 and 4 (unsupported tracks are skipped with a clear
-   error), output picker, settings. The Android remote gets "Play on this
+   `StreamPlanner`'s Direct check only (tracks that would need the Pipeline
+   are skipped with a clear error), output picker, settings. The Android remote gets "Play on this
    phone". This version is already useful for most local libraries.
-2. **Phase 2: restreaming.** Proxy mode (internet services, radio) and
-   Transcode mode (cue, CDDA, unsupported codecs, lossless and bitrate caps,
+2. **Phase 2: restreaming.** Pipeline mode with both outputs: Passthrough
+   (internet services, radio) and Encode (cue, CDDA, unsupported codecs,
+   lossless and bitrate caps,
    optional DSP), `?t=` seeking, sharing the audio-bin helper.
 3. **Phase 3: more renderers and live mix.** Because delivery is plain HTTP,
    UPnP/DLNA MediaRenderers (`AVTransport.SetAVTransportURI`) and Chromecast
@@ -585,7 +637,8 @@ Changes to existing files:
 
 ## 12. Testing
 
-- `streamplanner_test.cpp`: a table-driven test of every rule in §4.3. It is
+- `streamplanner_test.cpp`: a table-driven test of the Direct check and the
+  Passthrough/Encode choice in §4.3. It is
   pure logic and needs no GStreamer or network.
 - `mediahttpserver_test.cpp`: Range parsing (`bytes=0-`, `bytes=100-199`,
   suffix ranges, invalid ranges → 416), token and peer checks, unknown item
@@ -602,14 +655,15 @@ Changes to existing files:
   `A`–`Z` to HTTP only when streaming is on, anything else is closed; a
   first byte that arrives in a separate TCP segment from the rest; the
   10 s silence timeout.
-- Transcode: a GStreamer test that turns a short WAV fixture into Ogg/Opus
-  through `GstStreamPipeline` and checks the caps and approximate duration,
-  including a `?t=` start.
+- Pipeline: GStreamer tests through `GstStreamPipeline`. Encode turns a short
+  WAV fixture into Ogg/Opus. Passthrough turns MP3 and FLAC fixtures into
+  their raw forms, and the output decodes to the same PCM as the input.
+  Both check the caps and approximate duration, including a `?t=` start.
 
 ## 13. Open questions
 
 1. Should Clementine's volume slider set the renderer's device volume, or a
-   software gain inside Transcode? The proposal is the renderer's volume
+   software gain inside the Pipeline? The proposal is the renderer's volume
    (`RENDER_SET_VOLUME`), because Direct mode can't apply gain.
 2. Should the choice of output be per playlist ("the kitchen playlist always
    plays in the kitchen")? It's out of scope, but `EngineRouter::SetOutput`
