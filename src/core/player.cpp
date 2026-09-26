@@ -39,6 +39,7 @@
 #include "core/tagreaderclient.h"
 #include "core/urlhandler.h"
 #include "engines/enginebase.h"
+#include "engines/enginerouter.h"
 #include "engines/gstengine.h"
 #include "internet/lastfm/lastfmservice.h"
 #include "library/librarybackend.h"
@@ -54,7 +55,7 @@ Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
       lastfm_(nullptr),
-      engine_(new GstEngine(app_)),
+      engine_(new EngineRouter(new GstEngine(app_))),
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),

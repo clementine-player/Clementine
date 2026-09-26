@@ -127,6 +127,7 @@ void NetworkRemoteSettingsPage::Load() {
 #endif
 
   ui_->allow_downloads->setChecked(s.value("allow_downloads", false).toBool());
+  ui_->allow_streaming->setChecked(s.value("allow_streaming", false).toBool());
   ui_->convert_lossless->setChecked(
       s.value("convert_lossless", false).toBool());
 
@@ -227,6 +228,7 @@ void NetworkRemoteSettingsPage::Save() {
   s.setValue("use_auth_code", ui_->use_auth_code->isChecked());
   s.setValue("auth_code", ui_->auth_code->value());
   s.setValue("allow_downloads", ui_->allow_downloads->isChecked());
+  s.setValue("allow_streaming", ui_->allow_streaming->isChecked());
   s.setValue("convert_lossless", ui_->convert_lossless->isChecked());
 
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())

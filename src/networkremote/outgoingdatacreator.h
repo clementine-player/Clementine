@@ -59,6 +59,8 @@ class OutgoingDataCreator : public QObject {
   void SetAllowDownloads(bool allow_downloads) {
     allow_downloads_ = allow_downloads;
   }
+  void SetStreamingEnabled(bool enabled) { streaming_enabled_ = enabled; }
+  void SendDataToClients(cpb::remote::Message* msg);
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          cpb::remote::SongMetadata* song_metadata);
 
@@ -112,6 +114,7 @@ class OutgoingDataCreator : public QObject {
   QString files_root_folder_;
   QStringList files_music_extensions_;
   bool allow_downloads_;
+  bool streaming_enabled_ = false;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   QMap<int, SongInfoFetcher::Result> results_;
@@ -119,7 +122,6 @@ class OutgoingDataCreator : public QObject {
 
   QMap<int, GlobalSearchRequest> global_search_result_map_;
 
-  void SendDataToClients(cpb::remote::Message* msg);
   void SetEngineState(cpb::remote::ResponseClementineInfo* msg);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
