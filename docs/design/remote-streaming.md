@@ -207,8 +207,8 @@ There are only two modes, and two questions decide them.
 hold:
 
 - it is a local file, with no cue sheet and no begin/end markers,
-- its codec, sample rate and channel count are in the renderer's
-  capabilities,
+- the renderer lists a format for its codec, and that format allows its
+  sample rate (an empty list allows any),
 - DSP isn't being applied remotely (`apply_dsp` off, or EQ and ReplayGain
   both off),
 - it isn't lossless with `s.transcode_lossless` on (the setting downloads
@@ -216,11 +216,14 @@ hold:
 - its bitrate isn't above `s.max_bitrate_kbps` (if set).
 
 **2. Otherwise it goes through the Pipeline. Remux or encode?** Passthrough
-when the source's codec is in the renderer's capabilities *and* has an entry
+when the renderer plays the source's codec at its sample rate *and* it has an entry
 in the remux table (§5.2) *and* no DSP, markers or bitrate cap is in force.
-Anything else is encoded: CD audio (already PCM), cue tracks, codecs the
-renderer can't play, codecs with no remux entry, DSP, lossless-to-lossy and
-bitrate caps.
+Anything else is encoded: CD audio (already PCM), cue tracks, codecs or
+sample rates the renderer can't play, codecs with no remux entry, DSP,
+lossless-to-lossy and bitrate caps. The encoder's output is limited by the
+target format's own entry: its sample rates become a caps filter, from which
+`audioresample` picks the rate nearest the source's, and its channel limit
+likewise.
 
 So internet services, Google Drive files and radio usually end up as
 Pipeline + Passthrough: the same bytes, fetched by Clementine with
@@ -477,7 +480,7 @@ enum ServerFeature {
   SERVER_FEATURE_RENDERING = 1;
 }
 
-// Optional abilities of a renderer, beyond decoding its mime_types.
+// Optional abilities of a renderer, beyond decoding its formats.
 enum RendererFeature {
   RENDERER_FEATURE_UNSPECIFIED = 0;
   // Can queue a RENDER_PRELOAD item and start it without a gap.
@@ -486,23 +489,31 @@ enum RendererFeature {
   RENDERER_FEATURE_HTTP_RANGE = 2;
 }
 
+// One format a renderer can decode, with its limits.
+message AudioFormat {
+  // "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg". Without codecs=,
+  // any codec in that container. Strings rather than an enum, because the
+  // set is open-ended and already standardised.
+  optional string mime_type = 1;
+  // The sample rates it plays. Empty: any rate the format allows.
+  repeated int32 sample_rates_hz = 2;
+  // Unset or 0: as many channels as the format allows.
+  optional int32 max_channels = 3;
+}
+
 // What a renderer can play. Sent when it registers.
 message RendererCapabilities {
   // Stable per install (a UUID), so a renderer is recognised after reconnecting.
   optional string renderer_id = 1;
   // Shown in output pickers: "Pixel 9", "Kitchen tablet".
   optional string display_name = 2;
-  // Formats it can decode: "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg".
-  // Strings rather than an enum, because the set is open-ended and already
-  // standardised.
-  repeated string mime_types = 3;
-  optional int32 max_sample_rate_hz = 4;
-  optional int32 max_channels = 5;
+  // The formats it can decode, in no particular order.
+  repeated AudioFormat formats = 3;
   // Unknown values are ignored by the server.
-  repeated RendererFeature features = 6;
+  repeated RendererFeature features = 4;
   // Upper limit the renderer wants, for example on mobile data. Unset or 0
   // means no limit.
-  optional int32 max_bitrate_kbps = 7;
+  optional int32 max_bitrate_kbps = 5;
 }
 
 message RequestConnect {
@@ -680,6 +691,22 @@ says otherwise, `_UNSPECIFIED` means the sender didn't say, and the message is
 handled as if the field were absent.
 
 ### 6.3 Notes
+
+- **Limits are per format.** Real limits depend on the codec (a renderer may
+  play FLAC only up to 96 kHz while playing AAC at any rate), which is also
+  how browsers (`MediaCapabilities.decodingInfo`) and Android
+  (`MediaCodecInfo`) describe them, so each `AudioFormat` carries its own.
+  The limits stop at sample rate and channels because Clementine's `Song`
+  records neither channel count nor bit depth, so bit depth couldn't be
+  checked yet; a `max_bits_per_sample` field can be added later without
+  breaking older clients.
+- **Sample rates are a list of integers, not an enum or a maximum.** A list
+  records gaps (a device that plays 48 kHz but not 44.1 kHz) and gives the
+  encoder rates to choose from. Rates are an open set of numbers, so an enum
+  would need a schema change for each new one and would say nothing the
+  number doesn't. One entry per format, rather than one per combination of
+  format, rate and channel count, says the same thing without multiplying
+  entries.
 
 - The renderer uses its **existing control connection**, so authentication,
   keep-alive and disconnect handling work as they do now. A device can be a
@@ -980,8 +1007,9 @@ Clementine has to serve the web app itself, from Qt resources at `/`:
 ### The browser as a renderer
 
 An `<audio>` element can play both delivery modes: Direct with Range
-requests, and the Pipeline's chunked responses. `canPlayType()` fills in
-`RendererCapabilities.mime_types`. This gives "Play on this browser" with
+requests, and the Pipeline's chunked responses. `canPlayType()`, or
+`MediaCapabilities.decodingInfo()` for sample rates and channels, fills in
+`RendererCapabilities.formats`. This gives "Play on this browser" with
 nothing to install, and is the easiest way to test streaming end to end.
 Browsers bring their own limits, though:
 

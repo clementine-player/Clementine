@@ -90,11 +90,13 @@ void SplitMime(const QString& mime, QString* type, QString* codecs) {
 RendererCaps RendererCaps::FromProto(
     const cpb::remote::RendererCapabilities& pb) {
   RendererCaps caps;
-  for (const std::string& mime : pb.mime_types()) {
-    caps.mime_types << QString::fromStdString(mime);
+  for (const cpb::remote::AudioFormat& pb_format : pb.formats()) {
+    Format format;
+    format.mime_type = QString::fromStdString(pb_format.mime_type());
+    for (int hz : pb_format.sample_rates_hz()) format.sample_rates_hz << hz;
+    format.max_channels = pb_format.max_channels();
+    caps.formats << format;
   }
-  caps.max_sample_rate_hz = pb.max_sample_rate_hz();
-  caps.max_channels = pb.max_channels();
   caps.max_bitrate_kbps = pb.max_bitrate_kbps();
   for (int feature : pb.features()) {
     switch (feature) {
@@ -111,17 +113,23 @@ RendererCaps RendererCaps::FromProto(
   return caps;
 }
 
-bool RendererCaps::Accepts(const QString& mime_type) const {
+const RendererCaps::Format* RendererCaps::Find(const QString& mime_type) const {
   QString want_type, want_codecs;
   SplitMime(mime_type, &want_type, &want_codecs);
 
-  for (const QString& entry : mime_types) {
+  for (const Format& format : formats) {
     QString type, codecs;
-    SplitMime(entry, &type, &codecs);
+    SplitMime(format.mime_type, &type, &codecs);
     if (type != want_type) continue;
-    if (codecs.isEmpty() || codecs == want_codecs) return true;
+    if (codecs.isEmpty() || codecs == want_codecs) return &format;
   }
-  return false;
+  return nullptr;
+}
+
+QStringList RendererCaps::mime_types() const {
+  QStringList ret;
+  for (const Format& format : formats) ret << format.mime_type;
+  return ret;
 }
 
 StreamPlan StreamPlanner::Plan(const MediaPlaybackRequest& req,
@@ -136,16 +144,26 @@ StreamPlan StreamPlanner::Plan(const MediaPlaybackRequest& req,
   const bool cut = song.has_cue() || song.beginning_nanosec() > 0;
   const bool over_bitrate = caps.max_bitrate_kbps > 0 && song.bitrate() > 0 &&
                             song.bitrate() > caps.max_bitrate_kbps;
-  const bool over_rate = caps.max_sample_rate_hz > 0 &&
-                         song.samplerate() > caps.max_sample_rate_hz;
   const bool convert_lossless =
       settings.transcode_lossless && song.IsFileLossless();
-  const bool as_is = !cut && !over_bitrate && !over_rate && !convert_lossless &&
-                     !settings.force_encode;
+  const bool as_is =
+      !cut && !over_bitrate && !convert_lossless && !settings.force_encode;
+
+  // Whether the renderer plays |mime_type| at the song's sample rate.
+  bool rate_refused = false;
+  auto plays = [&](const char* mime_type) {
+    const RendererCaps::Format* format = caps.Find(mime_type);
+    if (!format) return false;
+    if (!format->AcceptsSampleRate(song.samplerate())) {
+      rate_refused = true;
+      return false;
+    }
+    return true;
+  };
 
   // 1. Direct: a local file the renderer can play, with nothing to change.
   if (as_is && req.MediaUrl().isLocalFile() && codec && *codec->file_mime &&
-      caps.Accepts(codec->file_mime)) {
+      plays(codec->file_mime)) {
     plan.mode = StreamPlan::Direct;
     plan.mime_type = codec->file_mime;
     plan.reason = "local file the renderer can play";
@@ -157,7 +175,7 @@ StreamPlan StreamPlanner::Plan(const MediaPlaybackRequest& req,
   // 2. Passthrough: the renderer can play the source codec, and nothing
   // needs the decoded audio.
   if (as_is && codec && *codec->passthrough_caps &&
-      caps.Accepts(codec->passthrough_mime)) {
+      plays(codec->passthrough_mime)) {
     plan.output = StreamPlan::Passthrough;
     plan.mime_type = codec->passthrough_mime;
     plan.decode_caps = codec->passthrough_caps;
@@ -168,18 +186,22 @@ StreamPlan StreamPlanner::Plan(const MediaPlaybackRequest& req,
 
   // 3. Encode to the first format the renderer accepts.
   for (const EncodeTarget& target : kEncodeTargets) {
-    if (!caps.Accepts(target.mime)) continue;
+    const RendererCaps::Format* format = caps.Find(target.mime);
+    if (!format) continue;
 
     int kbps = target.default_kbps;
     if (caps.max_bitrate_kbps > 0) kbps = qMin(kbps, caps.max_bitrate_kbps);
 
+    // audioresample picks the allowed rate nearest the source's.
     QString raw = "audioconvert ! audioresample";
     QStringList limits;
-    if (caps.max_sample_rate_hz > 0) {
-      limits << QString("rate=(int)[1,%1]").arg(caps.max_sample_rate_hz);
+    if (!format->sample_rates_hz.isEmpty()) {
+      QStringList rates;
+      for (int hz : format->sample_rates_hz) rates << QString::number(hz);
+      limits << QString("rate=(int){ %1 }").arg(rates.join(", "));
     }
-    if (caps.max_channels > 0) {
-      limits << QString("channels=(int)[1,%1]").arg(caps.max_channels);
+    if (format->max_channels > 0) {
+      limits << QString("channels=(int)[1,%1]").arg(format->max_channels);
     }
     if (!limits.isEmpty()) {
       raw += " ! audio/x-raw, " + limits.join(", ");
@@ -194,7 +216,8 @@ StreamPlan StreamPlanner::Plan(const MediaPlaybackRequest& req,
                   : cut              ? "encode: track is cut from a larger file"
                   : convert_lossless ? "encode: converting a lossless file"
                   : over_bitrate     ? "encode: over the renderer's bitrate"
-                  : over_rate        ? "encode: over the renderer's sample rate"
+                  : rate_refused
+                      ? "encode: the renderer can't play the sample rate"
                   : !codec ? "encode: unknown source codec"
                            : "encode: the renderer can't play the codec";
     return plan;

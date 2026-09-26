@@ -477,13 +477,24 @@ enum ServerFeature {
   SERVER_FEATURE_RENDERING = 1;
 }
 
-// Optional abilities of a renderer, beyond decoding its mime_types.
+// Optional abilities of a renderer, beyond decoding its formats.
 enum RendererFeature {
   RENDERER_FEATURE_UNSPECIFIED = 0;
   // Can queue a RENDER_PRELOAD item and start it without a gap.
   RENDERER_FEATURE_GAPLESS = 1;
   // Sends HTTP Range requests, so it can seek in Direct streams itself.
   RENDERER_FEATURE_HTTP_RANGE = 2;
+}
+
+// One format a renderer can decode, with its limits.
+message AudioFormat {
+  // "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg". Without codecs=,
+  // any codec in that container.
+  optional string mime_type = 1;
+  // The sample rates it plays. Empty: any rate the format allows.
+  repeated int32 sample_rates_hz = 2;
+  // Unset or 0: as many channels as the format allows.
+  optional int32 max_channels = 3;
 }
 
 // What a renderer can play. Sent in RequestConnect.
@@ -493,17 +504,13 @@ message RendererCapabilities {
   optional string renderer_id = 1;
   // Shown in output pickers: "Pixel 9", "Kitchen tablet".
   optional string display_name = 2;
-  // Formats it can decode: "audio/flac", "audio/ogg; codecs=opus",
-  // "audio/mpeg". An entry without codecs= accepts any codec in that
-  // container.
-  repeated string mime_types = 3;
-  optional int32 max_sample_rate_hz = 4;
-  optional int32 max_channels = 5;
+  // The formats it can decode, in no particular order.
+  repeated AudioFormat formats = 3;
   // Unknown values are ignored by the server.
-  repeated RendererFeature features = 6;
+  repeated RendererFeature features = 4;
   // Upper limit the renderer wants, for example on mobile data. Unset or 0
   // means no limit.
-  optional int32 max_bitrate_kbps = 7;
+  optional int32 max_bitrate_kbps = 5;
 }
 
 // Whether an output can be used right now.

@@ -34,9 +34,19 @@ Song MakeSong(Song::FileType type, const QUrl& url) {
   return song;
 }
 
+RendererCaps::Format Format(const QString& mime_type,
+                            const QList<int>& sample_rates_hz = {},
+                            int max_channels = 0) {
+  RendererCaps::Format format;
+  format.mime_type = mime_type;
+  format.sample_rates_hz = sample_rates_hz;
+  format.max_channels = max_channels;
+  return format;
+}
+
 RendererCaps Caps(const QStringList& mime_types) {
   RendererCaps caps;
-  caps.mime_types = mime_types;
+  for (const QString& mime_type : mime_types) caps.formats << Format(mime_type);
   return caps;
 }
 
@@ -126,14 +136,46 @@ TEST(StreamPlannerTest, BitrateCapLimitsTheEncoder) {
   EXPECT_TRUE(plan.tail.contains("bitrate=96000")) << plan.tail;
 }
 
-TEST(StreamPlannerTest, SampleRateCapAddsACapsFilter) {
-  RendererCaps caps = Caps({"audio/mpeg"});
-  caps.max_sample_rate_hz = 48000;
+TEST(StreamPlannerTest, UnlistedSampleRateIsResampled) {
+  // Plays FLAC, but not at 96 kHz.
+  RendererCaps caps;
+  caps.formats << Format("audio/flac", {44100, 48000})
+               << Format("audio/mpeg", {44100, 48000}, 2);
   Song song = MakeSong(Song::Type_Flac, kLocalFlac);
   song.set_samplerate(96000);
+
   StreamPlan plan = Plan(song, caps);
+  EXPECT_EQ(StreamPlan::Pipeline, plan.mode);
   EXPECT_EQ(StreamPlan::Encode, plan.output);
-  EXPECT_TRUE(plan.tail.contains("rate=(int)[1,48000]")) << plan.tail;
+  EXPECT_EQ("audio/mpeg", plan.mime_type);
+  EXPECT_TRUE(plan.tail.contains("rate=(int){ 44100, 48000 }")) << plan.tail;
+  EXPECT_TRUE(plan.tail.contains("channels=(int)[1,2]")) << plan.tail;
+}
+
+TEST(StreamPlannerTest, ListedSampleRateIsDirect) {
+  RendererCaps caps;
+  caps.formats << Format("audio/flac", {44100, 48000});
+  StreamPlan plan = Plan(MakeSong(Song::Type_Flac, kLocalFlac), caps);
+  EXPECT_EQ(StreamPlan::Direct, plan.mode);
+}
+
+TEST(StreamPlannerTest, UnknownSampleRateIsAccepted) {
+  RendererCaps caps;
+  caps.formats << Format("audio/flac", {48000});
+  Song song = MakeSong(Song::Type_Flac, kLocalFlac);
+  song.set_samplerate(0);
+  EXPECT_EQ(StreamPlan::Direct, Plan(song, caps).mode);
+}
+
+TEST(StreamPlannerTest, LimitsAreChosenPerFormat) {
+  // Opus is preferred, but it's the MP3 entry's limits that don't apply.
+  RendererCaps caps;
+  caps.formats << Format("audio/mpeg", {44100}, 1)
+               << Format("audio/ogg; codecs=opus", {48000});
+  StreamPlan plan = Plan(MakeSong(Song::Type_Flac, kLocalFlac), caps);
+  EXPECT_EQ("audio/ogg; codecs=opus", plan.mime_type);
+  EXPECT_TRUE(plan.tail.contains("rate=(int){ 48000 }")) << plan.tail;
+  EXPECT_FALSE(plan.tail.contains("channels")) << plan.tail;
 }
 
 TEST(StreamPlannerTest, ForceEncodeSkipsDirect) {

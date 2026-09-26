@@ -12,17 +12,9 @@ import uuid
 from pathlib import Path
 
 from . import connection
+from .formats import DEFAULT_FORMATS, describe, parse_format
 from .proto import pb
 from .renderer import Renderer
-
-DEFAULT_MIME_TYPES = [
-    "audio/mpeg",
-    "audio/flac",
-    "audio/ogg",
-    "audio/aac",
-    "audio/mp4",
-    "audio/wav",
-]
 
 CONTROLS = {
     "play": pb.PLAY,
@@ -196,7 +188,7 @@ async def cmd_render(args) -> None:
     caps = pb.RendererCapabilities(
         renderer_id=renderer_id(args.id),
         display_name=args.name,
-        mime_types=args.mime or DEFAULT_MIME_TYPES,
+        formats=args.format or [parse_format(f) for f in DEFAULT_FORMATS],
         features=[pb.RENDERER_FEATURE_HTTP_RANGE]
         + ([pb.RENDERER_FEATURE_GAPLESS] if args.gapless else []),
     )
@@ -212,7 +204,7 @@ async def cmd_render(args) -> None:
 
     log(
         f"registered as '{caps.display_name}' ({caps.renderer_id})"
-        f" accepting {', '.join(caps.mime_types)}"
+        f" accepting {'; '.join(describe(f) for f in caps.formats)}"
     )
 
     renderer = Renderer(conn, args.player, args.gapless, log)
@@ -271,10 +263,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="null fetches the stream without playing it",
     )
     p.add_argument(
-        "--mime",
+        "--format",
         action="append",
-        help="a MIME type we can play; repeat for more"
-        f" (default: {', '.join(DEFAULT_MIME_TYPES)})",
+        type=parse_format,
+        metavar="FORMAT",
+        help="a format we can play, as a MIME type with optional rates= and"
+        ' channels= limits, e.g. "audio/flac; rates=44100,48000; channels=2".'
+        f" Repeat for more (default: {', '.join(DEFAULT_FORMATS)})",
     )
     p.add_argument("--max-bitrate", type=int, help="in kbps")
     p.add_argument(

@@ -18,6 +18,7 @@
 #ifndef NETWORKREMOTE_STREAMING_STREAMPLANNER_H_
 #define NETWORKREMOTE_STREAMING_STREAMPLANNER_H_
 
+#include <QList>
 #include <QString>
 #include <QStringList>
 
@@ -33,18 +34,32 @@ class RendererCapabilities;
 // What a renderer said it can play, in a form the planner can use without
 // protobuf.
 struct RendererCaps {
-  QStringList mime_types;
-  int max_sample_rate_hz = 0;  // 0 = no limit
-  int max_channels = 0;        // 0 = no limit
-  int max_bitrate_kbps = 0;    // 0 = no limit
+  struct Format {
+    QString mime_type;
+    QList<int> sample_rates_hz;  // empty = any
+    int max_channels = 0;        // 0 = any
+
+    bool AcceptsSampleRate(int hz) const {
+      return sample_rates_hz.isEmpty() || hz <= 0 ||
+             sample_rates_hz.contains(hz);
+    }
+  };
+
+  QList<Format> formats;
+  int max_bitrate_kbps = 0;  // 0 = no limit
   bool gapless = false;
   bool http_range = false;
 
   static RendererCaps FromProto(const cpb::remote::RendererCapabilities& pb);
 
-  // True if one of mime_types accepts |mime_type|. An entry without a
+  // The format that accepts |mime_type|, or nullptr. An entry without a
   // codecs= parameter accepts any codec in that container.
-  bool Accepts(const QString& mime_type) const;
+  const Format* Find(const QString& mime_type) const;
+  bool Accepts(const QString& mime_type) const {
+    return Find(mime_type) != nullptr;
+  }
+
+  QStringList mime_types() const;
 };
 
 struct StreamSettings {
