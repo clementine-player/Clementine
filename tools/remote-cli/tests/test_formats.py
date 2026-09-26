@@ -2,7 +2,7 @@ import argparse
 
 import pytest
 
-from clementine_remote.formats import describe, parse_format
+from clementine_remote.formats import describe, matches, parse_format
 
 
 def test_plain_mime_type():
@@ -31,3 +31,17 @@ def test_several_rates():
 def test_rejects_bad_input(text):
     with pytest.raises(argparse.ArgumentTypeError):
         parse_format(text)
+
+
+@pytest.mark.parametrize(
+    ("entry", "mime_type", "expected"),
+    [
+        ("audio/flac", "audio/flac", True),
+        ("audio/ogg", "audio/ogg; codecs=opus", True),
+        ("audio/ogg; codecs=vorbis", "audio/ogg; codecs=opus", False),
+        ("audio/ogg; codecs=opus", "audio/ogg; codecs=opus", True),
+        ("audio/flac", "audio/mpeg", False),
+    ],
+)
+def test_matches(entry, mime_type, expected):
+    assert matches(parse_format(entry), mime_type) is expected
