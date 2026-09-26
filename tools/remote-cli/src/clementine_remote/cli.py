@@ -9,14 +9,45 @@ import os
 import socket
 import sys
 import uuid
+from collections.abc import Callable, Coroutine
 from pathlib import Path
+from typing import Any
 
 from . import connection
+from .connection import Connection
 from .formats import DEFAULT_FORMATS, describe, parse_format
 from .proto import pb
 from .renderer import Renderer
 
-CONTROLS = {
+
+class Args(argparse.Namespace):
+    """The parsed command line, with the type of every option."""
+
+    host: str
+    port: int
+    auth_code: int | None
+    func: Callable[[Args], Coroutine[Any, Any, None]]
+    # use
+    output_id: str
+    # control
+    action: str
+    # seek
+    seconds: int
+    # add
+    items: list[str]
+    play: bool
+    # render
+    name: str
+    id: str | None
+    player: str
+    format: list[pb.AudioFormat] | None
+    fail_format: list[pb.AudioFormat] | None
+    max_bitrate: int | None
+    gapless: bool
+    take_over: bool
+
+
+CONTROLS: dict[str, pb.MsgType] = {
     "play": pb.PLAY,
     "pause": pb.PAUSE,
     "playpause": pb.PLAYPAUSE,
@@ -45,36 +76,42 @@ def renderer_id(explicit: str | None) -> str:
     return value
 
 
-async def open_connection(args, renderer=None):
+async def open_connection(
+    args: Args, renderer: pb.RendererCapabilities | None = None
+) -> tuple[Connection, pb.ResponseClementineInfo]:
     try:
         conn, info = await connection.connect(
             args.host, args.port, args.auth_code, renderer=renderer
         )
     except OSError as e:
-        raise SystemExit(f"Can't connect to {args.host}:{args.port}: {e}")
+        raise SystemExit(f"Can't connect to {args.host}:{args.port}: {e}") from e
     except ConnectionError as e:
-        raise SystemExit(str(e))
-    return conn, info.response_clementine_info
+        raise SystemExit(str(e)) from e
+    return conn, info
 
 
-def has_rendering(info) -> bool:
+def has_rendering(info: pb.ResponseClementineInfo) -> bool:
     return pb.SERVER_FEATURE_RENDERING in info.features
 
 
-async def wait_for(conn, msg_type, timeout=5.0):
-    async def find():
+# How long to wait for Clementine to answer a request.
+REPLY_TIMEOUT = 5.0
+
+
+async def wait_for(conn: Connection, msg_type: pb.MsgType) -> pb.Message:
+    async def find() -> pb.Message:
         async for msg in conn.messages():
             if msg.type == msg_type:
                 return msg
         raise SystemExit("Connection closed")
 
     try:
-        return await asyncio.wait_for(find(), timeout)
-    except TimeoutError:
-        raise SystemExit(f"No {pb.MsgType.Name(msg_type)} from Clementine")
+        return await asyncio.wait_for(find(), REPLY_TIMEOUT)
+    except TimeoutError as e:
+        raise SystemExit(f"No {pb.MsgType.Name(msg_type)} from Clementine") from e
 
 
-def print_outputs(outputs) -> None:
+def print_outputs(outputs: pb.ResponseOutputs) -> None:
     for output in outputs.outputs:
         marker = "*" if output.state == pb.OUTPUT_STATE_ACTIVE else " "
         print(f"{marker} {output.output_id:38} {output.display_name}")
@@ -83,81 +120,95 @@ def print_outputs(outputs) -> None:
 # Commands ------------------------------------------------------------------
 
 
-async def cmd_info(args) -> None:
+async def cmd_info(args: Args) -> None:
     conn, info = await open_connection(args)
     print(f"version:  {info.version}")
     print(f"state:    {pb.EngineState.Name(info.state)}")
     print(f"downloads allowed: {info.allow_downloads}")
-    print(
-        f"features: {', '.join(pb.ServerFeature.Name(f) for f in info.features) or 'none'}"
-    )
+    features = ", ".join(pb.ServerFeature.Name(f) for f in info.features)
+    print(f"features: {features or 'none'}")
     await conn.close()
 
 
-async def cmd_outputs(args) -> None:
+async def cmd_outputs(args: Args) -> None:
     conn, info = await open_connection(args)
     if not has_rendering(info):
         raise SystemExit("Clementine doesn't allow playing on remote devices")
-    await conn.send(pb.REQUEST_OUTPUTS)
+    await conn.send(pb.Message(type=pb.REQUEST_OUTPUTS))
     msg = await wait_for(conn, pb.OUTPUTS)
     print_outputs(msg.response_outputs)
     await conn.close()
 
 
-async def cmd_use(args) -> None:
+async def cmd_use(args: Args) -> None:
     conn, info = await open_connection(args)
     if not has_rendering(info):
         raise SystemExit("Clementine doesn't allow playing on remote devices")
     await conn.send(
-        pb.SET_OUTPUT, request_set_output=pb.RequestSetOutput(output_id=args.output_id)
+        pb.Message(
+            type=pb.SET_OUTPUT,
+            request_set_output=pb.RequestSetOutput(output_id=args.output_id),
+        )
     )
     msg = await wait_for(conn, pb.OUTPUTS)
     print_outputs(msg.response_outputs)
     await conn.close()
 
 
-async def cmd_control(args) -> None:
+async def cmd_control(args: Args) -> None:
     conn, _ = await open_connection(args)
-    await conn.send(CONTROLS[args.action])
+    await conn.send(pb.Message(type=CONTROLS[args.action]))
     await conn.close()
 
 
-async def cmd_seek(args) -> None:
+async def cmd_seek(args: Args) -> None:
     conn, _ = await open_connection(args)
     await conn.send(
-        pb.SET_TRACK_POSITION,
-        request_set_track_position=pb.RequestSetTrackPosition(position=args.seconds),
+        pb.Message(
+            type=pb.SET_TRACK_POSITION,
+            request_set_track_position=pb.RequestSetTrackPosition(
+                position=args.seconds
+            ),
+        )
     )
     await conn.close()
 
 
-async def cmd_add(args) -> None:
+def to_urls(items: list[str]) -> list[str]:
+    """Turns the paths among |items| into file:// URLs."""
+    urls: list[str] = []
+    for item in items:
+        path = Path(item)
+        urls.append(path.resolve().as_uri() if path.exists() else item)
+    return urls
+
+
+async def cmd_add(args: Args) -> None:
     conn, _ = await open_connection(args)
-    await conn.send(pb.REQUEST_PLAYLISTS)
+    await conn.send(pb.Message(type=pb.REQUEST_PLAYLISTS))
     msg = await wait_for(conn, pb.PLAYLISTS)
     active = [p.id for p in msg.response_playlists.playlist if p.active]
     if not active:
         raise SystemExit("Clementine has no active playlist")
 
-    urls = []
-    for item in args.items:
-        path = Path(item)
-        urls.append(path.resolve().as_uri() if path.exists() else item)
+    urls = to_urls(args.items)
     await conn.send(
-        pb.INSERT_URLS,
-        request_insert_urls=pb.RequestInsertUrls(
-            playlist_id=active[0], urls=urls, play_now=args.play
-        ),
+        pb.Message(
+            type=pb.INSERT_URLS,
+            request_insert_urls=pb.RequestInsertUrls(
+                playlist_id=active[0], urls=urls, play_now=args.play
+            ),
+        )
     )
     print(f"Added {len(urls)} item(s) to playlist {active[0]}")
     await conn.close()
 
 
-async def cmd_watch(args) -> None:
+async def cmd_watch(args: Args) -> None:
     conn, info = await open_connection(args)
     log(f"connected to {info.version}")
     if has_rendering(info):
-        await conn.send(pb.REQUEST_OUTPUTS)
+        await conn.send(pb.Message(type=pb.REQUEST_OUTPUTS))
     async for msg in conn.messages():
         t = msg.type
         if t == pb.CURRENT_METAINFO:
@@ -184,7 +235,7 @@ async def cmd_watch(args) -> None:
             return
 
 
-async def cmd_render(args) -> None:
+async def cmd_render(args: Args) -> None:
     caps = pb.RendererCapabilities(
         renderer_id=renderer_id(args.id),
         display_name=args.name,
@@ -210,8 +261,10 @@ async def cmd_render(args) -> None:
     renderer = Renderer(conn, args.player, args.gapless, log, args.fail_format)
     if args.take_over:
         await conn.send(
-            pb.SET_OUTPUT,
-            request_set_output=pb.RequestSetOutput(output_id=caps.renderer_id),
+            pb.Message(
+                type=pb.SET_OUTPUT,
+                request_set_output=pb.RequestSetOutput(output_id=caps.renderer_id),
+            )
         )
     await renderer.run()
 
@@ -296,7 +349,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> None:
-    args = build_parser().parse_args(argv)
+    args = build_parser().parse_args(argv, namespace=Args())
     try:
         asyncio.run(args.func(args))
     except KeyboardInterrupt:

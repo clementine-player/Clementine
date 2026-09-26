@@ -7,8 +7,9 @@ card, and it can act as a **controller** that lists outputs and moves playback
 between them.
 
 It needs [uv](https://docs.astral.sh/uv/). The protocol's `.proto` file is read
-from this repository and compiled on first use, so changes to it are picked up
-on the next run.
+from this repository and compiled, with type stubs, into
+`src/clementine_remote/_generated` (not checked in) on first use. It's
+recompiled whenever the `.proto` changes.
 
 ## Setting up Clementine
 
@@ -57,9 +58,30 @@ To try the `ffplay` player without sound, set `SDL_AUDIODRIVER=dummy`.
 
 ## Development
 
+All the code is fully typed. CI's Python job runs these, with the versions of
+ruff and ty pinned in `pyproject.toml`:
+
 ```sh
-uv run --group dev pytest
-uvx ruff check src tests && uvx ruff format --check src tests
+uv run python -m clementine_remote.proto   # generate the protobuf module first
+uv run ruff check
+uv run ruff format --check
+uv run ty check
+uv run pytest
 ```
 
 Set `CLEMENTINE_REMOTE_PROTO` to use a `.proto` file from elsewhere.
+
+### Smoke tests
+
+`tests/smoke` runs a real Clementine and plays through the renderer, covering
+Direct and Pipeline streaming, retries, gapless preloading, moving playback
+between outputs and the checks on media URLs. They're skipped unless
+`CLEMENTINE_BINARY` points at a built `clementine`, and need `gst-launch-1.0`
+with GStreamer's base, good and bad plugins. CI's Test job runs them.
+
+```sh
+CLEMENTINE_BINARY=/path/to/build/clementine uv run pytest tests/smoke -v
+```
+
+Each test starts Clementine with a throwaway profile and its own `TMPDIR`, so
+it can't touch your library or hand off to a Clementine you're running.

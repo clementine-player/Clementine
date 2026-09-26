@@ -9,13 +9,21 @@ import socket
 import subprocess
 import tempfile
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Self
+from types import TracebackType
+from typing import Self, TypeVar
 
 from clementine_remote import connection
+from clementine_remote.connection import Connection
+from clementine_remote.events import Event, Fetched
 from clementine_remote.formats import DEFAULT_FORMATS, parse_format
+from clementine_remote.players import NullPlayer
 from clementine_remote.proto import pb
 from clementine_remote.renderer import Renderer
+
+T = TypeVar("T")
+E = TypeVar("E", bound=Event)
 
 HOST = "127.0.0.1"
 TIMEOUT = 20.0
@@ -39,12 +47,12 @@ def has_gst_element(name: str) -> bool:
 class Clementine:
     """A Clementine with a throwaway profile, listening on 127.0.0.1 only."""
 
-    def __init__(self, binary: Path, root: Path):
+    def __init__(self, binary: Path, root: Path) -> None:
         self.binary = binary
         self.root = root
         self.port = free_port()
         self.log_path = root / "clementine.log"
-        self.process: subprocess.Popen | None = None
+        self.process: subprocess.Popen[bytes] | None = None
         # Short, because Qt's local sockets live here and Unix socket paths
         # are limited to about 100 characters. Also keeps Clementine's
         # single-instance check away from a Clementine the user is running.
@@ -91,10 +99,9 @@ sink={sink}
         )
         deadline = time.monotonic() + 60
         while time.monotonic() < deadline:
-            if self.process.poll() is not None:
-                raise RuntimeError(
-                    f"Clementine exited with {self.process.returncode}:\n{self.log_tail()}"
-                )
+            code = self.process.poll()
+            if code is not None:
+                raise RuntimeError(f"Clementine exited with {code}:\n{self.log_tail()}")
             try:
                 socket.create_connection((HOST, self.port), timeout=1).close()
                 return
@@ -121,9 +128,11 @@ sink={sink}
         return "\n".join(text[-lines:])
 
 
-async def eventually(predicate, timeout: float = TIMEOUT, what: str = "condition"):
+async def eventually(
+    predicate: Callable[[], T], within: float = TIMEOUT, what: str = "condition"
+) -> T:
     """Waits until predicate() returns something truthy, and returns it."""
-    deadline = time.monotonic() + timeout
+    deadline = time.monotonic() + within
     while True:
         result = predicate()
         if result:
@@ -134,29 +143,44 @@ async def eventually(predicate, timeout: float = TIMEOUT, what: str = "condition
 
 
 # Clementine reports engine state changes with these message types.
-STATE_MESSAGES = {pb.PLAY: pb.Playing, pb.PAUSE: pb.Paused, pb.STOP: pb.Empty}
+STATE_MESSAGES: dict[pb.MsgType, pb.EngineState] = {
+    pb.PLAY: pb.Playing,
+    pb.PAUSE: pb.Paused,
+    pb.STOP: pb.Empty,
+}
 
 
 class Controller:
     """A plain remote control that tracks what Clementine reports."""
 
-    def __init__(self, port: int):
+    def __init__(self, port: int) -> None:
         self.port = port
         # States Clementine has reported since we connected, oldest first.
-        self.states: list[int] = []
-        self.info = None
-        self.outputs: list = []
-        self.playlists: list = []
-        self._task: asyncio.Task | None = None
+        self.states: list[pb.EngineState] = []
+        self.info = pb.ResponseClementineInfo()
+        self.outputs: list[pb.Output] = []
+        self.playlists: list[pb.Playlist] = []
+        self._conn: Connection | None = None
+        self._task: asyncio.Task[None] | None = None
+
+    @property
+    def conn(self) -> Connection:
+        assert self._conn, "use Controller with async with"
+        return self._conn
 
     async def __aenter__(self) -> Self:
-        self.conn, info = await connection.connect(HOST, self.port)
-        self.info = info.response_clementine_info
+        self._conn, self.info = await connection.connect(HOST, self.port)
         self._task = asyncio.create_task(self._read())
         return self
 
-    async def __aexit__(self, *exc) -> None:
-        self._task.cancel()
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        if self._task:
+            self._task.cancel()
         await self.conn.close()
 
     async def _read(self) -> None:
@@ -168,24 +192,28 @@ class Controller:
             elif msg.type == pb.PLAYLISTS:
                 self.playlists = list(msg.response_playlists.playlist)
 
-    async def send(self, msg_type: int, **fields) -> None:
-        await self.conn.send(msg_type, **fields)
-
     async def add(self, *paths: Path, play: bool = True) -> None:
         self.playlists = []
-        await self.send(pb.REQUEST_PLAYLISTS)
+        await self.conn.send(pb.Message(type=pb.REQUEST_PLAYLISTS))
         playlists = await eventually(lambda: self.playlists, what="playlists")
         active = next(p.id for p in playlists if p.active)
-        await self.send(
-            pb.INSERT_URLS,
-            request_insert_urls=pb.RequestInsertUrls(
-                playlist_id=active, urls=[p.as_uri() for p in paths], play_now=play
-            ),
+        await self.conn.send(
+            pb.Message(
+                type=pb.INSERT_URLS,
+                request_insert_urls=pb.RequestInsertUrls(
+                    playlist_id=active,
+                    urls=[p.as_uri() for p in paths],
+                    play_now=play,
+                ),
+            )
         )
 
     async def use(self, output_id: str) -> None:
-        await self.send(
-            pb.SET_OUTPUT, request_set_output=pb.RequestSetOutput(output_id=output_id)
+        await self.conn.send(
+            pb.Message(
+                type=pb.SET_OUTPUT,
+                request_set_output=pb.RequestSetOutput(output_id=output_id),
+            )
         )
         await eventually(
             lambda: any(
@@ -195,11 +223,13 @@ class Controller:
             what=f"output {output_id} to become active",
         )
 
-    async def wait_for_state(self, state: int, timeout: float = TIMEOUT) -> None:
+    async def wait_for_state(
+        self, state: pb.EngineState, within: float = TIMEOUT
+    ) -> None:
         """Waits until Clementine reports |state| as its latest."""
         await eventually(
-            lambda: self.states and self.states[-1] == state,
-            timeout,
+            lambda: bool(self.states) and self.states[-1] == state,
+            within,
             f"Clementine to be {pb.EngineState.Name(state)}",
         )
 
@@ -216,17 +246,19 @@ class TestRenderer:
         formats: list[str] | None = None,
         fail_formats: list[str] | None = None,
         gapless: bool = False,
-    ):
+    ) -> None:
         self.port = port
         self.renderer_id = renderer_id
         self.formats = formats or DEFAULT_FORMATS
         self.fail_formats = fail_formats or []
         self.gapless = gapless
-        self.events: list[tuple[str, dict]] = []
+        self.events: list[Event] = []
         self.log_lines: list[str] = []
+        self._conn: Connection | None = None
+        self._task: asyncio.Task[None] | None = None
 
-    def _record(self, name: str, **details) -> None:
-        self.events.append((name, details))
+    def _record(self, event: Event) -> None:
+        self.events.append(event)
 
     def _log(self, line: str) -> None:
         self.log_lines.append(line)
@@ -241,27 +273,35 @@ class TestRenderer:
             formats=[parse_format(f) for f in self.formats],
             features=features,
         )
-        self.conn, info = await connection.connect(HOST, self.port, renderer=caps)
-        assert pb.SERVER_FEATURE_RENDERING in info.response_clementine_info.features
+        self._conn, info = await connection.connect(HOST, self.port, renderer=caps)
+        assert pb.SERVER_FEATURE_RENDERING in info.features
         self.renderer = Renderer(
-            self.conn,
+            self._conn,
             "null",
             self.gapless,
             self._log,
             [parse_format(f) for f in self.fail_formats],
             on_event=self._record,
         )
+        assert isinstance(self.renderer.player, NullPlayer)
         self.renderer.player.keep_bodies = True
         self._task = asyncio.create_task(self.renderer.run())
         return self
 
-    async def __aexit__(self, *exc) -> None:
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
         await self.disconnect()
 
     async def disconnect(self) -> None:
-        if not self._task.done():
+        if self._task and not self._task.done():
             self._task.cancel()
-            await self.conn.close()
+        if self._conn:
+            await self._conn.close()
+            self._conn = None
 
     async def take_over(self, controller: Controller) -> None:
         # Registration reaches Clementine's main thread asynchronously; wait
@@ -272,25 +312,30 @@ class TestRenderer:
         )
         await controller.use(self.renderer_id)
 
-    def all(self, name: str, **match) -> list[dict]:
-        return [
-            details
-            for event, details in self.events
-            if event == name and all(details.get(k) == v for k, v in match.items())
-        ]
+    def all(
+        self, kind: type[E], where: Callable[[E], bool] = lambda event: True
+    ) -> list[E]:
+        """The events of type |kind| so far, oldest first, that match |where|."""
+        return [e for e in self.events if isinstance(e, kind) and where(e)]
 
-    async def wait(self, name: str, count: int = 1, timeout: float = TIMEOUT, **match):
-        """Waits for the |count|th event called |name| and returns it."""
+    async def wait(
+        self,
+        kind: type[E],
+        count: int = 1,
+        where: Callable[[E], bool] = lambda event: True,
+        within: float = TIMEOUT,
+    ) -> E:
+        """Waits for the |count|th event of type |kind| matching |where|."""
         found = await eventually(
-            lambda: len(self.all(name, **match)) >= count and self.all(name, **match),
-            timeout,
-            f"renderer event {name!r} #{count} {match or ''}",
+            lambda: self.all(kind, where)[count - 1 :],
+            within,
+            f"renderer event {kind.__name__} #{count}",
         )
-        return found[count - 1]
+        return found[0]
 
-    async def fetched(self, url: str) -> dict:
+    async def fetched(self, url: str) -> Fetched:
         """The response the null player got for |url|."""
-        return await self.wait("fetched", url=url)
+        return await self.wait(Fetched, where=lambda e: e.url == url)
 
 
 def decoded_seconds(data: bytes, work_dir: Path) -> float:
