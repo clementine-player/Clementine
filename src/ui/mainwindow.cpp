@@ -63,7 +63,6 @@
 #include "devices/deviceview.h"
 #include "devices/deviceviewcontainer.h"
 #include "engines/enginebase.h"
-#include "engines/enginerouter.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
@@ -2813,8 +2812,7 @@ void MainWindow::ShowVisualisations() {
     connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
             visualisation_.get(), SLOT(SongMetadataChanged(Song)));
 
-    visualisation_->SetEngine(
-        qobject_cast<EngineRouter*>(app_->player()->engine())->local_engine());
+    visualisation_->SetEngine(app_->player()->gst_engine());
   }
 
   visualisation_->show();

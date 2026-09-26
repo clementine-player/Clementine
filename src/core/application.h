@@ -72,6 +72,14 @@ class Application : public QObject {
   static bool IsPortable() { return kIsPortable; }
   static bool DebugFeaturesEnabled();
 
+  // Playing on remote devices through the network remote is a prototype, on
+  // only with --experimental-remote-streaming. Set before the Application is
+  // created, because the Player's engine depends on it.
+  static void SetRemoteStreamingEnabled(bool enabled) {
+    sRemoteStreamingEnabled = enabled;
+  }
+  static bool RemoteStreamingEnabled() { return sRemoteStreamingEnabled; }
+
   explicit Application(QObject* parent = nullptr);
   ~Application();
 
@@ -132,6 +140,8 @@ class Application : public QObject {
   void SaveSettings_();
 
  private:
+  static bool sRemoteStreamingEnabled;
+
   QString language_name_;
   std::unique_ptr<ApplicationImpl> p_;
   std::unique_ptr<Splash> splash_;

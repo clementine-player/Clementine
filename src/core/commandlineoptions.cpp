@@ -89,6 +89,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       show_osd_(false),
       toggle_pretty_osd_(false),
       play_and_exit_timeout_secs_(-1),
+      experimental_remote_streaming_(false),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -148,6 +149,10 @@ bool CommandlineOptions::Parse() {
       // see main.cpp's RunPlayAndExit(). Deliberately left out of
       // kHelpText.
       {"play-and-exit", required_argument, 0, PlayAndExit},
+      // Undocumented while it's a prototype: lets network remote clients
+      // become the audio output. See docs/design/remote-streaming.md.
+      {"experimental-remote-streaming", no_argument, 0,
+       ExperimentalRemoteStreaming},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -310,6 +315,10 @@ bool CommandlineOptions::Parse() {
       case PlayAndExit:
         play_and_exit_timeout_secs_ = QString(optarg).toInt(&ok);
         if (!ok) play_and_exit_timeout_secs_ = -1;
+        break;
+
+      case ExperimentalRemoteStreaming:
+        experimental_remote_streaming_ = true;
         break;
 
       case '?':

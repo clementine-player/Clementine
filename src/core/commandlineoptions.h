@@ -73,6 +73,9 @@ class CommandlineOptions {
   int play_track_at() const { return play_track_at_; }
   bool delete_current_track() const { return delete_current_track_; }
   int play_and_exit_timeout_secs() const { return play_and_exit_timeout_secs_; }
+  bool experimental_remote_streaming() const {
+    return experimental_remote_streaming_;
+  }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
   QList<QUrl> urls() const { return urls_; }
@@ -98,7 +101,8 @@ class CommandlineOptions {
     VolumeIncreaseBy,
     VolumeDecreaseBy,
     RestartOrPrevious,
-    PlayAndExit
+    PlayAndExit,
+    ExperimentalRemoteStreaming
   };
 
   QString tr(const char* source_text);
@@ -121,6 +125,7 @@ class CommandlineOptions {
   bool show_osd_;
   bool toggle_pretty_osd_;
   int play_and_exit_timeout_secs_;
+  bool experimental_remote_streaming_;
   QString language_;
   QString log_levels_;
   QString playlist_name_;

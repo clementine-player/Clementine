@@ -24,6 +24,7 @@
 #include <QTcpServer>
 #include <QTimer>
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "covers/currentartloader.h"
 #include "engines/enginerouter.h"
@@ -68,7 +69,9 @@ void NetworkRemote::ReadSettings() {
 
   listen_on_all_addresses_ = s.value("listen_on_all_addresses", true).toBool();
   listen_addresses_ = s.value("listen_addresses").toStringList();
-  allow_streaming_ = s.value("allow_streaming", false).toBool();
+  // Needs --experimental-remote-streaming as well as the setting.
+  allow_streaming_ = Application::RemoteStreamingEnabled() &&
+                     s.value("allow_streaming", false).toBool();
 
   s.endGroup();
 }
@@ -333,6 +336,13 @@ void NetworkRemote::AcceptConnection() {
                << client_socket->peerAddress().toString();
     client_socket->close();
     client_socket->deleteLater();
+    return;
+  }
+
+  // Without remote streaming, only the remote protocol is spoken here, so
+  // there's nothing to tell apart.
+  if (!Application::RemoteStreamingEnabled()) {
+    CreateRemoteClient(client_socket);
     return;
   }
 

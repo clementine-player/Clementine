@@ -49,6 +49,30 @@ async def test_advertises_rendering(clementine: Clementine) -> None:
 
 
 @run_async
+async def test_nothing_changes_without_the_flag(
+    clementine_without_streaming: Clementine, music: dict[str, Path]
+) -> None:
+    port = clementine_without_streaming.port
+    async with Controller(port) as controller:
+        # The setting is on, but without the flag it does nothing.
+        assert pb.SERVER_FEATURE_RENDERING not in controller.info.features
+
+        # The remote still controls playback on this computer.
+        await controller.add(music["long.flac"])
+        await controller.wait_for_state(pb.Playing)
+
+        # Output requests are ignored rather than answered.
+        await controller.conn.send(pb.Message(type=pb.REQUEST_OUTPUTS))
+        await asyncio.sleep(1)
+        assert controller.outputs == []
+
+    # Nothing answers HTTP: to the remote protocol it's an oversized message.
+    with _connect_from(HOST, port) as http:
+        http.sendall(b"GET /s/x/1 HTTP/1.1\r\nHost: x\r\n\r\n")
+        assert _read_all(http) == b""
+
+
+@run_async
 async def test_direct_serves_the_file_with_ranges(
     clementine: Clementine, music: dict[str, Path]
 ) -> None:

@@ -128,6 +128,8 @@ void NetworkRemoteSettingsPage::Load() {
 
   ui_->allow_downloads->setChecked(s.value("allow_downloads", false).toBool());
   ui_->allow_streaming->setChecked(s.value("allow_streaming", false).toBool());
+  // A prototype, only offered with --experimental-remote-streaming.
+  ui_->allow_streaming->setVisible(Application::RemoteStreamingEnabled());
   ui_->convert_lossless->setChecked(
       s.value("convert_lossless", false).toBool());
 

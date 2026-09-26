@@ -68,6 +68,7 @@ const char* Application::kLegacyPortableDataDir = "data";
 const char* Application::kDefaultPortableDataDir = "clementine-data";
 const char* Application::kPortableDataDir = nullptr;
 const char* Application::kDebugFeaturesKey = "CLEMENTINE_DEBUG";
+bool Application::sRemoteStreamingEnabled = false;
 const QStringList Application::kDefaultMusicExtensionsAllowedRemotely = {
     "aac", "alac", "flac", "m3u", "m4a", "mp3", "ogg", "wav", "wmv"};
 

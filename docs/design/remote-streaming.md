@@ -884,6 +884,14 @@ Changes to existing files:
 
 A prototype of Phases 1 and 2 is on this branch, with a Python command line
 client in `tools/remote-cli` that can act as a renderer or a controller.
+
+It's only active when Clementine is started with the undocumented
+`--experimental-remote-streaming` flag. Without it Clementine behaves as it
+did before: the Player uses `GstEngine` directly with no `EngineRouter`, new
+remote connections go straight to a `RemoteClient` without waiting for their
+first byte, the *Allow playing on remote devices* setting is hidden and has
+no effect, and nothing is advertised to clients. A smoke test checks this.
+
 Where it differs from the design above:
 
 - **Threads.** `NetworkRemote`, its `RemoteClient`s and `MediaHttpServer`
