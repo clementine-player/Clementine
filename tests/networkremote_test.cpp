@@ -54,3 +54,17 @@ TEST(NetworkRemoteTest, SkipsAddressesThatDontParse) {
 TEST(NetworkRemoteTest, NothingChosenListensNowhere) {
   EXPECT_TRUE(NetworkRemote::ListenAddresses(false, QStringList()).isEmpty());
 }
+
+TEST(NetworkRemoteTest, LocalhostIsPrivate) {
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("127.0.0.1")));
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("::1")));
+  // How an IPv4 client appears on a dual-stack socket.
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:127.0.0.1")));
+}
+
+TEST(NetworkRemoteTest, PrivateAndPublicAddresses) {
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("192.168.1.10")));
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:10.0.0.2")));
+  EXPECT_FALSE(NetworkRemote::IpIsPrivate(QHostAddress("8.8.8.8")));
+  EXPECT_FALSE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:8.8.8.8")));
+}

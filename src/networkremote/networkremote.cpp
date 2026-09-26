@@ -258,6 +258,9 @@ void NetworkRemote::AcceptConnection() {
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
   return
+      // Localhost, including v4 mapped to v6 (::ffff:127.0.0.1), which is how
+      // v4 clients arrive on a dual-stack socket
+      address.isLoopback() ||
       // Localhost v4
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.0/8")) ||
       // Link Local v4
