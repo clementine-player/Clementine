@@ -48,14 +48,20 @@ class Renderer:
         gapless: bool,
         log,
         fail_formats: list[pb.AudioFormat] | None = None,
+        on_event=None,
     ):
         self.conn = conn
         self.log = log
         self.gapless = gapless
+        # Called as on_event(name, **details) for everything the renderer is
+        # told and does, so tests can wait for and check them.
+        self.on_event = on_event or (lambda name, **details: None)
         # Items in these formats are refused as if the player couldn't play
         # them, to exercise Clementine's retry through its pipeline.
         self.fail_formats = fail_formats or []
-        self.player: Player = PLAYERS[player_name](log, self._ended, self._error)
+        self.player: Player = PLAYERS[player_name](
+            log, self._ended, self._error, self.on_event
+        )
         self.item: pb.RenderItem | None = None
         self.preloaded: pb.RenderItem | None = None
         self.state = pb.RENDERER_STATE_IDLE
@@ -80,6 +86,7 @@ class Renderer:
         if state != self.state:
             self.state = state
             self.log(f"state {pb.RendererState.Name(state)}")
+            self.on_event("state", state=state)
         await self.send_status()
 
     async def status_loop(self) -> None:
@@ -107,6 +114,7 @@ class Renderer:
             return
         ended = self.item
         self.log(f"item {ended.item_id} ended")
+        self.on_event("ended", item_id=ended.item_id)
 
         if self.preloaded:
             # Move on to the preloaded item. Clementine recognises it and
@@ -132,6 +140,9 @@ class Renderer:
 
     async def _error(self, message: str) -> None:
         self.log(f"error: {message}")
+        self.on_event(
+            "error", item_id=self.item.item_id if self.item else 0, message=message
+        )
         await self.conn.send(
             pb.RENDERER_ERROR,
             renderer_error=pb.RendererError(
@@ -176,6 +187,9 @@ class Renderer:
                 f"{'' if playing else ' (paused)'}"
             )
             self.log(f"  {load.item.url}")
+            self.on_event(
+                "load", item=load.item, start_ms=load.start_ms, playing=playing
+            )
             self.clock.set(load.start_ms, playing)
             if not await self._start_player(load.item, load.start_ms, playing):
                 return
@@ -186,6 +200,7 @@ class Renderer:
         elif t == pb.RENDER_PRELOAD:
             item = msg.request_render_preload.item
             self.log(f"preload {self.describe(item)}")
+            self.on_event("preload", item=item)
             if self.gapless:
                 self.preloaded = item
 
@@ -203,6 +218,7 @@ class Renderer:
 
         elif t == pb.RENDER_STOP:
             self.log("stop")
+            self.on_event("stop")
             await self.player.stop()
             self.item = self.preloaded = None
             self.clock.set(0, False)
@@ -216,6 +232,7 @@ class Renderer:
                 f"seek to {seek.position_ms}ms"
                 + (f" via {seek.url}" if seek.url else "")
             )
+            self.on_event("seek", position_ms=seek.position_ms, url=seek.url)
             self.clock.set(seek.position_ms, self.state == pb.RENDERER_STATE_PLAYING)
             await self.player.seek(seek.position_ms, seek.url or None)
             await self.send_status()
