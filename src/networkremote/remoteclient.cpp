@@ -23,8 +23,11 @@
 #include "core/logging.h"
 #include "networkremote.h"
 
+std::atomic<int> RemoteClient::sNextId(1);
+
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
     : app_(app),
+      id_(sNextId++),
       downloader_(false),
       client_(client),
       song_sender_(new SongSender(app, this)) {
@@ -32,6 +35,7 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
+  connect(client, SIGNAL(disconnected()), this, SLOT(SocketDisconnected()));
 
   // Check if we use auth code
   QSettings s;
@@ -61,6 +65,8 @@ RemoteClient::~RemoteClient() {
 }
 
 void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
+
+void RemoteClient::SocketDisconnected() { emit Disconnected(id_); }
 
 void RemoteClient::IncomingData() {
   while (client_->bytesAvailable()) {

@@ -86,6 +86,25 @@ enum MsgType {
   GLOBAL_SEARCH_STATUS = 56;
   // access Files from remote control
   LIST_FILES = 202;
+
+  // Remote playback: a client acting as Clementine's audio output.
+  // Renderer -> server
+  RENDERER_STATUS = 302;
+  RENDERER_TRACK_ENDED = 303;
+  RENDERER_ERROR = 304;
+  // Controller -> server
+  REQUEST_OUTPUTS = 305;
+  SET_OUTPUT = 306;
+  // Server -> renderer
+  RENDER_LOAD = 320;
+  RENDER_PRELOAD = 321;
+  RENDER_PLAY = 322;
+  RENDER_PAUSE = 323;
+  RENDER_STOP = 324;
+  RENDER_SEEK = 325;
+  RENDER_SET_VOLUME = 326;
+  // Server -> all clients
+  OUTPUTS = 340;
 }
 
 // Valid Engine states
@@ -213,6 +232,9 @@ message ResponseClementineInfo {
 
   // allowed extensions for REQUEST_FILES and LIST_FILES
   repeated string files_music_extensions = 4;
+
+  // Optional abilities of the server. Unknown values are ignored by clients.
+  repeated ServerFeature features = 5;
 }
 
 // The current song played
@@ -249,6 +271,8 @@ message RequestConnect {
   optional int32 auth_code = 1;
   optional bool send_playlist_songs = 2;
   optional bool downloader = 3;
+  // Present when the client also wants to act as a renderer.
+  optional RendererCapabilities renderer = 4;
 }
 
 // Respone, why the connection was closed
@@ -442,9 +466,201 @@ message ResponseSavedRadios {
   repeated Stream streams = 1;
 }
 
+// Remote playback. New definitions below follow buf's STANDARD lint rules:
+// every enum starts with <ENUM_NAME>_UNSPECIFIED = 0 and prefixes its values
+// with its own name, and enums are preferred over bools.
+
+// Optional abilities of the server, sent in ResponseClementineInfo.
+enum ServerFeature {
+  SERVER_FEATURE_UNSPECIFIED = 0;
+  // The server can send playback to renderers (streaming is enabled).
+  SERVER_FEATURE_RENDERING = 1;
+}
+
+// Optional abilities of a renderer, beyond decoding its formats.
+enum RendererFeature {
+  RENDERER_FEATURE_UNSPECIFIED = 0;
+  // Can queue a RENDER_PRELOAD item and start it without a gap.
+  RENDERER_FEATURE_GAPLESS = 1;
+  // Sends HTTP Range requests, so it can seek in Direct streams itself.
+  RENDERER_FEATURE_HTTP_RANGE = 2;
+}
+
+// One format a renderer can decode, with its limits.
+message AudioFormat {
+  // "audio/flac", "audio/ogg; codecs=opus", "audio/mpeg". Without codecs=,
+  // any codec in that container.
+  optional string mime_type = 1;
+  // The sample rates it plays. Empty: any rate the format allows.
+  repeated int32 sample_rates_hz = 2;
+  // Unset or 0: as many channels as the format allows.
+  optional int32 max_channels = 3;
+}
+
+// What a renderer can play. Sent in RequestConnect.
+message RendererCapabilities {
+  // Stable per install (a UUID), so a renderer is recognised after
+  // reconnecting.
+  optional string renderer_id = 1;
+  // Shown in output pickers: "Pixel 9", "Kitchen tablet".
+  optional string display_name = 2;
+  // The formats it can decode, in no particular order.
+  repeated AudioFormat formats = 3;
+  // Unknown values are ignored by the server.
+  repeated RendererFeature features = 4;
+  // Upper limit the renderer wants, for example on mobile data. Unset or 0
+  // means no limit.
+  optional int32 max_bitrate_kbps = 5;
+}
+
+// Whether an output can be used right now.
+enum OutputState {
+  OUTPUT_STATE_UNSPECIFIED = 0;
+  // Connected and can be chosen.
+  OUTPUT_STATE_AVAILABLE = 1;
+  // Playback is being handed over to it.
+  OUTPUT_STATE_ACTIVATING = 2;
+  // The current output.
+  OUTPUT_STATE_ACTIVE = 3;
+}
+
+// One place playback can go: this computer or a renderer.
+message Output {
+  // "local" for this computer, otherwise the renderer_id.
+  optional string output_id = 1;
+  optional string display_name = 2;
+  optional OutputState state = 3;
+}
+
+// Every output, sent with OUTPUTS.
+message ResponseOutputs {
+  repeated Output outputs = 1;
+}
+
+// A controller asks for playback to move to another output.
+message RequestSetOutput {
+  optional string output_id = 1;
+}
+
+// How the server delivers an item. Informational for the renderer; how to
+// seek is given separately by SeekMethod.
+enum StreamMode {
+  STREAM_MODE_UNSPECIFIED = 0;
+  // The original file, byte for byte.
+  STREAM_MODE_DIRECT = 1;
+  // Output of a GStreamer pipeline, remuxed or encoded.
+  STREAM_MODE_PIPELINE = 2;
+}
+
+// How a renderer seeks within an item.
+enum SeekMethod {
+  // Treat as SEEK_METHOD_NONE.
+  SEEK_METHOD_UNSPECIFIED = 0;
+  // Not seekable, for example live radio.
+  SEEK_METHOD_NONE = 1;
+  // Seek within the current URL using HTTP Range requests.
+  SEEK_METHOD_BYTE_RANGE = 2;
+  // Load the url given in RequestRenderSeek.
+  SEEK_METHOD_NEW_URL = 3;
+}
+
+// One track, as the renderer should fetch and present it.
+message RenderItem {
+  optional int32 item_id = 1;
+  // http://host:port/s/<token>/<item_id>
+  optional string url = 2;
+  optional string mime_type = 3;
+  optional StreamMode mode = 4;
+  // Unset for items with no known length, such as radio.
+  optional int64 length_ms = 5;
+  optional SeekMethod seek_method = 6;
+  // For the lock screen and notification UI.
+  optional SongMetadata song = 7;
+}
+
+// What a renderer does once an item has loaded.
+enum LoadStartState {
+  // Treat as LOAD_START_STATE_PAUSED.
+  LOAD_START_STATE_UNSPECIFIED = 0;
+  LOAD_START_STATE_PAUSED = 1;
+  LOAD_START_STATE_PLAYING = 2;
+}
+
+// Load an item now, replacing whatever is playing.
+message RequestRenderLoad {
+  optional RenderItem item = 1;
+  // Where to start. For SEEK_METHOD_NEW_URL items, item.url already starts
+  // there; for SEEK_METHOD_BYTE_RANGE items the renderer seeks to it.
+  optional int64 start_ms = 2;
+  optional LoadStartState start_state = 3;
+}
+
+// Queue the item that follows the current one.
+message RequestRenderPreload {
+  optional RenderItem item = 1;
+}
+
+// Seek within the current item.
+message RequestRenderSeek {
+  optional int32 item_id = 1;
+  optional int64 position_ms = 2;
+  // Set when the item's seek_method is SEEK_METHOD_NEW_URL.
+  optional string url = 3;
+}
+
+// Set the renderer's volume.
+message RequestRenderVolume {
+  // 0..100
+  optional int32 volume = 1;
+}
+
+// A renderer's playback state. Separate from EngineState because a renderer
+// has states the local engine doesn't report, such as buffering.
+enum RendererState {
+  RENDERER_STATE_UNSPECIFIED = 0;
+  RENDERER_STATE_IDLE = 1;
+  RENDERER_STATE_LOADING = 2;
+  RENDERER_STATE_BUFFERING = 3;
+  RENDERER_STATE_PLAYING = 4;
+  RENDERER_STATE_PAUSED = 5;
+}
+
+// Sent at 1 Hz while playing, and whenever the state changes.
+message RendererStatus {
+  optional int32 item_id = 1;
+  optional RendererState state = 2;
+  optional int64 position_ms = 3;
+  optional int32 buffered_percent = 4;
+}
+
+// The item finished playing to its end.
+message RendererTrackEnded {
+  optional int32 item_id = 1;
+}
+
+// What an error affects, and so what the server does about it.
+enum RendererErrorScope {
+  // Treat as RENDERER_ERROR_SCOPE_ITEM.
+  RENDERER_ERROR_SCOPE_UNSPECIFIED = 0;
+  // This item can't be played. Retry through the pipeline or skip it.
+  RENDERER_ERROR_SCOPE_ITEM = 1;
+  // A temporary problem, such as a network drop. Reload at the last
+  // position.
+  RENDERER_ERROR_SCOPE_TRANSIENT = 2;
+  // The renderer can't continue. Fall back to local output.
+  RENDERER_ERROR_SCOPE_RENDERER = 3;
+}
+
+// Something went wrong on the renderer.
+message RendererError {
+  optional int32 item_id = 1;
+  optional string message = 2;
+  optional RendererErrorScope scope = 3;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default = 21];
+  optional int32 version = 1 [default = 22];
   optional MsgType type = 2
       [default = UNKNOWN];  // What data is in the message?
 
@@ -486,4 +702,15 @@ message Message {
   optional ResponseGlobalSearchStatus response_global_search_status = 40;
   optional ResponseListFiles response_list_files = 52;
   optional ResponseSavedRadios response_saved_radios = 54;
+
+  // Remote playback
+  optional ResponseOutputs response_outputs = 61;
+  optional RequestSetOutput request_set_output = 62;
+  optional RequestRenderLoad request_render_load = 63;
+  optional RequestRenderPreload request_render_preload = 64;
+  optional RequestRenderSeek request_render_seek = 65;
+  optional RequestRenderVolume request_render_volume = 66;
+  optional RendererStatus renderer_status = 67;
+  optional RendererError renderer_error = 68;
+  optional RendererTrackEnded renderer_track_ended = 69;
 }

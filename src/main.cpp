@@ -545,6 +545,8 @@ int main(int argc, char* argv[]) {
   ParseAProto();
   (void)QtConcurrent::run(&ParseAProto);
 
+  Application::SetRemoteStreamingEnabled(
+      options.experimental_remote_streaming());
   Application app;
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);

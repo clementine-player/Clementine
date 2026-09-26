@@ -22,11 +22,17 @@
 #include <QNetworkProxy>
 #include <QSettings>
 #include <QTcpServer>
+#include <QTimer>
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "covers/currentartloader.h"
+#include "engines/enginerouter.h"
 #include "networkremote/incomingdataparser.h"
 #include "networkremote/outgoingdatacreator.h"
+#include "networkremote/protocolsniffer.h"
+#include "networkremote/streaming/mediahttpserver.h"
+#include "networkremote/streaming/rendererregistry.h"
 #include "networkremote/zeroconf.h"
 #include "playlist/playlistmanager.h"
 
@@ -34,8 +40,18 @@ const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
 const char* NetworkRemote::kTranscoderSettingPostfix = "/NetworkRemote";
 
+namespace {
+// How long a new connection may stay silent before it's dropped.
+const int kFirstByteTimeoutMsec = 10000;
+const char* kSniffedProperty = "clementine_sniffed";
+}  // namespace
+
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
-    : QObject(parent), signals_connected_(false), app_(app) {
+    : QObject(parent),
+      renderer_registry_(nullptr),
+      allow_streaming_(false),
+      signals_connected_(false),
+      app_(app) {
   setObjectName("Network remote");
 }
 
@@ -53,6 +69,9 @@ void NetworkRemote::ReadSettings() {
 
   listen_on_all_addresses_ = s.value("listen_on_all_addresses", true).toBool();
   listen_addresses_ = s.value("listen_addresses").toStringList();
+  // Needs --experimental-remote-streaming as well as the setting.
+  allow_streaming_ = Application::RemoteStreamingEnabled() &&
+                     s.value("allow_streaming", false).toBool();
 
   s.endGroup();
 }
@@ -121,6 +140,8 @@ void NetworkRemote::StartServer() {
     qLog(Warning) << "Network remote enabled, but no listen address is chosen";
   }
 
+  StartStreaming();
+
   QList<QHostAddress> listening;
   for (const QHostAddress& address : addresses) {
     std::unique_ptr<QTcpServer> server(new QTcpServer);
@@ -173,6 +194,70 @@ void NetworkRemote::StopServer() {
   servers_.clear();
   qDeleteAll(clients_);
   clients_.clear();
+  StopStreaming();
+}
+
+void NetworkRemote::StartStreaming() {
+  if (!allow_streaming_ || renderer_registry_) return;
+
+  EngineRouter* router = qobject_cast<EngineRouter*>(app_->player()->engine());
+  if (!router) {
+    qLog(Error) << "Streaming needs the Player's EngineRouter";
+    return;
+  }
+
+  qLog(Info) << "Playing on remote devices is allowed";
+
+  // The registry drives engines, so it has to live with the Player.
+  renderer_registry_ = new RendererRegistry(app_, router);
+  renderer_registry_->moveToThread(router->thread());
+  media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
+
+  connect(incoming_data_parser_.get(),
+          SIGNAL(RendererConnected(int, QByteArray, QString, quint16, QString)),
+          renderer_registry_,
+          SLOT(RegisterRenderer(int, QByteArray, QString, quint16, QString)));
+  connect(incoming_data_parser_.get(), SIGNAL(RendererMessage(int, QByteArray)),
+          renderer_registry_, SLOT(HandleMessage(int, QByteArray)));
+  connect(this, SIGNAL(ClientDisconnected(int)), renderer_registry_,
+          SLOT(ClientDisconnected(int)));
+  connect(renderer_registry_, SIGNAL(SendToClient(int, QByteArray)), this,
+          SLOT(SendToClient(int, QByteArray)));
+  connect(renderer_registry_, SIGNAL(SendToAll(QByteArray)), this,
+          SLOT(SendToAllClients(QByteArray)));
+
+  incoming_data_parser_->SetStreamingEnabled(true);
+  outgoing_data_creator_->SetStreamingEnabled(true);
+}
+
+void NetworkRemote::StopStreaming() {
+  if (incoming_data_parser_) incoming_data_parser_->SetStreamingEnabled(false);
+  if (outgoing_data_creator_) {
+    outgoing_data_creator_->SetStreamingEnabled(false);
+  }
+  media_http_server_.reset();
+  if (renderer_registry_) {
+    disconnect(renderer_registry_, nullptr, this, nullptr);
+    renderer_registry_->deleteLater();
+    renderer_registry_ = nullptr;
+  }
+}
+
+void NetworkRemote::SendToClient(int client_id, const QByteArray& data) {
+  cpb::remote::Message msg;
+  if (!msg.ParseFromArray(data.constData(), data.size())) return;
+  for (RemoteClient* client : clients_) {
+    if (client->id() == client_id) {
+      client->SendData(&msg);
+      return;
+    }
+  }
+}
+
+void NetworkRemote::SendToAllClients(const QByteArray& data) {
+  cpb::remote::Message msg;
+  if (!msg.ParseFromArray(data.constData(), data.size())) return;
+  if (outgoing_data_creator_) outgoing_data_creator_->SendDataToClients(&msg);
 }
 
 void NetworkRemote::ReloadSettings() {
@@ -251,9 +336,64 @@ void NetworkRemote::AcceptConnection() {
                << client_socket->peerAddress().toString();
     client_socket->close();
     client_socket->deleteLater();
-  } else {
-    CreateRemoteClient(client_socket);
+    return;
   }
+
+  // Without remote streaming, only the remote protocol is spoken here, so
+  // there's nothing to tell apart.
+  if (!Application::RemoteStreamingEnabled()) {
+    CreateRemoteClient(client_socket);
+    return;
+  }
+
+  // Drop connections that never say anything. Once the socket has been
+  // handed on, its new owner is responsible for it.
+  QTimer::singleShot(kFirstByteTimeoutMsec, client_socket, [client_socket]() {
+    if (client_socket->property(kSniffedProperty).toBool()) return;
+    qLog(Debug) << "Dropping a silent connection from"
+                << client_socket->peerAddress().toString();
+    client_socket->abort();
+    client_socket->deleteLater();
+  });
+  connect(client_socket, &QTcpSocket::readyRead, this,
+          [this, client_socket]() { SniffProtocol(client_socket); });
+  if (client_socket->bytesAvailable() > 0) SniffProtocol(client_socket);
+}
+
+void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
+  char first_byte = 0;
+  if (socket->property(kSniffedProperty).toBool() ||
+      socket->peek(&first_byte, 1) != 1) {
+    return;
+  }
+  socket->setProperty(kSniffedProperty, true);
+  disconnect(socket, &QTcpSocket::readyRead, this, nullptr);
+
+  switch (ProtocolSniffer::Classify(static_cast<unsigned char>(first_byte))) {
+    case ProtocolSniffer::Remote: {
+      CreateRemoteClient(socket);
+      // The first message is already waiting, and readyRead won't be emitted
+      // again for it.
+      QMetaObject::invokeMethod(clients_.last(), "IncomingData",
+                                Qt::QueuedConnection);
+      return;
+    }
+
+    case ProtocolSniffer::Http:
+      if (media_http_server_) {
+        media_http_server_->HandleConnection(socket);
+        return;
+      }
+      break;
+
+    case ProtocolSniffer::Unknown:
+      break;
+  }
+
+  qLog(Debug) << "Closing a connection with an unexpected protocol from"
+              << socket->peerAddress().toString();
+  socket->abort();
+  socket->deleteLater();
 }
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
@@ -297,6 +437,7 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(cpb::remote::Message)),
             incoming_data_parser_.get(), SLOT(Parse(cpb::remote::Message)));
+    connect(client, SIGNAL(Disconnected(int)), SIGNAL(ClientDisconnected(int)));
   }
 }
 

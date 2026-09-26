@@ -1,0 +1,57 @@
+[project]
+name = "clementine-remote"
+version = "0.1.0"
+description = "Command line client for Clementine's network remote, including remote playback"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+dependencies = [
+    # grpcio-tools bundles protoc, used to compile the remote's .proto at runtime.
+    "grpcio-tools>=1.66",
+    "httpx>=0.27",
+    "protobuf>=5.28",
+]
+
+[project.scripts]
+clementine-remote = "clementine_remote.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    # Pinned, so CI and local runs agree on what counts as an error.
+    "ruff==0.16.9",
+    "ty==0.0.84",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+extend-exclude = ["src/clementine_remote/_generated"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F",  # pycodestyle, pyflakes
+    "I",            # import order
+    "UP",           # modern syntax
+    "B",            # likely bugs
+    "SIM",          # simplifications
+    "ANN",          # every function fully annotated
+    "ASYNC",        # asyncio mistakes
+    "DTZ",          # naive datetimes
+    "PYI",          # typing conventions
+    "RUF",
+]
+
+[tool.ruff.lint.flake8-annotations]
+# Not even *args: Any and **kwargs: Any without saying so.
+allow-star-arg-any = false
+
+[tool.ty.src]
+exclude = ["src/clementine_remote/_generated"]
+
+[tool.ty.terminal]
+error-on-warning = true

@@ -2812,8 +2812,7 @@ void MainWindow::ShowVisualisations() {
     connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
             visualisation_.get(), SLOT(SongMetadataChanged(Song)));
 
-    visualisation_->SetEngine(
-        qobject_cast<GstEngine*>(app_->player()->engine()));
+    visualisation_->SetEngine(app_->player()->gst_engine());
   }
 
   visualisation_->show();

@@ -42,6 +42,31 @@ jobs:
                 -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
                 --dry-run --Werror
 
+  python:
+    name: Python
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/remote-cli
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      # ruff and ty are pinned in pyproject.toml's dev group, so uv runs the
+      # same versions here as locally.
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Generate the protobuf module
+        # ty needs the generated module and its type stubs to exist.
+        run: uv run python -m clementine_remote.proto
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # The smoke tests need a built Clementine; the Test job runs them.
+        run: uv run pytest -v
+
 
   test:
     name: Test
@@ -68,6 +93,8 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         # The same set as the Resolute build below, minus the Debian
         # packaging tools - this job builds the test binaries, not a .deb.
+        # The GStreamer plugins and tools are for the remote playback smoke
+        # tests, which run a real Clementine and encode and decode audio.
         run: |
           packages="
             ccache
@@ -75,6 +102,10 @@ jobs:
             g++
             gettext
             git
+            gstreamer1.0-plugins-bad
+            gstreamer1.0-plugins-base
+            gstreamer1.0-plugins-good
+            gstreamer1.0-tools
             libasound2-dev
             libboost-dev
             libboost-serialization-dev
@@ -164,6 +195,18 @@ jobs:
             echo "::endgroup::"
           done
           exit ${status}
+      - name: Build Clementine
+        working-directory: bin
+        # For the smoke tests below; builds clementine-tagreader too.
+        run: make -j$(nproc) clementine
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Remote playback smoke tests
+        working-directory: tools/remote-cli
+        env:
+          CLEMENTINE_BINARY: ${{ github.workspace }}/bin/clementine
+        # A real Clementine, driven through the network remote by the
+        # command line client acting as controller and renderer.
+        run: uv run --group dev pytest tests/smoke -v
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,

@@ -211,6 +211,18 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
       emit SendSavedRadios(client);
       break;
 
+    case cpb::remote::RENDERER_STATUS:
+    case cpb::remote::RENDERER_TRACK_ENDED:
+    case cpb::remote::RENDERER_ERROR:
+    case cpb::remote::REQUEST_OUTPUTS:
+    case cpb::remote::SET_OUTPUT:
+      if (streaming_enabled_) {
+        const std::string data = msg.SerializeAsString();
+        emit RendererMessage(client->id(),
+                             QByteArray(data.data(), data.size()));
+      }
+      break;
+
     default:
       break;
   }
@@ -340,6 +352,15 @@ void IncomingDataParser::ClientConnect(const cpb::remote::Message& msg,
                                        RemoteClient* client) {
   // Always sned the Clementine infos
   emit SendClementineInfo();
+
+  if (streaming_enabled_ && msg.request_connect().has_renderer()) {
+    const std::string caps =
+        msg.request_connect().renderer().SerializeAsString();
+    emit RendererConnected(client->id(), QByteArray(caps.data(), caps.size()),
+                           client->local_address().toString(),
+                           client->local_port(),
+                           client->peer_address().toString());
+  }
 
   // Check if we should send the first data
   if (!client->isDownloader()) {
