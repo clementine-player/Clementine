@@ -11,6 +11,7 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
@@ -18,7 +19,7 @@ import pytest
 from .harness import Clementine
 
 # samplesperbuffer=441 at 44.1 kHz makes each buffer 10 ms.
-TRACKS = {
+TRACKS: dict[str, tuple[int, str]] = {
     "tone.mp3": (
         300,
         (
@@ -32,7 +33,9 @@ TRACKS = {
 }
 
 
-def pytest_collection_modifyitems(config, items):
+def pytest_collection_modifyitems(
+    config: pytest.Config, items: list[pytest.Item]
+) -> None:
     reason = None
     if not os.environ.get("CLEMENTINE_BINARY"):
         reason = "set CLEMENTINE_BINARY to a built clementine"
@@ -40,12 +43,12 @@ def pytest_collection_modifyitems(config, items):
         reason = "needs gst-launch-1.0"
     if reason:
         for item in items:
-            if "smoke" in str(item.fspath):
+            if "smoke" in str(item.path):
                 item.add_marker(pytest.mark.skip(reason=reason))
 
 
 @pytest.fixture(scope="session")
-def music(tmp_path_factory) -> dict[str, Path]:
+def music(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     directory = tmp_path_factory.mktemp("music")
     tracks = {}
     for name, (buffers, encode) in TRACKS.items():
@@ -61,7 +64,7 @@ def music(tmp_path_factory) -> dict[str, Path]:
 
 
 @pytest.fixture
-def clementine(tmp_path):
+def clementine(tmp_path: Path) -> Iterator[Clementine]:
     instance = Clementine(Path(os.environ["CLEMENTINE_BINARY"]), tmp_path / "profile")
     instance.start()
     yield instance

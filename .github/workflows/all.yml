@@ -42,6 +42,31 @@ jobs:
                 -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
                 --dry-run --Werror
 
+  python:
+    name: Python
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/remote-cli
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      # ruff and ty are pinned in pyproject.toml's dev group, so uv runs the
+      # same versions here as locally.
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Generate the protobuf module
+        # ty needs the generated module and its type stubs to exist.
+        run: uv run python -m clementine_remote.proto
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # The smoke tests need a built Clementine; the Test job runs them.
+        run: uv run pytest -v
+
 
   test:
     name: Test

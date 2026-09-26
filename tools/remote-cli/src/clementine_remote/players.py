@@ -15,11 +15,11 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import httpx
 
+from .events import EventCallback, Fetched, ignore
+
 Log = Callable[[str], None]
 Callback = Callable[[], Awaitable[None]]
 ErrorCallback = Callable[[str], Awaitable[None]]
-# Called with an event name and its details, for tests to observe.
-EventCallback = Callable[..., None]
 
 
 def with_start(url: str, start_ms: int) -> str:
@@ -43,12 +43,12 @@ class Player:
         log: Log,
         on_end: Callback,
         on_error: ErrorCallback,
-        on_event: EventCallback | None = None,
-    ):
+        on_event: EventCallback = ignore,
+    ) -> None:
         self.log = log
         self.on_end = on_end
         self.on_error = on_error
-        self.on_event = on_event or (lambda name, **details: None)
+        self.on_event = on_event
         self.volume = 100
 
     async def load(
@@ -68,19 +68,27 @@ class Player:
 
 
 class NullPlayer(Player):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Keep each response's body in the "fetched" event, for tests that
-        # check what Clementine sent.
+    def __init__(
+        self,
+        log: Log,
+        on_end: Callback,
+        on_error: ErrorCallback,
+        on_event: EventCallback = ignore,
+    ) -> None:
+        super().__init__(log, on_end, on_error, on_event)
+        # Keep each response's body in its Fetched event, for tests that check
+        # what Clementine sent.
         self.keep_bodies = False
         self._client = httpx.AsyncClient(timeout=httpx.Timeout(30.0, read=None))
-        self._task: asyncio.Task | None = None
+        self._task: asyncio.Task[None] | None = None
         self._url = ""
         self._size: int | None = None
         self._length_ms = 0
         self._byte_range = False
 
-    async def load(self, url, start_ms, playing, byte_range, length_ms):
+    async def load(
+        self, url: str, start_ms: int, playing: bool, byte_range: bool, length_ms: int
+    ) -> None:
         self._url = url
         self._byte_range = byte_range
         self._length_ms = length_ms
@@ -102,8 +110,9 @@ class NullPlayer(Player):
         try:
             async with self._client.stream("GET", url, headers=headers) as response:
                 length = response.headers.get("content-length")
+                content_type = response.headers.get("content-type")
                 self.log(
-                    f"HTTP {response.status_code} {response.headers.get('content-type')}"
+                    f"HTTP {response.status_code} {content_type}"
                     f" length={length or 'unknown'}"
                     f" ranges={response.headers.get('accept-ranges')}"
                     + (
@@ -114,11 +123,7 @@ class NullPlayer(Player):
                 )
                 if response.status_code >= 400:
                     self.on_event(
-                        "fetched",
-                        url=url,
-                        status=response.status_code,
-                        headers=dict(response.headers),
-                        body=b"",
+                        Fetched(url, response.status_code, dict(response.headers))
                     )
                     await self.on_error(f"HTTP {response.status_code} for {url}")
                     return
@@ -131,25 +136,26 @@ class NullPlayer(Player):
             elapsed = time.monotonic() - started
             self.log(f"fetched {received} bytes in {elapsed:.1f}s")
             self.on_event(
-                "fetched",
-                url=url,
-                status=response.status_code,
-                headers=dict(response.headers),
-                body=bytes(body),
-                size=received,
+                Fetched(
+                    url,
+                    response.status_code,
+                    dict(response.headers),
+                    bytes(body),
+                    received,
+                )
             )
         except asyncio.CancelledError:
             raise
         except httpx.HTTPError as e:
             await self.on_error(f"fetch failed: {e!r}")
 
-    async def pause(self, position_ms):
+    async def pause(self, position_ms: int) -> None:
         pass
 
-    async def resume(self, position_ms):
+    async def resume(self, position_ms: int) -> None:
         pass
 
-    async def seek(self, position_ms, url):
+    async def seek(self, position_ms: int, url: str | None) -> None:
         if url:
             # Pipeline items: Clementine starts a new pipeline at the position.
             self._start_fetch(url, {})
@@ -157,7 +163,7 @@ class NullPlayer(Player):
             offset = self._size * position_ms // self._length_ms
             self._start_fetch(self._url, {"Range": f"bytes={offset}-"})
 
-    async def stop(self):
+    async def stop(self) -> None:
         if self._task:
             self._task.cancel()
             self._task = None
@@ -166,16 +172,24 @@ class NullPlayer(Player):
 class FfplayPlayer(Player):
     reports_end = True
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        log: Log,
+        on_end: Callback,
+        on_error: ErrorCallback,
+        on_event: EventCallback = ignore,
+    ) -> None:
+        super().__init__(log, on_end, on_error, on_event)
         if not shutil.which("ffplay"):
             raise SystemExit("ffplay isn't installed; try --player null")
         self._process: asyncio.subprocess.Process | None = None
-        self._watcher: asyncio.Task | None = None
+        self._watcher: asyncio.Task[None] | None = None
         self._url = ""
         self._byte_range = False
 
-    async def load(self, url, start_ms, playing, byte_range, length_ms):
+    async def load(
+        self, url: str, start_ms: int, playing: bool, byte_range: bool, length_ms: int
+    ) -> None:
         await self._kill()
         self._url = url
         self._byte_range = byte_range
@@ -229,13 +243,13 @@ class FfplayPlayer(Player):
             process.terminate()
             await process.wait()
 
-    async def pause(self, position_ms):
+    async def pause(self, position_ms: int) -> None:
         await self._kill()
 
-    async def resume(self, position_ms):
+    async def resume(self, position_ms: int) -> None:
         await self._launch(position_ms)
 
-    async def seek(self, position_ms, url):
+    async def seek(self, position_ms: int, url: str | None) -> None:
         # For Pipeline items |url| is the item's URL with t=position_ms, which
         # _launch builds the same way.
         playing = self._process is not None
@@ -243,13 +257,13 @@ class FfplayPlayer(Player):
         if playing:
             await self._launch(position_ms)
 
-    async def stop(self):
+    async def stop(self) -> None:
         await self._kill()
 
-    async def set_volume(self, volume):
+    async def set_volume(self, volume: int) -> None:
         await super().set_volume(volume)
         if self._process:
             self.log("ffplay can't change volume while playing; applies next track")
 
 
-PLAYERS = {"null": NullPlayer, "ffplay": FfplayPlayer}
+PLAYERS: dict[str, type[Player]] = {"null": NullPlayer, "ffplay": FfplayPlayer}

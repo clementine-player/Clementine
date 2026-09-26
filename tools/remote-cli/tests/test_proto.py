@@ -1,7 +1,7 @@
 from clementine_remote.proto import pb
 
 
-def test_new_enums_start_unspecified():
+def test_new_enums_start_unspecified() -> None:
     for enum in (
         pb.ServerFeature,
         pb.RendererFeature,
@@ -15,7 +15,7 @@ def test_new_enums_start_unspecified():
         assert enum.Name(0).endswith("_UNSPECIFIED")
 
 
-def test_round_trip():
+def test_round_trip() -> None:
     msg = pb.Message(type=pb.RENDER_LOAD)
     msg.request_render_load.item.item_id = 7
     msg.request_render_load.start_state = pb.LOAD_START_STATE_PLAYING

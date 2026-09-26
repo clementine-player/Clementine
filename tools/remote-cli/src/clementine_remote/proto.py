@@ -1,20 +1,22 @@
-"""Loads the remote's protobuf definitions.
+"""The remote's protobuf definitions, as `pb`.
 
-The .proto file lives in the Clementine source tree, so the Python module is
-compiled from it on first use (with the protoc bundled in grpcio-tools) and
-cached by content hash. Editing the .proto picks up the change on the next run.
+The .proto file lives in the Clementine source tree, so the Python module and
+its type stubs are compiled from it (with the protoc bundled in grpcio-tools)
+into the _generated package next to this file, which isn't checked in. They
+are rebuilt whenever the .proto changes. Run this module to generate them
+without doing anything else, for example before type checking.
 """
 
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import os
-import sys
 from pathlib import Path
-from types import ModuleType
 
 PROTO_NAME = "remotecontrolmessages.proto"
+GENERATED = Path(__file__).parent / "_generated"
+# Records which .proto the generated files came from.
+STAMP = GENERATED / "SOURCE_SHA256"
 
 
 def find_proto() -> Path:
@@ -26,45 +28,43 @@ def find_proto() -> Path:
     return root / "ext" / "libclementine-remote" / PROTO_NAME
 
 
-def _cache_dir() -> Path:
-    base = os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache"
-    return Path(base) / "clementine-remote-cli"
-
-
-def load() -> ModuleType:
+def generate() -> None:
+    """Compiles the .proto into _generated, unless it's already up to date."""
     proto = find_proto()
     if not proto.exists():
+        if STAMP.exists():
+            return  # Installed away from the source tree; use what's there.
         raise SystemExit(
             f"Can't find {PROTO_NAME} at {proto}; set CLEMENTINE_REMOTE_PROTO"
         )
 
-    digest = hashlib.sha256(proto.read_bytes()).hexdigest()[:16]
-    out_dir = _cache_dir() / digest
-    module_path = out_dir / "remotecontrolmessages_pb2.py"
+    digest = hashlib.sha256(proto.read_bytes()).hexdigest()
+    if STAMP.exists() and STAMP.read_text().strip() == digest:
+        return
 
-    if not module_path.exists():
-        from grpc_tools import protoc
+    from grpc_tools import protoc
 
-        out_dir.mkdir(parents=True, exist_ok=True)
-        result = protoc.main(
-            [
-                "protoc",
-                f"--proto_path={proto.parent}",
-                f"--python_out={out_dir}",
-                str(proto),
-            ]
-        )
-        if result != 0:
-            raise SystemExit(f"protoc failed to compile {proto}")
-
-    spec = importlib.util.spec_from_file_location(
-        "remotecontrolmessages_pb2", module_path
+    GENERATED.mkdir(exist_ok=True)
+    result = protoc.main(
+        [
+            "protoc",
+            f"--proto_path={proto.parent}",
+            f"--python_out={GENERATED}",
+            f"--pyi_out={GENERATED}",
+            str(proto),
+        ]
     )
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    sys.modules["remotecontrolmessages_pb2"] = module
-    spec.loader.exec_module(module)
-    return module
+    if result != 0:
+        raise SystemExit(f"protoc failed to compile {proto}")
+    (GENERATED / "__init__.py").touch()
+    STAMP.write_text(digest + "\n")
 
 
-pb = load()
+generate()
+
+from ._generated import remotecontrolmessages_pb2 as pb  # noqa: E402
+
+__all__ = ["pb"]
+
+if __name__ == "__main__":
+    print(f"Generated {GENERATED}")
