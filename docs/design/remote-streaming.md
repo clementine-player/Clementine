@@ -271,6 +271,9 @@ classified.
 The same byte range leaves room for TLS later: a TLS ClientHello starts with
 `0x16`, which matches neither protocol, so it can be recognised the same way.
 
+The HTTP side speaks HTTP/1.1 only. Appendix A explains why HTTP/2 isn't
+supported and how an HTTP/2 client is handled.
+
 The whole mechanism is a small `ProtocolSniffer` step in `NetworkRemote`.
 `RemoteClient` and `MediaHttpServer` each receive a socket that belongs to
 them and never see the other protocol. `MediaHttpServer` has no
@@ -848,3 +851,51 @@ Changes to existing files:
    on mobile? This design keeps the renderer passive. That is simpler and
    keeps one source of truth, at the cost of a gap if the control connection
    is down exactly when a track ends. `RENDER_PRELOAD` reduces the risk.
+
+## Appendix A: HTTP/2
+
+`MediaHttpServer` speaks HTTP/1.1 with keep-alive. It doesn't support
+HTTP/2, either over TLS (h2) or in cleartext (h2c).
+
+**Almost no renderer would use h2c.** Most clients only negotiate HTTP/2
+during a TLS handshake:
+
+- Browsers don't implement h2c at all.
+- Apple's `AVPlayer`/`URLSession`, Chromecast and GStreamer's `souphttpsrc`
+  (libsoup) only use HTTP/2 over TLS.
+- On Android, ExoPlayer's default HTTP stack is HTTP/1.1. OkHttp can use h2c
+  only when told in advance that the server supports it, with no fallback,
+  so a client would have to opt in deliberately.
+- DLNA renderers (Phase 3) are HTTP/1.1.
+
+**HTTP/2's benefits don't apply to this traffic.** Each renderer has at most
+two long responses at once (the current and the preloaded item), each
+several MB. Multiplexing and header compression gain nothing there, and
+HTTP/2 over TCP has the same head-of-line blocking as HTTP/1.1. The one real
+gain is cheaper seek cancellation: HTTP/2 can cancel a single request and
+keep the connection, where HTTP/1.1 closes it. On a LAN that saves one TCP
+handshake per seek, which is negligible.
+
+**The costs are real:**
+
+- HTTP/2 has its own per-stream and per-connection flow control. It would
+  sit on top of the back-pressure in §5.1 and §5.2, giving two sets of
+  windows to tune against each other.
+- Qt Network has an HTTP/2 client but no server, and nothing in Clementine's
+  current dependencies provides one. Supporting it would mean adding nghttp2
+  or a new Qt module, plus framing, header compression and stream state, to
+  replace a few hundred lines of HTTP/1.1.
+
+**How HTTP/2 clients are handled:**
+
+- An h2c client that assumes support opens with the fixed preface
+  `PRI * HTTP/2.0`. `P` is in the `A`–`Z` range, so §5.0 routes it to the
+  HTTP handler, which closes any connection that starts with `PRI`. Such a
+  client can't fall back to HTTP/1.1 on the same connection, so there is
+  nothing useful to reply.
+- An `Upgrade: h2c` header on an HTTP/1.1 request is ignored, and the
+  response is plain HTTP/1.1. RFC 9113 deprecated that upgrade path.
+
+**When to revisit.** If TLS is added later (§5.0), HTTP/2 comes almost for
+free through ALPN, as long as the TLS stack already provides it. That is the
+point to reconsider, although the gain for this traffic would still be small.
