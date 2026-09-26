@@ -801,9 +801,16 @@ Changes to existing files:
 - **No path exposure.** Files are chosen by `item_id`, never by path. That
   sidesteps the whole class of traversal bugs `files_root_folder` handling
   has to guard against.
-- **Resource limits.** A cap on concurrent HTTP responses per session (4), on
-  pipelines per renderer (2) and on header size (8 KiB). Idle sockets time
-  out after 30 s.
+- **Resource limits.** A cap on concurrent HTTP responses per renderer (4),
+  on pipelines per renderer (2), on responses overall (32) and on requests
+  still being sent (32), and on header size (8 KiB); requests over a cap get
+  `429` or `503`. A client that stops reading for 30 s is disconnected.
+  Renderer capabilities are bounded too: at most 32 formats of 32 sample
+  rates each, with out-of-range values dropped, because the sample rates end
+  up in every pipeline's caps.
+- **Renderer ids.** A renderer id can only be taken over by a connection
+  from the same address, so another device can't evict a renderer and
+  receive the `SET_OUTPUT` requests meant for it.
 - **Known weakness, unchanged.** The remote's auth code is a short number
   sent in plaintext. This design doesn't make that worse. Tokens are only
   handed out on authenticated connections. TLS could be added later on the
@@ -913,7 +920,7 @@ Where it differs from the design above:
   which internet services often don't set.
 - **Not done yet.** Applying EQ and ReplayGain on remote output, the output
   picker in Clementine's own window, the Pipeline's tee into the
-  analyzer, and resource limits per session. Handing paused playback to the
+  analyzer. Handing paused playback to the
   local engine plays for a moment before it pauses, because `GstEngine` can't
   load paused.
 

@@ -23,22 +23,21 @@
 #include <QUrlQuery>
 
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "directresponder.h"
 #include "pipelineresponder.h"
 #include "streamitemtable.h"
+
+const int MediaHttpServer::kMaxResponsesPerRenderer = 4;
+const int MediaHttpServer::kMaxPipelinesPerRenderer = 2;
+const int MediaHttpServer::kMaxResponses = 32;
+const int MediaHttpServer::kMaxPendingRequests = 32;
 
 namespace {
 
 const int kMaxHeadSize = 8 * 1024;
 const int kHeadTimeoutMsec = 10000;
 const char* kHandledProperty = "clementine_http_handled";
-
-// ::ffff:10.0.0.2 and 10.0.0.2 are the same peer.
-QHostAddress Normalise(const QHostAddress& address) {
-  bool is_v4 = false;
-  const quint32 v4 = address.toIPv4Address(&is_v4);
-  return is_v4 ? QHostAddress(v4) : address;
-}
 
 }  // namespace
 
@@ -101,9 +100,41 @@ MediaHttpServer::MediaHttpServer(std::shared_ptr<StreamItemTable> items,
                                  QObject* parent)
     : QObject(parent), items_(items) {}
 
+// Responders are children, so they're deleted here too: streams stop when the
+// server does, for example when streaming is turned off.
 MediaHttpServer::~MediaHttpServer() {}
 
+int MediaHttpServer::CountResponders(const QByteArray* token,
+                                     bool pipelines) const {
+  int count = 0;
+  for (const StreamResponder* responder :
+       findChildren<StreamResponder*>(QString(), Qt::FindDirectChildrenOnly)) {
+    if (!responder->active()) continue;
+    if (token && responder->token() != *token) continue;
+    if (pipelines && responder->kind() != StreamResponder::Pipeline) continue;
+    ++count;
+  }
+  return count;
+}
+
+int MediaHttpServer::CountPendingRequests() const {
+  int count = 0;
+  for (const QTcpSocket* socket :
+       findChildren<QTcpSocket*>(QString(), Qt::FindDirectChildrenOnly)) {
+    if (!socket->property(kHandledProperty).toBool()) ++count;
+  }
+  return count;
+}
+
 void MediaHttpServer::HandleConnection(QTcpSocket* socket) {
+  if (CountPendingRequests() >= kMaxPendingRequests) {
+    qLog(Warning) << "Too many incomplete media requests; dropping one from"
+                  << socket->peerAddress().toString();
+    socket->abort();
+    socket->deleteLater();
+    return;
+  }
+
   socket->setParent(this);
   connect(socket, SIGNAL(readyRead()), SLOT(ReadyRead()));
   connect(socket, SIGNAL(disconnected()), socket, SLOT(deleteLater()));
@@ -135,6 +166,9 @@ void MediaHttpServer::ReadyRead() {
     const int end = peeked.indexOf("\r\n\r\n");
     if (end == -1) {
       if (peeked.size() > kMaxHeadSize) {
+        // Answer once, however much more the client sends.
+        socket->setProperty(kHandledProperty, true);
+        disconnect(socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
         WriteError(socket, 431, "Request Header Fields Too Large");
       }
       continue;
@@ -177,10 +211,24 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   }
 
   // The URL is a capability, but only for the renderer it was given to.
-  if (Normalise(socket->peerAddress()) != Normalise(allowed_peer)) {
+  if (NormalisedAddress(socket->peerAddress()) !=
+      NormalisedAddress(allowed_peer)) {
     qLog(Warning) << "Media request from" << socket->peerAddress()
                   << "for a renderer at" << allowed_peer;
     WriteError(socket, 403, "Forbidden");
+    return;
+  }
+
+  const QByteArray& token = parts[2];
+  const bool pipeline = item.plan.mode != StreamPlan::Direct;
+  if (CountResponders(nullptr, false) >= kMaxResponses) {
+    WriteError(socket, 503, "Service Unavailable");
+    return;
+  }
+  if (CountResponders(&token, false) >= kMaxResponsesPerRenderer ||
+      (pipeline && CountResponders(&token, true) >= kMaxPipelinesPerRenderer)) {
+    qLog(Warning) << "Too many media requests from" << socket->peerAddress();
+    WriteError(socket, 429, "Too Many Requests");
     return;
   }
 
@@ -188,18 +236,25 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
               << request.headers.value("range");
 
   // The responder owns the socket from here and deletes itself with it.
-  socket->setParent(nullptr);
   disconnect(socket, SIGNAL(disconnected()), socket, SLOT(deleteLater()));
 
-  if (item.plan.mode == StreamPlan::Direct) {
-    new DirectResponder(socket, item, request.headers.value("range"),
-                        head_only);
-  } else {
-    const qint64 start_ms = QUrlQuery(QString::fromLatin1(request.query))
-                                .queryItemValue("t")
-                                .toLongLong();
-    new PipelineResponder(socket, item, start_ms, head_only);
+  if (!pipeline) {
+    new DirectResponder(socket, token, item, request.headers.value("range"),
+                        head_only, this);
+    return;
   }
+
+  // Where to start, for seeking: within the item, or at its start if it has
+  // no known length, such as radio.
+  bool ok = false;
+  qint64 start_ms = QUrlQuery(QString::fromLatin1(request.query))
+                        .queryItemValue("t")
+                        .toLongLong(&ok);
+  const qint64 length_ms = item.plan.length_nanosec / kNsecPerMsec;
+  if (!ok || start_ms < 0 || length_ms <= 0) start_ms = 0;
+  start_ms = qMin(start_ms, length_ms > 0 ? length_ms : 0);
+
+  new PipelineResponder(socket, token, item, start_ms, head_only, this);
 }
 
 void MediaHttpServer::WriteError(QTcpSocket* socket, int code,

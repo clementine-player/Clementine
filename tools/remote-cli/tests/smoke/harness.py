@@ -255,8 +255,10 @@ class TestRenderer:
         formats: list[str] | None = None,
         fail_formats: list[str] | None = None,
         gapless: bool = False,
+        local_address: str | None = None,
     ) -> None:
         self.port = port
+        self.local_address = local_address
         self.renderer_id = renderer_id
         self.formats = formats or DEFAULT_FORMATS
         self.fail_formats = fail_formats or []
@@ -282,7 +284,9 @@ class TestRenderer:
             formats=[parse_format(f) for f in self.formats],
             features=features,
         )
-        self._conn, info = await connection.connect(HOST, self.port, renderer=caps)
+        self._conn, info = await connection.connect(
+            HOST, self.port, renderer=caps, local_address=self.local_address
+        )
         assert pb.SERVER_FEATURE_RENDERING in info.features
         self.renderer = Renderer(
             self._conn,

@@ -21,8 +21,13 @@ class Connection:
         self._writer = writer
 
     @classmethod
-    async def open(cls, host: str, port: int) -> Connection:
-        reader, writer = await asyncio.open_connection(host, port)
+    async def open(
+        cls, host: str, port: int, local_address: str | None = None
+    ) -> Connection:
+        """Connects, from |local_address| if it's given."""
+        reader, writer = await asyncio.open_connection(
+            host, port, local_addr=(local_address, 0) if local_address else None
+        )
         return cls(reader, writer)
 
     async def send(self, msg: pb.Message) -> None:
@@ -60,9 +65,10 @@ async def connect(
     auth_code: int | None = None,
     renderer: pb.RendererCapabilities | None = None,
     send_playlist_songs: bool = False,
+    local_address: str | None = None,
 ) -> tuple[Connection, pb.ResponseClementineInfo]:
     """Connects and authenticates. Returns the connection and Clementine's INFO."""
-    conn = await Connection.open(host, port)
+    conn = await Connection.open(host, port, local_address)
     request = pb.RequestConnect(send_playlist_songs=send_playlist_songs)
     if auth_code is not None:
         request.auth_code = auth_code

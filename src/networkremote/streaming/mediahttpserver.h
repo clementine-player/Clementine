@@ -70,11 +70,24 @@ class MediaHttpServer : public QObject {
 
   static void WriteError(QTcpSocket* socket, int code, const char* reason);
 
+  // Limits on what one renderer (one token), and everyone together, may have
+  // open at once. Each pipeline is a decoder and an encoder with their own
+  // threads, so those are limited more tightly.
+  static const int kMaxResponsesPerRenderer;
+  static const int kMaxPipelinesPerRenderer;
+  static const int kMaxResponses;
+  // Connections that are still sending their request.
+  static const int kMaxPendingRequests;
+
  private slots:
   void ReadyRead();
 
  private:
   void Dispatch(QTcpSocket* socket, const HttpRequest& request);
+  // Live responders, all of them or only those for |token|; pipelines only
+  // with |pipelines|.
+  int CountResponders(const QByteArray* token, bool pipelines) const;
+  int CountPendingRequests() const;
 
   std::shared_ptr<StreamItemTable> items_;
 };

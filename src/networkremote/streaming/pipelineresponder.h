@@ -20,27 +20,26 @@
 
 #include <gst/gst.h>
 
-#include <QObject>
-
 #include "streamitemtable.h"
+#include "streamresponder.h"
 
-class QTcpSocket;
 class QTimer;
 
 // Streams an item through a GStreamer pipeline (remux or encode) as a chunked
-// HTTP response. Deletes itself when the socket closes.
+// HTTP response.
 //
 //   uridecodebin(caps = plan.decode_caps) ! <plan.tail> ! appsink
 //
 // See docs/design/remote-streaming.md section 5.2.
-class PipelineResponder : public QObject {
+class PipelineResponder : public StreamResponder {
   Q_OBJECT
 
  public:
   // Takes ownership of |socket|. |start_ms| is where to start within the
-  // item, for seeking.
-  PipelineResponder(QTcpSocket* socket, const StreamItem& item, qint64 start_ms,
-                    bool head_only);
+  // item, for seeking; it must be between 0 and the item's length.
+  PipelineResponder(QTcpSocket* socket, const QByteArray& token,
+                    const StreamItem& item, qint64 start_ms, bool head_only,
+                    QObject* parent);
   ~PipelineResponder();
 
   // The gst-launch description for |plan|, without the source URI.
@@ -59,7 +58,6 @@ class PipelineResponder : public QObject {
   void Fail(const QString& message);
   void Finish();
 
-  QTcpSocket* socket_;
   StreamItem item_;
   qint64 start_nanosec_;
   qint64 stop_nanosec_;  // -1: to the end

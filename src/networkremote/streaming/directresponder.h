@@ -19,28 +19,25 @@
 #define NETWORKREMOTE_STREAMING_DIRECTRESPONDER_H_
 
 #include <QFile>
-#include <QObject>
 
 #include "streamitemtable.h"
+#include "streamresponder.h"
 
-class QTcpSocket;
-
-// Sends a local file byte for byte, honouring a single Range. Deletes itself
-// when the socket closes.
-class DirectResponder : public QObject {
+// Sends a local file byte for byte, honouring a single Range.
+class DirectResponder : public StreamResponder {
   Q_OBJECT
 
  public:
   // Takes ownership of |socket|.
-  DirectResponder(QTcpSocket* socket, const StreamItem& item,
-                  const QByteArray& range, bool head_only);
+  DirectResponder(QTcpSocket* socket, const QByteArray& token,
+                  const StreamItem& item, const QByteArray& range,
+                  bool head_only, QObject* parent);
   ~DirectResponder();
 
  private slots:
   void Pump();
 
  private:
-  QTcpSocket* socket_;
   QFile file_;
   qint64 remaining_;
 };

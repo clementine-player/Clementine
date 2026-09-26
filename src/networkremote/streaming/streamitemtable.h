@@ -28,6 +28,14 @@
 #include "engines/playbackrequest.h"
 #include "streamplanner.h"
 
+// ::ffff:10.0.0.2 and 10.0.0.2 are the same peer; returns the plain IPv4 form
+// for either.
+inline QHostAddress NormalisedAddress(const QHostAddress& address) {
+  bool is_v4 = false;
+  const quint32 v4 = address.toIPv4Address(&is_v4);
+  return is_v4 ? QHostAddress(v4) : address;
+}
+
 // One track a renderer may fetch from MediaHttpServer.
 struct StreamItem {
   int id = 0;

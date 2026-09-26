@@ -30,6 +30,8 @@ TRACKS: dict[str, tuple[int, str]] = {
     "tone.flac": (300, "audioconvert ! flacenc"),
     "tone.ogg": (300, "audioconvert ! vorbisenc ! oggmux"),
     "long.flac": (1500, "audioconvert ! flacenc"),
+    # Long enough that its encoded stream can't all sit in socket buffers.
+    "ten-minutes.flac": (60000, "audioconvert ! flacenc"),
 }
 
 

@@ -259,6 +259,7 @@ set(SOURCES
   networkremote/streaming/rendererregistry.cpp
   networkremote/streaming/streamitemtable.cpp
   networkremote/streaming/streamplanner.cpp
+  networkremote/streaming/streamresponder.cpp
   networkremote/zeroconf.cpp
 
   playlist/dbplaylistitem.cpp
@@ -592,6 +593,7 @@ set(HEADERS
   networkremote/streaming/pipelineresponder.h
   networkremote/streaming/remoteengine.h
   networkremote/streaming/rendererregistry.h
+  networkremote/streaming/streamresponder.h
 
   playlist/dbplaylistitem.h
   playlist/dynamicplaylistcontrols.h

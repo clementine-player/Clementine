@@ -50,6 +50,17 @@ struct RendererCaps {
   bool gapless = false;
   bool http_range = false;
 
+  // Limits on what a renderer may describe. The planner renders a format's
+  // sample rates into every pipeline it builds, so they're kept small.
+  static const int kMaxFormats;
+  static const int kMaxSampleRates;
+  static const int kMaxMimeTypeLength;
+  static const int kMaxSampleRateHz;
+  static const int kMaxChannels;
+
+  // Converts what a renderer sent, dropping anything out of range: formats
+  // past kMaxFormats or with an unusable MIME type, sample rates past
+  // kMaxSampleRates or not in 1..kMaxSampleRateHz, and negative limits.
   static RendererCaps FromProto(const cpb::remote::RendererCapabilities& pb);
 
   // The format that accepts |mime_type|, or nullptr. An entry without a

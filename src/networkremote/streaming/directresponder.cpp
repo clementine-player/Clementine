@@ -29,12 +29,13 @@ const qint64 kChunkSize = 64 * 1024;
 const qint64 kHighWater = 256 * 1024;
 }  // namespace
 
-DirectResponder::DirectResponder(QTcpSocket* socket, const StreamItem& item,
-                                 const QByteArray& range, bool head_only)
-    : socket_(socket), file_(item.req.MediaUrl().toLocalFile()), remaining_(0) {
-  socket_->setParent(this);
-  connect(socket_, SIGNAL(disconnected()), SLOT(deleteLater()));
-
+DirectResponder::DirectResponder(QTcpSocket* socket, const QByteArray& token,
+                                 const StreamItem& item,
+                                 const QByteArray& range, bool head_only,
+                                 QObject* parent)
+    : StreamResponder(socket, token, Direct, parent),
+      file_(item.req.MediaUrl().toLocalFile()),
+      remaining_(0) {
   if (!file_.open(QIODevice::ReadOnly)) {
     qLog(Warning) << "Couldn't open" << file_.fileName() << "to stream";
     MediaHttpServer::WriteError(socket_, 404, "Not Found");

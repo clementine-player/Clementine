@@ -58,6 +58,7 @@ class RemoteEngine : public Engine::Base {
   const QString& renderer_id() const { return renderer_id_; }
   const QString& display_name() const { return display_name_; }
   int client_id() const { return endpoint_.client_id; }
+  const QHostAddress& peer_address() const { return endpoint_.peer_address; }
 
   // Handles a RENDERER_* message from this renderer.
   void HandleMessage(const cpb::remote::Message& msg);
