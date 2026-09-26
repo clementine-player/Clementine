@@ -1026,6 +1026,187 @@ policy, and the connection comes from a private address, so
 - The same checks also protect the media endpoints, because a malicious page
   could otherwise probe them too.
 
+### HTTPS
+
+The protocol works over plain HTTP. What's missing without HTTPS and a
+valid certificate is a browser that treats the page like an app.
+
+- **As a controller,** a page served by Clementine over HTTP works: the
+  WebSocket, playlists and controls are all fine. The cost is that pairing
+  secrets and session tokens cross the LAN in cleartext.
+- **As a renderer,** the page is held back:
+  - Browsers only let a page install as an app, or run a service worker,
+    over HTTPS (or on localhost). Without them, playback depends on a
+    browser tab staying open.
+  - Other APIs, such as Wake Lock and parts of Web Crypto, are also limited
+    to HTTPS. The rules differ by browser, so assume HTTP is missing things.
+  - A self-signed certificate doesn't help. Every device gets a full-page
+    warning, browsers remember the exception differently, and a page with an
+    invalid certificate still can't install. A native app can pin a
+    fingerprint from a QR code; a browser can't.
+- **A page hosted anywhere else needs TLS on Clementine.** An HTTPS page
+  can't open a plain `ws://` or `http://` connection to a LAN address
+  (mixed content), and Chrome now also asks the user's permission before a
+  public site connects to a private address.
+
+So the choice is between HTTP served by Clementine, with those limits, and a
+valid certificate for a name that points at the Clementine machine. There
+are three ways to get there.
+
+#### Option 1: plain HTTP from Clementine
+
+No setup, and the baseline everything else falls back to. The UX work is in
+pairing and in being honest about the limits:
+
+- **Pairing instead of the five-digit code.** The settings page shows a QR
+  code carrying Clementine's URL and a one-time pairing secret. The browser
+  trades the secret for a long-lived device token, and the settings page
+  lists paired devices with a Revoke button. This beats the auth code under
+  either option, though over HTTP the token can be sniffed on the LAN.
+- **Setting expectations.** The page says plainly: "Keep this tab open. On
+  phones, playback may stop when the screen locks." A suspended page drops
+  its WebSocket and never hears about the next track, which makes open
+  question 3 (a renderer that queues or pulls the next track itself) more
+  pressing for web renderers.
+
+#### Option 2: bring your own certificate
+
+Costs the project nothing to run, and it's what power users will want.
+
+- **Certificate and key settings.** Clementine serves HTTPS on the same
+  port: a TLS ClientHello starts with `0x16`, which the protocol sniffer can
+  recognise (§5.0). It watches the files and reloads them when they're
+  renewed.
+- **Tailscale** is the lowest-effort way to a real certificate, with no
+  domain of your own; see the steps below.
+- **A reverse proxy** (Caddy, nginx) in front of Clementine also works, with
+  the adjustments listed under "What Clementine needs behind a proxy".
+- **Your own domain with ACME** needs DNS-01 validation through the DNS
+  provider's API, because HTTP-01 can't reach a LAN machine. That's fine for
+  the few who want it, and too much to build a UI around.
+
+#### Option 3: a hosted service, like Plex's
+
+Plex gives every server a valid certificate with no user effort:
+
+1. Plex's DNS answers names that encode an IP address:
+   `192-168-1-10.<server id>.plex.direct` resolves to `192.168.1.10`.
+2. Each server gets a wildcard certificate for `*.<server id>.plex.direct`.
+3. The hosted app (app.plex.tv, on HTTPS) connects to
+   `https://192-168-1-10.<server id>.plex.direct:32400`. The certificate is
+   valid and nothing is blocked as mixed content.
+4. Accounts tie it together: the app lists the servers you've signed in on.
+
+A Clementine equivalent (say `clementine.direct`) would need:
+
+- **A DNS server** answering IP-encoded names, on a domain listed on the
+  Public Suffix List. Without the listing, Let's Encrypt's limit of about 50
+  certificates per registered domain per week caps the whole project.
+- **A certificate broker.** Clementine makes its key and certificate request
+  locally, and the service completes the DNS-01 challenge for that
+  install's subdomain. The service never sees the private key.
+- **Proof of installation,** so the broker only issues a subdomain's
+  certificate to the install that owns it. That means registering installs,
+  which is close to accounts.
+- **Renewal while Clementine runs.** Certificate lifetimes are shrinking
+  (CA/Browser Forum rules bring the maximum down to 47 days by 2029), so an
+  install left closed for a few weeks comes back with an expired
+  certificate and must fall back to Option 1 cleanly.
+- **Discovery.** Without accounts, the pairing QR code can carry the
+  `clementine.direct` URL. That works, but less smoothly than signing in.
+
+The costs:
+
+- **Running it indefinitely.** If the service or domain lapses, every
+  install's web remote breaks in a way users can't fix.
+- **Privacy.** The service learns every install's LAN address, public
+  address and when it runs, so it needs a published policy.
+- **Some networks block it.** Routers and DNS filters with DNS-rebinding
+  protection refuse public names that resolve to private addresses. Plex
+  documents this as a common support problem; those users silently get
+  Option 1.
+- **Abuse.** Automatically issued certificates on a public domain attract
+  misuse, which could get the domain flagged.
+- **Remote access is separate.** Plex's relay for playback away from home
+  carries user traffic and is a much bigger service. Tailscale or WireGuard
+  cover that instead.
+
+#### Recommendation
+
+1. **Build Option 1 properly first:** pairing tokens, a revocable device
+   list, the checks under Security above, and honest messaging about mobile
+   background playback.
+2. **Add Option 2 next:** certificate and key settings, TLS on the shared
+   port, and the Tailscale recipe below. That serves the people who most
+   want HTTPS at no ongoing cost.
+3. **Keep Option 3 possible without committing to it:** keep the
+   certificate source abstract (files now, a broker later), make the web app
+   work whether Clementine serves it or it's hosted with an allowlisted
+   Origin, and make pairing carry a URL rather than assume `host:port`.
+   Whether the project wants to run public infrastructure is a decision for
+   the maintainers, not a technical one.
+
+#### Tailscale, step by step
+
+Both the Clementine computer and the phone or laptop running the browser
+need to be on the same tailnet. Traffic between them is already encrypted
+by WireGuard; the certificate is there so the browser treats the page as
+secure. A bonus: it also works away from home.
+
+1. Install Tailscale on the Clementine computer and on each device that
+   will open the web remote, and sign in to the same tailnet on all of
+   them.
+2. In the Tailscale admin console, open **DNS**, make sure **MagicDNS** is
+   on, and under **HTTPS Certificates** choose **Enable HTTPS**. The page
+   warns that machine names are published in the public Certificate
+   Transparency logs. Rename the Clementine machine first if its name
+   reveals anything you'd rather not publish.
+3. On the Clementine computer, publish the remote's port over HTTPS:
+
+   ```sh
+   tailscale serve --bg --https=443 localhost:5500
+   tailscale serve status    # shows https://<machine>.<tailnet>.ts.net
+   ```
+
+   On Linux, if it refuses for lack of permission, allow your user to
+   manage Tailscale once with `sudo tailscale set --operator=$USER`.
+4. Open `https://<machine>.<tailnet>.ts.net` on the phone and pair as
+   usual.
+
+To stop: `tailscale serve --https=443 localhost:5500 off`.
+
+The alternative to step 3 is to let Clementine terminate TLS itself
+(Option 2): `tailscale cert <machine>.<tailnet>.ts.net` writes a Let's
+Encrypt certificate and key to files that Clementine's settings point at.
+Tailscale's docs note that you then have to renew them yourself before they
+expire after 90 days, for example with a timer that re-runs the command,
+and Clementine reloads them when they change. `tailscale serve` renews
+automatically, so it's the better default.
+
+#### What Clementine needs behind a proxy
+
+`tailscale serve`, Caddy and nginx all put a proxy between the browser and
+Clementine, which changes a few assumptions:
+
+- **Every client appears to come from localhost.** Clementine sees the
+  proxy's address, which on a dual-stack socket is `::ffff:127.0.0.1`
+  (#7524 makes the private-network check accept it). The network check then
+  says nothing about the real client, so access control rests on pairing
+  and, for Tailscale, on the tailnet's access rules. The media URL peer
+  check (§9) is weaker for the same reason, which is acceptable when the
+  tokens are unguessable and only sent over TLS.
+- **Media URLs must use the name the client used.** The prototype builds
+  them from the control socket's local address, which behind a proxy is
+  `127.0.0.1`. They should come from the Host of the WebSocket request, or
+  from a configured external URL.
+- **Host and Origin checks must allow the public name,** such as the
+  `ts.net` name, as well as Clementine's own addresses.
+- **WebSockets have to pass through the proxy.** Caddy and nginx support
+  this; confirm it for `tailscale serve` before relying on it.
+- **Only HTTP goes through an HTTP proxy.** The native Android remote keeps
+  speaking the protobuf protocol on the port directly. Over Tailscale it can
+  connect to the machine's tailnet address, which is already encrypted.
+
 ### Existing messages that don't suit a browser
 
 The web client can reuse most of the protocol as it is, but not all of it:
