@@ -111,9 +111,9 @@ Two things follow from this:
                       │                                             StreamPlanner         │
                       │                                                  │ plan           │
                       │                                                  ▼                │
- Renderer             │                                            MediaHttpServer :5501  │
+ Renderer             │                                            MediaHttpServer (:5500) │
  (phone, PC, ...)  ◄──┼─ protobuf :5500  RENDER_LOAD{url} ◄── RemoteEngine               │
-                   ───┼─ HTTP GET /s/<token>/<item>  ─────► Direct | Proxy | Transcode    │
+                   ───┼─ HTTP :5500 GET /s/<token>/<item> ► Direct | Proxy | Transcode    │
                       └───────────────────────────────────────────────────────────────────┘
 ```
 
@@ -217,17 +217,48 @@ Clementine and encoded again).
 
 ## 5. Delivery modes
 
-All three are served by `MediaHttpServer`, a small HTTP/1.1 server on its own
-`QTcpServer`. It uses the same listen addresses and the same
-`only_non_public_ip` check as `NetworkRemote`. The default port is 5501,
-configurable. The port goes in `ResponseClementineInfo` and in the Zeroconf
-TXT record, although renderers normally just follow the URL in `RENDER_LOAD`.
+All three are served by `MediaHttpServer`, a small HTTP/1.1 handler that
+shares the remote's existing port (5500 by default) with the protobuf
+protocol. That means one port to open in a firewall, one Zeroconf record,
+and the same listen addresses and `only_non_public_ip` check with no extra
+code.
 
-A separate port was chosen over sniffing `GET ` on 5500. Sharing the port
-would mean mixing two framings in `RemoteClient::IncomingData`, and it would
-make a later move to TLS for either side harder.
+### 5.0 Sharing the port
 
-URLs are opaque: `http://<host>:5501/s/<session-token>/<item-id>[?t=<ms>]`.
+`NetworkRemote::AcceptConnection` already runs the `only_non_public_ip` check.
+After that, instead of making a `RemoteClient` straight away, it waits for the
+first byte from the socket and **peeks** at it without consuming it
+(`QTcpSocket::peek`):
+
+- The protobuf framing starts with a big-endian `quint32` length
+  (`QDataStream`'s default byte order). `RemoteClient::IncomingData` already
+  disconnects any client whose length is over 128 MiB (`0x08000000`), so a
+  valid first byte is always `0x00`–`0x08`.
+- Every HTTP/1.x method (`GET`, `HEAD`, ...) starts with an upper-case ASCII
+  letter, `0x41`–`0x5A`.
+
+The two ranges don't overlap, so this isn't a guess based on low odds: a
+connection whose first byte is a letter is one the protobuf protocol would
+already reject. One byte decides it, and no buffering is needed. First byte
+`0x00`–`0x08` goes to `RemoteClient` as today. `A`–`Z` goes to
+`MediaHttpServer` if streaming is enabled. Anything else, or HTTP while
+streaming is off, closes the socket.
+
+The protocols are client-speaks-first: neither the remote nor HTTP sends
+anything before the client does, so waiting for the first byte changes
+nothing for existing clients. A connection that sends nothing within 10 s is
+closed, which also stops idle sockets from piling up before they are
+classified.
+
+The same byte range leaves room for TLS later: a TLS ClientHello starts with
+`0x16`, which matches neither protocol, so it can be recognised the same way.
+
+The whole mechanism is a small `ProtocolSniffer` step in `NetworkRemote`.
+`RemoteClient` and `MediaHttpServer` each receive a socket that belongs to
+them and never see the other protocol. `MediaHttpServer` has no
+`QTcpServer` of its own; it takes sockets through `HandleConnection(QTcpSocket*)`.
+
+URLs are opaque: `http://<host>:<remote port>/s/<session-token>/<item-id>[?t=<ms>]`.
 `item-id` is a key into a table held by the `RemoteEngine`. The table maps it
 to `{Plan, MediaPlaybackRequest, Song}`. Entries are made on `RENDER_LOAD` or
 `RENDER_PRELOAD`, and at most the current and next items are kept. **No file
@@ -364,7 +395,6 @@ message RequestConnect {
 message ResponseClementineInfo {
   // ...existing fields 1..4...
   optional bool supports_rendering = 5;  // server has streaming enabled
-  optional int32 stream_port = 6;
 }
 
 message Output {
@@ -379,7 +409,7 @@ enum StreamMode { STREAM_DIRECT = 0; STREAM_PROXY = 1; STREAM_TRANSCODE = 2; }
 
 message RenderItem {
   optional int32 item_id = 1;
-  optional string url = 2;            // http://host:5501/s/<token>/<item_id>
+  optional string url = 2;            // http://host:5500/s/<token>/<item_id>
   optional string mime_type = 3;
   optional StreamMode mode = 4;
   optional int64 length_ms = 5;
@@ -450,7 +480,8 @@ src/networkremote/streaming/
     remoteengine.{h,cpp}                   RemoteEngine (Engine::Base)
     rendererregistry.{h,cpp}               renderer_id -> RemoteEngine; owns OUTPUTS/OUTPUT_CHANGED
     streamplanner.{h,cpp}                  pure planning logic
-    mediahttpserver.{h,cpp}                QTcpServer, request parsing, token check, dispatch
+    protocolsniffer.{h,cpp}                first-byte routing of accepted sockets (§5.0)
+    mediahttpserver.{h,cpp}                HTTP request parsing, token check, dispatch
     directresponder.{h,cpp}                file + Range
     proxyresponder.{h,cpp}                 QNetworkAccessManager relay
     transcoderesponder.{h,cpp}             owns a GstStreamPipeline, appsink -> socket
@@ -462,14 +493,14 @@ Changes to existing files:
 
 - `Player`: construct an `EngineRouter` around `GstEngine`. Nothing else in
   `Player` changes.
-- `NetworkRemote`: own `RendererRegistry` and `MediaHttpServer`, start and
-  stop them with the server, and add `stream_port` to the Zeroconf TXT record.
+- `NetworkRemote`: own `RendererRegistry` and `MediaHttpServer`, and route
+  each accepted socket by its first byte (§5.0) instead of always making a
+  `RemoteClient`.
 - `RemoteClient`: store `RendererCapabilities` from `CONNECT` and issue the
   session token.
 - `IncomingDataParser`: handle the new message types and pass them to the
   registry.
-- `OutgoingDataCreator::SendClementineInfo`: set `supports_rendering` and
-  `stream_port`.
+- `OutgoingDataCreator::SendClementineInfo`: set `supports_rendering`.
 - `SettingsDialog`, `MainWindow`: `qobject_cast<GstEngine*>` becomes
   `EngineRouter::local_engine()`.
 - `networkremotesettingspage.ui`: add a "Streaming" group (§8).
@@ -483,7 +514,6 @@ Changes to existing files:
 - **Settings → Network Remote → Streaming**
   - *Allow playing on remote devices* (off by default. It exposes media the
     same way *Allow downloads* does, so it follows the same idea.)
-  - *Streaming port* (5501)
   - *When the device can't play a file, convert to:* \[transcoder preset\]
     (reuses the preset list downloads already show)
   - *Always convert lossless files* (shares the setting with downloads)
@@ -496,8 +526,10 @@ Changes to existing files:
 
 - **Off by default.** It needs the remote to be enabled *and* the new
   setting to be on.
-- **Same network policy.** `MediaHttpServer` uses `NetworkRemote`'s listen
-  addresses and `IpIsPrivate` check. Every request's peer address must also
+- **Same network policy.** HTTP arrives on the remote's own sockets, so the
+  listen addresses and `IpIsPrivate` check apply before it is even
+  recognised as HTTP. With streaming off, HTTP connections are closed
+  unanswered, so the port looks exactly as it does today. Every request's peer address must also
   match the peer address of the control connection that owns the token.
 - **Capability URLs.** The session token is 128 bits from
   `QRandomGenerator::system()`, issued only after `RemoteClient` is
@@ -517,8 +549,8 @@ Changes to existing files:
   out after 30 s.
 - **Known weakness, unchanged.** The remote's auth code is a short number
   sent in plaintext. This design doesn't make that worse. Tokens are only
-  handed out on authenticated connections. It also leaves a clean place to
-  add TLS later (separate ports, HTTP for media).
+  handed out on authenticated connections. TLS could be added later on the
+  same port, since its first byte is distinguishable too (§5.0).
 
 ## 10. Edge cases
 
@@ -564,25 +596,25 @@ Changes to existing files:
 - `remoteengine_test.cpp`: a fake renderer over a local socket speaking the
   new messages. Covers position interpolation, stale `item_id` reports being
   ignored, and disconnect falling back to local.
-- Extend `networkremote_test.cpp` to check that `supports_rendering` and
-  `stream_port` are only advertised when enabled.
+- Extend `networkremote_test.cpp` to check that `supports_rendering` is only
+  advertised when enabled.
+- `protocolsniffer_test.cpp`: first byte `0x00`–`0x08` goes to the remote,
+  `A`–`Z` to HTTP only when streaming is on, anything else is closed; a
+  first byte that arrives in a separate TCP segment from the rest; the
+  10 s silence timeout.
 - Transcode: a GStreamer test that turns a short WAV fixture into Ogg/Opus
   through `GstStreamPipeline` and checks the caps and approximate duration,
   including a `?t=` start.
 
 ## 13. Open questions
 
-1. Should the streaming port be optional, with media served on 5500 by
-   sniffing the protocol, for users who have to open firewall ports by hand?
-   The recommendation is no for Phase 1 (§5). It could come back later if
-   users ask.
-2. Should Clementine's volume slider set the renderer's device volume, or a
+1. Should Clementine's volume slider set the renderer's device volume, or a
    software gain inside Transcode? The proposal is the renderer's volume
    (`RENDER_SET_VOLUME`), because Direct mode can't apply gain.
-3. Should the choice of output be per playlist ("the kitchen playlist always
+2. Should the choice of output be per playlist ("the kitchen playlist always
    plays in the kitchen")? It's out of scope, but `EngineRouter::SetOutput`
    should be callable from `PlaylistManager` later.
-4. Should a renderer be able to *pull* the next track itself (a playlist
+3. Should a renderer be able to *pull* the next track itself (a playlist
    cursor on the renderer) to survive short losses of the control connection
    on mobile? This design keeps the renderer passive. That is simpler and
    keeps one source of truth, at the cost of a gap if the control connection
