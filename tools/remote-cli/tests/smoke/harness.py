@@ -36,12 +36,13 @@ def free_port() -> int:
 
 
 def has_gst_element(name: str) -> bool:
-    return (
-        subprocess.run(
-            ["gst-inspect-1.0", "--exists", name], capture_output=True, check=False
-        ).returncode
-        == 0
+    # Called while collecting tests, so it must work without GStreamer too.
+    if not shutil.which("gst-inspect-1.0"):
+        return False
+    result = subprocess.run(
+        ["gst-inspect-1.0", "--exists", name], capture_output=True, check=False
     )
+    return result.returncode == 0
 
 
 class Clementine:
