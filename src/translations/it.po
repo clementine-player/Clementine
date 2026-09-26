@@ -68,13 +68,18 @@ msgid " s"
 msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " secondi"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " brani"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr "%1 (non disponibile attualmente)"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -106,6 +111,11 @@ msgstr "%1 di %2"
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 scalette (%2)"
+
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr "%1 ha rifiutato l'accesso. Prova a disconnetterti e ad accedere di nuovo."
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -389,7 +399,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Le variabili iniziano con %, ad esempio: %artist %album %title </p>\n\n<p>Se racchiudi sezioni di testo che contengono una variabile tra parentesi \ngraffe, queste sezioni saranno nascoste se la variabile non contiene alcun \nvalore.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Un client può connettersi solo se viene digitato il codice corretto."
 
@@ -738,6 +748,10 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Gloria, gloria all'ipnorospo!"
 
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr "Tutti gli indirizzi"
+
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Tutti gli album"
@@ -763,11 +777,11 @@ msgstr "Tutti i traduttori"
 msgid "All tracks"
 msgstr "Tutte le tracce"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr "Permetti a un client di scaricare musica da questo computer."
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
 msgstr "Consenti gli scaricamenti"
 
@@ -819,7 +833,7 @@ msgstr "Arrabbiato"
 msgid "Appearance"
 msgstr "Aspetto"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Aggiungi file/URL alla scaletta"
 
@@ -874,7 +888,7 @@ msgid "As&k when saving"
 msgstr "&Chiedi durante il salvataggio"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Formato audio"
@@ -1108,7 +1122,7 @@ msgstr "Cambia la modalità di mescolamento"
 msgid "Change the currently playing song"
 msgstr "Cambierà la traccia in riproduzione"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Cambia la lingua"
 
@@ -1158,7 +1172,7 @@ msgstr "Scegli colore..."
 msgid "Choose font..."
 msgstr "Scegli carattere..."
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Scegli dall'elenco"
 
@@ -1254,7 +1268,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine può sincronizzare l'elenco delle tue sottoscrizioni con altri tuoi computer e applicazioni di gestione dei podcast. <a href=\"https://gpodder.net/register/\">Crea un account</a>."
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1271,6 +1285,12 @@ msgstr "Clementine non ha trovato risultati per questo file"
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
 msgstr "Clementine troverà la musica in:"
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
+msgstr "Clementine aprirà plex.tv nel tuo browser. Accedi e autorizza Clementine ad accedere al tuo account."
 
 #: library/libraryview.cpp:363
 msgid "Click here to add some music"
@@ -1327,7 +1347,7 @@ msgstr "Co&mpositore"
 msgid "Colors"
 msgstr "Colori"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Elenco separato da virgole di classe:livello, livello è 0-3"
 
@@ -1367,6 +1387,10 @@ msgstr "Configura %1..."
 msgid "Configure Magnatune..."
 msgstr "Configura Magnatune..."
 
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr "Configura Plex..."
+
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
 msgstr "Configura scorciatoie"
@@ -1405,6 +1429,16 @@ msgstr "Connetti i Wii Remote utilizzando l'azione attiva/disattiva"
 msgid "Connect device"
 msgstr "Connetti dispositivo"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr "Connesso a %1."
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr "Connessione a %1..."
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1428,6 +1462,10 @@ msgstr "Console"
 msgid "Constant bitrate"
 msgstr "Bitrate costante"
 
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr "Contatto con plex.tv..."
+
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
 msgstr "Converti tutta la musica"
@@ -1436,11 +1474,11 @@ msgstr "Converti tutta la musica"
 msgid "Convert any music that the device can't play"
 msgstr "Converti qualsiasi musica che il dispositivo non può riprodurre"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Converti i file audio senza perdita di informazione prima di inviarli alla destinazione remota."
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr "Converti i file senza perdita di informazione"
 
@@ -1501,6 +1539,11 @@ msgstr "Impossibile accedere a Last.fm. Prova ancora."
 msgid "Couldn't create playlist"
 msgstr "Impossibile creare la scaletta"
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr "Impossibile recuperare i tuoi server Plex: %1"
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1519,6 +1562,18 @@ msgstr "Impossibile trovare un codificatore per %1, verifica l'installazione del
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Impossibile aprire il file di uscita %1"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr "Impossibile raggiungere %1. Verificare che il server sia in esecuzione e che questo computer possa raggiungerlo."
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr "Impossibile raggiungere plex.tv: %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1555,7 +1610,7 @@ msgstr "Copertina impostata da %1"
 msgid "Covers from %1"
 msgstr "Copertine da %1"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr "Crea una nuova scaletta con file/URL"
 
@@ -1638,11 +1693,11 @@ msgstr "Giorni"
 msgid "De&fault"
 msgstr "Prede&finita"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr "Riduci il volume del 4 percento"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr "Riduci il volume del <value> percento"
 
@@ -1663,7 +1718,7 @@ msgstr "Dispositivo predefinito su %1"
 msgid "Defaults"
 msgstr "Valori predefiniti"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Ritardo tra le visualizzazioni"
 
@@ -1702,7 +1757,7 @@ msgstr "Elimina la preimpostazione"
 msgid "Delete smart playlist"
 msgstr "Elimina la scaletta veloce"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr "Elimina la traccia in riproduzione"
 
@@ -1823,7 +1878,7 @@ msgstr "Trasmissione discontinua"
 msgid "Display options"
 msgstr "Opzioni di visualizzazione"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Visualizza l'on-screen-display"
 
@@ -1922,15 +1977,15 @@ msgstr "Scarica automaticamente le nuove puntate"
 msgid "Download queued"
 msgstr "Scaricamento accodato"
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
 msgstr "Impostazioni di scaricamento"
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr "Scarica l'applicazione originale per Android"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Scarica il telecomando per desktop, Android e iOS"
 
@@ -2100,6 +2155,11 @@ msgstr "Digita un nome file per le copertine esportate (nessuna estensione):"
 msgid "Enter a new name for this playlist"
 msgstr "Inserisci un nuovo nome per questa scaletta"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr "Digita uno di questi indirizzi nell'applicazione per connetterti a Clementine."
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2126,10 +2186,6 @@ msgstr "Inserisci l'URL di flusso radio in Internet:"
 msgid "Enter the name of the folder"
 msgstr "Digita il nome della cartella"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr "Digita questo IP nell'applicazione per connetterti a Clementine."
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Collezione completa"
@@ -2142,11 +2198,11 @@ msgstr "Informazioni sulla puntata"
 msgid "Equalizer"
 msgstr "Equalizzatore"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalente a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels *:3"
 
@@ -2374,6 +2430,10 @@ msgstr "Scarica automaticamente"
 msgid "Fetch completed"
 msgstr "Scaricamento completato"
 
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr "Recupero della libreria Plex"
+
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Scaricamento della libreria di Subsonic"
@@ -2429,7 +2489,7 @@ msgstr "Anteprima nome file"
 msgid "Files"
 msgstr "File"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr "Cartella radice dei file"
 
@@ -2723,6 +2783,10 @@ msgstr "Ipnorospo"
 msgid "I don't have a Magnatune account"
 msgstr "Non ho un account Magnatune"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr "Sono registrato"
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Icona"
@@ -2811,11 +2875,11 @@ msgstr "Versione del protocollo REST di Subsonic incompatibile. Aggiorna il serv
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Configurazione incompleta, assicurati che tutti i campi siano popolati."
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr "Aumenta il volume del 4 percento"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr "Aumenta il volume del <value> percento"
 
@@ -3025,6 +3089,10 @@ msgstr "Chiaro"
 msgid "Limits"
 msgstr "Limiti"
 
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr "In ascolto su"
+
 #: ui/equalizer.cpp:138
 msgid "Live"
 msgstr "Live"
@@ -3094,7 +3162,7 @@ msgstr "Caricamento informazioni della traccia"
 msgid "Loading..."
 msgstr "Caricamento in corso..."
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carica file/URL, sostituendo la scaletta attuale"
 
@@ -3276,7 +3344,7 @@ msgstr "Riempimento minimo buffer"
 msgid "Missing plugins"
 msgstr "Estensioni mancanti"
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "Preimpostazioni projectM mancanti"
 
@@ -3347,7 +3415,7 @@ msgstr "Musica"
 msgid "Music Library"
 msgstr "Raccolta musicale"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr "Estensioni musicali visibili da remoto"
 
@@ -3378,7 +3446,7 @@ msgstr "Banda stretta (NB)"
 msgid "Network Proxy"
 msgstr "Proxy di rete"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr "Telecomando di rete"
 
@@ -3441,6 +3509,10 @@ msgstr "Traccia successiva"
 #: core/utilities.cpp:167
 msgid "Next week"
 msgstr "Settimana prossima"
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
+msgstr "Non sono stati trovati Plex Media Server nel tuo account."
 
 #: analyzers/analyzercontainer.cpp:83
 msgid "No analyzer"
@@ -3574,7 +3646,7 @@ msgstr "Acceso"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3582,7 +3654,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Accetta connessioni da client all'interno degli intervalli di IP: \n10.x.x.x \n172.16.0.0 - 172.31.255.255 \n 192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr "Consenti solo connessioni dalla rete locale"
 
@@ -3662,7 +3734,7 @@ msgid "Optimize for quality"
 msgstr "Ottimizza per qualità"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opzioni..."
@@ -3706,7 +3778,7 @@ msgstr "Supporto tag Anno originale"
 msgid "Other"
 msgstr "Altro"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Altre opzioni"
 
@@ -3763,7 +3835,7 @@ msgstr "Password"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Sospendi riproduzione"
 
@@ -3805,11 +3877,11 @@ msgstr "Riproduci"
 msgid "Play count"
 msgstr "Contatore di riproduzione"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr "Riproduci la scaletta specificata"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Riproduci se fermata, sospendi se in riproduzione"
 
@@ -3826,7 +3898,7 @@ msgstr "Riproduci dopo"
 msgid "Play selected tracks next"
 msgstr "Riproduci successivamente le tracce riprodotte"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Riproduci la traccia numero <n> della scaletta"
 
@@ -3838,7 +3910,7 @@ msgstr "Riproduci/Pausa"
 msgid "Playback"
 msgstr "Riproduzione"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Opzioni del lettore"
 
@@ -3852,7 +3924,7 @@ msgstr "Scaletta"
 msgid "Playlist finished"
 msgstr "Scaletta terminata"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opzioni della scaletta"
@@ -3873,6 +3945,20 @@ msgstr "Chiudi il browser e ritorna a Clementine."
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Apri questo URL nel tuo browser: <a href=\"%1\">%1</a>"
+
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr "Plex"
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr "Plex Media Server"
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
+msgstr "Plex non ha ancora confermato l'accesso. Autorizza Clementine nel tuo browser, quindi riprova."
 
 #: ../bin/src/ui_podcastinfodialog.h:91
 msgid "Podcast Information"
@@ -3898,7 +3984,7 @@ msgid "Popup duration"
 msgstr "Durata del fumetto"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Porta"
 
@@ -3976,7 +4062,7 @@ msgstr "Precedente"
 msgid "Previous track"
 msgstr "Traccia precedente"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Mostra le informazioni di versione"
 
@@ -4012,6 +4098,12 @@ msgstr "Metti i brani in ordine casuale"
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
 msgstr "Qt"
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
+msgstr "Le regole di registrazione dei log di Qt possono disattivare i messaggi di debug; QT_LOGGING_RULES=clementine.debug=true li riattiva."
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4072,7 +4164,7 @@ msgstr "Album casuali"
 msgid "Random Songs"
 msgstr "Brani casuali"
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Visualizzazione casuale"
 
@@ -4119,7 +4211,7 @@ msgstr "Limite di redirezioni superato, verifica la configurazione del server."
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Aggiorna catalogo"
 
@@ -4255,7 +4347,7 @@ msgstr "Modalità guadagno di riproduzione"
 msgid "Repopulate"
 msgstr "Ripopolamento"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr "Richiedi il codice di autenticazione"
 
@@ -4271,7 +4363,7 @@ msgstr "Azzera i contatori"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Riavvia il brano, poi salta alla precedente se premuto ancora"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Riavvia la traccia, o riproduci la traccia precedente se entro 8 secondi dall'avvio."
@@ -4312,7 +4404,7 @@ msgstr "Estrai CD audio"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr "La cartella radice che sarà navigabile dal telecomando di rete"
 
@@ -4469,6 +4561,10 @@ msgstr "Cerca in Jamendo"
 msgid "Search Magnatune"
 msgstr "Cerca in Magnatune"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr "Cerca su Plex"
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Cerca su Subsonic"
@@ -4535,11 +4631,11 @@ msgstr "Scorri indietro"
 msgid "Seek forward"
 msgstr "Scorri in avanti"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Sposta la traccia in riproduzione di una quantità relativa"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Sposta la traccia in riproduzione su una posizione assoluta"
 
@@ -4579,7 +4675,7 @@ msgstr "Seleziona le migliori corrispondenze possibili"
 msgid "Select foreground color:"
 msgstr "Seleziona il colore di primo piano:"
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Seleziona visualizzazioni"
 
@@ -4595,6 +4691,7 @@ msgstr "Seleziona..."
 msgid "Serial number"
 msgstr "Numero seriale"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
 msgstr "Server"
@@ -4619,7 +4716,7 @@ msgstr "Imposta %1 a \"%2\"..."
 msgid "Set target rate"
 msgstr "Imposta la velocità finale"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Imposta il volume al <value> percento"
 
@@ -4627,7 +4724,7 @@ msgstr "Imposta il volume al <value> percento"
 msgid "Set value for all selected tracks..."
 msgstr "Imposta valore per tutte le tracce selezionate..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -4791,9 +4888,14 @@ msgstr "Mescola la scaletta"
 msgid "Shuffle tracks in this album"
 msgstr "Mescola le tracce di questo album"
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
 msgstr "Registrati"
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
+msgstr "Accedi con Plex"
 
 #: ../bin/src/ui_loginstatewidget.h:166
 msgid "Sign out"
@@ -4815,7 +4917,7 @@ msgstr "Dimensioni:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Salta indietro nella scaletta"
 
@@ -4827,7 +4929,7 @@ msgstr "Salta il conteggio"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Salta i file con queste estensioni (separate da virgole, senza distinzione delle maiuscole)"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Salta in avanti nella scaletta"
 
@@ -4932,7 +5034,7 @@ msgstr "Album preferiti"
 msgid "Start ripping"
 msgstr "Avvia l'estrazione"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Avvia la scaletta attualmente in riproduzione"
 
@@ -4970,11 +5072,11 @@ msgstr "Ferma dopo ogni traccia"
 msgid "Stop after this track"
 msgstr "Ferma dopo questa traccia"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Ferma riproduzione"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr "Ferma la riproduzione dopo la traccia attuale"
 
@@ -5115,6 +5217,10 @@ msgstr "Il formato è aggiornato solo quando inizia una pipeline."
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Il secondo valore deve essere più grande del primo!"
+
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr "La richiesta di accesso è scaduta. Riprova."
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5282,7 +5388,7 @@ msgstr "Cambia lo stato della coda"
 msgid "Toggle scrobbling"
 msgstr "Commuta lo scrobbling"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Commuta la visibilità di Pretty OSD"
 
@@ -5381,7 +5487,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "URL del suo logo:"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5481,7 +5587,7 @@ msgstr "Aggiornamento %1%..."
 msgid "Updating library"
 msgstr "Aggiornamento raccolta"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Utilizzo"
 
@@ -5517,7 +5623,7 @@ msgstr "Usa un insieme di colori personalizzato"
 msgid "Use a custom message for notifications"
 msgstr "Usa un messaggio personalizzato per le notifiche"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr "Usa un telecomando in rete"
 
@@ -5602,6 +5708,10 @@ msgstr "Artisti vari"
 msgid "Verify Server certificate"
 msgstr "Verifica certificato del server"
 
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
+msgstr "Verifica certificato del server"
+
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
@@ -5615,7 +5725,7 @@ msgstr "Visualizza"
 msgid "View Stream Details"
 msgstr "Visualizza dettagli flusso"
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Modalità di visualizzazione"
 
@@ -5843,7 +5953,7 @@ msgstr "Sei registrato."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Puoi modificare l'organizzazione dei brani nella raccolta."
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5887,13 +5997,20 @@ msgstr "Devi eseguire le preferenze di sistema e consentire a Clementine di \"<s
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dovrai riavviare Clementine se cambi la lingua."
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr "Il tuo indirizzo IP:"
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Le credenziali fornite per Magnatune non erano corrette"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr "La tua sessione Plex è scaduta. Effettua nuovamente l'accesso."
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr "Il tuo browser dovrebbe ora visualizzare plex.tv. Se viene richiesto un codice, inserisci <b>%1</b>."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5959,7 +6076,7 @@ msgstr "prima i più grandi"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -5969,7 +6086,7 @@ msgstr "elenco separato da virgole delle estensioni consentite che saranno visib
 msgid "contains"
 msgstr "contiene"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr "telecomando_desktop"
 
@@ -6070,15 +6187,19 @@ msgstr "prima i più datati"
 msgid "on"
 msgstr "il"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "opzioni"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
 msgstr "o la scansione del codice QR:"
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
+msgstr "plex.tv ha inviato una risposta inattesa"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

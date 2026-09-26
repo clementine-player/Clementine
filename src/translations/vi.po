@@ -68,13 +68,18 @@ msgid " s"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " giây"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " bài hát"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr ""
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -106,6 +111,11 @@ msgstr ""
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "Danh sách %1 (%2)"
+
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr ""
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -389,7 +399,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Các dấu bắt đầu là %, ví dụ: %artist %album %title </p>\n\n<p>Nếu bạn quét chọn đoạn văn bản chứa dấu ngoặc nhọn, đoạn đó sẽ bị ẩn đi nếu dấu bắt đầu rỗng.<p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -738,6 +748,10 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr ""
+
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Tất cả album"
@@ -763,11 +777,11 @@ msgstr "Tất cả những người dịch"
 msgid "All tracks"
 msgstr "Tất cả bài hát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
 msgstr ""
 
@@ -819,7 +833,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Giao diện"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Thêm tập tin/URLs vào danh sách"
 
@@ -874,7 +888,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Định dạng"
@@ -1108,7 +1122,7 @@ msgstr "Thay đổi chế độ phát ngẫu nhiên"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Đổi ngôn ngữ"
 
@@ -1158,7 +1172,7 @@ msgstr "Chọn màu..."
 msgid "Choose font..."
 msgstr "Chọn phông chữ..."
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Chọn từ danh sách"
 
@@ -1254,7 +1268,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1270,6 +1284,12 @@ msgstr "Clementine không tìm thấy kết quả cho tập tin này"
 
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
 msgstr ""
 
 #: library/libraryview.cpp:363
@@ -1327,7 +1347,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Dấu phẩy phân cách danh sách lớp:mức độ, mức độ từ 0-3"
 
@@ -1367,6 +1387,10 @@ msgstr ""
 msgid "Configure Magnatune..."
 msgstr "Cấu hình Magnatune..."
 
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr ""
+
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
@@ -1405,6 +1429,16 @@ msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1428,6 +1462,10 @@ msgstr ""
 msgid "Constant bitrate"
 msgstr "Bitrate cố định"
 
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
 msgstr "Chuyển đổi toàn bộ nhạc"
@@ -1436,11 +1474,11 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1501,6 +1539,11 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr ""
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1519,6 +1562,18 @@ msgstr "Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đ�
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Không thể mở tập tin %1"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1555,7 +1610,7 @@ msgstr "Ảnh bìa được thiết lập từ %1"
 msgid "Covers from %1"
 msgstr "Ảnh bìa từ %1"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1638,11 +1693,11 @@ msgstr "Ngày"
 msgid "De&fault"
 msgstr "&Mặc định"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1663,7 +1718,7 @@ msgstr ""
 msgid "Defaults"
 msgstr "Mặc định"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 
@@ -1702,7 +1757,7 @@ msgstr "Xoá thiết lập"
 msgid "Delete smart playlist"
 msgstr "Xóa danh sách thông minh"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1823,7 +1878,7 @@ msgstr "Dừng truyền tải"
 msgid "Display options"
 msgstr "Tùy chọn hiển thị"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Hiện hộp thông báo trên màn hình"
 
@@ -1922,15 +1977,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2100,6 +2155,11 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Nhập tên mới cho danh sách này"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr ""
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2126,10 +2186,6 @@ msgstr "Nhập địa chỉ của kênh phát thanh trên internet:"
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Trọn bộ sưu tập"
@@ -2142,11 +2198,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Bộ cân chỉnh âm"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Tương đương với --log-levels *:1"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
@@ -2374,6 +2430,10 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr ""
@@ -2429,7 +2489,7 @@ msgstr ""
 msgid "Files"
 msgstr "Tập tin"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr ""
 
@@ -2723,6 +2783,10 @@ msgstr "Hypnotoad"
 msgid "I don't have a Magnatune account"
 msgstr "Không có tài khoản Magnatune"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Biểu tượng"
@@ -2811,11 +2875,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3025,6 +3089,10 @@ msgstr ""
 msgid "Limits"
 msgstr "Giới hạn"
 
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr ""
+
 #: ui/equalizer.cpp:138
 msgid "Live"
 msgstr "Live"
@@ -3094,7 +3162,7 @@ msgstr "Đang nạp thông tin bài hát"
 msgid "Loading..."
 msgstr "Đang nạp..."
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 
@@ -3276,7 +3344,7 @@ msgstr ""
 msgid "Missing plugins"
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "Thiếu thiết đặt projectM"
 
@@ -3347,7 +3415,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Thư viện nhạc"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3378,7 +3446,7 @@ msgstr "Băng hẹp (NB)"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr ""
 
@@ -3440,6 +3508,10 @@ msgstr "Phát bài tiếp theo"
 
 #: core/utilities.cpp:167
 msgid "Next week"
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:83
@@ -3574,7 +3646,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3582,7 +3654,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3662,7 +3734,7 @@ msgid "Optimize for quality"
 msgstr "Tối ưu cho chất lượng"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Tuỳ chọn..."
@@ -3706,7 +3778,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Các tuỳ chọn khác"
 
@@ -3763,7 +3835,7 @@ msgstr "Mật khẩu"
 msgid "Pause"
 msgstr "Tạm dừng"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Tạm dừng phát"
 
@@ -3805,11 +3877,11 @@ msgstr "Phát"
 msgid "Play count"
 msgstr "Số lần phát"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 
@@ -3826,7 +3898,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Phát bài hát thứ <n> trong danh sách"
 
@@ -3838,7 +3910,7 @@ msgstr "Phát/Tạm dừng"
 msgid "Playback"
 msgstr "Phát nhạc"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Tùy chỉnh phát nhạc"
 
@@ -3852,7 +3924,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Kết thúc danh sách"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Tùy chọn danh sách"
@@ -3872,6 +3944,20 @@ msgstr ""
 #: internet/lastfm/lastfmservice.cpp:142
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
+
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
 msgstr ""
 
 #: ../bin/src/ui_podcastinfodialog.h:91
@@ -3898,7 +3984,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Cổng"
 
@@ -3976,7 +4062,7 @@ msgstr "Trước"
 msgid "Previous track"
 msgstr "Phát bài trước"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Hiển thị thông tin phiên bản"
 
@@ -4011,6 +4097,12 @@ msgstr "Sắp xếp ngẫu nhiên các bài hát"
 
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
+msgstr ""
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
@@ -4072,7 +4164,7 @@ msgstr ""
 msgid "Random Songs"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Hiệu ứng hình ảnh ảo ngẫu nhiên"
 
@@ -4119,7 +4211,7 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Cập nhật mục lục"
 
@@ -4255,7 +4347,7 @@ msgstr "Chế độ Replay Gain"
 msgid "Repopulate"
 msgstr "Phục hồi số lượng"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr ""
 
@@ -4271,7 +4363,7 @@ msgstr "Thiết lập lại bộ đếm số lần phát"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4312,7 +4404,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4469,6 +4561,10 @@ msgstr "Tìm trên Jamendo"
 msgid "Search Magnatune"
 msgstr "Tìm trên Magnatune"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr ""
@@ -4535,11 +4631,11 @@ msgstr "Lùi về sau"
 msgid "Seek forward"
 msgstr "Tiến về trước"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Tua đến khoảng tương đối trong bài đang phát"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Tua đến vị trí chính xác trong bài đang phát"
 
@@ -4579,7 +4675,7 @@ msgstr "Chọn mục khớp nhiều nhất"
 msgid "Select foreground color:"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Chọn hiệu ứng hình ảnh ảo"
 
@@ -4595,6 +4691,7 @@ msgstr ""
 msgid "Serial number"
 msgstr "Số sê-ri"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
 msgstr ""
@@ -4619,7 +4716,7 @@ msgstr "Thiết lập %1 sang \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Đặt âm lượng ở mức <value> phần trăm"
 
@@ -4627,7 +4724,7 @@ msgstr "Đặt âm lượng ở mức <value> phần trăm"
 msgid "Set value for all selected tracks..."
 msgstr "Đặt giá trị cho tất cả những bài được chọn..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr "Thiết lập"
 
@@ -4791,8 +4888,13 @@ msgstr "Phát ngẫu nhiên danh sách"
 msgid "Shuffle tracks in this album"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:166
@@ -4815,7 +4917,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Không cho lùi lại trong danh sách"
 
@@ -4827,7 +4929,7 @@ msgstr "Không đếm"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Không cho chuyển bài trong danh sách"
 
@@ -4932,7 +5034,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Bắt đầu danh sách đang phát"
 
@@ -4970,11 +5072,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Dừng sau khi phát xong bài này"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Dừng lại"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5115,6 +5217,10 @@ msgstr ""
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Giá trị thứ hai phải lớn hơn giá trị thứ nhất!"
+
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr ""
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5282,7 +5388,7 @@ msgstr "Tắt/Bật trạng thái chờ"
 msgid "Toggle scrobbling"
 msgstr "Bật/Tắt Chuyển thông tin bài hát"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Bật/Tắt hiển thị của hộp thông báo"
 
@@ -5381,7 +5487,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5481,7 +5587,7 @@ msgstr "Đang cập nhật %1%..."
 msgid "Updating library"
 msgstr "Đang cập nhật thư viện"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Cách sử dụng"
 
@@ -5517,7 +5623,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Tùy chọn tin nhắn thông báo"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5602,6 +5708,10 @@ msgstr "Nhiều nghệ sỹ"
 msgid "Verify Server certificate"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
+msgstr ""
+
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
@@ -5615,7 +5725,7 @@ msgstr "Hiển thị"
 msgid "View Stream Details"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Chế độ hình ảnh ảo"
 
@@ -5843,7 +5953,7 @@ msgstr "Bạn đã đăng nhập."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Bạn có thể thay đổi cách tổ chức các bài hát trong thư viện."
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5887,13 +5997,20 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr ""
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Thông tin tài khoản Magnatune không đúng"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr ""
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5959,7 +6076,7 @@ msgstr "lớn nhất trước"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -5969,7 +6086,7 @@ msgstr ""
 msgid "contains"
 msgstr "có chứa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr ""
 
@@ -6070,14 +6187,18 @@ msgstr "cũ nhất trước"
 msgid "on"
 msgstr "vào"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "tùy chọn"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
 msgstr ""
 
 #: widgets/didyoumean.cpp:56

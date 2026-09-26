@@ -69,13 +69,18 @@ msgid " s"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " sekund"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " skladb"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr ""
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -107,6 +112,11 @@ msgstr ""
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamov predvajanja (%2)"
+
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr ""
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -390,7 +400,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Žetoni se pričnejo z %, na primer: %artist %album %title </p>\n\n<p>V primeru da odseke besedila, ki vsebujejo žetone, obdate z zavitimi oklepaji, bodo odseki skriti, če je žeton prazen.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -739,6 +749,10 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr ""
+
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Vsi albumi"
@@ -764,11 +778,11 @@ msgstr "Vsem prevajalcem"
 msgid "All tracks"
 msgstr "Vse skladbe"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
 msgstr ""
 
@@ -820,7 +834,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Videz"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Seznamu predvajanja dodaj datoteke/URL naslove"
 
@@ -875,7 +889,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Vrsta zvoka"
@@ -1109,7 +1123,7 @@ msgstr "Spremeni način naključnega predvajanja"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Sprememba jezika"
 
@@ -1159,7 +1173,7 @@ msgstr "Izberi barvo ..."
 msgid "Choose font..."
 msgstr "Izberi pisavo ..."
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Izberi s seznama"
 
@@ -1255,7 +1269,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1271,6 +1285,12 @@ msgstr "Clementine ni našel ničesar za to datoteko"
 
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
 msgstr ""
 
 #: library/libraryview.cpp:363
@@ -1328,7 +1348,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
 
@@ -1368,6 +1388,10 @@ msgstr ""
 msgid "Configure Magnatune..."
 msgstr "Nastavi Magnatune ..."
 
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr ""
+
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
 msgstr "Nastavi bližnjice"
@@ -1406,6 +1430,16 @@ msgstr "Povežite Wii Remotes z uporabo dejanja omogoči/onemogoči"
 msgid "Connect device"
 msgstr "Povežite napravo"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1429,6 +1463,10 @@ msgstr ""
 msgid "Constant bitrate"
 msgstr "Stalna bitna hitrost"
 
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
 msgstr "Pretvori vso glasbo"
@@ -1437,11 +1475,11 @@ msgstr "Pretvori vso glasbo"
 msgid "Convert any music that the device can't play"
 msgstr "Pretvori vso glasbo, ki je naprava ne more predvajati"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1502,6 +1540,11 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr ""
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1520,6 +1563,18 @@ msgstr "Kodirnika za %1 ni bilo mogoče najti. Preverite, če so nameščeni pra
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Izhodne datoteke %1 ni bilo mogoče odpreti"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1556,7 +1611,7 @@ msgstr "Naslovnica je nastavljena z %1"
 msgid "Covers from %1"
 msgstr "Naslovnice z %1"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1639,11 +1694,11 @@ msgstr "Dnevi"
 msgid "De&fault"
 msgstr "&Privzeto"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1664,7 +1719,7 @@ msgstr ""
 msgid "Defaults"
 msgstr "Privzete vrednosti"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Zakasnitev med predočenji"
 
@@ -1703,7 +1758,7 @@ msgstr "Izbriši predlogo nastavitev"
 msgid "Delete smart playlist"
 msgstr "Izbriši pameten seznam predvajanja"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1824,7 +1879,7 @@ msgstr "Nezvezni prenos (DTX)"
 msgid "Display options"
 msgstr "Možnosti prikaza"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Pokaži prikaz na zaslonu"
 
@@ -1923,15 +1978,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2101,6 +2156,11 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Vnesite novo ime za ta seznam predvajanja"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr ""
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2127,10 +2187,6 @@ msgstr "Vnesite URL naslov pretočnega radia:"
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Celotna zbirka"
@@ -2143,11 +2199,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Izravnalnik"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Enakovredno --log-levels *:1"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Enakovredno --log-levels *:3"
 
@@ -2375,6 +2431,10 @@ msgstr "Samodejno pridobi"
 msgid "Fetch completed"
 msgstr "Prejemanje zaključeno"
 
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr ""
@@ -2430,7 +2490,7 @@ msgstr ""
 msgid "Files"
 msgstr "Datoteke"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr ""
 
@@ -2724,6 +2784,10 @@ msgstr "Hypnotoad"
 msgid "I don't have a Magnatune account"
 msgstr "Nimam računa Magnatune"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Ikona"
@@ -2812,11 +2876,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3026,6 +3090,10 @@ msgstr ""
 msgid "Limits"
 msgstr "Omejitve"
 
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr ""
+
 #: ui/equalizer.cpp:138
 msgid "Live"
 msgstr "V živo"
@@ -3095,7 +3163,7 @@ msgstr "Nalaganje podatkov o skladbah"
 msgid "Loading..."
 msgstr "Nalaganje ..."
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 
@@ -3277,7 +3345,7 @@ msgstr ""
 msgid "Missing plugins"
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "Manjkajoče predloge nastavitev projectM"
 
@@ -3348,7 +3416,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Glasbena knjižnica"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3379,7 +3447,7 @@ msgstr "Ozek pas (NB)"
 msgid "Network Proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr ""
 
@@ -3441,6 +3509,10 @@ msgstr "Naslednja skladba"
 
 #: core/utilities.cpp:167
 msgid "Next week"
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:83
@@ -3575,7 +3647,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3583,7 +3655,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3663,7 +3735,7 @@ msgid "Optimize for quality"
 msgstr "Optimiziraj za kakovost"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Možnosti ..."
@@ -3707,7 +3779,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Druge možnosti"
 
@@ -3764,7 +3836,7 @@ msgstr "Geslo"
 msgid "Pause"
 msgstr "Naredi premor"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Naredi premor predvajanja"
 
@@ -3806,11 +3878,11 @@ msgstr "Predvajaj"
 msgid "Play count"
 msgstr "Število predvajanj"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Predvajaj, če je zaustavljeno, napravi premor, če se predvaja"
 
@@ -3827,7 +3899,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Predvajaj <n>-to skladbo v seznamu predvajanja"
 
@@ -3839,7 +3911,7 @@ msgstr "Predvajaj/premor"
 msgid "Playback"
 msgstr "Predvajanje"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
@@ -3853,7 +3925,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Seznam predvajanja je končan"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Možnosti seznama predvajanja"
@@ -3873,6 +3945,20 @@ msgstr ""
 #: internet/lastfm/lastfmservice.cpp:142
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
+
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
 msgstr ""
 
 #: ../bin/src/ui_podcastinfodialog.h:91
@@ -3899,7 +3985,7 @@ msgid "Popup duration"
 msgstr "Trajanje pojavnega obvestila"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Vrata"
 
@@ -3977,7 +4063,7 @@ msgstr "Predhodni"
 msgid "Previous track"
 msgstr "Predhodna skladba"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Izpiši podatke o različici"
 
@@ -4012,6 +4098,12 @@ msgstr "Razvrsti skladbe naključno"
 
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
+msgstr ""
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
@@ -4073,7 +4165,7 @@ msgstr ""
 msgid "Random Songs"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Naključno predočenje"
 
@@ -4120,7 +4212,7 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Osveži katalog"
 
@@ -4256,7 +4348,7 @@ msgstr "Način Jakosti predvajanja"
 msgid "Repopulate"
 msgstr "Znova napolni"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr ""
 
@@ -4272,7 +4364,7 @@ msgstr "Ponastavi število predvajanj"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4313,7 +4405,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4470,6 +4562,10 @@ msgstr "Poišči na Jamendo"
 msgid "Search Magnatune"
 msgstr "Poišči na Magnatune"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr ""
@@ -4536,11 +4632,11 @@ msgstr "Previj nazaj"
 msgid "Seek forward"
 msgstr "Previj naprej"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Previj trenutno predvajano skladbo za relativno količino"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Previj trenutno predvajano skladbo na absoluten položaj"
 
@@ -4580,7 +4676,7 @@ msgstr "Izberi najboljše mogoče ujemanje"
 msgid "Select foreground color:"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Izberi predočenja"
 
@@ -4596,6 +4692,7 @@ msgstr ""
 msgid "Serial number"
 msgstr "Zaporedna številka"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
 msgstr ""
@@ -4620,7 +4717,7 @@ msgstr "Nastavi %1 na \"%2\" ..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Nastavi glasnost na <value> odstotkov"
 
@@ -4628,7 +4725,7 @@ msgstr "Nastavi glasnost na <value> odstotkov"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavi vrednost za vse izbrane skladbe ..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr "Nastavitve"
 
@@ -4792,8 +4889,13 @@ msgstr "Premešaj seznam predvajanja"
 msgid "Shuffle tracks in this album"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:166
@@ -4816,7 +4918,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Skoči nazaj po seznamu predvajanja"
 
@@ -4828,7 +4930,7 @@ msgstr "Število preskočenih"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Skoči naprej po seznamu predvajanja"
 
@@ -4933,7 +5035,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Predvajaj skladbo, ki je označena v seznamu predvajanja"
 
@@ -4971,11 +5073,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Zaustavi po tej skladbi"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Zaustavi predvajanje"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5116,6 +5218,10 @@ msgstr ""
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Druga vrednost mora biti višja od prve!"
+
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr ""
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5283,7 +5389,7 @@ msgstr "Preklopi stanje vrste"
 msgid "Toggle scrobbling"
 msgstr "Preklopi beleženje skladb"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Preklopi vidnost lepega prikaza na zaslonu"
 
@@ -5382,7 +5488,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "Naslovi URL"
 
@@ -5482,7 +5588,7 @@ msgstr "Posodabljanje %1 % ..."
 msgid "Updating library"
 msgstr "Posodabljanje knjižnice"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Uporaba"
 
@@ -5518,7 +5624,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Za obvestila uporabi sporočila po meri"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5603,6 +5709,10 @@ msgstr "Različni izvajalci"
 msgid "Verify Server certificate"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
+msgstr ""
+
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
@@ -5616,7 +5726,7 @@ msgstr "Pogled"
 msgid "View Stream Details"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Način predočenja"
 
@@ -5844,7 +5954,7 @@ msgstr "Ste prijavljeni."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Spremenite lahko kako so skladbe organizirane v knjižnici"
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5888,13 +5998,20 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Za spremembo jezika morate ponovno zagnati Clementine"
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr ""
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaša poverila Magnatune so bila napačna"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr ""
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5960,7 +6077,7 @@ msgstr "najprej največji"
 msgid "bpm"
 msgstr "udarcev/min"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -5970,7 +6087,7 @@ msgstr ""
 msgid "contains"
 msgstr "vsebuje"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr ""
 
@@ -6071,14 +6188,18 @@ msgstr "najprej starejši"
 msgid "on"
 msgstr "v"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "možnosti"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
 msgstr ""
 
 #: widgets/didyoumean.cpp:56

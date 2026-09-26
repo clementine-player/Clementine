@@ -76,13 +76,18 @@ msgid " s"
 msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " sekund"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " písně"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr "%1 (nyní nedostupné)"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -114,6 +119,11 @@ msgstr "%1 na %2"
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamů skladeb (%2)"
+
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr "%1 odmítl přihlášení. Zkuste se odhlásit a znovu přihlásit."
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -397,7 +407,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Symboly začínají %, například: %artist %album %title </p>\n\n<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato část bude skryta, je-li symbol prázdný.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient se může připojit jen tehdy, když byl zadán správný kód."
 
@@ -746,6 +756,10 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Všechnu slávu omamující kuňce!"
 
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr "Všechny adresy"
+
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Všechna alba"
@@ -771,11 +785,11 @@ msgstr "Všichni překladatelé"
 msgid "All tracks"
 msgstr "Všechny skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr "Povolit klientu stahování hudby z tohoto počítače."
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
 msgstr "Povolit stahování"
 
@@ -827,7 +841,7 @@ msgstr "Rozlobený"
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
@@ -882,7 +896,7 @@ msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Zvukový formát"
@@ -1116,7 +1130,7 @@ msgstr "Změnit režim míchání"
 msgid "Change the currently playing song"
 msgstr "Změnit nyní přehrávanou píseň"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Změnit jazyk"
 
@@ -1166,7 +1180,7 @@ msgstr "Vybrat barvu..."
 msgid "Choose font..."
 msgstr "Vybrat písmo..."
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Vybrat ze seznamu"
 
@@ -1262,7 +1276,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine může seřídit váš seznam s odběry s vašimi dalšími počítači a programy na přehrávání pořadů sestávajících z předem nahraných zvukových záznamů.  <a href=\"https://gpodder.net/register/\">Vytvořit účet</a>."
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1279,6 +1293,12 @@ msgstr "Clementine se pro tento soubor výsledky najít nepodařilo"
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
 msgstr "Clementine bude hledat hudbu v:"
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
+msgstr "Clementine otevře ve vašem prohlížeči stránku plex.tv. Přihlaste se tam a povolte aplikaci Clementine přístup k vašemu účtu."
 
 #: library/libraryview.cpp:363
 msgid "Click here to add some music"
@@ -1335,7 +1355,7 @@ msgstr "S&kladatel"
 msgid "Colors"
 msgstr "Barvy"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
@@ -1375,6 +1395,10 @@ msgstr "Nastavit %1..."
 msgid "Configure Magnatune..."
 msgstr "Nastavit Magnatune..."
 
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr "Nastavit Plex..."
+
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
 msgstr "Nastavit klávesové zkratky"
@@ -1413,6 +1437,16 @@ msgstr "Připojit dálkový ovladač Wii pomocí činnosti zapnout/vypnout"
 msgid "Connect device"
 msgstr "Připojit zařízení"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr "Připojeno k %1."
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr "Připojuje se k %1..."
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1436,6 +1470,10 @@ msgstr "Konzole"
 msgid "Constant bitrate"
 msgstr "Stálý datový tok"
 
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr "Navazuje se spojení s plex.tv..."
+
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
 msgstr "Převést všechnu hudbu"
@@ -1444,11 +1482,11 @@ msgstr "Převést všechnu hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Převést zvukové soubory v bezztrátovém formátu, před jejich odesláním do vzdáleného úložiště."
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr "Převést soubory v bezztrátovém formátu"
 
@@ -1509,6 +1547,11 @@ msgstr "Nepodařilo se přihlásit se k Last.fm. Zkuste to, prosím, znovu.."
 msgid "Couldn't create playlist"
 msgstr "Nepodařilo se vytvořit seznam skladeb"
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr "Nepodařilo se natáhnout vaše servery Plex: %1"
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1527,6 +1570,18 @@ msgstr "Nepodařilo se najít kodér \"%1\" - ujistěte se, že máte nainstalov
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Nepodařilo se otevřít výstupní soubor %1"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr "Nelze se připojit k %1. Zkontrolujte, zda server běží a zda se k němu tento počítač může připojit."
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr "Nelze se připojit k plex.tv: %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1563,7 +1618,7 @@ msgstr "Obal nastaven z %1"
 msgid "Covers from %1"
 msgstr "Obaly od %1"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr "Vytvořit nový seznam skladeb pomocí souborů/adres"
 
@@ -1646,11 +1701,11 @@ msgstr "Dny"
 msgid "De&fault"
 msgstr "&Výchozí"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr "Snížit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr "Snížit hlasitost o <value> procent"
 
@@ -1671,7 +1726,7 @@ msgstr "Výchozí zařízení na %1"
 msgid "Defaults"
 msgstr "Výchozí"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Prodleva mezi vizualizacemi"
 
@@ -1710,7 +1765,7 @@ msgstr "Smazat přednastavení"
 msgid "Delete smart playlist"
 msgstr "Smazat chytrý seznam skladeb"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr "Smazat nyní přehrávanou píseň"
 
@@ -1831,7 +1886,7 @@ msgstr "Nesouvislý přenos"
 msgid "Display options"
 msgstr "Volby zobrazení"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Zobrazovat informace na obrazovce (OSD)"
 
@@ -1930,15 +1985,15 @@ msgstr "Stáhnout nové díly automaticky"
 msgid "Download queued"
 msgstr "Stáhnout zařazené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
 msgstr "Nastavení stahování"
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr "Stáhnout původní aplikaci pro Android"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Stáhnout dálkové ovládání pro stolní počítač, Android a iOS"
 
@@ -2108,6 +2163,11 @@ msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 msgid "Enter a new name for this playlist"
 msgstr "Zadejte název tohoto seznamu skladeb"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr "Zadejte v aplikaci jednu z těchto adres pro připojení ke Clementine."
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2134,10 +2194,6 @@ msgstr "Zadejte adresu (URL) proudu internetového rádia:"
 msgid "Enter the name of the folder"
 msgstr "Zadejte název složky"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr "Zadejte tuto adresu IP v programu pro spojení s Clementine."
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Celá sbírka"
@@ -2150,11 +2206,11 @@ msgstr "Informace o dílu"
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Rovnocenné s --log-levels *:1"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
@@ -2382,6 +2438,10 @@ msgstr "Stáhnout automaticky"
 msgid "Fetch completed"
 msgstr "Stahování dokončeno"
 
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr "Natahuje se knihovna Plex"
+
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr "Natahuje se knihovna Subsonic"
@@ -2437,7 +2497,7 @@ msgstr "Náhled názvu souboru"
 msgid "Files"
 msgstr "Soubory"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr "Základní složka pro soubory"
 
@@ -2731,6 +2791,10 @@ msgstr "Hypnožába"
 msgid "I don't have a Magnatune account"
 msgstr "U Magnatune nemám účet"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr "Přihlásil jsem se"
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Ikona"
@@ -2819,11 +2883,11 @@ msgstr "Nevhodná verze protokolu Subsonic REST. Server se musí zaktualizovat."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Neúplné nastavení. Zajistěte, prosím, že jsou všechna pole vyplněna."
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr "Zvýšit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr "Zvýšit hlasitost o <value> procent"
 
@@ -3033,6 +3097,10 @@ msgstr "Světlý"
 msgid "Limits"
 msgstr "Omezení"
 
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr "Poslechněte si dále"
+
 #: ui/equalizer.cpp:138
 msgid "Live"
 msgstr "Živě"
@@ -3102,7 +3170,7 @@ msgstr "Nahrávají se informace o skladbě"
 msgid "Loading..."
 msgstr "Nahrává se..."
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Nahraje soubory/adresy (URL), nahradí nynější seznam skladeb"
 
@@ -3284,7 +3352,7 @@ msgstr "Nejmenší naplnění vyrovnávací paměti"
 msgid "Missing plugins"
 msgstr "Chybějící přídavné moduly"
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "Chybí přednastavení projectM"
 
@@ -3355,7 +3423,7 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudební sbírka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr "Vzdáleně viditelné hudební přípony"
 
@@ -3386,7 +3454,7 @@ msgstr "Úzké pásmo"
 msgid "Network Proxy"
 msgstr "Síťová proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr "Síťové vzdálené ovládání"
 
@@ -3449,6 +3517,10 @@ msgstr "Další skladba"
 #: core/utilities.cpp:167
 msgid "Next week"
 msgstr "Příští týden"
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
+msgstr "Ve vašem účtu nebyly nalezeny žádné servery Plex Media Server."
 
 #: analyzers/analyzercontainer.cpp:83
 msgid "No analyzer"
@@ -3582,7 +3654,7 @@ msgstr "Zapnuto"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3590,7 +3662,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Přijmout spojení od klientů pouze v rozsazích IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr "Povolit spojení pouze z místní sítě"
 
@@ -3670,7 +3742,7 @@ msgid "Optimize for quality"
 msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Volby..."
@@ -3714,7 +3786,7 @@ msgstr "Podpora pro značku Původní rok"
 msgid "Other"
 msgstr "Jiné"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Další volby"
 
@@ -3771,7 +3843,7 @@ msgstr "Heslo"
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Pozastavit přehrávání"
 
@@ -3813,11 +3885,11 @@ msgstr "Přehrát"
 msgid "Play count"
 msgstr "Počet přehrání"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr "Přehrát daný seznam skladeb"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 
@@ -3834,7 +3906,7 @@ msgstr "Přehrát další"
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Přehrát <n>. skladbu v seznamu se skladbami"
 
@@ -3846,7 +3918,7 @@ msgstr "Přehrát/Pozastavit"
 msgid "Playback"
 msgstr "Přehrávání"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
@@ -3860,7 +3932,7 @@ msgstr "Seznam skladeb"
 msgid "Playlist finished"
 msgstr "Seznam skladeb dokončen"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Nastavení seznamu skladeb"
@@ -3881,6 +3953,20 @@ msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Otevřete, prosím, tuto adresu (URL) ve svém prohlížeči: <a href=\"%1\">%1</a>"
+
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr "Plex"
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr "Plex Media Server"
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
+msgstr "Služba Plex zatím přihlášení nepotvrdila. Schvalte Clementine ve svém prohlížeči a zkuste to znovu."
 
 #: ../bin/src/ui_podcastinfodialog.h:91
 msgid "Podcast Information"
@@ -3906,7 +3992,7 @@ msgid "Popup duration"
 msgstr "Doba zobrazení oznámení"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Port"
 
@@ -3984,7 +4070,7 @@ msgstr "Předchozí"
 msgid "Previous track"
 msgstr "Předchozí skladba"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Vypsat informaci o verzi"
 
@@ -4020,6 +4106,12 @@ msgstr "Seřadit skladby náhodně"
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
 msgstr "Qt"
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
+msgstr "Pravidla protokolování v Qt mohou vypnout ladicí zprávy; příkaz QT_LOGGING_RULES=clementine.debug=true je opět zapne"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4080,7 +4172,7 @@ msgstr "Náhodná alba"
 msgid "Random Songs"
 msgstr "Náhodné písně"
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Náhodná vizualizace"
 
@@ -4127,7 +4219,7 @@ msgstr "Krajní mez na přesměrování překročena, ověřte nastavení server
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Obnovit katalog"
 
@@ -4263,7 +4355,7 @@ msgstr "Režim zesílení přehrávaných skladeb"
 msgid "Repopulate"
 msgstr "Znovu zaplnit"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr "Vyžadovat ověřovací kód"
 
@@ -4279,7 +4371,7 @@ msgstr "Vynulovat počty přehrání"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Spustit píseň znovu, potom, v případě že je tlačítko opět stisknuto, skočit na předchozí"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Spustit znovu přehrávání skladby, nebo přehrávat předchozí skladbu, jestliže ještě neuběhlo osm sekund od začátku skladby."
@@ -4320,7 +4412,7 @@ msgstr "Vytáhnout skladby ze zvukového CD"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Základní složka, kterou lze procházet ze síťového dálkového ovladače"
 
@@ -4477,6 +4569,10 @@ msgstr "Hledat na Jamendu"
 msgid "Search Magnatune"
 msgstr "Hledat na Magnatune"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr "Vyhledat v Plexu"
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr "Hledat v Subsonic"
@@ -4543,11 +4639,11 @@ msgstr "Přetočit zpět"
 msgid "Seek forward"
 msgstr "Přetočit vpřed"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Přetočit v nyní přehrávané skladbě"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 
@@ -4587,7 +4683,7 @@ msgstr "Vyberte nejlepší možnou shodu"
 msgid "Select foreground color:"
 msgstr "Vybrat barvu popředí:"
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Vybrat vizualizace"
 
@@ -4603,6 +4699,7 @@ msgstr "Vybrat..."
 msgid "Serial number"
 msgstr "Sériové číslo"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
 msgstr "Server"
@@ -4627,7 +4724,7 @@ msgstr "Nastavit %1 na \"%2\"..."
 msgid "Set target rate"
 msgstr "Nastavit cílový tok"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Nastavit hlasitost na <value> procent"
 
@@ -4635,7 +4732,7 @@ msgstr "Nastavit hlasitost na <value> procent"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavit hodnotu pro vybrané skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -4799,9 +4896,14 @@ msgstr "Zamíchat seznam skladeb"
 msgid "Shuffle tracks in this album"
 msgstr "Zamíchat skladby v tomto albu"
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
 msgstr "Přihlásit se"
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
+msgstr "Přihlásit se přes Plex"
 
 #: ../bin/src/ui_loginstatewidget.h:166
 msgid "Sign out"
@@ -4823,7 +4925,7 @@ msgstr "Velikost:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Předchozí skladba v seznamu skladeb"
 
@@ -4835,7 +4937,7 @@ msgstr "Počet přeskočení"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Přeskočit soubory s těmito příponami (odděleny čárkou, rozlišuje se velikost písmen)"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
@@ -4940,7 +5042,7 @@ msgstr "Alba s hvězdičkami"
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Přehrát nynější skladbu v seznamu skladeb"
 
@@ -4978,11 +5080,11 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Zastavit přehrávání"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr "Zastavit přehrávání po nynější skladbě"
 
@@ -5123,6 +5225,10 @@ msgstr "Formát se aktualizuje pouze při spuštění roury."
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Druhá hodnota musí být větší než první!"
+
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr "Platnost žádosti o přihlášení vypršela. Zkuste to, prosím, znovu."
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5290,7 +5396,7 @@ msgstr "Přepnout stav řady"
 msgid "Toggle scrobbling"
 msgstr "Přepnout odesílání informací o přehrávání"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
@@ -5389,7 +5495,7 @@ msgstr "Adresa (URL)"
 msgid "URL of its Logo:"
 msgstr "Adresa (URL) jeho značky:"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "Adresa (URL)"
 
@@ -5489,7 +5595,7 @@ msgstr "Obnovuje se %1%..."
 msgid "Updating library"
 msgstr "Obnovuje se hudební sbírka"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Zacházení"
 
@@ -5525,7 +5631,7 @@ msgstr "Použít vlastní sadu barev"
 msgid "Use a custom message for notifications"
 msgstr "Použít vlastní zprávu pro oznámení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr "Použít síťové vzdálené ovládání"
 
@@ -5610,6 +5716,10 @@ msgstr "Různí umělci"
 msgid "Verify Server certificate"
 msgstr "Ověřit certifikát serveru"
 
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
+msgstr "Ověřit certifikát serveru"
+
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
@@ -5623,7 +5733,7 @@ msgstr "Pohled"
 msgid "View Stream Details"
 msgstr "Zobrazit podrobnosti o proudu"
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Režim vizualizací"
 
@@ -5851,7 +5961,7 @@ msgstr "Jste přihlášen."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Můžete změnit způsob uspořádání písní v hudební sbírce."
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5895,13 +6005,20 @@ msgstr "Aby bylo možné v Clementine používat globální klávesové zkratky,
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr "Vaše adresa IP:"
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaše přihlašovací údaje k Magnatune byly nesprávné"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr "Vaše přihlášení do služby Plex vypršelo. Přihlaste se, prosím, znovu."
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr "Váš prohlížeč by nyní měl zobrazit stránku plex.tv. Pokud vás požádá o zadání kódu, zadejte <b>%1</b>."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5967,7 +6084,7 @@ msgstr "nejprve největší"
 msgid "bpm"
 msgstr "úzm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -5977,7 +6094,7 @@ msgstr "seznam čárkou oddělených povolených přípon, které budou viditeln
 msgid "contains"
 msgstr "obsahuje"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr "desktop_vzdálené_ovládání"
 
@@ -6078,15 +6195,19 @@ msgstr "nejprve nejstarší"
 msgid "on"
 msgstr "Na"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "volby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
 msgstr "nebo sejměte QR kód:"
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
+msgstr "plex.tv poslala neočekávanou odpověď"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

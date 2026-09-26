@@ -5,7 +5,7 @@
 # Translators:
 # Coroccotta <adiazubierna@gmail.com>, 2012
 # Adolfo Jayme Barrientos, 2014
-# Adolfo Jayme Barrientos, 2012-2013,2018,2021
+# Adolfo Jayme Barrientos, 2012-2013,2018,2021,2026
 # Adolfo Jayme Barrientos, 2016-2022
 # Adolfo Jayme Barrientos, 2015-2016
 # Adolfo Jayme Barrientos, 2013
@@ -46,7 +46,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: isolus <isolus@yopmail.com>, 2025\n"
+"Last-Translator: Adolfo Jayme Barrientos, 2012-2013,2018,2021,2026\n"
 "Language-Team: Spanish (http://app.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,15 +60,15 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nPuede marcar listas de reproducción como favoritas pulsando en la estrella junto al nombre de una lista\n\nLas listas favoritas se guardarán aquí"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:127
 msgid " ANMR method (experimental)"
-msgstr ""
+msgstr "Método ANMR (experimental)"
 
 #: ../bin/src/ui_podcastsettingspage.h:273
 msgid " days"
-msgstr ""
+msgstr " días"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:133
 #: ../bin/src/ui_transcoderoptionsavaac.h:132
@@ -97,16 +97,21 @@ msgstr " pt"
 
 #: ../bin/src/ui_behavioursettingspage.h:414
 msgid " s"
-msgstr ""
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " segundos"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " canciones"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr "%1 (no disponible actualmente)"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -117,7 +122,7 @@ msgstr "%1 álbumes"
 #: widgets/equalizerslider.cpp:44
 #, qt-format
 msgid "%1 dB"
-msgstr ""
+msgstr "%1 dB"
 
 #: core/utilities.cpp:131
 #, qt-format
@@ -132,19 +137,24 @@ msgstr "hace %1 días"
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 en %2"
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reproducción (%2)"
 
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr ""
+
 #: internet/core/internetservice.cpp:160
 #, qt-format
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "Falló la solicitud de %1:\n%2"
 
 #: devices/deviceview.cpp:122
 #, qt-format
@@ -200,11 +210,11 @@ msgstr "%L1 reproducciones totales"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 pistas"
 
 #: ../bin/src/ui_notificationssettingspage.h:433
 msgid "%filename%"
-msgstr ""
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:258
 #, c-format, qt-plural-format
@@ -267,7 +277,7 @@ msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:731
 msgid "&Lyrics"
-msgstr ""
+msgstr "&Letra"
 
 #: ../bin/src/ui_mainwindow.h:792
 msgid "&Music"
@@ -319,7 +329,7 @@ msgstr "… y a todos los colaboradores de Amarok"
 
 #: ../bin/src/ui_albumcovermanager.h:227 ../bin/src/ui_albumcovermanager.h:228
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:66 ../bin/src/ui_trackslider.h:70
 msgid "0:00:00"
@@ -327,7 +337,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:344
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:131
 msgid "1 day"
@@ -348,7 +358,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:346
 msgid "40%"
-msgstr ""
+msgstr "40 %"
 
 #: ../bin/src/ui_playbacksettingspage.h:400
 msgid "44,100Hz"
@@ -421,14 +431,14 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Las fichas de reemplazo empiezan con «%», por ejemplo: %artist %album %title </p>\n\n<p>Si marca una sección de texto que contenga una ficha de reemplazo entre llaves, esa sección no se mostrará si la ficha de reemplazo se encuentra vacía.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Se requiere una cuenta prémium"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -444,7 +454,7 @@ msgstr "Se incluirá una canción en la lista de reproducción si coincide con e
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomático"
 
 #: smartplaylists/searchterm.cpp:408
 msgid "A-Z"
@@ -476,7 +486,7 @@ msgstr "ALABEMOS TODOS AL HIPNOSAPO"
 
 #: ui/albumcovermanager.cpp:107 ui/albumcoversearcher.cpp:160
 msgid "Abort"
-msgstr ""
+msgstr "Interrumpir"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -512,15 +522,15 @@ msgstr "Acción"
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #: wiimotedev/wiimotesettingspage.cpp:104
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Activar/desactivar Wii Remote"
 
 #: internet/podcasts/addpodcastdialog.cpp:64
 msgid "Add Podcast"
-msgstr ""
+msgstr "Añadir pódcast"
 
 #: ../bin/src/ui_addstreamdialog.h:123
 msgid "Add Stream"
@@ -536,7 +546,7 @@ msgstr "Añadir acción"
 
 #: ../bin/src/ui_transcodedialog.h:228
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Añadir todas las pistas de un directorio y todos sus subdirectorios"
 
 #: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
@@ -548,15 +558,15 @@ msgstr "Añadir directorio…"
 
 #: ui/mainwindow.cpp:2151
 msgid "Add file"
-msgstr ""
+msgstr "Añadir archivo"
 
 #: ../bin/src/ui_mainwindow.h:775
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Añadir archivo al conversor"
 
 #: ../bin/src/ui_mainwindow.h:773
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Añadir archivos al conversor"
 
 #: ../bin/src/ui_transcodedialog.h:226 ../bin/src/ui_mainwindow.h:741
 msgid "Add file..."
@@ -568,7 +578,7 @@ msgstr "Añadir archivos para convertir"
 
 #: ../bin/src/ui_googledrivesettingspage.h:148
 msgid "Add files..."
-msgstr ""
+msgstr "Añadir archivos…"
 
 #: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2178
 #: ripper/ripcddialog.cpp:279
@@ -585,11 +595,11 @@ msgstr "Añadir carpeta nueva…"
 
 #: ../bin/src/ui_addpodcastdialog.h:177
 msgid "Add podcast"
-msgstr ""
+msgstr "Añadir pódcast"
 
 #: internet/podcasts/podcastservice.cpp:434 ../bin/src/ui_mainwindow.h:771
 msgid "Add podcast..."
-msgstr ""
+msgstr "Añadir pódcast…"
 
 #: smartplaylists/searchtermwidget.cpp:385
 msgid "Add search term"
@@ -609,7 +619,7 @@ msgstr "Añadir etiqueta de artista a la canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Add song auto score"
-msgstr ""
+msgstr "Añadir valoración automática de canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song composer tag"
@@ -621,7 +631,7 @@ msgstr "Añadir etiqueta de disco a la canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Add song filename"
-msgstr ""
+msgstr "Añadir nombre de archivo de canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song genre tag"
@@ -743,7 +753,7 @@ msgstr "Artista del álbum"
 
 #: ../bin/src/ui_appearancesettingspage.h:339
 msgid "Album cover"
-msgstr ""
+msgstr "Portada de álbum"
 
 #: internet/jamendo/jamendoservice.cpp:423
 msgid "Album info on jamendo.com..."
@@ -759,7 +769,7 @@ msgstr "Álbumes sin cubiertas"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 #: ui/mainwindow.cpp:156
 msgid "All Files (*)"
@@ -768,7 +778,11 @@ msgstr "Todos los archivos (*)"
 #: ../bin/src/ui_mainwindow.h:747
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "¡Alabemos todos al hipnosapo!"
+
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr "Todas las direcciones"
 
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
@@ -795,13 +809,13 @@ msgstr "Todos los traductores"
 msgid "All tracks"
 msgstr "Todas las pistas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
-msgstr ""
+msgstr "Permitir descargas"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -835,7 +849,7 @@ msgstr "Ocurrió un error al escribir los metadatos en «%1»"
 
 #: internet/subsonic/subsonicsettingspage.cpp:127
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Se produjo un error no especificado."
 
 #: ui/about.cpp:91
 msgid "And:"
@@ -851,7 +865,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Añadir archivos/URL a la lista de reproducción"
 
@@ -906,14 +920,14 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Formato de audio"
 
 #: ../bin/src/ui_playbacksettingspage.h:392
 msgid "Audio output"
-msgstr ""
+msgstr "Salida de audio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
@@ -923,7 +937,7 @@ msgstr "Falló la autenticación"
 
 #: ../bin/src/ui_episodeinfowidget.h:129 ../bin/src/ui_podcastinfowidget.h:188
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: ui/about.cpp:74
 msgid "Authors"
@@ -936,7 +950,7 @@ msgstr "Automática"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid "Automatic updating"
@@ -964,7 +978,7 @@ msgstr "Tamaño promedio de imagen"
 
 #: internet/podcasts/addpodcastdialog.cpp:92
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "Pódcast de la BBC"
 
 #: playlist/playlist.cpp:1420 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:704
@@ -981,7 +995,7 @@ msgstr "Color de fondo"
 
 #: ../bin/src/ui_appearancesettingspage.h:334
 msgid "Background image"
-msgstr ""
+msgstr "Imagen de fondo"
 
 #: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background opacity"
@@ -989,11 +1003,11 @@ msgstr "Opacidad del fondo"
 
 #: core/database.cpp:683
 msgid "Backing up database"
-msgstr ""
+msgstr "Respaldando la base de datos"
 
 #: ../bin/src/ui_equalizer.h:170
 msgid "Balance"
-msgstr ""
+msgstr "Equilibrio"
 
 #: core/globalshortcuts.cpp:84
 msgid "Ban (Last.fm scrobbling)"
@@ -1021,7 +1035,7 @@ msgstr "Mejor"
 
 #: songinfo/artistbiography.cpp:97 songinfo/artistbiography.cpp:275
 msgid "Biography"
-msgstr ""
+msgstr "Biografía"
 
 #: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
@@ -1044,7 +1058,7 @@ msgstr "Tasa de bits"
 #: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Tasa de bits"
 
 #: analyzers/blockanalyzer.cpp:47
 msgid "Block analyzer"
@@ -1056,7 +1070,7 @@ msgstr "Tipo de bloque"
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
-msgstr ""
+msgstr "Cantidad de desenfoque"
 
 #: ../bin/src/ui_notificationssettingspage.h:456
 msgid "Body"
@@ -1068,7 +1082,7 @@ msgstr "Analizador de resonancia"
 
 #: ../bin/src/ui_boxsettingspage.h:96
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:144
 #: ../bin/src/ui_podcastsettingspage.h:269
@@ -1082,7 +1096,7 @@ msgstr "Duración del búfer"
 
 #: engines/gstengine.cpp:957
 msgid "Buffering"
-msgstr ""
+msgstr "Almacenando en búfer"
 
 #: internet/seafile/seafileservice.cpp:232
 msgid "Building Seafile index..."
@@ -1098,11 +1112,11 @@ msgstr "Botones"
 
 #: internet/podcasts/addpodcastdialog.cpp:95
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Pódcast de la CBC"
 
 #: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
-msgstr ""
+msgstr "Unidad de CD"
 
 #: core/song.cpp:444
 msgid "CDDA"
@@ -1114,7 +1128,7 @@ msgstr "Compatibilidad con hojas CUE"
 
 #: internet/podcasts/podcastservice.cpp:459
 msgid "Cancel download"
-msgstr ""
+msgstr "Cancelar descarga"
 
 #: ../bin/src/ui_edittagdialog.h:700
 msgid "Change cover art"
@@ -1134,13 +1148,13 @@ msgstr "Cambiar atajo…"
 
 #: core/globalshortcuts.cpp:75
 msgid "Change shuffle mode"
-msgstr "Cambiar modo aleatorio"
+msgstr "Cambiar modo de aleatorización"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Cambiar la canción en reproducción"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Cambiar el idioma"
 
@@ -1156,7 +1170,7 @@ msgstr ""
 
 #: ../bin/src/ui_streamdetailsdialog.h:135
 msgid "Channels"
-msgstr ""
+msgstr "Canales"
 
 #: ../bin/src/ui_podcastsettingspage.h:257
 msgid "Check for new episodes"
@@ -1190,7 +1204,7 @@ msgstr "Elegir color…"
 msgid "Choose font..."
 msgstr "Elegir tipo de letra…"
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Elegir de la lista"
 
@@ -1286,7 +1300,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1302,6 +1316,12 @@ msgstr "Clementine no encontró resultados para este archivo"
 
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
 msgstr ""
 
 #: library/libraryview.cpp:363
@@ -1333,7 +1353,7 @@ msgstr "Cerrar"
 
 #: playlist/playlisttabbar.cpp:56
 msgid "Close playlist"
-msgstr ""
+msgstr "Cerrar lista de reproducción"
 
 #: visualisations/visualisationcontainer.cpp:133
 msgid "Close visualization"
@@ -1357,9 +1377,9 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:322
 msgid "Colors"
-msgstr ""
+msgstr "Colores"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por comas de la clase:nivel, el nivel es 0-3"
 
@@ -1369,7 +1389,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:126
 msgid "Command"
-msgstr ""
+msgstr "Orden"
 
 #: playlist/playlist.cpp:1439 smartplaylists/searchterm.cpp:396
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:718
@@ -1393,11 +1413,15 @@ msgstr "Compositor"
 #: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Configurar %1…"
 
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Configurar Magnatune…"
+
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
@@ -1405,7 +1429,7 @@ msgstr "Configurar atajos"
 
 #: internet/subsonic/subsonicservice.cpp:147
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "Configurar Subsonic…"
 
 #: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
@@ -1418,7 +1442,7 @@ msgstr "Configurar fonoteca…"
 #: internet/podcasts/addpodcastdialog.cpp:78
 #: internet/podcasts/podcastservice.cpp:473
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Configurar pódcast…"
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:184
@@ -1437,6 +1461,16 @@ msgstr "Conectar Wii Remotes mediante acción de activar/desactivar"
 msgid "Connect device"
 msgstr "Conectar dispositivo"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1454,11 +1488,15 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:125 ../bin/src/ui_mainwindow.h:750
 msgid "Console"
-msgstr ""
+msgstr "Consola"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
 msgid "Constant bitrate"
 msgstr "Tasa de bits constante"
+
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
@@ -1468,11 +1506,11 @@ msgstr "Convertir toda la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir cualquier música que el dispositivo no pueda reproducir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1492,7 +1530,7 @@ msgstr "Copiar en la fonoteca…"
 
 #: ../bin/src/ui_podcastinfowidget.h:190
 msgid "Copyright"
-msgstr ""
+msgstr "Derechos de autor"
 
 #: internet/subsonic/subsonicsettingspage.cpp:100
 msgid ""
@@ -1533,6 +1571,11 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr ""
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1551,6 +1594,18 @@ msgstr "No se pudo encontrar un codificador para %1. Compruebe que tenga instala
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "No se pudo abrir el archivo de salida %1"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1587,7 +1642,7 @@ msgstr "Cubierta definida desde %1"
 msgid "Covers from %1"
 msgstr "Cubiertas de %1"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1617,7 +1672,7 @@ msgstr "Personalizado"
 
 #: ../bin/src/ui_appearancesettingspage.h:341
 msgid "Custom image:"
-msgstr ""
+msgstr "Imagen personalizada:"
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Custom message settings"
@@ -1629,7 +1684,7 @@ msgstr "Personalizado…"
 
 #: devices/udisks2lister.cpp:81
 msgid "D-Bus path"
-msgstr ""
+msgstr "Ruta de D-Bus"
 
 #: ui/equalizer.cpp:117
 msgid "Dance"
@@ -1637,11 +1692,11 @@ msgstr "Dance"
 
 #: ../bin/src/ui_appearancesettingspage.h:326
 msgid "Dark"
-msgstr ""
+msgstr "Oscuro"
 
 #: ../bin/src/ui_console.h:128
 msgid "Database"
-msgstr ""
+msgstr "Base de datos"
 
 #: core/database.cpp:636
 msgid ""
@@ -1652,7 +1707,7 @@ msgstr ""
 
 #: ../bin/src/ui_episodeinfowidget.h:130
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: playlist/playlist.cpp:1436 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1670,11 +1725,11 @@ msgstr "Días"
 msgid "De&fault"
 msgstr "Pre&determinado"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1695,14 +1750,14 @@ msgstr ""
 msgid "Defaults"
 msgstr "Valores predeterminados"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Demora entre visualizaciones"
 
 #: playlist/playlistlistcontainer.cpp:159
 #: ../bin/src/ui_playlistlistcontainer.h:130
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: internet/podcasts/podcastservice.cpp:454
 msgid "Delete downloaded data"
@@ -1734,7 +1789,7 @@ msgstr "Eliminar predefinición"
 msgid "Delete smart playlist"
 msgstr "Eliminar lista inteligente"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1748,7 +1803,7 @@ msgstr "Eliminando archivos"
 
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Depth"
-msgstr ""
+msgstr "Profundidad"
 
 #: ui/mainwindow.cpp:1865
 msgid "Dequeue selected tracks"
@@ -1769,7 +1824,7 @@ msgstr "Detalles…"
 
 #: ../bin/src/ui_playbacksettingspage.h:413
 msgid "Detect"
-msgstr ""
+msgstr "Detectar"
 
 #: devices/giolister.cpp:183
 msgid "Device"
@@ -1855,7 +1910,7 @@ msgstr "Transmisión discontinua"
 msgid "Display options"
 msgstr "Opciones de visualización"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Mostrar el mensaje en pantalla (OSD)"
 
@@ -1903,7 +1958,7 @@ msgstr ""
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:114
 msgid "Don't shuffle"
-msgstr "No mezclar"
+msgstr "No aleatorizar"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:317
 #: ui/albumcovermanager.cpp:217
@@ -1952,17 +2007,17 @@ msgstr ""
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
-msgstr ""
+msgstr "Descarga en cola"
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
-msgstr ""
+msgstr "Configuración de descargas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2132,6 +2187,11 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Escriba un nombre nuevo para esta lista de reproducción"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr ""
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2158,27 +2218,23 @@ msgstr "Escriba el URL de una transmisión radial por Internet:"
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Colección completa"
 
 #: internet/podcasts/podcastservice.cpp:545
 msgid "Episode information"
-msgstr ""
+msgstr "Información del episodio"
 
 #: ../bin/src/ui_equalizer.h:160 ../bin/src/ui_mainwindow.h:754
 msgid "Equalizer"
 msgstr "Ecualizador"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalente a --log-levels*:1"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels*:3"
 
@@ -2254,7 +2310,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every hour"
-msgstr ""
+msgstr "Cada hora"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "Except between tracks on the same album or in the same CUE sheet"
@@ -2262,7 +2318,7 @@ msgstr "Excepto entre pistas del mismo álbum, o en la misma hoja CUE"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Existing covers"
-msgstr ""
+msgstr "Portadas existentes"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:107
 msgid "Expand"
@@ -2275,11 +2331,11 @@ msgstr ""
 
 #: ../bin/src/ui_albumcovermanager.h:230
 msgid "Export Covers"
-msgstr ""
+msgstr "Exportar portadas"
 
 #: ../bin/src/ui_albumcoverexport.h:200
 msgid "Export covers"
-msgstr ""
+msgstr "Exportar portadas"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export downloaded covers"
@@ -2291,7 +2347,7 @@ msgstr ""
 
 #: ui/albumcovermanager.cpp:806 ui/albumcovermanager.cpp:830
 msgid "Export finished"
-msgstr ""
+msgstr "Exportación finalizada"
 
 #: ui/albumcovermanager.cpp:815
 #, qt-format
@@ -2300,7 +2356,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:415
 msgid "F32LE (32-bit)"
-msgstr ""
+msgstr "F32LE (32 bits)"
 
 #: ../bin/src/ui_mainwindow.h:789
 msgid "F9"
@@ -2388,7 +2444,7 @@ msgstr "Rápida"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:125
 msgid "Fast search"
-msgstr ""
+msgstr "Búsqueda rápida"
 
 #: library/library.cpp:92
 msgid "Favourite tracks"
@@ -2405,6 +2461,10 @@ msgstr "Obtener automáticamente"
 #: ../bin/src/ui_coversearchstatisticsdialog.h:72
 msgid "Fetch completed"
 msgstr "Descarga completada"
+
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr ""
 
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
@@ -2437,7 +2497,7 @@ msgstr "Nombre del archivo (sin ruta)"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:93
 msgid "File paths"
-msgstr ""
+msgstr "Rutas de archivos"
 
 #: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
@@ -2455,13 +2515,13 @@ msgstr "Nombre del archivo"
 
 #: ../bin/src/ui_ripcddialog.h:339
 msgid "Filename Preview"
-msgstr ""
+msgstr "Previsualización de nombre de archivo"
 
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Archivos"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr ""
 
@@ -2491,7 +2551,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
-msgstr ""
+msgstr "Seguir sistema"
 
 #: ../bin/src/ui_songinfosettingspage.h:152
 msgid "Font size"
@@ -2630,7 +2690,7 @@ msgstr "Ir a la lista de reproducción anterior"
 
 #: ../bin/src/ui_googledrivesettingspage.h:143
 msgid "Google Drive"
-msgstr ""
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:56 ui/albumcovermanager.cpp:470
 #: ../bin/src/ui_coversearchstatisticsdialog.h:73
@@ -2755,6 +2815,10 @@ msgstr "Hipnosapo"
 msgid "I don't have a Magnatune account"
 msgstr "No tengo una cuenta en Magnatune"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Icono"
@@ -2843,11 +2907,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2858,7 +2922,7 @@ msgstr "Aumentar volumen"
 #: internet/core/cloudfileservice.cpp:150
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "Indizando %1"
 
 #: wiimotedev/wiimotesettingspage.cpp:140 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
@@ -2866,7 +2930,7 @@ msgstr "Información"
 
 #: ../bin/src/ui_ripcddialog.h:325
 msgid "Input options"
-msgstr ""
+msgstr "Opciones de entrada"
 
 #: ../bin/src/ui_filenameformatwidget.h:121
 msgid "Insert..."
@@ -2874,7 +2938,7 @@ msgstr "Insertar…"
 
 #: core/database.cpp:620
 msgid "Integrity check"
-msgstr ""
+msgstr "Comprobación de integridad"
 
 #: ui/mainwindow.cpp:278
 msgid "Internet"
@@ -2883,15 +2947,15 @@ msgstr "Internet"
 #: ../bin/src/ui_internetshowsettingspage.h:81
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "Servicios de Internet"
 
 #: widgets/osd.cpp:321 ../bin/src/ui_playlistsequence.h:113
 msgid "Intro tracks"
-msgstr ""
+msgstr "Pistas de introducción"
 
 #: songinfo/streamdiscoverer.cpp:115
 msgid "Invalid URL"
-msgstr ""
+msgstr "URL no válido"
 
 #: ripper/ripcddialog.cpp:418
 msgid "Invalid format"
@@ -2997,7 +3061,7 @@ msgstr "Últimas reproducidas"
 #: playlist/playlist.cpp:1415 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "Última reproducción"
 
 #: ../bin/src/ui_lastfmsettingspage.h:128
 msgid "Last.fm"
@@ -3005,7 +3069,7 @@ msgstr "Last.fm"
 
 #: internet/lastfm/lastfmservice.cpp:141
 msgid "Last.fm Authentication"
-msgstr ""
+msgstr "Autenticación con Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:78
 msgid "Last.fm play counts"
@@ -3056,6 +3120,10 @@ msgstr ""
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Limits"
 msgstr "Límites"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr ""
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3126,7 +3194,7 @@ msgstr "Cargando información de pistas"
 msgid "Loading..."
 msgstr "Cargando…"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carga archivos/URL, reemplazando la lista de reproducción actual"
 
@@ -3143,7 +3211,7 @@ msgstr "Acceder"
 
 #: internet/podcasts/podcastsettingspage.cpp:132
 msgid "Login failed"
-msgstr ""
+msgstr "Falló el acceso"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Logs"
@@ -3306,9 +3374,9 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:121
 msgid "Missing plugins"
-msgstr ""
+msgstr "Complementos faltantes"
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "Faltan las predefiniciones de projectM"
 
@@ -3326,7 +3394,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:412
 msgid "Mono playback"
-msgstr ""
+msgstr "Reproducción monoaural"
 
 #: smartplaylists/searchterm.cpp:435
 msgid "Months"
@@ -3334,16 +3402,16 @@ msgstr "Meses"
 
 #: playlist/playlist.cpp:1443
 msgid "Mood"
-msgstr ""
+msgstr "Ánimo"
 
 #: moodbar/moodbarproxystyle.cpp:363
 #: ../bin/src/ui_appearancesettingspage.h:349
 msgid "Moodbar style"
-msgstr ""
+msgstr "Estilo de barra de ánimo"
 
 #: ../bin/src/ui_appearancesettingspage.h:347
 msgid "Moodbars"
-msgstr ""
+msgstr "Barras de ánimo"
 
 #: library/library.cpp:88
 msgid "Most played"
@@ -3373,13 +3441,13 @@ msgstr "Subir"
 
 #: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2153
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: ../bin/src/ui_librarysettingspage.h:194
 msgid "Music Library"
 msgstr "Fonoteca"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3396,7 +3464,7 @@ msgstr "Nombre"
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 msgctxt "Category label"
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../bin/src/ui_filenameformatwidget.h:115
 msgid "Naming options"
@@ -3410,7 +3478,7 @@ msgstr "Banda estrecha (NB)"
 msgid "Network Proxy"
 msgstr "«Proxy» de la red"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr ""
 
@@ -3431,7 +3499,7 @@ msgstr "Nunca comenzar la reproducción"
 #: playlist/playlistlistcontainer.cpp:263
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
-msgstr ""
+msgstr "Carpeta nueva"
 
 #: ui/mainwindow.cpp:1969 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
@@ -3451,7 +3519,7 @@ msgstr "Las pistas nuevas se añadirán automáticamente."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest Albums"
-msgstr ""
+msgstr "Álbumes más recientes"
 
 #: library/library.cpp:96
 msgid "Newest tracks"
@@ -3463,7 +3531,7 @@ msgstr "Siguiente"
 
 #: core/globalshortcuts.cpp:61 ../bin/src/ui_mainwindow.h:784
 msgid "Next album"
-msgstr ""
+msgstr "Álbum siguiente"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:726
@@ -3472,6 +3540,10 @@ msgstr "Pista siguiente"
 
 #: core/utilities.cpp:167
 msgid "Next week"
+msgstr "Próxima semana"
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:83
@@ -3521,7 +3593,7 @@ msgstr "Ninguna de las canciones seleccionadas fue apta para copiarse en un disp
 
 #: moodbar/moodbarrenderer.cpp:170
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:143
 msgid "Normal block type"
@@ -3604,9 +3676,9 @@ msgstr ""
 
 #: ../bin/src/ui_skydrivesettingspage.h:96
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3614,7 +3686,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3624,7 +3696,7 @@ msgstr "Solo mostrar el primero"
 
 #: ../bin/src/ui_appearancesettingspage.h:345
 msgid "Opacity"
-msgstr ""
+msgstr "Opacidad"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:300
@@ -3659,7 +3731,7 @@ msgstr "Abrir dispositivo"
 
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Open file..."
-msgstr ""
+msgstr "Abrir archivo…"
 
 #: internet/googledrive/googledriveservice.cpp:430
 msgid "Open in Google Drive"
@@ -3694,14 +3766,14 @@ msgid "Optimize for quality"
 msgstr "Optimizar para calidad"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opciones…"
 
 #: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
-msgstr ""
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:179
 msgid "Organise Files"
@@ -3723,7 +3795,7 @@ msgstr "Etiquetas originales"
 #: ../bin/src/ui_groupbydialog.h:177 ../bin/src/ui_groupbydialog.h:194
 #: ../bin/src/ui_groupbydialog.h:211
 msgid "Original year"
-msgstr ""
+msgstr "Año original"
 
 #: library/savedgroupingmanager.cpp:99 ../bin/src/ui_groupbydialog.h:179
 #: ../bin/src/ui_groupbydialog.h:196 ../bin/src/ui_groupbydialog.h:213
@@ -3738,13 +3810,13 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Otras opciones"
 
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
-msgstr ""
+msgstr "Salida"
 
 #: ../bin/src/ui_playbacksettingspage.h:393
 msgid "Output device"
@@ -3756,7 +3828,7 @@ msgstr "Opciones de salida"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Overwrite all"
-msgstr ""
+msgstr "Sobrescribir todo"
 
 #: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Overwrite existing files"
@@ -3768,7 +3840,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:191
 msgid "Owner"
-msgstr ""
+msgstr "Propietario"
 
 #: internet/jamendo/jamendoservice.cpp:225
 msgid "Parsing Jamendo catalogue"
@@ -3776,7 +3848,7 @@ msgstr "Analizando el catálogo de Jamendo"
 
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
-msgstr ""
+msgstr "Etiqueta de partición"
 
 #: ui/equalizer.cpp:140
 msgid "Party"
@@ -3795,7 +3867,7 @@ msgstr "Contraseña"
 msgid "Pause"
 msgstr "Pausar"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Pausar la reproducción"
 
@@ -3808,19 +3880,19 @@ msgstr "En pausa"
 #: ../bin/src/ui_groupbydialog.h:199 ../bin/src/ui_groupbydialog.h:216
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
-msgstr ""
+msgstr "Intérprete"
 
 #: ../bin/src/ui_gstenginedebug.h:64
 msgid "Pipeline"
-msgstr ""
+msgstr "Canalización"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Pipelines"
-msgstr ""
+msgstr "Canalizaciones"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Pixel"
-msgstr ""
+msgstr "Píxel"
 
 #: widgets/fancytabwidget.cpp:435
 msgid "Plain sidebar"
@@ -3837,11 +3909,11 @@ msgstr "Reproducir"
 msgid "Play count"
 msgstr "N.º de reproducciones"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
 
@@ -3852,13 +3924,13 @@ msgstr "Reproducir si no hay nada en reproducción"
 
 #: library/libraryview.cpp:395 ui/mainwindow.cpp:1876
 msgid "Play next"
-msgstr ""
+msgstr "Reproducir siguiente"
 
 #: ui/mainwindow.cpp:1874
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproducir la <n>.ª pista de la lista de reproducción"
 
@@ -3870,7 +3942,7 @@ msgstr "Reproducir/pausar"
 msgid "Playback"
 msgstr "Reproducción"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Opciones del reproductor"
 
@@ -3878,13 +3950,13 @@ msgstr "Opciones del reproductor"
 #: playlist/playlistmanager.cpp:90 playlist/playlistmanager.cpp:159
 #: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
-msgstr ""
+msgstr "Lista de reproducción"
 
 #: widgets/osd.cpp:182
 msgid "Playlist finished"
 msgstr "Lista de reproducción finalizada"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opciones de la lista de reproducción"
@@ -3895,7 +3967,7 @@ msgstr "Tipo de lista de reproducción"
 
 #: ui/mainwindow.cpp:275
 msgid "Playlists"
-msgstr ""
+msgstr "Listas de reproducción"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -3906,20 +3978,34 @@ msgstr ""
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
+msgstr ""
+
 #: ../bin/src/ui_podcastinfodialog.h:91
 msgid "Podcast Information"
-msgstr ""
+msgstr "Información del pódcast"
 
 #: internet/podcasts/podcastservice.cpp:451
 #: internet/podcasts/podcastservice.cpp:548
 #: internet/podcasts/podcastservice.cpp:552
 msgid "Podcast information"
-msgstr ""
+msgstr "Información del pódcast"
 
 #: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Podcasts"
-msgstr ""
+msgstr "Pódcast"
 
 #: ui/equalizer.cpp:142
 msgid "Pop"
@@ -3930,7 +4016,7 @@ msgid "Popup duration"
 msgstr "Duración de la notificación"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Puerto"
 
@@ -3940,7 +4026,7 @@ msgstr "Preamp."
 
 #: ../bin/src/ui_seafilesettingspage.h:173
 msgid "Preference"
-msgstr ""
+msgstr "Preferencia"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 #: ../bin/src/ui_magnatunesettingspage.h:168
@@ -4008,7 +4094,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Mostrar información de versión"
 
@@ -4023,11 +4109,11 @@ msgstr "Progreso"
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "Progreso"
 
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psicodélico"
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4043,6 +4129,12 @@ msgstr "Poner canciones en un orden aleatorio"
 
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
+msgstr "Qt"
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
@@ -4051,12 +4143,12 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:198
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Calidad"
 
 #: visualisations/visualisationcontainer.cpp:121
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Calidad"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
@@ -4094,17 +4186,17 @@ msgstr "Lluvia"
 #: ../bin/src/ui_mainwindow.h:746
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Lluvia"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
-msgstr ""
+msgstr "Álbumes aleatorios"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
-msgstr ""
+msgstr "Canciones aleatorias"
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Visualización al azar"
 
@@ -4151,7 +4243,7 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Actualizar el catálogo"
 
@@ -4227,7 +4319,7 @@ msgstr "Eliminar lista de reproducción"
 
 #: playlist/playlistlistcontainer.cpp:430
 msgid "Remove playlists"
-msgstr ""
+msgstr "Quitar listas de reproducción"
 
 #: ../bin/src/ui_mainwindow.h:778
 msgid "Remove unavailable tracks from playlist"
@@ -4287,7 +4379,7 @@ msgstr "Modo de regulación de volumen"
 msgid "Repopulate"
 msgstr "Rellenar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr ""
 
@@ -4303,7 +4395,7 @@ msgstr "Reiniciar contador de reproducciones"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4344,7 +4436,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4411,12 +4503,12 @@ msgstr "Guardar imagen"
 #: playlist/playlistlistcontainer.cpp:161
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Guardar lista de reproducción"
 
 #: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "Guardar lista de reproducción"
 
 #: playlist/playlisttabbar.cpp:60 ../bin/src/ui_mainwindow.h:759
 msgid "Save playlist..."
@@ -4460,7 +4552,7 @@ msgstr "Perfil de tasa de muestreo escalable (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Scale size"
-msgstr ""
+msgstr "Tamaño de escala"
 
 #: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
@@ -4476,7 +4568,7 @@ msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:161
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:167 ui/albumcoversearcher.cpp:184
 #: ../bin/src/ui_gpoddersearchpage.h:71 ../bin/src/ui_itunessearchpage.h:71
@@ -4487,7 +4579,7 @@ msgstr "Buscar"
 #: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
@@ -4501,13 +4593,17 @@ msgstr "Buscar en Jamendo"
 msgid "Search Magnatune"
 msgstr "Buscar en Magnatune"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Buscar en Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:81
 msgid "Search automatically"
-msgstr ""
+msgstr "Buscar automáticamente"
 
 #: ui/mainwindow.cpp:716
 msgid "Search for album"
@@ -4532,11 +4628,11 @@ msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Buscar en gpodder.net"
 
 #: ../bin/src/ui_itunessearchpage.h:69
 msgid "Search iTunes"
-msgstr ""
+msgstr "Buscar en iTunes"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
@@ -4553,7 +4649,7 @@ msgstr "Términos de búsqueda"
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Second Level"
-msgstr ""
+msgstr "Segundo nivel"
 
 #: ../bin/src/ui_groupbydialog.h:185
 msgid "Second level"
@@ -4567,11 +4663,11 @@ msgstr "Retroceder"
 msgid "Seek forward"
 msgstr "Avanzar"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Moverse en la pista actual hacia una posición relativa"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Moverse en la pista actual hacia una posición absoluta"
 
@@ -4611,7 +4707,7 @@ msgstr "Seleccionar la mejor coincidencia posible"
 msgid "Select foreground color:"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Elegir visualizaciones"
 
@@ -4621,25 +4717,26 @@ msgstr "Elegir visualizaciones…"
 
 #: ../bin/src/ui_transcodedialog.h:238 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
-msgstr ""
+msgstr "Seleccionar…"
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
 msgstr "N.º de serie"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
-msgstr ""
+msgstr "Servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 #: ../bin/src/ui_radiobrowsersettingspage.h:79
 msgid "Server URL"
-msgstr ""
+msgstr "URL de servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_radiobrowsersettingspage.h:78
 msgid "Server details"
-msgstr ""
+msgstr "Detalles del servidor"
 
 #: ui/mainwindow.cpp:1914
 #, qt-format
@@ -4651,7 +4748,7 @@ msgstr "Establecer %1 a «%2»…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Establecer el volumen en <valor> por ciento"
 
@@ -4659,7 +4756,7 @@ msgstr "Establecer el volumen en <valor> por ciento"
 msgid "Set value for all selected tracks..."
 msgstr "Establecer valor para todas las pistas seleccionadas…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr "Configuración"
 
@@ -4761,7 +4858,7 @@ msgstr "Mostrar en Varios artistas"
 
 #: moodbar/moodbarproxystyle.cpp:358
 msgid "Show moodbar"
-msgstr ""
+msgstr "Mostrar barra de ánimo"
 
 #: ui/mainwindow.cpp:665
 msgid "Show only duplicates"
@@ -4781,7 +4878,7 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:780
 msgid "Show sidebar"
-msgstr ""
+msgstr "Mostrar barra lateral"
 
 #: ../bin/src/ui_lastfmsettingspage.h:133
 msgid "Show the \"love\" button"
@@ -4809,22 +4906,27 @@ msgstr "Aleatorio"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:117
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Aleatorizar álbumes"
 
 #: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:116
 msgid "Shuffle all"
-msgstr "Mezclar todo"
+msgstr "Aleatorizar todo"
 
 #: ../bin/src/ui_mainwindow.h:740
 msgid "Shuffle playlist"
-msgstr "Mezclar lista de reproducción"
+msgstr "Aleatorizar lista de reproducción"
 
 #: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "Aleatorizar pistas en este álbum"
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
+msgstr "Acceder"
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:166
@@ -4837,17 +4939,17 @@ msgstr "Iniciando sesión…"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 #: ui/equalizer.cpp:153
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Saltar hacia atrás en la lista de reproducción"
 
@@ -4859,7 +4961,7 @@ msgstr "N.º de omisiones"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Saltar hacia adelante en la lista de reproducción"
 
@@ -4873,7 +4975,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:1883
 msgid "Skip track"
-msgstr ""
+msgstr "Omitir pista"
 
 #: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
@@ -4905,7 +5007,7 @@ msgstr "Información de la canción"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:88
 msgid "Song Metadata"
-msgstr ""
+msgstr "Metadatos de canción"
 
 #: ui/mainwindow.cpp:286
 msgid "Song info"
@@ -4941,12 +5043,12 @@ msgstr "Ordenación"
 
 #: playlist/playlist.cpp:1441
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:140
 #: ../bin/src/ui_internetshowsettingspage.h:82
 msgid "Sources"
-msgstr ""
+msgstr "Fuentes"
 
 #: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
@@ -4964,7 +5066,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Iniciar la lista de reproducción actualmente en reproducción"
 
@@ -5002,11 +5104,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Detener reproducción al finalizar la pista"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Detener reproducción"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5047,12 +5149,12 @@ msgstr "Membresía para transmisión"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Subscribers"
-msgstr ""
+msgstr "Suscriptores"
 
 #: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:127
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
@@ -5148,6 +5250,10 @@ msgstr ""
 msgid "The second value must be greater than the first one!"
 msgstr "El segundo valor debe ser mayor al primero."
 
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr ""
+
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
 msgstr "El sitio que indicó no existe."
@@ -5170,7 +5276,7 @@ msgstr "La versión de Clementine a la que se acaba de actualizar necesita volve
 
 #: ../bin/src/ui_appearancesettingspage.h:323
 msgid "Theme:"
-msgstr ""
+msgstr "Tema:"
 
 #: library/libraryview.cpp:585
 msgid "There are other songs in this album"
@@ -5314,13 +5420,13 @@ msgstr "Cambiar estado de la cola"
 msgid "Toggle scrobbling"
 msgstr "Activar o desactivar scrobbling"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Cambiar visibilidad del OSD estético"
 
 #: core/utilities.cpp:165
 msgid "Tomorrow"
-msgstr ""
+msgstr "Mañana"
 
 #: internet/podcasts/podcasturlloader.cpp:118
 msgid "Too many redirects"
@@ -5407,19 +5513,19 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:132
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:127
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "URL"
 
 #: devices/udisks2lister.cpp:85
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
 msgid "Ultra wide band (UWB)"
@@ -5473,11 +5579,11 @@ msgstr ""
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Desuscribir"
 
 #: songinfo/songkickconcerts.cpp:195
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Próximos conciertos"
 
 #: internet/podcasts/podcastservice.cpp:436
 msgid "Update all podcasts"
@@ -5497,7 +5603,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Updating"
-msgstr ""
+msgstr "Actualizando"
 
 #: library/librarywatcher.cpp:103
 #, qt-format
@@ -5513,7 +5619,7 @@ msgstr "Actualizando… (%1%)"
 msgid "Updating library"
 msgstr "Actualizando la fonoteca"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Uso"
 
@@ -5535,7 +5641,7 @@ msgstr "Usar metadatos de Replay Gain si están disponibles"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Usar SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use Wii Remote"
@@ -5549,7 +5655,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Usar un mensaje personalizado para las notificaciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5599,7 +5705,7 @@ msgstr "En uso:"
 
 #: ui/settingsdialog.cpp:138
 msgid "User interface"
-msgstr ""
+msgstr "Interfaz de usuario"
 
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_subsonicsettingspage.h:130
@@ -5619,7 +5725,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:448
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Variable bit rate"
@@ -5632,6 +5738,10 @@ msgstr "Varios artistas"
 
 #: ../bin/src/ui_subsonicsettingspage.h:133
 msgid "Verify Server certificate"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
 msgstr ""
 
 #: ui/about.cpp:35
@@ -5647,7 +5757,7 @@ msgstr "Ver"
 msgid "View Stream Details"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Modo de visualización"
 
@@ -5698,11 +5808,11 @@ msgstr "Wav"
 
 #: core/song.cpp:440
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:189
 msgid "Website"
-msgstr ""
+msgstr "Sitio web"
 
 #: smartplaylists/searchterm.cpp:433
 msgid "Weeks"
@@ -5794,7 +5904,7 @@ msgstr "Audio de Windows Media"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Without cover:"
-msgstr ""
+msgstr "Sin portada:"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -5812,7 +5922,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Write metadata"
-msgstr ""
+msgstr "Escribir metadatos"
 
 #: internet/subsonic/subsonicsettingspage.cpp:105
 msgid "Wrong username or password."
@@ -5875,7 +5985,7 @@ msgstr "Ha accedido a su cuenta."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Puede modificar el modo en que se organizan las canciones en la fonoteca."
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5919,13 +6029,20 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitará reiniciar Clementine si cambia el idioma."
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr ""
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Sus credenciales de Magnatune son incorrectas"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr ""
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5991,7 +6108,7 @@ msgstr "más grande primero"
 msgid "bpm"
 msgstr "ppm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6001,7 +6118,7 @@ msgstr ""
 msgid "contains"
 msgstr "contiene"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr ""
 
@@ -6026,7 +6143,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:275
 msgid "empty"
-msgstr ""
+msgstr "vacío"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "ends with"
@@ -6038,11 +6155,11 @@ msgstr "es igual a"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "Directorio de gpodder.net"
 
 #: smartplaylists/searchterm.cpp:267
 msgid "greater than"
@@ -6080,7 +6197,7 @@ msgstr "más nuevo primero"
 
 #: smartplaylists/searchterm.cpp:277
 msgid "not empty"
-msgstr ""
+msgstr "no vacío"
 
 #: smartplaylists/searchterm.cpp:273
 msgid "not equals"
@@ -6102,14 +6219,18 @@ msgstr "más antiguo primero"
 msgid "on"
 msgstr "en"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "opciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
 msgstr ""
 
 #: widgets/didyoumean.cpp:56
@@ -6128,7 +6249,7 @@ msgstr "más corto primero"
 
 #: playlist/playlistundocommands.cpp:111
 msgid "shuffle songs"
-msgstr ""
+msgstr "aleatorizar canciones"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "smallest first"
@@ -6136,7 +6257,7 @@ msgstr "más pequeño primero"
 
 #: playlist/playlistundocommands.cpp:105
 msgid "sort songs"
-msgstr ""
+msgstr "ordenar canciones"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "starts with"

@@ -66,13 +66,18 @@ msgid " s"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
-#: ../bin/src/ui_visualisationselector.h:114
+#: ../bin/src/ui_visualisationselector.h:115
 msgid " seconds"
 msgstr " segundu"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid " songs"
 msgstr " abesti"
+
+#: ui/networkremotesettingspage.cpp:203
+#, qt-format
+msgid "%1 (not currently available)"
+msgstr ""
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -104,6 +109,11 @@ msgstr ""
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 erreprodukzio-zerrenda (%2)"
+
+#: internet/plex/plexsettingspage.cpp:194
+#, qt-format
+msgid "%1 refused the sign-in. Try signing out and in again."
+msgstr ""
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -387,7 +397,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Tokenak %-rekin hasten dira, adibidez: %artista %albuma %titulua</p>\n\n<p>Tokena duten testu zatiak giltzekin inguratzen badituzu, zati hori ezkutaturik egongo da tokena hutsik badago.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:351
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -736,6 +746,10 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
+#: ../bin/src/ui_networkremotesettingspage.h:375
+msgid "All addresses"
+msgstr ""
+
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Album guztiak"
@@ -761,11 +775,11 @@ msgstr "Itzultzaile guztiak"
 msgid "All tracks"
 msgstr "Pista guztiak"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "Allow downloads"
 msgstr ""
 
@@ -817,7 +831,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Itxura"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
@@ -872,7 +886,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:388
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Audio formatua"
@@ -1106,7 +1120,7 @@ msgstr "Aldatu ausazko modua"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Aldatu hizkuntza"
 
@@ -1156,7 +1170,7 @@ msgstr "Hautatu kolorea..."
 msgid "Choose font..."
 msgstr "Hautatu letra-tipoa..."
 
-#: ../bin/src/ui_visualisationselector.h:111
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
 msgstr "Hautatu zerrendatik"
 
@@ -1252,7 +1266,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:137
+#: visualisations/projectmvisualisation.cpp:160
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1268,6 +1282,12 @@ msgstr "Clementine-k ezin izan du fitxategi honetarako emaitzak erakutsi"
 
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Clementine will find music in:"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:141
+msgid ""
+"Clementine will open plex.tv in your browser. Sign in there and allow "
+"Clementine to access your account."
 msgstr ""
 
 #: library/libraryview.cpp:363
@@ -1325,7 +1345,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
@@ -1365,6 +1385,10 @@ msgstr ""
 msgid "Configure Magnatune..."
 msgstr "Konfiguratu Magnatune..."
 
+#: internet/plex/plexservice.cpp:125
+msgid "Configure Plex..."
+msgstr ""
+
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
 msgstr "Konfiguratu laster-teklak"
@@ -1403,6 +1427,16 @@ msgstr "Konektatu Wii urruneko kontrola aktibatu/desaktibatu botoia erabiliz"
 msgid "Connect device"
 msgstr "Konektatu gailua"
 
+#: internet/plex/plexsettingspage.cpp:183
+#, qt-format
+msgid "Connected to %1."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:186
+#, qt-format
+msgid "Connecting to %1..."
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
@@ -1426,6 +1460,10 @@ msgstr ""
 msgid "Constant bitrate"
 msgstr "Bit-tasa konstantea"
 
+#: internet/plex/plexsettingspage.cpp:115
+msgid "Contacting plex.tv..."
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
 msgstr "Musika guztia bihurtu"
@@ -1434,11 +1472,11 @@ msgstr "Musika guztia bihurtu"
 msgid "Convert any music that the device can't play"
 msgstr "Gailuak erreproduzitu ezin dezakeen musika bihurtu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:387
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1499,6 +1537,11 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
+#: internet/plex/plexauthenticator.cpp:163
+#, qt-format
+msgid "Couldn't fetch your Plex servers: %1"
+msgstr ""
+
 #: transcoder/transcoder.cpp:476
 #, qt-format
 msgid ""
@@ -1517,6 +1560,18 @@ msgstr "Ezin izan da %1-(r)entzako kodetzailea aurkitu, begiratu GStreamer plugi
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Ezin izan da %1 irteera-fitxategia ireki"
+
+#: internet/plex/plexsettingspage.cpp:189
+#, qt-format
+msgid ""
+"Couldn't reach %1. Check that the server is running and that this computer "
+"can reach it."
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:89
+#, qt-format
+msgid "Couldn't reach plex.tv: %1"
+msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1553,7 +1608,7 @@ msgstr "%1-(e)tik ezarritako azalak"
 msgid "Covers from %1"
 msgstr "%1-(e)ko azalak"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1636,11 +1691,11 @@ msgstr "Egun"
 msgid "De&fault"
 msgstr "&Lehenetsia"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1661,7 +1716,7 @@ msgstr ""
 msgid "Defaults"
 msgstr "Lehenetsiak"
 
-#: ../bin/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
 msgstr "Bistaratzeen arteko atzerapena"
 
@@ -1700,7 +1755,7 @@ msgstr "Ezabatu aurre-ezarpena"
 msgid "Delete smart playlist"
 msgstr "Ezabatu erreprodukzio-zerrenda adimenduna"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1821,7 +1876,7 @@ msgstr "Transmisio ez-jarraitua"
 msgid "Display options"
 msgstr "Erakutsi aukerak"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Erakutsi pantailako bistaratzailea"
 
@@ -1920,15 +1975,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2098,6 +2153,11 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Sartu izen berria erreprodukzio-zerrenda honentzat"
 
+#: ../bin/src/ui_networkremotesettingspage.h:372
+#: ../bin/src/ui_networkremotesettingspage.h:377
+msgid "Enter one of these addresses in the app to connect to Clementine."
+msgstr ""
+
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
@@ -2124,10 +2184,6 @@ msgstr "Sartu interneteko irratiko jarioaren URLa:"
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
-msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
-
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
 msgstr "Bilduma osoa"
@@ -2140,11 +2196,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Ekualizadorea"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1-en baliokidea"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
@@ -2372,6 +2428,10 @@ msgstr "Automatikoki eskuratu"
 msgid "Fetch completed"
 msgstr "Eskuraketa eginda"
 
+#: internet/plex/plexservice.cpp:417
+msgid "Fetching Plex library"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:293
 msgid "Fetching Subsonic library"
 msgstr ""
@@ -2427,7 +2487,7 @@ msgstr ""
 msgid "Files"
 msgstr "Fitxategiak"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Files root folder"
 msgstr ""
 
@@ -2721,6 +2781,10 @@ msgstr "Hipnoapoa"
 msgid "I don't have a Magnatune account"
 msgstr "Ez daukat Magnatune-ko konturik"
 
+#: ../bin/src/ui_plexsettingspage.h:143
+msgid "I've signed in"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
 msgstr "Ikonoa"
@@ -2809,11 +2873,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3023,6 +3087,10 @@ msgstr ""
 msgid "Limits"
 msgstr "Limiteak"
 
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Listen on"
+msgstr ""
+
 #: ui/equalizer.cpp:138
 msgid "Live"
 msgstr "Zuzenean"
@@ -3092,7 +3160,7 @@ msgstr "Pisten informazioa kargatzen"
 msgid "Loading..."
 msgstr "Kargatzen..."
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
@@ -3274,7 +3342,7 @@ msgstr ""
 msgid "Missing plugins"
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:136
+#: visualisations/projectmvisualisation.cpp:159
 msgid "Missing projectM presets"
 msgstr "projectM-ko aurre-ezarpenak falta dira"
 
@@ -3345,7 +3413,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Musika-bilduma"
 
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3376,7 +3444,7 @@ msgstr "Banda estua (NB)"
 msgid "Network Proxy"
 msgstr "Sareko proxy-a"
 
-#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Network Remote"
 msgstr ""
 
@@ -3438,6 +3506,10 @@ msgstr "Hurrengo pista"
 
 #: core/utilities.cpp:167
 msgid "Next week"
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:162
+msgid "No Plex Media Servers were found on your account."
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:83
@@ -3572,7 +3644,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:344
+#: ../bin/src/ui_networkremotesettingspage.h:360
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3580,7 +3652,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:349
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3660,7 +3732,7 @@ msgid "Optimize for quality"
 msgstr "Kalitaterako optimizatu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:389
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Aukerak..."
@@ -3704,7 +3776,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Bestelako aukerak"
 
@@ -3761,7 +3833,7 @@ msgstr "Pasahitza"
 msgid "Pause"
 msgstr "Pausarazi"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
 msgstr "Erreprodukzioa pausatu"
 
@@ -3803,11 +3875,11 @@ msgstr "Erreproduzitu"
 msgid "Play count"
 msgstr "Erreprodukzio kopurua"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
@@ -3824,7 +3896,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 
@@ -3836,7 +3908,7 @@ msgstr "Erreproduzitu/Pausarazi"
 msgid "Playback"
 msgstr "Erreprodukzioa"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
@@ -3850,7 +3922,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Erreprodukzio-zerrenda amaituta"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Erreprodukzio-zerrendaren aukerak"
@@ -3870,6 +3942,20 @@ msgstr ""
 #: internet/lastfm/lastfmservice.cpp:142
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
+
+#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+msgid "Plex"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:145
+msgid "Plex Media Server"
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:135
+msgid ""
+"Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
+"then try again."
 msgstr ""
 
 #: ../bin/src/ui_podcastinfodialog.h:91
@@ -3896,7 +3982,7 @@ msgid "Popup duration"
 msgstr "Laster-leihoaren iraupena"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:342
+#: ../bin/src/ui_networkremotesettingspage.h:358
 msgid "Port"
 msgstr "Ataka"
 
@@ -3974,7 +4060,7 @@ msgstr "Aurrekoa"
 msgid "Previous track"
 msgstr "Aurreko pista"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Bertsio-informazioa erakutsi"
 
@@ -4009,6 +4095,12 @@ msgstr "Abestiak ausazko ordenan jarri"
 
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
+msgstr ""
+
+#: core/commandlineoptions.cpp:199
+msgid ""
+"Qt's logging rules can turn debug messages off; "
+"QT_LOGGING_RULES=clementine.debug=true turns them back on"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
@@ -4070,7 +4162,7 @@ msgstr ""
 msgid "Random Songs"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:110
+#: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Ausazko bistaratzea"
 
@@ -4117,7 +4209,7 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
-#: internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Katalogoa freskatu"
 
@@ -4253,7 +4345,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "Birpopulatu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:353
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Require authentication code"
 msgstr ""
 
@@ -4269,7 +4361,7 @@ msgstr "Berrezarri erreprodukzio kopurua"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4310,7 +4402,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4467,6 +4559,10 @@ msgstr "Bilatu Jamendo-n"
 msgid "Search Magnatune"
 msgstr "Bilatu Magnatune-n"
 
+#: internet/plex/plexservice.cpp:110
+msgid "Search Plex"
+msgstr ""
+
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
 msgstr ""
@@ -4533,11 +4629,11 @@ msgstr "Atzera egin"
 msgid "Seek forward"
 msgstr "Aurrera egin"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
@@ -4577,7 +4673,7 @@ msgstr "Hautatu bat-etortze posiblerik onena"
 msgid "Select foreground color:"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
 msgstr "Hautatu bistaratzeak"
 
@@ -4593,6 +4689,7 @@ msgstr ""
 msgid "Serial number"
 msgstr "Serie-zenbakia"
 
+#: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
 msgstr ""
@@ -4617,7 +4714,7 @@ msgstr "Ezarri %1 \"%2\"-(e)ra..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Ezarri bolumena ehuneko <value>-ra"
 
@@ -4625,7 +4722,7 @@ msgstr "Ezarri bolumena ehuneko <value>-ra"
 msgid "Set value for all selected tracks..."
 msgstr "Ezarri balioa aukeratutako pista guztiei..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:341
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Settings"
 msgstr ""
 
@@ -4789,8 +4886,13 @@ msgstr "Erreprodukzio-zerrenda nahastu"
 msgid "Shuffle tracks in this album"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
+msgstr ""
+
+#: ../bin/src/ui_plexsettingspage.h:142
+msgid "Sign in with Plex"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:166
@@ -4813,7 +4915,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
 msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
@@ -4825,7 +4927,7 @@ msgstr "Saltatu kontagailua"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
@@ -4930,7 +5032,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
@@ -4968,11 +5070,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Gelditu erreprodukzioa"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5113,6 +5215,10 @@ msgstr ""
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
 msgstr "Bigarren balioak lehenak baino handiagoa izan behar du!"
+
+#: internet/plex/plexauthenticator.cpp:126
+msgid "The sign-in request expired. Please try again."
+msgstr ""
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5280,7 +5386,7 @@ msgstr "Txandakatu ilara-egoera"
 msgid "Toggle scrobbling"
 msgstr "Txandakatu partekatzea"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
 
@@ -5379,7 +5485,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
 msgstr "URLa(k)"
 
@@ -5479,7 +5585,7 @@ msgstr "%1 eguneratzen..."
 msgid "Updating library"
 msgstr "Bilduma eguneratzen"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
 msgstr "Erabilera"
 
@@ -5515,7 +5621,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Erabili mezu pertsonalizatua jakinarazpenetan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:340
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5600,6 +5706,10 @@ msgstr "Hainbat artista"
 msgid "Verify Server certificate"
 msgstr ""
 
+#: ../bin/src/ui_plexsettingspage.h:146
+msgid "Verify server certificate"
+msgstr ""
+
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
@@ -5613,7 +5723,7 @@ msgstr "Ikusi"
 msgid "View Stream Details"
 msgstr ""
 
-#: ../bin/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
 msgstr "Bistaratze-modua"
 
@@ -5841,7 +5951,7 @@ msgstr "Saioa hasi duzu."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Bildumako abestiak antolaturik dauden era alda dezakezu."
 
-#: ui/networkremotesettingspage.cpp:172
+#: ui/networkremotesettingspage.cpp:165
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -5885,13 +5995,20 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 
-#: ../bin/src/ui_networkremotesettingspage.h:358
-msgid "Your IP address:"
-msgstr ""
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatuneko egiaztagiriak ez ziren egokiak"
+
+#: internet/plex/plexauthenticator.cpp:162
+msgid "Your Plex sign-in has expired. Please sign in again."
+msgstr ""
+
+#: internet/plex/plexsettingspage.cpp:131
+#, qt-format
+msgid ""
+"Your browser should now show plex.tv. If it asks for a code, enter "
+"<b>%1</b>."
+msgstr ""
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -5957,7 +6074,7 @@ msgstr "handienak aurretik"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -5967,7 +6084,7 @@ msgstr ""
 msgid "contains"
 msgstr "honakoa du"
 
-#: ../bin/src/ui_networkremotesettingspage.h:379
+#: ../bin/src/ui_networkremotesettingspage.h:399
 msgid "desktop_remote"
 msgstr ""
 
@@ -6068,14 +6185,18 @@ msgstr "zaharrenak arinago"
 msgid "on"
 msgstr "honen barruan"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "aukerak"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
-#: ../bin/src/ui_networkremotesettingspage.h:381
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "or scan the QR code: "
+msgstr ""
+
+#: internet/plex/plexauthenticator.cpp:97
+msgid "plex.tv sent an unexpected response"
 msgstr ""
 
 #: widgets/didyoumean.cpp:56
