@@ -149,8 +149,9 @@ class InternetBrowser : public QObject {
 
   int update_delay_msec_;
   int loading_timeout_msec_;
-  QTimer update_timer_;
-  QTimer loading_timer_;
+  // Children, so they move to the main thread with the browser.
+  QTimer* update_timer_;
+  QTimer* loading_timer_;
 };
 
 #endif  // NETWORKREMOTE_INTERNETBROWSER_H_

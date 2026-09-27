@@ -114,11 +114,13 @@ InternetBrowser::InternetBrowser(QObject* parent)
       model_(nullptr),
       hooks_(DefaultHooks()),
       update_delay_msec_(kUpdateDelayMsec),
-      loading_timeout_msec_(kLoadingTimeoutMsec) {
-  update_timer_.setSingleShot(true);
-  loading_timer_.setSingleShot(true);
-  connect(&update_timer_, SIGNAL(timeout()), SLOT(SendUpdates()));
-  connect(&loading_timer_, SIGNAL(timeout()), SLOT(SendUpdates()));
+      loading_timeout_msec_(kLoadingTimeoutMsec),
+      update_timer_(new QTimer(this)),
+      loading_timer_(new QTimer(this)) {
+  update_timer_->setSingleShot(true);
+  loading_timer_->setSingleShot(true);
+  connect(update_timer_, SIGNAL(timeout()), SLOT(SendUpdates()));
+  connect(loading_timer_, SIGNAL(timeout()), SLOT(SendUpdates()));
 }
 
 InternetBrowser::~InternetBrowser() {}
@@ -245,9 +247,9 @@ QByteArray InternetBrowser::Describe(Client* client) {
     // leave the client loading for ever.
     const int remaining =
         loading_timeout_msec_ - int(client->loading_since.elapsed());
-    if (!loading_timer_.isActive() ||
-        loading_timer_.remainingTime() > remaining) {
-      loading_timer_.start(qMax(0, remaining) + 1);
+    if (!loading_timer_->isActive() ||
+        loading_timer_->remainingTime() > remaining) {
+      loading_timer_->start(qMax(0, remaining) + 1);
     }
   } else {
     response->set_state(cpb::remote::BROWSE_STATE_READY);
@@ -450,7 +452,7 @@ void InternetBrowser::Add(int client_id, Client* client,
 }
 
 void InternetBrowser::ModelChanged() {
-  if (!update_timer_.isActive()) update_timer_.start(update_delay_msec_);
+  if (!update_timer_->isActive()) update_timer_->start(update_delay_msec_);
 }
 
 void InternetBrowser::SendUpdates() {
