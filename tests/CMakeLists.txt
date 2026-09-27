@@ -137,6 +137,13 @@ add_test_file(asxiniparser_test.cpp false)
 #add_test_file(database_test.cpp false)
 #add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
+add_test_file(librarytagprefetcher_test.cpp false)
+add_test_file(librarywatcher_test.cpp false)
+# Scans with real tag reader workers, found on $PATH.
+add_dependencies(librarywatcher_test clementine-tagreader)
+target_compile_definitions(librarywatcher_test PRIVATE
+  TAGREADER_DIR="$<TARGET_FILE_DIR:clementine-tagreader>"
+  TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 if(HAVE_GOOGLE_DRIVE)
   add_test_file(googledriveclient_test.cpp false)
 endif(HAVE_GOOGLE_DRIVE)

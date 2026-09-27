@@ -36,6 +36,7 @@
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "library/librarytagprefetcher.h"
 #include "librarybackend.h"
 #include "playlistparsers/cueparser.h"
 
@@ -48,79 +49,6 @@ namespace {
 static const char* kNoMediaFile = ".nomedia";
 static const char* kNoMusicFile = ".nomusic";
 }  // namespace
-
-// Asks the tag reader for a directory's files ahead of the loop that compares
-// them with the library, keeping a window of requests in flight so the tag
-// reader's workers read several files at once. The loop still reads files in
-// order and one at a time; it just rarely has to wait.
-class LibraryTagPrefetcher {
- public:
-  // Requests beyond this wait until earlier ones are used, so a directory of
-  // thousands of files doesn't queue thousands of requests.
-  static const int kMaxInFlight = 32;
-
-  // |files| are those the loop is expected to read, in the order it will.
-  explicit LibraryTagPrefetcher(const QStringList& files)
-      : files_(files), next_(0) {
-    for (int i = 0; i < files_.size(); ++i) index_[files_[i]] = i;
-    TopUp();
-  }
-
-  ~LibraryTagPrefetcher() {
-    // Files the loop decided not to read after all.
-    for (const InFlight& request : in_flight_) request.reply->deleteLater();
-  }
-
-  void Read(const QString& file, Song* song) {
-    TagReaderClient* client = TagReaderClient::Instance();
-    const int index = index_.value(file, -1);
-
-    // Requests for files the loop has passed without reading will never be
-    // used, and would hold the window up.
-    for (auto it = in_flight_.begin(); it != in_flight_.end();) {
-      if (index != -1 && it->index < index) {
-        it->reply->deleteLater();
-        it = in_flight_.erase(it);
-      } else {
-        ++it;
-      }
-    }
-
-    auto it = in_flight_.find(file);
-    if (it == in_flight_.end()) {
-      // Not prefetched: read it now, and prefetch from here on.
-      if (index >= next_) next_ = index + 1;
-      TopUp();
-      client->ReadFileBlocking(file, song);
-      return;
-    }
-
-    TagReaderClient::ReplyType* reply = it->reply;
-    in_flight_.erase(it);
-    TopUp();
-    client->ReadFileFinish(reply, file, song);
-  }
-
- private:
-  struct InFlight {
-    int index;
-    TagReaderClient::ReplyType* reply;
-  };
-
-  void TopUp() {
-    while (next_ < files_.size() && in_flight_.size() < kMaxInFlight) {
-      const QString& file = files_[next_];
-      in_flight_[file] =
-          InFlight{next_, TagReaderClient::Instance()->ReadFile(file)};
-      ++next_;
-    }
-  }
-
-  QStringList files_;
-  QHash<QString, int> index_;
-  int next_;
-  QHash<QString, InFlight> in_flight_;
-};
 
 static const int kUnfilteredImageLimit = 10;
 
@@ -139,6 +67,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       rescan_paused_(false),
       total_watches_(0),
       cue_parser_(new CueParser(backend_, this)),
+      prefetch_reader_(new TagReaderClientPrefetchReader),
       prefetcher_(nullptr) {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
@@ -155,6 +84,8 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
 
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
+
+LibraryWatcher::~LibraryWatcher() {}
 
 // Holding a reference to a directory is safe because a ScanTransaction object
 // is only created on a stack and the removal of a directory from the watch
@@ -437,7 +368,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     files_to_read << file;
   }
   std::unique_ptr<LibraryTagPrefetcher> prefetcher(
-      new LibraryTagPrefetcher(files_to_read));
+      new LibraryTagPrefetcher(prefetch_reader_.get(), files_to_read));
   prefetcher_ = prefetcher.get();
   // Cleared on every way out of this function, before |prefetcher| goes.
   struct ClearPrefetcher {
