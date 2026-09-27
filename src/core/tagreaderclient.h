@@ -66,6 +66,9 @@ class TagReaderClient : public QObject {
   // response.  These block the calling thread with a semaphore, and must NOT
   // be called from the TagReaderClient's thread.
   void ReadFileBlocking(const QString& filename, Song* song);
+  // Waits for |reply| to ReadFile(|filename|) and fills |song| from it, as
+  // ReadFileBlocking does. Takes ownership of |reply|.
+  void ReadFileFinish(ReplyType* reply, const QString& filename, Song* song);
   bool SaveFileBlocking(const QString& filename, const Song& metadata);
   bool UpdateSongStatisticsBlocking(const Song& metadata);
   bool UpdateSongRatingBlocking(const Song& metadata);

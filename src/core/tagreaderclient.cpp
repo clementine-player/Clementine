@@ -168,9 +168,13 @@ TagReaderReply* TagReaderClient::ReadCloudFile(
 }
 
 void TagReaderClient::ReadFileBlocking(const QString& filename, Song* song) {
+  ReadFileFinish(ReadFile(filename), filename, song);
+}
+
+void TagReaderClient::ReadFileFinish(ReplyType* reply, const QString& filename,
+                                     Song* song) {
   Q_ASSERT(QThread::currentThread() != thread());
 
-  TagReaderReply* reply = ReadFile(filename);
   if (reply->WaitForFinished()) {
     song->InitFromProtobuf(reply->message().read_file_response().metadata());
     path_parser_->GuessMissingFields(song, filename);
