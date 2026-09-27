@@ -37,6 +37,26 @@ FILES
  * testmdnsd.c - an example that creates an instance until terminated
 
 
+CLEMENTINE MODIFICATIONS
+-------------------------
+This is a copy of tinysvcmdns imported in January 2013 and patched in place
+since. It isn't synced from upstream, so anyone re-importing it has to carry
+these changes over (see `git log -- 3rdparty/tinysvcmdns` for the details):
+
+* Windows support: winsock headers and `closesocket`, a loopback TCP socket
+  pair in place of `pipe()` for the notification pipe, and linking against
+  ws2_32 in `CMakeLists.txt`.
+* `mdnsd_start_bind()`, which starts a responder for a single interface, so
+  Clementine can run one per interface with that interface's address.
+* The receive socket binds to `INADDR_ANY`, joins the multicast group and
+  sends on the responder's own interface. On Windows a socket bound to a
+  unicast address never receives multicast.
+* Questions asking for a unicast response ("QU") are answered by multicast
+  instead of being ignored, despite what the description above says.
+
+On Windows 10 1809 and later Clementine advertises through the system's own
+mDNS responder instead, and only falls back to this one if that fails.
+
 LICENSE
 --------
 tinysvcmdns is licensed under the 3-clause ("modified") BSD License.
