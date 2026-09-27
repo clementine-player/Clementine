@@ -168,9 +168,10 @@ void SubsonicService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
       library_model_->Init();
-      if (ConfigRequired()) {
-        ShowConfig();
-      } else if (total_song_count_ == 0 && !load_database_task_id_) {
+      // Not ShowConfig() when ConfigRequired(): a remote may be browsing.
+      // Expanding the service in the sidebar opens it instead.
+      if (!ConfigRequired() && total_song_count_ == 0 &&
+          !load_database_task_id_) {
         ReloadDatabase();
       }
       model()->merged_model()->AddSubModel(item->index(), library_sort_model_);

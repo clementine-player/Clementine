@@ -89,6 +89,10 @@ class InternetService : public QObject {
   virtual QString Icon() { return QString(); }
 
   virtual bool ConfigRequired() { return false; }
+  // Whether the service can't show anything until it's set up in the
+  // settings. Expanding it in the sidebar then opens its settings, and a
+  // remote browsing it is told to set it up on the computer.
+  virtual bool NeedsSetup() { return ConfigRequired(); }
 
  signals:
   void StreamError(const QString& message);

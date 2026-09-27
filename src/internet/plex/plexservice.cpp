@@ -171,10 +171,9 @@ QStandardItem* PlexService::CreateRootItem() {
 void PlexService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
+      // Not ShowConfig() when NeedsSetup(): a remote may be browsing.
+      // Expanding the service in the sidebar opens it instead.
       library_model_->Init();
-      if (login_state_ == LoginState_NotConfigured) {
-        ShowConfig();
-      }
       model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
 

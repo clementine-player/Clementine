@@ -73,6 +73,10 @@ class PlexService : public InternetService {
   void ReloadSettings() override;
 
   bool ConfigRequired() override { return login_state_ != LoginState_LoggedIn; }
+  // Only without a server; while logging in there's nothing to set up.
+  bool NeedsSetup() override {
+    return login_state_ == LoginState_NotConfigured;
+  }
 
   LoginState login_state() const { return login_state_; }
   QString server_name() const { return server_.name; }
