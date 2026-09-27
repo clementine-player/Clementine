@@ -35,6 +35,14 @@
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;
 
+// One per core, up to 8. Reading tags is mostly waiting for the disk or the
+// network rather than using a core: scanning a library over Samba with the
+// parallel scan got faster up to 8 workers and no faster beyond, and each idle
+// worker is still a few MB.
+int TagReaderClient::DefaultWorkerCount() {
+  return qBound(1, QThread::idealThreadCount(), 8);
+}
+
 TagReaderClient::TagReaderClient(QObject* parent)
     : QObject(parent),
       worker_pool_(new WorkerPool<HandlerType>(this)),
@@ -45,8 +53,8 @@ TagReaderClient::TagReaderClient(QObject* parent)
   QSettings s;
   s.beginGroup(Player::kSettingsGroup);
 
-  int max_workers = QThread::idealThreadCount();
-  int num_workers = s.value("max_numprocs_tagclients", max_workers).toInt();
+  int num_workers =
+      s.value("max_numprocs_tagclients", DefaultWorkerCount()).toInt();
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
   worker_pool_->SetWorkerCount(num_workers);
