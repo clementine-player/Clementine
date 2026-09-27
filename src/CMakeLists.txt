@@ -237,6 +237,7 @@ set(SOURCES
   library/librarysettingspage.cpp
   library/libraryview.cpp
   library/libraryviewcontainer.cpp
+  library/librarytagprefetcher.cpp
   library/librarywatcher.cpp
   library/savedgroupingmanager.cpp
   library/sqlrow.cpp

@@ -23,11 +23,13 @@
 #include <QMutex>
 #include <QObject>
 #include <QStringList>
+#include <memory>
 
 #include "core/song.h"
 #include "directory.h"
 
 class LibraryTagPrefetcher;
+class TagReaderClientPrefetchReader;
 class QFileSystemWatcher;
 class QTimer;
 
@@ -41,6 +43,7 @@ class LibraryWatcher : public QObject {
 
  public:
   LibraryWatcher(QObject* parent = nullptr);
+  ~LibraryWatcher();
 
   static const char* kSettingsGroup;
 
@@ -255,6 +258,7 @@ class LibraryWatcher : public QObject {
   int total_watches_;
 
   CueParser* cue_parser_;
+  std::unique_ptr<TagReaderClientPrefetchReader> prefetch_reader_;
   // Set while ScanSubdirectory compares a directory's files.
   LibraryTagPrefetcher* prefetcher_;
 
