@@ -973,6 +973,7 @@ optional_source(WIN32
     core/windowsmediacontrols.cpp
     engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
+    networkremote/windowsdnssd.cpp
     ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   HEADERS

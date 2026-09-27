@@ -122,7 +122,9 @@ static int create_recv_sock(uint32_t bind_ip) {
 	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_port = htons(MDNS_PORT);
-	serveraddr.sin_addr.s_addr = bind_ip;	/* receive multicast */
+	/* Bind to the wildcard address: on Windows a socket bound to a unicast
+	 * address never receives multicast. The interface is chosen below. */
+	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	if ((r = bind(sd, (struct sockaddr *)&serveraddr, sizeof(serveraddr))) < 0) {
 		log_message(LOG_ERR, "recv bind(): %m");
 	}
@@ -130,10 +132,18 @@ static int create_recv_sock(uint32_t bind_ip) {
 	// add membership to receiving socket
 	struct ip_mreq mreq;
 	memset(&mreq, 0, sizeof(struct ip_mreq));
-	mreq.imr_interface.s_addr = htonl(INADDR_ANY);
+	mreq.imr_interface.s_addr = bind_ip;
 	mreq.imr_multiaddr.s_addr = inet_addr(MDNS_ADDR);
 	if ((r = setsockopt(sd, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char *) &mreq, sizeof(mreq))) < 0) {
 		log_message(LOG_ERR, "recv setsockopt(IP_ADD_MEMBERSHIP): %m");
+		return r;
+	}
+
+	// send from the same interface
+	struct in_addr iface;
+	iface.s_addr = bind_ip;
+	if ((r = setsockopt(sd, IPPROTO_IP, IP_MULTICAST_IF, (char *) &iface, sizeof(iface))) < 0) {
+		log_message(LOG_ERR, "recv setsockopt(IP_MULTICAST_IF): %m");
 		return r;
 	}
 
@@ -278,12 +288,8 @@ static int process_mdns_pkt(struct mdnsd *svr, struct mdns_pkt *pkt, struct mdns
 			DEBUG_PRINTF("qn #%d: type %s (%02x) %s - ", i, rr_get_type_name(qn->type), qn->type, namestr);
 			free(namestr);
 
-			// check if it's a unicast query - we ignore those
-			if (qn->unicast_query) {
-				DEBUG_PRINTF("skipping unicast query\n");
-				continue;
-			}
-
+			// A question asking for a unicast response (QU) may also be
+			// answered by multicast, which is all this can send.
 			num_ans_added = populate_answers(svr, &reply->rr_ans, qn->name, qn->type);
 			reply->num_ans_rr += num_ans_added;
 
