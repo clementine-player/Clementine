@@ -94,9 +94,11 @@ IncomingDataParser::~IncomingDataParser() {}
 void IncomingDataParser::ReloadSettings() {
   QSettings s;
   s.beginGroup(MainWindow::kSettingsGroup);
+  // The same default as MainWindow, so a remote's tap on a song does what a
+  // double-click does.
   doubleclick_playlist_addmode_ = MainWindow::PlaylistAddBehaviour(
       s.value("doubleclick_playlist_addmode",
-              MainWindow::PlaylistAddBehaviour_Enqueue)
+              MainWindow::PlaylistAddBehaviour_Play)
           .toInt());
 }
 
