@@ -27,6 +27,7 @@
 #include "core/song.h"
 #include "directory.h"
 
+class LibraryTagPrefetcher;
 class QFileSystemWatcher;
 class QTimer;
 
@@ -201,6 +202,8 @@ class LibraryWatcher : public QObject {
   SongList ScanNewFile(const QString& file, const QString& path,
                        const QString& matching_cue,
                        QSet<QString>* cues_processed);
+  // Reads |file|'s tags, from the directory's prefetcher when there is one.
+  void ReadTags(const QString& file, Song* song);
 
  private:
   LibraryBackend* backend_;
@@ -252,6 +255,8 @@ class LibraryWatcher : public QObject {
   int total_watches_;
 
   CueParser* cue_parser_;
+  // Set while ScanSubdirectory compares a directory's files.
+  LibraryTagPrefetcher* prefetcher_;
 
   static QStringList sValidImages;
 };

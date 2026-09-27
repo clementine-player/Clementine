@@ -29,6 +29,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QtDebug>
+#include <memory>
 
 #include "core/filesystemwatcherinterface.h"
 #include "core/logging.h"
@@ -48,6 +49,79 @@ static const char* kNoMediaFile = ".nomedia";
 static const char* kNoMusicFile = ".nomusic";
 }  // namespace
 
+// Asks the tag reader for a directory's files ahead of the loop that compares
+// them with the library, keeping a window of requests in flight so the tag
+// reader's workers read several files at once. The loop still reads files in
+// order and one at a time; it just rarely has to wait.
+class LibraryTagPrefetcher {
+ public:
+  // Requests beyond this wait until earlier ones are used, so a directory of
+  // thousands of files doesn't queue thousands of requests.
+  static const int kMaxInFlight = 32;
+
+  // |files| are those the loop is expected to read, in the order it will.
+  explicit LibraryTagPrefetcher(const QStringList& files)
+      : files_(files), next_(0) {
+    for (int i = 0; i < files_.size(); ++i) index_[files_[i]] = i;
+    TopUp();
+  }
+
+  ~LibraryTagPrefetcher() {
+    // Files the loop decided not to read after all.
+    for (const InFlight& request : in_flight_) request.reply->deleteLater();
+  }
+
+  void Read(const QString& file, Song* song) {
+    TagReaderClient* client = TagReaderClient::Instance();
+    const int index = index_.value(file, -1);
+
+    // Requests for files the loop has passed without reading will never be
+    // used, and would hold the window up.
+    for (auto it = in_flight_.begin(); it != in_flight_.end();) {
+      if (index != -1 && it->index < index) {
+        it->reply->deleteLater();
+        it = in_flight_.erase(it);
+      } else {
+        ++it;
+      }
+    }
+
+    auto it = in_flight_.find(file);
+    if (it == in_flight_.end()) {
+      // Not prefetched: read it now, and prefetch from here on.
+      if (index >= next_) next_ = index + 1;
+      TopUp();
+      client->ReadFileBlocking(file, song);
+      return;
+    }
+
+    TagReaderClient::ReplyType* reply = it->reply;
+    in_flight_.erase(it);
+    TopUp();
+    client->ReadFileFinish(reply, file, song);
+  }
+
+ private:
+  struct InFlight {
+    int index;
+    TagReaderClient::ReplyType* reply;
+  };
+
+  void TopUp() {
+    while (next_ < files_.size() && in_flight_.size() < kMaxInFlight) {
+      const QString& file = files_[next_];
+      in_flight_[file] =
+          InFlight{next_, TagReaderClient::Instance()->ReadFile(file)};
+      ++next_;
+    }
+  }
+
+  QStringList files_;
+  QHash<QString, int> index_;
+  int next_;
+  QHash<QString, InFlight> in_flight_;
+};
+
 static const int kUnfilteredImageLimit = 10;
 
 QStringList LibraryWatcher::sValidImages;
@@ -64,7 +138,8 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       rescan_timer_(new QTimer(this)),
       rescan_paused_(false),
       total_watches_(0),
-      cue_parser_(new CueParser(backend_, this)) {
+      cue_parser_(new CueParser(backend_, this)),
+      prefetcher_(nullptr) {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
@@ -346,6 +421,30 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // Ask the database for a list of files in this directory
   SongList songs_in_db = t->FindSongsInSubdirectory(path);
 
+  // Start reading the tags the loop below will need: files that are new, or
+  // changed since they were last read. Files with cue sheets go their own way.
+  QStringList files_to_read;
+  for (const QString& file : files_on_disk) {
+    if (GetMtimeForCue(NoExtensionPart(file) + ".cue")) continue;
+    Song in_db;
+    if (FindSongByPath(songs_in_db, file, &in_db)) {
+      if (in_db.has_cue()) continue;
+      if (!t->ignores_mtime() &&
+          in_db.mtime() == QFileInfo(file).lastModified().toSecsSinceEpoch()) {
+        continue;
+      }
+    }
+    files_to_read << file;
+  }
+  std::unique_ptr<LibraryTagPrefetcher> prefetcher(
+      new LibraryTagPrefetcher(files_to_read));
+  prefetcher_ = prefetcher.get();
+  // Cleared on every way out of this function, before |prefetcher| goes.
+  struct ClearPrefetcher {
+    LibraryTagPrefetcher** prefetcher;
+    ~ClearPrefetcher() { *prefetcher = nullptr; }
+  } clear_prefetcher{&prefetcher_};
+
   QSet<QString> cues_processed;
 
   // Now compare the list from the database with the list of files on disk
@@ -432,6 +531,11 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       }
     }
   }
+
+  // Done reading tags; drop any requests the loop didn't use before scanning
+  // subdirectories, which have prefetchers of their own.
+  prefetcher_ = nullptr;
+  prefetcher.reset();
 
   // Look for deleted songs
   for (const Song& song : songs_in_db) {
@@ -528,7 +632,7 @@ void LibraryWatcher::UpdateNonCueAssociatedSong(const QString& file,
 
   Song song_on_disk;
   song_on_disk.set_directory_id(t->dir_id());
-  TagReaderClient::Instance()->ReadFileBlocking(file, &song_on_disk);
+  ReadTags(file, &song_on_disk);
 
   if (song_on_disk.is_valid()) {
     PreserveUserSetData(file, image, matching_song, &song_on_disk, t);
@@ -569,7 +673,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // it's a normal media file
   } else {
     Song song;
-    TagReaderClient::Instance()->ReadFileBlocking(file, &song);
+    ReadTags(file, &song);
 
     if (song.is_valid()) {
       song_list << song;
@@ -577,6 +681,14 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
   }
 
   return song_list;
+}
+
+void LibraryWatcher::ReadTags(const QString& file, Song* song) {
+  if (prefetcher_) {
+    prefetcher_->Read(file, song);
+  } else {
+    TagReaderClient::Instance()->ReadFileBlocking(file, song);
+  }
 }
 
 void LibraryWatcher::PreserveUserSetData(const QString& file,
