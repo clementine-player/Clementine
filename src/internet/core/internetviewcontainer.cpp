@@ -107,6 +107,15 @@ void InternetViewContainer::Collapsed(const QModelIndex& index) {
 
 void InternetViewContainer::Expanded(const QModelIndex& index) {
   ServiceChanged(index);
+
+  // A service that has to be set up first opens its settings. This used to
+  // happen in LazyPopulate, which a remote browsing the model also runs.
+  if (app_->internet_model()->merged_model()->mapToSource(index).model() ==
+          app_->internet_model() &&
+      index.data(InternetModel::Role_Type) == InternetModel::Type_Service) {
+    InternetService* service = app_->internet_model()->ServiceForIndex(index);
+    if (service && service->NeedsSetup()) service->ShowConfig();
+  }
 }
 
 void InternetViewContainer::SetHeaderVisible(QWidget* header, bool visible) {

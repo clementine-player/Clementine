@@ -83,9 +83,9 @@ QStandardItem* CloudFileService::CreateRootItem() {
 void CloudFileService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      if (ConfigRequired()) {
-        ShowConfig();
-      } else {
+      // Not ShowConfig() when ConfigRequired(): a remote may be browsing.
+      // Expanding the service in the sidebar opens it instead.
+      if (!ConfigRequired()) {
         Connect();
       }
       library_model_->Init();
