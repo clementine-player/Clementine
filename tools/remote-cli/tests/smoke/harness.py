@@ -52,10 +52,18 @@ class Clementine:
     |streaming|, which passes --experimental-remote-streaming.
     """
 
-    def __init__(self, binary: Path, root: Path, streaming: bool = True) -> None:
+    def __init__(
+        self,
+        binary: Path,
+        root: Path,
+        streaming: bool = True,
+        extra_config: str = "",
+    ) -> None:
         self.binary = binary
         self.root = root
         self.streaming = streaming
+        # More settings, in Clementine.conf's ini format.
+        self.extra_config = extra_config
         self.port = free_port()
         self.log_path = root / "clementine.log"
         self.process: subprocess.Popen[bytes] | None = None
@@ -81,6 +89,8 @@ use_auth_code=false
 
 [GstEngine]
 sink={sink}
+
+{self.extra_config}
 """
         )
 

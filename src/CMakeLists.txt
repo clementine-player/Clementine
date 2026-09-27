@@ -248,6 +248,7 @@ set(SOURCES
   musicbrainz/tagfetcher.cpp
 
   networkremote/incomingdataparser.cpp
+  networkremote/internetbrowser.cpp
   networkremote/networkremote.cpp
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
@@ -586,6 +587,7 @@ set(HEADERS
   networkremote/networkremotehelper.h
   networkremote/networkremote.h
   networkremote/incomingdataparser.h
+  networkremote/internetbrowser.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
   networkremote/songsender.h

@@ -13,6 +13,7 @@ from typing import Any, ParamSpec
 import httpx
 import pytest
 
+from clementine_remote import browse, connection
 from clementine_remote.events import Ended, Failed, Loaded, Preloaded, Stopped
 from clementine_remote.proto import pb
 
@@ -415,3 +416,35 @@ async def test_oversized_request_heads_are_answered_once(
                 sock.sendall(b"a" * 3000)
         response = _read_all(sock)
     assert response.count(b"HTTP/1.1 431") == 1
+
+
+@run_async
+async def test_browsing_plays_a_saved_radio_stream(
+    clementine_with_radio: Clementine,
+) -> None:
+    port = clementine_with_radio.port
+    async with Controller(port) as controller:
+        assert pb.SERVER_FEATURE_BROWSE in controller.info.features
+
+        # Node ids belong to a connection, so browse on one of its own.
+        conn, _ = await connection.connect(HOST, port)
+        try:
+            services = await browse.browse(conn)
+            assert services.state == pb.BROWSE_STATE_READY
+            assert "Your radio streams" in [n.title for n in services.nodes]
+
+            node, streams = await browse.browse_path(conn, ["Your radio streams"])
+            assert node is not None
+            assert node.kind == pb.BROWSE_NODE_KIND_SERVICE
+            assert streams.state == pb.BROWSE_STATE_READY
+            station = next(n for n in streams.nodes if n.title == "Smoke radio")
+            assert station.kind == pb.BROWSE_NODE_KIND_STREAM
+            assert station.playability == pb.BROWSE_PLAYABILITY_ADDABLE
+
+            result = await browse.add(
+                conn, [station.node_id], pb.BROWSE_ADD_ACTION_PLAY_NOW
+            )
+            assert result == pb.BROWSE_ADD_RESULT_ADDED
+            await controller.wait_for_state(pb.Playing)
+        finally:
+            await conn.close()

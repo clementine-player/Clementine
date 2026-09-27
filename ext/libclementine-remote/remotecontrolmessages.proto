@@ -105,6 +105,14 @@ enum MsgType {
   RENDER_SET_VOLUME = 326;
   // Server -> all clients
   OUTPUTS = 340;
+
+  // Browsing the Internet sidebar.
+  // Client -> server
+  REQUEST_BROWSE = 360;
+  REQUEST_BROWSE_ADD = 361;
+  // Server -> client
+  BROWSE = 370;
+  BROWSE_ADD_RESULT = 371;
 }
 
 // Valid Engine states
@@ -475,6 +483,8 @@ enum ServerFeature {
   SERVER_FEATURE_UNSPECIFIED = 0;
   // The server can send playback to renderers (streaming is enabled).
   SERVER_FEATURE_RENDERING = 1;
+  // The server can be browsed like its Internet sidebar (REQUEST_BROWSE).
+  SERVER_FEATURE_BROWSE = 2;
 }
 
 // Optional abilities of a renderer, beyond decoding its formats.
@@ -658,6 +668,129 @@ message RendererError {
   optional RendererErrorScope scope = 3;
 }
 
+// Browsing the Internet sidebar: services, and the nodes below them.
+
+// What kind of node a BrowseNode is, for its icon and what a tap does.
+enum BrowseNodeKind {
+  // Treat as BROWSE_NODE_KIND_FOLDER.
+  BROWSE_NODE_KIND_UNSPECIFIED = 0;
+  // A service's root: SomaFM, Plex, Google Drive...
+  BROWSE_NODE_KIND_SERVICE = 1;
+  // Anything grouping others: an artist, album, playlist, genre, category.
+  BROWSE_NODE_KIND_FOLDER = 2;
+  // A song with a length.
+  BROWSE_NODE_KIND_TRACK = 3;
+  // A radio stream, or anything else that plays with no known length.
+  BROWSE_NODE_KIND_STREAM = 4;
+  // A smart playlist, generated when added.
+  BROWSE_NODE_KIND_SMART_PLAYLIST = 5;
+}
+
+// Whether a node has children to browse into.
+enum BrowseChildren {
+  // Treat as BROWSE_CHILDREN_NONE.
+  BROWSE_CHILDREN_UNSPECIFIED = 0;
+  BROWSE_CHILDREN_NONE = 1;
+  // It has children, or will load some when browsed.
+  BROWSE_CHILDREN_SOME = 2;
+}
+
+// Whether a node can go on the playlist, as a drag from the sidebar can.
+enum BrowsePlayability {
+  // Treat as BROWSE_PLAYABILITY_NONE.
+  BROWSE_PLAYABILITY_UNSPECIFIED = 0;
+  BROWSE_PLAYABILITY_NONE = 1;
+  // Adding it adds it, or everything under it (an album, a playlist).
+  BROWSE_PLAYABILITY_ADDABLE = 2;
+}
+
+// One node of the tree the Internet sidebar shows.
+message BrowseNode {
+  // Opaque, issued by the server, valid on this connection until the node
+  // goes away. Never a URL or a path.
+  optional string node_id = 1;
+  optional string title = 2;
+  // A second line where there is one, such as a track's artist.
+  optional string subtitle = 3;
+  optional BrowseNodeKind kind = 4;
+  optional BrowseChildren children = 5;
+  optional BrowsePlayability playability = 6;
+  // PNG, at most 48x48. Only on service nodes.
+  optional bytes icon_png = 7;
+  // For tracks the server has metadata for: artist, album, length.
+  optional SongMetadata song = 8;
+}
+
+// Asks for a node's children, or for the services when node_id is unset.
+message RequestBrowse {
+  optional string node_id = 1;
+  // A page of the children. Unset or 0 limit: the server's maximum (500).
+  optional int32 offset = 2;
+  optional int32 limit = 3;
+}
+
+// Where a node's children stand.
+enum BrowseState {
+  // Treat as BROWSE_STATE_READY.
+  BROWSE_STATE_UNSPECIFIED = 0;
+  BROWSE_STATE_READY = 1;
+  // Still loading. Another BROWSE for this node follows when they change.
+  BROWSE_STATE_LOADING = 2;
+  // The service has to be set up on the computer first; message says how.
+  BROWSE_STATE_NEEDS_SETUP = 3;
+  // The node no longer exists: the client goes back up.
+  BROWSE_STATE_GONE = 4;
+}
+
+// A node's children, sent for a RequestBrowse and again when they change
+// while the client is looking at that node.
+message ResponseBrowse {
+  optional string node_id = 1;
+  optional BrowseState state = 2;
+  repeated BrowseNode nodes = 3;
+  // Where this page starts, and how many children there are in all.
+  optional int32 offset = 4;
+  optional int32 total_count = 5;
+  // Shown to the user with BROWSE_STATE_NEEDS_SETUP, translated.
+  optional string message = 6;
+}
+
+// What adding nodes does to the playlist.
+enum BrowseAddAction {
+  // Treat as BROWSE_ADD_ACTION_APPEND.
+  BROWSE_ADD_ACTION_UNSPECIFIED = 0;
+  // Add to the end of the current playlist.
+  BROWSE_ADD_ACTION_APPEND = 1;
+  // Add, and play the first one added.
+  BROWSE_ADD_ACTION_PLAY_NOW = 2;
+  // Add, and queue it to play straight after the current song.
+  BROWSE_ADD_ACTION_PLAY_NEXT = 3;
+  // Clear the current playlist, add, and play.
+  BROWSE_ADD_ACTION_REPLACE = 4;
+}
+
+// Puts nodes on the playlist, as dragging them from the sidebar does.
+message RequestBrowseAdd {
+  repeated string node_ids = 1;
+  optional BrowseAddAction action = 2;
+}
+
+// How a RequestBrowseAdd went.
+enum BrowseAddResult {
+  // Treat as BROWSE_ADD_RESULT_NOT_PLAYABLE.
+  BROWSE_ADD_RESULT_UNSPECIFIED = 0;
+  BROWSE_ADD_RESULT_ADDED = 1;
+  // None of the nodes can go on the playlist.
+  BROWSE_ADD_RESULT_NOT_PLAYABLE = 2;
+  // A node no longer exists.
+  BROWSE_ADD_RESULT_GONE = 3;
+}
+
+message ResponseBrowseAdd {
+  repeated string node_ids = 1;
+  optional BrowseAddResult result = 2;
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default = 22];
@@ -713,4 +846,10 @@ message Message {
   optional RendererStatus renderer_status = 67;
   optional RendererError renderer_error = 68;
   optional RendererTrackEnded renderer_track_ended = 69;
+
+  // Browsing the Internet sidebar
+  optional RequestBrowse request_browse = 70;
+  optional ResponseBrowse response_browse = 71;
+  optional RequestBrowseAdd request_browse_add = 72;
+  optional ResponseBrowseAdd response_browse_add = 73;
 }

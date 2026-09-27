@@ -225,6 +225,13 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
       }
       break;
 
+    case cpb::remote::REQUEST_BROWSE:
+    case cpb::remote::REQUEST_BROWSE_ADD: {
+      const std::string data = msg.SerializeAsString();
+      emit BrowseMessage(client->id(), QByteArray(data.data(), data.size()));
+      break;
+    }
+
     default:
       break;
   }

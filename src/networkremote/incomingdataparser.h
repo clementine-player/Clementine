@@ -76,6 +76,9 @@ class IncomingDataParser : public QObject {
                          const QString& local_address, quint16 local_port,
                          const QString& peer_address);
   void RendererMessage(int client_id, const QByteArray& data);
+  // Browsing the Internet sidebar, for the InternetBrowser on the main
+  // thread.
+  void BrowseMessage(int client_id, const QByteArray& data);
 
  private:
   Application* app_;

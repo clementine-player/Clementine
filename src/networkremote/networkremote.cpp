@@ -26,9 +26,12 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/mergedproxymodel.h"
 #include "covers/currentartloader.h"
 #include "engines/enginerouter.h"
+#include "internet/core/internetmodel.h"
 #include "networkremote/incomingdataparser.h"
+#include "networkremote/internetbrowser.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/protocolsniffer.h"
 #include "networkremote/streaming/mediahttpserver.h"
@@ -49,13 +52,17 @@ const char* kSniffedProperty = "clementine_sniffed";
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
     : QObject(parent),
       renderer_registry_(nullptr),
+      internet_browser_(nullptr),
       allow_streaming_(false),
       signals_connected_(false),
       app_(app) {
   setObjectName("Network remote");
 }
 
-NetworkRemote::~NetworkRemote() { StopServer(); }
+NetworkRemote::~NetworkRemote() {
+  StopServer();
+  if (internet_browser_) internet_browser_->deleteLater();
+}
 
 void NetworkRemote::ReadSettings() {
   QSettings s;
@@ -113,6 +120,30 @@ void NetworkRemote::SetupServer() {
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
   connect(incoming_data_parser_.get(), SIGNAL(SetCurrentPlaylist(int)),
           SIGNAL(SetCurrentPlaylist(int)));
+
+  // Browsing the Internet sidebar. The browser works on the sidebar's model,
+  // so it lives on the main thread, and gets the model there.
+  internet_browser_ = new InternetBrowser;
+  internet_browser_->moveToThread(QCoreApplication::instance()->thread());
+  Application* app = app_;
+  InternetBrowser* browser = internet_browser_;
+  QMetaObject::invokeMethod(
+      internet_browser_,
+      [app, browser]() {
+        browser->SetModel(app->internet_model()->merged_model(),
+                          InternetBrowser::HooksFor(app->internet_model()));
+      },
+      Qt::QueuedConnection);
+  connect(incoming_data_parser_.get(), SIGNAL(BrowseMessage(int, QByteArray)),
+          internet_browser_, SLOT(HandleMessage(int, QByteArray)));
+  connect(this, SIGNAL(ClientDisconnected(int)), internet_browser_,
+          SLOT(ClientDisconnected(int)));
+  connect(internet_browser_, SIGNAL(SendToClient(int, QByteArray)), this,
+          SLOT(SendToClient(int, QByteArray)));
+  // As the network remote's other additions: MainWindow drops it on the
+  // playlist.
+  connect(internet_browser_, SIGNAL(AddToPlaylist(QMimeData*)), this,
+          SIGNAL(AddToPlaylistSignal(QMimeData*)));
 }
 
 void NetworkRemote::StartServer() {
