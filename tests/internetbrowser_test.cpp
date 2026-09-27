@@ -19,6 +19,7 @@
 #include <QSignalSpy>
 #include <QStandardItemModel>
 #include <QTest>
+#include <QThread>
 #include <QTimer>
 #include <functional>
 #include <memory>
@@ -230,9 +231,24 @@ class InternetBrowserTest : public ::testing::Test {
     return qobject_cast<MimeData*>(added_[i][0].value<QMimeData*>());
   }
 
+  // NetworkRemote makes the browser on its own thread and moves it to the
+  // main one, so do the same: whatever it owns has to move with it.
+  static InternetBrowser* MadeOnAnotherThread() {
+    InternetBrowser* browser = nullptr;
+    QThread* thread = QThread::create([&browser]() {
+      browser = new InternetBrowser;
+      browser->moveToThread(QCoreApplication::instance()->thread());
+    });
+    thread->start();
+    thread->wait();
+    delete thread;
+    return browser;
+  }
+
   FakeModel model_;
   InternetBrowser::Hooks hooks_;
-  InternetBrowser browser_;
+  std::unique_ptr<InternetBrowser> owned_browser_{MadeOnAnotherThread()};
+  InternetBrowser& browser_{*owned_browser_};
   QSignalSpy sent_{&browser_, SIGNAL(SendToClient(int, QByteArray))};
   QSignalSpy added_{&browser_, SIGNAL(AddToPlaylist(QMimeData*))};
 
