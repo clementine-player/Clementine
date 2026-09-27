@@ -46,6 +46,9 @@ class TagReaderClient : public QObject {
 
   static const char* kWorkerExecutableName;
 
+  // How many worker processes to run unless the user chose otherwise.
+  static int DefaultWorkerCount();
+
   void Start();
   void ReloadSettings();
 

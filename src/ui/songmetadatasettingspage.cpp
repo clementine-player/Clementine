@@ -48,7 +48,8 @@ void SongMetadataSettingsPage::Load() {
   s.beginGroup(Player::kSettingsGroup);
 
   int max_numprocs_tagclients =
-      s.value("max_numprocs_tagclients", QThread::idealThreadCount()).toInt();
+      s.value("max_numprocs_tagclients", TagReaderClient::DefaultWorkerCount())
+          .toInt();
   ui_->max_numprocs_tagclients->setValue(max_numprocs_tagclients);
   ui_->max_numprocs_tagclients_value_label->setText(
       QString::number(max_numprocs_tagclients));
