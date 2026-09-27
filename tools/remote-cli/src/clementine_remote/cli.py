@@ -13,7 +13,7 @@ from collections.abc import Callable, Coroutine
 from pathlib import Path
 from typing import Any
 
-from . import connection
+from . import browse, connection
 from .connection import Connection
 from .formats import DEFAULT_FORMATS, describe, parse_format
 from .proto import pb
@@ -45,6 +45,10 @@ class Args(argparse.Namespace):
     max_bitrate: int | None
     gapless: bool
     take_over: bool
+    # browse, browse-add
+    path: list[str]
+    wait: float
+    browse_action: str
 
 
 CONTROLS: dict[str, pb.MsgType] = {
@@ -235,6 +239,44 @@ async def cmd_watch(args: Args) -> None:
             return
 
 
+async def cmd_browse(args: Args) -> None:
+    conn, info = await open_connection(args)
+    if pb.SERVER_FEATURE_BROWSE not in info.features:
+        raise SystemExit("This Clementine can't be browsed")
+    try:
+        node, response = await browse.browse_path(conn, args.path, args.wait)
+    except browse.BrowseError as e:
+        raise SystemExit(str(e)) from e
+    state = pb.BrowseState.Name(response.state).removeprefix("BROWSE_STATE_")
+    where = node.title if node else "Services"
+    print(f"{where}: {state.lower()}, {response.total_count} item(s)")
+    if response.message:
+        print(response.message)
+    for child in response.nodes:
+        print("  " + browse.describe(child))
+    await conn.close()
+
+
+async def cmd_browse_add(args: Args) -> None:
+    conn, info = await open_connection(args)
+    if pb.SERVER_FEATURE_BROWSE not in info.features:
+        raise SystemExit("This Clementine can't be browsed")
+    if not args.path:
+        raise SystemExit("Give the path to the node to add")
+    try:
+        _, parent = await browse.browse_path(conn, args.path[:-1], args.wait)
+    except browse.BrowseError as e:
+        raise SystemExit(str(e)) from e
+    matches = [n for n in parent.nodes if n.title == args.path[-1]]
+    if not matches:
+        raise SystemExit(f"No {args.path[-1]!r} there")
+    result = await browse.add(
+        conn, [matches[0].node_id], browse.ACTIONS[args.browse_action]
+    )
+    print(pb.BrowseAddResult.Name(result).removeprefix("BROWSE_ADD_RESULT_").lower())
+    await conn.close()
+
+
 async def cmd_render(args: Args) -> None:
     caps = pb.RendererCapabilities(
         renderer_id=renderer_id(args.id),
@@ -305,6 +347,31 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("watch", help="print what Clementine reports").set_defaults(
         func=cmd_watch
     )
+
+    p = sub.add_parser(
+        "browse",
+        help="list what's under a path of titles in Clementine's Internet sidebar",
+    )
+    p.add_argument("path", nargs="*", metavar="TITLE")
+    p.add_argument(
+        "--wait", type=float, default=browse.DEFAULT_WAIT, help="seconds to wait"
+    )
+    p.set_defaults(func=cmd_browse)
+
+    p = sub.add_parser(
+        "browse-add", help="put the node at a path of titles on the playlist"
+    )
+    p.add_argument("path", nargs="+", metavar="TITLE")
+    p.add_argument(
+        "--action",
+        dest="browse_action",
+        choices=sorted(browse.ACTIONS),
+        default="append",
+    )
+    p.add_argument(
+        "--wait", type=float, default=browse.DEFAULT_WAIT, help="seconds to wait"
+    )
+    p.set_defaults(func=cmd_browse_add)
 
     p = sub.add_parser("render", help="act as a renderer: Clementine plays through us")
     p.add_argument("--name", default=f"clementine-remote on {socket.gethostname()}")

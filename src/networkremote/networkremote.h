@@ -9,6 +9,7 @@
 
 class Application;
 class IncomingDataParser;
+class InternetBrowser;
 class MediaHttpServer;
 class OutgoingDataCreator;
 class RendererRegistry;
@@ -63,6 +64,8 @@ class NetworkRemote : public QObject {
   // Only while streaming is allowed. The registry lives on the main thread
   // with the Player; the HTTP server on this one with the sockets.
   RendererRegistry* renderer_registry_;
+  // Lives on the main thread with the Internet sidebar's model.
+  InternetBrowser* internet_browser_;
   std::unique_ptr<MediaHttpServer> media_http_server_;
 
   quint16 port_;
