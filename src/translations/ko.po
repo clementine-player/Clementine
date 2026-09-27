@@ -90,7 +90,7 @@ msgstr " 초"
 msgid " songs"
 msgstr "곡"
 
-#: ui/networkremotesettingspage.cpp:203
+#: ui/networkremotesettingspage.cpp:206
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -99,6 +99,16 @@ msgstr ""
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 앨범"
+
+#: networkremote/streaming/remoteengine.cpp:246
+#, qt-format
+msgid "%1 can't play this track: %2"
+msgstr ""
+
+#: networkremote/streaming/remoteengine.cpp:453
+#, qt-format
+msgid "%1 couldn't play this track"
+msgstr ""
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -413,7 +423,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>토큰은 %로 시작되며, 예제: %artist %album %title </p>\n\n<p>만약 중괄호를 포함하고 있는 토큰을 포함한 텍스트 섹션을 감싸고 있고 토큰이 비어 있다면, 그 해당 섹션은 감춰질 것입니다.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -762,7 +772,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "All addresses"
 msgstr ""
 
@@ -791,17 +801,21 @@ msgstr "모든 번역자"
 msgid "All tracks"
 msgstr "모든 트랙"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:388
 msgid "Allow downloads"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "중간/측면 인코딩 허용"
+
+#: ../bin/src/ui_networkremotesettingspage.h:392
+msgid "Allow playing on remote devices"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -847,7 +861,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "외형"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:192
 msgid "Append files/URLs to the playlist"
 msgstr "재생목록에 파일/URL 추가"
 
@@ -902,7 +916,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "오디오 형식"
@@ -1136,7 +1150,7 @@ msgstr "순서 섞기 모드 변경"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:198
 msgid "Change the language"
 msgstr "언어 변경"
 
@@ -1361,7 +1375,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:201
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "콤마로 클래스:단계의 목록을 나눔, 단계는 0-3"
 
@@ -1488,11 +1502,11 @@ msgstr "모든 곡 변환"
 msgid "Convert any music that the device can't play"
 msgstr "장치가 재생할 수 없는 곡 변환"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:387
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1624,7 +1638,7 @@ msgstr "%1에서 지정한 표지 디자인"
 msgid "Covers from %1"
 msgstr "%1의 표지"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:191
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1707,11 +1721,11 @@ msgstr "일"
 msgid "De&fault"
 msgstr "기본값(&F)"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:181
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1771,7 +1785,7 @@ msgstr "프리셋 삭제"
 msgid "Delete smart playlist"
 msgstr "스마트 재생목록 삭제"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:203
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1892,7 +1906,7 @@ msgstr "불연속적인 전송"
 msgid "Display options"
 msgstr "옵션 표시"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Display the on-screen-display"
 msgstr "OSD 표시"
 
@@ -1991,15 +2005,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:412
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2169,8 +2183,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "새로운 재생목록 이름을 입력하세요"
 
-#: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2212,11 +2226,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "이퀄라이저"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:199
 msgid "Equivalent to --log-levels *:1"
 msgstr "동등한 --log-levels *:1"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:200
 msgid "Equivalent to --log-levels *:3"
 msgstr "동등한 --log-level *:3"
 
@@ -2503,7 +2517,7 @@ msgstr ""
 msgid "Files"
 msgstr "파일"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Files root folder"
 msgstr ""
 
@@ -2889,11 +2903,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:180
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3078,6 +3092,12 @@ msgstr ""
 msgid "Length"
 msgstr "길이"
 
+#: ../bin/src/ui_networkremotesettingspage.h:390
+msgid ""
+"Let a connected device act as the speaker: Clementine keeps the playlist and"
+" streams the audio to it."
+msgstr ""
+
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
@@ -3103,7 +3123,7 @@ msgstr ""
 msgid "Limits"
 msgstr "제한"
 
-#: ../bin/src/ui_networkremotesettingspage.h:374
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Listen on"
 msgstr ""
 
@@ -3176,7 +3196,7 @@ msgstr "트랙 정보 불러오는중"
 msgid "Loading..."
 msgstr "여는 중..."
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:193
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 
@@ -3429,7 +3449,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "음악 라이브러리"
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3460,7 +3480,7 @@ msgstr "협대역(NB)"
 msgid "Network Proxy"
 msgstr "네트워크 프록시"
 
-#: ../bin/src/ui_networkremotesettingspage.h:355
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Network Remote"
 msgstr ""
 
@@ -3660,7 +3680,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3668,7 +3688,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3748,7 +3768,7 @@ msgid "Optimize for quality"
 msgstr "음질을 위해 최적화하기"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:389
+#: ../bin/src/ui_networkremotesettingspage.h:399
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "옵션..."
@@ -3792,7 +3812,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Other options"
 msgstr "그 외 옵션"
 
@@ -3849,7 +3869,7 @@ msgstr "암호"
 msgid "Pause"
 msgstr "일시중지"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Pause playback"
 msgstr "재생 일시중지"
 
@@ -3891,11 +3911,11 @@ msgstr "재생"
 msgid "Play count"
 msgstr "재생 횟수"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:195
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:174
 msgid "Play if stopped, pause if playing"
 msgstr "중지중일때 재생, 재생중일때 중지"
 
@@ -3912,7 +3932,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:194
 msgid "Play the <n>th track in the playlist"
 msgstr "재생목록의 <n>번째 트랙 재생하기"
 
@@ -3924,7 +3944,7 @@ msgstr "재생/일시중지"
 msgid "Playback"
 msgstr "재생"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:172
 msgid "Player options"
 msgstr "재생기 옵션"
 
@@ -3938,7 +3958,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "재생목록 끝남"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:190
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "재생목록 옵션"
@@ -3998,7 +4018,7 @@ msgid "Popup duration"
 msgstr "팝업 시간"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:358
+#: ../bin/src/ui_networkremotesettingspage.h:364
 msgid "Port"
 msgstr "포트"
 
@@ -4076,7 +4096,7 @@ msgstr "이전"
 msgid "Previous track"
 msgstr "이전 트랙"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:202
 msgid "Print out version information"
 msgstr "버전 정보 출력"
 
@@ -4113,7 +4133,7 @@ msgstr "무작위 순서로 곡 넣기"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:204
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4361,7 +4381,7 @@ msgstr "리플레이 게인 모드"
 msgid "Repopulate"
 msgstr "다시 채우기"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
 msgstr ""
 
@@ -4377,7 +4397,7 @@ msgstr "재생 횟수 초기화"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:188
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4418,7 +4438,7 @@ msgstr ""
 msgid "Rock"
 msgstr "록"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:401
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4645,11 +4665,11 @@ msgstr "뒤로 탐색"
 msgid "Seek forward"
 msgstr "앞으로 탐색"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track by a relative amount"
 msgstr "현재 재생 중인 트랙을 적절한 갯수로 탐색"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:184
 msgid "Seek the currently playing track to an absolute position"
 msgstr "현재 재생 중인 트랙을 절대적 위치로 탐색"
 
@@ -4730,7 +4750,7 @@ msgstr "%1을 \"%2\"로 설정..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:179
 msgid "Set the volume to <value> percent"
 msgstr "음량을 <value> 퍼센트로 설정"
 
@@ -4738,7 +4758,7 @@ msgstr "음량을 <value> 퍼센트로 설정"
 msgid "Set value for all selected tracks..."
 msgstr "모든 선택된 트랙의 값 지정하기..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:357
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Settings"
 msgstr "설정"
 
@@ -4931,7 +4951,7 @@ msgstr ""
 msgid "Ska"
 msgstr "스카"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:177
 msgid "Skip backwards in playlist"
 msgstr "재생목록에서 뒤로 건너뛰기"
 
@@ -4943,7 +4963,7 @@ msgstr "건너뛰기 횟수"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:178
 msgid "Skip forwards in playlist"
 msgstr "재생목록에서 앞으로 건너뛰기"
 
@@ -5048,7 +5068,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:173
 msgid "Start the playlist currently playing"
 msgstr "현재 재생중인 재생목록 시작"
 
@@ -5086,11 +5106,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "이 트랙 이후 중지하기"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Stop playback"
 msgstr "재생 "
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:176
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5334,6 +5354,10 @@ msgstr "이 앨범은 요청된 형식이 아닙니다."
 msgid "This can be changed later through the preferences"
 msgstr ""
 
+#: networkremote/streaming/rendererregistry.cpp:168
+msgid "This computer"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
@@ -5402,7 +5426,7 @@ msgstr "대기열 상황 토글"
 msgid "Toggle scrobbling"
 msgstr "청취 기록 토글"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:197
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "예쁜 OSD 표시를 보이기 선택"
 
@@ -5501,7 +5525,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "URL(s)"
 msgstr "URL(들)"
 
@@ -5601,7 +5625,7 @@ msgstr "업데이트 중 %1%..."
 msgid "Updating library"
 msgstr "라이브러리 업데이트 중"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "Usage"
 msgstr "사용"
 
@@ -5637,7 +5661,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "알림을 위한 사용자 정의 메시지 설정"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
+#: ../bin/src/ui_networkremotesettingspage.h:362
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5967,7 +5991,7 @@ msgstr "로그인되었습니다"
 msgid "You can change the way the songs in the library are organised."
 msgstr "라이브러리의 곡이 정리되는 방식을 변경할 수 있습니다."
 
-#: ui/networkremotesettingspage.cpp:165
+#: ui/networkremotesettingspage.cpp:168
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6090,7 +6114,7 @@ msgstr "가장 큰 순서"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6100,7 +6124,7 @@ msgstr ""
 msgid "contains"
 msgstr "포함"
 
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
 msgstr ""
 
@@ -6201,13 +6225,13 @@ msgstr "가장 오래된 것부터 먼저"
 msgid "on"
 msgstr "켜기"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "options"
 msgstr "옵션"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
-#: ../bin/src/ui_networkremotesettingspage.h:401
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:410
+#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
 msgstr ""
 

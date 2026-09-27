@@ -77,7 +77,7 @@ msgstr "сякунды"
 msgid " songs"
 msgstr "кампазыцыі"
 
-#: ui/networkremotesettingspage.cpp:203
+#: ui/networkremotesettingspage.cpp:206
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -86,6 +86,16 @@ msgstr ""
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 альбом(аў)"
+
+#: networkremote/streaming/remoteengine.cpp:246
+#, qt-format
+msgid "%1 can't play this track: %2"
+msgstr ""
+
+#: networkremote/streaming/remoteengine.cpp:453
+#, qt-format
+msgid "%1 couldn't play this track"
+msgstr ""
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -400,7 +410,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Палі пачынаюцца са знака %, напрыклад: %artist %album %title </p> \n<p>Калі вы абмежавалі частку тэкста фігурнымі дужкамі, то гэтая частка тэкста ня будзе бачная, калі значэньні палёў будуць пустымі</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -749,7 +759,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "All addresses"
 msgstr ""
 
@@ -778,17 +788,21 @@ msgstr "Усе перакладчыкі"
 msgid "All tracks"
 msgstr "Усе кампазіцыі"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:388
 msgid "Allow downloads"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "Дазволіць mid/side кадаваньне"
+
+#: ../bin/src/ui_networkremotesettingspage.h:392
+msgid "Allow playing on remote devices"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -834,7 +848,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Зьнешні выгляд"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:192
 msgid "Append files/URLs to the playlist"
 msgstr "Дадаць файлы/URLs ў плэйліст"
 
@@ -889,7 +903,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Фармат аўдыё"
@@ -1123,7 +1137,7 @@ msgstr "Зьмяніць рэжым мяшаньня"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:198
 msgid "Change the language"
 msgstr "Зьмяніць мову"
 
@@ -1348,7 +1362,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:201
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Падзелены коскамі сьпіс \"кляс:узровень\", дзе ўзровень ад 0 да 3"
 
@@ -1475,11 +1489,11 @@ msgstr "Канвэртаваць ўсю музыку"
 msgid "Convert any music that the device can't play"
 msgstr "Канвэртаваць ўсю музыку, якую можа прайграваць прылада."
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:387
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1611,7 +1625,7 @@ msgstr "Вокладка заданая з %1"
 msgid "Covers from %1"
 msgstr "Вокладкі з %1"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:191
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1694,11 +1708,11 @@ msgstr "Дзень (дня, дзён)"
 msgid "De&fault"
 msgstr "Па &змоўчаньні"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:181
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1758,7 +1772,7 @@ msgstr "Выдаліць прэсэт"
 msgid "Delete smart playlist"
 msgstr "Выдаліць смарт-плэйліст"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:203
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1879,7 +1893,7 @@ msgstr "Бесперапынная перадача"
 msgid "Display options"
 msgstr "Налады адлюстраваньня"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Display the on-screen-display"
 msgstr "Паказваць экраннае апавяшчэньне"
 
@@ -1978,15 +1992,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:412
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2156,8 +2170,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Уведзьце новае імя для гэтага плэйлісту"
 
-#: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2199,11 +2213,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Эквалайзэр"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:199
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналягічна --log-levels *:1"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:200
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналягічна --log-levels *:3"
 
@@ -2490,7 +2504,7 @@ msgstr ""
 msgid "Files"
 msgstr "Файлы"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Files root folder"
 msgstr ""
 
@@ -2876,11 +2890,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:180
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3065,6 +3079,12 @@ msgstr ""
 msgid "Length"
 msgstr "Працягласьць"
 
+#: ../bin/src/ui_networkremotesettingspage.h:390
+msgid ""
+"Let a connected device act as the speaker: Clementine keeps the playlist and"
+" streams the audio to it."
+msgstr ""
+
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
@@ -3090,7 +3110,7 @@ msgstr ""
 msgid "Limits"
 msgstr "Абмежаваньні"
 
-#: ../bin/src/ui_networkremotesettingspage.h:374
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Listen on"
 msgstr ""
 
@@ -3163,7 +3183,7 @@ msgstr "Загрузка інфармацыі пра трэк"
 msgid "Loading..."
 msgstr "Загрузка..."
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:193
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузіць файлы/URLs, замяняючы бягучы плэйліст"
 
@@ -3416,7 +3436,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Музычная Бібліятэка"
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3447,7 +3467,7 @@ msgstr "Вузкая паласа прапусканьня (NB)"
 msgid "Network Proxy"
 msgstr "Сеціўная проксі-служба"
 
-#: ../bin/src/ui_networkremotesettingspage.h:355
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Network Remote"
 msgstr ""
 
@@ -3647,7 +3667,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3655,7 +3675,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3735,7 +3755,7 @@ msgid "Optimize for quality"
 msgstr "Аптымізаваць па якасьці"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:389
+#: ../bin/src/ui_networkremotesettingspage.h:399
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Опцыі..."
@@ -3779,7 +3799,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Other options"
 msgstr "Іншыя налады"
 
@@ -3836,7 +3856,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Прыпыніць"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Pause playback"
 msgstr "Прыпыніць прайграваньне"
 
@@ -3878,11 +3898,11 @@ msgstr "Прайграць"
 msgid "Play count"
 msgstr "Колькасць прайграваньняў"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:195
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:174
 msgid "Play if stopped, pause if playing"
 msgstr "Прайграць калі спынена, прыпыніць калі прайграваецца"
 
@@ -3899,7 +3919,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:194
 msgid "Play the <n>th track in the playlist"
 msgstr "Прайграць <n> кампазыцыю ў плэйлісьце"
 
@@ -3911,7 +3931,7 @@ msgstr "Граць/Прыпыніць"
 msgid "Playback"
 msgstr "Прайграваньне"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:172
 msgid "Player options"
 msgstr "Налады плэеру"
 
@@ -3925,7 +3945,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Плэйліст скончыўся"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:190
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Налады плэйлісту"
@@ -3985,7 +4005,7 @@ msgid "Popup duration"
 msgstr "Працягласьць усплываючага паведамленьня"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:358
+#: ../bin/src/ui_networkremotesettingspage.h:364
 msgid "Port"
 msgstr "Порт"
 
@@ -4063,7 +4083,7 @@ msgstr "Папярэдні"
 msgid "Previous track"
 msgstr "Папярэдні трэк"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:202
 msgid "Print out version information"
 msgstr "Вывесьці інфармацыю аб вэрсіі"
 
@@ -4100,7 +4120,7 @@ msgstr "Раськідаць песьні ў выпадковым парадку
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:204
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4348,7 +4368,7 @@ msgstr "Рэжым Replay Gain"
 msgid "Repopulate"
 msgstr "Перазапоўніць"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
 msgstr ""
 
@@ -4364,7 +4384,7 @@ msgstr "Ськінуць лічыльнікі прайграваньня"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:188
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4405,7 +4425,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:401
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4632,11 +4652,11 @@ msgstr "Перамотка назад"
 msgid "Seek forward"
 msgstr "Перамотка наперад"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Крыху пераматаць быгучы трэк"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:184
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Пераматаць бягучы трэк на абсалютную пазыцыю"
 
@@ -4717,7 +4737,7 @@ msgstr "Усталяваць %1 у \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:179
 msgid "Set the volume to <value> percent"
 msgstr "Усталяваць гучнасьць у <value> адсоткаў"
 
@@ -4725,7 +4745,7 @@ msgstr "Усталяваць гучнасьць у <value> адсоткаў"
 msgid "Set value for all selected tracks..."
 msgstr "Усталяваць значэньне для вызначаных трэкаў..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:357
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Settings"
 msgstr "Налады"
 
@@ -4918,7 +4938,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:177
 msgid "Skip backwards in playlist"
 msgstr "Перамясьціць назад у плэйлісьце"
 
@@ -4930,7 +4950,7 @@ msgstr "Прапусьціць падлік"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:178
 msgid "Skip forwards in playlist"
 msgstr "Перамясьціць наперад ў плэйлісьце"
 
@@ -5035,7 +5055,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:173
 msgid "Start the playlist currently playing"
 msgstr "Запусьціць бягучы плэйліст"
 
@@ -5073,11 +5093,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Спыніць пасьля гэтага трэку"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Stop playback"
 msgstr "Спыніць прайграваньне"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:176
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5321,6 +5341,10 @@ msgstr "Гэты альбом не даступны ў патрабаваным 
 msgid "This can be changed later through the preferences"
 msgstr ""
 
+#: networkremote/streaming/rendererregistry.cpp:168
+msgid "This computer"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
@@ -5389,7 +5413,7 @@ msgstr "Пераключыць стан чаргі"
 msgid "Toggle scrobbling"
 msgstr "Укл/Выкл скроблінг"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:197
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Паказаць/Скрыць экраннае апавяшчэньне"
 
@@ -5488,7 +5512,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "URL(s)"
 msgstr "URI(s)"
 
@@ -5588,7 +5612,7 @@ msgstr "Абнаўленьне %1%..."
 msgid "Updating library"
 msgstr "Абнаўленьне бібліятэкі"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "Usage"
 msgstr "Выкарыстаньне"
 
@@ -5624,7 +5648,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Выкарыстоўваць уласнае апавяшчэньне"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
+#: ../bin/src/ui_networkremotesettingspage.h:362
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5954,7 +5978,7 @@ msgstr "Вы ўвайшлі ў сыстэму."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Вы можаце абраць спосаб сартоўкі кампазыцый ў бібліятэцы."
 
-#: ui/networkremotesettingspage.cpp:165
+#: ui/networkremotesettingspage.cpp:168
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6077,7 +6101,7 @@ msgstr "спачатку найбольшыя"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6087,7 +6111,7 @@ msgstr ""
 msgid "contains"
 msgstr "зьмяшчае"
 
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
 msgstr ""
 
@@ -6188,13 +6212,13 @@ msgstr "спачатку найстарэйшыя"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "options"
 msgstr "налады"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
-#: ../bin/src/ui_networkremotesettingspage.h:401
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:410
+#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
 msgstr ""
 

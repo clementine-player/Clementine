@@ -74,7 +74,7 @@ msgstr " 秒"
 msgid " songs"
 msgstr " 歌曲"
 
-#: ui/networkremotesettingspage.cpp:203
+#: ui/networkremotesettingspage.cpp:206
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -83,6 +83,16 @@ msgstr ""
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 專輯"
+
+#: networkremote/streaming/remoteengine.cpp:246
+#, qt-format
+msgid "%1 can't play this track: %2"
+msgstr ""
+
+#: networkremote/streaming/remoteengine.cpp:453
+#, qt-format
+msgid "%1 couldn't play this track"
+msgstr ""
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -397,7 +407,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p> Tokens 由%開頭, 例如：%artist %album %title </p>\n\n<p>若您將一段文字的前後用大括號括起來，那段文字將在token是空白的情況下被隱藏。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -746,7 +756,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "All addresses"
 msgstr ""
 
@@ -775,17 +785,21 @@ msgstr "所有翻譯者"
 msgid "All tracks"
 msgstr "所有音軌"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:388
 msgid "Allow downloads"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "允許 M/S (Mid/Side) 編碼技術"
+
+#: ../bin/src/ui_networkremotesettingspage.h:392
+msgid "Allow playing on remote devices"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -831,7 +845,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "外觀"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:192
 msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
@@ -886,7 +900,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "音訊格式"
@@ -1120,7 +1134,7 @@ msgstr "切換隨機模式"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:198
 msgid "Change the language"
 msgstr "變更語言"
 
@@ -1345,7 +1359,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:201
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "用逗號化分類別清單:等級為0-3"
 
@@ -1472,11 +1486,11 @@ msgstr "轉換所有音樂"
 msgid "Convert any music that the device can't play"
 msgstr "轉換任何裝置無法播放的音樂"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:387
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1608,7 +1622,7 @@ msgstr "從 %1 取得封面圖片"
 msgid "Covers from %1"
 msgstr "來自 %1 的封面"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:191
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1691,11 +1705,11 @@ msgstr "天"
 msgid "De&fault"
 msgstr "預設(&F)"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:181
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1755,7 +1769,7 @@ msgstr "刪除內建值"
 msgid "Delete smart playlist"
 msgstr "刪除智慧型播放清單"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:203
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1876,7 +1890,7 @@ msgstr "不連續傳送"
 msgid "Display options"
 msgstr "顯示選項"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Display the on-screen-display"
 msgstr "顯示螢幕上的顯示"
 
@@ -1975,15 +1989,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:412
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2153,8 +2167,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "為這個播放清單輸入新的名稱"
 
-#: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2196,11 +2210,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "等化器"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:199
 msgid "Equivalent to --log-levels *:1"
 msgstr "相當於 --log-levels *:1"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:200
 msgid "Equivalent to --log-levels *:3"
 msgstr "相當於 --log-levels *:3"
 
@@ -2487,7 +2501,7 @@ msgstr ""
 msgid "Files"
 msgstr "檔案"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Files root folder"
 msgstr ""
 
@@ -2873,11 +2887,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:180
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3062,6 +3076,12 @@ msgstr ""
 msgid "Length"
 msgstr "長度"
 
+#: ../bin/src/ui_networkremotesettingspage.h:390
+msgid ""
+"Let a connected device act as the speaker: Clementine keeps the playlist and"
+" streams the audio to it."
+msgstr ""
+
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
@@ -3087,7 +3107,7 @@ msgstr ""
 msgid "Limits"
 msgstr "限制"
 
-#: ../bin/src/ui_networkremotesettingspage.h:374
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Listen on"
 msgstr ""
 
@@ -3160,7 +3180,7 @@ msgstr "載入音軌資訊"
 msgid "Loading..."
 msgstr "載入中…"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:193
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "載入檔案/網址，取代目前的播放清單"
 
@@ -3413,7 +3433,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "媒體櫃"
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3444,7 +3464,7 @@ msgstr "窄頻 (NB)"
 msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
-#: ../bin/src/ui_networkremotesettingspage.h:355
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Network Remote"
 msgstr ""
 
@@ -3644,7 +3664,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3652,7 +3672,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3732,7 +3752,7 @@ msgid "Optimize for quality"
 msgstr "最佳化品質"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:389
+#: ../bin/src/ui_networkremotesettingspage.h:399
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "選項…"
@@ -3776,7 +3796,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Other options"
 msgstr "其它選項"
 
@@ -3833,7 +3853,7 @@ msgstr "密碼"
 msgid "Pause"
 msgstr "暫停"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Pause playback"
 msgstr "暫停播放"
 
@@ -3875,11 +3895,11 @@ msgstr "播放"
 msgid "Play count"
 msgstr "播放計數"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:195
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:174
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
@@ -3896,7 +3916,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:194
 msgid "Play the <n>th track in the playlist"
 msgstr "播放清單中的第<n>首歌曲"
 
@@ -3908,7 +3928,7 @@ msgstr "播放/暫停"
 msgid "Playback"
 msgstr "播放"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:172
 msgid "Player options"
 msgstr "播放器選項"
 
@@ -3922,7 +3942,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "播放清單播完了"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:190
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "播放清單選擇"
@@ -3982,7 +4002,7 @@ msgid "Popup duration"
 msgstr "彈出持續時間"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:358
+#: ../bin/src/ui_networkremotesettingspage.h:364
 msgid "Port"
 msgstr "連接埠"
 
@@ -4060,7 +4080,7 @@ msgstr "往前"
 msgid "Previous track"
 msgstr "上一首歌曲"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:202
 msgid "Print out version information"
 msgstr "印出版本資訊"
 
@@ -4097,7 +4117,7 @@ msgstr "將歌曲放入隨機曲單"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:204
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4345,7 +4365,7 @@ msgstr "播放增益模式"
 msgid "Repopulate"
 msgstr "重新填充"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
 msgstr ""
 
@@ -4361,7 +4381,7 @@ msgstr "重置播放計數"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:188
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4402,7 +4422,7 @@ msgstr ""
 msgid "Rock"
 msgstr "搖滾"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:401
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4629,11 +4649,11 @@ msgstr "倒帶"
 msgid "Seek forward"
 msgstr "快轉"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track by a relative amount"
 msgstr "藉由相對數字尋找現在播放的曲目"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:184
 msgid "Seek the currently playing track to an absolute position"
 msgstr "藉由絕對位置尋找現在播放的曲目"
 
@@ -4714,7 +4734,7 @@ msgstr "設定 %1 到「%2」…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:179
 msgid "Set the volume to <value> percent"
 msgstr "設定音量到百分之<value>"
 
@@ -4722,7 +4742,7 @@ msgstr "設定音量到百分之<value>"
 msgid "Set value for all selected tracks..."
 msgstr "為所有選擇的歌曲設定音量…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:357
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Settings"
 msgstr "設定"
 
@@ -4915,7 +4935,7 @@ msgstr ""
 msgid "Ska"
 msgstr "強節奏流行音樂"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:177
 msgid "Skip backwards in playlist"
 msgstr "跳至播放清單開頭"
 
@@ -4927,7 +4947,7 @@ msgstr "略過計數"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:178
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
@@ -5032,7 +5052,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:173
 msgid "Start the playlist currently playing"
 msgstr "開始播放目前播放清單"
 
@@ -5070,11 +5090,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "在這首歌之後停止"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Stop playback"
 msgstr "停止播放"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:176
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5318,6 +5338,10 @@ msgstr "這張專輯中不提供所要求的格式"
 msgid "This can be changed later through the preferences"
 msgstr ""
 
+#: networkremote/streaming/rendererregistry.cpp:168
+msgid "This computer"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
@@ -5386,7 +5410,7 @@ msgstr "切換佇列狀態"
 msgid "Toggle scrobbling"
 msgstr "切換 scrobbling"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:197
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "調整漂亮的螢幕顯示的可見度"
 
@@ -5485,7 +5509,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5585,7 +5609,7 @@ msgstr "更新 %1%…"
 msgid "Updating library"
 msgstr "正在更新媒體櫃"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "Usage"
 msgstr "使用"
 
@@ -5621,7 +5645,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "在通知中使用自訂訊息"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
+#: ../bin/src/ui_networkremotesettingspage.h:362
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5951,7 +5975,7 @@ msgstr "您已登入。"
 msgid "You can change the way the songs in the library are organised."
 msgstr "您可以改變媒體櫃中歌曲的整理方法。"
 
-#: ui/networkremotesettingspage.cpp:165
+#: ui/networkremotesettingspage.cpp:168
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6074,7 +6098,7 @@ msgstr "最大優先"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6084,7 +6108,7 @@ msgstr ""
 msgid "contains"
 msgstr "包含"
 
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
 msgstr ""
 
@@ -6185,13 +6209,13 @@ msgstr "最舊優先"
 msgid "on"
 msgstr "在"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "options"
 msgstr "選項"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
-#: ../bin/src/ui_networkremotesettingspage.h:401
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:410
+#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
 msgstr ""
 

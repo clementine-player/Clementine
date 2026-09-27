@@ -79,7 +79,7 @@ msgstr "ثانية"
 msgid " songs"
 msgstr "المقاطع"
 
-#: ui/networkremotesettingspage.cpp:203
+#: ui/networkremotesettingspage.cpp:206
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -88,6 +88,16 @@ msgstr ""
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 ألبومات"
+
+#: networkremote/streaming/remoteengine.cpp:246
+#, qt-format
+msgid "%1 can't play this track: %2"
+msgstr ""
+
+#: networkremote/streaming/remoteengine.cpp:453
+#, qt-format
+msgid "%1 couldn't play this track"
+msgstr ""
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -402,7 +412,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>النطاقات تبدأ بـ %، مثلا: %artist %album %title </p>\n<p>إن استخدمت معقوفات للإحاطة بقطعة نص تحتوي على نطاق ما، سيتم إخفاء تلك القطعة النصية إن كان النطاق فارغا.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -751,7 +761,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "All addresses"
 msgstr ""
 
@@ -780,17 +790,21 @@ msgstr "كل المترجمين"
 msgid "All tracks"
 msgstr "كل المقطوعات"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:388
 msgid "Allow downloads"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "اسمح بترميز mid/side"
+
+#: ../bin/src/ui_networkremotesettingspage.h:392
+msgid "Allow playing on remote devices"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -836,7 +850,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "المظهر"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:192
 msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
@@ -891,7 +905,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "صيغة الصوت"
@@ -1125,7 +1139,7 @@ msgstr "تغيير نمط الخلط"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:198
 msgid "Change the language"
 msgstr "تغيير اللغة"
 
@@ -1350,7 +1364,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:201
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
@@ -1477,11 +1491,11 @@ msgstr "حول جميع المقاطع"
 msgid "Convert any music that the device can't play"
 msgstr "حول جميع المقاطع التي لا يستطيع الجهاز تشغيلها"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:387
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1613,7 +1627,7 @@ msgstr "الغلاف محدد من %1"
 msgid "Covers from %1"
 msgstr "الأغلفة من %1"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:191
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1696,11 +1710,11 @@ msgstr "الأيام"
 msgid "De&fault"
 msgstr "&افتراضي"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:181
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1760,7 +1774,7 @@ msgstr "احذف ملف الإعدادات"
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:203
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1881,7 +1895,7 @@ msgstr "إرسال غير مستمر"
 msgid "Display options"
 msgstr "خيارات العرض"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Display the on-screen-display"
 msgstr "أظهر قائمة الشاشة"
 
@@ -1980,15 +1994,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:412
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2158,8 +2172,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "أدخل اسما جديدا لهذه القائمة"
 
-#: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2201,11 +2215,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "معدل الصوت"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:199
 msgid "Equivalent to --log-levels *:1"
 msgstr "يكافئ --log-levels *:1"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:200
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
@@ -2492,7 +2506,7 @@ msgstr ""
 msgid "Files"
 msgstr "الملفات"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Files root folder"
 msgstr ""
 
@@ -2878,11 +2892,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:180
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3067,6 +3081,12 @@ msgstr ""
 msgid "Length"
 msgstr "المدة"
 
+#: ../bin/src/ui_networkremotesettingspage.h:390
+msgid ""
+"Let a connected device act as the speaker: Clementine keeps the playlist and"
+" streams the audio to it."
+msgstr ""
+
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
@@ -3092,7 +3112,7 @@ msgstr ""
 msgid "Limits"
 msgstr "الحدود"
 
-#: ../bin/src/ui_networkremotesettingspage.h:374
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Listen on"
 msgstr ""
 
@@ -3165,7 +3185,7 @@ msgstr "جاري تحميل معلومات المقاطع"
 msgid "Loading..."
 msgstr "جاري التحميل"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:193
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "تحميل ملفات/روابط، استبدال قائمة التشغيل الحالية"
 
@@ -3418,7 +3438,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "مكتبة الصوتيات"
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3449,7 +3469,7 @@ msgstr "Narrow band (NB)"
 msgid "Network Proxy"
 msgstr "شبكة بروكسي"
 
-#: ../bin/src/ui_networkremotesettingspage.h:355
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Network Remote"
 msgstr ""
 
@@ -3649,7 +3669,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3657,7 +3677,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3737,7 +3757,7 @@ msgid "Optimize for quality"
 msgstr "تحسين لجودة أفضل"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:389
+#: ../bin/src/ui_networkremotesettingspage.h:399
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "الإعدادات..."
@@ -3781,7 +3801,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Other options"
 msgstr "خيارات اخرى"
 
@@ -3838,7 +3858,7 @@ msgstr "كلمة السر"
 msgid "Pause"
 msgstr "إيقاف مؤقت"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Pause playback"
 msgstr "أوقف التشغيل مؤقتا"
 
@@ -3880,11 +3900,11 @@ msgstr "تشغيل"
 msgid "Play count"
 msgstr "عدد مرات التشغيل"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:195
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:174
 msgid "Play if stopped, pause if playing"
 msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 
@@ -3901,7 +3921,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:194
 msgid "Play the <n>th track in the playlist"
 msgstr "شغيل المقطع رقم <n> في قائمة التشغيل"
 
@@ -3913,7 +3933,7 @@ msgstr "تشغيل/إيقاف"
 msgid "Playback"
 msgstr "التشغيل"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:172
 msgid "Player options"
 msgstr "خيارات المشغل"
 
@@ -3927,7 +3947,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "قائمة تشغيل منتهية"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:190
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "خيارات قائمة التشغيل"
@@ -3987,7 +4007,7 @@ msgid "Popup duration"
 msgstr "مدة نافذة الانبثاق"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:358
+#: ../bin/src/ui_networkremotesettingspage.h:364
 msgid "Port"
 msgstr "المنفذ"
 
@@ -4065,7 +4085,7 @@ msgstr "السابق"
 msgid "Previous track"
 msgstr "المقطع السابق"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:202
 msgid "Print out version information"
 msgstr "اطبع معلومات النسخة"
 
@@ -4102,7 +4122,7 @@ msgstr "ضع المقاطع في ترتيب عشوائي"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:204
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4350,7 +4370,7 @@ msgstr "نمط Replay Gain"
 msgid "Repopulate"
 msgstr "أعد ملأه من جديد"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
 msgstr ""
 
@@ -4366,7 +4386,7 @@ msgstr "صفّر عدد مرات التشغيل"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:188
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4407,7 +4427,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:401
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4634,11 +4654,11 @@ msgstr "ابحث إلى الخلف"
 msgid "Seek forward"
 msgstr "ابحث إلى الأمام"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track by a relative amount"
 msgstr "انتقل في المقطع الحالي إلى موضع نسبي"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:184
 msgid "Seek the currently playing track to an absolute position"
 msgstr "انتقل في المقطع الحالي إلى موضع محدد"
 
@@ -4719,7 +4739,7 @@ msgstr "غير %1 إلى %2"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:179
 msgid "Set the volume to <value> percent"
 msgstr "اجعل درجة الصوت بنسبة <value>"
 
@@ -4727,7 +4747,7 @@ msgstr "اجعل درجة الصوت بنسبة <value>"
 msgid "Set value for all selected tracks..."
 msgstr "اجعل هذه القيمة لجميع المقاطع المختارة"
 
-#: ../bin/src/ui_networkremotesettingspage.h:357
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -4920,7 +4940,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:177
 msgid "Skip backwards in playlist"
 msgstr "تجاهل السابق في قائمة التشغيل"
 
@@ -4932,7 +4952,7 @@ msgstr "تخطى العد"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:178
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
@@ -5037,7 +5057,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:173
 msgid "Start the playlist currently playing"
 msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 
@@ -5075,11 +5095,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Stop playback"
 msgstr "أوقف التشغيل"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:176
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5323,6 +5343,10 @@ msgstr "هذا الألبوم غير متوفر بالصيغة المطلوبة"
 msgid "This can be changed later through the preferences"
 msgstr ""
 
+#: networkremote/streaming/rendererregistry.cpp:168
+msgid "This computer"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
@@ -5391,7 +5415,7 @@ msgstr "بدّل حالة لائحة الانتظار"
 msgid "Toggle scrobbling"
 msgstr "بدّل حالة نقل المعلومات المستمع إليها"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:197
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "بدّل حالة الإظهار على الشاشة"
 
@@ -5490,7 +5514,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "URL(s)"
 msgstr "رابط(روابط)"
 
@@ -5590,7 +5614,7 @@ msgstr "جاري تحديث %1%"
 msgid "Updating library"
 msgstr "تحديث المكتبة"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "Usage"
 msgstr "الإستخدام"
 
@@ -5626,7 +5650,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "استخدم رسالة مخصصة للتنبيهات"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
+#: ../bin/src/ui_networkremotesettingspage.h:362
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5956,7 +5980,7 @@ msgstr "أنت متصل."
 msgid "You can change the way the songs in the library are organised."
 msgstr "يمكنك تغيير طريقة ترتيب المقاطع في المكتبة"
 
-#: ui/networkremotesettingspage.cpp:165
+#: ui/networkremotesettingspage.cpp:168
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6079,7 +6103,7 @@ msgstr "الأكبر أولا"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6089,7 +6113,7 @@ msgstr ""
 msgid "contains"
 msgstr "يحتوي"
 
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
 msgstr ""
 
@@ -6190,13 +6214,13 @@ msgstr "الأقدم أولا"
 msgid "on"
 msgstr "مفعل"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "options"
 msgstr "الخيارات"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
-#: ../bin/src/ui_networkremotesettingspage.h:401
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:410
+#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
 msgstr ""
 

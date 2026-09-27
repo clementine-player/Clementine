@@ -99,7 +99,7 @@ msgstr " секунд"
 msgid " songs"
 msgstr " песен"
 
-#: ui/networkremotesettingspage.cpp:203
+#: ui/networkremotesettingspage.cpp:206
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (в настоящее время недоступно)"
@@ -108,6 +108,16 @@ msgstr "%1 (в настоящее время недоступно)"
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 альбомов"
+
+#: networkremote/streaming/remoteengine.cpp:246
+#, qt-format
+msgid "%1 can't play this track: %2"
+msgstr "%1 не может воспроизвести эту дорожку: %2"
+
+#: networkremote/streaming/remoteengine.cpp:453
+#, qt-format
+msgid "%1 couldn't play this track"
+msgstr "%1 не удалось воспроизвести эту дорожку"
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -422,7 +432,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Токены начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не будет видна при пустом токене.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:367
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клиент сможет подключиться, только если был введён правильный код."
 
@@ -771,7 +781,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Слава Гипножабе!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "All addresses"
 msgstr "Все адреса"
 
@@ -800,17 +810,21 @@ msgstr "Всем переводчикам"
 msgid "All tracks"
 msgstr "Все треки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "Allow a client to download music from this computer."
 msgstr "Позволяет клиенту скачивать музыку с этого компьютера."
 
-#: ../bin/src/ui_networkremotesettingspage.h:382
+#: ../bin/src/ui_networkremotesettingspage.h:388
 msgid "Allow downloads"
 msgstr "Разрешить загрузки"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "Разрешить mid/side кодирование"
+
+#: ../bin/src/ui_networkremotesettingspage.h:392
+msgid "Allow playing on remote devices"
+msgstr "Разрешить воспроизведение на удалённых устройствах"
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -856,7 +870,7 @@ msgstr "Сердитый"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:192
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/адреса в плейлист"
 
@@ -911,7 +925,7 @@ msgid "As&k when saving"
 msgstr "Сп&рашивать при сохранении"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Формат аудио"
@@ -1145,7 +1159,7 @@ msgstr "Сменить режим перемешивания"
 msgid "Change the currently playing song"
 msgstr "Сменить активный трек"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:198
 msgid "Change the language"
 msgstr "Сменить язык"
 
@@ -1370,7 +1384,7 @@ msgstr "Ко&мпозитор"
 msgid "Colors"
 msgstr "Цвета"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:201
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделённый запятыми список «класс:уровень», где уровень от 0 до 3"
 
@@ -1497,11 +1511,11 @@ msgstr "Конвертировать всю музыку"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертировать всю музыку, которую не может проигрывать носитель"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:395
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Конвертировать аудиофайлы, сжатые без потери качества, перед отправкой их на удалённое устройство."
 
-#: ../bin/src/ui_networkremotesettingspage.h:387
+#: ../bin/src/ui_networkremotesettingspage.h:397
 msgid "Convert lossless files"
 msgstr "Конвертировать файлы, сжатые без потери качества"
 
@@ -1633,7 +1647,7 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:191
 msgid "Create a new playlist with files/URLs"
 msgstr "Создать новый плейлист с файлами/адресами"
 
@@ -1716,11 +1730,11 @@ msgstr "дн."
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:181
 msgid "Decrease the volume by 4 percent"
 msgstr "Уменьшить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by <value> percent"
 msgstr "Уменьшить громкость на <value> процентов"
 
@@ -1780,7 +1794,7 @@ msgstr "Удалить предустановку"
 msgid "Delete smart playlist"
 msgstr "Удалить умный плейлист"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:203
 msgid "Delete the currently playing song"
 msgstr "Удалить активный трек"
 
@@ -1901,7 +1915,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки вида"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -2000,15 +2014,15 @@ msgstr "Загружать новые эпизоды автоматически"
 msgid "Download queued"
 msgstr "Загрузка добавлена в очередь"
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Download settings"
 msgstr "Настройки загрузки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:412
 msgid "Download the original Android app"
 msgstr "Загрузите оригинальное приложение для Android"
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Загрузите приложение удалённого доступа для ПК, Android и iOS"
 
@@ -2178,8 +2192,8 @@ msgstr "Введите имя файла для экспортируемых о�
 msgid "Enter a new name for this playlist"
 msgstr "Введите новое имя для этого плейлиста"
 
-#: ../bin/src/ui_networkremotesettingspage.h:372
-#: ../bin/src/ui_networkremotesettingspage.h:377
+#: ../bin/src/ui_networkremotesettingspage.h:378
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Введите один из этих адресов в приложении, чтобы подключиться к Clementine."
 
@@ -2221,11 +2235,11 @@ msgstr "Информация об эпизоде"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:199
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:200
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
@@ -2512,7 +2526,7 @@ msgstr "Предпросмотр имени файла"
 msgid "Files"
 msgstr "Файлы"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Files root folder"
 msgstr "Файлы корневой папки"
 
@@ -2898,11 +2912,11 @@ msgstr "Несовместимая версия протокола Subsonic REST
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Неполная конфигурация, пожалуйста, убедитесь, что все поля заполнены."
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:180
 msgid "Increase the volume by 4 percent"
 msgstr "Увеличить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличить громкость на <value> процентов"
 
@@ -3087,6 +3101,12 @@ msgstr "Левый канал"
 msgid "Length"
 msgstr "Длина"
 
+#: ../bin/src/ui_networkremotesettingspage.h:390
+msgid ""
+"Let a connected device act as the speaker: Clementine keeps the playlist and"
+" streams the audio to it."
+msgstr "Разрешить подключённому устройству выступать в роли динамика: Clementine сохраняет плейлист и передаёт на него аудиопоток."
+
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
@@ -3112,7 +3132,7 @@ msgstr "Светлая"
 msgid "Limits"
 msgstr "Ограничения"
 
-#: ../bin/src/ui_networkremotesettingspage.h:374
+#: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Listen on"
 msgstr "Прослушивать"
 
@@ -3185,7 +3205,7 @@ msgstr "Загружаются сведения о композициях"
 msgid "Loading..."
 msgstr "Загружается…"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:193
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего плейлиста"
 
@@ -3438,7 +3458,7 @@ msgstr "Музыка"
 msgid "Music Library"
 msgstr "Фонотека"
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Music extensions remotely visible"
 msgstr "Расширения музыки, видимые удалённо"
 
@@ -3469,7 +3489,7 @@ msgstr "Узкая полоса пропускания (NB)"
 msgid "Network Proxy"
 msgstr "Прокси-сервер"
 
-#: ../bin/src/ui_networkremotesettingspage.h:355
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Network Remote"
 msgstr "Удалённый доступ"
 
@@ -3669,7 +3689,7 @@ msgstr "Вкл."
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:360
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3677,7 +3697,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Разрешать подключение с IP адресов из диапазонов:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:365
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Only allow connections from the local network"
 msgstr "Разрешать соединения только из локальной сети"
 
@@ -3757,7 +3777,7 @@ msgid "Optimize for quality"
 msgstr "Оптимизировать по качеству"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:389
+#: ../bin/src/ui_networkremotesettingspage.h:399
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Настройки…"
@@ -3801,7 +3821,7 @@ msgstr "Поддержка года выхода оригинала"
 msgid "Other"
 msgstr "Прочее"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:196
 msgid "Other options"
 msgstr "Прочие настройки"
 
@@ -3858,7 +3878,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Пауза"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -3900,11 +3920,11 @@ msgstr "Играть"
 msgid "Play count"
 msgstr "Разы"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:195
 msgid "Play given playlist"
 msgstr "Проиграть данный плейлист"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:174
 msgid "Play if stopped, pause if playing"
 msgstr "Играть если остановлено, пауза если воспроизводится"
 
@@ -3921,7 +3941,7 @@ msgstr "Играть следующий"
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:194
 msgid "Play the <n>th track in the playlist"
 msgstr "Играть <n> трек в плейлисте"
 
@@ -3933,7 +3953,7 @@ msgstr "Играть/пауза"
 msgid "Playback"
 msgstr "Проигрывание"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:172
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
@@ -3947,7 +3967,7 @@ msgstr "Плейлист"
 msgid "Playlist finished"
 msgstr "Плейлист закончился"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:190
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Настройки плейлиста"
@@ -4007,7 +4027,7 @@ msgid "Popup duration"
 msgstr "Длительность отображения"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:358
+#: ../bin/src/ui_networkremotesettingspage.h:364
 msgid "Port"
 msgstr "Порт"
 
@@ -4085,7 +4105,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущий трек"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:202
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -4122,7 +4142,7 @@ msgstr "Перемешать порядок песен"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:204
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4370,7 +4390,7 @@ msgstr "Режим нормализации"
 msgid "Repopulate"
 msgstr "Пересоздать"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
 msgstr "Требовать код аутентификации"
 
@@ -4386,7 +4406,7 @@ msgstr "Сбросить счётчики прослушивания"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапуск песни, при повторном нажатии — переход к предыдущей"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:188
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Перезапустить трек или проиграть предыдущий, если не прошло 8 секунд от начала."
@@ -4427,7 +4447,7 @@ msgstr "Извлечь данные с аудио-CD"
 msgid "Rock"
 msgstr "Рок"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:401
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Корневая папка, которая будет видна через сетевой удалённый доступ"
 
@@ -4654,11 +4674,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперёд"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Перемотать активный трек на относительную позицию"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:184
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать активный трек на абсолютную позицию"
 
@@ -4739,7 +4759,7 @@ msgstr "Установить %1 в «%2»…"
 msgid "Set target rate"
 msgstr "Указать целевую частоту"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:179
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -4747,7 +4767,7 @@ msgstr "Установить громкость в <value> процентов"
 msgid "Set value for all selected tracks..."
 msgstr "Установить значение для всех выделенных треков…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:357
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Settings"
 msgstr "Настройки"
 
@@ -4940,7 +4960,7 @@ msgstr "Размер:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:177
 msgid "Skip backwards in playlist"
 msgstr "Перейти назад в плейлисте"
 
@@ -4952,7 +4972,7 @@ msgstr "Пропуски"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Пропускать файлы с этими расширениями (через запятые, регистр не учитывается)"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:178
 msgid "Skip forwards in playlist"
 msgstr "Перейти вперёд в плейлисте"
 
@@ -5057,7 +5077,7 @@ msgstr "Оценённые альбомы"
 msgid "Start ripping"
 msgstr "Начать извлечение"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:173
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас плейлист"
 
@@ -5095,11 +5115,11 @@ msgstr "Стоп после каждого трека"
 msgid "Stop after this track"
 msgstr "Стоп после этого трека"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:175
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:176
 msgid "Stop playback after current track"
 msgstr "Остановить после текущего трека"
 
@@ -5343,6 +5363,10 @@ msgstr "Этот альбом не доступен в требуемом фор
 msgid "This can be changed later through the preferences"
 msgstr "В дальнейшем это можно изменить в настройках"
 
+#: networkremote/streaming/rendererregistry.cpp:168
+msgid "This computer"
+msgstr "Этот компьютер"
+
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
@@ -5411,7 +5435,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл./откл. скробблинг"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:197
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость модного экранного меню"
 
@@ -5510,7 +5534,7 @@ msgstr "Адрес"
 msgid "URL of its Logo:"
 msgstr "Адрес логотипа:"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "URL(s)"
 msgstr "Ссылки"
 
@@ -5610,7 +5634,7 @@ msgstr "Обновление %1%…"
 msgid "Updating library"
 msgstr "Обновление фонотеки"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "Usage"
 msgstr "Использование"
 
@@ -5646,7 +5670,7 @@ msgstr "Использовать собственный набор цветов"
 msgid "Use a custom message for notifications"
 msgstr "Использовать собственное сообщение для уведомлений"
 
-#: ../bin/src/ui_networkremotesettingspage.h:356
+#: ../bin/src/ui_networkremotesettingspage.h:362
 msgid "Use a network remote control"
 msgstr "Использовать удалённое управление по сети"
 
@@ -5976,7 +6000,7 @@ msgstr "Вы вошли в систему."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Вы можете изменить способ организации композиций в фонотеке."
 
-#: ui/networkremotesettingspage.cpp:165
+#: ui/networkremotesettingspage.cpp:168
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6099,7 +6123,7 @@ msgstr "наибольшие сначала"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6109,7 +6133,7 @@ msgstr "разделённый запятыми список разрешённ�
 msgid "contains"
 msgstr "содержит"
 
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
 msgstr "desktop_remote"
 
@@ -6210,13 +6234,13 @@ msgstr "сначала самые старые"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:171
 msgid "options"
 msgstr "параметры"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
-#: ../bin/src/ui_networkremotesettingspage.h:401
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:410
+#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
 msgstr "или сканируйте QR-код: "
 
