@@ -332,7 +332,7 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
       playlist_id =
           app_->playlist_manager()->New(request.new_playlist_name().c_str());
 
-    emit InsertSongs(request.playlist_id(), songs, request.position(),
+    emit InsertSongs(playlist_id, songs, request.position(),
                      request.play_now(), request.enqueue());
   }
 }
