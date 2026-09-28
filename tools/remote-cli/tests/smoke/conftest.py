@@ -76,11 +76,11 @@ def _run(root: Path, streaming: bool) -> Iterator[Clementine]:
 
 @pytest.fixture
 def clementine(tmp_path: Path) -> Iterator[Clementine]:
-    """Clementine with --experimental-remote-streaming."""
+    """Clementine with playing on remote devices allowed."""
     yield from _run(tmp_path / "profile", streaming=True)
 
 
 @pytest.fixture
 def clementine_without_streaming(tmp_path: Path) -> Iterator[Clementine]:
-    """Clementine as it runs without the flag, with the setting still on."""
+    """Clementine with playing on remote devices not allowed."""
     yield from _run(tmp_path / "profile", streaming=False)

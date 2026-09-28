@@ -48,8 +48,7 @@ def has_gst_element(name: str) -> bool:
 class Clementine:
     """A Clementine with a throwaway profile, listening on 127.0.0.1 only.
 
-    Remote streaming is allowed in its settings. It's only turned on with
-    |streaming|, which passes --experimental-remote-streaming.
+    Remote streaming is allowed in its settings if |streaming| is set.
     """
 
     def __init__(self, binary: Path, root: Path, streaming: bool = True) -> None:
@@ -73,7 +72,7 @@ class Clementine:
             f"""[NetworkRemote]
 use_remote=true
 port={self.port}
-allow_streaming=true
+allow_streaming={str(self.streaming).lower()}
 only_non_public_ip=true
 listen_on_all_addresses=false
 listen_addresses={HOST}
@@ -96,11 +95,8 @@ sink={sink}
             QT_QPA_PLATFORM="offscreen",
             DBUS_SESSION_BUS_ADDRESS="disabled:",
         )
-        args = [str(self.binary), "--log-levels", "*:3"]
-        if self.streaming:
-            args.append("--experimental-remote-streaming")
         self.process = subprocess.Popen(
-            args,
+            [str(self.binary), "--log-levels", "*:3"],
             env=env,
             stdout=self.log_path.open("wb"),
             stderr=subprocess.STDOUT,
