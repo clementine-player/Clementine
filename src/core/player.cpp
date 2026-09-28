@@ -54,10 +54,8 @@ const char* Player::kSettingsGroup = "Player";
 namespace {
 
 EngineBase* CreateEngine(Application* app) {
-  GstEngine* local = new GstEngine(app);
   // Remote playback routes the engine between outputs; see EngineRouter.
-  if (Application::RemoteStreamingEnabled()) return new EngineRouter(local);
-  return local;
+  return new EngineRouter(new GstEngine(app));
 }
 
 }  // namespace
