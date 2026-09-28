@@ -92,12 +92,12 @@ msgstr "%1 àlbums"
 #: networkremote/streaming/remoteengine.cpp:246
 #, qt-format
 msgid "%1 can't play this track: %2"
-msgstr ""
+msgstr "%1 no pot reproduir aquesta peça: %2"
 
 #: networkremote/streaming/remoteengine.cpp:453
 #, qt-format
 msgid "%1 couldn't play this track"
-msgstr ""
+msgstr "%1 no ha pogut reproduir aquesta peça"
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -128,7 +128,7 @@ msgstr "%1 llistes de reproducció (%2)"
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
 msgid "%1 refused the sign-in. Try signing out and in again."
-msgstr ""
+msgstr "%1 ha refusat l'inici de sessió. Intenteu sortir i iniciar sessió una altra vegada."
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -804,7 +804,7 @@ msgstr "Permet la codificació centre/costats"
 
 #: ../bin/src/ui_networkremotesettingspage.h:392
 msgid "Allow playing on remote devices"
-msgstr ""
+msgstr "Permet reproduir en dispositius remots"
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -1307,7 +1307,7 @@ msgstr "El Clementine cercarà a:"
 msgid ""
 "Clementine will open plex.tv in your browser. Sign in there and allow "
 "Clementine to access your account."
-msgstr ""
+msgstr "El Clementine obrirà plex.tv al navegador. Inicieu-hi sessió i permeteu al Clementine que pugui accedir al vostre compte."
 
 #: library/libraryview.cpp:363
 msgid "Click here to add some music"
@@ -1559,7 +1559,7 @@ msgstr "No s’ha pogut crear la llista de reproducció"
 #: internet/plex/plexauthenticator.cpp:163
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
-msgstr ""
+msgstr "No s'han pogut obtenir els vostres servidors Plex: %1"
 
 #: transcoder/transcoder.cpp:476
 #, qt-format
@@ -1585,12 +1585,12 @@ msgstr "No s’ha pogut obrir el fitxer de sortida %1"
 msgid ""
 "Couldn't reach %1. Check that the server is running and that this computer "
 "can reach it."
-msgstr ""
+msgstr "No s'ha contactat amb %1. Comproveu que el servidor s'executa correctament i que aquest ordinador pot comunicar-s'hi."
 
 #: internet/plex/plexauthenticator.cpp:89
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
-msgstr ""
+msgstr "No s'ha pogut contactar amb plex.tv: %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -2175,7 +2175,7 @@ msgstr "Introduïu un nom per aquesta llista de reproducció"
 #: ../bin/src/ui_networkremotesettingspage.h:378
 #: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "Enter one of these addresses in the app to connect to Clementine."
-msgstr ""
+msgstr "Escriviu una d'aquestes adreces a l'aplicació per a connectar el Clementine."
 
 #: ../bin/src/ui_globalsearchview.h:206
 msgid ""
@@ -3085,7 +3085,7 @@ msgstr "Durada"
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
-msgstr ""
+msgstr "Permet que un dispositiu connectat faci d'altaveu. El Clementine manté la llista de reproducció i hi emet l'àudio."
 
 #: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
 #: ../bin/src/ui_seafilesettingspage.h:174
@@ -3981,7 +3981,7 @@ msgstr "Plex Media Server"
 msgid ""
 "Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
 "then try again."
-msgstr ""
+msgstr "El Plex no ha confirmat que s'hagi iniciat la sessió. Aproveu el Clementine des del navegador i torneu-ho a intentar."
 
 #: ../bin/src/ui_podcastinfodialog.h:91
 msgid "Podcast Information"
@@ -4126,7 +4126,7 @@ msgstr "Qt"
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
-msgstr ""
+msgstr "Les regles d'inici de sessió del Qt poden desactivar els missatges de depuració. Amb QT_LOGGING_RULES=clementine.debug=true es tornen a activar."
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -5345,7 +5345,7 @@ msgstr "Aquesta opció es pot modificar més tard a Preferències"
 
 #: networkremote/streaming/rendererregistry.cpp:168
 msgid "This computer"
-msgstr ""
+msgstr "Aquest ordinador"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5600,7 +5600,7 @@ msgstr "Actualitza aquest pòdcast"
 msgid "Updating"
 msgstr "S'actualitza"
 
-#: library/librarywatcher.cpp:103
+#: library/librarywatcher.cpp:109
 #, qt-format
 msgid "Updating %1"
 msgstr "S’està actualitzant %1"
@@ -5610,7 +5610,7 @@ msgstr "S’està actualitzant %1"
 msgid "Updating %1%..."
 msgstr "S’està actualitzant %1%…"
 
-#: library/librarywatcher.cpp:101
+#: library/librarywatcher.cpp:107
 msgid "Updating library"
 msgstr "S’està actualitzant la col·lecció"
 
@@ -6037,7 +6037,7 @@ msgstr "L'inici de sessió al Plex ha caducat. Inicieu sessió una altra vegada.
 msgid ""
 "Your browser should now show plex.tv. If it asks for a code, enter "
 "<b>%1</b>."
-msgstr ""
+msgstr "El vostre navegador hauria de mostrar ara el plex.tv. Si demana un codi, escriviu <b>%1</b>."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
