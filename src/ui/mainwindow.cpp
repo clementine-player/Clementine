@@ -1397,17 +1397,11 @@ void MainWindow::ResumePlaybackPosition() {
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
-  if (!index.isValid()) return;
+  // The index can be in any playlist, not just the one shown: a network remote
+  // adds songs to other playlists and asks to play them.
+  const int row = app_->playlist_manager()->SetActiveToPlaylistOf(index);
+  if (row == -1) return;
 
-  int row = index.row();
-  if (index.model() == app_->playlist_manager()->current()->proxy()) {
-    // The index was in the proxy model (might've been filtered), so we need
-    // to get the actual row in the source model.
-    row =
-        app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
-  }
-
-  app_->playlist_manager()->SetActiveToCurrent();
   app_->player()->PlayAt(row, Engine::Manual, true);
 }
 

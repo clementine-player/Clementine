@@ -157,6 +157,9 @@ class PlaylistManager : public PlaylistManagerInterface {
   void RemoveDeletedSongs();
   // Returns true if the playlist is open
   bool IsPlaylistOpen(int id);
+  // Makes the playlist that index is in (in its model or its proxy) the active
+  // one, and returns the index's row in it; -1 if it isn't in a playlist.
+  int SetActiveToPlaylistOf(const QModelIndex& index);
 
   // Returns a pretty automatic name for playlist created from the given list of
   // songs.

@@ -287,15 +287,15 @@ int RunPlayAndExit(Application* app, const CommandlineOptions& options) {
 
   // InsertUrls(..., play_now=true) below only emits PlayRequested(index) -
   // MainWindow::PlayIndex() is normally what turns that into an actual
-  // Player::PlayAt() call, but there's no MainWindow here, so replicate its
-  // relevant half directly.
-  QObject::connect(app->playlist_manager(),
-                   &PlaylistManagerInterface::PlayRequested,
-                   [app](const QModelIndex& index) {
-                     if (!index.isValid()) return;
-                     app->playlist_manager()->SetActiveToCurrent();
-                     app->player()->PlayAt(index.row(), Engine::Manual, true);
-                   });
+  // Player::PlayAt() call, but there's no MainWindow here, so do the same
+  // directly.
+  QObject::connect(
+      app->playlist_manager(), &PlaylistManagerInterface::PlayRequested,
+      [app](const QModelIndex& index) {
+        const int row = app->playlist_manager()->SetActiveToPlaylistOf(index);
+        if (row == -1) return;
+        app->player()->PlayAt(row, Engine::Manual, true);
+      });
 
   QEventLoop loop;
   int result = 2;

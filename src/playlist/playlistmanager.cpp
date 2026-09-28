@@ -22,6 +22,7 @@
 #include <QFuture>
 #include <QMessageBox>
 #include <QRegularExpression>
+#include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
 #include <QtDebug>
 
@@ -100,6 +101,29 @@ QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   }
 
   return result;
+}
+
+int PlaylistManager::SetActiveToPlaylistOf(const QModelIndex& index) {
+  if (!index.isValid()) return -1;
+
+  for (const Data& data : playlists_) {
+    int row;
+    if (index.model() == data.p) {
+      row = index.row();
+    } else if (index.model() == data.p->proxy()) {
+      // The index was in the proxy model (might've been filtered), so we need
+      // to get the actual row in the source model.
+      row = data.p->proxy()->mapToSource(index).row();
+    } else {
+      continue;
+    }
+
+    // Only when it changes: ActiveChanged makes the network remote send every
+    // playlist to its clients again.
+    if (data.p->id() != active_id()) SetActivePlaylist(data.p->id());
+    return row;
+  }
+  return -1;
 }
 
 QItemSelection PlaylistManager::selection(int id) const {
