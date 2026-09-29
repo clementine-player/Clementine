@@ -76,7 +76,7 @@ msgstr " sekuntia"
 msgid " songs"
 msgstr " kappaletta"
 
-#: ui/networkremotesettingspage.cpp:206
+#: ui/networkremotesettingspage.cpp:204
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (ei nyt saatavilla)"
@@ -175,7 +175,7 @@ msgstr "%1: Wiimotedev-moduuli"
 msgid "%L1 other listeners"
 msgstr "%L1 muuta kuuntelijaa"
 
-#: playlist/playlistmanager.cpp:439
+#: playlist/playlistmanager.cpp:463
 #, qt-format
 msgid "%L1 selected of"
 msgstr "Valittuna %L1 /"
@@ -185,7 +185,7 @@ msgstr "Valittuna %L1 /"
 msgid "%L1 total plays"
 msgstr "%L1 soittokertaa"
 
-#: playlist/playlistmanager.cpp:445
+#: playlist/playlistmanager.cpp:469
 #, qt-format
 msgid "%L1 tracks"
 msgstr "%L1 kappaletta"
@@ -321,7 +321,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 päivä"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:469 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 kappale"
 
@@ -534,7 +534,7 @@ msgstr "Lisää toinen suoratoisto..."
 msgid "Add directory..."
 msgstr "Lisää kansio..."
 
-#: ui/mainwindow.cpp:2151
+#: ui/mainwindow.cpp:2145
 msgid "Add file"
 msgstr "Lisää tiedosto"
 
@@ -558,7 +558,7 @@ msgstr "Lisää tiedostoja muunnettavaksi"
 msgid "Add files..."
 msgstr "Lisää tiedostoja..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2178
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2172
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Lisää kansio"
@@ -629,7 +629,7 @@ msgstr "Lisää esittäjä-tunniste"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
-msgstr "Lisää kappaleen toistolaskuri"
+msgstr "Lisää soittolaskuriin"
 
 #: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
@@ -655,7 +655,7 @@ msgstr "Lisää kappaleen vuositunniste"
 msgid "Add stream..."
 msgstr "Lisää suoratoisto..."
 
-#: ui/mainwindow.cpp:1952
+#: ui/mainwindow.cpp:1946
 msgid "Add to another playlist"
 msgstr "Lisää toiseen soittolistaan"
 
@@ -818,7 +818,7 @@ msgstr "Näytä &pääikkuna aina"
 #: ../bin/src/ui_behavioursettingspage.h:392
 #: ../bin/src/ui_behavioursettingspage.h:406
 msgid "Always start playing"
-msgstr "Aloita aina toisto"
+msgstr "Aloita soittaminen aina"
 
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
@@ -847,7 +847,7 @@ msgstr "Vihainen"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:187
 msgid "Append files/URLs to the playlist"
 msgstr "Lisää tiedostoja/verkko-osoitteita soittolistalle"
 
@@ -1134,9 +1134,9 @@ msgstr "Vaihda sekoituksen tilaa"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
-msgstr "Vaihda toistettavaa kappaletta"
+msgstr "Vaihda soitettavaa kappaletta"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:193
 msgid "Change the language"
 msgstr "Vaihda kieltä"
 
@@ -1361,7 +1361,7 @@ msgstr "S&äveltäjä"
 msgid "Colors"
 msgstr "Värit"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:196
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Pilkuin erotettu lista luokka:taso -määritteitä, jossa taso on väliltä 0-3"
 
@@ -1549,7 +1549,7 @@ msgstr "Tietoja ei saatu haettua"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Last.fm kirjautuminen ei onnistunut. Yritä uudelleen."
 
-#: playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
 msgstr "Soittolistan luominen epäonnistui"
 
@@ -1624,7 +1624,7 @@ msgstr "Kansikuva asetettu kohteesta %1"
 msgid "Covers from %1"
 msgstr "Kansikuvat kohteesta %1"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:186
 msgid "Create a new playlist with files/URLs"
 msgstr "Luo uusi soittolista tiedosto tai verkko-osoite"
 
@@ -1707,11 +1707,11 @@ msgstr "Päivää"
 msgid "De&fault"
 msgstr "&Oletus"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:176
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähennä voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:178
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähennä voimakkuutta <value> prosentilla"
 
@@ -1746,7 +1746,7 @@ msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2527 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2521 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Poista tiedostot"
 
@@ -1771,7 +1771,7 @@ msgstr "Poista asetus"
 msgid "Delete smart playlist"
 msgstr "Poista älykäs soittolista"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:198
 msgid "Delete the currently playing song"
 msgstr "Poista nyt soiva kappale"
 
@@ -1787,11 +1787,11 @@ msgstr "Poistetaan tiedostoja"
 msgid "Depth"
 msgstr "Tilaäänen syvyys"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1859
 msgid "Dequeue selected tracks"
 msgstr "Poista valitut kappaleet jonosta"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1857
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
@@ -1892,7 +1892,7 @@ msgstr "Tiedonsiirron säännöstely"
 msgid "Display options"
 msgstr "Näkymän asetukset"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:191
 msgid "Display the on-screen-display"
 msgstr "Näytä ilmoituslaatikko"
 
@@ -2077,7 +2077,7 @@ msgstr "Lennosta sekoitus"
 msgid "Edit smart playlist..."
 msgstr "Muokkaa älykästä soittolistaa..."
 
-#: ui/mainwindow.cpp:1915
+#: ui/mainwindow.cpp:1909
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muokkaa tunnistetta \"%1\"..."
@@ -2212,16 +2212,16 @@ msgstr "Jakson tiedot"
 msgid "Equalizer"
 msgstr "Taajuuskorjain"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:194
 msgid "Equivalent to --log-levels *:1"
 msgstr "Vastaa --log-levels *:1"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:195
 msgid "Equivalent to --log-levels *:3"
 msgstr "Vastaa --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:251
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2480 ui/mainwindow.cpp:2658
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2474 ui/mainwindow.cpp:2652
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Virhe"
@@ -2889,11 +2889,11 @@ msgstr "Ei yhteensopiva Subsonic REST-protokollaversio. Palvelin on päivitettä
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Puutteelliset asetukset, varmista että kaikki kentät on täytetty."
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:175
 msgid "Increase the volume by 4 percent"
 msgstr "Lisää voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:177
 msgid "Increase the volume by <value> percent"
 msgstr "Lisää voimakkuutta <value> prosentilla"
 
@@ -3055,7 +3055,7 @@ msgstr "Last.fm-tunnistautuminen"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:78
 msgid "Last.fm play counts"
-msgstr "Last.fm-soittokerrat"
+msgstr "Last.fm-soittolaskuri"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:133
 msgid "Last.fm tags"
@@ -3093,7 +3093,7 @@ msgstr "Kirjasto"
 msgid "Library advanced grouping"
 msgstr "Kirjaston tarkennettu ryhmittely"
 
-#: ui/mainwindow.cpp:2790
+#: ui/mainwindow.cpp:2784
 msgid "Library rescan notice"
 msgstr "Ilmoitus kirjaston läpikäynnistä"
 
@@ -3182,7 +3182,7 @@ msgstr "Kappaletietoja ladataan"
 msgid "Loading..."
 msgstr "Ladataan..."
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:188
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Lataa tiedostoja tai osoitteita, korvaten samalla nykyisen soittolistan"
 
@@ -3427,7 +3427,7 @@ msgstr "Siirrä kirjastoon..."
 msgid "Move up"
 msgstr "Siirrä ylös"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2153
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2147
 msgid "Music"
 msgstr "Musiikki"
 
@@ -3481,7 +3481,7 @@ msgstr "Ei soitettu"
 #: ../bin/src/ui_behavioursettingspage.h:390
 #: ../bin/src/ui_behavioursettingspage.h:404
 msgid "Never start playing"
-msgstr "Älä aloita toistoa"
+msgstr "Älä aloita soittamista"
 
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
@@ -3489,7 +3489,7 @@ msgstr "Älä aloita toistoa"
 msgid "New folder"
 msgstr "Uusi kansio"
 
-#: ui/mainwindow.cpp:1969 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Uusi soittolista"
 
@@ -3575,7 +3575,7 @@ msgstr "Ei lyhyitä lohkoja"
 msgid "None"
 msgstr "Ei mitään"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2481 ui/mainwindow.cpp:2659
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Yksikään valitusta ei sovellu kopioitavaksi laitteelle"
 
@@ -3798,7 +3798,7 @@ msgstr "Julkaisuvuoden tunnistetuki"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:191
 msgid "Other options"
 msgstr "Muut valinnat"
 
@@ -3850,14 +3850,14 @@ msgstr "Party"
 msgid "Password"
 msgstr "Salasana"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1760
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1754
 #: ui/qtsystemtrayicon.cpp:234 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:170
 msgid "Pause playback"
-msgstr "Keskeytä toisto"
+msgstr "Keskeytä soitto"
 
 #: widgets/osd.cpp:158
 msgid "Paused"
@@ -3887,7 +3887,7 @@ msgid "Plain sidebar"
 msgstr "Pelkistetty sivupalkki"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1141
-#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1764 ui/qtsystemtrayicon.cpp:222
+#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:222
 #: ui/qtsystemtrayicon.cpp:246 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3895,13 +3895,13 @@ msgstr "Soita"
 
 #: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
-msgstr "Soittokertoja"
+msgstr "Soittolaskuri"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:190
 msgid "Play given playlist"
 msgstr "Soita annettu soittolista"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:169
 msgid "Play if stopped, pause if playing"
 msgstr "Soita jos pysäytetty, pysäytä jos soi"
 
@@ -3910,41 +3910,41 @@ msgstr "Soita jos pysäytetty, pysäytä jos soi"
 msgid "Play if there is nothing already playing"
 msgstr "Aloita soittaminen, jos mitään ei soi parhaillaan"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1876
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
 msgid "Play next"
-msgstr ""
+msgstr "Soita seuraava"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1868
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Soita seuraavaksi valitut kappaleet"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:189
 msgid "Play the <n>th track in the playlist"
 msgstr "Soita soittolistan <n>. kappale"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:117
 msgid "Play/Pause"
-msgstr "Toista/Keskeytä"
+msgstr "Soita/Keskeytä"
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Playback"
 msgstr "Toisto"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:167
 msgid "Player options"
 msgstr "Soittimen asetukset"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
-#: playlist/playlistmanager.cpp:90 playlist/playlistmanager.cpp:159
-#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
+#: playlist/playlistmanager.cpp:561 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
-msgstr ""
+msgstr "Soittolista"
 
 #: widgets/osd.cpp:182
 msgid "Playlist finished"
 msgstr "Soittolista soitettiin loppuun"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:185
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Soittolistan valinnat"
@@ -3955,45 +3955,45 @@ msgstr "Soittolistan tyyppi"
 
 #: ui/mainwindow.cpp:275
 msgid "Playlists"
-msgstr ""
+msgstr "Soittolistat"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "Sulje selaimesi ja palaa Clementineen."
 
 #: internet/lastfm/lastfmservice.cpp:142
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
-msgstr ""
+msgstr "Avaa osoite selaimessa: <a href=\"%1\">%1</a>"
 
 #: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
 msgid "Plex"
-msgstr ""
+msgstr "Plex"
 
 #: ../bin/src/ui_plexsettingspage.h:145
 msgid "Plex Media Server"
-msgstr ""
+msgstr "Plex Media Server"
 
 #: internet/plex/plexauthenticator.cpp:135
 msgid ""
 "Plex hasn't confirmed the sign-in yet. Approve Clementine in your browser, "
 "then try again."
-msgstr ""
+msgstr "Plex ei ole vielä vahvistanut kirjautumista. Hyväksy Clementine selaimessasi ja yritä sitten uudelleen."
 
 #: ../bin/src/ui_podcastinfodialog.h:91
 msgid "Podcast Information"
-msgstr ""
+msgstr "Podcastin tiedot"
 
 #: internet/podcasts/podcastservice.cpp:451
 #: internet/podcasts/podcastservice.cpp:548
 #: internet/podcasts/podcastservice.cpp:552
 msgid "Podcast information"
-msgstr ""
+msgstr "Lähetyksen tiedot"
 
 #: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Podcasts"
-msgstr ""
+msgstr "Podcastit"
 
 #: ui/equalizer.cpp:142
 msgid "Pop"
@@ -4014,29 +4014,29 @@ msgstr "Esivahvistus"
 
 #: ../bin/src/ui_seafilesettingspage.h:173
 msgid "Preference"
-msgstr ""
+msgstr "Lisäasetukset"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 #: ../bin/src/ui_magnatunesettingspage.h:168
 #: ../bin/src/ui_settingsdialog.h:114 ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Preferences"
-msgstr "Asetukset"
+msgstr "Lisäasetukset"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "Preferences..."
-msgstr "Asetukset..."
+msgstr "Lisäasetukset..."
 
 #: ../bin/src/ui_librarysettingspage.h:211
 msgid "Preferred album art filenames (comma separated)"
-msgstr "Ensisijainen tiedostonimi albumikuvitukselle (pilkuin eroteltu)"
+msgstr "Ensisijaiset kansikuvien tiedostonimet (pilkuilla erotettuina)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Preferred audio format"
-msgstr "Ensisijainen audiomuoto"
+msgstr "Ensisijainen audio-formaatti"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Preferred format"
-msgstr "Ensisijainen muoto"
+msgstr "Ensisijainen formaatti"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:176
 msgid "Premium audio type"
@@ -4044,7 +4044,7 @@ msgstr "Korkea laatu"
 
 #: ../bin/src/ui_equalizer.h:161
 msgid "Preset:"
-msgstr "Asetus:"
+msgstr "Esiasetus:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:118
 msgid "Press a button combination to use for"
@@ -4061,11 +4061,11 @@ msgstr "Paina näppäinyhdistelmää käyttääksesi %1 ..."
 
 #: ../bin/src/ui_behavioursettingspage.h:394
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Soittimen \"Edellinen\"-painiketta painettaessa..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
-msgstr "Kuvaruutunäytön valinnat"
+msgstr "Ilmoituslaatikon valinnat"
 
 #: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:154
 #: ../bin/src/ui_notificationssettingspage.h:453
@@ -4082,7 +4082,7 @@ msgstr "Edellinen"
 msgid "Previous track"
 msgstr "Edellinen"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:197
 msgid "Print out version information"
 msgstr "Tulosta versiotiedot"
 
@@ -4097,11 +4097,11 @@ msgstr "Edistyminen"
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "Edistyminen"
 
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psykedeelinen"
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4113,17 +4113,17 @@ msgstr "Paina Wii-ohjaimen nappia"
 
 #: ../bin/src/ui_querysortpage.h:136
 msgid "Put songs in a random order"
-msgstr "Aseta kappaleet satunnaiseen järjestykseen"
+msgstr "Laita kappaleet satunnaiseen järjestykseen"
 
 #: ../bin/src/ui_console.h:131
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:199
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
-msgstr ""
+msgstr "Qt:n lokisäännöt voivat kytkeä virheenjäljityksen pois päältä; QT_LOGGING_RULES=clementine.debug=true kytkee ne takaisin päälle."
 
 #: ../bin/src/ui_transcoderoptionsflac.h:89
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4131,12 +4131,12 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:198
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Laatu"
 
 #: visualisations/visualisationcontainer.cpp:121
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Laatu"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
@@ -4146,26 +4146,26 @@ msgstr "Kysytään tietoja laitteelta..."
 msgid "Queue Manager"
 msgstr "Soittojono"
 
-#: ui/mainwindow.cpp:1869
+#: ui/mainwindow.cpp:1863
 msgid "Queue selected tracks"
-msgstr "Aseta valitut kappaleet jonoon"
+msgstr "Aseta valitut jonoon"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1861
 msgid "Queue track"
 msgstr "Aseta kappale jonoon"
 
 #: ../bin/src/ui_lovedialog.h:114
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Arvioi kappale nopeasti"
 
 #: ../bin/src/ui_playbacksettingspage.h:387
 msgid "Radio (equal loudness for all tracks)"
-msgstr "Radio (sama äänenvoimakkuus kaikille kappaleille)"
+msgstr "Radio (sama voimakkuus kaikille)"
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:77
 msgid "RadioBrowser"
-msgstr ""
+msgstr "RadioBrowser"
 
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
@@ -4174,7 +4174,7 @@ msgstr "Sadetta"
 #: ../bin/src/ui_mainwindow.h:746
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Sadetta"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random Albums"
@@ -4182,7 +4182,7 @@ msgstr "Satunnainen levy"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Random Songs"
-msgstr ""
+msgstr "Satunnainen musiikki"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4190,27 +4190,27 @@ msgstr "Satunnainen visualisointi"
 
 #: core/globalshortcuts.cpp:90
 msgid "Rate the current song 0 stars"
-msgstr "Arvostele nykyinen kappale 0:n arvoiseksi"
+msgstr "Arvostele kappale 0-tähteä"
 
 #: core/globalshortcuts.cpp:91
 msgid "Rate the current song 1 star"
-msgstr "Arvostele nykyinen kappale 1:n arvoiseksi"
+msgstr "Arvostele kappale 1-tähti"
 
 #: core/globalshortcuts.cpp:92
 msgid "Rate the current song 2 stars"
-msgstr "Arvostele nykyinen kappale 2:n arvoiseksi"
+msgstr "Arvostele kappale 2-tähteä"
 
 #: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
-msgstr "Arvostele nykyinen kappale 3:n arvoiseksi"
+msgstr "Arvostele kappale 3-tähteä"
 
 #: core/globalshortcuts.cpp:94
 msgid "Rate the current song 4 stars"
-msgstr "Arvostele nykyinen kappale 4:n arvoiseksi"
+msgstr "Arvostele kappale 4-tähteä"
 
 #: core/globalshortcuts.cpp:95
 msgid "Rate the current song 5 stars"
-msgstr "Arvostele nykyinen kappale 5:n arvoiseksi"
+msgstr "Arvostele kappale 5-tähteä"
 
 #: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
@@ -4219,7 +4219,7 @@ msgstr "Arvostelu"
 #: internet/magnatune/magnatunedownloaddialog.cpp:314
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
-msgstr "Haluatko todella perua?"
+msgstr "Haluatko perua?"
 
 #: internet/subsonic/subsonicservice.cpp:114
 msgid "Recently Played Albums"
@@ -4227,7 +4227,7 @@ msgstr "Äskettäin soitetut levyt"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Ohjausten enimmäismäärä ylittyi, tarkista palvelimen määritykset."
 
 #: internet/jamendo/jamendoservice.cpp:432
 #: internet/magnatune/magnatuneservice.cpp:286
@@ -4256,7 +4256,7 @@ msgstr "Reggae"
 #: playlist/playlistsaveoptionsdialog.cpp:33
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Relative"
-msgstr ""
+msgstr "Suhteellinen"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:120
 msgid "Remember Wii remote swing"
@@ -4264,11 +4264,11 @@ msgstr "Muista Wii-ohjaimen heilautus"
 
 #: ../bin/src/ui_behavioursettingspage.h:381
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Muista viime &kerrasta"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:97
 msgid "Remember my choice"
-msgstr ""
+msgstr "Muista valintani"
 
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
@@ -4283,11 +4283,11 @@ msgstr "Poista toiminto"
 
 #: core/globalshortcuts.cpp:87
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "Poista kappale soittolistasta"
 
 #: ../bin/src/ui_mainwindow.h:772
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Poista kaksoiskappaleet soittolistasta"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Remove folder"
@@ -4299,7 +4299,7 @@ msgstr "Poista soittolistalta"
 
 #: ../bin/src/ui_transcodedialog.h:242
 msgid "Remove or replace original files "
-msgstr ""
+msgstr "Poista tai korvaa alkuperäiset tiedostot"
 
 #: playlist/playlisttabbar.cpp:184
 msgid "Remove playlist"
@@ -4307,15 +4307,15 @@ msgstr "Poista soittolista"
 
 #: playlist/playlistlistcontainer.cpp:430
 msgid "Remove playlists"
-msgstr ""
+msgstr "Poista soittolistat"
 
 #: ../bin/src/ui_mainwindow.h:778
 msgid "Remove unavailable tracks from playlist"
-msgstr ""
+msgstr "Poista soittolistasta kappaleet joita ei ole saatavilla"
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Rename playlist"
-msgstr "Nimeä soittolista uudelleen"
+msgstr "Nimeä soittolista"
 
 #: playlist/playlisttabbar.cpp:58
 msgid "Rename playlist..."
@@ -4331,7 +4331,7 @@ msgstr "Kertaa"
 
 #: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:110
 msgid "Repeat album"
-msgstr "Soita jatkuvasti"
+msgstr "Kertaa levyä"
 
 #: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:111
 msgid "Repeat playlist"
@@ -4345,7 +4345,7 @@ msgstr "Kertaa kappale"
 #: internet/core/internetservice.cpp:58 library/libraryview.cpp:385
 #: widgets/fileviewlist.cpp:35
 msgid "Replace current playlist"
-msgstr "Korvaa nykyinen soittolista"
+msgstr "Korvaa tämä soittolista"
 
 #: ../bin/src/ui_behavioursettingspage.h:400
 msgid "Replace the playlist"
@@ -4357,11 +4357,11 @@ msgstr "Korvaa välilyönnit alaviivoilla"
 
 #: ../bin/src/ui_playbacksettingspage.h:384
 msgid "Replay Gain"
-msgstr "Replay Gain"
+msgstr "Voimakkuuden tasaus"
 
 #: ../bin/src/ui_playbacksettingspage.h:386
 msgid "Replay Gain mode"
-msgstr "Replay Gain -tila"
+msgstr "Toistovoimakkuuden tasaus-moodi"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:108
 msgid "Repopulate"
@@ -4369,7 +4369,7 @@ msgstr "Täytä uudelleen"
 
 #: ../bin/src/ui_networkremotesettingspage.h:375
 msgid "Require authentication code"
-msgstr ""
+msgstr "Vaadi todennuskoodin"
 
 #: widgets/lineedit.cpp:53
 msgid "Reset"
@@ -4377,20 +4377,20 @@ msgstr "Oletukset"
 
 #: ui/edittagdialog.cpp:804 ../bin/src/ui_edittagdialog.h:701
 msgid "Reset play counts"
-msgstr "Nollaa soittokerrat"
+msgstr "Nollaa soittolaskuri"
 
 #: ../bin/src/ui_behavioursettingspage.h:396
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "Soita kappale uudelleen, siirtyy edelliseen jos painat uudestaan"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:183
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Soita kappale uudelleen tai soita edellinen, jos se on alle 8 s alusta."
 
 #: ../bin/src/ui_radiobrowsersettingspage.h:80
 msgid "Restore Default Server"
-msgstr ""
+msgstr "Palauta oletuspalvelin"
 
 #: ../bin/src/ui_filenameformatwidget.h:124
 msgid "Restrict to ASCII characters"
@@ -4398,27 +4398,27 @@ msgstr "Rajoita ASCII-merkkeihin"
 
 #: ../bin/src/ui_behavioursettingspage.h:386
 msgid "Resume playback on start"
-msgstr ""
+msgstr "Jatka soittamista kun sovellus aukeaa"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
-msgstr ""
+msgstr "Palaa Clementineen"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Right"
-msgstr ""
+msgstr "Oikea"
 
 #: ../bin/src/ui_ripcddialog.h:331
 msgid "Rip"
-msgstr ""
+msgstr "Kopioi levy"
 
 #: ripper/ripcddialog.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "Kopioi CD:n sisältö"
 
 #: ../bin/src/ui_mainwindow.h:777
 msgid "Rip audio CD"
-msgstr ""
+msgstr "Kopioi ääni-CD:n sisältö"
 
 #: ui/equalizer.cpp:149
 msgid "Rock"
@@ -4430,25 +4430,25 @@ msgstr "Root-kansio, jota voidaan selata ja ohjata etänä verkosta käsin"
 
 #: ../bin/src/ui_console.h:127
 msgid "Run"
-msgstr ""
+msgstr "Suorita"
 
 #: ../bin/src/ui_playbacksettingspage.h:414
 msgid "S16LE (16-bit)"
-msgstr ""
+msgstr "S16LE (16-bit)"
 
 #: core/song.cpp:446
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "SOCKS proxy"
-msgstr "SOCKS-välityspalvelin"
+msgstr "SOCKS proxy"
 
 #: internet/subsonic/subsonicsettingspage.cpp:150
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "SSL-käsittelyvirhe, tarkista palvelimen asetukset. SSLv3-valinta alla saattaa auttaa joissain tapauksissa."
 
 #: devices/deviceview.cpp:200
 msgid "Safely remove device"
@@ -4470,7 +4470,7 @@ msgstr "Näytteenottotaajuus"
 
 #: ../bin/src/ui_appearancesettingspage.h:350
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Tallenna .mood -tiedostot musiikkikirjastoon"
 
 #: ui/albumcoverchoicecontroller.cpp:138
 msgid "Save album cover"
@@ -4482,7 +4482,7 @@ msgstr "Tallenna levyn kansikuva kiintolevylle..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:99
 msgid "Save current grouping"
-msgstr ""
+msgstr "Tallenna näkymän ryhmittely"
 
 #: widgets/prettyimage.cpp:192 widgets/prettyimage.cpp:246
 msgid "Save image"
@@ -4491,12 +4491,12 @@ msgstr "Tallenna kuva"
 #: playlist/playlistlistcontainer.cpp:161
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Tallenna soittolista"
 
-#: playlist/playlistmanager.cpp:238
+#: playlist/playlistmanager.cpp:262
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "Tallenna soittolista"
 
 #: playlist/playlisttabbar.cpp:60 ../bin/src/ui_mainwindow.h:759
 msgid "Save playlist..."
@@ -4508,27 +4508,27 @@ msgstr "Tallenna asetus"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Tallenna arvostelu tiedoston tunnisteeseen, jos saatavilla"
 
 #: ../bin/src/ui_librarysettingspage.h:205
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Tallenna tilasto tiedoston tunnisteeseen, jos saatavilla"
 
 #: ../bin/src/ui_addstreamdialog.h:125
 msgid "Save this stream in the Internet tab"
-msgstr "Tallenna tämä suoratoisto Internet-osioon"
+msgstr "Tallenna tämä suoratoisto Internet-välilehteen"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "Ryhmittely tallennettu"
 
 #: playlistparsers/cueparser.cpp:360
 msgid "Saving cue files is not yet supported."
-msgstr ""
+msgstr "Ei vielä tueta cue-tiedostojen tallentamista."
 
 #: library/library.cpp:202
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "Tallennetaan kappaletilastot kappaleen tiedostoihin"
 
 #: ui/edittagdialog.cpp:713 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
@@ -4536,11 +4536,11 @@ msgstr "Tallennetaan kappaleita"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Scalable sampling rate profile (SSR)"
-msgstr "Scalable sampling rate -profiili (SSR)"
+msgstr "Skaalautuva näytteenottotaajuusprofiili (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Scale size"
-msgstr ""
+msgstr "Skaalaa koko"
 
 #: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
@@ -4548,15 +4548,15 @@ msgstr "Pisteet"
 
 #: ../bin/src/ui_lastfmsettingspage.h:132
 msgid "Scrobble tracks that I listen to"
-msgstr "Lähetä kappaletiedot kuuntelemistani kappaleista"
+msgstr "Kirjaa kuuntelemani kappaleet tilastoihin"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Scroll over icon to change track"
-msgstr ""
+msgstr "Vieritä kuvakkeen päällä ja kappale vaihtuu"
 
 #: ../bin/src/ui_seafilesettingspage.h:161
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:167 ui/albumcoversearcher.cpp:184
 #: ../bin/src/ui_gpoddersearchpage.h:71 ../bin/src/ui_itunessearchpage.h:71
@@ -4567,35 +4567,35 @@ msgstr "Haku"
 #: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Haku"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
-msgstr "Hae Icecastista"
+msgstr "Icecast haku"
 
 #: internet/jamendo/jamendoservice.cpp:439
 msgid "Search Jamendo"
-msgstr "Hae Jamendosta"
+msgstr "Jamendo haku"
 
 #: internet/magnatune/magnatuneservice.cpp:295
 msgid "Search Magnatune"
-msgstr "Hae Magnatunesta"
+msgstr "Magnatune haku"
 
 #: internet/plex/plexservice.cpp:110
 msgid "Search Plex"
-msgstr ""
+msgstr "Plex haku"
 
 #: internet/subsonic/subsonicservice.cpp:127
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Subsonic haku"
 
 #: ui/albumcoverchoicecontroller.cpp:81
 msgid "Search automatically"
-msgstr ""
+msgstr "Hae automaattisesti"
 
 #: ui/mainwindow.cpp:716
 msgid "Search for album"
-msgstr "Etsi äänilevyä"
+msgstr "Hae äänilevyä"
 
 #: ui/albumcoverchoicecontroller.cpp:75
 msgid "Search for album covers..."
@@ -4604,23 +4604,23 @@ msgstr "Hae kansikuvia..."
 #: ../bin/src/ui_globalsearchview.h:205
 #: ../bin/src/ui_playlistlistcontainer.h:125
 msgid "Search for anything"
-msgstr ""
+msgstr "Etsi mitä tahansa"
 
 #: ui/mainwindow.cpp:713
 msgid "Search for artist"
-msgstr ""
+msgstr "Hae esittäjää"
 
 #: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:400
 msgid "Search for this"
-msgstr ""
+msgstr "Etsi tätä"
 
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Gpodder.net haku"
 
 #: ../bin/src/ui_itunessearchpage.h:69
 msgid "Search iTunes"
-msgstr ""
+msgstr "iTunes haku"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
@@ -4628,7 +4628,7 @@ msgstr "Hakutapa"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
-msgstr "Haun asetukset"
+msgstr "Hakuasetukset"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4637,7 +4637,7 @@ msgstr "Hakusanat"
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Second Level"
-msgstr ""
+msgstr "Toinen taso"
 
 #: ../bin/src/ui_groupbydialog.h:185
 msgid "Second level"
@@ -4645,23 +4645,23 @@ msgstr "Toinen taso"
 
 #: core/globalshortcuts.cpp:69 wiimotedev/wiimotesettingspage.cpp:119
 msgid "Seek backward"
-msgstr "Siirry taaksepäin"
+msgstr "Kelaa taakse"
 
 #: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:121
 msgid "Seek forward"
-msgstr "Siirry eteenpäin"
+msgstr "Kelaa eteen"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:181
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Kelaa toistettavaa kappaletta suhteellisen määrän"
+msgstr "Pikakelaus eteen- tai taaksepäin"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:179
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Kelaa toistettavaa kappaletta tiettyyn kohtaan"
+msgstr "Pikakelaus eteen- tai taaksepäin tiettyyn kohtaan"
 
 #: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Seeking using a keyboard shortcut or mouse wheel"
-msgstr ""
+msgstr "Kelaa pikanäppäimillä tai käyttäen hiiren rullaa"
 
 #: visualisations/visualisationselector.cpp:31 ../bin/src/ui_ripcddialog.h:327
 msgid "Select All"
@@ -4673,27 +4673,27 @@ msgstr "Poista valinnat"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Valitse kansio"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Valitse tiedosto"
 
 #: ../bin/src/ui_appearancesettingspage.h:332
 msgid "Select background color:"
-msgstr ""
+msgstr "Valitse taustaväri:"
 
 #: ui/appearancesettingspage.cpp:282
 msgid "Select background image"
-msgstr ""
+msgstr "Valitse taustakuva"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Select best possible match"
-msgstr "Valitse paras mahdollinen vaihtoehto"
+msgstr "Valitse paras vaihtoehto"
 
 #: ../bin/src/ui_appearancesettingspage.h:330
 msgid "Select foreground color:"
-msgstr ""
+msgstr "Valitse edustaväri:"
 
 #: ../bin/src/ui_visualisationselector.h:109
 msgid "Select visualizations"
@@ -4705,7 +4705,7 @@ msgstr "Valitse visualisoinnit..."
 
 #: ../bin/src/ui_transcodedialog.h:238 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
-msgstr ""
+msgstr "Valitse..."
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -4714,29 +4714,29 @@ msgstr "Sarjanumero"
 #: ../bin/src/ui_plexsettingspage.h:144
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Server"
-msgstr ""
+msgstr "Palvelin"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 #: ../bin/src/ui_radiobrowsersettingspage.h:79
 msgid "Server URL"
-msgstr ""
+msgstr "Palvelimen osoite"
 
 #: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_radiobrowsersettingspage.h:78
 msgid "Server details"
-msgstr ""
+msgstr "Palvelimen tiedot"
 
-#: ui/mainwindow.cpp:1914
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Aseta %1 %2:een"
+msgstr "Aseta %1 - %2"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:130
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 msgid "Set target rate"
-msgstr ""
+msgstr "Aseta tavoitetaajuus"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "Säädä voimakkuudeksi <value> prosenttia"
 
@@ -4750,7 +4750,7 @@ msgstr "Asetukset"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Lyhyt kesto (vähintään 1 minuutti tai puolet pituudesta)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:183
 msgid "Shortcut"
@@ -4765,7 +4765,7 @@ msgstr "Pikanäppäin toiminnolle %1"
 #: wiimotedev/wiimotesettingspage.cpp:141
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr "Pikanäppäin toiminnolle %1 on jo olemassa"
+msgstr "Pikanäppäin %1 on jo olemassa"
 
 #: library/libraryfilterwidget.cpp:72
 msgid "Show"
@@ -4773,7 +4773,7 @@ msgstr "Näytä"
 
 #: core/globalshortcuts.cpp:71 wiimotedev/wiimotesettingspage.cpp:123
 msgid "Show OSD"
-msgstr "Näytä kappaletiedot näytöllä"
+msgstr "Näytä ilmoituslaatikko"
 
 #: ../bin/src/ui_playbacksettingspage.h:373
 msgid "Show a glowing animation on the current track"
@@ -4781,11 +4781,11 @@ msgstr "Korosta soiva kappale hohtavalla animaatiolla"
 
 #: ../bin/src/ui_appearancesettingspage.h:348
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Näytä moodbar-visualisointi aikajanalla"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a native desktop notification"
-msgstr "Näytä järjestelmälle ominainen ilmoitus"
+msgstr "Näytä työpöydän oma ilmoitus"
 
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I change the repeat/shuffle mode"
@@ -4797,7 +4797,7 @@ msgstr "Näytä ilmoitus kun voimakkuus muuttuu"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Näytä ilmoitus, kun keskeytän soiton"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
@@ -4805,7 +4805,7 @@ msgstr "Näytä ponnahdus tehtäväpalkista"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a pretty OSD"
-msgstr "Näytä kuvaruutunäyttö"
+msgstr "Näytä tyylikäs Ilmoituslaatikko"
 
 #: widgets/nowplayingwidget.cpp:138
 msgid "Show above status bar"
@@ -4838,7 +4838,7 @@ msgstr "Näytä tiedostoselaimessa..."
 
 #: ui/mainwindow.cpp:747
 msgid "Show in library..."
-msgstr ""
+msgstr "Näytä kirjastossa..."
 
 #: library/libraryview.cpp:435
 msgid "Show in various artists"
@@ -4846,7 +4846,7 @@ msgstr "Näytä kohdassa \"Useita esittäjiä\""
 
 #: moodbar/moodbarproxystyle.cpp:358
 msgid "Show moodbar"
-msgstr ""
+msgstr "Näytä mielialapalkki"
 
 #: ui/mainwindow.cpp:665
 msgid "Show only duplicates"
@@ -4854,27 +4854,27 @@ msgstr "Näytä kaksoiskappaleet"
 
 #: ui/mainwindow.cpp:667
 msgid "Show only untagged"
-msgstr "Näytä vain vailla tunnistetta olevat"
+msgstr "Näytä ilman tunnistetta olevat"
 
 #: ../bin/src/ui_mainwindow.h:782
 msgid "Show or hide the sidebar"
-msgstr ""
+msgstr "Näytä sivupalkki tai piilota"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Näytä hakuehdotukset"
 
 #: ../bin/src/ui_mainwindow.h:780
 msgid "Show sidebar"
-msgstr ""
+msgstr "Näytä sivupalkki"
 
 #: ../bin/src/ui_lastfmsettingspage.h:133
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Näytä \"Tykkää\"-sydänpainike"
 
 #: ../bin/src/ui_lastfmsettingspage.h:134
 msgid "Show the scrobble button in the main window"
-msgstr "Näytä pyyhkäisypainike pääikkunassa"
+msgstr "Näytä Last.fm-kuvake musiikkitietojen lähetys-painike"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Show tray icon"
@@ -4882,7 +4882,7 @@ msgstr "Näytä ilmoitusalueen kuvake"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Show which sources are enabled and disabled"
-msgstr "Näytä mitkä lähteet ovat käytössä tai pois käytöstä"
+msgstr "Näytä mitkä lähteet ovat käytössä"
 
 #: core/globalshortcuts.cpp:70
 msgid "Show/Hide"
@@ -4911,11 +4911,11 @@ msgstr "Sekoita tämän levyn kappaleet"
 #: ../bin/src/ui_plexsettingspage.h:140
 #: ../bin/src/ui_podcastsettingspage.h:283
 msgid "Sign in"
-msgstr ""
+msgstr "Kirjaudu"
 
 #: ../bin/src/ui_plexsettingspage.h:142
 msgid "Sign in with Plex"
-msgstr ""
+msgstr "Kirjaudu Plex-palveluun"
 
 #: ../bin/src/ui_loginstatewidget.h:166
 msgid "Sign out"
@@ -4927,19 +4927,19 @@ msgstr "Kirjautuu sisään..."
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Size"
-msgstr ""
+msgstr "Koko"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size:"
-msgstr ""
+msgstr "Koko:"
 
 #: ui/equalizer.cpp:153
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:172
 msgid "Skip backwards in playlist"
-msgstr "Siirry soittolistan edelliseen kappaleeseen"
+msgstr "Siirry soittolistan edelliseen"
 
 #: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
@@ -4947,23 +4947,23 @@ msgstr "Ohituskerrat"
 
 #: ../bin/src/ui_librarysettingspage.h:210
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Ohita tiedostot, joilla on nämä tiedostopäätteet (pilkuilla erotettuna, kirjainkoosta riippumatta)"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:173
 msgid "Skip forwards in playlist"
-msgstr "Siirry soittolistan seuraavaan kappaleeseen"
+msgstr "Siirry soittolistan seuraavaan"
 
-#: ui/mainwindow.cpp:1885
+#: ui/mainwindow.cpp:1879
 msgid "Skip selected tracks"
-msgstr ""
+msgstr "Ohita valitut kappaleet"
 
 #: ../bin/src/ui_mainwindow.h:786
 msgid "Skip to the next album"
 msgstr "Siirry seuraavaan levyyn"
 
-#: ui/mainwindow.cpp:1883
+#: ui/mainwindow.cpp:1877
 msgid "Skip track"
-msgstr ""
+msgstr "Ohita kappale"
 
 #: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
@@ -4991,19 +4991,19 @@ msgstr "Soft Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:150
 msgid "Song Information"
-msgstr "Kappale"
+msgstr "Kappaleen tiedot"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:88
 msgid "Song Metadata"
-msgstr ""
+msgstr "Kappaleen metatiedot"
 
 #: ui/mainwindow.cpp:286
 msgid "Song info"
-msgstr "Kappaletiedot"
+msgstr "Kappaleen tiedot"
 
 #: analyzers/sonogram.cpp:32
 msgid "Sonogram"
-msgstr "Sonogrammi"
+msgstr "Sonogram"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Sorry"
@@ -5011,11 +5011,11 @@ msgstr "Pahoittelut"
 
 #: ../bin/src/ui_icecastfilterwidget.h:72
 msgid "Sort by genre (alphabetically)"
-msgstr "Järjestä tyyli (aakkosjen mukaan)"
+msgstr "Järjestä tyylin mukaan (aakkosjärjestys)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:73
 msgid "Sort by genre (by popularity)"
-msgstr "Järjestä tyyli (suosion mukaan)"
+msgstr "Järjestä tyylin mukaan (suosio)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:74
 msgid "Sort by station name"
@@ -5031,12 +5031,12 @@ msgstr "Järjestys"
 
 #: playlist/playlist.cpp:1441
 msgid "Source"
-msgstr ""
+msgstr "Lähde"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:140
 #: ../bin/src/ui_internetshowsettingspage.h:82
 msgid "Sources"
-msgstr ""
+msgstr "Lähteet"
 
 #: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
@@ -5052,11 +5052,11 @@ msgstr "Tähdelliset levyt"
 
 #: ripper/ripcddialog.cpp:86
 msgid "Start ripping"
-msgstr ""
+msgstr "Aloita kopiointi"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:168
 msgid "Start the playlist currently playing"
-msgstr "Aloita tällä hetkellä toistettava soittolista"
+msgstr "Aloita soittolista alusta"
 
 #: transcoder/transcodedialog.cpp:105
 msgid "Start transcoding"
@@ -5078,31 +5078,31 @@ msgstr "Lopeta"
 
 #: wiimotedev/wiimotesettingspage.cpp:122
 msgid "Stop after"
-msgstr "Lopeta jälkeen"
+msgstr "Lopeta kun"
 
 #: ../bin/src/ui_playlistsequence.h:112
 msgid "Stop after each track"
-msgstr ""
+msgstr "Pysäytä jokaisen kappaleen jälkeen"
 
 #: widgets/osd.cpp:318
 msgid "Stop after every track"
-msgstr ""
+msgstr "Pysäytä jokaisen kappaleen jälkeen"
 
 #: ui/mainwindow.cpp:700 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Lopeta kappaleen jälkeen"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:170
 msgid "Stop playback"
 msgstr "Lopeta toisto"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:171
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "Lopeta toisto kappaleen jälkeen"
 
 #: ../bin/src/ui_behavioursettingspage.h:387
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Lopeta toisto, jos kappale ei soi"
 
 #: core/globalshortcuts.cpp:57
 msgid "Stop playing after current track"
@@ -5111,11 +5111,11 @@ msgstr "Lopeta toisto kappaleen jälkeen"
 #: widgets/osd.cpp:175
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "Lopeta toisto kappaleeseen: %1"
 
 #: widgets/osd.cpp:169
 msgid "Stopped"
-msgstr "Lopetettu"
+msgstr "Pysäytetty"
 
 #: core/song.cpp:453
 msgid "Stream"
@@ -5123,30 +5123,30 @@ msgstr "Suoratoisto"
 
 #: ../bin/src/ui_streamdetailsdialog.h:131
 msgid "Stream Details"
-msgstr ""
+msgstr "Suoratoiston tiedot"
 
 #: internet/subsonic/subsonicsettingspage.cpp:52
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "Suoratoisto Subsonic-palvelimelta edellyttää voimassa olevaa palvelinlisenssiä 30 päivän kokeilujakson jälkeen."
 
 #: ../bin/src/ui_magnatunesettingspage.h:162
 msgid "Streaming membership"
-msgstr "Suoratoistojäsenyys"
+msgstr "Suoratoistotilaus"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Subscribers"
-msgstr ""
+msgstr "Tilaajat"
 
 #: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:127
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
-msgstr ""
+msgstr "Onnistui!"
 
 #: transcoder/transcoder.cpp:209
 #, qt-format
@@ -5159,7 +5159,7 @@ msgstr "Ehdotetut tunnisteet"
 
 #: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
-msgstr ""
+msgstr "Tarvittavaa osaa ei löytynyt"
 
 #: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:455
@@ -5170,23 +5170,23 @@ msgstr "Yhteenveto"
 #: visualisations/visualisationcontainer.cpp:117
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr "Erittäin nopea (%1 fps)"
+msgstr "Erittäin korkea (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:126
 msgid "Super high (2048x2048)"
-msgstr ""
+msgstr "Erittäin korkea (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:373
 msgid "Supported formats"
-msgstr "Tuetut muodot"
+msgstr "Tuetut formaatit"
 
 #: ../bin/src/ui_librarysettingspage.h:209
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "Synkronoi heti tilastot tiedostoihin"
 
 #: moodbar/moodbarrenderer.cpp:178
 msgid "System colors"
-msgstr ""
+msgstr "Järjestelmän väripaletti"
 
 #: widgets/fancytabwidget.cpp:436
 msgid "Tabs on top"
@@ -5194,7 +5194,7 @@ msgstr "Välilehdet ylhäällä"
 
 #: ../bin/src/ui_trackselectiondialog.h:203
 msgid "Tag fetcher"
-msgstr "Tunnistenoutaja"
+msgstr "Tunnisteiden hakija"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 msgid "Target bitrate"
@@ -5228,19 +5228,19 @@ msgstr "Kansio %1 ei ole kelvollinen"
 
 #: songinfo/streamdiscoverer.cpp:119
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Haku on varattu"
 
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
-msgstr ""
+msgstr "Tämä formaatti päivitetään vasta kun putki aukeaa."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
-msgstr "Toisen arvo pitää olla suurempi kuin ensimmäinen!"
+msgstr "Toinen arvo tulee olla suurempi kuin ensimmäinen!"
 
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
-msgstr ""
+msgstr "Kirjautumisen pyyntö vanhentui. Yritä uudelleen."
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
@@ -5248,23 +5248,23 @@ msgstr "Hakemaasi sivua ei ole olemassa!"
 
 #: ui/coverfromurldialog.cpp:84
 msgid "The site you requested is not an image!"
-msgstr "Hakemasi sivu ei ole kuva!"
+msgstr "Valitsemasi osoite ei sisällä kuvatiedostoa!"
 
 #: internet/subsonic/subsonicsettingspage.cpp:120
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Subsonic-palvelimen kokeilujakso on päättynyt. Tee lahjoitus saadaksesi lisenssiavaimen. Lisätietoja subsonic.org sivustolla."
 
-#: ui/mainwindow.cpp:2781
+#: ui/mainwindow.cpp:2775
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Versio, johon juuri päivitit Clementinen, vaatii kirjaston läpikäynnin alla mainittujen uusien ominaisuuksien vuoksi:"
+msgstr "Päivitit Clementinen uuteen versioon ja se vaatii kirjaston läpikäynnin alla mainittujen uusien ominaisuuksien vuoksi:"
 
 #: ../bin/src/ui_appearancesettingspage.h:323
 msgid "Theme:"
-msgstr ""
+msgstr "Teema:"
 
 #: library/libraryview.cpp:585
 msgid "There are other songs in this album"
@@ -5274,27 +5274,27 @@ msgstr "Levyllä on muitakin kappaleita"
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
 #: internet/podcasts/gpoddertoptagspage.cpp:76
 msgid "There was a problem communicating with gpodder.net"
-msgstr ""
+msgstr "Yhteydessä gpodder.net-palveluun ilmeni ongelma."
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:171
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr "Metatietojen hakemisessa Magnatune palvelusta ilmeni virhe"
+msgstr "Metatietojen hakemisessa Magnatunesta ilmeni ongelma"
 
 #: internet/podcasts/itunessearchpage.cpp:85
 msgid "There was a problem parsing the response from the iTunes Store"
-msgstr ""
+msgstr "iTunes Storen vastauksen selvittämisessä ilmeni ongelma"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "Kappaleita kopioitaessa ilmeni virheitä. Seuraavien kappaleiden kopiointi epäonnistui:"
+msgstr "Joidenkin kappaleiden kopioimisessa oli ongelmia. Seuraavia tiedostoja ei voitu kopioida:"
 
 #: ui/organiseerrordialog.cpp:63
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "Kappaleita poistaessa ilmeni virheitä. Seuraavien kappaleiden poisto epäonnistui:"
+msgstr "Joidenkin kappaleiden poistamisessa ilmeni ongelmia. Seuraavia tiedostoja ei voitu poistaa:"
 
 #: devices/deviceview.cpp:397
 msgid ""
@@ -5302,11 +5302,11 @@ msgid ""
 "continue?"
 msgstr "Nämä tiedostot poistetaan laitteelta, haluatko varmasti jatkaa?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2528 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2522 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Nämä tiedostot poistetaan levyltä pysyvästi, haluatko jatkaa?"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid "These folders will be scanned for music to make up your library"
@@ -5316,11 +5316,11 @@ msgstr "Näistä kansioista etsitään musiikkia kirjastoosi."
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Nämä asetukset ovat käytössä \"Muunna eri muotoon\"-ikkunassa, ja muunnettaessa musiikkia ennen laitteelle kopiointia."
+msgstr "Näitä asetuksia käytetään ”Muunna musiikki” -valintaikkunassa sekä muunnettaessa musiikkia ennen sen kopioimista laitteelle."
 
 #: library/savedgroupingmanager.cpp:39
 msgid "Third Level"
-msgstr ""
+msgstr "Kolmas taso"
 
 #: ../bin/src/ui_groupbydialog.h:202
 msgid "Third level"
@@ -5334,15 +5334,15 @@ msgstr "Tämä luo tietokannan, jonka koko voi olla jopa 150 megatavua.\nHaluatk
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:199
 msgid "This album is not available in the requested format"
-msgstr "Levy ei ole saatavilla halutussa muodossa"
+msgstr "Äänilevy ei ole saatavilla halutussa muodossa"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Tämän voi muuttaa myöhemmin asetuksissa"
 
 #: networkremote/streaming/rendererregistry.cpp:168
 msgid "This computer"
-msgstr ""
+msgstr "Tämä tietokone"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5371,20 +5371,20 @@ msgstr "Kyseessä on iPod, mutta Clementine on käännetty ilman libgpod-tukea."
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Kytkit tämän laitteen tietokoneeseen ensimmäistä kertaa. Clementine etsii laitteesta musiikkia. Tämä voi kestää jonkin aikaa."
+msgstr "Kytkit tämän laitteen tietokoneeseen ensimmäistä kertaa. Clementine etsii musiikkia. Tämä voi kestää jonkin aikaa."
 
 #: playlist/playlisttabbar.cpp:198
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Tätä asetusta voi muuttaa ”Toiminta”-asetuksissa"
 
 #: devices/devicemanager.cpp:563
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr "Tämän tyyppinen laite ei ole tuettu: %1"
+msgstr "Laite ei ole tuettu: %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:413
 msgid "Time step"
-msgstr ""
+msgstr "Kelausväli"
 
 #: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:140 ../bin/src/ui_edittagdialog.h:719
@@ -5398,31 +5398,31 @@ msgstr "Tänään"
 
 #: core/globalshortcuts.cpp:73
 msgid "Toggle Pretty OSD"
-msgstr "Kuvaruutunäyttö päälle / pois"
+msgstr "Vaihda tyylikäs Ilmoituslaatikko päälle tai pois"
 
 #: visualisations/visualisationcontainer.cpp:107
 msgid "Toggle fullscreen"
 msgstr "Vaihda kokonäyttöön"
 
-#: ui/mainwindow.cpp:1871
+#: ui/mainwindow.cpp:1865
 msgid "Toggle queue status"
 msgstr "Vaihda jonon tila"
 
 #: ../bin/src/ui_mainwindow.h:770
 msgid "Toggle scrobbling"
-msgstr "Valitse pyyhkäisy"
+msgstr "Vaihda scrobbling lähetystä"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:192
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr "Vaihda ilmoituslaatikko päälle tai pois"
+msgstr "Vaihda tyylikäs ilmoituslaatikko päälle tai pois"
 
 #: core/utilities.cpp:165
 msgid "Tomorrow"
-msgstr ""
+msgstr "Huomenna"
 
 #: internet/podcasts/podcasturlloader.cpp:118
 msgid "Too many redirects"
-msgstr ""
+msgstr "Liian monta uudelleenohjausta"
 
 #: internet/subsonic/subsonicservice.cpp:110
 msgid "Top Rated Albums"
@@ -5434,15 +5434,15 @@ msgstr "Äänilevyjä:"
 
 #: covers/coversearchstatisticsdialog.cpp:73
 msgid "Total bytes transferred"
-msgstr "Yhteensä tavuja siirretty"
+msgstr "Siirrettyjen tavujen määrä"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total network requests made"
-msgstr "Yhteensä verkko pyyntöjä tehty"
+msgstr "Tehtyjen verkkopyyntöjen määrä"
 
 #: ../bin/src/ui_edittagdialog.h:720
 msgid "Trac&k"
-msgstr ""
+msgstr "&Kappale"
 
 #: playlist/playlist.cpp:1389 widgets/filenameformatwidget.cpp:56
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
@@ -5451,11 +5451,11 @@ msgstr "Kappale"
 
 #: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_mainwindow.h:755
 msgid "Transcode Music"
-msgstr "Muunna eri muotoon"
+msgstr "Muunna musiikki"
 
 #: ../bin/src/ui_transcodelogdialog.h:105
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Muuntimen tiedot"
 
 #: ../bin/src/ui_transcodersettingspage.h:57
 msgid "Transcoding"
@@ -5468,12 +5468,12 @@ msgstr "Muunnetaan %1 tiedostoa käyttäen %2 säiettä"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:51
 msgid "Transcoding options"
-msgstr "Muunnosvalinnat"
+msgstr "Muutamisen valinnat"
 
 #: transcoder/transcoderoptionsdialog.cpp:43
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr ""
+msgstr "Muutamisen valinnat - %1"
 
 #: core/song.cpp:442
 msgid "TrueAudio"
@@ -5481,11 +5481,11 @@ msgstr "TrueAudio"
 
 #: ../bin/src/ui_songmetadatasettingspage.h:93
 msgid "Try to extract title, artist, and album from file path."
-msgstr "Yritä purkaa tiedostopolusta nimi, esittäjä ja äänilevy."
+msgstr "Yritä poimia kappaleen nimi, artisti ja levy tiedostopolusta."
 
 #: ../bin/src/ui_songmetadatasettingspage.h:95
 msgid "Try to guess missing metadata"
-msgstr ""
+msgstr "Yritä arvata puuttuva metatieto"
 
 #: analyzers/turbine.cpp:35
 msgid "Turbine"
@@ -5497,7 +5497,7 @@ msgstr "Sammuta"
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
-msgstr ""
+msgstr "Kahden silmukan hakutapa"
 
 #: devices/giolister.cpp:184
 msgid "URI"
@@ -5505,19 +5505,19 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:132
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:127
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "Logon osoite:"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:166
 msgid "URL(s)"
-msgstr "Osoite/osoitteet"
+msgstr "Osoitteet"
 
 #: devices/udisks2lister.cpp:85
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
 msgid "Ultra wide band (UWB)"
@@ -5526,7 +5526,7 @@ msgstr "Ultra wide band (UWB)"
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
-msgstr ""
+msgstr "Yhdistäminen epäonnistui"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:156
 #, qt-format
@@ -5536,7 +5536,7 @@ msgstr "Kohteen %1 lataus epäonnistui (%2)"
 #: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
 #: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:310
-#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
+#: playlist/playlistmanager.cpp:568 playlist/playlistmanager.cpp:569
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:509
 msgid "Unknown"
@@ -5544,7 +5544,7 @@ msgstr "Tuntematon"
 
 #: internet/podcasts/podcasturlloader.cpp:210
 msgid "Unknown content-type"
-msgstr ""
+msgstr "Tuntematon sisältötyyppi"
 
 #: internet/digitally/digitallyimportedclient.cpp:75
 msgid "Unknown error"
@@ -5554,32 +5554,32 @@ msgstr "Tuntematon virhe"
 #: playlistparsers/playlistparser.cpp:168
 #, qt-format
 msgid "Unknown filetype: %1"
-msgstr ""
+msgstr "Tuntematon tiedostotyyppi: %1"
 
 #: ui/albumcoverchoicecontroller.cpp:77
 msgid "Unset cover"
-msgstr "Poista kansikuva"
+msgstr "Poista kansi"
 
-#: ui/mainwindow.cpp:1881
+#: ui/mainwindow.cpp:1875
 msgid "Unskip selected tracks"
-msgstr ""
+msgstr "Peru valittujen ohittaminen"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1873
 msgid "Unskip track"
-msgstr ""
+msgstr "Peru ohittaminen"
 
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Peru tilaus"
 
 #: songinfo/songkickconcerts.cpp:195
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Tulevat konsertit"
 
 #: internet/podcasts/podcastservice.cpp:436
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Päivitä kaikki podcastit"
 
 #: ../bin/src/ui_mainwindow.h:763
 msgid "Update changed library folders"
@@ -5587,15 +5587,15 @@ msgstr "Päivitä muuttuneet kirjastokansiot"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid "Update the library when Clementine starts"
-msgstr "Päivitä kirjasto Clementinen käynnistyessä"
+msgstr "Päivitä kirjasto kun Clementinen käynnistyy"
 
 #: internet/podcasts/podcastservice.cpp:445
 msgid "Update this podcast"
-msgstr ""
+msgstr "Päivitä tämä podcasti"
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Updating"
-msgstr ""
+msgstr "Päivitetään"
 
 #: library/librarywatcher.cpp:109
 #, qt-format
@@ -5611,9 +5611,9 @@ msgstr "Päivitetään %1 %..."
 msgid "Updating library"
 msgstr "Päivitetään kirjastoa"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:166
 msgid "Usage"
-msgstr "Käyttötaso"
+msgstr "Käyttö"
 
 #: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Use Album Artist tag when available"
@@ -5625,15 +5625,15 @@ msgstr "Käytä Gnomen pikanäppäimiä"
 
 #: analyzers/analyzercontainer.cpp:90
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "Käytä psykedeelisiä värejä"
 
 #: ../bin/src/ui_playbacksettingspage.h:385
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Käytä Replay Gainin metatietoja, jos saatavilla"
+msgstr "Käytä voimakkuuden tasaamiseen metatietoja, jos saatavilla"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Käytä SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use Wii Remote"
@@ -5641,7 +5641,7 @@ msgstr "Käytä Wii-ohjainta"
 
 #: ../bin/src/ui_appearancesettingspage.h:329
 msgid "Use a custom color set"
-msgstr ""
+msgstr "Käytä omaa väripalettia"
 
 #: ../bin/src/ui_notificationssettingspage.h:452
 msgid "Use a custom message for notifications"
@@ -5673,7 +5673,7 @@ msgstr "Käytä ilmoituksia Wii-ohjaimen tilasta ilmoittamiseen"
 
 #: ../bin/src/ui_appearancesettingspage.h:353
 msgid "Use system icons"
-msgstr ""
+msgstr "Käytä järjestelmän kuvakkeita"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Use temporal noise shaping"
@@ -5685,11 +5685,11 @@ msgstr "Käytä järjestelmän oletusta"
 
 #: ../bin/src/ui_appearancesettingspage.h:328
 msgid "Use the system default color set"
-msgstr ""
+msgstr "Käytä järjestelmän oletusvärejä"
 
 #: ../bin/src/ui_networkproxysettingspage.h:156
 msgid "Use the system proxy settings"
-msgstr "Käytä järjestelmän välityspalvelinasetuksia"
+msgstr "Käytä järjestelmän proxy-asetuksia"
 
 #: widgets/freespacebar.cpp:48
 msgid "Used"
@@ -5697,18 +5697,18 @@ msgstr "Käytetty"
 
 #: ui/settingsdialog.cpp:138
 msgid "User interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_podcastsettingspage.h:282
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "Username"
-msgstr "Käyttäjätunnus"
+msgstr "Käyttänimi"
 
 #: ../bin/src/ui_behavioursettingspage.h:389
 msgid "Using the menu to add a song will..."
-msgstr "Kappaleen lisääminen valikon avulla..."
+msgstr "Kappaleen lisääminen valikon kautta..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -5717,24 +5717,24 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:448
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Variable bit rate"
-msgstr "Muuttuva bittinopeus"
+msgstr "Vaihteleva bittivirta"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
-#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:267
+#: playlist/playlistmanager.cpp:580 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Useita esittäjiä"
 
 #: ../bin/src/ui_subsonicsettingspage.h:133
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Vahvista palvelimen varmenne"
 
 #: ../bin/src/ui_plexsettingspage.h:146
 msgid "Verify server certificate"
-msgstr ""
+msgstr "Vahvista palvelimen varmenne"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5747,7 +5747,7 @@ msgstr "Näkymä"
 
 #: ../bin/src/ui_mainwindow.h:779
 msgid "View Stream Details"
-msgstr ""
+msgstr "Näytä suoratoiston tiedot"
 
 #: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
@@ -5785,14 +5785,14 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:373
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Varoita minua jos suljen soittolistan välilehden"
 
 #: transcoder/transcoderoptionsflac.cpp:46
 msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Varoitus: Tämä pakkaustaso on suoratoiston ulkopuolella. Purkukoodaus ei välttämättä pysty aloittamaan toistoa keskeltä virtaa. Vaikuttaa myös laittekiihdytyksen suorituskykyyn."
 
 #: core/song.cpp:438 transcoder/transcoder.cpp:302
 msgid "Wav"
@@ -5800,11 +5800,11 @@ msgstr "Wav"
 
 #: core/song.cpp:440
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:189
 msgid "Website"
-msgstr ""
+msgstr "Verkkosivu"
 
 #: smartplaylists/searchterm.cpp:433
 msgid "Weeks"
@@ -5816,7 +5816,7 @@ msgstr "Kun Clementine käynnistyy"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Kun käytät soittolaskuria,"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid ""
@@ -5826,7 +5826,7 @@ msgstr "Kasikuvia etsiessä Clementine hakee kuvatiedostoja, jotka sisältävät
 
 #: ../bin/src/ui_behavioursettingspage.h:416
 msgid "When saving a playlist, file paths should be"
-msgstr ""
+msgstr "Kun tallennat soittolistolistaa, tiedostopolun tulee olla"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
@@ -5834,15 +5834,15 @@ msgstr "Kun lajittelet esittäjiä, äänilevyjä ja nimiä"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:145
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Kun lista on tyhjä..."
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."
-msgstr ""
+msgstr "Voisit kokeilla..."
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Wide band (WB)"
-msgstr "Laajakaistainen (WB)"
+msgstr "Laaja äänitaajuusalue (WB)"
 
 #: widgets/osd.cpp:245
 #, qt-format
@@ -5880,7 +5880,7 @@ msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Windows Media 40k"
@@ -5888,7 +5888,7 @@ msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
 #: core/song.cpp:418 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
@@ -5896,29 +5896,29 @@ msgstr "Windows Media"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Without cover:"
-msgstr ""
+msgstr "Ilman kansikuvaa:"
 
 #: library/libraryview.cpp:586
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "Haluatko siirtä levyn muut kappaleet luokkaan \"Useita esittäjiä\"?"
+msgstr "Haluatko siirtää levyn muut kappaleet luokkaan \"Useita esittäjiä\"?"
 
-#: ui/mainwindow.cpp:2788
+#: ui/mainwindow.cpp:2782
 msgid "Would you like to run a full rescan right now?"
-msgstr "Haluatko suorittaa kirjaston läpikäynnin nyt?"
+msgstr "Haluatko suorittaa heti kirjaston läpikäynnin?"
 
 #: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Kirjoita kaikki kappaletilastot kappaletiedostoihin"
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Write metadata"
-msgstr ""
+msgstr "Kirjoita metatiedot"
 
 #: internet/subsonic/subsonicsettingspage.cpp:105
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Väärä käyttäjänimi tai salasana."
 
 #: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1393
 #: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:176
@@ -5934,7 +5934,7 @@ msgstr "Vuosi - Levy"
 
 #: playlist/playlist.cpp:1395
 msgid "Year - original"
-msgstr ""
+msgstr "Vuosi - julkaisu"
 
 #: smartplaylists/searchterm.cpp:437
 msgid "Years"
@@ -5952,13 +5952,13 @@ msgstr "Olet lataamassa seuraavat levyt"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Haluatko poistaa %1 soittolistaa suosikeistasi?"
 
 #: playlist/playlisttabbar.cpp:187
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Olet poistamassa soittolistan, joka ei ole osa suosikkeja: Soittolista poistetaan (ei voi perua.) \nHaluatko jatkaa?"
 
 #: ../bin/src/ui_loginstatewidget.h:165
 msgid "You are not signed in."
@@ -5967,7 +5967,7 @@ msgstr "Et kirjautuneena"
 #: widgets/loginstatewidget.cpp:79
 #, qt-format
 msgid "You are signed in as %1."
-msgstr "Olet kirjautunut tunnuksella %1."
+msgstr "Kirjautunut %1."
 
 #: widgets/loginstatewidget.cpp:76
 msgid "You are signed in."
@@ -5977,7 +5977,7 @@ msgstr "Olet kirjautunut sisään."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Voit vaihtaa tapaa, miten kappaleet järjestetään kirjastossa."
 
-#: ui/networkremotesettingspage.cpp:168
+#: ui/networkremotesettingspage.cpp:166
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6004,7 +6004,7 @@ msgstr "Voit käyttää Wii-ohjainta kauko-ohjaimena ja hallita Clementinen toim
 
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "Sinulla ei ole aktiivista tilausta"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:88
 msgid "You love this track"
@@ -6015,26 +6015,26 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span "
 "style=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Avaa Järjestelmän asetukset ja salli Clementinen \"<span style=\"font-style:italic\">hallita tietokonettasi</span>\" käyttääksesi Clementinen pikanäppäimiä."
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Käynnistä Clementine uudelleen jos vaihdat kieltä."
+msgstr "Jos vaihdat kieltä, käynnistä Clementine uudelleen."
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
-msgstr "Tunnus tai salasana Magnatuneen oli väärin"
+msgstr "Magnatune-kirjautumistiedot olivat virheelliset"
 
 #: internet/plex/plexauthenticator.cpp:162
 msgid "Your Plex sign-in has expired. Please sign in again."
-msgstr ""
+msgstr "Plex-kirjautuminen on vanhentunut. Kirjaudu uudelleen."
 
 #: internet/plex/plexsettingspage.cpp:131
 #, qt-format
 msgid ""
 "Your browser should now show plex.tv. If it asks for a code, enter "
 "<b>%1</b>."
-msgstr ""
+msgstr "Selaimessasi pitäisi nyt näkyä plex.tv. Jos se pyytää koodia, anna <b>%1</b>."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"
@@ -6052,7 +6052,7 @@ msgstr "Lähetyksesi: %1"
 
 #: visualisations/visualisationcontainer.cpp:171
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "OpenGL-tuki puuttuu, joten visualisointi ei ole käytettävissä."
 
 #: smartplaylists/searchterm.cpp:408
 msgid "Z-A"
@@ -6112,7 +6112,7 @@ msgstr "sisältää"
 
 #: ../bin/src/ui_networkremotesettingspage.h:409
 msgid "desktop_remote"
-msgstr ""
+msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
@@ -6131,11 +6131,11 @@ msgstr "ei sisällä"
 
 #: ../bin/src/ui_console.h:130
 msgid "dump"
-msgstr ""
+msgstr "vedos"
 
 #: smartplaylists/searchterm.cpp:275
 msgid "empty"
-msgstr ""
+msgstr "tyhjä"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "ends with"
@@ -6143,15 +6143,15 @@ msgstr "päättyy"
 
 #: smartplaylists/searchterm.cpp:271
 msgid "equals"
-msgstr "yhtä kuin"
+msgstr "yhtä suuri kuin"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net -kansio"
 
 #: smartplaylists/searchterm.cpp:267
 msgid "greater than"
@@ -6159,7 +6159,7 @@ msgstr "enemmän kuin"
 
 #: ../bin/src/ui_deviceviewcontainer.h:95
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "iPodit ja USB-laitteet ei tällä hetkellä toimi Windowsissa. Pahoittelut!"
 
 #: smartplaylists/searchterm.cpp:247
 msgid "in the last"
@@ -6181,7 +6181,7 @@ msgstr "pisin ensin"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "move %n songs"
-msgstr ""
+msgstr "siirrä %n kappaletta"
 
 #: smartplaylists/searchterm.cpp:411
 msgid "newest first"
@@ -6189,7 +6189,7 @@ msgstr "uusin ensin"
 
 #: smartplaylists/searchterm.cpp:277
 msgid "not empty"
-msgstr ""
+msgstr "ei tyhjä"
 
 #: smartplaylists/searchterm.cpp:273
 msgid "not equals"
@@ -6211,7 +6211,7 @@ msgstr "vanhin ensin"
 msgid "on"
 msgstr "päällä"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:166
 msgid "options"
 msgstr "valinnat"
 
@@ -6219,11 +6219,11 @@ msgstr "valinnat"
 #: ../bin/src/ui_networkremotesettingspage.h:411
 #: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "tai lue QR-koodi:"
 
 #: internet/plex/plexauthenticator.cpp:97
 msgid "plex.tv sent an unexpected response"
-msgstr ""
+msgstr "plex.tv lähetti odottamattoman vastauksen"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
@@ -6241,7 +6241,7 @@ msgstr "lyhin ensin"
 
 #: playlist/playlistundocommands.cpp:111
 msgid "shuffle songs"
-msgstr ""
+msgstr "sekoita kappaleet"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "smallest first"
@@ -6249,7 +6249,7 @@ msgstr "pienin ensin"
 
 #: playlist/playlistundocommands.cpp:105
 msgid "sort songs"
-msgstr ""
+msgstr "järjestä kappaleet"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "starts with"
