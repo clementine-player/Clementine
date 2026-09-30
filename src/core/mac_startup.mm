@@ -21,7 +21,9 @@
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSNibDeclarations.h>
+#import <AppKit/NSView.h>
 #import <AppKit/NSViewController.h>
+#import <AppKit/NSWindow.h>
 
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSError.h>
