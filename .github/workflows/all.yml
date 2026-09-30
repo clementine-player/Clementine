@@ -1112,8 +1112,10 @@ jobs:
         timeout-minutes: 10
         run: |
           tools/screenshots/generate-music.sh showcase-music
-          dist/windows/clementine.exe --screenshots screenshots/windows \
-            showcase-music
+          for theme in light dark; do
+            dist/windows/clementine.exe --screenshots screenshots/windows \
+              --screenshot-theme $theme showcase-music
+          done
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
@@ -2134,8 +2136,11 @@ jobs:
         timeout-minutes: 10
         run: |
           tools/screenshots/generate-music.sh showcase-music
-          bin/clementine.app/Contents/MacOS/clementine \
-            --screenshots screenshots/macos showcase-music
+          for theme in light dark; do
+            bin/clementine.app/Contents/MacOS/clementine \
+              --screenshots screenshots/macos --screenshot-theme $theme \
+              showcase-music
+          done
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

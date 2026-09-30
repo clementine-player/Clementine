@@ -30,6 +30,7 @@
 #include <QRegularExpression>
 #include <QScreen>
 #include <QSettings>
+#include <QStringList>
 #include <QTimer>
 #include <QTreeWidget>
 #include <QTreeWidgetItemIterator>
@@ -42,6 +43,7 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
+#include "library/directory.h"
 #include "library/librarybackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -121,10 +123,10 @@ void ScreenshotTaker::Run() {
   }
   PausePartWay();
 
-  app_->appearance()->SetThemeMode(Appearance::ThemeMode_Light);
-  TakeAll(QString());
-  app_->appearance()->SetThemeMode(Appearance::ThemeMode_Dark);
-  TakeAll("dark_");
+  // main() started in the theme --screenshot-theme asked for.
+  TakeAll(app_->appearance()->EffectiveTheme() == Appearance::ThemeMode_Dark
+              ? "dark_"
+              : QString());
 
   qLog(Info) << "Took the screenshots in" << dir_.absolutePath() << "with"
              << failures_ << "failures";
@@ -171,12 +173,19 @@ bool ScreenshotTaker::WaitUntilSettled(const char* what, int timeout_msec,
 bool ScreenshotTaker::LoadMusic() {
   // MainWindow puts the music in the playlist itself; the library has to be
   // told about it.
+  // A second run, for the other theme, can have them already.
+  QStringList known;
+  for (const Directory& dir : app_->library_backend()->GetAllDirectories()) {
+    known << dir.path;
+  }
   int directories = 0;
   for (const QUrl& url : music_) {
-    if (url.isLocalFile() && QFileInfo(url.toLocalFile()).isDir()) {
-      app_->library_backend()->AddDirectory(url.toLocalFile());
-      ++directories;
+    const QFileInfo info(url.toLocalFile());
+    if (!url.isLocalFile() || !info.isDir()) continue;
+    if (!known.contains(info.canonicalFilePath())) {
+      app_->library_backend()->AddDirectory(info.canonicalFilePath());
     }
+    ++directories;
   }
 
   if (directories) {
