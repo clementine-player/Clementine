@@ -174,9 +174,21 @@ static BreakpadRef InitBreakpad() {
   return NSTerminateNow;
 }
 
-- (BOOL)userNotificationCenter:(id)center shouldPresentNotification:(id)notification {
+- (void)userNotificationCenter:(UNUserNotificationCenter*)center
+       willPresentNotification:(UNNotification*)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
   // Always show notifications, even if Clementine is in the foreground.
-  return YES;
+  completionHandler(UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionList);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter*)center
+    didReceiveNotificationResponse:(UNNotificationResponse*)response
+             withCompletionHandler:(void (^)(void))completionHandler {
+  // Clicking a notification brings Clementine to the front.
+  if (application_handler_) {
+    application_handler_->Activate();
+  }
+  completionHandler();
 }
 
 @end
@@ -211,7 +223,7 @@ static BreakpadRef InitBreakpad() {
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:delegate_];
+  [UNUserNotificationCenter currentNotificationCenter].delegate = delegate_;
 }
 
 @end

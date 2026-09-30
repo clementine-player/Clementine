@@ -18,6 +18,7 @@
 */
 
 #import <AppKit/NSApplication.h>
+#import <UserNotifications/UserNotifications.h>
 
 #include "config.h"
 #include "macglobalshortcutbackend.h"
@@ -28,7 +29,7 @@
 
 class PlatformInterface;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, UNUserNotificationCenterDelegate> {
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
   MacGlobalShortcutBackend* shortcut_handler_;
@@ -45,8 +46,13 @@ class PlatformInterface;
 - (NSMenu*)applicationDockMenu:(NSApplication*)sender;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender;
 
-// NSUserNotificationCenterDelegate
-- (BOOL)userNotificationCenter:(id)center shouldPresentNotification:(id)notification;
+// UNUserNotificationCenterDelegate
+- (void)userNotificationCenter:(UNUserNotificationCenter*)center
+       willPresentNotification:(UNNotification*)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
+- (void)userNotificationCenter:(UNUserNotificationCenter*)center
+    didReceiveNotificationResponse:(UNNotificationResponse*)response
+             withCompletionHandler:(void (^)(void))completionHandler;
 
 - (void)setDockMenu:(NSMenu*)menu;
 - (MacGlobalShortcutBackend*)shortcut_handler;

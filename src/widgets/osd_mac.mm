@@ -17,33 +17,84 @@
 
 #include "osd.h"
 
-#import <Foundation/NSProcessInfo.h>
-#import <Foundation/NSUserNotification.h>
+#import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSURL.h>
+#import <UserNotifications/UserNotifications.h>
 
-#include <QBuffer>
-#include <QByteArray>
+#include <QDir>
 #include <QFile>
+#include <QUuid>
 #include <QtDebug>
 
-#include "core/scoped_nsobject.h"
+#include "core/logging.h"
 
 namespace {
 
-void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
-  NSUserNotificationCenter* notification_center =
-      [NSUserNotificationCenter defaultUserNotificationCenter];
+// Every notification has this identifier, so each one replaces the last
+// rather than filling up Notification Center with every song played.
+NSString* const kNotificationIdentifier = @"org.clementine-player.now-playing";
 
-  NSUserNotification* notification = [[NSUserNotification alloc] init];
-  [notification setTitle:title];
-  [notification setSubtitle:subtitle];
+// The cover, as a file for the notification to show. Notification Center moves
+// the file into its own store once the notification is added.
+UNNotificationAttachment* CoverAttachment(const QImage& image) {
+  if (image.isNull()) return nil;
 
-  if ([[NSProcessInfo processInfo]
-          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10,
-                                                                     .minorVersion = 9,
-                                                                     .patchVersion = 0}]) {
-    [notification_center removeAllDeliveredNotifications];
+  const QString path =
+      QDir(QString::fromNSString(NSTemporaryDirectory()))
+          .filePath(QString("clementine-cover-%1.png")
+                        .arg(QUuid::createUuid().toString(QUuid::WithoutBraces)));
+  if (!image.save(path, "PNG")) return nil;
+
+  NSError* error = nil;
+  UNNotificationAttachment* attachment =
+      [UNNotificationAttachment attachmentWithIdentifier:@"cover"
+                                                     URL:[NSURL fileURLWithPath:path.toNSString()]
+                                                 options:nil
+                                                   error:&error];
+  if (!attachment) {
+    qLog(Warning) << "Couldn't attach the cover to the notification:"
+                  << QString::fromNSString(error.localizedDescription);
+    QFile::remove(path);
   }
-  [notification_center deliverNotification:notification];
+  return attachment;
+}
+
+void Deliver(NSString* title, NSString* body, UNNotificationAttachment* cover) {
+  UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+
+  // Asking again once the person has answered returns their answer without
+  // asking them, so this only prompts before the first notification.
+  [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert
+                        completionHandler:^(BOOL granted, NSError* error) {
+                          if (!granted) {
+                            // A build that isn't signed can end up here too.
+                            if (error) {
+                              qLog(Warning) << "Can't show notifications:"
+                                            << QString::fromNSString(
+                                                   error.localizedDescription);
+                            }
+                            return;
+                          }
+
+                          UNMutableNotificationContent* content =
+                              [[[UNMutableNotificationContent alloc] init] autorelease];
+                          content.title = title;
+                          content.body = body;
+                          if (cover) content.attachments = @[ cover ];
+
+                          UNNotificationRequest* request =
+                              [UNNotificationRequest requestWithIdentifier:kNotificationIdentifier
+                                                                   content:content
+                                                                   trigger:nil];
+                          [center addNotificationRequest:request
+                                   withCompletionHandler:^(NSError* add_error) {
+                                     if (add_error) {
+                                       qLog(Warning) << "Couldn't show a notification:"
+                                                     << QString::fromNSString(
+                                                            add_error.localizedDescription);
+                                     }
+                                   }];
+                        }];
 }
 
 }  // namespace
@@ -57,9 +108,5 @@ bool OSD::SupportsTrayPopups() { return false; }
 void OSD::ShowMessageNative(const QString& summary, const QString& message, const QString& icon,
                             const QImage& image) {
   Q_UNUSED(icon);
-  scoped_nsobject<NSString> mac_message(
-      [[NSString alloc] initWithUTF8String:message.toUtf8().constData()]);
-  scoped_nsobject<NSString> mac_summary(
-      [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()]);
-  SendNotificationCenterMessage(mac_summary.get(), mac_message.get());
+  Deliver(summary.toNSString(), message.toNSString(), CoverAttachment(image));
 }
