@@ -30,13 +30,16 @@ class MainWindow;
 class QWidget;
 
 // Takes the screenshots CI posts on pull requests (--screenshots <dir>): the
-// main window on each of its tabs and every settings page, light then dark.
+// main window on each of its tabs and every settings page, in the theme
+// --screenshot-theme (light or dark) started it in.
 // The music given on the command line is added to the library as well as the
 // playlist, and the playlist's first song is paused a third of the way in.
 //
 // It changes the library and settings of the profile it runs in, so it's
 // meant for CI runners and throwaway profiles. The files are named for the
-// order they were taken in; the dark theme's start with dark_.
+// order they were taken in; the dark theme's start with dark_. One theme a
+// run, from the start, is what people see: switching themes while Clementine
+// runs doesn't yet repaint everything.
 class ScreenshotTaker : public QObject {
   Q_OBJECT
 

@@ -563,7 +563,15 @@ int main(int argc, char* argv[]) {
   // with black-on-dark text. The system palette has to be recorded first,
   // while it's still what Qt handed us, so Appearance can go back to it.
   const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
-  app.appearance()->LoadUserTheme();
+  const bool screenshots = !options.screenshots_dir().isEmpty();
+  if (screenshots) {
+    // Each theme from the start, as people see it, rather than switching.
+    app.appearance()->SetThemeMode(options.screenshot_theme() == "dark"
+                                       ? Appearance::ThemeMode_Dark
+                                       : Appearance::ThemeMode_Light);
+  } else {
+    app.appearance()->LoadUserTheme();
+  }
 
   if (options.play_and_exit_timeout_secs() > 0) {
     return RunPlayAndExit(&app, options);
@@ -592,7 +600,6 @@ int main(int argc, char* argv[]) {
   WindowsMediaControls media_controls(&app);
 #endif
 
-  const bool screenshots = !options.screenshots_dir().isEmpty();
   if (screenshots) ScreenshotTaker::UseSilentSink();
 
   // Window

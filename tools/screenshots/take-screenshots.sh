@@ -14,16 +14,21 @@ binary=$1
 music=$2
 out=$3
 
-profile=$(mktemp -d)
 # Short, because Qt's local sockets live here and Unix socket paths are
 # limited to about 100 characters: longer, and the tag reader never starts.
 sockets=$(mktemp -d /tmp/cst-XXXXXX)
+profile=
 trap 'rm -rf "$profile" "$sockets"' EXIT
 
-HOME=$profile \
-XDG_CONFIG_HOME=$profile/.config \
-XDG_DATA_HOME=$profile/.local/share \
-XDG_CACHE_HOME=$profile/.cache \
-TMPDIR=$sockets \
-DBUS_SESSION_BUS_ADDRESS=disabled: \
-  "$binary" --screenshots "$out" "$music"
+# Each theme from the start, with a profile of its own.
+for theme in light dark; do
+  rm -rf "$profile"
+  profile=$(mktemp -d)
+  HOME=$profile \
+  XDG_CONFIG_HOME=$profile/.config \
+  XDG_DATA_HOME=$profile/.local/share \
+  XDG_CACHE_HOME=$profile/.cache \
+  TMPDIR=$sockets \
+  DBUS_SESSION_BUS_ADDRESS=disabled: \
+    "$binary" --screenshots "$out" --screenshot-theme "$theme" "$music"
+done

@@ -151,6 +151,7 @@ bool CommandlineOptions::Parse() {
       // Undocumented/CI-only: take screenshots of the main window and the
       // settings into a directory, then exit - see ui/screenshottaker.h.
       {"screenshots", required_argument, 0, Screenshots},
+      {"screenshot-theme", required_argument, 0, ScreenshotTheme},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -317,6 +318,10 @@ bool CommandlineOptions::Parse() {
 
       case Screenshots:
         screenshots_dir_ = QString::fromLocal8Bit(optarg);
+        break;
+
+      case ScreenshotTheme:
+        screenshot_theme_ = QString(optarg);
         break;
 
       case '?':
