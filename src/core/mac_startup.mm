@@ -511,4 +511,9 @@ float GetDevicePixelRatio(QWidget* widget) {
   return [[view window] backingScaleFactor];
 }
 
+int GetWindowNumber(QWidget* widget) {
+  NSView* view = reinterpret_cast<NSView*>(widget->winId());
+  return [[view window] windowNumber];
+}
+
 }  // namespace mac

@@ -70,6 +70,9 @@ GSTREAMER_PLUGINS = [
     'libgstaudioresample.dylib',
     'libgstautodetect.dylib',
     'libgstcoreelements.dylib',
+    # fakeaudiosink, which --screenshots plays through: fakesink, the only
+    # other sink that needs no sound card, plays as fast as it can.
+    'libgstdebugutilsbad.dylib',
     'libgstequalizer.dylib',
     'libgstgdp.dylib',
     'libgstosxaudio.dylib',
