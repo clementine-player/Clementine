@@ -56,7 +56,7 @@ class BlockAnalyzer : public Analyzer::Base {
   virtual void transform(Analyzer::Scope&);
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
   virtual void resizeEvent(QResizeEvent*);
-  virtual void paletteChange(const QPalette&);
+  void paletteChange(const QPalette&) override;
   virtual void framerateChanged();
   virtual void psychedelicModeChanged(bool);
 

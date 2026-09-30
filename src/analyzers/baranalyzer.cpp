@@ -36,9 +36,13 @@ const char* BarAnalyzer::kName =
 
 BarAnalyzer::BarAnalyzer(QWidget* parent) : Analyzer::Base(parent, 8) {
   // roof pixmaps don't depend on size() so we do in the ctor
-  bg_ = parent->palette().color(QPalette::Window);
+  paletteChange(parent->palette());
+}
 
-  QColor fg(parent->palette().color(QPalette::Highlight).lighter(150));
+void BarAnalyzer::paletteChange(const QPalette& palette) {
+  bg_ = palette.color(QPalette::Window);
+
+  QColor fg(palette.color(QPalette::Highlight).lighter(150));
 
   double dr = static_cast<double>(bg_.red() - fg.red()) /
               (kNumRoofs - 1);  // -1 because we start loop below at 0

@@ -45,7 +45,7 @@ class BoomAnalyzer : public Analyzer::Base {
 
  protected:
   void resizeEvent(QResizeEvent* e);
-  void paletteChange(const QPalette&);
+  void paletteChange(const QPalette&) override;
 
   static const uint kColumnWidth;
   static const uint kMaxBandCount;

@@ -131,6 +131,7 @@ endmacro (add_test_file)
 #add_test_file(albumcoverfetcher_test.cpp false)
 
 #add_test_file(albumcovermanager_test.cpp true)
+add_test_file(appearance_test.cpp true)
 add_test_file(asxparser_test.cpp false)
 add_test_file(asxiniparser_test.cpp false)
 #add_test_file(cueparser_test.cpp false)

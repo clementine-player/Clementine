@@ -46,6 +46,7 @@ class BarAnalyzer : public Analyzer::Base {
    * @param e The resize-event
    */
   void resizeEvent(QResizeEvent* e);
+  void paletteChange(const QPalette& palette) override;
   void colorChanged();
 
   uint band_count_;
