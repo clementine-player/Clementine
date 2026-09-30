@@ -207,6 +207,22 @@ jobs:
         # A real Clementine, driven through the network remote by the
         # command line client acting as controller and renderer.
         run: uv run --group dev pytest tests/smoke -v
+      # The screenshots the Screenshots job posts on pull requests, with
+      # Qt's own Fusion style: the offscreen platform has no desktop theme.
+      - name: Take screenshots
+        timeout-minutes: 10
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          tools/screenshots/generate-music.sh "$RUNNER_TEMP/music"
+          tools/screenshots/take-screenshots.sh bin/clementine \
+            "$RUNNER_TEMP/music" screenshots/linux
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: screenshots-linux
+          path: screenshots/
+          if-no-files-found: ignore
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -1091,6 +1107,19 @@ jobs:
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
+      # The packaged app, with the runner's own profile: nobody else uses it.
+      - name: Take screenshots
+        timeout-minutes: 10
+        run: |
+          tools/screenshots/generate-music.sh showcase-music
+          dist/windows/clementine.exe --screenshots screenshots/windows \
+            showcase-music
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: screenshots-windows
+          path: screenshots/
+          if-no-files-found: ignore
       - name: ccache statistics
         if: always()
         run: ccache --show-stats || true
@@ -2100,6 +2129,19 @@ jobs:
         with:
           name: release_mac
           path: bin/clementine-*.dmg
+      # The app in the DMG, with the runner's own profile: nobody else uses it.
+      - name: Take screenshots
+        timeout-minutes: 10
+        run: |
+          tools/screenshots/generate-music.sh showcase-music
+          bin/clementine.app/Contents/MacOS/clementine \
+            --screenshots screenshots/macos showcase-music
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: screenshots-macos
+          path: screenshots/
+          if-no-files-found: ignore
       - name: ccache statistics
         if: always()
         run: ccache --show-stats || true
@@ -2113,6 +2155,55 @@ jobs:
   # The single required status check for master: it passes only when every
   # job above did. Adding or removing a build job means editing this list
   # rather than the branch protection settings.
+  # Posts the screenshots the Test, Windows and Mac jobs took on the pull
+  # request, next to master's; each run on master replaces master's. Like the
+  # Android and iOS remotes' screenshots, they're hosted in a Cloudflare R2
+  # bucket, which charges nothing for bandwidth, with a token that can only
+  # read and write that bucket:
+  #   secrets R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY;
+  #   variables R2_BUCKET, R2_PUBLIC_URL (the bucket's public address).
+  # The remotes' bucket can hold them too: these are under desktop/. Without
+  # them, and on pull requests from forks (which get no secrets), the
+  # screenshots are only the jobs' artifacts. Not one of the CI job's needs:
+  # it's for looking at, not a check.
+  screenshots:
+    name: Screenshots
+    if: ${{ !cancelled() }}
+    needs:
+      - test
+      - build_mingw
+      - build_mac
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write # for the screenshots comment
+    env:
+      GH_TOKEN: ${{ github.token }}
+      # A step's condition can't read secrets, so this says whether the R2
+      # token is set.
+      HAS_R2_TOKEN: ${{ secrets.R2_ACCESS_KEY_ID != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      # Each artifact holds its platform's folder: linux/, windows/, macos/.
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          pattern: screenshots-*
+          path: screenshots
+          merge-multiple: true
+      - name: Post the screenshots
+        if: >
+          env.HAS_R2_TOKEN == 'true'
+          && (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_URL: ${{ vars.R2_PUBLIC_URL }}
+          TARGET: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'master' }}
+        run: tools/screenshots/post_screenshots.sh screenshots "$TARGET"
+
   ci:
     name: CI
     if: always()

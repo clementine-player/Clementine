@@ -400,6 +400,7 @@ set(SOURCES
   ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
   ui/screensaver.cpp
+  ui/screenshottaker.cpp
   ui/settingscategory.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
@@ -716,6 +717,7 @@ set(HEADERS
   ui/organiseerrordialog.h
   ui/playbacksettingspage.h
   ui/qtsystemtrayicon.h
+  ui/screenshottaker.h
   ui/settingscategory.h
   ui/settingsdialog.h
   ui/settingspage.h

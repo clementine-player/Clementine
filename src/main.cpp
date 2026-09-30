@@ -77,6 +77,7 @@
 #include "tagreadermessages.pb.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
+#include "ui/screenshottaker.h"
 #include "ui/systemtrayicon.h"
 #include "version.h"
 #include "widgets/osd.h"
@@ -400,6 +401,11 @@ int main(int argc, char* argv[]) {
     logging::SetLevels(options.log_levels());
 
     if (a.isRunning()) {
+      // Its options would go to the running one, which ignores them.
+      if (!options.screenshots_dir().isEmpty()) {
+        qLog(Error) << "Can't take screenshots while Clementine is running";
+        return 1;
+      }
       if (options.is_empty()) {
         qLog(Info)
             << "Clementine is already running - activating existing window";
@@ -586,6 +592,9 @@ int main(int argc, char* argv[]) {
   WindowsMediaControls media_controls(&app);
 #endif
 
+  const bool screenshots = !options.screenshots_dir().isEmpty();
+  if (screenshots) ScreenshotTaker::UseSilentSink();
+
   // Window
   MainWindow w(&app, tray_icon.get(), &osd, options);
 #ifdef Q_OS_DARWIN
@@ -600,6 +609,14 @@ int main(int argc, char* argv[]) {
   // Use a queued connection so the invokation occurs after the application
   // loop starts.
   QMetaObject::invokeMethod(&app, "Starting", Qt::QueuedConnection);
+
+  std::unique_ptr<ScreenshotTaker> screenshot_taker;
+  if (screenshots) {
+    screenshot_taker.reset(new ScreenshotTaker(
+        &app, &w, options.screenshots_dir(), options.urls()));
+    QMetaObject::invokeMethod(screenshot_taker.get(), "Run",
+                              Qt::QueuedConnection);
+  }
 
   int ret = a.exec();
 
