@@ -1004,7 +1004,7 @@ msgstr "均衡"
 
 #: core/globalshortcuts.cpp:84
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "禁止（Last.fm 音乐记录）"
 
 #: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
@@ -1075,7 +1075,7 @@ msgstr "轰鸣音分析器"
 
 #: ../bin/src/ui_boxsettingspage.h:96
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:144
 #: ../bin/src/ui_podcastsettingspage.h:269
@@ -1109,7 +1109,7 @@ msgstr "CBC 播客"
 
 #: ../bin/src/ui_ripcddialog.h:326
 msgid "CD Drive"
-msgstr ""
+msgstr "CD 驱动器"
 
 #: core/song.cpp:444
 msgid "CDDA"
@@ -1291,7 +1291,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine 可以将您的订阅列表与其他计算机和播客应用程序同步。<a href=\"https://gpodder.net/register/\">创建一个账号</a>。"
 
 #: visualisations/projectmvisualisation.cpp:160
 msgid ""
@@ -2455,11 +2455,11 @@ msgstr "自动获取"
 msgid "Fetch completed"
 msgstr "获取已完成"
 
-#: internet/plex/plexservice.cpp:417
+#: internet/plex/plexservice.cpp:416
 msgid "Fetching Plex library"
 msgstr ""
 
-#: internet/subsonic/subsonicservice.cpp:293
+#: internet/subsonic/subsonicservice.cpp:294
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -4750,6 +4750,11 @@ msgstr ""
 #: core/commandlineoptions.cpp:174
 msgid "Set the volume to <value> percent"
 msgstr "设置音量为 <value>%"
+
+#: networkremote/internetbrowser.cpp:241
+#, qt-format
+msgid "Set up %1 in Clementine's settings on the computer"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "Set value for all selected tracks..."
