@@ -105,6 +105,10 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #include "core/windowsmediacontrols.h"
 #endif
 
+#ifdef Q_OS_DARWIN
+#include "core/macmediacontrols.h"
+#endif
+
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
@@ -598,6 +602,9 @@ int main(int argc, char* argv[]) {
 #endif
 #ifdef Q_OS_WIN32
   WindowsMediaControls media_controls(&app);
+#endif
+#ifdef Q_OS_DARWIN
+  MacMediaControls media_controls(&app);
 #endif
 
   if (screenshots) ScreenshotTaker::UseSilentSink();

@@ -38,7 +38,6 @@
 
 #import <QuartzCore/CALayer.h>
 
-#import "3rdparty/SPMediaKeyTap/SPMediaKeyTap.h"
 
 #include "config.h"
 #include "core/logging.h"
@@ -125,13 +124,6 @@ static BreakpadRef InitBreakpad() {
   breakpad_ = InitBreakpad();
 #endif
 
-  // Register defaults for the whitelist of apps that want to use media keys
-  [[NSUserDefaults standardUserDefaults]
-      registerDefaults:[NSDictionary
-                           dictionaryWithObjectsAndKeys:[SPMediaKeyTap
-                                                            defaultMediaKeyUserBundleIdentifiers],
-                                                        kMediaKeyUsingBundleIdentifiersDefaultsKey,
-                                                        nil]];
   return self;
 }
 
@@ -158,19 +150,6 @@ static BreakpadRef InitBreakpad() {
   return shortcut_handler_;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification {
-  key_tap_ = [[SPMediaKeyTap alloc] initWithDelegate:self];
-  if ([SPMediaKeyTap usesGlobalMediaKeyTap] &&
-      ![[NSProcessInfo processInfo]
-          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10,
-                                                                     .minorVersion = 12,
-                                                                     .patchVersion = 0}]) {
-    [key_tap_ startWatchingMediaKeys];
-  } else {
-    qLog(Warning) << "Media key monitoring disabled";
-  }
-}
-
 - (BOOL)application:(NSApplication*)app openFile:(NSString*)filename {
   qLog(Debug) << "Wants to open:" << [filename UTF8String];
 
@@ -186,24 +165,6 @@ static BreakpadRef InitBreakpad() {
   [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
     [self application:app openFile:(NSString*)object];
   }];
-}
-
-- (void)mediaKeyTap:(SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
-  NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys,
-           @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
-
-  int key_code = (([event data1] & 0xFFFF0000) >> 16);
-  int key_flags = ([event data1] & 0x0000FFFF);
-  BOOL key_is_released = (((key_flags & 0xFF00) >> 8)) == 0xB;
-  // not used. keep just in case
-  //  int key_repeat = (key_flags & 0x1);
-
-  if (!shortcut_handler_) {
-    return;
-  }
-  if (key_is_released) {
-    shortcut_handler_->MacMediaKeyPressed(key_code);
-  }
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender {
@@ -251,18 +212,6 @@ static BreakpadRef InitBreakpad() {
   [self setDelegate:delegate_];
 
   [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:delegate_];
-}
-
-- (void)sendEvent:(NSEvent*)event {
-  // If event tap is not installed, handle events that reach the app instead
-  BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
-
-  if (shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined &&
-      [event subtype] == SPSystemDefinedEventMediaKeys) {
-    [(id)[self delegate] mediaKeyTap:nil receivedMediaKeyEvent:event];
-  }
-
-  [super sendEvent:event];
 }
 
 @end

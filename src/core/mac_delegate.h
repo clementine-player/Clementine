@@ -27,13 +27,11 @@
 #endif
 
 class PlatformInterface;
-@class SPMediaKeyTap;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate> {
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
   MacGlobalShortcutBackend* shortcut_handler_;
-  SPMediaKeyTap* key_tap_;
 
 #ifdef HAVE_BREAKPAD
   BreakpadRef breakpad_;
@@ -45,7 +43,6 @@ class PlatformInterface;
 // NSApplicationDelegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication*)app hasVisibleWindows:(BOOL)flag;
 - (NSMenu*)applicationDockMenu:(NSApplication*)sender;
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender;
 
 // NSUserNotificationCenterDelegate
@@ -54,5 +51,4 @@ class PlatformInterface;
 - (void)setDockMenu:(NSMenu*)menu;
 - (MacGlobalShortcutBackend*)shortcut_handler;
 - (void)setShortcutHandler:(MacGlobalShortcutBackend*)backend;
-- (void)mediaKeyTap:(SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event;
 @end

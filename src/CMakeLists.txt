@@ -950,6 +950,7 @@ optional_source(APPLE
   SOURCES
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
+    core/macmediacontrols.mm
     core/mac_startup.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
@@ -960,6 +961,7 @@ optional_source(APPLE
   HEADERS
     core/macfslistener.h
     core/macglobalshortcutbackend.h
+    core/macmediacontrols.h
     ui/macsystemtrayicon.h
 )
 
@@ -1395,9 +1397,9 @@ if (APPLE)
     "-framework DiskArbitration"
     "-framework Foundation"
     "-framework IOKit"
+    "-framework MediaPlayer"
     "-framework ScriptingBridge"
   )
-  target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
     include_directories(${SPARKLE}/Headers)
     target_link_libraries(clementine_lib ${SPARKLE})
