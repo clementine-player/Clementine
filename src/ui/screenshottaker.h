@@ -19,6 +19,7 @@
 #define UI_SCREENSHOTTAKER_H_
 
 #include <QDir>
+#include <QImage>
 #include <QList>
 #include <QObject>
 #include <QUrl>
@@ -66,7 +67,12 @@ class ScreenshotTaker : public QObject {
   void TakeAll(const QString& prefix);
   void TakeMainWindow(const QString& prefix);
   void TakeSettings(const QString& prefix);
+  // Sizes |widget| as close to |size| as fits on its screen, frame and all,
+  // and puts it in the top left corner.
+  void Place(QWidget* widget, const QSize& size);
   void Save(QWidget* widget, const QString& name);
+  // The window with its frame, or a null image where that can't be had.
+  QImage CaptureFrame(QWidget* widget);
 
   static QString Slug(const QString& text);
 
