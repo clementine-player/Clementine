@@ -1399,6 +1399,7 @@ if (APPLE)
     "-framework IOKit"
     "-framework MediaPlayer"
     "-framework ScriptingBridge"
+    "-framework UserNotifications"
   )
   if (HAVE_SPARKLE)
     include_directories(${SPARKLE}/Headers)
