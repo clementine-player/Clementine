@@ -397,9 +397,12 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
+      # Only the packages: the jobs also upload screenshots (screenshots-*),
+      # which have the same names on every platform and aren't release assets.
       - uses: actions/download-artifact@v8.0.1
         with:
           path: release_artifacts
+          pattern: release_*
       - name: Create draft pre-release
         id: tag_name
         env:
