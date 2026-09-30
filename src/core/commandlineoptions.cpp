@@ -148,6 +148,9 @@ bool CommandlineOptions::Parse() {
       // see main.cpp's RunPlayAndExit(). Deliberately left out of
       // kHelpText.
       {"play-and-exit", required_argument, 0, PlayAndExit},
+      // Undocumented/CI-only: take screenshots of the main window and the
+      // settings into a directory, then exit - see ui/screenshottaker.h.
+      {"screenshots", required_argument, 0, Screenshots},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -310,6 +313,10 @@ bool CommandlineOptions::Parse() {
       case PlayAndExit:
         play_and_exit_timeout_secs_ = QString(optarg).toInt(&ok);
         if (!ok) play_and_exit_timeout_secs_ = -1;
+        break;
+
+      case Screenshots:
+        screenshots_dir_ = QString::fromLocal8Bit(optarg);
         break;
 
       case '?':
