@@ -14,8 +14,9 @@ iOS remotes do for their apps.
   main window on each tab and every settings page, then the same in dark
   (`dark_`), and exits. On Windows and macOS the screenshots include the
   window's title bar and frame; on Linux, where Wayland doesn't allow it and
-  offscreen has none, they're what Qt paints inside the window. It changes the profile it runs in, so it's for CI
-  runners and throwaway profiles; see `src/ui/screenshottaker.h`.
+  offscreen has none, they're what Qt paints inside the window. It changes
+  the profile it runs in, so it's for CI runners and throwaway profiles; see
+  `src/ui/screenshottaker.h`.
 - `take-screenshots.sh <clementine> <music dir> <dir>` runs that with a
   throwaway profile on Linux.
 - `post_screenshots.sh` uploads them and writes the pull request's comment.
