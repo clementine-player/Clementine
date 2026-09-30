@@ -67,6 +67,26 @@ jobs:
         # The smoke tests need a built Clementine; the Test job runs them.
         run: uv run pytest -v
 
+  python_apt:
+    name: Python (apt repository)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/apt-repo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # Checks the signatures with gpgv, which the runner has.
+        run: uv run pytest -v
+
 
   test:
     name: Test
@@ -2160,6 +2180,96 @@ jobs:
   # The single required status check for master: it passes only when every
   # job above did. Adding or removing a build job means editing this list
   # rather than the branch protection settings.
+  # Publishes the .debs as an apt repository in the R2 bucket, under apt/,
+  # signed with a Cloud KMS key that can't be exported: see
+  # tools/apt-repo/README.md and dist/gcp_apt_signing_setup.sh. Skipped until
+  # the APT_* repository variables are set. Not one of the CI job's needs:
+  # it's publishing, not a check.
+  publish_apt:
+    name: Publish the apt repository
+    if: >
+      github.event_name == 'push' && github.ref == 'refs/heads/master'
+      && vars.APT_KMS_KEY != ''
+    needs:
+      - build_bookworm_64
+      - build_trixie_64
+      - build_jammy_64
+      - build_noble_64
+      - build_resolute_64
+    runs-on: ubuntu-24.04
+    # Each publish starts from the index the last one wrote.
+    concurrency:
+      group: publish-apt
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write # to sign, through Workload Identity Federation
+    env:
+      APT_BUCKET: s3://${{ vars.R2_BUCKET }}/apt
+      R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      # The Debian and Ubuntu builds: release_<suite>_64 and _arm64.
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          pattern: release_*_{64,arm64}
+          path: debs
+          merge-multiple: true
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.APT_WIF_PROVIDER }}
+          service_account: apt-signing@clementine-data.iam.gserviceaccount.com
+      - name: Fetch the repository's index files
+        # Not the packages: the index says what they are. Nor the old
+        # indexes kept by hash, which are never changed.
+        run: >
+          aws s3 sync "$APT_BUCKET/dists" repo/dists --exclude '*/by-hash/*'
+          --endpoint-url "$R2_ENDPOINT" --only-show-errors
+      - name: Add the packages and sign
+        env:
+          APT_KMS_KEY: ${{ vars.APT_KMS_KEY }}
+          APT_KEY_CREATED: ${{ vars.APT_KEY_CREATED }}
+          APT_KEY_FINGERPRINT: ${{ vars.APT_KEY_FINGERPRINT }}
+        run: |
+          mapfile -t packages < <(find debs -name '*.deb' | sort)
+          if [ ${#packages[@]} -eq 0 ]; then
+            echo "::error::No .debs to publish"
+            exit 1
+          fi
+          uv run --project tools/apt-repo clementine-apt publish \
+            --root repo --kms-key "$APT_KMS_KEY" --created "$APT_KEY_CREATED" \
+            ${APT_KEY_FINGERPRINT:+--expect-fingerprint "$APT_KEY_FINGERPRINT"} \
+            --pruned pruned.txt "${packages[@]}"
+      - name: Upload
+        # In the order that keeps the repository whole for anyone updating
+        # meanwhile: packages, then the indexes by hash, then the indexes,
+        # then the signed Release files that list them. Pruned packages go
+        # last, once nothing lists them.
+        run: |
+          s3() { aws s3 "$@" --endpoint-url "$R2_ENDPOINT" --only-show-errors; }
+          forever='public, max-age=31536000, immutable'
+          s3 cp repo/pool "$APT_BUCKET/pool" --recursive --cache-control "$forever"
+          s3 cp repo/dists "$APT_BUCKET/dists" --recursive \
+            --exclude '*' --include '*/by-hash/*' --cache-control "$forever"
+          s3 cp repo/dists "$APT_BUCKET/dists" --recursive \
+            --exclude '*/by-hash/*' --exclude '*Release*' --cache-control no-cache
+          s3 cp repo/dists "$APT_BUCKET/dists" --recursive \
+            --exclude '*' --include '*Release*' --cache-control no-cache
+          for file in clementine-archive-keyring.gpg clementine-archive-keyring.asc; do
+            s3 cp "repo/$file" "$APT_BUCKET/$file" --cache-control no-cache
+          done
+          while read -r file; do
+            s3 rm "$APT_BUCKET/$file"
+          done < pruned.txt
+
   # Posts the screenshots the Test, Windows and Mac jobs took on the pull
   # request, next to master's; each run on master replaces master's. Like the
   # Android and iOS remotes' screenshots, they're hosted in a Cloudflare R2
@@ -2214,6 +2324,7 @@ jobs:
     if: always()
     needs:
       - lint
+      - python_apt
       - test
       - build_source
       - build_bookworm_64
