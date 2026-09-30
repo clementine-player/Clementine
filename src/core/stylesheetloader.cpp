@@ -99,7 +99,13 @@ void StyleSheetLoader::ReplaceColor(QString* css, const QString& name,
 }
 
 bool StyleSheetLoader::eventFilter(QObject* obj, QEvent* event) {
-  if (event->type() != QEvent::PaletteChange) return false;
+  // A new application palette, as when the theme switches while Clementine
+  // runs, reaches a window with a stylesheet as ApplicationPaletteChange, not
+  // PaletteChange: without it the colours stayed the old theme's.
+  if (event->type() != QEvent::PaletteChange &&
+      event->type() != QEvent::ApplicationPaletteChange) {
+    return false;
+  }
 
   QWidget* widget = qobject_cast<QWidget*>(obj);
   if (!widget || !filenames_.contains(widget)) return false;

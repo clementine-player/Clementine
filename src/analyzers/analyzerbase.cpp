@@ -27,6 +27,7 @@
 #include <QEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QResizeEvent>
 #include <QtDebug>
 #include <algorithm>
 #include <cmath>
@@ -100,11 +101,22 @@ void Analyzer::Base::transform(Scope& scope) {
   scope.resize(fht_->size() / 2);  // second half of values are rubbish
 }
 
+void Analyzer::Base::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+  if (e->type() != QEvent::PaletteChange) return;
+
+  paletteChange(palette());
+  QResizeEvent resize(size(), size());
+  resizeEvent(&resize);
+  update();
+}
+
 void Analyzer::Base::paintEvent(QPaintEvent* e) {
   QPainter p(this);
   p.fillRect(e->rect(), palette().color(QPalette::Window));
 
-  switch (engine_->state()) {
+  // Until it's given an engine, as when stopped.
+  switch (engine_ ? engine_->state() : Engine::Empty) {
     case Engine::Playing: {
       const Engine::Scope& thescope = engine_->scope(timeout_);
       int i = 0;

@@ -83,10 +83,16 @@ class Base : public QWidget {
  protected:
   explicit Base(QWidget*, uint scopeSize = 7);
 
+  void changeEvent(QEvent*);
   void hideEvent(QHideEvent*);
   void showEvent(QShowEvent*);
   void paintEvent(QPaintEvent*);
   void timerEvent(QTimerEvent*);
+
+  // Works out the colours to draw in from the palette. Called when the
+  // palette changes, as when the theme does, before the analyzer is resized
+  // to its own size again, to redraw what it keeps.
+  virtual void paletteChange(const QPalette&) {}
 
   void polishEvent();
 
