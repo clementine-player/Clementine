@@ -24,7 +24,6 @@
 #include <AppKit/NSWorkspace.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <Foundation/NSString.h>
-#include <IOKit/hidsystem/ev_keymap.h>
 
 #include <QAction>
 #include <QList>
@@ -95,20 +94,6 @@ bool MacGlobalShortcutBackend::DoRegister() {
 void MacGlobalShortcutBackend::DoUnregister() {
   p_->Unregister();
   shortcuts_.clear();
-}
-
-void MacGlobalShortcutBackend::MacMediaKeyPressed(int key) {
-  switch (key) {
-    case NX_KEYTYPE_PLAY:
-      KeyPressed(Qt::Key_MediaPlay);
-      break;
-    case NX_KEYTYPE_FAST:
-      KeyPressed(Qt::Key_MediaNext);
-      break;
-    case NX_KEYTYPE_REWIND:
-      KeyPressed(Qt::Key_MediaPrevious);
-      break;
-  }
 }
 
 bool MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {

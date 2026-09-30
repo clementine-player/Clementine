@@ -39,8 +39,6 @@ class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   bool IsAccessibilityEnabled() const;
   void ShowAccessibilityDialog();
 
-  void MacMediaKeyPressed(int key);
-
  protected:
   bool DoRegister();
   void DoUnregister();
