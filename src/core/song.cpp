@@ -686,7 +686,13 @@ void Song::InitFromFilePartial(const QString& filename) {
   d->basefilename_ = info.fileName();
   QString suffix = info.suffix().toLower();
 
-  TagLib::FileRef fileref(filename.toUtf8().constData());
+#ifdef Q_OS_WIN32
+  // TagLib treats a narrow filename as being in the ANSI code page on
+  // Windows, so non-ASCII paths have to be passed as wide strings.
+  TagLib::FileRef fileref(filename.toStdWString().c_str());
+#else
+  TagLib::FileRef fileref(QFile::encodeName(filename).constData());
+#endif
   if (fileref.file() || GME::IsSupportedFormat(info))
     d->valid_ = true;
   else {
