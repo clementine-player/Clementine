@@ -182,7 +182,6 @@ set(SOURCES
   internet/digitally/digitallyimportedservicebase.cpp
   internet/digitally/digitallyimportedsettingspage.cpp
   internet/digitally/digitallyimportedurlhandler.cpp
-  internet/core/geolocator.cpp
   internet/icecast/icecastbackend.cpp
   internet/icecast/icecastfilterwidget.cpp
   internet/icecast/icecastmodel.cpp
@@ -347,8 +346,6 @@ set(SOURCES
   songinfo/songinfosettingspage.cpp
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
-  songinfo/songkickconcerts.cpp
-  songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
   songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
@@ -526,7 +523,6 @@ set(HEADERS
   internet/digitally/digitallyimportedclient.h
   internet/digitally/digitallyimportedservicebase.h
   internet/digitally/digitallyimportedsettingspage.h
-  internet/core/geolocator.h
   internet/icecast/icecastbackend.h
   internet/icecast/icecastfilterwidget.h
   internet/icecast/icecastmodel.h
@@ -672,8 +668,6 @@ set(HEADERS
   songinfo/songinfosettingspage.h
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
-  songinfo/songkickconcerts.h
-  songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
   songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
@@ -811,7 +805,6 @@ set(UI
   smartplaylists/searchtermwidget.ui
   smartplaylists/wizardfinishpage.ui
 
-  songinfo/songkickconcertwidget.ui
   songinfo/songinfosettingspage.ui
 
   transcoder/transcodedialog.ui
