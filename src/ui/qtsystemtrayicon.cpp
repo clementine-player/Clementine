@@ -85,9 +85,10 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
       action_stop_after_this_track_(nullptr),
       action_mute_(nullptr),
       action_love_(nullptr) {
-  QIcon theme_icon = IconLoader::Load("clementine-panel", IconLoader::Base);
-  QIcon theme_icon_grey =
-      IconLoader::Load("clementine-panel-grey", IconLoader::Base);
+  // Icon themes can have monochrome panel icons for us. Clementine doesn't
+  // ship them, so most won't, and that's fine.
+  QIcon theme_icon = QIcon::fromTheme("clementine-panel");
+  QIcon theme_icon_grey = QIcon::fromTheme("clementine-panel-grey");
 
   if (theme_icon.isNull() || theme_icon_grey.isNull()) {
     // Load the default icon

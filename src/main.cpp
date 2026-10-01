@@ -426,7 +426,7 @@ int main(int argc, char* argv[]) {
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
-  qLog(Info) << "Clementine-qt5" << CLEMENTINE_VERSION_DISPLAY;
+  qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
 
   // Seed the random number generators.
   time_t t = time(nullptr);
@@ -451,6 +451,14 @@ int main(int argc, char* argv[]) {
   surface_format.setProfile(QSurfaceFormat::CoreProfile);
   surface_format.setAlphaBufferSize(0);
   QSurfaceFormat::setDefaultFormat(surface_format);
+
+  // Set the name of the app desktop file as per the freedesktop specifications
+  // This is needed on Wayland for the main window to show the correct icon.
+  // Before the application is made: Qt registers the app with the desktop
+  // portal under this name then, and the portal only takes one name per
+  // connection, so setting it later fails ("Connection already associated
+  // with an application ID").
+  QGuiApplication::setDesktopFileName("org.clementine_player.Clementine");
 
   QtSingleApplication a(argc, argv);
 
@@ -513,12 +521,6 @@ int main(int argc, char* argv[]) {
     // Set -rw-------
     QFile::setPermissions(s.fileName(), QFile::ReadOwner | QFile::WriteOwner);
   }
-#endif
-
-// Set the name of the app desktop file as per the freedesktop specifications
-// This is needed on Wayland for the main window to show the correct icon
-#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-  QGuiApplication::setDesktopFileName("org.clementine_player.Clementine");
 #endif
 
   // Resources

@@ -94,8 +94,16 @@ void GnomeGlobalShortcutBackend::RegisterFinished(
   watcher->deleteLater();
 
   if (reply.type() == QDBusMessage::ErrorMessage) {
-    qLog(Warning) << "Failed to grab media keys" << reply.errorName()
-                  << reply.errorMessage();
+    // Newer GNOMEs (50 at least) don't have the MediaKeys interface any more:
+    // they send media keys to players over MPRIS, which we have.
+    if (reply.errorName() == "org.freedesktop.DBus.Error.UnknownMethod" ||
+        reply.errorName() == "org.freedesktop.DBus.Error.UnknownInterface" ||
+        reply.errorName() == "org.freedesktop.DBus.Error.UnknownObject") {
+      qLog(Info) << "GNOME doesn't take media key grabs: they come over MPRIS";
+    } else {
+      qLog(Warning) << "Failed to grab media keys" << reply.errorName()
+                    << reply.errorMessage();
+    }
     return;
   }
 
