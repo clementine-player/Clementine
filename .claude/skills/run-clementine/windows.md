@@ -1,19 +1,19 @@
 # Build and run Clementine on Windows
 
-Toolchain: MSYS2 MinGW64 (GCC, Qt 6, GStreamer, all from `C:\msys64\mingw64`),
-CMake, and Ninja.
+Toolchain: MSYS2 CLANG64 (Clang and libc++, Qt 6, GStreamer, all from
+`C:\msys64\clang64`), CMake, and Ninja.
 
 Commands below are for the Bash tool (Git Bash) unless marked PowerShell.
 
 ## 1. Put the MSYS2 toolchain first on PATH
 
 ```bash
-export PATH=/c/msys64/mingw64/bin:$PATH
+export PATH=/c/msys64/clang64/bin:$PATH
 ```
 
 Do this in every shell that configures, builds or runs. The system PATH also
-contains `C:\Qt\Tools\mingw1310_64\bin`, a different GCC and Qt that do not
-match the MSYS2 libraries. Using it causes build or runtime DLL failures.
+contains `C:\Qt\Tools\mingw1310_64\bin`, a GCC and Qt that do not match
+the MSYS2 libraries. Using it causes build or runtime DLL failures.
 
 ## 2. Configure (once per checkout or worktree)
 
@@ -21,9 +21,9 @@ Skip this if `bin/CMakeCache.txt` already exists.
 
 ```bash
 cmake -S . -B bin -G Ninja -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/cc.exe \
-  -DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/c++.exe \
-  -DCMAKE_MAKE_PROGRAM=C:/msys64/mingw64/bin/ninja.exe
+  -DCMAKE_C_COMPILER=C:/msys64/clang64/bin/cc.exe \
+  -DCMAKE_CXX_COMPILER=C:/msys64/clang64/bin/c++.exe \
+  -DCMAKE_MAKE_PROGRAM=C:/msys64/clang64/bin/ninja.exe
 ```
 
 Configuring takes about 15 seconds. You can't copy another checkout's `bin/`
@@ -38,13 +38,13 @@ folder the app starts, but nothing plays. Make it a junction to the MSYS2
 plugin folder (PowerShell, no admin needed):
 
 ```powershell
-New-Item -ItemType Junction -Path bin\gstreamer-plugins -Target C:\msys64\mingw64\lib\gstreamer-1.0
+New-Item -ItemType Junction -Path bin\gstreamer-plugins -Target C:\msys64\clang64\lib\gstreamer-1.0
 ```
 
 ## 4. Build
 
 ```bash
-export PATH=/c/msys64/mingw64/bin:$PATH
+export PATH=/c/msys64/clang64/bin:$PATH
 ninja -C bin -j$(nproc)
 ```
 
@@ -54,7 +54,7 @@ seconds. The result is `bin/clementine.exe`.
 
 To check a single `.cpp` compiles without a full build, take its command from
 `ninja -C bin -t commands | grep <file>.cpp`. Replace `-MD -MT … -o <obj>` with
-`-fsyntax-only` and run the rest. Use the MSYS2 `c++.exe` and pass the
+`-fsyntax-only` and run the rest. Use the MSYS2 CLANG64 `c++.exe` and pass the
 arguments from a file to avoid backslash/quoting problems in Git Bash.
 
 ## 5. Launch
@@ -69,7 +69,7 @@ Get-Process clementine -ErrorAction SilentlyContinue | Select-Object Id, Path
 Then launch with the MSYS2 DLLs on PATH (PowerShell):
 
 ```powershell
-$env:PATH = "C:\msys64\mingw64\bin;$env:PATH"
+$env:PATH = "C:\msys64\clang64\bin;$env:PATH"
 Start-Process "<checkout>\bin\clementine.exe"
 Start-Sleep 5
 Get-Process clementine | Select-Object Id, Path, MainWindowTitle

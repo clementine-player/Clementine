@@ -11,7 +11,7 @@ current platform below and follow that file exactly.
 
 | Platform | Instructions |
 | -------- | ------------ |
-| Windows (MSYS2 MinGW64 + Ninja) | [windows.md](windows.md) |
+| Windows (MSYS2 CLANG64 + Ninja) | [windows.md](windows.md) |
 | Linux   | Not written yet |
 | macOS   | Not written yet |
 

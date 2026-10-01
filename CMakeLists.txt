@@ -174,8 +174,14 @@ include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 
 if (WIN32)
-  # RC compiler
-  string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
+  # RC compiler.  A cross GCC toolchain (eg. i686-w64-mingw32-gcc) has a
+  # matching prefixed windres; MSYS2 CLANG64 has no GCC and provides LLVM's
+  # windres-compatible resource compiler instead.
+  if (CMAKE_C_COMPILER MATCHES "gcc")
+    string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
+  else ()
+    set(CMAKE_RC_COMPILER_INIT windres llvm-windres)
+  endif ()
   enable_language(RC)
   SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I ${CMAKE_SOURCE_DIR}/dist/windows")
 endif(WIN32)
