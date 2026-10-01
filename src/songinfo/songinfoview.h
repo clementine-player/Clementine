@@ -18,17 +18,7 @@
 #ifndef SONGINFOVIEW_H
 #define SONGINFOVIEW_H
 
-#include <memory>
-
 #include "songinfobase.h"
-// Needed complete (not just forward-declared) so that Qt6's automatic
-// metatype registration for the UltimateLyricsParsed(QFuture<QList<
-// SongInfoProvider*>>) signal below can determine whether SongInfoProvider
-// derives from QObject.
-#include "songinfoprovider.h"
-
-class UltimateLyricsProvider;
-class UltimateLyricsReader;
 
 class SongInfoView : public SongInfoBase {
   Q_OBJECT
@@ -39,32 +29,12 @@ class SongInfoView : public SongInfoBase {
 
   static const char* kSettingsGroup;
 
-  QList<const UltimateLyricsProvider*> lyric_providers() const;
-
- public slots:
-  void ReloadSettings();
-
  protected:
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
  protected slots:
   virtual void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
-
- private:
-  SongInfoProvider* ProviderByName(const QString& name) const;
-
- private slots:
-  // Written as the fully expanded type rather than the ProviderList typedef:
-  // QMetaMethod::invoke() (used by NewClosure(), see core/closure.h) needs
-  // this signature's text to match QMetaType::fromType<>().name()'s
-  // canonical (alias-resolved) form of the argument's actual type, or the
-  // invoke silently fails - this wasn't an issue under Qt5, which didn't
-  // validate the name.
-  void UltimateLyricsParsed(const QList<SongInfoProvider*>& providers);
-
- private:
-  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
 };
 
 #endif  // SONGINFOVIEW_H

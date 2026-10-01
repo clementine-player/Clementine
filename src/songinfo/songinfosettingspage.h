@@ -20,10 +20,7 @@
 
 #include "ui/settingspage.h"
 
-class SongInfoView;
 class Ui_SongInfoSettingsPage;
-
-class QListWidgetItem;
 
 class SongInfoSettingsPage : public SettingsPage {
   Q_OBJECT
@@ -36,13 +33,6 @@ class SongInfoSettingsPage : public SettingsPage {
   void Save();
 
  private slots:
-  void MoveUp();
-  void MoveDown();
-  void Move(int d);
-
-  void CurrentItemChanged(QListWidgetItem* item);
-  void ItemChanged(QListWidgetItem* item);
-
   void FontSizeChanged(double value);
 
  private:

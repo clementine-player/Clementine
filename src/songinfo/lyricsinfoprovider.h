@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,19 +15,29 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ULTIMATELYRICSLYRIC_H
-#define ULTIMATELYRICSLYRIC_H
+#ifndef SONGINFO_LYRICSINFOPROVIDER_H_
+#define SONGINFO_LYRICSINFOPROVIDER_H_
 
-#include <QString>
-#include <QTextDocument>
+#include <QMap>
 
-class UltimateLyricsLyric : public QTextDocument {
+#include "songinfo/lyricsfetcher.h"
+#include "songinfo/songinfoprovider.h"
+
+// The song's lyrics, from LyricsFetcher, as a section of the song info pane.
+class LyricsInfoProvider : public SongInfoProvider {
   Q_OBJECT
 
  public:
-  UltimateLyricsLyric(QObject* parent = nullptr);
+  LyricsInfoProvider();
 
-  void SetHtml(const QString& html);
+  void FetchInfo(int id, const Song& metadata) override;
+
+ private:
+  void FetchFinished(int fetch_id, const Lyrics& lyrics);
+
+  LyricsFetcher* fetcher_;
+  // Fetch ids to song info request ids.
+  QMap<int, int> requests_;
 };
 
-#endif  // ULTIMATELYRICSLYRIC_H
+#endif  // SONGINFO_LYRICSINFOPROVIDER_H_

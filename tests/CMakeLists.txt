@@ -139,6 +139,8 @@ add_test_file(asxiniparser_test.cpp false)
 #add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
 add_test_file(librarytagprefetcher_test.cpp false)
+add_test_file(lrcparser_test.cpp false)
+add_test_file(lyricsfetcher_test.cpp false)
 add_test_file(librarywatcher_test.cpp false)
 # Scans with real tag reader workers, found on $PATH.
 add_dependencies(librarywatcher_test clementine-tagreader)
