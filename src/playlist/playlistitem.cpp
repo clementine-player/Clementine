@@ -24,8 +24,6 @@
 #include "core/logging.h"
 #include "core/song.h"
 #include "internet/core/internetplaylistitem.h"
-#include "internet/jamendo/jamendoplaylistitem.h"
-#include "internet/jamendo/jamendoservice.h"
 #include "internet/magnatune/magnatuneplaylistitem.h"
 #include "internet/magnatune/magnatuneservice.h"
 #include "library/library.h"
@@ -39,8 +37,6 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new LibraryPlaylistItem(type);
   if (MagnatunePlaylistItem::IsTypeSupported(type))
     return new MagnatunePlaylistItem(type);
-  if (JamendoPlaylistItem::IsTypeSupported(type))
-    return new JamendoPlaylistItem(type);
   if (SongPlaylistItem::IsTypeSupported(type))
     return new SongPlaylistItem(type);
   if (InternetPlaylistItem::IsTypeSupported(type))
@@ -55,8 +51,6 @@ PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table,
   if (table == Library::kSongsTable) return new LibraryPlaylistItem(song);
   if (table == MagnatuneService::kSongsTable)
     return new MagnatunePlaylistItem(song);
-  if (table == JamendoService::kSongsTable)
-    return new JamendoPlaylistItem(song);
 
   qLog(Warning) << "Invalid PlaylistItem songs table:" << table;
   return nullptr;

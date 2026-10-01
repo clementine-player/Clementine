@@ -465,8 +465,6 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url,
       icon = IconLoader::Load("spotify", IconLoader::Provider);
     } else if (url.scheme() == "file") {
       icon = IconLoader::Load("folder-sound", IconLoader::Base);
-    } else if (url.host() == "api.jamendo.com") {
-      icon = IconLoader::Load("jamendo", IconLoader::Provider);
     } else if (url.host() == "api.soundcloud.com") {
       icon = IconLoader::Load("soundcloud", IconLoader::Provider);
     } else if (url.scheme() == "cdda") {

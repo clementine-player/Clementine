@@ -58,7 +58,10 @@ bool InternetPlaylistItem::InitFromQuery(const SqlRow& query) {
 
   service_name_ = query.value(row + 1).toString();
 
-  metadata_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
+  // The playlist item's own columns follow the songs tables'.
+  metadata_.InitFromQuery(
+      query, false,
+      (Song::kColumns.count() + 1) * (PlaylistBackend::kSongTableJoins - 1));
   InitMetadata();
 
   return true;

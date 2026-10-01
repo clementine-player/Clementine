@@ -41,7 +41,7 @@ using std::placeholders::_1;
 
 using smart_playlists::GeneratorPtr;
 
-const int PlaylistBackend::kSongTableJoins = 4;
+const int PlaylistBackend::kSongTableJoins = 3;
 
 PlaylistBackend::PlaylistBackend(Application* app, QObject* parent)
     : QObject(parent), app_(app), db_(app_->database()) {}
@@ -145,9 +145,6 @@ QSqlQuery PlaylistBackend::GetPlaylistRows(int playlist) {
                   "       magnatune_songs.ROWID, " +
                   Song::JoinSpec("magnatune_songs") +
                   ","
-                  "       jamendo_songs.ROWID, " +
-                  Song::JoinSpec("jamendo_songs") +
-                  ","
                   "       p.ROWID, " +
                   Song::JoinSpec("p") +
                   ","
@@ -157,8 +154,6 @@ QSqlQuery PlaylistBackend::GetPlaylistRows(int playlist) {
                   "    ON p.library_id = songs.ROWID"
                   " LEFT JOIN magnatune_songs"
                   "    ON p.library_id = magnatune_songs.ROWID"
-                  " LEFT JOIN jamendo.songs AS jamendo_songs"
-                  "    ON p.library_id = jamendo_songs.ROWID"
                   " WHERE p.playlist = :playlist";
   QSqlQuery q(db);
   // Forward iterations only may be faster
