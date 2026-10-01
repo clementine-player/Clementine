@@ -26,6 +26,7 @@
 #include <QMap>
 #include <QMetaType>
 #include <QNetworkCookie>
+#include <QNetworkReply>
 
 #include "config.h"
 #include "covers/albumcoverfetcher.h"
@@ -33,7 +34,6 @@
 #include "engines/gstengine.h"
 #include "engines/gstenginepipeline.h"
 #include "globalsearch/searchprovider.h"
-#include "internet/core/geolocator.h"
 #include "internet/digitally/digitallyimportedclient.h"
 #include "internet/intergalacticfm/intergalacticfmservice.h"
 #include "internet/podcasts/podcast.h"
@@ -68,7 +68,6 @@ void RegisterMetaTypes() {
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::TrackChangeFlags>("Engine::TrackChangeFlags");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEngine::OutputDetails>("GstEngine::OutputDetails");
