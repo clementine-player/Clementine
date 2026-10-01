@@ -458,7 +458,7 @@ jobs:
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
       - name: Create draft pre-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
