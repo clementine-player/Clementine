@@ -959,7 +959,7 @@ jobs:
         shell: msys2 {0}
     env:
       # A Windows path: actions/cache runs outside the MSYS2 shell, and the
-      # mingw ccache is a native Win32 binary, so both understand this one.
+      # clang64 ccache is a native Win32 binary, so both understand this one.
       # Under the workspace rather than runner.temp, because the runner
       # context isn't available at job level.
       CCACHE_DIR: ${{ github.workspace }}\.ccache
@@ -989,51 +989,55 @@ jobs:
           }
           Add-Content -Path $env:GITHUB_PATH -Value $nsisDir
 
-      - name: Set up MSYS2 (mingw64)
+      # CLANG64 rather than MINGW64 or UCRT64: like UCRT64 it links against
+      # the Universal C Runtime instead of MINGW64's legacy msvcrt.dll, and
+      # it builds with clang, lld and libc++ - the same compiler family as
+      # the macOS build.
+      - name: Set up MSYS2 (clang64)
         uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW64
+          msystem: CLANG64
           update: true
           install: >-
             base-devel
             git
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-ccache
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-ninja
-            mingw-w64-x86_64-ntldd
-            mingw-w64-x86_64-pkgconf
-            mingw-w64-x86_64-qt6-base
-            mingw-w64-x86_64-qt6-5compat
-            mingw-w64-x86_64-qt6-tools
-            mingw-w64-x86_64-qt6-svg
-            mingw-w64-x86_64-taglib
-            mingw-w64-x86_64-boost
-            mingw-w64-x86_64-protobuf
-            mingw-w64-x86_64-sqlite3
-            mingw-w64-x86_64-glew
-            mingw-w64-x86_64-fftw
-            mingw-w64-x86_64-chromaprint
-            mingw-w64-x86_64-libcdio
-            mingw-w64-x86_64-sparsehash
-            mingw-w64-x86_64-gettext
-            mingw-w64-x86_64-gstreamer
-            mingw-w64-x86_64-gst-plugins-base
-            mingw-w64-x86_64-gst-plugins-good
-            mingw-w64-x86_64-gst-plugins-bad
-            mingw-w64-x86_64-gst-plugins-ugly
-            mingw-w64-x86_64-gst-libav
+            mingw-w64-clang-x86_64-toolchain
+            mingw-w64-clang-x86_64-ccache
+            mingw-w64-clang-x86_64-cmake
+            mingw-w64-clang-x86_64-ninja
+            mingw-w64-clang-x86_64-ntldd
+            mingw-w64-clang-x86_64-pkgconf
+            mingw-w64-clang-x86_64-qt6-base
+            mingw-w64-clang-x86_64-qt6-5compat
+            mingw-w64-clang-x86_64-qt6-tools
+            mingw-w64-clang-x86_64-qt6-svg
+            mingw-w64-clang-x86_64-taglib
+            mingw-w64-clang-x86_64-boost
+            mingw-w64-clang-x86_64-protobuf
+            mingw-w64-clang-x86_64-sqlite3
+            mingw-w64-clang-x86_64-glew
+            mingw-w64-clang-x86_64-fftw
+            mingw-w64-clang-x86_64-chromaprint
+            mingw-w64-clang-x86_64-libcdio
+            mingw-w64-clang-x86_64-sparsehash
+            mingw-w64-clang-x86_64-gettext
+            mingw-w64-clang-x86_64-gstreamer
+            mingw-w64-clang-x86_64-gst-plugins-base
+            mingw-w64-clang-x86_64-gst-plugins-good
+            mingw-w64-clang-x86_64-gst-plugins-bad
+            mingw-w64-clang-x86_64-gst-plugins-ugly
+            mingw-w64-clang-x86_64-gst-libav
 
-      # These aren't confirmed to exist as MSYS2 mingw64 packages (libmtp in
+      # These aren't confirmed to exist as MSYS2 clang64 packages (libmtp in
       # particular). Failing softly here just means CMake's optional_component
       # machinery disables the corresponding feature instead of failing the
       # whole build - see the job summary in the PR/commit this came from.
-      # libgpod isn't attempted at all: it's not packaged for MSYS2 mingw64,
+      # libgpod isn't attempted at all: it's not packaged for MSYS2 clang64,
       # so iPod classic support is disabled on this build variant for now.
       # (Last.fm scrobbling talks directly to the web service API now - see
       # src/internet/lastfm/lastfmws.* - so it needs no package here at all.)
       - name: Install optional dependencies (best-effort)
-        run: pacman --noconfirm -S --needed mingw-w64-x86_64-libmtp || true
+        run: pacman --noconfirm -S --needed mingw-w64-clang-x86_64-libmtp || true
 
       - name: git hackery
         run: git config --global --add safe.directory "$(cygpath -u "$GITHUB_WORKSPACE")"
@@ -1076,40 +1080,40 @@ jobs:
         run: |
           set -e
           mkdir -p platforms styles imageformats tls
-          cp /mingw64/share/qt6/plugins/platforms/qwindows.dll platforms/
+          cp /clang64/share/qt6/plugins/platforms/qwindows.dll platforms/
           # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
           # a single qmodernwindowsstyle.dll that covers both the
           # "windowsvista" and "windows11" styles.
-          cp /mingw64/share/qt6/plugins/styles/qmodernwindowsstyle.dll styles/
-          cp /mingw64/share/qt6/plugins/imageformats/qgif.dll \
-             /mingw64/share/qt6/plugins/imageformats/qjpeg.dll \
-             /mingw64/share/qt6/plugins/imageformats/qsvg.dll \
+          cp /clang64/share/qt6/plugins/styles/qmodernwindowsstyle.dll styles/
+          cp /clang64/share/qt6/plugins/imageformats/qgif.dll \
+             /clang64/share/qt6/plugins/imageformats/qjpeg.dll \
+             /clang64/share/qt6/plugins/imageformats/qsvg.dll \
              imageformats/
           # Qt6 moved TLS support out of QtNetwork and into a plugin.
           # qschannelbackend uses Windows' native Secure Channel, so unlike
           # the qopensslbackend alternative it needs no separate OpenSSL DLLs
           # bundled alongside it.
-          cp /mingw64/share/qt6/plugins/tls/qschannelbackend.dll tls/
+          cp /clang64/share/qt6/plugins/tls/qschannelbackend.dll tls/
 
       - name: Copy GIO modules
         working-directory: dist/windows
         run: |
           mkdir -p gio-modules
-          cp /mingw64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
+          cp /clang64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
 
       - name: Copy GStreamer plugins
         working-directory: dist/windows
         run: |
           mkdir -p gstreamer-plugins
-          cp /mingw64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+          cp /clang64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
 
       # Direct + transitive linked DLL dependencies are discovered from the
       # built binaries themselves rather than hardcoded by name/version, since
-      # exact mingw64 package sonames drift with every MSYS2 update. This has
+      # exact clang64 package sonames drift with every MSYS2 update. This has
       # to run after every plugin-copying step above, and walk those plugin
       # DLLs too, not just the .exes - a plugin loaded via dlopen() at
       # runtime (Qt platform plugins, GStreamer elements, GIO modules) can
-      # depend on a mingw64 DLL nothing else in the app needs (eg.
+      # depend on a clang64 DLL nothing else in the app needs (eg.
       # gstreamer-plugins/libgstaudiofx.dll needs liborc, which no .exe here
       # links against), and that DLL then silently isn't there at runtime -
       # GStreamer just drops the one plugin that needed it rather than
@@ -1132,23 +1136,23 @@ jobs:
           echo "---- raw ntldd output ----"
           cat raw_deps.txt
           # ntldd prints native Windows paths (backslash-separated, drive
-          # letter, e.g. D:\a\_temp\msys64\mingw64\bin\libfoo.dll) rather than
-          # the /mingw64/... POSIX path - match on "mingw64\bin" or
-          # "mingw64/bin" regardless of separator, then re-resolve each hit
-          # against the canonical POSIX /mingw64/bin path rather than passing
+          # letter, e.g. D:\a\_temp\msys64\clang64\bin\libfoo.dll) rather than
+          # the /clang64/... POSIX path - match on "clang64\bin" or
+          # "clang64/bin" regardless of separator, then re-resolve each hit
+          # against the canonical POSIX /clang64/bin path rather than passing
           # the raw backslash path to cp.
           grep '=>' raw_deps.txt | awk '{print $3}' \
-            | grep -i 'mingw64[\\/]bin[\\/]' \
+            | grep -i 'clang64[\\/]bin[\\/]' \
             | sed 's/^.*[\\/]//' \
             | sort -u > mingw_deps.txt || true
-          echo "---- mingw64 DLLs to bundle ----"
+          echo "---- clang64 DLLs to bundle ----"
           cat mingw_deps.txt
           if [ ! -s mingw_deps.txt ]; then
-            echo "::error::No mingw64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
+            echo "::error::No clang64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
             exit 1
           fi
           while IFS= read -r name; do
-            cp -n -v "/mingw64/bin/$name" .
+            cp -n -v "/clang64/bin/$name" .
           done < mingw_deps.txt
           rm -f raw_deps.txt mingw_deps.txt
 

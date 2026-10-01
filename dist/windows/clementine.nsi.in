@@ -314,6 +314,19 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\imageformats\qgif4.dll"
   Delete "$INSTDIR\imageformats\qjpeg4.dll"
 
+  ; Runtime DLLs and plugins are collected by CI rather than listed here, so
+  ; their names change between releases - eg. the move from MSYS2 MINGW64
+  ; to CLANG64 swapped GCC's libstdc++/msvcrt runtime for libc++/UCRT.
+  ; Clear out everything the previous install bundled so a stale DLL built
+  ; against the old runtime can't be picked up next to the new ones.
+  Delete "$INSTDIR\*.dll"
+  Delete "$INSTDIR\platforms\*.dll"
+  Delete "$INSTDIR\styles\*.dll"
+  Delete "$INSTDIR\imageformats\*.dll"
+  Delete "$INSTDIR\tls\*.dll"
+  Delete "$INSTDIR\gio-modules\*.dll"
+  Delete "$INSTDIR\gstreamer-plugins\*.dll"
+
 SectionEnd
 
 Section "Clementine" Clementine
