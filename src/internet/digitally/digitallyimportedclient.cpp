@@ -38,9 +38,12 @@ const char* DigitallyImportedClient::kApiPassword = "dayeiph0ne@pp";
 const char* DigitallyImportedClient::kAuthUrl =
     "https://api.audioaddict.com/v1/%1/members/authenticate";
 
+// The API now rejects an empty stream_set_key. Only the channels are read
+// from the reply, not its streams, so any stream set will do: public3 is the
+// one that comes back fastest.
 const char* DigitallyImportedClient::kChannelListUrl =
     "https://api.audioaddict.com/v1/%1/mobile/"
-    "batch_update?asset_group_key=mobile_icons&stream_set_key=";
+    "batch_update?asset_group_key=mobile_icons&stream_set_key=public3";
 
 DigitallyImportedClient::DigitallyImportedClient(const QString& service_name,
                                                  QObject* parent)
@@ -143,6 +146,10 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
 
       Channel channel;
       channel.art_url_ = QUrl(json_channel["asset_url"].toString());
+      // It leaves out its scheme ("//cdn-images...").
+      if (!channel.art_url_.isEmpty() && channel.art_url_.scheme().isEmpty()) {
+        channel.art_url_.setScheme("https");
+      }
       channel.description_ = json_channel["description"].toString();
       channel.director_ = json_channel["channel_director"].toString();
       channel.key_ = json_channel["key"].toString();
