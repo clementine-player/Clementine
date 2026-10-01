@@ -210,7 +210,10 @@ void SongInfoBase::ReloadSettings() {
     QWidget* contents = pane->data().contents_;
     if (!contents) continue;
 
-    QMetaObject::invokeMethod(contents, "ReloadSettings");
+    // Not every section has settings.
+    if (contents->metaObject()->indexOfMethod("ReloadSettings()") != -1) {
+      QMetaObject::invokeMethod(contents, "ReloadSettings");
+    }
   }
 }
 

@@ -94,7 +94,7 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const LastFmXmlQuery& q) {
     widget->AddItem(IconLoader::Load("media-playback-start", IconLoader::Base),
                     tr("%L1 total plays").arg(playcount));
   if (listeners)
-    widget->AddItem(IconLoader::Load("my_neighbours", IconLoader::Lastfm),
+    widget->AddItem(IconLoader::Load("group", IconLoader::Base),
                     tr("%L1 other listeners").arg(listeners));
 
   emit InfoReady(id, data);

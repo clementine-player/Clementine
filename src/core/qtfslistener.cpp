@@ -36,6 +36,9 @@ void QtFSListener::RemovePath(const QString& path) {
 }
 
 void QtFSListener::Clear() {
-  watcher_.removePaths(watcher_.directories());
-  watcher_.removePaths(watcher_.files());
+  // Qt warns about removing nothing.
+  if (!watcher_.directories().isEmpty()) {
+    watcher_.removePaths(watcher_.directories());
+  }
+  if (!watcher_.files().isEmpty()) watcher_.removePaths(watcher_.files());
 }
