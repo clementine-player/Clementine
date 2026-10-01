@@ -61,15 +61,18 @@ const char* MagnatuneService::kSettingsGroup = "Magnatune";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
 const char* MagnatuneService::kFtsTable = "magnatune_songs_fts";
 
-const char* MagnatuneService::kHomepage = "http://magnatune.com";
+const char* MagnatuneService::kHomepage = "https://magnatune.com";
 const char* MagnatuneService::kDatabaseUrl =
-    "http://magnatune.com/info/song_info_xml.gz";
-const char* MagnatuneService::kStreamingHostname = "streaming.magnatune.com";
-const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
+    "https://magnatune.com/info/song_info_xml.gz";
+// Where every track is served from, to members too, who log in with HTTP
+// Basic authentication. The catalogue's own URLs name he3.magnatune.com,
+// which no longer answers, and the members' old streaming. and download.
+// hosts only redirect here.
+const char* MagnatuneService::kHostname = "magnatune.com";
 
 const char* MagnatuneService::kPartnerId = "clementine";
 const char* MagnatuneService::kDownloadUrl =
-    "http://download.magnatune.com/buy/membership_free_dl_xml";
+    "https://magnatune.com/buy/membership_free_dl_xml";
 
 MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
@@ -318,20 +321,10 @@ void MagnatuneService::Homepage() {
 
 QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
   QUrl ret(url);
-  ret.setScheme("http");
+  ret.setScheme("https");
+  ret.setHost(kHostname);
 
-  switch (membership_) {
-    case Membership_None:
-      return ret;  // Use the URL as-is
-
-    // Otherwise add the hostname
-    case Membership_Streaming:
-      ret.setHost(kStreamingHostname);
-      break;
-    case Membership_Download:
-      ret.setHost(kDownloadHostname);
-      break;
-  }
+  if (membership_ == Membership_None) return ret;
 
   // Add the credentials
   ret.setUserName(username_);

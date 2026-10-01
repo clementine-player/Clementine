@@ -135,6 +135,7 @@ void MagnatuneDownloadDialog::DownloadNext() {
   QUrlQuery url_query;
   url_query.addQueryItem("id", MagnatuneService::kPartnerId);
   url_query.addQueryItem("sku", sku);
+  url.setQuery(url_query);
 
   current_reply_ = network_->get(QNetworkRequest(url));
 
