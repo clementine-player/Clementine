@@ -458,6 +458,8 @@ jobs:
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
       - name: Create draft pre-release
+        # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
+        # at once, among a run of Not Found errors from GitHub.
         uses: softprops/action-gh-release@v3.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -468,6 +470,7 @@ jobs:
           fail_on_unmatched_files: true
           draft: false
           prerelease: false
+          preserve_order: true
 
   build_source:
     name: Build source tarball
