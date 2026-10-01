@@ -24,6 +24,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QTimer>
+#include <QUrlQuery>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -45,6 +46,12 @@ namespace {
 
 static const char* kServiceId = "dropbox";
 
+static const char* kOAuthEndpoint = "https://www.dropbox.com/oauth2/authorize";
+static const char* kOAuthClientId = "qh6ca27eclt9p2k";
+static const char* kOAuthClientSecret = "pg7y68h5efap8r6";
+static const char* kOAuthTokenEndpoint =
+    "https://api.dropboxapi.com/oauth2/token";
+
 static const char* kMediaEndpoint =
     "https://api.dropboxapi.com/2/files/get_temporary_link";
 static const char* kListFolderEndpoint =
@@ -63,35 +70,102 @@ DropboxService::DropboxService(Application* app, InternetModel* parent)
       network_(new NetworkAccessManager(this)) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  // OAuth2 version of dropbox auth token.
+  // A long-lived token from before Dropbox's tokens started expiring, kept
+  // until it's replaced by logging in again. It has no expiry time.
   access_token_ = settings.value("access_token2").toString();
   app->player()->RegisterUrlHandler(new DropboxUrlHandler(this, this));
 }
 
 bool DropboxService::has_credentials() const {
-  return !access_token_.isEmpty();
+  return !refresh_token().isEmpty() || !access_token_.isEmpty();
+}
+
+QString DropboxService::refresh_token() const {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  return s.value("refresh_token").toString();
+}
+
+bool DropboxService::is_authenticated() const {
+  return !access_token_.isEmpty() &&
+         (!expiry_time_.isValid() ||
+          QDateTime::currentDateTime().secsTo(expiry_time_) > 0);
 }
 
 void DropboxService::Connect() {
-  if (has_credentials()) {
+  if (!has_credentials()) {
+    ShowConfig();
+  } else if (is_authenticated()) {
     RequestFileList();
   } else {
-    ShowConfig();
+    connect(RefreshAccessToken(), &OAuthenticator::Finished, this, [this] {
+      if (is_authenticated()) RequestFileList();
+    });
   }
 }
 
-void DropboxService::AuthenticationFinished(OAuthenticator* authenticator) {
-  authenticator->deleteLater();
+void DropboxService::Login() {
+  OAuthenticator* oauth = new OAuthenticator(
+      kOAuthClientId, kOAuthClientSecret,
+      OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
+  connect(oauth, &OAuthenticator::Finished, this, [this, oauth] {
+    AccessTokenFinished(oauth);
+    if (is_authenticated()) RequestFileList();
+  });
+  // Dropbox's access tokens expire after a few hours: ask for a refresh
+  // token too.
+  QUrlQuery extra_params;
+  extra_params.addQueryItem("token_access_type", "offline");
+  oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, QString(),
+                            extra_params);
+}
 
-  access_token_ = authenticator->access_token();
+OAuthenticator* DropboxService::RefreshAccessToken() {
+  OAuthenticator* oauth = new OAuthenticator(
+      kOAuthClientId, kOAuthClientSecret,
+      OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
+  connect(oauth, &OAuthenticator::Finished, this,
+          [this, oauth] { AccessTokenFinished(oauth); });
+  oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token());
+  return oauth;
+}
 
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-  settings.setValue("access_token2", access_token_);
+void DropboxService::AccessTokenFinished(OAuthenticator* oauth) {
+  oauth->deleteLater();
+
+  if (oauth->access_token().isEmpty()) {
+    qLog(Error) << "Couldn't get a Dropbox access token";
+    return;
+  }
+
+  access_token_ = oauth->access_token();
+  expiry_time_ = oauth->expiry_time();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  // A refresh doesn't come with a new refresh token: keep the one we have.
+  if (!oauth->refresh_token().isEmpty()) {
+    s.setValue("refresh_token", oauth->refresh_token());
+  }
+  s.remove("access_token2");
 
   emit Connected();
+}
 
-  RequestFileList();
+void DropboxService::EnsureConnected() {
+  if (is_authenticated() || refresh_token().isEmpty()) return;
+
+  WaitForSignal(RefreshAccessToken(), SIGNAL(Finished()));
+}
+
+void DropboxService::ForgetCredentials() {
+  access_token_.clear();
+  expiry_time_ = QDateTime();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.remove("refresh_token");
+  s.remove("access_token2");
 }
 
 QByteArray DropboxService::GenerateAuthorisationHeader() {
@@ -99,6 +173,13 @@ QByteArray DropboxService::GenerateAuthorisationHeader() {
 }
 
 void DropboxService::RequestFileList() {
+  if (!is_authenticated()) {
+    // The access token has expired since the last listing: this is called
+    // again once there's a new one.
+    Connect();
+    return;
+  }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
@@ -136,6 +217,18 @@ void DropboxService::RequestFileList() {
 
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   reply->deleteLater();
+
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() ==
+          401 &&
+      refresh_token().isEmpty()) {
+    // An access token saved before we asked for refresh tokens, which has
+    // expired, as all of them since 2021 have.
+    ForgetCredentials();
+    app_->AddError(
+        tr("Your Dropbox login has expired. Log in again in "
+           "Dropbox's settings."));
+    return;
+  }
 
   QJsonDocument document = ParseJsonReply(reply);
   if (document.isNull()) return;
@@ -276,6 +369,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
 }
 
 QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
+  EnsureConnected();
   QNetworkReply* reply = FetchContentUrl(url);
   WaitForSignal(reply, SIGNAL(finished()));
 
