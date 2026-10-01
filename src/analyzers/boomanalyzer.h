@@ -35,16 +35,16 @@ class BoomAnalyzer : public Analyzer::Base {
 
   static const char* kName;
 
-  virtual void transform(Analyzer::Scope& s);
-  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
-  virtual void psychedelicModeChanged(bool);
+  void transform(Analyzer::Scope& s) override;
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame) override;
+  void psychedelicModeChanged(bool) override;
 
  public slots:
   void changeK_barHeight(int);
   void changeF_peakSpeed(int);
 
  protected:
-  void resizeEvent(QResizeEvent* e);
+  void resizeEvent(QResizeEvent* e) override;
   void paletteChange(const QPalette&) override;
 
   static const uint kColumnWidth;

@@ -37,15 +37,15 @@ class BarAnalyzer : public Analyzer::Base {
  public:
   Q_INVOKABLE BarAnalyzer(QWidget*);
 
-  void init();
-  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
-  virtual void psychedelicModeChanged(bool);
+  void init() override;
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame) override;
+  void psychedelicModeChanged(bool) override;
 
   /**
    * Resizes the widget to a new geometry according to @p e
    * @param e The resize-event
    */
-  void resizeEvent(QResizeEvent* e);
+  void resizeEvent(QResizeEvent* e) override;
   void paletteChange(const QPalette& palette) override;
   void colorChanged();
 

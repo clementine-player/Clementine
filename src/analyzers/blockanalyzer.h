@@ -53,12 +53,12 @@ class BlockAnalyzer : public Analyzer::Base {
   static const char* kName;
 
  protected:
-  virtual void transform(Analyzer::Scope&);
-  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
-  virtual void resizeEvent(QResizeEvent*);
+  void transform(Analyzer::Scope&) override;
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame) override;
+  void resizeEvent(QResizeEvent*) override;
   void paletteChange(const QPalette&) override;
-  virtual void framerateChanged();
-  virtual void psychedelicModeChanged(bool);
+  void framerateChanged() override;
+  void psychedelicModeChanged(bool) override;
 
   void determineStep();
 
