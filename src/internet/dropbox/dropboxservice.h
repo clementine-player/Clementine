@@ -19,6 +19,8 @@
 #ifndef INTERNET_DROPBOX_DROPBOXSERVICE_H_
 #define INTERNET_DROPBOX_DROPBOXSERVICE_H_
 
+#include <QDateTime>
+
 #include "core/tagreaderclient.h"
 #include "internet/core/cloudfileservice.h"
 
@@ -37,6 +39,10 @@ class DropboxService : public CloudFileService {
 
   virtual bool has_credentials() const;
 
+  // Opens the browser to log in to Dropbox.
+  void Login();
+  void ForgetCredentials();
+
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
  signals:
@@ -44,7 +50,6 @@ class DropboxService : public CloudFileService {
 
  public slots:
   void Connect();
-  void AuthenticationFinished(OAuthenticator* authenticator);
 
  private slots:
   void RequestFileListFinished(QNetworkReply* reply);
@@ -53,12 +58,23 @@ class DropboxService : public CloudFileService {
   void LongPollDelta();
 
  private:
+  QString refresh_token() const;
+  bool is_authenticated() const;
+  // Gets a new access token with the refresh token. It's ready when the
+  // OAuthenticator returned emits Finished().
+  OAuthenticator* RefreshAccessToken();
+  void AccessTokenFinished(OAuthenticator* oauth);
+  // Blocks until the access token is current, if it can be.
+  void EnsureConnected();
+
   void RequestFileList();
   QByteArray GenerateAuthorisationHeader();
   QNetworkReply* FetchContentUrl(const QUrl& url);
 
  private:
   QString access_token_;
+  // When access_token_ expires, or invalid for a long-lived token.
+  QDateTime expiry_time_;
 
   NetworkAccessManager* network_;
 };
