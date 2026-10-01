@@ -156,8 +156,12 @@ endif(GIT_PARTS_LENGTH EQUAL 3)
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${GIT_REV}")
   set(CLEMENTINE_VERSION_DEB     "${GIT_REV}")
-  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}")
-  set(CLEMENTINE_VERSION_RPM_R   "2.${GIT_COMMITCOUNT}.${GIT_SHA1}")
+  # A snapshot after the tag: rpm sorts 1.4.1^256.gdb9f503df after 1.4.1
+  # whatever its release, and before 1.4.2. With the commits in the release
+  # instead (1.4.1-2.256...), Fedora's own 1.4.1-10 sorted above every build
+  # and dnf chose it over COPR's.
+  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}^${GIT_COMMITCOUNT}.${GIT_SHA1}")
+  set(CLEMENTINE_VERSION_RPM_R   "1")
   set(CLEMENTINE_VERSION_SPARKLE "${GIT_REV}")
   set(CLEMENTINE_VERSION_PLIST   "4096.${GIT_TAGNAME}.2.${GIT_COMMITCOUNT}")
 endif(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
