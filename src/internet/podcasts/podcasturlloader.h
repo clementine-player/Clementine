@@ -80,7 +80,7 @@ class PodcastUrlLoader : public QObject {
   // Both the FixPodcastUrl functions replace common podcatcher URL schemes
   // like itpc:// or zune:// with their http:// equivalents.  The QString
   // overload also cleans up user-entered text a bit - stripping whitespace and
-  // applying shortcuts like sc:tag.
+  // applying shortcuts like fb:name.
   static QUrl FixPodcastUrl(const QString& url_text);
   static QUrl FixPodcastUrl(const QUrl& url);
 
