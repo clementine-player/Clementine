@@ -888,6 +888,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Lyrics
   ConnectInfoView(song_info_view_);
+  song_info_view_->SetPlayer(app_->player());
   ConnectInfoView(artist_info_view_);
 
   // Analyzer

@@ -18,6 +18,7 @@
 #include "lyricsinfoprovider.h"
 
 #include "songinfo/songinfotextview.h"
+#include "songinfo/syncedlyricsview.h"
 
 LyricsInfoProvider::LyricsInfoProvider() : fetcher_(new LyricsFetcher(this)) {
   connect(fetcher_, &LyricsFetcher::Finished, this,
@@ -38,9 +39,23 @@ void LyricsInfoProvider::FetchFinished(int fetch_id, const Lyrics& lyrics) {
     data.title_ = lyrics.title;
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
 
-    SongInfoTextView* view = new SongInfoTextView;
-    view->setPlainText(lyrics.instrumental ? tr("Instrumental") : lyrics.plain);
-    data.contents_ = view;
+    // Timed lyrics follow the song, in SongInfoView.
+    SyncedLyricsView* synced = nullptr;
+    if (!lyrics.instrumental && !lyrics.lrc.isEmpty()) {
+      synced = new SyncedLyricsView(lyrics.lrc);
+      if (!synced->has_lines()) {
+        delete synced;
+        synced = nullptr;
+      }
+    }
+    if (synced) {
+      data.contents_ = synced;
+    } else {
+      SongInfoTextView* view = new SongInfoTextView;
+      view->setPlainText(lyrics.instrumental ? tr("Instrumental")
+                                             : lyrics.plain);
+      data.contents_ = view;
+    }
 
     emit InfoReady(id, data);
   }

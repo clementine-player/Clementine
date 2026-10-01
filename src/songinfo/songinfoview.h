@@ -18,7 +18,15 @@
 #ifndef SONGINFOVIEW_H
 #define SONGINFOVIEW_H
 
+#include <QDateTime>
+#include <QPointer>
+
 #include "songinfobase.h"
+
+class Player;
+class SyncedLyricsView;
+
+class QTimer;
 
 class SongInfoView : public SongInfoBase {
   Q_OBJECT
@@ -29,12 +37,29 @@ class SongInfoView : public SongInfoBase {
 
   static const char* kSettingsGroup;
 
+  // Where timed lyrics get the song's position from.
+  void SetPlayer(Player* player);
+
  protected:
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
+  void showEvent(QShowEvent* e) override;
+  void hideEvent(QHideEvent* e) override;
 
  protected slots:
   virtual void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
+
+ private:
+  void UpdateLyricsTimer();
+  void UpdateLyricsPosition();
+  void ScrollToLyricsLine(int y, int height);
+
+  Player* player_;
+  QTimer* lyrics_timer_;
+  // The current song's timed lyrics, if it has them.
+  QPointer<SyncedLyricsView> synced_lyrics_;
+  // When the user last scrolled the pane: we leave it alone for a while.
+  QDateTime user_scrolled_;
 };
 
 #endif  // SONGINFOVIEW_H
