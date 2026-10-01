@@ -34,9 +34,7 @@
 #include "ui/iconloader.h"
 #include "ui_itunessearchpage.h"
 
-const char* ITunesSearchPage::kUrlBase =
-    "http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStoreServices.woa/"
-    "wa/wsSearch?country=US&media=podcast";
+const char* ITunesSearchPage::kUrlBase = "https://itunes.apple.com/search";
 
 ITunesSearchPage::ITunesSearchPage(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),
@@ -52,8 +50,9 @@ ITunesSearchPage::~ITunesSearchPage() { delete ui_; }
 void ITunesSearchPage::SearchClicked() {
   emit Busy(true);
 
-  QUrl url(QUrl::fromEncoded(kUrlBase));
+  QUrl url(kUrlBase);
   QUrlQuery url_query;
+  url_query.addQueryItem("media", "podcast");
   url_query.addQueryItem("term", ui_->query->text());
   url.setQuery(url_query);
 
@@ -107,7 +106,11 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
     podcast.set_url(QUrl(json_result["feedUrl"].toString()));
     podcast.set_link(QUrl(json_result["trackViewUrl"].toString()));
     podcast.set_image_url_small(QUrl(json_result["artworkUrl30"].toString()));
-    podcast.set_image_url_large(QUrl(json_result["artworkUrl100"].toString()));
+    QString large_image = json_result["artworkUrl600"].toString();
+    if (large_image.isEmpty()) {
+      large_image = json_result["artworkUrl100"].toString();
+    }
+    podcast.set_image_url_large(QUrl(large_image));
 
     model()->appendRow(model()->CreatePodcastItem(podcast));
   }
