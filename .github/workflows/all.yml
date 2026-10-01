@@ -882,6 +882,33 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      # Builds this commit in COPR, which rebuilds the source RPM for each
+      # Fedora release and architecture the project has, then signs and
+      # hosts them: dnf copr enable <COPR_PROJECT>. One source RPM builds for
+      # all of them, so only this job sends it. Needs:
+      #   variable COPR_PROJECT, the project as owner/name;
+      #   secret COPR_CONFIG, the config file COPR's API page shows
+      #   (https://copr.fedorainfracloud.org/api/).
+      # COPR's tokens expire, so this only warns when it fails: the release
+      # waits on this job.
+      - name: Build in COPR
+        if: >
+          github.event_name == 'push' && github.ref == 'refs/heads/master'
+          && matrix.artifact == 'release_fedora_44' && vars.COPR_PROJECT != ''
+        continue-on-error: true
+        env:
+          COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
+          COPR_PROJECT: ${{ vars.COPR_PROJECT }}
+        run: |
+          dnf install --assumeyes copr-cli
+          mkdir -p ~/.config
+          trap 'rm -f ~/.config/copr' EXIT
+          printf '%s\n' "$COPR_CONFIG" > ~/.config/copr
+          # --nowait: COPR takes a while, and its own page shows the result.
+          if ! copr-cli build "$COPR_PROJECT" ~/rpmbuild/SRPMS/clementine-*.src.rpm --nowait; then
+            echo "::warning::Couldn't start the COPR build: has the COPR_CONFIG token expired?"
+            exit 1
+          fi
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,

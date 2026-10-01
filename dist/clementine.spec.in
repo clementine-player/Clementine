@@ -26,6 +26,7 @@ BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(gthread-2.0)
 BuildRequires:  pkgconfig(dbus-1)
+BuildRequires:  pkgconfig(fftw3)
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(protobuf)
 BuildRequires:  pkgconfig(sqlite3) >= 3.7
@@ -43,6 +44,7 @@ BuildRequires:  pkgconfig(Qt6OpenGLWidgets)
 BuildRequires:  pkgconfig(Qt6DBus)
 BuildRequires:  pkgconfig(Qt6Test)
 BuildRequires:  pkgconfig(Qt6Core5Compat)
+BuildRequires:  cmake(Qt6LinguistTools)
 # liblastfm isn't a dependency any more - Last.fm scrobbling talks directly
 # to the web service API now (src/internet/lastfm/lastfmws.*).
 BuildRequires:  pkgconfig(gstreamer-1.0)
