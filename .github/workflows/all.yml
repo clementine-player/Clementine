@@ -2183,16 +2183,19 @@ jobs:
   # The single required status check for master: it passes only when every
   # job above did. Adding or removing a build job means editing this list
   # rather than the branch protection settings.
-  # Publishes the .debs as an apt repository in the R2 bucket, under apt/,
-  # signed with a Cloud KMS key that can't be exported: see
-  # tools/apt-repo/README.md and dist/gcp_apt_signing_setup.sh. Skipped until
-  # the APT_* repository variables are set. Not one of the CI job's needs:
-  # it's publishing, not a check.
+  # Publishes the .debs as an apt repository at the root of an R2 bucket of
+  # its own, signed with a Cloud KMS key that can't be exported: see
+  # tools/apt-repo/README.md and dist/gcp_apt_signing_setup.sh. Its own
+  # bucket, and a token that can only read and write that bucket:
+  #   secrets APT_R2_ACCESS_KEY_ID, APT_R2_SECRET_ACCESS_KEY (and the
+  #   account's R2_ACCOUNT_ID); variable APT_R2_BUCKET.
+  # Skipped until those and the APT_* signing variables are set. Not one of
+  # the CI job's needs: it's publishing, not a check.
   publish_apt:
     name: Publish the apt repository
     if: >
       github.event_name == 'push' && github.ref == 'refs/heads/master'
-      && vars.APT_KMS_KEY != ''
+      && vars.APT_KMS_KEY != '' && vars.APT_R2_BUCKET != ''
     needs:
       - build_bookworm_64
       - build_trixie_64
@@ -2208,10 +2211,10 @@ jobs:
       contents: read
       id-token: write # to sign, through Workload Identity Federation
     env:
-      APT_BUCKET: s3://${{ vars.R2_BUCKET }}/apt
+      APT_BUCKET: s3://${{ vars.APT_R2_BUCKET }}
       R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
-      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.APT_R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.APT_R2_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: auto
       AWS_REQUEST_CHECKSUM_CALCULATION: when_required
       AWS_RESPONSE_CHECKSUM_VALIDATION: when_required

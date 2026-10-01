@@ -107,7 +107,7 @@ cat <<EOF
     APT_WIF_PROVIDER=projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/${WIF_POOL_ID}/providers/${WIF_PROVIDER_ID}
 
     The next push to master publishes the repository and the public key
-    (apt/clementine-archive-keyring.gpg in the bucket), and its log prints the
+    (clementine-archive-keyring.gpg in the bucket), and its log prints the
     key's fingerprint. Set APT_KEY_FINGERPRINT to it, so a later publish with
     any other key fails instead of locking everyone out.
 EOF

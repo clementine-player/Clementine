@@ -1,9 +1,9 @@
 # clementine-apt
 
 Publishes the `.deb`s CI builds as an apt repository, so people on Debian and
-Ubuntu get Clementine's updates from `apt`. The repository is static files in
-the R2 bucket under `apt/`. Its index files are signed with a key in Google
-Cloud KMS that can't be exported: CI can ask KMS for signatures, but nobody,
+Ubuntu get Clementine's updates from `apt`. The repository is static files at
+the root of an R2 bucket of its own. Its index files are signed with a key in
+Google Cloud KMS that can't be exported: CI can ask KMS for signatures, but nobody,
 CI included, ever has the key itself.
 
 GnuPG can't use a Cloud KMS key, so this builds the OpenPGP packets itself
@@ -31,13 +31,22 @@ in `noble`.
    admin. It makes the key, a service account that can only sign with it, and
    a Workload Identity Federation provider that only master's pushes can use.
 
-2. **Repository variables** (Settings → Secrets and variables → Actions →
-   Variables): `APT_KMS_KEY`, `APT_KEY_CREATED` and `APT_WIF_PROVIDER`, as the
-   script prints them. The job is skipped until `APT_KMS_KEY` is set. It uses
-   the R2 secrets and variables the screenshots already use.
+2. **The bucket.** Create an R2 bucket for the repository, give it a custom
+   domain (`r2.dev` addresses are rate limited, and the domain is what people
+   put in their sources), and make an R2 API token that can only read and
+   write that bucket.
 
-3. **The fingerprint.** The next push to master publishes the repository and
-   the public key, `apt/clementine-archive-keyring.gpg`, and the log prints
+3. **Repository settings** (Settings → Secrets and variables → Actions):
+   - variables `APT_KMS_KEY`, `APT_KEY_CREATED` and `APT_WIF_PROVIDER`, as the
+     script prints them, and `APT_R2_BUCKET`, the bucket's name;
+   - secrets `APT_R2_ACCESS_KEY_ID` and `APT_R2_SECRET_ACCESS_KEY`, the
+     bucket's token. `R2_ACCOUNT_ID` is the account's, as for the
+     screenshots.
+
+   The job is skipped until `APT_KMS_KEY` and `APT_R2_BUCKET` are set.
+
+4. **The fingerprint.** The next push to master publishes the repository and
+   the public key, `clementine-archive-keyring.gpg`, and the log prints
    the key's fingerprint ("Signed with …"). Set `APT_KEY_FINGERPRINT` to it:
    from then on a publish with any other key fails, rather than leaving
    everyone who installed the old key unable to update.
@@ -49,15 +58,12 @@ never changes. The public key comes out the same on every run.
 
 ```sh
 sudo install -d /etc/apt/keyrings
-curl -fsSL <R2_PUBLIC_URL>/apt/clementine-archive-keyring.gpg \
+curl -fsSL https://<domain>/clementine-archive-keyring.gpg \
   | sudo tee /etc/apt/keyrings/clementine-archive-keyring.gpg > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/clementine-archive-keyring.gpg] <R2_PUBLIC_URL>/apt $(. /etc/os-release; echo "$VERSION_CODENAME") main" \
+echo "deb [signed-by=/etc/apt/keyrings/clementine-archive-keyring.gpg] https://<domain> $(. /etc/os-release; echo "$VERSION_CODENAME") main" \
   | sudo tee /etc/apt/sources.list.d/clementine.list
 sudo apt update && sudo apt install clementine
 ```
-
-Cloudflare's `r2.dev` addresses are rate limited and not meant for this: give
-the bucket a custom domain before telling people about it.
 
 ## Development
 
