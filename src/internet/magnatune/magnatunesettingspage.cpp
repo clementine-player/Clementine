@@ -63,8 +63,11 @@ MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
 
 MagnatuneSettingsPage::~MagnatuneSettingsPage() { delete ui_; }
 
-const char* kMagnatuneDownloadValidateUrl = "http://download.magnatune.com/";
-const char* kMagnatuneStreamingValidateUrl = "http://streaming.magnatune.com/";
+// A track without its closing commercial, which only members can fetch: a
+// wrong login gets 401. (The old streaming. and download. hosts' front pages
+// now redirect to the public homepage, so they let any login through.)
+const char* kMagnatuneValidateUrl =
+    "https://magnatune.com/all/01-I%27m%20Monster-1kub_nospeech.mp3";
 
 void MagnatuneSettingsPage::UpdateLoginState() {
   ui_->login_state->SetLoggedIn(
@@ -74,13 +77,7 @@ void MagnatuneSettingsPage::UpdateLoginState() {
 }
 
 void MagnatuneSettingsPage::Login() {
-  MagnatuneService::MembershipType type =
-      MagnatuneService::MembershipType(ui_->membership->currentIndex());
-
-  QUrl url(type == MagnatuneService::Membership_Streaming
-               ? kMagnatuneStreamingValidateUrl
-               : kMagnatuneDownloadValidateUrl,
-           QUrl::StrictMode);
+  QUrl url(kMagnatuneValidateUrl, QUrl::StrictMode);
 
   url.setUserName(ui_->username->text());
   // NOTE: Magnatune actually only checks the first 8 characters.

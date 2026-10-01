@@ -64,8 +64,7 @@ class MagnatuneService : public InternetService {
   static const char* kSongsTable;
   static const char* kFtsTable;
   static const char* kHomepage;
-  static const char* kStreamingHostname;
-  static const char* kDownloadHostname;
+  static const char* kHostname;
   static const char* kPartnerId;
   static const char* kDownloadUrl;
 
