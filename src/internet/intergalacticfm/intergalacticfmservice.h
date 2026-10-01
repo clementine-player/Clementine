@@ -20,8 +20,6 @@
 #ifndef INTERNET_INTERGALACTICFM_INTERGALACTICFMSERVICE_H_
 #define INTERNET_INTERGALACTICFM_INTERGALACTICFMSERVICE_H_
 
-#include <QXmlStreamReader>
-
 #include "core/cachedlist.h"
 #include "internet/core/internetservice.h"
 
@@ -83,7 +81,7 @@ class IntergalacticFMServiceBase : public InternetService {
   void Donate();
 
  private:
-  void ReadChannel(QXmlStreamReader& reader, StreamList* ret);
+  StreamList ParseChannels(const QByteArray& data) const;
   void PopulateStreams();
 
  private:

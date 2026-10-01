@@ -23,10 +23,13 @@
 
 #include <QCoreApplication>
 #include <QDesktopServices>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QMap>
 #include <QMenu>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QXmlStreamReader>
 #include <QtDebug>
 
 #include "core/application.h"
@@ -35,7 +38,6 @@
 #include "core/network.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
-#include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/intergalacticfmsearchprovider.h"
 #include "intergalacticfmurlhandler.h"
@@ -132,16 +134,11 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
     return;
   }
 
-  StreamList list;
-
-  QXmlStreamReader reader(reply);
-  while (!reader.atEnd()) {
-    reader.readNext();
-
-    if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == QLatin1String("channel")) {
-      ReadChannel(reader, &list);
-    }
+  StreamList list = ParseChannels(reply->readAll());
+  if (list.isEmpty()) {
+    app_->AddError(tr("Failed to get channel list:\n%1")
+                       .arg(tr("The server didn't list any channels")));
+    return;
   }
 
   streams_.Update(list);
@@ -153,48 +150,45 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   emit StreamsChanged();
 }
 
-void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader,
-                                             StreamList* ret) {
-  Stream stream;
-  bool found = false;
+IntergalacticFMServiceBase::StreamList
+IntergalacticFMServiceBase::ParseChannels(const QByteArray& data) const {
+  // Icecast's status: a "source" for each of the server's streams, or the
+  // stream itself if there's only one. Each channel has several, in different
+  // formats and bitrates: take its best MP3 one.
+  QJsonValue sources =
+      QJsonDocument::fromJson(data).object()["icestats"].toObject()["source"];
+  QJsonArray source_list =
+      sources.isArray() ? sources.toArray() : QJsonArray{sources};
 
-  while (!reader.atEnd()) {
-    switch (reader.readNext()) {
-      case QXmlStreamReader::EndElement:
-        if (!stream.url_.isEmpty()) {
-          ret->append(stream);
-        }
-        return;
-
-      case QXmlStreamReader::StartElement:
-        if (reader.name() == QLatin1String("title")) {
-          stream.title_ = reader.readElementText();
-        } else if (reader.name() == QLatin1String("dj")) {
-          stream.dj_ = reader.readElementText();
-        } else if (reader.name() == QLatin1String("fastpls") &&
-                   reader.attributes().value("format") ==
-                       QLatin1String("mp3")) {
-          QUrl url(reader.readElementText());
-          url.setScheme(url_handler_->scheme());
-
-          stream.url_ = url;
-          found = true;
-        } else if (!found && reader.name() == QLatin1String("highestpls") &&
-                   reader.attributes().value("format") ==
-                       QLatin1String("mp3")) {
-          QUrl url(reader.readElementText());
-          url.setScheme(url_handler_->scheme());
-
-          stream.url_ = url;
-        } else {
-          Utilities::ConsumeCurrentElement(&reader);
-        }
-        break;
-
-      default:
-        break;
+  QMap<QString, QJsonObject> best;
+  for (const QJsonValue& value : source_list) {
+    QJsonObject source = value.toObject();
+    const QString name = source["server_name"].toString().trimmed();
+    if (name.isEmpty() || source["server_type"].toString() != "audio/mpeg" ||
+        source["listenurl"].toString().isEmpty()) {
+      continue;
+    }
+    if (!best.contains(name) ||
+        source["bitrate"].toInt() > best[name]["bitrate"].toInt()) {
+      best[name] = source;
     }
   }
+
+  StreamList ret;
+  for (const QJsonObject& source : best) {
+    // Its playlist, which the URL handler loads: the listen URL with ".xspf".
+    // (Icecast's .m3u has no #EXTM3U header for the parser to recognise.)
+    QUrl url(source["listenurl"].toString());
+    url.setPort(-1);
+    url.setPath(url.path() + ".xspf");
+    url.setScheme(url_handler_->scheme());
+
+    Stream stream;
+    stream.title_ = source["server_name"].toString().trimmed();
+    stream.url_ = url;
+    ret << stream;
+  }
+  return ret;
 }
 
 Song IntergalacticFMServiceBase::Stream::ToSong(const QString& prefix) const {
@@ -276,6 +270,8 @@ IntergalacticFMService::IntergalacticFMService(Application* app,
                                                InternetModel* parent)
     : IntergalacticFMServiceBase(
           app, parent, "Intergalactic FM",
-          QUrl("https://www.intergalactic.fm/channels.xml"),
+          // The channels.xml it used to publish is gone. Its Icecast
+          // server's status lists the channels instead.
+          QUrl("https://radio.intergalactic.fm/status-json.xsl"),
           QUrl("https://www.intergalactic.fm"), QUrl(),
           IconLoader::Load("intergalacticfm", IconLoader::Provider)) {}
