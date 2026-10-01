@@ -20,15 +20,7 @@
 #include "playlist/playlistmanager.h"
 #include "remoteclient.h"
 #include "remotecontrolmessages.pb.h"
-#include "songinfo/collapsibleinfopane.h"
-#include "songinfo/songinfofetcher.h"
-#include "songinfo/songinfoprovider.h"
-#include "songinfo/songinfoview.h"
-#include "songinfo/ultimatelyricslyric.h"
-#include "songinfo/ultimatelyricsprovider.h"
-#include "songinfo/ultimatelyricsreader.h"
-
-typedef QList<SongInfoProvider*> ProviderList;
+#include "songinfo/lyricsfetcher.h"
 
 struct GlobalSearchRequest {
   int id_;
@@ -87,7 +79,7 @@ class OutgoingDataCreator : public QObject {
   void UpdateTrackPosition();
   void DisconnectAllClients();
   void GetLyrics();
-  void SendLyrics(int id, const SongInfoFetcher::Result& result);
+  void SendLyrics(int id, const Lyrics& lyrics);
   void SendLibrary(RemoteClient* client);
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
@@ -116,15 +108,11 @@ class OutgoingDataCreator : public QObject {
   bool allow_downloads_;
   bool streaming_enabled_ = false;
 
-  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
-  QMap<int, SongInfoFetcher::Result> results_;
-  SongInfoFetcher* fetcher_;
+  LyricsFetcher* lyrics_fetcher_;
 
   QMap<int, GlobalSearchRequest> global_search_result_map_;
 
   void SetEngineState(cpb::remote::ResponseClementineInfo* msg);
-  void CheckEnabledProviders();
-  SongInfoProvider* ProviderByName(const QString& name) const;
 };
 
 #endif  // OUTGOINGDATACREATOR_H

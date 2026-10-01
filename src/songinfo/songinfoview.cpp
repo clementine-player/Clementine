@@ -17,45 +17,17 @@
 
 #include "songinfo/songinfoview.h"
 
-#include <QFuture>
-#include <QSettings>
-#include <QtConcurrentRun>
-#include <algorithm>
-
-#include "config.h"
-#include "core/closure.h"
 #include "songinfo/lastfmtrackinfoprovider.h"
-#include "songinfo/songinfoprovider.h"
-#include "songinfo/taglyricsinfoprovider.h"
-#include "songinfo/ultimatelyricsprovider.h"
-#include "songinfo/ultimatelyricsreader.h"
+#include "songinfo/lyricsinfoprovider.h"
 
 const char* SongInfoView::kSettingsGroup = "SongInfo";
 
-SongInfoView::SongInfoView(QWidget* parent)
-    : SongInfoBase(parent), ultimate_reader_(new UltimateLyricsReader(this)) {
-  // Parse the ultimate lyrics xml file in the background
-  QFuture<QList<SongInfoProvider*>> future =
-      QtConcurrent::run(&UltimateLyricsReader::Parse, ultimate_reader_.get(),
-                        QString(":lyrics/ultimate_providers.xml"));
-  NewClosure(future, this, &SongInfoView::UltimateLyricsParsed);
-
+SongInfoView::SongInfoView(QWidget* parent) : SongInfoBase(parent) {
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
-  fetcher_->AddProvider(new TagLyricsInfoProvider);
+  fetcher_->AddProvider(new LyricsInfoProvider);
 }
 
 SongInfoView::~SongInfoView() {}
-
-void SongInfoView::UltimateLyricsParsed(
-    const QList<SongInfoProvider*>& providers) {
-  for (SongInfoProvider* provider : providers) {
-    fetcher_->AddProvider(provider);
-  }
-
-  ultimate_reader_.reset();
-
-  ReloadSettings();
-}
 
 bool SongInfoView::NeedsUpdate(const Song& old_metadata,
                                const Song& new_metadata) const {
@@ -75,83 +47,3 @@ void SongInfoView::InfoResultReady(int id,
 }
 
 void SongInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {}
-
-void SongInfoView::ReloadSettings() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  // Put the providers in the right order
-  QList<SongInfoProvider*> ordered_providers;
-
-  QVariantList default_order;
-  default_order << "lyrics.wikia.com"
-                << "lyricsreg.com"
-                << "lyricsmania.com"
-                << "azlyrics.com"
-                << "songlyrics.com"
-                << "elyrics.net"
-                << "lyricsdownload.com"
-                << "lyrics.com"
-                << "lyricsbay.com"
-                << "directlyrics.com"
-                << "teksty.org"
-                << "tekstowo.pl (Polish translations)"
-                << "vagalume.uol.com.br"
-                << "vagalume.uol.com.br (Portuguese translations)"
-                << "darklyrics.com";
-
-  QVariant saved_order = s.value("search_order", default_order);
-  for (const QVariant& name : saved_order.toList()) {
-    SongInfoProvider* provider = ProviderByName(name.toString());
-    if (provider) ordered_providers << provider;
-  }
-
-  // Enable all the providers in the list and rank them
-  int relevance = 100;
-  for (SongInfoProvider* provider : ordered_providers) {
-    provider->set_enabled(true);
-    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
-  }
-
-  // Any lyric providers we don't have in ordered_providers are considered
-  // disabled
-  for (SongInfoProvider* provider : fetcher_->providers()) {
-    if (qobject_cast<UltimateLyricsProvider*>(provider) &&
-        !ordered_providers.contains(provider)) {
-      provider->set_enabled(false);
-    }
-  }
-
-  SongInfoBase::ReloadSettings();
-}
-
-SongInfoProvider* SongInfoView::ProviderByName(const QString& name) const {
-  for (SongInfoProvider* provider : fetcher_->providers()) {
-    if (UltimateLyricsProvider* lyrics =
-            qobject_cast<UltimateLyricsProvider*>(provider)) {
-      if (lyrics->name() == name) return provider;
-    }
-  }
-  return nullptr;
-}
-
-namespace {
-bool CompareLyricProviders(const UltimateLyricsProvider* a,
-                           const UltimateLyricsProvider* b) {
-  if (a->is_enabled() && !b->is_enabled()) return true;
-  if (!a->is_enabled() && b->is_enabled()) return false;
-  return a->relevance() > b->relevance();
-}
-}  // namespace
-
-QList<const UltimateLyricsProvider*> SongInfoView::lyric_providers() const {
-  QList<const UltimateLyricsProvider*> ret;
-  for (SongInfoProvider* provider : fetcher_->providers()) {
-    if (UltimateLyricsProvider* lyrics =
-            qobject_cast<UltimateLyricsProvider*>(provider)) {
-      ret << lyrics;
-    }
-  }
-  std::sort(ret.begin(), ret.end(), CompareLyricProviders);
-  return ret;
-}

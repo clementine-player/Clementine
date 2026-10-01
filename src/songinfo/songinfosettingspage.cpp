@@ -20,26 +20,16 @@
 #include <QFile>
 #include <QSettings>
 
-#include "songinfofetcher.h"
+#include "songinfo/lyricsfetcher.h"
 #include "songinfotextview.h"
-#include "songinfoview.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui_songinfosettingspage.h"
-#include "ultimatelyricsprovider.h"
 
 SongInfoSettingsPage::SongInfoSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_SongInfoSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-lyrics", IconLoader::Base));
-
-  connect(ui_->up, SIGNAL(clicked()), SLOT(MoveUp()));
-  connect(ui_->down, SIGNAL(clicked()), SLOT(MoveDown()));
-  connect(ui_->providers,
-          SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
-          SLOT(CurrentItemChanged(QListWidgetItem*)));
-  connect(ui_->providers, SIGNAL(itemChanged(QListWidgetItem*)),
-          SLOT(ItemChanged(QListWidgetItem*)));
 
   QFile song_info_preview(":/lumberjacksong.txt");
   (void)song_info_preview.open(QIODevice::ReadOnly);
@@ -60,19 +50,9 @@ void SongInfoSettingsPage::Load() {
       s.value("font_size", SongInfoTextView::kDefaultFontSize).toReal());
   s.endGroup();
 
-  QList<const UltimateLyricsProvider*> providers =
-      dialog()->song_info_view()->lyric_providers();
-
-  ui_->providers->clear();
-  for (const UltimateLyricsProvider* provider : providers) {
-    QListWidgetItem* item = new QListWidgetItem(ui_->providers);
-    item->setText(provider->name());
-    item->setCheckState(provider->is_enabled() ? Qt::Checked : Qt::Unchecked);
-    item->setForeground(
-        provider->is_enabled()
-            ? palette().color(QPalette::Active, QPalette::Text)
-            : palette().color(QPalette::Disabled, QPalette::Text));
-  }
+  s.beginGroup(LyricsFetcher::kSettingsGroup);
+  ui_->online_lyrics->setChecked(
+      s.value(LyricsFetcher::kOnlineLyricsKey, true).toBool());
 }
 
 void SongInfoSettingsPage::Save() {
@@ -82,43 +62,11 @@ void SongInfoSettingsPage::Save() {
   s.setValue("font_size", ui_->song_info_font_preview->font().pointSizeF());
   s.endGroup();
 
-  s.beginGroup(SongInfoView::kSettingsGroup);
-  QVariantList search_order;
-  for (int i = 0; i < ui_->providers->count(); ++i) {
-    const QListWidgetItem* item = ui_->providers->item(i);
-    if (item->checkState() == Qt::Checked) search_order << item->text();
-  }
-  s.setValue("search_order", search_order);
+  s.beginGroup(LyricsFetcher::kSettingsGroup);
+  s.setValue(LyricsFetcher::kOnlineLyricsKey, ui_->online_lyrics->isChecked());
+  // The lyrics websites Clementine used to search, in order.
+  s.remove("search_order");
   s.endGroup();
-}
-
-void SongInfoSettingsPage::CurrentItemChanged(QListWidgetItem* item) {
-  if (!item) {
-    ui_->up->setEnabled(false);
-    ui_->down->setEnabled(false);
-  } else {
-    const int row = ui_->providers->row(item);
-    ui_->up->setEnabled(row != 0);
-    ui_->down->setEnabled(row != ui_->providers->count() - 1);
-  }
-}
-
-void SongInfoSettingsPage::MoveUp() { Move(-1); }
-
-void SongInfoSettingsPage::MoveDown() { Move(+1); }
-
-void SongInfoSettingsPage::Move(int d) {
-  const int row = ui_->providers->currentRow();
-  QListWidgetItem* item = ui_->providers->takeItem(row);
-  ui_->providers->insertItem(row + d, item);
-  ui_->providers->setCurrentRow(row + d);
-}
-
-void SongInfoSettingsPage::ItemChanged(QListWidgetItem* item) {
-  const bool checked = item->checkState() == Qt::Checked;
-  item->setForeground(
-      checked ? palette().color(QPalette::Active, QPalette::Text)
-              : palette().color(QPalette::Disabled, QPalette::Text));
 }
 
 void SongInfoSettingsPage::FontSizeChanged(double value) {

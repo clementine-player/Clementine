@@ -339,6 +339,9 @@ set(SOURCES
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
+  songinfo/lrcparser.cpp
+  songinfo/lyricsfetcher.cpp
+  songinfo/lyricsinfoprovider.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
   songinfo/songinfoprovider.cpp
@@ -350,10 +353,6 @@ set(SOURCES
   songinfo/songplaystats.cpp
   songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
-  songinfo/taglyricsinfoprovider.cpp
-  songinfo/ultimatelyricslyric.cpp
-  songinfo/ultimatelyricsprovider.cpp
-  songinfo/ultimatelyricsreader.cpp
 
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
@@ -666,6 +665,8 @@ set(HEADERS
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
+  songinfo/lyricsfetcher.h
+  songinfo/lyricsinfoprovider.h
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
   songinfo/songinfoprovider.h
@@ -677,10 +678,6 @@ set(HEADERS
   songinfo/songplaystats.h
   songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
-  songinfo/taglyricsinfoprovider.h
-  songinfo/ultimatelyricslyric.h
-  songinfo/ultimatelyricsprovider.h
-  songinfo/ultimatelyricsreader.h
 
   transcoder/transcodedialog.h
   transcoder/transcoder.h

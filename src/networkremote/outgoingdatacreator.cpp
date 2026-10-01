@@ -36,10 +36,7 @@
 const quint32 OutgoingDataCreator::kFileChunkSize = 100000;  // in Bytes
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
-    : app_(app),
-      aww_(false),
-      ultimate_reader_(new UltimateLyricsReader(this)),
-      fetcher_(new SongInfoFetcher(this)) {
+    : app_(app), aww_(false), lyrics_fetcher_(nullptr) {
   // Create Keep Alive Timer
   keep_alive_timer_ = new QTimer(this);
   connect(keep_alive_timer_, SIGNAL(timeout()), this, SLOT(SendKeepAlive()));
@@ -59,20 +56,12 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   connect(track_position_timer_, SIGNAL(timeout()), this,
           SLOT(UpdateTrackPosition()));
 
-  // Parse the ultimate lyrics xml file
-  ultimate_reader_->SetThread(this->thread());
-  ProviderList provider_list =
-      ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
-
-  // Set up the lyrics parser
-  connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
-          SLOT(SendLyrics(int, SongInfoFetcher::Result)));
-
-  for (SongInfoProvider* provider : provider_list) {
-    fetcher_->AddProvider(provider);
+  // Created here, in the remote's thread, where its replies arrive.
+  if (!lyrics_fetcher_) {
+    lyrics_fetcher_ = new LyricsFetcher(this);
+    connect(lyrics_fetcher_, &LyricsFetcher::Finished, this,
+            &OutgoingDataCreator::SendLyrics);
   }
-
-  CheckEnabledProviders();
 
   // Setup global search
   app_->global_search()->ReloadSettings();
@@ -84,65 +73,6 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
 
   connect(app_->global_search(), SIGNAL(SearchFinished(int)),
           SLOT(SearchFinished(int)), Qt::QueuedConnection);
-}
-
-void OutgoingDataCreator::CheckEnabledProviders() {
-  QSettings s;
-  s.beginGroup(SongInfoView::kSettingsGroup);
-
-  // Put the providers in the right order
-  QList<SongInfoProvider*> ordered_providers;
-
-  QVariantList default_order;
-  default_order << "lyrics.wikia.com"
-                << "lyricstime.com"
-                << "lyricsreg.com"
-                << "lyricsmania.com"
-                << "azlyrics.com"
-                << "songlyrics.com"
-                << "elyrics.net"
-                << "lyricsdownload.com"
-                << "lyrics.com"
-                << "lyricsbay.com"
-                << "directlyrics.com"
-                << "teksty.org"
-                << "tekstowo.pl (Polish translations)"
-                << "vagalume.uol.com.br"
-                << "vagalume.uol.com.br (Portuguese translations)"
-                << "darklyrics.com";
-
-  QVariant saved_order = s.value("search_order", default_order);
-  for (const QVariant& name : saved_order.toList()) {
-    SongInfoProvider* provider = ProviderByName(name.toString());
-    if (provider) ordered_providers << provider;
-  }
-
-  // Enable all the providers in the list and rank them
-  int relevance = 100;
-  for (SongInfoProvider* provider : ordered_providers) {
-    provider->set_enabled(true);
-    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
-  }
-
-  // Any lyric providers we don't have in ordered_providers are considered
-  // disabled
-  for (SongInfoProvider* provider : fetcher_->providers()) {
-    if (qobject_cast<UltimateLyricsProvider*>(provider) &&
-        !ordered_providers.contains(provider)) {
-      provider->set_enabled(false);
-    }
-  }
-}
-
-SongInfoProvider* OutgoingDataCreator::ProviderByName(
-    const QString& name) const {
-  for (SongInfoProvider* provider : fetcher_->providers()) {
-    if (UltimateLyricsProvider* lyrics =
-            qobject_cast<UltimateLyricsProvider*>(provider)) {
-      if (lyrics->name() == name) return provider;
-    }
-  }
-  return nullptr;
 }
 
 void OutgoingDataCreator::SendDataToClients(cpb::remote::Message* msg) {
@@ -584,29 +514,26 @@ void OutgoingDataCreator::DisconnectAllClients() {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::GetLyrics() { fetcher_->FetchInfo(current_song_); }
+void OutgoingDataCreator::GetLyrics() {
+  if (lyrics_fetcher_) lyrics_fetcher_->Fetch(current_song_);
+}
 
-void OutgoingDataCreator::SendLyrics(int id,
-                                     const SongInfoFetcher::Result& result) {
+void OutgoingDataCreator::SendLyrics(int, const Lyrics& lyrics) {
   cpb::remote::Message msg;
   msg.set_type(cpb::remote::LYRICS);
   cpb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
 
-  for (const CollapsibleInfoPane::Data& data : result.info_) {
-    // If the size is zero, do not send the provider
-    UltimateLyricsLyric* editor =
-        qobject_cast<UltimateLyricsLyric*>(data.content_object_);
-    if (editor->toPlainText().length() == 0) continue;
-
+  // No lyrics is an empty list.
+  if (!lyrics.IsEmpty()) {
+    const QString lyrics_id = "lyrics";
+    const QString content =
+        lyrics.instrumental ? tr("Instrumental") : lyrics.plain;
     cpb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
-
-    lyric->set_id(DataCommaSizeFromQString(data.id_));
-    lyric->set_title(DataCommaSizeFromQString(data.title_));
-    lyric->set_content(DataCommaSizeFromQString(editor->toPlainText()));
+    lyric->set_id(DataCommaSizeFromQString(lyrics_id));
+    lyric->set_title(DataCommaSizeFromQString(lyrics.title));
+    lyric->set_content(DataCommaSizeFromQString(content));
   }
   SendDataToClients(&msg);
-
-  results_.take(id);
 }
 
 void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
