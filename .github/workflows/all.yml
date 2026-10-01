@@ -423,6 +423,31 @@ jobs:
         with:
           path: release_artifacts
           pattern: release_*
+      # And a few of the screenshots, for clementine-player.org, which shows the
+      # visitor's platform's: screenshot-<platform>-<screen>.png. The website
+      # knows these names (its data.py), so keep them.
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          path: screenshots
+          pattern: screenshots-*
+          merge-multiple: true
+      - name: Choose the screenshots to release
+        run: |
+          mkdir -p release_artifacts/screenshots
+          for platform in linux windows macos; do
+            # By the screen's name: its number is its place in the sidebar.
+            for pick in main-library:library dark_main-library:library-dark \
+                main-internet:internet; do
+              prefix=${pick%%:*}; screen=${pick#*:}
+              shot=$(find "screenshots/$platform" -name "${prefix%-*}-[0-9]*-${prefix##*-}.png" | head -n 1)
+              if [ -z "$shot" ]; then
+                echo "::warning::No $platform $screen screenshot to release"
+                continue
+              fi
+              cp "$shot" "release_artifacts/screenshots/screenshot-$platform-$screen.png"
+            done
+          done
+          ls -l release_artifacts/screenshots
       - name: Create draft pre-release
         id: tag_name
         env:
