@@ -352,6 +352,7 @@ set(SOURCES
   songinfo/songplaystats.cpp
   songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
+  songinfo/syncedlyricsview.cpp
 
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
@@ -677,6 +678,7 @@ set(HEADERS
   songinfo/songplaystats.h
   songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
+  songinfo/syncedlyricsview.h
 
   transcoder/transcodedialog.h
   transcoder/transcoder.h

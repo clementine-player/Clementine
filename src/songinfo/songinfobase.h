@@ -60,6 +60,8 @@ class SongInfoBase : public QWidget {
     return true;
   }
 
+  QScrollArea* scroll_area() const { return scroll_area_; }
+
   void AddWidget(QWidget* widget);
   void AddSection(CollapsibleInfoPane* section);
   void Clear();
