@@ -1,7 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <davidsansome@gmail.com>
-   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
-   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,19 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
-#define INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
+#ifndef INTERNET_JAMENDO_JAMENDOURLHANDLER_H_
+#define INTERNET_JAMENDO_JAMENDOURLHANDLER_H_
 
-#include "playlist/dbplaylistitem.h"
+#include "core/urlhandler.h"
 
-class JamendoPlaylistItem : public DbPlaylistItem {
+// Plays jamendo://track/<id>, from Jamendo's storage. Playlists keep the
+// track's id rather than the storage URL, so they still play if that changes.
+class JamendoUrlHandler : public UrlHandler {
+  Q_OBJECT
+
  public:
-  explicit JamendoPlaylistItem(const QString& type);
-  explicit JamendoPlaylistItem(const Song& song);
+  explicit JamendoUrlHandler(QObject* parent = nullptr);
 
-  static bool IsTypeSupported(const QString& type);
-
-  bool InitFromQuery(const SqlRow& query);
+  QString scheme() const override;
+  QIcon icon() const override;
+  LoadResult StartLoading(const QUrl& url) override;
 };
 
-#endif  // INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
+#endif  // INTERNET_JAMENDO_JAMENDOURLHANDLER_H_

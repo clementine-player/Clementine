@@ -6,6 +6,7 @@
    Copyright 2011, Andrea Decorte <adecorte@gmail.com>
    Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,483 +25,398 @@
 #include "jamendoservice.h"
 
 #include <QDesktopServices>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QLineEdit>
 #include <QMenu>
-#include <QMessageBox>
 #include <QNetworkReply>
-#include <QSortFilterProxyModel>
-#include <QXmlStreamReader>
-#include <QtConcurrentRun>
+#include <QNetworkRequest>
 
 #include "core/application.h"
-#include "core/database.h"
 #include "core/logging.h"
-#include "core/mergedproxymodel.h"
 #include "core/network.h"
-#include "core/scopedtransaction.h"
+#include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
-#include "globalsearch/globalsearch.h"
-#include "globalsearch/librarysearchprovider.h"
-#include "internet/core/internetmodel.h"
-#include "jamendodynamicplaylist.h"
-#include "jamendoplaylistitem.h"
-#include "library/librarybackend.h"
-#include "library/libraryfilterwidget.h"
-#include "library/librarymodel.h"
-#include "qtiocompressor.h"
-#include "smartplaylists/generator.h"
-#include "smartplaylists/querygenerator.h"
+#include "core/utilities.h"
+#include "internet/jamendo/jamendourlhandler.h"
 #include "ui/iconloader.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
-const char* JamendoService::kDirectoryUrl =
-    "https://imgjam.com/data/dbdump_artistalbumtrack.xml.gz";
-const char* JamendoService::kMp3StreamUrl =
-    "http://api.jamendo.com/get2/stream/track/redirect/"
-    "?id=%1&streamencoding=mp31";
-const char* JamendoService::kOggStreamUrl =
-    "http://api.jamendo.com/get2/stream/track/redirect/"
-    "?id=%1&streamencoding=ogg2";
-const char* JamendoService::kAlbumCoverUrl =
-    "http://api.jamendo.com/get2/image/album/redirect/?id=%1&imagesize=300";
-const char* JamendoService::kHomepage = "http://www.jamendo.com/";
-const char* JamendoService::kAlbumInfoUrl = "http://www.jamendo.com/album/%1";
-const char* JamendoService::kDownloadAlbumUrl =
-    "http://www.jamendo.com/download/album/%1";
-
-const char* JamendoService::kSongsTable = "jamendo.songs";
-const char* JamendoService::kFtsTable = "jamendo.songs_fts";
-const char* JamendoService::kTrackIdsTable = "jamendo.track_ids";
-const char* JamendoService::kTrackIdsColumn = "track_id";
-
 const char* JamendoService::kSettingsGroup = "Jamendo";
+const char* JamendoService::kUrlScheme = "jamendo";
 
-const int JamendoService::kBatchSize = 10000;
-const int JamendoService::kApproxDatabaseSize = 450000;
+namespace {
+
+const char* kApiUrl = "https://api.jamendo.com/v3.0/";
+// Registered at https://devportal.jamendo.com for Clementine. Every request
+// counts against its quota, which every Clementine user shares.
+const char* kClientId = "71a779eb";
+// mp32 is Jamendo's VBR MP3, its best quality that doesn't need a login.
+// "from" credits the plays to Clementine.
+const char* kStreamUrl =
+    "https://prod-1.storage.jamendo.com/?trackid=%1&format=mp32&from=app-%2";
+const char* kHomepage = "https://www.jamendo.com/";
+
+// How many tracks or albums to list at once.
+const int kListLimit = 50;
+// The API sometimes answers with no results for a query that has some, so
+// a request that comes back empty is tried again this many times.
+const int kEmptyRetries = 1;
+
+struct Genre {
+  const char* tag;
+  const char* name;
+};
+
+// Some of Jamendo's music tags, which it groups its catalogue by.
+const Genre kGenres[] = {
+    {"ambient", QT_TRANSLATE_NOOP("JamendoService", "Ambient")},
+    {"blues", QT_TRANSLATE_NOOP("JamendoService", "Blues")},
+    {"chillout", QT_TRANSLATE_NOOP("JamendoService", "Chillout")},
+    {"classical", QT_TRANSLATE_NOOP("JamendoService", "Classical")},
+    {"country", QT_TRANSLATE_NOOP("JamendoService", "Country")},
+    {"dance", QT_TRANSLATE_NOOP("JamendoService", "Dance")},
+    {"electronic", QT_TRANSLATE_NOOP("JamendoService", "Electronic")},
+    {"folk", QT_TRANSLATE_NOOP("JamendoService", "Folk")},
+    {"funk", QT_TRANSLATE_NOOP("JamendoService", "Funk")},
+    {"hiphop", QT_TRANSLATE_NOOP("JamendoService", "Hip-hop")},
+    {"jazz", QT_TRANSLATE_NOOP("JamendoService", "Jazz")},
+    {"latin", QT_TRANSLATE_NOOP("JamendoService", "Latin")},
+    {"lounge", QT_TRANSLATE_NOOP("JamendoService", "Lounge")},
+    {"metal", QT_TRANSLATE_NOOP("JamendoService", "Metal")},
+    {"pop", QT_TRANSLATE_NOOP("JamendoService", "Pop")},
+    {"punk", QT_TRANSLATE_NOOP("JamendoService", "Punk")},
+    {"reggae", QT_TRANSLATE_NOOP("JamendoService", "Reggae")},
+    {"rock", QT_TRANSLATE_NOOP("JamendoService", "Rock")},
+    {"soundtrack", QT_TRANSLATE_NOOP("JamendoService", "Soundtrack")},
+    {"world", QT_TRANSLATE_NOOP("JamendoService", "World")},
+};
+
+}  // namespace
 
 JamendoService::JamendoService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      library_backend_(nullptr),
-      library_filter_(nullptr),
-      library_model_(nullptr),
-      library_sort_model_(new QSortFilterProxyModel(this)),
-      search_provider_(nullptr),
-      load_database_task_id_(0),
-      total_song_count_(0),
-      accepted_download_(false) {
-  library_backend_.reset(new LibraryBackend,
-                         [](QObject* obj) { obj->deleteLater(); });
-  library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable, kFtsTable);
-  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
-          SLOT(UpdateTotalSongCount(int)));
+      url_handler_(new JamendoUrlHandler(this)),
+      root_(nullptr),
+      search_results_(nullptr),
+      search_box_(new QLineEdit),
+      open_share_url_(nullptr),
+      refresh_(nullptr) {
+  app_->player()->RegisterUrlHandler(url_handler_);
 
-  using smart_playlists::Generator;
-  using smart_playlists::GeneratorPtr;
-  using smart_playlists::QueryGenerator;
-  using smart_playlists::Search;
-  using smart_playlists::SearchTerm;
+  // The local copy of Jamendo's catalogue older versions kept.
+  const QString old_database =
+      Utilities::GetConfigPath(Utilities::Path_Root) + "/jamendo.db";
+  if (QFile::exists(old_database) && QFile::remove(old_database)) {
+    qLog(Info) << "Removed" << old_database;
+  }
 
-  library_model_ = new LibraryModel(library_backend_, app_, this);
-  library_model_->set_show_various_artists(false);
-  library_model_->set_show_smart_playlists(false);
-  library_model_->set_default_smart_playlists(
-      LibraryModel::DefaultGenerators()
-      << (LibraryModel::GeneratorList()
-          << GeneratorPtr(new JamendoDynamicPlaylist(
-                 tr("Jamendo Top Tracks of the Month"),
-                 JamendoDynamicPlaylist::OrderBy_RatingMonth))
-          << GeneratorPtr(new JamendoDynamicPlaylist(
-                 tr("Jamendo Top Tracks of the Week"),
-                 JamendoDynamicPlaylist::OrderBy_RatingWeek))
-          << GeneratorPtr(new JamendoDynamicPlaylist(
-                 tr("Jamendo Top Tracks"),
-                 JamendoDynamicPlaylist::OrderBy_Rating))
-          << GeneratorPtr(new JamendoDynamicPlaylist(
-                 tr("Jamendo Most Listened Tracks"),
-                 JamendoDynamicPlaylist::OrderBy_Listened)))
-      << (LibraryModel::GeneratorList() << GeneratorPtr(new QueryGenerator(
-              tr("Dynamic random mix"),
-              Search(Search::Type_All, Search::TermList(), Search::Sort_Random,
-                     SearchTerm::Field_Title),
-              true))));
-
-  library_sort_model_->setSourceModel(library_model_);
-  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
-  library_sort_model_->setDynamicSortFilter(true);
-  library_sort_model_->setSortLocaleAware(true);
-  library_sort_model_->sort(0);
-
-  search_provider_ = new LibrarySearchProvider(
-      library_backend_.get(), tr("Jamendo"), "jamendo",
-      IconLoader::Load("jamendo", IconLoader::Provider), false, app_, this);
-  app_->global_search()->AddProvider(search_provider_);
-  connect(app_->global_search(),
-          SIGNAL(ProviderToggled(const SearchProvider*, bool)),
-          SLOT(SearchProviderToggled(const SearchProvider*, bool)));
+  search_box_->setPlaceholderText(tr("Search Jamendo"));
+  search_box_->setClearButtonEnabled(true);
+  connect(search_box_, &QLineEdit::returnPressed, this,
+          &JamendoService::Search);
 }
 
-JamendoService::~JamendoService() {}
+JamendoService::~JamendoService() { delete search_box_; }
+
+QUrl JamendoService::StreamUrl(const QString& track_id) {
+  return QUrl(QString(kStreamUrl).arg(track_id, kClientId));
+}
 
 QStandardItem* JamendoService::CreateRootItem() {
+  root_ = new QStandardItem(IconLoader::Load("jamendo", IconLoader::Provider),
+                            kServiceName);
+  root_->setData(true, InternetModel::Role_CanLazyLoad);
+  return root_;
+}
+
+QWidget* JamendoService::HeaderWidget() const { return search_box_; }
+
+QStandardItem* JamendoService::CreateList(const QString& text, Type type,
+                                          const QString& query) {
   QStandardItem* item = new QStandardItem(
-      IconLoader::Load("jamendo", IconLoader::Provider), kServiceName);
+      IconLoader::Load("folder-sound", IconLoader::Base), text);
+  item->setData(type, InternetModel::Role_Type);
+  item->setData(query, Role_Query);
   item->setData(true, InternetModel::Role_CanLazyLoad);
+  if (type == Type_Tracks) {
+    item->setData(InternetModel::PlayBehaviour_MultipleItems,
+                  InternetModel::Role_PlayBehaviour);
+  }
   return item;
 }
 
+void JamendoService::PopulateRoot() {
+  root_->appendRow(CreateList(tr("Popular this week"), Type_Tracks,
+                              "order=popularity_week"));
+  root_->appendRow(CreateList(tr("Popular this month"), Type_Tracks,
+                              "order=popularity_month"));
+  root_->appendRow(CreateList(tr("Most popular of all time"), Type_Tracks,
+                              "order=popularity_total"));
+  root_->appendRow(
+      CreateList(tr("Popular albums"), Type_Albums, "order=popularity_month"));
+  root_->appendRow(
+      CreateList(tr("New albums"), Type_Albums, "order=releasedate_desc"));
+
+  QStandardItem* genres = new QStandardItem(
+      IconLoader::Load("folder-sound", IconLoader::Base), tr("Genres"));
+  genres->setData(Type_Genres, InternetModel::Role_Type);
+  for (const Genre& genre : kGenres) {
+    QUrlQuery query;
+    query.addQueryItem("tags", genre.tag);
+    query.addQueryItem("order", "popularity_month");
+    genres->appendRow(CreateList(tr(genre.name), Type_Tracks,
+                                 query.toString(QUrl::FullyEncoded)));
+  }
+  root_->appendRow(genres);
+}
+
 void JamendoService::LazyPopulate(QStandardItem* item) {
+  if (item == root_) {
+    PopulateRoot();
+  } else {
+    Fetch(item);
+  }
+}
+
+void JamendoService::Fetch(QStandardItem* item) {
+  QUrlQuery query(item->data(Role_Query).toString());
   switch (item->data(InternetModel::Role_Type).toInt()) {
-    case InternetModel::Type_Service: {
-      if (total_song_count_ == 0 && !load_database_task_id_) {
-        DownloadDirectory();
-      }
-      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
+    case Type_Tracks:
+      query.addQueryItem("limit", QString::number(kListLimit));
+      Request(item, "tracks", query, kEmptyRetries);
       break;
-    }
+    case Type_Albums:
+      query.addQueryItem("limit", QString::number(kListLimit));
+      Request(item, "albums", query, kEmptyRetries);
+      break;
+    case Type_Album:
+      // (tracks?album_id= finds nothing.)
+      query.addQueryItem("id", item->data(Role_Id).toString());
+      Request(item, "albums/tracks", query, kEmptyRetries);
+      break;
     default:
       break;
   }
 }
 
-void JamendoService::UpdateTotalSongCount(int count) {
-  total_song_count_ = count;
-  if (total_song_count_ > 0) {
-    library_model_->set_show_smart_playlists(true);
-    accepted_download_ = true;  // the user has previously accepted
-  }
+void JamendoService::Request(QStandardItem* item, const QString& endpoint,
+                             const QUrlQuery& query, int retries_left) {
+  QUrlQuery full_query(query);
+  full_query.addQueryItem("client_id", kClientId);
+  full_query.addQueryItem("format", "json");
+
+  QUrl url(kApiUrl + endpoint + "/");
+  url.setQuery(full_query);
+
+  const int task_id =
+      app_->task_manager()->StartTask(tr("Loading %1").arg(item->text()));
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  const QPersistentModelIndex index(item->index());
+  connect(reply, &QNetworkReply::finished, this, [=] {
+    RequestFinished(reply, index, endpoint, query, retries_left, task_id);
+  });
 }
 
-void JamendoService::DownloadDirectory() {
-  // don't ask if we're refreshing the database
-  if (total_song_count_ == 0) {
-    if (QMessageBox::question(nullptr, tr("Jamendo database"),
-                              tr("This action will create a database which "
-                                 "could be as big as 150 MB.\n"
-                                 "Do you want to continue anyway?"),
-                              QMessageBox::Ok | QMessageBox::Cancel) !=
-        QMessageBox::Ok)
-      return;
-  }
-  accepted_download_ = true;
-  QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
-  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                   QNetworkRequest::AlwaysNetwork);
+void JamendoService::RequestFinished(QNetworkReply* reply,
+                                     const QPersistentModelIndex& index,
+                                     const QString& endpoint,
+                                     const QUrlQuery& query, int retries_left,
+                                     int task_id) {
+  reply->deleteLater();
+  app_->task_manager()->SetTaskFinished(task_id);
 
-  QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
-  connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
-          SLOT(DownloadDirectoryProgress(qint64, qint64)));
+  // The list might have been refreshed or searched again since.
+  if (!index.isValid()) return;
+  QStandardItem* item = model()->itemFromIndex(index);
 
-  if (!load_database_task_id_) {
-    load_database_task_id_ =
-        app_->task_manager()->StartTask(tr("Downloading Jamendo catalogue"));
-  }
-}
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
 
-void JamendoService::DownloadDirectoryProgress(qint64 received, qint64 total) {
-  float progress = static_cast<float>(received) / total;
-  app_->task_manager()->SetTaskProgress(load_database_task_id_,
-                                        static_cast<int>(progress * 100), 100);
-}
-
-void JamendoService::DownloadDirectoryFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
-
-  app_->task_manager()->SetTaskFinished(load_database_task_id_);
-  load_database_task_id_ = 0;
-
-  // TODO(John Maguire): Not leak reply.
-  QtIOCompressor* gzip = new QtIOCompressor(reply);
-  gzip->setStreamFormat(QtIOCompressor::GzipFormat);
-  if (!gzip->open(QIODevice::ReadOnly)) {
-    qLog(Warning) << "Jamendo library not in gzip format";
-    delete gzip;
+  QJsonObject headers = document.object()["headers"].toObject();
+  if (headers["status"].toString() != "success") {
+    // Eg. code 6: the quota has run out.
+    qLog(Error) << "Jamendo request failed:" << headers;
+    app_->AddError(tr("Jamendo request failed:\n%1")
+                       .arg(headers["error_message"].toString()));
     return;
   }
 
-  load_database_task_id_ =
-      app_->task_manager()->StartTask(tr("Parsing Jamendo catalogue"));
-
-  QFuture<void> future =
-      QtConcurrent::run(&JamendoService::ParseDirectory, this, gzip);
-  NewClosure(future, this, &JamendoService::ParseDirectoryFinished);
-}
-
-void JamendoService::ParseDirectory(QIODevice* device) const {
-  int total_count = 0;
-
-  // Bit of a hack: don't update the model while we're parsing the xml
-  disconnect(library_backend_.get(), SIGNAL(SongsDiscovered(SongList)),
-             library_model_, SLOT(SongsDiscovered(SongList)));
-  disconnect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)), this,
-             SLOT(UpdateTotalSongCount(int)));
-
-  // Delete the database and recreate it.  This is faster than dropping tables
-  // or removing rows.
-  library_backend_->db()->RecreateAttachedDb("jamendo");
-
-  TrackIdList track_ids;
-  SongList songs;
-  QXmlStreamReader reader(device);
-  while (!reader.atEnd()) {
-    reader.readNext();
-    if (reader.tokenType() == QXmlStreamReader::StartElement &&
-        reader.name() == QLatin1String("artist")) {
-      songs << ReadArtist(&reader, &track_ids);
-    }
-
-    if (songs.count() >= kBatchSize) {
-      // Add the songs to the database in batches
-      library_backend_->AddOrUpdateSongs(songs);
-      InsertTrackIds(track_ids);
-
-      total_count += songs.count();
-      songs.clear();
-      track_ids.clear();
-
-      // Update progress info
-      app_->task_manager()->SetTaskProgress(load_database_task_id_, total_count,
-                                            kApproxDatabaseSize);
-    }
+  QJsonArray results = document.object()["results"].toArray();
+  if (results.isEmpty() && retries_left > 0) {
+    Request(item, endpoint, query, retries_left - 1);
+    return;
   }
 
-  library_backend_->AddOrUpdateSongs(songs);
-  InsertTrackIds(track_ids);
-
-  connect(library_backend_.get(), SIGNAL(SongsDiscovered(SongList)),
-          library_model_, SLOT(SongsDiscovered(SongList)));
-  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
-          SLOT(UpdateTotalSongCount(int)));
-
-  library_backend_->UpdateTotalSongCount();
-}
-
-void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
-  QMutexLocker l(library_backend_->db()->Mutex());
-  QSqlDatabase db(library_backend_->db()->Connect());
-
-  ScopedTransaction t(&db);
-
-  QSqlQuery insert(db);
-  insert.prepare(QString("INSERT INTO %1 (%2) VALUES (:id)")
-                     .arg(kTrackIdsTable, kTrackIdsColumn));
-
-  for (int id : ids) {
-    insert.bindValue(":id", id);
-    if (!insert.exec()) {
-      qLog(Warning) << "Query failed" << insert.lastQuery();
-    }
-  }
-
-  t.Commit();
-}
-
-SongList JamendoService::ReadArtist(QXmlStreamReader* reader,
-                                    TrackIdList* track_ids) const {
-  SongList ret;
-  QString current_artist;
-
-  while (!reader->atEnd()) {
-    reader->readNext();
-
-    if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      QStringView name = reader->name();
-      if (name == QLatin1String("name")) {
-        current_artist = reader->readElementText().trimmed();
-      } else if (name == QLatin1String("album")) {
-        ret << ReadAlbum(current_artist, reader, track_ids);
-      }
-    } else if (reader->isEndElement() &&
-               reader->name() == QLatin1String("artist")) {
+  if (item->hasChildren()) item->removeRows(0, item->rowCount());
+  switch (item->data(InternetModel::Role_Type).toInt()) {
+    case Type_Tracks:
+      AddTracks(item, results, true);
       break;
-    }
+    case Type_Albums:
+      AddAlbums(item, results);
+      break;
+    case Type_Album:
+      AddTracks(item, AlbumTracks(results.first().toObject()), false);
+      break;
   }
-
-  return ret;
 }
 
-SongList JamendoService::ReadAlbum(const QString& artist,
-                                   QXmlStreamReader* reader,
-                                   TrackIdList* track_ids) const {
-  SongList ret;
-  QString current_album;
-  QString cover;
-  int current_album_id = 0;
-
-  while (!reader->atEnd()) {
-    reader->readNext();
-
-    if (reader->tokenType() == QXmlStreamReader::StartElement) {
-      if (reader->name() == QLatin1String("name")) {
-        current_album = reader->readElementText().trimmed();
-      } else if (reader->name() == QLatin1String("id")) {
-        QString id = reader->readElementText();
-        cover = QString(kAlbumCoverUrl).arg(id);
-        current_album_id = id.toInt();
-      } else if (reader->name() == QLatin1String("track")) {
-        ret << ReadTrack(artist, current_album, cover, current_album_id, reader,
-                         track_ids);
-      }
-    } else if (reader->isEndElement() &&
-               reader->name() == QLatin1String("album")) {
-      break;
-    }
+QJsonArray JamendoService::AlbumTracks(const QJsonObject& album) {
+  // An album's tracks leave out what they share with it.
+  QJsonArray ret;
+  for (const QJsonValue& value : album["tracks"].toArray()) {
+    QJsonObject track = value.toObject();
+    track["artist_name"] = album["artist_name"];
+    track["album_name"] = album["name"];
+    track["image"] = album["image"];
+    track["releasedate"] = album["releasedate"];
+    track["shareurl"] =
+        QString("https://www.jamendo.com/track/%1").arg(track["id"].toString());
+    ret << track;
   }
   return ret;
 }
 
-Song JamendoService::ReadTrack(const QString& artist, const QString& album,
-                               const QString& album_cover, int album_id,
-                               QXmlStreamReader* reader,
-                               TrackIdList* track_ids) const {
+Song JamendoService::TrackToSong(const QJsonObject& track) const {
   Song song;
-  song.set_artist(artist);
-  song.set_album(album);
-  song.set_filetype(Song::Type_Stream);
-  song.set_directory_id(0);
-  song.set_mtime(0);
-  song.set_ctime(0);
-  song.set_filesize(0);
-
-  // Shoehorn the album ID into the comment field
-  song.set_comment(QString::number(album_id));
-
-  while (!reader->atEnd()) {
-    reader->readNext();
-    if (reader->isStartElement()) {
-      QStringView name = reader->name();
-      if (name == QLatin1String("name")) {
-        song.set_title(reader->readElementText().trimmed());
-      } else if (name == QLatin1String("duration")) {
-        const int length = reader->readElementText().toFloat();
-        song.set_length_nanosec(length * kNsecPerSec);
-      } else if (name == QLatin1String("id3genre")) {
-        int genre_id = reader->readElementText().toInt();
-        // In theory, genre 0 is "blues"; in practice it's invalid.
-        if (genre_id != 0) {
-          song.set_genre_id3(genre_id);
-        }
-      } else if (name == QLatin1String("id")) {
-        QString id_text = reader->readElementText();
-        int id = id_text.toInt();
-        if (id == 0) continue;
-
-        QString mp3_url = QString(kMp3StreamUrl).arg(id_text);
-        song.set_url(QUrl(mp3_url));
-        song.set_art_automatic(album_cover);
-        song.set_valid(true);
-
-        // Rely on songs getting added in this exact order
-        track_ids->append(id);
-      }
-    } else if (reader->isEndElement() &&
-               reader->name() == QLatin1String("track")) {
-      break;
-    }
-  }
+  song.set_valid(true);
+  song.set_title(track["name"].toString());
+  song.set_artist(track["artist_name"].toString());
+  song.set_album(track["album_name"].toString());
+  // Numbers, or strings in an album's tracks.
+  const int position = track["position"].toVariant().toInt();
+  if (position > 0) song.set_track(position);
+  song.set_length_nanosec(track["duration"].toVariant().toLongLong() *
+                          kNsecPerSec);
+  song.set_year(track["releasedate"].toString().left(4).toInt());
+  song.set_art_automatic(track["image"].toString());
+  song.set_url(
+      QUrl(QString("%1://track/%2").arg(kUrlScheme, track["id"].toString())));
   return song;
 }
 
-void JamendoService::ParseDirectoryFinished() {
-  // show smart playlists
-  library_model_->set_show_smart_playlists(true);
-  library_model_->Reset();
+void JamendoService::AddTracks(QStandardItem* parent, const QJsonArray& tracks,
+                               bool with_artist) {
+  QList<QJsonObject> sorted;
+  for (const QJsonValue& value : tracks) sorted << value.toObject();
+  // An album's tracks, in order.
+  if (!with_artist) {
+    std::stable_sort(sorted.begin(), sorted.end(),
+                     [](const QJsonObject& a, const QJsonObject& b) {
+                       return a["position"].toVariant().toInt() <
+                              b["position"].toVariant().toInt();
+                     });
+  }
 
-  app_->task_manager()->SetTaskFinished(load_database_task_id_);
-  load_database_task_id_ = 0;
-}
+  for (const QJsonObject& track : sorted) {
+    const Song song = TrackToSong(track);
+    const QString text =
+        with_artist ? QString("%1 - %2").arg(song.artist(), song.title())
+                    : song.title();
 
-void JamendoService::EnsureMenuCreated() {
-  if (library_filter_) return;
-
-  context_menu_.reset(new QMenu);
-  context_menu_->addActions(GetPlaylistActions());
-  album_info_ = context_menu_->addAction(
-      IconLoader::Load("view-media-lyrics", IconLoader::Base),
-      tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
-  download_album_ = context_menu_->addAction(
-      IconLoader::Load("download", IconLoader::Base),
-      tr("Download this album..."), this, SLOT(DownloadAlbum()));
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
-                           tr("Open %1 in browser").arg("jamendo.com"), this,
-                           SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
-                           tr("Refresh catalogue"), this,
-                           SLOT(DownloadDirectory()));
-
-  if (accepted_download_) {
-    library_filter_ = new LibraryFilterWidget(0);
-    library_filter_->SetSettingsGroup(kSettingsGroup);
-    library_filter_->SetLibraryModel(library_model_);
-    library_filter_->SetFilterHint(tr("Search Jamendo"));
-    library_filter_->SetAgeFilterEnabled(false);
-
-    context_menu_->addSeparator();
-    context_menu_->addMenu(library_filter_->menu());
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("audio-x-generic", IconLoader::Base), text);
+    item->setData(InternetModel::Type_Track, InternetModel::Role_Type);
+    item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    item->setData(InternetModel::PlayBehaviour_SingleItem,
+                  InternetModel::Role_PlayBehaviour);
+    item->setData(track["shareurl"].toString(), Role_ShareUrl);
+    parent->appendRow(item);
   }
 }
 
+void JamendoService::AddAlbums(QStandardItem* parent,
+                               const QJsonArray& albums) {
+  for (const QJsonValue& value : albums) {
+    QJsonObject album = value.toObject();
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("x-clementine-album", IconLoader::Base),
+        QString("%1 - %2").arg(album["artist_name"].toString(),
+                               album["name"].toString()));
+    item->setData(Type_Album, InternetModel::Role_Type);
+    item->setData(album["id"].toString(), Role_Id);
+    item->setData(album["shareurl"].toString(), Role_ShareUrl);
+    item->setData(true, InternetModel::Role_CanLazyLoad);
+    item->setData(InternetModel::PlayBehaviour_MultipleItems,
+                  InternetModel::Role_PlayBehaviour);
+    parent->appendRow(item);
+  }
+}
+
+void JamendoService::Search() {
+  const QString text = search_box_->text().trimmed();
+  if (text.isEmpty()) return;
+
+  // The root's lists come first, so the results can go above them.
+  if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
+    root_->setData(false, InternetModel::Role_CanLazyLoad);
+    PopulateRoot();
+  }
+
+  // A new list for each search, so a slow reply to an earlier one can't fill
+  // it in.
+  if (search_results_) root_->removeRow(search_results_->row());
+  QUrlQuery query;
+  query.addQueryItem("search", text);
+  query.addQueryItem("boost", "popularity_total");
+  search_results_ = CreateList(tr("Search results for \"%1\"").arg(text),
+                               Type_Tracks, query.toString(QUrl::FullyEncoded));
+  search_results_->setData(false, InternetModel::Role_CanLazyLoad);
+  root_->insertRow(0, search_results_);
+
+  Fetch(search_results_);
+  emit ScrollToIndex(search_results_->index());
+}
+
 void JamendoService::ShowContextMenu(const QPoint& global_pos) {
-  EnsureMenuCreated();
+  if (!context_menu_) {
+    context_menu_.reset(new QMenu);
+    context_menu_->addActions(GetPlaylistActions());
+    context_menu_->addSeparator();
+    open_share_url_ = context_menu_->addAction(
+        IconLoader::Load("applications-internet", IconLoader::Base),
+        tr("Open on Jamendo"), this, SLOT(OpenShareUrl()));
+    refresh_ = context_menu_->addAction(
+        IconLoader::Load("view-refresh", IconLoader::Base), tr("Refresh"), this,
+        SLOT(Refresh()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                             tr("Open %1 in browser").arg("jamendo.com"), this,
+                             SLOT(Homepage()));
+  }
 
-  const bool enabled = accepted_download_ &&
-                       model()->current_index().model() == library_sort_model_;
+  context_index_ = QPersistentModelIndex(model()->current_index());
+  QStandardItem* item = context_index_.isValid()
+                            ? model()->itemFromIndex(context_index_)
+                            : nullptr;
+  const int type = item ? item->data(InternetModel::Role_Type).toInt() : -1;
+  const bool playable =
+      item && item->data(InternetModel::Role_PlayBehaviour).toInt() !=
+                  InternetModel::PlayBehaviour_None;
 
-  // make menu items visible and enabled only when needed
-  GetAppendToPlaylistAction()->setVisible(accepted_download_);
-  GetAppendToPlaylistAction()->setEnabled(enabled);
-  GetReplacePlaylistAction()->setVisible(accepted_download_);
-  GetReplacePlaylistAction()->setEnabled(enabled);
-  GetOpenInNewPlaylistAction()->setEnabled(enabled);
-  GetOpenInNewPlaylistAction()->setVisible(accepted_download_);
-  album_info_->setEnabled(enabled);
-  album_info_->setVisible(accepted_download_);
-  download_album_->setEnabled(enabled);
-  download_album_->setVisible(accepted_download_);
+  for (QAction* action : GetPlaylistActions()) action->setEnabled(playable);
+  open_share_url_->setVisible(item &&
+                              !item->data(Role_ShareUrl).toString().isEmpty());
+  refresh_->setVisible(type == Type_Tracks || type == Type_Albums ||
+                       type == Type_Album);
 
   context_menu_->popup(global_pos);
 }
 
-QWidget* JamendoService::HeaderWidget() const {
-  const_cast<JamendoService*>(this)->EnsureMenuCreated();
-  return library_filter_;
+void JamendoService::OpenShareUrl() {
+  if (!context_index_.isValid()) return;
+  QDesktopServices::openUrl(
+      QUrl(context_index_.data(Role_ShareUrl).toString()));
 }
 
-void JamendoService::AlbumInfo() {
-  SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(model()->current_index())));
-  if (songs.isEmpty()) return;
-
-  // We put the album ID into the comment field
-  int id = songs.first().comment().toInt();
-  if (!id) return;
-
-  QDesktopServices::openUrl(QUrl(QString(kAlbumInfoUrl).arg(id)));
-}
-
-void JamendoService::DownloadAlbum() {
-  SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(model()->current_index())));
-  if (songs.isEmpty()) return;
-
-  // We put the album ID into the comment field
-  int id = songs.first().comment().toInt();
-  if (!id) return;
-
-  QDesktopServices::openUrl(QUrl(QString(kDownloadAlbumUrl).arg(id)));
+void JamendoService::Refresh() {
+  if (!context_index_.isValid()) return;
+  QStandardItem* item = model()->itemFromIndex(context_index_);
+  if (item) Fetch(item);
 }
 
 void JamendoService::Homepage() { QDesktopServices::openUrl(QUrl(kHomepage)); }
-
-void JamendoService::SearchProviderToggled(const SearchProvider* provider,
-                                           bool enabled) {
-  // If the use enabled our provider and he hasn't downloaded the directory yet,
-  // prompt him to do so now.
-  if (provider == search_provider_ && enabled && total_song_count_ == 0) {
-    DownloadDirectory();
-  }
-}

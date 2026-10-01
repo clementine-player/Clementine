@@ -48,7 +48,7 @@
 #include "utilities.h"
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 52;
+const int Database::kSchemaVersion = 53;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -223,9 +223,6 @@ Database::Database(Application* app, QObject* parent,
 
   directory_ =
       QDir::toNativeSeparators(Utilities::GetConfigPath(Utilities::Path_Root));
-
-  attached_databases_["jamendo"] = AttachedDatabase(
-      directory_ + "/jamendo.db", ":/schema/jamendo.sql", false);
 
   QMutexLocker l(&mutex_);
   Connect();

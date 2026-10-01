@@ -20,7 +20,6 @@
 #include <QSettings>
 
 #include "core/logging.h"
-#include "internet/jamendo/jamendodynamicplaylist.h"
 #include "internet/subsonic/subsonicdynamicplaylist.h"
 #include "querygenerator.h"
 
@@ -35,8 +34,6 @@ Generator::Generator() : QObject(nullptr), backend_(nullptr) {}
 GeneratorPtr Generator::Create(const QString& type) {
   if (type == "Query")
     return GeneratorPtr(new QueryGenerator);
-  else if (type == "Jamendo")
-    return GeneratorPtr(new JamendoDynamicPlaylist);
   else if (type == "Subsonic") {
     return GeneratorPtr(new SubsonicDynamicPlaylist);
   }

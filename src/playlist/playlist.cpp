@@ -49,8 +49,6 @@
 #include "internet/core/internetplaylistitem.h"
 #include "internet/core/internetsongmimedata.h"
 #include "internet/internetradio/savedradio.h"
-#include "internet/jamendo/jamendoplaylistitem.h"
-#include "internet/jamendo/jamendoservice.h"
 #include "internet/magnatune/magnatuneplaylistitem.h"
 #include "internet/magnatune/magnatuneservice.h"
 #include "library/library.h"
@@ -788,10 +786,6 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
              song_data->backend->songs_table() == MagnatuneService::kSongsTable)
       InsertSongItems<MagnatunePlaylistItem>(song_data->songs, row, play_now,
                                              enqueue_now, enqueue_next_now);
-    else if (song_data->backend &&
-             song_data->backend->songs_table() == JamendoService::kSongsTable)
-      InsertSongItems<JamendoPlaylistItem>(song_data->songs, row, play_now,
-                                           enqueue_now, enqueue_next_now);
     else
       InsertSongItems<SongPlaylistItem>(song_data->songs, row, play_now,
                                         enqueue_now, enqueue_next_now);
@@ -1609,8 +1603,6 @@ void Playlist::ItemsLoaded(PlaylistItemList items) {
         backend = library_;
       else if (p.dynamic_backend == MagnatuneService::kSongsTable)
         backend = InternetModel::Service<MagnatuneService>()->library_backend();
-      else if (p.dynamic_backend == JamendoService::kSongsTable)
-        backend = InternetModel::Service<JamendoService>()->library_backend();
 
       if (backend) {
         gen->set_library(backend);

@@ -37,7 +37,10 @@ bool SongPlaylistItem::IsTypeSupported(const QString& type) {
 }
 
 bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
-  song_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
+  // The playlist item's own columns follow the songs tables'.
+  song_.InitFromQuery(
+      query, false,
+      (Song::kColumns.count() + 1) * (PlaylistBackend::kSongTableJoins - 1));
 
   if (type() == "Stream") {
     song_.set_filetype(Song::Type_Stream);
