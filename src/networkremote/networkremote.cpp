@@ -47,6 +47,9 @@ namespace {
 // How long a new connection may stay silent before it's dropped.
 const int kFirstByteTimeoutMsec = 10000;
 const char* kSniffedProperty = "clementine_sniffed";
+// Set on a connection that isn't from the local network when only those are
+// allowed. It's told why once it's said which protocol it speaks.
+const char* kRefusedProperty = "clementine_refused";
 
 // Non-public ranges that aren't a local network by themselves. Tailscale
 // gives its devices addresses from carrier-grade NAT space, so a listen
@@ -383,9 +386,7 @@ void NetworkRemote::AcceptConnection() {
                   << client_socket->localAddress().toString()
                   << "because only connections from the local network are "
                      "allowed";
-    client_socket->close();
-    client_socket->deleteLater();
-    return;
+    client_socket->setProperty(kRefusedProperty, true);
   }
 
   // Drop connections that never say anything. Once the socket has been
@@ -411,7 +412,14 @@ void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
   socket->setProperty(kSniffedProperty, true);
   disconnect(socket, &QTcpSocket::readyRead, this, nullptr);
 
-  switch (ProtocolSniffer::Classify(static_cast<unsigned char>(first_byte))) {
+  const ProtocolSniffer::Protocol protocol =
+      ProtocolSniffer::Classify(static_cast<unsigned char>(first_byte));
+  if (socket->property(kRefusedProperty).toBool()) {
+    RefuseNotLocal(socket, protocol);
+    return;
+  }
+
+  switch (protocol) {
     case ProtocolSniffer::Remote: {
       CreateRemoteClient(socket);
       // The first message is already waiting, and readyRead won't be emitted
@@ -436,6 +444,51 @@ void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
               << socket->peerAddress().toString();
   socket->abort();
   socket->deleteLater();
+}
+
+void NetworkRemote::RefuseNotLocal(QTcpSocket* socket,
+                                   ProtocolSniffer::Protocol protocol) {
+  // Closing with unread data makes the kernel reset the connection, which can
+  // throw away the reply before the client reads it.
+  socket->readAll();
+
+  connect(socket, &QTcpSocket::disconnected, socket, &QObject::deleteLater);
+  // In case the client never takes the reply.
+  QTimer::singleShot(kFirstByteTimeoutMsec, socket, [socket]() {
+    socket->abort();
+    socket->deleteLater();
+  });
+
+  switch (protocol) {
+    case ProtocolSniffer::Remote:
+      socket->write(DisconnectMessage(cpb::remote::Not_Local_Network));
+      socket->disconnectFromHost();
+      return;
+
+    case ProtocolSniffer::Http:
+      MediaHttpServer::WriteError(socket, 403, "Forbidden");
+      return;
+
+    case ProtocolSniffer::Unknown:
+      socket->abort();
+      return;
+  }
+}
+
+QByteArray NetworkRemote::DisconnectMessage(
+    cpb::remote::ReasonDisconnect reason) {
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::DISCONNECT);
+  msg.set_version(msg.default_instance().version());
+  msg.mutable_response_disconnect()->set_reason_disconnect(reason);
+  const std::string data = msg.SerializeAsString();
+
+  // As RemoteClient frames it: a big-endian length, then the message.
+  QByteArray framed;
+  QDataStream s(&framed, QIODevice::WriteOnly);
+  s << qint32(data.length());
+  s.writeRawData(data.data(), data.length());
+  return framed;
 }
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
