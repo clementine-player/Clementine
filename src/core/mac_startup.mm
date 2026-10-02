@@ -53,7 +53,7 @@
 #include "utilities.h"
 
 #ifdef HAVE_SPARKLE
-#import <Sparkle/SUUpdater.h>
+#import <Sparkle/SPUStandardUpdaterController.h>
 #endif
 
 #include <QApplication>
@@ -232,13 +232,19 @@ static BreakpadRef InitBreakpad() {
 
 namespace mac {
 
+#ifdef HAVE_SPARKLE
+// Lives as long as the app: it checks for updates on Sparkle's schedule.
+static SPUStandardUpdaterController* updater_controller = nil;
+#endif
+
 void MacMain() {
   ScopedNSAutoreleasePool pool;
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
 #ifdef HAVE_SPARKLE
-  // Creates and sets the magic global variable for Sparkle.
-  [[SUUpdater sharedUpdater] setDelegate:NSApp];
+  updater_controller = [[SPUStandardUpdaterController alloc] initWithStartingUpdater:YES
+                                                                     updaterDelegate:nil
+                                                                  userDriverDelegate:nil];
 #endif
 }
 
@@ -248,7 +254,7 @@ void SetApplicationHandler(PlatformInterface* handler) { [NSApp SetApplicationHa
 
 void CheckForUpdates() {
 #ifdef HAVE_SPARKLE
-  [[SUUpdater sharedUpdater] checkForUpdates:NSApp];
+  [updater_controller checkForUpdates:nil];
 #endif
 }
 

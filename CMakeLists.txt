@@ -140,7 +140,22 @@ else()
 endif()
 
 if (APPLE)
+  # Sparkle 2, from `clementine-mac-update fetch-sparkle <dir>`
+  # (tools/mac-update): pass -DCMAKE_FRAMEWORK_PATH=<dir>.
   find_library(SPARKLE Sparkle)
+  # The public half of the EdDSA key that signs the updates in the feed
+  # (tools/mac-update/README.md). Without it the app couldn't check any
+  # update, so Sparkle stays out of the build until the file exists.
+  set(SPARKLE_PUBLIC_KEY_FILE "${CMAKE_SOURCE_DIR}/dist/sparkle_public_key.txt")
+  set(SPARKLE_PUBLIC_ED_KEY "")
+  if (EXISTS "${SPARKLE_PUBLIC_KEY_FILE}")
+    file(READ "${SPARKLE_PUBLIC_KEY_FILE}" SPARKLE_PUBLIC_ED_KEY)
+    string(STRIP "${SPARKLE_PUBLIC_ED_KEY}" SPARKLE_PUBLIC_ED_KEY)
+    # So a new key reaches Info.plist without configuring by hand.
+    set_property(DIRECTORY APPEND PROPERTY
+      CMAKE_CONFIGURE_DEPENDS "${SPARKLE_PUBLIC_KEY_FILE}")
+  endif ()
+  set(SPARKLE_FEED_URL "https://data.clementine-player.org/sparkle2")
 endif (APPLE)
 
 find_package(Threads)
@@ -269,6 +284,7 @@ optional_component(MOODBAR ON "Moodbar support"
 optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "macOS" APPLE
   DEPENDS "Sparkle" SPARKLE
+  DEPENDS "dist/sparkle_public_key.txt (tools/mac-update/README.md)" SPARKLE_PUBLIC_ED_KEY
 )
 
 optional_component(ALSA ON "ALSA integration"

@@ -33,11 +33,11 @@
   <key>LSApplicationCategoryType</key>
   <string>public.app-category.music</string>
   <key>LSMinimumSystemVersion</key>
-  <string>10.7.0</string>
+  <string>${MACOS_MINIMUM_VERSION}</string>
   <key>SUFeedURL</key>
-  <string>https://clementine-data.appspot.com/sparkle</string>
-  <key>SUPublicDSAKeyFile</key>
-  <string>sparkle_pub.pem</string>
+  <string>${SPARKLE_FEED_URL}</string>
+  <key>SUPublicEDKey</key>
+  <string>${SPARKLE_PUBLIC_ED_KEY}</string>
   <key>BreakpadProduct</key>
   <string>Clementine</string>
   <key>BreakpadProductDisplay</key>

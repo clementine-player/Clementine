@@ -31,6 +31,10 @@ def FindSignablePaths(app_bundle):
 
   for root, dirs, files in os.walk(app_bundle):
     for d in sorted(dirs):
+      # A framework's top level links to its current version's contents
+      # (Sparkle.framework/Updater.app, say), which are signed there.
+      if os.path.islink(os.path.join(root, d)):
+        continue
       if d.endswith(('.framework', '.app')):
         nested_bundles.append(os.path.join(root, d))
         # Don't descend into it separately; it's signed as a unit below by
@@ -49,6 +53,17 @@ def FindSignablePaths(app_bundle):
   return binaries + nested_bundles
 
 
+def IsSparkleHelper(path):
+  # Sparkle.framework itself is loaded into Clementine, but its Autoupdate
+  # and Updater.app run as processes of their own. They need none of
+  # Clementine's entitlements, which relax the hardened runtime, so they're
+  # signed without any, as Sparkle's documentation does.
+  parts = path.split(os.sep)
+  return ('Sparkle.framework' in parts
+          and not path.endswith('Sparkle.framework')
+          and os.path.basename(path) != 'Sparkle')
+
+
 def SignPath(path, developer_id, entitlements):
   args = ['codesign', '--force']
   if developer_id != '-':
@@ -57,7 +72,10 @@ def SignPath(path, developer_id, entitlements):
     # satisfy Apple Silicon's "every loaded binary needs *a* valid
     # signature" requirement for local runs.
     args += ['--options', 'runtime', '--timestamp']
-  args += ['-s', developer_id, '--entitlements', entitlements, '-v', path]
+  args += ['-s', developer_id]
+  if not IsSparkleHelper(path):
+    args += ['--entitlements', entitlements]
+  args += ['-v', path]
   subprocess.check_call(args)
 
 
