@@ -16,6 +16,7 @@
 
 #include "networkremote/networkremote.h"
 
+#include <QDataStream>
 #include <QHostAddress>
 #include <QStringList>
 
@@ -115,4 +116,21 @@ TEST(NetworkRemoteTest, LocalClientsCanReachNonPublicAddresses) {
       QHostAddress("fd7a:115c:a1e0::f535:374b")));
   EXPECT_FALSE(
       NetworkRemote::LocalClientsCanReach(QHostAddress("203.0.113.5")));
+}
+
+TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
+  const QByteArray framed =
+      NetworkRemote::DisconnectMessage(cpb::remote::Not_Local_Network);
+
+  QDataStream s(framed);
+  qint32 length = 0;
+  s >> length;
+  ASSERT_EQ(framed.size() - 4, length);
+
+  cpb::remote::Message msg;
+  ASSERT_TRUE(msg.ParseFromArray(framed.constData() + 4, length));
+  EXPECT_EQ(cpb::remote::DISCONNECT, msg.type());
+  EXPECT_EQ(cpb::remote::Not_Local_Network,
+            msg.response_disconnect().reason_disconnect());
+  EXPECT_TRUE(msg.has_version());
 }
