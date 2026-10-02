@@ -373,9 +373,11 @@ void NetworkRemote::AcceptConnection() {
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
   QTcpSocket* client_socket = server->nextPendingConnection();
   // Check if our ip is in private scope
-  if (only_non_public_ip_ && !IsLocalClient(client_socket->peerAddress(),
-                                            client_socket->localAddress(),
-                                            !listen_on_all_addresses_)) {
+  if (only_non_public_ip_ &&
+      !IsLocalClient(client_socket->peerAddress(),
+                     client_socket->localAddress(),
+                     listen_on_all_addresses_ ? Listening::OnAllAddresses
+                                              : Listening::OnChosenAddress)) {
     qLog(Warning) << "Refusing a connection from"
                   << client_socket->peerAddress().toString() << "to"
                   << client_socket->localAddress().toString()
@@ -463,9 +465,9 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
 
 bool NetworkRemote::IsLocalClient(const QHostAddress& peer,
                                   const QHostAddress& local,
-                                  bool local_was_chosen) {
+                                  Listening listening) {
   if (IpIsPrivate(peer)) return true;
-  if (!local_was_chosen) return false;
+  if (listening != Listening::OnChosenAddress) return false;
 
   // Arriving on the address isn't enough by itself: a machine in a router's
   // DMZ gets the internet on its LAN address.

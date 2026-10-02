@@ -22,6 +22,8 @@
 #include "gtest/gtest.h"
 #include "test_utils.h"
 
+using Listening = NetworkRemote::Listening;
+
 TEST(NetworkRemoteTest, AllAddressesListensOnTheWildcards) {
   const QList<QHostAddress> addresses =
       NetworkRemote::ListenAddresses(true, QStringList() << "192.168.1.5");
@@ -78,27 +80,30 @@ TEST(NetworkRemoteTest, LinkLocalIsPrivate) {
 
 TEST(NetworkRemoteTest, TailnetClientIsLocalOnAChosenTailnetAddress) {
   const QHostAddress local("100.65.55.75");
-  EXPECT_TRUE(
-      NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local, true));
+  EXPECT_TRUE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local,
+                                           Listening::OnChosenAddress));
   // Not when listening on everything.
-  EXPECT_FALSE(
-      NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local, false));
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local,
+                                            Listening::OnAllAddresses));
   // The internet stays out.
-  EXPECT_FALSE(
-      NetworkRemote::IsLocalClient(QHostAddress("8.8.8.8"), local, true));
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("8.8.8.8"), local,
+                                            Listening::OnChosenAddress));
 }
 
 TEST(NetworkRemoteTest, TailnetClientIsntLocalOnALanAddress) {
-  EXPECT_FALSE(NetworkRemote::IsLocalClient(
-      QHostAddress("100.101.2.3"), QHostAddress("192.168.86.178"), true));
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"),
+                                            QHostAddress("192.168.86.178"),
+                                            Listening::OnChosenAddress));
 }
 
 TEST(NetworkRemoteTest, InternetIsntLocalOnAChosenLanAddress) {
   // A machine in a router's DMZ gets the internet on its LAN address.
-  EXPECT_FALSE(NetworkRemote::IsLocalClient(
-      QHostAddress("8.8.8.8"), QHostAddress("192.168.86.178"), true));
-  EXPECT_TRUE(NetworkRemote::IsLocalClient(
-      QHostAddress("192.168.86.20"), QHostAddress("192.168.86.178"), true));
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("8.8.8.8"),
+                                            QHostAddress("192.168.86.178"),
+                                            Listening::OnChosenAddress));
+  EXPECT_TRUE(NetworkRemote::IsLocalClient(QHostAddress("192.168.86.20"),
+                                           QHostAddress("192.168.86.178"),
+                                           Listening::OnChosenAddress));
 }
 
 TEST(NetworkRemoteTest, LocalClientsCanReachNonPublicAddresses) {
