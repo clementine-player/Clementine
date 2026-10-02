@@ -63,7 +63,7 @@ msgstr " kbde"
 msgid " ms"
 msgstr " me"
 
-#: ../bin/src/ui_songinfosettingspage.h:153
+#: ../bin/src/ui_songinfosettingspage.h:125
 msgid " pt"
 msgstr " pik"
 
@@ -538,7 +538,7 @@ msgstr "Ouzhpennañ ul lanv all..."
 msgid "Add directory..."
 msgstr "Ouzhpennañ un teuliad..."
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2146
 msgid "Add file"
 msgstr ""
 
@@ -562,7 +562,7 @@ msgstr "Ouzhpennañ restroù da"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Ouzhpennañ un teuliad"
@@ -659,7 +659,7 @@ msgstr "Ouzhpennañ klav bloavezh an ton"
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1947
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
@@ -713,7 +713,7 @@ msgstr ""
 msgid "After copying..."
 msgstr "Goude an eiladur..."
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1385
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
 #: ../bin/src/ui_albumcoversearcher.h:108
@@ -726,7 +726,7 @@ msgstr "Albom"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1400
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1394
 #: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_groupbydialog.h:189 ../bin/src/ui_groupbydialog.h:206
 #: ../bin/src/ui_edittagdialog.h:725
@@ -736,10 +736,6 @@ msgstr "Arzour an albom"
 #: ../bin/src/ui_appearancesettingspage.h:339
 msgid "Album cover"
 msgstr ""
-
-#: internet/jamendo/jamendoservice.cpp:423
-msgid "Album info on jamendo.com..."
-msgstr "Titouroù an albom war jamendo.com..."
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -824,11 +820,15 @@ msgstr ""
 msgid "Always start playing"
 msgstr "Atav kregin da lenn"
 
+#: internet/jamendo/jamendoservice.cpp:75
+msgid "Ambient"
+msgstr ""
+
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
 msgstr "Ur gudenn a zo savet en ur c'hargañ stlennvon iTunes"
 
-#: playlist/playlist.cpp:456 ui/edittagdialog.cpp:705
+#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:705
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ur gudenn a zo savet e-pad enskrivadur ar metaroadennoù e-barzh '%1'"
@@ -846,7 +846,7 @@ msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:276
-#: ../bin/src/ui_songinfosettingspage.h:151
+#: ../bin/src/ui_songinfosettingspage.h:123
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Appearance"
 msgstr "Neuz"
@@ -884,7 +884,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1383
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1377
 #: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_groupbydialog.h:188 ../bin/src/ui_groupbydialog.h:205
 #: ../bin/src/ui_albumcoversearcher.h:104
@@ -916,7 +916,7 @@ msgid "Audio output"
 msgstr ""
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:114
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "Dilesadur sac'het"
@@ -966,7 +966,7 @@ msgstr "Ment keidennek ar skeudenn"
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1420 widgets/filenameformatwidget.cpp:58
+#: playlist/playlist.cpp:1414 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -987,7 +987,7 @@ msgstr ""
 msgid "Background opacity"
 msgstr "Divoullder drekleur"
 
-#: core/database.cpp:683
+#: core/database.cpp:680
 msgid "Backing up database"
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgstr "Gwell"
 msgid "Biography"
 msgstr ""
 
-#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Bit rate"
 msgstr "Fonnder"
@@ -1053,6 +1053,10 @@ msgstr "Spektogram dre vloc'hoù"
 #: ../bin/src/ui_transcoderoptionsaac.h:142
 msgid "Block type"
 msgstr "Doare bloc'hoù"
+
+#: internet/jamendo/jamendoservice.cpp:76
+msgid "Blues"
+msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1174,6 +1178,10 @@ msgstr "Klask hizivadurioù..."
 msgid "Checking Google Drive for changes..."
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:77
+msgid "Chillout"
+msgstr ""
+
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Choazit un anv evit ho roll seniñ spredek"
@@ -1206,18 +1214,13 @@ msgstr ""
 msgid "Choose the internet services you want to show."
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:156
-msgid ""
-"Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Lec'hiennoù web ho peus c'hoant implij evit klask komzoù"
-
 #: ../bin/src/ui_googledrivesettingspage.h:147
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr ""
 
-#: ui/equalizer.cpp:113
+#: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
 msgstr "Klasel"
 
@@ -1296,6 +1299,12 @@ msgstr "N'eo ket bet gouest Clementine da gargañ diskwel projectM. Gwiriekait e
 msgid "Clementine image viewer"
 msgstr "Gweler skeudennoù Clementine"
 
+#: ../bin/src/ui_songinfosettingspage.h:128
+msgid ""
+"Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
+" the same name next to it."
+msgstr ""
+
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
 msgstr "N'eo ket bet gouest Clementine da gavout disoc'hoù evit ar restr-mañ"
@@ -1345,7 +1354,7 @@ msgstr ""
 msgid "Close visualization"
 msgstr "Serriñ an hewelaat"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:315
+#: internet/magnatune/magnatunedownloaddialog.cpp:316
 msgid "Closing this window will cancel the download."
 msgstr "Serrin ar prenestr-mañ a paouezo ar pellgargadenn"
 
@@ -1377,7 +1386,7 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: playlist/playlist.cpp:1439 smartplaylists/searchterm.cpp:396
+#: playlist/playlist.cpp:1433 smartplaylists/searchterm.cpp:396
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Evezhiadenn"
@@ -1390,7 +1399,7 @@ msgstr "Leuniañ ar c'hlavioù ent emgefreek"
 msgid "Complete tags automatically..."
 msgstr "Leuniañ ar c'hlavioù ent emgefreek..."
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1402
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1396
 #: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:173
 #: ../bin/src/ui_groupbydialog.h:190 ../bin/src/ui_groupbydialog.h:207
 msgid "Composer"
@@ -1401,7 +1410,7 @@ msgstr "Aozer"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "KefluniañMagnatune..."
 
@@ -1576,7 +1585,7 @@ msgid ""
 "plugins installed"
 msgstr "Dibosupl eo kavout un enkoder evit %1, gwiriekait ez eo staliet ar enlugelladoù mat evit GStreamer"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:229
+#: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Dibosubl eo digeriñ ar restr ec'hankañ %1"
@@ -1591,6 +1600,10 @@ msgstr ""
 #: internet/plex/plexauthenticator.cpp:89
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:79
+msgid "Country"
 msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
@@ -1672,7 +1685,7 @@ msgstr "Personelaat..."
 msgid "D-Bus path"
 msgstr ""
 
-#: ui/equalizer.cpp:117
+#: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "Dañs"
 
@@ -1684,7 +1697,7 @@ msgstr ""
 msgid "Database"
 msgstr ""
 
-#: core/database.cpp:636
+#: core/database.cpp:633
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1695,11 +1708,11 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: playlist/playlist.cpp:1436 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Deizad krouadur"
 
-#: playlist/playlist.cpp:1434 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1428 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Deizad kemmadur"
 
@@ -1750,7 +1763,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2521 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Diverkañ restroù"
 
@@ -1791,11 +1804,11 @@ msgstr "O tiverkañ restroù"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1860
 msgid "Dequeue selected tracks"
 msgstr "Dilemel ar roudoù diuzet diwar al listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue track"
 msgstr "Dilemel ar roud-mañ diwar al listenn c'hortoz"
 
@@ -1879,7 +1892,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1391
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1385
 #: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:181
 #: ../bin/src/ui_groupbydialog.h:198 ../bin/src/ui_groupbydialog.h:215
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:341
@@ -1946,13 +1959,13 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "Chom hep meskañ"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:317
+#: internet/magnatune/magnatunedownloaddialog.cpp:318
 #: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "Chom hep paouez!"
 
 #: internet/somafm/somafmservice.cpp:106
-#: internet/intergalacticfm/intergalacticfmservice.cpp:104
+#: internet/intergalacticfm/intergalacticfmservice.cpp:106
 msgid "Donate"
 msgstr ""
 
@@ -1974,7 +1987,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:277
+#: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Teuliad pellgargañ"
 
@@ -2007,13 +2020,9 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
 msgstr "Pellgargañ an albom"
-
-#: internet/jamendo/jamendoservice.cpp:426
-msgid "Download this album..."
-msgstr "Pellgargañ an albom..."
 
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
@@ -2029,11 +2038,7 @@ msgstr ""
 msgid "Downloading Icecast directory"
 msgstr "O pellgargañ katalog Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:198
-msgid "Downloading Jamendo catalogue"
-msgstr "O pellgargañ katalog Jamendo"
-
-#: internet/magnatune/magnatuneservice.cpp:157
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "O pellgargañ katalog Magnatune"
 
@@ -2073,7 +2078,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Gweredekaet eo ar mod dialuskel"
 
-#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
+#: library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
@@ -2081,7 +2086,7 @@ msgstr "Meskaj dargouezhek dialuskel"
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1910
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Cheñch an tag \"%1\"..."
@@ -2110,6 +2115,10 @@ msgstr ""
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Embann..."
+
+#: internet/jamendo/jamendoservice.cpp:81
+msgid "Electronic"
+msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2224,8 +2233,8 @@ msgstr "Kenkoulz a --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:251
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2474 ui/mainwindow.cpp:2652
+#: internet/magnatune/magnatunedownloaddialog.cpp:252
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Fazi"
@@ -2382,13 +2391,14 @@ msgstr ""
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:73
-#: internet/podcasts/itunessearchpage.cpp:84
-#: internet/podcasts/itunessearchpage.cpp:93
+#: internet/podcasts/itunessearchpage.cpp:72
+#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:92
 msgid "Failed to fetch podcasts"
 msgstr ""
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:131
+#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:139
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2407,7 +2417,7 @@ msgid ""
 "%2"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:169
 msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
@@ -2473,11 +2483,11 @@ msgstr "Askouzehadenn ar restr"
 msgid "File formats"
 msgstr "Mentrezhoù restroù"
 
-#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Anv ar restr"
 
-#: playlist/playlist.cpp:1428
+#: playlist/playlist.cpp:1422
 msgid "File name (without path)"
 msgstr "Anv ar restr (hep an hent)"
 
@@ -2485,11 +2495,11 @@ msgstr "Anv ar restr (hep an hent)"
 msgid "File paths"
 msgstr ""
 
-#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Ment ar restr"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1432
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1426
 #: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_groupbydialog.h:191
 #: ../bin/src/ui_groupbydialog.h:208 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2535,11 +2545,15 @@ msgstr "Live kentañ"
 msgid "Fit cover to width"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:82
+msgid "Folk"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:152
+#: ../bin/src/ui_songinfosettingspage.h:124
 msgid "Font size"
 msgstr "Ment an nodrezh"
 
@@ -2570,7 +2584,6 @@ msgstr "Disoñjal un drobarzhell a denn anezhi eus al listenn-mañ ha rediet e v
 #: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:134
 #: ../bin/src/ui_searchpreview.h:101 ../bin/src/ui_searchtermwidget.h:271
 #: ../bin/src/ui_wizardfinishpage.h:79
-#: ../bin/src/ui_songkickconcertwidget.h:96
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 #: ../bin/src/ui_transcoderoptionsavaac.h:123
 #: ../bin/src/ui_transcoderoptionserror.h:53
@@ -2622,6 +2635,10 @@ msgstr "Fumm Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
+#: internet/jamendo/jamendoservice.cpp:83
+msgid "Funk"
+msgstr ""
+
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
 msgstr ""
@@ -2634,15 +2651,19 @@ msgstr ""
 msgid "General settings"
 msgstr "Arventennoù hollek"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1398
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1392
 #: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:175
 #: ../bin/src/ui_groupbydialog.h:192 ../bin/src/ui_groupbydialog.h:209
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Doare"
 
+#: internet/jamendo/jamendoservice.cpp:165
+msgid "Genres"
+msgstr ""
+
 #: internet/somafm/somafmservice.cpp:119
-#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/intergalacticfm/intergalacticfmservice.cpp:119
 #: internet/radiobrowser/radiobrowserservice.cpp:209
 #: internet/radiobrowser/radiobrowserservice.cpp:245
 #: internet/radiobrowser/radiobrowserservice.cpp:263
@@ -2724,7 +2745,7 @@ msgstr "Strollañ dre Zoare/Albom"
 msgid "Group by Genre/Artist/Album"
 msgstr "Strollañ dre Zoare/Arzour/Albom"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1406
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1400
 #: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:183
 #: ../bin/src/ui_groupbydialog.h:200 ../bin/src/ui_groupbydialog.h:217
 msgid "Grouping"
@@ -2738,7 +2759,7 @@ msgstr ""
 msgid "Grouping name:"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:202
 msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
@@ -2783,6 +2804,10 @@ msgstr "Uhel (1024x1024)"
 
 #: ui/equalizer.cpp:129
 msgid "Hip Hop"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:84
+msgid "Hip-hop"
 msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
@@ -2922,7 +2947,12 @@ msgstr ""
 msgid "Insert..."
 msgstr "Enlakaat..."
 
-#: core/database.cpp:620
+#: networkremote/outgoingdatacreator.cpp:530
+#: songinfo/lyricsinfoprovider.cpp:55
+msgid "Instrumental"
+msgstr ""
+
+#: core/database.cpp:617
 msgid "Integrity check"
 msgstr ""
 
@@ -2951,29 +2981,16 @@ msgstr "Mentrezh didalvoudek"
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:136
-msgid "Jamendo"
-msgstr "Jamendo"
+#: internet/jamendo/jamendoservice.cpp:243
+#, qt-format
+msgid ""
+"Jamendo request failed:\n"
+"%1"
+msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:121
-msgid "Jamendo Most Listened Tracks"
-msgstr "Roudoù Jamendo Selaouet an aliesañ"
-
-#: internet/jamendo/jamendoservice.cpp:118
-msgid "Jamendo Top Tracks"
-msgstr "Top roudoù Jamendo"
-
-#: internet/jamendo/jamendoservice.cpp:112
-msgid "Jamendo Top Tracks of the Month"
-msgstr "Top ar miz roudoù Jamendo"
-
-#: internet/jamendo/jamendoservice.cpp:115
-msgid "Jamendo Top Tracks of the Week"
-msgstr "Top ar sizhun roudoù Jamendo"
-
-#: internet/jamendo/jamendoservice.cpp:178
-msgid "Jamendo database"
-msgstr "Stlennvon Jamendo"
+#: internet/jamendo/jamendoservice.cpp:85
+msgid "Jazz"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3044,7 +3061,7 @@ msgstr "Barenn gostez ledan"
 msgid "Last played"
 msgstr "Selaouet e ziwezhañ"
 
-#: playlist/playlist.cpp:1415 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -3069,6 +3086,10 @@ msgstr "Klavioù Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
+#: internet/jamendo/jamendoservice.cpp:86
+msgid "Latin"
+msgstr ""
+
 #: library/library.cpp:106
 msgid "Least favourite tracks"
 msgstr "Roudoù an nebeutañ plijet"
@@ -3077,7 +3098,7 @@ msgstr "Roudoù an nebeutañ plijet"
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1387 widgets/filenameformatwidget.cpp:63
+#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Padelezh"
@@ -3097,7 +3118,7 @@ msgstr "Sonaoueg"
 msgid "Library advanced grouping"
 msgstr "Strolladur ar sonaoueg kempleshoc'h"
 
-#: ui/mainwindow.cpp:2784
+#: ui/mainwindow.cpp:2785
 msgid "Library rescan notice"
 msgstr "Kemenn hizivadur ar sonaoueg"
 
@@ -3148,6 +3169,11 @@ msgstr "Kargañ ar roll seniñ"
 #: ../bin/src/ui_mainwindow.h:760
 msgid "Load playlist..."
 msgstr "Kargañ ar roll seniñ..."
+
+#: internet/jamendo/jamendoservice.cpp:216
+#, qt-format
+msgid "Loading %1"
+msgstr ""
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3213,6 +3239,10 @@ msgstr ""
 msgid "Long term prediction profile (LTP)"
 msgstr "Aelad Diougan Padus (ADP)"
 
+#: internet/jamendo/jamendoservice.cpp:87
+msgid "Lounge"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
 msgstr "Karout"
@@ -3236,17 +3266,21 @@ msgid "Low complexity profile (LC)"
 msgstr "Aelad e Luzierezh Gwan (ALG)"
 
 #: widgets/filenameformatwidget.cpp:55
-#: ../bin/src/ui_songinfosettingspage.h:155
+#: ../bin/src/ui_songinfosettingspage.h:127
 msgid "Lyrics"
 msgstr "Komzoù"
 
-#: songinfo/ultimatelyricsprovider.cpp:157
+#: songinfo/lyricsfetcher.cpp:129
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Komzoù eus %1"
 
-#: songinfo/taglyricsinfoprovider.cpp:30
-msgid "Lyrics from the tag"
+#: songinfo/lyricsfetcher.cpp:258
+msgid "Lyrics from LRCLIB"
+msgstr ""
+
+#: songinfo/lyricsfetcher.cpp:115
+msgid "Lyrics from the file's tags"
 msgstr ""
 
 #: transcoder/transcoder.cpp:282
@@ -3274,7 +3308,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:105
+#: internet/magnatune/magnatuneservice.cpp:108
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3356,6 +3390,10 @@ msgstr "Etre (512x512)"
 msgid "Membership type"
 msgstr "Doare emezeladur"
 
+#: internet/jamendo/jamendoservice.cpp:88
+msgid "Metal"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
 msgstr "Fonnder izelañ"
@@ -3392,7 +3430,7 @@ msgstr ""
 msgid "Months"
 msgstr "Mizioù"
 
-#: playlist/playlist.cpp:1443
+#: playlist/playlist.cpp:1437
 msgid "Mood"
 msgstr ""
 
@@ -3409,6 +3447,10 @@ msgstr ""
 msgid "Most played"
 msgstr "Lennet an aliesañ"
 
+#: internet/jamendo/jamendoservice.cpp:157
+msgid "Most popular of all time"
+msgstr ""
+
 #: devices/giolister.cpp:182
 msgid "Mount point"
 msgstr "Poent staliañ"
@@ -3418,7 +3460,7 @@ msgid "Mount points"
 msgstr "Poentoù staliañ"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
-#: ../bin/src/ui_queuemanager.h:145 ../bin/src/ui_songinfosettingspage.h:158
+#: ../bin/src/ui_queuemanager.h:145
 msgid "Move down"
 msgstr "Dindan"
 
@@ -3427,11 +3469,11 @@ msgid "Move to library..."
 msgstr "Dilec'hiañ davet ar sonaoueg..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:142
-#: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:157
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Move up"
 msgstr "A-us"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
 msgid "Music"
 msgstr ""
 
@@ -3487,13 +3529,17 @@ msgstr "Morse sonet"
 msgid "Never start playing"
 msgstr "Morse kregiñ da lenn"
 
+#: internet/jamendo/jamendoservice.cpp:162
+msgid "New albums"
+msgstr ""
+
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
@@ -3579,7 +3625,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3692,10 +3738,10 @@ msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:300
-#: internet/jamendo/jamendoservice.cpp:429
-#: internet/magnatune/magnatuneservice.cpp:283
+#: internet/jamendo/jamendoservice.cpp:388
+#: internet/magnatune/magnatuneservice.cpp:286
 #: internet/somafm/somafmservice.cpp:101
-#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/intergalacticfm/intergalacticfmservice.cpp:101
 #: internet/radiobrowser/radiobrowserservice.cpp:291
 #, qt-format
 msgid "Open %1 in browser"
@@ -3742,6 +3788,10 @@ msgstr ""
 
 #: songinfo/artistbiography.cpp:101 songinfo/artistbiography.cpp:281
 msgid "Open in your browser"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:382
+msgid "Open on Jamendo"
 msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
@@ -3806,6 +3856,12 @@ msgstr ""
 msgid "Other options"
 msgstr "Dibarzhioù all"
 
+#: ../bin/src/ui_songinfosettingspage.h:129
+msgid ""
+"Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
+"and length to lrclib.net)"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
 msgstr ""
@@ -3834,10 +3890,6 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:225
-msgid "Parsing Jamendo catalogue"
-msgstr "O tielfennañ katalog Jamendo"
-
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr ""
@@ -3854,8 +3906,8 @@ msgstr "Fest"
 msgid "Password"
 msgstr "Ger-tremen"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1754
-#: ui/qtsystemtrayicon.cpp:234 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Ehan"
 
@@ -3867,7 +3919,7 @@ msgstr "Ehan al lenn"
 msgid "Paused"
 msgstr "Ehanet"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1404
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1398
 #: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:182
 #: ../bin/src/ui_groupbydialog.h:199 ../bin/src/ui_groupbydialog.h:216
 #: ../bin/src/ui_edittagdialog.h:727
@@ -3890,14 +3942,14 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Bareen gostez simpl"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1141
-#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:222
-#: ui/qtsystemtrayicon.cpp:246 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
+#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Lenn"
 
-#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Konter selaouadennoù"
 
@@ -3914,11 +3966,11 @@ msgstr "Lenn pe ehan, hervez ar stad"
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1869
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3999,9 +4051,21 @@ msgstr ""
 msgid "Podcasts"
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: internet/jamendo/jamendoservice.cpp:89 ui/equalizer.cpp:142
 msgid "Pop"
 msgstr "Pop"
+
+#: internet/jamendo/jamendoservice.cpp:160
+msgid "Popular albums"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:155
+msgid "Popular this month"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:153
+msgid "Popular this week"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
@@ -4071,7 +4135,7 @@ msgstr ""
 msgid "Pretty OSD options"
 msgstr "Dibarzhioù an OSD brav"
 
-#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:154
+#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:126
 #: ../bin/src/ui_notificationssettingspage.h:453
 #: ../bin/src/ui_organisedialog.h:186
 msgid "Preview"
@@ -4105,6 +4169,10 @@ msgstr ""
 
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:90
+msgid "Punk"
 msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:247
@@ -4150,12 +4218,12 @@ msgstr "Goulennadeg trobarzhell"
 msgid "Queue Manager"
 msgstr "Merour listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1864
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1862
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
 
@@ -4216,11 +4284,11 @@ msgstr "Lakaat 4 steredenn evit an ton lennet"
 msgid "Rate the current song 5 stars"
 msgstr "Lakaat 5 steredenn evit an ton lennet"
 
-#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1403 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Notenn"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:314
+#: internet/magnatune/magnatunedownloaddialog.cpp:315
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "Sur oc'h da gaout c'hoant da nullañ"
@@ -4233,14 +4301,17 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:432
-#: internet/magnatune/magnatuneservice.cpp:286
+#: internet/jamendo/jamendoservice.cpp:384
+msgid "Refresh"
+msgstr ""
+
+#: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Hizivaat ar c'hatalog"
 
 #: internet/somafm/somafmservice.cpp:110
-#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/intergalacticfm/intergalacticfmservice.cpp:110
 #: internet/radiobrowser/radiobrowserservice.cpp:295
 msgid "Refresh channels"
 msgstr "Hizivaat ar c'hanolioù"
@@ -4253,7 +4324,7 @@ msgstr "Hizivat listenn ar savlec'hioù"
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
-#: ui/equalizer.cpp:147
+#: internet/jamendo/jamendoservice.cpp:91 ui/equalizer.cpp:147
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4424,7 +4495,7 @@ msgstr ""
 msgid "Rip audio CD"
 msgstr ""
 
-#: ui/equalizer.cpp:149
+#: internet/jamendo/jamendoservice.cpp:92 ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
 
@@ -4462,7 +4533,7 @@ msgstr "Tennañ an drobarzhell diarvar"
 msgid "Safely remove the device after copying"
 msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 
-#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:398
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Sample rate"
@@ -4546,7 +4617,7 @@ msgstr "Aelad ar feur standilhonañ (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Poentoù"
 
@@ -4577,11 +4648,11 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "Klask war savlec'hioù Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:439
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Search Jamendo"
 msgstr "Klask Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:298
 msgid "Search Magnatune"
 msgstr "Klask Magnatune"
 
@@ -4633,6 +4704,11 @@ msgstr "Doare klask"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Dibarzhioù klask"
+
+#: internet/jamendo/jamendoservice.cpp:366
+#, qt-format
+msgid "Search results for \"%1\""
+msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4730,7 +4806,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1909
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
@@ -4950,7 +5026,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Mont a-drek er roll seniñ"
 
-#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Konter tonioù lammet"
 
@@ -4962,7 +5038,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1880
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -4970,7 +5046,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1878
 msgid "Skip track"
 msgstr ""
 
@@ -4998,7 +5074,7 @@ msgstr "Soft"
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
-#: ../bin/src/ui_songinfosettingspage.h:150
+#: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
 msgstr "Titouroù an ton"
 
@@ -5038,7 +5114,11 @@ msgstr "Urzhiañ an tonioù gant"
 msgid "Sorting"
 msgstr "Urzhiañ"
 
-#: playlist/playlist.cpp:1441
+#: internet/jamendo/jamendoservice.cpp:93
+msgid "Soundtrack"
+msgstr ""
+
+#: playlist/playlist.cpp:1435
 msgid "Source"
 msgstr ""
 
@@ -5247,6 +5327,10 @@ msgstr ""
 msgid "The second value must be greater than the first one!"
 msgstr "An eil talvoud a rank bezañ uheloc'h eget an hini kentañ"
 
+#: internet/intergalacticfm/intergalacticfmservice.cpp:140
+msgid "The server didn't list any channels"
+msgstr ""
+
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
 msgstr ""
@@ -5265,7 +5349,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2775
+#: ui/mainwindow.cpp:2776
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5285,11 +5369,11 @@ msgstr ""
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:171
+#: internet/magnatune/magnatunedownloaddialog.cpp:172
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Ur gudenn a zo savet evit kaout metaroadennoù adalek Magnatune"
 
-#: internet/podcasts/itunessearchpage.cpp:85
+#: internet/podcasts/itunessearchpage.cpp:84
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr ""
 
@@ -5311,7 +5395,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2522 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5335,13 +5419,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Trede live"
 
-#: internet/jamendo/jamendoservice.cpp:179
-msgid ""
-"This action will create a database which could be as big as 150 MB.\n"
-"Do you want to continue anyway?"
-msgstr "Kement-se a krouo ur stlennvon 150Me tamm-pe-damm. Ha sur oc'h kenderc'hel ?"
-
-#: internet/magnatune/magnatunedownloaddialog.cpp:199
+#: internet/magnatune/magnatunedownloaddialog.cpp:200
 msgid "This album is not available in the requested format"
 msgstr "N'ez eus ket eus an albom er mentrezh goulennet"
 
@@ -5395,7 +5473,7 @@ msgstr "An doare trobarzhell-mañ n'eo ket meret :%1"
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:47
+#: playlist/playlist.cpp:1375 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:140 ../bin/src/ui_edittagdialog.h:719
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
@@ -5413,7 +5491,7 @@ msgstr "Gweredekaat/Diweredekaat an OSD brav"
 msgid "Toggle fullscreen"
 msgstr "Tremen e skramm leun"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1866
 msgid "Toggle queue status"
 msgstr "Cheñch stad al listenn c'hortoz"
 
@@ -5429,7 +5507,7 @@ msgstr "Gweredekaat/Diweredekaat an OSD brav"
 msgid "Tomorrow"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:118
+#: internet/podcasts/podcasturlloader.cpp:112
 msgid "Too many redirects"
 msgstr ""
 
@@ -5453,7 +5531,7 @@ msgstr "Niver a atersadennoù rouedad"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1389 widgets/filenameformatwidget.cpp:56
+#: playlist/playlist.cpp:1383 widgets/filenameformatwidget.cpp:56
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Roud"
@@ -5537,7 +5615,7 @@ msgstr "Bandenn ledan tre (UWB)"
 msgid "Unable to connect"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:156
+#: internet/magnatune/magnatunedownloaddialog.cpp:157
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "N'eus ket tu pellgargañ %1 (%2)"
@@ -5551,11 +5629,11 @@ msgstr "N'eus ket tu pellgargañ %1 (%2)"
 msgid "Unknown"
 msgstr "Dianav"
 
-#: internet/podcasts/podcasturlloader.cpp:210
+#: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitally/digitallyimportedclient.cpp:75
+#: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
 msgstr "Kudenn dianav"
 
@@ -5569,21 +5647,17 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Ar golo n'eo ket bet lakaet"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1876
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1874
 msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
-
-#: songinfo/songkickconcerts.cpp:195
-msgid "Upcoming Concerts"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:436
@@ -5907,13 +5981,17 @@ msgstr "ausio Windows Media"
 msgid "Without cover:"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:94
+msgid "World"
+msgstr ""
+
 #: library/libraryview.cpp:586
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2783
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 
@@ -5929,7 +6007,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1393
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1387
 #: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_groupbydialog.h:193 ../bin/src/ui_groupbydialog.h:210
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
@@ -5941,7 +6019,7 @@ msgstr "Bloaz"
 msgid "Year - Album"
 msgstr "Bloaz - Albom"
 
-#: playlist/playlist.cpp:1395
+#: playlist/playlist.cpp:1389
 msgid "Year - original"
 msgstr ""
 
@@ -6011,7 +6089,7 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Tu zo deoc'h implijout ho Wii Remote evel ur pellurzhier evit Clementine, <a href=\"http://www.clementine-player.org/wiimote\">Sellit ar bajenn war wiki Clementine</a> evit muioc'h a ditouroù.\n"
 
-#: internet/digitally/digitallyimportedclient.cpp:96
+#: internet/digitally/digitallyimportedclient.cpp:99
 msgid "You do not have an active subscription"
 msgstr ""
 
@@ -6030,7 +6108,11 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Ezhomm a vo adloc'hañ Clementine ma cheñchit ar yezh."
 
-#: internet/magnatune/magnatunesettingspage.cpp:118
+#: internet/dropbox/dropboxservice.cpp:228
+msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
+msgstr ""
+
+#: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Magnatune a zo direizh."
 

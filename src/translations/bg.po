@@ -61,7 +61,7 @@ msgstr " кбита/сек"
 msgid " ms"
 msgstr " ms"
 
-#: ../bin/src/ui_songinfosettingspage.h:153
+#: ../bin/src/ui_songinfosettingspage.h:125
 msgid " pt"
 msgstr " точки"
 
@@ -536,7 +536,7 @@ msgstr "Добавяне на друг поток..."
 msgid "Add directory..."
 msgstr "Добави папка..."
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2146
 msgid "Add file"
 msgstr ""
 
@@ -560,7 +560,7 @@ msgstr "Добавяне на файлове за прекодиране"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Добави папка"
@@ -657,7 +657,7 @@ msgstr "Добавяне на етикет за година на песен"
 msgid "Add stream..."
 msgstr "Добавяне на поток..."
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1947
 msgid "Add to another playlist"
 msgstr "Добави в друг списък с песни"
 
@@ -711,7 +711,7 @@ msgstr ""
 msgid "After copying..."
 msgstr "След копиране..."
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1385
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
 #: ../bin/src/ui_albumcoversearcher.h:108
@@ -724,7 +724,7 @@ msgstr "Албум"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Албум (идеална сила на звука за всички песни)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1400
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1394
 #: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_groupbydialog.h:189 ../bin/src/ui_groupbydialog.h:206
 #: ../bin/src/ui_edittagdialog.h:725
@@ -734,10 +734,6 @@ msgstr "Изпълнител на албума"
 #: ../bin/src/ui_appearancesettingspage.h:339
 msgid "Album cover"
 msgstr ""
-
-#: internet/jamendo/jamendoservice.cpp:423
-msgid "Album info on jamendo.com..."
-msgstr "Информация за албума на jamendo.com..."
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -822,11 +818,15 @@ msgstr ""
 msgid "Always start playing"
 msgstr "Винаги започвай възпроизвеждането"
 
+#: internet/jamendo/jamendoservice.cpp:75
+msgid "Ambient"
+msgstr ""
+
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
 msgstr "Възникна грешка при зареждането на базата данни на iTunes"
 
-#: playlist/playlist.cpp:456 ui/edittagdialog.cpp:705
+#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:705
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Получи се грешка при запис метаданните на '%1'"
@@ -844,7 +844,7 @@ msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:276
-#: ../bin/src/ui_songinfosettingspage.h:151
+#: ../bin/src/ui_songinfosettingspage.h:123
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Appearance"
 msgstr "Облик"
@@ -882,7 +882,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1383
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1377
 #: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_groupbydialog.h:188 ../bin/src/ui_groupbydialog.h:205
 #: ../bin/src/ui_albumcoversearcher.h:104
@@ -914,7 +914,7 @@ msgid "Audio output"
 msgstr ""
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:114
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "Неуспешна идентификация"
@@ -964,7 +964,7 @@ msgstr "Среден размер на изображение"
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1420 widgets/filenameformatwidget.cpp:58
+#: playlist/playlist.cpp:1414 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "Темпо"
@@ -985,7 +985,7 @@ msgstr ""
 msgid "Background opacity"
 msgstr "Прозрачност на фона"
 
-#: core/database.cpp:683
+#: core/database.cpp:680
 msgid "Backing up database"
 msgstr ""
 
@@ -1021,7 +1021,7 @@ msgstr "Най-добро"
 msgid "Biography"
 msgstr ""
 
-#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Bit rate"
 msgstr "Поток в битове"
@@ -1051,6 +1051,10 @@ msgstr "Блоков анализатор"
 #: ../bin/src/ui_transcoderoptionsaac.h:142
 msgid "Block type"
 msgstr "Тип блок"
+
+#: internet/jamendo/jamendoservice.cpp:76
+msgid "Blues"
+msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1172,6 +1176,10 @@ msgstr "Проверка за обновления..."
 msgid "Checking Google Drive for changes..."
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:77
+msgid "Chillout"
+msgstr ""
+
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Изберете име за вашият умен списък с песни"
@@ -1204,18 +1212,13 @@ msgstr ""
 msgid "Choose the internet services you want to show."
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:156
-msgid ""
-"Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Изберете уебсайтовете, които искате Clementine да използва за търсене на текстовете на песните."
-
 #: ../bin/src/ui_googledrivesettingspage.h:147
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr ""
 
-#: ui/equalizer.cpp:113
+#: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
 msgstr "Класически"
 
@@ -1294,6 +1297,12 @@ msgstr "Clementine не можа да зареди никаква projectM ви�
 msgid "Clementine image viewer"
 msgstr "Clementine мениджър на изображения"
 
+#: ../bin/src/ui_songinfosettingspage.h:128
+msgid ""
+"Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
+" the same name next to it."
+msgstr ""
+
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine не намери резултати за този файл"
@@ -1343,7 +1352,7 @@ msgstr ""
 msgid "Close visualization"
 msgstr "Затваря визуализацията"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:315
+#: internet/magnatune/magnatunedownloaddialog.cpp:316
 msgid "Closing this window will cancel the download."
 msgstr "Затварянето на този прозорец ще прекрати свалянето"
 
@@ -1375,7 +1384,7 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: playlist/playlist.cpp:1439 smartplaylists/searchterm.cpp:396
+#: playlist/playlist.cpp:1433 smartplaylists/searchterm.cpp:396
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Коментар"
@@ -1388,7 +1397,7 @@ msgstr "Автоматично довършване на етикетите"
 msgid "Complete tags automatically..."
 msgstr "Автоматично довършване на етикетите..."
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1402
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1396
 #: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:173
 #: ../bin/src/ui_groupbydialog.h:190 ../bin/src/ui_groupbydialog.h:207
 msgid "Composer"
@@ -1399,7 +1408,7 @@ msgstr "Композитор"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "Настройване на Magnatune..."
 
@@ -1574,7 +1583,7 @@ msgid ""
 "plugins installed"
 msgstr "Не мога да намеря кодер за %1, проверете дали имате инсталирани правилните GSteamer плъгини."
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:229
+#: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Не мога да отворя изходен файл %1"
@@ -1589,6 +1598,10 @@ msgstr ""
 #: internet/plex/plexauthenticator.cpp:89
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:79
+msgid "Country"
 msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
@@ -1670,7 +1683,7 @@ msgstr "Потребителски..."
 msgid "D-Bus path"
 msgstr ""
 
-#: ui/equalizer.cpp:117
+#: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "Денс"
 
@@ -1682,7 +1695,7 @@ msgstr ""
 msgid "Database"
 msgstr ""
 
-#: core/database.cpp:636
+#: core/database.cpp:633
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1693,11 +1706,11 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: playlist/playlist.cpp:1436 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Дата на създаване"
 
-#: playlist/playlist.cpp:1434 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1428 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Дата на променяне"
 
@@ -1748,7 +1761,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2521 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Изтриване на файлове"
 
@@ -1789,11 +1802,11 @@ msgstr "Изтриване на файлове"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1860
 msgid "Dequeue selected tracks"
 msgstr "Махни от опашката избраните парчета"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue track"
 msgstr "Махни от опашката парчето"
 
@@ -1877,7 +1890,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1391
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1385
 #: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:181
 #: ../bin/src/ui_groupbydialog.h:198 ../bin/src/ui_groupbydialog.h:215
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:341
@@ -1944,13 +1957,13 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "Не разбърквай"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:317
+#: internet/magnatune/magnatunedownloaddialog.cpp:318
 #: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "Не спирай!"
 
 #: internet/somafm/somafmservice.cpp:106
-#: internet/intergalacticfm/intergalacticfmservice.cpp:104
+#: internet/intergalacticfm/intergalacticfmservice.cpp:106
 msgid "Donate"
 msgstr ""
 
@@ -1972,7 +1985,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:277
+#: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Папка за сваляне"
 
@@ -2005,13 +2018,9 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
 msgstr "Сваляне на този албум"
-
-#: internet/jamendo/jamendoservice.cpp:426
-msgid "Download this album..."
-msgstr "Сваляне на този албум..."
 
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
@@ -2027,11 +2036,7 @@ msgstr ""
 msgid "Downloading Icecast directory"
 msgstr "Сваляне на icecast директорията"
 
-#: internet/jamendo/jamendoservice.cpp:198
-msgid "Downloading Jamendo catalogue"
-msgstr "Сваляне на jamendo каталог"
-
-#: internet/magnatune/magnatuneservice.cpp:157
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "Сваляне на каталог Magnatune"
 
@@ -2071,7 +2076,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Динамичния режим е включен"
 
-#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
+#: library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Динамичен случаен микс"
 
@@ -2079,7 +2084,7 @@ msgstr "Динамичен случаен микс"
 msgid "Edit smart playlist..."
 msgstr "Редактиране умен списък с песни..."
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1910
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Редактиране на етикет \"%1\"..."
@@ -2108,6 +2113,10 @@ msgstr ""
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Редактиране..."
+
+#: internet/jamendo/jamendoservice.cpp:81
+msgid "Electronic"
+msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2222,8 +2231,8 @@ msgstr "Еквивалентно на --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:251
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2474 ui/mainwindow.cpp:2652
+#: internet/magnatune/magnatunedownloaddialog.cpp:252
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Грешка"
@@ -2380,13 +2389,14 @@ msgstr ""
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:73
-#: internet/podcasts/itunessearchpage.cpp:84
-#: internet/podcasts/itunessearchpage.cpp:93
+#: internet/podcasts/itunessearchpage.cpp:72
+#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:92
 msgid "Failed to fetch podcasts"
 msgstr ""
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:131
+#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:139
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2405,7 +2415,7 @@ msgid ""
 "%2"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:169
 msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
@@ -2471,11 +2481,11 @@ msgstr "Файлово разширение"
 msgid "File formats"
 msgstr "Файлови формати"
 
-#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Име на файл"
 
-#: playlist/playlist.cpp:1428
+#: playlist/playlist.cpp:1422
 msgid "File name (without path)"
 msgstr "Име на файл (без път)"
 
@@ -2483,11 +2493,11 @@ msgstr "Име на файл (без път)"
 msgid "File paths"
 msgstr ""
 
-#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Размер на файла"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1432
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1426
 #: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_groupbydialog.h:191
 #: ../bin/src/ui_groupbydialog.h:208 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2533,11 +2543,15 @@ msgstr "Първо ниво"
 msgid "Fit cover to width"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:82
+msgid "Folk"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:152
+#: ../bin/src/ui_songinfosettingspage.h:124
 msgid "Font size"
 msgstr "Размер на шрифта"
 
@@ -2568,7 +2582,6 @@ msgstr "Забравяне на устройство ще го премахне 
 #: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:134
 #: ../bin/src/ui_searchpreview.h:101 ../bin/src/ui_searchtermwidget.h:271
 #: ../bin/src/ui_wizardfinishpage.h:79
-#: ../bin/src/ui_songkickconcertwidget.h:96
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 #: ../bin/src/ui_transcoderoptionsavaac.h:123
 #: ../bin/src/ui_transcoderoptionserror.h:53
@@ -2620,6 +2633,10 @@ msgstr "Пълен бас + Високи"
 msgid "Full Treble"
 msgstr "Пълни високи"
 
+#: internet/jamendo/jamendoservice.cpp:83
+msgid "Funk"
+msgstr ""
+
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
 msgstr ""
@@ -2632,15 +2649,19 @@ msgstr ""
 msgid "General settings"
 msgstr "Общи настройки"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1398
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1392
 #: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:175
 #: ../bin/src/ui_groupbydialog.h:192 ../bin/src/ui_groupbydialog.h:209
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Жанр"
 
+#: internet/jamendo/jamendoservice.cpp:165
+msgid "Genres"
+msgstr ""
+
 #: internet/somafm/somafmservice.cpp:119
-#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/intergalacticfm/intergalacticfmservice.cpp:119
 #: internet/radiobrowser/radiobrowserservice.cpp:209
 #: internet/radiobrowser/radiobrowserservice.cpp:245
 #: internet/radiobrowser/radiobrowserservice.cpp:263
@@ -2722,7 +2743,7 @@ msgstr "Групиране по Жанр/Албум"
 msgid "Group by Genre/Artist/Album"
 msgstr "Групиране по Жанр/Изпълнител/Албум"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1406
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1400
 #: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:183
 #: ../bin/src/ui_groupbydialog.h:200 ../bin/src/ui_groupbydialog.h:217
 msgid "Grouping"
@@ -2736,7 +2757,7 @@ msgstr ""
 msgid "Grouping name:"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:202
 msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
@@ -2781,6 +2802,10 @@ msgstr "Високо (1024x1024)"
 
 #: ui/equalizer.cpp:129
 msgid "Hip Hop"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:84
+msgid "Hip-hop"
 msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
@@ -2920,7 +2945,12 @@ msgstr ""
 msgid "Insert..."
 msgstr "Вмъкване..."
 
-#: core/database.cpp:620
+#: networkremote/outgoingdatacreator.cpp:530
+#: songinfo/lyricsinfoprovider.cpp:55
+msgid "Instrumental"
+msgstr ""
+
+#: core/database.cpp:617
 msgid "Integrity check"
 msgstr ""
 
@@ -2949,29 +2979,16 @@ msgstr "Невалиден формат"
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:136
-msgid "Jamendo"
-msgstr "Jamendo"
+#: internet/jamendo/jamendoservice.cpp:243
+#, qt-format
+msgid ""
+"Jamendo request failed:\n"
+"%1"
+msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:121
-msgid "Jamendo Most Listened Tracks"
-msgstr "Най-слушаните парчета в Jamendo"
-
-#: internet/jamendo/jamendoservice.cpp:118
-msgid "Jamendo Top Tracks"
-msgstr "Най-високо класираните парчета в Jamendo"
-
-#: internet/jamendo/jamendoservice.cpp:112
-msgid "Jamendo Top Tracks of the Month"
-msgstr "Най-високо класираните парчета в Jamendo този месец"
-
-#: internet/jamendo/jamendoservice.cpp:115
-msgid "Jamendo Top Tracks of the Week"
-msgstr "Най-високо класираните парчета в Jamendo тази седмица"
-
-#: internet/jamendo/jamendoservice.cpp:178
-msgid "Jamendo database"
-msgstr "Jamendo база от данни"
+#: internet/jamendo/jamendoservice.cpp:85
+msgid "Jazz"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3042,7 +3059,7 @@ msgstr "Голяма странична лента"
 msgid "Last played"
 msgstr "Последно изпълнение"
 
-#: playlist/playlist.cpp:1415 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -3067,6 +3084,10 @@ msgstr "Last.fm етикети"
 msgid "Last.fm wiki"
 msgstr "Last.fm уики"
 
+#: internet/jamendo/jamendoservice.cpp:86
+msgid "Latin"
+msgstr ""
+
 #: library/library.cpp:106
 msgid "Least favourite tracks"
 msgstr "Най-малко любими песни"
@@ -3075,7 +3096,7 @@ msgstr "Най-малко любими песни"
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1387 widgets/filenameformatwidget.cpp:63
+#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Дължина"
@@ -3095,7 +3116,7 @@ msgstr "Библиотека"
 msgid "Library advanced grouping"
 msgstr "Разширено групиране на Библиотеката"
 
-#: ui/mainwindow.cpp:2784
+#: ui/mainwindow.cpp:2785
 msgid "Library rescan notice"
 msgstr "Известие за повторно сканиране на библиотеката"
 
@@ -3146,6 +3167,11 @@ msgstr "Зареждане на списък с песни"
 #: ../bin/src/ui_mainwindow.h:760
 msgid "Load playlist..."
 msgstr "Зареждане на списък с песни..."
+
+#: internet/jamendo/jamendoservice.cpp:216
+#, qt-format
+msgid "Loading %1"
+msgstr ""
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3211,6 +3237,10 @@ msgstr ""
 msgid "Long term prediction profile (LTP)"
 msgstr "Long term prediction profile (LTP)"
 
+#: internet/jamendo/jamendoservice.cpp:87
+msgid "Lounge"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
 msgstr "Любима"
@@ -3234,17 +3264,21 @@ msgid "Low complexity profile (LC)"
 msgstr "Low complexity profile (LC)"
 
 #: widgets/filenameformatwidget.cpp:55
-#: ../bin/src/ui_songinfosettingspage.h:155
+#: ../bin/src/ui_songinfosettingspage.h:127
 msgid "Lyrics"
 msgstr "Текстове на песни"
 
-#: songinfo/ultimatelyricsprovider.cpp:157
+#: songinfo/lyricsfetcher.cpp:129
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Текстове на песни от %1"
 
-#: songinfo/taglyricsinfoprovider.cpp:30
-msgid "Lyrics from the tag"
+#: songinfo/lyricsfetcher.cpp:258
+msgid "Lyrics from LRCLIB"
+msgstr ""
+
+#: songinfo/lyricsfetcher.cpp:115
+msgid "Lyrics from the file's tags"
 msgstr ""
 
 #: transcoder/transcoder.cpp:282
@@ -3272,7 +3306,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:105
+#: internet/magnatune/magnatuneservice.cpp:108
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3354,6 +3388,10 @@ msgstr "Средно (512x512)"
 msgid "Membership type"
 msgstr "Тип членство"
 
+#: internet/jamendo/jamendoservice.cpp:88
+msgid "Metal"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
 msgstr "Минимален битов поток"
@@ -3390,7 +3428,7 @@ msgstr ""
 msgid "Months"
 msgstr "Месеца"
 
-#: playlist/playlist.cpp:1443
+#: playlist/playlist.cpp:1437
 msgid "Mood"
 msgstr ""
 
@@ -3407,6 +3445,10 @@ msgstr ""
 msgid "Most played"
 msgstr "Най-пускани"
 
+#: internet/jamendo/jamendoservice.cpp:157
+msgid "Most popular of all time"
+msgstr ""
+
 #: devices/giolister.cpp:182
 msgid "Mount point"
 msgstr "Точка на монтиране"
@@ -3416,7 +3458,7 @@ msgid "Mount points"
 msgstr "Точки за монтиране"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
-#: ../bin/src/ui_queuemanager.h:145 ../bin/src/ui_songinfosettingspage.h:158
+#: ../bin/src/ui_queuemanager.h:145
 msgid "Move down"
 msgstr "Преместване надолу"
 
@@ -3425,11 +3467,11 @@ msgid "Move to library..."
 msgstr "Преместване в библиотека..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:142
-#: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:157
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Move up"
 msgstr "Преместване нагоре"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
 msgid "Music"
 msgstr ""
 
@@ -3485,13 +3527,17 @@ msgstr "Никога пускани"
 msgid "Never start playing"
 msgstr "Никога да не се пуска възпроизвеждането"
 
+#: internet/jamendo/jamendoservice.cpp:162
+msgid "New albums"
+msgstr ""
+
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Нов списък с песни"
 
@@ -3577,7 +3623,7 @@ msgstr "No short blocks"
 msgid "None"
 msgstr "Никаква"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Никоя от избраните песни бяха сподобни да бъдат копирани на устройството"
 
@@ -3690,10 +3736,10 @@ msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:300
-#: internet/jamendo/jamendoservice.cpp:429
-#: internet/magnatune/magnatuneservice.cpp:283
+#: internet/jamendo/jamendoservice.cpp:388
+#: internet/magnatune/magnatuneservice.cpp:286
 #: internet/somafm/somafmservice.cpp:101
-#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/intergalacticfm/intergalacticfmservice.cpp:101
 #: internet/radiobrowser/radiobrowserservice.cpp:291
 #, qt-format
 msgid "Open %1 in browser"
@@ -3740,6 +3786,10 @@ msgstr ""
 
 #: songinfo/artistbiography.cpp:101 songinfo/artistbiography.cpp:281
 msgid "Open in your browser"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:382
+msgid "Open on Jamendo"
 msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
@@ -3804,6 +3854,12 @@ msgstr ""
 msgid "Other options"
 msgstr "Други настройки"
 
+#: ../bin/src/ui_songinfosettingspage.h:129
+msgid ""
+"Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
+"and length to lrclib.net)"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
 msgstr ""
@@ -3832,10 +3888,6 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:225
-msgid "Parsing Jamendo catalogue"
-msgstr "Претърсване на Jamendo каталога"
-
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr ""
@@ -3852,8 +3904,8 @@ msgstr "Парти"
 msgid "Password"
 msgstr "Парола"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1754
-#: ui/qtsystemtrayicon.cpp:234 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Пауза"
 
@@ -3865,7 +3917,7 @@ msgstr "На пауза"
 msgid "Paused"
 msgstr "На пауза"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1404
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1398
 #: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:182
 #: ../bin/src/ui_groupbydialog.h:199 ../bin/src/ui_groupbydialog.h:216
 #: ../bin/src/ui_edittagdialog.h:727
@@ -3888,14 +3940,14 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Стандартна странична лента"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1141
-#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:222
-#: ui/qtsystemtrayicon.cpp:246 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
+#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Възпроизвеждане"
 
-#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Брой изпълнения"
 
@@ -3912,11 +3964,11 @@ msgstr "Продължаване ако е спряно и обратно"
 msgid "Play if there is nothing already playing"
 msgstr "Възпроизвеждане, ако има песен, която вече се изпълнява"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1869
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3997,9 +4049,21 @@ msgstr ""
 msgid "Podcasts"
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: internet/jamendo/jamendoservice.cpp:89 ui/equalizer.cpp:142
 msgid "Pop"
 msgstr "Поп"
+
+#: internet/jamendo/jamendoservice.cpp:160
+msgid "Popular albums"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:155
+msgid "Popular this month"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:153
+msgid "Popular this week"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
@@ -4069,7 +4133,7 @@ msgstr ""
 msgid "Pretty OSD options"
 msgstr "Настройки на красиво OSD"
 
-#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:154
+#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:126
 #: ../bin/src/ui_notificationssettingspage.h:453
 #: ../bin/src/ui_organisedialog.h:186
 msgid "Preview"
@@ -4103,6 +4167,10 @@ msgstr ""
 
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:90
+msgid "Punk"
 msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:247
@@ -4148,12 +4216,12 @@ msgstr "Заявящо устойство..."
 msgid "Queue Manager"
 msgstr "Мениджър на опашката"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1864
 msgid "Queue selected tracks"
 msgstr "Пратете избраните песни на опашката"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1862
 msgid "Queue track"
 msgstr "Прати избрана песен на опашката"
 
@@ -4214,11 +4282,11 @@ msgstr "Задай рейтинг на текущата песен 4 звезд�
 msgid "Rate the current song 5 stars"
 msgstr "Задай рейтинг на текущата песен 5 звезди"
 
-#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1403 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Рейтинг"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:314
+#: internet/magnatune/magnatunedownloaddialog.cpp:315
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "Наистина ли искаш да затвориш?"
@@ -4231,14 +4299,17 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:432
-#: internet/magnatune/magnatuneservice.cpp:286
+#: internet/jamendo/jamendoservice.cpp:384
+msgid "Refresh"
+msgstr ""
+
+#: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Презареди каталога"
 
 #: internet/somafm/somafmservice.cpp:110
-#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/intergalacticfm/intergalacticfmservice.cpp:110
 #: internet/radiobrowser/radiobrowserservice.cpp:295
 msgid "Refresh channels"
 msgstr "Презареди каналите"
@@ -4251,7 +4322,7 @@ msgstr "Презареди листа със станциите"
 msgid "Refresh streams"
 msgstr "Обновяване на потоците"
 
-#: ui/equalizer.cpp:147
+#: internet/jamendo/jamendoservice.cpp:91 ui/equalizer.cpp:147
 msgid "Reggae"
 msgstr "Реге"
 
@@ -4422,7 +4493,7 @@ msgstr ""
 msgid "Rip audio CD"
 msgstr ""
 
-#: ui/equalizer.cpp:149
+#: internet/jamendo/jamendoservice.cpp:92 ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Рок"
 
@@ -4460,7 +4531,7 @@ msgstr "Безопасно премахване на устройството"
 msgid "Safely remove the device after copying"
 msgstr "Безопасно премахване на устройството след приключване на копирането"
 
-#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:398
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Sample rate"
@@ -4544,7 +4615,7 @@ msgstr "Scalable sampling rate profile (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Резултат"
 
@@ -4575,11 +4646,11 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "Търси Icecast станции"
 
-#: internet/jamendo/jamendoservice.cpp:439
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Search Jamendo"
 msgstr "Търси в jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:298
 msgid "Search Magnatune"
 msgstr "Търси в Magnatune"
 
@@ -4631,6 +4702,11 @@ msgstr "Режим \"Търсене\""
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Опции при търсене"
+
+#: internet/jamendo/jamendoservice.cpp:366
+#, qt-format
+msgid "Search results for \"%1\""
+msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4728,7 +4804,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1909
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Задай %1 да е %2\"..."
@@ -4948,7 +5024,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr "Прескачане назад в списъка с песни"
 
-#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Презключи броя"
 
@@ -4960,7 +5036,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Прескачане напред в списъка с песни"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1880
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -4968,7 +5044,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1878
 msgid "Skip track"
 msgstr ""
 
@@ -4996,7 +5072,7 @@ msgstr "Лек"
 msgid "Soft Rock"
 msgstr "Лек рок"
 
-#: ../bin/src/ui_songinfosettingspage.h:150
+#: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
 msgstr "Информация за песен"
 
@@ -5036,7 +5112,11 @@ msgstr "Сортиране на песните по"
 msgid "Sorting"
 msgstr "Сортиране"
 
-#: playlist/playlist.cpp:1441
+#: internet/jamendo/jamendoservice.cpp:93
+msgid "Soundtrack"
+msgstr ""
+
+#: playlist/playlist.cpp:1435
 msgid "Source"
 msgstr ""
 
@@ -5245,6 +5325,10 @@ msgstr ""
 msgid "The second value must be greater than the first one!"
 msgstr "Втората стойност трябва да е по-голяма от първата!"
 
+#: internet/intergalacticfm/intergalacticfmservice.cpp:140
+msgid "The server didn't list any channels"
+msgstr ""
+
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
 msgstr ""
@@ -5263,7 +5347,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2775
+#: ui/mainwindow.cpp:2776
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5283,11 +5367,11 @@ msgstr ""
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:171
+#: internet/magnatune/magnatunedownloaddialog.cpp:172
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Имаше проблем с изтеглянето на метаданните от Magnatune"
 
-#: internet/podcasts/itunessearchpage.cpp:85
+#: internet/podcasts/itunessearchpage.cpp:84
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr ""
 
@@ -5309,7 +5393,7 @@ msgid ""
 "continue?"
 msgstr "Тези файлове ще бъдат изтрити от устройството,сигурни ли сте че искате да продължите?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2522 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5333,13 +5417,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Трето ниво"
 
-#: internet/jamendo/jamendoservice.cpp:179
-msgid ""
-"This action will create a database which could be as big as 150 MB.\n"
-"Do you want to continue anyway?"
-msgstr "Това действие ще създаде база от данни с размер, който може да достигне 150 MB.\nСигурни ли сте че искате да продължите?"
-
-#: internet/magnatune/magnatunedownloaddialog.cpp:199
+#: internet/magnatune/magnatunedownloaddialog.cpp:200
 msgid "This album is not available in the requested format"
 msgstr "Този албум не е наличен в избраният формат"
 
@@ -5393,7 +5471,7 @@ msgstr "Този тип устройство не е подържано:%1"
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:47
+#: playlist/playlist.cpp:1375 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:140 ../bin/src/ui_edittagdialog.h:719
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
@@ -5411,7 +5489,7 @@ msgstr "Вкл./Изкл. на красиво екранно меню"
 msgid "Toggle fullscreen"
 msgstr "Превключване на пълен екран"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1866
 msgid "Toggle queue status"
 msgstr "Покажи статус на опашката"
 
@@ -5427,7 +5505,7 @@ msgstr "Превключване видимостта на красиво екр
 msgid "Tomorrow"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:118
+#: internet/podcasts/podcasturlloader.cpp:112
 msgid "Too many redirects"
 msgstr ""
 
@@ -5451,7 +5529,7 @@ msgstr "Общ брой направени мрежови заявки"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1389 widgets/filenameformatwidget.cpp:56
+#: playlist/playlist.cpp:1383 widgets/filenameformatwidget.cpp:56
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Песен"
@@ -5535,7 +5613,7 @@ msgstr "Ultra wide band (UWB)"
 msgid "Unable to connect"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:156
+#: internet/magnatune/magnatunedownloaddialog.cpp:157
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "Неуспешно сваляне %1 (%2)"
@@ -5549,11 +5627,11 @@ msgstr "Неуспешно сваляне %1 (%2)"
 msgid "Unknown"
 msgstr "Непознат"
 
-#: internet/podcasts/podcasturlloader.cpp:210
+#: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitally/digitallyimportedclient.cpp:75
+#: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
 msgstr "Неизвестна грешка"
 
@@ -5567,21 +5645,17 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Махни обложката"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1876
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1874
 msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
-
-#: songinfo/songkickconcerts.cpp:195
-msgid "Upcoming Concerts"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:436
@@ -5905,13 +5979,17 @@ msgstr "Аудио — Windows Media"
 msgid "Without cover:"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:94
+msgid "World"
+msgstr ""
+
 #: library/libraryview.cpp:586
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2783
 msgid "Would you like to run a full rescan right now?"
 msgstr "Искате ли да изпълните пълно повторно сканиране сега?"
 
@@ -5927,7 +6005,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1393
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1387
 #: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_groupbydialog.h:193 ../bin/src/ui_groupbydialog.h:210
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
@@ -5939,7 +6017,7 @@ msgstr "Година"
 msgid "Year - Album"
 msgstr "Година - Албум"
 
-#: playlist/playlist.cpp:1395
+#: playlist/playlist.cpp:1389
 msgid "Year - original"
 msgstr ""
 
@@ -6009,7 +6087,7 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Можете да използвате Wii Remote като дистанционно за Clementine.<a href=\"http://www.clementine-player.org/wiimote\">Вижте Wiki страницата на Clementine</a> за повече информация.\n"
 
-#: internet/digitally/digitallyimportedclient.cpp:96
+#: internet/digitally/digitallyimportedclient.cpp:99
 msgid "You do not have an active subscription"
 msgstr ""
 
@@ -6028,7 +6106,11 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Трябва да рестартирате Clementine, ако смените езика."
 
-#: internet/magnatune/magnatunesettingspage.cpp:118
+#: internet/dropbox/dropboxservice.cpp:228
+msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
+msgstr ""
+
+#: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Вашите данни за достъп за Magnatune бяха грешни"
 

@@ -57,7 +57,7 @@ msgstr " kbps"
 msgid " ms"
 msgstr " 毫秒"
 
-#: ../bin/src/ui_songinfosettingspage.h:153
+#: ../bin/src/ui_songinfosettingspage.h:125
 msgid " pt"
 msgstr " pt"
 
@@ -532,7 +532,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄…"
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2146
 msgid "Add file"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgstr "加入檔案以轉碼"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "加入資料夾"
@@ -653,7 +653,7 @@ msgstr "加入歌曲年份標籤"
 msgid "Add stream..."
 msgstr "加入網路串流…"
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1947
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -707,7 +707,7 @@ msgstr ""
 msgid "After copying..."
 msgstr "複製後 …"
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1385
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
 #: ../bin/src/ui_albumcoversearcher.h:108
@@ -720,7 +720,7 @@ msgstr "專輯"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "專輯（為所有音軌取得理想音量）"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1400
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1394
 #: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_groupbydialog.h:189 ../bin/src/ui_groupbydialog.h:206
 #: ../bin/src/ui_edittagdialog.h:725
@@ -730,10 +730,6 @@ msgstr "專輯演出者"
 #: ../bin/src/ui_appearancesettingspage.h:339
 msgid "Album cover"
 msgstr ""
-
-#: internet/jamendo/jamendoservice.cpp:423
-msgid "Album info on jamendo.com..."
-msgstr " jamendo.com上的專輯資訊…"
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -818,11 +814,15 @@ msgstr ""
 msgid "Always start playing"
 msgstr "總是開始播放"
 
+#: internet/jamendo/jamendoservice.cpp:75
+msgid "Ambient"
+msgstr ""
+
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
 msgstr "讀取 iTunes 資料時發生錯誤"
 
-#: playlist/playlist.cpp:456 ui/edittagdialog.cpp:705
+#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:705
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "寫入目標數據至「%1」時發生錯誤"
@@ -840,7 +840,7 @@ msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:276
-#: ../bin/src/ui_songinfosettingspage.h:151
+#: ../bin/src/ui_songinfosettingspage.h:123
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Appearance"
 msgstr "外觀"
@@ -878,7 +878,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1383
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1377
 #: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_groupbydialog.h:188 ../bin/src/ui_groupbydialog.h:205
 #: ../bin/src/ui_albumcoversearcher.h:104
@@ -910,7 +910,7 @@ msgid "Audio output"
 msgstr ""
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:114
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "認證失敗"
@@ -960,7 +960,7 @@ msgstr "平均圖片大小"
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1420 widgets/filenameformatwidget.cpp:58
+#: playlist/playlist.cpp:1414 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -981,7 +981,7 @@ msgstr ""
 msgid "Background opacity"
 msgstr "背景不透明"
 
-#: core/database.cpp:683
+#: core/database.cpp:680
 msgid "Backing up database"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgstr "最佳"
 msgid "Biography"
 msgstr ""
 
-#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Bit rate"
 msgstr "位元率"
@@ -1047,6 +1047,10 @@ msgstr "區塊分析儀"
 #: ../bin/src/ui_transcoderoptionsaac.h:142
 msgid "Block type"
 msgstr "區塊型態"
+
+#: internet/jamendo/jamendoservice.cpp:76
+msgid "Blues"
+msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1168,6 +1172,10 @@ msgstr "檢查更新…"
 msgid "Checking Google Drive for changes..."
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:77
+msgid "Chillout"
+msgstr ""
+
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "為您智慧型播放清單選擇一個名稱"
@@ -1200,18 +1208,13 @@ msgstr ""
 msgid "Choose the internet services you want to show."
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:156
-msgid ""
-"Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "選擇您想要 Clementine 使用來搜尋歌詞的網站。"
-
 #: ../bin/src/ui_googledrivesettingspage.h:147
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr ""
 
-#: ui/equalizer.cpp:113
+#: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
 msgstr "古典"
 
@@ -1290,6 +1293,12 @@ msgstr "Clementine 無法載入任何 ProjectM 視覺化工具。\n請檢查是�
 msgid "Clementine image viewer"
 msgstr "Clementine 圖片檢視器"
 
+#: ../bin/src/ui_songinfosettingspage.h:128
+msgid ""
+"Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
+" the same name next to it."
+msgstr ""
+
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine 無法搜尋到任何符合此檔案的結果"
@@ -1339,7 +1348,7 @@ msgstr ""
 msgid "Close visualization"
 msgstr "關閉視覺化效果"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:315
+#: internet/magnatune/magnatunedownloaddialog.cpp:316
 msgid "Closing this window will cancel the download."
 msgstr "關閉此視窗將取消下載。"
 
@@ -1371,7 +1380,7 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: playlist/playlist.cpp:1439 smartplaylists/searchterm.cpp:396
+#: playlist/playlist.cpp:1433 smartplaylists/searchterm.cpp:396
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "評論"
@@ -1384,7 +1393,7 @@ msgstr "標籤完全自動分類"
 msgid "Complete tags automatically..."
 msgstr "標籤完全自動分類…"
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1402
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1396
 #: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:173
 #: ../bin/src/ui_groupbydialog.h:190 ../bin/src/ui_groupbydialog.h:207
 msgid "Composer"
@@ -1395,7 +1404,7 @@ msgstr "作曲家"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "設定 Magnatune …"
 
@@ -1570,7 +1579,7 @@ msgid ""
 "plugins installed"
 msgstr "無法找到%1的解碼器，請確認已正確安裝 GStreamer 外掛。"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:229
+#: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "無法開啟輸出檔 %1"
@@ -1585,6 +1594,10 @@ msgstr ""
 #: internet/plex/plexauthenticator.cpp:89
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:79
+msgid "Country"
 msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
@@ -1666,7 +1679,7 @@ msgstr "自訂…"
 msgid "D-Bus path"
 msgstr ""
 
-#: ui/equalizer.cpp:117
+#: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "舞蹈"
 
@@ -1678,7 +1691,7 @@ msgstr ""
 msgid "Database"
 msgstr ""
 
-#: core/database.cpp:636
+#: core/database.cpp:633
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1689,11 +1702,11 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: playlist/playlist.cpp:1436 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "創建的日期"
 
-#: playlist/playlist.cpp:1434 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1428 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "修改的日期"
 
@@ -1744,7 +1757,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2521 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1785,11 +1798,11 @@ msgstr "檔案刪除中"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1860
 msgid "Dequeue selected tracks"
 msgstr "將選取的音軌移出佇列中"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue track"
 msgstr "將音軌移出佇列中"
 
@@ -1873,7 +1886,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1391
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1385
 #: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:181
 #: ../bin/src/ui_groupbydialog.h:198 ../bin/src/ui_groupbydialog.h:215
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:341
@@ -1940,13 +1953,13 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "不要隨機播放"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:317
+#: internet/magnatune/magnatunedownloaddialog.cpp:318
 #: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "不要停止！"
 
 #: internet/somafm/somafmservice.cpp:106
-#: internet/intergalacticfm/intergalacticfmservice.cpp:104
+#: internet/intergalacticfm/intergalacticfmservice.cpp:106
 msgid "Donate"
 msgstr ""
 
@@ -1968,7 +1981,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:277
+#: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "下載目錄"
 
@@ -2001,13 +2014,9 @@ msgstr ""
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
 msgstr "下載此專輯"
-
-#: internet/jamendo/jamendoservice.cpp:426
-msgid "Download this album..."
-msgstr "下載此專輯…"
 
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
@@ -2023,11 +2032,7 @@ msgstr ""
 msgid "Downloading Icecast directory"
 msgstr "下載 Icecast 目錄中"
 
-#: internet/jamendo/jamendoservice.cpp:198
-msgid "Downloading Jamendo catalogue"
-msgstr "下載 Jamendo 目錄中"
-
-#: internet/magnatune/magnatuneservice.cpp:157
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "下載 Magnatune 目錄中"
 
@@ -2067,7 +2072,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "動態模式開啟"
 
-#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
+#: library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "動態隨機混合"
 
@@ -2075,7 +2080,7 @@ msgstr "動態隨機混合"
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單…"
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1910
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯「%1」標籤…"
@@ -2104,6 +2109,10 @@ msgstr ""
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "編輯…"
+
+#: internet/jamendo/jamendoservice.cpp:81
+msgid "Electronic"
+msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2218,8 +2227,8 @@ msgstr "相當於 --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "相當於 --log-levels *:3"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:251
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2474 ui/mainwindow.cpp:2652
+#: internet/magnatune/magnatunedownloaddialog.cpp:252
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "錯誤"
@@ -2376,13 +2385,14 @@ msgstr ""
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:73
-#: internet/podcasts/itunessearchpage.cpp:84
-#: internet/podcasts/itunessearchpage.cpp:93
+#: internet/podcasts/itunessearchpage.cpp:72
+#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:92
 msgid "Failed to fetch podcasts"
 msgstr ""
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:131
+#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:139
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2401,7 +2411,7 @@ msgid ""
 "%2"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:169
 msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
@@ -2467,11 +2477,11 @@ msgstr "副檔名"
 msgid "File formats"
 msgstr "檔案格式"
 
-#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "檔名"
 
-#: playlist/playlist.cpp:1428
+#: playlist/playlist.cpp:1422
 msgid "File name (without path)"
 msgstr "檔名（不含路徑）"
 
@@ -2479,11 +2489,11 @@ msgstr "檔名（不含路徑）"
 msgid "File paths"
 msgstr ""
 
-#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "檔案大小"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1432
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1426
 #: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_groupbydialog.h:191
 #: ../bin/src/ui_groupbydialog.h:208 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2529,11 +2539,15 @@ msgstr "第一層次"
 msgid "Fit cover to width"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:82
+msgid "Folk"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
 msgstr ""
 
-#: ../bin/src/ui_songinfosettingspage.h:152
+#: ../bin/src/ui_songinfosettingspage.h:124
 msgid "Font size"
 msgstr "字型大小"
 
@@ -2564,7 +2578,6 @@ msgstr "忘記裝置這個動作將會把此裝置從名單中移除且 Clementi
 #: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:134
 #: ../bin/src/ui_searchpreview.h:101 ../bin/src/ui_searchtermwidget.h:271
 #: ../bin/src/ui_wizardfinishpage.h:79
-#: ../bin/src/ui_songkickconcertwidget.h:96
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 #: ../bin/src/ui_transcoderoptionsavaac.h:123
 #: ../bin/src/ui_transcoderoptionserror.h:53
@@ -2616,6 +2629,10 @@ msgstr "全部低音+高音"
 msgid "Full Treble"
 msgstr "全部高音"
 
+#: internet/jamendo/jamendoservice.cpp:83
+msgid "Funk"
+msgstr ""
+
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
 msgstr ""
@@ -2628,15 +2645,19 @@ msgstr ""
 msgid "General settings"
 msgstr "一般設定"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1398
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1392
 #: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:175
 #: ../bin/src/ui_groupbydialog.h:192 ../bin/src/ui_groupbydialog.h:209
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "風格"
 
+#: internet/jamendo/jamendoservice.cpp:165
+msgid "Genres"
+msgstr ""
+
 #: internet/somafm/somafmservice.cpp:119
-#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/intergalacticfm/intergalacticfmservice.cpp:119
 #: internet/radiobrowser/radiobrowserservice.cpp:209
 #: internet/radiobrowser/radiobrowserservice.cpp:245
 #: internet/radiobrowser/radiobrowserservice.cpp:263
@@ -2718,7 +2739,7 @@ msgstr "依風格/專輯歸類"
 msgid "Group by Genre/Artist/Album"
 msgstr "依風格/演出者/專輯歸類"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1406
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1400
 #: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:183
 #: ../bin/src/ui_groupbydialog.h:200 ../bin/src/ui_groupbydialog.h:217
 msgid "Grouping"
@@ -2732,7 +2753,7 @@ msgstr ""
 msgid "Grouping name:"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:202
 msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
@@ -2777,6 +2798,10 @@ msgstr "高 (1024x1024)"
 
 #: ui/equalizer.cpp:129
 msgid "Hip Hop"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:84
+msgid "Hip-hop"
 msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
@@ -2916,7 +2941,12 @@ msgstr ""
 msgid "Insert..."
 msgstr "插入…"
 
-#: core/database.cpp:620
+#: networkremote/outgoingdatacreator.cpp:530
+#: songinfo/lyricsinfoprovider.cpp:55
+msgid "Instrumental"
+msgstr ""
+
+#: core/database.cpp:617
 msgid "Integrity check"
 msgstr ""
 
@@ -2945,29 +2975,16 @@ msgstr "無效的格式"
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:136
-msgid "Jamendo"
-msgstr "Jamendo"
+#: internet/jamendo/jamendoservice.cpp:243
+#, qt-format
+msgid ""
+"Jamendo request failed:\n"
+"%1"
+msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:121
-msgid "Jamendo Most Listened Tracks"
-msgstr "Jamendo 最常聆聽的曲目"
-
-#: internet/jamendo/jamendoservice.cpp:118
-msgid "Jamendo Top Tracks"
-msgstr "Jamendo 熱門曲目"
-
-#: internet/jamendo/jamendoservice.cpp:112
-msgid "Jamendo Top Tracks of the Month"
-msgstr "Jamendo 每月熱門曲目"
-
-#: internet/jamendo/jamendoservice.cpp:115
-msgid "Jamendo Top Tracks of the Week"
-msgstr "Jamendo 每週熱門曲目"
-
-#: internet/jamendo/jamendoservice.cpp:178
-msgid "Jamendo database"
-msgstr "Jamendo 資料庫"
+#: internet/jamendo/jamendoservice.cpp:85
+msgid "Jazz"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3038,7 +3055,7 @@ msgstr "大型側邊欄"
 msgid "Last played"
 msgstr "最近播放"
 
-#: playlist/playlist.cpp:1415 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -3063,6 +3080,10 @@ msgstr "Last.fm 標籤"
 msgid "Last.fm wiki"
 msgstr "Last.fm 維基百科"
 
+#: internet/jamendo/jamendoservice.cpp:86
+msgid "Latin"
+msgstr ""
+
 #: library/library.cpp:106
 msgid "Least favourite tracks"
 msgstr "最不喜歡的曲目"
@@ -3071,7 +3092,7 @@ msgstr "最不喜歡的曲目"
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1387 widgets/filenameformatwidget.cpp:63
+#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "長度"
@@ -3091,7 +3112,7 @@ msgstr "媒體櫃"
 msgid "Library advanced grouping"
 msgstr "進階媒體櫃歸類"
 
-#: ui/mainwindow.cpp:2784
+#: ui/mainwindow.cpp:2785
 msgid "Library rescan notice"
 msgstr "媒體櫃重新掃描通知"
 
@@ -3142,6 +3163,11 @@ msgstr "載入播放清單"
 #: ../bin/src/ui_mainwindow.h:760
 msgid "Load playlist..."
 msgstr "載入播放清單…"
+
+#: internet/jamendo/jamendoservice.cpp:216
+#, qt-format
+msgid "Loading %1"
+msgstr ""
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3207,6 +3233,10 @@ msgstr ""
 msgid "Long term prediction profile (LTP)"
 msgstr "長時期預測規格 (LTP)"
 
+#: internet/jamendo/jamendoservice.cpp:87
+msgid "Lounge"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
 msgstr "喜愛"
@@ -3230,17 +3260,21 @@ msgid "Low complexity profile (LC)"
 msgstr "低複雜度規格 (LC)"
 
 #: widgets/filenameformatwidget.cpp:55
-#: ../bin/src/ui_songinfosettingspage.h:155
+#: ../bin/src/ui_songinfosettingspage.h:127
 msgid "Lyrics"
 msgstr "歌詞"
 
-#: songinfo/ultimatelyricsprovider.cpp:157
+#: songinfo/lyricsfetcher.cpp:129
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "歌詞來自 %1"
 
-#: songinfo/taglyricsinfoprovider.cpp:30
-msgid "Lyrics from the tag"
+#: songinfo/lyricsfetcher.cpp:258
+msgid "Lyrics from LRCLIB"
+msgstr ""
+
+#: songinfo/lyricsfetcher.cpp:115
+msgid "Lyrics from the file's tags"
 msgstr ""
 
 #: transcoder/transcoder.cpp:282
@@ -3268,7 +3302,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:105
+#: internet/magnatune/magnatuneservice.cpp:108
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3350,6 +3384,10 @@ msgstr "中 (512x512)"
 msgid "Membership type"
 msgstr "會員類型"
 
+#: internet/jamendo/jamendoservice.cpp:88
+msgid "Metal"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
 msgstr "最小位元率"
@@ -3386,7 +3424,7 @@ msgstr ""
 msgid "Months"
 msgstr "月"
 
-#: playlist/playlist.cpp:1443
+#: playlist/playlist.cpp:1437
 msgid "Mood"
 msgstr ""
 
@@ -3403,6 +3441,10 @@ msgstr ""
 msgid "Most played"
 msgstr "最常播放的"
 
+#: internet/jamendo/jamendoservice.cpp:157
+msgid "Most popular of all time"
+msgstr ""
+
 #: devices/giolister.cpp:182
 msgid "Mount point"
 msgstr "掛載點"
@@ -3412,7 +3454,7 @@ msgid "Mount points"
 msgstr "掛載點"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
-#: ../bin/src/ui_queuemanager.h:145 ../bin/src/ui_songinfosettingspage.h:158
+#: ../bin/src/ui_queuemanager.h:145
 msgid "Move down"
 msgstr "下移"
 
@@ -3421,11 +3463,11 @@ msgid "Move to library..."
 msgstr "移到媒體櫃…"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:142
-#: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:157
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
 msgid "Music"
 msgstr ""
 
@@ -3481,13 +3523,17 @@ msgstr "從未播放"
 msgid "Never start playing"
 msgstr "永不開始播放"
 
+#: internet/jamendo/jamendoservice.cpp:162
+msgid "New albums"
+msgstr ""
+
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "新增播放清單"
 
@@ -3573,7 +3619,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3686,10 +3732,10 @@ msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:300
-#: internet/jamendo/jamendoservice.cpp:429
-#: internet/magnatune/magnatuneservice.cpp:283
+#: internet/jamendo/jamendoservice.cpp:388
+#: internet/magnatune/magnatuneservice.cpp:286
 #: internet/somafm/somafmservice.cpp:101
-#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/intergalacticfm/intergalacticfmservice.cpp:101
 #: internet/radiobrowser/radiobrowserservice.cpp:291
 #, qt-format
 msgid "Open %1 in browser"
@@ -3736,6 +3782,10 @@ msgstr ""
 
 #: songinfo/artistbiography.cpp:101 songinfo/artistbiography.cpp:281
 msgid "Open in your browser"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:382
+msgid "Open on Jamendo"
 msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
@@ -3800,6 +3850,12 @@ msgstr ""
 msgid "Other options"
 msgstr "其它選項"
 
+#: ../bin/src/ui_songinfosettingspage.h:129
+msgid ""
+"Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
+"and length to lrclib.net)"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
 msgstr ""
@@ -3828,10 +3884,6 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:225
-msgid "Parsing Jamendo catalogue"
-msgstr "擷取 Jamendo目錄"
-
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr ""
@@ -3848,8 +3900,8 @@ msgstr "派對"
 msgid "Password"
 msgstr "密碼"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1754
-#: ui/qtsystemtrayicon.cpp:234 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "暫停"
 
@@ -3861,7 +3913,7 @@ msgstr "暫停播放"
 msgid "Paused"
 msgstr "已暫停"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1404
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1398
 #: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:182
 #: ../bin/src/ui_groupbydialog.h:199 ../bin/src/ui_groupbydialog.h:216
 #: ../bin/src/ui_edittagdialog.h:727
@@ -3884,14 +3936,14 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1141
-#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:222
-#: ui/qtsystemtrayicon.cpp:246 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
+#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "播放"
 
-#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "播放計數"
 
@@ -3908,11 +3960,11 @@ msgstr "停止的話就開始播放，播放中的就暫停"
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1869
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3993,9 +4045,21 @@ msgstr ""
 msgid "Podcasts"
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: internet/jamendo/jamendoservice.cpp:89 ui/equalizer.cpp:142
 msgid "Pop"
 msgstr "流行音樂"
+
+#: internet/jamendo/jamendoservice.cpp:160
+msgid "Popular albums"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:155
+msgid "Popular this month"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:153
+msgid "Popular this week"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
@@ -4065,7 +4129,7 @@ msgstr ""
 msgid "Pretty OSD options"
 msgstr "漂亮的 OSD 選項"
 
-#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:154
+#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:126
 #: ../bin/src/ui_notificationssettingspage.h:453
 #: ../bin/src/ui_organisedialog.h:186
 msgid "Preview"
@@ -4099,6 +4163,10 @@ msgstr ""
 
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:90
+msgid "Punk"
 msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:247
@@ -4144,12 +4212,12 @@ msgstr "查詢裝置…"
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1864
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1862
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -4210,11 +4278,11 @@ msgstr "評價目前的歌曲 4 顆星"
 msgid "Rate the current song 5 stars"
 msgstr "評價目前的歌曲 5 顆星"
 
-#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1403 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "評分"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:314
+#: internet/magnatune/magnatunedownloaddialog.cpp:315
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "真的要取消？"
@@ -4227,14 +4295,17 @@ msgstr ""
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:432
-#: internet/magnatune/magnatuneservice.cpp:286
+#: internet/jamendo/jamendoservice.cpp:384
+msgid "Refresh"
+msgstr ""
+
+#: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "刷新目錄"
 
 #: internet/somafm/somafmservice.cpp:110
-#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/intergalacticfm/intergalacticfmservice.cpp:110
 #: internet/radiobrowser/radiobrowserservice.cpp:295
 msgid "Refresh channels"
 msgstr "刷新頻道"
@@ -4247,7 +4318,7 @@ msgstr "重新整理電台清單"
 msgid "Refresh streams"
 msgstr "重新整理串流"
 
-#: ui/equalizer.cpp:147
+#: internet/jamendo/jamendoservice.cpp:91 ui/equalizer.cpp:147
 msgid "Reggae"
 msgstr "雷鬼"
 
@@ -4418,7 +4489,7 @@ msgstr ""
 msgid "Rip audio CD"
 msgstr ""
 
-#: ui/equalizer.cpp:149
+#: internet/jamendo/jamendoservice.cpp:92 ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "搖滾"
 
@@ -4456,7 +4527,7 @@ msgstr "安全地移除裝置"
 msgid "Safely remove the device after copying"
 msgstr "在複製之後，安全的移除裝置"
 
-#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:398
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Sample rate"
@@ -4540,7 +4611,7 @@ msgstr "可變取樣率規格 (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "分數"
 
@@ -4571,11 +4642,11 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "搜尋 Icecast stations"
 
-#: internet/jamendo/jamendoservice.cpp:439
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Search Jamendo"
 msgstr "搜尋 Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:298
 msgid "Search Magnatune"
 msgstr "搜尋 Magnatune"
 
@@ -4627,6 +4698,11 @@ msgstr "搜尋模式"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "搜尋選項"
+
+#: internet/jamendo/jamendoservice.cpp:366
+#, qt-format
+msgid "Search results for \"%1\""
+msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4724,7 +4800,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1909
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」…"
@@ -4944,7 +5020,7 @@ msgstr "強節奏流行音樂"
 msgid "Skip backwards in playlist"
 msgstr "跳至播放清單開頭"
 
-#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "略過計數"
 
@@ -4956,7 +5032,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1880
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -4964,7 +5040,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1878
 msgid "Skip track"
 msgstr ""
 
@@ -4992,7 +5068,7 @@ msgstr "輕柔的音樂"
 msgid "Soft Rock"
 msgstr "比較輕柔的搖滾樂"
 
-#: ../bin/src/ui_songinfosettingspage.h:150
+#: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
 msgstr "歌曲資訊"
 
@@ -5032,7 +5108,11 @@ msgstr "歌曲排序方式"
 msgid "Sorting"
 msgstr "分類"
 
-#: playlist/playlist.cpp:1441
+#: internet/jamendo/jamendoservice.cpp:93
+msgid "Soundtrack"
+msgstr ""
+
+#: playlist/playlist.cpp:1435
 msgid "Source"
 msgstr ""
 
@@ -5241,6 +5321,10 @@ msgstr ""
 msgid "The second value must be greater than the first one!"
 msgstr "第二個值必須大於第一個！"
 
+#: internet/intergalacticfm/intergalacticfmservice.cpp:140
+msgid "The server didn't list any channels"
+msgstr ""
+
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
 msgstr ""
@@ -5259,7 +5343,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2775
+#: ui/mainwindow.cpp:2776
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5279,11 +5363,11 @@ msgstr ""
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:171
+#: internet/magnatune/magnatunedownloaddialog.cpp:172
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "從 Magnatune 獲取詮釋資料有一個問題"
 
-#: internet/podcasts/itunessearchpage.cpp:85
+#: internet/podcasts/itunessearchpage.cpp:84
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr ""
 
@@ -5305,7 +5389,7 @@ msgid ""
 "continue?"
 msgstr "這些檔案將從裝置上被移除，你確定你要繼續？"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2522 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5329,13 +5413,7 @@ msgstr ""
 msgid "Third level"
 msgstr "第三個層次"
 
-#: internet/jamendo/jamendoservice.cpp:179
-msgid ""
-"This action will create a database which could be as big as 150 MB.\n"
-"Do you want to continue anyway?"
-msgstr "這項動作將新增一個容量大約 150MB 的資料庫，仍然要繼續？"
-
-#: internet/magnatune/magnatunedownloaddialog.cpp:199
+#: internet/magnatune/magnatunedownloaddialog.cpp:200
 msgid "This album is not available in the requested format"
 msgstr "這張專輯中不提供所要求的格式"
 
@@ -5389,7 +5467,7 @@ msgstr "這種裝置不被支援： %1"
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:47
+#: playlist/playlist.cpp:1375 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:140 ../bin/src/ui_edittagdialog.h:719
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
@@ -5407,7 +5485,7 @@ msgstr "拖曳漂亮的螢幕顯示"
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1866
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -5423,7 +5501,7 @@ msgstr "調整漂亮的螢幕顯示的可見度"
 msgid "Tomorrow"
 msgstr ""
 
-#: internet/podcasts/podcasturlloader.cpp:118
+#: internet/podcasts/podcasturlloader.cpp:112
 msgid "Too many redirects"
 msgstr ""
 
@@ -5447,7 +5525,7 @@ msgstr "總發送網路請求"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1389 widgets/filenameformatwidget.cpp:56
+#: playlist/playlist.cpp:1383 widgets/filenameformatwidget.cpp:56
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "歌曲"
@@ -5531,7 +5609,7 @@ msgstr "超寬頻 (UWB)"
 msgid "Unable to connect"
 msgstr ""
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:156
+#: internet/magnatune/magnatunedownloaddialog.cpp:157
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "無法下載 %1 (%2)"
@@ -5545,11 +5623,11 @@ msgstr "無法下載 %1 (%2)"
 msgid "Unknown"
 msgstr "未知的"
 
-#: internet/podcasts/podcasturlloader.cpp:210
+#: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitally/digitallyimportedclient.cpp:75
+#: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
 msgstr "不明的錯誤"
 
@@ -5563,21 +5641,17 @@ msgstr ""
 msgid "Unset cover"
 msgstr "未設置封面"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1876
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1874
 msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
-
-#: songinfo/songkickconcerts.cpp:195
-msgid "Upcoming Concerts"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:436
@@ -5901,13 +5975,17 @@ msgstr "Windows Media 音訊"
 msgid "Without cover:"
 msgstr ""
 
+#: internet/jamendo/jamendoservice.cpp:94
+msgid "World"
+msgstr ""
+
 #: library/libraryview.cpp:586
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2783
 msgid "Would you like to run a full rescan right now?"
 msgstr "您想要立刻執行完整的重新掃描嗎？"
 
@@ -5923,7 +6001,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1393
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1387
 #: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_groupbydialog.h:193 ../bin/src/ui_groupbydialog.h:210
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
@@ -5935,7 +6013,7 @@ msgstr "年份"
 msgid "Year - Album"
 msgstr "年份 - 專輯"
 
-#: playlist/playlist.cpp:1395
+#: playlist/playlist.cpp:1389
 msgid "Year - original"
 msgstr ""
 
@@ -6005,7 +6083,7 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "您可以使用您的 Wii 遙控器遙控 Clementine。 <a href=\"http://www.clementine-player.org/wiimote\">請參閱在 Clementine wiki 的頁面</a> 取得更多的資訊。\n"
 
-#: internet/digitally/digitallyimportedclient.cpp:96
+#: internet/digitally/digitallyimportedclient.cpp:99
 msgid "You do not have an active subscription"
 msgstr ""
 
@@ -6024,7 +6102,11 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "語言變更將在重新啟動 Clementine 後套用。"
 
-#: internet/magnatune/magnatunesettingspage.cpp:118
+#: internet/dropbox/dropboxservice.cpp:228
+msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
+msgstr ""
+
+#: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
 msgstr "您的 Magnatune 的憑證是不正確的"
 

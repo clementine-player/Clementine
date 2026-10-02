@@ -58,7 +58,7 @@ msgstr " kbps"
 msgid " ms"
 msgstr " msek"
 
-#: ../bin/src/ui_songinfosettingspage.h:153
+#: ../bin/src/ui_songinfosettingspage.h:125
 msgid " pt"
 msgstr " punkti"
 
@@ -533,7 +533,7 @@ msgstr "Lisa veel üks voogedastus..."
 msgid "Add directory..."
 msgstr "Lisa kaust..."
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2146
 msgid "Add file"
 msgstr "Lisa fail"
 
@@ -557,7 +557,7 @@ msgstr "Lisa failid kodeeringu muutmiseks"
 msgid "Add files..."
 msgstr "Lisa failid..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Lisa kaust"
@@ -654,7 +654,7 @@ msgstr "Lisa loole aasta silt"
 msgid "Add stream..."
 msgstr "Lisa voogedastus..."
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1947
 msgid "Add to another playlist"
 msgstr "Lisa teise esitusloendisse"
 
@@ -708,7 +708,7 @@ msgstr "Pärast"
 msgid "After copying..."
 msgstr "Pärast kopeerimist..."
 
-#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1385
+#: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
 #: ../bin/src/ui_albumcoversearcher.h:108
@@ -721,7 +721,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (kõigil radadel ideaalne valjus)"
 
-#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1400
+#: library/savedgroupingmanager.cpp:81 playlist/playlist.cpp:1394
 #: widgets/filenameformatwidget.cpp:51 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_groupbydialog.h:189 ../bin/src/ui_groupbydialog.h:206
 #: ../bin/src/ui_edittagdialog.h:725
@@ -731,10 +731,6 @@ msgstr "Albumi esitaja"
 #: ../bin/src/ui_appearancesettingspage.h:339
 msgid "Album cover"
 msgstr "Albumi kaanepilt"
-
-#: internet/jamendo/jamendoservice.cpp:423
-msgid "Album info on jamendo.com..."
-msgstr "Albumi teave jamendo.com saidis..."
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -819,11 +815,15 @@ msgstr "Alati näi&ta põhiakent"
 msgid "Always start playing"
 msgstr "Alati alusta esitust"
 
+#: internet/jamendo/jamendoservice.cpp:75
+msgid "Ambient"
+msgstr ""
+
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes'i andmebaasi laadimisel tekkis viga"
 
-#: playlist/playlist.cpp:456 ui/edittagdialog.cpp:705
+#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:705
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Tekkis viga metaandmete salvestamisel siia '%1'"
@@ -841,7 +841,7 @@ msgid "Angry"
 msgstr "Vihane"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
-#: ../bin/src/ui_songinfosettingspage.h:151
+#: ../bin/src/ui_songinfosettingspage.h:123
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Appearance"
 msgstr "Väljanägemine"
@@ -879,7 +879,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Kas sa oled kindel, et soovid kõikidesse muusikakogu lugude failidesse salvestada lugude statistikat?"
 
-#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1383
+#: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1377
 #: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_groupbydialog.h:188 ../bin/src/ui_groupbydialog.h:205
 #: ../bin/src/ui_albumcoversearcher.h:104
@@ -911,7 +911,7 @@ msgid "Audio output"
 msgstr "Heliväljund"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:114
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "Autentimine ei õnnestunud"
@@ -961,7 +961,7 @@ msgstr "Keskmine pildisuurus"
 msgid "BBC Podcasts"
 msgstr "BBC taskuhäälingud"
 
-#: playlist/playlist.cpp:1420 widgets/filenameformatwidget.cpp:58
+#: playlist/playlist.cpp:1414 widgets/filenameformatwidget.cpp:58
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -982,7 +982,7 @@ msgstr "Taustapilt"
 msgid "Background opacity"
 msgstr "Tausta läbipaistvus"
 
-#: core/database.cpp:683
+#: core/database.cpp:680
 msgid "Backing up database"
 msgstr "Varundan andmebaasi"
 
@@ -1018,7 +1018,7 @@ msgstr "Parim"
 msgid "Biography"
 msgstr "Elulugu"
 
-#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Bit rate"
 msgstr "Bitikiirus"
@@ -1048,6 +1048,10 @@ msgstr "Blokk-analüsaator"
 #: ../bin/src/ui_transcoderoptionsaac.h:142
 msgid "Block type"
 msgstr "Blokitüüp"
+
+#: internet/jamendo/jamendoservice.cpp:76
+msgid "Blues"
+msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1169,6 +1173,10 @@ msgstr "Kontrolli uuendusi..."
 msgid "Checking Google Drive for changes..."
 msgstr "Kontrollin, kas Google Drive'is leidub muudatusi..."
 
+#: internet/jamendo/jamendoservice.cpp:77
+msgid "Chillout"
+msgstr ""
+
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Vali nimi oma nutika esitusloendi jaoks"
@@ -1201,18 +1209,13 @@ msgstr "Vali taskuhäälingu allalaadimise kaust"
 msgid "Choose the internet services you want to show."
 msgstr "Vali need internetipõhised teenused, mida sa tahad kuvada."
 
-#: ../bin/src/ui_songinfosettingspage.h:156
-msgid ""
-"Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Vali veebisaidid, kust Clementine võiks laulusõnu otsida."
-
 #: ../bin/src/ui_googledrivesettingspage.h:147
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr "Vali faili, mida Clementine näeb. Tal saab olema vaid ligipääs siin sinu valitud failidele."
 
-#: ui/equalizer.cpp:113
+#: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
 msgstr "Klassikaline"
 
@@ -1291,6 +1294,12 @@ msgstr "Clementine ei suutnud laadida mitte ühtegi projectM visualiseerimist. P
 msgid "Clementine image viewer"
 msgstr "Clementine pildivaatur"
 
+#: ../bin/src/ui_songinfosettingspage.h:128
+msgid ""
+"Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
+" the same name next to it."
+msgstr ""
+
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine ei leidnud selle faili kohta teavet"
@@ -1340,7 +1349,7 @@ msgstr "Sulge esitusloend"
 msgid "Close visualization"
 msgstr "Sulge visualiseerimine"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:315
+#: internet/magnatune/magnatunedownloaddialog.cpp:316
 msgid "Closing this window will cancel the download."
 msgstr "Selle akna sulgemine tühistab allalaadimise."
 
@@ -1372,7 +1381,7 @@ msgstr "Komadega eraldatud loend sõnadest, mida ei kasutata sortimisel"
 msgid "Command"
 msgstr "Käsk"
 
-#: playlist/playlist.cpp:1439 smartplaylists/searchterm.cpp:396
+#: playlist/playlist.cpp:1433 smartplaylists/searchterm.cpp:396
 #: widgets/filenameformatwidget.cpp:62 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Märkus"
@@ -1385,7 +1394,7 @@ msgstr "Täida sildid automaatselt"
 msgid "Complete tags automatically..."
 msgstr "Täida sildid automaatselt..."
 
-#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1402
+#: library/savedgroupingmanager.cpp:75 playlist/playlist.cpp:1396
 #: widgets/filenameformatwidget.cpp:52 ../bin/src/ui_groupbydialog.h:173
 #: ../bin/src/ui_groupbydialog.h:190 ../bin/src/ui_groupbydialog.h:207
 msgid "Composer"
@@ -1396,7 +1405,7 @@ msgstr "Helilooja"
 msgid "Configure %1..."
 msgstr "Seadista %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "Seadista Magnatune..."
 
@@ -1571,7 +1580,7 @@ msgid ""
 "plugins installed"
 msgstr "Ei leidnud kodeerijat %1 jaoks, palun kontrolli et arvutis oleks paigaldatud õiged GStreamer'i pistikprogrammid"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:229
+#: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Ei suuda avada väljund faili %1"
@@ -1587,6 +1596,10 @@ msgstr "%1 teenus polnud leitav. Kontrolli, kas see server töötab ja sellest a
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
 msgstr "Sait plex.tv pole leitav: %1"
+
+#: internet/jamendo/jamendoservice.cpp:79
+msgid "Country"
+msgstr ""
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1667,7 +1680,7 @@ msgstr "Kohandatud..."
 msgid "D-Bus path"
 msgstr "DBus'i asukoht"
 
-#: ui/equalizer.cpp:117
+#: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "Tantsumuusika"
 
@@ -1679,7 +1692,7 @@ msgstr "Tume"
 msgid "Database"
 msgstr "Andmebaas"
 
-#: core/database.cpp:636
+#: core/database.cpp:633
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1690,11 +1703,11 @@ msgstr "Tuvastasime et andmebaas on vigane. Meie juhend andmebaasi parandamiseks
 msgid "Date"
 msgstr "Kuupäev"
 
-#: playlist/playlist.cpp:1436 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Loomise aeg"
 
-#: playlist/playlist.cpp:1434 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1428 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Muutmise aeg"
 
@@ -1745,7 +1758,7 @@ msgid "Delete downloaded data"
 msgstr "Kustuta allalaaditud andmed"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2521 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Kustuta failid"
 
@@ -1786,11 +1799,11 @@ msgstr "Failide kustutamine"
 msgid "Depth"
 msgstr "Sügavus"
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1860
 msgid "Dequeue selected tracks"
 msgstr "Eemalda valitud lood järjekorrast"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue track"
 msgstr "Eemalda järjekorrast"
 
@@ -1874,7 +1887,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
-#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1391
+#: library/savedgroupingmanager.cpp:96 playlist/playlist.cpp:1385
 #: widgets/filenameformatwidget.cpp:57 ../bin/src/ui_groupbydialog.h:181
 #: ../bin/src/ui_groupbydialog.h:198 ../bin/src/ui_groupbydialog.h:215
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:341
@@ -1941,13 +1954,13 @@ msgstr "Ära näita kuulatud osi"
 msgid "Don't shuffle"
 msgstr "Ära sega"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:317
+#: internet/magnatune/magnatunedownloaddialog.cpp:318
 #: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "Ära peata!"
 
 #: internet/somafm/somafmservice.cpp:106
-#: internet/intergalacticfm/intergalacticfmservice.cpp:104
+#: internet/intergalacticfm/intergalacticfmservice.cpp:106
 msgid "Donate"
 msgstr "Toeta rahaliselt"
 
@@ -1969,7 +1982,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Laadi %n osa alla"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:277
+#: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Laadi kaust alla"
 
@@ -2002,13 +2015,9 @@ msgstr "Laadi alla meie õige Androidi rakendus"
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Laadi alla kaughaldusliides töölauarakenduse, Androidi ja iOS jaoks"
 
-#: internet/magnatune/magnatuneservice.cpp:279
+#: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
 msgstr "Laadi see album alla"
-
-#: internet/jamendo/jamendoservice.cpp:426
-msgid "Download this album..."
-msgstr "Laadi see album..."
 
 #: internet/podcasts/podcastservice.cpp:565
 msgid "Download this episode"
@@ -2024,11 +2033,7 @@ msgstr "Laadin alla (%1%)..."
 msgid "Downloading Icecast directory"
 msgstr "Laadin alla Icecasti kataloogi"
 
-#: internet/jamendo/jamendoservice.cpp:198
-msgid "Downloading Jamendo catalogue"
-msgstr "Laadin alla Jamendo kataloogi"
-
-#: internet/magnatune/magnatuneservice.cpp:157
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "Laadin alla Magnatune kataloogi"
 
@@ -2068,7 +2073,7 @@ msgstr "Kestus"
 msgid "Dynamic mode is on"
 msgstr "Kasutusel on dünaamiline režiim"
 
-#: internet/jamendo/jamendoservice.cpp:124 library/library.cpp:115
+#: library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Dünaamiline juhuslik valik"
 
@@ -2076,7 +2081,7 @@ msgstr "Dünaamiline juhuslik valik"
 msgid "Edit smart playlist..."
 msgstr "Muuda nutikat esitusloendit..."
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1910
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muuda silti \"%1\"..."
@@ -2105,6 +2110,10 @@ msgstr "Muuda lugude teavet..."
 #: internet/internetradio/savedradio.cpp:111
 msgid "Edit..."
 msgstr "Muuda..."
+
+#: internet/jamendo/jamendoservice.cpp:81
+msgid "Electronic"
+msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2219,8 +2228,8 @@ msgstr "Võrdne käivitusvõtmega --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Võrdne käivitusvõtmega --log-levels *:3"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:251
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2474 ui/mainwindow.cpp:2652
+#: internet/magnatune/magnatunedownloaddialog.cpp:252
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Viga"
@@ -2377,13 +2386,14 @@ msgstr "Kataloogi laadimine ei õnnestunud"
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:73
-#: internet/podcasts/itunessearchpage.cpp:84
-#: internet/podcasts/itunessearchpage.cpp:93
+#: internet/podcasts/itunessearchpage.cpp:72
+#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:92
 msgid "Failed to fetch podcasts"
 msgstr "Taskuhäälingute laadimine ei õnnestunud"
 
-#: internet/intergalacticfm/intergalacticfmservice.cpp:131
+#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#: internet/intergalacticfm/intergalacticfmservice.cpp:139
 #, qt-format
 msgid ""
 "Failed to get channel list:\n"
@@ -2402,7 +2412,7 @@ msgid ""
 "%2"
 msgstr "%1 vastuse töötlemine ei õnnestunud:\n%2"
 
-#: internet/podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:169
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Ei õnnestunud selle uudisvoo XML'i lugeda"
 
@@ -2468,11 +2478,11 @@ msgstr "Faililaiend"
 msgid "File formats"
 msgstr "Faili vormingud"
 
-#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Faili nimi"
 
-#: playlist/playlist.cpp:1428
+#: playlist/playlist.cpp:1422
 msgid "File name (without path)"
 msgstr "Failinimi (ilma asukohata)"
 
@@ -2480,11 +2490,11 @@ msgstr "Failinimi (ilma asukohata)"
 msgid "File paths"
 msgstr "Failide asukohad"
 
-#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Faili suurus"
 
-#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1432
+#: library/savedgroupingmanager.cpp:84 playlist/playlist.cpp:1426
 #: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_groupbydialog.h:191
 #: ../bin/src/ui_groupbydialog.h:208 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2530,11 +2540,15 @@ msgstr "Esimene tase"
 msgid "Fit cover to width"
 msgstr "Sobita kaanepilt laiusele"
 
+#: internet/jamendo/jamendoservice.cpp:82
+msgid "Folk"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
 msgstr "Järgi süsteemi seadistusi"
 
-#: ../bin/src/ui_songinfosettingspage.h:152
+#: ../bin/src/ui_songinfosettingspage.h:124
 msgid "Font size"
 msgstr "Kirja suurus"
 
@@ -2565,7 +2579,6 @@ msgstr "Seadme unustamine eemaldab selle siit loendist, mistõttu Clementine'il 
 #: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:134
 #: ../bin/src/ui_searchpreview.h:101 ../bin/src/ui_searchtermwidget.h:271
 #: ../bin/src/ui_wizardfinishpage.h:79
-#: ../bin/src/ui_songkickconcertwidget.h:96
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 #: ../bin/src/ui_transcoderoptionsavaac.h:123
 #: ../bin/src/ui_transcoderoptionserror.h:53
@@ -2617,6 +2630,10 @@ msgstr "Täisbass + täiskõrged"
 msgid "Full Treble"
 msgstr "Täiskõrged"
 
+#: internet/jamendo/jamendoservice.cpp:83
+msgid "Funk"
+msgstr ""
+
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
 msgstr "Ža&nr"
@@ -2629,15 +2646,19 @@ msgstr "Üldine"
 msgid "General settings"
 msgstr "Üldised seadistused"
 
-#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1398
+#: library/savedgroupingmanager.cpp:78 playlist/playlist.cpp:1392
 #: widgets/filenameformatwidget.cpp:61 ../bin/src/ui_groupbydialog.h:175
 #: ../bin/src/ui_groupbydialog.h:192 ../bin/src/ui_groupbydialog.h:209
 #: ../bin/src/ui_ripcddialog.h:344
 msgid "Genre"
 msgstr "Žanr"
 
+#: internet/jamendo/jamendoservice.cpp:165
+msgid "Genres"
+msgstr ""
+
 #: internet/somafm/somafmservice.cpp:119
-#: internet/intergalacticfm/intergalacticfmservice.cpp:117
+#: internet/intergalacticfm/intergalacticfmservice.cpp:119
 #: internet/radiobrowser/radiobrowserservice.cpp:209
 #: internet/radiobrowser/radiobrowserservice.cpp:245
 #: internet/radiobrowser/radiobrowserservice.cpp:263
@@ -2719,7 +2740,7 @@ msgstr "Rühmita žanri/albumi järgi"
 msgid "Group by Genre/Artist/Album"
 msgstr "Rühmita žanri/esitaja/albumi järgi"
 
-#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1406
+#: library/savedgroupingmanager.cpp:90 playlist/playlist.cpp:1400
 #: widgets/filenameformatwidget.cpp:54 ../bin/src/ui_groupbydialog.h:183
 #: ../bin/src/ui_groupbydialog.h:200 ../bin/src/ui_groupbydialog.h:217
 msgid "Grouping"
@@ -2733,7 +2754,7 @@ msgstr "Rühmitamise nimetus"
 msgid "Grouping name:"
 msgstr "Rühmitamise nimetus:"
 
-#: internet/podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:202
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML lehel ei leidunud ühtegi RSS uudisvoogu"
 
@@ -2779,6 +2800,10 @@ msgstr "Kõrge (1024x1024)"
 #: ui/equalizer.cpp:129
 msgid "Hip Hop"
 msgstr "Hip Hop"
+
+#: internet/jamendo/jamendoservice.cpp:84
+msgid "Hip-hop"
+msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2917,7 +2942,12 @@ msgstr "Sisendvalikud"
 msgid "Insert..."
 msgstr "Lisa..."
 
-#: core/database.cpp:620
+#: networkremote/outgoingdatacreator.cpp:530
+#: songinfo/lyricsinfoprovider.cpp:55
+msgid "Instrumental"
+msgstr ""
+
+#: core/database.cpp:617
 msgid "Integrity check"
 msgstr "Tervikluse kontroll"
 
@@ -2946,29 +2976,16 @@ msgstr "Sobimatu formaat"
 msgid "Invert Selection"
 msgstr "Pööra valik teistpidi"
 
-#: internet/jamendo/jamendoservice.cpp:136
-msgid "Jamendo"
-msgstr "Jamendo"
+#: internet/jamendo/jamendoservice.cpp:243
+#, qt-format
+msgid ""
+"Jamendo request failed:\n"
+"%1"
+msgstr ""
 
-#: internet/jamendo/jamendoservice.cpp:121
-msgid "Jamendo Most Listened Tracks"
-msgstr "Jamendo kuulatumad lood"
-
-#: internet/jamendo/jamendoservice.cpp:118
-msgid "Jamendo Top Tracks"
-msgstr "Jamendo populaarsemad lood"
-
-#: internet/jamendo/jamendoservice.cpp:112
-msgid "Jamendo Top Tracks of the Month"
-msgstr "Jamendo selle kuu populaarsemad lood"
-
-#: internet/jamendo/jamendoservice.cpp:115
-msgid "Jamendo Top Tracks of the Week"
-msgstr "Jamendo selle nädala populaarsemad lood"
-
-#: internet/jamendo/jamendoservice.cpp:178
-msgid "Jamendo database"
-msgstr "Jamendo andmebaas"
+#: internet/jamendo/jamendoservice.cpp:85
+msgid "Jazz"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3039,7 +3056,7 @@ msgstr "Suur külgriba"
 msgid "Last played"
 msgstr "Viimati esitatud"
 
-#: playlist/playlist.cpp:1415 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Viimati esitatud"
@@ -3064,6 +3081,10 @@ msgstr "Last.fm sildipilv"
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
+#: internet/jamendo/jamendoservice.cpp:86
+msgid "Latin"
+msgstr ""
+
 #: library/library.cpp:106
 msgid "Least favourite tracks"
 msgstr "Vähim kuulatud lood"
@@ -3072,7 +3093,7 @@ msgstr "Vähim kuulatud lood"
 msgid "Left"
 msgstr "Vasakul"
 
-#: playlist/playlist.cpp:1387 widgets/filenameformatwidget.cpp:63
+#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:63
 #: ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Kestus"
@@ -3092,7 +3113,7 @@ msgstr "Helikogu"
 msgid "Library advanced grouping"
 msgstr "Helikogu täpsem rühmitamine"
 
-#: ui/mainwindow.cpp:2784
+#: ui/mainwindow.cpp:2785
 msgid "Library rescan notice"
 msgstr "Helikogu täisanalüüsi teade"
 
@@ -3143,6 +3164,11 @@ msgstr "Laadi esitusloend"
 #: ../bin/src/ui_mainwindow.h:760
 msgid "Load playlist..."
 msgstr "Laadi esitusloend..."
+
+#: internet/jamendo/jamendoservice.cpp:216
+#, qt-format
+msgid "Loading %1"
+msgstr ""
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3208,6 +3234,10 @@ msgstr "Logid"
 msgid "Long term prediction profile (LTP)"
 msgstr "Pikaajalisel ennustusel põhinev profiil (Long term prediction profile - LTP)"
 
+#: internet/jamendo/jamendoservice.cpp:87
+msgid "Lounge"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
 msgstr "Meeldib"
@@ -3231,18 +3261,22 @@ msgid "Low complexity profile (LC)"
 msgstr "Vähese keerukusega profiil (Low complexity profile - LC)"
 
 #: widgets/filenameformatwidget.cpp:55
-#: ../bin/src/ui_songinfosettingspage.h:155
+#: ../bin/src/ui_songinfosettingspage.h:127
 msgid "Lyrics"
 msgstr "Laulusõnad"
 
-#: songinfo/ultimatelyricsprovider.cpp:157
+#: songinfo/lyricsfetcher.cpp:129
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Laulusõnad saidilt %1"
 
-#: songinfo/taglyricsinfoprovider.cpp:30
-msgid "Lyrics from the tag"
-msgstr "Helifaili salvestatud laulusõnad"
+#: songinfo/lyricsfetcher.cpp:258
+msgid "Lyrics from LRCLIB"
+msgstr ""
+
+#: songinfo/lyricsfetcher.cpp:115
+msgid "Lyrics from the file's tags"
+msgstr ""
 
 #: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
@@ -3269,7 +3303,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatune/magnatuneservice.cpp:105
+#: internet/magnatune/magnatuneservice.cpp:108
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "Magnatune"
 msgstr "Magnatune"
@@ -3351,6 +3385,10 @@ msgstr "Keskmine (512x512)"
 msgid "Membership type"
 msgstr "Liikmelisuse tüüp"
 
+#: internet/jamendo/jamendoservice.cpp:88
+msgid "Metal"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
 msgstr "Vähim bitikiirus"
@@ -3387,7 +3425,7 @@ msgstr "Mono taasesitus"
 msgid "Months"
 msgstr "kuud"
 
-#: playlist/playlist.cpp:1443
+#: playlist/playlist.cpp:1437
 msgid "Mood"
 msgstr "Meeleolu"
 
@@ -3404,6 +3442,10 @@ msgstr "Meeleoluribad"
 msgid "Most played"
 msgstr "Enim esitatud"
 
+#: internet/jamendo/jamendoservice.cpp:157
+msgid "Most popular of all time"
+msgstr ""
+
 #: devices/giolister.cpp:182
 msgid "Mount point"
 msgstr "Haakepunkt"
@@ -3413,7 +3455,7 @@ msgid "Mount points"
 msgstr "Haakepunktid"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
-#: ../bin/src/ui_queuemanager.h:145 ../bin/src/ui_songinfosettingspage.h:158
+#: ../bin/src/ui_queuemanager.h:145
 msgid "Move down"
 msgstr "Liiguta alla"
 
@@ -3422,11 +3464,11 @@ msgid "Move to library..."
 msgstr "Tõsta helikogusse..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:142
-#: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:157
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Move up"
 msgstr "Liiguta üles"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
 msgid "Music"
 msgstr "Muusika"
 
@@ -3482,13 +3524,17 @@ msgstr "Pole iialgi esitatud"
 msgid "Never start playing"
 msgstr "Ära kunagi alusta esitust"
 
+#: internet/jamendo/jamendoservice.cpp:162
+msgid "New albums"
+msgstr ""
+
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
 msgstr "Uus kaust"
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Uus esitusloend"
 
@@ -3574,7 +3620,7 @@ msgstr "Ära kasuta lühikesi blokke"
 msgid "None"
 msgstr "Puudub"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Valitud lood ei olnud sobilikud seadmesse kopeerimiseks"
 
@@ -3687,10 +3733,10 @@ msgstr "Läbipaistmatus"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:300
-#: internet/jamendo/jamendoservice.cpp:429
-#: internet/magnatune/magnatuneservice.cpp:283
+#: internet/jamendo/jamendoservice.cpp:388
+#: internet/magnatune/magnatuneservice.cpp:286
 #: internet/somafm/somafmservice.cpp:101
-#: internet/intergalacticfm/intergalacticfmservice.cpp:99
+#: internet/intergalacticfm/intergalacticfmservice.cpp:101
 #: internet/radiobrowser/radiobrowserservice.cpp:291
 #, qt-format
 msgid "Open %1 in browser"
@@ -3738,6 +3784,10 @@ msgstr "Ava uues esitusloendis"
 #: songinfo/artistbiography.cpp:101 songinfo/artistbiography.cpp:281
 msgid "Open in your browser"
 msgstr "Ava oma brauseris"
+
+#: internet/jamendo/jamendoservice.cpp:382
+msgid "Open on Jamendo"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3801,6 +3851,12 @@ msgstr "Muu"
 msgid "Other options"
 msgstr "Muud valikud"
 
+#: ../bin/src/ui_songinfosettingspage.h:129
+msgid ""
+"Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
+"and length to lrclib.net)"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
 msgstr "Väljund"
@@ -3829,10 +3885,6 @@ msgstr "Kirjuta vaid väiksemad failid üle"
 msgid "Owner"
 msgstr "Omanik"
 
-#: internet/jamendo/jamendoservice.cpp:225
-msgid "Parsing Jamendo catalogue"
-msgstr "Sirvin Jamendo kataloogi"
-
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr "Partitsiooni silt"
@@ -3849,8 +3901,8 @@ msgstr "Pidu"
 msgid "Password"
 msgstr "Salasõna"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1177 ui/mainwindow.cpp:1754
-#: ui/qtsystemtrayicon.cpp:234 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Paus"
 
@@ -3862,7 +3914,7 @@ msgstr "Peata esitus"
 msgid "Paused"
 msgstr "Peatatud"
 
-#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1404
+#: library/savedgroupingmanager.cpp:87 playlist/playlist.cpp:1398
 #: widgets/filenameformatwidget.cpp:53 ../bin/src/ui_groupbydialog.h:182
 #: ../bin/src/ui_groupbydialog.h:199 ../bin/src/ui_groupbydialog.h:216
 #: ../bin/src/ui_edittagdialog.h:727
@@ -3885,14 +3937,14 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Täielik külgriba"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1141
-#: ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:222
-#: ui/qtsystemtrayicon.cpp:246 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
+#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Esita"
 
-#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Esitamisi"
 
@@ -3909,11 +3961,11 @@ msgstr "Esita, kui on peatatud, pane pausile, kui esitamisel"
 msgid "Play if there is nothing already playing"
 msgstr "Esita, kui hetkel juba pole midagi esitamisel"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
 msgid "Play next"
 msgstr "Esita järgmisena"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1869
 msgid "Play selected tracks next"
 msgstr "Esita valitud lood järgmisena"
 
@@ -3994,9 +4046,21 @@ msgstr "Teave taskuhäälingu kohta"
 msgid "Podcasts"
 msgstr "Taskuhäälingud"
 
-#: ui/equalizer.cpp:142
+#: internet/jamendo/jamendoservice.cpp:89 ui/equalizer.cpp:142
 msgid "Pop"
 msgstr "Pop"
+
+#: internet/jamendo/jamendoservice.cpp:160
+msgid "Popular albums"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:155
+msgid "Popular this month"
+msgstr ""
+
+#: internet/jamendo/jamendoservice.cpp:153
+msgid "Popular this week"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
@@ -4066,7 +4130,7 @@ msgstr "Meediamängijas „Eelmise loo“ nupu vajutamisel..."
 msgid "Pretty OSD options"
 msgstr "Ilusa ekraanimenüü seadistused"
 
-#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:154
+#: ../bin/src/ui_searchpreview.h:102 ../bin/src/ui_songinfosettingspage.h:126
 #: ../bin/src/ui_notificationssettingspage.h:453
 #: ../bin/src/ui_organisedialog.h:186
 msgid "Preview"
@@ -4101,6 +4165,10 @@ msgstr "Edenemine"
 #: ui/equalizer.cpp:145
 msgid "Psychedelic"
 msgstr "Psühhedeelne"
+
+#: internet/jamendo/jamendoservice.cpp:90
+msgid "Punk"
+msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4145,12 +4213,12 @@ msgstr "Vaatame, mida seadmes leidub..."
 msgid "Queue Manager"
 msgstr "Järjekorrahaldur"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1864
 msgid "Queue selected tracks"
 msgstr "Lisa valitud lood järjekorda"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1862
 msgid "Queue track"
 msgstr "Lisa järjekorda"
 
@@ -4211,11 +4279,11 @@ msgstr "Hinda seda lugu 4 tärniga"
 msgid "Rate the current song 5 stars"
 msgstr "Hinda seda lugu 5 tärniga"
 
-#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1403 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Hinnang"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:314
+#: internet/magnatune/magnatunedownloaddialog.cpp:315
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "Kas tõesti tühistan?"
@@ -4228,14 +4296,17 @@ msgstr "Hiljuti esitatud albumid"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Liiga palju ümbersuunamisi, kontrolli serveri seadistusi."
 
-#: internet/jamendo/jamendoservice.cpp:432
-#: internet/magnatune/magnatuneservice.cpp:286
+#: internet/jamendo/jamendoservice.cpp:384
+msgid "Refresh"
+msgstr ""
+
+#: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Värskenda kataloogi"
 
 #: internet/somafm/somafmservice.cpp:110
-#: internet/intergalacticfm/intergalacticfmservice.cpp:108
+#: internet/intergalacticfm/intergalacticfmservice.cpp:110
 #: internet/radiobrowser/radiobrowserservice.cpp:295
 msgid "Refresh channels"
 msgstr "Värskenda kanaleid"
@@ -4248,7 +4319,7 @@ msgstr "Värskenda jaamade loendit"
 msgid "Refresh streams"
 msgstr "Värskenda voogedastusi"
 
-#: ui/equalizer.cpp:147
+#: internet/jamendo/jamendoservice.cpp:91 ui/equalizer.cpp:147
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4419,7 +4490,7 @@ msgstr "Ripi CD"
 msgid "Rip audio CD"
 msgstr "Ripi audio-CD"
 
-#: ui/equalizer.cpp:149
+#: internet/jamendo/jamendoservice.cpp:92 ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rokk"
 
@@ -4457,7 +4528,7 @@ msgstr "Lahuta seade turvaliselt"
 msgid "Safely remove the device after copying"
 msgstr "Peale kopeerimist lahuta seade turvaliselt"
 
-#: playlist/playlist.cpp:1424 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:398
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Sample rate"
@@ -4541,7 +4612,7 @@ msgstr "Skaleeritava diskreetimissageduse profiil (Scalable sampling rate profil
 msgid "Scale size"
 msgstr "Skaleeri suurust"
 
-#: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Skoor"
 
@@ -4572,11 +4643,11 @@ msgstr "Otsing"
 msgid "Search Icecast stations"
 msgstr "Otsi Icecast'i veebiraadiojaamu"
 
-#: internet/jamendo/jamendoservice.cpp:439
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Search Jamendo"
 msgstr "Otsi Jamendo'st"
 
-#: internet/magnatune/magnatuneservice.cpp:295
+#: internet/magnatune/magnatuneservice.cpp:298
 msgid "Search Magnatune"
 msgstr "Otsi Magnatune'st"
 
@@ -4628,6 +4699,11 @@ msgstr "Otsingurežiim"
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Search options"
 msgstr "Otsingu valikud"
+
+#: internet/jamendo/jamendoservice.cpp:366
+#, qt-format
+msgid "Search results for \"%1\""
+msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4725,7 +4801,7 @@ msgstr "Serveri võrguaadress"
 msgid "Server details"
 msgstr "Üksikasjalik teave serveri kohta"
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1909
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Seadista %1 väärtuseks „%2“..."
@@ -4945,7 +5021,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Samm lugude nimekirjas tagasi"
 
-#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Vahelejätmiskordi"
 
@@ -4957,7 +5033,7 @@ msgstr "Jäta nende laienditega failid vahele (tõstutundetu komadega eraldatud 
 msgid "Skip forwards in playlist"
 msgstr "Samm lugude nimekirjas edasi"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1880
 msgid "Skip selected tracks"
 msgstr "Jäta valituid lood vahele"
 
@@ -4965,7 +5041,7 @@ msgstr "Jäta valituid lood vahele"
 msgid "Skip to the next album"
 msgstr "Hüppa järgmise albumi juurde"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1878
 msgid "Skip track"
 msgstr "Jäta lugu vahele"
 
@@ -4993,7 +5069,7 @@ msgstr "Mahe"
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
-#: ../bin/src/ui_songinfosettingspage.h:150
+#: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
 msgstr "Loo andmed"
 
@@ -5033,7 +5109,11 @@ msgstr "Lugude sorteerimise alus"
 msgid "Sorting"
 msgstr "Sorteerimine"
 
-#: playlist/playlist.cpp:1441
+#: internet/jamendo/jamendoservice.cpp:93
+msgid "Soundtrack"
+msgstr ""
+
+#: playlist/playlist.cpp:1435
 msgid "Source"
 msgstr "Andmeallikas"
 
@@ -5242,6 +5322,10 @@ msgstr "Vormingut uuendatakse alles siis kui kodeerimise konveier alustab tööd
 msgid "The second value must be greater than the first one!"
 msgstr "Teine väärtus peab olema suurem kui esimene!"
 
+#: internet/intergalacticfm/intergalacticfmservice.cpp:140
+msgid "The server didn't list any channels"
+msgstr ""
+
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
 msgstr "Sisselogimispäring aegus. Palun logi uuesti sisse."
@@ -5260,7 +5344,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Sunsonicu serveri kasutamise prooviperiood on läbi. Litsentsivõtme saamiseks palun tee annetus. Täpsem teave leidub subsonic.org veebisaidis."
 
-#: ui/mainwindow.cpp:2775
+#: ui/mainwindow.cpp:2776
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5280,11 +5364,11 @@ msgstr "Selles albumis on veel lugusid"
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Suhtlemisel gpodder.net'iga tekkis viga"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:171
+#: internet/magnatune/magnatunedownloaddialog.cpp:172
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Metaandmete laadimisel Magnatune'st tekkis viga"
 
-#: internet/podcasts/itunessearchpage.cpp:85
+#: internet/podcasts/itunessearchpage.cpp:84
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "iTunes Store'i vastuse töötlemisel tekkis viga"
 
@@ -5306,7 +5390,7 @@ msgid ""
 "continue?"
 msgstr "Need failid kustutatakse seadmest. Kas sa kindlasti soovid jätkata?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2522 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5330,13 +5414,7 @@ msgstr "Kolmas tase"
 msgid "Third level"
 msgstr "Kolmas tase"
 
-#: internet/jamendo/jamendoservice.cpp:179
-msgid ""
-"This action will create a database which could be as big as 150 MB.\n"
-"Do you want to continue anyway?"
-msgstr "See toiming loob andmebaasi, mis võib kasvada kuni 150 MB suuruseks. \nKas kindlasti soovid jätkata?"
-
-#: internet/magnatune/magnatunedownloaddialog.cpp:199
+#: internet/magnatune/magnatunedownloaddialog.cpp:200
 msgid "This album is not available in the requested format"
 msgstr "Album ei ole saadaval soovitud vormingus"
 
@@ -5390,7 +5468,7 @@ msgstr "Seda tüüpi seade ei ole toetatud: %1"
 msgid "Time step"
 msgstr "Ajasamm"
 
-#: playlist/playlist.cpp:1381 widgets/filenameformatwidget.cpp:47
+#: playlist/playlist.cpp:1375 widgets/filenameformatwidget.cpp:47
 #: ../bin/src/ui_about.h:140 ../bin/src/ui_edittagdialog.h:719
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:335
 msgid "Title"
@@ -5408,7 +5486,7 @@ msgstr "Lülita ilus ekraanimenüü sisse või välja"
 msgid "Toggle fullscreen"
 msgstr "Lülita täisekraan sisse või välja"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1866
 msgid "Toggle queue status"
 msgstr "Vaheta staatus esitusjärjekorras"
 
@@ -5424,7 +5502,7 @@ msgstr "Lülita ekraanimenüü nähtavust sisse või välja"
 msgid "Tomorrow"
 msgstr "Homme"
 
-#: internet/podcasts/podcasturlloader.cpp:118
+#: internet/podcasts/podcasturlloader.cpp:112
 msgid "Too many redirects"
 msgstr "Liiga palju ümbersuunamisi"
 
@@ -5448,7 +5526,7 @@ msgstr "Võrgupäringuid kokku"
 msgid "Trac&k"
 msgstr "Pala"
 
-#: playlist/playlist.cpp:1389 widgets/filenameformatwidget.cpp:56
+#: playlist/playlist.cpp:1383 widgets/filenameformatwidget.cpp:56
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:333
 msgid "Track"
 msgstr "Lugu"
@@ -5532,7 +5610,7 @@ msgstr "Ultralairibaühendus (Ultra wide band - UWB)"
 msgid "Unable to connect"
 msgstr "Ühendamine ei õnnestu"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:156
+#: internet/magnatune/magnatunedownloaddialog.cpp:157
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "Ei õnnestu alla laadida %1 (%2)"
@@ -5546,11 +5624,11 @@ msgstr "Ei õnnestu alla laadida %1 (%2)"
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: internet/podcasts/podcasturlloader.cpp:210
+#: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Tundmatu sisutüüp"
 
-#: internet/digitally/digitallyimportedclient.cpp:75
+#: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
 msgstr "Tundmatu viga"
 
@@ -5564,11 +5642,11 @@ msgstr "Tundmatu failitüüp: %1"
 msgid "Unset cover"
 msgstr "Määramata kaanepilt"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1876
 msgid "Unskip selected tracks"
 msgstr "Tühista valitud lugude vahelejätmine"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1874
 msgid "Unskip track"
 msgstr "Tühista loo vahelejätmine"
 
@@ -5576,10 +5654,6 @@ msgstr "Tühista loo vahelejätmine"
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
 msgstr "Tühista tellimus"
-
-#: songinfo/songkickconcerts.cpp:195
-msgid "Upcoming Concerts"
-msgstr "Tulevased kontserdid"
 
 #: internet/podcasts/podcastservice.cpp:436
 msgid "Update all podcasts"
@@ -5902,13 +5976,17 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Ilma kaanepildita:"
 
+#: internet/jamendo/jamendoservice.cpp:94
+msgid "World"
+msgstr ""
+
 #: library/libraryview.cpp:586
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Kas sa soovid ka muud selle albumi lood liigitada erinevate esitajate alla"
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2783
 msgid "Would you like to run a full rescan right now?"
 msgstr "Kas sa soovid teha uut helikogu täisanalüüsi?"
 
@@ -5924,7 +6002,7 @@ msgstr "Kirjuta metateavet"
 msgid "Wrong username or password."
 msgstr "Vale kasutajanimi või salasõna."
 
-#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1393
+#: library/savedgroupingmanager.cpp:72 playlist/playlist.cpp:1387
 #: widgets/filenameformatwidget.cpp:59 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_groupbydialog.h:193 ../bin/src/ui_groupbydialog.h:210
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:340
@@ -5936,7 +6014,7 @@ msgstr "Aasta"
 msgid "Year - Album"
 msgstr "Aasta - Album"
 
-#: playlist/playlist.cpp:1395
+#: playlist/playlist.cpp:1389
 msgid "Year - original"
 msgstr "Algne aasta"
 
@@ -6006,7 +6084,7 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Sa võid kasutada oma Wii pulti Clementine kaugjuhtimispuldina. Täpsema teabe leiad <a href=\"http://www.clementine-player.org/wiimote\">sellelt Clementine wiki lehelt</a>.\n"
 
-#: internet/digitally/digitallyimportedclient.cpp:96
+#: internet/digitally/digitallyimportedclient.cpp:99
 msgid "You do not have an active subscription"
 msgstr "Sul ei ole kehtivat tellimust"
 
@@ -6025,7 +6103,11 @@ msgstr "Selleks et globaalsed kiirklahvid toimiks Clementine's pead sa avama sü
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Keele vahetamiseks pead sa taaskäivitama Clementine."
 
-#: internet/magnatune/magnatunesettingspage.cpp:118
+#: internet/dropbox/dropboxservice.cpp:228
+msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
+msgstr ""
+
+#: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Sinu Magnatune kasutajaandmed polnud korrektsed"
 
