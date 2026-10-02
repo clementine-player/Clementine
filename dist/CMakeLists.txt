@@ -2,6 +2,20 @@ execute_process(COMMAND env LC_ALL="en_US.utf8" date "+%a %b %d %Y" OUTPUT_VARIA
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/clementine.spec.in
                ${CMAKE_CURRENT_SOURCE_DIR}/clementine.spec @ONLY)
+if(APPLE)
+  # The bundle ships Homebrew's libraries, and Homebrew builds its bottles for
+  # the macOS they're installed on, so the app needs at least the build
+  # machine's macOS. Sparkle reads this too, and won't offer the update to an
+  # older one.
+  if(CMAKE_OSX_DEPLOYMENT_TARGET)
+    set(MACOS_MINIMUM_VERSION "${CMAKE_OSX_DEPLOYMENT_TARGET}")
+  else()
+    execute_process(COMMAND sw_vers -productVersion
+      OUTPUT_VARIABLE MACOS_BUILD_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+    string(REGEX MATCH "^[0-9]+" MACOS_BUILD_MAJOR "${MACOS_BUILD_VERSION}")
+    set(MACOS_MINIMUM_VERSION "${MACOS_BUILD_MAJOR}.0")
+  endif()
+endif()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in
                ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/maketarball.sh.in

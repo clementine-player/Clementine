@@ -277,7 +277,15 @@ def GetBrokenLibraries(binary):
   return broken_libs
 
 
-def FindFramework(path):
+def FindFramework(path, referencing_binary=None):
+  # Sparkle comes from wherever fetch-sparkle (tools/mac-update) put it, which
+  # only the binary linking it knows, through the rpath CMake gave it.
+  if path.startswith('@rpath/') and referencing_binary:
+    resolved = ResolveRPath(path, referencing_binary)
+    if resolved:
+      LOGGER.debug("Found framework '%s' via rpath of '%s'", path,
+                   referencing_binary)
+      return resolved
   for prefix in STRIP_PREFIX:
     if path.startswith(prefix):
       path = path[len(prefix):]
@@ -289,6 +297,11 @@ def FindFramework(path):
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
+
+
+def GetId(binary):
+  output = subprocess.check_output([OTOOL, '-D', binary]).decode('utf-8')
+  return output.strip().split('\n')[-1]
 
 
 def GetRPaths(binary):
@@ -394,13 +407,13 @@ def FindLibrary(path, referencing_binary=None):
 
 def FixAllLibraries(broken_libs, referencing_binary=None):
   for framework in broken_libs['frameworks']:
-    FixFramework(framework)
+    FixFramework(framework, referencing_binary)
   for lib in broken_libs['libs']:
     FixLibrary(lib, referencing_binary)
 
 
-def FixFramework(path):
-  abs_path = FindFramework(path)
+def FixFramework(path, referencing_binary=None):
+  abs_path = FindFramework(path, referencing_binary)
   # Homebrew paths often reach the same real framework through different
   # symlinked prefixes (e.g. .../opt/qt@5/... vs .../Cellar/qt@5/5.x/...),
   # so dedupe by real path rather than the literal string - otherwise the
@@ -416,8 +429,12 @@ def FixFramework(path):
   FixAllLibraries(broken_libs, abs_path)
 
   new_path = CopyFramework(abs_path)
-  id = os.sep.join(new_path.split(os.sep)[3:])
-  FixFrameworkId(new_path, id)
+  # An @rpath id, like Sparkle's, already works from the bundle (the app's
+  # rpath is its Frameworks dir), and its headers may have no room for a
+  # longer one.
+  if not GetId(abs_path).startswith('@rpath/'):
+    id = os.sep.join(new_path.split(os.sep)[3:])
+    FixFrameworkId(new_path, id)
   for framework in broken_libs['frameworks']:
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
@@ -512,7 +529,7 @@ def CopyFramework(src_binary):
 
   # Copy special files from various places:
   #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
-  #   Sparkle has Resources/*
+  #   Sparkle has Resources/* (and helpers, below)
   #   Qt* have Resources/Info.plist
   #
   # Deliberately os.path.join(src_base, 'Versions', version, 'Resources')
@@ -531,6 +548,20 @@ def CopyFramework(src_binary):
   elif os.path.exists(resources_src):
     LOGGER.info("Copying resources dir '%s'", resources_src)
     commands.append(['cp', '-r', resources_src, dest_dir])
+
+  # Sparkle 2 installs updates from helpers of its own, next to its binary:
+  # Autoupdate and Updater.app. It finds them at the framework's top level,
+  # through links like the binary's below. Its XPCServices are left out:
+  # they're only for sandboxed apps, and Clementine isn't one.
+  for helper in ('Autoupdate', 'Updater.app'):
+    helper_src = os.path.join(src_base, 'Versions', version, helper)
+    if os.path.exists(helper_src):
+      LOGGER.info("Copying framework helper '%s'", helper_src)
+      commands.append(['cp', '-R', helper_src, dest_dir])
+      commands.append([
+          'ln', '-sf', 'Versions/Current/%s' % helper,
+          os.path.join(dest_base, helper)
+      ])
 
   info_plist = os.path.join(src_base, 'Contents', 'Info.plist')
   if os.path.exists(info_plist):

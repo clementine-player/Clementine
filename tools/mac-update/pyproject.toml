@@ -1,0 +1,51 @@
+[project]
+name = "clementine-mac-update"
+version = "0.1.0"
+description = "Downloads Sparkle for the macOS build, and publishes its updates to the Sparkle feed"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+dependencies = [
+    "cryptography>=43",
+    # Application Default Credentials, which google-github-actions/auth sets up.
+    "google-cloud-datastore>=2.20",
+]
+
+[project.scripts]
+clementine-mac-update = "clementine_mac_update.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    # Pinned, so CI and local runs agree on what counts as an error.
+    "ruff==0.16.9",
+    "ty==0.0.84",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F",  # pycodestyle, pyflakes
+    "I",            # import order
+    "UP",           # modern syntax
+    "B",            # likely bugs
+    "SIM",          # simplifications
+    "ANN",          # every function fully annotated
+    "DTZ",          # naive datetimes
+    "PYI",          # typing conventions
+    "PLC0415",      # imports at the top of the file, not inside functions
+    "RUF",
+]
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = false
+
+[tool.ty.terminal]
+error-on-warning = true

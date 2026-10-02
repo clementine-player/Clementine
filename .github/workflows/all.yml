@@ -87,6 +87,26 @@ jobs:
         # Checks the signatures with gpgv, which the runner has.
         run: uv run pytest -v
 
+  python_mac_update:
+    name: Python (macOS updates)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/mac-update
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # Reading a DMG needs macOS (hdiutil), so that part is left out.
+        run: uv run pytest -v
+
 
   test:
     name: Test
@@ -2142,6 +2162,13 @@ jobs:
           git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
+      # For updates: a pinned release, checked against its checksum.
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Download Sparkle
+        run: >
+          uv run --project tools/mac-update
+          clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
+
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -2159,6 +2186,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release \
             -DENABLE_LIBGPOD=OFF \
             -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
+            -DCMAKE_FRAMEWORK_PATH="$RUNNER_TEMP/sparkle" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
@@ -2385,6 +2413,7 @@ jobs:
     needs:
       - lint
       - python_apt
+      - python_mac_update
       - test
       - build_source
       - build_bookworm_64
