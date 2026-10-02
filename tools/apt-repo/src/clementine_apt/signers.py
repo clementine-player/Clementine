@@ -5,10 +5,12 @@ from __future__ import annotations
 import base64
 from typing import Protocol
 
+import google.auth
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 from cryptography.hazmat.primitives.asymmetric.utils import Prehashed
+from google.auth.transport.requests import AuthorizedSession
 
 KMS_API = "https://cloudkms.googleapis.com/v1"
 # PKCS#1 v1.5 over SHA-256 is what OpenPGP's RSA signatures are.
@@ -53,10 +55,6 @@ class KmsSigner:
     digest. Authenticates with Application Default Credentials."""
 
     def __init__(self, key_version: str) -> None:
-        # Imported here so the rest works without Google's libraries set up.
-        import google.auth
-        from google.auth.transport.requests import AuthorizedSession
-
         credentials, _ = google.auth.default(
             scopes=["https://www.googleapis.com/auth/cloudkms"]
         )

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import gzip
 import io
 import lzma
 import shutil
@@ -61,8 +62,6 @@ def make_deb(tmp_path: Path) -> MakeDeb:
         elif compression == "zst":
             compressed = zstandard.ZstdCompressor().compress(control_tar)
         else:
-            import gzip
-
             compressed = gzip.compress(control_tar)
         data = _ar(
             [

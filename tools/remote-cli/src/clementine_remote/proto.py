@@ -13,6 +13,8 @@ import hashlib
 import os
 from pathlib import Path
 
+from grpc_tools import protoc
+
 PROTO_NAME = "remotecontrolmessages.proto"
 GENERATED = Path(__file__).parent / "_generated"
 # Records which .proto the generated files came from.
@@ -41,8 +43,6 @@ def generate() -> None:
     digest = hashlib.sha256(proto.read_bytes()).hexdigest()
     if STAMP.exists() and STAMP.read_text().strip() == digest:
         return
-
-    from grpc_tools import protoc
 
     GENERATED.mkdir(exist_ok=True)
     result = protoc.main(
