@@ -25,6 +25,9 @@
 ArtistInfoView::ArtistInfoView(QWidget* parent) : SongInfoBase(parent) {
   fetcher_->AddProvider(new ArtistImages);
   fetcher_->AddProvider(new ArtistBiography);
+  SetPlaceholderText(
+      tr("Play a song to see pictures of its artist and their biography "
+         "here."));
 }
 
 ArtistInfoView::~ArtistInfoView() {}
