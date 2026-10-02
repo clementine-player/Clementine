@@ -156,12 +156,17 @@ endif(GIT_PARTS_LENGTH EQUAL 3)
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${GIT_REV}")
   set(CLEMENTINE_VERSION_DEB     "${GIT_REV}")
-  # A snapshot after the tag: rpm sorts 1.4.1^256.gdb9f503df after 1.4.1
-  # whatever its release, and before 1.4.2. With the commits in the release
-  # instead (1.4.1-2.256...), Fedora's own 1.4.1-10 sorted above every build
-  # and dnf chose it over COPR's.
-  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}^${GIT_COMMITCOUNT}.${GIT_SHA1}")
-  set(CLEMENTINE_VERSION_RPM_R   "1")
+  # The commits since the tag go in the release, where rpm compares them
+  # against Fedora's own release of the same tag: 1.4.1-282.gae9d5d8cd beats
+  # their 1.4.1-10, so dnf keeps choosing ours. They once had a "2." in front
+  # of them, and 2.256... lost to 10 on that first part alone, which is the
+  # whole reason this ever looked like it belonged in the version.
+  #
+  # They must stay out of the version, which rpm builds in a directory named
+  # after it: a directory that changes with every commit lands in the debug
+  # info, which ccache folds into its hash, and CI's cache never hits.
+  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}")
+  set(CLEMENTINE_VERSION_RPM_R   "${GIT_COMMITCOUNT}.${GIT_SHA1}")
   set(CLEMENTINE_VERSION_SPARKLE "${GIT_REV}")
   set(CLEMENTINE_VERSION_PLIST   "4096.${GIT_TAGNAME}.2.${GIT_COMMITCOUNT}")
 endif(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
