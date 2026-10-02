@@ -43,6 +43,7 @@ select = [
     "ASYNC",        # asyncio mistakes
     "DTZ",          # naive datetimes
     "PYI",          # typing conventions
+    "PLC0415",      # imports at the top of the file, not inside functions
     "RUF",
 ]
 
