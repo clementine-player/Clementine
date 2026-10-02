@@ -179,7 +179,7 @@ struct Song::Private : public QSharedData {
 
   // A unique album ID
   // Used to distinguish between albums from providers that have multiple
-  // versions of a given album with the same title (e.g. Spotify).
+  // versions of a given album with the same title.
   // This is never persisted, it is only stored temporarily for global search
   // results.
   int album_id_;

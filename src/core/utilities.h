@@ -135,7 +135,6 @@ enum ConfigPath {
   Path_NetworkCache,
   Path_GstreamerRegistry,
   Path_DefaultMusicLibrary,
-  Path_LocalSpotifyBlob,
   Path_MoodbarCache,
   Path_PixmapCache,
   Path_CacheRoot,

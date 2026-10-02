@@ -334,6 +334,7 @@ set(SOURCES
   smartplaylists/wizardplugin.cpp
 
   songinfo/artistbiography.cpp
+  songinfo/artistimages.cpp
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
@@ -347,7 +348,6 @@ set(SOURCES
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
-  songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
   songinfo/syncedlyricsview.cpp
 
@@ -658,6 +658,7 @@ set(HEADERS
   smartplaylists/wizardplugin.h
 
   songinfo/artistbiography.h
+  songinfo/artistimages.h
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
@@ -670,7 +671,6 @@ set(HEADERS
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
-  songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
   songinfo/syncedlyricsview.h
 

@@ -97,11 +97,6 @@ QString About::MakeHtml() const {
       "<br /><a href=\"http://hyperboleandahalf.blogspot.com\">Allie "
       "Brosh</a></p>");
 
-  ret +=
-      "<p>This product uses Music by Spotify but is not endorsed, certified "
-      "or otherwise approved in any way by Spotify. Spotify is the registered "
-      "trade mark of the Spotify Group.</p>";
-
   return ret;
 }
 

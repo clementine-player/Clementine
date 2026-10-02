@@ -194,7 +194,7 @@ jobs:
         run: ccache --zero-stats
       - name: cmake
         working-directory: bin
-        run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
+        run: cmake ..
       - name: Build tests
         working-directory: bin
         # build_tests builds every test binary without running any of them;
@@ -1329,7 +1329,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=bookworm
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1499,7 +1498,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=trixie
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1666,7 +1664,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=jammy
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1833,7 +1830,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=noble
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2000,7 +1996,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=resolute
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
