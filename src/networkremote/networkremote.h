@@ -38,12 +38,15 @@ class NetworkRemote : public QObject {
   // Whether a client at |address| counts as on the local network.
   static bool IpIsPrivate(const QHostAddress& address);
 
+  // How the address a client connected to is being listened on.
+  enum class Listening { OnAllAddresses, OnChosenAddress };
+
   // Whether a client at |peer| that connected to |local| counts as on the
   // local network. Besides the private ranges, when |local| is a listen
   // address the user chose and it's in a shared non-public range, such as
   // Tailscale's 100.64.0.0/10, clients from that same range count too.
   static bool IsLocalClient(const QHostAddress& peer, const QHostAddress& local,
-                            bool local_was_chosen);
+                            Listening listening);
 
   // Whether any client counting as local could connect through a chosen
   // listen |address|. When not, only allowing local clients refuses everyone
