@@ -1031,14 +1031,7 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin,
                                               gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  if (instance->has_next_valid_url() &&
-      // I'm not sure why, but calling this when previous track is a local song
-      // and the next track is a Spotify song is buggy: the Spotify song will
-      // not start or with some offset. So just do nothing here: when the song
-      // finished, EndOfStreamReached/TrackEnded will be emitted anyway so
-      // NextItem will be called.
-      !(instance->current_.url_.scheme() != "spotify" &&
-        instance->next_.url_.scheme() == "spotify")) {
+  if (instance->has_next_valid_url()) {
     instance->TransitionToNext();
   }
 }

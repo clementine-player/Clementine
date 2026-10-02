@@ -46,10 +46,6 @@
 #include "internet/seafile/seafilesettingspage.h"
 #endif
 
-#ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifysettingspage.h"
-#endif
-
 InternetSettingsCategory::InternetSettingsCategory(SettingsDialog* dialog)
     : SettingsCategory(SettingsDialog::Page_InternetShow,
                        new InternetShowSettingsPage(dialog), dialog) {
@@ -74,10 +70,6 @@ void InternetSettingsCategory::AddChildren() {
 
 #ifdef HAVE_SKYDRIVE
   AddPage(SettingsDialog::Page_Skydrive, new SkydriveSettingsPage(dialog_));
-#endif
-
-#ifdef HAVE_SPOTIFY
-  AddPage(SettingsDialog::Page_Spotify, new SpotifySettingsPage(dialog_));
 #endif
 
 #ifdef HAVE_SEAFILE

@@ -461,9 +461,7 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url,
   if (handler) {
     icon = handler->icon();
   } else {
-    if (url.scheme() == "spotify") {
-      icon = IconLoader::Load("spotify", IconLoader::Provider);
-    } else if (url.scheme() == "file") {
+    if (url.scheme() == "file") {
       icon = IconLoader::Load("folder-sound", IconLoader::Base);
     } else if (url.host() == "api.soundcloud.com") {
       icon = IconLoader::Load("soundcloud", IconLoader::Provider);

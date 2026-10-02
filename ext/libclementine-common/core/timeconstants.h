@@ -16,10 +16,6 @@
    limitations under the License.
 */
 
-// Note: this file is licensed under the Apache License instead of GPL because
-// it is used by the Spotify blob which links against libspotify and is not GPL
-// compatible.
-
 #ifndef CORE_TIMECONSTANTS_H_
 #define CORE_TIMECONSTANTS_H_
 

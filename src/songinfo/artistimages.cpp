@@ -1,4 +1,4 @@
-#include "spotifyimages.h"
+#include "artistimages.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -13,22 +13,23 @@
 #include "core/network.h"
 
 namespace {
-static const char* kSpotifyImagesUrl =
+// Clementine's own service, which looks the artist up elsewhere.
+static const char* kArtistImagesUrl =
     "https://data.clementine-player.org/fetchimages";
 }  // namespace
 
-SpotifyImages::SpotifyImages() : network_(new NetworkAccessManager) {}
+ArtistImages::ArtistImages() : network_(new NetworkAccessManager) {}
 
-SpotifyImages::~SpotifyImages() {}
+ArtistImages::~ArtistImages() {}
 
-void SpotifyImages::FetchInfo(int id, const Song& metadata) {
+void ArtistImages::FetchInfo(int id, const Song& metadata) {
   if (metadata.artist().isEmpty()) {
     emit Finished(id);
     return;
   }
 
   // Fetch artist id.
-  QUrl url(kSpotifyImagesUrl);
+  QUrl url(kArtistImagesUrl);
   QUrlQuery url_query;
   url_query.addQueryItem("artist", metadata.artist());
   url.setQuery(url_query);

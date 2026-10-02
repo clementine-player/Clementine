@@ -47,8 +47,8 @@ class PlaylistBackend : public QObject {
     QString dynamic_backend;
     QByteArray dynamic_data;
 
-    // Special playlists have different behaviour, eg. the "spotify-search"
-    // type has a spotify search box at the top, replacing the ordinary filter.
+    // Special playlists can have different behaviour, eg. their own search box
+    // at the top in place of the ordinary filter.
     QString special_type;
   };
   typedef QList<Playlist> PlaylistList;
