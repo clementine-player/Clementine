@@ -45,6 +45,9 @@ class NetworkRemoteSettingsPage : public SettingsPage {
   // the ones in |chosen|. Chosen addresses that aren't currently present -
   // a VPN that's down, say - are kept, so saving doesn't quietly drop them.
   void PopulateListenAddresses(const QStringList& chosen);
+  // Warns about chosen listen addresses that only allowing local clients
+  // leaves nobody able to connect through.
+  void UpdateListenWarning();
 
   static const char* kPlayStoreUrl;
   static const char* kPlayStoreUrl2;
