@@ -62,6 +62,14 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
           ui_->listen_addresses,
           [this](bool all) { ui_->listen_addresses->setEnabled(!all); });
 
+  ui_->listen_warning->hide();
+  connect(ui_->only_non_public_ip, &QCheckBox::toggled, this,
+          &NetworkRemoteSettingsPage::UpdateListenWarning);
+  connect(ui_->listen_on_all_addresses, &QCheckBox::toggled, this,
+          &NetworkRemoteSettingsPage::UpdateListenWarning);
+  connect(ui_->listen_addresses, &QListWidget::itemChanged, this,
+          &NetworkRemoteSettingsPage::UpdateListenWarning);
+
   ui_->play_store->installEventFilter(this);
   ui_->play_store_2->installEventFilter(this);
   ui_->apple_store->installEventFilter(this);
@@ -115,6 +123,7 @@ void NetworkRemoteSettingsPage::Load() {
       s.value("listen_on_all_addresses", true).toBool());
   ui_->listen_addresses->setEnabled(!ui_->listen_on_all_addresses->isChecked());
   PopulateListenAddresses(s.value("listen_addresses").toStringList());
+  UpdateListenWarning();
 
   // Auth Code, 5 digits
   ui_->use_auth_code->setChecked(s.value("use_auth_code", false).toBool());
@@ -206,6 +215,27 @@ void NetworkRemoteSettingsPage::PopulateListenAddresses(
     item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
     item->setCheckState(Qt::Checked);
   }
+}
+
+void NetworkRemoteSettingsPage::UpdateListenWarning() {
+  QStringList unreachable;
+  if (ui_->only_non_public_ip->isChecked() &&
+      !ui_->listen_on_all_addresses->isChecked()) {
+    for (int i = 0; i < ui_->listen_addresses->count(); ++i) {
+      const QListWidgetItem* item = ui_->listen_addresses->item(i);
+      const QString text = item->data(Qt::UserRole).toString();
+      if (item->checkState() == Qt::Checked &&
+          !NetworkRemote::LocalClientsCanReach(QHostAddress(text))) {
+        unreachable << text;
+      }
+    }
+  }
+
+  ui_->listen_warning->setText(
+      tr("Only connections from the local network are allowed, so nothing "
+         "can connect through: %1")
+          .arg(unreachable.join(", ")));
+  ui_->listen_warning->setVisible(!unreachable.isEmpty());
 }
 
 void NetworkRemoteSettingsPage::Save() {

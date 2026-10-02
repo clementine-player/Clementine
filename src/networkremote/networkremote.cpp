@@ -47,6 +47,19 @@ namespace {
 // How long a new connection may stay silent before it's dropped.
 const int kFirstByteTimeoutMsec = 10000;
 const char* kSniffedProperty = "clementine_sniffed";
+
+// Non-public ranges that aren't a local network by themselves. Tailscale
+// gives its devices addresses from carrier-grade NAT space, so a listen
+// address chosen there makes the rest of it local. Only a chosen one: when
+// listening on everything, 100.x clients stay public, as before.
+const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
+
+bool InSharedSubnet(const QHostAddress& address) {
+  for (const char* subnet : kSharedSubnets) {
+    if (address.isInSubnet(QHostAddress::parseSubnet(subnet))) return true;
+  }
+  return false;
+}
 }  // namespace
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
@@ -360,9 +373,14 @@ void NetworkRemote::AcceptConnection() {
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
   QTcpSocket* client_socket = server->nextPendingConnection();
   // Check if our ip is in private scope
-  if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
-    qLog(Info) << "Got a connection from public ip"
-               << client_socket->peerAddress().toString();
+  if (only_non_public_ip_ && !IsLocalClient(client_socket->peerAddress(),
+                                            client_socket->localAddress(),
+                                            !listen_on_all_addresses_)) {
+    qLog(Warning) << "Refusing a connection from"
+                  << client_socket->peerAddress().toString() << "to"
+                  << client_socket->localAddress().toString()
+                  << "because only connections from the local network are "
+                     "allowed";
     client_socket->close();
     client_socket->deleteLater();
     return;
@@ -426,8 +444,9 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       // Localhost v4
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.0/8")) ||
       // Link Local v4
-      address.isInSubnet(QHostAddress::parseSubnet("169.254.1.0/16")) ||
-      // Link Local v6
+      address.isInSubnet(QHostAddress::parseSubnet("169.254.0.0/16")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("::ffff:169.254.0.0/112")) ||
+      // Localhost and Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
       address.isInSubnet(QHostAddress::parseSubnet("fe80::/10")) ||
       // Private v4 range
@@ -440,6 +459,25 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       address.isInSubnet(QHostAddress::parseSubnet("::ffff:10.0.0.0/104")) ||
       // Private v6 range
       address.isInSubnet(QHostAddress::parseSubnet("fc00::/7"));
+}
+
+bool NetworkRemote::IsLocalClient(const QHostAddress& peer,
+                                  const QHostAddress& local,
+                                  bool local_was_chosen) {
+  if (IpIsPrivate(peer)) return true;
+  if (!local_was_chosen) return false;
+
+  // Arriving on the address isn't enough by itself: a machine in a router's
+  // DMZ gets the internet on its LAN address.
+  for (const char* text : kSharedSubnets) {
+    const QPair<QHostAddress, int> subnet = QHostAddress::parseSubnet(text);
+    if (local.isInSubnet(subnet) && peer.isInSubnet(subnet)) return true;
+  }
+  return false;
+}
+
+bool NetworkRemote::LocalClientsCanReach(const QHostAddress& address) {
+  return IpIsPrivate(address) || InSharedSubnet(address);
 }
 
 void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {

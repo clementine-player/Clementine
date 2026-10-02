@@ -68,7 +68,10 @@
          <string>Only accept connections from clients within the ip ranges:
 10.x.x.x
 172.16.0.0 - 172.31.255.255
-192.168.x.x</string>
+192.168.x.x
+and from link-local and private IPv6 addresses.
+
+When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too.</string>
         </property>
         <property name="text">
          <string>Only allow connections from the local network</string>
@@ -139,6 +142,13 @@
             <width>16777215</width>
             <height>120</height>
            </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="listen_warning">
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
