@@ -7,6 +7,9 @@
 #include <memory>
 #include <vector>
 
+#include "networkremote/protocolsniffer.h"
+#include "remotecontrolmessages.pb.h"
+
 class Application;
 class IncomingDataParser;
 class InternetBrowser;
@@ -52,6 +55,9 @@ class NetworkRemote : public QObject {
   // listen |address|. When not, only allowing local clients refuses everyone
   // on it.
   static bool LocalClientsCanReach(const QHostAddress& address);
+
+  // A DISCONNECT message giving |reason|, framed as on the wire.
+  static QByteArray DisconnectMessage(cpb::remote::ReasonDisconnect reason);
 
  signals:
   void AddToPlaylistSignal(QMimeData* data);
@@ -101,6 +107,9 @@ class NetworkRemote : public QObject {
   // Waits for a new connection's first byte to tell its protocol, then hands
   // it to a RemoteClient or the MediaHttpServer.
   void SniffProtocol(QTcpSocket* socket);
+  // Tells a client that isn't on the local network why it's refused, in the
+  // |protocol| it speaks, then closes the connection.
+  void RefuseNotLocal(QTcpSocket* socket, ProtocolSniffer::Protocol protocol);
   void CreateRemoteClient(QTcpSocket* client_socket);
 };
 
