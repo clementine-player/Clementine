@@ -132,17 +132,30 @@ else(FORCE_GIT_REVISION)
         RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV
         OUTPUT_STRIP_TRAILING_WHITESPACE)
+    # On the commit an annotated tag points at, describe prints the tag alone,
+    # with no count or sha for the parsing below to find, and the versions fall
+    # back to the numbers at the top of this file. --long always prints all
+    # three, so a build there carries the tag it is on. GIT_REV itself keeps
+    # describe's own wording, which the displayed and Debian versions use.
+    execute_process(COMMAND ${GIT_EXECUTABLE} describe --long
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_REV_LONG
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
     if(NOT ${GIT_INFO_RESULT} EQUAL 0)
       message(SEND_ERROR "git describe failed with code ${GIT_INFO_RESULT}: ${GIT_REV}")
     endif()
   endif()
 endif()
 
+if(NOT GIT_REV_LONG)
+  set(GIT_REV_LONG ${GIT_REV})
+endif(NOT GIT_REV_LONG)
+
 string(REGEX REPLACE "^(.+)-([0-9]+)-(g[a-f0-9]+)$" "\\1;\\2;\\3"
-       GIT_PARTS ${GIT_REV})
+       GIT_PARTS ${GIT_REV_LONG})
 
 if(NOT GIT_PARTS)
-  message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV}'")
+  message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV_LONG}'")
 endif(NOT GIT_PARTS)
 
 list(LENGTH GIT_PARTS GIT_PARTS_LENGTH)
