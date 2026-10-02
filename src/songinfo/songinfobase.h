@@ -31,6 +31,7 @@ class CollapsibleInfoPane;
 class WidgetFadeHelper;
 
 class QNetworkAccessManager;
+class QLabel;
 class QScrollArea;
 class QVBoxLayout;
 
@@ -61,6 +62,8 @@ class SongInfoBase : public QWidget {
   }
 
   QScrollArea* scroll_area() const { return scroll_area_; }
+  // What to say when nothing is playing.
+  void SetPlaceholderText(const QString& text);
 
   void AddWidget(QWidget* widget);
   void AddSection(CollapsibleInfoPane* section);
@@ -93,6 +96,8 @@ class SongInfoBase : public QWidget {
   QList<CollapsibleInfoPane*> sections_;
 
   WidgetFadeHelper* fader_;
+  // Shown when nothing is playing.
+  QLabel* placeholder_;
 
   Song queued_metadata_;
   Song old_metadata_;
