@@ -42,7 +42,7 @@ ITunesSearchPage::ITunesSearchPage(Application* app, QWidget* parent)
       network_(new NetworkAccessManager(this)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
-  setWindowIcon(IconLoader::Load("itunes", IconLoader::Provider));
+  setWindowIcon(IconLoader::Load("apple-podcasts", IconLoader::Provider));
 }
 
 ITunesSearchPage::~ITunesSearchPage() { delete ui_; }
@@ -81,7 +81,7 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
   if (error.error != QJsonParseError::NoError) {
     QMessageBox::warning(
         this, tr("Failed to fetch podcasts"),
-        tr("There was a problem parsing the response from the iTunes Store"));
+        tr("There was a problem parsing the response from Apple Podcasts"));
     return;
   }
 
