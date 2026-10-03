@@ -38,8 +38,8 @@ SystemTrayIcon::SystemTrayIcon(QObject* parent)
   paused_icon_ = tiny_pause.pixmap(tiny_pause.availableSizes().last());
 }
 
-QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon,
-                                   const QPixmap& grey_icon) {
+QPixmap SystemTrayIcon::CreateProgressIcon(const QPixmap& icon,
+                                           const QPixmap& grey_icon) {
   QRect rect(icon.rect());
 
   // The angle of the line that's used to cover the icon.
@@ -62,7 +62,16 @@ QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon,
   // Draw the grey bit over the orange icon
   p.setClipRegion(mask);
   p.drawPixmap(0, 0, grey_icon);
-  p.setClipping(false);
+  p.end();
+
+  return ret;
+}
+
+QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon,
+                                   const QPixmap& grey_icon) {
+  QPixmap ret(CreateProgressIcon(icon, grey_icon));
+  QRect rect(ret.rect());
+  QPainter p(&ret);
 
   // Draw the playing or paused icon in the top-right
   if (!current_state_icon().isNull()) {
@@ -86,16 +95,19 @@ void SystemTrayIcon::SetProgress(int percentage) {
 }
 
 void SystemTrayIcon::SetPaused() {
+  playback_state_ = PlaybackState::Paused;
   current_state_icon_ = paused_icon_;
   UpdateIcon();
 }
 
 void SystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
+  playback_state_ = PlaybackState::Playing;
   current_state_icon_ = playing_icon_;
   UpdateIcon();
 }
 
 void SystemTrayIcon::SetStopped() {
+  playback_state_ = PlaybackState::Stopped;
   current_state_icon_ = QPixmap();
   UpdateIcon();
 }
