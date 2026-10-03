@@ -477,6 +477,20 @@ jobs:
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      # The Release-note: trailers of the commits since the previous release
+      # (see "Release notes" in README.md), one bullet each. Usually empty:
+      # most commits have none.
+      - name: Collect the release notes
+        run: |
+          : > "$RUNNER_TEMP/release_notes.md"
+          if previous=$(git describe --tags --abbrev=0 --match '[0-9]*' HEAD^); then
+            git log --reverse \
+                --format='%(trailers:key=Release-note,valueonly,separator=%x0A)' \
+                "$previous..HEAD" |
+              sed -e '/^[[:space:]]*$/d' -e 's/^[[:space:]]*/- /' \
+              > "$RUNNER_TEMP/release_notes.md"
+          fi
+          cat "$RUNNER_TEMP/release_notes.md"
       - name: Create draft pre-release
         # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
         # at once, among a run of Not Found errors from GitHub.
@@ -486,6 +500,10 @@ jobs:
         with:
           name: ${{ steps.tag_name.outputs.version }}
           tag_name: ${{ steps.tag_name.outputs.version }}
+          # The commit that was built. Otherwise the tag goes on master as it
+          # is when this job runs, which may be later commits by then.
+          target_commitish: ${{ github.sha }}
+          body_path: ${{ runner.temp }}/release_notes.md
           files: "release_artifacts/**/*"
           fail_on_unmatched_files: true
           draft: false
