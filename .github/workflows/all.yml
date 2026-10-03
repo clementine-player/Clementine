@@ -2224,6 +2224,18 @@ jobs:
         run: >
           ./clementine.app/Contents/MacOS/clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+      # GStreamer trusts what macOS trusts (GstEngine::MacTlsDatabase), not
+      # a list of its own - one shipped in 2015 failed Plex servers' Let's
+      # Encrypt certificates, while GitHub's above passed. The runs above
+      # wrote out what it trusts; Let's Encrypt's test site for its root,
+      # which that old list failed, checks it's current. (A CA of our own,
+      # trusted just for this, would need someone to click Allow.)
+      - name: Smoke test - trusted certificates are the system's
+        run: >
+          echo | openssl s_client -verify_return_error
+          -connect valid-isrgrootx1.letsencrypt.org:443
+          -servername valid-isrgrootx1.letsencrypt.org
+          -CAfile "$HOME/Library/Application Support/Clementine/trusted-certificates.pem"
 
       - name: Notarize DMG
         if: steps.signing.outputs.notarize == 'true'

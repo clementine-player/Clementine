@@ -29,6 +29,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QSaveFile>
 #include <QSettings>
 #include <QTimeLine>
 #include <QTimer>
@@ -131,12 +132,47 @@ GstEngine::GstEngine(Application* app)
   ReloadSettings();
 
 #ifdef Q_OS_DARWIN
-  QDir resources_dir(mac::GetResourcesPath());
-  QString ca_cert_path = resources_dir.filePath("cacert.pem");
-  GError* error = nullptr;
-  tls_database_ = g_tls_file_database_new(ca_cert_path.toUtf8().data(), &error);
+  tls_database_ = MacTlsDatabase();
 #endif
 }
+
+#ifdef Q_OS_DARWIN
+// GStreamer's TLS can't read the keychain, so it gets the roots macOS trusts,
+// as of startup, to trust the same servers everything else on the Mac does.
+GTlsDatabase* GstEngine::MacTlsDatabase() {
+  QByteArray pem;
+  for (const QByteArray& der : mac::GetTrustedRootCertificates()) {
+    const QByteArray base64 = der.toBase64();
+    pem += "-----BEGIN CERTIFICATE-----\n";
+    for (int i = 0; i < base64.size(); i += 64) {
+      pem += base64.mid(i, 64) + "\n";
+    }
+    pem += "-----END CERTIFICATE-----\n";
+  }
+
+  // GTlsFileDatabase only takes a file, and reads it again later, so it
+  // stays for as long as Clementine runs. Replaced whole, so another
+  // Clementine starting up never leaves it half written.
+  const QString cache = Utilities::GetConfigPath(Utilities::Path_CacheRoot);
+  const QString path = cache + "/trusted-certificates.pem";
+  QDir().mkpath(cache);
+  QSaveFile file(path);
+  if (!file.open(QIODevice::WriteOnly) || file.write(pem) != pem.size() ||
+      !file.commit()) {
+    qLog(Error) << "Couldn't write the trusted certificates to" << path;
+    return nullptr;
+  }
+
+  GError* error = nullptr;
+  GTlsDatabase* database =
+      g_tls_file_database_new(path.toUtf8().constData(), &error);
+  if (!database) {
+    qLog(Error) << "Couldn't load the trusted certificates:" << error->message;
+    g_error_free(error);
+  }
+  return database;
+}
+#endif
 
 GstEngine::~GstEngine() {
   EnsureInitialised();
@@ -146,7 +182,7 @@ GstEngine::~GstEngine() {
   qDeleteAll(device_finders_);
 
 #ifdef Q_OS_DARWIN
-  g_object_unref(tls_database_);
+  g_clear_object(&tls_database_);
 #endif
 }
 

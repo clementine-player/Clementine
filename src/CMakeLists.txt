@@ -1390,6 +1390,7 @@ if (APPLE)
     "-framework IOKit"
     "-framework MediaPlayer"
     "-framework ScriptingBridge"
+    "-framework Security"
     "-framework UserNotifications"
   )
   if (HAVE_SPARKLE)
@@ -1486,8 +1487,6 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/qt.conf
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-  install(FILES ../dist/cacert.pem
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   if (HAVE_PROJECTM_PRESETS_RCC)
     install(FILES "${PROJECTM_PRESETS_RCC}"
@@ -1558,7 +1557,7 @@ if (APPLE)
   # `sign` re-seals the app bundle with whatever identity is configured
   # (ad-hoc by default, same as the POST_BUILD step above). It's always
   # defined, not just when APPLE_DEVELOPER_ID is set, because `make install`
-  # (which copies clementine.icns/qt.conf/cacert.pem into
+  # (which copies clementine.icns/qt.conf into
   # Contents/Resources) adds files to the bundle *after* POST_BUILD already
   # sealed it, invalidating that signature - so packaging needs to re-sign
   # after install, and this target is what does that (and also serves as a
