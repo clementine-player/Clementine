@@ -26,8 +26,10 @@
 
 #include <QtDebug>
 
-#include <AppKit/NSMenu.h>
-#include <AppKit/NSMenuItem.h>
+#include <AppKit/AppKit.h>
+#include <QGuiApplication>
+#include <QImage>
+#include <QStyleHints>
 
 @interface Target : NSObject {
   QAction* action_;
@@ -151,13 +153,80 @@ class MacSystemTrayIconPrivate {
   Q_DISABLE_COPY(MacSystemTrayIconPrivate);
 };
 
+namespace {
+
+// The Dock shows icons at up to 128 points, which is 256 pixels on Retina
+// screens.
+const int kDockIconSize = 256;
+
+// Puts a circular play or pause badge in the icon's bottom right, dark on a
+// light Dock and light on a dark one, so it stands out either way.
+QPixmap AddPlaybackBadge(const QPixmap& icon, bool playing, bool dark) {
+  QImage image = icon.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  const CGFloat size = image.width();
+
+  CGColorSpaceRef color_space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef context = CGBitmapContextCreate(
+      image.bits(), image.width(), image.height(), 8, image.bytesPerLine(), color_space,
+      kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little);
+  CGColorSpaceRelease(color_space);
+
+  [NSGraphicsContext saveGraphicsState];
+  [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithCGContext:context
+                                                                               flipped:NO]];
+
+  NSColor* fill =
+      dark ? [NSColor colorWithWhite:0.98 alpha:1.0] : [NSColor colorWithWhite:0.13 alpha:0.94];
+  NSColor* glyph_color = dark ? [NSColor colorWithWhite:0.13 alpha:1.0] : [NSColor whiteColor];
+
+  const CGFloat diameter = size * 0.42;
+  const CGFloat inset = size * 0.03;
+  const NSRect badge = NSMakeRect(size - diameter - inset, inset, diameter, diameter);
+
+  [NSGraphicsContext saveGraphicsState];
+  NSShadow* shadow = [[[NSShadow alloc] init] autorelease];
+  shadow.shadowBlurRadius = size * 0.025;
+  shadow.shadowOffset = NSMakeSize(0, -size * 0.008);
+  shadow.shadowColor = [NSColor colorWithWhite:0 alpha:0.35];
+  [shadow set];
+  [fill setFill];
+  [[NSBezierPath bezierPathWithOvalInRect:badge] fill];
+  [NSGraphicsContext restoreGraphicsState];
+
+  NSImageSymbolConfiguration* config = [[NSImageSymbolConfiguration
+      configurationWithPointSize:diameter * 0.36
+                          weight:NSFontWeightBold]
+      configurationByApplyingConfiguration:[NSImageSymbolConfiguration
+                                               configurationWithPaletteColors:@[ glyph_color ]]];
+  NSImage* glyph = [[NSImage imageWithSystemSymbolName:playing ? @"play.fill" : @"pause.fill"
+                              accessibilityDescription:nil] imageWithSymbolConfiguration:config];
+  // The play triangle's weight is left of its centre, so nudge it right.
+  const CGFloat nudge = playing ? diameter * 0.025 : 0;
+  [glyph drawInRect:NSMakeRect(NSMidX(badge) - glyph.size.width / 2 + nudge,
+                               NSMidY(badge) - glyph.size.height / 2, glyph.size.width,
+                               glyph.size.height)];
+
+  [NSGraphicsContext restoreGraphicsState];
+  CGContextRelease(context);
+  return QPixmap::fromImage(image);
+}
+
+}  // namespace
+
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)
     : SystemTrayIcon(parent),
-      orange_icon_(QPixmap(":icon_large.png")
-                       .scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)),
+      orange_icon_(
+          QPixmap(":icon_large.png")
+              .scaled(kDockIconSize, kDockIconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)),
       grey_icon_(QPixmap(":icon_large_grey.png")
-                     .scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)) {
-  QApplication::setWindowIcon(orange_icon_);
+                     .scaled(kDockIconSize, kDockIconSize, Qt::KeepAspectRatio,
+                             Qt::SmoothTransformation)) {
+  // The badge contrasts with the Dock, which follows the system's light or
+  // dark appearance. So does Qt's colour scheme, unless Clementine's own
+  // Appearance setting forces one, when the badge follows that instead.
+  connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this,
+          [this] { UpdateIcon(); });
+  UpdateIcon();
 }
 
 MacSystemTrayIcon::~MacSystemTrayIcon() {}
@@ -184,7 +253,12 @@ void MacSystemTrayIcon::SetupMenuItem(QAction* action) {
 }
 
 void MacSystemTrayIcon::UpdateIcon() {
-  QApplication::setWindowIcon(CreateIcon(orange_icon_, grey_icon_));
+  QPixmap icon = CreateProgressIcon(orange_icon_, grey_icon_);
+  if (playback_state() != PlaybackState::Stopped) {
+    const bool dark = QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark;
+    icon = AddPlaybackBadge(icon, playback_state() == PlaybackState::Playing, dark);
+  }
+  QApplication::setWindowIcon(icon);
 }
 
 void MacSystemTrayIcon::ActionChanged() {
