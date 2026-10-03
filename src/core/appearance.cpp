@@ -260,13 +260,20 @@ QPalette Appearance::BasePalette() const {
 
 void Appearance::ApplyTheme() {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
-  // Tell the platform as well as ourselves, so the things a palette can't
-  // reach follow too - notably the window title bar on Windows and macOS.
-  // This is deliberately not the whole mechanism: it does nothing at all on
-  // some platform themes (it's a no-op under the offscreen and plain-Fusion
-  // setups this was tested on), so the palette below is what actually
-  // guarantees the app is dark. Set it first so ours wins where both apply.
-  switch (EffectiveTheme()) {
+  // When the user picks Light or Dark, tell the platform as well as
+  // ourselves, so the things a palette can't reach follow too - notably the
+  // window title bar on Windows and macOS. This is deliberately not the whole
+  // mechanism: it does nothing at all on some platform themes (it's a no-op
+  // under the offscreen and plain-Fusion setups this was tested on), so the
+  // palette below is what actually guarantees the app is dark. Set it first
+  // so ours wins where both apply.
+  //
+  // Following the system, leave the scheme to the platform. Setting it, even
+  // to what the system is using, fixes it there: Qt's colorScheme() stops
+  // following the system and colorSchemeChanged stops firing, so nothing
+  // listening for it - the constructor's follow-the-desktop connection
+  // included - would ever see the system switch again.
+  switch (theme_mode_) {
     case ThemeMode_Dark:
       QGuiApplication::styleHints()->setColorScheme(Qt::ColorScheme::Dark);
       break;
