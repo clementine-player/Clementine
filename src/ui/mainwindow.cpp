@@ -235,9 +235,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Initialise the UI
   ui_->setupUi(this);
-#ifdef Q_OS_DARWIN
-  ui_->menu_help->menuAction()->setVisible(false);
-#endif
 
   ui_->multi_loading_indicator->SetTaskManager(app_->task_manager());
   ui_->now_playing->SetApplication(app_);
