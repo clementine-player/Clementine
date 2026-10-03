@@ -79,7 +79,7 @@ msgstr " segons"
 msgid " songs"
 msgstr " cançons"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (no està disponible ara mateix)"
@@ -135,7 +135,7 @@ msgstr "%1 ha refusat l'inici de sessió. Intenteu sortir i iniciar sessió una 
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr "La demanda %1 ha fallat:\n%2"
+msgstr "La sol·licitud %1 ha fallat:\n%2"
 
 #: devices/deviceview.cpp:122
 #, qt-format
@@ -412,7 +412,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %title </p>\n\n<p>Si demarqueu entre claus una secció de text que contingui una fitxa de reemplaçament, aquesta secció no es mostrarà si la fitxa de reemplaçament es troba buida.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Només es pot connectar un client si s’introdueix el codi correcte."
 
@@ -757,7 +757,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Lloem l’hipnogripau!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr "Totes les adreces"
 
@@ -786,11 +786,11 @@ msgstr "Tots els traductors"
 msgid "All tracks"
 msgstr "Totes les peces"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr "Permet que un client baixi música d’aquest ordinador."
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr "Permet les baixades"
 
@@ -798,7 +798,7 @@ msgstr "Permet les baixades"
 msgid "Allow mid/side encoding"
 msgstr "Permet la codificació centre/costats"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr "Permet reproduir en dispositius remots"
 
@@ -821,7 +821,7 @@ msgstr "Comença sempre la reproducció"
 
 #: internet/jamendo/jamendoservice.cpp:75
 msgid "Ambient"
-msgstr ""
+msgstr "Ambiental"
 
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
@@ -905,7 +905,7 @@ msgid "As&k when saving"
 msgstr "&Pregunta en desar"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Format d’àudio"
@@ -1055,7 +1055,7 @@ msgstr "Tipus de bloc"
 
 #: internet/jamendo/jamendoservice.cpp:76
 msgid "Blues"
-msgstr ""
+msgstr "Blues"
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1179,7 +1179,7 @@ msgstr "Es comprova si hi ha canvis al Google Drive..."
 
 #: internet/jamendo/jamendoservice.cpp:77
 msgid "Chillout"
-msgstr ""
+msgstr "Relaxant"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1302,7 +1302,7 @@ msgstr "Visor d’imatges del Clementine"
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
 " the same name next to it."
-msgstr ""
+msgstr "El Clementine mostra la lletra de les etiquetes de la cançó o dels fitxers .lrc o .txt que tinguin el mateix nom de fitxer."
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
@@ -1500,11 +1500,11 @@ msgstr "Converteix tota la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Converteix els fitxers sense pèrdues abans d’enviar-los al comandament."
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr "Converteix els fitxers sense pèrdues"
 
@@ -1603,7 +1603,7 @@ msgstr "No s'ha pogut contactar amb plex.tv: %1"
 
 #: internet/jamendo/jamendoservice.cpp:79
 msgid "Country"
-msgstr ""
+msgstr "Country"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -2007,15 +2007,15 @@ msgstr "Baixa els episodis nous automàticament"
 msgid "Download queued"
 msgstr "Baixada en la cua"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr "Paràmetres de baixades"
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr "Baixeu l’aplicació original per a l’Android"
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Baixeu el comandament a distància per a l’escriptori, l’Android i l’iOS"
 
@@ -2117,7 +2117,7 @@ msgstr "Edita…"
 
 #: internet/jamendo/jamendoservice.cpp:81
 msgid "Electronic"
-msgstr ""
+msgstr "Electrònica"
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2181,8 +2181,8 @@ msgstr "Introduïu un nom de fitxer per a les cobertes exportades (sense extensi
 msgid "Enter a new name for this playlist"
 msgstr "Introduïu un nom per aquesta llista de reproducció"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Escriviu una d'aquestes adreces a l'aplicació per a connectar el Clementine."
 
@@ -2192,8 +2192,8 @@ msgid ""
 msgstr "Escriviu termes de cerca per a trobar música a l’ordinador i a la Internet"
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr "Introduïu termes de cerca per a trobar pòdcasts a iTunes Store"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
+msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
 msgid "Enter search terms below to find podcasts on gpodder.net"
@@ -2516,7 +2516,7 @@ msgstr "Previsualització de nom de fitxer"
 msgid "Files"
 msgstr "Fitxers"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr "Carpeta arrel dels fitxers"
 
@@ -2546,7 +2546,7 @@ msgstr "Ajusta la coberta a l’amplada"
 
 #: internet/jamendo/jamendoservice.cpp:82
 msgid "Folk"
-msgstr ""
+msgstr "Folk"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
@@ -2636,7 +2636,7 @@ msgstr "Aguts complets"
 
 #: internet/jamendo/jamendoservice.cpp:83
 msgid "Funk"
-msgstr ""
+msgstr "Funk"
 
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
@@ -2659,7 +2659,7 @@ msgstr "Estil"
 
 #: internet/jamendo/jamendoservice.cpp:165
 msgid "Genres"
-msgstr ""
+msgstr "Gèneres"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:119
@@ -2807,7 +2807,7 @@ msgstr "Hip hop"
 
 #: internet/jamendo/jamendoservice.cpp:84
 msgid "Hip-hop"
-msgstr ""
+msgstr "Hip-hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2949,7 +2949,7 @@ msgstr "Insereix…"
 #: networkremote/outgoingdatacreator.cpp:530
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
-msgstr ""
+msgstr "Instrumental"
 
 #: core/database.cpp:617
 msgid "Integrity check"
@@ -2985,11 +2985,11 @@ msgstr "Inverteix la selecció"
 msgid ""
 "Jamendo request failed:\n"
 "%1"
-msgstr ""
+msgstr "La sol·licitud del Jamendo ha fallat:\n%1"
 
 #: internet/jamendo/jamendoservice.cpp:85
 msgid "Jazz"
-msgstr ""
+msgstr "Jazz"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3087,7 +3087,7 @@ msgstr "Wiki de Last.fm"
 
 #: internet/jamendo/jamendoservice.cpp:86
 msgid "Latin"
-msgstr ""
+msgstr "Llatina"
 
 #: library/library.cpp:106
 msgid "Least favourite tracks"
@@ -3102,7 +3102,7 @@ msgstr "Esquerra"
 msgid "Length"
 msgstr "Durada"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
@@ -3133,7 +3133,7 @@ msgstr "Clar"
 msgid "Limits"
 msgstr "Límits"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr "Escolta en"
 
@@ -3172,7 +3172,7 @@ msgstr "Carrega la llista de reproducció..."
 #: internet/jamendo/jamendoservice.cpp:216
 #, qt-format
 msgid "Loading %1"
-msgstr ""
+msgstr "Es carrega %1"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3240,7 +3240,7 @@ msgstr "Perfil de predicció a llarg termini (LTP)"
 
 #: internet/jamendo/jamendoservice.cpp:87
 msgid "Lounge"
-msgstr ""
+msgstr "Lounge"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
@@ -3276,11 +3276,11 @@ msgstr "Lletres des de %1"
 
 #: songinfo/lyricsfetcher.cpp:258
 msgid "Lyrics from LRCLIB"
-msgstr ""
+msgstr "Lletra de LRCLIB"
 
 #: songinfo/lyricsfetcher.cpp:115
 msgid "Lyrics from the file's tags"
-msgstr ""
+msgstr "Lletra des de les etiquetes del fitxer"
 
 #: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
@@ -3391,7 +3391,7 @@ msgstr "Tipus d’afiliació"
 
 #: internet/jamendo/jamendoservice.cpp:88
 msgid "Metal"
-msgstr ""
+msgstr "Heavy metal"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
@@ -3448,7 +3448,7 @@ msgstr "Més reproduïdes"
 
 #: internet/jamendo/jamendoservice.cpp:157
 msgid "Most popular of all time"
-msgstr ""
+msgstr "Més populars de la història"
 
 #: devices/giolister.cpp:182
 msgid "Mount point"
@@ -3480,7 +3480,7 @@ msgstr "Música"
 msgid "Music Library"
 msgstr "Col·lecció de música"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr "Extensions visibles a la xarxa remota"
 
@@ -3511,7 +3511,7 @@ msgstr "Banda estreta (BE)"
 msgid "Network Proxy"
 msgstr "Servidor intermediari de xarxa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr "Control remot de xarxa"
 
@@ -3530,7 +3530,7 @@ msgstr "Mai no comencis a reproduir"
 
 #: internet/jamendo/jamendoservice.cpp:162
 msgid "New albums"
-msgstr ""
+msgstr "Àlbums nous"
 
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
@@ -3715,17 +3715,27 @@ msgstr "Actiu"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
-msgstr "Només accepta les connexions de clients dins del rang d’IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
+msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
 msgstr "Permet només connexions provinents de la xarxa local"
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
+msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Only show the first"
@@ -3791,7 +3801,7 @@ msgstr "Obre al navegador"
 
 #: internet/jamendo/jamendoservice.cpp:382
 msgid "Open on Jamendo"
-msgstr ""
+msgstr "Obre al Jamendo"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3807,7 +3817,7 @@ msgid "Optimize for quality"
 msgstr "Optimitza la qualitat"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opcions…"
@@ -3859,7 +3869,7 @@ msgstr "Altres opcions"
 msgid ""
 "Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
 "and length to lrclib.net)"
-msgstr ""
+msgstr "Altrament, les cerca a LRCLIB (el Clementine envia el nom de l'artista, el títol de la peça, l'àlbul i la durada a lrclib.net)."
 
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
@@ -3947,6 +3957,14 @@ msgstr "Barra lateral senzilla"
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Reprodueix"
+
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
@@ -4056,22 +4074,22 @@ msgstr "Pop"
 
 #: internet/jamendo/jamendoservice.cpp:160
 msgid "Popular albums"
-msgstr ""
+msgstr "Àlbums populars"
 
 #: internet/jamendo/jamendoservice.cpp:155
 msgid "Popular this month"
-msgstr ""
+msgstr "Popular aquest mes"
 
 #: internet/jamendo/jamendoservice.cpp:153
 msgid "Popular this week"
-msgstr ""
+msgstr "Popular aquesta setmana"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Duració de la finestra emergent"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Port"
 
@@ -4172,7 +4190,7 @@ msgstr "Psicodèlic"
 
 #: internet/jamendo/jamendoservice.cpp:90
 msgid "Punk"
-msgstr ""
+msgstr "Punk"
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4302,7 +4320,7 @@ msgstr "S’ha excedit el límit de redireccions, comproveu la configuració del
 
 #: internet/jamendo/jamendoservice.cpp:384
 msgid "Refresh"
-msgstr ""
+msgstr "Actualitza"
 
 #: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
@@ -4441,7 +4459,7 @@ msgstr "Mode del Replay Gain"
 msgid "Repopulate"
 msgstr "Reomple"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr "Sol·licita un codi d’autenticació"
 
@@ -4498,7 +4516,7 @@ msgstr "Captura CD d’àudio"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Carpeta que es podrà navegar des de la xarxa remota"
 
@@ -4643,6 +4661,10 @@ msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Cerca"
 
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
+msgstr ""
+
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
 msgstr "Cerca emissores Icecast"
@@ -4692,10 +4714,6 @@ msgstr "Cerca-ho"
 msgid "Search gpodder.net"
 msgstr "Cerca al gpodder.net"
 
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
-msgstr "Cerca a l'iTunes"
-
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Mode de cerca"
@@ -4707,7 +4725,7 @@ msgstr "Opcions de cerca"
 #: internet/jamendo/jamendoservice.cpp:366
 #, qt-format
 msgid "Search results for \"%1\""
-msgstr ""
+msgstr "Resultats de la cerca «%1»"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4828,7 +4846,7 @@ msgstr "Estableix %1 a la configuració del Clementine de l'ordinador"
 msgid "Set value for all selected tracks..."
 msgstr "Estableix valor per a totes les peces seleccionades…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Paràmetres"
 
@@ -5115,7 +5133,7 @@ msgstr "Ordenació"
 
 #: internet/jamendo/jamendoservice.cpp:93
 msgid "Soundtrack"
-msgstr ""
+msgstr "Banda sonora"
 
 #: playlist/playlist.cpp:1435
 msgid "Source"
@@ -5328,7 +5346,7 @@ msgstr "El segon valor ha de ser major que el primer!"
 
 #: internet/intergalacticfm/intergalacticfmservice.cpp:140
 msgid "The server didn't list any channels"
-msgstr ""
+msgstr "El servidor no ha retornat cap canal."
 
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
@@ -5373,8 +5391,8 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Hi ha hagut un problema rebent la meta-informació de Magnatune"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
-msgstr "S’ha produit un error en analitzar la resposta de l’iTunes Store"
+msgid "There was a problem parsing the response from Apple Podcasts"
+msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -5729,7 +5747,7 @@ msgstr "Empra un conjunt de colors personalitzat"
 msgid "Use a custom message for notifications"
 msgstr "Utilitza un missatge personalitzat per les notificacions"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr "Usa un control remot de xarxa"
 
@@ -5982,7 +6000,7 @@ msgstr "Sense coberta:"
 
 #: internet/jamendo/jamendoservice.cpp:94
 msgid "World"
-msgstr ""
+msgstr "Món"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -6063,7 +6081,7 @@ msgstr "Heu iniciat la sessió."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Podeu canviar la forma en la qual les cançons de la col·lecció estan organitzades"
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6109,7 +6127,7 @@ msgstr "Si canvieu la llengua haureu de reiniciar el Clementine."
 
 #: internet/dropbox/dropboxservice.cpp:228
 msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
-msgstr ""
+msgstr "La sessió del Dropbox ha caducat. Torneu a iniciar sessió a la configuració del Dropbox."
 
 #: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
@@ -6190,7 +6208,7 @@ msgstr "els més grans primer"
 msgid "bpm"
 msgstr "ppm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6200,7 +6218,7 @@ msgstr "Llista separada per comes de les extensions que seran visibles per la xa
 msgid "contains"
 msgstr "conté"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr "desktop_remote"
 
@@ -6305,9 +6323,9 @@ msgstr "a"
 msgid "options"
 msgstr "opcions"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr "o escanegeu el codi QR:"
 

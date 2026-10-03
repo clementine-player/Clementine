@@ -108,7 +108,7 @@ msgstr " segundos"
 msgid " songs"
 msgstr " canciones"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (no disponible actualmente)"
@@ -441,7 +441,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Las fichas de reemplazo empiezan con «%», por ejemplo: %artist %album %title </p>\n\n<p>Si marca una sección de texto que contenga una ficha de reemplazo entre llaves, esa sección no se mostrará si la ficha de reemplazo se encuentra vacía.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Solo se puede conectar un cliente si se introduce el código correcto."
 
@@ -786,7 +786,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "¡Alabemos todos al hipnosapo!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr "Todas las direcciones"
 
@@ -815,11 +815,11 @@ msgstr "Todos los traductores"
 msgid "All tracks"
 msgstr "Todas las pistas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr "Permitir descargas"
 
@@ -827,7 +827,7 @@ msgstr "Permitir descargas"
 msgid "Allow mid/side encoding"
 msgstr "Permitir codificación centro-lateral"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -934,7 +934,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Formato de audio"
@@ -1529,11 +1529,11 @@ msgstr "Convertir toda la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir cualquier música que el dispositivo no pueda reproducir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr ""
 
@@ -2036,15 +2036,15 @@ msgstr "Descargar episodios nuevos automáticamente"
 msgid "Download queued"
 msgstr "Descarga en cola"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr "Configuración de descargas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2072,7 +2072,7 @@ msgstr "Descargando el catálogo de Magnatune"
 
 #: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
-msgstr "Descargando los metadatos"
+msgstr "Descargando metadatos"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "Drag to reposition"
@@ -2210,8 +2210,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Escriba un nombre nuevo para esta lista de reproducción"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Introduzca una de estas direcciones en la aplicación para conectarse con Clementine."
 
@@ -2221,7 +2221,7 @@ msgid ""
 msgstr "Introduzca términos de búsqueda arriba para encontrar música en su equipo y en Internet"
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
@@ -2345,7 +2345,7 @@ msgstr "Portadas existentes"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:107
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: widgets/loginstatewidget.cpp:148
 #, qt-format
@@ -2375,7 +2375,7 @@ msgstr "Exportación finalizada"
 #: ui/albumcovermanager.cpp:815
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "Se exportaron %1 portadas de %2 (se omitieron %3)"
 
 #: ../bin/src/ui_playbacksettingspage.h:415
 msgid "F32LE (32-bit)"
@@ -2383,7 +2383,7 @@ msgstr "F32LE (32 bits)"
 
 #: ../bin/src/ui_mainwindow.h:789
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:420 transcoder/transcoder.cpp:280
 #: transcoder/transcodersettingspage.cpp:30
@@ -2545,9 +2545,9 @@ msgstr "Previsualización de nombre de archivo"
 msgid "Files"
 msgstr "Archivos"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
-msgstr ""
+msgstr "Carpeta raíz de los archivos"
 
 #: ../bin/src/ui_transcodedialog.h:222
 msgid "Files to transcode"
@@ -2688,7 +2688,7 @@ msgstr "Género"
 
 #: internet/jamendo/jamendoservice.cpp:165
 msgid "Genres"
-msgstr ""
+msgstr "Géneros"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:119
@@ -3131,7 +3131,7 @@ msgstr ""
 msgid "Length"
 msgstr "Duración"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
@@ -3162,7 +3162,7 @@ msgstr ""
 msgid "Limits"
 msgstr "Límites"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr "Escuchar en"
 
@@ -3509,7 +3509,7 @@ msgstr "Música"
 msgid "Music Library"
 msgstr "Fonoteca"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3540,7 +3540,7 @@ msgstr "Banda estrecha (NB)"
 msgid "Network Proxy"
 msgstr "«Proxy» de la red"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr ""
 
@@ -3559,7 +3559,7 @@ msgstr "Nunca comenzar la reproducción"
 
 #: internet/jamendo/jamendoservice.cpp:162
 msgid "New albums"
-msgstr ""
+msgstr "Álbumes nuevos"
 
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
@@ -3744,17 +3744,27 @@ msgstr "⏽"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
 msgstr "Solo permitir conexiones provenientes de la red local"
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
+msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Only show the first"
@@ -3801,7 +3811,7 @@ msgstr "Abrir archivo…"
 
 #: internet/googledrive/googledriveservice.cpp:430
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "Abrir en Google Drive"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:461
 #: internet/core/internetservice.cpp:65 library/libraryview.cpp:388
@@ -3812,15 +3822,15 @@ msgstr "Abrir en una lista de reproducción nueva"
 #: ../bin/src/ui_behavioursettingspage.h:401
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Abrir en una lista nueva"
 
 #: songinfo/artistbiography.cpp:101 songinfo/artistbiography.cpp:281
 msgid "Open in your browser"
-msgstr ""
+msgstr "Abrir en el navegador"
 
 #: internet/jamendo/jamendoservice.cpp:382
 msgid "Open on Jamendo"
-msgstr ""
+msgstr "Abrir en Jamendo"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3836,7 +3846,7 @@ msgid "Optimize for quality"
 msgstr "Optimizar para calidad"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opciones…"
@@ -3977,6 +3987,14 @@ msgstr "Barra lateral simple"
 msgid "Play"
 msgstr "Reproducir"
 
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
+
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "N.º de reproducciones"
@@ -4100,7 +4118,7 @@ msgid "Popup duration"
 msgstr "Duración de la notificación"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Puerto"
 
@@ -4470,7 +4488,7 @@ msgstr "Modo de regulación de volumen"
 msgid "Repopulate"
 msgstr "Rellenar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr "Requerir código de autenticación"
 
@@ -4527,7 +4545,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4672,6 +4690,10 @@ msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Buscar"
 
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
+msgstr "Buscar en Apple Podcasts"
+
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
 msgstr "Buscar emisoras Icecast"
@@ -4720,10 +4742,6 @@ msgstr "Buscar esto"
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
 msgstr "Buscar en gpodder.net"
-
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
-msgstr "Buscar en iTunes"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
@@ -4781,11 +4799,11 @@ msgstr "No seleccionar nada"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Seleccione un directorio"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Seleccione un archivo"
 
 #: ../bin/src/ui_appearancesettingspage.h:332
 msgid "Select background color:"
@@ -4857,7 +4875,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "Establecer valor para todas las pistas seleccionadas…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Configuración"
 
@@ -5165,7 +5183,7 @@ msgstr "Estándar"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
-msgstr ""
+msgstr "Álbumes con estrella"
 
 #: ripper/ripcddialog.cpp:86
 msgid "Start ripping"
@@ -5402,8 +5420,8 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Se produjo un problema al obtener los metadatos de Magnatune"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
-msgstr "Se produjo un problema al interpretar la respuesta de la iTunes Store"
+msgid "There was a problem parsing the response from Apple Podcasts"
+msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -5624,7 +5642,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:127
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "URL del logo:"
 
 #: core/commandlineoptions.cpp:170
 msgid "URL(s)"
@@ -5728,7 +5746,7 @@ msgstr "Uso"
 
 #: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Usar etiqueta Artista del álbum cuando esté disponible"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "Use Gnome's shortcut keys"
@@ -5758,7 +5776,7 @@ msgstr "Usar conjunto de colores personalizado"
 msgid "Use a custom message for notifications"
 msgstr "Usar un mensaje personalizado para las notificaciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5949,7 +5967,7 @@ msgstr "Cuando la lista esté vacía…"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."
-msgstr ""
+msgstr "¿Por qué no prueba con…?:"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Wide band (WB)"
@@ -6092,7 +6110,7 @@ msgstr "Ha accedido a su cuenta."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Puede modificar el modo en que se organizan las canciones en la fonoteca."
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6219,7 +6237,7 @@ msgstr "más grande primero"
 msgid "bpm"
 msgstr "ppm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6229,7 +6247,7 @@ msgstr ""
 msgid "contains"
 msgstr "contiene"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr ""
 
@@ -6278,7 +6296,7 @@ msgstr "mayor que"
 
 #: ../bin/src/ui_deviceviewcontainer.h:95
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "Los iPod y los dispositivos USB no funcionan en Windows por ahora. Disculpe las molestias."
 
 #: smartplaylists/searchterm.cpp:247
 msgid "in the last"
@@ -6334,9 +6352,9 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr "o escanee el código QR:"
 

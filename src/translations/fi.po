@@ -76,7 +76,7 @@ msgstr " sekuntia"
 msgid " songs"
 msgstr " kappaletta"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (ei nyt saatavilla)"
@@ -409,7 +409,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Tietueet alkavat % merkillä, esim: %artist %album %title </p>\n\n<p>Jos ympäröit sisältävän tekstin sulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ohjelma yhdistää vain oikealla koodilla."
 
@@ -754,7 +754,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Kaikki kunnia Hypnotoadille!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr "Kaikki osoitteet"
 
@@ -783,11 +783,11 @@ msgstr "Kaikki kääntäjät"
 msgid "All tracks"
 msgstr "Kaikki kappaleet"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr "Salli ohjelman ladata musiikkia tältä tietokoneelta."
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr "Salli lataukset"
 
@@ -795,7 +795,7 @@ msgstr "Salli lataukset"
 msgid "Allow mid/side encoding"
 msgstr "Salli puolivälissä koodaus"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr "Salli soiton ohjaaminen toiselta laitteelta"
 
@@ -818,7 +818,7 @@ msgstr "Aloita soittaminen aina"
 
 #: internet/jamendo/jamendoservice.cpp:75
 msgid "Ambient"
-msgstr ""
+msgstr "Taustaäänet"
 
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
@@ -902,7 +902,7 @@ msgid "As&k when saving"
 msgstr "Kys&y kun tallennetaan"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Audiomuoto"
@@ -1052,7 +1052,7 @@ msgstr "Lohkotyyppi"
 
 #: internet/jamendo/jamendoservice.cpp:76
 msgid "Blues"
-msgstr ""
+msgstr "Blues"
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1176,7 +1176,7 @@ msgstr "Tarkistaa Google Drivea muutosten varalta..."
 
 #: internet/jamendo/jamendoservice.cpp:77
 msgid "Chillout"
-msgstr ""
+msgstr "Chillout"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1299,7 +1299,7 @@ msgstr "Clementine-kuvakatselin"
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
 " the same name next to it."
-msgstr ""
+msgstr "Clementine näyttää kappaleen sanoitukset tunnisteissa tai samannimisessä .lrc- tai .txt-tiedostossa sen vieressä."
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
@@ -1497,11 +1497,11 @@ msgstr "Muunna kaikki"
 msgid "Convert any music that the device can't play"
 msgstr "Muunna musiikit joita laite ei pysty toistamaan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Muunna häviöttömät äänitiedostot ennen niiden lähettämistä."
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr "Muunna häviöttömät tiedostot"
 
@@ -1600,7 +1600,7 @@ msgstr "Plex.tv ei yhteyttä: %1"
 
 #: internet/jamendo/jamendoservice.cpp:79
 msgid "Country"
-msgstr ""
+msgstr "Maa"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -2004,15 +2004,15 @@ msgstr "Lataa uudet jaksot automaattisesti"
 msgid "Download queued"
 msgstr "Lataus jonossa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr "Lataamisen asetukset"
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr "Lataa alkuperäinen Android-sovellus"
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Lataa kauko-ojaus PC, Android ja iOS"
 
@@ -2114,7 +2114,7 @@ msgstr "Muokkaa..."
 
 #: internet/jamendo/jamendoservice.cpp:81
 msgid "Electronic"
-msgstr ""
+msgstr "Electronic"
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2178,8 +2178,8 @@ msgstr "Anna tiedostonimi kansille (ei tiedostopäätettä):"
 msgid "Enter a new name for this playlist"
 msgstr "Anna uusi nimi tälle soittolistalle"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Anna sovellukseen jokin näistä osoitteista ja muodosta yhteys Clementineen."
 
@@ -2189,8 +2189,8 @@ msgid ""
 msgstr "Anna hakusanat yläpuolelle ja löydä musiikkia tietokoneeltasi ja internetistä"
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr "Anna hakusanat alle ja löydä podcastit iTunes Store:sta"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
+msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
 msgid "Enter search terms below to find podcasts on gpodder.net"
@@ -2513,7 +2513,7 @@ msgstr "Tiedostonimen esikatselu"
 msgid "Files"
 msgstr "Tiedostot"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr "Tiedostojen root-kansio"
 
@@ -2543,7 +2543,7 @@ msgstr "Sovita kansikuva leveyteen"
 
 #: internet/jamendo/jamendoservice.cpp:82
 msgid "Folk"
-msgstr ""
+msgstr "Folk"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
@@ -2633,7 +2633,7 @@ msgstr "Täysi diskantti"
 
 #: internet/jamendo/jamendoservice.cpp:83
 msgid "Funk"
-msgstr ""
+msgstr "Funk"
 
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
@@ -2656,7 +2656,7 @@ msgstr "Tyylilaji"
 
 #: internet/jamendo/jamendoservice.cpp:165
 msgid "Genres"
-msgstr ""
+msgstr "Tyylilajit"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:119
@@ -2804,7 +2804,7 @@ msgstr "Hip Hop"
 
 #: internet/jamendo/jamendoservice.cpp:84
 msgid "Hip-hop"
-msgstr ""
+msgstr "Hip-hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2946,7 +2946,7 @@ msgstr "Lisää..."
 #: networkremote/outgoingdatacreator.cpp:530
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
-msgstr ""
+msgstr "Instrumental"
 
 #: core/database.cpp:617
 msgid "Integrity check"
@@ -2982,11 +2982,11 @@ msgstr "Käänteinen valinta"
 msgid ""
 "Jamendo request failed:\n"
 "%1"
-msgstr ""
+msgstr "Jamendo pyyntö epäonnistui:\n%1"
 
 #: internet/jamendo/jamendoservice.cpp:85
 msgid "Jazz"
-msgstr ""
+msgstr "Jazz"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3084,7 +3084,7 @@ msgstr "Last.fm-wiki"
 
 #: internet/jamendo/jamendoservice.cpp:86
 msgid "Latin"
-msgstr ""
+msgstr "Latin"
 
 #: library/library.cpp:106
 msgid "Least favourite tracks"
@@ -3099,7 +3099,7 @@ msgstr "Vasen"
 msgid "Length"
 msgstr "Kesto"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
@@ -3130,7 +3130,7 @@ msgstr "Vaalea"
 msgid "Limits"
 msgstr "Rajat"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr "Kuunnellaan"
 
@@ -3169,7 +3169,7 @@ msgstr "Lataa soittolista..."
 #: internet/jamendo/jamendoservice.cpp:216
 #, qt-format
 msgid "Loading %1"
-msgstr ""
+msgstr "Ladataan %1"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3237,7 +3237,7 @@ msgstr "Long term prediction -profiili (LTP)"
 
 #: internet/jamendo/jamendoservice.cpp:87
 msgid "Lounge"
-msgstr ""
+msgstr "Lounge"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
@@ -3273,11 +3273,11 @@ msgstr "Sanoitukset tarjoaa %1"
 
 #: songinfo/lyricsfetcher.cpp:258
 msgid "Lyrics from LRCLIB"
-msgstr ""
+msgstr "Sanoitukset tarjoaa LRCLIB"
 
 #: songinfo/lyricsfetcher.cpp:115
 msgid "Lyrics from the file's tags"
-msgstr ""
+msgstr "Sanoitukset tiedostotunnisteesta"
 
 #: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
@@ -3388,7 +3388,7 @@ msgstr "Jäsenyyden tyyppi"
 
 #: internet/jamendo/jamendoservice.cpp:88
 msgid "Metal"
-msgstr ""
+msgstr "Metal"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
@@ -3445,7 +3445,7 @@ msgstr "Eniten soitetut"
 
 #: internet/jamendo/jamendoservice.cpp:157
 msgid "Most popular of all time"
-msgstr ""
+msgstr "Kaikkien aikojen suosituinta"
 
 #: devices/giolister.cpp:182
 msgid "Mount point"
@@ -3477,7 +3477,7 @@ msgstr "Musiikki"
 msgid "Music Library"
 msgstr "Musiikkikirjasto"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr "Etänä näkyvät musiikkilaajennukset"
 
@@ -3508,7 +3508,7 @@ msgstr "Narrow band (NB)"
 msgid "Network Proxy"
 msgstr "Välityspalvelin"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr "Kauko-ohjaus"
 
@@ -3527,7 +3527,7 @@ msgstr "Älä aloita soittamista"
 
 #: internet/jamendo/jamendoservice.cpp:162
 msgid "New albums"
-msgstr ""
+msgstr "Uusia levyjä"
 
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
@@ -3712,17 +3712,27 @@ msgstr "Päällä"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
-msgstr "Salli yhteydet, joiden IP-osoitteet ovat seuraavilla alueilla:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
+msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
 msgstr "Salli yhteydet vain paikallisessa lähiverkossa"
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
+msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Only show the first"
@@ -3788,7 +3798,7 @@ msgstr "Avaa selaimessa"
 
 #: internet/jamendo/jamendoservice.cpp:382
 msgid "Open on Jamendo"
-msgstr ""
+msgstr "Avaa Jamendossa"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3804,7 +3814,7 @@ msgid "Optimize for quality"
 msgstr "Optimoi laatuun"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Valinnat..."
@@ -3856,7 +3866,7 @@ msgstr "Muut valinnat"
 msgid ""
 "Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
 "and length to lrclib.net)"
-msgstr ""
+msgstr "Vaihtoehtoisesti etsi niitä LRCLIB:stä (lähettää kappaleen artistin, nimen, levyn ja keston osoitteeseen lrclib.net)"
 
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
@@ -3944,6 +3954,14 @@ msgstr "Pelkistetty sivupalkki"
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Soita"
+
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
@@ -4053,22 +4071,22 @@ msgstr "Pop"
 
 #: internet/jamendo/jamendoservice.cpp:160
 msgid "Popular albums"
-msgstr ""
+msgstr "Suositut levyt"
 
 #: internet/jamendo/jamendoservice.cpp:155
 msgid "Popular this month"
-msgstr ""
+msgstr "Suosittua tässä kuussa"
 
 #: internet/jamendo/jamendoservice.cpp:153
 msgid "Popular this week"
-msgstr ""
+msgstr "Suosittua tällä viikolla"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Ponnahdusikkunan kesto"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Portti"
 
@@ -4169,7 +4187,7 @@ msgstr "Psykedeelinen"
 
 #: internet/jamendo/jamendoservice.cpp:90
 msgid "Punk"
-msgstr ""
+msgstr "Punk"
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4299,7 +4317,7 @@ msgstr "Ohjausten enimmäismäärä ylittyi, tarkista palvelimen määritykset."
 
 #: internet/jamendo/jamendoservice.cpp:384
 msgid "Refresh"
-msgstr ""
+msgstr "Virkistä"
 
 #: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
@@ -4438,7 +4456,7 @@ msgstr "Toistovoimakkuuden tasaus-moodi"
 msgid "Repopulate"
 msgstr "Täytä uudelleen"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr "Vaadi todennuskoodin"
 
@@ -4495,7 +4513,7 @@ msgstr "Kopioi ääni-CD:n sisältö"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Root-kansio, jota voidaan selata ja ohjata etänä verkosta käsin"
 
@@ -4640,6 +4658,10 @@ msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Haku"
 
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
+msgstr ""
+
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
 msgstr "Icecast haku"
@@ -4689,10 +4711,6 @@ msgstr "Etsi tätä"
 msgid "Search gpodder.net"
 msgstr "Gpodder.net haku"
 
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
-msgstr "iTunes haku"
-
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Hakutapa"
@@ -4704,7 +4722,7 @@ msgstr "Hakuasetukset"
 #: internet/jamendo/jamendoservice.cpp:366
 #, qt-format
 msgid "Search results for \"%1\""
-msgstr ""
+msgstr "Hakutulokset \"%1\""
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4819,13 +4837,13 @@ msgstr "Säädä voimakkuudeksi <value> prosenttia"
 #: networkremote/internetbrowser.cpp:241
 #, qt-format
 msgid "Set up %1 in Clementine's settings on the computer"
-msgstr ""
+msgstr "Määritä %1 Clementine asetukset tietokoneella"
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "Set value for all selected tracks..."
 msgstr "Aseta arvo kaikille valituille kappaleille..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Asetukset"
 
@@ -5112,7 +5130,7 @@ msgstr "Järjestys"
 
 #: internet/jamendo/jamendoservice.cpp:93
 msgid "Soundtrack"
-msgstr ""
+msgstr "Ääniraita"
 
 #: playlist/playlist.cpp:1435
 msgid "Source"
@@ -5325,7 +5343,7 @@ msgstr "Toinen arvo tulee olla suurempi kuin ensimmäinen!"
 
 #: internet/intergalacticfm/intergalacticfmservice.cpp:140
 msgid "The server didn't list any channels"
-msgstr ""
+msgstr "Palvelin ei listannut yhtään kanavaa"
 
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
@@ -5370,8 +5388,8 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Metatietojen hakemisessa Magnatunesta ilmeni ongelma"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
-msgstr "iTunes Storen vastauksen selvittämisessä ilmeni ongelma"
+msgid "There was a problem parsing the response from Apple Podcasts"
+msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -5726,7 +5744,7 @@ msgstr "Käytä omaa väripalettia"
 msgid "Use a custom message for notifications"
 msgstr "Käytä omaa viestiä ilmoituksissa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr "Käytä kauko-ohjausta verkon kautta"
 
@@ -5979,7 +5997,7 @@ msgstr "Ilman kansikuvaa:"
 
 #: internet/jamendo/jamendoservice.cpp:94
 msgid "World"
-msgstr ""
+msgstr "World"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -6060,7 +6078,7 @@ msgstr "Olet kirjautunut sisään."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Voit vaihtaa tapaa, miten kappaleet järjestetään kirjastossa."
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6106,7 +6124,7 @@ msgstr "Jos vaihdat kieltä, käynnistä Clementine uudelleen."
 
 #: internet/dropbox/dropboxservice.cpp:228
 msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
-msgstr ""
+msgstr "Dropbox-kirjautuminen on vanhentunut. Kirjaudu uudelleen Dropboxin asetuksissa."
 
 #: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
@@ -6187,7 +6205,7 @@ msgstr "suurin ensin"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6197,7 +6215,7 @@ msgstr "pilkuin erotettu luettelo sallituista tiedostopäätteistä, jotka näky
 msgid "contains"
 msgstr "sisältää"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr "desktop_remote"
 
@@ -6302,9 +6320,9 @@ msgstr "päällä"
 msgid "options"
 msgstr "valinnat"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr "tai lue QR-koodi:"
 

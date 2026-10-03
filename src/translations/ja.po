@@ -84,7 +84,7 @@ msgstr " 秒"
 msgid " songs"
 msgstr " 曲"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -417,7 +417,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>トークンは % で始まります (例: %artist %album %title)。 </p>\n\n<p>トークンを含むテキストの一部を「{ }」で囲むと、トークンが空の場合、{ } で選択した部分が非表示になります。</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -762,7 +762,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr ""
 
@@ -791,11 +791,11 @@ msgstr "すべての翻訳者"
 msgid "All tracks"
 msgstr "すべてのトラック"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr ""
 
@@ -803,7 +803,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "M/S エンコードを許可"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -910,7 +910,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "オーディオ形式"
@@ -1505,11 +1505,11 @@ msgstr "すべての曲を変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべての曲を変換する"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr ""
 
@@ -2012,15 +2012,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2186,8 +2186,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "このプレイリストの名前を入力してください"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2197,7 +2197,7 @@ msgid ""
 msgstr ""
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
@@ -2521,7 +2521,7 @@ msgstr ""
 msgid "Files"
 msgstr "ファイル"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr ""
 
@@ -3107,7 +3107,7 @@ msgstr ""
 msgid "Length"
 msgstr "長さ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
@@ -3138,7 +3138,7 @@ msgstr ""
 msgid "Limits"
 msgstr "制限"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr ""
 
@@ -3485,7 +3485,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "ミュージックライブラリ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3516,7 +3516,7 @@ msgstr "低速回線 (NB)"
 msgid "Network Proxy"
 msgstr "ネットワークプロキシ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr ""
 
@@ -3720,16 +3720,26 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
+msgstr ""
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
 msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
@@ -3812,7 +3822,7 @@ msgid "Optimize for quality"
 msgstr "品質を最適化"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "オプション..."
@@ -3953,6 +3963,14 @@ msgstr "プレーンサイドバー"
 msgid "Play"
 msgstr "再生"
 
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
+
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "再生回数"
@@ -4076,7 +4094,7 @@ msgid "Popup duration"
 msgstr "ポップアップの長さ"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "ポート"
 
@@ -4446,7 +4464,7 @@ msgstr "再生ゲインモード"
 msgid "Repopulate"
 msgstr "再装着"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr ""
 
@@ -4503,7 +4521,7 @@ msgstr ""
 msgid "Rock"
 msgstr "ロック"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4648,6 +4666,10 @@ msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
 
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
+msgstr ""
+
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
 msgstr "Icecast 局の検索"
@@ -4695,10 +4717,6 @@ msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
-msgstr ""
-
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
 msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:114
@@ -4833,7 +4851,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "すべての選択されたトラックの音量を設定しました..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "設定"
 
@@ -5378,7 +5396,7 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatune からのメタデータ取得に問題がありました"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
+msgid "There was a problem parsing the response from Apple Podcasts"
 msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
@@ -5734,7 +5752,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "通知にカスタムメッセージを使用する"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr ""
 
@@ -6068,7 +6086,7 @@ msgstr "サインインしています。"
 msgid "You can change the way the songs in the library are organised."
 msgstr "ライブラリの曲を整理する方法を変更できます。"
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6195,7 +6213,7 @@ msgstr "大きい順"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6205,7 +6223,7 @@ msgstr ""
 msgid "contains"
 msgstr "が次を含む"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr ""
 
@@ -6310,9 +6328,9 @@ msgstr "が次の日付"
 msgid "options"
 msgstr "オプション"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr ""
 

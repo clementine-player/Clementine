@@ -84,7 +84,7 @@ msgstr " sekund"
 msgid " songs"
 msgstr " písně"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (nyní nedostupné)"
@@ -417,7 +417,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Symboly začínají %, například: %artist %album %title </p>\n\n<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato část bude skryta, je-li symbol prázdný.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient se může připojit jen tehdy, když byl zadán správný kód."
 
@@ -762,7 +762,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Všechnu slávu omamující kuňce!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr "Všechny adresy"
 
@@ -791,11 +791,11 @@ msgstr "Všichni překladatelé"
 msgid "All tracks"
 msgstr "Všechny skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr "Povolit klientu stahování hudby z tohoto počítače."
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr "Povolit stahování"
 
@@ -803,7 +803,7 @@ msgstr "Povolit stahování"
 msgid "Allow mid/side encoding"
 msgstr "Povolit kódování střed/kraj"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr "Povolit přehrávání ve vzdálených zařízeních"
 
@@ -826,7 +826,7 @@ msgstr "Vždy začít přehrávat"
 
 #: internet/jamendo/jamendoservice.cpp:75
 msgid "Ambient"
-msgstr ""
+msgstr "Ambient (klidná hudba)"
 
 #: devices/gpodloader.cpp:62
 msgid "An error occurred loading the iTunes database"
@@ -910,7 +910,7 @@ msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Zvukový formát"
@@ -1060,7 +1060,7 @@ msgstr "Typ bloku"
 
 #: internet/jamendo/jamendoservice.cpp:76
 msgid "Blues"
-msgstr ""
+msgstr "Blues"
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
@@ -1184,7 +1184,7 @@ msgstr "Kontrolují se změny na Disku Google..."
 
 #: internet/jamendo/jamendoservice.cpp:77
 msgid "Chillout"
-msgstr ""
+msgstr "Chill-out (jemná hudba)"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1307,7 +1307,7 @@ msgstr "Prohlížeč obrázků pro Clementine"
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
 " the same name next to it."
-msgstr ""
+msgstr "Clementine zobrazuje texty písní v popiscích skladeb nebo v souborech .lrc či .txt se stejným názvem, které se nacházejí vedle nich."
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
@@ -1505,11 +1505,11 @@ msgstr "Převést všechnu hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Převést zvukové soubory v bezztrátovém formátu, před jejich odesláním do vzdáleného úložiště."
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr "Převést soubory v bezztrátovém formátu"
 
@@ -1608,7 +1608,7 @@ msgstr "Nelze se připojit k plex.tv: %1"
 
 #: internet/jamendo/jamendoservice.cpp:79
 msgid "Country"
-msgstr ""
+msgstr "Country"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -2012,15 +2012,15 @@ msgstr "Stáhnout nové díly automaticky"
 msgid "Download queued"
 msgstr "Stáhnout zařazené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr "Nastavení stahování"
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr "Stáhnout původní aplikaci pro Android"
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr "Stáhnout dálkové ovládání pro stolní počítač, Android a iOS"
 
@@ -2122,7 +2122,7 @@ msgstr "Upravit..."
 
 #: internet/jamendo/jamendoservice.cpp:81
 msgid "Electronic"
-msgstr ""
+msgstr "Electronická hudba"
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2186,8 +2186,8 @@ msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 msgid "Enter a new name for this playlist"
 msgstr "Zadejte název tohoto seznamu skladeb"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Zadejte v aplikaci jednu z těchto adres pro připojení ke Clementine."
 
@@ -2197,8 +2197,8 @@ msgid ""
 msgstr "Zadejte hledané pojmy výše pro nalezení hudby ve vašem počítači a na internetu"
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr "Zadejte hledané výrazy pro nalezení pořadů v obchodu iTunes"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
+msgstr "Zadejte hledané výrazy pro nalezení pořadů na Apple Podcasts"
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
 msgid "Enter search terms below to find podcasts on gpodder.net"
@@ -2521,7 +2521,7 @@ msgstr "Náhled názvu souboru"
 msgid "Files"
 msgstr "Soubory"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr "Základní složka pro soubory"
 
@@ -2551,7 +2551,7 @@ msgstr "Přizpůsobit obal šířce"
 
 #: internet/jamendo/jamendoservice.cpp:82
 msgid "Folk"
-msgstr ""
+msgstr "Folk"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Follow system"
@@ -2641,7 +2641,7 @@ msgstr "Plné výšky"
 
 #: internet/jamendo/jamendoservice.cpp:83
 msgid "Funk"
-msgstr ""
+msgstr "Funk"
 
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
@@ -2664,7 +2664,7 @@ msgstr "Žánr"
 
 #: internet/jamendo/jamendoservice.cpp:165
 msgid "Genres"
-msgstr ""
+msgstr "Žánry"
 
 #: internet/somafm/somafmservice.cpp:119
 #: internet/intergalacticfm/intergalacticfmservice.cpp:119
@@ -2812,7 +2812,7 @@ msgstr "Hip Hop"
 
 #: internet/jamendo/jamendoservice.cpp:84
 msgid "Hip-hop"
-msgstr ""
+msgstr "Hip hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2954,7 +2954,7 @@ msgstr "Vložit..."
 #: networkremote/outgoingdatacreator.cpp:530
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
-msgstr ""
+msgstr "Instrumentální hudba"
 
 #: core/database.cpp:617
 msgid "Integrity check"
@@ -2990,11 +2990,11 @@ msgstr "Obrátit výběr"
 msgid ""
 "Jamendo request failed:\n"
 "%1"
-msgstr ""
+msgstr "Žádost Jamendo se nezdařila:\n%1"
 
 #: internet/jamendo/jamendoservice.cpp:85
 msgid "Jazz"
-msgstr ""
+msgstr "Jazz"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Jump to previous song right away"
@@ -3092,7 +3092,7 @@ msgstr "Wiki pro Last.fm"
 
 #: internet/jamendo/jamendoservice.cpp:86
 msgid "Latin"
-msgstr ""
+msgstr "Latinskoamerická hudba"
 
 #: library/library.cpp:106
 msgid "Least favourite tracks"
@@ -3107,7 +3107,7 @@ msgstr "Vlevo"
 msgid "Length"
 msgstr "Délka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
@@ -3138,7 +3138,7 @@ msgstr "Světlý"
 msgid "Limits"
 msgstr "Omezení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr "Poslechněte si dále"
 
@@ -3177,7 +3177,7 @@ msgstr "Nahrát seznam skladeb..."
 #: internet/jamendo/jamendoservice.cpp:216
 #, qt-format
 msgid "Loading %1"
-msgstr ""
+msgstr "Nahrává se %1"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3245,7 +3245,7 @@ msgstr "Dlouhodobý předpověďní profil"
 
 #: internet/jamendo/jamendoservice.cpp:87
 msgid "Lounge"
-msgstr ""
+msgstr "Lounge"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Love"
@@ -3277,15 +3277,15 @@ msgstr "Texty písní"
 #: songinfo/lyricsfetcher.cpp:129
 #, qt-format
 msgid "Lyrics from %1"
-msgstr "Texty písní z %1"
+msgstr "Text písně z %1"
 
 #: songinfo/lyricsfetcher.cpp:258
 msgid "Lyrics from LRCLIB"
-msgstr ""
+msgstr "Text písně z LRCLIB"
 
 #: songinfo/lyricsfetcher.cpp:115
 msgid "Lyrics from the file's tags"
-msgstr ""
+msgstr "Text písně ze značek soubou"
 
 #: transcoder/transcoder.cpp:282
 msgid "M4A AAC"
@@ -3396,7 +3396,7 @@ msgstr "Druh členství"
 
 #: internet/jamendo/jamendoservice.cpp:88
 msgid "Metal"
-msgstr ""
+msgstr "Metal"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Minimum bitrate"
@@ -3453,7 +3453,7 @@ msgstr "Nejvíce hráno"
 
 #: internet/jamendo/jamendoservice.cpp:157
 msgid "Most popular of all time"
-msgstr ""
+msgstr "Nejoblíbenější všech dob"
 
 #: devices/giolister.cpp:182
 msgid "Mount point"
@@ -3485,7 +3485,7 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudební sbírka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr "Vzdáleně viditelné hudební přípony"
 
@@ -3516,7 +3516,7 @@ msgstr "Úzké pásmo"
 msgid "Network Proxy"
 msgstr "Síťová proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr "Síťové vzdálené ovládání"
 
@@ -3535,7 +3535,7 @@ msgstr "Nikdy nezačít přehrávání"
 
 #: internet/jamendo/jamendoservice.cpp:162
 msgid "New albums"
-msgstr ""
+msgstr "Nová alba"
 
 #: playlist/playlistlistcontainer.cpp:158
 #: playlist/playlistlistcontainer.cpp:263
@@ -3720,17 +3720,27 @@ msgstr "Zapnuto"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
-msgstr "Přijmout spojení od klientů pouze v rozsazích IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
+msgstr "Přijímat pouze připojení od klientů v následujících rozsazích IP adres:\n10.x.x.x\n172.16.0.0 – 172.31.255.255\n192.168.x.x\na z adres IPv6 typu link-local a soukromých.\n\nPři naslouchání na zvolené adrese v rozsahu 100.64.0.0/10, například na adrese Tailscale, se připojení z tohoto rozsahu rovněž považují za místní."
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
 msgstr "Povolit spojení pouze z místní sítě"
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
+msgstr "Povoleny jsou pouze připojení z místní sítě, takže se nelze připojit přes: %1"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Only show the first"
@@ -3796,7 +3806,7 @@ msgstr "Otevřít v prohlížeči"
 
 #: internet/jamendo/jamendoservice.cpp:382
 msgid "Open on Jamendo"
-msgstr ""
+msgstr "Otevřít v Jamendu"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3812,7 +3822,7 @@ msgid "Optimize for quality"
 msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Volby..."
@@ -3864,7 +3874,7 @@ msgstr "Další volby"
 msgid ""
 "Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
 "and length to lrclib.net)"
-msgstr ""
+msgstr "V opačném případě je vyhledejte v LRCLIB (odešle jméno interpreta, název skladby, název alba a délku skladby lrclib.net)"
 
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
@@ -3952,6 +3962,14 @@ msgstr "Prostý postranní panel"
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Přehrát"
+
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr "Přehrávejte píseň a podívejte se zde na její slova a podrobnosti k ní."
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr "Přehrávejte píseň a podívejte se zde na obrázky zpěváka a jeho životopis."
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
@@ -4061,22 +4079,22 @@ msgstr "Pop"
 
 #: internet/jamendo/jamendoservice.cpp:160
 msgid "Popular albums"
-msgstr ""
+msgstr "Oblíbená alba"
 
 #: internet/jamendo/jamendoservice.cpp:155
 msgid "Popular this month"
-msgstr ""
+msgstr "Oblíbené tento měsíc"
 
 #: internet/jamendo/jamendoservice.cpp:153
 msgid "Popular this week"
-msgstr ""
+msgstr "Oblíbené tento týden"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Doba zobrazení oznámení"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Port"
 
@@ -4177,7 +4195,7 @@ msgstr "Křiklavý"
 
 #: internet/jamendo/jamendoservice.cpp:90
 msgid "Punk"
-msgstr ""
+msgstr "Punk"
 
 #: wiimotedev/wiimotesettingspage.cpp:247
 msgid "Push Wii Remote button"
@@ -4307,7 +4325,7 @@ msgstr "Krajní mez na přesměrování překročena, ověřte nastavení server
 
 #: internet/jamendo/jamendoservice.cpp:384
 msgid "Refresh"
-msgstr ""
+msgstr "Obnovit"
 
 #: internet/magnatune/magnatuneservice.cpp:289
 #: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
@@ -4446,7 +4464,7 @@ msgstr "Režim zesílení přehrávaných skladeb"
 msgid "Repopulate"
 msgstr "Znovu zaplnit"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr "Vyžadovat ověřovací kód"
 
@@ -4503,7 +4521,7 @@ msgstr "Vytáhnout skladby ze zvukového CD"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Základní složka, kterou lze procházet ze síťového dálkového ovladače"
 
@@ -4648,6 +4666,10 @@ msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
 
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
+msgstr "Hledat v Apple Podcasts"
+
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
 msgstr "Hledat stanice s Icecastem"
@@ -4697,10 +4719,6 @@ msgstr "Hledat toto"
 msgid "Search gpodder.net"
 msgstr "Hledat na gpodder.net"
 
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
-msgstr "Hledat na iTunes"
-
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Režim vyhledávání"
@@ -4712,7 +4730,7 @@ msgstr "Možnosti vyhledávání"
 #: internet/jamendo/jamendoservice.cpp:366
 #, qt-format
 msgid "Search results for \"%1\""
-msgstr ""
+msgstr "Výsledky vyhledávání pro „%1“"
 
 #: smartplaylists/querywizardplugin.cpp:157
 #: ../bin/src/ui_querysearchpage.h:119
@@ -4833,7 +4851,7 @@ msgstr "Nastavit %1 v nastavení Clementine v počítači"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavit hodnotu pro vybrané skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -5120,7 +5138,7 @@ msgstr "Řazení"
 
 #: internet/jamendo/jamendoservice.cpp:93
 msgid "Soundtrack"
-msgstr ""
+msgstr "Hudební doprovod"
 
 #: playlist/playlist.cpp:1435
 msgid "Source"
@@ -5333,7 +5351,7 @@ msgstr "Druhá hodnota musí být větší než první!"
 
 #: internet/intergalacticfm/intergalacticfmservice.cpp:140
 msgid "The server didn't list any channels"
-msgstr ""
+msgstr "Server nezobrazil žádné kanály"
 
 #: internet/plex/plexauthenticator.cpp:126
 msgid "The sign-in request expired. Please try again."
@@ -5378,8 +5396,8 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Při stahování popisných dat z Magnatune se vyskytly potíže."
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
-msgstr "Nastaly potíže se zpracováním odpovědi od obchodu iTunes"
+msgid "There was a problem parsing the response from Apple Podcasts"
+msgstr "Nastaly potíže se zpracováním odpovědi obchodu Apple Podcasts"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -5734,7 +5752,7 @@ msgstr "Použít vlastní sadu barev"
 msgid "Use a custom message for notifications"
 msgstr "Použít vlastní zprávu pro oznámení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr "Použít síťové vzdálené ovládání"
 
@@ -5987,7 +6005,7 @@ msgstr "Bez obalu:"
 
 #: internet/jamendo/jamendoservice.cpp:94
 msgid "World"
-msgstr ""
+msgstr "World music"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -6068,7 +6086,7 @@ msgstr "Jste přihlášen."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Můžete změnit způsob uspořádání písní v hudební sbírce."
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6114,7 +6132,7 @@ msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 
 #: internet/dropbox/dropboxservice.cpp:228
 msgid "Your Dropbox login has expired. Log in again in Dropbox's settings."
-msgstr ""
+msgstr "Platnost vašeho přihlášení do Dropboxu vypršela. Přihlaste se znovu v nastaveních Dropboxu."
 
 #: internet/magnatune/magnatunesettingspage.cpp:115
 msgid "Your Magnatune credentials were incorrect"
@@ -6195,7 +6213,7 @@ msgstr "nejprve největší"
 msgid "bpm"
 msgstr "úzm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6205,7 +6223,7 @@ msgstr "seznam čárkou oddělených povolených přípon, které budou viditeln
 msgid "contains"
 msgstr "obsahuje"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr "desktop_vzdálené_ovládání"
 
@@ -6310,9 +6328,9 @@ msgstr "Na"
 msgid "options"
 msgstr "volby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr "nebo sejměte QR kód:"
 
