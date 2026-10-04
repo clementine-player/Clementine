@@ -245,6 +245,7 @@ set(SOURCES
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
 
+  networkremote/authattemptlimiter.cpp
   networkremote/incomingdataparser.cpp
   networkremote/internetbrowser.cpp
   networkremote/networkremote.cpp

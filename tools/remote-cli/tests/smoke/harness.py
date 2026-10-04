@@ -48,7 +48,8 @@ def has_gst_element(name: str) -> bool:
 class Clementine:
     """A Clementine with a throwaway profile, listening on 127.0.0.1 only.
 
-    Remote streaming is allowed in its settings if |streaming| is set.
+    Remote streaming is allowed in its settings if |streaming| is set, and
+    remotes have to give |auth_code| if it's set.
     """
 
     def __init__(
@@ -57,12 +58,14 @@ class Clementine:
         root: Path,
         streaming: bool = True,
         extra_config: str = "",
+        auth_code: int | None = None,
     ) -> None:
         self.binary = binary
         self.root = root
         self.streaming = streaming
         # More settings, in Clementine.conf's ini format.
         self.extra_config = extra_config
+        self.auth_code = auth_code
         self.port = free_port()
         self.log_path = root / "clementine.log"
         self.process: subprocess.Popen[bytes] | None = None
@@ -84,7 +87,8 @@ allow_streaming={str(self.streaming).lower()}
 only_non_public_ip=true
 listen_on_all_addresses=false
 listen_addresses={HOST}
-use_auth_code=false
+use_auth_code={str(self.auth_code is not None).lower()}
+auth_code={self.auth_code or 0}
 
 [GstEngine]
 sink={sink}

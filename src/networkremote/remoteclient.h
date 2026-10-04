@@ -9,10 +9,14 @@
 #include "remotecontrolmessages.pb.h"
 #include "songsender.h"
 
+class AuthAttemptLimiter;
+
 class RemoteClient : public QObject {
   Q_OBJECT
  public:
-  RemoteClient(Application* app, QTcpSocket* client);
+  // |auth_limiter| is shared by every connection, and outlives this one.
+  RemoteClient(Application* app, QTcpSocket* client,
+               AuthAttemptLimiter* auth_limiter);
   ~RemoteClient();
 
   // This method checks if client is authenticated before sending the data
@@ -55,6 +59,7 @@ class RemoteClient : public QObject {
   Application* app_;
   const int id_;
 
+  AuthAttemptLimiter* auth_limiter_;
   bool use_auth_code_;
   int auth_code_;
   bool authenticated_;

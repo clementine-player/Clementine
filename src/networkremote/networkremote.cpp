@@ -30,6 +30,7 @@
 #include "covers/currentartloader.h"
 #include "engines/enginerouter.h"
 #include "internet/core/internetmodel.h"
+#include "networkremote/authattemptlimiter.h"
 #include "networkremote/incomingdataparser.h"
 #include "networkremote/internetbrowser.h"
 #include "networkremote/outgoingdatacreator.h"
@@ -55,7 +56,8 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
       internet_browser_(nullptr),
       allow_streaming_(false),
       signals_connected_(false),
-      app_(app) {
+      app_(app),
+      auth_limiter_(new AuthAttemptLimiter) {
   setObjectName("Network remote");
 }
 
@@ -445,7 +447,8 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
 void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
   if (client_socket) {
     // Add the client to the list
-    RemoteClient* client = new RemoteClient(app_, client_socket);
+    RemoteClient* client =
+        new RemoteClient(app_, client_socket, auth_limiter_.get());
     clients_.push_back(client);
 
     // Update the Remote Root Files for the latest Client

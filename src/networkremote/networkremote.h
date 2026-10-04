@@ -8,6 +8,7 @@
 #include <vector>
 
 class Application;
+class AuthAttemptLimiter;
 class IncomingDataParser;
 class InternetBrowser;
 class MediaHttpServer;
@@ -78,6 +79,9 @@ class NetworkRemote : public QObject {
   Application* app_;
 
   QList<RemoteClient*> clients_;
+  // Wrong auth codes, by address. Kept across connections and restarts of the
+  // server, so neither resets the count.
+  std::unique_ptr<AuthAttemptLimiter> auth_limiter_;
 
   void StopServer();
   void ReadSettings();

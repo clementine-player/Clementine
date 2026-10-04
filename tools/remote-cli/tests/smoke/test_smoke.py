@@ -447,3 +447,51 @@ async def test_browsing_plays_a_saved_radio_stream(
             await controller.wait_for_state(pb.Playing)
         finally:
             await conn.close()
+
+
+async def _answer_to_code(port: int, code: int, local_address: str = HOST) -> str:
+    """What Clementine answers a CONNECT with |code|: INFO, the disconnect
+    reason, or "closed" if it closes the connection without one."""
+    conn = await connection.Connection.open(HOST, port, local_address)
+    try:
+        await conn.send(
+            pb.Message(
+                type=pb.CONNECT, request_connect=pb.RequestConnect(auth_code=code)
+            )
+        )
+        async for msg in conn.messages():
+            if msg.type == pb.INFO:
+                return "INFO"
+            if msg.type == pb.DISCONNECT:
+                return pb.ReasonDisconnect.Name(
+                    msg.response_disconnect.reason_disconnect
+                )
+        return "closed"
+    finally:
+        await conn.close()
+
+
+@run_async
+async def test_guessing_the_auth_code_is_limited(
+    clementine_with_auth_code: Clementine,
+) -> None:
+    port = clementine_with_auth_code.port
+    right = clementine_with_auth_code.auth_code
+    assert right is not None
+
+    # A right code resets the count, so mistakes don't add up across visits.
+    for _ in range(5):
+        assert await _answer_to_code(port, right + 1) == "Wrong_Auth_Code"
+    assert await _answer_to_code(port, right) == "INFO"
+
+    for _ in range(6):
+        assert await _answer_to_code(port, right + 1) == "Wrong_Auth_Code"
+    # Locked out: even the right code isn't checked.
+    assert await _answer_to_code(port, right) == "closed"
+
+    # Other addresses can still connect.
+    try:
+        answer = await _answer_to_code(port, right, local_address="127.0.0.2")
+    except OSError:
+        pytest.skip("can't connect from 127.0.0.2 here")
+    assert answer == "INFO"

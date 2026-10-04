@@ -22,12 +22,15 @@
 
 #include "core/logging.h"
 #include "networkremote.h"
+#include "networkremote/authattemptlimiter.h"
 
 std::atomic<int> RemoteClient::sNextId(1);
 
-RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
+RemoteClient::RemoteClient(Application* app, QTcpSocket* client,
+                           AuthAttemptLimiter* auth_limiter)
     : app_(app),
       id_(sNextId++),
+      auth_limiter_(auth_limiter),
       downloader_(false),
       client_(client),
       song_sender_(new SongSender(app, this)) {
@@ -116,10 +119,19 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
   }
 
   if (msg.type() == cpb::remote::CONNECT && use_auth_code_) {
+    // While its address is locked out, the code isn't even looked at, so
+    // there's nothing to learn from trying. There's no disconnect reason for
+    // this that the remotes know, so it's just dropped.
+    if (!auth_limiter_->MayTry(peer_address())) {
+      client_->close();
+      return;
+    }
     if (msg.request_connect().auth_code() != auth_code_) {
+      auth_limiter_->RecordFailure(peer_address());
       DisconnectClient(cpb::remote::Wrong_Auth_Code);
       return;
     } else {
+      auth_limiter_->RecordSuccess(peer_address());
       authenticated_ = true;
     }
   }

@@ -18,8 +18,10 @@
 
 #include <QHostAddress>
 #include <QStringList>
+#include <algorithm>
 
 #include "gtest/gtest.h"
+#include "networkremote/authattemptlimiter.h"
 #include "test_utils.h"
 
 TEST(NetworkRemoteTest, AllAddressesListensOnTheWildcards) {
@@ -67,4 +69,109 @@ TEST(NetworkRemoteTest, PrivateAndPublicAddresses) {
   EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:10.0.0.2")));
   EXPECT_FALSE(NetworkRemote::IpIsPrivate(QHostAddress("8.8.8.8")));
   EXPECT_FALSE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:8.8.8.8")));
+}
+
+class AuthAttemptLimiterTest : public ::testing::Test {
+ protected:
+  AuthAttemptLimiterTest()
+      : now_(0), limiter_([this]() { return now_; }), guesser_("203.0.113.7") {}
+
+  void FailFreely(const QHostAddress& address) {
+    for (int i = 0; i < AuthAttemptLimiter::kFreeFailures; ++i) {
+      ASSERT_TRUE(limiter_.MayTry(address));
+      EXPECT_EQ(0, limiter_.RecordFailure(address));
+    }
+  }
+
+  qint64 now_;
+  AuthAttemptLimiter limiter_;
+  const QHostAddress guesser_;
+};
+
+TEST_F(AuthAttemptLimiterTest, AFewWrongCodesAreFree) {
+  FailFreely(guesser_);
+  EXPECT_TRUE(limiter_.MayTry(guesser_));
+}
+
+TEST_F(AuthAttemptLimiterTest, LockoutDoublesUpToTheMaximum) {
+  FailFreely(guesser_);
+
+  qint64 expected = AuthAttemptLimiter::kFirstLockoutMsec;
+  for (int i = 0; i < 20; ++i) {
+    ASSERT_TRUE(limiter_.MayTry(guesser_));
+    EXPECT_EQ(expected, limiter_.RecordFailure(guesser_));
+
+    now_ += expected - 1;
+    EXPECT_FALSE(limiter_.MayTry(guesser_));
+    now_ += 1;
+
+    expected = std::min(expected * 2, AuthAttemptLimiter::kMaxLockoutMsec);
+  }
+}
+
+TEST_F(AuthAttemptLimiterTest, GuessingAllTheCodesTakesYears) {
+  // As fast as the limit allows.
+  qint64 guesses = 0;
+  while (now_ < 365LL * 24 * 60 * 60 * 1000) {
+    now_ += limiter_.RecordFailure(guesser_);
+    ++guesses;
+  }
+  // Half of the 100000 codes, the average needed, would take over five years.
+  EXPECT_LT(guesses, 10000);
+}
+
+TEST_F(AuthAttemptLimiterTest, OtherAddressesAreUnaffected) {
+  FailFreely(guesser_);
+  limiter_.RecordFailure(guesser_);
+  EXPECT_FALSE(limiter_.MayTry(guesser_));
+  EXPECT_TRUE(limiter_.MayTry(QHostAddress("203.0.113.8")));
+}
+
+TEST_F(AuthAttemptLimiterTest, ARightCodeForgetsTheAddress) {
+  FailFreely(guesser_);
+  limiter_.RecordSuccess(guesser_);
+  EXPECT_EQ(0, limiter_.address_count());
+  FailFreely(guesser_);
+}
+
+TEST_F(AuthAttemptLimiterTest, ADayWithoutWrongCodesForgetsTheAddress) {
+  FailFreely(guesser_);
+  limiter_.RecordFailure(guesser_);
+
+  now_ += AuthAttemptLimiter::kForgetAfterMsec - 1;
+  EXPECT_EQ(AuthAttemptLimiter::kFirstLockoutMsec * 2,
+            limiter_.RecordFailure(guesser_));
+
+  now_ += AuthAttemptLimiter::kForgetAfterMsec;
+  FailFreely(guesser_);
+}
+
+TEST_F(AuthAttemptLimiterTest, IPv4IsTheSameOnADualStackSocket) {
+  FailFreely(QHostAddress("::ffff:203.0.113.7"));
+  limiter_.RecordFailure(guesser_);
+  EXPECT_FALSE(limiter_.MayTry(QHostAddress("::ffff:203.0.113.7")));
+}
+
+TEST_F(AuthAttemptLimiterTest, IPv6IsCountedBySlash64) {
+  FailFreely(QHostAddress("2001:db8:1:2::1"));
+  limiter_.RecordFailure(QHostAddress("2001:db8:1:2:aaaa::9"));
+  EXPECT_FALSE(limiter_.MayTry(QHostAddress("2001:db8:1:2:ffff::1")));
+  EXPECT_TRUE(limiter_.MayTry(QHostAddress("2001:db8:1:3::1")));
+}
+
+TEST_F(AuthAttemptLimiterTest, KeepsABoundedNumberOfAddresses) {
+  for (int i = 0; i < AuthAttemptLimiter::kMaxAddresses * 2; ++i) {
+    now_ += 1;
+    limiter_.RecordFailure(QHostAddress(quint32(0x0a000000 + i)));
+  }
+  EXPECT_EQ(AuthAttemptLimiter::kMaxAddresses, limiter_.address_count());
+
+  // The latest is still counted: its sixth wrong code locks it out.
+  const QHostAddress latest(
+      quint32(0x0a000000 + AuthAttemptLimiter::kMaxAddresses * 2 - 1));
+  for (int i = 1; i < AuthAttemptLimiter::kFreeFailures; ++i) {
+    limiter_.RecordFailure(latest);
+  }
+  EXPECT_EQ(AuthAttemptLimiter::kFirstLockoutMsec,
+            limiter_.RecordFailure(latest));
 }
