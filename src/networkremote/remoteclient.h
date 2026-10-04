@@ -24,7 +24,9 @@ class RemoteClient : public QObject {
   QAbstractSocket::SocketState State();
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
-  void DisconnectClient(cpb::remote::ReasonDisconnect reason);
+  // |retry_after_msec| is sent, rounded up to seconds, if it's set.
+  void DisconnectClient(cpb::remote::ReasonDisconnect reason,
+                        qint64 retry_after_msec = 0);
 
   SongSender* song_sender() { return song_sender_; }
   const QString& files_root_folder() const { return files_root_folder_; }

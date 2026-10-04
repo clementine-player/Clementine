@@ -120,15 +120,21 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
 
   if (msg.type() == cpb::remote::CONNECT && use_auth_code_) {
     // While its address is locked out, the code isn't even looked at, so
-    // there's nothing to learn from trying. There's no disconnect reason for
-    // this that the remotes know, so it's just dropped.
-    if (!auth_limiter_->MayTry(peer_address())) {
-      client_->close();
+    // there's nothing to learn from trying.
+    const qint64 locked_out_for = auth_limiter_->LockedOutFor(peer_address());
+    if (locked_out_for > 0) {
+      DisconnectClient(cpb::remote::Too_Many_Wrong_Auth_Codes, locked_out_for);
       return;
     }
     if (msg.request_connect().auth_code() != auth_code_) {
-      auth_limiter_->RecordFailure(peer_address());
-      DisconnectClient(cpb::remote::Wrong_Auth_Code);
+      // The wrong code that starts a lockout says so, so the remote can say
+      // to wait rather than ask for the code again.
+      const qint64 lockout = auth_limiter_->RecordFailure(peer_address());
+      if (lockout > 0) {
+        DisconnectClient(cpb::remote::Too_Many_Wrong_Auth_Codes, lockout);
+      } else {
+        DisconnectClient(cpb::remote::Wrong_Auth_Code);
+      }
       return;
     } else {
       auth_limiter_->RecordSuccess(peer_address());
@@ -163,11 +169,16 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
   emit Parse(msg);
 }
 
-void RemoteClient::DisconnectClient(cpb::remote::ReasonDisconnect reason) {
+void RemoteClient::DisconnectClient(cpb::remote::ReasonDisconnect reason,
+                                    qint64 retry_after_msec) {
   cpb::remote::Message msg;
   msg.set_type(cpb::remote::DISCONNECT);
 
   msg.mutable_response_disconnect()->set_reason_disconnect(reason);
+  if (retry_after_msec > 0) {
+    msg.mutable_response_disconnect()->set_retry_after_seconds(
+        (retry_after_msec + 999) / 1000);
+  }
   SendDataToClient(&msg);
 
   // Just close the connection. The next time the outgoing data creator

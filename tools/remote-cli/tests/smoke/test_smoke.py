@@ -484,10 +484,12 @@ async def test_guessing_the_auth_code_is_limited(
         assert await _answer_to_code(port, right + 1) == "Wrong_Auth_Code"
     assert await _answer_to_code(port, right) == "INFO"
 
-    for _ in range(6):
+    for _ in range(5):
         assert await _answer_to_code(port, right + 1) == "Wrong_Auth_Code"
+    # The sixth starts a lockout, and says so.
+    assert await _answer_to_code(port, right + 1) == "Too_Many_Wrong_Auth_Codes"
     # Locked out: even the right code isn't checked.
-    assert await _answer_to_code(port, right) == "closed"
+    assert await _answer_to_code(port, right) == "Too_Many_Wrong_Auth_Codes"
 
     # Other addresses can still connect.
     try:

@@ -56,8 +56,9 @@ class AuthAttemptLimiter {
   // Uses |clock| for the time if it's given; tests give one.
   explicit AuthAttemptLimiter(Clock clock = Clock());
 
-  // Whether a code from |address| should be checked now. Logs refusals.
-  bool MayTry(const QHostAddress& address);
+  // How long until a code from |address| is checked again, in milliseconds:
+  // 0 if it should be checked now. Logs refusals.
+  qint64 LockedOutFor(const QHostAddress& address);
 
   // A wrong code from |address|. Returns how long it's now refused for, in
   // milliseconds: 0 while it's within its free failures.

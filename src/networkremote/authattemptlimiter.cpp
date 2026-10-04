@@ -57,12 +57,13 @@ AuthAttemptLimiter::Record* AuthAttemptLimiter::Find(const QString& key,
   return &it.value();
 }
 
-bool AuthAttemptLimiter::MayTry(const QHostAddress& address) {
+qint64 AuthAttemptLimiter::LockedOutFor(const QHostAddress& address) {
   const qint64 now = Now();
   Record* record = Find(KeyFor(address), now);
-  if (!record || now >= record->locked_until) return true;
+  if (!record || now >= record->locked_until) return 0;
 
-  const qint64 seconds_left = (record->locked_until - now + 999) / 1000;
+  const qint64 left = record->locked_until - now;
+  const qint64 seconds_left = (left + 999) / 1000;
   if (record->refusal_logged) {
     qLog(Debug) << "Refusing an auth code from" << address.toString()
                 << "for another" << seconds_left << "seconds";
@@ -72,7 +73,7 @@ bool AuthAttemptLimiter::MayTry(const QHostAddress& address) {
                   << "for another" << seconds_left << "seconds, after"
                   << record->failures << "wrong codes";
   }
-  return false;
+  return left;
 }
 
 qint64 AuthAttemptLimiter::RecordFailure(const QHostAddress& address) {
