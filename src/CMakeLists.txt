@@ -949,6 +949,7 @@ optional_source(APPLE
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
+    ui/sfsymbolicon.mm
     widgets/osd_mac.mm
   HEADERS
     core/macfslistener.h

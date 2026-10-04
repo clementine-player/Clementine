@@ -26,6 +26,10 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 
+#ifdef Q_OS_DARWIN
+#include "ui/sfsymbolicon.h"
+#endif
+
 QList<int> IconLoader::sizes_;
 QString IconLoader::custom_icon_path_;
 QList<QString> IconLoader::icon_sub_path_;
@@ -57,6 +61,19 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
   if (use_sys_icons_) {
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;
+  }
+#endif
+
+#ifdef Q_OS_DARWIN
+  // On macOS, the system's own SF Symbols for the common actions, unless the
+  // user has an icon set of their own. CLEMENTINE_SF_SYMBOLS=0 turns them off.
+  if (icontype == Base && qgetenv("CLEMENTINE_SF_SYMBOLS") != "0" &&
+      !QDir(custom_icon_path_ + icon_sub_path_.at(icontype)).exists()) {
+    const QString symbol = SFSymbolForIconName(name);
+    if (!symbol.isEmpty()) {
+      ret = SFSymbolIcon(symbol);
+      if (!ret.isNull()) return ret;
+    }
   }
 #endif
 
