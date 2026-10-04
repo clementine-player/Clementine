@@ -9,10 +9,14 @@
 #include "remotecontrolmessages.pb.h"
 #include "songsender.h"
 
+class AuthAttemptLimiter;
+
 class RemoteClient : public QObject {
   Q_OBJECT
  public:
-  RemoteClient(Application* app, QTcpSocket* client);
+  // |auth_limiter| is shared by every connection, and outlives this one.
+  RemoteClient(Application* app, QTcpSocket* client,
+               AuthAttemptLimiter* auth_limiter);
   ~RemoteClient();
 
   // This method checks if client is authenticated before sending the data
@@ -20,7 +24,9 @@ class RemoteClient : public QObject {
   QAbstractSocket::SocketState State();
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
-  void DisconnectClient(cpb::remote::ReasonDisconnect reason);
+  // |retry_after_msec| is sent, rounded up to seconds, if it's set.
+  void DisconnectClient(cpb::remote::ReasonDisconnect reason,
+                        qint64 retry_after_msec = 0);
 
   SongSender* song_sender() { return song_sender_; }
   const QString& files_root_folder() const { return files_root_folder_; }
@@ -55,6 +61,7 @@ class RemoteClient : public QObject {
   Application* app_;
   const int id_;
 
+  AuthAttemptLimiter* auth_limiter_;
   bool use_auth_code_;
   int auth_code_;
   bool authenticated_;

@@ -85,9 +85,14 @@ def music_server(music: dict[str, Path]) -> Iterator[str]:
     server.shutdown()
 
 
-def _run(root: Path, streaming: bool, extra_config: str = "") -> Iterator[Clementine]:
+def _run(
+    root: Path,
+    streaming: bool,
+    extra_config: str = "",
+    auth_code: int | None = None,
+) -> Iterator[Clementine]:
     instance = Clementine(
-        Path(os.environ["CLEMENTINE_BINARY"]), root, streaming, extra_config
+        Path(os.environ["CLEMENTINE_BINARY"]), root, streaming, extra_config, auth_code
     )
     instance.start()
     yield instance
@@ -120,3 +125,9 @@ streams\\size=1
 def clementine_without_streaming(tmp_path: Path) -> Iterator[Clementine]:
     """Clementine with playing on remote devices not allowed."""
     yield from _run(tmp_path / "profile", streaming=False)
+
+
+@pytest.fixture
+def clementine_with_auth_code(tmp_path: Path) -> Iterator[Clementine]:
+    """Clementine that asks remotes for an auth code: its auth_code."""
+    yield from _run(tmp_path / "profile", streaming=False, auth_code=12345)

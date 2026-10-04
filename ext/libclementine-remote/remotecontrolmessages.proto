@@ -292,9 +292,16 @@ enum ReasonDisconnect {
   // Clementine only accepts connections from its local network, and the
   // client isn't on it. Older clients read this as Server_Shutdown.
   Not_Local_Network = 5;
+  // Too many wrong auth codes have come from the client's address, so
+  // Clementine isn't checking its codes for a while: see retry_after_seconds.
+  // Older clients read this as Server_Shutdown.
+  Too_Many_Wrong_Auth_Codes = 6;
 }
 message ResponseDisconnect {
   optional ReasonDisconnect reason_disconnect = 1;
+  // With Too_Many_Wrong_Auth_Codes: how long until Clementine checks a code
+  // from the client's address again.
+  optional int32 retry_after_seconds = 2;
 }
 
 message ResponseActiveChanged {
