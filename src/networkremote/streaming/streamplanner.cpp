@@ -127,6 +127,9 @@ RendererCaps RendererCaps::FromProto(
       case cpb::remote::RENDERER_FEATURE_HTTP_RANGE:
         caps.http_range = true;
         break;
+      case cpb::remote::RENDERER_FEATURE_RELATIVE_URLS:
+        caps.relative_urls = true;
+        break;
       default:
         break;
     }

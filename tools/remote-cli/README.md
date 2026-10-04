@@ -51,6 +51,7 @@ cr watch                 # print state, position and output changes
 | `--fail-format FORMAT` | For testing: refuse items in this format as if the player couldn't decode them. Clementine should retry the item once, encoded to another format the renderer accepts, then skip it if that fails too. `--fail-format audio/flac` exercises the retry; failing every format you accept exercises the skip. |
 | `--max-bitrate KBPS` | Asks Clementine to keep streams under this bitrate. |
 | `--gapless` | Accepts `RENDER_PRELOAD` and starts the next item without a gap. Only the `null` player uses it. |
+| `--absolute-urls` | Doesn't declare `RENDERER_FEATURE_RELATIVE_URLS`, like the first released remotes, so Clementine sends URLs with the address its end of the connection has, rather than a path to fetch from the address this renderer connected to. |
 | `--take-over` | Makes this renderer the active output as soon as it connects. |
 | `--id`, `--name` | The renderer's id and display name. The id defaults to a UUID saved in `~/.config/clementine-remote-cli/renderer_id`. |
 

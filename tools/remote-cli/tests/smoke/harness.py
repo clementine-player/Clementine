@@ -14,6 +14,8 @@ from pathlib import Path
 from types import TracebackType
 from typing import Self, TypeVar
 
+import httpx
+
 from clementine_remote import connection
 from clementine_remote.connection import Connection
 from clementine_remote.events import Event, Fetched
@@ -262,8 +264,12 @@ class TestRenderer:
         fail_formats: list[str] | None = None,
         gapless: bool = False,
         local_address: str | None = None,
+        relative_urls: bool = True,
     ) -> None:
         self.port = port
+        self.relative_urls = relative_urls
+        # What a path as a render URL is relative to.
+        self.base_url = connection.base_url(HOST, port)
         self.local_address = local_address
         self.renderer_id = renderer_id
         self.formats = formats or DEFAULT_FORMATS
@@ -284,6 +290,8 @@ class TestRenderer:
         features = [pb.RENDERER_FEATURE_HTTP_RANGE]
         if self.gapless:
             features.append(pb.RENDERER_FEATURE_GAPLESS)
+        if self.relative_urls:
+            features.append(pb.RENDERER_FEATURE_RELATIVE_URLS)
         caps = pb.RendererCapabilities(
             renderer_id=self.renderer_id,
             display_name=self.renderer_id,
@@ -301,6 +309,7 @@ class TestRenderer:
             self._log,
             [parse_format(f) for f in self.fail_formats],
             on_event=self._record,
+            base_url=self.base_url,
         )
         assert isinstance(self.renderer.player, NullPlayer)
         self.renderer.player.keep_bodies = True
@@ -353,8 +362,13 @@ class TestRenderer:
         return found[0]
 
     async def fetched(self, url: str) -> Fetched:
-        """The response the null player got for |url|."""
+        """The response the null player got for render URL |url|."""
+        url = self.renderer.url(url)
         return await self.wait(Fetched, where=lambda e: e.url == url)
+
+    def client(self) -> httpx.AsyncClient:
+        """An HTTP client that resolves render URLs as this renderer does."""
+        return httpx.AsyncClient(base_url=self.base_url)
 
 
 def decoded_seconds(data: bytes, work_dir: Path) -> float:

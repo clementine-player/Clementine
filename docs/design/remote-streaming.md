@@ -282,7 +282,17 @@ The whole mechanism is a small `ProtocolSniffer` step in `NetworkRemote`.
 them and never see the other protocol. `MediaHttpServer` has no
 `QTcpServer` of its own; it takes sockets through `HandleConnection(QTcpSocket*)`.
 
-URLs are opaque: `http://<host>:<remote port>/s/<session-token>/<item-id>[?t=<ms>]`.
+URLs are opaque: `/s/<session-token>/<item-id>[?t=<ms>]`. Media is always on
+the renderer's own connection's host and port, so the URL is just a path, and
+the renderer resolves it against the host and port it connected to. Through
+NAT, Docker's port mapping or a router's port forward, the address
+Clementine's socket sees isn't one the renderer can reach; the address the
+renderer dialled is. A URL with a scheme and host is still fetched from exactly
+there, which leaves room to point a renderer elsewhere, such as at a radio
+stream it fetches itself. A renderer only gets a path if it declares
+`RENDERER_FEATURE_RELATIVE_URLS`; the first released remotes don't resolve
+paths, so they get `http://<local address>:<remote port>/s/...`, with the
+address the server's end of their connection has.
 `item-id` is a key into a table held by the `RemoteEngine`. The table maps it
 to `{Plan, MediaPlaybackRequest, Song}`. Entries are made on `RENDER_LOAD` or
 `RENDER_PRELOAD`, and at most the current and next items are kept. **No file
@@ -487,6 +497,10 @@ enum RendererFeature {
   RENDERER_FEATURE_GAPLESS = 1;
   // Sends HTTP Range requests, so it can seek in Direct streams itself.
   RENDERER_FEATURE_HTTP_RANGE = 2;
+  // Resolves a relative render URL against the host and port it connected
+  // to. Without it, the server sends URLs with its own address, which a
+  // renderer can't reach through NAT or a port forward.
+  RENDERER_FEATURE_RELATIVE_URLS = 3;
 }
 
 // One format a renderer can decode, with its limits.
@@ -582,7 +596,11 @@ enum SeekMethod {
 // One track, as the renderer should fetch and present it.
 message RenderItem {
   optional int32 item_id = 1;
-  // http://host:5500/s/<token>/<item_id>
+  // Where to fetch the item. To renderers with RENDERER_FEATURE_RELATIVE_URLS
+  // it's usually a path, /s/<token>/<item_id>, on the host and port the
+  // renderer connected to: resolve it against http://<host>:<port>/ as a
+  // relative URL (RFC 3986). A URL with a scheme and host is fetched from
+  // exactly there. Other renderers get http://<host>:<port>/s/<token>/<item_id>.
   optional string url = 2;
   optional string mime_type = 3;
   optional StreamMode mode = 4;
@@ -618,7 +636,8 @@ message RequestRenderPreload {
 message RequestRenderSeek {
   optional int32 item_id = 1;
   optional int64 position_ms = 2;
-  // Set when the item's seek_method is SEEK_METHOD_NEW_URL.
+  // Set when the item's seek_method is SEEK_METHOD_NEW_URL. Resolved like
+  // RenderItem.url.
   optional string url = 3;
 }
 

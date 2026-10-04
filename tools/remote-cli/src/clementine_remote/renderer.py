@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import time
+from urllib.parse import urljoin
 
 from .connection import Connection
 from .events import (
@@ -60,8 +61,12 @@ class Renderer:
         log: Log,
         fail_formats: list[pb.AudioFormat] | None = None,
         on_event: EventCallback = ignore,
+        base_url: str = "",
     ) -> None:
         self.conn = conn
+        # Where Clementine is, as this renderer reached it: render URLs that
+        # are only a path are on this host and port.
+        self.base_url = base_url
         self.log = log
         self.gapless = gapless
         # Told about everything the renderer is asked to do and does, so tests
@@ -77,6 +82,11 @@ class Renderer:
         self.preloaded: pb.RenderItem | None = None
         self.state: pb.RendererState = pb.RENDERER_STATE_IDLE
         self.clock = Clock()
+
+    def url(self, url: str) -> str:
+        """Where to fetch a render URL: a path on |base_url|, or a full URL as
+        it is."""
+        return urljoin(self.base_url, url)
 
     # Status reports ---------------------------------------------------------
 
@@ -176,7 +186,9 @@ class Renderer:
             await self._error(f"refusing {item.mime_type} (--fail-format)")
             return False
         byte_range = item.seek_method == pb.SEEK_METHOD_BYTE_RANGE
-        await self.player.load(item.url, start_ms, playing, byte_range, item.length_ms)
+        await self.player.load(
+            self.url(item.url), start_ms, playing, byte_range, item.length_ms
+        )
         return True
 
     def describe(self, item: pb.RenderItem) -> str:
@@ -244,7 +256,9 @@ class Renderer:
             )
             self.on_event(Seeked(seek.position_ms, seek.url))
             self.clock.set(seek.position_ms, self.state == pb.RENDERER_STATE_PLAYING)
-            await self.player.seek(seek.position_ms, seek.url or None)
+            await self.player.seek(
+                seek.position_ms, self.url(seek.url) if seek.url else None
+            )
             await self.send_status()
 
         elif t == pb.RENDER_SET_VOLUME:

@@ -6,7 +6,7 @@ import asyncio
 import contextlib
 import functools
 import socket
-from collections.abc import Callable, Coroutine
+from collections.abc import AsyncIterator, Callable, Coroutine
 from pathlib import Path
 from typing import Any, ParamSpec
 
@@ -94,13 +94,79 @@ async def test_direct_serves_the_file_with_ranges(
         assert response.status == 200
         assert response.body == track.read_bytes()
 
-        async with httpx.AsyncClient() as client:
+        async with renderer.client() as client:
             ranged = await client.get(item.url, headers={"Range": "bytes=100-199"})
         assert ranged.status_code == 206
         assert ranged.content == track.read_bytes()[100:200]
 
         await renderer.wait(Ended, where=lambda e: e.item_id == item.item_id)
         await controller.wait_for_state(pb.Empty)
+
+
+@contextlib.asynccontextmanager
+async def _port_forward(port: int) -> AsyncIterator[int]:
+    """Forwards a new port to |port|, as a router or Docker's -p does, so
+    Clementine's end of a connection has a different port from the one the
+    client dialled. Yields the new port."""
+
+    async def pipe(reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
+        with contextlib.suppress(ConnectionError):
+            while data := await reader.read(65536):
+                writer.write(data)
+                await writer.drain()
+        writer.close()
+
+    async def forward(
+        reader: asyncio.StreamReader, writer: asyncio.StreamWriter
+    ) -> None:
+        to_reader, to_writer = await asyncio.open_connection(HOST, port)
+        await asyncio.gather(pipe(reader, to_writer), pipe(to_reader, writer))
+
+    server = await asyncio.start_server(forward, HOST, 0)
+    async with server:
+        yield server.sockets[0].getsockname()[1]
+
+
+@run_async
+async def test_media_comes_from_where_the_renderer_connected(
+    clementine: Clementine, music: dict[str, Path]
+) -> None:
+    track = music["tone.mp3"]
+    async with (
+        _port_forward(clementine.port) as forwarded,
+        Controller(clementine.port) as controller,
+        TestRenderer(forwarded) as renderer,
+    ):
+        await renderer.take_over(controller)
+        await controller.add(track)
+
+        # Clementine sees a connection to its own port, so it sends only the
+        # path, and the renderer fetches it through the forwarded port.
+        item = (await renderer.wait(Loaded)).item
+        assert item.url.startswith("/s/")
+        response = await renderer.fetched(item.url)
+        assert response.url.startswith(f"http://{HOST}:{forwarded}/s/")
+        assert response.status == 200
+        assert response.body == track.read_bytes()
+
+
+@run_async
+async def test_renderers_without_relative_urls_get_clementines_address(
+    clementine: Clementine, music: dict[str, Path]
+) -> None:
+    async with (
+        _port_forward(clementine.port) as forwarded,
+        Controller(clementine.port) as controller,
+        TestRenderer(forwarded, relative_urls=False) as renderer,
+    ):
+        await renderer.take_over(controller)
+        await controller.add(music["tone.mp3"])
+
+        # The address of Clementine's end of the connection, not the one the
+        # renderer dialled.
+        item = (await renderer.wait(Loaded)).item
+        assert item.url.startswith(f"http://{HOST}:{clementine.port}/s/")
+        assert (await renderer.fetched(item.url)).status == 200
 
 
 @run_async
@@ -127,7 +193,7 @@ async def test_pipeline_encodes_what_the_renderer_cant_play(
         )
 
         # Seeking asks for a new stream that starts part way in.
-        async with httpx.AsyncClient() as client:
+        async with renderer.client() as client:
             later = await client.get(item.url + "?t=1500")
         assert later.status_code == 200
         assert decoded_seconds(later.content, tmp_path) == pytest.approx(
@@ -281,7 +347,7 @@ async def test_media_urls_are_guarded(
         path = httpx.URL(item.url).path
         token = path.split("/")[2]
 
-        async with httpx.AsyncClient() as client:
+        async with renderer.client() as client:
             wrong_token = await client.get(item.url.replace(token, "0" * len(token)))
             assert wrong_token.status_code == 404
             assert (await client.post(item.url)).status_code == 405
@@ -365,7 +431,7 @@ async def test_start_positions_are_clamped(
         await controller.add(music["tone.flac"])
         item = (await renderer.wait(Loaded)).item
 
-        async with httpx.AsyncClient() as client:
+        async with renderer.client() as client:
             for start in ("-5000", "99999999999999999999", "banana"):
                 response = await client.get(f"{item.url}?t={start}")
                 assert response.status_code == 200, start

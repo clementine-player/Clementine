@@ -34,7 +34,8 @@ class Application;
 // values and talk to the client through signals.
 struct RendererEndpoint {
   int client_id = 0;
-  // The address and port the renderer connected to; media URLs use them.
+  // The address and port the renderer connected to, as this end sees them.
+  // Media URLs use them for renderers that can't resolve relative URLs.
   QHostAddress local_address;
   quint16 local_port = 0;
   // The renderer's address; only it may fetch its media URLs.
