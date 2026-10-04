@@ -205,9 +205,6 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\gstreamer-plugins\libgstqueue2.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstsoup.dll"
 
-  ; 1.0 prerelease
-  Delete "$INSTDIR\spotify.dll"
-
   ; 1.0
   Delete "$INSTDIR\libofa.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
@@ -454,7 +451,6 @@ Section "Uninstall"
   ; Delete all the files
   Delete "$INSTDIR\clementine.exe"
   Delete "$INSTDIR\clementine-tagreader.exe"
-  Delete "$INSTDIR\clementine-spotifyblob.exe"
   Delete "$INSTDIR\clementine.ico"
   ; Runtime DLLs are installed as a wildcard blob (see the "Clementine" and
   ; plugin sections above), so they're removed the same way here rather than

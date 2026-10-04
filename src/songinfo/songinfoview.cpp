@@ -42,6 +42,8 @@ SongInfoView::SongInfoView(QWidget* parent)
     : SongInfoBase(parent), player_(nullptr), lyrics_timer_(new QTimer(this)) {
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
   fetcher_->AddProvider(new LyricsInfoProvider);
+  SetPlaceholderText(
+      tr("Play a song to see its lyrics and information about it here."));
 
   lyrics_timer_->setInterval(kLyricsUpdateMsec);
   connect(lyrics_timer_, &QTimer::timeout, this,

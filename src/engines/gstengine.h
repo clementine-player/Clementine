@@ -263,6 +263,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   QList<DeviceFinder*> device_finders_;
 
 #ifdef Q_OS_DARWIN
+  static GTlsDatabase* MacTlsDatabase();
+
+  // Null if the trusted certificates couldn't be loaded, which fails every
+  // https stream: see GstEnginePipeline's tls-database.
   GTlsDatabase* tls_database_;
 #endif
 };

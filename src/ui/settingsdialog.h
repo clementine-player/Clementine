@@ -81,7 +81,6 @@ class SettingsDialog : public QDialog {
     // Internet services
     Page_InternetShow,
     Page_Lastfm,
-    Page_Spotify,
     Page_Magnatune,
     Page_DigitallyImported,
     Page_Subsonic,

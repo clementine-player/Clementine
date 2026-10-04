@@ -19,7 +19,9 @@
 #ifndef MAC_STARTUP_H
 #define MAC_STARTUP_H
 
+#include <QByteArray>
 #include <QKeySequence>
+#include <QList>
 
 class MacGlobalShortcutBackend;
 class QObject;
@@ -45,6 +47,10 @@ QString GetBundlePath();
 QString GetResourcesPath();
 QString GetApplicationSupportPath();
 QString GetMusicDirectory();
+
+// The certificates macOS trusts as roots for TLS right now, DER encoded: its
+// own, plus any an admin or the user has added, less any they distrust.
+QList<QByteArray> GetTrustedRootCertificates();
 
 void EnableFullScreen(const QWidget& main_window);
 

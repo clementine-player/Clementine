@@ -335,6 +335,7 @@ set(SOURCES
   smartplaylists/wizardplugin.cpp
 
   songinfo/artistbiography.cpp
+  songinfo/artistimages.cpp
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
@@ -348,7 +349,6 @@ set(SOURCES
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
-  songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
   songinfo/syncedlyricsview.cpp
 
@@ -659,6 +659,7 @@ set(HEADERS
   smartplaylists/wizardplugin.h
 
   songinfo/artistbiography.h
+  songinfo/artistimages.h
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
@@ -671,7 +672,6 @@ set(HEADERS
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
-  songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
   songinfo/syncedlyricsview.h
 
@@ -1391,6 +1391,7 @@ if (APPLE)
     "-framework IOKit"
     "-framework MediaPlayer"
     "-framework ScriptingBridge"
+    "-framework Security"
     "-framework UserNotifications"
   )
   if (HAVE_SPARKLE)
@@ -1487,10 +1488,6 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/qt.conf
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-  install(FILES ../dist/sparkle_pub.pem
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-  install(FILES ../dist/cacert.pem
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   if (HAVE_PROJECTM_PRESETS_RCC)
     install(FILES "${PROJECTM_PRESETS_RCC}"
@@ -1561,7 +1558,7 @@ if (APPLE)
   # `sign` re-seals the app bundle with whatever identity is configured
   # (ad-hoc by default, same as the POST_BUILD step above). It's always
   # defined, not just when APPLE_DEVELOPER_ID is set, because `make install`
-  # (which copies clementine.icns/qt.conf/cacert.pem/sparkle_pub.pem into
+  # (which copies clementine.icns/qt.conf into
   # Contents/Resources) adds files to the bundle *after* POST_BUILD already
   # sealed it, invalidating that signature - so packaging needs to re-sign
   # after install, and this target is what does that (and also serves as a

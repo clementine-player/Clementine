@@ -132,17 +132,30 @@ else(FORCE_GIT_REVISION)
         RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV
         OUTPUT_STRIP_TRAILING_WHITESPACE)
+    # On the commit an annotated tag points at, describe prints the tag alone,
+    # with no count or sha for the parsing below to find, and the versions fall
+    # back to the numbers at the top of this file. --long always prints all
+    # three, so a build there carries the tag it is on. GIT_REV itself keeps
+    # describe's own wording, which the displayed and Debian versions use.
+    execute_process(COMMAND ${GIT_EXECUTABLE} describe --long
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_REV_LONG
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
     if(NOT ${GIT_INFO_RESULT} EQUAL 0)
       message(SEND_ERROR "git describe failed with code ${GIT_INFO_RESULT}: ${GIT_REV}")
     endif()
   endif()
 endif()
 
+if(NOT GIT_REV_LONG)
+  set(GIT_REV_LONG ${GIT_REV})
+endif(NOT GIT_REV_LONG)
+
 string(REGEX REPLACE "^(.+)-([0-9]+)-(g[a-f0-9]+)$" "\\1;\\2;\\3"
-       GIT_PARTS ${GIT_REV})
+       GIT_PARTS ${GIT_REV_LONG})
 
 if(NOT GIT_PARTS)
-  message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV}'")
+  message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV_LONG}'")
 endif(NOT GIT_PARTS)
 
 list(LENGTH GIT_PARTS GIT_PARTS_LENGTH)
@@ -156,12 +169,17 @@ endif(GIT_PARTS_LENGTH EQUAL 3)
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${GIT_REV}")
   set(CLEMENTINE_VERSION_DEB     "${GIT_REV}")
-  # A snapshot after the tag: rpm sorts 1.4.1^256.gdb9f503df after 1.4.1
-  # whatever its release, and before 1.4.2. With the commits in the release
-  # instead (1.4.1-2.256...), Fedora's own 1.4.1-10 sorted above every build
-  # and dnf chose it over COPR's.
-  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}^${GIT_COMMITCOUNT}.${GIT_SHA1}")
-  set(CLEMENTINE_VERSION_RPM_R   "1")
+  # The commits since the tag go in the release, where rpm compares them
+  # against Fedora's own release of the same tag: 1.4.1-282.gae9d5d8cd beats
+  # their 1.4.1-10, so dnf keeps choosing ours. They once had a "2." in front
+  # of them, and 2.256... lost to 10 on that first part alone, which is the
+  # whole reason this ever looked like it belonged in the version.
+  #
+  # They must stay out of the version, which rpm builds in a directory named
+  # after it: a directory that changes with every commit lands in the debug
+  # info, which ccache folds into its hash, and CI's cache never hits.
+  set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}")
+  set(CLEMENTINE_VERSION_RPM_R   "${GIT_COMMITCOUNT}.${GIT_SHA1}")
   set(CLEMENTINE_VERSION_SPARKLE "${GIT_REV}")
   set(CLEMENTINE_VERSION_PLIST   "4096.${GIT_TAGNAME}.2.${GIT_COMMITCOUNT}")
 endif(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)

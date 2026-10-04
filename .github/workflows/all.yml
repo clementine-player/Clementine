@@ -87,6 +87,26 @@ jobs:
         # Checks the signatures with gpgv, which the runner has.
         run: uv run pytest -v
 
+  python_mac_update:
+    name: Python (macOS updates)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/mac-update
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # Reading a DMG needs macOS (hdiutil), so that part is left out.
+        run: uv run pytest -v
+
 
   test:
     name: Test
@@ -194,7 +214,7 @@ jobs:
         run: ccache --zero-stats
       - name: cmake
         working-directory: bin
-        run: cmake .. -DENABLE_SPOTIFY_BLOB=OFF
+        run: cmake ..
       - name: Build tests
         working-directory: bin
         # build_tests builds every test binary without running any of them;
@@ -457,6 +477,20 @@ jobs:
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      # The Release-note: trailers of the commits since the previous release
+      # (see "Release notes" in README.md), one bullet each. Usually empty:
+      # most commits have none.
+      - name: Collect the release notes
+        run: |
+          : > "$RUNNER_TEMP/release_notes.md"
+          if previous=$(git describe --tags --abbrev=0 --match '[0-9]*' HEAD^); then
+            git log --reverse \
+                --format='%(trailers:key=Release-note,valueonly,separator=%x0A)' \
+                "$previous..HEAD" |
+              sed -e '/^[[:space:]]*$/d' -e 's/^[[:space:]]*/- /' \
+              > "$RUNNER_TEMP/release_notes.md"
+          fi
+          cat "$RUNNER_TEMP/release_notes.md"
       - name: Create draft pre-release
         # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
         # at once, among a run of Not Found errors from GitHub.
@@ -466,6 +500,10 @@ jobs:
         with:
           name: ${{ steps.tag_name.outputs.version }}
           tag_name: ${{ steps.tag_name.outputs.version }}
+          # The commit that was built. Otherwise the tag goes on master as it
+          # is when this job runs, which may be later commits by then.
+          target_commitish: ${{ github.sha }}
+          body_path: ${{ runner.temp }}/release_notes.md
           files: "release_artifacts/**/*"
           fail_on_unmatched_files: true
           draft: false
@@ -1329,7 +1367,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=bookworm
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1499,7 +1536,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=trixie
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1666,7 +1702,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=jammy
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1833,7 +1868,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=noble
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2000,7 +2034,6 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=resolute
-          -DENABLE_SPOTIFY_BLOB=OFF
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2147,6 +2180,13 @@ jobs:
           git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
+      # For updates: a pinned release, checked against its checksum.
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Download Sparkle
+        run: >
+          uv run --project tools/mac-update
+          clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
+
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -2164,6 +2204,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release \
             -DENABLE_LIBGPOD=OFF \
             -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
+            -DCMAKE_FRAMEWORK_PATH="$RUNNER_TEMP/sparkle" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
             -DGETTEXT_MSGFMT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgfmt" \
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
@@ -2201,6 +2242,18 @@ jobs:
         run: >
           ./clementine.app/Contents/MacOS/clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+      # GStreamer trusts what macOS trusts (GstEngine::MacTlsDatabase), not
+      # a list of its own - one shipped in 2015 failed Plex servers' Let's
+      # Encrypt certificates, while GitHub's above passed. The runs above
+      # wrote out what it trusts; Let's Encrypt's test site for its root,
+      # which that old list failed, checks it's current. (A CA of our own,
+      # trusted just for this, would need someone to click Allow.)
+      - name: Smoke test - trusted certificates are the system's
+        run: >
+          echo | openssl s_client -verify_return_error
+          -connect valid-isrgrootx1.letsencrypt.org:443
+          -servername valid-isrgrootx1.letsencrypt.org
+          -CAfile "$HOME/Library/Application Support/Clementine/trusted-certificates.pem"
 
       - name: Notarize DMG
         if: steps.signing.outputs.notarize == 'true'
@@ -2390,6 +2443,7 @@ jobs:
     needs:
       - lint
       - python_apt
+      - python_mac_update
       - test
       - build_source
       - build_bookworm_64

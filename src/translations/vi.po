@@ -76,7 +76,7 @@ msgstr " giây"
 msgid " songs"
 msgstr " bài hát"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -409,7 +409,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Các dấu bắt đầu là %, ví dụ: %artist %album %title </p>\n\n<p>Nếu bạn quét chọn đoạn văn bản chứa dấu ngoặc nhọn, đoạn đó sẽ bị ẩn đi nếu dấu bắt đầu rỗng.<p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -534,7 +534,7 @@ msgstr "Thêm luồng dữ liệu khác..."
 msgid "Add directory..."
 msgstr "Thêm thư mục..."
 
-#: ui/mainwindow.cpp:2146
+#: ui/mainwindow.cpp:2143
 msgid "Add file"
 msgstr ""
 
@@ -558,7 +558,7 @@ msgstr "Thêm các tập tin để chuyển mã"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Thêm thư mục"
@@ -655,7 +655,7 @@ msgstr "Thêm thẻ năm của bài hát"
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: ui/mainwindow.cpp:1947
+#: ui/mainwindow.cpp:1944
 msgid "Add to another playlist"
 msgstr "Thêm vào danh sách khác"
 
@@ -754,7 +754,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr ""
 
@@ -783,11 +783,11 @@ msgstr "Tất cả những người dịch"
 msgid "All tracks"
 msgstr "Tất cả bài hát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr ""
 
@@ -795,7 +795,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "Cho phép mã hóa song song"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -889,7 +889,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Nghệ sĩ"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Nghệ sĩ"
 
@@ -902,7 +902,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Định dạng"
@@ -1080,7 +1080,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr "Thời gian đệm"
 
-#: engines/gstengine.cpp:957
+#: engines/gstengine.cpp:993
 msgid "Buffering"
 msgstr ""
 
@@ -1166,7 +1166,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:846
+#: ui/mainwindow.cpp:843
 msgid "Check for updates..."
 msgstr "Kiểm tra cập nhật..."
 
@@ -1182,7 +1182,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Đặt tên cho danh sách nhạc của bạn"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:1014
 msgid "Choose automatically"
 msgstr "Tự động lựa chọn"
 
@@ -1426,7 +1426,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:679
+#: ui/mainwindow.cpp:676
 msgid "Configure library..."
 msgstr "Cấu hình thư viện..."
 
@@ -1497,11 +1497,11 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1510,11 +1510,11 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:739 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Chép vào thiết bị..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:729
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Chép vào thư viện..."
@@ -1736,7 +1736,7 @@ msgstr "Giảm âm lượng"
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:1004
+#: engines/gstengine.cpp:1040
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1759,7 +1759,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Xóa các tập tin"
 
@@ -1767,7 +1767,7 @@ msgstr "Xóa các tập tin"
 msgid "Delete from device..."
 msgstr "Xóa khỏi thiết bị..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Xóa khỏi ổ cứng..."
@@ -1800,11 +1800,11 @@ msgstr "Đang xóa các tập tin"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1860
+#: ui/mainwindow.cpp:1857
 msgid "Dequeue selected tracks"
 msgstr "Loại các bài đã chọn khỏi danh sách chờ"
 
-#: ui/mainwindow.cpp:1858
+#: ui/mainwindow.cpp:1855
 msgid "Dequeue track"
 msgstr "Loại bài hát khỏi d.sách chờ"
 
@@ -1837,7 +1837,7 @@ msgstr "Tên thiết bị"
 msgid "Device properties..."
 msgstr "Thuộc tính của thiết bị..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Thiết bị"
 
@@ -2004,15 +2004,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2082,7 +2082,7 @@ msgstr "Hòa trộn âm thanh động ngẫu nhiên"
 msgid "Edit smart playlist..."
 msgstr "Cập nhật danh sách thông minh..."
 
-#: ui/mainwindow.cpp:1910
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sửa \"%1\"..."
@@ -2178,8 +2178,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Nhập tên mới cho danh sách này"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2189,7 +2189,7 @@ msgid ""
 msgstr ""
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
@@ -2230,7 +2230,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Lỗi"
@@ -2509,11 +2509,11 @@ msgstr "Tên tập tin"
 msgid "Filename Preview"
 msgstr ""
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Tập tin"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr ""
 
@@ -2952,7 +2952,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Internet"
 
@@ -3099,13 +3099,13 @@ msgstr ""
 msgid "Length"
 msgstr "Thời lượng"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr ""
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Thư viện"
@@ -3114,7 +3114,7 @@ msgstr "Thư viện"
 msgid "Library advanced grouping"
 msgstr "Nhóm thư viện nâng cao"
 
-#: ui/mainwindow.cpp:2785
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Chú ý quét lại thư viện"
 
@@ -3130,7 +3130,7 @@ msgstr ""
 msgid "Limits"
 msgstr "Giới hạn"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr ""
 
@@ -3460,7 +3460,7 @@ msgstr "Các điểm gắn"
 msgid "Move down"
 msgstr "Chuyển xuống"
 
-#: ui/mainwindow.cpp:732 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Dời vào thư viện..."
 
@@ -3469,7 +3469,7 @@ msgstr "Dời vào thư viện..."
 msgid "Move up"
 msgstr "Chuyển lên"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
 msgid "Music"
 msgstr ""
 
@@ -3477,7 +3477,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Thư viện nhạc"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3508,7 +3508,7 @@ msgstr "Băng hẹp (NB)"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr ""
 
@@ -3535,7 +3535,7 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Tạo danh sách mới"
 
@@ -3621,7 +3621,7 @@ msgstr "Các khối ngắn"
 msgid "None"
 msgstr "Không"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
@@ -3662,7 +3662,7 @@ msgstr "Thông báo"
 msgid "Notifications"
 msgstr "Thông báo"
 
-#: ui/macsystemtrayicon.mm:64
+#: ui/macsystemtrayicon.mm:66
 msgid "Now Playing"
 msgstr "Đang phát"
 
@@ -3712,16 +3712,26 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
+msgstr ""
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
 msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
@@ -3804,7 +3814,7 @@ msgid "Optimize for quality"
 msgstr "Tối ưu cho chất lượng"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Tuỳ chọn..."
@@ -3817,7 +3827,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Sao chép tập tin"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:735
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
 msgid "Organise files..."
 msgstr "Sao chép tập tin..."
 
@@ -3902,7 +3912,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
 #: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Tạm dừng"
@@ -3938,12 +3948,20 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Thanh bên đơn giản"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
-#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
 #: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Phát"
+
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
@@ -3962,11 +3980,11 @@ msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 msgid "Play if there is nothing already playing"
 msgstr "Phát nhạc nếu không có bài khác đang phát"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1869
+#: ui/mainwindow.cpp:1866
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -4005,7 +4023,7 @@ msgstr "Tùy chọn danh sách"
 msgid "Playlist type"
 msgstr "Loại danh sách"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr ""
 
@@ -4068,7 +4086,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Cổng"
 
@@ -4214,12 +4232,12 @@ msgstr "Truy vấn thiết bị..."
 msgid "Queue Manager"
 msgstr "Quản lý danh sách chờ"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1861
 msgid "Queue selected tracks"
 msgstr "Chờ phát những bài đã chọn"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1859
 msgid "Queue track"
 msgstr "Chờ phát sau"
 
@@ -4438,7 +4456,7 @@ msgstr "Chế độ Replay Gain"
 msgid "Repopulate"
 msgstr "Phục hồi số lượng"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr ""
 
@@ -4495,7 +4513,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4635,9 +4653,13 @@ msgstr ""
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
+msgstr ""
+
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
@@ -4664,7 +4686,7 @@ msgstr ""
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:716
+#: ui/mainwindow.cpp:713
 msgid "Search for album"
 msgstr ""
 
@@ -4677,7 +4699,7 @@ msgstr "Tìm ảnh bìa..."
 msgid "Search for anything"
 msgstr ""
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:710
 msgid "Search for artist"
 msgstr ""
 
@@ -4687,10 +4709,6 @@ msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
-msgstr ""
-
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
 msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:114
@@ -4802,7 +4820,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1906
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Thiết lập %1 sang \"%2\"..."
@@ -4825,7 +4843,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "Đặt giá trị cho tất cả những bài được chọn..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Thiết lập"
 
@@ -4892,7 +4910,7 @@ msgstr "Tùy chỉnh thông báo"
 msgid "Show above status bar"
 msgstr "Hiện phía trên thanh trạng thái"
 
-#: ui/mainwindow.cpp:663
+#: ui/mainwindow.cpp:660
 msgid "Show all songs"
 msgstr "Hiện tất cả bài hát"
 
@@ -4912,12 +4930,12 @@ msgstr "Hiện đường phân cách"
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước gốc..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Mở thư mục lưu..."
 
-#: ui/mainwindow.cpp:747
+#: ui/mainwindow.cpp:744
 msgid "Show in library..."
 msgstr ""
 
@@ -4929,11 +4947,11 @@ msgstr "Hiện trong mục nhiều nghệ sĩ"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:662
 msgid "Show only duplicates"
 msgstr "Chỉ hiện những mục bị trùng"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:664
 msgid "Show only untagged"
 msgstr "Chỉ hiện những mục không được gán thẻ"
 
@@ -5034,7 +5052,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Không cho chuyển bài trong danh sách"
 
-#: ui/mainwindow.cpp:1880
+#: ui/mainwindow.cpp:1877
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -5042,7 +5060,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1878
+#: ui/mainwindow.cpp:1875
 msgid "Skip track"
 msgstr ""
 
@@ -5078,7 +5096,7 @@ msgstr "Thông tin bài hát"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Bài hát"
 
@@ -5173,7 +5191,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:700 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Dừng sau khi phát xong bài này"
 
@@ -5345,7 +5363,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2776
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5370,7 +5388,7 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy thông tin từ Magnatune"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
+msgid "There was a problem parsing the response from Apple Podcasts"
 msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
@@ -5391,7 +5409,7 @@ msgid ""
 "continue?"
 msgstr "Các tập tin này sẽ bị xóa khỏi thiết bị, bạn có muốn tiếp tục?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5487,7 +5505,7 @@ msgstr "Bật/Tắt hộp thông báo"
 msgid "Toggle fullscreen"
 msgstr "Tắt/Bật toàn màn hình"
 
-#: ui/mainwindow.cpp:1866
+#: ui/mainwindow.cpp:1863
 msgid "Toggle queue status"
 msgstr "Tắt/Bật trạng thái chờ"
 
@@ -5643,11 +5661,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Bỏ thiết đặt ảnh bìa"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1873
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1871
 msgid "Unskip track"
 msgstr ""
 
@@ -5726,7 +5744,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Tùy chọn tin nhắn thông báo"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5987,7 +6005,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2783
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
@@ -6060,7 +6078,7 @@ msgstr "Bạn đã đăng nhập."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Bạn có thể thay đổi cách tổ chức các bài hát trong thư viện."
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6187,7 +6205,7 @@ msgstr "lớn nhất trước"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6197,7 +6215,7 @@ msgstr ""
 msgid "contains"
 msgstr "có chứa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr ""
 
@@ -6302,9 +6320,9 @@ msgstr "vào"
 msgid "options"
 msgstr "tùy chọn"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr ""
 

@@ -65,3 +65,30 @@ Then reformat the files you've changed since `origin/master`:
 
 Claude Code does this automatically after each edit, using a hook in
 `.claude/settings.json`.
+
+Release notes
+-------------
+
+If your change is something users will notice, end its commit message with a
+`Release-note:` trailer: one line, written for users (what's new, not how it
+was done):
+
+    Show the song's lyrics in time with the song
+
+    Release-note: Lyrics scroll along with the song, when they're timed.
+
+Git only reads trailers in a message's last paragraph, so keep the note there,
+with any other trailers and no blank line between them. A note followed by a
+blank line and then, say, `Co-Authored-By:` is ignored, and the commit never
+makes an update. Together, as here, both are read:
+
+    Release-note: Lyrics scroll along with the song, when they're timed.
+    Co-Authored-By: Someone <someone@example.com>
+
+To check, `git log -1 --format='%(trailers:key=Release-note,valueonly)'`
+should print the note.
+
+Once a week, the macOS update feed gets the newest build if the commits since
+its last update have notes, and shows them in the update window. Commits
+without one (refactoring, tests, CI, docs) never make an update on their own.
+See `tools/mac-update/README.md`.

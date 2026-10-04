@@ -85,8 +85,7 @@ SongLoader::SongLoader(LibraryBackendInterface* library, const Player* player,
                    << "rtsp"
                    << "rtspu"
                    << "rtspt"
-                   << "rtsph"
-                   << "spotify";
+                   << "rtsph";
   }
 
   timeout_timer_->setSingleShot(true);

@@ -40,6 +40,8 @@
 
 #import <QuartzCore/CALayer.h>
 
+#import <Security/Security.h>
+
 
 #include "config.h"
 #include "core/logging.h"
@@ -53,7 +55,7 @@
 #include "utilities.h"
 
 #ifdef HAVE_SPARKLE
-#import <Sparkle/SUUpdater.h>
+#import <Sparkle/SPUStandardUpdaterController.h>
 #endif
 
 #include <QApplication>
@@ -61,6 +63,7 @@
 #include <QDir>
 #include <QEvent>
 #include <QFile>
+#include <QSet>
 #include <QSettings>
 #include <QWidget>
 
@@ -232,13 +235,19 @@ static BreakpadRef InitBreakpad() {
 
 namespace mac {
 
+#ifdef HAVE_SPARKLE
+// Lives as long as the app: it checks for updates on Sparkle's schedule.
+static SPUStandardUpdaterController* updater_controller = nil;
+#endif
+
 void MacMain() {
   ScopedNSAutoreleasePool pool;
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
 #ifdef HAVE_SPARKLE
-  // Creates and sets the magic global variable for Sparkle.
-  [[SUUpdater sharedUpdater] setDelegate:NSApp];
+  updater_controller = [[SPUStandardUpdaterController alloc] initWithStartingUpdater:YES
+                                                                     updaterDelegate:nil
+                                                                  userDriverDelegate:nil];
 #endif
 }
 
@@ -248,7 +257,7 @@ void SetApplicationHandler(PlatformInterface* handler) { [NSApp SetApplicationHa
 
 void CheckForUpdates() {
 #ifdef HAVE_SPARKLE
-  [[SUUpdater sharedUpdater] checkForUpdates:NSApp];
+  [updater_controller checkForUpdates:nil];
 #endif
 }
 
@@ -291,6 +300,103 @@ QString GetMusicDirectory() {
     ret = "~/Music";
   }
   return ret;
+}
+
+namespace {
+
+QByteArray CertificateData(SecCertificateRef certificate) {
+  ScopedCFTypeRef<CFDataRef> data(SecCertificateCopyData(certificate));
+  return QByteArray(reinterpret_cast<const char*>(CFDataGetBytePtr(data)),
+                    CFDataGetLength(data));
+}
+
+bool IsTlsPolicy(SecPolicyRef policy) {
+  ScopedCFTypeRef<CFDictionaryRef> properties(SecPolicyCopyProperties(policy));
+  CFTypeRef oid = properties ? CFDictionaryGetValue(properties, kSecPolicyOid) : nullptr;
+  return oid && CFEqual(oid, kSecPolicyAppleSSL);
+}
+
+enum class TlsTrust { Unspecified, Trusted, Distrusted };
+
+// What a certificate's trust settings in one domain say about trusting it
+// as a root for TLS connections. See SecTrustSettingsCopyTrustSettings.
+TlsTrust TlsTrustFrom(CFArrayRef settings) {
+  // No constraints at all: trusted as a root for everything.
+  if (CFArrayGetCount(settings) == 0) return TlsTrust::Trusted;
+
+  for (CFIndex i = 0; i < CFArrayGetCount(settings); ++i) {
+    CFDictionaryRef constraint =
+        static_cast<CFDictionaryRef>(CFArrayGetValueAtIndex(settings, i));
+    // Settings for one app only, or for something other than TLS.
+    if (CFDictionaryContainsKey(constraint, kSecTrustSettingsApplication)) continue;
+    CFTypeRef policy = CFDictionaryGetValue(constraint, kSecTrustSettingsPolicy);
+    if (policy && !IsTlsPolicy(static_cast<SecPolicyRef>(const_cast<void*>(policy)))) {
+      continue;
+    }
+
+    SInt32 result = kSecTrustSettingsResultTrustRoot;
+    CFNumberRef number =
+        static_cast<CFNumberRef>(CFDictionaryGetValue(constraint, kSecTrustSettingsResult));
+    if (number) CFNumberGetValue(number, kCFNumberSInt32Type, &result);
+    switch (result) {
+      case kSecTrustSettingsResultTrustRoot:
+      case kSecTrustSettingsResultTrustAsRoot:
+        return TlsTrust::Trusted;
+      case kSecTrustSettingsResultDeny:
+        return TlsTrust::Distrusted;
+      default:
+        break;
+    }
+  }
+  return TlsTrust::Unspecified;
+}
+
+}  // namespace
+
+QList<QByteArray> GetTrustedRootCertificates() {
+  QSet<QByteArray> trusted;
+
+  CFArrayRef anchors = nullptr;
+  OSStatus status = SecTrustCopyAnchorCertificates(&anchors);
+  ScopedCFTypeRef<CFArrayRef> scoped_anchors(anchors);
+  if (status == errSecSuccess) {
+    for (CFIndex i = 0; i < CFArrayGetCount(anchors); ++i) {
+      trusted.insert(CertificateData(
+          static_cast<SecCertificateRef>(const_cast<void*>(CFArrayGetValueAtIndex(anchors, i)))));
+    }
+  } else {
+    qLog(Error) << "Couldn't get the system's root certificates:" << status;
+  }
+
+  // The user's settings win over an admin's, which win over the system's.
+  for (SecTrustSettingsDomain domain : {kSecTrustSettingsDomainAdmin, kSecTrustSettingsDomainUser}) {
+    CFArrayRef certificates = nullptr;
+    // errSecNoTrustSettings when the domain has none.
+    if (SecTrustSettingsCopyCertificates(domain, &certificates) != errSecSuccess) continue;
+    ScopedCFTypeRef<CFArrayRef> scoped_certificates(certificates);
+
+    for (CFIndex i = 0; i < CFArrayGetCount(certificates); ++i) {
+      SecCertificateRef certificate = static_cast<SecCertificateRef>(
+          const_cast<void*>(CFArrayGetValueAtIndex(certificates, i)));
+      CFArrayRef settings = nullptr;
+      if (SecTrustSettingsCopyTrustSettings(certificate, domain, &settings) != errSecSuccess) {
+        continue;
+      }
+      ScopedCFTypeRef<CFArrayRef> scoped_settings(settings);
+      switch (TlsTrustFrom(settings)) {
+        case TlsTrust::Trusted:
+          trusted.insert(CertificateData(certificate));
+          break;
+        case TlsTrust::Distrusted:
+          trusted.remove(CertificateData(certificate));
+          break;
+        case TlsTrust::Unspecified:
+          break;
+      }
+    }
+  }
+
+  return trusted.values();
 }
 
 static int MapFunctionKey(int keycode) {

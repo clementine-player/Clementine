@@ -48,6 +48,22 @@ namespace {
 // How long a new connection may stay silent before it's dropped.
 const int kFirstByteTimeoutMsec = 10000;
 const char* kSniffedProperty = "clementine_sniffed";
+// Set on a connection that isn't from the local network when only those are
+// allowed. It's told why once it's said which protocol it speaks.
+const char* kRefusedProperty = "clementine_refused";
+
+// Non-public ranges that aren't a local network by themselves. Tailscale
+// gives its devices addresses from carrier-grade NAT space, so a listen
+// address chosen there makes the rest of it local. Only a chosen one: when
+// listening on everything, 100.x clients stay public, as before.
+const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
+
+bool InSharedSubnet(const QHostAddress& address) {
+  for (const char* subnet : kSharedSubnets) {
+    if (address.isInSubnet(QHostAddress::parseSubnet(subnet))) return true;
+  }
+  return false;
+}
 }  // namespace
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
@@ -362,12 +378,17 @@ void NetworkRemote::AcceptConnection() {
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
   QTcpSocket* client_socket = server->nextPendingConnection();
   // Check if our ip is in private scope
-  if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
-    qLog(Info) << "Got a connection from public ip"
-               << client_socket->peerAddress().toString();
-    client_socket->close();
-    client_socket->deleteLater();
-    return;
+  if (only_non_public_ip_ &&
+      !IsLocalClient(client_socket->peerAddress(),
+                     client_socket->localAddress(),
+                     listen_on_all_addresses_ ? Listening::OnAllAddresses
+                                              : Listening::OnChosenAddress)) {
+    qLog(Warning) << "Refusing a connection from"
+                  << client_socket->peerAddress().toString() << "to"
+                  << client_socket->localAddress().toString()
+                  << "because only connections from the local network are "
+                     "allowed";
+    client_socket->setProperty(kRefusedProperty, true);
   }
 
   // Drop connections that never say anything. Once the socket has been
@@ -393,7 +414,14 @@ void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
   socket->setProperty(kSniffedProperty, true);
   disconnect(socket, &QTcpSocket::readyRead, this, nullptr);
 
-  switch (ProtocolSniffer::Classify(static_cast<unsigned char>(first_byte))) {
+  const ProtocolSniffer::Protocol protocol =
+      ProtocolSniffer::Classify(static_cast<unsigned char>(first_byte));
+  if (socket->property(kRefusedProperty).toBool()) {
+    RefuseNotLocal(socket, protocol);
+    return;
+  }
+
+  switch (protocol) {
     case ProtocolSniffer::Remote: {
       CreateRemoteClient(socket);
       // The first message is already waiting, and readyRead won't be emitted
@@ -420,6 +448,51 @@ void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
   socket->deleteLater();
 }
 
+void NetworkRemote::RefuseNotLocal(QTcpSocket* socket,
+                                   ProtocolSniffer::Protocol protocol) {
+  // Closing with unread data makes the kernel reset the connection, which can
+  // throw away the reply before the client reads it.
+  socket->readAll();
+
+  connect(socket, &QTcpSocket::disconnected, socket, &QObject::deleteLater);
+  // In case the client never takes the reply.
+  QTimer::singleShot(kFirstByteTimeoutMsec, socket, [socket]() {
+    socket->abort();
+    socket->deleteLater();
+  });
+
+  switch (protocol) {
+    case ProtocolSniffer::Remote:
+      socket->write(DisconnectMessage(cpb::remote::Not_Local_Network));
+      socket->disconnectFromHost();
+      return;
+
+    case ProtocolSniffer::Http:
+      MediaHttpServer::WriteError(socket, 403, "Forbidden");
+      return;
+
+    case ProtocolSniffer::Unknown:
+      socket->abort();
+      return;
+  }
+}
+
+QByteArray NetworkRemote::DisconnectMessage(
+    cpb::remote::ReasonDisconnect reason) {
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::DISCONNECT);
+  msg.set_version(msg.default_instance().version());
+  msg.mutable_response_disconnect()->set_reason_disconnect(reason);
+  const std::string data = msg.SerializeAsString();
+
+  // As RemoteClient frames it: a big-endian length, then the message.
+  QByteArray framed;
+  QDataStream s(&framed, QIODevice::WriteOnly);
+  s << qint32(data.length());
+  s.writeRawData(data.data(), data.length());
+  return framed;
+}
+
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
   return
       // Localhost, including v4 mapped to v6 (::ffff:127.0.0.1), which is how
@@ -428,8 +501,9 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       // Localhost v4
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.0/8")) ||
       // Link Local v4
-      address.isInSubnet(QHostAddress::parseSubnet("169.254.1.0/16")) ||
-      // Link Local v6
+      address.isInSubnet(QHostAddress::parseSubnet("169.254.0.0/16")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("::ffff:169.254.0.0/112")) ||
+      // Localhost and Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
       address.isInSubnet(QHostAddress::parseSubnet("fe80::/10")) ||
       // Private v4 range
@@ -442,6 +516,25 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       address.isInSubnet(QHostAddress::parseSubnet("::ffff:10.0.0.0/104")) ||
       // Private v6 range
       address.isInSubnet(QHostAddress::parseSubnet("fc00::/7"));
+}
+
+bool NetworkRemote::IsLocalClient(const QHostAddress& peer,
+                                  const QHostAddress& local,
+                                  Listening listening) {
+  if (IpIsPrivate(peer)) return true;
+  if (listening != Listening::OnChosenAddress) return false;
+
+  // Arriving on the address isn't enough by itself: a machine in a router's
+  // DMZ gets the internet on its LAN address.
+  for (const char* text : kSharedSubnets) {
+    const QPair<QHostAddress, int> subnet = QHostAddress::parseSubnet(text);
+    if (local.isInSubnet(subnet) && peer.isInSubnet(subnet)) return true;
+  }
+  return false;
+}
+
+bool NetworkRemote::LocalClientsCanReach(const QHostAddress& address) {
+  return IpIsPrivate(address) || InSharedSubnet(address);
 }
 
 void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {

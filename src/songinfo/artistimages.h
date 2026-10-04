@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SPOTIFYIMAGES_H
-#define SPOTIFYIMAGES_H
+#ifndef ARTISTIMAGES_H
+#define ARTISTIMAGES_H
 
 #include <memory>
 
@@ -24,18 +24,16 @@
 
 class NetworkAccessManager;
 
-class SpotifyImages : public SongInfoProvider {
+class ArtistImages : public SongInfoProvider {
   Q_OBJECT
  public:
-  SpotifyImages();
-  ~SpotifyImages();
+  ArtistImages();
+  ~ArtistImages();
 
   void FetchInfo(int id, const Song& metadata) override;
 
  private:
-  void FetchImagesForArtist(int id, const QString& spotify_id);
-
   std::unique_ptr<NetworkAccessManager> network_;
 };
 
-#endif  // SPOTIFYIMAGES_H
+#endif  // ARTISTIMAGES_H

@@ -75,7 +75,7 @@ msgstr " sekundi"
 msgid " songs"
 msgstr " pjesme"
 
-#: ui/networkremotesettingspage.cpp:204
+#: ui/networkremotesettingspage.cpp:213
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -408,7 +408,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Znakovi započeti s %, npr: %izvođač %album %pjesma </p>\n\n<p>Ako imate dijelove teksta koji sadrže znakove sa vitičastom zagradom, taj dio će biti sakriven ako su oznake prazne.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:383
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -533,7 +533,7 @@ msgstr "Dodajte novi stream..."
 msgid "Add directory..."
 msgstr "Dodajte direktorij..."
 
-#: ui/mainwindow.cpp:2146
+#: ui/mainwindow.cpp:2143
 msgid "Add file"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr "Dodajte datoteku za transkôdiranje..."
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Dodajte mapu"
@@ -654,7 +654,7 @@ msgstr "Dodajte oznaku godine pjesme"
 msgid "Add stream..."
 msgstr "Dodajte stream..."
 
-#: ui/mainwindow.cpp:1947
+#: ui/mainwindow.cpp:1944
 msgid "Add to another playlist"
 msgstr "Dodajte na drugi popis izvođenja"
 
@@ -753,7 +753,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:391
 msgid "All addresses"
 msgstr ""
 
@@ -782,11 +782,11 @@ msgstr "Svi prevoditelji"
 msgid "All tracks"
 msgstr "Sve pjesme"
 
-#: ../bin/src/ui_networkremotesettingspage.h:386
+#: ../bin/src/ui_networkremotesettingspage.h:396
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:398
 msgid "Allow downloads"
 msgstr ""
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "Dopusti mid/side enkôdiranje"
 
-#: ../bin/src/ui_networkremotesettingspage.h:392
+#: ../bin/src/ui_networkremotesettingspage.h:402
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Izvođač"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Info izvođača"
 
@@ -901,7 +901,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:408
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Format zvuka"
@@ -1079,7 +1079,7 @@ msgstr "Pogledaj..."
 msgid "Buffer duration"
 msgstr "Trajanje međuspremnika"
 
-#: engines/gstengine.cpp:957
+#: engines/gstengine.cpp:993
 msgid "Buffering"
 msgstr ""
 
@@ -1165,7 +1165,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:846
+#: ui/mainwindow.cpp:843
 msgid "Check for updates..."
 msgstr "Provjeri ima li nadogradnja"
 
@@ -1181,7 +1181,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Izaberite naziv za svoj pametni popis izvođenja"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:1014
 msgid "Choose automatically"
 msgstr "Automatski odabir"
 
@@ -1425,7 +1425,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:679
+#: ui/mainwindow.cpp:676
 msgid "Configure library..."
 msgstr "Podesi fonoteku..."
 
@@ -1496,11 +1496,11 @@ msgstr "Konvertiraj svu glazbu"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertiraj svu glazbu koju uređaj može reproducirati"
 
-#: ../bin/src/ui_networkremotesettingspage.h:395
+#: ../bin/src/ui_networkremotesettingspage.h:405
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:397
+#: ../bin/src/ui_networkremotesettingspage.h:407
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1509,11 +1509,11 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:739 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopirajte na uređaj..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:729
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Kopirajte u fonoteku..."
@@ -1735,7 +1735,7 @@ msgstr "Smanji glasnoću zvuka"
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:1004
+#: engines/gstengine.cpp:1040
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1758,7 +1758,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Obrišite datoteku"
 
@@ -1766,7 +1766,7 @@ msgstr "Obrišite datoteku"
 msgid "Delete from device..."
 msgstr "Obrišite s uređaja..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Obrišite s diska..."
@@ -1799,11 +1799,11 @@ msgstr "Brisanje datoteka"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1860
+#: ui/mainwindow.cpp:1857
 msgid "Dequeue selected tracks"
 msgstr "Uklonite označenu pjesmu s reprodukcije"
 
-#: ui/mainwindow.cpp:1858
+#: ui/mainwindow.cpp:1855
 msgid "Dequeue track"
 msgstr "Uklonite označenu pjesmu za reprodukciju"
 
@@ -1836,7 +1836,7 @@ msgstr "Naziv uređaja"
 msgid "Device properties..."
 msgstr "Mogućnosti uređaja..."
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -2003,15 +2003,15 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:403
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:412
+#: ../bin/src/ui_networkremotesettingspage.h:422
 msgid "Download the original Android app"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:418
 msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
@@ -2081,7 +2081,7 @@ msgstr "Dinamičan naizmjeničan mix"
 msgid "Edit smart playlist..."
 msgstr "Uredite pametni popis izvođenja..."
 
-#: ui/mainwindow.cpp:1910
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznaku \"%1\"..."
@@ -2177,8 +2177,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "Upišite novi naziv za popis izvođenja"
 
-#: ../bin/src/ui_networkremotesettingspage.h:378
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:388
+#: ../bin/src/ui_networkremotesettingspage.h:393
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2188,7 +2188,7 @@ msgid ""
 msgstr ""
 
 #: ../bin/src/ui_itunessearchpage.h:70
-msgid "Enter search terms below to find podcasts in the iTunes Store"
+msgid "Enter search terms below to find podcasts on Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:70
@@ -2229,7 +2229,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Odgovara --log-levels *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Greška"
@@ -2508,11 +2508,11 @@ msgstr "Naziv datoteke"
 msgid "Filename Preview"
 msgstr ""
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Datoteke"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:413
 msgid "Files root folder"
 msgstr ""
 
@@ -2951,7 +2951,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Internet"
 
@@ -3098,13 +3098,13 @@ msgstr ""
 msgid "Length"
 msgstr "Trajanje"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:400
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr ""
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Fonoteka"
@@ -3113,7 +3113,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Napredno grupiranje fonoteke"
 
-#: ui/mainwindow.cpp:2785
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Obavijest o ponovnom pretraživanju fonoteke"
 
@@ -3129,7 +3129,7 @@ msgstr ""
 msgid "Limits"
 msgstr "Granice"
 
-#: ../bin/src/ui_networkremotesettingspage.h:380
+#: ../bin/src/ui_networkremotesettingspage.h:390
 msgid "Listen on"
 msgstr ""
 
@@ -3459,7 +3459,7 @@ msgstr "Točka montiranja"
 msgid "Move down"
 msgstr "Pomakni dolje"
 
-#: ui/mainwindow.cpp:732 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Premjesti u fonoteku..."
 
@@ -3468,7 +3468,7 @@ msgstr "Premjesti u fonoteku..."
 msgid "Move up"
 msgstr "Pomakni gore"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
 msgid "Music"
 msgstr ""
 
@@ -3476,7 +3476,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Fonoteka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:417
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3507,7 +3507,7 @@ msgstr "Uskopojasni (UP)"
 msgid "Network Proxy"
 msgstr "Mrežni Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:361
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Network Remote"
 msgstr ""
 
@@ -3534,7 +3534,7 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Novi popis izvođenja"
 
@@ -3620,7 +3620,7 @@ msgstr "Bez kratkih blokova"
 msgid "None"
 msgstr "Ništa"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nijedna od odabranih pjesama nije prikladna za kopiranje na uređaj"
 
@@ -3661,7 +3661,7 @@ msgstr "Vrsta obavijesti"
 msgid "Notifications"
 msgstr "Obavijesti"
 
-#: ui/macsystemtrayicon.mm:64
+#: ui/macsystemtrayicon.mm:66
 msgid "Now Playing"
 msgstr "Sada se reproducira"
 
@@ -3711,16 +3711,26 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:366
+#: ../bin/src/ui_networkremotesettingspage.h:373
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
-"192.168.x.x"
+"192.168.x.x\n"
+"and from link-local and private IPv6 addresses.\n"
+"\n"
+"When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Only allow connections from the local network"
+msgstr ""
+
+#: ui/networkremotesettingspage.cpp:235
+#, qt-format
+msgid ""
+"Only connections from the local network are allowed, so nothing can connect "
+"through: %1"
 msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:140
@@ -3803,7 +3813,7 @@ msgid "Optimize for quality"
 msgstr "Podesite kvalitetu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:399
+#: ../bin/src/ui_networkremotesettingspage.h:409
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Mogućnosti..."
@@ -3816,7 +3826,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Organizirajte datoteke"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:735
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
 msgid "Organise files..."
 msgstr "Organizirajte datoteke..."
 
@@ -3901,7 +3911,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
 #: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pauziraj reprodukciju"
@@ -3937,12 +3947,20 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Jednostavna bočna traka"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
-#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
 #: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Pokreni reprodukciju"
+
+#: songinfo/songinfoview.cpp:46
+msgid "Play a song to see its lyrics and information about it here."
+msgstr ""
+
+#: songinfo/artistinfoview.cpp:29
+msgid "Play a song to see pictures of its artist and their biography here."
+msgstr ""
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
@@ -3961,11 +3979,11 @@ msgstr "Reproduciraj ako se zaustavi, pauziraj ako svira"
 msgid "Play if there is nothing already playing"
 msgstr "Reproduciraj glazbu ako se trenutno ništa ne reproducira"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1869
+#: ui/mainwindow.cpp:1866
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -4004,7 +4022,7 @@ msgstr "Mogućnosti popisa izvođenja"
 msgid "Playlist type"
 msgstr "Vrsta popisa izvođenja"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr ""
 
@@ -4067,7 +4085,7 @@ msgid "Popup duration"
 msgstr "Trajanje skočnog prozora, obavijesti ili ljepšeg OSD-a"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:364
+#: ../bin/src/ui_networkremotesettingspage.h:371
 msgid "Port"
 msgstr "Ulaz"
 
@@ -4213,12 +4231,12 @@ msgstr "Tražim uređaj..."
 msgid "Queue Manager"
 msgstr "Upravljanje odabranim pjesmama za reprodukciju"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1861
 msgid "Queue selected tracks"
 msgstr "Odaberite označenu pjesmu za reprodukciju"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1859
 msgid "Queue track"
 msgstr "Odaberite pjesmu za reprodukciju"
 
@@ -4437,7 +4455,7 @@ msgstr "Način pred-pjačanja"
 msgid "Repopulate"
 msgstr "Izmješajte pjesme"
 
-#: ../bin/src/ui_networkremotesettingspage.h:375
+#: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Require authentication code"
 msgstr ""
 
@@ -4494,7 +4512,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:401
+#: ../bin/src/ui_networkremotesettingspage.h:411
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4634,9 +4652,13 @@ msgstr ""
 msgid "Search"
 msgstr "Traži"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
+msgstr ""
+
+#: ../bin/src/ui_itunessearchpage.h:69
+msgid "Search Apple Podcasts"
 msgstr ""
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
@@ -4663,7 +4685,7 @@ msgstr ""
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:716
+#: ui/mainwindow.cpp:713
 msgid "Search for album"
 msgstr ""
 
@@ -4676,7 +4698,7 @@ msgstr "Pretražite omote albuma..."
 msgid "Search for anything"
 msgstr ""
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:710
 msgid "Search for artist"
 msgstr ""
 
@@ -4686,10 +4708,6 @@ msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:69
 msgid "Search gpodder.net"
-msgstr ""
-
-#: ../bin/src/ui_itunessearchpage.h:69
-msgid "Search iTunes"
 msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:114
@@ -4801,7 +4819,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1906
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Postavite %1 na \"%2\"..."
@@ -4824,7 +4842,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "Postavi vrijednosti za sve odabrane pjesme..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:363
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Settings"
 msgstr "Postavke"
 
@@ -4891,7 +4909,7 @@ msgstr "Prikaži ljepši OSD"
 msgid "Show above status bar"
 msgstr "Prikaži iznad trake stanja"
 
-#: ui/mainwindow.cpp:663
+#: ui/mainwindow.cpp:660
 msgid "Show all songs"
 msgstr "Prikaži sve pjesme"
 
@@ -4911,12 +4929,12 @@ msgstr "Prikaži razdjelnike u stablu fonoteke"
 msgid "Show fullsize..."
 msgstr "Prikaži u punoj veličini..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Prikaži u pregledniku datoteka..."
 
-#: ui/mainwindow.cpp:747
+#: ui/mainwindow.cpp:744
 msgid "Show in library..."
 msgstr ""
 
@@ -4928,11 +4946,11 @@ msgstr "Prikaži u različitim izvođačima"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:662
 msgid "Show only duplicates"
 msgstr "Prikaži samo duplicirane pjesme"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:664
 msgid "Show only untagged"
 msgstr "Prikaži samo neoznačene pjesme"
 
@@ -5033,7 +5051,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unaprijed u popisu izvođenja"
 
-#: ui/mainwindow.cpp:1880
+#: ui/mainwindow.cpp:1877
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -5041,7 +5059,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1878
+#: ui/mainwindow.cpp:1875
 msgid "Skip track"
 msgstr ""
 
@@ -5077,7 +5095,7 @@ msgstr "Informacije o pjesmi"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Info pjesme"
 
@@ -5172,7 +5190,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:700 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Zaustavi reprodukciju nakon ove pjesme"
 
@@ -5344,7 +5362,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2776
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5369,7 +5387,7 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Dogodio se problem u preuzimanju metapodataka iz Magnatune"
 
 #: internet/podcasts/itunessearchpage.cpp:84
-msgid "There was a problem parsing the response from the iTunes Store"
+msgid "There was a problem parsing the response from Apple Podcasts"
 msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
@@ -5390,7 +5408,7 @@ msgid ""
 "continue?"
 msgstr "Ove datoteke bit će obrisane sa uređaja, sigurno želite nastaviti?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5486,7 +5504,7 @@ msgstr "Uključi/Isključi ljepši OSD"
 msgid "Toggle fullscreen"
 msgstr "Cijelozaslonski prikaz"
 
-#: ui/mainwindow.cpp:1866
+#: ui/mainwindow.cpp:1863
 msgid "Toggle queue status"
 msgstr "Uključi/isključi stanje reda čekanja"
 
@@ -5642,11 +5660,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "Uklonite omot"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1873
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1871
 msgid "Unskip track"
 msgstr ""
 
@@ -5725,7 +5743,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Koristi prilagođene poruke za obavijesti"
 
-#: ../bin/src/ui_networkremotesettingspage.h:362
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5986,7 +6004,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2783
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Želite li pokrenuti ponovnu potpunu prtetragu odmah?"
 
@@ -6059,7 +6077,7 @@ msgstr "Prijavljeni ste."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Možete promijeniti način na koji su pjesme organizirane u fonoteci."
 
-#: ui/networkremotesettingspage.cpp:166
+#: ui/networkremotesettingspage.cpp:175
 #, qt-format
 msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
@@ -6186,7 +6204,7 @@ msgstr "najveći prvi"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:415
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6196,7 +6214,7 @@ msgstr ""
 msgid "contains"
 msgstr "sadrži"
 
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:419
 msgid "desktop_remote"
 msgstr ""
 
@@ -6301,9 +6319,9 @@ msgstr "na"
 msgid "options"
 msgstr "mogućnosti"
 
-#: ../bin/src/ui_networkremotesettingspage.h:410
-#: ../bin/src/ui_networkremotesettingspage.h:411
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:420
+#: ../bin/src/ui_networkremotesettingspage.h:421
+#: ../bin/src/ui_networkremotesettingspage.h:423
 msgid "or scan the QR code: "
 msgstr ""
 

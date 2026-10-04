@@ -106,12 +106,9 @@ class AlbumCoverLoader : public QObject {
   QMutex mutex_;
   QQueue<Task> tasks_;
   QMap<QNetworkReply*, Task> remote_tasks_;
-  QMap<QString, Task> remote_spotify_tasks_;
   quint64 next_id_;
 
   NetworkAccessManager* network_;
-
-  bool connected_spotify_;
 
   static const int kMaxRedirects = 3;
 };

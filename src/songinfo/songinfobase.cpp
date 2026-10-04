@@ -18,6 +18,7 @@
 #include "songinfobase.h"
 
 #include <QFile>
+#include <QLabel>
 #include <QMultiMap>
 #include <QScrollArea>
 #include <QSettings>
@@ -57,6 +58,18 @@ SongInfoBase::SongInfoBase(QWidget* parent)
 
   // Add a spacer to the bottom of the container
   container_->addStretch();
+
+  // In place of the scroll area while nothing's playing, as nothing's playing
+  // yet.
+  placeholder_ = new QLabel;
+  placeholder_->setAlignment(Qt::AlignCenter);
+  placeholder_->setWordWrap(true);
+  placeholder_->setMargin(12);
+  placeholder_->setForegroundRole(QPalette::PlaceholderText);
+  placeholder_->setBackgroundRole(QPalette::Base);
+  placeholder_->setAutoFillBackground(true);
+  layout()->addWidget(placeholder_);
+  scroll_area_->hide();
 
   // Set stylesheet
   QFile stylesheet(":/songinfo.css");
@@ -118,7 +131,21 @@ void SongInfoBase::SongChanged(const Song& metadata) {
   }
 }
 
-void SongInfoBase::SongFinished() { dirty_ = false; }
+void SongInfoBase::SongFinished() {
+  dirty_ = false;
+
+  // Nothing's playing: the last song's information goes, and replies still on
+  // their way for it are ignored. Playing it again fetches it again.
+  current_request_id_ = -1;
+  old_metadata_ = Song();
+  Clear();
+  scroll_area_->hide();
+  placeholder_->show();
+}
+
+void SongInfoBase::SetPlaceholderText(const QString& text) {
+  placeholder_->setText(text);
+}
 
 void SongInfoBase::showEvent(QShowEvent* e) {
   if (dirty_) {
@@ -140,6 +167,8 @@ void SongInfoBase::MaybeUpdate(const Song& metadata) {
 }
 
 void SongInfoBase::Update(const Song& metadata) {
+  placeholder_->hide();
+  scroll_area_->show();
   current_request_id_ = fetcher_->FetchInfo(metadata);
 
   // Do this after the new pane has been shown otherwise it'll just grab a

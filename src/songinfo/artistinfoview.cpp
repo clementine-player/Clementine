@@ -18,13 +18,16 @@
 #include "artistinfoview.h"
 
 #include "songinfo/artistbiography.h"
+#include "songinfo/artistimages.h"
 #include "songinfo/songinfofetcher.h"
-#include "songinfo/spotifyimages.h"
 #include "widgets/prettyimageview.h"
 
 ArtistInfoView::ArtistInfoView(QWidget* parent) : SongInfoBase(parent) {
-  fetcher_->AddProvider(new SpotifyImages);
+  fetcher_->AddProvider(new ArtistImages);
   fetcher_->AddProvider(new ArtistBiography);
+  SetPlaceholderText(
+      tr("Play a song to see pictures of its artist and their biography "
+         "here."));
 }
 
 ArtistInfoView::~ArtistInfoView() {}

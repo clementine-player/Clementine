@@ -289,6 +289,9 @@ enum ReasonDisconnect {
   Wrong_Auth_Code = 2;
   Not_Authenticated = 3;
   Download_Forbidden = 4;
+  // Clementine only accepts connections from its local network, and the
+  // client isn't on it. Older clients read this as Server_Shutdown.
+  Not_Local_Network = 5;
 }
 message ResponseDisconnect {
   optional ReasonDisconnect reason_disconnect = 1;

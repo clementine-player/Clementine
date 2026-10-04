@@ -16,6 +16,7 @@
 
 #include "networkremote/networkremote.h"
 
+#include <QDataStream>
 #include <QHostAddress>
 #include <QStringList>
 #include <algorithm>
@@ -23,6 +24,8 @@
 #include "gtest/gtest.h"
 #include "networkremote/authattemptlimiter.h"
 #include "test_utils.h"
+
+using Listening = NetworkRemote::Listening;
 
 TEST(NetworkRemoteTest, AllAddressesListensOnTheWildcards) {
   const QList<QHostAddress> addresses =
@@ -174,4 +177,67 @@ TEST_F(AuthAttemptLimiterTest, KeepsABoundedNumberOfAddresses) {
   }
   EXPECT_EQ(AuthAttemptLimiter::kFirstLockoutMsec,
             limiter_.RecordFailure(latest));
+}
+
+TEST(NetworkRemoteTest, LinkLocalIsPrivate) {
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("169.254.0.7")));
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("::ffff:169.254.0.7")));
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("fe80::1")));
+  EXPECT_TRUE(NetworkRemote::IpIsPrivate(QHostAddress("fd7a:115c:a1e0::1")));
+}
+
+TEST(NetworkRemoteTest, TailnetClientIsLocalOnAChosenTailnetAddress) {
+  const QHostAddress local("100.65.55.75");
+  EXPECT_TRUE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local,
+                                           Listening::OnChosenAddress));
+  // Not when listening on everything.
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"), local,
+                                            Listening::OnAllAddresses));
+  // The internet stays out.
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("8.8.8.8"), local,
+                                            Listening::OnChosenAddress));
+}
+
+TEST(NetworkRemoteTest, TailnetClientIsntLocalOnALanAddress) {
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("100.101.2.3"),
+                                            QHostAddress("192.168.86.178"),
+                                            Listening::OnChosenAddress));
+}
+
+TEST(NetworkRemoteTest, InternetIsntLocalOnAChosenLanAddress) {
+  // A machine in a router's DMZ gets the internet on its LAN address.
+  EXPECT_FALSE(NetworkRemote::IsLocalClient(QHostAddress("8.8.8.8"),
+                                            QHostAddress("192.168.86.178"),
+                                            Listening::OnChosenAddress));
+  EXPECT_TRUE(NetworkRemote::IsLocalClient(QHostAddress("192.168.86.20"),
+                                           QHostAddress("192.168.86.178"),
+                                           Listening::OnChosenAddress));
+}
+
+TEST(NetworkRemoteTest, LocalClientsCanReachNonPublicAddresses) {
+  EXPECT_TRUE(
+      NetworkRemote::LocalClientsCanReach(QHostAddress("100.65.55.75")));
+  EXPECT_TRUE(
+      NetworkRemote::LocalClientsCanReach(QHostAddress("192.168.86.178")));
+  EXPECT_TRUE(NetworkRemote::LocalClientsCanReach(
+      QHostAddress("fd7a:115c:a1e0::f535:374b")));
+  EXPECT_FALSE(
+      NetworkRemote::LocalClientsCanReach(QHostAddress("203.0.113.5")));
+}
+
+TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
+  const QByteArray framed =
+      NetworkRemote::DisconnectMessage(cpb::remote::Not_Local_Network);
+
+  QDataStream s(framed);
+  qint32 length = 0;
+  s >> length;
+  ASSERT_EQ(framed.size() - 4, length);
+
+  cpb::remote::Message msg;
+  ASSERT_TRUE(msg.ParseFromArray(framed.constData() + 4, length));
+  EXPECT_EQ(cpb::remote::DISCONNECT, msg.type());
+  EXPECT_EQ(cpb::remote::Not_Local_Network,
+            msg.response_disconnect().reason_disconnect());
+  EXPECT_TRUE(msg.has_version());
 }

@@ -1,0 +1,128 @@
+# Puts the newest macOS build from master in the Sparkle feed that the app
+# checks for updates, weekly, when there's something to tell users: commits
+# since the last update with "Release-note:" trailers. Run by hand, it
+# publishes any change since the last update. See tools/mac-update/README.md,
+# whose clementine-mac-update does each step.
+#
+# The DMG is the one already released and notarized by all.yml; this signs it
+# for Sparkle with the EdDSA key in Secret Manager, reached through Workload
+# Identity Federation by this workflow on master only
+# (dist/gcp_sparkle_setup.sh). Skipped until the SPARKLE_WIF_PROVIDER
+# repository variable is set.
+
+name: mac-update
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mac-update
+  cancel-in-progress: false
+
+defaults:
+  run:
+    # With pipefail, unlike the runner's default: a failed key fetch must
+    # fail the signing step rather than sign with nothing.
+    shell: bash
+
+jobs:
+  publish:
+    name: Publish the macOS update
+    if: github.ref == 'refs/heads/master' && vars.SPARKLE_WIF_PROVIDER != ''
+    # hdiutil, to read the app's Info.plist, and Sparkle's sign_update are
+    # macOS-only.
+    runs-on: macos-26
+    timeout-minutes: 30
+    permissions:
+      contents: write # to tag what's published, sparkle/<release>
+      id-token: write # for the signing key, through Workload Identity Federation
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: Install clementine-mac-update
+        run: |
+          uv sync --project tools/mac-update --no-dev
+          echo "$PWD/tools/mac-update/.venv/bin" >> "$GITHUB_PATH"
+
+      - name: Plan the update
+        id: plan
+        env:
+          ALWAYS: ${{ github.event_name == 'workflow_dispatch' && 'true' || '' }}
+        run: >
+          clementine-mac-update plan --notes "$RUNNER_TEMP/notes.txt" ${ALWAYS:+--always}
+          | tee -a "$GITHUB_OUTPUT"
+      - name: Show the release notes
+        if: steps.plan.outputs.publish == 'true'
+        env:
+          RELEASE: ${{ steps.plan.outputs.release }}
+        run: |
+          {
+            echo "### $RELEASE"
+            sed 's/^/- /' "$RUNNER_TEMP/notes.txt"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Download the DMG
+        if: steps.plan.outputs.publish == 'true'
+        env:
+          RELEASE: ${{ steps.plan.outputs.release }}
+          DMG: ${{ steps.plan.outputs.dmg }}
+        run: |
+          gh release download "$RELEASE" --pattern "$DMG" --dir "$RUNNER_TEMP"
+          expected=$(gh release view "$RELEASE" --json assets \
+            --jq ".assets[] | select(.name == \"$DMG\") | .digest")
+          echo "${expected#sha256:}  $RUNNER_TEMP/$DMG" | shasum -a 256 -c -
+      - name: Fetch Sparkle's tools
+        if: steps.plan.outputs.publish == 'true'
+        run: clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
+
+      - name: Authenticate to GCP
+        if: steps.plan.outputs.publish == 'true'
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.SPARKLE_WIF_PROVIDER }}
+          service_account: sparkle-feed@clementine-data.iam.gserviceaccount.com
+      - name: Set up gcloud
+        if: steps.plan.outputs.publish == 'true'
+        uses: google-github-actions/setup-gcloud@v3
+      - name: Sign the DMG
+        id: sign
+        if: steps.plan.outputs.publish == 'true'
+        env:
+          DMG: ${{ steps.plan.outputs.dmg }}
+        # The key goes from Secret Manager straight to sign_update's stdin,
+        # never to disk or the log.
+        run: |
+          signature=$(gcloud secrets versions access latest \
+              --secret=sparkle-ed-private-key --project=clementine-data |
+            "$RUNNER_TEMP/sparkle/bin/sign_update" -p --ed-key-file - "$RUNNER_TEMP/$DMG")
+          echo "signature=$signature" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to the feed
+        if: steps.plan.outputs.publish == 'true'
+        env:
+          RELEASE: ${{ steps.plan.outputs.release }}
+          DMG: ${{ steps.plan.outputs.dmg }}
+          SIGNATURE: ${{ steps.sign.outputs.signature }}
+        run: >
+          clementine-mac-update publish
+          --dmg "$RUNNER_TEMP/$DMG"
+          --url "https://github.com/$GITHUB_REPOSITORY/releases/download/$RELEASE/$DMG"
+          --signature "$SIGNATURE"
+          --notes "$RUNNER_TEMP/notes.txt"
+      # Last, so a failed publish is tried again next week, with that week's
+      # notes too.
+      - name: Tag what's published
+        if: steps.plan.outputs.publish == 'true'
+        env:
+          RELEASE: ${{ steps.plan.outputs.release }}
+        run: |
+          git tag "sparkle/$RELEASE" "$RELEASE"
+          git push origin "sparkle/$RELEASE"

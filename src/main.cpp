@@ -154,8 +154,8 @@ void SetEnv(const char* key, const QString& value) {
 #endif
 }
 
-// This must be done early so that the spotify blob process also picks up
-// these environment variables.
+// This must be done early, so that the processes we start (eg. the tag
+// readers) also pick up these environment variables.
 void SetGstreamerEnvironment() {
   QString scanner_path;
   QString plugin_path;
