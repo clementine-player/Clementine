@@ -531,7 +531,7 @@ msgstr "Додати інший потік…"
 msgid "Add directory..."
 msgstr "Додати теку…"
 
-#: ui/mainwindow.cpp:2146
+#: ui/mainwindow.cpp:2143
 msgid "Add file"
 msgstr "Додати файл"
 
@@ -555,7 +555,7 @@ msgstr "Додати файли для перекодування"
 msgid "Add files..."
 msgstr "Додати файли…"
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2173
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Додати теку"
@@ -652,7 +652,7 @@ msgstr "Додати мітку року пісні"
 msgid "Add stream..."
 msgstr "Додати потік…"
 
-#: ui/mainwindow.cpp:1947
+#: ui/mainwindow.cpp:1944
 msgid "Add to another playlist"
 msgstr "Додати до іншого списку відтворення"
 
@@ -886,7 +886,7 @@ msgstr "Ви справді хочете записати статистичні
 msgid "Artist"
 msgstr "Виконавець"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Виконавець"
 
@@ -1077,7 +1077,7 @@ msgstr "Огляд…"
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:957
+#: engines/gstengine.cpp:993
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1163,7 +1163,7 @@ msgstr "Перевіряти наявність нових випусків"
 msgid "Check for updates"
 msgstr "Перевірити наявність оновлень"
 
-#: ui/mainwindow.cpp:846
+#: ui/mainwindow.cpp:843
 msgid "Check for updates..."
 msgstr "Перевірити оновлення…"
 
@@ -1179,7 +1179,7 @@ msgstr "Чілаут"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:1014
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1423,7 +1423,7 @@ msgstr "Налаштувати Subsonic…"
 msgid "Configure global search..."
 msgstr "Налаштувати загальні правила пошуку…"
 
-#: ui/mainwindow.cpp:679
+#: ui/mainwindow.cpp:676
 msgid "Configure library..."
 msgstr "Налаштувати фонотеку"
 
@@ -1507,11 +1507,11 @@ msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:739 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:729
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Скопіювати до фонотеки…"
@@ -1733,7 +1733,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:1004
+#: engines/gstengine.cpp:1040
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -1756,7 +1756,7 @@ msgid "Delete downloaded data"
 msgstr "Вилучити отримані дані"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2522 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Вилучити файли"
 
@@ -1764,7 +1764,7 @@ msgstr "Вилучити файли"
 msgid "Delete from device..."
 msgstr "Вилучити з пристрою…"
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Вилучити з диска…"
@@ -1797,11 +1797,11 @@ msgstr "Вилучення файлів"
 msgid "Depth"
 msgstr "Глибина"
 
-#: ui/mainwindow.cpp:1860
+#: ui/mainwindow.cpp:1857
 msgid "Dequeue selected tracks"
 msgstr "Вилучити з черги вибрані композиції"
 
-#: ui/mainwindow.cpp:1858
+#: ui/mainwindow.cpp:1855
 msgid "Dequeue track"
 msgstr "Вилучити композицію з черги"
 
@@ -1834,7 +1834,7 @@ msgstr "Назва пристрою"
 msgid "Device properties..."
 msgstr "Налаштування пристрою…"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -2079,7 +2079,7 @@ msgstr "Динамічний випадковий мікс"
 msgid "Edit smart playlist..."
 msgstr "Редагувати розумний список відтворення…"
 
-#: ui/mainwindow.cpp:1910
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Змінити «%1»…"
@@ -2227,7 +2227,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2475 ui/mainwindow.cpp:2653
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Помилка"
@@ -2506,7 +2506,7 @@ msgstr "Назва файлу"
 msgid "Filename Preview"
 msgstr "Перегляд назви файла"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Файли"
 
@@ -2949,7 +2949,7 @@ msgstr "Інструментальна музика"
 msgid "Integrity check"
 msgstr "Перевірка цілісності даних"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Інтернет"
 
@@ -3102,7 +3102,7 @@ msgid ""
 " streams the audio to it."
 msgstr "Дозволити з'єднаному пристрою працювати як гучномовцю: Clementine збереже список відтворення і потоково передаватиме звукові дані на пристрій."
 
-#: ui/mainwindow.cpp:254 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Фонотека"
@@ -3111,7 +3111,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Розширене групування фонотеки"
 
-#: ui/mainwindow.cpp:2785
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Повідомлення про повторне сканування фонотеки"
 
@@ -3457,7 +3457,7 @@ msgstr "Точки монтування"
 msgid "Move down"
 msgstr "Перемістити вниз"
 
-#: ui/mainwindow.cpp:732 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Перемістити до фонотеки…"
 
@@ -3466,7 +3466,7 @@ msgstr "Перемістити до фонотеки…"
 msgid "Move up"
 msgstr "Перемістити вгору"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2148
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
 msgid "Music"
 msgstr "Музика"
 
@@ -3532,7 +3532,7 @@ msgstr "Нові альбоми"
 msgid "New folder"
 msgstr "Нова тека"
 
-#: ui/mainwindow.cpp:1964 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Новий список відтворення"
 
@@ -3618,7 +3618,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2476 ui/mainwindow.cpp:2654
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -3659,7 +3659,7 @@ msgstr "Тип повідомлення"
 msgid "Notifications"
 msgstr "Сповіщення"
 
-#: ui/macsystemtrayicon.mm:64
+#: ui/macsystemtrayicon.mm:66
 msgid "Now Playing"
 msgstr "Зараз відтворюється"
 
@@ -3824,7 +3824,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:735
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
@@ -3909,7 +3909,7 @@ msgstr "Вечірка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1178 ui/mainwindow.cpp:1755
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
 #: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Призупинити"
@@ -3945,8 +3945,8 @@ msgstr "Піксель"
 msgid "Plain sidebar"
 msgstr "Звичайна бічна панель"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:696 ui/mainwindow.cpp:1142
-#: ui/mainwindow.cpp:1163 ui/mainwindow.cpp:1759 ui/qtsystemtrayicon.cpp:223
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
 #: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3977,11 +3977,11 @@ msgstr "Відтворити, якщо зупинено; призупинити,
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1871
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
 msgid "Play next"
 msgstr "Відтворити наступну"
 
-#: ui/mainwindow.cpp:1869
+#: ui/mainwindow.cpp:1866
 msgid "Play selected tracks next"
 msgstr "Відтворити наступні позначені композиції"
 
@@ -4020,7 +4020,7 @@ msgstr "Налаштування списку відтворення"
 msgid "Playlist type"
 msgstr "Тип списку відтворення"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr "Списки"
 
@@ -4229,12 +4229,12 @@ msgstr "Опитування пристрою…"
 msgid "Queue Manager"
 msgstr "Керування чергою"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1861
 msgid "Queue selected tracks"
 msgstr "Додати до черги позначені композиції"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1859
 msgid "Queue track"
 msgstr "Додати композицію до черги"
 
@@ -4650,7 +4650,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Пошук"
 
-#: ui/mainwindow.cpp:266 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Пошук"
@@ -4683,7 +4683,7 @@ msgstr "Шукати на Subsonic"
 msgid "Search automatically"
 msgstr "Шукати автоматично"
 
-#: ui/mainwindow.cpp:716
+#: ui/mainwindow.cpp:713
 msgid "Search for album"
 msgstr "Шукати альбом"
 
@@ -4696,7 +4696,7 @@ msgstr "Пошук обкладинок альбомів…"
 msgid "Search for anything"
 msgstr "Шукати всюди"
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:710
 msgid "Search for artist"
 msgstr "Шукати виконавця"
 
@@ -4817,7 +4817,7 @@ msgstr "Адреса сервера"
 msgid "Server details"
 msgstr "Параметри сервера"
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1906
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
@@ -4907,7 +4907,7 @@ msgstr "Показувати приємні повідомлення OSD"
 msgid "Show above status bar"
 msgstr "Показати вище, в рядку стану"
 
-#: ui/mainwindow.cpp:663
+#: ui/mainwindow.cpp:660
 msgid "Show all songs"
 msgstr "Показати всі композиції"
 
@@ -4927,12 +4927,12 @@ msgstr "Показати розділювачі"
 msgid "Show fullsize..."
 msgstr "Показати на повний розмір…"
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Показати в оглядачі файлів…"
 
-#: ui/mainwindow.cpp:747
+#: ui/mainwindow.cpp:744
 msgid "Show in library..."
 msgstr "Показати у фонотеці…"
 
@@ -4944,11 +4944,11 @@ msgstr "Показувати в різних виконавцях"
 msgid "Show moodbar"
 msgstr "Показувати смужку настрою"
 
-#: ui/mainwindow.cpp:665
+#: ui/mainwindow.cpp:662
 msgid "Show only duplicates"
 msgstr "Показати тільки дублікати"
 
-#: ui/mainwindow.cpp:667
+#: ui/mainwindow.cpp:664
 msgid "Show only untagged"
 msgstr "Показати тільки без міток"
 
@@ -5049,7 +5049,7 @@ msgstr "Пропустити файли із вказаними суфіксам
 msgid "Skip forwards in playlist"
 msgstr "Перескочити вперед у списку композицій"
 
-#: ui/mainwindow.cpp:1880
+#: ui/mainwindow.cpp:1877
 msgid "Skip selected tracks"
 msgstr "Пропустити позначені композиції"
 
@@ -5057,7 +5057,7 @@ msgstr "Пропустити позначені композиції"
 msgid "Skip to the next album"
 msgstr "Перейти до наступного альбому"
 
-#: ui/mainwindow.cpp:1878
+#: ui/mainwindow.cpp:1875
 msgid "Skip track"
 msgstr "Пропустити композицію"
 
@@ -5093,7 +5093,7 @@ msgstr "Про композицію"
 msgid "Song Metadata"
 msgstr "Метадані композиції"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Композиція"
 
@@ -5188,7 +5188,7 @@ msgstr "Зупинятися після кожної композиції"
 msgid "Stop after every track"
 msgstr "Зупинятися після будь-якої композиції"
 
-#: ui/mainwindow.cpp:700 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Зупинити після цієї композиції"
 
@@ -5360,7 +5360,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Час тестування сервера Subsonic завершено. Будь ласка, придбайте ліцензійний ключ. Відвідайте subsonic.org, щоб дізнатися більше."
 
-#: ui/mainwindow.cpp:2776
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5406,7 +5406,7 @@ msgid ""
 "continue?"
 msgstr "Ці файли будуть вилучені з пристрою. Ви впевнені? Вилучити їх?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2523 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5502,7 +5502,7 @@ msgstr "Змінити режим приємних OSD"
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
-#: ui/mainwindow.cpp:1866
+#: ui/mainwindow.cpp:1863
 msgid "Toggle queue status"
 msgstr "Перемикнути статус черги"
 
@@ -5658,11 +5658,11 @@ msgstr "Невідомий тип файла: %1"
 msgid "Unset cover"
 msgstr "Вилучити обкладинку"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1873
 msgid "Unskip selected tracks"
 msgstr "Не пропускати позначені композиції"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1871
 msgid "Unskip track"
 msgstr "Не пропускати композицію"
 
@@ -6002,7 +6002,7 @@ msgid ""
 "well?"
 msgstr "Хочете пересунути всі ініші композиції цього альбому до розділу «Різні виконавці»?"
 
-#: ui/mainwindow.cpp:2783
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
