@@ -39,10 +39,6 @@
 #include "ui/iconloader.h"
 #include "widgets/trackslider.h"
 
-#ifdef Q_OS_DARWIN
-#include "core/mac_utilities.h"
-#endif  // Q_OS_DARWIN
-
 const int QueuedItemDelegate::kQueueBoxBorder = 1;
 const int QueuedItemDelegate::kQueueBoxCornerRadius = 3;
 const int QueuedItemDelegate::kQueueBoxLength = 30;
@@ -487,15 +483,10 @@ void SongSourceDelegate::paint(QPainter* painter,
   const QUrl& url = index.data().toUrl();
   QPixmap pixmap = LookupPixmap(url, option_copy.decorationSize);
 
-  float device_pixel_ratio = 1.0f;
-#ifdef Q_OS_DARWIN
-  QWidget* parent_widget = reinterpret_cast<QWidget*>(parent());
-  device_pixel_ratio = mac::GetDevicePixelRatio(parent_widget);
-#endif
-
-  // Draw the pixmap in the middle of the rectangle
-  QRect draw_rect(QPoint(0, 0),
-                  option_copy.decorationSize / device_pixel_ratio);
+  // Draw the pixmap in the middle of the rectangle. It's at the screen's
+  // scale already (QIcon::pixmap() sets its device pixel ratio), so it's
+  // drawn at the decoration's size, not that divided by the scale again.
+  QRect draw_rect(QPoint(0, 0), option_copy.decorationSize);
   draw_rect.moveCenter(option_copy.rect.center());
 
   painter->drawPixmap(draw_rect, pixmap);

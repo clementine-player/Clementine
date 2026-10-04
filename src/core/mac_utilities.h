@@ -30,7 +30,6 @@ namespace mac {
 
 QKeySequence KeySequenceFromNSEvent(NSEvent* event);
 void DumpDictionary(CFDictionaryRef dict);
-float GetDevicePixelRatio(QWidget* widget);
 // The window server's number for |widget|'s window, as screencapture -l takes.
 int GetWindowNumber(QWidget* widget);
 }  // namespace mac
