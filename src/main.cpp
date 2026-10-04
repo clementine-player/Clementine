@@ -55,6 +55,7 @@
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/commandlineoptions.h"
+#include "core/crashreporting.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
@@ -418,6 +419,10 @@ int main(int argc, char* argv[]) {
     }
   }
 
+  // Started once we know this is the only instance, and after CheckPortable()
+  // so reports go in the right directory.
+  CrashReporting crash_reporting;
+
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
   qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
@@ -626,6 +631,11 @@ int main(int argc, char* argv[]) {
         &app, &w, options.screenshots_dir(), options.urls()));
     QMetaObject::invokeMethod(screenshot_taker.get(), "Run",
                               Qt::QueuedConnection);
+  }
+
+  if (!screenshots) {
+    QTimer::singleShot(0, &w,
+                       [&w]() { CrashReporting::AskForConsentIfNeeded(&w); });
   }
 
   int ret = a.exec();

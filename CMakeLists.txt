@@ -221,6 +221,22 @@ if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
 endif(WIN32)
 
+find_package(sentry CONFIG QUIET)
+optional_component(SENTRY OFF "Crash reporting (Sentry)"
+  DEPENDS "sentry-native" sentry_FOUND
+)
+# Where crash reports go. Left empty, a build with ENABLE_SENTRY has crash
+# reporting compiled in but never starts it.
+set(SENTRY_DSN "" CACHE STRING "Sentry DSN that crash reports are sent to")
+if(HAVE_SENTRY)
+  # Installed alongside sentry-native by its Crashpad backend.
+  find_program(SENTRY_CRASHPAD_HANDLER crashpad_handler
+    HINTS "${sentry_DIR}/../../../bin")
+  if(NOT SENTRY_CRASHPAD_HANDLER)
+    message(FATAL_ERROR "ENABLE_SENTRY needs sentry-native built with SENTRY_BACKEND=crashpad, but crashpad_handler wasn't found")
+  endif()
+endif()
+
 optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
