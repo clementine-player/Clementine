@@ -575,11 +575,6 @@ void EnableFullScreen(const QWidget& main_window) {
   [window setCollectionBehavior:kFullScreenPrimary];
 }
 
-float GetDevicePixelRatio(QWidget* widget) {
-  NSView* view = reinterpret_cast<NSView*>(widget->winId());
-  return [[view window] backingScaleFactor];
-}
-
 int GetWindowNumber(QWidget* widget) {
   NSView* view = reinterpret_cast<NSView*>(widget->winId());
   return [[view window] windowNumber];
