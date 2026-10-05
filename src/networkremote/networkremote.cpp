@@ -211,6 +211,18 @@ void NetworkRemote::StartServer() {
     servers_.push_back(std::move(server));
   }
 
+  if (renderer_registry_) {
+    // The registry lives on the Player's thread.
+    RendererRegistry* registry = renderer_registry_;
+    const quint16 port = port_;
+    const QList<QHostAddress> where =
+        listen_on_all_addresses_ ? QList<QHostAddress>() : listening;
+    QMetaObject::invokeMethod(
+        registry,
+        [registry, port, where]() { registry->SetListening(port, where); },
+        Qt::QueuedConnection);
+  }
+
   if (Zeroconf::GetZeroconf()) {
     // Advertise only where something is listening, so remotes aren't sent to
     // an address that refuses them. That includes a chosen address that

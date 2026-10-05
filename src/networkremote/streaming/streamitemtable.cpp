@@ -18,6 +18,14 @@
 #include "streamitemtable.h"
 
 #include <QMutexLocker>
+#include <QRandomGenerator>
+
+QByteArray StreamItemTable::NewToken() {
+  QByteArray bytes(16, Qt::Uninitialized);
+  QRandomGenerator::system()->fillRange(
+      reinterpret_cast<quint32*>(bytes.data()), bytes.size() / 4);
+  return bytes.toHex();
+}
 
 void StreamItemTable::Set(const QByteArray& token, const QHostAddress& peer,
                           const QList<StreamItem>& items) {

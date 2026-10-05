@@ -49,6 +49,9 @@ struct StreamItem {
 // network remote's thread.
 class StreamItemTable {
  public:
+  // A new session token: 128 random bits, in hex.
+  static QByteArray NewToken();
+
   // Replaces what the renderer with |token| may fetch.
   void Set(const QByteArray& token, const QHostAddress& peer,
            const QList<StreamItem>& items);

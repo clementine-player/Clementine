@@ -17,7 +17,6 @@
 
 #include "remoteengine.h"
 
-#include <QRandomGenerator>
 #include <QSettings>
 #include <QTimer>
 #include <QTimerEvent>
@@ -37,13 +36,6 @@ namespace {
 const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;
 const int kTimerIntervalMsec = 1000;
 
-QByteArray NewToken() {
-  QByteArray bytes(16, Qt::Uninitialized);
-  QRandomGenerator::system()->fillRange(
-      reinterpret_cast<quint32*>(bytes.data()), bytes.size() / 4);
-  return bytes.toHex();
-}
-
 }  // namespace
 
 RemoteEngine::RemoteEngine(Application* app, const RendererEndpoint& endpoint,
@@ -55,7 +47,7 @@ RemoteEngine::RemoteEngine(Application* app, const RendererEndpoint& endpoint,
       renderer_id_(QString::fromStdString(caps.renderer_id())),
       display_name_(QString::fromStdString(caps.display_name())),
       caps_(RendererCaps::FromProto(caps)),
-      token_(NewToken()),
+      token_(StreamItemTable::NewToken()),
       next_item_id_(1),
       current_sent_(false),
       current_retried_(false),
