@@ -76,19 +76,15 @@ class SystemTrayIcon : public QObject {
   // The icon with the grey icon over the part of it the song has played, a
   // wedge sweeping round from the top right.
   QPixmap CreateProgressIcon(const QPixmap& icon, const QPixmap& grey_icon);
-  // That, with the playing or paused icon in its top right.
+  // That, with a playing or paused badge in its bottom right.
   QPixmap CreateIcon(const QPixmap& icon, const QPixmap& grey_icon);
 
   int song_progress() const { return percentage_; }
-  QPixmap current_state_icon() const { return current_state_icon_; }
   PlaybackState playback_state() const { return playback_state_; }
 
  private:
   int percentage_;
   PlaybackState playback_state_ = PlaybackState::Stopped;
-  QPixmap playing_icon_;
-  QPixmap paused_icon_;
-  QPixmap current_state_icon_;
 };
 
 #endif  // SYSTEMTRAYICON_H
