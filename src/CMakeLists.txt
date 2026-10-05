@@ -85,6 +85,7 @@ set(SOURCES
   analyzers/turbine.cpp
   analyzers/fht.cpp
 
+  chromecast/castchannel.cpp
   chromecast/castdevice.cpp
   chromecast/castdiscovery.cpp
 
@@ -460,6 +461,7 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
+  chromecast/castchannel.h
   chromecast/castdiscovery.h
 
   core/appearance.h
@@ -1312,6 +1314,11 @@ add_library(clementine_lib STATIC
   ${PO}
   ${OTHER_UIC_SOURCES}
 )
+
+# Cast's wire format, generated into chromecast/ in the build directory.
+protobuf_generate(TARGET clementine_lib LANGUAGE cpp
+  PROTOS chromecast/castchannel.proto
+  IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(clementine_lib
   libclementine-common
