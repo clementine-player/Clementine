@@ -80,7 +80,8 @@ ChromecastEngine* RendererRegistry::CastEngine(const QString& device_id) const {
 void RendererRegistry::CastDeviceFound(const CastDevice& device) {
   if (ChromecastEngine* engine = CastEngine(device.id)) {
     engine->SetDevice(device);
-    RouterOutputsChanged();
+    // Its name may have changed.
+    if (router_) router_->NotifyOutputsChanged();
     return;
   }
   if (!router_) return;

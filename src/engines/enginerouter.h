@@ -44,6 +44,8 @@ class EngineRouter : public Engine::Base {
   GstEngine* local_engine() const;
   Engine::Base* active_engine() const { return active_; }
   bool is_local() const;
+  // The local engine first, then the others in the order they were added.
+  QList<Engine::Base*> outputs() const;
 
   // Makes |engine| available as an output. It isn't owned; it is removed
   // when destroyed.
@@ -55,6 +57,8 @@ class EngineRouter : public Engine::Base {
   // |engine| must be the local engine or one passed to AddOutput.
   void SetOutput(Engine::Base* engine);
   void SetLocalOutput();
+  // For an output whose name changed.
+  void NotifyOutputsChanged() { emit OutputsChanged(); }
 
   // Engine::Base
   bool Init();

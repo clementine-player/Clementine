@@ -63,6 +63,7 @@
 #include "devices/deviceview.h"
 #include "devices/deviceviewcontainer.h"
 #include "engines/enginebase.h"
+#include "engines/enginerouter.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
@@ -122,6 +123,7 @@
 #include "widgets/fileview.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
+#include "widgets/outputbutton.h"
 #include "widgets/stylehelper.h"
 #include "widgets/trackslider.h"
 
@@ -242,6 +244,17 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   int volume = app_->player()->GetVolume();
   ui_->volume->setValue(volume);
   VolumeChanged(volume);
+
+  // Experimental, see --chromecast: where to play, next to the volume.
+  EngineRouter* router = qobject_cast<EngineRouter*>(app_->player()->engine());
+  if (options.chromecast() && router) {
+    QBoxLayout* layout =
+        qobject_cast<QBoxLayout*>(ui_->volume->parentWidget()->layout());
+    if (layout) {
+      layout->insertWidget(layout->indexOf(ui_->volume),
+                           new OutputButton(router, this));
+    }
+  }
 
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());

@@ -80,6 +80,8 @@ class RemoteEngine : public Engine::Base {
   Engine::State state() const { return state_; }
   qint64 position_nanosec() const;
   qint64 length_nanosec() const;
+  QString output_name() const { return display_name_; }
+  QString output_icon() const { return "phone"; }
 
  signals:
   // The renderer reported an error it can't recover from.
