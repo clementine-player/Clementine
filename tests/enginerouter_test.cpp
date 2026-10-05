@@ -91,6 +91,18 @@ class EngineRouterTest : public ::testing::Test {
 
 }  // namespace
 
+TEST_F(EngineRouterTest, ListsItsOutputsLocalFirst) {
+  QList<Engine::Base*> outputs = router_->outputs();
+  ASSERT_EQ(2, outputs.size());
+  EXPECT_TRUE(outputs[0] == local_);
+  EXPECT_TRUE(outputs[1] == &remote_);
+
+  router_->RemoveOutput(&remote_);
+  outputs = router_->outputs();
+  ASSERT_EQ(1, outputs.size());
+  EXPECT_TRUE(outputs[0] == local_);
+}
+
 TEST_F(EngineRouterTest, ForwardsToTheLocalEngineByDefault) {
   EXPECT_TRUE(router_->is_local());
   PlayUrl("file:///a.mp3");

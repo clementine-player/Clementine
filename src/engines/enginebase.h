@@ -61,6 +61,11 @@ class Base : public QObject {
   virtual qint64 position_nanosec() const = 0;
   virtual qint64 length_nanosec() const = 0;
 
+  // For an EngineRouter output other than this computer: its name and the
+  // name of its icon in output pickers.
+  virtual QString output_name() const { return QString(); }
+  virtual QString output_icon() const { return QString(); }
+
   // Subclasses should respect given markers (beginning and end) which are
   // in milliseconds.
   virtual bool Load(const MediaPlaybackRequest& req, TrackChangeFlags change,

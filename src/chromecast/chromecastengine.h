@@ -69,6 +69,8 @@ class ChromecastEngine : public Engine::Base {
   Engine::State state() const override { return state_; }
   qint64 position_nanosec() const override;
   qint64 length_nanosec() const override;
+  QString output_name() const override { return device_.name; }
+  QString output_icon() const override { return "cast"; }
 
  signals:
   // The connection to the device was lost, or another sender took it over.

@@ -152,6 +152,10 @@ void EngineRouter::SetOutput(Engine::Base* engine) {
 
 void EngineRouter::SetLocalOutput() { SetOutput(local_.get()); }
 
+QList<Engine::Base*> EngineRouter::outputs() const {
+  return QList<Engine::Base*>{local_.get()} + remotes_;
+}
+
 void EngineRouter::UpdateFadeSettings() {
   Engine::Base::ReloadSettings();
   if (!is_local()) {
