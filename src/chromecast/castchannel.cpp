@@ -21,6 +21,7 @@
 #include <QSslConfiguration>
 #include <QSslSocket>
 #include <QtEndian>
+#include <cstring>
 
 #include "cast_channel/cast_channel.pb.h"
 #include "core/logging.h"
@@ -36,6 +37,9 @@ const int CastChannel::kMaxMessageSize = 64 * 1024;
 namespace {
 
 using openscreen::cast::proto::CastMessage;
+
+// Each message is preceded by its size.
+const int kHeaderSize = sizeof(quint32_be);
 
 const int kDefaultHeartbeatMsec = 5000;
 // How many heartbeats may pass with nothing from the device.
@@ -54,21 +58,26 @@ QByteArray CastChannel::Encode(const Message& message) {
   pb.set_payload_utf8(message.payload.toStdString());
 
   const std::string data = pb.SerializeAsString();
-  QByteArray ret(4, '\0');
-  qToBigEndian<quint32>(data.size(), ret.data());
+  const quint32_be size(static_cast<quint32>(data.size()));
+  QByteArray ret;
+  ret.append(reinterpret_cast<const char*>(&size), sizeof(size));
   ret.append(data.data(), data.size());
   return ret;
 }
 
 bool CastChannel::Decode(QByteArray* buffer, QList<Message>* messages) {
-  while (buffer->size() >= 4) {
-    const quint32 size = qFromBigEndian<quint32>(buffer->constData());
+  while (buffer->size() >= kHeaderSize) {
+    quint32_be header;
+    memcpy(&header, buffer->constData(), kHeaderSize);
+    const quint32 size = header;
     if (size > static_cast<quint32>(kMaxMessageSize)) return false;
-    if (buffer->size() < 4 + static_cast<int>(size)) break;
+    if (buffer->size() < kHeaderSize + static_cast<int>(size)) break;
 
     CastMessage pb;
-    if (!pb.ParseFromArray(buffer->constData() + 4, size)) return false;
-    buffer->remove(0, 4 + size);
+    if (!pb.ParseFromArray(buffer->constData() + kHeaderSize, size)) {
+      return false;
+    }
+    buffer->remove(0, kHeaderSize + size);
 
     Message message;
     message.source_id = QString::fromStdString(pb.source_id());
