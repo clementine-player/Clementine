@@ -1315,10 +1315,10 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
-# Cast's wire format, generated into chromecast/ in the build directory.
+# Cast's wire format, generated into cast_channel/ in the build directory.
 protobuf_generate(TARGET clementine_lib LANGUAGE cpp
-  PROTOS chromecast/castchannel.proto
-  IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+  PROTOS ${CMAKE_SOURCE_DIR}/3rdparty/cast_channel/cast_channel.proto
+  IMPORT_DIRS ${CMAKE_SOURCE_DIR}/3rdparty)
 
 target_link_libraries(clementine_lib
   libclementine-common

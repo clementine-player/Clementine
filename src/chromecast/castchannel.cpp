@@ -22,7 +22,7 @@
 #include <QSslSocket>
 #include <QtEndian>
 
-#include "chromecast/castchannel.pb.h"
+#include "cast_channel/cast_channel.pb.h"
 #include "core/logging.h"
 
 const char* CastChannel::kConnectionNamespace =
@@ -35,6 +35,8 @@ const int CastChannel::kMaxMessageSize = 64 * 1024;
 
 namespace {
 
+using openscreen::cast::proto::CastMessage;
+
 const int kDefaultHeartbeatMsec = 5000;
 // How many heartbeats may pass with nothing from the device.
 const int kMissedHeartbeats = 3;
@@ -43,12 +45,12 @@ const int kConnectTimeoutMsec = 10000;
 }  // namespace
 
 QByteArray CastChannel::Encode(const Message& message) {
-  cpb::cast::CastMessage pb;
-  pb.set_protocol_version(cpb::cast::CastMessage::CASTV2_1_0);
+  CastMessage pb;
+  pb.set_protocol_version(CastMessage::CASTV2_1_0);
   pb.set_source_id(message.source_id.toStdString());
   pb.set_destination_id(message.destination_id.toStdString());
   pb.set_namespace_(message.name_space.toStdString());
-  pb.set_payload_type(cpb::cast::CastMessage::STRING);
+  pb.set_payload_type(CastMessage::STRING);
   pb.set_payload_utf8(message.payload.toStdString());
 
   const std::string data = pb.SerializeAsString();
@@ -64,7 +66,7 @@ bool CastChannel::Decode(QByteArray* buffer, QList<Message>* messages) {
     if (size > static_cast<quint32>(kMaxMessageSize)) return false;
     if (buffer->size() < 4 + static_cast<int>(size)) break;
 
-    cpb::cast::CastMessage pb;
+    CastMessage pb;
     if (!pb.ParseFromArray(buffer->constData() + 4, size)) return false;
     buffer->remove(0, 4 + size);
 
@@ -72,7 +74,7 @@ bool CastChannel::Decode(QByteArray* buffer, QList<Message>* messages) {
     message.source_id = QString::fromStdString(pb.source_id());
     message.destination_id = QString::fromStdString(pb.destination_id());
     message.name_space = QString::fromStdString(pb.namespace_());
-    if (pb.payload_type() == cpb::cast::CastMessage::STRING) {
+    if (pb.payload_type() == CastMessage::STRING) {
       message.payload = QString::fromStdString(pb.payload_utf8());
     }
     *messages << message;
