@@ -39,7 +39,7 @@
 #include "ui_networkremotesettingspage.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
-    "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
+    "https://play.google.com/store/apps/details?id=org.clementine_player.remote";
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl2 =
     "https://play.google.com/store/apps/details?id=fr.mbruel.ClementineRemote";
 const char* NetworkRemoteSettingsPage::kAppleStoreUrl =
