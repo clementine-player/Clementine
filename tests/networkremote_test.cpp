@@ -18,6 +18,7 @@
 
 #include <QDataStream>
 #include <QHostAddress>
+#include <QHostInfo>
 #include <QStringList>
 #include <algorithm>
 
@@ -225,6 +226,16 @@ TEST(NetworkRemoteTest, LocalClientsCanReachNonPublicAddresses) {
       QHostAddress("fd7a:115c:a1e0::f535:374b")));
   EXPECT_FALSE(
       NetworkRemote::LocalClientsCanReach(QHostAddress("203.0.113.5")));
+}
+
+TEST(NetworkRemoteTest, ComputerIsNamedAfterItsHostUnlessToldOtherwise) {
+  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::ComputerName());
+
+  NetworkRemote::SetComputerName("  Living room ");
+  EXPECT_EQ("Living room", NetworkRemote::ComputerName());
+
+  NetworkRemote::SetComputerName("");
+  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::ComputerName());
 }
 
 TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {

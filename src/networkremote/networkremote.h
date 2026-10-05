@@ -57,6 +57,11 @@ class NetworkRemote : public QObject {
   // on it.
   static bool LocalClientsCanReach(const QHostAddress& address);
 
+  // What remotes call this computer: its host name, unless |name| (from
+  // --remote-name) isn't empty. Set before the server starts.
+  static void SetComputerName(const QString& name);
+  static QString ComputerName();
+
   // A DISCONNECT message giving |reason|, framed as on the wire.
   static QByteArray DisconnectMessage(cpb::remote::ReasonDisconnect reason);
 

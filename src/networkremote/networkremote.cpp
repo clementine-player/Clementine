@@ -58,6 +58,9 @@ const char* kRefusedProperty = "clementine_refused";
 // listening on everything, 100.x clients stay public, as before.
 const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
 
+// From --remote-name; empty for the host name.
+QString sComputerName;
+
 bool InSharedSubnet(const QHostAddress& address) {
   for (const char* subnet : kSharedSubnets) {
     if (address.isInSubnet(QHostAddress::parseSubnet(subnet))) return true;
@@ -97,6 +100,14 @@ void NetworkRemote::ReadSettings() {
   allow_streaming_ = s.value("allow_streaming", false).toBool();
 
   s.endGroup();
+}
+
+void NetworkRemote::SetComputerName(const QString& name) {
+  sComputerName = name.trimmed();
+}
+
+QString NetworkRemote::ComputerName() {
+  return sComputerName.isEmpty() ? QHostInfo::localHostName() : sComputerName;
 }
 
 QList<QHostAddress> NetworkRemote::ListenAddresses(bool all,
@@ -230,8 +241,7 @@ void NetworkRemote::StartServer() {
     if (!listen_on_all_addresses_ && listening.isEmpty()) {
       qLog(Warning) << "Not listening on any address, so not advertising";
     } else {
-      QString name =
-          QString("Clementine on %1").arg(QHostInfo::localHostName());
+      QString name = QString("Clementine on %1").arg(ComputerName());
       Zeroconf::GetZeroconf()->Publish(
           "local", "_clementine._tcp", name, port_,
           listen_on_all_addresses_ ? QList<QHostAddress>() : listening);
