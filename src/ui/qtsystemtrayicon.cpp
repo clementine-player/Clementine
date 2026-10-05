@@ -17,6 +17,7 @@
 
 #include "qtsystemtrayicon.h"
 
+#include <QApplication>
 #include <QCoreApplication>
 #include <QFile>
 #include <QMenu>
@@ -103,6 +104,8 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
 
   tray_->setIcon(orange_icon_);
   tray_->installEventFilter(this);
+  // The play and pause badge follows the theme, so redraw it when that changes.
+  qApp->installEventFilter(this);
   ClearNowPlaying();
 
   connect(tray_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -113,6 +116,11 @@ QtSystemTrayIcon::~QtSystemTrayIcon() { delete menu_; }
 
 bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
   if (QObject::eventFilter(object, event)) return true;
+
+  if (object == qApp && event->type() == QEvent::ApplicationPaletteChange) {
+    UpdateIcon();
+    return false;
+  }
 
   if (object != tray_) return false;
 
