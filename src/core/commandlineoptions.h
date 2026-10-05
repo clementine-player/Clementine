@@ -75,6 +75,7 @@ class CommandlineOptions {
   int play_and_exit_timeout_secs() const { return play_and_exit_timeout_secs_; }
   QString screenshots_dir() const { return screenshots_dir_; }
   QString screenshot_theme() const { return screenshot_theme_; }
+  bool chromecast() const { return chromecast_; }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
   QList<QUrl> urls() const { return urls_; }
@@ -102,7 +103,8 @@ class CommandlineOptions {
     RestartOrPrevious,
     PlayAndExit,
     Screenshots,
-    ScreenshotTheme
+    ScreenshotTheme,
+    Chromecast
   };
 
   QString tr(const char* source_text);
@@ -129,6 +131,8 @@ class CommandlineOptions {
   // to another one.
   QString screenshots_dir_;
   QString screenshot_theme_;
+  // Not serialized: it only matters when Clementine starts.
+  bool chromecast_;
   QString language_;
   QString log_levels_;
   QString playlist_name_;
