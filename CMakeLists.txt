@@ -435,9 +435,6 @@ add_subdirectory(3rdparty/qocoa)
 
 # Subdirectories
 add_subdirectory(src)
-if (WIN32)
-  add_subdirectory(3rdparty/tinysvcmdns)
-endif (WIN32)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(ext/libclementine-common)
