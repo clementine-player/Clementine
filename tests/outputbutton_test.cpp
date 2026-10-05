@@ -68,7 +68,7 @@ class OutputButtonTest : public ::testing::Test {
       if (action->isSeparator()) {
         items << "-";
       } else {
-        items << (action->isChecked() ? "* " : "  ") + action->text();
+        items << (action->font().bold() ? "* " : "  ") + action->text();
       }
     }
     return items;

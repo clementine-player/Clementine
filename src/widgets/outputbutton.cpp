@@ -17,8 +17,8 @@
 
 #include "outputbutton.h"
 
-#include <QActionGroup>
 #include <QEvent>
+#include <QFont>
 #include <QMenu>
 #include <QPainter>
 
@@ -71,7 +71,9 @@ QString OutputButton::OutputName(Engine::Base* engine) const {
 QIcon OutputButton::OutputIcon(Engine::Base* engine) const {
   if (engine == router_->outputs().first()) return Glyph("computer");
   const QString icon = engine->output_icon();
-  if (icon == "cast") return Glyph(icon);
+  if (icon == "cast") {
+    return Glyph(engine == router_->active_engine() ? "cast-connected" : icon);
+  }
   if (icon.isEmpty()) return QIcon();
   return IconLoader::Load(icon, IconLoader::Base);
 }
@@ -81,13 +83,16 @@ void OutputButton::OutputsChanged() {
   const QList<Engine::Base*> outputs = router_->outputs();
 
   menu_->clear();
-  QActionGroup* group = new QActionGroup(menu_);
   for (Engine::Base* engine : outputs) {
     QAction* action = menu_->addAction(OutputIcon(engine), OutputName(engine));
-    action->setCheckable(true);
-    action->setChecked(engine == router_->active_engine());
     action->setData(QVariant::fromValue<QObject*>(engine));
-    group->addAction(action);
+    // The one playing is in bold. A checked item with an icon would get a
+    // frame round the icon instead of a check mark, sized for a square icon.
+    if (engine == router_->active_engine()) {
+      QFont font = action->font();
+      font.setBold(true);
+      action->setFont(font);
+    }
     // This computer, then the devices.
     if (engine == outputs.first() && outputs.size() > 1) menu_->addSeparator();
   }
