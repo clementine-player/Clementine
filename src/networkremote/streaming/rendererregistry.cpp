@@ -170,7 +170,7 @@ QByteArray RendererRegistry::OutputsMessage() const {
   const bool local_active = !router_ || router_->is_local();
   cpb::remote::Output* local = outputs->add_outputs();
   local->set_output_id(kLocalOutputId);
-  local->set_display_name(NetworkRemote::ComputerName().toStdString());
+  local->set_display_name(NetworkRemote::RemoteName().toStdString());
   local->set_state(local_active ? cpb::remote::OUTPUT_STATE_ACTIVE
                                 : cpb::remote::OUTPUT_STATE_AVAILABLE);
 

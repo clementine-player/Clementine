@@ -405,7 +405,7 @@ int main(int argc, char* argv[]) {
     // full QApplication so it works without an X server
     if (!options.Parse()) return 1;
     logging::SetLevels(options.log_levels());
-    NetworkRemote::SetComputerName(options.remote_name());
+    NetworkRemote::SetRemoteName(options.remote_name());
 
     if (a.isRunning()) {
       // Its options would go to the running one, which ignores them.
