@@ -43,10 +43,14 @@ class _MessageReplyBase : public QObject {
 
   void Abort();
 
-signals:
+ signals:
+  // Emitted on this object's own thread, which needs an event loop.
   void Finished(bool success);
 
  protected:
+  // Called on the handler's thread once finished_ and success_ are set.
+  void NotifyFinished();
+
   bool finished_;
   bool success_;
 
@@ -87,8 +91,7 @@ void MessageReply<MessageType>::SetReply(const MessageType& message) {
   success_ = true;
 
   qLog(Debug) << "Releasing ID" << id() << "(finished)";
-  semaphore_.release();
-  emit Finished(success_);
+  NotifyFinished();
 }
 
 #endif  // MESSAGEREPLY_H
