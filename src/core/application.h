@@ -32,6 +32,7 @@ class QSettings;
 class AlbumCoverLoader;
 class Appearance;
 class ApplicationImpl;
+class CastDiscovery;
 class Console;
 class CoverProviders;
 class CurrentArtLoader;
@@ -109,6 +110,12 @@ class Application : public QObject {
   TagReaderClient* tag_reader_client() const;
   TaskManager* task_manager() const;
 
+  // Finds Cast devices; only set when started with --chromecast.
+  CastDiscovery* cast_discovery() const { return cast_discovery_; }
+  void set_cast_discovery(CastDiscovery* discovery) {
+    cast_discovery_ = discovery;
+  }
+
   void DirtySettings();
 
   void MoveToNewThread(QObject* object);
@@ -133,6 +140,7 @@ class Application : public QObject {
 
  private:
   QString language_name_;
+  CastDiscovery* cast_discovery_ = nullptr;
   std::unique_ptr<ApplicationImpl> p_;
   std::unique_ptr<Splash> splash_;
   QList<QThread*> threads_;

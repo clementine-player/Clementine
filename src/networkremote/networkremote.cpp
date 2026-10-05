@@ -24,6 +24,7 @@
 #include <QTcpServer>
 #include <QTimer>
 
+#include "chromecast/castdiscovery.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -280,6 +281,15 @@ void NetworkRemote::StartStreaming() {
   // The registry drives engines, so it has to live with the Player.
   renderer_registry_ = new RendererRegistry(app_, router);
   renderer_registry_->moveToThread(router->thread());
+  if (CastDiscovery* discovery = app_->cast_discovery()) {
+    // Experimental, see --chromecast. The registry is on the Player's thread
+    // now, with the discovery.
+    RendererRegistry* registry = renderer_registry_;
+    QMetaObject::invokeMethod(
+        registry,
+        [registry, discovery]() { registry->UseCastDevices(discovery); },
+        Qt::QueuedConnection);
+  }
   media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
 
   connect(incoming_data_parser_.get(),
