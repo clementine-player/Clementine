@@ -18,6 +18,7 @@
 #include "rendererregistry.h"
 
 #include <QHostAddress>
+#include <QNetworkInterface>
 
 #include "core/logging.h"
 #include "engines/enginerouter.h"
@@ -34,7 +35,10 @@ const int kMaxDisplayNameLength = 64;
 }  // namespace
 
 RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
-    : app_(app), router_(router), items_(new StreamItemTable) {
+    : app_(app),
+      router_(router),
+      items_(new StreamItemTable),
+      listening_port_(0) {
   connect(router_, SIGNAL(OutputsChanged()), SLOT(RouterOutputsChanged()));
 }
 
@@ -196,4 +200,48 @@ bool RendererRegistry::SetOutput(const QString& output_id) {
   }
   qLog(Warning) << "No output called" << output_id;
   return false;
+}
+
+void RendererRegistry::SetListening(quint16 port,
+                                    const QList<QHostAddress>& addresses) {
+  listening_port_ = port;
+  listening_addresses_ = addresses;
+  qLog(Debug) << "Media for other devices is served on port" << port;
+}
+
+QUrl RendererRegistry::MediaBaseUrl(const QHostAddress& device) const {
+  if (listening_port_ == 0) return QUrl();
+
+  QList<QNetworkAddressEntry> interfaces;
+  for (const QNetworkInterface& iface : QNetworkInterface::allInterfaces()) {
+    if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
+    interfaces << iface.addressEntries();
+  }
+  const QHostAddress local =
+      LocalAddressFor(device, listening_addresses_, interfaces);
+  if (local.isNull()) return QUrl();
+
+  QUrl url;
+  url.setScheme("http");
+  url.setHost(local.toString());
+  url.setPort(listening_port_);
+  return url;
+}
+
+QHostAddress RendererRegistry::LocalAddressFor(
+    const QHostAddress& device, const QList<QHostAddress>& listening,
+    const QList<QNetworkAddressEntry>& interfaces) {
+  const QHostAddress peer = NormalisedAddress(device);
+  for (const QNetworkAddressEntry& entry : interfaces) {
+    const QHostAddress local = NormalisedAddress(entry.ip());
+    if (local.protocol() != peer.protocol() || entry.prefixLength() < 0 ||
+        !peer.isInSubnet(local, entry.prefixLength())) {
+      continue;
+    }
+    if (listening.isEmpty()) return local;
+    for (const QHostAddress& address : listening) {
+      if (NormalisedAddress(address) == local) return local;
+    }
+  }
+  return QHostAddress();
 }

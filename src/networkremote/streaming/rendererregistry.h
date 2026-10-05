@@ -19,9 +19,12 @@
 #define NETWORKREMOTE_STREAMING_RENDERERREGISTRY_H_
 
 #include <QByteArray>
+#include <QHostAddress>
 #include <QList>
+#include <QNetworkAddressEntry>
 #include <QObject>
 #include <QPointer>
+#include <QUrl>
 #include <memory>
 
 #include "remotecontrolmessages.pb.h"
@@ -56,6 +59,23 @@ class RendererRegistry : public QObject {
   // A serialized OUTPUTS message.
   QByteArray OutputsMessage() const;
 
+  // Where the network remote listens for HTTP: |port|, on |addresses|, or on
+  // every address if that's empty. NetworkRemote calls this once it's
+  // listening.
+  void SetListening(quint16 port, const QList<QHostAddress>& addresses);
+
+  // Where a device that doesn't connect to the remote itself, such as a Cast
+  // device, fetches media from: "http://address:port", with the address that
+  // the remote listens on in the same network as |device|. Empty if there's
+  // no such address.
+  QUrl MediaBaseUrl(const QHostAddress& device) const;
+
+  // The local address in |interfaces| that's in the same subnet as |device|
+  // and in |listening| (anything, if that's empty), or a null address.
+  static QHostAddress LocalAddressFor(
+      const QHostAddress& device, const QList<QHostAddress>& listening,
+      const QList<QNetworkAddressEntry>& interfaces);
+
  public slots:
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
@@ -86,6 +106,10 @@ class RendererRegistry : public QObject {
   QPointer<EngineRouter> router_;
   std::shared_ptr<StreamItemTable> items_;
   QList<RemoteEngine*> engines_;
+
+  // 0 until NetworkRemote says where it listens.
+  quint16 listening_port_;
+  QList<QHostAddress> listening_addresses_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_RENDERERREGISTRY_H_

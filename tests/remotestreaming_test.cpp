@@ -19,6 +19,8 @@
 #include "networkremote/protocolsniffer.h"
 #include "networkremote/streaming/mediahttpserver.h"
 #include "networkremote/streaming/pipelineresponder.h"
+#include "networkremote/streaming/rendererregistry.h"
+#include "networkremote/streaming/streamitemtable.h"
 #include "networkremote/streaming/streamplanner.h"
 #include "remotecontrolmessages.pb.h"
 #include "test_utils.h"
@@ -340,4 +342,60 @@ TEST(ByteRangeTest, Unsatisfiable) {
             ByteRange::Parse("bytes=20-10", 100, &first, &last));
   EXPECT_EQ(ByteRange::Unsatisfiable,
             ByteRange::Parse("bytes=-0", 100, &first, &last));
+}
+
+namespace {
+
+QNetworkAddressEntry Entry(const QString& ip, int prefix_length) {
+  QNetworkAddressEntry entry;
+  entry.setIp(QHostAddress(ip));
+  entry.setPrefixLength(prefix_length);
+  return entry;
+}
+
+}  // namespace
+
+TEST(StreamItemTableTest, TokensAreRandomHex) {
+  const QString token = QString::fromLatin1(StreamItemTable::NewToken());
+  EXPECT_EQ(32, token.size());
+  EXPECT_EQ(token,
+            QString::fromLatin1(QByteArray::fromHex(token.toLatin1()).toHex()));
+  EXPECT_NE(token, QString::fromLatin1(StreamItemTable::NewToken()));
+}
+
+TEST(RendererRegistryTest, MediaComesFromTheDevicesNetwork) {
+  const QList<QNetworkAddressEntry> interfaces = {
+      Entry("127.0.0.1", 8), Entry("100.65.55.75", 32),
+      Entry("192.168.86.178", 24), Entry("fd22::1", 64)};
+
+  EXPECT_EQ(QHostAddress("192.168.86.178"),
+            RendererRegistry::LocalAddressFor(QHostAddress("192.168.86.162"),
+                                              {}, interfaces));
+  // As a dual-stack socket reports it.
+  EXPECT_EQ(QHostAddress("192.168.86.178"),
+            RendererRegistry::LocalAddressFor(
+                QHostAddress("::ffff:192.168.86.162"), {}, interfaces));
+  EXPECT_EQ(QHostAddress("fd22::1"),
+            RendererRegistry::LocalAddressFor(QHostAddress("fd22::5"), {},
+                                              interfaces));
+  // Not on any of our networks.
+  EXPECT_TRUE(RendererRegistry::LocalAddressFor(QHostAddress("10.1.2.3"), {},
+                                                interfaces)
+                  .isNull());
+}
+
+TEST(RendererRegistryTest, MediaOnlyComesFromAddressesTheRemoteListensOn) {
+  const QList<QNetworkAddressEntry> interfaces = {Entry("192.168.86.178", 24),
+                                                  Entry("192.168.86.179", 24)};
+
+  EXPECT_EQ(QHostAddress("192.168.86.179"),
+            RendererRegistry::LocalAddressFor(
+                QHostAddress("192.168.86.162"),
+                {QHostAddress("127.0.0.1"), QHostAddress("192.168.86.179")},
+                interfaces));
+  // The remote only listens on loopback.
+  EXPECT_TRUE(RendererRegistry::LocalAddressFor(QHostAddress("192.168.86.162"),
+                                                {QHostAddress("127.0.0.1")},
+                                                interfaces)
+                  .isNull());
 }
