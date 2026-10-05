@@ -301,9 +301,11 @@ void OutgoingDataCreator::SendSongMetadata() {
 void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
                                      const int index,
                                      cpb::remote::SongMetadata* song_metadata) {
+  // Even for a song that isn't valid (one whose file can't be read, say): the
+  // remotes tell a playlist's songs apart, and pick one to play, by its index.
+  song_metadata->set_index(index);
   if (song.is_valid()) {
     song_metadata->set_id(song.id());
-    song_metadata->set_index(index);
     song_metadata->set_title(DataCommaSizeFromQString(song.PrettyTitle()));
     song_metadata->set_artist(DataCommaSizeFromQString(song.artist()));
     song_metadata->set_album(DataCommaSizeFromQString(song.album()));

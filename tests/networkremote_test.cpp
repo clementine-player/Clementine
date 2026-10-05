@@ -21,8 +21,10 @@
 #include <QStringList>
 #include <algorithm>
 
+#include "core/song.h"
 #include "gtest/gtest.h"
 #include "networkremote/authattemptlimiter.h"
+#include "networkremote/outgoingdatacreator.h"
 #include "test_utils.h"
 
 using Listening = NetworkRemote::Listening;
@@ -240,4 +242,13 @@ TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
   EXPECT_EQ(cpb::remote::Not_Local_Network,
             msg.response_disconnect().reason_disconnect());
   EXPECT_TRUE(msg.has_version());
+}
+
+// A playlist's songs are told apart by their index, so a song that isn't valid
+// keeps its own rather than taking the first song's, 0.
+TEST(NetworkRemoteTest, SongThatIsntValidKeepsItsIndex) {
+  cpb::remote::SongMetadata pb_song;
+  OutgoingDataCreator::CreateSong(Song(), QImage(), 3, &pb_song);
+  EXPECT_EQ(3, pb_song.index());
+  EXPECT_FALSE(pb_song.has_title());
 }
