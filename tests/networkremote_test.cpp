@@ -244,11 +244,27 @@ TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
   EXPECT_TRUE(msg.has_version());
 }
 
-// A playlist's songs are told apart by their index, so a song that isn't valid
-// keeps its own rather than taking the first song's, 0.
-TEST(NetworkRemoteTest, SongThatIsntValidKeepsItsIndex) {
+// A song that isn't valid (one whose file can't be read, say) is sent as the
+// playlist shows it, with its own index rather than the first song's, 0.
+TEST(NetworkRemoteTest, SongThatIsntValidIsSentAsThePlaylistShowsIt) {
+  Song song;
+  song.Init("Clair de lune", "Claude Debussy", "Suite bergamasque", 300);
+  song.set_url(QUrl::fromLocalFile("/music/clair.ogg"));
+  song.set_valid(false);
+
+  cpb::remote::SongMetadata pb_song;
+  OutgoingDataCreator::CreateSong(song, QImage(), 3, &pb_song);
+  EXPECT_EQ(3, pb_song.index());
+  EXPECT_TRUE(pb_song.has_id());
+  EXPECT_EQ("Clair de lune", pb_song.title());
+  EXPECT_EQ("Claude Debussy", pb_song.artist());
+}
+
+// The remotes take a song without an id for no song, as when none is playing.
+TEST(NetworkRemoteTest, EmptySongHasNoFieldsButItsIndex) {
   cpb::remote::SongMetadata pb_song;
   OutgoingDataCreator::CreateSong(Song(), QImage(), 3, &pb_song);
   EXPECT_EQ(3, pb_song.index());
+  EXPECT_FALSE(pb_song.has_id());
   EXPECT_FALSE(pb_song.has_title());
 }

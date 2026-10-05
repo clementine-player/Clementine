@@ -304,7 +304,10 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
   // Even for a song that isn't valid (one whose file can't be read, say): the
   // remotes tell a playlist's songs apart, and pick one to play, by its index.
   song_metadata->set_index(index);
-  if (song.is_valid()) {
+  // A song that isn't valid still has what the playlist shows of it, so the
+  // remotes get that too. Only an empty song (none playing) has no fields: the
+  // remotes take a song without an id for no song.
+  if (song.is_valid() || !song.url().isEmpty()) {
     song_metadata->set_id(song.id());
     song_metadata->set_title(DataCommaSizeFromQString(song.PrettyTitle()));
     song_metadata->set_artist(DataCommaSizeFromQString(song.artist()));
