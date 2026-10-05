@@ -42,6 +42,10 @@ QList<QByteArray> Txt(const QByteArray& id, const QByteArray& name) {
           "ic=/setup/icon.png"};
 }
 
+QString Joined(const QList<QByteArray>& entries) {
+  return QString::fromUtf8(entries.join('|'));
+}
+
 CastDevice Device(const QByteArray& id, const QByteArray& name,
                   const QString& address) {
   CastDevice device;
@@ -62,8 +66,15 @@ class FakeCastDiscovery : public CastDiscovery {
 
   void Start() override {}
 
+  using CastDiscovery::ServiceAdded;
   using CastDiscovery::ServiceRemoved;
   using CastDiscovery::ServiceResolved;
+
+  // An advertisement that appears and resolves straight away.
+  void Resolve(const QString& service, const CastDevice& device) {
+    ServiceAdded(service);
+    ServiceResolved(service, device);
+  }
 
   QList<CastDevice> found_;
   QStringList lost_;
@@ -96,6 +107,22 @@ TEST(CastDeviceTest, NeedsAnId) {
   EXPECT_TRUE(device.id.isEmpty());
 }
 
+TEST(CastDeviceTest, SplitsTxt) {
+  const QByteArray rdata(
+      "\x06id=abc\x00\x0a"
+      "fn=Kitchen\x03"
+      "rs=",
+      23);
+  EXPECT_EQ("id=abc|fn=Kitchen|rs=", Joined(CastDevice::SplitTxt(rdata)));
+}
+
+TEST(CastDeviceTest, SplitTxtDropsATruncatedEntry) {
+  EXPECT_EQ("id=abc", Joined(CastDevice::SplitTxt(QByteArray("\x06id=abc\x09"
+                                                             "fn=K",
+                                                             12))));
+  EXPECT_TRUE(CastDevice::SplitTxt(QByteArray()).isEmpty());
+}
+
 TEST(CastDeviceTest, ValidNeedsAnAddressAndPort) {
   CastDevice device = Device("abc", "Kitchen", "192.168.1.2");
   EXPECT_TRUE(device.is_valid());
@@ -111,8 +138,8 @@ TEST(CastDiscoveryTest, MergesServicesForOneDevice) {
   const CastDevice device = Device("abc", "Kitchen", "192.168.1.2");
 
   // Seen over IPv4 and IPv6 on the same interface.
-  discovery.ServiceResolved("2/0/Kitchen", device);
-  discovery.ServiceResolved("2/1/Kitchen", device);
+  discovery.Resolve("2/0/Kitchen", device);
+  discovery.Resolve("2/1/Kitchen", device);
   ASSERT_EQ(1, discovery.found_.size());
   EXPECT_EQ(device, discovery.found_[0]);
   EXPECT_EQ(1, discovery.devices().size());
@@ -128,16 +155,12 @@ TEST(CastDiscoveryTest, MergesServicesForOneDevice) {
 
 TEST(CastDiscoveryTest, ReportsChanges) {
   FakeCastDiscovery discovery;
-  discovery.ServiceResolved("2/0/Kitchen",
-                            Device("abc", "Kitchen", "192.168.1.2"));
-  discovery.ServiceResolved("2/0/Kitchen",
-                            Device("abc", "Kitchen", "192.168.1.2"));
+  discovery.Resolve("2/0/Kitchen", Device("abc", "Kitchen", "192.168.1.2"));
+  discovery.Resolve("2/0/Kitchen", Device("abc", "Kitchen", "192.168.1.2"));
   EXPECT_EQ(1, discovery.found_.size());
 
-  discovery.ServiceResolved("2/0/Kitchen",
-                            Device("abc", "Kitchen", "192.168.1.3"));
-  discovery.ServiceResolved("2/0/Kitchen",
-                            Device("abc", "Dining room", "192.168.1.3"));
+  discovery.Resolve("2/0/Kitchen", Device("abc", "Kitchen", "192.168.1.3"));
+  discovery.Resolve("2/0/Kitchen", Device("abc", "Dining room", "192.168.1.3"));
   ASSERT_EQ(3, discovery.found_.size());
   EXPECT_EQ("Dining room", discovery.found_[2].name);
   EXPECT_EQ(1, discovery.devices().size());
@@ -146,10 +169,8 @@ TEST(CastDiscoveryTest, ReportsChanges) {
 
 TEST(CastDiscoveryTest, KeepsDevicesApart) {
   FakeCastDiscovery discovery;
-  discovery.ServiceResolved("2/0/Kitchen",
-                            Device("abc", "Kitchen", "192.168.1.2"));
-  discovery.ServiceResolved("2/0/Bedroom",
-                            Device("def", "Bedroom", "192.168.1.3"));
+  discovery.Resolve("2/0/Kitchen", Device("abc", "Kitchen", "192.168.1.2"));
+  discovery.Resolve("2/0/Bedroom", Device("def", "Bedroom", "192.168.1.3"));
   EXPECT_EQ(2, discovery.devices().size());
 
   discovery.ServiceRemoved("2/0/Kitchen");
@@ -160,10 +181,8 @@ TEST(CastDiscoveryTest, KeepsDevicesApart) {
 
 TEST(CastDiscoveryTest, ServiceThatChangesDeviceLosesTheOldOne) {
   FakeCastDiscovery discovery;
-  discovery.ServiceResolved("2/0/Speaker",
-                            Device("abc", "Speaker", "192.168.1.2"));
-  discovery.ServiceResolved("2/0/Speaker",
-                            Device("def", "Speaker", "192.168.1.2"));
+  discovery.Resolve("2/0/Speaker", Device("abc", "Speaker", "192.168.1.2"));
+  discovery.Resolve("2/0/Speaker", Device("def", "Speaker", "192.168.1.2"));
   EXPECT_EQ("abc", discovery.lost_.join(","));
   ASSERT_EQ(1, discovery.devices().size());
   EXPECT_EQ("def", discovery.devices()[0].id);
@@ -173,12 +192,26 @@ TEST(CastDiscoveryTest, IgnoresIncompleteAndUnknownServices) {
   FakeCastDiscovery discovery;
   CastDevice no_address = Device("abc", "Kitchen", "192.168.1.2");
   no_address.address = QHostAddress();
-  discovery.ServiceResolved("2/0/Kitchen", no_address);
+  discovery.Resolve("2/0/Kitchen", no_address);
   EXPECT_TRUE(discovery.found_.isEmpty());
 
   discovery.ServiceRemoved("2/0/Kitchen");
   discovery.ServiceRemoved("2/0/Unknown");
   EXPECT_TRUE(discovery.lost_.isEmpty());
+}
+
+TEST(CastDiscoveryTest, IgnoresResolvesForServicesThatAreGone) {
+  FakeCastDiscovery discovery;
+  const CastDevice device = Device("abc", "Kitchen", "192.168.1.2");
+
+  discovery.ServiceResolved("2/0/Kitchen", device);
+  EXPECT_TRUE(discovery.found_.isEmpty());
+
+  discovery.ServiceAdded("2/0/Kitchen");
+  discovery.ServiceRemoved("2/0/Kitchen");
+  discovery.ServiceResolved("2/0/Kitchen", device);
+  EXPECT_TRUE(discovery.found_.isEmpty());
+  EXPECT_TRUE(discovery.devices().isEmpty());
 }
 
 }  // namespace

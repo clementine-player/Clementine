@@ -120,10 +120,10 @@ void AvahiCastDiscovery::ItemNew(int iface, int protocol, const QString& name,
                                  const QString& type, const QString& domain,
                                  uint) {
   const QString service = ServiceKey(iface, protocol, name, domain);
-  services_ << service;
+  ServiceAdded(service);
 
-  // Ask for an IPv4 address even when the service was seen over IPv6. Cast
-  // devices all have one, and it's what the remote's network policy expects.
+  // Ask for an IPv4 address even when the service was seen over IPv6, as
+  // ResolveHost does.
   CallAvahi(
       this, "/", kServerInterface, "ResolveService",
       {iface, protocol, name, type, domain, kAvahiProtoInet, 0u},
@@ -132,7 +132,7 @@ void AvahiCastDiscovery::ItemNew(int iface, int protocol, const QString& name,
 
 void AvahiCastDiscovery::Resolved(const QString& service,
                                   const QDBusMessage& reply) {
-  if (!services_.contains(service)) return;
+  if (!IsLive(service)) return;
 
   if (reply.type() == QDBusMessage::ErrorMessage) {
     qLog(Debug) << "Couldn't resolve Cast service" << service << ":"
@@ -162,9 +162,7 @@ void AvahiCastDiscovery::Resolved(const QString& service,
 void AvahiCastDiscovery::ItemRemove(int iface, int protocol,
                                     const QString& name, const QString&,
                                     const QString& domain, uint) {
-  const QString service = ServiceKey(iface, protocol, name, domain);
-  services_.remove(service);
-  ServiceRemoved(service);
+  ServiceRemoved(ServiceKey(iface, protocol, name, domain));
 }
 
 void AvahiCastDiscovery::Failure(const QString& error) {

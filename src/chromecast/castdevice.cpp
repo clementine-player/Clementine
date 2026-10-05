@@ -44,6 +44,18 @@ bool CastDevice::ParseTxt(const QList<QByteArray>& txt) {
   return true;
 }
 
+QList<QByteArray> CastDevice::SplitTxt(const QByteArray& rdata) {
+  QList<QByteArray> entries;
+  int pos = 0;
+  while (pos < rdata.size()) {
+    const int length = static_cast<quint8>(rdata[pos++]);
+    if (pos + length > rdata.size()) break;
+    if (length > 0) entries << rdata.mid(pos, length);
+    pos += length;
+  }
+  return entries;
+}
+
 bool CastDevice::operator==(const CastDevice& other) const {
   return id == other.id && name == other.name && model == other.model &&
          address == other.address && port == other.port;
