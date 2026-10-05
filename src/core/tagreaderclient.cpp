@@ -25,9 +25,11 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
+#include <QPromise>
 #include <QTcpServer>
 #include <QThread>
 #include <QUrl>
+#include <memory>
 
 #include "player.h"
 #include "songpathparser.h"
@@ -83,8 +85,36 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
-                                          const Song& metadata) {
+namespace {
+
+// A future for |reply|'s result, as |result| reads it from the reply, or T()
+// if the worker failed. Owns |reply| from now on.
+template <typename T, typename Result>
+QFuture<T> FutureForReply(TagReaderReply* reply, Result result) {
+  // Connections copy their functors, and a QPromise can only be moved.
+  auto promise = std::make_shared<QPromise<T>>();
+  promise->start();
+  QObject::connect(reply, &TagReaderReply::Finished, reply,
+                   [reply, promise, result](bool success) {
+                     promise->addResult(success ? result(*reply) : T());
+                     promise->finish();
+                     reply->deleteLater();
+                   });
+  return promise->future();
+}
+
+}  // namespace
+
+QFuture<bool> TagReaderClient::SaveFile(const QString& filename,
+                                        const Song& metadata) {
+  return FutureForReply<bool>(
+      SendSaveFile(filename, metadata), [](const TagReaderReply& reply) {
+        return reply.message().save_file_response().success();
+      });
+}
+
+TagReaderReply* TagReaderClient::SendSaveFile(const QString& filename,
+                                              const Song& metadata) {
   cpb::tagreader::Message message;
   cpb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
 
@@ -188,7 +218,9 @@ bool TagReaderClient::SaveFileBlocking(const QString& filename,
 
   bool ret = false;
 
-  TagReaderReply* reply = SaveFile(filename, metadata);
+  // Not SaveFile(...).result(): that future is fulfilled on this thread,
+  // which would be stuck waiting for it.
+  TagReaderReply* reply = SendSaveFile(filename, metadata);
   if (reply->WaitForFinished()) {
     ret = reply->message().save_file_response().success();
   }

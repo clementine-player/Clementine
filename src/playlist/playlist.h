@@ -410,7 +410,7 @@ class Playlist : public QAbstractListModel {
   void TracksDequeued();
   void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
-  void SongSaveComplete(bool success, TagReaderReply* reply,
+  void SongSaveComplete(bool saved, const QString& filename,
                         const QPersistentModelIndex& index);
   void ItemReloadComplete(const QPersistentModelIndex& index);
   // Written as the fully expanded type rather than the PlaylistItemList

@@ -149,6 +149,12 @@ add_dependencies(librarywatcher_test clementine-tagreader)
 target_compile_definitions(librarywatcher_test PRIVATE
   TAGREADER_DIR="$<TARGET_FILE_DIR:clementine-tagreader>"
   TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
+add_test_file(tagreaderclient_test.cpp false)
+# Saves with real tag reader workers, found on $PATH.
+add_dependencies(tagreaderclient_test clementine-tagreader)
+target_compile_definitions(tagreaderclient_test PRIVATE
+  TAGREADER_DIR="$<TARGET_FILE_DIR:clementine-tagreader>"
+  TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 if(HAVE_GOOGLE_DRIVE)
   add_test_file(googledriveclient_test.cpp false)
 endif(HAVE_GOOGLE_DRIVE)

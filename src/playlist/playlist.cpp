@@ -433,30 +433,27 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
-    TagReaderReply* reply =
-        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
-
-    NewClosure(reply, &TagReaderReply::Finished, this,
-               &Playlist::SongSaveComplete, reply,
-               QPersistentModelIndex(index));
+    const QString filename = song.url().toLocalFile();
+    const QPersistentModelIndex persistent_index(index);
+    TagReaderClient::Instance()
+        ->SaveFile(filename, song)
+        .then(this, [this, filename, persistent_index](bool saved) {
+          SongSaveComplete(saved, filename, persistent_index);
+        });
   }
   return true;
 }
 
-void Playlist::SongSaveComplete(bool success, TagReaderReply* reply,
+void Playlist::SongSaveComplete(bool saved, const QString& filename,
                                 const QPersistentModelIndex& index) {
-  if (success && index.isValid()) {
-    if (reply->message().save_file_response().success()) {
-      QFuture<void> future = item_at(index.row())->BackgroundReload();
-      NewClosure(future, this, &Playlist::ItemReloadComplete, index);
-    } else {
-      emit Error(
-          tr("An error occurred writing metadata to '%1'")
-              .arg(QString::fromStdString(
-                  reply->request_message().save_file_request().filename())));
-    }
+  if (!saved) {
+    emit Error(tr("An error occurred writing metadata to '%1'").arg(filename));
+    return;
   }
-  reply->deleteLater();
+  if (!index.isValid()) return;
+  item_at(index.row())->BackgroundReload().then(this, [this, index]() {
+    ItemReloadComplete(index);
+  });
 }
 
 void Playlist::ItemReloadComplete(const QPersistentModelIndex& index) {
