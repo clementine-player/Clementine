@@ -69,9 +69,7 @@ QString OutputButton::OutputName(Engine::Base* engine) const {
 }
 
 QIcon OutputButton::OutputIcon(Engine::Base* engine) const {
-  if (engine == router_->outputs().first()) {
-    return IconLoader::Load("audio-card", IconLoader::Base);
-  }
+  if (engine == router_->outputs().first()) return Glyph("computer");
   const QString icon = engine->output_icon();
   if (icon == "cast") return Glyph(icon);
   if (icon.isEmpty()) return QIcon();
