@@ -972,14 +972,11 @@ optional_source(WIN32
   SOURCES
     core/windowsmediacontrols.cpp
     engines/directsounddevicefinder.cpp
-    networkremote/tinysvcmdns.cpp
     networkremote/windowsdnssd.cpp
     ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   HEADERS
     core/windowsmediacontrols.h
-  INCLUDE_DIRECTORIES
-    ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
 )
 
 # Platform specific - X11
@@ -1409,7 +1406,6 @@ target_link_libraries(clementine_lib qsqlite)
 if (WIN32)
   target_link_libraries(clementine_lib
     protobuf
-    tinysvcmdns
     dsound
     dwmapi
     runtimeobject

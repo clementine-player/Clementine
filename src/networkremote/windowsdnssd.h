@@ -2,16 +2,12 @@
 #define WINDOWSDNSSD_H
 
 #include <QList>
-#include <memory>
 
 #include "zeroconf.h"
 
-class TinySVCMDNS;
-
 // Advertises through the mDNS responder built into Windows 10 1809 and later,
-// with DnsServiceRegister. That responder owns UDP port 5353, so there
-// tinysvcmdns never sees the multicast queries remotes browse with. Where the
-// API is missing, or a registration fails, this falls back to tinysvcmdns.
+// with DnsServiceRegister. That responder owns UDP port 5353, so it has to be
+// the one answering the queries remotes browse with.
 class WindowsDnsSd : public Zeroconf {
  public:
   WindowsDnsSd();
@@ -36,8 +32,6 @@ class WindowsDnsSd : public Zeroconf {
   void DeregisterAll();
 
   QList<Registration*> registrations_;
-  // Created the first time a registration fails, and used from then on.
-  std::unique_ptr<TinySVCMDNS> fallback_;
 };
 
 #endif  // WINDOWSDNSSD_H

@@ -11,7 +11,6 @@
 #endif
 
 #ifdef Q_OS_WIN32
-#include "tinysvcmdns.h"
 #include "windowsdnssd.h"
 #endif
 
@@ -33,8 +32,6 @@ Zeroconf* Zeroconf::GetZeroconf() {
 #ifdef Q_OS_WIN32
     if (WindowsDnsSd::IsAvailable()) {
       sInstance = new WindowsDnsSd;
-    } else {
-      sInstance = new TinySVCMDNS;
     }
 #endif
   }

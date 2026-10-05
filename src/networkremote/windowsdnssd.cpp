@@ -8,9 +8,9 @@
 
 #include <QHostInfo>
 #include <QMap>
+#include <QtEndian>
 
 #include "core/logging.h"
-#include "tinysvcmdns.h"
 
 namespace {
 
@@ -106,44 +106,37 @@ bool WindowsDnsSd::IsAvailable() { return Api().loaded(); }
 void WindowsDnsSd::PublishInternal(const QString& domain, const QString& type,
                                    const QByteArray& name, quint16 port,
                                    const QList<QHostAddress>& addresses) {
-  if (!fallback_) {
-    const QString instance_name =
-        QString("%1.%2.%3")
-            .arg(EscapeInstanceLabel(QString::fromUtf8(name.constData())), type,
-                 domain);
-    const QString host =
-        QString("%1.%2").arg(QHostInfo::localHostName(), domain);
+  const QString instance_name =
+      QString("%1.%2.%3")
+          .arg(EscapeInstanceLabel(QString::fromUtf8(name.constData())), type,
+               domain);
+  const QString host = QString("%1.%2").arg(QHostInfo::localHostName(), domain);
 
-    bool ok = true;
-    if (addresses.isEmpty()) {
-      ok = Register(instance_name, host, port, 0, addresses);
-    } else {
-      // Windows registers a service on one interface or on all of them, so
-      // advertise on each interface the chosen addresses are on.
-      QMap<int, QList<QHostAddress>> by_interface;
-      for (const QHostAddress& address : addresses) {
-        const int iface = InterfaceIndexOf(address);
-        if (iface < 0) {
-          qLog(Warning) << "Not advertising the remote on" << address.toString()
-                        << "- it isn't on any network interface";
-          continue;
-        }
-        by_interface[iface] << address;
+  bool ok = true;
+  if (addresses.isEmpty()) {
+    ok = Register(instance_name, host, port, 0, addresses);
+  } else {
+    // Windows registers a service on one interface or on all of them, so
+    // advertise on each interface the chosen addresses are on.
+    QMap<int, QList<QHostAddress>> by_interface;
+    for (const QHostAddress& address : addresses) {
+      const int iface = InterfaceIndexOf(address);
+      if (iface < 0) {
+        qLog(Warning) << "Not advertising the remote on" << address.toString()
+                      << "- it isn't on any network interface";
+        continue;
       }
-      for (auto it = by_interface.begin(); ok && it != by_interface.end();
-           ++it) {
-        ok = Register(instance_name, host, port, it.key(), it.value());
-      }
+      by_interface[iface] << address;
     }
-    if (ok) return;
-
-    qLog(Warning) << "Falling back to tinysvcmdns to advertise the remote";
-    DeregisterAll();
-    fallback_.reset(new TinySVCMDNS);
+    for (auto it = by_interface.begin(); ok && it != by_interface.end(); ++it) {
+      ok = Register(instance_name, host, port, it.key(), it.value());
+    }
   }
+  if (ok) return;
 
-  fallback_->Publish(domain, type, QString::fromUtf8(name.constData()), port,
-                     addresses);
+  // Remotes can still connect by address.
+  qLog(Warning) << "Couldn't advertise the remote";
+  DeregisterAll();
 }
 
 bool WindowsDnsSd::Register(const QString& instance_name, const QString& host,
@@ -155,7 +148,7 @@ bool WindowsDnsSd::Register(const QString& instance_name, const QString& host,
   PIP6_ADDRESS ipv6 = nullptr;
   for (const QHostAddress& address : addresses) {
     if (!ipv4 && address.protocol() == QAbstractSocket::IPv4Protocol) {
-      registration->ipv4 = htonl(address.toIPv4Address());
+      registration->ipv4 = qToBigEndian(address.toIPv4Address());
       ipv4 = &registration->ipv4;
     } else if (!ipv6 && address.protocol() == QAbstractSocket::IPv6Protocol) {
       const Q_IPV6ADDR bytes = address.toIPv6Address();
@@ -203,10 +196,7 @@ bool WindowsDnsSd::Register(const QString& instance_name, const QString& host,
   return true;
 }
 
-void WindowsDnsSd::UnpublishInternal() {
-  DeregisterAll();
-  if (fallback_) fallback_->Unpublish();
-}
+void WindowsDnsSd::UnpublishInternal() { DeregisterAll(); }
 
 void WindowsDnsSd::DeregisterAll() {
   for (Registration* registration : registrations_) {
