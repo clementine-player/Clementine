@@ -433,6 +433,9 @@ endif()
 # Qocoa
 add_subdirectory(3rdparty/qocoa)
 
+# Cast's message format
+add_subdirectory(3rdparty/cast_channel)
+
 # Subdirectories
 add_subdirectory(src)
 add_subdirectory(tests)

@@ -23,7 +23,7 @@
 #include <QtEndian>
 #include <cstring>
 
-#include "cast_channel/cast_channel.pb.h"
+#include "cast_channel.pb.h"
 #include "core/logging.h"
 
 const char* CastChannel::kConnectionNamespace =
