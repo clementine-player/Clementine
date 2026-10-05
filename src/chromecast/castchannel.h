@@ -79,12 +79,12 @@ class CastChannel : public QObject {
   void Open(const QHostAddress& address, quint16 port);
   // Closes the connection without emitting Closed.
   void Close();
-  bool is_open() const { return open_; }
+  virtual bool is_open() const { return open_; }
 
   // Sends |payload| to |destination|, opening a virtual connection to it
-  // first if this channel doesn't have one.
-  void Send(const QString& name_space, const QString& destination,
-            const QJsonObject& payload);
+  // first if this channel doesn't have one. Virtual for tests.
+  virtual void Send(const QString& name_space, const QString& destination,
+                    const QJsonObject& payload);
 
   // How often to PING. Tests make it shorter.
   void set_heartbeat_interval(int msec);
