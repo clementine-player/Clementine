@@ -25,10 +25,12 @@
 #include "ui/iconloader.h"
 
 LibraryDirectoryModel::LibraryDirectoryModel(
-    std::shared_ptr<LibraryBackend> backend, QObject* parent)
+    std::shared_ptr<LibraryBackend> backend,
+    std::shared_ptr<DirectoryManager> directory_manager, QObject* parent)
     : QStandardItemModel(parent),
       dir_icon_(IconLoader::Load("document-open-folder", IconLoader::Base)),
-      backend_(backend) {
+      backend_(backend),
+      directory_manager_(directory_manager) {
   connect(backend_.get(),
           SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
           SLOT(DirectoryDiscovered(Directory)));
@@ -67,7 +69,7 @@ void LibraryDirectoryModel::DirectoryDeleted(int dir_id) {
 void LibraryDirectoryModel::AddDirectory(const QString& path) {
   if (!backend_) return;
 
-  backend_->AddDirectory(path);
+  backend_->AddDirectory(directory_manager_.get(), path);
 }
 
 void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
