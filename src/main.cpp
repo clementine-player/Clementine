@@ -51,6 +51,7 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include "chromecast/castdiscovery.h"
 #include "config.h"
 #include "core/appearance.h"
 #include "core/application.h"
@@ -625,6 +626,16 @@ int main(int argc, char* argv[]) {
   // Use a queued connection so the invokation occurs after the application
   // loop starts.
   QMetaObject::invokeMethod(&app, "Starting", Qt::QueuedConnection);
+
+  std::unique_ptr<CastDiscovery> cast_discovery;
+  if (options.chromecast()) {
+    cast_discovery.reset(CastDiscovery::Create());
+    if (cast_discovery) {
+      cast_discovery->Start();
+    } else {
+      qLog(Warning) << "Can't look for Cast devices on this platform";
+    }
+  }
 
   std::unique_ptr<ScreenshotTaker> screenshot_taker;
   if (screenshots) {

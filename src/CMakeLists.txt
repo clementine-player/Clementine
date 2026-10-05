@@ -85,6 +85,9 @@ set(SOURCES
   analyzers/turbine.cpp
   analyzers/fht.cpp
 
+  chromecast/castdevice.cpp
+  chromecast/castdiscovery.cpp
+
   core/appearance.cpp
   core/application.cpp
   core/backgroundstreams.cpp
@@ -456,6 +459,8 @@ set(HEADERS
   analyzers/rainbowanalyzer.h
   analyzers/sonogram.h
   analyzers/turbine.h
+
+  chromecast/castdiscovery.h
 
   core/appearance.h
   core/application.h
@@ -1087,11 +1092,13 @@ endif(UNIX AND HAVE_DBUS)
 
 optional_source(HAVE_DBUS
   SOURCES
+    chromecast/avahicastdiscovery.cpp
     core/mpris.cpp
     core/mpris2.cpp
     networkremote/avahi.cpp
     ui/dbusscreensaver.cpp
   HEADERS
+    chromecast/avahicastdiscovery.h
     core/mpris.h
     core/mpris2.h
 )
