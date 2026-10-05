@@ -32,7 +32,19 @@ void _MessageReplyBase::Abort() {
   finished_ = true;
   success_ = false;
 
-  emit Finished(success_);
   qLog(Debug) << "Releasing ID" << id() << "(aborted)";
+  NotifyFinished();
+}
+
+void _MessageReplyBase::NotifyFinished() {
+  // Whoever is notified may delete this straight away: a WaitForFinished
+  // caller as soon as the semaphore is released, and a Finished receiver as
+  // soon as it's emitted. So Finished is queued to this object's thread
+  // (and dropped if it's deleted first) rather than emitted here, and
+  // releasing the semaphore is the last thing done with this object.
+  const bool success = success_;
+  QMetaObject::invokeMethod(
+      this, [this, success]() { emit Finished(success); },
+      Qt::QueuedConnection);
   semaphore_.release();
 }
