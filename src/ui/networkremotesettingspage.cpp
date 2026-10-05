@@ -39,13 +39,8 @@
 #include "ui_networkremotesettingspage.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
-    "https://play.google.com/store/apps/details?id=org.clementine_player.remote";
-const char* NetworkRemoteSettingsPage::kPlayStoreUrl2 =
-    "https://play.google.com/store/apps/details?id=fr.mbruel.ClementineRemote";
-const char* NetworkRemoteSettingsPage::kAppleStoreUrl =
-    "https://apps.apple.com/fr/app/clemremote/id1541922045";
-const char* NetworkRemoteSettingsPage::kLatestReleasesUrl =
-    "https://github.com/mbruel/ClementineRemote/releases/latest";
+    "https://play.google.com/store/apps/"
+    "details?id=org.clementine_player.remote";
 
 static bool ComparePresetsByName(const TranscoderPreset& left,
                                  const TranscoderPreset& right) {
@@ -71,9 +66,6 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
           &NetworkRemoteSettingsPage::UpdateListenWarning);
 
   ui_->play_store->installEventFilter(this);
-  ui_->play_store_2->installEventFilter(this);
-  ui_->apple_store->installEventFilter(this);
-  ui_->desktop_remote->installEventFilter(this);
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
@@ -88,21 +80,10 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
 NetworkRemoteSettingsPage::~NetworkRemoteSettingsPage() { delete ui_; }
 
 bool NetworkRemoteSettingsPage::eventFilter(QObject* object, QEvent* event) {
-  if (event->type() == QEvent::MouseButtonRelease) {
-    QUrl url;
-    if (object == ui_->play_store)
-      url = QUrl(kPlayStoreUrl);
-    else if (object == ui_->play_store_2)
-      url = QUrl(kPlayStoreUrl2);
-    else if (object == ui_->apple_store)
-      url = QUrl(kAppleStoreUrl);
-    else if (object == ui_->desktop_remote)
-      url = QUrl(kLatestReleasesUrl);
-
-    if (!url.isEmpty()) {
-      QDesktopServices::openUrl(url);
-      return true;
-    }
+  if (object == ui_->play_store &&
+      event->type() == QEvent::MouseButtonRelease) {
+    QDesktopServices::openUrl(QUrl(kPlayStoreUrl));
+    return true;
   }
 
   return SettingsPage::eventFilter(object, event);
@@ -169,14 +150,6 @@ void NetworkRemoteSettingsPage::Load() {
   }
 
   ui_->play_store->setPixmap(QPixmap(badge_filename));
-  ui_->play_store_2->setPixmap(QPixmap(badge_filename));
-
-  ui_->desktop_remote->setText(
-      tr("You can find <a href=\"%1\">here on GitHub</a> the new cross "
-         "platform remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> "
-         "and <b>Windows</b><br/>")
-          .arg(kLatestReleasesUrl));
-  ui_->desktop_remote->setWordWrap(true);
 }
 
 void NetworkRemoteSettingsPage::PopulateListenAddresses(
