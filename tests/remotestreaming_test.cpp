@@ -116,6 +116,17 @@ TEST(RendererCapsTest, FromProtoDropsFormatsWithOnlyInvalidRates) {
   EXPECT_EQ("audio/mpeg", caps.formats[0].mime_type);
 }
 
+TEST(RendererCapsTest, FromProtoReadsFeatures) {
+  cpb::remote::RendererCapabilities pb;
+  EXPECT_FALSE(RendererCaps::FromProto(pb).relative_urls);
+
+  pb.add_features(cpb::remote::RENDERER_FEATURE_RELATIVE_URLS);
+  RendererCaps caps = RendererCaps::FromProto(pb);
+  EXPECT_TRUE(caps.relative_urls);
+  EXPECT_FALSE(caps.gapless);
+  EXPECT_FALSE(caps.http_range);
+}
+
 TEST(RendererCapsTest, CodecsMustMatch) {
   RendererCaps caps = Caps({"audio/ogg; codecs=\"vorbis\""});
   EXPECT_TRUE(caps.Accepts("audio/ogg; codecs=vorbis"));

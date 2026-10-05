@@ -44,6 +44,7 @@ class Args(argparse.Namespace):
     fail_format: list[pb.AudioFormat] | None
     max_bitrate: int | None
     gapless: bool
+    absolute_urls: bool
     take_over: bool
     # browse, browse-add
     path: list[str]
@@ -283,7 +284,8 @@ async def cmd_render(args: Args) -> None:
         display_name=args.name,
         formats=args.format or [parse_format(f) for f in DEFAULT_FORMATS],
         features=[pb.RENDERER_FEATURE_HTTP_RANGE]
-        + ([pb.RENDERER_FEATURE_GAPLESS] if args.gapless else []),
+        + ([pb.RENDERER_FEATURE_GAPLESS] if args.gapless else [])
+        + ([] if args.absolute_urls else [pb.RENDERER_FEATURE_RELATIVE_URLS]),
     )
     if args.max_bitrate:
         caps.max_bitrate_kbps = args.max_bitrate
@@ -300,7 +302,14 @@ async def cmd_render(args: Args) -> None:
         f" accepting {'; '.join(describe(f) for f in caps.formats)}"
     )
 
-    renderer = Renderer(conn, args.player, args.gapless, log, args.fail_format)
+    renderer = Renderer(
+        conn,
+        args.player,
+        args.gapless,
+        log,
+        args.fail_format,
+        base_url=connection.base_url(args.host, args.port),
+    )
     if args.take_over:
         await conn.send(
             pb.Message(
@@ -405,6 +414,12 @@ def build_parser() -> argparse.ArgumentParser:
         "--gapless",
         action="store_true",
         help="accept preloads and start them without a gap",
+    )
+    p.add_argument(
+        "--absolute-urls",
+        action="store_true",
+        help="don't resolve paths as render URLs, like the first released"
+        " remotes; Clementine then sends URLs with its own address",
     )
     p.add_argument(
         "--take-over",

@@ -49,6 +49,8 @@ struct RendererCaps {
   int max_bitrate_kbps = 0;  // 0 = no limit
   bool gapless = false;
   bool http_range = false;
+  // Fetches a path on the address it connected to, so it's sent no host.
+  bool relative_urls = false;
 
   // Limits on what a renderer may describe. The planner renders a format's
   // sample rates into every pipeline it builds, so they're kept small.

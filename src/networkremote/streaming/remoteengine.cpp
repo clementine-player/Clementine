@@ -121,16 +121,20 @@ StreamItem RemoteEngine::MakeItem(const MediaPlaybackRequest& req,
 
 QString RemoteEngine::UrlForItem(const StreamItem& item,
                                  qint64 start_ms) const {
-  // The address the renderer reached us on is one it can fetch from.
-  QHostAddress host = endpoint_.local_address;
-  bool is_v4 = false;
-  const quint32 v4 = host.toIPv4Address(&is_v4);
-  if (is_v4) host = QHostAddress(v4);
-
   QUrl url;
-  url.setScheme("http");
-  url.setHost(host.toString());
-  url.setPort(endpoint_.local_port);
+  // Media is served on the renderer's own connection's host and port, so a
+  // renderer that resolves relative URLs gets just the path. Behind NAT or a
+  // port forward, the address our socket sees isn't one it can reach.
+  if (!caps_.relative_urls) {
+    QHostAddress host = endpoint_.local_address;
+    bool is_v4 = false;
+    const quint32 v4 = host.toIPv4Address(&is_v4);
+    if (is_v4) host = QHostAddress(v4);
+
+    url.setScheme("http");
+    url.setHost(host.toString());
+    url.setPort(endpoint_.local_port);
+  }
   url.setPath(
       QString("/s/%1/%2").arg(QString::fromLatin1(token_)).arg(item.id));
   if (start_ms > 0) url.setQuery(QString("t=%1").arg(start_ms));

@@ -59,6 +59,14 @@ class Connection:
             await self._writer.wait_closed()
 
 
+def base_url(host: str, port: int) -> str:
+    """The URL render URLs that are only a path are relative to: Clementine's
+    remote control port, at the address this end connected to."""
+    if ":" in host and not host.startswith("["):
+        host = f"[{host}]"
+    return f"http://{host}:{port}/"
+
+
 async def connect(
     host: str,
     port: int,
