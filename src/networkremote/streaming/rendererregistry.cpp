@@ -20,6 +20,8 @@
 #include <QHostAddress>
 #include <QNetworkInterface>
 
+#include "chromecast/castdiscovery.h"
+#include "chromecast/chromecastengine.h"
 #include "core/logging.h"
 #include "engines/enginerouter.h"
 #include "remoteengine.h"
@@ -47,6 +49,66 @@ RendererRegistry::~RendererRegistry() {
     if (router_) router_->RemoveOutput(engine);
     delete engine;
   }
+  for (ChromecastEngine* engine : cast_engines_) {
+    if (router_) router_->RemoveOutput(engine);
+    delete engine;
+  }
+}
+
+void RendererRegistry::UseCastDevices(CastDiscovery* discovery) {
+  connect(discovery, &CastDiscovery::DeviceFound, this,
+          &RendererRegistry::CastDeviceFound);
+  connect(discovery, &CastDiscovery::DeviceLost, this,
+          &RendererRegistry::CastDeviceLost);
+  for (const CastDevice& device : discovery->devices()) {
+    CastDeviceFound(device);
+  }
+}
+
+QString RendererRegistry::CastOutputId(const CastDevice& device) {
+  return "cast:" + device.id;
+}
+
+ChromecastEngine* RendererRegistry::CastEngine(const QString& device_id) const {
+  for (ChromecastEngine* engine : cast_engines_) {
+    if (engine->device().id == device_id) return engine;
+  }
+  return nullptr;
+}
+
+void RendererRegistry::CastDeviceFound(const CastDevice& device) {
+  if (ChromecastEngine* engine = CastEngine(device.id)) {
+    engine->SetDevice(device);
+    RouterOutputsChanged();
+    return;
+  }
+  if (!router_) return;
+
+  ChromecastEngine* engine =
+      new ChromecastEngine(app_, device, this, items_.get(), this);
+  cast_engines_ << engine;
+  connect(engine, &ChromecastEngine::DeviceFailed, this,
+          [this, engine]() { CastEngineFailed(engine); });
+  router_->AddOutput(engine);
+  qLog(Info) << "Cast device available:" << device.name;
+}
+
+void RendererRegistry::CastDeviceLost(const QString& id) {
+  ChromecastEngine* engine = CastEngine(id);
+  if (!engine) return;
+  cast_engines_.removeOne(engine);
+  qLog(Info) << "Cast device gone:" << engine->device().name;
+  if (router_) router_->RemoveOutput(engine);
+  engine->deleteLater();
+}
+
+void RendererRegistry::CastEngineFailed(ChromecastEngine* engine) {
+  if (!router_ || router_->active_engine() != engine) return;
+  // Fall back to this computer, paused, as for a renderer that goes away,
+  // but keep offering the device.
+  router_->RemoveOutput(engine);
+  engine->Stop();
+  router_->AddOutput(engine);
 }
 
 void RendererRegistry::RegisterRenderer(int client_id, const QByteArray& data,
@@ -181,6 +243,14 @@ QByteArray RendererRegistry::OutputsMessage() const {
                           ? cpb::remote::OUTPUT_STATE_ACTIVE
                           : cpb::remote::OUTPUT_STATE_AVAILABLE);
   }
+  for (ChromecastEngine* engine : cast_engines_) {
+    cpb::remote::Output* output = outputs->add_outputs();
+    output->set_output_id(CastOutputId(engine->device()).toStdString());
+    output->set_display_name(engine->device().name.toStdString());
+    output->set_state(router_ && router_->active_engine() == engine
+                          ? cpb::remote::OUTPUT_STATE_ACTIVE
+                          : cpb::remote::OUTPUT_STATE_AVAILABLE);
+  }
 
   const std::string data = msg.SerializeAsString();
   return QByteArray(data.data(), static_cast<int>(data.size()));
@@ -194,6 +264,12 @@ bool RendererRegistry::SetOutput(const QString& output_id) {
   }
   for (RemoteEngine* engine : engines_) {
     if (engine->renderer_id() == output_id) {
+      router_->SetOutput(engine);
+      return true;
+    }
+  }
+  for (ChromecastEngine* engine : cast_engines_) {
+    if (CastOutputId(engine->device()) == output_id) {
       router_->SetOutput(engine);
       return true;
     }

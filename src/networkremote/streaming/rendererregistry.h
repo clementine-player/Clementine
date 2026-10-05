@@ -30,6 +30,9 @@
 #include "remotecontrolmessages.pb.h"
 
 class Application;
+class CastDiscovery;
+class ChromecastEngine;
+struct CastDevice;
 class EngineRouter;
 class RemoteEngine;
 class StreamItemTable;
@@ -77,6 +80,8 @@ class RendererRegistry : public QObject {
       const QList<QNetworkAddressEntry>& interfaces);
 
  public slots:
+  // Offers the Cast devices |discovery| finds as outputs.
+  void UseCastDevices(CastDiscovery* discovery);
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
   void RegisterRenderer(int client_id, const QByteArray& caps,
@@ -106,6 +111,14 @@ class RendererRegistry : public QObject {
   QPointer<EngineRouter> router_;
   std::shared_ptr<StreamItemTable> items_;
   QList<RemoteEngine*> engines_;
+
+  // Output ids for Cast devices.
+  static QString CastOutputId(const CastDevice& device);
+  void CastDeviceFound(const CastDevice& device);
+  void CastDeviceLost(const QString& id);
+  void CastEngineFailed(ChromecastEngine* engine);
+  ChromecastEngine* CastEngine(const QString& device_id) const;
+  QList<ChromecastEngine*> cast_engines_;
 
   // 0 until NetworkRemote says where it listens.
   quint16 listening_port_;

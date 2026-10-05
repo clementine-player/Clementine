@@ -89,6 +89,7 @@ set(SOURCES
   chromecast/castdevice.cpp
   chromecast/castdiscovery.cpp
   chromecast/castmediaplayer.cpp
+  chromecast/chromecastengine.cpp
 
   core/appearance.cpp
   core/application.cpp
@@ -465,6 +466,7 @@ set(HEADERS
   chromecast/castchannel.h
   chromecast/castdiscovery.h
   chromecast/castmediaplayer.h
+  chromecast/chromecastengine.h
 
   core/appearance.h
   core/application.h

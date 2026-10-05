@@ -558,7 +558,21 @@ int main(int argc, char* argv[]) {
   ParseAProto();
   (void)QtConcurrent::run(&ParseAProto);
 
+  // Experimental, see --chromecast. It's created before the Application so
+  // that it outlives everything that uses it.
+  std::unique_ptr<CastDiscovery> cast_discovery;
+  if (options.chromecast()) {
+    cast_discovery.reset(CastDiscovery::Create());
+    if (!cast_discovery) {
+      qLog(Warning) << "Can't look for Cast devices on this platform";
+    }
+  }
+
   Application app;
+  if (cast_discovery) {
+    app.set_cast_discovery(cast_discovery.get());
+    cast_discovery->Start();
+  }
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
 
@@ -626,16 +640,6 @@ int main(int argc, char* argv[]) {
   // Use a queued connection so the invokation occurs after the application
   // loop starts.
   QMetaObject::invokeMethod(&app, "Starting", Qt::QueuedConnection);
-
-  std::unique_ptr<CastDiscovery> cast_discovery;
-  if (options.chromecast()) {
-    cast_discovery.reset(CastDiscovery::Create());
-    if (cast_discovery) {
-      cast_discovery->Start();
-    } else {
-      qLog(Warning) << "Can't look for Cast devices on this platform";
-    }
-  }
 
   std::unique_ptr<ScreenshotTaker> screenshot_taker;
   if (screenshots) {
