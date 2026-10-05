@@ -34,6 +34,12 @@
   <string>public.app-category.music</string>
   <key>LSMinimumSystemVersion</key>
   <string>${MACOS_MINIMUM_VERSION}</string>
+  <key>NSLocalNetworkUsageDescription</key>
+  <string>Clementine looks for Chromecasts and other Cast devices on your network so it can play music on them.</string>
+  <key>NSBonjourServices</key>
+  <array>
+    <string>_googlecast._tcp</string>
+  </array>
   <key>SUFeedURL</key>
   <string>${SPARKLE_FEED_URL}</string>
   <key>SUPublicEDKey</key>

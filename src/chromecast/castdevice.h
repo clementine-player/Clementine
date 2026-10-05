@@ -47,6 +47,11 @@ struct CastDevice {
   // entries look like "key=value". Returns false if it has no id.
   bool ParseTxt(const QList<QByteArray>& txt);
 
+  // Splits a TXT record in its wire format, where each entry is preceded by
+  // its length in one byte, into the entries ParseTxt takes. A truncated last
+  // entry is dropped.
+  static QList<QByteArray> SplitTxt(const QByteArray& rdata);
+
   bool operator==(const CastDevice& other) const;
   bool operator!=(const CastDevice& other) const { return !(*this == other); }
 };

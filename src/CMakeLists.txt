@@ -945,6 +945,7 @@ optional_source(APPLE
   INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
   SOURCES
+    chromecast/bonjourcastdiscovery.cpp
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/macmediacontrols.mm
@@ -957,6 +958,7 @@ optional_source(APPLE
     ui/sfsymbolicon.mm
     widgets/osd_mac.mm
   HEADERS
+    chromecast/bonjourcastdiscovery.h
     core/macfslistener.h
     core/macglobalshortcutbackend.h
     core/macmediacontrols.h
@@ -975,12 +977,14 @@ endif()
 # Platform specific - Windows
 optional_source(WIN32
   SOURCES
+    chromecast/windowscastdiscovery.cpp
     core/windowsmediacontrols.cpp
     engines/directsounddevicefinder.cpp
     networkremote/windowsdnssd.cpp
     ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   HEADERS
+    chromecast/windowscastdiscovery.h
     core/windowsmediacontrols.h
 )
 

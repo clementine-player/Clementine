@@ -18,8 +18,6 @@
 #ifndef CHROMECAST_AVAHICASTDISCOVERY_H_
 #define CHROMECAST_AVAHICASTDISCOVERY_H_
 
-#include <QSet>
-
 #include "castdiscovery.h"
 
 class QDBusMessage;
@@ -54,9 +52,6 @@ class AvahiCastDiscovery : public CastDiscovery {
   void Resolved(const QString& service, const QDBusMessage& reply);
 
   QString browser_path_;
-  // Services Avahi has reported and not yet removed. A resolve that finishes
-  // after its service went away is ignored.
-  QSet<QString> services_;
 };
 
 #endif  // CHROMECAST_AVAHICASTDISCOVERY_H_

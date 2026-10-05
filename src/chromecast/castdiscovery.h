@@ -20,6 +20,7 @@
 
 #include <QMap>
 #include <QObject>
+#include <QSet>
 #include <QString>
 
 #include "castdevice.h"
@@ -51,13 +52,30 @@ class CastDiscovery : public QObject {
   void DeviceLost(const QString& id);
 
  protected:
-  // |service| identifies one advertisement, eg. by interface, protocol and
-  // instance name, and is only compared with other values from the same
-  // subclass.
-  void ServiceResolved(const QString& service, const CastDevice& device);
+  // Subclasses report each advertisement as it comes and goes, then what it
+  // resolves to. |service| identifies one advertisement, eg. by interface,
+  // protocol and instance name, and is only compared with other values from
+  // the same subclass.
+  void ServiceAdded(const QString& service);
   void ServiceRemoved(const QString& service);
+  bool IsLive(const QString& service) const {
+    return live_services_.contains(service);
+  }
+
+  // Ignored unless |service| is still live, so a resolve that finishes after
+  // its advertisement went away doesn't bring the device back.
+  void ServiceResolved(const QString& service, const CastDevice& device);
+  // For platforms whose resolver gives a host name rather than an address:
+  // looks up |host|'s IPv4 address, then calls ServiceResolved.
+  void ResolveHost(const QString& service, const CastDevice& device,
+                   const QString& host);
 
  private:
+  // Forgets which device |service| advertised, and emits DeviceLost if it
+  // was that device's last one.
+  void ForgetService(const QString& service);
+
+  QSet<QString> live_services_;
   // Service to the id of the device it advertises.
   QMap<QString, QString> service_ids_;
   QMap<QString, CastDevice> devices_;

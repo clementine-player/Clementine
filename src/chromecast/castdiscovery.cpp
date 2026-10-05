@@ -17,17 +17,27 @@
 
 #include "castdiscovery.h"
 
+#include <QHostInfo>
+
 #include "config.h"
 #include "core/logging.h"
 
-#ifdef HAVE_DBUS
+#if defined(Q_OS_DARWIN)
+#include "bonjourcastdiscovery.h"
+#elif defined(Q_OS_WIN32)
+#include "windowscastdiscovery.h"
+#elif defined(HAVE_DBUS)
 #include "avahicastdiscovery.h"
 #endif
 
 const char* CastDiscovery::kServiceType = "_googlecast._tcp";
 
 CastDiscovery* CastDiscovery::Create(QObject* parent) {
-#ifdef HAVE_DBUS
+#if defined(Q_OS_DARWIN)
+  return new BonjourCastDiscovery(parent);
+#elif defined(Q_OS_WIN32)
+  return new WindowsCastDiscovery(parent);
+#elif defined(HAVE_DBUS)
   return new AvahiCastDiscovery(parent);
 #else
   Q_UNUSED(parent);
@@ -37,8 +47,13 @@ CastDiscovery* CastDiscovery::Create(QObject* parent) {
 
 CastDiscovery::CastDiscovery(QObject* parent) : QObject(parent) {}
 
+void CastDiscovery::ServiceAdded(const QString& service) {
+  live_services_ << service;
+}
+
 void CastDiscovery::ServiceResolved(const QString& service,
                                     const CastDevice& device) {
+  if (!IsLive(service)) return;
   if (!device.is_valid()) {
     qLog(Debug) << "Ignoring incomplete Cast service" << service;
     return;
@@ -47,7 +62,7 @@ void CastDiscovery::ServiceResolved(const QString& service,
   // The same advertisement can't normally change device, but if it did the
   // old device may have lost its last service.
   const QString old_id = service_ids_.value(service);
-  if (!old_id.isEmpty() && old_id != device.id) ServiceRemoved(service);
+  if (!old_id.isEmpty() && old_id != device.id) ForgetService(service);
   service_ids_[service] = device.id;
 
   auto it = devices_.find(device.id);
@@ -58,7 +73,30 @@ void CastDiscovery::ServiceResolved(const QString& service,
   emit DeviceFound(device);
 }
 
+void CastDiscovery::ResolveHost(const QString& service,
+                                const CastDevice& device, const QString& host) {
+  QHostInfo::lookupHost(
+      host, this, [this, service, device, host](const QHostInfo& info) {
+        // IPv4, as Avahi is asked for: Cast devices all have an address, and
+        // it's what the remote's network policy expects.
+        for (const QHostAddress& address : info.addresses()) {
+          if (address.protocol() != QAbstractSocket::IPv4Protocol) continue;
+          CastDevice resolved = device;
+          resolved.address = address;
+          ServiceResolved(service, resolved);
+          return;
+        }
+        qLog(Debug) << "No IPv4 address for Cast service" << service << "on"
+                    << host << info.errorString();
+      });
+}
+
 void CastDiscovery::ServiceRemoved(const QString& service) {
+  live_services_.remove(service);
+  ForgetService(service);
+}
+
+void CastDiscovery::ForgetService(const QString& service) {
   const QString id = service_ids_.take(service);
   if (id.isEmpty()) return;
 
