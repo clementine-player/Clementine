@@ -156,6 +156,9 @@ bool CommandlineOptions::Parse() {
       // Undocumented while it's being built: look for Chromecasts. Left out
       // of kHelpText.
       {"chromecast", no_argument, 0, Chromecast},
+      // Undocumented, for demos and screenshots: what remotes call this
+      // computer, instead of its host name. Left out of kHelpText.
+      {"remote-name", required_argument, 0, RemoteName},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -330,6 +333,10 @@ bool CommandlineOptions::Parse() {
 
       case Chromecast:
         chromecast_ = true;
+        break;
+
+      case RemoteName:
+        remote_name_ = QString::fromLocal8Bit(optarg);
         break;
 
       case '?':
