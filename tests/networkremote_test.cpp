@@ -228,14 +228,14 @@ TEST(NetworkRemoteTest, LocalClientsCanReachNonPublicAddresses) {
       NetworkRemote::LocalClientsCanReach(QHostAddress("203.0.113.5")));
 }
 
-TEST(NetworkRemoteTest, ComputerIsNamedAfterItsHostUnlessToldOtherwise) {
-  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::ComputerName());
+TEST(NetworkRemoteTest, NamesThisComputerAfterItsHostUnlessTold) {
+  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::RemoteName());
 
-  NetworkRemote::SetComputerName("  Living room ");
-  EXPECT_EQ("Living room", NetworkRemote::ComputerName());
+  NetworkRemote::SetRemoteName("  Living room ");
+  EXPECT_EQ("Living room", NetworkRemote::RemoteName());
 
-  NetworkRemote::SetComputerName("");
-  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::ComputerName());
+  NetworkRemote::SetRemoteName("");
+  EXPECT_EQ(QHostInfo::localHostName(), NetworkRemote::RemoteName());
 }
 
 TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
