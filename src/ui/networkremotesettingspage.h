@@ -50,9 +50,6 @@ class NetworkRemoteSettingsPage : public SettingsPage {
   void UpdateListenWarning();
 
   static const char* kPlayStoreUrl;
-  static const char* kPlayStoreUrl2;
-  static const char* kAppleStoreUrl;
-  static const char* kLatestReleasesUrl;
 
   Ui_NetworkRemoteSettingsPage* ui_;
 };
