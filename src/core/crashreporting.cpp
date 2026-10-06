@@ -230,9 +230,9 @@ void CrashReporting::AskToSendPendingReports(QWidget*) {}
 
 __attribute__((noinline)) void CrashReporting::CrashForTesting() {
   qLog(Error) << "Crashing on purpose because of --crash";
-  // volatile so the compiler can't tell the pointer is null and turn the write
-  // into something else.
-  int* volatile null_pointer = nullptr;
+  // Both volatile: the pointer so the compiler can't tell it's null, and what
+  // it points to so the write isn't dropped as dead before the abort() below.
+  volatile int* volatile null_pointer = nullptr;
   *null_pointer = 0;
   // Not reached.
   std::abort();
