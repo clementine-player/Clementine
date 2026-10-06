@@ -313,12 +313,14 @@ endif()
 # and don't exist on my mingw toolchain
 list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
-option(USE_SYSTEM_PROJECTM "Use system-installed projectM 4.x library instead of the bundled copy" ON)
+option(USE_SYSTEM_PROJECTM "Use system-installed projectM 4.2 or later instead of the bundled copy" ON)
 
 if(HAVE_VISUALISATIONS)
   if(USE_SYSTEM_PROJECTM)
-    find_package(projectM4 QUIET)
-    find_package(projectM4Playlist QUIET)
+    # The playlist's preset load event callback (see
+    # ProjectMVisualisation::InitProjectM) first appears in projectM 4.2.
+    find_package(projectM4 4.2 QUIET)
+    find_package(projectM4Playlist 4.2 QUIET)
   endif()
 
   if(projectM4_FOUND AND projectM4Playlist_FOUND)
@@ -326,7 +328,7 @@ if(HAVE_VISUALISATIONS)
     set(LIBPROJECTM_LIBRARIES libprojectM::projectM libprojectM::playlist)
   else()
     if(USE_SYSTEM_PROJECTM)
-      message(STATUS "System projectM 4.x not found, falling back to bundled copy")
+      message(STATUS "System projectM 4.2 or later not found, falling back to bundled copy")
     else()
       message(STATUS "Using bundled projectM library")
     endif()
