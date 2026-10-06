@@ -235,6 +235,14 @@ if(HAVE_SENTRY)
   if(NOT SENTRY_CRASHPAD_HANDLER)
     message(FATAL_ERROR "ENABLE_SENTRY needs sentry-native built with SENTRY_BACKEND=crashpad, but crashpad_handler wasn't found")
   endif()
+  if(UNIX AND NOT APPLE)
+    # A helper only Clementine runs, so it goes in libexec rather than on
+    # everyone's PATH.
+    include(GNUInstallDirs)
+    set(CRASHPAD_HANDLER_INSTALL_DIR "${CMAKE_INSTALL_LIBEXECDIR}/clementine")
+    set(INSTALLED_CRASHPAD_HANDLER
+      "${CMAKE_INSTALL_FULL_LIBEXECDIR}/clementine/crashpad_handler")
+  endif()
 endif()
 
 optional_component(GOOGLE_DRIVE ON "Google Drive support"

@@ -135,15 +135,21 @@ CrashReporting::CrashReporting() {
   CollectNewReports(DatabasePath());
   SetDatabasePath(options, DatabasePath());
 
-  // Packaged builds put crashpad_handler next to the executable, which is
-  // where sentry-native looks by default. A build that's run from its build
-  // directory doesn't, so fall back to the one it was built against.
+  // The macOS and Windows packages put crashpad_handler next to the
+  // executable, which is where sentry-native looks by default. Linux installs
+  // it in libexec, and a build that's run from its build directory falls back
+  // to the one it was built against.
   const QString bundled_handler =
       QDir(QCoreApplication::applicationDirPath())
           .filePath("crashpad_handler" CMAKE_EXECUTABLE_SUFFIX);
-  if (!QFile::exists(bundled_handler) &&
-      QFile::exists(CLEMENTINE_CRASHPAD_HANDLER)) {
-    SetHandlerPath(options, CLEMENTINE_CRASHPAD_HANDLER);
+  if (!QFile::exists(bundled_handler)) {
+    for (const char* handler :
+         {CLEMENTINE_INSTALLED_CRASHPAD_HANDLER, CLEMENTINE_CRASHPAD_HANDLER}) {
+      if (qstrlen(handler) != 0 && QFile::exists(handler)) {
+        SetHandlerPath(options, handler);
+        break;
+      }
+    }
   }
 
   if (sentry_init(options) != 0) {
