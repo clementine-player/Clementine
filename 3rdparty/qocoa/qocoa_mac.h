@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include <AppKit/NSImage.h>
 #include <AppKit/NSView.h>
 #include <Foundation/NSString.h>
+#include <QEvent>
 #include <QImage>
 #include <QPixmap>
 #include <QString>
@@ -35,15 +36,25 @@ THE SOFTWARE.
 // Cocoa view as a subview and let AppKit's own autoresizing mask keep it
 // sized to match, rather than reimplementing QMacCocoaViewContainer's
 // internal resize-event plumbing.
+//
+// The container keeps its own reference to the wrapped view, as Qt5's did:
+// the widgets that use it release theirs once it's set up. Qt destroys and
+// recreates a widget's native view when, for example, the widget is
+// reparented, and the old view's subviews go with it; without that
+// reference, the wrapped view would be freed while the widget still points
+// at it. When the native view changes, the wrapped view moves to the new one.
 class QMacCocoaViewContainer : public QWidget {
 public:
   explicit QMacCocoaViewContainer(void* cocoaViewToWrap, QWidget* parent = nullptr)
       : QWidget(parent), cocoaView_(static_cast<NSView*>(cocoaViewToWrap)) {
+    [cocoaView_ retain];
     setAttribute(Qt::WA_NativeWindow);
-    NSView* qtView = reinterpret_cast<NSView*>(winId());
-    [qtView addSubview:cocoaView_];
-    [cocoaView_ setFrame:[qtView bounds]];
-    [cocoaView_ setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
+    attach(winId());
+  }
+
+  ~QMacCocoaViewContainer() override {
+    [cocoaView_ removeFromSuperview];
+    [cocoaView_ release];
   }
 
   QSize sizeHint() const override {
@@ -51,7 +62,24 @@ public:
     return QSize(fitting.width, fitting.height);
   }
 
+protected:
+  bool event(QEvent* e) override {
+    // Also sent when the native view goes, when there's none to move to.
+    if (e->type() == QEvent::WinIdChange && internalWinId()) attach(internalWinId());
+    return QWidget::event(e);
+  }
+
 private:
+  // Puts the wrapped view in this widget's native view, [id].
+  void attach(WId id) {
+    NSView* qtView = reinterpret_cast<NSView*>(id);
+    if ([cocoaView_ superview] == qtView) return;
+    [cocoaView_ removeFromSuperview];
+    [qtView addSubview:cocoaView_];
+    [cocoaView_ setFrame:[qtView bounds]];
+    [cocoaView_ setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
+  }
+
   NSView* cocoaView_;
 };
 
