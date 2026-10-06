@@ -635,7 +635,7 @@ int main(int argc, char* argv[]) {
 
   if (!screenshots) {
     QTimer::singleShot(0, &w,
-                       [&w]() { CrashReporting::AskForConsentIfNeeded(&w); });
+                       [&w]() { CrashReporting::AskToSendPendingReports(&w); });
   }
 
   int ret = a.exec();

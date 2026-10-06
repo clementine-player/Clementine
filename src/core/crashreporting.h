@@ -20,22 +20,25 @@
 #ifndef CORE_CRASHREPORTING_H_
 #define CORE_CRASHREPORTING_H_
 
-#include <QtGlobal>
+#include <QString>
 
 class QWidget;
 
-// Sends crash reports to Sentry. While an instance of this class is alive,
-// crashes are caught by sentry-native's Crashpad handler, which runs in a
-// process of its own and uploads the minidump.
+// Sends crash reports to Sentry, but only one at a time and only when the user
+// says so.
 //
-// Nothing is uploaded until the user has agreed to it: Sentry is started with
-// user consent required, and consent is only given when the "send_reports"
-// setting is true. Builds without ENABLE_SENTRY, or with an empty SENTRY_DSN,
-// get no-op stubs.
+// While an instance of this class is alive, crashes are caught by
+// sentry-native's Crashpad handler, which runs in a process of its own and
+// saves a minidump. Sentry is started with user consent required and consent
+// is never left given, so the handler doesn't upload anything itself. On the
+// next start the minidumps are set aside, and AskToSendPendingReports() asks
+// the user whether to send them.
+//
+// Builds without ENABLE_SENTRY, or with an empty SENTRY_DSN, get no-op stubs.
 class CrashReporting {
  public:
   static const char* kSettingsGroup;
-  static const char* kSendReports;
+  static const char* kAskAfterCrash;
 
   CrashReporting();
   ~CrashReporting();
@@ -43,16 +46,19 @@ class CrashReporting {
   // True if this build can send crash reports at all.
   static bool IsAvailable();
 
-  // Asks the user whether to send crash reports, unless they've already
-  // answered. Their answer is remembered and can be changed in Preferences.
-  static void AskForConsentIfNeeded(QWidget* parent);
+  // If Clementine crashed since the user was last asked, asks whether to send
+  // the reports, and sends or deletes them.
+  static void AskToSendPendingReports(QWidget* parent);
 
-  // Whether the user has agreed to send crash reports.
+  // Whether to catch crashes and offer to send a report afterwards. Changing
+  // it takes effect the next time Clementine starts.
   static bool IsEnabled();
   static void SetEnabled(bool enabled);
 
  private:
   Q_DISABLE_COPY(CrashReporting)
+
+  static QString DatabasePath();
 
   static bool sInitialised;
 };

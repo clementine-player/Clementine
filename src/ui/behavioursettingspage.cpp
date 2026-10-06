@@ -98,7 +98,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   std::stable_sort(names.begin(), names.end(), LocaleAwareCompare);
   ui_->language->addItems(names);
 
-  ui_->b_send_crash_reports_->setVisible(CrashReporting::IsAvailable());
+  ui_->b_offer_crash_reports_->setVisible(CrashReporting::IsAvailable());
 
 #ifdef Q_OS_DARWIN
   ui_->b_show_tray_icon_->setEnabled(false);
@@ -230,7 +230,7 @@ void BehaviourSettingsPage::Load() {
       s.value("warn_close_playlist", true).toBool());
   s.endGroup();
 
-  ui_->b_send_crash_reports_->setChecked(CrashReporting::IsEnabled());
+  ui_->b_offer_crash_reports_->setChecked(CrashReporting::IsEnabled());
 }
 
 void BehaviourSettingsPage::Save() {
@@ -320,9 +320,8 @@ void BehaviourSettingsPage::Save() {
   s.setValue("warn_close_playlist", ui_->b_warn_close_playlist_->isChecked());
   s.endGroup();
 
-  if (CrashReporting::IsAvailable() &&
-      ui_->b_send_crash_reports_->isChecked() != CrashReporting::IsEnabled()) {
-    CrashReporting::SetEnabled(ui_->b_send_crash_reports_->isChecked());
+  if (CrashReporting::IsAvailable()) {
+    CrashReporting::SetEnabled(ui_->b_offer_crash_reports_->isChecked());
   }
 }
 

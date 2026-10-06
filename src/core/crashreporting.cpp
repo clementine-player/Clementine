@@ -22,6 +22,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
@@ -35,8 +36,14 @@
 #endif
 
 const char* CrashReporting::kSettingsGroup = "CrashReporting";
-const char* CrashReporting::kSendReports = "send_reports";
+const char* CrashReporting::kAskAfterCrash = "ask_after_crash";
 bool CrashReporting::sInitialised = false;
+
+QString CrashReporting::DatabasePath() {
+  // With the rest of Clementine's files, so portable installs keep it in their
+  // own directory.
+  return Utilities::GetConfigPath(Utilities::Path_Root) + "/crashreports";
+}
 
 #ifdef HAVE_SENTRY
 
@@ -52,6 +59,11 @@ void SetHandlerPath(sentry_options_t* options, const QString& path) {
   sentry_options_set_handler_pathw(
       options, reinterpret_cast<const wchar_t*>(path.utf16()));
 }
+
+sentry_uuid_t CaptureMinidump(const QString& path) {
+  return sentry_capture_minidumpw(
+      reinterpret_cast<const wchar_t*>(path.utf16()));
+}
 #else
 void SetDatabasePath(sentry_options_t* options, const QString& path) {
   sentry_options_set_database_path(options,
@@ -61,12 +73,47 @@ void SetDatabasePath(sentry_options_t* options, const QString& path) {
 void SetHandlerPath(sentry_options_t* options, const QString& path) {
   sentry_options_set_handler_path(options, QFile::encodeName(path).constData());
 }
+
+sentry_uuid_t CaptureMinidump(const QString& path) {
+  return sentry_capture_minidump(QFile::encodeName(path).constData());
+}
 #endif
+
+QString UnsentPath(const QString& database_path) {
+  return database_path + "/unsent";
+}
+
+// Moves the minidumps of crashes since the last start out of Crashpad's
+// database, where sentry_init() would delete them after two days, to wait for
+// the user to say whether to send them. Run before sentry_init(), while no
+// handler is using the database. Crashpad keeps reports in "pending" and
+// "completed" on Linux and macOS, and all of them in "reports" on Windows.
+void CollectNewReports(const QString& database_path) {
+  QDir unsent(UnsentPath(database_path));
+  for (const char* subdir : {"pending", "completed", "reports"}) {
+    QDir dir(database_path + "/" + QString::fromLatin1(subdir));
+    for (const QFileInfo& info :
+         dir.entryInfoList(QStringList() << "*.dmp", QDir::Files)) {
+      if (!unsent.mkpath(".") ||
+          !QFile::rename(info.absoluteFilePath(),
+                         unsent.filePath(info.fileName()))) {
+        qLog(Warning) << "Couldn't keep crash report"
+                      << info.absoluteFilePath();
+      }
+    }
+  }
+}
 
 }  // namespace
 
 CrashReporting::CrashReporting() {
   if (!IsAvailable()) return;
+
+  if (!IsEnabled()) {
+    // Don't leave reports from before it was turned off lying around.
+    QDir(DatabasePath()).removeRecursively();
+    return;
+  }
 
   sentry_options_t* options = sentry_options_new();
   sentry_options_set_dsn(options, CLEMENTINE_SENTRY_DSN);
@@ -76,17 +123,17 @@ CrashReporting::CrashReporting() {
                                  .toUtf8()
                                  .constData());
 
-  // The handler doesn't upload anything until sentry_user_consent_give() is
-  // called.
+  // Consent is only ever given while queueing a report the user agreed to
+  // send, so the Crashpad handler never uploads anything itself: it marks
+  // each report as skipped and leaves the minidump in its database.
   sentry_options_set_require_user_consent(options, 1);
 
   // Only crashes, no usage data.
   sentry_options_set_auto_session_tracking(options, 0);
+  sentry_options_set_send_client_reports(options, 0);
 
-  // Reports and the Crashpad database live with the rest of Clementine's
-  // files, so portable installs keep them in their own directory.
-  SetDatabasePath(options, Utilities::GetConfigPath(Utilities::Path_Root) +
-                               "/crashreports");
+  CollectNewReports(DatabasePath());
+  SetDatabasePath(options, DatabasePath());
 
   // Packaged builds put crashpad_handler next to the executable, which is
   // where sentry-native looks by default. A build that's run from its build
@@ -105,15 +152,9 @@ CrashReporting::CrashReporting() {
   }
   sInitialised = true;
 
-  // Sentry remembers consent itself too, but the setting is what the user
-  // sees in Preferences, so it wins.
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  if (s.value(kSendReports, false).toBool()) {
-    sentry_user_consent_give();
-  } else {
-    sentry_user_consent_revoke();
-  }
+  // Sentry remembers consent across runs, so take back any that was left
+  // given, by a run that crashed while sending a report for instance.
+  sentry_user_consent_revoke();
 }
 
 CrashReporting::~CrashReporting() {
@@ -127,6 +168,47 @@ bool CrashReporting::IsAvailable() {
   return qstrlen(CLEMENTINE_SENTRY_DSN) != 0;
 }
 
+void CrashReporting::AskToSendPendingReports(QWidget* parent) {
+  if (!sInitialised) return;
+
+  QDir unsent(UnsentPath(DatabasePath()));
+  const QFileInfoList reports =
+      unsent.entryInfoList(QStringList() << "*.dmp", QDir::Files);
+  if (reports.isEmpty()) return;
+
+  QMessageBox box(QMessageBox::Question,
+                  QObject::tr("Clementine quit unexpectedly"),
+                  QObject::tr("Clementine crashed last time it was running. "
+                              "Send a crash report to the developers so they "
+                              "can fix the problem?"),
+                  QMessageBox::NoButton, parent);
+  box.setInformativeText(
+      QObject::tr("The report says what Clementine was doing when it crashed. "
+                  "It can include file names and the titles of songs you "
+                  "were playing. You'll be asked again each time Clementine "
+                  "crashes, and you can turn this off in Preferences."));
+  QPushButton* send =
+      box.addButton(QObject::tr("Send report"), QMessageBox::AcceptRole);
+  box.addButton(QObject::tr("Don't send"), QMessageBox::RejectRole);
+  box.setDefaultButton(send);
+  box.exec();
+
+  if (box.clickedButton() == send) {
+    // Consent is checked when a report is queued, not when it's uploaded, and
+    // the minidump is read in when it's queued, so it's only given for long
+    // enough to queue these ones.
+    sentry_user_consent_give();
+    for (const QFileInfo& info : reports) {
+      CaptureMinidump(info.absoluteFilePath());
+    }
+    sentry_user_consent_revoke();
+  }
+
+  for (const QFileInfo& info : reports) {
+    QFile::remove(info.absoluteFilePath());
+  }
+}
+
 #else  // HAVE_SENTRY
 
 CrashReporting::CrashReporting() {}
@@ -135,51 +217,18 @@ CrashReporting::~CrashReporting() {}
 
 bool CrashReporting::IsAvailable() { return false; }
 
+void CrashReporting::AskToSendPendingReports(QWidget*) {}
+
 #endif  // HAVE_SENTRY
-
-void CrashReporting::AskForConsentIfNeeded(QWidget* parent) {
-  if (!IsAvailable()) return;
-
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  if (s.contains(kSendReports)) return;
-
-  QMessageBox box(QMessageBox::Question, QObject::tr("Send crash reports?"),
-                  QObject::tr("If Clementine crashes, it can send a report to "
-                              "its developers so they can fix the problem."),
-                  QMessageBox::NoButton, parent);
-  box.setInformativeText(
-      QObject::tr("A report says what Clementine was doing when it crashed. "
-                  "It can include file names and the titles of songs you "
-                  "were playing. You can change your mind at any time in "
-                  "Preferences."));
-  QPushButton* send =
-      box.addButton(QObject::tr("Send reports"), QMessageBox::AcceptRole);
-  box.addButton(QObject::tr("Don't send"), QMessageBox::RejectRole);
-  box.setDefaultButton(send);
-  box.exec();
-
-  SetEnabled(box.clickedButton() == send);
-}
 
 bool CrashReporting::IsEnabled() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  return s.value(kSendReports, false).toBool();
+  return s.value(kAskAfterCrash, true).toBool();
 }
 
 void CrashReporting::SetEnabled(bool enabled) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue(kSendReports, enabled);
-
-#ifdef HAVE_SENTRY
-  if (sInitialised) {
-    if (enabled) {
-      sentry_user_consent_give();
-    } else {
-      sentry_user_consent_revoke();
-    }
-  }
-#endif
+  s.setValue(kAskAfterCrash, enabled);
 }
