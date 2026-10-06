@@ -78,7 +78,7 @@ msgstr " שניות"
 msgid " songs"
 msgstr " שירים"
 
-#: ui/networkremotesettingspage.cpp:213
+#: ui/networkremotesettingspage.cpp:186
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -88,12 +88,13 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 אלבומים"
 
-#: networkremote/streaming/remoteengine.cpp:250
+#: chromecast/chromecastengine.cpp:252
+#: networkremote/streaming/remoteengine.cpp:242
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
 
-#: networkremote/streaming/remoteengine.cpp:457
+#: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
 msgstr ""
@@ -113,6 +114,11 @@ msgstr "%1 ימים"
 #, qt-format
 msgid "%1 days ago"
 msgstr "לפני %1 ימים"
+
+#: chromecast/chromecastengine.cpp:202
+#, qt-format
+msgid "%1 isn't on a network the network remote listens on"
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -411,7 +417,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>מילים שמורות מתחילות ב־%, לדוגמה: %artist %album %title </p>\n\n<p>סגירת טקסט בסוגריים מסולסלות משני צדיו תגרום להסתרתו במקרה שהטקסט מכיל מילה שמורה אשר לא מכילה כלום.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:285
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -536,7 +542,7 @@ msgstr "הוספת תזרים אחר..."
 msgid "Add directory..."
 msgstr "הוספת תיקייה..."
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2156
 msgid "Add file"
 msgstr ""
 
@@ -560,7 +566,7 @@ msgstr "הוספת קובצי מוזיקה להמרה"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "הוספת תיקייה"
@@ -657,7 +663,7 @@ msgstr "הוספת תג שנה לשיר"
 msgid "Add stream..."
 msgstr "הוספת תזרים"
 
-#: ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1957
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
@@ -747,7 +753,7 @@ msgstr "אלבומים ללא עטיפה"
 msgid "All"
 msgstr ""
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:158
 msgid "All Files (*)"
 msgstr "כל הקבצים (*)"
 
@@ -756,7 +762,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:293
 msgid "All addresses"
 msgstr ""
 
@@ -785,11 +791,11 @@ msgstr "כל המתרגמים"
 msgid "All tracks"
 msgstr "כל הרצועות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:396
+#: ../bin/src/ui_networkremotesettingspage.h:298
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "Allow downloads"
 msgstr ""
 
@@ -797,7 +803,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "מתן האפשרות לקידוד mid/side"
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:304
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -849,7 +855,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "מראה"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 
@@ -891,7 +897,7 @@ msgstr ""
 msgid "Artist"
 msgstr "אמן"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:299
 msgid "Artist info"
 msgstr "מידע על האמן"
 
@@ -904,7 +910,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:310
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "להמיר לתבנית"
@@ -1142,7 +1148,7 @@ msgstr "שינוי מצב ערבוב"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "שינוי השפה"
 
@@ -1168,7 +1174,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:843
+#: ui/mainwindow.cpp:856
 msgid "Check for updates..."
 msgstr "בדיקת עדכונים..."
 
@@ -1372,7 +1378,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "רשימה מופרדת בפסיקים של class:level,level יכול להיות 0-3 "
 
@@ -1428,7 +1434,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:676
+#: ui/mainwindow.cpp:689
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
@@ -1499,11 +1505,11 @@ msgstr "המרת כל המוזיקה"
 msgid "Convert any music that the device can't play"
 msgstr "המרת כל המוזיקה שהתקן זה לא מסוגל לנגן"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1512,11 +1518,11 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "העתקה לספרייה..."
@@ -1639,7 +1645,7 @@ msgstr "עטיפת אלבום נבחרה מתוך %1"
 msgid "Covers from %1"
 msgstr "עטיפות מ־%1"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1722,11 +1728,11 @@ msgstr "ימים"
 msgid "De&fault"
 msgstr "בררת מח&דל"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1761,7 +1767,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1769,7 +1775,7 @@ msgstr "מחיקת קבצים"
 msgid "Delete from device..."
 msgstr "מחיקה מתוך התקן..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "מחיקה מתוך דיסק..."
@@ -1786,7 +1792,7 @@ msgstr "מחיקת אפשרות מוגדרת מראש"
 msgid "Delete smart playlist"
 msgstr "מחיקת רשימת השמעה חכמה"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1802,11 +1808,11 @@ msgstr "הקבצים נמחקים"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1870
 msgid "Dequeue selected tracks"
 msgstr "הסרת הרצועות הנבחרות מהתור"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1868
 msgid "Dequeue track"
 msgstr "הסרת הרצועה מהתור"
 
@@ -1839,7 +1845,7 @@ msgstr "שם ההתקן"
 msgid "Device properties..."
 msgstr "מאפייני ההתקן..."
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:292
 msgid "Devices"
 msgstr "התקנים"
 
@@ -1907,7 +1913,7 @@ msgstr "תמסורת רציפה"
 msgid "Display options"
 msgstr "הגדרות תצוגה"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "הצגת חיווי מסך"
 
@@ -1985,6 +1991,10 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
+#: ../bin/src/ui_networkremotesettingspage.h:320
+msgid "Download Clementine Remote for Android"
+msgstr ""
+
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "הורדת תיקייה"
@@ -2006,16 +2016,8 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Download settings"
-msgstr ""
-
-#: ../bin/src/ui_networkremotesettingspage.h:422
-msgid "Download the original Android app"
-msgstr ""
-
-#: ../bin/src/ui_networkremotesettingspage.h:418
-msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:282
@@ -2084,7 +2086,7 @@ msgstr "מיקס דינמי אקראי"
 msgid "Edit smart playlist..."
 msgstr "עריכת רשימת השמעה חכמה..."
 
-#: ui/mainwindow.cpp:1907
+#: ui/mainwindow.cpp:1920
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2180,8 +2182,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "שם חדש לרשימת השמעה זו"
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:295
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2223,16 +2225,16 @@ msgstr ""
 msgid "Equalizer"
 msgstr "אקולייזר"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "זהה לאפשרות --log-levels *:1"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "שגיאה"
@@ -2511,11 +2513,11 @@ msgstr "שם הקובץ"
 msgid "Filename Preview"
 msgstr ""
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:282
 msgid "Files"
 msgstr "קבצים"
 
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:315
 msgid "Files root folder"
 msgstr ""
 
@@ -2916,11 +2918,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2945,7 +2947,7 @@ msgstr ""
 msgid "Insert..."
 msgstr "הוספה..."
 
-#: networkremote/outgoingdatacreator.cpp:530
+#: networkremote/outgoingdatacreator.cpp:535
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr ""
@@ -2954,7 +2956,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:288
 msgid "Internet"
 msgstr "אינטרנט"
 
@@ -3101,13 +3103,13 @@ msgstr ""
 msgid "Length"
 msgstr "אורך"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr ""
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "ספרייה"
@@ -3116,7 +3118,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2795
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3132,7 +3134,7 @@ msgstr ""
 msgid "Limits"
 msgstr "הגבלות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "Listen on"
 msgstr ""
 
@@ -3210,7 +3212,7 @@ msgstr "נטען מידע אודות השירים"
 msgid "Loading..."
 msgstr "בטעינה..."
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההשמעה הנוכחית"
 
@@ -3462,7 +3464,7 @@ msgstr "נקודות עגינה"
 msgid "Move down"
 msgstr "הזזה מטה"
 
-#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "העברה לספרייה..."
 
@@ -3471,7 +3473,7 @@ msgstr "העברה לספרייה..."
 msgid "Move up"
 msgstr "הזזה מעלה"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
 msgid "Music"
 msgstr ""
 
@@ -3479,7 +3481,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "ספריית המוזיקה"
 
-#: ../bin/src/ui_networkremotesettingspage.h:417
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3510,7 +3512,7 @@ msgstr "פס צר (NB)"
 msgid "Network Proxy"
 msgstr "מתווך רשת"
 
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:270
 msgid "Network Remote"
 msgstr ""
 
@@ -3537,7 +3539,7 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "רשימת השמעה חדשה"
 
@@ -3623,7 +3625,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3714,7 +3716,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:275
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3725,11 +3727,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:283
 msgid "Only allow connections from the local network"
 msgstr ""
 
-#: ui/networkremotesettingspage.cpp:235
+#: ui/networkremotesettingspage.cpp:208
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3816,7 +3818,7 @@ msgid "Optimize for quality"
 msgstr "מיטוב לאיכות"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:311
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "אפשרויות"
@@ -3829,7 +3831,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "ארגון קבצים"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
 msgid "Organise files..."
 msgstr "ארגון קבצים..."
 
@@ -3860,7 +3862,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "אפשרויות נוספות"
 
@@ -3914,12 +3916,12 @@ msgstr "מסיבה"
 msgid "Password"
 msgstr "ססמה"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
-#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "השהייה"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "השהיית הנגינה"
 
@@ -3950,9 +3952,9 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
-#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
-#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
+#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "נגינה"
@@ -3969,11 +3971,11 @@ msgstr ""
 msgid "Play count"
 msgstr "מונה השמעות"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "ניגון אם מושהה, השהייה אם מנגן"
 
@@ -3982,15 +3984,19 @@ msgstr "ניגון אם מושהה, השהייה אם מנגן"
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1866
+#: widgets/outputbutton.cpp:103
+msgid "Play on another device"
+msgstr ""
+
+#: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "נגן הרצועה ה־<n> מרשימת ההשמעה"
 
@@ -4002,9 +4008,14 @@ msgstr "ניגון/השהייה"
 msgid "Playback"
 msgstr "השמעה"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "אפשרויות נגן"
+
+#: widgets/outputbutton.cpp:104
+#, qt-format
+msgid "Playing on %1"
+msgstr ""
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4016,7 +4027,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "רשימת ההשמעה הסתיימה"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "אפשרויות רשימת ההשמעה"
@@ -4025,7 +4036,7 @@ msgstr "אפשרויות רשימת ההשמעה"
 msgid "Playlist type"
 msgstr "סוג רשימת ההשמעה"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:285
 msgid "Playlists"
 msgstr ""
 
@@ -4088,7 +4099,7 @@ msgid "Popup duration"
 msgstr "משך זמן חלונית קופצת"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:273
 msgid "Port"
 msgstr "פתחה"
 
@@ -4166,7 +4177,7 @@ msgstr "הקודם"
 msgid "Previous track"
 msgstr "רצועה קודמת"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Print out version information"
 
@@ -4207,7 +4218,7 @@ msgstr "הוספת שירים ברצף אקראי"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4234,12 +4245,12 @@ msgstr "התקן מתושאל..."
 msgid "Queue Manager"
 msgstr "מנהל התור"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1874
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1872
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
@@ -4458,7 +4469,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "איכלוס מחדש"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:287
 msgid "Require authentication code"
 msgstr ""
 
@@ -4474,7 +4485,7 @@ msgstr "איפוס מונה ההשמעות"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4515,7 +4526,7 @@ msgstr ""
 msgid "Rock"
 msgstr "רוק"
 
-#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4655,7 +4666,7 @@ msgstr ""
 msgid "Search"
 msgstr "חיפוש"
 
-#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4688,7 +4699,7 @@ msgstr ""
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:726
 msgid "Search for album"
 msgstr ""
 
@@ -4701,7 +4712,7 @@ msgstr "חיפוש אחר עטיפות אלבום..."
 msgid "Search for anything"
 msgstr ""
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:723
 msgid "Search for artist"
 msgstr ""
 
@@ -4747,11 +4758,11 @@ msgstr "דילוג אחורה"
 msgid "Seek forward"
 msgstr "דילוג קדימה"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום יחסי"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום מוחלט"
 
@@ -4822,7 +4833,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1906
+#: ui/mainwindow.cpp:1919
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
@@ -4832,7 +4843,7 @@ msgstr "הגדרת %1 בתור „%2“..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "הגדרת עצמת השמע ל־<value> אחוזים"
 
@@ -4845,7 +4856,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "הגדרת הערך לכל הרצועות הנבחרות..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:370
+#: ../bin/src/ui_networkremotesettingspage.h:272
 msgid "Settings"
 msgstr ""
 
@@ -4912,7 +4923,7 @@ msgstr "הצגת חיווי מסך נאה"
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
-#: ui/mainwindow.cpp:660
+#: ui/mainwindow.cpp:673
 msgid "Show all songs"
 msgstr "הצגת כל השירים"
 
@@ -4932,12 +4943,12 @@ msgstr "הצגת חוצצים"
 msgid "Show fullsize..."
 msgstr "הצגה על מסך מלא..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "הצגה בסייר הקבצים..."
 
-#: ui/mainwindow.cpp:744
+#: ui/mainwindow.cpp:757
 msgid "Show in library..."
 msgstr ""
 
@@ -4949,11 +4960,11 @@ msgstr "הצגה תחת אמנים שונים"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:662
+#: ui/mainwindow.cpp:675
 msgid "Show only duplicates"
 msgstr "הצגת כפילויות בלבד"
 
-#: ui/mainwindow.cpp:664
+#: ui/mainwindow.cpp:677
 msgid "Show only untagged"
 msgstr "הצגת לא מתוייגים בלבד"
 
@@ -5038,7 +5049,7 @@ msgstr ""
 msgid "Ska"
 msgstr "סקא"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "דילוג אחורה ברשימת ההשמעה"
 
@@ -5050,11 +5061,11 @@ msgstr "מונה דילוגים"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1890
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -5062,7 +5073,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1888
 msgid "Skip track"
 msgstr ""
 
@@ -5098,7 +5109,7 @@ msgstr "מידע על השיר"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:296
 msgid "Song info"
 msgstr "מידע על השיר"
 
@@ -5159,7 +5170,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "התחלת רשימת ההשמעה המתנגנת כעת"
 
@@ -5193,15 +5204,15 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "הפסקת הנגינה"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5322,6 +5333,20 @@ msgstr "תודתנו נתונה לבאים"
 msgid "The \"%1\" command could not be started."
 msgstr "לא ניתן להפעיל את הפקודה „%1“."
 
+#: chromecast/castmediaplayer.cpp:201
+#, qt-format
+msgid "The Cast device couldn't play the track (%1)"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:171
+#, qt-format
+msgid "The Cast device couldn't start playing: %1"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:289
+msgid "The Cast device stopped playing because of an error"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:337
 msgid "The album cover of the currently playing song"
 msgstr ""
@@ -5365,7 +5390,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2773
+#: ui/mainwindow.cpp:2786
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5411,7 +5436,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5443,7 +5468,7 @@ msgstr "אלבום זה לא זמין בפורמט המבוקש"
 msgid "This can be changed later through the preferences"
 msgstr ""
 
-#: networkremote/streaming/rendererregistry.cpp:168
+#: widgets/outputbutton.cpp:67
 msgid "This computer"
 msgstr ""
 
@@ -5507,7 +5532,7 @@ msgstr "החלפה ל/ממצב חיווי נאה"
 msgid "Toggle fullscreen"
 msgstr "הפעלה או כיבוי של מסך מלא"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1876
 msgid "Toggle queue status"
 msgstr "החלף מצב התור"
 
@@ -5515,7 +5540,7 @@ msgstr "החלף מצב התור"
 msgid "Toggle scrobbling"
 msgstr "החלפה לscrobbling"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 
@@ -5614,7 +5639,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5663,11 +5688,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1886
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1871
+#: ui/mainwindow.cpp:1884
 msgid "Unskip track"
 msgstr ""
 
@@ -5710,7 +5735,7 @@ msgstr "עדכון %1%..."
 msgid "Updating library"
 msgstr "הספרייה בעדכון"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "בשימוש"
 
@@ -5746,7 +5771,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "שימוש בהודעות מותאמות אישית להתרעות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:271
 msgid "Use a network remote control"
 msgstr ""
 
@@ -6007,7 +6032,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2780
+#: ui/mainwindow.cpp:2793
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
@@ -6079,14 +6104,6 @@ msgstr "מחובר"
 #: ../bin/src/ui_groupbydialog.h:166
 msgid "You can change the way the songs in the library are organised."
 msgstr "ניתן לשנות את הדרך שבה השירים מסודרים בספרייה שלך."
-
-#: ui/networkremotesettingspage.cpp:175
-#, qt-format
-msgid ""
-"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
-"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
-"<b>Windows</b><br/>"
-msgstr ""
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6207,7 +6224,7 @@ msgstr "הכי גדול קודם"
 msgid "bpm"
 msgstr "פעימות לדקה"
 
-#: ../bin/src/ui_networkremotesettingspage.h:415
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6216,10 +6233,6 @@ msgstr ""
 #: smartplaylists/searchterm.cpp:259
 msgid "contains"
 msgstr "מכיל"
-
-#: ../bin/src/ui_networkremotesettingspage.h:419
-msgid "desktop_remote"
-msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
@@ -6318,13 +6331,11 @@ msgstr "הישן ביותר ראשון"
 msgid "on"
 msgstr "ב־"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "אפשרויות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:420
-#: ../bin/src/ui_networkremotesettingspage.h:421
-#: ../bin/src/ui_networkremotesettingspage.h:423
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "or scan the QR code: "
 msgstr ""
 

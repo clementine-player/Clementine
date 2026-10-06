@@ -84,7 +84,7 @@ msgstr " sekund"
 msgid " songs"
 msgstr " písně"
 
-#: ui/networkremotesettingspage.cpp:213
+#: ui/networkremotesettingspage.cpp:186
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (nyní nedostupné)"
@@ -94,12 +94,13 @@ msgstr "%1 (nyní nedostupné)"
 msgid "%1 albums"
 msgstr "%1 alb"
 
-#: networkremote/streaming/remoteengine.cpp:250
+#: chromecast/chromecastengine.cpp:252
+#: networkremote/streaming/remoteengine.cpp:242
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 se nepodařilo přehrát tuto skladbu: %2"
 
-#: networkremote/streaming/remoteengine.cpp:457
+#: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
 msgstr "%1 se nepodařilo přehrát tuto skladbu"
@@ -119,6 +120,11 @@ msgstr "%1 dnů"
 #, qt-format
 msgid "%1 days ago"
 msgstr "před %1 dny"
+
+#: chromecast/chromecastengine.cpp:202
+#, qt-format
+msgid "%1 isn't on a network the network remote listens on"
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -417,7 +423,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Symboly začínají %, například: %artist %album %title </p>\n\n<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato část bude skryta, je-li symbol prázdný.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:285
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient se může připojit jen tehdy, když byl zadán správný kód."
 
@@ -542,7 +548,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2156
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -566,7 +572,7 @@ msgstr "Přidat soubory pro překódování"
 msgid "Add files..."
 msgstr "Přidat soubory..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -663,7 +669,7 @@ msgstr "Přidat značku rok písně"
 msgid "Add stream..."
 msgstr "Přidat proud..."
 
-#: ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1957
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -753,7 +759,7 @@ msgstr "Alba bez obalů"
 msgid "All"
 msgstr "Vše"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:158
 msgid "All Files (*)"
 msgstr "Všechny soubory (*)"
 
@@ -762,7 +768,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Všechnu slávu omamující kuňce!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:293
 msgid "All addresses"
 msgstr "Všechny adresy"
 
@@ -791,11 +797,11 @@ msgstr "Všichni překladatelé"
 msgid "All tracks"
 msgstr "Všechny skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:396
+#: ../bin/src/ui_networkremotesettingspage.h:298
 msgid "Allow a client to download music from this computer."
 msgstr "Povolit klientu stahování hudby z tohoto počítače."
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "Allow downloads"
 msgstr "Povolit stahování"
 
@@ -803,7 +809,7 @@ msgstr "Povolit stahování"
 msgid "Allow mid/side encoding"
 msgstr "Povolit kódování střed/kraj"
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:304
 msgid "Allow playing on remote devices"
 msgstr "Povolit přehrávání ve vzdálených zařízeních"
 
@@ -855,7 +861,7 @@ msgstr "Rozlobený"
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
@@ -897,7 +903,7 @@ msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech p
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:299
 msgid "Artist info"
 msgstr "Umělec"
 
@@ -910,7 +916,7 @@ msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:310
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Zvukový formát"
@@ -1148,7 +1154,7 @@ msgstr "Změnit režim míchání"
 msgid "Change the currently playing song"
 msgstr "Změnit nyní přehrávanou píseň"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Změnit jazyk"
 
@@ -1174,7 +1180,7 @@ msgstr "Podívat se po nových dílech"
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:843
+#: ui/mainwindow.cpp:856
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
@@ -1378,7 +1384,7 @@ msgstr "S&kladatel"
 msgid "Colors"
 msgstr "Barvy"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
@@ -1434,7 +1440,7 @@ msgstr "Nastavit Subsonic..."
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:676
+#: ui/mainwindow.cpp:689
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
@@ -1505,11 +1511,11 @@ msgstr "Převést všechnu hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Převést zvukové soubory v bezztrátovém formátu, před jejich odesláním do vzdáleného úložiště."
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Convert lossless files"
 msgstr "Převést soubory v bezztrátovém formátu"
 
@@ -1518,11 +1524,11 @@ msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1645,7 +1651,7 @@ msgstr "Obal nastaven z %1"
 msgid "Covers from %1"
 msgstr "Obaly od %1"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Vytvořit nový seznam skladeb pomocí souborů/adres"
 
@@ -1728,11 +1734,11 @@ msgstr "Dny"
 msgid "De&fault"
 msgstr "&Výchozí"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Snížit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Snížit hlasitost o <value> procent"
 
@@ -1767,7 +1773,7 @@ msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1775,7 +1781,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1792,7 +1798,7 @@ msgstr "Smazat přednastavení"
 msgid "Delete smart playlist"
 msgstr "Smazat chytrý seznam skladeb"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Smazat nyní přehrávanou píseň"
 
@@ -1808,11 +1814,11 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1870
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1868
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1845,7 +1851,7 @@ msgstr "Název zařízení"
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:292
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -1913,7 +1919,7 @@ msgstr "Nesouvislý přenos"
 msgid "Display options"
 msgstr "Volby zobrazení"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Zobrazovat informace na obrazovce (OSD)"
 
@@ -1991,6 +1997,10 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Stáhnout %n dílů"
 
+#: ../bin/src/ui_networkremotesettingspage.h:320
+msgid "Download Clementine Remote for Android"
+msgstr ""
+
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Stáhnout složku"
@@ -2012,17 +2022,9 @@ msgstr "Stáhnout nové díly automaticky"
 msgid "Download queued"
 msgstr "Stáhnout zařazené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Download settings"
 msgstr "Nastavení stahování"
-
-#: ../bin/src/ui_networkremotesettingspage.h:422
-msgid "Download the original Android app"
-msgstr "Stáhnout původní aplikaci pro Android"
-
-#: ../bin/src/ui_networkremotesettingspage.h:418
-msgid "Download the remote for Desktops, Android and iOS"
-msgstr "Stáhnout dálkové ovládání pro stolní počítač, Android a iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
@@ -2090,7 +2092,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1907
+#: ui/mainwindow.cpp:1920
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2186,8 +2188,8 @@ msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 msgid "Enter a new name for this playlist"
 msgstr "Zadejte název tohoto seznamu skladeb"
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:295
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Zadejte v aplikaci jednu z těchto adres pro připojení ke Clementine."
 
@@ -2229,16 +2231,16 @@ msgstr "Informace o dílu"
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Rovnocenné s --log-levels *:1"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Chyba"
@@ -2517,11 +2519,11 @@ msgstr "Název souboru"
 msgid "Filename Preview"
 msgstr "Náhled názvu souboru"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:282
 msgid "Files"
 msgstr "Soubory"
 
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:315
 msgid "Files root folder"
 msgstr "Základní složka pro soubory"
 
@@ -2922,11 +2924,11 @@ msgstr "Nevhodná verze protokolu Subsonic REST. Server se musí zaktualizovat."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Neúplné nastavení. Zajistěte, prosím, že jsou všechna pole vyplněna."
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Zvýšit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Zvýšit hlasitost o <value> procent"
 
@@ -2951,7 +2953,7 @@ msgstr "Vstupní volby"
 msgid "Insert..."
 msgstr "Vložit..."
 
-#: networkremote/outgoingdatacreator.cpp:530
+#: networkremote/outgoingdatacreator.cpp:535
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumentální hudba"
@@ -2960,7 +2962,7 @@ msgstr "Instrumentální hudba"
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:288
 msgid "Internet"
 msgstr "Internet"
 
@@ -3107,13 +3109,13 @@ msgstr "Vlevo"
 msgid "Length"
 msgstr "Délka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr "Nechte připojené zařízení jednat jako reproduktor: Clementine spravuje seznam skladeb a přenáší zvuk do něj."
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Sbírka"
@@ -3122,7 +3124,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2795
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3138,7 +3140,7 @@ msgstr "Světlý"
 msgid "Limits"
 msgstr "Omezení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "Listen on"
 msgstr "Poslechněte si dále"
 
@@ -3216,7 +3218,7 @@ msgstr "Nahrávají se informace o skladbě"
 msgid "Loading..."
 msgstr "Nahrává se..."
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Nahraje soubory/adresy (URL), nahradí nynější seznam skladeb"
 
@@ -3468,7 +3470,7 @@ msgstr "Přípojné body"
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3477,7 +3479,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
 msgid "Music"
 msgstr "Hudba"
 
@@ -3485,7 +3487,7 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudební sbírka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:417
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Music extensions remotely visible"
 msgstr "Vzdáleně viditelné hudební přípony"
 
@@ -3516,7 +3518,7 @@ msgstr "Úzké pásmo"
 msgid "Network Proxy"
 msgstr "Síťová proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:270
 msgid "Network Remote"
 msgstr "Síťové vzdálené ovládání"
 
@@ -3543,7 +3545,7 @@ msgstr "Nová alba"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3629,7 +3631,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3720,7 +3722,7 @@ msgstr "Zapnuto"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:275
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3731,11 +3733,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "Přijímat pouze připojení od klientů v následujících rozsazích IP adres:\n10.x.x.x\n172.16.0.0 – 172.31.255.255\n192.168.x.x\na z adres IPv6 typu link-local a soukromých.\n\nPři naslouchání na zvolené adrese v rozsahu 100.64.0.0/10, například na adrese Tailscale, se připojení z tohoto rozsahu rovněž považují za místní."
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:283
 msgid "Only allow connections from the local network"
 msgstr "Povolit spojení pouze z místní sítě"
 
-#: ui/networkremotesettingspage.cpp:235
+#: ui/networkremotesettingspage.cpp:208
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3822,7 +3824,7 @@ msgid "Optimize for quality"
 msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:311
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Volby..."
@@ -3835,7 +3837,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3866,7 +3868,7 @@ msgstr "Podpora pro značku Původní rok"
 msgid "Other"
 msgstr "Jiné"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Další volby"
 
@@ -3920,12 +3922,12 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
-#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Pozastavit přehrávání"
 
@@ -3956,9 +3958,9 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
-#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
-#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
+#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Přehrát"
@@ -3975,11 +3977,11 @@ msgstr "Přehrávejte píseň a podívejte se zde na obrázky zpěváka a jeho �
 msgid "Play count"
 msgstr "Počet přehrání"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Přehrát daný seznam skladeb"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 
@@ -3988,15 +3990,19 @@ msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
 msgid "Play next"
 msgstr "Přehrát další"
 
-#: ui/mainwindow.cpp:1866
+#: widgets/outputbutton.cpp:103
+msgid "Play on another device"
+msgstr ""
+
+#: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Přehrát <n>. skladbu v seznamu se skladbami"
 
@@ -4008,9 +4014,14 @@ msgstr "Přehrát/Pozastavit"
 msgid "Playback"
 msgstr "Přehrávání"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Nastavení přehrávače"
+
+#: widgets/outputbutton.cpp:104
+#, qt-format
+msgid "Playing on %1"
+msgstr ""
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4022,7 +4033,7 @@ msgstr "Seznam skladeb"
 msgid "Playlist finished"
 msgstr "Seznam skladeb dokončen"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Nastavení seznamu skladeb"
@@ -4031,7 +4042,7 @@ msgstr "Nastavení seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:285
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -4094,7 +4105,7 @@ msgid "Popup duration"
 msgstr "Doba zobrazení oznámení"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:273
 msgid "Port"
 msgstr "Port"
 
@@ -4172,7 +4183,7 @@ msgstr "Předchozí"
 msgid "Previous track"
 msgstr "Předchozí skladba"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Vypsat informaci o verzi"
 
@@ -4213,7 +4224,7 @@ msgstr "Seřadit skladby náhodně"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4240,12 +4251,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1874
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1872
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4464,7 +4475,7 @@ msgstr "Režim zesílení přehrávaných skladeb"
 msgid "Repopulate"
 msgstr "Znovu zaplnit"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:287
 msgid "Require authentication code"
 msgstr "Vyžadovat ověřovací kód"
 
@@ -4480,7 +4491,7 @@ msgstr "Vynulovat počty přehrání"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Spustit píseň znovu, potom, v případě že je tlačítko opět stisknuto, skočit na předchozí"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Spustit znovu přehrávání skladby, nebo přehrávat předchozí skladbu, jestliže ještě neuběhlo osm sekund od začátku skladby."
@@ -4521,7 +4532,7 @@ msgstr "Vytáhnout skladby ze zvukového CD"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Základní složka, kterou lze procházet ze síťového dálkového ovladače"
 
@@ -4661,7 +4672,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledat"
 
-#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
@@ -4694,7 +4705,7 @@ msgstr "Hledat v Subsonic"
 msgid "Search automatically"
 msgstr "Hledat automaticky"
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:726
 msgid "Search for album"
 msgstr "Hledat album"
 
@@ -4707,7 +4718,7 @@ msgstr "Hledat obaly alb..."
 msgid "Search for anything"
 msgstr "Hledat vše"
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:723
 msgid "Search for artist"
 msgstr "Hledat umělce"
 
@@ -4753,11 +4764,11 @@ msgstr "Přetočit zpět"
 msgid "Seek forward"
 msgstr "Přetočit vpřed"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Přetočit v nyní přehrávané skladbě"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 
@@ -4828,7 +4839,7 @@ msgstr "Adresa serveru (URL)"
 msgid "Server details"
 msgstr "Podrobnosti o serveru"
 
-#: ui/mainwindow.cpp:1906
+#: ui/mainwindow.cpp:1919
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4838,7 +4849,7 @@ msgstr "Nastavit %1 na \"%2\"..."
 msgid "Set target rate"
 msgstr "Nastavit cílový tok"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Nastavit hlasitost na <value> procent"
 
@@ -4851,7 +4862,7 @@ msgstr "Nastavit %1 v nastavení Clementine v počítači"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavit hodnotu pro vybrané skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:370
+#: ../bin/src/ui_networkremotesettingspage.h:272
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -4918,7 +4929,7 @@ msgstr "Ukázat hezké OSD"
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:660
+#: ui/mainwindow.cpp:673
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4938,12 +4949,12 @@ msgstr "Ukazovat oddělovače"
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:744
+#: ui/mainwindow.cpp:757
 msgid "Show in library..."
 msgstr "Ukázat ve sbírce..."
 
@@ -4955,11 +4966,11 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Zobrazit ukazatel nálady"
 
-#: ui/mainwindow.cpp:662
+#: ui/mainwindow.cpp:675
 msgid "Show only duplicates"
 msgstr "Ukázat pouze opakovaně zařazené"
 
-#: ui/mainwindow.cpp:664
+#: ui/mainwindow.cpp:677
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
@@ -5044,7 +5055,7 @@ msgstr "Velikost:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Předchozí skladba v seznamu skladeb"
 
@@ -5056,11 +5067,11 @@ msgstr "Počet přeskočení"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Přeskočit soubory s těmito příponami (odděleny čárkou, rozlišuje se velikost písmen)"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1890
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
@@ -5068,7 +5079,7 @@ msgstr "Přeskočit vybrané skladby"
 msgid "Skip to the next album"
 msgstr "Skočit na další album"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1888
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -5104,7 +5115,7 @@ msgstr "Informace o písni"
 msgid "Song Metadata"
 msgstr "Popis písně"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:296
 msgid "Song info"
 msgstr "Píseň"
 
@@ -5165,7 +5176,7 @@ msgstr "Alba s hvězdičkami"
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Přehrát nynější skladbu v seznamu skladeb"
 
@@ -5199,15 +5210,15 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after every track"
 msgstr "Zastavit po každé skladbě"
 
-#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Zastavit přehrávání"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Zastavit přehrávání po nynější skladbě"
 
@@ -5328,6 +5339,20 @@ msgstr "Poděkování"
 msgid "The \"%1\" command could not be started."
 msgstr "Příkaz \"%1\" se nepodařilo provést."
 
+#: chromecast/castmediaplayer.cpp:201
+#, qt-format
+msgid "The Cast device couldn't play the track (%1)"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:171
+#, qt-format
+msgid "The Cast device couldn't start playing: %1"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:289
+msgid "The Cast device stopped playing because of an error"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:337
 msgid "The album cover of the currently playing song"
 msgstr "Obal alba nyní přehrávané písně"
@@ -5371,7 +5396,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2773
+#: ui/mainwindow.cpp:2786
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5417,7 +5442,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5449,9 +5474,9 @@ msgstr "Album není v požadovaném formátu dostupné"
 msgid "This can be changed later through the preferences"
 msgstr "Toto lze změnit později v nastavení"
 
-#: networkremote/streaming/rendererregistry.cpp:168
+#: widgets/outputbutton.cpp:67
 msgid "This computer"
-msgstr "Tento počítač"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5513,7 +5538,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1876
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5521,7 +5546,7 @@ msgstr "Přepnout stav řady"
 msgid "Toggle scrobbling"
 msgstr "Přepnout odesílání informací o přehrávání"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
@@ -5620,7 +5645,7 @@ msgstr "Adresa (URL)"
 msgid "URL of its Logo:"
 msgstr "Adresa (URL) jeho značky:"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Adresa (URL)"
 
@@ -5669,11 +5694,11 @@ msgstr "Neznámý typ souboru: %1"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1886
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1871
+#: ui/mainwindow.cpp:1884
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5716,7 +5741,7 @@ msgstr "Obnovuje se %1%..."
 msgid "Updating library"
 msgstr "Obnovuje se hudební sbírka"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Zacházení"
 
@@ -5752,7 +5777,7 @@ msgstr "Použít vlastní sadu barev"
 msgid "Use a custom message for notifications"
 msgstr "Použít vlastní zprávu pro oznámení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:271
 msgid "Use a network remote control"
 msgstr "Použít síťové vzdálené ovládání"
 
@@ -6013,7 +6038,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2780
+#: ui/mainwindow.cpp:2793
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -6085,14 +6110,6 @@ msgstr "Jste přihlášen."
 #: ../bin/src/ui_groupbydialog.h:166
 msgid "You can change the way the songs in the library are organised."
 msgstr "Můžete změnit způsob uspořádání písní v hudební sbírce."
-
-#: ui/networkremotesettingspage.cpp:175
-#, qt-format
-msgid ""
-"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
-"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
-"<b>Windows</b><br/>"
-msgstr " <a href=\"%1\">Zde na GitHubu</a> naleznete nové vzdálené ovládání pro operační systémy.<br/>Je dostupné na <b>Linuxu</b>, <b>MacOS</b> a <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6213,7 +6230,7 @@ msgstr "nejprve největší"
 msgid "bpm"
 msgstr "úzm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:415
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6222,10 +6239,6 @@ msgstr "seznam čárkou oddělených povolených přípon, které budou viditeln
 #: smartplaylists/searchterm.cpp:259
 msgid "contains"
 msgstr "obsahuje"
-
-#: ../bin/src/ui_networkremotesettingspage.h:419
-msgid "desktop_remote"
-msgstr "desktop_vzdálené_ovládání"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
@@ -6324,13 +6337,11 @@ msgstr "nejprve nejstarší"
 msgid "on"
 msgstr "Na"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "volby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:420
-#: ../bin/src/ui_networkremotesettingspage.h:421
-#: ../bin/src/ui_networkremotesettingspage.h:423
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "or scan the QR code: "
 msgstr "nebo sejměte QR kód:"
 

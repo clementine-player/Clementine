@@ -76,7 +76,7 @@ msgstr " sekuntia"
 msgid " songs"
 msgstr " kappaletta"
 
-#: ui/networkremotesettingspage.cpp:213
+#: ui/networkremotesettingspage.cpp:186
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (ei nyt saatavilla)"
@@ -86,12 +86,13 @@ msgstr "%1 (ei nyt saatavilla)"
 msgid "%1 albums"
 msgstr "%1 äänilevyä"
 
-#: networkremote/streaming/remoteengine.cpp:250
+#: chromecast/chromecastengine.cpp:252
+#: networkremote/streaming/remoteengine.cpp:242
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 ei voi soittaa tätä kappaletta: %2"
 
-#: networkremote/streaming/remoteengine.cpp:457
+#: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
 msgstr "%1 ei voi soittaa kappaletta"
@@ -111,6 +112,11 @@ msgstr "%1 päivää"
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 päivää sitten"
+
+#: chromecast/chromecastengine.cpp:202
+#, qt-format
+msgid "%1 isn't on a network the network remote listens on"
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -409,7 +415,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Tietueet alkavat % merkillä, esim: %artist %album %title </p>\n\n<p>Jos ympäröit sisältävän tekstin sulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:285
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ohjelma yhdistää vain oikealla koodilla."
 
@@ -534,7 +540,7 @@ msgstr "Lisää toinen suoratoisto..."
 msgid "Add directory..."
 msgstr "Lisää kansio..."
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2156
 msgid "Add file"
 msgstr "Lisää tiedosto"
 
@@ -558,7 +564,7 @@ msgstr "Lisää tiedostoja muunnettavaksi"
 msgid "Add files..."
 msgstr "Lisää tiedostoja..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Lisää kansio"
@@ -655,7 +661,7 @@ msgstr "Lisää kappaleen vuositunniste"
 msgid "Add stream..."
 msgstr "Lisää suoratoisto..."
 
-#: ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1957
 msgid "Add to another playlist"
 msgstr "Lisää toiseen soittolistaan"
 
@@ -745,7 +751,7 @@ msgstr "Levyt ilman kansikuvia"
 msgid "All"
 msgstr "Kaikki"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:158
 msgid "All Files (*)"
 msgstr "Kaikki tiedostot (*)"
 
@@ -754,7 +760,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Kaikki kunnia Hypnotoadille!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:293
 msgid "All addresses"
 msgstr "Kaikki osoitteet"
 
@@ -783,11 +789,11 @@ msgstr "Kaikki kääntäjät"
 msgid "All tracks"
 msgstr "Kaikki kappaleet"
 
-#: ../bin/src/ui_networkremotesettingspage.h:396
+#: ../bin/src/ui_networkremotesettingspage.h:298
 msgid "Allow a client to download music from this computer."
 msgstr "Salli ohjelman ladata musiikkia tältä tietokoneelta."
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "Allow downloads"
 msgstr "Salli lataukset"
 
@@ -795,7 +801,7 @@ msgstr "Salli lataukset"
 msgid "Allow mid/side encoding"
 msgstr "Salli puolivälissä koodaus"
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:304
 msgid "Allow playing on remote devices"
 msgstr "Salli soiton ohjaaminen toiselta laitteelta"
 
@@ -847,7 +853,7 @@ msgstr "Vihainen"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Lisää tiedostoja/verkko-osoitteita soittolistalle"
 
@@ -889,7 +895,7 @@ msgstr "Haluatko kirjoittaa kaikki kappaletilastot suoraan kirjastosi tiedostoih
 msgid "Artist"
 msgstr "Esittäjä"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:299
 msgid "Artist info"
 msgstr "Artisti"
 
@@ -902,7 +908,7 @@ msgid "As&k when saving"
 msgstr "Kys&y kun tallennetaan"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:310
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Audiomuoto"
@@ -1140,7 +1146,7 @@ msgstr "Vaihda sekoituksen tilaa"
 msgid "Change the currently playing song"
 msgstr "Vaihda soitettavaa kappaletta"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Vaihda kieltä"
 
@@ -1166,7 +1172,7 @@ msgstr "Tarkista uudet jaksot"
 msgid "Check for updates"
 msgstr "Tarkista päivitykset"
 
-#: ui/mainwindow.cpp:843
+#: ui/mainwindow.cpp:856
 msgid "Check for updates..."
 msgstr "Tarkistaa päivitykset..."
 
@@ -1370,7 +1376,7 @@ msgstr "S&äveltäjä"
 msgid "Colors"
 msgstr "Värit"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Pilkuin erotettu lista luokka:taso -määritteitä, jossa taso on väliltä 0-3"
 
@@ -1426,7 +1432,7 @@ msgstr "Subsonic asetukset..."
 msgid "Configure global search..."
 msgstr "Hakuasetukset..."
 
-#: ui/mainwindow.cpp:676
+#: ui/mainwindow.cpp:689
 msgid "Configure library..."
 msgstr "Kirjaston asetukset..."
 
@@ -1497,11 +1503,11 @@ msgstr "Muunna kaikki"
 msgid "Convert any music that the device can't play"
 msgstr "Muunna musiikit joita laite ei pysty toistamaan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Muunna häviöttömät äänitiedostot ennen niiden lähettämistä."
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Convert lossless files"
 msgstr "Muunna häviöttömät tiedostot"
 
@@ -1510,11 +1516,11 @@ msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Kopioi kirjastoon..."
@@ -1637,7 +1643,7 @@ msgstr "Kansikuva asetettu kohteesta %1"
 msgid "Covers from %1"
 msgstr "Kansikuvat kohteesta %1"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Luo uusi soittolista tiedosto tai verkko-osoite"
 
@@ -1720,11 +1726,11 @@ msgstr "Päivää"
 msgid "De&fault"
 msgstr "&Oletus"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähennä voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähennä voimakkuutta <value> prosentilla"
 
@@ -1759,7 +1765,7 @@ msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Poista tiedostot"
 
@@ -1767,7 +1773,7 @@ msgstr "Poista tiedostot"
 msgid "Delete from device..."
 msgstr "Poista laitteelta..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Poista levyltä..."
@@ -1784,7 +1790,7 @@ msgstr "Poista asetus"
 msgid "Delete smart playlist"
 msgstr "Poista älykäs soittolista"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Poista nyt soiva kappale"
 
@@ -1800,11 +1806,11 @@ msgstr "Poistetaan tiedostoja"
 msgid "Depth"
 msgstr "Tilaäänen syvyys"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1870
 msgid "Dequeue selected tracks"
 msgstr "Poista valitut kappaleet jonosta"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1868
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
@@ -1837,7 +1843,7 @@ msgstr "Laitteen nimi"
 msgid "Device properties..."
 msgstr "Laitteen lisäasetukset..."
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:292
 msgid "Devices"
 msgstr "Laitteet"
 
@@ -1905,7 +1911,7 @@ msgstr "Tiedonsiirron säännöstely"
 msgid "Display options"
 msgstr "Näkymän asetukset"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Näytä ilmoituslaatikko"
 
@@ -1983,6 +1989,10 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Lataa %n jaksoa"
 
+#: ../bin/src/ui_networkremotesettingspage.h:320
+msgid "Download Clementine Remote for Android"
+msgstr ""
+
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Latauskansio"
@@ -2004,17 +2014,9 @@ msgstr "Lataa uudet jaksot automaattisesti"
 msgid "Download queued"
 msgstr "Lataus jonossa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Download settings"
 msgstr "Lataamisen asetukset"
-
-#: ../bin/src/ui_networkremotesettingspage.h:422
-msgid "Download the original Android app"
-msgstr "Lataa alkuperäinen Android-sovellus"
-
-#: ../bin/src/ui_networkremotesettingspage.h:418
-msgid "Download the remote for Desktops, Android and iOS"
-msgstr "Lataa kauko-ojaus PC, Android ja iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
@@ -2082,7 +2084,7 @@ msgstr "Lennosta sekoitus"
 msgid "Edit smart playlist..."
 msgstr "Muokkaa älykästä soittolistaa..."
 
-#: ui/mainwindow.cpp:1907
+#: ui/mainwindow.cpp:1920
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muokkaa tunnistetta \"%1\"..."
@@ -2178,8 +2180,8 @@ msgstr "Anna tiedostonimi kansille (ei tiedostopäätettä):"
 msgid "Enter a new name for this playlist"
 msgstr "Anna uusi nimi tälle soittolistalle"
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:295
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Anna sovellukseen jokin näistä osoitteista ja muodosta yhteys Clementineen."
 
@@ -2221,16 +2223,16 @@ msgstr "Jakson tiedot"
 msgid "Equalizer"
 msgstr "Taajuuskorjain"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Vastaa --log-levels *:1"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Vastaa --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Virhe"
@@ -2509,11 +2511,11 @@ msgstr "Tiedostonimi"
 msgid "Filename Preview"
 msgstr "Tiedostonimen esikatselu"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:282
 msgid "Files"
 msgstr "Tiedostot"
 
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:315
 msgid "Files root folder"
 msgstr "Tiedostojen root-kansio"
 
@@ -2914,11 +2916,11 @@ msgstr "Ei yhteensopiva Subsonic REST-protokollaversio. Palvelin on päivitettä
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Puutteelliset asetukset, varmista että kaikki kentät on täytetty."
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Lisää voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Lisää voimakkuutta <value> prosentilla"
 
@@ -2943,7 +2945,7 @@ msgstr "Sisääntulon valinnat"
 msgid "Insert..."
 msgstr "Lisää..."
 
-#: networkremote/outgoingdatacreator.cpp:530
+#: networkremote/outgoingdatacreator.cpp:535
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumental"
@@ -2952,7 +2954,7 @@ msgstr "Instrumental"
 msgid "Integrity check"
 msgstr "Eheystarkistus"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:288
 msgid "Internet"
 msgstr "Internet"
 
@@ -3099,13 +3101,13 @@ msgstr "Vasen"
 msgid "Length"
 msgstr "Kesto"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr "Anna yhdistetyn laitteen toimia kaiuttimena: Clementine hallitsee soittolistaa ja siirtää äänen laitteeseen."
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Kirjasto"
@@ -3114,7 +3116,7 @@ msgstr "Kirjasto"
 msgid "Library advanced grouping"
 msgstr "Kirjaston tarkennettu ryhmittely"
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2795
 msgid "Library rescan notice"
 msgstr "Ilmoitus kirjaston läpikäynnistä"
 
@@ -3130,7 +3132,7 @@ msgstr "Vaalea"
 msgid "Limits"
 msgstr "Rajat"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "Listen on"
 msgstr "Kuunnellaan"
 
@@ -3208,7 +3210,7 @@ msgstr "Kappaletietoja ladataan"
 msgid "Loading..."
 msgstr "Ladataan..."
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Lataa tiedostoja tai osoitteita, korvaten samalla nykyisen soittolistan"
 
@@ -3460,7 +3462,7 @@ msgstr "Liitoskohdat"
 msgid "Move down"
 msgstr "Siirrä alas"
 
-#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Siirrä kirjastoon..."
 
@@ -3469,7 +3471,7 @@ msgstr "Siirrä kirjastoon..."
 msgid "Move up"
 msgstr "Siirrä ylös"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
 msgid "Music"
 msgstr "Musiikki"
 
@@ -3477,7 +3479,7 @@ msgstr "Musiikki"
 msgid "Music Library"
 msgstr "Musiikkikirjasto"
 
-#: ../bin/src/ui_networkremotesettingspage.h:417
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Music extensions remotely visible"
 msgstr "Etänä näkyvät musiikkilaajennukset"
 
@@ -3508,7 +3510,7 @@ msgstr "Narrow band (NB)"
 msgid "Network Proxy"
 msgstr "Välityspalvelin"
 
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:270
 msgid "Network Remote"
 msgstr "Kauko-ohjaus"
 
@@ -3535,7 +3537,7 @@ msgstr "Uusia levyjä"
 msgid "New folder"
 msgstr "Uusi kansio"
 
-#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Uusi soittolista"
 
@@ -3621,7 +3623,7 @@ msgstr "Ei lyhyitä lohkoja"
 msgid "None"
 msgstr "Ei mitään"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Yksikään valitusta ei sovellu kopioitavaksi laitteelle"
 
@@ -3712,7 +3714,7 @@ msgstr "Päällä"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:275
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3723,11 +3725,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:283
 msgid "Only allow connections from the local network"
 msgstr "Salli yhteydet vain paikallisessa lähiverkossa"
 
-#: ui/networkremotesettingspage.cpp:235
+#: ui/networkremotesettingspage.cpp:208
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3814,7 +3816,7 @@ msgid "Optimize for quality"
 msgstr "Optimoi laatuun"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:311
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Valinnat..."
@@ -3827,7 +3829,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Hallitse tiedostoja"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
 msgid "Organise files..."
 msgstr "Hallitse tiedostoja..."
 
@@ -3858,7 +3860,7 @@ msgstr "Julkaisuvuoden tunnistetuki"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Muut valinnat"
 
@@ -3912,12 +3914,12 @@ msgstr "Party"
 msgid "Password"
 msgstr "Salasana"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
-#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Keskeytä soitto"
 
@@ -3948,9 +3950,9 @@ msgstr "Pikseliä"
 msgid "Plain sidebar"
 msgstr "Pelkistetty sivupalkki"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
-#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
-#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
+#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Soita"
@@ -3967,11 +3969,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Soittolaskuri"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Soita annettu soittolista"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Soita jos pysäytetty, pysäytä jos soi"
 
@@ -3980,15 +3982,19 @@ msgstr "Soita jos pysäytetty, pysäytä jos soi"
 msgid "Play if there is nothing already playing"
 msgstr "Aloita soittaminen, jos mitään ei soi parhaillaan"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
 msgid "Play next"
 msgstr "Soita seuraava"
 
-#: ui/mainwindow.cpp:1866
+#: widgets/outputbutton.cpp:103
+msgid "Play on another device"
+msgstr ""
+
+#: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr "Soita seuraavaksi valitut kappaleet"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Soita soittolistan <n>. kappale"
 
@@ -4000,9 +4006,14 @@ msgstr "Soita/Keskeytä"
 msgid "Playback"
 msgstr "Toisto"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Soittimen asetukset"
+
+#: widgets/outputbutton.cpp:104
+#, qt-format
+msgid "Playing on %1"
+msgstr ""
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4014,7 +4025,7 @@ msgstr "Soittolista"
 msgid "Playlist finished"
 msgstr "Soittolista soitettiin loppuun"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Soittolistan valinnat"
@@ -4023,7 +4034,7 @@ msgstr "Soittolistan valinnat"
 msgid "Playlist type"
 msgstr "Soittolistan tyyppi"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:285
 msgid "Playlists"
 msgstr "Soittolistat"
 
@@ -4086,7 +4097,7 @@ msgid "Popup duration"
 msgstr "Ponnahdusikkunan kesto"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:273
 msgid "Port"
 msgstr "Portti"
 
@@ -4164,7 +4175,7 @@ msgstr "Edellinen"
 msgid "Previous track"
 msgstr "Edellinen"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Tulosta versiotiedot"
 
@@ -4205,7 +4216,7 @@ msgstr "Laita kappaleet satunnaiseen järjestykseen"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4232,12 +4243,12 @@ msgstr "Kysytään tietoja laitteelta..."
 msgid "Queue Manager"
 msgstr "Soittojono"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1874
 msgid "Queue selected tracks"
 msgstr "Aseta valitut jonoon"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1872
 msgid "Queue track"
 msgstr "Aseta kappale jonoon"
 
@@ -4456,7 +4467,7 @@ msgstr "Toistovoimakkuuden tasaus-moodi"
 msgid "Repopulate"
 msgstr "Täytä uudelleen"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:287
 msgid "Require authentication code"
 msgstr "Vaadi todennuskoodin"
 
@@ -4472,7 +4483,7 @@ msgstr "Nollaa soittolaskuri"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Soita kappale uudelleen, siirtyy edelliseen jos painat uudestaan"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Soita kappale uudelleen tai soita edellinen, jos se on alle 8 s alusta."
@@ -4513,7 +4524,7 @@ msgstr "Kopioi ääni-CD:n sisältö"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Root-kansio, jota voidaan selata ja ohjata etänä verkosta käsin"
 
@@ -4653,7 +4664,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Haku"
 
-#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Haku"
@@ -4686,7 +4697,7 @@ msgstr "Subsonic haku"
 msgid "Search automatically"
 msgstr "Hae automaattisesti"
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:726
 msgid "Search for album"
 msgstr "Hae äänilevyä"
 
@@ -4699,7 +4710,7 @@ msgstr "Hae kansikuvia..."
 msgid "Search for anything"
 msgstr "Etsi mitä tahansa"
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:723
 msgid "Search for artist"
 msgstr "Hae esittäjää"
 
@@ -4745,11 +4756,11 @@ msgstr "Kelaa taakse"
 msgid "Seek forward"
 msgstr "Kelaa eteen"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Pikakelaus eteen- tai taaksepäin"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pikakelaus eteen- tai taaksepäin tiettyyn kohtaan"
 
@@ -4820,7 +4831,7 @@ msgstr "Palvelimen osoite"
 msgid "Server details"
 msgstr "Palvelimen tiedot"
 
-#: ui/mainwindow.cpp:1906
+#: ui/mainwindow.cpp:1919
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Aseta %1 - %2"
@@ -4830,7 +4841,7 @@ msgstr "Aseta %1 - %2"
 msgid "Set target rate"
 msgstr "Aseta tavoitetaajuus"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Säädä voimakkuudeksi <value> prosenttia"
 
@@ -4843,7 +4854,7 @@ msgstr "Määritä %1 Clementine asetukset tietokoneella"
 msgid "Set value for all selected tracks..."
 msgstr "Aseta arvo kaikille valituille kappaleille..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:370
+#: ../bin/src/ui_networkremotesettingspage.h:272
 msgid "Settings"
 msgstr "Asetukset"
 
@@ -4910,7 +4921,7 @@ msgstr "Näytä tyylikäs Ilmoituslaatikko"
 msgid "Show above status bar"
 msgstr "Näytä tilapalkin yläpuolella"
 
-#: ui/mainwindow.cpp:660
+#: ui/mainwindow.cpp:673
 msgid "Show all songs"
 msgstr "Näytä kaikki kappaleet"
 
@@ -4930,12 +4941,12 @@ msgstr "Näytä erottimet"
 msgid "Show fullsize..."
 msgstr "Näytä oikeassa koossa..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Näytä tiedostoselaimessa..."
 
-#: ui/mainwindow.cpp:744
+#: ui/mainwindow.cpp:757
 msgid "Show in library..."
 msgstr "Näytä kirjastossa..."
 
@@ -4947,11 +4958,11 @@ msgstr "Näytä kohdassa \"Useita esittäjiä\""
 msgid "Show moodbar"
 msgstr "Näytä mielialapalkki"
 
-#: ui/mainwindow.cpp:662
+#: ui/mainwindow.cpp:675
 msgid "Show only duplicates"
 msgstr "Näytä kaksoiskappaleet"
 
-#: ui/mainwindow.cpp:664
+#: ui/mainwindow.cpp:677
 msgid "Show only untagged"
 msgstr "Näytä ilman tunnistetta olevat"
 
@@ -5036,7 +5047,7 @@ msgstr "Koko:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Siirry soittolistan edelliseen"
 
@@ -5048,11 +5059,11 @@ msgstr "Ohituskerrat"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Ohita tiedostot, joilla on nämä tiedostopäätteet (pilkuilla erotettuna, kirjainkoosta riippumatta)"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Siirry soittolistan seuraavaan"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1890
 msgid "Skip selected tracks"
 msgstr "Ohita valitut kappaleet"
 
@@ -5060,7 +5071,7 @@ msgstr "Ohita valitut kappaleet"
 msgid "Skip to the next album"
 msgstr "Siirry seuraavaan levyyn"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1888
 msgid "Skip track"
 msgstr "Ohita kappale"
 
@@ -5096,7 +5107,7 @@ msgstr "Kappaleen tiedot"
 msgid "Song Metadata"
 msgstr "Kappaleen metatiedot"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:296
 msgid "Song info"
 msgstr "Kappaleen tiedot"
 
@@ -5157,7 +5168,7 @@ msgstr "Tähdelliset levyt"
 msgid "Start ripping"
 msgstr "Aloita kopiointi"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Aloita soittolista alusta"
 
@@ -5191,15 +5202,15 @@ msgstr "Pysäytä jokaisen kappaleen jälkeen"
 msgid "Stop after every track"
 msgstr "Pysäytä jokaisen kappaleen jälkeen"
 
-#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Lopeta kappaleen jälkeen"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Lopeta toisto"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Lopeta toisto kappaleen jälkeen"
 
@@ -5320,6 +5331,20 @@ msgstr "Kiitokset"
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\"-komentoa ei voitu suorittaa."
 
+#: chromecast/castmediaplayer.cpp:201
+#, qt-format
+msgid "The Cast device couldn't play the track (%1)"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:171
+#, qt-format
+msgid "The Cast device couldn't start playing: %1"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:289
+msgid "The Cast device stopped playing because of an error"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:337
 msgid "The album cover of the currently playing song"
 msgstr "Soivan kappaleen kansikuva"
@@ -5363,7 +5388,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic-palvelimen kokeilujakso on päättynyt. Tee lahjoitus saadaksesi lisenssiavaimen. Lisätietoja subsonic.org sivustolla."
 
-#: ui/mainwindow.cpp:2773
+#: ui/mainwindow.cpp:2786
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5409,7 +5434,7 @@ msgid ""
 "continue?"
 msgstr "Nämä tiedostot poistetaan laitteelta, haluatko varmasti jatkaa?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5441,9 +5466,9 @@ msgstr "Äänilevy ei ole saatavilla halutussa muodossa"
 msgid "This can be changed later through the preferences"
 msgstr "Tämän voi muuttaa myöhemmin asetuksissa"
 
-#: networkremote/streaming/rendererregistry.cpp:168
+#: widgets/outputbutton.cpp:67
 msgid "This computer"
-msgstr "Tämä tietokone"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5505,7 +5530,7 @@ msgstr "Vaihda tyylikäs Ilmoituslaatikko päälle tai pois"
 msgid "Toggle fullscreen"
 msgstr "Vaihda kokonäyttöön"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1876
 msgid "Toggle queue status"
 msgstr "Vaihda jonon tila"
 
@@ -5513,7 +5538,7 @@ msgstr "Vaihda jonon tila"
 msgid "Toggle scrobbling"
 msgstr "Vaihda scrobbling lähetystä"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Vaihda tyylikäs ilmoituslaatikko päälle tai pois"
 
@@ -5612,7 +5637,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "Logon osoite:"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Osoitteet"
 
@@ -5661,11 +5686,11 @@ msgstr "Tuntematon tiedostotyyppi: %1"
 msgid "Unset cover"
 msgstr "Poista kansi"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1886
 msgid "Unskip selected tracks"
 msgstr "Peru valittujen ohittaminen"
 
-#: ui/mainwindow.cpp:1871
+#: ui/mainwindow.cpp:1884
 msgid "Unskip track"
 msgstr "Peru ohittaminen"
 
@@ -5708,7 +5733,7 @@ msgstr "Päivitetään %1 %..."
 msgid "Updating library"
 msgstr "Päivitetään kirjastoa"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Käyttö"
 
@@ -5744,7 +5769,7 @@ msgstr "Käytä omaa väripalettia"
 msgid "Use a custom message for notifications"
 msgstr "Käytä omaa viestiä ilmoituksissa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:271
 msgid "Use a network remote control"
 msgstr "Käytä kauko-ohjausta verkon kautta"
 
@@ -6005,7 +6030,7 @@ msgid ""
 "well?"
 msgstr "Haluatko siirtää levyn muut kappaleet luokkaan \"Useita esittäjiä\"?"
 
-#: ui/mainwindow.cpp:2780
+#: ui/mainwindow.cpp:2793
 msgid "Would you like to run a full rescan right now?"
 msgstr "Haluatko suorittaa heti kirjaston läpikäynnin?"
 
@@ -6077,14 +6102,6 @@ msgstr "Olet kirjautunut sisään."
 #: ../bin/src/ui_groupbydialog.h:166
 msgid "You can change the way the songs in the library are organised."
 msgstr "Voit vaihtaa tapaa, miten kappaleet järjestetään kirjastossa."
-
-#: ui/networkremotesettingspage.cpp:175
-#, qt-format
-msgid ""
-"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
-"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
-"<b>Windows</b><br/>"
-msgstr "Löydät <a href=\"%1\">GitHub</a> -sivustolta kauko-ohjaimen.<br/>Se on saatavilla <b>Linux</b>, <b>MacOS</b> ja <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6205,7 +6222,7 @@ msgstr "suurin ensin"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:415
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6214,10 +6231,6 @@ msgstr "pilkuin erotettu luettelo sallituista tiedostopäätteistä, jotka näky
 #: smartplaylists/searchterm.cpp:259
 msgid "contains"
 msgstr "sisältää"
-
-#: ../bin/src/ui_networkremotesettingspage.h:419
-msgid "desktop_remote"
-msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
@@ -6316,13 +6329,11 @@ msgstr "vanhin ensin"
 msgid "on"
 msgstr "päällä"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "valinnat"
 
-#: ../bin/src/ui_networkremotesettingspage.h:420
-#: ../bin/src/ui_networkremotesettingspage.h:421
-#: ../bin/src/ui_networkremotesettingspage.h:423
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "or scan the QR code: "
 msgstr "tai lue QR-koodi:"
 

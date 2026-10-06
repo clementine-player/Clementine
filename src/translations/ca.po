@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Adolfo Jayme Barrientos, 2014-2015
-# Adolfo Jayme Barrientos, 2012-2013,2018
+# Adolfo Jayme Barrientos, 2012-2013,2018,2026
 # Adolfo Jayme Barrientos, 2016,2018-2021
 # Adolfo Jayme Barrientos, 2015-2016
 # Adolfo Jayme Barrientos, 2013
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Juanjo, 2016-2023,2026\n"
+"Last-Translator: Adolfo Jayme Barrientos, 2012-2013,2018,2026\n"
 "Language-Team: Catalan (http://app.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +79,7 @@ msgstr " segons"
 msgid " songs"
 msgstr " cançons"
 
-#: ui/networkremotesettingspage.cpp:213
+#: ui/networkremotesettingspage.cpp:186
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (no està disponible ara mateix)"
@@ -89,12 +89,13 @@ msgstr "%1 (no està disponible ara mateix)"
 msgid "%1 albums"
 msgstr "%1 àlbums"
 
-#: networkremote/streaming/remoteengine.cpp:250
+#: chromecast/chromecastengine.cpp:252
+#: networkremote/streaming/remoteengine.cpp:242
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 no pot reproduir aquesta peça: %2"
 
-#: networkremote/streaming/remoteengine.cpp:457
+#: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
 msgstr "%1 no ha pogut reproduir aquesta peça"
@@ -114,6 +115,11 @@ msgstr "%1 dies"
 #, qt-format
 msgid "%1 days ago"
 msgstr "fa %1 dies"
+
+#: chromecast/chromecastengine.cpp:202
+#, qt-format
+msgid "%1 isn't on a network the network remote listens on"
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -412,7 +418,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %title </p>\n\n<p>Si demarqueu entre claus una secció de text que contingui una fitxa de reemplaçament, aquesta secció no es mostrarà si la fitxa de reemplaçament es troba buida.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:285
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Només es pot connectar un client si s’introdueix el codi correcte."
 
@@ -537,7 +543,7 @@ msgstr "Afegeix un altre flux…"
 msgid "Add directory..."
 msgstr "Afegeix un directori…"
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2156
 msgid "Add file"
 msgstr "Afegeix un fitxer"
 
@@ -561,7 +567,7 @@ msgstr "Afegeix fitxers per a convertir-los"
 msgid "Add files..."
 msgstr "Afegeix fitxers..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2170
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
@@ -658,7 +664,7 @@ msgstr "Afegeix l’etiqueta d’any a la cançó"
 msgid "Add stream..."
 msgstr "Afegeix un flux…"
 
-#: ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1957
 msgid "Add to another playlist"
 msgstr "Afegeix a una altra llista de reproducció"
 
@@ -748,7 +754,7 @@ msgstr "Àlbums sense cobertes"
 msgid "All"
 msgstr "Tot"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:158
 msgid "All Files (*)"
 msgstr "Tots els fitxers (*)"
 
@@ -757,7 +763,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Lloem l’hipnogripau!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:391
+#: ../bin/src/ui_networkremotesettingspage.h:293
 msgid "All addresses"
 msgstr "Totes les adreces"
 
@@ -786,11 +792,11 @@ msgstr "Tots els traductors"
 msgid "All tracks"
 msgstr "Totes les peces"
 
-#: ../bin/src/ui_networkremotesettingspage.h:396
+#: ../bin/src/ui_networkremotesettingspage.h:298
 msgid "Allow a client to download music from this computer."
 msgstr "Permet que un client baixi música d’aquest ordinador."
 
-#: ../bin/src/ui_networkremotesettingspage.h:398
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "Allow downloads"
 msgstr "Permet les baixades"
 
@@ -798,7 +804,7 @@ msgstr "Permet les baixades"
 msgid "Allow mid/side encoding"
 msgstr "Permet la codificació centre/costats"
 
-#: ../bin/src/ui_networkremotesettingspage.h:402
+#: ../bin/src/ui_networkremotesettingspage.h:304
 msgid "Allow playing on remote devices"
 msgstr "Permet reproduir en dispositius remots"
 
@@ -850,7 +856,7 @@ msgstr "Enfadat"
 msgid "Appearance"
 msgstr "Aparença"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Afegeix fitxers/URL a la llista de reproducció"
 
@@ -892,7 +898,7 @@ msgstr "Segur que voleu escriure les estadístiques de les cançons en tots els 
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:299
 msgid "Artist info"
 msgstr "Inf.artista"
 
@@ -905,7 +911,7 @@ msgid "As&k when saving"
 msgstr "&Pregunta en desar"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:408
+#: ../bin/src/ui_networkremotesettingspage.h:310
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Format d’àudio"
@@ -1143,7 +1149,7 @@ msgstr "Canvia el mode de mescla"
 msgid "Change the currently playing song"
 msgstr "Canvia la cançó que es reprodueix ara"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Canvia la llengua"
 
@@ -1169,7 +1175,7 @@ msgstr "Comprova si hi ha episodis nous"
 msgid "Check for updates"
 msgstr "Comprova si hi ha actualitzacions"
 
-#: ui/mainwindow.cpp:843
+#: ui/mainwindow.cpp:856
 msgid "Check for updates..."
 msgstr "Comprova si hi ha actualitzacions…"
 
@@ -1373,7 +1379,7 @@ msgstr "Co&mpositor"
 msgid "Colors"
 msgstr "Colors"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
@@ -1429,7 +1435,7 @@ msgstr "Configura el Subsonic…"
 msgid "Configure global search..."
 msgstr "Configura la cerca global…"
 
-#: ui/mainwindow.cpp:676
+#: ui/mainwindow.cpp:689
 msgid "Configure library..."
 msgstr "Configura la col·lecció…"
 
@@ -1500,11 +1506,11 @@ msgstr "Converteix tota la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:405
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Converteix els fitxers sense pèrdues abans d’enviar-los al comandament."
 
-#: ../bin/src/ui_networkremotesettingspage.h:407
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Convert lossless files"
 msgstr "Converteix els fitxers sense pèrdues"
 
@@ -1513,11 +1519,11 @@ msgid "Copy to clipboard"
 msgstr "Copia al porta-retalls"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:736 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Copia al dispositiu…"
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:726
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Copia a la col·lecció…"
@@ -1640,7 +1646,7 @@ msgstr "Coberta definida des de %1"
 msgid "Covers from %1"
 msgstr "Cobertes de %1"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Crea una nova llista de reproducció amb arxius i adreces URL"
 
@@ -1723,11 +1729,11 @@ msgstr "Dies"
 msgid "De&fault"
 msgstr "Per de&fecte"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Redueix el volum un 4 %"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Redueix el volum <value> per cent"
 
@@ -1762,7 +1768,7 @@ msgid "Delete downloaded data"
 msgstr "Suprimeix les dades baixades"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2519 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Suprimeix els fitxers"
 
@@ -1770,7 +1776,7 @@ msgstr "Suprimeix els fitxers"
 msgid "Delete from device..."
 msgstr "Suprimeix del dispositiu…"
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:739
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Suprimeix del disc…"
@@ -1787,7 +1793,7 @@ msgstr "Elimina la predefinició"
 msgid "Delete smart playlist"
 msgstr "Elimina la llista de reproducció intel·ligent"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Suprimeix la peça en reproducció"
 
@@ -1803,11 +1809,11 @@ msgstr "S’estan suprimint els fitxers"
 msgid "Depth"
 msgstr "Profunditat"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1870
 msgid "Dequeue selected tracks"
 msgstr "Treu de la cua les peces seleccionades"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1868
 msgid "Dequeue track"
 msgstr "Treu de la cua la peça"
 
@@ -1840,7 +1846,7 @@ msgstr "Nom de dispositiu"
 msgid "Device properties..."
 msgstr "Propietats del dispositiu…"
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:292
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -1908,7 +1914,7 @@ msgstr "Transmissió discontínua"
 msgid "Display options"
 msgstr "Opcions de visualització"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Mostra la indicació a pantalla"
 
@@ -1986,6 +1992,10 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Baixa %n episodis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:320
+msgid "Download Clementine Remote for Android"
+msgstr ""
+
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
 msgstr "Directori de descàrregues"
@@ -2007,17 +2017,9 @@ msgstr "Baixa els episodis nous automàticament"
 msgid "Download queued"
 msgstr "Baixada en la cua"
 
-#: ../bin/src/ui_networkremotesettingspage.h:403
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Download settings"
 msgstr "Paràmetres de baixades"
-
-#: ../bin/src/ui_networkremotesettingspage.h:422
-msgid "Download the original Android app"
-msgstr "Baixeu l’aplicació original per a l’Android"
-
-#: ../bin/src/ui_networkremotesettingspage.h:418
-msgid "Download the remote for Desktops, Android and iOS"
-msgstr "Baixeu el comandament a distància per a l’escriptori, l’Android i l’iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
@@ -2085,7 +2087,7 @@ msgstr "Mescla dinàmica aleatòria"
 msgid "Edit smart playlist..."
 msgstr "Edita la llista de reproducció intel·ligent"
 
-#: ui/mainwindow.cpp:1907
+#: ui/mainwindow.cpp:1920
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edita l’etiqueta «%1»…"
@@ -2181,8 +2183,8 @@ msgstr "Introduïu un nom de fitxer per a les cobertes exportades (sense extensi
 msgid "Enter a new name for this playlist"
 msgstr "Introduïu un nom per aquesta llista de reproducció"
 
-#: ../bin/src/ui_networkremotesettingspage.h:388
-#: ../bin/src/ui_networkremotesettingspage.h:393
+#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:295
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Escriviu una d'aquestes adreces a l'aplicació per a connectar el Clementine."
 
@@ -2224,16 +2226,16 @@ msgstr "Informació de l’episodi"
 msgid "Equalizer"
 msgstr "Equalitzador"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalent a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2472 ui/mainwindow.cpp:2650
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Error"
@@ -2512,11 +2514,11 @@ msgstr "Nom de fitxer"
 msgid "Filename Preview"
 msgstr "Previsualització de nom de fitxer"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:282
 msgid "Files"
 msgstr "Fitxers"
 
-#: ../bin/src/ui_networkremotesettingspage.h:413
+#: ../bin/src/ui_networkremotesettingspage.h:315
 msgid "Files root folder"
 msgstr "Carpeta arrel dels fitxers"
 
@@ -2917,11 +2919,11 @@ msgstr "La versió del protocol REST del Subsonic és incompatible. El servidor 
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "La configuració està incompleta. Assegureu-vos que heu emplenat tots els camps."
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Incrementa el volum un 4 %"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Augmenta el volum <value> per cent"
 
@@ -2946,7 +2948,7 @@ msgstr "Opcions d’entrada"
 msgid "Insert..."
 msgstr "Insereix…"
 
-#: networkremote/outgoingdatacreator.cpp:530
+#: networkremote/outgoingdatacreator.cpp:535
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumental"
@@ -2955,7 +2957,7 @@ msgstr "Instrumental"
 msgid "Integrity check"
 msgstr "Comprovació d’integritat"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:288
 msgid "Internet"
 msgstr "Internet"
 
@@ -3102,13 +3104,13 @@ msgstr "Esquerra"
 msgid "Length"
 msgstr "Durada"
 
-#: ../bin/src/ui_networkremotesettingspage.h:400
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
 "Let a connected device act as the speaker: Clementine keeps the playlist and"
 " streams the audio to it."
 msgstr "Permet que un dispositiu connectat faci d'altaveu. El Clementine manté la llista de reproducció i hi emet l'àudio."
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Col·lecció"
@@ -3117,7 +3119,7 @@ msgstr "Col·lecció"
 msgid "Library advanced grouping"
 msgstr "Agrupació avançada de la col·lecció"
 
-#: ui/mainwindow.cpp:2782
+#: ui/mainwindow.cpp:2795
 msgid "Library rescan notice"
 msgstr "Avís de reescaneig de la col·lecció"
 
@@ -3133,7 +3135,7 @@ msgstr "Clar"
 msgid "Limits"
 msgstr "Límits"
 
-#: ../bin/src/ui_networkremotesettingspage.h:390
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "Listen on"
 msgstr "Escolta en"
 
@@ -3211,7 +3213,7 @@ msgstr "S’està carregant la informació de les peces"
 msgid "Loading..."
 msgstr "S’està carregant…"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar fitxers/URL, substituint l’actual llista de reproducció"
 
@@ -3463,7 +3465,7 @@ msgstr "Punts de muntatge"
 msgid "Move down"
 msgstr "Mou cap avall"
 
-#: ui/mainwindow.cpp:729 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Mou a la col·lecció…"
 
@@ -3472,7 +3474,7 @@ msgstr "Mou a la col·lecció…"
 msgid "Move up"
 msgstr "Mou cap amunt"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
 msgid "Music"
 msgstr "Música"
 
@@ -3480,7 +3482,7 @@ msgstr "Música"
 msgid "Music Library"
 msgstr "Col·lecció de música"
 
-#: ../bin/src/ui_networkremotesettingspage.h:417
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Music extensions remotely visible"
 msgstr "Extensions visibles a la xarxa remota"
 
@@ -3511,7 +3513,7 @@ msgstr "Banda estreta (BE)"
 msgid "Network Proxy"
 msgstr "Servidor intermediari de xarxa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:368
+#: ../bin/src/ui_networkremotesettingspage.h:270
 msgid "Network Remote"
 msgstr "Control remot de xarxa"
 
@@ -3538,7 +3540,7 @@ msgstr "Àlbums nous"
 msgid "New folder"
 msgstr "Carpeta nova"
 
-#: ui/mainwindow.cpp:1961 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Llista de reproducció nova"
 
@@ -3624,7 +3626,7 @@ msgstr "No utilitzis blocs curs"
 msgid "None"
 msgstr "Cap"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2473 ui/mainwindow.cpp:2651
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
@@ -3715,7 +3717,7 @@ msgstr "Actiu"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:373
+#: ../bin/src/ui_networkremotesettingspage.h:275
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3726,11 +3728,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "Accepta només connexions dels clients amb rangs d'IP entre:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x\ni des d'enllaços locals i adreces IPv6 privades.\n\nQuan s'escolta una adreça com ara 100.64.0.0/10, com ara una adreça Tailscale, les connexions d'aquest rang també es consideren locals."
 
-#: ../bin/src/ui_networkremotesettingspage.h:381
+#: ../bin/src/ui_networkremotesettingspage.h:283
 msgid "Only allow connections from the local network"
 msgstr "Permet només connexions provinents de la xarxa local"
 
-#: ui/networkremotesettingspage.cpp:235
+#: ui/networkremotesettingspage.cpp:208
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3817,7 +3819,7 @@ msgid "Optimize for quality"
 msgstr "Optimitza la qualitat"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:409
+#: ../bin/src/ui_networkremotesettingspage.h:311
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opcions…"
@@ -3830,7 +3832,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organitza fitxers"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:732
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
 msgid "Organise files..."
 msgstr "Organitza fitxers..."
 
@@ -3861,7 +3863,7 @@ msgstr "Compatibilitat amb l’etiqueta d’any original"
 msgid "Other"
 msgstr "Altres"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Altres opcions"
 
@@ -3915,12 +3917,12 @@ msgstr "Festa"
 msgid "Password"
 msgstr "Contrasenya"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1752
-#: ui/qtsystemtrayicon.cpp:235 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Pausa la reproducció"
 
@@ -3951,9 +3953,9 @@ msgstr "Píxel"
 msgid "Plain sidebar"
 msgstr "Barra lateral senzilla"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:693 ui/mainwindow.cpp:1139
-#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1756 ui/qtsystemtrayicon.cpp:223
-#: ui/qtsystemtrayicon.cpp:247 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
+#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
 msgstr "Reprodueix"
@@ -3970,11 +3972,11 @@ msgstr "Reproduïu una peça i aquí es mostraran imatges i la bibliografia de l
 msgid "Play count"
 msgstr "Comptador de reproduccions"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Reprodueix la llista"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si està parat, posa en pausa si està reproduint"
 
@@ -3983,15 +3985,19 @@ msgstr "Reprodueix si està parat, posa en pausa si està reproduint"
 msgid "Play if there is nothing already playing"
 msgstr "Reprodueix si encara no hi ha res reproduint-se"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1868
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
 msgid "Play next"
 msgstr "Reprodueix a continuació"
 
-#: ui/mainwindow.cpp:1866
+#: widgets/outputbutton.cpp:103
+msgid "Play on another device"
+msgstr "Reprodueix en un altre dispositiu"
+
+#: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr "Reprodueix les peces següents a continuació"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Reprodueix la <n>a cançó de la llista de reproducció"
 
@@ -4003,9 +4009,14 @@ msgstr "Reprodueix/Pausa"
 msgid "Playback"
 msgstr "Reproducció"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Opcions del reproductor"
+
+#: widgets/outputbutton.cpp:104
+#, qt-format
+msgid "Playing on %1"
+msgstr ""
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4017,7 +4028,7 @@ msgstr "Llista de reproducció"
 msgid "Playlist finished"
 msgstr "Llista de reproducció finalitzada"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opcions de la llista de reproducció"
@@ -4026,7 +4037,7 @@ msgstr "Opcions de la llista de reproducció"
 msgid "Playlist type"
 msgstr "Tipus de llista de reproducció"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:285
 msgid "Playlists"
 msgstr "Llistes"
 
@@ -4089,7 +4100,7 @@ msgid "Popup duration"
 msgstr "Duració de la finestra emergent"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:371
+#: ../bin/src/ui_networkremotesettingspage.h:273
 msgid "Port"
 msgstr "Port"
 
@@ -4167,7 +4178,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Peça anterior"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Mostra la informació de la versió"
 
@@ -4208,7 +4219,7 @@ msgstr "Posa les cançons en ordre aleatori"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4235,12 +4246,12 @@ msgstr "S’està consultant el dispositiu…"
 msgid "Queue Manager"
 msgstr "Gestor de la cua"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1874
 msgid "Queue selected tracks"
 msgstr "Afegeix les peces seleccionades a la cua"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1872
 msgid "Queue track"
 msgstr "Afegeix la peça a la cua"
 
@@ -4459,7 +4470,7 @@ msgstr "Mode del Replay Gain"
 msgid "Repopulate"
 msgstr "Reomple"
 
-#: ../bin/src/ui_networkremotesettingspage.h:385
+#: ../bin/src/ui_networkremotesettingspage.h:287
 msgid "Require authentication code"
 msgstr "Sol·licita un codi d’autenticació"
 
@@ -4475,7 +4486,7 @@ msgstr "Posa a zero el comptador de reproduccions"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reinicia la peça i salta a l’anterior en fer clic un altre cop"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reinicia la peça, o canvia a l’anterior si no han transcorregut 8 segons des de l’inici."
@@ -4516,7 +4527,7 @@ msgstr "Captura CD d’àudio"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:411
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Carpeta que es podrà navegar des de la xarxa remota"
 
@@ -4656,7 +4667,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Cerca"
 
-#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Cerca"
@@ -4689,7 +4700,7 @@ msgstr "Cerca al Subsonic"
 msgid "Search automatically"
 msgstr "Cerca automàticament"
 
-#: ui/mainwindow.cpp:713
+#: ui/mainwindow.cpp:726
 msgid "Search for album"
 msgstr "Cerca per àlbum"
 
@@ -4702,7 +4713,7 @@ msgstr "Cerca la coberta de l’àlbum…"
 msgid "Search for anything"
 msgstr "Cerca a tot arreu"
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:723
 msgid "Search for artist"
 msgstr "Cerca per artista"
 
@@ -4748,11 +4759,11 @@ msgstr "Retrocedeix 10 segons"
 msgid "Seek forward"
 msgstr "Avança 10 segons"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Mou-te per la peça en reproducció a una posició relativa"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Mou-te per la peça en reproducció a una posició absoluta"
 
@@ -4823,7 +4834,7 @@ msgstr "URL del servidor"
 msgid "Server details"
 msgstr "Detalls del servidor"
 
-#: ui/mainwindow.cpp:1906
+#: ui/mainwindow.cpp:1919
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
@@ -4833,7 +4844,7 @@ msgstr "Estableix %1 a «%2»…"
 msgid "Set target rate"
 msgstr "Estableix la freqüència desitjada"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Estableix el volum al <value> percent"
 
@@ -4846,7 +4857,7 @@ msgstr "Estableix %1 a la configuració del Clementine de l'ordinador"
 msgid "Set value for all selected tracks..."
 msgstr "Estableix valor per a totes les peces seleccionades…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:370
+#: ../bin/src/ui_networkremotesettingspage.h:272
 msgid "Settings"
 msgstr "Paràmetres"
 
@@ -4913,7 +4924,7 @@ msgstr "Mostra un OSD bonic"
 msgid "Show above status bar"
 msgstr "Mostra sota la barra d’estat"
 
-#: ui/mainwindow.cpp:660
+#: ui/mainwindow.cpp:673
 msgid "Show all songs"
 msgstr "Mostra totes les cançons"
 
@@ -4933,12 +4944,12 @@ msgstr "Mostra els separadors"
 msgid "Show fullsize..."
 msgstr "Mostra a mida completa..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:742
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Mostra al gestor de fitxers"
 
-#: ui/mainwindow.cpp:744
+#: ui/mainwindow.cpp:757
 msgid "Show in library..."
 msgstr "Mostra a la col·lecció…"
 
@@ -4950,11 +4961,11 @@ msgstr "Mostra en Artistes diversos"
 msgid "Show moodbar"
 msgstr "Mostra les barres d’ànim"
 
-#: ui/mainwindow.cpp:662
+#: ui/mainwindow.cpp:675
 msgid "Show only duplicates"
 msgstr "Mostra només els duplicats"
 
-#: ui/mainwindow.cpp:664
+#: ui/mainwindow.cpp:677
 msgid "Show only untagged"
 msgstr "Mostra només les peces sense etiquetar"
 
@@ -5039,7 +5050,7 @@ msgstr "Mida:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
@@ -5051,11 +5062,11 @@ msgstr "Comptador d’omissions"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Omet fitxers amb aquestes extensions (separades per comes, no es distingeixen les majúscules)"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1890
 msgid "Skip selected tracks"
 msgstr "Omet les peces seleccionades"
 
@@ -5063,7 +5074,7 @@ msgstr "Omet les peces seleccionades"
 msgid "Skip to the next album"
 msgstr "Passa a l’àlbum següent"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1888
 msgid "Skip track"
 msgstr "Omet la peça"
 
@@ -5099,7 +5110,7 @@ msgstr "Informació de la cançó"
 msgid "Song Metadata"
 msgstr "Metadades de la peça"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:296
 msgid "Song info"
 msgstr "Inf. cançó"
 
@@ -5160,7 +5171,7 @@ msgstr "Àlbums destacats"
 msgid "Start ripping"
 msgstr "Inicia la captura"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que es reprodueix ara mateix"
 
@@ -5194,15 +5205,15 @@ msgstr "Atura després de cada peça"
 msgid "Stop after every track"
 msgstr "Atura després de cada peça"
 
-#: ui/mainwindow.cpp:697 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Atura després d’aquesta peça"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Atura la reproducció"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Atura la reproducció després de la peça actual"
 
@@ -5323,6 +5334,20 @@ msgstr "Agraïm a"
 msgid "The \"%1\" command could not be started."
 msgstr "No s’ha pogut iniciar l’ordre «%1»."
 
+#: chromecast/castmediaplayer.cpp:201
+#, qt-format
+msgid "The Cast device couldn't play the track (%1)"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:171
+#, qt-format
+msgid "The Cast device couldn't start playing: %1"
+msgstr ""
+
+#: chromecast/castmediaplayer.cpp:289
+msgid "The Cast device stopped playing because of an error"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:337
 msgid "The album cover of the currently playing song"
 msgstr "La coberta de l’àlbum de la cançó en reproducció"
@@ -5366,7 +5391,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ha acabat el període de prova del servidor del Subsonic. Feu una donació per a obtenir una clau de llicència. Visiteu subsonic.org per a més detalls."
 
-#: ui/mainwindow.cpp:2773
+#: ui/mainwindow.cpp:2786
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5412,7 +5437,7 @@ msgid ""
 "continue?"
 msgstr "Se suprimiran aquests fitxers del dispositiu; segur que voleu continuar?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2520 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5444,9 +5469,9 @@ msgstr "Aquest àlbum no està disponible en el format demanat"
 msgid "This can be changed later through the preferences"
 msgstr "Aquesta opció es pot modificar més tard a Preferències"
 
-#: networkremote/streaming/rendererregistry.cpp:168
+#: widgets/outputbutton.cpp:67
 msgid "This computer"
-msgstr "Aquest ordinador"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5508,7 +5533,7 @@ msgstr "Activa la visualització per pantalla elegant"
 msgid "Toggle fullscreen"
 msgstr "Commuta a pantalla completa"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1876
 msgid "Toggle queue status"
 msgstr "Commuta l’estat de la cua"
 
@@ -5516,7 +5541,7 @@ msgstr "Commuta l’estat de la cua"
 msgid "Toggle scrobbling"
 msgstr "Commuta l’«scrobbling»"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Canvia la visibilitat del OSD estètic"
 
@@ -5615,7 +5640,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "URL del logo:"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5664,11 +5689,11 @@ msgstr "Tipus de fitxer desconegut: %1"
 msgid "Unset cover"
 msgstr "Esborra’n la coberta"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1886
 msgid "Unskip selected tracks"
 msgstr "No ometis les peces seleccionades"
 
-#: ui/mainwindow.cpp:1871
+#: ui/mainwindow.cpp:1884
 msgid "Unskip track"
 msgstr "No ometis la peça"
 
@@ -5711,7 +5736,7 @@ msgstr "S’està actualitzant %1%…"
 msgid "Updating library"
 msgstr "S’està actualitzant la col·lecció"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Ús"
 
@@ -5747,7 +5772,7 @@ msgstr "Empra un conjunt de colors personalitzat"
 msgid "Use a custom message for notifications"
 msgstr "Utilitza un missatge personalitzat per les notificacions"
 
-#: ../bin/src/ui_networkremotesettingspage.h:369
+#: ../bin/src/ui_networkremotesettingspage.h:271
 msgid "Use a network remote control"
 msgstr "Usa un control remot de xarxa"
 
@@ -6008,7 +6033,7 @@ msgid ""
 "well?"
 msgstr "Voleu moure també les altres cançons d’aquest àlbum a Artistes diversos?"
 
-#: ui/mainwindow.cpp:2780
+#: ui/mainwindow.cpp:2793
 msgid "Would you like to run a full rescan right now?"
 msgstr "Voleu fer de nou un escaneig complet ara?"
 
@@ -6080,14 +6105,6 @@ msgstr "Heu iniciat la sessió."
 #: ../bin/src/ui_groupbydialog.h:166
 msgid "You can change the way the songs in the library are organised."
 msgstr "Podeu canviar la forma en la qual les cançons de la col·lecció estan organitzades"
-
-#: ui/networkremotesettingspage.cpp:175
-#, qt-format
-msgid ""
-"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
-"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
-"<b>Windows</b><br/>"
-msgstr "<a href=\"%1\">Aquí</a> podeu trobar el nou control remot multiplataforma.<br/>Està disponible per <b>Linux</b>, <b>MacOS</b> i <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6208,7 +6225,7 @@ msgstr "els més grans primer"
 msgid "bpm"
 msgstr "ppm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:415
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6217,10 +6234,6 @@ msgstr "Llista separada per comes de les extensions que seran visibles per la xa
 #: smartplaylists/searchterm.cpp:259
 msgid "contains"
 msgstr "conté"
-
-#: ../bin/src/ui_networkremotesettingspage.h:419
-msgid "desktop_remote"
-msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
@@ -6319,13 +6332,11 @@ msgstr "els més antics primer"
 msgid "on"
 msgstr "a"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "opcions"
 
-#: ../bin/src/ui_networkremotesettingspage.h:420
-#: ../bin/src/ui_networkremotesettingspage.h:421
-#: ../bin/src/ui_networkremotesettingspage.h:423
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "or scan the QR code: "
 msgstr "o escanegeu el codi QR:"
 
