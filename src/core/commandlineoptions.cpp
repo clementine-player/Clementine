@@ -89,7 +89,6 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       show_osd_(false),
       toggle_pretty_osd_(false),
       play_and_exit_timeout_secs_(-1),
-      chromecast_(false),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -153,9 +152,6 @@ bool CommandlineOptions::Parse() {
       // settings into a directory, then exit - see ui/screenshottaker.h.
       {"screenshots", required_argument, 0, Screenshots},
       {"screenshot-theme", required_argument, 0, ScreenshotTheme},
-      // Undocumented while it's being built: look for Chromecasts. Left out
-      // of kHelpText.
-      {"chromecast", no_argument, 0, Chromecast},
       // Undocumented, for demos and screenshots: what remotes call this
       // computer, instead of its host name. Left out of kHelpText.
       {"remote-name", required_argument, 0, RemoteName},
@@ -329,10 +325,6 @@ bool CommandlineOptions::Parse() {
 
       case ScreenshotTheme:
         screenshot_theme_ = QString(optarg);
-        break;
-
-      case Chromecast:
-        chromecast_ = true;
         break;
 
       case RemoteName:

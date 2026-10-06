@@ -245,9 +245,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->volume->setValue(volume);
   VolumeChanged(volume);
 
-  // Experimental, see --chromecast: where to play, next to the volume.
+  // Where to play, next to the volume. Hidden while there's nowhere else.
   EngineRouter* router = qobject_cast<EngineRouter*>(app_->player()->engine());
-  if (options.chromecast() && router) {
+  if (router) {
     QBoxLayout* layout =
         qobject_cast<QBoxLayout*>(ui_->volume->parentWidget()->layout());
     if (layout) {
