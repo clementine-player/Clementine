@@ -56,14 +56,18 @@ RendererRegistry::~RendererRegistry() {
   }
 }
 
-void RendererRegistry::UseCastDevices(CastDiscovery* discovery) {
-  connect(discovery, &CastDiscovery::DeviceFound, this,
-          &RendererRegistry::CastDeviceFound);
-  connect(discovery, &CastDiscovery::DeviceLost, this,
-          &RendererRegistry::CastDeviceLost);
-  for (const CastDevice& device : discovery->devices()) {
-    CastDeviceFound(device);
+void RendererRegistry::StartCastDiscovery() {
+  if (cast_discovery_) return;
+  cast_discovery_ = CastDiscovery::Create(this);
+  if (!cast_discovery_) {
+    qLog(Info) << "Can't look for Cast devices on this platform";
+    return;
   }
+  connect(cast_discovery_, &CastDiscovery::DeviceFound, this,
+          &RendererRegistry::CastDeviceFound);
+  connect(cast_discovery_, &CastDiscovery::DeviceLost, this,
+          &RendererRegistry::CastDeviceLost);
+  cast_discovery_->Start();
 }
 
 QString RendererRegistry::CastOutputId(const CastDevice& device) {

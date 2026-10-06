@@ -80,8 +80,9 @@ class RendererRegistry : public QObject {
       const QList<QNetworkAddressEntry>& interfaces);
 
  public slots:
-  // Offers the Cast devices |discovery| finds as outputs.
-  void UseCastDevices(CastDiscovery* discovery);
+  // Starts looking for Cast devices, and offers them as outputs for as long
+  // as this registry exists.
+  void StartCastDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
   void RegisterRenderer(int client_id, const QByteArray& caps,
@@ -119,6 +120,8 @@ class RendererRegistry : public QObject {
   void CastEngineFailed(ChromecastEngine* engine);
   ChromecastEngine* CastEngine(const QString& device_id) const;
   QList<ChromecastEngine*> cast_engines_;
+  // Owned; null until StartCastDiscovery, or if this platform has none.
+  CastDiscovery* cast_discovery_ = nullptr;
 
   // 0 until NetworkRemote says where it listens.
   quint16 listening_port_;

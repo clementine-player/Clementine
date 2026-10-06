@@ -51,7 +51,6 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-#include "chromecast/castdiscovery.h"
 #include "config.h"
 #include "core/appearance.h"
 #include "core/application.h"
@@ -560,21 +559,7 @@ int main(int argc, char* argv[]) {
   ParseAProto();
   (void)QtConcurrent::run(&ParseAProto);
 
-  // Experimental, see --chromecast. It's created before the Application so
-  // that it outlives everything that uses it.
-  std::unique_ptr<CastDiscovery> cast_discovery;
-  if (options.chromecast()) {
-    cast_discovery.reset(CastDiscovery::Create());
-    if (!cast_discovery) {
-      qLog(Warning) << "Can't look for Cast devices on this platform";
-    }
-  }
-
   Application app;
-  if (cast_discovery) {
-    app.set_cast_discovery(cast_discovery.get());
-    cast_discovery->Start();
-  }
   QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
 
