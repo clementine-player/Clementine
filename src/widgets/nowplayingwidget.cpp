@@ -301,8 +301,14 @@ void NowPlayingWidget::UpdateDetailsText() {
 }
 
 void NowPlayingWidget::ScaleCover() {
-  cover_ = QPixmap::fromImage(
-      AlbumCoverLoader::ScaleAndPad(cover_loader_options_, original_));
+  // Scale to device pixels so the cover stays sharp on HiDPI screens.
+  const qreal dpr = devicePixelRatioF();
+  AlbumCoverLoaderOptions options = cover_loader_options_;
+  options.desired_height_ = qRound(options.desired_height_ * dpr);
+
+  cover_ =
+      QPixmap::fromImage(AlbumCoverLoader::ScaleAndPad(options, original_));
+  cover_.setDevicePixelRatio(dpr);
   update();
 }
 
@@ -332,7 +338,9 @@ void NowPlayingWidget::AlbumArtLoaded(const Song& metadata, const QString& uri,
 void NowPlayingWidget::SetImage(const QImage& image) {
   if (visible_) {
     // Cache the current pixmap so we can fade between them
-    previous_track_ = QPixmap(size());
+    const qreal dpr = devicePixelRatioF();
+    previous_track_ = QPixmap(size() * dpr);
+    previous_track_.setDevicePixelRatio(dpr);
     previous_track_.fill(palette().window().color());
     previous_track_opacity_ = 1.0;
     QPainter p(&previous_track_);
@@ -364,6 +372,11 @@ void NowPlayingWidget::SetVisible(bool visible) {
 }
 
 void NowPlayingWidget::paintEvent(QPaintEvent* e) {
+  // The window moved to a screen with a different pixel ratio
+  if (!cover_.isNull() && cover_.devicePixelRatio() != devicePixelRatioF()) {
+    ScaleCover();
+  }
+
   QPainter p(this);
 
   DrawContents(&p);
