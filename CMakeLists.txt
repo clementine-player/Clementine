@@ -225,9 +225,12 @@ find_package(sentry CONFIG QUIET)
 optional_component(SENTRY OFF "Crash reporting (Sentry)"
   DEPENDS "sentry-native" sentry_FOUND
 )
-# Where crash reports go. Left empty, a build with ENABLE_SENTRY has crash
-# reporting compiled in but never starts it.
-set(SENTRY_DSN "" CACHE STRING "Sentry DSN that crash reports are sent to")
+# Where crash reports go: Clementine's Sentry project. A DSN only lets you send
+# events, so it isn't secret. Set it to empty to build with ENABLE_SENTRY but
+# never start crash reporting.
+set(SENTRY_DSN
+    "https://655f8ef3c58fb344dd15e72df0d50f95@o4512210144526336.ingest.de.sentry.io/4512210147606608"
+    CACHE STRING "Sentry DSN that crash reports are sent to")
 if(HAVE_SENTRY)
   # Installed alongside sentry-native by its Crashpad backend.
   find_program(SENTRY_CRASHPAD_HANDLER crashpad_handler
