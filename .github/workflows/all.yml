@@ -999,6 +999,7 @@ jobs:
       run:
         shell: msys2 {0}
     env:
+      SENTRY_NATIVE_VERSION: 0.17.1
       # A Windows path: actions/cache runs outside the MSYS2 shell, and the
       # clang64 ccache is a native Win32 binary, so both understand this one.
       # Under the workspace rather than runner.temp, because the runner
@@ -1094,6 +1095,40 @@ jobs:
           git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
+      # Crash reporting: sentry-native with its Crashpad backend, built
+      # static so there's no sentry DLL to ship. Only crashpad_handler.exe
+      # goes in the installer, next to clementine.exe where Clementine looks
+      # for it. Cached per version, since it takes a while to build.
+      - name: Restore sentry-native
+        id: sentry_cache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: ${{ runner.temp }}\sentry-native
+          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}
+      - name: Build sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        run: |
+          set -e
+          temp="$(cygpath -m "$RUNNER_TEMP")"
+          git clone -q --depth 1 --branch "$SENTRY_NATIVE_VERSION" \
+            --recurse-submodules --shallow-submodules \
+            https://github.com/getsentry/sentry-native.git "$temp/sentry-src"
+          cmake -S "$temp/sentry-src" -B "$temp/sentry-build" -G Ninja \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_INSTALL_PREFIX="$temp/sentry-native" \
+            -DSENTRY_BACKEND=crashpad \
+            -DSENTRY_BUILD_SHARED_LIBS=OFF \
+            -DSENTRY_BUILD_TESTS=OFF \
+            -DSENTRY_BUILD_EXAMPLES=OFF
+          cmake --build "$temp/sentry-build"
+          cmake --install "$temp/sentry-build"
+      - name: Save sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: ${{ runner.temp }}\sentry-native
+          key: ${{ steps.sentry_cache.outputs.cache-primary-key }}
+
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1104,9 +1139,14 @@ jobs:
         run: ccache --zero-stats
       - name: cmake
         working-directory: bin
-        run: >
-          cmake .. -G Ninja
-          -DCMAKE_BUILD_TYPE=Release
+        run: |
+          set -e
+          cmake .. -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_SENTRY=ON \
+            -Dsentry_DIR="$(cygpath -m "$RUNNER_TEMP")/sentry-native/lib/cmake/sentry"
+          # optional_component turns Sentry off quietly if it can't find it.
+          grep -q '^#define HAVE_SENTRY' include/clementine-config.h
 
       - name: build
         working-directory: bin
@@ -1114,7 +1154,9 @@ jobs:
 
       - name: Copy build outputs
         working-directory: dist/windows
-        run: cp ../../bin/*.exe ../../bin/projectm-presets.rcc .
+        run: |
+          cp ../../bin/*.exe ../../bin/projectm-presets.rcc .
+          cp "$(cygpath -u "$RUNNER_TEMP")/sentry-native/bin/crashpad_handler.exe" .
 
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
@@ -2093,6 +2135,7 @@ jobs:
       id-token: write
       contents: read
     env:
+      SENTRY_NATIVE_VERSION: 0.17.1
       # Under the workspace rather than runner.temp, because the runner
       # context isn't available at job level. Nothing in this job packages
       # the workspace root - the DMG is built from bin/clementine.app.
@@ -2187,6 +2230,40 @@ jobs:
           uv run --project tools/mac-update
           clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
 
+      # Crash reporting: sentry-native with its Crashpad backend, built
+      # static so there's no libsentry to bundle. CMake installs
+      # crashpad_handler into Contents/MacOS, and codesign.py signs it with
+      # the rest of the app. Cached per version, since it takes a while to
+      # build.
+      - name: Restore sentry-native
+        id: sentry_cache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: ${{ runner.temp }}/sentry-native
+          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}
+      - name: Build sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        run: |
+          set -e
+          git clone -q --depth 1 --branch "$SENTRY_NATIVE_VERSION" \
+            --recurse-submodules --shallow-submodules \
+            https://github.com/getsentry/sentry-native.git "$RUNNER_TEMP/sentry-src"
+          cmake -S "$RUNNER_TEMP/sentry-src" -B "$RUNNER_TEMP/sentry-build" \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/sentry-native" \
+            -DSENTRY_BACKEND=crashpad \
+            -DSENTRY_BUILD_SHARED_LIBS=OFF \
+            -DSENTRY_BUILD_TESTS=OFF \
+            -DSENTRY_BUILD_EXAMPLES=OFF
+          cmake --build "$RUNNER_TEMP/sentry-build" --parallel "$(sysctl -n hw.ncpu)"
+          cmake --install "$RUNNER_TEMP/sentry-build"
+      - name: Save sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: ${{ runner.temp }}/sentry-native
+          key: ${{ steps.sentry_cache.outputs.cache-primary-key }}
+
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -2203,6 +2280,8 @@ jobs:
             -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
             -DENABLE_LIBGPOD=OFF \
+            -DENABLE_SENTRY=ON \
+            -Dsentry_DIR="$RUNNER_TEMP/sentry-native/lib/cmake/sentry" \
             -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
             -DCMAKE_FRAMEWORK_PATH="$RUNNER_TEMP/sparkle" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
@@ -2210,6 +2289,8 @@ jobs:
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
             ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"} \
             ${APPLE_NOTARIZE_API_KEY_PATH:+-DAPPLE_NOTARIZE_API_KEY_PATH="$APPLE_NOTARIZE_API_KEY_PATH"}
+          # optional_component turns Sentry off quietly if it can't find it.
+          grep -q '^#define HAVE_SENTRY' include/clementine-config.h
       # Explicit, and parallel: `make install` builds everything it hasn't
       # already as a side effect, and with no -j it did so one file at a
       # time - 33 minutes of compiling inside a step named after copying

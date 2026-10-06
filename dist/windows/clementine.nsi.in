@@ -331,6 +331,8 @@ Section "Clementine" Clementine
 
   File "clementine.exe"
   File "clementine-tagreader.exe"
+  ; Only in builds with crash reporting.
+  File /nonfatal "crashpad_handler.exe"
   File "clementine.ico"
   ; Runtime DLLs are collected by CI (via ntldd dependency resolution) rather
   ; than enumerated here by name, since exact filenames/versions drift with
@@ -451,6 +453,7 @@ Section "Uninstall"
   ; Delete all the files
   Delete "$INSTDIR\clementine.exe"
   Delete "$INSTDIR\clementine-tagreader.exe"
+  Delete "$INSTDIR\crashpad_handler.exe"
   Delete "$INSTDIR\clementine.ico"
   ; Runtime DLLs are installed as a wildcard blob (see the "Clementine" and
   ; plugin sections above), so they're removed the same way here rather than
