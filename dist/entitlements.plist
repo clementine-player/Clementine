@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <!-- Homebrew-provided frameworks/dylibs (Qt, GStreamer, Sparkle, Breakpad, ...) are
+  <!-- Homebrew-provided frameworks/dylibs (Qt, GStreamer, Sparkle, ...) are
        not signed with the same Team ID as this build, so hardened runtime's library
        validation has to be relaxed or the app refuses to load them at launch. -->
   <key>com.apple.security.cs.disable-library-validation</key>

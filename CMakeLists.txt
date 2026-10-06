@@ -221,8 +221,6 @@ if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
 endif(WIN32)
 
-optional_component(BREAKPAD OFF "Crash reporting")
-
 optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
@@ -451,10 +449,6 @@ option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
   add_subdirectory(debian)
 endif(WITH_DEBIAN)
-
-if(HAVE_BREAKPAD)
-  add_subdirectory(3rdparty/google-breakpad)
-endif(HAVE_BREAKPAD)
 
 if(HAVE_MOODBAR)
   add_subdirectory(gst/moodbar)

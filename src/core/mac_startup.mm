@@ -95,22 +95,6 @@ QDebug operator<<(QDebug dbg, NSObject* object) {
 
 @end
 
-#ifdef HAVE_BREAKPAD
-static bool BreakpadCallback(int, int, mach_port_t, void*) { return true; }
-
-static BreakpadRef InitBreakpad() {
-  ScopedNSAutoreleasePool pool;
-  BreakpadRef breakpad = nil;
-  NSDictionary* plist = [[NSBundle mainBundle] infoDictionary];
-  if (plist) {
-    breakpad = BreakpadCreate(plist);
-    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, nullptr);
-  }
-  [pool release];
-  return breakpad;
-}
-#endif  // HAVE_BREAKPAD
-
 @implementation AppDelegate
 
 - (id)init {
@@ -124,10 +108,6 @@ static BreakpadRef InitBreakpad() {
 
 - (id)initWithHandler:(PlatformInterface*)handler {
   application_handler_ = handler;
-
-#ifdef HAVE_BREAKPAD
-  breakpad_ = InitBreakpad();
-#endif
 
   return self;
 }
@@ -173,9 +153,6 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender {
-#ifdef HAVE_BREAKPAD
-  BreakpadRelease(breakpad_);
-#endif
   return NSTerminateNow;
 }
 
