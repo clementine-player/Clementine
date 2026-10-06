@@ -26,6 +26,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <cstdlib>
 
 #include "config.h"
 #include "core/logging.h"
@@ -226,6 +227,16 @@ bool CrashReporting::IsAvailable() { return false; }
 void CrashReporting::AskToSendPendingReports(QWidget*) {}
 
 #endif  // HAVE_SENTRY
+
+__attribute__((noinline)) void CrashReporting::CrashForTesting() {
+  qLog(Error) << "Crashing on purpose because of --crash";
+  // volatile so the compiler can't tell the pointer is null and turn the write
+  // into something else.
+  int* volatile null_pointer = nullptr;
+  *null_pointer = 0;
+  // Not reached.
+  std::abort();
+}
 
 bool CrashReporting::IsEnabled() {
   QSettings s;

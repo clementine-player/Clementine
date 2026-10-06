@@ -55,6 +55,11 @@ class CrashReporting {
   static bool IsEnabled();
   static void SetEnabled(bool enabled);
 
+  // Crashes Clementine on purpose, for --crash. It always crashes here, with a
+  // write to a null pointer, so the reports it makes can be told apart in
+  // Sentry by this function's name.
+  [[noreturn]] static void CrashForTesting();
+
  private:
   Q_DISABLE_COPY(CrashReporting)
 

@@ -634,8 +634,12 @@ int main(int argc, char* argv[]) {
   }
 
   if (!screenshots) {
-    QTimer::singleShot(0, &w,
-                       [&w]() { CrashReporting::AskToSendPendingReports(&w); });
+    const bool crash = options.crash();
+    QTimer::singleShot(0, &w, [&w, crash]() {
+      CrashReporting::AskToSendPendingReports(&w);
+      // After asking, so the crash doesn't happen with the question still open.
+      if (crash) CrashReporting::CrashForTesting();
+    });
   }
 
   int ret = a.exec();
