@@ -23,20 +23,12 @@
 #include "config.h"
 #include "macglobalshortcutbackend.h"
 
-#ifdef HAVE_BREAKPAD
-#import <Breakpad/Breakpad.h>
-#endif
-
 class PlatformInterface;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, UNUserNotificationCenterDelegate> {
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
   MacGlobalShortcutBackend* shortcut_handler_;
-
-#ifdef HAVE_BREAKPAD
-  BreakpadRef breakpad_;
-#endif
 }
 
 - (id)initWithHandler:(PlatformInterface*)handler;

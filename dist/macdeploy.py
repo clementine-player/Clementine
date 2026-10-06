@@ -253,8 +253,6 @@ def GetBrokenLibraries(binary):
       continue  # System framework
     elif re.match(r'^\s*/usr/lib/', line):
       continue  # unix style system library
-    elif re.match(r'Breakpad', line):
-      continue  # Manually added by cmake.
     elif re.match(r'^\s*@loader_path', line):
       abs_path = os.path.join(
         os.path.dirname(binary),

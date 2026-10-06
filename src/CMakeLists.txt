@@ -58,10 +58,6 @@ if (HAVE_VISUALISATIONS)
 endif(HAVE_VISUALISATIONS)
 
 
-if(HAVE_BREAKPAD)
-  include_directories(../3rdparty/google-breakpad)
-endif(HAVE_BREAKPAD)
-
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
@@ -95,7 +91,6 @@ set(SOURCES
   core/application.cpp
   core/backgroundstreams.cpp
   core/commandlineoptions.cpp
-  core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
@@ -473,7 +468,6 @@ set(HEADERS
   core/appearance.h
   core/application.h
   core/backgroundstreams.h
-  core/crashreporting.h
   core/database.h
   core/deletefiles.h
   core/filesystemwatcherinterface.h
@@ -951,8 +945,6 @@ list(APPEND UI
 
 # Platform specific - OS X
 optional_source(APPLE
-  INCLUDE_DIRECTORIES
-    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
   SOURCES
     chromecast/bonjourcastdiscovery.cpp
     core/macfslistener.mm
@@ -1381,17 +1373,6 @@ if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)
 
-if(HAVE_BREAKPAD)
-  if (LINUX)
-    target_link_libraries(clementine_lib breakpad)
-  elseif (APPLE)
-    add_dependencies(clementine_lib breakpad)
-    target_link_libraries(clementine_lib
-        "-F${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release"
-        "-framework Breakpad")
-  endif (LINUX)
-endif(HAVE_BREAKPAD)
-
 if(HAVE_LIBPULSE)
   target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
 endif()
@@ -1512,19 +1493,6 @@ if (APPLE)
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   endif()
 
-  if (HAVE_BREAKPAD)
-    install(DIRECTORY
-        ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
-        DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks"
-        PATTERN "*.h" EXCLUDE
-        PATTERN "Inspector" PERMISSIONS OWNER_EXECUTE OWNER_READ
-                                        GROUP_EXECUTE GROUP_READ
-                                        WORLD_READ WORLD_EXECUTE
-        PATTERN "crash_report_sender" PERMISSIONS OWNER_EXECUTE OWNER_READ
-                                                  GROUP_EXECUTE GROUP_READ
-                                                  WORLD_READ WORLD_EXECUTE)
-  endif (HAVE_BREAKPAD)
-
   # macdeploy.py's install_name_tool rewrites invalidate whatever ad-hoc
   # signature Homebrew shipped on each copied dylib/framework. On Apple
   # Silicon the kernel refuses to load any Mach-O with an invalid (not just
@@ -1553,15 +1521,6 @@ if (APPLE)
       VERBATIM
     )
   endif(USE_BUNDLE)
-
-  add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/clementine.breakpad
-    COMMAND
-    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/tools/mac/dump_syms/build/Release/dump_syms
-    -a i386 ${PROJECT_BINARY_DIR}/clementine.app/Contents/MacOS/clementine
-    > ${PROJECT_BINARY_DIR}/clementine.breakpad
-    DEPENDS clementine)
-  add_custom_target(clementine-breakpad
-    DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
   # `clementine` is already signed with APPLE_DEVELOPER_ID (or ad-hoc, see
   # above) as part of its own POST_BUILD step. APPLE_NOTARIZE_API_KEY_PATH
