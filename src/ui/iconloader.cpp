@@ -25,6 +25,7 @@
 #include "core/appearance.h"
 #include "core/logging.h"
 #include "core/utilities.h"
+#include "ui/symbolicicon.h"
 
 #ifdef Q_OS_DARWIN
 #include "ui/sfsymbolicon.h"
@@ -34,6 +35,7 @@ QList<int> IconLoader::sizes_;
 QString IconLoader::custom_icon_path_;
 QList<QString> IconLoader::icon_sub_path_;
 bool IconLoader::use_sys_icons_;
+bool IconLoader::use_symbolic_icons_;
 
 void IconLoader::Init() {
   sizes_.clear();
@@ -47,6 +49,7 @@ void IconLoader::Init() {
   QSettings settings;
   settings.beginGroup(Appearance::kSettingsGroup);
   use_sys_icons_ = settings.value("b_use_sys_icons", false).toBool();
+  use_symbolic_icons_ = UseSymbolicIcons();
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
@@ -76,6 +79,17 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     }
   }
 #endif
+
+  // Under GNOME, the icon theme's symbolic icons for the common actions,
+  // unless the user has an icon set of their own.
+  if (use_symbolic_icons_ && icontype == Base &&
+      !QDir(custom_icon_path_ + icon_sub_path_.at(icontype)).exists()) {
+    const QString symbolic = SymbolicNameForIconName(name);
+    if (!symbolic.isEmpty()) {
+      ret = SymbolicIcon(symbolic);
+      if (!ret.isNull()) return ret;
+    }
+  }
 
   // Set the icon load location based on IConType
   switch (icontype) {

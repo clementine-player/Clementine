@@ -410,6 +410,7 @@ set(SOURCES
   ui/splash.cpp
   ui/songmetadatasettingspage.cpp
   ui/standarditemiconloader.cpp
+  ui/symbolicicon.cpp
   ui/streamdetailsdialog.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
