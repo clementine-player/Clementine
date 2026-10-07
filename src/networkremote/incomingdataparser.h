@@ -55,9 +55,9 @@ class IncomingDataParser : public QObject {
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
   void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now,
-                  bool enqueue);
+                  bool enqueue, bool enqueue_next);
   void InsertSongs(int id, const SongList& songs, int pos, bool play_now,
-                   bool enqueue);
+                   bool enqueue, bool enqueue_next);
   void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
   void SendLibrary(RemoteClient* client);

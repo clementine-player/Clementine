@@ -121,6 +121,7 @@ void OutgoingDataCreator::SendClementineInfo() {
   info->set_version(version.toLatin1().toStdString());
   info->set_allow_downloads(allow_downloads_);
   info->add_features(cpb::remote::SERVER_FEATURE_BROWSE);
+  info->add_features(cpb::remote::SERVER_FEATURE_ENQUEUE_NEXT);
   if (streaming_enabled_) {
     info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
   }

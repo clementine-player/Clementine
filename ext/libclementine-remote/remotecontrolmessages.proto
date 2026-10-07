@@ -324,6 +324,10 @@ message RequestInsertUrls {
   repeated SongMetadata songs = 6;
   // if we wish to create a new playlist
   optional string new_playlist_name = 7;
+  // Queue them to play straight after the current song, in front of anything
+  // queued already. Servers with SERVER_FEATURE_ENQUEUE_NEXT honor it; older
+  // ones just insert them.
+  optional bool enqueue_next = 8 [default = false];
 }
 
 // Client want to change track
@@ -495,6 +499,8 @@ enum ServerFeature {
   SERVER_FEATURE_RENDERING = 1;
   // The server can be browsed like its Internet sidebar (REQUEST_BROWSE).
   SERVER_FEATURE_BROWSE = 2;
+  // The server honors RequestInsertUrls.enqueue_next.
+  SERVER_FEATURE_ENQUEUE_NEXT = 3;
 }
 
 // Optional abilities of a renderer, beyond decoding its formats.
