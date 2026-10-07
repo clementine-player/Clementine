@@ -44,6 +44,9 @@ class TrackSliderSlider : public QSlider {
   void enterEvent(QEnterEvent*);
   void leaveEvent(QEvent*);
   void keyPressEvent(QKeyEvent* event);
+#ifdef Q_OS_DARWIN
+  void paintEvent(QPaintEvent* e);
+#endif
 
  private slots:
   void UpdateDeltaTime();

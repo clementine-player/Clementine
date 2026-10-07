@@ -19,6 +19,7 @@
 
 #include <QEnterEvent>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QStyle>
 #include <QStyleOptionSlider>
 #include <QWheelEvent>
@@ -122,6 +123,26 @@ void TrackSliderSlider::leaveEvent(QEvent* e) {
     popup_->hide();
   }
 }
+
+#ifdef Q_OS_DARWIN
+void TrackSliderSlider::paintEvent(QPaintEvent* e) {
+  if (isEnabled()) {
+    QSlider::paintEvent(e);
+    return;
+  }
+
+  // Qt's macOS style draws a disabled slider with a disabled NSSlider, and on
+  // macOS 26 that draws its bar short of the slider's width. It's disabled
+  // when nothing is playing, back at the start, where it looks the same
+  // enabled - so draw it enabled.
+  QPainter p(this);
+  QStyleOptionSlider opt;
+  initStyleOption(&opt);
+  opt.state |= QStyle::State_Enabled;
+  opt.subControls = QStyle::SC_SliderGroove | QStyle::SC_SliderHandle;
+  style()->drawComplexControl(QStyle::CC_Slider, &opt, &p, this);
+}
+#endif
 
 void TrackSliderSlider::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Down) {
