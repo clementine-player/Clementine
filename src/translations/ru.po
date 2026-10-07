@@ -139,7 +139,7 @@ msgstr "%1 дн. назад"
 #: chromecast/chromecastengine.cpp:202
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
-msgstr ""
+msgstr "%1 не находится в сети, прослушиваемой удалённым доступом по сети"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -876,7 +876,7 @@ msgstr "Сердитый"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/адреса в плейлист"
 
@@ -1169,7 +1169,7 @@ msgstr "Сменить режим перемешивания"
 msgid "Change the currently playing song"
 msgstr "Сменить активный трек"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 msgid "Change the language"
 msgstr "Сменить язык"
 
@@ -1399,7 +1399,7 @@ msgstr "Ко&мпозитор"
 msgid "Colors"
 msgstr "Цвета"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделённый запятыми список «класс:уровень», где уровень от 0 до 3"
 
@@ -1666,7 +1666,7 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Create a new playlist with files/URLs"
 msgstr "Создать новый плейлист с файлами/адресами"
 
@@ -1749,11 +1749,11 @@ msgstr "дн."
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by 4 percent"
 msgstr "Уменьшить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Decrease the volume by <value> percent"
 msgstr "Уменьшить громкость на <value> процентов"
 
@@ -1813,7 +1813,7 @@ msgstr "Удалить предустановку"
 msgid "Delete smart playlist"
 msgstr "Удалить умный плейлист"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Delete the currently playing song"
 msgstr "Удалить активный трек"
 
@@ -1934,7 +1934,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки вида"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -2014,7 +2014,7 @@ msgstr "Загрузить %n эпизодов"
 
 #: ../bin/src/ui_networkremotesettingspage.h:320
 msgid "Download Clementine Remote for Android"
-msgstr ""
+msgstr "Скачать Clementine Remote для Android"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
@@ -2236,7 +2236,7 @@ msgstr "Введите имя папки"
 
 #: ../bin/src/ui_libraryfilterwidget.h:90
 msgid "Entire collection"
-msgstr "Вся коллекция"
+msgstr "Вся фонотека"
 
 #: internet/podcasts/podcastservice.cpp:545
 msgid "Episode information"
@@ -2246,11 +2246,11 @@ msgstr "Информация об эпизоде"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
@@ -2939,11 +2939,11 @@ msgstr "Несовместимая версия протокола Subsonic REST
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Неполная конфигурация, пожалуйста, убедитесь, что все поля заполнены."
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by 4 percent"
 msgstr "Увеличить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличить громкость на <value> процентов"
 
@@ -3126,9 +3126,10 @@ msgstr "Длина"
 
 #: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
-"Let a connected device act as the speaker: Clementine keeps the playlist and"
-" streams the audio to it."
-msgstr "Разрешить подключённому устройству выступать в роли динамика: Clementine сохраняет плейлист и передаёт на него аудиопоток."
+"Let a connected device, or a Chromecast or other Cast device on your "
+"network, act as the speaker: Clementine keeps the playlist and streams the "
+"audio to it."
+msgstr "Позволить подключённому устройству, Chromecast или другому устройству Cast в вашей сети работать как динамик: Clementine хранит плейлист и передаёт на него аудио."
 
 #: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
@@ -3233,7 +3234,7 @@ msgstr "Загружаются сведения о композициях"
 msgid "Loading..."
 msgstr "Загружается…"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:195
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего плейлиста"
 
@@ -3570,7 +3571,7 @@ msgstr "Новый умный плейлист…"
 
 #: widgets/freespacebar.cpp:47
 msgid "New songs"
-msgstr "Новые композиции"
+msgstr "Новые дорожки"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:106
 msgid "New tracks will be added automatically."
@@ -3883,7 +3884,7 @@ msgstr "Поддержка года выхода оригинала"
 msgid "Other"
 msgstr "Прочее"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Other options"
 msgstr "Прочие настройки"
 
@@ -3911,7 +3912,7 @@ msgstr "Перезаписать все"
 
 #: ../bin/src/ui_filenameformatwidget.h:125
 msgid "Overwrite existing files"
-msgstr "Перезаписать существующие файлы"
+msgstr "Перезаписывать существующие файлы"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Overwrite smaller ones only"
@@ -3942,7 +3943,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Пауза"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -3992,11 +3993,11 @@ msgstr "Запустите воспроизведение песни, чтобы
 msgid "Play count"
 msgstr "Разы"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:197
 msgid "Play given playlist"
 msgstr "Проиграть данный плейлист"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:176
 msgid "Play if stopped, pause if playing"
 msgstr "Играть если остановлено, пауза если воспроизводится"
 
@@ -4011,13 +4012,13 @@ msgstr "Играть следующий"
 
 #: widgets/outputbutton.cpp:103
 msgid "Play on another device"
-msgstr ""
+msgstr "Играть на другом устройстве"
 
 #: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Play the <n>th track in the playlist"
 msgstr "Играть <n> трек в плейлисте"
 
@@ -4029,14 +4030,14 @@ msgstr "Играть/пауза"
 msgid "Playback"
 msgstr "Проигрывание"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:174
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
 #: widgets/outputbutton.cpp:104
 #, qt-format
 msgid "Playing on %1"
-msgstr ""
+msgstr "Играет на %1"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4048,7 +4049,7 @@ msgstr "Плейлист"
 msgid "Playlist finished"
 msgstr "Плейлист закончился"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Настройки плейлиста"
@@ -4198,7 +4199,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущий трек"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -4239,7 +4240,7 @@ msgstr "Перемешать порядок песен"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4506,7 +4507,7 @@ msgstr "Сбросить счётчики прослушивания"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапуск песни, при повторном нажатии — переход к предыдущей"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Перезапустить трек или проиграть предыдущий, если не прошло 8 секунд от начала."
@@ -4549,7 +4550,7 @@ msgstr "Рок"
 
 #: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Root folder that will be browsable from the network remote"
-msgstr "Корневая папка, которая будет видна через сетевой удалённый доступ"
+msgstr "Корневая папка, которая будет видна через удалённый доступ по сети"
 
 #: ../bin/src/ui_console.h:127
 msgid "Run"
@@ -4779,11 +4780,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперёд"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Перемотать активный трек на относительную позицию"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать активный трек на абсолютную позицию"
 
@@ -4864,7 +4865,7 @@ msgstr "Установить %1 в «%2»…"
 msgid "Set target rate"
 msgstr "Указать целевую частоту"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -5070,7 +5071,7 @@ msgstr "Размер:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:179
 msgid "Skip backwards in playlist"
 msgstr "Перейти назад в плейлисте"
 
@@ -5082,7 +5083,7 @@ msgstr "Пропуски"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Пропускать файлы с этими расширениями (через запятые, регистр не учитывается)"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:180
 msgid "Skip forwards in playlist"
 msgstr "Перейти вперёд в плейлисте"
 
@@ -5191,7 +5192,7 @@ msgstr "Оценённые альбомы"
 msgid "Start ripping"
 msgstr "Начать извлечение"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:175
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас плейлист"
 
@@ -5229,11 +5230,11 @@ msgstr "Стоп после каждого трека"
 msgid "Stop after this track"
 msgstr "Стоп после этого трека"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:178
 msgid "Stop playback after current track"
 msgstr "Остановить после текущего трека"
 
@@ -5491,7 +5492,7 @@ msgstr "В дальнейшем это можно изменить в настр
 
 #: widgets/outputbutton.cpp:67
 msgid "This computer"
-msgstr ""
+msgstr "Этот компьютер"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5561,7 +5562,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл./откл. скробблинг"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:199
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость модного экранного меню"
 
@@ -5660,7 +5661,7 @@ msgstr "Адрес"
 msgid "URL of its Logo:"
 msgstr "Адрес логотипа:"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "URL(s)"
 msgstr "Ссылки"
 
@@ -5756,7 +5757,7 @@ msgstr "Обновление %1%…"
 msgid "Updating library"
 msgstr "Обновление фонотеки"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "Usage"
 msgstr "Использование"
 
@@ -6249,7 +6250,7 @@ msgstr "bpm"
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr "разделённый запятыми список разрешённых расширений, который будет доступен через сетевой удалённый доступ (напр.: m3u,mp3,flac,ogg,wav) "
+msgstr "разделённый запятыми список разрешённых расширений, который будет доступен через удалённый доступ по сети (напр.: m3u,mp3,flac,ogg,wav) "
 
 #: smartplaylists/searchterm.cpp:259
 msgid "contains"
@@ -6352,7 +6353,7 @@ msgstr "сначала самые старые"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "options"
 msgstr "параметры"
 

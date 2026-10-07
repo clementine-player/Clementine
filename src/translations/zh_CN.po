@@ -864,7 +864,7 @@ msgstr "愤怒"
 msgid "Appearance"
 msgstr "外观"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Append files/URLs to the playlist"
 msgstr "将文件或 URL 追加到播放列表"
 
@@ -1157,7 +1157,7 @@ msgstr "更改随机播放模式"
 msgid "Change the currently playing song"
 msgstr "更改当前播放的歌曲"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 msgid "Change the language"
 msgstr "更改语言"
 
@@ -1387,7 +1387,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "class:level 列表用逗号分隔，level 范围 0-3"
 
@@ -1654,7 +1654,7 @@ msgstr "从 %1 中设置封面"
 msgid "Covers from %1"
 msgstr "封面来自 %1"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1737,11 +1737,11 @@ msgstr "天"
 msgid "De&fault"
 msgstr "默认(&F)"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1801,7 +1801,7 @@ msgstr "删除预设"
 msgid "Delete smart playlist"
 msgstr "删除智能播放列表"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1922,7 +1922,7 @@ msgstr "不连续传输"
 msgid "Display options"
 msgstr "显示选项"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Display the on-screen-display"
 msgstr "显示 OSD"
 
@@ -2234,11 +2234,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "均衡器"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Equivalent to --log-levels *:1"
 msgstr "相当于 --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Equivalent to --log-levels *:3"
 msgstr "相当于 --log-levels *:3"
 
@@ -2927,11 +2927,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3114,8 +3114,9 @@ msgstr "长度"
 
 #: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
-"Let a connected device act as the speaker: Clementine keeps the playlist and"
-" streams the audio to it."
+"Let a connected device, or a Chromecast or other Cast device on your "
+"network, act as the speaker: Clementine keeps the playlist and streams the "
+"audio to it."
 msgstr ""
 
 #: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
@@ -3221,7 +3222,7 @@ msgstr "正在加载曲目信息"
 msgid "Loading..."
 msgstr "正在加载…"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:195
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "加载文件或 URL，替换当前播放列表"
 
@@ -3871,7 +3872,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Other options"
 msgstr "其他选项"
 
@@ -3930,7 +3931,7 @@ msgstr "密码"
 msgid "Pause"
 msgstr "暂停"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Pause playback"
 msgstr "暂停播放"
 
@@ -3980,11 +3981,11 @@ msgstr ""
 msgid "Play count"
 msgstr "播放计数"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:197
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:176
 msgid "Play if stopped, pause if playing"
 msgstr "如果已停止则播放，如果正在播放则暂停"
 
@@ -4005,7 +4006,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Play the <n>th track in the playlist"
 msgstr "播放列表中的第 <n> 首"
 
@@ -4017,7 +4018,7 @@ msgstr "播放/暂停"
 msgid "Playback"
 msgstr "播放"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:174
 msgid "Player options"
 msgstr "播放器选项"
 
@@ -4036,7 +4037,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "播放列表已完成"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "播放列表选项"
@@ -4186,7 +4187,7 @@ msgstr "上一首"
 msgid "Previous track"
 msgstr "上一首"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Print out version information"
 msgstr "打印版本信息"
 
@@ -4227,7 +4228,7 @@ msgstr "将歌曲随机排序"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4494,7 +4495,7 @@ msgstr "重置播放计数"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4767,11 +4768,11 @@ msgstr "快退"
 msgid "Seek forward"
 msgstr "快进"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Seek the currently playing track by a relative amount"
 msgstr "当前播放的曲目以相对步长快进/快退"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track to an absolute position"
 msgstr "当前播放的曲目快进/快退至指定时间点"
 
@@ -4852,7 +4853,7 @@ msgstr "将 %1 设置为“%2”…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Set the volume to <value> percent"
 msgstr "设置音量为 <value>%"
 
@@ -5058,7 +5059,7 @@ msgstr ""
 msgid "Ska"
 msgstr "斯卡音乐"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:179
 msgid "Skip backwards in playlist"
 msgstr "在播放列表中快退"
 
@@ -5070,7 +5071,7 @@ msgstr "跳过计数"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:180
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中快进"
 
@@ -5179,7 +5180,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:175
 msgid "Start the playlist currently playing"
 msgstr "开始播放当前播放列表"
 
@@ -5217,11 +5218,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "在此曲目后停止"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Stop playback"
 msgstr "停止播放"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:178
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5549,7 +5550,7 @@ msgstr "切换队列状态"
 msgid "Toggle scrobbling"
 msgstr "切换听歌记录"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:199
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "切换 OSD 可见性"
 
@@ -5648,7 +5649,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5744,7 +5745,7 @@ msgstr "正在更新 %1%…"
 msgid "Updating library"
 msgstr "正在更新媒体库"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "Usage"
 msgstr "用法"
 
@@ -6340,7 +6341,7 @@ msgstr "从旧到新"
 msgid "on"
 msgstr "于日期"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "options"
 msgstr "选项"
 

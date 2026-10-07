@@ -115,7 +115,7 @@ msgstr "%1 päeva tagasi"
 #: chromecast/chromecastengine.cpp:202
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
-msgstr ""
+msgstr "%1 ei asu võrgus, mida kaugjuhtimispult kuulab"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -852,7 +852,7 @@ msgstr "Vihane"
 msgid "Appearance"
 msgstr "Väljanägemine"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Append files/URLs to the playlist"
 msgstr "Lisa faile/võrguaadresse oma esitusloendisse"
 
@@ -1145,7 +1145,7 @@ msgstr "Muuda segamise viisi"
 msgid "Change the currently playing song"
 msgstr "Vaheta hetkel esitatavat lugu"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 msgid "Change the language"
 msgstr "Muuda keelt"
 
@@ -1375,7 +1375,7 @@ msgstr "He&lilooja"
 msgid "Colors"
 msgstr "Värvid"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komadega eraldatud loend klass:tase, kus tase võib olla 0-3"
 
@@ -1642,7 +1642,7 @@ msgstr "Kaanepilt on määratud %1'st"
 msgid "Covers from %1"
 msgstr "Kaanepildid %1'st"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Create a new playlist with files/URLs"
 msgstr "Koosta failidest/võrguaadressidest uus esitusloend"
 
@@ -1725,11 +1725,11 @@ msgstr "päeva"
 msgid "De&fault"
 msgstr "&Vaikeväärtus"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähenda helivaljust 4 protsenti"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähenda helivaljust <value> protsenti"
 
@@ -1789,7 +1789,7 @@ msgstr "Kustuta valmisseadistus."
 msgid "Delete smart playlist"
 msgstr "Kustuta nutikas esitusloend"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Delete the currently playing song"
 msgstr "Kustuta parasjagu esitamisel olev lugu"
 
@@ -1910,7 +1910,7 @@ msgstr "Katkestustega edastamine"
 msgid "Display options"
 msgstr "Kuvamise valikud"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Display the on-screen-display"
 msgstr "Luba ekraanimenüü"
 
@@ -1990,7 +1990,7 @@ msgstr "Laadi %n osa alla"
 
 #: ../bin/src/ui_networkremotesettingspage.h:320
 msgid "Download Clementine Remote for Android"
-msgstr ""
+msgstr "Laadi alla Clementine'i kaugjuhtimispult Androidile"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
@@ -2222,11 +2222,11 @@ msgstr "Andmed osa kohta"
 msgid "Equalizer"
 msgstr "Ekvalaiser"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Equivalent to --log-levels *:1"
 msgstr "Võrdne käivitusvõtmega --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Equivalent to --log-levels *:3"
 msgstr "Võrdne käivitusvõtmega --log-levels *:3"
 
@@ -2915,11 +2915,11 @@ msgstr "Mitteühilduv Subsonicu REST-protokolli versioon. Server vajab uuendust.
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Seadistus on poolik. Palun kontrolli, et kõik väljad oleksid täidetud."
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Increase the volume by 4 percent"
 msgstr "Suurenda helivaljust 4 protsenti"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Increase the volume by <value> percent"
 msgstr "Suurenda helivaljust <value> protsenti"
 
@@ -3102,9 +3102,10 @@ msgstr "Kestus"
 
 #: ../bin/src/ui_networkremotesettingspage.h:302
 msgid ""
-"Let a connected device act as the speaker: Clementine keeps the playlist and"
-" streams the audio to it."
-msgstr "Las ühendatud seadmel toimida kõlarina: Clementine jätkab esitamist ja edastab heli tollesse seadmesse."
+"Let a connected device, or a Chromecast or other Cast device on your "
+"network, act as the speaker: Clementine keeps the playlist and streams the "
+"audio to it."
+msgstr ""
 
 #: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
 #: ../bin/src/ui_seafilesettingspage.h:174
@@ -3209,7 +3210,7 @@ msgstr "Laadin lugude teavet"
 msgid "Loading..."
 msgstr "Laadimine..."
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:195
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Laadib faile või võrguaadresse ning asendab kasutuseloleva esitusloendi"
 
@@ -3859,7 +3860,7 @@ msgstr "Algse aasta sildi tugi"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Other options"
 msgstr "Muud valikud"
 
@@ -3918,7 +3919,7 @@ msgstr "Salasõna"
 msgid "Pause"
 msgstr "Paus"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Pause playback"
 msgstr "Peata esitus"
 
@@ -3968,11 +3969,11 @@ msgstr "Hakka midagi kuulama ning näed siin esitaja pilte ja elulugu."
 msgid "Play count"
 msgstr "Esitamisi"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:197
 msgid "Play given playlist"
 msgstr "Esita antud loendit"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:176
 msgid "Play if stopped, pause if playing"
 msgstr "Esita, kui on peatatud, pane pausile, kui esitamisel"
 
@@ -3987,13 +3988,13 @@ msgstr "Esita järgmisena"
 
 #: widgets/outputbutton.cpp:103
 msgid "Play on another device"
-msgstr ""
+msgstr "Esita muus seadmes"
 
 #: ui/mainwindow.cpp:1879
 msgid "Play selected tracks next"
 msgstr "Esita valitud lood järgmisena"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Play the <n>th track in the playlist"
 msgstr "Esita nimekirjast lugu #<n>"
 
@@ -4005,14 +4006,14 @@ msgstr "Esita/paus"
 msgid "Playback"
 msgstr "Taasesitus"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:174
 msgid "Player options"
 msgstr "Esitaja valikud"
 
 #: widgets/outputbutton.cpp:104
 #, qt-format
 msgid "Playing on %1"
-msgstr ""
+msgstr "Esitamisel seadmes %1"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
@@ -4024,7 +4025,7 @@ msgstr "Esitusloend"
 msgid "Playlist finished"
 msgstr "Esitusloend on läbi mängitud"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Esitusnimekirja valikud"
@@ -4174,7 +4175,7 @@ msgstr "Eelmine"
 msgid "Previous track"
 msgstr "Eelmine lugu"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Print out version information"
 msgstr "Trüki teave käesoleva versiooni kohta"
 
@@ -4215,7 +4216,7 @@ msgstr "Pane lood juhuslikku järjekorda"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4482,7 +4483,7 @@ msgstr "Nulli esituskordade arv"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Alusta sama loo esitamist ja uuel vajutusel hüppa eelmise loo juurde"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Alusta loo esitamist uuesti või alusta eelmise loo esitamist, kui algusest on möödunud kuni 8 sekundit."
@@ -4674,7 +4675,7 @@ msgstr "Otsi teenusest Apple Podcasts"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Search Icecast stations"
-msgstr "Otsi Icecast'i veebiraadiojaamu"
+msgstr "Otsi Icecasti veebiraadiojaamu"
 
 #: internet/jamendo/jamendoservice.cpp:117
 msgid "Search Jamendo"
@@ -4755,11 +4756,11 @@ msgstr "Samm tagasi"
 msgid "Seek forward"
 msgstr "Samm edasi"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Jätka praeguse loo esitust uuest suhtelisest asukohast"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Jätka praeguse loo esitust uuest absoluutsest asukohast"
 
@@ -4840,7 +4841,7 @@ msgstr "Seadista %1 väärtuseks „%2“..."
 msgid "Set target rate"
 msgstr "Seadista bitikiiruse eesmärk"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Set the volume to <value> percent"
 msgstr "Määra helivaljuseks <value> protsenti"
 
@@ -5046,7 +5047,7 @@ msgstr "Suurus:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:179
 msgid "Skip backwards in playlist"
 msgstr "Samm lugude nimekirjas tagasi"
 
@@ -5058,7 +5059,7 @@ msgstr "Vahelejätmiskordi"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Jäta nende laienditega failid vahele (tõstutundetu komadega eraldatud loend)"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:180
 msgid "Skip forwards in playlist"
 msgstr "Samm lugude nimekirjas edasi"
 
@@ -5167,7 +5168,7 @@ msgstr "Tärniga märgitud albumid"
 msgid "Start ripping"
 msgstr "Alusta rippimist"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:175
 msgid "Start the playlist currently playing"
 msgstr "Alusta hetkel esitatavat esitusloendit uuesti algusest"
 
@@ -5205,11 +5206,11 @@ msgstr "Peata pärast iga lugu"
 msgid "Stop after this track"
 msgstr "Peata pärast seda lugu"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Stop playback"
 msgstr "Lõpeta esitamine"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:178
 msgid "Stop playback after current track"
 msgstr "Peata esitamine peale käesolevat lugu"
 
@@ -5333,16 +5334,16 @@ msgstr "\"%1\" käsu täitmist ei olnud võimalik alustada"
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
 msgid "The Cast device couldn't play the track (%1)"
-msgstr ""
+msgstr "Leviedastuse seade ei suutnud lugu esitada (%1)"
 
 #: chromecast/castmediaplayer.cpp:171
 #, qt-format
 msgid "The Cast device couldn't start playing: %1"
-msgstr ""
+msgstr "Leviedastuse seade ei suutnud esitamist alustada: %1"
 
 #: chromecast/castmediaplayer.cpp:289
 msgid "The Cast device stopped playing because of an error"
-msgstr ""
+msgstr "Leviedastuse seade lõpetas vea tõttu esitamise"
 
 #: ../bin/src/ui_appearancesettingspage.h:337
 msgid "The album cover of the currently playing song"
@@ -5467,7 +5468,7 @@ msgstr "Seda on hiljem võimalik muuta seadistustest"
 
 #: widgets/outputbutton.cpp:67
 msgid "This computer"
-msgstr ""
+msgstr "Se arvuti"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5537,7 +5538,7 @@ msgstr "Vaheta staatus esitusjärjekorras"
 msgid "Toggle scrobbling"
 msgstr "Lülita kraasimine sisse või välja"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:199
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Lülita ekraanimenüü nähtavust sisse või välja"
 
@@ -5636,7 +5637,7 @@ msgstr "Võrguaadress"
 msgid "URL of its Logo:"
 msgstr "Logo asukoht võrgus:"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "URL(s)"
 msgstr "Võrguaadress(id)"
 
@@ -5732,7 +5733,7 @@ msgstr "Uuendan %1%"
 msgid "Updating library"
 msgstr "Uuendan helikogu"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "Usage"
 msgstr "Kasutus"
 
@@ -6328,7 +6329,7 @@ msgstr "kõige vanem esimesena"
 msgid "on"
 msgstr "kuupäeval"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:173
 msgid "options"
 msgstr "valikud"
 
