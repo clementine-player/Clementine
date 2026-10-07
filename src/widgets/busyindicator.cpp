@@ -18,7 +18,56 @@
 #include "busyindicator.h"
 
 #include <QHBoxLayout>
-#include <QMovie>
+#include <QPainter>
+#include <QTimer>
+
+// Draws the spinner instead of playing a GIF so it stays sharp on high-DPI
+// screens and follows the palette's text colour.
+class BusyIndicatorSpinner : public QWidget {
+ public:
+  explicit BusyIndicatorSpinner(QWidget* parent = nullptr)
+      : QWidget(parent), timer_(new QTimer(this)), step_(0) {
+    setFixedSize(16, 16);
+    timer_->setInterval(100);
+    connect(timer_, &QTimer::timeout, this, [this] {
+      step_ = (step_ + 1) % kDots;
+      update();
+    });
+  }
+
+  void start() { timer_->start(); }
+  void stop() { timer_->stop(); }
+
+ protected:
+  void paintEvent(QPaintEvent*) override {
+    QPainter p(this);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setPen(Qt::NoPen);
+    p.translate(QRectF(rect()).center());
+
+    const qreal dot_radius = width() * 0.1;
+    const qreal ring_radius = width() / 2.0 - dot_radius - 0.5;
+    QColor color = palette().color(QPalette::WindowText);
+
+    for (int i = 0; i < kDots; ++i) {
+      // The dot at step_ is the head; the ones behind it fade out.
+      const int age = (step_ - i + kDots) % kDots;
+      color.setAlphaF(1.0 - age * 0.85 / (kDots - 1));
+      p.setBrush(color);
+
+      p.save();
+      p.rotate(i * 360.0 / kDots);
+      p.drawEllipse(QPointF(0, -ring_radius), dot_radius, dot_radius);
+      p.restore();
+    }
+  }
+
+ private:
+  static const int kDots = 8;
+
+  QTimer* timer_;
+  int step_;
+};
 
 BusyIndicator::BusyIndicator(const QString& text, QWidget* parent)
     : QWidget(parent) {
@@ -30,29 +79,26 @@ BusyIndicator::BusyIndicator(QWidget* parent) : QWidget(parent) {
 }
 
 void BusyIndicator::Init(const QString& text) {
-  movie_ = new QMovie(":spinner.gif"), label_ = new QLabel;
-
-  QLabel* icon = new QLabel;
-  icon->setMovie(movie_);
-  icon->setMinimumSize(16, 16);
+  spinner_ = new BusyIndicatorSpinner;
+  label_ = new QLabel;
 
   label_->setWordWrap(true);
   label_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
-  layout->addWidget(icon);
+  layout->addWidget(spinner_);
   layout->addSpacing(6);
   layout->addWidget(label_);
 
   set_text(text);
 }
 
-BusyIndicator::~BusyIndicator() { delete movie_; }
+BusyIndicator::~BusyIndicator() {}
 
-void BusyIndicator::showEvent(QShowEvent*) { movie_->start(); }
+void BusyIndicator::showEvent(QShowEvent*) { spinner_->start(); }
 
-void BusyIndicator::hideEvent(QHideEvent*) { movie_->stop(); }
+void BusyIndicator::hideEvent(QHideEvent*) { spinner_->stop(); }
 
 void BusyIndicator::set_text(const QString& text) {
   label_->setText(text);
