@@ -32,6 +32,7 @@ class TrackSliderPopup : public QWidget {
   void SetPopupPosition(const QPoint& pos);
 
  protected:
+  bool event(QEvent* e);
   void paintEvent(QPaintEvent*);
 
  private:
