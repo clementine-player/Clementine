@@ -227,9 +227,11 @@ class PlaylistManager : public PlaylistManagerInterface {
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
   void InsertUrls(int id, const QList<QUrl>& urls, int pos = -1,
-                  bool play_now = false, bool enqueue = false);
+                  bool play_now = false, bool enqueue = false,
+                  bool enqueue_next = false);
   void InsertSongs(int id, const SongList& songs, int pos = -1,
-                   bool play_now = false, bool enqueue = false);
+                   bool play_now = false, bool enqueue = false,
+                   bool enqueue_next = false);
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);

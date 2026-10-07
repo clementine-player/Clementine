@@ -65,12 +65,14 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
           playlist_manager->sequence(),
           SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
-  connect(this, SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool)),
+  connect(this,
+          SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool, bool)),
           playlist_manager,
-          SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool)));
-  connect(this, SIGNAL(InsertSongs(int, const SongList&, int, bool, bool)),
+          SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool, bool)));
+  connect(this,
+          SIGNAL(InsertSongs(int, const SongList&, int, bool, bool, bool)),
           playlist_manager,
-          SLOT(InsertSongs(int, const SongList&, int, bool, bool)));
+          SLOT(InsertSongs(int, const SongList&, int, bool, bool, bool)));
   connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)), playlist_manager,
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
   connect(this, SIGNAL(New(const QString&)), playlist_manager,
@@ -323,7 +325,7 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
 
     // Insert the urls
     emit InsertUrls(playlist_id, urls, request.position(), request.play_now(),
-                    request.enqueue());
+                    request.enqueue(), request.enqueue_next());
   }
 
   // Add songs with metadata if present
@@ -340,7 +342,7 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
           app_->playlist_manager()->New(request.new_playlist_name().c_str());
 
     emit InsertSongs(playlist_id, songs, request.position(), request.play_now(),
-                     request.enqueue());
+                     request.enqueue(), request.enqueue_next());
   }
 }
 
