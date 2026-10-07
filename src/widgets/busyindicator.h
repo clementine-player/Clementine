@@ -20,7 +20,7 @@
 
 #include <QLabel>
 
-class QMovie;
+class BusyIndicatorSpinner;
 
 class BusyIndicator : public QWidget {
   Q_OBJECT
@@ -42,7 +42,7 @@ class BusyIndicator : public QWidget {
   void Init(const QString& text);
 
  private:
-  QMovie* movie_;
+  BusyIndicatorSpinner* spinner_;
   QLabel* label_;
 };
 
