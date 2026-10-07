@@ -23,6 +23,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <QWheelEvent>
+#include <QWindow>
 #include <QtDebug>
 
 #include "ui/qt_blurimage.h"
@@ -60,6 +61,17 @@ void TrackSliderPopup::SetSmallText(const QString& text) {
 void TrackSliderPopup::SetPopupPosition(const QPoint& pos) {
   pos_ = pos;
   UpdatePosition();
+}
+
+bool TrackSliderPopup::event(QEvent* e) {
+  // The popup gets a native window when its siblings do, as they do on macOS
+  // next to a Cocoa search field. WA_TransparentForMouseEvents doesn't reach
+  // that window, so without this it takes the clicks meant for the slider
+  // underneath.
+  if (e->type() == QEvent::WinIdChange && windowHandle()) {
+    windowHandle()->setFlag(Qt::WindowTransparentForInput);
+  }
+  return QWidget::event(e);
 }
 
 void TrackSliderPopup::paintEvent(QPaintEvent*) {
