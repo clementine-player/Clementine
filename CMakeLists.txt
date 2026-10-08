@@ -221,6 +221,33 @@ if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
 endif(WIN32)
 
+find_package(sentry CONFIG QUIET)
+optional_component(SENTRY OFF "Crash reporting (Sentry)"
+  DEPENDS "sentry-native" sentry_FOUND
+)
+# Where crash reports go: Clementine's Sentry project. A DSN only lets you send
+# events, so it isn't secret. Set it to empty to build with ENABLE_SENTRY but
+# never start crash reporting.
+set(SENTRY_DSN
+    "https://655f8ef3c58fb344dd15e72df0d50f95@o4512210144526336.ingest.de.sentry.io/4512210147606608"
+    CACHE STRING "Sentry DSN that crash reports are sent to")
+if(HAVE_SENTRY)
+  # Installed alongside sentry-native by its Crashpad backend.
+  find_program(SENTRY_CRASHPAD_HANDLER crashpad_handler
+    HINTS "${sentry_DIR}/../../../bin")
+  if(NOT SENTRY_CRASHPAD_HANDLER)
+    message(FATAL_ERROR "ENABLE_SENTRY needs sentry-native built with SENTRY_BACKEND=crashpad, but crashpad_handler wasn't found")
+  endif()
+  if(UNIX AND NOT APPLE)
+    # A helper only Clementine runs, so it goes in libexec rather than on
+    # everyone's PATH.
+    include(GNUInstallDirs)
+    set(CRASHPAD_HANDLER_INSTALL_DIR "${CMAKE_INSTALL_LIBEXECDIR}/clementine")
+    set(INSTALLED_CRASHPAD_HANDLER
+      "${CMAKE_INSTALL_FULL_LIBEXECDIR}/clementine/crashpad_handler")
+  endif()
+endif()
+
 optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
