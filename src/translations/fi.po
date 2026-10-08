@@ -388,7 +388,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr "<html><head/><body><p>Voit etsiä sanaa kenttänimellä ja rajoittaa haku kyseiseen kenttään, esim. <span style=\" font-weight:600;\">esittäjä:</span><span style=\" font-style:italic;\">Bode</span> etsii kirjastosta kaikki artistit sanalla Bode <span style=\" font-weight:600;\">toistomäärä:</span><span style=\" font-style:italic;\">&gt;=2</span>etsii kappaleita, joita on soitettu vähintään kahdesti,<span style=\" font-weight:600;\">soitettu hiljattain:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> etsii soitetut kappaleet viimeiset 180 min.</p><p><span style=\" font-weight:600;\">Käytettävät kentät: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
+msgstr "<html><head/><body><p>Voit etsiä hakusanalla ja rajoittaa haku tiettyyn kenttään, esim. <span style=\" font-weight:600;\">artisti:</span><span style=\" font-style:italic;\">Bode</span> etsii kirjastosta kaikki artistit sanalla Bode <span style=\" font-weight:600;\">toistomäärä:</span><span style=\" font-style:italic;\">&gt;=2</span>löytää kappaleita, joita on toistettu vähintään kahdesti,<span style=\" font-weight:600;\">toistettu hiljattain:</span>&lt;<span style=\" font-style:italic;\">1h 30m</span> löytää toistetut viimeisen 180 min aikana.</p><p><span style=\" font-weight:600;\">Käytettävät kentät: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid ""
@@ -413,7 +413,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Tietueet alkavat % merkillä, esim: %artist %album %title </p>\n\n<p>Jos ympäröit sisältävän tekstin sulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
+msgstr "<p>Tietueet alkavat % merkillä, esim: %artist %album %title </p>\n\n<p>Jos ympäröit tekstin sulkeilla, se piilotetaan, jos tietue on tyhjä.</p>"
 
 #: ../bin/src/ui_networkremotesettingspage.h:285
 msgid "A client can connect only, if the correct code was entered."
@@ -2945,7 +2945,7 @@ msgstr "Sisääntulon valinnat"
 msgid "Insert..."
 msgstr "Lisää..."
 
-#: networkremote/outgoingdatacreator.cpp:535
+#: networkremote/outgoingdatacreator.cpp:536
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumental"
@@ -4018,7 +4018,7 @@ msgstr "Soitetaan %1"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:329
 #: playlist/playlistmanager.cpp:91 playlist/playlistmanager.cpp:183
-#: playlist/playlistmanager.cpp:561 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:563 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Soittolista"
 
@@ -5663,7 +5663,7 @@ msgstr "Kohteen %1 lataus epäonnistui (%2)"
 #: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
 #: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
-#: playlist/playlistmanager.cpp:568 playlist/playlistmanager.cpp:569
+#: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:509
 msgid "Unknown"
@@ -5847,7 +5847,7 @@ msgid "Variable bit rate"
 msgstr "Vaihteleva bittivirta"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
-#: playlist/playlistmanager.cpp:580 ui/albumcovermanager.cpp:267
+#: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Useita esittäjiä"
 
