@@ -2079,24 +2079,22 @@ void MainWindow::RenumberTracks() {
     if (song.IsEditable()) {
       song.set_track(track);
 
-      TagReaderReply* reply =
-          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
-
-      NewClosure(reply, &TagReaderReply::Finished, this,
-                 &MainWindow::SongSaveComplete, reply,
-                 QPersistentModelIndex(source_index));
+      const QPersistentModelIndex index(source_index);
+      TagReaderClient::Instance()
+          ->SaveFile(song.url().toLocalFile(), song)
+          .then(this,
+                [this, index](bool saved) { SongSaveComplete(saved, index); });
     }
     track++;
   }
 }
 
-void MainWindow::SongSaveComplete(bool success, TagReaderReply* reply,
+void MainWindow::SongSaveComplete(bool saved,
                                   const QPersistentModelIndex& index) {
-  if (success && index.isValid()) {
+  if (saved && index.isValid()) {
     app_->playlist_manager()->current()->ReloadItems(QList<int>()
                                                      << index.row());
   }
-  reply->deleteLater();
 }
 
 void MainWindow::SelectionSetValue() {
@@ -2115,12 +2113,11 @@ void MainWindow::SelectionSetValue() {
     Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
 
     if (Playlist::set_column_value(song, column, column_value)) {
-      TagReaderReply* reply =
-          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
-
-      NewClosure(reply, &TagReaderReply::Finished, this,
-                 &MainWindow::SongSaveComplete, reply,
-                 QPersistentModelIndex(source_index));
+      const QPersistentModelIndex index(source_index);
+      TagReaderClient::Instance()
+          ->SaveFile(song.url().toLocalFile(), song)
+          .then(this,
+                [this, index](bool saved) { SongSaveComplete(saved, index); });
     }
   }
 }
