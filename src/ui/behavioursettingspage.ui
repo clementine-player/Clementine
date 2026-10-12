@@ -56,6 +56,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="b_offer_crash_reports_">
+     <property name="text">
+      <string>Offer to send a crash report after Clementine crashes</string>
+     </property>
+     <property name="toolTip">
+      <string>The next time Clementine starts after a crash, ask whether to send a report so the problem can be fixed. Takes effect when Clementine restarts.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="title">
       <string>Language</string>

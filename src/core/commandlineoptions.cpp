@@ -89,6 +89,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       show_osd_(false),
       toggle_pretty_osd_(false),
       play_and_exit_timeout_secs_(-1),
+      crash_(false),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -155,6 +156,9 @@ bool CommandlineOptions::Parse() {
       // Undocumented, for demos and screenshots: what remotes call this
       // computer, instead of its host name. Left out of kHelpText.
       {"remote-name", required_argument, 0, RemoteName},
+      // Undocumented: crash on purpose once the main window is up, to test
+      // crash reporting - see CrashReporting::CrashForTesting().
+      {"crash", no_argument, 0, Crash},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -329,6 +333,10 @@ bool CommandlineOptions::Parse() {
 
       case RemoteName:
         remote_name_ = QString::fromLocal8Bit(optarg);
+        break;
+
+      case Crash:
+        crash_ = true;
         break;
 
       case '?':

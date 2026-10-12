@@ -91,6 +91,7 @@ set(SOURCES
   core/application.cpp
   core/backgroundstreams.cpp
   core/commandlineoptions.cpp
+  core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
@@ -468,6 +469,7 @@ set(HEADERS
   core/appearance.h
   core/application.h
   core/backgroundstreams.h
+  core/crashreporting.h
   core/database.h
   core/deletefiles.h
   core/filesystemwatcherinterface.h
@@ -1373,6 +1375,10 @@ if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)
 
+if(HAVE_SENTRY)
+  target_link_libraries(clementine_lib sentry::sentry)
+endif(HAVE_SENTRY)
+
 if(HAVE_LIBPULSE)
   target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
 endif()
@@ -1493,6 +1499,13 @@ if (APPLE)
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   endif()
 
+  if (HAVE_SENTRY)
+    # sentry-native's Crashpad backend looks for its handler next to the
+    # executable. codesign.py signs it along with the rest of the bundle.
+    install(PROGRAMS "${SENTRY_CRASHPAD_HANDLER}"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/MacOS")
+  endif (HAVE_SENTRY)
+
   # macdeploy.py's install_name_tool rewrites invalidate whatever ad-hoc
   # signature Homebrew shipped on each copied dylib/framework. On Apple
   # Silicon the kernel refuses to load any Mach-O with an invalid (not just
@@ -1592,4 +1605,9 @@ else (APPLE)
   install(TARGETS clementine
     RUNTIME DESTINATION bin
   )
+
+  if (HAVE_SENTRY AND CRASHPAD_HANDLER_INSTALL_DIR)
+    install(PROGRAMS "${SENTRY_CRASHPAD_HANDLER}"
+      DESTINATION "${CRASHPAD_HANDLER_INSTALL_DIR}")
+  endif ()
 endif (APPLE)
