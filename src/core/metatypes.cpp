@@ -25,6 +25,7 @@
 #include <QFileInfo>
 #include <QMap>
 #include <QMetaType>
+#include <QMimeData>
 #include <QNetworkCookie>
 #include <QNetworkReply>
 
@@ -99,6 +100,7 @@ void RegisterMetaTypes() {
   // find once it's registered.
   qRegisterMetaType<ColumnAlignmentMap>();
   qRegisterMetaType<QList<Song>>("QList<Song>");
+  qRegisterMetaType<QMimeData*>("QMimeData*");
   qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
   qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
