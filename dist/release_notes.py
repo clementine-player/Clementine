@@ -21,7 +21,7 @@ Usage:
     origin/master), and its version. Run by release.yml, and locally to see
     what the next release would be. Prints key=value lines, for
     $GITHUB_OUTPUT: last (the last release), release (true or false) and
-    version. Writes the notes to FILE (default: notes.md).
+    version. Writes the notes to FILE, or shows them after that.
 
   dist/release_notes.py notes [--commit C] [--release]
 
@@ -144,9 +144,14 @@ def plan(args: argparse.Namespace) -> None:
     if git("rev-parse", "-q", "--verify", f"refs/tags/{version}").returncode == 0:
         raise Error(f"There's a release {version} already.")
 
-    Path(args.notes).write_text(as_markdown(notes))
     print("release=true")
     print(f"version={version}")
+    if args.notes:
+        Path(args.notes).write_text(as_markdown(notes))
+    else:
+        # On stderr, to keep stdout to the key=value lines.
+        sys.stdout.flush()
+        print(f"\n{as_markdown(notes)}", end="", file=sys.stderr)
 
 
 def notes(args: argparse.Namespace) -> None:
@@ -185,7 +190,7 @@ def main() -> None:
         help="release any change since the last release, even without notes",
     )
     plan_parser.add_argument(
-        "--notes", default="notes.md", help="where to write the notes"
+        "--notes", help="where to write the notes, instead of showing them"
     )
     plan_parser.set_defaults(command=plan)
 
