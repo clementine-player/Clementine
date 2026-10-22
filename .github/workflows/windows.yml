@@ -1,0 +1,377 @@
+# Builds the Windows installer, and has SignPath sign it when asked to. all.yml
+# runs it for every pull request and push, and windows-release.yml for the
+# weekly signed release; see dist/windows/signpath/README.md.
+
+name: windows
+on:
+  workflow_call:
+    inputs:
+      signing-policy:
+        description: >
+          The SignPath signing policy to sign with: release-signing,
+          test-signing, or empty to sign nothing.
+        type: string
+        default: ''
+    secrets:
+      SIGNPATH_API_TOKEN:
+        required: false
+
+jobs:
+  build_mingw:
+    name: Build
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      # A Windows path: actions/cache runs outside the MSYS2 shell, and the
+      # clang64 ccache is a native Win32 binary, so both understand this one.
+      # Under the workspace rather than runner.temp, because the runner
+      # context isn't available at job level.
+      CCACHE_DIR: ${{ github.workspace }}\.ccache
+      CCACHE_MAXSIZE: 250M
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+  
+      # windows-latest has dropped NSIS from its preinstalled software list
+      # on some recent runner images, so install it explicitly rather than
+      # relying on it being there.
+      - name: Install NSIS
+        shell: pwsh
+        run: |
+          choco install nsis --no-progress -y
+          # The choco package doesn't register makensis on PATH itself, so
+          # do it here - GITHUB_PATH additions apply to every later step in
+          # the job regardless of which shell that step uses.
+          $nsisDir = "${env:ProgramFiles(x86)}\NSIS"
+          if (-not (Test-Path "$nsisDir\makensis.exe")) {
+            throw "makensis.exe not found under $nsisDir after choco install"
+          }
+          Add-Content -Path $env:GITHUB_PATH -Value $nsisDir
+  
+      # CLANG64 rather than MINGW64 or UCRT64: like UCRT64 it links against
+      # the Universal C Runtime instead of MINGW64's legacy msvcrt.dll, and
+      # it builds with clang, lld and libc++ - the same compiler family as
+      # the macOS build.
+      - name: Set up MSYS2 (clang64)
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: CLANG64
+          update: true
+          install: >-
+            base-devel
+            git
+            mingw-w64-clang-x86_64-toolchain
+            mingw-w64-clang-x86_64-ccache
+            mingw-w64-clang-x86_64-cmake
+            mingw-w64-clang-x86_64-ninja
+            mingw-w64-clang-x86_64-ntldd
+            mingw-w64-clang-x86_64-pkgconf
+            mingw-w64-clang-x86_64-qt6-base
+            mingw-w64-clang-x86_64-qt6-5compat
+            mingw-w64-clang-x86_64-qt6-tools
+            mingw-w64-clang-x86_64-qt6-svg
+            mingw-w64-clang-x86_64-taglib
+            mingw-w64-clang-x86_64-boost
+            mingw-w64-clang-x86_64-protobuf
+            mingw-w64-clang-x86_64-sqlite3
+            mingw-w64-clang-x86_64-glew
+            mingw-w64-clang-x86_64-fftw
+            mingw-w64-clang-x86_64-chromaprint
+            mingw-w64-clang-x86_64-libcdio
+            mingw-w64-clang-x86_64-sparsehash
+            mingw-w64-clang-x86_64-gettext
+            mingw-w64-clang-x86_64-gstreamer
+            mingw-w64-clang-x86_64-gst-plugins-base
+            mingw-w64-clang-x86_64-gst-plugins-good
+            mingw-w64-clang-x86_64-gst-plugins-bad
+            mingw-w64-clang-x86_64-gst-plugins-ugly
+            mingw-w64-clang-x86_64-gst-libav
+  
+      # These aren't confirmed to exist as MSYS2 clang64 packages (libmtp in
+      # particular). Failing softly here just means CMake's optional_component
+      # machinery disables the corresponding feature instead of failing the
+      # whole build - see the job summary in the PR/commit this came from.
+      # libgpod isn't attempted at all: it's not packaged for MSYS2 clang64,
+      # so iPod classic support is disabled on this build variant for now.
+      # (Last.fm scrobbling talks directly to the web service API now - see
+      # src/internet/lastfm/lastfmws.* - so it needs no package here at all.)
+      - name: Install optional dependencies (best-effort)
+        run: pacman --noconfirm -S --needed mingw-w64-clang-x86_64-libmtp || true
+  
+      - name: git hackery
+        run: git config --global --add safe.directory "$(cygpath -u "$GITHUB_WORKSPACE")"
+  
+      - name: Download projectM presets
+        run: |
+          # pinned so every platform ships the same presets
+          PRESETS_SHA=0180df21f5e0bd39b9060cc5de420ed2f1f9e509
+          git init -q 3rdparty/libprojectm/presets-cream
+          git -C 3rdparty/libprojectm/presets-cream fetch -q --depth=1 \
+            https://github.com/projectM-visualizer/presets-cream-of-the-crop.git \
+            "$PRESETS_SHA"
+          git -C 3rdparty/libprojectm/presets-cream checkout -q FETCH_HEAD
+          rm -rf 3rdparty/libprojectm/presets-cream/.git
+  
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: ${{ github.workspace }}\.ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
+      - name: cmake
+        working-directory: bin
+        run: >
+          cmake .. -G Ninja
+          -DCMAKE_BUILD_TYPE=Release
+  
+      - name: build
+        working-directory: bin
+        run: cmake --build .
+  
+      - name: Copy build outputs
+        working-directory: dist/windows
+        run: cp ../../bin/*.exe ../../bin/projectm-presets.rcc .
+  
+      - name: Copy Qt plugin DLLs
+        working-directory: dist/windows
+        run: |
+          set -e
+          mkdir -p platforms styles imageformats tls
+          cp /clang64/share/qt6/plugins/platforms/qwindows.dll platforms/
+          # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
+          # a single qmodernwindowsstyle.dll that covers both the
+          # "windowsvista" and "windows11" styles.
+          cp /clang64/share/qt6/plugins/styles/qmodernwindowsstyle.dll styles/
+          cp /clang64/share/qt6/plugins/imageformats/qgif.dll \
+             /clang64/share/qt6/plugins/imageformats/qjpeg.dll \
+             /clang64/share/qt6/plugins/imageformats/qsvg.dll \
+             imageformats/
+          # Qt6 moved TLS support out of QtNetwork and into a plugin.
+          # qschannelbackend uses Windows' native Secure Channel, so unlike
+          # the qopensslbackend alternative it needs no separate OpenSSL DLLs
+          # bundled alongside it.
+          cp /clang64/share/qt6/plugins/tls/qschannelbackend.dll tls/
+  
+      - name: Copy GIO modules
+        working-directory: dist/windows
+        run: |
+          mkdir -p gio-modules
+          cp /clang64/lib/gio/modules/libgiognutls.dll gio-modules/ || true
+  
+      - name: Copy GStreamer plugins
+        working-directory: dist/windows
+        run: |
+          mkdir -p gstreamer-plugins
+          cp /clang64/lib/gstreamer-1.0/*.dll gstreamer-plugins/
+  
+      # Direct + transitive linked DLL dependencies are discovered from the
+      # built binaries themselves rather than hardcoded by name/version, since
+      # exact clang64 package sonames drift with every MSYS2 update. This has
+      # to run after every plugin-copying step above, and walk those plugin
+      # DLLs too, not just the .exes - a plugin loaded via dlopen() at
+      # runtime (Qt platform plugins, GStreamer elements, GIO modules) can
+      # depend on a clang64 DLL nothing else in the app needs (eg.
+      # gstreamer-plugins/libgstaudiofx.dll needs liborc, which no .exe here
+      # links against), and that DLL then silently isn't there at runtime -
+      # GStreamer just drops the one plugin that needed it rather than
+      # erroring at startup, which is a much more confusing failure to debug
+      # than a missing DLL would be.
+      - name: Collect runtime DLL dependencies
+        working-directory: dist/windows
+        run: |
+          set -x
+          which ntldd
+          ls -la
+          : > raw_deps.txt
+          for dll in *.exe platforms/*.dll styles/*.dll imageformats/*.dll \
+              tls/*.dll gio-modules/*.dll gstreamer-plugins/*.dll; do
+            [ -e "$dll" ] || continue
+            echo "== ntldd -R $dll =="
+            ntldd -R "$dll" >> raw_deps.txt 2>&1 \
+              || echo "ntldd exited non-zero for $dll (continuing, see output above/below)"
+          done
+          echo "---- raw ntldd output ----"
+          cat raw_deps.txt
+          # ntldd prints native Windows paths (backslash-separated, drive
+          # letter, e.g. D:\a\_temp\msys64\clang64\bin\libfoo.dll) rather than
+          # the /clang64/... POSIX path - match on "clang64\bin" or
+          # "clang64/bin" regardless of separator, then re-resolve each hit
+          # against the canonical POSIX /clang64/bin path rather than passing
+          # the raw backslash path to cp.
+          grep '=>' raw_deps.txt | awk '{print $3}' \
+            | grep -i 'clang64[\\/]bin[\\/]' \
+            | sed 's/^.*[\\/]//' \
+            | sort -u > mingw_deps.txt || true
+          echo "---- clang64 DLLs to bundle ----"
+          cat mingw_deps.txt
+          if [ ! -s mingw_deps.txt ]; then
+            echo "::error::No clang64 DLL dependencies were resolved - ntldd likely isn't finding the exes' dependencies. See raw ntldd output above." >&2
+            exit 1
+          fi
+          while IFS= read -r name; do
+            cp -n -v "/clang64/bin/$name" .
+          done < mingw_deps.txt
+          rm -f raw_deps.txt mingw_deps.txt
+  
+      # Runs the actual packaged binary (not a dev build) end to end through
+      # real playback, so a plugin/dependency that's missing or broken only
+      # in the *packaged* app - which a successful build can't catch, and
+      # which is exactly how both the libsoup rpath bug and the missing
+      # liborc/libgstfft dependencies above were found - fails CI instead of
+      # surfacing later as a user report. See --play-and-exit in
+      # src/core/commandlineoptions.cpp/src/main.cpp.
+      - name: Smoke test - local playback
+        timeout-minutes: 5
+        working-directory: dist/windows
+        run: ./clementine.exe --play-and-exit 30 ../../tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
+        working-directory: dist/windows
+        run: >
+          ./clementine.exe --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+  
+      # What's signed is uploaded as an artifact of this run, and SignPath
+      # fetches it from here and checks it was built here. The signed files
+      # are Clementine's own - clementine.exe, clementine-tagreader.exe, the
+      # uninstaller and then the installer holding them - never the DLLs it
+      # bundles, which other projects build. See
+      # dist/windows/signpath/README.md.
+      - name: Check signing eligibility
+        id: signing
+        env:
+          ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          POLICY: ${{ inputs.signing-policy }}
+        run: |
+          # Nothing is signed until SignPath is set up.
+          if [[ -z "$ORGANIZATION_ID" ]]; then
+            POLICY=
+          fi
+          echo "policy=$POLICY" >> "$GITHUB_OUTPUT"
+          # The version every signed file carries, which SignPath checks
+          # them against.
+          version=$(sed -n 's/^!define PRODUCT_DISPLAY_VERSION "\(.*\)"$/\1/p' dist/windows/clementine.nsi)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Signing policy: ${POLICY:-none}, version: $version"
+  
+      # Always, signed or not, so the uninstaller every build ships comes
+      # the same way. See the note at OutFile in clementine.nsi.in.
+      - name: Write the uninstaller
+        # makensis was installed via choco onto the Windows-wide PATH, not
+        # the MSYS2 one (MSYS2's shell rebuilds its own minimal PATH rather
+        # than inheriting the runner's), so run this step outside msys2.
+        shell: pwsh
+        working-directory: dist/windows
+        run: |
+          makensis /DUNINSTALLER_ONLY clementine.nsi
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Start-Process -Wait -FilePath .\WriteUninstaller.exe
+          if (-not (Test-Path Uninstall.exe)) {
+            throw "WriteUninstaller.exe didn't write Uninstall.exe"
+          }
+          Remove-Item WriteUninstaller.exe
+  
+      - name: Upload the binaries to sign
+        id: unsigned-binaries
+        if: steps.signing.outputs.policy != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: signpath-binaries-unsigned
+          path: |
+            dist/windows/clementine.exe
+            dist/windows/clementine-tagreader.exe
+            dist/windows/Uninstall.exe
+      - name: Sign the binaries
+        if: steps.signing.outputs.policy != ''
+        uses: signpath/github-action-submit-signing-request@v3.0
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ steps.signing.outputs.policy }}
+          artifact-configuration-slug: binaries
+          github-artifact-id: ${{ steps.unsigned-binaries.outputs.artifact-id }}
+          parameters: |
+            version: ${{ toJSON(steps.signing.outputs.version) }}
+          wait-for-completion: true
+          # Long enough for a maintainer to see the request and approve it.
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: dist/windows/signed-binaries
+      - name: Use the signed binaries
+        if: steps.signing.outputs.policy != ''
+        working-directory: dist/windows
+        run: |
+          mv -f signed-binaries/* .
+          rmdir signed-binaries
+  
+      - name: Build Windows installer
+        shell: pwsh
+        run: makensis /DPREBUILT_UNINSTALLER clementine.nsi
+        working-directory: dist/windows
+  
+      - name: Upload the installer to sign
+        id: unsigned-installer
+        if: steps.signing.outputs.policy != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: signpath-installer-unsigned
+          path: dist/windows/ClementineSetup*.exe
+      - name: Sign the installer
+        if: steps.signing.outputs.policy != ''
+        uses: signpath/github-action-submit-signing-request@v3.0
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ steps.signing.outputs.policy }}
+          artifact-configuration-slug: installer
+          github-artifact-id: ${{ steps.unsigned-installer.outputs.artifact-id }}
+          parameters: |
+            version: ${{ toJSON(steps.signing.outputs.version) }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: dist/windows/signed-installer
+      - name: Use the signed installer
+        if: steps.signing.outputs.policy != ''
+        working-directory: dist/windows
+        run: |
+          mv -f signed-installer/ClementineSetup*.exe .
+          rmdir signed-installer
+  
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: release_mingw
+          path: dist/windows/ClementineSetup*.exe
+      # The packaged app, with the runner's own profile: nobody else uses it.
+      - name: Take screenshots
+        timeout-minutes: 10
+        run: |
+          tools/screenshots/generate-music.sh showcase-music
+          for theme in light dark; do
+            dist/windows/clementine.exe --screenshots screenshots/windows \
+              --screenshot-theme $theme showcase-music
+          done
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: screenshots-windows
+          path: screenshots/
+          if-no-files-found: ignore
+      - name: ccache statistics
+        if: always()
+        run: ccache --show-stats || true
+      - name: Save ccache
+        if: always()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: ${{ github.workspace }}\.ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}

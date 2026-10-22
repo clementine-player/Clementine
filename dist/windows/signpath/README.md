@@ -7,9 +7,10 @@ https://www.clementine-player.org/code-signing.
 
 ## What's signed, and how
 
-The `build_mingw` job in `.github/workflows/all.yml` signs Clementine's own
-programs and nothing it bundles: the Qt, GStreamer and other DLLs come from
-MSYS2, and SignPath's terms don't let us sign other projects' binaries.
+`.github/workflows/windows.yml` builds the Windows installer, for `all.yml`
+and for the releases, and signs Clementine's own programs in it, and nothing it
+bundles: the Qt, GStreamer and other DLLs come from MSYS2, and SignPath's terms
+don't let us sign other projects' binaries.
 
 1. `clementine.exe`, `clementine-tagreader.exe` and `Uninstall.exe` are
    uploaded as an artifact of the run and signed with the `binaries` artifact
@@ -23,13 +24,16 @@ MSYS2, and SignPath's terms don't let us sign other projects' binaries.
 SignPath fetches each artifact from the run itself and checks it was built
 there, from this repository, on GitHub's own runners.
 
-Pushes to `master` use the `release-signing` policy: Windows trusts its
-certificate, and each request waits until an approver approves it on SignPath,
-so each release needs two approvals, one for each request. The job waits up to
-two hours for each. Pull requests from branches in this repository use
-`test-signing`, which signs straight away with a certificate Windows doesn't
-trust, so the signing steps are tested before they reach `master`. Fork pull
-requests sign nothing.
+Which policy signs, if any, is the caller's `signing-policy`:
+
+- Releases use `release-signing`: Windows trusts its certificate, and each
+  request waits until an approver approves it on SignPath, so each release
+  needs two approvals, one for each request. The job waits up to two hours
+  for each.
+- Pull requests from branches in this repository use `test-signing`, which
+  signs straight away with a certificate Windows doesn't trust, so the signing
+  steps are tested before they reach `master`.
+- Development builds from `master`, and fork pull requests, aren't signed.
 
 Every signed file must carry the product name `Clementine` and the build's
 version, which the configurations check. `dist/windows/windres.rc.in`,
@@ -65,7 +69,7 @@ On GitHub, in the repository's Settings, Secrets and variables, Actions:
 
 ## Approving a release
 
-Every push to `master` makes two signing requests, which SignPath emails the
-approvers about. Approve the `binaries` one first: the `installer` one only
-appears once it's done. If nobody approves within two hours, the job fails and
-that commit has no release; re-running the job makes new requests.
+Each release makes two signing requests, which SignPath emails the approvers
+about. Approve the `binaries` one first: the `installer` one only appears once
+it's done. If nobody approves within two hours, the job fails and the release
+isn't published; run it again to make new requests.
