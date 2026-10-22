@@ -1,5 +1,5 @@
 # Makes a numbered release every week there's something to tell users, with no
-# manual steps.
+# manual steps beyond approving the Windows installer's signing on SignPath.
 #
 # Commits that change something users notice carry a "Release-note:" trailer:
 # one line for users. Every Monday this collects the notes since the last
@@ -7,14 +7,15 @@
 # tests and CI never make a release. With some, it tags master with the next
 # version (1.4.2, then 1.4.3), and builds every platform from it as all.yml
 # builds the development builds, but as the latest release on GitHub, with
-# every note. mac-update.yml then puts it in the Sparkle feed. See RELEASING.md.
+# every note and the Windows installer signed. mac-update.yml then puts it in
+# the Sparkle feed. See RELEASING.md.
 #
 # Run it by hand (Actions → release → Run workflow) to release now rather than
 # on Monday, optionally with a version (such as 1.5.0) for a new minor or
 # major version. Run by hand, it releases any change since the last release,
 # noting "Fixes and improvements." if none has a note. To publish a release
-# again after a failure (a flaky build, say), run it from that release's tag
-# instead of master: "Use workflow from", Tags.
+# again after a failure (the signing wasn't approved in time, say), run it
+# from that release's tag instead of master: "Use workflow from", Tags.
 name: release
 on:
   schedule:
@@ -27,6 +28,7 @@ on:
 
 # What all.yml's jobs ask for: a called workflow gets no more than this.
 permissions:
+  actions: read # for SignPath, which fetches the Windows build's artifacts
   contents: write # for the tag and the GitHub release
   id-token: write # for the macOS signing certificate
   pull-requests: write # asked for by the screenshots job, which only comments on pull requests

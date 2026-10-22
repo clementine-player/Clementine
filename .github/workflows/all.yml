@@ -7,7 +7,7 @@ on:
     branches:
       - master
   # release.yml, for a numbered release: the same builds, from the commit it
-  # tagged, released as the latest release.
+  # tagged, released as the latest release, the Windows installer signed.
   workflow_call:
     inputs:
       release:
@@ -1018,11 +1018,12 @@ jobs:
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
   # In its own workflow, which signs the build with SignPath when given a
-  # signing policy. Pull requests from branches in this repository are signed
-  # with SignPath's test-signing policy, which signs straight away with a
-  # certificate nobody trusts, so the signing steps are tested before they
-  # reach master. Pushes to master aren't signed: every signed release waits
-  # for a maintainer to approve it, so only releases are.
+  # signing policy. Numbered releases (release.yml) are signed with
+  # release-signing, which waits for a maintainer to approve each request.
+  # Pull requests from branches in this repository are signed with
+  # test-signing, which signs straight away with a certificate nobody trusts,
+  # so the signing steps are tested before they reach master. Development
+  # builds from master aren't signed: they'd need an approval each.
   build_mingw:
     name: Build Windows Installer
     needs:
@@ -1030,7 +1031,10 @@ jobs:
       - test
     uses: ./.github/workflows/windows.yml
     with:
-      signing-policy: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && 'test-signing' || '' }}
+      signing-policy: >-
+        ${{ inputs.release && 'release-signing'
+          || github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && 'test-signing'
+          || '' }}
     secrets:
       SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
 

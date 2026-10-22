@@ -7,8 +7,8 @@ https://www.clementine-player.org/code-signing.
 
 ## What's signed, and how
 
-`.github/workflows/windows.yml` builds the Windows installer, for `all.yml`
-and for the releases, and signs Clementine's own programs in it, and nothing it
+`.github/workflows/windows.yml` builds the Windows installer, for `all.yml`,
+which `release.yml` also runs for the numbered releases, and signs Clementine's own programs in it, and nothing it
 bundles: the Qt, GStreamer and other DLLs come from MSYS2, and SignPath's terms
 don't let us sign other projects' binaries.
 
@@ -74,4 +74,5 @@ Each release makes two signing requests, which SignPath emails the approvers
 about. Approve the `binaries` one first: the `installer` one only appears once
 it's done, and the installer is built (a few minutes). Each has nearly six
 hours: if nobody approves one in time, its job fails and the release isn't
-published; run it again to make new requests.
+published. Run the release workflow again from the release's tag to make new
+requests (see "If a release fails" in `RELEASING.md`).

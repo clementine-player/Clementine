@@ -2,7 +2,8 @@
 
 Clementine has development builds, from every change, and numbered releases,
 once a week when there's something to tell users. Both are made by GitHub
-Actions, with no manual steps.
+Actions, with no manual steps beyond approving the Windows installer's
+signature.
 
 ## Development builds
 
@@ -11,7 +12,7 @@ publishes the build:
 
 - as a GitHub **pre-release** named after `git describe`, such as
   `1.4.2-55-g4c062729d`: the source, the Debian, Ubuntu and Fedora packages,
-  the macOS DMG, signed and notarized, and the Windows installer;
+  the macOS DMG, signed and notarized, and the Windows installer, unsigned;
 - in the **apt repository**, for Debian and Ubuntu (`tools/apt-repo`);
 - in **COPR**, for Fedora.
 
@@ -31,7 +32,7 @@ the next release would be). With none, it does nothing. With some, it:
 
 - tags `master` with the next version, as an annotated tag;
 - builds every platform from that tag, as `all.yml` builds the development
-  builds;
+  builds, with the Windows installer signed (`dist/windows/signpath`);
 - publishes them as the **latest release** on GitHub, with every note. The
   website offers it, and Clementine Remote's demo and screenshots use it.
 
@@ -51,11 +52,17 @@ workflow*, on `master`). Run by hand, it releases any change since the last
 release: when no commit has a note, the release notes just say "Fixes and
 improvements."
 
-**If a release fails** after its tag was pushed (a flaky build, say), run the
-workflow again from that tag: *Run workflow*, *Use workflow from*, *Tags*, and
-the release. It builds and publishes it again.
+**Approving the Windows signature.** Each release waits for an approver to
+approve its two signing requests on SignPath, for up to nearly six hours each:
+SignPath emails them. See `dist/windows/signpath/README.md`.
+
+**If a release fails** after its tag was pushed (nobody approved the signing
+in time, say), run the workflow again from that tag: *Run workflow*, *Use
+workflow from*, *Tags*, and the release. It builds and publishes it again.
 
 ### One-time setup
 
+- **Windows signing:** see `dist/windows/signpath/README.md`. Until it's set
+  up, releases have an unsigned installer.
 - If tags get a repository ruleset, let GitHub Actions bypass it for numbered
   tags: the workflow pushes them.
