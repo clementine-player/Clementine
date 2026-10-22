@@ -14,7 +14,11 @@ import shutil
 import subprocess
 import threading
 from collections.abc import Iterator
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from http.server import (
+    BaseHTTPRequestHandler,
+    SimpleHTTPRequestHandler,
+    ThreadingHTTPServer,
+)
 from pathlib import Path
 
 import pytest
@@ -73,6 +77,25 @@ class _QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
+class _StalledStreamHandler(BaseHTTPRequestHandler):
+    """Answers like a FLAC stream, then never sends any of it."""
+
+    stop: threading.Event
+
+    def do_HEAD(self) -> None:
+        self.send_response(200)
+        self.send_header("Content-Type", "audio/flac")
+        self.end_headers()
+
+    def do_GET(self) -> None:
+        self.do_HEAD()
+        self.wfile.flush()
+        self.stop.wait()
+
+    def log_message(self, format: str, *args: object) -> None:
+        pass
+
+
 @pytest.fixture(scope="session")
 def music_server(music: dict[str, Path]) -> Iterator[str]:
     """An HTTP server for the test music; yields its base URL."""
@@ -82,6 +105,20 @@ def music_server(music: dict[str, Path]) -> Iterator[str]:
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     yield f"http://127.0.0.1:{server.server_address[1]}"
+    server.shutdown()
+
+
+@pytest.fixture
+def stalled_stream_server() -> Iterator[str]:
+    """An HTTP server whose streams never send anything; yields a stream's URL."""
+    stop = threading.Event()
+    handler = type("Handler", (_StalledStreamHandler,), {"stop": stop})
+    server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    server.daemon_threads = True
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    yield f"http://127.0.0.1:{server.server_address[1]}/stalled.flac"
+    stop.set()
     server.shutdown()
 
 
@@ -107,17 +144,33 @@ def clementine(tmp_path: Path) -> Iterator[Clementine]:
     yield from _run(tmp_path / "profile", streaming=True)
 
 
+def _radio_config(url: str) -> str:
+    return f"""[SavedRadio]
+streams\\1\\url={url}
+streams\\1\\name=Smoke radio
+streams\\size=1
+"""
+
+
 @pytest.fixture
 def clementine_with_radio(tmp_path: Path, music_server: str) -> Iterator[Clementine]:
     """Clementine with a saved radio stream, served by music_server."""
     yield from _run(
         tmp_path / "profile",
         streaming=False,
-        extra_config=f"""[SavedRadio]
-streams\\1\\url={music_server}/long.flac
-streams\\1\\name=Smoke radio
-streams\\size=1
-""",
+        extra_config=_radio_config(f"{music_server}/long.flac"),
+    )
+
+
+@pytest.fixture
+def clementine_with_stalled_radio(
+    tmp_path: Path, stalled_stream_server: str
+) -> Iterator[Clementine]:
+    """Clementine with a saved radio stream that never sends anything."""
+    yield from _run(
+        tmp_path / "profile",
+        streaming=False,
+        extra_config=_radio_config(stalled_stream_server),
     )
 
 

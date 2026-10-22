@@ -331,6 +331,7 @@ void SongLoader::AddAsRawStream() {
 }
 
 void SongLoader::Timeout() {
+  qLog(Warning) << "Timed out loading" << url_.toString();
   state_ = Finished;
   success_ = false;
   StopTypefind();
@@ -387,8 +388,6 @@ SongLoader::Result SongLoader::LoadRemote() {
   // If the magic succeeds then we know for sure it's a playlist - so read the
   // rest of the file, parse the playlist and return success.
 
-  timeout_timer_->start(timeout_);
-
   // gstreamer is initialised on a thread of its own as Clementine starts, and
   // a URL can arrive before that's finished: from the command line, or from a
   // remote. gst_is_initialized() is already true while the plugin registry is
@@ -444,6 +443,13 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   QEventLoop loop;
   loop.connect(this, SIGNAL(LoadRemoteFinished()), SLOT(quit()));
+
+  // This runs on a worker thread, and a timer can only be started from the
+  // thread it belongs to. StopTypefind() stops it there too, and is queued
+  // after this.
+  QMetaObject::invokeMethod(
+      timeout_timer_, [this]() { timeout_timer_->start(timeout_); },
+      Qt::QueuedConnection);
 
   // Start "playing"
   gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
