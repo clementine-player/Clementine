@@ -1,19 +1,19 @@
-# Puts the newest macOS build from master in the Sparkle feed that the app
-# checks for updates, weekly, when there's something to tell users: commits
-# since the last update with "Release-note:" trailers. Run by hand, it
-# publishes any change since the last update. See tools/mac-update/README.md,
-# whose clementine-mac-update does each step.
+# Puts the newest numbered release's macOS build in the Sparkle feed that the
+# app checks for updates, once release.yml has made it. Run by hand, it
+# publishes the newest release if the feed doesn't have it yet. See
+# tools/mac-update/README.md, whose clementine-mac-update does each step.
 #
-# The DMG is the one already released and notarized by all.yml; this signs it
-# for Sparkle with the EdDSA key in Secret Manager, reached through Workload
-# Identity Federation by this workflow on master only
-# (dist/gcp_sparkle_setup.sh). Skipped until the SPARKLE_WIF_PROVIDER
-# repository variable is set.
+# The DMG is the one already released and notarized; this signs it for Sparkle
+# with the EdDSA key in Secret Manager, reached through Workload Identity
+# Federation by this workflow on master only (dist/gcp_sparkle_setup.sh): which
+# is why it's a workflow of its own, run after release.yml, rather than a part
+# of it. Skipped until the SPARKLE_WIF_PROVIDER repository variable is set.
 
 name: mac-update
 on:
-  schedule:
-    - cron: '0 9 * * 1'
+  workflow_run:
+    workflows: [release]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,10 @@ defaults:
 jobs:
   publish:
     name: Publish the macOS update
-    if: github.ref == 'refs/heads/master' && vars.SPARKLE_WIF_PROVIDER != ''
+    if: >
+      github.ref == 'refs/heads/master' && vars.SPARKLE_WIF_PROVIDER != ''
+      && (github.event_name == 'workflow_dispatch'
+        || github.event.workflow_run.conclusion == 'success')
     # hdiutil, to read the app's Info.plist, and Sparkle's sign_update are
     # macOS-only.
     runs-on: macos-26
@@ -54,10 +57,8 @@ jobs:
 
       - name: Plan the update
         id: plan
-        env:
-          ALWAYS: ${{ github.event_name == 'workflow_dispatch' && 'true' || '' }}
         run: >
-          clementine-mac-update plan --notes "$RUNNER_TEMP/notes.txt" ${ALWAYS:+--always}
+          clementine-mac-update plan --notes "$RUNNER_TEMP/notes.txt"
           | tee -a "$GITHUB_OUTPUT"
       - name: Show the release notes
         if: steps.plan.outputs.publish == 'true'
@@ -117,8 +118,8 @@ jobs:
           --url "https://github.com/$GITHUB_REPOSITORY/releases/download/$RELEASE/$DMG"
           --signature "$SIGNATURE"
           --notes "$RUNNER_TEMP/notes.txt"
-      # Last, so a failed publish is tried again next week, with that week's
-      # notes too.
+      # Last, so a failed publish is tried again by the next run, with the
+      # next release's notes too.
       - name: Tag what's published
         if: steps.plan.outputs.publish == 'true'
         env:

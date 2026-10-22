@@ -88,7 +88,7 @@ makes an update. Together, as here, both are read:
 To check, `git log -1 --format='%(trailers:key=Release-note,valueonly)'`
 should print the note.
 
-Once a week, the macOS update feed gets the newest build if the commits since
-its last update have notes, and shows them in the update window. Commits
-without one (refactoring, tests, CI, docs) never make an update on their own.
-See `tools/mac-update/README.md`.
+Once a week, if the commits since the last release have notes, they make a
+numbered release, with the notes as its release notes, for every platform:
+the macOS update window shows them too. Commits without one (refactoring,
+tests, CI, docs) never make a release on their own. See `RELEASING.md`.

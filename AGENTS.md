@@ -4,8 +4,8 @@
 
 A commit that changes something users will notice ends with a `Release-note:`
 trailer: one line, written for users (what's new, not how it was done). The
-weekly macOS update collects them for its release notes, and a week with none
-publishes no update. Commits without user-visible changes (refactoring, tests,
+weekly release collects them for its release notes, and a week with none
+makes no release. Commits without user-visible changes (refactoring, tests,
 CI, docs) have no note. See "Release notes" in `README.md`.
 
 Git only reads trailers in the message's last paragraph. Put `Release-note:`

@@ -21,33 +21,29 @@ these updates: they're Intel-only, and the DMG is arm64-only.
 
 ## What's in the feed
 
-Every push to `master` makes a GitHub release with a notarized DMG
-(`all.yml`). The feed gets one of them a week at most, and only when there's
-something to tell users.
+Every push to `master` makes a development build, a GitHub pre-release with a
+notarized DMG (`all.yml`). The feed doesn't get those: it gets the numbered
+releases, which `release.yml` makes once a week when there's something to tell
+users (see `RELEASING.md`).
 
-**Release notes live in commit messages.** A commit that changes something
-users notice ends with a `Release-note:` trailer: one line, written for users.
-Commits without one never make an update on their own.
-
-**Every Monday** `.github/workflows/mac-update.yml` collects the notes of the
-commits since the last update (`clementine-mac-update plan`; run it to see
-what the next update would be). With none, it does nothing. With some, it takes the
-newest release on `master` with a DMG, and:
+Once a release is made, `.github/workflows/mac-update.yml` runs
+(`clementine-mac-update plan`; run it to see what the next update would be).
+It takes the newest numbered release on `master` with a DMG, if the feed
+doesn't have it yet, and:
 
 - signs the DMG for Sparkle (EdDSA) with `sign_update`;
 - checks the signature against the `SUPublicEDKey` in the app inside it, the
   key installs check updates with;
-- adds it to the feed with the notes (`clementine-mac-update publish`), and the
-  version and minimum macOS from the app's own `Info.plist`: Sparkle compares
-  `CFBundleVersion`, and doesn't offer an update to an older macOS than
-  `LSMinimumSystemVersion`;
+- adds it to the feed with the notes of the commits since the last update
+  (their `Release-note:` trailers, or "Fixes and improvements." when none has
+  one), and the version and minimum macOS from the app's own `Info.plist`
+  (`clementine-mac-update publish`): Sparkle compares `CFBundleVersion`, and
+  doesn't offer an update to an older macOS than `LSMinimumSystemVersion`;
 - tags the release's commit `sparkle/<release>`, which is where the next
   update's notes start.
 
-To publish before Monday, run the workflow by hand (*Actions → mac-update →
-Run workflow*, on `master`). Run by hand, it publishes any change since the
-last update: when no commit has a note, the notes just say "Fixes and
-improvements."
+If publishing failed, run the workflow by hand (*Actions → mac-update → Run
+workflow*, on `master`) to try again.
 
 `LSMinimumSystemVersion` is the macOS the DMG was built on (see
 `dist/CMakeLists.txt`): the app bundles Homebrew's libraries, which are built
