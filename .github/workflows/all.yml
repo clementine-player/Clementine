@@ -6,6 +6,13 @@ on:
   pull_request:
     branches:
       - master
+  # release.yml, for a numbered release: the same builds, from the commit it
+  # tagged, released as the latest release.
+  workflow_call:
+    inputs:
+      release:
+        type: boolean
+        default: false
 
 # The Linux containers default to the plain C locale, which makes every Qt
 # tool and the smoke tests warn that Qt is switching to C.UTF-8.
@@ -279,7 +286,7 @@ jobs:
 
   push_translations:
     name: Push translation sources to Transifex
-    if: github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:noble
@@ -419,7 +426,10 @@ jobs:
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-24.04
-    if: github.ref == 'refs/heads/master'
+    # Every push to master makes a development build, a pre-release named
+    # after git describe. A numbered release (release.yml) is the latest
+    # release, which the website offers.
+    if: github.ref == 'refs/heads/master' || inputs.release
     needs:
       - build_bookworm_64
       - build_trixie_64
@@ -478,20 +488,51 @@ jobs:
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
       # The Release-note: trailers of the commits since the previous release
-      # (see "Release notes" in README.md), one bullet each. Usually empty:
-      # most commits have none.
+      # (see "Release notes" in README.md), one bullet each. For a
+      # development build, since the previous build, so usually empty: most
+      # commits have none. For a numbered release, since the previous
+      # numbered release, whose tags are the annotated ones.
       - name: Collect the release notes
+        env:
+          RELEASE: ${{ inputs.release }}
         run: |
           : > "$RUNNER_TEMP/release_notes.md"
-          if previous=$(git describe --tags --abbrev=0 --match '[0-9]*' HEAD^); then
+          if [[ "$RELEASE" == "true" ]]; then
+            previous=$(git describe --abbrev=0 --match '[0-9]*' HEAD^ || true)
+          else
+            previous=$(git describe --tags --abbrev=0 --match '[0-9]*' HEAD^ || true)
+          fi
+          if [[ -n "$previous" ]]; then
             git log --reverse \
                 --format='%(trailers:key=Release-note,valueonly,separator=%x0A)' \
                 "$previous..HEAD" |
-              sed -e '/^[[:space:]]*$/d' -e 's/^[[:space:]]*/- /' \
+              sed -e '/^[[:space:]]*$/d' -e 's/^[[:space:]]*//' | awk '!seen[$0]++' |
+              sed -e 's/^/- /' \
               > "$RUNNER_TEMP/release_notes.md"
           fi
+          if [[ "$RELEASE" == "true" && ! -s "$RUNNER_TEMP/release_notes.md" ]]; then
+            echo "- Fixes and improvements." > "$RUNNER_TEMP/release_notes.md"
+          fi
+          if [[ "$RELEASE" == "true" ]]; then
+            printf '\nDevelopment builds, from every change since: [pre-releases](https://github.com/%s/releases)\n' \
+              "$GITHUB_REPOSITORY" >> "$RUNNER_TEMP/release_notes.md"
+          fi
           cat "$RUNNER_TEMP/release_notes.md"
+      # A development build of a commit release.yml has tagged already
+      # takes the release's version, and mustn't take over its release: the
+      # release has the same commit, so nothing is lost.
+      - name: Check this isn't a numbered release's commit
+        id: numbered
+        if: ${{ !inputs.release }}
+        env:
+          VERSION: ${{ steps.tag_name.outputs.version }}
+        run: |
+          if [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+)+$ ]]; then
+            echo "::notice::$VERSION is a numbered release, which release.yml makes, so this build isn't released."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Create draft pre-release
+        if: steps.numbered.outputs.skip != 'true'
         # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
         # at once, among a run of Not Found errors from GitHub.
         uses: softprops/action-gh-release@v3.0.3
@@ -507,7 +548,8 @@ jobs:
           files: "release_artifacts/**/*"
           fail_on_unmatched_files: true
           draft: false
-          prerelease: false
+          prerelease: ${{ !inputs.release }}
+          make_latest: ${{ inputs.release && 'true' || 'false' }}
           preserve_order: true
 
   build_source:
@@ -2135,7 +2177,7 @@ jobs:
       - name: Check signing eligibility
         id: signing
         run: |
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
+          if [[ "${{ inputs.release }}" == "true" || ( "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ) ]]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
             echo "notarize=true" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
@@ -2428,6 +2470,7 @@ jobs:
         if: >
           env.HAS_R2_TOKEN == 'true'
           && (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
+          && !inputs.release
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}

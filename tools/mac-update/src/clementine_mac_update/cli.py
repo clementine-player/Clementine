@@ -1,7 +1,7 @@
 """clementine-mac-update: Sparkle for Clementine's macOS build.
 
 clementine-mac-update fetch-sparkle <dir>
-clementine-mac-update plan [--notes <file>] [--always]
+clementine-mac-update plan [--notes <file>]
 clementine-mac-update publish --dmg <file> --url <url> --signature <sig>
     --notes <file> [--dry-run]
 """
@@ -21,9 +21,7 @@ def _fetch_sparkle(args: argparse.Namespace) -> None:
 
 def _plan(args: argparse.Namespace) -> None:
     repository = os.environ.get("GITHUB_REPOSITORY", "clementine-player/Clementine")
-    update = plan.plan(
-        args.repo, args.master, plan.github_dmg(repository), always=args.always
-    )
+    update = plan.plan(args.repo, args.master, plan.github_dmg(repository))
     # key=value lines, for $GITHUB_OUTPUT.
     if update is None:
         print("publish=false")
@@ -67,11 +65,6 @@ def main() -> None:
         type=Path,
         default=Path("notes.txt"),
         help="where to write its release notes, one per line",
-    )
-    planner.add_argument(
-        "--always",
-        action="store_true",
-        help="publish any change since the last update, with or without notes",
     )
     planner.add_argument("--repo", type=Path, default=Path())
     planner.add_argument("--master", default="origin/master")

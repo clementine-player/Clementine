@@ -1,0 +1,104 @@
+# Makes a numbered release every week there's something to tell users, with no
+# manual steps.
+#
+# Commits that change something users notice carry a "Release-note:" trailer:
+# one line for users. Every Monday this collects the notes since the last
+# release (dist/plan_release.sh); with none, it does nothing, so refactoring,
+# tests and CI never make a release. With some, it tags master with the next
+# version (1.4.2, then 1.4.3), and builds every platform from it as all.yml
+# builds the development builds, but as the latest release on GitHub, with
+# every note. mac-update.yml then puts it in the Sparkle feed. See RELEASING.md.
+#
+# Run it by hand (Actions → release → Run workflow) to release now rather than
+# on Monday, optionally with a version (such as 1.5.0) for a new minor or
+# major version. Run by hand, it releases any change since the last release,
+# noting "Fixes and improvements." if none has a note. To publish a release
+# again after a failure (a flaky build, say), run it from that release's tag
+# instead of master: "Use workflow from", Tags.
+name: release
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays, 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      version:
+        description: The version, such as 1.5.0, instead of the next one
+        required: false
+
+# What all.yml's jobs ask for: a called workflow gets no more than this.
+permissions:
+  contents: write # for the tag and the GitHub release
+  id-token: write # for the macOS signing certificate
+  pull-requests: write # asked for by the screenshots job, which only comments on pull requests
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    name: Plan the release
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # to push the tag
+    outputs:
+      release: ${{ steps.plan.outputs.release }}
+      version: ${{ steps.plan.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          # All of master's history and tags: the notes and version come
+          # from them.
+          fetch-depth: 0
+      - name: Plan the release
+        id: plan
+        env:
+          ALWAYS: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
+          VERSION: ${{ inputs.version }}
+          # The commit this run builds: master as it was when it started.
+          COMMIT: ${{ github.sha }}
+        run: |
+          # Publishing a release again: it's tagged already.
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            version=${GITHUB_REF#refs/tags/}
+            if [[ ! "$version" =~ ^[0-9]+(\.[0-9]+)+$ ]] \
+                || [[ "$(git cat-file -t "$version")" != tag ]]; then
+              echo "::error::$version isn't a numbered release's tag."
+              exit 1
+            fi
+            { echo "release=true"; echo "version=$version"; echo "again=true"; } \
+              | tee -a "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          dist/plan_release.sh "$RUNNER_TEMP/notes.md" | tee -a "$GITHUB_OUTPUT"
+      - name: Nothing to release
+        if: steps.plan.outputs.release != 'true'
+        run: echo "::notice::No release notes since ${{ steps.plan.outputs.last }}, so no release."
+      - name: Show the release notes
+        if: steps.plan.outputs.release == 'true' && steps.plan.outputs.again != 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          { echo "### $VERSION"; cat "$RUNNER_TEMP/notes.md"; } >> "$GITHUB_STEP_SUMMARY"
+      # An annotated tag, which is what makes it a numbered release: CMake
+      # (cmake/Version.cmake) names the build after git describe, which only
+      # looks at annotated tags, and the development builds' are lightweight.
+      - name: Tag the release
+        if: steps.plan.outputs.release == 'true' && steps.plan.outputs.again != 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$VERSION" -m "Clementine $VERSION" "$GITHUB_SHA"
+          git push origin "refs/tags/$VERSION"
+
+  build:
+    name: Build
+    needs: plan
+    if: needs.plan.outputs.release == 'true'
+    uses: ./.github/workflows/all.yml
+    with:
+      release: true
+    secrets: inherit
