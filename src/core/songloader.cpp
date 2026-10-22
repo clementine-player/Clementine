@@ -40,6 +40,7 @@
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "core/waitforsignal.h"
+#include "engines/gstengine.h"
 #include "internet/core/internetmodel.h"
 #include "internet/podcasts/podcastparser.h"
 #include "internet/podcasts/podcastservice.h"
@@ -388,6 +389,17 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   timeout_timer_->start(timeout_);
 
+  // gstreamer is initialised on a thread of its own as Clementine starts, and
+  // a URL can arrive before that's finished: from the command line, or from a
+  // remote. gst_is_initialized() is already true while the plugin registry is
+  // still being filled in, so some elements below would be missing and the
+  // load would never finish.
+  if (player_) {
+    if (GstEngine* engine = player_->gst_engine()) {
+      engine->EnsureInitialised();
+    }
+  }
+
   // Create the pipeline - it gets unreffed if it goes out of scope
   std::shared_ptr<GstElement> pipeline(gst_pipeline_new(nullptr),
                                        std::bind(&gst_object_unref, _1));
@@ -405,6 +417,14 @@ SongLoader::Result SongLoader::LoadRemote() {
   // Create the other elements and link them up
   GstElement* typefind = gst_element_factory_make("typefind", nullptr);
   GstElement* fakesink = gst_element_factory_make("fakesink", nullptr);
+  if (!typefind || !fakesink) {
+    qLog(Warning) << "Couldn't create gstreamer elements to load"
+                  << url_.toString();
+    for (GstElement* element : {source, typefind, fakesink}) {
+      if (element) gst_object_unref(gst_object_ref_sink(element));
+    }
+    return Error;
+  }
 
   gst_bin_add_many(GST_BIN(pipeline.get()), source, typefind, fakesink,
                    nullptr);
