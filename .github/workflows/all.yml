@@ -206,8 +206,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one. Only master's runs save one
+      # (see "Save ccache" below), so that's master's.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -275,8 +275,17 @@ jobs:
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
       # broke are still worth keeping for the next attempt.
+      #
+      # Only for pushes to master. The repository's caches share a 10GB
+      # limit, and one run's ccaches can fill 7.5GB of it (the four Fedora
+      # ones are 1GB each), so when pull requests saved theirs too, they
+      # evicted master's: a pull request, and the next push to master,
+      # then compiled everything from scratch. A pull request's entries
+      # only ever served later pushes to the same pull request.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -380,8 +389,8 @@ jobs:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
         run: tx init
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -413,9 +422,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -628,8 +640,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -657,9 +669,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -759,8 +774,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -821,9 +836,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -923,8 +941,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1010,9 +1028,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -1274,8 +1295,11 @@ jobs:
       - name: ccache statistics
         if: always()
         run: ccache --show-stats || true
+      # Only for pushes to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: ${{ github.workspace }}\.ccache
@@ -1377,8 +1401,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1446,9 +1470,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -1550,8 +1577,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1607,9 +1634,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -1717,8 +1747,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1774,9 +1804,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -1884,8 +1917,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -1941,9 +1974,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -2051,8 +2087,8 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
       # Cache entries are immutable, so the key carries the commit and the
-      # prefix restores the newest earlier one - from this branch, or from
-      # master for a pull request's first run.
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
       - name: Restore ccache
         uses: actions/cache/restore@v6.1.0
         with:
@@ -2108,9 +2144,12 @@ jobs:
         # this should not add a second failure on top.
         run: ccache --show-stats || true
       # Saved even when the build failed: the objects compiled before it
-      # broke are still worth keeping for the next attempt.
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: /ccache
@@ -2322,8 +2361,11 @@ jobs:
       - name: ccache statistics
         if: always()
         run: ccache --show-stats || true
+      # Only for pushes to master: see the Test job.
       - name: Save ccache
-        if: always()
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
         uses: actions/cache/save@v6.1.0
         with:
           path: ${{ github.workspace }}/.ccache
