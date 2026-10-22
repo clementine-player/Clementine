@@ -494,8 +494,15 @@ jobs:
       - name: Collect the release notes
         env:
           RELEASE: ${{ inputs.release && '--release' || '' }}
+          SIGNPATH_ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
         run: |
           dist/release_notes.py notes $RELEASE > "$RUNNER_TEMP/release_notes.md"
+          # SignPath's terms ask for a link to the code signing policy on every
+          # page that offers the signed installer for download.
+          if [[ -n "$SIGNPATH_ORGANIZATION_ID" ]]; then
+            printf '\nWindows builds: [Code signing policy](https://www.clementine-player.org/code-signing)\n' \
+              >> "$RUNNER_TEMP/release_notes.md"
+          fi
           cat "$RUNNER_TEMP/release_notes.md"
       # A development build of a commit release.yml has tagged already
       # takes the release's version, and mustn't take over its release: the
@@ -1236,13 +1243,125 @@ jobs:
           ./clementine.exe --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - name: Build Windows installer
+      # Release builds are code signed by SignPath, through its GitHub
+      # integration: what's signed is uploaded as an artifact of this run,
+      # and SignPath fetches it from here and checks it was built here. The
+      # signed files are Clementine's own - clementine.exe,
+      # clementine-tagreader.exe, the uninstaller and then the installer
+      # holding them - never the DLLs it bundles, which other projects
+      # build. See dist/windows/signpath/README.md for SignPath's side.
+      #
+      # Pushes to master use the release-signing policy, whose certificate
+      # Windows trusts and whose every request waits for a maintainer to
+      # approve it on SignPath. Pull requests from branches in this repo use
+      # test-signing, which signs straight away with a certificate nobody
+      # trusts, so the signing path is tested before it reaches master. Fork
+      # pull requests can't see the API token and sign nothing; nor does
+      # anything until SIGNPATH_ORGANIZATION_ID is set.
+      - name: Check signing eligibility
+        id: signing
+        env:
+          ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+        run: |
+          if [[ -z "$ORGANIZATION_ID" ]]; then
+            policy=
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
+            policy=release-signing
+          elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
+            policy=test-signing
+          else
+            policy=
+          fi
+          echo "policy=$policy" >> "$GITHUB_OUTPUT"
+          # The version every signed file carries, which SignPath checks
+          # them against.
+          version=$(sed -n 's/^!define PRODUCT_DISPLAY_VERSION "\(.*\)"$/\1/p' dist/windows/clementine.nsi)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Signing policy: ${policy:-none}, version: $version"
+
+      # Always, signed or not, so the uninstaller every build ships comes
+      # the same way. See the note at OutFile in clementine.nsi.in.
+      - name: Write the uninstaller
         # makensis was installed via choco onto the Windows-wide PATH, not
         # the MSYS2 one (MSYS2's shell rebuilds its own minimal PATH rather
         # than inheriting the runner's), so run this step outside msys2.
         shell: pwsh
-        run: makensis clementine.nsi
         working-directory: dist/windows
+        run: |
+          makensis /DUNINSTALLER_ONLY clementine.nsi
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Start-Process -Wait -FilePath .\WriteUninstaller.exe
+          if (-not (Test-Path Uninstall.exe)) {
+            throw "WriteUninstaller.exe didn't write Uninstall.exe"
+          }
+          Remove-Item WriteUninstaller.exe
+
+      - name: Upload the binaries to sign
+        id: unsigned-binaries
+        if: steps.signing.outputs.policy != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: signpath-binaries-unsigned
+          path: |
+            dist/windows/clementine.exe
+            dist/windows/clementine-tagreader.exe
+            dist/windows/Uninstall.exe
+      - name: Sign the binaries
+        if: steps.signing.outputs.policy != ''
+        uses: signpath/github-action-submit-signing-request@v3.0
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ steps.signing.outputs.policy }}
+          artifact-configuration-slug: binaries
+          github-artifact-id: ${{ steps.unsigned-binaries.outputs.artifact-id }}
+          parameters: |
+            version: ${{ toJSON(steps.signing.outputs.version) }}
+          wait-for-completion: true
+          # Long enough for a maintainer to see the request and approve it.
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: dist/windows/signed-binaries
+      - name: Use the signed binaries
+        if: steps.signing.outputs.policy != ''
+        working-directory: dist/windows
+        run: |
+          mv -f signed-binaries/* .
+          rmdir signed-binaries
+
+      - name: Build Windows installer
+        shell: pwsh
+        run: makensis /DPREBUILT_UNINSTALLER clementine.nsi
+        working-directory: dist/windows
+
+      - name: Upload the installer to sign
+        id: unsigned-installer
+        if: steps.signing.outputs.policy != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: signpath-installer-unsigned
+          path: dist/windows/ClementineSetup*.exe
+      - name: Sign the installer
+        if: steps.signing.outputs.policy != ''
+        uses: signpath/github-action-submit-signing-request@v3.0
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ steps.signing.outputs.policy }}
+          artifact-configuration-slug: installer
+          github-artifact-id: ${{ steps.unsigned-installer.outputs.artifact-id }}
+          parameters: |
+            version: ${{ toJSON(steps.signing.outputs.version) }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: dist/windows/signed-installer
+      - name: Use the signed installer
+        if: steps.signing.outputs.policy != ''
+        working-directory: dist/windows
+        run: |
+          mv -f signed-installer/ClementineSetup*.exe .
+          rmdir signed-installer
 
       - uses: actions/upload-artifact@v7.0.1
         with:

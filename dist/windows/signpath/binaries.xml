@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SignPath artifact configuration "binaries": Clementine's own programs,
+     signed before the installer is built around them. See README.md. -->
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
+  <parameters>
+    <parameter name="version" />
+  </parameters>
+  <zip-file>
+    <pe-file path="clementine.exe" product-name="Clementine" product-version="${version}">
+      <authenticode-sign />
+    </pe-file>
+    <pe-file path="clementine-tagreader.exe" product-name="Clementine" product-version="${version}">
+      <authenticode-sign />
+    </pe-file>
+    <pe-file path="Uninstall.exe" product-name="Clementine" product-version="${version}">
+      <authenticode-sign />
+    </pe-file>
+  </zip-file>
+</artifact-configuration>
