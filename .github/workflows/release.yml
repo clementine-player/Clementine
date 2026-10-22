@@ -3,7 +3,7 @@
 #
 # Commits that change something users notice carry a "Release-note:" trailer:
 # one line for users. Every Monday this collects the notes since the last
-# release (dist/plan_release.sh); with none, it does nothing, so refactoring,
+# release (dist/release_notes.py); with none, it does nothing, so refactoring,
 # tests and CI never make a release. With some, it tags master with the next
 # version (1.4.2, then 1.4.3), and builds every platform from it as all.yml
 # builds the development builds, but as the latest release on GitHub, with
@@ -54,10 +54,8 @@ jobs:
       - name: Plan the release
         id: plan
         env:
-          ALWAYS: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
+          ALWAYS: ${{ github.event_name == 'workflow_dispatch' && '--always' || '' }}
           VERSION: ${{ inputs.version }}
-          # The commit this run builds: master as it was when it started.
-          COMMIT: ${{ github.sha }}
         run: |
           # Publishing a release again: it's tagged already.
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
@@ -71,7 +69,10 @@ jobs:
               | tee -a "$GITHUB_OUTPUT"
             exit 0
           fi
-          dist/plan_release.sh "$RUNNER_TEMP/notes.md" | tee -a "$GITHUB_OUTPUT"
+          # The commit this run builds: master as it was when it started.
+          dist/release_notes.py plan --commit "$GITHUB_SHA" \
+              ${VERSION:+--version "$VERSION"} $ALWAYS --notes "$RUNNER_TEMP/notes.md" \
+            | tee -a "$GITHUB_OUTPUT"
       - name: Nothing to release
         if: steps.plan.outputs.release != 'true'
         run: echo "::notice::No release notes since ${{ steps.plan.outputs.last }}, so no release."

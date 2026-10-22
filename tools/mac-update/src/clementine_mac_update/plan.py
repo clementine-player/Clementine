@@ -2,7 +2,7 @@
 
 Every push to master makes a development build, a GitHub pre-release named
 after `git describe` (1.4.2-55-g4c062729d), and every week with release notes
-makes a numbered release (1.4.3; see dist/plan_release.sh). The feed gets the
+makes a numbered release (1.4.3; see dist/release_notes.py). The feed gets the
 numbered releases only: the newest one with a DMG.
 
 Each one published is marked with a tag, sparkle/<release>, at the same
