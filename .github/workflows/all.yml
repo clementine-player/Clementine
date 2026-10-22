@@ -526,10 +526,20 @@ jobs:
           body_path: ${{ runner.temp }}/release_notes.md
           files: "release_artifacts/**/*"
           fail_on_unmatched_files: true
-          draft: false
+          # Releases here are immutable: once published, nothing can be
+          # uploaded to them. The action uploads to a release before
+          # publishing it, but not to a pre-release, which it publishes
+          # first, so a development build stays a draft until the next step.
+          draft: ${{ !inputs.release }}
           prerelease: ${{ !inputs.release }}
           make_latest: ${{ inputs.release && 'true' || 'false' }}
           preserve_order: true
+      - name: Publish the pre-release
+        if: ${{ !inputs.release && steps.numbered.outputs.skip != 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.tag_name.outputs.version }}
+        run: gh release edit "$VERSION" --draft=false
 
   build_source:
     name: Build source tarball
