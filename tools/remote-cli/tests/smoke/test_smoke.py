@@ -23,6 +23,7 @@ from .harness import (
     Controller,
     TestRenderer,
     decoded_seconds,
+    eventually,
     has_gst_element,
 )
 
@@ -491,28 +492,47 @@ async def test_browsing_plays_a_saved_radio_stream(
     async with Controller(port) as controller:
         assert pb.SERVER_FEATURE_BROWSE in controller.info.features
 
-        # Node ids belong to a connection, so browse on one of its own.
-        conn, _ = await connection.connect(HOST, port)
-        try:
-            services = await browse.browse(conn)
-            assert services.state == pb.BROWSE_STATE_READY
-            assert "Your radio streams" in [n.title for n in services.nodes]
+        await _play_saved_radio(port)
+        await controller.wait_for_state(pb.Playing)
 
-            node, streams = await browse.browse_path(conn, ["Your radio streams"])
-            assert node is not None
-            assert node.kind == pb.BROWSE_NODE_KIND_SERVICE
-            assert streams.state == pb.BROWSE_STATE_READY
-            station = next(n for n in streams.nodes if n.title == "Smoke radio")
-            assert station.kind == pb.BROWSE_NODE_KIND_STREAM
-            assert station.playability == pb.BROWSE_PLAYABILITY_ADDABLE
 
-            result = await browse.add(
-                conn, [station.node_id], pb.BROWSE_ADD_ACTION_PLAY_NOW
-            )
-            assert result == pb.BROWSE_ADD_RESULT_ADDED
-            await controller.wait_for_state(pb.Playing)
-        finally:
-            await conn.close()
+@run_async
+async def test_a_stream_that_sends_nothing_times_out(
+    clementine_with_stalled_radio: Clementine,
+) -> None:
+    clementine = clementine_with_stalled_radio
+    async with Controller(clementine.port) as controller:
+        await _play_saved_radio(clementine.port)
+        await eventually(
+            lambda: "Timed out loading" in clementine.log_path.read_text(),
+            what="Clementine to give up on the stream",
+        )
+        assert pb.Playing not in controller.states
+
+
+async def _play_saved_radio(port: int) -> None:
+    """Plays the saved radio stream, through the remote's Browse."""
+    # Node ids belong to a connection, so browse on one of its own.
+    conn, _ = await connection.connect(HOST, port)
+    try:
+        services = await browse.browse(conn)
+        assert services.state == pb.BROWSE_STATE_READY
+        assert "Your radio streams" in [n.title for n in services.nodes]
+
+        node, streams = await browse.browse_path(conn, ["Your radio streams"])
+        assert node is not None
+        assert node.kind == pb.BROWSE_NODE_KIND_SERVICE
+        assert streams.state == pb.BROWSE_STATE_READY
+        station = next(n for n in streams.nodes if n.title == "Smoke radio")
+        assert station.kind == pb.BROWSE_NODE_KIND_STREAM
+        assert station.playability == pb.BROWSE_PLAYABILITY_ADDABLE
+
+        result = await browse.add(
+            conn, [station.node_id], pb.BROWSE_ADD_ACTION_PLAY_NOW
+        )
+        assert result == pb.BROWSE_ADD_RESULT_ADDED
+    finally:
+        await conn.close()
 
 
 async def _answer_to_code(port: int, code: int, local_address: str = HOST) -> str:
