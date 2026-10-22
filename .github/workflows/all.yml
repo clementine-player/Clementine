@@ -227,6 +227,8 @@ jobs:
         # build_tests builds every test binary without running any of them;
         # the clementine_test target runs each one as it is built, which
         # stops at the first failure and reports nothing about the rest.
+        # The other jobs use -j2; this one is on the critical path for
+        # everything else, so use the whole runner.
         run: make -j$(nproc) build_tests
       - name: Run tests
         working-directory: bin/tests
@@ -407,7 +409,7 @@ jobs:
         run: cmake ..
       - name: make
         working-directory: bin
-        run: make -j$(nproc)
+        run: make -j2
       - name: tx config
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
@@ -699,6 +701,7 @@ jobs:
     container:
       image: fedora:43
     env:
+      RPM_BUILD_NCPUS: "2"
       CCACHE_DIR: /ccache
       # The spec unpacks into a fixed directory name, so the build path
       # stays the same between commits; see %prep in
@@ -800,9 +803,6 @@ jobs:
         run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
       - name: Build RPM
         working-directory: bin
-        # rpmbuild compiles with as many jobs as RPM_BUILD_NCPUS says, or
-        # the CPUs it finds when it's unset.
-        #
         # Pull requests leave out two slow parts of the build that only
         # matter to the packages people install: the debuginfo packages
         # (about 2.5 minutes) and link-time optimisation (about 2). Only
@@ -882,6 +882,7 @@ jobs:
     container:
       image: fedora:44
     env:
+      RPM_BUILD_NCPUS: "2"
       CCACHE_DIR: /ccache
       # The spec unpacks into a fixed directory name, so the build path
       # stays the same between commits; see %prep in
@@ -1448,11 +1449,7 @@ jobs:
           -DDEB_DIST=bookworm
       - name: make
         working-directory: bin
-        # dpkg-buildpackage runs its own make, which can't join this one's
-        # jobs ("jobserver unavailable: using -j1"), so make -j on its own
-        # compiled one file at a time. debian/rules takes the job count
-        # from DEB_BUILD_OPTIONS instead.
-        run: DEB_BUILD_OPTIONS=parallel=$(nproc) make deb
+        run : make -j2 deb
 
       # Same rationale as the windows/mac smoke tests further up: run the
       # actual packaged artifact rather than the build tree. Installing the
@@ -1624,8 +1621,7 @@ jobs:
           -DDEB_DIST=trixie
       - name: make
         working-directory: bin
-        # See the Bookworm job for why the job count goes in DEB_BUILD_OPTIONS.
-        run: DEB_BUILD_OPTIONS=parallel=$(nproc) make deb
+        run : make -j2 deb
       # See the bookworm job for why this installs and runs the .deb rather
       # than the build tree, and what the headless setup is for.
       - name: Install built package
@@ -1794,8 +1790,7 @@ jobs:
           -DDEB_DIST=jammy
       - name: make
         working-directory: bin
-        # See the Bookworm job for why the job count goes in DEB_BUILD_OPTIONS.
-        run: DEB_BUILD_OPTIONS=parallel=$(nproc) make deb
+        run : make -j2 deb
       # See the bookworm job for why this installs and runs the .deb rather
       # than the build tree, and what the headless setup is for.
       - name: Install built package
@@ -1964,8 +1959,7 @@ jobs:
           -DDEB_DIST=noble
       - name: make
         working-directory: bin
-        # See the Bookworm job for why the job count goes in DEB_BUILD_OPTIONS.
-        run: DEB_BUILD_OPTIONS=parallel=$(nproc) make deb
+        run : make -j2 deb
       # See the bookworm job for why this installs and runs the .deb rather
       # than the build tree, and what the headless setup is for.
       - name: Install built package
@@ -2134,8 +2128,7 @@ jobs:
           -DDEB_DIST=resolute
       - name: make
         working-directory: bin
-        # See the Bookworm job for why the job count goes in DEB_BUILD_OPTIONS.
-        run: DEB_BUILD_OPTIONS=parallel=$(nproc) make deb
+        run : make -j2 deb
       # See the bookworm job for why this installs and runs the .deb rather
       # than the build tree, and what the headless setup is for.
       - name: Install built package
