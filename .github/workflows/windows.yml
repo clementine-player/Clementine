@@ -1,6 +1,5 @@
 # Builds the Windows installer, and has SignPath sign it when asked to. all.yml
-# runs it for every pull request and push, and windows-release.yml for the
-# weekly signed release; see dist/windows/signpath/README.md.
+# runs it for every pull request and push; see dist/windows/signpath/README.md.
 
 name: windows
 on:

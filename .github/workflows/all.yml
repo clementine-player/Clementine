@@ -1017,13 +1017,12 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
-  # In its own workflow so windows-release.yml can build and sign the weekly
-  # release the same way. Pull requests from branches in this repository are
-  # signed with SignPath's test-signing policy, which signs straight away with
-  # a certificate nobody trusts, so the signing steps are tested before they
+  # In its own workflow, which signs the build with SignPath when given a
+  # signing policy. Pull requests from branches in this repository are signed
+  # with SignPath's test-signing policy, which signs straight away with a
+  # certificate nobody trusts, so the signing steps are tested before they
   # reach master. Pushes to master aren't signed: every signed release waits
-  # for a maintainer to approve it, so that's once a week, in
-  # windows-release.yml.
+  # for a maintainer to approve it, so only releases are.
   build_mingw:
     name: Build Windows Installer
     needs:
