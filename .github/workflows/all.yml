@@ -500,7 +500,7 @@ jobs:
           # SignPath's terms ask for a link to the code signing policy on every
           # page that offers the signed installer for download.
           if [[ -n "$SIGNPATH_ORGANIZATION_ID" ]]; then
-            printf '\nWindows builds: [Code signing policy](https://www.clementine-player.org/code-signing)\n' \
+            printf '\n[Windows code signing policy](https://www.clementine-player.org/code-signing)\n' \
               >> "$RUNNER_TEMP/release_notes.md"
           fi
           cat "$RUNNER_TEMP/release_notes.md"
