@@ -1,5 +1,8 @@
 # macOS code signing
 
+Windows builds are signed by SignPath instead: see
+`dist/windows/signpath/README.md`.
+
 Release builds are signed with a real Apple "Developer ID Application"
 certificate and (separately) notarized. Everyone else's builds - local dev,
 PRs, forks - fall back to ad-hoc signing automatically (see
