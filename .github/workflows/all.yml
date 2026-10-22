@@ -2217,15 +2217,6 @@ jobs:
       # so the tomahawk-player/tomahawkqt5 tap this job used to pull a
       # Qt5-linked liblastfm from isn't needed any more either.
       - name: Install dependencies
-        env:
-          # Both are housekeeping for a machine that's kept: cleaning up
-          # old versions after installing, and checking, and rebuilding,
-          # every formula the runner image has that depends on one this
-          # upgrades. The runner is thrown away after this job, and the
-          # formulae it uses are all in the Brewfile, so they're installed
-          # or upgraded anyway.
-          HOMEBREW_NO_INSTALL_CLEANUP: "1"
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: "1"
         run: brew bundle
 
       # Real Developer ID signing runs for pushes to master (release builds)
