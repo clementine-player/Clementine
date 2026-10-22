@@ -802,7 +802,23 @@ jobs:
         working-directory: bin
         # rpmbuild compiles with as many jobs as RPM_BUILD_NCPUS says, or
         # the CPUs it finds when it's unset.
-        run: rpmbuild -ba ../dist/clementine.spec
+        #
+        # Pull requests leave out two slow parts of the build that only
+        # matter to the packages people install: the debuginfo packages
+        # (about 2.5 minutes) and link-time optimisation (about 2). Only
+        # the link leaves LTO out: -ffat-lto-objects puts ordinary code in
+        # each object beside the LTO code, so the objects are compiled as
+        # on master, and still hit master's ccache.
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            rpmbuild -ba ../dist/clementine.spec \
+              --define 'debug_package %{nil}' \
+              --define "build_ldflags $(rpm --eval '%{build_ldflags}') -fno-lto"
+          else
+            rpmbuild -ba ../dist/clementine.spec
+          fi
       # See the fedora 42 job for why this installs and runs the .rpm, and
       # why it uses beep.ogg rather than beep.mp3.
       - name: Install built package
@@ -967,7 +983,17 @@ jobs:
         run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
       - name: Build RPM
         working-directory: bin
-        run: rpmbuild -ba ../dist/clementine.spec
+        # See the Fedora 43 job for what pull requests leave out.
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            rpmbuild -ba ../dist/clementine.spec \
+              --define 'debug_package %{nil}' \
+              --define "build_ldflags $(rpm --eval '%{build_ldflags}') -fno-lto"
+          else
+            rpmbuild -ba ../dist/clementine.spec
+          fi
       # See the fedora 42 job for why this installs and runs the .rpm, and
       # why it uses beep.ogg rather than beep.mp3.
       - name: Install built package
