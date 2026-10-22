@@ -28,8 +28,9 @@ Which policy signs, if any, is the caller's `signing-policy`:
 
 - Releases use `release-signing`: Windows trusts its certificate, and each
   request waits until an approver approves it on SignPath, so each release
-  needs two approvals, one for each request. The job waits up to two hours
-  for each.
+  needs two approvals, one for each request. Each request waits in a job of
+  its own, on an Ubuntu runner, for up to the six hours GitHub gives a job
+  (a little less: 5 hours 50 minutes).
 - Pull requests from branches in this repository use `test-signing`, which
   signs straight away with a certificate Windows doesn't trust, so the signing
   steps are tested before they reach `master`.
@@ -71,5 +72,6 @@ On GitHub, in the repository's Settings, Secrets and variables, Actions:
 
 Each release makes two signing requests, which SignPath emails the approvers
 about. Approve the `binaries` one first: the `installer` one only appears once
-it's done. If nobody approves within two hours, the job fails and the release
-isn't published; run it again to make new requests.
+it's done, and the installer is built (a few minutes). Each has nearly six
+hours: if nobody approves one in time, its job fails and the release isn't
+published; run it again to make new requests.
