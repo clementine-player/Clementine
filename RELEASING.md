@@ -26,8 +26,8 @@ users notice ends with a `Release-note:` trailer: one line, written for users
 CI, docs) never make a release on their own.
 
 **Every Monday** `.github/workflows/release.yml` collects the notes since the
-last release (`dist/plan_release.sh`; run it to see what the next release
-would be). With none, it does nothing. With some, it:
+last release (`dist/release_notes.py`: `dist/release_notes.py plan` shows what
+the next release would be). With none, it does nothing. With some, it:
 
 - tags `master` with the next version, as an annotated tag;
 - builds every platform from that tag, as `all.yml` builds the development

@@ -488,35 +488,14 @@ jobs:
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
       # The Release-note: trailers of the commits since the previous release
-      # (see "Release notes" in README.md), one bullet each. For a
-      # development build, since the previous build, so usually empty: most
-      # commits have none. For a numbered release, since the previous
-      # numbered release, whose tags are the annotated ones.
+      # (see "Release notes" in README.md): for a development build, since
+      # the previous build, so usually none; for a numbered release, since
+      # the previous numbered release.
       - name: Collect the release notes
         env:
-          RELEASE: ${{ inputs.release }}
+          RELEASE: ${{ inputs.release && '--release' || '' }}
         run: |
-          : > "$RUNNER_TEMP/release_notes.md"
-          if [[ "$RELEASE" == "true" ]]; then
-            previous=$(git describe --abbrev=0 --match '[0-9]*' HEAD^ || true)
-          else
-            previous=$(git describe --tags --abbrev=0 --match '[0-9]*' HEAD^ || true)
-          fi
-          if [[ -n "$previous" ]]; then
-            git log --reverse \
-                --format='%(trailers:key=Release-note,valueonly,separator=%x0A)' \
-                "$previous..HEAD" |
-              sed -e '/^[[:space:]]*$/d' -e 's/^[[:space:]]*//' | awk '!seen[$0]++' |
-              sed -e 's/^/- /' \
-              > "$RUNNER_TEMP/release_notes.md"
-          fi
-          if [[ "$RELEASE" == "true" && ! -s "$RUNNER_TEMP/release_notes.md" ]]; then
-            echo "- Fixes and improvements." > "$RUNNER_TEMP/release_notes.md"
-          fi
-          if [[ "$RELEASE" == "true" ]]; then
-            printf '\nDevelopment builds, from every change since: [pre-releases](https://github.com/%s/releases)\n' \
-              "$GITHUB_REPOSITORY" >> "$RUNNER_TEMP/release_notes.md"
-          fi
+          dist/release_notes.py notes $RELEASE > "$RUNNER_TEMP/release_notes.md"
           cat "$RUNNER_TEMP/release_notes.md"
       # A development build of a commit release.yml has tagged already
       # takes the release's version, and mustn't take over its release: the
