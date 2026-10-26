@@ -39,6 +39,13 @@ Then `.github/workflows/mac-update.yml` puts the DMG in the **macOS update
 feed**, with the same notes (`tools/mac-update`). The apt repository and COPR
 already have that commit, as a development build.
 
+The notes also go in the **AppStream metadata** that Linux software centres
+and Flathub show: CMake fills the `<releases>` of
+`dist/org.clementine_player.Clementine.appdata.xml.in` from git with
+`dist/release_notes.py appstream`, so nothing is committed for a release. The
+source tarball has no git, so `maketarball.sh` packs the metadata as the build
+that made the tarball generated it, and builds from the tarball use that.
+
 **Versions.** A release is the last one with its last number one higher:
 1.4.2, then 1.4.3. For a new minor or major version, run the workflow by hand
 with that version. The version comes from the tag, through `git describe`
