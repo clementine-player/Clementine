@@ -36,7 +36,10 @@ the next release would be). With none, it does nothing. With some, it:
   website offers it, and Clementine Remote's demo and screenshots use it.
 
 Then `.github/workflows/mac-update.yml` puts the DMG in the **macOS update
-feed**, with the same notes (`tools/mac-update`). The apt repository and COPR
+feed**, with the same notes (`tools/mac-update`), and
+`.github/workflows/winget.yml` opens a pull request on
+[winget-pkgs](https://github.com/microsoft/winget-pkgs) with the Windows
+installer, for **winget**'s moderators to merge. The apt repository and COPR
 already have that commit, as a development build.
 
 **Versions.** A release is the last one with its last number one higher:
@@ -59,3 +62,5 @@ the release. It builds and publishes it again.
 
 - If tags get a repository ruleset, let GitHub Actions bypass it for numbered
   tags: the workflow pushes them.
+- For winget, a fork of winget-pkgs and a token for it: see the top of
+  `.github/workflows/winget.yml`. Until they're set, the workflow is skipped.
