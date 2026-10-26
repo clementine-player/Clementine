@@ -20,6 +20,7 @@
 
 #include <QList>
 #include <QString>
+#include <QStringList>
 
 // One group of rooms from a Sonos player's ZoneGroupTopology service, which
 // is how UpnpDiscovery tells which Sonos MediaRenderers can be played on.
@@ -39,9 +40,11 @@ struct SonosZoneGroup {
   QString coordinator_id;
   QList<Member> members;
 
-  // The rooms, coordinator first, as the Sonos app names a group: "Lounge"
-  // or "Lounge + Kitchen".
-  QString Name() const;
+  // The rooms, coordinator first, without the second speaker of a stereo
+  // pair.
+  QStringList Rooms() const;
+  // As the Sonos app names a group: "Lounge" or "Lounge + Kitchen".
+  QString Name() const { return Rooms().join(" + "); }
 
   // Parses GetZoneGroupState's ZoneGroupState, with or without the
   // <ZoneGroupState> around the <ZoneGroups> that older firmware leaves out.

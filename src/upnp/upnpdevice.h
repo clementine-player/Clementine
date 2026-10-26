@@ -69,6 +69,10 @@ struct UpnpDevice {
   // The device's own name for each of caps' MIME types, eg. "audio/mp3" for
   // "audio/mpeg", which is what it's told it's being sent.
   QMap<QString, QString> device_mime_types;
+  // Whether the Sink lists any video formats, which suggests it has a screen.
+  bool video = false;
+  // A Sonos group of more than one room. See UpnpDiscovery.
+  bool group = false;
 
   bool is_valid() const {
     return !id.isEmpty() && !address.isNull() && av_transport.is_valid();
@@ -80,7 +84,8 @@ struct UpnpDevice {
   bool ParseDescription(const QByteArray& xml, const QUrl& location);
   // Fills in the caps from GetProtocolInfo's Sink: protocolInfo entries
   // separated by commas, eg. "http-get:*:audio/mpeg:*,...". Only those over
-  // HTTP, in formats the planner knows, are used.
+  // HTTP, in formats the planner knows, are used, but any video format over
+  // HTTP sets video.
   void SetProtocolInfo(const QString& sink);
 
   // The MIME type to tell the device for |mime_type|, from caps.

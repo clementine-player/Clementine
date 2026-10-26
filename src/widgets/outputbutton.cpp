@@ -74,6 +74,9 @@ QIcon OutputButton::OutputIcon(Engine::Base* engine) const {
   if (icon == "cast") {
     return Glyph(engine == router_->active_engine() ? "cast-connected" : icon);
   }
+  if (icon == "speaker" || icon == "speaker-group" || icon == "tv") {
+    return Glyph(icon);
+  }
   if (icon.isEmpty()) return QIcon();
   return IconLoader::Load(icon, IconLoader::Base);
 }

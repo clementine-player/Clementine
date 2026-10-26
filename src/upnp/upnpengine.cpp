@@ -262,6 +262,12 @@ qint64 UpnpEngine::length_nanosec() const {
   return player_.duration_ms() * kNsecPerMsec;
 }
 
+QString UpnpEngine::output_icon() const {
+  if (device_.group) return "speaker-group";
+  if (device_.video) return "tv";
+  return "speaker";
+}
+
 void UpnpEngine::SetVolumeSW(uint) {
   // Not before playing on it; see the class comment.
   if (!in_control_) return;
