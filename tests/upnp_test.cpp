@@ -256,8 +256,9 @@ TEST(UpnpDeviceTest, ParsesAnEmbeddedRenderer) {
   EXPECT_EQ("Bedroom - Sonos Play:3 Media Renderer", device.name);
   EXPECT_EQ("Sonos Play:3", device.model);
   EXPECT_EQ(QHostAddress("192.168.86.217"), device.address);
-  EXPECT_EQ(QUrl("http://192.168.86.217:1400/MediaRenderer/AVTransport/Control"),
-            device.av_transport.control_url);
+  EXPECT_EQ(
+      QUrl("http://192.168.86.217:1400/MediaRenderer/AVTransport/Control"),
+      device.av_transport.control_url);
   EXPECT_EQ("urn:schemas-upnp-org:service:AVTransport:1",
             device.av_transport.type);
   // The renderer's, not the MediaServer's.
@@ -411,8 +412,8 @@ class FakePlayer : public UpnpMediaPlayer {
             {"TrackDuration", "0:04:00"},
             {"TrackURI", track_uri.isEmpty() ? kUrl : track_uri}});
     EXPECT_EQ("GetTransportInfo", last().name.toStdString());
-    Answer({{"CurrentTransportState", state},
-            {"CurrentTransportStatus", "OK"}});
+    Answer(
+        {{"CurrentTransportState", state}, {"CurrentTransportStatus", "OK"}});
   }
 
   const UpnpSoap::Action& last() const { return sent_.last(); }

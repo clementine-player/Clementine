@@ -26,9 +26,9 @@
 #include "engines/enginerouter.h"
 #include "networkremote/networkremote.h"
 #include "remoteengine.h"
+#include "streamitemtable.h"
 #include "upnp/upnpdiscovery.h"
 #include "upnp/upnpengine.h"
-#include "streamitemtable.h"
 
 const char* RendererRegistry::kLocalOutputId = "local";
 

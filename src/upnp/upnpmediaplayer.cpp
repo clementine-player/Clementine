@@ -62,7 +62,7 @@ UpnpMediaPlayer::UpnpMediaPlayer(QObject* parent)
 void UpnpMediaPlayer::SetDevice(const UpnpDevice& device) { device_ = device; }
 
 void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
-                            bool autoplay) {
+                           bool autoplay) {
   ++generation_;
   queue_.clear();
   loaded_ = true;
@@ -83,7 +83,8 @@ void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
     Enqueue(LoadSeek, device_.av_transport, "Seek",
             {{"Unit", "REL_TIME"}, {"Target", FormatTime(start_ms)}});
   }
-  if (autoplay) Enqueue(LoadPlay, device_.av_transport, "Play", {{"Speed", "1"}});
+  if (autoplay)
+    Enqueue(LoadPlay, device_.av_transport, "Play", {{"Speed", "1"}});
   poll_timer_->start();
 }
 
@@ -216,8 +217,7 @@ void UpnpMediaPlayer::Finished(const UpnpSoap::Response& response) {
       if (!current) break;
       if (!response.ok) {
         Unload();
-        emit Error(
-            tr("The renderer couldn't play it: %1").arg(response.error));
+        emit Error(tr("The renderer couldn't play it: %1").arg(response.error));
       } else if (request.kind == LoadPlay) {
         play_sent_ = true;
       }
@@ -251,7 +251,8 @@ void UpnpMediaPlayer::Poll() {
 void UpnpMediaPlayer::PositionInfo(const QMap<QString, QString>& values) {
   const QString track_uri = values.value("TrackURI");
   if (started_ && !track_uri.isEmpty() && QUrl(track_uri) != QUrl(uri_)) {
-    qLog(Info) << "The renderer is playing" << track_uri << "instead of" << uri_;
+    qLog(Info) << "The renderer is playing" << track_uri << "instead of"
+               << uri_;
     Unload();
     emit Lost(tr("Something else is playing on it now"));
     return;
