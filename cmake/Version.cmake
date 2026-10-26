@@ -122,10 +122,19 @@ endif(CLEMENTINE_VERSION_PRERELEASE)
 # FORCE_GIT_REVISION takes the place of git describe --long, for builds from a
 # tarball, which has no git history: the deb and rpm builds pass on what
 # describe said when their sources were made.
+#
+# Without it, a build from git writes what describe said to GIT_REV_FILE, and
+# maketarball.sh, which runs after that, packs it into the tarball. A build
+# from the tarball reads it back, so it needs no flag, and packagers that only
+# bump the tarball (Flathub's update checker) get the right version.
+set(GIT_REV_FILE ${CMAKE_SOURCE_DIR}/dist/git-revision)
 if(FORCE_GIT_REVISION)
   set(GIT_REV_LONG ${FORCE_GIT_REVISION})
   set(GIT_INFO_RESULT 0)
-else(FORCE_GIT_REVISION)
+elseif(NOT EXISTS ${CMAKE_SOURCE_DIR}/.git AND EXISTS ${GIT_REV_FILE})
+  file(STRINGS ${GIT_REV_FILE} GIT_REV_LONG LIMIT_COUNT 1)
+  set(GIT_INFO_RESULT 0)
+else()
   find_program(GIT_EXECUTABLE git)
   message(STATUS "Found git: ${GIT_EXECUTABLE}")
 
@@ -138,7 +147,9 @@ else(FORCE_GIT_REVISION)
         RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV_LONG
         OUTPUT_STRIP_TRAILING_WHITESPACE)
-    if(NOT ${GIT_INFO_RESULT} EQUAL 0)
+    if(${GIT_INFO_RESULT} EQUAL 0)
+      file(WRITE ${GIT_REV_FILE} "${GIT_REV_LONG}\n")
+    else()
       message(SEND_ERROR "git describe failed with code ${GIT_INFO_RESULT}: ${GIT_REV_LONG}")
     endif()
   endif()
