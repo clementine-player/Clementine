@@ -199,8 +199,18 @@ void ChromecastEngine::SendLoad(qint64 start_ms, bool playing) {
   const bool pipeline = current_.plan.mode == StreamPlan::Pipeline;
   const QUrl url = UrlForItem(current_, pipeline ? start_ms : 0);
   if (url.isEmpty()) {
-    FailItem(tr("%1 isn't on a network the network remote listens on")
-                 .arg(device_.name));
+    // Every track would fail the same way, so rather than skip through the
+    // playlist, give up on the device. Not from inside Play(), whose caller
+    // would be told to play the next track before it's finished.
+    const QString message =
+        tr("%1 isn't on a network the network remote listens on")
+            .arg(device_.name);
+    qLog(Warning) << message;
+    current_sent_ = false;
+    QTimer::singleShot(0, this, [this, message]() {
+      emit Error(message);
+      emit DeviceFailed();
+    });
     return;
   }
 

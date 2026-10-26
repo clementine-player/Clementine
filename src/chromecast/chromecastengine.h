@@ -73,7 +73,8 @@ class ChromecastEngine : public Engine::Base {
   QString output_icon() const override { return "cast"; }
 
  signals:
-  // The connection to the device was lost, or another sender took it over.
+  // The connection to the device was lost, another sender took it over, or
+  // media can't be served to it.
   void DeviceFailed();
 
  protected:
