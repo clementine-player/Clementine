@@ -47,7 +47,22 @@ SetFile -a E "$TMP/Clementine.app"
 # doesn't have this legacy baggage, and this is also just a single
 # `hdiutil create` call instead of the old makehybrid+convert two-step
 # hybrid-CD-era dance.
-hdiutil create -volname Clementine -srcfolder "$TMP" -ov -format UDZO -imagekey zlib-level=9 -fs APFS "$OUT"
+#
+# hdiutil now and then fails with "Resource busy" on CI runners, when
+# something else (Spotlight, XProtect) briefly holds the new image, so it's
+# given a few tries.
+tries=0
+until hdiutil create -volname Clementine -srcfolder "$TMP" -ov -format UDZO -imagekey zlib-level=9 -fs APFS "$OUT"
+do
+    tries=$((tries + 1))
+    if [ "$tries" -ge 5 ]
+    then
+        echo "hdiutil create failed $tries times, giving up."
+        exit 1
+    fi
+    echo "hdiutil create failed, retrying in $((tries * 10)) seconds."
+    sleep $((tries * 10))
+done
 
 # done !
 echo 'DMG size:' `du -hs "$OUT" | awk '{print $1}'`
