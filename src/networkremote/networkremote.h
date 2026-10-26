@@ -63,6 +63,10 @@ class NetworkRemote : public QObject {
   static void SetRemoteName(const QString& name);
   static QString RemoteName();
 
+  // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
+  // before the server starts.
+  static void SetUpnpEnabled(bool enabled);
+
   // A DISCONNECT message giving |reason|, framed as on the wire.
   static QByteArray DisconnectMessage(cpb::remote::ReasonDisconnect reason);
 
