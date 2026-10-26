@@ -320,8 +320,25 @@ TEST(UpnpDeviceTest, ProtocolInfo) {
   EXPECT_FALSE(device.caps.Accepts("audio/aac"));
   EXPECT_FALSE(device.caps.Accepts("audio/ogg; codecs=opus"));
 
+  // Sonos plays only audio.
+  EXPECT_FALSE(device.video);
+
   device.SetProtocolInfo("");
   EXPECT_TRUE(device.caps.formats.isEmpty());
+}
+
+TEST(UpnpDeviceTest, ProtocolInfoWithVideo) {
+  // Like a TV's.
+  UpnpDevice device;
+  device.SetProtocolInfo(
+      "http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,"
+      "http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_720p_AAC");
+  EXPECT_TRUE(device.video);
+  EXPECT_EQ(QStringList() << "audio/mpeg", device.caps.mime_types());
+
+  // Not over HTTP.
+  device.SetProtocolInfo("rtsp-rtp-udp:*:video/mp4:*,http-get:*:audio/mpeg:*");
+  EXPECT_FALSE(device.video);
 }
 
 TEST(SonosTopologyTest, RoomsOnTheirOwn) {
@@ -331,6 +348,7 @@ TEST(SonosTopologyTest, RoomsOnTheirOwn) {
   ASSERT_EQ(1, groups[0].members.size());
   EXPECT_EQ("RINCON_000E5876740201400", groups[0].members[0].id);
   EXPECT_EQ("Bedroom", groups[0].Name());
+  EXPECT_EQ(QStringList() << "Bedroom", groups[0].Rooms());
   EXPECT_EQ("Lounge", groups[1].Name());
 }
 
@@ -341,6 +359,9 @@ TEST(SonosTopologyTest, GroupedRooms) {
   EXPECT_EQ(3, groups[0].members.size());
   EXPECT_TRUE(groups[0].members[2].invisible);
   // The coordinator first, and the pair once.
+  EXPECT_EQ(QStringList() << "Lounge"
+                          << "Kitchen",
+            groups[0].Rooms());
   EXPECT_EQ("Lounge + Kitchen", groups[0].Name());
 }
 

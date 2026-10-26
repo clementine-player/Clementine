@@ -23,6 +23,7 @@ bool CastDevice::ParseTxt(const QList<QByteArray>& txt) {
   QString new_id;
   QString new_name;
   QString new_model;
+  quint32 new_capabilities = 0;
   for (const QByteArray& entry : txt) {
     const int equals = entry.indexOf('=');
     if (equals <= 0) continue;
@@ -34,6 +35,8 @@ bool CastDevice::ParseTxt(const QList<QByteArray>& txt) {
       new_name = value;
     } else if (key == "md") {
       new_model = value;
+    } else if (key == "ca") {
+      new_capabilities = value.toUInt();
     }
   }
   if (new_id.isEmpty()) return false;
@@ -41,6 +44,7 @@ bool CastDevice::ParseTxt(const QList<QByteArray>& txt) {
   id = new_id;
   name = new_name.isEmpty() ? new_model : new_name;
   model = new_model;
+  capabilities = new_capabilities;
   return true;
 }
 
@@ -58,7 +62,8 @@ QList<QByteArray> CastDevice::SplitTxt(const QByteArray& rdata) {
 
 bool CastDevice::operator==(const CastDevice& other) const {
   return id == other.id && name == other.name && model == other.model &&
-         address == other.address && port == other.port;
+         capabilities == other.capabilities && address == other.address &&
+         port == other.port;
 }
 
 QDebug operator<<(QDebug dbg, const CastDevice& device) {

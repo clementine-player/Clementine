@@ -27,6 +27,12 @@ class QDebug;
 
 // A Cast device, or a speaker group, found on the network.
 struct CastDevice {
+  enum Capability {
+    VideoOut = 0x01,
+    AudioOut = 0x04,
+    MultizoneGroup = 0x20,
+  };
+
   // From the "id" TXT entry. It stays the same when the device restarts or
   // changes address.
   QString id;
@@ -34,17 +40,23 @@ struct CastDevice {
   QString name;
   // "md", eg. "Chromecast Ultra".
   QString model;
+  // "ca", a bitmask of Capability.
+  quint32 capabilities = 0;
   // Where its control connection is. Speaker groups use a port of their own
   // on one of their members.
   QHostAddress address;
   quint16 port = 0;
 
+  // Whether it has a screen, rather than being a speaker.
+  bool has_video() const { return capabilities & VideoOut; }
+  bool is_group() const { return capabilities & MultizoneGroup; }
+
   bool is_valid() const {
     return !id.isEmpty() && !address.isNull() && port != 0;
   }
 
-  // Fills in id, name and model from a _googlecast._tcp TXT record, whose
-  // entries look like "key=value". Returns false if it has no id.
+  // Fills in id, name, model and capabilities from a _googlecast._tcp TXT
+  // record, whose entries look like "key=value". Returns false if it has no id.
   bool ParseTxt(const QList<QByteArray>& txt);
 
   // Splits a TXT record in its wire format, where each entry is preceded by

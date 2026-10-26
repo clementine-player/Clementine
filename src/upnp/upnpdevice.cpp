@@ -162,12 +162,14 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
 void UpnpDevice::SetProtocolInfo(const QString& sink) {
   caps = RendererCaps();
   device_mime_types.clear();
+  video = false;
 
   for (const QString& entry : sink.split(',')) {
     // "protocol:network:contentFormat:additionalInfo"
     const QStringList parts = entry.trimmed().split(':');
     if (parts.size() != 4 || parts[0] != "http-get") continue;
     const QString device_mime = parts[2].toLower();
+    if (device_mime.startsWith("video/")) video = true;
 
     for (const MimeAlias& alias : kMimeAliases) {
       if (device_mime != alias.device) continue;
@@ -199,7 +201,8 @@ bool UpnpDevice::operator==(const UpnpDevice& other) const {
          group_rendering_control == other.group_rendering_control &&
          root_id == other.root_id &&
          zone_group_topology == other.zone_group_topology &&
-         device_mime_types == other.device_mime_types;
+         device_mime_types == other.device_mime_types && video == other.video &&
+         group == other.group;
 }
 
 QDebug operator<<(QDebug dbg, const UpnpDevice& device) {

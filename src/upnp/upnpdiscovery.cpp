@@ -255,10 +255,10 @@ void UpnpDiscovery::FetchTopology(const QString& id) {
 
 void UpnpDiscovery::TopologyReceived(const QList<SonosZoneGroup>& groups) {
   for (const SonosZoneGroup& group : groups) {
-    const QString name = group.Name();
+    const QStringList rooms = group.Rooms();
     for (const SonosZoneGroup::Member& member : group.members) {
       sonos_groups_[member.id] =
-          member.id == group.coordinator_id ? name : QString();
+          member.id == group.coordinator_id ? rooms : QStringList();
     }
   }
   Update();
@@ -271,9 +271,10 @@ void UpnpDiscovery::Update() {
     UpnpDevice device = it->device;
     if (device.zone_group_topology.is_valid()) {
       // Not until it's known to be a coordinator.
-      const QString group = sonos_groups_.value(device.root_id);
-      if (group.isEmpty()) continue;
-      device.name = group;
+      const QStringList rooms = sonos_groups_.value(device.root_id);
+      if (rooms.isEmpty()) continue;
+      device.name = rooms.join(" + ");
+      device.group = rooms.size() > 1;
     }
     offered[device.id] = device;
   }

@@ -94,8 +94,8 @@ class UpnpDiscovery : public QObject {
   QTimer* search_timer_;
   QMap<QString, Renderer> renderers_;
   // Sonos players' root ids, and whether each is its group's coordinator:
-  // the group's name if so, otherwise empty.
-  QMap<QString, QString> sonos_groups_;
+  // the group's rooms if so, otherwise empty.
+  QMap<QString, QStringList> sonos_groups_;
   QMap<QString, UpnpDevice> offered_;
 };
 

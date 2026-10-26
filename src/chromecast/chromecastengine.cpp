@@ -342,6 +342,14 @@ qint64 ChromecastEngine::position_nanosec() const {
   return length > 0 ? qMin(nanosec, length) : nanosec;
 }
 
+QString ChromecastEngine::output_icon() const {
+  if (device_.is_group()) return "speaker-group";
+  if (device_.has_video()) return "tv";
+  // Devices that don't say what they are.
+  if (!(device_.capabilities & CastDevice::AudioOut)) return "cast";
+  return "speaker";
+}
+
 qint64 ChromecastEngine::length_nanosec() const {
   if (current_.id == 0) return 0;
   if (current_.plan.length_nanosec > 0) return current_.plan.length_nanosec;

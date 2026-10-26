@@ -86,6 +86,27 @@ TEST(CastDeviceTest, ParsesTxt) {
   EXPECT_EQ("ba6eb2c5", device.id);
   EXPECT_EQ("Living Room TV", device.name);
   EXPECT_EQ("Chromecast Ultra", device.model);
+  EXPECT_EQ(201221u, device.capabilities);
+}
+
+TEST(CastDeviceTest, Capabilities) {
+  // A Chromecast Ultra, a Nest Mini and a speaker group, as they advertise.
+  CastDevice device;
+  ASSERT_TRUE(device.ParseTxt({"id=a", "ca=201221"}));
+  EXPECT_TRUE(device.has_video());
+  EXPECT_FALSE(device.is_group());
+
+  ASSERT_TRUE(device.ParseTxt({"id=b", "ca=198660"}));
+  EXPECT_FALSE(device.has_video());
+  EXPECT_FALSE(device.is_group());
+
+  ASSERT_TRUE(device.ParseTxt({"id=c", "ca=2084", "md=Google Cast Group"}));
+  EXPECT_FALSE(device.has_video());
+  EXPECT_TRUE(device.is_group());
+
+  // Missing or malformed.
+  ASSERT_TRUE(device.ParseTxt({"id=d", "ca=x"}));
+  EXPECT_EQ(0u, device.capabilities);
 }
 
 TEST(CastDeviceTest, ValueMayContainEquals) {

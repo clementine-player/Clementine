@@ -20,7 +20,7 @@
 #include <QStringList>
 #include <QXmlStreamReader>
 
-QString SonosZoneGroup::Name() const {
+QStringList SonosZoneGroup::Rooms() const {
   QStringList rooms;
   for (const Member& member : members) {
     if (member.invisible || rooms.contains(member.room)) continue;
@@ -30,7 +30,7 @@ QString SonosZoneGroup::Name() const {
       rooms << member.room;
     }
   }
-  return rooms.join(" + ");
+  return rooms;
 }
 
 QList<SonosZoneGroup> SonosZoneGroup::ParseState(const QString& xml) {
