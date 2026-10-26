@@ -2377,6 +2377,17 @@ jobs:
           name: screenshots-macos
           path: screenshots/
           if-no-files-found: ignore
+      # A crash leaves only "Bus error" or "Segmentation fault" in the log, so
+      # show the report macOS wrote: which thread crashed, and where.
+      - name: Show crash reports
+        if: failure()
+        run: |
+          shopt -s nullglob
+          for report in ~/Library/Logs/DiagnosticReports/clementine*; do
+            echo "::group::$(basename "$report")"
+            cat "$report"
+            echo "::endgroup::"
+          done
       - name: ccache statistics
         if: always()
         run: ccache --show-stats || true

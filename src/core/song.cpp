@@ -696,8 +696,9 @@ void Song::InitFromFilePartial(const QString& filename) {
   if (fileref.file() || GME::IsSupportedFormat(info))
     d->valid_ = true;
   else {
+    // Not always a mistake: a folder can have its cover beside its songs.
     d->valid_ = false;
-    qLog(Error) << "File" << filename
+    qLog(Debug) << "File" << filename
                 << "is not recognized by TagLib as a valid audio file.";
   }
 }

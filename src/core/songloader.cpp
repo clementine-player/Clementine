@@ -262,6 +262,8 @@ SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
     songs_ << song;
     return Success;
   } else {
+    qLog(Error) << "File" << filename
+                << "is not recognized by TagLib as a valid audio file.";
     return Error;
   }
 }
