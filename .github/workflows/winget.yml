@@ -9,14 +9,15 @@
 # until the WINGET_FORK_OWNER repository variable is set.
 #
 # One-time setup:
-#   1. Fork microsoft/winget-pkgs to a GitHub account (a user, not an
-#      organisation: the pull requests come from its fork).
-#   2. On that account, create a classic personal access token with the
-#      public_repo scope (Komac pushes a branch to the fork and opens the pull
-#      request on microsoft/winget-pkgs, which a fine-grained token can't).
+#   1. Fork microsoft/winget-pkgs, to clementine-player or to a user: the
+#      pull requests come from branches on the fork.
+#   2. Create a classic personal access token with the public_repo scope, on
+#      a user who can push to the fork (Komac pushes a branch to it and opens
+#      the pull request on microsoft/winget-pkgs, which a fine-grained token
+#      can't). The pull requests are opened as that user.
 #   3. In this repository's Settings > Secrets and variables > Actions, add
 #      the secret WINGET_TOKEN (the token) and the variable WINGET_FORK_OWNER
-#      (the account's login).
+#      (the fork's owner, such as clementine-player).
 
 name: winget
 on:
