@@ -119,44 +119,40 @@ else(CLEMENTINE_VERSION_PRERELEASE)
 endif(CLEMENTINE_VERSION_PRERELEASE)
 
 # Add git revision
+# FORCE_GIT_REVISION takes the place of git describe --long, for builds from a
+# tarball, which has no git history: the deb and rpm builds pass on what
+# describe said when their sources were made.
 if(FORCE_GIT_REVISION)
-  set(GIT_REV ${FORCE_GIT_REVISION})
+  set(GIT_REV_LONG ${FORCE_GIT_REVISION})
   set(GIT_INFO_RESULT 0)
 else(FORCE_GIT_REVISION)
   find_program(GIT_EXECUTABLE git)
   message(STATUS "Found git: ${GIT_EXECUTABLE}")
 
   if(NOT GIT_EXECUTABLE-NOTFOUND)
-    execute_process(COMMAND ${GIT_EXECUTABLE} describe
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        RESULT_VARIABLE GIT_INFO_RESULT
-        OUTPUT_VARIABLE GIT_REV
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-    # On the commit an annotated tag points at, describe prints the tag alone,
-    # with no count or sha for the parsing below to find, and the versions fall
-    # back to the numbers at the top of this file. --long always prints all
-    # three, so a build there carries the tag it is on. GIT_REV itself keeps
-    # describe's own wording, which the displayed and Debian versions use.
+    # Plain describe prints the tag alone on the commit an annotated tag points
+    # at, with no count or sha for the parsing below to find. --long always
+    # prints all three, so a build there carries the tag it is on.
     execute_process(COMMAND ${GIT_EXECUTABLE} describe --long
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV_LONG
         OUTPUT_STRIP_TRAILING_WHITESPACE)
     if(NOT ${GIT_INFO_RESULT} EQUAL 0)
-      message(SEND_ERROR "git describe failed with code ${GIT_INFO_RESULT}: ${GIT_REV}")
+      message(SEND_ERROR "git describe failed with code ${GIT_INFO_RESULT}: ${GIT_REV_LONG}")
     endif()
   endif()
 endif()
 
-if(NOT GIT_REV_LONG)
-  set(GIT_REV_LONG ${GIT_REV})
-endif(NOT GIT_REV_LONG)
-
-string(REGEX REPLACE "^(.+)-([0-9]+)-(g[a-f0-9]+)$" "\\1;\\2;\\3"
-       GIT_PARTS ${GIT_REV_LONG})
-
-if(NOT GIT_PARTS)
+# A string that doesn't match comes back from REGEX REPLACE unchanged, so check
+# first: otherwise the versions quietly fall back to the numbers at the top of
+# this file.
+set(GIT_REV_REGEX "^(.+)-([0-9]+)-(g[a-f0-9]+)$")
+if(NOT "${GIT_REV_LONG}" MATCHES "${GIT_REV_REGEX}")
   message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV_LONG}'")
-endif(NOT GIT_PARTS)
+endif()
+string(REGEX REPLACE "${GIT_REV_REGEX}" "\\1;\\2;\\3"
+       GIT_PARTS ${GIT_REV_LONG})
 
 list(LENGTH GIT_PARTS GIT_PARTS_LENGTH)
 if(GIT_PARTS_LENGTH EQUAL 3)
@@ -165,6 +161,14 @@ if(GIT_PARTS_LENGTH EQUAL 3)
   list(GET GIT_PARTS 2 GIT_SHA1)
   set(HAS_GIT_REVISION ON)
 endif(GIT_PARTS_LENGTH EQUAL 3)
+
+# GIT_REV is in plain describe's own wording, which the displayed and Debian
+# versions use: the tag alone on a numbered release.
+if(GIT_COMMITCOUNT EQUAL 0)
+  set(GIT_REV ${GIT_TAGNAME})
+else()
+  set(GIT_REV ${GIT_REV_LONG})
+endif()
 
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${GIT_REV}")

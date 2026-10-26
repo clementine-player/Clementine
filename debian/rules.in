@@ -12,7 +12,7 @@ configure-stamp:
 	dh_testdir
 	cd bin && cmake .. \
 	  -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr \
-	  -DFORCE_GIT_REVISION=@GIT_REV@
+	  -DFORCE_GIT_REVISION=@GIT_REV_LONG@
 	touch configure-stamp
 
 build: build-stamp
