@@ -411,6 +411,13 @@ set(SOURCES
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
 
+  upnp/sonostopology.cpp
+  upnp/upnpdevice.cpp
+  upnp/upnpdiscovery.cpp
+  upnp/upnpengine.cpp
+  upnp/upnpmediaplayer.cpp
+  upnp/upnpsoap.cpp
+
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
   widgets/clickablelabel.cpp
@@ -727,6 +734,10 @@ set(HEADERS
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
+
+  upnp/upnpdiscovery.h
+  upnp/upnpengine.h
+  upnp/upnpmediaplayer.h
 
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h

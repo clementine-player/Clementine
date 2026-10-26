@@ -26,6 +26,8 @@
 #include "engines/enginerouter.h"
 #include "networkremote/networkremote.h"
 #include "remoteengine.h"
+#include "upnp/upnpdiscovery.h"
+#include "upnp/upnpengine.h"
 #include "streamitemtable.h"
 
 const char* RendererRegistry::kLocalOutputId = "local";
@@ -51,6 +53,10 @@ RendererRegistry::~RendererRegistry() {
     delete engine;
   }
   for (ChromecastEngine* engine : cast_engines_) {
+    if (router_) router_->RemoveOutput(engine);
+    delete engine;
+  }
+  for (UpnpEngine* engine : upnp_engines_) {
     if (router_) router_->RemoveOutput(engine);
     delete engine;
   }
@@ -112,6 +118,61 @@ void RendererRegistry::CastEngineFailed(ChromecastEngine* engine) {
   if (!router_ || router_->active_engine() != engine) return;
   // Fall back to this computer, paused, as for a renderer that goes away,
   // but keep offering the device.
+  router_->RemoveOutput(engine);
+  engine->Stop();
+  router_->AddOutput(engine);
+}
+
+void RendererRegistry::StartUpnpDiscovery() {
+  if (upnp_discovery_) return;
+  upnp_discovery_ = new UpnpDiscovery(this);
+  connect(upnp_discovery_, &UpnpDiscovery::DeviceFound, this,
+          &RendererRegistry::UpnpDeviceFound);
+  connect(upnp_discovery_, &UpnpDiscovery::DeviceLost, this,
+          &RendererRegistry::UpnpDeviceLost);
+  upnp_discovery_->Start();
+}
+
+QString RendererRegistry::UpnpOutputId(const UpnpDevice& device) {
+  return "upnp:" + device.id;
+}
+
+UpnpEngine* RendererRegistry::FindUpnpEngine(const QString& device_id) const {
+  for (UpnpEngine* engine : upnp_engines_) {
+    if (engine->device().id == device_id) return engine;
+  }
+  return nullptr;
+}
+
+void RendererRegistry::UpnpDeviceFound(const UpnpDevice& device) {
+  if (UpnpEngine* engine = FindUpnpEngine(device.id)) {
+    engine->SetDevice(device);
+    // Its name may have changed.
+    if (router_) router_->NotifyOutputsChanged();
+    return;
+  }
+  if (!router_) return;
+
+  UpnpEngine* engine = new UpnpEngine(app_, device, this, items_.get(), this);
+  upnp_engines_ << engine;
+  connect(engine, &UpnpEngine::DeviceFailed, this,
+          [this, engine]() { UpnpEngineFailed(engine); });
+  router_->AddOutput(engine);
+  qLog(Info) << "UPnP renderer available:" << device.name;
+}
+
+void RendererRegistry::UpnpDeviceLost(const QString& id) {
+  UpnpEngine* engine = FindUpnpEngine(id);
+  if (!engine) return;
+  upnp_engines_.removeOne(engine);
+  qLog(Info) << "UPnP renderer gone:" << engine->device().name;
+  if (router_) router_->RemoveOutput(engine);
+  engine->deleteLater();
+}
+
+void RendererRegistry::UpnpEngineFailed(UpnpEngine* engine) {
+  if (!router_ || router_->active_engine() != engine) return;
+  // As for a Cast device.
   router_->RemoveOutput(engine);
   engine->Stop();
   router_->AddOutput(engine);
@@ -257,6 +318,14 @@ QByteArray RendererRegistry::OutputsMessage() const {
                           ? cpb::remote::OUTPUT_STATE_ACTIVE
                           : cpb::remote::OUTPUT_STATE_AVAILABLE);
   }
+  for (UpnpEngine* engine : upnp_engines_) {
+    cpb::remote::Output* output = outputs->add_outputs();
+    output->set_output_id(UpnpOutputId(engine->device()).toStdString());
+    output->set_display_name(engine->device().name.toStdString());
+    output->set_state(router_ && router_->active_engine() == engine
+                          ? cpb::remote::OUTPUT_STATE_ACTIVE
+                          : cpb::remote::OUTPUT_STATE_AVAILABLE);
+  }
 
   const std::string data = msg.SerializeAsString();
   return QByteArray(data.data(), static_cast<int>(data.size()));
@@ -276,6 +345,12 @@ bool RendererRegistry::SetOutput(const QString& output_id) {
   }
   for (ChromecastEngine* engine : cast_engines_) {
     if (CastOutputId(engine->device()) == output_id) {
+      router_->SetOutput(engine);
+      return true;
+    }
+  }
+  for (UpnpEngine* engine : upnp_engines_) {
+    if (UpnpOutputId(engine->device()) == output_id) {
       router_->SetOutput(engine);
       return true;
     }

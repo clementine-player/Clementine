@@ -35,6 +35,9 @@ class ChromecastEngine;
 struct CastDevice;
 class EngineRouter;
 class RemoteEngine;
+class UpnpDiscovery;
+class UpnpEngine;
+struct UpnpDevice;
 class StreamItemTable;
 struct RendererEndpoint;
 
@@ -83,6 +86,8 @@ class RendererRegistry : public QObject {
   // Starts looking for Cast devices, and offers them as outputs for as long
   // as this registry exists.
   void StartCastDiscovery();
+  // The same for UPnP MediaRenderers. Experimental, see --upnp.
+  void StartUpnpDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
   void RegisterRenderer(int client_id, const QByteArray& caps,
@@ -122,6 +127,16 @@ class RendererRegistry : public QObject {
   QList<ChromecastEngine*> cast_engines_;
   // Owned; null until StartCastDiscovery, or if this platform has none.
   CastDiscovery* cast_discovery_ = nullptr;
+
+  // Output ids for UPnP renderers.
+  static QString UpnpOutputId(const UpnpDevice& device);
+  void UpnpDeviceFound(const UpnpDevice& device);
+  void UpnpDeviceLost(const QString& id);
+  void UpnpEngineFailed(UpnpEngine* engine);
+  UpnpEngine* FindUpnpEngine(const QString& device_id) const;
+  QList<UpnpEngine*> upnp_engines_;
+  // Owned; null until StartUpnpDiscovery.
+  UpnpDiscovery* upnp_discovery_ = nullptr;
 
   // 0 until NetworkRemote says where it listens.
   quint16 listening_port_;

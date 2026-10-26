@@ -60,6 +60,8 @@ const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
 
 // From --remote-name; empty for the host name.
 QString sRemoteName;
+// From --upnp.
+bool sUpnpEnabled = false;
 
 bool InSharedSubnet(const QHostAddress& address) {
   for (const char* subnet : kSharedSubnets) {
@@ -105,6 +107,8 @@ void NetworkRemote::ReadSettings() {
 void NetworkRemote::SetRemoteName(const QString& name) {
   sRemoteName = name.trimmed();
 }
+
+void NetworkRemote::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
 
 QString NetworkRemote::RemoteName() {
   return sRemoteName.isEmpty() ? QHostInfo::localHostName() : sRemoteName;
@@ -285,6 +289,10 @@ void NetworkRemote::StartStreaming() {
   // registry's thread, which the discovery then lives on.
   QMetaObject::invokeMethod(renderer_registry_, "StartCastDiscovery",
                             Qt::QueuedConnection);
+  if (sUpnpEnabled) {
+    QMetaObject::invokeMethod(renderer_registry_, "StartUpnpDiscovery",
+                              Qt::QueuedConnection);
+  }
   media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
 
   connect(incoming_data_parser_.get(),
