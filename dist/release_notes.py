@@ -28,6 +28,13 @@ Usage:
     The GitHub release's notes for commit C (default: HEAD), which all.yml has
     just built: the notes since the build before it, or with --release, since
     the numbered release before it. Prints them as Markdown.
+
+  dist/release_notes.py appstream [--commit C]
+
+    Every numbered release up to commit C (default: HEAD), newest first, with
+    its date and notes, as the <release> elements of the AppStream metadata's
+    <releases>. Run by dist/CMakeLists.txt, which puts them in
+    dist/org.clementine_player.Clementine.appdata.xml.
 """
 
 import argparse
@@ -36,6 +43,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -173,6 +181,29 @@ def notes(args: argparse.Namespace) -> None:
     )
 
 
+def appstream(args: argparse.Namespace) -> None:
+    release = last_release(args.commit, numbered=True)
+    while release:
+        before = last_release(f"{release}^", numbered=True)
+        # Annotated tags from before numbered releases, such as 1.4.0rc2.
+        if VERSION.fullmatch(release):
+            date = git_output(
+                "for-each-ref", "--format=%(taggerdate:short)", f"refs/tags/{release}"
+            ).strip()
+            print(f'\t\t<release version="{release}" date="{date}">')
+            # Releases from before release notes have none.
+            release_notes = notes_since(before, release)
+            if release_notes:
+                print("\t\t\t<description>")
+                print("\t\t\t\t<ul>")
+                for note in release_notes:
+                    print(f"\t\t\t\t\t<li>{escape(note)}</li>")
+                print("\t\t\t\t</ul>")
+                print("\t\t\t</description>")
+            print("\t\t</release>")
+        release = before
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=__doc__.splitlines()[0],
@@ -200,6 +231,12 @@ def main() -> None:
         "--release", action="store_true", help="for a numbered release"
     )
     notes_parser.set_defaults(command=notes)
+
+    appstream_parser = commands.add_parser(
+        "appstream", help="the AppStream metadata's releases"
+    )
+    appstream_parser.add_argument("--commit", default="HEAD")
+    appstream_parser.set_defaults(command=appstream)
 
     args = parser.parse_args()
     try:
