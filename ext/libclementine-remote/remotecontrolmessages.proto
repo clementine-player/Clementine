@@ -113,6 +113,17 @@ enum MsgType {
   // Server -> client
   BROWSE = 370;
   BROWSE_ADD_RESULT = 371;
+
+  // Syncing media to the client, behind SERVER_FEATURE_SYNC.
+  // Client -> server
+  REQUEST_SYNC_SOURCES = 380;
+  REQUEST_SYNC_MANIFEST = 381;
+  // Behind SERVER_FEATURE_PLAY_REPORTS.
+  REPORT_PLAYS = 382;
+  // Server -> client
+  SYNC_SOURCES = 390;
+  SYNC_MANIFEST = 391;
+  REPORT_PLAYS_RESULT = 392;
 }
 
 // Valid Engine states
@@ -169,6 +180,8 @@ message SongMetadata {
   optional string art_automatic = 20;
   optional string art_manual = 21;
   optional Type type = 22;
+  // Set by servers with SERVER_FEATURE_SYNC.
+  optional Downloadability downloadable = 23;
 }
 
 // Playlist information
@@ -243,6 +256,13 @@ message ResponseClementineInfo {
 
   // Optional abilities of the server. Unknown values are ignored by clients.
   repeated ServerFeature features = 5;
+
+  // The formats the server can convert to for sync, from its transcoder
+  // presets and the encoders installed. Sent with SERVER_FEATURE_SYNC.
+  repeated AudioFormat encodable_formats = 6;
+  // Stable per install (a UUID), so a client can tell this Clementine from
+  // another, and find it again when its address changes.
+  optional string server_id = 7;
 }
 
 // The current song played
@@ -501,6 +521,11 @@ enum ServerFeature {
   SERVER_FEATURE_BROWSE = 2;
   // The server honors RequestInsertUrls.enqueue_next.
   SERVER_FEATURE_ENQUEUE_NEXT = 3;
+  // The server answers REQUEST_SYNC_SOURCES and REQUEST_SYNC_MANIFEST, and
+  // serves the files they list.
+  SERVER_FEATURE_SYNC = 4;
+  // The server applies plays sent with REPORT_PLAYS.
+  SERVER_FEATURE_PLAY_REPORTS = 5;
 }
 
 // Optional abilities of a renderer, beyond decoding its formats.
@@ -744,6 +769,13 @@ message BrowseNode {
   optional bytes icon_png = 7;
   // For tracks the server has metadata for: artist, album, length.
   optional SongMetadata song = 8;
+  // Whether the node, or everything under it, can be synced to the client.
+  // Set by servers with SERVER_FEATURE_SYNC.
+  optional Downloadability downloadable = 9;
+  // Unlike node_id, stable across connections and restarts: the service's
+  // own key for the node, such as a Plex rating key. Set only on nodes that
+  // can be a sync source, which use it in their source_id.
+  optional string sync_key = 10;
 }
 
 // Asks for a node's children, or for the services when node_id is unset.
@@ -816,9 +848,192 @@ message ResponseBrowseAdd {
   optional BrowseAddResult result = 2;
 }
 
+// Syncing media to the client. The client keeps its sync rules; the server
+// resolves a rule's source into a manifest of songs when asked, and serves
+// each song over HTTP. The server keeps no state about rules.
+
+// Whether a song, or a node and everything under it, can be downloaded.
+enum Downloadability {
+  // An older server: treat only local files as downloadable.
+  DOWNLOADABILITY_UNSPECIFIED = 0;
+  DOWNLOADABILITY_DOWNLOADABLE = 1;
+  // A stream with no end, such as radio, or the service doesn't allow it.
+  DOWNLOADABILITY_NOT_DOWNLOADABLE = 2;
+}
+
+// What a sync source is.
+enum SyncSourceKind {
+  SYNC_SOURCE_KIND_UNSPECIFIED = 0;
+  SYNC_SOURCE_KIND_SONG = 1;
+  SYNC_SOURCE_KIND_ALBUM = 2;
+  SYNC_SOURCE_KIND_ARTIST = 3;
+  // A Clementine playlist.
+  SYNC_SOURCE_KIND_PLAYLIST = 4;
+  SYNC_SOURCE_KIND_SMART_PLAYLIST = 5;
+  // A node in the Internet sidebar: a Plex playlist, a Drive folder, a
+  // podcast.
+  SYNC_SOURCE_KIND_INTERNET_NODE = 6;
+}
+
+// Something a sync rule can point at.
+message SyncSource {
+  // Stable across connections and restarts, so a rule keeps meaning the same
+  // thing: "library/album/<albumartist>/<album>", "playlist/<id>",
+  // "smart/<backend>/<uuid>", "browse/<service>/<sync_key>". Opaque to
+  // clients.
+  optional string source_id = 1;
+  optional string title = 2;
+  optional SyncSourceKind kind = 3;
+  // How many songs it holds now, and roughly how big they are. Unset when
+  // unknown without resolving it.
+  optional int32 item_count = 4;
+  optional int64 approx_bytes = 5;
+}
+
+// Asks for the sources the client can offer when making a rule: the
+// playlists and smart playlists. Songs, albums, artists and Internet nodes
+// are picked from the library and the Internet tab instead.
+message RequestSyncSources {}
+
+message ResponseSyncSources {
+  repeated SyncSource sources = 1;
+}
+
+// How a song is to be delivered.
+enum SyncQuality {
+  // Treat as SYNC_QUALITY_ORIGINAL.
+  SYNC_QUALITY_UNSPECIFIED = 0;
+  // The original file when the client plays its format, otherwise converted.
+  SYNC_QUALITY_ORIGINAL = 1;
+  // Not yet honored: convert anything over max_bitrate_kbps.
+  SYNC_QUALITY_SAVE_SPACE = 2;
+  // Convert everything to preferred_mime_type.
+  SYNC_QUALITY_ALWAYS_CONVERT = 3;
+}
+
+// What to do with lossless files under SYNC_QUALITY_ORIGINAL.
+enum SyncLossless {
+  // Treat as SYNC_LOSSLESS_KEEP.
+  SYNC_LOSSLESS_UNSPECIFIED = 0;
+  SYNC_LOSSLESS_KEEP = 1;
+  SYNC_LOSSLESS_CONVERT = 2;
+}
+
+// Asks for the songs a source holds now, ready to download.
+message RequestSyncManifest {
+  optional string source_id = 1;
+  // Unset or 0: no limit. With both, whichever is reached first.
+  optional int32 limit_items = 2;
+  optional int64 limit_bytes = 3;
+  // The formats the client plays, as in RendererCapabilities.
+  repeated AudioFormat supported_formats = 4;
+  optional SyncQuality quality = 5;
+  // For conversions. Unset or 0: the server's default for the format.
+  optional int32 max_bitrate_kbps = 6;
+  // For random sources: the same seed gives the same songs, so a resumed
+  // sync sees the same manifest. Unset or 0: a new random choice.
+  optional int64 seed = 7;
+  // What to convert to, from encodable_formats, such as
+  // "audio/ogg; codecs=opus". Unset: the server's choice.
+  optional string preferred_mime_type = 8;
+  optional SyncLossless lossless = 9;
+}
+
+// How the server is delivering an item.
+enum SyncDelivery {
+  SYNC_DELIVERY_UNSPECIFIED = 0;
+  // The original file, byte for byte.
+  SYNC_DELIVERY_ORIGINAL = 1;
+  // Converted, given quality and supported_formats.
+  SYNC_DELIVERY_CONVERTED = 2;
+}
+
+// A cover, shared by every song that has it.
+message SyncArt {
+  // SHA-256 of the cover's bytes, in hex, stable across connections. The
+  // client keeps covers by key and fetches only the keys it lacks.
+  optional string key = 1;
+  // The cover at full size: a path, /a/<token>/<n>, resolved like
+  // RenderItem.url.
+  optional string url = 2;
+}
+
+// One song in a manifest.
+message SyncItem {
+  // The song's identity across manifests and refreshes.
+  optional string item_key = 1;
+  // Changes when the bytes the client gets would change: the file, or how
+  // it is converted.
+  optional string version = 2;
+  // Without art: covers come once each, through art.
+  optional SongMetadata song = 3;
+  // A path, /d/<token>/<n>, resolved like RenderItem.url. Supports Range,
+  // with an ETag of item_key:version for If-Range.
+  optional string url = 4;
+  optional string mime_type = 5;
+  // 0 until a conversion has finished.
+  optional int64 size_bytes = 6;
+  optional SyncDelivery delivery = 7;
+  // Unset for songs without a cover.
+  optional SyncArt art = 8;
+}
+
+// Where a manifest stands.
+enum SyncManifestState {
+  // Treat as SYNC_MANIFEST_STATE_READY.
+  SYNC_MANIFEST_STATE_UNSPECIFIED = 0;
+  SYNC_MANIFEST_STATE_READY = 1;
+  // The source's service has to be set up on the computer first; message
+  // says how.
+  SYNC_MANIFEST_STATE_NEEDS_SETUP = 2;
+  // The source no longer exists.
+  SYNC_MANIFEST_STATE_GONE = 3;
+}
+
+message ResponseSyncManifest {
+  optional string source_id = 1;
+  optional SyncManifestState state = 2;
+  // In the source's order.
+  repeated SyncItem items = 3;
+  // Songs left out because they can't be downloaded, or the client can't
+  // play them and the server can't convert them.
+  optional int32 skipped = 4;
+  // Shown to the user with SYNC_MANIFEST_STATE_NEEDS_SETUP, translated.
+  optional string message = 5;
+}
+
+// How a play on the client ended.
+enum PlayOutcome {
+  PLAY_OUTCOME_UNSPECIFIED = 0;
+  PLAY_OUTCOME_COMPLETED = 1;
+  PLAY_OUTCOME_SKIPPED = 2;
+}
+
+// A song played on the client while it wasn't connected.
+message PlayEvent {
+  optional string item_key = 1;
+  // When it started, in Unix seconds.
+  optional int64 played_at = 2;
+  optional int64 listened_ms = 3;
+  optional PlayOutcome outcome = 4;
+  // Set if rated on the client: 0 (0 stars) to 1 (5 stars).
+  optional float rating = 5;
+}
+
+// Plays to apply, sent with REPORT_PLAYS to servers with
+// SERVER_FEATURE_PLAY_REPORTS.
+message RequestReportPlays {
+  repeated PlayEvent plays = 1;
+}
+
+// The client deletes the plays the server accepted.
+message ResponseReportPlays {
+  optional int32 accepted = 1;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default = 22];
+  optional int32 version = 1 [default = 23];
   optional MsgType type = 2
       [default = UNKNOWN];  // What data is in the message?
 
@@ -877,4 +1092,12 @@ message Message {
   optional ResponseBrowse response_browse = 71;
   optional RequestBrowseAdd request_browse_add = 72;
   optional ResponseBrowseAdd response_browse_add = 73;
+
+  // Syncing media to the client
+  optional RequestSyncSources request_sync_sources = 74;
+  optional ResponseSyncSources response_sync_sources = 75;
+  optional RequestSyncManifest request_sync_manifest = 76;
+  optional ResponseSyncManifest response_sync_manifest = 77;
+  optional RequestReportPlays request_report_plays = 78;
+  optional ResponseReportPlays response_report_plays = 79;
 }
