@@ -14,8 +14,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "networkremote/sync/mediasync.h"
+
 #include <QCoreApplication>
 #include <QSettings>
+#include <QSignalSpy>
 #include <QUuid>
 
 #include "core/database.h"
@@ -304,6 +307,7 @@ class SyncResolverTest : public ::testing::Test {
     song.set_mtime(1);
     song.set_ctime(1);
     song.set_filesize(1000);
+    song.set_filetype(Song::Type_Flac);
     library_->AddOrUpdateSongs(SongList() << song);
   }
 
@@ -413,6 +417,175 @@ TEST_F(SyncResolverTest, OtherSourcesAreNotSupportedYet) {
             Resolve(SyncSourceId::ForSmartPlaylist("library", "0b6e")).state);
   EXPECT_EQ(SyncResolver::State::Unsupported,
             Resolve(SyncSourceId::ForInternetNode("plex", "42")).state);
+}
+
+class MediaSyncTest : public SyncResolverTest {
+ protected:
+  void SetUp() override {
+    SyncResolverTest::SetUp();
+    MediaSync::Hooks hooks;
+    hooks.playlists = playlists_;
+    hooks.downloads_allowed = [this]() { return downloads_allowed_; };
+    sync_.reset(new MediaSync(library_.get(), hooks, items_));
+    sent_.reset(
+        new QSignalSpy(sync_.get(), SIGNAL(SendToClient(int, QByteArray))));
+  }
+
+  cpb::remote::ResponseSyncManifest Manifest(const SyncSourceId& source,
+                                             int client = 1,
+                                             const QStringList& formats = {
+                                                 "audio/flac"}) {
+    cpb::remote::Message msg;
+    msg.set_type(cpb::remote::REQUEST_SYNC_MANIFEST);
+    cpb::remote::RequestSyncManifest* req = msg.mutable_request_sync_manifest();
+    req->set_source_id(source.ToString().toStdString());
+    for (const QString& format : formats) {
+      req->add_supported_formats()->set_mime_type(format.toStdString());
+    }
+    req->set_limit_items(limit_items_);
+    req->set_limit_bytes(limit_bytes_);
+    return Send(msg, client);
+  }
+
+  cpb::remote::ResponseSyncManifest Send(const cpb::remote::Message& msg,
+                                         int client = 1) {
+    const std::string data = msg.SerializeAsString();
+    sync_->HandleMessage(client, "10.0.0.2",
+                         QByteArray(data.data(), data.size()));
+    cpb::remote::Message reply;
+    EXPECT_FALSE(sent_->isEmpty());
+    if (sent_->isEmpty()) return reply.response_sync_manifest();
+    EXPECT_EQ(client, sent_->last()[0].toInt());
+    const QByteArray out = sent_->last()[1].toByteArray();
+    reply.ParseFromArray(out.constData(), out.size());
+    EXPECT_EQ(cpb::remote::SYNC_MANIFEST, reply.type());
+    return reply.response_sync_manifest();
+  }
+
+  // Finds the item a manifest's URL stands for.
+  bool Fetch(const std::string& url, StreamItem* item, QHostAddress* peer) {
+    const QStringList parts = QString::fromStdString(url).split('/');
+    if (parts.size() != 4 || parts[1] != "d") return false;
+    return items_->Find(parts[2].toLatin1(), parts[3].toInt(), item, peer);
+  }
+
+  std::shared_ptr<StreamItemTable> items_ = std::make_shared<StreamItemTable>();
+  std::unique_ptr<MediaSync> sync_;
+  std::unique_ptr<QSignalSpy> sent_;
+  bool downloads_allowed_ = true;
+  int limit_items_ = 0;
+  qint64 limit_bytes_ = 0;
+};
+
+TEST_F(MediaSyncTest, ListsAnAlbumsSongsToDownload) {
+  const SyncSourceId source = SyncSourceId::ForAlbum("Pixies", "Doolittle");
+  const cpb::remote::ResponseSyncManifest manifest = Manifest(source);
+  EXPECT_EQ(source.ToString().toStdString(), manifest.source_id());
+  EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_READY, manifest.state());
+  EXPECT_EQ(0, manifest.skipped());
+  ASSERT_EQ(3, manifest.items_size());
+
+  const cpb::remote::SyncItem& debaser = manifest.items(0);
+  const Song song = Find("Debaser");
+  EXPECT_EQ(SyncSong::ItemKey(song).toStdString(), debaser.item_key());
+  EXPECT_EQ(SyncSong::ItemVersion(song).toStdString(), debaser.version());
+  EXPECT_EQ("Debaser", debaser.song().title());
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_DOWNLOADABLE,
+            debaser.song().downloadable());
+  EXPECT_EQ("audio/flac", debaser.mime_type());
+  EXPECT_EQ(1000, debaser.size_bytes());
+  EXPECT_EQ(cpb::remote::SYNC_DELIVERY_ORIGINAL, debaser.delivery());
+
+  StreamItem item;
+  QHostAddress peer;
+  ASSERT_TRUE(Fetch(debaser.url(), &item, &peer));
+  EXPECT_EQ(StreamPlan::Direct, item.plan.mode);
+  EXPECT_EQ(QUrl::fromLocalFile("/music/Debaser.flac"), item.req.MediaUrl());
+  EXPECT_EQ(QHostAddress("10.0.0.2"), peer);
+}
+
+TEST_F(MediaSyncTest, SkipsWhatTheRemoteCantPlay) {
+  // Converting comes later: for now, only files the remote plays as they are.
+  const cpb::remote::ResponseSyncManifest manifest = Manifest(
+      SyncSourceId::ForAlbum("Pixies", "Doolittle"), 1, {"audio/mpeg"});
+  EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_READY, manifest.state());
+  EXPECT_EQ(0, manifest.items_size());
+  EXPECT_EQ(3, manifest.skipped());
+}
+
+TEST_F(MediaSyncTest, SkipsWhatCantBeDownloaded) {
+  Song stream;
+  stream.Init("Groove Salad", "SomaFM", "", -1);
+  stream.set_url(QUrl("http://ice.somafm.com/groovesalad"));
+  stream.set_filetype(Song::Type_Stream);
+  playlist_ << Find("Tame") << stream;
+
+  const cpb::remote::ResponseSyncManifest manifest =
+      Manifest(SyncSourceId::ForPlaylist(7));
+  ASSERT_EQ(1, manifest.items_size());
+  EXPECT_EQ("Tame", manifest.items(0).song().title());
+  EXPECT_EQ(1, manifest.skipped());
+}
+
+TEST_F(MediaSyncTest, StopsAtTheLimits) {
+  limit_items_ = 2;
+  EXPECT_EQ(2, Manifest(SyncSourceId::ForArtist("Pixies")).items_size());
+
+  limit_items_ = 0;
+  limit_bytes_ = 2500;
+  EXPECT_EQ(2, Manifest(SyncSourceId::ForArtist("Pixies")).items_size());
+}
+
+TEST_F(MediaSyncTest, ASongInTwoManifestsHasOneUrl) {
+  const std::string album =
+      Manifest(SyncSourceId::ForAlbum("Pixies", "Doolittle")).items(0).url();
+  const std::string song =
+      Manifest(SyncSourceId::ForSong(Find("Debaser").id())).items(0).url();
+  EXPECT_EQ(album, song);
+
+  // And the first manifest's songs can still be fetched.
+  StreamItem item;
+  QHostAddress peer;
+  EXPECT_TRUE(Fetch(
+      Manifest(SyncSourceId::ForAlbum("Pixies", "Doolittle")).items(2).url(),
+      &item, &peer));
+}
+
+TEST_F(MediaSyncTest, EachRemoteHasItsOwnUrls) {
+  const SyncSourceId source = SyncSourceId::ForSong(Find("Debaser").id());
+  const std::string first = Manifest(source, 1).items(0).url();
+  const std::string second = Manifest(source, 2).items(0).url();
+  EXPECT_NE(first, second);
+
+  // Until it goes.
+  sync_->ClientDisconnected(1);
+  StreamItem item;
+  QHostAddress peer;
+  EXPECT_FALSE(Fetch(first, &item, &peer));
+  EXPECT_TRUE(Fetch(second, &item, &peer));
+}
+
+TEST_F(MediaSyncTest, SaysWhenASourceIsGone) {
+  const cpb::remote::ResponseSyncManifest manifest =
+      Manifest(SyncSourceId::ForAlbum("Pixies", "Trompe le Monde"));
+  EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_GONE, manifest.state());
+  EXPECT_EQ(0, manifest.items_size());
+}
+
+TEST_F(MediaSyncTest, KeepsRulesItCantSyncYet) {
+  const cpb::remote::ResponseSyncManifest manifest =
+      Manifest(SyncSourceId::ForSmartPlaylist("library", "0b6e"));
+  EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_NEEDS_SETUP, manifest.state());
+  EXPECT_FALSE(manifest.message().empty());
+}
+
+TEST_F(MediaSyncTest, NeedsDownloadsAllowed) {
+  downloads_allowed_ = false;
+  const cpb::remote::ResponseSyncManifest manifest =
+      Manifest(SyncSourceId::ForAlbum("Pixies", "Doolittle"));
+  EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_NEEDS_SETUP, manifest.state());
+  EXPECT_FALSE(manifest.message().empty());
+  EXPECT_EQ(0, manifest.items_size());
 }
 
 }  // namespace

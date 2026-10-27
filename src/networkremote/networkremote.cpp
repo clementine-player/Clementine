@@ -37,7 +37,10 @@
 #include "networkremote/protocolsniffer.h"
 #include "networkremote/streaming/mediahttpserver.h"
 #include "networkremote/streaming/rendererregistry.h"
+#include "networkremote/sync/mediasync.h"
 #include "networkremote/zeroconf.h"
+#include "playlist/playlist.h"
+#include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
@@ -76,6 +79,7 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
     : QObject(parent),
       renderer_registry_(nullptr),
       internet_browser_(nullptr),
+      media_sync_(nullptr),
       allow_streaming_(false),
       signals_connected_(false),
       app_(app),
@@ -86,6 +90,7 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
 NetworkRemote::~NetworkRemote() {
   StopServer();
   if (internet_browser_) internet_browser_->deleteLater();
+  if (media_sync_) media_sync_->deleteLater();
 }
 
 void NetworkRemote::ReadSettings() {
@@ -184,6 +189,43 @@ void NetworkRemote::SetupServer() {
   // playlist.
   connect(internet_browser_, SIGNAL(AddToPlaylist(QMimeData*)), this,
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
+
+  if (MediaSyncEnabled()) SetupMediaSync();
+}
+
+void NetworkRemote::SetupMediaSync() {
+  Application* app = app_;
+  MediaSync::Hooks hooks;
+  hooks.playlists.songs = [app](int id, SongList* songs) {
+    // An open playlist as it is now, with changes not yet saved.
+    if (Playlist* open = app->playlist_manager()->playlist(id)) {
+      *songs = open->GetAllSongs();
+      return true;
+    }
+    PlaylistBackend* backend = app->playlist_backend();
+    if (backend->GetPlaylist(id).id != id) return false;
+    *songs = backend->GetPlaylistSongs(id);
+    return true;
+  };
+  hooks.url_handler = [app](const Song& song) {
+    return app->player()->HandlerForUrl(song.url());
+  };
+  hooks.downloads_allowed = []() {
+    QSettings s;
+    s.beginGroup(kSettingsGroup);
+    return s.value("allow_downloads", false).toBool();
+  };
+
+  media_sync_ = new MediaSync(app_->library_backend(), hooks,
+                              std::make_shared<StreamItemTable>());
+  media_sync_->moveToThread(QCoreApplication::instance()->thread());
+  connect(incoming_data_parser_.get(),
+          SIGNAL(SyncMessage(int, QString, QByteArray)), media_sync_,
+          SLOT(HandleMessage(int, QString, QByteArray)));
+  connect(this, SIGNAL(ClientDisconnected(int)), media_sync_,
+          SLOT(ClientDisconnected(int)));
+  connect(media_sync_, SIGNAL(SendToClient(int, QByteArray)), this,
+          SLOT(SendToClient(int, QByteArray)));
 }
 
 void NetworkRemote::StartServer() {

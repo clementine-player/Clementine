@@ -26,6 +26,7 @@
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
 #include "internet/lastfm/lastfmservice.h"
+#include "networkremote/networkremote.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
@@ -233,6 +234,14 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
       emit BrowseMessage(client->id(), QByteArray(data.data(), data.size()));
       break;
     }
+
+    case cpb::remote::REQUEST_SYNC_MANIFEST:
+      if (NetworkRemote::MediaSyncEnabled()) {
+        const std::string data = msg.SerializeAsString();
+        emit SyncMessage(client->id(), client->peer_address().toString(),
+                         QByteArray(data.data(), data.size()));
+      }
+      break;
 
     default:
       break;

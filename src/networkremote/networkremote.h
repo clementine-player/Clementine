@@ -14,6 +14,7 @@ class Application;
 class AuthAttemptLimiter;
 class IncomingDataParser;
 class InternetBrowser;
+class MediaSync;
 class MediaHttpServer;
 class OutgoingDataCreator;
 class RendererRegistry;
@@ -78,6 +79,7 @@ class NetworkRemote : public QObject {
 
  public slots:
   void SetupServer();
+  void SetupMediaSync();
   void StartServer();
   void ReloadSettings();
   void AcceptConnection();
@@ -100,6 +102,8 @@ class NetworkRemote : public QObject {
   RendererRegistry* renderer_registry_;
   // Lives on the main thread with the Internet sidebar's model.
   InternetBrowser* internet_browser_;
+  // With --media-sync. Lives on the main thread, where open playlists are.
+  MediaSync* media_sync_;
   // While the server runs, for Cast devices and renderers to fetch media.
   // Lives on this thread with the sockets.
   std::unique_ptr<MediaHttpServer> media_http_server_;
