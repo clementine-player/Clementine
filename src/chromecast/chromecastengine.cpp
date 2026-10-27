@@ -202,9 +202,8 @@ void ChromecastEngine::SendLoad(qint64 start_ms, bool playing) {
     // Every track would fail the same way, so rather than skip through the
     // playlist, give up on the device. Not from inside Play(), whose caller
     // would be told to play the next track before it's finished.
-    const QString message =
-        tr("%1 isn't on a network the network remote listens on")
-            .arg(device_.name);
+    const QString message = registry_->ReachMessage(
+        registry_->ReachFor(device_.address), device_.name);
     qLog(Warning) << message;
     current_sent_ = false;
     QTimer::singleShot(0, this, [this, message]() {

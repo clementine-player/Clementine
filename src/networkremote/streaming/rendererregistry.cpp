@@ -33,6 +33,8 @@
 const char* RendererRegistry::kLocalOutputId = "local";
 
 namespace {
+bool sUpnpEnabled = false;
+
 // Client-chosen strings kept for as long as the renderer is connected, and
 // shown in output pickers.
 const int kMaxRendererIdLength = 128;
@@ -40,12 +42,11 @@ const int kMaxDisplayNameLength = 64;
 }  // namespace
 
 RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
-    : app_(app),
-      router_(router),
-      items_(new StreamItemTable),
-      listening_port_(0) {
+    : app_(app), router_(router), items_(new StreamItemTable) {
   connect(router_, SIGNAL(OutputsChanged()), SLOT(RouterOutputsChanged()));
 }
+
+void RendererRegistry::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
 
 RendererRegistry::~RendererRegistry() {
   for (RemoteEngine* engine : engines_) {
@@ -62,18 +63,28 @@ RendererRegistry::~RendererRegistry() {
   }
 }
 
-void RendererRegistry::StartCastDiscovery() {
-  if (cast_discovery_) return;
-  cast_discovery_ = CastDiscovery::Create(this);
+void RendererRegistry::StartDiscovery() {
   if (!cast_discovery_) {
-    qLog(Info) << "Can't look for Cast devices on this platform";
-    return;
+    cast_discovery_ = CastDiscovery::Create(this);
+    if (cast_discovery_) {
+      connect(cast_discovery_, &CastDiscovery::DeviceFound, this,
+              &RendererRegistry::CastDeviceFound);
+      connect(cast_discovery_, &CastDiscovery::DeviceLost, this,
+              &RendererRegistry::CastDeviceLost);
+      cast_discovery_->Start();
+    } else {
+      qLog(Info) << "Can't look for Cast devices on this platform";
+    }
   }
-  connect(cast_discovery_, &CastDiscovery::DeviceFound, this,
-          &RendererRegistry::CastDeviceFound);
-  connect(cast_discovery_, &CastDiscovery::DeviceLost, this,
-          &RendererRegistry::CastDeviceLost);
-  cast_discovery_->Start();
+
+  if (sUpnpEnabled && !upnp_discovery_) {
+    upnp_discovery_ = new UpnpDiscovery(this);
+    connect(upnp_discovery_, &UpnpDiscovery::DeviceFound, this,
+            &RendererRegistry::UpnpDeviceFound);
+    connect(upnp_discovery_, &UpnpDiscovery::DeviceLost, this,
+            &RendererRegistry::UpnpDeviceLost);
+    upnp_discovery_->Start();
+  }
 }
 
 QString RendererRegistry::CastOutputId(const CastDevice& device) {
@@ -121,16 +132,6 @@ void RendererRegistry::CastEngineFailed(ChromecastEngine* engine) {
   router_->RemoveOutput(engine);
   engine->Stop();
   router_->AddOutput(engine);
-}
-
-void RendererRegistry::StartUpnpDiscovery() {
-  if (upnp_discovery_) return;
-  upnp_discovery_ = new UpnpDiscovery(this);
-  connect(upnp_discovery_, &UpnpDiscovery::DeviceFound, this,
-          &RendererRegistry::UpnpDeviceFound);
-  connect(upnp_discovery_, &UpnpDiscovery::DeviceLost, this,
-          &RendererRegistry::UpnpDeviceLost);
-  upnp_discovery_->Start();
 }
 
 QString RendererRegistry::UpnpOutputId(const UpnpDevice& device) {
@@ -359,29 +360,100 @@ bool RendererRegistry::SetOutput(const QString& output_id) {
   return false;
 }
 
-void RendererRegistry::SetListening(quint16 port,
-                                    const QList<QHostAddress>& addresses) {
-  listening_port_ = port;
-  listening_addresses_ = addresses;
-  qLog(Debug) << "Media for other devices is served on port" << port;
+void RendererRegistry::SetServing(const Serving& serving) {
+  serving_ = serving;
+  if (serving.enabled) {
+    qLog(Debug) << "Media for other devices is served on port" << serving.port;
+  }
+  emit ServingChanged();
 }
 
-QUrl RendererRegistry::MediaBaseUrl(const QHostAddress& device) const {
-  if (listening_port_ == 0) return QUrl();
+namespace {
 
+QList<QNetworkAddressEntry> UpInterfaces() {
   QList<QNetworkAddressEntry> interfaces;
   for (const QNetworkInterface& iface : QNetworkInterface::allInterfaces()) {
     if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
     interfaces << iface.addressEntries();
   }
+  return interfaces;
+}
+
+}  // namespace
+
+RendererRegistry::Reach RendererRegistry::ReachFor(
+    const QHostAddress& device, const Serving& serving,
+    const QList<QNetworkAddressEntry>& interfaces, QHostAddress* local_ret) {
+  if (!serving.enabled) return Reach::RemoteOff;
+  if (serving.port == 0) return Reach::NotListening;
+
   const QHostAddress local =
-      LocalAddressFor(device, listening_addresses_, interfaces);
-  if (local.isNull()) return QUrl();
+      LocalAddressFor(device, serving.addresses, interfaces);
+  if (local.isNull()) return Reach::NotOnNetwork;
+
+  // As NetworkRemote decides when the device connects.
+  if (serving.only_local &&
+      !NetworkRemote::IsLocalClient(
+          NormalisedAddress(device), local,
+          serving.addresses.isEmpty()
+              ? NetworkRemote::Listening::OnAllAddresses
+              : NetworkRemote::Listening::OnChosenAddress)) {
+    return Reach::NotLocal;
+  }
+
+  if (local_ret) *local_ret = local;
+  return Reach::Reachable;
+}
+
+RendererRegistry::Reach RendererRegistry::ReachFor(
+    const QHostAddress& device) const {
+  return ReachFor(device, serving_, UpInterfaces());
+}
+
+RendererRegistry::Reach RendererRegistry::ReachFor(Engine::Base* output) const {
+  const QHostAddress address = output->output_address();
+  if (address.isNull()) return Reach::Reachable;
+  return ReachFor(address);
+}
+
+QString RendererRegistry::ReachMessage(Reach reach, const QString& name) const {
+  switch (reach) {
+    case Reach::Reachable:
+      break;
+    case Reach::RemoteOff:
+      return tr("%1 gets its music from Clementine through the network "
+                "remote, which is turned off.")
+          .arg(name);
+    case Reach::NotListening:
+      return tr("%1 gets its music from Clementine through the network "
+                "remote, which couldn't listen on port %2. Another program "
+                "may be using it.")
+          .arg(name)
+          .arg(serving_.port == 0 ? NetworkRemote::kDefaultServerPort
+                                  : serving_.port);
+    case Reach::NotOnNetwork:
+      return tr("%1 gets its music from Clementine through the network "
+                "remote, which doesn't listen on an address in %1's network.")
+          .arg(name);
+    case Reach::NotLocal:
+      return tr("%1 gets its music from Clementine through the network "
+                "remote, which only allows connections from the local "
+                "network, and %1 isn't on it.")
+          .arg(name);
+  }
+  return QString();
+}
+
+QUrl RendererRegistry::MediaBaseUrl(const QHostAddress& device) const {
+  QHostAddress local;
+  if (ReachFor(device, serving_, UpInterfaces(), &local) != Reach::Reachable) {
+    return QUrl();
+  }
 
   QUrl url;
   url.setScheme("http");
   url.setHost(local.toString());
-  url.setPort(listening_port_);
+  url.setPort(serving_.port);
   return url;
 }
 

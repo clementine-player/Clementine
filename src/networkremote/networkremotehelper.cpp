@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "networkremote/networkremote.h"
+#include "networkremote/streaming/rendererregistry.h"
 #include "playlist/playlistmanager.h"
 
 NetworkRemoteHelper* NetworkRemoteHelper::sInstance = nullptr;
@@ -43,6 +44,12 @@ NetworkRemoteHelper::NetworkRemoteHelper(Application* app) : app_(app) {
 NetworkRemoteHelper::~NetworkRemoteHelper() {}
 
 void NetworkRemoteHelper::StartServer() {
+  // Other devices are offered whether or not the remote is on, and the
+  // remote's thread uses the registry, so it's made here, on the main thread.
+  // On macOS, looking for them is what asks for local network access.
+  if (RendererRegistry* registry = app_->renderer_registry()) {
+    registry->StartDiscovery();
+  }
   emit SetupServerSig();
   emit StartServerSig();
 }

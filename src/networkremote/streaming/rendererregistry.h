@@ -41,8 +41,17 @@ struct UpnpDevice;
 class StreamItemTable;
 struct RendererEndpoint;
 
-// Keeps a RemoteEngine for every connected renderer, makes each one an output
-// of the EngineRouter, and answers the output-related remote messages.
+namespace Engine {
+class Base;
+}
+
+// Keeps a RemoteEngine for every connected renderer, and an engine for every
+// Cast device and UPnP renderer found, makes each one an output of the
+// EngineRouter, and answers the output-related remote messages.
+//
+// It exists whether or not the network remote is on, so that devices are
+// offered as outputs either way. They fetch media from the network remote,
+// though, so whether one can play depends on how that's set up; see Reach.
 //
 // Lives on the main thread with the Player. The network remote's thread
 // talks to it only through queued slots and signals carrying serialized
@@ -52,6 +61,10 @@ class RendererRegistry : public QObject {
 
  public:
   static const char* kLocalOutputId;
+
+  // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
+  // before discovery starts.
+  static void SetUpnpEnabled(bool enabled);
 
   RendererRegistry(Application* app, EngineRouter* router);
   ~RendererRegistry();
@@ -65,15 +78,52 @@ class RendererRegistry : public QObject {
   // A serialized OUTPUTS message.
   QByteArray OutputsMessage() const;
 
-  // Where the network remote listens for HTTP: |port|, on |addresses|, or on
-  // every address if that's empty. NetworkRemote calls this once it's
-  // listening.
-  void SetListening(quint16 port, const QList<QHostAddress>& addresses);
+  // How the network remote is serving media. NetworkRemote sets it whenever
+  // it starts or stops.
+  struct Serving {
+    // Whether the network remote is turned on.
+    bool enabled = false;
+    // The port it listens on, or 0 if it couldn't listen anywhere.
+    quint16 port = 0;
+    // The addresses it listens on, or empty for every address.
+    QList<QHostAddress> addresses;
+    // Whether it only allows connections from the local network.
+    bool only_local = true;
+  };
+  void SetServing(const Serving& serving);
+  const Serving& serving() const { return serving_; }
 
-  // Where a device that doesn't connect to the remote itself, such as a Cast
-  // device, fetches media from: "http://address:port", with the address that
-  // the remote listens on in the same network as |device|. Empty if there's
-  // no such address.
+  // Whether a device that doesn't connect to the remote itself, such as a
+  // Cast device, can fetch media from it, or else why not.
+  enum class Reach {
+    Reachable,
+    // The network remote is off.
+    RemoteOff,
+    // It's on, but couldn't listen on its port.
+    NotListening,
+    // It doesn't listen on an address in the device's network.
+    NotOnNetwork,
+    // It only allows connections from the local network, and the device
+    // doesn't count as on it.
+    NotLocal,
+  };
+  Reach ReachFor(const QHostAddress& device) const;
+  // For an output of the router, by its output_address: Reachable for this
+  // computer, and for renderers, which connect to the remote themselves.
+  Reach ReachFor(Engine::Base* output) const;
+  // ReachFor with the local network |interfaces|, and the local address the
+  // device would fetch from in |local|, when Reachable.
+  static Reach ReachFor(const QHostAddress& device, const Serving& serving,
+                        const QList<QNetworkAddressEntry>& interfaces,
+                        QHostAddress* local = nullptr);
+
+  // Why a device called |name| can't play, for the user, or empty when
+  // |reach| is Reachable.
+  QString ReachMessage(Reach reach, const QString& name) const;
+
+  // Where a device that doesn't connect to the remote itself fetches media
+  // from: "http://address:port", with the address that the remote listens on
+  // in the same network as |device|. Empty unless the device is Reachable.
   QUrl MediaBaseUrl(const QHostAddress& device) const;
 
   // The local address in |interfaces| that's in the same subnet as |device|
@@ -83,11 +133,10 @@ class RendererRegistry : public QObject {
       const QList<QNetworkAddressEntry>& interfaces);
 
  public slots:
-  // Starts looking for Cast devices, and offers them as outputs for as long
-  // as this registry exists.
-  void StartCastDiscovery();
-  // The same for UPnP MediaRenderers. Experimental, see --upnp.
-  void StartUpnpDiscovery();
+  // Starts looking for Cast devices, and UPnP MediaRenderers if
+  // SetUpnpEnabled, and offers them as outputs for as long as this registry
+  // exists.
+  void StartDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
   void RegisterRenderer(int client_id, const QByteArray& caps,
@@ -104,6 +153,8 @@ class RendererRegistry : public QObject {
 
   // Outputs were added or removed, or the active one changed.
   void OutputsChanged();
+  // SetServing was called, so ReachFor may say something else.
+  void ServingChanged();
 
  private slots:
   void EngineFailed();
@@ -125,7 +176,7 @@ class RendererRegistry : public QObject {
   void CastEngineFailed(ChromecastEngine* engine);
   ChromecastEngine* CastEngine(const QString& device_id) const;
   QList<ChromecastEngine*> cast_engines_;
-  // Owned; null until StartCastDiscovery, or if this platform has none.
+  // Owned; null until StartDiscovery, or if this platform has none.
   CastDiscovery* cast_discovery_ = nullptr;
 
   // Output ids for UPnP renderers.
@@ -135,12 +186,10 @@ class RendererRegistry : public QObject {
   void UpnpEngineFailed(UpnpEngine* engine);
   UpnpEngine* FindUpnpEngine(const QString& device_id) const;
   QList<UpnpEngine*> upnp_engines_;
-  // Owned; null until StartUpnpDiscovery.
+  // Owned; null until StartDiscovery, or without --upnp.
   UpnpDiscovery* upnp_discovery_ = nullptr;
 
-  // 0 until NetworkRemote says where it listens.
-  quint16 listening_port_;
-  QList<QHostAddress> listening_addresses_;
+  Serving serving_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_RENDERERREGISTRY_H_
