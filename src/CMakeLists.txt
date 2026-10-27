@@ -264,6 +264,7 @@ set(SOURCES
   networkremote/streaming/streamplanner.cpp
   networkremote/streaming/streamresponder.cpp
   networkremote/sync/serverid.cpp
+  networkremote/sync/syncresolver.cpp
   networkremote/sync/syncsong.cpp
   networkremote/sync/syncsourceid.cpp
   networkremote/zeroconf.cpp

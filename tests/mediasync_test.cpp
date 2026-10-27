@@ -18,13 +18,17 @@
 #include <QSettings>
 #include <QUuid>
 
+#include "core/database.h"
 #include "core/song.h"
 #include "core/timeconstants.h"
 #include "core/urlhandler.h"
 #include "gtest/gtest.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/sync/serverid.h"
+#include "networkremote/sync/syncresolver.h"
 #include "networkremote/sync/syncsong.h"
 #include "networkremote/sync/syncsourceid.h"
 #include "test_utils.h"
@@ -39,6 +43,9 @@ std::ostream& operator<<(std::ostream& stream, const SyncSourceId& id) {
 std::ostream& operator<<(std::ostream& stream,
                          UrlHandler::Downloadability downloadability) {
   return stream << static_cast<int>(downloadability);
+}
+std::ostream& operator<<(std::ostream& stream, SyncResolver::State state) {
+  return stream << static_cast<int>(state);
 }
 
 namespace {
@@ -260,6 +267,152 @@ TEST_F(ServerIdTest, IsNewOnceCleared) {
   const QString first = NetworkRemoteServerId();
   Clear();
   EXPECT_NE(first, NetworkRemoteServerId());
+}
+
+class SyncResolverTest : public ::testing::Test {
+ protected:
+  void SetUp() override {
+    database_.reset(new MemoryDatabase(nullptr));
+    library_.reset(new LibraryBackend);
+    library_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
+                   Library::kSubdirsTable, Library::kFtsTable);
+    library_->AddDirectory("/music");
+
+    // Two Pixies albums, given out of order, and a song by someone else.
+    Add("Tame", "Pixies", "Doolittle", 1989, 1, 3);
+    Add("Debaser", "Pixies", "Doolittle", 1989, 1, 1);
+    Add("Bone Machine", "Pixies", "Surfer Rosa", 1988, 1, 1);
+    Add("Wave of Mutilation", "Pixies", "Doolittle", 1989, 1, 7);
+    Add("Clair de lune", "Claude Debussy", "Suite bergamasque", 1905, 1, 3);
+
+    playlists_.songs = [this](int id, SongList* songs) {
+      if (id != 7) return false;
+      *songs = playlist_;
+      return true;
+    };
+  }
+
+  void Add(const QString& title, const QString& artist, const QString& album,
+           int year, int disc, int track) {
+    Song song;
+    song.Init(title, artist, album, kThreeMinutesNanosec);
+    song.set_year(year);
+    song.set_disc(disc);
+    song.set_track(track);
+    song.set_directory_id(1);
+    song.set_url(QUrl::fromLocalFile("/music/" + title + ".flac"));
+    song.set_mtime(1);
+    song.set_ctime(1);
+    song.set_filesize(1000);
+    library_->AddOrUpdateSongs(SongList() << song);
+  }
+
+  SyncResolver::Result Resolve(const SyncSourceId& source) {
+    return SyncResolver(library_.get(), playlists_).Resolve(source);
+  }
+
+  static QStringList Titles(const SyncResolver::Result& result) {
+    QStringList titles;
+    for (const Song& song : result.songs) titles << song.title();
+    return titles;
+  }
+
+  Song Find(const QString& title) {
+    for (const Song& song : library_->GetAllSongs()) {
+      if (song.title() == title) return song;
+    }
+    ADD_FAILURE() << "no song called " << title.toStdString();
+    return Song();
+  }
+
+  std::unique_ptr<Database> database_;
+  std::unique_ptr<LibraryBackend> library_;
+  SyncResolver::Playlists playlists_;
+  SongList playlist_;
+};
+
+TEST_F(SyncResolverTest, FindsASong) {
+  const Song debaser = Find("Debaser");
+  const SyncResolver::Result result =
+      Resolve(SyncSourceId::ForSong(debaser.id()));
+  EXPECT_EQ(SyncResolver::State::Ready, result.state);
+  EXPECT_EQ(QStringList{"Debaser"}, Titles(result));
+  EXPECT_TRUE(result.songs[0].is_library_song());
+}
+
+TEST_F(SyncResolverTest, FindsAnAlbumInOrder) {
+  const SyncResolver::Result result =
+      Resolve(SyncSourceId::ForAlbum("Pixies", "Doolittle"));
+  EXPECT_EQ(SyncResolver::State::Ready, result.state);
+  EXPECT_EQ((QStringList{"Debaser", "Tame", "Wave of Mutilation"}),
+            Titles(result));
+}
+
+TEST_F(SyncResolverTest, FindsAnArtistsAlbumsInOrder) {
+  const SyncResolver::Result result =
+      Resolve(SyncSourceId::ForArtist("Pixies"));
+  EXPECT_EQ(SyncResolver::State::Ready, result.state);
+  EXPECT_EQ(
+      (QStringList{"Bone Machine", "Debaser", "Tame", "Wave of Mutilation"}),
+      Titles(result));
+}
+
+TEST_F(SyncResolverTest, GroupsByAlbumArtist) {
+  Song cover = Find("Clair de lune");
+  cover.set_artist("Isao Tomita");
+  cover.set_albumartist("Claude Debussy");
+  cover.set_album("Snowflakes Are Dancing");
+  library_->AddOrUpdateSongs(SongList() << cover);
+
+  EXPECT_EQ(QStringList{"Clair de lune"},
+            Titles(Resolve(SyncSourceId::ForAlbum("Claude Debussy",
+                                                  "Snowflakes Are Dancing"))));
+  // But an artist is the songs' own.
+  EXPECT_EQ(QStringList{"Clair de lune"},
+            Titles(Resolve(SyncSourceId::ForArtist("Isao Tomita"))));
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForArtist("Claude Debussy")).state);
+}
+
+TEST_F(SyncResolverTest, GoneSourcesAreGone) {
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForSong(999)).state);
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForAlbum("Pixies", "Trompe le Monde")).state);
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForArtist("Breeders")).state);
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForPlaylist(8)).state);
+  EXPECT_EQ(SyncResolver::State::Gone, Resolve(SyncSourceId()).state);
+}
+
+TEST_F(SyncResolverTest, UnavailableSongsAreLeftOut) {
+  const Song tame = Find("Tame");
+  library_->MarkSongsUnavailable(SongList() << tame);
+
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForSong(tame.id())).state);
+  EXPECT_EQ((QStringList{"Debaser", "Wave of Mutilation"}),
+            Titles(Resolve(SyncSourceId::ForAlbum("Pixies", "Doolittle"))));
+}
+
+TEST_F(SyncResolverTest, FindsAPlaylistInItsOrder) {
+  playlist_ << Find("Tame") << Find("Clair de lune") << Find("Debaser");
+  const SyncResolver::Result result = Resolve(SyncSourceId::ForPlaylist(7));
+  EXPECT_EQ(SyncResolver::State::Ready, result.state);
+  EXPECT_EQ((QStringList{"Tame", "Clair de lune", "Debaser"}), Titles(result));
+
+  // An empty playlist is still there.
+  playlist_.clear();
+  EXPECT_EQ(SyncResolver::State::Ready,
+            Resolve(SyncSourceId::ForPlaylist(7)).state);
+}
+
+TEST_F(SyncResolverTest, OtherSourcesAreNotSupportedYet) {
+  EXPECT_EQ(SyncResolver::State::Unsupported,
+            Resolve(SyncSourceId::ForSmartPlaylist("library", "0b6e")).state);
+  EXPECT_EQ(SyncResolver::State::Unsupported,
+            Resolve(SyncSourceId::ForInternetNode("plex", "42")).state);
 }
 
 }  // namespace
