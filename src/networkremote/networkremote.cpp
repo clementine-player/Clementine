@@ -166,8 +166,12 @@ void NetworkRemote::SetupServer() {
   QMetaObject::invokeMethod(
       internet_browser_,
       [app, browser]() {
-        browser->SetModel(app->internet_model()->merged_model(),
-                          InternetBrowser::HooksFor(app->internet_model()));
+        InternetBrowser::Hooks hooks =
+            InternetBrowser::HooksFor(app->internet_model());
+        hooks.url_handler = [app](const Song& song) {
+          return app->player()->HandlerForUrl(song.url());
+        };
+        browser->SetModel(app->internet_model()->merged_model(), hooks);
       },
       Qt::QueuedConnection);
   connect(incoming_data_parser_.get(), SIGNAL(BrowseMessage(int, QByteArray)),

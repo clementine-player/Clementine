@@ -31,6 +31,8 @@
 #include "internet/internetradio/savedradio.h"
 #include "library/librarybackend.h"
 #include "networkremote.h"
+#include "networkremote/sync/serverid.h"
+#include "networkremote/sync/syncsong.h"
 #include "ui/iconloader.h"
 
 const quint32 OutgoingDataCreator::kFileChunkSize = 100000;  // in Bytes
@@ -124,6 +126,9 @@ void OutgoingDataCreator::SendClementineInfo() {
   info->add_features(cpb::remote::SERVER_FEATURE_ENQUEUE_NEXT);
   if (streaming_enabled_) {
     info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
+  }
+  if (NetworkRemote::MediaSyncEnabled()) {
+    info->set_server_id(NetworkRemoteServerId().toStdString());
   }
   SendDataToClients(&msg);
 }
@@ -293,10 +298,32 @@ void OutgoingDataCreator::SendSongMetadata() {
 
   // If there is no song, create an empty node, otherwise fill it with data
   int i = app_->playlist_manager()->active()->current_row();
-  CreateSong(current_song_, current_image_, i,
-             msg.mutable_response_current_metadata()->mutable_song_metadata());
+  CreateSongForSync(
+      current_song_, current_image_, i,
+      msg.mutable_response_current_metadata()->mutable_song_metadata());
 
   SendDataToClients(&msg);
+}
+
+cpb::remote::Downloadability OutgoingDataCreator::DownloadabilityOf(
+    const Song& song, const UrlHandler* handler) {
+  switch (SyncSong::Downloadability(song, handler)) {
+    case UrlHandler::Downloadability::Downloadable:
+      return cpb::remote::DOWNLOADABILITY_DOWNLOADABLE;
+    case UrlHandler::Downloadability::NotDownloadable:
+      return cpb::remote::DOWNLOADABILITY_NOT_DOWNLOADABLE;
+  }
+  return cpb::remote::DOWNLOADABILITY_UNSPECIFIED;
+}
+
+void OutgoingDataCreator::CreateSongForSync(
+    const Song& song, const QImage& art, int index,
+    cpb::remote::SongMetadata* song_metadata) const {
+  CreateSong(song, art, index, song_metadata);
+  if (NetworkRemote::MediaSyncEnabled() && song_metadata->has_id()) {
+    song_metadata->set_downloadable(
+        DownloadabilityOf(song, app_->player()->HandlerForUrl(song.url())));
+  }
 }
 
 void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
@@ -394,7 +421,7 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
     Song song = it.next();
     cpb::remote::SongMetadata* pb_song =
         pb_response_playlist_songs->add_songs();
-    CreateSong(song, null_img, index, pb_song);
+    CreateSongForSync(song, null_img, index, pb_song);
     ++index;
   }
   SendDataToClients(&msg);
@@ -670,7 +697,7 @@ void OutgoingDataCreator::ResultsAvailable(
 
   for (const SearchProvider::Result& result : results) {
     cpb::remote::SongMetadata* pb_song = response->add_song_metadata();
-    CreateSong(result.metadata_, null_img, 0, pb_song);
+    CreateSongForSync(result.metadata_, null_img, 0, pb_song);
   }
 
   client->SendData(&msg);

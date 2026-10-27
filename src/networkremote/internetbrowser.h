@@ -34,6 +34,7 @@
 class InternetModel;
 class QAbstractItemModel;
 class QMimeData;
+class UrlHandler;
 
 // Lets network remote clients browse the tree Clementine's Internet sidebar
 // shows - every service and the nodes below it - and put nodes on the
@@ -71,6 +72,9 @@ class InternetBrowser : public QObject {
     // model, each of which gets its own mimeData.
     std::function<QList<QModelIndexList>(const QModelIndexList&)>
         group_by_model;
+    // The UrlHandler for a song's URL scheme, if any, which says whether its
+    // songs can be downloaded.
+    std::function<const UrlHandler*(const Song&)> url_handler;
   };
   static Hooks DefaultHooks();
   static Hooks HooksFor(InternetModel* model);
