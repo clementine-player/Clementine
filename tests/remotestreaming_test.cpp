@@ -363,6 +363,14 @@ TEST(StreamItemTableTest, TokensAreRandomHex) {
   EXPECT_NE(token, QString::fromLatin1(StreamItemTable::NewToken()));
 }
 
+TEST(StreamItemTest, ContentType) {
+  StreamItem item;
+  item.plan.mime_type = "audio/ogg; codecs=vorbis";
+  EXPECT_EQ("audio/ogg; codecs=vorbis", item.ContentType());
+  item.content_type = "application/ogg";
+  EXPECT_EQ("application/ogg", item.ContentType());
+}
+
 TEST(RendererRegistryTest, MediaComesFromTheDevicesNetwork) {
   const QList<QNetworkAddressEntry> interfaces = {
       Entry("127.0.0.1", 8), Entry("100.65.55.75", 32),

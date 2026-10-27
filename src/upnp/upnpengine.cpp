@@ -105,6 +105,7 @@ StreamItem UpnpEngine::MakeItem(const MediaPlaybackRequest& req,
   item.req = req;
   item.song = song;
   item.plan = StreamPlanner::Plan(req, song, device_.caps, settings);
+  item.content_type = device_.DeviceMimeType(item.plan.mime_type);
 
   qLog(Debug) << "UPnP item" << item.id << req.MediaUrl() << "->"
               << item.plan.mode << item.plan.mime_type << "("
@@ -146,7 +147,7 @@ void UpnpEngine::SendLoad(qint64 start_ms, bool playing) {
 
   UpnpMediaInfo info;
   info.url = url;
-  info.content_type = device_.DeviceMimeType(current_.plan.mime_type);
+  info.content_type = current_.ContentType();
   info.title = current_.song.PrettyTitle();
   info.artist = current_.song.artist();
   info.album = current_.song.album();
