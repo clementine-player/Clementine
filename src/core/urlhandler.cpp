@@ -29,3 +29,7 @@ UrlHandler::LoadResult::LoadResult(const QUrl& original_url, Type type,
 UrlHandler::UrlHandler(QObject* parent) : QObject(parent) {}
 
 QIcon UrlHandler::icon() const { return QIcon(); }
+
+UrlHandler::Downloadability UrlHandler::downloadability(const Song&) const {
+  return Downloadability::Downloadable;
+}

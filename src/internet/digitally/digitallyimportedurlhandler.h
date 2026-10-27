@@ -33,6 +33,10 @@ class DigitallyImportedUrlHandler : public UrlHandler {
   QString scheme() const;
   QIcon icon() const;
   LoadResult StartLoading(const QUrl& url);
+  // Radio: it never ends, so there's nothing to download.
+  Downloadability downloadability(const Song&) const {
+    return Downloadability::NotDownloadable;
+  }
 
   void CancelTask();
   void LoadPlaylistFinished(QIODevice* device);
