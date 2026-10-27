@@ -25,6 +25,8 @@
 #include <QObject>
 #include <QUrl>
 
+class Song;
+
 class UrlHandler : public QObject {
   Q_OBJECT
 
@@ -83,6 +85,12 @@ class UrlHandler : public QObject {
   virtual LoadResult LoadNext(const QUrl& url) {
     return LoadResult(url, LoadResult::NoMoreTracks);
   }
+
+  // Whether a song with this scheme can be downloaded, to sync it to a
+  // network remote. Songs that are streams, with no end, never can be,
+  // whatever the handler says.
+  enum class Downloadability { Downloadable, NotDownloadable };
+  virtual Downloadability downloadability(const Song& song) const;
 
   // Functions to be warned when something happen to a track handled by
   // UrlHandler.

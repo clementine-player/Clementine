@@ -35,6 +35,10 @@ class RadioBrowserUrlHandler : public UrlHandler {
   QString scheme() const;
   QIcon icon() const;
   LoadResult StartLoading(const QUrl& url);
+  // Radio: it never ends, so there's nothing to download.
+  Downloadability downloadability(const Song&) const {
+    return Downloadability::NotDownloadable;
+  }
 
  private slots:
   void LoadStationFinished(const QUrl& original_url, const Song& song);
