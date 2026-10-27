@@ -32,6 +32,7 @@
 #include "internet/core/internetservice.h"
 #include "library/libraryitem.h"
 #include "library/librarymodel.h"
+#include "networkremote/networkremote.h"
 #include "networkremote/outgoingdatacreator.h"
 
 const int InternetBrowser::kMaxPageSize = 500;
@@ -56,6 +57,7 @@ InternetBrowser::Hooks InternetBrowser::DefaultHooks() {
   hooks.group_by_model = [](const QModelIndexList& indexes) {
     return QList<QModelIndexList>{indexes};
   };
+  hooks.url_handler = [](const Song&) -> const UrlHandler* { return nullptr; };
   return hooks;
 }
 
@@ -319,6 +321,21 @@ void InternetBrowser::DescribeNode(const QModelIndex& index,
     }
     OutgoingDataCreator::CreateSong(info.song, QImage(), -1,
                                     node->mutable_song());
+  }
+
+  // Only songs and streams for now: whether a folder can be synced depends
+  // on its service, and comes with syncing them.
+  if (NetworkRemote::MediaSyncEnabled()) {
+    if (kind == cpb::remote::BROWSE_NODE_KIND_TRACK) {
+      const cpb::remote::Downloadability downloadable =
+          OutgoingDataCreator::DownloadabilityOf(info.song,
+                                                 hooks_.url_handler(info.song));
+      node->set_downloadable(downloadable);
+      if (node->has_song())
+        node->mutable_song()->set_downloadable(downloadable);
+    } else if (kind == cpb::remote::BROWSE_NODE_KIND_STREAM) {
+      node->set_downloadable(cpb::remote::DOWNLOADABILITY_NOT_DOWNLOADABLE);
+    }
   }
 
   if (kind == cpb::remote::BROWSE_NODE_KIND_SERVICE) {

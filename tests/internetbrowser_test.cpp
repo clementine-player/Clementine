@@ -29,6 +29,7 @@
 #include "gtest/gtest.h"
 #include "internet/core/internetmodel.h"
 #include "library/libraryitem.h"
+#include "networkremote/networkremote.h"
 #include "test_utils.h"
 
 namespace {
@@ -490,4 +491,26 @@ TEST_F(InternetBrowserTest, ClientsHaveTheirOwnIds) {
 
   browser_.ClientDisconnected(1);
   EXPECT_EQ(cpb::remote::BROWSE_STATE_GONE, Browse(radio).state());
+}
+
+TEST_F(InternetBrowserTest, SaysWhatCanBeDownloadedWithMediaSync) {
+  const QString radio_id = IdOf(Browse(), "Radio");
+  // Without --media-sync, nothing says.
+  const cpb::remote::ResponseBrowse before = Browse(radio_id);
+  EXPECT_FALSE(NodeOf(before, "A song")->has_downloadable());
+  EXPECT_FALSE(NodeOf(before, "A song")->song().has_downloadable());
+
+  NetworkRemote::SetMediaSyncEnabled(true);
+  const cpb::remote::ResponseBrowse radio = Browse(radio_id);
+  NetworkRemote::SetMediaSyncEnabled(false);
+
+  const cpb::remote::BrowseNode* track = NodeOf(radio, "A song");
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_DOWNLOADABLE, track->downloadable());
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_DOWNLOADABLE,
+            track->song().downloadable());
+  // A stream never ends.
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_NOT_DOWNLOADABLE,
+            NodeOf(radio, "Groove Salad")->downloadable());
+  // Folders say once they can be synced.
+  EXPECT_FALSE(NodeOf(radio, "Genres")->has_downloadable());
 }

@@ -12,6 +12,7 @@
 
 #include "core/application.h"
 #include "core/player.h"
+#include "core/urlhandler.h"
 #include "engines/engine_fwd.h"
 #include "engines/enginebase.h"
 #include "globalsearch/globalsearch.h"
@@ -55,6 +56,10 @@ class OutgoingDataCreator : public QObject {
   void SendDataToClients(cpb::remote::Message* msg);
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          cpb::remote::SongMetadata* song_metadata);
+  // Whether a remote can keep |song| on the phone, asking |handler|, the
+  // UrlHandler for its scheme (null for none).
+  static cpb::remote::Downloadability DownloadabilityOf(
+      const Song& song, const UrlHandler* handler);
 
  public slots:
   void SendClementineInfo();
@@ -92,6 +97,10 @@ class OutgoingDataCreator : public QObject {
   void SendSavedRadios(RemoteClient* client);
 
  private:
+  // CreateSong, and with --media-sync, whether the song can be downloaded.
+  void CreateSongForSync(const Song& song, const QImage& art, int index,
+                         cpb::remote::SongMetadata* song_metadata) const;
+
   Application* app_;
   QList<RemoteClient*>* clients_;
   Song current_song_;

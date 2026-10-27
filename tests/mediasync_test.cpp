@@ -23,6 +23,7 @@
 #include "core/urlhandler.h"
 #include "gtest/gtest.h"
 #include "networkremote/networkremote.h"
+#include "networkremote/outgoingdatacreator.h"
 #include "networkremote/sync/serverid.h"
 #include "networkremote/sync/syncsong.h"
 #include "networkremote/sync/syncsourceid.h"
@@ -195,6 +196,15 @@ TEST(SyncSongTest, HandlersCanRefuse) {
   const FakeUrlHandler handler(Downloadability::NotDownloadable);
   EXPECT_EQ(Downloadability::NotDownloadable,
             SyncSong::Downloadability(song, &handler));
+}
+
+TEST(SyncSongTest, RemotesAreToldOnTheWire) {
+  const Song song = MakeSong(QUrl("fake://song"), kThreeMinutesNanosec);
+  const FakeUrlHandler refuses(Downloadability::NotDownloadable);
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_DOWNLOADABLE,
+            OutgoingDataCreator::DownloadabilityOf(song, nullptr));
+  EXPECT_EQ(cpb::remote::DOWNLOADABILITY_NOT_DOWNLOADABLE,
+            OutgoingDataCreator::DownloadabilityOf(song, &refuses));
 }
 
 TEST(SyncSongTest, ItemKeys) {
