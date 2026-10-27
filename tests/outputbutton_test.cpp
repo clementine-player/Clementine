@@ -25,6 +25,11 @@
 #include "test_utils.h"
 #include "ui/iconloader.h"
 
+// For gtest, which prints a QList's items with <<.
+std::ostream& operator<<(std::ostream& stream, RendererRegistry::Reach reach) {
+  return stream << static_cast<int>(reach);
+}
+
 namespace {
 
 // An output that does nothing, with a name and an icon.
