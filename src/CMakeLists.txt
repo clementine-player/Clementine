@@ -263,6 +263,7 @@ set(SOURCES
   networkremote/streaming/streamitemtable.cpp
   networkremote/streaming/streamplanner.cpp
   networkremote/streaming/streamresponder.cpp
+  networkremote/sync/mediasync.cpp
   networkremote/sync/serverid.cpp
   networkremote/sync/syncresolver.cpp
   networkremote/sync/syncsong.cpp
@@ -614,6 +615,7 @@ set(HEADERS
   networkremote/streaming/remoteengine.h
   networkremote/streaming/rendererregistry.h
   networkremote/streaming/streamresponder.h
+  networkremote/sync/mediasync.h
 
   playlist/dbplaylistitem.h
   playlist/dynamicplaylistcontrols.h
