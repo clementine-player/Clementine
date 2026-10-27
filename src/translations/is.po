@@ -87,8 +87,8 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 hljómplötur"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
@@ -114,7 +114,7 @@ msgstr "%1 dagar"
 msgid "%1 days ago"
 msgstr "%1 dögum síðan"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr ""
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Útlit"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Bæta skrám/slóðum í lagalista"
 
@@ -1147,7 +1147,7 @@ msgstr "Breyta stokkunarham"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Skipta um tungumál"
 
@@ -1377,7 +1377,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kommu-aðgreindur listi klasi:stig, stig eru 0-3"
 
@@ -1644,7 +1644,7 @@ msgstr "Umslagsmynd sett frá %1"
 msgid "Covers from %1"
 msgstr "Umslög frá %1"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1727,11 +1727,11 @@ msgstr "Dagar"
 msgid "De&fault"
 msgstr "Sjálf&gefið"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1791,7 +1791,7 @@ msgstr "Eyða forstillingu"
 msgid "Delete smart playlist"
 msgstr "Eyða snjöllum spilunarlista"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1912,7 +1912,7 @@ msgstr "Slitrótt sending"
 msgid "Display options"
 msgstr "Skjástillingar"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Birta OSD-stjórntexta"
 
@@ -2224,11 +2224,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Tónjafnari"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Samsvarar --log-levels *:1"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Samsvarar --log-levels *:3"
 
@@ -2917,11 +2917,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2978,6 +2978,10 @@ msgstr "Ógilt snið"
 
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
 msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
@@ -3212,7 +3216,7 @@ msgstr "Hleð inn upplýsingum um lög"
 msgid "Loading..."
 msgstr "Hleð inn..."
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Hleður inn skrám/slóðum, skiptir út núverandi lagalista"
 
@@ -3862,7 +3866,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Aðrir valkostir"
 
@@ -3921,7 +3925,7 @@ msgstr "Lykilorð"
 msgid "Pause"
 msgstr "Í bið"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Gera hlé á afspilun"
 
@@ -3971,11 +3975,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Hversu oft spilað"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Spila ef stöðvað, setja í hlé ef spilandi"
 
@@ -3988,7 +3992,7 @@ msgstr "Spila ef ekkert er þegar í afspilun"
 msgid "Play next"
 msgstr ""
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr ""
 
@@ -3996,7 +4000,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Spila lag númer <n> á spilunarlistanum"
 
@@ -4008,11 +4012,11 @@ msgstr "Spila/bíða"
 msgid "Playback"
 msgstr "Afspilun"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Stillingar spilarans"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr ""
@@ -4027,7 +4031,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Spilunarlista lokið"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Valkostir spilunarlista"
@@ -4177,7 +4181,7 @@ msgstr "Fyrri"
 msgid "Previous track"
 msgstr "Fyrra lag"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Birta upplýsingar um útgáfu"
 
@@ -4218,7 +4222,7 @@ msgstr "Spila lög í tilviljunarkenndri röð"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4485,7 +4489,7 @@ msgstr "Núllstilla spilunarfjölda"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4758,11 +4762,11 @@ msgstr "Leita afturábak"
 msgid "Seek forward"
 msgstr "Leita áfram"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Hoppa hlutfallslega í laginu sem nú er í spilun"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa á ákveðinn stað í laginu sem nú er í spilun"
 
@@ -4843,7 +4847,7 @@ msgstr "Setja %1 sem \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Setja hljóðstyrk á <value> prósent"
 
@@ -5049,7 +5053,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Fara afturábak í spilunarlista"
 
@@ -5061,7 +5065,7 @@ msgstr "Sleppa talningu"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Fara áfram í spilunarlista"
 
@@ -5100,6 +5104,10 @@ msgstr "Mjúkt"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "Mjúkt rokk"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5170,7 +5178,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Ræsa spilunarlistann sem er núna í spilun"
 
@@ -5208,11 +5216,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Stoppa eftir þetta lag"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Stöðva afspilun"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5362,6 +5370,15 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
 msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
@@ -5540,7 +5557,7 @@ msgstr "Víxla stöðu biðraðar"
 msgid "Toggle scrobbling"
 msgstr "Víxla af/á skráningu á hlustunarvenjum (scrobbling)"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Víxla sýnileika fegraða OSD-stjórntextans af/á"
 
@@ -5639,7 +5656,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Slóð(ir)"
 
@@ -5735,7 +5752,7 @@ msgstr "Uppfæri %1%..."
 msgid "Updating library"
 msgstr "Uppfæri safn"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Notkun"
 
@@ -6331,7 +6348,7 @@ msgstr "elsta fyrst"
 msgid "on"
 msgstr "á"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "valkostir"
 

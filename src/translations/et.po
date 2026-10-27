@@ -85,8 +85,8 @@ msgstr "%1 (pole hetkel saadaval)"
 msgid "%1 albums"
 msgstr "%1 albumit"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 ei saa seda lugu esitada: %2"
@@ -112,7 +112,7 @@ msgstr "%1 päeva"
 msgid "%1 days ago"
 msgstr "%1 päeva tagasi"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr "%1 ei asu võrgus, mida kaugjuhtimispult kuulab"
@@ -852,7 +852,7 @@ msgstr "Vihane"
 msgid "Appearance"
 msgstr "Väljanägemine"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Lisa faile/võrguaadresse oma esitusloendisse"
 
@@ -1145,7 +1145,7 @@ msgstr "Muuda segamise viisi"
 msgid "Change the currently playing song"
 msgstr "Vaheta hetkel esitatavat lugu"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Muuda keelt"
 
@@ -1375,7 +1375,7 @@ msgstr "He&lilooja"
 msgid "Colors"
 msgstr "Värvid"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komadega eraldatud loend klass:tase, kus tase võib olla 0-3"
 
@@ -1642,7 +1642,7 @@ msgstr "Kaanepilt on määratud %1'st"
 msgid "Covers from %1"
 msgstr "Kaanepildid %1'st"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Koosta failidest/võrguaadressidest uus esitusloend"
 
@@ -1725,11 +1725,11 @@ msgstr "päeva"
 msgid "De&fault"
 msgstr "&Vaikeväärtus"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähenda helivaljust 4 protsenti"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähenda helivaljust <value> protsenti"
 
@@ -1789,7 +1789,7 @@ msgstr "Kustuta valmisseadistus."
 msgid "Delete smart playlist"
 msgstr "Kustuta nutikas esitusloend"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Kustuta parasjagu esitamisel olev lugu"
 
@@ -1910,7 +1910,7 @@ msgstr "Katkestustega edastamine"
 msgid "Display options"
 msgstr "Kuvamise valikud"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Luba ekraanimenüü"
 
@@ -2222,11 +2222,11 @@ msgstr "Andmed osa kohta"
 msgid "Equalizer"
 msgstr "Ekvalaiser"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Võrdne käivitusvõtmega --log-levels *:1"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Võrdne käivitusvõtmega --log-levels *:3"
 
@@ -2915,11 +2915,11 @@ msgstr "Mitteühilduv Subsonicu REST-protokolli versioon. Server vajab uuendust.
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Seadistus on poolik. Palun kontrolli, et kõik väljad oleksid täidetud."
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Suurenda helivaljust 4 protsenti"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Suurenda helivaljust <value> protsenti"
 
@@ -2977,6 +2977,10 @@ msgstr "Sobimatu formaat"
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Pööra valik teistpidi"
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3210,7 +3214,7 @@ msgstr "Laadin lugude teavet"
 msgid "Loading..."
 msgstr "Laadimine..."
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Laadib faile või võrguaadresse ning asendab kasutuseloleva esitusloendi"
 
@@ -3860,7 +3864,7 @@ msgstr "Algse aasta sildi tugi"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Muud valikud"
 
@@ -3919,7 +3923,7 @@ msgstr "Salasõna"
 msgid "Pause"
 msgstr "Paus"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Peata esitus"
 
@@ -3969,11 +3973,11 @@ msgstr "Hakka midagi kuulama ning näed siin esitaja pilte ja elulugu."
 msgid "Play count"
 msgstr "Esitamisi"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Esita antud loendit"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Esita, kui on peatatud, pane pausile, kui esitamisel"
 
@@ -3986,7 +3990,7 @@ msgstr "Esita, kui hetkel juba pole midagi esitamisel"
 msgid "Play next"
 msgstr "Esita järgmisena"
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr "Esita muus seadmes"
 
@@ -3994,7 +3998,7 @@ msgstr "Esita muus seadmes"
 msgid "Play selected tracks next"
 msgstr "Esita valitud lood järgmisena"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Esita nimekirjast lugu #<n>"
 
@@ -4006,11 +4010,11 @@ msgstr "Esita/paus"
 msgid "Playback"
 msgstr "Taasesitus"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Esitaja valikud"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr "Esitamisel seadmes %1"
@@ -4025,7 +4029,7 @@ msgstr "Esitusloend"
 msgid "Playlist finished"
 msgstr "Esitusloend on läbi mängitud"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Esitusnimekirja valikud"
@@ -4175,7 +4179,7 @@ msgstr "Eelmine"
 msgid "Previous track"
 msgstr "Eelmine lugu"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Trüki teave käesoleva versiooni kohta"
 
@@ -4216,7 +4220,7 @@ msgstr "Pane lood juhuslikku järjekorda"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4483,7 +4487,7 @@ msgstr "Nulli esituskordade arv"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Alusta sama loo esitamist ja uuel vajutusel hüppa eelmise loo juurde"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Alusta loo esitamist uuesti või alusta eelmise loo esitamist, kui algusest on möödunud kuni 8 sekundit."
@@ -4756,11 +4760,11 @@ msgstr "Samm tagasi"
 msgid "Seek forward"
 msgstr "Samm edasi"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Jätka praeguse loo esitust uuest suhtelisest asukohast"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Jätka praeguse loo esitust uuest absoluutsest asukohast"
 
@@ -4841,7 +4845,7 @@ msgstr "Seadista %1 väärtuseks „%2“..."
 msgid "Set target rate"
 msgstr "Seadista bitikiiruse eesmärk"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Määra helivaljuseks <value> protsenti"
 
@@ -5047,7 +5051,7 @@ msgstr "Suurus:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Samm lugude nimekirjas tagasi"
 
@@ -5059,7 +5063,7 @@ msgstr "Vahelejätmiskordi"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Jäta nende laienditega failid vahele (tõstutundetu komadega eraldatud loend)"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Samm lugude nimekirjas edasi"
 
@@ -5098,6 +5102,10 @@ msgstr "Mahe"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "Soft Rock"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5168,7 +5176,7 @@ msgstr "Tärniga märgitud albumid"
 msgid "Start ripping"
 msgstr "Alusta rippimist"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Alusta hetkel esitatavat esitusloendit uuesti algusest"
 
@@ -5206,11 +5214,11 @@ msgstr "Peata pärast iga lugu"
 msgid "Stop after this track"
 msgstr "Peata pärast seda lugu"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Lõpeta esitamine"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Peata esitamine peale käesolevat lugu"
 
@@ -5361,6 +5369,15 @@ msgstr "Lugude otsija on hõivatud"
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
 msgstr "Vormingut uuendatakse alles siis kui kodeerimise konveier alustab tööd."
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
+msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5538,7 +5555,7 @@ msgstr "Vaheta staatus esitusjärjekorras"
 msgid "Toggle scrobbling"
 msgstr "Lülita kraasimine sisse või välja"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Lülita ekraanimenüü nähtavust sisse või välja"
 
@@ -5637,7 +5654,7 @@ msgstr "Võrguaadress"
 msgid "URL of its Logo:"
 msgstr "Logo asukoht võrgus:"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Võrguaadress(id)"
 
@@ -5733,7 +5750,7 @@ msgstr "Uuendan %1%"
 msgid "Updating library"
 msgstr "Uuendan helikogu"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Kasutus"
 
@@ -6329,7 +6346,7 @@ msgstr "kõige vanem esimesena"
 msgid "on"
 msgstr "kuupäeval"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "valikud"
 

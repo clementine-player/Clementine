@@ -85,8 +85,8 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 албума"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
@@ -112,7 +112,7 @@ msgstr "%1 дана"
 msgid "%1 days ago"
 msgstr "пре %1 дана"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr ""
@@ -852,7 +852,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Изглед"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Додај нумере/УРЛ токове у листу нумера"
 
@@ -1145,7 +1145,7 @@ msgstr "Насумичност"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Промени језик"
 
@@ -1375,7 +1375,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Зарез раздваја листу од класа: ниво, ниво је 0-3"
 
@@ -1642,7 +1642,7 @@ msgstr "Омот постављен из %1"
 msgid "Covers from %1"
 msgstr "Омоти са %1"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1725,11 +1725,11 @@ msgstr "дана"
 msgid "De&fault"
 msgstr "Под&разумевана"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1789,7 +1789,7 @@ msgstr "Обриши препоставку"
 msgid "Delete smart playlist"
 msgstr "Обриши паметну листу"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1910,7 +1910,7 @@ msgstr "Испрекидан пренос"
 msgid "Display options"
 msgstr "Опције приказа"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Прикажи екрански преглед"
 
@@ -2222,11 +2222,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Еквилајзер"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Исто као и --log-levels *:1"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Исто као и --log-levels *:3"
 
@@ -2915,11 +2915,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2976,6 +2976,10 @@ msgstr "Неисправан формат"
 
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
 msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
@@ -3210,7 +3214,7 @@ msgstr "Учитавам податке о нумерама"
 msgid "Loading..."
 msgstr "Учитавам..."
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Учитава датотеке/УРЛ-ове, замењујући текућу листу"
 
@@ -3860,7 +3864,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Остале опције"
 
@@ -3919,7 +3923,7 @@ msgstr "Лозинка"
 msgid "Pause"
 msgstr "Паузирај"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Паузирај пуштање"
 
@@ -3969,11 +3973,11 @@ msgstr ""
 msgid "Play count"
 msgstr "број пуштања"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Пусти ако је заустављено, заустави ако се пушта"
 
@@ -3986,7 +3990,7 @@ msgstr "почеће пуштање ако тренутно ништа није 
 msgid "Play next"
 msgstr ""
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr ""
 
@@ -3994,7 +3998,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Пусти <n>у нумеру са листе"
 
@@ -4006,11 +4010,11 @@ msgstr "Пусти/паузирај"
 msgid "Playback"
 msgstr "Пуштање"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Опције плејера"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr ""
@@ -4025,7 +4029,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Листа нумера је завршена"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Опције листе нумера"
@@ -4175,7 +4179,7 @@ msgstr "Претходна"
 msgid "Previous track"
 msgstr "Претходна нумера"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Прикажи податке о издању"
 
@@ -4216,7 +4220,7 @@ msgstr "Постави насумично"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4483,7 +4487,7 @@ msgstr "Поништи број пуштања"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4756,11 +4760,11 @@ msgstr "Тражи уназад"
 msgid "Seek forward"
 msgstr "Тражи унапред"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Иди на положај текуће нумере за релативни износ"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Иди на положај текуће нумере за апсолутни износ"
 
@@ -4841,7 +4845,7 @@ msgstr "Промени %1 у „%2“..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Постави јачину звука на <вредност> процената"
 
@@ -5047,7 +5051,7 @@ msgstr ""
 msgid "Ska"
 msgstr "ска"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Прескочи уназад у листи нумера"
 
@@ -5059,7 +5063,7 @@ msgstr "број прескакања"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Прескочи унапред у листи нумера"
 
@@ -5098,6 +5102,10 @@ msgstr "лагана"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "лагани рок"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5168,7 +5176,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Пусти текућу листу нумера"
 
@@ -5206,11 +5214,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Заустави после ове нумере"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Заустави пуштање"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5360,6 +5368,15 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
 msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
@@ -5538,7 +5555,7 @@ msgstr "Мењај стање редоследа"
 msgid "Toggle scrobbling"
 msgstr "Мењај скробловање"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Мењај видљивост лепог ОСД-а"
 
@@ -5637,7 +5654,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Адресе"
 
@@ -5733,7 +5750,7 @@ msgstr "Ажурирам %1%..."
 msgid "Updating library"
 msgstr "Ажурирање библиотеке"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Употреба"
 
@@ -6329,7 +6346,7 @@ msgstr "прво најстарије"
 msgid "on"
 msgstr "на дан"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "Опције"
 

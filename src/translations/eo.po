@@ -9,13 +9,13 @@
 # Adolfo Jayme Barrientos, 2015-2016
 # Adolfo Jayme Barrientos, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Jakub Szafranek Fabijan <jakubfabijan@tuta.io>, 2025
-# Jakub Szafranek Fabijan <jakubfabijan@tuta.io>, 2025
+# Szafranek13 <szafranek13@proton.me>, 2025
+# Szafranek13 <szafranek13@proton.me>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Jakub Szafranek Fabijan <jakubfabijan@tuta.io>, 2025\n"
+"Last-Translator: Szafranek13 <szafranek13@proton.me>, 2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/davidsansome/clementine/language/eo/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,8 +87,8 @@ msgstr "%1 (nuntempe ne disponebla)"
 msgid "%1 albums"
 msgstr "%1 albumoj"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 ne povas ludi tiun ĉi trakon: %2"
@@ -114,7 +114,7 @@ msgstr "%1 tagoj"
 msgid "%1 days ago"
 msgstr "%1 tagoj antaŭe"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr "%1 ne estas en reto, kiun la reta teleregilo aŭskultas"
@@ -854,7 +854,7 @@ msgstr "Kolera"
 msgid "Appearance"
 msgstr "Aspekto"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Aldoni dosierojn/URL al la ludlisto"
 
@@ -1147,7 +1147,7 @@ msgstr "Ŝanĝi miksan reĝimon"
 msgid "Change the currently playing song"
 msgstr "Ŝanĝi la nun ludiĝantan kanton"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Ŝanĝi la lingvon"
 
@@ -1377,7 +1377,7 @@ msgstr "&Komponisto"
 msgid "Colors"
 msgstr "Koloroj"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komapartigita listo de klaso:nivelo; nivelo estas 0–3"
 
@@ -1644,7 +1644,7 @@ msgstr "Kovrilo agordita el %1"
 msgid "Covers from %1"
 msgstr "Kovriloj de %1"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Krei novan ludliston kun dosieroj/URL-oj"
 
@@ -1727,11 +1727,11 @@ msgstr "Tagoj"
 msgid "De&fault"
 msgstr "De&fŭlta"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Malpliigi la laŭtecon je 4 procentoj"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Malpliigi la laŭtecon je <value> procentoj"
 
@@ -1791,7 +1791,7 @@ msgstr "Forigi antaŭagordon"
 msgid "Delete smart playlist"
 msgstr "Forigi inteligentan ludliston"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Forigi la nun ludiĝantan kanton"
 
@@ -1912,7 +1912,7 @@ msgstr "Nekontinua transmisio"
 msgid "Display options"
 msgstr "Vidigaj opcioj"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Montri surekranan ekranon"
 
@@ -2224,11 +2224,11 @@ msgstr "Informoj pri epizodo"
 msgid "Equalizer"
 msgstr "Egalizilo"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekvivalenta al --log-levels *:1"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalenta al --log-levels *:3"
 
@@ -2917,11 +2917,11 @@ msgstr "Nekongrua versio de Subsonic REST-protokolo. La servilo devas esti ĝisd
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Nekompleta agordo; bonvolu certigi, ke ĉiuj kampoj estas plenigitaj."
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Pliigi la laŭtecon je 4 procentoj"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Pliigi la laŭtecon je <value> procentoj"
 
@@ -2979,6 +2979,10 @@ msgstr "Nevalida formato"
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Inversigi elekton"
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3212,7 +3216,7 @@ msgstr "Ŝargado de informoj pri trakoj"
 msgid "Loading..."
 msgstr "Ŝargado…"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Ŝargas dosierojn/URL-ojn, anstataŭigante la nunan ludliston"
 
@@ -3862,7 +3866,7 @@ msgstr "Subteno de etikedo de originala jaro"
 msgid "Other"
 msgstr "Alia"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Aliaj opcioj"
 
@@ -3921,7 +3925,7 @@ msgstr "Pasvorto"
 msgid "Pause"
 msgstr "Paŭzigi"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Paŭzi ludadon"
 
@@ -3971,11 +3975,11 @@ msgstr "Ludu kanton por vidi ĉi tie bildojn de ĝia artisto kaj lian aŭ ŝian 
 msgid "Play count"
 msgstr "Ludnombro"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Ludi la donitan ludliston"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Ludi se ĉesigita, paŭzi se ludata"
 
@@ -3988,7 +3992,7 @@ msgstr "Ludi se nenio jam ludas"
 msgid "Play next"
 msgstr "Ludi poste"
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr "Ludi ĉe alia aparato"
 
@@ -3996,7 +4000,7 @@ msgstr "Ludi ĉe alia aparato"
 msgid "Play selected tracks next"
 msgstr "Ludi elektitajn trakojn poste"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Ludi la <n>-an trakon en la ludlisto"
 
@@ -4008,11 +4012,11 @@ msgstr "Ludi/paŭzigi"
 msgid "Playback"
 msgstr "Ludado"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Ludilaj opcioj"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr "Ludado ĉe %1"
@@ -4027,7 +4031,7 @@ msgstr "Ludlisto"
 msgid "Playlist finished"
 msgstr "Ludlisto finiĝis"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Ludlistaj opcioj"
@@ -4177,7 +4181,7 @@ msgstr "Antaŭa"
 msgid "Previous track"
 msgstr "Antaŭa trako"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Presi versiinformojn"
 
@@ -4218,7 +4222,7 @@ msgstr "Meti kantojn en hazardan ordon"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4485,7 +4489,7 @@ msgstr "Restarigi ludnombrojn"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reludi la kanton dekomence, poste salti al la antaŭa se denove premita"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reludi la trakon aŭ ludi la antaŭan trakon se ene de 8 sekundoj post la komenco."
@@ -4758,11 +4762,11 @@ msgstr "Serĉi malantaŭen"
 msgid "Seek forward"
 msgstr "Serĉi antaŭen"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Movi la nun ludiĝantan trakon je relativa kvanto"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Movi la nun ludiĝantan trakon al absoluta pozicio"
 
@@ -4843,7 +4847,7 @@ msgstr "Agordi %1 al „%2”…"
 msgid "Set target rate"
 msgstr "Agordi celan rapidon"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Agordi la laŭtecon al <value> procentoj"
 
@@ -5049,7 +5053,7 @@ msgstr "Grando:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Preterpasi malantaŭen en ludlisto"
 
@@ -5061,7 +5065,7 @@ msgstr "Preterpasnombro"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Preterpasi dosierojn kun tiuj ĉi etendaĵoj (apartigitaj per komoj, sendepende de uskleco)"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Preterpasi antaŭen en ludlisto"
 
@@ -5100,6 +5104,10 @@ msgstr "Mola"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "Mola roko"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5170,7 +5178,7 @@ msgstr "Stelmarkitaj albumoj"
 msgid "Start ripping"
 msgstr "Komenci eltiradon"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Komenci la nun ludatan ludliston"
 
@@ -5208,11 +5216,11 @@ msgstr "Ĉesigi post ĉiu trako"
 msgid "Stop after this track"
 msgstr "Ĉesigi post tiu ĉi trako"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Ĉesigi ludadon"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Ĉesigi ludadon post la nuna trako"
 
@@ -5363,6 +5371,15 @@ msgstr "La malkovrilo estas okupata"
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
 msgstr "La formato estas ĝisdatigita nur kiam dukto startas."
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
+msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5540,7 +5557,7 @@ msgstr "Baskuligi atendovican staton"
 msgid "Toggle scrobbling"
 msgstr "Baskuligi skrobladon"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Baskuligi videblecon de la bela surekrana ekrano"
 
@@ -5639,7 +5656,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "URL de ĝia emblemo:"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "URL-o(j)"
 
@@ -5735,7 +5752,7 @@ msgstr "Ĝisdatigado de %1 %…"
 msgid "Updating library"
 msgstr "Ĝisdatigado de biblioteko"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Uzado"
 
@@ -6331,7 +6348,7 @@ msgstr "plej malnovaj unue"
 msgid "on"
 msgstr "ŝaltita"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "opcioj"
 

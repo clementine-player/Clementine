@@ -89,8 +89,8 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 ألبومات"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
@@ -116,7 +116,7 @@ msgstr "%1 أيام"
 msgid "%1 days ago"
 msgstr "%1 مند أيام"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr ""
@@ -856,7 +856,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "المظهر"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
@@ -1149,7 +1149,7 @@ msgstr "تغيير نمط الخلط"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "تغيير اللغة"
 
@@ -1379,7 +1379,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
@@ -1646,7 +1646,7 @@ msgstr "الغلاف محدد من %1"
 msgid "Covers from %1"
 msgstr "الأغلفة من %1"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1729,11 +1729,11 @@ msgstr "الأيام"
 msgid "De&fault"
 msgstr "&افتراضي"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr "احذف ملف الإعدادات"
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1914,7 +1914,7 @@ msgstr "إرسال غير مستمر"
 msgid "Display options"
 msgstr "خيارات العرض"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "أظهر قائمة الشاشة"
 
@@ -2226,11 +2226,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "معدل الصوت"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "يكافئ --log-levels *:1"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
@@ -2919,11 +2919,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2980,6 +2980,10 @@ msgstr "صيغة غير متاحة"
 
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
 msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
@@ -3214,7 +3218,7 @@ msgstr "جاري تحميل معلومات المقاطع"
 msgid "Loading..."
 msgstr "جاري التحميل"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "تحميل ملفات/روابط، استبدال قائمة التشغيل الحالية"
 
@@ -3864,7 +3868,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "خيارات اخرى"
 
@@ -3923,7 +3927,7 @@ msgstr "كلمة السر"
 msgid "Pause"
 msgstr "إيقاف مؤقت"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "أوقف التشغيل مؤقتا"
 
@@ -3973,11 +3977,11 @@ msgstr ""
 msgid "Play count"
 msgstr "عدد مرات التشغيل"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 
@@ -3990,7 +3994,7 @@ msgstr "شغل إذا لم يكن هناك مقطع قيد التشغيل "
 msgid "Play next"
 msgstr ""
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr ""
 
@@ -3998,7 +4002,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "شغيل المقطع رقم <n> في قائمة التشغيل"
 
@@ -4010,11 +4014,11 @@ msgstr "تشغيل/إيقاف"
 msgid "Playback"
 msgstr "التشغيل"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "خيارات المشغل"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr ""
@@ -4029,7 +4033,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "قائمة تشغيل منتهية"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "خيارات قائمة التشغيل"
@@ -4179,7 +4183,7 @@ msgstr "السابق"
 msgid "Previous track"
 msgstr "المقطع السابق"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "اطبع معلومات النسخة"
 
@@ -4220,7 +4224,7 @@ msgstr "ضع المقاطع في ترتيب عشوائي"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4487,7 +4491,7 @@ msgstr "صفّر عدد مرات التشغيل"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4760,11 +4764,11 @@ msgstr "ابحث إلى الخلف"
 msgid "Seek forward"
 msgstr "ابحث إلى الأمام"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "انتقل في المقطع الحالي إلى موضع نسبي"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "انتقل في المقطع الحالي إلى موضع محدد"
 
@@ -4845,7 +4849,7 @@ msgstr "غير %1 إلى %2"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "اجعل درجة الصوت بنسبة <value>"
 
@@ -5051,7 +5055,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "تجاهل السابق في قائمة التشغيل"
 
@@ -5063,7 +5067,7 @@ msgstr "تخطى العد"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
@@ -5102,6 +5106,10 @@ msgstr "Soft"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "Soft Rock"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5172,7 +5180,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 
@@ -5210,11 +5218,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "أوقف التشغيل"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5364,6 +5372,15 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
 msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
@@ -5542,7 +5559,7 @@ msgstr "بدّل حالة لائحة الانتظار"
 msgid "Toggle scrobbling"
 msgstr "بدّل حالة نقل المعلومات المستمع إليها"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "بدّل حالة الإظهار على الشاشة"
 
@@ -5641,7 +5658,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "رابط(روابط)"
 
@@ -5737,7 +5754,7 @@ msgstr "جاري تحديث %1%"
 msgid "Updating library"
 msgstr "تحديث المكتبة"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "الإستخدام"
 
@@ -6333,7 +6350,7 @@ msgstr "الأقدم أولا"
 msgid "on"
 msgstr "مفعل"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "الخيارات"
 

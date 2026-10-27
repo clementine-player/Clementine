@@ -95,8 +95,8 @@ msgstr "%1 (momentan indisponibil)"
 msgid "%1 albums"
 msgstr "%1 albume"
 
-#: chromecast/chromecastengine.cpp:252
-#: networkremote/streaming/remoteengine.cpp:242
+#: chromecast/chromecastengine.cpp:262
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 nu poate reda această piesă: %2"
@@ -122,7 +122,7 @@ msgstr "%1 zile"
 msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
-#: chromecast/chromecastengine.cpp:202
+#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
 #, qt-format
 msgid "%1 isn't on a network the network remote listens on"
 msgstr "%1 nu se află în rețeaua pe care o ascultă aplicația de control la distanță a Clementine."
@@ -862,7 +862,7 @@ msgstr "Furios"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Adaugă fișiere/URL-uri în lista de redare"
 
@@ -1155,7 +1155,7 @@ msgstr "Schimbă modul amestecare"
 msgid "Change the currently playing song"
 msgstr "Schimbă melodia care se redă în prezent"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Schimbă limba"
 
@@ -1385,7 +1385,7 @@ msgstr "Co&mpozitor"
 msgid "Colors"
 msgstr "Culori"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listă separată prin virgule de clasă:nivel, nivelul este 0-3"
 
@@ -1652,7 +1652,7 @@ msgstr "Copertă selectată de la %1"
 msgid "Covers from %1"
 msgstr "Coperți de la %1"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Creează o listă de redare nouă cu fișiere/adrese URL"
 
@@ -1735,11 +1735,11 @@ msgstr "Zile"
 msgid "De&fault"
 msgstr "Im&plicit"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Scade volumul cu 4%"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Scade volumul cu <value>%"
 
@@ -1799,7 +1799,7 @@ msgstr "Șterge preconfigurarea"
 msgid "Delete smart playlist"
 msgstr "Șterge lista de redare inteligentă"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Șterge melodia care se redă în acest moment"
 
@@ -1920,7 +1920,7 @@ msgstr "Transmisie discontinuă"
 msgid "Display options"
 msgstr "Opțiuni de afișare"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Afișează mesajele pe ecran (OSD)"
 
@@ -2232,11 +2232,11 @@ msgstr "Informații despre episod"
 msgid "Equalizer"
 msgstr "Egalizator"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Echivalent cu „--log-levels *:1”"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu „--log-levels *:3”"
 
@@ -2925,11 +2925,11 @@ msgstr "Versiune incompatibilă a protocolului REST Subsonic. Serverul trebuie a
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Configurație incompletă; asigurați-vă că toate câmpurile sunt completate."
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Crește volumul cu 4%"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Crește volumul cu <value>%"
 
@@ -2987,6 +2987,10 @@ msgstr "Format nevalid"
 #: ../bin/src/ui_ripcddialog.h:329
 msgid "Invert Selection"
 msgstr "Inversează selecția"
+
+#: upnp/upnpmediaplayer.cpp:303
+msgid "It was stopped from somewhere else"
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3220,7 +3224,7 @@ msgstr "Se încarcă informațiile pieselor"
 msgid "Loading..."
 msgstr "Se încarcă..."
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 
@@ -3870,7 +3874,7 @@ msgstr "Suport pentru eticheta anului original de lansare"
 msgid "Other"
 msgstr "Alta"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Alte opțiuni"
 
@@ -3929,7 +3933,7 @@ msgstr "Parolă"
 msgid "Pause"
 msgstr "Pauză"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Pauză redare"
 
@@ -3979,11 +3983,11 @@ msgstr "Redă o melodie pentru a vedea aici fotografii ale artistului și biogra
 msgid "Play count"
 msgstr "Număr redări"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Redă lista de redare specificată"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, pune în pauză dacă este în curs de redare"
 
@@ -3996,7 +4000,7 @@ msgstr "Redă dacă nu există nimic deja în curs de redare"
 msgid "Play next"
 msgstr "Redă următoarea"
 
-#: widgets/outputbutton.cpp:103
+#: widgets/outputbutton.cpp:106
 msgid "Play on another device"
 msgstr "Redă pe un alt dispozitiv"
 
@@ -4004,7 +4008,7 @@ msgstr "Redă pe un alt dispozitiv"
 msgid "Play selected tracks next"
 msgstr "Redă următoarele piese selectate"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Redă pista a <n>-a din lista de redare"
 
@@ -4016,11 +4020,11 @@ msgstr "Redare/Pauză"
 msgid "Playback"
 msgstr "Redare"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Opțiuni ale programului de redare"
 
-#: widgets/outputbutton.cpp:104
+#: widgets/outputbutton.cpp:107
 #, qt-format
 msgid "Playing on %1"
 msgstr "Redare pe %1"
@@ -4035,7 +4039,7 @@ msgstr "Listă de redare"
 msgid "Playlist finished"
 msgstr "Listă de redare terminată"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opțiuni listă de redare"
@@ -4185,7 +4189,7 @@ msgstr "Precedentă"
 msgid "Previous track"
 msgstr "Piesa precedentă"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Afișează informațiile despre versiune"
 
@@ -4226,7 +4230,7 @@ msgstr "Aranjează melodiile într-o ordine aleatoare"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4493,7 +4497,7 @@ msgstr "Rinițializează numărul de ascultări"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reia redarea melodiei, apoi trece la melodia anterioară dacă se apasă din nou"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reia redarea melodiei sau trece la melodia anterioară dacă au trecut mai puțin de 8 secunde de când a început redarea melodiei."
@@ -4766,11 +4770,11 @@ msgstr "Derulează înapoi"
 msgid "Seek forward"
 msgstr "Derulează înainte"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Caută în piesa redată curent după o cantitate relativă"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Caută în piesa redată curent pentru o poziție absolută"
 
@@ -4851,7 +4855,7 @@ msgstr "Stabilește %1 la „%2”..."
 msgid "Set target rate"
 msgstr "Stabiliți viteza țintă"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Stabilește volumul la <value>%"
 
@@ -5057,7 +5061,7 @@ msgstr "Dimensiune:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Sari înapoi în lista de redare"
 
@@ -5069,7 +5073,7 @@ msgstr "Omite numărul de piesă dat"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Omite fișierele cu aceste extensii (separate prin virgule, fără diferențiere între majuscule și minuscule)"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Sare înainte în lista de redare"
 
@@ -5108,6 +5112,10 @@ msgstr "Soft"
 #: ui/equalizer.cpp:155
 msgid "Soft Rock"
 msgstr "Soft Rock"
+
+#: upnp/upnpmediaplayer.cpp:257
+msgid "Something else is playing on it now"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5178,7 +5186,7 @@ msgstr "Albume marcate cu steluță"
 msgid "Start ripping"
 msgstr "Pornește extragerea"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Pornește lista de redare curent redată"
 
@@ -5216,11 +5224,11 @@ msgstr "Oprește redarea după fiecare piesă"
 msgid "Stop after this track"
 msgstr "Oprește după această piesă"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Oprește redarea"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Oprește redarea după piesa curentă"
 
@@ -5371,6 +5379,15 @@ msgstr "Procesul de detectare este ocupat"
 #: ../bin/src/ui_playbacksettingspage.h:418
 msgid "The format is only updated when a pipeline starts."
 msgstr "Formatul este actualizat doar atunci când se pornește o linie de procesare."
+
+#: upnp/upnpmediaplayer.cpp:307
+msgid "The renderer couldn't play it"
+msgstr ""
+
+#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#, qt-format
+msgid "The renderer couldn't play it: %1"
+msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5548,7 +5565,7 @@ msgstr "Comută stare coadă"
 msgid "Toggle scrobbling"
 msgstr "Comută scrobbling"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Comută vizibilitatea pentru afișare-pe-ecran cu aspect elegant"
 
@@ -5647,7 +5664,7 @@ msgstr "Adresa URL"
 msgid "URL of its Logo:"
 msgstr "Adresa URL a logo-ului:"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -5743,7 +5760,7 @@ msgstr "Se actualizează %1%..."
 msgid "Updating library"
 msgstr "Se actualizează colecția"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Utilizare"
 
@@ -6339,7 +6356,7 @@ msgstr "întâi cele mai vechi"
 msgid "on"
 msgstr "pornire"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "opțiuni"
 
