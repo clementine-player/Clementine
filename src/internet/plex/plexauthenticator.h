@@ -39,6 +39,8 @@ class PlexAuthenticator : public QObject {
  public:
   explicit PlexAuthenticator(QObject* parent = nullptr);
 
+  // plex.tv's list of the user's servers and their connections.
+  static QUrl ResourcesUrl();
   static QUrl AuthUrl(const QString& client_id, const QString& code,
                       const QUrl& forward_url);
 
