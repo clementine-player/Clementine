@@ -25,6 +25,11 @@
 #include "remotecontrolmessages.pb.h"
 #include "test_utils.h"
 
+// For gtest's messages, which stream the values compared.
+std::ostream& operator<<(std::ostream& stream, RendererRegistry::Reach reach) {
+  return stream << static_cast<int>(reach);
+}
+
 namespace {
 
 Song MakeSong(Song::FileType type, const QUrl& url) {
