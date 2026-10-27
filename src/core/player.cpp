@@ -477,7 +477,9 @@ int Player::GetVolume() const { return engine_->volume(); }
 
 void Player::PlayAt(int index, Engine::TrackChangeFlags change,
                     bool reshuffle) {
-  if (change == Engine::Manual &&
+  // Without a current item there's nothing being skipped, even if the engine
+  // reports a position.
+  if (change == Engine::Manual && current_item_ &&
       engine_->position_nanosec() != engine_->length_nanosec()) {
     emit TrackSkipped(current_item_);
     const QUrl& url = current_item_->Url();
