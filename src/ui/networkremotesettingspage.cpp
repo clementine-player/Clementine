@@ -52,6 +52,24 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("ipodtouchicon", IconLoader::Base));
 
+  // Set here rather than in the .ui file, which can't give translators notes.
+  ui_->cast_note->setText(
+      // TRANSLATORS: On the Network Remote settings page, under "Use a
+      // network remote control". Chromecasts, and other devices Clementine
+      // can play on, download the audio from Clementine through the network
+      // remote, so they only work while it's on, listening on an address in
+      // the device's network.
+      tr("Chromecasts and other devices you play on get their music from "
+         "Clementine through the network remote, so they need it turned on, "
+         "and listening on an address in their network."));
+  ui_->allow_streaming->setToolTip(
+      // TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
+      // for phones running the Clementine Remote app, which can act as the
+      // speaker and choose where Clementine plays; Chromecasts don't need it.
+      tr("Let a phone or tablet running Clementine Remote act as the speaker, "
+         "and choose where Clementine plays: Clementine keeps the playlist and "
+         "streams the audio to the device."));
+
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->listen_on_all_addresses, &QCheckBox::toggled,
           ui_->listen_addresses,
