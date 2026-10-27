@@ -63,10 +63,6 @@ class NetworkRemote : public QObject {
   static void SetRemoteName(const QString& name);
   static QString RemoteName();
 
-  // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
-  // before the server starts.
-  static void SetUpnpEnabled(bool enabled);
-
   // A DISCONNECT message giving |reason|, framed as on the wire.
   static QByteArray DisconnectMessage(cpb::remote::ReasonDisconnect reason);
 
@@ -93,11 +89,14 @@ class NetworkRemote : public QObject {
   std::vector<std::unique_ptr<QTcpServer>> servers_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
-  // Only while streaming is allowed. The registry lives on the main thread
-  // with the Player; the HTTP server on this one with the sockets.
+  // The Application's, from when the server first starts. It lives on the
+  // main thread with the Player. Remotes only talk to it while streaming is
+  // allowed.
   RendererRegistry* renderer_registry_;
   // Lives on the main thread with the Internet sidebar's model.
   InternetBrowser* internet_browser_;
+  // While the server runs, for Cast devices and renderers to fetch media.
+  // Lives on this thread with the sockets.
   std::unique_ptr<MediaHttpServer> media_http_server_;
 
   quint16 port_;
@@ -118,6 +117,9 @@ class NetworkRemote : public QObject {
   void ReadSettings();
   void StartStreaming();
   void StopStreaming();
+  // Tells the registry how media is being served, now that the server's
+  // started, listening on |listening|, or stopped.
+  void PublishServing(const QList<QHostAddress>& listening);
   // Waits for a new connection's first byte to tell its protocol, then hands
   // it to a RemoteClient or the MediaHttpServer.
   void SniffProtocol(QTcpSocket* socket);

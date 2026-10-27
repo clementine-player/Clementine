@@ -20,7 +20,9 @@
 #include <QEvent>
 #include <QFont>
 #include <QMenu>
+#include <QMessageBox>
 #include <QPainter>
+#include <QPushButton>
 
 #include "engines/enginerouter.h"
 #include "ui/iconloader.h"
@@ -32,8 +34,12 @@ const int kGlyphSizes[] = {22, 32, 48};
 
 }  // namespace
 
-OutputButton::OutputButton(EngineRouter* router, QWidget* parent)
-    : QToolButton(parent), router_(router), menu_(new QMenu(this)) {
+OutputButton::OutputButton(EngineRouter* router, RendererRegistry* registry,
+                           QWidget* parent)
+    : QToolButton(parent),
+      router_(router),
+      registry_(registry),
+      menu_(new QMenu(this)) {
   setAutoRaise(true);
   setIconSize(QSize(22, 22));
   setPopupMode(QToolButton::InstantPopup);
@@ -43,6 +49,9 @@ OutputButton::OutputButton(EngineRouter* router, QWidget* parent)
 
   connect(router_, SIGNAL(OutputsChanged()), SLOT(OutputsChanged()));
   connect(menu_, SIGNAL(triggered(QAction*)), SLOT(OutputChosen(QAction*)));
+  if (registry_) {
+    connect(registry_, SIGNAL(ServingChanged()), SLOT(ServingChanged()));
+  }
   OutputsChanged();
 }
 
@@ -112,13 +121,74 @@ void OutputButton::OutputsChanged() {
 void OutputButton::OutputChosen(QAction* action) {
   if (!router_) return;
   QObject* chosen = action->data().value<QObject*>();
+  pending_ = nullptr;
   // The menu is rebuilt whenever the outputs change, but check anyway.
   for (Engine::Base* engine : router_->outputs()) {
     if (engine == chosen) {
-      router_->SetOutput(engine);
+      PlayOn(engine);
       return;
     }
   }
+}
+
+void OutputButton::PlayOn(Engine::Base* engine) {
+  const RendererRegistry::Reach reach =
+      registry_ ? registry_->ReachFor(engine)
+                : RendererRegistry::Reach::Reachable;
+  if (reach == RendererRegistry::Reach::Reachable) {
+    router_->SetOutput(engine);
+    return;
+  }
+
+  const QString name = OutputName(engine);
+  switch (Ask(name, registry_->ReachMessage(reach, name), reach)) {
+    case Answer::TurnOn:
+      pending_ = engine;
+      emit TurnOnNetworkRemote();
+      break;
+    case Answer::Settings:
+      emit ShowNetworkRemoteSettings();
+      break;
+    case Answer::Cancel:
+      break;
+  }
+}
+
+void OutputButton::ServingChanged() {
+  if (!pending_ || !router_ || !registry_) return;
+  // Restarting, the remote is off for a moment first.
+  if (registry_->ReachFor(pending_.data()) ==
+      RendererRegistry::Reach::RemoteOff) {
+    return;
+  }
+
+  Engine::Base* engine = pending_.data();
+  pending_ = nullptr;
+  // If it still can't be played on, such as when the remote doesn't listen
+  // on its network, this says so, and offers the settings.
+  if (router_->outputs().contains(engine)) PlayOn(engine);
+}
+
+OutputButton::Answer OutputButton::Ask(const QString& name,
+                                       const QString& message,
+                                       RendererRegistry::Reach reach) {
+  QMessageBox box(QMessageBox::Information, tr("Play on %1").arg(name), message,
+                  QMessageBox::Cancel, window());
+  QPushButton* turn_on = nullptr;
+  if (reach == RendererRegistry::Reach::RemoteOff) {
+    box.setInformativeText(
+        tr("Turning on the network remote also lets the Clementine Remote "
+           "app, on phones and tablets in your network, control Clementine."));
+    turn_on = box.addButton(tr("Turn On"), QMessageBox::AcceptRole);
+  }
+  QPushButton* settings =
+      box.addButton(tr("Network Remote Settings..."), QMessageBox::ActionRole);
+  box.setDefaultButton(turn_on ? turn_on : settings);
+  box.exec();
+
+  if (turn_on && box.clickedButton() == turn_on) return Answer::TurnOn;
+  if (box.clickedButton() == settings) return Answer::Settings;
+  return Answer::Cancel;
 }
 
 void OutputButton::changeEvent(QEvent* e) {

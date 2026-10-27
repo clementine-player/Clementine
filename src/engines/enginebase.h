@@ -25,6 +25,7 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+#include <QHostAddress>
 #include <QList>
 #include <QObject>
 #include <QUrl>
@@ -65,6 +66,10 @@ class Base : public QObject {
   // name of its icon in output pickers.
   virtual QString output_name() const { return QString(); }
   virtual QString output_icon() const { return QString(); }
+  // For an output that fetches its media from the network remote without
+  // connecting to it otherwise, such as a Cast device: its address. Null for
+  // any other.
+  virtual QHostAddress output_address() const { return QHostAddress(); }
 
   // Subclasses should respect given markers (beginning and end) which are
   // in milliseconds.

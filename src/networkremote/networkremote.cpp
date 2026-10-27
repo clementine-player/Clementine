@@ -60,8 +60,6 @@ const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
 
 // From --remote-name; empty for the host name.
 QString sRemoteName;
-// From --upnp.
-bool sUpnpEnabled = false;
 
 bool InSharedSubnet(const QHostAddress& address) {
   for (const char* subnet : kSharedSubnets) {
@@ -107,8 +105,6 @@ void NetworkRemote::ReadSettings() {
 void NetworkRemote::SetRemoteName(const QString& name) {
   sRemoteName = name.trimmed();
 }
-
-void NetworkRemote::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
 
 QString NetworkRemote::RemoteName() {
   return sRemoteName.isEmpty() ? QHostInfo::localHostName() : sRemoteName;
@@ -182,10 +178,13 @@ void NetworkRemote::StartServer() {
     qLog(Error) << "Start Server called without having an application!";
     return;
   }
+  if (!renderer_registry_) renderer_registry_ = app_->renderer_registry();
+
   // Check if user desires to start a network remote server
   ReadSettings();
   if (!use_remote_) {
     qLog(Info) << "Network Remote deactivated";
+    PublishServing(QList<QHostAddress>());
     return;
   }
 
@@ -202,6 +201,10 @@ void NetworkRemote::StartServer() {
     qLog(Warning) << "Network remote enabled, but no listen address is chosen";
   }
 
+  // Cast devices and the like fetch media over HTTP on the same port.
+  if (renderer_registry_) {
+    media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
+  }
   StartStreaming();
 
   QList<QHostAddress> listening;
@@ -226,17 +229,7 @@ void NetworkRemote::StartServer() {
     servers_.push_back(std::move(server));
   }
 
-  if (renderer_registry_) {
-    // The registry lives on the Player's thread.
-    RendererRegistry* registry = renderer_registry_;
-    const quint16 port = port_;
-    const QList<QHostAddress> where =
-        listen_on_all_addresses_ ? QList<QHostAddress>() : listening;
-    QMetaObject::invokeMethod(
-        registry,
-        [registry, port, where]() { registry->SetListening(port, where); },
-        Qt::QueuedConnection);
-  }
+  PublishServing(listening);
 
   if (Zeroconf::GetZeroconf()) {
     // Advertise only where something is listening, so remotes aren't sent to
@@ -268,32 +261,30 @@ void NetworkRemote::StopServer() {
   qDeleteAll(clients_);
   clients_.clear();
   StopStreaming();
+  media_http_server_.reset();
+  PublishServing(QList<QHostAddress>());
+}
+
+void NetworkRemote::PublishServing(const QList<QHostAddress>& listening) {
+  if (!renderer_registry_) return;
+
+  RendererRegistry::Serving serving;
+  serving.enabled = !servers_.empty();
+  serving.port = listening.isEmpty() ? 0 : port_;
+  if (!listen_on_all_addresses_) serving.addresses = listening;
+  serving.only_local = only_non_public_ip_;
+
+  // The registry lives on the Player's thread.
+  RendererRegistry* registry = renderer_registry_;
+  QMetaObject::invokeMethod(
+      registry, [registry, serving]() { registry->SetServing(serving); },
+      Qt::QueuedConnection);
 }
 
 void NetworkRemote::StartStreaming() {
-  if (!allow_streaming_ || renderer_registry_) return;
-
-  EngineRouter* router = qobject_cast<EngineRouter*>(app_->player()->engine());
-  if (!router) {
-    qLog(Error) << "Streaming needs the Player's EngineRouter";
-    return;
-  }
+  if (!allow_streaming_ || !renderer_registry_) return;
 
   qLog(Info) << "Playing on remote devices is allowed";
-
-  // The registry drives engines, so it has to live with the Player.
-  renderer_registry_ = new RendererRegistry(app_, router);
-  renderer_registry_->moveToThread(router->thread());
-  // Looking for Cast devices only while playing on them is allowed. On macOS
-  // that's what asks the user for local network access. It's started on the
-  // registry's thread, which the discovery then lives on.
-  QMetaObject::invokeMethod(renderer_registry_, "StartCastDiscovery",
-                            Qt::QueuedConnection);
-  if (sUpnpEnabled) {
-    QMetaObject::invokeMethod(renderer_registry_, "StartUpnpDiscovery",
-                              Qt::QueuedConnection);
-  }
-  media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
 
   connect(incoming_data_parser_.get(),
           SIGNAL(RendererConnected(int, QByteArray, QString, quint16, QString)),
@@ -317,11 +308,16 @@ void NetworkRemote::StopStreaming() {
   if (outgoing_data_creator_) {
     outgoing_data_creator_->SetStreamingEnabled(false);
   }
-  media_http_server_.reset();
   if (renderer_registry_) {
+    // The registry stays, since it offers Cast devices and the like whether
+    // or not the remote's on, but remotes no longer hear about it.
     disconnect(renderer_registry_, nullptr, this, nullptr);
-    renderer_registry_->deleteLater();
-    renderer_registry_ = nullptr;
+    disconnect(this, SIGNAL(ClientDisconnected(int)), renderer_registry_,
+               nullptr);
+    if (incoming_data_parser_) {
+      disconnect(incoming_data_parser_.get(), nullptr, renderer_registry_,
+                 nullptr);
+    }
   }
 }
 

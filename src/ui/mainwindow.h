@@ -270,6 +270,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Console* CreateDebugConsole();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
+  // As if the user checked the box in the network remote's settings.
+  void TurnOnNetworkRemote();
   void ShowSongInfoConfig();
 
   void SaveGeometry(QSettings* settings);

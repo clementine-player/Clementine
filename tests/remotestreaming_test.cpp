@@ -407,3 +407,44 @@ TEST(RendererRegistryTest, MediaOnlyComesFromAddressesTheRemoteListensOn) {
                                                 interfaces)
                   .isNull());
 }
+
+TEST(RendererRegistryTest, DevicesReachTheRemoteOnlyAsItsSettingsAllow) {
+  typedef RendererRegistry::Reach Reach;
+  const QList<QNetworkAddressEntry> interfaces = {Entry("192.168.86.178", 24),
+                                                  Entry("100.65.55.75", 10),
+                                                  Entry("203.0.113.5", 24)};
+  const QHostAddress speaker("192.168.86.162");
+
+  RendererRegistry::Serving serving;
+  EXPECT_EQ(Reach::RemoteOff,
+            RendererRegistry::ReachFor(speaker, serving, interfaces));
+
+  // On, but nothing could be bound, such as when the port's taken.
+  serving.enabled = true;
+  EXPECT_EQ(Reach::NotListening,
+            RendererRegistry::ReachFor(speaker, serving, interfaces));
+
+  serving.port = 5500;
+  QHostAddress local;
+  EXPECT_EQ(Reach::Reachable,
+            RendererRegistry::ReachFor(speaker, serving, interfaces, &local));
+  EXPECT_EQ(QHostAddress("192.168.86.178"), local);
+
+  // Only listening on the Tailscale address.
+  serving.addresses = {QHostAddress("100.65.55.75")};
+  EXPECT_EQ(Reach::NotOnNetwork,
+            RendererRegistry::ReachFor(speaker, serving, interfaces));
+  // Which makes the rest of Tailscale local.
+  EXPECT_EQ(Reach::Reachable,
+            RendererRegistry::ReachFor(QHostAddress("100.100.1.2"), serving,
+                                       interfaces));
+
+  // A device on a network with public addresses.
+  serving.addresses.clear();
+  const QHostAddress public_speaker("203.0.113.9");
+  EXPECT_EQ(Reach::NotLocal,
+            RendererRegistry::ReachFor(public_speaker, serving, interfaces));
+  serving.only_local = false;
+  EXPECT_EQ(Reach::Reachable,
+            RendererRegistry::ReachFor(public_speaker, serving, interfaces));
+}

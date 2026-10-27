@@ -82,6 +82,7 @@
 #include "library/libraryviewcontainer.h"
 #include "musicbrainz/tagfetcher.h"
 #include "networkremote/networkremote.h"
+#include "networkremote/networkremotehelper.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistlistcontainer.h"
@@ -251,8 +252,15 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
     QBoxLayout* layout =
         qobject_cast<QBoxLayout*>(ui_->volume->parentWidget()->layout());
     if (layout) {
-      layout->insertWidget(layout->indexOf(ui_->volume),
-                           new OutputButton(router, this));
+      OutputButton* output_button =
+          new OutputButton(router, app_->renderer_registry(), this);
+      layout->insertWidget(layout->indexOf(ui_->volume), output_button);
+      connect(output_button, &OutputButton::TurnOnNetworkRemote, this,
+              &MainWindow::TurnOnNetworkRemote);
+      connect(output_button, &OutputButton::ShowNetworkRemoteSettings, this,
+              [this]() {
+                OpenSettingsDialogAtPage(SettingsDialog::Page_NetworkRemote);
+              });
     }
   }
 
@@ -2723,6 +2731,17 @@ void MainWindow::OpenSettingsDialog() { settings_dialog_->show(); }
 
 void MainWindow::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
   settings_dialog_->OpenAtPage(page);
+}
+
+void MainWindow::TurnOnNetworkRemote() {
+  QSettings s;
+  s.beginGroup(NetworkRemote::kSettingsGroup);
+  s.setValue("use_remote", true);
+  s.endGroup();
+
+  if (NetworkRemoteHelper::Instance()) {
+    NetworkRemoteHelper::Instance()->ReloadSettings();
+  }
 }
 
 EditTagDialog* MainWindow::CreateEditTagDialog() {

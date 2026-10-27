@@ -54,6 +54,7 @@ class PodcastBackend;
 class PodcastDeleter;
 class PodcastDownloader;
 class PodcastUpdater;
+class RendererRegistry;
 class Scrobbler;
 class Splash;
 class TagReaderClient;
@@ -101,6 +102,9 @@ class Application : public QObject {
   Player* player() const;
   PlaylistBackend* playlist_backend() const;
   PlaylistManager* playlist_manager() const;
+  // The other devices to play on, such as Cast devices. Create it on the
+  // main thread, with the Player, before anything uses it from another.
+  RendererRegistry* renderer_registry() const;
   PodcastBackend* podcast_backend() const;
   PodcastDeleter* podcast_deleter() const;
   PodcastDownloader* podcast_downloader() const;

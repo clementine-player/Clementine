@@ -68,6 +68,7 @@ class UpnpEngine : public Engine::Base {
   qint64 length_nanosec() const override;
   QString output_name() const override { return device_.name; }
   QString output_icon() const override;
+  QHostAddress output_address() const override { return device_.address; }
 
  signals:
   // The renderer can't be reached, something else is playing on it now, or

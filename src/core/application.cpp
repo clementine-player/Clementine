@@ -39,6 +39,7 @@
 #include "covers/lastfmcoverprovider.h"
 #include "covers/musicbrainzcoverprovider.h"
 #include "devices/devicemanager.h"
+#include "engines/enginerouter.h"
 #include "globalsearch/globalsearch.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/scrobbler.h"
@@ -54,6 +55,7 @@
 #include "moodbar/moodbarloader.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/networkremotehelper.h"
+#include "networkremote/streaming/rendererregistry.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "ui/splash.h"
@@ -161,6 +163,12 @@ class ApplicationImpl {
             },
             [=](NetworkRemote* remote) { remote->deleteLater(); }),
         network_remote_helper_([=]() { return new NetworkRemoteHelper(app); }),
+        renderer_registry_([=]() -> RendererRegistry* {
+          EngineRouter* router =
+              qobject_cast<EngineRouter*>(app->player()->engine());
+          if (!router) return nullptr;
+          return new RendererRegistry(app, router);
+        }),
         scrobbler_([=]() { return new LastFMService(app, app); }) {
   }
 
@@ -190,6 +198,8 @@ class ApplicationImpl {
   Lazy<MoodbarController> moodbar_controller_;
   Lazy<NetworkRemote> network_remote_;
   Lazy<NetworkRemoteHelper> network_remote_helper_;
+  // After the Player, so it's deleted first: its outputs are the router's.
+  Lazy<RendererRegistry> renderer_registry_;
   Lazy<Scrobbler> scrobbler_;
 };
 
@@ -337,6 +347,10 @@ NetworkRemote* Application::network_remote() const {
 }
 
 Player* Application::player() const { return p_->player_.get(); }
+
+RendererRegistry* Application::renderer_registry() const {
+  return p_->renderer_registry_.get();
+}
 
 PlaylistBackend* Application::playlist_backend() const {
   return p_->playlist_backend_.get();
