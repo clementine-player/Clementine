@@ -61,6 +61,9 @@ const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
 // From --remote-name; empty for the host name.
 QString sRemoteName;
 
+// From --media-sync.
+bool sMediaSyncEnabled = false;
+
 bool InSharedSubnet(const QHostAddress& address) {
   for (const char* subnet : kSharedSubnets) {
     if (address.isInSubnet(QHostAddress::parseSubnet(subnet))) return true;
@@ -109,6 +112,12 @@ void NetworkRemote::SetRemoteName(const QString& name) {
 QString NetworkRemote::RemoteName() {
   return sRemoteName.isEmpty() ? QHostInfo::localHostName() : sRemoteName;
 }
+
+void NetworkRemote::SetMediaSyncEnabled(bool enabled) {
+  sMediaSyncEnabled = enabled;
+}
+
+bool NetworkRemote::MediaSyncEnabled() { return sMediaSyncEnabled; }
 
 QList<QHostAddress> NetworkRemote::ListenAddresses(bool all,
                                                    const QStringList& chosen) {

@@ -63,6 +63,11 @@ class NetworkRemote : public QObject {
   static void SetRemoteName(const QString& name);
   static QString RemoteName();
 
+  // Whether remotes can keep songs on the phone (from --media-sync). Off
+  // while it's being built. Set before the server starts.
+  static void SetMediaSyncEnabled(bool enabled);
+  static bool MediaSyncEnabled();
+
   // A DISCONNECT message giving |reason|, framed as on the wire.
   static QByteArray DisconnectMessage(cpb::remote::ReasonDisconnect reason);
 
