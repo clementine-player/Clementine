@@ -66,9 +66,18 @@ QUrl CoverArtUrl(const QString& thumb, const QUrl& base_url,
   return url;
 }
 
+// The certificate hash in a <ip>.<hash>.plex.direct name, which stays the
+// same when the server's IP changes.
+QString PlexDirectHash(const QUrl& url) {
+  const QStringList labels = url.host().split('.');
+  if (labels.size() != 4 || labels[2] != "plex" || labels[3] != "direct") {
+    return QString();
+  }
+  return labels[1];
+}
+
 Song ParseTrack(const QJsonObject& track, const QString& machine_id,
-                const QString& section_key, const QUrl& base_url,
-                const QString& token) {
+                const QString& section_key) {
   const QJsonArray media = track["Media"].toArray();
   if (media.isEmpty()) return Song();
   const QJsonObject first_media = media.first().toObject();
@@ -108,7 +117,7 @@ Song ParseTrack(const QJsonObject& track, const QString& machine_id,
   QString thumb = track["parentThumb"].toString();
   if (thumb.isEmpty()) thumb = track["thumb"].toString();
   if (!thumb.isEmpty()) {
-    song.set_art_automatic(CoverArtUrl(thumb, base_url, token).toString());
+    song.set_art_automatic(MakeCoverArtUrl(machine_id, thumb));
   }
 
   song.set_url(MakeSongUrl(machine_id, rating_key, part_key, section_key));
@@ -212,8 +221,7 @@ QList<PlexSection> ParseMusicSections(const QJsonDocument& doc) {
 }
 
 PlexTracksPage ParseTracks(const QJsonDocument& doc, const QString& machine_id,
-                           const QString& section_key, const QUrl& base_url,
-                           const QString& token) {
+                           const QString& section_key) {
   PlexTracksPage page;
   const QJsonObject container = doc.object()["MediaContainer"].toObject();
   const QJsonArray metadata = container["Metadata"].toArray();
@@ -223,11 +231,46 @@ PlexTracksPage ParseTracks(const QJsonDocument& doc, const QString& machine_id,
                         : page.size;
 
   for (const QJsonValue& value : metadata) {
-    Song song =
-        ParseTrack(value.toObject(), machine_id, section_key, base_url, token);
+    Song song = ParseTrack(value.toObject(), machine_id, section_key);
     if (song.url().isValid()) page.songs << song;
   }
   return page;
+}
+
+QString MakeCoverArtUrl(const QString& machine_id, const QString& thumb) {
+  QUrl url;
+  url.setScheme(kScheme);
+  url.setHost(machine_id);
+  url.setPath("/photo");
+  QUrlQuery query;
+  query.addQueryItem("thumb",
+                     QString::fromLatin1(QUrl::toPercentEncoding(thumb)));
+  url.setQuery(query);
+  return url.toString();
+}
+
+QUrl ResolveCoverArtUrl(const QString& art, const QString& machine_id,
+                        const QUrl& base_url, const QString& token) {
+  if (machine_id.isEmpty() || !base_url.isValid()) return QUrl();
+
+  const QUrl url(art);
+  QString thumb;
+  if (url.scheme() == kScheme) {
+    if (MachineIdFromUrl(url) != machine_id || url.path() != "/photo") {
+      return QUrl();
+    }
+    thumb = QUrlQuery(url).queryItemValue("thumb", QUrl::FullyDecoded);
+  } else {
+    const QString hash = PlexDirectHash(url);
+    if (hash.isEmpty() || hash != PlexDirectHash(base_url) ||
+        url.path() != "/photo/:/transcode") {
+      return QUrl();
+    }
+    thumb = QUrlQuery(url).queryItemValue("url", QUrl::FullyDecoded);
+  }
+
+  if (thumb.isEmpty()) return QUrl();
+  return CoverArtUrl(thumb, base_url, token);
 }
 
 QUrl MakeSongUrl(const QString& machine_id, const QString& rating_key,

@@ -20,6 +20,7 @@
 
 #include <QDateTime>
 #include <QHash>
+#include <QMutex>
 #include <QUrlQuery>
 #include <memory>
 
@@ -146,6 +147,16 @@ class PlexService : public InternetService {
   PlexServer server_;
   // The plex.tv account's token, for refreshing the server's connections.
   QString user_token_;
+  // What the album cover loaders, on their own threads, need to resolve this
+  // server's covers.  Only set while connected.
+  struct CoverServer {
+    QString machine_id;
+    QUrl base_url;
+    QString token;
+  };
+  void SetCoverServer(const CoverServer& server);
+  mutable QMutex cover_server_mutex_;
+  CoverServer cover_server_;
   bool verify_cert_;
   LoginState login_state_;
   QUrl base_url_;

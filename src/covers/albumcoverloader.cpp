@@ -23,6 +23,9 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QMap>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QNetworkReply>
 #include <QPainter>
 #include <QUrl>
@@ -34,6 +37,32 @@
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
+
+namespace {
+
+QMutex resolvers_mutex;
+QMap<QString, AlbumCoverLoader::CoverUrlResolver> resolvers;
+
+QString ResolveCoverUrl(const QString& art) {
+  QMutexLocker l(&resolvers_mutex);
+  for (const AlbumCoverLoader::CoverUrlResolver& resolver : resolvers) {
+    const QUrl url = resolver(art);
+    if (url.isValid()) return url.toString();
+  }
+  return art;
+}
+
+}  // namespace
+
+void AlbumCoverLoader::SetCoverUrlResolver(const QString& name,
+                                           const CoverUrlResolver& resolver) {
+  QMutexLocker l(&resolvers_mutex);
+  if (resolver) {
+    resolvers[name] = resolver;
+  } else {
+    resolvers.remove(name);
+  }
+}
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     : QObject(parent),
@@ -147,7 +176,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   QString filename;
   switch (task.state) {
     case State_TryingAuto:
-      filename = task.art_automatic;
+      filename = ResolveCoverUrl(task.art_automatic);
       break;
     case State_TryingManual:
       filename = task.art_manual;

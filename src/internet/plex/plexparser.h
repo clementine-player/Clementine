@@ -89,11 +89,20 @@ QList<PlexConnection> ParseConnections(const QByteArray& json);
 // Music ("artist" type) sections from /library/sections.
 QList<PlexSection> ParseMusicSections(const QJsonDocument& doc);
 
-// Tracks from /library/sections/<key>/all?type=10.  Artwork URLs are built
-// against base_url and carry token.
+// Tracks from /library/sections/<key>/all?type=10.  Their covers are
+// MakeCoverArtUrl()s.
 PlexTracksPage ParseTracks(const QJsonDocument& doc, const QString& machine_id,
-                           const QString& section_key, const QUrl& base_url,
-                           const QString& token);
+                           const QString& section_key);
+
+// A cover, stored without the server's address or token, since both change:
+// plex://<machine_id>/photo?thumb=<thumb>
+QString MakeCoverArtUrl(const QString& machine_id, const QString& thumb);
+// The URL to fetch a cover from, on the server machine_id at base_url.  As
+// well as MakeCoverArtUrl()s, takes the full URLs songs stored before them,
+// if they're on another plex.direct address of the same server.  Returns an
+// invalid URL for any other cover.
+QUrl ResolveCoverArtUrl(const QString& art, const QString& machine_id,
+                        const QUrl& base_url, const QString& token);
 
 // plex://<machine_id>/<rating_key>?part=<part_key>&section=<section_key>
 QUrl MakeSongUrl(const QString& machine_id, const QString& rating_key,
