@@ -160,6 +160,9 @@ class UpnpMediaPlayer : public QObject {
   QElapsedTimer position_updated_;
   // Where it was when last seen playing.
   qint64 last_playing_position_ms_;
+  // Where to seek to once it's playing or paused, or -1. Some renderers,
+  // like Rygel, can't seek until then, so seeking as it's loaded fails.
+  qint64 pending_seek_ms_;
   qint64 duration_ms_;
 };
 
