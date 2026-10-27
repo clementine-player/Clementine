@@ -135,8 +135,7 @@ TEST(PlexParserTest, ParsesMusicSections) {
 }
 
 TEST(PlexParserTest, ParsesTracks) {
-  PlexTracksPage page = PlexParser::ParseTracks(Json(kTracks), "abc123", "3",
-                                                kBaseUrl, "server-token");
+  PlexTracksPage page = PlexParser::ParseTracks(Json(kTracks), "abc123", "3");
   EXPECT_EQ(3, page.size);
   EXPECT_EQ(1200, page.total_size);
   // The track without media is dropped.
@@ -167,13 +166,11 @@ TEST(PlexParserTest, ParsesTracks) {
   EXPECT_EQ("/library/parts/555/1700000000/file.flac",
             PlexParser::PartKeyFromUrl(one.url()));
 
-  QUrl art(one.art_automatic());
-  EXPECT_EQ(kBaseUrl.host(), art.host());
-  EXPECT_EQ("/photo/:/transcode", art.path());
-  QUrlQuery art_query(art);
-  EXPECT_EQ("/library/metadata/100/thumb/1",
-            art_query.queryItemValue("url", QUrl::FullyDecoded));
-  EXPECT_EQ("server-token", art_query.queryItemValue("X-Plex-Token"));
+  // The cover is stored without the server's address or token.
+  EXPECT_EQ(
+      PlexParser::MakeCoverArtUrl("abc123", "/library/metadata/100/thumb/1"),
+      one.art_automatic());
+  EXPECT_FALSE(one.art_automatic().contains("server-token"));
 
   const Song& two = page.songs[1];
   EXPECT_EQ("102", PlexParser::RatingKeyFromUrl(two.url()));
@@ -186,6 +183,56 @@ TEST(PlexParserTest, ParsesTracks) {
   EXPECT_EQ(-1, two.bitrate());
   EXPECT_EQ(-1, two.rating());
   EXPECT_TRUE(two.art_automatic().isEmpty());
+}
+
+TEST(PlexParserTest, ResolvesCoverArtOnTheCurrentAddress) {
+  const QString art =
+      PlexParser::MakeCoverArtUrl("abc123", "/library/metadata/100/thumb/1");
+  const QUrl url =
+      PlexParser::ResolveCoverArtUrl(art, "abc123", kBaseUrl, "server-token");
+  EXPECT_EQ(kBaseUrl.host(), url.host());
+  EXPECT_EQ("/photo/:/transcode", url.path());
+  QUrlQuery query(url);
+  EXPECT_EQ("/library/metadata/100/thumb/1",
+            query.queryItemValue("url", QUrl::FullyDecoded));
+  EXPECT_EQ("server-token", query.queryItemValue("X-Plex-Token"));
+}
+
+TEST(PlexParserTest, LeavesOtherServersCoverArtAlone) {
+  const QString art =
+      PlexParser::MakeCoverArtUrl("other", "/library/metadata/100/thumb/1");
+  EXPECT_FALSE(
+      PlexParser::ResolveCoverArtUrl(art, "abc123", kBaseUrl, "server-token")
+          .isValid());
+  EXPECT_FALSE(PlexParser::ResolveCoverArtUrl("/home/me/cover.jpg", "abc123",
+                                              kBaseUrl, "server-token")
+                   .isValid());
+  EXPECT_FALSE(
+      PlexParser::ResolveCoverArtUrl(art, "", QUrl(), QString()).isValid());
+}
+
+TEST(PlexParserTest, MovesOldCoverArtUrlsToTheCurrentAddress) {
+  // Before covers were stored without an address, they were full URLs on the
+  // address the server had then.
+  const QString old_art =
+      "https://192-168-1-9.abc123.plex.direct:32400/photo/:/transcode"
+      "?width=300&url=%2Flibrary%2Fmetadata%2F100%2Fthumb%2F1"
+      "&X-Plex-Token=old-token";
+  const QUrl url = PlexParser::ResolveCoverArtUrl(old_art, "abc123", kBaseUrl,
+                                                  "server-token");
+  EXPECT_EQ(kBaseUrl.host(), url.host());
+  EXPECT_EQ(kBaseUrl.port(), url.port());
+  QUrlQuery query(url);
+  EXPECT_EQ("/library/metadata/100/thumb/1",
+            query.queryItemValue("url", QUrl::FullyDecoded));
+  EXPECT_EQ("server-token", query.queryItemValue("X-Plex-Token"));
+
+  // Another server's certificate hash.
+  QString other = old_art;
+  other.replace(".abc123.", ".def456.");
+  EXPECT_FALSE(
+      PlexParser::ResolveCoverArtUrl(other, "abc123", kBaseUrl, "server-token")
+          .isValid());
 }
 
 TEST(PlexParserTest, SongUrlSurvivesAStringRoundTrip) {

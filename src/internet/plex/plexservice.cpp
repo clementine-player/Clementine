@@ -38,6 +38,7 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "covers/albumcoverloader.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/plex/plexauthenticator.h"
@@ -130,12 +131,28 @@ PlexService::PlexService(Application* app, InternetModel* parent)
 
   library_filter_->AddMenuAction(config_action);
 
+  AlbumCoverLoader::SetCoverUrlResolver(
+      kServiceName, [this](const QString& art) {
+        QMutexLocker l(&cover_server_mutex_);
+        return PlexParser::ResolveCoverArtUrl(art, cover_server_.machine_id,
+                                              cover_server_.base_url,
+                                              cover_server_.token);
+      });
+
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_.get(), tr("Plex"), "plex",
       IconLoader::Load("plex", IconLoader::Provider), true, app_, this));
 }
 
-PlexService::~PlexService() {}
+PlexService::~PlexService() {
+  AlbumCoverLoader::SetCoverUrlResolver(kServiceName,
+                                        AlbumCoverLoader::CoverUrlResolver());
+}
+
+void PlexService::SetCoverServer(const CoverServer& server) {
+  QMutexLocker l(&cover_server_mutex_);
+  cover_server_ = server;
+}
 
 QString PlexService::ClientId() {
   QSettings s;
@@ -223,6 +240,7 @@ void PlexService::ReloadSettings() {
 
   listener_->Stop();
   base_url_ = QUrl();
+  SetCoverServer(CoverServer());
   server_ = server;
   verify_cert_ = verify_cert;
 
@@ -375,6 +393,7 @@ void PlexService::CheckProbes() {
     if (probe.ok) {
       ++probe_generation_;  // Ignore the rest.
       base_url_ = probe.uri;
+      SetCoverServer({server_.machine_id, base_url_, server_.access_token});
       qLog(Info) << "Connected to Plex server" << server_.name << "at"
                  << base_url_;
       SetLoginState(LoginState_LoggedIn);

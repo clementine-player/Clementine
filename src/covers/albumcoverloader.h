@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QQueue>
 #include <QUrl>
+#include <functional>
 
 #include "albumcoverloaderoptions.h"
 #include "config.h"
@@ -59,6 +60,15 @@ class AlbumCoverLoader : public QObject {
                                const QString& filename = QString());
   static QImage ScaleAndPad(const AlbumCoverLoaderOptions& options,
                             const QImage& image);
+
+  // Turns a cover a service stored in a form of its own, e.g. without a
+  // server address that can change, into the URL to fetch it from.  Returns
+  // an invalid URL for covers that aren't the service's.  Called on the
+  // loaders' threads.
+  typedef std::function<QUrl(const QString& art)> CoverUrlResolver;
+  // Sets the resolver for name; a null one removes it.
+  static void SetCoverUrlResolver(const QString& name,
+                                  const CoverUrlResolver& resolver);
 
  signals:
   void ImageLoaded(quint64 id, const QImage& image);

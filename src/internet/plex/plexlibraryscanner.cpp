@@ -92,8 +92,7 @@ void PlexLibraryScanner::PageFinished(QNetworkReply* reply, int offset) {
   }
 
   PlexTracksPage page =
-      PlexParser::ParseTracks(doc, service_->machine_id(), current_section_,
-                              service_->base_url(), service_->server_token());
+      PlexParser::ParseTracks(doc, service_->machine_id(), current_section_);
   songs_[current_section_] << page.songs;
 
   if (offset == 0) total_ += page.total_size;
