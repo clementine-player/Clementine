@@ -42,6 +42,14 @@ struct StreamItem {
   StreamPlan plan;
   MediaPlaybackRequest req;
   Song song;
+  // The renderer's own name for plan.mime_type, if it has one. Some check
+  // the Content-Type they're served against the types they listed, exactly.
+  QString content_type;
+
+  // What to serve the item as.
+  QString ContentType() const {
+    return content_type.isEmpty() ? plan.mime_type : content_type;
+  }
 };
 
 // The items each renderer may fetch, by session token. Written by

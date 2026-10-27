@@ -191,7 +191,7 @@ void PipelineResponder::WriteHead() {
   head_written_ = true;
 
   QByteArray head = "HTTP/1.1 200 OK\r\n";
-  head += "Content-Type: " + item_.plan.mime_type.toLatin1() + "\r\n";
+  head += "Content-Type: " + item_.ContentType().toLatin1() + "\r\n";
   // The output's size isn't known until it's finished.
   head += "Transfer-Encoding: chunked\r\n";
   head += "Accept-Ranges: none\r\n";

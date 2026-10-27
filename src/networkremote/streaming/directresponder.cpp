@@ -69,7 +69,7 @@ DirectResponder::DirectResponder(QTcpSocket* socket, const QByteArray& token,
   } else {
     head += "HTTP/1.1 200 OK\r\n";
   }
-  head += "Content-Type: " + item.plan.mime_type.toLatin1() + "\r\n";
+  head += "Content-Type: " + item.ContentType().toLatin1() + "\r\n";
   head += "Content-Length: " + QByteArray::number(last - first + 1) + "\r\n";
   head += "Accept-Ranges: bytes\r\n";
   head += "Cache-Control: no-store\r\n";
