@@ -90,6 +90,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       toggle_pretty_osd_(false),
       play_and_exit_timeout_secs_(-1),
       upnp_(false),
+      media_sync_(false),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -159,6 +160,9 @@ bool CommandlineOptions::Parse() {
       // Undocumented while it's being built: offer UPnP MediaRenderers, such
       // as Sonos players, as outputs too. Left out of kHelpText.
       {"upnp", no_argument, 0, Upnp},
+      // Undocumented while it's being built: let remotes keep songs on the
+      // phone to play offline. Left out of kHelpText.
+      {"media-sync", no_argument, 0, MediaSync},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -337,6 +341,10 @@ bool CommandlineOptions::Parse() {
 
       case Upnp:
         upnp_ = true;
+        break;
+
+      case MediaSync:
+        media_sync_ = true;
         break;
 
       case '?':

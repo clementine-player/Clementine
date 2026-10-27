@@ -399,6 +399,7 @@ int main(int argc, char* argv[]) {
     logging::SetLevels(options.log_levels());
     NetworkRemote::SetRemoteName(options.remote_name());
     RendererRegistry::SetUpnpEnabled(options.upnp());
+    NetworkRemote::SetMediaSyncEnabled(options.media_sync());
 
     if (a.isRunning()) {
       // Its options would go to the running one, which ignores them.
