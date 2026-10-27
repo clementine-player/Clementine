@@ -160,10 +160,10 @@ endif (APPLE)
 
 find_package(Threads)
 
+# Logging isn't compiled out of release builds, which the Mac and Windows
+# packages are: --log-levels and Qt's logging rules choose what's shown.
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
-  add_definitions(-DQT_NO_DEBUG_OUTPUT)
-  add_definitions(-DQT_NO_WARNING_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # Set up definitions and paths
