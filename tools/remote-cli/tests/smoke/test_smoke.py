@@ -68,10 +68,11 @@ async def test_nothing_changes_without_the_setting(
         await asyncio.sleep(1)
         assert controller.outputs == []
 
-    # Nothing answers HTTP: the connection is closed.
+    # Media is still served over HTTP, for Cast devices, but there's none
+    # for a renderer.
     with _connect_from(HOST, port) as http:
         http.sendall(b"GET /s/x/1 HTTP/1.1\r\nHost: x\r\n\r\n")
-        assert _read_all(http) == b""
+        assert _read_all(http).startswith(b"HTTP/1.1 404 ")
 
 
 @run_async
