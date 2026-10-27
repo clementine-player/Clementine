@@ -40,6 +40,7 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
+#include "internet/plex/plexauthenticator.h"
 #include "internet/plex/plexlibraryscanner.h"
 #include "internet/plex/plexnotificationlistener.h"
 #include "internet/plex/plexplaybackreporter.h"
@@ -208,6 +209,7 @@ void PlexService::ReloadSettings() {
   server.connections =
       PlexParser::ParseConnections(s.value("connections").toByteArray());
   const bool verify_cert = s.value("verify_cert", true).toBool();
+  user_token_ = s.value("user_token").toString();
 
   // Settings are reloaded whenever any page is saved.  Don't drop a working
   // connection if nothing Plex-related changed.
@@ -266,11 +268,61 @@ QNetworkReply* PlexService::Get(const QString& path, const QUrlQuery& query) {
 void PlexService::Connect() {
   SetLoginState(LoginState_Connecting);
 
+  ++probe_generation_;
+  probes_.clear();
+
+  if (user_token_.isEmpty()) {
+    ProbeConnections();
+    return;
+  }
+
+  // The server's addresses change, e.g. with its local IP, and the ones saved
+  // at sign-in then all fail.  So ask plex.tv for the current ones first, and
+  // fall back to the saved ones if it can't be reached.
+  QNetworkRequest request(PlexAuthenticator::ResourcesUrl());
+  AddClientHeaders(&request, user_token_);
+  QNetworkReply* reply = network_->get(request);
+  probe_timeouts_->AddReply(reply);
+  NewClosure(reply, &QNetworkReply::finished, this,
+             &PlexService::ResourcesFetched, reply, probe_generation_);
+}
+
+void PlexService::ResourcesFetched(QNetworkReply* reply, quint64 generation) {
+  reply->deleteLater();
+  if (generation != probe_generation_) return;
+
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "Couldn't get the Plex server's addresses from plex.tv,"
+                  << "trying the saved ones:" << reply->errorString();
+    ProbeConnections();
+    return;
+  }
+
+  const QList<PlexServer> servers =
+      PlexParser::ParseResources(QJsonDocument::fromJson(reply->readAll()));
+  for (const PlexServer& server : servers) {
+    if (server.machine_id != server_.machine_id) continue;
+    if (server.connections.isEmpty()) break;
+
+    const QByteArray connections =
+        PlexParser::SerializeConnections(server.connections);
+    if (connections != PlexParser::SerializeConnections(server_.connections)) {
+      qLog(Info) << "Plex server" << server_.name << "has new addresses";
+      server_.connections = server.connections;
+      QSettings s;
+      s.beginGroup(kSettingsGroup);
+      s.setValue("connections", connections);
+    }
+    break;
+  }
+
+  ProbeConnections();
+}
+
+void PlexService::ProbeConnections() {
   // Try every connection at once, but prefer them in the order
   // OrderConnections gives: a local server beats a remote one, even if the
   // remote one answers first.
-  ++probe_generation_;
-  probes_.clear();
   for (const PlexConnection& connection :
        PlexParser::OrderConnections(server_.connections)) {
     Probe probe;

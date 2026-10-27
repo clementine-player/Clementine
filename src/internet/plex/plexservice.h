@@ -100,6 +100,7 @@ class PlexService : public InternetService {
   void ForceSync();
 
  private slots:
+  void ResourcesFetched(QNetworkReply* reply, quint64 generation);
   void ProbeFinished(QNetworkReply* reply, int index, quint64 generation);
   void SectionsFinished(QNetworkReply* reply, bool force);
   void ScanProgress(int done, int total);
@@ -117,7 +118,9 @@ class PlexService : public InternetService {
   };
 
   void SetLoginState(LoginState state);
+  // Refreshes the server's connections from plex.tv, then probes them.
   void Connect();
+  void ProbeConnections();
   void CheckProbes();
   QNetworkRequest MakeRequest(const QUrl& url) const;
   // Fetches /library/sections and syncs the sections that changed.
@@ -141,6 +144,8 @@ class PlexService : public InternetService {
   int sync_task_id_;
 
   PlexServer server_;
+  // The plex.tv account's token, for refreshing the server's connections.
+  QString user_token_;
   bool verify_cert_;
   LoginState login_state_;
   QUrl base_url_;

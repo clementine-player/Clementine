@@ -141,14 +141,18 @@ void PlexAuthenticator::PinChecked(QNetworkReply* reply) {
   emit Authenticated(token);
 }
 
-void PlexAuthenticator::FetchServers(const QString& user_token) {
+QUrl PlexAuthenticator::ResourcesUrl() {
   QUrlQuery query;
   query.addQueryItem("includeHttps", "1");
   query.addQueryItem("includeRelay", "1");
   QUrl url(kResourcesUrl);
   url.setQuery(query);
+  return url;
+}
 
-  QNetworkReply* reply = network_->get(PlexTvRequest(url, user_token));
+void PlexAuthenticator::FetchServers(const QString& user_token) {
+  QNetworkReply* reply =
+      network_->get(PlexTvRequest(ResourcesUrl(), user_token));
   NewClosure(reply, &QNetworkReply::finished, this,
              &PlexAuthenticator::ResourcesFetched, reply);
 }
