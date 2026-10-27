@@ -54,6 +54,7 @@ UpnpMediaPlayer::UpnpMediaPlayer(QObject* parent)
       state_(Idle),
       position_ms_(0),
       last_playing_position_ms_(0),
+      pending_seek_ms_(-1),
       duration_ms_(0) {
   poll_timer_->setInterval(kPollIntervalMsec);
   connect(poll_timer_, &QTimer::timeout, this, &UpnpMediaPlayer::Poll);
@@ -74,6 +75,7 @@ void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
   position_ms_ = start_ms;
   position_updated_.start();
   last_playing_position_ms_ = start_ms;
+  pending_seek_ms_ = -1;
   duration_ms_ = info.duration_ms;
   SetState(autoplay ? Buffering : Idle);
 
@@ -110,8 +112,13 @@ void UpnpMediaPlayer::Stop() {
 
 void UpnpMediaPlayer::Seek(qint64 position_ms) {
   if (!loaded_) return;
-  Enqueue(Command, device_.av_transport, "Seek",
-          {{"Unit", "REL_TIME"}, {"Target", FormatTime(position_ms)}});
+  if (pending_seek_ms_ >= 0) {
+    // This would fail too.
+    pending_seek_ms_ = position_ms;
+  } else {
+    Enqueue(Command, device_.av_transport, "Seek",
+            {{"Unit", "REL_TIME"}, {"Target", FormatTime(position_ms)}});
+  }
   position_ms_ = position_ms;
   position_updated_.start();
   last_playing_position_ms_ = position_ms;
@@ -149,6 +156,7 @@ void UpnpMediaPlayer::Unload() {
   started_ = false;
   play_sent_ = false;
   want_play_ = false;
+  pending_seek_ms_ = -1;
   poll_timer_->stop();
   SetState(Idle);
 }
@@ -223,6 +231,11 @@ void UpnpMediaPlayer::Finished(const UpnpSoap::Response& response) {
       }
       break;
     case LoadSeek:
+      if (current && !response.ok) {
+        // Not a reason to give up on it: try again once it's started.
+        pending_seek_ms_ = ParseTime(request.action.args.last().second);
+      }
+      break;
     case Command:
     case Volume:
       // Logged above; the next poll says what the renderer's doing.
@@ -259,7 +272,8 @@ void UpnpMediaPlayer::PositionInfo(const QMap<QString, QString>& values) {
   }
 
   const qint64 position = ParseTime(values.value("RelTime"));
-  if (position >= 0) {
+  // Still at the start, until it can seek to where it should be.
+  if (position >= 0 && pending_seek_ms_ < 0) {
     position_ms_ = position;
     position_updated_.start();
   }
@@ -306,6 +320,12 @@ void UpnpMediaPlayer::TransportInfo(const QMap<QString, QString>& values) {
       Unload();
       emit Error(tr("The renderer couldn't play it"));
     }
+  }
+
+  if (started_ && pending_seek_ms_ >= 0) {
+    const qint64 position_ms = pending_seek_ms_;
+    pending_seek_ms_ = -1;
+    Seek(position_ms);
   }
 }
 

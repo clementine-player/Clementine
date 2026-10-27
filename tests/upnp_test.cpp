@@ -503,10 +503,60 @@ TEST(UpnpMediaPlayerTest, LoadsPartWayThrough) {
   EXPECT_EQ("Seek", player.last().name.toStdString());
   EXPECT_EQ("REL_TIME", player.Arg("Unit"));
   EXPECT_EQ("0:01:05", player.Arg("Target"));
-  // A seek that fails doesn't stop it playing.
-  player.Fault(701);
+  player.Answer();
   EXPECT_EQ("Play", player.last().name.toStdString());
+  player.Answer();
+
+  // It isn't sent again.
+  const int sent = player.sent_.size();
+  player.Poll("0:01:05", "PLAYING");
+  EXPECT_EQ(sent + 2, player.sent_.size());
+}
+
+TEST(UpnpMediaPlayerTest, SeeksOnceItCan) {
+  // Like Rygel, which can't seek until it's playing or paused.
+  FakePlayer player;
+  player.Load(Info(), 65000, true);
+  player.Answer();
+  EXPECT_EQ("Seek", player.last().name.toStdString());
+  // That doesn't stop it playing.
+  player.Fault(710);
+  EXPECT_EQ("Play", player.last().name.toStdString());
+  player.Answer();
   EXPECT_TRUE(player.is_loaded());
+
+  player.Poll("0:00:00", "TRANSITIONING");
+  EXPECT_EQ("GetTransportInfo", player.last().name.toStdString());
+  EXPECT_GE(player.position_ms(), 65000);
+
+  player.Poll("0:00:00", "PLAYING");
+  EXPECT_EQ("Seek", player.last().name.toStdString());
+  EXPECT_EQ("0:01:05", player.Arg("Target"));
+  EXPECT_GE(player.position_ms(), 65000);
+  player.Answer();
+
+  // Only the once.
+  player.Poll("0:01:06", "PLAYING");
+  EXPECT_EQ("GetTransportInfo", player.last().name.toStdString());
+}
+
+TEST(UpnpMediaPlayerTest, SeekingBeforeItCanMovesTheSeek) {
+  FakePlayer player;
+  player.Load(Info(), 65000, false);
+  player.Answer();
+  player.Fault(710);
+  EXPECT_TRUE(player.is_loaded());
+
+  // Not sent while it's still stopped.
+  const int sent = player.sent_.size();
+  player.Seek(30000);
+  EXPECT_EQ(sent, player.sent_.size());
+
+  player.Play();
+  player.Answer();
+  player.Poll("0:00:00", "PLAYING");
+  EXPECT_EQ("Seek", player.last().name.toStdString());
+  EXPECT_EQ("0:00:30", player.Arg("Target"));
 }
 
 TEST(UpnpMediaPlayerTest, LoadsPaused) {
