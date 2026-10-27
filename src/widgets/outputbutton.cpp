@@ -172,16 +172,29 @@ void OutputButton::ServingChanged() {
 OutputButton::Answer OutputButton::Ask(const QString& name,
                                        const QString& message,
                                        RendererRegistry::Reach reach) {
+  // TRANSLATORS: The title of the message shown when the user picks a
+  // Chromecast or other device to play on, and it can't get the music from
+  // Clementine's network remote. %1 is the device's name.
   QMessageBox box(QMessageBox::Information, tr("Play on %1").arg(name), message,
                   QMessageBox::Cancel, window());
   QPushButton* turn_on = nullptr;
   if (reach == RendererRegistry::Reach::RemoteOff) {
     box.setInformativeText(
+        // TRANSLATORS: Below the message saying the network remote is off,
+        // which a Chromecast or other device needs to play. Turning it on
+        // for the device also lets phones running the Clementine Remote app
+        // connect, which is why this warns about it.
         tr("Turning on the network remote also lets the Clementine Remote "
            "app, on phones and tablets in your network, control Clementine."));
+    // TRANSLATORS: A button that turns on the network remote, so the chosen
+    // Chromecast or other device can play.
     turn_on = box.addButton(tr("Turn On"), QMessageBox::AcceptRole);
   }
   QPushButton* settings =
+      // TRANSLATORS: A button that opens the Network Remote page of the
+      // settings, where the user can fix why a Chromecast or other device
+      // can't get music from Clementine. "Network Remote" is that page's
+      // name.
       box.addButton(tr("Network Remote Settings..."), QMessageBox::ActionRole);
   box.setDefaultButton(turn_on ? turn_on : settings);
   box.exec();

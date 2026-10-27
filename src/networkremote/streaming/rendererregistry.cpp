@@ -421,10 +421,19 @@ QString RendererRegistry::ReachMessage(Reach reach, const QString& name) const {
     case Reach::Reachable:
       break;
     case Reach::RemoteOff:
+      // TRANSLATORS: Shown when the user picks a Chromecast or other device
+      // to play on, and it can't get the music. Such devices download the
+      // audio from Clementine through the network remote, the server the
+      // phone remote apps also connect to (Settings, Network Remote). %1 is
+      // the device's name, such as "Living Room TV".
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which is turned off.")
           .arg(name);
     case Reach::NotListening:
+      // TRANSLATORS: Shown when a Chromecast or other device the user picks
+      // can't get its music from Clementine's network remote: the remote is
+      // on, but couldn't open its port, usually because another program has
+      // it. %1 is the device's name; %2 is the port number, such as 5500.
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which couldn't listen on port %2. Another program "
                 "may be using it.")
@@ -432,10 +441,18 @@ QString RendererRegistry::ReachMessage(Reach reach, const QString& name) const {
           .arg(serving_.port == 0 ? NetworkRemote::kDefaultServerPort
                                   : serving_.port);
     case Reach::NotOnNetwork:
+      // TRANSLATORS: Shown when a Chromecast or other device the user picks
+      // can't get its music from Clementine's network remote: the remote only
+      // listens on addresses the user chose (Settings, Network Remote), and
+      // none is on the device's network. %1 is the device's name.
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which doesn't listen on an address in %1's network.")
           .arg(name);
     case Reach::NotLocal:
+      // TRANSLATORS: Shown when a Chromecast or other device the user picks
+      // can't get its music from Clementine's network remote: the remote's
+      // "Only allow connections from the local network" setting refuses it,
+      // since its address isn't a private one. %1 is the device's name.
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which only allows connections from the local "
                 "network, and %1 isn't on it.")

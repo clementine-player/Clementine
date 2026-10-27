@@ -7,7 +7,9 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr:1,2c --keyword=tr --flag=tr:1:pass-c-for
     --keyword=QT_TRANSLATE_NOOP:2 --flag=QT_TRANSLATE_NOOP:2:pass-c-format --flag=QT_TRANSLATE_NOOP:2:pass-qt-format
     --keyword=_ --flag=_:1:pass-c-format --flag=_:1:pass-qt-format
     --keyword=N_ --flag=N_:1:pass-c-format --flag=N_:1:pass-qt-format
-    --from-code=utf-8)
+    --from-code=utf-8
+    # Notes for translators, as "// TRANSLATORS: ..." just before the string.
+    --add-comments=TRANSLATORS:)
 
 macro(add_pot outfiles header pot)
   # Make relative filenames for all source files

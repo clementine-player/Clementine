@@ -23,9 +23,6 @@
    </item>
    <item>
     <widget class="QLabel" name="cast_note">
-     <property name="text">
-      <string>Chromecasts and other devices you play on get their music from Clementine through the network remote, so they need it turned on, and listening on an address in their network.</string>
-     </property>
      <property name="wordWrap">
       <bool>true</bool>
      </property>
@@ -176,9 +173,6 @@ When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address
       </item>
       <item row="4" column="0" colspan="2">
        <widget class="QCheckBox" name="allow_streaming">
-        <property name="toolTip">
-         <string>Let a phone or tablet running Clementine Remote act as the speaker, and choose where Clementine plays: Clementine keeps the playlist and streams the audio to the device.</string>
-        </property>
         <property name="text">
          <string>Allow playing on remote devices</string>
         </property>
