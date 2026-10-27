@@ -74,7 +74,7 @@ set(INCLUDE_GIT_REVISION ON)
 
 # Version numbers in Clementine:
 #   Deb:
-#     With git:    $tagname-$commitcount-g$sha1
+#     With git:    $tagname-$commitcount.dev-g$sha1
 #     Without git: $major.$minor.$patch[~$prerelease]
 #
 #   Rpm:           Version                 Release
@@ -83,7 +83,7 @@ set(INCLUDE_GIT_REVISION ON)
 #     With git:    $tagname                2.$commitcount.g$sha1
 #
 #   QtSparkle (Windows):
-#     With git:    $tagname-$commitcount-g$sha1
+#     With git:    $tagname-$commitcount.dev-g$sha1
 #     Without git: $major.$minor.$patch[$prerelease]
 #
 #   Mac info.plist: CFBundleVersion
@@ -173,12 +173,17 @@ if(GIT_PARTS_LENGTH EQUAL 3)
   set(HAS_GIT_REVISION ON)
 endif(GIT_PARTS_LENGTH EQUAL 3)
 
-# GIT_REV is in plain describe's own wording, which the displayed and Debian
-# versions use: the tag alone on a numbered release.
+# GIT_REV is what the displayed and Debian versions use: the tag alone on a
+# numbered release. A development build is 1.4.3-12.dev-g4c062729d rather than
+# describe's 1.4.3-12-g4c062729d, and its release on GitHub is tagged that too.
+# GitHub lists a day's releases by their tags as semantic versions, which would
+# compare "12-g4c062729d" as text and put 9 above 12; after the dot, the count
+# is a number of its own. The "-g" stays for release-monitoring.org's filter,
+# which hides development builds by it.
 if(GIT_COMMITCOUNT EQUAL 0)
   set(GIT_REV ${GIT_TAGNAME})
 else()
-  set(GIT_REV ${GIT_REV_LONG})
+  set(GIT_REV "${GIT_TAGNAME}-${GIT_COMMITCOUNT}.dev-${GIT_SHA1}")
 endif()
 
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)
