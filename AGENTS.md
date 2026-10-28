@@ -26,9 +26,10 @@ After committing, check that git sees it:
 
 ## Stacked pull requests
 
-CI only runs on pull requests into `master`, so a pull request that builds on
-another one still targets `master`. Its description starts by naming the pull
-requests it depends on, and which of its commits to review until they merge.
+A pull request that builds on another one targets that one's branch, so that
+it shows only its own commits. Its description starts by naming the pull
+requests it depends on. CI runs on pull requests into any branch, so it's
+checked against what it builds on.
 
 Pull requests are merged by squashing or rebasing, which gives their commits
 new hashes, so the branches built on them still carry the old ones. When one
@@ -39,5 +40,5 @@ their own commits:
 
 `git patch-id --stable` on the branch's commit and the merged one shows
 whether what merged is what the branch had. Then build, run the tests, push
-with `--force-with-lease`, and update the commits to review in each
-description.
+with `--force-with-lease`, point each at `master` if GitHub hasn't already
+(`gh pr edit <number> --base master`), and update its description.
