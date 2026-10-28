@@ -3,6 +3,8 @@ syntax = "proto2";
 package cpb.tagreader;
 
 message SongMetadata {
+  // buf:lint:ignore ENUM_VALUE_PREFIX
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
   enum Type {
     UNKNOWN = 0;
     ASF = 1;

@@ -23,6 +23,8 @@ syntax = "proto2";
 package cpb.remote;
 
 // The supported message types
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 enum MsgType {
   UNKNOWN = 0;
   // Messages generally send from client to server
@@ -127,6 +129,9 @@ enum MsgType {
 }
 
 // Valid Engine states
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
+// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 enum EngineState {
   Empty = 0;
   Idle = 1;
@@ -136,6 +141,8 @@ enum EngineState {
 
 // Song Metadata
 message SongMetadata {
+  // buf:lint:ignore ENUM_VALUE_PREFIX
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
   enum Type {
     UNKNOWN = 0;
     ASF = 1;
@@ -195,6 +202,9 @@ message Playlist {
 }
 
 // Valid Repeatmodes
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
+// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 enum RepeatMode {
   Repeat_Off = 0;
   Repeat_Track = 1;
@@ -205,6 +215,9 @@ enum RepeatMode {
 }
 
 // Valid Shuffle modes
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
+// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 enum ShuffleMode {
   Shuffle_Off = 0;
   Shuffle_All = 1;
@@ -304,6 +317,9 @@ message RequestConnect {
 }
 
 // Respone, why the connection was closed
+// buf:lint:ignore ENUM_FIRST_VALUE_ZERO
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
 enum ReasonDisconnect {
   Server_Shutdown = 1;
   Wrong_Auth_Code = 2;
@@ -384,6 +400,9 @@ message Lyric {
 }
 
 // Message request for downloading songs
+// buf:lint:ignore ENUM_FIRST_VALUE_ZERO
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
 enum DownloadItem {
   CurrentItem = 1;
   ItemAlbum = 2;
@@ -452,6 +471,9 @@ message ResponseTranscoderStatus {
   optional int32 total = 2;
 }
 
+// buf:lint:ignore ENUM_FIRST_VALUE_ZERO
+// buf:lint:ignore ENUM_VALUE_PREFIX
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
 enum GlobalSearchStatus {
   GlobalSearchStarted = 1;
   GlobalSearchFinished = 2;
@@ -474,6 +496,8 @@ message FileMetadata {
 }
 
 message ResponseListFiles {
+  // buf:lint:ignore ENUM_VALUE_PREFIX
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
   enum Error {
     NONE = 0;
     ROOT_DIR_NOT_SET = 1;
