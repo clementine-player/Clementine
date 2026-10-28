@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - master
+  # Into any branch, so that a pull request stacked on another's branch is
+  # checked too. Only pushes to master publish anything.
   pull_request:
-    branches:
-      - master
   # release.yml, for a numbered release: the same builds, from the commit it
   # tagged, released as the latest release.
   workflow_call:
