@@ -78,7 +78,7 @@ msgstr " שניות"
 msgid " songs"
 msgstr " שירים"
 
-#: ui/networkremotesettingspage.cpp:186
+#: ui/networkremotesettingspage.cpp:204
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr ""
@@ -88,7 +88,7 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 אלבומים"
 
-#: chromecast/chromecastengine.cpp:262
+#: chromecast/chromecastengine.cpp:261
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
@@ -115,9 +115,49 @@ msgstr "%1 ימים"
 msgid "%1 days ago"
 msgstr "לפני %1 ימים"
 
-#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote is
+#. on, but couldn't open its port, usually because another program has
+#. it. %1 is the device's name; %2 is the port number, such as 5500.
+#: networkremote/streaming/rendererregistry.cpp:437
 #, qt-format
-msgid "%1 isn't on a network the network remote listens on"
+msgid ""
+"%1 gets its music from Clementine through the network remote, which couldn't"
+" listen on port %2. Another program may be using it."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote only
+#. listens on addresses the user chose (Settings, Network Remote), and
+#. none is on the device's network. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:448
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which doesn't "
+"listen on an address in %1's network."
+msgstr ""
+
+#. TRANSLATORS: Shown when the user picks a Chromecast or other device
+#. to play on, and it can't get the music. Such devices download the
+#. audio from Clementine through the network remote, the server the
+#. phone remote apps also connect to (Settings, Network Remote). %1 is
+#. the device's name, such as "Living Room TV".
+#: networkremote/streaming/rendererregistry.cpp:429
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which is "
+"turned off."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote's
+#. "Only allow connections from the local network" setting refuses it,
+#. since its address isn't a private one. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:456
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which only "
+"allows connections from the local network, and %1 isn't on it."
 msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
@@ -417,7 +457,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>מילים שמורות מתחילות ב־%, לדוגמה: %artist %album %title </p>\n\n<p>סגירת טקסט בסוגריים מסולסלות משני צדיו תגרום להסתרתו במקרה שהטקסט מכיל מילה שמורה אשר לא מכילה כלום.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:285
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -542,7 +582,7 @@ msgstr "הוספת תזרים אחר..."
 msgid "Add directory..."
 msgstr "הוספת תיקייה..."
 
-#: ui/mainwindow.cpp:2156
+#: ui/mainwindow.cpp:2164
 msgid "Add file"
 msgstr ""
 
@@ -566,7 +606,7 @@ msgstr "הוספת קובצי מוזיקה להמרה"
 msgid "Add files..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2191
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "הוספת תיקייה"
@@ -663,7 +703,7 @@ msgstr "הוספת תג שנה לשיר"
 msgid "Add stream..."
 msgstr "הוספת תזרים"
 
-#: ui/mainwindow.cpp:1957
+#: ui/mainwindow.cpp:1965
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
@@ -753,7 +793,7 @@ msgstr "אלבומים ללא עטיפה"
 msgid "All"
 msgstr ""
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "כל הקבצים (*)"
 
@@ -762,7 +802,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:293
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "All addresses"
 msgstr ""
 
@@ -791,11 +831,11 @@ msgstr "כל המתרגמים"
 msgid "All tracks"
 msgstr "כל הרצועות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:298
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Allow downloads"
 msgstr ""
 
@@ -803,7 +843,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "מתן האפשרות לקידוד mid/side"
 
-#: ../bin/src/ui_networkremotesettingspage.h:304
+#: ../bin/src/ui_networkremotesettingspage.h:308
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -897,7 +937,7 @@ msgstr ""
 msgid "Artist"
 msgstr "אמן"
 
-#: ui/mainwindow.cpp:299
+#: ui/mainwindow.cpp:307
 msgid "Artist info"
 msgstr "מידע על האמן"
 
@@ -910,7 +950,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:310
+#: ../bin/src/ui_networkremotesettingspage.h:314
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "להמיר לתבנית"
@@ -1174,7 +1214,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:856
+#: ui/mainwindow.cpp:864
 msgid "Check for updates..."
 msgstr "בדיקת עדכונים..."
 
@@ -1222,6 +1262,18 @@ msgstr ""
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
+msgstr ""
+
+#. TRANSLATORS: On the Network Remote settings page, under "Use a
+#. network remote control". Chromecasts, and other devices Clementine
+#. can play on, download the audio from Clementine through the network
+#. remote, so they only work while it's on, listening on an address in
+#. the device's network.
+#: ui/networkremotesettingspage.cpp:62
+msgid ""
+"Chromecasts and other devices you play on get their music from Clementine "
+"through the network remote, so they need it turned on, and listening on an "
+"address in their network."
 msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
@@ -1418,7 +1470,7 @@ msgstr ""
 msgid "Configure Magnatune..."
 msgstr "הגדרת Magnatune..."
 
-#: internet/plex/plexservice.cpp:125
+#: internet/plex/plexservice.cpp:127
 msgid "Configure Plex..."
 msgstr ""
 
@@ -1434,7 +1486,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:689
+#: ui/mainwindow.cpp:697
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
@@ -1505,11 +1557,11 @@ msgstr "המרת כל המוזיקה"
 msgid "Convert any music that the device can't play"
 msgstr "המרת כל המוזיקה שהתקן זה לא מסוגל לנגן"
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:311
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1518,11 +1570,11 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:747
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "העתקה לספרייה..."
@@ -1570,7 +1622,7 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: internet/plex/plexauthenticator.cpp:163
+#: internet/plex/plexauthenticator.cpp:167
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr ""
@@ -1767,7 +1819,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2540 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1775,7 +1827,7 @@ msgstr "מחיקת קבצים"
 msgid "Delete from device..."
 msgstr "מחיקה מתוך התקן..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:760
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "מחיקה מתוך דיסק..."
@@ -1808,11 +1860,11 @@ msgstr "הקבצים נמחקים"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1870
+#: ui/mainwindow.cpp:1878
 msgid "Dequeue selected tracks"
 msgstr "הסרת הרצועות הנבחרות מהתור"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1876
 msgid "Dequeue track"
 msgstr "הסרת הרצועה מהתור"
 
@@ -1845,7 +1897,7 @@ msgstr "שם ההתקן"
 msgid "Device properties..."
 msgstr "מאפייני ההתקן..."
 
-#: ui/mainwindow.cpp:292
+#: ui/mainwindow.cpp:300
 msgid "Devices"
 msgstr "התקנים"
 
@@ -1991,7 +2043,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:320
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid "Download Clementine Remote for Android"
 msgstr ""
 
@@ -2016,7 +2068,7 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Download settings"
 msgstr ""
 
@@ -2086,7 +2138,7 @@ msgstr "מיקס דינמי אקראי"
 msgid "Edit smart playlist..."
 msgstr "עריכת רשימת השמעה חכמה..."
 
-#: ui/mainwindow.cpp:1920
+#: ui/mainwindow.cpp:1928
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2182,8 +2234,8 @@ msgstr ""
 msgid "Enter a new name for this playlist"
 msgstr "שם חדש לרשימת השמעה זו"
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
-#: ../bin/src/ui_networkremotesettingspage.h:295
+#: ../bin/src/ui_networkremotesettingspage.h:297
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2234,7 +2286,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2493 ui/mainwindow.cpp:2671
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "שגיאה"
@@ -2458,7 +2510,7 @@ msgstr "אחזור אוטומטי"
 msgid "Fetch completed"
 msgstr "אחזור המידע הושלם"
 
-#: internet/plex/plexservice.cpp:416
+#: internet/plex/plexservice.cpp:487
 msgid "Fetching Plex library"
 msgstr ""
 
@@ -2513,11 +2565,11 @@ msgstr "שם הקובץ"
 msgid "Filename Preview"
 msgstr ""
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:290
 msgid "Files"
 msgstr "קבצים"
 
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Files root folder"
 msgstr ""
 
@@ -2956,7 +3008,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:296
 msgid "Internet"
 msgstr "אינטרנט"
 
@@ -2981,7 +3033,7 @@ msgstr "תבנית לא תקינה"
 msgid "Invert Selection"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:303
+#: upnp/upnpmediaplayer.cpp:317
 msgid "It was stopped from somewhere else"
 msgstr ""
 
@@ -3107,14 +3159,17 @@ msgstr ""
 msgid "Length"
 msgstr "אורך"
 
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
+#. for phones running the Clementine Remote app, which can act as the
+#. speaker and choose where Clementine plays; Chromecasts don't need it.
+#: ui/networkremotesettingspage.cpp:69
 msgid ""
-"Let a connected device, or a Chromecast or other Cast device on your "
-"network, act as the speaker: Clementine keeps the playlist and streams the "
-"audio to it."
+"Let a phone or tablet running Clementine Remote act as the speaker, and "
+"choose where Clementine plays: Clementine keeps the playlist and streams the"
+" audio to the device."
 msgstr ""
 
-#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:272 ui/mainwindow.cpp:287
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "ספרייה"
@@ -3123,7 +3178,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2795
+#: ui/mainwindow.cpp:2814
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3139,7 +3194,7 @@ msgstr ""
 msgid "Limits"
 msgstr "הגבלות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:299
 msgid "Listen on"
 msgstr ""
 
@@ -3469,7 +3524,7 @@ msgstr "נקודות עגינה"
 msgid "Move down"
 msgstr "הזזה מטה"
 
-#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:750 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "העברה לספרייה..."
 
@@ -3478,7 +3533,7 @@ msgstr "העברה לספרייה..."
 msgid "Move up"
 msgstr "הזזה מעלה"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2166
 msgid "Music"
 msgstr ""
 
@@ -3486,7 +3541,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "ספריית המוזיקה"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:323
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3517,8 +3572,16 @@ msgstr "פס צר (NB)"
 msgid "Network Proxy"
 msgstr "מתווך רשת"
 
-#: ../bin/src/ui_networkremotesettingspage.h:270
+#: ../bin/src/ui_networkremotesettingspage.h:277
 msgid "Network Remote"
+msgstr ""
+
+#. TRANSLATORS: A button that opens the Network Remote page of the
+#. settings, where the user can fix why a Chromecast or other device
+#. can't get music from Clementine. "Network Remote" is that page's
+#. name.
+#: widgets/outputbutton.cpp:198
+msgid "Network Remote Settings..."
 msgstr ""
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
@@ -3544,7 +3607,7 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1982 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "רשימת השמעה חדשה"
 
@@ -3630,7 +3693,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2494 ui/mainwindow.cpp:2672
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3721,7 +3784,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:275
+#: ../bin/src/ui_networkremotesettingspage.h:282
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3732,11 +3795,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:283
+#: ../bin/src/ui_networkremotesettingspage.h:290
 msgid "Only allow connections from the local network"
 msgstr ""
 
-#: ui/networkremotesettingspage.cpp:208
+#: ui/networkremotesettingspage.cpp:226
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3823,7 +3886,7 @@ msgid "Optimize for quality"
 msgstr "מיטוב לאיכות"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:315
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "אפשרויות"
@@ -3836,7 +3899,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "ארגון קבצים"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:753
 msgid "Organise files..."
 msgstr "ארגון קבצים..."
 
@@ -3921,7 +3984,7 @@ msgstr "מסיבה"
 msgid "Password"
 msgstr "ססמה"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
 #: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "השהייה"
@@ -3957,8 +4020,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
-#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
+#: ui/mainwindow.cpp:1181 ui/mainwindow.cpp:1777 ui/qtsystemtrayicon.cpp:231
 #: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3989,15 +4052,23 @@ msgstr "ניגון אם מושהה, השהייה אם מנגן"
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1889
 msgid "Play next"
 msgstr ""
 
-#: widgets/outputbutton.cpp:106
+#. TRANSLATORS: The title of the message shown when the user picks a
+#. Chromecast or other device to play on, and it can't get the music from
+#. Clementine's network remote. %1 is the device's name.
+#: widgets/outputbutton.cpp:178
+#, qt-format
+msgid "Play on %1"
+msgstr ""
+
+#: widgets/outputbutton.cpp:115
 msgid "Play on another device"
 msgstr ""
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1887
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -4017,7 +4088,7 @@ msgstr "השמעה"
 msgid "Player options"
 msgstr "אפשרויות נגן"
 
-#: widgets/outputbutton.cpp:107
+#: widgets/outputbutton.cpp:116
 #, qt-format
 msgid "Playing on %1"
 msgstr ""
@@ -4041,7 +4112,7 @@ msgstr "אפשרויות רשימת ההשמעה"
 msgid "Playlist type"
 msgstr "סוג רשימת ההשמעה"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:293
 msgid "Playlists"
 msgstr ""
 
@@ -4054,7 +4125,7 @@ msgstr ""
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
 
-#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+#: internet/plex/plexservice.cpp:143 ../bin/src/ui_plexsettingspage.h:139
 msgid "Plex"
 msgstr ""
 
@@ -4104,7 +4175,7 @@ msgid "Popup duration"
 msgstr "משך זמן חלונית קופצת"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:273
+#: ../bin/src/ui_networkremotesettingspage.h:280
 msgid "Port"
 msgstr "פתחה"
 
@@ -4250,12 +4321,12 @@ msgstr "התקן מתושאל..."
 msgid "Queue Manager"
 msgstr "מנהל התור"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1882
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1872
+#: ui/mainwindow.cpp:1880
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
@@ -4338,7 +4409,7 @@ msgid "Refresh"
 msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:289
-#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:125 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "רענון הקטלוג"
 
@@ -4474,7 +4545,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "איכלוס מחדש"
 
-#: ../bin/src/ui_networkremotesettingspage.h:287
+#: ../bin/src/ui_networkremotesettingspage.h:294
 msgid "Require authentication code"
 msgstr ""
 
@@ -4531,7 +4602,7 @@ msgstr ""
 msgid "Rock"
 msgstr "רוק"
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4671,7 +4742,7 @@ msgstr ""
 msgid "Search"
 msgstr "חיפוש"
 
-#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:284 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4692,7 +4763,7 @@ msgstr "חיפוש ב־Jamendo"
 msgid "Search Magnatune"
 msgstr "חיפוש ב־Magnatune"
 
-#: internet/plex/plexservice.cpp:110
+#: internet/plex/plexservice.cpp:112
 msgid "Search Plex"
 msgstr ""
 
@@ -4704,7 +4775,7 @@ msgstr ""
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:726
+#: ui/mainwindow.cpp:734
 msgid "Search for album"
 msgstr ""
 
@@ -4717,7 +4788,7 @@ msgstr "חיפוש אחר עטיפות אלבום..."
 msgid "Search for anything"
 msgstr ""
 
-#: ui/mainwindow.cpp:723
+#: ui/mainwindow.cpp:731
 msgid "Search for artist"
 msgstr ""
 
@@ -4838,7 +4909,7 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1927
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
@@ -4861,7 +4932,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "הגדרת הערך לכל הרצועות הנבחרות..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:272
+#: ../bin/src/ui_networkremotesettingspage.h:279
 msgid "Settings"
 msgstr ""
 
@@ -4928,7 +4999,7 @@ msgstr "הצגת חיווי מסך נאה"
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
-#: ui/mainwindow.cpp:673
+#: ui/mainwindow.cpp:681
 msgid "Show all songs"
 msgstr "הצגת כל השירים"
 
@@ -4948,12 +5019,12 @@ msgstr "הצגת חוצצים"
 msgid "Show fullsize..."
 msgstr "הצגה על מסך מלא..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:763
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "הצגה בסייר הקבצים..."
 
-#: ui/mainwindow.cpp:757
+#: ui/mainwindow.cpp:765
 msgid "Show in library..."
 msgstr ""
 
@@ -4965,11 +5036,11 @@ msgstr "הצגה תחת אמנים שונים"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:675
+#: ui/mainwindow.cpp:683
 msgid "Show only duplicates"
 msgstr "הצגת כפילויות בלבד"
 
-#: ui/mainwindow.cpp:677
+#: ui/mainwindow.cpp:685
 msgid "Show only untagged"
 msgstr "הצגת לא מתוייגים בלבד"
 
@@ -5070,7 +5141,7 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
-#: ui/mainwindow.cpp:1890
+#: ui/mainwindow.cpp:1898
 msgid "Skip selected tracks"
 msgstr ""
 
@@ -5078,7 +5149,7 @@ msgstr ""
 msgid "Skip to the next album"
 msgstr ""
 
-#: ui/mainwindow.cpp:1888
+#: ui/mainwindow.cpp:1896
 msgid "Skip track"
 msgstr ""
 
@@ -5106,7 +5177,7 @@ msgstr "רך"
 msgid "Soft Rock"
 msgstr "רוק קל"
 
-#: upnp/upnpmediaplayer.cpp:257
+#: upnp/upnpmediaplayer.cpp:270
 msgid "Something else is playing on it now"
 msgstr ""
 
@@ -5118,7 +5189,7 @@ msgstr "מידע על השיר"
 msgid "Song Metadata"
 msgstr ""
 
-#: ui/mainwindow.cpp:296
+#: ui/mainwindow.cpp:304
 msgid "Song info"
 msgstr "מידע על השיר"
 
@@ -5213,7 +5284,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:718 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
@@ -5373,11 +5444,11 @@ msgstr ""
 msgid "The format is only updated when a pipeline starts."
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:307
+#: upnp/upnpmediaplayer.cpp:321
 msgid "The renderer couldn't play it"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
 #, qt-format
 msgid "The renderer couldn't play it: %1"
 msgstr ""
@@ -5408,7 +5479,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2786
+#: ui/mainwindow.cpp:2805
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5454,7 +5525,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2541 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5486,7 +5557,7 @@ msgstr "אלבום זה לא זמין בפורמט המבוקש"
 msgid "This can be changed later through the preferences"
 msgstr ""
 
-#: widgets/outputbutton.cpp:67
+#: widgets/outputbutton.cpp:76
 msgid "This computer"
 msgstr ""
 
@@ -5550,7 +5621,7 @@ msgstr "החלפה ל/ממצב חיווי נאה"
 msgid "Toggle fullscreen"
 msgstr "הפעלה או כיבוי של מסך מלא"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1884
 msgid "Toggle queue status"
 msgstr "החלף מצב התור"
 
@@ -5637,9 +5708,25 @@ msgstr ""
 msgid "Turbine"
 msgstr "Turbine"
 
+#. TRANSLATORS: A button that turns on the network remote, so the chosen
+#. Chromecast or other device can play.
+#: widgets/outputbutton.cpp:191
+msgid "Turn On"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Turn off"
 msgstr "כבה"
+
+#. TRANSLATORS: Below the message saying the network remote is off,
+#. which a Chromecast or other device needs to play. Turning it on
+#. for the device also lets phones running the Clementine Remote app
+#. connect, which is why this warns about it.
+#: widgets/outputbutton.cpp:187
+msgid ""
+"Turning on the network remote also lets the Clementine Remote app, on phones"
+" and tablets in your network, control Clementine."
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
@@ -5706,11 +5793,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
-#: ui/mainwindow.cpp:1886
+#: ui/mainwindow.cpp:1894
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1884
+#: ui/mainwindow.cpp:1892
 msgid "Unskip track"
 msgstr ""
 
@@ -5789,7 +5876,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "שימוש בהודעות מותאמות אישית להתרעות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:271
+#: ../bin/src/ui_networkremotesettingspage.h:278
 msgid "Use a network remote control"
 msgstr ""
 
@@ -6050,7 +6137,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2793
+#: ui/mainwindow.cpp:2812
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
@@ -6167,7 +6254,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr "פרטי החיבור שלך ל־Magnatune שגויים."
 
-#: internet/plex/plexauthenticator.cpp:162
+#: internet/plex/plexauthenticator.cpp:166
 msgid "Your Plex sign-in has expired. Please sign in again."
 msgstr ""
 
@@ -6242,7 +6329,7 @@ msgstr "הכי גדול קודם"
 msgid "bpm"
 msgstr "פעימות לדקה"
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6353,7 +6440,7 @@ msgstr "ב־"
 msgid "options"
 msgstr "אפשרויות"
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:325
 msgid "or scan the QR code: "
 msgstr ""
 

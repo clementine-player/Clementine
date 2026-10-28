@@ -84,7 +84,7 @@ msgstr " sekund"
 msgid " songs"
 msgstr " písně"
 
-#: ui/networkremotesettingspage.cpp:186
+#: ui/networkremotesettingspage.cpp:204
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (nyní nedostupné)"
@@ -94,7 +94,7 @@ msgstr "%1 (nyní nedostupné)"
 msgid "%1 albums"
 msgstr "%1 alb"
 
-#: chromecast/chromecastengine.cpp:262
+#: chromecast/chromecastengine.cpp:261
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
@@ -121,10 +121,50 @@ msgstr "%1 dnů"
 msgid "%1 days ago"
 msgstr "před %1 dny"
 
-#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote is
+#. on, but couldn't open its port, usually because another program has
+#. it. %1 is the device's name; %2 is the port number, such as 5500.
+#: networkremote/streaming/rendererregistry.cpp:437
 #, qt-format
-msgid "%1 isn't on a network the network remote listens on"
-msgstr "%1 není připojen k síti, na které síťový server naslouchá"
+msgid ""
+"%1 gets its music from Clementine through the network remote, which couldn't"
+" listen on port %2. Another program may be using it."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote only
+#. listens on addresses the user chose (Settings, Network Remote), and
+#. none is on the device's network. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:448
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which doesn't "
+"listen on an address in %1's network."
+msgstr ""
+
+#. TRANSLATORS: Shown when the user picks a Chromecast or other device
+#. to play on, and it can't get the music. Such devices download the
+#. audio from Clementine through the network remote, the server the
+#. phone remote apps also connect to (Settings, Network Remote). %1 is
+#. the device's name, such as "Living Room TV".
+#: networkremote/streaming/rendererregistry.cpp:429
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which is "
+"turned off."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote's
+#. "Only allow connections from the local network" setting refuses it,
+#. since its address isn't a private one. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:456
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which only "
+"allows connections from the local network, and %1 isn't on it."
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -423,7 +463,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Symboly začínají %, například: %artist %album %title </p>\n\n<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato část bude skryta, je-li symbol prázdný.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:285
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient se může připojit jen tehdy, když byl zadán správný kód."
 
@@ -548,7 +588,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2156
+#: ui/mainwindow.cpp:2164
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -572,7 +612,7 @@ msgstr "Přidat soubory pro překódování"
 msgid "Add files..."
 msgstr "Přidat soubory..."
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2191
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -669,7 +709,7 @@ msgstr "Přidat značku rok písně"
 msgid "Add stream..."
 msgstr "Přidat proud..."
 
-#: ui/mainwindow.cpp:1957
+#: ui/mainwindow.cpp:1965
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -759,7 +799,7 @@ msgstr "Alba bez obalů"
 msgid "All"
 msgstr "Vše"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Všechny soubory (*)"
 
@@ -768,7 +808,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Slavící kuňka!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:293
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "All addresses"
 msgstr "Všechny adresy"
 
@@ -797,11 +837,11 @@ msgstr "Všichni překladatelé"
 msgid "All tracks"
 msgstr "Všechny skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:298
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Allow a client to download music from this computer."
 msgstr "Povolit klientu stahování hudby z tohoto počítače."
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Allow downloads"
 msgstr "Povolit stahování"
 
@@ -809,7 +849,7 @@ msgstr "Povolit stahování"
 msgid "Allow mid/side encoding"
 msgstr "Povolit kódování střed/kraj"
 
-#: ../bin/src/ui_networkremotesettingspage.h:304
+#: ../bin/src/ui_networkremotesettingspage.h:308
 msgid "Allow playing on remote devices"
 msgstr "Povolit přehrávání ve vzdálených zařízeních"
 
@@ -903,7 +943,7 @@ msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech p
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:299
+#: ui/mainwindow.cpp:307
 msgid "Artist info"
 msgstr "Umělec"
 
@@ -916,7 +956,7 @@ msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:310
+#: ../bin/src/ui_networkremotesettingspage.h:314
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Zvukový formát"
@@ -1180,7 +1220,7 @@ msgstr "Podívat se po nových dílech"
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:856
+#: ui/mainwindow.cpp:864
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
@@ -1229,6 +1269,18 @@ msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr "Vyberte, které soubory může Clementine vidět. Clementine bude mít přístup pouze k souborům, které zde vyberete."
+
+#. TRANSLATORS: On the Network Remote settings page, under "Use a
+#. network remote control". Chromecasts, and other devices Clementine
+#. can play on, download the audio from Clementine through the network
+#. remote, so they only work while it's on, listening on an address in
+#. the device's network.
+#: ui/networkremotesettingspage.cpp:62
+msgid ""
+"Chromecasts and other devices you play on get their music from Clementine "
+"through the network remote, so they need it turned on, and listening on an "
+"address in their network."
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
@@ -1424,7 +1476,7 @@ msgstr "Nastavit %1..."
 msgid "Configure Magnatune..."
 msgstr "Nastavit Magnatune..."
 
-#: internet/plex/plexservice.cpp:125
+#: internet/plex/plexservice.cpp:127
 msgid "Configure Plex..."
 msgstr "Nastavit Plex..."
 
@@ -1440,7 +1492,7 @@ msgstr "Nastavit Subsonic..."
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:689
+#: ui/mainwindow.cpp:697
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
@@ -1511,11 +1563,11 @@ msgstr "Převést všechnu hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:311
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Převést zvukové soubory v bezztrátovém formátu, před jejich odesláním do vzdáleného úložiště."
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Convert lossless files"
 msgstr "Převést soubory v bezztrátovém formátu"
 
@@ -1524,11 +1576,11 @@ msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:747
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1576,7 +1628,7 @@ msgstr "Nepodařilo se přihlásit se k Last.fm. Zkuste to, prosím, znovu.."
 msgid "Couldn't create playlist"
 msgstr "Nepodařilo se vytvořit seznam skladeb"
 
-#: internet/plex/plexauthenticator.cpp:163
+#: internet/plex/plexauthenticator.cpp:167
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Nepodařilo se natáhnout vaše servery Plex: %1"
@@ -1773,7 +1825,7 @@ msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2540 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1781,7 +1833,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:760
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1814,11 +1866,11 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1870
+#: ui/mainwindow.cpp:1878
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1876
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1851,7 +1903,7 @@ msgstr "Název zařízení"
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:292
+#: ui/mainwindow.cpp:300
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -1997,7 +2049,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Stáhnout %n dílů"
 
-#: ../bin/src/ui_networkremotesettingspage.h:320
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid "Download Clementine Remote for Android"
 msgstr "Stáhnout Clementine Remote pro Android"
 
@@ -2022,7 +2074,7 @@ msgstr "Stáhnout nové díly automaticky"
 msgid "Download queued"
 msgstr "Stáhnout zařazené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Download settings"
 msgstr "Nastavení stahování"
 
@@ -2092,7 +2144,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1920
+#: ui/mainwindow.cpp:1928
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2188,8 +2240,8 @@ msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 msgid "Enter a new name for this playlist"
 msgstr "Zadejte název tohoto seznamu skladeb"
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
-#: ../bin/src/ui_networkremotesettingspage.h:295
+#: ../bin/src/ui_networkremotesettingspage.h:297
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Zadejte v aplikaci jednu z těchto adres pro připojení ke Clementine."
 
@@ -2240,7 +2292,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2493 ui/mainwindow.cpp:2671
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Chyba"
@@ -2464,7 +2516,7 @@ msgstr "Stáhnout automaticky"
 msgid "Fetch completed"
 msgstr "Stahování dokončeno"
 
-#: internet/plex/plexservice.cpp:416
+#: internet/plex/plexservice.cpp:487
 msgid "Fetching Plex library"
 msgstr "Natahuje se knihovna Plex"
 
@@ -2519,11 +2571,11 @@ msgstr "Název souboru"
 msgid "Filename Preview"
 msgstr "Náhled názvu souboru"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:290
 msgid "Files"
 msgstr "Soubory"
 
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Files root folder"
 msgstr "Základní složka pro soubory"
 
@@ -2962,7 +3014,7 @@ msgstr "Instrumentální hudba"
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:296
 msgid "Internet"
 msgstr "Internet"
 
@@ -2987,9 +3039,9 @@ msgstr "Neplatný formát"
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
-#: upnp/upnpmediaplayer.cpp:303
+#: upnp/upnpmediaplayer.cpp:317
 msgid "It was stopped from somewhere else"
-msgstr ""
+msgstr "Bylo to zastaveno odjinud"
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3113,14 +3165,17 @@ msgstr "Vlevo"
 msgid "Length"
 msgstr "Délka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
+#. for phones running the Clementine Remote app, which can act as the
+#. speaker and choose where Clementine plays; Chromecasts don't need it.
+#: ui/networkremotesettingspage.cpp:69
 msgid ""
-"Let a connected device, or a Chromecast or other Cast device on your "
-"network, act as the speaker: Clementine keeps the playlist and streams the "
-"audio to it."
-msgstr "Nechte připojené zařízení, Chromecast nebo jiné zařízení s podporou Cast ve vaší síti, pracovat jako reproduktor: Clementine spravuje seznam skladeb a přenáší zvuk do něj."
+"Let a phone or tablet running Clementine Remote act as the speaker, and "
+"choose where Clementine plays: Clementine keeps the playlist and streams the"
+" audio to the device."
+msgstr ""
 
-#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:272 ui/mainwindow.cpp:287
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Sbírka"
@@ -3129,7 +3184,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2795
+#: ui/mainwindow.cpp:2814
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3145,7 +3200,7 @@ msgstr "Světlý"
 msgid "Limits"
 msgstr "Omezení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:299
 msgid "Listen on"
 msgstr "Poslechněte si dále"
 
@@ -3475,7 +3530,7 @@ msgstr "Přípojné body"
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:750 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3484,7 +3539,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2166
 msgid "Music"
 msgstr "Hudba"
 
@@ -3492,7 +3547,7 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Sbírka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:323
 msgid "Music extensions remotely visible"
 msgstr "Na dálku viditelné hudební přípony"
 
@@ -3523,9 +3578,17 @@ msgstr "Úzké pásmo"
 msgid "Network Proxy"
 msgstr "Síťová proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:270
+#: ../bin/src/ui_networkremotesettingspage.h:277
 msgid "Network Remote"
 msgstr "Ovládání"
+
+#. TRANSLATORS: A button that opens the Network Remote page of the
+#. settings, where the user can fix why a Chromecast or other device
+#. can't get music from Clementine. "Network Remote" is that page's
+#. name.
+#: widgets/outputbutton.cpp:198
+msgid "Network Remote Settings..."
+msgstr ""
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
@@ -3550,7 +3613,7 @@ msgstr "Nová alba"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1982 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3636,7 +3699,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2494 ui/mainwindow.cpp:2672
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3727,7 +3790,7 @@ msgstr "Zapnuto"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:275
+#: ../bin/src/ui_networkremotesettingspage.h:282
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3738,11 +3801,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "Přijímat pouze připojení od klientů v následujících rozsazích IP adres:\n10.x.x.x\n172.16.0.0 – 172.31.255.255\n192.168.x.x\na z adres IPv6 typu link-local a soukromých.\n\nPři naslouchání na zvolené adrese v rozsahu 100.64.0.0/10, například na adrese Tailscale, se připojení z tohoto rozsahu rovněž považují za místní."
 
-#: ../bin/src/ui_networkremotesettingspage.h:283
+#: ../bin/src/ui_networkremotesettingspage.h:290
 msgid "Only allow connections from the local network"
 msgstr "Povolit spojení pouze z místní sítě"
 
-#: ui/networkremotesettingspage.cpp:208
+#: ui/networkremotesettingspage.cpp:226
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3829,7 +3892,7 @@ msgid "Optimize for quality"
 msgstr "Optimalizovat s ohledem na kvalitu"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:315
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Volby..."
@@ -3842,7 +3905,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:753
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3927,7 +3990,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
 #: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3963,8 +4026,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
-#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
+#: ui/mainwindow.cpp:1181 ui/mainwindow.cpp:1777 ui/qtsystemtrayicon.cpp:231
 #: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3995,15 +4058,23 @@ msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1889
 msgid "Play next"
 msgstr "Přehrát další"
 
-#: widgets/outputbutton.cpp:106
+#. TRANSLATORS: The title of the message shown when the user picks a
+#. Chromecast or other device to play on, and it can't get the music from
+#. Clementine's network remote. %1 is the device's name.
+#: widgets/outputbutton.cpp:178
+#, qt-format
+msgid "Play on %1"
+msgstr ""
+
+#: widgets/outputbutton.cpp:115
 msgid "Play on another device"
 msgstr "Přehrát na jiném zařízení"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1887
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
@@ -4023,7 +4094,7 @@ msgstr "Přehrávání"
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
-#: widgets/outputbutton.cpp:107
+#: widgets/outputbutton.cpp:116
 #, qt-format
 msgid "Playing on %1"
 msgstr "Přehrává se na %1"
@@ -4047,7 +4118,7 @@ msgstr "Nastavení seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:293
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -4060,7 +4131,7 @@ msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Otevřete, prosím, tuto adresu (URL) ve svém prohlížeči: <a href=\"%1\">%1</a>"
 
-#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+#: internet/plex/plexservice.cpp:143 ../bin/src/ui_plexsettingspage.h:139
 msgid "Plex"
 msgstr "Plex"
 
@@ -4110,7 +4181,7 @@ msgid "Popup duration"
 msgstr "Doba zobrazení oznámení"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:273
+#: ../bin/src/ui_networkremotesettingspage.h:280
 msgid "Port"
 msgstr "Port"
 
@@ -4256,12 +4327,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1882
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1872
+#: ui/mainwindow.cpp:1880
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4344,7 +4415,7 @@ msgid "Refresh"
 msgstr "Obnovit"
 
 #: internet/magnatune/magnatuneservice.cpp:289
-#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:125 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Obnovit katalog"
 
@@ -4480,7 +4551,7 @@ msgstr "Režim zesílení přehrávaných skladeb"
 msgid "Repopulate"
 msgstr "Znovu zaplnit"
 
-#: ../bin/src/ui_networkremotesettingspage.h:287
+#: ../bin/src/ui_networkremotesettingspage.h:294
 msgid "Require authentication code"
 msgstr "Vyžadovat ověřovací kód"
 
@@ -4537,7 +4608,7 @@ msgstr "Vytáhnout skladby ze zvukového CD"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Základní složka, kterou lze procházet ze síťového dálkového ovladače"
 
@@ -4677,7 +4748,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledání"
 
-#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:284 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledání"
@@ -4698,7 +4769,7 @@ msgstr "Hledat na Jamendu"
 msgid "Search Magnatune"
 msgstr "Hledat na Magnatune"
 
-#: internet/plex/plexservice.cpp:110
+#: internet/plex/plexservice.cpp:112
 msgid "Search Plex"
 msgstr "Vyhledat v Plexu"
 
@@ -4710,7 +4781,7 @@ msgstr "Hledat v Subsonic"
 msgid "Search automatically"
 msgstr "Hledat automaticky"
 
-#: ui/mainwindow.cpp:726
+#: ui/mainwindow.cpp:734
 msgid "Search for album"
 msgstr "Hledat album"
 
@@ -4723,7 +4794,7 @@ msgstr "Hledat obaly alb..."
 msgid "Search for anything"
 msgstr "Hledat vše"
 
-#: ui/mainwindow.cpp:723
+#: ui/mainwindow.cpp:731
 msgid "Search for artist"
 msgstr "Hledat umělce"
 
@@ -4844,7 +4915,7 @@ msgstr "Adresa serveru (URL)"
 msgid "Server details"
 msgstr "Podrobnosti o serveru"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1927
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4867,7 +4938,7 @@ msgstr "Nastavit %1 v nastavení Clementine v počítači"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavit hodnotu pro vybrané skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:272
+#: ../bin/src/ui_networkremotesettingspage.h:279
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -4934,7 +5005,7 @@ msgstr "Ukázat hezké OSD"
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:673
+#: ui/mainwindow.cpp:681
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4954,12 +5025,12 @@ msgstr "Ukazovat oddělovače"
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:763
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:757
+#: ui/mainwindow.cpp:765
 msgid "Show in library..."
 msgstr "Ukázat ve sbírce..."
 
@@ -4971,11 +5042,11 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Zobrazit ukazatel nálady"
 
-#: ui/mainwindow.cpp:675
+#: ui/mainwindow.cpp:683
 msgid "Show only duplicates"
 msgstr "Ukázat pouze opakovaně zařazené"
 
-#: ui/mainwindow.cpp:677
+#: ui/mainwindow.cpp:685
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
@@ -5076,7 +5147,7 @@ msgstr "Přeskočit soubory s těmito příponami (odděleny čárkou, rozlišuj
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1890
+#: ui/mainwindow.cpp:1898
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
@@ -5084,7 +5155,7 @@ msgstr "Přeskočit vybrané skladby"
 msgid "Skip to the next album"
 msgstr "Skočit na další album"
 
-#: ui/mainwindow.cpp:1888
+#: ui/mainwindow.cpp:1896
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -5112,9 +5183,9 @@ msgstr "Měkké"
 msgid "Soft Rock"
 msgstr "Soft rock"
 
-#: upnp/upnpmediaplayer.cpp:257
+#: upnp/upnpmediaplayer.cpp:270
 msgid "Something else is playing on it now"
-msgstr ""
+msgstr "Teď na něm hraje něco jiného"
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5124,7 +5195,7 @@ msgstr "Píseň"
 msgid "Song Metadata"
 msgstr "Popis"
 
-#: ui/mainwindow.cpp:296
+#: ui/mainwindow.cpp:304
 msgid "Song info"
 msgstr "Píseň"
 
@@ -5219,7 +5290,7 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after every track"
 msgstr "Zastavit po každé skladbě"
 
-#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:718 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -5379,14 +5450,14 @@ msgstr "Objevitel je zaneprázdněn"
 msgid "The format is only updated when a pipeline starts."
 msgstr "Formát se aktualizuje pouze při spuštění roury."
 
-#: upnp/upnpmediaplayer.cpp:307
+#: upnp/upnpmediaplayer.cpp:321
 msgid "The renderer couldn't play it"
-msgstr ""
+msgstr "Přehrávač to nedokázal přehrát"
 
-#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
 #, qt-format
 msgid "The renderer couldn't play it: %1"
-msgstr ""
+msgstr "Přehrávač to nedokázal přehrát: %1"
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5414,7 +5485,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2786
+#: ui/mainwindow.cpp:2805
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5460,7 +5531,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2541 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5492,7 +5563,7 @@ msgstr "Album není v požadovaném formátu dostupné"
 msgid "This can be changed later through the preferences"
 msgstr "Toto lze změnit později v nastavení"
 
-#: widgets/outputbutton.cpp:67
+#: widgets/outputbutton.cpp:76
 msgid "This computer"
 msgstr "Tento počítač"
 
@@ -5556,7 +5627,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1884
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5643,9 +5714,25 @@ msgstr "Zkusit odhadnout chybějící popisná data"
 msgid "Turbine"
 msgstr "Turbína"
 
+#. TRANSLATORS: A button that turns on the network remote, so the chosen
+#. Chromecast or other device can play.
+#: widgets/outputbutton.cpp:191
+msgid "Turn On"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Turn off"
 msgstr "Vypnout"
+
+#. TRANSLATORS: Below the message saying the network remote is off,
+#. which a Chromecast or other device needs to play. Turning it on
+#. for the device also lets phones running the Clementine Remote app
+#. connect, which is why this warns about it.
+#: widgets/outputbutton.cpp:187
+msgid ""
+"Turning on the network remote also lets the Clementine Remote app, on phones"
+" and tablets in your network, control Clementine."
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
@@ -5712,11 +5799,11 @@ msgstr "Neznámý typ souboru: %1"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1886
+#: ui/mainwindow.cpp:1894
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1884
+#: ui/mainwindow.cpp:1892
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5795,7 +5882,7 @@ msgstr "Použít vlastní sadu barev"
 msgid "Use a custom message for notifications"
 msgstr "Použít vlastní zprávu pro oznámení"
 
-#: ../bin/src/ui_networkremotesettingspage.h:271
+#: ../bin/src/ui_networkremotesettingspage.h:278
 msgid "Use a network remote control"
 msgstr "Použít síťové dálkové ovládání"
 
@@ -6056,7 +6143,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2793
+#: ui/mainwindow.cpp:2812
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -6173,7 +6260,7 @@ msgstr "Platnost vašeho přihlášení do Dropboxu vypršela. Přihlaste se zno
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaše přihlašovací údaje k Magnatune byly nesprávné"
 
-#: internet/plex/plexauthenticator.cpp:162
+#: internet/plex/plexauthenticator.cpp:166
 msgid "Your Plex sign-in has expired. Please sign in again."
 msgstr "Vaše přihlášení do služby Plex vypršelo. Přihlaste se, prosím, znovu."
 
@@ -6248,7 +6335,7 @@ msgstr "nejprve největší"
 msgid "bpm"
 msgstr "úzm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6359,7 +6446,7 @@ msgstr "Na"
 msgid "options"
 msgstr "volby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:325
 msgid "or scan the QR code: "
 msgstr "nebo sejměte QR kód:"
 

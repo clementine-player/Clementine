@@ -73,7 +73,7 @@ msgstr " секунд"
 msgid " songs"
 msgstr " композицій"
 
-#: ui/networkremotesettingspage.cpp:186
+#: ui/networkremotesettingspage.cpp:204
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (зараз немає доступу)"
@@ -83,7 +83,7 @@ msgstr "%1 (зараз немає доступу)"
 msgid "%1 albums"
 msgstr "%1 альбом(ів)"
 
-#: chromecast/chromecastengine.cpp:262
+#: chromecast/chromecastengine.cpp:261
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
@@ -110,10 +110,50 @@ msgstr "%1 д."
 msgid "%1 days ago"
 msgstr "%1 день тому"
 
-#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote is
+#. on, but couldn't open its port, usually because another program has
+#. it. %1 is the device's name; %2 is the port number, such as 5500.
+#: networkremote/streaming/rendererregistry.cpp:437
 #, qt-format
-msgid "%1 isn't on a network the network remote listens on"
-msgstr "%1 не перебуває у мережі, дані у якій очікує дистанційне керування"
+msgid ""
+"%1 gets its music from Clementine through the network remote, which couldn't"
+" listen on port %2. Another program may be using it."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote only
+#. listens on addresses the user chose (Settings, Network Remote), and
+#. none is on the device's network. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:448
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which doesn't "
+"listen on an address in %1's network."
+msgstr ""
+
+#. TRANSLATORS: Shown when the user picks a Chromecast or other device
+#. to play on, and it can't get the music. Such devices download the
+#. audio from Clementine through the network remote, the server the
+#. phone remote apps also connect to (Settings, Network Remote). %1 is
+#. the device's name, such as "Living Room TV".
+#: networkremote/streaming/rendererregistry.cpp:429
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which is "
+"turned off."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote's
+#. "Only allow connections from the local network" setting refuses it,
+#. since its address isn't a private one. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:456
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which only "
+"allows connections from the local network, and %1 isn't on it."
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -412,7 +452,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Мітки починаються з %, наприклад: %artist %album %title </p>\n\n<p>Якщо ви берете частину тексту з міткою у фігурні дужки, ця частина буде приховуватись, якщо мітка порожня.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:285
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клієнтське з’єднання стане можливим лише після введення належного коду."
 
@@ -537,7 +577,7 @@ msgstr "Додати інший потік…"
 msgid "Add directory..."
 msgstr "Додати теку…"
 
-#: ui/mainwindow.cpp:2156
+#: ui/mainwindow.cpp:2164
 msgid "Add file"
 msgstr "Додати файл"
 
@@ -561,7 +601,7 @@ msgstr "Додати файли для перекодування"
 msgid "Add files..."
 msgstr "Додати файли…"
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2191
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Додати теку"
@@ -658,7 +698,7 @@ msgstr "Додати мітку року пісні"
 msgid "Add stream..."
 msgstr "Додати потік…"
 
-#: ui/mainwindow.cpp:1957
+#: ui/mainwindow.cpp:1965
 msgid "Add to another playlist"
 msgstr "Додати до іншого списку відтворення"
 
@@ -748,7 +788,7 @@ msgstr "Альбоми без обкладинок"
 msgid "All"
 msgstr "Усі"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Всі файли (*)"
 
@@ -757,7 +797,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Вся слава Гіпножабі!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:293
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "All addresses"
 msgstr "Усі адреси"
 
@@ -786,11 +826,11 @@ msgstr "Всім перекладачам"
 msgid "All tracks"
 msgstr "Всі композиції"
 
-#: ../bin/src/ui_networkremotesettingspage.h:298
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Allow a client to download music from this computer."
 msgstr "Дозволити клієнту отримувати музику з цього комп’ютера."
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Allow downloads"
 msgstr "Дозволити отримання"
 
@@ -798,7 +838,7 @@ msgstr "Дозволити отримання"
 msgid "Allow mid/side encoding"
 msgstr "Дозволити mid/side кодування"
 
-#: ../bin/src/ui_networkremotesettingspage.h:304
+#: ../bin/src/ui_networkremotesettingspage.h:308
 msgid "Allow playing on remote devices"
 msgstr "Дозволити відтворення на віддалених пристроях"
 
@@ -892,7 +932,7 @@ msgstr "Ви справді хочете записати статистичні
 msgid "Artist"
 msgstr "Виконавець"
 
-#: ui/mainwindow.cpp:299
+#: ui/mainwindow.cpp:307
 msgid "Artist info"
 msgstr "Виконавець"
 
@@ -905,7 +945,7 @@ msgid "As&k when saving"
 msgstr "&Питати при збереженні"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:310
+#: ../bin/src/ui_networkremotesettingspage.h:314
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Аудіо-формат"
@@ -1169,7 +1209,7 @@ msgstr "Перевіряти наявність нових випусків"
 msgid "Check for updates"
 msgstr "Перевірити наявність оновлень"
 
-#: ui/mainwindow.cpp:856
+#: ui/mainwindow.cpp:864
 msgid "Check for updates..."
 msgstr "Перевірити оновлення…"
 
@@ -1218,6 +1258,18 @@ msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr "Виберіть файли, які бачитиме Clementine. Clementine матиме доступ лише до файлів, які ви виберете тут."
+
+#. TRANSLATORS: On the Network Remote settings page, under "Use a
+#. network remote control". Chromecasts, and other devices Clementine
+#. can play on, download the audio from Clementine through the network
+#. remote, so they only work while it's on, listening on an address in
+#. the device's network.
+#: ui/networkremotesettingspage.cpp:62
+msgid ""
+"Chromecasts and other devices you play on get their music from Clementine "
+"through the network remote, so they need it turned on, and listening on an "
+"address in their network."
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
@@ -1413,7 +1465,7 @@ msgstr "Налаштувати %1…"
 msgid "Configure Magnatune..."
 msgstr "Налаштувати Magnatune…"
 
-#: internet/plex/plexservice.cpp:125
+#: internet/plex/plexservice.cpp:127
 msgid "Configure Plex..."
 msgstr "Налаштувати Plex..."
 
@@ -1429,7 +1481,7 @@ msgstr "Налаштувати Subsonic…"
 msgid "Configure global search..."
 msgstr "Налаштувати загальні правила пошуку…"
 
-#: ui/mainwindow.cpp:689
+#: ui/mainwindow.cpp:697
 msgid "Configure library..."
 msgstr "Налаштувати фонотеку"
 
@@ -1500,11 +1552,11 @@ msgstr "Конвертувати всю музику"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертувати всю музику, яку не може відтворити пристрій"
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:311
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Перетворювати звукові файли у форматах без втрати якості перед надсиланням їх на віддалений пристрій."
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Convert lossless files"
 msgstr "Перетворювати файли, стиснені без втрати якості"
 
@@ -1513,11 +1565,11 @@ msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:747
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Скопіювати до фонотеки…"
@@ -1565,7 +1617,7 @@ msgstr "Не вдалося увійти до last.fm. Будь ласка, по
 msgid "Couldn't create playlist"
 msgstr "Не вдалося створити список відтворення"
 
-#: internet/plex/plexauthenticator.cpp:163
+#: internet/plex/plexauthenticator.cpp:167
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Не вдалося отримати ваші сервери Plex: %1"
@@ -1762,7 +1814,7 @@ msgid "Delete downloaded data"
 msgstr "Вилучити отримані дані"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2540 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Вилучити файли"
 
@@ -1770,7 +1822,7 @@ msgstr "Вилучити файли"
 msgid "Delete from device..."
 msgstr "Вилучити з пристрою…"
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:760
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Вилучити з диска…"
@@ -1803,11 +1855,11 @@ msgstr "Вилучення файлів"
 msgid "Depth"
 msgstr "Глибина"
 
-#: ui/mainwindow.cpp:1870
+#: ui/mainwindow.cpp:1878
 msgid "Dequeue selected tracks"
 msgstr "Вилучити з черги вибрані композиції"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1876
 msgid "Dequeue track"
 msgstr "Вилучити композицію з черги"
 
@@ -1840,7 +1892,7 @@ msgstr "Назва пристрою"
 msgid "Device properties..."
 msgstr "Налаштування пристрою…"
 
-#: ui/mainwindow.cpp:292
+#: ui/mainwindow.cpp:300
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -1986,7 +2038,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Завантажити %n випусків"
 
-#: ../bin/src/ui_networkremotesettingspage.h:320
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid "Download Clementine Remote for Android"
 msgstr "Отримати Clementine Remote для Android"
 
@@ -2011,7 +2063,7 @@ msgstr "Завантажувати нові епізоди автоматичн�
 msgid "Download queued"
 msgstr "Отримання заплановано"
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Download settings"
 msgstr "Параметри отримання"
 
@@ -2081,7 +2133,7 @@ msgstr "Динамічний випадковий мікс"
 msgid "Edit smart playlist..."
 msgstr "Редагувати розумний список відтворення…"
 
-#: ui/mainwindow.cpp:1920
+#: ui/mainwindow.cpp:1928
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Змінити «%1»…"
@@ -2177,8 +2229,8 @@ msgstr "Вкажіть назву файла для експортованих �
 msgid "Enter a new name for this playlist"
 msgstr "Введіть нову назву для цього списку відтворення"
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
-#: ../bin/src/ui_networkremotesettingspage.h:295
+#: ../bin/src/ui_networkremotesettingspage.h:297
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Введіть одну з цих адрес у програмі для встановлення з’єднання з Clementine."
 
@@ -2229,7 +2281,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2493 ui/mainwindow.cpp:2671
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Помилка"
@@ -2453,7 +2505,7 @@ msgstr "Отримувати автоматично"
 msgid "Fetch completed"
 msgstr "Отримання завершено"
 
-#: internet/plex/plexservice.cpp:416
+#: internet/plex/plexservice.cpp:487
 msgid "Fetching Plex library"
 msgstr "Отримання бібліотеки Plex"
 
@@ -2508,11 +2560,11 @@ msgstr "Назва файлу"
 msgid "Filename Preview"
 msgstr "Перегляд назви файла"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:290
 msgid "Files"
 msgstr "Файли"
 
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Files root folder"
 msgstr "Коренева тека файлів"
 
@@ -2951,7 +3003,7 @@ msgstr "Інструментальна музика"
 msgid "Integrity check"
 msgstr "Перевірка цілісності даних"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:296
 msgid "Internet"
 msgstr "Інтернет"
 
@@ -2976,9 +3028,9 @@ msgstr "Не чинний формат"
 msgid "Invert Selection"
 msgstr "Інвертувати позначення"
 
-#: upnp/upnpmediaplayer.cpp:303
+#: upnp/upnpmediaplayer.cpp:317
 msgid "It was stopped from somewhere else"
-msgstr ""
+msgstr "Зупинено кимось іншим"
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3102,14 +3154,17 @@ msgstr "Ліворуч"
 msgid "Length"
 msgstr "Тривалість"
 
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
+#. for phones running the Clementine Remote app, which can act as the
+#. speaker and choose where Clementine plays; Chromecasts don't need it.
+#: ui/networkremotesettingspage.cpp:69
 msgid ""
-"Let a connected device, or a Chromecast or other Cast device on your "
-"network, act as the speaker: Clementine keeps the playlist and streams the "
-"audio to it."
-msgstr "Дозволити з'єднаному пристрою, або Chromecast або іншому пристрою Cast у вашій мережі, працювати як гучномовцю: Clementine збереже список відтворення і потоково передаватиме звукові дані на пристрій."
+"Let a phone or tablet running Clementine Remote act as the speaker, and "
+"choose where Clementine plays: Clementine keeps the playlist and streams the"
+" audio to the device."
+msgstr ""
 
-#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:272 ui/mainwindow.cpp:287
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Фонотека"
@@ -3118,7 +3173,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Розширене групування фонотеки"
 
-#: ui/mainwindow.cpp:2795
+#: ui/mainwindow.cpp:2814
 msgid "Library rescan notice"
 msgstr "Повідомлення про повторне сканування фонотеки"
 
@@ -3134,7 +3189,7 @@ msgstr "Світла"
 msgid "Limits"
 msgstr "Обмеження"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:299
 msgid "Listen on"
 msgstr "Слухати"
 
@@ -3464,7 +3519,7 @@ msgstr "Точки монтування"
 msgid "Move down"
 msgstr "Перемістити вниз"
 
-#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:750 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Перемістити до фонотеки…"
 
@@ -3473,7 +3528,7 @@ msgstr "Перемістити до фонотеки…"
 msgid "Move up"
 msgstr "Перемістити вгору"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2166
 msgid "Music"
 msgstr "Музика"
 
@@ -3481,7 +3536,7 @@ msgstr "Музика"
 msgid "Music Library"
 msgstr "Фонотека"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:323
 msgid "Music extensions remotely visible"
 msgstr "Віддалено видимі музичні суфікси назв"
 
@@ -3512,9 +3567,17 @@ msgstr "Вузька смуга (NB)"
 msgid "Network Proxy"
 msgstr "Проксі мережі"
 
-#: ../bin/src/ui_networkremotesettingspage.h:270
+#: ../bin/src/ui_networkremotesettingspage.h:277
 msgid "Network Remote"
 msgstr "Мережеве дистанційне керування"
+
+#. TRANSLATORS: A button that opens the Network Remote page of the
+#. settings, where the user can fix why a Chromecast or other device
+#. can't get music from Clementine. "Network Remote" is that page's
+#. name.
+#: widgets/outputbutton.cpp:198
+msgid "Network Remote Settings..."
+msgstr ""
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
@@ -3539,7 +3602,7 @@ msgstr "Нові альбоми"
 msgid "New folder"
 msgstr "Нова тека"
 
-#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1982 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Новий список відтворення"
 
@@ -3625,7 +3688,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2494 ui/mainwindow.cpp:2672
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -3716,7 +3779,7 @@ msgstr "Увімкн."
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:275
+#: ../bin/src/ui_networkremotesettingspage.h:282
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3727,11 +3790,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "З'єднання буде встановлено лише для клієнтів у цих діапазонах ip-адрес:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x\nі з адреси link-local і приватних IPv6.\n\nПри очікуванні на дані з вибраної адреси у 100.64.0.0/10, зокрема адреси Tailscale, з'єдання з відповідного діапазону також вважатимуться локальними."
 
-#: ../bin/src/ui_networkremotesettingspage.h:283
+#: ../bin/src/ui_networkremotesettingspage.h:290
 msgid "Only allow connections from the local network"
 msgstr "З’єднуватися лише у межах локальної мережі"
 
-#: ui/networkremotesettingspage.cpp:208
+#: ui/networkremotesettingspage.cpp:226
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3818,7 +3881,7 @@ msgid "Optimize for quality"
 msgstr "Оптимізувати для якості"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:315
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Налаштування…"
@@ -3831,7 +3894,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:753
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
@@ -3916,7 +3979,7 @@ msgstr "Вечірка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
 #: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Призупинити"
@@ -3952,8 +4015,8 @@ msgstr "Піксель"
 msgid "Plain sidebar"
 msgstr "Звичайна бічна панель"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
-#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
+#: ui/mainwindow.cpp:1181 ui/mainwindow.cpp:1777 ui/qtsystemtrayicon.cpp:231
 #: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3984,15 +4047,23 @@ msgstr "Відтворити, якщо зупинено; призупинити,
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1889
 msgid "Play next"
 msgstr "Відтворити наступну"
 
-#: widgets/outputbutton.cpp:106
+#. TRANSLATORS: The title of the message shown when the user picks a
+#. Chromecast or other device to play on, and it can't get the music from
+#. Clementine's network remote. %1 is the device's name.
+#: widgets/outputbutton.cpp:178
+#, qt-format
+msgid "Play on %1"
+msgstr ""
+
+#: widgets/outputbutton.cpp:115
 msgid "Play on another device"
 msgstr "Відтворити на іншому пристрої"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1887
 msgid "Play selected tracks next"
 msgstr "Відтворити наступні позначені композиції"
 
@@ -4012,7 +4083,7 @@ msgstr "Відтворення"
 msgid "Player options"
 msgstr "Налаштування програвача"
 
-#: widgets/outputbutton.cpp:107
+#: widgets/outputbutton.cpp:116
 #, qt-format
 msgid "Playing on %1"
 msgstr "Відтворення на %1"
@@ -4036,7 +4107,7 @@ msgstr "Налаштування списку відтворення"
 msgid "Playlist type"
 msgstr "Тип списку відтворення"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:293
 msgid "Playlists"
 msgstr "Списки"
 
@@ -4049,7 +4120,7 @@ msgstr "Будь ласка, закрийте вікно програми для
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Будь ласка, відкрийте цю адресу у вашому браузері: <a href=\"%1\">%1</a>"
 
-#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+#: internet/plex/plexservice.cpp:143 ../bin/src/ui_plexsettingspage.h:139
 msgid "Plex"
 msgstr "Plex"
 
@@ -4099,7 +4170,7 @@ msgid "Popup duration"
 msgstr "Тривалість виринаючого повідомлення"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:273
+#: ../bin/src/ui_networkremotesettingspage.h:280
 msgid "Port"
 msgstr "Порт"
 
@@ -4245,12 +4316,12 @@ msgstr "Опитування пристрою…"
 msgid "Queue Manager"
 msgstr "Керування чергою"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1882
 msgid "Queue selected tracks"
 msgstr "Додати до черги позначені композиції"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1872
+#: ui/mainwindow.cpp:1880
 msgid "Queue track"
 msgstr "Додати композицію до черги"
 
@@ -4333,7 +4404,7 @@ msgid "Refresh"
 msgstr "Освіжити"
 
 #: internet/magnatune/magnatuneservice.cpp:289
-#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:125 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Оновити каталог"
 
@@ -4469,7 +4540,7 @@ msgstr "Режим вирівнювання гучності"
 msgid "Repopulate"
 msgstr "Знов наповнити"
 
-#: ../bin/src/ui_networkremotesettingspage.h:287
+#: ../bin/src/ui_networkremotesettingspage.h:294
 msgid "Require authentication code"
 msgstr "Потрібен код розпізнавання"
 
@@ -4526,7 +4597,7 @@ msgstr "Оцифрувати звуковий КД"
 msgid "Rock"
 msgstr "Рок"
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Коренева тека, яка буде доступною для перегляду із пристроїв віддаленого керування"
 
@@ -4666,7 +4737,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Пошук"
 
-#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:284 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Пошук"
@@ -4687,7 +4758,7 @@ msgstr "Шукати на Jamendo"
 msgid "Search Magnatune"
 msgstr "Пошук на Magnatune"
 
-#: internet/plex/plexservice.cpp:110
+#: internet/plex/plexservice.cpp:112
 msgid "Search Plex"
 msgstr "Шукати на Plex"
 
@@ -4699,7 +4770,7 @@ msgstr "Шукати на Subsonic"
 msgid "Search automatically"
 msgstr "Шукати автоматично"
 
-#: ui/mainwindow.cpp:726
+#: ui/mainwindow.cpp:734
 msgid "Search for album"
 msgstr "Шукати альбом"
 
@@ -4712,7 +4783,7 @@ msgstr "Пошук обкладинок альбомів…"
 msgid "Search for anything"
 msgstr "Шукати всюди"
 
-#: ui/mainwindow.cpp:723
+#: ui/mainwindow.cpp:731
 msgid "Search for artist"
 msgstr "Шукати виконавця"
 
@@ -4833,7 +4904,7 @@ msgstr "Адреса сервера"
 msgid "Server details"
 msgstr "Параметри сервера"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1927
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
@@ -4856,7 +4927,7 @@ msgstr "Налаштуйте %1 у параметрах Clementine на комп
 msgid "Set value for all selected tracks..."
 msgstr "Встановити значення для всіх вибраних композицій…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:272
+#: ../bin/src/ui_networkremotesettingspage.h:279
 msgid "Settings"
 msgstr "Параметри"
 
@@ -4923,7 +4994,7 @@ msgstr "Показувати приємні повідомлення OSD"
 msgid "Show above status bar"
 msgstr "Показати вище, в рядку стану"
 
-#: ui/mainwindow.cpp:673
+#: ui/mainwindow.cpp:681
 msgid "Show all songs"
 msgstr "Показати всі композиції"
 
@@ -4943,12 +5014,12 @@ msgstr "Показати розділювачі"
 msgid "Show fullsize..."
 msgstr "Показати на повний розмір…"
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:763
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Показати в оглядачі файлів…"
 
-#: ui/mainwindow.cpp:757
+#: ui/mainwindow.cpp:765
 msgid "Show in library..."
 msgstr "Показати у фонотеці…"
 
@@ -4960,11 +5031,11 @@ msgstr "Показувати в різних виконавцях"
 msgid "Show moodbar"
 msgstr "Показувати смужку настрою"
 
-#: ui/mainwindow.cpp:675
+#: ui/mainwindow.cpp:683
 msgid "Show only duplicates"
 msgstr "Показати тільки дублікати"
 
-#: ui/mainwindow.cpp:677
+#: ui/mainwindow.cpp:685
 msgid "Show only untagged"
 msgstr "Показати тільки без міток"
 
@@ -5065,7 +5136,7 @@ msgstr "Пропустити файли із вказаними суфіксам
 msgid "Skip forwards in playlist"
 msgstr "Перескочити вперед у списку композицій"
 
-#: ui/mainwindow.cpp:1890
+#: ui/mainwindow.cpp:1898
 msgid "Skip selected tracks"
 msgstr "Пропустити позначені композиції"
 
@@ -5073,7 +5144,7 @@ msgstr "Пропустити позначені композиції"
 msgid "Skip to the next album"
 msgstr "Перейти до наступного альбому"
 
-#: ui/mainwindow.cpp:1888
+#: ui/mainwindow.cpp:1896
 msgid "Skip track"
 msgstr "Пропустити композицію"
 
@@ -5101,9 +5172,9 @@ msgstr "Легка"
 msgid "Soft Rock"
 msgstr "Легкий рок"
 
-#: upnp/upnpmediaplayer.cpp:257
+#: upnp/upnpmediaplayer.cpp:270
 msgid "Something else is playing on it now"
-msgstr ""
+msgstr "Відбувається відтворення чогось іншого"
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5113,7 +5184,7 @@ msgstr "Про композицію"
 msgid "Song Metadata"
 msgstr "Метадані композиції"
 
-#: ui/mainwindow.cpp:296
+#: ui/mainwindow.cpp:304
 msgid "Song info"
 msgstr "Композиція"
 
@@ -5208,7 +5279,7 @@ msgstr "Зупинятися після кожної композиції"
 msgid "Stop after every track"
 msgstr "Зупинятися після будь-якої композиції"
 
-#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:718 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Зупинити після цієї композиції"
 
@@ -5368,14 +5439,14 @@ msgstr "Засіб вивчення зайнято"
 msgid "The format is only updated when a pipeline starts."
 msgstr "Формат буде оновлено лише після запуску конвеєра обробки."
 
-#: upnp/upnpmediaplayer.cpp:307
+#: upnp/upnpmediaplayer.cpp:321
 msgid "The renderer couldn't play it"
-msgstr ""
+msgstr "Обробнику не вдалося відтворити"
 
-#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
 #, qt-format
 msgid "The renderer couldn't play it: %1"
-msgstr ""
+msgstr "Обробнику не вдалося відтворити: %1"
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5403,7 +5474,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Час тестування сервера Subsonic завершено. Будь ласка, придбайте ліцензійний ключ. Відвідайте subsonic.org, щоб дізнатися більше."
 
-#: ui/mainwindow.cpp:2786
+#: ui/mainwindow.cpp:2805
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5449,7 +5520,7 @@ msgid ""
 "continue?"
 msgstr "Ці файли будуть вилучені з пристрою. Ви впевнені? Вилучити їх?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2541 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5481,7 +5552,7 @@ msgstr "Цей альбом не доступний в запитуваному 
 msgid "This can be changed later through the preferences"
 msgstr "Згодом цей параметр можна буде змінити у налаштуваннях програми"
 
-#: widgets/outputbutton.cpp:67
+#: widgets/outputbutton.cpp:76
 msgid "This computer"
 msgstr "Цьому комп'ютері"
 
@@ -5545,7 +5616,7 @@ msgstr "Змінити режим приємних OSD"
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1884
 msgid "Toggle queue status"
 msgstr "Перемикнути статус черги"
 
@@ -5632,9 +5703,25 @@ msgstr "Спробувати вгадати потрібні метадані"
 msgid "Turbine"
 msgstr "Турбіна"
 
+#. TRANSLATORS: A button that turns on the network remote, so the chosen
+#. Chromecast or other device can play.
+#: widgets/outputbutton.cpp:191
+msgid "Turn On"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Turn off"
 msgstr "Вимкнути"
+
+#. TRANSLATORS: Below the message saying the network remote is off,
+#. which a Chromecast or other device needs to play. Turning it on
+#. for the device also lets phones running the Clementine Remote app
+#. connect, which is why this warns about it.
+#: widgets/outputbutton.cpp:187
+msgid ""
+"Turning on the network remote also lets the Clementine Remote app, on phones"
+" and tablets in your network, control Clementine."
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
@@ -5701,11 +5788,11 @@ msgstr "Невідомий тип файла: %1"
 msgid "Unset cover"
 msgstr "Вилучити обкладинку"
 
-#: ui/mainwindow.cpp:1886
+#: ui/mainwindow.cpp:1894
 msgid "Unskip selected tracks"
 msgstr "Не пропускати позначені композиції"
 
-#: ui/mainwindow.cpp:1884
+#: ui/mainwindow.cpp:1892
 msgid "Unskip track"
 msgstr "Не пропускати композицію"
 
@@ -5784,7 +5871,7 @@ msgstr "Використати власну палітру"
 msgid "Use a custom message for notifications"
 msgstr "Використати власне повідомлення для сповіщень"
 
-#: ../bin/src/ui_networkremotesettingspage.h:271
+#: ../bin/src/ui_networkremotesettingspage.h:278
 msgid "Use a network remote control"
 msgstr "Використовувати віддалене керування мережею"
 
@@ -6045,7 +6132,7 @@ msgid ""
 "well?"
 msgstr "Хочете пересунути всі ініші композиції цього альбому до розділу «Різні виконавці»?"
 
-#: ui/mainwindow.cpp:2793
+#: ui/mainwindow.cpp:2812
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
@@ -6162,7 +6249,7 @@ msgstr "Строк дії вашого сеансу Dropbox вичерпано. 
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Введені дані облікового запису Magnatune некоректні"
 
-#: internet/plex/plexauthenticator.cpp:162
+#: internet/plex/plexauthenticator.cpp:166
 msgid "Your Plex sign-in has expired. Please sign in again."
 msgstr "Запит щодо входу до Plex прострочено. Будь ласка, повторіть спробу."
 
@@ -6237,7 +6324,7 @@ msgstr "спочатку найбільші"
 msgid "bpm"
 msgstr "такт/хв."
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6348,7 +6435,7 @@ msgstr "на"
 msgid "options"
 msgstr "налаштування"
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:325
 msgid "or scan the QR code: "
 msgstr "або скануйте QR-код:"
 

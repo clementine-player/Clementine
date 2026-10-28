@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2026\n"
+"Last-Translator: titus <titus0818@gmail.com>, 2014\n"
 "Language-Team: Romanian (http://app.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -85,7 +85,7 @@ msgstr " secunde"
 msgid " songs"
 msgstr " melodii"
 
-#: ui/networkremotesettingspage.cpp:186
+#: ui/networkremotesettingspage.cpp:204
 #, qt-format
 msgid "%1 (not currently available)"
 msgstr "%1 (momentan indisponibil)"
@@ -95,7 +95,7 @@ msgstr "%1 (momentan indisponibil)"
 msgid "%1 albums"
 msgstr "%1 albume"
 
-#: chromecast/chromecastengine.cpp:262
+#: chromecast/chromecastengine.cpp:261
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
 #, qt-format
 msgid "%1 can't play this track: %2"
@@ -122,10 +122,50 @@ msgstr "%1 zile"
 msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
-#: chromecast/chromecastengine.cpp:206 upnp/upnpengine.cpp:136
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote is
+#. on, but couldn't open its port, usually because another program has
+#. it. %1 is the device's name; %2 is the port number, such as 5500.
+#: networkremote/streaming/rendererregistry.cpp:437
 #, qt-format
-msgid "%1 isn't on a network the network remote listens on"
-msgstr "%1 nu se află în rețeaua pe care o ascultă aplicația de control la distanță a Clementine."
+msgid ""
+"%1 gets its music from Clementine through the network remote, which couldn't"
+" listen on port %2. Another program may be using it."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote only
+#. listens on addresses the user chose (Settings, Network Remote), and
+#. none is on the device's network. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:448
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which doesn't "
+"listen on an address in %1's network."
+msgstr ""
+
+#. TRANSLATORS: Shown when the user picks a Chromecast or other device
+#. to play on, and it can't get the music. Such devices download the
+#. audio from Clementine through the network remote, the server the
+#. phone remote apps also connect to (Settings, Network Remote). %1 is
+#. the device's name, such as "Living Room TV".
+#: networkremote/streaming/rendererregistry.cpp:429
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which is "
+"turned off."
+msgstr ""
+
+#. TRANSLATORS: Shown when a Chromecast or other device the user picks
+#. can't get its music from Clementine's network remote: the remote's
+#. "Only allow connections from the local network" setting refuses it,
+#. since its address isn't a private one. %1 is the device's name.
+#: networkremote/streaming/rendererregistry.cpp:456
+#, qt-format
+msgid ""
+"%1 gets its music from Clementine through the network remote, which only "
+"allows connections from the local network, and %1 isn't on it."
+msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -424,7 +464,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Câmpurile încep cu %, de exemplu:%artist %album %titlu </ p>\n\n<p>Dacă încadrați secțiuni de text care conțin un câmp cu bucle-acolade, acea secțiune va fi ascunsă dacă câmpul este gol.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:285
+#: ../bin/src/ui_networkremotesettingspage.h:292
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Un client se poate conecta, numai dacă a fost introdus codul corect."
 
@@ -549,7 +589,7 @@ msgstr "Adaugă alt flux..."
 msgid "Add directory..."
 msgstr "Adăugare director..."
 
-#: ui/mainwindow.cpp:2156
+#: ui/mainwindow.cpp:2164
 msgid "Add file"
 msgstr "Adaugă fișier"
 
@@ -573,7 +613,7 @@ msgstr "Adaugă fișiere pentru transcodificare"
 msgid "Add files..."
 msgstr "Adaugă fișiere…"
 
-#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2183
+#: transcoder/transcodedialog.cpp:349 ui/mainwindow.cpp:2191
 #: ripper/ripcddialog.cpp:279
 msgid "Add folder"
 msgstr "Adăugare dosar"
@@ -670,7 +710,7 @@ msgstr "Adaugă eticheta anului melodiei"
 msgid "Add stream..."
 msgstr "Adaugă flux..."
 
-#: ui/mainwindow.cpp:1957
+#: ui/mainwindow.cpp:1965
 msgid "Add to another playlist"
 msgstr "Adaugă la altă listă de redare"
 
@@ -760,7 +800,7 @@ msgstr "Albume fără coperți"
 msgid "All"
 msgstr "Toate"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Toate fișierele (*)"
 
@@ -769,7 +809,7 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Glorie hypnotoadului!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:293
+#: ../bin/src/ui_networkremotesettingspage.h:300
 msgid "All addresses"
 msgstr "Toate adresele"
 
@@ -798,11 +838,11 @@ msgstr "Toți traducătorii"
 msgid "All tracks"
 msgstr "Toate pistele"
 
-#: ../bin/src/ui_networkremotesettingspage.h:298
+#: ../bin/src/ui_networkremotesettingspage.h:305
 msgid "Allow a client to download music from this computer."
 msgstr "Permite unui client să descarce muzică de la acest calculator."
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
+#: ../bin/src/ui_networkremotesettingspage.h:307
 msgid "Allow downloads"
 msgstr "Permite descărcările"
 
@@ -810,7 +850,7 @@ msgstr "Permite descărcările"
 msgid "Allow mid/side encoding"
 msgstr "Permite codificarea mijloc/margine"
 
-#: ../bin/src/ui_networkremotesettingspage.h:304
+#: ../bin/src/ui_networkremotesettingspage.h:308
 msgid "Allow playing on remote devices"
 msgstr "Permite redarea pe dispozitive la distanță"
 
@@ -904,7 +944,7 @@ msgstr "Sunteți sigur că doriți să scrieți statisticile melodiilor în fiș
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:299
+#: ui/mainwindow.cpp:307
 msgid "Artist info"
 msgstr "Informații artist"
 
@@ -917,7 +957,7 @@ msgid "As&k when saving"
 msgstr "Î&ntreabă înainte de salvare"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:310
+#: ../bin/src/ui_networkremotesettingspage.h:314
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Format audio"
@@ -1181,7 +1221,7 @@ msgstr "Verifică dacă au apărut episoade noi"
 msgid "Check for updates"
 msgstr "Verifică dacă sunt disponibile actualizări"
 
-#: ui/mainwindow.cpp:856
+#: ui/mainwindow.cpp:864
 msgid "Check for updates..."
 msgstr "Verifică după actualizări..."
 
@@ -1230,6 +1270,18 @@ msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
 msgstr "Alegeți fișierele la care Clementine să aibă acces. Clementine va avea acces doar la fișierele pe care le selectați aici."
+
+#. TRANSLATORS: On the Network Remote settings page, under "Use a
+#. network remote control". Chromecasts, and other devices Clementine
+#. can play on, download the audio from Clementine through the network
+#. remote, so they only work while it's on, listening on an address in
+#. the device's network.
+#: ui/networkremotesettingspage.cpp:62
+msgid ""
+"Chromecasts and other devices you play on get their music from Clementine "
+"through the network remote, so they need it turned on, and listening on an "
+"address in their network."
+msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
@@ -1425,7 +1477,7 @@ msgstr "Configurați %1..."
 msgid "Configure Magnatune..."
 msgstr "Configurați Magnatune..."
 
-#: internet/plex/plexservice.cpp:125
+#: internet/plex/plexservice.cpp:127
 msgid "Configure Plex..."
 msgstr "Configurați Plex..."
 
@@ -1441,7 +1493,7 @@ msgstr "Configurați Subsonic..."
 msgid "Configure global search..."
 msgstr "Configurați căutarea globală..."
 
-#: ui/mainwindow.cpp:689
+#: ui/mainwindow.cpp:697
 msgid "Configure library..."
 msgstr "Configurați colecția..."
 
@@ -1512,11 +1564,11 @@ msgstr "Convertește toată muzica"
 msgid "Convert any music that the device can't play"
 msgstr "Convertește orice muzică pe care nu o poate reda dispozitivul"
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:311
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Convertește fișierele audio în audio fără pierderi înainte de a le trimite către dispozitivul la distanță."
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:313
 msgid "Convert lossless files"
 msgstr "Convertește fișierele în audio fără pierderi"
 
@@ -1525,11 +1577,11 @@ msgid "Copy to clipboard"
 msgstr "Copiază în clipboard"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
-#: ui/mainwindow.cpp:749 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Copiază pe dispozitiv..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:739
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:747
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Copiază în colecție..."
@@ -1577,7 +1629,7 @@ msgstr "Nu s-a putut efectua autentificarea pe Last.fm. Vă rugăm să încerca�
 msgid "Couldn't create playlist"
 msgstr "Nu s-a putut crea lista de redare"
 
-#: internet/plex/plexauthenticator.cpp:163
+#: internet/plex/plexauthenticator.cpp:167
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Nu s-a putut obține lista serverelor Plex: %1"
@@ -1774,7 +1826,7 @@ msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
-#: ui/mainwindow.cpp:2532 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2540 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
@@ -1782,7 +1834,7 @@ msgstr "Șterge fișiere"
 msgid "Delete from device..."
 msgstr "Șterge de pe dispozitiv..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:752
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:760
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Șterge de pe disc..."
@@ -1815,11 +1867,11 @@ msgstr "Se șterg fișierele"
 msgid "Depth"
 msgstr "Adâncime"
 
-#: ui/mainwindow.cpp:1870
+#: ui/mainwindow.cpp:1878
 msgid "Dequeue selected tracks"
 msgstr "Elimină din coadă piesele selectate"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1876
 msgid "Dequeue track"
 msgstr "Elimină din coadă piesa"
 
@@ -1852,7 +1904,7 @@ msgstr "Nume dispozitiv"
 msgid "Device properties..."
 msgstr "Proprietăți dispozitiv..."
 
-#: ui/mainwindow.cpp:292
+#: ui/mainwindow.cpp:300
 msgid "Devices"
 msgstr "Dispozitive"
 
@@ -1998,7 +2050,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Descarcă %n episoade"
 
-#: ../bin/src/ui_networkremotesettingspage.h:320
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid "Download Clementine Remote for Android"
 msgstr "Descarcă aplicația de control la distanță a Clementine pentru Android"
 
@@ -2023,7 +2075,7 @@ msgstr "Descărcă automat noile episoade"
 msgid "Download queued"
 msgstr "Descarcă elementele puse în coada de descărcare"
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:309
 msgid "Download settings"
 msgstr "Opțiuni pentru descărcare"
 
@@ -2093,7 +2145,7 @@ msgstr "Mixare aleatoare dinamică"
 msgid "Edit smart playlist..."
 msgstr "Editare listă de redare inteligentă..."
 
-#: ui/mainwindow.cpp:1920
+#: ui/mainwindow.cpp:1928
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editare eticheta \"%1\"..."
@@ -2189,8 +2241,8 @@ msgstr "Introduceți un nume de fișier pentru coperțile exportate (fără exte
 msgid "Enter a new name for this playlist"
 msgstr "Introduceți un nume nou pentru această listă de redare"
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
-#: ../bin/src/ui_networkremotesettingspage.h:295
+#: ../bin/src/ui_networkremotesettingspage.h:297
+#: ../bin/src/ui_networkremotesettingspage.h:302
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Introduceți una dintre aceste adrese în aplicație pentru a vă conecta la Clementine."
 
@@ -2241,7 +2293,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu „--log-levels *:3”"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:252
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2485 ui/mainwindow.cpp:2663
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2493 ui/mainwindow.cpp:2671
 #: ripper/ripcddialog.cpp:340
 msgid "Error"
 msgstr "Eroare"
@@ -2465,7 +2517,7 @@ msgstr "Preluare automată"
 msgid "Fetch completed"
 msgstr "Preluare finalizată"
 
-#: internet/plex/plexservice.cpp:416
+#: internet/plex/plexservice.cpp:487
 msgid "Fetching Plex library"
 msgstr "Se preia biblioteca Plex"
 
@@ -2520,11 +2572,11 @@ msgstr "Nume fișier"
 msgid "Filename Preview"
 msgstr "Previzualizare nume fișier"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:290
 msgid "Files"
 msgstr "Fișiere"
 
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Files root folder"
 msgstr "Dosarul rădăcină al fișierelor"
 
@@ -2963,7 +3015,7 @@ msgstr "Instrumentală"
 msgid "Integrity check"
 msgstr "Verificare integritate"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:296
 msgid "Internet"
 msgstr "Internet"
 
@@ -2988,9 +3040,9 @@ msgstr "Format nevalid"
 msgid "Invert Selection"
 msgstr "Inversează selecția"
 
-#: upnp/upnpmediaplayer.cpp:303
+#: upnp/upnpmediaplayer.cpp:317
 msgid "It was stopped from somewhere else"
-msgstr ""
+msgstr "A fost oprit din altă parte"
 
 #: internet/jamendo/jamendoservice.cpp:243
 #, qt-format
@@ -3114,14 +3166,17 @@ msgstr "Stânga"
 msgid "Length"
 msgstr "Lungime"
 
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
+#. for phones running the Clementine Remote app, which can act as the
+#. speaker and choose where Clementine plays; Chromecasts don't need it.
+#: ui/networkremotesettingspage.cpp:69
 msgid ""
-"Let a connected device, or a Chromecast or other Cast device on your "
-"network, act as the speaker: Clementine keeps the playlist and streams the "
-"audio to it."
-msgstr "Lasă un dispozitiv conectat, un Chromecast sau un alt dispozitiv Cast din rețeaua ta să funcționeze ca difuzor: Clementine gestionează lista de redare și transmite semnalul audio către acesta."
+"Let a phone or tablet running Clementine Remote act as the speaker, and "
+"choose where Clementine plays: Clementine keeps the playlist and streams the"
+" audio to the device."
+msgstr ""
 
-#: ui/mainwindow.cpp:264 ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:272 ui/mainwindow.cpp:287
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Library"
 msgstr "Colecție"
@@ -3130,7 +3185,7 @@ msgstr "Colecție"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată colecție"
 
-#: ui/mainwindow.cpp:2795
+#: ui/mainwindow.cpp:2814
 msgid "Library rescan notice"
 msgstr "Notificare privind scanarea din nou a colecției"
 
@@ -3146,7 +3201,7 @@ msgstr "Luminoasă"
 msgid "Limits"
 msgstr "Limite"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:299
 msgid "Listen on"
 msgstr "Ascultă pe"
 
@@ -3476,7 +3531,7 @@ msgstr "Puncte de montare"
 msgid "Move down"
 msgstr "Mută în jos"
 
-#: ui/mainwindow.cpp:742 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:750 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Mută în colecție..."
 
@@ -3485,7 +3540,7 @@ msgstr "Mută în colecție..."
 msgid "Move up"
 msgstr "Mută în sus"
 
-#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:270 ui/mainwindow.cpp:2166
 msgid "Music"
 msgstr "Muzică"
 
@@ -3493,7 +3548,7 @@ msgstr "Muzică"
 msgid "Music Library"
 msgstr "Colecție de muzică"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:323
 msgid "Music extensions remotely visible"
 msgstr "Extensii muzicale vizibile de la distanță"
 
@@ -3524,9 +3579,17 @@ msgstr "Bandă îngustă (NB)"
 msgid "Network Proxy"
 msgstr "Proxy rețea"
 
-#: ../bin/src/ui_networkremotesettingspage.h:270
+#: ../bin/src/ui_networkremotesettingspage.h:277
 msgid "Network Remote"
 msgstr "Control la distanță prin rețea"
+
+#. TRANSLATORS: A button that opens the Network Remote page of the
+#. settings, where the user can fix why a Chromecast or other device
+#. can't get music from Clementine. "Network Remote" is that page's
+#. name.
+#: widgets/outputbutton.cpp:198
+msgid "Network Remote Settings..."
+msgstr ""
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
@@ -3551,7 +3614,7 @@ msgstr "Albume noi"
 msgid "New folder"
 msgstr "Dosar nou"
 
-#: ui/mainwindow.cpp:1974 ../bin/src/ui_mainwindow.h:758
+#: ui/mainwindow.cpp:1982 ../bin/src/ui_mainwindow.h:758
 msgid "New playlist"
 msgstr "Listă de redare nouă"
 
@@ -3637,7 +3700,7 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Nimic"
 
-#: library/libraryview.cpp:674 ui/mainwindow.cpp:2486 ui/mainwindow.cpp:2664
+#: library/libraryview.cpp:674 ui/mainwindow.cpp:2494 ui/mainwindow.cpp:2672
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Niciuna dintre melodiile selectate nu este potrivită pentru copierea pe un dispozitiv"
 
@@ -3728,7 +3791,7 @@ msgstr "Activată"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:275
+#: ../bin/src/ui_networkremotesettingspage.h:282
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3739,11 +3802,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "Se acceptă numai conexiunile de la clienți aflați în intervalele de adrese IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x\nși de la adrese IPv6 locale de legătură și private.\n\nCând ascultați pe o adresă aleasă din 100.64.0.0/10, cum ar fi o adresă Tailscale, conexiunile din acel interval sunt considerate, de asemenea, locale."
 
-#: ../bin/src/ui_networkremotesettingspage.h:283
+#: ../bin/src/ui_networkremotesettingspage.h:290
 msgid "Only allow connections from the local network"
 msgstr "Permite conexiuni numai din rețeaua locală"
 
-#: ui/networkremotesettingspage.cpp:208
+#: ui/networkremotesettingspage.cpp:226
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3830,7 +3893,7 @@ msgid "Optimize for quality"
 msgstr "Optimizează pentru calitate"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:315
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Opțiuni..."
@@ -3843,7 +3906,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizează fișierele"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:745
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:753
 msgid "Organise files..."
 msgstr "Organizează fișierele..."
 
@@ -3928,7 +3991,7 @@ msgstr "Petrecere"
 msgid "Password"
 msgstr "Parolă"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1188 ui/mainwindow.cpp:1765
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
 #: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pauză"
@@ -3964,8 +4027,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:706 ui/mainwindow.cpp:1152
-#: ui/mainwindow.cpp:1173 ui/mainwindow.cpp:1769 ui/qtsystemtrayicon.cpp:231
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
+#: ui/mainwindow.cpp:1181 ui/mainwindow.cpp:1777 ui/qtsystemtrayicon.cpp:231
 #: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Play"
@@ -3996,15 +4059,23 @@ msgstr "Redă dacă este oprit, pune în pauză dacă este în curs de redare"
 msgid "Play if there is nothing already playing"
 msgstr "Redă dacă nu există nimic deja în curs de redare"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1881
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1889
 msgid "Play next"
 msgstr "Redă următoarea"
 
-#: widgets/outputbutton.cpp:106
+#. TRANSLATORS: The title of the message shown when the user picks a
+#. Chromecast or other device to play on, and it can't get the music from
+#. Clementine's network remote. %1 is the device's name.
+#: widgets/outputbutton.cpp:178
+#, qt-format
+msgid "Play on %1"
+msgstr ""
+
+#: widgets/outputbutton.cpp:115
 msgid "Play on another device"
 msgstr "Redă pe un alt dispozitiv"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1887
 msgid "Play selected tracks next"
 msgstr "Redă următoarele piese selectate"
 
@@ -4024,7 +4095,7 @@ msgstr "Redare"
 msgid "Player options"
 msgstr "Opțiuni ale programului de redare"
 
-#: widgets/outputbutton.cpp:107
+#: widgets/outputbutton.cpp:116
 #, qt-format
 msgid "Playing on %1"
 msgstr "Redare pe %1"
@@ -4048,7 +4119,7 @@ msgstr "Opțiuni listă de redare"
 msgid "Playlist type"
 msgstr "Tipul listei de redare"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:293
 msgid "Playlists"
 msgstr "Liste de redare"
 
@@ -4061,7 +4132,7 @@ msgstr "Închideți navigatorul web și reveniți la Clementine."
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Deschideți această adresă URL în navigatorul dvs.: <a href=\"%1\">%1</a>"
 
-#: internet/plex/plexservice.cpp:133 ../bin/src/ui_plexsettingspage.h:139
+#: internet/plex/plexservice.cpp:143 ../bin/src/ui_plexsettingspage.h:139
 msgid "Plex"
 msgstr "Plex"
 
@@ -4111,7 +4182,7 @@ msgid "Popup duration"
 msgstr "Durata de afișare a ferestrei emergente"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:273
+#: ../bin/src/ui_networkremotesettingspage.h:280
 msgid "Port"
 msgstr "Port"
 
@@ -4257,12 +4328,12 @@ msgstr "Se interoghează dispozitivul..."
 msgid "Queue Manager"
 msgstr "Administrator coadă"
 
-#: ui/mainwindow.cpp:1874
+#: ui/mainwindow.cpp:1882
 msgid "Queue selected tracks"
 msgstr "Adaugă în coadă piesele selectate"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1872
+#: ui/mainwindow.cpp:1880
 msgid "Queue track"
 msgstr "Adaugă în coadă piesa"
 
@@ -4345,7 +4416,7 @@ msgid "Refresh"
 msgstr "Reîmprospătare"
 
 #: internet/magnatune/magnatuneservice.cpp:289
-#: internet/plex/plexservice.cpp:123 internet/subsonic/subsonicservice.cpp:143
+#: internet/plex/plexservice.cpp:125 internet/subsonic/subsonicservice.cpp:143
 msgid "Refresh catalogue"
 msgstr "Reîmprospătare catalog"
 
@@ -4481,7 +4552,7 @@ msgstr "Modul de egalizare a volumului de redare"
 msgid "Repopulate"
 msgstr "Repopulează"
 
-#: ../bin/src/ui_networkremotesettingspage.h:287
+#: ../bin/src/ui_networkremotesettingspage.h:294
 msgid "Require authentication code"
 msgstr "Solicită codul de autentificare"
 
@@ -4538,7 +4609,7 @@ msgstr "Extragere date CD audio"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:317
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Dosarul rădăcină care va putea fi explorat de la distanță prin rețea"
 
@@ -4678,7 +4749,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Căutare"
 
-#: ui/mainwindow.cpp:276 ../bin/src/ui_globalsearchsettingspage.h:139
+#: ui/mainwindow.cpp:284 ../bin/src/ui_globalsearchsettingspage.h:139
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Caută"
@@ -4699,7 +4770,7 @@ msgstr "Caută în Jamendo"
 msgid "Search Magnatune"
 msgstr "Caută în Magnatune"
 
-#: internet/plex/plexservice.cpp:110
+#: internet/plex/plexservice.cpp:112
 msgid "Search Plex"
 msgstr "Caută în Plex"
 
@@ -4711,7 +4782,7 @@ msgstr "Caută în Subsonic"
 msgid "Search automatically"
 msgstr "Căutare automată"
 
-#: ui/mainwindow.cpp:726
+#: ui/mainwindow.cpp:734
 msgid "Search for album"
 msgstr "Căutare album"
 
@@ -4724,7 +4795,7 @@ msgstr "Caută coperți pentru album..."
 msgid "Search for anything"
 msgstr "Caută orice"
 
-#: ui/mainwindow.cpp:723
+#: ui/mainwindow.cpp:731
 msgid "Search for artist"
 msgstr "Căutare artist"
 
@@ -4845,7 +4916,7 @@ msgstr "Adresa URL a serverului"
 msgid "Server details"
 msgstr "Detalii despre server"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1927
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Stabilește %1 la „%2”..."
@@ -4868,7 +4939,7 @@ msgstr "Configurează %1 în opțiunile aplicației Clementine de pe calculator"
 msgid "Set value for all selected tracks..."
 msgstr "Stabilește valoarea pentru toate piesele selectate..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:272
+#: ../bin/src/ui_networkremotesettingspage.h:279
 msgid "Settings"
 msgstr "Configurări"
 
@@ -4935,7 +5006,7 @@ msgstr "Afișează un OSD cu un aspect elegant"
 msgid "Show above status bar"
 msgstr "Afișează deasupra barei de stare"
 
-#: ui/mainwindow.cpp:673
+#: ui/mainwindow.cpp:681
 msgid "Show all songs"
 msgstr "Afișează toate melodiile"
 
@@ -4955,12 +5026,12 @@ msgstr "Afișează separatorii"
 msgid "Show fullsize..."
 msgstr "Afișează dimensiunea completă..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:755
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:763
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Afișează în exploratorul de fișiere..."
 
-#: ui/mainwindow.cpp:757
+#: ui/mainwindow.cpp:765
 msgid "Show in library..."
 msgstr "Afișează în colecție..."
 
@@ -4972,11 +5043,11 @@ msgstr "Afișează din artiști diferiți"
 msgid "Show moodbar"
 msgstr "Afișează bara de redare vizuală a dispoziției"
 
-#: ui/mainwindow.cpp:675
+#: ui/mainwindow.cpp:683
 msgid "Show only duplicates"
 msgstr "Afișează numai duplicatele"
 
-#: ui/mainwindow.cpp:677
+#: ui/mainwindow.cpp:685
 msgid "Show only untagged"
 msgstr "Afișează numai pe cele neetichetate"
 
@@ -5077,7 +5148,7 @@ msgstr "Omite fișierele cu aceste extensii (separate prin virgule, fără difer
 msgid "Skip forwards in playlist"
 msgstr "Sare înainte în lista de redare"
 
-#: ui/mainwindow.cpp:1890
+#: ui/mainwindow.cpp:1898
 msgid "Skip selected tracks"
 msgstr "Sare peste piesele selectate"
 
@@ -5085,7 +5156,7 @@ msgstr "Sare peste piesele selectate"
 msgid "Skip to the next album"
 msgstr "Trece la următorul album"
 
-#: ui/mainwindow.cpp:1888
+#: ui/mainwindow.cpp:1896
 msgid "Skip track"
 msgstr "Sare peste piesă"
 
@@ -5113,9 +5184,9 @@ msgstr "Soft"
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
-#: upnp/upnpmediaplayer.cpp:257
+#: upnp/upnpmediaplayer.cpp:270
 msgid "Something else is playing on it now"
-msgstr ""
+msgstr "Acum se redă altceva pe el"
 
 #: ../bin/src/ui_songinfosettingspage.h:122
 msgid "Song Information"
@@ -5125,7 +5196,7 @@ msgstr "Informații melodie"
 msgid "Song Metadata"
 msgstr "Metadate melodie"
 
-#: ui/mainwindow.cpp:296
+#: ui/mainwindow.cpp:304
 msgid "Song info"
 msgstr "Informație melodie"
 
@@ -5220,7 +5291,7 @@ msgstr "Oprește redarea după fiecare piesă"
 msgid "Stop after every track"
 msgstr "Oprește redarea după fiecare piesă"
 
-#: ui/mainwindow.cpp:710 ../bin/src/ui_mainwindow.h:728
+#: ui/mainwindow.cpp:718 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Oprește după această piesă"
 
@@ -5380,14 +5451,14 @@ msgstr "Procesul de detectare este ocupat"
 msgid "The format is only updated when a pipeline starts."
 msgstr "Formatul este actualizat doar atunci când se pornește o linie de procesare."
 
-#: upnp/upnpmediaplayer.cpp:307
+#: upnp/upnpmediaplayer.cpp:321
 msgid "The renderer couldn't play it"
-msgstr ""
+msgstr "Motorul de redare nu a putut să-l redea"
 
-#: upnp/upnpmediaplayer.cpp:220 upnp/upnpmediaplayer.cpp:276
+#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
 #, qt-format
 msgid "The renderer couldn't play it: %1"
-msgstr ""
+msgstr "Motorul de redare nu a putut să-l redea: %1"
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5415,7 +5486,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Perioada de probă pentru serverul Subsonic s‑a încheiat. Vă rugăm să donați pentru a obține o cheie de licență. Vizitați subsonic.org pentru detalii."
 
-#: ui/mainwindow.cpp:2786
+#: ui/mainwindow.cpp:2805
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5461,7 +5532,7 @@ msgid ""
 "continue?"
 msgstr "Aceste fișiere vor fi șterse de pe dispozitiv, sigur doriți să continuați?"
 
-#: library/libraryview.cpp:680 ui/mainwindow.cpp:2533 widgets/fileview.cpp:190
+#: library/libraryview.cpp:680 ui/mainwindow.cpp:2541 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5493,7 +5564,7 @@ msgstr "Acest album nu este disponibil în formatul cerut"
 msgid "This can be changed later through the preferences"
 msgstr "Această opțiune poate fi modificată ulterior în fereastra de preferințe"
 
-#: widgets/outputbutton.cpp:67
+#: widgets/outputbutton.cpp:76
 msgid "This computer"
 msgstr "Acest calculator"
 
@@ -5557,7 +5628,7 @@ msgstr "Activează/dezactivează OSD-ul cu un aspect elegant"
 msgid "Toggle fullscreen"
 msgstr "Activează/dezactivează modul de ecran complet"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1884
 msgid "Toggle queue status"
 msgstr "Comută stare coadă"
 
@@ -5644,9 +5715,25 @@ msgstr "Încearcă să ghicească metadatele lipsă"
 msgid "Turbine"
 msgstr "Turbină"
 
+#. TRANSLATORS: A button that turns on the network remote, so the chosen
+#. Chromecast or other device can play.
+#: widgets/outputbutton.cpp:191
+msgid "Turn On"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Turn off"
 msgstr "Oprește"
+
+#. TRANSLATORS: Below the message saying the network remote is off,
+#. which a Chromecast or other device needs to play. Turning it on
+#. for the device also lets phones running the Clementine Remote app
+#. connect, which is why this warns about it.
+#: widgets/outputbutton.cpp:187
+msgid ""
+"Turning on the network remote also lets the Clementine Remote app, on phones"
+" and tablets in your network, control Clementine."
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
@@ -5713,11 +5800,11 @@ msgstr "Tip de fișier necunoscut: %1"
 msgid "Unset cover"
 msgstr "Deselectează coperta"
 
-#: ui/mainwindow.cpp:1886
+#: ui/mainwindow.cpp:1894
 msgid "Unskip selected tracks"
 msgstr "Nu sare peste piesele selectate"
 
-#: ui/mainwindow.cpp:1884
+#: ui/mainwindow.cpp:1892
 msgid "Unskip track"
 msgstr "Nu sare peste piesă"
 
@@ -5796,7 +5883,7 @@ msgstr "Utilizează un set de culori personalizat"
 msgid "Use a custom message for notifications"
 msgstr "Utilizează un mesaj personalizat pentru notificări"
 
-#: ../bin/src/ui_networkremotesettingspage.h:271
+#: ../bin/src/ui_networkremotesettingspage.h:278
 msgid "Use a network remote control"
 msgstr "Utilizează un control la distanță prin rețea"
 
@@ -6057,7 +6144,7 @@ msgid ""
 "well?"
 msgstr "Doriți să mutați și celelalte melodii din acest album în categoria „Diverși artiști”?"
 
-#: ui/mainwindow.cpp:2793
+#: ui/mainwindow.cpp:2812
 msgid "Would you like to run a full rescan right now?"
 msgstr "Doriți să rulați o scanare completă în acest moment?"
 
@@ -6174,7 +6261,7 @@ msgstr "Acreditările dvs. de autentificare la Dropbox au expirat. Autentificaț
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Datele dvs. de identificare Magnatune sunt incorecte"
 
-#: internet/plex/plexauthenticator.cpp:162
+#: internet/plex/plexauthenticator.cpp:166
 msgid "Your Plex sign-in has expired. Please sign in again."
 msgstr "Autentificarea dvs. în Plex a expirat. Vă rugăm să vă autentificați din nou."
 
@@ -6249,7 +6336,7 @@ msgstr "întâi cele mai mari"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6360,7 +6447,7 @@ msgstr "pornire"
 msgid "options"
 msgstr "opțiuni"
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:325
 msgid "or scan the QR code: "
 msgstr "sau scanează codul QR: "
 
