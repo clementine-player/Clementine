@@ -65,6 +65,8 @@ UpnpEngine::UpnpEngine(Application* app, const UpnpDevice& device,
           &UpnpEngine::PlayerStateChanged);
   connect(&player_, &UpnpMediaPlayer::TrackEnded, this,
           &UpnpEngine::PlayerTrackEnded);
+  connect(&player_, &UpnpMediaPlayer::NextStarted, this,
+          &UpnpEngine::PlayerNextStarted);
   connect(&player_, &UpnpMediaPlayer::Error, this, &UpnpEngine::PlayerError);
   connect(&player_, &UpnpMediaPlayer::Lost, this, &UpnpEngine::PlayerLost);
 }
@@ -82,12 +84,21 @@ void UpnpEngine::SetDevice(const UpnpDevice& device) {
 void UpnpEngine::PublishItems() {
   QList<StreamItem> items;
   if (current_.id != 0) items << current_;
+  if (preloaded_.id != 0) items << preloaded_;
   items_->Set(token_, device_.address, items);
 }
 
-Song UpnpEngine::SongForRequest(const MediaPlaybackRequest& req) const {
+Song UpnpEngine::SongForRequest(const MediaPlaybackRequest& req,
+                                bool next) const {
   // As RemoteEngine does: the engine interface only carries URLs.
-  PlaylistItemPtr item = app_->player()->GetCurrentItem();
+  PlaylistItemPtr item;
+  if (next) {
+    Playlist* playlist = app_->playlist_manager()->active();
+    const int row = playlist->next_row();
+    if (row != -1) item = playlist->item_at(row);
+  } else {
+    item = app_->player()->GetCurrentItem();
+  }
   if (item && item->Url() == req.RequestUrl()) return item->Metadata();
 
   Song song;
@@ -122,6 +133,20 @@ QUrl UpnpEngine::UrlForItem(const StreamItem& item, qint64 start_ms) const {
   return url;
 }
 
+UpnpMediaInfo UpnpEngine::InfoForItem(const StreamItem& item,
+                                      const QUrl& url) const {
+  UpnpMediaInfo info;
+  info.url = url;
+  info.content_type = item.ContentType();
+  info.title = item.song.PrettyTitle();
+  info.artist = item.song.artist();
+  info.album = item.song.album();
+  if (item.plan.length_nanosec > 0) {
+    info.duration_ms = item.plan.length_nanosec / kNsecPerMsec;
+  }
+  return info;
+}
+
 void UpnpEngine::SendLoad(qint64 start_ms, bool playing) {
   if (current_.id == 0) return;
 
@@ -144,18 +169,13 @@ void UpnpEngine::SendLoad(qint64 start_ms, bool playing) {
     return;
   }
 
-  UpnpMediaInfo info;
-  info.url = url;
-  info.content_type = current_.ContentType();
-  info.title = current_.song.PrettyTitle();
-  info.artist = current_.song.artist();
-  info.album = current_.song.album();
-  if (current_.plan.length_nanosec > 0) {
-    info.duration_ms = current_.plan.length_nanosec / kNsecPerMsec;
-  }
   position_base_ms_ = pipeline ? start_ms : 0;
   qLog(Info) << "Playing" << url << "on" << device_;
-  player_.Load(info, pipeline ? 0 : start_ms, playing);
+  player_.Load(InfoForItem(current_, url), pipeline ? 0 : start_ms, playing);
+  // Loading replaced what was queued after it.
+  if (preloaded_.id != 0) {
+    player_.SetNext(InfoForItem(preloaded_, UrlForItem(preloaded_, 0)));
+  }
   current_sent_ = true;
   in_control_ = true;
 }
@@ -182,7 +202,14 @@ bool UpnpEngine::Load(const MediaPlaybackRequest& req,
   Engine::Base::Load(req, change, force_stop_at_end, beginning_nanosec,
                      end_nanosec);
 
-  current_ = MakeItem(req, SongForRequest(req), false);
+  // After a gapless transition the renderer is already playing this.
+  if (change & Engine::Auto && current_sent_ && current_.id != 0 &&
+      current_.req.MediaUrl() == req.MediaUrl()) {
+    return true;
+  }
+
+  preloaded_ = StreamItem();
+  current_ = MakeItem(req, SongForRequest(req, false), false);
   current_sent_ = false;
   current_retried_ = false;
   valid_emitted_ = false;
@@ -216,6 +243,7 @@ bool UpnpEngine::Play(quint64 offset_nanosec) {
 void UpnpEngine::Stop(bool) {
   if (current_sent_) player_.Stop();
   current_ = StreamItem();
+  preloaded_ = StreamItem();
   current_sent_ = false;
   // Including when the router moves playback elsewhere.
   in_control_ = false;
@@ -294,6 +322,34 @@ void UpnpEngine::PlayerStateChanged(UpnpMediaPlayer::State state) {
       // TrackEnded, Error or Lost says why.
       break;
   }
+}
+
+void UpnpEngine::StartPreloading(const MediaPlaybackRequest& req, bool, qint64,
+                                 qint64) {
+  // Otherwise the next track is loaded when this one ends.
+  if (current_.id == 0 || !current_sent_ || !player_.can_queue_next()) return;
+
+  StreamItem item = MakeItem(req, SongForRequest(req, true), false);
+  if (item.plan.mode == StreamPlan::Unplayable) return;
+  const QUrl url = UrlForItem(item, 0);
+  if (url.isEmpty()) return;
+
+  preloaded_ = item;
+  PublishItems();
+  qLog(Info) << "Queueing" << url << "on" << device_;
+  player_.SetNext(InfoForItem(preloaded_, url));
+}
+
+void UpnpEngine::PlayerNextStarted() {
+  if (preloaded_.id == 0) return;
+  current_ = preloaded_;
+  preloaded_ = StreamItem();
+  current_retried_ = false;
+  position_base_ms_ = 0;
+  PublishItems();
+  emit TrackEnded();
+  valid_emitted_ = true;
+  emit ValidMediaRequested(current_.req);
 }
 
 void UpnpEngine::PlayerTrackEnded() {

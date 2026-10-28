@@ -41,7 +41,8 @@ struct UpnpMediaInfo {
   qint64 duration_ms = 0;
 };
 
-// Plays one URL at a time on a UPnP MediaRenderer, with its AVTransport.
+// Plays one URL at a time on a UPnP MediaRenderer, with its AVTransport,
+// and queues the next where the renderer has SetNextAVTransportURI.
 //
 // Actions are sent one at a time, in the order they're asked for. While
 // something's loaded, the renderer is asked for its state and position every
@@ -71,10 +72,15 @@ class UpnpMediaPlayer : public QObject {
   void Pause();
   void Stop();
   void Seek(qint64 position_ms);
+  // Has the renderer play |info| when the loaded track ends, without a gap.
+  // Nothing happens if it can't; see can_queue_next.
+  void SetNext(const UpnpMediaInfo& info);
   // 0 to 100.
   void SetVolume(int volume);
 
   bool is_loaded() const { return loaded_; }
+  // False once the renderer has said it doesn't have SetNextAVTransportURI.
+  bool can_queue_next() const { return !next_unsupported_; }
   State state() const { return state_; }
   // Where the renderer last said it was, moved on by the time since then
   // while it's playing.
@@ -93,6 +99,9 @@ class UpnpMediaPlayer : public QObject {
   void StateChanged(UpnpMediaPlayer::State state);
   // The track played to the end.
   void TrackEnded();
+  // The track played to the end, and the renderer went on to what SetNext
+  // queued, which is what's loaded now.
+  void NextStarted();
   // The renderer couldn't play the track.
   void Error(const QString& message);
   // It can't be reached, or something else is playing on it now. Nothing is
@@ -113,6 +122,7 @@ class UpnpMediaPlayer : public QObject {
     SetUri,
     LoadSeek,
     LoadPlay,
+    SetNextUri,
     Command,
     Volume,
     PollPosition,
@@ -164,6 +174,11 @@ class UpnpMediaPlayer : public QObject {
   // like Rygel, can't seek until then, so seeking as it's loaded fails.
   qint64 pending_seek_ms_;
   qint64 duration_ms_;
+
+  // What SetNext queued, until the renderer plays it.
+  QString next_uri_;
+  qint64 next_duration_ms_;
+  bool next_unsupported_;
 };
 
 #endif  // UPNP_UPNPMEDIAPLAYER_H_

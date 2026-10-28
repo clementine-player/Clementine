@@ -55,7 +55,9 @@ UpnpMediaPlayer::UpnpMediaPlayer(QObject* parent)
       position_ms_(0),
       last_playing_position_ms_(0),
       pending_seek_ms_(-1),
-      duration_ms_(0) {
+      duration_ms_(0),
+      next_duration_ms_(0),
+      next_unsupported_(false) {
   poll_timer_->setInterval(kPollIntervalMsec);
   connect(poll_timer_, &QTimer::timeout, this, &UpnpMediaPlayer::Poll);
 }
@@ -77,6 +79,8 @@ void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
   last_playing_position_ms_ = start_ms;
   pending_seek_ms_ = -1;
   duration_ms_ = info.duration_ms;
+  // A new URI replaces anything queued after the old one.
+  next_uri_.clear();
   SetState(autoplay ? Buffering : Idle);
 
   Enqueue(SetUri, device_.av_transport, "SetAVTransportURI",
@@ -124,6 +128,14 @@ void UpnpMediaPlayer::Seek(qint64 position_ms) {
   last_playing_position_ms_ = position_ms;
 }
 
+void UpnpMediaPlayer::SetNext(const UpnpMediaInfo& info) {
+  if (!loaded_ || next_unsupported_) return;
+  next_uri_ = info.url.toString(QUrl::FullyEncoded);
+  next_duration_ms_ = info.duration_ms;
+  Enqueue(SetNextUri, device_.av_transport, "SetNextAVTransportURI",
+          {{"NextURI", next_uri_}, {"NextURIMetaData", Didl(info)}});
+}
+
 void UpnpMediaPlayer::SetVolume(int volume) {
   const QString value = QString::number(qBound(0, volume, 100));
   // Only the latest matters.
@@ -157,6 +169,7 @@ void UpnpMediaPlayer::Unload() {
   play_sent_ = false;
   want_play_ = false;
   pending_seek_ms_ = -1;
+  next_uri_.clear();
   poll_timer_->stop();
   SetState(Idle);
 }
@@ -236,6 +249,16 @@ void UpnpMediaPlayer::Finished(const UpnpSoap::Response& response) {
         pending_seek_ms_ = ParseTime(request.action.args.last().second);
       }
       break;
+    case SetNextUri:
+      if (current && !response.ok) {
+        // The next track is loaded once this one ends instead.
+        next_uri_.clear();
+        // Invalid Action, and Optional Action Not Implemented.
+        if (response.error_code == 401 || response.error_code == 602) {
+          next_unsupported_ = true;
+        }
+      }
+      break;
     case Command:
     case Volume:
       // Logged above; the next poll says what the renderer's doing.
@@ -263,6 +286,18 @@ void UpnpMediaPlayer::Poll() {
 
 void UpnpMediaPlayer::PositionInfo(const QMap<QString, QString>& values) {
   const QString track_uri = values.value("TrackURI");
+  if (started_ && !next_uri_.isEmpty() && !track_uri.isEmpty() &&
+      QUrl(track_uri) == QUrl(next_uri_)) {
+    uri_ = next_uri_;
+    next_uri_.clear();
+    duration_ms_ = next_duration_ms_;
+    position_ms_ = 0;
+    position_updated_.start();
+    last_playing_position_ms_ = 0;
+    pending_seek_ms_ = -1;
+    stopped_polls_ = 0;
+    emit NextStarted();
+  }
   if (started_ && !track_uri.isEmpty() && QUrl(track_uri) != QUrl(uri_)) {
     qLog(Info) << "The renderer is playing" << track_uri << "instead of"
                << uri_;

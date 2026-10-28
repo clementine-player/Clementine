@@ -592,6 +592,124 @@ TEST(UpnpMediaPlayerTest, EndsAtTheEnd) {
   EXPECT_EQ(UpnpMediaPlayer::Idle, player.state());
 }
 
+TEST(UpnpMediaPlayerTest, QueuesTheNext) {
+  FakePlayer player;
+  QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);
+  QSignalSpy next(&player, &UpnpMediaPlayer::NextStarted);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  info.title = "Next";
+  player.SetNext(info);
+  EXPECT_EQ("SetNextAVTransportURI", player.last().name.toStdString());
+  EXPECT_EQ("http://10.0.0.1:5500/s/token/2", player.Arg("NextURI"));
+  EXPECT_TRUE(player.Arg("NextURIMetaData").contains("<dc:title>Next"));
+  player.Answer();
+
+  player.Poll("0:03:59", "PLAYING");
+  EXPECT_EQ(0, next.size());
+  // It's gone on to the next by itself.
+  player.Poll("0:00:01", "PLAYING", "http://10.0.0.1:5500/s/token/2");
+  EXPECT_EQ(1, next.size());
+  EXPECT_EQ(0, ended.size());
+  EXPECT_EQ(0, lost.size());
+  EXPECT_TRUE(player.is_loaded());
+  EXPECT_EQ(UpnpMediaPlayer::Playing, player.state());
+  EXPECT_GE(player.position_ms(), 1000);
+  EXPECT_LT(player.position_ms(), 3000);
+
+  // Which is what's loaded now.
+  player.Poll("0:00:02", "PLAYING", "http://10.0.0.1:5500/s/token/2");
+  EXPECT_EQ(1, next.size());
+  EXPECT_EQ(0, lost.size());
+  player.Poll("0:00:00", "STOPPED", "http://10.0.0.1:5500/s/token/2");
+  EXPECT_EQ(0, ended.size());
+  EXPECT_EQ(1, lost.size());
+}
+
+TEST(UpnpMediaPlayerTest, SomethingElseAfterQueueingTheNext) {
+  FakePlayer player;
+  QSignalSpy next(&player, &UpnpMediaPlayer::NextStarted);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  player.SetNext(info);
+  player.Answer();
+
+  QMetaObject::invokeMethod(&player, "Poll", Qt::DirectConnection);
+  player.Answer({{"RelTime", "0:00:01"},
+                 {"TrackURI", "x-rincon-mp3radio://example.com/"}});
+  EXPECT_EQ(0, next.size());
+  EXPECT_EQ(1, lost.size());
+}
+
+TEST(UpnpMediaPlayerTest, CantQueueTheNext) {
+  FakePlayer player;
+  QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);
+  StartPlaying(&player);
+  EXPECT_TRUE(player.can_queue_next());
+
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  player.SetNext(info);
+  // Optional Action Not Implemented.
+  player.Fault(602);
+  EXPECT_FALSE(player.can_queue_next());
+  const int sent = player.sent_.size();
+  player.SetNext(info);
+  EXPECT_EQ(sent, player.sent_.size());
+
+  // So it ends as it would have.
+  player.Poll("0:03:59", "PLAYING");
+  player.Poll("0:00:00", "STOPPED");
+  EXPECT_EQ(1, ended.size());
+}
+
+TEST(UpnpMediaPlayerTest, NextItCouldntQueue) {
+  FakePlayer player;
+  QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  player.SetNext(info);
+  // Illegal MIME-type: only this track's to blame.
+  player.Fault(714);
+  EXPECT_TRUE(player.can_queue_next());
+
+  player.Poll("0:03:59", "PLAYING");
+  player.Poll("0:00:00", "STOPPED");
+  EXPECT_EQ(1, ended.size());
+  EXPECT_EQ(0, lost.size());
+}
+
+TEST(UpnpMediaPlayerTest, LoadingForgetsTheNext) {
+  FakePlayer player;
+  QSignalSpy next(&player, &UpnpMediaPlayer::NextStarted);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  player.SetNext(info);
+  player.Answer();
+
+  // Like a seek in a stream that can't, which loads it again.
+  player.Load(Info(), 30000, true);
+  player.Answer();  // SetAVTransportURI
+  player.Answer();  // Seek
+  player.Answer();  // Play
+  player.Poll("0:00:31", "PLAYING");
+  QMetaObject::invokeMethod(&player, "Poll", Qt::DirectConnection);
+  player.Answer({{"RelTime", "0:00:01"},
+                 {"TrackURI", "http://10.0.0.1:5500/s/token/2"}});
+  EXPECT_EQ(0, next.size());
+  EXPECT_EQ(1, lost.size());
+}
+
 TEST(UpnpMediaPlayerTest, StoppedElsewhere) {
   FakePlayer player;
   QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);

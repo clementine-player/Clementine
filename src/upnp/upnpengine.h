@@ -30,7 +30,8 @@ class RendererRegistry;
 // The engine for one UPnP MediaRenderer: an output of the EngineRouter, like
 // a ChromecastEngine, that tells the renderer to play URLs with its
 // AVTransport. Each track is planned against the formats the renderer's
-// ConnectionManager lists.
+// ConnectionManager lists. Where the renderer has SetNextAVTransportURI,
+// the next track is queued on it before this one ends, for gapless playback.
 //
 // Media is served by the network remote's MediaHttpServer, under a token of
 // this engine's that only the renderer's address may use.
@@ -53,8 +54,8 @@ class UpnpEngine : public Engine::Base {
 
   // Engine::Base
   bool Init() override { return true; }
-  void StartPreloading(const MediaPlaybackRequest&, bool, qint64,
-                       qint64) override {}
+  void StartPreloading(const MediaPlaybackRequest& req, bool force_stop_at_end,
+                       qint64 beginning_nanosec, qint64 end_nanosec) override;
   bool Load(const MediaPlaybackRequest& req, Engine::TrackChangeFlags change,
             bool force_stop_at_end, quint64 beginning_nanosec,
             qint64 end_nanosec) override;
@@ -82,14 +83,17 @@ class UpnpEngine : public Engine::Base {
  private slots:
   void PlayerStateChanged(UpnpMediaPlayer::State state);
   void PlayerTrackEnded();
+  void PlayerNextStarted();
   void PlayerError(const QString& message);
   void PlayerLost(const QString& reason);
 
  private:
   StreamItem MakeItem(const MediaPlaybackRequest& req, const Song& song,
                       bool force_encode);
-  Song SongForRequest(const MediaPlaybackRequest& req) const;
+  // The Player's current song, or with |next| the one it's preloading.
+  Song SongForRequest(const MediaPlaybackRequest& req, bool next) const;
   QUrl UrlForItem(const StreamItem& item, qint64 start_ms) const;
+  UpnpMediaInfo InfoForItem(const StreamItem& item, const QUrl& url) const;
   void PublishItems();
 
   void SendLoad(qint64 start_ms, bool playing);
@@ -110,6 +114,8 @@ class UpnpEngine : public Engine::Base {
   bool in_control_;
 
   StreamItem current_;
+  // Queued on the renderer to follow current_.
+  StreamItem preloaded_;
   // Whether current_ has been sent to the renderer.
   bool current_sent_;
   bool current_retried_;
