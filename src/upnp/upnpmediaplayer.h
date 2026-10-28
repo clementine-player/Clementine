@@ -52,16 +52,20 @@ struct UpnpMediaInfo {
 // kPollIntervalMsec, which is how this finds out that the track ended, that
 // it couldn't be played, or that something else is playing on it now.
 //
-// Volume is the renderer's own, through RenderingControl, or its group's
-// where it has a GroupRenderingControl (Sonos).
+// Once subscribed, the renderer also sends events about its AVTransport,
+// which say the same as the polls do, straight away. While they come, it's
+// only polled every kEventPollIntervalMsec, for its position and in case
+// they stop.
 //
-// Once subscribed, the renderer also sends events about its AVTransport and
-// volume. They're only logged so far.
+// Volume is the renderer's own, through RenderingControl, or its group's
+// where it has a GroupRenderingControl (Sonos). Its events say when that
+// changes, from anywhere.
 class UpnpMediaPlayer : public QObject {
   Q_OBJECT
 
  public:
   static const int kPollIntervalMsec;
+  static const int kEventPollIntervalMsec;
   // A track that stops this close to its end finished.
   static const int kEndMarginMsec;
 
@@ -101,6 +105,7 @@ class UpnpMediaPlayer : public QObject {
   qint64 position_ms() const;
   // 0 if unknown.
   qint64 duration_ms() const { return duration_ms_; }
+  int poll_interval_msec() const;
 
   // The DIDL-Lite that describes |info| to the renderer.
   static QString Didl(const UpnpMediaInfo& info);
@@ -121,17 +126,21 @@ class UpnpMediaPlayer : public QObject {
   // It can't be reached, or something else is playing on it now. Nothing is
   // loaded any more.
   void Lost(const QString& reason);
+  // The renderer's volume, 0 to 100, as it was when subscribing and whenever
+  // it changes.
+  void RendererVolumeChanged(int volume);
 
  protected:
   // Sends |action|, then calls Finished with the answer. Tests answer it
   // themselves.
   virtual void Send(const UpnpSoap::Action& action);
   void Finished(const UpnpSoap::Response& response);
+  // From the subscriptions; tests send them themselves.
+  void TransportEvent(const QMap<QString, QString>& variables);
+  void VolumeEvent(const QMap<QString, QString>& variables);
 
  private slots:
   void Poll();
-  void TransportEvent(const QMap<QString, QString>& variables);
-  void VolumeEvent(const QMap<QString, QString>& variables);
 
  private:
   enum Kind {

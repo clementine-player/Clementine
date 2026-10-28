@@ -466,6 +466,9 @@ class FakePlayer : public UpnpMediaPlayer {
 
   void Send(const UpnpSoap::Action& action) override { sent_ << action; }
 
+  using UpnpMediaPlayer::TransportEvent;
+  using UpnpMediaPlayer::VolumeEvent;
+
   // Answers the action that was sent last.
   void Answer(const QMap<QString, QString>& values = {}) {
     UpnpSoap::Response response;
@@ -1140,6 +1143,110 @@ TEST(UpnpSubscriptionTest, Fails) {
   ASSERT_TRUE(failed.wait(5000));
   EXPECT_EQ("HTTP 412", failed[0][0].toString());
   EXPECT_FALSE(subscription.is_subscribed());
+}
+
+TEST(UpnpMediaPlayerTest, EventsSayWhatPollsWould) {
+  FakePlayer player;
+  StartPlaying(&player);
+  EXPECT_EQ(UpnpMediaPlayer::kPollIntervalMsec, player.poll_interval_msec());
+
+  // Paused from the Sonos app: no poll needed to notice.
+  const int sent = player.sent_.size();
+  player.TransportEvent({{"TransportState", "PAUSED_PLAYBACK"}});
+  EXPECT_EQ(UpnpMediaPlayer::Paused, player.state());
+  player.TransportEvent({{"TransportState", "PLAYING"}});
+  EXPECT_EQ(UpnpMediaPlayer::Playing, player.state());
+  EXPECT_EQ(sent, player.sent_.size());
+  // Polled less, now that they come.
+  EXPECT_EQ(UpnpMediaPlayer::kEventPollIntervalMsec,
+            player.poll_interval_msec());
+  player.Unsubscribe();
+  EXPECT_EQ(UpnpMediaPlayer::kPollIntervalMsec, player.poll_interval_msec());
+}
+
+TEST(UpnpMediaPlayerTest, EventsAboutWhatPlayedBefore) {
+  FakePlayer player;
+  player.Load(Info(), 0, true);
+  player.Answer();  // SetAVTransportURI
+  player.Answer();  // Play
+
+  // Still the last track, as the renderer moves on.
+  player.TransportEvent({{"TransportState", "PLAYING"},
+                         {"CurrentTrackURI", "http://10.0.0.1:5500/s/old/9"}});
+  EXPECT_EQ(UpnpMediaPlayer::Buffering, player.state());
+  // A stop before it starts is left to the polls.
+  player.TransportEvent({{"TransportState", "STOPPED"},
+                         {"CurrentTrackURI", FakePlayer::kUrl}});
+  EXPECT_TRUE(player.is_loaded());
+  EXPECT_EQ(UpnpMediaPlayer::Buffering, player.state());
+
+  player.TransportEvent({{"TransportState", "PLAYING"},
+                         {"CurrentTrackURI", FakePlayer::kUrl}});
+  EXPECT_EQ(UpnpMediaPlayer::Playing, player.state());
+}
+
+TEST(UpnpMediaPlayerTest, EventsSaySomethingElsePlays) {
+  FakePlayer player;
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+  player.TransportEvent(
+      {{"TransportState", "PLAYING"},
+       {"CurrentTrackURI", "x-sonos-spotify:spotify%3atrack%3a1"}});
+  EXPECT_EQ(1, lost.size());
+  EXPECT_FALSE(player.is_loaded());
+}
+
+TEST(UpnpMediaPlayerTest, EventsSayTheNextStarted) {
+  FakePlayer player;
+  QSignalSpy next(&player, &UpnpMediaPlayer::NextStarted);
+  StartPlaying(&player);
+  UpnpMediaInfo info = Info();
+  info.url = QUrl("http://10.0.0.1:5500/s/token/2");
+  player.SetNext(info);
+  player.Answer();
+
+  player.TransportEvent({{"TransportState", "PLAYING"},
+                         {"CurrentTrackURI", "http://10.0.0.1:5500/s/token/2"},
+                         {"CurrentTrackDuration", "0:03:00"}});
+  EXPECT_EQ(1, next.size());
+  EXPECT_EQ(180000, player.duration_ms());
+}
+
+TEST(UpnpMediaPlayerTest, StoppedByEventAtTheEnd) {
+  FakePlayer player;
+  QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+  // Polled last a little short of the margin; it played on since.
+  player.Poll("0:03:56", "PLAYING");
+  QTest::qWait(1100);
+  player.TransportEvent({{"TransportState", "STOPPED"}});
+  EXPECT_EQ(1, ended.size());
+  EXPECT_EQ(0, lost.size());
+}
+
+TEST(UpnpMediaPlayerTest, StoppedByEventPartWay) {
+  FakePlayer player;
+  QSignalSpy ended(&player, &UpnpMediaPlayer::TrackEnded);
+  QSignalSpy lost(&player, &UpnpMediaPlayer::Lost);
+  StartPlaying(&player);
+  player.Poll("0:01:00", "PLAYING");
+  player.TransportEvent({{"TransportState", "STOPPED"}});
+  EXPECT_EQ(0, ended.size());
+  EXPECT_EQ(1, lost.size());
+}
+
+TEST(UpnpMediaPlayerTest, VolumeEvents) {
+  FakePlayer player;
+  QSignalSpy volumes(&player, &UpnpMediaPlayer::RendererVolumeChanged);
+  // The group's on Sonos, otherwise the renderer's own.
+  player.VolumeEvent(UpnpSubscription::ParsePropertySet(kGroupVolumeEvent));
+  player.VolumeEvent(
+      UpnpSubscription::ParsePropertySet(kRenderingControlEvent));
+  player.VolumeEvent({{"Mute", "1"}});
+  ASSERT_EQ(2, volumes.size());
+  EXPECT_EQ(20, volumes[0][0].toInt());
+  EXPECT_EQ(20, volumes[1][0].toInt());
 }
 
 }  // namespace

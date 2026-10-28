@@ -18,6 +18,8 @@
 #ifndef UPNP_UPNPENGINE_H_
 #define UPNP_UPNPENGINE_H_
 
+#include <QElapsedTimer>
+
 #include "engines/enginebase.h"
 #include "networkremote/streaming/streamitemtable.h"
 #include "networkremote/streaming/streamplanner.h"
@@ -41,7 +43,8 @@ class RendererRegistry;
 //
 // Clementine's volume slider sets the renderer's volume, but only once this
 // has played on it: switching to it leaves its volume as it was, rather than
-// jumping to wherever the slider is.
+// jumping to wherever the slider is. Where the renderer sends events, the
+// slider follows its volume instead, whatever changes it.
 class UpnpEngine : public Engine::Base {
   Q_OBJECT
 
@@ -94,6 +97,7 @@ class UpnpEngine : public Engine::Base {
   void PlayerNextStarted();
   void PlayerError(const QString& message);
   void PlayerLost(const QString& reason);
+  void PlayerVolumeChanged(int volume);
 
  private:
   StreamItem MakeItem(const MediaPlaybackRequest& req, const Song& song,
@@ -122,6 +126,11 @@ class UpnpEngine : public Engine::Base {
   // Whether this has played on the renderer since it was chosen; see the
   // class comment.
   bool in_control_;
+  // The renderer's volume as it last said, or -1. Not sent back to it.
+  int renderer_volume_;
+  // Since this last set it. Its events about that, which may be about
+  // values the slider has already passed, don't move the slider.
+  QElapsedTimer volume_set_;
 
   StreamItem current_;
   // Queued on the renderer to follow current_.

@@ -67,6 +67,8 @@ void EngineRouter::ConnectEngine(Engine::Base* engine) {
           SLOT(ForwardMetaData(Engine::SimpleMetaBundle)));
   connect(engine, SIGNAL(StateChanged(Engine::State)),
           SLOT(ForwardStateChanged(Engine::State)));
+  connect(engine, SIGNAL(OutputVolumeChanged(int)),
+          SLOT(ForwardOutputVolumeChanged(int)));
 }
 
 void EngineRouter::AddOutput(Engine::Base* engine) {
@@ -305,6 +307,10 @@ void EngineRouter::ForwardValidMediaRequested(const MediaPlaybackRequest& req) {
 
 void EngineRouter::ForwardMetaData(const Engine::SimpleMetaBundle& bundle) {
   if (IsActive(sender())) emit MetaData(bundle);
+}
+
+void EngineRouter::ForwardOutputVolumeChanged(int volume) {
+  if (IsActive(sender())) emit OutputVolumeChanged(volume);
 }
 
 void EngineRouter::ForwardStateChanged(Engine::State state) {

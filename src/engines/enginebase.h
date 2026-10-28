@@ -140,6 +140,10 @@ class Base : public QObject {
   // subsequent call to state() won't return a stale value.
   void StateChanged(Engine::State);
 
+  // The output's own volume changed, for example from its own controls or
+  // another app: 0 to 100, as the volume slider has it.
+  void OutputVolumeChanged(int volume);
+
  protected:
   Base();
 

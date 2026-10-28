@@ -39,6 +39,9 @@ namespace {
 // Same margins as ChromecastEngine.
 const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;
 const int kTimerIntervalMsec = 1000;
+// How long the renderer's volume events are taken to be about this having
+// set it.
+const int kOwnVolumeMsec = 1500;
 // Sonos shows covers at up to 640 pixels; TVs mostly smaller.
 const int kMaxCoverSize = 600;
 
@@ -58,6 +61,7 @@ UpnpEngine::UpnpEngine(Application* app, const UpnpDevice& device,
       token_(StreamItemTable::NewToken()),
       next_item_id_(1),
       in_control_(false),
+      renderer_volume_(-1),
       current_sent_(false),
       current_retried_(false),
       valid_emitted_(false),
@@ -80,6 +84,8 @@ UpnpEngine::UpnpEngine(Application* app, const UpnpDevice& device,
           &UpnpEngine::PlayerNextStarted);
   connect(&player_, &UpnpMediaPlayer::Error, this, &UpnpEngine::PlayerError);
   connect(&player_, &UpnpMediaPlayer::Lost, this, &UpnpEngine::PlayerLost);
+  connect(&player_, &UpnpMediaPlayer::RendererVolumeChanged, this,
+          &UpnpEngine::PlayerVolumeChanged);
 }
 
 UpnpEngine::~UpnpEngine() { items_->Remove(token_); }
@@ -370,9 +376,17 @@ QString UpnpEngine::output_icon() const {
 }
 
 void UpnpEngine::SetVolumeSW(uint) {
-  // Not before playing on it; see the class comment.
-  if (!in_control_) return;
+  // Not before playing on it; see the class comment. Nor what it just said
+  // it's at, as the slider follows it.
+  if (!in_control_ || static_cast<int>(volume_) == renderer_volume_) return;
   player_.SetVolume(volume_);
+  volume_set_.start();
+}
+
+void UpnpEngine::PlayerVolumeChanged(int volume) {
+  renderer_volume_ = volume;
+  if (volume_set_.isValid() && volume_set_.elapsed() < kOwnVolumeMsec) return;
+  emit OutputVolumeChanged(volume);
 }
 
 void UpnpEngine::PlayerStateChanged(UpnpMediaPlayer::State state) {
