@@ -33,10 +33,13 @@ struct UpnpService {
   // eg. "urn:schemas-upnp-org:service:AVTransport:1".
   QString type;
   QUrl control_url;
+  // Where to subscribe to its events. Empty if it has none.
+  QUrl event_url;
 
   bool is_valid() const { return !type.isEmpty() && control_url.isValid(); }
   bool operator==(const UpnpService& other) const {
-    return type == other.type && control_url == other.control_url;
+    return type == other.type && control_url == other.control_url &&
+           event_url == other.event_url;
   }
 };
 

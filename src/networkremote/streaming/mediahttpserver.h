@@ -24,6 +24,7 @@
 #include <memory>
 
 class QTcpSocket;
+class EventCallbackTable;
 class StreamItemTable;
 struct StreamItem;
 
@@ -62,7 +63,9 @@ class MediaHttpServer : public QObject {
   Q_OBJECT
 
  public:
+  // Renderers' events are taken for |events|' tokens, if there is one.
   explicit MediaHttpServer(std::shared_ptr<StreamItemTable> items,
+                           std::shared_ptr<EventCallbackTable> events = nullptr,
                            QObject* parent = nullptr);
   ~MediaHttpServer();
 
@@ -79,6 +82,8 @@ class MediaHttpServer : public QObject {
   static const int kMaxResponses;
   // Connections that are still sending their request.
   static const int kMaxPendingRequests;
+  // The biggest event body taken. Sonos's grouping events can be tens of KB.
+  static const int kMaxEventSize;
 
  private slots:
   void ReadyRead();
@@ -86,12 +91,15 @@ class MediaHttpServer : public QObject {
  private:
   void Dispatch(QTcpSocket* socket, const HttpRequest& request);
   void WriteCover(QTcpSocket* socket, const StreamItem& item, bool head_only);
+  // A NOTIFY to /e/<token>: reads its body, then hands it to the receiver.
+  void ReadEvent(QTcpSocket* socket, const HttpRequest& request);
   // Live responders, all of them or only those for |token|; pipelines only
   // with |pipelines|.
   int CountResponders(const QByteArray* token, bool pipelines) const;
   int CountPendingRequests() const;
 
   std::shared_ptr<StreamItemTable> items_;
+  std::shared_ptr<EventCallbackTable> events_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_MEDIAHTTPSERVER_H_

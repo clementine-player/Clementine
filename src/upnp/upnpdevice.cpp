@@ -108,17 +108,21 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
     } else if (name == QLatin1String("service")) {
       UpnpService service;
       QString control_url;
+      QString event_url;
       while (reader.readNextStartElement()) {
         if (reader.name() == QLatin1String("serviceType")) {
           service.type = reader.readElementText();
         } else if (reader.name() == QLatin1String("controlURL")) {
           control_url = reader.readElementText();
+        } else if (reader.name() == QLatin1String("eventSubURL")) {
+          event_url = reader.readElementText().trimmed();
         } else {
           reader.skipCurrentElement();
         }
       }
       // Resolved once URLBase is known, which may come after.
       service.control_url = QUrl(control_url);
+      if (!event_url.isEmpty()) service.event_url = QUrl(event_url);
       open.last().services << service;
     }
   }
@@ -137,8 +141,12 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
 
   const QUrl base = url_base.isEmpty() ? location : QUrl(url_base);
   auto resolved = [&base](UpnpService service) {
-    if (service.is_valid())
+    if (service.is_valid()) {
       service.control_url = base.resolved(service.control_url);
+      if (!service.event_url.isEmpty()) {
+        service.event_url = base.resolved(service.event_url);
+      }
+    }
     return service;
   };
 

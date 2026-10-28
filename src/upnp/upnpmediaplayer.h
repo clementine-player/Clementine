@@ -22,12 +22,15 @@
 #include <QList>
 #include <QObject>
 #include <QUrl>
+#include <memory>
 
 #include "upnpdevice.h"
 #include "upnpsoap.h"
 
+class EventCallbackTable;
 class QNetworkAccessManager;
 class QTimer;
+class UpnpSubscription;
 
 // What to play, and what the renderer shows while it plays.
 struct UpnpMediaInfo {
@@ -51,6 +54,9 @@ struct UpnpMediaInfo {
 //
 // Volume is the renderer's own, through RenderingControl, or its group's
 // where it has a GroupRenderingControl (Sonos).
+//
+// Once subscribed, the renderer also sends events about its AVTransport and
+// volume. They're only logged so far.
 class UpnpMediaPlayer : public QObject {
   Q_OBJECT
 
@@ -63,9 +69,17 @@ class UpnpMediaPlayer : public QObject {
   Q_ENUM(State)
 
   explicit UpnpMediaPlayer(QObject* parent = nullptr);
+  ~UpnpMediaPlayer();
 
   // Where its services are.
   void SetDevice(const UpnpDevice& device);
+  // Where the media server takes events, for Subscribe.
+  void SetEventCallbacks(std::shared_ptr<EventCallbackTable> callbacks);
+
+  // Subscribes to the renderer's events, sent to the media server at |base|,
+  // if it isn't already. They're kept until Stop or Unsubscribe.
+  void Subscribe(const QUrl& base);
+  void Unsubscribe();
 
   void Load(const UpnpMediaInfo& info, qint64 start_ms, bool autoplay);
   void Play();
@@ -116,6 +130,8 @@ class UpnpMediaPlayer : public QObject {
 
  private slots:
   void Poll();
+  void TransportEvent(const QMap<QString, QString>& variables);
+  void VolumeEvent(const QMap<QString, QString>& variables);
 
  private:
   enum Kind {
@@ -145,6 +161,9 @@ class UpnpMediaPlayer : public QObject {
   void PositionInfo(const QMap<QString, QString>& values);
   void TransportInfo(const QMap<QString, QString>& values);
   void SetState(State state);
+  // A subscription to |service|'s events, or null if it has none.
+  UpnpSubscription* MakeSubscription(const UpnpService& service,
+                                     const QUrl& base);
 
   QNetworkAccessManager* network_;
   QTimer* poll_timer_;
@@ -179,6 +198,10 @@ class UpnpMediaPlayer : public QObject {
   QString next_uri_;
   qint64 next_duration_ms_;
   bool next_unsupported_;
+
+  std::shared_ptr<EventCallbackTable> callbacks_;
+  UpnpSubscription* transport_events_;
+  UpnpSubscription* volume_events_;
 };
 
 #endif  // UPNP_UPNPMEDIAPLAYER_H_

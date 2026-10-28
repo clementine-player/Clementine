@@ -24,6 +24,7 @@
 #include <QXmlStreamWriter>
 
 #include "core/logging.h"
+#include "upnpsubscription.h"
 
 const int UpnpMediaPlayer::kPollIntervalMsec = 1000;
 const int UpnpMediaPlayer::kEndMarginMsec = 3000;
@@ -57,12 +58,93 @@ UpnpMediaPlayer::UpnpMediaPlayer(QObject* parent)
       pending_seek_ms_(-1),
       duration_ms_(0),
       next_duration_ms_(0),
-      next_unsupported_(false) {
+      next_unsupported_(false),
+      transport_events_(nullptr),
+      volume_events_(nullptr) {
   poll_timer_->setInterval(kPollIntervalMsec);
   connect(poll_timer_, &QTimer::timeout, this, &UpnpMediaPlayer::Poll);
 }
 
+UpnpMediaPlayer::~UpnpMediaPlayer() {
+  // Before network_, which they unsubscribe with.
+  Unsubscribe();
+}
+
 void UpnpMediaPlayer::SetDevice(const UpnpDevice& device) { device_ = device; }
+
+void UpnpMediaPlayer::SetEventCallbacks(
+    std::shared_ptr<EventCallbackTable> callbacks) {
+  callbacks_ = callbacks;
+}
+
+void UpnpMediaPlayer::Subscribe(const QUrl& base) {
+  if (!callbacks_ || base.isEmpty()) return;
+
+  // Group volume where there is one, as SetVolume sets.
+  const UpnpService& volume = device_.group_rendering_control.is_valid()
+                                  ? device_.group_rendering_control
+                                  : device_.rendering_control;
+  auto current = [&base](UpnpSubscription* subscription,
+                         const UpnpService& service) {
+    return subscription && subscription->base() == base &&
+           subscription->event_url() == service.event_url;
+  };
+  if (!current(transport_events_, device_.av_transport)) {
+    delete transport_events_;
+    transport_events_ = MakeSubscription(device_.av_transport, base);
+    if (transport_events_) {
+      connect(transport_events_, &UpnpSubscription::Event, this,
+              &UpnpMediaPlayer::TransportEvent);
+    }
+  }
+  if (!current(volume_events_, volume)) {
+    delete volume_events_;
+    volume_events_ = MakeSubscription(volume, base);
+    if (volume_events_) {
+      connect(volume_events_, &UpnpSubscription::Event, this,
+              &UpnpMediaPlayer::VolumeEvent);
+    }
+  }
+}
+
+UpnpSubscription* UpnpMediaPlayer::MakeSubscription(const UpnpService& service,
+                                                    const QUrl& base) {
+  if (!service.is_valid() || service.event_url.isEmpty()) return nullptr;
+  UpnpSubscription* subscription = new UpnpSubscription(
+      network_, callbacks_, service.event_url, device_.address, this);
+  // Polling carries on regardless.
+  connect(subscription, &UpnpSubscription::Failed, this,
+          [this, subscription](const QString& reason) {
+            qLog(Warning) << "No events from" << subscription->event_url()
+                          << ":" << reason;
+            if (subscription == transport_events_) transport_events_ = nullptr;
+            if (subscription == volume_events_) volume_events_ = nullptr;
+            subscription->deleteLater();
+          });
+  subscription->Start(base);
+  return subscription;
+}
+
+void UpnpMediaPlayer::Unsubscribe() {
+  delete transport_events_;
+  transport_events_ = nullptr;
+  delete volume_events_;
+  volume_events_ = nullptr;
+}
+
+void UpnpMediaPlayer::TransportEvent(const QMap<QString, QString>& variables) {
+  qLog(Debug) << device_.name
+              << "AVTransport event:" << variables.value("TransportState")
+              << variables.value("TransportStatus")
+              << variables.value("CurrentTrackURI");
+}
+
+void UpnpMediaPlayer::VolumeEvent(const QMap<QString, QString>& variables) {
+  qLog(Debug) << device_.name << "volume event:"
+              << variables.value("GroupVolume", variables.value("Volume"))
+              << "mute"
+              << variables.value("GroupMute", variables.value("Mute"));
+}
 
 void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
                            bool autoplay) {
@@ -109,6 +191,7 @@ void UpnpMediaPlayer::Pause() {
 }
 
 void UpnpMediaPlayer::Stop() {
+  Unsubscribe();
   if (!loaded_) return;
   Unload();
   Enqueue(Command, device_.av_transport, "Stop");
