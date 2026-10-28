@@ -27,6 +27,7 @@
 #include "upnpsubscription.h"
 
 const int UpnpMediaPlayer::kPollIntervalMsec = 1000;
+const int UpnpMediaPlayer::kEventPollIntervalMsec = 5000;
 const int UpnpMediaPlayer::kEndMarginMsec = 3000;
 
 namespace {
@@ -117,7 +118,10 @@ UpnpSubscription* UpnpMediaPlayer::MakeSubscription(const UpnpService& service,
           [this, subscription](const QString& reason) {
             qLog(Warning) << "No events from" << subscription->event_url()
                           << ":" << reason;
-            if (subscription == transport_events_) transport_events_ = nullptr;
+            if (subscription == transport_events_) {
+              transport_events_ = nullptr;
+              poll_timer_->setInterval(kPollIntervalMsec);
+            }
             if (subscription == volume_events_) volume_events_ = nullptr;
             subscription->deleteLater();
           });
@@ -128,8 +132,13 @@ UpnpSubscription* UpnpMediaPlayer::MakeSubscription(const UpnpService& service,
 void UpnpMediaPlayer::Unsubscribe() {
   delete transport_events_;
   transport_events_ = nullptr;
+  poll_timer_->setInterval(kPollIntervalMsec);
   delete volume_events_;
   volume_events_ = nullptr;
+}
+
+int UpnpMediaPlayer::poll_interval_msec() const {
+  return poll_timer_->interval();
 }
 
 void UpnpMediaPlayer::TransportEvent(const QMap<QString, QString>& variables) {
@@ -137,13 +146,46 @@ void UpnpMediaPlayer::TransportEvent(const QMap<QString, QString>& variables) {
               << "AVTransport event:" << variables.value("TransportState")
               << variables.value("TransportStatus")
               << variables.value("CurrentTrackURI");
+  // They're coming, so polls are only a safety net now.
+  poll_timer_->setInterval(kEventPollIntervalMsec);
+  if (!loaded_) return;
+
+  const QString uri = variables.value("CurrentTrackURI");
+  // Until it's started, an event may still be about what played before.
+  if (!started_ && !uri.isEmpty() && QUrl(uri) != QUrl(uri_)) return;
+
+  // As GetPositionInfo would have it, without the position, which isn't sent
+  // as an event.
+  QMap<QString, QString> position;
+  if (variables.contains("CurrentTrackURI")) position["TrackURI"] = uri;
+  if (variables.contains("CurrentTrackDuration")) {
+    position["TrackDuration"] = variables.value("CurrentTrackDuration");
+  }
+  if (!position.isEmpty()) {
+    PositionInfo(position);
+    if (!loaded_) return;
+  }
+
+  if (!variables.contains("TransportState")) return;
+  const QString state = variables.value("TransportState");
+  // Whether a track that hasn't started couldn't be played is left to the
+  // polls, which give it time.
+  if (!started_ && (state == "STOPPED" || state == "NO_MEDIA_PRESENT")) {
+    return;
+  }
+  TransportInfo(
+      {{"CurrentTransportState", state},
+       {"CurrentTransportStatus", variables.value("TransportStatus")}});
 }
 
 void UpnpMediaPlayer::VolumeEvent(const QMap<QString, QString>& variables) {
-  qLog(Debug) << device_.name << "volume event:"
-              << variables.value("GroupVolume", variables.value("Volume"))
-              << "mute"
-              << variables.value("GroupMute", variables.value("Mute"));
+  // The group's, where SetVolume sets that.
+  const QString name =
+      variables.contains("GroupVolume") ? "GroupVolume" : "Volume";
+  bool ok = false;
+  const int volume = variables.value(name).toInt(&ok);
+  qLog(Debug) << device_.name << "volume event:" << variables.value(name);
+  if (ok) emit RendererVolumeChanged(qBound(0, volume, 100));
 }
 
 void UpnpMediaPlayer::Load(const UpnpMediaInfo& info, qint64 start_ms,
@@ -426,8 +468,11 @@ void UpnpMediaPlayer::TransportInfo(const QMap<QString, QString>& values) {
     if (!want_play_) return;
 
     if (started_) {
-      const bool ended = duration_ms_ <= 0 || last_playing_position_ms_ >=
-                                                  duration_ms_ - kEndMarginMsec;
+      // Polls may be seconds apart, so where it must have got to since.
+      const qint64 reached = qMax(last_playing_position_ms_,
+                                  state_ == Playing ? position_ms() : 0);
+      const bool ended =
+          duration_ms_ <= 0 || reached >= duration_ms_ - kEndMarginMsec;
       Unload();
       if (ended) {
         emit TrackEnded();

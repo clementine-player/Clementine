@@ -110,6 +110,7 @@ class EngineRouter : public Engine::Base {
   void ForwardValidMediaRequested(const MediaPlaybackRequest& req);
   void ForwardMetaData(const Engine::SimpleMetaBundle& bundle);
   void ForwardStateChanged(Engine::State state);
+  void ForwardOutputVolumeChanged(int volume);
   void PauseWhenPlaying();
 
  private:

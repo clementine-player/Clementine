@@ -116,6 +116,9 @@ void Player::Init() {
           SLOT(EngineStateChanged(Engine::State)));
   connect(engine_.get(), SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
   connect(engine_.get(), SIGNAL(TrackEnded()), SLOT(TrackEnded()));
+  // Such as a Sonos's, from its own app: the slider follows.
+  connect(engine_.get(), SIGNAL(OutputVolumeChanged(int)),
+          SLOT(SetVolume(int)));
   connect(engine_.get(), SIGNAL(MetaData(Engine::SimpleMetaBundle)),
           SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
