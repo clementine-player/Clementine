@@ -540,8 +540,15 @@ jobs:
       # A development build of a commit release.yml has tagged already
       # takes the release's version, and mustn't take over its release: the
       # release has the same commit, so nothing is lost.
-      - name: Check this isn't a numbered release's commit
-        id: numbered
+      #
+      # Nor can it be released if master's workflows have changed since this
+      # commit: a tag on it would bring back the workflows it had, and
+      # GITHUB_TOKEN can't have the workflows permission that takes, so
+      # GitHub refuses the release with a 403. Master's newer build is
+      # released instead, with this one's notes, which are collected since
+      # the last tag.
+      - name: Check this build can be released
+        id: releasable
         if: ${{ !inputs.release }}
         env:
           VERSION: ${{ steps.tag_name.outputs.version }}
@@ -549,9 +556,15 @@ jobs:
           if [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+)+$ ]]; then
             echo "::notice::$VERSION is a numbered release, which release.yml makes, so this build isn't released."
             echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch --quiet origin master
+          if ! git diff --quiet "$GITHUB_SHA" FETCH_HEAD -- .github/workflows; then
+            echo "::notice::Master's workflows have changed since $VERSION's commit, so it can't be tagged, and its build isn't released. Master's newer build will be."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Create draft pre-release
-        if: steps.numbered.outputs.skip != 'true'
+        if: steps.releasable.outputs.skip != 'true'
         # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
         # at once, among a run of Not Found errors from GitHub.
         uses: softprops/action-gh-release@v3.0.3
@@ -575,7 +588,7 @@ jobs:
           make_latest: ${{ inputs.release && 'true' || 'false' }}
           preserve_order: true
       - name: Publish the pre-release
-        if: ${{ !inputs.release && steps.numbered.outputs.skip != 'true' }}
+        if: ${{ !inputs.release && steps.releasable.outputs.skip != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.tag_name.outputs.version }}
