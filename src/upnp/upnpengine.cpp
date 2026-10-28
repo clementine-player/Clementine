@@ -17,6 +17,8 @@
 
 #include "upnpengine.h"
 
+#include <QBuffer>
+#include <QImage>
 #include <QSettings>
 #include <QTimer>
 #include <QTimerEvent>
@@ -24,6 +26,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
+#include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/streaming/rendererregistry.h"
@@ -35,6 +38,12 @@ namespace {
 // Same margins as ChromecastEngine.
 const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;
 const int kTimerIntervalMsec = 1000;
+// Sonos shows covers at up to 640 pixels; TVs mostly smaller.
+const int kMaxCoverSize = 600;
+
+bool IsWebUrl(const QString& url) {
+  return url.startsWith("http://") || url.startsWith("https://");
+}
 
 }  // namespace
 
@@ -117,11 +126,67 @@ StreamItem UpnpEngine::MakeItem(const MediaPlaybackRequest& req,
   item.song = song;
   item.plan = StreamPlanner::Plan(req, song, device_.caps, settings);
   item.content_type = device_.DeviceMimeType(item.plan.mime_type);
+  item.cover = LoadCover(song);
 
   qLog(Debug) << "UPnP item" << item.id << req.MediaUrl() << "->"
               << item.plan.mode << item.plan.mime_type << "("
               << item.plan.reason << ")";
   return item;
+}
+
+QByteArray UpnpEngine::LoadCover(const Song& song) {
+  // As AlbumCoverLoader::TryLoadPixmap does, without the QPixmap.
+  const QString manual = song.art_manual();
+  const QString automatic = song.art_automatic();
+  if (manual == Song::kManuallyUnsetCover) return QByteArray();
+
+  QImage image = song.image();
+  if (image.isNull() && !manual.isEmpty() && !IsWebUrl(manual)) {
+    image.load(manual);
+  }
+  if (image.isNull()) {
+    if (automatic == Song::kEmbeddedCover && song.url().isLocalFile()) {
+      image = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(
+          song.url().toLocalFile());
+    } else if (!automatic.isEmpty() && !IsWebUrl(automatic)) {
+      image.load(automatic);
+    }
+  }
+  return EncodeCover(image);
+}
+
+QByteArray UpnpEngine::EncodeCover(const QImage& image) {
+  if (image.isNull()) return QByteArray();
+  QImage scaled = image;
+  if (image.width() > kMaxCoverSize || image.height() > kMaxCoverSize) {
+    scaled = image.scaled(kMaxCoverSize, kMaxCoverSize, Qt::KeepAspectRatio,
+                          Qt::SmoothTransformation);
+  }
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  if (!scaled.convertToFormat(QImage::Format_RGB32).save(&buffer, "JPG", 90)) {
+    return QByteArray();
+  }
+  return data;
+}
+
+QUrl UpnpEngine::CoverUrl(const StreamItem& item) const {
+  if (item.cover.isEmpty()) {
+    // One on the web, the renderer can fetch itself.
+    const QString manual = item.song.art_manual();
+    if (manual == Song::kManuallyUnsetCover) return QUrl();
+    if (IsWebUrl(manual)) return QUrl(manual);
+    if (IsWebUrl(item.song.art_automatic())) {
+      return QUrl(item.song.art_automatic());
+    }
+    return QUrl();
+  }
+  QUrl url = registry_->MediaBaseUrl(device_.address);
+  if (url.isEmpty()) return url;
+  url.setPath(
+      QString("/a/%1/%2").arg(QString::fromLatin1(token_)).arg(item.id));
+  return url;
 }
 
 QUrl UpnpEngine::UrlForItem(const StreamItem& item, qint64 start_ms) const {
@@ -141,6 +206,7 @@ UpnpMediaInfo UpnpEngine::InfoForItem(const StreamItem& item,
   info.title = item.song.PrettyTitle();
   info.artist = item.song.artist();
   info.album = item.song.album();
+  info.image_url = CoverUrl(item);
   if (item.plan.length_nanosec > 0) {
     info.duration_ms = item.plan.length_nanosec / kNsecPerMsec;
   }

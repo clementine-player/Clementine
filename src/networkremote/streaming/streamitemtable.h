@@ -45,6 +45,9 @@ struct StreamItem {
   // The renderer's own name for plan.mime_type, if it has one. Some check
   // the Content-Type they're served against the types they listed, exactly.
   QString content_type;
+  // The song's cover as a JPEG, for renderers that show one, served beside
+  // the item. Empty if there's none to serve.
+  QByteArray cover;
 
   // What to serve the item as.
   QString ContentType() const {
