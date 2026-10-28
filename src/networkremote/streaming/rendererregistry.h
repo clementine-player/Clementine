@@ -38,6 +38,7 @@ class RemoteEngine;
 class UpnpDiscovery;
 class UpnpEngine;
 struct UpnpDevice;
+class EventCallbackTable;
 class StreamItemTable;
 struct RendererEndpoint;
 
@@ -71,6 +72,10 @@ class RendererRegistry : public QObject {
 
   // Shared with MediaHttpServer, which reads it from another thread.
   std::shared_ptr<StreamItemTable> items() const { return items_; }
+  // Where renderers' events go, for MediaHttpServer to take.
+  std::shared_ptr<EventCallbackTable> event_callbacks() const {
+    return event_callbacks_;
+  }
 
   // Moves playback to the output with this id ("local" or a renderer id).
   bool SetOutput(const QString& output_id);
@@ -167,6 +172,7 @@ class RendererRegistry : public QObject {
   Application* app_;
   QPointer<EngineRouter> router_;
   std::shared_ptr<StreamItemTable> items_;
+  std::shared_ptr<EventCallbackTable> event_callbacks_;
   QList<RemoteEngine*> engines_;
 
   // Output ids for Cast devices.

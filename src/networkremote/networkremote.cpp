@@ -212,7 +212,8 @@ void NetworkRemote::StartServer() {
 
   // Cast devices and the like fetch media over HTTP on the same port.
   if (renderer_registry_) {
-    media_http_server_.reset(new MediaHttpServer(renderer_registry_->items()));
+    media_http_server_.reset(new MediaHttpServer(
+        renderer_registry_->items(), renderer_registry_->event_callbacks()));
   }
   StartStreaming();
 

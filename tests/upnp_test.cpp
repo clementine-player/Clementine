@@ -16,10 +16,18 @@
 */
 
 #include <QImage>
+#include <QNetworkAccessManager>
 #include <QSignalSpy>
+#include <QTcpServer>
+#include <QTcpSocket>
 #include <QTemporaryDir>
+#include <QTest>
+#include <memory>
 
 #include "gtest/gtest.h"
+#include "networkremote/streaming/eventcallbacktable.h"
+#include "networkremote/streaming/mediahttpserver.h"
+#include "networkremote/streaming/streamitemtable.h"
 #include "test_utils.h"
 #include "upnp/sonostopology.h"
 #include "upnp/upnpdevice.h"
@@ -27,6 +35,7 @@
 #include "upnp/upnpengine.h"
 #include "upnp/upnpmediaplayer.h"
 #include "upnp/upnpsoap.h"
+#include "upnp/upnpsubscription.h"
 
 namespace {
 
@@ -113,7 +122,8 @@ const char kSonosDescription[] =
     "</controlURL></service>"
     "<service><serviceType>urn:schemas-upnp-org:service:AVTransport:1"
     "</serviceType><controlURL>/MediaRenderer/AVTransport/Control"
-    "</controlURL></service>"
+    "</controlURL><eventSubURL>/MediaRenderer/AVTransport/Event"
+    "</eventSubURL></service>"
     "<service><serviceType>"
     "urn:schemas-upnp-org:service:GroupRenderingControl:1</serviceType>"
     "<controlURL>/MediaRenderer/GroupRenderingControl/Control</controlURL>"
@@ -137,7 +147,8 @@ const char kPlainDescription[] =
     "<UDN>uuid:5f9ec1b3-ed59-79bb-4530-745d6b3e9a65</UDN>"
     "<serviceList>"
     "<service><serviceType>urn:schemas-upnp-org:service:AVTransport:2"
-    "</serviceType><controlURL>upnp/control/avt</controlURL></service>"
+    "</serviceType><controlURL>upnp/control/avt</controlURL>"
+    "<eventSubURL>upnp/event/avt</eventSubURL></service>"
     "<service><serviceType>urn:schemas-upnp-org:service:RenderingControl:2"
     "</serviceType><controlURL>upnp/control/rc</controlURL></service>"
     "</serviceList>"
@@ -264,6 +275,10 @@ TEST(UpnpDeviceTest, ParsesAnEmbeddedRenderer) {
       device.av_transport.control_url);
   EXPECT_EQ("urn:schemas-upnp-org:service:AVTransport:1",
             device.av_transport.type);
+  EXPECT_EQ(QUrl("http://192.168.86.217:1400/MediaRenderer/AVTransport/Event"),
+            device.av_transport.event_url);
+  // The fixture leaves it out.
+  EXPECT_TRUE(device.rendering_control.event_url.isEmpty());
   // The renderer's, not the MediaServer's.
   EXPECT_EQ(QUrl("http://192.168.86.217:1400/MediaRenderer/ConnectionManager/"
                  "Control"),
@@ -285,6 +300,8 @@ TEST(UpnpDeviceTest, ParsesARootRenderer) {
   EXPECT_EQ("Kitchen & Dining", device.name);
   EXPECT_EQ(QUrl("http://10.0.0.9:49152/upnp/control/avt"),
             device.av_transport.control_url);
+  EXPECT_EQ(QUrl("http://10.0.0.9:49152/upnp/event/avt"),
+            device.av_transport.event_url);
   EXPECT_EQ("urn:schemas-upnp-org:service:AVTransport:2",
             device.av_transport.type);
   EXPECT_FALSE(device.connection_manager.is_valid());
@@ -881,6 +898,248 @@ TEST(UpnpMediaPlayerTest, VolumeWithoutGroups) {
   EXPECT_EQ("0", player.Arg("InstanceID"));
   EXPECT_EQ("Master", player.Arg("Channel"));
   EXPECT_EQ("42", player.Arg("DesiredVolume"));
+}
+
+// Events from a Sonos Play:3, as they first come after subscribing. The
+// AVTransport's is trimmed of variables that aren't used.
+const char kGroupVolumeEvent[] =
+    "<e:propertyset xmlns:e=\"urn:schemas-upnp-org:event-1-0\">"
+    "<e:property><GroupVolume>20</GroupVolume></e:property>"
+    "<e:property><GroupMute>0</GroupMute></e:property>"
+    "<e:property><GroupVolumeChangeable>1</GroupVolumeChangeable>"
+    "</e:property></e:propertyset>";
+const char kRenderingControlEvent[] =
+    "<e:propertyset xmlns:e=\"urn:schemas-upnp-org:event-1-0\"><e:property>"
+    "<LastChange>&lt;Event xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/RCS/"
+    "&quot;&gt;&lt;InstanceID val=&quot;0&quot;&gt;&lt;Volume channel=&quot;"
+    "Master&quot; val=&quot;20&quot;/&gt;&lt;Volume channel=&quot;LF&quot; "
+    "val=&quot;100&quot;/&gt;&lt;Volume channel=&quot;RF&quot; val=&quot;100"
+    "&quot;/&gt;&lt;Mute channel=&quot;Master&quot; val=&quot;0&quot;/&gt;"
+    "&lt;Mute channel=&quot;LF&quot; val=&quot;0&quot;/&gt;&lt;Bass val=&quot;"
+    "0&quot;/&gt;&lt;/InstanceID&gt;&lt;/Event&gt;</LastChange></e:property>"
+    "</e:propertyset>";
+const char kTransportEvent[] =
+    "<e:propertyset xmlns:e=\"urn:schemas-upnp-org:event-1-0\"><e:property>"
+    "<LastChange>&lt;Event xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/AVT/"
+    "&quot; xmlns:r=&quot;urn:schemas-rinconnetworks-com:metadata-1-0/&quot;"
+    "&gt;&lt;InstanceID val=&quot;0&quot;&gt;&lt;TransportState val=&quot;"
+    "STOPPED&quot;/&gt;&lt;CurrentTrackURI val=&quot;http://192.168.86.214:"
+    "34637/s/c18b74a22c9b820333ab8cce5749eb6b/2&quot;/&gt;&lt;"
+    "CurrentTrackDuration val=&quot;0:00:12&quot;/&gt;&lt;CurrentTrackMetaData "
+    "val=&quot;&amp;lt;DIDL-Lite&amp;gt;&amp;lt;/DIDL-Lite&amp;gt;&quot;/&gt;"
+    "&lt;r:NextTrackURI val=&quot;&quot;/&gt;&lt;TransportStatus val=&quot;OK"
+    "&quot;/&gt;&lt;/InstanceID&gt;&lt;/Event&gt;</LastChange></e:property>"
+    "</e:propertyset>";
+
+TEST(UpnpSubscriptionTest, ParsesProperties) {
+  const QMap<QString, QString> group =
+      UpnpSubscription::ParsePropertySet(kGroupVolumeEvent);
+  EXPECT_EQ("20", group.value("GroupVolume"));
+  EXPECT_EQ("0", group.value("GroupMute"));
+  EXPECT_EQ(3, group.size());
+}
+
+TEST(UpnpSubscriptionTest, ParsesLastChange) {
+  const QMap<QString, QString> volume =
+      UpnpSubscription::ParsePropertySet(kRenderingControlEvent);
+  // The Master channel's, not the others'.
+  EXPECT_EQ("20", volume.value("Volume"));
+  EXPECT_EQ("0", volume.value("Mute"));
+  EXPECT_EQ("0", volume.value("Bass"));
+  EXPECT_FALSE(volume.contains("LastChange"));
+
+  const QMap<QString, QString> transport =
+      UpnpSubscription::ParsePropertySet(kTransportEvent);
+  EXPECT_EQ("STOPPED", transport.value("TransportState"));
+  EXPECT_EQ("OK", transport.value("TransportStatus"));
+  EXPECT_EQ("http://192.168.86.214:34637/s/c18b74a22c9b820333ab8cce5749eb6b/2",
+            transport.value("CurrentTrackURI"));
+  EXPECT_EQ("<DIDL-Lite></DIDL-Lite>",
+            transport.value("CurrentTrackMetaData"));
+  // Sonos's own, with its prefix.
+  EXPECT_TRUE(transport.contains("r:NextTrackURI"));
+}
+
+TEST(UpnpSubscriptionTest, OnlyInstanceZero) {
+  const QMap<QString, QString> variables = UpnpSubscription::ParseLastChange(
+      "<Event><InstanceID val=\"1\"><TransportState val=\"PLAYING\"/>"
+      "</InstanceID><InstanceID val=\"0\"><TransportState val=\"PAUSED_"
+      "PLAYBACK\"/></InstanceID></Event>");
+  EXPECT_EQ("PAUSED_PLAYBACK", variables.value("TransportState"));
+  EXPECT_TRUE(UpnpSubscription::ParseLastChange("<html>").isEmpty());
+}
+
+// Sends |chunks| to |server| one after another, as a renderer at 127.0.0.1
+// would, and returns the answer.
+QByteArray Exchange(MediaHttpServer* server, const QList<QByteArray>& chunks) {
+  QTcpServer listener;
+  if (!listener.listen(QHostAddress::LocalHost)) return QByteArray();
+  QObject::connect(&listener, &QTcpServer::newConnection, [&]() {
+    while (listener.hasPendingConnections()) {
+      server->HandleConnection(listener.nextPendingConnection());
+    }
+  });
+
+  QTcpSocket socket;
+  QByteArray response;
+  QObject::connect(&socket, &QTcpSocket::readyRead,
+                   [&]() { response += socket.readAll(); });
+  socket.connectToHost(QHostAddress::LocalHost, listener.serverPort());
+  if (!QTest::qWaitFor(
+          [&]() { return socket.state() == QAbstractSocket::ConnectedState; },
+          5000)) {
+    return QByteArray();
+  }
+  for (const QByteArray& chunk : chunks) {
+    socket.write(chunk);
+    socket.flush();
+    QTest::qWait(50);
+  }
+  QTest::qWaitFor(
+      [&]() { return socket.state() == QAbstractSocket::UnconnectedState; },
+      5000);
+  return response + socket.readAll();
+}
+
+QByteArray Notify(const QByteArray& path, const QByteArray& body) {
+  return "NOTIFY " + path +
+         " HTTP/1.1\r\nHOST: x\r\nNT: upnp:event\r\nNTS: upnp:propchange\r\n"
+         "SID: uuid:1\r\nSEQ: 0\r\nContent-Length: " +
+         QByteArray::number(body.size()) + "\r\n\r\n";
+}
+
+TEST(UpnpSubscriptionTest, MediaServerHandsEventsOn) {
+  auto items = std::make_shared<StreamItemTable>();
+  auto callbacks = std::make_shared<EventCallbackTable>();
+  MediaHttpServer server(items, callbacks);
+  UpnpSubscription subscription(nullptr, callbacks, QUrl("http://x/event"),
+                                QHostAddress::LocalHost);
+  callbacks->Set("token", QHostAddress::LocalHost, &subscription);
+  QSignalSpy events(&subscription, &UpnpSubscription::Event);
+
+  // The body after its head, as it may come.
+  const QByteArray body(kGroupVolumeEvent);
+  const QByteArray reply = Exchange(&server, {Notify("/e/token", body), body});
+  EXPECT_TRUE(reply.startsWith("HTTP/1.1 200 OK\r\n")) << reply.data();
+  // Delivered while that ran, or soon after.
+  ASSERT_TRUE(QTest::qWaitFor([&]() { return events.size() == 1; }, 2000));
+  const auto variables = events[0][0].value<QMap<QString, QString>>();
+  EXPECT_EQ("20", variables.value("GroupVolume"));
+
+  // Nobody else's.
+  EXPECT_TRUE(Exchange(&server, {Notify("/e/other", body) + body})
+                  .startsWith("HTTP/1.1 404"));
+  EXPECT_TRUE(
+      Exchange(&server, {"NOTIFY /e/token HTTP/1.1\r\nHOST: x\r\n\r\n"})
+          .startsWith("HTTP/1.1 411"));
+  callbacks->Set("token", QHostAddress("10.0.0.9"), &subscription);
+  EXPECT_TRUE(Exchange(&server, {Notify("/e/token", body) + body})
+                  .startsWith("HTTP/1.1 403"));
+  // Not without a table.
+  MediaHttpServer without(items);
+  EXPECT_TRUE(Exchange(&without, {Notify("/e/token", body) + body})
+                  .startsWith("HTTP/1.1 404"));
+  EXPECT_EQ(1, events.size());
+}
+
+// A renderer's event URL, answering SUBSCRIBE and UNSUBSCRIBE as |answer|
+// says and keeping the requests' heads.
+class FakeEventServer {
+ public:
+  explicit FakeEventServer(const QByteArray& answer) : answer_(answer) {
+    listener_.listen(QHostAddress::LocalHost);
+    QObject::connect(&listener_, &QTcpServer::newConnection, [this]() {
+      QTcpSocket* socket = listener_.nextPendingConnection();
+      QObject::connect(socket, &QTcpSocket::readyRead, [this, socket]() {
+        buffer_ += socket->readAll();
+        const int end = buffer_.indexOf("\r\n\r\n");
+        if (end == -1) return;
+        requests_ << buffer_.left(end);
+        buffer_.clear();
+        socket->write(answer_);
+        socket->disconnectFromHost();
+      });
+    });
+  }
+
+  QUrl url() const {
+    return QUrl(QString("http://127.0.0.1:%1/event").arg(listener_.serverPort()));
+  }
+  QList<QByteArray> requests_;
+
+ private:
+  QTcpServer listener_;
+  QByteArray answer_;
+  QByteArray buffer_;
+};
+
+QByteArray Header(const QByteArray& request, const QByteArray& name) {
+  for (const QByteArray& line : request.split('\n')) {
+    if (line.toLower().startsWith(name.toLower() + ":")) {
+      return line.mid(name.size() + 1).trimmed();
+    }
+  }
+  return QByteArray();
+}
+
+TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
+  // Renewed a fifth of the second before it runs out.
+  FakeEventServer renderer(
+      "HTTP/1.1 200 OK\r\nSID: uuid:RINCON_1_sub7\r\nTIMEOUT: Second-1\r\n"
+      "Content-Length: 0\r\n\r\n");
+  QNetworkAccessManager network;
+  auto callbacks = std::make_shared<EventCallbackTable>();
+  auto subscription = std::make_unique<UpnpSubscription>(
+      &network, callbacks, renderer.url(), QHostAddress::LocalHost);
+  QSignalSpy subscribed(subscription.get(), &UpnpSubscription::Subscribed);
+  subscription->Start(QUrl("http://192.168.86.214:5500"));
+  ASSERT_TRUE(subscribed.wait(5000));
+  EXPECT_TRUE(subscription->is_subscribed());
+
+  ASSERT_EQ(1, renderer.requests_.size());
+  const QByteArray first = renderer.requests_[0];
+  EXPECT_TRUE(first.startsWith("SUBSCRIBE /event HTTP/1.1")) << first.data();
+  EXPECT_EQ("upnp:event", Header(first, "NT").toStdString());
+  EXPECT_EQ("Second-1800", Header(first, "TIMEOUT").toStdString());
+  const QByteArray callback = Header(first, "CALLBACK");
+  EXPECT_TRUE(callback.startsWith("<http://192.168.86.214:5500/e/"))
+      << callback.data();
+  // Which the media server takes events at.
+  const QByteArray token = callback.mid(30, callback.size() - 31);
+  QHostAddress peer;
+  EXPECT_TRUE(callbacks->Find(token, &peer));
+  EXPECT_EQ(QHostAddress(QHostAddress::LocalHost), peer);
+
+  ASSERT_TRUE(QTest::qWaitFor([&]() { return renderer.requests_.size() >= 2; },
+                              3000));
+  const QByteArray renewal = renderer.requests_[1];
+  EXPECT_TRUE(renewal.startsWith("SUBSCRIBE /event HTTP/1.1"));
+  EXPECT_EQ("uuid:RINCON_1_sub7", Header(renewal, "SID").toStdString());
+  EXPECT_TRUE(Header(renewal, "CALLBACK").isEmpty());
+  EXPECT_EQ(1, subscribed.size());
+
+  const int before = renderer.requests_.size();
+  subscription.reset();
+  EXPECT_FALSE(callbacks->Find(token, &peer));
+  ASSERT_TRUE(QTest::qWaitFor(
+      [&]() { return renderer.requests_.size() > before; }, 3000));
+  EXPECT_TRUE(renderer.requests_.last().startsWith("UNSUBSCRIBE /event"));
+  EXPECT_EQ("uuid:RINCON_1_sub7",
+            Header(renderer.requests_.last(), "SID").toStdString());
+}
+
+TEST(UpnpSubscriptionTest, Fails) {
+  FakeEventServer renderer(
+      "HTTP/1.1 412 Precondition Failed\r\nContent-Length: 0\r\n\r\n");
+  QNetworkAccessManager network;
+  auto callbacks = std::make_shared<EventCallbackTable>();
+  UpnpSubscription subscription(&network, callbacks, renderer.url(),
+                                QHostAddress::LocalHost);
+  QSignalSpy failed(&subscription, &UpnpSubscription::Failed);
+  subscription.Start(QUrl("http://192.168.86.214:5500"));
+  ASSERT_TRUE(failed.wait(5000));
+  EXPECT_EQ("HTTP 412", failed[0][0].toString());
+  EXPECT_FALSE(subscription.is_subscribed());
 }
 
 }  // namespace

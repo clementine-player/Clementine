@@ -25,6 +25,7 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "directresponder.h"
+#include "eventcallbacktable.h"
 #include "pipelineresponder.h"
 #include "streamitemtable.h"
 
@@ -32,6 +33,7 @@ const int MediaHttpServer::kMaxResponsesPerRenderer = 4;
 const int MediaHttpServer::kMaxPipelinesPerRenderer = 2;
 const int MediaHttpServer::kMaxResponses = 32;
 const int MediaHttpServer::kMaxPendingRequests = 32;
+const int MediaHttpServer::kMaxEventSize = 512 * 1024;
 
 namespace {
 
@@ -97,8 +99,9 @@ ByteRange::Result ByteRange::Parse(const QByteArray& header, qint64 size,
 }
 
 MediaHttpServer::MediaHttpServer(std::shared_ptr<StreamItemTable> items,
+                                 std::shared_ptr<EventCallbackTable> events,
                                  QObject* parent)
-    : QObject(parent), items_(items) {}
+    : QObject(parent), items_(items), events_(events) {}
 
 // Responders are children, so they're deleted here too: streams stop when the
 // server does, for example when streaming is turned off.
@@ -188,6 +191,11 @@ void MediaHttpServer::ReadyRead() {
 }
 
 void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
+  if (request.method == "NOTIFY") {
+    ReadEvent(socket, request);
+    return;
+  }
+
   const bool head_only = request.method == "HEAD";
   if (request.method != "GET" && !head_only) {
     WriteError(socket, 405, "Method Not Allowed");
@@ -263,6 +271,61 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   start_ms = qMin(start_ms, length_ms > 0 ? length_ms : 0);
 
   new PipelineResponder(socket, token, item, start_ms, head_only, this);
+}
+
+void MediaHttpServer::ReadEvent(QTcpSocket* socket,
+                                const HttpRequest& request) {
+  // /e/<token>
+  const QList<QByteArray> parts = request.path.split('/');
+  QHostAddress allowed_peer;
+  if (!events_ || parts.size() != 3 || !parts[0].isEmpty() || parts[1] != "e" ||
+      !events_->Find(parts[2], &allowed_peer)) {
+    WriteError(socket, 404, "Not Found");
+    return;
+  }
+  if (NormalisedAddress(socket->peerAddress()) !=
+      NormalisedAddress(allowed_peer)) {
+    qLog(Warning) << "Event from" << socket->peerAddress()
+                  << "for a renderer at" << allowed_peer;
+    WriteError(socket, 403, "Forbidden");
+    return;
+  }
+
+  bool ok = false;
+  const qint64 length = request.headers.value("content-length").toLongLong(&ok);
+  if (!ok || length < 0) {
+    WriteError(socket, 411, "Length Required");
+    return;
+  }
+  if (length > kMaxEventSize) {
+    WriteError(socket, 413, "Content Too Large");
+    return;
+  }
+
+  // The body may still be on its way.
+  const QByteArray token = parts[2];
+  auto body = std::make_shared<QByteArray>();
+  auto connection = std::make_shared<QMetaObject::Connection>();
+  auto read = [this, socket, token, length, body, connection]() {
+    *body += socket->read(length - body->size());
+    if (body->size() < length) return;
+    disconnect(*connection);
+
+    if (!events_->Deliver(token, *body)) {
+      WriteError(socket, 404, "Not Found");
+      return;
+    }
+    socket->write(
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Length: 0\r\n"
+        "Connection: close\r\n\r\n");
+    socket->disconnectFromHost();
+  };
+  *connection = connect(socket, &QTcpSocket::readyRead, this, read);
+  QTimer::singleShot(kHeadTimeoutMsec, socket, [socket, body, length]() {
+    if (body->size() < length) socket->abort();
+  });
+  read();
 }
 
 void MediaHttpServer::WriteCover(QTcpSocket* socket, const StreamItem& item,

@@ -29,6 +29,7 @@
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "networkremote/networkremote.h"
+#include "networkremote/streaming/eventcallbacktable.h"
 #include "networkremote/streaming/rendererregistry.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -65,6 +66,7 @@ UpnpEngine::UpnpEngine(Application* app, const UpnpDevice& device,
       timer_id_(startTimer(kTimerIntervalMsec)) {
   setParent(parent);
   player_.SetDevice(device_);
+  player_.SetEventCallbacks(registry_->event_callbacks());
 
   QSettings s;
   s.beginGroup(NetworkRemote::kSettingsGroup);
@@ -237,6 +239,7 @@ void UpnpEngine::SendLoad(qint64 start_ms, bool playing) {
 
   position_base_ms_ = pipeline ? start_ms : 0;
   qLog(Info) << "Playing" << url << "on" << device_;
+  player_.Subscribe(registry_->MediaBaseUrl(device_.address));
   player_.Load(InfoForItem(current_, url), pipeline ? 0 : start_ms, playing);
   // Loading replaced what was queued after it.
   if (preloaded_.id != 0) {
@@ -307,7 +310,11 @@ bool UpnpEngine::Play(quint64 offset_nanosec) {
 }
 
 void UpnpEngine::Stop(bool) {
-  if (current_sent_) player_.Stop();
+  if (current_sent_) {
+    player_.Stop();
+  } else {
+    player_.Unsubscribe();
+  }
   current_ = StreamItem();
   preloaded_ = StreamItem();
   current_sent_ = false;
@@ -447,6 +454,7 @@ void UpnpEngine::PlayerError(const QString& message) {
 
 void UpnpEngine::PlayerLost(const QString& reason) {
   qLog(Warning) << "Lost" << device_.name << ":" << reason;
+  player_.Unsubscribe();
   current_sent_ = false;
   in_control_ = false;
   if (state_ == Engine::Playing || state_ == Engine::Paused) {

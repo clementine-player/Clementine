@@ -24,6 +24,7 @@
 #include "chromecast/chromecastengine.h"
 #include "core/logging.h"
 #include "engines/enginerouter.h"
+#include "eventcallbacktable.h"
 #include "networkremote/networkremote.h"
 #include "remoteengine.h"
 #include "streamitemtable.h"
@@ -42,7 +43,10 @@ const int kMaxDisplayNameLength = 64;
 }  // namespace
 
 RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
-    : app_(app), router_(router), items_(new StreamItemTable) {
+    : app_(app),
+      router_(router),
+      items_(new StreamItemTable),
+      event_callbacks_(new EventCallbackTable) {
   connect(router_, SIGNAL(OutputsChanged()), SLOT(RouterOutputsChanged()));
 }
 

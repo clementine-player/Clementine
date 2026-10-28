@@ -259,6 +259,7 @@ set(SOURCES
   networkremote/streaming/pipelineresponder.cpp
   networkremote/streaming/remoteengine.cpp
   networkremote/streaming/rendererregistry.cpp
+  networkremote/streaming/eventcallbacktable.cpp
   networkremote/streaming/streamitemtable.cpp
   networkremote/streaming/streamplanner.cpp
   networkremote/streaming/streamresponder.cpp
@@ -420,6 +421,7 @@ set(SOURCES
   upnp/upnpengine.cpp
   upnp/upnpmediaplayer.cpp
   upnp/upnpsoap.cpp
+  upnp/upnpsubscription.cpp
 
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
@@ -741,6 +743,7 @@ set(HEADERS
   upnp/upnpdiscovery.h
   upnp/upnpengine.h
   upnp/upnpmediaplayer.h
+  upnp/upnpsubscription.h
 
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h
