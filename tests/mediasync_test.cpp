@@ -19,6 +19,7 @@
 #include <QUuid>
 
 #include "core/song.h"
+#include "core/timeconstants.h"
 #include "core/urlhandler.h"
 #include "gtest/gtest.h"
 #include "networkremote/networkremote.h"
@@ -69,7 +70,7 @@ Song MakeSong(const QUrl& url, qint64 length_nanosec) {
   return song;
 }
 
-constexpr qint64 kThreeMinutes = 180ll * 1000 * 1000 * 1000;
+constexpr qint64 kThreeMinutesNanosec = 3 * 60 * kNsecPerSec;
 
 TEST(SyncSourceIdTest, WritesEachKind) {
   EXPECT_EQ("library/song/42", SyncSourceId::ForSong(42).ToString());
@@ -156,7 +157,7 @@ TEST(SyncSourceIdTest, RejectsEmptyParts) {
 }
 
 TEST(SyncSongTest, LocalFilesAreDownloadable) {
-  Song song = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutes);
+  Song song = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutesNanosec);
   EXPECT_EQ(Downloadability::Downloadable,
             SyncSong::Downloadability(song, nullptr));
 
@@ -167,7 +168,8 @@ TEST(SyncSongTest, LocalFilesAreDownloadable) {
 }
 
 TEST(SyncSongTest, ServiceSongsWithALengthAreDownloadable) {
-  const Song song = MakeSong(QUrl("plex://server/library/1"), kThreeMinutes);
+  const Song song =
+      MakeSong(QUrl("plex://server/library/1"), kThreeMinutesNanosec);
   const FakeUrlHandler handler(Downloadability::Downloadable);
   EXPECT_EQ(Downloadability::Downloadable,
             SyncSong::Downloadability(song, &handler));
@@ -176,7 +178,8 @@ TEST(SyncSongTest, ServiceSongsWithALengthAreDownloadable) {
 }
 
 TEST(SyncSongTest, StreamsAreNotDownloadable) {
-  Song stream = MakeSong(QUrl("http://radio.example/stream"), kThreeMinutes);
+  Song stream =
+      MakeSong(QUrl("http://radio.example/stream"), kThreeMinutesNanosec);
   stream.set_filetype(Song::Type_Stream);
   EXPECT_EQ(Downloadability::NotDownloadable,
             SyncSong::Downloadability(stream, nullptr));
@@ -188,25 +191,26 @@ TEST(SyncSongTest, StreamsAreNotDownloadable) {
 }
 
 TEST(SyncSongTest, HandlersCanRefuse) {
-  const Song song = MakeSong(QUrl("fake://station/1"), kThreeMinutes);
+  const Song song = MakeSong(QUrl("fake://station/1"), kThreeMinutesNanosec);
   const FakeUrlHandler handler(Downloadability::NotDownloadable);
   EXPECT_EQ(Downloadability::NotDownloadable,
             SyncSong::Downloadability(song, &handler));
 }
 
 TEST(SyncSongTest, ItemKeys) {
-  Song library = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutes);
+  Song library = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutesNanosec);
   library.set_id(17);
   EXPECT_EQ("library/17", SyncSong::ItemKey(library));
 
-  const Song plex = MakeSong(QUrl("plex://server/library/1"), kThreeMinutes);
+  const Song plex =
+      MakeSong(QUrl("plex://server/library/1"), kThreeMinutesNanosec);
   EXPECT_EQ("url/plex%3A%2F%2Fserver%2Flibrary%2F1", SyncSong::ItemKey(plex));
 
   EXPECT_TRUE(SyncSong::ItemKey(Song()).isEmpty());
 }
 
 TEST(SyncSongTest, ItemVersionChangesWithTheFileAndPreset) {
-  Song song = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutes);
+  Song song = MakeSong(QUrl("file:///music/a.mp3"), kThreeMinutesNanosec);
   song.set_mtime(1700000000);
   song.set_filesize(4000000);
   const QString original = SyncSong::ItemVersion(song);
