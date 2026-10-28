@@ -15,13 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QImage>
 #include <QSignalSpy>
+#include <QTemporaryDir>
 
 #include "gtest/gtest.h"
 #include "test_utils.h"
 #include "upnp/sonostopology.h"
 #include "upnp/upnpdevice.h"
 #include "upnp/upnpdiscovery.h"
+#include "upnp/upnpengine.h"
 #include "upnp/upnpmediaplayer.h"
 #include "upnp/upnpsoap.h"
 
@@ -389,11 +392,54 @@ TEST(UpnpMediaPlayerTest, Didl) {
       << didl.toStdString();
   EXPECT_TRUE(didl.contains("<dc:creator>&lt;Artist&gt;</dc:creator>"));
   EXPECT_FALSE(didl.contains("upnp:album>"));
+  EXPECT_FALSE(didl.contains("albumArtURI"));
   EXPECT_TRUE(didl.contains(
       "<res protocolInfo=\"http-get:*:audio/ogg:*\" duration=\"0:04:05\">"
       "http://10.0.0.1:5500/s/token/1?t=5</res>"))
       << didl.toStdString();
   EXPECT_TRUE(didl.contains("object.item.audioItem.musicTrack"));
+
+  info.image_url = QUrl("http://10.0.0.1:5500/a/token/1");
+  EXPECT_TRUE(UpnpMediaPlayer::Didl(info).contains(
+      "<upnp:albumArtURI>http://10.0.0.1:5500/a/token/1</upnp:albumArtURI>"));
+}
+
+TEST(UpnpEngineTest, EncodesCovers) {
+  EXPECT_TRUE(UpnpEngine::EncodeCover(QImage()).isEmpty());
+
+  QImage big(1200, 900, QImage::Format_ARGB32);
+  big.fill(Qt::red);
+  const QByteArray jpeg = UpnpEngine::EncodeCover(big);
+  ASSERT_FALSE(jpeg.isEmpty());
+  EXPECT_TRUE(jpeg.startsWith("\xff\xd8"));
+  // Scaled down to what renderers show, keeping its shape.
+  const QImage decoded = QImage::fromData(jpeg, "JPG");
+  EXPECT_EQ(600, decoded.width());
+  EXPECT_EQ(450, decoded.height());
+
+  QImage small(200, 200, QImage::Format_RGB32);
+  small.fill(Qt::blue);
+  EXPECT_EQ(200, QImage::fromData(UpnpEngine::EncodeCover(small)).width());
+}
+
+TEST(UpnpEngineTest, LoadsCovers) {
+  QImage image(300, 300, QImage::Format_RGB32);
+  image.fill(Qt::green);
+  QTemporaryDir dir;
+  const QString path = dir.filePath("cover.png");
+  ASSERT_TRUE(image.save(path));
+
+  Song song;
+  song.set_art_automatic(path);
+  EXPECT_EQ(300, QImage::fromData(UpnpEngine::LoadCover(song)).width());
+
+  // One the user unset, or on the web, isn't loaded.
+  song.set_art_manual(Song::kManuallyUnsetCover);
+  EXPECT_TRUE(UpnpEngine::LoadCover(song).isEmpty());
+  song.set_art_manual("https://example.com/cover.jpg");
+  EXPECT_EQ(300, QImage::fromData(UpnpEngine::LoadCover(song)).width());
+  song.set_art_automatic("https://example.com/cover.jpg");
+  EXPECT_TRUE(UpnpEngine::LoadCover(song).isEmpty());
 }
 
 // Records what's sent, and answers it as the test says.

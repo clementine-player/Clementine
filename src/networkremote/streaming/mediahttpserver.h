@@ -25,6 +25,7 @@
 
 class QTcpSocket;
 class StreamItemTable;
+struct StreamItem;
 
 // A parsed HTTP/1.x request head.
 struct HttpRequest {
@@ -84,6 +85,7 @@ class MediaHttpServer : public QObject {
 
  private:
   void Dispatch(QTcpSocket* socket, const HttpRequest& request);
+  void WriteCover(QTcpSocket* socket, const StreamItem& item, bool head_only);
   // Live responders, all of them or only those for |token|; pipelines only
   // with |pipelines|.
   int CountResponders(const QByteArray* token, bool pipelines) const;

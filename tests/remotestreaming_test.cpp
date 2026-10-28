@@ -14,6 +14,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QTest>
+#include <memory>
+
 #include "core/song.h"
 #include "gtest/gtest.h"
 #include "networkremote/protocolsniffer.h"
@@ -374,6 +379,67 @@ TEST(StreamItemTest, ContentType) {
   EXPECT_EQ("audio/ogg; codecs=vorbis", item.ContentType());
   item.content_type = "application/ogg";
   EXPECT_EQ("application/ogg", item.ContentType());
+}
+
+// Fetches |path| from |server|, as a renderer at 127.0.0.1 would.
+QByteArray Fetch(MediaHttpServer* server, const QByteArray& method,
+                 const QByteArray& path) {
+  QTcpServer listener;
+  if (!listener.listen(QHostAddress::LocalHost)) return QByteArray();
+  QObject::connect(&listener, &QTcpServer::newConnection, [&]() {
+    while (listener.hasPendingConnections()) {
+      server->HandleConnection(listener.nextPendingConnection());
+    }
+  });
+
+  QTcpSocket socket;
+  QByteArray response;
+  QObject::connect(&socket, &QTcpSocket::readyRead,
+                   [&]() { response += socket.readAll(); });
+  socket.connectToHost(QHostAddress::LocalHost, listener.serverPort());
+  if (!QTest::qWaitFor(
+          [&]() { return socket.state() == QAbstractSocket::ConnectedState; },
+          5000)) {
+    return QByteArray();
+  }
+  socket.write(method + " " + path + " HTTP/1.1\r\nHost: x\r\n\r\n");
+  QTest::qWaitFor(
+      [&]() { return socket.state() == QAbstractSocket::UnconnectedState; },
+      5000);
+  return response + socket.readAll();
+}
+
+TEST(MediaHttpServerTest, ServesCovers) {
+  auto items = std::make_shared<StreamItemTable>();
+  MediaHttpServer server(items);
+  StreamItem with_cover;
+  with_cover.id = 1;
+  with_cover.cover = QByteArray("\xff\xd8 a cover", 10);
+  StreamItem without_cover;
+  without_cover.id = 2;
+  items->Set("token", QHostAddress::LocalHost, {with_cover, without_cover});
+
+  const QByteArray cover = Fetch(&server, "GET", "/a/token/1");
+  EXPECT_TRUE(cover.startsWith("HTTP/1.1 200 OK\r\n")) << cover.data();
+  EXPECT_TRUE(cover.contains("Content-Type: image/jpeg\r\n"));
+  EXPECT_TRUE(cover.contains("Content-Length: 10\r\n"));
+  EXPECT_TRUE(cover.endsWith(with_cover.cover));
+
+  const QByteArray head = Fetch(&server, "HEAD", "/a/token/1");
+  EXPECT_TRUE(head.startsWith("HTTP/1.1 200 OK\r\n"));
+  EXPECT_TRUE(head.endsWith("\r\n\r\n"));
+
+  EXPECT_TRUE(Fetch(&server, "GET", "/a/token/2").startsWith("HTTP/1.1 404"));
+  EXPECT_TRUE(Fetch(&server, "GET", "/a/other/1").startsWith("HTTP/1.1 404"));
+  EXPECT_TRUE(Fetch(&server, "GET", "/b/token/1").startsWith("HTTP/1.1 404"));
+
+  // Not only for the renderer it's for, as its media is: apps that control
+  // the renderer show the cover too.
+  StreamItem media = with_cover;
+  media.plan.mode = StreamPlan::Direct;
+  items->Set("token", QHostAddress("10.0.0.9"), {media});
+  EXPECT_TRUE(Fetch(&server, "GET", "/a/token/1").startsWith("HTTP/1.1 200"));
+  EXPECT_TRUE(Fetch(&server, "GET", "/s/token/1").startsWith("HTTP/1.1 403"));
 }
 
 TEST(RendererRegistryTest, MediaComesFromTheDevicesNetwork) {

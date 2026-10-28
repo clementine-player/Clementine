@@ -194,11 +194,12 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
     return;
   }
 
-  // /s/<token>/<item id>
+  // /s/<token>/<item id>, or its cover at /a/<token>/<item id>
   const QList<QByteArray> parts = request.path.split('/');
   bool id_ok = false;
   const int item_id = parts.size() == 4 ? parts[3].toInt(&id_ok) : 0;
-  if (parts.size() != 4 || !parts[0].isEmpty() || parts[1] != "s" || !id_ok) {
+  if (parts.size() != 4 || !parts[0].isEmpty() ||
+      (parts[1] != "s" && parts[1] != "a") || !id_ok) {
     WriteError(socket, 404, "Not Found");
     return;
   }
@@ -207,6 +208,13 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   QHostAddress allowed_peer;
   if (!items_->Find(parts[2], item_id, &item, &allowed_peer)) {
     WriteError(socket, 404, "Not Found");
+    return;
+  }
+
+  // Covers are shown by whatever controls the renderer too, such as the
+  // Sonos app, which fetches them itself. Their URL is enough.
+  if (parts[1] == "a") {
+    WriteCover(socket, item, head_only);
     return;
   }
 
@@ -255,6 +263,24 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   start_ms = qMin(start_ms, length_ms > 0 ? length_ms : 0);
 
   new PipelineResponder(socket, token, item, start_ms, head_only, this);
+}
+
+void MediaHttpServer::WriteCover(QTcpSocket* socket, const StreamItem& item,
+                                 bool head_only) {
+  qLog(Debug) << "Serving the cover of item" << item.id << "to"
+              << socket->peerAddress() << "," << item.cover.size() << "bytes";
+  if (item.cover.isEmpty()) {
+    WriteError(socket, 404, "Not Found");
+    return;
+  }
+  QByteArray head = "HTTP/1.1 200 OK\r\n";
+  head += "Content-Type: image/jpeg\r\n";
+  head += "Content-Length: " + QByteArray::number(item.cover.size()) + "\r\n";
+  head += "Cache-Control: no-store\r\n";
+  head += "Connection: close\r\n\r\n";
+  socket->write(head);
+  if (!head_only) socket->write(item.cover);
+  socket->disconnectFromHost();
 }
 
 void MediaHttpServer::WriteError(QTcpSocket* socket, int code,

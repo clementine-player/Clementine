@@ -36,6 +36,9 @@ class RendererRegistry;
 // Media is served by the network remote's MediaHttpServer, under a token of
 // this engine's that only the renderer's address may use.
 //
+// Covers are served beside the media, or given as they are if they're on the
+// web, for the renderer to show.
+//
 // Clementine's volume slider sets the renderer's volume, but only once this
 // has played on it: switching to it leaves its volume as it was, rather than
 // jumping to wherever the slider is.
@@ -47,6 +50,11 @@ class UpnpEngine : public Engine::Base {
              const RendererRegistry* registry, StreamItemTable* items,
              QObject* parent = nullptr);
   ~UpnpEngine();
+
+  // |song|'s cover, if it's a local file or embedded, as a JPEG no bigger
+  // than renderers show covers. Empty if it has none.
+  static QByteArray LoadCover(const Song& song);
+  static QByteArray EncodeCover(const QImage& image);
 
   const UpnpDevice& device() const { return device_; }
   // When its name, address or services change.
@@ -94,6 +102,8 @@ class UpnpEngine : public Engine::Base {
   Song SongForRequest(const MediaPlaybackRequest& req, bool next) const;
   QUrl UrlForItem(const StreamItem& item, qint64 start_ms) const;
   UpnpMediaInfo InfoForItem(const StreamItem& item, const QUrl& url) const;
+  // Where the renderer can fetch |item|'s cover, if it has one.
+  QUrl CoverUrl(const StreamItem& item) const;
   void PublishItems();
 
   void SendLoad(qint64 start_ms, bool playing);
