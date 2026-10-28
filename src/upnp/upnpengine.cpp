@@ -135,6 +135,7 @@ StreamItem UpnpEngine::MakeItem(const MediaPlaybackRequest& req,
   item.plan = StreamPlanner::Plan(req, song, device_.caps, settings);
   item.content_type = device_.DeviceMimeType(item.plan.mime_type);
   item.cover = LoadCover(song);
+  item.dlna = device_.dlna;
 
   qLog(Debug) << "UPnP item" << item.id << req.MediaUrl() << "->"
               << item.plan.mode << item.plan.mime_type << "("
@@ -215,6 +216,7 @@ UpnpMediaInfo UpnpEngine::InfoForItem(const StreamItem& item,
   info.artist = item.song.artist();
   info.album = item.song.album();
   info.image_url = CoverUrl(item);
+  if (item.dlna) info.dlna_features = QString::fromLatin1(item.DlnaFeatures());
   if (item.plan.length_nanosec > 0) {
     info.duration_ms = item.plan.length_nanosec / kNsecPerMsec;
   }

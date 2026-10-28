@@ -15,6 +15,7 @@
 */
 
 #include <QTcpServer>
+#include <QTemporaryDir>
 #include <QTcpSocket>
 #include <QTest>
 #include <memory>
@@ -407,6 +408,83 @@ QByteArray Fetch(MediaHttpServer* server, const QByteArray& method,
       [&]() { return socket.state() == QAbstractSocket::UnconnectedState; },
       5000);
   return response + socket.readAll();
+}
+
+TEST(StreamItemTest, DlnaFeatures) {
+  StreamItem item;
+  item.plan.mode = StreamPlan::Direct;
+  item.plan.mime_type = "audio/mpeg";
+  EXPECT_EQ(
+      "DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_CI=0;"
+      "DLNA.ORG_FLAGS=01700000000000000000000000000000",
+      item.DlnaFeatures().toStdString());
+
+  // Made as it's sent: converted, and no seeking.
+  item.plan.mode = StreamPlan::Pipeline;
+  item.plan.mime_type = "audio/flac";
+  EXPECT_EQ(
+      "DLNA.ORG_OP=00;DLNA.ORG_CI=1;"
+      "DLNA.ORG_FLAGS=01700000000000000000000000000000",
+      item.DlnaFeatures().toStdString());
+}
+
+TEST(MediaHttpServerTest, DlnaHeaders) {
+  StreamItem item;
+  item.plan.mode = StreamPlan::Direct;
+  item.plan.mime_type = "audio/flac";
+  HttpRequest plain;
+  ASSERT_TRUE(HttpRequest::Parse("GET /s/t/1 HTTP/1.1\r\nHost: x", &plain));
+  EXPECT_TRUE(MediaHttpServer::DlnaHeaders(item, plain).isEmpty());
+
+  // Asked for, as Rygel does.
+  HttpRequest asking;
+  ASSERT_TRUE(HttpRequest::Parse(
+      "HEAD /s/t/1 HTTP/1.1\r\nHost: x\r\ngetContentFeatures.dlna.org: 1",
+      &asking));
+  EXPECT_EQ(
+      "contentFeatures.dlna.org: DLNA.ORG_OP=01;DLNA.ORG_CI=0;"
+      "DLNA.ORG_FLAGS=01700000000000000000000000000000\r\n",
+      MediaHttpServer::DlnaHeaders(item, asking).toStdString());
+  HttpRequest mode;
+  ASSERT_TRUE(HttpRequest::Parse(
+      "GET /s/t/1 HTTP/1.1\r\ntransferMode.dlna.org: Background", &mode));
+  EXPECT_EQ("transferMode.dlna.org: Background\r\n",
+            MediaHttpServer::DlnaHeaders(item, mode).toStdString());
+  // Not one audio can be.
+  ASSERT_TRUE(HttpRequest::Parse(
+      "GET /s/t/1 HTTP/1.1\r\ntransferMode.dlna.org: Interactive", &mode));
+  EXPECT_TRUE(MediaHttpServer::DlnaHeaders(item, mode).isEmpty());
+
+  // Always, for a DLNA renderer's.
+  item.dlna = true;
+  const QByteArray headers = MediaHttpServer::DlnaHeaders(item, plain);
+  EXPECT_TRUE(headers.contains("contentFeatures.dlna.org: DLNA.ORG_OP=01"));
+  EXPECT_TRUE(headers.contains("transferMode.dlna.org: Streaming\r\n"));
+}
+
+TEST(MediaHttpServerTest, ServesDlnaHeaders) {
+  QTemporaryDir dir;
+  const QString path = dir.filePath("song.flac");
+  QFile file(path);
+  ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+  file.write(QByteArray(1000, 'x'));
+  file.close();
+
+  auto items = std::make_shared<StreamItemTable>();
+  MediaHttpServer server(items);
+  StreamItem item;
+  item.id = 1;
+  item.req = MediaPlaybackRequest(QUrl::fromLocalFile(path));
+  item.plan.mode = StreamPlan::Direct;
+  item.plan.mime_type = "audio/flac";
+  item.dlna = true;
+  items->Set("token", QHostAddress::LocalHost, {item});
+
+  const QByteArray head = Fetch(&server, "HEAD", "/s/token/1");
+  EXPECT_TRUE(head.startsWith("HTTP/1.1 200 OK\r\n")) << head.data();
+  EXPECT_TRUE(head.contains("Content-Length: 1000\r\n"));
+  EXPECT_TRUE(head.contains("contentFeatures.dlna.org: DLNA.ORG_OP=01;"));
+  EXPECT_TRUE(head.contains("transferMode.dlna.org: Streaming\r\n"));
 }
 
 TEST(MediaHttpServerTest, ServesCovers) {

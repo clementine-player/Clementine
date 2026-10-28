@@ -48,6 +48,15 @@ struct StreamItem {
   // The song's cover as a JPEG, for renderers that show one, served beside
   // the item. Empty if there's none to serve.
   QByteArray cover;
+  // For a DLNA renderer, such as a TV. It's served with DLNA's headers, and
+  // a stream that's made as it's sent ends when the connection closes,
+  // rather than being chunked, which many can't take.
+  bool dlna = false;
+
+  // DLNA's flags for what can be done with it, for the fourth field of its
+  // protocolInfo and the contentFeatures.dlna.org header: seeking by bytes
+  // in a file, nothing in a stream made as it's sent.
+  QByteArray DlnaFeatures() const;
 
   // What to serve the item as.
   QString ContentType() const {

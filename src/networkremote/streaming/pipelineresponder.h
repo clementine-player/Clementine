@@ -26,7 +26,8 @@
 class QTimer;
 
 // Streams an item through a GStreamer pipeline (remux or encode) as a chunked
-// HTTP response.
+// HTTP response, or for a DLNA renderer, one that ends when the connection
+// closes.
 //
 //   uridecodebin(caps = plan.decode_caps) ! <plan.tail> ! appsink
 //
@@ -39,7 +40,7 @@ class PipelineResponder : public StreamResponder {
   // item, for seeking; it must be between 0 and the item's length.
   PipelineResponder(QTcpSocket* socket, const QByteArray& token,
                     const StreamItem& item, qint64 start_ms, bool head_only,
-                    QObject* parent);
+                    const QByteArray& extra_headers, QObject* parent);
   ~PipelineResponder();
 
   // The gst-launch description for |plan|, without the source URI.
@@ -59,6 +60,7 @@ class PipelineResponder : public StreamResponder {
   void Finish();
 
   StreamItem item_;
+  const QByteArray extra_headers_;
   qint64 start_nanosec_;
   qint64 stop_nanosec_;  // -1: to the end
 

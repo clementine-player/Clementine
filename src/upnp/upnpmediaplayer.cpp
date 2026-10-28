@@ -529,8 +529,11 @@ QString UpnpMediaPlayer::Didl(const UpnpMediaInfo& info) {
                           "object.item.audioItem.musicTrack");
 
   writer.writeStartElement(kDidlNamespace, "res");
-  writer.writeAttribute("protocolInfo",
-                        QString("http-get:*:%1:*").arg(mime_type));
+  writer.writeAttribute(
+      "protocolInfo",
+      QString("http-get:*:%1:%2")
+          .arg(mime_type, info.dlna_features.isEmpty() ? QString("*")
+                                                       : info.dlna_features));
   if (info.duration_ms > 0) {
     writer.writeAttribute("duration", FormatTime(info.duration_ms));
   }

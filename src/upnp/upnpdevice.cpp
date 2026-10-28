@@ -61,6 +61,7 @@ struct DescribedDevice {
   QString friendly_name;
   QString model;
   QString udn;
+  bool dlna = false;
   QList<UpnpService> services;
 
   UpnpService Find(const QString& name) const {
@@ -105,6 +106,10 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
       open.last().model = reader.readElementText();
     } else if (name == QLatin1String("UDN")) {
       open.last().udn = reader.readElementText();
+    } else if (name == QLatin1String("X_DLNADOC")) {
+      // eg. "DMR-1.50", in the DLNA namespace.
+      open.last().dlna = true;
+      reader.skipCurrentElement();
     } else if (name == QLatin1String("service")) {
       UpnpService service;
       QString control_url;
@@ -157,6 +162,7 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
   name = renderer->friendly_name.isEmpty() ? root.friendly_name
                                            : renderer->friendly_name;
   model = renderer->model.isEmpty() ? root.model : renderer->model;
+  dlna = renderer->dlna || root.dlna;
   address = QHostAddress(location.host());
   av_transport = new_av_transport;
   rendering_control = resolved(renderer->Find("RenderingControl"));
@@ -210,7 +216,7 @@ bool UpnpDevice::operator==(const UpnpDevice& other) const {
          root_id == other.root_id &&
          zone_group_topology == other.zone_group_topology &&
          device_mime_types == other.device_mime_types && video == other.video &&
-         group == other.group;
+         dlna == other.dlna && group == other.group;
 }
 
 QDebug operator<<(QDebug dbg, const UpnpDevice& device) {

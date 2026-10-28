@@ -20,6 +20,21 @@
 #include <QMutexLocker>
 #include <QRandomGenerator>
 
+QByteArray StreamItem::DlnaFeatures() const {
+  // Streaming, background and stalled transfers; DLNA 1.5.
+  const QByteArray flags = "01700000000000000000000000000000";
+  QByteArray ret;
+  const QString type = ContentType().section(';', 0, 0).trimmed();
+  if (type == "audio/mpeg" || type == "audio/mp3") ret += "DLNA.ORG_PN=MP3;";
+  if (plan.mode == StreamPlan::Direct) {
+    ret += "DLNA.ORG_OP=01;DLNA.ORG_CI=0;";
+  } else {
+    // Converted, and only Clementine's own way of starting part-way.
+    ret += "DLNA.ORG_OP=00;DLNA.ORG_CI=1;";
+  }
+  return ret + "DLNA.ORG_FLAGS=" + flags;
+}
+
 QByteArray StreamItemTable::NewToken() {
   QByteArray bytes(16, Qt::Uninitialized);
   QRandomGenerator::system()->fillRange(

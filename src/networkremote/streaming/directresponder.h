@@ -31,7 +31,8 @@ class DirectResponder : public StreamResponder {
   // Takes ownership of |socket|.
   DirectResponder(QTcpSocket* socket, const QByteArray& token,
                   const StreamItem& item, const QByteArray& range,
-                  bool head_only, QObject* parent);
+                  bool head_only, const QByteArray& extra_headers,
+                  QObject* parent);
   ~DirectResponder();
 
  private slots:
