@@ -256,7 +256,7 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
 
   if (!pipeline) {
     new DirectResponder(socket, token, item, request.headers.value("range"),
-                        head_only, this);
+                        head_only, DlnaHeaders(item, request), this);
     return;
   }
 
@@ -270,7 +270,8 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   if (!ok || start_ms < 0 || length_ms <= 0) start_ms = 0;
   start_ms = qMin(start_ms, length_ms > 0 ? length_ms : 0);
 
-  new PipelineResponder(socket, token, item, start_ms, head_only, this);
+  new PipelineResponder(socket, token, item, start_ms, head_only,
+                        DlnaHeaders(item, request), this);
 }
 
 void MediaHttpServer::ReadEvent(QTcpSocket* socket,
@@ -344,6 +345,23 @@ void MediaHttpServer::WriteCover(QTcpSocket* socket, const StreamItem& item,
   socket->write(head);
   if (!head_only) socket->write(item.cover);
   socket->disconnectFromHost();
+}
+
+QByteArray MediaHttpServer::DlnaHeaders(const StreamItem& item,
+                                        const HttpRequest& request) {
+  QByteArray ret;
+  if (item.dlna ||
+      request.headers.value("getcontentfeatures.dlna.org") == "1") {
+    ret += "contentFeatures.dlna.org: " + item.DlnaFeatures() + "\r\n";
+  }
+  // What it asked for, which audio can always be.
+  QByteArray mode = request.headers.value("transfermode.dlna.org");
+  if (mode != "Streaming" && mode != "Background") mode.clear();
+  if (item.dlna || !mode.isEmpty()) {
+    ret += "transferMode.dlna.org: " + (mode.isEmpty() ? "Streaming" : mode) +
+           "\r\n";
+  }
+  return ret;
 }
 
 void MediaHttpServer::WriteError(QTcpSocket* socket, int code,

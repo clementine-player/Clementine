@@ -49,9 +49,12 @@ QString PipelineResponder::Description(const StreamPlan& plan) {
 PipelineResponder::PipelineResponder(QTcpSocket* socket,
                                      const QByteArray& token,
                                      const StreamItem& item, qint64 start_ms,
-                                     bool head_only, QObject* parent)
+                                     bool head_only,
+                                     const QByteArray& extra_headers,
+                                     QObject* parent)
     : StreamResponder(socket, token, Pipeline, parent),
       item_(item),
+      extra_headers_(extra_headers),
       start_nanosec_(item.plan.beginning_nanosec + start_ms * kNsecPerMsec),
       stop_nanosec_(-1),
       pipeline_(nullptr),
@@ -193,9 +196,10 @@ void PipelineResponder::WriteHead() {
   QByteArray head = "HTTP/1.1 200 OK\r\n";
   head += "Content-Type: " + item_.ContentType().toLatin1() + "\r\n";
   // The output's size isn't known until it's finished.
-  head += "Transfer-Encoding: chunked\r\n";
+  if (!item_.dlna) head += "Transfer-Encoding: chunked\r\n";
   head += "Accept-Ranges: none\r\n";
   head += "Cache-Control: no-store\r\n";
+  head += extra_headers_;
   head += "Connection: close\r\n\r\n";
   socket_->write(head);
 }
@@ -216,9 +220,13 @@ void PipelineResponder::Pump() {
     if (buffer && gst_buffer_map(buffer, &map, GST_MAP_READ)) {
       if (map.size > 0) {
         WriteHead();
-        socket_->write(QByteArray::number(qulonglong(map.size), 16) + "\r\n");
-        socket_->write(reinterpret_cast<const char*>(map.data), map.size);
-        socket_->write("\r\n");
+        if (item_.dlna) {
+          socket_->write(reinterpret_cast<const char*>(map.data), map.size);
+        } else {
+          socket_->write(QByteArray::number(qulonglong(map.size), 16) + "\r\n");
+          socket_->write(reinterpret_cast<const char*>(map.data), map.size);
+          socket_->write("\r\n");
+        }
       }
       gst_buffer_unmap(buffer, &map);
     }
@@ -233,8 +241,9 @@ void PipelineResponder::Fail(const QString& message) {
   timer_->stop();
 
   if (head_written_) {
-    // Too late for an error status; ending without the final chunk tells
-    // the renderer the response is incomplete.
+    // Too late for an error status; ending without the final chunk, or
+    // with a reset where there are no chunks, tells the renderer the
+    // response is incomplete.
     socket_->abort();
   } else {
     MediaHttpServer::WriteError(socket_, 502, "Bad Gateway");
@@ -245,6 +254,7 @@ void PipelineResponder::Finish() {
   finished_ = true;
   timer_->stop();
   WriteHead();
-  socket_->write("0\r\n\r\n");
+  // Otherwise closing the connection is the end.
+  if (!item_.dlna) socket_->write("0\r\n\r\n");
   socket_->disconnectFromHost();
 }

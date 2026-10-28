@@ -76,6 +76,8 @@ struct UpnpDevice {
   bool video = false;
   // A Sonos group of more than one room. See UpnpDiscovery.
   bool group = false;
+  // Whether it says it follows DLNA, as TVs do, with an X_DLNADOC.
+  bool dlna = false;
 
   bool is_valid() const {
     return !id.isEmpty() && !address.isNull() && av_transport.is_valid();

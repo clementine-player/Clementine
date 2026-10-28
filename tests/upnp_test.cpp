@@ -145,6 +145,8 @@ const char kPlainDescription[] =
     "<friendlyName>Kitchen &amp; Dining</friendlyName>"
     "<modelName>Renderer</modelName>"
     "<UDN>uuid:5f9ec1b3-ed59-79bb-4530-745d6b3e9a65</UDN>"
+    "<dlna:X_DLNADOC xmlns:dlna=\"urn:schemas-dlna-org:device-1-0\">"
+    "DMR-1.50</dlna:X_DLNADOC>"
     "<serviceList>"
     "<service><serviceType>urn:schemas-upnp-org:service:AVTransport:2"
     "</serviceType><controlURL>upnp/control/avt</controlURL>"
@@ -279,6 +281,8 @@ TEST(UpnpDeviceTest, ParsesAnEmbeddedRenderer) {
             device.av_transport.event_url);
   // The fixture leaves it out.
   EXPECT_TRUE(device.rendering_control.event_url.isEmpty());
+  // Sonos doesn't say it follows DLNA.
+  EXPECT_FALSE(device.dlna);
   // The renderer's, not the MediaServer's.
   EXPECT_EQ(QUrl("http://192.168.86.217:1400/MediaRenderer/ConnectionManager/"
                  "Control"),
@@ -302,6 +306,7 @@ TEST(UpnpDeviceTest, ParsesARootRenderer) {
             device.av_transport.control_url);
   EXPECT_EQ(QUrl("http://10.0.0.9:49152/upnp/event/avt"),
             device.av_transport.event_url);
+  EXPECT_TRUE(device.dlna);
   EXPECT_EQ("urn:schemas-upnp-org:service:AVTransport:2",
             device.av_transport.type);
   EXPECT_FALSE(device.connection_manager.is_valid());
@@ -415,6 +420,12 @@ TEST(UpnpMediaPlayerTest, Didl) {
       "http://10.0.0.1:5500/s/token/1?t=5</res>"))
       << didl.toStdString();
   EXPECT_TRUE(didl.contains("object.item.audioItem.musicTrack"));
+
+  // For a DLNA renderer.
+  info.dlna_features = "DLNA.ORG_OP=01;DLNA.ORG_CI=0";
+  EXPECT_TRUE(UpnpMediaPlayer::Didl(info).contains(
+      "protocolInfo=\"http-get:*:audio/ogg:DLNA.ORG_OP=01;DLNA.ORG_CI=0\""));
+  info.dlna_features.clear();
 
   info.image_url = QUrl("http://10.0.0.1:5500/a/token/1");
   EXPECT_TRUE(UpnpMediaPlayer::Didl(info).contains(

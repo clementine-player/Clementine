@@ -40,6 +40,9 @@ struct UpnpMediaInfo {
   QString artist;
   QString album;
   QUrl image_url;
+  // For a DLNA renderer: the fourth field of the protocolInfo, as
+  // StreamItem::DlnaFeatures. "*" otherwise.
+  QString dlna_features;
   // 0 if unknown.
   qint64 duration_ms = 0;
 };

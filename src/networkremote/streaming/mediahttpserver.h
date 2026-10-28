@@ -73,6 +73,10 @@ class MediaHttpServer : public QObject {
   void HandleConnection(QTcpSocket* socket);
 
   static void WriteError(QTcpSocket* socket, int code, const char* reason);
+  // DLNA's response headers for |item|, each ending in CRLF: for DLNA
+  // renderers, and for any request that asks for them.
+  static QByteArray DlnaHeaders(const StreamItem& item,
+                                const HttpRequest& request);
 
   // Limits on what one renderer (one token), and everyone together, may have
   // open at once. Each pipeline is a decoder and an encoder with their own

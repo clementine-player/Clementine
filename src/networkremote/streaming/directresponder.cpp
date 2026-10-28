@@ -32,6 +32,7 @@ const qint64 kHighWater = 256 * 1024;
 DirectResponder::DirectResponder(QTcpSocket* socket, const QByteArray& token,
                                  const StreamItem& item,
                                  const QByteArray& range, bool head_only,
+                                 const QByteArray& extra_headers,
                                  QObject* parent)
     : StreamResponder(socket, token, Direct, parent),
       file_(item.req.MediaUrl().toLocalFile()),
@@ -73,6 +74,7 @@ DirectResponder::DirectResponder(QTcpSocket* socket, const QByteArray& token,
   head += "Content-Length: " + QByteArray::number(last - first + 1) + "\r\n";
   head += "Accept-Ranges: bytes\r\n";
   head += "Cache-Control: no-store\r\n";
+  head += extra_headers;
   head += "Connection: close\r\n\r\n";
   socket_->write(head);
 
