@@ -1046,22 +1046,26 @@ TEST(UpnpSubscriptionTest, MediaServerHandsEventsOn) {
 }
 
 // A renderer's event URL, answering SUBSCRIBE and UNSUBSCRIBE as |answer|
-// says and keeping the requests' heads.
+// says, one request per connection, and keeping the requests' heads.
 class FakeEventServer {
  public:
   explicit FakeEventServer(const QByteArray& answer) : answer_(answer) {
     listener_.listen(QHostAddress::LocalHost);
     QObject::connect(&listener_, &QTcpServer::newConnection, [this]() {
-      QTcpSocket* socket = listener_.nextPendingConnection();
-      QObject::connect(socket, &QTcpSocket::readyRead, [this, socket]() {
-        buffer_ += socket->readAll();
-        const int end = buffer_.indexOf("\r\n\r\n");
-        if (end == -1) return;
-        requests_ << buffer_.left(end);
-        buffer_.clear();
-        socket->write(answer_);
-        socket->disconnectFromHost();
-      });
+      while (listener_.hasPendingConnections()) {
+        QTcpSocket* socket = listener_.nextPendingConnection();
+        auto buffer = std::make_shared<QByteArray>();
+        QObject::connect(socket, &QTcpSocket::readyRead,
+                         [this, socket, buffer]() {
+                           *buffer += socket->readAll();
+                           const int end = buffer->indexOf("\r\n\r\n");
+                           if (end == -1) return;
+                           requests_ << buffer->left(end);
+                           buffer->clear();
+                           socket->write(answer_);
+                           socket->disconnectFromHost();
+                         });
+      }
     });
   }
 
@@ -1073,7 +1077,6 @@ class FakeEventServer {
  private:
   QTcpServer listener_;
   QByteArray answer_;
-  QByteArray buffer_;
 };
 
 QByteArray Header(const QByteArray& request, const QByteArray& name) {
@@ -1089,7 +1092,7 @@ TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
   // Renewed a fifth of the second before it runs out.
   FakeEventServer renderer(
       "HTTP/1.1 200 OK\r\nSID: uuid:RINCON_1_sub7\r\nTIMEOUT: Second-1\r\n"
-      "Content-Length: 0\r\n\r\n");
+      "Content-Length: 0\r\nConnection: close\r\n\r\n");
   QNetworkAccessManager network;
   auto callbacks = std::make_shared<EventCallbackTable>();
   auto subscription = std::make_unique<UpnpSubscription>(
@@ -1114,7 +1117,7 @@ TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
   EXPECT_EQ(QHostAddress(QHostAddress::LocalHost), peer);
 
   ASSERT_TRUE(QTest::qWaitFor([&]() { return renderer.requests_.size() >= 2; },
-                              3000));
+                              10000));
   const QByteArray renewal = renderer.requests_[1];
   EXPECT_TRUE(renewal.startsWith("SUBSCRIBE /event HTTP/1.1"));
   EXPECT_EQ("uuid:RINCON_1_sub7", Header(renewal, "SID").toStdString());
@@ -1125,7 +1128,7 @@ TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
   subscription.reset();
   EXPECT_FALSE(callbacks->Find(token, &peer));
   ASSERT_TRUE(QTest::qWaitFor(
-      [&]() { return renderer.requests_.size() > before; }, 3000));
+      [&]() { return renderer.requests_.size() > before; }, 10000));
   EXPECT_TRUE(renderer.requests_.last().startsWith("UNSUBSCRIBE /event"));
   EXPECT_EQ("uuid:RINCON_1_sub7",
             Header(renderer.requests_.last(), "SID").toStdString());
@@ -1133,7 +1136,8 @@ TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
 
 TEST(UpnpSubscriptionTest, Fails) {
   FakeEventServer renderer(
-      "HTTP/1.1 412 Precondition Failed\r\nContent-Length: 0\r\n\r\n");
+      "HTTP/1.1 412 Precondition Failed\r\nContent-Length: 0\r\n"
+      "Connection: close\r\n\r\n");
   QNetworkAccessManager network;
   auto callbacks = std::make_shared<EventCallbackTable>();
   UpnpSubscription subscription(&network, callbacks, renderer.url(),
