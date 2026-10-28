@@ -1,0 +1,36 @@
+# buf (https://buf.build) checks the protocol buffers that Clementine defines.
+# CI runs `buf lint`, and `buf breaking` against the branch a pull request
+# goes into. To run them locally:
+#
+#   buf lint
+#   buf breaking --against '.git#branch=master'
+version: v2
+modules:
+  # The remote control protocol, which the Android and iOS remotes copy.
+  - path: ext/libclementine-remote
+  # Between Clementine and its tag reader process, which ship together.
+  - path: ext/libclementine-tagreader
+lint:
+  use:
+    - STANDARD
+  except:
+    # Moving the files or renaming the packages would change the namespaces of
+    # all the generated code, in Clementine and the remotes, for no gain.
+    - PACKAGE_DIRECTORY_MATCH
+    - PACKAGE_VERSION_SUFFIX
+  # Enums older than these rules break them, and renaming their values would
+  # break the code that uses them, so each one says which rules it ignores
+  # with `// buf:lint:ignore` comments. New enums follow the rules.
+breaking:
+  # Only what changes the binary encoding, which is all the protocol uses:
+  # renaming a field or an enum value is fine, renumbering one isn't.
+  use:
+    - WIRE
+  except:
+    # Message.version's default is the protocol version, which goes up with
+    # each change.
+    - FIELD_SAME_DEFAULT
+  ignore:
+    # Clementine and the tag reader are always built together, so nothing
+    # ever talks to an older version of it.
+    - ext/libclementine-tagreader
