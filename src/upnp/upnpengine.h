@@ -129,7 +129,8 @@ class UpnpEngine : public Engine::Base {
   // The renderer's volume as it last said, or -1. Not sent back to it.
   int renderer_volume_;
   // Since this last set it. Its events about that, which may be about
-  // values the slider has already passed, don't move the slider.
+  // values the slider has already passed, don't move the slider; only where
+  // it's settled once they're over does, if that isn't where the slider is.
   QElapsedTimer volume_set_;
 
   StreamItem current_;
