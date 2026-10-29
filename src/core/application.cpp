@@ -231,6 +231,10 @@ Application::Application(QObject* parent)
   // TODO(John Maguire): Make this not a weird singleton.
   tag_reader_client();
 
+  // Now rather than when something first needs it, so "While Clementine is
+  // open" keeps the computer awake from the start.
+  sleep_inhibitor();
+
   p_->settings_timer_.setInterval(1000);
   p_->settings_timer_.setSingleShot(true);
   connect(&(p_->settings_timer_), SIGNAL(timeout()), SLOT(SaveSettings_()));

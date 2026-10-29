@@ -19,6 +19,7 @@
 #define CORE_DBUSSLEEPINHIBITOR_H_
 
 #include <QDBusObjectPath>
+#include <QDBusUnixFileDescriptor>
 #include <QMap>
 #include <QObject>
 #include <QString>
@@ -28,8 +29,9 @@
 class QDBusError;
 
 // Asks the desktop through the XDG desktop portal, which works inside the
-// Flatpak too. Desktops without the portal's Inhibit interface can still keep
-// the display on through org.freedesktop.ScreenSaver.
+// Flatpak too. Without the portal's Inhibit interface, the display is kept on
+// through org.freedesktop.ScreenSaver, and the computer awake through
+// systemd-logind's idle inhibitor.
 class DBusSleepInhibitor : public QObject, public SleepInhibitor::Backend {
   Q_OBJECT
 
@@ -43,7 +45,7 @@ class DBusSleepInhibitor : public QObject, public SleepInhibitor::Backend {
  private:
   struct Inhibition {
     enum class State { Released, Requesting, Held };
-    enum class Via { Portal, ScreenSaver };
+    enum class Via { Portal, ScreenSaver, Logind };
 
     State state = State::Released;
     // Whether it's still needed: a request can be answered after it isn't.
@@ -52,10 +54,13 @@ class DBusSleepInhibitor : public QObject, public SleepInhibitor::Backend {
     Via via = Via::Portal;
     QDBusObjectPath portal_request;
     quint32 screensaver_cookie = 0;
+    // Held until it's closed.
+    QDBusUnixFileDescriptor logind_fd;
   };
 
   void RequestFromPortal(SleepInhibitor::Keep keep);
   void RequestFromScreenSaver(SleepInhibitor::Keep keep);
+  void RequestFromLogind(SleepInhibitor::Keep keep);
   void Granted(SleepInhibitor::Keep keep);
   void Refused(SleepInhibitor::Keep keep, const QDBusError& error);
   void Release(SleepInhibitor::Keep keep);

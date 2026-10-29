@@ -18,10 +18,14 @@
 #ifndef BEHAVIOURSETTINGSPAGE_H
 #define BEHAVIOURSETTINGSPAGE_H
 
+#include <QList>
 #include <QMap>
+#include <QPair>
 
+#include "core/sleepinhibitor.h"
 #include "settingspage.h"
 
+class QCheckBox;
 class Ui_BehaviourSettingsPage;
 
 class BehaviourSettingsPage : public SettingsPage {
@@ -38,6 +42,10 @@ class BehaviourSettingsPage : public SettingsPage {
   void ShowTrayIconToggled(bool on);
 
  private:
+  // Each "Keep the computer awake" checkbox, and what it's for.
+  typedef QPair<QCheckBox*, SleepInhibitor::Activity> KeepAwakeOption;
+  QList<KeepAwakeOption> KeepAwakeOptions() const;
+
   Ui_BehaviourSettingsPage* ui_;
 
   QMap<QString, QString> language_map_;

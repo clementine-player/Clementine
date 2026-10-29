@@ -25,7 +25,9 @@
 
 class QTcpSocket;
 class EventCallbackTable;
+class SleepInhibitor;
 class StreamItemTable;
+class StreamResponder;
 struct StreamItem;
 
 // A parsed HTTP/1.x request head.
@@ -74,6 +76,10 @@ class MediaHttpServer : public QObject {
   void SetSyncItems(std::shared_ptr<StreamItemTable> items) {
     sync_items_ = items;
   }
+  // Keeps the computer awake while a remote downloads from /d/, if set.
+  void SetSleepInhibitor(SleepInhibitor* inhibitor) {
+    sleep_inhibitor_ = inhibitor;
+  }
 
   // Takes ownership of |socket|. It may already have data waiting.
   void HandleConnection(QTcpSocket* socket);
@@ -107,10 +113,12 @@ class MediaHttpServer : public QObject {
   // with |pipelines|.
   int CountResponders(const QByteArray* token, bool pipelines) const;
   int CountPendingRequests() const;
+  void KeepAwake(StreamResponder* responder);
 
   std::shared_ptr<StreamItemTable> items_;
   std::shared_ptr<EventCallbackTable> events_;
   std::shared_ptr<StreamItemTable> sync_items_;
+  SleepInhibitor* sleep_inhibitor_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_MEDIAHTTPSERVER_H_

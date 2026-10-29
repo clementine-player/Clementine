@@ -23,6 +23,7 @@
 #include <QUrlQuery>
 
 #include "core/logging.h"
+#include "core/sleepinhibitor.h"
 #include "core/timeconstants.h"
 #include "directresponder.h"
 #include "eventcallbacktable.h"
@@ -101,7 +102,10 @@ ByteRange::Result ByteRange::Parse(const QByteArray& header, qint64 size,
 MediaHttpServer::MediaHttpServer(std::shared_ptr<StreamItemTable> items,
                                  std::shared_ptr<EventCallbackTable> events,
                                  QObject* parent)
-    : QObject(parent), items_(items), events_(events) {}
+    : QObject(parent),
+      items_(items),
+      events_(events),
+      sleep_inhibitor_(nullptr) {}
 
 // Responders are children, so they're deleted here too: streams stop when the
 // server does, for example when streaming is turned off.
@@ -266,8 +270,10 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
          request.headers.value("if-range") != item.etag)) {
       range.clear();
     }
-    new DirectResponder(socket, token, item, range, head_only,
-                        DlnaHeaders(item, request), this);
+    StreamResponder* responder =
+        new DirectResponder(socket, token, item, range, head_only,
+                            DlnaHeaders(item, request), this);
+    if (download) KeepAwake(responder);
     return;
   }
 
@@ -281,8 +287,18 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   if (!ok || start_ms < 0 || length_ms <= 0) start_ms = 0;
   start_ms = qMin(start_ms, length_ms > 0 ? length_ms : 0);
 
-  new PipelineResponder(socket, token, item, start_ms, head_only,
-                        DlnaHeaders(item, request), this);
+  StreamResponder* responder =
+      new PipelineResponder(socket, token, item, start_ms, head_only,
+                            DlnaHeaders(item, request), this);
+  if (download) KeepAwake(responder);
+}
+
+// Streams for renderers don't need it: the player keeps the computer awake
+// while it's playing on them.
+void MediaHttpServer::KeepAwake(StreamResponder* responder) {
+  if (!sleep_inhibitor_) return;
+  responder->KeepAwake(
+      sleep_inhibitor_->Acquire(SleepInhibitor::Activity::RemoteTransfer));
 }
 
 void MediaHttpServer::ReadEvent(QTcpSocket* socket,

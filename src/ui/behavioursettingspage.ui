@@ -120,6 +120,18 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_keep_awake">
       <item>
+       <widget class="QCheckBox" name="b_keep_awake_while_open_"/>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="b_keep_awake_playback_"/>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="b_keep_awake_other_device_"/>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="b_keep_awake_remote_transfer_"/>
+      </item>
+      <item>
        <widget class="QCheckBox" name="b_keep_awake_visualizations_"/>
       </item>
      </layout>

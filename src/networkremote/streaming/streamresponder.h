@@ -21,6 +21,9 @@
 #include <QByteArray>
 #include <QElapsedTimer>
 #include <QObject>
+#include <memory>
+
+#include "core/sleepinhibitor.h"
 
 class QTcpSocket;
 class QTimer;
@@ -50,6 +53,11 @@ class StreamResponder : public QObject {
   // longer counts against the limits.
   bool active() const { return active_; }
 
+  // Keeps the computer awake until this is deleted.
+  void KeepAwake(std::unique_ptr<SleepInhibitor::Hold> hold) {
+    sleep_hold_ = std::move(hold);
+  }
+
  protected:
   QTcpSocket* socket_;
 
@@ -64,6 +72,7 @@ class StreamResponder : public QObject {
   bool active_;
   QElapsedTimer last_progress_;
   QTimer* idle_timer_;
+  std::unique_ptr<SleepInhibitor::Hold> sleep_hold_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_STREAMRESPONDER_H_

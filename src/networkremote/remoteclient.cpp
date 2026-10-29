@@ -67,9 +67,24 @@ RemoteClient::~RemoteClient() {
   client_->deleteLater();
 }
 
-void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
+void RemoteClient::setDownloader(bool downloader) {
+  downloader_ = downloader;
+  // A downloader connects only to download songs, and goes when it's done.
+  if (downloader && app_) {
+    if (!download_hold_) {
+      download_hold_ = app_->sleep_inhibitor()->Acquire(
+          SleepInhibitor::Activity::RemoteTransfer);
+    }
+  } else {
+    download_hold_.reset();
+  }
+}
 
-void RemoteClient::SocketDisconnected() { emit Disconnected(id_); }
+void RemoteClient::SocketDisconnected() {
+  // This can be deleted a while later, when something's next sent.
+  download_hold_.reset();
+  emit Disconnected(id_);
+}
 
 void RemoteClient::IncomingData() {
   while (client_->bytesAvailable()) {

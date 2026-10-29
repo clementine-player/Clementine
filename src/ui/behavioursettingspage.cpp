@@ -40,6 +40,29 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
 
   // Set here rather than in the .ui file, which can't give translators notes.
+  ui_->b_keep_awake_while_open_->setText(
+      // TRANSLATORS: An option under "Keep the computer awake" on the
+      // Behavior settings page, and read with it: keep the computer awake
+      // for as long as Clementine is running, whatever it's doing.
+      tr("While Clementine is open"));
+  ui_->b_keep_awake_playback_->setText(
+      // TRANSLATORS: An option under "Keep the computer awake" on the
+      // Behavior settings page, and read with it: keep the computer awake
+      // while Clementine plays music through this computer's speakers or
+      // headphones.
+      tr("During playback"));
+  ui_->b_keep_awake_other_device_->setText(
+      // TRANSLATORS: An option under "Keep the computer awake" on the
+      // Behavior settings page, and read with it: keep the computer awake
+      // while Clementine plays music on a phone, a Chromecast, a Sonos speaker
+      // or the like, which gets the music from this computer.
+      tr("While playing on another device"));
+  ui_->b_keep_awake_remote_transfer_->setText(
+      // TRANSLATORS: An option under "Keep the computer awake" on the
+      // Behavior settings page, and read with it: keep the computer awake
+      // while a phone running Clementine Remote downloads songs from it,
+      // whether the user picked them or they're being synced.
+      tr("While a remote is downloading or syncing"));
   ui_->b_keep_awake_visualizations_->setText(
       // TRANSLATORS: An option under "Keep the computer awake" on the
       // Behavior settings page, and read with it: keep the computer awake
@@ -54,6 +77,13 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)),
           SLOT(ShowTrayIconToggled(bool)));
+  // Keeping the computer awake all the time covers the other times it would.
+  connect(ui_->b_keep_awake_while_open_, &QCheckBox::toggled, this,
+          [this](bool while_open) {
+            ui_->b_keep_awake_playback_->setEnabled(!while_open);
+            ui_->b_keep_awake_other_device_->setEnabled(!while_open);
+            ui_->b_keep_awake_remote_transfer_->setEnabled(!while_open);
+          });
 
   ui_->doubleclick_addmode->setItemData(0, MainWindow::AddBehaviour_Append);
   ui_->doubleclick_addmode->setItemData(1, MainWindow::AddBehaviour_Load);
@@ -242,11 +272,12 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(SleepInhibitor::kSettingsGroup);
-  ui_->b_keep_awake_visualizations_->setChecked(
-      s.value(SleepInhibitor::SettingsKey(
-                  SleepInhibitor::Activity::FullScreenVisualizations),
-              true)
-          .toBool());
+  for (const KeepAwakeOption& option : KeepAwakeOptions()) {
+    option.first->setChecked(
+        s.value(SleepInhibitor::SettingsKey(option.second),
+                SleepInhibitor::EnabledByDefault(option.second))
+            .toBool());
+  }
   s.endGroup();
 }
 
@@ -337,10 +368,25 @@ void BehaviourSettingsPage::Save() {
   s.setValue("warn_close_playlist", ui_->b_warn_close_playlist_->isChecked());
   s.endGroup();
   s.beginGroup(SleepInhibitor::kSettingsGroup);
-  s.setValue(SleepInhibitor::SettingsKey(
-                 SleepInhibitor::Activity::FullScreenVisualizations),
-             ui_->b_keep_awake_visualizations_->isChecked());
+  for (const KeepAwakeOption& option : KeepAwakeOptions()) {
+    s.setValue(SleepInhibitor::SettingsKey(option.second),
+               option.first->isChecked());
+  }
   s.endGroup();
+}
+
+QList<BehaviourSettingsPage::KeepAwakeOption>
+BehaviourSettingsPage::KeepAwakeOptions() const {
+  return QList<KeepAwakeOption>{
+      {ui_->b_keep_awake_while_open_, SleepInhibitor::Activity::WhileOpen},
+      {ui_->b_keep_awake_playback_, SleepInhibitor::Activity::LocalPlayback},
+      {ui_->b_keep_awake_other_device_,
+       SleepInhibitor::Activity::PlaybackOnOtherDevice},
+      {ui_->b_keep_awake_remote_transfer_,
+       SleepInhibitor::Activity::RemoteTransfer},
+      {ui_->b_keep_awake_visualizations_,
+       SleepInhibitor::Activity::FullScreenVisualizations},
+  };
 }
 
 void BehaviourSettingsPage::ShowTrayIconToggled(bool on) {

@@ -4,8 +4,10 @@
 #include <QHostAddress>
 #include <QTcpSocket>
 #include <atomic>
+#include <memory>
 
 #include "core/application.h"
+#include "core/sleepinhibitor.h"
 #include "remotecontrolmessages.pb.h"
 #include "songsender.h"
 
@@ -67,6 +69,8 @@ class RemoteClient : public QObject {
   bool authenticated_;
   bool allow_downloads_;
   bool downloader_;
+  // Keeps the computer awake while a downloader's connected.
+  std::unique_ptr<SleepInhibitor::Hold> download_hold_;
 
   QTcpSocket* client_;
   bool reading_protobuf_;
