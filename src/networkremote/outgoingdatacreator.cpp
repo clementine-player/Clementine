@@ -127,9 +127,7 @@ void OutgoingDataCreator::SendClementineInfo() {
   if (streaming_enabled_) {
     info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
   }
-  if (NetworkRemote::MediaSyncEnabled()) {
-    info->set_server_id(NetworkRemoteServerId().toStdString());
-  }
+  info->set_server_id(NetworkRemoteServerId().toStdString());
   SendDataToClients(&msg);
 }
 
