@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reformats C++ source files that have changed from a given git ref, using
-the same clang-format style and scope as .github/workflows/all.yml's
-clang-format-lint-action.
+the same clang-format style and scope as the clang-format step in
+.github/workflows/all.yml.
 """
 import argparse
 import difflib
@@ -25,8 +25,9 @@ def main():
       help='path to the clang-format executable')
   parser.add_argument('--ref', default='origin/master',
       help='the git-ref to compare against')
-  parser.add_argument('--source', default='src',
-      help='only reformat files under this directory (matches CI\'s scope)')
+  parser.add_argument('--source', action='append', metavar='DIR',
+      help='only reformat files under this directory; may be repeated '
+           '(default: src and tests, which is CI\'s scope)')
   parser.add_argument('--extension', action='append', metavar='EXT',
       default=EXTENSIONS,
       help='file extensions to reformat')
@@ -57,8 +58,9 @@ def main():
   changed_files = subprocess.check_output(
       ['git', 'diff-index', args.ref, '--name-only'],
       text=True).splitlines()
-  source_prefix = args.source.rstrip('/') + '/'
-  changed_files = [f for f in changed_files if f.startswith(source_prefix)]
+  source_prefixes = tuple(
+      s.rstrip('/') + '/' for s in (args.source or ['src', 'tests']))
+  changed_files = [f for f in changed_files if f.startswith(source_prefixes)]
 
   if not changed_files:
     print('No changes from %s' % args.ref, file=sys.stderr)

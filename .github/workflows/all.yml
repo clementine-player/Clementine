@@ -42,7 +42,7 @@ jobs:
         run: pip install clang-format==23.1.0
       - name: clang-format
         run: |
-          find src -type f \( -name '*.c' -o -name '*.h' -o -name '*.C' -o -name '*.H' \
+          find src tests -type f \( -name '*.c' -o -name '*.h' -o -name '*.C' -o -name '*.H' \
               -o -name '*.cpp' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \
               -o -name '*.c++' -o -name '*.h++' -o -name '*.cxx' -o -name '*.hxx' \) -print0 \
             | xargs -0 clang-format \
