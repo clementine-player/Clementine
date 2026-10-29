@@ -73,6 +73,7 @@ DirectResponder::DirectResponder(QTcpSocket* socket, const QByteArray& token,
   head += "Content-Type: " + item.ContentType().toLatin1() + "\r\n";
   head += "Content-Length: " + QByteArray::number(last - first + 1) + "\r\n";
   head += "Accept-Ranges: bytes\r\n";
+  if (!item.etag.isEmpty()) head += "ETag: " + item.etag + "\r\n";
   head += "Cache-Control: no-store\r\n";
   head += extra_headers;
   head += "Connection: close\r\n\r\n";

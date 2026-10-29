@@ -139,6 +139,7 @@ void MediaSync::Manifest(Client* client,
     item.req = playback;
     item.song = song;
     const QString version = SyncSong::ItemVersion(song);
+    item.etag = '"' + (key + ':' + version).toUtf8() + '"';
     const int id = Offer(client, key + ':' + version, item);
     if (!id) {
       qLog(Warning) << "A remote has" << kMaxItemsPerClient

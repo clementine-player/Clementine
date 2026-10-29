@@ -354,7 +354,10 @@ void NetworkRemote::StartServer() {
   if (renderer_registry_) {
     media_http_server_.reset(new MediaHttpServer(
         renderer_registry_->items(), renderer_registry_->event_callbacks()));
+    if (media_sync_) media_http_server_->SetSyncItems(media_sync_->items());
   }
+  // Remotes can sync once there's somewhere to download from.
+  outgoing_data_creator_->SetSyncEnabled(media_sync_ && media_http_server_);
   StartStreaming();
 
   running_ = true;

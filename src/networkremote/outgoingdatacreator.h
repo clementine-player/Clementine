@@ -53,6 +53,7 @@ class OutgoingDataCreator : public QObject {
     allow_downloads_ = allow_downloads;
   }
   void SetStreamingEnabled(bool enabled) { streaming_enabled_ = enabled; }
+  void SetSyncEnabled(bool enabled) { sync_enabled_ = enabled; }
   void SendDataToClients(cpb::remote::Message* msg);
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          cpb::remote::SongMetadata* song_metadata);
@@ -116,6 +117,7 @@ class OutgoingDataCreator : public QObject {
   QStringList files_music_extensions_;
   bool allow_downloads_;
   bool streaming_enabled_ = false;
+  bool sync_enabled_ = false;
 
   LyricsFetcher* lyrics_fetcher_;
 

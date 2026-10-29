@@ -202,19 +202,23 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
     return;
   }
 
-  // /s/<token>/<item id>, or its cover at /a/<token>/<item id>
+  // /s/<token>/<item id>, its cover at /a/<token>/<item id>, or a sync
+  // download at /d/<token>/<item id>
   const QList<QByteArray> parts = request.path.split('/');
   bool id_ok = false;
   const int item_id = parts.size() == 4 ? parts[3].toInt(&id_ok) : 0;
+  const bool download = parts.size() == 4 && parts[1] == "d";
+  const std::shared_ptr<StreamItemTable>& table =
+      download ? sync_items_ : items_;
   if (parts.size() != 4 || !parts[0].isEmpty() ||
-      (parts[1] != "s" && parts[1] != "a") || !id_ok) {
+      (parts[1] != "s" && parts[1] != "a" && !download) || !id_ok || !table) {
     WriteError(socket, 404, "Not Found");
     return;
   }
 
   StreamItem item;
   QHostAddress allowed_peer;
-  if (!items_->Find(parts[2], item_id, &item, &allowed_peer)) {
+  if (!table->Find(parts[2], item_id, &item, &allowed_peer)) {
     WriteError(socket, 404, "Not Found");
     return;
   }
@@ -255,8 +259,15 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   disconnect(socket, SIGNAL(disconnected()), socket, SLOT(deleteLater()));
 
   if (!pipeline) {
-    new DirectResponder(socket, token, item, request.headers.value("range"),
-                        head_only, DlnaHeaders(item, request), this);
+    // A download resumes only from the same file: otherwise it starts over.
+    QByteArray range = request.headers.value("range");
+    if (request.headers.contains("if-range") &&
+        (item.etag.isEmpty() ||
+         request.headers.value("if-range") != item.etag)) {
+      range.clear();
+    }
+    new DirectResponder(socket, token, item, range, head_only,
+                        DlnaHeaders(item, request), this);
     return;
   }
 

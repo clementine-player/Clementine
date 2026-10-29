@@ -128,6 +128,9 @@ void OutgoingDataCreator::SendClementineInfo() {
     info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
   }
   info->set_server_id(NetworkRemoteServerId().toStdString());
+  if (sync_enabled_) {
+    info->add_features(cpb::remote::SERVER_FEATURE_SYNC);
+  }
   SendDataToClients(&msg);
 }
 
