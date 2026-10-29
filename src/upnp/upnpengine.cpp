@@ -387,7 +387,17 @@ void UpnpEngine::SetVolumeSW(uint) {
 
 void UpnpEngine::PlayerVolumeChanged(int volume) {
   renderer_volume_ = volume;
-  if (volume_set_.isValid() && volume_set_.elapsed() < kOwnVolumeMsec) return;
+  if (volume_set_.isValid() && volume_set_.elapsed() < kOwnVolumeMsec) {
+    // Once that's past, whatever it's settled on, if that isn't where the
+    // slider is: someone else may have changed it meanwhile.
+    QTimer::singleShot(kOwnVolumeMsec - volume_set_.elapsed(), this, [this]() {
+      if (volume_set_.elapsed() < kOwnVolumeMsec) return;
+      if (renderer_volume_ != static_cast<int>(volume_)) {
+        emit OutputVolumeChanged(renderer_volume_);
+      }
+    });
+    return;
+  }
   emit OutputVolumeChanged(volume);
 }
 
