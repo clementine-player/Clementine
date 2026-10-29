@@ -89,7 +89,7 @@ msgid "%1 albums"
 msgstr "%1 álbuns"
 
 #: chromecast/chromecastengine.cpp:261
-#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:297
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
@@ -119,7 +119,7 @@ msgstr "%1 dias atrás"
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:437
+#: networkremote/streaming/rendererregistry.cpp:441
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -130,7 +130,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:448
+#: networkremote/streaming/rendererregistry.cpp:452
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -142,7 +142,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:429
+#: networkremote/streaming/rendererregistry.cpp:433
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -153,7 +153,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:456
+#: networkremote/streaming/rendererregistry.cpp:460
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -895,7 +895,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Aspeto"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Adicionar ficheiros/URL à lista de reprodução"
 
@@ -1188,7 +1188,7 @@ msgstr "Alterar modo de desordenação"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Alterar idioma"
 
@@ -1430,7 +1430,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista de classes separadas por vírgula: nível entre 0 e 3"
 
@@ -1697,7 +1697,7 @@ msgstr "Capa de álbum definida em %1"
 msgid "Covers from %1"
 msgstr "Capas de álbum de %1"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1780,11 +1780,11 @@ msgstr "Dias"
 msgid "De&fault"
 msgstr "Pa&drão"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1844,7 +1844,7 @@ msgstr "Apagar pré-ajuste"
 msgid "Delete smart playlist"
 msgstr "Apagar lista de reprodução inteligente"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1965,7 +1965,7 @@ msgstr "Transmissão intermitente"
 msgid "Display options"
 msgstr "Opções de exibição"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Mostrar notificação"
 
@@ -2277,11 +2277,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Equalizador"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalente a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels *:3"
 
@@ -2970,11 +2970,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3033,7 +3033,7 @@ msgstr "Formato inválido"
 msgid "Invert Selection"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:317
+#: upnp/upnpmediaplayer.cpp:480
 msgid "It was stopped from somewhere else"
 msgstr ""
 
@@ -3272,7 +3272,7 @@ msgstr "A carregar informação das faixas"
 msgid "Loading..."
 msgstr "A carregar..."
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar ficheiros/URL, substituindo a lista de reprodução atual"
 
@@ -3930,7 +3930,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Outras opções"
 
@@ -3989,7 +3989,7 @@ msgstr "Palavra-passe"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Pausa na reprodução"
 
@@ -4039,11 +4039,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Número de reproduções"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Reproduzir se parado, pausa se em reprodução"
 
@@ -4072,7 +4072,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproduzir a <n>.ª faixa da lista de reprodução"
 
@@ -4084,7 +4084,7 @@ msgstr "Reproduzir/Pausa"
 msgid "Playback"
 msgstr "Reprodução"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Opções do reprodutor"
 
@@ -4103,7 +4103,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Lista de reprodução terminada"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opções da lista de reprodução"
@@ -4253,7 +4253,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Faixa anterior"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Imprimir informações da versão"
 
@@ -4294,7 +4294,7 @@ msgstr "Colocar faixas aleatoriamente"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4561,7 +4561,7 @@ msgstr "Reiniciar número de reproduções"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4834,11 +4834,11 @@ msgstr "Recuar"
 msgid "Seek forward"
 msgstr "Avançar"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Avançar um tempo relativo na faixa atual"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Avançar para uma posição absoluta na faixa atual"
 
@@ -4919,7 +4919,7 @@ msgstr "Definir %1 para \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Ajustar volume para <value> por cento"
 
@@ -5125,7 +5125,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Recuar na lista de reprodução"
 
@@ -5137,7 +5137,7 @@ msgstr "Reproduções ignoradas"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Avançar na lista de reprodução"
 
@@ -5177,7 +5177,7 @@ msgstr "Suave"
 msgid "Soft Rock"
 msgstr "Rock suave"
 
-#: upnp/upnpmediaplayer.cpp:270
+#: upnp/upnpmediaplayer.cpp:430
 msgid "Something else is playing on it now"
 msgstr ""
 
@@ -5250,7 +5250,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Iniciar lista de reprodução atual"
 
@@ -5288,11 +5288,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Parar após esta faixa"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Parar reprodução"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5444,11 +5444,11 @@ msgstr ""
 msgid "The format is only updated when a pipeline starts."
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:321
+#: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
+#: upnp/upnpmediaplayer.cpp:366 upnp/upnpmediaplayer.cpp:450
 #, qt-format
 msgid "The renderer couldn't play it: %1"
 msgstr ""
@@ -5629,7 +5629,7 @@ msgstr "Trocar estado da fila"
 msgid "Toggle scrobbling"
 msgstr "Alternar envio"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Alternar visibilidade da notificação"
 
@@ -5744,7 +5744,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5840,7 +5840,7 @@ msgstr "A atualizar %1%..."
 msgid "Updating library"
 msgstr "A atualizar coleção"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Utilização"
 
@@ -6436,7 +6436,7 @@ msgstr "a mais antiga primeiro"
 msgid "on"
 msgstr "em"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "opções"
 

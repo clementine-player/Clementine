@@ -95,7 +95,7 @@ msgid "%1 albums"
 msgstr "%1 alb"
 
 #: chromecast/chromecastengine.cpp:261
-#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:297
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr "%1 se nepodařilo přehrát tuto skladbu: %2"
@@ -125,46 +125,46 @@ msgstr "před %1 dny"
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:437
+#: networkremote/streaming/rendererregistry.cpp:441
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
 " listen on port %2. Another program may be using it."
-msgstr ""
+msgstr "%1 získává hudbu z aplikace Clementine prostřednictvím síťového dálkového ovládání, které se však nemohlo připojit k přípojce (port) %2. Možná jej právě využívá jiný program."
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:448
+#: networkremote/streaming/rendererregistry.cpp:452
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
 "listen on an address in %1's network."
-msgstr ""
+msgstr "%1 získává hudbu z Clementine prostřednictvím síťového dálkového ovládání, které však nenaslouchá na adrese v síti %1."
 
 #. TRANSLATORS: Shown when the user picks a Chromecast or other device
 #. to play on, and it can't get the music. Such devices download the
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:429
+#: networkremote/streaming/rendererregistry.cpp:433
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
 "turned off."
-msgstr ""
+msgstr "%1 získává hudbu z Clementine prostřednictvím síťového dálkového ovladače, které je vypnuto."
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:456
+#: networkremote/streaming/rendererregistry.cpp:460
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
 "allows connections from the local network, and %1 isn't on it."
-msgstr ""
+msgstr "%1 získává hudbu z Clementine prostřednictvím síťového dálkového ovládání, které povoluje pouze připojení z místní sítě, a %1 v ní není."
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -901,7 +901,7 @@ msgstr "Rozlobený"
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
@@ -1194,7 +1194,7 @@ msgstr "Změnit režim míchání"
 msgid "Change the currently playing song"
 msgstr "Změnit nyní přehrávanou píseň"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Změnit jazyk"
 
@@ -1280,7 +1280,7 @@ msgid ""
 "Chromecasts and other devices you play on get their music from Clementine "
 "through the network remote, so they need it turned on, and listening on an "
 "address in their network."
-msgstr ""
+msgstr "Zařízení Chromecast a další zařízení, ve kterých přehráváte hudbu, získávají hudbu z aplikace Clementine prostřednictvím síťového dálkového ovládání, takže musí být zapnuta a naslouchat na adrese v jejich síti."
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
@@ -1436,7 +1436,7 @@ msgstr "S&kladatel"
 msgid "Colors"
 msgstr "Barvy"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
@@ -1703,7 +1703,7 @@ msgstr "Obal nastaven z %1"
 msgid "Covers from %1"
 msgstr "Obaly od %1"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr "Vytvořit nový seznam skladeb pomocí souborů/adres"
 
@@ -1786,11 +1786,11 @@ msgstr "Dny"
 msgid "De&fault"
 msgstr "&Výchozí"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr "Snížit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr "Snížit hlasitost o <value> procent"
 
@@ -1850,7 +1850,7 @@ msgstr "Smazat přednastavení"
 msgid "Delete smart playlist"
 msgstr "Smazat chytrý seznam skladeb"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr "Smazat nyní přehrávanou píseň"
 
@@ -1971,7 +1971,7 @@ msgstr "Nesouvislý přenos"
 msgid "Display options"
 msgstr "Volby zobrazení"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Zobrazovat informace na obrazovce (OSD)"
 
@@ -2283,11 +2283,11 @@ msgstr "Informace o dílu"
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Rovnocenné s --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
@@ -2976,11 +2976,11 @@ msgstr "Nevhodná verze protokolu Subsonic REST. Server se musí zaktualizovat."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Neúplné nastavení. Zajistěte, prosím, že jsou všechna pole vyplněna."
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr "Zvýšit hlasitost o 4 procenta"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr "Zvýšit hlasitost o <value> procent"
 
@@ -3039,7 +3039,7 @@ msgstr "Neplatný formát"
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
-#: upnp/upnpmediaplayer.cpp:317
+#: upnp/upnpmediaplayer.cpp:480
 msgid "It was stopped from somewhere else"
 msgstr "Bylo to zastaveno odjinud"
 
@@ -3173,7 +3173,7 @@ msgid ""
 "Let a phone or tablet running Clementine Remote act as the speaker, and "
 "choose where Clementine plays: Clementine keeps the playlist and streams the"
 " audio to the device."
-msgstr ""
+msgstr "Nechte telefon nebo tablet s aplikací Clementine Remote pracovat jako reproduktor a vyberte, kde má Clementine přehrávat: Clementine zachová seznam skladeb a přenáší zvuk do daného zařízení."
 
 #: ui/mainwindow.cpp:272 ui/mainwindow.cpp:287
 #: ../bin/src/ui_seafilesettingspage.h:174
@@ -3278,7 +3278,7 @@ msgstr "Nahrávají se informace o skladbě"
 msgid "Loading..."
 msgstr "Nahrává se..."
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Nahraje soubory/adresy (URL), nahradí nynější seznam skladeb"
 
@@ -3588,7 +3588,7 @@ msgstr "Ovládání"
 #. name.
 #: widgets/outputbutton.cpp:198
 msgid "Network Remote Settings..."
-msgstr ""
+msgstr "Nastavení síťového dálkového ovládání..."
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
@@ -3936,7 +3936,7 @@ msgstr "Podpora pro značku Původní rok"
 msgid "Other"
 msgstr "Jiné"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Další volby"
 
@@ -3995,7 +3995,7 @@ msgstr "Heslo"
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Pozastavit přehrávání"
 
@@ -4045,11 +4045,11 @@ msgstr "Přehrávejte píseň a podívejte se zde na obrázky zpěváka a jeho �
 msgid "Play count"
 msgstr "Počet přehrání"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr "Přehrát daný seznam skladeb"
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 
@@ -4068,7 +4068,7 @@ msgstr "Přehrát další"
 #: widgets/outputbutton.cpp:178
 #, qt-format
 msgid "Play on %1"
-msgstr ""
+msgstr "Přehrává na %1"
 
 #: widgets/outputbutton.cpp:115
 msgid "Play on another device"
@@ -4078,7 +4078,7 @@ msgstr "Přehrát na jiném zařízení"
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Přehrát <n>. skladbu v seznamu se skladbami"
 
@@ -4090,7 +4090,7 @@ msgstr "Přehrát/Pozastavit"
 msgid "Playback"
 msgstr "Přehrávání"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
@@ -4109,7 +4109,7 @@ msgstr "Seznam skladeb"
 msgid "Playlist finished"
 msgstr "Seznam skladeb dokončen"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Nastavení seznamu skladeb"
@@ -4259,7 +4259,7 @@ msgstr "Předchozí"
 msgid "Previous track"
 msgstr "Předchozí skladba"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Vypsat informaci o verzi"
 
@@ -4300,7 +4300,7 @@ msgstr "Seřadit skladby náhodně"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4567,7 +4567,7 @@ msgstr "Vynulovat počty přehrání"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Spustit píseň znovu, potom, v případě že je tlačítko opět stisknuto, skočit na předchozí"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Spustit znovu přehrávání skladby, nebo přehrávat předchozí skladbu, jestliže ještě neuběhlo osm sekund od začátku skladby."
@@ -4840,11 +4840,11 @@ msgstr "Přetočit zpět"
 msgid "Seek forward"
 msgstr "Přetočit vpřed"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Přetočit v nyní přehrávané skladbě"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 
@@ -4925,7 +4925,7 @@ msgstr "Nastavit %1 na \"%2\"..."
 msgid "Set target rate"
 msgstr "Nastavit cílový tok"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Nastavit hlasitost na <value> procent"
 
@@ -5131,7 +5131,7 @@ msgstr "Velikost:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Předchozí skladba v seznamu skladeb"
 
@@ -5143,7 +5143,7 @@ msgstr "Počet přeskočení"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Přeskočit soubory s těmito příponami (odděleny čárkou, rozlišuje se velikost písmen)"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
@@ -5183,7 +5183,7 @@ msgstr "Měkké"
 msgid "Soft Rock"
 msgstr "Soft rock"
 
-#: upnp/upnpmediaplayer.cpp:270
+#: upnp/upnpmediaplayer.cpp:430
 msgid "Something else is playing on it now"
 msgstr "Teď na něm hraje něco jiného"
 
@@ -5256,7 +5256,7 @@ msgstr "Alba s hvězdičkami"
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Přehrát nynější skladbu v seznamu skladeb"
 
@@ -5294,11 +5294,11 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Zastavit přehrávání"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr "Zastavit přehrávání po nynější skladbě"
 
@@ -5450,11 +5450,11 @@ msgstr "Objevitel je zaneprázdněn"
 msgid "The format is only updated when a pipeline starts."
 msgstr "Formát se aktualizuje pouze při spuštění roury."
 
-#: upnp/upnpmediaplayer.cpp:321
+#: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
 msgstr "Přehrávač to nedokázal přehrát"
 
-#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
+#: upnp/upnpmediaplayer.cpp:366 upnp/upnpmediaplayer.cpp:450
 #, qt-format
 msgid "The renderer couldn't play it: %1"
 msgstr "Přehrávač to nedokázal přehrát: %1"
@@ -5635,7 +5635,7 @@ msgstr "Přepnout stav řady"
 msgid "Toggle scrobbling"
 msgstr "Přepnout odesílání informací o přehrávání"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
@@ -5718,7 +5718,7 @@ msgstr "Turbína"
 #. Chromecast or other device can play.
 #: widgets/outputbutton.cpp:191
 msgid "Turn On"
-msgstr ""
+msgstr "Zapnout"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Turn off"
@@ -5732,7 +5732,7 @@ msgstr "Vypnout"
 msgid ""
 "Turning on the network remote also lets the Clementine Remote app, on phones"
 " and tablets in your network, control Clementine."
-msgstr ""
+msgstr "Zapnutím síťového dálkového ovládání umožníte také aplikaci Clementine Remote v telefonech a tabletech ve vaší síti ovládat aplikaci Clementine."
 
 #: ../bin/src/ui_transcoderoptionsavaac.h:126
 msgid "Two loop searching method"
@@ -5750,7 +5750,7 @@ msgstr "Adresa (URL)"
 msgid "URL of its Logo:"
 msgstr "Adresa (URL) jeho značky:"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "Adresa (URL)"
 
@@ -5846,7 +5846,7 @@ msgstr "Obnovuje se %1%..."
 msgid "Updating library"
 msgstr "Obnovuje se hudební sbírka"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Zacházení"
 
@@ -6442,7 +6442,7 @@ msgstr "nejprve nejstarší"
 msgid "on"
 msgstr "Na"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "volby"
 

@@ -81,7 +81,7 @@ msgid "%1 albums"
 msgstr "%1 အယ်လဘမ်များ"
 
 #: chromecast/chromecastengine.cpp:261
-#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:193
+#: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:297
 #, qt-format
 msgid "%1 can't play this track: %2"
 msgstr ""
@@ -111,7 +111,7 @@ msgstr "%1 လွန်ခဲ့သောနေ့များ"
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:437
+#: networkremote/streaming/rendererregistry.cpp:441
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -122,7 +122,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:448
+#: networkremote/streaming/rendererregistry.cpp:452
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -134,7 +134,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:429
+#: networkremote/streaming/rendererregistry.cpp:433
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -145,7 +145,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:456
+#: networkremote/streaming/rendererregistry.cpp:460
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -887,7 +887,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "ပုံပန်းသဏ္ဎာန်"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "ဖိုင်များ/ယူအာအလ်များသီချင်းစာရင်းသို့ဖြည့်စွက်"
 
@@ -1180,7 +1180,7 @@ msgstr "ကုလားဖန်ထိုးစနစ်ပြောင်းလ
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "ဒီဘာသာစကားပြောင်းလဲ"
 
@@ -1422,7 +1422,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "အမျိုးအစားစာရင်းခွဲခြားရန်ပုဒ်ရပ်: အမျိုးအစား, အမျိုးအစားက ၀-၃"
 
@@ -1689,7 +1689,7 @@ msgstr "%1 မှအနုပညာအဖုံးသတ်မှတ်"
 msgid "Covers from %1"
 msgstr "%1 မှအဖုံးများ"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1772,11 +1772,11 @@ msgstr "နေ့များ"
 msgid "De&fault"
 msgstr "မူလအခြေအနေ(&f)"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1836,7 +1836,7 @@ msgstr "ကြိုတင်ထိန်းညှိပယ်ဖျက်"
 msgid "Delete smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်းပယ်ဖျက်"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1957,7 +1957,7 @@ msgstr "ဆက်လက်မထုတ်လွှင့်ခြင်း"
 msgid "Display options"
 msgstr "ပြသခြင်းရွေးပိုင်ခွင့်များ"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသခြင်း"
 
@@ -2269,11 +2269,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "အသံထိန်းညှိသူ"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1တူညီ"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent to --log-levels *:3တူညီ"
 
@@ -2962,11 +2962,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3025,7 +3025,7 @@ msgstr "ပုံစံမမှန်"
 msgid "Invert Selection"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:317
+#: upnp/upnpmediaplayer.cpp:480
 msgid "It was stopped from somewhere else"
 msgstr ""
 
@@ -3264,7 +3264,7 @@ msgstr "တေးသံလမ်းကြောအချက်အလက်မျ
 msgid "Loading..."
 msgstr "ထည့်သွင်းနေ..."
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "ဖိုင်များ/ယူအာအလ်များထည့်သွင်း၊ ယခုသီချင်းစာရင်းအစားထိုး"
 
@@ -3922,7 +3922,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "အခြားရွေးပိုင်ခွင့်များ"
 
@@ -3981,7 +3981,7 @@ msgstr "စကားဝှက်"
 msgid "Pause"
 msgstr "ရပ်တန့်"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "ပြန်ဖွင့်ရပ်တန့်"
 
@@ -4031,11 +4031,11 @@ msgstr ""
 msgid "Play count"
 msgstr "ဖွင့်သံအရေအတွက်"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "ရပ်တန့်ပြီးလျှင်ဖွင့်၊ ဖွင့်ပြီးလျှင်ရပ်တန့်"
 
@@ -4064,7 +4064,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "သီချင်းစာရင်းတွင်တေးသံလမ်းကြော <n> စတင်ဖွင့်"
 
@@ -4076,7 +4076,7 @@ msgstr "ဖွင့်/ရပ်တန့်"
 msgid "Playback"
 msgstr "ပြန်ဖွင့်"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
@@ -4095,7 +4095,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "သီချင်းစာရင်းပြီးဆံုး"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "သီချင်းစာရင်းရွေးပိုင်ခွင့်များ"
@@ -4245,7 +4245,7 @@ msgstr "ယခင်"
 msgid "Previous track"
 msgstr "ယခင်တေးသံလမ်းကြော"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "ပုံစံအချက်အလက်ဖော်ပြ"
 
@@ -4286,7 +4286,7 @@ msgstr "သီချင်းများကိုကျပန်းစီစဉ
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4553,7 +4553,7 @@ msgstr "ဖွင့်သံအရေအတွက်များပြန်လ
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4826,11 +4826,11 @@ msgstr "နောက်ပြန်ရှာဖွေ"
 msgid "Seek forward"
 msgstr "ရှေ့သို့ရှာဖွေ"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောအတိုင်းအတာနှိုင်းယှဉ်ချက်အားဖြင့်ရှာဖွေ"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောမှပကတိနေရာသို့ရှာဖွေ"
 
@@ -4911,7 +4911,7 @@ msgstr "%1 မှ \"%2\" ထိန်းညှိ..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်ထိန်းညှိ"
 
@@ -5117,7 +5117,7 @@ msgstr ""
 msgid "Ska"
 msgstr "စကာဂီတ"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "စာရင်းရှိနောက်ပြန်များခုန်ကျော်"
 
@@ -5129,7 +5129,7 @@ msgstr "အရေအတွက်ခုန်ကျော်"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "စာရင်းရှိရှေ့သို့များခုန်ကျော်"
 
@@ -5169,7 +5169,7 @@ msgstr "ပျော့"
 msgid "Soft Rock"
 msgstr "ပျော့ရော့ခ်ဂီတ"
 
-#: upnp/upnpmediaplayer.cpp:270
+#: upnp/upnpmediaplayer.cpp:430
 msgid "Something else is playing on it now"
 msgstr ""
 
@@ -5242,7 +5242,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "လက်ရှိဖွင့်ဆဲသီချင်းစာရင်းစတင်"
 
@@ -5280,11 +5280,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "ဒီတေးသံလမ်းကြောပြီးနောက်ရပ်"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "ပြန်ဖွင့်ရပ်"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5436,11 +5436,11 @@ msgstr ""
 msgid "The format is only updated when a pipeline starts."
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:321
+#: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
 msgstr ""
 
-#: upnp/upnpmediaplayer.cpp:228 upnp/upnpmediaplayer.cpp:290
+#: upnp/upnpmediaplayer.cpp:366 upnp/upnpmediaplayer.cpp:450
 #, qt-format
 msgid "The renderer couldn't play it: %1"
 msgstr ""
@@ -5621,7 +5621,7 @@ msgstr "စီတန်းအခြေအနေဖွင့်ပိတ်လု
 msgid "Toggle scrobbling"
 msgstr "သီချင်းနာမည်ပေးပို့ခြင်းဖွင့်ပိတ်လုပ်"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှမြင်ကွင်းပေါ်ရန်ဖွင့်ပိတ်လုပ်"
 
@@ -5736,7 +5736,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "ယူအာအလ်(များ)"
 
@@ -5832,7 +5832,7 @@ msgstr "မွမ်းမံနေ %1%..."
 msgid "Updating library"
 msgstr "သီချင်းတိုက်မွမ်းမံနေ"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "သုံးစွဲမှု"
 
@@ -6428,7 +6428,7 @@ msgstr "အအိုဆုံးဦးစားပေး"
 msgid "on"
 msgstr "အပေါ်မှာ"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "ရွေးပိုင်ခွင့်များ"
 
