@@ -39,6 +39,19 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_BehaviourSettingsPage) {
   ui_->setupUi(this);
 
+  // Set here rather than in the .ui file, which can't give translators notes.
+  ui_->b_keep_awake_visualizations_->setText(
+      // TRANSLATORS: An option under "Keep the computer awake" on the
+      // Behavior settings page, and read with it: keep the computer awake
+      // while visualizations are shown full screen.
+      tr("While visualizations are full screen"));
+  ui_->b_keep_awake_visualizations_->setToolTip(
+      // TRANSLATORS: The tooltip of "While visualizations are full screen",
+      // under "Keep the computer awake". As well as keeping the computer
+      // awake, it stops the screen from turning off or locking while they're
+      // on show.
+      tr("Keeps the display on too"));
+
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)),
           SLOT(ShowTrayIconToggled(bool)));
 
