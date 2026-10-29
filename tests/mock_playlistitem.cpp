@@ -20,7 +20,4 @@
 using ::testing::_;
 using ::testing::Return;
 
-MockPlaylistItem::MockPlaylistItem()
-  : PlaylistItem("DummyType")
-{
-}
+MockPlaylistItem::MockPlaylistItem() : PlaylistItem("DummyType") {}

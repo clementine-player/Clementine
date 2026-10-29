@@ -18,15 +18,15 @@
 #ifndef MOCK_PLAYER_H
 #define MOCK_PLAYER_H
 
-#include "core/player.h"
-#include "core/song.h"
-#include "core/settingsprovider.h"
-#include "library/sqlrow.h"
-
 #include <gmock/gmock.h>
 
+#include "core/player.h"
+#include "core/settingsprovider.h"
+#include "core/song.h"
+#include "library/sqlrow.h"
+
 class MockPlayer : public PlayerInterface {
-public:
+ public:
   MockPlayer() {}
 
   MOCK_CONST_METHOD0(engine, EngineBase*());
@@ -63,4 +63,4 @@ public:
   MOCK_METHOD0(ShowOSD, void());
 };
 
-#endif // MOCK_PLAYER_H
+#endif  // MOCK_PLAYER_H

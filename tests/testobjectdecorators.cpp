@@ -21,7 +21,7 @@
 
 #include "testobjectdecorators.h"
 
-
-void TestObjectDecorators::initStyleOption(QProgressBar* self, QStyleOptionProgressBar* opt) {
+void TestObjectDecorators::initStyleOption(QProgressBar* self,
+                                           QStyleOptionProgressBar* opt) {
   self->initStyleOption(opt);
 }

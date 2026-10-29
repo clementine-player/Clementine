@@ -15,26 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-#include "test_utils.h"
-
-#include "core/timeconstants.h"
 #include "playlistparsers/cueparser.h"
 
 #include <QUrl>
 
+#include "core/timeconstants.h"
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
 class CueParserTest : public ::testing::Test {
  protected:
-  CueParserTest()
-      : parser_(nullptr) {
-  }
+  CueParserTest() : parser_(nullptr) {}
 
   // We believe CUE - all songs with proper CUE entries should be valid.
   bool validate_songs(SongList songs) {
-    foreach(const Song& song, songs) {
-      if(!song.is_valid()) {
+    foreach (const Song& song, songs) {
+      if (!song.is_valid()) {
         return false;
       }
     }
@@ -89,7 +86,8 @@ TEST_F(CueParserTest, ParsesTwoSongs) {
   ASSERT_EQ("Zucchero himself", first_song.artist());
   ASSERT_EQ("Zucchero himself", first_song.albumartist());
   ASSERT_EQ(to_nanosec(0, 1, 0), first_song.beginning_nanosec());
-  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
+  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(),
+            first_song.length_nanosec());
   ASSERT_EQ(1, first_song.track());
 
   ASSERT_EQ("Somewon Else's Tears", second_song.title());
@@ -120,9 +118,10 @@ TEST_F(CueParserTest, SkipsBrokenSongs) {
   ASSERT_EQ("Zucchero himself", first_song.artist());
   ASSERT_EQ("Zucchero himself", first_song.albumartist());
   ASSERT_EQ(to_nanosec(0, 1, 0), first_song.beginning_nanosec());
-  // includes the broken song too; this entry will span from it's 
+  // includes the broken song too; this entry will span from it's
   // INDEX (beginning) to the end of the next correct song
-  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
+  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(),
+            first_song.length_nanosec());
   ASSERT_EQ(1, first_song.track());
 
   ASSERT_EQ("Somewon Else's Tears", second_song.title());
@@ -155,7 +154,8 @@ TEST_F(CueParserTest, UsesAllMetadataInformation) {
   ASSERT_EQ("Zucchero himself", first_song.albumartist());
   ASSERT_EQ("Some guy", first_song.composer());
   ASSERT_EQ(to_nanosec(0, 1, 0), first_song.beginning_nanosec());
-  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
+  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(),
+            first_song.length_nanosec());
   ASSERT_EQ(1, first_song.track());
 
   ASSERT_TRUE(second_song.url().toString().endsWith("a_file.mp3"));
@@ -192,7 +192,8 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ("Artist One", first_song.artist());
   ASSERT_EQ("Artist One", first_song.albumartist());
   ASSERT_EQ(to_nanosec(0, 1, 0), first_song.beginning_nanosec());
-  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
+  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(),
+            first_song.length_nanosec());
   ASSERT_EQ(-1, first_song.track());
   ASSERT_EQ("CUEPATH", first_song.cue_path());
 
@@ -210,7 +211,8 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ("Artist X", third_song.artist());
   ASSERT_EQ("Artist Two", third_song.albumartist());
   ASSERT_EQ(to_nanosec(0, 0, 12), third_song.beginning_nanosec());
-  ASSERT_EQ(fourth_song.beginning_nanosec() - third_song.beginning_nanosec(), third_song.length_nanosec());
+  ASSERT_EQ(fourth_song.beginning_nanosec() - third_song.beginning_nanosec(),
+            third_song.length_nanosec());
   ASSERT_EQ(-1, third_song.track());
   ASSERT_EQ("CUEPATH", third_song.cue_path());
 
@@ -255,7 +257,8 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   ASSERT_EQ("Artist One Album", first_song.album());
   ASSERT_EQ("A1", first_song.title());
   ASSERT_EQ(to_nanosec(0, 1, 15), first_song.beginning_nanosec());
-  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
+  ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(),
+            first_song.length_nanosec());
   ASSERT_EQ(-1, first_song.track());
 
   ASSERT_TRUE(second_song.url().toString().endsWith("file1.mp3"));

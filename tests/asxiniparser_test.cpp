@@ -15,18 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-
 #include "playlistparsers/asxiniparser.h"
-#include "playlistparsers/playlistparser.h"
 
 #include <QBuffer>
 #include <QUrl>
 
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "playlistparsers/playlistparser.h"
+#include "test_utils.h"
+
 class AsxIniParserTest : public ::testing::Test {
-protected:
+ protected:
   AsxIniParserTest() : parser_(nullptr) {}
 
   AsxIniParser parser_;
@@ -39,7 +39,8 @@ TEST_F(AsxIniParserTest, ParsesBasicTrackList) {
   SongList songs = parser_.Load(&file, "", QDir());
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ(QUrl("http://195.245.168.21/antena3?MSWMExt=.asf"), songs[0].url());
-  EXPECT_EQ(QUrl("http://195.245.168.21:80/antena3?MSWMExt=.asf"), songs[1].url());
+  EXPECT_EQ(QUrl("http://195.245.168.21:80/antena3?MSWMExt=.asf"),
+            songs[1].url());
   EXPECT_TRUE(songs[0].is_valid());
   EXPECT_TRUE(songs[1].is_valid());
 }
@@ -63,5 +64,6 @@ TEST_F(AsxIniParserTest, WritesBasicTrackList) {
   songs << song;
 
   parser_.Save(songs, &buffer);
-  EXPECT_EQ("[Reference]\nRef1=http://www.example.com/foo.mp3\n", QString(data));
+  EXPECT_EQ("[Reference]\nRef1=http://www.example.com/foo.mp3\n",
+            QString(data));
 }

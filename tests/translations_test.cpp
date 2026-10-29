@@ -31,6 +31,5 @@ TEST(Translations, Basic) {
 
   EXPECT_EQ(QString::fromUtf8("Fonoteca"),
             t.translate("MainWindow", "Library"));
-  EXPECT_EQ(QString::fromUtf8("Fonoteca"),
-            t.translate("", "Library"));
+  EXPECT_EQ(QString::fromUtf8("Fonoteca"), t.translate("", "Library"));
 }

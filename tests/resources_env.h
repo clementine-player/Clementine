@@ -23,7 +23,7 @@
 #include <QResource>
 
 class ResourcesEnvironment : public ::testing::Environment {
-public:
+ public:
   void SetUp() {
     Q_INIT_RESOURCE(data);
     Q_INIT_RESOURCE(translations);
@@ -31,4 +31,4 @@ public:
   }
 };
 
-#endif // RESOURCES_ENV_H
+#endif  // RESOURCES_ENV_H

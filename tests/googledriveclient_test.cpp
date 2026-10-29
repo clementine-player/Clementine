@@ -15,14 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
-#include <QCoreApplication>
-
 #include "internet/googledrive/googledriveclient.h"
 
-#include "mock_networkaccessmanager.h"
+#include <QCoreApplication>
+#include <memory>
+
 #include "gtest/gtest.h"
+#include "mock_networkaccessmanager.h"
 #include "test_utils.h"
 
 using google_drive::Client;
@@ -43,9 +42,8 @@ TEST_F(GoogleDriveClientTest, GetFileParsesMetadata) {
 
   MockNetworkReply* reply = mock_network_->ExpectGet(
       "drive/v3/files/fileA", QMap<QString, QString>(), 200,
-      QByteArray(
-          "{\"id\": \"fileA\", \"name\": \"Song A.mp3\", \"mimeType\": "
-          "\"audio/mpeg\", \"size\": \"12345\", \"version\": \"7\"}"));
+      QByteArray("{\"id\": \"fileA\", \"name\": \"Song A.mp3\", \"mimeType\": "
+                 "\"audio/mpeg\", \"size\": \"12345\", \"version\": \"7\"}"));
 
   GetFileResponse* response = client.GetFile("fileA");
 
@@ -74,7 +72,7 @@ TEST_F(GoogleDriveClientTest, GetFileReportsHttpErrors) {
   MockNetworkReply* reply = mock_network_->ExpectGet(
       "drive/v3/files/missing", QMap<QString, QString>(), 404,
       QByteArray("{\"error\": {\"code\": 404, \"message\": \"File not "
-                "found: missing\"}}"));
+                 "found: missing\"}}"));
 
   GetFileResponse* response = client.GetFile("missing");
 
@@ -92,7 +90,8 @@ TEST_F(GoogleDriveClientTest, GetFileReportsHttpErrors) {
 // v3's Changes API has no "list everything since account creation" concept
 // - an empty cursor should just establish a starting point via
 // changes/startPageToken, with no changes reported.
-TEST_F(GoogleDriveClientTest, ListChangesEstablishesStartPageTokenWhenCursorEmpty) {
+TEST_F(GoogleDriveClientTest,
+       ListChangesEstablishesStartPageTokenWhenCursorEmpty) {
   Client client(nullptr, mock_network_.get());
 
   MockNetworkReply* reply = mock_network_->ExpectGet(
@@ -129,13 +128,12 @@ TEST_F(GoogleDriveClientTest, ListChangesParsesFoundAndDeletedItems) {
   params["pageToken"] = "cursor1";
   MockNetworkReply* reply = mock_network_->ExpectGet(
       "drive/v3/changes", params, 200,
-      QByteArray(
-          "{\"changes\": ["
-          "{\"fileId\": \"fileA\", \"removed\": false, \"file\": "
-          "{\"id\": \"fileA\", \"name\": \"Song A.mp3\", \"mimeType\": "
-          "\"audio/mpeg\", \"trashed\": false}},"
-          "{\"fileId\": \"fileB\", \"removed\": true}"
-          "], \"newStartPageToken\": \"67890\"}"));
+      QByteArray("{\"changes\": ["
+                 "{\"fileId\": \"fileA\", \"removed\": false, \"file\": "
+                 "{\"id\": \"fileA\", \"name\": \"Song A.mp3\", \"mimeType\": "
+                 "\"audio/mpeg\", \"trashed\": false}},"
+                 "{\"fileId\": \"fileB\", \"removed\": true}"
+                 "], \"newStartPageToken\": \"67890\"}"));
 
   ListChangesResponse* response = client.ListChanges("cursor1");
 

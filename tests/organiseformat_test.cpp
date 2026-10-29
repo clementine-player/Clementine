@@ -15,20 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gtest/gtest.h"
-#include "test_utils.h"
-
 #include "core/organiseformat.h"
-#include "core/timeconstants.h"
 
 #include <QUrl>
 
+#include "core/timeconstants.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
 class OrganiseFormatTest : public ::testing::Test {
-protected:
+ protected:
   OrganiseFormat format_;
   Song song_;
 };
-
 
 TEST_F(OrganiseFormatTest, BasicReplace) {
   song_.set_album("album");
@@ -48,13 +47,16 @@ TEST_F(OrganiseFormatTest, BasicReplace) {
   song_.set_track(321);
   song_.set_year(2010);
 
-  format_.set_format("%album %albumartist %bitrate %bpm %comment %composer "
-                     "%performer %grouping "
-                     "%disc %genre %length %samplerate %title %track %year");
+  format_.set_format(
+      "%album %albumartist %bitrate %bpm %comment %composer "
+      "%performer %grouping "
+      "%disc %genre %length %samplerate %title %track %year");
 
   ASSERT_TRUE(format_.IsValid());
-  EXPECT_EQ("album albumartist 123 4.56 comment composer performer grouping 789 genre 987 654 title 321 2010",
-            format_.GetFilenameForSong(song_));
+  EXPECT_EQ(
+      "album albumartist 123 4.56 comment composer performer grouping 789 "
+      "genre 987 654 title 321 2010",
+      format_.GetFilenameForSong(song_));
 }
 
 TEST_F(OrganiseFormatTest, Extension) {
@@ -104,9 +106,11 @@ TEST_F(OrganiseFormatTest, ReplaceSpaces) {
   song_.set_title("The Song Title");
   format_.set_format("The Format String %title");
 
-  EXPECT_EQ("The Format String The Song Title", format_.GetFilenameForSong(song_));
+  EXPECT_EQ("The Format String The Song Title",
+            format_.GetFilenameForSong(song_));
   format_.set_replace_spaces(true);
-  EXPECT_EQ("The_Format_String_The_Song_Title", format_.GetFilenameForSong(song_));
+  EXPECT_EQ("The_Format_String_The_Song_Title",
+            format_.GetFilenameForSong(song_));
 }
 
 TEST_F(OrganiseFormatTest, ReplaceThe) {

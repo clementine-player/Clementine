@@ -18,33 +18,25 @@
 #ifndef MOCK_PLAYLISTITEM_H
 #define MOCK_PLAYLISTITEM_H
 
-#include "core/song.h"
+#include <gmock/gmock.h>
+
 #include "core/settingsprovider.h"
+#include "core/song.h"
 #include "library/sqlrow.h"
 #include "playlist/playlistitem.h"
-
-#include <gmock/gmock.h>
 
 class MockPlaylistItem : public PlaylistItem {
  public:
   MockPlaylistItem();
 
-  MOCK_CONST_METHOD0(options,
-      Options());
-  MOCK_METHOD1(InitFromQuery,
-      bool(const SqlRow& settings));
-  MOCK_METHOD0(Reload,
-      void());
-  MOCK_CONST_METHOD0(Metadata,
-      Song());
-  MOCK_CONST_METHOD0(Url,
-      QUrl());
-  MOCK_METHOD1(SetTemporaryMetadata,
-      void(const Song& metadata));
-  MOCK_METHOD0(ClearTemporaryMetadata,
-      void());
-  MOCK_METHOD1(DatabaseValue,
-      QVariant(DatabaseColumn));
+  MOCK_CONST_METHOD0(options, Options());
+  MOCK_METHOD1(InitFromQuery, bool(const SqlRow& settings));
+  MOCK_METHOD0(Reload, void());
+  MOCK_CONST_METHOD0(Metadata, Song());
+  MOCK_CONST_METHOD0(Url, QUrl());
+  MOCK_METHOD1(SetTemporaryMetadata, void(const Song& metadata));
+  MOCK_METHOD0(ClearTemporaryMetadata, void());
+  MOCK_METHOD1(DatabaseValue, QVariant(DatabaseColumn));
 };
 
-#endif // MOCK_PLAYLISTITEM_H
+#endif  // MOCK_PLAYLISTITEM_H

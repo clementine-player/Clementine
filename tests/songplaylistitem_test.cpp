@@ -15,16 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
 #include "playlist/songplaylistitem.h"
-#include "test_utils.h"
 
 #include <gtest/gtest.h>
 
-#include <QTemporaryFile>
 #include <QFileInfo>
+#include <QTemporaryFile>
 #include <QtDebug>
+#include <memory>
+
+#include "test_utils.h"
 
 namespace {
 
@@ -43,8 +43,7 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
 
     item_.reset(new SongPlaylistItem(song_));
 
-    if (!absolute_file_name_.startsWith('/'))
-      absolute_file_name_.prepend('/');
+    if (!absolute_file_name_.startsWith('/')) absolute_file_name_.prepend('/');
   }
 
   Song song_;
@@ -53,12 +52,11 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
   std::unique_ptr<SongPlaylistItem> item_;
 };
 
-INSTANTIATE_TEST_CASE_P(RealFiles, SongPlaylistItemTest, testing::Values(
-    "normalfile.mp3",
-    "file with spaces.mp3",
-    "file with # hash.mp3",
-    "file with ? question.mp3"
-));
+INSTANTIATE_TEST_CASE_P(RealFiles, SongPlaylistItemTest,
+                        testing::Values("normalfile.mp3",
+                                        "file with spaces.mp3",
+                                        "file with # hash.mp3",
+                                        "file with ? question.mp3"));
 
 TEST_P(SongPlaylistItemTest, Url) {
   QUrl expected;
@@ -68,6 +66,4 @@ TEST_P(SongPlaylistItemTest, Url) {
   EXPECT_EQ(expected, item_->Url());
 }
 
-
-} //namespace
-
+}  // namespace

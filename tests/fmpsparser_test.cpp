@@ -15,15 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gtest/gtest.h"
-
 #include "fmpsparser.h"
 
 #include <QtDebug>
 
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
 class FMPSParserTest : public testing::Test {
-protected:
+ protected:
   FMPSParser parser_;
 };
 
@@ -179,37 +179,53 @@ TEST_F(FMPSParserTest, SpecExamples) {
   expected << (QVariantList() << "Metacritic" << "FMPS_Nothing" << 0.8);
   expected << (QVariantList() << "FMPS_Nothing" << "Some Dude" << 0.9);
 
-  ASSERT_TRUE(parser_.Parse("Rolling Stone::Ralph Gleason::0.83;;musicOMH.com::FMPS_Nothing::0.76;;Metacritic::FMPS_Nothing::0.8;;FMPS_Nothing::Some Dude::0.9"));
+  ASSERT_TRUE(parser_.Parse(
+      "Rolling Stone::Ralph "
+      "Gleason::0.83;;musicOMH.com::FMPS_Nothing::0.76;;Metacritic::FMPS_"
+      "Nothing::0.8;;FMPS_Nothing::Some Dude::0.9"));
   EXPECT_EQ(expected, parser_.result());
 
   expected.clear();
   expected << (QVariantList() << "Amarok" << "AutoRate" << 0.52);
   expected << (QVariantList() << "VLC" << "Standard" << 0.6);
   expected << (QVariantList() << "QuodLibet" << "RatingPlugin:X" << 0.35);
-  expected << (QVariantList() << "The Free Music Player Alliance" << "Rating Algorithm 1" << 0.5);
+  expected << (QVariantList() << "The Free Music Player Alliance"
+                              << "Rating Algorithm 1" << 0.5);
 
-  ASSERT_TRUE(parser_.Parse("Amarok::AutoRate::0.52;;VLC::Standard::0.6;;QuodLibet::RatingPlugin\\:X::0.35;;The Free Music Player Alliance::Rating Algorithm 1::0.5"));
+  ASSERT_TRUE(parser_.Parse(
+      "Amarok::AutoRate::0.52;;VLC::Standard::0.6;;QuodLibet::RatingPlugin\\:X:"
+      ":0.35;;The Free Music Player Alliance::Rating Algorithm 1::0.5"));
   EXPECT_EQ(expected, parser_.result());
 
   expected.clear();
   expected << (QVariantList() << "Willy Nelson" << "Guitar");
   expected << (QVariantList() << "Eric Clapton" << "Guitar (Backup)");
   expected << (QVariantList() << "B.B. King" << "Vocals");
-  ASSERT_TRUE(parser_.Parse("Willy Nelson::Guitar;;Eric Clapton::Guitar (Backup);;B.B. King::Vocals"));
+  ASSERT_TRUE(
+      parser_.Parse("Willy Nelson::Guitar;;Eric Clapton::Guitar (Backup);;B.B. "
+                    "King::Vocals"));
   EXPECT_EQ(expected, parser_.result());
 
   expected.clear();
   expected << (QVariantList() << "Alice Aardvark" << "[lyrics]");
   expected << (QVariantList() << "Bob Baboon" << "[lyrics]");
   expected << (QVariantList() << "http://www.lyricssite.net" << "[lyrics]");
-  ASSERT_TRUE(parser_.Parse("Alice Aardvark::[lyrics];;Bob Baboon::[lyrics];;http\\://www.lyricssite.net::[lyrics]"));
+  ASSERT_TRUE(
+      parser_.Parse("Alice Aardvark::[lyrics];;Bob "
+                    "Baboon::[lyrics];;http\\://www.lyricssite.net::[lyrics]"));
   EXPECT_EQ(expected, parser_.result());
 
   expected.clear();
   expected << (QVariantList() << "Amarok" << "Album" << "2982ab29ef");
-  expected << (QVariantList() << "AmarokUser" << "Compilation" << "My Compilation");
-  expected << (QVariantList() << "Banshee" << "Compilation" << "ad8slpbzl229zier");
-  expected << (QVariantList() << "FMPSAlliance" << "Album" << "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3");
-  ASSERT_TRUE(parser_.Parse("Amarok::Album::2982ab29ef;;AmarokUser::Compilation::My Compilation;;Banshee::Compilation::ad8slpbzl229zier;;FMPSAlliance::Album::de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3"));
+  expected << (QVariantList()
+               << "AmarokUser" << "Compilation" << "My Compilation");
+  expected << (QVariantList()
+               << "Banshee" << "Compilation" << "ad8slpbzl229zier");
+  expected << (QVariantList() << "FMPSAlliance" << "Album"
+                              << "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3");
+  ASSERT_TRUE(parser_.Parse(
+      "Amarok::Album::2982ab29ef;;AmarokUser::Compilation::My "
+      "Compilation;;Banshee::Compilation::ad8slpbzl229zier;;FMPSAlliance::"
+      "Album::de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3"));
   EXPECT_EQ(expected, parser_.result());
 }

@@ -17,11 +17,11 @@
 
 #include "widgets/trackslider.h"
 
+#include <QApplication>
 #include <QEnterEvent>
 #include <QHBoxLayout>
 #include <QSignalSpy>
 #include <QSlider>
-#include <QApplication>
 #include <QTest>
 #include <QWindow>
 

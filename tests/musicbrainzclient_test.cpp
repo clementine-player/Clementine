@@ -15,9 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
-#include "core/logging.h"
 #include "musicbrainz/musicbrainzclient.h"
 
 #include <QCoreApplication>
@@ -27,9 +24,11 @@
 #include <QSignalSpy>
 #include <QString>
 #include <QStringList>
+#include <memory>
 
-#include "mock_networkaccessmanager.h"
+#include "core/logging.h"
 #include "gtest/gtest.h"
+#include "mock_networkaccessmanager.h"
 #include "test_utils.h"
 
 typedef QList<MusicBrainzClient::Result> ResultList;

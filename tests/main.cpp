@@ -24,19 +24,19 @@
 #include "resources_env.h"
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
-# include <QtPlugin>
-  Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 #endif
 
 int main(int argc, char** argv) {
   testing::InitGoogleMock(&argc, argv);
 
   testing::AddGlobalTestEnvironment(new MetatypesEnvironment);
-  #ifdef GUI
+#ifdef GUI
   QApplication a(argc, argv);
-  #else
+#else
   QCoreApplication a(argc, argv);
-  #endif
+#endif
   testing::AddGlobalTestEnvironment(new ResourcesEnvironment);
   testing::AddGlobalTestEnvironment(new LoggingEnvironment);
 

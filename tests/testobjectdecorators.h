@@ -26,8 +26,8 @@ class QStyleOptionProgressBar;
 class TestObjectDecorators : public QObject {
   Q_OBJECT
 
-public slots:
+ public slots:
   void initStyleOption(QProgressBar* self, QStyleOptionProgressBar* opt);
 };
 
-#endif // TESTOBJECTDECORATORS_H
+#endif  // TESTOBJECTDECORATORS_H
