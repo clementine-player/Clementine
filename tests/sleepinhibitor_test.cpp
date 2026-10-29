@@ -23,6 +23,7 @@
 #include <QTemporaryDir>
 #include <QThread>
 #include <memory>
+#include <string>
 
 #include "gtest/gtest.h"
 
@@ -79,6 +80,9 @@ class SleepInhibitorTest : public ::testing::Test {
 
   static QTemporaryDir* settings_dir_;
 
+  // What the backend was asked, in order, as "Inhibit DisplayOn, ...".
+  std::string Calls() const { return calls_.join(", ").toStdString(); }
+
   QStringList calls_;
   std::unique_ptr<SleepInhibitor> inhibitor_;
 };
@@ -88,11 +92,10 @@ QTemporaryDir* SleepInhibitorTest::settings_dir_ = nullptr;
 TEST_F(SleepInhibitorTest, InhibitsWhileHeld) {
   std::unique_ptr<SleepInhibitor::Hold> hold =
       inhibitor_->Acquire(Activity::FullScreenVisualizations);
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn", calls_);
+  EXPECT_EQ("Inhibit DisplayOn", Calls());
 
   hold.reset();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
 }
 
 TEST_F(SleepInhibitorTest, AsksOnceForManyHolds) {
@@ -102,11 +105,10 @@ TEST_F(SleepInhibitorTest, AsksOnceForManyHolds) {
       inhibitor_->Acquire(Activity::FullScreenVisualizations);
 
   first.reset();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn", calls_);
+  EXPECT_EQ("Inhibit DisplayOn", Calls());
 
   second.reset();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
 }
 
 TEST_F(SleepInhibitorTest, DisabledActivityDoesNothing) {
@@ -125,14 +127,12 @@ TEST_F(SleepInhibitorTest, SettingsApplyToHoldsAlreadyTaken) {
 
   SetEnabled(Activity::FullScreenVisualizations, false);
   inhibitor_->ReloadSettings();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
 
   SetEnabled(Activity::FullScreenVisualizations, true);
   inhibitor_->ReloadSettings();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn"
-                          << "Inhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn, Inhibit DisplayOn",
+            Calls());
 }
 
 TEST_F(SleepInhibitorTest, LetsGoWhenDeleted) {
@@ -145,8 +145,7 @@ TEST_F(SleepInhibitorTest, LetsGoWhenDeleted) {
   // A hold mustn't outlive its inhibitor, so let go of it without telling it.
   hold.release();
   inhibitor_.reset();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
 }
 
 TEST_F(SleepInhibitorTest, HoldsWorkFromOtherThreads) {
@@ -159,15 +158,14 @@ TEST_F(SleepInhibitorTest, HoldsWorkFromOtherThreads) {
   // Not until the inhibitor's thread gets to it.
   EXPECT_TRUE(calls_.isEmpty());
   QCoreApplication::processEvents();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn", calls_);
+  EXPECT_EQ("Inhibit DisplayOn", Calls());
 
   delete thread;
   thread = QThread::create([&hold]() { hold.reset(); });
   thread->start();
   thread->wait();
   QCoreApplication::processEvents();
-  EXPECT_EQ(QStringList() << "Inhibit DisplayOn" << "Uninhibit DisplayOn",
-            calls_);
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
   delete thread;
 }
 
