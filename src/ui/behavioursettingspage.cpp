@@ -23,6 +23,7 @@
 #include <algorithm>
 
 #include "core/player.h"
+#include "core/sleepinhibitor.h"
 #include "mainwindow.h"
 #include "playlist/playlist.h"
 #include "playlist/playlisttabbar.h"
@@ -226,6 +227,14 @@ void BehaviourSettingsPage::Load() {
   ui_->b_warn_close_playlist_->setChecked(
       s.value("warn_close_playlist", true).toBool());
   s.endGroup();
+
+  s.beginGroup(SleepInhibitor::kSettingsGroup);
+  ui_->b_keep_awake_visualizations_->setChecked(
+      s.value(SleepInhibitor::SettingsKey(
+                  SleepInhibitor::Activity::FullScreenVisualizations),
+              true)
+          .toBool());
+  s.endGroup();
 }
 
 void BehaviourSettingsPage::Save() {
@@ -313,6 +322,11 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
   s.setValue("warn_close_playlist", ui_->b_warn_close_playlist_->isChecked());
+  s.endGroup();
+  s.beginGroup(SleepInhibitor::kSettingsGroup);
+  s.setValue(SleepInhibitor::SettingsKey(
+                 SleepInhibitor::Activity::FullScreenVisualizations),
+             ui_->b_keep_awake_visualizations_->isChecked());
   s.endGroup();
 }
 

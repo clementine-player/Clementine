@@ -20,7 +20,9 @@
 
 #include <QBasicTimer>
 #include <QGraphicsView>
+#include <memory>
 
+#include "core/sleepinhibitor.h"
 #include "core/song.h"
 
 class GstEngine;
@@ -35,7 +37,8 @@ class VisualisationContainer : public QGraphicsView {
   Q_OBJECT
 
  public:
-  VisualisationContainer(QWidget* parent = nullptr);
+  explicit VisualisationContainer(SleepInhibitor* sleep_inhibitor,
+                                  QWidget* parent = nullptr);
 
   static const int kLowFramerate;
   static const int kMediumFramerate;
@@ -72,9 +75,12 @@ class VisualisationContainer : public QGraphicsView {
   void mouseDoubleClickEvent(QMouseEvent* e);
   void contextMenuEvent(QContextMenuEvent* event);
   void keyReleaseEvent(QKeyEvent* event);
+  void changeEvent(QEvent* event);
 
  private:
   void Init();
+  // Keeps the display on while full screen visualisations are on show.
+  void UpdateSleepHold();
 
   void SizeChanged();
   void AddFramerateMenuItem(const QString& name, int value, int def,
@@ -105,6 +111,9 @@ class VisualisationContainer : public QGraphicsView {
 
   int fps_;
   int size_;
+
+  SleepInhibitor* sleep_inhibitor_;
+  std::unique_ptr<SleepInhibitor::Hold> sleep_hold_;
 };
 
 #endif  // VISUALISATIONCONTAINER_H

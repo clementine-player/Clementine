@@ -114,6 +114,25 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="keep_awake_group_">
+     <property name="title">
+      <string>Keep the computer awake</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_keep_awake">
+      <item>
+       <widget class="QCheckBox" name="b_keep_awake_visualizations_">
+        <property name="toolTip">
+         <string>Keeps the display on too</string>
+        </property>
+        <property name="text">
+         <string>While visualizations are full screen</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="b_click_edit_inline_">
      <property name="toolTip">
       <string>If activated, clicking a selected song in the playlist view will let you edit the tag value directly</string>

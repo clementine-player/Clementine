@@ -30,6 +30,7 @@
 #include "core/database.h"
 #include "core/lazy.h"
 #include "core/player.h"
+#include "core/sleepinhibitor.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "covers/albumcoverloader.h"
@@ -169,7 +170,13 @@ class ApplicationImpl {
           if (!router) return nullptr;
           return new RendererRegistry(app, router);
         }),
-        scrobbler_([=]() { return new LastFMService(app, app); }) {
+        scrobbler_([=]() { return new LastFMService(app, app); }),
+        sleep_inhibitor_([=]() {
+          SleepInhibitor* inhibitor = new SleepInhibitor(app);
+          QObject::connect(app, SIGNAL(SettingsChanged()), inhibitor,
+                           SLOT(ReloadSettings()));
+          return inhibitor;
+        }) {
   }
 
   QTimer settings_timer_;
@@ -201,6 +208,7 @@ class ApplicationImpl {
   // After the Player, so it's deleted first: its outputs are the router's.
   Lazy<RendererRegistry> renderer_registry_;
   Lazy<Scrobbler> scrobbler_;
+  Lazy<SleepInhibitor> sleep_inhibitor_;
 };
 
 Application::Application(QObject* parent)
@@ -377,6 +385,10 @@ PodcastUpdater* Application::podcast_updater() const {
 }
 
 Scrobbler* Application::scrobbler() const { return p_->scrobbler_.get(); }
+
+SleepInhibitor* Application::sleep_inhibitor() const {
+  return p_->sleep_inhibitor_.get();
+}
 
 TagReaderClient* Application::tag_reader_client() const {
   return p_->tag_reader_client_.get();
