@@ -56,6 +56,7 @@ class PodcastDownloader;
 class PodcastUpdater;
 class RendererRegistry;
 class Scrobbler;
+class SleepInhibitor;
 class Splash;
 class TagReaderClient;
 class TaskManager;
@@ -110,6 +111,7 @@ class Application : public QObject {
   PodcastDownloader* podcast_downloader() const;
   PodcastUpdater* podcast_updater() const;
   Scrobbler* scrobbler() const;
+  SleepInhibitor* sleep_inhibitor() const;
   TagReaderClient* tag_reader_client() const;
   TaskManager* task_manager() const;
 

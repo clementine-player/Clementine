@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,22 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MACSCREENSAVER_H
-#define MACSCREENSAVER_H
+#ifndef CORE_WINDOWSSLEEPINHIBITOR_H_
+#define CORE_WINDOWSSLEEPINHIBITOR_H_
 
-#include <IOKit/pwr_mgt/IOPMLib.h>
+#include <windows.h>
 
-#include "screensaver.h"
+#include <QMap>
 
-class MacScreensaver : public Screensaver {
+#include "core/sleepinhibitor.h"
+
+// Makes a power request, which `powercfg /requests` lists. Unlike
+// SetThreadExecutionState, a request doesn't belong to the thread that made
+// it.
+class WindowsSleepInhibitor : public SleepInhibitor::Backend {
  public:
-  MacScreensaver();
+  ~WindowsSleepInhibitor();
 
-  void Inhibit();
-  void Uninhibit();
+  void Inhibit(SleepInhibitor::Keep keep, const QString& reason) override;
+  void Uninhibit(SleepInhibitor::Keep keep) override;
 
  private:
-  IOPMAssertionID assertion_id_;
+  QMap<SleepInhibitor::Keep, HANDLE> requests_;
 };
 
-#endif
+#endif  // CORE_WINDOWSSLEEPINHIBITOR_H_

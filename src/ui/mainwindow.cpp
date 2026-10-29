@@ -2824,7 +2824,7 @@ void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 void MainWindow::ShowVisualisations() {
 #ifdef HAVE_VISUALISATIONS
   if (!visualisation_) {
-    visualisation_.reset(new VisualisationContainer);
+    visualisation_.reset(new VisualisationContainer(app_->sleep_inhibitor()));
 
     visualisation_->SetActions(ui_->action_previous_track,
                                ui_->action_play_pause, ui_->action_stop,

@@ -35,7 +35,6 @@
 #include "engines/gstengine.h"
 #include "projectmvisualisation.h"
 #include "ui/iconloader.h"
-#include "ui/screensaver.h"
 #include "visualisationoverlay.h"
 #include "visualisationselector.h"
 
@@ -51,7 +50,8 @@ const int VisualisationContainer::kDefaultHeight = 512;
 const int VisualisationContainer::kDefaultFps = kHighFramerate;
 const int VisualisationContainer::kDefaultTextureSize = 512;
 
-VisualisationContainer::VisualisationContainer(QWidget* parent)
+VisualisationContainer::VisualisationContainer(SleepInhibitor* sleep_inhibitor,
+                                               QWidget* parent)
     : QGraphicsView(parent),
       initialised_(false),
       engine_(nullptr),
@@ -61,7 +61,8 @@ VisualisationContainer::VisualisationContainer(QWidget* parent)
       overlay_proxy_(nullptr),
       menu_(new QMenu(this)),
       fps_(kDefaultFps),
-      size_(kDefaultTextureSize) {
+      size_(kDefaultTextureSize),
+      sleep_inhibitor_(sleep_inhibitor) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   if (!restoreGeometry(s.value("geometry").toByteArray())) {
@@ -183,6 +184,7 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
   update_timer_.start(1000 / fps_, this);
 
   if (engine_) engine_->AddBufferConsumer(vis_);
+  UpdateSleepHold();
 }
 
 void VisualisationContainer::hideEvent(QHideEvent* e) {
@@ -191,6 +193,7 @@ void VisualisationContainer::hideEvent(QHideEvent* e) {
   update_timer_.stop();
 
   if (engine_) engine_->RemoveBufferConsumer(vis_);
+  UpdateSleepHold();
 }
 
 void VisualisationContainer::closeEvent(QCloseEvent* e) {
@@ -283,12 +286,24 @@ void VisualisationContainer::keyReleaseEvent(QKeyEvent* event) {
   QGraphicsView::keyReleaseEvent(event);
 }
 
+void VisualisationContainer::changeEvent(QEvent* event) {
+  QGraphicsView::changeEvent(event);
+  if (event->type() == QEvent::WindowStateChange) UpdateSleepHold();
+}
+
 void VisualisationContainer::ToggleFullscreen() {
   setWindowState(windowState() ^ Qt::WindowFullScreen);
+}
 
-  Screensaver* screensaver = Screensaver::GetScreensaver();
-  if (screensaver)
-    isFullScreen() ? screensaver->Inhibit() : screensaver->Uninhibit();
+void VisualisationContainer::UpdateSleepHold() {
+  if (isVisible() && isFullScreen()) {
+    if (!sleep_hold_) {
+      sleep_hold_ = sleep_inhibitor_->Acquire(
+          SleepInhibitor::Activity::FullScreenVisualizations);
+    }
+  } else {
+    sleep_hold_.reset();
+  }
 }
 
 void VisualisationContainer::SetFps(int fps) {

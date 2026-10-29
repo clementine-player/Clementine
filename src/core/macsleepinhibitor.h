@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2015, John Maguire <john.maguire@gmail.com>
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,16 +15,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "windowsscreensaver.h"
+#ifndef CORE_MACSLEEPINHIBITOR_H_
+#define CORE_MACSLEEPINHIBITOR_H_
 
-WindowsScreensaver::WindowsScreensaver() : previous_state_(0) {}
+#include <IOKit/pwr_mgt/IOPMLib.h>
 
-void WindowsScreensaver::Inhibit() {
-  // TODO: use PowerCreateRequest on Win7+
-  previous_state_ =
-      SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED);
-}
+#include <QMap>
 
-void WindowsScreensaver::Uninhibit() {
-  SetThreadExecutionState(ES_CONTINUOUS | previous_state_);
-}
+#include "core/sleepinhibitor.h"
+
+// Holds a power management assertion, which `pmset -g assertions` lists.
+class MacSleepInhibitor : public SleepInhibitor::Backend {
+ public:
+  ~MacSleepInhibitor();
+
+  void Inhibit(SleepInhibitor::Keep keep, const QString& reason) override;
+  void Uninhibit(SleepInhibitor::Keep keep) override;
+
+ private:
+  QMap<SleepInhibitor::Keep, IOPMAssertionID> assertions_;
+};
+
+#endif  // CORE_MACSLEEPINHIBITOR_H_

@@ -113,6 +113,7 @@ set(SOURCES
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
   core/signalchecker.cpp
+  core/sleepinhibitor.cpp
   core/song.cpp
   core/songloader.cpp
   core/songpathparser.cpp
@@ -403,7 +404,6 @@ set(SOURCES
   ui/organiseerrordialog.cpp
   ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
-  ui/screensaver.cpp
   ui/screenshottaker.cpp
   ui/settingscategory.cpp
   ui/settingsdialog.cpp
@@ -495,6 +495,7 @@ set(HEADERS
   core/organise.h
   core/player.h
   core/qtfslistener.h
+  core/sleepinhibitor.h
   core/songloader.h
   core/tagreaderclient.h
   core/taskmanager.h
@@ -970,11 +971,11 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/macmediacontrols.mm
+    core/macsleepinhibitor.cpp
     core/mac_startup.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
-    ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
     ui/sfsymbolicon.mm
     widgets/osd_mac.mm
@@ -1000,9 +1001,9 @@ optional_source(WIN32
   SOURCES
     chromecast/windowscastdiscovery.cpp
     core/windowsmediacontrols.cpp
+    core/windowssleepinhibitor.cpp
     engines/directsounddevicefinder.cpp
     networkremote/windowsdnssd.cpp
-    ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   HEADERS
     chromecast/windowscastdiscovery.h
@@ -1118,12 +1119,13 @@ endif(UNIX AND HAVE_DBUS)
 optional_source(HAVE_DBUS
   SOURCES
     chromecast/avahicastdiscovery.cpp
+    core/dbussleepinhibitor.cpp
     core/mpris.cpp
     core/mpris2.cpp
     networkremote/avahi.cpp
-    ui/dbusscreensaver.cpp
   HEADERS
     chromecast/avahicastdiscovery.h
+    core/dbussleepinhibitor.h
     core/mpris.h
     core/mpris2.h
 )
