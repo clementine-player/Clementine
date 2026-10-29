@@ -114,6 +114,8 @@ QString SleepInhibitor::SettingsKey(Activity activity) {
 QString SleepInhibitor::Reason(Activity activity) {
   switch (activity) {
     case Activity::FullScreenVisualizations:
+      // TRANSLATORS: Why Clementine is keeping the computer awake, which
+      // the system shows in its list of what's stopping it from sleeping.
       return tr("Showing visualizations full screen");
   }
   return QString();
