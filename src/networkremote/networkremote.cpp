@@ -19,6 +19,7 @@
 
 #include <QDataStream>
 #include <QHostInfo>
+#include <QNetworkInterface>
 #include <QNetworkProxy>
 #include <QSettings>
 #include <QTcpServer>
@@ -47,6 +48,8 @@ const char* NetworkRemote::kTranscoderSettingPostfix = "/NetworkRemote";
 namespace {
 // How long a new connection may stay silent before it's dropped.
 const int kFirstByteTimeoutMsec = 10000;
+// How often to check whether the chosen networks' addresses have changed.
+const int kAddressCheckMsec = 30000;
 const char* kSniffedProperty = "clementine_sniffed";
 // Set on a connection that isn't from the local network when only those are
 // allowed. It's told why once it's said which protocol it speaks.
@@ -74,6 +77,8 @@ bool InSharedSubnet(const QHostAddress& address) {
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
     : QObject(parent),
+      running_(false),
+      address_check_(new QTimer(this)),
       renderer_registry_(nullptr),
       internet_browser_(nullptr),
       allow_streaming_(false),
@@ -81,6 +86,9 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
       app_(app),
       auth_limiter_(new AuthAttemptLimiter) {
   setObjectName("Network remote");
+
+  address_check_->setInterval(kAddressCheckMsec);
+  connect(address_check_, &QTimer::timeout, this, &NetworkRemote::Listen);
 }
 
 NetworkRemote::~NetworkRemote() {
@@ -99,7 +107,16 @@ void NetworkRemote::ReadSettings() {
   only_non_public_ip_ = s.value("only_non_public_ip", true).toBool();
 
   listen_on_all_addresses_ = s.value("listen_on_all_addresses", true).toBool();
-  listen_addresses_ = s.value("listen_addresses").toStringList();
+  if (s.contains("listen_networks")) {
+    listen_networks_ = s.value("listen_networks").toStringList();
+  } else {
+    // Saved by a build that chose addresses. Turn them into their networks
+    // once, while they're likely still this computer's, so a new lease
+    // doesn't lose them. The addresses stay for that build to read.
+    listen_networks_ = NetworksOfAddresses(
+        s.value("listen_addresses").toStringList(), PresentAddresses());
+    s.setValue("listen_networks", listen_networks_);
+  }
   allow_streaming_ = s.value("allow_streaming", false).toBool();
 
   s.endGroup();
@@ -119,8 +136,8 @@ void NetworkRemote::SetMediaSyncEnabled(bool enabled) {
 
 bool NetworkRemote::MediaSyncEnabled() { return sMediaSyncEnabled; }
 
-QList<QHostAddress> NetworkRemote::ListenAddresses(bool all,
-                                                   const QStringList& chosen) {
+QList<QHostAddress> NetworkRemote::ListenAddresses(
+    bool all, const QStringList& networks, const QList<QHostAddress>& present) {
   if (all) {
     // Any is dual-stack, so it covers IPv6 too. The separate AnyIPv6 server
     // is left from Qt 4, where Any meant IPv4 only; on a dual-stack system
@@ -129,16 +146,99 @@ QList<QHostAddress> NetworkRemote::ListenAddresses(bool all,
             QHostAddress(QHostAddress::AnyIPv6)};
   }
 
-  QList<QHostAddress> addresses;
-  for (const QString& text : chosen) {
-    QHostAddress address(text);
-    if (address.isNull()) {
-      qLog(Warning) << "Ignoring a listen address that doesn't parse:" << text;
+  QList<QPair<QHostAddress, int>> subnets;
+  for (const QString& text : networks) {
+    const QPair<QHostAddress, int> subnet = QHostAddress::parseSubnet(text);
+    if (subnet.first.isNull()) {
+      qLog(Warning) << "Ignoring a listen network that doesn't parse:" << text;
       continue;
     }
-    addresses << address;
+    subnets << subnet;
+  }
+
+  QList<QHostAddress> addresses;
+  for (const QHostAddress& address : present) {
+    for (const QPair<QHostAddress, int>& subnet : subnets) {
+      if (address.isInSubnet(subnet)) {
+        addresses << address;
+        break;
+      }
+    }
   }
   return addresses;
+}
+
+QList<QNetworkAddressEntry> NetworkRemote::PresentAddresses() {
+  QList<QNetworkAddressEntry> entries;
+  for (const QNetworkInterface& iface : QNetworkInterface::allInterfaces()) {
+    if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
+
+    for (const QNetworkAddressEntry& entry : iface.addressEntries()) {
+      const QHostAddress address = entry.ip();
+      if (address.protocol() == QAbstractSocket::IPv6Protocol &&
+          address.isLinkLocal()) {
+        continue;
+      }
+      entries << entry;
+    }
+  }
+  return entries;
+}
+
+QString NetworkRemote::NetworkOf(const QHostAddress& address,
+                                 int prefix_length) {
+  if (address.protocol() == QAbstractSocket::IPv4Protocol) {
+    prefix_length = qBound(0, prefix_length, 32);
+    const quint32 mask =
+        prefix_length == 0 ? 0 : ~quint32(0) << (32 - prefix_length);
+    return QString("%1/%2")
+        .arg(QHostAddress(address.toIPv4Address() & mask).toString())
+        .arg(prefix_length);
+  }
+
+  prefix_length = qBound(0, prefix_length, 128);
+  Q_IPV6ADDR bytes = address.toIPv6Address();
+  for (int i = 0; i < 16; ++i) {
+    const int bits = qBound(0, prefix_length - i * 8, 8);
+    bytes[i] &= quint8(0xff00 >> bits);
+  }
+  return QString("%1/%2")
+      .arg(QHostAddress(bytes).toString())
+      .arg(prefix_length);
+}
+
+QString NetworkRemote::ParseNetwork(const QString& text) {
+  const QString trimmed = text.trimmed();
+  if (!trimmed.contains('/')) {
+    const QHostAddress address(trimmed);
+    if (address.isNull()) return QString();
+    return NetworkOf(
+        address,
+        address.protocol() == QAbstractSocket::IPv4Protocol ? 32 : 128);
+  }
+
+  const QPair<QHostAddress, int> subnet = QHostAddress::parseSubnet(trimmed);
+  if (subnet.first.isNull()) return QString();
+  return NetworkOf(subnet.first, subnet.second);
+}
+
+QStringList NetworkRemote::NetworksOfAddresses(
+    const QStringList& addresses, const QList<QNetworkAddressEntry>& present) {
+  QStringList networks;
+  for (const QString& text : addresses) {
+    const QHostAddress address(text);
+    if (address.isNull()) continue;
+
+    QString network = ParseNetwork(text);
+    for (const QNetworkAddressEntry& entry : present) {
+      if (entry.ip() == address && entry.prefixLength() >= 0) {
+        network = NetworkOf(address, entry.prefixLength());
+        break;
+      }
+    }
+    if (!networks.contains(network)) networks << network;
+  }
+  return networks;
 }
 
 void NetworkRemote::SetupServer() {
@@ -201,18 +301,12 @@ void NetworkRemote::StartServer() {
     return;
   }
 
-  if (!servers_.empty()) {
+  if (running_) {
     // Already running; ReloadSettings stops the servers before restarting.
     return;
   }
 
   qLog(Info) << "Starting network remote";
-
-  const QList<QHostAddress> addresses =
-      ListenAddresses(listen_on_all_addresses_, listen_addresses_);
-  if (addresses.isEmpty()) {
-    qLog(Warning) << "Network remote enabled, but no listen address is chosen";
-  }
 
   // Cast devices and the like fetch media over HTTP on the same port.
   if (renderer_registry_) {
@@ -221,8 +315,48 @@ void NetworkRemote::StartServer() {
   }
   StartStreaming();
 
-  QList<QHostAddress> listening;
-  for (const QHostAddress& address : addresses) {
+  running_ = true;
+  Bind();
+  if (!listen_on_all_addresses_ && listen_networks_.isEmpty()) {
+    qLog(Warning) << "Network remote enabled, but no listen network is chosen";
+  } else if (wanted_.isEmpty()) {
+    qLog(Info) << "This computer isn't on any of the chosen networks yet";
+  }
+  Advertise();
+  if (!listen_on_all_addresses_) address_check_->start();
+}
+
+void NetworkRemote::Listen() {
+  if (Bind()) Advertise();
+}
+
+bool NetworkRemote::Bind() {
+  QList<QHostAddress> present;
+  if (!listen_on_all_addresses_) {
+    for (const QNetworkAddressEntry& entry : PresentAddresses()) {
+      present << entry.ip();
+    }
+  }
+  const QList<QHostAddress> wanted =
+      ListenAddresses(listen_on_all_addresses_, listen_networks_, present);
+
+  bool changed = false;
+  QList<QHostAddress> bound;
+  for (const std::unique_ptr<QTcpServer>& server : servers_) {
+    if (!server->isListening()) continue;
+    if (wanted.contains(server->serverAddress())) {
+      bound << server->serverAddress();
+      continue;
+    }
+    qLog(Info) << "No longer listening on" << server->serverAddress().toString()
+               << "port" << port_;
+    server->close();
+    changed = true;
+  }
+
+  for (const QHostAddress& address : wanted) {
+    if (bound.contains(address)) continue;
+
     std::unique_ptr<QTcpServer> server(new QTcpServer);
     server->setProxy(QNetworkProxy::NoProxy);
     connect(server.get(), SIGNAL(newConnection()), this,
@@ -230,38 +364,52 @@ void NetworkRemote::StartServer() {
 
     if (server->listen(address, port_)) {
       qLog(Info) << "Listening on" << address.toString() << "port" << port_;
-      listening << address;
-    } else if (listen_on_all_addresses_) {
+      bound << address;
+      servers_.push_back(std::move(server));
+      changed = true;
+    } else if (listen_on_all_addresses_ || wanted_.contains(address)) {
       // See ListenAddresses: one of the two wildcard servers failing is
-      // normal.
+      // normal. Otherwise it's failed before, and is tried again on every
+      // check.
       qLog(Debug) << "Couldn't listen on" << address.toString() << "port"
                   << port_ << ":" << server->errorString();
     } else {
       qLog(Warning) << "Couldn't listen on" << address.toString() << "port"
                     << port_ << ":" << server->errorString();
     }
-    servers_.push_back(std::move(server));
   }
 
-  PublishServing(listening);
+  wanted_ = wanted;
+  listening_.clear();
+  for (const QHostAddress& address : wanted) {
+    if (bound.contains(address)) listening_ << address;
+  }
+  return changed;
+}
+
+void NetworkRemote::Advertise() {
+  PublishServing(listening_);
 
   if (Zeroconf::GetZeroconf()) {
     // Advertise only where something is listening, so remotes aren't sent to
     // an address that refuses them. That includes a chosen address that
     // couldn't be bound, such as a VPN's while it's down.
-    if (!listen_on_all_addresses_ && listening.isEmpty()) {
+    if (!listen_on_all_addresses_ && listening_.isEmpty()) {
       qLog(Warning) << "Not listening on any address, so not advertising";
+      Zeroconf::GetZeroconf()->Unpublish();
     } else {
       QString name = QString("Clementine on %1").arg(RemoteName());
       Zeroconf::GetZeroconf()->Publish(
           "local", "_clementine._tcp", name, port_,
-          listen_on_all_addresses_ ? QList<QHostAddress>() : listening);
+          listen_on_all_addresses_ ? QList<QHostAddress>() : listening_);
     }
   }
 }
 
 void NetworkRemote::StopServer() {
-  if (servers_.empty()) return;
+  if (!running_) return;
+  running_ = false;
+  address_check_->stop();
 
   if (Zeroconf::GetZeroconf()) {
     Zeroconf::GetZeroconf()->Unpublish();
@@ -272,6 +420,8 @@ void NetworkRemote::StopServer() {
   }
   // Deleting a server closes it.
   servers_.clear();
+  listening_.clear();
+  wanted_.clear();
   qDeleteAll(clients_);
   clients_.clear();
   StopStreaming();
@@ -283,7 +433,7 @@ void NetworkRemote::PublishServing(const QList<QHostAddress>& listening) {
   if (!renderer_registry_) return;
 
   RendererRegistry::Serving serving;
-  serving.enabled = !servers_.empty();
+  serving.enabled = running_;
   serving.port = listening.isEmpty() ? 0 : port_;
   if (!listen_on_all_addresses_) serving.addresses = listening;
   serving.only_local = only_non_public_ip_;

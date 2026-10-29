@@ -18,10 +18,13 @@
 #ifndef NETWORKREMOTESETTINGSPAGE_H
 #define NETWORKREMOTESETTINGSPAGE_H
 
+#include <QHostAddress>
+#include <QList>
 #include <QStringList>
 
 #include "settingspage.h"
 
+class QListWidgetItem;
 class Ui_NetworkRemoteSettingsPage;
 
 class NetworkRemoteSettingsPage : public SettingsPage {
@@ -39,15 +42,23 @@ class NetworkRemoteSettingsPage : public SettingsPage {
 
  private slots:
   void Options();
+  void AddNetwork();
+  void RemoveNetwork();
 
  private:
-  // Fills the listen address list with this machine's addresses, checking
-  // the ones in |chosen|. Chosen addresses that aren't currently present -
-  // a VPN that's down, say - are kept, so saving doesn't quietly drop them.
-  void PopulateListenAddresses(const QStringList& chosen);
-  // Warns about chosen listen addresses that only allowing local clients
+  // Fills the listen network list with the networks this computer is on,
+  // checking the ones in |chosen|. Chosen networks that it isn't on now -
+  // at home while it's at work, say - are kept, so saving doesn't quietly
+  // drop them.
+  void PopulateListenNetworks(const QStringList& chosen);
+  // Adds a row for |network|, which was added by hand rather than being an
+  // interface's, given this computer's |addresses| in it.
+  QListWidgetItem* AddChosenNetwork(const QString& network,
+                                    const QList<QHostAddress>& addresses);
+  // Warns about chosen listen networks that only allowing local clients
   // leaves nobody able to connect through.
   void UpdateListenWarning();
+  void UpdateRemoveButton();
 
   static const char* kPlayStoreUrl;
 
