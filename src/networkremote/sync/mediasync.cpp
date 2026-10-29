@@ -39,17 +39,17 @@ void MediaSync::HandleMessage(int client_id, const QString& peer_address,
   if (!msg.ParseFromArray(data.constData(), data.size())) return;
   if (msg.type() != cpb::remote::REQUEST_SYNC_MANIFEST) return;
 
-  Client& client = clients_[client_id];
-  if (client.token.isEmpty()) {
-    client.token = StreamItemTable::NewToken();
-    client.peer = NormalisedAddress(QHostAddress(peer_address));
+  Client* client = &clients_[client_id];
+  if (client->token.isEmpty()) {
+    client->token = StreamItemTable::NewToken();
+    client->peer = NormalisedAddress(QHostAddress(peer_address));
   }
 
   cpb::remote::Message reply;
   reply.set_type(cpb::remote::SYNC_MANIFEST);
-  Manifest(&client, msg.request_sync_manifest(),
+  Manifest(client, msg.request_sync_manifest(),
            reply.mutable_response_sync_manifest());
-  items_->Set(client.token, client.peer, client.items);
+  items_->Set(client->token, client->peer, client->items);
 
   const std::string out = reply.SerializeAsString();
   emit SendToClient(client_id, QByteArray(out.data(), out.size()));
