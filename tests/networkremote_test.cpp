@@ -31,36 +31,112 @@
 using Listening = NetworkRemote::Listening;
 
 TEST(NetworkRemoteTest, AllAddressesListensOnTheWildcards) {
-  const QList<QHostAddress> addresses =
-      NetworkRemote::ListenAddresses(true, QStringList() << "192.168.1.5");
+  const QList<QHostAddress> addresses = NetworkRemote::ListenAddresses(
+      true, QStringList() << "192.168.1.0/24",
+      QList<QHostAddress>() << QHostAddress("192.168.1.5"));
 
-  // The chosen list is ignored when listening on everything.
+  // The chosen networks are ignored when listening on everything.
   ASSERT_EQ(2, addresses.size());
   EXPECT_EQ(QHostAddress(QHostAddress::Any), addresses[0]);
   EXPECT_EQ(QHostAddress(QHostAddress::AnyIPv6), addresses[1]);
 }
 
-TEST(NetworkRemoteTest, ChosenAddressesInOrder) {
+TEST(NetworkRemoteTest, ListensOnPresentAddressesInChosenNetworks) {
+  const QList<QHostAddress> present =
+      QList<QHostAddress>()
+      << QHostAddress("100.65.55.75") << QHostAddress("192.168.86.178")
+      << QHostAddress("10.0.0.4") << QHostAddress("fd7a:115c:a1e0::f535:374b");
   const QList<QHostAddress> addresses = NetworkRemote::ListenAddresses(
-      false, QStringList() << "100.65.55.75" << "192.168.86.178"
-                           << "fd7a:115c:a1e0::f535:374b");
+      false,
+      QStringList() << "192.168.86.0/24" << "fd7a:115c:a1e0::/48"
+                    << "100.64.0.0/10",
+      present);
 
+  // In the order they're present.
   ASSERT_EQ(3, addresses.size());
   EXPECT_EQ(QHostAddress("100.65.55.75"), addresses[0]);
   EXPECT_EQ(QHostAddress("192.168.86.178"), addresses[1]);
   EXPECT_EQ(QHostAddress("fd7a:115c:a1e0::f535:374b"), addresses[2]);
 }
 
-TEST(NetworkRemoteTest, SkipsAddressesThatDontParse) {
+TEST(NetworkRemoteTest, NewLeaseOnAChosenNetworkIsListenedOn) {
+  const QStringList networks = QStringList() << "192.168.1.0/24";
+  EXPECT_EQ(QList<QHostAddress>() << QHostAddress("192.168.1.23"),
+            NetworkRemote::ListenAddresses(
+                false, networks,
+                QList<QHostAddress>() << QHostAddress("192.168.1.23")));
+  EXPECT_EQ(QList<QHostAddress>() << QHostAddress("192.168.1.57"),
+            NetworkRemote::ListenAddresses(
+                false, networks,
+                QList<QHostAddress>() << QHostAddress("192.168.1.57")));
+}
+
+TEST(NetworkRemoteTest, SingleAddressNetworkListensOnlyThere) {
   const QList<QHostAddress> addresses = NetworkRemote::ListenAddresses(
-      false, QStringList() << "1000.65.55.75" << "10.0.0.1" << "");
+      false, QStringList() << "192.168.1.23/32",
+      QList<QHostAddress>()
+          << QHostAddress("192.168.1.57") << QHostAddress("192.168.1.23"));
+
+  ASSERT_EQ(1, addresses.size());
+  EXPECT_EQ(QHostAddress("192.168.1.23"), addresses[0]);
+}
+
+TEST(NetworkRemoteTest, SkipsNetworksThatDontParse) {
+  const QList<QHostAddress> addresses = NetworkRemote::ListenAddresses(
+      false, QStringList() << "1000.65.55.0/24" << "10.0.0.0/8" << "",
+      QList<QHostAddress>() << QHostAddress("10.0.0.1"));
 
   ASSERT_EQ(1, addresses.size());
   EXPECT_EQ(QHostAddress("10.0.0.1"), addresses[0]);
 }
 
 TEST(NetworkRemoteTest, NothingChosenListensNowhere) {
-  EXPECT_TRUE(NetworkRemote::ListenAddresses(false, QStringList()).isEmpty());
+  EXPECT_TRUE(NetworkRemote::ListenAddresses(false, QStringList(),
+                                             QList<QHostAddress>()
+                                                 << QHostAddress("10.0.0.1"))
+                  .isEmpty());
+}
+
+TEST(NetworkRemoteTest, NetworkOfMasksTheHostPart) {
+  EXPECT_EQ("192.168.1.0/24",
+            NetworkRemote::NetworkOf(QHostAddress("192.168.1.57"), 24));
+  EXPECT_EQ("100.64.0.0/10",
+            NetworkRemote::NetworkOf(QHostAddress("100.101.7.12"), 10));
+  EXPECT_EQ("10.1.2.3/32",
+            NetworkRemote::NetworkOf(QHostAddress("10.1.2.3"), 32));
+  EXPECT_EQ("fd7a:115c:a1e0::/48",
+            NetworkRemote::NetworkOf(
+                QHostAddress("fd7a:115c:a1e0:ab12:4843:cd96:6258:b240"), 48));
+  EXPECT_EQ("fd00:0:0:10::/62",
+            NetworkRemote::NetworkOf(QHostAddress("fd00:0:0:13::1"), 62));
+}
+
+TEST(NetworkRemoteTest, ParseNetworkTakesNetworksAndAddresses) {
+  EXPECT_EQ("192.168.1.0/24", NetworkRemote::ParseNetwork(" 192.168.1.0/24 "));
+  // The host part is dropped.
+  EXPECT_EQ("192.168.1.0/24", NetworkRemote::ParseNetwork("192.168.1.57/24"));
+  EXPECT_EQ("192.168.1.23/32", NetworkRemote::ParseNetwork("192.168.1.23"));
+  EXPECT_EQ("fd00::8/128", NetworkRemote::ParseNetwork("fd00::8"));
+  EXPECT_EQ("", NetworkRemote::ParseNetwork("192.168.1.0/33"));
+  EXPECT_EQ("", NetworkRemote::ParseNetwork("home"));
+  EXPECT_EQ("", NetworkRemote::ParseNetwork(""));
+}
+
+TEST(NetworkRemoteTest, SavedAddressesBecomeTheirNetworks) {
+  QNetworkAddressEntry wifi;
+  wifi.setIp(QHostAddress("192.168.1.23"));
+  wifi.setPrefixLength(24);
+  QNetworkAddressEntry other;
+  other.setIp(QHostAddress("192.168.1.24"));
+  other.setPrefixLength(24);
+
+  // Two addresses on one network give it once, and an address that isn't
+  // present, such as a VPN's while it's down, stays just that address.
+  EXPECT_EQ(QStringList() << "192.168.1.0/24" << "100.65.55.75/32",
+            NetworkRemote::NetworksOfAddresses(
+                QStringList() << "192.168.1.23" << "192.168.1.24"
+                              << "100.65.55.75" << "nonsense",
+                QList<QNetworkAddressEntry>() << wifi << other));
 }
 
 TEST(NetworkRemoteTest, LocalhostIsPrivate) {

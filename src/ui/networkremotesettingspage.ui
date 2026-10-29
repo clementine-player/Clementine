@@ -127,17 +127,31 @@ When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address
       <item row="9" column="1">
        <layout class="QVBoxLayout" name="listen_addresses_layout">
         <item>
-         <widget class="QCheckBox" name="listen_on_all_addresses">
-          <property name="text">
-           <string>All addresses</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="listen_on_all_addresses_layout">
+          <item>
+           <widget class="QCheckBox" name="listen_on_all_addresses">
+            <property name="text">
+             <string>All networks</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="all_addresses_info"/>
+          </item>
+          <item>
+           <spacer name="listen_on_all_addresses_spacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QListWidget" name="listen_addresses">
+         <widget class="QListWidget" name="listen_networks">
           <property name="toolTip">
            <string>Enter one of these addresses in the app to connect to Clementine.</string>
           </property>
@@ -147,10 +161,41 @@ When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>120</height>
+            <height>160</height>
            </size>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="listen_networks_buttons">
+          <item>
+           <widget class="QPushButton" name="add_network">
+            <property name="text">
+             <string>Add network or address...</string>
+            </property>
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="remove_network">
+            <property name="text">
+             <string>Remove</string>
+            </property>
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="listen_networks_buttons_spacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QLabel" name="listen_warning">

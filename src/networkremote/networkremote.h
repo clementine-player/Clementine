@@ -2,6 +2,7 @@
 #define NETWORKREMOTE_H
 
 #include <QList>
+#include <QNetworkAddressEntry>
 #include <QObject>
 #include <QStringList>
 #include <memory>
@@ -21,6 +22,7 @@ class QHostAddress;
 class QImage;
 class QTcpServer;
 class QTcpSocket;
+class QTimer;
 class RemoteClient;
 class QMimeData;
 
@@ -35,9 +37,31 @@ class NetworkRemote : public QObject {
   ~NetworkRemote();
 
   // What to listen on: every address when |all| is set, otherwise the
-  // addresses in |chosen| that parse, in the order given.
-  static QList<QHostAddress> ListenAddresses(bool all,
-                                             const QStringList& chosen);
+  // addresses in |present| that are in one of the |networks|, such as
+  // "192.168.1.0/24", in the order of |present|. Networks that don't parse
+  // are skipped.
+  static QList<QHostAddress> ListenAddresses(
+      bool all, const QStringList& networks,
+      const QList<QHostAddress>& present);
+
+  // This computer's addresses on the interfaces that are up, leaving out
+  // IPv6 link-local ones: binding to those needs their scope as well, and
+  // nobody types one into a phone anyway.
+  static QList<QNetworkAddressEntry> PresentAddresses();
+
+  // The network |address| is on, given its |prefix_length|, as text such as
+  // "192.168.1.0/24".
+  static QString NetworkOf(const QHostAddress& address, int prefix_length);
+
+  // |text| as a network, such as "192.168.1.0/24", or an empty string when
+  // it isn't one. A lone address is a network of just that address.
+  static QString ParseNetwork(const QString& text);
+
+  // The networks to listen on in place of the |addresses| saved by builds
+  // that chose addresses rather than networks: the network each one is on
+  // in |present|, or just that address when it isn't present.
+  static QStringList NetworksOfAddresses(
+      const QStringList& addresses, const QList<QNetworkAddressEntry>& present);
 
   // Whether a client at |address| counts as on the local network.
   static bool IpIsPrivate(const QHostAddress& address);
@@ -88,10 +112,24 @@ class NetworkRemote : public QObject {
   // Serialized messages from the RendererRegistry on the main thread.
   void SendToClient(int client_id, const QByteArray& data);
   void SendToAllClients(const QByteArray& data);
+  // Listens on the chosen networks' addresses that have appeared since the
+  // last time, such as after a new DHCP lease, and stops listening on the
+  // ones that have gone.
+  void Listen();
 
  private:
-  // One per address being listened on.
+  // One per address listened on since the server started. Ones for
+  // addresses that have gone are closed rather than deleted, since the
+  // sockets they accepted are their children.
   std::vector<std::unique_ptr<QTcpServer>> servers_;
+  // Whether the server's started, listening on anything or not.
+  bool running_;
+  // The addresses being listened on now, and the ones that should be.
+  QList<QHostAddress> listening_;
+  QList<QHostAddress> wanted_;
+  // While listening on chosen networks, checks for their addresses
+  // changing.
+  QTimer* address_check_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
   // The Application's, from when the server first starts. It lives on the
@@ -109,7 +147,7 @@ class NetworkRemote : public QObject {
   bool only_non_public_ip_;
   bool listen_on_all_addresses_;
   bool allow_streaming_;
-  QStringList listen_addresses_;
+  QStringList listen_networks_;
   bool signals_connected_;
   Application* app_;
 
@@ -125,6 +163,12 @@ class NetworkRemote : public QObject {
   // Tells the registry how media is being served, now that the server's
   // started, listening on |listening|, or stopped.
   void PublishServing(const QList<QHostAddress>& listening);
+  // Listens on what the settings choose that isn't being listened on yet,
+  // and closes what they no longer choose. Returns whether that changed
+  // what's being listened on.
+  bool Bind();
+  // Tells the registry and Zeroconf what's being listened on.
+  void Advertise();
   // Waits for a new connection's first byte to tell its protocol, then hands
   // it to a RemoteClient or the MediaHttpServer.
   void SniffProtocol(QTcpSocket* socket);
