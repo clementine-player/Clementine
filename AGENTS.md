@@ -24,6 +24,21 @@ After committing, check that git sees it:
 
     git log -1 --format='%(trailers:key=Release-note,valueonly)'
 
+## C++ style
+
+Follow the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html),
+except where it conflicts with Qt's style or the code around it, which wins.
+`dist/format.py` formats with `.clang-format`, which is based on Google's.
+
+One rule to note: don't hold or pass mutable references. Use a pointer for
+something that's changed, and a `const` reference otherwise:
+
+    Client* client = &clients_[client_id];  // not Client& client = ...
+    void Manifest(const Request& req, Response* response);
+
+Operators that take a stream, such as `operator<<(std::ostream&, ...)`, are
+the usual exception.
+
 ## Stacked pull requests
 
 A pull request that builds on another one targets that one's branch, so that
@@ -37,6 +52,9 @@ merges, rebase the pull requests that build on it straight away, moving only
 their own commits:
 
     git rebase --onto origin/master <the merged branch's last commit> <branch>
+
+Keep the branches linear: don't merge `master` or another branch into one
+instead, because GitHub can't rebase a branch with merge commits.
 
 `git patch-id --stable` on the branch's commit and the merged one shows
 whether what merged is what the branch had. Then build, run the tests, push
