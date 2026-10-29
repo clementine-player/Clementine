@@ -17,8 +17,13 @@
 #include "networkremote/sync/mediasync.h"
 
 #include <QCoreApplication>
+#include <QFile>
 #include <QSettings>
 #include <QSignalSpy>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QTemporaryDir>
+#include <QTest>
 #include <QUuid>
 
 #include "core/database.h"
@@ -30,6 +35,7 @@
 #include "library/librarybackend.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/outgoingdatacreator.h"
+#include "networkremote/streaming/mediahttpserver.h"
 #include "networkremote/sync/serverid.h"
 #include "networkremote/sync/syncresolver.h"
 #include "networkremote/sync/syncsong.h"
@@ -49,6 +55,9 @@ std::ostream& operator<<(std::ostream& stream,
 }
 std::ostream& operator<<(std::ostream& stream, SyncResolver::State state) {
   return stream << static_cast<int>(state);
+}
+std::ostream& operator<<(std::ostream& stream, const QByteArray& bytes) {
+  return stream << bytes.toStdString();
 }
 
 namespace {
@@ -450,8 +459,7 @@ class MediaSyncTest : public SyncResolverTest {
   cpb::remote::ResponseSyncManifest Send(const cpb::remote::Message& msg,
                                          int client = 1) {
     const std::string data = msg.SerializeAsString();
-    sync_->HandleMessage(client, "10.0.0.2",
-                         QByteArray(data.data(), data.size()));
+    sync_->HandleMessage(client, peer_, QByteArray(data.data(), data.size()));
     cpb::remote::Message reply;
     EXPECT_FALSE(sent_->isEmpty());
     if (sent_->isEmpty()) return reply.response_sync_manifest();
@@ -472,6 +480,7 @@ class MediaSyncTest : public SyncResolverTest {
   std::shared_ptr<StreamItemTable> items_ = std::make_shared<StreamItemTable>();
   std::unique_ptr<MediaSync> sync_;
   std::unique_ptr<QSignalSpy> sent_;
+  QString peer_ = "10.0.0.2";
   bool downloads_allowed_ = true;
   int limit_items_ = 0;
   qint64 limit_bytes_ = 0;
@@ -586,6 +595,115 @@ TEST_F(MediaSyncTest, NeedsDownloadsAllowed) {
   EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_NEEDS_SETUP, manifest.state());
   EXPECT_FALSE(manifest.message().empty());
   EXPECT_EQ(0, manifest.items_size());
+}
+
+// A remote downloading a song it was given in a manifest, over HTTP.
+class SyncDownloadTest : public MediaSyncTest {
+ protected:
+  void SetUp() override {
+    MediaSyncTest::SetUp();
+    peer_ = "127.0.0.1";
+
+    ASSERT_TRUE(dir_.isValid());
+    const QString path = dir_.filePath("Debaser.flac");
+    QFile file(path);
+    ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+    file.write(kContents);
+    file.close();
+
+    Song song = Find("Debaser");
+    song.set_url(QUrl::fromLocalFile(path));
+    song.set_filesize(kContents.size());
+    library_->AddOrUpdateSongs(SongList() << song);
+
+    http_.SetSyncItems(sync_->items());
+    ASSERT_TRUE(server_.listen(QHostAddress::LocalHost));
+    QObject::connect(&server_, &QTcpServer::newConnection, [this]() {
+      while (QTcpSocket* socket = server_.nextPendingConnection()) {
+        http_.HandleConnection(socket);
+      }
+    });
+
+    item_ = Manifest(SyncSourceId::ForSong(song.id())).items(0);
+  }
+
+  // The whole response: head and body.
+  QByteArray Get(const std::string& path, const QByteArray& headers = "") {
+    QTcpSocket socket;
+    socket.connectToHost(QHostAddress::LocalHost, server_.serverPort());
+    EXPECT_TRUE(socket.waitForConnected(2000));
+    socket.write("GET " + QByteArray::fromStdString(path) +
+                 " HTTP/1.1\r\nHost: localhost\r\n" + headers + "\r\n");
+    QByteArray response;
+    EXPECT_TRUE(QTest::qWaitFor(
+        [&]() {
+          response += socket.readAll();
+          return socket.state() == QAbstractSocket::UnconnectedState;
+        },
+        5000));
+    return response + socket.readAll();
+  }
+
+  static QByteArray Body(const QByteArray& response) {
+    return response.mid(response.indexOf("\r\n\r\n") + 4);
+  }
+
+  QByteArray ETag() const {
+    return '"' +
+           QByteArray::fromStdString(item_.item_key() + ':' + item_.version()) +
+           '"';
+  }
+
+  static const QByteArray kContents;
+  QTemporaryDir dir_;
+  MediaHttpServer http_{std::make_shared<StreamItemTable>()};
+  QTcpServer server_;
+  cpb::remote::SyncItem item_;
+};
+
+const QByteArray SyncDownloadTest::kContents = "fLaC and then the song";
+
+TEST_F(SyncDownloadTest, DownloadsTheOriginalFile) {
+  EXPECT_EQ(kContents.size(), item_.size_bytes());
+  const QByteArray response = Get(item_.url());
+  EXPECT_TRUE(response.startsWith("HTTP/1.1 200 OK\r\n")) << response.data();
+  EXPECT_TRUE(response.contains("Content-Type: audio/flac\r\n"));
+  EXPECT_TRUE(response.contains("ETag: " + ETag() + "\r\n")) << response.data();
+  EXPECT_EQ(kContents, Body(response));
+}
+
+TEST_F(SyncDownloadTest, ResumesFromTheSameFile) {
+  const QByteArray resumed =
+      Get(item_.url(), "Range: bytes=5-\r\nIf-Range: " + ETag() + "\r\n");
+  EXPECT_TRUE(resumed.startsWith("HTTP/1.1 206")) << resumed.data();
+  EXPECT_EQ(kContents.mid(5), Body(resumed));
+
+  // A file that's changed since starts over.
+  const QByteArray changed =
+      Get(item_.url(), "Range: bytes=5-\r\nIf-Range: \"library/1:0-0\"\r\n");
+  EXPECT_TRUE(changed.startsWith("HTTP/1.1 200 OK")) << changed.data();
+  EXPECT_EQ(kContents, Body(changed));
+}
+
+TEST_F(SyncDownloadTest, OnlyWhatWasOfferedCanBeDownloaded) {
+  const QStringList parts = QString::fromStdString(item_.url()).split('/');
+  const std::string token = parts[2].toStdString();
+  const std::string id = parts[3].toStdString();
+  // Another item, another token, or as a renderer's URL.
+  EXPECT_TRUE(Get("/d/" + token + "/99").startsWith("HTTP/1.1 404"));
+  EXPECT_TRUE(Get("/d/0123456789abcdef/" + id).startsWith("HTTP/1.1 404"));
+  EXPECT_TRUE(Get("/s/" + token + "/" + id).startsWith("HTTP/1.1 404"));
+
+  // Nor once the remote has gone.
+  sync_->ClientDisconnected(1);
+  EXPECT_TRUE(Get(item_.url()).startsWith("HTTP/1.1 404"));
+}
+
+TEST_F(SyncDownloadTest, OnlyTheRemoteItWasGivenToCanDownload) {
+  peer_ = "10.0.0.9";
+  const cpb::remote::SyncItem elsewhere =
+      Manifest(SyncSourceId::ForSong(Find("Debaser").id()), 2).items(0);
+  EXPECT_TRUE(Get(elsewhere.url()).startsWith("HTTP/1.1 403"));
 }
 
 }  // namespace

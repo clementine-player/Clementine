@@ -55,8 +55,9 @@ struct ByteRange {
                       qint64* last);
 };
 
-// Serves media URLs (/s/<token>/<item>[?t=<ms>]) on sockets the network
-// remote has recognised as HTTP. HTTP/1.1, one request per connection.
+// Serves media URLs on sockets the network remote has recognised as HTTP:
+// /s/<token>/<item>[?t=<ms>] for renderers, and /d/<token>/<item> for remotes
+// downloading songs to sync. HTTP/1.1, one request per connection.
 //
 // See docs/design/remote-streaming.md section 5.
 class MediaHttpServer : public QObject {
@@ -68,6 +69,11 @@ class MediaHttpServer : public QObject {
                            std::shared_ptr<EventCallbackTable> events = nullptr,
                            QObject* parent = nullptr);
   ~MediaHttpServer();
+
+  // Where /d/ URLs come from, with --media-sync. Without, they're not found.
+  void SetSyncItems(std::shared_ptr<StreamItemTable> items) {
+    sync_items_ = items;
+  }
 
   // Takes ownership of |socket|. It may already have data waiting.
   void HandleConnection(QTcpSocket* socket);
@@ -104,6 +110,7 @@ class MediaHttpServer : public QObject {
 
   std::shared_ptr<StreamItemTable> items_;
   std::shared_ptr<EventCallbackTable> events_;
+  std::shared_ptr<StreamItemTable> sync_items_;
 };
 
 #endif  // NETWORKREMOTE_STREAMING_MEDIAHTTPSERVER_H_

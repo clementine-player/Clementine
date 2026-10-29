@@ -52,6 +52,9 @@ struct StreamItem {
   // a stream that's made as it's sent ends when the connection closes,
   // rather than being chunked, which many can't take.
   bool dlna = false;
+  // For downloads that resume: sent as the ETag, and compared with If-Range.
+  // Empty for renderers.
+  QByteArray etag;
 
   // DLNA's flags for what can be done with it, for the fourth field of its
   // protocolInfo and the contentFeatures.dlna.org header: seeking by bytes
