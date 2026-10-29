@@ -15,23 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-#include "test_utils.h"
-
-#include "core/timeconstants.h"
 #include "playlistparsers/m3uparser.h"
 
 #include <QBuffer>
 #include <QTemporaryFile>
 
+#include "core/timeconstants.h"
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
 using ::testing::HasSubstr;
 
 class M3UParserTest : public ::testing::Test {
  protected:
-  M3UParserTest()
-      : parser_(nullptr) {
-  }
+  M3UParserTest() : parser_(nullptr) {}
 
   M3UParser parser_;
 };
@@ -85,9 +83,10 @@ TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
 }
 
 TEST_F(M3UParserTest, ParsesSongsFromDevice) {
-  QByteArray data = "#EXTM3U\n"
-                    "#EXTINF:123,Some Artist - Some Title\n"
-                    "http://foo.com/bar/somefile.mp3\n";
+  QByteArray data =
+      "#EXTM3U\n"
+      "#EXTINF:123,Some Artist - Some Title\n"
+      "http://foo.com/bar/somefile.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
   M3UParser parser(nullptr);
@@ -101,8 +100,9 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
 }
 
 TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
-  QByteArray data = "http://foo.com/bar/somefile.mp3\n"
-                    "http://baz.com/thing.mp3\n";
+  QByteArray data =
+      "http://foo.com/bar/somefile.mp3\n"
+      "http://baz.com/thing.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
   M3UParser parser(nullptr);
@@ -147,9 +147,10 @@ TEST_F(M3UParserTest, SavesSong) {
 }
 
 TEST_F(M3UParserTest, ParsesUTF8) {
-  QByteArray data = "#EXTM3U\n"
-                    "#EXTINF:123,Разные - исполнители\n"
-                    "/foo/Разные/исполнители.mp3\n";
+  QByteArray data =
+      "#EXTM3U\n"
+      "#EXTINF:123,Разные - исполнители\n"
+      "/foo/Разные/исполнители.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
   M3UParser parser(nullptr);
@@ -159,6 +160,7 @@ TEST_F(M3UParserTest, ParsesUTF8) {
   EXPECT_EQ(11, songs[0].title().length());
   EXPECT_EQ(QString::fromUtf8("Разные"), songs[0].artist());
   EXPECT_EQ(QString::fromUtf8("исполнители"), songs[0].title());
-  EXPECT_EQ(QUrl::fromLocalFile(QString::fromUtf8("/foo/Разные/исполнители.mp3")),
-            songs[0].url());
+  EXPECT_EQ(
+      QUrl::fromLocalFile(QString::fromUtf8("/foo/Разные/исполнители.mp3")),
+      songs[0].url());
 }

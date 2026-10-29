@@ -18,12 +18,11 @@
 #ifndef TEST_UTILS_H
 #define TEST_UTILS_H
 
-#include <iostream>
-
 #include <QMetaType>
 #include <QModelIndex>
 #include <QString>
 #include <QTemporaryFile>
+#include <iostream>
 
 class QHostAddress;
 class QNetworkRequest;
@@ -31,14 +30,14 @@ class QString;
 class QUrl;
 class QVariant;
 
-std::ostream& operator <<(std::ostream& stream, const QString& str);
-std::ostream& operator <<(std::ostream& stream, const QVariant& var);
-std::ostream& operator <<(std::ostream& stream, const QUrl& url);
-std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req);
+std::ostream& operator<<(std::ostream& stream, const QString& str);
+std::ostream& operator<<(std::ostream& stream, const QVariant& var);
+std::ostream& operator<<(std::ostream& stream, const QUrl& url);
+std::ostream& operator<<(std::ostream& stream, const QNetworkRequest& req);
 std::ostream& operator<<(std::ostream& stream, const QHostAddress& address);
 
 template <typename T>
-std::ostream& operator <<(std::ostream& stream, const QList<T>& list) {
+std::ostream& operator<<(std::ostream& stream, const QList<T>& list) {
   stream << "QList(";
   foreach (const T& item, list) {
     stream << item << ",";
@@ -53,16 +52,16 @@ void PrintTo(const ::QUrl& url, std::ostream& os);
 void PrintTo(const ::QHostAddress& address, std::ostream& os);
 
 #define EXPOSE_SIGNAL0(n) \
-    void Emit##n() { emit n(); }
+  void Emit##n() { emit n(); }
 #define EXPOSE_SIGNAL1(n, t1) \
-    void Emit##n(const t1& a1) { emit n(a1); }
+  void Emit##n(const t1& a1) { emit n(a1); }
 #define EXPOSE_SIGNAL2(n, t1, t2) \
-    void Emit##n(const t1& a1, const t2& a2) { emit n(a1, a2); }
+  void Emit##n(const t1& a1, const t2& a2) { emit n(a1, a2); }
 
 Q_DECLARE_METATYPE(QModelIndex);
 
 class TemporaryResource : public QTemporaryFile {
-public:
+ public:
   TemporaryResource(const QString& filename);
 };
 

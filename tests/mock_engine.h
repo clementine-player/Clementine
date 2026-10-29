@@ -23,7 +23,7 @@
 #include "engines/enginebase.h"
 
 class MockEngine : public Engine::Base {
-public:
+ public:
   MOCK_METHOD0(Init, bool());
   MOCK_METHOD1(CanDecode, bool(const QUrl&));
 
@@ -45,4 +45,4 @@ public:
   MOCK_METHOD1(SetVolumeSW, void(uint));
 };
 
-#endif // MOCK_ENGINE_H
+#endif  // MOCK_ENGINE_H

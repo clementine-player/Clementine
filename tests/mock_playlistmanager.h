@@ -21,8 +21,9 @@
 #include "playlist/playlistmanager.h"
 
 class MockPlaylistManager : public PlaylistManagerInterface {
-public:
-  MockPlaylistManager(QObject* parent = NULL) : PlaylistManagerInterface(parent) {}
+ public:
+  MockPlaylistManager(QObject* parent = NULL)
+      : PlaylistManagerInterface(parent) {}
 
   MOCK_CONST_METHOD0(current_id, int());
   MOCK_CONST_METHOD0(active_id, int());
@@ -75,11 +76,10 @@ public:
 
   MOCK_METHOD2(SongChangeRequestProcessed, void(const QUrl& url, bool));
 
-  MOCK_METHOD3(PlaySmartPlaylist, void(smart_playlists::GeneratorPtr, bool, bool));
+  MOCK_METHOD3(PlaySmartPlaylist,
+               void(smart_playlists::GeneratorPtr, bool, bool));
 
-  void EmitPlaylistManagerInitialized() {
-    emit PlaylistManagerInitialized();
-  }
+  void EmitPlaylistManagerInitialized() { emit PlaylistManagerInitialized(); }
 };
 
-#endif // MOCK_PLAYLISTMANAGER_H
+#endif  // MOCK_PLAYLISTMANAGER_H

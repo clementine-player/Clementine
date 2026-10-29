@@ -18,35 +18,31 @@
 #ifndef MOCK_SETTINGSPROVIDER_H
 #define MOCK_SETTINGSPROVIDER_H
 
-#include "core/settingsprovider.h"
-
 #include <gmock/gmock.h>
+
+#include "core/settingsprovider.h"
 
 class MockSettingsProvider : public SettingsProvider {
  public:
-  MOCK_METHOD1(set_group,
-      void(const char* group));
-  MOCK_CONST_METHOD2(value,
-      QVariant(const QString& key, const QVariant& default_value));
-  MOCK_METHOD2(setValue,
-      void(const QString& key, const QVariant& value));
-  MOCK_METHOD1(beginReadArray,
-      int(const QString& prefix));
-  MOCK_METHOD2(beginWriteArray,
-      void(const QString& prefix, int size));
-  MOCK_METHOD1(setArrayIndex,
-      void(int i));
-  MOCK_METHOD0(endArray,
-      void());
+  MOCK_METHOD1(set_group, void(const char* group));
+  MOCK_CONST_METHOD2(value, QVariant(const QString& key,
+                                     const QVariant& default_value));
+  MOCK_METHOD2(setValue, void(const QString& key, const QVariant& value));
+  MOCK_METHOD1(beginReadArray, int(const QString& prefix));
+  MOCK_METHOD2(beginWriteArray, void(const QString& prefix, int size));
+  MOCK_METHOD1(setArrayIndex, void(int i));
+  MOCK_METHOD0(endArray, void());
 };
 
 class DummySettingsProvider : public SettingsProvider {
  public:
   DummySettingsProvider() {}
 
-  void set_group(const char *group) {}
+  void set_group(const char* group) {}
 
-  QVariant value(const QString&, const QVariant& = QVariant()) const { return QVariant(); }
+  QVariant value(const QString&, const QVariant& = QVariant()) const {
+    return QVariant();
+  }
   void setValue(const QString&, const QVariant&) {}
   int beginReadArray(const QString&) { return 0; }
   void beginWriteArray(const QString&, int = -1) {}
@@ -54,5 +50,4 @@ class DummySettingsProvider : public SettingsProvider {
   void endArray() {}
 };
 
-#endif // MOCK_SETTINGSPROVIDER_H
-
+#endif  // MOCK_SETTINGSPROVIDER_H

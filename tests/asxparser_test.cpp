@@ -15,29 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-
-#include "core/timeconstants.h"
 #include "playlistparsers/asxparser.h"
 
 #include <QBuffer>
 #include <QUrl>
 
+#include "core/timeconstants.h"
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
 using ::testing::HasSubstr;
 
-class ASXParserTest : public ::testing::Test {
-
-};
+class ASXParserTest : public ::testing::Test {};
 
 TEST_F(ASXParserTest, ParsesOneTrackFromXML) {
   QByteArray data =
       "<asx version=\"3.0\"><title>foobar</title><entry>"
-        "<ref href=\"http://example.com/foo.mp3\"/>"
-        "<title>Foo</title>"
-        "<author>Bar</author>"
-        "<copyright>mumble mumble</copyright>"
+      "<ref href=\"http://example.com/foo.mp3\"/>"
+      "<title>Foo</title>"
+      "<author>Bar</author>"
+      "<copyright>mumble mumble</copyright>"
       "</entry></asx>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
@@ -54,12 +52,12 @@ TEST_F(ASXParserTest, ParsesOneTrackFromXML) {
 TEST_F(ASXParserTest, ParsesMoreThanOneTrackFromXML) {
   QByteArray data =
       "<asx><entry>"
-        "<entry>"
-          "<ref href=\"http://example.com/foo.mp3\"/>"
-        "</entry>"
-        "<entry>"
-          "<ref href=\"http://example.com/bar.mp3\"/>"
-        "</entry>"
+      "<entry>"
+      "<ref href=\"http://example.com/foo.mp3\"/>"
+      "</entry>"
+      "<entry>"
+      "<ref href=\"http://example.com/bar.mp3\"/>"
+      "</entry>"
       "</entry></asx>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
@@ -80,8 +78,10 @@ TEST_F(ASXParserTest, ParsesBrokenXmlEntities) {
       "<Copyright>2006 Digitally Imported., Inc</Copyright>"
       "<MoreInfo href=\"http://www.di.fm/\" />"
       "  <entry>"
-      "    <PARAM name=\"HTMLView\" value=\"http://www.di.fm/classictrance/pro/mini_playlist.html\"/>"
-      "    <ref href = \"mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx\"/>"
+      "    <PARAM name=\"HTMLView\" "
+      "value=\"http://www.di.fm/classictrance/pro/mini_playlist.html\"/>"
+      "    <ref href = "
+      "\"mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx\"/>"
       "    <Title>Classic Trance</Title>"
       "    <Author>Digitally Imported Premium</Author>"
       "  </entry>"
@@ -92,7 +92,9 @@ TEST_F(ASXParserTest, ParsesBrokenXmlEntities) {
   ASXParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
-  EXPECT_EQ(QUrl("mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx"), songs[0].url());
+  EXPECT_EQ(
+      QUrl("mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx"),
+      songs[0].url());
 }
 
 TEST_F(ASXParserTest, SavesSong) {
@@ -110,7 +112,8 @@ TEST_F(ASXParserTest, SavesSong) {
   songs << one;
 
   parser.Save(songs, &buffer);
-  EXPECT_THAT(data.constData(), HasSubstr("<ref href=\"http://www.example.com/foo.mp3\"/>"));
+  EXPECT_THAT(data.constData(),
+              HasSubstr("<ref href=\"http://www.example.com/foo.mp3\"/>"));
   EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
   EXPECT_THAT(data.constData(), HasSubstr("<author>bar</author>"));
 }
@@ -124,6 +127,8 @@ TEST_F(ASXParserTest, ParsesSomaFM) {
 
   ASSERT_EQ(4, songs.count());
   EXPECT_EQ("SomaFM: Secret Agent", songs[0].title());
-  EXPECT_EQ("Keep us on the air! Click Support SomaFM above!", songs[0].artist());
-  EXPECT_EQ(QUrl("http://streamer-ntc-aa03.somafm.com:80/stream/1021"), songs[0].url());
+  EXPECT_EQ("Keep us on the air! Click Support SomaFM above!",
+            songs[0].artist());
+  EXPECT_EQ(QUrl("http://streamer-ntc-aa03.somafm.com:80/stream/1021"),
+            songs[0].url());
 }

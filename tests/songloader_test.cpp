@@ -15,29 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
+#include "core/songloader.h"
 
 #include <QBuffer>
 #include <QDir>
 #include <QEventLoop>
 #include <QSignalSpy>
 #include <QtDebug>
-
 #include <cstdlib>
+#include <memory>
 
-#include "test_utils.h"
+#include "engines/gstengine.h"
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 #include "mock_librarybackend.h"
-
-#include "core/songloader.h"
-#include "engines/gstengine.h"
+#include "test_utils.h"
 
 using ::testing::_;
 using ::testing::Return;
 
 class SongLoaderTest : public ::testing::Test {
-public:
+ public:
   static void SetUpTestCase() {
     sGstEngine = new GstEngine;
     ASSERT_TRUE(sGstEngine->Init());
@@ -49,14 +47,15 @@ public:
     sGstEngine = nullptr;
   }
 
-protected:
+ protected:
   void SetUp() {
     library_.reset(new MockLibraryBackend);
     loader_.reset(new SongLoader(library_.get(), nullptr));
     loader_->set_timeout(20000);
 
     // the thing we return is not really important
-    EXPECT_CALL(*library_.get(), GetSongByUrl(_, _)).WillRepeatedly(Return(Song()));
+    EXPECT_CALL(*library_.get(), GetSongByUrl(_, _))
+        .WillRepeatedly(Return(Song()));
   }
 
   void LoadLocalDirectory(const QString& dir);
@@ -68,7 +67,8 @@ protected:
   std::unique_ptr<MockLibraryBackend> library_;
 };
 
-const char* SongLoaderTest::kRemoteUrl = "http://remotetestdata.clementine-player.org";
+const char* SongLoaderTest::kRemoteUrl =
+    "http://remotetestdata.clementine-player.org";
 GstEngine* SongLoaderTest::sGstEngine = nullptr;
 
 TEST_F(SongLoaderTest, LoadLocalMp3) {
@@ -101,8 +101,8 @@ TEST_F(SongLoaderTest, LoadLocalPls) {
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -122,8 +122,8 @@ TEST_F(SongLoaderTest, LoadLocalM3U) {
   QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
 
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -141,8 +141,8 @@ TEST_F(SongLoaderTest, LoadLocalXSPF) {
   QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
 
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -161,8 +161,8 @@ TEST_F(SongLoaderTest, LoadLocalASX) {
   QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
 
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -182,8 +182,8 @@ TEST_F(SongLoaderTest, LoadRemoteMp3) {
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -203,8 +203,8 @@ TEST_F(SongLoaderTest, LoadRemote404) {
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Error
@@ -213,15 +213,16 @@ TEST_F(SongLoaderTest, LoadRemote404) {
 }
 
 TEST_F(SongLoaderTest, LoadRemotePls) {
-  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/pls_somafm.pls");
+  SongLoader::Result ret =
+      loader_->Load(QString(kRemoteUrl) + "/pls_somafm.pls");
   ASSERT_EQ(SongLoader::WillLoadAsync, ret);
 
   QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -230,21 +231,25 @@ TEST_F(SongLoaderTest, LoadRemotePls) {
 
   // Check some metadata
   ASSERT_EQ(4, loader_->songs().count());
-  EXPECT_EQ("SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient beats and grooves.",
-            loader_->songs()[2].title());
-  EXPECT_EQ(QUrl("http://ice.somafm.com/groovesalad"), loader_->songs()[3].url());
+  EXPECT_EQ(
+      "SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient "
+      "beats and grooves.",
+      loader_->songs()[2].title());
+  EXPECT_EQ(QUrl("http://ice.somafm.com/groovesalad"),
+            loader_->songs()[3].url());
 }
 
 TEST_F(SongLoaderTest, LoadRemotePlainText) {
-  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/notaplaylist.txt");
+  SongLoader::Result ret =
+      loader_->Load(QString(kRemoteUrl) + "/notaplaylist.txt");
   ASSERT_EQ(SongLoader::WillLoadAsync, ret);
 
   QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Error
@@ -260,8 +265,8 @@ TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
 
   // Start an event loop to wait for gstreamer to do its thing
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
@@ -290,7 +295,7 @@ TEST_F(SongLoaderTest, LoadLocalDirectory) {
   QByteArray data(resource.readAll());
 
   // Write 3 MP3 files
-  for (int i=0 ; i<3 ; ++i) {
+  for (int i = 0; i < 3; ++i) {
     QFile mp3(QString("%1/%2.mp3").arg(dir).arg(i));
     mp3.open(QIODevice::WriteOnly);
     mp3.write(data);
@@ -314,7 +319,7 @@ TEST_F(SongLoaderTest, LoadLocalDirectory) {
   d.rmdir(dir);
 }
 
-void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
+void SongLoaderTest::LoadLocalDirectory(const QString& filename) {
   // Load the directory
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(filename));
   ASSERT_EQ(SongLoader::WillLoadAsync, ret);
@@ -323,8 +328,8 @@ void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
 
   // Start an event loop to wait for it to read the directory
   QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
-                   &loop, SLOT(quit()));
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
+                   SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
   loader_.get()->EffectiveSongsLoad();
 

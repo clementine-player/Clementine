@@ -15,12 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
-#include "test_utils.h"
-#include "gtest/gtest.h"
-
-#include "core/timeconstants.h"
 #include "playlistparsers/plsparser.h"
 
 #include <QBuffer>
@@ -28,17 +22,21 @@
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QtDebug>
+#include <memory>
+
+#include "core/timeconstants.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 using std::shared_ptr;
 
 class PLSParserTest : public ::testing::Test {
-protected:
+ protected:
   PLSParserTest() : parser_(nullptr) {}
 
   shared_ptr<QFile> Open(const QString& filename) {
     shared_ptr<QFile> ret(new QFile(":/testdata/" + filename));
-    if (!ret->open(QIODevice::ReadOnly))
-      ret.reset();
+    if (!ret->open(QIODevice::ReadOnly)) ret.reset();
     return ret;
   }
 
@@ -50,7 +48,8 @@ TEST_F(PLSParserTest, ParseOneTrack) {
 
   SongList songs = parser_.Load(file.get(), "", QDir("/relative/to/"));
   ASSERT_EQ(1, songs.length());
-  EXPECT_EQ(QUrl("file:///relative/to/filename with spaces.mp3"), songs[0].url());
+  EXPECT_EQ(QUrl("file:///relative/to/filename with spaces.mp3"),
+            songs[0].url());
   EXPECT_EQ("Title", songs[0].title());
   EXPECT_EQ(123 * kNsecPerSec, songs[0].length_nanosec());
 }
@@ -60,13 +59,25 @@ TEST_F(PLSParserTest, ParseSomaFM) {
 
   SongList songs = parser_.Load(file.get());
   ASSERT_EQ(4, songs.length());
-  EXPECT_EQ(QUrl("http://streamer-dtc-aa05.somafm.com:80/stream/1018"), songs[0].url());
-  EXPECT_EQ(QUrl("http://streamer-mtc-aa03.somafm.com:80/stream/1018"), songs[1].url());
-  EXPECT_EQ(QUrl("http://streamer-ntc-aa04.somafm.com:80/stream/1018"), songs[2].url());
+  EXPECT_EQ(QUrl("http://streamer-dtc-aa05.somafm.com:80/stream/1018"),
+            songs[0].url());
+  EXPECT_EQ(QUrl("http://streamer-mtc-aa03.somafm.com:80/stream/1018"),
+            songs[1].url());
+  EXPECT_EQ(QUrl("http://streamer-ntc-aa04.somafm.com:80/stream/1018"),
+            songs[2].url());
   EXPECT_EQ(QUrl("http://ice.somafm.com/groovesalad"), songs[3].url());
-  EXPECT_EQ("SomaFM: Groove Salad (#1 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[0].title());
-  EXPECT_EQ("SomaFM: Groove Salad (#2 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[1].title());
-  EXPECT_EQ("SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[2].title());
+  EXPECT_EQ(
+      "SomaFM: Groove Salad (#1 128k mp3): A nicely chilled plate of ambient "
+      "beats and grooves.",
+      songs[0].title());
+  EXPECT_EQ(
+      "SomaFM: Groove Salad (#2 128k mp3): A nicely chilled plate of ambient "
+      "beats and grooves.",
+      songs[1].title());
+  EXPECT_EQ(
+      "SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient "
+      "beats and grooves.",
+      songs[2].title());
   EXPECT_EQ(-1, songs[0].length_nanosec());
   EXPECT_TRUE(songs[0].is_stream());
 }
@@ -76,13 +87,25 @@ TEST_F(PLSParserTest, ParseSomaFM2) {
 
   SongList songs = parser_.Load(file.get());
   ASSERT_EQ(4, songs.length());
-  EXPECT_EQ(QUrl("http://streamer-ntc-aa03.somafm.com:80/stream/1021"), songs[0].url());
-  EXPECT_EQ(QUrl("http://streamer-mtc-aa04.somafm.com:80/stream/1021"), songs[1].url());
-  EXPECT_EQ(QUrl("http://streamer-dtc-aa05.somafm.com:80/stream/1021"), songs[2].url());
+  EXPECT_EQ(QUrl("http://streamer-ntc-aa03.somafm.com:80/stream/1021"),
+            songs[0].url());
+  EXPECT_EQ(QUrl("http://streamer-mtc-aa04.somafm.com:80/stream/1021"),
+            songs[1].url());
+  EXPECT_EQ(QUrl("http://streamer-dtc-aa05.somafm.com:80/stream/1021"),
+            songs[2].url());
   EXPECT_EQ(QUrl("http://ice.somafm.com/secretagent"), songs[3].url());
-  EXPECT_EQ("SomaFM: Secret Agent (#1 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[0].title());
-  EXPECT_EQ("SomaFM: Secret Agent (#2 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[1].title());
-  EXPECT_EQ("SomaFM: Secret Agent (#3 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[2].title());
+  EXPECT_EQ(
+      "SomaFM: Secret Agent (#1 128k mp3): The soundtrack for your stylish, "
+      "mysterious, dangerous life. For Spies and PIs too!",
+      songs[0].title());
+  EXPECT_EQ(
+      "SomaFM: Secret Agent (#2 128k mp3): The soundtrack for your stylish, "
+      "mysterious, dangerous life. For Spies and PIs too!",
+      songs[1].title());
+  EXPECT_EQ(
+      "SomaFM: Secret Agent (#3 128k mp3): The soundtrack for your stylish, "
+      "mysterious, dangerous life. For Spies and PIs too!",
+      songs[2].title());
   EXPECT_EQ(-1, songs[0].length_nanosec());
   EXPECT_TRUE(songs[0].is_stream());
 }

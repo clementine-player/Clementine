@@ -28,7 +28,7 @@
 #include "library/directory.h"
 
 class MetatypesEnvironment : public ::testing::Environment {
-public:
+ public:
   void SetUp() {
     qRegisterMetaType<Directory>("Directory");
     qRegisterMetaType<DirectoryList>("DirectoryList");
@@ -40,4 +40,4 @@ public:
   }
 };
 
-#endif // RESOURCES_ENV_H
+#endif  // RESOURCES_ENV_H

@@ -15,20 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/song.h"
-#include "engines/gstengine.h"
-
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
-
-#include "test_utils.h"
-
-#include <QTemporaryFile>
-#include <QResource>
 #include <QDir>
+#include <QResource>
 #include <QSet>
 #include <QSignalSpy>
+#include <QTemporaryFile>
 #include <QtDebug>
+
+#include "core/song.h"
+#include "engines/gstengine.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 namespace {
 
@@ -45,14 +43,13 @@ class FileformatsTest : public ::testing::TestWithParam<const char*> {
   }
 
  protected:
-  FileformatsTest() {
-    kFormatsWithoutMetadata.insert("wav");
-  }
+  FileformatsTest() { kFormatsWithoutMetadata.insert("wav"); }
 
   void SetUp() {
     format_ = GetParam();
     resource_filename_ = ":/testdata/beep." + format_;
-    temp_filetemplate_ = QDir::tempPath() + "/fileformatstest-XXXXXX." + format_;
+    temp_filetemplate_ =
+        QDir::tempPath() + "/fileformatstest-XXXXXX." + format_;
   }
 
   void SaveToTempFile(QTemporaryFile* file) {
@@ -75,7 +72,6 @@ class FileformatsTest : public ::testing::TestWithParam<const char*> {
 };
 
 GstEngine* FileformatsTest::sGstEngine = nullptr;
-
 
 TEST_P(FileformatsTest, Exists) {
   EXPECT_TRUE(QFile::exists(resource_filename_));

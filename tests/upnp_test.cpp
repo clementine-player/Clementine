@@ -781,8 +781,8 @@ TEST(UpnpMediaPlayerTest, LoadingForgetsTheNext) {
   player.Answer();  // Play
   player.Poll("0:00:31", "PLAYING");
   QMetaObject::invokeMethod(&player, "Poll", Qt::DirectConnection);
-  player.Answer({{"RelTime", "0:00:01"},
-                 {"TrackURI", "http://10.0.0.1:5500/s/token/2"}});
+  player.Answer(
+      {{"RelTime", "0:00:01"}, {"TrackURI", "http://10.0.0.1:5500/s/token/2"}});
   EXPECT_EQ(0, next.size());
   EXPECT_EQ(1, lost.size());
 }
@@ -968,8 +968,7 @@ TEST(UpnpSubscriptionTest, ParsesLastChange) {
   EXPECT_EQ("OK", transport.value("TransportStatus"));
   EXPECT_EQ("http://192.168.86.214:34637/s/c18b74a22c9b820333ab8cce5749eb6b/2",
             transport.value("CurrentTrackURI"));
-  EXPECT_EQ("<DIDL-Lite></DIDL-Lite>",
-            transport.value("CurrentTrackMetaData"));
+  EXPECT_EQ("<DIDL-Lite></DIDL-Lite>", transport.value("CurrentTrackMetaData"));
   // Sonos's own, with its prefix.
   EXPECT_TRUE(transport.contains("r:NextTrackURI"));
 }
@@ -1043,9 +1042,8 @@ TEST(UpnpSubscriptionTest, MediaServerHandsEventsOn) {
   // Nobody else's.
   EXPECT_TRUE(Exchange(&server, {Notify("/e/other", body) + body})
                   .startsWith("HTTP/1.1 404"));
-  EXPECT_TRUE(
-      Exchange(&server, {"NOTIFY /e/token HTTP/1.1\r\nHOST: x\r\n\r\n"})
-          .startsWith("HTTP/1.1 411"));
+  EXPECT_TRUE(Exchange(&server, {"NOTIFY /e/token HTTP/1.1\r\nHOST: x\r\n\r\n"})
+                  .startsWith("HTTP/1.1 411"));
   callbacks->Set("token", QHostAddress("10.0.0.9"), &subscription);
   EXPECT_TRUE(Exchange(&server, {Notify("/e/token", body) + body})
                   .startsWith("HTTP/1.1 403"));
@@ -1081,7 +1079,8 @@ class FakeEventServer {
   }
 
   QUrl url() const {
-    return QUrl(QString("http://127.0.0.1:%1/event").arg(listener_.serverPort()));
+    return QUrl(
+        QString("http://127.0.0.1:%1/event").arg(listener_.serverPort()));
   }
   QList<QByteArray> requests_;
 
@@ -1127,8 +1126,8 @@ TEST(UpnpSubscriptionTest, SubscribesRenewsAndUnsubscribes) {
   EXPECT_TRUE(callbacks->Find(token, &peer));
   EXPECT_EQ(QHostAddress(QHostAddress::LocalHost), peer);
 
-  ASSERT_TRUE(QTest::qWaitFor([&]() { return renderer.requests_.size() >= 2; },
-                              10000));
+  ASSERT_TRUE(
+      QTest::qWaitFor([&]() { return renderer.requests_.size() >= 2; }, 10000));
   const QByteArray renewal = renderer.requests_[1];
   EXPECT_TRUE(renewal.startsWith("SUBSCRIBE /event HTTP/1.1"));
   EXPECT_EQ("uuid:RINCON_1_sub7", Header(renewal, "SID").toStdString());
@@ -1190,13 +1189,13 @@ TEST(UpnpMediaPlayerTest, EventsAboutWhatPlayedBefore) {
                          {"CurrentTrackURI", "http://10.0.0.1:5500/s/old/9"}});
   EXPECT_EQ(UpnpMediaPlayer::Buffering, player.state());
   // A stop before it starts is left to the polls.
-  player.TransportEvent({{"TransportState", "STOPPED"},
-                         {"CurrentTrackURI", FakePlayer::kUrl}});
+  player.TransportEvent(
+      {{"TransportState", "STOPPED"}, {"CurrentTrackURI", FakePlayer::kUrl}});
   EXPECT_TRUE(player.is_loaded());
   EXPECT_EQ(UpnpMediaPlayer::Buffering, player.state());
 
-  player.TransportEvent({{"TransportState", "PLAYING"},
-                         {"CurrentTrackURI", FakePlayer::kUrl}});
+  player.TransportEvent(
+      {{"TransportState", "PLAYING"}, {"CurrentTrackURI", FakePlayer::kUrl}});
   EXPECT_EQ(UpnpMediaPlayer::Playing, player.state());
 }
 

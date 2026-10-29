@@ -15,13 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gtest/gtest.h"
-#include "test_utils.h"
-
-#include "core/song.h"
-#include "core/organiseformat.h"
 #include "ui/organisedialog.h"
 
+#include "core/organiseformat.h"
+#include "core/song.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest) {
   // Create some songs, with multiple similar songs
@@ -58,7 +57,8 @@ TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest) {
   // Generate new filenames
   OrganiseFormat format;
   format.set_format(OrganiseDialog::kDefaultFormat);
-  Organise::NewSongInfoList new_songs_info = OrganiseDialog::ComputeNewSongsFilenames(songs, format);
+  Organise::NewSongInfoList new_songs_info =
+      OrganiseDialog::ComputeNewSongsFilenames(songs, format);
 
   EXPECT_EQ("/Album/Test1.", new_songs_info[0].new_filename_);
   EXPECT_EQ("//filename.mp3", new_songs_info[1].new_filename_);
@@ -68,4 +68,3 @@ TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest) {
   EXPECT_EQ("Foo//Bar(2).mp3", new_songs_info[5].new_filename_);
   EXPECT_EQ("Foo//Bar(3).mp3", new_songs_info[6].new_filename_);
 }
-

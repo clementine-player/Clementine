@@ -15,16 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gtest/gtest.h"
-
 #include "core/scopedtransaction.h"
 
-#include <QtDebug>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QVariant>
+#include <QtDebug>
+
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 namespace {
 
@@ -92,5 +92,4 @@ TEST_F(ScopedTransactionTest, Commit) {
   EXPECT_EQ(42, q.value(0).toInt());
 }
 
-
-} // namespace
+}  // namespace

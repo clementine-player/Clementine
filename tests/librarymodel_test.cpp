@@ -15,20 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
-#include "test_utils.h"
-#include "gtest/gtest.h"
-
-#include "core/database.h"
 #include "library/librarymodel.h"
-#include "library/librarybackend.h"
-#include "library/library.h"
 
-#include <QtDebug>
-#include <QThread>
 #include <QSignalSpy>
 #include <QSortFilterProxyModel>
+#include <QThread>
+#include <QtDebug>
+#include <memory>
+
+#include "core/database.h"
+#include "gtest/gtest.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
+#include "test_utils.h"
 
 namespace {
 
@@ -37,8 +36,8 @@ class LibraryModelTest : public ::testing::Test {
   void SetUp() {
     database_.reset(new MemoryDatabase);
     backend_.reset(new LibraryBackend);
-    backend_->Init(database_, Library::kSongsTable,
-                   Library::kDirsTable, Library::kSubdirsTable, Library::kFtsTable);
+    backend_->Init(database_, Library::kSongsTable, Library::kDirsTable,
+                   Library::kSubdirsTable, Library::kFtsTable);
     model_.reset(new LibraryModel(backend_.get(), nullptr));
 
     added_dir_ = false;
@@ -66,7 +65,8 @@ class LibraryModelTest : public ::testing::Test {
     return song;
   }
 
-  Song AddSong(const QString& title, const QString& artist, const QString& album, int length) {
+  Song AddSong(const QString& title, const QString& artist,
+               const QString& album, int length) {
     Song song;
     song.Init(title, artist, album, length);
     return AddSong(song);
@@ -92,8 +92,10 @@ TEST_F(LibraryModelTest, WithInitialArtists) {
 
   ASSERT_EQ(5, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("A", model_sorted_->index(0, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("Artist 1", model_sorted_->index(1, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("Artist 2", model_sorted_->index(2, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("Artist 1",
+            model_sorted_->index(1, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("Artist 2",
+            model_sorted_->index(2, 0, QModelIndex()).data().toString());
   EXPECT_EQ("F", model_sorted_->index(3, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Foo", model_sorted_->index(4, 0, QModelIndex()).data().toString());
 }
@@ -128,11 +130,15 @@ TEST_F(LibraryModelTest, NumericHeaders) {
 
   ASSERT_EQ(6, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("0-9", model_sorted_->index(0, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("0artist", model_sorted_->index(1, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("1artist", model_sorted_->index(2, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("2artist", model_sorted_->index(3, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("0artist",
+            model_sorted_->index(1, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("1artist",
+            model_sorted_->index(2, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("2artist",
+            model_sorted_->index(3, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Z", model_sorted_->index(4, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("zartist", model_sorted_->index(5, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("zartist",
+            model_sorted_->index(5, 0, QModelIndex()).data().toString());
 }
 
 TEST_F(LibraryModelTest, MixedCaseHeaders) {
@@ -142,8 +148,10 @@ TEST_F(LibraryModelTest, MixedCaseHeaders) {
 
   ASSERT_EQ(3, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("A", model_sorted_->index(0, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("Artist", model_sorted_->index(1, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("artist", model_sorted_->index(2, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("Artist",
+            model_sorted_->index(1, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("artist",
+            model_sorted_->index(2, 0, QModelIndex()).data().toString());
 }
 
 TEST_F(LibraryModelTest, UnknownArtists) {
@@ -177,21 +185,22 @@ TEST_F(LibraryModelTest, UnknownAlbums) {
 
 TEST_F(LibraryModelTest, VariousArtistSongs) {
   SongList songs;
-  for (int i=0 ; i<4 ; ++i) {
-    QString n = QString::number(i+1);
+  for (int i = 0; i < 4; ++i) {
+    QString n = QString::number(i + 1);
     Song song;
     song.Init("Title " + n, "Artist " + n, "Album", 0);
     songs << song;
   }
 
-  // Different ways of putting songs in "Various Artist".  Make sure they all work
+  // Different ways of putting songs in "Various Artist".  Make sure they all
+  // work
   songs[0].set_sampler(true);
   songs[1].set_compilation(true);
   songs[2].set_forced_compilation_on(true);
-  songs[3].set_sampler(true); songs[3].set_artist("Various Artists");
+  songs[3].set_sampler(true);
+  songs[3].set_artist("Various Artists");
 
-  for (int i=0 ; i<4 ; ++i)
-    AddSong(songs[i]);
+  for (int i = 0; i < 4; ++i) AddSong(songs[i]);
   model_->Init(false);
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
@@ -202,15 +211,20 @@ TEST_F(LibraryModelTest, VariousArtistSongs) {
   model_->fetchMore(album_index);
   ASSERT_EQ(4, model_->rowCount(album_index));
 
-  EXPECT_EQ("Artist 1 - Title 1", model_->index(0, 0, album_index).data().toString());
-  EXPECT_EQ("Artist 2 - Title 2", model_->index(1, 0, album_index).data().toString());
-  EXPECT_EQ("Artist 3 - Title 3", model_->index(2, 0, album_index).data().toString());
+  EXPECT_EQ("Artist 1 - Title 1",
+            model_->index(0, 0, album_index).data().toString());
+  EXPECT_EQ("Artist 2 - Title 2",
+            model_->index(1, 0, album_index).data().toString());
+  EXPECT_EQ("Artist 3 - Title 3",
+            model_->index(2, 0, album_index).data().toString());
   EXPECT_EQ("Title 4", model_->index(3, 0, album_index).data().toString());
 }
 
 TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
-  Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
-  Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
+  Song one = AddSong("Title 1", "Artist", "Album", 123);
+  one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album", 123);
+  two.set_id(2);
   AddSong("Title 3", "Artist", "Album", 123);
   model_->Init(false);
 
@@ -223,8 +237,10 @@ TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
   ASSERT_EQ(3, model_->rowCount(album_index));
 
   // Remove the first two songs
-  QSignalSpy spy_preremove(model_.get(), SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy spy_remove(model_.get(), SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_preremove(model_.get(),
+                           SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)));
+  QSignalSpy spy_remove(model_.get(),
+                        SIGNAL(rowsRemoved(QModelIndex, int, int)));
   QSignalSpy spy_reset(model_.get(), SIGNAL(modelReset()));
 
   backend_->DeleteSongs(SongList() << one << two);
@@ -241,13 +257,17 @@ TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
 }
 
 TEST_F(LibraryModelTest, RemoveSongsNotLazyLoaded) {
-  Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
-  Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
+  Song one = AddSong("Title 1", "Artist", "Album", 123);
+  one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album", 123);
+  two.set_id(2);
   model_->Init(false);
 
   // Remove the first two songs
-  QSignalSpy spy_preremove(model_.get(), SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy spy_remove(model_.get(), SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_preremove(model_.get(),
+                           SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)));
+  QSignalSpy spy_remove(model_.get(),
+                        SIGNAL(rowsRemoved(QModelIndex, int, int)));
   QSignalSpy spy_reset(model_.get(), SIGNAL(modelReset()));
 
   backend_->DeleteSongs(SongList() << one << two);
@@ -258,9 +278,12 @@ TEST_F(LibraryModelTest, RemoveSongsNotLazyLoaded) {
 }
 
 TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
-  Song one = AddSong("Title 1", "Artist", "Album 1", 123); one.set_id(1);
-  Song two = AddSong("Title 2", "Artist", "Album 2", 123); two.set_id(2);
-  Song three = AddSong("Title 3", "Artist", "Album 2", 123); three.set_id(3);
+  Song one = AddSong("Title 1", "Artist", "Album 1", 123);
+  one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album 2", 123);
+  two.set_id(2);
+  Song three = AddSong("Title 3", "Artist", "Album 2", 123);
+  three.set_id(3);
   model_->Init(false);
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
@@ -283,7 +306,8 @@ TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
 }
 
 TEST_F(LibraryModelTest, RemoveEmptyArtists) {
-  Song one = AddSong("Title", "Artist", "Album", 123); one.set_id(1);
+  Song one = AddSong("Title", "Artist", "Album", 123);
+  one.set_id(1);
   model_->Init(false);
 
   // Lazy load the items
@@ -304,4 +328,4 @@ TEST_F(LibraryModelTest, RemoveEmptyArtists) {
   ASSERT_EQ(0, model_->rowCount(QModelIndex()));
 }
 
-} // namespace
+}  // namespace

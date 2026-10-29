@@ -15,15 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-
-#include "core/timeconstants.h"
 #include "playlistparsers/xspfparser.h"
 
 #include <QBuffer>
 #include <QUrl>
+
+#include "core/timeconstants.h"
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 using ::testing::HasSubstr;
 

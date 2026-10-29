@@ -15,18 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gtest/gtest.h"
-#include "test_utils.h"
 #include "core/mergedproxymodel.h"
 
-#include <QStandardItemModel>
 #include <QSignalSpy>
+#include <QStandardItemModel>
+
+#include "gtest/gtest.h"
+#include "test_utils.h"
 
 class MergedProxyModelTest : public ::testing::Test {
  protected:
-  void SetUp() {
-    merged_.setSourceModel(&source_);
-  }
+  void SetUp() { merged_.setSourceModel(&source_); }
 
   QStandardItemModel source_;
   MergedProxyModel merged_;
@@ -86,8 +85,9 @@ TEST_F(MergedProxyModelTest, Merged) {
 }
 
 TEST_F(MergedProxyModelTest, SourceInsert) {
-  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)));
-  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex,int,int)));
+  QSignalSpy before_spy(&merged_,
+                        SIGNAL(rowsAboutToBeInserted(QModelIndex, int, int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex, int, int)));
 
   source_.appendRow(new QStandardItem("one"));
 
@@ -104,8 +104,9 @@ TEST_F(MergedProxyModelTest, SourceInsert) {
 TEST_F(MergedProxyModelTest, SourceRemove) {
   source_.appendRow(new QStandardItem("one"));
 
-  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy before_spy(&merged_,
+                        SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex, int, int)));
 
   source_.removeRow(0, QModelIndex());
 
@@ -124,8 +125,9 @@ TEST_F(MergedProxyModelTest, SubInsert) {
   QStandardItemModel submodel;
   merged_.AddSubModel(source_.index(0, 0, QModelIndex()), &submodel);
 
-  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)));
-  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex,int,int)));
+  QSignalSpy before_spy(&merged_,
+                        SIGNAL(rowsAboutToBeInserted(QModelIndex, int, int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex, int, int)));
 
   submodel.appendRow(new QStandardItem("two"));
 
@@ -146,8 +148,9 @@ TEST_F(MergedProxyModelTest, SubRemove) {
 
   submodel.appendRow(new QStandardItem("two"));
 
-  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy before_spy(&merged_,
+                        SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex, int, int)));
 
   submodel.removeRow(0, QModelIndex());
 

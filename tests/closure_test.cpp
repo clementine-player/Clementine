@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "core/closure.h"
 
 #include <QEventLoop>
 #include <QFuture>
@@ -6,7 +6,7 @@
 #include <QString>
 
 #include "config.h"
-#include "core/closure.h"
+#include "gtest/gtest.h"
 #include "test_utils.h"
 
 namespace {
@@ -34,16 +34,16 @@ using Invoke = decltype(&TestQObject::Invoke);
 using InvokeWithArgs = decltype(&TestQObject::InvokeWithArgs);
 
 // Signal arguments reach the receiver...
-static_assert(_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int,
-                                       QString>);
+static_assert(
+    _detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int, QString>);
 // ... and leaving them off is what a lambda is for.
 static_assert(!_detail::ReceiverAccepts<Invoke, TestQObject, int, QString>);
 
 // Bound arguments follow the signal's own.
-static_assert(_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int,
-                                       QString>);
-static_assert(!_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, QString,
-                                        int>);
+static_assert(
+    _detail::ReceiverAccepts<InvokeWithArgs, TestQObject, int, QString>);
+static_assert(
+    !_detail::ReceiverAccepts<InvokeWithArgs, TestQObject, QString, int>);
 
 // A receiver of no arguments suits a signal that reports none.
 static_assert(_detail::ReceiverAccepts<Invoke, TestQObject>);
@@ -59,8 +59,8 @@ static_assert(_detail::TakesFutureResult<void, void (*)()>::value);
 static_assert(!_detail::TakesFutureResult<void, void (*)(int)>::value);
 
 // ... followed by the bound arguments.
-static_assert(_detail::TakesFutureResult<int, void (*)(int, QString),
-                                         QString>::value);
+static_assert(
+    _detail::TakesFutureResult<int, void (*)(int, QString), QString>::value);
 static_assert(!_detail::TakesFutureResult<int, void (*)(int), QString>::value);
 
 }  // namespace
@@ -170,8 +170,7 @@ TEST(ClosureTest, PassesFutureResultBeforeBoundArguments) {
   QPromise<int> promise;
   QFuture<int> future = promise.future();
 
-  NewClosure(future, &receiver, &TestQObject::InvokeWithArgs,
-             QString("bound"));
+  NewClosure(future, &receiver, &TestQObject::InvokeWithArgs, QString("bound"));
 
   promise.start();
   promise.addResult(42);
@@ -212,8 +211,7 @@ TEST(ClosureTest, DoAfterCallsReceiver) {
   EXPECT_EQ(0, receiver.invoked());
 
   bool done = false;
-  DoAfter(
-      &receiver, [&done]() { done = true; }, std::chrono::milliseconds(50));
+  DoAfter(&receiver, [&done]() { done = true; }, std::chrono::milliseconds(50));
   SpinUntil(done);
   EXPECT_EQ(1, receiver.invoked());
 }

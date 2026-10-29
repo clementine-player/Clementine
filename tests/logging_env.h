@@ -23,11 +23,11 @@
 #include "core/logging.h"
 
 class LoggingEnvironment : public ::testing::Environment {
-public:
+ public:
   void SetUp() {
     logging::Init();
     logging::SetLevels("*:4");
   }
 };
 
-#endif // LOGGING_ENV_H
+#endif  // LOGGING_ENV_H

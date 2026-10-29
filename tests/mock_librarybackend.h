@@ -39,15 +39,19 @@ class MockLibraryBackend : public LibraryBackendInterface {
 
   MOCK_METHOD1(GetAllArtists, QStringList(const QueryOptions&));
   MOCK_METHOD1(GetAllArtistsWithAlbums, QStringList(const QueryOptions&));
-  MOCK_METHOD3(GetSongs, SongList(const QString&, const QString&, const QueryOptions&));
+  MOCK_METHOD3(GetSongs,
+               SongList(const QString&, const QString&, const QueryOptions&));
 
-  MOCK_METHOD2(GetCompilationSongs, SongList(const QString&, const QueryOptions&));
+  MOCK_METHOD2(GetCompilationSongs,
+               SongList(const QString&, const QueryOptions&));
 
   MOCK_METHOD1(GetAllAlbums, AlbumList(const QueryOptions&));
-  MOCK_METHOD2(GetAlbumsByArtist, AlbumList(const QString&, const QueryOptions&));
+  MOCK_METHOD2(GetAlbumsByArtist,
+               AlbumList(const QString&, const QueryOptions&));
   MOCK_METHOD1(GetCompilationAlbums, AlbumList(const QueryOptions&));
 
-  MOCK_METHOD3(UpdateManualAlbumArtAsync, void(const QString&, const QString&, const QString&));
+  MOCK_METHOD3(UpdateManualAlbumArtAsync,
+               void(const QString&, const QString&, const QString&));
   MOCK_METHOD2(GetAlbumArt, Album(const QString&, const QString&));
 
   MOCK_METHOD1(GetSongById, Song(int));

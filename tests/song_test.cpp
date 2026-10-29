@@ -15,21 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include "tagreader.h"
 #include "core/song.h"
-#include "internet/lastfm/lastfmtrack.h"
 
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
-
-#include "test_utils.h"
+#include <id3v2tag.h>
 
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextCodec>
 
-#include <id3v2tag.h>
+#include "config.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+#include "internet/lastfm/lastfmtrack.h"
+#include "tagreader.h"
+#include "test_utils.h"
 
 namespace {
 
@@ -387,8 +386,8 @@ TEST_F(SongTest, StatisticsMP4) {
 
 TEST_F(SongTest, MergeUserSetDataTest) {
   // Suppose we have songs from files and from the DB
-  // Songs from files are the ones that will be imported in the DB after being merged with the
-  // former DB song values
+  // Songs from files are the ones that will be imported in the DB after being
+  // merged with the former DB song values
   Song song_db_with_rating;
   Song song_db_with_no_rating;
   Song song_file_with_rating;
@@ -397,13 +396,15 @@ TEST_F(SongTest, MergeUserSetDataTest) {
   song_db_with_rating.set_rating(0.42);
   song_file_with_rating.set_rating(0.43);
 
-  // Merging a DB song with no rating should not update the rating that is in the file song
+  // Merging a DB song with no rating should not update the rating that is in
+  // the file song
   float old_rating_value = song_file_with_rating.rating();
   song_file_with_rating.MergeUserSetData(song_db_with_no_rating);
   EXPECT_NE(song_db_with_no_rating.rating(), song_file_with_rating.rating());
   EXPECT_EQ(song_file_with_rating.rating(), old_rating_value);
 
-  // Merging a DB song with rating should not update the rating that is in the file song...
+  // Merging a DB song with rating should not update the rating that is in the
+  // file song...
   old_rating_value = song_file_with_rating.rating();
   song_file_with_rating.MergeUserSetData(song_db_with_rating);
   EXPECT_NE(song_db_with_rating.rating(), song_file_with_rating.rating());

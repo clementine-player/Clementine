@@ -17,25 +17,25 @@
 
 #include "test_utils.h"
 
-#include "gtest/gtest.h"
-
 #include <QDir>
 #include <QHostAddress>
 #include <QNetworkRequest>
 #include <QString>
 #include <QUrl>
 
+#include "gtest/gtest.h"
+
 std::ostream& operator<<(std::ostream& stream, const QString& str) {
   stream << str.toStdString();
   return stream;
 }
 
-std::ostream& operator <<(std::ostream& stream, const QUrl& url) {
+std::ostream& operator<<(std::ostream& stream, const QUrl& url) {
   stream << url.toString().toStdString();
   return stream;
 }
 
-std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req) {
+std::ostream& operator<<(std::ostream& stream, const QNetworkRequest& req) {
   stream << req.url().toString().toStdString();
   return stream;
 }
@@ -45,7 +45,7 @@ std::ostream& operator<<(std::ostream& stream, const QHostAddress& address) {
   return stream;
 }
 
-std::ostream& operator <<(std::ostream& stream, const QVariant& var) {
+std::ostream& operator<<(std::ostream& stream, const QVariant& var) {
   stream << var.toString().toStdString();
   return stream;
 }
@@ -79,22 +79,15 @@ TemporaryResource::TemporaryResource(const QString& filename) {
 }
 
 TestQObject::TestQObject(QObject* parent)
-  : QObject(parent),
-    invoked_(0),
-    number_(0) {
-}
+    : QObject(parent), invoked_(0), number_(0) {}
 
-void TestQObject::Emit() {
-  emit Emitted();
-}
+void TestQObject::Emit() { emit Emitted(); }
 
 void TestQObject::EmitWithArgs(int number, const QString& text) {
   emit EmittedWithArgs(number, text);
 }
 
-void TestQObject::Invoke() {
-  ++invoked_;
-}
+void TestQObject::Invoke() { ++invoked_; }
 
 void TestQObject::InvokeWithArgs(int number, const QString& text) {
   ++invoked_;

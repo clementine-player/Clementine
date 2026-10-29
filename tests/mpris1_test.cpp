@@ -15,29 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
-
-#include "core/encoding.h"
 #include "core/mpris1.h"
-#include "core/song.h"
-#include "playlist/playlistmanager.h"
-#include "playlist/playlistsequence.h"
 
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
-
-#include "test_utils.h"
-#include "mock_engine.h"
-#include "mock_player.h"
-#include "mock_playlistmanager.h"
+#include <id3v2tag.h>
 
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QSignalSpy>
 #include <QTemporaryFile>
 #include <QTextCodec>
+#include <memory>
 
-#include <id3v2tag.h>
+#include "core/encoding.h"
+#include "core/song.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+#include "mock_engine.h"
+#include "mock_player.h"
+#include "mock_playlistmanager.h"
+#include "playlist/playlistmanager.h"
+#include "playlist/playlistsequence.h"
+#include "test_utils.h"
 
 using ::testing::_;
 using ::testing::Return;
@@ -45,7 +43,7 @@ using ::testing::Return;
 namespace {
 
 class Mpris1BasicTest : public ::testing::Test {
-protected:
+ protected:
   void SetUp() {
     sequence_.reset(new PlaylistSequence);
 
@@ -56,7 +54,7 @@ protected:
 
   QString service_name() const {
     return "org.clementine.unittest" +
-        QString::number(QCoreApplication::applicationPid());
+           QString::number(QCoreApplication::applicationPid());
   }
 
   MockEngine engine_;
@@ -67,22 +65,21 @@ protected:
 };
 
 TEST_F(Mpris1BasicTest, CreatesDBusService) {
-  EXPECT_FALSE(QDBusConnection::sessionBus().interface()->
-               isServiceRegistered(service_name()));
+  EXPECT_FALSE(QDBusConnection::sessionBus().interface()->isServiceRegistered(
+      service_name()));
 
   std::unique_ptr<mpris::Mpris1> mpris(
       new mpris::Mpris1(&player_, nullptr, nullptr, service_name()));
-  EXPECT_TRUE(QDBusConnection::sessionBus().interface()->
-              isServiceRegistered(service_name()));
+  EXPECT_TRUE(QDBusConnection::sessionBus().interface()->isServiceRegistered(
+      service_name()));
 
   mpris.reset();
-  EXPECT_FALSE(QDBusConnection::sessionBus().interface()->
-               isServiceRegistered(service_name()));
+  EXPECT_FALSE(QDBusConnection::sessionBus().interface()->isServiceRegistered(
+      service_name()));
 }
 
-
 class Mpris1Test : public Mpris1BasicTest {
-protected:
+ protected:
   void SetUp() {
     Mpris1BasicTest::SetUp();
 
@@ -252,4 +249,3 @@ TEST_F(Mpris1Test, HandlesShuffleModeChanged) {
 }
 
 }  // namespace
-

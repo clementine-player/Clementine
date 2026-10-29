@@ -15,8 +15,8 @@
 */
 
 #include <QTcpServer>
-#include <QTemporaryDir>
 #include <QTcpSocket>
+#include <QTemporaryDir>
 #include <QTest>
 #include <memory>
 
