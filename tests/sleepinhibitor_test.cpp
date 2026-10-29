@@ -21,6 +21,7 @@
 #include <QSettings>
 #include <QStringList>
 #include <QTemporaryDir>
+#include <QTest>
 #include <QThread>
 #include <memory>
 #include <string>
@@ -32,14 +33,14 @@ namespace {
 using Activity = SleepInhibitor::Activity;
 using Keep = SleepInhibitor::Keep;
 
-// Records what it's asked, as "Inhibit DisplayOn" and the like.
+// Records what it's asked, as "Inhibit DisplayOn (reason)" and the like.
 class FakeBackend : public SleepInhibitor::Backend {
  public:
   explicit FakeBackend(QStringList* calls) : calls_(calls) {}
 
   void Inhibit(Keep keep, const QString& reason) override {
     EXPECT_FALSE(reason.isEmpty());
-    *calls_ << "Inhibit " + Name(keep);
+    *calls_ << "Inhibit " + Name(keep) + " (" + reason + ")";
   }
   void Uninhibit(Keep keep) override { *calls_ << "Uninhibit " + Name(keep); }
 
@@ -67,9 +68,15 @@ class SleepInhibitorTest : public ::testing::Test {
   }
 
   void SetUp() override {
-    SetEnabled(Activity::FullScreenVisualizations, true);
+    QSettings().remove(SleepInhibitor::kSettingsGroup);
+    CreateInhibitor();
+  }
+
+  void CreateInhibitor() {
     inhibitor_ = std::make_unique<SleepInhibitor>(
         std::make_unique<FakeBackend>(&calls_));
+    // Tests of the grace period set their own.
+    inhibitor_->SetGraceMsec(0);
   }
 
   static void SetEnabled(Activity activity, bool enabled) {
@@ -80,8 +87,15 @@ class SleepInhibitorTest : public ::testing::Test {
 
   static QTemporaryDir* settings_dir_;
 
-  // What the backend was asked, in order, as "Inhibit DisplayOn, ...".
-  std::string Calls() const { return calls_.join(", ").toStdString(); }
+  // What the backend was asked, in order, as "Inhibit DisplayOn, ...", and
+  // why if |with_reasons|.
+  std::string Calls(bool with_reasons = false) const {
+    QStringList calls;
+    for (const QString& call : calls_) {
+      calls << (with_reasons ? call : call.section(" (", 0, 0));
+    }
+    return calls.join(", ").toStdString();
+  }
 
   QStringList calls_;
   std::unique_ptr<SleepInhibitor> inhibitor_;
@@ -167,6 +181,85 @@ TEST_F(SleepInhibitorTest, HoldsWorkFromOtherThreads) {
   QCoreApplication::processEvents();
   EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
   delete thread;
+}
+
+TEST_F(SleepInhibitorTest, PlaybackKeepsAwake) {
+  std::unique_ptr<SleepInhibitor::Hold> hold =
+      inhibitor_->Acquire(Activity::LocalPlayback);
+  EXPECT_EQ("Inhibit Awake", Calls());
+
+  hold.reset();
+  EXPECT_EQ("Inhibit Awake, Uninhibit Awake", Calls());
+}
+
+TEST_F(SleepInhibitorTest, KeepsAwakeForAWhileAfterwards) {
+  inhibitor_->SetGraceMsec(50);
+  std::unique_ptr<SleepInhibitor::Hold> hold =
+      inhibitor_->Acquire(Activity::RemoteTransfer);
+  hold.reset();
+  // Such as between the files a remote downloads.
+  hold = inhibitor_->Acquire(Activity::RemoteTransfer);
+  hold.reset();
+  EXPECT_EQ("Inhibit Awake", Calls());
+
+  QTest::qWait(200);
+  EXPECT_EQ("Inhibit Awake, Uninhibit Awake", Calls());
+}
+
+TEST_F(SleepInhibitorTest, DisplayGoesStraightAway) {
+  inhibitor_->SetGraceMsec(60000);
+  std::unique_ptr<SleepInhibitor::Hold> hold =
+      inhibitor_->Acquire(Activity::FullScreenVisualizations);
+  hold.reset();
+  EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
+}
+
+TEST_F(SleepInhibitorTest, AsksAgainWhenTheReasonChanges) {
+  std::unique_ptr<SleepInhibitor::Hold> playback =
+      inhibitor_->Acquire(Activity::LocalPlayback);
+  std::unique_ptr<SleepInhibitor::Hold> transfer =
+      inhibitor_->Acquire(Activity::RemoteTransfer);
+  EXPECT_EQ(
+      "Inhibit Awake (Playing music), Uninhibit Awake, "
+      "Inhibit Awake (Sending songs to a remote)",
+      Calls(/* with_reasons= */ true));
+
+  // Still awake for playback, with its own reason.
+  transfer.reset();
+  EXPECT_EQ(
+      "Inhibit Awake (Playing music), Uninhibit Awake, "
+      "Inhibit Awake (Sending songs to a remote), Uninhibit Awake, "
+      "Inhibit Awake (Playing music)",
+      Calls(/* with_reasons= */ true));
+}
+
+TEST_F(SleepInhibitorTest, WhileOpenIsOffByDefault) {
+  EXPECT_TRUE(calls_.isEmpty());
+
+  SetEnabled(Activity::WhileOpen, true);
+  inhibitor_->ReloadSettings();
+  EXPECT_EQ("Inhibit Awake", Calls());
+}
+
+TEST_F(SleepInhibitorTest, WhileOpenFromTheStart) {
+  SetEnabled(Activity::WhileOpen, true);
+  inhibitor_.reset();
+  calls_.clear();
+
+  CreateInhibitor();
+  EXPECT_EQ("Inhibit Awake", Calls());
+}
+
+TEST_F(SleepInhibitorTest, OtherDeviceCanBeTurnedOffAlone) {
+  SetEnabled(Activity::PlaybackOnOtherDevice, false);
+  inhibitor_->ReloadSettings();
+
+  std::unique_ptr<SleepInhibitor::Hold> other =
+      inhibitor_->Acquire(Activity::PlaybackOnOtherDevice);
+  EXPECT_TRUE(calls_.isEmpty());
+  std::unique_ptr<SleepInhibitor::Hold> local =
+      inhibitor_->Acquire(Activity::LocalPlayback);
+  EXPECT_EQ("Inhibit Awake", Calls());
 }
 
 }  // namespace

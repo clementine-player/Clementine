@@ -68,6 +68,7 @@ Player::Player(Application* app, QObject* parent)
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),
+      sleep_hold_activity_(SleepInhibitor::Activity::LocalPlayback),
       volume_before_mute_(50),
       last_pressed_previous_(QDateTime::currentDateTime()),
       menu_previousmode_(PreviousBehaviour_DontRestart),
@@ -121,6 +122,10 @@ void Player::Init() {
           SLOT(SetVolume(int)));
   connect(engine_.get(), SIGNAL(MetaData(Engine::SimpleMetaBundle)),
           SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
+  if (EngineRouter* router = qobject_cast<EngineRouter*>(engine_.get())) {
+    // Moving to another output can change which setting applies.
+    connect(router, SIGNAL(OutputsChanged()), SLOT(UpdateSleepHold()));
+  }
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());
 
@@ -462,6 +467,25 @@ void Player::EngineStateChanged(Engine::State state) {
       break;
   }
   last_state_ = state;
+  UpdateSleepHold();
+}
+
+void Player::UpdateSleepHold() {
+  if (last_state_ != Engine::Playing) {
+    sleep_hold_.reset();
+    return;
+  }
+
+  EngineRouter* router = qobject_cast<EngineRouter*>(engine_.get());
+  const SleepInhibitor::Activity activity =
+      router && !router->is_local()
+          ? SleepInhibitor::Activity::PlaybackOnOtherDevice
+          : SleepInhibitor::Activity::LocalPlayback;
+  if (sleep_hold_ && sleep_hold_activity_ == activity) return;
+
+  // The new hold is taken before the old one goes, so there's no gap.
+  sleep_hold_ = app_->sleep_inhibitor()->Acquire(activity);
+  sleep_hold_activity_ = activity;
 }
 
 void Player::SetVolume(int value) {

@@ -33,6 +33,7 @@
 #include <memory>
 
 #include "config.h"
+#include "core/sleepinhibitor.h"
 #include "core/song.h"
 #include "core/urlhandler.h"
 #include "covers/albumcoverloader.h"
@@ -203,6 +204,9 @@ class Player : public PlayerInterface {
   void UrlHandlerDestroyed(QObject* object);
   void HandleLoadResult(const UrlHandler::LoadResult& result);
 
+  // Keeps the computer awake while playing, for whichever output's playing.
+  void UpdateSleepHold();
+
  private:
   // Returns true if we were supposed to stop after this track.
   bool HandleStopAfter();
@@ -220,6 +224,9 @@ class Player : public PlayerInterface {
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
   int nb_errors_received_;
+
+  std::unique_ptr<SleepInhibitor::Hold> sleep_hold_;
+  SleepInhibitor::Activity sleep_hold_activity_;
 
   QMap<QString, UrlHandler*> url_handlers_;
 

@@ -43,6 +43,10 @@ const char* kScreenSaverService = "org.freedesktop.ScreenSaver";
 const char* kScreenSaverPath = "/org/freedesktop/ScreenSaver";
 const char* kScreenSaverInterface = "org.freedesktop.ScreenSaver";
 
+const char* kLogindService = "org.freedesktop.login1";
+const char* kLogindPath = "/org/freedesktop/login1";
+const char* kLogindInterface = "org.freedesktop.login1.Manager";
+
 }  // namespace
 
 DBusSleepInhibitor::DBusSleepInhibitor() {}
@@ -98,7 +102,7 @@ void DBusSleepInhibitor::RequestFromPortal(SleepInhibitor::Keep keep) {
               if (keep == SleepInhibitor::Keep::DisplayOn) {
                 RequestFromScreenSaver(keep);
               } else {
-                Refused(keep, reply.error());
+                RequestFromLogind(keep);
               }
               return;
             }
@@ -127,6 +131,31 @@ void DBusSleepInhibitor::RequestFromScreenSaver(SleepInhibitor::Keep keep) {
             Inhibition* inhibition = &inhibitions_[keep];
             inhibition->via = Inhibition::Via::ScreenSaver;
             inhibition->screensaver_cookie = reply.value();
+            Granted(keep);
+          });
+}
+
+void DBusSleepInhibitor::RequestFromLogind(SleepInhibitor::Keep keep) {
+  // An idle inhibitor stops the computer suspending by itself, but not when
+  // the user asks: "sleep" would stop that too.
+  QDBusMessage message = QDBusMessage::createMethodCall(
+      kLogindService, kLogindPath, kLogindInterface, "Inhibit");
+  message << QString("idle") << QCoreApplication::applicationName()
+          << inhibitions_[keep].reason << QString("block");
+
+  QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(
+      QDBusConnection::systemBus().asyncCall(message), this);
+  connect(watcher, &QDBusPendingCallWatcher::finished, this,
+          [this, keep](QDBusPendingCallWatcher* watcher) {
+            watcher->deleteLater();
+            QDBusPendingReply<QDBusUnixFileDescriptor> reply = *watcher;
+            if (reply.isError()) {
+              Refused(keep, reply.error());
+              return;
+            }
+            Inhibition* inhibition = &inhibitions_[keep];
+            inhibition->via = Inhibition::Via::Logind;
+            inhibition->logind_fd = reply.value();
             Granted(keep);
           });
 }
@@ -163,6 +192,10 @@ void DBusSleepInhibitor::Release(SleepInhibitor::Keep keep) {
                                          kScreenSaverInterface, "UnInhibit");
       message << inhibition->screensaver_cookie;
       break;
+    case Inhibition::Via::Logind:
+      // Closing the descriptor lets go.
+      inhibition->logind_fd = QDBusUnixFileDescriptor();
+      return;
   }
   QDBusConnection::sessionBus().send(message);
 }

@@ -32,9 +32,22 @@ class SleepInhibitor : public QObject {
 
  public:
   static const char* kSettingsGroup;
+  // How long the computer stays awake for an activity after its last hold
+  // goes, unless that was keeping the display on.
+  static const int kDefaultGraceMsec;
 
   // What Clementine is doing that the computer should stay awake for.
   enum class Activity {
+    // Held all the time, so the computer never sleeps while Clementine's
+    // open. Off unless the user turns it on.
+    WhileOpen,
+    // Playing through this computer's own output.
+    LocalPlayback,
+    // Playing on a phone, Chromecast or UPnP renderer, which gets the music
+    // from this computer.
+    PlaybackOnOtherDevice,
+    // A remote downloading songs, for syncing or otherwise.
+    RemoteTransfer,
     FullScreenVisualizations,
   };
 
@@ -84,7 +97,11 @@ class SleepInhibitor : public QObject {
   // Can be called on any thread.
   std::unique_ptr<Hold> Acquire(Activity activity);
 
+  // For tests.
+  void SetGraceMsec(int msec) { grace_msec_ = msec; }
+
   static Keep KeepFor(Activity activity);
+  static bool EnabledByDefault(Activity activity);
   static QString SettingsKey(Activity activity);
   static QString Reason(Activity activity);
 
@@ -101,9 +118,11 @@ class SleepInhibitor : public QObject {
   static std::unique_ptr<Backend> CreatePlatformBackend();
 
   std::unique_ptr<Backend> backend_;
+  int grace_msec_;
   QMap<Activity, int> holds_;
   QMap<Activity, bool> enabled_;
-  QMap<Keep, bool> inhibited_;
+  // Why each Keep the backend's been asked for was asked for.
+  QMap<Keep, QString> inhibited_;
 };
 
 #endif  // CORE_SLEEPINHIBITOR_H_
