@@ -399,6 +399,7 @@ int main(int argc, char* argv[]) {
     logging::SetLevels(options.log_levels());
     NetworkRemote::SetRemoteName(options.remote_name());
     RendererRegistry::SetUpnpEnabled(options.upnp());
+    RendererRegistry::SetAirPlayEnabled(options.airplay());
     NetworkRemote::SetMediaSyncEnabled(options.media_sync());
 
     if (a.isRunning()) {
