@@ -2173,7 +2173,7 @@ void MainWindow::AddFile() {
   // Convert to URLs
   QList<QUrl> urls;
   for (const QString& path : file_names) {
-    urls << QUrl::fromLocalFile(QFileInfo(path).canonicalFilePath());
+    urls << QUrl::fromLocalFile(QFileInfo(path).absoluteFilePath());
   }
 
   MimeData* data = new MimeData;
@@ -2197,7 +2197,7 @@ void MainWindow::AddFolder() {
   // Add media
   MimeData* data = new MimeData;
   data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(
-                    QFileInfo(directory).canonicalFilePath()));
+                    QFileInfo(directory).absoluteFilePath()));
   AddToPlaylist(data);
 }
 
