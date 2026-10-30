@@ -35,6 +35,20 @@ const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 const char* Library::kFtsTable = "songs_fts";
 
+namespace {
+
+// Songs added to the library in the last |days| days: a window that moves on,
+// so old songs leave it.
+smart_playlists::SearchTerm AddedInTheLast(int days) {
+  smart_playlists::SearchTerm term(
+      smart_playlists::SearchTerm::Field_DateCreated,
+      smart_playlists::SearchTerm::Op_NumericDate, days);
+  term.date_ = smart_playlists::SearchTerm::Date_Day;
+  return term;
+}
+
+}  // namespace
+
 Library::Library(Application* app, QObject* parent)
     : QObject(parent),
       app_(app),
@@ -115,7 +129,12 @@ Library::Library(Application* app, QObject* parent)
               QT_TRANSLATE_NOOP("Library", "Dynamic random mix"),
               Search(Search::Type_All, Search::TermList(), Search::Sort_Random,
                      SearchTerm::Field_Title),
-              true))));
+              true)))
+      << (LibraryModel::GeneratorList() << GeneratorPtr(new QueryGenerator(
+              QT_TRANSLATE_NOOP("Library", "Added in the last 30 days"),
+              Search(Search::Type_And, Search::TermList() << AddedInTheLast(30),
+                     Search::Sort_FieldDesc, SearchTerm::Field_DateCreated,
+                     -1)))));
 
   // full rescan revisions
   full_rescan_revisions_[26] = tr("CUE sheet support");
