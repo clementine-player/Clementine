@@ -63,8 +63,7 @@ class SeafileTree : public QObject {
     bool is_library() const;
 
     Entry& operator=(const Entry& entry);
-    bool operator==(const Entry& a) const;
-    bool operator!=(const Entry& a) const;
+    bool operator==(const Entry& a) const = default;
 
     QString ToString() const;
 

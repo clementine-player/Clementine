@@ -82,8 +82,8 @@ struct TakesFutureResult<void, Func, BoundArgs...>
 }  // namespace _detail
 
 template <typename Sender, typename SignalOwner, typename... SignalArgs,
-          typename Receiver, typename Slot, typename... BoundArgs,
-          typename = std::enable_if_t<std::is_member_function_pointer_v<Slot>>>
+          typename Receiver, typename Slot, typename... BoundArgs>
+  requires std::is_member_function_pointer_v<Slot>
 QMetaObject::Connection NewClosure(Sender* sender,
                                    void (SignalOwner::*signal)(SignalArgs...),
                                    Receiver* receiver, Slot slot,
@@ -104,9 +104,8 @@ QMetaObject::Connection NewClosure(Sender* sender,
 // thread it runs on and how long the connection lives, so pass the object
 // whose lifetime the callable depends on.
 template <typename Sender, typename SignalOwner, typename... SignalArgs,
-          typename Func, typename... BoundArgs,
-          typename = std::enable_if_t<
-              !std::is_member_function_pointer_v<std::decay_t<Func>>>>
+          typename Func, typename... BoundArgs>
+  requires(!std::is_member_function_pointer_v<std::decay_t<Func>>)
 QMetaObject::Connection NewClosure(Sender* sender,
                                    void (SignalOwner::*signal)(SignalArgs...),
                                    QObject* context, Func func,
@@ -133,8 +132,8 @@ QMetaObject::Connection NewClosure(Sender* sender,
 // bound arguments. To reach the future itself - to check whether it was
 // cancelled, or to read more than its first result - use the callable
 // overload and capture it in a lambda.
-template <typename T, typename Receiver, typename Slot, typename... BoundArgs,
-          typename = std::enable_if_t<std::is_member_function_pointer_v<Slot>>>
+template <typename T, typename Receiver, typename Slot, typename... BoundArgs>
+  requires std::is_member_function_pointer_v<Slot>
 QMetaObject::Connection NewClosure(QFuture<T> future, Receiver* receiver,
                                    Slot slot, BoundArgs... bound) {
   if constexpr (std::is_void_v<T>) {
@@ -165,9 +164,8 @@ QMetaObject::Connection NewClosure(QFuture<T> future, Receiver* receiver,
   return connection;
 }
 
-template <typename T, typename Func, typename... BoundArgs,
-          typename = std::enable_if_t<
-              _detail::TakesFutureResult<T, Func, BoundArgs...>::value>>
+template <typename T, typename Func, typename... BoundArgs>
+  requires _detail::TakesFutureResult<T, Func, BoundArgs...>::value
 QMetaObject::Connection NewClosure(QFuture<T> future, QObject* context,
                                    Func func, BoundArgs... bound) {
   QFutureWatcher<T>* watcher = new QFutureWatcher<T>;

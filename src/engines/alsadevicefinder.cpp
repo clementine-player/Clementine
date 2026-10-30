@@ -23,9 +23,9 @@
 #include <stdio.h>
 
 #include <QList>
+#include <QScopeGuard>
 #include <QString>
 #include <QVariant>
-#include <boost/scope_exit.hpp>
 
 #include "devicefinder.h"
 
@@ -57,8 +57,7 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
                   << snd_strerror(result);
       continue;
     }
-    BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
-    BOOST_SCOPE_EXIT_END
+    auto close_handle = qScopeGuard([handle] { snd_ctl_close(handle); });
 
     result = snd_ctl_card_info(handle, cardinfo);
     if (result < 0) {

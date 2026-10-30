@@ -41,8 +41,7 @@ class Equalizer : public QDialog {
     Params(int g0, int g1, int g2, int g3, int g4, int g5, int g6, int g7,
            int g8, int g9, int pre = 0);
 
-    bool operator==(const Params& other) const;
-    bool operator!=(const Params& other) const;
+    bool operator==(const Params& other) const = default;
 
     int preamp;
     int gain[kBands];
