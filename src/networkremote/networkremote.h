@@ -15,6 +15,7 @@ class Application;
 class AuthAttemptLimiter;
 class IncomingDataParser;
 class InternetBrowser;
+class RemoteSmartPlaylists;
 class MediaSync;
 class MediaHttpServer;
 class OutgoingDataCreator;
@@ -120,6 +121,9 @@ class NetworkRemote : public QObject {
   void Listen();
 
  private:
+  // Lists and plays the library's smart playlists for remotes.
+  void SetupSmartPlaylists();
+
   // One per address listened on since the server started. Ones for
   // addresses that have gone are closed rather than deleted, since the
   // sockets they accepted are their children.
@@ -140,6 +144,8 @@ class NetworkRemote : public QObject {
   RendererRegistry* renderer_registry_;
   // Lives on the main thread with the Internet sidebar's model.
   InternetBrowser* internet_browser_;
+  // Lives on the main thread with the library model.
+  RemoteSmartPlaylists* smart_playlists_;
   // With --media-sync. Lives on the main thread, where open playlists are.
   MediaSync* media_sync_;
   // While the server runs, for Cast devices and renderers to fetch media.

@@ -235,6 +235,14 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
       break;
     }
 
+    case cpb::remote::REQUEST_SMART_PLAYLISTS:
+    case cpb::remote::REQUEST_SMART_PLAYLIST_ADD: {
+      const std::string data = msg.SerializeAsString();
+      emit SmartPlaylistMessage(client->id(),
+                                QByteArray(data.data(), data.size()));
+      break;
+    }
+
     case cpb::remote::REQUEST_SYNC_SOURCES:
     case cpb::remote::REQUEST_SYNC_MANIFEST:
       if (NetworkRemote::MediaSyncEnabled()) {

@@ -254,6 +254,7 @@ set(SOURCES
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/remotesmartplaylists.cpp
   networkremote/songsender.cpp
   networkremote/streaming/directresponder.cpp
   networkremote/streaming/mediahttpserver.cpp
@@ -609,6 +610,7 @@ set(HEADERS
   networkremote/internetbrowser.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
+  networkremote/remotesmartplaylists.h
   networkremote/songsender.h
   networkremote/streaming/directresponder.h
   networkremote/streaming/mediahttpserver.h
