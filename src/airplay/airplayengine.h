@@ -75,12 +75,21 @@ class AirPlayEngine : public GstEngine {
   void SessionReady();
   void SessionFailed(const QString& error);
   void SessionNotAllowed(const QString& message);
+  void PasswordNeeded(bool wrong);
+  void PinShown();
+  void PairedPersistently(const QByteArray& receiver_pairing_id,
+                          const QByteArray& receiver_public_key);
+  void PairingForgotten();
   void StreamFlushed();
 
  private:
   class Target;
 
   QString SinkDevice() const;
+  // Opens the session with what's kept in the settings for this receiver.
+  void OpenSession();
+  // Where this receiver's password and pairing are kept.
+  QString SettingsGroup() const;
 
   AirPlayDevice device_;
   AirPlaySession* session_;
@@ -90,6 +99,8 @@ class AirPlayEngine : public GstEngine {
   // Which pipelines' sinks may write to the session: those made since the
   // last manual track change, which a sink names in its device property.
   int generation_;
+  // Whether pairing again was tried after the receiver forgot this sender.
+  bool repaired_;
 };
 
 #endif  // AIRPLAY_AIRPLAYENGINE_H_

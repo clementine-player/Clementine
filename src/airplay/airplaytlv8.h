@@ -31,12 +31,15 @@ namespace tlv8 {
 // specification's kTLVType values).
 enum Type : quint8 {
   kMethod = 0x00,
+  kIdentifier = 0x01,
   kSalt = 0x02,
   kPublicKey = 0x03,
   kProof = 0x04,
+  kEncryptedData = 0x05,
   kSeqNo = 0x06,
   kError = 0x07,
   kRetryDelay = 0x08,
+  kSignature = 0x0A,
   kFlags = 0x13,
 };
 

@@ -338,6 +338,9 @@ struct Result {
   QString error;
   // Why the receiver's user didn't allow it.
   QString not_allowed;
+  // Whether it wants a password, and whether the one given was wrong.
+  bool password_needed = false;
+  bool password_wrong = false;
   qint64 msec = 0;
 };
 
@@ -347,11 +350,13 @@ Result Open(AirPlaySession* session, const AirPlayDevice& device) {
   QSignalSpy set_up(session, &AirPlaySession::SetUp);
   QSignalSpy failed(session, &AirPlaySession::Failed);
   QSignalSpy not_allowed(session, &AirPlaySession::NotAllowed);
+  QSignalSpy password(session, &AirPlaySession::PasswordNeeded);
+  QSignalSpy forgotten(session, &AirPlaySession::PairingForgotten);
   QElapsedTimer timer;
   timer.start();
   session->Open(device);
   while (set_up.isEmpty() && failed.isEmpty() && not_allowed.isEmpty() &&
-         timer.elapsed() < 10000) {
+         password.isEmpty() && forgotten.isEmpty() && timer.elapsed() < 10000) {
     set_up.wait(50);
   }
   Result result;
@@ -360,6 +365,10 @@ Result Open(AirPlaySession* session, const AirPlayDevice& device) {
   if (!failed.isEmpty()) result.error = failed.first().first().toString();
   if (!not_allowed.isEmpty()) {
     result.not_allowed = not_allowed.first().first().toString();
+  }
+  result.password_needed = !password.isEmpty();
+  if (result.password_needed) {
+    result.password_wrong = password.first().first().toBool();
   }
   result.msec = timer.elapsed();
   return result;
@@ -476,12 +485,11 @@ TEST(AirPlaySessionTest, SaysAPairingRefusalMayMeanAPassword) {
   receiver.SetPassword("foobar");
   receiver.set_report_password(false);
 
+  // So the refusal asks for one.
   const Result result = Pair(receiver.device(), FastOptions());
   EXPECT_FALSE(result.paired);
-  EXPECT_EQ(
-      "Fake refused to pair. It may want a password, which Clementine can't "
-      "use yet.",
-      result.error);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_FALSE(result.password_wrong);
 }
 
 TEST(AirPlaySessionTest, SaysItsWaitingForTheReceiversUser) {
@@ -559,16 +567,41 @@ TEST(AirPlaySessionTest, UnansweredPromptTimesOut) {
 
 // Passwords aren't supported yet, and a receiver that wants one says so
 // before pairing.
-TEST(AirPlaySessionTest, StopsBeforePairingWithAReceiverThatWantsAPassword) {
+TEST(AirPlaySessionTest, AsksForAPasswordBeforePairing) {
   FakeAirPlayReceiver receiver;
   ASSERT_TRUE(receiver.Listen());
   receiver.SetPassword("foobar");
 
   const Result result = Pair(receiver.device(), FastOptions());
-  EXPECT_FALSE(result.paired);
-  EXPECT_EQ("Fake requires a password, which Clementine can't use yet",
-            result.error);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_FALSE(result.password_wrong);
   EXPECT_EQ(QStringList({"GET /info"}), receiver.requests());
+}
+
+// The password is transient pairing's PIN.
+TEST(AirPlaySessionTest, PairsWithAPassword) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.SetPassword("foobar");
+
+  AirPlaySession::Options options = FastOptions();
+  options.password = "foobar";
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+}
+
+TEST(AirPlaySessionTest, SaysWhenThePasswordIsWrong) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.SetPassword("foobar");
+
+  AirPlaySession::Options options = FastOptions();
+  options.password = "wrong";
+  const Result result = Pair(receiver.device(), options);
+  EXPECT_FALSE(result.paired);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_TRUE(result.password_wrong);
 }
 
 // TEST-NET-1 (RFC 5737) never answers.
@@ -753,6 +786,130 @@ TEST(AirPlaySessionTest, PlaysOnInTimeAfterAGap) {
   WaitFor([&receiver]() { return receiver.audio_packets() >= 8; });
   EXPECT_EQ(0, receiver.late_packets());
   EXPECT_EQ(tone + tone, receiver.audio());
+}
+
+// RFC 8032 section 7.1, test 1.
+TEST(AirPlayTest, Ed25519) {
+  const QByteArray seed = QByteArray::fromHex(
+      "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60");
+  const QByteArray public_key = Ed25519PublicKey(seed);
+  EXPECT_EQ(
+      QByteArray(
+          "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"),
+      public_key.toHex());
+  const QByteArray signature = Ed25519Sign(seed, QByteArray());
+  EXPECT_EQ(
+      QByteArray(
+          "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8"
+          "821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"),
+      signature.toHex());
+  EXPECT_TRUE(Ed25519Verify(public_key, signature, QByteArray()));
+  EXPECT_FALSE(Ed25519Verify(public_key, signature, "x"));
+}
+
+// RFC 7748 section 6.1.
+TEST(AirPlayTest, X25519) {
+  const QByteArray alice = QByteArray::fromHex(
+      "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a");
+  const QByteArray bob = QByteArray::fromHex(
+      "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb");
+  EXPECT_EQ(
+      QByteArray(
+          "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a"),
+      X25519PublicKey(alice).toHex());
+  EXPECT_EQ(
+      QByteArray(
+          "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742"),
+      X25519Shared(alice, X25519PublicKey(bob)).toHex());
+}
+
+AirPlaySession::Options PersistentOptions() {
+  AirPlaySession::Options options = FastOptions();
+  options.sender_id = "02:11:22:33:44:55";
+  options.identity_seed = QByteArray(32, '\x07');
+  return options;
+}
+
+// Pairing with long-term keys the first time, then pair-verify.
+TEST(AirPlaySessionTest, PairsPersistentlyThenVerifies) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession::Options options = PersistentOptions();
+  QByteArray receiver_id;
+  QByteArray receiver_key;
+  {
+    AirPlaySession session(options);
+    QObject::connect(&session, &AirPlaySession::PairedPersistently,
+                     [&](const QByteArray& id, const QByteArray& key) {
+                       receiver_id = id;
+                       receiver_key = key;
+                     });
+    EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  }
+  EXPECT_EQ(FakeAirPlayReceiver::PairingId(), receiver_id);
+  EXPECT_EQ(FakeAirPlayReceiver::PublicKey(), receiver_key);
+  EXPECT_EQ(Ed25519PublicKey(options.identity_seed),
+            receiver.senders().value("02:11:22:33:44:55"));
+
+  options.receiver_pairing_id = receiver_id;
+  options.receiver_public_key = receiver_key;
+  AirPlaySession session(options);
+  const int requests = receiver.requests().size();
+  EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  const QStringList second = receiver.requests().mid(requests);
+  EXPECT_EQ(QStringList({"GET /info", "POST /pair-verify", "POST /pair-verify",
+                         "SETUP"}),
+            second.mid(0, 4));
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, SaysWhenTheReceiverForgotThePairing) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession::Options options = PersistentOptions();
+  options.receiver_pairing_id = FakeAirPlayReceiver::PairingId();
+  options.receiver_public_key = FakeAirPlayReceiver::PublicKey();
+  AirPlaySession session(options);
+  QSignalSpy forgotten(&session, &AirPlaySession::PairingForgotten);
+  EXPECT_FALSE(Open(&session, receiver.device()).set_up);
+  EXPECT_EQ(1, forgotten.count());
+}
+
+// An Apple TV shows a PIN, which the user types in.
+TEST(AirPlaySessionTest, PairsWithAPinTheReceiverShows) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.set_pin("4821");
+
+  AirPlaySession::Options options = PersistentOptions();
+  options.show_pin = true;
+  AirPlaySession session(options);
+  QObject::connect(&session, &AirPlaySession::PinShown,
+                   [&session]() { session.SubmitPin("4821"); });
+  EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  EXPECT_EQ(QStringList(), receiver.errors());
+  EXPECT_TRUE(receiver.senders().contains("02:11:22:33:44:55"));
+}
+
+TEST(AirPlaySessionTest, SaysWhenThePinIsWrong) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.set_pin("4821");
+
+  AirPlaySession::Options options = PersistentOptions();
+  options.show_pin = true;
+  AirPlaySession session(options);
+  QObject::connect(&session, &AirPlaySession::PinShown,
+                   [&session]() { session.SubmitPin("1111"); });
+  const Result result = Open(&session, receiver.device());
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_TRUE(result.password_wrong);
 }
 
 }  // namespace

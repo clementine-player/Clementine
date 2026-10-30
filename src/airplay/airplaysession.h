@@ -24,6 +24,7 @@
 
 #include "airplaycrypto.h"
 #include "airplaydevice.h"
+#include "airplayrtspconnection.h"
 #include "airplaytlv8.h"
 
 class AirPlayRtspConnection;
@@ -62,6 +63,19 @@ class AirPlaySession : public QObject {
     // which senders its user allowed by this and the name, so it should stay
     // the same: see SavedSenderId(). Empty for a new one each time.
     QString sender_id;
+    // The receiver's password, which is the PIN of transient pairing, or
+    // empty for the fixed PIN 3939.
+    QString password;
+    // For pairing that the receiver remembers, with long-term keys: this
+    // sender's Ed25519 seed, or empty for transient pairing every time. And
+    // what was learned of the receiver by pairing before, if anything: its
+    // pairing id and Ed25519 public key, to pair-verify with.
+    QByteArray identity_seed;
+    QByteArray receiver_pairing_id;
+    QByteArray receiver_public_key;
+    // Whether to ask the receiver to show a PIN, which SubmitPin() then
+    // pairs with: an Apple TV needs one.
+    bool show_pin;
     // How long to wait: for the connection, for each response, and for the
     // first SETUP, which waits for the receiver's user to allow this sender.
     int connect_timeout_msec;
@@ -78,12 +92,18 @@ class AirPlaySession : public QObject {
   static QString DefaultName();
   // A random sender id, made the first time and kept in the settings.
   static QString SavedSenderId();
+  // This sender's long-term Ed25519 seed, likewise.
+  static QByteArray SavedIdentitySeed();
 
   // Connects to |device|, pairs and sets up the stream. Paired, SetUp and
   // Ready, or Failed follows.
   void Open(const AirPlayDevice& device);
   // Tears the session down, if it was set up.
   void Close();
+  // For the next Open().
+  void set_options(const Options& options) { options_ = options; }
+  // Pairs with the PIN the receiver showed, after PinShown.
+  void SubmitPin(const QString& pin);
 
   bool is_open() const { return state_ != State::Closed; }
   bool is_ready() const { return state_ == State::Ready; }
@@ -101,6 +121,18 @@ class AirPlaySession : public QObject {
 
  signals:
   void Paired();
+  // The receiver wants a password, or the one given was wrong. The session
+  // has closed; open it again with the password.
+  void PasswordNeeded(bool wrong);
+  // The receiver is showing a PIN to pair with: see SubmitPin().
+  void PinShown();
+  // The receiver will remember this sender by these, for pair-verify next
+  // time.
+  void PairedPersistently(const QByteArray& receiver_pairing_id,
+                          const QByteArray& receiver_public_key);
+  // Pair-verify failed: the receiver doesn't remember this sender any more.
+  // The session has closed; forget what was kept and pair again.
+  void PairingForgotten();
   // The receiver is taking a while to answer the first SETUP, probably
   // because it's asking its user whether to allow this sender.
   void WaitingForApproval();
@@ -131,7 +163,19 @@ class AirPlaySession : public QObject {
 
   void GetInfo();
   void Pair();
+  void PairSetup();
   void PairM3(const QByteArray& response);
+  void PairM5(const QByteArray& srp_key);
+  void PairVerify();
+  void PairVerifyM3(const QByteArray& secret, const QByteArray& our_public,
+                    const QByteArray& response);
+  // Encrypts the connection with keys derived from |shared|, then sets up.
+  void PairedWith(const QByteArray& shared);
+  // The PIN pair-setup uses.
+  QString Pin() const;
+  AirPlayRtspConnection::Headers Headers() const;
+  QByteArray PairingId() const;
+  bool persistent() const { return !options_.identity_seed.isEmpty(); }
   void SetupSession();
   void SetupStream();
   void StartStream(quint16 data_port, quint16 control_port);

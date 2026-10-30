@@ -45,10 +45,6 @@ namespace {
 // asked to with /pair-pin-start.
 const char kTransientPin[] = "3939";
 
-// X-Apple-HKP: 4 asks for transient HomeKit pairing, as pyatv sends it.
-const AirPlayRtspConnection::Headers kPairingHeaders = {
-    {"X-Apple-HKP", "4"}, {"Connection", "keep-alive"}};
-
 const char kPlistType[] = "application/x-apple-binary-plist";
 const char kSettingsGroup[] = "AirPlay";
 // How often to try connecting to the event channel, a second apart: a
@@ -63,6 +59,7 @@ const int kApprovalNoticeMsec = 1000;
 
 AirPlaySession::Options::Options()
     : name(DefaultName()),
+      show_pin(false),
       connect_timeout_msec(AirPlayRtspConnection::kConnectTimeoutMsec),
       request_timeout_msec(AirPlayRtspConnection::kTimeoutMsec),
       // A Mac holds the first SETUP until its user answers, which can take
@@ -130,6 +127,17 @@ QString AirPlaySession::SavedSenderId() {
   return id;
 }
 
+QByteArray AirPlaySession::SavedIdentitySeed() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  QByteArray seed = QByteArray::fromHex(s.value("identity_seed").toByteArray());
+  if (seed.size() != 32) {
+    seed = airplay::RandomKey();
+    s.setValue("identity_seed", seed.toHex());
+  }
+  return seed;
+}
+
 QString AirPlaySession::DefaultName() {
   return tr("Clementine on %1").arg(QSysInfo::machineHostName());
 }
@@ -194,9 +202,12 @@ void AirPlaySession::GetInfo() {
                       << map.value("model").toString() << "source version"
                       << map.value("sourceVersion").toString();
           if (map.value("statusFlags").toUInt() &
-              AirPlayDevice::PasswordRequired) {
-            Fail(tr("%1 requires a password, which Clementine can't use yet")
-                     .arg(device_.name));
+                  AirPlayDevice::PasswordRequired &&
+              options_.password.isEmpty() && !persistent()) {
+            qLog(Info) << "AirPlay receiver" << device_.name
+                       << "wants a password";
+            Close();
+            emit PasswordNeeded(false);
             return;
           }
         }
@@ -205,15 +216,65 @@ void AirPlaySession::GetInfo() {
 }
 
 // HomeKit transient pairing: pair-setup M1 to M4 with the fixed PIN.
+QString AirPlaySession::Pin() const {
+  return options_.password.isEmpty() ? kTransientPin : options_.password;
+}
+
+QByteArray AirPlaySession::PairingId() const {
+  return (options_.sender_id.isEmpty() ? QString(connection_->dacp_id())
+                                       : options_.sender_id)
+      .toUtf8();
+}
+
+// X-Apple-HKP says which kind of HomeKit pairing: 4 for transient, 3 for
+// pairing that's remembered, as pyatv sends them.
+AirPlayRtspConnection::Headers AirPlaySession::Headers() const {
+  return {{"X-Apple-HKP", persistent() ? "3" : "4"},
+          {"Connection", "keep-alive"}};
+}
+
 void AirPlaySession::Pair() {
-  using airplay::tlv8::Write;
-  const QByteArray m1 = Write({
-      {airplay::tlv8::kMethod, QByteArray(1, '\0')},
-      {airplay::tlv8::kSeqNo, QByteArray(1, 1)},
-      {airplay::tlv8::kFlags,
-       QByteArray(1, char(airplay::tlv8::kFlagTransient))},
-  });
-  connection_->Post("/pair-setup", kPairingHeaders, m1,
+  if (persistent() && !options_.receiver_public_key.isEmpty()) {
+    PairVerify();
+    return;
+  }
+  if (options_.show_pin) {
+    // The receiver shows a PIN, which its user tells Clementine.
+    connection_->Post(
+        "/pair-pin-start", Headers(), QByteArray(),
+        [this](const AirPlayRtspConnection::Response& r) {
+          if (r.code != 200) {
+            Fail(tr("%1 didn't show a PIN to pair with (HTTP %2)")
+                     .arg(device_.name)
+                     .arg(r.code));
+            return;
+          }
+          emit PinShown();
+        },
+        options_.approval_timeout_msec);
+    return;
+  }
+  PairSetup();
+}
+
+void AirPlaySession::SubmitPin(const QString& pin) {
+  if (state_ != State::Pairing) return;
+  options_.password = pin;
+  PairSetup();
+}
+
+// HomeKit pair-setup M1 to M4, with the fixed PIN, a password or a PIN the
+// receiver showed: transient unless this sender has long-term keys.
+void AirPlaySession::PairSetup() {
+  namespace tlv8 = airplay::tlv8;
+  tlv8::Items m1 = {
+      {tlv8::kMethod, QByteArray(1, '\0')},
+      {tlv8::kSeqNo, QByteArray(1, 1)},
+  };
+  if (!persistent()) {
+    m1.append({tlv8::kFlags, QByteArray(1, char(tlv8::kFlagTransient))});
+  }
+  connection_->Post("/pair-setup", Headers(), tlv8::Write(m1),
                     [this](const AirPlayRtspConnection::Response& r) {
                       if (r.code != 200) {
                         Fail(tr("%1 refused to pair (HTTP %2). Is it set to "
@@ -241,7 +302,7 @@ void AirPlaySession::PairM3(const QByteArray& response) {
   }
 
   const airplay::SrpClient::Result srp =
-      airplay::SrpClient().Process(kTransientPin, salt, b_public);
+      airplay::SrpClient().Process(Pin(), salt, b_public);
   const QByteArray m3 = tlv8::Write({
       {tlv8::kSeqNo, QByteArray(1, 3)},
       {tlv8::kPublicKey, srp.public_key},
@@ -249,25 +310,42 @@ void AirPlaySession::PairM3(const QByteArray& response) {
   });
   const QByteArray key = srp.key;
   connection_->Post(
-      "/pair-setup", kPairingHeaders, m3,
+      "/pair-setup", Headers(), m3,
       [this, key](const AirPlayRtspConnection::Response& r) {
         const tlv8::Items m4 = tlv8::Read(r.body);
+        if (r.code == 200 && tlv8::Get(m4, tlv8::kError) == QByteArray(1, 2)) {
+          // The PIN or password didn't match.
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << "refused the password or PIN";
+          const bool wrong = !options_.password.isEmpty();
+          Close();
+          emit PasswordNeeded(wrong);
+          return;
+        }
         if (r.code != 200 || !tlv8::Get(m4, tlv8::kError).isNull()) {
           Fail(PairingError(r.code, m4));
           return;
         }
-        // The keys of the encrypted connection, as HomeKit derives them.
-        connection_->EnableEncryption(
-            airplay::HkdfSha512("Control-Salt", "Control-Write-Encryption-Key",
-                                key),
-            airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key",
-                                key));
-        qLog(Info) << "Paired with AirPlay receiver" << device_.name;
-        shared_key_ = key;
-        state_ = State::SettingUp;
-        emit Paired();
-        SetupSession();
+        if (persistent()) {
+          PairM5(key);
+        } else {
+          PairedWith(key);
+        }
       });
+}
+
+void AirPlaySession::PairedWith(const QByteArray& shared) {
+  // The keys of the encrypted connection, as HomeKit derives them.
+  connection_->EnableEncryption(
+      airplay::HkdfSha512("Control-Salt", "Control-Write-Encryption-Key",
+                          shared),
+      airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key",
+                          shared));
+  qLog(Info) << "Paired with AirPlay receiver" << device_.name;
+  shared_key_ = shared;
+  state_ = State::SettingUp;
+  emit Paired();
+  SetupSession();
 }
 
 QString AirPlaySession::PairingError(int code,
@@ -277,9 +355,7 @@ QString AirPlaySession::PairingError(int code,
   // HAP's kTLVError values.
   switch (error.isEmpty() ? -1 : quint8(error[0])) {
     case 0x02:  // Authentication: the SRP proof didn't match.
-      return tr("%1 refused to pair. It may want a password, which "
-                "Clementine can't use yet.")
-          .arg(device_.name);
+      return tr("%1 refused to pair").arg(device_.name);
     case 0x03: {  // Backoff
       const QByteArray delay = tlv8::Get(items, tlv8::kRetryDelay);
       return tr("%1 refused to pair after too many attempts. Try again in %2 "
@@ -566,4 +642,129 @@ void AirPlaySession::SendSync() {
 void AirPlaySession::SendFeedback() {
   connection_->Request("POST", "/feedback", {}, QByteArray(), QByteArray(),
                        "RTSP/1.0", nullptr);
+}
+
+// Pair-setup M5 and M6, which exchange long-term keys: this sender signs
+// its pairing id and public key, and the receiver does the same, each
+// encrypted with a key from the SRP exchange (HomeKit Accessory Protocol
+// specification, "Pair Setup").
+void AirPlaySession::PairM5(const QByteArray& srp_key) {
+  namespace tlv8 = airplay::tlv8;
+  const QByteArray encrypt_key = airplay::HkdfSha512(
+      "Pair-Setup-Encrypt-Salt", "Pair-Setup-Encrypt-Info", srp_key);
+  const QByteArray our_public =
+      airplay::Ed25519PublicKey(options_.identity_seed);
+  const QByteArray info =
+      airplay::HkdfSha512("Pair-Setup-Controller-Sign-Salt",
+                          "Pair-Setup-Controller-Sign-Info", srp_key) +
+      PairingId() + our_public;
+  const QByteArray sub = tlv8::Write({
+      {tlv8::kIdentifier, PairingId()},
+      {tlv8::kPublicKey, our_public},
+      {tlv8::kSignature, airplay::Ed25519Sign(options_.identity_seed, info)},
+  });
+  const QByteArray m5 = tlv8::Write({
+      {tlv8::kSeqNo, QByteArray(1, 5)},
+      {tlv8::kEncryptedData,
+       airplay::Seal(encrypt_key, QByteArray(4, '\0') + "PS-Msg05", {}, sub)},
+  });
+  connection_->Post(
+      "/pair-setup", Headers(), m5,
+      [this, srp_key, encrypt_key](const AirPlayRtspConnection::Response& r) {
+        const tlv8::Items m6 = tlv8::Read(r.body);
+        QByteArray plain;
+        if (r.code != 200 || !tlv8::Get(m6, tlv8::kError).isNull() ||
+            !airplay::Open(encrypt_key, QByteArray(4, '\0') + "PS-Msg06", {},
+                           tlv8::Get(m6, tlv8::kEncryptedData), &plain)) {
+          Fail(PairingError(r.code, m6));
+          return;
+        }
+        const tlv8::Items sub = tlv8::Read(plain);
+        const QByteArray id = tlv8::Get(sub, tlv8::kIdentifier);
+        const QByteArray public_key = tlv8::Get(sub, tlv8::kPublicKey);
+        const QByteArray info =
+            airplay::HkdfSha512("Pair-Setup-Accessory-Sign-Salt",
+                                "Pair-Setup-Accessory-Sign-Info", srp_key) +
+            id + public_key;
+        if (!airplay::Ed25519Verify(public_key,
+                                    tlv8::Get(sub, tlv8::kSignature), info)) {
+          Fail(tr("%1 didn't prove who it is").arg(device_.name));
+          return;
+        }
+        qLog(Info) << "AirPlay receiver" << device_.name
+                   << "will remember this sender";
+        options_.receiver_pairing_id = id;
+        options_.receiver_public_key = public_key;
+        emit PairedPersistently(id, public_key);
+        // Long-term keys are then used as on every later connection.
+        PairVerify();
+      });
+}
+
+// Pair-verify: an X25519 exchange, each side signing it with its long-term
+// key, which gives the connection's keys without a PIN (HomeKit Accessory
+// Protocol specification, "Pair Verify").
+void AirPlaySession::PairVerify() {
+  namespace tlv8 = airplay::tlv8;
+  const QByteArray secret = airplay::RandomKey();
+  const QByteArray our_public = airplay::X25519PublicKey(secret);
+  connection_->Post(
+      "/pair-verify", Headers(),
+      tlv8::Write(
+          {{tlv8::kSeqNo, QByteArray(1, 1)}, {tlv8::kPublicKey, our_public}}),
+      [this, secret, our_public](const AirPlayRtspConnection::Response& r) {
+        PairVerifyM3(secret, our_public, r.body);
+      });
+}
+
+void AirPlaySession::PairVerifyM3(const QByteArray& secret,
+                                  const QByteArray& our_public,
+                                  const QByteArray& response) {
+  namespace tlv8 = airplay::tlv8;
+  const tlv8::Items m2 = tlv8::Read(response);
+  const QByteArray their_public = tlv8::Get(m2, tlv8::kPublicKey);
+  const QByteArray shared = airplay::X25519Shared(secret, their_public);
+  const QByteArray key = airplay::HkdfSha512(
+      "Pair-Verify-Encrypt-Salt", "Pair-Verify-Encrypt-Info", shared);
+  QByteArray plain;
+  bool ok = !shared.isEmpty() &&
+            airplay::Open(key, QByteArray(4, '\0') + "PV-Msg02", {},
+                          tlv8::Get(m2, tlv8::kEncryptedData), &plain);
+  if (ok) {
+    const tlv8::Items sub = tlv8::Read(plain);
+    ok = tlv8::Get(sub, tlv8::kIdentifier) == options_.receiver_pairing_id &&
+         airplay::Ed25519Verify(
+             options_.receiver_public_key, tlv8::Get(sub, tlv8::kSignature),
+             their_public + options_.receiver_pairing_id + our_public);
+  }
+  if (!ok) {
+    qLog(Info) << "AirPlay receiver" << device_.name
+               << "doesn't remember this sender";
+    Close();
+    emit PairingForgotten();
+    return;
+  }
+
+  const QByteArray signature = airplay::Ed25519Sign(
+      options_.identity_seed, our_public + PairingId() + their_public);
+  const QByteArray m3 = tlv8::Write({
+      {tlv8::kSeqNo, QByteArray(1, 3)},
+      {tlv8::kEncryptedData,
+       airplay::Seal(key, QByteArray(4, '\0') + "PV-Msg03", {},
+                     tlv8::Write({{tlv8::kIdentifier, PairingId()},
+                                  {tlv8::kSignature, signature}}))},
+  });
+  connection_->Post(
+      "/pair-verify", Headers(), m3,
+      [this, shared](const AirPlayRtspConnection::Response& r) {
+        const tlv8::Items m4 = tlv8::Read(r.body);
+        if (r.code != 200 || !tlv8::Get(m4, tlv8::kError).isNull()) {
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << "refused pair-verify";
+          Close();
+          emit PairingForgotten();
+          return;
+        }
+        PairedWith(shared);
+      });
 }

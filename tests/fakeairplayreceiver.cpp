@@ -17,6 +17,7 @@
 
 #include "fakeairplayreceiver.h"
 
+#include <QMap>
 #include <QNetworkDatagram>
 #include <QRandomGenerator>
 #include <QTcpServer>
@@ -47,6 +48,8 @@ const char kN[] =
     "43DB5BFCE0FD108E4B82D120A93AD2CAFFFFFFFFFFFFFFFF";
 const char kUsername[] = "Pair-Setup";
 const char kTransientPin[] = "3939";
+// Its long-term Ed25519 seed.
+const QByteArray kSeed(32, '\x42');
 // What a Mac reported without a password: 0x4 at first, then 0x84.
 const quint32 kStatusFlags = 0x84;
 
@@ -139,6 +142,7 @@ FakeAirPlayReceiver::FakeAirPlayReceiver()
       event_replies_(0),
       flushes_(0),
       flushed_once_(false),
+      showing_pin_(false),
       flush_seq_(-1),
       have_sync_(false),
       sync_rtptime_(0),
@@ -216,6 +220,8 @@ void FakeAirPlayReceiver::NewConnection() {
   paired_ = false;
   prompting_ = false;
   sender_timing_port_ = 0;
+  showing_pin_ = false;
+  srp_key_.clear();
   flush_seq_ = -1;
   have_sync_ = false;
   last_seq_ = -1;
@@ -298,11 +304,20 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     info["statusFlags"] = status_flags();
     Respond(request, 200, airplay::bplist::Write(info));
   } else if (request.method == "POST" && request.uri == "/pair-pin-start") {
-    // It would show a PIN, which transient pairing doesn't use.
-    errors_ << "pair-pin-start";
+    // Shows a PIN, which transient pairing doesn't use.
+    if (pin_.isEmpty()) errors_ << "pair-pin-start";
+    showing_pin_ = !pin_.isEmpty();
     Respond(request, 200);
   } else if (request.method == "POST" && request.uri == "/pair-setup") {
-    PairSetup(request);
+    const QByteArray seq = airplay::tlv8::Get(airplay::tlv8::Read(request.body),
+                                              airplay::tlv8::kSeqNo);
+    if (seq == QByteArray(1, 5)) {
+      PairSetupM5(request);
+    } else {
+      PairSetup(request);
+    }
+  } else if (request.method == "POST" && request.uri == "/pair-verify") {
+    PairVerify(request);
   } else if (request.method == "SETUP" &&
              request.Header("Content-Type") ==
                  "application/x-apple-binary-plist" &&
@@ -377,8 +392,9 @@ void FakeAirPlayReceiver::PairSetup(const Request& request) {
   BigInt g;
   mpz_set_ui(g.get(), 5);
   const int n_size = n.Bytes().size();
-  const QByteArray pin =
-      password_.isEmpty() ? QByteArray(kTransientPin) : password_.toUtf8();
+  const QByteArray pin = showing_pin_          ? pin_.toUtf8()
+                         : password_.isEmpty() ? QByteArray(kTransientPin)
+                                               : password_.toUtf8();
 
   if (seq == 1) {
     srp_salt_ = RandomBytes(16);
@@ -437,11 +453,21 @@ void FakeAirPlayReceiver::PairSetup(const Request& request) {
   Respond(request, 200,
           tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)},
                        {tlv8::kProof, airplay::Sha512(a.Bytes() + m1 + key)}}));
-  shared_key_ = key;
+  // Pairing that's remembered goes on to exchange long-term keys.
+  if (request.Header("X-Apple-HKP") == "3") {
+    srp_key_ = key;
+    return;
+  }
+  Encrypt(key);
+}
+
+void FakeAirPlayReceiver::Encrypt(const QByteArray& shared) {
+  shared_key_ = shared;
   cipher_.reset(new airplay::FrameCipher(
-      airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key", key),
+      airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key",
+                          shared),
       airplay::HkdfSha512("Control-Salt", "Control-Write-Encryption-Key",
-                          key)));
+                          shared)));
   paired_ = true;
 }
 
@@ -589,4 +615,104 @@ void FakeAirPlayReceiver::EventReadyRead() {
     if (event_buffer_.startsWith("RTSP/1.0 200")) ++event_replies_;
     event_buffer_.remove(0, end + 4);
   }
+}
+
+QByteArray FakeAirPlayReceiver::PublicKey() {
+  return airplay::Ed25519PublicKey(kSeed);
+}
+
+// Pair-setup M5 and M6: the sender's long-term key for this receiver's.
+void FakeAirPlayReceiver::PairSetupM5(const Request& request) {
+  namespace tlv8 = airplay::tlv8;
+  const QByteArray key = airplay::HkdfSha512(
+      "Pair-Setup-Encrypt-Salt", "Pair-Setup-Encrypt-Info", srp_key_);
+  QByteArray plain;
+  if (srp_key_.isEmpty() ||
+      !airplay::Open(key, QByteArray(4, '\0') + "PS-Msg05", {},
+                     tlv8::Get(tlv8::Read(request.body), tlv8::kEncryptedData),
+                     &plain)) {
+    errors_ << "pair-setup M5 didn't decrypt";
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 6)},
+                         {tlv8::kError, QByteArray(1, 2)}}));
+    return;
+  }
+  const tlv8::Items sub = tlv8::Read(plain);
+  const QByteArray id = tlv8::Get(sub, tlv8::kIdentifier);
+  const QByteArray public_key = tlv8::Get(sub, tlv8::kPublicKey);
+  const QByteArray info =
+      airplay::HkdfSha512("Pair-Setup-Controller-Sign-Salt",
+                          "Pair-Setup-Controller-Sign-Info", srp_key_) +
+      id + public_key;
+  if (!airplay::Ed25519Verify(public_key, tlv8::Get(sub, tlv8::kSignature),
+                              info)) {
+    errors_ << "pair-setup M5's signature didn't verify";
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 6)},
+                         {tlv8::kError, QByteArray(1, 2)}}));
+    return;
+  }
+  senders_[id] = public_key;
+
+  const QByteArray our_info =
+      airplay::HkdfSha512("Pair-Setup-Accessory-Sign-Salt",
+                          "Pair-Setup-Accessory-Sign-Info", srp_key_) +
+      PairingId() + PublicKey();
+  const QByteArray reply = tlv8::Write({
+      {tlv8::kIdentifier, PairingId()},
+      {tlv8::kPublicKey, PublicKey()},
+      {tlv8::kSignature, airplay::Ed25519Sign(kSeed, our_info)},
+  });
+  Respond(request, 200,
+          tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 6)},
+                       {tlv8::kEncryptedData,
+                        airplay::Seal(key, QByteArray(4, '\0') + "PS-Msg06", {},
+                                      reply)}}));
+  showing_pin_ = false;
+}
+
+// Pair-verify M1 to M4.
+void FakeAirPlayReceiver::PairVerify(const Request& request) {
+  namespace tlv8 = airplay::tlv8;
+  const tlv8::Items items = tlv8::Read(request.body);
+  if (tlv8::Get(items, tlv8::kSeqNo) == QByteArray(1, 1)) {
+    const QByteArray secret = airplay::RandomKey();
+    verify_our_public_ = airplay::X25519PublicKey(secret);
+    verify_their_public_ = tlv8::Get(items, tlv8::kPublicKey);
+    verify_shared_ = airplay::X25519Shared(secret, verify_their_public_);
+    const QByteArray key = airplay::HkdfSha512(
+        "Pair-Verify-Encrypt-Salt", "Pair-Verify-Encrypt-Info", verify_shared_);
+    const QByteArray signature = airplay::Ed25519Sign(
+        kSeed, verify_our_public_ + PairingId() + verify_their_public_);
+    const QByteArray sub = tlv8::Write(
+        {{tlv8::kIdentifier, PairingId()}, {tlv8::kSignature, signature}});
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 2)},
+                         {tlv8::kPublicKey, verify_our_public_},
+                         {tlv8::kEncryptedData,
+                          airplay::Seal(key, QByteArray(4, '\0') + "PV-Msg02",
+                                        {}, sub)}}));
+    return;
+  }
+
+  const QByteArray key = airplay::HkdfSha512(
+      "Pair-Verify-Encrypt-Salt", "Pair-Verify-Encrypt-Info", verify_shared_);
+  QByteArray plain;
+  bool ok = airplay::Open(key, QByteArray(4, '\0') + "PV-Msg03", {},
+                          tlv8::Get(items, tlv8::kEncryptedData), &plain);
+  if (ok) {
+    const tlv8::Items sub = tlv8::Read(plain);
+    const QByteArray id = tlv8::Get(sub, tlv8::kIdentifier);
+    ok = senders_.contains(id) &&
+         airplay::Ed25519Verify(senders_[id], tlv8::Get(sub, tlv8::kSignature),
+                                verify_their_public_ + id + verify_our_public_);
+  }
+  if (!ok) {
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)},
+                         {tlv8::kError, QByteArray(1, 2)}}));
+    return;
+  }
+  Respond(request, 200, tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)}}));
+  Encrypt(verify_shared_);
 }
