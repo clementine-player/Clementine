@@ -26,6 +26,7 @@
 #include <QtEndian>
 
 #include "airplay/airplayplist.h"
+#include "airplay/airplaystream.h"
 #include "airplay/airplaytlv8.h"
 #include "mini-gmp.h"
 
@@ -87,6 +88,10 @@ QByteArray RandomBytes(int size) {
   return out;
 }
 
+double NtpSeconds(quint64 ntp) {
+  return (ntp >> 32) + (ntp & 0xFFFFFFFF) / 4294967296.0;
+}
+
 QByteArray ReasonPhrase(int code) {
   switch (code) {
     case 200:
@@ -121,7 +126,33 @@ FakeAirPlayReceiver::FakeAirPlayReceiver()
       sender_timing_port_(0),
       timing_requests_(0),
       timing_replies_(0),
-      torn_down_(false) {
+      torn_down_(false),
+      event_server_(new QTcpServer(this)),
+      event_socket_(nullptr),
+      control_(new QUdpSocket(this)),
+      audio_socket_(new QUdpSocket(this)),
+      waiting_for_time_(false),
+      timing_replies_before_setup_(0),
+      setups_after_timing_(0),
+      audio_packets_(0),
+      sync_packets_(0),
+      event_replies_(0),
+      flushes_(0),
+      flushed_once_(false),
+      flush_seq_(-1),
+      have_sync_(false),
+      sync_rtptime_(0),
+      sync_ntp_(0),
+      late_packets_(0),
+      dropped_packets_(0),
+      last_seq_(-1),
+      last_rtptime_(0) {
+  connect(event_server_, &QTcpServer::newConnection, this,
+          [this]() { NewEventConnection(); });
+  connect(control_, &QUdpSocket::readyRead, this,
+          [this]() { ControlReadyRead(); });
+  connect(audio_socket_, &QUdpSocket::readyRead, this,
+          [this]() { AudioReadyRead(); });
   connect(server_, &QTcpServer::newConnection, this,
           [this]() { NewConnection(); });
   connect(timing_, &QUdpSocket::readyRead, this,
@@ -131,8 +162,10 @@ FakeAirPlayReceiver::FakeAirPlayReceiver()
 FakeAirPlayReceiver::~FakeAirPlayReceiver() {}
 
 bool FakeAirPlayReceiver::Listen() {
-  return server_->listen(QHostAddress::LocalHost) &&
-         timing_->bind(QHostAddress::LocalHost);
+  const QHostAddress local = QHostAddress::LocalHost;
+  return server_->listen(local) && timing_->bind(local) &&
+         event_server_->listen(local) && control_->bind(local) &&
+         audio_socket_->bind(local);
 }
 
 AirPlayDevice FakeAirPlayReceiver::device() const {
@@ -183,6 +216,13 @@ void FakeAirPlayReceiver::NewConnection() {
   paired_ = false;
   prompting_ = false;
   sender_timing_port_ = 0;
+  flush_seq_ = -1;
+  have_sync_ = false;
+  last_seq_ = -1;
+  waiting_for_time_ = false;
+  audio_key_.clear();
+  audio_nonces_.clear();
+  flushed_once_ = false;
   connect(client_, &QTcpSocket::readyRead, this, [this]() { ReadyRead(); });
 }
 
@@ -263,6 +303,11 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     Respond(request, 200);
   } else if (request.method == "POST" && request.uri == "/pair-setup") {
     PairSetup(request);
+  } else if (request.method == "SETUP" &&
+             request.Header("Content-Type") ==
+                 "application/x-apple-binary-plist" &&
+             request.body.contains("streams")) {
+    return SetupStream(request);
   } else if (request.method == "SETUP") {
     // Asks for the time straight away, then for its user to allow the
     // sender.
@@ -275,7 +320,31 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     }
     if (!CheckAllowed(request)) return false;
     Respond(request, 200,
-            airplay::bplist::Write(QVariantMap{{"eventPort", 0}}));
+            airplay::bplist::Write(
+                QVariantMap{{"eventPort", event_server_->serverPort()}}));
+  } else if (request.method == "RECORD") {
+    Respond(request, 200);
+    // A Mac sends its senders requests on the event channel.
+    if (event_socket_ && event_cipher_) {
+      event_socket_->write(event_cipher_->Encrypt(
+          "POST /command RTSP/1.0\r\nCSeq: 1\r\nContent-Length: 0\r\n\r\n"));
+    }
+  } else if (request.method == "FLUSH") {
+    if (flushed_once_) ++flushes_;
+    flushed_once_ = true;
+    for (const QByteArray& part : request.Header("RTP-Info").split(';')) {
+      if (part.startsWith("seq=")) flush_seq_ = part.mid(4).toInt();
+    }
+    Respond(request, 200);
+  } else if (request.method == "SET_PARAMETER") {
+    if (request.body.startsWith("volume: ")) {
+      volume_ = request.body.mid(8).trimmed();
+    } else {
+      errors_ << "SET_PARAMETER without a volume";
+    }
+    Respond(request, 200);
+  } else if (request.method == "POST" && request.uri == "/feedback") {
+    Respond(request, 200);
   } else if (request.method == "TEARDOWN") {
     Respond(request, 200);
     torn_down_ = true;
@@ -368,6 +437,7 @@ void FakeAirPlayReceiver::PairSetup(const Request& request) {
   Respond(request, 200,
           tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)},
                        {tlv8::kProof, airplay::Sha512(a.Bytes() + m1 + key)}}));
+  shared_key_ = key;
   cipher_.reset(new airplay::FrameCipher(
       airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key", key),
       airplay::HkdfSha512("Control-Salt", "Control-Write-Encryption-Key",
@@ -392,5 +462,131 @@ void FakeAirPlayReceiver::TimingReadyRead() {
     if (data.size() >= 32 && (quint8(data[1]) & 0x7F) == 0x53) {
       ++timing_replies_;
     }
+  }
+  ProcessRequests();
+}
+
+bool FakeAirPlayReceiver::SetupStream(const Request& request) {
+  QVariant body;
+  airplay::bplist::Read(request.body, &body);
+  const QVariantMap map = body.toMap();
+
+  // The SETUP that starts the stream isn't answered until the sender has
+  // answered a request for the time.
+  if (!waiting_for_time_) {
+    waiting_for_time_ = true;
+    timing_replies_before_setup_ = timing_replies_;
+    SendTimingRequest();
+    return false;
+  }
+  if (timing_replies_ <= timing_replies_before_setup_) return false;
+  waiting_for_time_ = false;
+  ++setups_after_timing_;
+
+  audio_key_ =
+      map.value("streams").toList().value(0).toMap().value("shk").toByteArray();
+  if (audio_key_.size() != 32) errors_ << "shk isn't 32 bytes";
+  for (const char* info :
+       {"Events-Write-Encryption-Key", "Events-Read-Encryption-Key"}) {
+    if (audio_key_ == airplay::HkdfSha512("Events-Salt", info, shared_key_)) {
+      errors_ << QString("shk is the event channel's %1").arg(info);
+    }
+  }
+  const QVariantMap stream{{"type", 0x60},
+                           {"dataPort", audio_socket_->localPort()},
+                           {"controlPort", control_->localPort()}};
+  Respond(
+      request, 200,
+      airplay::bplist::Write(QVariantMap{{"streams", QVariantList{stream}}}));
+  return true;
+}
+
+void FakeAirPlayReceiver::ControlReadyRead() {
+  while (control_->hasPendingDatagrams()) {
+    const QByteArray data = control_->receiveDatagram().data();
+    if (data.size() < 20 || (quint8(data[1]) & 0x7F) != 0x54) continue;
+    ++sync_packets_;
+    // What's playing now, and when that is.
+    sync_rtptime_ = qFromBigEndian<quint32>(data.constData() + 4);
+    sync_ntp_ = qFromBigEndian<quint64>(data.constData() + 8);
+    have_sync_ = true;
+  }
+}
+
+// The payload and its tag, then the last 8 bytes of its nonce.
+void FakeAirPlayReceiver::AudioReadyRead() {
+  while (audio_socket_->hasPendingDatagrams()) {
+    const QByteArray packet = audio_socket_->receiveDatagram().data();
+    if (packet.size() < 12 + 16 + 8) continue;
+    ++audio_packets_;
+    const quint16 seq = qFromBigEndian<quint16>(packet.constData() + 2);
+    // Each packet follows the last, in sequence and in time.
+    const quint32 rtptime = qFromBigEndian<quint32>(packet.constData() + 4);
+    if (last_seq_ >= 0) {
+      if (seq != quint16(last_seq_ + 1)) {
+        errors_ << QString("packet %1 followed %2").arg(seq).arg(last_seq_);
+      }
+      if (qint32(rtptime - last_rtptime_) <= 0) {
+        errors_ << QString("packet %1 went back in time").arg(seq);
+      }
+    }
+    last_seq_ = seq;
+    last_rtptime_ = rtptime;
+    // A packet from before the last FLUSH is dropped, as is one that would
+    // play too late, going by the last sync packet, as a Mac drops them.
+    if (flush_seq_ >= 0 && qint16(seq - quint16(flush_seq_)) < 0) {
+      ++dropped_packets_;
+      continue;
+    }
+    if (have_sync_) {
+      const double plays_at =
+          NtpSeconds(sync_ntp_) + qint32(rtptime - sync_rtptime_) / 44100.0;
+      if (plays_at < NtpSeconds(AirPlayStream::NtpNow())) {
+        ++late_packets_;
+        continue;
+      }
+    }
+    const QByteArray nonce = QByteArray(4, '\0') + packet.right(8);
+    if (audio_nonces_.contains(nonce)) {
+      errors_ << "an audio nonce was used twice";
+    }
+    audio_nonces_ << nonce;
+    QByteArray pcm;
+    if (!airplay::Open(audio_key_, nonce, packet.mid(4, 8),
+                       packet.mid(12, packet.size() - 12 - 8), &pcm)) {
+      errors_ << "an audio packet didn't decrypt";
+      continue;
+    }
+    // L16 is big endian.
+    for (int i = 0; i + 1 < pcm.size(); i += 2) {
+      audio_ += airplay::Bytes(
+          qToLittleEndian(qFromBigEndian<quint16>(pcm.constData() + i)));
+    }
+  }
+}
+
+void FakeAirPlayReceiver::NewEventConnection() {
+  if (event_socket_) event_socket_->deleteLater();
+  event_socket_ = event_server_->nextPendingConnection();
+  event_buffer_.clear();
+  // The sender reads with the Events-Write key, and writes with Events-Read.
+  event_cipher_.reset(new airplay::FrameCipher(
+      airplay::HkdfSha512("Events-Salt", "Events-Write-Encryption-Key",
+                          shared_key_),
+      airplay::HkdfSha512("Events-Salt", "Events-Read-Encryption-Key",
+                          shared_key_)));
+  connect(event_socket_, &QTcpSocket::readyRead, this,
+          [this]() { EventReadyRead(); });
+}
+
+void FakeAirPlayReceiver::EventReadyRead() {
+  if (!event_cipher_->Decrypt(event_socket_->readAll(), &event_buffer_)) {
+    errors_ << "an event reply didn't decrypt";
+    return;
+  }
+  while (event_buffer_.contains("\r\n\r\n")) {
+    const int end = event_buffer_.indexOf("\r\n\r\n");
+    if (event_buffer_.startsWith("RTSP/1.0 200")) ++event_replies_;
+    event_buffer_.remove(0, end + 4);
   }
 }

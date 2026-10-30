@@ -20,11 +20,15 @@
 
 #include <QHostAddress>
 #include <QObject>
+#include <memory>
 
+#include "airplaycrypto.h"
 #include "airplaydevice.h"
 #include "airplaytlv8.h"
 
 class AirPlayRtspConnection;
+class AirPlayStream;
+class QTcpSocket;
 class QTimer;
 class QUdpSocket;
 
@@ -39,9 +43,14 @@ class QUdpSocket;
 // /pair-pin-start isn't sent: it makes a receiver show a PIN to pair with,
 // which transient pairing doesn't use.)
 //
+// Then it sets up a stream of realtime audio: an event channel, which the
+// receiver sends requests on, a second SETUP with the stream's key and
+// control port, RECORD and FLUSH.
+//
 // Receivers ask the sender for the time while setting up, and may not
 // answer SETUP until they've had an answer, so that's answered from the
-// start.
+// start. While streaming, sync packets go every second and POST /feedback
+// every two, which keeps the session alive.
 class AirPlaySession : public QObject {
   Q_OBJECT
 
@@ -70,14 +79,25 @@ class AirPlaySession : public QObject {
   // A random sender id, made the first time and kept in the settings.
   static QString SavedSenderId();
 
-  // Connects to |device|, pairs and sends the first SETUP. Paired, then
-  // SetUp, or Failed follows.
+  // Connects to |device|, pairs and sets up the stream. Paired, SetUp and
+  // Ready, or Failed follows.
   void Open(const AirPlayDevice& device);
   // Tears the session down, if it was set up.
   void Close();
 
   bool is_open() const { return state_ != State::Closed; }
-  bool is_set_up() const { return state_ == State::SetUp; }
+  bool is_ready() const { return state_ == State::Ready; }
+  // Where the audio goes, while ready.
+  AirPlayStream* stream() const { return stream_; }
+
+  // Tells the receiver to drop what it has buffered and play the stream
+  // from where it goes on, after a seek or a pause.
+  void Flush();
+  // The gain to play at, from 0 to 100 percent, as Clementine's engines take
+  // it once its volume slider's curve is applied: so it sounds as loud as
+  // playing locally. AirPlay takes it in dB, from -30 to 0, or -144 for
+  // silence.
+  void SetVolume(int percent);
 
  signals:
   void Paired();
@@ -85,6 +105,13 @@ class AirPlaySession : public QObject {
   // because it's asking its user whether to allow this sender.
   void WaitingForApproval();
   void SetUp();
+  // Audio written to stream() now plays.
+  void Ready();
+  // stream() is about to be deleted, so nothing should write to it.
+  void StreamEnding();
+  // The receiver's user didn't allow this sender, or didn't answer, which
+  // they may yet: a message for the user.
+  void NotAllowed(const QString& message);
   // A message for the user.
   void Failed(const QString& error);
 
@@ -92,14 +119,24 @@ class AirPlaySession : public QObject {
   void Connected();
   void Fail(const QString& error);
   void TimingReadyRead();
+  void SendFeedback();
+  void SendSync();
+  void ConnectEventChannel();
+  void EventConnected();
+  void EventError();
+  void EventReadyRead();
 
  private:
-  enum class State { Closed, Connecting, Pairing, SettingUp, SetUp };
+  enum class State { Closed, Connecting, Pairing, SettingUp, SetUp, Ready };
 
   void GetInfo();
   void Pair();
   void PairM3(const QByteArray& response);
   void SetupSession();
+  void SetupStream();
+  void StartStream(quint16 data_port, quint16 control_port);
+  // False, after failing, unless |code| is 200.
+  bool Check(const QByteArray& what, int code);
   // What a pairing step's error TLV means, for the user.
   QString PairingError(int code, const airplay::tlv8::Items& items) const;
 
@@ -111,6 +148,23 @@ class AirPlaySession : public QObject {
   QUdpSocket* timing_;
   // Notices that the first SETUP is waiting for the receiver's user.
   QTimer* approval_timer_;
+  QByteArray shared_key_;
+
+  // The control channel, where sync packets go from and resend requests
+  // come to.
+  QUdpSocket* control_;
+  QTimer* sync_timer_;
+  QTimer* feedback_timer_;
+
+  QTcpSocket* event_socket_;
+  std::unique_ptr<airplay::FrameCipher> event_cipher_;
+  QByteArray event_buffer_;
+  quint16 event_port_;
+  int event_attempts_;
+
+  QByteArray audio_key_;
+  AirPlayStream* stream_;
+  int volume_;
 };
 
 #endif  // AIRPLAY_AIRPLAYSESSION_H_

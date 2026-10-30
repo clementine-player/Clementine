@@ -254,6 +254,7 @@ bool GstEnginePipeline::InitAudioBin() {
         break;
     }
   }
+  engine_->ConfigureSink(audiosink_);
 
   // Create all the other elements
   GstElement *probe_queue, *probe_converter, *probe_sink, *audio_queue,
