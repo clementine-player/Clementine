@@ -25,7 +25,9 @@
 
 #include "airplaydevice.h"
 
-// Finds AirPlay receivers on the local network by browsing for _airplay._tcp.
+// Finds AirPlay receivers on the local network by browsing for _airplay._tcp,
+// which AirPlay 2 receivers advertise, or _raop._tcp, which every receiver
+// does, AirPlay 1 ones only that.
 //
 // A device is advertised on every interface and address family it's on, so
 // the platform's browser reports each of those as a separate service. This
@@ -35,12 +37,18 @@ class AirPlayDiscovery : public QObject {
   Q_OBJECT
 
  public:
-  static const char* kServiceType;
+  static const char kAirPlayServiceType[];
+  static const char kRaopServiceType[];
 
-  // The discovery for this platform, or nullptr if there isn't one.
-  static AirPlayDiscovery* Create(QObject* parent = nullptr);
+  // The discovery of |service_type| for this platform, or nullptr if there
+  // isn't one.
+  static AirPlayDiscovery* Create(const char* service_type,
+                                  QObject* parent = nullptr);
 
-  explicit AirPlayDiscovery(QObject* parent = nullptr);
+  explicit AirPlayDiscovery(const char* service_type,
+                            QObject* parent = nullptr);
+
+  const char* service_type() const { return service_type_; }
 
   virtual void Start() = 0;
 
@@ -52,6 +60,11 @@ class AirPlayDiscovery : public QObject {
   void DeviceLost(const QString& id);
 
  protected:
+  // Fills in |device| from a service's instance name and TXT record, as
+  // its service type has them. False if it has no device id.
+  bool ParseService(const QString& instance, const QList<QByteArray>& txt,
+                    AirPlayDevice* device) const;
+
   // Subclasses report each advertisement as it comes and goes, then what it
   // resolves to. |service| identifies one advertisement, eg. by interface,
   // protocol and instance name, and is only compared with other values from
@@ -75,6 +88,7 @@ class AirPlayDiscovery : public QObject {
   // was that device's last one.
   void ForgetService(const QString& service);
 
+  const char* const service_type_;
   QSet<QString> live_services_;
   // Service to the id of the device it advertises.
   QMap<QString, QString> service_ids_;

@@ -20,9 +20,10 @@
 #include "core/logging.h"
 #include "networkremote/windowsdnssdbrowser.h"
 
-WindowsAirPlayDiscovery::WindowsAirPlayDiscovery(QObject* parent)
-    : AirPlayDiscovery(parent),
-      browser_(new WindowsDnsSdBrowser(kServiceType, this)) {
+WindowsAirPlayDiscovery::WindowsAirPlayDiscovery(const char* service_type,
+                                                 QObject* parent)
+    : AirPlayDiscovery(service_type, parent),
+      browser_(new WindowsDnsSdBrowser(service_type, this)) {
   connect(browser_, &WindowsDnsSdBrowser::ServiceAdded, this,
           [this](const QString& service) { ServiceAdded(service); });
   connect(browser_, &WindowsDnsSdBrowser::ServiceRemoved, this,
@@ -31,12 +32,13 @@ WindowsAirPlayDiscovery::WindowsAirPlayDiscovery(QObject* parent)
           [this](const QString& service,
                  const WindowsDnsSdBrowser::Service& resolved) {
             AirPlayDevice device;
-            if (!device.ParseTxt(resolved.txt)) {
+            // The instance name, up to the service type.
+            const QString instance =
+                resolved.instance.section(QString(".") + service_type(), 0, 0);
+            if (!ParseService(instance, resolved.txt, &device)) {
               qLog(Debug) << "AirPlay service" << service << "has no device id";
               return;
             }
-            // The instance name, up to the service type, is the receiver's.
-            device.name = resolved.instance.section("._airplay._tcp", 0, 0);
             device.port = resolved.port;
             if (resolved.address.isNull()) {
               ResolveHost(service, device, resolved.host);

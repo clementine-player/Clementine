@@ -35,7 +35,8 @@ class BonjourAirPlayDiscovery : public AirPlayDiscovery {
   Q_OBJECT
 
  public:
-  explicit BonjourAirPlayDiscovery(QObject* parent = nullptr);
+  explicit BonjourAirPlayDiscovery(const char* service_type,
+                                   QObject* parent = nullptr);
   ~BonjourAirPlayDiscovery();
 
   void Start() override;

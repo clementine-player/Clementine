@@ -60,6 +60,7 @@ const int kApprovalNoticeMsec = 1000;
 AirPlaySession::Options::Options()
     : name(DefaultName()),
       show_pin(false),
+      force_airplay1(false),
       connect_timeout_msec(AirPlayRtspConnection::kConnectTimeoutMsec),
       request_timeout_msec(AirPlayRtspConnection::kTimeoutMsec),
       // A Mac holds the first SETUP until its user answers, which can take
@@ -70,6 +71,7 @@ AirPlaySession::Options::Options()
 AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
     : QObject(parent),
       options_(options),
+      airplay1_(false),
       connection_(new AirPlayRtspConnection(this)),
       state_(State::Closed),
       timing_(new QUdpSocket(this)),
@@ -145,8 +147,17 @@ QString AirPlaySession::DefaultName() {
 void AirPlaySession::Open(const AirPlayDevice& device) {
   Close();
   device_ = device;
+  airplay1_ = device.airplay1 || options_.force_airplay1;
   state_ = State::Connecting;
-  qLog(Info) << "Connecting to AirPlay receiver" << device;
+  if (airplay1_ && !device.plain_audio) {
+    Fail(tr("%1 only takes encrypted AirPlay 1 audio, which Clementine "
+            "can't send")
+             .arg(device.name));
+    return;
+  }
+  qLog(Info) << "Connecting to AirPlay receiver" << device
+             << (airplay1_ ? "with AirPlay 1" : "");
+  connection_->set_password(options_.password);
   connection_->Connect(device.address, device.port);
 }
 
@@ -188,7 +199,21 @@ void AirPlaySession::Connected() {
     Fail(tr("Couldn't listen for the AirPlay receiver"));
     return;
   }
-  GetInfo();
+  if (!airplay1_) {
+    GetInfo();
+    return;
+  }
+  // AirPlay 1 receivers say whether they want a password as they're
+  // advertised, and may not have GET /info.
+  if (device_.password_required() && options_.password.isEmpty() &&
+      !persistent()) {
+    qLog(Info) << "AirPlay receiver" << device_.name << "wants a password";
+    Close();
+    emit PasswordNeeded(false);
+    return;
+  }
+  state_ = State::SettingUp;
+  Announce();
 }
 
 void AirPlaySession::GetInfo() {
@@ -345,7 +370,11 @@ void AirPlaySession::PairedWith(const QByteArray& shared) {
   shared_key_ = shared;
   state_ = State::SettingUp;
   emit Paired();
-  SetupSession();
+  if (airplay1_) {
+    Announce();
+  } else {
+    SetupSession();
+  }
 }
 
 QString AirPlaySession::PairingError(int code,
@@ -403,18 +432,7 @@ void AirPlaySession::SetupSession() {
   connection_->Rtsp(
       "SETUP", {}, kPlistType, airplay::bplist::Write(body),
       [this](const AirPlayRtspConnection::Response& r) {
-        // A Mac answers 400 when its user doesn't allow this sender, or
-        // doesn't answer in 15 s.
-        const bool asked = !approval_timer_->isActive();
-        approval_timer_->stop();
-        if (r.code == 400 && asked) {
-          qLog(Info) << "AirPlay receiver" << device_.name
-                     << "didn't allow this sender";
-          Close();
-          emit NotAllowed(tr("%1 didn't allow %2 to play there")
-                              .arg(device_.name, options_.name));
-          return;
-        }
+        if (!CheckAllowed(r.code)) return;
         if (r.code != 200) {
           Fail(tr("%1 refused to set up a session (HTTP %2)")
                    .arg(device_.name)
@@ -467,6 +485,18 @@ void AirPlaySession::TimingReadyRead() {
     timing_->writeDatagram(response, datagram.senderAddress(),
                            datagram.senderPort());
   }
+}
+
+bool AirPlaySession::CheckAllowed(int code) {
+  const bool asked = !approval_timer_->isActive();
+  approval_timer_->stop();
+  if (code != 400 || !asked) return true;
+  qLog(Info) << "AirPlay receiver" << device_.name
+             << "didn't allow this sender";
+  Close();
+  emit NotAllowed(
+      tr("%1 didn't allow %2 to play there").arg(device_.name, options_.name));
+  return false;
 }
 
 bool AirPlaySession::Check(const QByteArray& what, int code) {
@@ -585,28 +615,133 @@ void AirPlaySession::StartStream(quint16 data_port, quint16 control_port) {
   stream_->SendSync();
   sync_timer_->start();
 
+  quint16 seq;
+  quint32 rtptime;
+  stream_->Next(&seq, &rtptime);
+  const AirPlayRtspConnection::Headers start = {
+      {"Range", "npt=0-"},
+      {"RTP-Info",
+       QString("seq=%1;rtptime=%2").arg(seq).arg(rtptime).toUtf8()}};
+  // AirPlay 1 says where the stream starts with RECORD; AirPlay 2 with a
+  // FLUSH after it.
   connection_->Rtsp(
-      "RECORD", {}, QByteArray(), QByteArray(),
-      [this](const AirPlayRtspConnection::Response& r) {
+      "RECORD", airplay1_ ? start : AirPlayRtspConnection::Headers(),
+      QByteArray(), QByteArray(),
+      [this, start](const AirPlayRtspConnection::Response& r) {
         if (!Check("RECORD", r.code)) return;
-        quint16 seq;
-        quint32 rtptime;
-        stream_->Next(&seq, &rtptime);
-        connection_->Rtsp(
-            "FLUSH",
-            {{"Range", "npt=0-"},
-             {"RTP-Info",
-              QString("seq=%1;rtptime=%2").arg(seq).arg(rtptime).toUtf8()}},
-            QByteArray(), QByteArray(),
-            [this](const AirPlayRtspConnection::Response& r) {
-              if (!Check("FLUSH", r.code)) return;
-              state_ = State::Ready;
-              feedback_timer_->start();
-              if (volume_ >= 0) SetVolume(volume_);
-              qLog(Info) << "Streaming to AirPlay receiver" << device_.name;
-              emit Ready();
-            });
+        if (airplay1_) {
+          BecomeReady();
+          return;
+        }
+        connection_->Rtsp("FLUSH", start, QByteArray(), QByteArray(),
+                          [this](const AirPlayRtspConnection::Response& r) {
+                            if (!Check("FLUSH", r.code)) return;
+                            BecomeReady();
+                          });
       });
+}
+
+void AirPlaySession::BecomeReady() {
+  state_ = State::Ready;
+  // AirPlay 1 receivers don't have /feedback.
+  if (!airplay1_) feedback_timer_->start();
+  if (volume_ >= 0) SetVolume(volume_);
+  qLog(Info) << "Streaming to AirPlay receiver" << device_.name;
+  emit Ready();
+}
+
+// AirPlay 1's ANNOUNCE: an SDP saying the audio is ALAC, unencrypted. The
+// fmtp is ALAC's "magic cookie", as AirPort Express senders send it: frame
+// length, compatible version, bit depth, rice history mult, initial history,
+// rice limit, channels, max run, max frame bytes, average bit rate and
+// sample rate.
+void AirPlaySession::Announce() {
+  const QHostAddress local = connection_->local_address();
+  const QString family =
+      local.protocol() == QAbstractSocket::IPv6Protocol ? "IP6" : "IP4";
+  const QString sdp =
+      QString(
+          "v=0\r\n"
+          "o=iTunes %1 0 IN %2 %3\r\n"
+          "s=iTunes\r\n"
+          "c=IN %2 %4\r\n"
+          "t=0 0\r\n"
+          "m=audio 0 RTP/AVP 96\r\n"
+          "a=rtpmap:96 AppleLossless\r\n"
+          "a=fmtp:96 %5 0 16 40 10 14 2 255 0 0 %6\r\n")
+          .arg(connection_->session_id())
+          .arg(family, local.toString(), device_.address.toString())
+          .arg(AirPlayStream::kFramesPerPacket)
+          .arg(AirPlayStream::kSampleRate);
+  approval_timer_->start();
+  connection_->Rtsp(
+      "ANNOUNCE", {}, "application/sdp", sdp.toUtf8(),
+      [this](const AirPlayRtspConnection::Response& r) {
+        if (!CheckAllowed(r.code)) return;
+        if (r.code == 403 && !connection_->encrypted()) {
+          // It wants HomeKit pairing first, as AirPlay 2 receivers do.
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << "wants to pair first";
+          state_ = State::Pairing;
+          Pair();
+          return;
+        }
+        if (r.code == 401) {
+          // The connection sent the password, if there was one.
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << (options_.password.isEmpty() ? "wants a password"
+                                                     : "refused the password");
+          const bool wrong = !options_.password.isEmpty();
+          Close();
+          emit PasswordNeeded(wrong);
+          return;
+        }
+        if (!Check("ANNOUNCE", r.code)) return;
+        SetupAirPlay1();
+      },
+      options_.approval_timeout_msec);
+}
+
+// AirPlay 1's SETUP: where this sender listens for the time and for resend
+// requests, answered with where the audio and sync packets go.
+void AirPlaySession::SetupAirPlay1() {
+  const QByteArray transport =
+      QString(
+          "RTP/AVP/UDP;unicast;interleaved=0-1;mode=record;control_port=%1;"
+          "timing_port=%2")
+          .arg(control_->localPort())
+          .arg(timing_->localPort())
+          .toUtf8();
+  approval_timer_->start();
+  connection_->Rtsp(
+      "SETUP", {{"Transport", transport}}, QByteArray(), QByteArray(),
+      [this](const AirPlayRtspConnection::Response& r) {
+        if (!CheckAllowed(r.code)) return;
+        if (!Check("SETUP", r.code)) return;
+        quint16 data_port = 0;
+        quint16 control_port = 0;
+        for (const QByteArray& part : r.Header("Transport").split(';')) {
+          const int equals = part.indexOf('=');
+          const QByteArray key = part.left(equals);
+          if (key == "server_port") data_port = part.mid(equals + 1).toUInt();
+          if (key == "control_port") {
+            control_port = part.mid(equals + 1).toUInt();
+          }
+        }
+        if (!data_port || !control_port) {
+          Fail(tr("%1 didn't say where to send audio").arg(device_.name));
+          return;
+        }
+        // Eg. "1;timeout=60".
+        connection_->set_session(r.Header("Session").split(';').value(0));
+        qLog(Info) << "Set up a session with AirPlay receiver" << device_.name;
+        state_ = State::SetUp;
+        emit SetUp();
+        // Unencrypted ALAC.
+        audio_key_.clear();
+        StartStream(data_port, control_port);
+      },
+      options_.approval_timeout_msec);
 }
 
 void AirPlaySession::Flush() {

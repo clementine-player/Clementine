@@ -30,22 +30,37 @@
 #include "avahiairplaydiscovery.h"
 #endif
 
-const char* AirPlayDiscovery::kServiceType = "_airplay._tcp";
+const char AirPlayDiscovery::kAirPlayServiceType[] = "_airplay._tcp";
+const char AirPlayDiscovery::kRaopServiceType[] = "_raop._tcp";
 
-AirPlayDiscovery* AirPlayDiscovery::Create(QObject* parent) {
+AirPlayDiscovery* AirPlayDiscovery::Create(const char* service_type,
+                                           QObject* parent) {
 #if defined(Q_OS_DARWIN)
-  return new BonjourAirPlayDiscovery(parent);
+  return new BonjourAirPlayDiscovery(service_type, parent);
 #elif defined(Q_OS_WIN32)
-  return new WindowsAirPlayDiscovery(parent);
+  return new WindowsAirPlayDiscovery(service_type, parent);
 #elif defined(HAVE_DBUS)
-  return new AvahiAirPlayDiscovery(parent);
+  return new AvahiAirPlayDiscovery(service_type, parent);
 #else
+  Q_UNUSED(service_type);
   Q_UNUSED(parent);
   return nullptr;
 #endif
 }
 
-AirPlayDiscovery::AirPlayDiscovery(QObject* parent) : QObject(parent) {}
+AirPlayDiscovery::AirPlayDiscovery(const char* service_type, QObject* parent)
+    : QObject(parent), service_type_(service_type) {}
+
+bool AirPlayDiscovery::ParseService(const QString& instance,
+                                    const QList<QByteArray>& txt,
+                                    AirPlayDevice* device) const {
+  if (qstrcmp(service_type_, kRaopServiceType) == 0) {
+    return device->ParseRaopService(instance, txt);
+  }
+  if (!device->ParseTxt(txt)) return false;
+  device->name = instance;
+  return true;
+}
 
 void AirPlayDiscovery::ServiceAdded(const QString& service) {
   live_services_ << service;

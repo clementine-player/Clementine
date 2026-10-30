@@ -52,6 +52,12 @@ class QUdpSocket;
 // answer SETUP until they've had an answer, so that's answered from the
 // start. While streaming, sync packets go every second and POST /feedback
 // every two, which keeps the session alive.
+//
+// An AirPlay 1 receiver gets RAOP instead: ANNOUNCE with an SDP of ALAC,
+// SETUP with the control and timing ports in a Transport header, and RECORD,
+// with the audio unencrypted. One that refuses ANNOUNCE with 403, as an
+// AirPlay 2 receiver may, gets the same HomeKit pairing first; one that asks
+// for a password with 401, as an AirPort Express does, gets HTTP Digest.
 class AirPlaySession : public QObject {
   Q_OBJECT
 
@@ -76,6 +82,9 @@ class AirPlaySession : public QObject {
     // Whether to ask the receiver to show a PIN, which SubmitPin() then
     // pairs with: an Apple TV needs one.
     bool show_pin;
+    // Whether to play to an AirPlay 2 receiver with AirPlay 1, as to one
+    // that's only AirPlay 1.
+    bool force_airplay1;
     // How long to wait: for the connection, for each response, and for the
     // first SETUP, which waits for the receiver's user to allow this sender.
     int connect_timeout_msec;
@@ -106,6 +115,8 @@ class AirPlaySession : public QObject {
   void SubmitPin(const QString& pin);
 
   bool is_open() const { return state_ != State::Closed; }
+  // Whether it's playing with AirPlay 1.
+  bool airplay1() const { return airplay1_; }
   bool is_ready() const { return state_ == State::Ready; }
   // Where the audio goes, while ready.
   AirPlayStream* stream() const { return stream_; }
@@ -178,14 +189,23 @@ class AirPlaySession : public QObject {
   bool persistent() const { return !options_.identity_seed.isEmpty(); }
   void SetupSession();
   void SetupStream();
+  // AirPlay 1's ANNOUNCE and SETUP.
+  void Announce();
+  void SetupAirPlay1();
   void StartStream(quint16 data_port, quint16 control_port);
+  void BecomeReady();
   // False, after failing, unless |code| is 200.
   bool Check(const QByteArray& what, int code);
+  // Stops waiting for the receiver's user to allow this sender. False, after
+  // closing, if they didn't: a Mac answers 400 when its user doesn't allow a
+  // sender, or doesn't answer in 15 s.
+  bool CheckAllowed(int code);
   // What a pairing step's error TLV means, for the user.
   QString PairingError(int code, const airplay::tlv8::Items& items) const;
 
   Options options_;
   AirPlayDevice device_;
+  bool airplay1_;
   AirPlayRtspConnection* connection_;
   State state_;
   // Where the receiver asks for the time.

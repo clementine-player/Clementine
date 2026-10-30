@@ -281,7 +281,7 @@ AirPlayDevice Receiver(const QByteArray& id, const QString& name,
 
 class FakeAirPlayDiscovery : public AirPlayDiscovery {
  public:
-  FakeAirPlayDiscovery() {
+  FakeAirPlayDiscovery() : AirPlayDiscovery(kAirPlayServiceType) {
     connect(this, &AirPlayDiscovery::DeviceFound,
             [this](const AirPlayDevice& device) { found_ << device.name; });
     connect(this, &AirPlayDiscovery::DeviceLost,
@@ -913,3 +913,211 @@ TEST(AirPlaySessionTest, SaysWhenThePinIsWrong) {
 }
 
 }  // namespace
+
+TEST(AirPlayDeviceTest, ParsesARaopService) {
+  AirPlayDevice device;
+  ASSERT_TRUE(device.ParseRaopService(
+      "E64360C0424C@zarniwoop",
+      {"am=AirPort10,115", "ft=0x77,0x1", "sf=0x4", "pw=true", "et=0,4"}));
+  EXPECT_EQ("E6:43:60:C0:42:4C", device.id);
+  EXPECT_EQ("zarniwoop", device.name);
+  EXPECT_EQ("AirPort10,115", device.model);
+  EXPECT_EQ(Q_UINT64_C(0x100000077), device.features);
+  EXPECT_TRUE(device.password_required());
+  EXPECT_TRUE(device.airplay1);
+  EXPECT_TRUE(device.plain_audio);
+}
+
+TEST(AirPlayDeviceTest, RaopServiceMayWantEncryptedAudio) {
+  AirPlayDevice device;
+  ASSERT_TRUE(device.ParseRaopService("E64360C0424C@Kitchen", {"et=1"}));
+  EXPECT_FALSE(device.plain_audio);
+  EXPECT_FALSE(device.password_required());
+}
+
+TEST(AirPlayDeviceTest, RaopServiceNeedsAMac) {
+  AirPlayDevice device;
+  EXPECT_FALSE(device.ParseRaopService("Kitchen", {}));
+  EXPECT_FALSE(device.ParseRaopService("E643@Kitchen", {}));
+}
+
+// 23 bits of header, 352 stereo frames of 16 bits, and a 3-bit end tag.
+TEST(AirPlayStreamTest, UncompressedAlac) {
+  QByteArray pcm = Tone(352);
+  // The first left sample, which the tone starts at 0.
+  pcm[0] = char(0xFF);
+  pcm[1] = char(0x7F);
+  const QByteArray frame = AirPlayStream::UncompressedAlac(pcm);
+  EXPECT_EQ((23 + 352 * 2 * 16 + 3 + 7) / 8, frame.size());
+  // Channel pair, nothing shifted or partial, escaped; then 0x7FFF from the
+  // 24th bit: 0, then ones.
+  EXPECT_EQ(QByteArray::fromHex("200002FF"), frame.left(4));
+}
+
+AirPlaySession::Options AirPlay1Options(FakeAirPlayReceiver* receiver) {
+  receiver->set_airplay1(true);
+  return FastOptions();
+}
+
+TEST(AirPlaySessionTest, StreamsAudioWithAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  EXPECT_TRUE(session.airplay1());
+  EXPECT_FALSE(receiver.paired());
+
+  const QByteArray tone = Tone(352 * 6);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 6; });
+  EXPECT_EQ(tone, receiver.audio());
+  EXPECT_GE(receiver.sync_packets(), 1);
+  EXPECT_GE(receiver.timing_replies(), 1);
+  EXPECT_EQ(QStringList({"ANNOUNCE", "SETUP", "RECORD"}), receiver.requests());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, SetsTheVolumeFlushesAndTearsDownWithAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  session.SetVolume(50);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  WaitFor([&receiver]() { return !receiver.volume().isEmpty(); });
+  EXPECT_EQ("-6.020600", receiver.volume());
+
+  session.Flush();
+  WaitFor([&receiver]() { return receiver.flushes() == 1; });
+  EXPECT_EQ(1, receiver.flushes());
+
+  session.Close();
+  WaitFor([&receiver]() { return receiver.torn_down(); });
+  EXPECT_TRUE(receiver.torn_down());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, WaitsForTheReceiversUserToAllowAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(1200, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  QSignalSpy waiting(&session, &AirPlaySession::WaitingForApproval);
+  EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  EXPECT_EQ(1, receiver.prompts());
+  EXPECT_EQ(1, waiting.count());
+}
+
+TEST(AirPlaySessionTest, SaysWhenTheReceiversUserDoesntAllowAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(1200, &receiver, [&receiver]() { receiver.Deny(); });
+  });
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  const Result result = Open(&session, receiver.device());
+  EXPECT_FALSE(result.set_up);
+  EXPECT_EQ("Fake didn't allow Clementine on test to play there",
+            result.not_allowed);
+}
+
+// An AirPlay 2 receiver refuses AirPlay 1's ANNOUNCE until the sender pairs.
+TEST(AirPlaySessionTest, PairsWhenAirPlay1IsRefused) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  receiver.set_airplay1_pairing(true);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  EXPECT_TRUE(receiver.paired());
+  EXPECT_EQ(QStringList({"ANNOUNCE", "POST /pair-setup", "POST /pair-setup",
+                         "ANNOUNCE", "SETUP", "RECORD"}),
+            receiver.requests());
+
+  const QByteArray tone = Tone(352 * 2);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 2; });
+  EXPECT_EQ(tone, receiver.audio());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, PairsWithAPasswordWhenAirPlay1IsRefused) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.SetPassword("foobar");
+
+  AirPlaySession::Options options = AirPlay1Options(&receiver);
+  receiver.set_airplay1_pairing(true);
+  options.password = "wrong";
+  Result result = Pair(receiver.device(), options);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_TRUE(result.password_wrong);
+
+  options.password = "foobar";
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+}
+
+// As an AirPort Express asks for one.
+TEST(AirPlaySessionTest, AnswersAirPlay1sDigestChallenge) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.SetPassword("foobar");
+
+  AirPlaySession::Options options = AirPlay1Options(&receiver);
+  // It said so as it was advertised.
+  Result result = Pair(receiver.device(), options);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_FALSE(result.password_wrong);
+  EXPECT_EQ(QStringList(), receiver.requests());
+
+  options.password = "wrong";
+  result = Pair(receiver.device(), options);
+  EXPECT_TRUE(result.password_needed);
+  EXPECT_TRUE(result.password_wrong);
+
+  options.password = "foobar";
+  AirPlaySession session(options);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  session.SetVolume(100);
+  session.Flush();
+  WaitFor([&receiver]() { return receiver.flushes() == 1; });
+  EXPECT_EQ("0.000000", receiver.volume());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, ForcesAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession::Options options = AirPlay1Options(&receiver);
+  options.force_airplay1 = true;
+  AirPlayDevice device = receiver.device();
+  device.airplay1 = false;
+  AirPlaySession session(options);
+  ASSERT_TRUE(OpenReady(&session, device));
+  EXPECT_TRUE(session.airplay1());
+}
+
+TEST(AirPlaySessionTest, SaysWhenAirPlay1AudioMustBeEncrypted) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+
+  AirPlayDevice device = receiver.device();
+  device.airplay1 = true;
+  device.plain_audio = false;
+  const Result result = Pair(device, FastOptions());
+  EXPECT_EQ(
+      "Fake only takes encrypted AirPlay 1 audio, which Clementine can't send",
+      result.error);
+}

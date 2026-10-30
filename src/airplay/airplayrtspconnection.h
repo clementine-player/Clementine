@@ -78,6 +78,13 @@ class AirPlayRtspConnection : public QObject {
   // shows it when it asks whether to allow a sender, and remembers its
   // answer by it.
   void set_client_name(const QString& name) { client_name_ = name.toUtf8(); }
+  // The password of an AirPlay 1 receiver that asks for one with HTTP Digest
+  // authentication, as an AirPort Express does: a request it refuses with
+  // 401 is sent again with it, once.
+  void set_password(const QString& password) { password_ = password; }
+  // The RTSP session an AirPlay 1 receiver's SETUP started, which later
+  // requests name.
+  void set_session(const QByteArray& session) { session_ = session; }
   // For tests, which don't want to wait as long.
   void set_timeouts(int connect_msec, int request_msec);
   // The URI of RTSP requests: rtsp://<local address>/<session id>.
@@ -119,11 +126,19 @@ class AirPlayRtspConnection : public QObject {
     QByteArray protocol;
     Callback callback;
     int timeout_msec = kTimeoutMsec;
+    // Whether it was sent with the receiver's last Digest challenge.
+    bool authorized = false;
   };
 
   void NewSocket();
   void SendNext();
   bool ParseResponse(Response* response);
+  // Takes the realm and nonce from a 401's WWW-Authenticate. False if it
+  // isn't a Digest challenge, or there's no password to answer it with.
+  bool TakeChallenge(const Response& response);
+  // The Authorization header for |method| on |uri|.
+  QByteArray DigestAuthorization(const QByteArray& method,
+                                 const QByteArray& uri) const;
 
   QTcpSocket* socket_;
   QHostAddress host_;
@@ -140,6 +155,10 @@ class AirPlayRtspConnection : public QObject {
   QByteArray dacp_id_;
   const quint32 active_remote_;
   QByteArray client_name_;
+  QString password_;
+  QByteArray digest_realm_;
+  QByteArray digest_nonce_;
+  QByteArray session_;
 };
 
 #endif  // AIRPLAY_AIRPLAYRTSPCONNECTION_H_

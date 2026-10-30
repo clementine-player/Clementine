@@ -22,8 +22,9 @@
 
 #include "core/logging.h"
 
-BonjourAirPlayDiscovery::BonjourAirPlayDiscovery(QObject* parent)
-    : AirPlayDiscovery(parent) {}
+BonjourAirPlayDiscovery::BonjourAirPlayDiscovery(const char* service_type,
+                                                 QObject* parent)
+    : AirPlayDiscovery(service_type, parent) {}
 
 BonjourAirPlayDiscovery::~BonjourAirPlayDiscovery() {
   for (Resolve* resolve : resolves_) {
@@ -38,7 +39,7 @@ void BonjourAirPlayDiscovery::Start() {
 
   const DNSServiceErrorType error =
       DNSServiceBrowse(&browse_.ref, 0, kDNSServiceInterfaceIndexAny,
-                       kServiceType, nullptr, &BrowseReply, this);
+                       service_type(), nullptr, &BrowseReply, this);
   if (error != kDNSServiceErr_NoError) {
     qLog(Warning) << "Couldn't look for AirPlay receivers, error" << error;
     browse_.ref = nullptr;
@@ -140,10 +141,12 @@ void DNSSD_API BonjourAirPlayDiscovery::ResolveReply(
   const QString service = resolve->service;
 
   AirPlayDevice device;
-  const bool ok = error == kDNSServiceErr_NoError &&
-                  device.ParseTxt(AirPlayDevice::SplitTxt(QByteArray(
-                      reinterpret_cast<const char*>(txt), txt_length)));
-  device.name = resolve->name;
+  const bool ok =
+      error == kDNSServiceErr_NoError &&
+      self->ParseService(resolve->name,
+                         AirPlayDevice::SplitTxt(QByteArray(
+                             reinterpret_cast<const char*>(txt), txt_length)),
+                         &device);
   const QString host_name = QString::fromUtf8(host);
   // In network byte order.
   device.port = qFromBigEndian(port);

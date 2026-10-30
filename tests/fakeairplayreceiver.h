@@ -52,6 +52,11 @@ class QUdpSocket;
 //
 // It decrypts the audio and keeps it, and notes mistakes such as a reused
 // nonce or an audio key that's one of the event channel's keys.
+//
+// set_airplay1() makes it an AirPlay 1 receiver instead, which takes
+// ANNOUNCE, a SETUP with a Transport header and unencrypted ALAC, and asks
+// to allow a sender at ANNOUNCE. With a password, it asks for HTTP Digest
+// authentication as an AirPort Express does, unless it wants pairing first.
 class FakeAirPlayReceiver : public QObject {
  public:
   FakeAirPlayReceiver();
@@ -74,6 +79,12 @@ class FakeAirPlayReceiver : public QObject {
   static QByteArray PairingId() { return "fake-receiver"; }
   // Its long-term public key.
   static QByteArray PublicKey();
+
+  // Whether it's an AirPlay 1 receiver.
+  void set_airplay1(bool airplay1) { airplay1_ = airplay1; }
+  // Whether, as an AirPlay 1 receiver, it refuses ANNOUNCE with 403 until
+  // the sender has paired, with the password as the PIN.
+  void set_airplay1_pairing(bool pairing) { airplay1_pairing_ = pairing; }
 
   // Whether its status flags say it has a password. A Mac kept wanting one
   // after saying it didn't.
@@ -134,7 +145,15 @@ class FakeAirPlayReceiver : public QObject {
   bool ParseRequest(Request* request);
   // Handles |request|, or returns false to hold it.
   bool Handle(const Request& request);
-  void Respond(const Request& request, int code, const QByteArray& body = {});
+  void Respond(const Request& request, int code, const QByteArray& body = {},
+               const Headers& headers = {});
+  // Handles |request| as an AirPlay 1 receiver does, returning false to hold
+  // it, or nullopt for one that's handled as an AirPlay 2 receiver does.
+  std::optional<bool> HandleAirPlay1(const Request& request);
+  // Whether |request| has the password, by HTTP Digest, if one's needed.
+  bool Authorized(const Request& request) const;
+  // Appends the PCM of an uncompressed ALAC frame to audio_.
+  void DecodeAlac(const QByteArray& frame);
   // False if |request| has to wait for its sender name to be allowed.
   bool CheckAllowed(const Request& request);
   void PairSetup(const Request& request);
@@ -159,6 +178,9 @@ class FakeAirPlayReceiver : public QObject {
   bool paired_;
 
   QString password_;
+  bool airplay1_;
+  bool airplay1_pairing_;
+  QByteArray digest_nonce_;
   bool ask_to_allow_;
   bool report_password_;
   QSet<QString> allowed_names_;

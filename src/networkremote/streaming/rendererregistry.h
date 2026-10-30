@@ -21,17 +21,18 @@
 #include <QByteArray>
 #include <QHostAddress>
 #include <QList>
+#include <QMap>
 #include <QNetworkAddressEntry>
 #include <QObject>
 #include <QPointer>
 #include <QUrl>
 #include <memory>
 
+#include "airplay/airplaydevice.h"
 #include "remotecontrolmessages.pb.h"
 
 class AirPlayDiscovery;
 class AirPlayEngine;
-struct AirPlayDevice;
 class Application;
 class CastDiscovery;
 class ChromecastEngine;
@@ -203,14 +204,24 @@ class RendererRegistry : public QObject {
 
   // Output ids for AirPlay receivers.
   static QString AirPlayOutputId(const AirPlayDevice& device);
+  // What |discovery| found or lost.
+  void AirPlayFound(AirPlayDiscovery* discovery, const AirPlayDevice& device);
+  void AirPlayLost(AirPlayDiscovery* discovery, const QString& id);
+  // Offers the receiver |id| as both discoveries have it, or stops.
+  void AirPlayChanged(const QString& id);
   void AirPlayDeviceFound(const AirPlayDevice& device);
   void AirPlayDeviceLost(const QString& id);
   void AirPlayEngineFailed(AirPlayEngine* engine);
   AirPlayEngine* FindAirPlayEngine(const QString& device_id) const;
   QList<AirPlayEngine*> airplay_engines_;
   // Owned; null until StartDiscovery, without --airplay, or if this platform
-  // has none.
+  // has none. One looks for _airplay._tcp and the other for _raop._tcp.
   AirPlayDiscovery* airplay_discovery_ = nullptr;
+  AirPlayDiscovery* raop_discovery_ = nullptr;
+  // What each found, by id. An AirPlay 2 receiver advertises both, and is
+  // played to as _airplay._tcp says; an AirPlay 1 receiver only _raop._tcp.
+  QMap<QString, AirPlayDevice> airplay_found_;
+  QMap<QString, AirPlayDevice> raop_found_;
 
   Serving serving_;
 };

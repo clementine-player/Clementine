@@ -32,7 +32,8 @@ class AvahiAirPlayDiscovery : public AirPlayDiscovery {
   Q_OBJECT
 
  public:
-  explicit AvahiAirPlayDiscovery(QObject* parent = nullptr);
+  explicit AvahiAirPlayDiscovery(const char* service_type,
+                                 QObject* parent = nullptr);
   ~AvahiAirPlayDiscovery();
 
   void Start() override;

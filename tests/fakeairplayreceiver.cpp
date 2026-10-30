@@ -17,6 +17,7 @@
 
 #include "fakeairplayreceiver.h"
 
+#include <QCryptographicHash>
 #include <QMap>
 #include <QNetworkDatagram>
 #include <QRandomGenerator>
@@ -95,12 +96,47 @@ double NtpSeconds(quint64 ntp) {
   return (ntp >> 32) + (ntp & 0xFFFFFFFF) / 4294967296.0;
 }
 
+// Reads bits most significant first, as ALAC has them.
+class BitReader {
+ public:
+  explicit BitReader(const QByteArray& data) : data_(data) {}
+
+  quint32 Read(int bits) {
+    quint32 value = 0;
+    for (int i = 0; i < bits; ++i, ++pos_) {
+      const int byte = pos_ / 8;
+      const bool bit =
+          byte < data_.size() && (quint8(data_[byte]) >> (7 - pos_ % 8)) & 1;
+      value = (value << 1) | (bit ? 1 : 0);
+    }
+    return value;
+  }
+  // Whether it read past the end.
+  bool overrun() const { return pos_ > data_.size() * 8; }
+  // Bits left in the last byte.
+  int left() const { return data_.size() * 8 - pos_; }
+
+ private:
+  const QByteArray data_;
+  int pos_ = 0;
+};
+
+QByteArray Md5Hex(const QByteArray& data) {
+  return QCryptographicHash::hash(data, QCryptographicHash::Md5).toHex();
+}
+
+const char kRealm[] = "raop";
+
 QByteArray ReasonPhrase(int code) {
   switch (code) {
     case 200:
       return "OK";
     case 400:
       return "Bad Request";
+    case 401:
+      return "Unauthorized";
+    case 403:
+      return "Forbidden";
     case 404:
       return "Not Found";
     default:
@@ -121,6 +157,8 @@ FakeAirPlayReceiver::FakeAirPlayReceiver()
     : server_(new QTcpServer(this)),
       client_(nullptr),
       paired_(false),
+      airplay1_(false),
+      airplay1_pairing_(false),
       ask_to_allow_(true),
       report_password_(true),
       prompting_(false),
@@ -179,6 +217,12 @@ AirPlayDevice FakeAirPlayReceiver::device() const {
   device.model = "Mac14,2";
   device.features = 0x38174fde4a7fcfd5;
   device.status_flags = status_flags();
+  if (airplay1_) {
+    // As ParseRaopService gives it, with "pw=true" for a password.
+    device.model = "AirPort10,115";
+    device.features = 0x77;
+    device.airplay1 = true;
+  }
   device.address = QHostAddress::LocalHost;
   device.port = server_->serverPort();
   return device;
@@ -226,6 +270,7 @@ void FakeAirPlayReceiver::NewConnection() {
   have_sync_ = false;
   last_seq_ = -1;
   waiting_for_time_ = false;
+  digest_nonce_ = RandomBytes(16).toHex();
   audio_key_.clear();
   audio_nonces_.clear();
   flushed_once_ = false;
@@ -285,10 +330,12 @@ bool FakeAirPlayReceiver::ParseRequest(Request* request) {
 }
 
 void FakeAirPlayReceiver::Respond(const Request& request, int code,
-                                  const QByteArray& body) {
+                                  const QByteArray& body,
+                                  const Headers& headers) {
   QByteArray message = "RTSP/1.0 " + QByteArray::number(code) + " " +
                        ReasonPhrase(code) + "\r\n";
   message += "CSeq: " + request.Header("CSeq") + "\r\n";
+  for (const auto& h : headers) message += h.first + ": " + h.second + "\r\n";
   message += "Server: AirTunes/980.77.5\r\n";
   message += "Content-Length: " + QByteArray::number(body.size()) + "\r\n\r\n";
   message += body;
@@ -296,6 +343,10 @@ void FakeAirPlayReceiver::Respond(const Request& request, int code,
 }
 
 bool FakeAirPlayReceiver::Handle(const Request& request) {
+  if (airplay1_) {
+    const std::optional<bool> handled = HandleAirPlay1(request);
+    if (handled) return *handled;
+  }
   if (request.method == "GET" && request.uri == "/info") {
     QVariantMap info;
     info["name"] = "Fake";
@@ -365,6 +416,87 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     torn_down_ = true;
   } else {
     Respond(request, 501);
+  }
+  return true;
+}
+
+bool FakeAirPlayReceiver::Authorized(const Request& request) const {
+  if (password_.isEmpty() || airplay1_pairing_) return true;
+  const QByteArray auth = request.Header("Authorization");
+  auto param = [&auth](const QByteArray& name) {
+    const int start = auth.indexOf(name + "=\"");
+    if (start < 0) return QByteArray();
+    const int from = start + name.size() + 2;
+    return auth.mid(from, auth.indexOf('"', from) - from);
+  };
+  const QByteArray ha1 =
+      Md5Hex(param("username") + ":" + kRealm + ":" + password_.toUtf8());
+  const QByteArray ha2 = Md5Hex(request.method + ":" + request.uri);
+  return auth.startsWith("Digest ") && param("nonce") == digest_nonce_ &&
+         param("uri") == request.uri &&
+         param("response") == Md5Hex(ha1 + ":" + digest_nonce_ + ":" + ha2);
+}
+
+std::optional<bool> FakeAirPlayReceiver::HandleAirPlay1(
+    const Request& request) {
+  // Pairing goes as for AirPlay 2.
+  if (request.method == "POST" && request.uri != "/feedback") {
+    return std::nullopt;
+  }
+  if (!Authorized(request)) {
+    Respond(request, 401, {},
+            {{"WWW-Authenticate", QByteArray("Digest realm=\"") + kRealm +
+                                      "\", nonce=\"" + digest_nonce_ + "\""}});
+    return true;
+  }
+  if (request.method != "ANNOUNCE" && request.method != "SETUP" &&
+      request.method != "TEARDOWN" && request.Header("Session") != "1") {
+    errors_ << QString("%1 without the session").arg(QString(request.method));
+  }
+
+  if (request.method == "ANNOUNCE") {
+    if (airplay1_pairing_ && !paired_) {
+      Respond(request, 403);
+      return true;
+    }
+    if (!request.body.contains("a=rtpmap:96 AppleLossless") ||
+        request.body.contains("rsaaeskey")) {
+      errors_ << "ANNOUNCE isn't of unencrypted ALAC";
+    }
+    if (!CheckAllowed(request)) return false;
+    Respond(request, 200);
+  } else if (request.method == "SETUP") {
+    for (const QByteArray& part : request.Header("Transport").split(';')) {
+      if (part.startsWith("timing_port=")) {
+        sender_timing_port_ = part.mid(12).toUInt();
+      }
+    }
+    if (!sender_timing_port_) errors_ << "SETUP without a timing port";
+    SendTimingRequest();
+    const QByteArray transport =
+        "RTP/AVP/UDP;unicast;mode=record;server_port=" +
+        QByteArray::number(audio_socket_->localPort()) +
+        ";control_port=" + QByteArray::number(control_->localPort()) +
+        ";timing_port=" + QByteArray::number(timing_->localPort());
+    Respond(request, 200, {},
+            {{"Transport", transport}, {"Session", "1;timeout=60"}});
+  } else if (request.method == "RECORD") {
+    // Where the stream starts.
+    for (const QByteArray& part : request.Header("RTP-Info").split(';')) {
+      if (part.startsWith("seq=")) flush_seq_ = part.mid(4).toInt();
+    }
+    if (flush_seq_ < 0) errors_ << "RECORD without RTP-Info";
+    flushed_once_ = true;
+    Respond(request, 200);
+  } else if (request.method == "GET" ||
+             (request.method == "POST" && request.uri == "/feedback")) {
+    // An AirPort Express has neither.
+    errors_ << QString("%1 %2").arg(QString(request.method),
+                                    QString(request.uri));
+    Respond(request, 404);
+  } else {
+    // FLUSH, SET_PARAMETER and TEARDOWN go as for AirPlay 2.
+    return std::nullopt;
   }
   return true;
 }
@@ -543,7 +675,7 @@ void FakeAirPlayReceiver::ControlReadyRead() {
 void FakeAirPlayReceiver::AudioReadyRead() {
   while (audio_socket_->hasPendingDatagrams()) {
     const QByteArray packet = audio_socket_->receiveDatagram().data();
-    if (packet.size() < 12 + 16 + 8) continue;
+    if (packet.size() < (airplay1_ ? 12 + 3 : 12 + 16 + 8)) continue;
     ++audio_packets_;
     const quint16 seq = qFromBigEndian<quint16>(packet.constData() + 2);
     // Each packet follows the last, in sequence and in time.
@@ -572,6 +704,10 @@ void FakeAirPlayReceiver::AudioReadyRead() {
         continue;
       }
     }
+    if (airplay1_) {
+      DecodeAlac(packet.mid(12));
+      continue;
+    }
     const QByteArray nonce = QByteArray(4, '\0') + packet.right(8);
     if (audio_nonces_.contains(nonce)) {
       errors_ << "an audio nonce was used twice";
@@ -589,6 +725,30 @@ void FakeAirPlayReceiver::AudioReadyRead() {
           qToLittleEndian(qFromBigEndian<quint16>(pcm.constData() + i)));
     }
   }
+}
+
+// Only the uncompressed frames AirPlaySession sends, checking each field.
+void FakeAirPlayReceiver::DecodeAlac(const QByteArray& frame) {
+  BitReader r(frame);
+  const quint32 tag = r.Read(3);
+  r.Read(4);  // Element instance tag
+  const quint32 unused = r.Read(12);
+  const quint32 partial = r.Read(1);
+  const quint32 shift = r.Read(2);
+  const quint32 escape = r.Read(1);
+  if (tag != 1 || unused != 0 || partial != 0 || shift != 0 || escape != 1) {
+    errors_ << "an ALAC frame isn't an uncompressed channel pair";
+    return;
+  }
+  QByteArray pcm;
+  for (int i = 0; i < AirPlayStream::kFramesPerPacket * 2; ++i) {
+    pcm += airplay::Bytes(qToLittleEndian(quint16(r.Read(16))));
+  }
+  if (r.Read(3) != 7 || r.overrun() || r.left() >= 8) {
+    errors_ << "an ALAC frame doesn't end where it should";
+    return;
+  }
+  audio_ += pcm;
 }
 
 void FakeAirPlayReceiver::NewEventConnection() {
