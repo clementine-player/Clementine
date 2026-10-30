@@ -22,6 +22,9 @@
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/streaming/streamplanner.h"
 #include "networkremote/sync/syncsong.h"
+#include "networkremote/sync/syncsourceid.h"
+#include "smartplaylists/generator.h"
+#include "smartplaylists/generatormimedata.h"
 
 const int MediaSync::kMaxItemsPerClient = 20000;
 
@@ -51,6 +54,15 @@ void MediaSync::HandleMessage(int client_id, const QString& peer_address,
     emit SendToClient(client_id, QByteArray(out.data(), out.size()));
     return;
   }
+  if (msg.type() == cpb::remote::REQUEST_SYNC_SOURCE_ADD) {
+    cpb::remote::Message reply;
+    reply.set_type(cpb::remote::SYNC_SOURCE_ADD_RESULT);
+    Add(msg.request_sync_source_add(),
+        reply.mutable_response_sync_source_add());
+    const std::string out = reply.SerializeAsString();
+    emit SendToClient(client_id, QByteArray(out.data(), out.size()));
+    return;
+  }
   if (msg.type() != cpb::remote::REQUEST_SYNC_MANIFEST) return;
 
   Client* client = &clients_[client_id];
@@ -74,6 +86,46 @@ void MediaSync::ClientDisconnected(int client_id) {
   if (it == clients_.end()) return;
   items_->Remove(it->token);
   clients_.erase(it);
+}
+
+void MediaSync::Add(const cpb::remote::RequestSyncSourceAdd& request,
+                    cpb::remote::ResponseSyncSourceAdd* response) {
+  response->set_source_id(request.source_id());
+  const SyncSourceId source =
+      SyncSourceId::Parse(QString::fromStdString(request.source_id()));
+  if (source.kind() != SyncSourceId::Kind::SmartPlaylist ||
+      !hooks_.smart_playlists.generator) {
+    response->set_result(cpb::remote::BROWSE_ADD_RESULT_NOT_PLAYABLE);
+    return;
+  }
+  smart_playlists::GeneratorPtr generator = hooks_.smart_playlists.generator(
+      source.parts().value(0), source.parts().value(1));
+  if (!generator) {
+    response->set_result(cpb::remote::BROWSE_ADD_RESULT_GONE);
+    return;
+  }
+
+  smart_playlists::GeneratorMimeData* data =
+      new smart_playlists::GeneratorMimeData(generator);
+  data->name_for_new_playlist_ = generator->name();
+  data->override_user_settings_ = request.has_action();
+  data->from_doubleclick_ = !request.has_action();
+  switch (request.action()) {
+    case cpb::remote::BROWSE_ADD_ACTION_PLAY_NOW:
+      data->play_now_ = true;
+      break;
+    case cpb::remote::BROWSE_ADD_ACTION_PLAY_NEXT:
+      data->enqueue_next_now_ = true;
+      break;
+    case cpb::remote::BROWSE_ADD_ACTION_REPLACE:
+      data->clear_first_ = true;
+      data->play_now_ = true;
+      break;
+    default:
+      break;
+  }
+  emit AddToPlaylist(data);
+  response->set_result(cpb::remote::BROWSE_ADD_RESULT_ADDED);
 }
 
 void MediaSync::Manifest(Client* client,

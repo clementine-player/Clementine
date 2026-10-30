@@ -122,10 +122,12 @@ enum MsgType {
   REQUEST_SYNC_MANIFEST = 381;
   // Behind SERVER_FEATURE_PLAY_REPORTS.
   REPORT_PLAYS = 382;
+  REQUEST_SYNC_SOURCE_ADD = 383;
   // Server -> client
   SYNC_SOURCES = 390;
   SYNC_MANIFEST = 391;
   REPORT_PLAYS_RESULT = 392;
+  SYNC_SOURCE_ADD_RESULT = 393;
 }
 
 // Valid Engine states
@@ -923,6 +925,21 @@ message ResponseSyncSources {
   repeated SyncSource sources = 1;
 }
 
+// Puts a source on the current playlist, as double-clicking it in Clementine
+// does. Only smart playlists for now: a dynamic one makes the playlist
+// dynamic. Answered with SYNC_SOURCE_ADD_RESULT.
+message RequestSyncSourceAdd {
+  optional string source_id = 1;
+  // Unset: what the user's settings say double-clicking does.
+  optional BrowseAddAction action = 2;
+}
+
+message ResponseSyncSourceAdd {
+  optional string source_id = 1;
+  // BROWSE_ADD_RESULT_NOT_PLAYABLE for a kind of source that can't be added.
+  optional BrowseAddResult result = 2;
+}
+
 // How a song is to be delivered.
 enum SyncQuality {
   // Treat as SYNC_QUALITY_ORIGINAL.
@@ -1124,4 +1141,6 @@ message Message {
   optional ResponseSyncManifest response_sync_manifest = 77;
   optional RequestReportPlays request_report_plays = 78;
   optional ResponseReportPlays response_report_plays = 79;
+  optional RequestSyncSourceAdd request_sync_source_add = 80;
+  optional ResponseSyncSourceAdd response_sync_source_add = 81;
 }

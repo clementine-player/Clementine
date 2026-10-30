@@ -31,14 +31,15 @@
 #include "remotecontrolmessages.pb.h"
 
 class LibraryBackend;
+class QMimeData;
 class UrlHandler;
 
 // Answers remotes' sync requests (with --media-sync): lists the sources a
-// remote can keep, and resolves a rule's source into a manifest of songs, each
-// with a /d/ URL that only that remote may fetch. Keeps no state about rules,
-// only what each connected remote may download. Lives on the main thread, like
-// InternetBrowser, and talks to the network remote through queued signals
-// carrying serialized messages.
+// remote can keep, puts one on the playlist, and resolves a rule's source into
+// a manifest of songs, each with a /d/ URL that only that remote may fetch.
+// Keeps no state about rules, only what each connected remote may download.
+// Lives on the main thread, like InternetBrowser, and talks to the network
+// remote through queued signals carrying serialized messages.
 class MediaSync : public QObject {
   Q_OBJECT
 
@@ -73,6 +74,8 @@ class MediaSync : public QObject {
 
  signals:
   void SendToClient(int client_id, const QByteArray& data);
+  // As the library's double-click does; the receiver takes ownership.
+  void AddToPlaylist(QMimeData* data);
 
  private:
   struct Client {
@@ -83,6 +86,8 @@ class MediaSync : public QObject {
     QHash<QString, int> ids;
   };
 
+  void Add(const cpb::remote::RequestSyncSourceAdd& request,
+           cpb::remote::ResponseSyncSourceAdd* response);
   void Manifest(Client* client, const cpb::remote::RequestSyncManifest& req,
                 cpb::remote::ResponseSyncManifest* response);
   // The id of |item| in |client|'s offer, adding it if need be. 0 when the

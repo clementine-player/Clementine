@@ -364,6 +364,8 @@ void NetworkRemote::SetupMediaSync() {
           SLOT(ClientDisconnected(int)));
   connect(media_sync_, SIGNAL(SendToClient(int, QByteArray)), this,
           SLOT(SendToClient(int, QByteArray)));
+  connect(media_sync_, SIGNAL(AddToPlaylist(QMimeData*)), this,
+          SIGNAL(AddToPlaylistSignal(QMimeData*)));
 }
 
 void NetworkRemote::StartServer() {

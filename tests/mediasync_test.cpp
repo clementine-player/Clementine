@@ -41,6 +41,7 @@
 #include "networkremote/sync/syncresolver.h"
 #include "networkremote/sync/syncsong.h"
 #include "networkremote/sync/syncsourceid.h"
+#include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/querygenerator.h"
 #include "test_utils.h"
 
@@ -671,6 +672,76 @@ TEST_F(MediaSyncTest, ListsWhatCanBeKept) {
   EXPECT_EQ("smart/library/0b6e",
             reply.response_sync_sources().sources(0).source_id());
   EXPECT_EQ("Newest tracks", reply.response_sync_sources().sources(0).title());
+}
+
+TEST_F(MediaSyncTest, PutsASmartPlaylistOnThePlaylist) {
+  AddSmartPlaylist();
+  MediaSync::Hooks hooks;
+  hooks.smart_playlists = smart_playlists_;
+  MediaSync sync(library_.get(), hooks, items_);
+  QSignalSpy sent(&sync, SIGNAL(SendToClient(int, QByteArray)));
+  qRegisterMetaType<QMimeData*>("QMimeData*");
+  QSignalSpy added(&sync, SIGNAL(AddToPlaylist(QMimeData*)));
+
+  auto add = [&](const SyncSourceId& source,
+                 cpb::remote::BrowseAddAction action) {
+    cpb::remote::Message msg;
+    msg.set_type(cpb::remote::REQUEST_SYNC_SOURCE_ADD);
+    msg.mutable_request_sync_source_add()->set_source_id(
+        source.ToString().toStdString());
+    if (action != cpb::remote::BROWSE_ADD_ACTION_UNSPECIFIED) {
+      msg.mutable_request_sync_source_add()->set_action(action);
+    }
+    const std::string data = msg.SerializeAsString();
+    sync.HandleMessage(1, peer_, QByteArray(data.data(), data.size()));
+    cpb::remote::Message reply;
+    EXPECT_FALSE(sent.isEmpty());
+    if (sent.isEmpty()) return reply.response_sync_source_add();
+    const QByteArray out = sent.last()[1].toByteArray();
+    reply.ParseFromArray(out.constData(), out.size());
+    EXPECT_EQ(cpb::remote::SYNC_SOURCE_ADD_RESULT, reply.type());
+    return reply.response_sync_source_add();
+  };
+
+  const cpb::remote::ResponseSyncSourceAdd response =
+      add(SyncSourceId::ForSmartPlaylist("library", "0b6e"),
+          cpb::remote::BROWSE_ADD_ACTION_REPLACE);
+  EXPECT_EQ("smart/library/0b6e", response.source_id());
+  EXPECT_EQ(cpb::remote::BROWSE_ADD_RESULT_ADDED, response.result());
+  ASSERT_EQ(1, added.size());
+  std::unique_ptr<QMimeData> data(added.last()[0].value<QMimeData*>());
+  const auto* generator =
+      qobject_cast<smart_playlists::GeneratorMimeData*>(data.get());
+  ASSERT_NE(nullptr, generator);
+  EXPECT_EQ("Pixies", generator->generator_->name());
+  EXPECT_TRUE(generator->override_user_settings_);
+  EXPECT_TRUE(generator->clear_first_);
+  EXPECT_TRUE(generator->play_now_);
+
+  add(SyncSourceId::ForSmartPlaylist("library", "0b6e"),
+      cpb::remote::BROWSE_ADD_ACTION_PLAY_NEXT);
+  ASSERT_EQ(2, added.size());
+  data.reset(added.last()[0].value<QMimeData*>());
+  EXPECT_TRUE(qobject_cast<MimeData*>(data.get())->enqueue_next_now_);
+  EXPECT_FALSE(qobject_cast<MimeData*>(data.get())->play_now_);
+
+  // With no action, as the user's settings say double-clicking does.
+  add(SyncSourceId::ForSmartPlaylist("library", "0b6e"),
+      cpb::remote::BROWSE_ADD_ACTION_UNSPECIFIED);
+  ASSERT_EQ(3, added.size());
+  data.reset(added.last()[0].value<QMimeData*>());
+  EXPECT_TRUE(qobject_cast<MimeData*>(data.get())->from_doubleclick_);
+  EXPECT_FALSE(qobject_cast<MimeData*>(data.get())->override_user_settings_);
+
+  EXPECT_EQ(cpb::remote::BROWSE_ADD_RESULT_GONE,
+            add(SyncSourceId::ForSmartPlaylist("library", "9f1c"),
+                cpb::remote::BROWSE_ADD_ACTION_APPEND)
+                .result());
+  EXPECT_EQ(
+      cpb::remote::BROWSE_ADD_RESULT_NOT_PLAYABLE,
+      add(SyncSourceId::ForPlaylist(7), cpb::remote::BROWSE_ADD_ACTION_APPEND)
+          .result());
+  EXPECT_EQ(3, added.size());
 }
 
 TEST_F(MediaSyncTest, NeedsDownloadsAllowed) {
