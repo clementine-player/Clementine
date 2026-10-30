@@ -208,7 +208,7 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished, [=] {
+  connect(reply, &QNetworkReply::finished, [=, this] {
     app_->task_manager()->SetTaskFinished(task_id);
     reply->deleteLater();
     QJsonDocument document = ParseJsonReply(reply);
@@ -245,7 +245,7 @@ void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
   connect(reply, &QNetworkReply::finished,
-          [=] { this->RefreshStreamsFinished(reply, task_id, item); });
+          [=, this] { this->RefreshStreamsFinished(reply, task_id, item); });
 }
 
 void RadioBrowserService::RefreshTop100(QStandardItem* item) {
@@ -263,7 +263,7 @@ void RadioBrowserService::RefreshTop100(QStandardItem* item) {
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
   connect(reply, &QNetworkReply::finished,
-          [=] { this->RefreshStreamsFinished(reply, task_id, item); });
+          [=, this] { this->RefreshStreamsFinished(reply, task_id, item); });
 }
 
 void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
@@ -392,7 +392,7 @@ void RadioBrowserService::Search(int search_id, const QString& query,
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished, [=] {
+  connect(reply, &QNetworkReply::finished, [=, this] {
     app_->task_manager()->SetTaskFinished(task_id);
     reply->deleteLater();
     QJsonDocument document = ParseJsonReply(reply);
@@ -417,7 +417,7 @@ void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting station"));
 
-  connect(reply, &QNetworkReply::finished, [=] {
+  connect(reply, &QNetworkReply::finished, [=, this] {
     app_->task_manager()->SetTaskFinished(task_id);
     reply->deleteLater();
     QJsonDocument document = ParseJsonReply(reply);

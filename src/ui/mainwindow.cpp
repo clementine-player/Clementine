@@ -186,7 +186,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
-      add_stream_dialog_([=]() {
+      add_stream_dialog_([=, this]() {
         AddStreamDialog* add_stream_dialog = new AddStreamDialog;
         connect(add_stream_dialog, SIGNAL(accepted()), this,
                 SLOT(AddStreamAccepted()));
@@ -194,7 +194,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
             InternetModel::Service<SavedRadio>());
         return add_stream_dialog;
       }),
-      cover_manager_([=]() {
+      cover_manager_([=, this]() {
         AlbumCoverManager* cover_manager =
             new AlbumCoverManager(app, app->library_backend());
         cover_manager->Init();
