@@ -15,17 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <gst/gst.h>
+
 #include <QElapsedTimer>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QSignalSpy>
+#include <QTest>
 #include <QTimer>
 #include <QVariantMap>
+#include <QtEndian>
+#include <cmath>
+#include <thread>
 
 #include "airplay/airplaycrypto.h"
 #include "airplay/airplaydevice.h"
 #include "airplay/airplaydiscovery.h"
 #include "airplay/airplayplist.h"
 #include "airplay/airplaysession.h"
+#include "airplay/airplaysink.h"
 #include "airplay/airplaysrp.h"
+#include "airplay/airplaystream.h"
 #include "airplay/airplaytlv8.h"
 #include "fakeairplayreceiver.h"
 #include "gtest/gtest.h"
@@ -326,6 +336,8 @@ struct Result {
   bool paired = false;
   bool set_up = false;
   QString error;
+  // Why the receiver's user didn't allow it.
+  QString not_allowed;
   qint64 msec = 0;
 };
 
@@ -334,16 +346,21 @@ Result Open(AirPlaySession* session, const AirPlayDevice& device) {
   QSignalSpy paired(session, &AirPlaySession::Paired);
   QSignalSpy set_up(session, &AirPlaySession::SetUp);
   QSignalSpy failed(session, &AirPlaySession::Failed);
+  QSignalSpy not_allowed(session, &AirPlaySession::NotAllowed);
   QElapsedTimer timer;
   timer.start();
   session->Open(device);
-  while (set_up.isEmpty() && failed.isEmpty() && timer.elapsed() < 10000) {
+  while (set_up.isEmpty() && failed.isEmpty() && not_allowed.isEmpty() &&
+         timer.elapsed() < 10000) {
     set_up.wait(50);
   }
   Result result;
   result.paired = !paired.isEmpty();
   result.set_up = !set_up.isEmpty();
   if (!failed.isEmpty()) result.error = failed.first().first().toString();
+  if (!not_allowed.isEmpty()) {
+    result.not_allowed = not_allowed.first().first().toString();
+  }
   result.msec = timer.elapsed();
   return result;
 }
@@ -352,6 +369,30 @@ Result Pair(const AirPlayDevice& device,
             const AirPlaySession::Options& options) {
   AirPlaySession session(options);
   return Open(&session, device);
+}
+
+// Opens |session| to |device| and waits until its stream is ready.
+bool OpenReady(AirPlaySession* session, const AirPlayDevice& device) {
+  QSignalSpy ready(session, &AirPlaySession::Ready);
+  QSignalSpy failed(session, &AirPlaySession::Failed);
+  session->Open(device);
+  QElapsedTimer timer;
+  timer.start();
+  while (ready.isEmpty() && failed.isEmpty() && timer.elapsed() < 10000) {
+    ready.wait(50);
+  }
+  return !ready.isEmpty();
+}
+
+// |frames| of a 440 Hz tone, as S16LE stereo.
+QByteArray Tone(int frames) {
+  QByteArray pcm;
+  for (int i = 0; i < frames; ++i) {
+    const qint16 s = qint16(8000 * std::sin(2 * M_PI * 440 * i / 44100.0));
+    pcm += airplay::Bytes(qToLittleEndian(s));
+    pcm += airplay::Bytes(qToLittleEndian(s));
+  }
+  return pcm;
 }
 
 // Runs the event loop until |done| or a second has passed.
@@ -375,7 +416,7 @@ TEST(AirPlaySessionTest, Pairs) {
   // use.
   EXPECT_EQ(QStringList(
                 {"GET /info", "POST /pair-setup", "POST /pair-setup", "SETUP"}),
-            receiver.requests());
+            receiver.requests().mid(0, 4));
   EXPECT_EQ(QStringList(), receiver.errors());
   EXPECT_GE(receiver.timing_replies(), 1);
   EXPECT_EQ(QSet<QString>({"Clementine on test"}), receiver.client_names());
@@ -487,9 +528,21 @@ TEST(AirPlaySessionTest, SaysWhenTheReceiversUserDoesntAllowIt) {
     QTimer::singleShot(1200, &receiver, [&receiver]() { receiver.Deny(); });
   });
 
-  const Result result = Pair(receiver.device(), FastOptions());
+  // Not a failure of the receiver: the user may allow it yet.
+  AirPlaySession session(FastOptions());
+  const Result result = Open(&session, receiver.device());
   EXPECT_FALSE(result.set_up);
-  EXPECT_EQ("Fake didn't allow Clementine on test to play there", result.error);
+  EXPECT_TRUE(result.error.isEmpty());
+  EXPECT_EQ("Fake didn't allow Clementine on test to play there",
+            result.not_allowed);
+  EXPECT_FALSE(session.is_open());
+
+  // Trying again asks again.
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(0, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+  EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  EXPECT_EQ(2, receiver.prompts());
 }
 
 TEST(AirPlaySessionTest, UnansweredPromptTimesOut) {
@@ -538,6 +591,168 @@ TEST(AirPlaySessionTest, UnansweredConnectTimesOut) {
       "Couldn't connect to the AirPlay receiver at 192.0.2.1:7000 in 0.2 s. "
       "Is it awake, with AirPlay on?",
       result.error);
+}
+
+// The receiver asks for the time while setting up, and holds the SETUP
+// that starts the stream until it's answered.
+TEST(AirPlaySessionTest, AnswersTheTimeWhileSettingUp) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  EXPECT_TRUE(OpenReady(&session, receiver.device()));
+  EXPECT_EQ(1, receiver.setups_after_timing());
+  EXPECT_GE(receiver.timing_replies(), 2);
+}
+
+TEST(AirPlaySessionTest, StreamsAudio) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+
+  // 12 whole packets of 352 frames, and some left over for the next write.
+  const QByteArray tone = Tone(4410);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 12; });
+  EXPECT_EQ(12, receiver.audio_packets());
+  EXPECT_EQ(tone.left(12 * 352 * 4), receiver.audio());
+  EXPECT_GE(receiver.sync_packets(), 1);
+  EXPECT_EQ(1, receiver.event_replies());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+// GStreamer's streaming thread writes the audio.
+TEST(AirPlaySessionTest, StreamsAudioWrittenFromAnotherThread) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+
+  const QByteArray tone = Tone(352 * 4);
+  AirPlayStream* stream = session.stream();
+  std::thread writer(
+      [stream, &tone]() { stream->Write(tone.constData(), tone.size()); });
+  writer.join();
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 4; });
+  EXPECT_EQ(tone, receiver.audio());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, SetsTheVolumeFlushesAndTearsDown) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  // Set before it's ready, which is sent once it is.
+  session.SetVolume(50);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  WaitFor([&receiver]() { return !receiver.volume().isEmpty(); });
+  // Half the amplitude.
+  EXPECT_EQ("-6.020600", receiver.volume());
+
+  session.Flush();
+  WaitFor([&receiver]() { return receiver.flushes() == 1; });
+  EXPECT_EQ(1, receiver.flushes());
+
+  session.Close();
+  WaitFor([&receiver]() { return receiver.torn_down(); });
+  EXPECT_TRUE(receiver.torn_down());
+}
+
+class CapturingTarget : public AirPlaySinkTarget {
+ public:
+  void Write(const char* pcm, int size) override {
+    QMutexLocker l(&mutex_);
+    data_.append(pcm, size);
+  }
+  void Flushed() override {}
+
+  int size() {
+    QMutexLocker l(&mutex_);
+    return data_.size();
+  }
+
+ private:
+  QMutex mutex_;
+  QByteArray data_;
+};
+
+TEST(AirPlaySinkTest, HandsWhatItRendersToItsTarget) {
+  gst_init(nullptr, nullptr);
+  AirPlaySink::RegisterElement();
+  std::shared_ptr<CapturingTarget> target(new CapturingTarget);
+  AirPlaySink::SetTarget("test-device", target);
+
+  GError* error = nullptr;
+  GstElement* pipeline = gst_parse_launch(
+      "audiotestsrc num-buffers=4 samplesperbuffer=441 ! audioconvert ! "
+      "audioresample ! clementineairplaysink device=test-device",
+      &error);
+  ASSERT_TRUE(pipeline) << (error ? error->message : "");
+  gst_element_set_state(pipeline, GST_STATE_PLAYING);
+  GstBus* bus = gst_element_get_bus(pipeline);
+  GstMessage* message = gst_bus_timed_pop_filtered(
+      bus, 5 * GST_SECOND, GstMessageType(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
+  ASSERT_TRUE(message);
+  EXPECT_EQ(GST_MESSAGE_EOS, GST_MESSAGE_TYPE(message));
+  gst_message_unref(message);
+  gst_object_unref(bus);
+  gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref(pipeline);
+  AirPlaySink::RemoveTarget("test-device");
+
+  // Four buffers of 441 S16 stereo frames.
+  EXPECT_EQ(4 * 441 * 4, target->size());
+}
+
+// While paused, nothing is written, so the stream falls behind the time.
+// Resuming flushes, and what comes after must not be too late to play.
+TEST(AirPlaySessionTest, PlaysOnInTimeAfterAPause) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  const QByteArray tone = Tone(352 * 4);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 4; });
+
+  // Longer than the receiver's 1.5 s latency.
+  QTest::qWait(1800);
+  session.Flush();
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 8; });
+  EXPECT_EQ(8, receiver.audio_packets());
+  EXPECT_EQ(0, receiver.late_packets());
+  EXPECT_EQ(0, receiver.dropped_packets());
+  EXPECT_EQ(tone + tone, receiver.audio());
+}
+
+// Between tracks nothing is written for a moment, without a FLUSH.
+TEST(AirPlaySessionTest, PlaysOnInTimeAfterAGap) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  const QByteArray tone = Tone(352 * 4);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 4; });
+
+  QTest::qWait(1800);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() { return receiver.audio_packets() >= 8; });
+  EXPECT_EQ(0, receiver.late_packets());
+  EXPECT_EQ(tone + tone, receiver.audio());
 }
 
 }  // namespace

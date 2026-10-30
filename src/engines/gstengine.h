@@ -144,6 +144,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
 
+  // For an engine that always plays through one sink, whatever the settings
+  // say, such as an AirPlay receiver's. Call it from ReloadSettings().
+  void SetOutput(const QString& sink, const QVariant& device);
+
  private:
   // Used for debug purposes only.
   friend class GstEngineDebug;

@@ -18,22 +18,31 @@
 #ifndef AIRPLAY_AIRPLAYENGINE_H_
 #define AIRPLAY_AIRPLAYENGINE_H_
 
+#include <memory>
+
 #include "airplaydevice.h"
-#include "engines/enginebase.h"
+#include "engines/gstengine.h"
 
 class AirPlaySession;
+class Application;
 
 // The engine for one AirPlay receiver: an output of the EngineRouter.
 //
-// For now it only connects, pairs and sets up a session when asked to play,
-// which a receiver may first ask its user to allow, then reports that it
-// can't play yet.
-class AirPlayEngine : public Engine::Base {
+// It's a GstEngine whose pipelines all end in an airplaysink, which feeds
+// the one session this engine keeps with the receiver. So the equalizer,
+// ReplayGain and gapless playback work as they do locally, and a new track
+// carries on in the same stream.
+//
+// The session is opened when the engine is first asked to play, which a
+// receiver may first ask its user to allow, and kept until playback stops.
+// Pausing leaves the receiver to run dry, and flushes it on resuming, as
+// does a seek. Clementine's volume slider sets the receiver's volume.
+class AirPlayEngine : public GstEngine {
   Q_OBJECT
 
  public:
-  explicit AirPlayEngine(const AirPlayDevice& device,
-                         QObject* parent = nullptr);
+  AirPlayEngine(Application* app, const AirPlayDevice& device,
+                QObject* parent = nullptr);
   ~AirPlayEngine();
 
   const AirPlayDevice& device() const { return device_; }
@@ -41,38 +50,46 @@ class AirPlayEngine : public Engine::Base {
   void SetDevice(const AirPlayDevice& device);
 
   // Engine::Base
-  bool Init() override { return true; }
-  void StartPreloading(const MediaPlaybackRequest&, bool, qint64,
-                       qint64) override {}
   bool Load(const MediaPlaybackRequest& req, Engine::TrackChangeFlags change,
             bool force_stop_at_end, quint64 beginning_nanosec,
             qint64 end_nanosec) override;
   bool Play(quint64 offset_nanosec) override;
   void Stop(bool stop_after = false) override;
-  void Pause() override {}
-  void Unpause() override {}
-  void Seek(quint64) override {}
-  Engine::State state() const override { return Engine::Empty; }
-  qint64 position_nanosec() const override { return 0; }
-  qint64 length_nanosec() const override { return 0; }
+  void Unpause() override;
+  qint64 position_nanosec() const override;
   QString output_name() const override { return device_.name; }
   QString output_icon() const override;
+  void ReloadSettings() override;
 
  signals:
-  // The receiver couldn't be paired with, or can't be played on.
+  // The receiver couldn't be paired with or played on, or went away. Not
+  // when its user didn't allow Clementine: it stays the output, stopped, and
+  // playing again asks again.
   void DeviceFailed();
 
  protected:
-  void SetVolumeSW(uint) override {}
+  void SetVolumeSW(uint percent) override;
 
  private slots:
   void WaitingForApproval();
-  void SessionSetUp();
+  void SessionReady();
   void SessionFailed(const QString& error);
+  void SessionNotAllowed(const QString& message);
+  void StreamFlushed();
 
  private:
+  class Target;
+
+  QString SinkDevice() const;
+
   AirPlayDevice device_;
   AirPlaySession* session_;
+  std::shared_ptr<Target> target_;
+  // Play() waits for the session: where to start, or -1.
+  qint64 pending_play_nanosec_;
+  // Which pipelines' sinks may write to the session: those made since the
+  // last manual track change, which a sink names in its device property.
+  int generation_;
 };
 
 #endif  // AIRPLAY_AIRPLAYENGINE_H_

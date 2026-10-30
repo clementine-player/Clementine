@@ -78,7 +78,9 @@ set(SOURCES
   airplay/airplayplist.cpp
   airplay/airplayrtspconnection.cpp
   airplay/airplaysession.cpp
+  airplay/airplaysink.cpp
   airplay/airplaysrp.cpp
+  airplay/airplaystream.cpp
   airplay/airplaytlv8.cpp
 
   analyzers/analyzerbase.cpp
@@ -479,6 +481,7 @@ set(HEADERS
   airplay/airplayengine.h
   airplay/airplayrtspconnection.h
   airplay/airplaysession.h
+  airplay/airplaystream.h
 
   analyzers/analyzerbase.h
   analyzers/analyzercontainer.h

@@ -22,17 +22,20 @@
 #include <QSettings>
 #include <QStringList>
 #include <QSysInfo>
+#include <QTcpSocket>
 #include <QTimer>
 #include <QUdpSocket>
 #include <QUuid>
 #include <QVariantMap>
 #include <QtEndian>
 #include <chrono>
+#include <cmath>
 
 #include "airplaycrypto.h"
 #include "airplayplist.h"
 #include "airplayrtspconnection.h"
 #include "airplaysrp.h"
+#include "airplaystream.h"
 #include "core/logging.h"
 
 namespace {
@@ -48,22 +51,13 @@ const AirPlayRtspConnection::Headers kPairingHeaders = {
 
 const char kPlistType[] = "application/x-apple-binary-plist";
 const char kSettingsGroup[] = "AirPlay";
+// How often to try connecting to the event channel, a second apart: a
+// receiver may not be listening on it straight away, as pyatv found.
+const int kEventAttempts = 5;
 
 // How long the first SETUP takes before it's probably waiting for the
 // receiver's user.
 const int kApprovalNoticeMsec = 1000;
-
-// Now, as a 64-bit NTP timestamp: seconds since 1900, then the fraction.
-quint64 NtpNow() {
-  using namespace std::chrono;
-  const quint64 us =
-      duration_cast<microseconds>(system_clock::now().time_since_epoch())
-          .count();
-  // Seconds from 1900 to 1970 (RFC 5905).
-  const quint64 secs = us / 1000000 + 0x83AA7E80;
-  const quint64 frac = ((us % 1000000) << 32) / 1000000;
-  return (secs << 32) | frac;
-}
 
 }  // namespace
 
@@ -82,7 +76,15 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
       connection_(new AirPlayRtspConnection(this)),
       state_(State::Closed),
       timing_(new QUdpSocket(this)),
-      approval_timer_(new QTimer(this)) {
+      approval_timer_(new QTimer(this)),
+      control_(new QUdpSocket(this)),
+      sync_timer_(new QTimer(this)),
+      feedback_timer_(new QTimer(this)),
+      event_socket_(new QTcpSocket(this)),
+      event_port_(0),
+      event_attempts_(0),
+      stream_(nullptr),
+      volume_(-1) {
   connection_->set_client_name(options_.name);
   connection_->set_timeouts(options_.connect_timeout_msec,
                             options_.request_timeout_msec);
@@ -92,9 +94,23 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
   approval_timer_->setSingleShot(true);
   approval_timer_->setInterval(kApprovalNoticeMsec);
   connect(approval_timer_, SIGNAL(timeout()), SIGNAL(WaitingForApproval()));
+
+  // As often as Apple's senders send them.
+  sync_timer_->setInterval(1000);
+  connect(sync_timer_, SIGNAL(timeout()), SLOT(SendSync()));
+  // A receiver ends a session it doesn't hear from, as pyatv found.
+  feedback_timer_->setInterval(2000);
+  connect(feedback_timer_, SIGNAL(timeout()), SLOT(SendFeedback()));
+
+  connect(event_socket_, SIGNAL(connected()), SLOT(EventConnected()));
+  connect(event_socket_, SIGNAL(errorOccurred(QAbstractSocket::SocketError)),
+          SLOT(EventError()));
+  connect(event_socket_, SIGNAL(readyRead()), SLOT(EventReadyRead()));
 }
 
-AirPlaySession::~AirPlaySession() {}
+// Tears the session down even when Clementine quits: a Mac asks its user
+// again about a sender that left a session unfinished.
+AirPlaySession::~AirPlaySession() { Close(); }
 
 QString AirPlaySession::SavedSenderId() {
   QSettings s;
@@ -127,14 +143,25 @@ void AirPlaySession::Open(const AirPlayDevice& device) {
 }
 
 void AirPlaySession::Close() {
-  if (state_ == State::SetUp) {
+  if (state_ == State::SetUp || state_ == State::Ready) {
     // Sent, but not waited for.
     connection_->Rtsp("TEARDOWN", {}, QByteArray(), QByteArray(), nullptr);
   }
   state_ = State::Closed;
   approval_timer_->stop();
+  sync_timer_->stop();
+  feedback_timer_->stop();
   connection_->Close();
+  event_socket_->abort();
+  event_cipher_.reset();
+  event_buffer_.clear();
   timing_->close();
+  control_->close();
+  if (stream_) {
+    emit StreamEnding();
+    delete stream_;
+    stream_ = nullptr;
+  }
 }
 
 void AirPlaySession::Fail(const QString& error) {
@@ -148,7 +175,8 @@ void AirPlaySession::Connected() {
   state_ = State::Pairing;
   // Receivers ask for the time while they set up, and may not answer SETUP
   // until they've had an answer, so this listens from the start.
-  if (!timing_->bind(connection_->local_address(), 0)) {
+  const QHostAddress local = connection_->local_address();
+  if (!timing_->bind(local, 0) || !control_->bind(local, 0)) {
     Fail(tr("Couldn't listen for the AirPlay receiver"));
     return;
   }
@@ -235,6 +263,7 @@ void AirPlaySession::PairM3(const QByteArray& response) {
             airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key",
                                 key));
         qLog(Info) << "Paired with AirPlay receiver" << device_.name;
+        shared_key_ = key;
         state_ = State::SettingUp;
         emit Paired();
         SetupSession();
@@ -303,8 +332,11 @@ void AirPlaySession::SetupSession() {
         const bool asked = !approval_timer_->isActive();
         approval_timer_->stop();
         if (r.code == 400 && asked) {
-          Fail(tr("%1 didn't allow %2 to play there")
-                   .arg(device_.name, options_.name));
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << "didn't allow this sender";
+          Close();
+          emit NotAllowed(tr("%1 didn't allow %2 to play there")
+                              .arg(device_.name, options_.name));
           return;
         }
         if (r.code != 200) {
@@ -316,6 +348,22 @@ void AirPlaySession::SetupSession() {
         qLog(Info) << "Set up a session with AirPlay receiver" << device_.name;
         state_ = State::SetUp;
         emit SetUp();
+
+        QVariant reply;
+        airplay::bplist::Read(r.body, &reply);
+        event_port_ = reply.toMap().value("eventPort").toUInt();
+        if (!event_port_) {
+          SetupStream();
+          return;
+        }
+        // The receiver writes with the Events-Write key.
+        event_cipher_.reset(new airplay::FrameCipher(
+            airplay::HkdfSha512("Events-Salt", "Events-Read-Encryption-Key",
+                                shared_key_),
+            airplay::HkdfSha512("Events-Salt", "Events-Write-Encryption-Key",
+                                shared_key_)));
+        event_attempts_ = 0;
+        ConnectEventChannel();
       },
       options_.approval_timeout_msec);
 }
@@ -326,7 +374,7 @@ void AirPlaySession::TimingReadyRead() {
     const QNetworkDatagram datagram = timing_->receiveDatagram();
     const QByteArray data = datagram.data();
     if (data.size() < 32) continue;
-    const quint64 now = NtpNow();
+    const quint64 now = AirPlayStream::NtpNow();
     // RAOP's timing packets: an RTP-like header with payload type 0x52 for
     // a request and 0x53 for the reply (with the marker bit), sequence
     // number 7, then three NTP timestamps, as pyatv and shairport-sync have
@@ -343,4 +391,179 @@ void AirPlaySession::TimingReadyRead() {
     timing_->writeDatagram(response, datagram.senderAddress(),
                            datagram.senderPort());
   }
+}
+
+bool AirPlaySession::Check(const QByteArray& what, int code) {
+  if (code == 200) return true;
+  Fail(tr("%1 refused %2 (HTTP %3)")
+           .arg(device_.name, QString::fromUtf8(what))
+           .arg(code));
+  return false;
+}
+
+void AirPlaySession::ConnectEventChannel() {
+  if (state_ != State::SetUp) return;
+  ++event_attempts_;
+  event_socket_->connectToHost(device_.address, event_port_);
+}
+
+void AirPlaySession::EventConnected() { SetupStream(); }
+
+void AirPlaySession::EventError() {
+  if (state_ != State::SetUp) return;
+  if (event_attempts_ >= kEventAttempts) {
+    Fail(tr("Couldn't connect to %1's event channel: %2")
+             .arg(device_.name, event_socket_->errorString()));
+    return;
+  }
+  qLog(Debug) << "AirPlay event channel:" << event_socket_->errorString();
+  event_socket_->abort();
+  QTimer::singleShot(1000, this, SLOT(ConnectEventChannel()));
+}
+
+// The receiver sends RTSP requests on the event channel; each gets 200 OK, as
+// Apple's senders do.
+void AirPlaySession::EventReadyRead() {
+  if (!event_cipher_ ||
+      !event_cipher_->Decrypt(event_socket_->readAll(), &event_buffer_)) {
+    qLog(Warning) << "Couldn't decrypt AirPlay event channel";
+    event_socket_->abort();
+    return;
+  }
+  while (true) {
+    const int end = event_buffer_.indexOf("\r\n\r\n");
+    if (end < 0) return;
+    int length = 0;
+    QByteArray cseq;
+    const QList<QByteArray> lines = event_buffer_.left(end).split('\n');
+    for (const QByteArray& line : lines) {
+      const int colon = line.indexOf(':');
+      if (colon < 0) continue;
+      const QByteArray key = line.left(colon).trimmed().toLower();
+      const QByteArray value = line.mid(colon + 1).trimmed();
+      if (key == "content-length") length = value.toInt();
+      if (key == "cseq") cseq = value;
+    }
+    if (event_buffer_.size() < end + 4 + length) return;
+    event_buffer_.remove(0, end + 4 + length);
+    qLog(Debug) << "AirPlay event:" << lines.value(0).trimmed();
+    event_socket_->write(event_cipher_->Encrypt(
+        QByteArray("RTSP/1.0 200 OK\r\nContent-Length: 0\r\n"
+                   "Audio-Latency: 0\r\nCSeq: ") +
+        cseq + "\r\n\r\n"));
+  }
+}
+
+// The second SETUP: a stream of realtime L16 audio.
+void AirPlaySession::SetupStream() {
+  // The receiver takes whatever key it's sent. It's random rather than
+  // derived from the pairing as the other keys are, as pyatv derives it:
+  // that gives the key the receiver encrypts the event channel with, and
+  // both count nonces from 0, so the two would reuse key and nonce together.
+  audio_key_.resize(32);
+  QRandomGenerator::system()->fillRange(
+      reinterpret_cast<quint32*>(audio_key_.data()),
+      audio_key_.size() / sizeof(quint32));
+
+  QVariantMap stream;
+  // The format and stream type pyatv uses: 0x800 is L16 at 44.1 kHz in
+  // stereo, and type 0x60 (96) is realtime audio, rather than buffered (103).
+  stream["audioFormat"] = 0x800;
+  stream["audioMode"] = "default";
+  stream["controlPort"] = control_->localPort();
+  stream["ct"] = 1;  // PCM
+  stream["isMedia"] = true;
+  // 2 s and 0.25 s, as pyatv asks for.
+  stream["latencyMax"] = 88200;
+  stream["latencyMin"] = 11025;
+  stream["shk"] = audio_key_;
+  stream["spf"] = AirPlayStream::kFramesPerPacket;
+  stream["sr"] = AirPlayStream::kSampleRate;
+  stream["type"] = 0x60;  // Realtime audio
+  stream["supportsDynamicStreamID"] = false;
+  stream["streamConnectionID"] = qint64(connection_->session_id());
+  QVariantMap body;
+  body["streams"] = QVariantList{stream};
+  connection_->Rtsp(
+      "SETUP", {}, kPlistType, airplay::bplist::Write(body),
+      [this](const AirPlayRtspConnection::Response& r) {
+        if (!Check("SETUP", r.code)) return;
+        QVariant reply;
+        airplay::bplist::Read(r.body, &reply);
+        const QVariantMap s =
+            reply.toMap().value("streams").toList().value(0).toMap();
+        const quint16 data_port = s.value("dataPort").toUInt();
+        const quint16 control_port = s.value("controlPort").toUInt();
+        if (!data_port || !control_port) {
+          Fail(tr("%1 didn't say where to send audio").arg(device_.name));
+          return;
+        }
+        StartStream(data_port, control_port);
+      });
+}
+
+void AirPlaySession::StartStream(quint16 data_port, quint16 control_port) {
+  stream_ =
+      new AirPlayStream(device_.address, data_port, control_port, control_,
+                        audio_key_, connection_->session_id(), this);
+  stream_->SendSync();
+  sync_timer_->start();
+
+  connection_->Rtsp(
+      "RECORD", {}, QByteArray(), QByteArray(),
+      [this](const AirPlayRtspConnection::Response& r) {
+        if (!Check("RECORD", r.code)) return;
+        quint16 seq;
+        quint32 rtptime;
+        stream_->Next(&seq, &rtptime);
+        connection_->Rtsp(
+            "FLUSH",
+            {{"Range", "npt=0-"},
+             {"RTP-Info",
+              QString("seq=%1;rtptime=%2").arg(seq).arg(rtptime).toUtf8()}},
+            QByteArray(), QByteArray(),
+            [this](const AirPlayRtspConnection::Response& r) {
+              if (!Check("FLUSH", r.code)) return;
+              state_ = State::Ready;
+              feedback_timer_->start();
+              if (volume_ >= 0) SetVolume(volume_);
+              qLog(Info) << "Streaming to AirPlay receiver" << device_.name;
+              emit Ready();
+            });
+      });
+}
+
+void AirPlaySession::Flush() {
+  if (state_ != State::Ready) return;
+  quint16 seq;
+  quint32 rtptime;
+  stream_->Flush(&seq, &rtptime);
+  // Where the stream now goes on from, in time.
+  stream_->SendSync();
+  connection_->Rtsp(
+      "FLUSH",
+      {{"RTP-Info",
+        QString("seq=%1;rtptime=%2").arg(seq).arg(rtptime).toUtf8()}},
+      QByteArray(), QByteArray(), nullptr);
+}
+
+void AirPlaySession::SetVolume(int percent) {
+  volume_ = percent;
+  if (state_ != State::Ready) return;
+  const double db =
+      percent <= 0
+          ? -144.0
+          : qBound(-30.0, 20.0 * std::log10(qMin(percent, 100) / 100.0), 0.0);
+  connection_->Rtsp("SET_PARAMETER", {}, "text/parameters",
+                    QString("volume: %1\r\n").arg(db, 0, 'f', 6).toUtf8(),
+                    nullptr);
+}
+
+void AirPlaySession::SendSync() {
+  if (stream_) stream_->SendSync();
+}
+
+void AirPlaySession::SendFeedback() {
+  connection_->Request("POST", "/feedback", {}, QByteArray(), QByteArray(),
+                       "RTSP/1.0", nullptr);
 }
