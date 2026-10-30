@@ -23,6 +23,7 @@
 
 #include <memory.h>
 
+#include <QFuture>
 #include <QStringList>
 
 #include "core/messagehandler.h"
@@ -53,7 +54,11 @@ class TagReaderClient : public QObject {
   void ReloadSettings();
 
   ReplyType* ReadFile(const QString& filename);
-  ReplyType* SaveFile(const QString& filename, const Song& metadata);
+  // Writes |metadata| to |filename| on a worker. The result is whether it was
+  // written; false, too, if no worker could be asked. Attach what happens
+  // next with then(context, ...), which runs on the context's thread and is
+  // dropped if the context is deleted first.
+  QFuture<bool> SaveFile(const QString& filename, const Song& metadata);
   ReplyType* UpdateSongStatistics(const Song& metadata);
   ReplyType* UpdateSongRating(const Song& metadata);
   ReplyType* IsMediaFile(const QString& filename);
@@ -86,6 +91,8 @@ class TagReaderClient : public QObject {
   void WorkerFailedToStart();
 
  private:
+  ReplyType* SendSaveFile(const QString& filename, const Song& metadata);
+
   static TagReaderClient* sInstance;
 
   WorkerPool<HandlerType>* worker_pool_;
