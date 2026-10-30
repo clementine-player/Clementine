@@ -28,3 +28,20 @@ A Mac14,2 with AirPlay Receiver set to allow anyone on the network, tested
 | Volume | Right: 20·log10 of the gain, so 50% on the slider is about −12 dB. |
 | Pause, seek, skip, gapless | All clean. |
 | Unanswered Allow | Stays on the receiver, stopped, with a message. |
+
+### Passwords and long-term pairing
+
+| Check | Result |
+| --- | --- |
+| No password given | Seen from GET /info before pairing; nothing played. |
+| Wrong password | Pair-setup M4 has error 0x02 (authentication); reported as a wrong password. |
+| Right password | Paired, asked to Allow, then played. |
+| Turning the password off | The Mac advertised no password at once, but kept pairing only with the old one until System Settings was closed. |
+| Too many failed attempts | Pair-setup refused with error 0x03 (backoff), with a retry delay of a few seconds. |
+| Long-term pairing, with a password | M5/M6 accepted, but on a later connection SETUP got 401 after pair-verify: the password is needed every time. |
+| Long-term pairing with 3939, no password | Refused with error 0x02: 3939 is only for transient pairing. |
+| Long-term pairing with the PIN shown, no password | Worked; a later connection pair-verified with no PIN and wasn't asked to Allow. |
+
+So without a password, pairing once with the PIN the Mac shows gives keys to
+connect with afterwards. Whether that stops it asking to Allow again from
+time to time needs watching for longer.

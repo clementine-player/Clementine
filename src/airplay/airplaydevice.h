@@ -32,6 +32,9 @@ struct AirPlayDevice {
   // GET /info). A Mac (AirTunes 980.77.5) was seen to set 0x200 while its
   // "Require password" is on, and to clear it when that's off.
   enum StatusFlag {
+    // Needs a PIN that it shows (bit 3), as openairplay.github.io lists it.
+    // Not yet seen on a receiver.
+    PinRequired = 0x8,
     PasswordRequired = 0x200,
   };
 

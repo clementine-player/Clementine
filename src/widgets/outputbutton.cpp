@@ -108,6 +108,12 @@ void OutputButton::OutputsChanged() {
     // This computer, then the devices.
     if (engine == outputs.first() && outputs.size() > 1) menu_->addSeparator();
   }
+  // Then what can be done with the one playing.
+  const QList<QAction*> actions = router_->active_engine()->output_actions();
+  if (!actions.isEmpty()) {
+    menu_->addSeparator();
+    menu_->addActions(actions);
+  }
 
   const bool local = router_->is_local();
   setIcon(Glyph(local ? "cast" : "cast-connected"));

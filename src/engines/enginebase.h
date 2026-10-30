@@ -34,6 +34,8 @@
 #include "engine_fwd.h"
 #include "playbackrequest.h"
 
+class QAction;
+
 namespace Engine {
 
 typedef std::vector<int16_t> Scope;
@@ -66,6 +68,10 @@ class Base : public QObject {
   // name of its icon in output pickers.
   virtual QString output_name() const { return QString(); }
   virtual QString output_icon() const { return QString(); }
+  // Things to do with the output while it's the one playing, such as pairing
+  // with it, which output pickers offer. The engine owns them, and hides
+  // those that don't apply.
+  virtual QList<QAction*> output_actions() const { return {}; }
   // For an output that fetches its media from the network remote without
   // connecting to it otherwise, such as a Cast device: its address. Null for
   // any other.

@@ -21,6 +21,7 @@
 #include <QByteArray>
 #include <QHostAddress>
 #include <QList>
+#include <QMap>
 #include <QObject>
 #include <QPair>
 #include <QSet>
@@ -43,6 +44,8 @@ class QUdpSocket;
 // - Transient pair-setup with SRP, using the password as the PIN (or 3939).
 //   A wrong PIN gets M4 with error 2.
 // - Then everything on the connection is encrypted.
+// - With a password, the first SETUP gets 401 unless pair-setup used it on
+//   this connection: pair-verify isn't enough.
 // - It asks its user whether to allow each sender name it doesn't know,
 //   holding the first SETUP until Allow() is called. Setting a password
 //   forgets the allowed names.
@@ -63,6 +66,17 @@ class FakeAirPlayReceiver : public QObject {
 
   // Empty for none. Setting one forgets the allowed names, as a Mac did.
   void SetPassword(const QString& password);
+  // A PIN it shows when asked with /pair-pin-start, and pairs with then, as
+  // an Apple TV does. Empty for none.
+  void set_pin(const QString& pin) { pin_ = pin; }
+  // Forgets the senders it paired with persistently.
+  void ForgetSenders() { senders_.clear(); }
+  // The senders it remembers: pairing id to Ed25519 public key.
+  QMap<QByteArray, QByteArray> senders() const { return senders_; }
+  static QByteArray PairingId() { return "fake-receiver"; }
+  // Its long-term public key.
+  static QByteArray PublicKey();
+
   // Whether its status flags say it has a password. A Mac kept wanting one
   // after saying it didn't.
   void set_report_password(bool report) { report_password_ = report; }
@@ -126,6 +140,10 @@ class FakeAirPlayReceiver : public QObject {
   // False if |request| has to wait for its sender name to be allowed.
   bool CheckAllowed(const Request& request);
   void PairSetup(const Request& request);
+  void PairSetupM5(const Request& request);
+  void PairVerify(const Request& request);
+  // Encrypts the connection with keys from |shared|.
+  void Encrypt(const QByteArray& shared);
   bool SetupStream(const Request& request);
   void SendTimingRequest();
   void TimingReadyRead();
@@ -164,6 +182,16 @@ class FakeAirPlayReceiver : public QObject {
   bool torn_down_;
 
   QByteArray shared_key_;
+  QString pin_;
+  bool showing_pin_;
+  QByteArray srp_key_;
+  // Whether pair-setup used the password on this connection.
+  bool password_proven_;
+  QMap<QByteArray, QByteArray> senders_;
+  // Pair-verify, between M2 and M4.
+  QByteArray verify_shared_;
+  QByteArray verify_their_public_;
+  QByteArray verify_our_public_;
   QTcpServer* event_server_;
   QTcpSocket* event_socket_;
   std::unique_ptr<airplay::FrameCipher> event_cipher_;
