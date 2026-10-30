@@ -73,6 +73,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEngine::OutputDetails>("GstEngine::OutputDetails");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
+  qRegisterMetaType<DirectoryManager*>("DirectoryManager*");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
   qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
