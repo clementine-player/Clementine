@@ -445,7 +445,7 @@ void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   // Icon and text
   p.setPen(palette().color(QPalette::Text));
   p.drawPixmap(icon, icon_);
-  p.drawText(text, Qt::TextDontClip | Qt::AlignVCenter, text_);
+  p.drawText(text, Qt::AlignVCenter | Qt::TextDontClip, text_);
 }
 
 void SearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {

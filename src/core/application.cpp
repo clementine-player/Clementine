@@ -105,12 +105,12 @@ class ApplicationImpl {
           app->MoveToNewThread(loader);
           return loader;
         }),
-        playlist_backend_([=]() {
+        playlist_backend_([=, this]() {
           PlaylistBackend* backend = new PlaylistBackend(app, app);
           app->MoveToThread(backend, database_->thread());
           return backend;
         }),
-        podcast_backend_([=]() {
+        podcast_backend_([=, this]() {
           PodcastBackend* backend = new PodcastBackend(app, app);
           app->MoveToThread(backend, database_->thread());
           return backend;

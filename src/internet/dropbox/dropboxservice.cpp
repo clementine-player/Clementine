@@ -200,7 +200,7 @@ void DropboxService::RequestFileList() {
     QJsonDocument document(json);
     QNetworkReply* reply = network_->post(request, document.toJson());
     connect(reply, &QNetworkReply::finished,
-            [=] { this->RequestFileListFinished(reply); });
+            [=, this] { this->RequestFileListFinished(reply); });
   } else {
     QUrl url = QUrl(kListFolderContinueEndpoint);
     QJsonObject json;
@@ -211,7 +211,7 @@ void DropboxService::RequestFileList() {
     request.setRawHeader("Content-Type", "application/json; charset=utf-8");
     QNetworkReply* reply = network_->post(request, document.toJson());
     connect(reply, &QNetworkReply::finished,
-            [=] { this->RequestFileListFinished(reply); });
+            [=, this] { this->RequestFileListFinished(reply); });
   }
 }
 
@@ -269,7 +269,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
     if (ShouldIndexFile(url, GuessMimeTypeForFile(url.toString()))) {
       QNetworkReply* reply = FetchContentUrl(url);
-      connect(reply, &QNetworkReply::finished, [=] {
+      connect(reply, &QNetworkReply::finished, [=, this] {
         this->FetchContentUrlFinished(reply, item.toVariantMap());
       });
     }
@@ -304,7 +304,7 @@ void DropboxService::LongPollDelta() {
   QJsonDocument document(json);
   QNetworkReply* reply = network_->post(request, document.toJson());
   connect(reply, &QNetworkReply::finished,
-          [=] { this->LongPollFinished(reply); });
+          [=, this] { this->LongPollFinished(reply); });
 }
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {

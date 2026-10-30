@@ -216,7 +216,7 @@ void JamendoService::Request(QStandardItem* item, const QString& endpoint,
       app_->task_manager()->StartTask(tr("Loading %1").arg(item->text()));
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   const QPersistentModelIndex index(item->index());
-  connect(reply, &QNetworkReply::finished, this, [=] {
+  connect(reply, &QNetworkReply::finished, this, [=, this] {
     RequestFinished(reply, index, endpoint, query, retries_left, task_id);
   });
 }

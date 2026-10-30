@@ -168,7 +168,7 @@ void LyricsFetcher::LrclibGet(int id, const Song& song) {
   request.setRawHeader("User-Agent", kLrclibUserAgent);
   QNetworkReply* reply = network_->get(request);
   connect(reply, &QNetworkReply::finished, this,
-          [=] { LrclibGetFinished(reply, id, song); });
+          [=, this] { LrclibGetFinished(reply, id, song); });
 }
 
 void LyricsFetcher::LrclibGetFinished(QNetworkReply* reply, int id,
@@ -205,7 +205,7 @@ void LyricsFetcher::LrclibGetFinished(QNetworkReply* reply, int id,
   request.setRawHeader("User-Agent", kLrclibUserAgent);
   QNetworkReply* search = network_->get(request);
   connect(search, &QNetworkReply::finished, this,
-          [=] { LrclibSearchFinished(search, id, song); });
+          [=, this] { LrclibSearchFinished(search, id, song); });
 }
 
 void LyricsFetcher::LrclibSearchFinished(QNetworkReply* reply, int id,
