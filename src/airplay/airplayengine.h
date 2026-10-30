@@ -18,12 +18,14 @@
 #ifndef AIRPLAY_AIRPLAYENGINE_H_
 #define AIRPLAY_AIRPLAYENGINE_H_
 
+#include <QPointer>
 #include <memory>
 
 #include "airplaydevice.h"
 #include "engines/gstengine.h"
 
 class AirPlaySession;
+class QInputDialog;
 class Application;
 
 // The engine for one AirPlay receiver: an output of the EngineRouter.
@@ -59,7 +61,9 @@ class AirPlayEngine : public GstEngine {
   qint64 position_nanosec() const override;
   QString output_name() const override { return device_.name; }
   QString output_icon() const override;
+  QList<QAction*> output_actions() const override;
   void ReloadSettings() override;
+
  signals:
   // The receiver couldn't be paired with or played on, or went away. Not
   // when its user didn't allow Clementine: it stays the output, stopped, and
@@ -75,16 +79,46 @@ class AirPlayEngine : public GstEngine {
   void SessionReady();
   void SessionFailed(const QString& error);
   void SessionNotAllowed(const QString& message);
+  void PasswordNeeded(bool wrong);
+  void PinShown();
+  void PairedPersistently(const QByteArray& receiver_pairing_id,
+                          const QByteArray& receiver_public_key);
+  void PairingForgotten();
+  // From the outputs menu.
+  void PairRequested();
+  void ForgetPairing();
   void StreamFlushed();
 
  private:
   class Target;
+
+  // Opens the session with what's kept in the settings for this receiver.
+  void OpenSession();
+  // Where this receiver's password and pairing are kept.
+  QString SettingsGroup() const;
+  bool paired() const;
+  // Shows the actions that apply.
+  void UpdateActions();
+  // The password or PIN dialog, which replaces any open one. It's closed when
+  // playback stops and with the engine.
+  QInputDialog* NewDialog(const QString& kind);
+  void CloseDialog();
 
   AirPlayDevice device_;
   AirPlaySession* session_;
   std::shared_ptr<Target> target_;
   // Play() waits for the session: where to start, or -1.
   qint64 pending_play_nanosec_;
+  // Whether pairing again was tried after the receiver forgot this sender.
+  bool repaired_;
+  // Whether the user asked to pair with long-term keys.
+  bool pair_requested_;
+  // Whether the receiver showed a PIN, which a refusal then means was wrong.
+  bool pin_shown_;
+  bool pin_wrong_;
+  QAction* pair_action_;
+  QPointer<QInputDialog> dialog_;
+  QAction* forget_action_;
 };
 
 #endif  // AIRPLAY_AIRPLAYENGINE_H_

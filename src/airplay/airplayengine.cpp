@@ -17,10 +17,14 @@
 
 #include "airplayengine.h"
 
+#include <QAction>
+#include <QInputDialog>
+#include <QLineEdit>
 #include <QMetaObject>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QPointer>
+#include <QSettings>
 
 #include "airplaysession.h"
 #include "airplaysink.h"
@@ -65,11 +69,25 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
       device_(device),
       session_(nullptr),
       target_(new Target(this)),
-      pending_play_nanosec_(-1) {
+      pending_play_nanosec_(-1),
+      repaired_(false),
+      pair_requested_(false),
+      pin_shown_(false),
+      pin_wrong_(false),
+      pair_action_(new QAction(this)),
+      forget_action_(new QAction(this)) {
   setParent(parent);
-  AirPlaySession::Options options;
-  options.sender_id = AirPlaySession::SavedSenderId();
-  session_ = new AirPlaySession(options, this);
+  connect(pair_action_, &QAction::triggered, this,
+          &AirPlayEngine::PairRequested);
+  connect(forget_action_, &QAction::triggered, this,
+          &AirPlayEngine::ForgetPairing);
+  UpdateActions();
+  session_ = new AirPlaySession(AirPlaySession::Options(), this);
+  connect(session_, SIGNAL(PasswordNeeded(bool)), SLOT(PasswordNeeded(bool)));
+  connect(session_, SIGNAL(PinShown()), SLOT(PinShown()));
+  connect(session_, SIGNAL(PairedPersistently(QByteArray, QByteArray)),
+          SLOT(PairedPersistently(QByteArray, QByteArray)));
+  connect(session_, SIGNAL(PairingForgotten()), SLOT(PairingForgotten()));
   connect(session_, SIGNAL(WaitingForApproval()), SLOT(WaitingForApproval()));
   connect(session_, SIGNAL(Ready()), SLOT(SessionReady()));
   connect(session_, SIGNAL(Failed(QString)), SLOT(SessionFailed(QString)));
@@ -80,9 +98,40 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
   ReloadSettings();
 }
 
-AirPlayEngine::~AirPlayEngine() { target_->SetStream(nullptr); }
+AirPlayEngine::~AirPlayEngine() {
+  CloseDialog();
+  target_->SetStream(nullptr);
+}
 
-void AirPlayEngine::SetDevice(const AirPlayDevice& device) { device_ = device; }
+void AirPlayEngine::SetDevice(const AirPlayDevice& device) {
+  device_ = device;
+  UpdateActions();
+}
+
+QList<QAction*> AirPlayEngine::output_actions() const {
+  return {pair_action_, forget_action_};
+}
+
+bool AirPlayEngine::paired() const {
+  QSettings s;
+  s.beginGroup(SettingsGroup());
+  return s.contains("public_key");
+}
+
+// A receiver that has a password wants it on every connection, so pairing
+// with long-term keys is only offered for one that hasn't. One that needs a
+// PIN pairs that way anyway.
+void AirPlayEngine::UpdateActions() {
+  const bool paired = this->paired();
+  // TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
+  // shows a PIN once, after which it lets Clementine play without asking.
+  pair_action_->setText(tr("Pair with %1...").arg(device_.name));
+  pair_action_->setVisible(
+      !paired && !device_.password_required() &&
+      !(device_.status_flags & AirPlayDevice::PinRequired));
+  forget_action_->setText(tr("Forget pairing with %1").arg(device_.name));
+  forget_action_->setVisible(paired);
+}
 
 QString AirPlayEngine::output_icon() const {
   if (device_.model.startsWith("AppleTV")) return "tv";
@@ -105,7 +154,7 @@ bool AirPlayEngine::Load(const MediaPlaybackRequest& req,
                          qint64 end_nanosec) {
   EnsureInitialised();
   AirPlaySink::RegisterElement();
-  if (!session_->is_open()) session_->Open(device_);
+  if (!session_->is_open()) OpenSession();
   if (change & Engine::Manual && session_->is_ready()) {
     // The user skipped: what the receiver has buffered of the last track is
     // dropped, and the last track's pipeline, which may still be rendering,
@@ -124,7 +173,7 @@ bool AirPlayEngine::Play(quint64 offset_nanosec) {
   if (!session_->is_ready()) {
     // Plays once the receiver is ready, which it may first ask its user.
     pending_play_nanosec_ = offset_nanosec;
-    if (!session_->is_open()) session_->Open(device_);
+    if (!session_->is_open()) OpenSession();
     return true;
   }
   return GstEngine::Play(offset_nanosec);
@@ -152,6 +201,26 @@ void AirPlayEngine::Stop(bool stop_after) {
   GstEngine::Stop(stop_after);
   target_->SetStream(nullptr);
   session_->Close();
+  CloseDialog();
+}
+
+QInputDialog* AirPlayEngine::NewDialog(const QString& kind) {
+  CloseDialog();
+  // Parentless, since an engine has no window, but closed with the engine.
+  dialog_ = new QInputDialog;
+  dialog_->setObjectName(kind);
+  dialog_->setAttribute(Qt::WA_DeleteOnClose);
+  return dialog_;
+}
+
+void AirPlayEngine::CloseDialog() {
+  if (dialog_ && dialog_->isVisible()) {
+    // Closing it isn't the user cancelling.
+    dialog_->disconnect(this);
+    dialog_->disconnect(session_);
+    dialog_->close();
+  }
+  dialog_.clear();
 }
 
 // The receiver ran dry while paused: it plays from what comes next.
@@ -189,4 +258,143 @@ void AirPlayEngine::SessionFailed(const QString& error) {
   GstEngine::Stop();
   emit Error(error);
   emit DeviceFailed();
+}
+
+QString AirPlayEngine::SettingsGroup() const {
+  // Device ids look like MAC addresses, whose colons settings keys avoid.
+  return QString("AirPlay/receivers/%1").arg(QString(device_.id).remove(':'));
+}
+
+void AirPlayEngine::OpenSession() {
+  QSettings s;
+  AirPlaySession::Options options;
+  options.sender_id = AirPlaySession::SavedSenderId();
+  s.beginGroup(SettingsGroup());
+  options.password = s.value("password").toString();
+  options.receiver_pairing_id = s.value("pairing_id").toByteArray();
+  options.receiver_public_key =
+      QByteArray::fromHex(s.value("public_key").toByteArray());
+  s.endGroup();
+  // Long-term keys, which the receiver showing a PIN gives, for a receiver
+  // that needs a PIN or that the user paired with. Others pair transiently,
+  // with the password if they have one.
+  const bool needs_pin = device_.status_flags & AirPlayDevice::PinRequired;
+  const bool keys =
+      !options.receiver_public_key.isEmpty() && !device_.password_required();
+  if (needs_pin || pair_requested_ || keys) {
+    options.identity_seed = AirPlaySession::SavedIdentitySeed();
+  } else {
+    options.receiver_pairing_id.clear();
+    options.receiver_public_key.clear();
+  }
+  options.show_pin =
+      (needs_pin || pair_requested_) && options.receiver_public_key.isEmpty();
+  session_->set_options(options);
+  session_->Open(device_);
+}
+
+// Asks for the receiver's password, then tries again with it.
+void AirPlayEngine::PasswordNeeded(bool wrong) {
+  // What was to play stays loaded meanwhile.
+  const qint64 offset = pending_play_nanosec_;
+  if (pin_shown_) {
+    // The PIN was wrong: the receiver shows a new one.
+    pin_wrong_ = true;
+    OpenSession();
+    return;
+  }
+  // Asked again before answering, as when playing again.
+  if (dialog_ && dialog_->isVisible() && dialog_->objectName() == "password") {
+    dialog_->raise();
+    dialog_->activateWindow();
+    return;
+  }
+  QInputDialog* dialog = NewDialog("password");
+  dialog->setWindowTitle(tr("AirPlay password"));
+  dialog->setLabelText(
+      wrong ? tr("That password was wrong. Enter %1's AirPlay password:")
+                  .arg(device_.name)
+            : tr("Enter %1's AirPlay password:").arg(device_.name));
+  dialog->setTextEchoMode(QLineEdit::Password);
+  connect(dialog, &QInputDialog::textValueSelected, this,
+          [this, offset](const QString& password) {
+            QSettings s;
+            s.beginGroup(SettingsGroup());
+            s.setValue("password", password);
+            pending_play_nanosec_ = qMax<qint64>(0, offset);
+            OpenSession();
+          });
+  connect(dialog, &QInputDialog::rejected, this, [this]() { Stop(); });
+  dialog->open();
+}
+
+// Asks for the PIN the receiver shows.
+void AirPlayEngine::PinShown() {
+  pin_shown_ = true;
+  // The receiver shows a new PIN each time, so this replaces any dialog.
+  QInputDialog* dialog = NewDialog("pin");
+  dialog->setWindowTitle(tr("AirPlay PIN"));
+  dialog->setLabelText(
+      pin_wrong_ ? tr("That PIN was wrong. Enter the PIN %1 shows now:")
+                       .arg(device_.name)
+                 : tr("Enter the PIN %1 shows:").arg(device_.name));
+  pin_wrong_ = false;
+  connect(dialog, &QInputDialog::textValueSelected, session_,
+          &AirPlaySession::SubmitPin);
+  connect(dialog, &QInputDialog::rejected, this, [this]() {
+    pin_shown_ = false;
+    pair_requested_ = false;
+    Stop();
+  });
+  dialog->open();
+}
+
+void AirPlayEngine::PairedPersistently(const QByteArray& receiver_pairing_id,
+                                       const QByteArray& receiver_public_key) {
+  QSettings s;
+  s.beginGroup(SettingsGroup());
+  s.setValue("pairing_id", receiver_pairing_id);
+  s.setValue("public_key", receiver_public_key.toHex());
+  repaired_ = false;
+  pin_shown_ = false;
+  const bool requested = pair_requested_;
+  pair_requested_ = false;
+  UpdateActions();
+  // Pairing was all the user asked for.
+  if (requested && state() != Engine::Playing && state() != Engine::Paused) {
+    session_->Close();
+  }
+}
+
+// Pairs with the PIN the receiver shows, for long-term keys.
+void AirPlayEngine::PairRequested() {
+  pair_requested_ = true;
+  session_->Close();
+  target_->SetStream(nullptr);
+  OpenSession();
+}
+
+void AirPlayEngine::ForgetPairing() {
+  QSettings s;
+  s.beginGroup(SettingsGroup());
+  s.remove("pairing_id");
+  s.remove("public_key");
+  UpdateActions();
+}
+
+// The receiver forgot this sender, so it pairs again, once.
+void AirPlayEngine::PairingForgotten() {
+  QSettings s;
+  s.beginGroup(SettingsGroup());
+  s.remove("pairing_id");
+  s.remove("public_key");
+  UpdateActions();
+  if (repaired_) {
+    SessionFailed(tr("%1 doesn't remember Clementine, and pairing again "
+                     "didn't work")
+                      .arg(device_.name));
+    return;
+  }
+  repaired_ = true;
+  OpenSession();
 }

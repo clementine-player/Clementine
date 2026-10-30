@@ -48,6 +48,21 @@ QByteArray Seal(const QByteArray& key, const QByteArray& nonce,
 bool Open(const QByteArray& key, const QByteArray& nonce, const QByteArray& aad,
           const QByteArray& sealed, QByteArray* plain);
 
+// 32 random bytes, for keys.
+QByteArray RandomKey();
+
+// Ed25519 (RFC 8032), which HomeKit pairing signs with. A key pair is made
+// from a 32-byte seed, which is what's kept.
+QByteArray Ed25519PublicKey(const QByteArray& seed);
+QByteArray Ed25519Sign(const QByteArray& seed, const QByteArray& message);
+bool Ed25519Verify(const QByteArray& public_key, const QByteArray& signature,
+                   const QByteArray& message);
+
+// X25519 (RFC 7748), which pair-verify agrees on a shared secret with.
+QByteArray X25519PublicKey(const QByteArray& secret);
+QByteArray X25519Shared(const QByteArray& secret,
+                        const QByteArray& their_public);
+
 // The encryption AirPlay 2 puts on its TCP connections after pairing: frames
 // of at most 1024 bytes, each preceded by its length (16-bit little endian),
 // which is also the additional authenticated data.

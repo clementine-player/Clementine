@@ -19,8 +19,10 @@
 
 #include <QCryptographicHash>
 #include <QMessageAuthenticationCode>
+#include <QRandomGenerator>
 #include <QtEndian>
 
+#include "monocypher-ed25519.h"
 #include "monocypher.h"
 
 namespace airplay {
@@ -94,6 +96,66 @@ bool Open(const QByteArray& key, const QByteArray& nonce, const QByteArray& aad,
   if (mismatch) return false;
   *plain = out;
   return true;
+}
+
+QByteArray RandomKey() {
+  QByteArray key(32, '\0');
+  QRandomGenerator::system()->fillRange(reinterpret_cast<quint32*>(key.data()),
+                                        key.size() / sizeof(quint32));
+  return key;
+}
+
+namespace {
+
+// Monocypher's Ed25519 secret key: the seed, then the public key.
+QByteArray Ed25519SecretKey(const QByteArray& seed, QByteArray* public_key) {
+  Q_ASSERT(seed.size() == 32);
+  QByteArray seed_copy = seed;  // Wiped by Monocypher
+  QByteArray secret(64, '\0');
+  public_key->resize(32);
+  crypto_ed25519_key_pair(Bytes(&secret), Bytes(public_key), Bytes(&seed_copy));
+  return secret;
+}
+
+}  // namespace
+
+QByteArray Ed25519PublicKey(const QByteArray& seed) {
+  QByteArray public_key;
+  QByteArray secret = Ed25519SecretKey(seed, &public_key);
+  crypto_wipe(Bytes(&secret), secret.size());
+  return public_key;
+}
+
+QByteArray Ed25519Sign(const QByteArray& seed, const QByteArray& message) {
+  QByteArray public_key;
+  QByteArray secret = Ed25519SecretKey(seed, &public_key);
+  QByteArray signature(64, '\0');
+  crypto_ed25519_sign(Bytes(&signature), Bytes(secret), Bytes(message),
+                      message.size());
+  crypto_wipe(Bytes(&secret), secret.size());
+  return signature;
+}
+
+bool Ed25519Verify(const QByteArray& public_key, const QByteArray& signature,
+                   const QByteArray& message) {
+  if (public_key.size() != 32 || signature.size() != 64) return false;
+  return crypto_ed25519_check(Bytes(signature), Bytes(public_key),
+                              Bytes(message), message.size()) == 0;
+}
+
+QByteArray X25519PublicKey(const QByteArray& secret) {
+  Q_ASSERT(secret.size() == 32);
+  QByteArray public_key(32, '\0');
+  crypto_x25519_public_key(Bytes(&public_key), Bytes(secret));
+  return public_key;
+}
+
+QByteArray X25519Shared(const QByteArray& secret,
+                        const QByteArray& their_public) {
+  if (their_public.size() != 32) return QByteArray();
+  QByteArray shared(32, '\0');
+  crypto_x25519(Bytes(&shared), Bytes(secret), Bytes(their_public));
+  return shared;
 }
 
 FrameCipher::FrameCipher(const QByteArray& out_key, const QByteArray& in_key)
