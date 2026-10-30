@@ -71,6 +71,16 @@ if(HAVE_TRANSLATIONS)
 endif(HAVE_TRANSLATIONS)
 
 set(SOURCES
+  airplay/airplaycrypto.cpp
+  airplay/airplaydevice.cpp
+  airplay/airplaydiscovery.cpp
+  airplay/airplayengine.cpp
+  airplay/airplayplist.cpp
+  airplay/airplayrtspconnection.cpp
+  airplay/airplaysession.cpp
+  airplay/airplaysrp.cpp
+  airplay/airplaytlv8.cpp
+
   analyzers/analyzerbase.cpp
   analyzers/analyzercontainer.cpp
   analyzers/baranalyzer.cpp
@@ -465,6 +475,11 @@ set(SOURCES
 )
 
 set(HEADERS
+  airplay/airplaydiscovery.h
+  airplay/airplayengine.h
+  airplay/airplayrtspconnection.h
+  airplay/airplaysession.h
+
   analyzers/analyzerbase.h
   analyzers/analyzercontainer.h
   analyzers/baranalyzer.h
@@ -967,6 +982,7 @@ list(APPEND UI
 # Platform specific - OS X
 optional_source(APPLE
   SOURCES
+    airplay/bonjourairplaydiscovery.cpp
     chromecast/bonjourcastdiscovery.cpp
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
@@ -980,6 +996,7 @@ optional_source(APPLE
     ui/sfsymbolicon.mm
     widgets/osd_mac.mm
   HEADERS
+    airplay/bonjourairplaydiscovery.h
     chromecast/bonjourcastdiscovery.h
     core/macfslistener.h
     core/macglobalshortcutbackend.h
@@ -999,15 +1016,19 @@ endif()
 # Platform specific - Windows
 optional_source(WIN32
   SOURCES
+    airplay/windowsairplaydiscovery.cpp
     chromecast/windowscastdiscovery.cpp
     core/windowsmediacontrols.cpp
     core/windowssleepinhibitor.cpp
     engines/directsounddevicefinder.cpp
     networkremote/windowsdnssd.cpp
+    networkremote/windowsdnssdbrowser.cpp
     widgets/osd_win.cpp
   HEADERS
+    airplay/windowsairplaydiscovery.h
     chromecast/windowscastdiscovery.h
     core/windowsmediacontrols.h
+    networkremote/windowsdnssdbrowser.h
 )
 
 # Platform specific - X11
@@ -1118,12 +1139,14 @@ endif(UNIX AND HAVE_DBUS)
 
 optional_source(HAVE_DBUS
   SOURCES
+    airplay/avahiairplaydiscovery.cpp
     chromecast/avahicastdiscovery.cpp
     core/dbussleepinhibitor.cpp
     core/mpris.cpp
     core/mpris2.cpp
     networkremote/avahi.cpp
   HEADERS
+    airplay/avahiairplaydiscovery.h
     chromecast/avahicastdiscovery.h
     core/dbussleepinhibitor.h
     core/mpris.h
@@ -1338,6 +1361,8 @@ add_library(clementine_lib STATIC
 
 target_link_libraries(clementine_lib
   cast_channel
+  mini-gmp
+  monocypher
   libclementine-common
   libclementine-tagreader
   libclementine-remote

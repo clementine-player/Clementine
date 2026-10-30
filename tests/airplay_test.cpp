@@ -1,0 +1,543 @@
+/* This file is part of Clementine.
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include <QElapsedTimer>
+#include <QSignalSpy>
+#include <QTimer>
+#include <QVariantMap>
+
+#include "airplay/airplaycrypto.h"
+#include "airplay/airplaydevice.h"
+#include "airplay/airplaydiscovery.h"
+#include "airplay/airplayplist.h"
+#include "airplay/airplaysession.h"
+#include "airplay/airplaysrp.h"
+#include "airplay/airplaytlv8.h"
+#include "fakeairplayreceiver.h"
+#include "gtest/gtest.h"
+#include "test_utils.h"
+
+using namespace airplay;
+
+// For gtest's failure messages.
+std::ostream& operator<<(std::ostream& stream, const QByteArray& bytes) {
+  return stream << bytes.toHex().constData();
+}
+
+std::ostream& operator<<(std::ostream& stream, const QSet<QString>& set) {
+  return stream << QStringList(set.begin(), set.end()).join(", ");
+}
+
+namespace {
+
+// RFC 8439 section 2.8.2.
+TEST(AirPlayTest, ChaCha20Poly1305) {
+  QByteArray key;
+  for (int i = 0x80; i < 0xa0; ++i) key.append(char(i));
+  const QByteArray nonce = QByteArray::fromHex("070000004041424344454647");
+  const QByteArray aad = QByteArray::fromHex("50515253c0c1c2c3c4c5c6c7");
+  const QByteArray plain(
+      "Ladies and Gentlemen of the class of '99: If I could offer you only "
+      "one tip for the future, sunscreen would be it.");
+  const QByteArray expected = QByteArray::fromHex(
+      "d31a8d34648e60db7b86afbc53ef7ec2a4aded51296e08fea9e2b5a736ee62d63dbea4"
+      "5e8ca9671282fafb69da92728b1a71de0a9e060b2905d6a5b67ecd3b3692ddbd7f2d77"
+      "8b8c9803aee328091b58fab324e4fad675945585808b4831d7bc3ff4def08e4b7a9de5"
+      "76d26586cec64b6116"
+      "1ae10b594f09e26a7e902ecbd0600691");
+
+  const QByteArray sealed = Seal(key, nonce, aad, plain);
+  EXPECT_EQ(sealed.toHex(), expected.toHex());
+
+  QByteArray opened;
+  EXPECT_TRUE(Open(key, nonce, aad, sealed, &opened));
+  EXPECT_EQ(opened, plain);
+
+  QByteArray tampered = sealed;
+  tampered[0] = char(tampered[0] ^ 1);
+  EXPECT_FALSE(Open(key, nonce, aad, tampered, &opened));
+}
+
+// Checked against Python's cryptography package.
+TEST(AirPlayTest, Hkdf) {
+  QByteArray secret;
+  for (int i = 0; i < 64; ++i) secret.append(char(i));
+  EXPECT_EQ(HkdfSha512("Control-Salt", "Control-Write-Encryption-Key", secret)
+                .toHex(),
+            QByteArray("5a6cb19bcbe7d4df2dd8279f39562f7fae2dbf73eb5a4f98849c24"
+                       "5c82b2fe96"));
+}
+
+TEST(AirPlayTest, Nonce) {
+  EXPECT_EQ(Nonce(0x0102).toHex(), QByteArray("000000000201000000000000"));
+}
+
+TEST(AirPlayTest, FrameCipherRoundTrip) {
+  const QByteArray a(32, 'a');
+  const QByteArray b(32, 'b');
+  FrameCipher sender(a, b);
+  FrameCipher receiver(b, a);
+  // Over 1024 bytes, so it's split into two frames.
+  const QByteArray message(1500, 'x');
+  QByteArray wire = sender.Encrypt(message);
+  wire += sender.Encrypt("more");
+  EXPECT_EQ(wire.size(), 1500 + 4 + 2 * 3 + 16 * 3);
+
+  // Arriving in pieces.
+  QByteArray plain;
+  EXPECT_TRUE(receiver.Decrypt(wire.left(100), &plain));
+  EXPECT_TRUE(plain.isEmpty());
+  EXPECT_TRUE(receiver.Decrypt(wire.mid(100), &plain));
+  EXPECT_EQ(plain, message + "more");
+}
+
+// The same inputs give the same results as the Rust proof of concept,
+// which was checked against srptools. The salt's leading zero byte is
+// dropped before hashing, as srptools does.
+TEST(AirPlayTest, Srp) {
+  const QByteArray a(QByteArray::fromHex(QByteArray(64, '1')));
+  const QByteArray salt =
+      QByteArray::fromHex("00a1b2c3d4e5f60718293a4b5c6d7e8f");
+  const QByteArray b_hash = Sha512("b").toHex();
+  const QByteArray b = QByteArray::fromHex(
+      "7f" + (b_hash + b_hash + b_hash + b_hash + b_hash + b_hash).mid(2));
+
+  const SrpClient::Result r = SrpClient(a).Process("3939", salt, b);
+  EXPECT_EQ(
+      r.public_key.toHex(),
+      QByteArray(
+          "c95341372ca4d0b469f87c0ae37bda635713223b577ef5e8d64a959a54e53957"
+          "22fea50e71bbd44306055760924a64885805ae13545fcfc7e65f4e7b75c765a1"
+          "12d267f79bffb8353d96ae81cfa64ca7eb687a5dba4cf223b21e1362489ca3e0"
+          "56254b25f610c00643490ea19944f6d3d0872bdcc5fc338bebc8936f30b69592"
+          "4e117f364a4cfc3898eeaa1a4bb98957df8eb046eba3cf42558138ca616a1dc7"
+          "991426292dd258693bbd4c11816e3064e4a7c536f7255ae61735db25e3cf0349"
+          "eb8b3e9848d0aa572b0f809d8983f1b280581aba96104422fcf088b698f8d899"
+          "115a5653cc473e87f5e45552a5a126c8b7fc273bd2cd12bfb15ff3501a572b17"
+          "608f16c33f6e971081f3af1be37a0a96748f60d204e935f6a5d2a71303aea434"
+          "b45bcb9ab6b4444208d3fdf7a00c07a3ba2a09b56b578170c78ba1573ca26924"
+          "06ba8d461e43bb3d160f0024a388d7234236537e29c3604f666c69d7244eae29"
+          "a0e8b9fa5ee490890e5892973fa535707fbe8f06e90dcbb99c7b39b5eb2b45f"
+          "b"));
+  EXPECT_EQ(
+      r.proof.toHex(),
+      QByteArray(
+          "dcffaf5aa2754af8645619e632a9cc034c7f8d5c6095120893a6bff857f89887"
+          "971aa93102c75d77e80553b98eb7351fc98bcf01a840d52a1806d83607b39eb"
+          "1"));
+  EXPECT_EQ(
+      r.key.toHex(),
+      QByteArray(
+          "eb3b50c2e3514a00ec9c72d3bf32d99f2145de13f86a74cdf0b7a49a38477051"
+          "4011c96ee111133bf8885a879360fbee39c58c0d74d6cefb0a52277419451b9"
+          "0"));
+}
+
+TEST(AirPlayTest, Tlv8) {
+  const QByteArray big(300, 'k');
+  const QByteArray wire = tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 3)},
+                                       {tlv8::kPublicKey, big},
+                                       {tlv8::kProof, QByteArray()}});
+  EXPECT_EQ(wire.size(), 3 + 2 + 255 + 2 + 45 + 2);
+  const tlv8::Items items = tlv8::Read(wire);
+  EXPECT_EQ(items.size(), 3);
+  EXPECT_EQ(tlv8::Get(items, tlv8::kPublicKey), big);
+  EXPECT_EQ(tlv8::Get(items, tlv8::kSeqNo), QByteArray(1, 3));
+  EXPECT_TRUE(tlv8::Get(items, tlv8::kSalt).isNull());
+}
+
+TEST(AirPlayTest, BinaryPlistRoundTrip) {
+  QVariantMap stream;
+  stream["audioFormat"] = 0x800;
+  stream["shk"] = QByteArray(32, '\x01');
+  stream["isMedia"] = true;
+  stream["latencyMax"] = 88200;
+  stream["big"] = qint64(0x123456789LL);
+  stream["negative"] = -1;
+  stream["ratio"] = 0.5;
+  stream["name"] = QString("Clementine on a very long name indeed");
+  stream["unicode"] = QString::fromUtf8("Caf\xc3\xa9");
+  QVariantMap root;
+  root["streams"] = QVariantList{stream, QVariantList{}};
+
+  const QByteArray data = bplist::Write(root);
+  EXPECT_TRUE(data.startsWith("bplist00"));
+  QVariant read;
+  EXPECT_TRUE(bplist::Read(data, &read));
+  const QVariantMap s = read.toMap().value("streams").toList().value(0).toMap();
+  EXPECT_EQ(s.value("audioFormat").toLongLong(), 0x800);
+  EXPECT_EQ(s.value("shk").toByteArray(), QByteArray(32, '\x01'));
+  EXPECT_EQ(s.value("isMedia").toBool(), true);
+  EXPECT_EQ(s.value("latencyMax").toLongLong(), 88200);
+  EXPECT_EQ(s.value("big").toLongLong(), 0x123456789LL);
+  EXPECT_EQ(s.value("negative").toLongLong(), -1);
+  EXPECT_EQ(s.value("ratio").toDouble(), 0.5);
+  EXPECT_EQ(s.value("name").toString(),
+            QString("Clementine on a very long name indeed"));
+  EXPECT_EQ(s.value("unicode").toString(), QString::fromUtf8("Caf\xc3\xa9"));
+}
+
+// Written by Python's plistlib, which uses 1-byte refs and offsets.
+TEST(AirPlayTest, BinaryPlistFromPython) {
+  const QByteArray data = QByteArray::fromHex(
+      "62706c6973743030d3010203040506596576656e74506f7274546e616d655a74"
+      "696d696e67506f727411ddad597a61726e69776f6f701000080f191e292c3600"
+      "00000000000101000000000000000700000000000000000000000000000038");
+  QVariant read;
+  EXPECT_TRUE(bplist::Read(data, &read));
+  const QVariantMap map = read.toMap();
+  EXPECT_EQ(map.value("eventPort").toLongLong(), 56749);
+  EXPECT_EQ(map.value("timingPort").toLongLong(), 0);
+  EXPECT_EQ(map.value("name").toString(), QString("zarniwoop"));
+}
+
+TEST(AirPlayTest, BinaryPlistRejectsGarbage) {
+  QVariant read;
+  EXPECT_FALSE(bplist::Read("bplist00", &read));
+  EXPECT_FALSE(bplist::Read(QByteArray(64, '\xff'), &read));
+  QByteArray truncated = bplist::Write(QVariantMap{{"a", 1}});
+  truncated[truncated.size() - 1] = char(0xff);  // Table offset past the end
+  EXPECT_FALSE(bplist::Read(truncated, &read));
+}
+
+// zarniwoop's _airplay._tcp TXT record, with "Require password" on.
+const QList<QByteArray> kMacTxt = {"acl=0",
+                                   "deviceid=E6:43:60:C0:42:4C",
+                                   "features=0x4A7FCFD5,0x38174FDE",
+                                   "fex=1c9/St5PFzg2IYxA",
+                                   "flags=0x284",
+                                   "model=Mac14,2",
+                                   "protovers=1.1",
+                                   "srcvers=980.77.5"};
+
+TEST(AirPlayDeviceTest, ParsesAMacsTxt) {
+  AirPlayDevice device;
+  ASSERT_TRUE(device.ParseTxt(kMacTxt));
+  EXPECT_EQ("E6:43:60:C0:42:4C", device.id);
+  EXPECT_EQ("Mac14,2", device.model);
+  EXPECT_EQ(Q_UINT64_C(0x38174fde4a7fcfd5), device.features);
+  EXPECT_EQ(0x284u, device.status_flags);
+  EXPECT_TRUE(device.password_required());
+  EXPECT_TRUE(device.supports_airplay2());
+}
+
+TEST(AirPlayDeviceTest, NoPasswordWithoutTheFlag) {
+  QList<QByteArray> txt = kMacTxt;
+  txt.replace(4, "flags=0x84");
+  AirPlayDevice device;
+  ASSERT_TRUE(device.ParseTxt(txt));
+  EXPECT_FALSE(device.password_required());
+}
+
+TEST(AirPlayDeviceTest, NeedsADeviceId) {
+  AirPlayDevice device;
+  EXPECT_FALSE(device.ParseTxt({"model=Mac14,2", "flags=0x4"}));
+}
+
+TEST(AirPlayDeviceTest, SplitsWireFormatTxt) {
+  const QByteArray rdata = QByteArray(
+      "\x05"
+      "acl=0"
+      "\x0b"
+      "flags=0x284",
+      18);
+  EXPECT_EQ(QByteArray("acl=0|flags=0x284"),
+            AirPlayDevice::SplitTxt(rdata).join('|'));
+}
+
+AirPlayDevice Receiver(const QByteArray& id, const QString& name,
+                       const QString& address) {
+  AirPlayDevice device;
+  EXPECT_TRUE(device.ParseTxt({"deviceid=" + id, "model=Mac14,2"}));
+  device.name = name;
+  device.address = QHostAddress(address);
+  device.port = 7000;
+  return device;
+}
+
+class FakeAirPlayDiscovery : public AirPlayDiscovery {
+ public:
+  FakeAirPlayDiscovery() {
+    connect(this, &AirPlayDiscovery::DeviceFound,
+            [this](const AirPlayDevice& device) { found_ << device.name; });
+    connect(this, &AirPlayDiscovery::DeviceLost,
+            [this](const QString& id) { lost_ << id; });
+  }
+
+  void Start() override {}
+
+  void Resolve(const QString& service, const AirPlayDevice& device) {
+    ServiceAdded(service);
+    ServiceResolved(service, device);
+  }
+  using AirPlayDiscovery::ServiceRemoved;
+
+  QStringList found_;
+  QStringList lost_;
+};
+
+// A receiver is advertised on each interface and address family.
+TEST(AirPlayDiscoveryTest, MergesAdvertisementsOfOneReceiver) {
+  FakeAirPlayDiscovery discovery;
+  const AirPlayDevice mac = Receiver("E6:43", "zarniwoop", "192.168.86.213");
+  discovery.Resolve("eth0/ipv4", mac);
+  discovery.Resolve("eth0/ipv6", mac);
+  EXPECT_EQ(QStringList({"zarniwoop"}), discovery.found_);
+
+  discovery.ServiceRemoved("eth0/ipv4");
+  EXPECT_TRUE(discovery.lost_.isEmpty());
+  discovery.ServiceRemoved("eth0/ipv6");
+  EXPECT_EQ(QStringList({"E6:43"}), discovery.lost_);
+}
+
+TEST(AirPlayDiscoveryTest, ReportsARenamedReceiver) {
+  FakeAirPlayDiscovery discovery;
+  discovery.Resolve("eth0/ipv4",
+                    Receiver("E6:43", "zarniwoop", "192.168.86.213"));
+  discovery.Resolve("eth0/ipv4", Receiver("E6:43", "Study", "192.168.86.213"));
+  EXPECT_EQ(QStringList({"zarniwoop", "Study"}), discovery.found_);
+}
+
+// Options that don't keep a test waiting.
+AirPlaySession::Options FastOptions() {
+  AirPlaySession::Options options;
+  options.name = "Clementine on test";
+  options.connect_timeout_msec = 1000;
+  options.request_timeout_msec = 1000;
+  options.approval_timeout_msec = 2000;
+  return options;
+}
+
+struct Result {
+  bool paired = false;
+  bool set_up = false;
+  QString error;
+  qint64 msec = 0;
+};
+
+// Opens |session| to |device| and waits until it's set up or failed.
+Result Open(AirPlaySession* session, const AirPlayDevice& device) {
+  QSignalSpy paired(session, &AirPlaySession::Paired);
+  QSignalSpy set_up(session, &AirPlaySession::SetUp);
+  QSignalSpy failed(session, &AirPlaySession::Failed);
+  QElapsedTimer timer;
+  timer.start();
+  session->Open(device);
+  while (set_up.isEmpty() && failed.isEmpty() && timer.elapsed() < 10000) {
+    set_up.wait(50);
+  }
+  Result result;
+  result.paired = !paired.isEmpty();
+  result.set_up = !set_up.isEmpty();
+  if (!failed.isEmpty()) result.error = failed.first().first().toString();
+  result.msec = timer.elapsed();
+  return result;
+}
+
+Result Pair(const AirPlayDevice& device,
+            const AirPlaySession::Options& options) {
+  AirPlaySession session(options);
+  return Open(&session, device);
+}
+
+// Runs the event loop until |done| or a second has passed.
+void WaitFor(std::function<bool()> done) {
+  QElapsedTimer timer;
+  timer.start();
+  while (!done() && timer.elapsed() < 1000) {
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 10);
+  }
+}
+
+TEST(AirPlaySessionTest, Pairs) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  const Result result = Pair(receiver.device(), FastOptions());
+  EXPECT_TRUE(result.set_up) << result.error;
+  EXPECT_TRUE(receiver.paired());
+  // pair-pin-start would make it show a PIN, which transient pairing doesn't
+  // use.
+  EXPECT_EQ(QStringList(
+                {"GET /info", "POST /pair-setup", "POST /pair-setup", "SETUP"}),
+            receiver.requests());
+  EXPECT_EQ(QStringList(), receiver.errors());
+  EXPECT_GE(receiver.timing_replies(), 1);
+  EXPECT_EQ(QSet<QString>({"Clementine on test"}), receiver.client_names());
+}
+
+TEST(AirPlaySessionTest, WaitsForTheReceiversUserToAllow) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(200, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+
+  const Result result = Pair(receiver.device(), FastOptions());
+  EXPECT_TRUE(result.set_up) << result.error;
+  EXPECT_EQ(1, receiver.prompts());
+  EXPECT_GE(result.msec, 200);
+}
+
+// A Mac asks once per sender name.
+TEST(AirPlaySessionTest, IsAskedAboutOncePerName) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(0, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+
+  AirPlaySession::Options options = FastOptions();
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+  EXPECT_EQ(1, receiver.prompts());
+
+  options.name = "Clementine elsewhere";
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+  EXPECT_EQ(2, receiver.prompts());
+}
+
+// The receiver's user can take longer than other responses may.
+TEST(AirPlaySessionTest, ApprovalOutlastsTheRequestTimeout) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(300, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+
+  AirPlaySession::Options options = FastOptions();
+  options.request_timeout_msec = 100;
+  options.approval_timeout_msec = 1000;
+  const Result result = Pair(receiver.device(), options);
+  EXPECT_TRUE(result.set_up) << result.error;
+}
+
+// A receiver whose flags say it has no password may still want one.
+TEST(AirPlaySessionTest, SaysAPairingRefusalMayMeanAPassword) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.SetPassword("foobar");
+  receiver.set_report_password(false);
+
+  const Result result = Pair(receiver.device(), FastOptions());
+  EXPECT_FALSE(result.paired);
+  EXPECT_EQ(
+      "Fake refused to pair. It may want a password, which Clementine can't "
+      "use yet.",
+      result.error);
+}
+
+TEST(AirPlaySessionTest, SaysItsWaitingForTheReceiversUser) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(1200, &receiver, [&receiver]() { receiver.Allow(); });
+  });
+
+  AirPlaySession session(FastOptions());
+  QSignalSpy waiting(&session, &AirPlaySession::WaitingForApproval);
+  EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  EXPECT_EQ(1, waiting.count());
+}
+
+// A Mac remembers which senders were allowed by this and the name.
+TEST(AirPlaySessionTest, SendsItsSenderId) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession::Options options = FastOptions();
+  options.sender_id = "02:11:22:33:44:55";
+  EXPECT_TRUE(Pair(receiver.device(), options).set_up);
+  EXPECT_EQ("02:11:22:33:44:55", receiver.sender_mac_address());
+}
+
+TEST(AirPlaySessionTest, TearsDown) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(Open(&session, receiver.device()).set_up);
+  session.Close();
+  WaitFor([&receiver]() { return receiver.torn_down(); });
+  EXPECT_TRUE(receiver.torn_down()) << receiver.requests().join(",");
+}
+
+TEST(AirPlaySessionTest, SaysWhenTheReceiversUserDoesntAllowIt) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_on_prompt([&receiver](const QString&) {
+    QTimer::singleShot(1200, &receiver, [&receiver]() { receiver.Deny(); });
+  });
+
+  const Result result = Pair(receiver.device(), FastOptions());
+  EXPECT_FALSE(result.set_up);
+  EXPECT_EQ("Fake didn't allow Clementine on test to play there", result.error);
+}
+
+TEST(AirPlaySessionTest, UnansweredPromptTimesOut) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+
+  AirPlaySession::Options options = FastOptions();
+  options.approval_timeout_msec = 300;
+  const Result result = Pair(receiver.device(), options);
+  EXPECT_FALSE(result.set_up);
+  EXPECT_EQ("The AirPlay receiver didn't respond in 0.3 s", result.error);
+  EXPECT_EQ(1, receiver.prompts());
+}
+
+// Passwords aren't supported yet, and a receiver that wants one says so
+// before pairing.
+TEST(AirPlaySessionTest, StopsBeforePairingWithAReceiverThatWantsAPassword) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.SetPassword("foobar");
+
+  const Result result = Pair(receiver.device(), FastOptions());
+  EXPECT_FALSE(result.paired);
+  EXPECT_EQ("Fake requires a password, which Clementine can't use yet",
+            result.error);
+  EXPECT_EQ(QStringList({"GET /info"}), receiver.requests());
+}
+
+// TEST-NET-1 (RFC 5737) never answers.
+TEST(AirPlaySessionTest, UnansweredConnectTimesOut) {
+  AirPlayDevice device;
+  device.id = "AA:BB:CC:00:11:22";
+  device.name = "Nowhere";
+  device.address = QHostAddress("192.0.2.1");
+  device.port = 7000;
+
+  AirPlaySession::Options options = FastOptions();
+  options.connect_timeout_msec = 200;
+  const Result result = Pair(device, options);
+  EXPECT_FALSE(result.paired);
+  if (result.error.contains("unreachable", Qt::CaseInsensitive)) {
+    std::cout << "Skipped: this machine has no route to TEST-NET-1\n";
+    return;
+  }
+  EXPECT_EQ(
+      "Couldn't connect to the AirPlay receiver at 192.0.2.1:7000 in 0.2 s. "
+      "Is it awake, with AirPlay on?",
+      result.error);
+}
+
+}  // namespace
