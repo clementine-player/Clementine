@@ -40,10 +40,6 @@ const int kFramesPerPacket = 352;
 const quint32 kLatency = 22050 + kSampleRate;
 const int kBacklog = 1000;
 const int kEventAttempts = 5;
-// A receiver may ask its user whether to allow a new sender before it answers
-// the first request that needs it (pair-pin-start, or ANNOUNCE for AirPlay
-// 1), and a Mac that has just woken can be slow too.
-const int kApprovalTimeoutMsec = 30000;
 
 quint64 NtpNow() {
   using namespace std::chrono;
@@ -114,6 +110,8 @@ Session::Session(const Options& options, std::unique_ptr<AudioSource> source,
       feedback_timer_(new QTimer(this)),
       audio_timer_(new QTimer(this)) {
   connection_->set_client_name(options_.name);
+  connection_->set_timeouts(options_.connect_timeout_msec,
+                            options_.request_timeout_msec);
   if (!options_.device_id.isEmpty()) {
     connection_->set_dacp_id(options_.device_id);
   }
@@ -304,7 +302,7 @@ void Session::SetupAirPlay1() {
               StartStreaming(data_port, control_port);
             });
       },
-      kApprovalTimeoutMsec);
+      options_.approval_timeout_msec);
 }
 
 // HomeKit transient pairing: pair-setup M1 to M4 with a fixed or user PIN.
@@ -315,7 +313,7 @@ void Session::Pair() {
       [](const RtspConnection::Response& r) {
         qCDebug(airplay_log) << "pair-pin-start:" << r.code;
       },
-      kApprovalTimeoutMsec);
+      options_.approval_timeout_msec);
 
   const QByteArray m1 = tlv8::Write({
       {tlv8::kMethod, QByteArray(1, '\0')},
@@ -596,7 +594,9 @@ void Session::SendAudio() {
 void Session::SendPacket() {
   // Once the source ends, keep sending silence for the latency so what was
   // sent gets played out.
-  if (padding_ >= kLatency) {
+  const qint64 play_out =
+      options_.play_out_frames < 0 ? kLatency : options_.play_out_frames;
+  if (padding_ > 0 && padding_ >= play_out) {
     Finish();
     return;
   }

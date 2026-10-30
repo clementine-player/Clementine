@@ -53,8 +53,10 @@ class RtspConnection : public QObject {
   };
   using Callback = std::function<void(const Response&)>;
 
-  // How long a request waits for its response by default.
+  // How long a request waits for its response by default, and how long
+  // connecting may take.
   static const int kTimeoutMsec = 10000;
+  static const int kConnectTimeoutMsec = 5000;
 
   explicit RtspConnection(QObject* parent = nullptr);
 
@@ -73,22 +75,23 @@ class RtspConnection : public QObject {
   void set_client_name(const QString& name) { client_name_ = name.toUtf8(); }
   // For receivers that ask for HTTP Digest authentication (AirPlay 1).
   void set_password(const QString& password) { password_ = password.toUtf8(); }
+  // For tests, which don't want to wait as long.
+  void set_timeouts(int connect_msec, int request_msec);
   // The URI of RTSP requests: rtsp://<local address>/<session id>.
   QByteArray uri() const;
 
   // Queues a request. |uri| empty means uri(). Fails the connection if
-  // there's no response in |timeout_msec|.
+  // there's no response in |timeout_msec|, or the default if it's negative.
   void Request(const QByteArray& method, const QByteArray& uri,
                const Headers& headers, const QByteArray& content_type,
                const QByteArray& body, const QByteArray& protocol,
-               Callback callback, int timeout_msec = kTimeoutMsec);
+               Callback callback, int timeout_msec = -1);
   void Rtsp(const QByteArray& method, const Headers& headers,
             const QByteArray& content_type, const QByteArray& body,
-            Callback callback, int timeout_msec = kTimeoutMsec);
+            Callback callback, int timeout_msec = -1);
   // An HTTP POST of application/octet-stream to |path|.
   void Post(const QByteArray& path, const Headers& headers,
-            const QByteArray& body, Callback callback,
-            int timeout_msec = kTimeoutMsec);
+            const QByteArray& body, Callback callback, int timeout_msec = -1);
 
  signals:
   void Connected();
@@ -129,6 +132,7 @@ class RtspConnection : public QObject {
   QHostAddress host_;
   quint16 port_ = 0;
   QTimer* connect_timeout_;
+  int request_timeout_msec_ = kTimeoutMsec;
   QTimer* timeout_;
   std::unique_ptr<FrameCipher> cipher_;
   QQueue<Pending> queue_;

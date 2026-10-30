@@ -34,8 +34,6 @@
 #include "logging.h"
 #include "session.h"
 
-Q_LOGGING_CATEGORY(airplay_log, "airplay", QtInfoMsg)
-
 using airplay::Device;
 using airplay::Discovery;
 using airplay::Session;

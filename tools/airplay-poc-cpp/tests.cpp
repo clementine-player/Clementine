@@ -23,8 +23,6 @@
 #include "srp.h"
 #include "tlv8.h"
 
-Q_LOGGING_CATEGORY(airplay_log, "airplay", QtInfoMsg)
-
 using namespace airplay;
 
 class AirPlayTest : public QObject {

@@ -12,24 +12,28 @@ add_subdirectory(${THIRDPARTY}/monocypher monocypher)
 add_subdirectory(${THIRDPARTY}/mini-gmp mini-gmp)
 
 add_library(airplay STATIC
+  audiosource.cpp
   bplist.cpp
   crypto.cpp
+  discovery.cpp
+  logging.cpp
+  rtspconnection.cpp
+  session.cpp
   srp.cpp
   tlv8.cpp
 )
-target_link_libraries(airplay PUBLIC Qt6::Core monocypher mini-gmp)
+target_link_libraries(airplay PUBLIC
+  Qt6::Core Qt6::Network Qt6::DBus monocypher mini-gmp)
 
-add_executable(airplay-poc
-  audiosource.cpp
-  discovery.cpp
-  main.cpp
-  rtspconnection.cpp
-  session.cpp
-)
-target_link_libraries(airplay-poc airplay Qt6::Network Qt6::DBus)
+add_executable(airplay-poc main.cpp)
+target_link_libraries(airplay-poc airplay)
 
 add_executable(airplay-poc-tests tests.cpp)
 target_link_libraries(airplay-poc-tests airplay Qt6::Test)
 
+add_executable(airplay-poc-receiver-tests fakereceiver.cpp receivertests.cpp)
+target_link_libraries(airplay-poc-receiver-tests airplay Qt6::Test)
+
 enable_testing()
 add_test(NAME airplay-poc-tests COMMAND airplay-poc-tests)
+add_test(NAME airplay-poc-receiver-tests COMMAND airplay-poc-receiver-tests)

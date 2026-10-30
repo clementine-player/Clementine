@@ -35,6 +35,7 @@ the clearest reference for senders.
 cmake -S tools/airplay-poc-cpp -B build-airplay -G Ninja
 ninja -C build-airplay
 build-airplay/airplay-poc-tests
+build-airplay/airplay-poc-receiver-tests
 build-airplay/airplay-poc list
 build-airplay/airplay-poc play "Living Room" --tone --seconds 10
 ```
@@ -71,3 +72,16 @@ shairport-sync works as an AirPlay 1 test receiver:
 shairport-sync -o stdout -p 5000 > out.raw &
 build-airplay/airplay-poc play 127.0.0.1:5000 --v1 --tone --seconds 4
 ```
+
+## Tests
+
+`airplay-poc-tests` checks the crypto, SRP, TLV8 and binary plists against
+known values. `airplay-poc-receiver-tests` plays to `FakeReceiver`, a
+receiver on localhost that behaves as a Mac was seen to: it asks for the time
+before answering the stream's SETUP, holds pair-pin-start while it asks its
+user to allow a new sender name, sets status flag 0x200 while a password is
+set, answers a wrong PIN with pair-setup error 2, and refuses AirPlay 1's
+ANNOUNCE with 403 until the sender has paired. A legacy mode asks for HTTP
+Digest instead. It decrypts the audio and checks the tone arrived, and notes
+mistakes such as a reused nonce or an audio key that's also an event channel
+key.

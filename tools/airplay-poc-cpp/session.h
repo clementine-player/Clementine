@@ -58,6 +58,16 @@ class Session : public QObject {
     QString name = "Clementine";
     // This sender's id, as hex, or empty for a random one each session.
     QByteArray device_id;
+
+    // How long to wait: for the connection, for each response, and for a
+    // receiver that asks its user whether to allow this sender. A Mac holds
+    // pair-pin-start (or ANNOUNCE for AirPlay 1) until its user answers.
+    int connect_timeout_msec = RtspConnection::kConnectTimeoutMsec;
+    int request_timeout_msec = RtspConnection::kTimeoutMsec;
+    int approval_timeout_msec = 30000;
+    // How much silence to send after the source ends, so that what was sent
+    // gets played out: the receiver's latency, unless a test wants none.
+    qint64 play_out_frames = -1;
   };
 
   Session(const Options& options, std::unique_ptr<AudioSource> source,

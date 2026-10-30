@@ -28,7 +28,6 @@ namespace {
 
 const char kUserAgent[] = "AirPlay/550.10";
 const char kDigestUsername[] = "iTunes";
-const int kConnectTimeoutMsec = 5000;
 
 QString Describe(const Headers& headers) {
   QStringList parts;
@@ -77,6 +76,11 @@ void RtspConnection::Connect(const QHostAddress& host, quint16 port) {
   socket_->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 }
 
+void RtspConnection::set_timeouts(int connect_msec, int request_msec) {
+  connect_timeout_->setInterval(connect_msec);
+  request_timeout_msec_ = request_msec;
+}
+
 void RtspConnection::EnableEncryption(const QByteArray& out_key,
                                       const QByteArray& in_key) {
   cipher_.reset(new FrameCipher(out_key, in_key));
@@ -102,7 +106,8 @@ void RtspConnection::Request(const QByteArray& method, const QByteArray& uri,
   pending.body = body;
   pending.protocol = protocol;
   pending.callback = callback;
-  pending.timeout_msec = timeout_msec;
+  pending.timeout_msec =
+      timeout_msec < 0 ? request_timeout_msec_ : timeout_msec;
   queue_.enqueue(pending);
   SendNext();
 }
@@ -273,12 +278,12 @@ void RtspConnection::ConnectTimedOut() {
                       "AirPlay Receiver on?)")
                   .arg(host_.toString())
                   .arg(port_)
-                  .arg(kConnectTimeoutMsec / 1000));
+                  .arg(connect_timeout_->interval() / 1000.0));
 }
 
 void RtspConnection::TimedOut() {
   emit Failed(QString("no response from the receiver in %1 s")
-                  .arg(timeout_->interval() / 1000));
+                  .arg(timeout_->interval() / 1000.0));
 }
 
 }  // namespace airplay
