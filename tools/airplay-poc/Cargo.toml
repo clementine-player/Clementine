@@ -1,0 +1,18 @@
+[package]
+name = "airplay-poc"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "Proof of concept: stream PCM audio to an AirPlay receiver"
+
+[dependencies]
+anyhow = "1"
+chacha20poly1305 = "0.10"
+hkdf = "0.12"
+sha2 = "0.10"
+num-bigint = "0.4"
+rand = "0.8"
+plist = "1"
+mdns-sd = "0.13"
+log = "0.4"
+env_logger = "0.11"
