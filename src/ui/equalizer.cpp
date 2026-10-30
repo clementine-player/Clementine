@@ -322,18 +322,6 @@ Equalizer::Params::Params(int g0, int g1, int g2, int g3, int g4, int g5,
   gain[9] = g9;
 }
 
-bool Equalizer::Params::operator==(const Equalizer::Params& other) const {
-  if (preamp != other.preamp) return false;
-  for (int i = 0; i < Equalizer::kBands; ++i) {
-    if (gain[i] != other.gain[i]) return false;
-  }
-  return true;
-}
-
-bool Equalizer::Params::operator!=(const Equalizer::Params& other) const {
-  return !(*this == other);
-}
-
 void Equalizer::StereoSliderChanged(int value) {
   emit StereoBalanceChanged(stereo_balance());
   Save();

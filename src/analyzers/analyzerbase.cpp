@@ -32,6 +32,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <numbers>
 
 #include "core/arraysize.h"
 
@@ -191,7 +192,8 @@ void Analyzer::Base::demo(QPainter& p) {
 
     const double dt = static_cast<double>(t) / 200;
     for (uint i = 0; i < s.size(); ++i)
-      s[i] = dt * (sin(M_PI + (i * M_PI) / s.size()) + 1.0);
+      s[i] = dt *
+             (sin(std::numbers::pi + (i * std::numbers::pi) / s.size()) + 1.0);
 
     analyze(p, s, new_frame_);
   } else {
@@ -282,7 +284,7 @@ void Analyzer::interpolate(const Scope& inVec, Scope& outVec) {
 }
 
 void Analyzer::initSin(Scope& v, const uint size) {
-  double step = (M_PI * 2) / size;
+  double step = (std::numbers::pi * 2) / size;
   double radian = 0;
 
   for (uint i = 0; i < size; i++) {

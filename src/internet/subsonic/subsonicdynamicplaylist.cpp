@@ -21,7 +21,6 @@
 #include <QFileInfo>
 #include <QSslConfiguration>
 #include <QUrlQuery>
-#include <boost/scope_exit.hpp>
 
 #include "core/application.h"
 #include "core/logging.h"

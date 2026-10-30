@@ -118,7 +118,6 @@ class SearchTerm {
   QString ToSql() const;
   bool is_valid() const;
   bool operator==(const SearchTerm& other) const;
-  bool operator!=(const SearchTerm& other) const { return !(*this == other); }
 
   static Type TypeOf(Field field);
   static QList<Operator> OperatorsForType(Type type);

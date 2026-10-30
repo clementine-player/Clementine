@@ -32,13 +32,13 @@
 #include <QLibrary>
 #include <QLibraryInfo>
 #include <QRegularExpression>
+#include <QScopeGuard>
 #include <QSqlDriver>
 #include <QSqlQuery>
 #include <QThread>
 #include <QUrl>
 #include <QVariant>
 #include <QtDebug>
-#include <boost/scope_exit.hpp>
 
 #include "config.h"
 #include "core/application.h"
@@ -682,13 +682,12 @@ void Database::BackupFile(const QString& filename) {
   sqlite3* source_connection = nullptr;
   sqlite3* dest_connection = nullptr;
 
-  BOOST_SCOPE_EXIT((&source_connection)(&dest_connection)(task_id)(app_)) {
+  auto cleanup = qScopeGuard([&] {
     // Harmless to call sqlite3_close() with a nullptr pointer.
     sqlite3_close(source_connection);
     sqlite3_close(dest_connection);
     app_->task_manager()->SetTaskFinished(task_id);
-  }
-  BOOST_SCOPE_EXIT_END
+  });
 
   bool success = OpenDatabase(filename, &source_connection);
   if (!success) {

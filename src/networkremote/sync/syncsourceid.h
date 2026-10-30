@@ -61,10 +61,7 @@ class SyncSourceId {
 
   QString ToString() const;
 
-  bool operator==(const SyncSourceId& other) const {
-    return kind_ == other.kind_ && id_ == other.id_ && parts_ == other.parts_;
-  }
-  bool operator!=(const SyncSourceId& other) const { return !(*this == other); }
+  bool operator==(const SyncSourceId& other) const = default;
 
  private:
   SyncSourceId(Kind kind, int id, const QStringList& parts)

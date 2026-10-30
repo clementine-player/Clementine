@@ -25,6 +25,7 @@
 #include <QWidget>
 #include <QtDebug>
 #include <cmath>
+#include <numbers>
 
 #include "core/appearance.h"
 #include "macsystemtrayicon.h"
@@ -54,7 +55,8 @@ QPixmap SystemTrayIcon::CreateProgressIcon(const QPixmap& icon,
 
   // The angle of the line that's used to cover the icon.
   // Centered on rect.topRight()
-  double angle = double(100 - song_progress()) / 100.0 * M_PI_2 + M_PI;
+  double angle = double(100 - song_progress()) / 100.0 * std::numbers::pi / 2 +
+                 std::numbers::pi;
   double length = sqrt(pow(rect.width(), 2.0) + pow(rect.height(), 2.0));
 
   QPolygon mask;

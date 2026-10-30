@@ -64,8 +64,7 @@ struct CastDevice {
   // entry is dropped.
   static QList<QByteArray> SplitTxt(const QByteArray& rdata);
 
-  bool operator==(const CastDevice& other) const;
-  bool operator!=(const CastDevice& other) const { return !(*this == other); }
+  bool operator==(const CastDevice& other) const = default;
 };
 
 QDebug operator<<(QDebug dbg, const CastDevice& device);

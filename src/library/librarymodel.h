@@ -105,11 +105,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
     const GroupBy& operator[](int i) const;
     GroupBy& operator[](int i);
-    bool operator==(const Grouping& other) const {
-      return first == other.first && second == other.second &&
-             third == other.third;
-    }
-    bool operator!=(const Grouping& other) const { return !(*this == other); }
+    bool operator==(const Grouping& other) const = default;
   };
 
   struct QueryResult {

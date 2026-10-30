@@ -33,6 +33,7 @@
 #include <QTimer>
 #include <QtDebug>
 #include <algorithm>
+#include <numbers>
 
 #include "config.h"
 #include "core/application.h"
@@ -476,7 +477,8 @@ QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
     QImage step(image.copy());
     p.begin(&step);
     p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-    p.setOpacity(0.4 - 0.6 * sin(float(i) / kGlowIntensitySteps * (M_PI / 2)));
+    p.setOpacity(0.4 - 0.6 * sin(float(i) / kGlowIntensitySteps *
+                                 (std::numbers::pi / 2)));
     p.fillRect(step.rect(), Qt::white);
     p.end();
     ret << QPixmap::fromImage(step);

@@ -245,14 +245,6 @@ SeafileTree::Entry& SeafileTree::Entry::operator=(const Entry& entry) {
   return *this;
 }
 
-bool SeafileTree::Entry::operator==(const Entry& a) const {
-  return a.name() == name() && a.id() == id() && a.type() == type();
-}
-
-bool SeafileTree::Entry::operator!=(const Entry& a) const {
-  return !(operator==(a));
-}
-
 SeafileTree::Entry::~Entry() {}
 
 QString SeafileTree::Entry::TypeToString(const Type& type) {

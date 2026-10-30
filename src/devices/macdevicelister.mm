@@ -38,11 +38,10 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSURL.h>
 
-#include <boost/scope_exit.hpp>
-
 #include <libmtp.h>
 
 #include <QMutex>
+#include <QScopeGuard>
 #include <QString>
 #include <QStringList>
 #include <QUrl>
@@ -440,8 +439,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
   io_object_t object;
   while ((object = IOIteratorNext(it))) {
     ScopedCFTypeRef<CFStringRef> class_name(IOObjectCopyClass(object));
-    BOOST_SCOPE_EXIT((object)) { IOObjectRelease(object); }
-    BOOST_SCOPE_EXIT_END
+    auto release_object = qScopeGuard([object] { IOObjectRelease(object); });
 
     if (CFStringCompare(class_name.get(), CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
       NSString* vendor = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBVendorString));
@@ -518,11 +516,10 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       }
 
       // Automatically close & release usb device at scope exit.
-      BOOST_SCOPE_EXIT((dev)) {
+      auto close_dev = qScopeGuard([dev] {
         (*dev)->USBDeviceClose(dev);
         (*dev)->Release(dev);
-      }
-      BOOST_SCOPE_EXIT_END
+      });
 
       // Request the string descriptor at 0xee.
       // This is a magic string that indicates whether this device supports MTP.
@@ -574,8 +571,7 @@ void MacDeviceLister::USBDeviceRemovedCallback(void* refcon, io_iterator_t it) {
   io_object_t object;
   while ((object = IOIteratorNext(it))) {
     ScopedCFTypeRef<CFStringRef> class_name(IOObjectCopyClass(object));
-    BOOST_SCOPE_EXIT((object)) { IOObjectRelease(object); }
-    BOOST_SCOPE_EXIT_END
+    auto release_object = qScopeGuard([object] { IOObjectRelease(object); });
 
     if (CFStringCompare(class_name.get(), CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
       NSString* vendor = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBVendorString));

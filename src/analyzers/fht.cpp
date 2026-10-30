@@ -23,6 +23,7 @@
 #include "fht.h"
 
 #include <cmath>
+#include <numbers>
 
 FHT::FHT(int n) : num_((n < 3) ? 0 : 1 << n), exp2_((n < 3) ? -1 : n) {
   if (n > 3) {
@@ -46,7 +47,7 @@ void FHT::makeCasTable(void) {
   float* sintab = tab_() + num_ / 2 + 1;
 
   for (int ul = 0; ul < num_; ul++) {
-    float d = M_PI * ul / (num_ / 2);
+    float d = std::numbers::pi * ul / (num_ / 2);
     *costab = *sintab = cos(d);
 
     costab += 2;
