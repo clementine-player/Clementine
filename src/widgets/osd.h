@@ -72,6 +72,7 @@ class OSD : public QObject {
 
   void Paused();
   void Stopped();
+  void ResumedPlayback();
   void StopAfterToggle(bool stop);
   void PlaylistFinished();
   void VolumeChanged(int value);
@@ -126,6 +127,7 @@ class OSD : public QObject {
 
   bool force_show_next_;
   bool ignore_next_stopped_;
+  bool is_player_paused_;
 
   OSDPretty* pretty_popup_;
 
