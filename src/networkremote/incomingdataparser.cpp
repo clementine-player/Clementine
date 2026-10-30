@@ -237,6 +237,7 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
 
     case cpb::remote::REQUEST_SYNC_SOURCES:
     case cpb::remote::REQUEST_SYNC_MANIFEST:
+    case cpb::remote::REQUEST_SYNC_SOURCE_ADD:
       if (NetworkRemote::MediaSyncEnabled()) {
         const std::string data = msg.SerializeAsString();
         emit SyncMessage(client->id(), client->peer_address().toString(),
