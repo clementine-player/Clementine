@@ -60,12 +60,6 @@ QList<QByteArray> CastDevice::SplitTxt(const QByteArray& rdata) {
   return entries;
 }
 
-bool CastDevice::operator==(const CastDevice& other) const {
-  return id == other.id && name == other.name && model == other.model &&
-         capabilities == other.capabilities && address == other.address &&
-         port == other.port;
-}
-
 QDebug operator<<(QDebug dbg, const CastDevice& device) {
   QDebugStateSaver saver(dbg);
   dbg.nospace().noquote() << device.name << " (" << device.model << ", "

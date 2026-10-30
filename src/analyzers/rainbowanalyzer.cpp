@@ -28,6 +28,7 @@
 #include <QPen>
 #include <QTimerEvent>
 #include <cmath>
+#include <numbers>
 
 #include "core/arraysize.h"
 #include "core/logging.h"
@@ -69,8 +70,8 @@ Rainbow::RainbowAnalyzer::RainbowAnalyzer(const RainbowType& rbtype,
 
     // pow constants computed so that
     // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
-    band_scale_[i] =
-        -std::cos(M_PI * i / (kRainbowBands - 1)) * 0.5 * std::pow(2.3, i);
+    band_scale_[i] = -std::cos(std::numbers::pi * i / (kRainbowBands - 1)) *
+                     0.5 * std::pow(2.3, i);
   }
 }
 

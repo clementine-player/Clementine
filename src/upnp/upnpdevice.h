@@ -37,10 +37,7 @@ struct UpnpService {
   QUrl event_url;
 
   bool is_valid() const { return !type.isEmpty() && control_url.isValid(); }
-  bool operator==(const UpnpService& other) const {
-    return type == other.type && control_url == other.control_url &&
-           event_url == other.event_url;
-  }
+  bool operator==(const UpnpService& other) const = default;
 };
 
 // A UPnP MediaRenderer that can be told to play a URL: one with an
@@ -97,7 +94,6 @@ struct UpnpDevice {
   QString DeviceMimeType(const QString& mime_type) const;
 
   bool operator==(const UpnpDevice& other) const;
-  bool operator!=(const UpnpDevice& other) const { return !(*this == other); }
 };
 
 QDebug operator<<(QDebug dbg, const UpnpDevice& device);
