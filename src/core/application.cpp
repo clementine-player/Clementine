@@ -125,6 +125,12 @@ class ApplicationImpl {
           return cover_providers;
         }),
         task_manager_([=]() { return new TaskManager(app); }),
+        sleep_inhibitor_([=]() {
+          SleepInhibitor* inhibitor = new SleepInhibitor(app);
+          QObject::connect(app, SIGNAL(SettingsChanged()), inhibitor,
+                           SLOT(ReloadSettings()));
+          return inhibitor;
+        }),
         player_([=]() { return new Player(app, app); }),
         playlist_manager_([=]() { return new PlaylistManager(app); }),
         current_art_loader_([=]() { return new CurrentArtLoader(app, app); }),
@@ -170,13 +176,7 @@ class ApplicationImpl {
           if (!router) return nullptr;
           return new RendererRegistry(app, router);
         }),
-        scrobbler_([=]() { return new LastFMService(app, app); }),
-        sleep_inhibitor_([=]() {
-          SleepInhibitor* inhibitor = new SleepInhibitor(app);
-          QObject::connect(app, SIGNAL(SettingsChanged()), inhibitor,
-                           SLOT(ReloadSettings()));
-          return inhibitor;
-        }) {
+        scrobbler_([=]() { return new LastFMService(app, app); }) {
   }
 
   QTimer settings_timer_;
@@ -190,6 +190,9 @@ class ApplicationImpl {
   Lazy<Appearance> appearance_;
   Lazy<CoverProviders> cover_providers_;
   Lazy<TaskManager> task_manager_;
+  // Before everything that takes a hold on it, so it's deleted after them:
+  // a hold released after the inhibitor has gone uses it after it's freed.
+  Lazy<SleepInhibitor> sleep_inhibitor_;
   Lazy<Player> player_;
   Lazy<PlaylistManager> playlist_manager_;
   Lazy<CurrentArtLoader> current_art_loader_;
@@ -208,7 +211,6 @@ class ApplicationImpl {
   // After the Player, so it's deleted first: its outputs are the router's.
   Lazy<RendererRegistry> renderer_registry_;
   Lazy<Scrobbler> scrobbler_;
-  Lazy<SleepInhibitor> sleep_inhibitor_;
 };
 
 Application::Application(QObject* parent)
