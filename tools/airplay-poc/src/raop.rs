@@ -71,7 +71,7 @@ impl Timeline {
 struct Shared {
     timeline: Mutex<Timeline>,
     backlog: Mutex<HashMap<u16, Vec<u8>>>,
-    running: AtomicBool,
+    running: Arc<AtomicBool>,
 }
 
 pub struct Session {
@@ -79,7 +79,6 @@ pub struct Session {
     version: Version,
     shared: Arc<Shared>,
     control: UdpSocket,
-    timing: UdpSocket,
     audio: UdpSocket,
     remote_control: SocketAddr,
     rtsp_session: String,
@@ -102,6 +101,10 @@ impl Session {
         let timing = UdpSocket::bind((conn.local_ip, 0))?;
         let control_port = control.local_addr()?.port();
         let timing_port = timing.local_addr()?.port();
+        // Receivers ask for the time while they set up, and may not answer
+        // SETUP until we've answered them, so this starts first.
+        let running = Arc::new(AtomicBool::new(true));
+        spawn_timing(timing.try_clone()?, running.clone());
 
         let info = conn.request("GET", Some("/info"), &[], None, &[], "RTSP/1.0")?;
         if info.code == 200 {
@@ -234,7 +237,7 @@ impl Session {
         let shared = Arc::new(Shared {
             timeline: Mutex::new(Timeline { seq: rand::thread_rng().gen(), start_ts, head_ts: start_ts }),
             backlog: Mutex::new(HashMap::new()),
-            running: AtomicBool::new(true),
+            running,
         });
 
         Ok(Session {
@@ -242,7 +245,6 @@ impl Session {
             version: opts.version,
             shared,
             control,
-            timing,
             audio,
             remote_control: (host, remote_control_port).into(),
             rtsp_session,
@@ -276,7 +278,6 @@ impl Session {
     }
 
     pub fn play(&mut self, source: &mut dyn Source, volume: Option<f32>) -> Result<()> {
-        self.spawn_timing();
         self.spawn_control()?;
         self.spawn_feedback();
 
@@ -386,32 +387,6 @@ impl Session {
         }
         info!("Finished after {:.1} s", started.elapsed().as_secs_f64());
         Ok(())
-    }
-
-    /// Answers the receiver's NTP-style timing requests.
-    fn spawn_timing(&self) {
-        let sock = self.timing.try_clone().unwrap();
-        let shared = self.shared.clone();
-        sock.set_read_timeout(Some(Duration::from_millis(500))).unwrap();
-        thread::spawn(move || {
-            let mut buf = [0u8; 128];
-            while shared.running.load(Ordering::SeqCst) {
-                let Ok((n, from)) = sock.recv_from(&mut buf) else { continue };
-                if n < 32 {
-                    continue;
-                }
-                let now = ntp_now();
-                let mut resp = [0u8; 32];
-                resp[0] = buf[0];
-                resp[1] = 0x53 | 0x80;
-                resp[2..4].copy_from_slice(&7u16.to_be_bytes());
-                // Reference time: when they sent the request.
-                resp[8..16].copy_from_slice(&buf[24..32]);
-                resp[16..24].copy_from_slice(&now.to_be_bytes());
-                resp[24..32].copy_from_slice(&now.to_be_bytes());
-                let _ = sock.send_to(&resp, from);
-            }
-        });
     }
 
     /// Sends a sync packet every second and answers resend requests.
@@ -531,6 +506,31 @@ impl BitWriter {
         }
         self.out
     }
+}
+
+/// Answers the receiver's NTP-style timing requests.
+fn spawn_timing(sock: UdpSocket, running: Arc<AtomicBool>) {
+    sock.set_read_timeout(Some(Duration::from_millis(500))).unwrap();
+    thread::spawn(move || {
+        let mut buf = [0u8; 128];
+        while running.load(Ordering::SeqCst) {
+            let Ok((n, from)) = sock.recv_from(&mut buf) else { continue };
+            debug!("Timing request from {from}");
+            if n < 32 {
+                continue;
+            }
+            let now = ntp_now();
+            let mut resp = [0u8; 32];
+            resp[0] = buf[0];
+            resp[1] = 0x53 | 0x80;
+            resp[2..4].copy_from_slice(&7u16.to_be_bytes());
+            // Reference time: when they sent the request.
+            resp[8..16].copy_from_slice(&buf[24..32]);
+            resp[16..24].copy_from_slice(&now.to_be_bytes());
+            resp[24..32].copy_from_slice(&now.to_be_bytes());
+            let _ = sock.send_to(&resp, from);
+        }
+    });
 }
 
 const BPLIST: &str = "application/x-apple-binary-plist";
