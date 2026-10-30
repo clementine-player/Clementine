@@ -282,6 +282,11 @@ void GstEngine::InitialiseGstreamer() {
   emit Initialised();
 }
 
+void GstEngine::SetOutput(const QString& sink, const QVariant& device) {
+  sink_ = sink;
+  device_ = device;
+}
+
 void GstEngine::ReloadSettings() {
   Engine::Base::ReloadSettings();
 

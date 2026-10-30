@@ -100,9 +100,13 @@ void AirPlayRtspConnection::Close() {
   }
   // Whatever was written, such as a TEARDOWN, still goes, and the next
   // connection gets a socket of its own.
+  // It's written out now, and the socket outlives this connection, which may
+  // be closing because Clementine is quitting.
   QTcpSocket* old = socket_;
   old->disconnect(this);
+  old->setParent(nullptr);
   connect(old, &QAbstractSocket::disconnected, old, &QObject::deleteLater);
+  old->flush();
   old->disconnectFromHost();
   NewSocket();
 }

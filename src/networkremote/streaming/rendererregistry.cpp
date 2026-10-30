@@ -228,7 +228,7 @@ void RendererRegistry::AirPlayDeviceFound(const AirPlayDevice& device) {
   }
   if (!router_) return;
 
-  AirPlayEngine* engine = new AirPlayEngine(device, this);
+  AirPlayEngine* engine = new AirPlayEngine(app_, device, this);
   airplay_engines_ << engine;
   connect(engine, &AirPlayEngine::DeviceFailed, this,
           [this, engine]() { AirPlayEngineFailed(engine); });
