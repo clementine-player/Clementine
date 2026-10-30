@@ -22,6 +22,7 @@
 
 #include "core/song.h"
 #include "networkremote/sync/syncsourceid.h"
+#include "smartplaylists/generator_fwd.h"
 
 class LibraryBackend;
 
@@ -31,8 +32,8 @@ class SyncResolver {
  public:
   enum class State {
     Ready,
-    // The source no longer exists: the song, album, artist or playlist is
-    // gone.
+    // The source no longer exists: the song, album, artist, playlist or
+    // smart playlist is gone.
     Gone,
     // A kind of source this Clementine can't sync yet.
     Unsupported,
@@ -50,7 +51,17 @@ class SyncResolver {
     std::function<bool(int id, SongList* songs)> songs;
   };
 
-  SyncResolver(LibraryBackend* library, const Playlists& playlists);
+  // Where smart playlists come from.
+  struct SmartPlaylists {
+    // The smart playlist of |backend|'s with |uuid|, or null if there's
+    // none.
+    std::function<smart_playlists::GeneratorPtr(const QString& backend,
+                                                const QString& uuid)>
+        generator;
+  };
+
+  SyncResolver(LibraryBackend* library, const Playlists& playlists,
+               const SmartPlaylists& smart_playlists = SmartPlaylists());
 
   Result Resolve(const SyncSourceId& source) const;
 
@@ -59,6 +70,7 @@ class SyncResolver {
 
   LibraryBackend* library_;
   Playlists playlists_;
+  SmartPlaylists smart_playlists_;
 };
 
 #endif  // NETWORKREMOTE_SYNC_SYNCRESOLVER_H_

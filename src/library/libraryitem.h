@@ -49,6 +49,9 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
   int container_level;
   Song metadata;
   QByteArray smart_playlist_data;
+  // Names a smart playlist for as long as it exists, whatever it's renamed
+  // to, so that remotes can keep it.
+  QString smart_playlist_uuid;
   LibraryItem* compilation_artist_node_;
 };
 

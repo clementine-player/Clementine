@@ -19,9 +19,14 @@
 
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
+#include "playlist/playlistitem.h"
+#include "smartplaylists/generator.h"
 
-SyncResolver::SyncResolver(LibraryBackend* library, const Playlists& playlists)
-    : library_(library), playlists_(playlists) {}
+SyncResolver::SyncResolver(LibraryBackend* library, const Playlists& playlists,
+                           const SmartPlaylists& smart_playlists)
+    : library_(library),
+      playlists_(playlists),
+      smart_playlists_(smart_playlists) {}
 
 SyncResolver::Result SyncResolver::Resolve(const SyncSourceId& source) const {
   Result result;
@@ -37,7 +42,23 @@ SyncResolver::Result SyncResolver::Resolve(const SyncSourceId& source) const {
       }
       return result;
 
-    case SyncSourceId::Kind::SmartPlaylist:
+    case SyncSourceId::Kind::SmartPlaylist: {
+      if (!smart_playlists_.generator) {
+        result.state = State::Unsupported;
+        return result;
+      }
+      // Made afresh each time, so a rolling one such as songs added in the
+      // last 30 days moves on.
+      smart_playlists::GeneratorPtr generator =
+          smart_playlists_.generator(source.parts()[0], source.parts()[1]);
+      if (!generator) return result;
+      for (const PlaylistItemPtr& item : generator->Generate()) {
+        result.songs << item->Metadata();
+      }
+      result.state = State::Ready;
+      return result;
+    }
+
     case SyncSourceId::Kind::InternetNode:
       result.state = State::Unsupported;
       return result;

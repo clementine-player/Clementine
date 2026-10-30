@@ -33,18 +33,22 @@
 class LibraryBackend;
 class UrlHandler;
 
-// Answers remotes' sync requests (with --media-sync): resolves a rule's
-// source into a manifest of songs, each with a /d/ URL that only that remote
-// may fetch. Keeps no state about rules, only what each connected remote
-// may download. Lives on the main thread, like InternetBrowser, and talks
-// to the network remote through queued signals carrying serialized
-// messages.
+// Answers remotes' sync requests (with --media-sync): lists the sources a
+// remote can keep, and resolves a rule's source into a manifest of songs, each
+// with a /d/ URL that only that remote may fetch. Keeps no state about rules,
+// only what each connected remote may download. Lives on the main thread, like
+// InternetBrowser, and talks to the network remote through queued signals
+// carrying serialized messages.
 class MediaSync : public QObject {
   Q_OBJECT
 
  public:
   struct Hooks {
     SyncResolver::Playlists playlists;
+    SyncResolver::SmartPlaylists smart_playlists;
+    // The playlists and smart playlists a remote can keep, for
+    // REQUEST_SYNC_SOURCES.
+    std::function<QList<cpb::remote::SyncSource>()> sources;
     // The UrlHandler for a song's URL scheme, if any.
     std::function<const UrlHandler*(const Song&)> url_handler;
     // Whether the network remote's settings let remotes download songs.

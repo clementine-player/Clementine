@@ -19,6 +19,7 @@
 
 #include <QFuture>
 #include <QIODevice>
+#include <QMap>
 #include <QMetaEnum>
 #include <QNetworkCacheMetaData>
 #include <QNetworkDiskCache>
@@ -27,6 +28,7 @@
 #include <QSettings>
 #include <QStringList>
 #include <QUrl>
+#include <QUuid>
 #include <QtConcurrentRun>
 #include <algorithm>
 #include <functional>
@@ -1411,7 +1413,9 @@ void LibraryModel::CreateSmartPlaylists() {
     for (; version < default_smart_playlists_.count(); ++version) {
       for (smart_playlists::GeneratorPtr gen :
            default_smart_playlists_[version]) {
-        SaveGenerator(&s, playlist_index++, gen);
+        // Not yet unique: that's checked below, with the others.
+        SaveGenerator(&s, playlist_index++, gen,
+                      UuidFor(gen->type(), gen->Save(), {}));
       }
     }
     s.endArray();
@@ -1419,11 +1423,48 @@ void LibraryModel::CreateSmartPlaylists() {
 
   s.setValue(backend_->songs_table() + "_version", version);
 
+  // Smart playlists saved before they had uuids get them now, and any that
+  // share one (copies of the same smart playlist) get new ones.
+  QSet<QString> used;
+  QMap<int, QString> missing;
   const int count = s.beginReadArray(backend_->songs_table());
+  for (int i = 0; i < count; ++i) {
+    s.setArrayIndex(i);
+    const QString uuid = s.value("uuid").toString();
+    if (uuid.isEmpty() || used.contains(uuid)) {
+      missing[i] = UuidFor(s.value("type").toString(),
+                           s.value("data").toByteArray(), used);
+      used << missing[i];
+    } else {
+      used << uuid;
+    }
+  }
+  s.endArray();
+  if (!missing.isEmpty()) {
+    s.beginWriteArray(backend_->songs_table(), count);
+    for (auto it = missing.constBegin(); it != missing.constEnd(); ++it) {
+      s.setArrayIndex(it.key());
+      s.setValue("uuid", it.value());
+    }
+    s.endArray();
+  }
+
+  s.beginReadArray(backend_->songs_table());
   for (int i = 0; i < count; ++i) {
     s.setArrayIndex(i);
     ItemFromSmartPlaylist(s, false);
   }
+}
+
+QString LibraryModel::UuidFor(const QString& type, const QByteArray& data,
+                              const QSet<QString>& used) {
+  // Any fixed namespace: what matters is that every Clementine uses this one.
+  static const QUuid kNamespace("{6c3b1d6e-6f0a-4c35-9a8e-4f0d3b5e2c71}");
+  const QString uuid =
+      QUuid::createUuidV5(kNamespace, QByteArray(type.toUtf8() + '\n' + data))
+          .toString(QUuid::WithoutBraces);
+  if (!used.contains(uuid)) return uuid;
+  return QUuid::createUuid().toString(QUuid::WithoutBraces);
 }
 
 void LibraryModel::ItemFromSmartPlaylist(const QSettings& s,
@@ -1434,6 +1475,7 @@ void LibraryModel::ItemFromSmartPlaylist(const QSettings& s,
   item->sort_text = item->display_text;
   item->key = s.value("type").toString();
   item->smart_playlist_data = s.value("data").toByteArray();
+  item->smart_playlist_uuid = s.value("uuid").toString();
   item->lazy_loaded = true;
 
   if (notify) item->InsertNotify(smart_playlist_node_);
@@ -1449,7 +1491,8 @@ void LibraryModel::AddGenerator(GeneratorPtr gen) {
 
   // Add this one to the end
   s.beginWriteArray(backend_->songs_table(), count + 1);
-  SaveGenerator(&s, count, gen);
+  SaveGenerator(&s, count, gen,
+                QUuid::createUuid().toString(QUuid::WithoutBraces));
 
   // Add it to the model
   ItemFromSmartPlaylist(s, true);
@@ -1471,7 +1514,8 @@ void LibraryModel::UpdateGenerator(const QModelIndex& index, GeneratorPtr gen) {
   s.endArray();
 
   s.beginWriteArray(backend_->songs_table(), count);
-  SaveGenerator(&s, index.row(), gen);
+  // Still the same smart playlist, so remotes keeping it keep the new one.
+  SaveGenerator(&s, index.row(), gen, item->smart_playlist_uuid);
 
   // Update the text of the item
   item->display_text = gen->name();
@@ -1499,16 +1543,18 @@ void LibraryModel::DeleteGenerator(const QModelIndex& index) {
     s.setValue("name", item->display_text);
     s.setValue("type", item->key);
     s.setValue("data", item->smart_playlist_data);
+    s.setValue("uuid", item->smart_playlist_uuid);
   }
   s.endArray();
 }
 
-void LibraryModel::SaveGenerator(QSettings* s, int i,
-                                 GeneratorPtr generator) const {
+void LibraryModel::SaveGenerator(QSettings* s, int i, GeneratorPtr generator,
+                                 const QString& uuid) const {
   s->setArrayIndex(i);
   s->setValue("name", generator->name());
   s->setValue("type", generator->type());
   s->setValue("data", generator->Save());
+  s->setValue("uuid", uuid);
 }
 
 GeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
@@ -1524,6 +1570,44 @@ GeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
   ret->set_library(backend());
   ret->Load(item->smart_playlist_data);
   return ret;
+}
+
+// These read the settings rather than the tree, which has no smart playlists
+// while the library is filtered.
+QList<LibraryModel::SmartPlaylist> LibraryModel::SmartPlaylists() const {
+  QList<SmartPlaylist> ret;
+  if (!show_smart_playlists_) return ret;
+
+  QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+  const int count = s.beginReadArray(backend_->songs_table());
+  for (int i = 0; i < count; ++i) {
+    s.setArrayIndex(i);
+    const QString uuid = s.value("uuid").toString();
+    if (uuid.isEmpty()) continue;
+    ret << SmartPlaylist{uuid, tr(qPrintable(s.value("name").toString()))};
+  }
+  return ret;
+}
+
+GeneratorPtr LibraryModel::CreateGenerator(const QString& uuid) const {
+  if (!show_smart_playlists_ || uuid.isEmpty()) return GeneratorPtr();
+
+  QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+  const int count = s.beginReadArray(backend_->songs_table());
+  for (int i = 0; i < count; ++i) {
+    s.setArrayIndex(i);
+    if (s.value("uuid").toString() != uuid) continue;
+
+    GeneratorPtr ret = Generator::Create(s.value("type").toString());
+    if (!ret) return ret;
+    ret->set_name(tr(qPrintable(s.value("name").toString())));
+    ret->set_library(backend());
+    ret->Load(s.value("data").toByteArray());
+    return ret;
+  }
+  return GeneratorPtr();
 }
 
 void LibraryModel::TotalSongCountUpdatedSlot(int count) {

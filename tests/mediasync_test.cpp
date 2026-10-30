@@ -33,6 +33,7 @@
 #include "gtest/gtest.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "library/librarymodel.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/streaming/mediahttpserver.h"
@@ -40,6 +41,7 @@
 #include "networkremote/sync/syncresolver.h"
 #include "networkremote/sync/syncsong.h"
 #include "networkremote/sync/syncsourceid.h"
+#include "smartplaylists/querygenerator.h"
 #include "test_utils.h"
 
 // For gtest's messages.
@@ -321,7 +323,30 @@ class SyncResolverTest : public ::testing::Test {
   }
 
   SyncResolver::Result Resolve(const SyncSourceId& source) {
-    return SyncResolver(library_.get(), playlists_).Resolve(source);
+    return SyncResolver(library_.get(), playlists_, smart_playlists_)
+        .Resolve(source);
+  }
+
+  // A smart playlist of the Pixies' songs, by title, as "smart/library/0b6e".
+  void AddSmartPlaylist() {
+    smart_playlists_.generator = [this](const QString& backend,
+                                        const QString& uuid) {
+      if (backend != "library" || uuid != "0b6e") {
+        return smart_playlists::GeneratorPtr();
+      }
+      smart_playlists::GeneratorPtr generator(
+          new smart_playlists::QueryGenerator(
+              "Pixies",
+              smart_playlists::Search(
+                  smart_playlists::Search::Type_And,
+                  {smart_playlists::SearchTerm(
+                      smart_playlists::SearchTerm::Field_Artist,
+                      smart_playlists::SearchTerm::Op_Equals, "Pixies")},
+                  smart_playlists::Search::Sort_FieldAsc,
+                  smart_playlists::SearchTerm::Field_Title)));
+      generator->set_library(library_.get());
+      return generator;
+    };
   }
 
   static QStringList Titles(const SyncResolver::Result& result) {
@@ -341,6 +366,7 @@ class SyncResolverTest : public ::testing::Test {
   std::unique_ptr<Database> database_;
   std::unique_ptr<LibraryBackend> library_;
   SyncResolver::Playlists playlists_;
+  SyncResolver::SmartPlaylists smart_playlists_;
   SongList playlist_;
 };
 
@@ -421,11 +447,46 @@ TEST_F(SyncResolverTest, FindsAPlaylistInItsOrder) {
             Resolve(SyncSourceId::ForPlaylist(7)).state);
 }
 
+TEST_F(SyncResolverTest, MakesASmartPlaylist) {
+  AddSmartPlaylist();
+  const SyncResolver::Result result =
+      Resolve(SyncSourceId::ForSmartPlaylist("library", "0b6e"));
+  EXPECT_EQ(SyncResolver::State::Ready, result.state);
+  EXPECT_EQ(
+      (QStringList{"Bone Machine", "Debaser", "Tame", "Wave of Mutilation"}),
+      Titles(result));
+
+  // Made again each time, so it has what's in the library now.
+  Add("Gouge Away", "Pixies", "Doolittle", 1989, 1, 15);
+  EXPECT_EQ((QStringList{"Bone Machine", "Debaser", "Gouge Away", "Tame",
+                         "Wave of Mutilation"}),
+            Titles(Resolve(SyncSourceId::ForSmartPlaylist("library", "0b6e"))));
+}
+
+TEST_F(SyncResolverTest, DeletedSmartPlaylistsAreGone) {
+  AddSmartPlaylist();
+  EXPECT_EQ(SyncResolver::State::Gone,
+            Resolve(SyncSourceId::ForSmartPlaylist("library", "9f1c")).state);
+}
+
 TEST_F(SyncResolverTest, OtherSourcesAreNotSupportedYet) {
+  // Without smart playlists, as in tests that don't give them.
   EXPECT_EQ(SyncResolver::State::Unsupported,
             Resolve(SyncSourceId::ForSmartPlaylist("library", "0b6e")).state);
   EXPECT_EQ(SyncResolver::State::Unsupported,
             Resolve(SyncSourceId::ForInternetNode("plex", "42")).state);
+}
+
+TEST(SmartPlaylistUuidTest, IsTheSameForTheSameSmartPlaylist) {
+  const QString uuid = LibraryModel::UuidFor("Query", "data", {});
+  EXPECT_FALSE(QUuid::fromString(uuid).isNull());
+  // So a default smart playlist is the same source on every Clementine.
+  EXPECT_EQ(uuid, LibraryModel::UuidFor("Query", "data", {}));
+  EXPECT_NE(uuid, LibraryModel::UuidFor("Query", "other data", {}));
+  // But a copy of one gets its own.
+  const QString copy = LibraryModel::UuidFor("Query", "data", {uuid});
+  EXPECT_FALSE(QUuid::fromString(copy).isNull());
+  EXPECT_NE(uuid, copy);
 }
 
 class MediaSyncTest : public SyncResolverTest {
@@ -435,6 +496,7 @@ class MediaSyncTest : public SyncResolverTest {
     MediaSync::Hooks hooks;
     hooks.playlists = playlists_;
     hooks.downloads_allowed = [this]() { return downloads_allowed_; };
+    hooks.sources = [this]() { return sources_; };
     sync_.reset(new MediaSync(library_.get(), hooks, items_));
     sent_.reset(
         new QSignalSpy(sync_.get(), SIGNAL(SendToClient(int, QByteArray))));
@@ -482,6 +544,7 @@ class MediaSyncTest : public SyncResolverTest {
   std::unique_ptr<QSignalSpy> sent_;
   QString peer_ = "10.0.0.2";
   bool downloads_allowed_ = true;
+  QList<cpb::remote::SyncSource> sources_;
   int limit_items_ = 0;
   qint64 limit_bytes_ = 0;
 };
@@ -583,9 +646,31 @@ TEST_F(MediaSyncTest, SaysWhenASourceIsGone) {
 
 TEST_F(MediaSyncTest, KeepsRulesItCantSyncYet) {
   const cpb::remote::ResponseSyncManifest manifest =
-      Manifest(SyncSourceId::ForSmartPlaylist("library", "0b6e"));
+      Manifest(SyncSourceId::ForInternetNode("plex", "42"));
   EXPECT_EQ(cpb::remote::SYNC_MANIFEST_STATE_NEEDS_SETUP, manifest.state());
   EXPECT_FALSE(manifest.message().empty());
+}
+
+TEST_F(MediaSyncTest, ListsWhatCanBeKept) {
+  cpb::remote::SyncSource source;
+  source.set_source_id("smart/library/0b6e");
+  source.set_title("Newest tracks");
+  source.set_kind(cpb::remote::SYNC_SOURCE_KIND_SMART_PLAYLIST);
+  sources_ << source;
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::REQUEST_SYNC_SOURCES);
+  const std::string data = msg.SerializeAsString();
+  sync_->HandleMessage(1, peer_, QByteArray(data.data(), data.size()));
+  ASSERT_EQ(1, sent_->size());
+  const QByteArray out = sent_->last()[1].toByteArray();
+  cpb::remote::Message reply;
+  ASSERT_TRUE(reply.ParseFromArray(out.constData(), out.size()));
+  EXPECT_EQ(cpb::remote::SYNC_SOURCES, reply.type());
+  ASSERT_EQ(1, reply.response_sync_sources().sources_size());
+  EXPECT_EQ("smart/library/0b6e",
+            reply.response_sync_sources().sources(0).source_id());
+  EXPECT_EQ("Newest tracks", reply.response_sync_sources().sources(0).title());
 }
 
 TEST_F(MediaSyncTest, NeedsDownloadsAllowed) {
