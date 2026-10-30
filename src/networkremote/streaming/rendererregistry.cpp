@@ -20,6 +20,8 @@
 #include <QHostAddress>
 #include <QNetworkInterface>
 
+#include "airplay/airplaydiscovery.h"
+#include "airplay/airplayengine.h"
 #include "chromecast/castdiscovery.h"
 #include "chromecast/chromecastengine.h"
 #include "core/logging.h"
@@ -35,6 +37,7 @@ const char* RendererRegistry::kLocalOutputId = "local";
 
 namespace {
 bool sUpnpEnabled = false;
+bool sAirPlayEnabled = false;
 
 // Client-chosen strings kept for as long as the renderer is connected, and
 // shown in output pickers.
@@ -52,6 +55,10 @@ RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
 
 void RendererRegistry::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
 
+void RendererRegistry::SetAirPlayEnabled(bool enabled) {
+  sAirPlayEnabled = enabled;
+}
+
 RendererRegistry::~RendererRegistry() {
   for (RemoteEngine* engine : engines_) {
     if (router_) router_->RemoveOutput(engine);
@@ -62,6 +69,10 @@ RendererRegistry::~RendererRegistry() {
     delete engine;
   }
   for (UpnpEngine* engine : upnp_engines_) {
+    if (router_) router_->RemoveOutput(engine);
+    delete engine;
+  }
+  for (AirPlayEngine* engine : airplay_engines_) {
     if (router_) router_->RemoveOutput(engine);
     delete engine;
   }
@@ -88,6 +99,19 @@ void RendererRegistry::StartDiscovery() {
     connect(upnp_discovery_, &UpnpDiscovery::DeviceLost, this,
             &RendererRegistry::UpnpDeviceLost);
     upnp_discovery_->Start();
+  }
+
+  if (sAirPlayEnabled && !airplay_discovery_) {
+    airplay_discovery_ = AirPlayDiscovery::Create(this);
+    if (airplay_discovery_) {
+      connect(airplay_discovery_, &AirPlayDiscovery::DeviceFound, this,
+              &RendererRegistry::AirPlayDeviceFound);
+      connect(airplay_discovery_, &AirPlayDiscovery::DeviceLost, this,
+              &RendererRegistry::AirPlayDeviceLost);
+      airplay_discovery_->Start();
+    } else {
+      qLog(Info) << "Can't look for AirPlay receivers on this platform";
+    }
   }
 }
 
@@ -178,6 +202,53 @@ void RendererRegistry::UpnpDeviceLost(const QString& id) {
 void RendererRegistry::UpnpEngineFailed(UpnpEngine* engine) {
   if (!router_ || router_->active_engine() != engine) return;
   // As for a Cast device.
+  router_->RemoveOutput(engine);
+  engine->Stop();
+  router_->AddOutput(engine);
+}
+
+QString RendererRegistry::AirPlayOutputId(const AirPlayDevice& device) {
+  return "airplay:" + device.id;
+}
+
+AirPlayEngine* RendererRegistry::FindAirPlayEngine(
+    const QString& device_id) const {
+  for (AirPlayEngine* engine : airplay_engines_) {
+    if (engine->device().id == device_id) return engine;
+  }
+  return nullptr;
+}
+
+void RendererRegistry::AirPlayDeviceFound(const AirPlayDevice& device) {
+  if (AirPlayEngine* engine = FindAirPlayEngine(device.id)) {
+    engine->SetDevice(device);
+    // Its name may have changed.
+    if (router_) router_->NotifyOutputsChanged();
+    return;
+  }
+  if (!router_) return;
+
+  AirPlayEngine* engine = new AirPlayEngine(device, this);
+  airplay_engines_ << engine;
+  connect(engine, &AirPlayEngine::DeviceFailed, this,
+          [this, engine]() { AirPlayEngineFailed(engine); });
+  router_->AddOutput(engine);
+  qLog(Info) << "AirPlay receiver available:" << device.name;
+}
+
+void RendererRegistry::AirPlayDeviceLost(const QString& id) {
+  AirPlayEngine* engine = FindAirPlayEngine(id);
+  if (!engine) return;
+  airplay_engines_.removeOne(engine);
+  qLog(Info) << "AirPlay receiver gone:" << engine->device().name;
+  if (router_) router_->RemoveOutput(engine);
+  engine->deleteLater();
+}
+
+void RendererRegistry::AirPlayEngineFailed(AirPlayEngine* engine) {
+  if (!router_ || router_->active_engine() != engine) return;
+  // Fall back to this computer, paused, as for a Cast device, but keep
+  // offering the receiver.
   router_->RemoveOutput(engine);
   engine->Stop();
   router_->AddOutput(engine);
@@ -331,6 +402,14 @@ QByteArray RendererRegistry::OutputsMessage() const {
                           ? cpb::remote::OUTPUT_STATE_ACTIVE
                           : cpb::remote::OUTPUT_STATE_AVAILABLE);
   }
+  for (AirPlayEngine* engine : airplay_engines_) {
+    cpb::remote::Output* output = outputs->add_outputs();
+    output->set_output_id(AirPlayOutputId(engine->device()).toStdString());
+    output->set_display_name(engine->device().name.toStdString());
+    output->set_state(router_ && router_->active_engine() == engine
+                          ? cpb::remote::OUTPUT_STATE_ACTIVE
+                          : cpb::remote::OUTPUT_STATE_AVAILABLE);
+  }
 
   const std::string data = msg.SerializeAsString();
   return QByteArray(data.data(), static_cast<int>(data.size()));
@@ -356,6 +435,12 @@ bool RendererRegistry::SetOutput(const QString& output_id) {
   }
   for (UpnpEngine* engine : upnp_engines_) {
     if (UpnpOutputId(engine->device()) == output_id) {
+      router_->SetOutput(engine);
+      return true;
+    }
+  }
+  for (AirPlayEngine* engine : airplay_engines_) {
+    if (AirPlayOutputId(engine->device()) == output_id) {
       router_->SetOutput(engine);
       return true;
     }

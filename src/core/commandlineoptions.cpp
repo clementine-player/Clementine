@@ -91,6 +91,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       play_and_exit_timeout_secs_(-1),
       upnp_(false),
       media_sync_(false),
+      airplay_(false),
       log_levels_(logging::kDefaultLogLevels) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -163,6 +164,9 @@ bool CommandlineOptions::Parse() {
       // Undocumented while it's being built: let remotes keep songs on the
       // phone to play offline. Left out of kHelpText.
       {"media-sync", no_argument, 0, MediaSync},
+      // Undocumented while it's being built: offer AirPlay receivers as
+      // outputs too. Left out of kHelpText.
+      {"airplay", no_argument, 0, AirPlay},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -345,6 +349,10 @@ bool CommandlineOptions::Parse() {
 
       case MediaSync:
         media_sync_ = true;
+        break;
+
+      case AirPlay:
+        airplay_ = true;
         break;
 
       case '?':
