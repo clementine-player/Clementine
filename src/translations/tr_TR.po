@@ -93,7 +93,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:414
+#: ../bin/src/ui_behavioursettingspage.h:454
 msgid " s"
 msgstr ""
 
@@ -106,9 +106,26 @@ msgstr " saniye"
 msgid " songs"
 msgstr " şarkılar"
 
-#: ui/networkremotesettingspage.cpp:204
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
+#. a network this computer isn't connected to now, such as a home
+#. network while it's at work. %1 is the network, such as
+#. "192.168.1.0/24".
+#: ui/networkremotesettingspage.cpp:318
 #, qt-format
-msgid "%1 (not currently available)"
+msgid ""
+"%1\n"
+"Not connected now. Clementine listens when this computer joins it."
+msgstr ""
+
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
+#. a network that was added by hand. %1 is the network, such as
+#. "192.168.1.0/24", and %2 this computer's addresses in it, such
+#. as "192.168.1.57", separated by commas.
+#: ui/networkremotesettingspage.cpp:325
+#, qt-format
+msgid ""
+"%1\n"
+"This computer is %2"
 msgstr ""
 
 #: widgets/osd.cpp:196
@@ -239,6 +256,18 @@ msgstr "%1 parça"
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 aktarıldı"
+
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list. %1 is
+#. a network interface's name, such as "Wi-Fi" or "eth0", %2 its
+#. networks, such as "192.168.1.0/24", separated by commas, and %3
+#. this computer's addresses on them, such as "192.168.1.57",
+#. separated by commas.
+#: ui/networkremotesettingspage.cpp:280
+#, qt-format
+msgid ""
+"%1  %2\n"
+"This computer is %3"
+msgstr ""
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -485,7 +514,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>% ile başlayan özellikler, örneğin: %artist %album %title </p>\n\n<p>İşaret içeren metnin bölümlerini süslü parantez ile sarmalarsanız, işaret boşsa o bölüm görünmeyecektir.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:334
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -506,7 +535,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Bir şarkı, eğer bu koşullara uyarsa çalma listesine eklenecektir."
 
-#: ../bin/src/ui_behavioursettingspage.h:417
+#: ../bin/src/ui_behavioursettingspage.h:457
 msgid "A&utomatic"
 msgstr ""
 
@@ -556,7 +585,7 @@ msgid "About Qt..."
 msgstr "Qt Hakkında..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:418
+#: ../bin/src/ui_behavioursettingspage.h:458
 msgid "Absolute"
 msgstr ""
 
@@ -642,6 +671,14 @@ msgstr "Klasör ekle"
 #: ../bin/src/ui_mainwindow.h:756
 msgid "Add folder..."
 msgstr "Klasör ekle..."
+
+#: ui/networkremotesettingspage.cpp:342
+msgid "Add network or address"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:346
+msgid "Add network or address..."
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -739,8 +776,8 @@ msgstr "Başka bir çalma listesine ekle"
 msgid "Add to playlist"
 msgstr "Çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:402
-#: ../bin/src/ui_behavioursettingspage.h:410
+#: ../bin/src/ui_behavioursettingspage.h:442
+#: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Add to the queue"
 msgstr "Kuyruğa ekle"
 
@@ -830,10 +867,6 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
-msgid "All addresses"
-msgstr ""
-
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Tüm albümler"
@@ -845,6 +878,10 @@ msgstr "Tüm sanatçılar"
 #: ui/albumcoverchoicecontroller.cpp:53
 msgid "All files (*)"
 msgstr "Tüm dosyalar (*)"
+
+#: ../bin/src/ui_networkremotesettingspage.h:342
+msgid "All networks"
+msgstr ""
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -859,19 +896,25 @@ msgstr "Tüm çevirmenler"
 msgid "All tracks"
 msgstr "Tüm parçalar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:351
 msgid "Allow downloads"
+msgstr ""
+
+#: networkremote/sync/mediasync.cpp:73
+msgid ""
+"Allow downloads in Clementine's network remote settings to keep songs on "
+"this phone."
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "Mid/side kodlamaya izin ver"
 
-#: ../bin/src/ui_networkremotesettingspage.h:308
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Allow playing on remote devices"
 msgstr ""
 
@@ -879,16 +922,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Alwa&ys hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:418
 msgid "Always show &the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:392
-#: ../bin/src/ui_behavioursettingspage.h:406
+#: ../bin/src/ui_behavioursettingspage.h:432
+#: ../bin/src/ui_behavioursettingspage.h:446
 msgid "Always start playing"
 msgstr "Her zaman çalarak başlat"
 
@@ -933,7 +976,7 @@ msgstr "Çalma listesine dosya/URL ekle"
 msgid "Append to current playlist"
 msgstr "Şu anki çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:399
+#: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Append to the playlist"
 msgstr "Çalma listesine ekle"
 
@@ -973,12 +1016,12 @@ msgstr "Sanatçı bilgisi"
 msgid "Artist's initial"
 msgstr "Sanatçının kısaltması"
 
-#: ../bin/src/ui_behavioursettingspage.h:420
+#: ../bin/src/ui_behavioursettingspage.h:460
 msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:314
+#: ../bin/src/ui_networkremotesettingspage.h:358
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Ses biçimi"
@@ -1083,7 +1126,7 @@ msgstr "Temel Mavi"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:408
 msgid "Behavior"
 msgstr "Davranış"
 
@@ -1212,7 +1255,7 @@ msgstr "Kısayolu değiştir..."
 msgid "Change shuffle mode"
 msgstr "Karıştırma kipini değiştir"
 
-#: ../bin/src/ui_behavioursettingspage.h:409
+#: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1297,7 +1340,7 @@ msgstr ""
 #. can play on, download the audio from Clementine through the network
 #. remote, so they only work while it's on, listening on an address in
 #. the device's network.
-#: ui/networkremotesettingspage.cpp:62
+#: ui/networkremotesettingspage.cpp:65
 msgid ""
 "Chromecasts and other devices you play on get their music from Clementine "
 "through the network remote, so they need it turned on, and listening on an "
@@ -1322,7 +1365,7 @@ msgid "Clear playlist"
 msgstr "Çalma listesini temizle"
 
 #: smartplaylists/searchtermwidget.cpp:374
-#: visualisations/visualisationcontainer.cpp:236
+#: visualisations/visualisationcontainer.cpp:239
 #: ../bin/src/ui_mainwindow.h:722 ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -1335,8 +1378,8 @@ msgstr "Clementine Hatası"
 msgid "Clementine Orange"
 msgstr "Clementine Turuncu"
 
-#: visualisations/visualisationcontainer.cpp:80
-#: visualisations/visualisationcontainer.cpp:170
+#: visualisations/visualisationcontainer.cpp:81
+#: visualisations/visualisationcontainer.cpp:171
 msgid "Clementine Visualization"
 msgstr "Clementine Görselleştirme"
 
@@ -1434,7 +1477,7 @@ msgstr "Kapat"
 msgid "Close playlist"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:133
+#: visualisations/visualisationcontainer.cpp:134
 msgid "Close visualization"
 msgstr "Görselleştirmeyi kapat"
 
@@ -1462,7 +1505,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
-#: ../bin/src/ui_behavioursettingspage.h:425
+#: ../bin/src/ui_behavioursettingspage.h:465
 msgid "Comma separated list of prefix words to ignore when sorting"
 msgstr ""
 
@@ -1585,11 +1628,11 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Convert lossless files"
 msgstr ""
 
@@ -2057,11 +2100,11 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Açmak için çift tıkla"
 
-#: ../bin/src/ui_behavioursettingspage.h:408
+#: ../bin/src/ui_behavioursettingspage.h:448
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:398
+#: ../bin/src/ui_behavioursettingspage.h:438
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
@@ -2071,7 +2114,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:324
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Download Clementine Remote for Android"
 msgstr ""
 
@@ -2096,7 +2139,7 @@ msgstr ""
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:353
 msgid "Download settings"
 msgstr ""
 
@@ -2152,6 +2195,14 @@ msgstr ""
 
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while Clementine plays music through this computer's speakers or
+#. headphones.
+#: ui/behavioursettingspage.cpp:53
+msgid "During playback"
 msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
@@ -2216,7 +2267,7 @@ msgstr "Ekolayzırı etkinleştir"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kısayolları sadece Clementine odaktayken etkinleştir"
 
-#: ../bin/src/ui_behavioursettingspage.h:385
+#: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2258,12 +2309,18 @@ msgstr "Kapağı Internet'ten indirmek için URL girin:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
+#: ui/networkremotesettingspage.cpp:374
+msgid ""
+"Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
+"192.168.1.23."
+msgstr ""
+
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
 msgstr "Bu çalma listesi için yeni bir isim gir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:297
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr ""
 
@@ -2597,7 +2654,7 @@ msgstr ""
 msgid "Files"
 msgstr "Dosyalar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Files root folder"
 msgstr ""
 
@@ -2687,7 +2744,7 @@ msgid "Format"
 msgstr "Biçim"
 
 #: analyzers/analyzercontainer.cpp:52
-#: visualisations/visualisationcontainer.cpp:109
+#: visualisations/visualisationcontainer.cpp:110
 msgid "Framerate"
 msgstr "Kare oranı"
 
@@ -2785,7 +2842,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 kapaktan %1 tanesi alındı (%3 tanesi başarısız)"
 
-#: ../bin/src/ui_behavioursettingspage.h:388
+#: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Grey out non existent songs in my playlists"
 msgstr "Çalma listemde olmayan şarkıları gri göster"
 
@@ -2873,12 +2930,12 @@ msgid "High"
 msgstr "Yüksek"
 
 #: analyzers/analyzercontainer.cpp:68
-#: visualisations/visualisationcontainer.cpp:115
+#: visualisations/visualisationcontainer.cpp:116
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Yüksek (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:125
+#: visualisations/visualisationcontainer.cpp:126
 msgid "High (1024x1024)"
 msgstr "Yüksek (1024x1024)"
 
@@ -2922,7 +2979,7 @@ msgstr "Üstteki simgeler"
 msgid "Identifying song"
 msgstr "Şarkı teşhis ediliyor"
 
-#: ../bin/src/ui_behavioursettingspage.h:383
+#: ../bin/src/ui_behavioursettingspage.h:423
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2949,7 +3006,7 @@ msgstr ""
 msgid "Ignore \"The\" in artist names"
 msgstr "Sanatçı isimlerinde \"The\" kelimesini önemseme"
 
-#: ../bin/src/ui_behavioursettingspage.h:423
+#: ../bin/src/ui_behavioursettingspage.h:463
 msgid "Ignore prefix word(s)"
 msgstr ""
 
@@ -3027,7 +3084,7 @@ msgstr ""
 msgid "Insert..."
 msgstr "Ekle..."
 
-#: networkremote/outgoingdatacreator.cpp:536
+#: networkremote/outgoingdatacreator.cpp:564
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr ""
@@ -3076,7 +3133,7 @@ msgstr ""
 msgid "Jazz"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:395
+#: ../bin/src/ui_behavioursettingspage.h:435
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -3096,13 +3153,31 @@ msgstr "Düğmeleri %1 saniye tut..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Düğmeleri %1 saniye tut..."
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:411
 msgid "Keep running in the background when the window is closed"
 msgstr "Pencere kapandığında arkaplanda çalışmaya devam et"
+
+#: ../bin/src/ui_behavioursettingspage.h:421
+msgid "Keep the computer awake"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
 msgstr "Orijinal dosyaları sakla"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:154
+msgid "Keeping the computer awake while Clementine is open"
+msgstr ""
+
+#. TRANSLATORS: The tooltip of "While visualizations are full screen",
+#. under "Keep the computer awake". As well as keeping the computer
+#. awake, it stops the screen from turning off or locking while they're
+#. on show.
+#: ui/behavioursettingspage.cpp:76
+msgid "Keeps the display on too"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3113,7 +3188,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:413
 msgid "Language"
 msgstr "Dil"
 
@@ -3190,7 +3265,7 @@ msgstr "Süre"
 #. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
 #. for phones running the Clementine Remote app, which can act as the
 #. speaker and choose where Clementine plays; Chromecasts don't need it.
-#: ui/networkremotesettingspage.cpp:69
+#: ui/networkremotesettingspage.cpp:72
 msgid ""
 "Let a phone or tablet running Clementine Remote act as the speaker, and "
 "choose where Clementine plays: Clementine keeps the playlist and streams the"
@@ -3222,8 +3297,19 @@ msgstr ""
 msgid "Limits"
 msgstr "Limitler"
 
-#: ../bin/src/ui_networkremotesettingspage.h:299
+#: ../bin/src/ui_networkremotesettingspage.h:341
 msgid "Listen on"
+msgstr ""
+
+#. TRANSLATORS: The tooltip of the information icon beside "All
+#. networks" in the Network Remote's "Listen on" list. %1 is a list, one
+#. per line, of this computer's network interfaces and their addresses,
+#. such as "eth0: 192.168.1.57".
+#: ui/networkremotesettingspage.cpp:295
+#, qt-format
+msgid ""
+"Listens on every address this computer has:\n"
+"%1"
 msgstr ""
 
 #: ui/equalizer.cpp:138
@@ -3340,12 +3426,12 @@ msgid "Love (Last.fm scrobbling)"
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:66
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:112
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Düşük (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:123
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Low (256x256)"
 msgstr "Düşük (256x256)"
 
@@ -3465,12 +3551,12 @@ msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:67
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:114
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Orta (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:125
 msgid "Medium (512x512)"
 msgstr "Orta (512x512)"
 
@@ -3569,7 +3655,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Müzik Kütüphanesi"
 
-#: ../bin/src/ui_networkremotesettingspage.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "Music extensions remotely visible"
 msgstr ""
 
@@ -3600,7 +3686,7 @@ msgstr "Dar band (NB)"
 msgid "Network Proxy"
 msgstr "Vekil Sunucu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:277
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Network Remote"
 msgstr ""
 
@@ -3612,6 +3698,13 @@ msgstr ""
 msgid "Network Remote Settings..."
 msgstr ""
 
+#. TRANSLATORS: In the dialog that adds a network, or a single
+#. address, to the Network Remote's "Listen on" list.
+#: ui/networkremotesettingspage.cpp:337
+msgid ""
+"Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
 msgstr "Hiçbir zaman"
@@ -3620,8 +3713,8 @@ msgstr "Hiçbir zaman"
 msgid "Never played"
 msgstr "Hiç çalınmamış"
 
-#: ../bin/src/ui_behavioursettingspage.h:390
-#: ../bin/src/ui_behavioursettingspage.h:404
+#: ../bin/src/ui_behavioursettingspage.h:430
+#: ../bin/src/ui_behavioursettingspage.h:444
 msgid "Never start playing"
 msgstr "Asla çalarak başlama"
 
@@ -3733,7 +3826,7 @@ msgstr ""
 msgid "Normal block type"
 msgstr "Normal blok tipi"
 
-#: ../bin/src/ui_behavioursettingspage.h:428
+#: ../bin/src/ui_behavioursettingspage.h:468
 msgid "Normal duration (at least 4 minutes or half the track length)"
 msgstr ""
 
@@ -3812,7 +3905,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:282
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3823,11 +3916,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:332
 msgid "Only allow connections from the local network"
 msgstr ""
 
-#: ui/networkremotesettingspage.cpp:226
+#: ui/networkremotesettingspage.cpp:414
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3887,7 +3980,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
-#: ../bin/src/ui_behavioursettingspage.h:401
+#: ../bin/src/ui_behavioursettingspage.h:441
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3914,7 +4007,7 @@ msgid "Optimize for quality"
 msgstr "Kalite için eniyileştir"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:359
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Seçenekler..."
@@ -4075,8 +4168,8 @@ msgstr ""
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
-#: ../bin/src/ui_behavioursettingspage.h:391
-#: ../bin/src/ui_behavioursettingspage.h:405
+#: ../bin/src/ui_behavioursettingspage.h:431
+#: ../bin/src/ui_behavioursettingspage.h:445
 msgid "Play if there is nothing already playing"
 msgstr "Çalan bir şey yoksa çal"
 
@@ -4115,6 +4208,20 @@ msgstr "Oynat"
 #: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:158
+msgid "Playing music"
+msgstr ""
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#. The music is playing on a phone, a Chromecast or the like, which
+#. gets it from this computer.
+#: core/sleepinhibitor.cpp:164
+msgid "Playing music on another device"
+msgstr ""
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -4203,7 +4310,7 @@ msgid "Popup duration"
 msgstr "Açılır pencere süresi"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:280
+#: ../bin/src/ui_networkremotesettingspage.h:322
 msgid "Port"
 msgstr "Port"
 
@@ -4258,7 +4365,7 @@ msgstr "Bir tuşa basın"
 msgid "Press a key combination to use for %1..."
 msgstr "%1 için kullanmak için bir tuş kombinasyonun basın..."
 
-#: ../bin/src/ui_behavioursettingspage.h:394
+#: ../bin/src/ui_behavioursettingspage.h:434
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -4336,7 +4443,7 @@ msgctxt "Sound quality"
 msgid "Quality"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:121
+#: visualisations/visualisationcontainer.cpp:122
 msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr ""
@@ -4460,7 +4567,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:419
+#: ../bin/src/ui_behavioursettingspage.h:459
 msgid "Relative"
 msgstr ""
 
@@ -4468,7 +4575,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "Wii kumanda sallamayı hatırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:420
 msgid "Remember from &last time"
 msgstr ""
 
@@ -4479,6 +4586,7 @@ msgstr ""
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:347
 #: ../bin/src/ui_googledrivesettingspage.h:149
 msgid "Remove"
 msgstr "Kaldır"
@@ -4553,7 +4661,7 @@ msgstr "Parçayı tekrarla"
 msgid "Replace current playlist"
 msgstr "Şu anki çalma listesinin yerine geç"
 
-#: ../bin/src/ui_behavioursettingspage.h:400
+#: ../bin/src/ui_behavioursettingspage.h:440
 msgid "Replace the playlist"
 msgstr "Çalma listesinin yerine geç"
 
@@ -4573,7 +4681,7 @@ msgstr "Yeniden Oynatma Kazanç kipi"
 msgid "Repopulate"
 msgstr "Yeniden doldur"
 
-#: ../bin/src/ui_networkremotesettingspage.h:294
+#: ../bin/src/ui_networkremotesettingspage.h:336
 msgid "Require authentication code"
 msgstr ""
 
@@ -4585,7 +4693,7 @@ msgstr "Sıfırla"
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:396
+#: ../bin/src/ui_behavioursettingspage.h:436
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4602,7 +4710,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
 
-#: ../bin/src/ui_behavioursettingspage.h:386
+#: ../bin/src/ui_behavioursettingspage.h:426
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4630,7 +4738,7 @@ msgstr ""
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Root folder that will be browsable from the network remote"
 msgstr ""
 
@@ -4756,7 +4864,7 @@ msgstr "Puan"
 msgid "Scrobble tracks that I listen to"
 msgstr "Dinlediğim parçaları skropla"
 
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:410
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4870,7 +4978,7 @@ msgstr "Çalan parçayı görece miktara göre ara"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Çalan parçayı kesin bir konuma göre ara"
 
-#: ../bin/src/ui_behavioursettingspage.h:412
+#: ../bin/src/ui_behavioursettingspage.h:452
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4910,12 +5018,20 @@ msgstr ""
 msgid "Select visualizations"
 msgstr "Görsel seç"
 
-#: visualisations/visualisationcontainer.cpp:129
+#: visualisations/visualisationcontainer.cpp:130
 msgid "Select visualizations..."
 msgstr "Görselleştirmeleri seç..."
 
 #: ../bin/src/ui_transcodedialog.h:238 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
+msgstr ""
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#. A phone running Clementine Remote is downloading songs from this
+#. computer.
+#: core/sleepinhibitor.cpp:170
+msgid "Sending songs to a remote"
 msgstr ""
 
 #: devices/udisks2lister.cpp:82
@@ -4951,7 +5067,7 @@ msgstr ""
 msgid "Set the volume to <value> percent"
 msgstr "Ses seviyesini yüzde <value> yap"
 
-#: networkremote/internetbrowser.cpp:241
+#: networkremote/internetbrowser.cpp:243
 #, qt-format
 msgid "Set up %1 in Clementine's settings on the computer"
 msgstr ""
@@ -4960,11 +5076,11 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "Seçili tüm parçalar için değeri ayarla..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:279
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: ../bin/src/ui_behavioursettingspage.h:429
+#: ../bin/src/ui_behavioursettingspage.h:469
 msgid "Short duration (at least 1 minute or half the track length)"
 msgstr ""
 
@@ -5092,7 +5208,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Show tray icon"
 msgstr "Sistem çekmecesi simgesini göster"
 
@@ -5103,6 +5219,12 @@ msgstr ""
 #: core/globalshortcuts.cpp:70
 msgid "Show/Hide"
 msgstr "Göster/Gizle"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:150
+msgid "Showing visualizations full screen"
+msgstr ""
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5324,7 +5446,7 @@ msgstr "Oynatmayı durdur"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:387
+#: ../bin/src/ui_behavioursettingspage.h:427
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5391,12 +5513,12 @@ msgid "Summary"
 msgstr "Özet"
 
 #: analyzers/analyzercontainer.cpp:69
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:118
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Süper yüksek (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:126
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Super high (2048x2048)"
 msgstr ""
 
@@ -5627,7 +5749,11 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr "Bu tür bir aygıt desteklenmiyor: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:413
+#: networkremote/sync/mediasync.cpp:94
+msgid "This version of Clementine can't sync this yet."
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
 msgstr ""
 
@@ -5645,7 +5771,7 @@ msgstr "Bugün"
 msgid "Toggle Pretty OSD"
 msgstr "Zarif OSD'yi Aç/Kapa"
 
-#: visualisations/visualisationcontainer.cpp:107
+#: visualisations/visualisationcontainer.cpp:108
 msgid "Toggle fullscreen"
 msgstr "Tam ekran göster/gizle"
 
@@ -5904,7 +6030,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr "Bildirimler için özel bir mesaj kullan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:278
+#: ../bin/src/ui_networkremotesettingspage.h:320
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5936,7 +6062,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "Temporal noise shaping kullan"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:414
 msgid "Use the system default"
 msgstr "Sistem öntanımlısını kullan"
 
@@ -5963,7 +6089,7 @@ msgstr ""
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: ../bin/src/ui_behavioursettingspage.h:389
+#: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Using the menu to add a song will..."
 msgstr "Menü kullanarak şarkı eklemek..."
 
@@ -6010,7 +6136,7 @@ msgstr ""
 msgid "Visualization mode"
 msgstr "Görüntüleme kipi"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:764
+#: ../bin/src/ui_mainwindow.h:764
 msgid "Visualizations"
 msgstr "Görseller"
 
@@ -6040,7 +6166,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:373
+#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:412
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -6067,11 +6193,11 @@ msgstr ""
 msgid "Weeks"
 msgstr "Haftalar"
 
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:417
 msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
-#: ../bin/src/ui_behavioursettingspage.h:427
+#: ../bin/src/ui_behavioursettingspage.h:467
 msgid "When calculating play counts, use"
 msgstr ""
 
@@ -6081,16 +6207,46 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini içeren resim dosyasına bakacak.\nEğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
 
-#: ../bin/src/ui_behavioursettingspage.h:416
+#: ../bin/src/ui_behavioursettingspage.h:456
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:422
+#: ../bin/src/ui_behavioursettingspage.h:462
 msgid "When sorting artists, albums and titles"
 msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:145
 msgid "When the list is empty..."
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. for as long as Clementine is running, whatever it's doing.
+#: ui/behavioursettingspage.cpp:47
+msgid "While Clementine is open"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while a phone running Clementine Remote downloads songs from it,
+#. whether the user picked them or they're being synced.
+#: ui/behavioursettingspage.cpp:65
+msgid "While a remote is downloading or syncing"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while Clementine plays music on a phone, a Chromecast, a Sonos speaker
+#. or the like, which gets the music from this computer.
+#: ui/behavioursettingspage.cpp:59
+msgid "While playing on another device"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while visualizations are shown full screen.
+#: ui/behavioursettingspage.cpp:70
+msgid "While visualizations are full screen"
 msgstr ""
 
 #: ../bin/src/ui_globalsearchview.h:209
@@ -6173,7 +6329,7 @@ msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:421
+#: ../bin/src/ui_behavioursettingspage.h:461
 msgid "Write metadata"
 msgstr ""
 
@@ -6270,7 +6426,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:416
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
@@ -6307,7 +6463,7 @@ msgstr "Radyo yayın akışlarınız"
 msgid "Your scrobbles: %1"
 msgstr "Skroplarınız: %1"
 
-#: visualisations/visualisationcontainer.cpp:171
+#: visualisations/visualisationcontainer.cpp:172
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 
@@ -6357,7 +6513,7 @@ msgstr "ilk önce en büyüğü"
 msgid "bpm"
 msgstr "bpm"
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6468,7 +6624,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#: ../bin/src/ui_networkremotesettingspage.h:325
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "or scan the QR code: "
 msgstr ""
 

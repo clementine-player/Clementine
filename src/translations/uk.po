@@ -60,7 +60,7 @@ msgstr " мс"
 msgid " pt"
 msgstr " тчк"
 
-#: ../bin/src/ui_behavioursettingspage.h:414
+#: ../bin/src/ui_behavioursettingspage.h:454
 msgid " s"
 msgstr "с"
 
@@ -73,10 +73,27 @@ msgstr " секунд"
 msgid " songs"
 msgstr " композицій"
 
-#: ui/networkremotesettingspage.cpp:204
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
+#. a network this computer isn't connected to now, such as a home
+#. network while it's at work. %1 is the network, such as
+#. "192.168.1.0/24".
+#: ui/networkremotesettingspage.cpp:318
 #, qt-format
-msgid "%1 (not currently available)"
-msgstr "%1 (зараз немає доступу)"
+msgid ""
+"%1\n"
+"Not connected now. Clementine listens when this computer joins it."
+msgstr ""
+
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
+#. a network that was added by hand. %1 is the network, such as
+#. "192.168.1.0/24", and %2 this computer's addresses in it, such
+#. as "192.168.1.57", separated by commas.
+#: ui/networkremotesettingspage.cpp:325
+#, qt-format
+msgid ""
+"%1\n"
+"This computer is %2"
+msgstr ""
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -206,6 +223,18 @@ msgstr "%1 композицій"
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 передано"
+
+#. TRANSLATORS: A row in the Network Remote's "Listen on" list. %1 is
+#. a network interface's name, such as "Wi-Fi" or "eth0", %2 its
+#. networks, such as "192.168.1.0/24", separated by commas, and %3
+#. this computer's addresses on them, such as "192.168.1.57",
+#. separated by commas.
+#: ui/networkremotesettingspage.cpp:280
+#, qt-format
+msgid ""
+"%1  %2\n"
+"This computer is %3"
+msgstr ""
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -452,7 +481,7 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Мітки починаються з %, наприклад: %artist %album %title </p>\n\n<p>Якщо ви берете частину тексту з міткою у фігурні дужки, ця частина буде приховуватись, якщо мітка порожня.</p>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:292
+#: ../bin/src/ui_networkremotesettingspage.h:334
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клієнтське з’єднання стане можливим лише після введення належного коду."
 
@@ -473,7 +502,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Пісню буде включено до списку відтворення якщо вона відповідає наступним умовам."
 
-#: ../bin/src/ui_behavioursettingspage.h:417
+#: ../bin/src/ui_behavioursettingspage.h:457
 msgid "A&utomatic"
 msgstr "&Автоматично"
 
@@ -523,7 +552,7 @@ msgid "About Qt..."
 msgstr "Про Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:418
+#: ../bin/src/ui_behavioursettingspage.h:458
 msgid "Absolute"
 msgstr "Абсолютними"
 
@@ -609,6 +638,14 @@ msgstr "Додати теку"
 #: ../bin/src/ui_mainwindow.h:756
 msgid "Add folder..."
 msgstr "Додати теку…"
+
+#: ui/networkremotesettingspage.cpp:342
+msgid "Add network or address"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:346
+msgid "Add network or address..."
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -706,8 +743,8 @@ msgstr "Додати до іншого списку відтворення"
 msgid "Add to playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:402
-#: ../bin/src/ui_behavioursettingspage.h:410
+#: ../bin/src/ui_behavioursettingspage.h:442
+#: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Add to the queue"
 msgstr "Додати до черги"
 
@@ -797,10 +834,6 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Вся слава Гіпножабі!"
 
-#: ../bin/src/ui_networkremotesettingspage.h:300
-msgid "All addresses"
-msgstr "Усі адреси"
-
 #: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "Всі альбоми"
@@ -812,6 +845,10 @@ msgstr "Всі виконавці"
 #: ui/albumcoverchoicecontroller.cpp:53
 msgid "All files (*)"
 msgstr "Всі файли (*)"
+
+#: ../bin/src/ui_networkremotesettingspage.h:342
+msgid "All networks"
+msgstr ""
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -826,19 +863,25 @@ msgstr "Всім перекладачам"
 msgid "All tracks"
 msgstr "Всі композиції"
 
-#: ../bin/src/ui_networkremotesettingspage.h:305
+#: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
 msgstr "Дозволити клієнту отримувати музику з цього комп’ютера."
 
-#: ../bin/src/ui_networkremotesettingspage.h:307
+#: ../bin/src/ui_networkremotesettingspage.h:351
 msgid "Allow downloads"
 msgstr "Дозволити отримання"
+
+#: networkremote/sync/mediasync.cpp:73
+msgid ""
+"Allow downloads in Clementine's network remote settings to keep songs on "
+"this phone."
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
 msgstr "Дозволити mid/side кодування"
 
-#: ../bin/src/ui_networkremotesettingspage.h:308
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Allow playing on remote devices"
 msgstr "Дозволити відтворення на віддалених пристроях"
 
@@ -846,16 +889,16 @@ msgstr "Дозволити відтворення на віддалених пр
 msgid "Alongside the originals"
 msgstr "Разом з оригіналами"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Alwa&ys hide the main window"
 msgstr "Зав&жди приховувати головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:418
 msgid "Always show &the main window"
 msgstr "Завжди показувати &головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:392
-#: ../bin/src/ui_behavioursettingspage.h:406
+#: ../bin/src/ui_behavioursettingspage.h:432
+#: ../bin/src/ui_behavioursettingspage.h:446
 msgid "Always start playing"
 msgstr "Завжди починати відтворення"
 
@@ -900,7 +943,7 @@ msgstr "Додати файли/адреси до списку відтворе�
 msgid "Append to current playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:399
+#: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Append to the playlist"
 msgstr "Додати  до списку відтворення"
 
@@ -940,12 +983,12 @@ msgstr "Виконавець"
 msgid "Artist's initial"
 msgstr "Ініціали виконавця"
 
-#: ../bin/src/ui_behavioursettingspage.h:420
+#: ../bin/src/ui_behavioursettingspage.h:460
 msgid "As&k when saving"
 msgstr "&Питати при збереженні"
 
 #: ../bin/src/ui_transcodedialog.h:233
-#: ../bin/src/ui_networkremotesettingspage.h:314
+#: ../bin/src/ui_networkremotesettingspage.h:358
 #: ../bin/src/ui_ripcddialog.h:347
 msgid "Audio format"
 msgstr "Аудіо-формат"
@@ -1050,7 +1093,7 @@ msgstr "Стандартний синій"
 msgid "Basic audio type"
 msgstr "Основний тип звуку"
 
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:408
 msgid "Behavior"
 msgstr "Поведінка"
 
@@ -1179,7 +1222,7 @@ msgstr "Змінити комбінацію клавіш…"
 msgid "Change shuffle mode"
 msgstr "Змінити режим перемішування"
 
-#: ../bin/src/ui_behavioursettingspage.h:409
+#: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Change the currently playing song"
 msgstr "Змінити поточну відтворювану композицію"
 
@@ -1264,7 +1307,7 @@ msgstr "Виберіть файли, які бачитиме Clementine. Clement
 #. can play on, download the audio from Clementine through the network
 #. remote, so they only work while it's on, listening on an address in
 #. the device's network.
-#: ui/networkremotesettingspage.cpp:62
+#: ui/networkremotesettingspage.cpp:65
 msgid ""
 "Chromecasts and other devices you play on get their music from Clementine "
 "through the network remote, so they need it turned on, and listening on an "
@@ -1289,7 +1332,7 @@ msgid "Clear playlist"
 msgstr "Очистити список відтворення"
 
 #: smartplaylists/searchtermwidget.cpp:374
-#: visualisations/visualisationcontainer.cpp:236
+#: visualisations/visualisationcontainer.cpp:239
 #: ../bin/src/ui_mainwindow.h:722 ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -1302,8 +1345,8 @@ msgstr "Помилка Clementine"
 msgid "Clementine Orange"
 msgstr "Помаранчевий Clementine"
 
-#: visualisations/visualisationcontainer.cpp:80
-#: visualisations/visualisationcontainer.cpp:170
+#: visualisations/visualisationcontainer.cpp:81
+#: visualisations/visualisationcontainer.cpp:171
 msgid "Clementine Visualization"
 msgstr "Візуалізація Clementine"
 
@@ -1401,7 +1444,7 @@ msgstr "Закрити"
 msgid "Close playlist"
 msgstr "Закрити список відтворення"
 
-#: visualisations/visualisationcontainer.cpp:133
+#: visualisations/visualisationcontainer.cpp:134
 msgid "Close visualization"
 msgstr "Закрити візуалізацію"
 
@@ -1429,7 +1472,7 @@ msgstr "Кольори"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Список, розділений комами, виду клас:рівень, рівень може бути від 0 до 3"
 
-#: ../bin/src/ui_behavioursettingspage.h:425
+#: ../bin/src/ui_behavioursettingspage.h:465
 msgid "Comma separated list of prefix words to ignore when sorting"
 msgstr "Список відокремлених комами слів-префіксів, ігнорованих при упорядкуванні"
 
@@ -1552,11 +1595,11 @@ msgstr "Конвертувати всю музику"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертувати всю музику, яку не може відтворити пристрій"
 
-#: ../bin/src/ui_networkremotesettingspage.h:311
+#: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Перетворювати звукові файли у форматах без втрати якості перед надсиланням їх на віддалений пристрій."
 
-#: ../bin/src/ui_networkremotesettingspage.h:313
+#: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Convert lossless files"
 msgstr "Перетворювати файли, стиснені без втрати якості"
 
@@ -2024,11 +2067,11 @@ msgstr "Підтримати фінансово"
 msgid "Double click to open"
 msgstr "Подвійне клацання, щоб відкрити"
 
-#: ../bin/src/ui_behavioursettingspage.h:408
+#: ../bin/src/ui_behavioursettingspage.h:448
 msgid "Double clicking a song in the playlist will..."
 msgstr "Подвійне клацання на пункті у списку композицій змусить…"
 
-#: ../bin/src/ui_behavioursettingspage.h:398
+#: ../bin/src/ui_behavioursettingspage.h:438
 msgid "Double clicking a song will..."
 msgstr "Подвійне клацання на пісні:"
 
@@ -2038,7 +2081,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Завантажити %n випусків"
 
-#: ../bin/src/ui_networkremotesettingspage.h:324
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Download Clementine Remote for Android"
 msgstr "Отримати Clementine Remote для Android"
 
@@ -2063,7 +2106,7 @@ msgstr "Завантажувати нові епізоди автоматичн�
 msgid "Download queued"
 msgstr "Отримання заплановано"
 
-#: ../bin/src/ui_networkremotesettingspage.h:309
+#: ../bin/src/ui_networkremotesettingspage.h:353
 msgid "Download settings"
 msgstr "Параметри отримання"
 
@@ -2120,6 +2163,14 @@ msgstr "Записати до журналу"
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_ripcddialog.h:337
 msgid "Duration"
 msgstr "Тривалість"
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while Clementine plays music through this computer's speakers or
+#. headphones.
+#: ui/behavioursettingspage.cpp:53
+msgid "During playback"
+msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
@@ -2183,7 +2234,7 @@ msgstr "Увімкнути еквалайзер"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Використовувати глобальні скорочення лише коли Clementine у фокусі"
 
-#: ../bin/src/ui_behavioursettingspage.h:385
+#: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Enable song metadata inline edition with click"
 msgstr "Уможливити вбудоване редагування метаданих композиції клацанням"
 
@@ -2225,12 +2276,18 @@ msgstr "Введіть посилання для завантаження обк
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Вкажіть назву файла для експортованих обкладинок (без суфікса назви):"
 
+#: ui/networkremotesettingspage.cpp:374
+msgid ""
+"Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
+"192.168.1.23."
+msgstr ""
+
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
 msgstr "Введіть нову назву для цього списку відтворення"
 
-#: ../bin/src/ui_networkremotesettingspage.h:297
-#: ../bin/src/ui_networkremotesettingspage.h:302
+#: ../bin/src/ui_networkremotesettingspage.h:339
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Enter one of these addresses in the app to connect to Clementine."
 msgstr "Введіть одну з цих адрес у програмі для встановлення з’єднання з Clementine."
 
@@ -2564,7 +2621,7 @@ msgstr "Перегляд назви файла"
 msgid "Files"
 msgstr "Файли"
 
-#: ../bin/src/ui_networkremotesettingspage.h:319
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Files root folder"
 msgstr "Коренева тека файлів"
 
@@ -2654,7 +2711,7 @@ msgid "Format"
 msgstr "Формат"
 
 #: analyzers/analyzercontainer.cpp:52
-#: visualisations/visualisationcontainer.cpp:109
+#: visualisations/visualisationcontainer.cpp:110
 msgid "Framerate"
 msgstr "Частота кадрів"
 
@@ -2752,7 +2809,7 @@ msgstr "Диск Google"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Отримано %1 обкладинок з %2 (%3 не вдалось)"
 
-#: ../bin/src/ui_behavioursettingspage.h:388
+#: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Grey out non existent songs in my playlists"
 msgstr "Позначати сірим пісні у списках відтворення, що не існують"
 
@@ -2840,12 +2897,12 @@ msgid "High"
 msgstr "Високий"
 
 #: analyzers/analyzercontainer.cpp:68
-#: visualisations/visualisationcontainer.cpp:115
+#: visualisations/visualisationcontainer.cpp:116
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Висока (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:125
+#: visualisations/visualisationcontainer.cpp:126
 msgid "High (1024x1024)"
 msgstr "Висока (1024x1024)"
 
@@ -2889,7 +2946,7 @@ msgstr "Значки зверху"
 msgid "Identifying song"
 msgstr "Визначаю пісню"
 
-#: ../bin/src/ui_behavioursettingspage.h:383
+#: ../bin/src/ui_behavioursettingspage.h:423
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2916,7 +2973,7 @@ msgstr "Якщо ви знаєте URL подкасту, введіть його
 msgid "Ignore \"The\" in artist names"
 msgstr "Ігнорувати «The» в іменах виконавців"
 
-#: ../bin/src/ui_behavioursettingspage.h:423
+#: ../bin/src/ui_behavioursettingspage.h:463
 msgid "Ignore prefix word(s)"
 msgstr "Ігнорувати слова-префікси"
 
@@ -2994,7 +3051,7 @@ msgstr "Вхідні параметри"
 msgid "Insert..."
 msgstr "Вставити…"
 
-#: networkremote/outgoingdatacreator.cpp:536
+#: networkremote/outgoingdatacreator.cpp:564
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Інструментальна музика"
@@ -3043,7 +3100,7 @@ msgstr "Помилка запиту  до Jamendo:\n%1"
 msgid "Jazz"
 msgstr "Джаз"
 
-#: ../bin/src/ui_behavioursettingspage.h:395
+#: ../bin/src/ui_behavioursettingspage.h:435
 msgid "Jump to previous song right away"
 msgstr "Перейти до попередньої композиції негайно"
 
@@ -3063,13 +3120,31 @@ msgstr "Тримати кнопки %1 секунду…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Тримати кнопки %1 секунд…"
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:411
 msgid "Keep running in the background when the window is closed"
 msgstr "Продовжувати виконання у фоні коли вікно зачинено"
+
+#: ../bin/src/ui_behavioursettingspage.h:421
+msgid "Keep the computer awake"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
 msgstr "Зберегти оригінальні файли"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:154
+msgid "Keeping the computer awake while Clementine is open"
+msgstr ""
+
+#. TRANSLATORS: The tooltip of "While visualizations are full screen",
+#. under "Keep the computer awake". As well as keeping the computer
+#. awake, it stops the screen from turning off or locking while they're
+#. on show.
+#: ui/behavioursettingspage.cpp:76
+msgid "Keeps the display on too"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3080,7 +3155,7 @@ msgstr "Кошенята"
 msgid "Kuduro"
 msgstr "Кудуро"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:413
 msgid "Language"
 msgstr "Мова"
 
@@ -3157,7 +3232,7 @@ msgstr "Тривалість"
 #. TRANSLATORS: The tooltip of "Allow playing on remote devices". It's
 #. for phones running the Clementine Remote app, which can act as the
 #. speaker and choose where Clementine plays; Chromecasts don't need it.
-#: ui/networkremotesettingspage.cpp:69
+#: ui/networkremotesettingspage.cpp:72
 msgid ""
 "Let a phone or tablet running Clementine Remote act as the speaker, and "
 "choose where Clementine plays: Clementine keeps the playlist and streams the"
@@ -3189,9 +3264,20 @@ msgstr "Світла"
 msgid "Limits"
 msgstr "Обмеження"
 
-#: ../bin/src/ui_networkremotesettingspage.h:299
+#: ../bin/src/ui_networkremotesettingspage.h:341
 msgid "Listen on"
 msgstr "Слухати"
+
+#. TRANSLATORS: The tooltip of the information icon beside "All
+#. networks" in the Network Remote's "Listen on" list. %1 is a list, one
+#. per line, of this computer's network interfaces and their addresses,
+#. such as "eth0: 192.168.1.57".
+#: ui/networkremotesettingspage.cpp:295
+#, qt-format
+msgid ""
+"Listens on every address this computer has:\n"
+"%1"
+msgstr ""
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3307,12 +3393,12 @@ msgid "Love (Last.fm scrobbling)"
 msgstr "Уподобати (скроблінг Last.fm)"
 
 #: analyzers/analyzercontainer.cpp:66
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:112
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Низька  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:123
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Low (256x256)"
 msgstr "Низька (256x256)"
 
@@ -3432,12 +3518,12 @@ msgid "Maximum number of child processes for tag handling (requires restart)"
 msgstr "Максимальна кількість дочірніх процесів для обробки міток (потребує перезапуску)"
 
 #: analyzers/analyzercontainer.cpp:67
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:114
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Середня  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:125
 msgid "Medium (512x512)"
 msgstr "Середня (512x512)"
 
@@ -3536,7 +3622,7 @@ msgstr "Музика"
 msgid "Music Library"
 msgstr "Фонотека"
 
-#: ../bin/src/ui_networkremotesettingspage.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:367
 msgid "Music extensions remotely visible"
 msgstr "Віддалено видимі музичні суфікси назв"
 
@@ -3567,7 +3653,7 @@ msgstr "Вузька смуга (NB)"
 msgid "Network Proxy"
 msgstr "Проксі мережі"
 
-#: ../bin/src/ui_networkremotesettingspage.h:277
+#: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Network Remote"
 msgstr "Мережеве дистанційне керування"
 
@@ -3579,6 +3665,13 @@ msgstr "Мережеве дистанційне керування"
 msgid "Network Remote Settings..."
 msgstr "Параметри віддаленого пристрою мережі…"
 
+#. TRANSLATORS: In the dialog that adds a network, or a single
+#. address, to the Network Remote's "Listen on" list.
+#: ui/networkremotesettingspage.cpp:337
+msgid ""
+"Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
 msgstr "Ніколи"
@@ -3587,8 +3680,8 @@ msgstr "Ніколи"
 msgid "Never played"
 msgstr "Ніколи не відтворені"
 
-#: ../bin/src/ui_behavioursettingspage.h:390
-#: ../bin/src/ui_behavioursettingspage.h:404
+#: ../bin/src/ui_behavioursettingspage.h:430
+#: ../bin/src/ui_behavioursettingspage.h:444
 msgid "Never start playing"
 msgstr "Ніколи не починати відтворення"
 
@@ -3700,7 +3793,7 @@ msgstr "Звичайний"
 msgid "Normal block type"
 msgstr "Нормальний тип блоку"
 
-#: ../bin/src/ui_behavioursettingspage.h:428
+#: ../bin/src/ui_behavioursettingspage.h:468
 msgid "Normal duration (at least 4 minutes or half the track length)"
 msgstr "Звичайну тривалість (принаймні 4 хвилини або половину тривалості композиції)"
 
@@ -3779,7 +3872,7 @@ msgstr "Увімкн."
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:282
+#: ../bin/src/ui_networkremotesettingspage.h:324
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3790,11 +3883,11 @@ msgid ""
 "When listening on a chosen address in 100.64.0.0/10, such as a Tailscale address, connections from that range count as local too."
 msgstr "З'єднання буде встановлено лише для клієнтів у цих діапазонах ip-адрес:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x\nі з адреси link-local і приватних IPv6.\n\nПри очікуванні на дані з вибраної адреси у 100.64.0.0/10, зокрема адреси Tailscale, з'єдання з відповідного діапазону також вважатимуться локальними."
 
-#: ../bin/src/ui_networkremotesettingspage.h:290
+#: ../bin/src/ui_networkremotesettingspage.h:332
 msgid "Only allow connections from the local network"
 msgstr "З’єднуватися лише у межах локальної мережі"
 
-#: ui/networkremotesettingspage.cpp:226
+#: ui/networkremotesettingspage.cpp:414
 #, qt-format
 msgid ""
 "Only connections from the local network are allowed, so nothing can connect "
@@ -3854,7 +3947,7 @@ msgstr "Відкрити у Диску Google"
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:401
+#: ../bin/src/ui_behavioursettingspage.h:441
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
@@ -3881,7 +3974,7 @@ msgid "Optimize for quality"
 msgstr "Оптимізувати для якості"
 
 #: ../bin/src/ui_transcodedialog.h:234
-#: ../bin/src/ui_networkremotesettingspage.h:315
+#: ../bin/src/ui_networkremotesettingspage.h:359
 #: ../bin/src/ui_ripcddialog.h:349
 msgid "Options..."
 msgstr "Налаштування…"
@@ -4042,8 +4135,8 @@ msgstr "Відтворити вказаний список"
 msgid "Play if stopped, pause if playing"
 msgstr "Відтворити, якщо зупинено; призупинити, якщо відтворюється"
 
-#: ../bin/src/ui_behavioursettingspage.h:391
-#: ../bin/src/ui_behavioursettingspage.h:405
+#: ../bin/src/ui_behavioursettingspage.h:431
+#: ../bin/src/ui_behavioursettingspage.h:445
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
@@ -4082,6 +4175,20 @@ msgstr "Відтворення"
 #: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Налаштування програвача"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:158
+msgid "Playing music"
+msgstr ""
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#. The music is playing on a phone, a Chromecast or the like, which
+#. gets it from this computer.
+#: core/sleepinhibitor.cpp:164
+msgid "Playing music on another device"
+msgstr ""
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -4170,7 +4277,7 @@ msgid "Popup duration"
 msgstr "Тривалість виринаючого повідомлення"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
-#: ../bin/src/ui_networkremotesettingspage.h:280
+#: ../bin/src/ui_networkremotesettingspage.h:322
 msgid "Port"
 msgstr "Порт"
 
@@ -4225,7 +4332,7 @@ msgstr "Натисніть клавішу"
 msgid "Press a key combination to use for %1..."
 msgstr "Натисніть комбінацію клавіш для %1…"
 
-#: ../bin/src/ui_behavioursettingspage.h:394
+#: ../bin/src/ui_behavioursettingspage.h:434
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Натискання «Попередня» у програвачі виконує дію…"
 
@@ -4303,7 +4410,7 @@ msgctxt "Sound quality"
 msgid "Quality"
 msgstr "Якість"
 
-#: visualisations/visualisationcontainer.cpp:121
+#: visualisations/visualisationcontainer.cpp:122
 msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "Якість"
@@ -4427,7 +4534,7 @@ msgid "Reggae"
 msgstr "Реґґі"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:419
+#: ../bin/src/ui_behavioursettingspage.h:459
 msgid "Relative"
 msgstr "Відносними"
 
@@ -4435,7 +4542,7 @@ msgstr "Відносними"
 msgid "Remember Wii remote swing"
 msgstr "Пам’ятати рухи в Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:420
 msgid "Remember from &last time"
 msgstr "Запам'ятати &останній варіант"
 
@@ -4446,6 +4553,7 @@ msgstr "Запам'ятати вибір"
 #: internet/internetradio/savedradio.cpp:108
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:347
 #: ../bin/src/ui_googledrivesettingspage.h:149
 msgid "Remove"
 msgstr "Вилучити"
@@ -4520,7 +4628,7 @@ msgstr "Повторювати композицію"
 msgid "Replace current playlist"
 msgstr "Замінити список відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:400
+#: ../bin/src/ui_behavioursettingspage.h:440
 msgid "Replace the playlist"
 msgstr "Замінити список відтворення"
 
@@ -4540,7 +4648,7 @@ msgstr "Режим вирівнювання гучності"
 msgid "Repopulate"
 msgstr "Знов наповнити"
 
-#: ../bin/src/ui_networkremotesettingspage.h:294
+#: ../bin/src/ui_networkremotesettingspage.h:336
 msgid "Require authentication code"
 msgstr "Потрібен код розпізнавання"
 
@@ -4552,7 +4660,7 @@ msgstr "Скинути"
 msgid "Reset play counts"
 msgstr "Скинути лічильник відтворень"
 
-#: ../bin/src/ui_behavioursettingspage.h:396
+#: ../bin/src/ui_behavioursettingspage.h:436
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапустити композицію, потім перейти до попередньої, якщо натиснуто ще раз"
 
@@ -4569,7 +4677,7 @@ msgstr "Відновити типовий сервер"
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:386
+#: ../bin/src/ui_behavioursettingspage.h:426
 msgid "Resume playback on start"
 msgstr "При запуску продовжити відтворення"
 
@@ -4597,7 +4705,7 @@ msgstr "Оцифрувати звуковий КД"
 msgid "Rock"
 msgstr "Рок"
 
-#: ../bin/src/ui_networkremotesettingspage.h:317
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Root folder that will be browsable from the network remote"
 msgstr "Коренева тека, яка буде доступною для перегляду із пристроїв віддаленого керування"
 
@@ -4723,7 +4831,7 @@ msgstr "Рахунок"
 msgid "Scrobble tracks that I listen to"
 msgstr "Скробблити композиції, які я слухаю"
 
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:410
 msgid "Scroll over icon to change track"
 msgstr "Гортання на піктограмі для зміни композиції"
 
@@ -4837,7 +4945,7 @@ msgstr "Трохи перемотати поточну композицію"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотати поточну композицію на абсолютну позицію"
 
-#: ../bin/src/ui_behavioursettingspage.h:412
+#: ../bin/src/ui_behavioursettingspage.h:452
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Позиціювання за допомогою клавіатурного скорочення або коліщатка миші"
 
@@ -4877,13 +4985,21 @@ msgstr "Виберіть колір тла:"
 msgid "Select visualizations"
 msgstr "Вибрати візуалізації"
 
-#: visualisations/visualisationcontainer.cpp:129
+#: visualisations/visualisationcontainer.cpp:130
 msgid "Select visualizations..."
 msgstr "Вибрати візуалізації…"
 
 #: ../bin/src/ui_transcodedialog.h:238 ../bin/src/ui_ripcddialog.h:348
 msgid "Select..."
 msgstr "Вибрати…"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#. A phone running Clementine Remote is downloading songs from this
+#. computer.
+#: core/sleepinhibitor.cpp:170
+msgid "Sending songs to a remote"
+msgstr ""
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -4918,7 +5034,7 @@ msgstr "Встановити цільову частоту"
 msgid "Set the volume to <value> percent"
 msgstr "Встановити гучність до <value> відсотків"
 
-#: networkremote/internetbrowser.cpp:241
+#: networkremote/internetbrowser.cpp:243
 #, qt-format
 msgid "Set up %1 in Clementine's settings on the computer"
 msgstr "Налаштуйте %1 у параметрах Clementine на комп'ютері"
@@ -4927,11 +5043,11 @@ msgstr "Налаштуйте %1 у параметрах Clementine на комп
 msgid "Set value for all selected tracks..."
 msgstr "Встановити значення для всіх вибраних композицій…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:279
+#: ../bin/src/ui_networkremotesettingspage.h:321
 msgid "Settings"
 msgstr "Параметри"
 
-#: ../bin/src/ui_behavioursettingspage.h:429
+#: ../bin/src/ui_behavioursettingspage.h:469
 msgid "Short duration (at least 1 minute or half the track length)"
 msgstr "Коротку тривалість (принаймні 1 хвилину або половину тривалості композиції)"
 
@@ -5059,7 +5175,7 @@ msgstr "Показувати кнопку «love»"
 msgid "Show the scrobble button in the main window"
 msgstr "Показувати кнопку скроблінга в головному вікні"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Show tray icon"
 msgstr "Показувати значок в лотку"
 
@@ -5070,6 +5186,12 @@ msgstr "Показати список увімкнених та вимкнени
 #: core/globalshortcuts.cpp:70
 msgid "Show/Hide"
 msgstr "Показати/приховати"
+
+#. TRANSLATORS: Why Clementine is keeping the computer awake, which
+#. the system shows in its list of what's stopping it from sleeping.
+#: core/sleepinhibitor.cpp:150
+msgid "Showing visualizations full screen"
+msgstr ""
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5291,7 +5413,7 @@ msgstr "Зупинити відтворення"
 msgid "Stop playback after current track"
 msgstr "Зупинити відтворення після поточної композиції"
 
-#: ../bin/src/ui_behavioursettingspage.h:387
+#: ../bin/src/ui_behavioursettingspage.h:427
 msgid "Stop playback if song fails to play"
 msgstr "Припинити відтворення, якщо не вдасться відтворити композицію"
 
@@ -5358,12 +5480,12 @@ msgid "Summary"
 msgstr "Зведення"
 
 #: analyzers/analyzercontainer.cpp:69
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:118
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Найвища  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:126
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Super high (2048x2048)"
 msgstr "Надвисока (2048x2048)"
 
@@ -5594,7 +5716,11 @@ msgstr "Значення цього параметра можна змінити
 msgid "This type of device is not supported: %1"
 msgstr "Цей тип пристрою не підтримується: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:413
+#: networkremote/sync/mediasync.cpp:94
+msgid "This version of Clementine can't sync this yet."
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
 msgstr "Крок за часом"
 
@@ -5612,7 +5738,7 @@ msgstr "Сьогодні"
 msgid "Toggle Pretty OSD"
 msgstr "Змінити режим приємних OSD"
 
-#: visualisations/visualisationcontainer.cpp:107
+#: visualisations/visualisationcontainer.cpp:108
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
@@ -5871,7 +5997,7 @@ msgstr "Використати власну палітру"
 msgid "Use a custom message for notifications"
 msgstr "Використати власне повідомлення для сповіщень"
 
-#: ../bin/src/ui_networkremotesettingspage.h:278
+#: ../bin/src/ui_networkremotesettingspage.h:320
 msgid "Use a network remote control"
 msgstr "Використовувати віддалене керування мережею"
 
@@ -5903,7 +6029,7 @@ msgstr "Загальносистемні піктограми"
 msgid "Use temporal noise shaping"
 msgstr "Використати тимчасове формування шуму"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:414
 msgid "Use the system default"
 msgstr "Використовувати системну"
 
@@ -5930,7 +6056,7 @@ msgstr "Інтерфейс користувача"
 msgid "Username"
 msgstr "Користувач"
 
-#: ../bin/src/ui_behavioursettingspage.h:389
+#: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Using the menu to add a song will..."
 msgstr "Використання меню для додавання композиції…"
 
@@ -5977,7 +6103,7 @@ msgstr "Перегляд параметрів потоку"
 msgid "Visualization mode"
 msgstr "Режим візуалізації"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:764
+#: ../bin/src/ui_mainwindow.h:764
 msgid "Visualizations"
 msgstr "Візуалізації"
 
@@ -6007,7 +6133,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:373
+#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:412
 msgid "Warn me when closing a playlist tab"
 msgstr "Попереджати про закриття вкладки списку відтворення"
 
@@ -6034,11 +6160,11 @@ msgstr "Вебсайт"
 msgid "Weeks"
 msgstr "Тижнів"
 
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:417
 msgid "When Clementine starts"
 msgstr "Під час запуску Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:427
+#: ../bin/src/ui_behavioursettingspage.h:467
 msgid "When calculating play counts, use"
 msgstr "При обчисленні кількості відтворень використовувати"
 
@@ -6048,17 +6174,47 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Під час пошуку обкладинок, Clementine спочатку шукатиме файли зображень, що містять одне з цих слів.\nЯкщо відповідників не буде, використовуватиметься найбільше зображення в каталозі."
 
-#: ../bin/src/ui_behavioursettingspage.h:416
+#: ../bin/src/ui_behavioursettingspage.h:456
 msgid "When saving a playlist, file paths should be"
 msgstr "Шляхи під час збереження списків відтворення мають бути"
 
-#: ../bin/src/ui_behavioursettingspage.h:422
+#: ../bin/src/ui_behavioursettingspage.h:462
 msgid "When sorting artists, albums and titles"
 msgstr "Під час упорядковування за виконавцями, альбомами та назвами"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:145
 msgid "When the list is empty..."
 msgstr "Якщо список є порожнім…"
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. for as long as Clementine is running, whatever it's doing.
+#: ui/behavioursettingspage.cpp:47
+msgid "While Clementine is open"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while a phone running Clementine Remote downloads songs from it,
+#. whether the user picked them or they're being synced.
+#: ui/behavioursettingspage.cpp:65
+msgid "While a remote is downloading or syncing"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while Clementine plays music on a phone, a Chromecast, a Sonos speaker
+#. or the like, which gets the music from this computer.
+#: ui/behavioursettingspage.cpp:59
+msgid "While playing on another device"
+msgstr ""
+
+#. TRANSLATORS: An option under "Keep the computer awake" on the
+#. Behavior settings page, and read with it: keep the computer awake
+#. while visualizations are shown full screen.
+#: ui/behavioursettingspage.cpp:70
+msgid "While visualizations are full screen"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."
@@ -6140,7 +6296,7 @@ msgstr "Бажаєте зараз виконати повторне сканув
 msgid "Write all songs statistics into songs' files"
 msgstr "Записати статичні дані щодо всіх композицій до файлів композицій"
 
-#: ../bin/src/ui_behavioursettingspage.h:421
+#: ../bin/src/ui_behavioursettingspage.h:461
 msgid "Write metadata"
 msgstr "Записати метадані"
 
@@ -6237,7 +6393,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Щоб мати змогу користуватися загальними клавіатурними скороченнями у Clementine, вам слід запустити програму «Системні налаштування» і дозволити Clementine «<span style=\"font-style:italic\">керувати вашим комп’ютером</span>»."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:416
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Потрібно перезапустити Clementine, щоб змінити мову."
 
@@ -6274,7 +6430,7 @@ msgstr "Ваші радіо-потоки"
 msgid "Your scrobbles: %1"
 msgstr "%1 відтворень у вас"
 
-#: visualisations/visualisationcontainer.cpp:171
+#: visualisations/visualisationcontainer.cpp:172
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "У вашій системі не передбачено підтримки OpenGL, отже візуалізаціями не можна буде скористатися."
 
@@ -6324,7 +6480,7 @@ msgstr "спочатку найбільші"
 msgid "bpm"
 msgstr "такт/хв."
 
-#: ../bin/src/ui_networkremotesettingspage.h:321
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid ""
 "comma-separated list of the allowed extensions that will be visible from the"
 " network remote (ex: m3u,mp3,flac,ogg,wav)"
@@ -6435,7 +6591,7 @@ msgstr "на"
 msgid "options"
 msgstr "налаштування"
 
-#: ../bin/src/ui_networkremotesettingspage.h:325
+#: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "or scan the QR code: "
 msgstr "або скануйте QR-код:"
 
