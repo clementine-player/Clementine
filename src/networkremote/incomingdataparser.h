@@ -79,6 +79,9 @@ class IncomingDataParser : public QObject {
   // Browsing the Internet sidebar, for the InternetBrowser on the main
   // thread.
   void BrowseMessage(int client_id, const QByteArray& data);
+  // Listing and playing the library's smart playlists, for the
+  // RemoteSmartPlaylists on the main thread.
+  void SmartPlaylistMessage(int client_id, const QByteArray& data);
   // Syncing songs to remotes, for the MediaSync on the main thread. Only with
   // --media-sync.
   void SyncMessage(int client_id, const QString& peer_address,

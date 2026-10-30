@@ -124,6 +124,7 @@ void OutgoingDataCreator::SendClementineInfo() {
   info->set_allow_downloads(allow_downloads_);
   info->add_features(cpb::remote::SERVER_FEATURE_BROWSE);
   info->add_features(cpb::remote::SERVER_FEATURE_ENQUEUE_NEXT);
+  info->add_features(cpb::remote::SERVER_FEATURE_SMART_PLAYLISTS);
   if (streaming_enabled_) {
     info->add_features(cpb::remote::SERVER_FEATURE_RENDERING);
   }

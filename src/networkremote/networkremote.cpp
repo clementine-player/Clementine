@@ -37,9 +37,11 @@
 #include "networkremote/internetbrowser.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/protocolsniffer.h"
+#include "networkremote/remotesmartplaylists.h"
 #include "networkremote/streaming/mediahttpserver.h"
 #include "networkremote/streaming/rendererregistry.h"
 #include "networkremote/sync/mediasync.h"
+#include "networkremote/sync/syncsourceid.h"
 #include "networkremote/zeroconf.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistbackend.h"
@@ -89,6 +91,7 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
       address_check_(new QTimer(this)),
       renderer_registry_(nullptr),
       internet_browser_(nullptr),
+      smart_playlists_(nullptr),
       media_sync_(nullptr),
       allow_streaming_(false),
       signals_connected_(false),
@@ -103,6 +106,7 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
 NetworkRemote::~NetworkRemote() {
   StopServer();
   if (internet_browser_) internet_browser_->deleteLater();
+  if (smart_playlists_) smart_playlists_->deleteLater();
   if (media_sync_) media_sync_->deleteLater();
 }
 
@@ -295,7 +299,47 @@ void NetworkRemote::SetupServer() {
   connect(internet_browser_, SIGNAL(AddToPlaylist(QMimeData*)), this,
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
 
+  SetupSmartPlaylists();
   if (MediaSyncEnabled()) SetupMediaSync();
+}
+
+void NetworkRemote::SetupSmartPlaylists() {
+  Application* app = app_;
+  RemoteSmartPlaylists::Hooks hooks;
+  // Ids are the smart playlists' sync source ids, so that a remote that syncs
+  // can keep one by its id.
+  hooks.list = [app]() {
+    QList<cpb::remote::SmartPlaylist> list;
+    for (const LibraryModel::SmartPlaylist& smart :
+         app->library_model()->SmartPlaylists()) {
+      cpb::remote::SmartPlaylist item;
+      item.set_id(
+          SyncSourceId::ForSmartPlaylist(kLibrarySmartPlaylists, smart.uuid)
+              .ToString()
+              .toStdString());
+      item.set_name(smart.name.toStdString());
+      list << item;
+    }
+    return list;
+  };
+  hooks.generator = [app](const QString& id) {
+    const SyncSourceId source = SyncSourceId::Parse(id);
+    if (source.kind() != SyncSourceId::Kind::SmartPlaylist ||
+        source.parts().value(0) != kLibrarySmartPlaylists) {
+      return smart_playlists::GeneratorPtr();
+    }
+    return app->library_model()->CreateGenerator(source.parts().value(1));
+  };
+
+  smart_playlists_ = new RemoteSmartPlaylists(hooks);
+  smart_playlists_->moveToThread(QCoreApplication::instance()->thread());
+  connect(incoming_data_parser_.get(),
+          SIGNAL(SmartPlaylistMessage(int, QByteArray)), smart_playlists_,
+          SLOT(HandleMessage(int, QByteArray)));
+  connect(smart_playlists_, SIGNAL(SendToClient(int, QByteArray)), this,
+          SLOT(SendToClient(int, QByteArray)));
+  connect(smart_playlists_, SIGNAL(AddToPlaylist(QMimeData*)), this,
+          SIGNAL(AddToPlaylistSignal(QMimeData*)));
 }
 
 void NetworkRemote::SetupMediaSync() {

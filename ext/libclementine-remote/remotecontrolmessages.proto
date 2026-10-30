@@ -126,6 +126,14 @@ enum MsgType {
   SYNC_SOURCES = 390;
   SYNC_MANIFEST = 391;
   REPORT_PLAYS_RESULT = 392;
+
+  // The library's smart playlists, behind SERVER_FEATURE_SMART_PLAYLISTS.
+  // Client -> server
+  REQUEST_SMART_PLAYLISTS = 400;
+  REQUEST_SMART_PLAYLIST_ADD = 401;
+  // Server -> client
+  SMART_PLAYLISTS = 410;
+  SMART_PLAYLIST_ADD_RESULT = 411;
 }
 
 // Valid Engine states
@@ -550,6 +558,9 @@ enum ServerFeature {
   SERVER_FEATURE_SYNC = 4;
   // The server applies plays sent with REPORT_PLAYS.
   SERVER_FEATURE_PLAY_REPORTS = 5;
+  // The server answers REQUEST_SMART_PLAYLISTS and
+  // REQUEST_SMART_PLAYLIST_ADD.
+  SERVER_FEATURE_SMART_PLAYLISTS = 6;
 }
 
 // Optional abilities of a renderer, beyond decoding its formats.
@@ -872,6 +883,36 @@ message ResponseBrowseAdd {
   optional BrowseAddResult result = 2;
 }
 
+// Asks for the library's smart playlists. Answered with SMART_PLAYLISTS.
+message RequestSmartPlaylists {}
+
+message SmartPlaylist {
+  // Stays the same for as long as the smart playlist exists. It's also the
+  // smart playlist's SyncSource.id, so a client that syncs can keep it.
+  optional string id = 1;
+  optional string name = 2;
+}
+
+message ResponseSmartPlaylists {
+  // In the order the library shows them.
+  repeated SmartPlaylist smart_playlists = 1;
+}
+
+// Adds a smart playlist to the current playlist, as double-clicking it in the
+// library does: Clementine generates its songs, and a dynamic one makes the
+// playlist dynamic. Answered with SMART_PLAYLIST_ADD_RESULT.
+message RequestSmartPlaylistAdd {
+  optional string smart_playlist_id = 1;
+  // Unset: what the user's settings say double-clicking does.
+  optional BrowseAddAction action = 2;
+}
+
+message ResponseSmartPlaylistAdd {
+  optional string smart_playlist_id = 1;
+  // BROWSE_ADD_RESULT_GONE when there's no smart playlist with that id.
+  optional BrowseAddResult result = 2;
+}
+
 // Syncing media to the client. The client keeps its sync rules; the server
 // resolves a rule's source into a manifest of songs when asked, and serves
 // each song over HTTP. The server keeps no state about rules.
@@ -1124,4 +1165,8 @@ message Message {
   optional ResponseSyncManifest response_sync_manifest = 77;
   optional RequestReportPlays request_report_plays = 78;
   optional ResponseReportPlays response_report_plays = 79;
+  optional RequestSmartPlaylistAdd request_smart_playlist_add = 80;
+  optional ResponseSmartPlaylistAdd response_smart_playlist_add = 81;
+  optional RequestSmartPlaylists request_smart_playlists = 82;
+  optional ResponseSmartPlaylists response_smart_playlists = 83;
 }
