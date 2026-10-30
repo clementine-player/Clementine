@@ -29,6 +29,9 @@
 
 #include "remotecontrolmessages.pb.h"
 
+class AirPlayDiscovery;
+class AirPlayEngine;
+struct AirPlayDevice;
 class Application;
 class CastDiscovery;
 class ChromecastEngine;
@@ -47,8 +50,8 @@ class Base;
 }
 
 // Keeps a RemoteEngine for every connected renderer, and an engine for every
-// Cast device and UPnP renderer found, makes each one an output of the
-// EngineRouter, and answers the output-related remote messages.
+// Cast device, UPnP renderer and AirPlay receiver found, makes each one an
+// output of the EngineRouter, and answers the output-related remote messages.
 //
 // It exists whether or not the network remote is on, so that devices are
 // offered as outputs either way. They fetch media from the network remote,
@@ -66,6 +69,9 @@ class RendererRegistry : public QObject {
   // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
   // before discovery starts.
   static void SetUpnpEnabled(bool enabled);
+  // Whether to offer AirPlay receivers as outputs too, from --airplay. Set
+  // before discovery starts.
+  static void SetAirPlayEnabled(bool enabled);
 
   RendererRegistry(Application* app, EngineRouter* router);
   ~RendererRegistry();
@@ -138,9 +144,9 @@ class RendererRegistry : public QObject {
       const QList<QNetworkAddressEntry>& interfaces);
 
  public slots:
-  // Starts looking for Cast devices, and UPnP MediaRenderers if
-  // SetUpnpEnabled, and offers them as outputs for as long as this registry
-  // exists.
+  // Starts looking for Cast devices, UPnP MediaRenderers if SetUpnpEnabled,
+  // and AirPlay receivers if SetAirPlayEnabled, and offers them as outputs
+  // for as long as this registry exists.
   void StartDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
@@ -194,6 +200,17 @@ class RendererRegistry : public QObject {
   QList<UpnpEngine*> upnp_engines_;
   // Owned; null until StartDiscovery, or without --upnp.
   UpnpDiscovery* upnp_discovery_ = nullptr;
+
+  // Output ids for AirPlay receivers.
+  static QString AirPlayOutputId(const AirPlayDevice& device);
+  void AirPlayDeviceFound(const AirPlayDevice& device);
+  void AirPlayDeviceLost(const QString& id);
+  void AirPlayEngineFailed(AirPlayEngine* engine);
+  AirPlayEngine* FindAirPlayEngine(const QString& device_id) const;
+  QList<AirPlayEngine*> airplay_engines_;
+  // Owned; null until StartDiscovery, without --airplay, or if this platform
+  // has none.
+  AirPlayDiscovery* airplay_discovery_ = nullptr;
 
   Serving serving_;
 };

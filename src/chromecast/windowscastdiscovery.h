@@ -18,15 +18,12 @@
 #ifndef CHROMECAST_WINDOWSCASTDISCOVERY_H_
 #define CHROMECAST_WINDOWSCASTDISCOVERY_H_
 
-#include <memory>
-
 #include "castdiscovery.h"
 
+class WindowsDnsSdBrowser;
+
 // Browses with the mDNS responder built into Windows 10 1809 and later,
-// through DnsServiceBrowse and DnsServiceResolve.
-//
-// Windows calls back on threads of its own. The callbacks only copy what
-// they were given and post it to the main thread.
+// through a WindowsDnsSdBrowser.
 class WindowsCastDiscovery : public CastDiscovery {
   Q_OBJECT
 
@@ -37,17 +34,7 @@ class WindowsCastDiscovery : public CastDiscovery {
   void Start() override;
 
  private:
-  struct Shared;
-  struct Browse;
-  struct Resolve;
-
-  void PtrRecord(const QString& instance, bool removed);
-  void StartResolve(const QString& instance);
-
-  // Shared with Windows' callbacks, which may still run after this is
-  // destroyed.
-  Shared* shared_;
-  std::unique_ptr<Browse> browse_;
+  WindowsDnsSdBrowser* browser_;
 };
 
 #endif  // CHROMECAST_WINDOWSCASTDISCOVERY_H_

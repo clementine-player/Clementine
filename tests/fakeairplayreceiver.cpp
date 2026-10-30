@@ -1,0 +1,396 @@
+/* This file is part of Clementine.
+   Copyright 2026, John Maguire <john.maguire@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "fakeairplayreceiver.h"
+
+#include <QNetworkDatagram>
+#include <QRandomGenerator>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QUdpSocket>
+#include <QVariantMap>
+#include <QtEndian>
+
+#include "airplay/airplayplist.h"
+#include "airplay/airplaytlv8.h"
+#include "mini-gmp.h"
+
+namespace {
+
+// RFC 5054's 3072-bit group, as AirPlaySrp uses.
+const char kN[] =
+    "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74020BBEA6"
+    "3B139B22514A08798E3404DDEF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245"
+    "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7EDEE386BFB5A899FA5AE9F2411"
+    "7C4B1FE649286651ECE45B3DC2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F"
+    "83655D23DCA3AD961C62F356208552BB9ED529077096966D670C354E4ABC9804F1746C08"
+    "CA18217C32905E462E36CE3BE39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9"
+    "DE2BCBF6955817183995497CEA956AE515D2261898FA051015728E5A8AAAC42DAD33170D"
+    "04507A33A85521ABDF1CBA64ECFB850458DBEF0A8AEA71575D060C7DB3970F85A6E1E4C7"
+    "ABF5AE8CDB0933D71E8C94E04A25619DCEE3D2261AD2EE6BF12FFA06D98A0864D8760273"
+    "3EC86A64521F2B18177B200CBBE117577A615D6C770988C0BAD946E208E24FA074E5AB31"
+    "43DB5BFCE0FD108E4B82D120A93AD2CAFFFFFFFFFFFFFFFF";
+const char kUsername[] = "Pair-Setup";
+const char kTransientPin[] = "3939";
+// What a Mac reported without a password: 0x4 at first, then 0x84.
+const quint32 kStatusFlags = 0x84;
+
+// An mpz_t that frees itself, for the server side of SRP.
+class BigInt {
+ public:
+  BigInt() { mpz_init(v_); }
+  explicit BigInt(const QByteArray& big_endian) {
+    mpz_init(v_);
+    mpz_import(v_, big_endian.size(), 1, 1, 1, 0, big_endian.constData());
+  }
+  ~BigInt() { mpz_clear(v_); }
+  BigInt(const BigInt&) = delete;
+  BigInt& operator=(const BigInt&) = delete;
+
+  mpz_ptr get() { return v_; }
+  mpz_srcptr get() const { return v_; }
+
+  QByteArray Bytes() const {
+    QByteArray out((mpz_sizeinbase(v_, 2) + 7) / 8, '\0');
+    size_t written = 0;
+    mpz_export(out.data(), &written, 1, 1, 1, 0, v_);
+    return out.left(qMax<size_t>(written, 1));
+  }
+
+  QByteArray Padded(int size) const {
+    const QByteArray b = Bytes();
+    return QByteArray(qMax(0, size - int(b.size())), '\0') + b;
+  }
+
+ private:
+  mpz_t v_;
+};
+
+QByteArray RandomBytes(int size) {
+  QByteArray out(size, '\0');
+  QRandomGenerator::global()->fillRange(reinterpret_cast<quint32*>(out.data()),
+                                        size / sizeof(quint32));
+  return out;
+}
+
+QByteArray ReasonPhrase(int code) {
+  switch (code) {
+    case 200:
+      return "OK";
+    case 400:
+      return "Bad Request";
+    case 404:
+      return "Not Found";
+    default:
+      return "Not Implemented";
+  }
+}
+
+}  // namespace
+
+QByteArray FakeAirPlayReceiver::Request::Header(const QByteArray& name) const {
+  for (const auto& h : headers) {
+    if (h.first.compare(name, Qt::CaseInsensitive) == 0) return h.second;
+  }
+  return QByteArray();
+}
+
+FakeAirPlayReceiver::FakeAirPlayReceiver()
+    : server_(new QTcpServer(this)),
+      client_(nullptr),
+      paired_(false),
+      ask_to_allow_(true),
+      report_password_(true),
+      prompting_(false),
+      prompts_(0),
+      timing_(new QUdpSocket(this)),
+      sender_timing_port_(0),
+      timing_requests_(0),
+      timing_replies_(0),
+      torn_down_(false) {
+  connect(server_, &QTcpServer::newConnection, this,
+          [this]() { NewConnection(); });
+  connect(timing_, &QUdpSocket::readyRead, this,
+          [this]() { TimingReadyRead(); });
+}
+
+FakeAirPlayReceiver::~FakeAirPlayReceiver() {}
+
+bool FakeAirPlayReceiver::Listen() {
+  return server_->listen(QHostAddress::LocalHost) &&
+         timing_->bind(QHostAddress::LocalHost);
+}
+
+AirPlayDevice FakeAirPlayReceiver::device() const {
+  AirPlayDevice device;
+  device.id = "AA:BB:CC:00:11:22";
+  device.name = "Fake";
+  device.model = "Mac14,2";
+  device.features = 0x38174fde4a7fcfd5;
+  device.status_flags = status_flags();
+  device.address = QHostAddress::LocalHost;
+  device.port = server_->serverPort();
+  return device;
+}
+
+quint32 FakeAirPlayReceiver::status_flags() const {
+  return kStatusFlags | (password_.isEmpty() || !report_password_
+                             ? 0
+                             : AirPlayDevice::PasswordRequired);
+}
+
+void FakeAirPlayReceiver::SetPassword(const QString& password) {
+  password_ = password;
+  allowed_names_.clear();
+}
+
+void FakeAirPlayReceiver::Allow() {
+  if (!prompting_) return;
+  prompting_ = false;
+  allowed_names_ << prompted_name_;
+  ProcessRequests();
+}
+
+void FakeAirPlayReceiver::Deny() {
+  if (!prompting_ || !held_) return;
+  prompting_ = false;
+  Respond(*held_, 400);
+  held_.reset();
+  ProcessRequests();
+}
+
+void FakeAirPlayReceiver::NewConnection() {
+  // One sender at a time: a new connection replaces the last.
+  if (client_) client_->deleteLater();
+  client_ = server_->nextPendingConnection();
+  buffer_.clear();
+  held_.reset();
+  cipher_.reset();
+  paired_ = false;
+  prompting_ = false;
+  sender_timing_port_ = 0;
+  connect(client_, &QTcpSocket::readyRead, this, [this]() { ReadyRead(); });
+}
+
+void FakeAirPlayReceiver::ReadyRead() {
+  const QByteArray data = client_->readAll();
+  if (cipher_) {
+    if (!cipher_->Decrypt(data, &buffer_)) {
+      client_->abort();
+      return;
+    }
+  } else {
+    buffer_ += data;
+  }
+  ProcessRequests();
+}
+
+void FakeAirPlayReceiver::ProcessRequests() {
+  while (client_) {
+    if (!held_) {
+      Request request;
+      if (!ParseRequest(&request)) return;
+      // RTSP URIs name the sender's address and a random session.
+      requests_ << QString::fromUtf8(request.uri.startsWith("rtsp://")
+                                         ? request.method
+                                         : request.method + " " + request.uri);
+      client_names_ << QString::fromUtf8(request.Header("X-Apple-Client-Name"));
+      held_ = request;
+    }
+    if (!Handle(*held_)) return;
+    held_.reset();
+  }
+}
+
+bool FakeAirPlayReceiver::ParseRequest(Request* request) {
+  const int header_end = buffer_.indexOf("\r\n\r\n");
+  if (header_end < 0) return false;
+  const QList<QByteArray> lines = buffer_.left(header_end).split('\n');
+  const QList<QByteArray> first = lines.value(0).trimmed().split(' ');
+  Request r;
+  r.method = first.value(0);
+  r.uri = first.value(1);
+  for (int i = 1; i < lines.size(); ++i) {
+    const int colon = lines[i].indexOf(':');
+    if (colon < 0) continue;
+    r.headers.append(
+        {lines[i].left(colon).trimmed(), lines[i].mid(colon + 1).trimmed()});
+  }
+  const int length = r.Header("Content-Length").toInt();
+  if (buffer_.size() < header_end + 4 + length) return false;
+  r.body = buffer_.mid(header_end + 4, length);
+  buffer_.remove(0, header_end + 4 + length);
+  *request = r;
+  return true;
+}
+
+void FakeAirPlayReceiver::Respond(const Request& request, int code,
+                                  const QByteArray& body) {
+  QByteArray message = "RTSP/1.0 " + QByteArray::number(code) + " " +
+                       ReasonPhrase(code) + "\r\n";
+  message += "CSeq: " + request.Header("CSeq") + "\r\n";
+  message += "Server: AirTunes/980.77.5\r\n";
+  message += "Content-Length: " + QByteArray::number(body.size()) + "\r\n\r\n";
+  message += body;
+  client_->write(cipher_ ? cipher_->Encrypt(message) : message);
+}
+
+bool FakeAirPlayReceiver::Handle(const Request& request) {
+  if (request.method == "GET" && request.uri == "/info") {
+    QVariantMap info;
+    info["name"] = "Fake";
+    info["model"] = "Mac14,2";
+    info["sourceVersion"] = "980.77.5";
+    info["statusFlags"] = status_flags();
+    Respond(request, 200, airplay::bplist::Write(info));
+  } else if (request.method == "POST" && request.uri == "/pair-pin-start") {
+    // It would show a PIN, which transient pairing doesn't use.
+    errors_ << "pair-pin-start";
+    Respond(request, 200);
+  } else if (request.method == "POST" && request.uri == "/pair-setup") {
+    PairSetup(request);
+  } else if (request.method == "SETUP") {
+    // Asks for the time straight away, then for its user to allow the
+    // sender.
+    if (!sender_timing_port_) {
+      QVariant body;
+      airplay::bplist::Read(request.body, &body);
+      sender_timing_port_ = body.toMap().value("timingPort").toUInt();
+      sender_mac_address_ = body.toMap().value("macAddress").toString();
+      SendTimingRequest();
+    }
+    if (!CheckAllowed(request)) return false;
+    Respond(request, 200,
+            airplay::bplist::Write(QVariantMap{{"eventPort", 0}}));
+  } else if (request.method == "TEARDOWN") {
+    Respond(request, 200);
+    torn_down_ = true;
+  } else {
+    Respond(request, 501);
+  }
+  return true;
+}
+
+bool FakeAirPlayReceiver::CheckAllowed(const Request& request) {
+  const QString name = QString::fromUtf8(request.Header("X-Apple-Client-Name"));
+  if (!ask_to_allow_ || allowed_names_.contains(name)) return true;
+  if (!prompting_) {
+    prompting_ = true;
+    prompted_name_ = name;
+    ++prompts_;
+    if (on_prompt_) on_prompt_(name);
+  }
+  return false;
+}
+
+void FakeAirPlayReceiver::PairSetup(const Request& request) {
+  namespace tlv8 = airplay::tlv8;
+  const tlv8::Items items = tlv8::Read(request.body);
+  const QByteArray seq_item = tlv8::Get(items, tlv8::kSeqNo);
+  const int seq = seq_item.isEmpty() ? 0 : quint8(seq_item[0]);
+
+  BigInt n;
+  mpz_set_str(n.get(), kN, 16);
+  BigInt g;
+  mpz_set_ui(g.get(), 5);
+  const int n_size = n.Bytes().size();
+  const QByteArray pin =
+      password_.isEmpty() ? QByteArray(kTransientPin) : password_.toUtf8();
+
+  if (seq == 1) {
+    srp_salt_ = RandomBytes(16);
+    srp_salt_[0] = char(srp_salt_[0] | 0x80);  // No leading zero to drop
+    srp_b_ = RandomBytes(32);
+  }
+  // v = g ^ H(s, H(I:P)), k = H(N, PAD(g))
+  const BigInt x(airplay::Sha512(
+      srp_salt_ + airplay::Sha512(QByteArray(kUsername) + ":" + pin)));
+  BigInt v;
+  mpz_powm(v.get(), g.get(), x.get(), n.get());
+  const BigInt k(airplay::Sha512(n.Bytes() + g.Padded(n_size)));
+  const BigInt b(srp_b_);
+
+  if (seq == 1) {
+    // B = k * v + g ^ b
+    BigInt gb;
+    mpz_powm(gb.get(), g.get(), b.get(), n.get());
+    BigInt b_public;
+    mpz_mul(b_public.get(), k.get(), v.get());
+    mpz_add(b_public.get(), b_public.get(), gb.get());
+    mpz_mod(b_public.get(), b_public.get(), n.get());
+    srp_b_public_ = b_public.Bytes();
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 2)},
+                         {tlv8::kSalt, srp_salt_},
+                         {tlv8::kPublicKey, srp_b_public_}}));
+    return;
+  }
+
+  // S = (A * v ^ u) ^ b, with u = H(PAD(A), PAD(B))
+  const BigInt a(tlv8::Get(items, tlv8::kPublicKey));
+  const BigInt b_public(srp_b_public_);
+  const BigInt u(airplay::Sha512(a.Padded(n_size) + b_public.Padded(n_size)));
+  BigInt s;
+  mpz_powm(s.get(), v.get(), u.get(), n.get());
+  mpz_mul(s.get(), s.get(), a.get());
+  mpz_mod(s.get(), s.get(), n.get());
+  mpz_powm(s.get(), s.get(), b.get(), n.get());
+  const QByteArray key = airplay::Sha512(s.Bytes());
+
+  const BigInt hn(airplay::Sha512(n.Bytes()));
+  const BigInt hg(airplay::Sha512(g.Bytes()));
+  BigInt hxor;
+  mpz_xor(hxor.get(), hn.get(), hg.get());
+  const QByteArray m1 =
+      airplay::Sha512(hxor.Bytes() + airplay::Sha512(kUsername) + srp_salt_ +
+                      a.Bytes() + b_public.Bytes() + key);
+  if (m1 != tlv8::Get(items, tlv8::kProof)) {
+    // As a Mac answers a wrong PIN: HTTP 200, with an authentication error.
+    Respond(request, 200,
+            tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)},
+                         {tlv8::kError, QByteArray(1, 2)}}));
+    return;
+  }
+  Respond(request, 200,
+          tlv8::Write({{tlv8::kSeqNo, QByteArray(1, 4)},
+                       {tlv8::kProof, airplay::Sha512(a.Bytes() + m1 + key)}}));
+  cipher_.reset(new airplay::FrameCipher(
+      airplay::HkdfSha512("Control-Salt", "Control-Read-Encryption-Key", key),
+      airplay::HkdfSha512("Control-Salt", "Control-Write-Encryption-Key",
+                          key)));
+  paired_ = true;
+}
+
+void FakeAirPlayReceiver::SendTimingRequest() {
+  if (!sender_timing_port_) return;
+  QByteArray packet;
+  packet.append(char(0x80));
+  packet.append(char(0xD2));
+  packet += airplay::Bytes(qToBigEndian(quint16(7)));
+  packet += QByteArray(20, '\0');
+  packet += airplay::Bytes(qToBigEndian(quint64(++timing_requests_)));
+  timing_->writeDatagram(packet, QHostAddress::LocalHost, sender_timing_port_);
+}
+
+void FakeAirPlayReceiver::TimingReadyRead() {
+  while (timing_->hasPendingDatagrams()) {
+    const QByteArray data = timing_->receiveDatagram().data();
+    if (data.size() >= 32 && (quint8(data[1]) & 0x7F) == 0x53) {
+      ++timing_replies_;
+    }
+  }
+}

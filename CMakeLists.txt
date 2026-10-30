@@ -436,6 +436,10 @@ add_subdirectory(3rdparty/qocoa)
 # Cast's message format
 add_subdirectory(3rdparty/cast_channel)
 
+# AirPlay pairing's ChaCha20-Poly1305 and big-number arithmetic
+add_subdirectory(3rdparty/monocypher)
+add_subdirectory(3rdparty/mini-gmp)
+
 # Subdirectories
 add_subdirectory(src)
 add_subdirectory(tests)
