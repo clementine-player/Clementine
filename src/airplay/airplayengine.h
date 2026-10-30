@@ -18,13 +18,16 @@
 #ifndef AIRPLAY_AIRPLAYENGINE_H_
 #define AIRPLAY_AIRPLAYENGINE_H_
 
+#include <QImage>
 #include <memory>
 
 #include "airplaydevice.h"
+#include "core/song.h"
 #include "engines/gstengine.h"
 
 class AirPlaySession;
 class Application;
+class QTimer;
 
 // The engine for one AirPlay receiver: an output of the EngineRouter.
 //
@@ -37,6 +40,9 @@ class Application;
 // receiver may first ask its user to allow, and kept until playback stops.
 // Pausing leaves the receiver to run dry, and flushes it on resuming, as
 // does a seek. Clementine's volume slider sets the receiver's volume.
+//
+// The receiver shows the song that's playing, its cover and its progress,
+// from the song Clementine's player has as current.
 class AirPlayEngine : public GstEngine {
   Q_OBJECT
 
@@ -81,6 +87,8 @@ class AirPlayEngine : public GstEngine {
                           const QByteArray& receiver_public_key);
   void PairingForgotten();
   void StreamFlushed();
+  void ArtLoaded(const Song& song, const QString& uri, const QImage& image);
+  void SendProgress();
 
  private:
   class Target;
@@ -90,6 +98,8 @@ class AirPlayEngine : public GstEngine {
   void OpenSession();
   // Where this receiver's password and pairing are kept.
   QString SettingsGroup() const;
+  // Tells the session what's playing, while it's open.
+  void SendNowPlaying();
 
   AirPlayDevice device_;
   AirPlaySession* session_;
@@ -101,6 +111,12 @@ class AirPlayEngine : public GstEngine {
   int generation_;
   // Whether pairing again was tried after the receiver forgot this sender.
   bool repaired_;
+  // What's playing, and its cover, which is made a JPEG only when the
+  // session's open.
+  Song song_;
+  QImage cover_;
+  // Sends the progress once the position has settled, after a change.
+  QTimer* progress_timer_;
 };
 
 #endif  // AIRPLAY_AIRPLAYENGINE_H_

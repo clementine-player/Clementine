@@ -27,6 +27,7 @@
 #include <QVariantMap>
 #include <QtEndian>
 
+#include "airplay/airplaydmap.h"
 #include "airplay/airplayplist.h"
 #include "airplay/airplaystream.h"
 #include "airplay/airplaytlv8.h"
@@ -403,10 +404,26 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     }
     Respond(request, 200);
   } else if (request.method == "SET_PARAMETER") {
+    const QByteArray type = request.Header("Content-Type");
+    // Metadata and artwork apply from an RTP timestamp.
+    const bool timed = request.Header("RTP-Info").startsWith("rtptime=");
     if (request.body.startsWith("volume: ")) {
       volume_ = request.body.mid(8).trimmed();
+    } else if (request.body.startsWith("progress: ")) {
+      progress_ = request.body.mid(10).trimmed();
+    } else if (type == "application/x-dmap-tagged" && timed) {
+      namespace dmap = airplay::dmap;
+      const dmap::Items item =
+          dmap::Read(dmap::Get(dmap::Read(request.body), "mlit"));
+      now_playing_ = QStringList();
+      for (const char* tag : {"minm", "asar", "asal"}) {
+        now_playing_ << QString::fromUtf8(dmap::Get(item, tag));
+      }
+    } else if (type.startsWith("image/") && timed) {
+      artwork_type_ = type;
+      artwork_ = request.body;
     } else {
-      errors_ << "SET_PARAMETER without a volume";
+      errors_ << "SET_PARAMETER of something else";
     }
     Respond(request, 200);
   } else if (request.method == "POST" && request.uri == "/feedback") {

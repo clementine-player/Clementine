@@ -81,6 +81,7 @@ set(SOURCES
   airplay/airplaysink.cpp
   airplay/airplaysrp.cpp
   airplay/airplaystream.cpp
+  airplay/airplaydmap.cpp
   airplay/airplaytlv8.cpp
 
   analyzers/analyzerbase.cpp

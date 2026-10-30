@@ -130,6 +130,16 @@ class AirPlaySession : public QObject {
   // silence.
   void SetVolume(int percent);
 
+  // What the receiver shows as playing, sent now if the session is ready and
+  // again whenever it becomes ready. |artwork| is a JPEG, or empty for none.
+  void SetNowPlaying(const QString& title, const QString& artist,
+                     const QString& album);
+  void SetArtwork(const QByteArray& artwork);
+  // Where the song that's playing now is, so the receiver shows its
+  // progress. Only sent while ready, since it's out of date by the next
+  // time; a negative length is unknown, as for a stream.
+  void SetProgress(qint64 position_msec, qint64 length_msec);
+
  signals:
   void Paired();
   // The receiver wants a password, or the one given was wrong. The session
@@ -194,6 +204,10 @@ class AirPlaySession : public QObject {
   void SetupAirPlay1();
   void StartStream(quint16 data_port, quint16 control_port);
   void BecomeReady();
+  void SendNowPlaying();
+  void SendArtwork();
+  // RTP-Info for a SET_PARAMETER that applies from now on.
+  AirPlayRtspConnection::Headers RtpInfoNow() const;
   // False, after failing, unless |code| is 200.
   bool Check(const QByteArray& what, int code);
   // Stops waiting for the receiver's user to allow this sender. False, after
@@ -229,6 +243,13 @@ class AirPlaySession : public QObject {
   QByteArray audio_key_;
   AirPlayStream* stream_;
   int volume_;
+  // What's playing, for when the session becomes ready.
+  QString title_;
+  QString artist_;
+  QString album_;
+  QByteArray artwork_;
+  bool have_now_playing_;
+  bool have_artwork_;
 };
 
 #endif  // AIRPLAY_AIRPLAYSESSION_H_

@@ -31,6 +31,7 @@
 #include "airplay/airplaycrypto.h"
 #include "airplay/airplaydevice.h"
 #include "airplay/airplaydiscovery.h"
+#include "airplay/airplaydmap.h"
 #include "airplay/airplayplist.h"
 #include "airplay/airplaysession.h"
 #include "airplay/airplaysink.h"
@@ -1120,4 +1121,82 @@ TEST(AirPlaySessionTest, SaysWhenAirPlay1AudioMustBeEncrypted) {
   EXPECT_EQ(
       "Fake only takes encrypted AirPlay 1 audio, which Clementine can't send",
       result.error);
+}
+
+TEST(AirPlayTest, Dmap) {
+  using airplay::dmap::Items;
+  const QByteArray data = airplay::dmap::Write(
+      {{"mlit", airplay::dmap::Write({{"minm", "Song"}})}});
+  EXPECT_EQ(QByteArray("mlit\0\0\0\x0Cminm\0\0\0\x04Song", 20), data);
+  const Items items = airplay::dmap::Read(data);
+  ASSERT_EQ(1, items.size());
+  EXPECT_EQ("Song",
+            airplay::dmap::Get(airplay::dmap::Read(items[0].second), "minm"));
+  // A length past the end stops reading.
+  EXPECT_TRUE(
+      airplay::dmap::Read(QByteArray("minm\0\0\0\x09Song", 12)).isEmpty());
+}
+
+// Each set before the session's ready, and again after.
+void ExpectNowPlaying(FakeAirPlayReceiver* receiver) {
+  AirPlaySession session(FastOptions());
+  session.SetNowPlaying("Song", "Artist", "Album");
+  session.SetArtwork("jpeg");
+  ASSERT_TRUE(OpenReady(&session, receiver->device()));
+  WaitFor([receiver]() { return !receiver->artwork().isEmpty(); });
+  EXPECT_EQ(QStringList({"Song", "Artist", "Album"}), receiver->now_playing());
+  EXPECT_EQ("image/jpeg", receiver->artwork_type());
+  EXPECT_EQ("jpeg", receiver->artwork());
+
+  session.SetNowPlaying("Næste", "", "");
+  session.SetArtwork(QByteArray());
+  WaitFor([receiver]() { return receiver->artwork_type() == "image/none"; });
+  EXPECT_EQ(QStringList({"Næste", "", ""}), receiver->now_playing());
+  EXPECT_EQ("image/none", receiver->artwork_type());
+
+  // 1 s into 3 s: the start a second (44100 frames) before what's playing
+  // now, which is the latency behind what's sent next, and the end 3 s
+  // after the start.
+  session.SetProgress(1000, 3000);
+  WaitFor([receiver]() { return !receiver->progress().isEmpty(); });
+  const QList<QByteArray> progress = receiver->progress().split('/');
+  ASSERT_EQ(3, progress.size());
+  const quint32 start = progress[0].toUInt();
+  const quint32 now = progress[1].toUInt();
+  const quint32 end = progress[2].toUInt();
+  EXPECT_EQ(44100u, now - start);
+  EXPECT_EQ(3u * 44100, end - start);
+  quint16 seq;
+  quint32 next;
+  session.stream()->Next(&seq, &next);
+  EXPECT_EQ(AirPlayStream::kLatencyFrames, next - now);
+  EXPECT_EQ(QStringList(), receiver->errors());
+}
+
+TEST(AirPlaySessionTest, SaysWhatsPlaying) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  ExpectNowPlaying(&receiver);
+}
+
+TEST(AirPlaySessionTest, SaysWhatsPlayingWithAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.set_airplay1(true);
+  ExpectNowPlaying(&receiver);
+}
+
+// A stream has no length to show progress through.
+TEST(AirPlaySessionTest, NoProgressWithoutALength) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  session.SetProgress(1000, -1);
+  session.SetVolume(100);
+  WaitFor([&receiver]() { return !receiver.volume().isEmpty(); });
+  EXPECT_TRUE(receiver.progress().isEmpty());
 }

@@ -117,6 +117,12 @@ class FakeAirPlayReceiver : public QObject {
   // FLUSHes after the first, and the last volume set, in dB.
   int flushes() const { return flushes_; }
   QByteArray volume() const { return volume_; }
+  // What it was last told is playing: DMAP's song name, artist and album,
+  // the artwork and its type, and "start/now/end" in RTP timestamps.
+  QStringList now_playing() const { return now_playing_; }
+  QByteArray artwork() const { return artwork_; }
+  QByteArray artwork_type() const { return artwork_type_; }
+  QByteArray progress() const { return progress_; }
   // Packets it dropped as too late to play, or from before a FLUSH.
   int late_packets() const { return late_packets_; }
   int dropped_packets() const { return dropped_packets_; }
@@ -236,6 +242,10 @@ class FakeAirPlayReceiver : public QObject {
   int last_seq_;
   quint32 last_rtptime_;
   QByteArray volume_;
+  QStringList now_playing_;
+  QByteArray artwork_;
+  QByteArray artwork_type_;
+  QByteArray progress_;
   QStringList errors_;
 
   QStringList requests_;

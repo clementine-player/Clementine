@@ -17,6 +17,7 @@
 
 #include "airplayengine.h"
 
+#include <QBuffer>
 #include <QInputDialog>
 #include <QLineEdit>
 #include <QMetaObject>
@@ -24,11 +25,40 @@
 #include <QMutexLocker>
 #include <QPointer>
 #include <QSettings>
+#include <QTimer>
 
 #include "airplaysession.h"
 #include "airplaysink.h"
 #include "airplaystream.h"
+#include "core/application.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
+#include "covers/currentartloader.h"
+
+namespace {
+
+// As big as a Mac shows it, as the UPnP engine sends them.
+const int kMaxCoverSize = 600;
+// How long a new position takes to settle after a seek or a new track.
+const int kProgressDelayMsec = 1000;
+
+QByteArray EncodeCover(const QImage& image) {
+  if (image.isNull()) return QByteArray();
+  QImage scaled = image;
+  if (image.width() > kMaxCoverSize || image.height() > kMaxCoverSize) {
+    scaled = image.scaled(kMaxCoverSize, kMaxCoverSize, Qt::KeepAspectRatio,
+                          Qt::SmoothTransformation);
+  }
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  if (!scaled.convertToFormat(QImage::Format_RGB32).save(&buffer, "JPG", 90)) {
+    return QByteArray();
+  }
+  return data;
+}
+
+}  // namespace
 
 // What the engine's airplaysinks write to, from GStreamer's streaming
 // thread: the session's stream while it's ready, else nowhere.
@@ -64,8 +94,16 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
       target_(new Target(this)),
       pending_play_nanosec_(-1),
       generation_(0),
-      repaired_(false) {
+      repaired_(false),
+      progress_timer_(new QTimer(this)) {
   setParent(parent);
+  progress_timer_->setSingleShot(true);
+  progress_timer_->setInterval(kProgressDelayMsec);
+  connect(progress_timer_, SIGNAL(timeout()), SLOT(SendProgress()));
+  if (app) {
+    connect(app->current_art_loader(), &CurrentArtLoader::ArtLoaded, this,
+            &AirPlayEngine::ArtLoaded);
+  }
   session_ = new AirPlaySession(AirPlaySession::Options(), this);
   connect(session_, SIGNAL(PasswordNeeded(bool)), SLOT(PasswordNeeded(bool)));
   connect(session_, SIGNAL(PinShown()), SLOT(PinShown()));
@@ -147,6 +185,7 @@ void AirPlayEngine::WaitingForApproval() {
 
 void AirPlayEngine::SessionReady() {
   target_->SetStream(session_->stream());
+  progress_timer_->start();
   if (pending_play_nanosec_ >= 0) {
     const quint64 offset = pending_play_nanosec_;
     pending_play_nanosec_ = -1;
@@ -165,9 +204,34 @@ void AirPlayEngine::Stop(bool stop_after) {
 void AirPlayEngine::Unpause() {
   session_->Flush();
   GstEngine::Unpause();
+  progress_timer_->start();
 }
 
-void AirPlayEngine::StreamFlushed() { session_->Flush(); }
+void AirPlayEngine::StreamFlushed() {
+  session_->Flush();
+  // After a seek.
+  progress_timer_->start();
+}
+
+// The player's current song changed, or its cover was found.
+void AirPlayEngine::ArtLoaded(const Song& song, const QString&,
+                              const QImage& image) {
+  song_ = song;
+  cover_ = image;
+  if (!session_->is_open()) return;
+  SendNowPlaying();
+  progress_timer_->start();
+}
+
+void AirPlayEngine::SendNowPlaying() {
+  session_->SetNowPlaying(song_.PrettyTitle(), song_.artist(), song_.album());
+  session_->SetArtwork(EncodeCover(cover_));
+}
+
+void AirPlayEngine::SendProgress() {
+  session_->SetProgress(position_nanosec() / kNsecPerMsec,
+                        song_.length_nanosec() / kNsecPerMsec);
+}
 
 void AirPlayEngine::SetVolumeSW(uint percent) {
   // The receiver's volume, rather than the pipeline's.
@@ -227,6 +291,7 @@ void AirPlayEngine::OpenSession() {
   // Hidden too: plays to AirPlay 2 receivers with AirPlay 1.
   options.force_airplay1 = s.value("AirPlay/force_airplay1").toBool();
   session_->set_options(options);
+  if (song_.is_valid()) SendNowPlaying();
   session_->Open(device_);
 }
 
