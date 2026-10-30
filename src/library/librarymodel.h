@@ -20,7 +20,9 @@
 
 #include <QAbstractItemModel>
 #include <QIcon>
+#include <QList>
 #include <QNetworkDiskCache>
+#include <QSet>
 #include <QThreadPool>
 #include <memory>
 
@@ -143,7 +145,21 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   int total_song_count() const { return total_song_count_; }
 
   // Smart playlists
+  struct SmartPlaylist {
+    QString uuid;
+    QString name;
+  };
+  // The smart playlists, in the order they're shown. Each one's uuid stays
+  // the same for as long as it exists; a default one that's never been edited
+  // has the same uuid on every Clementine.
+  QList<SmartPlaylist> SmartPlaylists() const;
   smart_playlists::GeneratorPtr CreateGenerator(const QModelIndex& index) const;
+  // The smart playlist with |uuid|, or null if there's none.
+  smart_playlists::GeneratorPtr CreateGenerator(const QString& uuid) const;
+  // A uuid for a smart playlist that has none: the same for the same smart
+  // playlist on every Clementine, unless one in |used| has it already.
+  static QString UuidFor(const QString& type, const QByteArray& data,
+                         const QSet<QString>& used);
   void AddGenerator(smart_playlists::GeneratorPtr gen);
   void UpdateGenerator(const QModelIndex& index,
                        smart_playlists::GeneratorPtr gen);
@@ -239,7 +255,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Smart playlists are shown in another top-level node
   void CreateSmartPlaylists();
   void SaveGenerator(QSettings* s, int i,
-                     smart_playlists::GeneratorPtr generator) const;
+                     smart_playlists::GeneratorPtr generator,
+                     const QString& uuid) const;
+
   void ItemFromSmartPlaylist(const QSettings& s, bool notify) const;
 
   // Helpers for ItemFromQuery and ItemFromSong

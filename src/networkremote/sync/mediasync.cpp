@@ -37,6 +37,20 @@ void MediaSync::HandleMessage(int client_id, const QString& peer_address,
                               const QByteArray& data) {
   cpb::remote::Message msg;
   if (!msg.ParseFromArray(data.constData(), data.size())) return;
+  if (msg.type() == cpb::remote::REQUEST_SYNC_SOURCES) {
+    cpb::remote::Message reply;
+    reply.set_type(cpb::remote::SYNC_SOURCES);
+    cpb::remote::ResponseSyncSources* response =
+        reply.mutable_response_sync_sources();
+    if (hooks_.sources) {
+      for (const cpb::remote::SyncSource& source : hooks_.sources()) {
+        *response->add_sources() = source;
+      }
+    }
+    const std::string out = reply.SerializeAsString();
+    emit SendToClient(client_id, QByteArray(out.data(), out.size()));
+    return;
+  }
   if (msg.type() != cpb::remote::REQUEST_SYNC_MANIFEST) return;
 
   Client* client = &clients_[client_id];
@@ -79,7 +93,8 @@ void MediaSync::Manifest(Client* client,
   const SyncSourceId source =
       SyncSourceId::Parse(QString::fromStdString(req.source_id()));
   const SyncResolver::Result result =
-      SyncResolver(library_, hooks_.playlists).Resolve(source);
+      SyncResolver(library_, hooks_.playlists, hooks_.smart_playlists)
+          .Resolve(source);
   switch (result.state) {
     case SyncResolver::State::Ready:
       response->set_state(cpb::remote::SYNC_MANIFEST_STATE_READY);

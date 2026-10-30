@@ -31,6 +31,7 @@
 #include "covers/currentartloader.h"
 #include "engines/enginerouter.h"
 #include "internet/core/internetmodel.h"
+#include "library/librarymodel.h"
 #include "networkremote/authattemptlimiter.h"
 #include "networkremote/incomingdataparser.h"
 #include "networkremote/internetbrowser.h"
@@ -63,6 +64,10 @@ const char* kRefusedProperty = "clementine_refused";
 // address chosen there makes the rest of it local. Only a chosen one: when
 // listening on everything, 100.x clients stay public, as before.
 const char* kSharedSubnets[] = {"100.64.0.0/10", "::ffff:100.64.0.0/106"};
+
+// The backend part of the library's smart playlists' sync source ids:
+// "smart/library/<uuid>".
+const char* kLibrarySmartPlaylists = "library";
 
 // From --remote-name; empty for the host name.
 QString sRemoteName;
@@ -306,6 +311,39 @@ void NetworkRemote::SetupMediaSync() {
     if (backend->GetPlaylist(id).id != id) return false;
     *songs = backend->GetPlaylistSongs(id);
     return true;
+  };
+  hooks.smart_playlists.generator = [app](const QString& backend,
+                                          const QString& uuid) {
+    // Only the library's: services that have them are synced through the
+    // Internet tab.
+    if (backend != kLibrarySmartPlaylists) {
+      return smart_playlists::GeneratorPtr();
+    }
+    return app->library_model()->CreateGenerator(uuid);
+  };
+  hooks.sources = [app]() {
+    QList<cpb::remote::SyncSource> sources;
+    PlaylistManager* manager = app->playlist_manager();
+    for (const Playlist* playlist : manager->GetAllPlaylists()) {
+      cpb::remote::SyncSource source;
+      source.set_source_id(
+          SyncSourceId::ForPlaylist(playlist->id()).ToString().toStdString());
+      source.set_title(manager->GetPlaylistName(playlist->id()).toStdString());
+      source.set_kind(cpb::remote::SYNC_SOURCE_KIND_PLAYLIST);
+      sources << source;
+    }
+    for (const LibraryModel::SmartPlaylist& smart :
+         app->library_model()->SmartPlaylists()) {
+      cpb::remote::SyncSource source;
+      source.set_source_id(
+          SyncSourceId::ForSmartPlaylist(kLibrarySmartPlaylists, smart.uuid)
+              .ToString()
+              .toStdString());
+      source.set_title(smart.name.toStdString());
+      source.set_kind(cpb::remote::SYNC_SOURCE_KIND_SMART_PLAYLIST);
+      sources << source;
+    }
+    return sources;
   };
   hooks.url_handler = [app](const Song& song) {
     return app->player()->HandlerForUrl(song.url());
