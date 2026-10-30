@@ -46,7 +46,11 @@ class QUdpSocket;
 // - It asks its user whether to allow each sender name it doesn't know,
 //   holding the first SETUP until Allow() is called. Setting a password
 //   forgets the allowed names.
-// - It asks the sender for the time while setting up.
+// - It asks the sender for the time while setting up, and doesn't answer
+//   the SETUP that starts the stream until the sender has answered.
+//
+// It decrypts the audio and keeps it, and notes mistakes such as a reused
+// nonce or an audio key that's one of the event channel's keys.
 class FakeAirPlayReceiver : public QObject {
  public:
   FakeAirPlayReceiver();
@@ -80,6 +84,19 @@ class FakeAirPlayReceiver : public QObject {
   // The sender names it saw.
   QSet<QString> client_names() const { return client_names_; }
   int timing_replies() const { return timing_replies_; }
+  // SETUPs it held until the sender answered a request for the time.
+  int setups_after_timing() const { return setups_after_timing_; }
+  // The audio it decoded, as S16LE stereo.
+  QByteArray audio() const { return audio_; }
+  int audio_packets() const { return audio_packets_; }
+  int sync_packets() const { return sync_packets_; }
+  int event_replies() const { return event_replies_; }
+  // FLUSHes after the first, and the last volume set, in dB.
+  int flushes() const { return flushes_; }
+  QByteArray volume() const { return volume_; }
+  // Packets it dropped as too late to play, or from before a FLUSH.
+  int late_packets() const { return late_packets_; }
+  int dropped_packets() const { return dropped_packets_; }
   // What the first SETUP said the sender's MAC address was.
   QString sender_mac_address() const { return sender_mac_address_; }
   bool torn_down() const { return torn_down_; }
@@ -109,8 +126,13 @@ class FakeAirPlayReceiver : public QObject {
   // False if |request| has to wait for its sender name to be allowed.
   bool CheckAllowed(const Request& request);
   void PairSetup(const Request& request);
+  bool SetupStream(const Request& request);
   void SendTimingRequest();
   void TimingReadyRead();
+  void ControlReadyRead();
+  void AudioReadyRead();
+  void NewEventConnection();
+  void EventReadyRead();
   quint32 status_flags() const;
 
   QTcpServer* server_;
@@ -140,6 +162,34 @@ class FakeAirPlayReceiver : public QObject {
   int timing_requests_;
   int timing_replies_;
   bool torn_down_;
+
+  QByteArray shared_key_;
+  QTcpServer* event_server_;
+  QTcpSocket* event_socket_;
+  std::unique_ptr<airplay::FrameCipher> event_cipher_;
+  QByteArray event_buffer_;
+  QUdpSocket* control_;
+  QUdpSocket* audio_socket_;
+  bool waiting_for_time_;
+  int timing_replies_before_setup_;
+  int setups_after_timing_;
+  QByteArray audio_key_;
+  QSet<QByteArray> audio_nonces_;
+  QByteArray audio_;
+  int audio_packets_;
+  int sync_packets_;
+  int event_replies_;
+  int flushes_;
+  bool flushed_once_;
+  int flush_seq_;
+  bool have_sync_;
+  quint32 sync_rtptime_;
+  quint64 sync_ntp_;
+  int late_packets_;
+  int dropped_packets_;
+  int last_seq_;
+  quint32 last_rtptime_;
+  QByteArray volume_;
   QStringList errors_;
 
   QStringList requests_;

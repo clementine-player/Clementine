@@ -97,6 +97,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   OutputDetailsList GetOutputsList() const;
 
   GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
+  // Called with each pipeline's audio sink once it's made, for a subclass
+  // whose sink needs more than a device to be set up.
+  virtual void ConfigureSink(GstElement* sink) { Q_UNUSED(sink); }
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer* buffer, int pipeline_id);
@@ -143,6 +146,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
  protected:
   void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
+
+  // For an engine that always plays through one sink, whatever the settings
+  // say, such as an AirPlay receiver's. Call it from ReloadSettings().
+  void SetOutput(const QString& sink, const QVariant& device);
 
  private:
   // Used for debug purposes only.

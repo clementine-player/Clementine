@@ -19,3 +19,12 @@ A Mac14,2 with AirPlay Receiver set to allow anyone on the network, tested
 | /pair-pin-start | Asks to Allow, then shows a full-screen PIN: 3939 on 2026-10-30, a random one on 2026-11-01. |
 | Allow prompt | Holds the first SETUP until answered; unanswered, the Mac answers 400 after about 15 s. |
 | Asking again | It remembers allowing a sender for a while, but asks again at times for reasons unknown, even a minute later or after a clean TEARDOWN. |
+
+### Playing
+
+| Check | Result |
+| --- | --- |
+| Tone | Clean. |
+| Volume | Right: 20·log10 of the gain, so 50% on the slider is about −12 dB. |
+| Pause, seek, skip, gapless | All clean. |
+| Unanswered Allow | Stays on the receiver, stopped, with a message. |
