@@ -82,7 +82,7 @@ msgstr " композицій"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nЗараз не з'єднано. Clementine очікуватиме на дані, коли цей комп'ютер встановить з'єднання."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -93,7 +93,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nЦей комп'ютер — %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -234,7 +234,7 @@ msgstr "%1 передано"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
-msgstr ""
+msgstr "%1  %2\nЦей комп'ютер — %3"
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -418,7 +418,7 @@ msgstr "44100 Гц"
 msgid "48,000Hz"
 msgstr "48000 Гц"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 випадкових композиційдоріжок"
 
@@ -641,11 +641,11 @@ msgstr "Додати теку…"
 
 #: ui/networkremotesettingspage.cpp:342
 msgid "Add network or address"
-msgstr ""
+msgstr "Додати мережу або адресу"
 
 #: ../bin/src/ui_networkremotesettingspage.h:346
 msgid "Add network or address..."
-msgstr ""
+msgstr "Додати мережу або адресу…"
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -756,6 +756,10 @@ msgstr "Додати до ваших радіопотоків"
 msgid "Add wiimotedev action"
 msgstr "Додати дію wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr "Додано протягом попередніх 30 днів"
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Додано у цьому місяці"
@@ -848,7 +852,7 @@ msgstr "Всі файли (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Усі мережі"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -859,7 +863,7 @@ msgstr "Всі списки відтворення (%1)"
 msgid "All the translators"
 msgstr "Всім перекладачам"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Всі композиції"
 
@@ -871,11 +875,11 @@ msgstr "Дозволити клієнту отримувати музику з �
 msgid "Allow downloads"
 msgstr "Дозволити отримання"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
-msgstr ""
+msgstr "Дозвольте отримання даних у параметрах мережевого віддаленого пристрою Clementine, щоб зберігати композиції на цьому телефоні."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -1194,7 +1198,7 @@ msgstr "CD-зчитувач"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Підтримка листів CUE"
 
@@ -2170,13 +2174,13 @@ msgstr "Тривалість"
 #. headphones.
 #: ui/behavioursettingspage.cpp:53
 msgid "During playback"
-msgstr ""
+msgstr "Під час відтворення"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
 msgstr "Динамічний режим увімкнено"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Динамічний випадковий мікс"
 
@@ -2280,7 +2284,7 @@ msgstr "Вкажіть назву файла для експортованих �
 msgid ""
 "Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
 "192.168.1.23."
-msgstr ""
+msgstr "Введіть мережу, приклади: 192.168.1.0/24 або fd00::/64 — або адресу, подібну до 192.168.1.23."
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -2379,7 +2383,7 @@ msgstr "Помилка обробляння %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Помилка завантаження аудіо CD"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Будь-коли відтворений"
 
@@ -2546,7 +2550,7 @@ msgstr "Швидко"
 msgid "Fast search"
 msgstr "Швидкий пошук"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Улюблені композиції"
 
@@ -3126,7 +3130,7 @@ msgstr "Продовжувати виконання у фоні коли вік�
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Keep the computer awake"
-msgstr ""
+msgstr "Не присипляти комп'ютер"
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
@@ -3136,7 +3140,7 @@ msgstr "Зберегти оригінальні файли"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:154
 msgid "Keeping the computer awake while Clementine is open"
-msgstr ""
+msgstr "Не присипляти комп'ютер, доки відкрито вікно Clementine"
 
 #. TRANSLATORS: The tooltip of "While visualizations are full screen",
 #. under "Keep the computer awake". As well as keeping the computer
@@ -3144,7 +3148,7 @@ msgstr ""
 #. on show.
 #: ui/behavioursettingspage.cpp:76
 msgid "Keeps the display on too"
-msgstr ""
+msgstr "Не вимикати дисплей"
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3183,7 +3187,7 @@ msgstr "Велика обкладинка альбому (без подроби�
 msgid "Large sidebar"
 msgstr "Велика бічна панель"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Востаннє відтворено"
 
@@ -3216,7 +3220,7 @@ msgstr "Вікі Last.fm"
 msgid "Latin"
 msgstr "Латиноамериканська музика"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Найменш улюблені композиції"
 
@@ -3277,7 +3281,7 @@ msgstr "Слухати"
 msgid ""
 "Listens on every address this computer has:\n"
 "%1"
-msgstr ""
+msgstr "Очікує на дані на усіх адресах, які має цей комп'ютер:\n%1"
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3328,7 +3332,7 @@ msgstr "Завантаження бази даних iPod"
 msgid "Loading smart playlist"
 msgstr "Завантаження «розумного» списку відтворення"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Завантаження пісень"
 
@@ -3346,7 +3350,7 @@ msgstr "Завантаження композицій"
 msgid "Loading tracks info"
 msgstr "Завантажую дані композицій"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3584,7 +3588,7 @@ msgstr "Стиль смужки настрою"
 msgid "Moodbars"
 msgstr "Смужки настрою"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Найчастіше відтворювані"
 
@@ -3670,13 +3674,13 @@ msgstr "Параметри віддаленого пристрою мережі�
 #: ui/networkremotesettingspage.cpp:337
 msgid ""
 "Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
-msgstr ""
+msgstr "Мережа або адреса для очікування даних. Приклади: 192.168.1.0/24 і 192.168.1.23:"
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
 msgstr "Ніколи"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Ніколи не відтворені"
 
@@ -3715,7 +3719,7 @@ msgstr "Нові композиції буде додано автоматичн
 msgid "Newest Albums"
 msgstr "Найновіші альбоми"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Найновіші композиції"
 
@@ -4010,7 +4014,7 @@ msgstr "Рік оригіналу"
 msgid "Original year - Album"
 msgstr " Рік оригіналу — Альбом"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Підтримка мітки року оригіналу"
 
@@ -4180,7 +4184,7 @@ msgstr "Налаштування програвача"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:158
 msgid "Playing music"
-msgstr ""
+msgstr "Відтворення звукових даних"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -4188,7 +4192,7 @@ msgstr ""
 #. gets it from this computer.
 #: core/sleepinhibitor.cpp:164
 msgid "Playing music on another device"
-msgstr ""
+msgstr "Відтворення звукових даних на іншому пристрої"
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -4807,7 +4811,7 @@ msgstr "Керування збереженими групуваннями"
 msgid "Saving cue files is not yet supported."
 msgstr "Підтримки збереження файлів cue ще не передбачено."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Зберігаємо статистичні дані щодо композицій до файлів композицій"
 
@@ -4999,7 +5003,7 @@ msgstr "Вибрати…"
 #. computer.
 #: core/sleepinhibitor.cpp:170
 msgid "Sending songs to a remote"
-msgstr ""
+msgstr "Надсилання композицій на віддалений пристрій"
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -5191,7 +5195,7 @@ msgstr "Показати/приховати"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:150
 msgid "Showing visualizations full screen"
-msgstr ""
+msgstr "Показ візуалізацій на увесь екран"
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5282,7 +5286,7 @@ msgstr "Маленька бічна панель"
 msgid "Smart playlist"
 msgstr "«Розумний» список відтворення"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "«Розумні» списки відтворення"
 
@@ -5716,9 +5720,9 @@ msgstr "Значення цього параметра можна змінити
 msgid "This type of device is not supported: %1"
 msgstr "Цей тип пристрою не підтримується: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
-msgstr ""
+msgstr "У цій версії Clementine ще не передбачено синхронізації цих даних."
 
 #: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
@@ -5887,8 +5891,8 @@ msgstr "Не вдалося з’єднатися"
 msgid "Unable to download %1 (%2)"
 msgstr "Не вдалось завантажити %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6073,7 +6077,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Змінна бітова швидкість"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Різні виконавці"
@@ -6191,7 +6195,7 @@ msgstr "Якщо список є порожнім…"
 #. for as long as Clementine is running, whatever it's doing.
 #: ui/behavioursettingspage.cpp:47
 msgid "While Clementine is open"
-msgstr ""
+msgstr "Доки відкрито вікно Clementine"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6199,7 +6203,7 @@ msgstr ""
 #. whether the user picked them or they're being synced.
 #: ui/behavioursettingspage.cpp:65
 msgid "While a remote is downloading or syncing"
-msgstr ""
+msgstr "Доки відбувається отримання даних або їх синхронізація з віддаленим пристроєм"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6207,14 +6211,14 @@ msgstr ""
 #. or the like, which gets the music from this computer.
 #: ui/behavioursettingspage.cpp:59
 msgid "While playing on another device"
-msgstr ""
+msgstr "Доки відбувається відтворення на іншому пристрої"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
 #: ui/behavioursettingspage.cpp:70
 msgid "While visualizations are full screen"
-msgstr ""
+msgstr "Доки відбувається візуалізація на увесь екран"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."

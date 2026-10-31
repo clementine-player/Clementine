@@ -451,7 +451,7 @@ msgstr ""
 msgid "48,000Hz"
 msgstr ""
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 rastgele parça"
 
@@ -789,6 +789,10 @@ msgstr ""
 msgid "Add wiimotedev action"
 msgstr "wiimotedev eylemi ekle"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Bu ay eklenenler"
@@ -892,7 +896,7 @@ msgstr "Tüm çalma listeleri (%1)"
 msgid "All the translators"
 msgstr "Tüm çevirmenler"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Tüm parçalar"
 
@@ -904,7 +908,7 @@ msgstr ""
 msgid "Allow downloads"
 msgstr ""
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1227,7 +1231,7 @@ msgstr ""
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "CUE desteği"
 
@@ -2209,7 +2213,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Dinamik kip açık"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Dinamik rastgele karışım"
 
@@ -2412,7 +2416,7 @@ msgstr "%1 işlenirken hata: %2"
 msgid "Error while loading audio CD"
 msgstr "Ses CD'si yüklenirken hata"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Önceden çalınmış"
 
@@ -2579,7 +2583,7 @@ msgstr "Hızlı"
 msgid "Fast search"
 msgstr ""
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Beğenilen parçalar"
 
@@ -3216,7 +3220,7 @@ msgstr ""
 msgid "Large sidebar"
 msgstr "Büyük kenar çubuğu"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Son çalınan"
 
@@ -3249,7 +3253,7 @@ msgstr "Last.fm wiki"
 msgid "Latin"
 msgstr ""
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Az beğenilen parçalar"
 
@@ -3361,7 +3365,7 @@ msgstr "iPod veritabanı yükleniyor"
 msgid "Loading smart playlist"
 msgstr "Akıllı çalma listesi yükleniyor"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Şarkılar yükleniyor"
 
@@ -3379,7 +3383,7 @@ msgstr "Parçalar yükleniyor"
 msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3617,7 +3621,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "En fazla çalınan"
 
@@ -3709,7 +3713,7 @@ msgstr ""
 msgid "Never"
 msgstr "Hiçbir zaman"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Hiç çalınmamış"
 
@@ -3748,7 +3752,7 @@ msgstr "Yeni parçalar otomatik olarak eklenecektir."
 msgid "Newest Albums"
 msgstr ""
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "En yeni parçalar"
 
@@ -4043,7 +4047,7 @@ msgstr ""
 msgid "Original year - Album"
 msgstr ""
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr ""
 
@@ -4840,7 +4844,7 @@ msgstr ""
 msgid "Saving cue files is not yet supported."
 msgstr ""
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
@@ -5315,7 +5319,7 @@ msgstr "Küçük kenar çubuğu"
 msgid "Smart playlist"
 msgstr "Akıllı çalma listesi"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Akıllı çalma listeleri"
 
@@ -5749,7 +5753,7 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr "Bu tür bir aygıt desteklenmiyor: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
@@ -5920,8 +5924,8 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6106,7 +6110,7 @@ msgstr ""
 msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"

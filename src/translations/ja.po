@@ -429,7 +429,7 @@ msgstr ""
 msgid "48,000Hz"
 msgstr ""
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "ランダムな 50 トラック"
 
@@ -767,6 +767,10 @@ msgstr ""
 msgid "Add wiimotedev action"
 msgstr "Wii リモコンデバイスのアクションの追加"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "今月追加されたもの"
@@ -870,7 +874,7 @@ msgstr "すべてのプレイリスト (%1)"
 msgid "All the translators"
 msgstr "すべての翻訳者"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "すべてのトラック"
 
@@ -882,7 +886,7 @@ msgstr ""
 msgid "Allow downloads"
 msgstr ""
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1205,7 +1209,7 @@ msgstr ""
 msgid "CDDA"
 msgstr "オーディオ CD"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "CUE シートのサポート"
 
@@ -2187,7 +2191,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "ダイナミックモードはオンです"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "ダイナミックランダムミックス"
 
@@ -2390,7 +2394,7 @@ msgstr "%1 の処理エラー: %2"
 msgid "Error while loading audio CD"
 msgstr "音楽 CD を読み込み中にエラーが発生しました"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "再生したことがある"
 
@@ -2557,7 +2561,7 @@ msgstr "速"
 msgid "Fast search"
 msgstr ""
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "お気に入りのトラック"
 
@@ -3194,7 +3198,7 @@ msgstr ""
 msgid "Large sidebar"
 msgstr "大きいサイドバー"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "最終再生"
 
@@ -3227,7 +3231,7 @@ msgstr "Last.fm wiki"
 msgid "Latin"
 msgstr ""
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "嫌いなトラック"
 
@@ -3339,7 +3343,7 @@ msgstr "iPod データベースの読み込み中"
 msgid "Loading smart playlist"
 msgstr "スマートプレイリストの読み込み中"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "曲の読み込み中"
 
@@ -3357,7 +3361,7 @@ msgstr "トラックの読み込み中"
 msgid "Loading tracks info"
 msgstr "トラック情報の読み込み中"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3595,7 +3599,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "最も再生している"
 
@@ -3687,7 +3691,7 @@ msgstr ""
 msgid "Never"
 msgstr "なし"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "再生したことがない"
 
@@ -3726,7 +3730,7 @@ msgstr "新しいトラックは自動的に追加されます。"
 msgid "Newest Albums"
 msgstr ""
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "最新のトラック"
 
@@ -4021,7 +4025,7 @@ msgstr ""
 msgid "Original year - Album"
 msgstr ""
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr ""
 
@@ -4818,7 +4822,7 @@ msgstr ""
 msgid "Saving cue files is not yet supported."
 msgstr ""
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
@@ -5293,7 +5297,7 @@ msgstr "小さいサイドバー"
 msgid "Smart playlist"
 msgstr "スマートプレイリスト"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "スマートプレイリスト"
 
@@ -5727,7 +5731,7 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr "この種類のデバイスはサポートされていません: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
@@ -5898,8 +5902,8 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "%1 をダウンロードできません (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6084,7 +6088,7 @@ msgstr ""
 msgid "Variable bit rate"
 msgstr "可変ビットレート"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "さまざまなアーティスト"

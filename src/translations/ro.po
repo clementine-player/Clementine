@@ -94,7 +94,7 @@ msgstr " melodii"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nNu este conectat în acest moment. Clementine va asculta când acest calculator se va conecta."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -105,7 +105,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nAcest calculator este %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -246,7 +246,7 @@ msgstr "%1 transferat"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
-msgstr ""
+msgstr "%1  %2\nAcest calculator este %3"
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -430,7 +430,7 @@ msgstr "44,100Hz"
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 de piese aleatorii"
 
@@ -653,11 +653,11 @@ msgstr "Adaugă dosar..."
 
 #: ui/networkremotesettingspage.cpp:342
 msgid "Add network or address"
-msgstr ""
+msgstr "Adaugă o rețea sau o adresă"
 
 #: ../bin/src/ui_networkremotesettingspage.h:346
 msgid "Add network or address..."
-msgstr ""
+msgstr "Adaugă o rețea sau o adresă..."
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -768,6 +768,10 @@ msgstr "Adaugă la posturile tale de radio"
 msgid "Add wiimotedev action"
 msgstr "Adaugă acțiune wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Adăugate luna aceasta"
@@ -860,7 +864,7 @@ msgstr "Toate fișierele (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Toate rețelele"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -871,7 +875,7 @@ msgstr "Toate listele de redare (%1)"
 msgid "All the translators"
 msgstr "Toți traducătorii"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Toate pistele"
 
@@ -883,11 +887,11 @@ msgstr "Permite unui client să descarce muzică de la acest calculator."
 msgid "Allow downloads"
 msgstr "Permite descărcările"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
-msgstr ""
+msgstr "Permite descărcările în configurările pentru controlul de la distanță prin rețea ale aplicației Clementine, pentru a păstra melodiile pe acest telefon."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -1206,7 +1210,7 @@ msgstr "Unitate CD"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Suport fișă CUE"
 
@@ -2188,7 +2192,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Modul dinamic este pornit"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Mixare aleatoare dinamică"
 
@@ -2292,7 +2296,7 @@ msgstr "Introduceți un nume de fișier pentru coperțile exportate (fără exte
 msgid ""
 "Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
 "192.168.1.23."
-msgstr ""
+msgstr "Introduceți o rețea precum 192.168.1.0/24 sau fd00::/64, sau o adresă precum 192.168.1.23."
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -2391,7 +2395,7 @@ msgstr "Eroare la procesarea %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Eroare la încărcarea CD-ului audio"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Redate cândva"
 
@@ -2558,7 +2562,7 @@ msgstr "Rapidă"
 msgid "Fast search"
 msgstr "Căutare rapidă"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Piese favorite"
 
@@ -3195,7 +3199,7 @@ msgstr "Copertă de album mare (fără detalii)"
 msgid "Large sidebar"
 msgstr "Bară laterală mare"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Ultima redată"
 
@@ -3228,7 +3232,7 @@ msgstr "Wiki Last.fm"
 msgid "Latin"
 msgstr "Latină"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Piesele cel mai puțin preferate"
 
@@ -3289,7 +3293,7 @@ msgstr "Ascultă pe"
 msgid ""
 "Listens on every address this computer has:\n"
 "%1"
-msgstr ""
+msgstr "Ascultă pe fiecare adresă pe care o are acest calculator:\n%1"
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3340,7 +3344,7 @@ msgstr "Se încarcă baza de date iPod"
 msgid "Loading smart playlist"
 msgstr "Se încarcă lista de redare inteligentă"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Se încarcă melodiile"
 
@@ -3358,7 +3362,7 @@ msgstr "Se încarcă piesele"
 msgid "Loading tracks info"
 msgstr "Se încarcă informațiile pieselor"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3596,7 +3600,7 @@ msgstr "Stilul barei de redare vizuală a dispoziției"
 msgid "Moodbars"
 msgstr "Bare de redare vizuală a dispoziției"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Cele mai redate"
 
@@ -3682,13 +3686,13 @@ msgstr "Configurări pentru controlul la distanță de rețea..."
 #: ui/networkremotesettingspage.cpp:337
 msgid ""
 "Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
-msgstr ""
+msgstr "Rețeaua sau adresa pe care se va asculta, de exemplu 192.168.1.0/24 sau 192.168.1.23:"
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
 msgstr "Niciodată"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Niciodată redate"
 
@@ -3727,7 +3731,7 @@ msgstr "Pistele noi vor fi adăugate automat."
 msgid "Newest Albums"
 msgstr "Cele mai noi albume"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Cele mai noi piste"
 
@@ -4022,7 +4026,7 @@ msgstr "Anul de lansare original"
 msgid "Original year - Album"
 msgstr "Anul de lansare original - Album"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Suport pentru eticheta anului original de lansare"
 
@@ -4819,7 +4823,7 @@ msgstr "Gestionarul grupărilor salvate"
 msgid "Saving cue files is not yet supported."
 msgstr "Salvarea fișierelor cue nu este încă disponibilă."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Se salvează statisticile melodiilor în fișierele acestora"
 
@@ -5294,7 +5298,7 @@ msgstr "Bară laterală mică"
 msgid "Smart playlist"
 msgstr "Listă de redare inteligentă"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Liste de redare inteligente"
 
@@ -5728,9 +5732,9 @@ msgstr "Această opțiune poate fi modificată în secțiunea „Comportament”
 msgid "This type of device is not supported: %1"
 msgstr "Acest tip de dispozitiv nu este acceptat: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
-msgstr ""
+msgstr "Această versiune a aplicației Clementine nu permite încă sincronizarea acestuia."
 
 #: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
@@ -5899,8 +5903,8 @@ msgstr "Nu se poate conecta"
 msgid "Unable to download %1 (%2)"
 msgstr "Nu se poate descărca %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6085,7 +6089,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Rată de biți variabilă"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Artiști diferiți"

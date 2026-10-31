@@ -444,7 +444,7 @@ msgstr "44 100 Гц"
 msgid "48,000Hz"
 msgstr "48 000 Гц"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 случайных треков"
 
@@ -782,6 +782,10 @@ msgstr "Добавить в ваши потоки радио"
 msgid "Add wiimotedev action"
 msgstr "Добавить действие wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Добавлено за месяц"
@@ -885,7 +889,7 @@ msgstr "Все плейлисты (%1)"
 msgid "All the translators"
 msgstr "Всем переводчикам"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Все треки"
 
@@ -897,7 +901,7 @@ msgstr "Позволяет клиенту скачивать музыку с э�
 msgid "Allow downloads"
 msgstr "Разрешить загрузки"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1220,7 +1224,7 @@ msgstr "CD-привод"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Поддержка файлов разметки CUE"
 
@@ -2202,7 +2206,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Динамический режим включён"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Динамичный случайный микс"
 
@@ -2405,7 +2409,7 @@ msgstr "Ошибка при обработке %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Ошибка при загрузке аудио-CD"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Любые прослушанные"
 
@@ -2572,7 +2576,7 @@ msgstr "Быстрое"
 msgid "Fast search"
 msgstr "Быстрый поиск"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Любимые треки"
 
@@ -3209,7 +3213,7 @@ msgstr "Крупная обложка (без данных)"
 msgid "Large sidebar"
 msgstr "Широкая боковая панель"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Последний раз"
 
@@ -3242,7 +3246,7 @@ msgstr "Вики Last.fm"
 msgid "Latin"
 msgstr "Латинская"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Нелюбимые треки"
 
@@ -3354,7 +3358,7 @@ msgstr "Загружается база данных iPod"
 msgid "Loading smart playlist"
 msgstr "Загружается умный плейлист"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Загружаются песни"
 
@@ -3372,7 +3376,7 @@ msgstr "Загружаются композиции"
 msgid "Loading tracks info"
 msgstr "Загружаются сведения о композициях"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3610,7 +3614,7 @@ msgstr "Стиль индикатора тона"
 msgid "Moodbars"
 msgstr "Индикатор тона"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Наиболее прослушиваемые"
 
@@ -3702,7 +3706,7 @@ msgstr ""
 msgid "Never"
 msgstr "Никогда"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Никогда не прослушивались"
 
@@ -3741,7 +3745,7 @@ msgstr "Новые треки добавляются автоматически.
 msgid "Newest Albums"
 msgstr "Новые альбомы"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Свежие треки"
 
@@ -4036,7 +4040,7 @@ msgstr "Год оригинала"
 msgid "Original year - Album"
 msgstr "Год оригинала - Альбом"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Поддержка года выхода оригинала"
 
@@ -4833,7 +4837,7 @@ msgstr "Менеджер сохранённых групп"
 msgid "Saving cue files is not yet supported."
 msgstr "Сохранение файлов CUE пока не поддерживается."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Сохранение статистики композиций в файлы"
 
@@ -5308,7 +5312,7 @@ msgstr "Узкая боковая панель"
 msgid "Smart playlist"
 msgstr "Умный плейлист"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Умные плейлисты"
 
@@ -5742,7 +5746,7 @@ msgstr "Этот параметр можно изменить в настрой�
 msgid "This type of device is not supported: %1"
 msgstr "Не поддерживаемый тип устройства: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
@@ -5913,8 +5917,8 @@ msgstr "Невозможно подключиться"
 msgid "Unable to download %1 (%2)"
 msgstr "Невозможно загрузить %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6099,7 +6103,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Переменный битрейт"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Различные артисты"

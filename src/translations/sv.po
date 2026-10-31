@@ -446,7 +446,7 @@ msgstr "44 100 Hz"
 msgid "48,000Hz"
 msgstr "48 000 Hz"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 slumpmässiga spår"
 
@@ -784,6 +784,10 @@ msgstr "Lägg till bland dina radioströmmar"
 msgid "Add wiimotedev action"
 msgstr "Lägg till Wiimotedev-åtgärd"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Tillagda den här månaden"
@@ -887,7 +891,7 @@ msgstr "Alla spellistor (%1)"
 msgid "All the translators"
 msgstr "Alla översättarna"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Alla spår"
 
@@ -899,7 +903,7 @@ msgstr "Tillåt en klient att hämta musik från den här datorn."
 msgid "Allow downloads"
 msgstr "Tillåt hämtningar"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1222,7 +1226,7 @@ msgstr "CD-enhet"
 msgid "CDDA"
 msgstr "CD-ljud"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Stöd för CUE-filer"
 
@@ -2204,7 +2208,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Dynamiskt läge är på"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Dynamisk slumpmix"
 
@@ -2407,7 +2411,7 @@ msgstr "Fel vid bearbetning av %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Fel vid inläsning av ljud-CD"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Har spelats någon gång"
 
@@ -2574,7 +2578,7 @@ msgstr "Snabb"
 msgid "Fast search"
 msgstr "Snabbsökning"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Favoritspår"
 
@@ -3211,7 +3215,7 @@ msgstr "Stort albumomslag (inga detaljer)"
 msgid "Large sidebar"
 msgstr "Stort sidofält"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Senast spelad"
 
@@ -3244,7 +3248,7 @@ msgstr "Last.fm-wiki"
 msgid "Latin"
 msgstr "Latinamerikansk musik"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Minst omtyckta spår"
 
@@ -3356,7 +3360,7 @@ msgstr "Läser in iPod-databas"
 msgid "Loading smart playlist"
 msgstr "Läser in smart spellista"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Läser in låtar"
 
@@ -3374,7 +3378,7 @@ msgstr "Läser in spår"
 msgid "Loading tracks info"
 msgstr "Läser in spårinformation"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3612,7 +3616,7 @@ msgstr "Stil för stämningsdiagram"
 msgid "Moodbars"
 msgstr "Stämningsdiagram"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Mest spelade"
 
@@ -3704,7 +3708,7 @@ msgstr ""
 msgid "Never"
 msgstr "Aldrig"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Aldrig spelade"
 
@@ -3743,7 +3747,7 @@ msgstr "Nya spår läggs till automatiskt."
 msgid "Newest Albums"
 msgstr "Nyaste albumen"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Nyaste spåren"
 
@@ -4038,7 +4042,7 @@ msgstr "Ursprungligt år"
 msgid "Original year - Album"
 msgstr "Ursprungligt år – album"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Stöd för tagg för ursprungligt år"
 
@@ -4835,7 +4839,7 @@ msgstr "Hanterare för sparade grupperingar"
 msgid "Saving cue files is not yet supported."
 msgstr "Det går ännu inte att spara CUE-filer."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Sparar låtstatistik i låtfiler"
 
@@ -5310,7 +5314,7 @@ msgstr "Litet sidofält"
 msgid "Smart playlist"
 msgstr "Smart spellista"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Smarta spellistor"
 
@@ -5744,7 +5748,7 @@ msgstr "Det här alternativet kan ändras under ”Beteende” i inställningarn
 msgid "This type of device is not supported: %1"
 msgstr "Den här typen av enhet stöds inte: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
@@ -5915,8 +5919,8 @@ msgstr "Det går inte att ansluta"
 msgid "Unable to download %1 (%2)"
 msgstr "Det går inte att hämta %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6101,7 +6105,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Diverse artister"

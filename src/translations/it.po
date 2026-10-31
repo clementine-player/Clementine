@@ -421,7 +421,7 @@ msgstr "44,100Hz"
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 tracce casuali"
 
@@ -759,6 +759,10 @@ msgstr "Aggiungi i tuoi flussi radio"
 msgid "Add wiimotedev action"
 msgstr "Aggiungi azione wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Aggiunti questo mese"
@@ -862,7 +866,7 @@ msgstr "Tutte le scalette (%1)"
 msgid "All the translators"
 msgstr "Tutti i traduttori"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Tutte le tracce"
 
@@ -874,7 +878,7 @@ msgstr "Permetti a un client di scaricare musica da questo computer."
 msgid "Allow downloads"
 msgstr "Consenti gli scaricamenti"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1197,7 +1201,7 @@ msgstr "Lettore CD"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Supporto CUE sheet"
 
@@ -2173,13 +2177,13 @@ msgstr "Durata"
 #. headphones.
 #: ui/behavioursettingspage.cpp:53
 msgid "During playback"
-msgstr ""
+msgstr "Durante la riproduzione"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
 msgstr "La modalità dinamica è attiva"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Misto casuale dinamico"
 
@@ -2382,7 +2386,7 @@ msgstr "Errore durante l'elaborazione di %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Errore nel caricamento del CD audio"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Mai riprodotte"
 
@@ -2549,7 +2553,7 @@ msgstr "Veloce"
 msgid "Fast search"
 msgstr "Ricerca veloce"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Tracce preferite"
 
@@ -3129,7 +3133,7 @@ msgstr "Mantieni l'esecuzione sullo sfondo quando la finestra è chiusa"
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Keep the computer awake"
-msgstr ""
+msgstr "Mantieni il computer attivo"
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
@@ -3139,7 +3143,7 @@ msgstr "Mantieni i file originali"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:154
 msgid "Keeping the computer awake while Clementine is open"
-msgstr ""
+msgstr "Mantenere il computer attivo mentre Clementine è aperto"
 
 #. TRANSLATORS: The tooltip of "While visualizations are full screen",
 #. under "Keep the computer awake". As well as keeping the computer
@@ -3147,7 +3151,7 @@ msgstr ""
 #. on show.
 #: ui/behavioursettingspage.cpp:76
 msgid "Keeps the display on too"
-msgstr ""
+msgstr "Mantiene attivo anche lo schermo"
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3186,7 +3190,7 @@ msgstr "Copertina grande dell'album (senza dettagli)"
 msgid "Large sidebar"
 msgstr "Pannello laterale grande"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Ultima riproduzione"
 
@@ -3219,7 +3223,7 @@ msgstr "Wiki di Last.fm"
 msgid "Latin"
 msgstr "Latina"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Tracce meno apprezzate"
 
@@ -3331,7 +3335,7 @@ msgstr "Caricamento database dell'iPod"
 msgid "Loading smart playlist"
 msgstr "Caricamento scaletta veloce"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Caricamento brani in corso"
 
@@ -3349,7 +3353,7 @@ msgstr "Caricamento delle tracce"
 msgid "Loading tracks info"
 msgstr "Caricamento informazioni della traccia"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3587,7 +3591,7 @@ msgstr "Stile della barra dell'atmosfera"
 msgid "Moodbars"
 msgstr "Barre dell'atmosfera"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Più riprodotti"
 
@@ -3679,7 +3683,7 @@ msgstr "Rete o indirizzo su cui ascoltare, come 192.168.1.0/24 o 192.168.1.23:"
 msgid "Never"
 msgstr "Mai"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Mai riprodotte"
 
@@ -3718,7 +3722,7 @@ msgstr "Le nuove tracce saranno aggiunte automaticamente."
 msgid "Newest Albums"
 msgstr "Album più recenti"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Tracce più recenti"
 
@@ -4013,7 +4017,7 @@ msgstr "Anno originale"
 msgid "Original year - Album"
 msgstr "Anno originale - Album"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Supporto tag Anno originale"
 
@@ -4183,7 +4187,7 @@ msgstr "Opzioni del lettore"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:158
 msgid "Playing music"
-msgstr ""
+msgstr "Riprodurre la musica"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -4191,7 +4195,7 @@ msgstr ""
 #. gets it from this computer.
 #: core/sleepinhibitor.cpp:164
 msgid "Playing music on another device"
-msgstr ""
+msgstr "Riprodurre la musica su un altro dispositivo"
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -4810,7 +4814,7 @@ msgstr "Gestore raggruppamenti salvati"
 msgid "Saving cue files is not yet supported."
 msgstr "Il salvataggio dei file cue non è ancora supportato."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Salvare le statistiche dei brani nei file"
 
@@ -5002,7 +5006,7 @@ msgstr "Seleziona..."
 #. computer.
 #: core/sleepinhibitor.cpp:170
 msgid "Sending songs to a remote"
-msgstr ""
+msgstr "Inviare i brani a un dispositivo remoto"
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -5194,7 +5198,7 @@ msgstr "Mostra/Nascondi"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:150
 msgid "Showing visualizations full screen"
-msgstr ""
+msgstr "Mostrare le visualizzazioni a schermo intero"
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5285,7 +5289,7 @@ msgstr "Pannello laterale piccolo"
 msgid "Smart playlist"
 msgstr "Scaletta veloce"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Scalette veloci"
 
@@ -5719,7 +5723,7 @@ msgstr "Questa opzione può essere modificata nelle preferenze di \"Comportament
 msgid "This type of device is not supported: %1"
 msgstr "Questi tipo di dispositivo non è supportato: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr "Questa versione di Clementine non può sincronizzarlo ancora."
 
@@ -5890,8 +5894,8 @@ msgstr "Impossibile connettersi"
 msgid "Unable to download %1 (%2)"
 msgstr "Impossibile scaricare %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6076,7 +6080,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Bitrate variabile"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Artisti vari"
@@ -6194,7 +6198,7 @@ msgstr "Quando l'elenco è vuoto..."
 #. for as long as Clementine is running, whatever it's doing.
 #: ui/behavioursettingspage.cpp:47
 msgid "While Clementine is open"
-msgstr ""
+msgstr "Mentre Clementine è aperto"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6202,7 +6206,7 @@ msgstr ""
 #. whether the user picked them or they're being synced.
 #: ui/behavioursettingspage.cpp:65
 msgid "While a remote is downloading or syncing"
-msgstr ""
+msgstr "Mentre un dispositivo remoto sta scaricando o sincronizzando"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6210,14 +6214,14 @@ msgstr ""
 #. or the like, which gets the music from this computer.
 #: ui/behavioursettingspage.cpp:59
 msgid "While playing on another device"
-msgstr ""
+msgstr "Durante la riproduzione su un altro dispositivo"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
 #: ui/behavioursettingspage.cpp:70
 msgid "While visualizations are full screen"
-msgstr ""
+msgstr "Mentre le visualizzazioni sono a schermo intero"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."

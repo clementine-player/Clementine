@@ -93,7 +93,7 @@ msgstr " písně"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nNyní není připojen. Clementine začne naslouchat, jakmile se tento počítač připojí."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -104,7 +104,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nTento počítač je %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -245,7 +245,7 @@ msgstr "%1 přeneseno"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
-msgstr ""
+msgstr "%1  %2\nTento počítač je %3"
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -429,7 +429,7 @@ msgstr "44,100 Hz"
 msgid "48,000Hz"
 msgstr "48,000 Hz"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 náhodných skladeb"
 
@@ -652,11 +652,11 @@ msgstr "Přidat složku..."
 
 #: ui/networkremotesettingspage.cpp:342
 msgid "Add network or address"
-msgstr ""
+msgstr "Přidat síť nebo adresu"
 
 #: ../bin/src/ui_networkremotesettingspage.h:346
 msgid "Add network or address..."
-msgstr ""
+msgstr "Přidat síť nebo adresu..."
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -767,6 +767,10 @@ msgstr "Přidat k rozhlasovým proudům"
 msgid "Add wiimotedev action"
 msgstr "Přidat činnost wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr "Přidáno za posledních 30 dní"
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Přidána tento měsíc"
@@ -859,7 +863,7 @@ msgstr "Všechny soubory (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Všechny sítě"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -870,7 +874,7 @@ msgstr "Všechny seznamy skladeb (%1)"
 msgid "All the translators"
 msgstr "Všichni překladatelé"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Všechny skladby"
 
@@ -882,11 +886,11 @@ msgstr "Povolit klientu stahování hudby z tohoto počítače."
 msgid "Allow downloads"
 msgstr "Povolit stahování"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
-msgstr ""
+msgstr "V nastavení síťového dálkového ovládání v aplikaci Clementine povolte stahování, abyste si mohli skladby ponechat v tomto telefonu."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -1205,7 +1209,7 @@ msgstr "Mechanika CD"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Podpora pro list CUE"
 
@@ -2181,13 +2185,13 @@ msgstr "Doba trvání"
 #. headphones.
 #: ui/behavioursettingspage.cpp:53
 msgid "During playback"
-msgstr ""
+msgstr "Během přehrávání"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
 msgstr "Je zapnut dynamický režim"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Dynamický náhodný výběr"
 
@@ -2291,7 +2295,7 @@ msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 msgid ""
 "Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
 "192.168.1.23."
-msgstr ""
+msgstr "Zadejte síť, například 192.168.1.0/24 nebo fd00::/64, případně adresu, například 192.168.1.23."
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -2390,7 +2394,7 @@ msgstr "Chyba při zpracovávání %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Chyba  při nahrávání zvukového CD"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Přehrané skladby"
 
@@ -2557,7 +2561,7 @@ msgstr "Rychlý"
 msgid "Fast search"
 msgstr "Rychlé hledání"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Oblíbené skladby"
 
@@ -3137,7 +3141,7 @@ msgstr "Při zavření okna nechat běžet na pozadí"
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Keep the computer awake"
-msgstr ""
+msgstr "Zajistit, aby počítač zůstal vzhůru"
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
@@ -3147,7 +3151,7 @@ msgstr "Zachovat původní soubory"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:154
 msgid "Keeping the computer awake while Clementine is open"
-msgstr ""
+msgstr "Udržení počítače v zapnutém stavu, dokud je spuštěn přehrávač Clementine"
 
 #. TRANSLATORS: The tooltip of "While visualizations are full screen",
 #. under "Keep the computer awake". As well as keeping the computer
@@ -3155,7 +3159,7 @@ msgstr ""
 #. on show.
 #: ui/behavioursettingspage.cpp:76
 msgid "Keeps the display on too"
-msgstr ""
+msgstr "Zajišťuje, že obrazovka zůstane zapnutá"
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3194,7 +3198,7 @@ msgstr "Velký obal alba (žádné podrobnosti)"
 msgid "Large sidebar"
 msgstr "Velký postranní panel"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Naposledy hrané"
 
@@ -3227,7 +3231,7 @@ msgstr "Wiki pro Last.fm"
 msgid "Latin"
 msgstr "Latinskoamerická hudba"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Nejméně oblíbené skladby"
 
@@ -3288,7 +3292,7 @@ msgstr "Poslechněte si dále"
 msgid ""
 "Listens on every address this computer has:\n"
 "%1"
-msgstr ""
+msgstr "Naslouchá na všech adresách, které tento počítač má:\n%1"
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3339,7 +3343,7 @@ msgstr "Nahrává se databáze iPod"
 msgid "Loading smart playlist"
 msgstr "Nahrává se chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "Nahrávají se písně"
 
@@ -3357,7 +3361,7 @@ msgstr "Nahrávají se skladby"
 msgid "Loading tracks info"
 msgstr "Nahrávají se informace o skladbě"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3595,7 +3599,7 @@ msgstr "Styl ukazatele nálady"
 msgid "Moodbars"
 msgstr "Ukazatelé nálady"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Nejvíce hráno"
 
@@ -3681,13 +3685,13 @@ msgstr "Nastavení síťového dálkového ovládání..."
 #: ui/networkremotesettingspage.cpp:337
 msgid ""
 "Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
-msgstr ""
+msgstr "Síť nebo adresa, na které se má naslouchat, například 192.168.1.0/24 nebo 192.168.1.23:"
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
 msgstr "Nikdy"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Nikdy nehráno"
 
@@ -3726,7 +3730,7 @@ msgstr "Nové písně budou přidány automaticky."
 msgid "Newest Albums"
 msgstr "Nejnovější alba"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Nejnovější skladby"
 
@@ -4021,7 +4025,7 @@ msgstr "Původní rok"
 msgid "Original year - Album"
 msgstr "Původní rok - Album"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Podpora pro značku Původní rok"
 
@@ -4191,7 +4195,7 @@ msgstr "Nastavení přehrávače"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:158
 msgid "Playing music"
-msgstr ""
+msgstr "Přehrávání hudby"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -4199,7 +4203,7 @@ msgstr ""
 #. gets it from this computer.
 #: core/sleepinhibitor.cpp:164
 msgid "Playing music on another device"
-msgstr ""
+msgstr "Přehrávání hudby na jiném zařízení"
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -4818,7 +4822,7 @@ msgstr "Spravce uložených seskupení"
 msgid "Saving cue files is not yet supported."
 msgstr "Ukládání souborů CUE není podporováno."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Ukládání statistiky písní do souborů písní"
 
@@ -5010,7 +5014,7 @@ msgstr "Vybrat..."
 #. computer.
 #: core/sleepinhibitor.cpp:170
 msgid "Sending songs to a remote"
-msgstr ""
+msgstr "Odesílání písní do vzdáleného zařízení"
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -5202,7 +5206,7 @@ msgstr "Ukázat/Skrýt"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:150
 msgid "Showing visualizations full screen"
-msgstr ""
+msgstr "Zobrazení vizualizací na celou obrazovku"
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5293,7 +5297,7 @@ msgstr "Malý postranní panel"
 msgid "Smart playlist"
 msgstr "Chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
@@ -5727,9 +5731,9 @@ msgstr "Tuto volbu lze změnit v nastavení Chování"
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zařízení není podporován: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
-msgstr ""
+msgstr "Tato verze aplikace Clementine tuto funkci zatím neumí synchronizovat."
 
 #: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
@@ -5898,8 +5902,8 @@ msgstr "Nelze se připojit"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6084,7 +6088,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Proměnlivý datový tok"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Různí umělci"
@@ -6202,7 +6206,7 @@ msgstr "Při prázdném seznamu..."
 #. for as long as Clementine is running, whatever it's doing.
 #: ui/behavioursettingspage.cpp:47
 msgid "While Clementine is open"
-msgstr ""
+msgstr "Když je Clementine otevřený"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6210,7 +6214,7 @@ msgstr ""
 #. whether the user picked them or they're being synced.
 #: ui/behavioursettingspage.cpp:65
 msgid "While a remote is downloading or syncing"
-msgstr ""
+msgstr "Když se z dálkového zařízení stahuje nebo se synchronizuje"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6218,14 +6222,14 @@ msgstr ""
 #. or the like, which gets the music from this computer.
 #: ui/behavioursettingspage.cpp:59
 msgid "While playing on another device"
-msgstr ""
+msgstr "Když se hraje na jiném zařízení"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
 #: ui/behavioursettingspage.cpp:70
 msgid "While visualizations are full screen"
-msgstr ""
+msgstr "Když jsou vizualizace zobrazeny na celé obrazovce"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."

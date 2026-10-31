@@ -424,7 +424,7 @@ msgstr "44.100 Hz"
 msgid "48,000Hz"
 msgstr "48.000 Hz"
 
-#: library/library.cpp:66
+#: library/library.cpp:80
 msgid "50 random tracks"
 msgstr "50 peces a l’atzar"
 
@@ -762,6 +762,10 @@ msgstr "Afegeix als vostres fluxos de ràdio"
 msgid "Add wiimotedev action"
 msgstr "Afegeix una acció del Wiimotedev"
 
+#: library/library.cpp:134
+msgid "Added in the last 30 days"
+msgstr ""
+
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
 msgstr "Afegides aquest mes"
@@ -865,7 +869,7 @@ msgstr "Totes les llistes de reproducció (%1)"
 msgid "All the translators"
 msgstr "Tots els traductors"
 
-#: library/library.cpp:102
+#: library/library.cpp:116
 msgid "All tracks"
 msgstr "Totes les peces"
 
@@ -877,7 +881,7 @@ msgstr "Permet que un client baixi música d’aquest ordinador."
 msgid "Allow downloads"
 msgstr "Permet les baixades"
 
-#: networkremote/sync/mediasync.cpp:73
+#: networkremote/sync/mediasync.cpp:87
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1200,7 +1204,7 @@ msgstr "Unitat de CD"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:140
 msgid "CUE sheet support"
 msgstr "Compatibilitat amb fulles CUE"
 
@@ -2182,7 +2186,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "S’ha activat el mode dinàmic"
 
-#: library/library.cpp:115
+#: library/library.cpp:129
 msgid "Dynamic random mix"
 msgstr "Mescla dinàmica aleatòria"
 
@@ -2385,7 +2389,7 @@ msgstr "S’ha produït un error en processar %1: %2"
 msgid "Error while loading audio CD"
 msgstr "S’ha produït un error en carregar el CD d’àudio"
 
-#: library/library.cpp:70
+#: library/library.cpp:84
 msgid "Ever played"
 msgstr "Reproduïdes alguna vegada"
 
@@ -2552,7 +2556,7 @@ msgstr "Ràpid"
 msgid "Fast search"
 msgstr "Cerca ràpida"
 
-#: library/library.cpp:92
+#: library/library.cpp:106
 msgid "Favourite tracks"
 msgstr "Peces preferides"
 
@@ -3189,7 +3193,7 @@ msgstr "Coberta de l’àlbum gran (sense detalls)"
 msgid "Large sidebar"
 msgstr "Barra lateral gran"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "Last played"
 msgstr "Reproduïdes l’última vegada"
 
@@ -3222,7 +3226,7 @@ msgstr "Wiki de Last.fm"
 msgid "Latin"
 msgstr "Llatina"
 
-#: library/library.cpp:106
+#: library/library.cpp:120
 msgid "Least favourite tracks"
 msgstr "Cançons menys preferides"
 
@@ -3334,7 +3338,7 @@ msgstr "S’està carregant la base de dades de l’iPod"
 msgid "Loading smart playlist"
 msgstr "S’està carregant la llista de reproducció intel·ligent"
 
-#: library/librarymodel.cpp:172
+#: library/librarymodel.cpp:174
 msgid "Loading songs"
 msgstr "S’estan carregant les cançons"
 
@@ -3352,7 +3356,7 @@ msgstr "S’estan carregant les peces"
 msgid "Loading tracks info"
 msgstr "S’està carregant la informació de les peces"
 
-#: library/librarymodel.cpp:166
+#: library/librarymodel.cpp:168
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:175
 #: widgets/widgetfadehelper.cpp:97 ../bin/src/ui_addpodcastdialog.h:178
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_organisedialog.h:187
@@ -3590,7 +3594,7 @@ msgstr "Estil de barres d’ànim"
 msgid "Moodbars"
 msgstr "Barres d’ànim"
 
-#: library/library.cpp:88
+#: library/library.cpp:102
 msgid "Most played"
 msgstr "Més reproduïdes"
 
@@ -3682,7 +3686,7 @@ msgstr ""
 msgid "Never"
 msgstr "Mai"
 
-#: library/library.cpp:77
+#: library/library.cpp:91
 msgid "Never played"
 msgstr "Mai reproduïdes"
 
@@ -3721,7 +3725,7 @@ msgstr "Les peces noves s’afegiran automàticament."
 msgid "Newest Albums"
 msgstr "Àlbums nous"
 
-#: library/library.cpp:96
+#: library/library.cpp:110
 msgid "Newest tracks"
 msgstr "Peces més recents"
 
@@ -4016,7 +4020,7 @@ msgstr "Any original"
 msgid "Original year - Album"
 msgstr "Any original - àlbum"
 
-#: library/library.cpp:122
+#: library/library.cpp:141
 msgid "Original year tag support"
 msgstr "Compatibilitat amb l’etiqueta d’any original"
 
@@ -4813,7 +4817,7 @@ msgstr "Gestor d’agrupacions desades"
 msgid "Saving cue files is not yet supported."
 msgstr "Encara no s’admet el desament de fitxers .cue."
 
-#: library/library.cpp:202
+#: library/library.cpp:221
 msgid "Saving songs statistics into songs files"
 msgstr "Es desen les estadístiques en els fitxers de les cançons"
 
@@ -5288,7 +5292,7 @@ msgstr "Barra lateral petita"
 msgid "Smart playlist"
 msgstr "Llista de reproducció intel·ligent"
 
-#: library/librarymodel.cpp:1389
+#: library/librarymodel.cpp:1391
 msgid "Smart playlists"
 msgstr "Llistes de reproducció intel·ligents"
 
@@ -5722,7 +5726,7 @@ msgstr "Podeu modificar aquesta opció a la pestanya «Comportament» a Preferè
 msgid "This type of device is not supported: %1"
 msgstr "Aquest tipus de dispositiu no és compatible: %1"
 
-#: networkremote/sync/mediasync.cpp:94
+#: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
@@ -5893,8 +5897,8 @@ msgstr "No s’ha pogut connectar"
 msgid "Unable to download %1 (%2)"
 msgstr "No es pot baixar %1 (%2)"
 
-#: core/song.cpp:457 library/librarymodel.cpp:377 library/librarymodel.cpp:382
-#: library/librarymodel.cpp:386 library/librarymodel.cpp:1181
+#: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
+#: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:306
 #: playlist/playlistmanager.cpp:570 playlist/playlistmanager.cpp:571
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:133
@@ -6079,7 +6083,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
-#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:303
+#: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
 msgid "Various artists"
 msgstr "Artistes diversos"
