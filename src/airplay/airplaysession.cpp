@@ -32,6 +32,7 @@
 #include <cmath>
 
 #include "airplaycrypto.h"
+#include "airplaydmap.h"
 #include "airplayplist.h"
 #include "airplayrtspconnection.h"
 #include "airplaysrp.h"
@@ -54,6 +55,10 @@ const int kEventAttempts = 5;
 // How long the first SETUP takes before it's probably waiting for the
 // receiver's user.
 const int kApprovalNoticeMsec = 1000;
+
+// How far before a song's start its progress says to show it from, as
+// OwnTone's AIRPLAY_MD_DELAY_STARTUP has it.
+const quint32 kProgressDisplayFrames = 15360;
 
 }  // namespace
 
@@ -83,7 +88,10 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
       event_port_(0),
       event_attempts_(0),
       stream_(nullptr),
-      volume_(-1) {
+      volume_(-1),
+      have_now_playing_(false),
+      item_id_(QRandomGenerator::global()->generate64()),
+      have_artwork_(false) {
   connection_->set_client_name(options_.name);
   connection_->set_timeouts(options_.connect_timeout_msec,
                             options_.request_timeout_msec);
@@ -651,8 +659,81 @@ void AirPlaySession::BecomeReady() {
   // AirPlay 1; older AirPlay 1 receivers don't have /feedback.
   if (device_.supports_airplay2()) feedback_timer_->start();
   if (volume_ >= 0) SetVolume(volume_);
+  if (have_now_playing_) SendNowPlaying();
+  if (have_artwork_) SendArtwork();
   qLog(Info) << "Streaming to AirPlay receiver" << device_.name;
   emit Ready();
+}
+
+void AirPlaySession::SetNowPlaying(const QString& title, const QString& artist,
+                                   const QString& album) {
+  title_ = title;
+  artist_ = artist;
+  album_ = album;
+  // A new id for each song, which receivers tell songs apart by.
+  ++item_id_;
+  have_now_playing_ = true;
+  if (state_ == State::Ready) SendNowPlaying();
+}
+
+void AirPlaySession::SetArtwork(const QByteArray& artwork) {
+  artwork_ = artwork;
+  have_artwork_ = true;
+  if (state_ == State::Ready) SendArtwork();
+}
+
+quint32 AirPlaySession::PlayingRtpTime() const {
+  quint16 seq;
+  quint32 next;
+  stream_->Next(&seq, &next);
+  return next - AirPlayStream::kLatencyFrames;
+}
+
+// What's playing now applies from the song's start, which it's sent at, as
+// OwnTone sends it.
+AirPlayRtspConnection::Headers AirPlaySession::RtpInfoNow() const {
+  return {{"RTP-Info", "rtptime=" + QByteArray::number(PlayingRtpTime())}};
+}
+
+// As iTunes sends it: a DMAP listing item ("mlit") with the song's
+// persistent id ("mper"), name ("minm"), artist ("asar") and album ("asal").
+void AirPlaySession::SendNowPlaying() {
+  const QByteArray item = airplay::dmap::Write({
+      {"mper", airplay::Bytes(qToBigEndian(item_id_))},
+      {"minm", title_.toUtf8()},
+      {"asar", artist_.toUtf8()},
+      {"asal", album_.toUtf8()},
+  });
+  connection_->Rtsp("SET_PARAMETER", RtpInfoNow(), "application/x-dmap-tagged",
+                    airplay::dmap::Write({{"mlit", item}}), nullptr);
+}
+
+// No artwork is "image/none", as iTunes sends it, which clears the last.
+void AirPlaySession::SendArtwork() {
+  connection_->Rtsp("SET_PARAMETER", RtpInfoNow(),
+                    artwork_.isEmpty() ? "image/none" : "image/jpeg", artwork_,
+                    nullptr);
+}
+
+// RAOP's progress, as OwnTone sends it: the RTP timestamps of the song's
+// start, less a little (15360 frames, 0.35 s), of what's playing now, and of
+// the song's end, with RTP-Info giving the song's start.
+void AirPlaySession::SetProgress(qint64 position_msec, qint64 length_msec) {
+  if (state_ != State::Ready || length_msec <= 0) return;
+  const quint32 now = PlayingRtpTime();
+  const quint32 start =
+      now - quint32(position_msec * AirPlayStream::kSampleRate / 1000);
+  const quint32 end =
+      start + quint32(length_msec * AirPlayStream::kSampleRate / 1000);
+  connection_->Rtsp("SET_PARAMETER",
+                    {{"RTP-Info", "rtptime=" + QByteArray::number(start)}},
+                    "text/parameters",
+                    QString("progress: %1/%2/%3\r\n")
+                        .arg(start - kProgressDisplayFrames)
+                        .arg(now)
+                        .arg(end)
+                        .toUtf8(),
+                    nullptr);
 }
 
 // AirPlay 1's ANNOUNCE: an SDP saying the audio is ALAC, unencrypted. The
