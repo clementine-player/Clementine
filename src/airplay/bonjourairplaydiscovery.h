@@ -35,7 +35,7 @@ class BonjourAirPlayDiscovery : public AirPlayDiscovery {
   Q_OBJECT
 
  public:
-  explicit BonjourAirPlayDiscovery(QObject* parent = nullptr);
+  explicit BonjourAirPlayDiscovery(const char* type, QObject* parent = nullptr);
   ~BonjourAirPlayDiscovery();
 
   void Start() override;
@@ -51,7 +51,8 @@ class BonjourAirPlayDiscovery : public AirPlayDiscovery {
   struct Resolve {
     BonjourAirPlayDiscovery* owner;
     QString service;
-    // The instance name, which is the receiver's name.
+    // The instance name: the receiver's name, or for _raop._tcp its MAC
+    // address and name.
     QString name;
     Operation operation;
   };

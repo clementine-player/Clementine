@@ -289,6 +289,9 @@ void AirPlayEngine::OpenSession() {
   }
   options.show_pin =
       (needs_pin || pair_requested_) && options.receiver_public_key.isEmpty();
+  // A hidden setting, for testing: plays to AirPlay 2 receivers with
+  // AirPlay 1.
+  options.force_airplay1 = s.value("AirPlay/force_airplay1").toBool();
   session_->set_options(options);
   session_->Open(device_);
 }

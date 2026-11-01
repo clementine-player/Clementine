@@ -59,8 +59,8 @@ void CallAvahi(QObject* receiver, const QString& path, const char* interface,
 
 }  // namespace
 
-AvahiAirPlayDiscovery::AvahiAirPlayDiscovery(QObject* parent)
-    : AirPlayDiscovery(parent) {}
+AvahiAirPlayDiscovery::AvahiAirPlayDiscovery(const char* type, QObject* parent)
+    : AirPlayDiscovery(type, parent) {}
 
 AvahiAirPlayDiscovery::~AvahiAirPlayDiscovery() {
   // Avahi frees the browser when our connection closes too, but the system
@@ -76,10 +76,10 @@ AvahiAirPlayDiscovery::~AvahiAirPlayDiscovery() {
 void AvahiAirPlayDiscovery::Start() {
   if (!browser_path_.isEmpty()) return;
 
-  CallAvahi(
-      this, "/", kServer2Interface, "ServiceBrowserPrepare",
-      {kAvahiIfUnspec, kAvahiProtoUnspec, QString(kServiceType), QString(), 0u},
-      [this](const QDBusMessage& reply) { BrowserPrepared(reply); });
+  CallAvahi(this, "/", kServer2Interface, "ServiceBrowserPrepare",
+            {kAvahiIfUnspec, kAvahiProtoUnspec, QString(service_type()),
+             QString(), 0u},
+            [this](const QDBusMessage& reply) { BrowserPrepared(reply); });
 }
 
 void AvahiAirPlayDiscovery::BrowserPrepared(const QDBusMessage& reply) {
@@ -149,11 +149,11 @@ void AvahiAirPlayDiscovery::Resolved(const QString& service,
   }
 
   AirPlayDevice device;
-  if (!device.ParseTxt(qdbus_cast<QList<QByteArray>>(args[9]))) {
+  if (!ParseService(args[2].toString(), qdbus_cast<QList<QByteArray>>(args[9]),
+                    &device)) {
     qLog(Debug) << "AirPlay service" << service << "has no device id";
     return;
   }
-  device.name = args[2].toString();
   device.address = QHostAddress(args[7].toString());
   device.port = args[8].value<quint16>();
 
