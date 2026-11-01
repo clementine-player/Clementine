@@ -108,7 +108,7 @@ msgstr " песен"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nСейчас нет подключения. Clementine начинает прослушивание, когда этот компьютер подключается к нему."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -119,7 +119,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nЭтот компьютер — %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -260,7 +260,7 @@ msgstr "%1 передано"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
-msgstr ""
+msgstr "%1  %2\nЭтот компьютер — %3"
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -667,11 +667,11 @@ msgstr "Добавить папку…"
 
 #: ui/networkremotesettingspage.cpp:342
 msgid "Add network or address"
-msgstr ""
+msgstr "Добавить сеть или адрес"
 
 #: ../bin/src/ui_networkremotesettingspage.h:346
 msgid "Add network or address..."
-msgstr ""
+msgstr "Добавить сеть или адрес…"
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -784,7 +784,7 @@ msgstr "Добавить действие wiimotedev"
 
 #: library/library.cpp:134
 msgid "Added in the last 30 days"
-msgstr ""
+msgstr "Добавлено за последние 30 дней"
 
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
@@ -878,7 +878,7 @@ msgstr "Все файлы (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Все сети"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -905,7 +905,7 @@ msgstr "Разрешить загрузки"
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
-msgstr ""
+msgstr "Разрешите загрузки в настройках сетевого удалённого доступа Clementine, чтобы хранить песни на этом телефоне."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -2200,7 +2200,7 @@ msgstr "Длительность"
 #. headphones.
 #: ui/behavioursettingspage.cpp:53
 msgid "During playback"
-msgstr ""
+msgstr "Во время воспроизведения"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
@@ -2310,7 +2310,7 @@ msgstr "Введите имя файла для экспортируемых о�
 msgid ""
 "Enter a network like 192.168.1.0/24 or fd00::/64, or an address like "
 "192.168.1.23."
-msgstr ""
+msgstr "Введите сеть, например 192.168.1.0/24 или fd00::/64, либо адрес, например 192.168.1.23."
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -3156,7 +3156,7 @@ msgstr "Продолжить работу в фоне по закрытии ок
 
 #: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Keep the computer awake"
-msgstr ""
+msgstr "Не давать компьютеру засыпать"
 
 #: ../bin/src/ui_organisedialog.h:182
 msgid "Keep the original files"
@@ -3166,7 +3166,7 @@ msgstr "Сохранять исходные файлы"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:154
 msgid "Keeping the computer awake while Clementine is open"
-msgstr ""
+msgstr "Не давать компьютеру засыпать, пока Clementine открыта"
 
 #. TRANSLATORS: The tooltip of "While visualizations are full screen",
 #. under "Keep the computer awake". As well as keeping the computer
@@ -3174,7 +3174,7 @@ msgstr ""
 #. on show.
 #: ui/behavioursettingspage.cpp:76
 msgid "Keeps the display on too"
-msgstr ""
+msgstr "Также не даёт отключаться дисплею"
 
 #: ../bin/src/ui_mainwindow.h:749
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
@@ -3307,7 +3307,7 @@ msgstr "Прослушивать"
 msgid ""
 "Listens on every address this computer has:\n"
 "%1"
-msgstr ""
+msgstr "Прослушивает все адреса этого компьютера:\n%1"
 
 #: ui/equalizer.cpp:138
 msgid "Live"
@@ -3700,7 +3700,7 @@ msgstr "Настройки удалённого доступа…"
 #: ui/networkremotesettingspage.cpp:337
 msgid ""
 "Network or address to listen on, such as 192.168.1.0/24 or 192.168.1.23:"
-msgstr ""
+msgstr "Сеть или адрес для прослушивания, например 192.168.1.0/24 или 192.168.1.23:"
 
 #: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:532
 msgid "Never"
@@ -4210,7 +4210,7 @@ msgstr "Настройки проигрывателя"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:158
 msgid "Playing music"
-msgstr ""
+msgstr "Играет музыку"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -4218,7 +4218,7 @@ msgstr ""
 #. gets it from this computer.
 #: core/sleepinhibitor.cpp:164
 msgid "Playing music on another device"
-msgstr ""
+msgstr "Играет музыку на другом устройстве"
 
 #: widgets/outputbutton.cpp:116
 #, qt-format
@@ -5029,7 +5029,7 @@ msgstr "Выбрать…"
 #. computer.
 #: core/sleepinhibitor.cpp:170
 msgid "Sending songs to a remote"
-msgstr ""
+msgstr "Отправка песен на удалённое устройство"
 
 #: devices/udisks2lister.cpp:82
 msgid "Serial number"
@@ -5221,7 +5221,7 @@ msgstr "Показать/скрыть"
 #. the system shows in its list of what's stopping it from sleeping.
 #: core/sleepinhibitor.cpp:150
 msgid "Showing visualizations full screen"
-msgstr ""
+msgstr "Показ визуализаций на весь экран"
 
 #: playlist/playlistsequence.cpp:211 ../bin/src/ui_playlistsequence.h:122
 msgid "Shuffle"
@@ -5748,7 +5748,7 @@ msgstr "Не поддерживаемый тип устройства: %1"
 
 #: networkremote/sync/mediasync.cpp:109
 msgid "This version of Clementine can't sync this yet."
-msgstr ""
+msgstr "Эта версия Clementine пока не умеет синхронизировать это."
 
 #: ../bin/src/ui_behavioursettingspage.h:453
 msgid "Time step"
@@ -6221,7 +6221,7 @@ msgstr "Если список поиска пуст…"
 #. for as long as Clementine is running, whatever it's doing.
 #: ui/behavioursettingspage.cpp:47
 msgid "While Clementine is open"
-msgstr ""
+msgstr "Пока Clementine открыт"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6229,7 +6229,7 @@ msgstr ""
 #. whether the user picked them or they're being synced.
 #: ui/behavioursettingspage.cpp:65
 msgid "While a remote is downloading or syncing"
-msgstr ""
+msgstr "Пока удалённое устройство скачивает или синхронизирует"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6237,14 +6237,14 @@ msgstr ""
 #. or the like, which gets the music from this computer.
 #: ui/behavioursettingspage.cpp:59
 msgid "While playing on another device"
-msgstr ""
+msgstr "При воспроизведении на другом устройстве"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
 #: ui/behavioursettingspage.cpp:70
 msgid "While visualizations are full screen"
-msgstr ""
+msgstr "Пока визуализации на весь экран"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."
