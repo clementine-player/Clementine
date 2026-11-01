@@ -39,15 +39,15 @@ class AirPlayStream : public QObject {
   Q_OBJECT
 
  public:
-  static const int kSampleRate = 44100;
+  static constexpr int kSampleRate = 44100;
   // What every AirPlay sender puts in a packet, from AirTunes' ALAC frames.
-  static const int kFramesPerPacket = 352;
+  static constexpr int kFramesPerPacket = 352;
   // Interleaved S16 stereo.
-  static const int kFrameSize = 4;
+  static constexpr int kFrameSize = 4;
   // How far behind the RTP timestamps receivers play (1.5 s): AirTunes'
   // traditional 2 s less the 0.5 s it counts from, as pyatv and
   // shairport-sync have it.
-  static const quint32 kLatencyFrames = 22050 + kSampleRate;
+  static constexpr quint32 kLatencyFrames = 22050 + kSampleRate;
 
   // |audio_key| is the 32-byte key sent in SETUP as "shk", or empty for
   // AirPlay 1's unencrypted ALAC. Sync packets

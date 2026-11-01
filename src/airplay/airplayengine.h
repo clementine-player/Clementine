@@ -18,15 +18,18 @@
 #ifndef AIRPLAY_AIRPLAYENGINE_H_
 #define AIRPLAY_AIRPLAYENGINE_H_
 
+#include <QImage>
 #include <QPointer>
 #include <memory>
 
 #include "airplaydevice.h"
+#include "core/song.h"
 #include "engines/gstengine.h"
 
 class AirPlaySession;
 class QInputDialog;
 class Application;
+class QTimer;
 
 // The engine for one AirPlay receiver: an output of the EngineRouter.
 //
@@ -39,6 +42,9 @@ class Application;
 // receiver may first ask its user to allow, and kept until playback stops.
 // Pausing leaves the receiver to run dry, and flushes it on resuming, as
 // does a seek. Clementine's volume slider sets the receiver's volume.
+//
+// The receiver shows the song that's playing, its cover and its progress,
+// from the song Clementine's player has as current.
 class AirPlayEngine : public GstEngine {
   Q_OBJECT
 
@@ -88,6 +94,8 @@ class AirPlayEngine : public GstEngine {
   void PairRequested();
   void ForgetPairing();
   void StreamFlushed();
+  void ArtLoaded(const Song& song, const QString& uri, const QImage& image);
+  void SendProgress();
 
  private:
   class Target;
@@ -103,6 +111,8 @@ class AirPlayEngine : public GstEngine {
   // playback stops and with the engine.
   QInputDialog* NewDialog(const QString& kind);
   void CloseDialog();
+  // Tells the session what's playing, while it's open.
+  void SendNowPlaying();
 
   AirPlayDevice device_;
   AirPlaySession* session_;
@@ -119,6 +129,12 @@ class AirPlayEngine : public GstEngine {
   QAction* pair_action_;
   QPointer<QInputDialog> dialog_;
   QAction* forget_action_;
+  // What's playing, and its cover, which is made a JPEG only when the
+  // session's open.
+  Song song_;
+  QImage cover_;
+  // Sends the progress once the position has settled, after a change.
+  QTimer* progress_timer_;
 };
 
 #endif  // AIRPLAY_AIRPLAYENGINE_H_

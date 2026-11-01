@@ -59,6 +59,20 @@ time to time needs watching for longer.
 So the Mac doesn't play AirPlay 1 audio, at least now; AirPlay 1 is for
 receivers that only have it.
 
+### Now playing, over AirPlay 2
+
+| Check | Result |
+| --- | --- |
+| Title, artist, album | Shown, from DMAP in SET_PARAMETER, and updated for the next song. |
+| Cover | Shown, from a JPEG in SET_PARAMETER. |
+| A new cover for the next song | Accepted, but the first cover stayed for the rest of the session, with a new DMAP persistent id ("mper") or resent once the song was playing. `image/none` didn't clear it either. |
+| Progress | Applied when it changed (a seek showed 0:20 of 1:00), but never counted up, and Now Playing showed a Play button, as if paused. The same with progress as OwnTone sends it. |
+
+So over realtime audio the Mac shows what's playing and applies seeks, but
+shows it as paused and keeps the first song's cover. It may want buffered
+audio (type 103) with SETRATEANCHORTIME, or MediaRemote, for those, which
+aren't implemented.
+
 ## shairport-sync 4.3.7 (classic AirPlay)
 
 On Linux, run in the foreground with its audio written to a file, tested
@@ -69,3 +83,4 @@ On Linux, run in the foreground with its audio written to a file, tested
 | Playing | The uncompressed ALAC decoded to the tone sent, 440 Hz then 660 Hz, with no gaps. |
 | Volume | Taken as −3.10 dB for 70%. |
 | Password | Advertised (`pw=true`), so asked for before connecting; a wrong one answered the Digest challenge (realm "raop") once and was refused; the right one played. |
+| Now playing | Its metadata pipe gave each song's title, artist, album and persistent id, each song's cover (11.5 and 8.7 kB JPEGs) and progress. |
