@@ -23,6 +23,9 @@
 !define CAPABILITIES_SHOW_ICONS "Command to show icons"
 
 SetCompressor /SOLID lzma
+; Without this Windows bitmap-scales the installer on hi-DPI displays, so it
+; looks blurry.
+ManifestDPIAware true
 !include "MUI2.nsh"
 !include "FileFunc.nsh"
 !include "Capabilities.nsh"
