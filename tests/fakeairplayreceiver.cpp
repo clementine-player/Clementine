@@ -303,6 +303,7 @@ void FakeAirPlayReceiver::ProcessRequests() {
                                          ? request.method
                                          : request.method + " " + request.uri);
       client_names_ << QString::fromUtf8(request.Header("X-Apple-Client-Name"));
+      dacp_ids_ << QString::fromUtf8(request.Header("DACP-ID"));
       held_ = request;
     }
     if (!Handle(*held_)) return;
@@ -446,6 +447,27 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
     }
     Respond(request, 200);
   } else if (request.method == "POST" && request.uri == "/feedback") {
+    Respond(request, 200);
+  } else if (request.method == "POST" && request.uri == "/command") {
+    if (airplay1_) errors_ << "POST /command in AirPlay 1";
+    QVariant body;
+    airplay::bplist::Read(request.body, &body);
+    const QVariantMap command = body.toMap();
+    const QVariantMap params = command.value("params").toMap();
+    const QString policy = params.value("mergePolicy").toString();
+    if (command.value("type") == "updateMRPlaybackState") {
+      playback_states_ << params.value("mrPlaybackState").toInt();
+    } else if (command.value("type") == "updateMRSupportedCommands") {
+      supported_commands_
+          << params.value("mrSupportedCommandsFromSender").toList();
+    } else if (command.value("type") != "updateMRNowPlayingInfo" ||
+               params.value("type") != "npi-text" ||
+               (policy != "replace" && policy != "update")) {
+      errors_ << "POST /command of something else";
+    } else if (!params.value("params").toMap().isEmpty()) {
+      now_playing_infos_ << params.value("params").toMap();
+      merge_policies_ << policy;
+    }
     Respond(request, 200);
   } else if (request.method == "TEARDOWN") {
     Respond(request, 200);

@@ -262,6 +262,14 @@ void AirPlayEngine::CloseDialog() {
   dialog_.clear();
 }
 
+// The receiver shows it paused where it is.
+void AirPlayEngine::Pause() {
+  GstEngine::Pause();
+  progress_timer_->stop();
+  session_->SetProgress(position_nanosec() / kNsecPerMsec,
+                        song_.length_nanosec() / kNsecPerMsec, false);
+}
+
 // The receiver ran dry while paused: it plays from what comes next.
 void AirPlayEngine::Unpause() {
   session_->Flush();
@@ -292,7 +300,8 @@ void AirPlayEngine::SendNowPlaying() {
 
 void AirPlayEngine::SendProgress() {
   session_->SetProgress(position_nanosec() / kNsecPerMsec,
-                        song_.length_nanosec() / kNsecPerMsec);
+                        song_.length_nanosec() / kNsecPerMsec,
+                        state() == Engine::Playing);
 }
 
 void AirPlayEngine::SetVolumeSW(uint percent) {

@@ -17,6 +17,9 @@
 
 #include "airplaysession.h"
 
+#include <QCryptographicHash>
+#include <QDateTime>
+#include <QImage>
 #include <QNetworkDatagram>
 #include <QRandomGenerator>
 #include <QSettings>
@@ -91,8 +94,21 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
       volume_(-1),
       have_now_playing_(false),
       item_id_(QRandomGenerator::global()->generate64()),
-      have_artwork_(false) {
+      info_replace_pending_(true),
+      have_artwork_(false),
+      position_msec_(0),
+      length_msec_(-1),
+      playing_(false),
+      sent_length_msec_(-1),
+      have_progress_(false),
+      sent_playback_state_(0),
+      now_playing_info_timer_(new QTimer(this)) {
   connection_->set_client_name(options_.name);
+  position_clock_.start();
+  now_playing_info_timer_->setSingleShot(true);
+  now_playing_info_timer_->setInterval(0);
+  connect(now_playing_info_timer_, SIGNAL(timeout()),
+          SLOT(SendNowPlayingInfo()));
   connection_->set_timeouts(options_.connect_timeout_msec,
                             options_.request_timeout_msec);
   connect(connection_, SIGNAL(Connected()), SLOT(Connected()));
@@ -163,6 +179,12 @@ void AirPlaySession::Open(const AirPlayDevice& device) {
     device_.plain_audio = device.raop_plain_audio;
   }
   airplay1_ = device_.airplay1 || options_.force_airplay1;
+  // The same id in every session, as OwnTone sends its own: the sender id,
+  // as hex.
+  if (!options_.sender_id.isEmpty()) {
+    connection_->set_dacp_id(
+        QString(options_.sender_id).remove(':').toLatin1());
+  }
   state_ = State::Connecting;
   if (airplay1_ && !device_.plain_audio) {
     Fail(tr("%1 only takes encrypted AirPlay 1 audio, which Clementine "
@@ -177,15 +199,14 @@ void AirPlaySession::Open(const AirPlayDevice& device) {
 }
 
 void AirPlaySession::Close() {
-  if (state_ == State::SetUp || state_ == State::Ready) {
-    // Sent, but not waited for.
-    connection_->Rtsp("TEARDOWN", {}, QByteArray(), QByteArray(), nullptr);
-  }
+  // A TEARDOWN is sent ahead of anything still waiting, and not waited for.
+  const bool teardown = state_ == State::SetUp || state_ == State::Ready;
   state_ = State::Closed;
   approval_timer_->stop();
   sync_timer_->stop();
   feedback_timer_->stop();
-  connection_->Close();
+  now_playing_info_timer_->stop();
+  connection_->Close(teardown ? "TEARDOWN" : QByteArray());
   event_socket_->abort();
   event_cipher_.reset();
   event_buffer_.clear();
@@ -435,6 +456,11 @@ void AirPlaySession::SetupSession() {
   body["macAddress"] = sender_id;
   body["sessionUUID"] =
       QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper();
+  // As an iPhone sends them.
+  body["groupUUID"] =
+      QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper();
+  body["sessionCorrelationUUID"] =
+      QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper();
   body["timingPort"] = timing_->localPort();
   body["timingProtocol"] = "NTP";
   body["isMultiSelectAirPlay"] = true;
@@ -476,6 +502,22 @@ void AirPlaySession::SetupSession() {
         qLog(Info) << "Set up a session with AirPlay receiver" << device_.name;
         state_ = State::SetUp;
         emit SetUp();
+
+        // As an iPhone starts: nothing playing yet, and no remote
+        // commands.
+        connection_->Request(
+            "POST", "/command", {}, kPlistType,
+            airplay::bplist::Write(QVariantMap{
+                {"type", "updateMRNowPlayingInfo"},
+                {"params", QVariantMap{{"type", "npi-text"},
+                                       {"mergePolicy", "replace"},
+                                       {"params", QVariantMap()}}}}),
+            "RTSP/1.0", nullptr);
+        SendSupportedCommands(QVariantList());
+        SendSupportedCommands(SupportedCommands());
+        // Stopped until something plays.
+        sent_playback_state_ = 0;
+        SendPlaybackState(kStopped);
 
         QVariant reply;
         airplay::bplist::Read(r.body, &reply);
@@ -585,8 +627,14 @@ void AirPlaySession::EventReadyRead() {
       if (key == "cseq") cseq = value;
     }
     if (event_buffer_.size() < end + 4 + length) return;
+    const QByteArray body = event_buffer_.mid(end + 4, length);
     event_buffer_.remove(0, end + 4 + length);
-    qLog(Debug) << "AirPlay event:" << lines.value(0).trimmed();
+    QVariant plist;
+    if (body.startsWith("bplist00") && airplay::bplist::Read(body, &plist)) {
+      qLog(Debug) << "AirPlay event:" << lines << plist;
+    } else {
+      qLog(Debug) << "AirPlay event:" << lines << body.left(512);
+    }
     event_socket_->write(event_cipher_->Encrypt(
         QByteArray("RTSP/1.0 200 OK\r\nContent-Length: 0\r\n"
                    "Audio-Latency: 0\r\nCSeq: ") +
@@ -678,25 +726,149 @@ void AirPlaySession::BecomeReady() {
   if (volume_ >= 0) SetVolume(volume_);
   if (have_now_playing_) SendNowPlaying();
   if (have_artwork_) SendArtwork();
+  info_replace_pending_ = true;
+  if (have_now_playing_) QueueNowPlayingInfo();
   qLog(Info) << "Streaming to AirPlay receiver" << device_.name;
   emit Ready();
 }
 
 void AirPlaySession::SetNowPlaying(const QString& title, const QString& artist,
                                    const QString& album) {
+  const bool same = have_now_playing_ && title == title_ && artist == artist_ &&
+                    album == album_;
   title_ = title;
   artist_ = artist;
   album_ = album;
-  // A new id for each song, which receivers tell songs apart by.
-  ++item_id_;
+  info_replace_pending_ = true;
   have_now_playing_ = true;
+  if (!same) {
+    // A new id for each song, which receivers tell songs apart by.
+    ++item_id_;
+    content_item_id_ = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    // At its start, until it's said otherwise.
+    position_msec_ = 0;
+    length_msec_ = -1;
+    position_clock_.start();
+  }
   if (state_ == State::Ready) SendNowPlaying();
+  QueueNowPlayingInfo();
 }
 
 void AirPlaySession::SetArtwork(const QByteArray& artwork) {
   artwork_ = artwork;
   have_artwork_ = true;
+  info_replace_pending_ = true;
   if (state_ == State::Ready) SendArtwork();
+  QueueNowPlayingInfo();
+}
+
+void AirPlaySession::QueueNowPlayingInfo() {
+  if (state_ == State::Ready && !airplay1_) now_playing_info_timer_->start();
+}
+
+// MediaRemote's commands, as an iPhone lists those it takes: play (0),
+// pause (1), play or pause (2), stop (3), next (4), previous (5) and seek
+// (24). Each is a binary plist of its own.
+QVariantList AirPlaySession::SupportedCommands() {
+  QVariantList commands;
+  for (int command : {0, 1, 2, 3, 4, 5}) {
+    commands << airplay::bplist::Write(QVariantMap{
+        {"kCommandInfoCommandKey", command}, {"kCommandInfoEnabledKey", true}});
+  }
+  commands << airplay::bplist::Write(QVariantMap{
+      {"kCommandInfoCommandKey", 24},
+      {"kCommandInfoEnabledKey", true},
+      {"kCommandInfoOptionsKey",
+       QVariantMap{
+           {"kMRMediaRemoteCommandInfoCanBeControlledByScrubbingKey", true},
+           {"kMRMediaRemoteCommandInfoSupportsReferencePosition", false}}}});
+  return commands;
+}
+
+void AirPlaySession::SendSupportedCommands(const QVariantList& commands) {
+  connection_->Request(
+      "POST", "/command", {}, kPlistType,
+      airplay::bplist::Write(QVariantMap{
+          {"type", "updateMRSupportedCommands"},
+          {"params",
+           QVariantMap{{"mrSupportedCommandsFromSender", commands}}}}),
+      "RTSP/1.0", nullptr);
+}
+
+// AirPlay 2 senders say what's playing with MediaRemote's now-playing info,
+// in POST /command, as an iPhone sends it: each song named by a
+// ContentItemIdentifier, with its cover, its duration and where it is at a
+// time and how fast that's moving, so the receiver's clock runs, or doesn't
+// while paused. "replace" sends the whole song; "update" then sends only
+// where it is, at a timestamp, and the rate. A Mac counts on from the last
+// elapsed time it was sent, from the latest timestamp, so the two always go
+// together: an update with only a new timestamp and rate, as at a pause,
+// takes its clock back to the song's start.
+void AirPlaySession::SendNowPlayingInfo() {
+  if (state_ != State::Ready || airplay1_ || !have_now_playing_) return;
+  QVariantMap info;
+  info["kMRMediaRemoteNowPlayingInfoContentItemIdentifier"] = content_item_id_;
+  const bool replace = info_replace_pending_;
+  info_replace_pending_ = false;
+  if (replace) {
+    info["kMRMediaRemoteNowPlayingInfoTitle"] = title_;
+    info["kMRMediaRemoteNowPlayingInfoArtist"] = artist_;
+    info["kMRMediaRemoteNowPlayingInfoAlbum"] = album_;
+    info["kMRMediaRemoteNowPlayingInfoUniqueIdentifier"] = qint64(item_id_);
+    info["kMRMediaRemoteNowPlayingInfoContentType"] = "music";
+    info["kMRMediaRemoteNowPlayingInfoMediaType"] =
+        "MRMediaRemoteMediaTypeMusic";
+    info["kMRMediaRemoteNowPlayingInfoStrictMediaType"] = "audio";
+    info["kMRMediaRemoteNowPlayingInfoDefaultPlaybackRate"] = 1.0;
+    info["kMRMediaRemoteNowPlayingInfoIsAlwaysLive"] = false;
+    info["kMRMediaRemoteNowPlayingInfoIsInTransition"] = false;
+    info["kMRMediaRemoteNowPlayingInfoQueueIndex"] = 0;
+    info["kMRMediaRemoteNowPlayingInfoTotalQueueCount"] = 1;
+    if (!artwork_.isEmpty()) {
+      const QImage image = QImage::fromData(artwork_);
+      info["kMRMediaRemoteNowPlayingInfoArtworkData"] = artwork_;
+      info["kMRMediaRemoteNowPlayingInfoArtworkIdentifier"] = QString(
+          "clementine:artwork:" +
+          QCryptographicHash::hash(artwork_, QCryptographicHash::Sha1).toHex());
+      info["kMRMediaRemoteNowPlayingInfoArtworkDataWidth"] = image.width();
+      info["kMRMediaRemoteNowPlayingInfoArtworkDataHeight"] = image.height();
+    }
+  }
+  const qint64 elapsed =
+      position_msec_ + (playing_ ? position_clock_.elapsed() : 0);
+  info["kMRMediaRemoteNowPlayingInfoElapsedTime"] = elapsed / 1000.0;
+  if (length_msec_ > 0 && (replace || length_msec_ != sent_length_msec_)) {
+    info["kMRMediaRemoteNowPlayingInfoDuration"] = length_msec_ / 1000.0;
+  }
+  info["kMRMediaRemoteNowPlayingInfoPlaybackRate"] = playing_ ? 1.0 : 0.0;
+  info["kMRMediaRemoteNowPlayingInfoTimestamp"] =
+      QDateTime::currentDateTimeUtc();
+  sent_length_msec_ = length_msec_;
+
+  const QVariantMap body{
+      {"type", "updateMRNowPlayingInfo"},
+      {"params", QVariantMap{{"type", "npi-text"},
+                             {"mergePolicy", replace ? "replace" : "update"},
+                             {"params", info}}}};
+  connection_->Request("POST", "/command", {}, kPlistType,
+                       airplay::bplist::Write(body), "RTSP/1.0", nullptr);
+  if (have_progress_) SendPlaybackState(playing_ ? kPlaying : kPaused);
+}
+
+// A Mac's Now Playing only shows a sender's song as playing, with its clock
+// running, once it's told so: an iPhone sends this to receivers that have
+// feature bit 60, and shairport-sync reads it. A receiver keeps the last
+// state, and a Mac's is stopped at the end of each session, so it's sent
+// whenever it changes.
+void AirPlaySession::SendPlaybackState(PlaybackState state) {
+  if (state == sent_playback_state_) return;
+  sent_playback_state_ = state;
+  connection_->Request(
+      "POST", "/command", {}, kPlistType,
+      airplay::bplist::Write(QVariantMap{
+          {"type", "updateMRPlaybackState"},
+          {"params", QVariantMap{{"mrPlaybackState", int(state)}}}}),
+      "RTSP/1.0", nullptr);
 }
 
 quint32 AirPlaySession::PlayingRtpTime() const {
@@ -735,8 +907,16 @@ void AirPlaySession::SendArtwork() {
 // RAOP's progress, as OwnTone sends it: the RTP timestamps of the song's
 // start, less a little (15360 frames, 0.35 s), of what's playing now, and of
 // the song's end, with RTP-Info giving the song's start.
-void AirPlaySession::SetProgress(qint64 position_msec, qint64 length_msec) {
-  if (state_ != State::Ready || length_msec <= 0) return;
+void AirPlaySession::SetProgress(qint64 position_msec, qint64 length_msec,
+                                 bool playing) {
+  have_progress_ = true;
+  position_msec_ = position_msec;
+  length_msec_ = length_msec;
+  playing_ = playing;
+  position_clock_.start();
+  QueueNowPlayingInfo();
+  // RAOP's progress has no pause, so it isn't sent for one.
+  if (state_ != State::Ready || length_msec <= 0 || !playing) return;
   const quint32 now = PlayingRtpTime();
   const quint32 start =
       now - quint32(position_msec * AirPlayStream::kSampleRate / 1000);

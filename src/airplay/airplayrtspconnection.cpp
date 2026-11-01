@@ -96,11 +96,18 @@ void AirPlayRtspConnection::Connect(const QHostAddress& host, quint16 port) {
   socket_->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 }
 
-void AirPlayRtspConnection::Close() {
+void AirPlayRtspConnection::Close(const QByteArray& last_method) {
   connect_timeout_->stop();
   timeout_->stop();
   queue_.clear();
   in_flight_ = false;
+  if (!last_method.isEmpty() &&
+      socket_->state() == QAbstractSocket::ConnectedState) {
+    Rtsp(last_method, {}, QByteArray(), QByteArray(), nullptr);
+    queue_.clear();
+    in_flight_ = false;
+    timeout_->stop();
+  }
   buffer_.clear();
   cipher_.reset();
   digest_realm_.clear();

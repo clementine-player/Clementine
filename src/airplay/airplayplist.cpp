@@ -17,7 +17,9 @@
 
 #include "airplayplist.h"
 
+#include <QDateTime>
 #include <QList>
+#include <QTimeZone>
 #include <QtEndian>
 #include <cstring>
 
@@ -38,6 +40,11 @@ const int kOffsetSize = 4;
 // How deeply nested what's read may be.
 const int kMaxDepth = 32;
 
+// Dates count seconds from CoreFoundation's epoch.
+QDateTime Epoch() {
+  return QDateTime(QDate(2001, 1, 1), QTime(0, 0), QTimeZone::utc());
+}
+
 QByteArray BigEndian(quint64 value, int size) {
   QByteArray out(size, '\0');
   for (int i = size - 1; i >= 0; --i) {
@@ -45,6 +52,12 @@ QByteArray BigEndian(quint64 value, int size) {
     value >>= 8;
   }
   return out;
+}
+
+QByteArray Real(int type, double d) {
+  quint64 bits;
+  std::memcpy(&bits, &d, sizeof(bits));
+  return char((type << 4) | 3) + BigEndian(bits, 8);
 }
 
 QByteArray Integer(qint64 value) {
@@ -103,13 +116,13 @@ class Writer {
         object = Integer(value.toLongLong());
         break;
       case QMetaType::Double:
-      case QMetaType::Float: {
-        const double d = value.toDouble();
-        quint64 bits;
-        std::memcpy(&bits, &d, sizeof(bits));
-        object = '\x23' + BigEndian(bits, 8);
+      case QMetaType::Float:
+        object = Real(0x2, value.toDouble());
         break;
-      }
+      case QMetaType::QDateTime:
+        object =
+            Real(0x3, Epoch().msecsTo(value.toDateTime().toUTC()) / 1000.0);
+        break;
       case QMetaType::QByteArray: {
         const QByteArray data = value.toByteArray();
         object = Marker(0x4, data.size()) + data;
@@ -258,6 +271,9 @@ class Reader {
           double d;
           std::memcpy(&d, &bits, sizeof(d));
           *out = d;
+        }
+        if (type == 0x3) {
+          *out = Epoch().addMSecs(qint64(out->toDouble() * 1000));
         }
         return true;
       }
