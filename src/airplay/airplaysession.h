@@ -18,6 +18,7 @@
 #ifndef AIRPLAY_AIRPLAYSESSION_H_
 #define AIRPLAY_AIRPLAYSESSION_H_
 
+#include <QElapsedTimer>
 #include <QHostAddress>
 #include <QObject>
 #include <QSet>
@@ -137,9 +138,10 @@ class AirPlaySession : public QObject {
                      const QString& album);
   void SetArtwork(const QByteArray& artwork);
   // Where the song that's playing now is, so the receiver shows its
-  // progress. Only sent while ready, since it's out of date by the next
-  // time; a negative length is unknown, as for a stream.
-  void SetProgress(qint64 position_msec, qint64 length_msec);
+  // progress, and whether it's playing or paused there. A negative length is
+  // unknown, as for a stream.
+  void SetProgress(qint64 position_msec, qint64 length_msec,
+                   bool playing = true);
 
  signals:
   void Paired();
@@ -171,6 +173,7 @@ class AirPlaySession : public QObject {
   void Failed(const QString& error);
 
  private slots:
+  void SendNowPlayingInfo();
   void Connected();
   void Fail(const QString& error);
   void TimingReadyRead();
@@ -208,6 +211,15 @@ class AirPlaySession : public QObject {
   void BecomeReady();
   void SendNowPlaying();
   void SendArtwork();
+  // Sends what's playing as AirPlay 2 does too, once the event loop's been
+  // round, so that a new song's title, cover and progress go together.
+  void QueueNowPlayingInfo();
+  static QVariantList SupportedCommands();
+  void SendSupportedCommands(const QVariantList& commands);
+  // MediaRemote's playback state, which a Mac's Now Playing shows as playing,
+  // with its clock running, or not.
+  enum PlaybackState { kPlaying = 1, kPaused = 2, kStopped = 3 };
+  void SendPlaybackState(PlaybackState state);
   // The RTP timestamp of what the receiver is playing now.
   quint32 PlayingRtpTime() const;
   // RTP-Info for a SET_PARAMETER that applies from now on.
@@ -257,7 +269,24 @@ class AirPlaySession : public QObject {
   QByteArray artwork_;
   bool have_now_playing_;
   quint64 item_id_;
+  // MediaRemote's id for the song, and whether the next now-playing info
+  // replaces the last, for a new song or cover, or only updates it.
+  QString content_item_id_;
+  bool info_replace_pending_;
   bool have_artwork_;
+  // Where the song was, and whether it was playing, when SetProgress() was
+  // last called, and how long ago that was.
+  qint64 position_msec_;
+  qint64 length_msec_;
+  bool playing_;
+  QElapsedTimer position_clock_;
+  // The duration the last now-playing info said.
+  qint64 sent_length_msec_;
+  // Whether SetProgress() has said whether it's playing, and the last
+  // playback state sent, or 0 for none yet.
+  bool have_progress_;
+  int sent_playback_state_;
+  QTimer* now_playing_info_timer_;
 };
 
 #endif  // AIRPLAY_AIRPLAYSESSION_H_

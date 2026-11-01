@@ -22,6 +22,7 @@
 #include <QMutexLocker>
 #include <QSignalSpy>
 #include <QTest>
+#include <QTimeZone>
 #include <QTimer>
 #include <QVariantMap>
 #include <QtEndian>
@@ -182,6 +183,9 @@ TEST(AirPlayTest, BinaryPlistRoundTrip) {
   stream["ratio"] = 0.5;
   stream["name"] = QString("Clementine on a very long name indeed");
   stream["unicode"] = QString::fromUtf8("Caf\xc3\xa9");
+  const QDateTime when(QDate(2026, 11, 1), QTime(21, 30, 5, 250),
+                       QTimeZone::utc());
+  stream["when"] = when;
   QVariantMap root;
   root["streams"] = QVariantList{stream, QVariantList{}};
 
@@ -200,6 +204,14 @@ TEST(AirPlayTest, BinaryPlistRoundTrip) {
   EXPECT_EQ(s.value("name").toString(),
             QString("Clementine on a very long name indeed"));
   EXPECT_EQ(s.value("unicode").toString(), QString::fromUtf8("Caf\xc3\xa9"));
+  EXPECT_TRUE(s.value("when").toDateTime() == when);
+}
+
+// A date is a real's bytes with marker 0x33: seconds since 2001 began.
+TEST(AirPlayTest, BinaryPlistDate) {
+  const QByteArray data = bplist::Write(
+      QDateTime(QDate(2001, 1, 1), QTime(0, 0, 1), QTimeZone::utc()));
+  EXPECT_EQ(QByteArray::fromHex("333FF0000000000000"), data.mid(8, 9));
 }
 
 // Written by Python's plistlib, which uses 1-byte refs and offsets.
@@ -1287,4 +1299,178 @@ TEST(AirPlaySessionTest, NoProgressWithoutALength) {
   session.SetVolume(100);
   WaitFor([&receiver]() { return !receiver.volume().isEmpty(); });
   EXPECT_TRUE(receiver.progress().isEmpty());
+}
+
+// As AirPlay 2 senders say what's playing, so that a Mac shows a new cover
+// for each song and a clock that runs.
+TEST(AirPlaySessionTest, SendsNowPlayingInfoWithAirPlay2) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  session.SetNowPlaying("Song", "Artist", "Album");
+  session.SetArtwork("jpeg");
+  session.SetProgress(1000, 3000);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  WaitFor([&receiver]() { return !receiver.now_playing_infos().isEmpty(); });
+  // All of it at once.
+  ASSERT_EQ(1, receiver.now_playing_infos().size());
+  QVariantMap info = receiver.now_playing_infos().last();
+  EXPECT_EQ("Song", info.value("kMRMediaRemoteNowPlayingInfoTitle"));
+  EXPECT_EQ("Artist", info.value("kMRMediaRemoteNowPlayingInfoArtist"));
+  EXPECT_EQ("Album", info.value("kMRMediaRemoteNowPlayingInfoAlbum"));
+  EXPECT_EQ(
+      QByteArray("jpeg"),
+      info.value("kMRMediaRemoteNowPlayingInfoArtworkData").toByteArray());
+  EXPECT_EQ(3.0, info.value("kMRMediaRemoteNowPlayingInfoDuration"));
+  EXPECT_EQ(1.0, info.value("kMRMediaRemoteNowPlayingInfoPlaybackRate"));
+  // A second in, since when it's been playing.
+  const double elapsed =
+      info.value("kMRMediaRemoteNowPlayingInfoElapsedTime").toDouble();
+  EXPECT_GE(elapsed, 1.0);
+  EXPECT_LT(elapsed, 2.0);
+  const QDateTime when =
+      info.value("kMRMediaRemoteNowPlayingInfoTimestamp").toDateTime();
+  EXPECT_LT(qAbs(when.msecsTo(QDateTime::currentDateTimeUtc())), 2000);
+  const QVariant first_id =
+      info.value("kMRMediaRemoteNowPlayingInfoUniqueIdentifier");
+
+  EXPECT_EQ("replace", receiver.merge_policies().last());
+  // Stopped once set up, as an iPhone starts, then playing, which a Mac's
+  // Now Playing waits for to run its clock.
+  WaitFor([&receiver]() { return receiver.playback_states().size() >= 2; });
+  EXPECT_EQ(QList<int>({3, 1}), receiver.playback_states());
+  const QVariant first_item =
+      info.value("kMRMediaRemoteNowPlayingInfoContentItemIdentifier");
+  EXPECT_FALSE(first_item.toString().isEmpty());
+
+  // As an iPhone starts: no commands, then those it takes.
+  ASSERT_EQ(2, receiver.supported_commands().size());
+  EXPECT_TRUE(receiver.supported_commands()[0].isEmpty());
+  QList<int> commands;
+  for (const QVariant& command : receiver.supported_commands()[1]) {
+    QVariant decoded;
+    ASSERT_TRUE(airplay::bplist::Read(command.toByteArray(), &decoded));
+    commands << decoded.toMap().value("kCommandInfoCommandKey").toInt();
+  }
+  EXPECT_EQ(QList<int>({0, 1, 2, 3, 4, 5, 24}), commands);
+
+  // The same song again, as when its cover is found: the same item.
+  session.SetNowPlaying("Song", "Artist", "Album");
+  session.SetArtwork("jpeg1");
+  WaitFor([&receiver]() { return receiver.now_playing_infos().size() >= 2; });
+  ASSERT_EQ(2, receiver.now_playing_infos().size());
+  info = receiver.now_playing_infos().last();
+  EXPECT_EQ(first_item,
+            info.value("kMRMediaRemoteNowPlayingInfoContentItemIdentifier"));
+  EXPECT_EQ(first_id,
+            info.value("kMRMediaRemoteNowPlayingInfoUniqueIdentifier"));
+
+  // The next song, with its own ids and cover, playing from its start.
+  session.SetNowPlaying("Next", "Artist", "Album");
+  session.SetArtwork("jpeg2");
+  WaitFor([&receiver]() { return receiver.now_playing_infos().size() >= 3; });
+  ASSERT_EQ(3, receiver.now_playing_infos().size());
+  info = receiver.now_playing_infos().last();
+  EXPECT_EQ("replace", receiver.merge_policies().last());
+  EXPECT_EQ("Next", info.value("kMRMediaRemoteNowPlayingInfoTitle"));
+  EXPECT_EQ(
+      QByteArray("jpeg2"),
+      info.value("kMRMediaRemoteNowPlayingInfoArtworkData").toByteArray());
+  EXPECT_NE(first_id,
+            info.value("kMRMediaRemoteNowPlayingInfoUniqueIdentifier"));
+  const QVariant next_item =
+      info.value("kMRMediaRemoteNowPlayingInfoContentItemIdentifier");
+  EXPECT_NE(first_item, next_item);
+  EXPECT_EQ(1.0, info.value("kMRMediaRemoteNowPlayingInfoPlaybackRate"));
+  EXPECT_LT(info.value("kMRMediaRemoteNowPlayingInfoElapsedTime").toDouble(),
+            1.0);
+  EXPECT_FALSE(info.contains("kMRMediaRemoteNowPlayingInfoDuration"));
+
+  // Paused five seconds in: an update of the item, where the clock stops.
+  session.SetProgress(5000, 60000, false);
+  WaitFor([&receiver]() { return receiver.now_playing_infos().size() >= 4; });
+  info = receiver.now_playing_infos().last();
+  EXPECT_EQ("update", receiver.merge_policies().last());
+  EXPECT_EQ(next_item,
+            info.value("kMRMediaRemoteNowPlayingInfoContentItemIdentifier"));
+  EXPECT_FALSE(info.contains("kMRMediaRemoteNowPlayingInfoTitle"));
+  EXPECT_EQ(0.0, info.value("kMRMediaRemoteNowPlayingInfoPlaybackRate"));
+  EXPECT_EQ(5.0, info.value("kMRMediaRemoteNowPlayingInfoElapsedTime"));
+  EXPECT_EQ(60.0, info.value("kMRMediaRemoteNowPlayingInfoDuration"));
+  EXPECT_TRUE(info.contains("kMRMediaRemoteNowPlayingInfoTimestamp"));
+  WaitFor([&receiver]() { return receiver.playback_states().size() >= 3; });
+  EXPECT_EQ(QList<int>({3, 1, 2}), receiver.playback_states());
+
+  // Still there: where it is, when and the rate, and nothing more.
+  session.SetProgress(5000, 60000, false);
+  WaitFor([&receiver]() { return receiver.now_playing_infos().size() >= 5; });
+  info = receiver.now_playing_infos().last();
+  EXPECT_EQ(QStringList({"kMRMediaRemoteNowPlayingInfoContentItemIdentifier",
+                         "kMRMediaRemoteNowPlayingInfoElapsedTime",
+                         "kMRMediaRemoteNowPlayingInfoPlaybackRate",
+                         "kMRMediaRemoteNowPlayingInfoTimestamp"}),
+            info.keys());
+  EXPECT_EQ(5.0, info.value("kMRMediaRemoteNowPlayingInfoElapsedTime"));
+  // And the playback state isn't sent again while it's the same.
+  EXPECT_EQ(QList<int>({3, 1, 2}), receiver.playback_states());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+// A Mac counts on from the last elapsed time it was sent, from the latest
+// timestamp, so a pause where it was expected to be still says where: a
+// timestamp and rate alone took its clock back to the song's start.
+TEST(AirPlaySessionTest, SaysWhereItIsWhenPaused) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  session.SetNowPlaying("Song", "Artist", "Album");
+  session.SetProgress(0, 60000);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  WaitFor([&receiver]() { return !receiver.now_playing_infos().isEmpty(); });
+  QElapsedTimer playing;
+  playing.start();
+  WaitFor([&playing]() { return playing.elapsed() >= 300; });
+  // Paused just where it's been counting to.
+  session.SetProgress(playing.elapsed(), 60000, false);
+  WaitFor([&receiver]() { return receiver.now_playing_infos().size() >= 2; });
+  const QVariantMap info = receiver.now_playing_infos().last();
+  EXPECT_EQ(0.0, info.value("kMRMediaRemoteNowPlayingInfoPlaybackRate"));
+  ASSERT_TRUE(info.contains("kMRMediaRemoteNowPlayingInfoElapsedTime"));
+  EXPECT_GE(info.value("kMRMediaRemoteNowPlayingInfoElapsedTime").toDouble(),
+            0.3);
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+TEST(AirPlaySessionTest, NoNowPlayingInfoWithAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.set_airplay1(true);
+
+  AirPlaySession session(FastOptions());
+  session.SetNowPlaying("Song", "Artist", "Album");
+  session.SetProgress(1000, 3000);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  WaitFor([&receiver]() { return !receiver.progress().isEmpty(); });
+  EXPECT_TRUE(receiver.now_playing_infos().isEmpty());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+// The same DACP-ID every time, from the sender id, as OwnTone keeps its own.
+TEST(AirPlaySessionTest, SendsAStableDacpId) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession::Options options = FastOptions();
+  options.sender_id = "02:AB:CD:EF:01:23";
+  for (int i = 0; i < 2; ++i) {
+    AirPlaySession session(options);
+    EXPECT_TRUE(Open(&session, receiver.device()).set_up);
+  }
+  EXPECT_EQ(QSet<QString>({"02ABCDEF0123"}), receiver.dacp_ids());
 }

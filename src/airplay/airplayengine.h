@@ -63,6 +63,7 @@ class AirPlayEngine : public GstEngine {
             qint64 end_nanosec) override;
   bool Play(quint64 offset_nanosec) override;
   void Stop(bool stop_after = false) override;
+  void Pause() override;
   void Unpause() override;
   qint64 position_nanosec() const override;
   QString output_name() const override { return device_.name; }

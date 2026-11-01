@@ -63,7 +63,10 @@ class AirPlayRtspConnection : public QObject {
   ~AirPlayRtspConnection();
 
   void Connect(const QHostAddress& host, quint16 port);
-  void Close();
+  // Closes the connection. A |last_method|, such as TEARDOWN, is written
+  // first, ahead of any requests still waiting, which are dropped; its
+  // answer isn't waited for.
+  void Close(const QByteArray& last_method = QByteArray());
 
   // Encrypts everything sent and received from the next request on.
   void EnableEncryption(const QByteArray& out_key, const QByteArray& in_key);

@@ -23,7 +23,8 @@
 
 // Apple's binary property lists ("bplist00"), as QVariants: QVariantMap for a
 // dict, QVariantList for an array, QString, QByteArray for data, bool, qint64
-// for integers and double for reals (and dates, as seconds since 2001).
+// for integers, double for reals and QDateTime for dates, which are stored
+// to the millisecond.
 namespace airplay {
 namespace bplist {
 

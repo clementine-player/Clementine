@@ -128,6 +128,18 @@ class FakeAirPlayReceiver : public QObject {
   QByteArray artwork() const { return artwork_; }
   QByteArray artwork_type() const { return artwork_type_; }
   QByteArray progress() const { return progress_; }
+  // The MediaRemote now-playing info of each POST /command that had any, as
+  // AirPlay 2 senders send it: the "params" of its "params", and whether it
+  // replaced the last ("replace") or was merged with it ("update").
+  QList<QVariantMap> now_playing_infos() const { return now_playing_infos_; }
+  QStringList merge_policies() const { return merge_policies_; }
+  // Each updateMRPlaybackState's state: 1 playing, 2 paused, 3 stopped.
+  QList<int> playback_states() const { return playback_states_; }
+  // The MediaRemote commands of each updateMRSupportedCommands, each a
+  // binary plist.
+  QList<QVariantList> supported_commands() const { return supported_commands_; }
+  // The DACP-IDs requests came with.
+  QSet<QString> dacp_ids() const { return dacp_ids_; }
   // The DMAP persistent id of each song it was told of.
   QList<QByteArray> item_ids() const { return item_ids_; }
   // The RTP-Info rtptime that came with the progress.
@@ -256,6 +268,11 @@ class FakeAirPlayReceiver : public QObject {
   QByteArray volume_;
   QStringList now_playing_;
   QList<QByteArray> item_ids_;
+  QList<QVariantMap> now_playing_infos_;
+  QStringList merge_policies_;
+  QList<int> playback_states_;
+  QList<QVariantList> supported_commands_;
+  QSet<QString> dacp_ids_;
   QByteArray artwork_;
   QByteArray artwork_type_;
   QByteArray progress_;
