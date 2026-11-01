@@ -37,6 +37,31 @@ const int kBacklog = 1000;
 // from now (a quarter of a second).
 const quint64 kMaxGapFrames = AirPlayStream::kSampleRate / 4;
 
+// Writes bits most significant first, as ALAC reads them.
+class BitWriter {
+ public:
+  void Write(quint32 value, int bits) {
+    bits_ = (bits_ << bits) | (value & ((quint64(1) << bits) - 1));
+    count_ += bits;
+    while (count_ >= 8) {
+      count_ -= 8;
+      data_.append(char(bits_ >> count_));
+    }
+  }
+
+  // Pads the last byte with zeros.
+  QByteArray Finish() {
+    if (count_ > 0) data_.append(char(bits_ << (8 - count_)));
+    count_ = 0;
+    return data_;
+  }
+
+ private:
+  QByteArray data_;
+  quint64 bits_ = 0;
+  int count_ = 0;
+};
+
 quint64 NtpToTimestamp(quint64 ntp) {
   return ((ntp >> 16) * AirPlayStream::kSampleRate) >> 16;
 }
@@ -57,6 +82,26 @@ quint64 AirPlayStream::NtpNow() {
   const quint64 secs = us / 1000000 + 0x83AA7E80;
   const quint64 frac = ((us % 1000000) << 32) / 1000000;
   return (secs << 32) | frac;
+}
+
+// Apple's ALAC decoder (ALACDecoder.cpp) reads an element's tag, then a
+// header saying whether it holds a frame of a different length, shifted
+// samples or "escaped" uncompressed ones, as these are. The SDP's fmtp gave
+// the frame length, so it isn't repeated.
+QByteArray AirPlayStream::UncompressedAlac(const QByteArray& pcm) {
+  BitWriter w;
+  w.Write(1, 3);   // ID_CPE: a channel pair
+  w.Write(0, 4);   // Element instance tag
+  w.Write(0, 12);  // Unused
+  w.Write(0, 1);   // Partial frame: no
+  w.Write(0, 2);   // Bytes shifted: none
+  w.Write(1, 1);   // Escape: uncompressed
+  // The samples, interleaved, each in 16 bits.
+  for (int i = 0; i + 1 < pcm.size(); i += 2) {
+    w.Write(qFromLittleEndian<quint16>(pcm.constData() + i), 16);
+  }
+  w.Write(7, 3);  // ID_END
+  return w.Finish();
 }
 
 AirPlayStream::AirPlayStream(const QHostAddress& host, quint16 data_port,
@@ -102,13 +147,6 @@ void AirPlayStream::Write(const char* pcm, int size) {
 }
 
 void AirPlayStream::SendPacketLocked(const QByteArray& pcm) {
-  // L16 is big endian.
-  QByteArray payload(pcm.size(), '\0');
-  for (int i = 0; i + 1 < pcm.size(); i += 2) {
-    payload[i] = pcm[i + 1];
-    payload[i + 1] = pcm[i];
-  }
-
   const quint32 rtptime =
       quint32(head_timestamp_ - start_timestamp_ + kLatencyFrames);
   QByteArray packet;
@@ -119,10 +157,20 @@ void AirPlayStream::SendPacketLocked(const QByteArray& pcm) {
   packet += airplay::Bytes(qToBigEndian(seq_));
   packet += airplay::Bytes(qToBigEndian(rtptime));
   packet += airplay::Bytes(qToBigEndian(ssrc_));
-  // The payload and its tag, then the last 8 bytes of the nonce.
-  const QByteArray nonce = airplay::Nonce(nonce_++);
-  packet += airplay::Seal(audio_key_, nonce, packet.mid(4, 8), payload);
-  packet += nonce.mid(4);
+  if (audio_key_.isEmpty()) {
+    packet += UncompressedAlac(pcm);
+  } else {
+    // L16 is big endian.
+    QByteArray payload(pcm.size(), '\0');
+    for (int i = 0; i + 1 < pcm.size(); i += 2) {
+      payload[i] = pcm[i + 1];
+      payload[i + 1] = pcm[i];
+    }
+    // The payload and its tag, then the last 8 bytes of the nonce.
+    const QByteArray nonce = airplay::Nonce(nonce_++);
+    packet += airplay::Seal(audio_key_, nonce, packet.mid(4, 8), payload);
+    packet += nonce.mid(4);
+  }
   marker_ = false;
 
   backlog_.insert(seq_, packet);

@@ -25,8 +25,8 @@
 
 class QDebug;
 
-// An AirPlay receiver found on the network, from its _airplay._tcp
-// advertisement.
+// An AirPlay receiver found on the network, from its _airplay._tcp or
+// _raop._tcp advertisement.
 struct AirPlayDevice {
   // Bits of the status flags ("flags" in the TXT record, and statusFlags in
   // GET /info). A Mac (AirTunes 980.77.5) was seen to set 0x200 while its
@@ -50,6 +50,13 @@ struct AirPlayDevice {
   quint64 features = 0;
   // "flags" (or "sf"), a bitmask of StatusFlag and others.
   quint32 status_flags = 0;
+  // Whether it's from a _raop._tcp advertisement, and so is played to with
+  // AirPlay 1.
+  bool airplay1 = false;
+  // Whether it takes unencrypted AirPlay 1 audio: "et" (encryption types)
+  // includes 0, or is missing. AirPort Express-era receivers want audio
+  // encrypted with a key wrapped in Apple's RSA key, which isn't supported.
+  bool plain_audio = true;
   // Where its control connection is.
   QHostAddress address;
   quint16 port = 0;
@@ -67,6 +74,21 @@ struct AirPlayDevice {
   // record, whose entries look like "key=value". Returns false if it has no
   // device id.
   bool ParseTxt(const QList<QByteArray>& txt);
+
+  // Fills in id, name, model, features and status flags from a _raop._tcp
+  // advertisement, such as an AirPort Express's:
+  //
+  //   instance  A1B2C3D4E5F6@Living Room
+  //   TXT       txtvers=1 ch=2 cn=0,1 et=0,3,5 sv=false da=true sr=44100
+  //             ss=16 pw=false sf=0x4 ft=0x445F8A00,0x1C340 tp=UDP
+  //             vn=65537 vs=366.0 am=AirPort10,115
+  //
+  // The instance name is the MAC address, which becomes the id
+  // ("A1:B2:C3:D4:E5:F6"), then "@" and the name. Of the TXT record, only
+  // "am" (the model), "ft" and "sf" (features and status flags), "pw"
+  // (whether there's a password) and "et" (encryption types, where 0 is
+  // unencrypted) are used. Returns false if the instance name has no MAC.
+  bool ParseRaopService(const QString& instance, const QList<QByteArray>& txt);
 
   // Splits a TXT record in its wire format, where each entry is preceded by
   // its length in one byte, into the entries ParseTxt takes. A truncated last

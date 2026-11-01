@@ -17,7 +17,9 @@
 
 #include "airplayrtspconnection.h"
 
+#include <QCryptographicHash>
 #include <QRandomGenerator>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTcpSocket>
 #include <QTimer>
@@ -28,6 +30,13 @@ namespace {
 
 // What pyatv says it is: receivers expect a recent enough AirPlay sender.
 const char kUserAgent[] = "AirPlay/550.10";
+
+// AirPort Express senders' user name, as raop_play and pyatv send it.
+const char kDigestUser[] = "iTunes";
+
+QByteArray Md5Hex(const QByteArray& data) {
+  return QCryptographicHash::hash(data, QCryptographicHash::Md5).toHex();
+}
 
 QString Describe(const AirPlayRtspConnection::Headers& headers) {
   QStringList parts;
@@ -94,6 +103,9 @@ void AirPlayRtspConnection::Close() {
   in_flight_ = false;
   buffer_.clear();
   cipher_.reset();
+  digest_realm_.clear();
+  digest_nonce_.clear();
+  session_.clear();
   if (socket_->state() != QAbstractSocket::ConnectedState) {
     socket_->abort();
     return;
@@ -169,7 +181,7 @@ void AirPlayRtspConnection::Post(const QByteArray& path, const Headers& headers,
 void AirPlayRtspConnection::SendNext() {
   if (in_flight_ || queue_.isEmpty()) return;
   in_flight_ = true;
-  const Pending& pending = queue_.head();
+  Pending& pending = queue_.head();
 
   Headers all = {
       {"CSeq", QByteArray::number(cseq_++)},
@@ -180,6 +192,12 @@ void AirPlayRtspConnection::SendNext() {
   };
   if (!client_name_.isEmpty()) {
     all.append({"X-Apple-Client-Name", client_name_});
+  }
+  if (!session_.isEmpty()) all.append({"Session", session_});
+  pending.authorized = !digest_nonce_.isEmpty();
+  if (pending.authorized) {
+    all.append(
+        {"Authorization", DigestAuthorization(pending.method, pending.uri)});
   }
   all += pending.headers;
   if (!pending.content_type.isEmpty()) {
@@ -220,6 +238,12 @@ void AirPlayRtspConnection::ReadyRead() {
     qLog(Debug) << "<<" << response.code << Describe(response.headers)
                 << response.body.size() << "byte body";
     in_flight_ = false;
+    // Sent again with the password, unless it was already and was wrong.
+    if (response.code == 401 && !queue_.head().authorized &&
+        TakeChallenge(response)) {
+      SendNext();
+      continue;
+    }
     const Pending pending = queue_.dequeue();
     if (pending.callback) pending.callback(response);
     SendNext();
@@ -246,6 +270,36 @@ bool AirPlayRtspConnection::ParseResponse(Response* response) {
   buffer_.remove(0, start + length);
   *response = r;
   return true;
+}
+
+bool AirPlayRtspConnection::TakeChallenge(const Response& response) {
+  const QByteArray challenge = response.Header("WWW-Authenticate");
+  if (password_.isEmpty() || !challenge.startsWith("Digest ")) return false;
+  static const QRegularExpression kParam("(\\w+)=\"([^\"]*)\"");
+  QByteArray realm;
+  QByteArray nonce;
+  auto it = kParam.globalMatch(QString::fromUtf8(challenge));
+  while (it.hasNext()) {
+    const QRegularExpressionMatch m = it.next();
+    if (m.captured(1) == "realm") realm = m.captured(2).toUtf8();
+    if (m.captured(1) == "nonce") nonce = m.captured(2).toUtf8();
+  }
+  if (nonce.isEmpty()) return false;
+  digest_realm_ = realm;
+  digest_nonce_ = nonce;
+  return true;
+}
+
+// RFC 2617's Digest, without qop, as AirPort Express takes it.
+QByteArray AirPlayRtspConnection::DigestAuthorization(
+    const QByteArray& method, const QByteArray& uri) const {
+  const QByteArray ha1 = Md5Hex(QByteArray(kDigestUser) + ":" + digest_realm_ +
+                                ":" + password_.toUtf8());
+  const QByteArray ha2 = Md5Hex(method + ":" + uri);
+  const QByteArray response = Md5Hex(ha1 + ":" + digest_nonce_ + ":" + ha2);
+  return "Digest username=\"" + QByteArray(kDigestUser) + "\", realm=\"" +
+         digest_realm_ + "\", nonce=\"" + digest_nonce_ + "\", uri=\"" + uri +
+         "\", response=\"" + response + "\"";
 }
 
 void AirPlayRtspConnection::SocketError() {

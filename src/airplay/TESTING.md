@@ -45,3 +45,27 @@ A Mac14,2 with AirPlay Receiver set to allow anyone on the network, tested
 So without a password, pairing once with the PIN the Mac shows gives keys to
 connect with afterwards. Whether that stops it asking to Allow again from
 time to time needs watching for longer.
+
+### AirPlay 1
+
+| Check | Result |
+| --- | --- |
+| Discovery | `_raop._tcp` gives the same id as `_airplay._tcp`. |
+| ANNOUNCE, with a password | 401 with a Digest challenge (realm "airplay") on 2026-11-01; 403 on 2026-10-30. |
+| Without a password | ANNOUNCE, SETUP, RECORD, FLUSH and SET_PARAMETER all accepted, timing requests come, and nothing plays. |
+| After pairing over AirPlay 2 | The Allow prompt holds ANNOUNCE, then the same: accepted, and nothing plays. |
+| The proof of concept (#7653) | Accepted the same way, and nothing played, though it played on 2026-10-30. |
+
+So the Mac doesn't play AirPlay 1 audio, at least now; AirPlay 1 is for
+receivers that only have it.
+
+## shairport-sync 4.3.7 (classic AirPlay)
+
+On Linux, run in the foreground with its audio written to a file, tested
+2026-11-01. It advertises only `_raop._tcp`, with `et=0,1`.
+
+| Check | Result |
+| --- | --- |
+| Playing | The uncompressed ALAC decoded to the tone sent, 440 Hz then 660 Hz, with no gaps. |
+| Volume | Taken as −3.10 dB for 70%. |
+| Password | Advertised (`pw=true`), so asked for before connecting; a wrong one answered the Digest challenge (realm "raop") once and was refused; the right one played. |

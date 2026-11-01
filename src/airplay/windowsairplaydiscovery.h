@@ -28,7 +28,7 @@ class WindowsAirPlayDiscovery : public AirPlayDiscovery {
   Q_OBJECT
 
  public:
-  explicit WindowsAirPlayDiscovery(QObject* parent = nullptr);
+  explicit WindowsAirPlayDiscovery(const char* type, QObject* parent = nullptr);
   ~WindowsAirPlayDiscovery();
 
   void Start() override;

@@ -26,9 +26,11 @@
 
 class QUdpSocket;
 
-// The audio of an AirPlay 2 session: 44.1 kHz 16-bit stereo PCM, in RTP
-// packets of 352 frames as L16 (big endian), each encrypted with
-// ChaCha20-Poly1305 under the key the sender chose in SETUP.
+// The audio of an AirPlay session: 44.1 kHz 16-bit stereo PCM, in RTP
+// packets of 352 frames. AirPlay 2 sends it as L16 (big endian), each packet
+// encrypted with ChaCha20-Poly1305 under the key the sender chose in SETUP.
+// AirPlay 1 sends it unencrypted, as ALAC frames that hold it uncompressed,
+// which every receiver decodes and which costs nothing to make.
 //
 // Write() may be called from any thread, such as GStreamer's streaming
 // thread, which delivers audio in real time. The packets are sent from the
@@ -47,7 +49,8 @@ class AirPlayStream : public QObject {
   // shairport-sync have it.
   static const quint32 kLatencyFrames = 22050 + kSampleRate;
 
-  // |audio_key| is the 32-byte key sent in SETUP as "shk". Sync packets
+  // |audio_key| is the 32-byte key sent in SETUP as "shk", or empty for
+  // AirPlay 1's unencrypted ALAC. Sync packets
   // go from |control_socket|, whose port SETUP gave the receiver, to
   // |control_port|; it isn't owned.
   AirPlayStream(const QHostAddress& host, quint16 data_port,
@@ -58,6 +61,9 @@ class AirPlayStream : public QObject {
 
   // Now, as a 64-bit NTP timestamp: seconds since 1900, then the fraction.
   static quint64 NtpNow();
+  // An ALAC frame of |pcm|, S16LE stereo of kFramesPerPacket frames, stored
+  // uncompressed.
+  static QByteArray UncompressedAlac(const QByteArray& pcm);
 
   // Sends |size| bytes of S16LE stereo PCM, in whole packets: a partial one
   // waits for the next call.

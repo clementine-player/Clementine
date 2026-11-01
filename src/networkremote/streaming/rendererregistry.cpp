@@ -102,13 +102,23 @@ void RendererRegistry::StartDiscovery() {
   }
 
   if (sAirPlayEnabled && !airplay_discovery_) {
-    airplay_discovery_ = AirPlayDiscovery::Create(this);
-    if (airplay_discovery_) {
-      connect(airplay_discovery_, &AirPlayDiscovery::DeviceFound, this,
-              &RendererRegistry::AirPlayDeviceFound);
-      connect(airplay_discovery_, &AirPlayDiscovery::DeviceLost, this,
-              &RendererRegistry::AirPlayDeviceLost);
-      airplay_discovery_->Start();
+    airplay_discovery_ =
+        AirPlayDiscovery::Create(AirPlayDiscovery::kAirPlayServiceType, this);
+    raop_discovery_ =
+        AirPlayDiscovery::Create(AirPlayDiscovery::kRaopServiceType, this);
+    if (airplay_discovery_ && raop_discovery_) {
+      for (AirPlayDiscovery* discovery :
+           {airplay_discovery_, raop_discovery_}) {
+        connect(discovery, &AirPlayDiscovery::DeviceFound, this,
+                [this, discovery](const AirPlayDevice& device) {
+                  AirPlayFound(discovery, device);
+                });
+        connect(discovery, &AirPlayDiscovery::DeviceLost, this,
+                [this, discovery](const QString& id) {
+                  AirPlayLost(discovery, id);
+                });
+        discovery->Start();
+      }
     } else {
       qLog(Info) << "Can't look for AirPlay receivers on this platform";
     }
@@ -217,6 +227,39 @@ AirPlayEngine* RendererRegistry::FindAirPlayEngine(
     if (engine->device().id == device_id) return engine;
   }
   return nullptr;
+}
+
+// Ids are MAC addresses, which _raop._tcp gives without colons and
+// _airplay._tcp as it likes, so they're compared in upper case.
+void RendererRegistry::AirPlayFound(AirPlayDiscovery* discovery,
+                                    const AirPlayDevice& device) {
+  AirPlayDevice found = device;
+  found.id = device.id.toUpper();
+  (discovery == raop_discovery_ ? raop_found_ : airplay_found_)[found.id] =
+      found;
+  AirPlayChanged(found.id);
+}
+
+void RendererRegistry::AirPlayLost(AirPlayDiscovery* discovery,
+                                   const QString& id) {
+  (discovery == raop_discovery_ ? raop_found_ : airplay_found_)
+      .remove(id.toUpper());
+  AirPlayChanged(id.toUpper());
+}
+
+void RendererRegistry::AirPlayChanged(const QString& id) {
+  const auto airplay = airplay_found_.constFind(id);
+  const auto raop = raop_found_.constFind(id);
+  if (airplay == airplay_found_.cend() && raop == raop_found_.cend()) {
+    AirPlayDeviceLost(id);
+    return;
+  }
+  // An old Apple TV advertises _airplay._tcp for video, but plays audio
+  // with AirPlay 1.
+  const bool use_airplay =
+      airplay != airplay_found_.cend() &&
+      (raop == raop_found_.cend() || airplay->supports_airplay2());
+  AirPlayDeviceFound(use_airplay ? *airplay : *raop);
 }
 
 void RendererRegistry::AirPlayDeviceFound(const AirPlayDevice& device) {

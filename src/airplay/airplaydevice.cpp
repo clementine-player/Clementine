@@ -71,6 +71,52 @@ bool AirPlayDevice::ParseTxt(const QList<QByteArray>& txt) {
   return true;
 }
 
+bool AirPlayDevice::ParseRaopService(const QString& instance,
+                                     const QList<QByteArray>& txt) {
+  const int at = instance.indexOf('@');
+  const QString mac = instance.left(at);
+  if (at != 12 || QByteArray::fromHex(mac.toLatin1()).size() != 6) {
+    return false;
+  }
+  QStringList octets;
+  for (int i = 0; i < 12; i += 2) octets << mac.mid(i, 2).toUpper();
+
+  QString new_model;
+  QString new_features;
+  QString new_flags;
+  bool password = false;
+  bool plain = true;
+  for (const QByteArray& entry : txt) {
+    const int equals = entry.indexOf('=');
+    if (equals <= 0) continue;
+    const QByteArray key = entry.left(equals);
+    const QString value = QString::fromUtf8(entry.mid(equals + 1));
+    if (key == "am") {
+      new_model = value;
+    } else if (key == "ft") {
+      new_features = value;
+    } else if (key == "sf") {
+      new_flags = value;
+    } else if (key == "pw") {
+      password = value.compare("true", Qt::CaseInsensitive) == 0;
+    } else if (key == "et") {
+      plain = value.split(',').contains("0");
+    }
+  }
+
+  id = octets.join(':');
+  name = instance.mid(at + 1);
+  model = new_model;
+  const QStringList words = new_features.split(',');
+  features = quint64(ParseHex(words.value(0))) |
+             (quint64(ParseHex(words.value(1))) << 32);
+  status_flags = ParseHex(new_flags);
+  if (password) status_flags |= PasswordRequired;
+  plain_audio = plain;
+  airplay1 = true;
+  return true;
+}
+
 QList<QByteArray> AirPlayDevice::SplitTxt(const QByteArray& rdata) {
   QList<QByteArray> entries;
   int pos = 0;
@@ -86,6 +132,7 @@ QList<QByteArray> AirPlayDevice::SplitTxt(const QByteArray& rdata) {
 bool AirPlayDevice::operator==(const AirPlayDevice& other) const {
   return id == other.id && name == other.name && model == other.model &&
          features == other.features && status_flags == other.status_flags &&
+         airplay1 == other.airplay1 && plain_audio == other.plain_audio &&
          address == other.address && port == other.port;
 }
 
