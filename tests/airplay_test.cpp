@@ -1126,6 +1126,57 @@ TEST(AirPlaySessionTest, AnswersAirPlay1sDigestChallenge) {
   EXPECT_EQ(QStringList(), receiver.errors());
 }
 
+// An AirPlay 2 receiver that refuses a session with NTP timing, as
+// shairport-sync's AirPlay 2 builds do, is played to with AirPlay 1 if it
+// advertises that, from then on.
+TEST(AirPlaySessionTest, FallsBackToAirPlay1WhenNtpIsRefused) {
+  FakeAirPlayReceiver airplay2;
+  ASSERT_TRUE(airplay2.Listen());
+  airplay2.set_ask_to_allow(false);
+  airplay2.set_refuse_ntp(true);
+  FakeAirPlayReceiver airplay1;
+  ASSERT_TRUE(airplay1.Listen());
+  airplay1.set_ask_to_allow(false);
+  airplay1.set_airplay1(true);
+
+  AirPlayDevice device = airplay2.device();
+  device.raop_address = airplay1.device().address;
+  device.raop_port = airplay1.device().port;
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, device));
+  EXPECT_TRUE(session.airplay1());
+  EXPECT_EQ(1, airplay2.requests().count("SETUP"));
+  EXPECT_EQ(QStringList({"ANNOUNCE", "SETUP", "RECORD", "FLUSH"}),
+            airplay1.requests());
+
+  const QByteArray tone = Tone(352 * 6);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&airplay1]() { return airplay1.audio_packets() >= 6; });
+  EXPECT_EQ(tone, airplay1.audio());
+
+  // Straight to AirPlay 1 the next time.
+  session.Close();
+  ASSERT_TRUE(OpenReady(&session, device));
+  EXPECT_TRUE(session.airplay1());
+  EXPECT_EQ(1, airplay2.requests().count("SETUP"));
+  EXPECT_EQ(QStringList(), airplay2.errors());
+  EXPECT_EQ(QStringList(), airplay1.errors());
+}
+
+// Without AirPlay 1 to fall back to, it's an error.
+TEST(AirPlaySessionTest, FailsWhenNtpIsRefusedWithoutAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+  receiver.set_refuse_ntp(true);
+
+  AirPlaySession session(FastOptions());
+  QSignalSpy failed(&session, &AirPlaySession::Failed);
+  EXPECT_FALSE(OpenReady(&session, receiver.device()));
+  ASSERT_EQ(1, failed.size());
+  EXPECT_TRUE(failed[0][0].toString().contains("501"));
+}
+
 TEST(AirPlaySessionTest, ForcesAirPlay1) {
   FakeAirPlayReceiver receiver;
   ASSERT_TRUE(receiver.Listen());

@@ -155,18 +155,25 @@ QString AirPlaySession::DefaultName() {
 void AirPlaySession::Open(const AirPlayDevice& device) {
   Close();
   device_ = device;
-  airplay1_ = device.airplay1 || options_.force_airplay1;
+  if (!device.airplay1 && device.raop_port &&
+      airplay2_refused_.contains(device.id)) {
+    device_.airplay1 = true;
+    device_.address = device.raop_address;
+    device_.port = device.raop_port;
+    device_.plain_audio = device.raop_plain_audio;
+  }
+  airplay1_ = device_.airplay1 || options_.force_airplay1;
   state_ = State::Connecting;
-  if (airplay1_ && !device.plain_audio) {
+  if (airplay1_ && !device_.plain_audio) {
     Fail(tr("%1 only takes encrypted AirPlay 1 audio, which Clementine "
             "can't send")
-             .arg(device.name));
+             .arg(device_.name));
     return;
   }
-  qLog(Info) << "Connecting to AirPlay receiver" << device
+  qLog(Info) << "Connecting to AirPlay receiver" << device_
              << (airplay1_ ? "with AirPlay 1" : "");
   connection_->set_password(options_.password);
-  connection_->Connect(device.address, device.port);
+  connection_->Connect(device_.address, device_.port);
 }
 
 void AirPlaySession::Close() {
@@ -450,6 +457,16 @@ void AirPlaySession::SetupSession() {
           return;
         }
         if (!CheckAllowed(r.code)) return;
+        if (r.code == 501 && device_.raop_port) {
+          // shairport-sync's AirPlay 2 builds only take PTP timing, which
+          // needs ports only root can use; their AirPlay 1 is fine.
+          qLog(Info) << "AirPlay receiver" << device_.name
+                     << "refused an AirPlay 2 session; trying AirPlay 1";
+          airplay2_refused_ << device_.id;
+          const AirPlayDevice device = device_;
+          Open(device);
+          return;
+        }
         if (r.code != 200) {
           Fail(tr("%1 refused to set up a session (HTTP %2)")
                    .arg(device_.name)

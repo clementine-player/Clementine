@@ -93,6 +93,9 @@ class FakeAirPlayReceiver : public QObject {
   void set_report_password(bool report) { report_password_ = report; }
   // Whether it asks its user to allow new sender names.
   void set_ask_to_allow(bool ask) { ask_to_allow_ = ask; }
+  // Whether it refuses an AirPlay 2 session with NTP timing with 501, as
+  // shairport-sync's AirPlay 2 builds do.
+  void set_refuse_ntp(bool refuse) { refuse_ntp_ = refuse; }
   // Called when it asks its user whether to allow a sender name.
   void set_on_prompt(std::function<void(const QString&)> on_prompt) {
     on_prompt_ = on_prompt;
@@ -194,6 +197,7 @@ class FakeAirPlayReceiver : public QObject {
   bool airplay1_pairing_;
   QByteArray digest_nonce_;
   bool ask_to_allow_;
+  bool refuse_ntp_ = false;
   bool report_password_;
   QSet<QString> allowed_names_;
   bool prompting_;

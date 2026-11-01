@@ -84,3 +84,13 @@ On Linux, run in the foreground with its audio written to a file, tested
 | Volume | Taken as −3.10 dB for 70%. |
 | Password | Advertised (`pw=true`), so asked for before connecting; a wrong one answered the Digest challenge (realm "raop") once and was refused; the right one played. |
 | Now playing | Its metadata pipe gave each song's title, artist, album and persistent id, each song's cover (11.5 and 8.7 kB JPEGs) and progress. |
+
+## shairport-sync 5.6.2 (AirPlay 2)
+
+Built with AirPlay 2 support, run with nqptp in Docker on Linux, tested
+2026-11-01. It advertises both `_airplay._tcp` and `_raop._tcp`.
+
+| Check | Result |
+| --- | --- |
+| AirPlay 2 | Paired, then the session's SETUP refused with 501: it only takes PTP timing ("ntp stream handling is not implemented"). |
+| Falling back to AirPlay 1 | Played: ANNOUNCE, SETUP, RECORD and FLUSH accepted, and "Play begin" in its log. |

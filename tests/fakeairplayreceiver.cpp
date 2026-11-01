@@ -378,6 +378,14 @@ bool FakeAirPlayReceiver::Handle(const Request& request) {
              request.body.contains("streams")) {
     return SetupStream(request);
   } else if (request.method == "SETUP") {
+    if (refuse_ntp_) {
+      QVariant body;
+      airplay::bplist::Read(request.body, &body);
+      if (body.toMap().value("timingProtocol") == "NTP") {
+        Respond(request, 501);
+        return true;
+      }
+    }
     // Asks for the time straight away, then for its user to allow the
     // sender.
     if (!sender_timing_port_) {

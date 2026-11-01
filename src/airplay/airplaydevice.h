@@ -60,6 +60,13 @@ struct AirPlayDevice {
   // Where its control connection is.
   QHostAddress address;
   quint16 port = 0;
+  // For an AirPlay 2 receiver that also advertises _raop._tcp: where that
+  // is, and whether it takes unencrypted audio, to play with AirPlay 1 if
+  // it refuses an AirPlay 2 session, as shairport-sync's AirPlay 2 builds
+  // do with NTP timing. raop_port is 0 if it doesn't.
+  QHostAddress raop_address;
+  quint16 raop_port = 0;
+  bool raop_plain_audio = true;
 
   bool password_required() const { return status_flags & PasswordRequired; }
   // Whether it does HomeKit pairing, which AirPlay 2 needs, as pyatv
@@ -95,10 +102,7 @@ struct AirPlayDevice {
   // entry is dropped.
   static QList<QByteArray> SplitTxt(const QByteArray& rdata);
 
-  bool operator==(const AirPlayDevice& other) const;
-  bool operator!=(const AirPlayDevice& other) const {
-    return !(*this == other);
-  }
+  bool operator==(const AirPlayDevice& other) const = default;
 };
 
 QDebug operator<<(QDebug dbg, const AirPlayDevice& device);

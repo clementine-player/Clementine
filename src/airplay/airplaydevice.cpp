@@ -129,13 +129,6 @@ QList<QByteArray> AirPlayDevice::SplitTxt(const QByteArray& rdata) {
   return entries;
 }
 
-bool AirPlayDevice::operator==(const AirPlayDevice& other) const {
-  return id == other.id && name == other.name && model == other.model &&
-         features == other.features && status_flags == other.status_flags &&
-         airplay1 == other.airplay1 && plain_audio == other.plain_audio &&
-         address == other.address && port == other.port;
-}
-
 QDebug operator<<(QDebug dbg, const AirPlayDevice& device) {
   QDebugStateSaver saver(dbg);
   dbg.nospace().noquote() << device.name << " (" << device.model << ", "
