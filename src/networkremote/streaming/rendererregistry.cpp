@@ -259,7 +259,18 @@ void RendererRegistry::AirPlayChanged(const QString& id) {
   const bool use_airplay =
       airplay != airplay_found_.cend() &&
       (raop == raop_found_.cend() || airplay->supports_airplay2());
-  AirPlayDeviceFound(use_airplay ? *airplay : *raop);
+  if (!use_airplay) {
+    AirPlayDeviceFound(*raop);
+    return;
+  }
+  AirPlayDevice device = *airplay;
+  if (raop != raop_found_.cend()) {
+    // To fall back to if it refuses AirPlay 2.
+    device.raop_address = raop->address;
+    device.raop_port = raop->port;
+    device.raop_plain_audio = raop->plain_audio;
+  }
+  AirPlayDeviceFound(device);
 }
 
 void RendererRegistry::AirPlayDeviceFound(const AirPlayDevice& device) {

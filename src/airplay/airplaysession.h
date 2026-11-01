@@ -20,6 +20,7 @@
 
 #include <QHostAddress>
 #include <QObject>
+#include <QSet>
 #include <memory>
 
 #include "airplaycrypto.h"
@@ -223,6 +224,9 @@ class AirPlaySession : public QObject {
   Options options_;
   AirPlayDevice device_;
   bool airplay1_;
+  // The ids of receivers that refused an AirPlay 2 session, which are
+  // played to with AirPlay 1 from then on.
+  QSet<QString> airplay2_refused_;
   AirPlayRtspConnection* connection_;
   State state_;
   // Where the receiver asks for the time.
