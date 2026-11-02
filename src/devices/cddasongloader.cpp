@@ -134,9 +134,11 @@ bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags,
     g_free(buffer);
   }
 
+  // cdiocddasrc gives every track a duration, CD-TEXT or not, so it doesn't
+  // count as a loaded tag: otherwise the disc would always seem to have
+  // titles, and MusicBrainz's would never be used.
   guint64 duration;
   if (gst_tag_list_get_uint64(tags, GST_TAG_DURATION, &duration)) {
-    has_loaded_tags = true;
     song.set_length_nanosec(duration);
   }
 
@@ -173,13 +175,22 @@ void CddaSongLoader::LoadSongsFromCdda() {
     g_object_set(cdda_, "paranoia-mode", 0, nullptr);
   }
 
-  // Change the element's state to ready and paused, to be able to query it
-  if (gst_element_set_state(cdda_, GST_STATE_READY) ==
+  gst_tag_register_musicbrainz_tags();
+
+  // Link the source to a sink in a pipeline before pausing it. Once paused,
+  // it starts reading, and if it pushes before it's linked, it stops with
+  // "not-linked" and never sends the TOC and tags read below.
+  GstElement* pipeline = gst_pipeline_new("pipeline");
+  GstElement* sink = gst_element_factory_make("fakesink", nullptr);
+  gst_bin_add_many(GST_BIN(pipeline), cdda_, sink, nullptr);
+  if (!gst_element_link(cdda_, sink) ||
+      gst_element_set_state(pipeline, GST_STATE_PAUSED) ==
           GST_STATE_CHANGE_FAILURE ||
-      gst_element_set_state(cdda_, GST_STATE_PAUSED) ==
+      gst_element_get_state(pipeline, nullptr, nullptr, 10 * GST_SECOND) ==
           GST_STATE_CHANGE_FAILURE) {
-    gst_element_set_state(cdda_, GST_STATE_NULL);
-    gst_object_unref(GST_OBJECT(cdda_));
+    gst_element_set_state(pipeline, GST_STATE_NULL);
+    // This will also cause cdda_ to be unref'd.
+    gst_object_unref(pipeline);
 
     emit SongsLoaded(initial_song_list);
     emit Finished();
@@ -191,7 +202,8 @@ void CddaSongLoader::LoadSongsFromCdda() {
   gint64 num_tracks = 0;
   if (!gst_element_query_duration(cdda_, track_fmt, &num_tracks)) {
     qLog(Error) << "Error while querying cdda GstElement for track count";
-    gst_object_unref(GST_OBJECT(cdda_));
+    gst_element_set_state(pipeline, GST_STATE_NULL);
+    gst_object_unref(pipeline);
 
     emit SongsLoaded(initial_song_list);
     emit Finished();
@@ -212,15 +224,6 @@ void CddaSongLoader::LoadSongsFromCdda() {
   emit SongsLoaded(initial_song_list);
 
   SongList tagged_song_list(initial_song_list);
-
-  gst_tag_register_musicbrainz_tags();
-
-  GstElement* pipeline = gst_pipeline_new("pipeline");
-  GstElement* sink = gst_element_factory_make("fakesink", NULL);
-  gst_bin_add_many(GST_BIN(pipeline), cdda_, sink, nullptr);
-  gst_element_link(cdda_, sink);
-  gst_element_set_state(pipeline, GST_STATE_READY);
-  gst_element_set_state(pipeline, GST_STATE_PAUSED);
 
   // Get TOC and TAG messages
   GstMessage* msg = nullptr;
