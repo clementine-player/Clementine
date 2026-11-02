@@ -48,6 +48,10 @@ jobs:
             | xargs -0 clang-format \
                 -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
                 --dry-run --Werror
+      - name: Release notes tests
+        # dist/release_notes.py, which plans the releases and writes their
+        # notes, needs nothing but Python and git.
+        run: python3 -m unittest discover -v -s dist -p 'test_*.py'
 
   python:
     name: Python
