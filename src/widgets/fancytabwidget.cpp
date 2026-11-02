@@ -270,6 +270,18 @@ void FancyTabWidget::setCurrentIndex(int index) {
   QTabWidget::setCurrentIndex(index);
 }
 
+int FancyTabWidget::IndexOfPage(QWidget* page) const {
+  for (int i = 0; i < count(); ++i) {
+    if (widget(i) == page || widget(i)->isAncestorOf(page)) return i;
+  }
+  return -1;
+}
+
+void FancyTabWidget::setCurrentWidget(QWidget* page) {
+  const int index = IndexOfPage(page);
+  if (index != -1) setCurrentIndex(index);
+}
+
 // Slot
 void FancyTabWidget::currentTabChanged(int index) {
   QWidget* currentPage = currentWidget();

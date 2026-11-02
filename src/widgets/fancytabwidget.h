@@ -39,6 +39,11 @@ class FancyTabWidget : public QTabWidget {
                 const QString& label);
   void addBottomWidget(QWidget* widget);
 
+  // The index of the tab showing page, a widget passed to addTab or
+  // insertTab, or -1 if no tab shows it. QTabWidget::indexOf doesn't find
+  // it, because each page is put in a container widget of its own.
+  int IndexOfPage(QWidget* page) const;
+
   void setBackgroundPixmap(const QPixmap& pixmap);
   void addSpacer();
 
@@ -67,6 +72,9 @@ class FancyTabWidget : public QTabWidget {
 
  public slots:
   void setCurrentIndex(int index);
+  // Shows the tab of page, a widget passed to addTab or insertTab. Hides
+  // QTabWidget::setCurrentWidget, which doesn't find it.
+  void setCurrentWidget(QWidget* page);
   void SetMode(Mode mode);
   // Mapper mapped signal needs this convenience function
   void SetMode(int mode) { SetMode(Mode(mode)); }
