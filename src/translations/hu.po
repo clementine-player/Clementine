@@ -95,7 +95,7 @@ msgstr " szám"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nJelenleg nincs kapcsolódva. A Clementine figyeli, hogy ez a számítógép mikor csatlakozik."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -106,7 +106,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nEz a számítógép: %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -117,12 +117,12 @@ msgstr "%1 album"
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:297
 #, qt-format
 msgid "%1 can't play this track: %2"
-msgstr ""
+msgstr "A(z) %1 nem tudja lejátszani ezt a számot: %2"
 
 #: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
-msgstr ""
+msgstr "A(z) %1 nem tudta lejátszani ezt a számot"
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -140,65 +140,147 @@ msgstr "%1 nap"
 msgid "%1 days ago"
 msgstr "%1 nappal ezelőtt"
 
+#: airplay/airplaysession.cpp:532
+#, qt-format
+msgid "%1 didn't allow %2 to play there"
+msgstr "A(z) %1 nem engedélyezte, hogy a(z) %2 lejátsza ott"
+
+#: airplay/airplaysession.cpp:340
+#, qt-format
+msgid "%1 didn't pair as AirPlay receivers do"
+msgstr "A(z) %1 nem úgy párosította magát, ahogy az AirPlay vevők szokták"
+
+#: airplay/airplaysession.cpp:929
+#, qt-format
+msgid "%1 didn't prove who it is"
+msgstr "A(z) %1 nem bizonyította be, hogy az, aki"
+
+#: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
+#, qt-format
+msgid "%1 didn't say where to send audio"
+msgstr "A(z) %1 nem mondta meg, hogy merre legyen küldve a hang"
+
+#: airplay/airplaysession.cpp:287
+#, qt-format
+msgid "%1 didn't show a PIN to pair with (HTTP %2)"
+msgstr "A(z) %1 nem jelenített meg PIN-kódot a párosításhoz (HTTP %2)"
+
+#: airplay/airplayengine.cpp:461
+#, qt-format
+msgid "%1 doesn't remember Clementine, and pairing again didn't work"
+msgstr "A(z) %1 nem emlékszik a Clementine-ra, és az újbóli párosítás nem működött"
+
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:441
+#: networkremote/streaming/rendererregistry.cpp:580
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
 " listen on port %2. Another program may be using it."
-msgstr ""
+msgstr "A(z) %1 a Clementine-tól kéri le a zenét egy hálózati megosztáson keresztül, amely nem tudott ezen a porton figyelni: %2. Lehet, hogy egy másik program használja."
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:452
+#: networkremote/streaming/rendererregistry.cpp:591
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
 "listen on an address in %1's network."
-msgstr ""
+msgstr "A(z) %1 a Clementine-tól kéri le a zenét egy hálózati megosztáson keresztül, amely nem tud a(z) %1 hálózatának címén figyelni."
 
 #. TRANSLATORS: Shown when the user picks a Chromecast or other device
 #. to play on, and it can't get the music. Such devices download the
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:433
+#: networkremote/streaming/rendererregistry.cpp:572
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
 "turned off."
-msgstr ""
+msgstr "A(z) %1 a Clementine-tól kéri le a zenét egy hálózati megosztáson keresztül, amely ki van kapcsolva."
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:460
+#: networkremote/streaming/rendererregistry.cpp:599
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
 "allows connections from the local network, and %1 isn't on it."
-msgstr ""
+msgstr "A(z) %1 a Clementine-tól kéri le a zenét egy hálózati megosztáson keresztül, amely csak a helyi hálózatról engedélyez kapcsolatokat, és a(z) %1 nem azon van."
+
+#: airplay/airplaysession.cpp:416
+#, qt-format
+msgid "%1 is busy pairing with another AirPlay sender"
+msgstr "A(z) %1 épp egy másik AirPlay küldővel való párosítással van elfoglalva"
+
+#: airplay/airplaysession.cpp:414
+#, qt-format
+msgid "%1 isn't accepting new AirPlay senders"
+msgstr "A(z) %1 nem fogad új AirPlay küldőket"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 itt: %2"
 
+#: airplay/airplaysession.cpp:168
+#, qt-format
+msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
+msgstr ""
+
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 lejátszólista (%2)"
 
+#: airplay/airplaysession.cpp:538
+#, qt-format
+msgid "%1 refused %2 (HTTP %3)"
+msgstr "A(z) %1 elutasította: %2 (HTTP %3)"
+
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
 msgid "%1 refused the sign-in. Try signing out and in again."
-msgstr ""
+msgstr "A(z) %1 elutasította a bejelentkezést. Próbáljon meg ki- és bejelentkezni."
+
+#: airplay/airplaysession.cpp:402
+#, qt-format
+msgid "%1 refused to pair"
+msgstr "A(z) %1 elutasította a párosítást"
+
+#: airplay/airplaysession.cpp:320
+#, qt-format
+msgid ""
+"%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
+"network?"
+msgstr "A(z) %1 elutasította a párosítást (HTTP %2). Úgy van beállítva, hogy bárkitől elfogadja az AirPlayt a hálózaton?"
+
+#: airplay/airplaysession.cpp:419
+#, qt-format
+msgid "%1 refused to pair (HTTP %2, error %3)"
+msgstr "A(z) %1 elutasította a párosítást (HTTP %2, hiba: %3)"
+
+#: airplay/airplaysession.cpp:412
+#, qt-format
+msgid "%1 refused to pair after too many attempts"
+msgstr "A(z) %1 túl sok próbálkozás elutasította a párosítást"
+
+#: airplay/airplaysession.cpp:405
+#, qt-format
+msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
+msgstr "A(z) %1 túl sok próbálkozás elutasította a párosítást. Próbálja újra %2 másodperc múlva."
+
+#: airplay/airplaysession.cpp:471
+#, qt-format
+msgid "%1 refused to set up a session (HTTP %2)"
+msgstr "A(z) %1 elutasította a munkamenet beállítását (HTTP %2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -247,7 +329,14 @@ msgstr "%1 átküldve"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
-msgstr ""
+msgstr "%1  %2\nEz a számítógép: %3"
+
+#. TRANSLATORS: %1 is a message such as "Living Room didn't allow
+#. Clementine on Laptop to play there".
+#: airplay/airplayengine.cpp:316
+#, qt-format
+msgid "%1. Allow it there, then play again."
+msgstr "%1. Engedélyezze ott, majd játssza le újra."
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -328,7 +417,7 @@ msgstr "%1 el&rejtése"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
-msgstr "&Elrejtés..."
+msgstr "&Elrejtés…"
 
 #: playlist/playlistheader.cpp:47
 msgid "&Left"
@@ -388,7 +477,7 @@ msgstr "(különbözik több számnál)"
 
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
-msgstr "...és az összes Amarok közreműködő"
+msgstr "…és az Amarok összes közreműködője"
 
 #: ../bin/src/ui_albumcovermanager.h:227 ../bin/src/ui_albumcovermanager.h:228
 msgid "0"
@@ -417,7 +506,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_playbacksettingspage.h:403
 msgid "192,000Hz"
-msgstr "192,000 Hz"
+msgstr "192 000 Hz"
 
 #: ../bin/src/ui_appearancesettingspage.h:346
 msgid "40%"
@@ -425,11 +514,11 @@ msgstr "40%"
 
 #: ../bin/src/ui_playbacksettingspage.h:400
 msgid "44,100Hz"
-msgstr "44,100 Hz"
+msgstr "44 100 Hz"
 
 #: ../bin/src/ui_playbacksettingspage.h:401
 msgid "48,000Hz"
-msgstr "48,000 Hz"
+msgstr "48 000 Hz"
 
 #: library/library.cpp:80
 msgid "50 random tracks"
@@ -437,7 +526,7 @@ msgstr "50 véletlen szám"
 
 #: ../bin/src/ui_playbacksettingspage.h:402
 msgid "96,000Hz"
-msgstr "96,000 Hz"
+msgstr "96 000 Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:169
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -485,7 +574,7 @@ msgid ""
 "href=\"https://clementine-player.org/licenses/by-"
 "sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License "
 "3.0</a>.</p>"
-msgstr ""
+msgstr "<p>Ez a cikk felhasználja a következő Wikipédia-szócikket: <a href=\"%1\">%2</a>, amely a <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License 3.0</a> alatt lett közreadva.</p>"
 
 #: ../bin/src/ui_filenameformatwidget.h:117
 msgid ""
@@ -496,12 +585,12 @@ msgstr "<p>A száminformációk behelyettesítéséhez a címkék % jellel kezd�
 
 #: ../bin/src/ui_networkremotesettingspage.h:334
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Egy kliens csak akkor kapcsolódhat, ha a helyes kódot ütötte be."
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Prémium fiók szükséges"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -517,7 +606,7 @@ msgstr "Egy szám akkor lesz felvéve a lejátszólistára, ha kielégíti az al
 
 #: ../bin/src/ui_behavioursettingspage.h:457
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomatikus"
 
 #: smartplaylists/searchterm.cpp:408
 msgid "A-Z"
@@ -529,7 +618,7 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:173
 msgid "AAC 32k"
@@ -537,7 +626,7 @@ msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64k"
 
 #: core/song.cpp:436
 msgid "AIFF"
@@ -545,11 +634,11 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:147
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr "MINDEN DICSŐSÉG A HYPNOTOADÉ!"
+msgstr "MINDEN DICSŐSÉG A HYPNOTOADNAK!"
 
 #: ui/albumcovermanager.cpp:107 ui/albumcoversearcher.cpp:160
 msgid "Abort"
-msgstr "Névjegy"
+msgstr "Megszakítás"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -609,11 +698,11 @@ msgstr "Művelet felvétele"
 
 #: ../bin/src/ui_transcodedialog.h:228
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Összes szám hozzáadása a könyvtárból és az alkönyvtáraiból"
 
 #: internet/internetradio/savedradio.cpp:116
 msgid "Add another stream..."
-msgstr "Új közvetítés hozzáadása"
+msgstr "Új közvetítés hozzáadása…"
 
 #: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:230
 msgid "Add directory..."
@@ -625,19 +714,19 @@ msgstr "Fájl hozzáadása"
 
 #: ../bin/src/ui_mainwindow.h:775
 msgid "Add file to transcoder"
-msgstr "Fájl hozzáadása az átkódoláshoz"
+msgstr "Fájl hozzáadása az átkódolóhoz"
 
 #: ../bin/src/ui_mainwindow.h:773
 msgid "Add file(s) to transcoder"
-msgstr "Fájlok hozzáadása az átkódoláshoz"
+msgstr "Fájlok hozzáadása az átkódolóhoz"
 
 #: ../bin/src/ui_transcodedialog.h:226 ../bin/src/ui_mainwindow.h:741
 msgid "Add file..."
-msgstr "Fájl hozzáadása"
+msgstr "Fájl hozzáadása…"
 
 #: transcoder/transcodedialog.cpp:268
 msgid "Add files to transcode"
-msgstr "Fájlok felvétele átkódoláshoz"
+msgstr "Fájlok hozzáadása az átkódoláshoz"
 
 #: ../bin/src/ui_googledrivesettingspage.h:148
 msgid "Add files..."
@@ -654,11 +743,11 @@ msgstr "Mappa hozzáadása…"
 
 #: ui/networkremotesettingspage.cpp:342
 msgid "Add network or address"
-msgstr ""
+msgstr "Hálózat vagy cím hozzáadása"
 
 #: ../bin/src/ui_networkremotesettingspage.h:346
 msgid "Add network or address..."
-msgstr ""
+msgstr "Hálózat vagy cím hozzáadása…"
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Add new folder..."
@@ -710,7 +799,7 @@ msgstr "Műfaj címke hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Csoportosítás címke hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
@@ -718,7 +807,7 @@ msgstr "Szám hossza címke hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Előadó címke hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
@@ -726,7 +815,7 @@ msgstr "Lejátszásszámláló hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
-msgstr ""
+msgstr "Értékelés hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song skip count"
@@ -763,7 +852,7 @@ msgstr "Sorbaállítás"
 
 #: internet/radiobrowser/radiobrowserservice.cpp:309
 msgid "Add to your radio streams"
-msgstr ""
+msgstr "Hozzáadás a rádióközvetítésekhez"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:117
 msgid "Add wiimotedev action"
@@ -771,28 +860,28 @@ msgstr "Wiimotedev művelet hozzáadása"
 
 #: library/library.cpp:134
 msgid "Added in the last 30 days"
-msgstr ""
+msgstr "Az elmúlt 30 napbban hozzáadva"
 
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
-msgstr "Hozzáadva ebben a hónapban"
+msgstr "Ebben a hónapban hozzáadva"
 
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added this week"
-msgstr "Hozzáadva ezen a héten"
+msgstr "Ezen a héten hozzáadva"
 
 #: ../bin/src/ui_libraryfilterwidget.h:97
 msgid "Added this year"
-msgstr "Hozzáadva ebben az évben"
+msgstr "Ebben az évben hozzáadva"
 
 #: ../bin/src/ui_libraryfilterwidget.h:91
 msgid "Added today"
-msgstr "Hozzáadva ma"
+msgstr "Ma hozzáadva"
 
 #: ../bin/src/ui_libraryfilterwidget.h:93
 #: ../bin/src/ui_libraryfilterwidget.h:95
 msgid "Added within three months"
-msgstr "Hozzáadva három hónapon belül"
+msgstr "Három hónapon belül hozzáadva"
 
 #: library/libraryfilterwidget.cpp:177
 msgid "Advanced grouping..."
@@ -800,11 +889,19 @@ msgstr "Speciális csoportosítás…"
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid "After "
-msgstr ""
+msgstr "Utána"
 
 #: ../bin/src/ui_organisedialog.h:181
 msgid "After copying..."
 msgstr "Másolás után…"
+
+#: airplay/airplayengine.cpp:404
+msgid "AirPlay PIN"
+msgstr "AirPlay PIN-kód"
+
+#: airplay/airplayengine.cpp:381
+msgid "AirPlay password"
+msgstr "AirPlay jelszó"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
@@ -865,7 +962,7 @@ msgstr "Összes fájl (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Összes hálózat"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -880,9 +977,17 @@ msgstr "Összes fordító"
 msgid "All tracks"
 msgstr "Összes szám"
 
+#. TRANSLATORS: Shown while an AirPlay receiver, such as a Mac, asks its
+#. user whether to let Clementine play on it. %1 is what Clementine calls
+#. itself there, such as "Clementine on Laptop"; %2 is the receiver's name.
+#: airplay/airplayengine.cpp:224
+#, qt-format
+msgid "Allow %1 on %2 to play there"
+msgstr ""
+
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Engedélyezés, hogy egy kliens zenét töltsön le erről a számítógépről."
 
 #: ../bin/src/ui_networkremotesettingspage.h:351
 msgid "Allow downloads"
@@ -892,7 +997,7 @@ msgstr "Letöltések engedélyezése"
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
-msgstr ""
+msgstr "Engedélyezze a letöltéseket a Clementine távoli hálózati beállításaiban, hogy a számok ezen a telefonon maradjanak."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Allow mid/side encoding"
@@ -900,7 +1005,7 @@ msgstr "Mid/side kódolás engedélyezése"
 
 #: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Allow playing on remote devices"
-msgstr ""
+msgstr "Lejátszás engedélyezése távoli eszközökön"
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -908,16 +1013,16 @@ msgstr "Az eredetiek mellett"
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "A fő ablak el&rejtése mindig"
 
 #: ../bin/src/ui_behavioursettingspage.h:418
 msgid "Always show &the main window"
-msgstr ""
+msgstr "A fő ablak meg&jelenítése mindig"
 
 #: ../bin/src/ui_behavioursettingspage.h:432
 #: ../bin/src/ui_behavioursettingspage.h:446
 msgid "Always start playing"
-msgstr "Mindig indítsa el a lejátszást"
+msgstr "Lejátszás elindítása mindig"
 
 #: internet/jamendo/jamendoservice.cpp:75
 msgid "Ambient"
@@ -942,7 +1047,7 @@ msgstr "És:"
 
 #: moodbar/moodbarrenderer.cpp:172
 msgid "Angry"
-msgstr "Mérge"
+msgstr "Mérges"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
 #: ../bin/src/ui_songinfosettingspage.h:123
@@ -950,7 +1055,7 @@ msgstr "Mérge"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Append files/URLs to the playlist"
 msgstr "Fájlok/webcímek hozzáfűzése a lejátszólistához"
 
@@ -958,7 +1063,7 @@ msgstr "Fájlok/webcímek hozzáfűzése a lejátszólistához"
 #: internet/core/internetservice.cpp:51 library/libraryview.cpp:382
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
-msgstr "Hozzáfűzés az aktuális lejátszólistához"
+msgstr "Hozzáfűzés a jelenlegi lejátszólistához"
 
 #: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Append to the playlist"
@@ -981,7 +1086,7 @@ msgstr "Biztos, hogy visszaállítja a szám statisztikáit?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Biztos, hogy beleírja a számok sztatisztikáit a fájlokba a zenetár összes száma esetén?"
 
 #: library/savedgroupingmanager.cpp:63 playlist/playlist.cpp:1377
 #: widgets/filenameformatwidget.cpp:49 ../bin/src/ui_groupbydialog.h:171
@@ -1043,7 +1148,7 @@ msgstr "Automatikus frissítés"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:98
 msgid "Automatically determine based on sample rate."
-msgstr ""
+msgstr "Automatikus meghatározás a mintavételezési arány alapján."
 
 #: ../bin/src/ui_librarysettingspage.h:217
 msgid "Automatically open single categories in the library tree"
@@ -1088,7 +1193,7 @@ msgstr "Háttér átlátszatlansága"
 
 #: core/database.cpp:680
 msgid "Backing up database"
-msgstr ""
+msgstr "Adatbázis biztonsági mentése"
 
 #: ../bin/src/ui_equalizer.h:170
 msgid "Balance"
@@ -1108,7 +1213,7 @@ msgstr "Egyszerű kék"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "Basic audio type"
-msgstr ""
+msgstr "Alapvető hangtípus"
 
 #: ../bin/src/ui_behavioursettingspage.h:408
 msgid "Behavior"
@@ -1120,7 +1225,7 @@ msgstr "Legjobb"
 
 #: songinfo/artistbiography.cpp:97 songinfo/artistbiography.cpp:275
 msgid "Biography"
-msgstr ""
+msgstr "Életrajz"
 
 #: playlist/playlist.cpp:1416 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:137
@@ -1143,7 +1248,7 @@ msgstr "Bitsebesség"
 #: widgets/filenameformatwidget.cpp:64
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitsebesség"
 
 #: analyzers/blockanalyzer.cpp:47
 msgid "Block analyzer"
@@ -1155,11 +1260,11 @@ msgstr "Blokktípus"
 
 #: internet/jamendo/jamendoservice.cpp:76
 msgid "Blues"
-msgstr ""
+msgstr "Blues"
 
 #: ../bin/src/ui_appearancesettingspage.h:343
 msgid "Blur amount"
-msgstr ""
+msgstr "Elmosás mennyisége"
 
 #: ../bin/src/ui_notificationssettingspage.h:456
 msgid "Body"
@@ -1171,7 +1276,7 @@ msgstr "Fellendülés"
 
 #: ../bin/src/ui_boxsettingspage.h:96
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:144
 #: ../bin/src/ui_podcastsettingspage.h:269
@@ -1183,17 +1288,17 @@ msgstr "Tallózás…"
 msgid "Buffer duration"
 msgstr "Puffer hossza"
 
-#: engines/gstengine.cpp:993
+#: engines/gstengine.cpp:998
 msgid "Buffering"
 msgstr "Pufferelés"
 
 #: internet/seafile/seafileservice.cpp:232
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Seafile-index összeállítása…"
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "De ezek a források le vannak tiltva:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:181
 msgid "Buttons"
@@ -1243,13 +1348,13 @@ msgstr "Véletlenszerű lejátszási mód megváltoztatása"
 msgid "Change the currently playing song"
 msgstr "Jelenleg játszott szám megváltoztatása"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Change the language"
 msgstr "Nyelv váltása"
 
 #: ../bin/src/ui_playbacksettingspage.h:406
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "A változások a következő szám lejátszakor lépnek érvénybe"
 
 #: ../bin/src/ui_playbacksettingspage.h:410
 msgid ""
@@ -1285,7 +1390,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Válasszon nevet az intelligens lejátszólistának"
 
-#: engines/gstengine.cpp:1014
+#: engines/gstengine.cpp:1019
 msgid "Choose automatically"
 msgstr "Automatikus választás"
 
@@ -1307,17 +1412,17 @@ msgstr "Válassza ki, hogy a lejátszólista hogyan legyen rendezve és hány sz
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Válassza ki a podcastok letöltési könyvtárát"
 
 #: ../bin/src/ui_internetshowsettingspage.h:83
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Válassza ki a megjelenítendő internetes szolgáltatásokat."
 
 #: ../bin/src/ui_googledrivesettingspage.h:147
 msgid ""
 "Choose which files Clementine can see.  Clementine will only ever have "
 "access to the files you pick here."
-msgstr ""
+msgstr "Válassza ki, hogy mely fájlokat lásson a Clementine. A Clementine-nak csak itt kiválasztott fájlokhoz lesz hozzáférése."
 
 #. TRANSLATORS: On the Network Remote settings page, under "Use a
 #. network remote control". Chromecasts, and other devices Clementine
@@ -1329,7 +1434,7 @@ msgid ""
 "Chromecasts and other devices you play on get their music from Clementine "
 "through the network remote, so they need it turned on, and listening on an "
 "address in their network."
-msgstr ""
+msgstr "A Chromecastok és más lejátszóeszközök egy hálózati megosztáson keresztül kapják meg a zenét a Clementine-tól, így be kell kapcsolni, és figyelnie kell egy a hálózatukon elérhető címen."
 
 #: internet/jamendo/jamendoservice.cpp:78 ui/equalizer.cpp:113
 msgid "Classical"
@@ -1375,19 +1480,19 @@ msgstr "A Clementine automatikusan az eszköz által is támogatott formátumba 
 
 #: ../bin/src/ui_boxsettingspage.h:97
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "A Clementine le tudja játszani azokat a zenéket, melyet feltöltött a Boxra"
 
 #: ../bin/src/ui_dropboxsettingspage.h:97
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "A Clementine le tudja játszani azokat a zenéket, melyet feltöltött a Dropboxra"
 
 #: ../bin/src/ui_googledrivesettingspage.h:144
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "A Clementine le tudja játszani azokat a zenéket, melyet feltöltött a Google Drive-ra"
 
 #: ../bin/src/ui_skydrivesettingspage.h:97
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "A Clementine le tudja játszani azokat a zenéket, melyet feltöltött a OneDrive-ra"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
@@ -1409,6 +1514,11 @@ msgstr "A Clementine egyetlen projectM megjelenítést sem tud betölteni. Ellen
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
 msgstr "Clementine képmegjelenítő"
+
+#: airplay/airplaysession.cpp:152
+#, qt-format
+msgid "Clementine on %1"
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1485,7 +1595,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Színek"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:215
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Vesszővel tagolt lista az osztály:szint pároknak, a szintek 0-3 értékeket vehetnek fel"
 
@@ -1527,7 +1637,7 @@ msgstr "Magnatune beállítása…"
 
 #: internet/plex/plexservice.cpp:127
 msgid "Configure Plex..."
-msgstr ""
+msgstr "Plex beállítása…"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Configure Shortcuts"
@@ -1570,31 +1680,31 @@ msgstr "Eszköz csatlakoztatása"
 #: internet/plex/plexsettingspage.cpp:183
 #, qt-format
 msgid "Connected to %1."
-msgstr ""
+msgstr "Kapcsolódva ehhez: %1."
 
 #: internet/plex/plexsettingspage.cpp:186
 #, qt-format
 msgid "Connecting to %1..."
-msgstr ""
+msgstr "Kapcsolódás ehhez: %1…"
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "A kiszolgáló elutasította a kapcsolatot, ellenőrizze a kiszolgálócímet. Például http://localhost:4040/"
 
 #: songinfo/streamdiscoverer.cpp:117
 msgid "Connection timed out"
-msgstr ""
+msgstr "A kapcsolat túllépte az időkorlátot"
 
 #: internet/subsonic/subsonicsettingspage.cpp:144
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "A kapcsolat túllépte az időkorlátot, ellenőrizze a kiszolgálócímet. Például: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:125 ../bin/src/ui_mainwindow.h:750
 msgid "Console"
-msgstr ""
+msgstr "Konzol"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
 msgid "Constant bitrate"
@@ -1602,27 +1712,27 @@ msgstr "Állandó bitsebesség"
 
 #: internet/plex/plexsettingspage.cpp:115
 msgid "Contacting plex.tv..."
-msgstr ""
+msgstr "Kapcsolatfelvétel a plex.tv-vel…"
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert all music"
-msgstr "Minden szám átalakítása"
+msgstr "Összes szám átalakítása"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Convert any music that the device can't play"
-msgstr "Az eszköz által nem támogatott számok átalakítása"
+msgstr "Az eszköz által le nem játszható számok átalakítása"
 
 #: ../bin/src/ui_networkremotesettingspage.h:355
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "Veszteségmentes hangfájlok átalakítása a megosztásnak való elküldés előtt."
 
 #: ../bin/src/ui_networkremotesettingspage.h:357
 msgid "Convert lossless files"
-msgstr ""
+msgstr "Veszteségmentes hangfájlok átalakítása"
 
 #: internet/core/internetservice.cpp:82
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Másolás a vágólapra"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
 #: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
@@ -1636,7 +1746,7 @@ msgstr "Másolás a zenetárba…"
 
 #: ../bin/src/ui_podcastinfowidget.h:190
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: internet/subsonic/subsonicsettingspage.cpp:100
 msgid ""
@@ -1673,8 +1783,24 @@ msgstr ""
 msgid "Could not log in to Last.fm. Please try again."
 msgstr ""
 
+#: airplay/airplaysession.cpp:555
+#, qt-format
+msgid "Couldn't connect to %1's event channel: %2"
+msgstr ""
+
+#: airplay/airplayrtspconnection.cpp:315
+#, qt-format
+msgid ""
+"Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
+" AirPlay on?"
+msgstr ""
+
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
+msgstr ""
+
+#: airplay/airplayrtspconnection.cpp:228
+msgid "Couldn't decrypt what the AirPlay receiver sent"
 msgstr ""
 
 #: internet/plex/plexauthenticator.cpp:167
@@ -1687,14 +1813,18 @@ msgstr ""
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "%1 kódolásához nem található muxer, ellenőrizze, hogy telepítve van-e a megfelelő GStreamer beépülő"
+msgstr "A(z) %1 kódolásához nem található muxer, ellenőrizze, hogy telepítve van-e a megfelelő GStreamer beépülő"
 
 #: transcoder/transcoder.cpp:469
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "Nem található megfelelő kódoló %1 tömörítéséhez. Ellenőrizze, hogy a GStreamer beépülők megfelelően vannak-e telepítve"
+msgstr "Nem található megfelelő kódoló a(z) %1 tömörítéséhez, ellenőrizze, hogy a GStreamer beépülők megfelelően vannak-e telepítve"
+
+#: airplay/airplaysession.cpp:214
+msgid "Couldn't listen for the AirPlay receiver"
+msgstr "Nem sikerült az AirPlay vevő figyelése"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -1715,7 +1845,7 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:79
 msgid "Country"
-msgstr ""
+msgstr "Country"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:440
@@ -1752,9 +1882,9 @@ msgstr "Albumborító beállítva innen: %1"
 msgid "Covers from %1"
 msgstr "Borítók innen: %1"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Create a new playlist with files/URLs"
-msgstr ""
+msgstr "Új lejátszólista létrehozása fájlokkal/webcímekkel"
 
 #: ../bin/src/ui_playbacksettingspage.h:377
 msgid "Cross-fade when changing tracks automatically"
@@ -1774,7 +1904,7 @@ msgstr "Ctrl+K"
 
 #: ../bin/src/ui_savedgroupingmanager.h:106 ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+Up"
-msgstr "Ctrl+Up"
+msgstr "Ctrl+Fel"
 
 #: ui/equalizer.cpp:111
 msgid "Custom"
@@ -1782,7 +1912,7 @@ msgstr "Egyéni"
 
 #: ../bin/src/ui_appearancesettingspage.h:341
 msgid "Custom image:"
-msgstr ""
+msgstr "Egyéni kép:"
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Custom message settings"
@@ -1794,7 +1924,7 @@ msgstr "Egyéni…"
 
 #: devices/udisks2lister.cpp:81
 msgid "D-Bus path"
-msgstr ""
+msgstr "D-Bus útvonal"
 
 #: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
@@ -1813,11 +1943,11 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Adatbázis-sérülés észlelve. Olvassa el a https://github.com/clementine-player/Clementine/wiki/Database-Corruption leírást az adatbázis-helyreállítási utasításokért"
 
 #: ../bin/src/ui_episodeinfowidget.h:130
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
 #: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1835,13 +1965,13 @@ msgstr "Nap"
 msgid "De&fault"
 msgstr "&Alapértelmezés"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:195
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Hangerő csökkentése 4 százalékkal"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Decrease the volume by <value> percent"
-msgstr ""
+msgstr "Hangerő csökkentése <value> százalékkal"
 
 #: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Decrease volume"
@@ -1849,12 +1979,12 @@ msgstr "Hangerő csökkentése"
 
 #: ../bin/src/ui_appearancesettingspage.h:335
 msgid "Default background image"
-msgstr ""
+msgstr "Alapértelmezett háttérkép"
 
-#: engines/gstengine.cpp:1040
+#: engines/gstengine.cpp:1045
 #, qt-format
 msgid "Default device on %1"
-msgstr ""
+msgstr "Alapértelmezett eszköz ezen: %1"
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid "Defaults"
@@ -1899,7 +2029,7 @@ msgstr "Előbeállítás törlése"
 msgid "Delete smart playlist"
 msgstr "Intelligens lejátszólista törlése"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:217
 msgid "Delete the currently playing song"
 msgstr "Jelenleg játszott szám törlése"
 
@@ -1991,7 +2121,7 @@ msgstr "Időtartam letiltása"
 
 #: ../bin/src/ui_appearancesettingspage.h:351
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Hangulatsáv előállításának letiltása"
 
 #: ../bin/src/ui_notificationssettingspage.h:439
 msgctxt "Refers to a disabled notification type in Notification settings."
@@ -2020,13 +2150,13 @@ msgstr "Szakaszos átvitel"
 msgid "Display options"
 msgstr "Beállítások megtekintése"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Display the on-screen-display"
 msgstr "OSD megjelenítése"
 
 #: ../bin/src/ui_mainwindow.h:768
 msgid "Do a full library rescan"
-msgstr "Teljes zenetár újraolvasása"
+msgstr "Zenetár teljes átvizsgálása"
 
 #: internet/core/cloudfileservice.cpp:245
 #: internet/core/cloudfileservice.cpp:252
@@ -2100,7 +2230,7 @@ msgstr "%n epizód letöltése"
 
 #: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Download Clementine Remote for Android"
-msgstr ""
+msgstr "Clementine távirányító letöltése Androidra"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
@@ -2112,7 +2242,7 @@ msgstr "Epizódok letöltése ide:"
 
 #: ../bin/src/ui_magnatunesettingspage.h:163
 msgid "Download membership"
-msgstr "Tagsági információk betöltése"
+msgstr "Tagsági információk letöltése"
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download new episodes automatically"
@@ -2121,7 +2251,7 @@ msgstr "Új epizódok automatikus letöltése"
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
-msgstr "Letöltés sorba állítása"
+msgstr "Letöltés sorba állítva"
 
 #: ../bin/src/ui_networkremotesettingspage.h:353
 msgid "Download settings"
@@ -2187,7 +2317,7 @@ msgstr "Hossz"
 #. headphones.
 #: ui/behavioursettingspage.cpp:53
 msgid "During playback"
-msgstr ""
+msgstr "Lejátszás során"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Dynamic mode is on"
@@ -2233,7 +2363,7 @@ msgstr "Szerkesztés…"
 
 #: internet/jamendo/jamendoservice.cpp:81
 msgid "Electronic"
-msgstr ""
+msgstr "Elektronikus"
 
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Email"
@@ -2281,6 +2411,11 @@ msgstr "Kódolás minősége"
 msgid "Encoding mode"
 msgstr "Kódolási mód"
 
+#: airplay/airplayengine.cpp:385
+#, qt-format
+msgid "Enter %1's AirPlay password:"
+msgstr "Adja meg a(z) %1 AirPlay jelszavát:"
+
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
 msgstr "Adjon meg egy webcímet"
@@ -2326,6 +2461,11 @@ msgstr ""
 msgid "Enter search terms here"
 msgstr "Adja meg a keresési kifejezést"
 
+#: airplay/airplayengine.cpp:408
+#, qt-format
+msgid "Enter the PIN %1 shows:"
+msgstr ""
+
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Adja meg egy rádióközvetítés webcímét:"
@@ -2346,11 +2486,11 @@ msgstr "Epizódinformációk"
 msgid "Equalizer"
 msgstr "Hangszínszabályzó"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Equivalent to --log-levels *:1"
 msgstr "Megegyezik a --log-levels *:1 kapcsolóval"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid "Equivalent to --log-levels *:3"
 msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
@@ -2591,8 +2731,8 @@ msgstr "Subsonic könyvtár lekérése"
 msgid "Fetching cover error"
 msgstr "Hiba a borító lekérésekor"
 
-#: internet/subsonic/subsonicdynamicplaylist.cpp:98
-#: internet/subsonic/subsonicdynamicplaylist.cpp:164
+#: internet/subsonic/subsonicdynamicplaylist.cpp:97
+#: internet/subsonic/subsonicdynamicplaylist.cpp:163
 msgid "Fetching playlist items"
 msgstr "Lejátszólista-elemek lekérése"
 
@@ -2686,6 +2826,11 @@ msgstr "Mono kódolás kényszerítése"
 #: devices/deviceview.cpp:327
 msgid "Forget device"
 msgstr "Eszköz elfelejtése"
+
+#: airplay/airplayengine.cpp:170
+#, qt-format
+msgid "Forget pairing with %1"
+msgstr ""
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -2810,11 +2955,11 @@ msgstr "Ugrás"
 
 #: ../bin/src/ui_mainwindow.h:761
 msgid "Go to next playlist tab"
-msgstr "Ugrás a következő lejátszólista-lapra"
+msgstr "Ugrás a következő lejátszólistalapra"
 
 #: ../bin/src/ui_mainwindow.h:762
 msgid "Go to previous playlist tab"
-msgstr "Ugrás az előző lejátszólista-lapra"
+msgstr "Ugrás az előző lejátszólistalapra"
 
 #: ../bin/src/ui_googledrivesettingspage.h:143
 msgid "Google Drive"
@@ -2895,7 +3040,7 @@ msgstr "HTTP proxy"
 
 #: moodbar/moodbarrenderer.cpp:176
 msgid "Happy"
-msgstr ""
+msgstr "Boldog"
 
 #: ../bin/src/ui_deviceproperties.h:370
 msgid "Hardware information"
@@ -2907,7 +3052,7 @@ msgstr "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők me
 
 #: ../bin/src/ui_appearancesettingspage.h:354
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Lejátszólistaszűrő oldalsáv elrejtése"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "High"
@@ -2929,11 +3074,11 @@ msgstr "Hip Hop"
 
 #: internet/jamendo/jamendoservice.cpp:84
 msgid "Hip-hop"
-msgstr ""
+msgstr "Hip-hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr "A gazdagép nem található, ellenőrizze a kiszolgáló webcímét. Például: http://localhost:4040/"
+msgstr "WA gazdagép nem található, ellenőrizze a kiszolgáló webcímét. Például: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:429
 msgid "Hours"
@@ -2949,7 +3094,7 @@ msgstr "Nincs Magnatune fiókom"
 
 #: ../bin/src/ui_plexsettingspage.h:143
 msgid "I've signed in"
-msgstr ""
+msgstr "Bejelentkeztem"
 
 #: ../bin/src/ui_deviceproperties.h:369
 msgid "Icon"
@@ -3039,11 +3184,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3068,7 +3213,7 @@ msgstr ""
 msgid "Insert..."
 msgstr "Beszúrás…"
 
-#: networkremote/outgoingdatacreator.cpp:564
+#: networkremote/outgoingdatacreator.cpp:565
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr ""
@@ -3370,7 +3515,7 @@ msgstr "Száminformációk betöltése"
 msgid "Loading..."
 msgstr "Betöltés…"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fájlok/webcímek betöltése, jelenlegi lejátszólista cseréje"
 
@@ -3678,7 +3823,7 @@ msgstr "Hálózati távirányító"
 #. settings, where the user can fix why a Chromecast or other device
 #. can't get music from Clementine. "Network Remote" is that page's
 #. name.
-#: widgets/outputbutton.cpp:198
+#: widgets/outputbutton.cpp:204
 msgid "Network Remote Settings..."
 msgstr ""
 
@@ -4035,7 +4180,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Other options"
 msgstr "Egyéb beállítások"
 
@@ -4073,6 +4218,13 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
+#. TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
+#. shows a PIN once, after which it lets Clementine play without asking.
+#: airplay/airplayengine.cpp:166
+#, qt-format
+msgid "Pair with %1..."
+msgstr ""
+
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr ""
@@ -4094,7 +4246,7 @@ msgstr "Jelszó"
 msgid "Pause"
 msgstr "Szünet"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Pause playback"
 msgstr "Lejátszás szüneteltetése"
 
@@ -4144,11 +4296,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Lejátszások száma"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Play if stopped, pause if playing"
 msgstr "Lejátszás, ha le van állítva, különben szünet"
 
@@ -4164,12 +4316,12 @@ msgstr ""
 #. TRANSLATORS: The title of the message shown when the user picks a
 #. Chromecast or other device to play on, and it can't get the music from
 #. Clementine's network remote. %1 is the device's name.
-#: widgets/outputbutton.cpp:178
+#: widgets/outputbutton.cpp:184
 #, qt-format
 msgid "Play on %1"
 msgstr ""
 
-#: widgets/outputbutton.cpp:115
+#: widgets/outputbutton.cpp:121
 msgid "Play on another device"
 msgstr ""
 
@@ -4177,7 +4329,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Play the <n>th track in the playlist"
 msgstr "A(z) <n>. szám lejátszása a lejátszólistában"
 
@@ -4189,7 +4341,7 @@ msgstr "Lejátszás/szünet"
 msgid "Playback"
 msgstr "Lejátszás"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Player options"
 msgstr "Lejátszóbeállítások"
 
@@ -4207,7 +4359,7 @@ msgstr ""
 msgid "Playing music on another device"
 msgstr ""
 
-#: widgets/outputbutton.cpp:116
+#: widgets/outputbutton.cpp:122
 #, qt-format
 msgid "Playing on %1"
 msgstr ""
@@ -4222,7 +4374,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Lejátszólista befejezve"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Lejátszólista beállítások"
@@ -4372,9 +4524,9 @@ msgstr "Előző"
 msgid "Previous track"
 msgstr "Előző szám"
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:216
 msgid "Print out version information"
-msgstr "Verzió információ megjelenítése…"
+msgstr "Verzióinformáció kiírása"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Profile"
@@ -4413,7 +4565,7 @@ msgstr "Számok felvétele véletlenszerű rendezésben"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:218
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4667,7 +4819,7 @@ msgstr "Újbóli feltöltés"
 
 #: ../bin/src/ui_networkremotesettingspage.h:336
 msgid "Require authentication code"
-msgstr ""
+msgstr "Hitelesítési kód megkövetelése"
 
 #: widgets/lineedit.cpp:53
 msgid "Reset"
@@ -4681,7 +4833,7 @@ msgstr "Lejátszásszámlálók visszaállítása"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4954,11 +5106,11 @@ msgstr "Léptetés hátra"
 msgid "Seek forward"
 msgstr "Léptetés előre"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Léptetés hátra"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Seek the currently playing track to an absolute position"
 msgstr "A lejátszott szám adott pozícióra léptetése"
 
@@ -5047,7 +5199,7 @@ msgstr "%1 beállítása erre: „%2”…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Set the volume to <value> percent"
 msgstr "Hangerő beállítása <value> százalékra"
 
@@ -5129,11 +5281,11 @@ msgstr "Megjelenítése az állapotsáv fölött"
 
 #: ui/mainwindow.cpp:681
 msgid "Show all songs"
-msgstr "Minden szám megjelenítése"
+msgstr "Összes szám megjelenítése"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Show all the songs"
-msgstr "Minden szám megjelenítése"
+msgstr "Összes szám megjelenítése"
 
 #: ../bin/src/ui_librarysettingspage.h:218
 msgid "Show cover art in library"
@@ -5154,7 +5306,7 @@ msgstr "Megjelenítés fájlböngészőben…"
 
 #: ui/mainwindow.cpp:765
 msgid "Show in library..."
-msgstr ""
+msgstr "Megjelenítés a zenetárban…"
 
 #: library/libraryview.cpp:435
 msgid "Show in various artists"
@@ -5162,7 +5314,7 @@ msgstr "Megjelenítés a különböző előadók között"
 
 #: moodbar/moodbarproxystyle.cpp:358
 msgid "Show moodbar"
-msgstr ""
+msgstr "Hangulatsáv megjelenítése"
 
 #: ui/mainwindow.cpp:683
 msgid "Show only duplicates"
@@ -5178,11 +5330,11 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Keresési javaslatok megjelenítése"
 
 #: ../bin/src/ui_mainwindow.h:780
 msgid "Show sidebar"
-msgstr ""
+msgstr "Oldalsáv megjelenítése"
 
 #: ../bin/src/ui_lastfmsettingspage.h:133
 msgid "Show the \"love\" button"
@@ -5259,7 +5411,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Skip backwards in playlist"
 msgstr "Léptetés vissza a lejátszólistában"
 
@@ -5271,7 +5423,7 @@ msgstr "Kihagyások száma"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Skip forwards in playlist"
 msgstr "Léptetés előre a lejátszólistában"
 
@@ -5361,12 +5513,12 @@ msgstr ""
 
 #: playlist/playlist.cpp:1435
 msgid "Source"
-msgstr ""
+msgstr "Forrás"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:140
 #: ../bin/src/ui_internetshowsettingspage.h:82
 msgid "Sources"
-msgstr ""
+msgstr "Források"
 
 #: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
@@ -5378,13 +5530,13 @@ msgstr "Normál"
 
 #: internet/subsonic/subsonicservice.cpp:118
 msgid "Starred Albums"
-msgstr ""
+msgstr "Csillagozott albumok"
 
 #: ripper/ripcddialog.cpp:86
 msgid "Start ripping"
-msgstr ""
+msgstr "Beolvasás indítása"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Start the playlist currently playing"
 msgstr "Az éppen játszott lejátszólista indítása"
 
@@ -5412,27 +5564,27 @@ msgstr "Leállítás utána"
 
 #: ../bin/src/ui_playlistsequence.h:112
 msgid "Stop after each track"
-msgstr ""
+msgstr "Leállítás az egyes számok után"
 
 #: widgets/osd.cpp:318
 msgid "Stop after every track"
-msgstr ""
+msgstr "Leállítás az összes szám után"
 
 #: ui/mainwindow.cpp:718 ../bin/src/ui_mainwindow.h:728
 msgid "Stop after this track"
 msgstr "Leállítás a jelenlegi szám után"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Stop playback"
 msgstr "Lejátszás leállítása"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "Lejátszás leállítása a jelenlegi szám után"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Lejátszás leállítása, ha a lejátszás sikertelen"
 
 #: core/globalshortcuts.cpp:57
 msgid "Stop playing after current track"
@@ -5441,7 +5593,7 @@ msgstr "Leállítás a jelenlegi szám után"
 #: widgets/osd.cpp:175
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "Leállítás a ez után a szám után: %1"
 
 #: widgets/osd.cpp:169
 msgid "Stopped"
@@ -5453,7 +5605,7 @@ msgstr "Közvetítés"
 
 #: ../bin/src/ui_streamdetailsdialog.h:131
 msgid "Stream Details"
-msgstr ""
+msgstr "Közvetítés részletei"
 
 #: internet/subsonic/subsonicsettingspage.cpp:52
 msgid ""
@@ -5467,16 +5619,16 @@ msgstr "Közvetítési tagság"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Subscribers"
-msgstr ""
+msgstr "Feliratkozók"
 
 #: internet/subsonic/subsonicservice.cpp:154
 #: ../bin/src/ui_subsonicsettingspage.h:127
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
-msgstr ""
+msgstr "Sikeres!"
 
 #: transcoder/transcoder.cpp:209
 #, qt-format
@@ -5489,7 +5641,7 @@ msgstr "Javasolt címkék"
 
 #: transcoder/transcoder.cpp:154
 msgid "Suitable element not found"
-msgstr ""
+msgstr "Nem található megfelelő elem"
 
 #: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:455
@@ -5504,7 +5656,7 @@ msgstr "Nagyon magas (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Super high (2048x2048)"
-msgstr ""
+msgstr "Nagyon magas (2048×2048)"
 
 #: ../bin/src/ui_deviceproperties.h:373
 msgid "Supported formats"
@@ -5512,11 +5664,11 @@ msgstr "Támogatott formátumok"
 
 #: ../bin/src/ui_librarysettingspage.h:209
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "Statisztikák szinkronizálása a fájlokba most"
 
 #: moodbar/moodbarrenderer.cpp:178
 msgid "System colors"
-msgstr ""
+msgstr "Rendszerszínek"
 
 #: widgets/fancytabwidget.cpp:436
 msgid "Tabs on top"
@@ -5542,10 +5694,25 @@ msgstr "Szövegbeállítások"
 msgid "Thanks to"
 msgstr "Köszönet"
 
+#: airplay/airplayengine.cpp:406
+#, qt-format
+msgid "That PIN was wrong. Enter the PIN %1 shows now:"
+msgstr ""
+
+#: airplay/airplayengine.cpp:383
+#, qt-format
+msgid "That password was wrong. Enter %1's AirPlay password:"
+msgstr ""
+
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "A(z) „%1” parancs nem hajtható végre."
+
+#: airplay/airplayrtspconnection.cpp:326
+#, qt-format
+msgid "The AirPlay receiver didn't respond in %1 s"
+msgstr ""
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
@@ -5767,7 +5934,7 @@ msgstr "Sorállapot be/ki"
 msgid "Toggle scrobbling"
 msgstr "Scrobble funkció be/ki"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "OSD láthatósága be/ki"
 
@@ -5848,7 +6015,7 @@ msgstr "Turbina"
 
 #. TRANSLATORS: A button that turns on the network remote, so the chosen
 #. Chromecast or other device can play.
-#: widgets/outputbutton.cpp:191
+#: widgets/outputbutton.cpp:197
 msgid "Turn On"
 msgstr ""
 
@@ -5860,7 +6027,7 @@ msgstr "Kikapcsolás"
 #. which a Chromecast or other device needs to play. Turning it on
 #. for the device also lets phones running the Clementine Remote app
 #. connect, which is why this warns about it.
-#: widgets/outputbutton.cpp:187
+#: widgets/outputbutton.cpp:193
 msgid ""
 "Turning on the network remote also lets the Clementine Remote app, on phones"
 " and tablets in your network, control Clementine."
@@ -5876,19 +6043,19 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:132
 msgid "URL"
-msgstr ""
+msgstr "Webcím"
 
 #: ../bin/src/ui_addstreamdialog.h:127
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "Logo webcíme:"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "URL(s)"
-msgstr "URL(-ek)"
+msgstr "Webcímek"
 
 #: devices/udisks2lister.cpp:85
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
 msgid "Ultra wide band (UWB)"
@@ -5897,12 +6064,12 @@ msgstr "Ultra szélessávú (UWB)"
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
-msgstr ""
+msgstr "Nem lehet kapcsolódni"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:157
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr "%1 (%2) nem tölthető le"
+msgstr "A(z) %1 (%2) nem tölthető le"
 
 #: core/song.cpp:457 library/librarymodel.cpp:379 library/librarymodel.cpp:384
 #: library/librarymodel.cpp:388 library/librarymodel.cpp:1183
@@ -5915,7 +6082,7 @@ msgstr "Ismeretlen"
 
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
-msgstr ""
+msgstr "Ismeretlen tartalomtípus"
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
@@ -5925,7 +6092,7 @@ msgstr "Ismeretlen hiba"
 #: playlistparsers/playlistparser.cpp:168
 #, qt-format
 msgid "Unknown filetype: %1"
-msgstr ""
+msgstr "Ismeretlen fájltípus: %1"
 
 #: ui/albumcoverchoicecontroller.cpp:77
 msgid "Unset cover"
@@ -5942,11 +6109,11 @@ msgstr ""
 #: internet/podcasts/addpodcastdialog.cpp:71
 #: internet/podcasts/podcastservice.cpp:462
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Leiratkozás"
 
 #: internet/podcasts/podcastservice.cpp:436
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Összes podcast frissítése"
 
 #: ../bin/src/ui_mainwindow.h:763
 msgid "Update changed library folders"
@@ -5958,11 +6125,11 @@ msgstr "Zenetár frissítése a Clementine indításakor"
 
 #: internet/podcasts/podcastservice.cpp:445
 msgid "Update this podcast"
-msgstr ""
+msgstr "Podcast frissítése"
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Updating"
-msgstr ""
+msgstr "Frissítés"
 
 #: library/librarywatcher.cpp:109
 #, qt-format
@@ -5978,7 +6145,7 @@ msgstr "%1% frissítése…"
 msgid "Updating library"
 msgstr "Zenetár frissítése"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Usage"
 msgstr "Kihasználtság"
 
@@ -6075,7 +6242,7 @@ msgstr "Felhasználónév"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Using the menu to add a song will..."
-msgstr "Szám felvételéhez a menü használatával..."
+msgstr "Szám felvételéhez a menü használatával…"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -6084,11 +6251,11 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:448
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Variable bit rate"
-msgstr "Változó bitráta"
+msgstr "Változó bitsebesség"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:305
 #: playlist/playlistmanager.cpp:582 ui/albumcovermanager.cpp:267
@@ -6097,11 +6264,11 @@ msgstr "Különböző előadók"
 
 #: ../bin/src/ui_subsonicsettingspage.h:133
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Kiszolgálótanúsítvány ellenőrzése"
 
 #: ../bin/src/ui_plexsettingspage.h:146
 msgid "Verify server certificate"
-msgstr ""
+msgstr "Kiszolgálótanúsítvány ellenőrzése"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -6114,7 +6281,7 @@ msgstr "Nézet"
 
 #: ../bin/src/ui_mainwindow.h:779
 msgid "View Stream Details"
-msgstr ""
+msgstr "Közvetítés részleteinek megtekintése"
 
 #: ../bin/src/ui_visualisationselector.h:110
 msgid "Visualization mode"
@@ -6167,11 +6334,11 @@ msgstr "WAV"
 
 #: core/song.cpp:440
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:189
 msgid "Website"
-msgstr ""
+msgstr "Webhely"
 
 #: smartplaylists/searchterm.cpp:433
 msgid "Weeks"
@@ -6197,18 +6364,18 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:462
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Számok, előadók és albumok rendezése során"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:145
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Ha a lista üres…"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. for as long as Clementine is running, whatever it's doing.
 #: ui/behavioursettingspage.cpp:47
 msgid "While Clementine is open"
-msgstr ""
+msgstr "Ha a Clementine meg van nyitva"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
@@ -6224,14 +6391,14 @@ msgstr ""
 #. or the like, which gets the music from this computer.
 #: ui/behavioursettingspage.cpp:59
 msgid "While playing on another device"
-msgstr ""
+msgstr "Ha egy másik eszközön megy a lejátszás"
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
 #: ui/behavioursettingspage.cpp:70
 msgid "While visualizations are full screen"
-msgstr ""
+msgstr "Ha teljes képernyős a vizualizáció"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Why not try..."
@@ -6244,7 +6411,7 @@ msgstr "Széles sávú (WB)"
 #: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: activated"
-msgstr ""
+msgstr "Wii távvezérlő %1: aktiválva"
 
 #: widgets/osd.cpp:257
 #, qt-format
@@ -6277,7 +6444,7 @@ msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Windows Media 40k"
@@ -6285,7 +6452,7 @@ msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
 #: core/song.cpp:418 transcoder/transcoder.cpp:299
 msgid "Windows Media audio"
@@ -6293,11 +6460,11 @@ msgstr "Windows Media audio"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Without cover:"
-msgstr ""
+msgstr "Borító nélkül:"
 
 #: internet/jamendo/jamendoservice.cpp:94
 msgid "World"
-msgstr ""
+msgstr "Világzene"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -6449,7 +6616,7 @@ msgstr "Scrobble-jei: %1"
 
 #: visualisations/visualisationcontainer.cpp:172
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "A rendszeréről hiányzik az OpenGL-támogatás, a vizualizációk nem érhetők el."
 
 #: smartplaylists/searchterm.cpp:408
 msgid "Z-A"
@@ -6493,7 +6660,7 @@ msgstr "között"
 msgid "biggest first"
 msgstr "nagyobb először"
 
-#: playlist/playlistview.cpp:257 ui/edittagdialog.cpp:502
+#: playlist/playlistview.cpp:258 ui/edittagdialog.cpp:502
 msgid "bpm"
 msgstr "bpm"
 
@@ -6540,11 +6707,11 @@ msgstr "egyenlő"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net könyvtár"
 
 #: smartplaylists/searchterm.cpp:267
 msgid "greater than"
@@ -6558,7 +6725,7 @@ msgstr ""
 msgid "in the last"
 msgstr "az utóbbi"
 
-#: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:504
+#: playlist/playlistview.cpp:262 ui/edittagdialog.cpp:504
 msgid "kbps"
 msgstr "kbps"
 
@@ -6568,21 +6735,21 @@ msgstr "kevesebb mint"
 
 #: smartplaylists/searchterm.cpp:414
 msgid "longest first"
-msgstr "hosszabb először"
+msgstr "hosszabb elöl"
 
 #: playlist/playlistundocommands.cpp:87
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "move %n songs"
-msgstr ""
+msgstr "%n szám áthelyezése"
 
 #: smartplaylists/searchterm.cpp:411
 msgid "newest first"
-msgstr "újabb először"
+msgstr "újabb elöl"
 
 #: smartplaylists/searchterm.cpp:277
 msgid "not empty"
-msgstr ""
+msgstr "nem üres"
 
 #: smartplaylists/searchterm.cpp:273
 msgid "not equals"
@@ -6604,17 +6771,17 @@ msgstr "régebbi először"
 msgid "on"
 msgstr "ezen"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "options"
 msgstr "beállítások"
 
 #: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "vagy olvassa le a QR-kódot:"
 
 #: internet/plex/plexauthenticator.cpp:97
 msgid "plex.tv sent an unexpected response"
-msgstr ""
+msgstr "A plex.tv váratlan választ küldött"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
@@ -6628,19 +6795,19 @@ msgstr "%n szám eltávolítása"
 
 #: smartplaylists/searchterm.cpp:413
 msgid "shortest first"
-msgstr "rövidebb először"
+msgstr "rövidebb elől"
 
 #: playlist/playlistundocommands.cpp:111
 msgid "shuffle songs"
-msgstr ""
+msgstr "számok keverése"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "smallest first"
-msgstr "kisebb először"
+msgstr "kisebb elöl"
 
 #: playlist/playlistundocommands.cpp:105
 msgid "sort songs"
-msgstr ""
+msgstr "számok rendezése"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "starts with"

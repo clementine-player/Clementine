@@ -139,11 +139,41 @@ msgstr "%1 zile"
 msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
+#: airplay/airplaysession.cpp:532
+#, qt-format
+msgid "%1 didn't allow %2 to play there"
+msgstr ""
+
+#: airplay/airplaysession.cpp:340
+#, qt-format
+msgid "%1 didn't pair as AirPlay receivers do"
+msgstr ""
+
+#: airplay/airplaysession.cpp:929
+#, qt-format
+msgid "%1 didn't prove who it is"
+msgstr ""
+
+#: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
+#, qt-format
+msgid "%1 didn't say where to send audio"
+msgstr ""
+
+#: airplay/airplaysession.cpp:287
+#, qt-format
+msgid "%1 didn't show a PIN to pair with (HTTP %2)"
+msgstr ""
+
+#: airplay/airplayengine.cpp:461
+#, qt-format
+msgid "%1 doesn't remember Clementine, and pairing again didn't work"
+msgstr ""
+
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:441
+#: networkremote/streaming/rendererregistry.cpp:580
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -154,7 +184,7 @@ msgstr "%1 primește muzica de la Clementine prin controlul la distanță de re�
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:452
+#: networkremote/streaming/rendererregistry.cpp:591
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -166,7 +196,7 @@ msgstr "%1 primește muzica de la Clementine prin controlul la distanță de re�
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:433
+#: networkremote/streaming/rendererregistry.cpp:572
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -177,27 +207,79 @@ msgstr "%1 primește muzica de la Clementine prin controlul la distanță de re�
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:460
+#: networkremote/streaming/rendererregistry.cpp:599
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
 "allows connections from the local network, and %1 isn't on it."
 msgstr "%1 primește muzica de la Clementine prin controlul la distanță de rețea, care permite conexiuni doar din rețeaua locală, iar %1 nu se află în aceasta."
 
+#: airplay/airplaysession.cpp:416
+#, qt-format
+msgid "%1 is busy pairing with another AirPlay sender"
+msgstr ""
+
+#: airplay/airplaysession.cpp:414
+#, qt-format
+msgid "%1 isn't accepting new AirPlay senders"
+msgstr ""
+
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 în %2"
+
+#: airplay/airplaysession.cpp:168
+#, qt-format
+msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
+msgstr ""
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 liste de redare (%2)"
 
+#: airplay/airplaysession.cpp:538
+#, qt-format
+msgid "%1 refused %2 (HTTP %3)"
+msgstr ""
+
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
 msgid "%1 refused the sign-in. Try signing out and in again."
 msgstr "%1 a refuzat autentificarea. Încercați să vă deconectați și să vă autentificați din nou."
+
+#: airplay/airplaysession.cpp:402
+#, qt-format
+msgid "%1 refused to pair"
+msgstr ""
+
+#: airplay/airplaysession.cpp:320
+#, qt-format
+msgid ""
+"%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
+"network?"
+msgstr ""
+
+#: airplay/airplaysession.cpp:419
+#, qt-format
+msgid "%1 refused to pair (HTTP %2, error %3)"
+msgstr ""
+
+#: airplay/airplaysession.cpp:412
+#, qt-format
+msgid "%1 refused to pair after too many attempts"
+msgstr ""
+
+#: airplay/airplaysession.cpp:405
+#, qt-format
+msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
+msgstr ""
+
+#: airplay/airplaysession.cpp:471
+#, qt-format
+msgid "%1 refused to set up a session (HTTP %2)"
+msgstr ""
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -247,6 +329,13 @@ msgid ""
 "%1  %2\n"
 "This computer is %3"
 msgstr "%1  %2\nAcest calculator este %3"
+
+#. TRANSLATORS: %1 is a message such as "Living Room didn't allow
+#. Clementine on Laptop to play there".
+#: airplay/airplayengine.cpp:316
+#, qt-format
+msgid "%1. Allow it there, then play again."
+msgstr ""
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -805,6 +894,14 @@ msgstr "După "
 msgid "After copying..."
 msgstr "După copiere..."
 
+#: airplay/airplayengine.cpp:404
+msgid "AirPlay PIN"
+msgstr ""
+
+#: airplay/airplayengine.cpp:381
+msgid "AirPlay password"
+msgstr ""
+
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
@@ -879,6 +976,14 @@ msgstr "Toți traducătorii"
 msgid "All tracks"
 msgstr "Toate pistele"
 
+#. TRANSLATORS: Shown while an AirPlay receiver, such as a Mac, asks its
+#. user whether to let Clementine play on it. %1 is what Clementine calls
+#. itself there, such as "Clementine on Laptop"; %2 is the receiver's name.
+#: airplay/airplayengine.cpp:224
+#, qt-format
+msgid "Allow %1 on %2 to play there"
+msgstr ""
+
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
 msgstr "Permite unui client să descarce muzică de la acest calculator."
@@ -949,7 +1054,7 @@ msgstr "Furios"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Append files/URLs to the playlist"
 msgstr "Adaugă fișiere/URL-uri în lista de redare"
 
@@ -1182,7 +1287,7 @@ msgstr "Navighează..."
 msgid "Buffer duration"
 msgstr "Durată memorie tampon"
 
-#: engines/gstengine.cpp:993
+#: engines/gstengine.cpp:998
 msgid "Buffering"
 msgstr "Se preîncarcă"
 
@@ -1242,7 +1347,7 @@ msgstr "Schimbă modul amestecare"
 msgid "Change the currently playing song"
 msgstr "Schimbă melodia care se redă în prezent"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Change the language"
 msgstr "Schimbă limba"
 
@@ -1284,7 +1389,7 @@ msgstr "Chillout"
 msgid "Choose a name for your smart playlist"
 msgstr "Alegeți un nume pentru lista de redare inteligentă"
 
-#: engines/gstengine.cpp:1014
+#: engines/gstengine.cpp:1019
 msgid "Choose automatically"
 msgstr "Alege automat"
 
@@ -1409,6 +1514,11 @@ msgstr "Clementine nu a putut încărca nici o vizualizare projectM. Verificați
 msgid "Clementine image viewer"
 msgstr "Vizualizator de imagini Clementine"
 
+#: airplay/airplaysession.cpp:152
+#, qt-format
+msgid "Clementine on %1"
+msgstr ""
+
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
@@ -1484,7 +1594,7 @@ msgstr "Co&mpozitor"
 msgid "Colors"
 msgstr "Culori"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:215
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listă separată prin virgule de clasă:nivel, nivelul este 0-3"
 
@@ -1672,9 +1782,25 @@ msgstr "Nu s-au putut obține detalii"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Nu s-a putut efectua autentificarea pe Last.fm. Vă rugăm să încercați din nou."
 
+#: airplay/airplaysession.cpp:555
+#, qt-format
+msgid "Couldn't connect to %1's event channel: %2"
+msgstr ""
+
+#: airplay/airplayrtspconnection.cpp:315
+#, qt-format
+msgid ""
+"Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
+" AirPlay on?"
+msgstr ""
+
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
 msgstr "Nu s-a putut crea lista de redare"
+
+#: airplay/airplayrtspconnection.cpp:228
+msgid "Couldn't decrypt what the AirPlay receiver sent"
+msgstr ""
 
 #: internet/plex/plexauthenticator.cpp:167
 #, qt-format
@@ -1694,6 +1820,10 @@ msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "Nu s-a putut găsi un codificator pentru %1, verificați dacă aveți instalate modulele GStreamer corecte"
+
+#: airplay/airplaysession.cpp:214
+msgid "Couldn't listen for the AirPlay receiver"
+msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -1751,7 +1881,7 @@ msgstr "Copertă selectată de la %1"
 msgid "Covers from %1"
 msgstr "Coperți de la %1"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Create a new playlist with files/URLs"
 msgstr "Creează o listă de redare nouă cu fișiere/adrese URL"
 
@@ -1834,11 +1964,11 @@ msgstr "Zile"
 msgid "De&fault"
 msgstr "Im&plicit"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:195
 msgid "Decrease the volume by 4 percent"
 msgstr "Scade volumul cu 4%"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Decrease the volume by <value> percent"
 msgstr "Scade volumul cu <value>%"
 
@@ -1850,7 +1980,7 @@ msgstr "Scade volumul"
 msgid "Default background image"
 msgstr "Imagine de fundal implicită"
 
-#: engines/gstengine.cpp:1040
+#: engines/gstengine.cpp:1045
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispozitivul implicit pe %1"
@@ -1898,7 +2028,7 @@ msgstr "Șterge preconfigurarea"
 msgid "Delete smart playlist"
 msgstr "Șterge lista de redare inteligentă"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:217
 msgid "Delete the currently playing song"
 msgstr "Șterge melodia care se redă în acest moment"
 
@@ -2019,7 +2149,7 @@ msgstr "Transmisie discontinuă"
 msgid "Display options"
 msgstr "Opțiuni de afișare"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Display the on-screen-display"
 msgstr "Afișează mesajele pe ecran (OSD)"
 
@@ -2280,6 +2410,11 @@ msgstr "Calitate motor de codificare"
 msgid "Encoding mode"
 msgstr "Mod codificare"
 
+#: airplay/airplayengine.cpp:385
+#, qt-format
+msgid "Enter %1's AirPlay password:"
+msgstr ""
+
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
 msgstr "Introduceți o adresă URL"
@@ -2325,6 +2460,11 @@ msgstr "Introduceți termenii de căutare mai jos pentru a găsi podcasturi în 
 msgid "Enter search terms here"
 msgstr "Introduceți aici termenii de căutare"
 
+#: airplay/airplayengine.cpp:408
+#, qt-format
+msgid "Enter the PIN %1 shows:"
+msgstr ""
+
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Introduceți adresa URL a unui flux radio din internet:"
@@ -2345,11 +2485,11 @@ msgstr "Informații despre episod"
 msgid "Equalizer"
 msgstr "Egalizator"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Equivalent to --log-levels *:1"
 msgstr "Echivalent cu „--log-levels *:1”"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu „--log-levels *:3”"
 
@@ -2590,8 +2730,8 @@ msgstr "Se preia biblioteca Subsonic"
 msgid "Fetching cover error"
 msgstr "Eroare la preluarea copertei"
 
-#: internet/subsonic/subsonicdynamicplaylist.cpp:98
-#: internet/subsonic/subsonicdynamicplaylist.cpp:164
+#: internet/subsonic/subsonicdynamicplaylist.cpp:97
+#: internet/subsonic/subsonicdynamicplaylist.cpp:163
 msgid "Fetching playlist items"
 msgstr "Se preiau elementele din lista de redare"
 
@@ -2685,6 +2825,11 @@ msgstr "Forțează codificarea monofonică"
 #: devices/deviceview.cpp:327
 msgid "Forget device"
 msgstr "Uită dispozitivul"
+
+#: airplay/airplayengine.cpp:170
+#, qt-format
+msgid "Forget pairing with %1"
+msgstr ""
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -3038,11 +3183,11 @@ msgstr "Versiune incompatibilă a protocolului REST Subsonic. Serverul trebuie a
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Configurație incompletă; asigurați-vă că toate câmpurile sunt completate."
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Increase the volume by 4 percent"
 msgstr "Crește volumul cu 4%"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Increase the volume by <value> percent"
 msgstr "Crește volumul cu <value>%"
 
@@ -3067,7 +3212,7 @@ msgstr "Opțiuni de intrare"
 msgid "Insert..."
 msgstr "Inserați..."
 
-#: networkremote/outgoingdatacreator.cpp:564
+#: networkremote/outgoingdatacreator.cpp:565
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumentală"
@@ -3369,7 +3514,7 @@ msgstr "Se încarcă informațiile pieselor"
 msgid "Loading..."
 msgstr "Se încarcă..."
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 
@@ -3677,7 +3822,7 @@ msgstr "Control la distanță prin rețea"
 #. settings, where the user can fix why a Chromecast or other device
 #. can't get music from Clementine. "Network Remote" is that page's
 #. name.
-#: widgets/outputbutton.cpp:198
+#: widgets/outputbutton.cpp:204
 msgid "Network Remote Settings..."
 msgstr "Configurări pentru controlul la distanță de rețea..."
 
@@ -4034,7 +4179,7 @@ msgstr "Suport pentru eticheta anului original de lansare"
 msgid "Other"
 msgstr "Alta"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Other options"
 msgstr "Alte opțiuni"
 
@@ -4072,6 +4217,13 @@ msgstr "Suprascrie doar pe cele mai mici"
 msgid "Owner"
 msgstr "Proprietar"
 
+#. TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
+#. shows a PIN once, after which it lets Clementine play without asking.
+#: airplay/airplayengine.cpp:166
+#, qt-format
+msgid "Pair with %1..."
+msgstr ""
+
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr "Eticheta partiției"
@@ -4093,7 +4245,7 @@ msgstr "Parolă"
 msgid "Pause"
 msgstr "Pauză"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Pause playback"
 msgstr "Pauză redare"
 
@@ -4143,11 +4295,11 @@ msgstr "Redă o melodie pentru a vedea aici fotografii ale artistului și biogra
 msgid "Play count"
 msgstr "Număr redări"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Play given playlist"
 msgstr "Redă lista de redare specificată"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, pune în pauză dacă este în curs de redare"
 
@@ -4163,12 +4315,12 @@ msgstr "Redă următoarea"
 #. TRANSLATORS: The title of the message shown when the user picks a
 #. Chromecast or other device to play on, and it can't get the music from
 #. Clementine's network remote. %1 is the device's name.
-#: widgets/outputbutton.cpp:178
+#: widgets/outputbutton.cpp:184
 #, qt-format
 msgid "Play on %1"
 msgstr "Redare pe %1"
 
-#: widgets/outputbutton.cpp:115
+#: widgets/outputbutton.cpp:121
 msgid "Play on another device"
 msgstr "Redă pe un alt dispozitiv"
 
@@ -4176,7 +4328,7 @@ msgstr "Redă pe un alt dispozitiv"
 msgid "Play selected tracks next"
 msgstr "Redă următoarele piese selectate"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Play the <n>th track in the playlist"
 msgstr "Redă pista a <n>-a din lista de redare"
 
@@ -4188,7 +4340,7 @@ msgstr "Redare/Pauză"
 msgid "Playback"
 msgstr "Redare"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Player options"
 msgstr "Opțiuni ale programului de redare"
 
@@ -4206,7 +4358,7 @@ msgstr "Se reproduce muzică"
 msgid "Playing music on another device"
 msgstr "Se reproduce muzică pe un alt dispozitiv"
 
-#: widgets/outputbutton.cpp:116
+#: widgets/outputbutton.cpp:122
 #, qt-format
 msgid "Playing on %1"
 msgstr "Redare pe %1"
@@ -4221,7 +4373,7 @@ msgstr "Listă de redare"
 msgid "Playlist finished"
 msgstr "Listă de redare terminată"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Opțiuni listă de redare"
@@ -4371,7 +4523,7 @@ msgstr "Precedentă"
 msgid "Previous track"
 msgstr "Piesa precedentă"
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:216
 msgid "Print out version information"
 msgstr "Afișează informațiile despre versiune"
 
@@ -4412,7 +4564,7 @@ msgstr "Aranjează melodiile într-o ordine aleatoare"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:218
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4680,7 +4832,7 @@ msgstr "Rinițializează numărul de ascultări"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reia redarea melodiei, apoi trece la melodia anterioară dacă se apasă din nou"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reia redarea melodiei sau trece la melodia anterioară dacă au trecut mai puțin de 8 secunde de când a început redarea melodiei."
@@ -4953,11 +5105,11 @@ msgstr "Derulează înapoi"
 msgid "Seek forward"
 msgstr "Derulează înainte"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Caută în piesa redată curent după o cantitate relativă"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Caută în piesa redată curent pentru o poziție absolută"
 
@@ -5046,7 +5198,7 @@ msgstr "Stabilește %1 la „%2”..."
 msgid "Set target rate"
 msgstr "Stabiliți viteza țintă"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Set the volume to <value> percent"
 msgstr "Stabilește volumul la <value>%"
 
@@ -5258,7 +5410,7 @@ msgstr "Dimensiune:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Skip backwards in playlist"
 msgstr "Sari înapoi în lista de redare"
 
@@ -5270,7 +5422,7 @@ msgstr "Omite numărul de piesă dat"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Omite fișierele cu aceste extensii (separate prin virgule, fără diferențiere între majuscule și minuscule)"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Skip forwards in playlist"
 msgstr "Sare înainte în lista de redare"
 
@@ -5383,7 +5535,7 @@ msgstr "Albume marcate cu steluță"
 msgid "Start ripping"
 msgstr "Pornește extragerea"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Start the playlist currently playing"
 msgstr "Pornește lista de redare curent redată"
 
@@ -5421,11 +5573,11 @@ msgstr "Oprește redarea după fiecare piesă"
 msgid "Stop after this track"
 msgstr "Oprește după această piesă"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Stop playback"
 msgstr "Oprește redarea"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Stop playback after current track"
 msgstr "Oprește redarea după piesa curentă"
 
@@ -5541,10 +5693,25 @@ msgstr "Opțiuni text"
 msgid "Thanks to"
 msgstr "Mulțumiri către"
 
+#: airplay/airplayengine.cpp:406
+#, qt-format
+msgid "That PIN was wrong. Enter the PIN %1 shows now:"
+msgstr ""
+
+#: airplay/airplayengine.cpp:383
+#, qt-format
+msgid "That password was wrong. Enter %1's AirPlay password:"
+msgstr ""
+
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Comanda „%1” nu poate fi pornită."
+
+#: airplay/airplayrtspconnection.cpp:326
+#, qt-format
+msgid "The AirPlay receiver didn't respond in %1 s"
+msgstr ""
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
@@ -5766,7 +5933,7 @@ msgstr "Comută stare coadă"
 msgid "Toggle scrobbling"
 msgstr "Comută scrobbling"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Comută vizibilitatea pentru afișare-pe-ecran cu aspect elegant"
 
@@ -5847,7 +6014,7 @@ msgstr "Turbină"
 
 #. TRANSLATORS: A button that turns on the network remote, so the chosen
 #. Chromecast or other device can play.
-#: widgets/outputbutton.cpp:191
+#: widgets/outputbutton.cpp:197
 msgid "Turn On"
 msgstr "Pornește"
 
@@ -5859,7 +6026,7 @@ msgstr "Oprește"
 #. which a Chromecast or other device needs to play. Turning it on
 #. for the device also lets phones running the Clementine Remote app
 #. connect, which is why this warns about it.
-#: widgets/outputbutton.cpp:187
+#: widgets/outputbutton.cpp:193
 msgid ""
 "Turning on the network remote also lets the Clementine Remote app, on phones"
 " and tablets in your network, control Clementine."
@@ -5881,7 +6048,7 @@ msgstr "Adresa URL"
 msgid "URL of its Logo:"
 msgstr "Adresa URL a logo-ului:"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -5977,7 +6144,7 @@ msgstr "Se actualizează %1%..."
 msgid "Updating library"
 msgstr "Se actualizează colecția"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Usage"
 msgstr "Utilizare"
 
@@ -6492,7 +6659,7 @@ msgstr "între"
 msgid "biggest first"
 msgstr "întâi cele mai mari"
 
-#: playlist/playlistview.cpp:257 ui/edittagdialog.cpp:502
+#: playlist/playlistview.cpp:258 ui/edittagdialog.cpp:502
 msgid "bpm"
 msgstr "bpm"
 
@@ -6557,7 +6724,7 @@ msgstr "În prezent, dispozitivele iPod și cele USB nu funcționează pe Window
 msgid "in the last"
 msgstr "in ultimele"
 
-#: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:504
+#: playlist/playlistview.cpp:262 ui/edittagdialog.cpp:504
 msgid "kbps"
 msgstr "kbps"
 
@@ -6603,7 +6770,7 @@ msgstr "întâi cele mai vechi"
 msgid "on"
 msgstr "pornire"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "options"
 msgstr "opțiuni"
 

@@ -130,11 +130,41 @@ msgstr "%1 päivää"
 msgid "%1 days ago"
 msgstr "%1 päivää sitten"
 
+#: airplay/airplaysession.cpp:532
+#, qt-format
+msgid "%1 didn't allow %2 to play there"
+msgstr ""
+
+#: airplay/airplaysession.cpp:340
+#, qt-format
+msgid "%1 didn't pair as AirPlay receivers do"
+msgstr ""
+
+#: airplay/airplaysession.cpp:929
+#, qt-format
+msgid "%1 didn't prove who it is"
+msgstr ""
+
+#: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
+#, qt-format
+msgid "%1 didn't say where to send audio"
+msgstr ""
+
+#: airplay/airplaysession.cpp:287
+#, qt-format
+msgid "%1 didn't show a PIN to pair with (HTTP %2)"
+msgstr ""
+
+#: airplay/airplayengine.cpp:461
+#, qt-format
+msgid "%1 doesn't remember Clementine, and pairing again didn't work"
+msgstr ""
+
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:441
+#: networkremote/streaming/rendererregistry.cpp:580
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -145,7 +175,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:452
+#: networkremote/streaming/rendererregistry.cpp:591
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -157,7 +187,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:433
+#: networkremote/streaming/rendererregistry.cpp:572
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -168,11 +198,21 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:460
+#: networkremote/streaming/rendererregistry.cpp:599
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
 "allows connections from the local network, and %1 isn't on it."
+msgstr ""
+
+#: airplay/airplaysession.cpp:416
+#, qt-format
+msgid "%1 is busy pairing with another AirPlay sender"
+msgstr ""
+
+#: airplay/airplaysession.cpp:414
+#, qt-format
+msgid "%1 isn't accepting new AirPlay senders"
 msgstr ""
 
 #: internet/podcasts/gpoddersync.cpp:85
@@ -180,15 +220,57 @@ msgstr ""
 msgid "%1 on %2"
 msgstr "%1 / %2"
 
+#: airplay/airplaysession.cpp:168
+#, qt-format
+msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
+msgstr ""
+
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1-soittolistaa (%2)"
 
+#: airplay/airplaysession.cpp:538
+#, qt-format
+msgid "%1 refused %2 (HTTP %3)"
+msgstr ""
+
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
 msgid "%1 refused the sign-in. Try signing out and in again."
 msgstr "%1 hylkäsi kirjautumisen. Kokeile kirjautua ulos ja uudelleen sisään."
+
+#: airplay/airplaysession.cpp:402
+#, qt-format
+msgid "%1 refused to pair"
+msgstr ""
+
+#: airplay/airplaysession.cpp:320
+#, qt-format
+msgid ""
+"%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
+"network?"
+msgstr ""
+
+#: airplay/airplaysession.cpp:419
+#, qt-format
+msgid "%1 refused to pair (HTTP %2, error %3)"
+msgstr ""
+
+#: airplay/airplaysession.cpp:412
+#, qt-format
+msgid "%1 refused to pair after too many attempts"
+msgstr ""
+
+#: airplay/airplaysession.cpp:405
+#, qt-format
+msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
+msgstr ""
+
+#: airplay/airplaysession.cpp:471
+#, qt-format
+msgid "%1 refused to set up a session (HTTP %2)"
+msgstr ""
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -237,6 +319,13 @@ msgstr "%1 siirretty"
 msgid ""
 "%1  %2\n"
 "This computer is %3"
+msgstr ""
+
+#. TRANSLATORS: %1 is a message such as "Living Room didn't allow
+#. Clementine on Laptop to play there".
+#: airplay/airplayengine.cpp:316
+#, qt-format
+msgid "%1. Allow it there, then play again."
 msgstr ""
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
@@ -796,6 +885,14 @@ msgstr "Jälkeen"
 msgid "After copying..."
 msgstr "Kopioinnin jälkeen..."
 
+#: airplay/airplayengine.cpp:404
+msgid "AirPlay PIN"
+msgstr ""
+
+#: airplay/airplayengine.cpp:381
+msgid "AirPlay password"
+msgstr ""
+
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
 #: ../bin/src/ui_groupbydialog.h:187 ../bin/src/ui_groupbydialog.h:204
@@ -870,6 +967,14 @@ msgstr "Kaikki kääntäjät"
 msgid "All tracks"
 msgstr "Kaikki kappaleet"
 
+#. TRANSLATORS: Shown while an AirPlay receiver, such as a Mac, asks its
+#. user whether to let Clementine play on it. %1 is what Clementine calls
+#. itself there, such as "Clementine on Laptop"; %2 is the receiver's name.
+#: airplay/airplayengine.cpp:224
+#, qt-format
+msgid "Allow %1 on %2 to play there"
+msgstr ""
+
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
 msgstr "Salli ohjelman ladata musiikkia tältä tietokoneelta."
@@ -940,7 +1045,7 @@ msgstr "Vihainen"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Append files/URLs to the playlist"
 msgstr "Lisää tiedostoja/verkko-osoitteita soittolistalle"
 
@@ -1173,7 +1278,7 @@ msgstr "Selaa..."
 msgid "Buffer duration"
 msgstr "Puskurin kesto"
 
-#: engines/gstengine.cpp:993
+#: engines/gstengine.cpp:998
 msgid "Buffering"
 msgstr "Puskurointi"
 
@@ -1233,7 +1338,7 @@ msgstr "Vaihda sekoituksen tilaa"
 msgid "Change the currently playing song"
 msgstr "Vaihda soitettavaa kappaletta"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Change the language"
 msgstr "Vaihda kieltä"
 
@@ -1275,7 +1380,7 @@ msgstr "Chillout"
 msgid "Choose a name for your smart playlist"
 msgstr "Anna soittolistalle nimi"
 
-#: engines/gstengine.cpp:1014
+#: engines/gstengine.cpp:1019
 msgid "Choose automatically"
 msgstr "Valitse automaattisesti"
 
@@ -1400,6 +1505,11 @@ msgstr "Clementine projectM-visualisointi epäonnistui. Tarkista Clementine-asen
 msgid "Clementine image viewer"
 msgstr "Clementine-kuvakatselin"
 
+#: airplay/airplaysession.cpp:152
+#, qt-format
+msgid "Clementine on %1"
+msgstr ""
+
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
@@ -1475,7 +1585,7 @@ msgstr "S&äveltäjä"
 msgid "Colors"
 msgstr "Värit"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:215
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Pilkuin erotettu lista luokka:taso -määritteitä, jossa taso on väliltä 0-3"
 
@@ -1663,9 +1773,25 @@ msgstr "Tietoja ei saatu haettua"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Last.fm kirjautuminen ei onnistunut. Yritä uudelleen."
 
+#: airplay/airplaysession.cpp:555
+#, qt-format
+msgid "Couldn't connect to %1's event channel: %2"
+msgstr ""
+
+#: airplay/airplayrtspconnection.cpp:315
+#, qt-format
+msgid ""
+"Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
+" AirPlay on?"
+msgstr ""
+
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
 msgstr "Soittolistan luominen epäonnistui"
+
+#: airplay/airplayrtspconnection.cpp:228
+msgid "Couldn't decrypt what the AirPlay receiver sent"
+msgstr ""
 
 #: internet/plex/plexauthenticator.cpp:167
 #, qt-format
@@ -1685,6 +1811,10 @@ msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "Ei löydetty %1 -enkooderia, tarkista että sinulla on oikeat GStreamer laajennukset asennettuna"
+
+#: airplay/airplaysession.cpp:214
+msgid "Couldn't listen for the AirPlay receiver"
+msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -1742,7 +1872,7 @@ msgstr "Kansikuva asetettu kohteesta %1"
 msgid "Covers from %1"
 msgstr "Kansikuvat kohteesta %1"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Create a new playlist with files/URLs"
 msgstr "Luo uusi soittolista tiedosto tai verkko-osoite"
 
@@ -1825,11 +1955,11 @@ msgstr "Päivää"
 msgid "De&fault"
 msgstr "&Oletus"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:195
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähennä voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:197
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähennä voimakkuutta <value> prosentilla"
 
@@ -1841,7 +1971,7 @@ msgstr "Vähennä voimakkuutta"
 msgid "Default background image"
 msgstr "Oletustaustakuva"
 
-#: engines/gstengine.cpp:1040
+#: engines/gstengine.cpp:1045
 #, qt-format
 msgid "Default device on %1"
 msgstr "Oletuslaite %1"
@@ -1889,7 +2019,7 @@ msgstr "Poista asetus"
 msgid "Delete smart playlist"
 msgstr "Poista älykäs soittolista"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:217
 msgid "Delete the currently playing song"
 msgstr "Poista nyt soiva kappale"
 
@@ -2010,7 +2140,7 @@ msgstr "Tiedonsiirron säännöstely"
 msgid "Display options"
 msgstr "Näkymän asetukset"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Display the on-screen-display"
 msgstr "Näytä ilmoituslaatikko"
 
@@ -2271,6 +2401,11 @@ msgstr "Koodausmoottorin laatu"
 msgid "Encoding mode"
 msgstr "Koodaustila"
 
+#: airplay/airplayengine.cpp:385
+#, qt-format
+msgid "Enter %1's AirPlay password:"
+msgstr ""
+
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
 msgstr "Anna verkko-osoite"
@@ -2316,6 +2451,11 @@ msgstr "Anna hakusanat alle ja löydä podcastit gpodder.net"
 msgid "Enter search terms here"
 msgstr "Anna hakusanat tähän"
 
+#: airplay/airplayengine.cpp:408
+#, qt-format
+msgid "Enter the PIN %1 shows:"
+msgstr ""
+
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Anna Internet-radion osoite:"
@@ -2336,11 +2476,11 @@ msgstr "Jakson tiedot"
 msgid "Equalizer"
 msgstr "Taajuuskorjain"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Equivalent to --log-levels *:1"
 msgstr "Vastaa --log-levels *:1"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid "Equivalent to --log-levels *:3"
 msgstr "Vastaa --log-levels *:3"
 
@@ -2581,8 +2721,8 @@ msgstr "Noudetaan Subsonic-kirjastoa"
 msgid "Fetching cover error"
 msgstr "Kansikuvan noutovirhe"
 
-#: internet/subsonic/subsonicdynamicplaylist.cpp:98
-#: internet/subsonic/subsonicdynamicplaylist.cpp:164
+#: internet/subsonic/subsonicdynamicplaylist.cpp:97
+#: internet/subsonic/subsonicdynamicplaylist.cpp:163
 msgid "Fetching playlist items"
 msgstr "Noudetaan soittolistan kohteita"
 
@@ -2676,6 +2816,11 @@ msgstr "Pakota monokoodaus"
 #: devices/deviceview.cpp:327
 msgid "Forget device"
 msgstr "Unohda laite"
+
+#: airplay/airplayengine.cpp:170
+#, qt-format
+msgid "Forget pairing with %1"
+msgstr ""
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -3029,11 +3174,11 @@ msgstr "Ei yhteensopiva Subsonic REST-protokollaversio. Palvelin on päivitettä
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Puutteelliset asetukset, varmista että kaikki kentät on täytetty."
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Increase the volume by 4 percent"
 msgstr "Lisää voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Increase the volume by <value> percent"
 msgstr "Lisää voimakkuutta <value> prosentilla"
 
@@ -3058,7 +3203,7 @@ msgstr "Sisääntulon valinnat"
 msgid "Insert..."
 msgstr "Lisää..."
 
-#: networkremote/outgoingdatacreator.cpp:564
+#: networkremote/outgoingdatacreator.cpp:565
 #: songinfo/lyricsinfoprovider.cpp:55
 msgid "Instrumental"
 msgstr "Instrumental"
@@ -3360,7 +3505,7 @@ msgstr "Kappaletietoja ladataan"
 msgid "Loading..."
 msgstr "Ladataan..."
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Lataa tiedostoja tai osoitteita, korvaten samalla nykyisen soittolistan"
 
@@ -3668,7 +3813,7 @@ msgstr "Kauko-ohjaus"
 #. settings, where the user can fix why a Chromecast or other device
 #. can't get music from Clementine. "Network Remote" is that page's
 #. name.
-#: widgets/outputbutton.cpp:198
+#: widgets/outputbutton.cpp:204
 msgid "Network Remote Settings..."
 msgstr ""
 
@@ -4025,7 +4170,7 @@ msgstr "Julkaisuvuoden tunnistetuki"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Other options"
 msgstr "Muut valinnat"
 
@@ -4063,6 +4208,13 @@ msgstr "Korvaa vain pienemmät"
 msgid "Owner"
 msgstr "Omistaja"
 
+#. TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
+#. shows a PIN once, after which it lets Clementine play without asking.
+#: airplay/airplayengine.cpp:166
+#, qt-format
+msgid "Pair with %1..."
+msgstr ""
+
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
 msgstr "Osion nimi"
@@ -4084,7 +4236,7 @@ msgstr "Salasana"
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Pause playback"
 msgstr "Keskeytä soitto"
 
@@ -4134,11 +4286,11 @@ msgstr "Soita kappaletta ja näe esittäjän kuvia ja elämänkertaa täällä."
 msgid "Play count"
 msgstr "Soittolaskuri"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Play given playlist"
 msgstr "Soita annettu soittolista"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Play if stopped, pause if playing"
 msgstr "Soita jos pysäytetty, pysäytä jos soi"
 
@@ -4154,12 +4306,12 @@ msgstr "Soita seuraava"
 #. TRANSLATORS: The title of the message shown when the user picks a
 #. Chromecast or other device to play on, and it can't get the music from
 #. Clementine's network remote. %1 is the device's name.
-#: widgets/outputbutton.cpp:178
+#: widgets/outputbutton.cpp:184
 #, qt-format
 msgid "Play on %1"
 msgstr ""
 
-#: widgets/outputbutton.cpp:115
+#: widgets/outputbutton.cpp:121
 msgid "Play on another device"
 msgstr "Soita toisessa laitteessa"
 
@@ -4167,7 +4319,7 @@ msgstr "Soita toisessa laitteessa"
 msgid "Play selected tracks next"
 msgstr "Soita seuraavaksi valitut kappaleet"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Play the <n>th track in the playlist"
 msgstr "Soita soittolistan <n>. kappale"
 
@@ -4179,7 +4331,7 @@ msgstr "Soita/Keskeytä"
 msgid "Playback"
 msgstr "Toisto"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Player options"
 msgstr "Soittimen asetukset"
 
@@ -4197,7 +4349,7 @@ msgstr ""
 msgid "Playing music on another device"
 msgstr ""
 
-#: widgets/outputbutton.cpp:116
+#: widgets/outputbutton.cpp:122
 #, qt-format
 msgid "Playing on %1"
 msgstr "Soitetaan %1"
@@ -4212,7 +4364,7 @@ msgstr "Soittolista"
 msgid "Playlist finished"
 msgstr "Soittolista soitettiin loppuun"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Soittolistan valinnat"
@@ -4362,7 +4514,7 @@ msgstr "Edellinen"
 msgid "Previous track"
 msgstr "Edellinen"
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:216
 msgid "Print out version information"
 msgstr "Tulosta versiotiedot"
 
@@ -4403,7 +4555,7 @@ msgstr "Laita kappaleet satunnaiseen järjestykseen"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:218
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4671,7 +4823,7 @@ msgstr "Nollaa soittolaskuri"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Soita kappale uudelleen, siirtyy edelliseen jos painat uudestaan"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Soita kappale uudelleen tai soita edellinen, jos se on alle 8 s alusta."
@@ -4944,11 +5096,11 @@ msgstr "Kelaa taakse"
 msgid "Seek forward"
 msgstr "Kelaa eteen"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Pikakelaus eteen- tai taaksepäin"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pikakelaus eteen- tai taaksepäin tiettyyn kohtaan"
 
@@ -5037,7 +5189,7 @@ msgstr "Aseta %1 - %2"
 msgid "Set target rate"
 msgstr "Aseta tavoitetaajuus"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Set the volume to <value> percent"
 msgstr "Säädä voimakkuudeksi <value> prosenttia"
 
@@ -5249,7 +5401,7 @@ msgstr "Koko:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Skip backwards in playlist"
 msgstr "Siirry soittolistan edelliseen"
 
@@ -5261,7 +5413,7 @@ msgstr "Ohituskerrat"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Ohita tiedostot, joilla on nämä tiedostopäätteet (pilkuilla erotettuna, kirjainkoosta riippumatta)"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Skip forwards in playlist"
 msgstr "Siirry soittolistan seuraavaan"
 
@@ -5374,7 +5526,7 @@ msgstr "Tähdelliset levyt"
 msgid "Start ripping"
 msgstr "Aloita kopiointi"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Start the playlist currently playing"
 msgstr "Aloita soittolista alusta"
 
@@ -5412,11 +5564,11 @@ msgstr "Pysäytä jokaisen kappaleen jälkeen"
 msgid "Stop after this track"
 msgstr "Lopeta kappaleen jälkeen"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Stop playback"
 msgstr "Lopeta toisto"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Stop playback after current track"
 msgstr "Lopeta toisto kappaleen jälkeen"
 
@@ -5532,10 +5684,25 @@ msgstr "Tekstivalinnat"
 msgid "Thanks to"
 msgstr "Kiitokset"
 
+#: airplay/airplayengine.cpp:406
+#, qt-format
+msgid "That PIN was wrong. Enter the PIN %1 shows now:"
+msgstr ""
+
+#: airplay/airplayengine.cpp:383
+#, qt-format
+msgid "That password was wrong. Enter %1's AirPlay password:"
+msgstr ""
+
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\"-komentoa ei voitu suorittaa."
+
+#: airplay/airplayrtspconnection.cpp:326
+#, qt-format
+msgid "The AirPlay receiver didn't respond in %1 s"
+msgstr ""
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
@@ -5757,7 +5924,7 @@ msgstr "Vaihda jonon tila"
 msgid "Toggle scrobbling"
 msgstr "Vaihda scrobbling lähetystä"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Vaihda tyylikäs ilmoituslaatikko päälle tai pois"
 
@@ -5838,7 +6005,7 @@ msgstr "Turbine"
 
 #. TRANSLATORS: A button that turns on the network remote, so the chosen
 #. Chromecast or other device can play.
-#: widgets/outputbutton.cpp:191
+#: widgets/outputbutton.cpp:197
 msgid "Turn On"
 msgstr ""
 
@@ -5850,7 +6017,7 @@ msgstr "Sammuta"
 #. which a Chromecast or other device needs to play. Turning it on
 #. for the device also lets phones running the Clementine Remote app
 #. connect, which is why this warns about it.
-#: widgets/outputbutton.cpp:187
+#: widgets/outputbutton.cpp:193
 msgid ""
 "Turning on the network remote also lets the Clementine Remote app, on phones"
 " and tablets in your network, control Clementine."
@@ -5872,7 +6039,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "Logon osoite:"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "URL(s)"
 msgstr "Osoitteet"
 
@@ -5968,7 +6135,7 @@ msgstr "Päivitetään %1 %..."
 msgid "Updating library"
 msgstr "Päivitetään kirjastoa"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Usage"
 msgstr "Käyttö"
 
@@ -6483,7 +6650,7 @@ msgstr "välillä"
 msgid "biggest first"
 msgstr "suurin ensin"
 
-#: playlist/playlistview.cpp:257 ui/edittagdialog.cpp:502
+#: playlist/playlistview.cpp:258 ui/edittagdialog.cpp:502
 msgid "bpm"
 msgstr "bpm"
 
@@ -6548,7 +6715,7 @@ msgstr "iPodit ja USB-laitteet ei tällä hetkellä toimi Windowsissa. Pahoittel
 msgid "in the last"
 msgstr "viimeisenä"
 
-#: playlist/playlistview.cpp:261 ui/edittagdialog.cpp:504
+#: playlist/playlistview.cpp:262 ui/edittagdialog.cpp:504
 msgid "kbps"
 msgstr "kb/s"
 
@@ -6594,7 +6761,7 @@ msgstr "vanhin ensin"
 msgid "on"
 msgstr "päällä"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "options"
 msgstr "valinnat"
 
