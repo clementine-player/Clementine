@@ -1,28 +1,16 @@
-#!/usr/bin/env python3
-"""Tests for release_notes.py, on throwaway git repositories.
+"""Tests for release_notes.py, on throwaway git repositories."""
 
-Run from the repository's root:
-
-  python3 -m unittest discover -s dist -p 'test_*.py'
-"""
+from __future__ import annotations
 
 import argparse
-import contextlib
-import importlib.util
-import io
 import os
 import re
 import subprocess
-import tempfile
-import unittest
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location(
-    "release_notes", Path(__file__).resolve().parent / "release_notes.py"
-)
-assert spec and spec.loader
-release_notes = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(release_notes)
+import pytest
+
+import release_notes
 
 
 class Repo:
@@ -36,6 +24,7 @@ class Repo:
     def git(self, *args: str) -> str:
         # Dated by self.day, which each commit moves on, and without the
         # user's own git configuration.
+        date = f"2020-01-{self.day:02d}T12:00:00Z"
         env = {
             **os.environ,
             "GIT_CONFIG_GLOBAL": os.devnull,
@@ -44,8 +33,8 @@ class Repo:
             "GIT_AUTHOR_EMAIL": "test@example.com",
             "GIT_COMMITTER_NAME": "Test",
             "GIT_COMMITTER_EMAIL": "test@example.com",
-            "GIT_AUTHOR_DATE": f"2020-01-{self.day:02d}T12:00:00Z",
-            "GIT_COMMITTER_DATE": f"2020-01-{self.day:02d}T12:00:00Z",
+            "GIT_AUTHOR_DATE": date,
+            "GIT_COMMITTER_DATE": date,
         }
         return subprocess.run(
             ["git", *args],
@@ -76,88 +65,88 @@ class Repo:
         self.git("tag", name)
 
 
-class AppstreamTest(unittest.TestCase):
-    def setUp(self) -> None:
-        directory = tempfile.TemporaryDirectory()
-        self.addCleanup(directory.cleanup)
-        self.repo = Repo(Path(directory.name))
-        root = release_notes.ROOT
-        release_notes.ROOT = self.repo.path
-        self.addCleanup(setattr, release_notes, "ROOT", root)
-
-    def appstream(self) -> str:
-        output = io.StringIO()
-        with contextlib.redirect_stdout(output):
-            release_notes.appstream(argparse.Namespace(commit="HEAD"))
-        return output.getvalue()
-
-    def versions(self) -> list[str]:
-        return re.findall(r'<release version="([^"]+)"', self.appstream())
-
-    def test_releases_on_another_branch_are_in_order(self) -> None:
-        # Like 1.3 and 1.3.1: lightweight tags on a branch master never merged.
-        self.repo.commit()
-        self.repo.old_release("1.2")
-        self.repo.git("checkout", "-q", "-b", "1.3")
-        self.repo.commit()
-        self.repo.old_release("1.3")
-        self.repo.commit()
-        self.repo.old_release("1.3.1")
-        self.repo.git("checkout", "-q", "master")
-        self.repo.commit()
-        self.repo.release("1.4.1")
-        self.repo.commit("Something new.")
-        self.repo.release("1.4.2")
-
-        self.assertEqual(self.versions(), ["1.4.2", "1.4.1", "1.3.1", "1.3", "1.2"])
-
-    def test_only_numbered_releases_up_to_head(self) -> None:
-        self.repo.commit()
-        self.repo.release("1.4.0rc1")
-        self.repo.commit()
-        self.repo.release("1.4.1")
-        self.repo.commit()
-        self.repo.build("1.4.1-1-gabcdef012")
-        self.repo.commit("Something new.")
-        self.repo.release("1.4.2")
-        self.repo.commit()
-        self.repo.build("1.4.2-1-gabcdef012")
-        head = self.repo.git("rev-parse", "HEAD").strip()
-        # A release made since, which the build from head doesn't have.
-        self.repo.commit("Something newer.")
-        self.repo.release("1.4.3")
-        self.repo.git("checkout", "-q", head)
-
-        self.assertEqual(self.versions(), ["1.4.2", "1.4.1"])
-
-    def test_notes_and_dates(self) -> None:
-        self.repo.commit()
-        self.repo.release("1.4.1")
-        self.repo.commit("Fixed a crash.")
-        self.repo.commit("Lyrics & covers <for> everyone.")
-        self.repo.release("1.4.2")
-
-        self.assertEqual(
-            self.appstream(),
-            '\t\t<release version="1.4.2" date="2020-01-04">\n'
-            "\t\t\t<description>\n"
-            "\t\t\t\t<ul>\n"
-            "\t\t\t\t\t<li>Fixed a crash.</li>\n"
-            "\t\t\t\t\t<li>Lyrics &amp; covers &lt;for&gt; everyone.</li>\n"
-            "\t\t\t\t</ul>\n"
-            "\t\t\t</description>\n"
-            "\t\t</release>\n"
-            # Releases from before release notes have none.
-            '\t\t<release version="1.4.1" date="2020-01-02">\n'
-            "\t\t</release>\n",
-        )
-
-    def test_no_releases(self) -> None:
-        self.repo.commit()
-        self.repo.build("1.4.1-1-gabcdef012")
-
-        self.assertEqual(self.appstream(), "")
+@pytest.fixture
+def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Repo:
+    repo = Repo(tmp_path)
+    monkeypatch.setattr(release_notes, "ROOT", tmp_path)
+    return repo
 
 
-if __name__ == "__main__":
-    unittest.main()
+def appstream(capsys: pytest.CaptureFixture[str]) -> str:
+    release_notes.appstream(argparse.Namespace(commit="HEAD"))
+    return capsys.readouterr().out
+
+
+def versions(capsys: pytest.CaptureFixture[str]) -> list[str]:
+    return re.findall(r'<release version="([^"]+)"', appstream(capsys))
+
+
+def test_releases_on_another_branch_are_in_order(
+    repo: Repo, capsys: pytest.CaptureFixture[str]
+) -> None:
+    # Like 1.3 and 1.3.1: lightweight tags on a branch master never merged.
+    repo.commit()
+    repo.old_release("1.2")
+    repo.git("checkout", "-q", "-b", "1.3")
+    repo.commit()
+    repo.old_release("1.3")
+    repo.commit()
+    repo.old_release("1.3.1")
+    repo.git("checkout", "-q", "master")
+    repo.commit()
+    repo.release("1.4.1")
+    repo.commit("Something new.")
+    repo.release("1.4.2")
+
+    assert versions(capsys) == ["1.4.2", "1.4.1", "1.3.1", "1.3", "1.2"]
+
+
+def test_only_numbered_releases_up_to_head(
+    repo: Repo, capsys: pytest.CaptureFixture[str]
+) -> None:
+    repo.commit()
+    repo.release("1.4.0rc1")
+    repo.commit()
+    repo.release("1.4.1")
+    repo.commit()
+    repo.build("1.4.1-1-gabcdef012")
+    repo.commit("Something new.")
+    repo.release("1.4.2")
+    repo.commit()
+    repo.build("1.4.2-1-gabcdef012")
+    head = repo.git("rev-parse", "HEAD").strip()
+    # A release made since, which the build from head doesn't have.
+    repo.commit("Something newer.")
+    repo.release("1.4.3")
+    repo.git("checkout", "-q", head)
+
+    assert versions(capsys) == ["1.4.2", "1.4.1"]
+
+
+def test_notes_and_dates(repo: Repo, capsys: pytest.CaptureFixture[str]) -> None:
+    repo.commit()
+    repo.release("1.4.1")
+    repo.commit("Fixed a crash.")
+    repo.commit("Lyrics & covers <for> everyone.")
+    repo.release("1.4.2")
+
+    assert appstream(capsys) == (
+        '\t\t<release version="1.4.2" date="2020-01-04">\n'
+        "\t\t\t<description>\n"
+        "\t\t\t\t<ul>\n"
+        "\t\t\t\t\t<li>Fixed a crash.</li>\n"
+        "\t\t\t\t\t<li>Lyrics &amp; covers &lt;for&gt; everyone.</li>\n"
+        "\t\t\t\t</ul>\n"
+        "\t\t\t</description>\n"
+        "\t\t</release>\n"
+        # Releases from before release notes have none.
+        '\t\t<release version="1.4.1" date="2020-01-02">\n'
+        "\t\t</release>\n"
+    )
+
+
+def test_no_releases(repo: Repo, capsys: pytest.CaptureFixture[str]) -> None:
+    repo.commit()
+    repo.build("1.4.1-1-gabcdef012")
+
+    assert appstream(capsys) == ""

@@ -48,10 +48,6 @@ jobs:
             | xargs -0 clang-format \
                 -style="{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}" \
                 --dry-run --Werror
-      - name: Release notes tests
-        # dist/release_notes.py, which plans the releases and writes their
-        # notes, needs nothing but Python and git.
-        run: python3 -m unittest discover -v -s dist -p 'test_*.py'
 
   python:
     name: Python
@@ -116,6 +112,26 @@ jobs:
         run: uv run ty check --output-format github
       - name: Unit tests
         # Reading a DMG needs macOS (hdiutil), so that part is left out.
+        run: uv run pytest -v
+
+  python_release_notes:
+    name: Python (release notes)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: dist
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.2.0
+      - name: ruff check
+        run: uv run ruff check --output-format github
+      - name: ruff format
+        run: uv run ruff format --check
+      - name: ty
+        run: uv run ty check --output-format github
+      - name: Unit tests
+        # On throwaway git repositories, so it needs no history of its own.
         run: uv run pytest -v
 
 
@@ -2599,6 +2615,7 @@ jobs:
       - lint
       - python_apt
       - python_mac_update
+      - python_release_notes
       - protos
       - test
       - build_source
