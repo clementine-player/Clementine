@@ -26,9 +26,14 @@
 #include <algorithm>
 #include <memory>
 
+#include "config.h"
 #include "core/logging.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+
+#ifdef HAVE_AUDIOCD
+#include "devices/cddadevice.h"
+#endif
 
 using std::shared_ptr;
 
@@ -389,6 +394,13 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   return FailedToStart;
 }
 
+#ifdef HAVE_AUDIOCD
+void Transcoder::SourceSetupCallback(GstElement*, GstElement* source,
+                                     gpointer) {
+  CddaDevice::SetDefaultDrive(source);
+}
+#endif
+
 void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
   GstPad* const audiopad =
@@ -500,6 +512,9 @@ bool Transcoder::StartJob(const Job& job) {
   state->convert_element_ = convert;
 
   CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, state.get());
+#ifdef HAVE_AUDIOCD
+  CHECKED_GCONNECT(decode, "source-setup", &SourceSetupCallback, state.get());
+#endif
   gst_bus_set_sync_handler(
       gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline())), BusCallbackSync,
       state.get(), nullptr);

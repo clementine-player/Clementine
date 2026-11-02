@@ -1221,6 +1221,25 @@ jobs:
       - name: git hackery
         run: git config --global --add safe.directory "$(cygpath -u "$GITHUB_WORKSPACE")"
 
+      # libcdio's Windows driver takes an empty reply to READ DVD STRUCTURE
+      # for a DVD-ROM, both when a drive rejects the command for a CD (the
+      # driver doesn't check the SCSI status) and when it claims success.
+      # GStreamer's cdiocddasrc then refuses every audio CD (#7662). Rebuild
+      # MSYS2's package with a fix until a libcdio release has one.
+      - name: Rebuild libcdio with the Windows disc mode fix
+        run: |
+          set -e
+          mkdir -p /tmp/libcdio && cd /tmp/libcdio
+          base=https://raw.githubusercontent.com/msys2/MINGW-packages/master/mingw-w64-libcdio
+          curl -fsSLO "$base/PKGBUILD"
+          curl -fsSLO "$base/libcdio-0.83-linking.patch"
+          cp "$(cygpath -u "$GITHUB_WORKSPACE")/dist/windows/libcdio-win32-discmode.patch" .
+          # Apply it in prepare(), after MSYS2's own patch.
+          sed -i 's|^  autoreconf -fiv$|  patch -Np1 -i "${startdir}/libcdio-win32-discmode.patch"\n&|' PKGBUILD
+          grep -q libcdio-win32-discmode.patch PKGBUILD
+          MINGW_ARCH=clang64 makepkg-mingw --noconfirm --syncdeps --nocheck
+          pacman --noconfirm -U ./mingw-w64-clang-x86_64-libcdio-*.pkg.tar.zst
+
       - name: Download projectM presets
         run: |
           # pinned so every platform ships the same presets

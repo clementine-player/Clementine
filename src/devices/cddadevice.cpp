@@ -19,6 +19,10 @@
 
 #include <QUrl>
 
+// These must come after Qt includes (issue 3247)
+#include <cdio/cd_types.h>
+
+#include "core/logging.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -109,3 +113,29 @@ void CddaDevice::CheckDiscChanged() {
 }
 
 SongList CddaDevice::songs() const { return cdda_song_loader_.cached_tracks(); }
+
+void CddaDevice::SetDefaultDrive(GstElement* source) {
+  if (!GST_IS_AUDIO_CD_SRC(source)) return;
+
+  QString drive;
+  char** audio_cd_drives =
+      cdio_get_devices_with_cap(nullptr, CDIO_FS_AUDIO, false);
+  if (audio_cd_drives) {
+    if (*audio_cd_drives) drive = QString::fromLocal8Bit(*audio_cd_drives);
+    cdio_free_device_list(audio_cd_drives);
+  }
+  if (drive.isEmpty()) {
+    char* default_drive = cdio_get_default_device(nullptr);
+    if (default_drive) {
+      drive = QString::fromLocal8Bit(default_drive);
+      cdio_free(default_drive);
+    }
+  }
+  if (drive.isEmpty()) {
+    qLog(Warning) << "Couldn't find a CD drive";
+    return;
+  }
+
+  qLog(Debug) << "Reading audio CD from" << drive;
+  g_object_set(source, "device", drive.toLocal8Bit().constData(), nullptr);
+}

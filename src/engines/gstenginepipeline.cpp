@@ -1055,6 +1055,11 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "device",
                  instance->source_device().toLocal8Bit().constData(), nullptr);
   }
+#ifdef HAVE_AUDIOCD
+  if (instance->source_device().isEmpty()) {
+    CddaDevice::SetDefaultDrive(element);
+  }
+#endif
 
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "user-agent")) {
     QString user_agent =

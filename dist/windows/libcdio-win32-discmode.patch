@@ -1,0 +1,77 @@
+diff --git a/lib/driver/MSWindows/win32_ioctl.c b/lib/driver/MSWindows/win32_ioctl.c
+index b5d4628f..5fc43f42 100644
+--- a/lib/driver/MSWindows/win32_ioctl.c
++++ b/lib/driver/MSWindows/win32_ioctl.c
+@@ -644,6 +644,14 @@ run_mmc_cmd_win32ioctl( void *p_user_data,
+ 
+   memcpy(p_buf, &(p_sptwb->ucDataBuf), u_buf);
+ 
++  /* DeviceIoControl() succeeds even when the drive rejects the command
++     with CHECK CONDITION, such as READ DVD STRUCTURE on a CD. The data
++     buffer then holds nothing from the drive, so report the failure
++     instead of letting the caller parse it: otherwise every CD looks like
++     a DVD-ROM to get_discmode_win32ioctl(). */
++  if (p_sptwb->Spt.ScsiStatus && DRIVER_OP_SUCCESS == rc)
++    rc = DRIVER_OP_MMC_SENSE_DATA;
++
+   /* Record SCSI sense reply for API call mmc_last_cmd_sense().
+    */
+   if (p_sptwb->Spt.ScsiStatus && p_sptwb->Spt.SenseInfoLength > 0) {
+@@ -663,6 +671,31 @@ run_mmc_cmd_win32ioctl( void *p_user_data,
+ }
+ #endif
+ 
++/**
++  Return true if the drive's current profile, from the GET CONFIGURATION
++  header, says the medium is a CD.
++*/
++static bool
++has_cd_profile_win32ioctl (_img_private_t *p_env)
++{
++  mmc_cdb_t cdb = {{0, }};
++  uint8_t buf[8] = {0, };
++  uint16_t i_profile;
++
++  CDIO_MMC_SET_COMMAND(cdb.field, CDIO_MMC_GPCMD_GET_CONFIGURATION);
++  CDIO_MMC_SET_LEN16(cdb.field, 7, sizeof(buf));
++
++  if (DRIVER_OP_SUCCESS !=
++      run_mmc_cmd_win32ioctl(p_env, mmc_timeout_ms,
++                             mmc_get_cmd_len(cdb.field[0]), &cdb,
++                             SCSI_MMC_DATA_READ, sizeof(buf), buf))
++    return false;
++
++  /* 0x08 CD-ROM, 0x09 CD-R, 0x0A CD-RW. */
++  i_profile = CDIO_MMC_GETPOS_LEN16(buf, 6);
++  return 0x08 <= i_profile && i_profile <= 0x0A;
++}
++
+ /**
+   Get disc type associated with cd object.
+ */
+@@ -675,6 +708,11 @@ dvd_discmode_win32ioctl (_img_private_t *p_env)
+   /* See if this is a DVD. */
+   cdio_dvd_struct_t dvd;  /* DVD READ STRUCT for layer 0. */
+ 
++  /* Some drives, such as LG's GH24NS series, answer READ DVD STRUCTURE
++     for a CD with zeroes, which would read as a DVD-ROM. Believe the
++     drive's current profile first when it says the medium is a CD. */
++  if (has_cd_profile_win32ioctl(p_env)) return discmode;
++
+   dvd.physical.type = CDIO_DVD_STRUCT_PHYSICAL;
+   dvd.physical.layer_num = 0;
+ 
+@@ -1130,7 +1168,12 @@ read_toc_win32ioctl (_img_private_t *p_env)
+      Is this complicated enough? I could be wrong...
+ 
+    */
+-  b_fulltoc_first = (CDIO_DISC_MODE_NO_INFO == dvd_discmode_win32ioctl(p_env));
++  /* Until dvd_discmode_win32ioctl() could tell CDs from DVDs, it called
++     every disc a DVD, so the TOC has always come from IOCTL_CDROM_READ_TOC
++     first. Keep it that way: read_fulltoc_win32mmc() goes through
++     run_mmc_cmd_win32ioctl(), which has had little use, and emulated
++     drives such as VirtualBox's return a placeholder full TOC. */
++  b_fulltoc_first = false;
+ 
+   if ( b_fulltoc_first && read_fulltoc_win32mmc(p_env) ) return true;
+ 

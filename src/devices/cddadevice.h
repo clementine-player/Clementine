@@ -67,6 +67,12 @@ class CddaDevice : public ConnectedDevice {
     return str;
   }
 
+  // Gives a GStreamer audio CD source that no drive was chosen for the first
+  // drive with an audio CD in it, or else libcdio's default drive. Left
+  // alone, the source reads /dev/cdrom, which doesn't exist on Windows or
+  // macOS. Does nothing to other elements.
+  static void SetDefaultDrive(GstElement* source);
+
  signals:
   void SongsDiscovered(const SongList& songs);
   void DiscChanged();
