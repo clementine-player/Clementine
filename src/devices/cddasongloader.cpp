@@ -164,9 +164,11 @@ void CddaSongLoader::LoadSongsFromCdda() {
     return;
   }
 
-  if (!url_.isEmpty()) {
-    g_object_set(cdda_, "device",
-                 g_strdup(url_.path().toLocal8Bit().constData()), nullptr);
+  if (url_.path().isEmpty()) {
+    CddaDevice::SetDefaultDrive(cdda_);
+  } else {
+    g_object_set(cdda_, "device", url_.path().toLocal8Bit().constData(),
+                 nullptr);
   }
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(cdda_),
                                    "paranoia-mode")) {

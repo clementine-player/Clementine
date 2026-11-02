@@ -156,6 +156,7 @@ class Transcoder : public QObject {
                                                     const QString& mime_type);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
+  static void SourceSetupCallback(GstElement*, GstElement* source, gpointer);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
                                          gpointer data);
 
