@@ -181,27 +181,44 @@ def notes(args: argparse.Namespace) -> None:
     )
 
 
+def release_versions(upto: str) -> list[str]:
+    """Every numbered release up to version upto, newest first.
+
+    Old releases' tags aren't all annotated, and 1.3's are on a branch of
+    their own, so this goes by the tags' names rather than by git describe.
+    """
+
+    def key(version: str) -> tuple[int, ...]:
+        return tuple(int(number) for number in version.split("."))
+
+    versions = [
+        tag
+        for tag in git_output("tag", "--list", "[0-9]*").split()
+        if VERSION.fullmatch(tag) and key(tag) <= key(upto)
+    ]
+    return sorted(versions, key=key, reverse=True)
+
+
 def appstream(args: argparse.Namespace) -> None:
-    release = last_release(args.commit, numbered=True)
-    while release:
-        before = last_release(f"{release}^", numbered=True)
-        # Annotated tags from before numbered releases, such as 1.4.0rc2.
-        if VERSION.fullmatch(release):
-            date = git_output(
-                "for-each-ref", "--format=%(taggerdate:short)", f"refs/tags/{release}"
-            ).strip()
-            print(f'\t\t<release version="{release}" date="{date}">')
-            # Releases from before release notes have none.
-            release_notes = notes_since(before, release)
-            if release_notes:
-                print("\t\t\t<description>")
-                print("\t\t\t\t<ul>")
-                for note in release_notes:
-                    print(f"\t\t\t\t\t<li>{escape(note)}</li>")
-                print("\t\t\t\t</ul>")
-                print("\t\t\t</description>")
-            print("\t\t</release>")
-        release = before
+    last = last_release(args.commit, numbered=True)
+    if not last:
+        return
+    versions = release_versions(last)
+    for release, before in zip(versions, [*versions[1:], None], strict=True):
+        date = git_output(
+            "for-each-ref", "--format=%(creatordate:short)", f"refs/tags/{release}"
+        ).strip()
+        print(f'\t\t<release version="{release}" date="{date}">')
+        # Releases from before release notes have none.
+        release_notes = notes_since(before, release)
+        if release_notes:
+            print("\t\t\t<description>")
+            print("\t\t\t\t<ul>")
+            for note in release_notes:
+                print(f"\t\t\t\t\t<li>{escape(note)}</li>")
+            print("\t\t\t\t</ul>")
+            print("\t\t\t</description>")
+        print("\t\t</release>")
 
 
 def main() -> None:
