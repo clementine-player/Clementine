@@ -85,7 +85,7 @@ and its list of supported commands. The DACP-ID is the same in every session.
 | The same, with a song's info replaced | A new cover for each song, over realtime audio. |
 | Rate, position and timestamp in each song's replace | The clock stayed frozen. |
 | The iPhone's updates, and its supported commands | The clock stayed frozen. |
-| Now Playing's buttons, with supported commands sent | Each press came as a POST /command on the event channel, `sendMediaRemoteCommand` with its command (0 play, 4 next, 5 previous); Clementine doesn't act on them yet. Only Play is offered, as if paused. |
+| Now Playing's buttons, with supported commands sent | Each press came as a POST /command on the event channel, `sendMediaRemoteCommand` with its command (0 play, 4 next, 5 previous); Clementine plays, pauses, stops, skips and seeks for them. |
 
 So the cover only needed the iPhone's fields. The clock is below.
 Whether the steady DACP-ID stops the Allow prompt coming back needs

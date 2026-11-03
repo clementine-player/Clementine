@@ -850,6 +850,29 @@ void FakeAirPlayReceiver::NewEventConnection() {
           [this]() { EventReadyRead(); });
 }
 
+void FakeAirPlayReceiver::SendRemoteCommand(int command, const QString& value,
+                                            double position) {
+  if (!event_socket_ || !event_cipher_) {
+    errors_ << "no event channel to send a command on";
+    return;
+  }
+  QVariantMap params{
+      {"kMRMediaRemoteOptionCommandID", "C3B4C5F1-3F6B-40EB-A080-9497FA525665"},
+      {"kMRMediaRemoteOptionSendOptionsNumber", 1}};
+  if (position >= 0) {
+    params["kMRMediaRemoteOptionPlaybackPosition"] = position;
+  }
+  const QByteArray body = airplay::bplist::Write(
+      QVariantMap{{"type", "sendMediaRemoteCommand"},
+                  {"modernMediaRemoteCommand", QString::number(command)},
+                  {"value", value},
+                  {"params", params}});
+  event_socket_->write(event_cipher_->Encrypt(
+      "POST /command RTSP/1.0\r\nCSeq: 2\r\nContent-Type: "
+      "application/x-apple-binary-plist\r\nContent-Length: " +
+      QByteArray::number(body.size()) + "\r\n\r\n" + body));
+}
+
 void FakeAirPlayReceiver::EventReadyRead() {
   if (!event_cipher_->Decrypt(event_socket_->readAll(), &event_buffer_)) {
     errors_ << "an event reply didn't decrypt";

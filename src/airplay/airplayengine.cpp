@@ -33,6 +33,7 @@
 #include "airplaystream.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
 #include "core/timeconstants.h"
 #include "covers/currentartloader.h"
 
@@ -96,6 +97,7 @@ class AirPlayEngine::Target : public AirPlaySinkTarget {
 AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
                              QObject* parent)
     : GstEngine(app),
+      app_(app),
       device_(device),
       session_(nullptr),
       target_(new Target(this)),
@@ -128,6 +130,8 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
   connect(session_, SIGNAL(PairingForgotten()), SLOT(PairingForgotten()));
   connect(session_, SIGNAL(WaitingForApproval()), SLOT(WaitingForApproval()));
   connect(session_, SIGNAL(Ready()), SLOT(SessionReady()));
+  connect(session_, SIGNAL(RemoteCommand(int, double)),
+          SLOT(RemoteCommand(int, double)));
   connect(session_, SIGNAL(Failed(QString)), SLOT(SessionFailed(QString)));
   connect(session_, SIGNAL(NotAllowed(QString)),
           SLOT(SessionNotAllowed(QString)));
@@ -296,6 +300,38 @@ void AirPlayEngine::ArtLoaded(const Song& song, const QString&,
 void AirPlayEngine::SendNowPlaying() {
   session_->SetNowPlaying(song_.PrettyTitle(), song_.artist(), song_.album());
   session_->SetArtwork(EncodeCover(cover_));
+}
+
+// The receiver's Now Playing controls the player, as the player's own
+// buttons do.
+void AirPlayEngine::RemoteCommand(int command, double position) {
+  if (!app_) return;
+  PlayerInterface* player = app_->player();
+  switch (command) {
+    case AirPlaySession::kPlay:
+      player->Play();
+      break;
+    case AirPlaySession::kPause:
+      player->Pause();
+      break;
+    case AirPlaySession::kTogglePlayPause:
+      player->PlayPause();
+      break;
+    case AirPlaySession::kStop:
+      player->Stop();
+      break;
+    case AirPlaySession::kNextTrack:
+      player->Next();
+      break;
+    case AirPlaySession::kPreviousTrack:
+      player->Previous();
+      break;
+    case AirPlaySession::kSeek:
+      if (position >= 0) player->SeekTo(qRound(position));
+      break;
+    default:
+      qLog(Debug) << "Ignoring AirPlay receiver's command" << command;
+  }
 }
 
 void AirPlayEngine::SendProgress() {
