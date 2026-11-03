@@ -118,6 +118,15 @@ class FakeAirPlayReceiver : public QObject {
   QByteArray audio() const { return audio_; }
   int audio_packets() const { return audio_packets_; }
   int sync_packets() const { return sync_packets_; }
+  // Asks the sender for |count| packets again from |seq|, as a receiver that
+  // missed them does, on the control channel the sync packets come from.
+  void RequestResend(quint16 seq, quint16 count);
+  // The sequence number of the last audio packet in order.
+  int last_seq() const { return last_seq_; }
+  // Packets sent again: on the audio channel, as they were, and wrapped in
+  // a retransmit on the control channel.
+  int resent_packets() const { return resent_packets_; }
+  int wrapped_resends() const { return wrapped_resends_; }
   int event_replies() const { return event_replies_; }
   // FLUSHes after the first, and the last volume set, in dB.
   int flushes() const { return flushes_; }
@@ -254,6 +263,10 @@ class FakeAirPlayReceiver : public QObject {
   QByteArray audio_;
   int audio_packets_;
   int sync_packets_;
+  int resent_packets_ = 0;
+  int wrapped_resends_ = 0;
+  QHostAddress sender_control_address_;
+  quint16 sender_control_port_ = 0;
   int event_replies_;
   int flushes_;
   bool flushed_once_;
