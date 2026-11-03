@@ -1445,6 +1445,31 @@ TEST(AirPlaySessionTest, SaysWhereItIsWhenPaused) {
   EXPECT_EQ(QStringList(), receiver.errors());
 }
 
+// The buttons in a Mac's Now Playing come as MediaRemote's commands on the
+// event channel.
+TEST(AirPlaySessionTest, PassesOnTheReceiversCommands) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  QSignalSpy commands(&session, &AirPlaySession::RemoteCommand);
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  receiver.SendRemoteCommand(AirPlaySession::kPlay, "play");
+  receiver.SendRemoteCommand(AirPlaySession::kNextTrack, "nitm");
+  receiver.SendRemoteCommand(AirPlaySession::kSeek, "seek", 42.5);
+  WaitFor([&commands]() { return commands.size() >= 3; });
+  ASSERT_EQ(3, commands.size());
+  EXPECT_EQ(int(AirPlaySession::kPlay), commands[0][0].toInt());
+  EXPECT_EQ(int(AirPlaySession::kNextTrack), commands[1][0].toInt());
+  EXPECT_LT(commands[1][1].toDouble(), 0);
+  EXPECT_EQ(int(AirPlaySession::kSeek), commands[2][0].toInt());
+  EXPECT_EQ(42.5, commands[2][1].toDouble());
+  // Each is answered, as the Mac expects.
+  WaitFor([&receiver]() { return receiver.event_replies() >= 4; });
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
 TEST(AirPlaySessionTest, NoNowPlayingInfoWithAirPlay1) {
   FakeAirPlayReceiver receiver;
   ASSERT_TRUE(receiver.Listen());

@@ -632,6 +632,7 @@ void AirPlaySession::EventReadyRead() {
     QVariant plist;
     if (body.startsWith("bplist00") && airplay::bplist::Read(body, &plist)) {
       qLog(Debug) << "AirPlay event:" << lines << plist;
+      HandleEvent(plist.toMap());
     } else {
       qLog(Debug) << "AirPlay event:" << lines << body.left(512);
     }
@@ -640,6 +641,27 @@ void AirPlaySession::EventReadyRead() {
                    "Audio-Latency: 0\r\nCSeq: ") +
         cseq + "\r\n\r\n"));
   }
+}
+
+// A Mac sends a press of its Now Playing's buttons as
+//   {type: "sendMediaRemoteCommand", modernMediaRemoteCommand: "4",
+//    value: "nitm", params: {kMRMediaRemoteOption...}}
+// with MediaRemote's command, and what it calls it ("play", "nitm" for next,
+// "pitm" for previous...).
+void AirPlaySession::HandleEvent(const QVariantMap& event) {
+  if (event.value("type") != "sendMediaRemoteCommand") return;
+  bool ok = false;
+  const int command = event.value("modernMediaRemoteCommand").toInt(&ok);
+  if (!ok) {
+    qLog(Warning) << "AirPlay receiver sent a command we don't understand"
+                  << event;
+    return;
+  }
+  const QVariant position = event.value("params").toMap().value(
+      "kMRMediaRemoteOptionPlaybackPosition");
+  qLog(Info) << "AirPlay receiver" << device_.name << "sent command" << command
+             << event.value("value").toString();
+  emit RemoteCommand(command, position.isValid() ? position.toDouble() : -1);
 }
 
 // The second SETUP: a stream of realtime L16 audio.
@@ -771,12 +793,13 @@ void AirPlaySession::QueueNowPlayingInfo() {
 // (24). Each is a binary plist of its own.
 QVariantList AirPlaySession::SupportedCommands() {
   QVariantList commands;
-  for (int command : {0, 1, 2, 3, 4, 5}) {
+  for (int command :
+       {kPlay, kPause, kTogglePlayPause, kStop, kNextTrack, kPreviousTrack}) {
     commands << airplay::bplist::Write(QVariantMap{
         {"kCommandInfoCommandKey", command}, {"kCommandInfoEnabledKey", true}});
   }
   commands << airplay::bplist::Write(QVariantMap{
-      {"kCommandInfoCommandKey", 24},
+      {"kCommandInfoCommandKey", int(kSeek)},
       {"kCommandInfoEnabledKey", true},
       {"kCommandInfoOptionsKey",
        QVariantMap{

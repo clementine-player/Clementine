@@ -97,6 +97,8 @@ class AirPlayEngine : public GstEngine {
   void StreamFlushed();
   void ArtLoaded(const Song& song, const QString& uri, const QImage& image);
   void SendProgress();
+  // A button pressed on the receiver.
+  void RemoteCommand(int command, double position);
 
  private:
   class Target;
@@ -115,6 +117,7 @@ class AirPlayEngine : public GstEngine {
   // Tells the session what's playing, while it's open.
   void SendNowPlaying();
 
+  Application* app_;
   AirPlayDevice device_;
   AirPlaySession* session_;
   std::shared_ptr<Target> target_;

@@ -119,6 +119,11 @@ class FakeAirPlayReceiver : public QObject {
   int audio_packets() const { return audio_packets_; }
   int sync_packets() const { return sync_packets_; }
   int event_replies() const { return event_replies_; }
+  // Sends a press of a Now Playing button on the event channel, as a Mac
+  // does: MediaRemote's |command|, what it calls it, and for a seek, the
+  // position in seconds.
+  void SendRemoteCommand(int command, const QString& value,
+                         double position = -1);
   // FLUSHes after the first, and the last volume set, in dB.
   int flushes() const { return flushes_; }
   QByteArray volume() const { return volume_; }

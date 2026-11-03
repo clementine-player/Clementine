@@ -64,6 +64,18 @@ class AirPlaySession : public QObject {
   Q_OBJECT
 
  public:
+  // MediaRemote's commands, which a receiver sends when its user presses
+  // its Now Playing's buttons.
+  enum Command {
+    kPlay = 0,
+    kPause = 1,
+    kTogglePlayPause = 2,
+    kStop = 3,
+    kNextTrack = 4,
+    kPreviousTrack = 5,
+    kSeek = 24,
+  };
+
   struct Options {
     // What the receiver shows for this sender.
     QString name;
@@ -166,6 +178,10 @@ class AirPlaySession : public QObject {
   void Ready();
   // stream() is about to be deleted, so nothing should write to it.
   void StreamEnding();
+  // The receiver's user pressed a button in its Now Playing: one of
+  // MediaRemote's commands, as listed in SupportedCommands(), with the
+  // position in seconds to seek to for kSeek.
+  void RemoteCommand(int command, double position);
   // The receiver's user didn't allow this sender, or didn't answer, which
   // they may yet: a message for the user.
   void NotAllowed(const QString& message);
@@ -219,7 +235,9 @@ class AirPlaySession : public QObject {
   // MediaRemote's playback state, which a Mac's Now Playing shows as playing,
   // with its clock running, or not.
   enum PlaybackState { kPlaying = 1, kPaused = 2, kStopped = 3 };
+
   void SendPlaybackState(PlaybackState state);
+  void HandleEvent(const QVariantMap& event);
   // The RTP timestamp of what the receiver is playing now.
   quint32 PlayingRtpTime() const;
   // RTP-Info for a SET_PARAMETER that applies from now on.
