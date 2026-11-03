@@ -688,10 +688,32 @@ bool FakeAirPlayReceiver::SetupStream(const Request& request) {
   return true;
 }
 
+void FakeAirPlayReceiver::RequestResend(quint16 seq, quint16 count) {
+  if (!sender_control_port_) {
+    errors_ << "no sync packet yet to know where to ask for packets";
+    return;
+  }
+  QByteArray request;
+  request.append(char(0x80));
+  request.append(char(0xD5));
+  request += airplay::Bytes(qToBigEndian(quint16(1)));
+  request += airplay::Bytes(qToBigEndian(seq));
+  request += airplay::Bytes(qToBigEndian(count));
+  control_->writeDatagram(request, sender_control_address_,
+                          sender_control_port_);
+}
+
 void FakeAirPlayReceiver::ControlReadyRead() {
   while (control_->hasPendingDatagrams()) {
-    const QByteArray data = control_->receiveDatagram().data();
+    const QNetworkDatagram datagram = control_->receiveDatagram();
+    const QByteArray data = datagram.data();
+    if (data.size() >= 4 && quint8(data[1]) == 0xD6) {
+      ++wrapped_resends_;
+      continue;
+    }
     if (data.size() < 20 || (quint8(data[1]) & 0x7F) != 0x54) continue;
+    sender_control_address_ = datagram.senderAddress();
+    sender_control_port_ = datagram.senderPort();
     ++sync_packets_;
     // What's playing now, and when that is.
     sync_rtptime_ = qFromBigEndian<quint32>(data.constData() + 4);
@@ -709,6 +731,18 @@ void FakeAirPlayReceiver::AudioReadyRead() {
     const quint16 seq = qFromBigEndian<quint16>(packet.constData() + 2);
     // Each packet follows the last, in sequence and in time.
     const quint32 rtptime = qFromBigEndian<quint32>(packet.constData() + 4);
+    // One it's had before, sent again: it must still decrypt.
+    if (last_seq_ >= 0 && qint16(seq - quint16(last_seq_)) <= 0) {
+      ++resent_packets_;
+      QByteArray pcm;
+      if (!airplay1_ &&
+          !airplay::Open(audio_key_, QByteArray(4, '\0') + packet.right(8),
+                         packet.mid(4, 8),
+                         packet.mid(12, packet.size() - 12 - 8), &pcm)) {
+        errors_ << "a resent audio packet didn't decrypt";
+      }
+      continue;
+    }
     if (last_seq_ >= 0) {
       if (seq != quint16(last_seq_ + 1)) {
         errors_ << QString("packet %1 followed %2").arg(seq).arg(last_seq_);

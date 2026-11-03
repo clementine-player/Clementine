@@ -28,6 +28,7 @@ A Mac14,2 with AirPlay Receiver set to allow anyone on the network, tested
 | Volume | Right: 20·log10 of the gain, so 50% on the slider is about −12 dB. |
 | Pause, seek, skip, gapless | All clean. |
 | Unanswered Allow | Stays on the receiver, stopped, with a message. |
+| Missed packets, 2026-11-03 | A Mac asked again for about 35 packets at the start of a session. Wrapped in RAOP's retransmit on the control channel, none decrypted (`kAuthenticationErr` in its log): 35 unrecovered, and a glitch. Sent again as they were on the audio channel, as OwnTone does: none unrecovered, and no glitch. |
 
 ### Passwords and long-term pairing
 

@@ -1010,6 +1010,49 @@ TEST(AirPlaySessionTest, StreamsAudioWithAirPlay1) {
   EXPECT_EQ(QStringList(), receiver.errors());
 }
 
+// A receiver that missed packets asks for them again. An AirPlay 2 receiver
+// gets them as they were, on the audio channel: a Mac doesn't decrypt them
+// wrapped in RAOP's retransmit.
+TEST(AirPlaySessionTest, ResendsPacketsOnTheAudioChannel) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(FastOptions());
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  const QByteArray tone = Tone(352 * 6);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() {
+    return receiver.audio_packets() >= 6 && receiver.sync_packets() >= 1;
+  });
+  receiver.RequestResend(quint16(receiver.last_seq() - 2), 2);
+  WaitFor([&receiver]() { return receiver.resent_packets() >= 2; });
+  EXPECT_EQ(2, receiver.resent_packets());
+  EXPECT_EQ(0, receiver.wrapped_resends());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
+// AirPlay 1 receivers get them wrapped in a retransmit, on the control
+// channel.
+TEST(AirPlaySessionTest, ResendsPacketsWrappedWithAirPlay1) {
+  FakeAirPlayReceiver receiver;
+  ASSERT_TRUE(receiver.Listen());
+  receiver.set_ask_to_allow(false);
+
+  AirPlaySession session(AirPlay1Options(&receiver));
+  ASSERT_TRUE(OpenReady(&session, receiver.device()));
+  const QByteArray tone = Tone(352 * 6);
+  session.stream()->Write(tone.constData(), tone.size());
+  WaitFor([&receiver]() {
+    return receiver.audio_packets() >= 6 && receiver.sync_packets() >= 1;
+  });
+  receiver.RequestResend(quint16(receiver.last_seq() - 2), 2);
+  WaitFor([&receiver]() { return receiver.wrapped_resends() >= 2; });
+  EXPECT_EQ(2, receiver.wrapped_resends());
+  EXPECT_EQ(0, receiver.resent_packets());
+  EXPECT_EQ(QStringList(), receiver.errors());
+}
+
 TEST(AirPlaySessionTest, SetsTheVolumeFlushesAndTearsDownWithAirPlay1) {
   FakeAirPlayReceiver receiver;
   ASSERT_TRUE(receiver.Listen());

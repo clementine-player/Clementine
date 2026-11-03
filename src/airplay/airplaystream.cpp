@@ -247,8 +247,11 @@ void AirPlayStream::ControlReadyRead() {
   while (control_socket_->hasPendingDatagrams()) {
     const QNetworkDatagram datagram = control_socket_->receiveDatagram();
     const QByteArray data = datagram.data();
-    // RAOP's resend request (0x55), answered with the packets wrapped in a
-    // retransmit (0xD6, 0x56 with the marker bit).
+    // RAOP's resend request (0x55). AirPlay 1 receivers want the packets
+    // back wrapped in a retransmit (0xD6, 0x56 with the marker bit) on the
+    // control channel. A Mac doesn't decrypt AirPlay 2's packets wrapped so,
+    // so they go again as they were, on the audio channel, as OwnTone sends
+    // them, which shairport-sync takes too.
     if (data.size() < 8 || (quint8(data[1]) & 0x7F) != 0x55) continue;
     const quint16 lost = qFromBigEndian<quint16>(data.constData() + 4);
     const quint16 count = qFromBigEndian<quint16>(data.constData() + 6);
@@ -258,6 +261,10 @@ void AirPlayStream::ControlReadyRead() {
     for (quint16 i = 0; i < count; ++i) {
       const QByteArray packet = backlog_.value(quint16(lost + i));
       if (packet.isEmpty()) continue;
+      if (!audio_key_.isEmpty()) {
+        SendDatagram(packet, host_, data_port_);
+        continue;
+      }
       QByteArray resend;
       resend.append(char(0x80));
       resend.append(char(0xD6));
