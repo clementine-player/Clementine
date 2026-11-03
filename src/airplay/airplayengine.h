@@ -65,6 +65,7 @@ class AirPlayEngine : public GstEngine {
   void Stop(bool stop_after = false) override;
   void Pause() override;
   void Unpause() override;
+  void Seek(quint64 offset_nanosec) override;
   qint64 position_nanosec() const override;
   QString output_name() const override { return device_.name; }
   QString output_icon() const override;
@@ -130,6 +131,11 @@ class AirPlayEngine : public GstEngine {
   // Whether the receiver showed a PIN, which a refusal then means was wrong.
   bool pin_shown_;
   bool pin_wrong_;
+  // Whether Pause() took the pipeline back to what the receiver had played,
+  // so that, still paused, its position is what was heard.
+  bool rewound_;
+  // Where the last seek went, until the flush it makes, or -1.
+  qint64 seek_nanosec_;
   QAction* pair_action_;
   QPointer<QInputDialog> dialog_;
   QAction* forget_action_;
