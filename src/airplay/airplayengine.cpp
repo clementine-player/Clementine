@@ -42,6 +42,9 @@ namespace {
 const int kMaxCoverSize = 600;
 // How long a new position takes to settle after a seek or a new track.
 const int kProgressDelayMsec = 1000;
+// How far behind what's been sent the receiver plays.
+const int kLatencyMsec =
+    AirPlayStream::kLatencyFrames * 1000 / AirPlayStream::kSampleRate;
 
 QByteArray EncodeCover(const QImage& image) {
   if (image.isNull()) return QByteArray();
@@ -104,6 +107,8 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
       pair_requested_(false),
       pin_shown_(false),
       pin_wrong_(false),
+      rewound_(false),
+      seek_nanosec_(-1),
       pair_action_(new QAction(this)),
       forget_action_(new QAction(this)),
       progress_timer_(new QTimer(this)) {
@@ -263,23 +268,57 @@ void AirPlayEngine::CloseDialog() {
 }
 
 // The receiver shows it paused where it is.
+// The receiver stops at once, rather than playing out what it has queued, and
+// the pipeline goes back to what was heard, to go on from there.
 void AirPlayEngine::Pause() {
+  const qint64 heard = position_nanosec();
   GstEngine::Pause();
   progress_timer_->stop();
-  session_->SetProgress(position_nanosec() / kNsecPerMsec,
+  rewound_ = session_->is_open();
+  if (rewound_) {
+    session_->Flush();
+    Seek(heard);
+  }
+  session_->SetProgress(heard / kNsecPerMsec,
                         song_.length_nanosec() / kNsecPerMsec, false);
 }
 
-// The receiver ran dry while paused: it plays from what comes next.
+// The receiver ran dry while paused: it plays from what comes next. Rewound,
+// it plays nothing until the latency has passed, so until then it's left
+// showing paused where it was: where the pipeline is less the latency would
+// put it back from there, and it would count up to it again.
 void AirPlayEngine::Unpause() {
+  const bool rewound = rewound_;
+  rewound_ = false;
   session_->Flush();
   GstEngine::Unpause();
-  progress_timer_->start();
+  progress_timer_->start(rewound ? kLatencyMsec : kProgressDelayMsec);
+}
+
+void AirPlayEngine::Seek(quint64 offset_nanosec) {
+  seek_nanosec_ = offset_nanosec;
+  GstEngine::Seek(offset_nanosec);
 }
 
 void AirPlayEngine::StreamFlushed() {
+  const qint64 seek_nanosec = seek_nanosec_;
+  seek_nanosec_ = -1;
+  // Paused and rewound, the receiver has nothing queued to flush, as after
+  // Pause()'s own seek, and resuming flushes it anyway.
+  if (rewound_ && state() == Engine::Paused) {
+    progress_timer_->start();
+    return;
+  }
   session_->Flush();
-  // After a seek.
+  if (seek_nanosec >= 0 && state() == Engine::Playing) {
+    // As when resuming, the receiver plays nothing until the latency has
+    // passed. It's shown paused where the seek went until then, rather than
+    // counting on from there and then going back to it.
+    session_->SetProgress(seek_nanosec / kNsecPerMsec,
+                          song_.length_nanosec() / kNsecPerMsec, false);
+    progress_timer_->start(kLatencyMsec);
+    return;
+  }
   progress_timer_->start();
 }
 
@@ -299,6 +338,7 @@ void AirPlayEngine::SendNowPlaying() {
 }
 
 void AirPlayEngine::SendProgress() {
+  progress_timer_->setInterval(kProgressDelayMsec);
   session_->SetProgress(position_nanosec() / kNsecPerMsec,
                         song_.length_nanosec() / kNsecPerMsec,
                         state() == Engine::Playing);
@@ -310,6 +350,10 @@ void AirPlayEngine::SetVolumeSW(uint percent) {
 }
 
 qint64 AirPlayEngine::position_nanosec() const {
+  // Paused and rewound, the receiver has nothing queued.
+  if (rewound_ && state() == Engine::Paused) {
+    return GstEngine::position_nanosec();
+  }
   // The receiver plays this far behind what's been sent.
   const qint64 latency = qint64(AirPlayStream::kLatencyFrames) * kNsecPerSec /
                          AirPlayStream::kSampleRate;
