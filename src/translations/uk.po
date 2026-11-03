@@ -130,32 +130,32 @@ msgstr "%1 день тому"
 #: airplay/airplaysession.cpp:532
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
-msgstr ""
+msgstr "%1 не дозволяє відтворення %2 тут"
 
 #: airplay/airplaysession.cpp:340
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
-msgstr ""
+msgstr "%1 не сполучено як приймачі AirPlay"
 
 #: airplay/airplaysession.cpp:929
 #, qt-format
 msgid "%1 didn't prove who it is"
-msgstr ""
+msgstr "%1 не довів ідентичності"
 
 #: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
 #, qt-format
 msgid "%1 didn't say where to send audio"
-msgstr ""
+msgstr "%1 не повідомив, куди надсилати звукові дані"
 
 #: airplay/airplaysession.cpp:287
 #, qt-format
 msgid "%1 didn't show a PIN to pair with (HTTP %2)"
-msgstr ""
+msgstr "%1 не показав PIN-код для сполучення (HTTP %2)"
 
 #: airplay/airplayengine.cpp:461
 #, qt-format
 msgid "%1 doesn't remember Clementine, and pairing again didn't work"
-msgstr ""
+msgstr "%1 не пам'ятає Clementine, і повторне сполучення не спрацювало"
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
@@ -205,12 +205,12 @@ msgstr "%1 отримує звукові дані від Clementine віддал
 #: airplay/airplaysession.cpp:416
 #, qt-format
 msgid "%1 is busy pairing with another AirPlay sender"
-msgstr ""
+msgstr "%1 зайнято сполученням із іншим передавачем AirPlay"
 
 #: airplay/airplaysession.cpp:414
 #, qt-format
 msgid "%1 isn't accepting new AirPlay senders"
-msgstr ""
+msgstr "%1 не приймає нових передавачів AirPlay"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -220,7 +220,7 @@ msgstr "%1 на %2"
 #: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
-msgstr ""
+msgstr "%1 приймає лише шифровані звукові дані AirPlay 1, які Clementine не може надсилати"
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
@@ -230,7 +230,7 @@ msgstr "%1 списків відтворення (%2)"
 #: airplay/airplaysession.cpp:538
 #, qt-format
 msgid "%1 refused %2 (HTTP %3)"
-msgstr ""
+msgstr "%1 відмовив %2 (HTTP %3)"
 
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
@@ -240,34 +240,34 @@ msgstr "%1 відмовлено у вході. Спробуйте вийти і 
 #: airplay/airplaysession.cpp:402
 #, qt-format
 msgid "%1 refused to pair"
-msgstr ""
+msgstr "%1 відмовив у сполученні"
 
 #: airplay/airplaysession.cpp:320
 #, qt-format
 msgid ""
 "%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
 "network?"
-msgstr ""
+msgstr "%1 відмовив у сполученні (HTTP %2). Чи встановлено дозвіл AirPlay для доступу будь-кого у мережі?"
 
 #: airplay/airplaysession.cpp:419
 #, qt-format
 msgid "%1 refused to pair (HTTP %2, error %3)"
-msgstr ""
+msgstr "%1 відмовив у сполученні (HTTP %2, помилка %3)"
 
 #: airplay/airplaysession.cpp:412
 #, qt-format
 msgid "%1 refused to pair after too many attempts"
-msgstr ""
+msgstr "%1 відмовив у сполученні після перевищення граничної кількості спроб"
 
 #: airplay/airplaysession.cpp:405
 #, qt-format
 msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
-msgstr ""
+msgstr "%1 відмовив у сполученні після перевищення граничної кількості спроб. Повторна спробу за %2 секунд."
 
 #: airplay/airplaysession.cpp:471
 #, qt-format
 msgid "%1 refused to set up a session (HTTP %2)"
-msgstr ""
+msgstr "%1 відмовив у налаштовуванні сеансу (HTTP %2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -323,7 +323,7 @@ msgstr "%1  %2\nЦей комп'ютер — %3"
 #: airplay/airplayengine.cpp:316
 #, qt-format
 msgid "%1. Allow it there, then play again."
-msgstr ""
+msgstr "%1. Дозвольте це там, потім відтворіть знову."
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -884,11 +884,11 @@ msgstr "Після копіювання…"
 
 #: airplay/airplayengine.cpp:404
 msgid "AirPlay PIN"
-msgstr ""
+msgstr "PIN-код AirPlay"
 
 #: airplay/airplayengine.cpp:381
 msgid "AirPlay password"
-msgstr ""
+msgstr "Пароль AirPlay"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
@@ -970,7 +970,7 @@ msgstr "Всі композиції"
 #: airplay/airplayengine.cpp:224
 #, qt-format
 msgid "Allow %1 on %2 to play there"
-msgstr ""
+msgstr "Дозволити %1 на %2 відтворення там"
 
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
@@ -1505,7 +1505,7 @@ msgstr "Переглядач зображень Clementine"
 #: airplay/airplaysession.cpp:152
 #, qt-format
 msgid "Clementine on %1"
-msgstr ""
+msgstr "Clementine на %1"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1741,7 +1741,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Не вдалося встановити з’єднання з Subsonic, перевірте адресу сервера. Приклад: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:63
+#: transcoder/transcoder.cpp:68
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1773,14 +1773,14 @@ msgstr "Не вдалося увійти до last.fm. Будь ласка, по
 #: airplay/airplaysession.cpp:555
 #, qt-format
 msgid "Couldn't connect to %1's event channel: %2"
-msgstr ""
+msgstr "Не вдалося встановити з'єднання з каналом подій %1: %2"
 
 #: airplay/airplayrtspconnection.cpp:315
 #, qt-format
 msgid ""
 "Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
 " AirPlay on?"
-msgstr ""
+msgstr "Не вдалося встановити з'єднання з приймачем AirPlay на %1:%2 за %3 с. Чи працює він з увімкненим AirPlay?"
 
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
@@ -1788,21 +1788,21 @@ msgstr "Не вдалося створити список відтворення
 
 #: airplay/airplayrtspconnection.cpp:228
 msgid "Couldn't decrypt what the AirPlay receiver sent"
-msgstr ""
+msgstr "Не вдалося розшифрувати надіслане приймачем AirPlay"
 
 #: internet/plex/plexauthenticator.cpp:167
 #, qt-format
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Не вдалося отримати ваші сервери Plex: %1"
 
-#: transcoder/transcoder.cpp:476
+#: transcoder/transcoder.cpp:488
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Не вдалось знайти ущільнювач для %1, перевірте чи правильно встановлений модуль GStreamer"
 
-#: transcoder/transcoder.cpp:469
+#: transcoder/transcoder.cpp:481
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1811,7 +1811,7 @@ msgstr "Не вдалось знайти кодер для %1, перевірт�
 
 #: airplay/airplaysession.cpp:214
 msgid "Couldn't listen for the AirPlay receiver"
-msgstr ""
+msgstr "Не вдалося чекати дані для приймача AirPlay"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -2401,7 +2401,7 @@ msgstr "Режим кодування"
 #: airplay/airplayengine.cpp:385
 #, qt-format
 msgid "Enter %1's AirPlay password:"
-msgstr ""
+msgstr "Введіть пароль AirPlay %1:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
@@ -2451,7 +2451,7 @@ msgstr "Введіть сюди критерії пошуку"
 #: airplay/airplayengine.cpp:408
 #, qt-format
 msgid "Enter the PIN %1 shows:"
-msgstr ""
+msgstr "Введіть PIN-код, показаний %1:"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
@@ -2514,7 +2514,7 @@ msgstr "Помилка завантаження %1"
 msgid "Error loading di.fm playlist"
 msgstr "Помилка завантаження списку відтворення di.fm"
 
-#: transcoder/transcoder.cpp:441
+#: transcoder/transcoder.cpp:453
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Помилка обробляння %1: %2"
@@ -2605,7 +2605,7 @@ msgstr "F32LE (32-бітовий)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:280
+#: core/song.cpp:420 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:171
@@ -2817,7 +2817,7 @@ msgstr "Забути пристрій"
 #: airplay/airplayengine.cpp:170
 #, qt-format
 msgid "Forget pairing with %1"
-msgstr ""
+msgstr "Забути про сполучення з %1"
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -3087,7 +3087,7 @@ msgstr "Мною здійснено вхід"
 msgid "Icon"
 msgstr "Значок"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:449
 msgid "Icons on top"
 msgstr "Значки зверху"
 
@@ -3328,7 +3328,7 @@ msgstr "Велика обкладинка альбому (подробиці н�
 msgid "Large album cover (no details)"
 msgstr "Велика обкладинка альбому (без подробиць)"
 
-#: widgets/fancytabwidget.cpp:433
+#: widgets/fancytabwidget.cpp:445
 msgid "Large sidebar"
 msgstr "Велика бічна панель"
 
@@ -3573,11 +3573,11 @@ msgstr "Текст пісні з LRCLIB"
 msgid "Lyrics from the file's tags"
 msgstr "Текст з міток файла"
 
-#: transcoder/transcoder.cpp:282
+#: transcoder/transcoder.cpp:287
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:426 transcoder/transcoder.cpp:285
+#: core/song.cpp:426 transcoder/transcoder.cpp:290
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3995,19 +3995,19 @@ msgstr "Вимкн."
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:290
+#: transcoder/transcoder.cpp:295
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:434 transcoder/transcoder.cpp:296
+#: core/song.cpp:434 transcoder/transcoder.cpp:301
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:293
+#: core/song.cpp:430 transcoder/transcoder.cpp:298
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:432 transcoder/transcoder.cpp:287
+#: core/song.cpp:432 transcoder/transcoder.cpp:292
 #: ../bin/src/ui_magnatunedownloaddialog.h:137
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -4210,7 +4210,7 @@ msgstr "Власник"
 #: airplay/airplayengine.cpp:166
 #, qt-format
 msgid "Pair with %1..."
-msgstr ""
+msgstr "Сполучити з %1..."
 
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
@@ -4260,7 +4260,7 @@ msgstr "Конвеєри"
 msgid "Pixel"
 msgstr "Піксель"
 
-#: widgets/fancytabwidget.cpp:435
+#: widgets/fancytabwidget.cpp:447
 msgid "Plain sidebar"
 msgstr "Звичайна бічна панель"
 
@@ -5430,7 +5430,7 @@ msgstr "Пропустити композицію"
 msgid "Small album cover"
 msgstr "Маленька обкладинка альбому"
 
-#: widgets/fancytabwidget.cpp:434
+#: widgets/fancytabwidget.cpp:446
 msgid "Small sidebar"
 msgstr "Маленька бічна панель"
 
@@ -5531,7 +5531,7 @@ msgstr "Запустити список відтворення, що відтв�
 msgid "Start transcoding"
 msgstr "Почати перекодування"
 
-#: transcoder/transcoder.cpp:448
+#: transcoder/transcoder.cpp:460
 #, qt-format
 msgid "Starting %1"
 msgstr "Запуск %1"
@@ -5617,7 +5617,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Виконано!"
 
-#: transcoder/transcoder.cpp:209
+#: transcoder/transcoder.cpp:214
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Успішно записано %1"
@@ -5626,7 +5626,7 @@ msgstr "Успішно записано %1"
 msgid "Suggested tags"
 msgstr "Пропоновані мітки"
 
-#: transcoder/transcoder.cpp:154
+#: transcoder/transcoder.cpp:159
 msgid "Suitable element not found"
 msgstr "Не знайдено відповідного елемента"
 
@@ -5657,7 +5657,7 @@ msgstr "Синхронізувати статистичні дані з файл
 msgid "System colors"
 msgstr "Системні кольори"
 
-#: widgets/fancytabwidget.cpp:436
+#: widgets/fancytabwidget.cpp:448
 msgid "Tabs on top"
 msgstr "Вкладки зверху"
 
@@ -5684,12 +5684,12 @@ msgstr "Подяки"
 #: airplay/airplayengine.cpp:406
 #, qt-format
 msgid "That PIN was wrong. Enter the PIN %1 shows now:"
-msgstr ""
+msgstr "Цей PIN-код є помилковим. Введіть PIN-код, який %1 показує зараз:"
 
 #: airplay/airplayengine.cpp:383
 #, qt-format
 msgid "That password was wrong. Enter %1's AirPlay password:"
-msgstr ""
+msgstr "Цей пароль є помилковим. Введіть пароль AirPlay %1:"
 
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
@@ -5699,7 +5699,7 @@ msgstr "Команда \"%1\" не може бути виконана"
 #: airplay/airplayrtspconnection.cpp:326
 #, qt-format
 msgid "The AirPlay receiver didn't respond in %1 s"
-msgstr ""
+msgstr "Приймач AirPlay не відповів за %1 с"
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
@@ -5970,7 +5970,7 @@ msgstr "Параметри перекодувальника"
 msgid "Transcoding"
 msgstr "Перекодування"
 
-#: transcoder/transcoder.cpp:362
+#: transcoder/transcoder.cpp:367
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Перекодовано %1 файлів, використовуючи %2 гілки"
@@ -6315,7 +6315,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Попередження: цей рівень стискання не належить до підмножини придатних до трансляції рівнів. Це означає, що декодер, можливо, не зможе почати відтворення трансляції з середини. Вибір такого рівня також може значно вплинути на швидкодію апаратних декодерів."
 
-#: core/song.cpp:438 transcoder/transcoder.cpp:302
+#: core/song.cpp:438 transcoder/transcoder.cpp:307
 msgid "Wav"
 msgstr "Wav"
 
@@ -6441,7 +6441,7 @@ msgstr "Windows Media, 40 кб"
 msgid "Windows Media 64k"
 msgstr "Windows Media, 64 кб"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:299
+#: core/song.cpp:418 transcoder/transcoder.cpp:304
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

@@ -1742,7 +1742,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr ""
 
-#: transcoder/transcoder.cpp:63
+#: transcoder/transcoder.cpp:68
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1796,14 +1796,14 @@ msgstr ""
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr ""
 
-#: transcoder/transcoder.cpp:476
+#: transcoder/transcoder.cpp:488
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ne mogu da nađem mukser za %1, proverite da li imate instalirane potrebne priključke za Gstrimer"
 
-#: transcoder/transcoder.cpp:469
+#: transcoder/transcoder.cpp:481
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2515,7 +2515,7 @@ msgstr "Greška učitavanja %1"
 msgid "Error loading di.fm playlist"
 msgstr "Greška učitavanja di.fm liste numera"
 
-#: transcoder/transcoder.cpp:441
+#: transcoder/transcoder.cpp:453
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Greška obrade %1: %2"
@@ -2606,7 +2606,7 @@ msgstr ""
 msgid "F9"
 msgstr ""
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:280
+#: core/song.cpp:420 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:171
@@ -3088,7 +3088,7 @@ msgstr ""
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:449
 msgid "Icons on top"
 msgstr "Ikone na vrhu"
 
@@ -3329,7 +3329,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:433
+#: widgets/fancytabwidget.cpp:445
 msgid "Large sidebar"
 msgstr "Široka traka"
 
@@ -3574,11 +3574,11 @@ msgstr ""
 msgid "Lyrics from the file's tags"
 msgstr ""
 
-#: transcoder/transcoder.cpp:282
+#: transcoder/transcoder.cpp:287
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:426 transcoder/transcoder.cpp:285
+#: core/song.cpp:426 transcoder/transcoder.cpp:290
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3996,19 +3996,19 @@ msgstr ""
 msgid "Ogg FLAC"
 msgstr ""
 
-#: transcoder/transcoder.cpp:290
+#: transcoder/transcoder.cpp:295
 msgid "Ogg Flac"
 msgstr "OGG FLAC"
 
-#: core/song.cpp:434 transcoder/transcoder.cpp:296
+#: core/song.cpp:434 transcoder/transcoder.cpp:301
 msgid "Ogg Opus"
 msgstr ""
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:293
+#: core/song.cpp:430 transcoder/transcoder.cpp:298
 msgid "Ogg Speex"
 msgstr "OGG Speex"
 
-#: core/song.cpp:432 transcoder/transcoder.cpp:287
+#: core/song.cpp:432 transcoder/transcoder.cpp:292
 #: ../bin/src/ui_magnatunedownloaddialog.h:137
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -4261,7 +4261,7 @@ msgstr ""
 msgid "Pixel"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:435
+#: widgets/fancytabwidget.cpp:447
 msgid "Plain sidebar"
 msgstr "Obična traka"
 
@@ -5431,7 +5431,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr "Mali omot"
 
-#: widgets/fancytabwidget.cpp:434
+#: widgets/fancytabwidget.cpp:446
 msgid "Small sidebar"
 msgstr "Uska traka"
 
@@ -5532,7 +5532,7 @@ msgstr "Pusti tekuću listu numera"
 msgid "Start transcoding"
 msgstr "Počni prekodiranje"
 
-#: transcoder/transcoder.cpp:448
+#: transcoder/transcoder.cpp:460
 #, qt-format
 msgid "Starting %1"
 msgstr "Počinjem %1"
@@ -5618,7 +5618,7 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
-#: transcoder/transcoder.cpp:209
+#: transcoder/transcoder.cpp:214
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Uspešno upisano %1"
@@ -5627,7 +5627,7 @@ msgstr "Uspešno upisano %1"
 msgid "Suggested tags"
 msgstr "Predložene oznake"
 
-#: transcoder/transcoder.cpp:154
+#: transcoder/transcoder.cpp:159
 msgid "Suitable element not found"
 msgstr ""
 
@@ -5658,7 +5658,7 @@ msgstr ""
 msgid "System colors"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:436
+#: widgets/fancytabwidget.cpp:448
 msgid "Tabs on top"
 msgstr "Jezičci na vrhu"
 
@@ -5971,7 +5971,7 @@ msgstr ""
 msgid "Transcoding"
 msgstr "Prekodiranje"
 
-#: transcoder/transcoder.cpp:362
+#: transcoder/transcoder.cpp:367
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Prekodiram %1 fajlova koristeći %2 niski"
@@ -6316,7 +6316,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:438 transcoder/transcoder.cpp:302
+#: core/song.cpp:438 transcoder/transcoder.cpp:307
 msgid "Wav"
 msgstr "VAV"
 
@@ -6442,7 +6442,7 @@ msgstr "Vindouz medija 40k"
 msgid "Windows Media 64k"
 msgstr ""
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:299
+#: core/song.cpp:418 transcoder/transcoder.cpp:304
 msgid "Windows Media audio"
 msgstr "Vindouz medija audio"
 

@@ -133,12 +133,12 @@ msgstr "%1 giorni fa"
 #: airplay/airplaysession.cpp:532
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
-msgstr ""
+msgstr "%1 non ha consentito a %2 di riprodurre lì"
 
 #: airplay/airplaysession.cpp:340
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
-msgstr ""
+msgstr "%1 non è stato associato come vengono associato i ricevitori AirPlay"
 
 #: airplay/airplaysession.cpp:929
 #, qt-format
@@ -148,7 +148,7 @@ msgstr "%1 non ha provato la sua identità"
 #: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
 #, qt-format
 msgid "%1 didn't say where to send audio"
-msgstr ""
+msgstr "%1 non ha specificato dove inviare l'audio"
 
 #: airplay/airplaysession.cpp:287
 #, qt-format
@@ -158,7 +158,7 @@ msgstr "%1 non ha mostrato un PIN per l'associazione (HTTP %2)"
 #: airplay/airplayengine.cpp:461
 #, qt-format
 msgid "%1 doesn't remember Clementine, and pairing again didn't work"
-msgstr ""
+msgstr "%1 non ricorda Clementine, e la nuova associazione non ha funzionato"
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
@@ -208,7 +208,7 @@ msgstr "%1 ottiene la propria musica da Clementine tramite il controllo remoto d
 #: airplay/airplaysession.cpp:416
 #, qt-format
 msgid "%1 is busy pairing with another AirPlay sender"
-msgstr ""
+msgstr "%1 è impegnato nell'associazione con un altro mittente AirPlay"
 
 #: airplay/airplaysession.cpp:414
 #, qt-format
@@ -223,7 +223,7 @@ msgstr "%1 di %2"
 #: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
-msgstr ""
+msgstr "%1 accetta solo audio AirPlay 1 cifrato, che Clementine non è in grado di inviare"
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
@@ -250,7 +250,7 @@ msgstr "%1 ha rifiutato l'associazione"
 msgid ""
 "%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
 "network?"
-msgstr ""
+msgstr "%1 ha rifiutato l'associazione (HTTP %2). È configurato in modo da consentire AirPlay a chiunque si trovi sulla rete?"
 
 #: airplay/airplaysession.cpp:419
 #, qt-format
@@ -265,12 +265,12 @@ msgstr "%1 ha rifiutato l'associazione dopo troppi tentativi"
 #: airplay/airplaysession.cpp:405
 #, qt-format
 msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
-msgstr ""
+msgstr "%1 ha rifiutato l'associazione dopo troppi tentativi. Riprova tra %2 secondi."
 
 #: airplay/airplaysession.cpp:471
 #, qt-format
 msgid "%1 refused to set up a session (HTTP %2)"
-msgstr ""
+msgstr "%1 ha rifiutato di stabilire una sessione (HTTP %2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -326,7 +326,7 @@ msgstr "%1  %2\nQuesto computer è %3"
 #: airplay/airplayengine.cpp:316
 #, qt-format
 msgid "%1. Allow it there, then play again."
-msgstr ""
+msgstr "%1. Consentilo lì, poi riproduci di nuovo."
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -973,7 +973,7 @@ msgstr "Tutte le tracce"
 #: airplay/airplayengine.cpp:224
 #, qt-format
 msgid "Allow %1 on %2 to play there"
-msgstr ""
+msgstr "Consenti a %1 su %2 di riprodurre lì"
 
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
@@ -1744,7 +1744,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Impossibile connettersi a Subsonic, controlla l'URL del server. Esempio: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:63
+#: transcoder/transcoder.cpp:68
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1776,14 +1776,14 @@ msgstr "Impossibile accedere a Last.fm. Prova ancora."
 #: airplay/airplaysession.cpp:555
 #, qt-format
 msgid "Couldn't connect to %1's event channel: %2"
-msgstr ""
+msgstr "Impossibile connettersi al canale di eventi di %1: %2"
 
 #: airplay/airplayrtspconnection.cpp:315
 #, qt-format
 msgid ""
 "Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
 " AirPlay on?"
-msgstr ""
+msgstr "Impossibile connettersi al ricevitore AirPlay su %1:%2 in %3 s. È attivo e con AirPlay abilitato?"
 
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
@@ -1798,14 +1798,14 @@ msgstr "Impossibile decifrare ciò che il ricevitore AirPlay ha inviato"
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Impossibile recuperare i tuoi server Plex: %1"
 
-#: transcoder/transcoder.cpp:476
+#: transcoder/transcoder.cpp:488
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Impossibile trovare un multiplatore per %1, verifica l'installazione del plugin GStreamer corretto"
 
-#: transcoder/transcoder.cpp:469
+#: transcoder/transcoder.cpp:481
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1814,7 +1814,7 @@ msgstr "Impossibile trovare un codificatore per %1, verifica l'installazione del
 
 #: airplay/airplaysession.cpp:214
 msgid "Couldn't listen for the AirPlay receiver"
-msgstr ""
+msgstr "Impossibile restare in ascolto per il ricevitore AirPlay"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -2404,7 +2404,7 @@ msgstr "Modalità di codifica"
 #: airplay/airplayengine.cpp:385
 #, qt-format
 msgid "Enter %1's AirPlay password:"
-msgstr ""
+msgstr "Digita la password AirPlay di %1:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
@@ -2454,7 +2454,7 @@ msgstr "Inserisci qui i termini di ricerca"
 #: airplay/airplayengine.cpp:408
 #, qt-format
 msgid "Enter the PIN %1 shows:"
-msgstr ""
+msgstr "Digita il PIN mostrato da %1:"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
@@ -2517,7 +2517,7 @@ msgstr "Errore durante il caricamento di %1"
 msgid "Error loading di.fm playlist"
 msgstr "Errore durante il caricamento della scaletta di.fm"
 
-#: transcoder/transcoder.cpp:441
+#: transcoder/transcoder.cpp:453
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Errore durante l'elaborazione di %1: %2"
@@ -2608,7 +2608,7 @@ msgstr "F32LE (32-bit)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:280
+#: core/song.cpp:420 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:171
@@ -2820,7 +2820,7 @@ msgstr "Elimina dispositivo"
 #: airplay/airplayengine.cpp:170
 #, qt-format
 msgid "Forget pairing with %1"
-msgstr ""
+msgstr "Dimentica l'associazione con %1"
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -3090,7 +3090,7 @@ msgstr "Sono registrato"
 msgid "Icon"
 msgstr "Icona"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:449
 msgid "Icons on top"
 msgstr "Icone in alto"
 
@@ -3331,7 +3331,7 @@ msgstr "Copertina grande dell'album (sotto i dettagli)"
 msgid "Large album cover (no details)"
 msgstr "Copertina grande dell'album (senza dettagli)"
 
-#: widgets/fancytabwidget.cpp:433
+#: widgets/fancytabwidget.cpp:445
 msgid "Large sidebar"
 msgstr "Pannello laterale grande"
 
@@ -3576,11 +3576,11 @@ msgstr "Testi da LRCLIB"
 msgid "Lyrics from the file's tags"
 msgstr "Testi dai tag dei file"
 
-#: transcoder/transcoder.cpp:282
+#: transcoder/transcoder.cpp:287
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:426 transcoder/transcoder.cpp:285
+#: core/song.cpp:426 transcoder/transcoder.cpp:290
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -3998,19 +3998,19 @@ msgstr "Spento"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:290
+#: transcoder/transcoder.cpp:295
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:434 transcoder/transcoder.cpp:296
+#: core/song.cpp:434 transcoder/transcoder.cpp:301
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:293
+#: core/song.cpp:430 transcoder/transcoder.cpp:298
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:432 transcoder/transcoder.cpp:287
+#: core/song.cpp:432 transcoder/transcoder.cpp:292
 #: ../bin/src/ui_magnatunedownloaddialog.h:137
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -4213,7 +4213,7 @@ msgstr "Proprietario"
 #: airplay/airplayengine.cpp:166
 #, qt-format
 msgid "Pair with %1..."
-msgstr ""
+msgstr "Associa con %1..."
 
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
@@ -4263,7 +4263,7 @@ msgstr "Pipeline"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:435
+#: widgets/fancytabwidget.cpp:447
 msgid "Plain sidebar"
 msgstr "Barra laterale semplice"
 
@@ -5433,7 +5433,7 @@ msgstr "Salta la traccia"
 msgid "Small album cover"
 msgstr "Copertine piccole"
 
-#: widgets/fancytabwidget.cpp:434
+#: widgets/fancytabwidget.cpp:446
 msgid "Small sidebar"
 msgstr "Pannello laterale piccolo"
 
@@ -5534,7 +5534,7 @@ msgstr "Avvia la scaletta attualmente in riproduzione"
 msgid "Start transcoding"
 msgstr "Avvia transcodifica"
 
-#: transcoder/transcoder.cpp:448
+#: transcoder/transcoder.cpp:460
 #, qt-format
 msgid "Starting %1"
 msgstr "Avvio di %1"
@@ -5620,7 +5620,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Successo!"
 
-#: transcoder/transcoder.cpp:209
+#: transcoder/transcoder.cpp:214
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 scritto correttamente"
@@ -5629,7 +5629,7 @@ msgstr "%1 scritto correttamente"
 msgid "Suggested tags"
 msgstr "Tag consigliati"
 
-#: transcoder/transcoder.cpp:154
+#: transcoder/transcoder.cpp:159
 msgid "Suitable element not found"
 msgstr "Elemento adatto non trovato"
 
@@ -5660,7 +5660,7 @@ msgstr "Sincronizza le statistiche nei file ora"
 msgid "System colors"
 msgstr "Colori di sistema"
 
-#: widgets/fancytabwidget.cpp:436
+#: widgets/fancytabwidget.cpp:448
 msgid "Tabs on top"
 msgstr "Schede in alto"
 
@@ -5687,12 +5687,12 @@ msgstr "Grazie a"
 #: airplay/airplayengine.cpp:406
 #, qt-format
 msgid "That PIN was wrong. Enter the PIN %1 shows now:"
-msgstr ""
+msgstr "Quel PIN non era corretto. Digita il PIN %1 che viene visualizzato ora:"
 
 #: airplay/airplayengine.cpp:383
 #, qt-format
 msgid "That password was wrong. Enter %1's AirPlay password:"
-msgstr ""
+msgstr "La password non era corretta. Digita la password AirPlay di %1:"
 
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
@@ -5702,7 +5702,7 @@ msgstr "Il comando \"%1\" non può essere avviato."
 #: airplay/airplayrtspconnection.cpp:326
 #, qt-format
 msgid "The AirPlay receiver didn't respond in %1 s"
-msgstr ""
+msgstr "Il ricevitore AirPlay non ha risposto in %1 s"
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
@@ -5973,7 +5973,7 @@ msgstr "Dettagli del transcodificatore"
 msgid "Transcoding"
 msgstr "Transcodifica"
 
-#: transcoder/transcoder.cpp:362
+#: transcoder/transcoder.cpp:367
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Transcodifica di %1 file utilizzando %2 thread"
@@ -6318,7 +6318,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Avviso: questo livello di compressione non rientra nel sottoinsieme di trasmissione. Ciò significa che un decodificatore potrebbe non essere in grado di iniziare a riprodurlo a metà del flusso. Potrebbe anche influire sulle prestazioni dei decodificatori hardware."
 
-#: core/song.cpp:438 transcoder/transcoder.cpp:302
+#: core/song.cpp:438 transcoder/transcoder.cpp:307
 msgid "Wav"
 msgstr "Wav"
 
@@ -6444,7 +6444,7 @@ msgstr "Windows media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:299
+#: core/song.cpp:418 transcoder/transcoder.cpp:304
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

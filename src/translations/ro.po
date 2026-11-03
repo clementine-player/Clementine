@@ -1753,7 +1753,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Nu s-a putut stabili conexiunea cu Subsonic; verificați adresa URL a serverului. Exemplu: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:63
+#: transcoder/transcoder.cpp:68
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1807,14 +1807,14 @@ msgstr ""
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "Nu s-a putut obține lista serverelor Plex: %1"
 
-#: transcoder/transcoder.cpp:476
+#: transcoder/transcoder.cpp:488
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nu s-a putut găsi un mixer pentru %1, verificați dacă aveți instalate modulele corecte GStreamer"
 
-#: transcoder/transcoder.cpp:469
+#: transcoder/transcoder.cpp:481
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2526,7 +2526,7 @@ msgstr "Eroare la încărcarea %1"
 msgid "Error loading di.fm playlist"
 msgstr "Eroare la încărcarea listei de redare di.fm"
 
-#: transcoder/transcoder.cpp:441
+#: transcoder/transcoder.cpp:453
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Eroare la procesarea %1: %2"
@@ -2617,7 +2617,7 @@ msgstr "F32LE (32-biți)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:280
+#: core/song.cpp:420 transcoder/transcoder.cpp:285
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:171
@@ -3099,7 +3099,7 @@ msgstr "M-am autentificat"
 msgid "Icon"
 msgstr "Pictogramă"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:449
 msgid "Icons on top"
 msgstr "Pictograme sus"
 
@@ -3340,7 +3340,7 @@ msgstr "Copertă de album mare (detalii mai jos)"
 msgid "Large album cover (no details)"
 msgstr "Copertă de album mare (fără detalii)"
 
-#: widgets/fancytabwidget.cpp:433
+#: widgets/fancytabwidget.cpp:445
 msgid "Large sidebar"
 msgstr "Bară laterală mare"
 
@@ -3585,11 +3585,11 @@ msgstr "Versuri de la LRCLIB"
 msgid "Lyrics from the file's tags"
 msgstr "Versuri din etichetele fișierului"
 
-#: transcoder/transcoder.cpp:282
+#: transcoder/transcoder.cpp:287
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:426 transcoder/transcoder.cpp:285
+#: core/song.cpp:426 transcoder/transcoder.cpp:290
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -4007,19 +4007,19 @@ msgstr "Dezactivată"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:290
+#: transcoder/transcoder.cpp:295
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:434 transcoder/transcoder.cpp:296
+#: core/song.cpp:434 transcoder/transcoder.cpp:301
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:293
+#: core/song.cpp:430 transcoder/transcoder.cpp:298
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:432 transcoder/transcoder.cpp:287
+#: core/song.cpp:432 transcoder/transcoder.cpp:292
 #: ../bin/src/ui_magnatunedownloaddialog.h:137
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -4272,7 +4272,7 @@ msgstr "Lanțuri de procesare"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:435
+#: widgets/fancytabwidget.cpp:447
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
@@ -5442,7 +5442,7 @@ msgstr "Sare peste piesă"
 msgid "Small album cover"
 msgstr "Copertă mică album"
 
-#: widgets/fancytabwidget.cpp:434
+#: widgets/fancytabwidget.cpp:446
 msgid "Small sidebar"
 msgstr "Bară laterală mică"
 
@@ -5543,7 +5543,7 @@ msgstr "Pornește lista de redare curent redată"
 msgid "Start transcoding"
 msgstr "Începe transcodificarea"
 
-#: transcoder/transcoder.cpp:448
+#: transcoder/transcoder.cpp:460
 #, qt-format
 msgid "Starting %1"
 msgstr "Se pornește %1"
@@ -5629,7 +5629,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Succes!"
 
-#: transcoder/transcoder.cpp:209
+#: transcoder/transcoder.cpp:214
 #, qt-format
 msgid "Successfully written %1"
 msgstr "S-a scris cu succes %1"
@@ -5638,7 +5638,7 @@ msgstr "S-a scris cu succes %1"
 msgid "Suggested tags"
 msgstr "Etichete sugerate"
 
-#: transcoder/transcoder.cpp:154
+#: transcoder/transcoder.cpp:159
 msgid "Suitable element not found"
 msgstr "Nu s-a găsit niciun element adecvat"
 
@@ -5669,7 +5669,7 @@ msgstr "Sincronizează statisticile în fișiere acum"
 msgid "System colors"
 msgstr "Culorile sistemului"
 
-#: widgets/fancytabwidget.cpp:436
+#: widgets/fancytabwidget.cpp:448
 msgid "Tabs on top"
 msgstr "File în partea de sus"
 
@@ -5982,7 +5982,7 @@ msgstr "Detalii despre transcodificator"
 msgid "Transcoding"
 msgstr "Se transcodifică"
 
-#: transcoder/transcoder.cpp:362
+#: transcoder/transcoder.cpp:367
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Se transcodifică %1 utilizând %2 fire de execuție"
@@ -6327,7 +6327,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Avertisment: Acest nivel de compresie nu face parte din subsetul care poate fi redat în flux. Aceasta înseamnă că este posibil ca un decodor să nu poată începe redarea în mijlocul fluxului. De asemenea, acest lucru poate afecta performanța decodoarelor hardware."
 
-#: core/song.cpp:438 transcoder/transcoder.cpp:302
+#: core/song.cpp:438 transcoder/transcoder.cpp:307
 msgid "Wav"
 msgstr "Wav"
 
@@ -6453,7 +6453,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:299
+#: core/song.cpp:418 transcoder/transcoder.cpp:304
 msgid "Windows Media audio"
 msgstr "audio Windows Media"
 
