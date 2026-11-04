@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: titus <titus0818@gmail.com>, 2014\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2026\n"
 "Language-Team: Romanian (http://app.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -139,35 +139,35 @@ msgstr "%1 zile"
 msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
-#: airplay/airplaysession.cpp:532
+#: airplay/airplaysession.cpp:574
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
-msgstr ""
+msgstr "%1 nu a permis redarea de către %2"
 
-#: airplay/airplaysession.cpp:340
+#: airplay/airplaysession.cpp:361
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
-msgstr ""
+msgstr "%1 nu s-a asociat așa cum o fac receptoarele AirPlay"
 
-#: airplay/airplaysession.cpp:929
+#: airplay/airplaysession.cpp:1132
 #, qt-format
 msgid "%1 didn't prove who it is"
-msgstr ""
+msgstr "%1 nu și-a putut dovedi identitate"
 
-#: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
+#: airplay/airplaysession.cpp:708 airplay/airplaysession.cpp:1038
 #, qt-format
 msgid "%1 didn't say where to send audio"
-msgstr ""
+msgstr "%1 nu a specificat unde să se trimită fișierul audio"
 
-#: airplay/airplaysession.cpp:287
+#: airplay/airplaysession.cpp:308
 #, qt-format
 msgid "%1 didn't show a PIN to pair with (HTTP %2)"
-msgstr ""
+msgstr "%1 nu a afișat un cod PIN pentru asociere cu (HTTP %2)"
 
-#: airplay/airplayengine.cpp:461
+#: airplay/airplayengine.cpp:550
 #, qt-format
 msgid "%1 doesn't remember Clementine, and pairing again didn't work"
-msgstr ""
+msgstr "%1 nu mai recunoaște Clementine, iar reasocierea a eșuat"
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
@@ -214,72 +214,72 @@ msgid ""
 "allows connections from the local network, and %1 isn't on it."
 msgstr "%1 primește muzica de la Clementine prin controlul la distanță de rețea, care permite conexiuni doar din rețeaua locală, iar %1 nu se află în aceasta."
 
-#: airplay/airplaysession.cpp:416
+#: airplay/airplaysession.cpp:437
 #, qt-format
 msgid "%1 is busy pairing with another AirPlay sender"
-msgstr ""
+msgstr "%1 este ocupat cu asocierea cu un alt emițător AirPlay"
 
-#: airplay/airplaysession.cpp:414
+#: airplay/airplaysession.cpp:435
 #, qt-format
 msgid "%1 isn't accepting new AirPlay senders"
-msgstr ""
+msgstr "%1 nu acceptă emițători AirPlay noi"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 în %2"
 
-#: airplay/airplaysession.cpp:168
+#: airplay/airplaysession.cpp:190
 #, qt-format
 msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
-msgstr ""
+msgstr "%1 nu acceptă decât fluxuri audio criptate AirPlay 1, pe care Clementine nu le poate trimite"
 
 #: playlistparsers/playlistparser.cpp:94
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 liste de redare (%2)"
 
-#: airplay/airplaysession.cpp:538
+#: airplay/airplaysession.cpp:580
 #, qt-format
 msgid "%1 refused %2 (HTTP %3)"
-msgstr ""
+msgstr "%1 a refuzat %2 (HTTP %3)"
 
 #: internet/plex/plexsettingspage.cpp:194
 #, qt-format
 msgid "%1 refused the sign-in. Try signing out and in again."
 msgstr "%1 a refuzat autentificarea. Încercați să vă deconectați și să vă autentificați din nou."
 
-#: airplay/airplaysession.cpp:402
+#: airplay/airplaysession.cpp:423
 #, qt-format
 msgid "%1 refused to pair"
-msgstr ""
+msgstr "%1 a refuzat asocierea"
 
-#: airplay/airplaysession.cpp:320
+#: airplay/airplaysession.cpp:341
 #, qt-format
 msgid ""
 "%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
 "network?"
-msgstr ""
+msgstr "%1 a refuzat asocierea (HTTP %2). Este configurat să permită AirPlay de la oricine din rețea?"
 
-#: airplay/airplaysession.cpp:419
+#: airplay/airplaysession.cpp:440
 #, qt-format
 msgid "%1 refused to pair (HTTP %2, error %3)"
-msgstr ""
+msgstr "%1 a refuzat asocierea (HTTP %2, eroarea %3)"
 
-#: airplay/airplaysession.cpp:412
+#: airplay/airplaysession.cpp:433
 #, qt-format
 msgid "%1 refused to pair after too many attempts"
-msgstr ""
+msgstr "%1 a refuzat asocierea după prea multe încercări"
 
-#: airplay/airplaysession.cpp:405
+#: airplay/airplaysession.cpp:426
 #, qt-format
 msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
-msgstr ""
+msgstr "%1 a refuzat asocierea după prea multe încercări. Încercați din nou în %2 secunde."
 
-#: airplay/airplaysession.cpp:471
+#: airplay/airplaysession.cpp:497
 #, qt-format
 msgid "%1 refused to set up a session (HTTP %2)"
-msgstr ""
+msgstr "%1 a refuzat inițierea unei sesiuni (HTTP %2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -332,10 +332,10 @@ msgstr "%1  %2\nAcest calculator este %3"
 
 #. TRANSLATORS: %1 is a message such as "Living Room didn't allow
 #. Clementine on Laptop to play there".
-#: airplay/airplayengine.cpp:316
+#: airplay/airplayengine.cpp:405
 #, qt-format
 msgid "%1. Allow it there, then play again."
-msgstr ""
+msgstr "%1. Permiteți-i accesul, apoi redați din nou."
 
 #: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
 #: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
@@ -894,13 +894,13 @@ msgstr "După "
 msgid "After copying..."
 msgstr "După copiere..."
 
-#: airplay/airplayengine.cpp:404
+#: airplay/airplayengine.cpp:493
 msgid "AirPlay PIN"
-msgstr ""
+msgstr "Codul PIN AirPlay"
 
-#: airplay/airplayengine.cpp:381
+#: airplay/airplayengine.cpp:470
 msgid "AirPlay password"
-msgstr ""
+msgstr "Parola AirPlay"
 
 #: library/savedgroupingmanager.cpp:66 playlist/playlist.cpp:1379
 #: widgets/filenameformatwidget.cpp:48 ../bin/src/ui_groupbydialog.h:170
@@ -979,10 +979,10 @@ msgstr "Toate pistele"
 #. TRANSLATORS: Shown while an AirPlay receiver, such as a Mac, asks its
 #. user whether to let Clementine play on it. %1 is what Clementine calls
 #. itself there, such as "Clementine on Laptop"; %2 is the receiver's name.
-#: airplay/airplayengine.cpp:224
+#: airplay/airplayengine.cpp:233
 #, qt-format
 msgid "Allow %1 on %2 to play there"
-msgstr ""
+msgstr "Permiteți ca %1 de pe %2 să redea acolo"
 
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
@@ -1514,10 +1514,10 @@ msgstr "Clementine nu a putut încărca nici o vizualizare projectM. Verificați
 msgid "Clementine image viewer"
 msgstr "Vizualizator de imagini Clementine"
 
-#: airplay/airplaysession.cpp:152
+#: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "Clementine on %1"
-msgstr ""
+msgstr "Clementine pe %1"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1782,25 +1782,25 @@ msgstr "Nu s-au putut obține detalii"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Nu s-a putut efectua autentificarea pe Last.fm. Vă rugăm să încercați din nou."
 
-#: airplay/airplaysession.cpp:555
+#: airplay/airplaysession.cpp:597
 #, qt-format
 msgid "Couldn't connect to %1's event channel: %2"
-msgstr ""
+msgstr "Nu s-a putut realiza conexiunea la canalul de evenimente al lui %1: %2"
 
-#: airplay/airplayrtspconnection.cpp:315
+#: airplay/airplayrtspconnection.cpp:322
 #, qt-format
 msgid ""
 "Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
 " AirPlay on?"
-msgstr ""
+msgstr "Nu s-a putut realiza conexiunea cu receptorul AirPlay de la %1:%2 în %3 s. Este acesta activ și are funcția AirPlay activată?"
 
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
 msgstr "Nu s-a putut crea lista de redare"
 
-#: airplay/airplayrtspconnection.cpp:228
+#: airplay/airplayrtspconnection.cpp:235
 msgid "Couldn't decrypt what the AirPlay receiver sent"
-msgstr ""
+msgstr "Nu s-a putut decripta ceea ce a transmis receptorul AirPlay"
 
 #: internet/plex/plexauthenticator.cpp:167
 #, qt-format
@@ -1821,9 +1821,9 @@ msgid ""
 "plugins installed"
 msgstr "Nu s-a putut găsi un codificator pentru %1, verificați dacă aveți instalate modulele GStreamer corecte"
 
-#: airplay/airplaysession.cpp:214
+#: airplay/airplaysession.cpp:235
 msgid "Couldn't listen for the AirPlay receiver"
-msgstr ""
+msgstr "Nu s-a putut detecta receptorul AirPlay"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -1840,7 +1840,7 @@ msgstr "Nu s-a putut stabili conexiunea cu %1. Verificați dacă serverul funcț
 #: internet/plex/plexauthenticator.cpp:89
 #, qt-format
 msgid "Couldn't reach plex.tv: %1"
-msgstr "Couldn't reach plex.tv: %1"
+msgstr "Nu s-a putut accesa plex.tv: %1"
 
 #: internet/jamendo/jamendoservice.cpp:79
 msgid "Country"
@@ -2410,10 +2410,10 @@ msgstr "Calitate motor de codificare"
 msgid "Encoding mode"
 msgstr "Mod codificare"
 
-#: airplay/airplayengine.cpp:385
+#: airplay/airplayengine.cpp:474
 #, qt-format
 msgid "Enter %1's AirPlay password:"
-msgstr ""
+msgstr "Introdu parola AirPlay pentru %1:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:69
 msgid "Enter a URL"
@@ -2460,10 +2460,10 @@ msgstr "Introduceți termenii de căutare mai jos pentru a găsi podcasturi în 
 msgid "Enter search terms here"
 msgstr "Introduceți aici termenii de căutare"
 
-#: airplay/airplayengine.cpp:408
+#: airplay/airplayengine.cpp:497
 #, qt-format
 msgid "Enter the PIN %1 shows:"
-msgstr ""
+msgstr "Introduceți codul PIN afișat de %1:"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
@@ -2826,10 +2826,10 @@ msgstr "Forțează codificarea monofonică"
 msgid "Forget device"
 msgstr "Uită dispozitivul"
 
-#: airplay/airplayengine.cpp:170
+#: airplay/airplayengine.cpp:179
 #, qt-format
 msgid "Forget pairing with %1"
-msgstr ""
+msgstr "Uită de asocierea cu %1"
 
 #: devices/deviceview.cpp:323
 msgid ""
@@ -4219,10 +4219,10 @@ msgstr "Proprietar"
 
 #. TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
 #. shows a PIN once, after which it lets Clementine play without asking.
-#: airplay/airplayengine.cpp:166
+#: airplay/airplayengine.cpp:175
 #, qt-format
 msgid "Pair with %1..."
-msgstr ""
+msgstr "Se asociază cu %1..."
 
 #: devices/udisks2lister.cpp:84
 msgid "Partition label"
@@ -5693,25 +5693,25 @@ msgstr "Opțiuni text"
 msgid "Thanks to"
 msgstr "Mulțumiri către"
 
-#: airplay/airplayengine.cpp:406
+#: airplay/airplayengine.cpp:495
 #, qt-format
 msgid "That PIN was wrong. Enter the PIN %1 shows now:"
-msgstr ""
+msgstr "Codul PIN introdus este greșit. Introduceți codul PIN afișat acum de %1:"
 
-#: airplay/airplayengine.cpp:383
+#: airplay/airplayengine.cpp:472
 #, qt-format
 msgid "That password was wrong. Enter %1's AirPlay password:"
-msgstr ""
+msgstr "Această parolă este incorectă. Introduceți parola AirPlay a lui %1:"
 
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Comanda „%1” nu poate fi pornită."
 
-#: airplay/airplayrtspconnection.cpp:326
+#: airplay/airplayrtspconnection.cpp:333
 #, qt-format
 msgid "The AirPlay receiver didn't respond in %1 s"
-msgstr ""
+msgstr "Receptorul AirPlay nu a răspuns în %1 s"
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format

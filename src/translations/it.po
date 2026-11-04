@@ -130,32 +130,32 @@ msgstr "%1 giorni"
 msgid "%1 days ago"
 msgstr "%1 giorni fa"
 
-#: airplay/airplaysession.cpp:532
+#: airplay/airplaysession.cpp:574
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
 msgstr "%1 non ha consentito a %2 di riprodurre lì"
 
-#: airplay/airplaysession.cpp:340
+#: airplay/airplaysession.cpp:361
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
 msgstr "%1 non è stato associato come vengono associato i ricevitori AirPlay"
 
-#: airplay/airplaysession.cpp:929
+#: airplay/airplaysession.cpp:1132
 #, qt-format
 msgid "%1 didn't prove who it is"
 msgstr "%1 non ha provato la sua identità"
 
-#: airplay/airplaysession.cpp:638 airplay/airplaysession.cpp:835
+#: airplay/airplaysession.cpp:708 airplay/airplaysession.cpp:1038
 #, qt-format
 msgid "%1 didn't say where to send audio"
 msgstr "%1 non ha specificato dove inviare l'audio"
 
-#: airplay/airplaysession.cpp:287
+#: airplay/airplaysession.cpp:308
 #, qt-format
 msgid "%1 didn't show a PIN to pair with (HTTP %2)"
 msgstr "%1 non ha mostrato un PIN per l'associazione (HTTP %2)"
 
-#: airplay/airplayengine.cpp:461
+#: airplay/airplayengine.cpp:550
 #, qt-format
 msgid "%1 doesn't remember Clementine, and pairing again didn't work"
 msgstr "%1 non ricorda Clementine, e la nuova associazione non ha funzionato"
@@ -205,12 +205,12 @@ msgid ""
 "allows connections from the local network, and %1 isn't on it."
 msgstr "%1 ottiene la propria musica da Clementine tramite il controllo remoto di rete, che consente connessioni solo dalla rete locale; tuttavia, %1 non si trova su tale rete."
 
-#: airplay/airplaysession.cpp:416
+#: airplay/airplaysession.cpp:437
 #, qt-format
 msgid "%1 is busy pairing with another AirPlay sender"
 msgstr "%1 è impegnato nell'associazione con un altro mittente AirPlay"
 
-#: airplay/airplaysession.cpp:414
+#: airplay/airplaysession.cpp:435
 #, qt-format
 msgid "%1 isn't accepting new AirPlay senders"
 msgstr "%1 non accetta nuovi mittenti AirPlay"
@@ -220,7 +220,7 @@ msgstr "%1 non accetta nuovi mittenti AirPlay"
 msgid "%1 on %2"
 msgstr "%1 di %2"
 
-#: airplay/airplaysession.cpp:168
+#: airplay/airplaysession.cpp:190
 #, qt-format
 msgid "%1 only takes encrypted AirPlay 1 audio, which Clementine can't send"
 msgstr "%1 accetta solo audio AirPlay 1 cifrato, che Clementine non è in grado di inviare"
@@ -230,7 +230,7 @@ msgstr "%1 accetta solo audio AirPlay 1 cifrato, che Clementine non è in grado 
 msgid "%1 playlists (%2)"
 msgstr "%1 scalette (%2)"
 
-#: airplay/airplaysession.cpp:538
+#: airplay/airplaysession.cpp:580
 #, qt-format
 msgid "%1 refused %2 (HTTP %3)"
 msgstr "%1 ha rifiutato %2 (HTTP %3)"
@@ -240,34 +240,34 @@ msgstr "%1 ha rifiutato %2 (HTTP %3)"
 msgid "%1 refused the sign-in. Try signing out and in again."
 msgstr "%1 ha rifiutato l'accesso. Prova a disconnetterti e ad accedere di nuovo."
 
-#: airplay/airplaysession.cpp:402
+#: airplay/airplaysession.cpp:423
 #, qt-format
 msgid "%1 refused to pair"
 msgstr "%1 ha rifiutato l'associazione"
 
-#: airplay/airplaysession.cpp:320
+#: airplay/airplaysession.cpp:341
 #, qt-format
 msgid ""
 "%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
 "network?"
 msgstr "%1 ha rifiutato l'associazione (HTTP %2). È configurato in modo da consentire AirPlay a chiunque si trovi sulla rete?"
 
-#: airplay/airplaysession.cpp:419
+#: airplay/airplaysession.cpp:440
 #, qt-format
 msgid "%1 refused to pair (HTTP %2, error %3)"
 msgstr "%1 ha rifiutato l'associazione (HTTP %2, errore %3)"
 
-#: airplay/airplaysession.cpp:412
+#: airplay/airplaysession.cpp:433
 #, qt-format
 msgid "%1 refused to pair after too many attempts"
 msgstr "%1 ha rifiutato l'associazione dopo troppi tentativi"
 
-#: airplay/airplaysession.cpp:405
+#: airplay/airplaysession.cpp:426
 #, qt-format
 msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
 msgstr "%1 ha rifiutato l'associazione dopo troppi tentativi. Riprova tra %2 secondi."
 
-#: airplay/airplaysession.cpp:471
+#: airplay/airplaysession.cpp:497
 #, qt-format
 msgid "%1 refused to set up a session (HTTP %2)"
 msgstr "%1 ha rifiutato di stabilire una sessione (HTTP %2)"
@@ -323,7 +323,7 @@ msgstr "%1  %2\nQuesto computer è %3"
 
 #. TRANSLATORS: %1 is a message such as "Living Room didn't allow
 #. Clementine on Laptop to play there".
-#: airplay/airplayengine.cpp:316
+#: airplay/airplayengine.cpp:405
 #, qt-format
 msgid "%1. Allow it there, then play again."
 msgstr "%1. Consentilo lì, poi riproduci di nuovo."
@@ -885,11 +885,11 @@ msgstr "Dopo "
 msgid "After copying..."
 msgstr "Dopo la copia..."
 
-#: airplay/airplayengine.cpp:404
+#: airplay/airplayengine.cpp:493
 msgid "AirPlay PIN"
 msgstr "PIN di AirPlay"
 
-#: airplay/airplayengine.cpp:381
+#: airplay/airplayengine.cpp:470
 msgid "AirPlay password"
 msgstr "Password di AirPlay"
 
@@ -970,7 +970,7 @@ msgstr "Tutte le tracce"
 #. TRANSLATORS: Shown while an AirPlay receiver, such as a Mac, asks its
 #. user whether to let Clementine play on it. %1 is what Clementine calls
 #. itself there, such as "Clementine on Laptop"; %2 is the receiver's name.
-#: airplay/airplayengine.cpp:224
+#: airplay/airplayengine.cpp:233
 #, qt-format
 msgid "Allow %1 on %2 to play there"
 msgstr "Consenti a %1 su %2 di riprodurre lì"
@@ -1505,7 +1505,7 @@ msgstr "Clementine non può caricare alcuna visualizzazione projectM. Controlla 
 msgid "Clementine image viewer"
 msgstr "Visualizzatore immagini di Clementine"
 
-#: airplay/airplaysession.cpp:152
+#: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "Clementine on %1"
 msgstr "Clementine su %1"
@@ -1773,12 +1773,12 @@ msgstr "Impossibile ottenere i dettagli"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Impossibile accedere a Last.fm. Prova ancora."
 
-#: airplay/airplaysession.cpp:555
+#: airplay/airplaysession.cpp:597
 #, qt-format
 msgid "Couldn't connect to %1's event channel: %2"
 msgstr "Impossibile connettersi al canale di eventi di %1: %2"
 
-#: airplay/airplayrtspconnection.cpp:315
+#: airplay/airplayrtspconnection.cpp:322
 #, qt-format
 msgid ""
 "Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
@@ -1789,7 +1789,7 @@ msgstr "Impossibile connettersi al ricevitore AirPlay su %1:%2 in %3 s. È attiv
 msgid "Couldn't create playlist"
 msgstr "Impossibile creare la scaletta"
 
-#: airplay/airplayrtspconnection.cpp:228
+#: airplay/airplayrtspconnection.cpp:235
 msgid "Couldn't decrypt what the AirPlay receiver sent"
 msgstr "Impossibile decifrare ciò che il ricevitore AirPlay ha inviato"
 
@@ -1812,7 +1812,7 @@ msgid ""
 "plugins installed"
 msgstr "Impossibile trovare un codificatore per %1, verifica l'installazione del plugin GStreamer corretto"
 
-#: airplay/airplaysession.cpp:214
+#: airplay/airplaysession.cpp:235
 msgid "Couldn't listen for the AirPlay receiver"
 msgstr "Impossibile restare in ascolto per il ricevitore AirPlay"
 
@@ -2401,7 +2401,7 @@ msgstr "Qualità del motore di codifica"
 msgid "Encoding mode"
 msgstr "Modalità di codifica"
 
-#: airplay/airplayengine.cpp:385
+#: airplay/airplayengine.cpp:474
 #, qt-format
 msgid "Enter %1's AirPlay password:"
 msgstr "Digita la password AirPlay di %1:"
@@ -2451,7 +2451,7 @@ msgstr "Digita i termini di ricerca qui sotto per trovare podcast su gpodder.net
 msgid "Enter search terms here"
 msgstr "Inserisci qui i termini di ricerca"
 
-#: airplay/airplayengine.cpp:408
+#: airplay/airplayengine.cpp:497
 #, qt-format
 msgid "Enter the PIN %1 shows:"
 msgstr "Digita il PIN mostrato da %1:"
@@ -2817,7 +2817,7 @@ msgstr "Forza codifica mono"
 msgid "Forget device"
 msgstr "Elimina dispositivo"
 
-#: airplay/airplayengine.cpp:170
+#: airplay/airplayengine.cpp:179
 #, qt-format
 msgid "Forget pairing with %1"
 msgstr "Dimentica l'associazione con %1"
@@ -4210,7 +4210,7 @@ msgstr "Proprietario"
 
 #. TRANSLATORS: %1 is an AirPlay receiver, such as a Mac. Pairing means it
 #. shows a PIN once, after which it lets Clementine play without asking.
-#: airplay/airplayengine.cpp:166
+#: airplay/airplayengine.cpp:175
 #, qt-format
 msgid "Pair with %1..."
 msgstr "Associa con %1..."
@@ -5684,12 +5684,12 @@ msgstr "Opzioni testo"
 msgid "Thanks to"
 msgstr "Grazie a"
 
-#: airplay/airplayengine.cpp:406
+#: airplay/airplayengine.cpp:495
 #, qt-format
 msgid "That PIN was wrong. Enter the PIN %1 shows now:"
 msgstr "Quel PIN non era corretto. Digita il PIN %1 che viene visualizzato ora:"
 
-#: airplay/airplayengine.cpp:383
+#: airplay/airplayengine.cpp:472
 #, qt-format
 msgid "That password was wrong. Enter %1's AirPlay password:"
 msgstr "La password non era corretta. Digita la password AirPlay di %1:"
@@ -5699,7 +5699,7 @@ msgstr "La password non era corretta. Digita la password AirPlay di %1:"
 msgid "The \"%1\" command could not be started."
 msgstr "Il comando \"%1\" non può essere avviato."
 
-#: airplay/airplayrtspconnection.cpp:326
+#: airplay/airplayrtspconnection.cpp:333
 #, qt-format
 msgid "The AirPlay receiver didn't respond in %1 s"
 msgstr "Il ricevitore AirPlay non ha risposto in %1 s"
