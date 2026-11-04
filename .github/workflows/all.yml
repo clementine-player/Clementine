@@ -327,7 +327,7 @@ jobs:
       # broke are still worth keeping for the next attempt.
       #
       # Only for pushes to master. The repository's caches share a 10GB
-      # limit, and one run's ccaches can fill 7.5GB of it (the four Fedora
+      # limit, and one run's ccaches can fill 9.5GB of it (the six Fedora
       # ones are 1GB each), so when pull requests saved theirs too, they
       # evicted master's: a pull request, and the next push to master,
       # then compiled everything from scratch. A pull request's entries
@@ -495,6 +495,7 @@ jobs:
       - build_trixie_64
       - build_fedora_43
       - build_fedora_44
+      - build_fedora_45
       - build_jammy_64
       - build_noble_64
       - build_resolute_64
@@ -1083,6 +1084,182 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      - name: ccache statistics
+        if: always()
+        # Tolerant: if the job failed before the packages were installed,
+        # this should not add a second failure on top.
+        run: ccache --show-stats || true
+      # Saved even when the build failed: the objects compiled before it
+      # broke are still worth keeping for the next attempt. Only for pushes
+      # to master: see the Test job.
+      - name: Save ccache
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+
+  build_fedora_45:
+    name: ${{ matrix.name }}
+    needs:
+      - lint
+      - test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Build Fedora 45 RPM
+            runner: ubuntu-24.04
+            artifact: release_fedora_45
+          - name: Build Fedora 45 aarch64 RPM
+            runner: ubuntu-24.04-arm
+            artifact: release_fedora_45_aarch64
+    runs-on: ${{ matrix.runner }}
+    container:
+      image: fedora:45
+    env:
+      RPM_BUILD_NCPUS: "2"
+      CCACHE_DIR: /ccache
+      # The spec unpacks into a fixed directory name, so the build path
+      # stays the same between commits; see %prep in
+      # dist/clementine.spec.in for why that matters. No CCACHE_BASEDIR:
+      # it can't help here, because with -g ccache hashes the absolute
+      # working directory regardless.
+      #
+      # Much larger than the other jobs: rpmbuild compiles with -g and LTO,
+      # and one build's objects come to about 850MB even compressed.
+      CCACHE_MAXSIZE: 1G
+      # A fresh checkout stamps every file with the current time, which
+      # ccache's direct mode would otherwise treat as too new to trust.
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      # Picked up by every cmake run in the job, including the ones
+      # dpkg-buildpackage and rpmbuild start themselves.
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
+    steps:
+      - name: Install dependencies
+        run: >
+          dnf install --assumeyes
+          zstd
+          @development-tools
+          alsa-lib-devel
+          boost-devel
+          ccache
+          cmake
+          cryptopp
+          cryptopp-devel
+          dbus-devel
+          desktop-file-utils
+          fftw-devel
+          gcc-c++
+          gettext
+          git
+          glew-devel
+          gstreamer1-devel
+          gstreamer1-plugins-base-devel
+          hicolor-icon-theme
+          libappstream-glib
+          libcdio-devel
+          libchromaprint-devel
+          libgpod-devel
+          libmtp-devel
+          libnotify-devel
+          libX11-devel
+          libxcb-devel
+          mesa-libGL-devel
+          openssh
+          pkgconfig
+          protobuf-compiler
+          protobuf-devel
+          pulseaudio-libs-devel
+          qt6-linguist
+          qt6-qt5compat-devel
+          qt6-qtbase-devel
+          qt6-qtbase-private-devel
+          qt6-qttools-devel
+          qt6-rpm-macros
+          qtsingleapplication-qt6-devel
+          qtsinglecoreapplication-qt6-devel
+          rpmdevtools
+          sparsehash-devel
+          sqlite-devel
+          taglib-devel
+          tar
+          # liblastfm isn't a dependency any more (see the note in
+          # push_translations above), and the QCA qt5 plugins were unused
+          # dead weight in this list already.
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      # Cache entries are immutable, so the key carries the commit and the
+      # prefix restores the newest earlier one: master's, the only runs
+      # that save one.
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      # ccache's counters live in the cache directory and would otherwise
+      # come back with the restored cache, reporting this build's hit rate
+      # added to every earlier one's.
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
+      - name: cmake
+        working-directory: bin
+        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+      - name: Build source tarball
+        working-directory: bin
+        run: ../dist/maketarball.sh
+      - name: Create rpmbuild directory
+        run: mkdir -p ~/rpmbuild/SOURCES
+      - name: Move source tarball
+        working-directory: bin
+        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - name: Build RPM
+        working-directory: bin
+        # See the Fedora 43 job for what pull requests leave out.
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            rpmbuild -ba ../dist/clementine.spec \
+              --define 'debug_package %{nil}' \
+              --define "build_ldflags $(rpm --eval '%{build_ldflags}') -fno-lto"
+          else
+            rpmbuild -ba ../dist/clementine.spec
+          fi
+      # See the fedora 42 job for why this installs and runs the .rpm, and
+      # why it uses beep.ogg rather than beep.mp3.
+      - name: Install built package
+        run: dnf install --assumeyes ~/rpmbuild/RPMS/*/clementine-*.rpm
+
+      - name: Set up headless playback
+        run: |
+          printf 'pcm.!default { type null }\nctl.!default { type null }\n' \
+            > /etc/asound.conf
+
+      - name: Smoke test - local playback
+        timeout-minutes: 5
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: clementine --play-and-exit 30 tests/data/beep.ogg
+      - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: >
+          clementine --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ${{ matrix.artifact }}
+          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
       # Builds this commit in COPR, which rebuilds the source RPM for each
       # Fedora release and architecture the project has, then signs and
       # hosts them: dnf copr enable <COPR_PROJECT>. One source RPM builds for
@@ -1095,7 +1272,7 @@ jobs:
       - name: Build in COPR
         if: >
           github.event_name == 'push' && github.ref == 'refs/heads/master'
-          && matrix.artifact == 'release_fedora_44' && vars.COPR_PROJECT != ''
+          && matrix.artifact == 'release_fedora_45' && vars.COPR_PROJECT != ''
         continue-on-error: true
         env:
           COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
@@ -2645,6 +2822,7 @@ jobs:
       - build_resolute_64
       - build_fedora_43
       - build_fedora_44
+      - build_fedora_45
       - build_mac
       - build_mingw
     runs-on: ubuntu-24.04
