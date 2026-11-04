@@ -37,7 +37,6 @@ const char* RendererRegistry::kLocalOutputId = "local";
 
 namespace {
 bool sUpnpEnabled = false;
-bool sAirPlayEnabled = false;
 
 // Client-chosen strings kept for as long as the renderer is connected, and
 // shown in output pickers.
@@ -54,10 +53,6 @@ RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
 }
 
 void RendererRegistry::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
-
-void RendererRegistry::SetAirPlayEnabled(bool enabled) {
-  sAirPlayEnabled = enabled;
-}
 
 RendererRegistry::~RendererRegistry() {
   for (RemoteEngine* engine : engines_) {
@@ -101,7 +96,7 @@ void RendererRegistry::StartDiscovery() {
     upnp_discovery_->Start();
   }
 
-  if (sAirPlayEnabled && !airplay_discovery_) {
+  if (!airplay_discovery_) {
     airplay_discovery_ =
         AirPlayDiscovery::Create(AirPlayDiscovery::kAirPlayServiceType, this);
     raop_discovery_ =

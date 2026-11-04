@@ -70,9 +70,6 @@ class RendererRegistry : public QObject {
   // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
   // before discovery starts.
   static void SetUpnpEnabled(bool enabled);
-  // Whether to offer AirPlay receivers as outputs too, from --airplay. Set
-  // before discovery starts.
-  static void SetAirPlayEnabled(bool enabled);
 
   RendererRegistry(Application* app, EngineRouter* router);
   ~RendererRegistry();
@@ -146,8 +143,8 @@ class RendererRegistry : public QObject {
 
  public slots:
   // Starts looking for Cast devices, UPnP MediaRenderers if SetUpnpEnabled,
-  // and AirPlay receivers if SetAirPlayEnabled, and offers them as outputs
-  // for as long as this registry exists.
+  // and AirPlay receivers, and offers them as outputs for as long as this
+  // registry exists.
   void StartDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
@@ -214,8 +211,8 @@ class RendererRegistry : public QObject {
   void AirPlayEngineFailed(AirPlayEngine* engine);
   AirPlayEngine* FindAirPlayEngine(const QString& device_id) const;
   QList<AirPlayEngine*> airplay_engines_;
-  // Owned; null until StartDiscovery, without --airplay, or if this platform
-  // has none. One looks for _airplay._tcp and the other for _raop._tcp.
+  // Owned; null until StartDiscovery, or if this platform has none. One looks
+  // for _airplay._tcp and the other for _raop._tcp.
   AirPlayDiscovery* airplay_discovery_ = nullptr;
   AirPlayDiscovery* raop_discovery_ = nullptr;
   // What each found, by id. An AirPlay 2 receiver advertises both, and is

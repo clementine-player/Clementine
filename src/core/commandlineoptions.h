@@ -78,7 +78,6 @@ class CommandlineOptions {
   QString remote_name() const { return remote_name_; }
   bool upnp() const { return upnp_; }
   bool media_sync() const { return media_sync_; }
-  bool airplay() const { return airplay_; }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
   QList<QUrl> urls() const { return urls_; }
@@ -109,8 +108,7 @@ class CommandlineOptions {
     ScreenshotTheme,
     RemoteName,
     Upnp,
-    MediaSync,
-    AirPlay
+    MediaSync
   };
 
   QString tr(const char* source_text);
@@ -143,7 +141,6 @@ class CommandlineOptions {
   bool upnp_;
   // Not serialized: it only matters when Clementine starts.
   bool media_sync_;
-  bool airplay_;
   QString language_;
   QString log_levels_;
   QString playlist_name_;
