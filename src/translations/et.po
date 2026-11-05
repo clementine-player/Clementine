@@ -132,12 +132,12 @@ msgstr "%1 päeva tagasi"
 #: airplay/airplaysession.cpp:574
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
-msgstr ""
+msgstr "„%1“ ei lubanud siin „%2“ seadme meediumiesitust"
 
 #: airplay/airplaysession.cpp:361
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
-msgstr ""
+msgstr "%1 ei paardunud nii, nagu AirPlay vastuvõtjad tavaliselt teevad"
 
 #: airplay/airplaysession.cpp:1132
 #, qt-format
@@ -207,12 +207,12 @@ msgstr "%1 saab oma muusika Clementine’ist võrgu kaugjuhtimise kaudu, mis lub
 #: airplay/airplaysession.cpp:437
 #, qt-format
 msgid "%1 is busy pairing with another AirPlay sender"
-msgstr ""
+msgstr "%1 on hõivatud teise AirPlay saatja paartdumisega"
 
 #: airplay/airplaysession.cpp:435
 #, qt-format
 msgid "%1 isn't accepting new AirPlay senders"
-msgstr ""
+msgstr "%1 ei võta vastu uusi AirPlay saatjaid"
 
 #: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
@@ -249,27 +249,27 @@ msgstr "%1 keeldus paardumisest"
 msgid ""
 "%1 refused to pair (HTTP %2). Is it set to allow AirPlay from anyone on the "
 "network?"
-msgstr ""
+msgstr "%1 keeldus paardumisest (HTTP olek %2). Kas ta on seadistatud lubama AirPlay kasutamist kõikjalt võrgust?"
 
 #: airplay/airplaysession.cpp:440
 #, qt-format
 msgid "%1 refused to pair (HTTP %2, error %3)"
-msgstr ""
+msgstr "%1 keeldus paardumisest (HTTP olek %2, viga %3)"
 
 #: airplay/airplaysession.cpp:433
 #, qt-format
 msgid "%1 refused to pair after too many attempts"
-msgstr ""
+msgstr "%1 keeldus liiga paljude katsete järel paardumisest"
 
 #: airplay/airplaysession.cpp:426
 #, qt-format
 msgid "%1 refused to pair after too many attempts. Try again in %2 seconds."
-msgstr ""
+msgstr "%1 keeldus liiga paljude katsete järel paardumisest. Proovi %2 sekundi pärast uuesti."
 
 #: airplay/airplaysession.cpp:497
 #, qt-format
 msgid "%1 refused to set up a session (HTTP %2)"
-msgstr ""
+msgstr "%1 keeldus sessiooni seadistamisest, (HTTP olek %2)"
 
 #: internet/core/internetservice.cpp:160
 #, qt-format
@@ -972,7 +972,7 @@ msgstr "Kõik lood"
 #: airplay/airplayengine.cpp:233
 #, qt-format
 msgid "Allow %1 on %2 to play there"
-msgstr ""
+msgstr "Luba „%2“ seadmes „%1“ voogedastatud meediumi esitamist"
 
 #: ../bin/src/ui_networkremotesettingspage.h:349
 msgid "Allow a client to download music from this computer."
@@ -1507,7 +1507,7 @@ msgstr "Clementine pildivaatur"
 #: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "Clementine on %1"
-msgstr ""
+msgstr "Clementine seadmes „%1“"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1775,14 +1775,14 @@ msgstr "Last.fm teenusesse sisselogimine ei õnnestunud. Palun proovi uuesti."
 #: airplay/airplaysession.cpp:597
 #, qt-format
 msgid "Couldn't connect to %1's event channel: %2"
-msgstr ""
+msgstr "„%1“ seadme sündmuste kanaliga ühendamine ei õnnestunud: %2"
 
 #: airplay/airplayrtspconnection.cpp:322
 #, qt-format
 msgid ""
 "Couldn't connect to the AirPlay receiver at %1:%2 in %3 s. Is it awake, with"
 " AirPlay on?"
-msgstr ""
+msgstr "AirPlay vastuvõtjaga (aadressil %1:%2) ühendamine ei õnnestunud %3 sekundi jooksul.  On ta ikka töös ja AirPlay on lülitatud sisse?"
 
 #: playlist/playlistmanager.cpp:196
 msgid "Couldn't create playlist"
@@ -1790,7 +1790,7 @@ msgstr "Esitusloendi loomine ei õnnestunud"
 
 #: airplay/airplayrtspconnection.cpp:235
 msgid "Couldn't decrypt what the AirPlay receiver sent"
-msgstr ""
+msgstr "AirPlay voogedastuse dekrüptimine ei õnnestunud"
 
 #: internet/plex/plexauthenticator.cpp:167
 #, qt-format
@@ -1813,7 +1813,7 @@ msgstr "Ei leidnud kodeerijat %1 jaoks, palun kontrolli et arvutis oleks paigald
 
 #: airplay/airplaysession.cpp:235
 msgid "Couldn't listen for the AirPlay receiver"
-msgstr ""
+msgstr "AirPlay vastuvõtja kuulamine ei õnnestunud"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:230
 #, qt-format
@@ -5701,7 +5701,7 @@ msgstr "\"%1\" käsu täitmist ei olnud võimalik alustada"
 #: airplay/airplayrtspconnection.cpp:333
 #, qt-format
 msgid "The AirPlay receiver didn't respond in %1 s"
-msgstr ""
+msgstr "AirPlay vastuvõtja ei reageerinud %1 sekundi jooksul"
 
 #: chromecast/castmediaplayer.cpp:201
 #, qt-format
