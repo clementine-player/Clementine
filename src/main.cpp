@@ -68,7 +68,6 @@
 #include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "networkremote/networkremote.h"
-#include "networkremote/streaming/rendererregistry.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
@@ -398,7 +397,6 @@ int main(int argc, char* argv[]) {
     if (!options.Parse()) return 1;
     logging::SetLevels(options.log_levels());
     NetworkRemote::SetRemoteName(options.remote_name());
-    RendererRegistry::SetUpnpEnabled(options.upnp());
     NetworkRemote::SetMediaSyncEnabled(options.media_sync());
 
     if (a.isRunning()) {

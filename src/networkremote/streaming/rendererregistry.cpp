@@ -36,8 +36,6 @@
 const char* RendererRegistry::kLocalOutputId = "local";
 
 namespace {
-bool sUpnpEnabled = false;
-
 // Client-chosen strings kept for as long as the renderer is connected, and
 // shown in output pickers.
 const int kMaxRendererIdLength = 128;
@@ -51,8 +49,6 @@ RendererRegistry::RendererRegistry(Application* app, EngineRouter* router)
       event_callbacks_(new EventCallbackTable) {
   connect(router_, SIGNAL(OutputsChanged()), SLOT(RouterOutputsChanged()));
 }
-
-void RendererRegistry::SetUpnpEnabled(bool enabled) { sUpnpEnabled = enabled; }
 
 RendererRegistry::~RendererRegistry() {
   for (RemoteEngine* engine : engines_) {
@@ -87,7 +83,7 @@ void RendererRegistry::StartDiscovery() {
     }
   }
 
-  if (sUpnpEnabled && !upnp_discovery_) {
+  if (!upnp_discovery_) {
     upnp_discovery_ = new UpnpDiscovery(this);
     connect(upnp_discovery_, &UpnpDiscovery::DeviceFound, this,
             &RendererRegistry::UpnpDeviceFound);

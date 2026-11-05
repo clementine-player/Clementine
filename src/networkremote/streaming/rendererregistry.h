@@ -67,10 +67,6 @@ class RendererRegistry : public QObject {
  public:
   static const char* kLocalOutputId;
 
-  // Whether to offer UPnP MediaRenderers as outputs too, from --upnp. Set
-  // before discovery starts.
-  static void SetUpnpEnabled(bool enabled);
-
   RendererRegistry(Application* app, EngineRouter* router);
   ~RendererRegistry();
 
@@ -142,9 +138,9 @@ class RendererRegistry : public QObject {
       const QList<QNetworkAddressEntry>& interfaces);
 
  public slots:
-  // Starts looking for Cast devices, UPnP MediaRenderers if SetUpnpEnabled,
-  // and AirPlay receivers, and offers them as outputs for as long as this
-  // registry exists.
+  // Starts looking for Cast devices, UPnP MediaRenderers and AirPlay
+  // receivers, and offers them as outputs for as long as this registry
+  // exists.
   void StartDiscovery();
   // A client connected with RequestConnect.renderer set. |caps| is a
   // serialized RendererCapabilities.
@@ -196,7 +192,7 @@ class RendererRegistry : public QObject {
   void UpnpEngineFailed(UpnpEngine* engine);
   UpnpEngine* FindUpnpEngine(const QString& device_id) const;
   QList<UpnpEngine*> upnp_engines_;
-  // Owned; null until StartDiscovery, or without --upnp.
+  // Owned; null until StartDiscovery.
   UpnpDiscovery* upnp_discovery_ = nullptr;
 
   // Output ids for AirPlay receivers.

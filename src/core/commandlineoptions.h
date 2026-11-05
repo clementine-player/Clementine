@@ -76,7 +76,6 @@ class CommandlineOptions {
   QString screenshots_dir() const { return screenshots_dir_; }
   QString screenshot_theme() const { return screenshot_theme_; }
   QString remote_name() const { return remote_name_; }
-  bool upnp() const { return upnp_; }
   bool media_sync() const { return media_sync_; }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
@@ -107,7 +106,6 @@ class CommandlineOptions {
     Screenshots,
     ScreenshotTheme,
     RemoteName,
-    Upnp,
     MediaSync
   };
 
@@ -137,8 +135,6 @@ class CommandlineOptions {
   QString screenshot_theme_;
   // Not serialized: it only matters when Clementine starts.
   QString remote_name_;
-  // Not serialized: it only matters when Clementine starts.
-  bool upnp_;
   // Not serialized: it only matters when Clementine starts.
   bool media_sync_;
   QString language_;
