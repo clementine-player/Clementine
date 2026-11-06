@@ -16,7 +16,9 @@
 
 #include "networkremote/networkremote.h"
 
+#include <QCoreApplication>
 #include <QDataStream>
+#include <QDeadlineTimer>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -24,13 +26,19 @@
 #include <QHostInfo>
 #include <QStringList>
 #include <QTemporaryDir>
+#include <QThread>
 #include <algorithm>
 
+#include "core/database.h"
 #include "core/song.h"
+#include "core/timeconstants.h"
 #include "gtest/gtest.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
 #include "networkremote/authattemptlimiter.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/remotefiles.h"
+#include "networkremote/remotesongloader.h"
 #include "test_utils.h"
 
 using Listening = NetworkRemote::Listening;
@@ -432,4 +440,185 @@ TEST(NetworkRemoteTest, OnlyCoversFromTheSongOrTheWebAreTakenFromAClient) {
   EXPECT_FALSE(RemoteFiles::IsSafeCover("/home/someone/photo.jpg"));
   EXPECT_FALSE(RemoteFiles::IsSafeCover("file:///home/someone/photo.jpg"));
   EXPECT_FALSE(RemoteFiles::IsSafeCover("C:/Users/someone/photo.jpg"));
+}
+
+// Songs that loading a client's URL gives, such as a playlist file's entries,
+// checked against a library and a Files tab folder.
+class RemoteSongsTest : public ::testing::Test {
+ protected:
+  void SetUp() override {
+    ASSERT_TRUE(temp_.isValid());
+    // Playlists name files by their canonical paths.
+    base_ = QDir(QDir(temp_.path()).canonicalPath());
+    ASSERT_TRUE(base_.mkpath("library"));
+    ASSERT_TRUE(base_.mkpath("files"));
+    ASSERT_TRUE(base_.mkpath("elsewhere"));
+
+    database_.reset(new MemoryDatabase(nullptr));
+    library_.reset(new LibraryBackend);
+    library_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
+                   Library::kSubdirsTable, Library::kFtsTable);
+    library_->AddDirectory(base_.filePath("library"));
+  }
+
+  // Adds a song in the library folder to the library, with a cover beside it.
+  Song AddToLibrary(const QString& name, qint64 beginning = 0) {
+    const QString filename = base_.filePath("library/" + name);
+    Touch(filename);
+    Song song;
+    song.Init(name, "Artist", "Album", beginning, beginning + kNsecPerSec * 60);
+    song.set_directory_id(1);
+    song.set_url(QUrl::fromLocalFile(filename));
+    song.set_mtime(1);
+    song.set_ctime(1);
+    song.set_filesize(1000);
+    song.set_filetype(Song::Type_Flac);
+    song.set_art_automatic(
+        base_.filePath(QString("library/%1-%2.jpg").arg(name).arg(beginning)));
+    library_->AddOrUpdateSongs(SongList() << song);
+    return song;
+  }
+
+  QUrl File(const QString& path) {
+    Touch(base_.filePath(path));
+    return QUrl::fromLocalFile(base_.filePath(path));
+  }
+
+  // A song as a client's playlist file would describe it.
+  static Song FromPlaylist(const QUrl& url, const QString& cover) {
+    Song song;
+    song.set_valid(true);
+    song.set_url(url);
+    song.set_art_automatic(cover);
+    song.set_art_manual(cover);
+    return song;
+  }
+
+  bool Accept(Song* song) {
+    return RemoteFiles::AcceptSong(library_.get(), base_.filePath("files"),
+                                   song);
+  }
+
+  static void Touch(const QString& filename) {
+    QFile file(filename);
+    ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+  }
+
+  QTemporaryDir temp_;
+  QDir base_;
+  std::unique_ptr<Database> database_;
+  std::unique_ptr<LibraryBackend> library_;
+};
+
+TEST_F(RemoteSongsTest, ALibrarySongTakesTheLibrarysCovers) {
+  const Song in_library = AddToLibrary("song.flac");
+  // An XSPF can give a song any image.
+  Song song = FromPlaylist(in_library.url(), "/home/someone/photo.jpg");
+  EXPECT_TRUE(Accept(&song));
+  EXPECT_EQ(in_library.art_automatic(), song.art_automatic());
+  EXPECT_EQ(QString(), song.art_manual());
+}
+
+TEST_F(RemoteSongsTest, ASectionOfAFileTakesItsOwnCovers) {
+  AddToLibrary("album.flac", 0);
+  const Song second = AddToLibrary("album.flac", kNsecPerSec * 60);
+  Song song = FromPlaylist(second.url(), QString());
+  song.set_beginning_nanosec(kNsecPerSec * 60);
+  EXPECT_TRUE(Accept(&song));
+  EXPECT_EQ(second.art_automatic(), song.art_automatic());
+}
+
+TEST_F(RemoteSongsTest, AFileInTheFilesTabKeepsOnlySafeCovers) {
+  Song song = FromPlaylist(File("files/song.mp3"), "/home/someone/photo.jpg");
+  EXPECT_TRUE(Accept(&song));
+  EXPECT_EQ(QString(), song.art_automatic());
+  EXPECT_EQ(QString(), song.art_manual());
+
+  Song from_the_web =
+      FromPlaylist(File("files/other.mp3"), "https://radio.example/logo.png");
+  EXPECT_TRUE(Accept(&from_the_web));
+  EXPECT_EQ("https://radio.example/logo.png", from_the_web.art_automatic());
+}
+
+TEST_F(RemoteSongsTest, AFileElsewhereIsRefused) {
+  AddToLibrary("song.flac");
+  Song song = FromPlaylist(File("elsewhere/secret.flac"), QString());
+  EXPECT_FALSE(Accept(&song));
+  // Out of the Files tab's folder by "..".
+  Song climbing = FromPlaylist(
+      QUrl::fromLocalFile(base_.filePath("files/../elsewhere/secret.flac")),
+      QString());
+  EXPECT_FALSE(Accept(&climbing));
+}
+
+TEST_F(RemoteSongsTest, AStreamIsAcceptedWithoutFileCovers) {
+  Song song =
+      FromPlaylist(QUrl("http://radio.example/stream.mp3"), "/etc/photo.jpg");
+  EXPECT_TRUE(Accept(&song));
+  EXPECT_EQ(QString(), song.art_automatic());
+}
+
+TEST_F(RemoteSongsTest, APlaylistFileIsCheckedSongBySong) {
+  const Song first = AddToLibrary("first.flac");
+  const Song refused = AddToLibrary("refused.flac");
+  const QString playlist = base_.filePath("files/mixed.m3u");
+  {
+    QFile file(playlist);
+    ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+    file.write((first.url().toLocalFile() + "\n" + refused.url().toLocalFile() +
+                "\n" + "udp://radio.example:1234\n")
+                   .toUtf8());
+  }
+
+  RemoteSongLoader loader(library_.get(), nullptr);
+  const SongList songs = loader.LoadBlocking({QUrl::fromLocalFile(playlist)},
+                                             [&refused](Song* song) {
+                                               if (song->url() == refused.url())
+                                                 return false;
+                                               // What accept changes is what's
+                                               // added.
+                                               song->set_comment("checked");
+                                               return true;
+                                             });
+
+  ASSERT_EQ(2, songs.size());
+  EXPECT_EQ(first.url(), songs[0].url());
+  EXPECT_EQ("checked", songs[0].comment());
+  EXPECT_EQ(QUrl("udp://radio.example:1234"), songs[1].url());
+  EXPECT_EQ("checked", songs[1].comment());
+}
+
+TEST(RemoteSongLoaderTest, LoadsAwayAndAnswersOnTheContextsThread) {
+  // Streams need neither the library nor the player.
+  RemoteSongLoader loader(nullptr, nullptr);
+  QObject context;
+  QList<SongList> answers;
+  QList<QThread*> threads;
+  const RemoteSongLoader::Accept refuse_mms = [](Song* song) {
+    return song->url().scheme() != "mms";
+  };
+  const RemoteSongLoader::Done done = [&](const SongList& songs) {
+    answers << songs;
+    threads << QThread::currentThread();
+  };
+
+  loader.Load({QUrl("udp://one.example"), QUrl("mms://two.example"),
+               QUrl("udp://three.example")},
+              refuse_mms, &context, done);
+  loader.Load({QUrl("udp://four.example")}, refuse_mms, &context, done);
+  EXPECT_TRUE(answers.isEmpty());
+
+  QDeadlineTimer giving_up(5000);
+  while (answers.size() < 2 && !giving_up.hasExpired()) {
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 10);
+  }
+
+  ASSERT_EQ(2, answers.size());
+  ASSERT_EQ(2, answers[0].size());
+  EXPECT_EQ(QUrl("udp://one.example"), answers[0][0].url());
+  EXPECT_EQ(QUrl("udp://three.example"), answers[0][1].url());
+  ASSERT_EQ(1, answers[1].size());
+  EXPECT_EQ(QUrl("udp://four.example"), answers[1][0].url());
+  EXPECT_EQ(context.thread(), threads[0]);
+  EXPECT_EQ(context.thread(), threads[1]);
 }

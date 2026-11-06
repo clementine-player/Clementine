@@ -1,8 +1,11 @@
 #ifndef INCOMINGDATAPARSER_H
 #define INCOMINGDATAPARSER_H
 
+#include <memory>
+
 #include "core/application.h"
 #include "core/player.h"
+#include "networkremote/remotesongloader.h"
 #include "remoteclient.h"
 #include "remotecontrolmessages.pb.h"
 #include "ui/mainwindow.h"
@@ -54,8 +57,6 @@ class IncomingDataParser : public QObject {
   void ShuffleCurrent();
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
-  void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now,
-                  bool enqueue, bool enqueue_next);
   void InsertSongs(int id, const SongList& songs, int pos, bool play_now,
                    bool enqueue, bool enqueue_next);
   void RemoveSongs(int id, const QList<int>& indices);
@@ -93,6 +94,7 @@ class IncomingDataParser : public QObject {
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
   QString files_root_folder_;
   bool streaming_enabled_ = false;
+  std::unique_ptr<RemoteSongLoader> song_loader_;
 
   void GetPlaylistSongs(const cpb::remote::Message& msg);
   void ChangeSong(const cpb::remote::Message& msg);
@@ -114,6 +116,12 @@ class IncomingDataParser : public QObject {
   // Replaces the covers a client gave `song` with the library's, or drops
   // them when they'd be loaded from a file (see RemoteFiles::IsSafeCover).
   void TrustCoverFromLibrary(Song* song) const;
+  // Whether a song loaded from a URL a client sent may be added: see
+  // RemoteFiles::MayAdd. Drops covers it shouldn't have.
+  RemoteSongLoader::Accept AcceptSong() const;
+  // Adds songs from the Files tab, as APPEND_FILES asks.
+  void AddFilesToPlaylist(const cpb::remote::RequestAppendFiles& req_append,
+                          const SongList& songs);
   Song CreateSongFromProtobuf(const cpb::remote::SongMetadata& pb);
 };
 

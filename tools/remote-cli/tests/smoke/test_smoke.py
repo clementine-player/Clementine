@@ -105,6 +105,33 @@ async def test_direct_serves_the_file_with_ranges(
         await controller.wait_for_state(pb.Empty)
 
 
+@run_async
+async def test_a_playlist_file_adds_only_songs_a_remote_may_add(
+    clementine: Clementine, music: dict[str, Path], tmp_path: Path
+) -> None:
+    # A playlist file in the shared folder, naming a file outside it first.
+    secret = tmp_path / "secret.flac"
+    secret.write_bytes(music["long.flac"].read_bytes())
+    track = music["tone.mp3"]
+    playlist = track.parent / "mixed.m3u"
+    playlist.write_text(f"{secret}\n{track}\n")
+    try:
+        async with (
+            Controller(clementine.port) as controller,
+            TestRenderer(clementine.port) as renderer,
+        ):
+            await renderer.take_over(controller)
+            await controller.add(playlist)
+
+            item = (await renderer.wait(Loaded)).item
+            assert item.mime_type == "audio/mpeg"
+            response = await renderer.fetched(item.url)
+            assert response.body == track.read_bytes()
+    finally:
+        # The music folder is shared by every test.
+        playlist.unlink()
+
+
 @contextlib.asynccontextmanager
 async def _port_forward(port: int) -> AsyncIterator[int]:
     """Forwards a new port to |port|, as a router or Docker's -p does, so

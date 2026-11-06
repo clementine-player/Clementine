@@ -19,7 +19,9 @@
 
 #include <functional>
 
+class LibraryBackendInterface;
 class QDir;
+class Song;
 class QFileInfo;
 class QString;
 class QUrl;
@@ -49,6 +51,21 @@ bool MayAdd(const QUrl& url, const QString& files_root,
 // other value as a file and sends the image to remotes, so a client could
 // otherwise read any image on the computer.
 bool IsSafeCover(const QString& art);
+
+// Drops the covers of `song` that aren't safe (see IsSafeCover).
+void DropUnsafeCovers(Song* song);
+
+// Gives `song` the library's covers when it's in the library, and otherwise
+// drops the ones that aren't safe. A playlist file can name a library song
+// and still give it any cover, as an XSPF's images do, so a library song's
+// covers are read again rather than trusted.
+void TrustCovers(LibraryBackendInterface* library, Song* song);
+
+// Whether a client may add `song`, which Clementine loaded from a URL the
+// client sent, such as one of a playlist file's entries (see MayAdd). Makes
+// its covers safe when it may (see TrustCovers).
+bool AcceptSong(LibraryBackendInterface* library, const QString& files_root,
+                Song* song);
 
 }  // namespace RemoteFiles
 

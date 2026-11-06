@@ -32,8 +32,12 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
+#include "playlist/songmimedata.h"
 
-IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
+IncomingDataParser::IncomingDataParser(Application* app)
+    : app_(app),
+      song_loader_(
+          new RemoteSongLoader(app->library_backend(), app->player())) {
   // load settings initially and sign up for updates
   ReloadSettings();
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
@@ -68,10 +72,6 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
           playlist_manager->sequence(),
           SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
-  connect(this,
-          SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool, bool)),
-          playlist_manager,
-          SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool, bool)));
   connect(this,
           SIGNAL(InsertSongs(int, const SongList&, int, bool, bool, bool)),
           playlist_manager,
@@ -343,9 +343,25 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
       playlist_id =
           app_->playlist_manager()->New(request.new_playlist_name().c_str());
 
-    // Insert the urls
-    emit InsertUrls(playlist_id, urls, request.position(), request.play_now(),
-                    request.enqueue(), request.enqueue_next());
+    // A URL can be a folder or a playlist file, so the songs it names are
+    // loaded and checked here, before they're added.
+    if (!urls.isEmpty()) {
+      PlaylistManager* manager = app_->playlist_manager();
+      const int pos = request.position();
+      const bool play_now = request.play_now();
+      const bool enqueue = request.enqueue();
+      const bool enqueue_next = request.enqueue_next();
+      song_loader_->Load(urls, AcceptSong(), manager,
+                         [manager, playlist_id, pos, play_now, enqueue,
+                          enqueue_next](const SongList& songs) {
+                           Playlist* playlist = manager->playlist(playlist_id);
+                           if (!playlist || songs.isEmpty()) return;
+                           if (play_now && manager->active_id() != playlist_id)
+                             manager->SetActivePlaylist(playlist_id);
+                           playlist->InsertSongsOrLibraryItems(
+                               songs, pos, play_now, enqueue, enqueue_next);
+                         });
+    }
   }
 
   // Add songs with metadata if present
@@ -469,25 +485,15 @@ bool IncomingDataParser::MayAdd(const QUrl& url) const {
 }
 
 void IncomingDataParser::TrustCoverFromLibrary(Song* song) const {
-  // A song from the library gets its covers from there.
-  if (song->url().isLocalFile()) {
-    const SongList library_songs =
-        app_->library_backend()->GetSongsByUrl(song->url());
-    if (!library_songs.isEmpty()) {
-      const Song* found = &library_songs.first();
-      for (const Song& library_song : library_songs) {
-        if (library_song.beginning_nanosec() == song->beginning_nanosec())
-          found = &library_song;
-      }
-      song->set_art_automatic(found->art_automatic());
-      song->set_art_manual(found->art_manual());
-      return;
-    }
-  }
-  if (!RemoteFiles::IsSafeCover(song->art_automatic()))
-    song->set_art_automatic(QString());
-  if (!RemoteFiles::IsSafeCover(song->art_manual()))
-    song->set_art_manual(QString());
+  RemoteFiles::TrustCovers(app_->library_backend(), song);
+}
+
+RemoteSongLoader::Accept IncomingDataParser::AcceptSong() const {
+  const QString files_root = files_root_folder_;
+  LibraryBackend* library = app_->library_backend();
+  return [files_root, library](Song* song) {
+    return RemoteFiles::AcceptSong(library, files_root, song);
+  };
 }
 
 Song IncomingDataParser::CreateSongFromProtobuf(
@@ -553,27 +559,41 @@ void IncomingDataParser::AppendFilesToPlaylist(
     if (fi.exists() && RemoteFiles::IsWithin(root_dir, fi))
       urls << QUrl::fromLocalFile(fi.canonicalFilePath());
   }
-  if (!urls.isEmpty()) {
-    MimeData* data = new MimeData;
-    data->setUrls(urls);
-    if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
-    if (req_append.has_clear_first())
-      data->clear_first_ = req_append.clear_first();
-    if (req_append.has_new_playlist_name()) {
-      QString playlist_name =
-          QString::fromStdString(req_append.new_playlist_name());
-      if (!playlist_name.isEmpty()) {
-        data->open_in_new_playlist_ = true;
-        data->name_for_new_playlist_ = playlist_name;
-      }
-    } else if (req_append.has_playlist_id()) {
-      // if playing we will drop the files in another playlist
-      if (app_->player()->GetState() == Engine::Playing)
-        data->playlist_id = req_append.playlist_id();
-      else
-        // as me may play the song, we change the current playlist
-        emit SetCurrentPlaylist(req_append.playlist_id());
-    }
-    emit AddToPlaylistSignal(data);
+  if (urls.isEmpty()) return;
+
+  // A file can be a playlist file, whose entries are checked as they're
+  // loaded.
+  const bool playing = app_->player()->GetState() == Engine::Playing;
+  if (!req_append.has_new_playlist_name() && req_append.has_playlist_id() &&
+      !playing) {
+    // as me may play the song, we change the current playlist
+    emit SetCurrentPlaylist(req_append.playlist_id());
   }
+  song_loader_->Load(urls, AcceptSong(), this,
+                     [this, req_append](const SongList& songs) {
+                       if (!songs.isEmpty())
+                         AddFilesToPlaylist(req_append, songs);
+                     });
+}
+
+void IncomingDataParser::AddFilesToPlaylist(
+    const cpb::remote::RequestAppendFiles& req_append, const SongList& songs) {
+  SongMimeData* data = new SongMimeData;
+  data->songs = songs;
+  if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
+  if (req_append.has_clear_first())
+    data->clear_first_ = req_append.clear_first();
+  if (req_append.has_new_playlist_name()) {
+    QString playlist_name =
+        QString::fromStdString(req_append.new_playlist_name());
+    if (!playlist_name.isEmpty()) {
+      data->open_in_new_playlist_ = true;
+      data->name_for_new_playlist_ = playlist_name;
+    }
+  } else if (req_append.has_playlist_id()) {
+    // The songs go to the playlist the client named, even if the current one
+    // changed while they were loading.
+    data->playlist_id = req_append.playlist_id();
+  }
+  emit AddToPlaylistSignal(data);
 }

@@ -365,7 +365,10 @@ void SongLoader::StopTypefind() {
     if (result.isNull()) {
       qLog(Warning) << "Failed to parse podcast";
     } else {
-      InternetModel::Service<PodcastService>()->SubscribeAndShow(result);
+      // On the podcast service's thread: the network remote loads songs away
+      // from the main thread.
+      PodcastService* service = InternetModel::Service<PodcastService>();
+      CallOn(service, &PodcastService::SubscribeAndShow, result);
     }
 
   } else if (success_) {

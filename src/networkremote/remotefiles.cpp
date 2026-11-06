@@ -21,6 +21,7 @@
 #include <QUrl>
 
 #include "core/song.h"
+#include "library/librarybackend.h"
 
 namespace RemoteFiles {
 
@@ -51,6 +52,39 @@ bool IsSafeCover(const QString& art) {
   return art.isEmpty() || art == Song::kManuallyUnsetCover ||
          art == Song::kEmbeddedCover || lower.startsWith("http://") ||
          lower.startsWith("https://");
+}
+
+void DropUnsafeCovers(Song* song) {
+  if (!IsSafeCover(song->art_automatic())) song->set_art_automatic(QString());
+  if (!IsSafeCover(song->art_manual())) song->set_art_manual(QString());
+}
+
+void TrustCovers(LibraryBackendInterface* library, Song* song) {
+  if (song->url().isLocalFile()) {
+    const SongList library_songs = library->GetSongsByUrl(song->url());
+    if (!library_songs.isEmpty()) {
+      // A file can hold several songs, as a cue sheet's do.
+      const Song* found = &library_songs.first();
+      for (const Song& library_song : library_songs) {
+        if (library_song.beginning_nanosec() == song->beginning_nanosec())
+          found = &library_song;
+      }
+      song->set_art_automatic(found->art_automatic());
+      song->set_art_manual(found->art_manual());
+      return;
+    }
+  }
+  DropUnsafeCovers(song);
+}
+
+bool AcceptSong(LibraryBackendInterface* library, const QString& files_root,
+                Song* song) {
+  if (!MayAdd(song->url(), files_root, [library](const QUrl& file) {
+        return !library->GetSongsByUrl(file).isEmpty();
+      }))
+    return false;
+  TrustCovers(library, song);
+  return true;
 }
 
 }  // namespace RemoteFiles
