@@ -268,6 +268,7 @@ set(SOURCES
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
   networkremote/remotefiles.cpp
+  networkremote/remotesongloader.cpp
   networkremote/remotesmartplaylists.cpp
   networkremote/songsender.cpp
   networkremote/streaming/directresponder.cpp
