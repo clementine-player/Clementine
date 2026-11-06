@@ -109,6 +109,11 @@ class IncomingDataParser : public QObject {
   void GlobalSearch(RemoteClient* client, const cpb::remote::Message& msg);
   void AppendFilesToPlaylist(const cpb::remote::Message& msg);
 
+  // Whether a client may add `url` to a playlist (see RemoteFiles::MayAdd).
+  bool MayAdd(const QUrl& url) const;
+  // Replaces the covers a client gave `song` with the library's, or drops
+  // them when they'd be loaded from a file (see RemoteFiles::IsSafeCover).
+  void TrustCoverFromLibrary(Song* song) const;
   Song CreateSongFromProtobuf(const cpb::remote::SongMetadata& pb);
 };
 

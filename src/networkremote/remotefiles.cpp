@@ -18,6 +18,9 @@
 
 #include <QDir>
 #include <QFileInfo>
+#include <QUrl>
+
+#include "core/song.h"
 
 namespace RemoteFiles {
 
@@ -28,6 +31,26 @@ bool IsWithin(const QDir& root, const QFileInfo& file) {
       root.relativeFilePath(QDir::cleanPath(file.absoluteFilePath()));
   return !relative.isEmpty() && relative != "." && relative != ".." &&
          !relative.startsWith("../") && !QDir::isAbsolutePath(relative);
+}
+
+bool MayAdd(const QUrl& url, const QString& files_root,
+            const std::function<bool(const QUrl&)>& in_library) {
+  if (url.scheme().isEmpty()) return false;
+  if (!url.isLocalFile()) return true;
+
+  if (!files_root.isEmpty()) {
+    const QDir root(files_root);
+    if (root.exists() && IsWithin(root, QFileInfo(url.toLocalFile())))
+      return true;
+  }
+  return in_library(url);
+}
+
+bool IsSafeCover(const QString& art) {
+  const QString lower = art.toLower();
+  return art.isEmpty() || art == Song::kManuallyUnsetCover ||
+         art == Song::kEmbeddedCover || lower.startsWith("http://") ||
+         lower.startsWith("https://");
 }
 
 }  // namespace RemoteFiles

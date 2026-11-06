@@ -386,3 +386,50 @@ TEST(NetworkRemoteTest, FilesOutsideTheRootAreRefused) {
   EXPECT_FALSE(
       RemoteFiles::IsWithin(root, QFileInfo(album, "../../music2/song.mp3")));
 }
+
+// A client may add a file to a playlist only from the library or the Files
+// tab's folder, since whatever is on a playlist can be downloaded or streamed.
+TEST(NetworkRemoteTest, OnlyFilesFromTheLibraryOrTheFilesTabCanBeAdded) {
+  QTemporaryDir temp;
+  ASSERT_TRUE(temp.isValid());
+  QDir base(temp.path());
+  ASSERT_TRUE(base.mkpath("music/album"));
+  const QString root = base.filePath("music");
+  const QUrl in_root =
+      QUrl::fromLocalFile(base.filePath("music/album/song.mp3"));
+  const QUrl in_library = QUrl::fromLocalFile("/library/song.flac");
+  const QUrl elsewhere = QUrl::fromLocalFile(base.filePath("secret"));
+
+  const auto library = [&in_library](const QUrl& url) {
+    return url == in_library;
+  };
+
+  EXPECT_TRUE(RemoteFiles::MayAdd(in_root, root, library));
+  EXPECT_TRUE(RemoteFiles::MayAdd(in_library, root, library));
+  EXPECT_FALSE(RemoteFiles::MayAdd(elsewhere, root, library));
+  // Out of the root by "..", which a URL keeps.
+  EXPECT_FALSE(RemoteFiles::MayAdd(
+      QUrl::fromLocalFile(root + "/album/../../secret"), root, library));
+  // With the Files tab off, only the library.
+  EXPECT_FALSE(RemoteFiles::MayAdd(in_root, QString(), library));
+  EXPECT_TRUE(RemoteFiles::MayAdd(in_library, QString(), library));
+  // A path without a scheme.
+  EXPECT_FALSE(
+      RemoteFiles::MayAdd(QUrl(base.filePath("secret")), root, library));
+  // Streams aren't files on this computer.
+  EXPECT_TRUE(RemoteFiles::MayAdd(QUrl("http://radio.example/stream.mp3"), root,
+                                  library));
+}
+
+// Clementine loads a cover that isn't on the web from a file, and sends the
+// image to the remotes.
+TEST(NetworkRemoteTest, OnlyCoversFromTheSongOrTheWebAreTakenFromAClient) {
+  EXPECT_TRUE(RemoteFiles::IsSafeCover(QString()));
+  EXPECT_TRUE(RemoteFiles::IsSafeCover(Song::kEmbeddedCover));
+  EXPECT_TRUE(RemoteFiles::IsSafeCover(Song::kManuallyUnsetCover));
+  EXPECT_TRUE(RemoteFiles::IsSafeCover("https://radio.example/logo.png"));
+  EXPECT_TRUE(RemoteFiles::IsSafeCover("HTTP://radio.example/logo.png"));
+  EXPECT_FALSE(RemoteFiles::IsSafeCover("/home/someone/photo.jpg"));
+  EXPECT_FALSE(RemoteFiles::IsSafeCover("file:///home/someone/photo.jpg"));
+  EXPECT_FALSE(RemoteFiles::IsSafeCover("C:/Users/someone/photo.jpg"));
+}
