@@ -27,6 +27,7 @@
 #include "networkremote/networkremote.h"
 #include "networkremote/outgoingdatacreator.h"
 #include "networkremote/remoteclient.h"
+#include "networkremote/remotefiles.h"
 #include "playlist/playlistitem.h"
 
 const quint32 SongSender::kFileChunkSize = 100000;  // in Bytes
@@ -381,7 +382,7 @@ void SongSender::SendUrls(const cpb::remote::RequestDownloadSongs& request) {
         client_->files_music_extensions();
     for (const std::string& s : request.urls()) {
       QFileInfo fi(dir, s.c_str());
-      if (fi.exists() && fi.isFile() &&
+      if (fi.exists() && fi.isFile() && RemoteFiles::IsWithin(root_dir, fi) &&
           files_music_extensions.contains(fi.suffix())) {
         Song song;
         song.set_basefilename(fi.fileName());

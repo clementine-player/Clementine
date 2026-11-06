@@ -17,15 +17,20 @@
 #include "networkremote/networkremote.h"
 
 #include <QDataStream>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include <QHostAddress>
 #include <QHostInfo>
 #include <QStringList>
+#include <QTemporaryDir>
 #include <algorithm>
 
 #include "core/song.h"
 #include "gtest/gtest.h"
 #include "networkremote/authattemptlimiter.h"
 #include "networkremote/outgoingdatacreator.h"
+#include "networkremote/remotefiles.h"
 #include "test_utils.h"
 
 using Listening = NetworkRemote::Listening;
@@ -354,4 +359,30 @@ TEST(NetworkRemoteTest, EmptySongHasNoFieldsButItsIndex) {
   EXPECT_EQ(3, pb_song.index());
   EXPECT_FALSE(pb_song.has_id());
   EXPECT_FALSE(pb_song.has_title());
+}
+
+TEST(NetworkRemoteTest, FilesOutsideTheRootAreRefused) {
+  QTemporaryDir temp;
+  ASSERT_TRUE(temp.isValid());
+  QDir base(temp.path());
+  ASSERT_TRUE(base.mkpath("music/album"));
+  QFile(base.filePath("music/album/song.mp3")).open(QIODevice::WriteOnly);
+  QFile(base.filePath("secret.mp3")).open(QIODevice::WriteOnly);
+  const QDir root(base.filePath("music"));
+  const QDir album(root.filePath("album"));
+
+  EXPECT_TRUE(RemoteFiles::IsWithin(root, QFileInfo(album, "song.mp3")));
+  EXPECT_TRUE(
+      RemoteFiles::IsWithin(root, QFileInfo(album, "../album/song.mp3")));
+  EXPECT_FALSE(
+      RemoteFiles::IsWithin(root, QFileInfo(album, "../../secret.mp3")));
+  EXPECT_FALSE(RemoteFiles::IsWithin(
+      root, QFileInfo(album, base.filePath("secret.mp3"))));
+  EXPECT_FALSE(RemoteFiles::IsWithin(root, QFileInfo(album, "..")));
+  EXPECT_FALSE(RemoteFiles::IsWithin(root, QFileInfo(album, "../..")));
+  // A folder beside the root whose name starts with the root's.
+  ASSERT_TRUE(base.mkpath("music2"));
+  QFile(base.filePath("music2/song.mp3")).open(QIODevice::WriteOnly);
+  EXPECT_FALSE(
+      RemoteFiles::IsWithin(root, QFileInfo(album, "../../music2/song.mp3")));
 }

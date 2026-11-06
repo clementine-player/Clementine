@@ -27,6 +27,7 @@
 #include "internet/core/internetmodel.h"
 #include "internet/lastfm/lastfmservice.h"
 #include "networkremote/networkremote.h"
+#include "networkremote/remotefiles.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
@@ -512,7 +513,8 @@ void IncomingDataParser::AppendFilesToPlaylist(
   QDir dir(fi_folder.absoluteFilePath());
   for (const auto& file : req_append.files()) {
     QFileInfo fi(dir, file.c_str());
-    if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
+    if (fi.exists() && RemoteFiles::IsWithin(root_dir, fi))
+      urls << QUrl::fromLocalFile(fi.canonicalFilePath());
   }
   if (!urls.isEmpty()) {
     MimeData* data = new MimeData;
