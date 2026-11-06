@@ -163,7 +163,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:580
+#: networkremote/streaming/rendererregistry.cpp:575
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -174,7 +174,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:591
+#: networkremote/streaming/rendererregistry.cpp:586
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -186,7 +186,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:572
+#: networkremote/streaming/rendererregistry.cpp:567
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -197,7 +197,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:599
+#: networkremote/streaming/rendererregistry.cpp:594
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -1044,7 +1044,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Izgled"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Dodajte datoteku/URL u popis izvođenja"
 
@@ -1337,7 +1337,7 @@ msgstr "Promijenite naizmjenični mod"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Promijeni jezik"
 
@@ -1584,7 +1584,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:215
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Zarezom odvojen popis klasa:razina, razina je 0-3"
 
@@ -1871,7 +1871,7 @@ msgstr "Omot albuma postavljen iz %1"
 msgid "Covers from %1"
 msgstr "Omoti s %1"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1954,11 +1954,11 @@ msgstr "Dani"
 msgid "De&fault"
 msgstr "Za&dano"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -2018,7 +2018,7 @@ msgstr "Obrišite predložak"
 msgid "Delete smart playlist"
 msgstr "Obrišite pametni popis izvođenja"
 
-#: core/commandlineoptions.cpp:217
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -2139,7 +2139,7 @@ msgstr "Isprekidani prijenos"
 msgid "Display options"
 msgstr "Mogućnosti zaslona"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Prikaži zaslonski prikaz (OSD)"
 
@@ -2475,11 +2475,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Ekvalizator"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Odgovara --log-levels *: 1"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Odgovara --log-levels *: 3"
 
@@ -3173,11 +3173,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3504,7 +3504,7 @@ msgstr "Učitavanje informacija o pjesmi"
 msgid "Loading..."
 msgstr "Učitavanje..."
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Učitaj Datoteke/URL, zamijeni trenutni popis izvođenja"
 
@@ -4169,7 +4169,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Druge mogućnosti"
 
@@ -4235,7 +4235,7 @@ msgstr "Lozinka"
 msgid "Pause"
 msgstr "Pauziraj reprodukciju"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Pauziraj reprodukciju"
 
@@ -4285,11 +4285,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Broj izvođenja"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Reproduciraj ako se zaustavi, pauziraj ako svira"
 
@@ -4318,7 +4318,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproduciraj <n> pjesmu iz popisa izvođenja"
 
@@ -4330,7 +4330,7 @@ msgstr "Pokreni reprodukciju/Pauziraj"
 msgid "Playback"
 msgstr "Reprodukcija"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Mogućnosti preglednika"
 
@@ -4363,7 +4363,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Popis izvođenja je završen"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Mogućnosti popisa izvođenja"
@@ -4513,7 +4513,7 @@ msgstr "Prijašnja pjesma"
 msgid "Previous track"
 msgstr "Prijašnja pjesma"
 
-#: core/commandlineoptions.cpp:216
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Ispiši podatke o verziji"
 
@@ -4554,7 +4554,7 @@ msgstr "Stavi pjesmu u naizmjenični redosljed"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:218
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4822,7 +4822,7 @@ msgstr "Poništite broj izvođenja"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -5095,11 +5095,11 @@ msgstr "Traži unatrag"
 msgid "Seek forward"
 msgstr "Traži unaprijed"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Traži pjesmu koja se tranutno izvodi po ralativnom broju"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Traži pjesmu koja se tranutno izvodi po apsolutnom položaju"
 
@@ -5188,7 +5188,7 @@ msgstr "Postavite %1 na \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Postavi glasnoću zvuka na <value> posto"
 
@@ -5400,7 +5400,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Preskoči unatrag u popisu izvođenja"
 
@@ -5412,7 +5412,7 @@ msgstr "Preskoči računanje"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unaprijed u popisu izvođenja"
 
@@ -5525,7 +5525,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Pokrenite popis izvođenja koji se trenutno izvodi"
 
@@ -5563,11 +5563,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Zaustavi reprodukciju nakon ove pjesme"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Zaustavi reprodukciju"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5923,7 +5923,7 @@ msgstr "Uključi/isključi stanje reda čekanja"
 msgid "Toggle scrobbling"
 msgstr "Uključi/Isključi skrobblanje"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Uključi/Isključi vidljivost za ljepši OSD"
 
@@ -6038,7 +6038,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "URL(ovi)"
 
@@ -6134,7 +6134,7 @@ msgstr "Nadopuna %1%..."
 msgid "Updating library"
 msgstr "Nadopuna fonoteke"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Upotreba"
 
@@ -6760,7 +6760,7 @@ msgstr "najstarije prvo"
 msgid "on"
 msgstr "na"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "mogućnosti"
 

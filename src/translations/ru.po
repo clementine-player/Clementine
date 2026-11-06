@@ -187,7 +187,7 @@ msgstr "%1 не помнит Clementine, и повторное сопряжен�
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:580
+#: networkremote/streaming/rendererregistry.cpp:575
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -198,7 +198,7 @@ msgstr "%1 получает музыку из Clementine через сетево
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:591
+#: networkremote/streaming/rendererregistry.cpp:586
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -210,7 +210,7 @@ msgstr "%1 получает музыку из Clementine через сетево
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:572
+#: networkremote/streaming/rendererregistry.cpp:567
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -221,7 +221,7 @@ msgstr "%1 получает музыку из Clementine через сетево
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:599
+#: networkremote/streaming/rendererregistry.cpp:594
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -1068,7 +1068,7 @@ msgstr "Сердитый"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/адреса в плейлист"
 
@@ -1361,7 +1361,7 @@ msgstr "Сменить режим перемешивания"
 msgid "Change the currently playing song"
 msgstr "Сменить активный трек"
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Сменить язык"
 
@@ -1608,7 +1608,7 @@ msgstr "Ко&мпозитор"
 msgid "Colors"
 msgstr "Цвета"
 
-#: core/commandlineoptions.cpp:215
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделённый запятыми список «класс:уровень», где уровень от 0 до 3"
 
@@ -1895,7 +1895,7 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr "Создать новый плейлист с файлами/адресами"
 
@@ -1978,11 +1978,11 @@ msgstr "дн."
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr "Уменьшить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr "Уменьшить громкость на <value> процентов"
 
@@ -2042,7 +2042,7 @@ msgstr "Удалить предустановку"
 msgid "Delete smart playlist"
 msgstr "Удалить умный плейлист"
 
-#: core/commandlineoptions.cpp:217
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr "Удалить активный трек"
 
@@ -2163,7 +2163,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки вида"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -2499,11 +2499,11 @@ msgstr "Информация об эпизоде"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
@@ -3197,11 +3197,11 @@ msgstr "Несовместимая версия протокола Subsonic REST
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Неполная конфигурация, пожалуйста, убедитесь, что все поля заполнены."
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr "Увеличить громкость на 4 процента"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличить громкость на <value> процентов"
 
@@ -3528,7 +3528,7 @@ msgstr "Загружаются сведения о композициях"
 msgid "Loading..."
 msgstr "Загружается…"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего плейлиста"
 
@@ -4193,7 +4193,7 @@ msgstr "Поддержка года выхода оригинала"
 msgid "Other"
 msgstr "Прочее"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Прочие настройки"
 
@@ -4259,7 +4259,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Пауза"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -4309,11 +4309,11 @@ msgstr "Запустите воспроизведение песни, чтобы
 msgid "Play count"
 msgstr "Разы"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr "Проиграть данный плейлист"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Играть если остановлено, пауза если воспроизводится"
 
@@ -4342,7 +4342,7 @@ msgstr "Играть на другом устройстве"
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Играть <n> трек в плейлисте"
 
@@ -4354,7 +4354,7 @@ msgstr "Играть/пауза"
 msgid "Playback"
 msgstr "Проигрывание"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
@@ -4387,7 +4387,7 @@ msgstr "Плейлист"
 msgid "Playlist finished"
 msgstr "Плейлист закончился"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Настройки плейлиста"
@@ -4537,7 +4537,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущий трек"
 
-#: core/commandlineoptions.cpp:216
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -4578,7 +4578,7 @@ msgstr "Перемешать порядок песен"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:218
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4846,7 +4846,7 @@ msgstr "Сбросить счётчики прослушивания"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапуск песни, при повторном нажатии — переход к предыдущей"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Перезапустить трек или проиграть предыдущий, если не прошло 8 секунд от начала."
@@ -5119,11 +5119,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперёд"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Перемотать активный трек на относительную позицию"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать активный трек на абсолютную позицию"
 
@@ -5212,7 +5212,7 @@ msgstr "Установить %1 в «%2»…"
 msgid "Set target rate"
 msgstr "Указать целевую частоту"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -5424,7 +5424,7 @@ msgstr "Размер:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Перейти назад в плейлисте"
 
@@ -5436,7 +5436,7 @@ msgstr "Пропуски"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Пропускать файлы с этими расширениями (через запятые, регистр не учитывается)"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Перейти вперёд в плейлисте"
 
@@ -5549,7 +5549,7 @@ msgstr "Оценённые альбомы"
 msgid "Start ripping"
 msgstr "Начать извлечение"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас плейлист"
 
@@ -5587,11 +5587,11 @@ msgstr "Стоп после каждого трека"
 msgid "Stop after this track"
 msgstr "Стоп после этого трека"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr "Остановить после текущего трека"
 
@@ -5947,7 +5947,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл./откл. скробблинг"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость модного экранного меню"
 
@@ -6062,7 +6062,7 @@ msgstr "Адрес"
 msgid "URL of its Logo:"
 msgstr "Адрес логотипа:"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "Ссылки"
 
@@ -6158,7 +6158,7 @@ msgstr "Обновление %1%…"
 msgid "Updating library"
 msgstr "Обновление фонотеки"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Использование"
 
@@ -6784,7 +6784,7 @@ msgstr "сначала самые старые"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "параметры"
 

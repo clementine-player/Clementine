@@ -162,7 +162,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:580
+#: networkremote/streaming/rendererregistry.cpp:575
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -173,7 +173,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:591
+#: networkremote/streaming/rendererregistry.cpp:586
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -185,7 +185,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:572
+#: networkremote/streaming/rendererregistry.cpp:567
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -196,7 +196,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:599
+#: networkremote/streaming/rendererregistry.cpp:594
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -1043,7 +1043,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "外觀"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
@@ -1336,7 +1336,7 @@ msgstr "切換隨機模式"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "變更語言"
 
@@ -1583,7 +1583,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:215
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "用逗號化分類別清單:等級為0-3"
 
@@ -1870,7 +1870,7 @@ msgstr "從 %1 取得封面圖片"
 msgid "Covers from %1"
 msgstr "來自 %1 的封面"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1953,11 +1953,11 @@ msgstr "天"
 msgid "De&fault"
 msgstr "預設(&F)"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -2017,7 +2017,7 @@ msgstr "刪除內建值"
 msgid "Delete smart playlist"
 msgstr "刪除智慧型播放清單"
 
-#: core/commandlineoptions.cpp:217
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -2138,7 +2138,7 @@ msgstr "不連續傳送"
 msgid "Display options"
 msgstr "顯示選項"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "顯示螢幕上的顯示"
 
@@ -2474,11 +2474,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "等化器"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "相當於 --log-levels *:1"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "相當於 --log-levels *:3"
 
@@ -3172,11 +3172,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3503,7 +3503,7 @@ msgstr "載入音軌資訊"
 msgid "Loading..."
 msgstr "載入中…"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "載入檔案/網址，取代目前的播放清單"
 
@@ -4168,7 +4168,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "其它選項"
 
@@ -4234,7 +4234,7 @@ msgstr "密碼"
 msgid "Pause"
 msgstr "暫停"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "暫停播放"
 
@@ -4284,11 +4284,11 @@ msgstr ""
 msgid "Play count"
 msgstr "播放計數"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
@@ -4317,7 +4317,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "播放清單中的第<n>首歌曲"
 
@@ -4329,7 +4329,7 @@ msgstr "播放/暫停"
 msgid "Playback"
 msgstr "播放"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "播放器選項"
 
@@ -4362,7 +4362,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "播放清單播完了"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "播放清單選擇"
@@ -4512,7 +4512,7 @@ msgstr "往前"
 msgid "Previous track"
 msgstr "上一首歌曲"
 
-#: core/commandlineoptions.cpp:216
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "印出版本資訊"
 
@@ -4553,7 +4553,7 @@ msgstr "將歌曲放入隨機曲單"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:218
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4821,7 +4821,7 @@ msgstr "重置播放計數"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -5094,11 +5094,11 @@ msgstr "倒帶"
 msgid "Seek forward"
 msgstr "快轉"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "藉由相對數字尋找現在播放的曲目"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "藉由絕對位置尋找現在播放的曲目"
 
@@ -5187,7 +5187,7 @@ msgstr "設定 %1 到「%2」…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "設定音量到百分之<value>"
 
@@ -5399,7 +5399,7 @@ msgstr ""
 msgid "Ska"
 msgstr "強節奏流行音樂"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "跳至播放清單開頭"
 
@@ -5411,7 +5411,7 @@ msgstr "略過計數"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
@@ -5524,7 +5524,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "開始播放目前播放清單"
 
@@ -5562,11 +5562,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "在這首歌之後停止"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "停止播放"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5922,7 +5922,7 @@ msgstr "切換佇列狀態"
 msgid "Toggle scrobbling"
 msgstr "切換 scrobbling"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "調整漂亮的螢幕顯示的可見度"
 
@@ -6037,7 +6037,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -6133,7 +6133,7 @@ msgstr "更新 %1%…"
 msgid "Updating library"
 msgstr "正在更新媒體櫃"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "使用"
 
@@ -6759,7 +6759,7 @@ msgstr "最舊優先"
 msgid "on"
 msgstr "在"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "選項"
 

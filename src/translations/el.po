@@ -182,7 +182,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:580
+#: networkremote/streaming/rendererregistry.cpp:575
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -193,7 +193,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:591
+#: networkremote/streaming/rendererregistry.cpp:586
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -205,7 +205,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:572
+#: networkremote/streaming/rendererregistry.cpp:567
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -216,7 +216,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:599
+#: networkremote/streaming/rendererregistry.cpp:594
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -1063,7 +1063,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
@@ -1356,7 +1356,7 @@ msgstr "Αλλάξτε μέθοδο ανάμιξης"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Αλλαγή γλώσσας"
 
@@ -1603,7 +1603,7 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:215
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
@@ -1890,7 +1890,7 @@ msgstr "Το εξώφυλλο ορίστηκε από %1"
 msgid "Covers from %1"
 msgstr "Εξώφυλλα από %1"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1973,11 +1973,11 @@ msgstr "Ημέρες"
 msgid "De&fault"
 msgstr "Προ&επιλογή"
 
-#: core/commandlineoptions.cpp:195
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -2037,7 +2037,7 @@ msgstr "Διαγραφή ρύθμισης"
 msgid "Delete smart playlist"
 msgstr "Διαγραφή έξυπνης λίστας αναπαραγωγής"
 
-#: core/commandlineoptions.cpp:217
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -2158,7 +2158,7 @@ msgstr "Διακεκομμένη μετάδοση"
 msgid "Display options"
 msgstr "Επιλογές απεικόνισης"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Εμφάνιση της «απεικόνισης στην οθόνη»"
 
@@ -2494,11 +2494,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ισοδύναμο με --log-levels *:1"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
@@ -3192,11 +3192,11 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -3523,7 +3523,7 @@ msgstr "Φόρτωση πληροφοριών κομματιού"
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Φορτώνει αρχεία/URL, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
@@ -4188,7 +4188,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
@@ -4254,7 +4254,7 @@ msgstr "Συνθηματικό"
 msgid "Pause"
 msgstr "Παύση"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Παύση αναπαραγωγής"
 
@@ -4304,11 +4304,11 @@ msgstr ""
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
@@ -4337,7 +4337,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του κομματιού <n> της λίστας αναπαραγωγής"
 
@@ -4349,7 +4349,7 @@ msgstr "Αναπαραγωγή/Παύση"
 msgid "Playback"
 msgstr "Αναπαραγωγή"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
@@ -4382,7 +4382,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Η λίστα τελείωσε"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Επιλογές λίστας αναπαραγωγής"
@@ -4532,7 +4532,7 @@ msgstr "Προηγούμενο"
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
 
-#: core/commandlineoptions.cpp:216
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Εκτύπωση πληροφοριών έκδοσης"
 
@@ -4573,7 +4573,7 @@ msgstr "Τοποθέτηση τραγουδιών σε τυχαία σειρά"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:218
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4841,7 +4841,7 @@ msgstr "Επαναφορά μετρητή εκτελέσεων"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -5114,11 +5114,11 @@ msgstr "Αναζήτηση πίσω"
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικό ποσό"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι"
 
@@ -5207,7 +5207,7 @@ msgstr "Δώσε %1 στο \"%2\"..."
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Ρύθμιση της έντασης ήχου στο <value> τοις εκατό"
 
@@ -5419,7 +5419,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
@@ -5431,7 +5431,7 @@ msgstr "Μετρητής παραλήψεων"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
@@ -5544,7 +5544,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
@@ -5582,11 +5582,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Διακοπή της αναπαραγωγής"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5942,7 +5942,7 @@ msgstr "Εναλλαγή της κατάστασης της λίστας ανα�
 msgid "Toggle scrobbling"
 msgstr "Εναλλαγή του μουσικού προφίλ"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Εναλλαγή ορατότητας της όμορφης «απεικόνισης στην οθόνη»"
 
@@ -6057,7 +6057,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "URL"
 
@@ -6153,7 +6153,7 @@ msgstr "Ενημέρωση %1%..."
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Χρήση"
 
@@ -6779,7 +6779,7 @@ msgstr "το παλαιότερο πρώτα"
 msgid "on"
 msgstr "σε"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "επιλογές"
 
