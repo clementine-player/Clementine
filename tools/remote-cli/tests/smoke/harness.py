@@ -61,6 +61,7 @@ class Clementine:
         streaming: bool = True,
         extra_config: str = "",
         auth_code: int | None = None,
+        files_root: Path | None = None,
     ) -> None:
         self.binary = binary
         self.root = root
@@ -68,6 +69,9 @@ class Clementine:
         # More settings, in Clementine.conf's ini format.
         self.extra_config = extra_config
         self.auth_code = auth_code
+        # The Files tab's folder: a remote may add files from there, and
+        # from the library, but nowhere else.
+        self.files_root = files_root
         self.port = free_port()
         self.log_path = root / "clementine.log"
         self.process: subprocess.Popen[bytes] | None = None
@@ -91,6 +95,7 @@ listen_on_all_addresses=false
 listen_addresses={HOST}
 use_auth_code={str(self.auth_code is not None).lower()}
 auth_code={self.auth_code or 0}
+files_root_folder={self.files_root or ""}
 
 [GstEngine]
 sink={sink}

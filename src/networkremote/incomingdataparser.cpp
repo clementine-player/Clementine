@@ -26,6 +26,7 @@
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
 #include "internet/lastfm/lastfmservice.h"
+#include "library/librarybackend.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/remotefiles.h"
 #include "playlist/playlist.h"
@@ -334,8 +335,8 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
   if (!request.urls().empty()) {
     QList<QUrl> urls;
     for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-      std::string s = *it;
-      urls << QUrl(QStringFromStdString(s));
+      const QUrl url(QString::fromStdString(*it));
+      if (MayAdd(url)) urls << url;
     }
 
     if (request.has_new_playlist_name())
@@ -351,7 +352,10 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
   if (!request.songs().empty()) {
     SongList songs;
     for (int i = 0; i < request.songs().size(); i++) {
-      songs << CreateSongFromProtobuf(request.songs(i));
+      Song song = CreateSongFromProtobuf(request.songs(i));
+      if (!MayAdd(song.url())) continue;
+      TrustCoverFromLibrary(&song);
+      songs << song;
     }
 
     // create a new playlist if required and not already done above by
@@ -451,6 +455,39 @@ void IncomingDataParser::GlobalSearch(RemoteClient* client,
                                       const cpb::remote::Message& msg) {
   emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
                       client);
+}
+
+bool IncomingDataParser::MayAdd(const QUrl& url) const {
+  LibraryBackend* library = app_->library_backend();
+  if (RemoteFiles::MayAdd(url, files_root_folder_, [library](const QUrl& file) {
+        return !library->GetSongsByUrl(file).isEmpty();
+      }))
+    return true;
+  qLog(Warning) << "Refused a remote's request to add" << url
+                << "which isn't in the library or the Files tab's folder";
+  return false;
+}
+
+void IncomingDataParser::TrustCoverFromLibrary(Song* song) const {
+  // A song from the library gets its covers from there.
+  if (song->url().isLocalFile()) {
+    const SongList library_songs =
+        app_->library_backend()->GetSongsByUrl(song->url());
+    if (!library_songs.isEmpty()) {
+      const Song* found = &library_songs.first();
+      for (const Song& library_song : library_songs) {
+        if (library_song.beginning_nanosec() == song->beginning_nanosec())
+          found = &library_song;
+      }
+      song->set_art_automatic(found->art_automatic());
+      song->set_art_manual(found->art_manual());
+      return;
+    }
+  }
+  if (!RemoteFiles::IsSafeCover(song->art_automatic()))
+    song->set_art_automatic(QString());
+  if (!RemoteFiles::IsSafeCover(song->art_manual()))
+    song->set_art_manual(QString());
 }
 
 Song IncomingDataParser::CreateSongFromProtobuf(

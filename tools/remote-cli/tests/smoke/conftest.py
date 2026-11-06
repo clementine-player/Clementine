@@ -124,12 +124,19 @@ def stalled_stream_server() -> Iterator[str]:
 
 def _run(
     root: Path,
+    music: dict[str, Path],
     streaming: bool,
     extra_config: str = "",
     auth_code: int | None = None,
 ) -> Iterator[Clementine]:
+    # The tests add the music by file, so it's in the Files tab's folder.
     instance = Clementine(
-        Path(os.environ["CLEMENTINE_BINARY"]), root, streaming, extra_config, auth_code
+        Path(os.environ["CLEMENTINE_BINARY"]),
+        root,
+        streaming,
+        extra_config,
+        auth_code,
+        files_root=next(iter(music.values())).parent,
     )
     instance.start()
     yield instance
@@ -139,9 +146,9 @@ def _run(
 
 
 @pytest.fixture
-def clementine(tmp_path: Path) -> Iterator[Clementine]:
+def clementine(tmp_path: Path, music: dict[str, Path]) -> Iterator[Clementine]:
     """Clementine with playing on remote devices allowed."""
-    yield from _run(tmp_path / "profile", streaming=True)
+    yield from _run(tmp_path / "profile", music, streaming=True)
 
 
 def _radio_config(url: str) -> str:
@@ -153,10 +160,13 @@ streams\\size=1
 
 
 @pytest.fixture
-def clementine_with_radio(tmp_path: Path, music_server: str) -> Iterator[Clementine]:
+def clementine_with_radio(
+    tmp_path: Path, music: dict[str, Path], music_server: str
+) -> Iterator[Clementine]:
     """Clementine with a saved radio stream, served by music_server."""
     yield from _run(
         tmp_path / "profile",
+        music,
         streaming=False,
         extra_config=_radio_config(f"{music_server}/long.flac"),
     )
@@ -164,23 +174,28 @@ def clementine_with_radio(tmp_path: Path, music_server: str) -> Iterator[Clement
 
 @pytest.fixture
 def clementine_with_stalled_radio(
-    tmp_path: Path, stalled_stream_server: str
+    tmp_path: Path, music: dict[str, Path], stalled_stream_server: str
 ) -> Iterator[Clementine]:
     """Clementine with a saved radio stream that never sends anything."""
     yield from _run(
         tmp_path / "profile",
+        music,
         streaming=False,
         extra_config=_radio_config(stalled_stream_server),
     )
 
 
 @pytest.fixture
-def clementine_without_streaming(tmp_path: Path) -> Iterator[Clementine]:
+def clementine_without_streaming(
+    tmp_path: Path, music: dict[str, Path]
+) -> Iterator[Clementine]:
     """Clementine with playing on remote devices not allowed."""
-    yield from _run(tmp_path / "profile", streaming=False)
+    yield from _run(tmp_path / "profile", music, streaming=False)
 
 
 @pytest.fixture
-def clementine_with_auth_code(tmp_path: Path) -> Iterator[Clementine]:
+def clementine_with_auth_code(
+    tmp_path: Path, music: dict[str, Path]
+) -> Iterator[Clementine]:
     """Clementine that asks remotes for an auth code: its auth_code."""
-    yield from _run(tmp_path / "profile", streaming=False, auth_code=12345)
+    yield from _run(tmp_path / "profile", music, streaming=False, auth_code=12345)
