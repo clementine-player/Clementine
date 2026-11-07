@@ -2596,9 +2596,13 @@ jobs:
         working-directory: bin
         run: |
           status=0
+          checked=0
+          newest=0
           while IFS= read -r -d '' file; do
             file -b "$file" | grep -q Mach-O || continue
             minos="$(otool -l "$file" | awk '$1 == "minos" { print $2; exit }')"
+            checked=$((checked + 1))
+            newest="$(printf '%s\n' "${minos:-0}" "$newest" | sort -V | tail -1)"
             if [[ -z "$minos" ]]; then
               echo "::warning::$file: no minimum macOS"
             elif [[ "$(printf '%s\n' "$minos" 15.0 | sort -V | tail -1)" != 15.0 ]]; then
@@ -2606,6 +2610,8 @@ jobs:
               status=1
             fi
           done < <(find clementine.app -type f -print0)
+          echo "$checked binaries, the newest needing macOS $newest"
+          (( checked > 0 )) || status=1
           exit $status
 
       # Runs the actual packaged .app (not a dev build) end to end through
