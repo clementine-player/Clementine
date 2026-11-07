@@ -261,10 +261,29 @@ QSqlDatabase Database::Connect() {
     return db;
   }
 
-  // Find Sqlite3 functions in the Qt plugin.
+  // Set up the FTS tokenizer.
   if (!sFTSTokenizer) StaticInit();
 
   {
+    // The tokenizer is set up below by calling the SQLite we link against on
+    // the connection Qt's driver opened, so the driver has to be using that
+    // same SQLite. A Qt built with its own copy of SQLite (configured without
+    // -system-sqlite) usually has a different version, so catch that here
+    // rather than hand its connection to a library that doesn't own it.
+    QString driver_sqlite_version;
+    {
+      QSqlQuery version_query("SELECT sqlite_version()", db);
+      if (version_query.next()) {
+        driver_sqlite_version = version_query.value(0).toString();
+      }
+    }
+    if (driver_sqlite_version != QLatin1String(sqlite3_libversion())) {
+      qLog(Fatal) << "Qt's SQLite driver uses SQLite" << driver_sqlite_version
+                  << "but Clementine is linked against SQLite"
+                  << sqlite3_libversion()
+                  << "- Qt must be built to use the system SQLite";
+    }
+
 #ifdef SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER
     // In case sqlite>=3.12 is compiled without -DSQLITE_ENABLE_FTS3_TOKENIZER
     // (generally a good idea due to security reasons) the fts3 support should

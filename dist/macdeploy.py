@@ -138,6 +138,7 @@ QT_PLUGINS = [
     #'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
     'platforms/libqcocoa.dylib',
+    'sqldrivers/libqsqlite.dylib',
     'styles/libqmacstyle.dylib',
     # Qt6 moved TLS support out of QtNetwork and into a plugin. Without one
     # bundled, every HTTPS request (cover art, Last.fm, podcasts, internet

@@ -345,13 +345,10 @@ if(HAVE_VISUALISATIONS)
 endif(HAVE_VISUALISATIONS)
 
 
-# Build our copy of QSqlLiteDriver.
-# We do this because we can't guarantee that the driver shipped with Qt exposes the
-# raw sqlite3_ functions required for FTS support. This way we know that those symbols
-# exist at compile-time and that our code links to the same sqlite library as the
-# Qt driver.
-add_subdirectory(3rdparty/qsqlite)
-include_directories("3rdparty/qsqlite")
+# The database uses Qt's own QSQLITE driver, but registers its FTS tokenizer
+# by calling sqlite3_ functions on the driver's connection, so it links the
+# same system SQLite that Qt's driver is built against.
+find_package(SQLite3 REQUIRED)
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.
