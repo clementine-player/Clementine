@@ -321,6 +321,7 @@ Section "Delete old files" oldfiles
   ; against the old runtime can't be picked up next to the new ones.
   Delete "$INSTDIR\*.dll"
   Delete "$INSTDIR\platforms\*.dll"
+  Delete "$INSTDIR\sqldrivers\*.dll"
   Delete "$INSTDIR\styles\*.dll"
   Delete "$INSTDIR\imageformats\*.dll"
   Delete "$INSTDIR\tls\*.dll"
@@ -384,6 +385,12 @@ Section "Qt platform plugins" platforms
   SetOutPath "$INSTDIR\platforms"
 
   File "platforms\*.dll"
+SectionEnd
+
+Section "Qt SQL driver plugins" sqldrivers
+  SetOutPath "$INSTDIR\sqldrivers"
+
+  File "sqldrivers\*.dll"
 SectionEnd
 
 Section "Qt style plugins" styles
@@ -460,6 +467,7 @@ Section "Uninstall"
   ; enumerated by name.
   Delete "$INSTDIR\*.dll"
   Delete "$INSTDIR\platforms\*.dll"
+  Delete "$INSTDIR\sqldrivers\*.dll"
   Delete "$INSTDIR\styles\*.dll"
   Delete "$INSTDIR\imageformats\*.dll"
   Delete "$INSTDIR\tls\*.dll"
@@ -476,6 +484,7 @@ Section "Uninstall"
   RMDir "$INSTDIR\imageformats"
   RMDir "$INSTDIR\styles"
   RMDir "$INSTDIR\platforms"
+  RMDir "$INSTDIR\sqldrivers"
   RMDir "$INSTDIR\tls"
   RMDir "$INSTDIR\gio-modules"
   RMDir "$INSTDIR"

@@ -1,6 +1,0 @@
-This is the qsqlite plugin from the Qt SDK.  It's built statically on Windows
-and linked with libclementine.  This is so librarybackend.cpp can use QLibrary
-to load the symbols from sqlite (like sqlite3_create_function) which by
-default aren't exported from the .dll on windows.
-
-See the individual files for licensing information.

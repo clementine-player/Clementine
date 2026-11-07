@@ -59,6 +59,7 @@ Package: clementine
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
          libsqlite3-0,
+         libqt6sql6-sqlite,
          gstreamer1.0-plugins-base,
          gstreamer1.0-plugins-good,
          gstreamer1.0-plugins-ugly,

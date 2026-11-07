@@ -224,6 +224,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libusbmuxd-dev
             libx11-dev
@@ -401,6 +402,7 @@ jobs:
             libqt6core5compat6-dev
             libqt6opengl6-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libx11-dev
             libxcb1-dev
@@ -673,6 +675,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libusbmuxd-dev
             libx11-dev
@@ -1454,8 +1457,9 @@ jobs:
         working-directory: dist/windows
         run: |
           set -e
-          mkdir -p platforms styles imageformats tls
+          mkdir -p platforms sqldrivers styles imageformats tls
           cp /clang64/share/qt6/plugins/platforms/qwindows.dll platforms/
+          cp /clang64/share/qt6/plugins/sqldrivers/qsqlite.dll sqldrivers/
           # Qt6 replaced the old per-style qwindowsvistastyle.dll plugin with
           # a single qmodernwindowsstyle.dll that covers both the
           # "windowsvista" and "windows11" styles.
@@ -1501,7 +1505,7 @@ jobs:
           which ntldd
           ls -la
           : > raw_deps.txt
-          for dll in *.exe platforms/*.dll styles/*.dll imageformats/*.dll \
+          for dll in *.exe platforms/*.dll sqldrivers/*.dll styles/*.dll imageformats/*.dll \
               tls/*.dll gio-modules/*.dll gstreamer-plugins/*.dll; do
             [ -e "$dll" ] || continue
             echo "== ntldd -R $dll =="
@@ -1654,6 +1658,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libx11-dev
             libxcb1-dev
@@ -1826,6 +1831,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libx11-dev
             libxcb1-dev
@@ -1995,6 +2001,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libusbmuxd-dev
             libx11-dev
@@ -2164,6 +2171,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libusbmuxd-dev
             libx11-dev
@@ -2333,6 +2341,7 @@ jobs:
             libqt6opengl6-dev
             libsparsehash-dev
             libsqlite3-dev
+            libqt6sql6-sqlite
             libtag1-dev
             libusbmuxd-dev
             libx11-dev
