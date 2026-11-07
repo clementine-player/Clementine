@@ -26,6 +26,7 @@
 #include <QTimer>
 
 #include "core/application.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "covers/currentartloader.h"
@@ -277,17 +278,14 @@ void NetworkRemote::SetupServer() {
   internet_browser_->moveToThread(QCoreApplication::instance()->thread());
   Application* app = app_;
   InternetBrowser* browser = internet_browser_;
-  QMetaObject::invokeMethod(
-      internet_browser_,
-      [app, browser]() {
-        InternetBrowser::Hooks hooks =
-            InternetBrowser::HooksFor(app->internet_model());
-        hooks.url_handler = [app](const Song& song) {
-          return app->player()->HandlerForUrl(song.url());
-        };
-        browser->SetModel(app->internet_model()->merged_model(), hooks);
-      },
-      Qt::QueuedConnection);
+  PostTo(internet_browser_, [app, browser]() {
+    InternetBrowser::Hooks hooks =
+        InternetBrowser::HooksFor(app->internet_model());
+    hooks.url_handler = [app](const Song& song) {
+      return app->player()->HandlerForUrl(song.url());
+    };
+    browser->SetModel(app->internet_model()->merged_model(), hooks);
+  });
   connect(incoming_data_parser_.get(), SIGNAL(BrowseMessage(int, QByteArray)),
           internet_browser_, SLOT(HandleMessage(int, QByteArray)));
   connect(this, SIGNAL(ClientDisconnected(int)), internet_browser_,
@@ -567,10 +565,7 @@ void NetworkRemote::PublishServing(const QList<QHostAddress>& listening) {
   serving.only_local = only_non_public_ip_;
 
   // The registry lives on the Player's thread.
-  RendererRegistry* registry = renderer_registry_;
-  QMetaObject::invokeMethod(
-      registry, [registry, serving]() { registry->SetServing(serving); },
-      Qt::QueuedConnection);
+  PostTo(renderer_registry_, &RendererRegistry::SetServing, serving);
 }
 
 void NetworkRemote::StartStreaming() {

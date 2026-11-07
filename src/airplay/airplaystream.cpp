@@ -17,7 +17,6 @@
 
 #include "airplaystream.h"
 
-#include <QMetaObject>
 #include <QMutexLocker>
 #include <QNetworkDatagram>
 #include <QRandomGenerator>
@@ -27,6 +26,7 @@
 #include <chrono>
 
 #include "airplaycrypto.h"
+#include "core/closure.h"
 #include "core/logging.h"
 
 namespace {
@@ -136,7 +136,7 @@ void AirPlayStream::Write(const char* pcm, int size) {
   if (NtpToTimestamp(NtpNow()) > head_timestamp_ + kMaxGapFrames) {
     qLog(Debug) << "AirPlay stream ran dry; starting again from now";
     ReanchorLocked();
-    QMetaObject::invokeMethod(this, "SendSync", Qt::QueuedConnection);
+    PostTo(this, &AirPlayStream::SendSync);
   }
   pending_.append(pcm, size);
   int pos = 0;
@@ -188,12 +188,9 @@ void AirPlayStream::SendDatagram(const QByteArray& datagram,
     return;
   }
   // From the streaming thread: sockets belong to their own thread.
-  QMetaObject::invokeMethod(
-      this,
-      [this, datagram, host, port]() {
-        audio_socket_->writeDatagram(datagram, host, port);
-      },
-      Qt::QueuedConnection);
+  PostTo(this, [this, datagram, host, port]() {
+    audio_socket_->writeDatagram(datagram, host, port);
+  });
 }
 
 void AirPlayStream::ReanchorLocked() {

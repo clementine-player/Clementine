@@ -17,12 +17,12 @@
 
 #include "core/sleepinhibitor.h"
 
-#include <QMetaObject>
 #include <QSettings>
 #include <QTimer>
 #include <QtGlobal>
 
 #include "config.h"
+#include "core/closure.h"
 #include "core/logging.h"
 
 #if defined(Q_OS_DARWIN)
@@ -59,11 +59,7 @@ SleepInhibitor::Hold::Hold(SleepInhibitor* inhibitor, Activity activity)
     : inhibitor_(inhibitor), activity_(activity) {}
 
 SleepInhibitor::Hold::~Hold() {
-  SleepInhibitor* inhibitor = inhibitor_;
-  Activity activity = activity_;
-  // Runs straight away on the inhibitor's thread, and is queued from others.
-  QMetaObject::invokeMethod(
-      inhibitor, [inhibitor, activity]() { inhibitor->RemoveHold(activity); });
+  CallOn(inhibitor_, &SleepInhibitor::RemoveHold, activity_);
 }
 
 SleepInhibitor::SleepInhibitor(QObject* parent)
@@ -101,7 +97,7 @@ SleepInhibitor::CreatePlatformBackend() {
 
 std::unique_ptr<SleepInhibitor::Hold> SleepInhibitor::Acquire(
     Activity activity) {
-  QMetaObject::invokeMethod(this, [this, activity]() { AddHold(activity); });
+  CallOn(this, &SleepInhibitor::AddHold, activity);
   return std::unique_ptr<Hold>(new Hold(this, activity));
 }
 

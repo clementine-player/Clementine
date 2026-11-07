@@ -32,6 +32,7 @@
 #include <memory>
 
 #include "config.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/signalchecker.h"
@@ -449,9 +450,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   // This runs on a worker thread, and a timer can only be started from the
   // thread it belongs to. StopTypefind() stops it there too, and is queued
   // after this.
-  QMetaObject::invokeMethod(
-      timeout_timer_, [this]() { timeout_timer_->start(timeout_); },
-      Qt::QueuedConnection);
+  PostTo(timeout_timer_, qOverload<int>(&QTimer::start), timeout_);
 
   // Start "playing"
   gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
@@ -657,7 +656,7 @@ void SongLoader::StopTypefindAsync(bool success) {
   state_ = Finished;
   success_ = success;
 
-  metaObject()->invokeMethod(this, "StopTypefind", Qt::QueuedConnection);
+  PostTo(this, &SongLoader::StopTypefind);
 }
 
 bool SongLoader::LoadRemotePlaylist(const QUrl& url) {

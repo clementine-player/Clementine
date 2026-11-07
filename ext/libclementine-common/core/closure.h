@@ -185,6 +185,70 @@ QMetaObject::Connection NewClosure(QFuture<T> future, QObject* context,
   return connection;
 }
 
+// Calls a receiver's method, or any callable, on |context|'s thread, with the
+// bound arguments - for handing work to an object that lives on another
+// thread, from whichever thread the caller is on:
+//
+//   PostTo(registry_, &RendererRegistry::SetServing, serving);
+//   PostTo(manager, [manager, id]() { manager->SetActivePlaylist(id); });
+//
+// PostTo always queues: the call runs once the context's thread gets back to
+// its event loop, even when that is the caller's own thread, so it never runs
+// inside the caller. CallOn runs straight away when the caller is already on
+// the context's thread, and queues otherwise.
+//
+// Either way the call is dropped if |context| is destroyed before it runs, so
+// pass the object whose lifetime the callable depends on. |context| itself
+// has to be alive when posting. Bound arguments are copied when posting, so
+// a raw pointer among them has to outlive the call.
+
+namespace _detail {
+
+template <typename Receiver, typename Slot, typename... BoundArgs>
+void InvokeOn(Receiver* receiver, Slot slot, Qt::ConnectionType type,
+              BoundArgs... bound) {
+  static_assert(_detail::ReceiverAccepts<Slot, Receiver, BoundArgs...>,
+                "The receiver must take the bound arguments.");
+  QMetaObject::invokeMethod(
+      receiver, [receiver, slot, bound...]() { (receiver->*slot)(bound...); },
+      type);
+}
+
+template <typename Func, typename... BoundArgs>
+void InvokeCallableOn(QObject* context, Func func, Qt::ConnectionType type,
+                      BoundArgs... bound) {
+  static_assert(_detail::CallableAccepts<Func, BoundArgs...>,
+                "The callable must take the bound arguments.");
+  QMetaObject::invokeMethod(
+      context, [func, bound...]() mutable { func(bound...); }, type);
+}
+
+}  // namespace _detail
+
+template <typename Receiver, typename Slot, typename... BoundArgs>
+  requires std::is_member_function_pointer_v<Slot>
+void PostTo(Receiver* receiver, Slot slot, BoundArgs... bound) {
+  _detail::InvokeOn(receiver, slot, Qt::QueuedConnection, bound...);
+}
+
+template <typename Func, typename... BoundArgs>
+  requires(!std::is_member_function_pointer_v<std::decay_t<Func>>)
+void PostTo(QObject* context, Func func, BoundArgs... bound) {
+  _detail::InvokeCallableOn(context, func, Qt::QueuedConnection, bound...);
+}
+
+template <typename Receiver, typename Slot, typename... BoundArgs>
+  requires std::is_member_function_pointer_v<Slot>
+void CallOn(Receiver* receiver, Slot slot, BoundArgs... bound) {
+  _detail::InvokeOn(receiver, slot, Qt::AutoConnection, bound...);
+}
+
+template <typename Func, typename... BoundArgs>
+  requires(!std::is_member_function_pointer_v<std::decay_t<Func>>)
+void CallOn(QObject* context, Func func, BoundArgs... bound) {
+  _detail::InvokeCallableOn(context, func, Qt::AutoConnection, bound...);
+}
+
 namespace _detail {
 // Somewhere between one and two minutes, so that everything that wants to
 // run "in a minute or so" doesn't wake up at once.

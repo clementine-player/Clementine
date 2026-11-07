@@ -23,12 +23,12 @@
 #include <windns.h>
 // clang-format on
 
-#include <QMetaObject>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QtEndian>
 #include <functional>
 
+#include "core/closure.h"
 #include "core/logging.h"
 
 namespace {
@@ -84,9 +84,8 @@ struct WindowsDnsSdBrowser::Shared {
   void Post(std::function<void(WindowsDnsSdBrowser*)> f) {
     QMutexLocker l(&mutex);
     if (!owner) return;
-    WindowsDnsSdBrowser* o = owner;
-    // A call queued for an object that's then destroyed is dropped.
-    QMetaObject::invokeMethod(o, [o, f]() { f(o); }, Qt::QueuedConnection);
+    // A call posted to an object that's then destroyed is dropped.
+    PostTo(owner, f, owner);
   }
 };
 
