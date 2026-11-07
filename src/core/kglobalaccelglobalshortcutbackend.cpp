@@ -85,6 +85,11 @@ bool KGlobalAccelShortcutBackend::DoRegister() {
                    this, &KGlobalAccelShortcutBackend::OnShortcutPressed,
                    Qt::UniqueConnection);
 
+  QObject::connect(component_,
+                   &OrgKdeKglobalaccelComponentInterface::globalShortcutRepeated,
+                   this, &KGlobalAccelShortcutBackend::OnShortcutPressed,
+                   Qt::UniqueConnection);
+
   return complete;
 #else   // HAVE_DBUS
   qLog(Warning) << "dbus not available";
@@ -104,6 +109,9 @@ void KGlobalAccelShortcutBackend::DoUnregister() {
   QObject::disconnect(
       component_, &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
       this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
+  QObject::disconnect(
+        component_, &OrgKdeKglobalaccelComponentInterface::globalShortcutRepeated,
+        this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
 #endif  // HAVE_DBUS
 }
 
