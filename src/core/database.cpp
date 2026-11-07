@@ -310,8 +310,11 @@ QSqlDatabase Database::Connect() {
         ":pointer", QByteArray(reinterpret_cast<const char*>(&sFTSTokenizer),
                                sizeof(&sFTSTokenizer)));
     if (!set_fts_tokenizer.exec()) {
-      qLog(Warning) << "Couldn't register FTS3 tokenizer : "
-                    << set_fts_tokenizer.lastError();
+      // Without the tokenizer every query on the _fts tables fails, so the
+      // library can't be searched or updated. Stop here rather than carry on
+      // with that.
+      qLog(Fatal) << "Couldn't register FTS3 tokenizer:"
+                  << set_fts_tokenizer.lastError();
     }
     // Implicit invocation of ~QSqlQuery() when leaving the scope
     // to release any remaining database locks!
