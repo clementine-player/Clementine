@@ -2436,7 +2436,11 @@ jobs:
     needs:
       - lint
       - test
-    runs-on: macos-26
+    # Built on the oldest macOS Apple still patches, because Homebrew builds
+    # its bottles for the macOS they're made on, and the bundle ships them:
+    # on a newer runner the app would need that newer macOS. The Smoke test
+    # (Mac) job runs the DMG on the newer ones.
+    runs-on: macos-15
     # id-token: write is what lets the "Authenticate to GCP" step below
     # trade a GitHub OIDC token for short-lived GCP credentials (Workload
     # Identity Federation, no static key involved) - see
@@ -2468,6 +2472,14 @@ jobs:
       # Qt5-linked liblastfm from isn't needed any more either.
       - name: Install dependencies
         run: brew bundle
+      # The newest Xcode on the image, for the newest SDK: an app built
+      # against an older SDK gets the older look on newer macOS.
+      - name: Select Xcode
+        run: |
+          xcode="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$xcode"
+          xcodebuild -version
+          xcrun --show-sdk-version
 
       # Real Developer ID signing runs for pushes to master (release builds)
       # and for PRs opened from branches *within this repo* - so the
@@ -2554,6 +2566,7 @@ jobs:
           cmake .. \
             -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=15.0 \
             -DENABLE_LIBGPOD=OFF \
             -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
             -DCMAKE_FRAMEWORK_PATH="$RUNNER_TEMP/sparkle" \
@@ -2576,6 +2589,24 @@ jobs:
       - name: Build DMG
         working-directory: bin
         run: make dmg -j$(sysctl -n hw.ncpu)
+      # Every binary in the bundle says which macOS it needs, and the newest
+      # of them is what the app needs: one Homebrew library built for a
+      # newer macOS is enough to stop it starting on this one.
+      - name: Check the bundle's minimum macOS
+        working-directory: bin
+        run: |
+          status=0
+          while IFS= read -r -d '' file; do
+            file -b "$file" | grep -q Mach-O || continue
+            minos="$(otool -l "$file" | awk '$1 == "minos" { print $2; exit }')"
+            if [[ -z "$minos" ]]; then
+              echo "::warning::$file: no minimum macOS"
+            elif [[ "$(printf '%s\n' "$minos" 15.0 | sort -V | tail -1)" != 15.0 ]]; then
+              echo "::error::$file needs macOS $minos"
+              status=1
+            fi
+          done < <(find clementine.app -type f -print0)
+          exit $status
 
       # Runs the actual packaged .app (not a dev build) end to end through
       # real playback, so a plugin/dependency that's missing or broken only
@@ -2657,6 +2688,57 @@ jobs:
         with:
           path: ${{ github.workspace }}/.ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+
+  # The DMG that build_mac made, on each newer macOS it should run on.
+  smoke_mac:
+    name: Smoke test (Mac, ${{ matrix.runner }})
+    needs:
+      - build_mac
+    strategy:
+      fail-fast: false
+      matrix:
+        # GitHub names its macOS 27 image after its Xcode.
+        runner: [macos-26, xcode-27]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: release_mac
+          path: dmg
+      - name: Install the app
+        run: |
+          sw_vers
+          mount="$(mktemp -d)"
+          hdiutil attach -nobrowse -readonly -mountpoint "$mount" dmg/clementine-*.dmg
+          cp -R "$mount"/*.app "$RUNNER_TEMP/clementine.app"
+          hdiutil detach "$mount"
+      - name: Smoke test - local playback
+        timeout-minutes: 5
+        run: >
+          "$RUNNER_TEMP/clementine.app/Contents/MacOS/clementine"
+          --play-and-exit 30 tests/data/beep.mp3
+      - name: Smoke test - HTTPS playback
+        timeout-minutes: 5
+        run: >
+          "$RUNNER_TEMP/clementine.app/Contents/MacOS/clementine"
+          --play-and-exit 30
+          https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+      - name: Smoke test - trusted certificates are the system's
+        run: >
+          echo | openssl s_client -verify_return_error
+          -connect valid-isrgrootx1.letsencrypt.org:443
+          -servername valid-isrgrootx1.letsencrypt.org
+          -CAfile "$HOME/Library/Application Support/Clementine/trusted-certificates.pem"
+      - name: Show crash reports
+        if: failure()
+        run: |
+          shopt -s nullglob
+          for report in ~/Library/Logs/DiagnosticReports/clementine*; do
+            echo "::group::$(basename "$report")"
+            cat "$report"
+            echo "::endgroup::"
+          done
 
   # The single required status check for master: it passes only when every
   # job above did. Adding or removing a build job means editing this list
@@ -2824,6 +2906,7 @@ jobs:
       - build_fedora_44
       - build_fedora_45
       - build_mac
+      - smoke_mac
       - build_mingw
     runs-on: ubuntu-24.04
     steps:
