@@ -55,12 +55,25 @@ const QMap<QString, Song::FileType> kFiletypeId = QMap<QString, Song::FileType>(
 
 const QString kAllowedChars = "smhd";
 
+namespace {
+
+// An FTS5 string matching anything that starts with term. Quoting it means
+// characters such as "/" and "'" are split on by the tokenizer, as they are in
+// the indexed text, rather than being a syntax error.
+QString FtsPrefixTerm(QString term) {
+  term.replace('"', "\"\"");
+  return "\"" + term + "\"*";
+}
+
+}  // namespace
+
 LibraryQuery::LibraryQuery(const QueryOptions& options)
     : include_unavailable_(false), join_with_fts_(false), limit_(-1) {
   if (!options.filter().isEmpty()) {
     // We need to munge the filter text a little bit to get it to work as
-    // expected with sqlite's FTS3:
-    //  1) Append * to all tokens.
+    // expected with sqlite's FTS5:
+    //  1) Quote each token and append *, so that it matches as a prefix and
+    //     punctuation in it (AC/DC, Don't) isn't read as query syntax.
     //  2) Prefix "fts" to column names.
     //  3) Remove colons which don't correspond to column names.
     //
@@ -86,7 +99,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
         if (Song::kFtsColumns.contains(
                 "fts" + columntoken,
                 Qt::CaseInsensitive)) {  // Is it a FTS column?
-          query += "fts" + columntoken + ":" + subtoken + "* ";
+          if (!subtoken.isEmpty()) {
+            query += "fts" + columntoken + ":" + FtsPrefixTerm(subtoken) + " ";
+          }
         } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
           // We need to extract the operator and the value from the subtoken
           QRegularExpression operatorRe("^(" + kNumericCompOperators.join("|") +
@@ -133,10 +148,11 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
         } else {  // We did't recognize this as a column
           token.replace(":", " ");
           token = token.trimmed();
-          query += token + "* ";
+          if (!token.isEmpty()) query += FtsPrefixTerm(token) + " ";
         }
       } else {
-        query += token + "* ";
+        token = token.trimmed();
+        if (!token.isEmpty()) query += FtsPrefixTerm(token) + " ";
       }
     }
 

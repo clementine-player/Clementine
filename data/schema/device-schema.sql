@@ -69,9 +69,9 @@ CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);
 
 CREATE INDEX idx_device_%deviceid_songs_comp_artist ON device_%deviceid_songs (effective_compilation, artist);
 
-CREATE VIRTUAL TABLE device_%deviceid_fts USING fts3(
-  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment, ftsyear
-  tokenize=unicode
+CREATE VIRTUAL TABLE device_%deviceid_fts USING fts5(
+  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment, ftsyear,
+  tokenize = 'unicode61 remove_diacritics 2'
 );
 
 UPDATE devices SET schema_version=0 WHERE ROWID=%deviceid;

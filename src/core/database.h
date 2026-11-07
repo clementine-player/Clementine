@@ -34,14 +34,6 @@
 #include <QSqlError>
 #include <QStringList>
 
-#include "gtest/gtest_prod.h"
-
-extern "C" {
-struct sqlite3_tokenizer;
-struct sqlite3_tokenizer_cursor;
-struct sqlite3_tokenizer_module;
-}
-
 class Application;
 
 class Database : public QObject {
@@ -100,6 +92,7 @@ class Database : public QObject {
                               const QStringList& commands);
 
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
+  void RebuildFtsTablesWithFts5(QSqlDatabase* db);
   void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
   bool IntegrityCheck(QSqlDatabase db);
@@ -130,53 +123,6 @@ class Database : public QObject {
 
   // This is the schema version of Clementine's DB from the app's last run.
   int startup_schema_version_;
-
-  FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
-  FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
-  FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
-  FRIEND_TEST(DatabaseTest, FTSCursorWorks);
-  FRIEND_TEST(DatabaseTest, FTSOpenLeavesCyrillicQueries);
-
-  // Do static initialisation like loading sqlite functions.
-  static void StaticInit();
-
-  typedef int (*Sqlite3CreateFunc)(sqlite3*, const char*, int, int, void*,
-                                   void (*)(sqlite3_context*, int,
-                                            sqlite3_value**),
-                                   void (*)(sqlite3_context*, int,
-                                            sqlite3_value**),
-                                   void (*)(sqlite3_context*));
-
-  static sqlite3_tokenizer_module* sFTSTokenizer;
-
-  static int FTSCreate(int argc, const char* const* argv,
-                       sqlite3_tokenizer** tokenizer);
-  static int FTSDestroy(sqlite3_tokenizer* tokenizer);
-  static int FTSOpen(sqlite3_tokenizer* tokenizer, const char* input, int bytes,
-                     sqlite3_tokenizer_cursor** cursor);
-  static int FTSClose(sqlite3_tokenizer_cursor* cursor);
-  static int FTSNext(sqlite3_tokenizer_cursor* cursor, const char** token,
-                     int* bytes, int* start_offset, int* end_offset,
-                     int* position);
-  struct Token {
-    Token(const QString& token, int start, int end);
-    QString token;
-    int start_offset;
-    int end_offset;
-  };
-
-  // Based on sqlite3_tokenizer.
-  struct UnicodeTokenizer {
-    const sqlite3_tokenizer_module* pModule;
-  };
-
-  struct UnicodeTokenizerCursor {
-    const sqlite3_tokenizer* pTokenizer;
-
-    QList<Token> tokens;
-    int position;
-    QByteArray current_utf8;
-  };
 };
 
 class MemoryDatabase : public Database {
