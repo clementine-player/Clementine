@@ -29,8 +29,6 @@
 
 #include <QCoreApplication>
 #include <QDir>
-#include <QLibrary>
-#include <QLibraryInfo>
 #include <QRegularExpression>
 #include <QScopeGuard>
 #include <QSqlDriver>
@@ -48,165 +46,11 @@
 #include "utilities.h"
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 54;
+const int Database::kSchemaVersion = 55;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
 QMutex Database::sNextConnectionIdMutex;
-
-Database::Token::Token(const QString& token, int start, int end)
-    : token(token), start_offset(start), end_offset(end) {}
-
-struct sqlite3_tokenizer_module {
-  int iVersion;
-  int (*xCreate)(int argc,                /* Size of argv array */
-                 const char* const* argv, /* Tokenizer argument strings */
-                 sqlite3_tokenizer** ppTokenizer); /* OUT: Created tokenizer */
-
-  int (*xDestroy)(sqlite3_tokenizer* pTokenizer);
-
-  int (*xOpen)(
-      sqlite3_tokenizer* pTokenizer,        /* Tokenizer object */
-      const char* pInput, int nBytes,       /* Input buffer */
-      sqlite3_tokenizer_cursor** ppCursor); /* OUT: Created tokenizer cursor */
-
-  int (*xClose)(sqlite3_tokenizer_cursor* pCursor);
-
-  int (*xNext)(
-      sqlite3_tokenizer_cursor* pCursor,  /* Tokenizer cursor */
-      const char** ppToken, int* pnBytes, /* OUT: Normalized text for token */
-      int* piStartOffset, /* OUT: Byte offset of token in input buffer */
-      int* piEndOffset,   /* OUT: Byte offset of end of token in input buffer */
-      int* piPosition);   /* OUT: Number of tokens returned before this one */
-};
-
-struct sqlite3_tokenizer {
-  const sqlite3_tokenizer_module* pModule; /* The module for this tokenizer */
-  /* Tokenizer implementations will typically add additional fields */
-};
-
-struct sqlite3_tokenizer_cursor {
-  sqlite3_tokenizer* pTokenizer; /* Tokenizer for this cursor. */
-  /* Tokenizer implementations will typically add additional fields */
-};
-
-sqlite3_tokenizer_module* Database::sFTSTokenizer = nullptr;
-
-int Database::FTSCreate(int argc, const char* const* argv,
-                        sqlite3_tokenizer** tokenizer) {
-  *tokenizer = reinterpret_cast<sqlite3_tokenizer*>(new UnicodeTokenizer);
-
-  return SQLITE_OK;
-}
-
-int Database::FTSDestroy(sqlite3_tokenizer* tokenizer) {
-  UnicodeTokenizer* real_tokenizer =
-      reinterpret_cast<UnicodeTokenizer*>(tokenizer);
-  delete real_tokenizer;
-  return SQLITE_OK;
-}
-
-int Database::FTSOpen(sqlite3_tokenizer* pTokenizer, const char* input,
-                      int bytes, sqlite3_tokenizer_cursor** cursor) {
-  UnicodeTokenizerCursor* new_cursor = new UnicodeTokenizerCursor;
-  new_cursor->pTokenizer = pTokenizer;
-  new_cursor->position = 0;
-
-  QString str = QString::fromUtf8(input, bytes).toLower();
-  QChar* data = str.data();
-  // Decompose and strip punctuation.
-  QList<Token> tokens;
-  QString token;
-  int start_offset = 0;
-  int offset = 0;
-  for (int i = 0; i < str.length(); ++i) {
-    QChar c = data[i];
-    ushort unicode = c.unicode();
-    if (unicode <= 0x007f) {
-      offset += 1;
-    } else if (unicode >= 0x0080 && unicode <= 0x07ff) {
-      offset += 2;
-    } else if (unicode >= 0x0800) {
-      offset += 3;
-    }
-    // Unicode astral planes unsupported in Qt?
-    /*else if (unicode >= 0x010000 && unicode <= 0x10ffff) {
-      offset += 4;
-    }*/
-
-    if (!data[i].isLetterOrNumber()) {
-      // Token finished.
-      if (token.length() != 0) {
-        tokens << Token(token, start_offset, offset - 1);
-        start_offset = offset;
-        token.clear();
-      } else {
-        ++start_offset;
-      }
-    } else {
-      if (data[i].decompositionTag() != QChar::NoDecomposition) {
-        token.push_back(data[i].decomposition()[0]);
-      } else {
-        token.push_back(data[i]);
-      }
-    }
-
-    if (i == str.length() - 1) {
-      if (token.length() != 0) {
-        tokens << Token(token, start_offset, offset);
-        token.clear();
-      }
-    }
-  }
-
-  new_cursor->tokens = tokens;
-  *cursor = reinterpret_cast<sqlite3_tokenizer_cursor*>(new_cursor);
-
-  return SQLITE_OK;
-}
-
-int Database::FTSClose(sqlite3_tokenizer_cursor* cursor) {
-  UnicodeTokenizerCursor* real_cursor =
-      reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
-  delete real_cursor;
-
-  return SQLITE_OK;
-}
-
-int Database::FTSNext(sqlite3_tokenizer_cursor* cursor, const char** token,
-                      int* bytes, int* start_offset, int* end_offset,
-                      int* position) {
-  UnicodeTokenizerCursor* real_cursor =
-      reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
-
-  QList<Token> tokens = real_cursor->tokens;
-  if (real_cursor->position >= tokens.size()) {
-    return SQLITE_DONE;
-  }
-
-  Token t = tokens[real_cursor->position];
-  QByteArray utf8 = t.token.toUtf8();
-  *token = utf8.constData();
-  *bytes = utf8.size();
-  *start_offset = t.start_offset;
-  *end_offset = t.end_offset;
-  *position = real_cursor->position++;
-
-  real_cursor->current_utf8 = utf8;
-
-  return SQLITE_OK;
-}
-
-void Database::StaticInit() {
-  sFTSTokenizer = new sqlite3_tokenizer_module;
-  sFTSTokenizer->iVersion = 0;
-  sFTSTokenizer->xCreate = &Database::FTSCreate;
-  sFTSTokenizer->xDestroy = &Database::FTSDestroy;
-  sFTSTokenizer->xOpen = &Database::FTSOpen;
-  sFTSTokenizer->xNext = &Database::FTSNext;
-  sFTSTokenizer->xClose = &Database::FTSClose;
-  return;
-}
 
 Database::Database(Application* app, QObject* parent,
                    const QString& database_name)
@@ -261,11 +105,14 @@ QSqlDatabase Database::Connect() {
     return db;
   }
 
-  // Set up the FTS tokenizer.
-  if (!sFTSTokenizer) StaticInit();
-
   {
-    // The tokenizer is set up below by calling the SQLite we link against on
+    // Library search used FTS3 tables with a tokenizer of our own, registered
+    // as "unicode". Search now uses FTS5 with SQLite's own unicode61, but a
+    // database from before schema 55 still has those FTS3 tables, and SQLite
+    // can't even drop them without a tokenizer of that name. So the name
+    // stays registered, for SQLite's unicode61 FTS3 tokenizer.
+    //
+    // That's done below by calling the SQLite we link against on
     // the connection Qt's driver opened, so the driver has to be using that
     // same SQLite. A Qt built with its own copy of SQLite (configured without
     // -system-sqlite) usually has a different version, so catch that here
@@ -303,17 +150,12 @@ QSqlDatabase Database::Connect() {
     }
 #endif
 
-    QSqlQuery set_fts_tokenizer(db);
-    set_fts_tokenizer.prepare("SELECT fts3_tokenizer(:name, :pointer)");
-    set_fts_tokenizer.bindValue(":name", "unicode");
-    set_fts_tokenizer.bindValue(
-        ":pointer", QByteArray(reinterpret_cast<const char*>(&sFTSTokenizer),
-                               sizeof(&sFTSTokenizer)));
-    if (!set_fts_tokenizer.exec()) {
-      // Without the tokenizer every query on the _fts tables fails, so the
-      // library can't be searched or updated. Stop here rather than carry on
-      // with that.
-      qLog(Fatal) << "Couldn't register FTS3 tokenizer:"
+    QSqlQuery set_fts_tokenizer(
+        "SELECT fts3_tokenizer('unicode', fts3_tokenizer('unicode61'))", db);
+    if (set_fts_tokenizer.lastError().isValid()) {
+      // Without it, the FTS3 tables of a database from before schema 55 can't
+      // be dropped to make way for FTS5 ones.
+      qLog(Fatal) << "Couldn't register the unicode FTS3 tokenizer:"
                   << set_fts_tokenizer.lastError();
     }
     // Implicit invocation of ~QSqlQuery() when leaving the scope
@@ -470,7 +312,14 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase& db) {
   else
     filename = QString(":/schema/schema-%1.sql").arg(version);
 
-  if (version == 31) {
+  if (version == 55) {
+    ScopedTransaction t(&db);
+    RebuildFtsTablesWithFts5(&db);
+    qLog(Debug) << "Applying database schema update" << version << "from"
+                << filename;
+    ExecSchemaCommandsFromFile(db, filename, version - 1, true);
+    t.Commit();
+  } else if (version == 31) {
     // This version used to do a bad job of converting filenames in the songs
     // table to file:// URLs.  Now we do it properly here instead.
     ScopedTransaction t(&db);
@@ -491,6 +340,56 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase& db) {
     qLog(Debug) << "Applying database schema update" << version << "from"
                 << filename;
     ExecSchemaCommandsFromFile(db, filename, version - 1);
+  }
+}
+
+void Database::RebuildFtsTablesWithFts5(QSqlDatabase* db) {
+  // Each songs table has an FTS table beside it: songs has songs_fts,
+  // magnatune_songs has magnatune_songs_fts, and device_1_songs has
+  // device_1_fts. Find them all from the schema rather than listing them, so
+  // that every device and service table is caught.
+  QStringList fts_tables;
+  {
+    QSqlQuery q(
+        "SELECT name FROM sqlite_master WHERE type = 'table'"
+        " AND sql LIKE 'CREATE VIRTUAL TABLE%USING fts3%'",
+        *db);
+    while (q.next()) fts_tables << q.value(0).toString();
+  }
+  const QStringList tables = db->tables();
+  // The columns as they are at schema 55, which later schema changes alter
+  // in their own steps.
+  const QString fts_columns =
+      "ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer,"
+      " ftsperformer, ftsgrouping, ftsgenre, ftscomment, ftsyear";
+
+  for (const QString& fts_table : fts_tables) {
+    QString songs_table = fts_table;
+    songs_table.chop(QString("_fts").length());
+    if (songs_table.startsWith("device_") && !songs_table.endsWith("_songs")) {
+      songs_table += "_songs";
+    }
+
+    qLog(Info) << "Rebuilding" << fts_table << "with FTS5 from" << songs_table;
+    QSqlQuery drop(db->exec(QString("DROP TABLE %1").arg(fts_table)));
+    if (CheckErrors(drop)) qFatal("Unable to update music library database");
+
+    QSqlQuery create(
+        db->exec(QString("CREATE VIRTUAL TABLE %1 USING fts5(%2,"
+                         " tokenize = 'unicode61 remove_diacritics 2')")
+                     .arg(fts_table, fts_columns)));
+    if (CheckErrors(create)) qFatal("Unable to update music library database");
+
+    if (!tables.contains(songs_table)) {
+      qLog(Warning) << "No songs table" << songs_table << "for" << fts_table;
+      continue;
+    }
+    QSqlQuery fill(db->exec(
+        QString("INSERT INTO %1 (ROWID, %2)"
+                " SELECT ROWID, title, album, artist, albumartist, composer,"
+                " performer, grouping, genre, comment, year FROM %3")
+            .arg(fts_table, fts_columns, songs_table)));
+    if (CheckErrors(fill)) qFatal("Unable to update music library database");
   }
 }
 
