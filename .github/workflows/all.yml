@@ -2623,6 +2623,19 @@ jobs:
           (( checked > 0 )) || status=1
           exit $status
 
+      # Qt's SQLite driver uses the system libsqlite3, and the library's
+      # search is moving to FTS5, so check that this macOS's SQLite has it
+      # (and accent folding) before relying on it.
+      - name: Check the system SQLite has FTS5
+        run: |
+          otool -L /usr/bin/sqlite3
+          count="$(/usr/bin/sqlite3 :memory: "
+            SELECT sqlite_version();
+            CREATE VIRTUAL TABLE t USING fts5(a, tokenize='unicode61 remove_diacritics 2');
+            INSERT INTO t VALUES ('Café AC/DC');
+            SELECT count(*) FROM t WHERE t MATCH '\"cafe\"* \"ac/dc\"*';" | tail -1)"
+          test "$count" = 1
+
       # Runs the actual packaged .app (not a dev build) end to end through
       # real playback, so a plugin/dependency that's missing or broken only
       # in the *packaged* app - which a successful build can't catch, and
@@ -2728,6 +2741,18 @@ jobs:
           hdiutil attach -nobrowse -readonly -mountpoint "$mount" dmg/clementine-*.dmg
           cp -R "$mount"/*.app "$RUNNER_TEMP/clementine.app"
           hdiutil detach "$mount"
+      # Qt's SQLite driver uses the system libsqlite3, and the library's
+      # search is moving to FTS5, so check that this macOS's SQLite has it
+      # (and accent folding) before relying on it.
+      - name: Check the system SQLite has FTS5
+        run: |
+          otool -L /usr/bin/sqlite3
+          count="$(/usr/bin/sqlite3 :memory: "
+            SELECT sqlite_version();
+            CREATE VIRTUAL TABLE t USING fts5(a, tokenize='unicode61 remove_diacritics 2');
+            INSERT INTO t VALUES ('Café AC/DC');
+            SELECT count(*) FROM t WHERE t MATCH '\"cafe\"* \"ac/dc\"*';" | tail -1)"
+          test "$count" = 1
       - name: Smoke test - local playback
         timeout-minutes: 5
         run: >
