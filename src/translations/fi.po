@@ -164,7 +164,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote is
 #. on, but couldn't open its port, usually because another program has
 #. it. %1 is the device's name; %2 is the port number, such as 5500.
-#: networkremote/streaming/rendererregistry.cpp:575
+#: networkremote/streaming/rendererregistry.cpp:571
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
@@ -175,7 +175,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote only
 #. listens on addresses the user chose (Settings, Network Remote), and
 #. none is on the device's network. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:586
+#: networkremote/streaming/rendererregistry.cpp:582
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which doesn't "
@@ -187,7 +187,7 @@ msgstr ""
 #. audio from Clementine through the network remote, the server the
 #. phone remote apps also connect to (Settings, Network Remote). %1 is
 #. the device's name, such as "Living Room TV".
-#: networkremote/streaming/rendererregistry.cpp:567
+#: networkremote/streaming/rendererregistry.cpp:563
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which is "
@@ -198,7 +198,7 @@ msgstr ""
 #. can't get its music from Clementine's network remote: the remote's
 #. "Only allow connections from the local network" setting refuses it,
 #. since its address isn't a private one. %1 is the device's name.
-#: networkremote/streaming/rendererregistry.cpp:594
+#: networkremote/streaming/rendererregistry.cpp:590
 #, qt-format
 msgid ""
 "%1 gets its music from Clementine through the network remote, which only "
@@ -1045,7 +1045,7 @@ msgstr "Vihainen"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:198
 msgid "Append files/URLs to the playlist"
 msgstr "Lisää tiedostoja/verkko-osoitteita soittolistalle"
 
@@ -1338,7 +1338,7 @@ msgstr "Vaihda sekoituksen tilaa"
 msgid "Change the currently playing song"
 msgstr "Vaihda soitettavaa kappaletta"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:204
 msgid "Change the language"
 msgstr "Vaihda kieltä"
 
@@ -1585,7 +1585,7 @@ msgstr "S&äveltäjä"
 msgid "Colors"
 msgstr "Värit"
 
-#: core/commandlineoptions.cpp:211
+#: core/commandlineoptions.cpp:207
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Pilkuin erotettu lista luokka:taso -määritteitä, jossa taso on väliltä 0-3"
 
@@ -1872,7 +1872,7 @@ msgstr "Kansikuva asetettu kohteesta %1"
 msgid "Covers from %1"
 msgstr "Kansikuvat kohteesta %1"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:197
 msgid "Create a new playlist with files/URLs"
 msgstr "Luo uusi soittolista tiedosto tai verkko-osoite"
 
@@ -1955,11 +1955,11 @@ msgstr "Päivää"
 msgid "De&fault"
 msgstr "&Oletus"
 
-#: core/commandlineoptions.cpp:191
+#: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
 msgstr "Vähennä voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:193
+#: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähennä voimakkuutta <value> prosentilla"
 
@@ -2019,7 +2019,7 @@ msgstr "Poista asetus"
 msgid "Delete smart playlist"
 msgstr "Poista älykäs soittolista"
 
-#: core/commandlineoptions.cpp:213
+#: core/commandlineoptions.cpp:209
 msgid "Delete the currently playing song"
 msgstr "Poista nyt soiva kappale"
 
@@ -2140,7 +2140,7 @@ msgstr "Tiedonsiirron säännöstely"
 msgid "Display options"
 msgstr "Näkymän asetukset"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Display the on-screen-display"
 msgstr "Näytä ilmoituslaatikko"
 
@@ -2476,11 +2476,11 @@ msgstr "Jakson tiedot"
 msgid "Equalizer"
 msgstr "Taajuuskorjain"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:205
 msgid "Equivalent to --log-levels *:1"
 msgstr "Vastaa --log-levels *:1"
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:206
 msgid "Equivalent to --log-levels *:3"
 msgstr "Vastaa --log-levels *:3"
 
@@ -3174,11 +3174,11 @@ msgstr "Ei yhteensopiva Subsonic REST-protokollaversio. Palvelin on päivitettä
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Puutteelliset asetukset, varmista että kaikki kentät on täytetty."
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:186
 msgid "Increase the volume by 4 percent"
 msgstr "Lisää voimakkuutta 4 prosenttia"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:188
 msgid "Increase the volume by <value> percent"
 msgstr "Lisää voimakkuutta <value> prosentilla"
 
@@ -3505,7 +3505,7 @@ msgstr "Kappaletietoja ladataan"
 msgid "Loading..."
 msgstr "Ladataan..."
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:199
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Lataa tiedostoja tai osoitteita, korvaten samalla nykyisen soittolistan"
 
@@ -4170,7 +4170,7 @@ msgstr "Julkaisuvuoden tunnistetuki"
 msgid "Other"
 msgstr "Muu"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:202
 msgid "Other options"
 msgstr "Muut valinnat"
 
@@ -4236,7 +4236,7 @@ msgstr "Salasana"
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Pause playback"
 msgstr "Keskeytä soitto"
 
@@ -4286,11 +4286,11 @@ msgstr "Soita kappaletta ja näe esittäjän kuvia ja elämänkertaa täällä."
 msgid "Play count"
 msgstr "Soittolaskuri"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:201
 msgid "Play given playlist"
 msgstr "Soita annettu soittolista"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:180
 msgid "Play if stopped, pause if playing"
 msgstr "Soita jos pysäytetty, pysäytä jos soi"
 
@@ -4319,7 +4319,7 @@ msgstr "Soita toisessa laitteessa"
 msgid "Play selected tracks next"
 msgstr "Soita seuraavaksi valitut kappaleet"
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:200
 msgid "Play the <n>th track in the playlist"
 msgstr "Soita soittolistan <n>. kappale"
 
@@ -4331,7 +4331,7 @@ msgstr "Soita/Keskeytä"
 msgid "Playback"
 msgstr "Toisto"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:178
 msgid "Player options"
 msgstr "Soittimen asetukset"
 
@@ -4364,7 +4364,7 @@ msgstr "Soittolista"
 msgid "Playlist finished"
 msgstr "Soittolista soitettiin loppuun"
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:196
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Soittolistan valinnat"
@@ -4514,7 +4514,7 @@ msgstr "Edellinen"
 msgid "Previous track"
 msgstr "Edellinen"
 
-#: core/commandlineoptions.cpp:212
+#: core/commandlineoptions.cpp:208
 msgid "Print out version information"
 msgstr "Tulosta versiotiedot"
 
@@ -4555,7 +4555,7 @@ msgstr "Laita kappaleet satunnaiseen järjestykseen"
 msgid "Qt"
 msgstr "Qt"
 
-#: core/commandlineoptions.cpp:214
+#: core/commandlineoptions.cpp:210
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4823,7 +4823,7 @@ msgstr "Nollaa soittolaskuri"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Soita kappale uudelleen, siirtyy edelliseen jos painat uudestaan"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:194
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Soita kappale uudelleen tai soita edellinen, jos se on alle 8 s alusta."
@@ -5096,11 +5096,11 @@ msgstr "Kelaa taakse"
 msgid "Seek forward"
 msgstr "Kelaa eteen"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:192
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Pikakelaus eteen- tai taaksepäin"
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:190
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pikakelaus eteen- tai taaksepäin tiettyyn kohtaan"
 
@@ -5189,7 +5189,7 @@ msgstr "Aseta %1 - %2"
 msgid "Set target rate"
 msgstr "Aseta tavoitetaajuus"
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:185
 msgid "Set the volume to <value> percent"
 msgstr "Säädä voimakkuudeksi <value> prosenttia"
 
@@ -5401,7 +5401,7 @@ msgstr "Koko:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:183
 msgid "Skip backwards in playlist"
 msgstr "Siirry soittolistan edelliseen"
 
@@ -5413,7 +5413,7 @@ msgstr "Ohituskerrat"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr "Ohita tiedostot, joilla on nämä tiedostopäätteet (pilkuilla erotettuna, kirjainkoosta riippumatta)"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:184
 msgid "Skip forwards in playlist"
 msgstr "Siirry soittolistan seuraavaan"
 
@@ -5526,7 +5526,7 @@ msgstr "Tähdelliset levyt"
 msgid "Start ripping"
 msgstr "Aloita kopiointi"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:179
 msgid "Start the playlist currently playing"
 msgstr "Aloita soittolista alusta"
 
@@ -5564,11 +5564,11 @@ msgstr "Pysäytä jokaisen kappaleen jälkeen"
 msgid "Stop after this track"
 msgstr "Lopeta kappaleen jälkeen"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:181
 msgid "Stop playback"
 msgstr "Lopeta toisto"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:182
 msgid "Stop playback after current track"
 msgstr "Lopeta toisto kappaleen jälkeen"
 
@@ -5924,7 +5924,7 @@ msgstr "Vaihda jonon tila"
 msgid "Toggle scrobbling"
 msgstr "Vaihda scrobbling lähetystä"
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:203
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Vaihda tyylikäs ilmoituslaatikko päälle tai pois"
 
@@ -6039,7 +6039,7 @@ msgstr "URL"
 msgid "URL of its Logo:"
 msgstr "Logon osoite:"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "URL(s)"
 msgstr "Osoitteet"
 
@@ -6135,7 +6135,7 @@ msgstr "Päivitetään %1 %..."
 msgid "Updating library"
 msgstr "Päivitetään kirjastoa"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "Usage"
 msgstr "Käyttö"
 
@@ -6761,7 +6761,7 @@ msgstr "vanhin ensin"
 msgid "on"
 msgstr "päällä"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:177
 msgid "options"
 msgstr "valinnat"
 
