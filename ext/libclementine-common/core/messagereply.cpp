@@ -17,6 +17,8 @@
 
 #include "messagereply.h"
 
+#include "core/closure.h"
+
 _MessageReplyBase::_MessageReplyBase(QObject* parent)
     : QObject(parent), finished_(false), success_(false) {}
 
@@ -43,8 +45,6 @@ void _MessageReplyBase::NotifyFinished() {
   // (and dropped if it's deleted first) rather than emitted here, and
   // releasing the semaphore is the last thing done with this object.
   const bool success = success_;
-  QMetaObject::invokeMethod(
-      this, [this, success]() { emit Finished(success); },
-      Qt::QueuedConnection);
+  PostTo(this, &_MessageReplyBase::Finished, success);
   semaphore_.release();
 }

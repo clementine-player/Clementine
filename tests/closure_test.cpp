@@ -1,9 +1,13 @@
 #include "core/closure.h"
 
+#include <QAtomicInt>
+#include <QAtomicPointer>
+#include <QDeadlineTimer>
 #include <QEventLoop>
 #include <QFuture>
 #include <QPromise>
 #include <QString>
+#include <QThread>
 
 #include "config.h"
 #include "gtest/gtest.h"
@@ -214,4 +218,106 @@ TEST(ClosureTest, DoAfterCallsReceiver) {
   DoAfter(&receiver, [&done]() { done = true; }, std::chrono::milliseconds(50));
   SpinUntil(done);
   EXPECT_EQ(1, receiver.invoked());
+}
+
+namespace {
+
+// Lives on its own thread for as long as the test needs it.
+class OtherThread {
+ public:
+  OtherThread() : object_(new TestQObject) {
+    thread_.start();
+    object_->moveToThread(&thread_);
+  }
+  ~OtherThread() {
+    thread_.quit();
+    thread_.wait();
+    delete object_;
+  }
+
+  TestQObject* object() const { return object_; }
+  QThread* thread() { return &thread_; }
+
+ private:
+  QThread thread_;
+  TestQObject* object_;
+};
+
+}  // namespace
+
+TEST(ClosureTest, PostToCallsReceiverLater) {
+  TestQObject receiver;
+  PostTo(&receiver, &TestQObject::InvokeWithArgs, 42, QString("towel"));
+  // Queued, even on the receiver's own thread.
+  EXPECT_EQ(0, receiver.invoked());
+
+  bool done = false;
+  PostTo(&receiver, [&done]() { done = true; });
+  SpinUntil(done);
+  EXPECT_EQ(1, receiver.invoked());
+  EXPECT_EQ(42, receiver.number());
+  EXPECT_EQ("towel", receiver.text());
+}
+
+TEST(ClosureTest, PostToRunsInOrder) {
+  TestQObject context;
+  QString seen;
+  for (const char* part : {"a", "b", "c"}) {
+    PostTo(
+        &context, [&seen](const QString& value) { seen += value; },
+        QString(part));
+  }
+  bool done = false;
+  PostTo(&context, [&done]() { done = true; });
+  SpinUntil(done);
+  EXPECT_EQ("abc", seen);
+}
+
+TEST(ClosureTest, PostToRunsOnTheContextsThread) {
+  OtherThread other;
+  QAtomicPointer<QThread> ran_on;
+  QAtomicInt done = 0;
+  PostTo(other.object(), [&]() {
+    ran_on = QThread::currentThread();
+    done = 1;
+  });
+  QDeadlineTimer giving_up(5000);
+  while (!done && !giving_up.hasExpired()) QThread::msleep(1);
+  EXPECT_EQ(other.thread(), ran_on.loadAcquire());
+}
+
+TEST(ClosureTest, PostToIsDroppedWhenContextIsDestroyed) {
+  TestQObject* context = new TestQObject;
+  bool called = false;
+  PostTo(context, [&called]() { called = true; });
+  delete context;
+
+  TestQObject still_here;
+  bool done = false;
+  PostTo(&still_here, [&done]() { done = true; });
+  SpinUntil(done);
+  EXPECT_FALSE(called);
+}
+
+TEST(ClosureTest, CallOnRunsStraightAwayOnTheSameThread) {
+  TestQObject receiver;
+  CallOn(&receiver, &TestQObject::Invoke);
+  EXPECT_EQ(1, receiver.invoked());
+
+  int answer = 0;
+  CallOn(&receiver, [&answer](int bound) { answer = bound; }, 42);
+  EXPECT_EQ(42, answer);
+}
+
+TEST(ClosureTest, CallOnQueuesForAnotherThread) {
+  OtherThread other;
+  QAtomicPointer<QThread> ran_on;
+  QAtomicInt done = 0;
+  CallOn(other.object(), [&]() {
+    ran_on = QThread::currentThread();
+    done = 1;
+  });
+  QDeadlineTimer giving_up(5000);
+  while (!done && !giving_up.hasExpired()) QThread::msleep(1);
+  EXPECT_EQ(other.thread(), ran_on.loadAcquire());
 }
