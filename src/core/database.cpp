@@ -150,12 +150,24 @@ QSqlDatabase Database::Connect() {
     }
 #endif
 
-    QSqlQuery set_fts_tokenizer(
-        "SELECT fts3_tokenizer('unicode', fts3_tokenizer('unicode61'))", db);
-    if (set_fts_tokenizer.lastError().isValid()) {
-      // Without it, the FTS3 tables of a database from before schema 55 can't
-      // be dropped to make way for FTS5 ones.
+    // Register "unicode" as another name for the built-in unicode61
+    // tokenizer. Without it, the FTS3 tables of a database from before
+    // schema 55 can't be dropped to make way for FTS5 ones. The tokenizer is
+    // passed as a bound parameter, not a nested fts3_tokenizer() call,
+    // because Apple's SQLite accepts it no other way.
+    QSqlQuery get_fts_tokenizer("SELECT fts3_tokenizer('unicode61')", db);
+    QSqlQuery set_fts_tokenizer(db);
+    if (get_fts_tokenizer.next()) {
+      set_fts_tokenizer.prepare("SELECT fts3_tokenizer('unicode', :tokenizer)");
+      set_fts_tokenizer.bindValue(":tokenizer",
+                                  get_fts_tokenizer.value(0).toByteArray());
+      set_fts_tokenizer.exec();
+    }
+    if (get_fts_tokenizer.lastError().isValid() ||
+        set_fts_tokenizer.lastError().isValid() ||
+        !set_fts_tokenizer.isActive()) {
       qLog(Fatal) << "Couldn't register the unicode FTS3 tokenizer:"
+                  << get_fts_tokenizer.lastError()
                   << set_fts_tokenizer.lastError();
     }
     // Implicit invocation of ~QSqlQuery() when leaving the scope
