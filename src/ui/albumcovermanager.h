@@ -25,7 +25,6 @@
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"
 #include "covers/coversearchstatistics.h"
-#include "gtest/gtest_prod.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverExport;
@@ -185,10 +184,6 @@ class AlbumCoverManager : public QMainWindow {
   int jobs_;
 
   LibraryBackend* library_backend_;
-
-  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
-  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);
-  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithFilter);
 };
 
 #endif  // ALBUMCOVERMANAGER_H

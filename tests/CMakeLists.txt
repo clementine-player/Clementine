@@ -127,10 +127,6 @@ macro(add_test_file test_source gui_required)
     add_dependencies(build_tests ${TEST_NAME})
 endmacro (add_test_file)
 
-
-#add_test_file(albumcoverfetcher_test.cpp false)
-
-#add_test_file(albumcovermanager_test.cpp true)
 add_test_file(appearance_test.cpp true)
 add_test_file(asxparser_test.cpp false)
 add_test_file(asxiniparser_test.cpp false)
@@ -190,7 +186,3 @@ add_test_file(closure_test.cpp false)
 add_test_file(concurrentrun_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
 add_test_file(sqlite_test.cpp false)
-
-#if(LINUX AND HAVE_DBUS)
-#  add_test_file(mpris1_test.cpp true)
-#endif(LINUX AND HAVE_DBUS)
