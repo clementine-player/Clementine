@@ -23,9 +23,14 @@
 #include "core/timeconstants.h"
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
+#include "tagreader_env.h"
 #include "test_utils.h"
 
 using ::testing::HasSubstr;
+
+// Song loading reads tags through TagReaderClient.
+::testing::Environment* const kTagReader =
+    ::testing::AddGlobalTestEnvironment(new TagReaderEnvironment);
 
 class M3UParserTest : public ::testing::Test {
  protected:
@@ -44,35 +49,25 @@ TEST_F(M3UParserTest, ParsesMetadata) {
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocation) {
-  QTemporaryFile temp;
-  temp.open();
-  taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
-  Song song(&taglib_);
+  TemporaryResource temp(":/testdata/beep.mp3");
   QString line(temp.fileName());
+  Song song;
   parser_.LoadSong(line, 0, QDir(), &song);
   ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
 
-  song.InitFromFile(song.url().toLocalFile(), -1);
-
-  EXPECT_EQ("foo", song.title());
-  EXPECT_EQ("bar", song.artist());
-  EXPECT_EQ("baz", song.album());
+  // Read from the file's tags.
+  EXPECT_EQ("Beep mp3", song.title());
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
-  QTemporaryFile temp;
-  temp.open();
+  TemporaryResource temp(":/testdata/beep.mp3");
   QFileInfo info(temp);
-  taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
   M3UParser parser(nullptr);
   QString line(info.fileName());
-  Song song(&taglib_);
+  Song song;
   parser.LoadSong(line, 0, info.dir(), &song);
   ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
-
-  song.InitFromFile(song.url().toLocalFile(), -1);
-
-  EXPECT_EQ("foo", song.title());
+  EXPECT_EQ("Beep mp3", song.title());
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocationHttp) {

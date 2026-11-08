@@ -15,79 +15,60 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Reads the tags of a short file in each format Clementine plays, with real
+// tag reader workers.
+
 #include <QDir>
-#include <QResource>
-#include <QSet>
-#include <QSignalSpy>
+#include <QFile>
 #include <QTemporaryFile>
-#include <QtDebug>
 
 #include "core/song.h"
-#include "engines/gstengine.h"
-#include "gmock/gmock.h"
+#include "core/tagreaderclient.h"
 #include "gtest/gtest.h"
+#include "tagreader_env.h"
 #include "test_utils.h"
 
 namespace {
 
+::testing::Environment* const kTagReader =
+    ::testing::AddGlobalTestEnvironment(new TagReaderEnvironment);
+
 class FileformatsTest : public ::testing::TestWithParam<const char*> {
- public:
-  static void SetUpTestCase() {
-    sGstEngine = new GstEngine;
-    ASSERT_TRUE(sGstEngine->Init());
-  }
-
-  static void TearDownTestCase() {
-    delete sGstEngine;
-    sGstEngine = nullptr;
-  }
-
  protected:
-  FileformatsTest() { kFormatsWithoutMetadata.insert("wav"); }
-
   void SetUp() {
     format_ = GetParam();
     resource_filename_ = ":/testdata/beep." + format_;
-    temp_filetemplate_ =
-        QDir::tempPath() + "/fileformatstest-XXXXXX." + format_;
   }
 
-  void SaveToTempFile(QTemporaryFile* file) {
-    QFile resource(resource_filename_);
-    resource.open(QIODevice::ReadOnly);
-    QByteArray data(resource.readAll());
-    resource.close();
-
-    file->open();
-    file->write(data);
-    file->flush();
-  }
-
-  static GstEngine* sGstEngine;
-
-  QSet<QString> kFormatsWithoutMetadata;
   QString format_;
   QString resource_filename_;
-  QString temp_filetemplate_;
 };
-
-GstEngine* FileformatsTest::sGstEngine = nullptr;
 
 TEST_P(FileformatsTest, Exists) {
   EXPECT_TRUE(QFile::exists(resource_filename_));
 }
 
 TEST_P(FileformatsTest, LoadsTags) {
-  QTemporaryFile temp(temp_filetemplate_);
-  SaveToTempFile(&temp);
+  // With the format's extension, which the tag reader goes by.
+  QTemporaryFile temp(QDir::tempPath() + "/fileformatstest-XXXXXX." + format_);
+  ASSERT_TRUE(temp.open());
+  QFile resource(resource_filename_);
+  ASSERT_TRUE(resource.open(QIODevice::ReadOnly));
+  temp.write(resource.readAll());
+  temp.flush();
 
   Song song;
-  song.InitFromFile(temp.fileName(), -1);
+  TagReaderClient::Instance()->ReadFileBlocking(temp.fileName(), &song);
   ASSERT_TRUE(song.is_valid());
 
-  if (!kFormatsWithoutMetadata.contains(format_)) {
+  // WAV files have no tags.
+  if (format_ != "wav") {
     EXPECT_EQ("Beep " + format_, song.title());
   }
 }
+
+INSTANTIATE_TEST_CASE_P(Formats, FileformatsTest,
+                        ::testing::Values("flac", "mp3", "ogg", "spx", "wav",
+                                          "wma", "m4a"));
 
 }  // namespace
