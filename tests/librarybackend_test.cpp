@@ -34,9 +34,9 @@ namespace {
 class LibraryBackendTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    database_.reset(new MemoryDatabase);
+    database_.reset(new MemoryDatabase(nullptr));
     backend_.reset(new LibraryBackend);
-    backend_->Init(database_, Library::kSongsTable, Library::kDirsTable,
+    backend_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
                    Library::kSubdirsTable, Library::kFtsTable);
   }
 
@@ -51,7 +51,7 @@ class LibraryBackendTest : public ::testing::Test {
     return ret;
   }
 
-  std::shared_ptr<Database> database_;
+  std::unique_ptr<Database> database_;
   std::unique_ptr<LibraryBackend> backend_;
 };
 
@@ -85,51 +85,59 @@ TEST_F(LibraryBackendTest, RemoveDirectory) {
   dir.path = "/tmp";
   backend_->AddDirectory(dir.path);
 
-  QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDeleted(Directory)));
+  QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDeleted(int)));
 
   // Remove the directory again
-  backend_->RemoveDirectory(dir);
+  backend_->RemoveDirectory(dir.id);
 
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
-  dir = spy[0][0].value<Directory>();
-  EXPECT_EQ("/tmp", dir.path);
-  EXPECT_EQ(1, dir.id);
+  EXPECT_EQ(1, spy[0][0].toInt());
 }
 
-TEST_F(LibraryBackendTest, AddInvalidSong) {
-  // Adding a song without certain fields set should fail
+TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
+  LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "", "Album");
+  EXPECT_EQ("Album", album.album_name);
+  EXPECT_TRUE(album.art_automatic.isEmpty());
+  EXPECT_TRUE(album.art_manual.isEmpty());
+  EXPECT_TRUE(album.first_url.isEmpty());
+}
+
+TEST_F(LibraryBackendTest, AlbumsOfTheSameNameByDifferentArtists) {
   backend_->AddDirectory("/tmp");
-  Song s;
-  s.set_directory_id(1);
+  SongList songs;
+  for (const QString& artist : {"Abba", "Abba", "Queen"}) {
+    Song song = MakeDummySong(1);
+    song.set_url(QUrl::fromLocalFile(artist + QString::number(songs.size())));
+    song.set_artist(artist);
+    song.set_album("Greatest Hits");
+    songs << song;
+  }
+  backend_->AddOrUpdateSongs(songs);
 
-  QSignalSpy spy(database_.get(), SIGNAL(Error(QString)));
-
-  backend_->AddOrUpdateSongs(SongList() << s);
-  ASSERT_EQ(1, spy.count());
-  spy.takeFirst();
-
-  s.set_url(QUrl::fromLocalFile("foo"));
-  backend_->AddOrUpdateSongs(SongList() << s);
-  ASSERT_EQ(1, spy.count());
-  spy.takeFirst();
-
-  s.set_filesize(100);
-  backend_->AddOrUpdateSongs(SongList() << s);
-  ASSERT_EQ(1, spy.count());
-  spy.takeFirst();
-
-  s.set_mtime(100);
-  backend_->AddOrUpdateSongs(SongList() << s);
-  ASSERT_EQ(1, spy.count());
-  spy.takeFirst();
-
-  s.set_ctime(100);
-  backend_->AddOrUpdateSongs(SongList() << s);
-  ASSERT_EQ(0, spy.count());
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  ASSERT_EQ(2, albums.size());
+  EXPECT_EQ("Abba", albums[0].artist);
+  EXPECT_EQ("Queen", albums[1].artist);
 }
 
-TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {}
+TEST_F(LibraryBackendTest, AlbumWithAnAlbumArtist) {
+  backend_->AddDirectory("/tmp");
+  SongList songs;
+  for (const QString& artist : {"Artist", "Artist feat. Someone"}) {
+    Song song = MakeDummySong(1);
+    song.set_url(QUrl::fromLocalFile(artist));
+    song.set_artist(artist);
+    song.set_albumartist("Artist");
+    song.set_album("Album");
+    songs << song;
+  }
+  backend_->AddOrUpdateSongs(songs);
+
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  ASSERT_EQ(1, albums.size());
+  EXPECT_EQ("Artist", albums[0].album_artist);
+}
 
 // Test adding a single song to the database, then getting various information
 // back about it.
@@ -216,7 +224,7 @@ TEST_F(SingleSong, GetAlbumArt) {
   AddDummySong();
   if (HasFatalFailure()) return;
 
-  LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "Album");
+  LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "", "Album");
   EXPECT_EQ(song_.album(), album.album_name);
   EXPECT_EQ(song_.artist(), album.artist);
 }
