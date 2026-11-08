@@ -15,221 +15,88 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Loads local files, playlists and directories, with real tag reader workers
+// and an in-memory library. Loading remote URLs, which needs GStreamer, is
+// covered by the remote playback smoke tests in tools/remote-cli.
+
 #include "core/songloader.h"
 
-#include <QBuffer>
 #include <QDir>
-#include <QEventLoop>
-#include <QSignalSpy>
-#include <QtDebug>
-#include <cstdlib>
+#include <QFile>
+#include <QTemporaryDir>
+#include <QUrl>
 #include <memory>
 
-#include "engines/gstengine.h"
-#include "gmock/gmock-matchers.h"
+#include "core/database.h"
 #include "gtest/gtest.h"
-#include "mock_librarybackend.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
+#include "tagreader_env.h"
 #include "test_utils.h"
 
-using ::testing::_;
-using ::testing::Return;
+namespace {
+
+::testing::Environment* const kTagReader =
+    ::testing::AddGlobalTestEnvironment(new TagReaderEnvironment);
 
 class SongLoaderTest : public ::testing::Test {
- public:
-  static void SetUpTestCase() {
-    sGstEngine = new GstEngine;
-    ASSERT_TRUE(sGstEngine->Init());
-    sGstEngine->EnsureInitialised();
-  }
-
-  static void TearDownTestCase() {
-    delete sGstEngine;
-    sGstEngine = nullptr;
-  }
-
  protected:
   void SetUp() {
-    library_.reset(new MockLibraryBackend);
+    database_.reset(new MemoryDatabase(nullptr));
+    library_.reset(new LibraryBackend);
+    library_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
+                   Library::kSubdirsTable, Library::kFtsTable);
     loader_.reset(new SongLoader(library_.get(), nullptr));
-    loader_->set_timeout(20000);
-
-    // the thing we return is not really important
-    EXPECT_CALL(*library_.get(), GetSongByUrl(_, _))
-        .WillRepeatedly(Return(Song()));
   }
 
-  void LoadLocalDirectory(const QString& dir);
+  // Loads |url| as SongLoaderInserter does, blocking if the loader needs to.
+  SongLoader::Result Load(const QUrl& url) {
+    SongLoader::Result result = loader_->Load(url);
+    if (result == SongLoader::BlockingLoadRequired) {
+      result = loader_->LoadFilenamesBlocking();
+      loader_->LoadMetadataBlocking();
+    }
+    return result;
+  }
 
-  static const char* kRemoteUrl;
-  static GstEngine* sGstEngine;
-
+  std::unique_ptr<Database> database_;
+  std::unique_ptr<LibraryBackend> library_;
   std::unique_ptr<SongLoader> loader_;
-  std::unique_ptr<MockLibraryBackend> library_;
 };
 
-const char* SongLoaderTest::kRemoteUrl =
-    "http://remotetestdata.clementine-player.org";
-GstEngine* SongLoaderTest::sGstEngine = nullptr;
-
-TEST_F(SongLoaderTest, LoadLocalMp3) {
+TEST_F(SongLoaderTest, LoadsLocalMp3) {
   TemporaryResource file(":/testdata/beep.mp3");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(file.fileName())));
 
-  ASSERT_EQ(SongLoader::Success, ret);
   ASSERT_EQ(1, loader_->songs().count());
   EXPECT_TRUE(loader_->songs()[0].is_valid());
   EXPECT_EQ("Beep mp3", loader_->songs()[0].title());
 }
 
-TEST_F(SongLoaderTest, LoadLocalFileQueryExecutesButEmpty) {
-  EXPECT_CALL(*library_.get(), ExecQuery(_)).WillOnce(Return(true));
+TEST_F(SongLoaderTest, LoadsLocalMp3FromLibrary) {
   TemporaryResource file(":/testdata/beep.mp3");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
+  const QUrl url = QUrl::fromLocalFile(file.fileName());
 
-  ASSERT_EQ(SongLoader::Success, ret);
+  library_->AddDirectory(QDir::tempPath());
+  Song song;
+  song.set_directory_id(1);
+  song.set_url(url);
+  song.set_mtime(1);
+  song.set_ctime(1);
+  song.set_filesize(1);
+  song.set_title("Title in the library");
+  library_->AddOrUpdateSongs(SongList() << song);
+
+  // Found in the library, so there's nothing to wait for.
+  ASSERT_EQ(SongLoader::Success, loader_->Load(url));
   ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_TRUE(loader_->songs()[0].is_valid());
-  EXPECT_EQ("Beep mp3", loader_->songs()[0].title());
+  EXPECT_EQ("Title in the library", loader_->songs()[0].title());
 }
 
-TEST_F(SongLoaderTest, LoadLocalPls) {
-  TemporaryResource file(":/testdata/pls_one.pls");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
+TEST_F(SongLoaderTest, LoadsLocalPls) {
+  TemporaryResource file(":/testdata/pls_somafm.pls");
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(file.fileName())));
 
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  // Check the song got loaded
-  ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_EQ("Title", loader_->songs()[0].title());
-  EXPECT_EQ(123 * kNsecPerSec, loader_->songs()[0].length_nanosec());
-}
-
-TEST_F(SongLoaderTest, LoadLocalM3U) {
-  TemporaryResource file(":/testdata/test.m3u");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-  ASSERT_EQ(239, loader_->songs().count());
-}
-
-TEST_F(SongLoaderTest, LoadLocalXSPF) {
-  TemporaryResource file(":/testdata/test.xspf");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-  ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_EQ("Foo", loader_->songs()[0].title());
-}
-
-TEST_F(SongLoaderTest, LoadLocalASX) {
-  TemporaryResource file(":/testdata/test.asx");
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-  ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_EQ("Foo", loader_->songs()[0].title());
-}
-
-TEST_F(SongLoaderTest, LoadRemoteMp3) {
-  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/beep.mp3");
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  // Check the song got loaded
-  ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_EQ(QUrl(QString(kRemoteUrl) + "/beep.mp3"), loader_->songs()[0].url());
-}
-
-TEST_F(SongLoaderTest, LoadRemote404) {
-  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/404.mp3");
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Error
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(false, spy[0][0].toBool());
-}
-
-TEST_F(SongLoaderTest, LoadRemotePls) {
-  SongLoader::Result ret =
-      loader_->Load(QString(kRemoteUrl) + "/pls_somafm.pls");
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  // Check some metadata
   ASSERT_EQ(4, loader_->songs().count());
   EXPECT_EQ(
       "SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient "
@@ -239,105 +106,54 @@ TEST_F(SongLoaderTest, LoadRemotePls) {
             loader_->songs()[3].url());
 }
 
-TEST_F(SongLoaderTest, LoadRemotePlainText) {
-  SongLoader::Result ret =
-      loader_->Load(QString(kRemoteUrl) + "/notaplaylist.txt");
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
+TEST_F(SongLoaderTest, LoadsLocalM3U) {
+  TemporaryResource file(":/testdata/test.m3u");
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(file.fileName())));
 
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Error
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(false, spy[0][0].toBool());
+  EXPECT_EQ(239, loader_->songs().count());
 }
 
-TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
-  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/plainm3u.m3u");
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
+TEST_F(SongLoaderTest, LoadsLocalXSPF) {
+  TemporaryResource file(":/testdata/test.xspf");
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(file.fileName())));
 
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for gstreamer to do its thing
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  ASSERT_EQ(2, loader_->songs().count());
-  EXPECT_EQ(QUrl("http://www.example.com/one.mp3"), loader_->songs()[0].url());
-  EXPECT_EQ(QUrl("http://www.example.com/two.mp3"), loader_->songs()[1].url());
+  ASSERT_EQ(1, loader_->songs().count());
+  EXPECT_EQ("Foo", loader_->songs()[0].title());
 }
 
-TEST_F(SongLoaderTest, LoadLocalDirectory) {
-  // Make a directory and shove some files in it
-  QString dir;
-  {
-    QTemporaryFile ffffuuuuuuuu;
-    ffffuuuuuuuu.open();
-    dir = ffffuuuuuuuu.fileName();
-  }
+TEST_F(SongLoaderTest, LoadsLocalASX) {
+  TemporaryResource file(":/testdata/test.asx");
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(file.fileName())));
 
-  QDir d;
-  ASSERT_TRUE(d.mkdir(dir));
+  ASSERT_EQ(1, loader_->songs().count());
+  EXPECT_EQ("Foo", loader_->songs()[0].title());
+}
+
+TEST_F(SongLoaderTest, LoadsLocalDirectory) {
+  QTemporaryDir dir;
+  ASSERT_TRUE(dir.isValid());
 
   QFile resource(":/testdata/beep.mp3");
-  resource.open(QIODevice::ReadOnly);
-  QByteArray data(resource.readAll());
-
-  // Write 3 MP3 files
+  ASSERT_TRUE(resource.open(QIODevice::ReadOnly));
+  const QByteArray data(resource.readAll());
   for (int i = 0; i < 3; ++i) {
-    QFile mp3(QString("%1/%2.mp3").arg(dir).arg(i));
-    mp3.open(QIODevice::WriteOnly);
+    QFile mp3(dir.filePath(QString("%1.mp3").arg(i)));
+    ASSERT_TRUE(mp3.open(QIODevice::WriteOnly));
     mp3.write(data);
   }
 
-  // And one file that isn't an MP3
-  QFile somethingelse(QString(dir) + "/somethingelse.foo");
-  somethingelse.open(QIODevice::WriteOnly);
-  somethingelse.write("I'm not an MP3!");
-  somethingelse.close();
+  // And one file that isn't music.
+  QFile something_else(dir.filePath("somethingelse.foo"));
+  ASSERT_TRUE(something_else.open(QIODevice::WriteOnly));
+  something_else.write("I'm not an MP3!");
+  something_else.close();
 
-  // The actual test happens in another function so we can always clean up if
-  // it asserts
-  LoadLocalDirectory(dir);
+  ASSERT_EQ(SongLoader::Success, Load(QUrl::fromLocalFile(dir.path())));
 
-  QFile::remove(QString(dir) + "/0.mp3");
-  QFile::remove(QString(dir) + "/1.mp3");
-  QFile::remove(QString(dir) + "/2.mp3");
-  QFile::remove(QString(dir) + "/somethingelse.foo");
-
-  d.rmdir(dir);
-}
-
-void SongLoaderTest::LoadLocalDirectory(const QString& filename) {
-  // Load the directory
-  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(filename));
-  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
-
-  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
-
-  // Start an event loop to wait for it to read the directory
-  QEventLoop loop;
-  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)), &loop,
-                   SLOT(quit()));
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
-  loader_.get()->EffectiveSongsLoad();
-
-  // Check the signal was emitted with Success
-  ASSERT_EQ(1, spy.count());
-  EXPECT_EQ(true, spy[0][0].toBool());
-
-  // Check it loaded three files
   ASSERT_EQ(3, loader_->songs().count());
-  EXPECT_EQ("Beep mp3", loader_->songs()[2].title());
+  for (const Song& song : loader_->songs()) {
+    EXPECT_EQ("Beep mp3", song.title());
+  }
 }
+
+}  // namespace

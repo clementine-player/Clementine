@@ -26,9 +26,14 @@
 
 #include "core/timeconstants.h"
 #include "gtest/gtest.h"
+#include "tagreader_env.h"
 #include "test_utils.h"
 
 using std::shared_ptr;
+
+// Song loading reads tags through TagReaderClient.
+::testing::Environment* const kTagReader =
+    ::testing::AddGlobalTestEnvironment(new TagReaderEnvironment);
 
 class PLSParserTest : public ::testing::Test {
  protected:
