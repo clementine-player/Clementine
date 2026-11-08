@@ -651,6 +651,7 @@ void Playlist::set_current_row(int i, bool is_stopping) {
   ClearStreamMetadata();
 
   current_item_index_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
+  if (current_item_index_.isValid()) removed_current_item_.reset();
 
   // if the given item is the first in the queue, remove it from the queue
   if (current_item_index_.row() == queue_->PeekNext()) {
@@ -1089,10 +1090,11 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
       }
     }
 
-    if (item == current_item()) {
+    if (item == removed_current_item_) {
       // It's one we removed before that got re-added through an undo
       current_item_index_ = index(i, 0);
       last_played_item_index_ = current_item_index_;
+      removed_current_item_.reset();
     }
   }
   endInsertRows();
@@ -1525,6 +1527,9 @@ void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
     changePersistentIndex(idx,
                           index(new_rows[item], idx.column(), idx.parent()));
   }
+  // As when moving items, so that the next song follows the current one's new
+  // position.
+  current_virtual_index_ = virtual_items_.indexOf(current_row());
 
   layoutChanged();
 
@@ -1642,7 +1647,7 @@ void Playlist::RemoveItemsWithoutUndo(const QList<int>& indicesIn) {
     }
 
     // Remove the current sequence.
-    removeRows(beginning, end - beginning + 1);
+    RemoveItemsWithoutUndo(beginning, end - beginning + 1);
   }
 }
 
@@ -1656,8 +1661,6 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     // might have been invalidated.
     RemoveItemsWithoutUndo(row, count);
     undo_stack_->clear();
-  } else if (parent == QModelIndex()) {
-    RemoveItemsWithoutUndo(row, count);
   } else {
     undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, row, count));
   }
@@ -1701,10 +1704,12 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
   beginRemoveRows(QModelIndex(), row, row + count - 1);
 
   // Remove items
+  const PlaylistItemPtr current = current_item();
   PlaylistItemList ret;
   for (int i = 0; i < count; ++i) {
     PlaylistItemPtr item(items_.takeAt(row));
     ret << item;
+    if (item == current) removed_current_item_ = item;
 
     if (item->IsLocalLibraryItem()) {
       int id = item->Metadata().id();

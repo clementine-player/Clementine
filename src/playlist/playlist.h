@@ -445,6 +445,9 @@ class Playlist : public QAbstractListModel {
 
   QPersistentModelIndex current_item_index_;
   QPersistentModelIndex last_played_item_index_;
+  // The current item, if it was removed, until another one is made current.
+  // An undo that puts it back makes it current again.
+  PlaylistItemPtr removed_current_item_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;

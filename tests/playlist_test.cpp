@@ -412,6 +412,42 @@ TEST_F(PlaylistTest, UndoRemoveOldCurrent) {
   EXPECT_EQ(0, playlist_.last_played_row());
 }
 
+TEST_F(PlaylistTest, UndoRemoveDuplicates) {
+  playlist_.InsertItems(PlaylistItemList()
+                        << MakeMockItemP("One", "Artist", "Album")
+                        << MakeMockItemP("Two", "Artist", "Album")
+                        << MakeMockItemP("One", "Artist", "Album"));
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
+
+  playlist_.RemoveDuplicateSongs();
+  ASSERT_EQ(2, playlist_.rowCount(QModelIndex()));
+
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  playlist_.undo_stack()->undo();
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
+  EXPECT_EQ("One", playlist_.data(playlist_.index(2, Playlist::Column_Title)));
+}
+
+TEST_F(PlaylistTest, UndoSortThenNext) {
+  playlist_.InsertItems(PlaylistItemList()
+                        << MakeMockItemP("C") << MakeMockItemP("B")
+                        << MakeMockItemP("A"));
+  playlist_.set_current_row(2);  // A
+
+  playlist_.sort(Playlist::Column_Title, Qt::AscendingOrder);
+  ASSERT_EQ(0, playlist_.current_row());
+  EXPECT_EQ(1, playlist_.next_row());
+
+  playlist_.undo_stack()->undo();
+  ASSERT_EQ(2, playlist_.current_row());
+  EXPECT_EQ(-1, playlist_.next_row());
+  EXPECT_EQ(1, playlist_.previous_row());
+
+  playlist_.undo_stack()->redo();
+  ASSERT_EQ(0, playlist_.current_row());
+  EXPECT_EQ(1, playlist_.next_row());
+}
+
 TEST_F(PlaylistTest, ShuffleThenNext) {
   // Add 100 items
   PlaylistItemList items;
