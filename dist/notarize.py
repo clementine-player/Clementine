@@ -15,6 +15,21 @@ import os
 import subprocess
 import sys
 import tempfile
+import time
+
+
+def Staple(path):
+  # The stapler fetches the ticket from Apple's CloudKit, whose connection
+  # sometimes drops ("The network connection was lost", exit status 68).
+  # The ticket is already issued by then, so trying again is enough.
+  delays = [30, 60, 120]
+  for delay in delays:
+    if subprocess.call(['xcrun', 'stapler', 'staple', path]) == 0:
+      return
+    print('Stapling failed; trying again in %d seconds' % delay)
+    sys.stdout.flush()
+    time.sleep(delay)
+  subprocess.check_call(['xcrun', 'stapler', 'staple', path])
 
 
 def Notarize(path, api_key_path):
@@ -55,7 +70,7 @@ def Notarize(path, api_key_path):
     if zip_path:
       os.remove(zip_path)
 
-  subprocess.check_call(['xcrun', 'stapler', 'staple', path])
+  Staple(path)
   if path.endswith('.app'):
     subprocess.check_call(['spctl', '--assess', '--verbose=4', path])
 

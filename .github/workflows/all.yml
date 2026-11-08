@@ -2571,6 +2571,11 @@ jobs:
       - name: cmake
         working-directory: bin
         run: |
+          # With the API key, `make dmg` notarizes the app on its way to
+          # the DMG, so pull requests, which aren't notarized, don't get it.
+          if [[ "${{ steps.signing.outputs.notarize }}" != "true" ]]; then
+            unset APPLE_NOTARIZE_API_KEY_PATH
+          fi
           BREW_PREFIX="$(brew --prefix)"
           cmake .. \
             -Wno-dev \
