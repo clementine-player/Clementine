@@ -1,0 +1,103 @@
+# Submits the newest numbered release's Windows installer to winget, the
+# Windows Package Manager, once release.yml has made it: it opens a pull
+# request on microsoft/winget-pkgs updating Clementine.Clementine, which
+# winget's moderators review and merge. Run by hand, it submits the newest
+# release if winget doesn't have it yet.
+#
+# Komac (https://github.com/russellbanks/Komac) writes the manifests from the
+# installer and opens the pull request, from a fork of winget-pkgs. Skipped
+# until the WINGET_FORK_OWNER repository variable is set.
+#
+# One-time setup:
+#   1. Fork microsoft/winget-pkgs, to clementine-player or to a user: the
+#      pull requests come from branches on the fork.
+#   2. Create a classic personal access token with the public_repo scope, on
+#      a user who can push to the fork (Komac pushes a branch to it and opens
+#      the pull request on microsoft/winget-pkgs, which a fine-grained token
+#      can't). The pull requests are opened as that user.
+#   3. In this repository's Settings > Secrets and variables > Actions, add
+#      the secret WINGET_TOKEN (the token) and the variable WINGET_FORK_OWNER
+#      (the fork's owner, such as clementine-player).
+
+name: winget
+on:
+  workflow_run:
+    workflows: [release]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: winget
+  cancel-in-progress: false
+
+env:
+  PACKAGE: Clementine.Clementine
+  KOMAC_VERSION: 2.17.1
+
+jobs:
+  submit:
+    name: Submit to winget
+    if: >
+      github.ref == 'refs/heads/master' && vars.WINGET_FORK_OWNER != ''
+      && (github.event_name == 'workflow_dispatch'
+        || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Find the release
+        id: plan
+        run: |
+          # The latest release is always a numbered one: development builds
+          # are pre-releases.
+          version=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName --jq .tagName)
+          installer="ClementineSetup-$version.exe"
+          if ! gh release view "$version" --repo "$GITHUB_REPOSITORY" --json assets \
+              --jq '.assets[].name' | grep -qxF "$installer"; then
+            echo "::error::Release $version has no $installer."
+            exit 1
+          fi
+          # release.yml runs every Monday, but only some Mondays make a
+          # release: on the others, winget already has the latest.
+          path="manifests/c/${PACKAGE//./\/}/$version"
+          if gh api "repos/microsoft/winget-pkgs/contents/$path" --silent 2>/dev/null; then
+            echo "::notice::winget already has $PACKAGE $version."
+            echo "submit=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          {
+            echo "submit=true"
+            echo "version=$version"
+            echo "url=https://github.com/$GITHUB_REPOSITORY/releases/download/$version/$installer"
+          } | tee -a "$GITHUB_OUTPUT"
+
+      # Built from crates.io, which takes about ten minutes, so it's cached.
+      - name: Cache Komac
+        if: steps.plan.outputs.submit == 'true'
+        id: cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.cargo/bin/komac
+          key: komac-${{ env.KOMAC_VERSION }}-ubuntu-24.04
+      - name: Install Komac
+        if: steps.plan.outputs.submit == 'true' && steps.cache.outputs.cache-hit != 'true'
+        run: cargo install komac --version "$KOMAC_VERSION" --locked
+
+      - name: Open the pull request
+        if: steps.plan.outputs.submit == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.WINGET_TOKEN }}
+          KOMAC_FORK_OWNER: ${{ vars.WINGET_FORK_OWNER }}
+          VERSION: ${{ steps.plan.outputs.version }}
+          URL: ${{ steps.plan.outputs.url }}
+        run: |
+          komac sync-fork
+          komac update "$PACKAGE" --version "$VERSION" --urls "$URL" \
+            --release-notes-url "https://github.com/$GITHUB_REPOSITORY/releases/tag/$VERSION" \
+            --submit
+          # Branches of pull requests winget has merged.
+          komac cleanup --only-merged
