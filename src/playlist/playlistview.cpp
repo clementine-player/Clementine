@@ -703,9 +703,14 @@ void PlaylistView::RemoveSelected(bool deleting_from_disk) {
     if (range.top() < last_row) rows_removed += range.height();
 
     if (!deleting_from_disk) {
-      model()->removeRows(range.top(), range.height(), range.topLeft());
+      model()->removeRows(range.top(), range.height(), range.parent());
     } else {
-      model()->removeRows(range.top(), range.height(), QModelIndex());
+      // Not undoable: undoing would bring back songs whose files are gone.
+      QList<int> rows;
+      for (int row = range.top(); row <= range.bottom(); ++row) {
+        rows << playlist_->proxy()->mapToSource(model()->index(row, 0)).row();
+      }
+      playlist_->RemoveItemsWithoutUndo(rows);
     }
   }
 

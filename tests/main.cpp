@@ -22,6 +22,7 @@
 #include "logging_env.h"
 #include "metatypes_env.h"
 #include "resources_env.h"
+#include "ui/iconloader.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleMock(&argc, argv);
@@ -29,6 +30,8 @@ int main(int argc, char** argv) {
   testing::AddGlobalTestEnvironment(new MetatypesEnvironment);
 #ifdef GUI
   QApplication a(argc, argv);
+  // Widgets and models load icons when they're made, as in the app.
+  IconLoader::Init();
 #else
   QCoreApplication a(argc, argv);
 #endif
