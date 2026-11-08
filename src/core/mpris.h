@@ -26,7 +26,6 @@ class Application;
 
 namespace mpris {
 
-class Mpris1;
 class Mpris2;
 
 class Mpris : public QObject {
@@ -39,7 +38,6 @@ class Mpris : public QObject {
   void RaiseMainWindow();
 
  private:
-  Mpris1* mpris1_;
   Mpris2* mpris2_;
 };
 
