@@ -102,8 +102,11 @@ LibraryModel::LibraryModel(std::shared_ptr<LibraryBackend> backend,
   cover_loader_options_.pad_output_image_ = true;
   cover_loader_options_.scale_output_image_ = true;
 
-  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
-          SLOT(AlbumArtLoaded(quint64, QImage)));
+  // Tests make one without an Application, and don't load album art.
+  if (app_) {
+    connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
+            SLOT(AlbumArtLoaded(quint64, QImage)));
+  }
 
   icon_cache_->setCacheDirectory(
       Utilities::GetConfigPath(Utilities::Path_PixmapCache));

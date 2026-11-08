@@ -34,11 +34,11 @@ namespace {
 class LibraryModelTest : public ::testing::Test {
  protected:
   void SetUp() {
-    database_.reset(new MemoryDatabase);
+    database_.reset(new MemoryDatabase(nullptr));
     backend_.reset(new LibraryBackend);
-    backend_->Init(database_, Library::kSongsTable, Library::kDirsTable,
+    backend_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
                    Library::kSubdirsTable, Library::kFtsTable);
-    model_.reset(new LibraryModel(backend_.get(), nullptr));
+    model_.reset(new LibraryModel(backend_, nullptr));
 
     added_dir_ = false;
 
@@ -49,7 +49,7 @@ class LibraryModelTest : public ::testing::Test {
     model_sorted_->sort(0);
   }
 
-  Song AddSong(Song& song) {
+  Song AddSong(Song song) {
     song.set_directory_id(1);
     if (song.mtime() == -1) song.set_mtime(1);
     if (song.ctime() == -1) song.set_ctime(1);
@@ -72,8 +72,8 @@ class LibraryModelTest : public ::testing::Test {
     return AddSong(song);
   }
 
-  std::shared_ptr<Database> database_;
-  std::unique_ptr<LibraryBackend> backend_;
+  std::unique_ptr<Database> database_;
+  std::shared_ptr<LibraryBackend> backend_;
   std::unique_ptr<LibraryModel> model_;
   std::unique_ptr<QSortFilterProxyModel> model_sorted_;
 

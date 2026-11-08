@@ -892,9 +892,6 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     if (!ExecQuery(&query)) return ret;
   }
 
-  QString last_album;
-  QString last_artist;
-  QString last_album_artist;
   while (query.Next()) {
     bool compilation = query.Value(3).toBool() || query.Value(4).toBool();
 
@@ -906,16 +903,18 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     info.art_manual = query.Value(6).toString();
     info.first_url = QUrl::fromEncoded(query.Value(7).toByteArray());
 
-    if ((info.artist == last_artist ||
-         info.album_artist == last_album_artist) &&
-        info.album_name == last_album)
-      continue;
+    // Another song on the album before it: the same album by the same album
+    // artist, or by the same artist if neither song has an album artist.
+    if (!ret.isEmpty()) {
+      const Album& last = ret.last();
+      const bool same_artist =
+          info.album_artist.isEmpty() && last.album_artist.isEmpty()
+              ? info.artist == last.artist
+              : info.album_artist == last.album_artist;
+      if (same_artist && info.album_name == last.album_name) continue;
+    }
 
     ret << info;
-
-    last_album = info.album_name;
-    last_artist = info.artist;
-    last_album_artist = info.album_artist;
   }
 
   return ret;
