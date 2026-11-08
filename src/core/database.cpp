@@ -154,11 +154,16 @@ QSqlDatabase Database::Connect() {
     // tokenizer. Without it, the FTS3 tables of a database from before
     // schema 55 can't be dropped to make way for FTS5 ones. The tokenizer is
     // passed as a bound parameter, not a nested fts3_tokenizer() call,
-    // because Apple's SQLite accepts it no other way.
-    QSqlQuery get_fts_tokenizer("SELECT fts3_tokenizer('unicode61')", db);
+    // because Apple's SQLite accepts it no other way. The names are bound
+    // too: SQLite only hands out a tokenizer to a bound name when the
+    // connection hasn't enabled fts3_tokenizer(), which on macOS it hasn't.
+    QSqlQuery get_fts_tokenizer(db);
+    get_fts_tokenizer.prepare("SELECT fts3_tokenizer(:name)");
+    get_fts_tokenizer.bindValue(":name", "unicode61");
     QSqlQuery set_fts_tokenizer(db);
-    if (get_fts_tokenizer.next()) {
-      set_fts_tokenizer.prepare("SELECT fts3_tokenizer('unicode', :tokenizer)");
+    if (get_fts_tokenizer.exec() && get_fts_tokenizer.next()) {
+      set_fts_tokenizer.prepare("SELECT fts3_tokenizer(:name, :tokenizer)");
+      set_fts_tokenizer.bindValue(":name", "unicode");
       set_fts_tokenizer.bindValue(":tokenizer",
                                   get_fts_tokenizer.value(0).toByteArray());
       set_fts_tokenizer.exec();
