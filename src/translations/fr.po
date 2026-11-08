@@ -17,6 +17,7 @@
 # djabal <djabal@eastblue.net>, 2013
 # djabal <djabal@eastblue.net>, 2013
 # a270031086f2a0d3514bc0cb507b48f6, 2019
+# Epierre p, 2026
 # Etienne G <etn2010@gmail.com>, 2013
 # evangeneer <mathieu@evangeneer.net>, 2012
 # Faketag Fakenick <>, 2012
@@ -57,7 +58,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Wallon <wallon@ik.me>, 2026\n"
+"Last-Translator: Epierre p, 2026\n"
 "Language-Team: French (http://app.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -128,7 +129,7 @@ msgstr " morceaux"
 msgid ""
 "%1\n"
 "Not connected now. Clementine listens when this computer joins it."
-msgstr ""
+msgstr "%1\nNon connecté actuellement. Clementine attend que cet ordinateur rejoigne le réseau."
 
 #. TRANSLATORS: A row in the Network Remote's "Listen on" list, for
 #. a network that was added by hand. %1 is the network, such as
@@ -139,7 +140,7 @@ msgstr ""
 msgid ""
 "%1\n"
 "This computer is %2"
-msgstr ""
+msgstr "%1\nAdresse(s) de cet ordinateur %2"
 
 #: widgets/osd.cpp:196
 #, qt-format
@@ -150,12 +151,12 @@ msgstr "%1 albums"
 #: networkremote/streaming/remoteengine.cpp:242 upnp/upnpengine.cpp:297
 #, qt-format
 msgid "%1 can't play this track: %2"
-msgstr ""
+msgstr "%1 ne peut pas jouer cette piste: %2"
 
 #: networkremote/streaming/remoteengine.cpp:449
 #, qt-format
 msgid "%1 couldn't play this track"
-msgstr ""
+msgstr "%1 n'a pas pu jouer cette piste"
 
 #: widgets/equalizerslider.cpp:30 widgets/equalizerslider.cpp:32
 #: widgets/equalizerslider.cpp:44
@@ -176,32 +177,32 @@ msgstr "Il y a %1 jours"
 #: airplay/airplaysession.cpp:574
 #, qt-format
 msgid "%1 didn't allow %2 to play there"
-msgstr ""
+msgstr "%1 n'a pas autorisé %2 à diffuser"
 
 #: airplay/airplaysession.cpp:361
 #, qt-format
 msgid "%1 didn't pair as AirPlay receivers do"
-msgstr ""
+msgstr "%1 ne s'est pas comporté comme un récepteur AirPlay lors du jumelage"
 
 #: airplay/airplaysession.cpp:1132
 #, qt-format
 msgid "%1 didn't prove who it is"
-msgstr ""
+msgstr "%1 n'a pas pu prouver son identité"
 
 #: airplay/airplaysession.cpp:708 airplay/airplaysession.cpp:1038
 #, qt-format
 msgid "%1 didn't say where to send audio"
-msgstr ""
+msgstr "%1 n'a pas indiqué où envoyer le flux audio"
 
 #: airplay/airplaysession.cpp:308
 #, qt-format
 msgid "%1 didn't show a PIN to pair with (HTTP %2)"
-msgstr ""
+msgstr "%1 a échoué à fournir un code PIN pour l'association (HTTP %2)"
 
 #: airplay/airplayengine.cpp:550
 #, qt-format
 msgid "%1 doesn't remember Clementine, and pairing again didn't work"
-msgstr ""
+msgstr "%1 n'est plus associé à Clementine et la nouvelle tentative d'association a échoué"
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote is
@@ -212,7 +213,7 @@ msgstr ""
 msgid ""
 "%1 gets its music from Clementine through the network remote, which couldn't"
 " listen on port %2. Another program may be using it."
-msgstr ""
+msgstr "%1 obtient la musique de Clementine via le contrôle à distance, qui n'a pas pu ouvrir le port %2. Un autre programme l'utilise peut-être."
 
 #. TRANSLATORS: Shown when a Chromecast or other device the user picks
 #. can't get its music from Clementine's network remote: the remote only
@@ -298,7 +299,7 @@ msgstr ""
 #: airplay/airplaysession.cpp:440
 #, qt-format
 msgid "%1 refused to pair (HTTP %2, error %3)"
-msgstr ""
+msgstr "%1 a refusé l'association (HTTP %2, erreur %3)"
 
 #: airplay/airplaysession.cpp:433
 #, qt-format
@@ -893,7 +894,7 @@ msgstr "Ajouter des actions wiimote"
 
 #: library/library.cpp:134
 msgid "Added in the last 30 days"
-msgstr ""
+msgstr "Ajouté au cours des 30 derniers jours"
 
 #: ../bin/src/ui_libraryfilterwidget.h:98
 msgid "Added this month"
@@ -995,7 +996,7 @@ msgstr "Tous les fichiers (*)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "All networks"
-msgstr ""
+msgstr "Tous les réseaux"
 
 #: playlistparsers/playlistparser.cpp:81
 #, qt-format
@@ -1038,7 +1039,7 @@ msgstr "Autoriser l’encodage mid/side"
 
 #: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Allow playing on remote devices"
-msgstr ""
+msgstr "Autoriser la lecture sur des appareils distants"
 
 #: ../bin/src/ui_transcodedialog.h:236
 msgid "Alongside the originals"
@@ -1224,7 +1225,7 @@ msgstr "Image d’arrière-plan"
 msgid "Background opacity"
 msgstr "Opacité de l’arrière-plan"
 
-#: core/database.cpp:680
+#: core/database.cpp:702
 msgid "Backing up database"
 msgstr "Sauvegarde de la base de données en cours"
 
@@ -1713,12 +1714,12 @@ msgstr "Connexion du périphérique"
 #: internet/plex/plexsettingspage.cpp:183
 #, qt-format
 msgid "Connected to %1."
-msgstr ""
+msgstr "Connecté à %1."
 
 #: internet/plex/plexsettingspage.cpp:186
 #, qt-format
 msgid "Connecting to %1..."
-msgstr ""
+msgstr "Connexion à %1..."
 
 #: internet/subsonic/subsonicsettingspage.cpp:132
 msgid ""
@@ -1728,12 +1729,12 @@ msgstr "Connexion refusée par le serveur, vérifiez l’URL du serveur. Exemple
 
 #: songinfo/streamdiscoverer.cpp:117
 msgid "Connection timed out"
-msgstr ""
+msgstr "Délai de connexion dépassé"
 
 #: internet/subsonic/subsonicsettingspage.cpp:144
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Délai de connexion dépassé, vérifiez l'adresse du serveur. Exemple: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:125 ../bin/src/ui_mainwindow.h:750
 msgid "Console"
@@ -1765,7 +1766,7 @@ msgstr ""
 
 #: internet/core/internetservice.cpp:82
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copier dans le presse papier"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:457
 #: ui/mainwindow.cpp:757 widgets/fileviewlist.cpp:46
@@ -1779,13 +1780,13 @@ msgstr "Copier vers la bibliothèque…"
 
 #: ../bin/src/ui_podcastinfowidget.h:190
 msgid "Copyright"
-msgstr ""
+msgstr "Droit d'auteur"
 
 #: internet/subsonic/subsonicsettingspage.cpp:100
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Impossible de se connecter à Subsonic, vérifiez l'adresse du serveur. Exemple: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:68
 #, qt-format
@@ -1801,7 +1802,7 @@ msgstr ""
 
 #: internet/googledrive/googledriveservice.cpp:419
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Fichier Google Drive non trouvé."
 
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
@@ -1810,11 +1811,11 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
-msgstr ""
+msgstr "Ne peut récupérer les détails"
 
 #: internet/lastfm/lastfmsettingspage.cpp:74
 msgid "Could not log in to Last.fm. Please try again."
-msgstr ""
+msgstr "Impossible de se connecter à Last.fm. Veuillez réessayer."
 
 #: airplay/airplaysession.cpp:597
 #, qt-format
@@ -1957,7 +1958,7 @@ msgstr "Personnalisée…"
 
 #: devices/udisks2lister.cpp:81
 msgid "D-Bus path"
-msgstr ""
+msgstr "Chemin D-Bus"
 
 #: internet/jamendo/jamendoservice.cpp:80 ui/equalizer.cpp:117
 msgid "Dance"
@@ -1969,18 +1970,18 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:128
 msgid "Database"
-msgstr ""
+msgstr "Base de données"
 
-#: core/database.cpp:633
+#: core/database.cpp:655
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Une corruption de la base de données a été détectée. Veuillez lire https://github.com/clementine-player/Clementine/wiki/Database-Corruption pour obtenir des informations sur la restauration de votre base de données"
 
 #: ../bin/src/ui_episodeinfowidget.h:130
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -2000,7 +2001,7 @@ msgstr "Dé&faut"
 
 #: core/commandlineoptions.cpp:187
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Diminuer le volume de 4%"
 
 #: core/commandlineoptions.cpp:189
 msgid "Decrease the volume by <value> percent"
@@ -2012,7 +2013,7 @@ msgstr "Diminuer le volume"
 
 #: ../bin/src/ui_appearancesettingspage.h:335
 msgid "Default background image"
-msgstr ""
+msgstr "Image d'arrière-plan par défaut"
 
 #: engines/gstengine.cpp:1045
 #, qt-format
@@ -2030,11 +2031,11 @@ msgstr "Délai entre les visualisations"
 #: playlist/playlistlistcontainer.cpp:159
 #: ../bin/src/ui_playlistlistcontainer.h:130
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: internet/podcasts/podcastservice.cpp:454
 msgid "Delete downloaded data"
-msgstr ""
+msgstr "Effacer les données téléchargées"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:679
 #: ui/mainwindow.cpp:2540 widgets/fileview.cpp:189
@@ -2052,7 +2053,7 @@ msgstr "Supprimer du disque…"
 
 #: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Effacer les épisodes lus"
 
 #: ui/equalizer.cpp:222 ../bin/src/ui_equalizer.h:166
 msgid "Delete preset"
@@ -2263,7 +2264,7 @@ msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Download Clementine Remote for Android"
-msgstr ""
+msgstr "Téléchargez Clementine Remote pour Android"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:278
 msgid "Download directory"
@@ -3251,7 +3252,7 @@ msgstr "Insérer…"
 msgid "Instrumental"
 msgstr ""
 
-#: core/database.cpp:617
+#: core/database.cpp:639
 msgid "Integrity check"
 msgstr ""
 
@@ -3329,7 +3330,7 @@ msgstr "Conserver les fichiers originaux"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
-#: core/sleepinhibitor.cpp:154
+#: core/sleepinhibitor.cpp:150
 msgid "Keeping the computer awake while Clementine is open"
 msgstr ""
 
@@ -3850,7 +3851,7 @@ msgstr "Serveur mandataire (proxy)"
 
 #: ../bin/src/ui_networkremotesettingspage.h:319
 msgid "Network Remote"
-msgstr ""
+msgstr "Contrôle à distance"
 
 #. TRANSLATORS: A button that opens the Network Remote page of the
 #. settings, where the user can fix why a Chromecast or other device
@@ -3858,7 +3859,7 @@ msgstr ""
 #. name.
 #: widgets/outputbutton.cpp:204
 msgid "Network Remote Settings..."
-msgstr ""
+msgstr "Paramètres du contrôle à distance"
 
 #. TRANSLATORS: In the dialog that adds a network, or a single
 #. address, to the Network Remote's "Listen on" list.
@@ -4380,7 +4381,7 @@ msgstr "Options du lecteur"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
-#: core/sleepinhibitor.cpp:158
+#: core/sleepinhibitor.cpp:154
 msgid "Playing music"
 msgstr ""
 
@@ -4388,7 +4389,7 @@ msgstr ""
 #. the system shows in its list of what's stopping it from sleeping.
 #. The music is playing on a phone, a Chromecast or the like, which
 #. gets it from this computer.
-#: core/sleepinhibitor.cpp:164
+#: core/sleepinhibitor.cpp:160
 msgid "Playing music on another device"
 msgstr ""
 
@@ -5199,7 +5200,7 @@ msgstr ""
 #. the system shows in its list of what's stopping it from sleeping.
 #. A phone running Clementine Remote is downloading songs from this
 #. computer.
-#: core/sleepinhibitor.cpp:170
+#: core/sleepinhibitor.cpp:166
 msgid "Sending songs to a remote"
 msgstr ""
 
@@ -5391,7 +5392,7 @@ msgstr "Afficher/Masquer"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
-#: core/sleepinhibitor.cpp:150
+#: core/sleepinhibitor.cpp:146
 msgid "Showing visualizations full screen"
 msgstr ""
 
@@ -6649,7 +6650,7 @@ msgstr "Vos scrobbles : %1"
 
 #: visualisations/visualisationcontainer.cpp:172
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "Votre système ne prend pas en charge OpenGL. Les visualisations ne sont pas disponibles."
 
 #: smartplaylists/searchterm.cpp:408
 msgid "Z-A"
@@ -6810,11 +6811,11 @@ msgstr "options"
 
 #: ../bin/src/ui_networkremotesettingspage.h:369
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "ou scannez le code QR:"
 
 #: internet/plex/plexauthenticator.cpp:97
 msgid "plex.tv sent an unexpected response"
-msgstr ""
+msgstr "plex.tv a renvoyé une réponse inattendue"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
@@ -6832,7 +6833,7 @@ msgstr "le plus court en premier"
 
 #: playlist/playlistundocommands.cpp:111
 msgid "shuffle songs"
-msgstr ""
+msgstr "mélanger les morceaux"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "smallest first"
@@ -6840,7 +6841,7 @@ msgstr "le plus petit en premier"
 
 #: playlist/playlistundocommands.cpp:105
 msgid "sort songs"
-msgstr ""
+msgstr "trier les morceaux"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "starts with"
