@@ -374,16 +374,6 @@ else(USE_SYSTEM_QTSINGLEAPPLICATION)
   set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
 endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
-# QtIoCompressor isn't patched, so we can use a system version if it's
-# available
-find_path(QTIOCOMPRESSOR_INCLUDE_DIRS qtiocompressor.h PATH_SUFFIXES QtSolutions)
-find_library(QTIOCOMPRESSOR_LIBRARIES QtSolutions_IOCompressor-2.3)
-if(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
-  add_subdirectory(3rdparty/qtiocompressor)
-  set(QTIOCOMPRESSOR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtiocompressor)
-  set(QTIOCOMPRESSOR_LIBRARIES qtiocompressor)
-endif(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
-
 # When/if upstream accepts our or reimplement our patches then these options can be
 # used to link to system installed qxt instead.
 option(USE_SYSTEM_QXT "Don't set this option unless your system Qxt library has been compiled with the Clementine patches in 3rdparty" OFF)

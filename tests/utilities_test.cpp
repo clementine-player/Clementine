@@ -18,6 +18,8 @@
 
 #include "core/utilities.h"
 
+#include <zlib.h>
+
 #include <QDateTime>
 #include <QtDebug>
 
@@ -53,4 +55,53 @@ TEST(UtilitiesTest, ParseRFC822DateTim) {
   result_DateTime = Utilities::ParseRFC822DateTime(
       QString("Mon, 12 March 2012 20:00:00 +0100"));
   EXPECT_TRUE(result_DateTime.isValid());
+}
+
+namespace {
+
+// gzip, as Magnatune serves its database, with zlib's deflate.
+QByteArray Gzip(const QByteArray& data) {
+  z_stream stream = {};
+  // 16 more than the largest window: gzip's header and trailer.
+  EXPECT_EQ(Z_OK, deflateInit2(&stream, Z_DEFAULT_COMPRESSION, Z_DEFLATED,
+                               MAX_WBITS + 16, 8, Z_DEFAULT_STRATEGY));
+  QByteArray out(deflateBound(&stream, data.size()), '\0');
+  stream.next_in = reinterpret_cast<Bytef*>(const_cast<char*>(data.data()));
+  stream.avail_in = data.size();
+  stream.next_out = reinterpret_cast<Bytef*>(out.data());
+  stream.avail_out = out.size();
+  EXPECT_EQ(Z_STREAM_END, deflate(&stream, Z_FINISH));
+  out.resize(stream.total_out);
+  deflateEnd(&stream);
+  return out;
+}
+
+}  // namespace
+
+TEST(UtilitiesTest, Gunzip) {
+  const QByteArray xml("<AllSongs><Track/></AllSongs>");
+  QByteArray out;
+  EXPECT_TRUE(Utilities::Gunzip(Gzip(xml), &out));
+  EXPECT_EQ(xml.toStdString(), out.toStdString());
+
+  // More than one buffer's worth.
+  const QByteArray big = QByteArray("clementine").repeated(100000);
+  EXPECT_TRUE(Utilities::Gunzip(Gzip(big), &out));
+  // Not EXPECT_EQ, which would print a megabyte on failure.
+  EXPECT_TRUE(big == out);
+}
+
+TEST(UtilitiesTest, GunzipRejectsWhatIsntWholeGzip) {
+  QByteArray out("left over");
+  EXPECT_FALSE(Utilities::Gunzip(QByteArray(), &out));
+  EXPECT_TRUE(out.isEmpty());
+
+  EXPECT_FALSE(Utilities::Gunzip("<AllSongs/>", &out));
+
+  const QByteArray gzip = Gzip(QByteArray("clementine").repeated(1000));
+  EXPECT_FALSE(Utilities::Gunzip(gzip.left(gzip.size() / 2), &out));
+  EXPECT_TRUE(out.isEmpty());
+
+  // zlib's own format isn't gzip.
+  EXPECT_FALSE(Utilities::Gunzip(qCompress("clementine").mid(4), &out));
 }

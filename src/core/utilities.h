@@ -76,6 +76,9 @@ QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
 QByteArray Sha1File(QFile& file);
 QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
+// Decompresses gzip data into *out. False if it isn't whole gzip data.
+bool Gunzip(const QByteArray& data, QByteArray* out);
+
 // Picks an unused ephemeral port number.  Doesn't hold the port open so
 // there's the obvious race condition
 quint16 PickUnusedPort();
