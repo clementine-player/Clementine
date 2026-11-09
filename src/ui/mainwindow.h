@@ -251,8 +251,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NowPlayingWidgetPositionChanged(bool above_status_bar);
 
-  void SongSaveComplete(bool success, TagReaderReply* reply,
-                        const QPersistentModelIndex& index);
+  void SongSaveComplete(bool saved, const QPersistentModelIndex& index);
 
   void ShowCoverManager();
   bool IsLastFmEnabled();
