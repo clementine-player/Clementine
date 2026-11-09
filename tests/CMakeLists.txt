@@ -2,13 +2,7 @@ cmake_minimum_required(VERSION 3.16.0)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -Wno-c++11-narrowing")
 
-if(USE_SYSTEM_GMOCK)
-  include_directories(${GMOCK_INCLUDE_DIRS} ${GTEST_INCLUDE_DIRS})
-else(USE_SYSTEM_GMOCK)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/include)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest/include)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest)
-endif(USE_SYSTEM_GMOCK)
+set(GMOCK_LIBRARIES GTest::gmock GTest::gtest)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/src)
@@ -37,32 +31,6 @@ if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
 endif(HAVE_LIBGPOD)
 
-if(NOT USE_SYSTEM_GMOCK)
-  set(GTEST-SOURCES
-    ../3rdparty/gmock/gtest/src/gtest.cc
-    ../3rdparty/gmock/gtest/src/gtest-death-test.cc
-    ../3rdparty/gmock/gtest/src/gtest-filepath.cc
-    ../3rdparty/gmock/gtest/src/gtest-port.cc
-    ../3rdparty/gmock/gtest/src/gtest-test-part.cc
-    ../3rdparty/gmock/gtest/src/gtest-typed-test.cc
-  )
-
-  add_library(gtest STATIC EXCLUDE_FROM_ALL ${GTEST-SOURCES})
-
-  set(GMOCK-SOURCES
-    ../3rdparty/gmock/src/gmock-cardinalities.cc
-    ../3rdparty/gmock/src/gmock.cc
-    ../3rdparty/gmock/src/gmock-internal-utils.cc
-    ../3rdparty/gmock/src/gmock-matchers.cc
-    ../3rdparty/gmock/src/gmock-printers.cc
-    ../3rdparty/gmock/src/gmock-spec-builders.cc
-  )
-
-  add_library(gmock STATIC EXCLUDE_FROM_ALL ${GMOCK-SOURCES})
-  set(GMOCK_LIBRARIES gmock gtest)
-endif(NOT USE_SYSTEM_GMOCK)
-
-add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
 
 set(TESTUTILS-SOURCES
   mock_networkaccessmanager.cpp

@@ -24,9 +24,9 @@
 #include <QUrl>
 #include <memory>
 
+#include "core/friendtest.h"
 #include "core/organise.h"
 #include "core/song.h"
-#include "gtest/gtest_prod.h"
 #include "library/librarybackend.h"
 
 class LibraryWatcher;
@@ -102,7 +102,7 @@ class OrganiseDialog : public QDialog {
 
   bool resized_by_user_;
 
-  FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
+  CLEMENTINE_FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
 };
 
 #endif  // ORGANISEDIALOG_H

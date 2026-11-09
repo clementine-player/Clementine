@@ -35,7 +35,6 @@ if (LINUX)
 endif (LINUX)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(../3rdparty/gmock/gtest/include)
 
 # Activate fast QString concatenation
 add_definitions(-DQT_USE_QSTRINGBUILDER)
