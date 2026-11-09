@@ -13,10 +13,9 @@ set(QXT-MOC-HEADERS
 include_directories(${X11_INCLUDE_DIR})
 include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 
+# Not built on macOS, which has its own global shortcut backend.
 if(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_win.cpp)
-elseif(APPLE)
-  set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_mac.cpp)
 else(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_x11.cpp)
 endif(WIN32)

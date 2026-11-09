@@ -74,9 +74,25 @@ Files: dist/cpplint.py
 Copyright: 2009, Google Inc.
 License: BSD-Google
 
+Files: 3rdparty/libmygpo-qt5/*
+Copyright: 2010-2014, Stefan Derkits <stefan@derkits.at>
+           2010-2011, Christian Wagner <christian.wagner86@gmx.at>
+           2010-2011, Felix Winter <ixos01@gmail.com>
+License: LGPL-2.1+
+
 Files: 3rdparty/libprojectm/*
 Copyright: 2003-2009 projectM Team
 License: LGPL-2.1
+
+Files: 3rdparty/mini-gmp/*
+Copyright: 1991-1997, 1999-2022, Free Software Foundation, Inc.
+License: LGPL-3+ or GPL-2+
+
+Files: 3rdparty/monocypher/*
+Copyright: 2017-2023, Loup Vaillant
+           2017-2019, Michael Savage
+           2017-2023, Fabio Scotoni
+License: BSD-2-clause or CC0-1.0
 
 Files: 3rdparty/qtsingleapplication/*
 Copyright: 2009, Nokia Corporation
@@ -86,10 +102,6 @@ Files: 3rdparty/qxt/*
 Copyright: 2007, Qxt Foundation
 License: CPL 1.0 and/or LGPL-2.1
 
-Files: 3rdparty/sha2/*
-Copyright: 2000-2001, Aaron D. Gifford
-License: BSD-3-clause
-
 Files: 3rdparty/qocoa/*
 Copyright: 2011, Mick McQuaid
 License: Expat
@@ -97,6 +109,10 @@ License: Expat
 Files: 3rdparty/taglib/*
 Copyright: 2002-2008, Scott Wheeler
 License: LGPL-2.1
+
+Files: 3rdparty/utf8-cpp/*
+Copyright: 2006, Nemanja Trifunovic
+License: BSL-1.0
 
 License: LGPL-2.1
   This library is free software; you can redistribute it and/or modify it
@@ -280,3 +296,80 @@ License: Expat
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
+
+License: LGPL-2.1+
+  This library is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
+  the Free Software Foundation; either version 2.1 of the License, or (at
+  your option) any later version.
+  .
+  On Debian systems, the full text of the GNU Lesser General Public
+  License version 2.1 can be found in the file
+  `/usr/share/common-licenses/LGPL-2.1'.
+
+License: LGPL-3+
+  This library is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
+  the Free Software Foundation; either version 3 of the License, or (at
+  your option) any later version.
+  .
+  On Debian systems, the full text of the GNU Lesser General Public
+  License version 3 can be found in the file
+  `/usr/share/common-licenses/LGPL-3'.
+
+License: BSD-2-clause
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are
+  met:
+  .
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+  .
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the
+     distribution.
+  .
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: CC0-1.0
+  To the extent possible under law, the author(s) have dedicated all
+  copyright and related and neighboring rights to this software to the
+  public domain worldwide. This software is distributed without any
+  warranty.
+  .
+  On Debian systems, the full text of the CC0 1.0 Universal license can be
+  found in the file `/usr/share/common-licenses/CC0-1.0'.
+
+License: BSL-1.0
+  Permission is hereby granted, free of charge, to any person or organization
+  obtaining a copy of the software and accompanying documentation covered by
+  this license (the "Software") to use, reproduce, display, distribute,
+  execute, and transmit the Software, and to prepare derivative works of the
+  Software, and to permit third-parties to whom the Software is furnished to
+  do so, all subject to the following:
+  .
+  The copyright notices in the Software and this entire statement, including
+  the above license grant, this restriction and the following disclaimer,
+  must be included in all copies of the Software, in whole or in part, and
+  all derivative works of the Software, unless such copies or derivative
+  works are solely in the form of machine-executable object code generated by
+  a source language processor.
+  .
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+  SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+  FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+  DEALINGS IN THE SOFTWARE.
