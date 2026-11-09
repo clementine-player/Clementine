@@ -9,9 +9,16 @@
 import os
 import subprocess
 import sys
+import time
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_ENTITLEMENTS = os.path.join(SCRIPT_DIR, 'entitlements.plist')
+
+# Apple's timestamp server sometimes doesn't answer, and codesign then fails
+# with "A timestamp was expected but was not found". It answers again a few
+# seconds later, so that failure is retried; any other one fails at once.
+TIMESTAMP_ATTEMPTS = 5
+TIMESTAMP_ERROR = 'timestamp was expected but was not found'
 
 
 def IsMachO(path):
@@ -76,7 +83,18 @@ def SignPath(path, developer_id, entitlements):
   if not IsSparkleHelper(path):
     args += ['--entitlements', entitlements]
   args += ['-v', path]
-  subprocess.check_call(args)
+
+  for attempt in range(1, TIMESTAMP_ATTEMPTS + 1):
+    result = subprocess.run(args, stderr=subprocess.PIPE, text=True)
+    sys.stderr.write(result.stderr)
+    if result.returncode == 0:
+      return
+    if TIMESTAMP_ERROR not in result.stderr or attempt == TIMESTAMP_ATTEMPTS:
+      raise subprocess.CalledProcessError(result.returncode, args)
+    delay = 2 ** attempt
+    print('No timestamp from Apple for %s, retrying in %ds (attempt %d of %d)'
+          % (path, delay, attempt + 1, TIMESTAMP_ATTEMPTS), file=sys.stderr)
+    time.sleep(delay)
 
 
 def main():
