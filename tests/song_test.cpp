@@ -17,7 +17,10 @@
 
 #include "core/song.h"
 
+#include <flacpicture.h>
 #include <id3v2tag.h>
+#include <vorbisfile.h>
+#include <xiphcomment.h>
 
 #include <QStringList>
 #include <QTemporaryFile>
@@ -262,6 +265,26 @@ TEST_F(SongTest, TagsOgg) {
   EXPECT_EQ(12, new_song.track());
   EXPECT_EQ(1234, new_song.disc());
   EXPECT_EQ(2015, new_song.year());
+}
+
+TEST_F(SongTest, EmbeddedCoverOgg) {
+  TemporaryResource r(":/testdata/beep.ogg");
+  const QByteArray image("not really a jpeg");
+  {
+    TagLib::Ogg::Vorbis::File file(QFile::encodeName(r.fileName()).constData());
+    ASSERT_TRUE(file.isValid());
+    TagLib::FLAC::Picture* picture = new TagLib::FLAC::Picture;
+    picture->setType(TagLib::FLAC::Picture::FrontCover);
+    picture->setMimeType("image/jpeg");
+    picture->setData(TagLib::ByteVector(image.constData(), image.size()));
+    // The tag owns the picture.
+    file.tag()->addPicture(picture);
+    ASSERT_TRUE(file.save());
+  }
+
+  Song song = ReadSongFromFile(r.fileName());
+  EXPECT_EQ(Song::kEmbeddedCover, song.art_automatic());
+  EXPECT_TRUE(image == TagReader().LoadEmbeddedArt(r.fileName()));
 }
 
 TEST_F(SongTest, RatingFLAC) {
