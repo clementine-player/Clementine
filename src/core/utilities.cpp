@@ -27,6 +27,7 @@
 #include "utilities.h"
 
 #include <stdlib.h>
+#include <zlib.h>
 
 #include <QApplication>
 #include <QDateTime>
@@ -501,6 +502,40 @@ QByteArray HmacMd5(const QByteArray& key, const QByteArray& data) {
 
 QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
   return Hmac(key, data, Sha1_Algo);
+}
+
+bool Gunzip(const QByteArray& data, QByteArray* out) {
+  out->clear();
+
+  z_stream stream = {};
+  // 16 more than the largest window: gzip's header and trailer, not zlib's.
+  if (inflateInit2(&stream, MAX_WBITS + 16) != Z_OK) return false;
+
+  stream.next_in =
+      reinterpret_cast<Bytef*>(const_cast<char*>(data.constData()));
+  stream.avail_in = static_cast<uInt>(data.size());
+
+  char buffer[64 * 1024];
+  int result = Z_OK;
+  while (result == Z_OK) {
+    stream.next_out = reinterpret_cast<Bytef*>(buffer);
+    stream.avail_out = sizeof(buffer);
+    result = inflate(&stream, Z_NO_FLUSH);
+    if (result == Z_OK || result == Z_STREAM_END) {
+      out->append(buffer, sizeof(buffer) - stream.avail_out);
+    }
+    // Out of input before the end: the data is cut short.
+    if (result == Z_OK && stream.avail_in == 0 && stream.avail_out != 0) {
+      result = Z_BUF_ERROR;
+    }
+  }
+  inflateEnd(&stream);
+
+  if (result != Z_STREAM_END) {
+    out->clear();
+    return false;
+  }
+  return true;
 }
 
 // File must not be open and will be closed afterwards!

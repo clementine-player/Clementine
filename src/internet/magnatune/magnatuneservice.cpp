@@ -43,6 +43,7 @@
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/core/internetmodel.h"
@@ -52,7 +53,6 @@
 #include "magnatunedownloaddialog.h"
 #include "magnatuneplaylistitem.h"
 #include "magnatuneurlhandler.h"
-#include "qtiocompressor.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
@@ -175,10 +175,9 @@ void MagnatuneService::ReloadDatabaseFinished() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   // The XML file is compressed
-  QtIOCompressor gzip(reply);
-  gzip.setStreamFormat(QtIOCompressor::GzipFormat);
-  if (!gzip.open(QIODevice::ReadOnly)) {
-    qLog(Warning) << "Error opening gzip stream";
+  QByteArray xml;
+  if (!Utilities::Gunzip(reply->readAll(), &xml)) {
+    qLog(Warning) << "The Magnatune database isn't valid gzip data";
     return;
   }
 
@@ -186,7 +185,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
   library_backend_->DeleteAll();
 
   // Parse the XML we got from Magnatune
-  QXmlStreamReader reader(&gzip);
+  QXmlStreamReader reader(xml);
   SongList songs;
   while (!reader.atEnd()) {
     reader.readNext();
