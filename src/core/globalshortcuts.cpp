@@ -22,6 +22,7 @@
 #include "globalshortcuts.h"
 
 #include <QAction>
+#include <QGuiApplication>
 #include <QShortcut>
 #include <QtDebug>
 
@@ -34,6 +35,8 @@
 
 #ifdef HAVE_DBUS
 #include <QtDBus>
+
+#include "portalglobalshortcutbackend.h"
 #endif
 
 const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
@@ -41,6 +44,7 @@ const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 GlobalShortcuts::GlobalShortcuts(QWidget* parent)
     : QWidget(parent),
       gnome_backend_(nullptr),
+      portal_backend_(nullptr),
       system_backend_(nullptr),
       use_gnome_(false),
       have_kglobalaccel_(
@@ -97,6 +101,9 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
   // Create backends - these do the actual shortcut registration
   gnome_backend_ = new GnomeGlobalShortcutBackend(this);
   kglobalaccel_backend_ = new KGlobalAccelShortcutBackend(this);
+#ifdef HAVE_DBUS
+  portal_backend_ = new PortalGlobalShortcutBackend(this);
+#endif
 
 #ifndef Q_OS_DARWIN
   system_backend_ = new QxtGlobalShortcutBackend(this);
@@ -165,13 +172,47 @@ void GlobalShortcuts::ReloadSettings() {
 void GlobalShortcuts::Unregister() {
   if (gnome_backend_->is_active()) gnome_backend_->Unregister();
   if (kglobalaccel_backend_->is_active()) kglobalaccel_backend_->Unregister();
+#ifdef HAVE_DBUS
+  if (portal_backend_->is_active()) portal_backend_->Unregister();
+#endif
   if (system_backend_->is_active()) system_backend_->Unregister();
 }
 
 void GlobalShortcuts::Register() {
   if (have_kglobalaccel_ && kglobalaccel_backend_->Register()) return;
+  // On Wayland, only the desktop sees keys pressed in other applications, so
+  // the portal is the way to get them. On X11, the system backend gets them
+  // without the desktop asking the user first.
+#ifdef HAVE_DBUS
+  if (QGuiApplication::platformName().startsWith("wayland") &&
+      portal_backend_->Register()) {
+    return;
+  }
+#endif
   if (use_gnome_ && gnome_backend_->Register()) return;
   system_backend_->Register();
+}
+
+bool GlobalShortcuts::IsPortalActive() const {
+#ifdef HAVE_DBUS
+  return portal_backend_->is_active();
+#else
+  return false;
+#endif
+}
+
+bool GlobalShortcuts::CanConfigurePortal() const {
+#ifdef HAVE_DBUS
+  return IsPortalActive() && portal_backend_->CanConfigure();
+#else
+  return false;
+#endif
+}
+
+void GlobalShortcuts::ConfigurePortal() {
+#ifdef HAVE_DBUS
+  portal_backend_->Configure();
+#endif
 }
 
 bool GlobalShortcuts::IsMacAccessibilityEnabled() const {

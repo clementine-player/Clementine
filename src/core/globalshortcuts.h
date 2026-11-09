@@ -32,6 +32,7 @@ class QAction;
 class QShortcut;
 
 class GlobalShortcutBackend;
+class PortalGlobalShortcutBackend;
 
 class GlobalShortcuts : public QWidget {
   Q_OBJECT
@@ -51,10 +52,15 @@ class GlobalShortcuts : public QWidget {
   QMap<QString, Shortcut> shortcuts() const { return shortcuts_; }
   bool IsGsdAvailable() const;
   bool IsMacAccessibilityEnabled() const;
+  // Whether the desktop portal handles the shortcuts, so they're changed in
+  // the desktop's settings.
+  bool IsPortalActive() const;
+  bool CanConfigurePortal() const;
 
  public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();
+  void ConfigurePortal();
 
   void Unregister();
   void Register();
@@ -95,6 +101,7 @@ class GlobalShortcuts : public QWidget {
  private:
   GlobalShortcutBackend* gnome_backend_;
   GlobalShortcutBackend* kglobalaccel_backend_;
+  PortalGlobalShortcutBackend* portal_backend_;
   GlobalShortcutBackend* system_backend_;
 
   QMap<QString, Shortcut> shortcuts_;
