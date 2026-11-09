@@ -1,4 +1,4 @@
-// Monocypher version 4.0.2
+// Monocypher version 4.0.3
 //
 // This file is dual-licensed.  Choose whichever licence you want from
 // the two licences listed below.
@@ -113,16 +113,16 @@ static u64 load64_le(const u8 s[8])
 
 static void store32_le(u8 out[4], u32 in)
 {
-	out[0] =  in        & 0xff;
-	out[1] = (in >>  8) & 0xff;
-	out[2] = (in >> 16) & 0xff;
-	out[3] = (in >> 24) & 0xff;
+	out[0] = (u8)(in      );
+	out[1] = (u8)(in >>  8);
+	out[2] = (u8)(in >> 16);
+	out[3] = (u8)(in >> 24);
 }
 
 static void store64_le(u8 out[8], u64 in)
 {
-	store32_le(out    , (u32)in );
-	store32_le(out + 4, in >> 32);
+	store32_le(out    , (u32)(in      ));
+	store32_le(out + 4, (u32)(in >> 32));
 }
 
 static void load32_le_buf (u32 *dst, const u8 *src, size_t size) {
@@ -145,8 +145,9 @@ static int neq0(u64 diff)
 {
 	// constant time comparison to zero
 	// return diff != 0 ? -1 : 0
-	u64 half = (diff >> 32) | ((u32)diff);
-	return (1 & ((half - 1) >> 32)) - 1;
+	u64 half = (diff >> 32) | ((u32)diff);  // half < 2^32
+	u64 eq0  = 1 & ((half - 1) >> 32);      // half == 0 ? 1 : 0
+	return (int)eq0 - 1;                    // half == 0 ? 0 : -1
 }
 
 static u64 x16(const u8 a[16], const u8 b[16])
@@ -232,7 +233,7 @@ u64 crypto_chacha20_djb(u8 *cipher_text, const u8 *plain_text,
 	size_t nb_blocks = text_size >> 6;
 	FOR (i, 0, nb_blocks) {
 		chacha20_rounds(pool, input);
-		if (plain_text != 0) {
+		if (plain_text != NULL) {
 			FOR (j, 0, 16) {
 				u32 p = pool[j] + input[j];
 				store32_le(cipher_text, p ^ load32_le(plain_text));
@@ -255,7 +256,7 @@ u64 crypto_chacha20_djb(u8 *cipher_text, const u8 *plain_text,
 
 	// Last (incomplete) block
 	if (text_size > 0) {
-		if (plain_text == 0) {
+		if (plain_text == NULL) {
 			plain_text = zero;
 		}
 		chacha20_rounds(pool, input);
@@ -342,12 +343,12 @@ static void poly_blocks(crypto_poly1305_ctx *ctx, const u8 *in,
 		const u32 x4 =                                s4*rr4;
 
 		// partial reduction modulo 2^130 - 5
-		const u32 u5 = x4 + (x3 >> 32); // u5 <= 7ffffff5
-		const u64 u0 = (u5 >>  2) * 5 + (x0 & 0xffffffff);
-		const u64 u1 = (u0 >> 32)     + (x1 & 0xffffffff) + (x0 >> 32);
-		const u64 u2 = (u1 >> 32)     + (x2 & 0xffffffff) + (x1 >> 32);
-		const u64 u3 = (u2 >> 32)     + (x3 & 0xffffffff) + (x2 >> 32);
-		const u32 u4 = (u3 >> 32)     + (u5 & 3); // u4 <= 4
+		const u32 u5 = (u32)(x3 >> 32) + x4; // u5 <= 7ffffff5
+		const u64 u0 = (u32)(u5 >>  2) * 5 + (x0 & 0xffffffff);
+		const u64 u1 = (u32)(u0 >> 32)     + (x1 & 0xffffffff) + (x0 >> 32);
+		const u64 u2 = (u32)(u1 >> 32)     + (x2 & 0xffffffff) + (x1 >> 32);
+		const u64 u3 = (u32)(u2 >> 32)     + (x3 & 0xffffffff) + (x2 >> 32);
+		const u32 u4 = (u32)(u3 >> 32)     + (u5 & 3); // u4 <= 4
 
 		// Update the hash
 		h0 = u0 & 0xffffffff;
@@ -547,6 +548,7 @@ void crypto_blake2b_keyed_init(crypto_blake2b_ctx *ctx, size_t hash_size,
 		// same as calling crypto_blake2b_update(ctx, key_block , 128)
 		load64_le_buf(ctx->input, key_block, 16);
 		ctx->input_idx = 128;
+		WIPE_BUFFER(key_block);
 	}
 }
 
@@ -863,10 +865,10 @@ void crypto_argon2(u8 *hash, u32 hash_size, void *work_area,
 					u32 next_slice   = ((slice + 1) % 4) * segment_size;
 					u32 window_start = pass == 0 ? 0     : next_slice;
 					u32 nb_segments  = pass == 0 ? slice : 3;
-					u64 lane         =
+					u32 lane         =
 						pass == 0 && slice == 0
 						? segment
-						: (index_seed >> 32) % config.nb_lanes;
+						: (u32)(index_seed >> 32) % config.nb_lanes;
 					u32 window_size  =
 						nb_segments * segment_size +
 						(lane  == segment ? block-1 :
@@ -877,8 +879,8 @@ void crypto_argon2(u8 *hash, u32 hash_size, void *work_area,
 					u64  x         = (j1 * j1)         >> 32;
 					u64  y         = (window_size * x) >> 32;
 					u64  z         = (window_size - 1) - y;
-					u64  ref       = (window_start + z) % lane_size;
-					u32  index     = lane * lane_size + (u32)ref;
+					u32  ref       = (u32)((window_start + z) % lane_size);
+					u32  index     = lane * lane_size + ref;
 					blk *reference = blocks + index;
 
 					// Shuffle the previous & reference block
@@ -974,23 +976,53 @@ static void fe_neg (fe h,const fe f           ){FOR(i,0,10) h[i] = -f[i];      }
 static void fe_add (fe h,const fe f,const fe g){FOR(i,0,10) h[i] = f[i] + g[i];}
 static void fe_sub (fe h,const fe f,const fe g){FOR(i,0,10) h[i] = f[i] - g[i];}
 
+// Some compilers, when inlining fe_cswap() or fe_ccopy(), may introduce
+// a timing leak.  It happens when it notices `b` has only 2 possible
+// values, and either replace the arithmetic by a secret dependent
+// branch, or (as has been observed), swap pointers instead of values,
+// which intruduces a secret dependent index.
+//
+// We apply two mitigations here:
+// - Add `volatile` in the mask declaration.
+// - Unroll the copy loop (costs couple hundred bytes of binary code).
+//
+// As of June 2026, those mitigation work when applied separately or
+// together.  Applying them both is currently overkill, but may help
+// delay the day compilers grow clever enough to defeat it.  (The true
+// fix is in the semantics of the language itself: C currently has no
+// way to specify constant time code).
+//
+// Note (Loup): as of June 2026, the problem has yet to surface in
+// fe_cswap(), but since this is almost the same code as fe_ccopy() I
+// believe it is more prudent to apply the precaution there too.
 static void fe_cswap(fe f, fe g, int b)
 {
-	i32 mask = -b; // -1 = 0xffffffff
-	FOR (i, 0, 10) {
-		i32 x = (f[i] ^ g[i]) & mask;
-		f[i] = f[i] ^ x;
-		g[i] = g[i] ^ x;
-	}
+	volatile i32 mask = -b; // -1 = 0xffffffff
+	i32 x0 = (f[0] ^ g[0]) & mask;    f[0] = f[0] ^ x0;    g[0] = g[0] ^ x0;
+	i32 x1 = (f[1] ^ g[1]) & mask;    f[1] = f[1] ^ x1;    g[1] = g[1] ^ x1;
+	i32 x2 = (f[2] ^ g[2]) & mask;    f[2] = f[2] ^ x2;    g[2] = g[2] ^ x2;
+	i32 x3 = (f[3] ^ g[3]) & mask;    f[3] = f[3] ^ x3;    g[3] = g[3] ^ x3;
+	i32 x4 = (f[4] ^ g[4]) & mask;    f[4] = f[4] ^ x4;    g[4] = g[4] ^ x4;
+	i32 x5 = (f[5] ^ g[5]) & mask;    f[5] = f[5] ^ x5;    g[5] = g[5] ^ x5;
+	i32 x6 = (f[6] ^ g[6]) & mask;    f[6] = f[6] ^ x6;    g[6] = g[6] ^ x6;
+	i32 x7 = (f[7] ^ g[7]) & mask;    f[7] = f[7] ^ x7;    g[7] = g[7] ^ x7;
+	i32 x8 = (f[8] ^ g[8]) & mask;    f[8] = f[8] ^ x8;    g[8] = g[8] ^ x8;
+	i32 x9 = (f[9] ^ g[9]) & mask;    f[9] = f[9] ^ x9;    g[9] = g[9] ^ x9;
 }
 
 static void fe_ccopy(fe f, const fe g, int b)
 {
-	i32 mask = -b; // -1 = 0xffffffff
-	FOR (i, 0, 10) {
-		i32 x = (f[i] ^ g[i]) & mask;
-		f[i] = f[i] ^ x;
-	}
+	volatile i32 mask = -b; // -1 = 0xffffffff
+	i32 x0 = (f[0] ^ g[0]) & mask;    f[0] = f[0] ^ x0;
+	i32 x1 = (f[1] ^ g[1]) & mask;    f[1] = f[1] ^ x1;
+	i32 x2 = (f[2] ^ g[2]) & mask;    f[2] = f[2] ^ x2;
+	i32 x3 = (f[3] ^ g[3]) & mask;    f[3] = f[3] ^ x3;
+	i32 x4 = (f[4] ^ g[4]) & mask;    f[4] = f[4] ^ x4;
+	i32 x5 = (f[5] ^ g[5]) & mask;    f[5] = f[5] ^ x5;
+	i32 x6 = (f[6] ^ g[6]) & mask;    f[6] = f[6] ^ x6;
+	i32 x7 = (f[7] ^ g[7]) & mask;    f[7] = f[7] ^ x7;
+	i32 x8 = (f[8] ^ g[8]) & mask;    f[8] = f[8] ^ x8;
+	i32 x9 = (f[9] ^ g[9]) & mask;    f[9] = f[9] ^ x9;
 }
 
 
@@ -1705,7 +1737,7 @@ static void ge_tobytes(u8 s[32], const ge *h)
 	fe_mul(x, h->X, recip);
 	fe_mul(y, h->Y, recip);
 	fe_tobytes(s, y);
-	s[31] ^= fe_isodd(x) << 7;
+	s[31] ^= (u8)fe_isodd(x) << 7;
 
 	WIPE_BUFFER(recip);
 	WIPE_BUFFER(x);
