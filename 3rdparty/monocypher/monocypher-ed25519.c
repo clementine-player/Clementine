@@ -1,4 +1,4 @@
-// Monocypher version 4.0.2
+// Monocypher version 4.0.3
 //
 // This file is dual-licensed.  Choose whichever licence you want from
 // the two licences listed below.
@@ -93,14 +93,14 @@ static u64 load64_be(const u8 s[8])
 
 static void store64_be(u8 out[8], u64 in)
 {
-	out[0] = (in >> 56) & 0xff;
-	out[1] = (in >> 48) & 0xff;
-	out[2] = (in >> 40) & 0xff;
-	out[3] = (in >> 32) & 0xff;
-	out[4] = (in >> 24) & 0xff;
-	out[5] = (in >> 16) & 0xff;
-	out[6] = (in >>  8) & 0xff;
-	out[7] =  in        & 0xff;
+	out[0] = (u8)(in >> 56);
+	out[1] = (u8)(in >> 48);
+	out[2] = (u8)(in >> 40);
+	out[3] = (u8)(in >> 32);
+	out[4] = (u8)(in >> 24);
+	out[5] = (u8)(in >> 16);
+	out[6] = (u8)(in >>  8);
+	out[7] = (u8) in       ;
 }
 
 static void load64_be_buf (u64 *dst, const u8 *src, size_t size) {
@@ -393,6 +393,7 @@ void crypto_sha512_hkdf_expand(u8       *okm,  size_t okm_size,
 		okm_size -= out_size;
 		ctr++;
 	}
+	WIPE_BUFFER(blk);
 }
 
 void crypto_sha512_hkdf(u8       *okm , size_t okm_size,
@@ -406,6 +407,8 @@ void crypto_sha512_hkdf(u8       *okm , size_t okm_size,
 
 	// Expand
 	crypto_sha512_hkdf_expand(okm, okm_size, prk, sizeof(prk), info, info_size);
+
+	WIPE_BUFFER(prk);
 }
 
 ///////////////
@@ -441,7 +444,7 @@ static void hash_reduce(u8 h[32],
 	crypto_eddsa_reduce(h, hash);
 }
 
-static void ed25519_dom_sign(u8 signature [64], const u8 secret_key[32],
+static void ed25519_dom_sign(u8 signature[64], const u8 secret_key[64],
                              const u8 *dom,     size_t dom_size,
                              const u8 *message, size_t message_size)
 {
