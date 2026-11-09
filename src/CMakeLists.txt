@@ -1151,6 +1151,7 @@ optional_source(HAVE_DBUS
     core/dbussleepinhibitor.cpp
     core/mpris.cpp
     core/mpris2.cpp
+    core/portalglobalshortcutbackend.cpp
     networkremote/avahi.cpp
   HEADERS
     airplay/avahiairplaydiscovery.h
@@ -1158,6 +1159,7 @@ optional_source(HAVE_DBUS
     core/dbussleepinhibitor.h
     core/mpris.h
     core/mpris2.h
+    core/portalglobalshortcutbackend.h
 )
 
 optional_source(HAVE_WIIMOTEDEV

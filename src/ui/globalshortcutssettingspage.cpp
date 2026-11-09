@@ -69,6 +69,8 @@ void GlobalShortcutsSettingsPage::Load() {
 
     connect(ui_->mac_open, SIGNAL(clicked()), manager,
             SLOT(ShowMacAccessibilityDialog()));
+    connect(ui_->portal_open, &QPushButton::clicked, manager,
+            &GlobalShortcuts::ConfigurePortal);
 
     if (!manager->IsGsdAvailable()) {
       ui_->gnome_container->hide();
@@ -100,6 +102,14 @@ void GlobalShortcutsSettingsPage::Load() {
   }
 
   ui_->mac_container->setVisible(!manager->IsMacAccessibilityEnabled());
+
+  // The desktop decides the portal's keys: the ones here would only be what
+  // Clementine asked for the first time.
+  const bool portal = manager->IsPortalActive();
+  ui_->portal_container->setVisible(portal);
+  ui_->portal_open->setVisible(manager->CanConfigurePortal());
+  ui_->list_container->setVisible(!portal);
+  if (portal) ui_->gnome_container->hide();
 }
 
 void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,
