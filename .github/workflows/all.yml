@@ -376,9 +376,7 @@ jobs:
         run: |
           # liblastfm isn't a dependency any more - Last.fm scrobbling talks
           # directly to the web service API now (see
-          # src/internet/lastfm/lastfmws.*). libmygpo-qt still has no Qt6
-          # build anywhere, so gpodder sync falls back to the vendored
-          # 3rdparty/libmygpo-qt5 copy instead.
+          # src/internet/lastfm/lastfmws.*).
           packages="
             build-essential
             ccache
@@ -646,8 +644,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
-          # libmygpo-qt: see the note in push_translations above.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm: see
+          # the note in push_translations above.
           packages="
             ccache
             cmake
@@ -1630,8 +1628,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          # liblastfm and libmygpo-qt: see the note in push_translations
-          # above.
+          # liblastfm: see the note in push_translations above.
           packages="
             build-essential
             ccache
@@ -1803,8 +1800,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          # liblastfm and libmygpo-qt: see the note in push_translations
-          # above.
+          # liblastfm: see the note in push_translations above.
           packages="
             build-essential
             ccache
@@ -1969,8 +1965,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
-          # libmygpo-qt: see the note in push_translations above.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm: see
+          # the note in push_translations above.
           packages="
             ccache
             cmake
@@ -2139,8 +2135,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
-          # libmygpo-qt: see the note in push_translations above.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm: see
+          # the note in push_translations above.
           packages="
             ccache
             cmake
@@ -2309,8 +2305,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
-          # libmygpo-qt: see the note in push_translations above.
+          # QCA is unused by CMakeLists.txt (dead dependency). liblastfm: see
+          # the note in push_translations above.
           packages="
             ccache
             cmake

@@ -73,7 +73,6 @@ pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
-pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(TAGLIB taglib)
@@ -395,17 +394,6 @@ endif (USE_SYSTEM_QXT)
 
 # googletest, for the tests. Without it, Clementine builds without them.
 find_package(GTest CONFIG)
-
-# Use the system libmygpo-qt5 if a recent enough version was found
-if(LIBMYGPO_QT5_FOUND)
-  set(MYGPOQT5_LIBRARIES ${LIBMYGPO_QT5_LIBRARIES})
-  set(MYGPOQT5_INCLUDE_DIRS ${LIBMYGPO_QT5_INCLUDE_DIRS})
-else()
-  add_definitions(-DMYGPO_STATIC)
-  add_subdirectory(3rdparty/libmygpo-qt5)
-  set(MYGPOQT5_LIBRARIES mygpo-qt5)
-  set(MYGPOQT5_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libmygpo-qt5/src)
-endif()
 
 # Qocoa
 add_subdirectory(3rdparty/qocoa)
