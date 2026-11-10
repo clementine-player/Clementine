@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 David Sansome <me@davidsansome.com> -->
-<application>
+<component type="desktop-application">
 	<id>org.clementine_player.Clementine</id>
-	<id type="desktop">org.clementine_player.Clementine.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0+</project_license>
-	<name>Clementine Music Player</name>
+	<project_license>GPL-3.0-or-later</project_license>
+	<name>Clementine</name>
 	<summary>Plays music files and internet radio</summary>
+	<developer id="org.clementine_player">
+		<name>David Sansome, John Maguire &amp; Arnaud Bienner</name>
+	</developer>
 	<description>
 		<p>
 			Clementine is a multiplatform music player focusing on a fast and
@@ -35,16 +37,25 @@
 			<li>Queue manager.</li>
 		</ul>
 	</description>
+	<launchable type="desktop-id">org.clementine_player.Clementine.desktop</launchable>
+	<provides>
+		<binary>clementine</binary>
+	</provides>
 	<screenshots>
-		<screenshot type="default" width="1139" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-1.png</screenshot>
-		<screenshot width="1080" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-2.png</screenshot>
+		<screenshot type="default">
+			<image type="source" width="1139" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-1.png</image>
+		</screenshot>
+		<screenshot>
+			<image type="source" width="1080" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-2.png</image>
+		</screenshot>
 	</screenshots>
 	<releases>
 @APPSTREAM_RELEASES@	</releases>
-	<content_rating type="oars-1.1"></content_rating>
+	<content_rating type="oars-1.1"/>
 	<url type="homepage">https://www.clementine-player.org/</url>
+	<url type="vcs-browser">https://github.com/clementine-player/Clementine</url>
 	<url type="bugtracker">https://github.com/clementine-player/Clementine/issues</url>
 	<url type="translate">https://www.transifex.com/davidsansome/clementine/</url>
 	<url type="faq">https://github.com/clementine-player/Clementine/wiki/Frequently-asked-questions</url>
-	<updatecontact>me@davidsansome.com</updatecontact>
-</application>
+	<update_contact>me@davidsansome.com</update_contact>
+</component>
