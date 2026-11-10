@@ -6,8 +6,10 @@ as a **renderer**, so Clementine plays through it instead of the local sound
 card, and it can act as a **controller** that lists outputs and moves playback
 between them.
 
-It needs [uv](https://docs.astral.sh/uv/). The protocol's `.proto` file is read
-from this repository and compiled, with type stubs, into
+It needs [uv](https://docs.astral.sh/uv/), and is part of the repository's uv
+project (see "Python tools" in the top-level `README.md`), so `uv run
+clementine-remote` works from anywhere in the repository. The protocol's
+`.proto` file is read from this repository and compiled, with type stubs, into
 `src/clementine_remote/_generated` (not checked in) on first use. It's
 recompiled whenever the `.proto` changes.
 
@@ -23,7 +25,6 @@ IPv4 localhost when it arrives as `::ffff:127.0.0.1`.
 ## Examples
 
 ```sh
-cd tools/remote-cli
 alias cr='uv run clementine-remote --host 192.168.1.10'
 
 cr info                  # version, state and features (look for SERVER_FEATURE_RENDERING)
@@ -59,15 +60,16 @@ To try the `ffplay` player without sound, set `SDL_AUDIODRIVER=dummy`.
 
 ## Development
 
-All the code is fully typed. CI's Python job runs these, with the versions of
-ruff and ty pinned in `pyproject.toml`:
+All the code is fully typed. CI's Python job runs these, from the
+repository's root, with the versions of ruff and ty pinned in the top-level
+`pyproject.toml`:
 
 ```sh
 uv run python -m clementine_remote.proto   # generate the protobuf module first
 uv run ruff check
 uv run ruff format --check
 uv run ty check
-uv run pytest
+uv run pytest tools/remote-cli/tests
 ```
 
 Set `CLEMENTINE_REMOTE_PROTO` to use a `.proto` file from elsewhere.
@@ -81,7 +83,7 @@ between outputs and the checks on media URLs. They're skipped unless
 with GStreamer's base, good and bad plugins. CI's Test job runs them.
 
 ```sh
-CLEMENTINE_BINARY=/path/to/build/clementine uv run pytest tests/smoke -v
+CLEMENTINE_BINARY=/path/to/build/clementine uv run pytest tools/remote-cli/tests/smoke -v
 ```
 
 Each test starts Clementine with a throwaway profile and its own `TMPDIR`, so

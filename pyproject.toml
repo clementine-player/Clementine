@@ -1,0 +1,122 @@
+# Clementine's Python tooling, as one uv project: the command line tools in
+# tools/ and the release scripts in dist/. From anywhere in the repository,
+# `uv run <tool>` runs one, and `uv run ruff check`, `uv run ruff format
+# --check`, `uv run ty check` and `uv run pytest` check them all, as CI's
+# Python job does. Clementine itself is built with CMake, not from here.
+[project]
+name = "clementine-tools"
+version = "0.1.0"
+description = "Tools for developing, releasing and controlling Clementine"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+dependencies = [
+    "cryptography>=43",
+    # Application Default Credentials, which google-github-actions/auth sets
+    # up: google-auth for the apt repository, Datastore for the Sparkle feed.
+    "google-auth>=2.35",
+    "google-cloud-datastore>=2.20",
+    # grpcio-tools bundles protoc, used to compile the remote's .proto at
+    # runtime.
+    "grpcio-tools>=1.66",
+    "httpx>=0.27",
+    "protobuf>=5.28",
+    "requests>=2.32",
+    # control.tar.zst, which Ubuntu's .debs use.
+    "zstandard>=0.23",
+]
+
+[project.scripts]
+clementine-apt = "clementine_apt.cli:main"
+clementine-mac-update = "clementine_mac_update.cli:main"
+clementine-remote = "clementine_remote.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    # Pinned, so CI and local runs agree on what counts as an error.
+    "ruff==0.16.9",
+    "ty==0.0.84",
+]
+# For dist/sentry_symbols.py in the macOS and Windows builds, without the
+# rest: `uv run --only-group sentry`.
+sentry = ["sentry-cli==3.8.2"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "tools/apt-repo/src/clementine_apt",
+    "tools/mac-update/src/clementine_mac_update",
+    "tools/remote-cli/src/clementine_remote",
+]
+
+[tool.pytest.ini_options]
+# The remote's smoke tests are skipped unless CLEMENTINE_BINARY is set.
+testpaths = [
+    "dist/test_release_notes.py",
+    "dist/test_sentry_symbols.py",
+    "tools/apt-repo/tests",
+    "tools/mac-update/tests",
+    "tools/remote-cli/tests",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+# Only these: the other scripts in dist/ aren't checked.
+include = [
+    "dist/release_notes.py",
+    "dist/test_release_notes.py",
+    "dist/sentry_symbols.py",
+    "dist/test_sentry_symbols.py",
+    "tools/*/src/**/*.py",
+    "tools/*/tests/**/*.py",
+]
+# In place of ruff's default exclusions, which leave out anything in dist/.
+exclude = ["tools/remote-cli/src/clementine_remote/_generated"]
+# So imports of these sort as first party.
+src = ["dist", "tools/*/src"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F",  # pycodestyle, pyflakes
+    "I",            # import order
+    "UP",           # modern syntax
+    "B",            # likely bugs
+    "SIM",          # simplifications
+    "ANN",          # every function fully annotated
+    "ASYNC",        # asyncio mistakes
+    "DTZ",          # naive datetimes
+    "PYI",          # typing conventions
+    "PLC0415",      # imports at the top of the file, not inside functions
+    "RUF",
+]
+
+[tool.ruff.lint.flake8-annotations]
+# Not even *args: Any and **kwargs: Any without saying so.
+allow-star-arg-any = false
+
+[tool.ty.environment]
+# The dist/ tests import the scripts next to them, and the remote's smoke
+# tests are a package.
+extra-paths = ["dist", "tools/remote-cli/tests"]
+
+[tool.ty.src]
+include = [
+    "dist/release_notes.py",
+    "dist/test_release_notes.py",
+    "dist/sentry_symbols.py",
+    "dist/test_sentry_symbols.py",
+    "tools/*/src",
+    "tools/*/tests",
+]
+exclude = [
+    "tools/remote-cli/src/clementine_remote/_generated",
+    # ty leaves out anything in dist/ by default.
+    "!dist/",
+]
+
+[tool.ty.terminal]
+error-on-warning = true

@@ -95,7 +95,7 @@ is: only the feed workflow can read it.
 ## Building locally
 
 ```sh
-uv run --project tools/mac-update clementine-mac-update fetch-sparkle <directory>
+uv run clementine-mac-update fetch-sparkle <directory>
 ```
 
 downloads the pinned Sparkle release, as CI does (to move to a newer one, see
@@ -105,16 +105,17 @@ item.
 
 ## Development
 
-From this directory:
+This is part of the repository's uv project (see "Python tools" in the
+top-level `README.md`). From the repository's root:
 
 ```sh
 uv run ruff check && uv run ruff format --check && uv run ty check
-uv run pytest
+uv run pytest tools/mac-update/tests
 ```
 
-To see what the next update would be, from the repository's root (it needs the
-GitHub CLI, to look at the releases):
+To see what the next update would be (it needs the GitHub CLI, to look at the
+releases):
 
 ```sh
-uv run --project tools/mac-update clementine-mac-update plan --notes /dev/stdout
+uv run clementine-mac-update plan --notes /dev/stdout
 ```

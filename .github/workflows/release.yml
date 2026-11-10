@@ -51,6 +51,7 @@ jobs:
           # All of master's history and tags: the notes and version come
           # from them.
           fetch-depth: 0
+      - uses: astral-sh/setup-uv@v10.2.0
       - name: Plan the release
         id: plan
         env:
@@ -70,7 +71,7 @@ jobs:
             exit 0
           fi
           # The commit this run builds: master as it was when it started.
-          dist/release_notes.py plan --commit "$GITHUB_SHA" \
+          uv run dist/release_notes.py plan --commit "$GITHUB_SHA" \
               ${VERSION:+--version "$VERSION"} $ALWAYS --notes "$RUNNER_TEMP/notes.md" \
             | tee -a "$GITHUB_OUTPUT"
       - name: Nothing to release

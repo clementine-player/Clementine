@@ -8,13 +8,13 @@ a PDB for each .exe. all.yml collects them into a directory for each build.
 
 Usage:
 
-  uv run --project dist --only-group sentry dist/sentry_symbols.py \\
+  uv run --only-group sentry dist/sentry_symbols.py \\
       check SYMBOLS BINARY...
 
     Fails unless every BINARY, as shipped, has a file in SYMBOLS with debug
     info and the same debug ID, so a build can't quietly stop making them.
 
-  uv run --project dist --only-group sentry dist/sentry_symbols.py \\
+  uv run --only-group sentry dist/sentry_symbols.py \\
       upload SYMBOLS
 
     Uploads SYMBOLS to Sentry, with sentry-cli's SENTRY_AUTH_TOKEN, SENTRY_ORG

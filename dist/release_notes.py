@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
 """Collects Clementine's release notes, and plans the weekly release from them.
 
 Release notes live in commit messages: a commit that changes something users
