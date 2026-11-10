@@ -66,3 +66,24 @@ the release. It builds and publishes it again.
 
 - If tags get a repository ruleset, let GitHub Actions bypass it for numbered
   tags: the workflow pushes them.
+
+## Crash reports
+
+The macOS and Windows builds offer to send crash reports to Clementine's
+Sentry project (see `src/core/crashreporting.h`). A report is a minidump, so
+Sentry needs each build's debug symbols to show function names and lines:
+dSYMs on macOS, PDBs on Windows. Both builds collect them, check that they
+match what's shipped (`dist/sentry_symbols.py check`), and keep them as the
+run's `symbols-mac` and `symbols-windows` artifacts. Development builds and
+numbered releases also upload them to Sentry; pull requests don't.
+
+### One-time setup
+
+- An organization auth token from Sentry (*Settings → Developer Settings →
+  Organization Tokens*), as the repository secret `SENTRY_AUTH_TOKEN`. It can
+  only upload debug files and releases.
+- The project's slug as the repository variable `SENTRY_PROJECT`. An
+  organization token knows its organization and region; with another kind of
+  token, also set `SENTRY_ORG`.
+
+Without the token or the project, the upload step only says so.
