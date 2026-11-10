@@ -17,7 +17,7 @@
    <iconset resource="../../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,1,0">
    <item>
     <widget class="QWidget" name="gnome_container" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -244,6 +244,19 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <spacer name="bottom_spacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
