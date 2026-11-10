@@ -13,6 +13,9 @@ dev = [
     { name = "ruff" },
     { name = "ty" },
 ]
+sentry = [
+    { name = "sentry-cli" },
+]
 
 [package.metadata]
 
@@ -22,6 +25,7 @@ dev = [
     { name = "ruff", specifier = "==0.16.9" },
     { name = "ty", specifier = "==0.0.84" },
 ]
+sentry = [{ name = "sentry-cli", specifier = "==3.8.2" }]
 
 [[package]]
 name = "colorama"
@@ -107,6 +111,24 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ac/fe/734ec7527029ac757ecf821f143c9f3fcf69149c21f53a044a899b430f5a/ruff-0.16.9-py3-none-win32.whl", hash = "sha256:0e1dbc2073624dee6618d41d0098690a7244654af746704b64759e12b6b6b385", size = 10152355, upload-time = "2026-09-24T20:37:43.025Z" },
     { url = "https://files.pythonhosted.org/packages/14/21/26e4643629b3ebb44f0a06f9c9a53058d63d989415f63a9a3c28e2ee7f22/ruff-0.16.9-py3-none-win_amd64.whl", hash = "sha256:6bd40fec8cd4c8a3d4dd589bd8ad4e6320c13c29234159bfd959a40d529d597b", size = 10592965, upload-time = "2026-09-24T20:37:44.944Z" },
     { url = "https://files.pythonhosted.org/packages/51/60/5fb1a39dbb5ae314d5f59bc7348a63c1d5c20f3cd83914c4b5cb0be31d2d/ruff-0.16.9-py3-none-win_arm64.whl", hash = "sha256:ed1a252039200f57a59eebc063b54beabea67bfbaaca0eeaa7f54b5fbcda2284", size = 10458649, upload-time = "2026-09-24T20:37:46.882Z" },
+]
+
+[[package]]
+name = "sentry-cli"
+version = "3.8.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/aa/33/ef395d843eca6b052416372ede3ae83f23411ccec5850c1c269d610b45bb/sentry_cli-3.8.2.tar.gz", hash = "sha256:cf87052c7538522511c292e02587bc882804217426f513aef6c568f3d148a74d", size = 373031, upload-time = "2026-10-22T11:02:54.451Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/61/97/50222c686a720ae8e94ac3330eeed4904785b8ab81ded2121124d7b250ac/sentry_cli-3.8.2-py3-none-macosx_10_15_x86_64.whl", hash = "sha256:678764a9a755a86b0735d4f1b8ff128d3d36cece622b4207c846f9ae1a9ac2be", size = 15027709, upload-time = "2026-10-22T11:02:25.43Z" },
+    { url = "https://files.pythonhosted.org/packages/02/4a/86ed96da460ebb93f64ed3599e7cc252b1875aee266f53edc876bf68833f/sentry_cli-3.8.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:181f96f8ae2588f5a074a1932496c07ff67a69220c483361f7968490012f8301", size = 13649835, upload-time = "2026-10-22T11:02:28.156Z" },
+    { url = "https://files.pythonhosted.org/packages/a1/4e/f728c9017982a8fd1bb90dd901963bc4e6586450df7c88f95ba10b4ca368/sentry_cli-3.8.2-py3-none-macosx_11_0_universal2.whl", hash = "sha256:5fa03ff3c701c8d10981b31a89610a0e0d3cd3ba64d961a436fcb9fc170abe92", size = 28690352, upload-time = "2026-10-22T11:02:31.56Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/20/5cb6f4e45bd756c3b5538ed3701c54187ed0090bdde960a01d41793fa3b6/sentry_cli-3.8.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.musllinux_1_2_aarch64.whl", hash = "sha256:3452f4ab97b2ed3f679bd83f0e23dacb7ac273bf541d103d4a2d8a09d1b71454", size = 21001632, upload-time = "2026-10-22T11:02:34.713Z" },
+    { url = "https://files.pythonhosted.org/packages/49/ca/b4b25d441f00d905e6242fdd3458500d13b0ae6e7ac1184705db7c2241c6/sentry_cli-3.8.2-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.musllinux_1_2_armv7l.whl", hash = "sha256:7fc311657ea0b151bcc8cf98f65c42278ef0f02fe69046f86ad8f1de7a914797", size = 19270753, upload-time = "2026-10-22T11:02:38.014Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/7e/9590013004dcc135cb6106dd01b68e8c9ce5857c896b859394c661a27adf/sentry_cli-3.8.2-py3-none-manylinux_2_17_i686.manylinux2014_i686.musllinux_1_2_i686.whl", hash = "sha256:4ed114f47204f61013b08188783277257be57e9e8b5c3955bddd46b255c39097", size = 20416527, upload-time = "2026-10-22T11:02:41.053Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/0a/5a9892f38daf9d8e8b92df10a271407220fdc2327eea7983a888aa3c5ff2/sentry_cli-3.8.2-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.musllinux_1_2_x86_64.whl", hash = "sha256:b05c7d91edf1e5d1afc82ef7f1e36d276e3979e5c59c3c9ea3489966800dfa00", size = 23208589, upload-time = "2026-10-22T11:02:43.966Z" },
+    { url = "https://files.pythonhosted.org/packages/89/83/55cdbc720f7503ca4a20ae8d472f8760033f69c18adc634ecb16ba457229/sentry_cli-3.8.2-py3-none-win32.whl", hash = "sha256:87af9d2f88c2ccc02df1bceea4a209a465c7c481ee3b4aec7c4e5334b9846f7e", size = 11930379, upload-time = "2026-10-22T11:02:47.114Z" },
+    { url = "https://files.pythonhosted.org/packages/13/00/12eeab30c7835028f1fc44d591fb505ff7fbac4a465ea429c8b4943590bd/sentry_cli-3.8.2-py3-none-win_amd64.whl", hash = "sha256:bc98248daeb1f65b4636014e83c1e54771aa5abf9334cb60c49ee1e708824f3b", size = 13372175, upload-time = "2026-10-22T11:02:49.786Z" },
+    { url = "https://files.pythonhosted.org/packages/25/91/50f21cc15b24a7441f1a6fd3db371619810e2fd034658e4fc68b31da2fbf/sentry_cli-3.8.2-py3-none-win_arm64.whl", hash = "sha256:4a00a72e13e5469646e71d903e554f2c139f90f8727084186344849cd379d287", size = 11723535, upload-time = "2026-10-22T11:02:52.319Z" },
 ]
 
 [[package]]

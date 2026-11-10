@@ -1453,7 +1453,7 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: ${{ runner.temp }}\sentry-native
-          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}
+          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}-pdb
       - name: Build sentry-native
         if: steps.sentry_cache.outputs.cache-hit != 'true'
         run: |
@@ -1462,8 +1462,12 @@ jobs:
           git clone -q --depth 1 --branch "$SENTRY_NATIVE_VERSION" \
             --recurse-submodules --shallow-submodules \
             https://github.com/getsentry/sentry-native.git "$temp/sentry-src"
+          # Debug info as CodeView in PDBs, like Clementine's below.
           cmake -S "$temp/sentry-src" -B "$temp/sentry-build" -G Ninja \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_C_FLAGS=-gcodeview \
+            -DCMAKE_CXX_FLAGS=-gcodeview \
+            -DCMAKE_EXE_LINKER_FLAGS=-Wl,--pdb= \
             -DCMAKE_INSTALL_PREFIX="$temp/sentry-native" \
             -DSENTRY_BACKEND=crashpad \
             -DSENTRY_BUILD_SHARED_LIBS=OFF \
@@ -1471,6 +1475,11 @@ jobs:
             -DSENTRY_BUILD_EXAMPLES=OFF
           cmake --build "$temp/sentry-build"
           cmake --install "$temp/sentry-build"
+          # The handler's PDB isn't installed, and the build directory
+          # isn't cached, so keep it beside the handler.
+          find "$temp/sentry-build" -name crashpad_handler.pdb \
+            -exec cp {} "$temp/sentry-native/bin/" \;
+          test -f "$temp/sentry-native/bin/crashpad_handler.pdb"
       - name: Save sentry-native
         if: steps.sentry_cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v6.1.0
@@ -1490,8 +1499,14 @@ jobs:
         working-directory: bin
         run: |
           set -e
+          # Line tables in a PDB beside each .exe, for crash reports:
+          # enough for Sentry to show functions and lines, and nothing is
+          # added to what's installed.
           cmake .. -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_FLAGS="-gline-tables-only -gcodeview" \
+            -DCMAKE_CXX_FLAGS="-gline-tables-only -gcodeview" \
+            -DCMAKE_EXE_LINKER_FLAGS=-Wl,--pdb= \
             -DENABLE_SENTRY=ON \
             -Dsentry_DIR="$(cygpath -m "$RUNNER_TEMP")/sentry-native/lib/cmake/sentry"
           # optional_component turns Sentry off quietly if it can't find it.
@@ -1506,6 +1521,41 @@ jobs:
         run: |
           cp ../../bin/*.exe ../../bin/projectm-presets.rcc .
           cp "$(cygpath -u "$RUNNER_TEMP")/sentry-native/bin/crashpad_handler.exe" .
+
+      # What Sentry needs to turn crash reports from this build into
+      # function names and lines: each .exe Clementine ships that's built
+      # here, with its PDB.
+      - name: Collect debug symbols
+        run: |
+          set -e
+          mkdir -p symbols
+          cp bin/clementine.exe bin/clementine.pdb \
+            bin/clementine-tagreader.exe bin/clementine-tagreader.pdb \
+            "$(cygpath -u "$RUNNER_TEMP")"/sentry-native/bin/crashpad_handler.{exe,pdb} \
+            symbols/
+      - uses: astral-sh/setup-uv@v10.2.0
+        timeout-minutes: 5
+      # Against what the installer ships, so the PDBs are for these.
+      - name: Check debug symbols
+        timeout-minutes: 5
+        shell: bash
+        run: >
+          uv run --project dist --only-group sentry dist/sentry_symbols.py check symbols
+          dist/windows/clementine.exe dist/windows/clementine-tagreader.exe
+          dist/windows/crashpad_handler.exe
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: symbols-windows
+          path: symbols/
+      - name: Upload debug symbols to Sentry
+        timeout-minutes: 15
+        if: inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        shell: bash
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --project dist --only-group sentry dist/sentry_symbols.py upload symbols
 
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
@@ -2625,7 +2675,7 @@ jobs:
         uses: actions/cache/restore@v6.1.0
         with:
           path: ${{ runner.temp }}/sentry-native
-          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}-macos15
+          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}-macos15-dsym
       - name: Build sentry-native
         if: steps.sentry_cache.outputs.cache-hit != 'true'
         run: |
@@ -2645,6 +2695,10 @@ jobs:
             -DSENTRY_BUILD_EXAMPLES=OFF
           cmake --build "$RUNNER_TEMP/sentry-build" --parallel "$(sysctl -n hw.ncpu)"
           cmake --install "$RUNNER_TEMP/sentry-build"
+          # The handler's debug info stays in the object files, and the
+          # build directory isn't cached, so gather it into a dSYM now.
+          dsymutil "$RUNNER_TEMP/sentry-native/bin/crashpad_handler" \
+            -o "$RUNNER_TEMP/sentry-native/bin/crashpad_handler.dSYM"
       - name: Save sentry-native
         if: steps.sentry_cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v6.1.0
@@ -2672,6 +2726,8 @@ jobs:
           cmake .. \
             -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_FLAGS=-gline-tables-only \
+            -DCMAKE_CXX_FLAGS=-gline-tables-only \
             -DCMAKE_OSX_DEPLOYMENT_TARGET=15.0 \
             -DENABLE_LIBGPOD=OFF \
             -DENABLE_SENTRY=ON \
@@ -2696,6 +2752,20 @@ jobs:
       - name: Copy icon files and resources
         working-directory: bin
         run: make install
+
+      # What Sentry needs to turn crash reports from this build into
+      # function names and lines: a dSYM for each executable built here,
+      # made from the object files before anything else happens to them.
+      # Signing doesn't change a binary's UUID, so they match the DMG's.
+      - name: Collect debug symbols
+        run: |
+          set -e
+          mkdir -p symbols
+          dsymutil bin/clementine.app/Contents/MacOS/clementine \
+            -o symbols/clementine.dSYM
+          # make dmg copies this one into the bundle.
+          dsymutil bin/clementine-tagreader -o symbols/clementine-tagreader.dSYM
+          cp -R "$RUNNER_TEMP/sentry-native/bin/crashpad_handler.dSYM" symbols/
       - name: Build DMG
         working-directory: bin
         run: make dmg -j$(sysctl -n hw.ncpu)
@@ -2723,6 +2793,33 @@ jobs:
           echo "$checked binaries, the newest needing macOS $newest"
           (( checked > 0 )) || status=1
           exit $status
+
+      # Against the executables in the DMG's app, which go to Sentry too
+      # for their unwind info. uv is set up earlier in this job.
+      - name: Check debug symbols
+        timeout-minutes: 5
+        run: |
+          set -e
+          app=bin/clementine.app/Contents
+          binaries=(
+            "$app/MacOS/clementine"
+            "$app/MacOS/crashpad_handler"
+            "$app/PlugIns/clementine-tagreader"
+          )
+          cp "${binaries[@]}" symbols/
+          uv run --project dist --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: symbols-mac
+          path: symbols/
+      - name: Upload debug symbols to Sentry
+        timeout-minutes: 15
+        if: inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --project dist --only-group sentry dist/sentry_symbols.py upload symbols
 
       # Qt's SQLite driver uses the system libsqlite3, and the library's
       # search is moving to FTS5, so check that this macOS's SQLite has it

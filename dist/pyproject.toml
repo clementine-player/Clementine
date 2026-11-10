@@ -1,8 +1,9 @@
-# For release_notes.py and its tests: the other scripts here aren't checked.
+# For release_notes.py, sentry_symbols.py and their tests: the other scripts
+# here aren't checked.
 [project]
 name = "clementine-release-notes"
 version = "0.1.0"
-description = "Plans Clementine's numbered releases and collects their notes"
+description = "Plans Clementine's numbered releases, and checks and uploads their debug symbols"
 requires-python = ">=3.11"
 license = "GPL-3.0-or-later"
 dependencies = []
@@ -14,17 +15,24 @@ dev = [
     "ruff==0.16.9",
     "ty==0.0.84",
 ]
+# For sentry_symbols.py in the macOS and Windows builds, without the rest.
+sentry = ["sentry-cli==3.8.2"]
 
 [tool.uv]
 package = false
 
 [tool.pytest.ini_options]
-testpaths = ["test_release_notes.py"]
+testpaths = ["test_release_notes.py", "test_sentry_symbols.py"]
 
 [tool.ruff]
 target-version = "py311"
 line-length = 88
-include = ["release_notes.py", "test_release_notes.py"]
+include = [
+    "release_notes.py",
+    "test_release_notes.py",
+    "sentry_symbols.py",
+    "test_sentry_symbols.py",
+]
 
 [tool.ruff.lint]
 select = [
@@ -44,7 +52,12 @@ select = [
 allow-star-arg-any = false
 
 [tool.ty.src]
-include = ["release_notes.py", "test_release_notes.py"]
+include = [
+    "release_notes.py",
+    "test_release_notes.py",
+    "sentry_symbols.py",
+    "test_sentry_symbols.py",
+]
 
 [tool.ty.terminal]
 error-on-warning = true
