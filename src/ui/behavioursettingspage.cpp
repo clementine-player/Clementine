@@ -22,6 +22,7 @@
 #include <QSystemTrayIcon>
 #include <algorithm>
 
+#include "core/crashreporting.h"
 #include "core/player.h"
 #include "core/sleepinhibitor.h"
 #include "mainwindow.h"
@@ -140,6 +141,8 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   QStringList names = language_map_.keys();
   std::stable_sort(names.begin(), names.end(), LocaleAwareCompare);
   ui_->language->addItems(names);
+
+  ui_->b_offer_crash_reports_->setVisible(CrashReporting::IsAvailable());
 
 #ifdef Q_OS_DARWIN
   ui_->b_show_tray_icon_->setEnabled(false);
@@ -279,6 +282,8 @@ void BehaviourSettingsPage::Load() {
             .toBool());
   }
   s.endGroup();
+
+  ui_->b_offer_crash_reports_->setChecked(CrashReporting::IsEnabled());
 }
 
 void BehaviourSettingsPage::Save() {
@@ -373,6 +378,10 @@ void BehaviourSettingsPage::Save() {
                option.first->isChecked());
   }
   s.endGroup();
+
+  if (CrashReporting::IsAvailable()) {
+    CrashReporting::SetEnabled(ui_->b_offer_crash_reports_->isChecked());
+  }
 }
 
 QList<BehaviourSettingsPage::KeepAwakeOption>
