@@ -40,10 +40,8 @@ class PortalRequest : public QObject {
                 Handler handler, QObject* parent);
   ~PortalRequest();
 
-  // For a call that failed, so there will be no Response.
-  void Cancel();
-
- private slots:
+ public slots:
+  // Also called for a call that failed, which has no Response of its own.
   void Response(uint response, const QVariantMap& results);
 
  private:
@@ -58,6 +56,11 @@ class PortalRequest : public QObject {
 // the keys it would like for them, and the desktop decides the keys (often
 // asking the user first) and says when one is pressed.
 //
+// Desktops such as GNOME show a dialog when shortcuts they haven't seen are
+// bound, so Clementine binds them only once the user has asked to set them
+// up from the settings, and after that whenever it starts, when the desktop
+// already knows them.
+//
 // https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GlobalShortcuts.html
 class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
@@ -65,6 +68,9 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
  public:
   // Clementine's application ID, the name of its desktop file.
   static const char* kAppId;
+  // Whether the user has set up the shortcuts with the desktop, in
+  // GlobalShortcuts' settings group.
+  static const char* kSetUpKey;
 
   explicit PortalGlobalShortcutBackend(
       GlobalShortcuts* parent,
@@ -72,6 +78,12 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
 
   // Whether the desktop offers global shortcuts through the portal.
   bool IsAvailable();
+  // Whether the user has set up the shortcuts, so they're bound.
+  bool IsSetUp() const;
+  // Binds the shortcuts, so the desktop may ask the user about them, and
+  // remembers that they're set up if it works. SetUpFinished says how it
+  // went.
+  void SetUp();
   // Whether the portal can open the desktop's settings for our shortcuts.
   bool CanConfigure();
   void Configure();
@@ -80,6 +92,9 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
   // the XDG shortcuts specification ("CTRL+ALT+p"), or an empty string if
   // there's no key or it isn't one to ask for.
   static QString PreferredTrigger(const QKeySequence& key);
+
+ signals:
+  void SetUpFinished(bool success);
 
  protected:
   bool DoRegister() override;
@@ -101,7 +116,8 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
   void CallWithResponse(const QString& method, QList<QVariant> arguments,
                         QVariantMap options, ResponseHandler handler);
   void CreateSession(int generation);
-  void BindShortcuts(int generation);
+  // done is called with whether the desktop bound them.
+  void BindShortcuts(int generation, std::function<void(bool)> done);
   void CloseSession();
 
   QDBusConnection bus_;
@@ -112,6 +128,9 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
   // Counts registrations, so the answer to an old one is ignored.
   int generation_;
   QString session_;
+  // Whether shortcuts were bound in this session: the portal binds them only
+  // once per session.
+  bool bound_;
 };
 
 #endif  // CORE_PORTALGLOBALSHORTCUTBACKEND_H_

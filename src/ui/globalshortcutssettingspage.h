@@ -49,6 +49,8 @@ class GlobalShortcutsSettingsPage : public SettingsPage {
   void ChangeClicked();
 
   void OpenGnomeKeybindingProperties();
+  // Shows whether the desktop portal's shortcuts are set up.
+  void UpdatePortal();
 
  private:
   struct Shortcut {
