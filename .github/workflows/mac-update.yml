@@ -52,8 +52,8 @@ jobs:
       - uses: astral-sh/setup-uv@v10.2.0
       - name: Install clementine-mac-update
         run: |
-          uv sync --project tools/mac-update --no-dev
-          echo "$PWD/tools/mac-update/.venv/bin" >> "$GITHUB_PATH"
+          uv sync --no-dev
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
 
       - name: Plan the update
         id: plan

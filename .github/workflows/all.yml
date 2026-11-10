@@ -52,17 +52,15 @@ jobs:
   python:
     name: Python
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: tools/remote-cli
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
-      # ruff and ty are pinned in pyproject.toml's dev group, so uv runs the
-      # same versions here as locally.
+      # One uv project, pyproject.toml at the root, for the tools in tools/
+      # and the scripts in dist/. ruff and ty are pinned in its dev group,
+      # so uv runs the same versions here as locally.
       - uses: astral-sh/setup-uv@v10.2.0
       - name: Generate the protobuf module
-        # ty needs the generated module and its type stubs to exist.
+        # ty needs the remote's generated module and its type stubs to exist.
         run: uv run python -m clementine_remote.proto
       - name: ruff check
         run: uv run ruff check --output-format github
@@ -71,69 +69,13 @@ jobs:
       - name: ty
         run: uv run ty check --output-format github
       - name: Unit tests
-        # The smoke tests need a built Clementine; the Test job runs them.
+        # The remote's smoke tests need a built Clementine, so they're
+        # skipped here and the Test job runs them. Reading a DMG needs macOS
+        # (hdiutil), so that part of the macOS update tests is left out too.
+        # The apt repository's tests check signatures with gpgv, which the
+        # runner has, and the release notes' run on throwaway git
+        # repositories, so they need no history of their own.
         run: uv run pytest -v
-
-  python_apt:
-    name: Python (apt repository)
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: tools/apt-repo
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - uses: astral-sh/setup-uv@v10.2.0
-      - name: ruff check
-        run: uv run ruff check --output-format github
-      - name: ruff format
-        run: uv run ruff format --check
-      - name: ty
-        run: uv run ty check --output-format github
-      - name: Unit tests
-        # Checks the signatures with gpgv, which the runner has.
-        run: uv run pytest -v
-
-  python_mac_update:
-    name: Python (macOS updates)
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: tools/mac-update
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - uses: astral-sh/setup-uv@v10.2.0
-      - name: ruff check
-        run: uv run ruff check --output-format github
-      - name: ruff format
-        run: uv run ruff format --check
-      - name: ty
-        run: uv run ty check --output-format github
-      - name: Unit tests
-        # Reading a DMG needs macOS (hdiutil), so that part is left out.
-        run: uv run pytest -v
-
-  python_release_notes:
-    name: Python (release notes)
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: dist
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - uses: astral-sh/setup-uv@v10.2.0
-      - name: ruff check
-        run: uv run ruff check --output-format github
-      - name: ruff format
-        run: uv run ruff format --check
-      - name: ty
-        run: uv run ty check --output-format github
-      - name: Unit tests
-        # On throwaway git repositories, so it needs no history of its own.
-        run: uv run pytest -v
-
 
   protos:
     name: Protocol buffers
@@ -300,12 +242,11 @@ jobs:
         run: make -j$(nproc) clementine
       - uses: astral-sh/setup-uv@v10.2.0
       - name: Remote playback smoke tests
-        working-directory: tools/remote-cli
         env:
           CLEMENTINE_BINARY: ${{ github.workspace }}/bin/clementine
         # A real Clementine, driven through the network remote by the
         # command line client acting as controller and renderer.
-        run: uv run --group dev pytest tests/smoke -v
+        run: uv run pytest tools/remote-cli/tests/smoke -v
       # The screenshots the Screenshots job posts on pull requests, with
       # Qt's own Fusion style: the offscreen platform has no desktop theme.
       - name: Take screenshots
@@ -553,6 +494,7 @@ jobs:
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      - uses: astral-sh/setup-uv@v10.2.0
       # The Release-note: trailers of the commits since the previous release
       # (see "Release notes" in README.md): for a development build, since
       # the previous build, so usually none; for a numbered release, since
@@ -561,7 +503,7 @@ jobs:
         env:
           RELEASE: ${{ inputs.release && '--release' || '' }}
         run: |
-          dist/release_notes.py notes $RELEASE > "$RUNNER_TEMP/release_notes.md"
+          uv run dist/release_notes.py notes $RELEASE > "$RUNNER_TEMP/release_notes.md"
           cat "$RUNNER_TEMP/release_notes.md"
       # A development build of a commit release.yml has tagged already
       # takes the release's version, and mustn't take over its release: the
@@ -1540,7 +1482,7 @@ jobs:
         timeout-minutes: 5
         shell: bash
         run: >
-          uv run --project dist --only-group sentry dist/sentry_symbols.py check symbols
+          uv run --only-group sentry dist/sentry_symbols.py check symbols
           dist/windows/clementine.exe dist/windows/clementine-tagreader.exe
           dist/windows/crashpad_handler.exe
       - uses: actions/upload-artifact@v7.0.1
@@ -1555,7 +1497,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ vars.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
-        run: uv run --project dist --only-group sentry dist/sentry_symbols.py upload symbols
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
 
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
@@ -2662,8 +2604,7 @@ jobs:
       - uses: astral-sh/setup-uv@v10.2.0
       - name: Download Sparkle
         run: >
-          uv run --project tools/mac-update
-          clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
+          uv run clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
 
       # Crash reporting: sentry-native with its Crashpad backend, built
       # static so there's no libsentry to bundle. CMake installs
@@ -2807,7 +2748,7 @@ jobs:
             "$app/PlugIns/clementine-tagreader"
           )
           cp "${binaries[@]}" symbols/
-          uv run --project dist --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
+          uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: symbols-mac
@@ -2819,7 +2760,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ vars.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
-        run: uv run --project dist --only-group sentry dist/sentry_symbols.py upload symbols
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
 
       # Qt's SQLite driver uses the system libsqlite3, and the library's
       # search is moving to FTS5, so check that this macOS's SQLite has it
@@ -3048,7 +2989,7 @@ jobs:
             echo "::error::No .debs to publish"
             exit 1
           fi
-          uv run --project tools/apt-repo clementine-apt publish \
+          uv run clementine-apt publish \
             --root repo --kms-key "$APT_KMS_KEY" --created "$APT_KEY_CREATED" \
             ${APT_KEY_FINGERPRINT:+--expect-fingerprint "$APT_KEY_FINGERPRINT"} \
             --pruned pruned.txt "${packages[@]}"
@@ -3129,9 +3070,7 @@ jobs:
     if: always()
     needs:
       - lint
-      - python_apt
-      - python_mac_update
-      - python_release_notes
+      - python
       - protos
       - test
       - build_source

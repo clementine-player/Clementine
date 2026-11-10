@@ -67,9 +67,12 @@ sudo apt update && sudo apt install clementine
 
 ## Development
 
+This is part of the repository's uv project (see "Python tools" in the
+top-level `README.md`). From the repository's root:
+
 ```sh
 uv run ruff check && uv run ruff format --check && uv run ty check
-uv run pytest
+uv run pytest tools/apt-repo/tests
 ```
 
 The tests sign with a throwaway local key and check the signatures with

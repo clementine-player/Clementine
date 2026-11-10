@@ -56,3 +56,9 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 3rdparty/libprojectm/presets-cream/
+
+# The Python tooling's environment (pyproject.toml), and the protobuf module
+# tools/remote-cli compiles from the .proto.
+/.venv/
+.pytest_cache/
+/tools/remote-cli/src/clementine_remote/_generated/

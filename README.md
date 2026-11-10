@@ -66,6 +66,31 @@ Then reformat the files you've changed since `origin/master`:
 Claude Code does this automatically after each edit, using a hook in
 `.claude/settings.json`.
 
+Python tools
+------------
+
+The Python in this repository, the tools in `tools/` and the release scripts
+in `dist/`, is one [uv](https://docs.astral.sh/uv/) project: `pyproject.toml`
+and `uv.lock` here at the top. Run everything through uv, from anywhere in the
+repository, and it uses the locked versions:
+
+    uv run clementine-remote --help      # tools/remote-cli
+    uv run clementine-apt --help         # tools/apt-repo
+    uv run clementine-mac-update --help  # tools/mac-update
+
+From here, as CI's Python job does, check them all with the versions of ruff
+and ty pinned in `pyproject.toml`:
+
+    uv run python -m clementine_remote.proto  # ty needs the remote's protobuf module
+    uv run ruff check
+    uv run ruff format --check
+    uv run ty check
+    uv run pytest
+
+A new tool goes in `tools/<name>/src/<package>`, added to the wheel's
+packages, with its command under `[project.scripts]` and its dependencies
+with the rest.
+
 Release notes
 -------------
 
