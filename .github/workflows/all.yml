@@ -649,6 +649,7 @@ jobs:
           # QCA is unused by CMakeLists.txt (dead dependency). liblastfm and
           # libmygpo-qt: see the note in push_translations above.
           packages="
+            appstream
             ccache
             cmake
             fakeroot
@@ -725,6 +726,13 @@ jobs:
       - name: cmake
         working-directory: bin
         run: cmake ..
+      # cmake fills the AppStream metadata's releases from git, and the
+      # tarball ships it. Flathub's build installs it, and its linter
+      # refuses metadata that appstreamcli doesn't pass.
+      - name: Validate AppStream metadata
+        run: >
+          appstreamcli validate --no-net --explain
+          dist/org.clementine_player.Clementine.appdata.xml
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
