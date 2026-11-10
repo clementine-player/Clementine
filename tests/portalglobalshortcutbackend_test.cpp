@@ -437,9 +437,29 @@ TEST_F(PortalGlobalShortcutBackendTest, UnregisterClosesTheSession) {
   EXPECT_EQ(portal_->sessions_[0], portal_->closed_[0]);
 }
 
+TEST(PortalGnomeSettingsCommandTest, OnlyOnGnome) {
+  EXPECT_EQ(QStringList() << "/usr/bin/gnome-control-center"
+                          << "applications"
+                          << PortalGlobalShortcutBackend::kAppId,
+            PortalGlobalShortcutBackend::GnomeSettingsCommand(
+                "GNOME", "/usr/bin/gnome-control-center"));
+  // Ubuntu's session is "ubuntu:GNOME".
+  EXPECT_EQ(3, PortalGlobalShortcutBackend::GnomeSettingsCommand(
+                   "ubuntu:GNOME", "/usr/bin/gnome-control-center")
+                   .size());
+  EXPECT_TRUE(PortalGlobalShortcutBackend::GnomeSettingsCommand(
+                  "Hyprland", "/usr/bin/gnome-control-center")
+                  .isEmpty());
+  EXPECT_TRUE(
+      PortalGlobalShortcutBackend::GnomeSettingsCommand("GNOME", QString())
+          .isEmpty());
+}
+
 TEST_F(PortalGlobalShortcutBackendTest, CantConfigureBeforeVersion2) {
   StartPortal(1);
   SetSetUp();
+  // Not GNOME, so there's no Settings page to open instead.
+  qputenv("XDG_CURRENT_DESKTOP", "Hyprland");
   std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
   QSignalSpy finished(backend.get(), &GlobalShortcutBackend::RegisterFinished);
   ASSERT_TRUE(backend->Register());

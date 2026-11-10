@@ -26,7 +26,9 @@
 #include <QDBusPendingReply>
 #include <QDBusVariant>
 #include <QMap>
+#include <QProcess>
 #include <QSettings>
+#include <QStandardPaths>
 
 #include "core/globalshortcuts.h"
 #include "core/logging.h"
@@ -238,13 +240,43 @@ void PortalGlobalShortcutBackend::SetUp() {
   });
 }
 
+QStringList PortalGlobalShortcutBackend::GnomeSettingsCommand(
+    const QString& current_desktop, const QString& control_center) {
+  if (control_center.isEmpty()) return QStringList();
+  if (!current_desktop.split(':').contains("GNOME", Qt::CaseInsensitive)) {
+    return QStringList();
+  }
+  // The Apps panel selects the application whose desktop file ID starts with
+  // its argument, and lists its global shortcuts there.
+  return {control_center, "applications", kAppId};
+}
+
+namespace {
+
+QStringList CurrentGnomeSettingsCommand() {
+  return PortalGlobalShortcutBackend::GnomeSettingsCommand(
+      QString::fromLocal8Bit(qgetenv("XDG_CURRENT_DESKTOP")),
+      QStandardPaths::findExecutable("gnome-control-center"));
+}
+
+}  // namespace
+
 // ConfigureShortcuts is new in version 2.
 bool PortalGlobalShortcutBackend::CanConfigure() {
-  return Version() >= 2 && bound_;
+  const bool portal_can_configure = Version() >= 2 && bound_;
+  if (portal_can_configure) return true;
+  return IsSetUp() && !CurrentGnomeSettingsCommand().isEmpty();
 }
 
 void PortalGlobalShortcutBackend::Configure() {
-  if (!CanConfigure()) return;
+  const bool portal_can_configure = Version() >= 2 && bound_;
+  if (!portal_can_configure) {
+    const QStringList command = CurrentGnomeSettingsCommand();
+    if (IsSetUp() && !command.isEmpty()) {
+      QProcess::startDetached(command[0], command.mid(1));
+    }
+    return;
+  }
 
   QDBusMessage message = QDBusMessage::createMethodCall(
       kPortalService, kPortalPath, kPortalInterface, "ConfigureShortcuts");
