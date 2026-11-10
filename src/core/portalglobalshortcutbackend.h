@@ -21,6 +21,7 @@
 #include <QDBusConnection>
 #include <QKeySequence>
 #include <QString>
+#include <QStringList>
 #include <QVariantMap>
 #include <functional>
 
@@ -84,9 +85,17 @@ class PortalGlobalShortcutBackend : public GlobalShortcutBackend {
   // remembers that they're set up if it works. SetUpFinished says how it
   // went.
   void SetUp();
-  // Whether the portal can open the desktop's settings for our shortcuts.
+  // Whether Clementine can open the desktop's settings for its shortcuts:
+  // through the portal from version 2, or else GNOME's Settings, which has
+  // them on the application's page.
   bool CanConfigure();
   void Configure();
+
+  // The command that opens GNOME Settings at Clementine's page, given
+  // $XDG_CURRENT_DESKTOP and the path of gnome-control-center, or an empty
+  // list if it's not GNOME or there's no gnome-control-center.
+  static QStringList GnomeSettingsCommand(const QString& current_desktop,
+                                          const QString& control_center);
 
   // The key the portal is asked to prefer for a shortcut, in the format of
   // the XDG shortcuts specification ("CTRL+ALT+p"), or an empty string if
