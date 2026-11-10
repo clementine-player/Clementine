@@ -71,6 +71,10 @@ void GlobalShortcutsSettingsPage::Load() {
             SLOT(ShowMacAccessibilityDialog()));
     connect(ui_->portal_open, &QPushButton::clicked, manager,
             &GlobalShortcuts::ConfigurePortal);
+    connect(ui_->portal_set_up, &QPushButton::clicked, manager,
+            &GlobalShortcuts::SetUpPortal);
+    connect(manager, &GlobalShortcuts::PortalSetUpFinished, this,
+            &GlobalShortcutsSettingsPage::UpdatePortal);
 
     if (!manager->IsGsdAvailable()) {
       ui_->gnome_container->hide();
@@ -107,9 +111,25 @@ void GlobalShortcutsSettingsPage::Load() {
   // Clementine asked for the first time.
   const bool portal = manager->IsPortalActive();
   ui_->portal_container->setVisible(portal);
-  ui_->portal_open->setVisible(manager->CanConfigurePortal());
   ui_->list_container->setVisible(!portal);
   if (portal) ui_->gnome_container->hide();
+  UpdatePortal();
+}
+
+void GlobalShortcutsSettingsPage::UpdatePortal() {
+  GlobalShortcuts* manager = dialog()->global_shortcuts_manager();
+  const bool set_up = manager->IsPortalSetUp();
+  if (set_up) {
+    ui_->portal_label->setText(
+        tr("Your desktop handles Clementine's global shortcuts, so you "
+           "choose their keys in its settings."));
+  } else {
+    ui_->portal_label->setText(
+        tr("Your desktop handles Clementine's global shortcuts. They're off "
+           "until you set them up and choose their keys."));
+  }
+  ui_->portal_set_up->setVisible(!set_up);
+  ui_->portal_open->setVisible(manager->CanConfigurePortal());
 }
 
 void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,

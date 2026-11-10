@@ -28,8 +28,10 @@
 #include <QDBusVirtualObject>
 #include <QElapsedTimer>
 #include <QProcess>
+#include <QSettings>
 #include <QSignalSpy>
 #include <QStandardPaths>
+#include <QTemporaryDir>
 #include <QThread>
 #include <atomic>
 #include <functional>
@@ -75,7 +77,8 @@ bool WaitFor(const std::function<bool()>& condition) {
   return true;
 }
 
-// A desktop portal with GlobalShortcuts, which binds whatever it's asked to.
+// A desktop portal with GlobalShortcuts, which binds whatever it's asked to,
+// unless it's told to answer as if the user had said no.
 // It runs in a thread of its own, as the real one is in a process of its own,
 // because the backend blocks on its first call.
 class FakePortal : public QDBusVirtualObject {
@@ -115,9 +118,14 @@ class FakePortal : public QDBusVirtualObject {
       results["session_handle"] = session;
       Respond(message, options["handle_token"].toString(), results);
     } else if (interface == kPortalInterface && member == "BindShortcuts") {
+      const QVariantMap options = qdbus_cast<QVariantMap>(args[3]);
+      ++binds_;
+      if (refuse_binds_) {
+        Respond(message, options["handle_token"].toString(), QVariantMap(), 1);
+        return true;
+      }
       bound_session_ = qdbus_cast<QDBusObjectPath>(args[0]).path();
       bound_ = ReadShortcuts(args[1].value<QDBusArgument>());
-      const QVariantMap options = qdbus_cast<QVariantMap>(args[3]);
       Respond(message, options["handle_token"].toString(), QVariantMap());
     } else if (interface == kPortalInterface &&
                member == "ConfigureShortcuts") {
@@ -147,6 +155,9 @@ class FakePortal : public QDBusVirtualObject {
   QList<FakeShortcut> bound_;
   QStringList closed_;
   std::atomic<bool> configured_ = false;
+  std::atomic<int> binds_ = 0;
+  // Answers BindShortcuts as if the user had cancelled the desktop's dialog.
+  std::atomic<bool> refuse_binds_ = false;
 
  private:
   static QString Sender(const QDBusMessage& message) {
@@ -156,14 +167,14 @@ class FakePortal : public QDBusVirtualObject {
   // Answers a call with its Request's path, then sends the Request's
   // Response.
   void Respond(const QDBusMessage& message, const QString& token,
-               const QVariantMap& results) {
+               const QVariantMap& results, uint code = 0) {
     const QString request =
         QString("%1/request/%2/%3").arg(kPortalPath, Sender(message), token);
     bus_.send(
         message.createReply(QVariant::fromValue(QDBusObjectPath(request))));
     QDBusMessage response = QDBusMessage::createSignal(
         request, "org.freedesktop.portal.Request", "Response");
-    response << uint(0) << results;
+    response << code << results;
     bus_.send(response);
   }
 
@@ -176,6 +187,12 @@ class FakePortal : public QDBusVirtualObject {
 class PortalGlobalShortcutBackendTest : public ::testing::Test {
  protected:
   static void SetUpTestSuite() {
+    settings_dir_ = new QTemporaryDir;
+    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope,
+                       settings_dir_->path());
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,
+                       settings_dir_->path());
+
     const QString daemon = QStandardPaths::findExecutable("dbus-daemon");
     if (daemon.isEmpty()) return;
 
@@ -187,6 +204,8 @@ class PortalGlobalShortcutBackendTest : public ::testing::Test {
   }
 
   static void TearDownTestSuite() {
+    delete settings_dir_;
+    settings_dir_ = nullptr;
     if (daemon_) {
       daemon_->kill();
       daemon_->waitForFinished();
@@ -197,6 +216,7 @@ class PortalGlobalShortcutBackendTest : public ::testing::Test {
 
   void SetUp() override {
     if (address_.isEmpty()) GTEST_SKIP() << "No dbus-daemon to run a bus with";
+    QSettings().remove(GlobalShortcuts::kSettingsGroup);
     manager_ = std::make_unique<GlobalShortcuts>();
   }
 
@@ -236,6 +256,30 @@ class PortalGlobalShortcutBackendTest : public ::testing::Test {
             address_, QString("backend%1").arg(next_connection_++)));
   }
 
+  // As if the user had set up the shortcuts when Clementine last ran.
+  static void SetSetUp() {
+    QSettings s;
+    s.beginGroup(GlobalShortcuts::kSettingsGroup);
+    s.setValue(PortalGlobalShortcutBackend::kSetUpKey, true);
+  }
+
+  // Registers, and waits for the portal's answers.
+  static void RegisterAndWait(PortalGlobalShortcutBackend* backend) {
+    QSignalSpy finished(backend, &GlobalShortcutBackend::RegisterFinished);
+    ASSERT_TRUE(backend->Register());
+    ASSERT_TRUE(finished.wait(5000));
+    EXPECT_TRUE(finished[0][0].toBool());
+  }
+
+  // Sets up, and returns whether it worked.
+  static bool SetUpAndWait(PortalGlobalShortcutBackend* backend) {
+    QSignalSpy finished(backend, &PortalGlobalShortcutBackend::SetUpFinished);
+    backend->SetUp();
+    if (finished.isEmpty() && !finished.wait(5000)) return false;
+    return finished[0][0].toBool();
+  }
+
+  static QTemporaryDir* settings_dir_;
   static QProcess* daemon_;
   static QString address_;
   static int next_connection_;
@@ -246,6 +290,7 @@ class PortalGlobalShortcutBackendTest : public ::testing::Test {
   std::unique_ptr<QThread> portal_thread_;
 };
 
+QTemporaryDir* PortalGlobalShortcutBackendTest::settings_dir_ = nullptr;
 QProcess* PortalGlobalShortcutBackendTest::daemon_ = nullptr;
 QString PortalGlobalShortcutBackendTest::address_;
 int PortalGlobalShortcutBackendTest::next_connection_ = 0;
@@ -282,8 +327,9 @@ TEST_F(PortalGlobalShortcutBackendTest, UnavailableWithoutPortal) {
   EXPECT_FALSE(backend->is_active());
 }
 
-TEST_F(PortalGlobalShortcutBackendTest, BindsShortcutsAndTriggersThem) {
+TEST_F(PortalGlobalShortcutBackendTest, BindsShortcutsOnceSetUp) {
   StartPortal(1);
+  SetSetUp();
   manager_->shortcuts()["show_osd"].action->setShortcut(
       QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_O));
 
@@ -320,6 +366,59 @@ TEST_F(PortalGlobalShortcutBackendTest, BindsShortcutsAndTriggersThem) {
   EXPECT_FALSE(next.wait(500));
 }
 
+TEST_F(PortalGlobalShortcutBackendTest, DoesntBindUntilSetUp) {
+  StartPortal(1);
+  std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
+  RegisterAndWait(backend.get());
+
+  // Binding could show the desktop's dialog, which shouldn't appear just
+  // because Clementine started.
+  ASSERT_EQ(1, portal_->sessions_.size());
+  EXPECT_EQ(0, portal_->binds_.load());
+  EXPECT_TRUE(backend->is_active());
+  EXPECT_FALSE(backend->IsSetUp());
+
+  ASSERT_TRUE(SetUpAndWait(backend.get()));
+  EXPECT_EQ(portal_->sessions_[0], portal_->bound_session_);
+  EXPECT_EQ(manager_->shortcuts().size(), portal_->bound_.size());
+  EXPECT_TRUE(backend->IsSetUp());
+
+  QSignalSpy stop(manager_.get(), &GlobalShortcuts::Stop);
+  portal_->Activate(portal_->sessions_[0], "stop");
+  ASSERT_TRUE(stop.wait(5000));
+
+  // Next time, they're bound when Clementine starts.
+  std::unique_ptr<PortalGlobalShortcutBackend> next = NewBackend();
+  RegisterAndWait(next.get());
+  ASSERT_EQ(2, portal_->sessions_.size());
+  EXPECT_EQ(2, portal_->binds_.load());
+  EXPECT_EQ(portal_->sessions_[1], portal_->bound_session_);
+}
+
+TEST_F(PortalGlobalShortcutBackendTest, CancelledSetUpCanBeTriedAgain) {
+  StartPortal(1);
+  std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
+  RegisterAndWait(backend.get());
+  ASSERT_EQ(1, portal_->sessions_.size());
+
+  portal_->refuse_binds_ = true;
+  QSignalSpy new_session(backend.get(),
+                         &GlobalShortcutBackend::RegisterFinished);
+  EXPECT_FALSE(SetUpAndWait(backend.get()));
+  EXPECT_FALSE(backend->IsSetUp());
+
+  // The portal binds once per session, so trying again takes another one.
+  ASSERT_TRUE(new_session.wait(5000));
+  ASSERT_EQ(2, portal_->sessions_.size());
+  ASSERT_EQ(1, portal_->closed_.size());
+  EXPECT_EQ(portal_->sessions_[0], portal_->closed_[0]);
+
+  portal_->refuse_binds_ = false;
+  ASSERT_TRUE(SetUpAndWait(backend.get()));
+  EXPECT_EQ(portal_->sessions_[1], portal_->bound_session_);
+  EXPECT_TRUE(backend->IsSetUp());
+}
+
 TEST_F(PortalGlobalShortcutBackendTest, UnregisterClosesTheSession) {
   StartPortal(1);
   std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
@@ -340,6 +439,7 @@ TEST_F(PortalGlobalShortcutBackendTest, UnregisterClosesTheSession) {
 
 TEST_F(PortalGlobalShortcutBackendTest, CantConfigureBeforeVersion2) {
   StartPortal(1);
+  SetSetUp();
   std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
   QSignalSpy finished(backend.get(), &GlobalShortcutBackend::RegisterFinished);
   ASSERT_TRUE(backend->Register());
@@ -350,9 +450,10 @@ TEST_F(PortalGlobalShortcutBackendTest, CantConfigureBeforeVersion2) {
 TEST_F(PortalGlobalShortcutBackendTest, ConfiguresFromVersion2) {
   StartPortal(2);
   std::unique_ptr<PortalGlobalShortcutBackend> backend = NewBackend();
-  QSignalSpy finished(backend.get(), &GlobalShortcutBackend::RegisterFinished);
-  ASSERT_TRUE(backend->Register());
-  ASSERT_TRUE(finished.wait(5000));
+  RegisterAndWait(backend.get());
+  // There's nothing to configure until the shortcuts are bound.
+  EXPECT_FALSE(backend->CanConfigure());
+  ASSERT_TRUE(SetUpAndWait(backend.get()));
   ASSERT_TRUE(backend->CanConfigure());
   backend->Configure();
   EXPECT_TRUE(WaitFor([this]() { return portal_->configured_.load(); }));

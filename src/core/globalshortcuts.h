@@ -55,12 +55,17 @@ class GlobalShortcuts : public QWidget {
   // Whether the desktop portal handles the shortcuts, so they're changed in
   // the desktop's settings.
   bool IsPortalActive() const;
+  // Whether the user has set up the portal's shortcuts. Until then they're
+  // not bound, so the desktop doesn't ask about them at every start.
+  bool IsPortalSetUp() const;
   bool CanConfigurePortal() const;
 
  public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();
   void ConfigurePortal();
+  // Binds the portal's shortcuts, so the desktop may ask the user about them.
+  void SetUpPortal();
 
   void Unregister();
   void Register();
@@ -89,6 +94,8 @@ class GlobalShortcuts : public QWidget {
   void Love();
   void Ban();
   void RemoveCurrentSong();
+
+  void PortalSetUpFinished(bool success);
 
  private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

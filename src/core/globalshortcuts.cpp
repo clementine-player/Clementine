@@ -103,6 +103,8 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
   kglobalaccel_backend_ = new KGlobalAccelShortcutBackend(this);
 #ifdef HAVE_DBUS
   portal_backend_ = new PortalGlobalShortcutBackend(this);
+  connect(portal_backend_, &PortalGlobalShortcutBackend::SetUpFinished, this,
+          &GlobalShortcuts::PortalSetUpFinished);
 #endif
 
 #ifndef Q_OS_DARWIN
@@ -201,6 +203,14 @@ bool GlobalShortcuts::IsPortalActive() const {
 #endif
 }
 
+bool GlobalShortcuts::IsPortalSetUp() const {
+#ifdef HAVE_DBUS
+  return IsPortalActive() && portal_backend_->IsSetUp();
+#else
+  return false;
+#endif
+}
+
 bool GlobalShortcuts::CanConfigurePortal() const {
 #ifdef HAVE_DBUS
   return IsPortalActive() && portal_backend_->CanConfigure();
@@ -212,6 +222,12 @@ bool GlobalShortcuts::CanConfigurePortal() const {
 void GlobalShortcuts::ConfigurePortal() {
 #ifdef HAVE_DBUS
   portal_backend_->Configure();
+#endif
+}
+
+void GlobalShortcuts::SetUpPortal() {
+#ifdef HAVE_DBUS
+  portal_backend_->SetUp();
 #endif
 }
 

@@ -26,6 +26,7 @@
 #include <QDBusPendingReply>
 #include <QDBusVariant>
 #include <QMap>
+#include <QSettings>
 
 #include "core/globalshortcuts.h"
 #include "core/logging.h"
@@ -146,8 +147,6 @@ PortalRequest::~PortalRequest() {
                   SLOT(Response(uint, QVariantMap)));
 }
 
-void PortalRequest::Cancel() { deleteLater(); }
-
 void PortalRequest::Response(uint response, const QVariantMap& results) {
   // Only once, even if another Response arrives before this is deleted.
   if (handler_) {
@@ -160,6 +159,7 @@ void PortalRequest::Response(uint response, const QVariantMap& results) {
 
 const char* PortalGlobalShortcutBackend::kAppId =
     "org.clementine_player.Clementine";
+const char* PortalGlobalShortcutBackend::kSetUpKey = "portal_set_up";
 
 PortalGlobalShortcutBackend::PortalGlobalShortcutBackend(
     GlobalShortcuts* parent, const QDBusConnection& bus)
@@ -167,7 +167,8 @@ PortalGlobalShortcutBackend::PortalGlobalShortcutBackend(
       bus_(bus),
       version_(-1),
       next_token_(0),
-      generation_(0) {
+      generation_(0),
+      bound_(false) {
   qDBusRegisterMetaType<PortalShortcut>();
   qDBusRegisterMetaType<QList<PortalShortcut>>();
 }
@@ -209,9 +210,37 @@ int PortalGlobalShortcutBackend::Version() {
 
 bool PortalGlobalShortcutBackend::IsAvailable() { return Version() >= 1; }
 
+bool PortalGlobalShortcutBackend::IsSetUp() const {
+  QSettings s;
+  s.beginGroup(GlobalShortcuts::kSettingsGroup);
+  return s.value(kSetUpKey, false).toBool();
+}
+
+void PortalGlobalShortcutBackend::SetUp() {
+  if (session_.isEmpty() || bound_) {
+    emit SetUpFinished(bound_);
+    return;
+  }
+
+  const int generation = generation_;
+  BindShortcuts(generation, [this, generation](bool success) {
+    if (success) {
+      QSettings s;
+      s.beginGroup(GlobalShortcuts::kSettingsGroup);
+      s.setValue(kSetUpKey, true);
+    } else {
+      // The portal won't bind again in this session, so the next try needs
+      // another.
+      CloseSession();
+      CreateSession(generation);
+    }
+    emit SetUpFinished(success);
+  });
+}
+
 // ConfigureShortcuts is new in version 2.
 bool PortalGlobalShortcutBackend::CanConfigure() {
-  return Version() >= 2 && !session_.isEmpty();
+  return Version() >= 2 && bound_;
 }
 
 void PortalGlobalShortcutBackend::Configure() {
@@ -273,8 +302,8 @@ void PortalGlobalShortcutBackend::CallWithResponse(const QString& method,
             if (reply.isError()) {
               qLog(Warning) << "The global shortcuts portal's" << method
                             << "failed:" << reply.error().message();
-              request->Cancel();
-              emit RegisterFinished(false);
+              // As if the portal had answered that it failed.
+              request->Response(2, QVariantMap());
             }
           });
 }
@@ -308,14 +337,24 @@ void PortalGlobalShortcutBackend::CreateSession(int generation) {
         }
 
         session_ = session;
+        bound_ = false;
         bus_.connect(
             kPortalService, kPortalPath, kPortalInterface, "Activated", this,
             SLOT(Activated(QDBusObjectPath, QString, qulonglong, QVariantMap)));
-        BindShortcuts(generation);
+
+        // Until the user sets them up, binding would show the desktop's
+        // dialog every time Clementine starts.
+        if (!IsSetUp()) {
+          emit RegisterFinished(true);
+          return;
+        }
+        BindShortcuts(generation,
+                      [this](bool success) { emit RegisterFinished(success); });
       });
 }
 
-void PortalGlobalShortcutBackend::BindShortcuts(int generation) {
+void PortalGlobalShortcutBackend::BindShortcuts(
+    int generation, std::function<void(bool)> done) {
   QList<PortalShortcut> shortcuts;
   for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts()) {
     PortalShortcut portal_shortcut;
@@ -335,23 +374,24 @@ void PortalGlobalShortcutBackend::BindShortcuts(int generation) {
       {QVariant::fromValue(QDBusObjectPath(session_)),
        QVariant::fromValue(shortcuts), QString()},
       QVariantMap(),
-      [this, generation](uint response, const QVariantMap& results) {
+      [this, generation, done](uint response, const QVariantMap& results) {
         if (generation != generation_) return;
         if (response != 0) {
           // 1 is the user saying no.
           qLog(Warning) << "The global shortcuts portal didn't bind shortcuts:"
                         << response;
-          emit RegisterFinished(false);
+          done(false);
           return;
         }
 
+        bound_ = true;
         const QList<PortalShortcut> bound =
             qdbus_cast<QList<PortalShortcut>>(results["shortcuts"]);
         for (const PortalShortcut& shortcut : bound) {
           qLog(Debug) << "Global shortcut" << shortcut.id << "is"
                       << shortcut.properties["trigger_description"].toString();
         }
-        emit RegisterFinished(true);
+        done(true);
       });
 }
 
@@ -370,6 +410,7 @@ void PortalGlobalShortcutBackend::CloseSession() {
       kPortalService, session_, kSessionInterface, "Close");
   bus_.asyncCall(message);
   session_.clear();
+  bound_ = false;
 }
 
 void PortalGlobalShortcutBackend::Activated(const QDBusObjectPath& session,
