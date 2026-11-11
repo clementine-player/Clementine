@@ -57,6 +57,7 @@ packages = [
 testpaths = [
     "dist/test_release_notes.py",
     "dist/test_sentry_symbols.py",
+    "dist/test_versions.py",
     "tools/apt-repo/tests",
     "tools/mac-update/tests",
     "tools/remote-cli/tests",
@@ -71,6 +72,7 @@ include = [
     "dist/test_release_notes.py",
     "dist/sentry_symbols.py",
     "dist/test_sentry_symbols.py",
+    "dist/test_versions.py",
     "tools/*/src/**/*.py",
     "tools/*/tests/**/*.py",
 ]
@@ -109,6 +111,7 @@ include = [
     "dist/test_release_notes.py",
     "dist/sentry_symbols.py",
     "dist/test_sentry_symbols.py",
+    "dist/test_versions.py",
     "tools/*/src",
     "tools/*/tests",
 ]

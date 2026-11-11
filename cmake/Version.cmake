@@ -72,6 +72,9 @@ set(INCLUDE_GIT_REVISION ON)
 #
 #     See compareversions.cpp in QtSparkle.
 
+# dist/test_versions.py checks that builds' versions sort in the order the
+# builds were made, by each of these and by GitHub's releases page.
+
 # Version numbers in Clementine:
 #   Deb:
 #     With git:    $tagname-$commitcount.dev-g$sha1, the count padded to 3 digits

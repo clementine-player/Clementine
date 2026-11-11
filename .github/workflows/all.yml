@@ -68,6 +68,10 @@ jobs:
         run: uv run ruff format --check
       - name: ty
         run: uv run ty check --output-format github
+      - name: Install rpm
+        # dist/test_versions.py checks the rpm versions with rpm itself, as it
+        # does the Debian ones with dpkg, which the runner has.
+        run: sudo apt-get install -y --no-install-recommends rpm
       - name: Unit tests
         # The remote's smoke tests need a built Clementine, so they're
         # skipped here and the Test job runs them. Reading a DMG needs macOS
