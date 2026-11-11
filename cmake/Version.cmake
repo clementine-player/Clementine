@@ -74,7 +74,7 @@ set(INCLUDE_GIT_REVISION ON)
 
 # Version numbers in Clementine:
 #   Deb:
-#     With git:    $tagname-$commitcount.dev-g$sha1
+#     With git:    $tagname-$commitcount.dev-g$sha1, the count padded to 3 digits
 #     Without git: $major.$minor.$patch[~$prerelease]
 #
 #   Rpm:           Version                 Release
@@ -83,7 +83,7 @@ set(INCLUDE_GIT_REVISION ON)
 #     With git:    $tagname                2.$commitcount.g$sha1
 #
 #   QtSparkle (Windows):
-#     With git:    $tagname-$commitcount.dev-g$sha1
+#     With git:    $tagname-$commitcount.dev-g$sha1, the count padded to 3 digits
 #     Without git: $major.$minor.$patch[$prerelease]
 #
 #   Mac info.plist: CFBundleVersion
@@ -174,16 +174,24 @@ if(GIT_PARTS_LENGTH EQUAL 3)
 endif(GIT_PARTS_LENGTH EQUAL 3)
 
 # GIT_REV is what the displayed and Debian versions use: the tag alone on a
-# numbered release. A development build is 1.4.3-12.dev-g4c062729d rather than
-# describe's 1.4.3-12-g4c062729d, and its release on GitHub is tagged that too.
-# GitHub lists a day's releases by their tags as semantic versions, which would
-# compare "12-g4c062729d" as text and put 9 above 12; after the dot, the count
-# is a number of its own. The "-g" stays for release-monitoring.org's filter,
-# which hides development builds by it.
+# numbered release. A development build is 1.4.3-012.dev-g4c062729d rather
+# than describe's 1.4.3-12-g4c062729d, and its release on GitHub is tagged that
+# too. GitHub lists a day's releases by their tags, comparing what follows the
+# "-" as text: 1.4.5-9.dev-g30c8967a3 came above 1.4.5-14.dev-gc4987e3d6. So
+# the count is padded with zeros to 3 digits, which also compare the same as
+# numbers, for dpkg, rpm and Sparkle. Weekly releases keep the count well under
+# 1000. The "-g" stays for release-monitoring.org's filter, which hides
+# development builds by it.
 if(GIT_COMMITCOUNT EQUAL 0)
   set(GIT_REV ${GIT_TAGNAME})
 else()
-  set(GIT_REV "${GIT_TAGNAME}-${GIT_COMMITCOUNT}.dev-${GIT_SHA1}")
+  set(GIT_PADDED_COMMITCOUNT ${GIT_COMMITCOUNT})
+  string(LENGTH "${GIT_PADDED_COMMITCOUNT}" GIT_COMMITCOUNT_LENGTH)
+  while(GIT_COMMITCOUNT_LENGTH LESS 3)
+    set(GIT_PADDED_COMMITCOUNT "0${GIT_PADDED_COMMITCOUNT}")
+    math(EXPR GIT_COMMITCOUNT_LENGTH "${GIT_COMMITCOUNT_LENGTH} + 1")
+  endwhile()
+  set(GIT_REV "${GIT_TAGNAME}-${GIT_PADDED_COMMITCOUNT}.dev-${GIT_SHA1}")
 endif()
 
 if(INCLUDE_GIT_REVISION AND HAS_GIT_REVISION)

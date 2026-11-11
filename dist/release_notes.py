@@ -7,7 +7,7 @@ notes" in README.md). There are two kinds of release, both tagged:
 
 - Numbered releases, such as 1.4.3, made by .github/workflows/release.yml
   every week there are notes to tell users. Their tags are annotated.
-- Development builds, such as 1.4.3-12.dev-g4c062729d, made by all.yml for
+- Development builds, such as 1.4.3-012.dev-g4c062729d, made by all.yml for
   every push to master. Their tags are lightweight.
 
 So `git describe` without --tags finds the last numbered release, and with
