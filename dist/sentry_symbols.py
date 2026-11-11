@@ -15,11 +15,21 @@ Usage:
     info and the same debug ID, so a build can't quietly stop making them.
 
   uv run --only-group sentry dist/sentry_symbols.py \\
-      upload SYMBOLS
+      libraries DIR...
 
-    Uploads SYMBOLS to Sentry, with sentry-cli's SENTRY_AUTH_TOKEN, SENTRY_ORG
-    and SENTRY_PROJECT. Without a token or a project it only says so, so
-    builds without the repository's secrets still pass.
+    Says how many of the libraries under each DIR, such as the Qt and
+    GStreamer ones a build bundles, Sentry can name functions in (from their
+    symbol tables) and walk the stack through (from their unwind info). They
+    have no debug info of their own, so these come from the files themselves.
+
+  uv run --only-group sentry dist/sentry_symbols.py \\
+      upload SYMBOLS [LIBRARIES...]
+
+    Uploads SYMBOLS, and the libraries under each LIBRARIES directory, to
+    Sentry, with sentry-cli's SENTRY_AUTH_TOKEN, SENTRY_ORG and
+    SENTRY_PROJECT. Sentry skips files it already has. Without a token or a
+    project it only says so, so builds without the repository's secrets still
+    pass.
 """
 
 import argparse
@@ -39,6 +49,7 @@ class DebugFile:
     path: str
     debug_ids: frozenset[str]
     has_debug_info: bool
+    features: frozenset[str] = frozenset()
 
 
 def parse_check(path: str, output: str) -> DebugFile:
@@ -49,6 +60,7 @@ def parse_check(path: str, output: str) -> DebugFile:
         path=path,
         debug_ids=frozenset(v["debug_id"] for v in data.get("variants", [])),
         has_debug_info=bool(data.get("is_usable")) and "debug" in features,
+        features=frozenset(f for f in features if f),
     )
 
 
@@ -82,6 +94,20 @@ def missing_symbols(
     return problems
 
 
+def library_summary(libraries: Iterable[DebugFile]) -> list[str]:
+    """How many libraries have function names, and unwind info, for Sentry."""
+    libraries = list(libraries)
+    lines = [
+        f"{len(libraries)} libraries: "
+        f"{sum('symtab' in f.features for f in libraries)} with function names, "
+        f"{sum('unwind' in f.features for f in libraries)} with unwind info"
+    ]
+    lines += [
+        f"No function names: {f.path}" for f in libraries if "symtab" not in f.features
+    ]
+    return lines
+
+
 def files_under(directory: pathlib.Path) -> list[pathlib.Path]:
     return sorted(p for p in directory.rglob("*") if p.is_file())
 
@@ -104,7 +130,16 @@ def check(symbols_dir: pathlib.Path, binary_paths: list[pathlib.Path]) -> int:
     return 1 if problems else 0
 
 
-def upload(symbols_dir: pathlib.Path) -> int:
+def libraries(directories: list[pathlib.Path]) -> int:
+    found = []
+    for directory in directories:
+        found += [f for f in map(check_file, files_under(directory)) if f]
+    for line in library_summary(found):
+        print(line)
+    return 0
+
+
+def upload(symbols_dir: pathlib.Path, library_dirs: list[pathlib.Path]) -> int:
     missing = [
         name
         for name in ("SENTRY_AUTH_TOKEN", "SENTRY_PROJECT")
@@ -117,7 +152,14 @@ def upload(symbols_dir: pathlib.Path) -> int:
         )
         return 0
     return subprocess.run(
-        ["sentry-cli", "debug-files", "upload", str(symbols_dir)], check=False
+        [
+            "sentry-cli",
+            "debug-files",
+            "upload",
+            str(symbols_dir),
+            *map(str, library_dirs),
+        ],
+        check=False,
     ).returncode
 
 
@@ -127,12 +169,17 @@ def main(argv: list[str]) -> int:
     check_parser = commands.add_parser("check")
     check_parser.add_argument("symbols", type=pathlib.Path)
     check_parser.add_argument("binaries", type=pathlib.Path, nargs="+")
+    libraries_parser = commands.add_parser("libraries")
+    libraries_parser.add_argument("directories", type=pathlib.Path, nargs="+")
     upload_parser = commands.add_parser("upload")
     upload_parser.add_argument("symbols", type=pathlib.Path)
+    upload_parser.add_argument("libraries", type=pathlib.Path, nargs="*")
     args = parser.parse_args(argv)
     if args.command == "check":
         return check(args.symbols, args.binaries)
-    return upload(args.symbols)
+    if args.command == "libraries":
+        return libraries(args.directories)
+    return upload(args.symbols, args.libraries)
 
 
 if __name__ == "__main__":

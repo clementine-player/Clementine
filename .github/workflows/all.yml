@@ -1489,15 +1489,6 @@ jobs:
         with:
           name: symbols-windows
           path: symbols/
-      - name: Upload debug symbols to Sentry
-        timeout-minutes: 15
-        if: inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master')
-        shell: bash
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
-        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
 
       - name: Copy Qt plugin DLLs
         working-directory: dist/windows
@@ -1580,6 +1571,23 @@ jobs:
             cp -n -v "/clang64/bin/$name" .
           done < mingw_deps.txt
           rm -f raw_deps.txt mingw_deps.txt
+
+      # The DLLs and plugins come from MSYS2 without debug info, but Sentry
+      # can still name their exported functions and walk the stack through
+      # them from the files themselves, so they're uploaded too.
+      - name: Check library symbols
+        timeout-minutes: 10
+        shell: bash
+        run: uv run --only-group sentry dist/sentry_symbols.py libraries dist/windows
+      - name: Upload debug symbols to Sentry
+        timeout-minutes: 30
+        if: inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        shell: bash
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols dist/windows
 
       # Runs the actual packaged binary (not a dev build) end to end through
       # real playback, so a plugin/dependency that's missing or broken only
@@ -2753,14 +2761,20 @@ jobs:
         with:
           name: symbols-mac
           path: symbols/
+      # The frameworks and plugins come from Homebrew without debug info,
+      # but Sentry can still name their functions and walk the stack
+      # through them from the files themselves, so they're uploaded too.
+      - name: Check library symbols
+        timeout-minutes: 10
+        run: uv run --only-group sentry dist/sentry_symbols.py libraries bin/clementine.app/Contents/Frameworks bin/clementine.app/Contents/PlugIns
       - name: Upload debug symbols to Sentry
-        timeout-minutes: 15
+        timeout-minutes: 30
         if: inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master')
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ vars.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
-        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols bin/clementine.app/Contents/Frameworks bin/clementine.app/Contents/PlugIns
 
       # Qt's SQLite driver uses the system libsqlite3, and the library's
       # search is moving to FTS5, so check that this macOS's SQLite has it
