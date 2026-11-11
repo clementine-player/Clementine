@@ -62,7 +62,7 @@ msgstr "Normaliseringsmodus"
 msgid " pt"
 msgstr "pkt"
 
-#: ../bin/src/ui_behavioursettingspage.h:454
+#: ../bin/src/ui_behavioursettingspage.h:464
 msgid " s"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgstr "&Still opp tekst"
 msgid "&Center"
 msgstr "Sentr&er"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:228
 msgid "&Custom"
 msgstr "&Egendefinert"
 
@@ -424,7 +424,7 @@ msgstr ""
 msgid "&Music"
 msgstr "Musikk"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:226
 msgid "&None"
 msgstr "&Ingen"
 
@@ -593,7 +593,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Sanger som passer med disse kriteriene blir med på spillelista."
 
-#: ../bin/src/ui_behavioursettingspage.h:457
+#: ../bin/src/ui_behavioursettingspage.h:467
 msgid "A&utomatic"
 msgstr ""
 
@@ -643,7 +643,7 @@ msgid "About Qt..."
 msgstr "Om Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:458
+#: ../bin/src/ui_behavioursettingspage.h:468
 msgid "Absolute"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr "Kontodetaljer (Premium)"
 msgid "Action"
 msgstr "Handling"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:224
 msgctxt "Category label"
 msgid "Action"
 msgstr ""
@@ -834,8 +834,8 @@ msgstr "Legg til i annen spilleliste"
 msgid "Add to playlist"
 msgstr "Legg til i spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:442
-#: ../bin/src/ui_behavioursettingspage.h:450
+#: ../bin/src/ui_behavioursettingspage.h:452
+#: ../bin/src/ui_behavioursettingspage.h:460
 msgid "Add to the queue"
 msgstr "Legg i kø"
 
@@ -1000,16 +1000,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr "Sammen med originalene"
 
-#: ../bin/src/ui_behavioursettingspage.h:419
+#: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Alwa&ys hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:418
+#: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Always show &the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:432
-#: ../bin/src/ui_behavioursettingspage.h:446
+#: ../bin/src/ui_behavioursettingspage.h:442
+#: ../bin/src/ui_behavioursettingspage.h:456
 msgid "Always start playing"
 msgstr "Alltid start avspilling"
 
@@ -1044,7 +1044,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Utseende"
 
-#: core/commandlineoptions.cpp:198
+#: core/commandlineoptions.cpp:202
 msgid "Append files/URLs to the playlist"
 msgstr "Tilføy filer/URLer til spillelista"
 
@@ -1054,7 +1054,7 @@ msgstr "Tilføy filer/URLer til spillelista"
 msgid "Append to current playlist"
 msgstr "Legg til i gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:439
+#: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Append to the playlist"
 msgstr "Legg til i spillelista"
 
@@ -1094,7 +1094,7 @@ msgstr "Artistinfo"
 msgid "Artist's initial"
 msgstr "Artistens initialer"
 
-#: ../bin/src/ui_behavioursettingspage.h:460
+#: ../bin/src/ui_behavioursettingspage.h:470
 msgid "As&k when saving"
 msgstr ""
 
@@ -1188,7 +1188,7 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
-#: core/globalshortcuts.cpp:84
+#: core/globalshortcuts.cpp:88
 msgid "Ban (Last.fm scrobbling)"
 msgstr ""
 
@@ -1204,7 +1204,7 @@ msgstr "Blå"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:408
+#: ../bin/src/ui_behavioursettingspage.h:414
 msgid "Behavior"
 msgstr "Adferd"
 
@@ -1321,23 +1321,23 @@ msgstr "Endre omslagsbilde"
 msgid "Change font size..."
 msgstr "Endre skrifstørrelse…"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Change repeat mode"
 msgstr "Endre gjentagelsesmodus"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:229
 msgid "Change shortcut..."
 msgstr "Endre snarvei…"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Change shuffle mode"
 msgstr "Endre stokkings-modus"
 
-#: ../bin/src/ui_behavioursettingspage.h:449
+#: ../bin/src/ui_behavioursettingspage.h:459
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:204
+#: core/commandlineoptions.cpp:208
 msgid "Change the language"
 msgstr "Endre språk"
 
@@ -1500,6 +1500,12 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine klarte ikke å laste projectM-visualiseringer. Sjekk at Clementine er installert rett."
 
+#: core/crashreporting.cpp:188
+msgid ""
+"Clementine crashed last time it was running. Send a crash report to the "
+"developers so they can fix the problem?"
+msgstr ""
+
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
 msgstr "Clementine bildevisning"
@@ -1507,6 +1513,10 @@ msgstr "Clementine bildevisning"
 #: airplay/airplaysession.cpp:168
 #, qt-format
 msgid "Clementine on %1"
+msgstr ""
+
+#: core/crashreporting.cpp:187
+msgid "Clementine quit unexpectedly"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:128
@@ -1584,11 +1594,11 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:207
+#: core/commandlineoptions.cpp:211
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma-separert liste av klasse:level, level er 0-3"
 
-#: ../bin/src/ui_behavioursettingspage.h:465
+#: ../bin/src/ui_behavioursettingspage.h:475
 msgid "Comma separated list of prefix words to ignore when sorting"
 msgstr ""
 
@@ -1628,7 +1638,7 @@ msgstr "Sett opp Magnatune…"
 msgid "Configure Plex..."
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:214
 msgid "Configure Shortcuts"
 msgstr "Oppsett av hurtigtaster"
 
@@ -1871,7 +1881,7 @@ msgstr "Omslagsgrafikk satt fra %1"
 msgid "Covers from %1"
 msgstr "Omslag fra %1"
 
-#: core/commandlineoptions.cpp:197
+#: core/commandlineoptions.cpp:201
 msgid "Create a new playlist with files/URLs"
 msgstr ""
 
@@ -1950,19 +1960,19 @@ msgstr "Endringsdato"
 msgid "Days"
 msgstr "Dager"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:227
 msgid "De&fault"
 msgstr "S&tandard"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:191
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:189
+#: core/commandlineoptions.cpp:193
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:70 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Decrease volume"
 msgstr "Demp lydstyrken"
 
@@ -2018,7 +2028,7 @@ msgstr "Slett forhåndsinnstilling"
 msgid "Delete smart playlist"
 msgstr "Slett smart spilleliste"
 
-#: core/commandlineoptions.cpp:209
+#: core/commandlineoptions.cpp:213
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -2139,7 +2149,7 @@ msgstr "Uregelmessig overføring"
 msgid "Display options"
 msgstr "Visningsalternativ"
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Display the on-screen-display"
 msgstr "Overleggsvisning"
 
@@ -2177,6 +2187,10 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "Ikke gjenta"
 
+#: core/crashreporting.cpp:199
+msgid "Don't send"
+msgstr ""
+
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
 msgstr "Ikke vis under Diverse artister"
@@ -2203,11 +2217,11 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Dobbelklikk for å åpne"
 
-#: ../bin/src/ui_behavioursettingspage.h:448
+#: ../bin/src/ui_behavioursettingspage.h:458
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:438
+#: ../bin/src/ui_behavioursettingspage.h:448
 msgid "Double clicking a song will..."
 msgstr "Dobbeltklikking på en sang vil…"
 
@@ -2304,7 +2318,7 @@ msgstr ""
 #. Behavior settings page, and read with it: keep the computer awake
 #. while Clementine plays music through this computer's speakers or
 #. headphones.
-#: ui/behavioursettingspage.cpp:53
+#: ui/behavioursettingspage.cpp:54
 msgid "During playback"
 msgstr ""
 
@@ -2370,7 +2384,7 @@ msgstr "Slå på tonekontroll (EQ)"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kun bruk hurtigtaster når Clementine er i fokus"
 
-#: ../bin/src/ui_behavioursettingspage.h:425
+#: ../bin/src/ui_behavioursettingspage.h:435
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2380,7 +2394,7 @@ msgid ""
 "displayed in this order."
 msgstr ""
 
-#: core/globalshortcuts.cpp:80
+#: core/globalshortcuts.cpp:84
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Slå av/på lyttevaner mot Last.fm"
 
@@ -2475,11 +2489,11 @@ msgstr ""
 msgid "Equalizer"
 msgstr "Tonekontroll"
 
-#: core/commandlineoptions.cpp:205
+#: core/commandlineoptions.cpp:209
 msgid "Equivalent to --log-levels *:1"
 msgstr "Tilsvarer --log-levels *:1"
 
-#: core/commandlineoptions.cpp:206
+#: core/commandlineoptions.cpp:210
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tilsvarer --log-levels *:3"
 
@@ -2960,7 +2974,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Hentet %1 av %2 omslag (%3 feilet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:428
+#: ../bin/src/ui_behavioursettingspage.h:438
 msgid "Grey out non existent songs in my playlists"
 msgstr "Merk ikke-eksisterende sanger med grått i mine spillelister"
 
@@ -3097,7 +3111,7 @@ msgstr "Ikoner øverst"
 msgid "Identifying song"
 msgstr "Identifiserer sangen"
 
-#: ../bin/src/ui_behavioursettingspage.h:423
+#: ../bin/src/ui_behavioursettingspage.h:433
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -3124,7 +3138,7 @@ msgstr ""
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorer \"The\" i artistnavn"
 
-#: ../bin/src/ui_behavioursettingspage.h:463
+#: ../bin/src/ui_behavioursettingspage.h:473
 msgid "Ignore prefix word(s)"
 msgstr ""
 
@@ -3173,15 +3187,15 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:190
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:192
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:69 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Increase volume"
 msgstr "Øk lydstyrken"
 
@@ -3251,7 +3265,7 @@ msgstr ""
 msgid "Jazz"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:435
+#: ../bin/src/ui_behavioursettingspage.h:445
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -3271,11 +3285,11 @@ msgstr "Hold nede knappen i %1 sekund…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hold nede knappen i %1 sekunder…"
 
-#: ../bin/src/ui_behavioursettingspage.h:411
+#: ../bin/src/ui_behavioursettingspage.h:417
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsett i bakgrunnen selv om vinduet lukkes"
 
-#: ../bin/src/ui_behavioursettingspage.h:421
+#: ../bin/src/ui_behavioursettingspage.h:431
 msgid "Keep the computer awake"
 msgstr ""
 
@@ -3293,7 +3307,7 @@ msgstr ""
 #. under "Keep the computer awake". As well as keeping the computer
 #. awake, it stops the screen from turning off or locking while they're
 #. on show.
-#: ui/behavioursettingspage.cpp:76
+#: ui/behavioursettingspage.cpp:77
 msgid "Keeps the display on too"
 msgstr ""
 
@@ -3306,7 +3320,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:413
+#: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Language"
 msgstr "Språk"
 
@@ -3504,7 +3518,7 @@ msgstr "Henter informasjon om spor"
 msgid "Loading..."
 msgstr "Åpner…"
 
-#: core/commandlineoptions.cpp:199
+#: core/commandlineoptions.cpp:203
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Åpne filer/URL-er; erstatt gjeldende spilleliste"
 
@@ -3539,7 +3553,7 @@ msgstr ""
 msgid "Love"
 msgstr "Elsker"
 
-#: core/globalshortcuts.cpp:82
+#: core/globalshortcuts.cpp:86
 msgid "Love (Last.fm scrobbling)"
 msgstr ""
 
@@ -3777,7 +3791,7 @@ msgstr "Musikkbibliotek"
 msgid "Music extensions remotely visible"
 msgstr ""
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:114
+#: core/globalshortcuts.cpp:71 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:767
 msgid "Mute"
 msgstr "Demp"
@@ -3831,8 +3845,8 @@ msgstr "Aldri"
 msgid "Never played"
 msgstr "Aldri spilt"
 
-#: ../bin/src/ui_behavioursettingspage.h:430
-#: ../bin/src/ui_behavioursettingspage.h:444
+#: ../bin/src/ui_behavioursettingspage.h:440
+#: ../bin/src/ui_behavioursettingspage.h:454
 msgid "Never start playing"
 msgstr "Aldri begynn avspilling"
 
@@ -3874,11 +3888,11 @@ msgstr "Nyeste spor"
 msgid "Next"
 msgstr "Neste"
 
-#: core/globalshortcuts.cpp:61 ../bin/src/ui_mainwindow.h:784
+#: core/globalshortcuts.cpp:65 ../bin/src/ui_mainwindow.h:784
 msgid "Next album"
 msgstr ""
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Next track"
 msgstr "Neste spor"
@@ -3944,7 +3958,7 @@ msgstr ""
 msgid "Normal block type"
 msgstr "Normal blokktype"
 
-#: ../bin/src/ui_behavioursettingspage.h:468
+#: ../bin/src/ui_behavioursettingspage.h:478
 msgid "Normal duration (at least 4 minutes or half the track length)"
 msgstr ""
 
@@ -3991,6 +4005,10 @@ msgstr "Forhåndsvisning av skjermbildeoverlegg"
 
 #: widgets/osd.cpp:175
 msgid "Off"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:419
+msgid "Offer to send a crash report after Clementine crashes"
 msgstr ""
 
 #: core/song.cpp:428
@@ -4098,7 +4116,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr "Åpne i ny spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:441
+#: ../bin/src/ui_behavioursettingspage.h:451
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -4111,8 +4129,9 @@ msgstr ""
 msgid "Open on Jamendo"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:216
+#: ../bin/src/ui_globalshortcutssettingspage.h:219
+#: ../bin/src/ui_globalshortcutssettingspage.h:221
 msgid "Open..."
 msgstr "Åpne…"
 
@@ -4169,7 +4188,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:202
+#: core/commandlineoptions.cpp:206
 msgid "Other options"
 msgstr "Andre innstillinger"
 
@@ -4230,12 +4249,12 @@ msgstr "Fest"
 msgid "Password"
 msgstr "Passord"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
+#: core/globalshortcuts.cpp:56 ui/mainwindow.cpp:1196 ui/mainwindow.cpp:1773
 #: ui/qtsystemtrayicon.cpp:243 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pause"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Pause playback"
 msgstr "Sett avspilling på pause"
 
@@ -4266,7 +4285,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Enkelt sidefelt"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
+#: core/globalshortcuts.cpp:55 ui/mainwindow.cpp:714 ui/mainwindow.cpp:1160
 #: ui/mainwindow.cpp:1181 ui/mainwindow.cpp:1777 ui/qtsystemtrayicon.cpp:231
 #: ui/qtsystemtrayicon.cpp:255 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:724
@@ -4285,16 +4304,16 @@ msgstr ""
 msgid "Play count"
 msgstr "Antall avspillinger"
 
-#: core/commandlineoptions.cpp:201
+#: core/commandlineoptions.cpp:205
 msgid "Play given playlist"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:184
 msgid "Play if stopped, pause if playing"
 msgstr "Hvis stoppet: Spill av. Hvis spiller: pause"
 
-#: ../bin/src/ui_behavioursettingspage.h:431
-#: ../bin/src/ui_behavioursettingspage.h:445
+#: ../bin/src/ui_behavioursettingspage.h:441
+#: ../bin/src/ui_behavioursettingspage.h:455
 msgid "Play if there is nothing already playing"
 msgstr "Spill hvis det ikke er noe annet som spilles av for øyeblikket"
 
@@ -4318,11 +4337,11 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:200
+#: core/commandlineoptions.cpp:204
 msgid "Play the <n>th track in the playlist"
 msgstr "Spill av <n>ende spor i spillelista"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:117
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:117
 msgid "Play/Pause"
 msgstr "Spill av/Pause"
 
@@ -4330,7 +4349,7 @@ msgstr "Spill av/Pause"
 msgid "Playback"
 msgstr "Avspilling"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:182
 msgid "Player options"
 msgstr "Innstillinger for avspiller"
 
@@ -4363,7 +4382,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr "Spillelisten er ferdigspilt"
 
-#: core/commandlineoptions.cpp:196
+#: core/commandlineoptions.cpp:200
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:92
 msgid "Playlist options"
 msgstr "Innstillinger for spilleliste"
@@ -4490,7 +4509,7 @@ msgstr "Trykk en tast"
 msgid "Press a key combination to use for %1..."
 msgstr "Trykk en tastekombinasjon å bruke til %1…"
 
-#: ../bin/src/ui_behavioursettingspage.h:434
+#: ../bin/src/ui_behavioursettingspage.h:444
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -4508,12 +4527,12 @@ msgstr "Forhåndsvisning"
 msgid "Previous"
 msgstr "Forrige"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Previous track"
 msgstr "Forrige spor"
 
-#: core/commandlineoptions.cpp:208
+#: core/commandlineoptions.cpp:212
 msgid "Print out version information"
 msgstr "Vis versjonsinformasjon"
 
@@ -4554,7 +4573,7 @@ msgstr "Sett sangene i tilfeldig rekkefølge"
 msgid "Qt"
 msgstr ""
 
-#: core/commandlineoptions.cpp:210
+#: core/commandlineoptions.cpp:214
 msgid ""
 "Qt's logging rules can turn debug messages off; "
 "QT_LOGGING_RULES=clementine.debug=true turns them back on"
@@ -4623,27 +4642,27 @@ msgstr ""
 msgid "Random visualization"
 msgstr "Tilfeldig visualisering"
 
-#: core/globalshortcuts.cpp:90
+#: core/globalshortcuts.cpp:94
 msgid "Rate the current song 0 stars"
 msgstr "Gi sangen null stjerner"
 
-#: core/globalshortcuts.cpp:91
+#: core/globalshortcuts.cpp:95
 msgid "Rate the current song 1 star"
 msgstr "Gi sangen én stjerne"
 
-#: core/globalshortcuts.cpp:92
+#: core/globalshortcuts.cpp:96
 msgid "Rate the current song 2 stars"
 msgstr "Gi sangen to stjerner"
 
-#: core/globalshortcuts.cpp:93
+#: core/globalshortcuts.cpp:97
 msgid "Rate the current song 3 stars"
 msgstr "Gi sangen tre stjerner"
 
-#: core/globalshortcuts.cpp:94
+#: core/globalshortcuts.cpp:98
 msgid "Rate the current song 4 stars"
 msgstr "Gi sangen fire stjerner"
 
-#: core/globalshortcuts.cpp:95
+#: core/globalshortcuts.cpp:99
 msgid "Rate the current song 5 stars"
 msgstr "Gi sangen fem stjerner"
 
@@ -4692,7 +4711,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:459
+#: ../bin/src/ui_behavioursettingspage.h:469
 msgid "Relative"
 msgstr ""
 
@@ -4700,7 +4719,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "Husk Wii-kontroller-bevegelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:420
+#: ../bin/src/ui_behavioursettingspage.h:430
 msgid "Remember from &last time"
 msgstr ""
 
@@ -4720,7 +4739,7 @@ msgstr "Fjern"
 msgid "Remove action"
 msgstr "Fjern handling"
 
-#: core/globalshortcuts.cpp:87
+#: core/globalshortcuts.cpp:91
 msgid "Remove current song from playlist"
 msgstr ""
 
@@ -4786,7 +4805,7 @@ msgstr "Gjenta spor"
 msgid "Replace current playlist"
 msgstr "Erstatt gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:440
+#: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Replace the playlist"
 msgstr "Erstatt spillelista"
 
@@ -4818,11 +4837,11 @@ msgstr "Tilbakestill"
 msgid "Reset play counts"
 msgstr "Tilbakestill avspillingsteller"
 
-#: ../bin/src/ui_behavioursettingspage.h:436
+#: ../bin/src/ui_behavioursettingspage.h:446
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:194
+#: core/commandlineoptions.cpp:198
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4835,7 +4854,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Begrens til ASCII-tegn"
 
-#: ../bin/src/ui_behavioursettingspage.h:426
+#: ../bin/src/ui_behavioursettingspage.h:436
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4989,7 +5008,7 @@ msgstr "Poengsum"
 msgid "Scrobble tracks that I listen to"
 msgstr "Meld fra om mine lyttevaner"
 
-#: ../bin/src/ui_behavioursettingspage.h:410
+#: ../bin/src/ui_behavioursettingspage.h:416
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -5087,23 +5106,23 @@ msgstr ""
 msgid "Second level"
 msgstr "Andre nivå"
 
-#: core/globalshortcuts.cpp:69 wiimotedev/wiimotesettingspage.cpp:119
+#: core/globalshortcuts.cpp:73 wiimotedev/wiimotesettingspage.cpp:119
 msgid "Seek backward"
 msgstr "Gå bakover"
 
-#: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:121
+#: core/globalshortcuts.cpp:72 wiimotedev/wiimotesettingspage.cpp:121
 msgid "Seek forward"
 msgstr "Gå fremover"
 
-#: core/commandlineoptions.cpp:192
+#: core/commandlineoptions.cpp:196
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Gå frem-/bakover en del av sporlengden"
 
-#: core/commandlineoptions.cpp:190
+#: core/commandlineoptions.cpp:194
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Gå til et bestemt tidspunkt i sporet"
 
-#: ../bin/src/ui_behavioursettingspage.h:452
+#: ../bin/src/ui_behavioursettingspage.h:462
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -5151,6 +5170,10 @@ msgstr "Velg visualiseringer…"
 msgid "Select..."
 msgstr ""
 
+#: core/crashreporting.cpp:198
+msgid "Send report"
+msgstr ""
+
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
 #. A phone running Clementine Remote is downloading songs from this
@@ -5188,13 +5211,17 @@ msgstr "Sett %1 til \"%2\"…"
 msgid "Set target rate"
 msgstr ""
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:189
 msgid "Set the volume to <value> percent"
 msgstr "Sett lydstyrken til <verdi> prosent"
 
 #: networkremote/internetbrowser.cpp:243
 #, qt-format
 msgid "Set up %1 in Clementine's settings on the computer"
+msgstr ""
+
+#: ../bin/src/ui_globalshortcutssettingspage.h:218
+msgid "Set up..."
 msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:736
@@ -5205,16 +5232,16 @@ msgstr "Sett verdi for alle valgte spor…"
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: ../bin/src/ui_behavioursettingspage.h:469
+#: ../bin/src/ui_behavioursettingspage.h:479
 msgid "Short duration (at least 1 minute or half the track length)"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:223
 msgid "Shortcut"
 msgstr "Hurtigtast"
 
-#: ui/globalshortcutssettingspage.cpp:132
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:162
+#: ../bin/src/ui_globalshortcutssettingspage.h:225
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Hurtigtast for %1"
@@ -5228,7 +5255,7 @@ msgstr "Det finnes allerede en hurtigtast for %1"
 msgid "Show"
 msgstr "Vis"
 
-#: core/globalshortcuts.cpp:71 wiimotedev/wiimotesettingspage.cpp:123
+#: core/globalshortcuts.cpp:75 wiimotedev/wiimotesettingspage.cpp:123
 msgid "Show OSD"
 msgstr "Vis skjermbildeoverlegg"
 
@@ -5333,7 +5360,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Vis knappen for rapportering av lyttevaner i hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:409
+#: ../bin/src/ui_behavioursettingspage.h:415
 msgid "Show tray icon"
 msgstr "Vis systemkurvikon"
 
@@ -5341,7 +5368,7 @@ msgstr "Vis systemkurvikon"
 msgid "Show which sources are enabled and disabled"
 msgstr ""
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:74
 msgid "Show/Hide"
 msgstr "Vis/skjul"
 
@@ -5400,7 +5427,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:187
 msgid "Skip backwards in playlist"
 msgstr "Gå bakover i spillelista"
 
@@ -5412,7 +5439,7 @@ msgstr "Antall ganger hoppet over"
 msgid "Skip files with these extensions (comma separated, case insensitive)"
 msgstr ""
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:188
 msgid "Skip forwards in playlist"
 msgstr "Gå fremover i spillelista"
 
@@ -5525,7 +5552,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:183
 msgid "Start the playlist currently playing"
 msgstr "Begynn på spillelista som spilles nå"
 
@@ -5542,7 +5569,7 @@ msgstr "Starter %1"
 msgid "Starting..."
 msgstr "Starter…"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:109
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Stop"
 msgstr "Stopp"
@@ -5563,19 +5590,19 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Stopp etter denne sangen"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:185
 msgid "Stop playback"
 msgstr "Stopp avspilling"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:186
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:427
+#: ../bin/src/ui_behavioursettingspage.h:437
 msgid "Stop playback if song fails to play"
 msgstr ""
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:61
 msgid "Stop playing after current track"
 msgstr "Stopp avspilling etter dette sporet"
 
@@ -5693,7 +5720,7 @@ msgstr ""
 msgid "That password was wrong. Enter %1's AirPlay password:"
 msgstr ""
 
-#: ui/globalshortcutssettingspage.cpp:172
+#: ui/globalshortcutssettingspage.cpp:202
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Kunne ikke starte kommandoen \"%1\"."
@@ -5734,6 +5761,12 @@ msgstr ""
 msgid "The format is only updated when a pipeline starts."
 msgstr ""
 
+#: ../bin/src/ui_behavioursettingspage.h:421
+msgid ""
+"The next time Clementine starts after a crash, ask whether to send a report "
+"so the problem can be fixed. Takes effect when Clementine restarts."
+msgstr ""
+
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
 msgstr ""
@@ -5741,6 +5774,13 @@ msgstr ""
 #: upnp/upnpmediaplayer.cpp:366 upnp/upnpmediaplayer.cpp:450
 #, qt-format
 msgid "The renderer couldn't play it: %1"
+msgstr ""
+
+#: core/crashreporting.cpp:193
+msgid ""
+"The report says what Clementine was doing when it crashed. It can include "
+"file names and the titles of songs you were playing. You'll be asked again "
+"each time Clementine crashes, and you can turn this off in Preferences."
 msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:375
@@ -5893,7 +5933,7 @@ msgstr "Denne enhetstypen (%1) støttes ikke."
 msgid "This version of Clementine can't sync this yet."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:453
+#: ../bin/src/ui_behavioursettingspage.h:463
 msgid "Time step"
 msgstr ""
 
@@ -5907,7 +5947,7 @@ msgstr "Tittel"
 msgid "Today"
 msgstr "I dag"
 
-#: core/globalshortcuts.cpp:73
+#: core/globalshortcuts.cpp:77
 msgid "Toggle Pretty OSD"
 msgstr "Slå av/på pent skjermbildeoverlegg"
 
@@ -5923,7 +5963,7 @@ msgstr "Slå av/på køstatus"
 msgid "Toggle scrobbling"
 msgstr "Slå av/på deling av lyttevaner"
 
-#: core/commandlineoptions.cpp:203
+#: core/commandlineoptions.cpp:207
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Slå av/på synlighet for det pene skjermbildeoverlegget"
 
@@ -6038,7 +6078,7 @@ msgstr ""
 msgid "URL of its Logo:"
 msgstr ""
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "URL(s)"
 msgstr "URL(er)"
 
@@ -6134,7 +6174,7 @@ msgstr "Oppdaterer %1% …"
 msgid "Updating library"
 msgstr "Oppdaterer bibliotek"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "Usage"
 msgstr "Bruk"
 
@@ -6142,7 +6182,7 @@ msgstr "Bruk"
 msgid "Use Album Artist tag when available"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:215
 msgid "Use Gnome's shortcut keys"
 msgstr "Bruk hurtigtaster fra Gnome"
 
@@ -6202,7 +6242,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "Bruk midlertidig støyforming"
 
-#: ../bin/src/ui_behavioursettingspage.h:414
+#: ../bin/src/ui_behavioursettingspage.h:424
 msgid "Use the system default"
 msgstr "Bruk systemforvalg"
 
@@ -6229,7 +6269,7 @@ msgstr ""
 msgid "Username"
 msgstr "Brukernavn"
 
-#: ../bin/src/ui_behavioursettingspage.h:429
+#: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Using the menu to add a song will..."
 msgstr "Bruk av menyen for å legge til et spor vil…"
 
@@ -6306,7 +6346,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:412
+#: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:418
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -6333,11 +6373,11 @@ msgstr ""
 msgid "Weeks"
 msgstr "Uker"
 
-#: ../bin/src/ui_behavioursettingspage.h:417
+#: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When Clementine starts"
 msgstr "Når Clementine starter"
 
-#: ../bin/src/ui_behavioursettingspage.h:467
+#: ../bin/src/ui_behavioursettingspage.h:477
 msgid "When calculating play counts, use"
 msgstr ""
 
@@ -6347,11 +6387,11 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Clementine søker først etter billedfiler som inneholder ett av disse ordene.\nHvis ingen ord passer, blir det største bildet i mappa brukt."
 
-#: ../bin/src/ui_behavioursettingspage.h:456
+#: ../bin/src/ui_behavioursettingspage.h:466
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:462
+#: ../bin/src/ui_behavioursettingspage.h:472
 msgid "When sorting artists, albums and titles"
 msgstr ""
 
@@ -6362,7 +6402,7 @@ msgstr ""
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. for as long as Clementine is running, whatever it's doing.
-#: ui/behavioursettingspage.cpp:47
+#: ui/behavioursettingspage.cpp:48
 msgid "While Clementine is open"
 msgstr ""
 
@@ -6370,7 +6410,7 @@ msgstr ""
 #. Behavior settings page, and read with it: keep the computer awake
 #. while a phone running Clementine Remote downloads songs from it,
 #. whether the user picked them or they're being synced.
-#: ui/behavioursettingspage.cpp:65
+#: ui/behavioursettingspage.cpp:66
 msgid "While a remote is downloading or syncing"
 msgstr ""
 
@@ -6378,14 +6418,14 @@ msgstr ""
 #. Behavior settings page, and read with it: keep the computer awake
 #. while Clementine plays music on a phone, a Chromecast, a Sonos speaker
 #. or the like, which gets the music from this computer.
-#: ui/behavioursettingspage.cpp:59
+#: ui/behavioursettingspage.cpp:60
 msgid "While playing on another device"
 msgstr ""
 
 #. TRANSLATORS: An option under "Keep the computer awake" on the
 #. Behavior settings page, and read with it: keep the computer awake
 #. while visualizations are shown full screen.
-#: ui/behavioursettingspage.cpp:70
+#: ui/behavioursettingspage.cpp:71
 msgid "While visualizations are full screen"
 msgstr ""
 
@@ -6469,7 +6509,7 @@ msgstr "Vil du søke gjennom hele biblioteket på ny nå?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:461
+#: ../bin/src/ui_behavioursettingspage.h:471
 msgid "Write metadata"
 msgstr ""
 
@@ -6559,14 +6599,14 @@ msgstr ""
 msgid "You love this track"
 msgstr "Du elsker dette sporet"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:220
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span "
 "style=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:416
+#: ../bin/src/ui_behavioursettingspage.h:426
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du må starte Clementine på nytt for å bytte språk."
 
@@ -6587,6 +6627,19 @@ msgstr ""
 msgid ""
 "Your browser should now show plex.tv. If it asks for a code, enter "
 "<b>%1</b>."
+msgstr ""
+
+#: ui/globalshortcutssettingspage.cpp:124
+#: ../bin/src/ui_globalshortcutssettingspage.h:217
+msgid ""
+"Your desktop handles Clementine's global shortcuts, so you choose their keys"
+" in its settings."
+msgstr ""
+
+#: ui/globalshortcutssettingspage.cpp:128
+msgid ""
+"Your desktop handles Clementine's global shortcuts. They're off until you "
+"set them up and choose their keys."
 msgstr ""
 
 #: library/libraryview.cpp:357
@@ -6760,7 +6813,7 @@ msgstr "eldste først"
 msgid "on"
 msgstr "på"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:181
 msgid "options"
 msgstr "innstillinger"
 
