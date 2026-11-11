@@ -19,6 +19,7 @@
 #define NETWORKREMOTE_STREAMING_MEDIAHTTPSERVER_H_
 
 #include <QByteArray>
+#include <QList>
 #include <QMap>
 #include <QObject>
 #include <memory>
@@ -55,6 +56,28 @@ struct ByteRange {
 
   static Result Parse(const QByteArray& header, qint64 size, qint64* first,
                       qint64* last);
+};
+
+// A media URL's path: /<prefix>/<token>[/<item id>].
+struct MediaPath {
+  enum class Kind {
+    // /s/<token>/<item id>: a renderer's stream.
+    Stream,
+    // /a/<token>/<item id>: the cover of a renderer's item or a remote's
+    // synced song.
+    Cover,
+    // /d/<token>/<item id>: a song a remote downloads to sync.
+    Download,
+    // /e/<token>: a renderer's events, sent with NOTIFY.
+    Event,
+  };
+
+  Kind kind = Kind::Stream;
+  QByteArray token;
+  // 0 for events.
+  int item_id = 0;
+
+  static bool Parse(const QByteArray& path, MediaPath* media_path);
 };
 
 // Serves media URLs on sockets the network remote has recognised as HTTP:
@@ -109,10 +132,28 @@ class MediaHttpServer : public QObject {
   void ReadyRead();
 
  private:
+  // Where a kind of path's items are found, in the order they're looked in,
+  // and who may fetch them.
+  struct ItemSource {
+    enum class Access {
+      // Whoever has the URL.
+      Anyone,
+      // Only the renderer or remote the item was offered to.
+      OnlyItsPeer,
+    };
+    const StreamItemTable* table;
+    Access access;
+  };
+  QList<ItemSource> Sources(MediaPath::Kind kind) const;
+
   void Dispatch(QTcpSocket* socket, const HttpRequest& request);
+  // Sends a stream or a download, with a responder that owns the socket.
+  void ServeItem(QTcpSocket* socket, const HttpRequest& request,
+                 const MediaPath& path, const StreamItem& item, bool head_only);
   void WriteCover(QTcpSocket* socket, const StreamItem& item, bool head_only);
   // A NOTIFY to /e/<token>: reads its body, then hands it to the receiver.
-  void ReadEvent(QTcpSocket* socket, const HttpRequest& request);
+  void ReadEvent(QTcpSocket* socket, const HttpRequest& request,
+                 const QByteArray& token);
   // Live responders, all of them or only those for |token|; pipelines only
   // with |pipelines|.
   int CountResponders(const QByteArray* token, bool pipelines) const;
