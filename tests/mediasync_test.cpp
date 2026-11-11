@@ -16,8 +16,11 @@
 
 #include "networkremote/sync/mediasync.h"
 
+#include <QBuffer>
 #include <QCoreApplication>
+#include <QCryptographicHash>
 #include <QFile>
+#include <QImage>
 #include <QSettings>
 #include <QSignalSpy>
 #include <QTcpServer>
@@ -682,6 +685,95 @@ TEST_F(MediaSyncTest, NeedsDownloadsAllowed) {
   EXPECT_EQ(0, manifest.items_size());
 }
 
+// A small PNG, for covers.
+QByteArray Png(Qt::GlobalColor color) {
+  QImage image(4, 4, QImage::Format_RGB32);
+  image.fill(color);
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  image.save(&buffer, "PNG");
+  return data;
+}
+
+QString Sha256(const QByteArray& data) {
+  return QString::fromLatin1(
+      QCryptographicHash::hash(data, QCryptographicHash::Sha256).toHex());
+}
+
+TEST_F(MediaSyncTest, SendsEachCoverOnceByItsContents) {
+  QTemporaryDir dir;
+  ASSERT_TRUE(dir.isValid());
+  const QByteArray red = Png(Qt::red);
+  const QString folder_cover = dir.filePath("cover.png");
+  QFile file(folder_cover);
+  ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+  file.write(red);
+  file.close();
+
+  // Two songs with the album's cover, one whose cover is in its file, and one
+  // whose cover was taken away.
+  Song debaser = Find("Debaser");
+  debaser.set_art_automatic(folder_cover);
+  Song tame = Find("Tame");
+  tame.set_art_manual(folder_cover);
+  Song wave = Find("Wave of Mutilation");
+  wave.set_art_automatic(Song::kEmbeddedCover);
+  library_->AddOrUpdateSongs(SongList() << debaser << tame << wave);
+
+  const cpb::remote::ResponseSyncManifest manifest =
+      Manifest(SyncSourceId::ForAlbum("Pixies", "Doolittle"));
+  ASSERT_EQ(3, manifest.items_size());
+  const cpb::remote::SyncItem& first = manifest.items(0);
+  const cpb::remote::SyncItem& second = manifest.items(1);
+  ASSERT_TRUE(first.has_art());
+  ASSERT_TRUE(second.has_art());
+  EXPECT_EQ(Sha256(red).toStdString(), first.art().key());
+  EXPECT_EQ(first.art().key(), second.art().key());
+  EXPECT_FALSE(manifest.items(2).has_art());
+
+  // The cover is the remote's to fetch, beside the song.
+  const QStringList cover =
+      QString::fromStdString(first.art().url()).split('/');
+  const QStringList song = QString::fromStdString(first.url()).split('/');
+  ASSERT_EQ(4, cover.size());
+  EXPECT_EQ("a", cover[1]);
+  EXPECT_EQ(song[2], cover[2]);
+  StreamItem item;
+  QHostAddress peer;
+  ASSERT_TRUE(
+      items_->Find(cover[2].toLatin1(), cover[3].toInt(), &item, &peer));
+  EXPECT_EQ(folder_cover, item.cover_file);
+}
+
+TEST_F(MediaSyncTest, ACoverThatChangesHasANewKey) {
+  QTemporaryDir dir;
+  ASSERT_TRUE(dir.isValid());
+  const QString path = dir.filePath("cover.png");
+  QFile file(path);
+  ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+  file.write(Png(Qt::red));
+  file.close();
+
+  Song debaser = Find("Debaser");
+  debaser.set_art_automatic(path);
+  library_->AddOrUpdateSongs(SongList() << debaser);
+  const SyncSourceId source = SyncSourceId::ForSong(debaser.id());
+  EXPECT_EQ(Sha256(Png(Qt::red)).toStdString(),
+            Manifest(source).items(0).art().key());
+
+  // Bigger, so it's seen as changed however coarse the file times are.
+  const QByteArray blue = Png(Qt::blue) + QByteArray(100, '\0');
+  ASSERT_TRUE(file.open(QIODevice::WriteOnly | QIODevice::Truncate));
+  file.write(blue);
+  file.close();
+  EXPECT_EQ(Sha256(blue).toStdString(), Manifest(source).items(0).art().key());
+
+  // And one that's gone has none.
+  ASSERT_TRUE(QFile::remove(path));
+  EXPECT_FALSE(Manifest(source).items(0).has_art());
+}
+
 // A remote downloading a song it was given in a manifest, over HTTP.
 class SyncDownloadTest : public MediaSyncTest {
  protected:
@@ -696,9 +788,16 @@ class SyncDownloadTest : public MediaSyncTest {
     file.write(kContents);
     file.close();
 
+    cover_ = Png(Qt::red);
+    QFile cover(dir_.filePath("cover.png"));
+    ASSERT_TRUE(cover.open(QIODevice::WriteOnly));
+    cover.write(cover_);
+    cover.close();
+
     Song song = Find("Debaser");
     song.set_url(QUrl::fromLocalFile(path));
     song.set_filesize(kContents.size());
+    song.set_art_automatic(cover.fileName());
     library_->AddOrUpdateSongs(SongList() << song);
 
     http_.SetSyncItems(sync_->items());
@@ -740,6 +839,7 @@ class SyncDownloadTest : public MediaSyncTest {
   }
 
   static const QByteArray kContents;
+  QByteArray cover_;
   QTemporaryDir dir_;
   MediaHttpServer http_{std::make_shared<StreamItemTable>()};
   QTcpServer server_;
@@ -789,6 +889,26 @@ TEST_F(SyncDownloadTest, OnlyTheRemoteItWasGivenToCanDownload) {
   const cpb::remote::SyncItem elsewhere =
       Manifest(SyncSourceId::ForSong(Find("Debaser").id()), 2).items(0);
   EXPECT_TRUE(Get(elsewhere.url()).startsWith("HTTP/1.1 403"));
+}
+
+TEST_F(SyncDownloadTest, DownloadsTheCover) {
+  ASSERT_TRUE(item_.has_art());
+  const QByteArray response = Get(item_.art().url());
+  EXPECT_TRUE(response.startsWith("HTTP/1.1 200 OK\r\n")) << response.data();
+  EXPECT_TRUE(response.contains("Content-Type: image/png\r\n"));
+  EXPECT_EQ(cover_, Body(response));
+}
+
+TEST_F(SyncDownloadTest, OnlyTheRemoteItWasGivenToCanDownloadTheCover) {
+  peer_ = "10.0.0.9";
+  const cpb::remote::SyncItem elsewhere =
+      Manifest(SyncSourceId::ForSong(Find("Debaser").id()), 2).items(0);
+  ASSERT_TRUE(elsewhere.has_art());
+  EXPECT_TRUE(Get(elsewhere.art().url()).startsWith("HTTP/1.1 403"));
+
+  // Nor once the remote has gone.
+  sync_->ClientDisconnected(1);
+  EXPECT_TRUE(Get(item_.art().url()).startsWith("HTTP/1.1 404"));
 }
 
 }  // namespace

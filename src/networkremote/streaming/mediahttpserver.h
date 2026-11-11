@@ -58,8 +58,9 @@ struct ByteRange {
 };
 
 // Serves media URLs on sockets the network remote has recognised as HTTP:
-// /s/<token>/<item>[?t=<ms>] for renderers, and /d/<token>/<item> for remotes
-// downloading songs to sync. HTTP/1.1, one request per connection.
+// /s/<token>/<item>[?t=<ms>] for renderers, /d/<token>/<item> for remotes
+// downloading songs to sync, and /a/<token>/<item> for either's covers.
+// HTTP/1.1, one request per connection.
 //
 // See docs/design/remote-streaming.md section 5.
 class MediaHttpServer : public QObject {
@@ -72,7 +73,8 @@ class MediaHttpServer : public QObject {
                            QObject* parent = nullptr);
   ~MediaHttpServer();
 
-  // Where /d/ URLs come from, with --media-sync. Without, they're not found.
+  // Where /d/ URLs, and synced songs' /a/ URLs, come from, with --media-sync.
+  // Without, they're not found.
   void SetSyncItems(std::shared_ptr<StreamItemTable> items) {
     sync_items_ = items;
   }
@@ -100,6 +102,8 @@ class MediaHttpServer : public QObject {
   static const int kMaxPendingRequests;
   // The biggest event body taken. Sonos's grouping events can be tens of KB.
   static const int kMaxEventSize;
+  // The biggest cover file served to a remote that syncs.
+  static const int kMaxCoverFileSize;
 
  private slots:
   void ReadyRead();

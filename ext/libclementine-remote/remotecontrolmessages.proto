@@ -1039,7 +1039,8 @@ message SyncItem {
   // 0 until a conversion has finished.
   optional int64 size_bytes = 6;
   optional SyncDelivery delivery = 7;
-  // Unset for songs without a cover.
+  // Unset for songs without a cover, and for songs whose cover is in their
+  // own file, which the client reads from there.
   optional SyncArt art = 8;
 }
 

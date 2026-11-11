@@ -48,6 +48,9 @@ struct StreamItem {
   // The song's cover as a JPEG, for renderers that show one, served beside
   // the item. Empty if there's none to serve.
   QByteArray cover;
+  // Otherwise, a file to serve as the cover, read when it's asked for: for
+  // remotes that sync, which can have thousands of songs on offer.
+  QString cover_file;
   // For a DLNA renderer, such as a TV. It's served with DLNA's headers, and
   // a stream that's made as it's sent ends when the connection closes,
   // rather than being chunked, which many can't take.
