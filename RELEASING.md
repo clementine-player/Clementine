@@ -75,7 +75,10 @@ Sentry needs each build's debug symbols to show function names and lines:
 dSYMs on macOS, PDBs on Windows. Both builds collect them, check that they
 match what's shipped (`dist/sentry_symbols.py check`), and keep them as the
 run's `symbols-mac` and `symbols-windows` artifacts. Development builds and
-numbered releases also upload them to Sentry; pull requests don't.
+numbered releases also upload them to Sentry; pull requests don't. They
+upload the libraries the builds bundle too (Qt, GStreamer and the rest, from
+Homebrew and MSYS2): those have no debug info, but Sentry can still name
+their functions and walk the stack through them.
 
 ### One-time setup
 

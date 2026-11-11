@@ -3,7 +3,7 @@ import json
 import pytest
 
 import sentry_symbols
-from sentry_symbols import DebugFile, missing_symbols, parse_check
+from sentry_symbols import DebugFile, library_summary, missing_symbols, parse_check
 
 
 def check_output(debug_ids: list[str], features: str, usable: bool = True) -> str:
@@ -19,7 +19,9 @@ def check_output(debug_ids: list[str], features: str, usable: bool = True) -> st
 
 def test_parse_check_debug_info() -> None:
     f = parse_check("a.pdb", check_output(["id1"], "symtab, debug"))
-    assert f == DebugFile("a.pdb", frozenset({"id1"}), True)
+    assert f == DebugFile(
+        "a.pdb", frozenset({"id1"}), True, frozenset({"symtab", "debug"})
+    )
 
 
 def test_parse_check_no_debug_info() -> None:
@@ -34,7 +36,9 @@ def test_parse_check_unusable() -> None:
 
 def test_parse_check_no_features() -> None:
     output = json.dumps({"type": "pe", "variants": [], "features": None})
-    assert parse_check("a.exe", output) == DebugFile("a.exe", frozenset(), False)
+    assert parse_check("a.exe", output) == DebugFile(
+        "a.exe", frozenset(), False, frozenset()
+    )
 
 
 def test_binaries_with_symbols() -> None:
@@ -94,3 +98,37 @@ def test_upload_without_settings_only_notes_it(
     monkeypatch.setattr(sentry_symbols.subprocess, "run", fail)
     assert sentry_symbols.main(["upload", "symbols"]) == 0
     assert f"no {missing}." in capsys.readouterr().out
+
+
+def test_library_summary() -> None:
+    libraries = [
+        DebugFile(
+            "Qt6Core.dll", frozenset({"a"}), False, frozenset({"symtab", "unwind"})
+        ),
+        DebugFile("libfoo.dll", frozenset({"b"}), False, frozenset({"unwind"})),
+    ]
+    assert library_summary(libraries) == [
+        "2 libraries: 1 with function names, 2 with unwind info",
+        "No function names: libfoo.dll",
+    ]
+
+
+def test_upload_passes_library_directories(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("SENTRY_AUTH_TOKEN", "t")
+    monkeypatch.setenv("SENTRY_PROJECT", "p")
+    commands = []
+
+    class Result:
+        returncode = 0
+
+    def run(command: list[str], **kwargs: object) -> Result:
+        commands.append(command)
+        return Result()
+
+    monkeypatch.setattr(sentry_symbols.subprocess, "run", run)
+    assert sentry_symbols.main(["upload", "symbols", "app", "dlls"]) == 0
+    assert commands == [
+        ["sentry-cli", "debug-files", "upload", "symbols", "app", "dlls"]
+    ]
