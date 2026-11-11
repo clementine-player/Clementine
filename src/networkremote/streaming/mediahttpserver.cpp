@@ -17,7 +17,9 @@
 
 #include "mediahttpserver.h"
 
+#include <QFile>
 #include <QHostAddress>
+#include <QMimeDatabase>
 #include <QTcpSocket>
 #include <QTimer>
 #include <QUrlQuery>
@@ -35,6 +37,7 @@ const int MediaHttpServer::kMaxPipelinesPerRenderer = 2;
 const int MediaHttpServer::kMaxResponses = 32;
 const int MediaHttpServer::kMaxPendingRequests = 32;
 const int MediaHttpServer::kMaxEventSize = 512 * 1024;
+const int MediaHttpServer::kMaxCoverFileSize = 32 * 1024 * 1024;
 
 namespace {
 
@@ -207,39 +210,51 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   }
 
   // /s/<token>/<item id>, its cover at /a/<token>/<item id>, or a sync
-  // download at /d/<token>/<item id>
+  // download at /d/<token>/<item id>. A synced song's cover is at /a/ too,
+  // with the remote's token.
   const QList<QByteArray> parts = request.path.split('/');
   bool id_ok = false;
   const int item_id = parts.size() == 4 ? parts[3].toInt(&id_ok) : 0;
   const bool download = parts.size() == 4 && parts[1] == "d";
-  const std::shared_ptr<StreamItemTable>& table =
-      download ? sync_items_ : items_;
+  const bool cover = parts.size() == 4 && parts[1] == "a";
   if (parts.size() != 4 || !parts[0].isEmpty() ||
-      (parts[1] != "s" && parts[1] != "a" && !download) || !id_ok || !table) {
+      (parts[1] != "s" && !cover && !download) || !id_ok) {
     WriteError(socket, 404, "Not Found");
     return;
   }
 
   StreamItem item;
   QHostAddress allowed_peer;
-  if (!table->Find(parts[2], item_id, &item, &allowed_peer)) {
+  // A renderer's item for /s/ and /a/, or a remote's for /d/ and /a/.
+  const bool rendered = !download && items_ &&
+                        items_->Find(parts[2], item_id, &item, &allowed_peer);
+  const bool synced =
+      !rendered && (download || cover) && sync_items_ &&
+      sync_items_->Find(parts[2], item_id, &item, &allowed_peer);
+  if (!rendered && !synced) {
     WriteError(socket, 404, "Not Found");
     return;
   }
 
   // Covers are shown by whatever controls the renderer too, such as the
   // Sonos app, which fetches them itself. Their URL is enough.
-  if (parts[1] == "a") {
+  if (cover && !synced) {
     WriteCover(socket, item, head_only);
     return;
   }
 
-  // The URL is a capability, but only for the renderer it was given to.
+  // The URL is a capability, but only for the renderer or remote it was given
+  // to.
   if (NormalisedAddress(socket->peerAddress()) !=
       NormalisedAddress(allowed_peer)) {
     qLog(Warning) << "Media request from" << socket->peerAddress()
                   << "for a renderer at" << allowed_peer;
     WriteError(socket, 403, "Forbidden");
+    return;
+  }
+
+  if (cover) {
+    WriteCover(socket, item, head_only);
     return;
   }
 
@@ -358,19 +373,28 @@ void MediaHttpServer::ReadEvent(QTcpSocket* socket,
 
 void MediaHttpServer::WriteCover(QTcpSocket* socket, const StreamItem& item,
                                  bool head_only) {
+  QByteArray data = item.cover;
+  QByteArray type = "image/jpeg";
+  if (data.isEmpty() && !item.cover_file.isEmpty()) {
+    QFile file(item.cover_file);
+    if (file.open(QIODevice::ReadOnly) && file.size() <= kMaxCoverFileSize) {
+      data = file.readAll();
+      type = QMimeDatabase().mimeTypeForData(data).name().toLatin1();
+    }
+  }
   qLog(Debug) << "Serving the cover of item" << item.id << "to"
-              << socket->peerAddress() << "," << item.cover.size() << "bytes";
-  if (item.cover.isEmpty()) {
+              << socket->peerAddress() << "," << data.size() << "bytes";
+  if (data.isEmpty() || !type.startsWith("image/")) {
     WriteError(socket, 404, "Not Found");
     return;
   }
   QByteArray head = "HTTP/1.1 200 OK\r\n";
-  head += "Content-Type: image/jpeg\r\n";
-  head += "Content-Length: " + QByteArray::number(item.cover.size()) + "\r\n";
+  head += "Content-Type: " + type + "\r\n";
+  head += "Content-Length: " + QByteArray::number(data.size()) + "\r\n";
   head += "Cache-Control: no-store\r\n";
   head += "Connection: close\r\n\r\n";
   socket->write(head);
-  if (!head_only) socket->write(item.cover);
+  if (!head_only) socket->write(data);
   socket->disconnectFromHost();
 }
 

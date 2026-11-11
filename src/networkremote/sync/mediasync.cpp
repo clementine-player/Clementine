@@ -17,6 +17,10 @@
 
 #include "mediasync.h"
 
+#include <QCryptographicHash>
+#include <QFile>
+#include <QFileInfo>
+
 #include "core/logging.h"
 #include "core/urlhandler.h"
 #include "networkremote/outgoingdatacreator.h"
@@ -24,6 +28,25 @@
 #include "networkremote/sync/syncsong.h"
 
 const int MediaSync::kMaxItemsPerClient = 20000;
+
+namespace {
+
+// The file holding |song|'s cover, as Clementine shows it, or empty if it has
+// none or it's somewhere else. A cover in the song's own file isn't sent: the
+// remote reads it from the song.
+QString CoverFile(const Song& song) {
+  QString art = song.art_manual();
+  if (art == Song::kManuallyUnsetCover || art == Song::kEmbeddedCover) {
+    return QString();
+  }
+  if (art.isEmpty()) art = song.art_automatic();
+  if (art.isEmpty() || art == Song::kEmbeddedCover || art.contains("://")) {
+    return QString();
+  }
+  return art;
+}
+
+}  // namespace
 
 MediaSync::MediaSync(LibraryBackend* library, const Hooks& hooks,
                      std::shared_ptr<StreamItemTable> items, QObject* parent)
@@ -149,10 +172,15 @@ void MediaSync::Manifest(Client* client,
       break;
     }
 
+    const QString cover_file = CoverFile(song);
+    const QString cover_key =
+        cover_file.isEmpty() ? QString() : CoverKeyOf(cover_file);
+
     StreamItem item;
     item.plan = plan;
     item.req = playback;
     item.song = song;
+    if (!cover_key.isEmpty()) item.cover_file = cover_file;
     const QString version = SyncSong::ItemVersion(song);
     item.etag = '"' + (key + ':' + version).toUtf8() + '"';
     const int id = Offer(client, key + ':' + version, item);
@@ -176,6 +204,14 @@ void MediaSync::Manifest(Client* client,
     pb->set_mime_type(plan.mime_type.toStdString());
     pb->set_size_bytes(song.filesize());
     pb->set_delivery(cpb::remote::SYNC_DELIVERY_ORIGINAL);
+    if (!cover_key.isEmpty()) {
+      cpb::remote::SyncArt* art = pb->mutable_art();
+      art->set_key(cover_key.toStdString());
+      art->set_url(QString("/a/%1/%2")
+                       .arg(QString::fromLatin1(client->token))
+                       .arg(id)
+                       .toStdString());
+    }
   }
   response->set_skipped(skipped);
 }
@@ -183,7 +219,11 @@ void MediaSync::Manifest(Client* client,
 int MediaSync::Offer(Client* client, const QString& key,
                      const StreamItem& item) {
   const auto it = client->ids.constFind(key);
-  if (it != client->ids.constEnd()) return *it;
+  if (it != client->ids.constEnd()) {
+    // The song's the same, but its cover may not be.
+    client->items[*it - 1].cover_file = item.cover_file;
+    return *it;
+  }
   if (client->items.size() >= kMaxItemsPerClient) return 0;
 
   StreamItem offered = item;
@@ -191,4 +231,27 @@ int MediaSync::Offer(Client* client, const QString& key,
   client->items << offered;
   client->ids[key] = offered.id;
   return offered.id;
+}
+
+QString MediaSync::CoverKeyOf(const QString& path) {
+  const QFileInfo info(path);
+  if (!info.isFile()) return QString();
+
+  auto it = cover_keys_.find(path);
+  if (it != cover_keys_.end() && it->modified == info.lastModified() &&
+      it->size == info.size()) {
+    return it->key;
+  }
+
+  QFile file(path);
+  if (!file.open(QIODevice::ReadOnly)) return QString();
+  QCryptographicHash hash(QCryptographicHash::Sha256);
+  if (!hash.addData(&file)) return QString();
+
+  CoverKey cover;
+  cover.modified = info.lastModified();
+  cover.size = info.size();
+  cover.key = QString::fromLatin1(hash.result().toHex());
+  cover_keys_[path] = cover;
+  return cover.key;
 }

@@ -19,6 +19,7 @@
 #define NETWORKREMOTE_SYNC_MEDIASYNC_H_
 
 #include <QByteArray>
+#include <QDateTime>
 #include <QHash>
 #include <QHostAddress>
 #include <QList>
@@ -35,10 +36,10 @@ class UrlHandler;
 
 // Answers remotes' sync requests (with --media-sync): lists the sources a
 // remote can keep, and resolves a rule's source into a manifest of songs, each
-// with a /d/ URL that only that remote may fetch. Keeps no state about rules,
-// only what each connected remote may download. Lives on the main thread, like
-// InternetBrowser, and talks to the network remote through queued signals
-// carrying serialized messages.
+// with a /d/ URL, and a /a/ URL for its cover, that only that remote may fetch.
+// Keeps no state about rules, only what each connected remote may download.
+// Lives on the main thread, like InternetBrowser, and talks to the network
+// remote through queued signals carrying serialized messages.
 class MediaSync : public QObject {
   Q_OBJECT
 
@@ -83,8 +84,18 @@ class MediaSync : public QObject {
     QHash<QString, int> ids;
   };
 
+  // A cover file's key, as SyncArt.key has it.
+  struct CoverKey {
+    QDateTime modified;
+    qint64 size = -1;
+    QString key;
+  };
+
   void Manifest(Client* client, const cpb::remote::RequestSyncManifest& req,
                 cpb::remote::ResponseSyncManifest* response);
+  // The SHA-256 of the file at |path|, in hex, or empty if it can't be read.
+  // Kept until the file changes, as many songs share each cover.
+  QString CoverKeyOf(const QString& path);
   // The id of |item| in |client|'s offer, adding it if need be. 0 when the
   // offer is full.
   int Offer(Client* client, const QString& key, const StreamItem& item);
@@ -93,6 +104,8 @@ class MediaSync : public QObject {
   Hooks hooks_;
   std::shared_ptr<StreamItemTable> items_;
   QHash<int, Client> clients_;
+  // By path.
+  QHash<QString, CoverKey> cover_keys_;
 };
 
 #endif  // NETWORKREMOTE_SYNC_MEDIASYNC_H_
