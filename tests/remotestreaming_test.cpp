@@ -312,6 +312,36 @@ TEST(HttpRequestTest, RejectsGarbage) {
   EXPECT_FALSE(HttpRequest::Parse("PRI * HTTP/2.0\r\n", &request));
 }
 
+TEST(MediaPathTest, ParsesEachKind) {
+  MediaPath path;
+  ASSERT_TRUE(MediaPath::Parse("/s/abc/3", &path));
+  EXPECT_EQ(MediaPath::Kind::Stream, path.kind);
+  EXPECT_EQ("abc", QString(path.token));
+  EXPECT_EQ(3, path.item_id);
+
+  ASSERT_TRUE(MediaPath::Parse("/a/abc/4", &path));
+  EXPECT_EQ(MediaPath::Kind::Cover, path.kind);
+  EXPECT_EQ(4, path.item_id);
+
+  ASSERT_TRUE(MediaPath::Parse("/d/abc/5", &path));
+  EXPECT_EQ(MediaPath::Kind::Download, path.kind);
+  EXPECT_EQ(5, path.item_id);
+
+  ASSERT_TRUE(MediaPath::Parse("/e/abc", &path));
+  EXPECT_EQ(MediaPath::Kind::Event, path.kind);
+  EXPECT_EQ("abc", QString(path.token));
+  EXPECT_EQ(0, path.item_id);
+}
+
+TEST(MediaPathTest, RejectsOtherPaths) {
+  MediaPath path;
+  for (const char* bad :
+       {"", "/", "/s", "/s/abc", "/s/abc/x", "/s/abc/3/4", "/s//3", "s/abc/3",
+        "/x/abc/3", "/e/abc/3", "/e/", "/index.html"}) {
+    EXPECT_FALSE(MediaPath::Parse(bad, &path)) << bad;
+  }
+}
+
 TEST(ByteRangeTest, NoHeaderMeansWholeFile) {
   qint64 first, last;
   EXPECT_EQ(ByteRange::Whole, ByteRange::Parse("", 100, &first, &last));

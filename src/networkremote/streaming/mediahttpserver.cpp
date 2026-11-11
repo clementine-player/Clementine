@@ -197,9 +197,71 @@ void MediaHttpServer::ReadyRead() {
   }
 }
 
+bool MediaPath::Parse(const QByteArray& path, MediaPath* media_path) {
+  struct Prefix {
+    const char* name;
+    Kind kind;
+    bool has_item;
+  };
+  static const Prefix kPrefixes[] = {
+      {"s", Kind::Stream, true},
+      {"a", Kind::Cover, true},
+      {"d", Kind::Download, true},
+      {"e", Kind::Event, false},
+  };
+
+  const QList<QByteArray> parts = path.split('/');
+  if (parts.size() < 3 || !parts[0].isEmpty() || parts[2].isEmpty()) {
+    return false;
+  }
+  for (const Prefix& prefix : kPrefixes) {
+    if (parts[1] != prefix.name) continue;
+    if (parts.size() != (prefix.has_item ? 4 : 3)) return false;
+    media_path->kind = prefix.kind;
+    media_path->token = parts[2];
+    media_path->item_id = 0;
+    if (prefix.has_item) {
+      bool ok = false;
+      media_path->item_id = parts[3].toInt(&ok);
+      if (!ok) return false;
+    }
+    return true;
+  }
+  return false;
+}
+
+QList<MediaHttpServer::ItemSource> MediaHttpServer::Sources(
+    MediaPath::Kind kind) const {
+  switch (kind) {
+    case MediaPath::Kind::Stream:
+      return {{items_.get(), ItemSource::Access::OnlyItsPeer}};
+    case MediaPath::Kind::Cover:
+      // A renderer's covers are shown by whatever controls it too, such as
+      // the Sonos app, which fetches them itself, so their URL is enough. A
+      // remote's are only for it, like its downloads.
+      return {{items_.get(), ItemSource::Access::Anyone},
+              {sync_items_.get(), ItemSource::Access::OnlyItsPeer}};
+    case MediaPath::Kind::Download:
+      return {{sync_items_.get(), ItemSource::Access::OnlyItsPeer}};
+    case MediaPath::Kind::Event:
+      break;
+  }
+  return {};
+}
+
 void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
-  if (request.method == "NOTIFY") {
-    ReadEvent(socket, request);
+  MediaPath path;
+  if (!MediaPath::Parse(request.path, &path)) {
+    WriteError(socket, 404, "Not Found");
+    return;
+  }
+
+  if (path.kind == MediaPath::Kind::Event) {
+    if (request.method != "NOTIFY") {
+      WriteError(socket, 405, "Method Not Allowed");
+      return;
+    }
+    ReadEvent(socket, request, path.token);
     return;
   }
 
@@ -209,56 +271,45 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
     return;
   }
 
-  // /s/<token>/<item id>, its cover at /a/<token>/<item id>, or a sync
-  // download at /d/<token>/<item id>. A synced song's cover is at /a/ too,
-  // with the remote's token.
-  const QList<QByteArray> parts = request.path.split('/');
-  bool id_ok = false;
-  const int item_id = parts.size() == 4 ? parts[3].toInt(&id_ok) : 0;
-  const bool download = parts.size() == 4 && parts[1] == "d";
-  const bool cover = parts.size() == 4 && parts[1] == "a";
-  if (parts.size() != 4 || !parts[0].isEmpty() ||
-      (parts[1] != "s" && !cover && !download) || !id_ok) {
-    WriteError(socket, 404, "Not Found");
-    return;
-  }
-
   StreamItem item;
   QHostAddress allowed_peer;
-  // A renderer's item for /s/ and /a/, or a remote's for /d/ and /a/.
-  const bool rendered = !download && items_ &&
-                        items_->Find(parts[2], item_id, &item, &allowed_peer);
-  const bool synced =
-      !rendered && (download || cover) && sync_items_ &&
-      sync_items_->Find(parts[2], item_id, &item, &allowed_peer);
-  if (!rendered && !synced) {
+  const ItemSource* found = nullptr;
+  const QList<ItemSource> sources = Sources(path.kind);
+  for (const ItemSource& source : sources) {
+    if (source.table &&
+        source.table->Find(path.token, path.item_id, &item, &allowed_peer)) {
+      found = &source;
+      break;
+    }
+  }
+  if (!found) {
     WriteError(socket, 404, "Not Found");
     return;
   }
 
-  // Covers are shown by whatever controls the renderer too, such as the
-  // Sonos app, which fetches them itself. Their URL is enough.
-  if (cover && !synced) {
-    WriteCover(socket, item, head_only);
-    return;
-  }
-
-  // The URL is a capability, but only for the renderer or remote it was given
-  // to.
-  if (NormalisedAddress(socket->peerAddress()) !=
-      NormalisedAddress(allowed_peer)) {
-    qLog(Warning) << "Media request from" << socket->peerAddress()
-                  << "for a renderer at" << allowed_peer;
+  // Otherwise the URL is a capability, but only for the renderer or remote it
+  // was given to.
+  if (found->access == ItemSource::Access::OnlyItsPeer &&
+      NormalisedAddress(socket->peerAddress()) !=
+          NormalisedAddress(allowed_peer)) {
+    qLog(Warning) << "Media request from" << socket->peerAddress() << "for"
+                  << allowed_peer;
     WriteError(socket, 403, "Forbidden");
     return;
   }
 
-  if (cover) {
+  if (path.kind == MediaPath::Kind::Cover) {
     WriteCover(socket, item, head_only);
     return;
   }
+  ServeItem(socket, request, path, item, head_only);
+}
 
-  const QByteArray& token = parts[2];
+void MediaHttpServer::ServeItem(QTcpSocket* socket, const HttpRequest& request,
+                                const MediaPath& path, const StreamItem& item,
+                                bool head_only) {
+  const QByteArray& token = path.token;
+  const bool download = path.kind == MediaPath::Kind::Download;
   const bool pipeline = item.plan.mode != StreamPlan::Direct;
   if (CountResponders(nullptr, false) >= kMaxResponses) {
     WriteError(socket, 503, "Service Unavailable");
@@ -271,7 +322,7 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
     return;
   }
 
-  qLog(Debug) << "Serving item" << item_id << request.method
+  qLog(Debug) << "Serving item" << path.item_id << request.method
               << request.headers.value("range");
 
   // The responder owns the socket from here and deletes itself with it.
@@ -316,13 +367,10 @@ void MediaHttpServer::KeepAwake(StreamResponder* responder) {
       sleep_inhibitor_->Acquire(SleepInhibitor::Activity::RemoteTransfer));
 }
 
-void MediaHttpServer::ReadEvent(QTcpSocket* socket,
-                                const HttpRequest& request) {
-  // /e/<token>
-  const QList<QByteArray> parts = request.path.split('/');
+void MediaHttpServer::ReadEvent(QTcpSocket* socket, const HttpRequest& request,
+                                const QByteArray& token) {
   QHostAddress allowed_peer;
-  if (!events_ || parts.size() != 3 || !parts[0].isEmpty() || parts[1] != "e" ||
-      !events_->Find(parts[2], &allowed_peer)) {
+  if (!events_ || !events_->Find(token, &allowed_peer)) {
     WriteError(socket, 404, "Not Found");
     return;
   }
@@ -346,7 +394,6 @@ void MediaHttpServer::ReadEvent(QTcpSocket* socket,
   }
 
   // The body may still be on its way.
-  const QByteArray token = parts[2];
   auto body = std::make_shared<QByteArray>();
   auto connection = std::make_shared<QMetaObject::Connection>();
   auto read = [this, socket, token, length, body, connection]() {
