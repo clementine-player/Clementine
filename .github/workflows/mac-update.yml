@@ -86,13 +86,13 @@ jobs:
 
       - name: Authenticate to GCP
         if: steps.plan.outputs.publish == 'true'
-        uses: google-github-actions/auth@v3
+        uses: google-github-actions/auth@v3.0.0
         with:
           workload_identity_provider: ${{ vars.SPARKLE_WIF_PROVIDER }}
           service_account: sparkle-feed@clementine-data.iam.gserviceaccount.com
       - name: Set up gcloud
         if: steps.plan.outputs.publish == 'true'
-        uses: google-github-actions/setup-gcloud@v3
+        uses: google-github-actions/setup-gcloud@v3.0.1
       - name: Sign the DMG
         id: sign
         if: steps.plan.outputs.publish == 'true'
