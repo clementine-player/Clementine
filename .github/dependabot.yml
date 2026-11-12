@@ -1,0 +1,18 @@
+# Keeps the GitHub Actions the workflows use up to date. Dependabot updates
+# .github/workflows/actions.lock in the same pull request, and the
+# actions-lock check verifies it.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Waits a week after a release before proposing it, so a compromised or
+    # broken release has time to be noticed and pulled.
+    cooldown:
+      default-days: 7
+    # One pull request a week for all of them.
+    groups:
+      actions:
+        patterns:
+          - '*'
