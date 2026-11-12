@@ -983,7 +983,7 @@ msgstr "Permetti a un client di scaricare musica da questo computer."
 msgid "Allow downloads"
 msgstr "Consenti gli scaricamenti"
 
-#: networkremote/sync/mediasync.cpp:87
+#: networkremote/sync/mediasync.cpp:110
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1505,7 +1505,7 @@ msgstr "Clementine non può caricare alcuna visualizzazione projectM. Controlla 
 msgid ""
 "Clementine crashed last time it was running. Send a crash report to the "
 "developers so they can fix the problem?"
-msgstr ""
+msgstr "Clementine si è arrestato in modo inatteso l'ultima volta che era in esecuzione. Vuoi inviare una segnalazione di errore agli sviluppatori in modo che possano risolvere il problema?"
 
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
@@ -1518,7 +1518,7 @@ msgstr "Clementine su %1"
 
 #: core/crashreporting.cpp:187
 msgid "Clementine quit unexpectedly"
-msgstr ""
+msgstr "Clementine si è chiuso in modo inatteso"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -2190,7 +2190,7 @@ msgstr "Non ripetere"
 
 #: core/crashreporting.cpp:199
 msgid "Don't send"
-msgstr ""
+msgstr "Non inviare"
 
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
@@ -4010,7 +4010,7 @@ msgstr "Spento"
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Offer to send a crash report after Clementine crashes"
-msgstr ""
+msgstr "Proponi di inviare una segnalazione in caso di arresto di Clementine"
 
 #: core/song.cpp:428
 msgid "Ogg FLAC"
@@ -5173,7 +5173,7 @@ msgstr "Seleziona..."
 
 #: core/crashreporting.cpp:198
 msgid "Send report"
-msgstr ""
+msgstr "Invia segnalazione"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -5766,7 +5766,7 @@ msgstr "Il formato è aggiornato solo quando inizia una pipeline."
 msgid ""
 "The next time Clementine starts after a crash, ask whether to send a report "
 "so the problem can be fixed. Takes effect when Clementine restarts."
-msgstr ""
+msgstr "La prossima volta che Clementine si avvia dopo un arresto inatteso, chiederà se inviare una segnalazione in modo che il problema possa essere risolto. Ha effetto al riavvio di Clementine."
 
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
@@ -5782,7 +5782,7 @@ msgid ""
 "The report says what Clementine was doing when it crashed. It can include "
 "file names and the titles of songs you were playing. You'll be asked again "
 "each time Clementine crashes, and you can turn this off in Preferences."
-msgstr ""
+msgstr "La segnalazione indica cosa stava facendo Clementine quando si è arrestato. Può includere i nomi dei file e i titoli dei brani che stavi riproducendo. Questa richiesta sarà ripetuta ogni volta che Clementine si arresta in modo inatteso e puoi disattivarla nelle Preferenze."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5930,7 +5930,7 @@ msgstr "Questa opzione può essere modificata nelle preferenze di \"Comportament
 msgid "This type of device is not supported: %1"
 msgstr "Questi tipo di dispositivo non è supportato: %1"
 
-#: networkremote/sync/mediasync.cpp:109
+#: networkremote/sync/mediasync.cpp:132
 msgid "This version of Clementine can't sync this yet."
 msgstr "Questa versione di Clementine non può sincronizzarlo ancora."
 

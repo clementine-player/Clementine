@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "PO-Revision-Date: 2011-10-27 18:53+0000\n"
-"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2026\n"
+"Last-Translator: titus <titus0818@gmail.com>, 2014\n"
 "Language-Team: Romanian (http://app.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -992,7 +992,7 @@ msgstr "Permite unui client să descarce muzică de la acest calculator."
 msgid "Allow downloads"
 msgstr "Permite descărcările"
 
-#: networkremote/sync/mediasync.cpp:87
+#: networkremote/sync/mediasync.cpp:110
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1514,7 +1514,7 @@ msgstr "Clementine nu a putut încărca nici o vizualizare projectM. Verificați
 msgid ""
 "Clementine crashed last time it was running. Send a crash report to the "
 "developers so they can fix the problem?"
-msgstr ""
+msgstr "Clementine s-a blocat sau s-a închis brusc ultima dată când a fost pornită. Trimiteți un raport de eroare dezvoltatorilor, pentru ca aceștia să poată remedia problema?"
 
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
@@ -1527,7 +1527,7 @@ msgstr "Clementine pe %1"
 
 #: core/crashreporting.cpp:187
 msgid "Clementine quit unexpectedly"
-msgstr ""
+msgstr "Clementine s-a închis brusc de formă neașteptată"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -2199,7 +2199,7 @@ msgstr "Nu repeta"
 
 #: core/crashreporting.cpp:199
 msgid "Don't send"
-msgstr ""
+msgstr "Nu trimite"
 
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
@@ -4019,7 +4019,7 @@ msgstr "Dezactivată"
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Offer to send a crash report after Clementine crashes"
-msgstr ""
+msgstr "Oferă posibilitatea de a trimite un raport de eroare după ce Clementine se blochează sau se închide brusc"
 
 #: core/song.cpp:428
 msgid "Ogg FLAC"
@@ -5182,7 +5182,7 @@ msgstr "Selectați..."
 
 #: core/crashreporting.cpp:198
 msgid "Send report"
-msgstr ""
+msgstr "Trimite raportul"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -5232,7 +5232,7 @@ msgstr "Configurează %1 în opțiunile aplicației Clementine de pe calculator"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:218
 msgid "Set up..."
-msgstr ""
+msgstr "Configurează..."
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "Set value for all selected tracks..."
@@ -5775,7 +5775,7 @@ msgstr "Formatul este actualizat doar atunci când se pornește o linie de proce
 msgid ""
 "The next time Clementine starts after a crash, ask whether to send a report "
 "so the problem can be fixed. Takes effect when Clementine restarts."
-msgstr ""
+msgstr "Data viitoare când Clementine va fi repornită după o blocare sau o închidere bruscă, te va întreba dacă dorești să trimiți un raport, pentru ca problema să poată fi remediată. Alegerea intră în vigoare la repornirea aplicației Clementine."
 
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
@@ -5791,7 +5791,7 @@ msgid ""
 "The report says what Clementine was doing when it crashed. It can include "
 "file names and the titles of songs you were playing. You'll be asked again "
 "each time Clementine crashes, and you can turn this off in Preferences."
-msgstr ""
+msgstr "Raportul descrie ce făcea Clementine în momentul în care s-a blocat. Acesta poate include numele fișierelor și titlurile melodiilor pe care le ascultați. Veți fi întrebat din nou de fiecare dată când Clementine se blochează, și puteți dezactiva această opțiune în Preferințe."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5939,7 +5939,7 @@ msgstr "Această opțiune poate fi modificată în secțiunea „Comportament”
 msgid "This type of device is not supported: %1"
 msgstr "Acest tip de dispozitiv nu este acceptat: %1"
 
-#: networkremote/sync/mediasync.cpp:109
+#: networkremote/sync/mediasync.cpp:132
 msgid "This version of Clementine can't sync this yet."
 msgstr "Această versiune a aplicației Clementine nu permite încă sincronizarea acestuia."
 
@@ -6644,13 +6644,13 @@ msgstr "Navigatorul dvs. ar trebui să afișeze acum plex.tv. Dacă vi se solici
 msgid ""
 "Your desktop handles Clementine's global shortcuts, so you choose their keys"
 " in its settings."
-msgstr ""
+msgstr "Mediul grafic de birou gestionează comenzile rapide globale ale aplicației Clementine, așa că puteți alege tastele corespunzătoare din opțiunile acestuia."
 
 #: ui/globalshortcutssettingspage.cpp:128
 msgid ""
 "Your desktop handles Clementine's global shortcuts. They're off until you "
 "set them up and choose their keys."
-msgstr ""
+msgstr "Mediul grafic de birou gestionează comenzile rapide globale ale aplicației Clementine. Acestea rămân dezactivate până când le configurați și alegeți tastele respective."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"

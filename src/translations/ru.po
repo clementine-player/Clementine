@@ -1006,7 +1006,7 @@ msgstr "Позволяет клиенту скачивать музыку с э�
 msgid "Allow downloads"
 msgstr "Разрешить загрузки"
 
-#: networkremote/sync/mediasync.cpp:87
+#: networkremote/sync/mediasync.cpp:110
 msgid ""
 "Allow downloads in Clementine's network remote settings to keep songs on "
 "this phone."
@@ -1528,7 +1528,7 @@ msgstr "Clementine не может загрузить ни одну визуал
 msgid ""
 "Clementine crashed last time it was running. Send a crash report to the "
 "developers so they can fix the problem?"
-msgstr ""
+msgstr "Clementine аварийно завершился во время последнего запуска. Отправить отчёт о сбое разработчикам, чтобы они могли исправить проблему?"
 
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
@@ -1541,13 +1541,13 @@ msgstr "Clementine на %1"
 
 #: core/crashreporting.cpp:187
 msgid "Clementine quit unexpectedly"
-msgstr ""
+msgstr "Clementine неожиданно завершился"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
 "Clementine shows the lyrics in a song's tags, or in a .lrc or .txt file with"
 " the same name next to it."
-msgstr "Clementine показывает текст песни в тегах композиции или в файле .lrc или .txt с тем же именем рядом с ней."
+msgstr "Clementine показывает текст песни из тегов композиции или из файлов .lrc или .txt с тем же именем рядом с ней."
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
@@ -2213,7 +2213,7 @@ msgstr "Не повторять"
 
 #: core/crashreporting.cpp:199
 msgid "Don't send"
-msgstr ""
+msgstr "Не отправлять"
 
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
@@ -2491,7 +2491,7 @@ msgstr "Введите критерии поиска"
 #: airplay/airplayengine.cpp:497
 #, qt-format
 msgid "Enter the PIN %1 shows:"
-msgstr "Введите PIN-код, который показывает %1:"
+msgstr "Введите PIN-код, показанный %1:"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Enter the URL of an internet radio stream:"
@@ -4033,7 +4033,7 @@ msgstr "Откл."
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Offer to send a crash report after Clementine crashes"
-msgstr ""
+msgstr "Предлагать отправить отчёт о сбое после аварийного завершения Clementine"
 
 #: core/song.cpp:428
 msgid "Ogg FLAC"
@@ -4220,7 +4220,7 @@ msgstr "Прочие настройки"
 msgid ""
 "Otherwise, look for them on LRCLIB (sends the song's artist, title, album "
 "and length to lrclib.net)"
-msgstr "В противном случае искать их на LRCLIB (отправляет исполнителя, название, альбом и длительность песни на lrclib.net)"
+msgstr "Иначе искать текст в LRCLIB (передаёт артиста, название, альбом и длительность в lrclib.net)"
 
 #: ../bin/src/ui_albumcoverexport.h:201
 msgid "Output"
@@ -5196,7 +5196,7 @@ msgstr "Выбрать…"
 
 #: core/crashreporting.cpp:198
 msgid "Send report"
-msgstr ""
+msgstr "Отправить отчёт"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -5789,7 +5789,7 @@ msgstr "Формат обновляется только при старте к�
 msgid ""
 "The next time Clementine starts after a crash, ask whether to send a report "
 "so the problem can be fixed. Takes effect when Clementine restarts."
-msgstr ""
+msgstr "При следующем запуске Clementine после сбоя спрашивать, отправлять ли отчёт, чтобы проблему можно было исправить. Вступает в силу после перезапуска Clementine."
 
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
@@ -5805,7 +5805,7 @@ msgid ""
 "The report says what Clementine was doing when it crashed. It can include "
 "file names and the titles of songs you were playing. You'll be asked again "
 "each time Clementine crashes, and you can turn this off in Preferences."
-msgstr ""
+msgstr "В отчёте указывается, что делал Clementine в момент сбоя. Он может содержать имена файлов и названия песен, которые вы воспроизводили. Запрос будет появляться при каждом сбое Clementine, и его можно отключить в настройках."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -5953,7 +5953,7 @@ msgstr "Этот параметр можно изменить в настрой�
 msgid "This type of device is not supported: %1"
 msgstr "Не поддерживаемый тип устройства: %1"
 
-#: networkremote/sync/mediasync.cpp:109
+#: networkremote/sync/mediasync.cpp:132
 msgid "This version of Clementine can't sync this yet."
 msgstr "Эта версия Clementine пока не умеет синхронизировать это."
 
