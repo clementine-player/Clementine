@@ -47,7 +47,7 @@ jobs:
           cat actions-lock-fix.patch
       - name: Keep the fix
         if: failure()
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: actions-lock-fix
           path: actions-lock-fix.patch

@@ -10,7 +10,7 @@ jobs:
     container:
       image: ubuntu:jammy
     steps:
-      - uses: supplypike/setup-bin@v3
+      - uses: supplypike/setup-bin@v5
         with:
           uri: https://github.com/transifex/cli/releases/download/v1.6.7/tx-linux-amd64.tar.gz
           name: tx
@@ -23,7 +23,7 @@ jobs:
           git
           ssh
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: git hackery
@@ -43,7 +43,7 @@ jobs:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
         run: tx pull -f -a
       - name: Setup git SSH
-        uses: webfactory/ssh-agent@v0.4.1
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.TX_KEY }}
       - name: git add

@@ -147,7 +147,7 @@ jobs:
           fi
 
       - if: steps.check.outputs.action != ''
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: distro-watch-change
           path: ${{ runner.temp }}/change/
@@ -163,7 +163,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           name: distro-watch-change
           path: ${{ runner.temp }}/change
@@ -189,7 +189,7 @@ jobs:
       - name: Mint app token
         if: steps.apply.outputs.changed == 'true'
         id: app-token
-        uses: actions/create-github-app-token@v3.2.0
+        uses: actions/create-github-app-token@v3.3.0
         with:
           client-id: ${{ vars.DISTRO_BOT_CLIENT_ID }}
           private-key: ${{ secrets.DISTRO_BOT_PRIVATE_KEY }}

@@ -51,7 +51,7 @@ jobs:
           # All of master's history and tags: the notes and version come
           # from them.
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       - name: Plan the release
         id: plan
         env:
