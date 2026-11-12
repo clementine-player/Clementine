@@ -58,7 +58,7 @@ jobs:
       # One uv project, pyproject.toml at the root, for the tools in tools/
       # and the scripts in dist/. ruff and ty are pinned in its dev group,
       # so uv runs the same versions here as locally.
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       - name: Generate the protobuf module
         # ty needs the remote's generated module and its type stubs to exist.
         run: uv run python -m clementine_remote.proto
@@ -244,7 +244,7 @@ jobs:
         working-directory: bin
         # For the smoke tests below; builds clementine-tagreader too.
         run: make -j$(nproc) clementine
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       - name: Remote playback smoke tests
         env:
           CLEMENTINE_BINARY: ${{ github.workspace }}/bin/clementine
@@ -261,7 +261,7 @@ jobs:
           tools/screenshots/generate-music.sh "$RUNNER_TEMP/music"
           tools/screenshots/take-screenshots.sh bin/clementine \
             "$RUNNER_TEMP/music" screenshots/linux
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: screenshots-linux
@@ -311,7 +311,7 @@ jobs:
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
-      - uses: supplypike/setup-bin@v3
+      - uses: supplypike/setup-bin@v5
         with:
           uri: https://github.com/transifex/cli/releases/download/v1.6.17/tx-linux-amd64.tar.gz
           name: tx
@@ -460,14 +460,14 @@ jobs:
           fetch-depth: 0
       # Only the packages: the jobs also upload screenshots (screenshots-*),
       # which have the same names on every platform and aren't release assets.
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           path: release_artifacts
           pattern: release_*
       # And a few of the screenshots, for clementine-player.org, which shows the
       # visitor's platform's: screenshot-<platform>-<screen>.png. The website
       # knows these names (its data.py), so keep them.
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           path: screenshots
           pattern: screenshots-*
@@ -498,7 +498,7 @@ jobs:
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       # The Release-note: trailers of the commits since the previous release
       # (see "Release notes" in README.md): for a development build, since
       # the previous build, so usually none; for a numbered release, since
@@ -539,7 +539,7 @@ jobs:
         if: steps.releasable.outputs.skip != 'true'
         # One file at a time: 2.6.2 quit partway through 1.4.1-258's 34 uploads, all
         # at once, among a run of Not Found errors from GitHub.
-        uses: softprops/action-gh-release@v3.0.3
+        uses: softprops/action-gh-release@v3.0.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -683,7 +683,7 @@ jobs:
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
@@ -864,7 +864,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -1040,7 +1040,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -1216,7 +1216,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
@@ -1479,7 +1479,7 @@ jobs:
             bin/clementine-tagreader.exe bin/clementine-tagreader.pdb \
             "$(cygpath -u "$RUNNER_TEMP")"/sentry-native/bin/crashpad_handler.{exe,pdb} \
             symbols/
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
         timeout-minutes: 5
       # Against what the installer ships, so the PDBs are for these.
       - name: Check debug symbols
@@ -1489,7 +1489,7 @@ jobs:
           uv run --only-group sentry dist/sentry_symbols.py check symbols
           dist/windows/clementine.exe dist/windows/clementine-tagreader.exe
           dist/windows/crashpad_handler.exe
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: symbols-windows
           path: symbols/
@@ -1619,7 +1619,7 @@ jobs:
         run: makensis clementine.nsi
         working-directory: dist/windows
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: release_mingw
           path: dist/windows/ClementineSetup*.exe
@@ -1632,7 +1632,7 @@ jobs:
             dist/windows/clementine.exe --screenshots screenshots/windows \
               --screenshot-theme $theme showcase-music
           done
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: screenshots-windows
@@ -1803,7 +1803,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
@@ -1967,7 +1967,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
@@ -2137,7 +2137,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
@@ -2307,7 +2307,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
@@ -2477,7 +2477,7 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
@@ -2613,7 +2613,7 @@ jobs:
           rm -rf 3rdparty/libprojectm/presets-cream/.git
 
       # For updates: a pinned release, checked against its checksum.
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       - name: Download Sparkle
         run: >
           uv run clementine-mac-update fetch-sparkle "$RUNNER_TEMP/sparkle"
@@ -2761,7 +2761,7 @@ jobs:
           )
           cp "${binaries[@]}" symbols/
           uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: symbols-mac
           path: symbols/
@@ -2830,7 +2830,7 @@ jobs:
         timeout-minutes: 45
         working-directory: bin
         run: make notarize-dmg
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: release_mac
           path: bin/clementine-*.dmg
@@ -2844,7 +2844,7 @@ jobs:
               --screenshots screenshots/macos --screenshot-theme $theme \
               showcase-music
           done
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: screenshots-macos
@@ -2887,7 +2887,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           name: release_mac
           path: dmg
@@ -2979,12 +2979,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
       # The Debian and Ubuntu builds: release_<suite>_64 and _arm64.
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           pattern: release_*_{64,arm64}
           path: debs
           merge-multiple: true
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.3
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v3.0.0
         with:
@@ -3064,7 +3064,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
       # Each artifact holds its platform's folder: linux/, windows/, macos/.
-      - uses: actions/download-artifact@v8.0.1
+      - uses: actions/download-artifact@v8.0.2
         with:
           pattern: screenshots-*
           path: screenshots
