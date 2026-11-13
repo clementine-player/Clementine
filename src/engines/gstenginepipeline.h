@@ -66,6 +66,11 @@ class GstEnginePipeline : public GstPipelineBase {
   // Control the music playback
   QFuture<GstStateChangeReturn> SetState(GstState state);
   Q_INVOKABLE bool Seek(qint64 nanosec);
+  // Reopens the audio sink where playback is, so that a sink that picks the
+  // system's default device when it opens moves to the new default. A stream
+  // that can't seek, such as internet radio, starts again instead. Does
+  // nothing if a device was chosen.
+  void RestartAudioSink();
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);
   void SetVolume(int percent);
@@ -164,6 +169,9 @@ class GstEnginePipeline : public GstPipelineBase {
   // If the decodebin is special (ie. not really a uridecodebin) then it'll have
   // a src pad immediately and we can link it after everything's created.
   void MaybeLinkDecodeToAudio();
+
+  // Runs on set_state_threadpool_ for RestartAudioSink().
+  void RestartAudioSinkNow();
 
   // Helper method to retrieve the audio format from a GstCaps object.
   static QString GetAudioFormat(GstCaps* caps);

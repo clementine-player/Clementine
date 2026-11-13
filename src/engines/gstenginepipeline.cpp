@@ -41,6 +41,24 @@
 #include "internet/core/internetmodel.h"
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
+
+namespace {
+
+using ScopedGstQuery =
+    std::unique_ptr<GstQuery,
+                    decltype([](GstQuery* query) { gst_query_unref(query); })>;
+
+bool IsSeekable(GstElement* element) {
+  ScopedGstQuery query(gst_query_new_seeking(GST_FORMAT_TIME));
+  gboolean seekable = FALSE;
+  if (gst_element_query(element, query.get())) {
+    gst_query_parse_seeking(query.get(), nullptr, &seekable, nullptr, nullptr);
+  }
+  return seekable;
+}
+
+}  // namespace
+
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
 
 const int GstEnginePipeline::kEqBandCount = 10;
@@ -103,6 +121,11 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   }
 
   for (int i = 0; i < kEqBandCount; ++i) eq_band_gains_ << 0;
+
+  // State changes must apply in the order they're asked for: with more than
+  // one thread, the PLAYING after buffering could run before the PAUSED that
+  // started it, and leave the pipeline paused.
+  set_state_threadpool_.setMaxThreadCount(1);
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
@@ -518,6 +541,9 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
 }
 
 GstEnginePipeline::~GstEnginePipeline() {
+  // A task there may still use this pipeline.
+  set_state_threadpool_.waitForDone();
+
   if (pipeline_) {
     GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
     gst_bus_remove_watch(bus);
@@ -793,11 +819,13 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
   const GstState current_state = state();
 
   if (percent == 0 && current_state == GST_STATE_PLAYING && !buffering_) {
+    qLog(Debug) << id() << "buffering, pausing";
     buffering_ = true;
     emit BufferingStarted();
 
     SetState(GST_STATE_PAUSED);
   } else if (percent == 100 && buffering_) {
+    qLog(Debug) << id() << "buffered, playing";
     buffering_ = false;
     emit BufferingFinished();
 
@@ -1169,6 +1197,75 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
   last_known_position_ns_ = nanosec;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
+}
+
+void GstEnginePipeline::RestartAudioSink() {
+  if (!pipeline_is_initialised_ || !audiosink_ ||
+      !device_.toString().isEmpty()) {
+    return;
+  }
+
+  ConcurrentRun::Run<void>(&set_state_threadpool_,
+                           [this]() { RestartAudioSinkNow(); });
+}
+
+void GstEnginePipeline::RestartAudioSinkNow() {
+  const GstClockTime kTimeout = 2 * GST_SECOND;
+
+  GstState state = GST_STATE_NULL;
+  GstState pending = GST_STATE_VOID_PENDING;
+  gst_element_get_state(pipeline_, &state, &pending, kTimeout);
+  if (pending != GST_STATE_VOID_PENDING) state = pending;
+  if (state != GST_STATE_PLAYING && state != GST_STATE_PAUSED) return;
+
+  // Reopening the sink flushes everything upstream of it, and only a flushing
+  // seek starts it flowing again.
+  if (!IsSeekable(pipeline_)) {
+    // A stream that can't seek, such as internet radio, has no position to go
+    // back to, so start it again. Going to NULL closes the sink too.
+    qLog(Info) << "Restarting the stream on the new audio output";
+    gst_element_set_state(pipeline_, GST_STATE_NULL);
+    // The restarted stream's running time starts at 0 again, so the new
+    // decoder pad mustn't be offset to follow on from the old one, as it is
+    // for gapless playback. That would hold its audio back by as long as the
+    // stream had been playing.
+    gst_segment_init(&last_decodebin_segment_, GST_FORMAT_TIME);
+    gst_element_set_state(pipeline_, state);
+    return;
+  }
+
+  gint64 position = 0;
+  if (!gst_element_query_position(pipeline_, GST_FORMAT_TIME, &position)) {
+    qLog(Warning) << "Not moving to the new audio output: no position";
+    return;
+  }
+
+  qLog(Info) << "Reopening the audio sink at" << position;
+
+  if (state == GST_STATE_PLAYING) {
+    gst_element_set_state(pipeline_, GST_STATE_PAUSED);
+    gst_element_get_state(pipeline_, nullptr, nullptr, kTimeout);
+  }
+
+  // Going to NULL makes osxaudiosink forget the device, and going back to
+  // READY picks the current default.
+  gst_element_set_state(audiosink_, GST_STATE_NULL);
+  gst_element_sync_state_with_parent(audiosink_);
+
+  last_known_position_ns_ = position;
+  if (!gst_element_seek_simple(
+          pipeline_, GST_FORMAT_TIME,
+          GstSeekFlags(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE),
+          position)) {
+    qLog(Warning) << "Seek after reopening the audio sink failed";
+  }
+  gst_element_get_state(pipeline_, nullptr, nullptr, kTimeout);
+
+  // The sink provided the pipeline's clock and lost it when it closed; going
+  // to PLAYING makes the pipeline pick a clock again.
+  if (state == GST_STATE_PLAYING) {
+    gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+  }
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {
