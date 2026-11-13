@@ -252,8 +252,16 @@ bool GstEnginePipeline::InitAudioBin() {
     return false;
   }
 
-  if (g_object_class_find_property(G_OBJECT_GET_CLASS(audiosink_), "device") &&
-      !device_.toString().isEmpty()) {
+  if (device_.type() == QVariant::String && !device_.toString().isEmpty() &&
+      g_object_class_find_property(G_OBJECT_GET_CLASS(audiosink_),
+                                   "unique-id")) {
+    // osxaudiosink takes the device's persistent ID here; its "device" is the
+    // AudioDeviceID, which can change when the device reconnects.
+    g_object_set(G_OBJECT(audiosink_), "unique-id",
+                 device_.toString().toUtf8().constData(), nullptr);
+  } else if (g_object_class_find_property(G_OBJECT_GET_CLASS(audiosink_),
+                                          "device") &&
+             !device_.toString().isEmpty()) {
     switch (device_.type()) {
       case QVariant::Int:
         g_object_set(G_OBJECT(audiosink_), "device", device_.toInt(), nullptr);
@@ -1200,6 +1208,10 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
 }
 
 void GstEnginePipeline::RestartAudioSink() {
+  // Other sinks either follow the default device themselves, or play to one
+  // device whatever the system's default is.
+  if (sink_ != "autoaudiosink" && sink_ != "osxaudiosink") return;
+
   if (!pipeline_is_initialised_ || !audiosink_ ||
       !device_.toString().isEmpty()) {
     return;
