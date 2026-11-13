@@ -175,6 +175,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void BufferingProgress(int percent);
   void BufferingFinished();
 
+  void DefaultOutputChanged();
+
  private:
   struct PluginDetails {
     QString name;

@@ -64,6 +64,7 @@
 #endif
 
 #ifdef Q_OS_DARWIN
+#include "engines/osxdefaultoutputwatcher.h"
 #include "engines/osxdevicefinder.h"
 #endif
 
@@ -133,6 +134,9 @@ GstEngine::GstEngine(Application* app)
 
 #ifdef Q_OS_DARWIN
   tls_database_ = MacTlsDatabase();
+
+  connect(new OsxDefaultOutputWatcher(this), SIGNAL(DefaultOutputChanged()),
+          SLOT(DefaultOutputChanged()));
 #endif
 }
 
@@ -711,6 +715,14 @@ void GstEngine::SeekNow() {
   if (!current_pipeline_->Seek(seek_pos_)) {
     qLog(Warning) << "Seek failed";
   }
+}
+
+void GstEngine::DefaultOutputChanged() {
+  // Other sinks either follow the default device themselves, or play to one
+  // device whatever the system's default is.
+  if (sink_ != kAutoSink && sink_ != "osxaudiosink") return;
+
+  if (current_pipeline_) current_pipeline_->RestartAudioSink();
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {

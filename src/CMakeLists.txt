@@ -997,6 +997,7 @@ optional_source(APPLE
     core/macmediacontrols.mm
     core/macsleepinhibitor.cpp
     core/mac_startup.mm
+    engines/osxdefaultoutputwatcher.cpp
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
@@ -1009,6 +1010,7 @@ optional_source(APPLE
     core/macfslistener.h
     core/macglobalshortcutbackend.h
     core/macmediacontrols.h
+    engines/osxdefaultoutputwatcher.h
     ui/macsystemtrayicon.h
 )
 
