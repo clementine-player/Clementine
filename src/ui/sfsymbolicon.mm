@@ -62,6 +62,16 @@ QString SFSymbolForIconName(const QString& icon_name) {
       {"multimedia-player-ipod-mini-blue", "externaldrive"},
       {"ipodtouchicon", "iphone.radiowaves.left.and.right"},
       {"wiimotedev", "gamecontroller"},
+      // Audio outputs, as macOS's sound settings show them
+      {"audio-speakers", "speaker.wave.2.fill"},
+      {"audio-speakers-bluetooth", "hifispeaker.fill"},
+      {"audio-speakers-airplay", "airplayaudio"},
+      {"audio-headphones", "headphones"},
+      {"audio-headphones-airpods", "airpods"},
+      {"audio-headphones-airpodspro", "airpodspro"},
+      {"audio-headphones-airpodsmax", "airpodsmax"},
+      {"video-display", "display"},
+      {"audio-card", "hifispeaker.fill"},
       // Files and places
       {"folder", "folder"},
       {"folder-new", "folder.badge.plus"},

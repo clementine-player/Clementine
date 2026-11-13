@@ -66,6 +66,64 @@ QString GetStringProperty(AudioDeviceID device_id,
   return QString::fromCFString(value);
 }
 
+// The built-in output's data source when headphones are plugged in.
+constexpr UInt32 kHeadphonesDataSource = 'hdpn';
+
+UInt32 GetUInt32Property(AudioDeviceID device_id,
+                         const AudioObjectPropertyAddress& address) {
+  UInt32 value = 0;
+  UInt32 size_bytes = sizeof(value);
+  if (AudioObjectGetPropertyData(device_id, &address, 0, nullptr, &size_bytes,
+                                 &value) != kAudioHardwareNoError) {
+    return 0;
+  }
+  return value;
+}
+
+// An icon like the one macOS shows for the device in its sound settings,
+// from how it's connected. The names fall back to more general ones when a
+// component is stripped off, and on macOS map to SF Symbols.
+QString GetIconName(AudioDeviceID device_id, const QString& description) {
+  const AudioObjectPropertyAddress transport_address = {
+      kAudioDevicePropertyTransportType, kAudioObjectPropertyScopeGlobal,
+      kAudioObjectPropertyElementMaster};
+  const AudioObjectPropertyAddress data_source_address = {
+      kAudioDevicePropertyDataSource, kAudioDevicePropertyScopeOutput,
+      kAudioObjectPropertyElementMaster};
+
+  const QString name = description.toLower();
+  if (name.contains("airpods max")) return "audio-headphones-airpodsmax";
+  if (name.contains("airpods pro")) return "audio-headphones-airpodspro";
+  if (name.contains("airpods")) return "audio-headphones-airpods";
+
+  switch (GetUInt32Property(device_id, transport_address)) {
+    case kAudioDeviceTransportTypeBuiltIn:
+      // The built-in output is the speakers, or headphones when they're
+      // plugged into the headphone jack. Apple silicon Macs list the jack as
+      // a device of its own, "External Headphones".
+      if (name.contains("headphone") ||
+          GetUInt32Property(device_id, data_source_address) ==
+              kHeadphonesDataSource) {
+        return "audio-headphones";
+      }
+      return "audio-speakers";
+    case kAudioDeviceTransportTypeBluetooth:
+    case kAudioDeviceTransportTypeBluetoothLE:
+      if (name.contains("headphone") || name.contains("headset") ||
+          name.contains("buds")) {
+        return "audio-headphones";
+      }
+      return "audio-speakers-bluetooth";
+    case kAudioDeviceTransportTypeHDMI:
+    case kAudioDeviceTransportTypeDisplayPort:
+      return "video-display";
+    case kAudioDeviceTransportTypeAirPlay:
+      return "audio-speakers-airplay";
+    default:
+      return "audio-card";
+  }
+}
+
 QString GetDeviceUid(AudioDeviceID device_id) {
   const AudioObjectPropertyAddress address = {
       kAudioDevicePropertyDeviceUID, kAudioObjectPropertyScopeGlobal,
@@ -113,7 +171,7 @@ QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
     dev.description = GetStringProperty(id, address);
     if (dev.description.isEmpty()) dev.description = QString("Unknown device");
     dev.device_property_value = uid;
-    dev.icon_name = GuessIconName(dev.description);
+    dev.icon_name = GetIconName(id, dev.description);
     ret.append(dev);
   }
   return ret;
