@@ -32,16 +32,26 @@ const AudioObjectPropertyAddress kDefaultOutputAddress = {
     kAudioHardwarePropertyDefaultOutputDevice, kAudioObjectPropertyScopeGlobal,
     kAudioObjectPropertyElementMaster};
 
+const AudioObjectPropertyAddress kDevicesAddress = {
+    kAudioHardwarePropertyDevices, kAudioObjectPropertyScopeGlobal,
+    kAudioObjectPropertyElementMaster};
+
 }  // namespace
 
 OsxDefaultOutputWatcher::OsxDefaultOutputWatcher(QObject* parent)
     : QObject(parent),
       settle_timer_(new QTimer(this)),
+      devices_settle_timer_(new QTimer(this)),
       device_id_(CurrentDefaultOutput()),
-      listening_(false) {
+      listening_(false),
+      listening_for_devices_(false) {
   settle_timer_->setSingleShot(true);
   settle_timer_->setInterval(kSettleMsec);
   connect(settle_timer_, SIGNAL(timeout()), SLOT(CheckDefaultOutput()));
+
+  devices_settle_timer_->setSingleShot(true);
+  devices_settle_timer_->setInterval(kSettleMsec);
+  connect(devices_settle_timer_, SIGNAL(timeout()), SIGNAL(DevicesChanged()));
 
   const OSStatus status = AudioObjectAddPropertyListener(
       kAudioObjectSystemObject, &kDefaultOutputAddress, PropertyListener, this);
@@ -49,6 +59,14 @@ OsxDefaultOutputWatcher::OsxDefaultOutputWatcher(QObject* parent)
     listening_ = true;
   } else {
     qLog(Warning) << "Can't watch the default audio output:" << status;
+  }
+
+  const OSStatus devices_status = AudioObjectAddPropertyListener(
+      kAudioObjectSystemObject, &kDevicesAddress, PropertyListener, this);
+  if (devices_status == kAudioHardwareNoError) {
+    listening_for_devices_ = true;
+  } else {
+    qLog(Warning) << "Can't watch the audio devices:" << devices_status;
   }
 }
 
@@ -58,19 +76,33 @@ OsxDefaultOutputWatcher::~OsxDefaultOutputWatcher() {
                                       &kDefaultOutputAddress, PropertyListener,
                                       this);
   }
+  if (listening_for_devices_) {
+    AudioObjectRemovePropertyListener(kAudioObjectSystemObject,
+                                      &kDevicesAddress, PropertyListener, this);
+  }
 }
 
 OSStatus OsxDefaultOutputWatcher::PropertyListener(
-    AudioObjectID, UInt32, const AudioObjectPropertyAddress*,
-    void* client_data) {
+    AudioObjectID, UInt32 address_count,
+    const AudioObjectPropertyAddress* addresses, void* client_data) {
   // This runs on a CoreAudio thread.
-  QMetaObject::invokeMethod(
-      reinterpret_cast<OsxDefaultOutputWatcher*>(client_data), "Notified",
-      Qt::QueuedConnection);
+  OsxDefaultOutputWatcher* me =
+      reinterpret_cast<OsxDefaultOutputWatcher*>(client_data);
+  for (UInt32 i = 0; i < address_count; ++i) {
+    if (addresses[i].mSelector == kAudioHardwarePropertyDevices) {
+      QMetaObject::invokeMethod(me, "DevicesNotified", Qt::QueuedConnection);
+    } else {
+      QMetaObject::invokeMethod(me, "Notified", Qt::QueuedConnection);
+    }
+  }
   return kAudioHardwareNoError;
 }
 
 void OsxDefaultOutputWatcher::Notified() { settle_timer_->start(); }
+
+void OsxDefaultOutputWatcher::DevicesNotified() {
+  devices_settle_timer_->start();
+}
 
 void OsxDefaultOutputWatcher::CheckDefaultOutput() {
   const AudioDeviceID device_id = CurrentDefaultOutput();

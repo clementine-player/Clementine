@@ -56,29 +56,14 @@ PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
   ui_->output_format->setItemData(0, GstEngine::kOutFormatDetect);
   ui_->output_format->setItemData(1, GstEngine::kOutFormatS16LE);
   ui_->output_format->setItemData(2, GstEngine::kOutFormatF32LE);
+
+  connect(dialog->gst_engine(), SIGNAL(OutputsChanged()),
+          SLOT(OutputsChanged()));
 }
 
 PlaybackSettingsPage::~PlaybackSettingsPage() { delete ui_; }
 
 void PlaybackSettingsPage::Load() {
-  const GstEngine* engine = dialog()->gst_engine();
-
-  ui_->gst_output->clear();
-  for (const GstEngine::OutputDetails& output : engine->GetOutputsList()) {
-    QIcon icon;
-    if (!output.icon_name.isEmpty()) {
-      // Strip components off the icon name until we find one.
-      QStringList components = output.icon_name.split("-");
-      while (icon.isNull() && !components.isEmpty()) {
-        icon = IconLoader::Load(components.join("-"), IconLoader::Base);
-        components.removeLast();
-      }
-    }
-
-    ui_->gst_output->addItem(icon, output.description,
-                             QVariant::fromValue(output));
-  }
-
   QSettings s;
 
   s.beginGroup(Playlist::kSettingsGroup);
@@ -102,17 +87,7 @@ void PlaybackSettingsPage::Load() {
   QString sink = s.value("sink", GstEngine::kAutoSink).toString();
   QVariant device = s.value("device");
 
-  ui_->gst_output->setCurrentIndex(0);
-  for (int i = 0; i < ui_->gst_output->count(); ++i) {
-    GstEngine::OutputDetails details =
-        ui_->gst_output->itemData(i).value<GstEngine::OutputDetails>();
-
-    if (details.gstreamer_plugin_name == sink &&
-        details.device_property_value == device) {
-      ui_->gst_output->setCurrentIndex(i);
-      break;
-    }
-  }
+  LoadOutputs(sink, device, s.value("device_description").toString());
 
   ui_->replaygain->setChecked(s.value("rgenabled", false).toBool());
   ui_->replaygain_mode->setCurrentIndex(s.value("rgmode", 0).toInt());
@@ -129,6 +104,63 @@ void PlaybackSettingsPage::Load() {
           .toString()));
   ui_->buffer_min_fill->setValue(s.value("bufferminfill", 33).toInt());
   s.endGroup();
+}
+
+void PlaybackSettingsPage::LoadOutputs(const QString& sink,
+                                       const QVariant& device,
+                                       const QString& description) {
+  const GstEngine* engine = dialog()->gst_engine();
+
+  ui_->gst_output->clear();
+  for (const GstEngine::OutputDetails& output : engine->GetOutputsList()) {
+    QIcon icon;
+    if (!output.icon_name.isEmpty()) {
+      // Strip components off the icon name until we find one.
+      QStringList components = output.icon_name.split("-");
+      while (icon.isNull() && !components.isEmpty()) {
+        icon = IconLoader::Load(components.join("-"), IconLoader::Base);
+        components.removeLast();
+      }
+    }
+
+    ui_->gst_output->addItem(icon, output.description,
+                             QVariant::fromValue(output));
+  }
+
+  ui_->gst_output->setCurrentIndex(0);
+  bool found_output = false;
+  for (int i = 0; i < ui_->gst_output->count(); ++i) {
+    GstEngine::OutputDetails details =
+        ui_->gst_output->itemData(i).value<GstEngine::OutputDetails>();
+
+    if (details.gstreamer_plugin_name == sink &&
+        details.device_property_value == device) {
+      ui_->gst_output->setCurrentIndex(i);
+      found_output = true;
+      break;
+    }
+  }
+
+  if (!found_output && !device.toString().isEmpty()) {
+    // The chosen device isn't connected now, such as Bluetooth speakers that
+    // are off. Keep it chosen, so that saving doesn't forget it.
+    GstEngine::OutputDetails details;
+    details.description =
+        description.isEmpty() ? tr("Unknown device") : description;
+    details.gstreamer_plugin_name = sink;
+    details.device_property_value = device;
+    ui_->gst_output->addItem(tr("%1 (not connected)").arg(details.description),
+                             QVariant::fromValue(details));
+    ui_->gst_output->setCurrentIndex(ui_->gst_output->count() - 1);
+  }
+}
+
+void PlaybackSettingsPage::OutputsChanged() {
+  // Keep whichever output is chosen in the dialog, saved or not.
+  const GstEngine::OutputDetails current =
+      ui_->gst_output->currentData().value<GstEngine::OutputDetails>();
+  LoadOutputs(current.gstreamer_plugin_name, current.device_property_value,
+              current.description);
 }
 
 void PlaybackSettingsPage::Save() {
@@ -155,6 +187,7 @@ void PlaybackSettingsPage::Save() {
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", details.gstreamer_plugin_name);
   s.setValue("device", details.device_property_value);
+  s.setValue("device_description", details.description);
   s.setValue("rgenabled", ui_->replaygain->isChecked());
   s.setValue("rgmode", ui_->replaygain_mode->currentIndex());
   s.setValue("rgpreamp", float(ui_->replaygain_preamp->value()) / 10 - 15);

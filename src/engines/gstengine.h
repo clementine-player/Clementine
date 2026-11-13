@@ -110,6 +110,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   // processes, which is what TagReaderClient waits for before starting its own
   // - see Player::Init().
   void Initialised();
+  // The outputs GetOutputsList() returns changed, for example because
+  // headphones were connected.
+  void OutputsChanged();
 
  public slots:
   void StartPreloading(const MediaPlaybackRequest& req, bool force_stop_at_end,

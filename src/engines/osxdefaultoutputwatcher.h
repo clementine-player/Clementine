@@ -27,7 +27,8 @@ class QTimer;
 // Tells when macOS's default audio output device changes, for example when
 // the user picks other speakers in System Settings or connects headphones.
 // osxaudiosink picks the default device only when it opens, so a sink that's
-// already playing has to be reopened to follow the change.
+// already playing has to be reopened to follow the change. Also tells when
+// devices are connected or disconnected, so lists of outputs can be updated.
 class OsxDefaultOutputWatcher : public QObject {
   Q_OBJECT
 
@@ -38,9 +39,12 @@ class OsxDefaultOutputWatcher : public QObject {
  signals:
   // Emitted once the default output has settled on a different device.
   void DefaultOutputChanged();
+  // Emitted once devices have stopped being connected or disconnected.
+  void DevicesChanged();
 
  private slots:
   void Notified();
+  void DevicesNotified();
   void CheckDefaultOutput();
 
  private:
@@ -51,8 +55,10 @@ class OsxDefaultOutputWatcher : public QObject {
   static AudioDeviceID CurrentDefaultOutput();
 
   QTimer* settle_timer_;
+  QTimer* devices_settle_timer_;
   AudioDeviceID device_id_;
   bool listening_;
+  bool listening_for_devices_;
 };
 
 #endif  // ENGINES_OSXDEFAULTOUTPUTWATCHER_H

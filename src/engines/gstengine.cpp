@@ -135,8 +135,10 @@ GstEngine::GstEngine(Application* app)
 #ifdef Q_OS_DARWIN
   tls_database_ = MacTlsDatabase();
 
-  connect(new OsxDefaultOutputWatcher(this), SIGNAL(DefaultOutputChanged()),
+  OsxDefaultOutputWatcher* output_watcher = new OsxDefaultOutputWatcher(this);
+  connect(output_watcher, SIGNAL(DefaultOutputChanged()),
           SLOT(DefaultOutputChanged()));
+  connect(output_watcher, SIGNAL(DevicesChanged()), SIGNAL(OutputsChanged()));
 #endif
 }
 
@@ -301,6 +303,24 @@ void GstEngine::ReloadSettings() {
   device_ = s.value("device");
 
   if (sink_.isEmpty()) sink_ = kAutoSink;
+
+#ifdef Q_OS_DARWIN
+  // Older versions saved the device's AudioDeviceID, which changes when the
+  // device reconnects. Save its UID instead, while that ID still finds it.
+  if (sink_ == "osxaudiosink" && device_.type() != QVariant::String &&
+      device_.canConvert<uint>()) {
+    const QString uid = OsxDeviceFinder::UidForDeviceId(device_.toUInt());
+    if (uid.isEmpty()) {
+      // The ID no longer finds the device, and can't tell which it was.
+      qLog(Info) << "Audio output" << device_ << "not found, using the default";
+      sink_ = kAutoSink;
+      device_ = QString();
+    } else {
+      device_ = uid;
+      s.setValue("device", device_);
+    }
+  }
+#endif
 
   rg_enabled_ = s.value("rgenabled", false).toBool();
   rg_mode_ = s.value("rgmode", 0).toInt();
@@ -718,10 +738,8 @@ void GstEngine::SeekNow() {
 }
 
 void GstEngine::DefaultOutputChanged() {
-  // Other sinks either follow the default device themselves, or play to one
-  // device whatever the system's default is.
-  if (sink_ != kAutoSink && sink_ != "osxaudiosink") return;
-
+  // The pipeline knows whether it plays to the default device: it may have
+  // fallen back to it because the chosen one wasn't connected.
   if (current_pipeline_) current_pipeline_->RestartAudioSink();
 }
 
@@ -895,7 +913,21 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   EnsureInitialised();
 
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
+#ifdef Q_OS_DARWIN
+  if (sink_ == "osxaudiosink" && device_.type() == QVariant::String &&
+      !device_.toString().isEmpty() &&
+      !OsxDeviceFinder::HasOutputDevice(device_.toString())) {
+    // The chosen device isn't connected, such as Bluetooth speakers that are
+    // off: play to the default device until it's back, rather than failing.
+    qLog(Info) << "Audio output" << device_.toString()
+               << "isn't connected, using the default output";
+    ret->set_output_device(kAutoSink, QVariant(QString()));
+  } else {
+    ret->set_output_device(sink_, device_);
+  }
+#else
   ret->set_output_device(sink_, device_);
+#endif
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
   ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
   ret->set_buffer_min_fill(buffer_min_fill_);

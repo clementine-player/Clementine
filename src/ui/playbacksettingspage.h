@@ -18,6 +18,9 @@
 #ifndef PLAYBACKSETTINGSPAGE_H
 #define PLAYBACKSETTINGSPAGE_H
 
+#include <QString>
+#include <QVariant>
+
 #include "settingspage.h"
 
 class Ui_PlaybackSettingsPage;
@@ -36,8 +39,16 @@ class PlaybackSettingsPage : public SettingsPage {
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
   void BufferMinFillChanged(int value);
+  // The audio outputs that can be chosen changed, for example because
+  // headphones were connected.
+  void OutputsChanged();
 
  private:
+  // Lists the outputs and chooses the one given. If it isn't connected, it's
+  // listed anyway, so that saving keeps it.
+  void LoadOutputs(const QString& sink, const QVariant& device,
+                   const QString& description);
+
   Ui_PlaybackSettingsPage* ui_;
 };
 

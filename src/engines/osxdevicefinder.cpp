@@ -54,6 +54,25 @@ std::unique_ptr<T> GetProperty(const AudioDeviceID& device_id,
   return ret;
 }
 
+QString GetStringProperty(AudioDeviceID device_id,
+                          const AudioObjectPropertyAddress& address) {
+  CFStringRef value = nullptr;
+  UInt32 size_bytes = sizeof(value);
+  const OSStatus status = AudioObjectGetPropertyData(
+      device_id, &address, 0, nullptr, &size_bytes, &value);
+  if (status != kAudioHardwareNoError || !value) return QString();
+
+  ScopedCFTypeRef<CFStringRef> scoped_value(value);
+  return QString::fromCFString(value);
+}
+
+QString GetDeviceUid(AudioDeviceID device_id) {
+  const AudioObjectPropertyAddress address = {
+      kAudioDevicePropertyDeviceUID, kAudioObjectPropertyScopeGlobal,
+      kAudioObjectPropertyElementMaster};
+  return GetStringProperty(device_id, address);
+}
+
 }  // namespace
 
 OsxDeviceFinder::OsxDeviceFinder() : DeviceFinder("osxaudiosink") {}
@@ -77,15 +96,6 @@ QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
   for (UInt32 i = 0; i < device_count; ++i) {
     const AudioDeviceID id = devices.get()[i];
 
-    // Query device name
-    address.mSelector = kAudioDevicePropertyDeviceNameCFString;
-    std::unique_ptr<CFStringRef> device_name =
-        GetProperty<CFStringRef>(id, address);
-    ScopedCFTypeRef<CFStringRef> scoped_device_name(*device_name.get());
-    if (!device_name.get()) {
-      continue;
-    }
-
     // Determine if the device is an output device (it is an output device if
     // it has output channels)
     address.mSelector = kAudioDevicePropertyStreamConfiguration;
@@ -95,13 +105,27 @@ QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
       continue;
     }
 
+    const QString uid = GetDeviceUid(id);
+    if (uid.isEmpty()) continue;
+
+    address.mSelector = kAudioDevicePropertyDeviceNameCFString;
     Device dev;
-    dev.description = QString::fromUtf8(
-        CFStringGetCStringPtr(*device_name, CFStringGetSystemEncoding()));
+    dev.description = GetStringProperty(id, address);
     if (dev.description.isEmpty()) dev.description = QString("Unknown device");
-    dev.device_property_value = id;
+    dev.device_property_value = uid;
     dev.icon_name = GuessIconName(dev.description);
     ret.append(dev);
   }
   return ret;
+}
+
+QString OsxDeviceFinder::UidForDeviceId(quint32 device_id) {
+  return GetDeviceUid(device_id);
+}
+
+bool OsxDeviceFinder::HasOutputDevice(const QString& uid) {
+  for (const Device& device : OsxDeviceFinder().ListDevices()) {
+    if (device.device_property_value.toString() == uid) return true;
+  }
+  return false;
 }

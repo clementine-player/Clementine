@@ -18,14 +18,26 @@
 #ifndef OSXDEVICEFINDER_H
 #define OSXDEVICEFINDER_H
 
+#include <QString>
+
 #include "engines/devicefinder.h"
 
+// Devices are identified by their CoreAudio UID, which stays the same across
+// reconnects and restarts, unlike their AudioDeviceID. osxaudiosink takes it as
+// its "unique-id".
 class OsxDeviceFinder : public DeviceFinder {
  public:
   OsxDeviceFinder();
 
   virtual bool Initialise() { return true; }
   virtual QList<Device> ListDevices();
+
+  // Returns the UID of the device with this AudioDeviceID, as older versions
+  // saved it, or an empty string if there is no such device now.
+  static QString UidForDeviceId(quint32 device_id);
+
+  // Returns whether an output device with this UID is connected.
+  static bool HasOutputDevice(const QString& uid);
 };
 
 #endif  // OSXDEVICEFINDER_H
