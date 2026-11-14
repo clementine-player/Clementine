@@ -112,6 +112,11 @@ msgid ""
 "This computer is %2"
 msgstr ""
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr ""
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1292,7 +1297,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr ""
 
@@ -1394,7 +1399,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "사용자의 스마트 재생목록 이름 선택"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1995,7 +2000,7 @@ msgstr "음량 줄이기"
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -6126,6 +6131,10 @@ msgstr "알 수 없는"
 
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
+msgstr ""
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
 msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:78

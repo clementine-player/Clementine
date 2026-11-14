@@ -121,6 +121,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nЭтот компьютер — %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr "%1 (не подключено)"
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1301,7 +1306,7 @@ msgstr "Обзор…"
 msgid "Buffer duration"
 msgstr "Размер буфера"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Буферизация"
 
@@ -1403,7 +1408,7 @@ msgstr "Чилаут"
 msgid "Choose a name for your smart playlist"
 msgstr "Выберите название вашего умного плейлиста"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Выбирать автоматически"
 
@@ -1889,7 +1894,7 @@ msgstr "Обложка загружена автоматически с %1"
 
 #: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
-msgstr "Обложка вручную отключена"
+msgstr "Обложка убрана вручную"
 
 #: ui/edittagdialog.cpp:491
 msgid "Cover art not set"
@@ -2004,7 +2009,7 @@ msgstr "Уменьшить громкость"
 msgid "Default background image"
 msgstr "Стандартное фоновое изображение"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Стандартное устройство для %1"
@@ -6137,6 +6142,10 @@ msgstr "Неизвестный"
 msgid "Unknown content-type"
 msgstr "Неизвестный тип содержимого"
 
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr "Неизвестное устройство"
+
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
@@ -6149,7 +6158,7 @@ msgstr "Неизвестный тип файла: %1"
 
 #: ui/albumcoverchoicecontroller.cpp:77
 msgid "Unset cover"
-msgstr "Удалить обложку"
+msgstr "Убрать обложку"
 
 #: ui/mainwindow.cpp:1894
 msgid "Unskip selected tracks"

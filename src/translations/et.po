@@ -97,6 +97,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nSee arvuti on %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr "%1 (pole ühendatud)"
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1277,7 +1282,7 @@ msgstr "Sirvi..."
 msgid "Buffer duration"
 msgstr "Puhvri kestus"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Puhvedan"
 
@@ -1379,7 +1384,7 @@ msgstr "Chillout"
 msgid "Choose a name for your smart playlist"
 msgstr "Vali nimi oma nutika esitusloendi jaoks"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Vali automaatselt"
 
@@ -1504,7 +1509,7 @@ msgstr "Clementine ei suutnud laadida mitte ühtegi projectM visualiseerimist. P
 msgid ""
 "Clementine crashed last time it was running. Send a crash report to the "
 "developers so they can fix the problem?"
-msgstr ""
+msgstr "Clementine jooksis viimati kokku. Kas tahaksid saata selle kohta arendajatele aruande, et nad saaksid vea parandada?"
 
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
@@ -1517,7 +1522,7 @@ msgstr "Clementine seadmes „%1“"
 
 #: core/crashreporting.cpp:187
 msgid "Clementine quit unexpectedly"
-msgstr ""
+msgstr "Clementine lõpetas ootamatult töö"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1980,7 +1985,7 @@ msgstr "Heli vaiksemaks"
 msgid "Default background image"
 msgstr "Vaikimisi taustapilt"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Vaikimisi seade asukohas %1"
@@ -2189,7 +2194,7 @@ msgstr "Ära korda"
 
 #: core/crashreporting.cpp:199
 msgid "Don't send"
-msgstr ""
+msgstr "Ära saada"
 
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
@@ -4009,7 +4014,7 @@ msgstr "Väljas"
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Offer to send a crash report after Clementine crashes"
-msgstr ""
+msgstr "Clementine'i kokkujooksmisel paku võimalust edastada arendajatele veateadet"
 
 #: core/song.cpp:428
 msgid "Ogg FLAC"
@@ -5172,7 +5177,7 @@ msgstr "Vali..."
 
 #: core/crashreporting.cpp:198
 msgid "Send report"
-msgstr ""
+msgstr "Saada veateade"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -5222,7 +5227,7 @@ msgstr "Seadista %1 teenus Clementine'is"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:218
 msgid "Set up..."
-msgstr ""
+msgstr "Seadista..."
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "Set value for all selected tracks..."
@@ -5765,7 +5770,7 @@ msgstr "Vormingut uuendatakse alles siis kui kodeerimise konveier alustab tööd
 msgid ""
 "The next time Clementine starts after a crash, ask whether to send a report "
 "so the problem can be fixed. Takes effect when Clementine restarts."
-msgstr ""
+msgstr "Küsi Clementine'i kokkujooksmisjärgsel käivitusel, kas peaks arendajatele vigade parandamiseks veateate saatma. Muudatus jõustub Clementine'i järgmisel käivitusel."
 
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
@@ -5781,7 +5786,7 @@ msgid ""
 "The report says what Clementine was doing when it crashed. It can include "
 "file names and the titles of songs you were playing. You'll be asked again "
 "each time Clementine crashes, and you can turn this off in Preferences."
-msgstr ""
+msgstr "Selles aruandes on kirjas, mida Clementine kokkujooksmisel tegi. Seal võib olla esitatavate failide nimesid ja lugude pealkirju. Igal kokkujooksmisel küsitakse sinult veel kord saatmiskinnitust ja võid selle ka eelistustest välja lülitada."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -6112,6 +6117,10 @@ msgstr "Tundmatu"
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Tundmatu sisutüüp"
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr "Tundmatu seade"
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
@@ -6634,13 +6643,13 @@ msgstr "Sinu veebibrauser peaks nüüd kuvama plex.tv saiti. Kui ta küsib koodi
 msgid ""
 "Your desktop handles Clementine's global shortcuts, so you choose their keys"
 " in its settings."
-msgstr ""
+msgstr "Sinu töölauakeskkond käsitleb Clementine'i üldisi kiirklahve ja seadistustest saad klahvivalikud määratleda."
 
 #: ui/globalshortcutssettingspage.cpp:128
 msgid ""
 "Your desktop handles Clementine's global shortcuts. They're off until you "
 "set them up and choose their keys."
-msgstr ""
+msgstr "Sinu töölauakeskkond käsitleb Clementine'i üldisi kiirklahve. Seni kuni sa pole neid määratlenud ja klahvikombinatsioone valinud, on nad lülitatud välja."
 
 #: library/libraryview.cpp:357
 msgid "Your library is empty!"

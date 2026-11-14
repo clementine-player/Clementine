@@ -106,6 +106,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nTento počítač je %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr "%1 (nepřipojeno)"
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1286,7 +1291,7 @@ msgstr "Procházet…"
 msgid "Buffer duration"
 msgstr "Délka vyrovnávací paměti"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
 
@@ -1388,7 +1393,7 @@ msgstr "Chill-out (jemná hudba)"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte název pro svůj chytrý seznam skladeb"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Vybrat automaticky"
 
@@ -1513,7 +1518,7 @@ msgstr "Clementine se nepodařilo nahrát žádné vizualizace z projectM. Ově�
 msgid ""
 "Clementine crashed last time it was running. Send a crash report to the "
 "developers so they can fix the problem?"
-msgstr ""
+msgstr "Aplikace Clementine při posledním spuštění spadla. Odeslat zprávu o chybě vývojářům, aby mohli problém vyřešit?"
 
 #: widgets/prettyimage.cpp:202
 msgid "Clementine image viewer"
@@ -1526,7 +1531,7 @@ msgstr "Clementine na %1"
 
 #: core/crashreporting.cpp:187
 msgid "Clementine quit unexpectedly"
-msgstr ""
+msgstr "Aplikace Clementine nečekaně skončila"
 
 #: ../bin/src/ui_songinfosettingspage.h:128
 msgid ""
@@ -1989,7 +1994,7 @@ msgstr "Snížit hlasitost"
 msgid "Default background image"
 msgstr "Výchozí obrázek na pozadí"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Výchozí zařízení na %1"
@@ -2198,7 +2203,7 @@ msgstr "Neopakovat"
 
 #: core/crashreporting.cpp:199
 msgid "Don't send"
-msgstr ""
+msgstr "Neposílat"
 
 #: library/libraryview.cpp:438
 msgid "Don't show in various artists"
@@ -4018,7 +4023,7 @@ msgstr "Vypnuto"
 
 #: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Offer to send a crash report after Clementine crashes"
-msgstr ""
+msgstr "Nabídnout odeslání zprávy o chybě po pádu Clementine"
 
 #: core/song.cpp:428
 msgid "Ogg FLAC"
@@ -5181,7 +5186,7 @@ msgstr "Vybrat..."
 
 #: core/crashreporting.cpp:198
 msgid "Send report"
-msgstr ""
+msgstr "Odeslat zprávu"
 
 #. TRANSLATORS: Why Clementine is keeping the computer awake, which
 #. the system shows in its list of what's stopping it from sleeping.
@@ -5774,7 +5779,7 @@ msgstr "Formát se aktualizuje pouze při spuštění roury."
 msgid ""
 "The next time Clementine starts after a crash, ask whether to send a report "
 "so the problem can be fixed. Takes effect when Clementine restarts."
-msgstr ""
+msgstr "Až se příště Clementine spustí po pádu, zeptat se, zda chcete odeslat zprávu, aby mohl být problém vyřešen. Nastavení se projeví při restartu aplikace Clementine."
 
 #: upnp/upnpmediaplayer.cpp:484
 msgid "The renderer couldn't play it"
@@ -5790,7 +5795,7 @@ msgid ""
 "The report says what Clementine was doing when it crashed. It can include "
 "file names and the titles of songs you were playing. You'll be asked again "
 "each time Clementine crashes, and you can turn this off in Preferences."
-msgstr ""
+msgstr "Zpráva uvádí, co aplikace Clementine právě dělala v okamžiku, kdy došlo k pádu. Může obsahovat názvy souborů a názvy skladeb, které jste právě přehrával. Při každém pádu aplikace Clementine se vám tato otázka zobrazí znovu; tuto funkci můžete vypnout v nastavení."
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
@@ -6121,6 +6126,10 @@ msgstr "Neznámý"
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Neznámý typ obsahu"
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr "Neznámé zařízení"
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"

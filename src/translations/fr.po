@@ -142,6 +142,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nAdresse(s) de cet ordinateur %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr ""
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1322,7 +1327,7 @@ msgstr "Parcourir…"
 msgid "Buffer duration"
 msgstr "Durée du tampon"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Mise en mémoire tampon"
 
@@ -1424,7 +1429,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Choisissez un nom pour votre liste de lecture intelligente"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Choisir automatiquement"
 
@@ -2025,7 +2030,7 @@ msgstr "Diminuer le volume"
 msgid "Default background image"
 msgstr "Image d'arrière-plan par défaut"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -6156,6 +6161,10 @@ msgstr "Inconnu"
 
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
+msgstr ""
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
 msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:78

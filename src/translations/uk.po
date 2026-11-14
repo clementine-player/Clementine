@@ -95,6 +95,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nЦей комп'ютер — %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr "%1 (не зʼєднано)"
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1275,7 +1280,7 @@ msgstr "Огляд…"
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1377,7 +1382,7 @@ msgstr "Чілаут"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1978,7 +1983,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -6110,6 +6115,10 @@ msgstr "Невідомо"
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Невідомий content-type"
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr "Невідомий пристрій"
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"

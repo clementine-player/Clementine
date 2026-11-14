@@ -101,6 +101,11 @@ msgid ""
 "This computer is %2"
 msgstr ""
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr ""
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1281,7 +1286,7 @@ msgstr "Explora…"
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "S'emplena la memòria intermèdia"
 
@@ -1383,7 +1388,7 @@ msgstr "Relaxant"
 msgid "Choose a name for your smart playlist"
 msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Tria automàticament"
 
@@ -1984,7 +1989,7 @@ msgstr "Redueix el volum"
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositiu per defecte a %1"
@@ -6116,6 +6121,10 @@ msgstr "Desconegut"
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Tipus de contingut desconegut"
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"

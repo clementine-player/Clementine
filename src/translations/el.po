@@ -117,6 +117,11 @@ msgid ""
 "This computer is %2"
 msgstr "%1\nΗ διεύθυνση αυτού του υπολογιστή είναι %2"
 
+#: ui/playbacksettingspage.cpp:152
+#, qt-format
+msgid "%1 (not connected)"
+msgstr ""
+
 #: widgets/osd.cpp:196
 #, qt-format
 msgid "%1 albums"
@@ -1297,7 +1302,7 @@ msgstr "Αναζήτηση..."
 msgid "Buffer duration"
 msgstr "Διάρκεια της ενδιάμεσης μνήμης"
 
-#: engines/gstengine.cpp:998
+#: engines/gstengine.cpp:1042
 msgid "Buffering"
 msgstr "Φόρτωση"
 
@@ -1399,7 +1404,7 @@ msgstr "Τσιλ άουτ"
 msgid "Choose a name for your smart playlist"
 msgstr "Επιλέξτε ένα όνομα για την έξυπνη λίστα αναπαραγωγής"
 
-#: engines/gstengine.cpp:1019
+#: engines/gstengine.cpp:1063
 msgid "Choose automatically"
 msgstr "Αυτόματη επιλογή"
 
@@ -2000,7 +2005,7 @@ msgstr "Μείωση έντασης"
 msgid "Default background image"
 msgstr "Εξ ορισμού εικόνα παρασκηνίου"
 
-#: engines/gstengine.cpp:1045
+#: engines/gstengine.cpp:1089
 #, qt-format
 msgid "Default device on %1"
 msgstr "Εξ ορισμού συσκευή στο %1"
@@ -6132,6 +6137,10 @@ msgstr "Άγνωστο"
 #: internet/podcasts/podcasturlloader.cpp:204
 msgid "Unknown content-type"
 msgstr "Άγνωστος τύπος περιεχομένου"
+
+#: ui/playbacksettingspage.cpp:149
+msgid "Unknown device"
+msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:78
 msgid "Unknown error"
