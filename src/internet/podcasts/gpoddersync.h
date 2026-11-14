@@ -20,15 +20,12 @@
 #ifndef INTERNET_PODCASTS_GPODDERSYNC_H_
 #define INTERNET_PODCASTS_GPODDERSYNC_H_
 
-#include <ApiRequest.h>
-
 #include <QDateTime>
 #include <QObject>
-#include <QScopedPointer>
 #include <QSet>
-#include <QSharedPointer>
 #include <QUrl>
 
+#include "gpodderclient.h"
 #include "podcastepisode.h"
 
 class Application;
@@ -38,7 +35,6 @@ class PodcastUrlLoader;
 class PodcastUrlLoaderReply;
 
 class QNetworkAccessManager;
-class QNetworkReply;
 class QTimer;
 
 class GPodderSync : public QObject {
@@ -76,28 +72,20 @@ class GPodderSync : public QObject {
 
  private slots:
   void ReloadSettings();
-  void LoginFinished(QNetworkReply* reply, const QString& username,
-                     const QString& password);
-
-  void DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply);
-  void DeviceUpdatesParseError();
-  void DeviceUpdatesRequestError(QNetworkReply::NetworkError error);
+  void DeviceUpdatesFinished(const GPodderClient::DeviceUpdates& updates);
 
   void NewPodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
                         const QUrl& url,
-                        const QList<mygpo::EpisodePtr>& actions);
+                        const QList<GPodderClient::EpisodeAction>& actions);
 
-  void ApplyActions(const QList<mygpo::EpisodePtr>& actions,
+  void ApplyActions(const QList<GPodderClient::EpisodeAction>& actions,
                     PodcastEpisodeList* episodes);
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
   void FlushUpdateQueue();
 
-  void AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
-                         const QList<QUrl>& affected_urls);
-  void AddRemoveParseError();
-  void AddRemoveRequestError(QNetworkReply::NetworkError error);
+  void AddRemoveFinished(const QList<QUrl>& affected_urls);
 
  private:
   void LoadQueue();
@@ -108,7 +96,7 @@ class GPodderSync : public QObject {
  private:
   Application* app_;
   QNetworkAccessManager* network_;
-  QScopedPointer<mygpo::ApiRequest> api_;
+  GPodderClient* client_;
 
   PodcastBackend* backend_;
   PodcastUrlLoader* loader_;

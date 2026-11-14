@@ -48,7 +48,6 @@ include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
-include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
 if (HAVE_VISUALISATIONS)
   find_package(OpenGL REQUIRED)
@@ -326,6 +325,7 @@ set(SOURCES
   internet/podcasts/addpodcastpage.cpp
   internet/podcasts/episodeinfowidget.cpp
   internet/podcasts/fixedopmlpage.cpp
+  internet/podcasts/gpodderclient.cpp
   internet/podcasts/gpoddersearchpage.cpp
   internet/podcasts/gpoddersync.cpp
   internet/podcasts/gpoddertoptagsmodel.cpp
@@ -678,6 +678,7 @@ set(HEADERS
   internet/podcasts/addpodcastpage.h
   internet/podcasts/episodeinfowidget.h
   internet/podcasts/fixedopmlpage.h
+  internet/podcasts/gpodderclient.h
   internet/podcasts/gpoddersearchpage.h
   internet/podcasts/gpoddersync.h
   internet/podcasts/gpoddertoptagsmodel.h
@@ -1380,7 +1381,6 @@ target_link_libraries(clementine_lib
   libclementine-remote
 
   ${TAGLIB_LIBRARIES}
-  ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}

@@ -20,12 +20,11 @@
 #ifndef INTERNET_PODCASTS_GPODDERTOPTAGSPAGE_H_
 #define INTERNET_PODCASTS_GPODDERTOPTAGSPAGE_H_
 
-#include <ApiRequest.h>
-
-#include <QScopedPointer>
+#include <QStringList>
 
 #include "addpodcastpage.h"
 
+class GPodderClient;
 class QNetworkAccessManager;
 
 class GPodderTopTagsPage : public AddPodcastPage {
@@ -41,12 +40,12 @@ class GPodderTopTagsPage : public AddPodcastPage {
   virtual void Show();
 
  private slots:
-  void TagListLoaded(mygpo::TagListPtr tag_list);
-  void TagListFailed(mygpo::TagListPtr tag_list);
+  void TagListLoaded(const QStringList& tags);
+  void TagListFailed();
 
  private:
   QNetworkAccessManager* network_;
-  mygpo::ApiRequest* api_;
+  GPodderClient* client_;
 
   bool done_initial_load_;
 };

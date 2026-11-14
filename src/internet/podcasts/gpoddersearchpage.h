@@ -20,10 +20,10 @@
 #ifndef INTERNET_PODCASTS_GPODDERSEARCHPAGE_H_
 #define INTERNET_PODCASTS_GPODDERSEARCHPAGE_H_
 
-#include <ApiRequest.h>
-
 #include "addpodcastpage.h"
+#include "podcast.h"
 
+class GPodderClient;
 class QNetworkAccessManager;
 
 class Ui_GPodderSearchPage;
@@ -39,14 +39,14 @@ class GPodderSearchPage : public AddPodcastPage {
 
  private slots:
   void SearchClicked();
-  void SearchFinished(mygpo::PodcastListPtr list);
-  void SearchFailed(mygpo::PodcastListPtr list);
+  void SearchFinished(const QList<Podcast>& podcasts);
+  void SearchFailed();
 
  private:
   Ui_GPodderSearchPage* ui_;
 
   QNetworkAccessManager* network_;
-  mygpo::ApiRequest* api_;
+  GPodderClient* client_;
 };
 
 #endif  // INTERNET_PODCASTS_GPODDERSEARCHPAGE_H_
