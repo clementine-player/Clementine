@@ -25,9 +25,12 @@
 #include <QHostAddress>
 #include <QHostInfo>
 #include <QStringList>
+#include <QTcpServer>
+#include <QTcpSocket>
 #include <QTemporaryDir>
 #include <QThread>
 #include <algorithm>
+#include <memory>
 
 #include "core/database.h"
 #include "core/song.h"
@@ -37,6 +40,7 @@
 #include "library/librarybackend.h"
 #include "networkremote/authattemptlimiter.h"
 #include "networkremote/outgoingdatacreator.h"
+#include "networkremote/remoteclient.h"
 #include "networkremote/remotefiles.h"
 #include "networkremote/remotesongloader.h"
 #include "test_utils.h"
@@ -342,6 +346,25 @@ TEST(NetworkRemoteTest, DisconnectMessageIsFramedLikeTheRemote) {
   EXPECT_EQ(cpb::remote::Not_Local_Network,
             msg.response_disconnect().reason_disconnect());
   EXPECT_TRUE(msg.has_version());
+}
+
+// Restarting the remote, as saving its settings does, deletes the servers
+// before the clients they accepted.
+TEST(NetworkRemoteTest, ClientOutlivesTheServerThatAcceptedIt) {
+  std::unique_ptr<QTcpServer> server = std::make_unique<QTcpServer>();
+  ASSERT_TRUE(server->listen(QHostAddress::LocalHost));
+
+  QTcpSocket remote;
+  remote.connectToHost(QHostAddress::LocalHost, server->serverPort());
+  ASSERT_TRUE(server->waitForNewConnection(5000));
+  QTcpSocket* socket = server->nextPendingConnection();
+  ASSERT_NE(nullptr, socket);
+
+  RemoteClient* client = new RemoteClient(nullptr, socket, nullptr);
+  server.reset();
+
+  EXPECT_EQ(QAbstractSocket::ConnectedState, client->State());
+  delete client;
 }
 
 // A song that isn't valid (one whose file can't be read, say) is sent as the

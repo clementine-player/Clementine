@@ -36,6 +36,11 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client,
       song_sender_(new SongSender(app, this)) {
   reading_protobuf_ = false;
 
+  // The socket arrives as a child of the QTcpServer that accepted it, which
+  // would delete it along with the server, such as when the remote's settings
+  // are reloaded, while this still uses it. This deletes it instead.
+  client_->setParent(nullptr);
+
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
   connect(client, SIGNAL(disconnected()), this, SLOT(SocketDisconnected()));
