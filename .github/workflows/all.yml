@@ -1274,7 +1274,7 @@ jobs:
       run:
         shell: msys2 {0}
     env:
-      SENTRY_NATIVE_VERSION: 0.17.1
+      SENTRY_NATIVE_VERSION: 0.17.6
       # A Windows path: actions/cache runs outside the MSYS2 shell, and the
       # clang64 ccache is a native Win32 binary, so both understand this one.
       # Under the workspace rather than runner.temp, because the runner
@@ -2516,7 +2516,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      SENTRY_NATIVE_VERSION: 0.17.1
+      SENTRY_NATIVE_VERSION: 0.17.6
       # Under the workspace rather than runner.temp, because the runner
       # context isn't available at job level. Nothing in this job packages
       # the workspace root - the DMG is built from bin/clementine.app.
