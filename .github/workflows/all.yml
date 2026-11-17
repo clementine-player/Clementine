@@ -1863,7 +1863,7 @@ jobs:
       # Only builds that are published, dev pre-releases from master and
       # releases, have debug info and send it to Sentry, so pull requests
       # build as quickly as before.
-      DEBUG_SYMBOLS: &debug_symbols ${{ inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'pull_request' }}
+      DEBUG_SYMBOLS: &debug_symbols ${{ inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master') }}
     steps:
       - name: Install dependencies
         run: |
