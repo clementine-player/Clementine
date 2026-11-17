@@ -1,0 +1,28 @@
+// 1 is CREATEPROCESS_MANIFEST_RESOURCE_ID, 24 is RT_MANIFEST.
+1 24 "clementine.manifest"
+// Release builds are code signed, and the signing service only signs files
+// whose product name and version are set - see dist/windows/signpath.
+1 VERSIONINFO
+FILEVERSION     ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},0,0
+PRODUCTVERSION  ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904E4"
+    BEGIN
+      VALUE "CompanyName", "Clementine"
+      VALUE "FileDescription", "Clementine tag reader"
+      VALUE "FileVersion", "${CLEMENTINE_VERSION_DISPLAY}"
+      VALUE "InternalName", "clementine-tagreader"
+      VALUE "LegalCopyright", "David Sansome"
+      VALUE "OriginalFilename", "clementine-tagreader.exe"
+      VALUE "ProductName", "Clementine"
+      VALUE "ProductVersion", "${CLEMENTINE_VERSION_DISPLAY}"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1252
+  END
+END
