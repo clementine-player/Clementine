@@ -18,6 +18,13 @@ on:
 # tool and the smoke tests warn that Qt is switching to C.UTF-8.
 env:
   LANG: C.UTF-8
+  # Crash reporting, in the macOS, Windows and deb builds: the sentry-native
+  # they're built with, and where their reports go, Clementine's Sentry
+  # project. A DSN only lets you send events, so it isn't secret. Builds made
+  # elsewhere leave it empty, the default, so they never send reports to a
+  # project that has none of their symbols.
+  SENTRY_NATIVE_VERSION: 0.17.6
+  SENTRY_DSN: https://655f8ef3c58fb344dd15e72df0d50f95@o4512210144526336.ingest.de.sentry.io/4512210147606608
 
 # Pushing again to a pull request makes the run in progress pointless, so
 # stop it. Runs on master are left alone - each one produces the release
@@ -1283,7 +1290,6 @@ jobs:
       run:
         shell: msys2 {0}
     env:
-      SENTRY_NATIVE_VERSION: 0.17.6
       # A Windows path: actions/cache runs outside the MSYS2 shell, and the
       # clang64 ccache is a native Win32 binary, so both understand this one.
       # Under the workspace rather than runner.temp, because the runner
@@ -1463,9 +1469,12 @@ jobs:
             -DCMAKE_CXX_FLAGS="-gline-tables-only -gcodeview" \
             -DCMAKE_EXE_LINKER_FLAGS=-Wl,--pdb= \
             -DENABLE_SENTRY=ON \
-            -Dsentry_DIR="$(cygpath -m "$RUNNER_TEMP")/sentry-native/lib/cmake/sentry"
-          # optional_component turns Sentry off quietly if it can't find it.
+            -Dsentry_DIR="$(cygpath -m "$RUNNER_TEMP")/sentry-native/lib/cmake/sentry" \
+            -DSENTRY_DSN="$SENTRY_DSN"
+          # optional_component turns Sentry off quietly if it can't find it,
+          # and without a DSN it's built in but never starts.
           grep -q '^#define HAVE_SENTRY' include/clementine-config.h
+          grep -q '^#define CLEMENTINE_SENTRY_DSN "https://' include/clementine-config.h
 
       - name: build
         working-directory: bin
@@ -1879,6 +1888,7 @@ jobs:
             libasound2-dev
             libboost-dev
             libcdio-dev
+            libcurl4-openssl-dev
             libchromaprint-dev
             libcrypto++-dev
             libdbus-1-dev
@@ -1909,6 +1919,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zlib1g-dev
             zstd
           "
           # The archives sometimes rotate a package out between the index
@@ -1942,13 +1953,61 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
+      # Crash reporting: sentry-native with its Crashpad backend, built
+      # static as for macOS and Windows, and cached per version, distribution
+      # and architecture. The deb installs crashpad_handler in
+      # /usr/libexec/clementine. The other deb jobs reuse these steps.
+      - &deb_sentry_restore
+        name: Restore sentry-native
+        id: sentry_cache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /opt/sentry-native
+          key: sentry-native-${{ env.SENTRY_NATIVE_VERSION }}-${{ github.job }}-${{ runner.arch }}
+      - &deb_sentry_build
+        name: Build sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        run: |
+          set -e
+          git clone -q --depth 1 --branch "$SENTRY_NATIVE_VERSION" \
+            --recurse-submodules --shallow-submodules \
+            https://github.com/getsentry/sentry-native.git /tmp/sentry-src
+          # Not through ccache: it's built once per version and cached.
+          env -u CMAKE_C_COMPILER_LAUNCHER -u CMAKE_CXX_COMPILER_LAUNCHER \
+            cmake -S /tmp/sentry-src -B /tmp/sentry-build \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_INSTALL_PREFIX=/opt/sentry-native \
+            -DSENTRY_BACKEND=crashpad \
+            -DSENTRY_BUILD_SHARED_LIBS=OFF \
+            -DSENTRY_BUILD_TESTS=OFF \
+            -DSENTRY_BUILD_EXAMPLES=OFF
+          cmake --build /tmp/sentry-build --parallel "$(nproc)"
+          cmake --install /tmp/sentry-build
+      - &deb_sentry_save
+        name: Save sentry-native
+        if: steps.sentry_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /opt/sentry-native
+          key: ${{ steps.sentry_cache.outputs.cache-primary-key }}
       - name: cmake
         working-directory: bin
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=bookworm
+          -DENABLE_SENTRY=ON
+          -Dsentry_DIR=/opt/sentry-native/lib/cmake/sentry
+          "-DSENTRY_DSN=$SENTRY_DSN"
           ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
+      # optional_component turns Sentry off quietly if it can't find it,
+      # and without a DSN it's built in but never starts.
+      - &deb_sentry_check
+        name: Check crash reporting is built in
+        working-directory: bin
+        run: |
+          grep -q '^#define HAVE_SENTRY' include/clementine-config.h
+          grep -q '^#define CLEMENTINE_SENTRY_DSN "https://' include/clementine-config.h
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1985,6 +2044,27 @@ jobs:
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
 
+      # --crash crashes on purpose once the window is up. Crashpad's handler,
+      # found from the installed executable, should write a minidump, kept
+      # for asking the user about on the next start. Nothing is sent.
+      - &deb_crash_test
+        name: Smoke test - crash report
+        timeout-minutes: 5
+        shell: bash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          reports="$HOME/.config/Clementine/crashreports"
+          if clementine --crash; then
+            echo "::error::clementine --crash didn't crash"
+            exit 1
+          fi
+          if ! find "$reports" -name '*.dmp' | grep .; then
+            echo "::error::No minidump in $reports"
+            ls -laR "$reports" || true
+            exit 1
+          fi
+
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
@@ -2011,7 +2091,11 @@ jobs:
           mkdir -p "$deb" symbols
           dpkg-deb -x bin/clementine_*.deb "$deb"
           dpkg-deb -x ../clementine-dbgsym_*deb "$deb"
-          binaries=("$deb/usr/bin/clementine" "$deb/usr/bin/clementine-tagreader")
+          binaries=(
+            "$deb/usr/bin/clementine"
+            "$deb/usr/bin/clementine-tagreader"
+            "$deb/usr/libexec/clementine/crashpad_handler"
+          )
           cp -r "$deb/usr/lib/debug" "${binaries[@]}" symbols/
           uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
       - &deb_symbols_artifact
@@ -2095,6 +2179,7 @@ jobs:
             libasound2-dev
             libboost-dev
             libcdio-dev
+            libcurl4-openssl-dev
             libchromaprint-dev
             libcrypto++-dev
             libdbus-1-dev
@@ -2125,6 +2210,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zlib1g-dev
             zstd
           "
           # The archives sometimes rotate a package out between the index
@@ -2158,13 +2244,21 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
+      # Crash reporting, as in build_bookworm_64.
+      - *deb_sentry_restore
+      - *deb_sentry_build
+      - *deb_sentry_save
       - name: cmake
         working-directory: bin
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=trixie
+          -DENABLE_SENTRY=ON
+          -Dsentry_DIR=/opt/sentry-native/lib/cmake/sentry
+          "-DSENTRY_DSN=$SENTRY_DSN"
           ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
+      - *deb_sentry_check
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2191,6 +2285,8 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
+      - *deb_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
@@ -2273,6 +2369,7 @@ jobs:
             libboost-serialization-dev
             libcdio-cdda2
             libcdio-dev
+            libcurl4-openssl-dev
             libchromaprint-dev
             libcrypto++-dev
             libdbus-1-dev
@@ -2303,6 +2400,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zlib1g-dev
             zstd
           "
           # The archives sometimes rotate a package out between the index
@@ -2336,13 +2434,21 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
+      # Crash reporting, as in build_bookworm_64.
+      - *deb_sentry_restore
+      - *deb_sentry_build
+      - *deb_sentry_save
       - name: cmake
         working-directory: bin
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=jammy
+          -DENABLE_SENTRY=ON
+          -Dsentry_DIR=/opt/sentry-native/lib/cmake/sentry
+          "-DSENTRY_DSN=$SENTRY_DSN"
           ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
+      - *deb_sentry_check
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2369,6 +2475,8 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
+      - *deb_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
@@ -2451,6 +2559,7 @@ jobs:
             libboost-serialization-dev
             libcdio-cdda2
             libcdio-dev
+            libcurl4-openssl-dev
             libchromaprint-dev
             libcrypto++-dev
             libdbus-1-dev
@@ -2481,6 +2590,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zlib1g-dev
             zstd
           "
           # The archives sometimes rotate a package out between the index
@@ -2514,13 +2624,21 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
+      # Crash reporting, as in build_bookworm_64.
+      - *deb_sentry_restore
+      - *deb_sentry_build
+      - *deb_sentry_save
       - name: cmake
         working-directory: bin
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=noble
+          -DENABLE_SENTRY=ON
+          -Dsentry_DIR=/opt/sentry-native/lib/cmake/sentry
+          "-DSENTRY_DSN=$SENTRY_DSN"
           ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
+      - *deb_sentry_check
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2547,6 +2665,8 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
+      - *deb_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
@@ -2629,6 +2749,7 @@ jobs:
             libboost-serialization-dev
             libcdio-cdda2
             libcdio-dev
+            libcurl4-openssl-dev
             libchromaprint-dev
             libcrypto++-dev
             libdbus-1-dev
@@ -2659,6 +2780,7 @@ jobs:
             qt6-tools-dev
             qt6-tools-dev-tools
             ssh
+            zlib1g-dev
             zstd
           "
           # The archives sometimes rotate a package out between the index
@@ -2692,13 +2814,21 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
+      # Crash reporting, as in build_bookworm_64.
+      - *deb_sentry_restore
+      - *deb_sentry_build
+      - *deb_sentry_save
       - name: cmake
         working-directory: bin
         run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=resolute
+          -DENABLE_SENTRY=ON
+          -Dsentry_DIR=/opt/sentry-native/lib/cmake/sentry
+          "-DSENTRY_DSN=$SENTRY_DSN"
           ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
+      - *deb_sentry_check
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2725,6 +2855,8 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.mp3
+
+      - *deb_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
@@ -2770,7 +2902,6 @@ jobs:
       id-token: write
       contents: read
     env:
-      SENTRY_NATIVE_VERSION: 0.17.6
       # Under the workspace rather than runner.temp, because the runner
       # context isn't available at job level. Nothing in this job packages
       # the workspace root - the DMG is built from bin/clementine.app.
@@ -2939,6 +3070,7 @@ jobs:
             -DENABLE_LIBGPOD=OFF \
             -DENABLE_SENTRY=ON \
             -Dsentry_DIR="$RUNNER_TEMP/sentry-native/lib/cmake/sentry" \
+            -DSENTRY_DSN="$SENTRY_DSN" \
             -DCMAKE_PREFIX_PATH="${BREW_PREFIX}/opt/qt" \
             -DCMAKE_FRAMEWORK_PATH="$RUNNER_TEMP/sparkle" \
             -DGETTEXT_MSGMERGE_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/msgmerge" \
@@ -2946,8 +3078,10 @@ jobs:
             -DGETTEXT_XGETTEXT_EXECUTABLE="${BREW_PREFIX}/opt/gettext/bin/xgettext" \
             ${APPLE_DEVELOPER_ID:+-DAPPLE_DEVELOPER_ID="$APPLE_DEVELOPER_ID"} \
             ${APPLE_NOTARIZE_API_KEY_PATH:+-DAPPLE_NOTARIZE_API_KEY_PATH="$APPLE_NOTARIZE_API_KEY_PATH"}
-          # optional_component turns Sentry off quietly if it can't find it.
+          # optional_component turns Sentry off quietly if it can't find it,
+          # and without a DSN it's built in but never starts.
           grep -q '^#define HAVE_SENTRY' include/clementine-config.h
+          grep -q '^#define CLEMENTINE_SENTRY_DSN "https://' include/clementine-config.h
       # Explicit, and parallel: `make install` builds everything it hasn't
       # already as a side effect, and with no -j it did so one file at a
       # time - 33 minutes of compiling inside a step named after copying
