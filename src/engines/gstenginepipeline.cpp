@@ -160,10 +160,12 @@ void GstEnginePipeline::set_sample_rate(int rate) { sample_rate_ = rate; }
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
 
-  // Destroy the old elements if they are set
-  // Note that the caller to this function MUST schedule the old uridecodebin_
-  // for deletion in the main thread.
+  // Take the old decode bin out of the pipeline.  Removing it drops the
+  // pipeline's reference, which is usually the last one, so keep one for the
+  // caller: it MUST hand the old uridecodebin_ to sElementDeleter, which stops
+  // it in the main thread and then drops that reference.
   if (uridecodebin_) {
+    gst_object_ref(uridecodebin_);
     gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
   }
 
@@ -1153,6 +1155,10 @@ void GstEnginePipeline::TransitionToNext() {
   // song hasn't finished playing yet.  We'll get a new stream when it really
   // does finish, so emit TrackEnded then.
   emit_track_ended_on_stream_start_ = true;
+
+  // The old bin can still be streaming until the deleter stops it, and the
+  // deleter can outlive this pipeline, so its signals mustn't call back here.
+  g_signal_handlers_disconnect_by_data(old_decode_bin, this);
 
   // This has to happen *after* the gst_element_set_state on the new bin to
   // fix an occasional race condition deadlock.

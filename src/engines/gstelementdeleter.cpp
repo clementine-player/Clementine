@@ -28,4 +28,5 @@ void GstElementDeleter::DeleteElementLater(GstElement* element) {
 
 void GstElementDeleter::DeleteElement(GstElement* element) {
   gst_element_set_state(element, GST_STATE_NULL);
+  gst_object_unref(element);
 }
