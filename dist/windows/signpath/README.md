@@ -71,6 +71,12 @@ On GitHub, in the repository's Settings, Secrets and variables, Actions:
 - Variable `SIGNPATH_ORGANIZATION_ID`: the organization's ID, from its
   settings. Nothing is signed until this is set.
 
+To check the setup, open a pull request from a branch in this repository.
+Its run signs with `test-signing`: the "Sign the Windows binaries" and "Sign
+the Windows installer" jobs should each finish in a few minutes, and the
+`release_mingw` artifact holds an installer signed with SignPath's test
+certificate (Windows shows the signature but doesn't trust it).
+
 ## Approving a release
 
 Each release makes two signing requests, which SignPath emails the approvers
