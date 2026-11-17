@@ -38,7 +38,9 @@ GPodDevice::GPodDevice(const QUrl& url, DeviceLister* lister,
                       first_time),
       loader_thread_(new QThread(this)),
       loader_(nullptr),
-      db_(nullptr) {}
+      db_(nullptr) {
+  loader_thread_->setObjectName("iPod loader");
+}
 
 bool GPodDevice::Init() {
   InitBackendDirectory(url_.path(), first_time_);

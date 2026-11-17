@@ -46,6 +46,7 @@
 #include <QSurfaceFormat>
 #include <QSysInfo>
 #include <QTextCodec>
+#include <QThreadPool>
 #include <QTimer>
 #include <QTranslator>
 #include <QtConcurrentRun>
@@ -357,6 +358,13 @@ int main(int argc, char* argv[]) {
   // This must go before QApplication initialisation.
   mac::MacMain();
 #endif
+
+  // Name the threads crash reports show.  On Linux the main thread already
+  // carries the program's name, which tools like pkill and top look for.
+#ifndef Q_OS_LINUX
+  Utilities::SetCurrentThreadName("Main");
+#endif
+  QThreadPool::globalInstance()->setObjectName("Global pool");
 
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);

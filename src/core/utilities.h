@@ -159,6 +159,11 @@ enum {
 static const int IOPRIO_CLASS_SHIFT = 13;
 
 int SetThreadIOPriority(IoPriority priority);
+
+// Names the calling thread, as debuggers and crash reports show it.  Threads
+// that QThread starts already take their objectName(), so this is for threads
+// Qt didn't start, such as the main thread.
+void SetCurrentThreadName(const QString& name);
 int GetThreadId();
 
 // Returns true if this machine has a battery.

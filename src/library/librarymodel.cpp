@@ -93,6 +93,7 @@ LibraryModel::LibraryModel(std::shared_ptr<LibraryBackend> backend,
       use_pretty_covers_(false),
       show_dividers_(true) {
   root_->lazy_loaded = true;
+  thread_pool_.setObjectName("Library query");
 
   group_by_[0] = GroupBy_AlbumArtist;
   group_by_[1] = GroupBy_Album;

@@ -40,6 +40,8 @@ DeviceLister::~DeviceLister() {
 
 void DeviceLister::Start() {
   thread_ = new QThread;
+  // Named after the subclass, such as Udisks2Lister.
+  thread_->setObjectName(metaObject()->className());
   connect(thread_, SIGNAL(started()), SLOT(ThreadStarted()));
 
   moveToThread(thread_);

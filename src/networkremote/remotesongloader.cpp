@@ -26,6 +26,7 @@ RemoteSongLoader::RemoteSongLoader(LibraryBackendInterface* library,
                                    const Player* player)
     : library_(library), player_(player) {
   pool_.setMaxThreadCount(1);
+  pool_.setObjectName("Remote loader");
 }
 
 RemoteSongLoader::~RemoteSongLoader() { pool_.waitForDone(); }
