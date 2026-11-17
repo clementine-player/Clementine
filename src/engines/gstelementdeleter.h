@@ -28,9 +28,11 @@ class GstElementDeleter : public QObject {
  public:
   GstElementDeleter(QObject* parent = nullptr);
 
-  // If you call this function with any gstreamer element, the element will get
-  // deleted in the main thread.  This is useful if you need to delete an
-  // element from its own callback.
+  // Stops element (sets it to the NULL state) in the main thread, then drops
+  // the reference to it that the caller passes in.  This is useful if you need
+  // to delete an element from its own callback.  The caller must own the
+  // reference it passes: an element taken out of a bin needs a reference of
+  // its own first, or the bin frees it as it's removed.
   // It's in a separate object so *your* object (GstEnginePipeline) can be
   // destroyed, and the element that you scheduled for deletion is still
   // deleted later regardless.
