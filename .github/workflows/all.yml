@@ -1683,6 +1683,10 @@ jobs:
       # dpkg-buildpackage and rpmbuild start themselves.
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # Only builds that are published, dev pre-releases from master and
+      # releases, have debug info and send it to Sentry, so pull requests
+      # build as quickly as before.
+      DEBUG_SYMBOLS: &debug_symbols ${{ inputs.release || (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'pull_request' }}
     steps:
       - name: Install dependencies
         run: |
@@ -1767,6 +1771,7 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=bookworm
+          ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1807,6 +1812,46 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      # For crash reports, which need these to name functions and lines:
+      # the deb's stripped executables, and the debug files dh_strip put
+      # in the clementine-dbgsym package (a .ddeb on Ubuntu) next to the
+      # checkout, matched by build ID. -g1 above keeps them to function
+      # names and line tables. Only in published builds: see DEBUG_SYMBOLS.
+      # The other deb jobs reuse these steps through their anchors.
+      - &deb_symbols_setup_uv
+        uses: astral-sh/setup-uv@v10.3.3
+        if: env.DEBUG_SYMBOLS == 'true'
+        timeout-minutes: 5
+      - &deb_symbols_check
+        name: Check debug symbols
+        if: env.DEBUG_SYMBOLS == 'true'
+        timeout-minutes: 5
+        # The containers' default shell is sh, without arrays.
+        shell: bash
+        run: |
+          set -e
+          deb="$RUNNER_TEMP/deb"
+          mkdir -p "$deb" symbols
+          dpkg-deb -x bin/clementine_*.deb "$deb"
+          dpkg-deb -x ../clementine-dbgsym_*deb "$deb"
+          binaries=("$deb/usr/bin/clementine" "$deb/usr/bin/clementine-tagreader")
+          cp -r "$deb/usr/lib/debug" "${binaries[@]}" symbols/
+          uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
+      - &deb_symbols_artifact
+        uses: actions/upload-artifact@v7.0.2
+        if: env.DEBUG_SYMBOLS == 'true'
+        with:
+          name: symbols-${{ matrix.artifact }}
+          path: symbols/
+      - &deb_symbols_upload
+        name: Upload debug symbols to Sentry
+        timeout-minutes: 30
+        if: env.DEBUG_SYMBOLS == 'true'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -1856,6 +1901,8 @@ jobs:
       # dpkg-buildpackage and rpmbuild start themselves.
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # As in build_bookworm_64.
+      DEBUG_SYMBOLS: *debug_symbols
     steps:
       - name: Install dependencies
         run: |
@@ -1940,6 +1987,7 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=trixie
+          ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -1971,6 +2019,11 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      # Debug symbols for Sentry, as in build_bookworm_64.
+      - *deb_symbols_setup_uv
+      - *deb_symbols_check
+      - *deb_symbols_artifact
+      - *deb_symbols_upload
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -2020,6 +2073,8 @@ jobs:
       # dpkg-buildpackage and rpmbuild start themselves.
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # As in build_bookworm_64.
+      DEBUG_SYMBOLS: *debug_symbols
     steps:
       - name: Install dependencies
         env:
@@ -2110,6 +2165,7 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=jammy
+          ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2141,6 +2197,11 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      # Debug symbols for Sentry, as in build_bookworm_64.
+      - *deb_symbols_setup_uv
+      - *deb_symbols_check
+      - *deb_symbols_artifact
+      - *deb_symbols_upload
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -2190,6 +2251,8 @@ jobs:
       # dpkg-buildpackage and rpmbuild start themselves.
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # As in build_bookworm_64.
+      DEBUG_SYMBOLS: *debug_symbols
     steps:
       - name: Install dependencies
         env:
@@ -2280,6 +2343,7 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=noble
+          ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2311,6 +2375,11 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      # Debug symbols for Sentry, as in build_bookworm_64.
+      - *deb_symbols_setup_uv
+      - *deb_symbols_check
+      - *deb_symbols_artifact
+      - *deb_symbols_upload
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -2360,6 +2429,8 @@ jobs:
       # dpkg-buildpackage and rpmbuild start themselves.
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
+      # As in build_bookworm_64.
+      DEBUG_SYMBOLS: *debug_symbols
     steps:
       - name: Install dependencies
         env:
@@ -2450,6 +2521,7 @@ jobs:
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_DIST=resolute
+          ${{ env.DEBUG_SYMBOLS == 'true' && '-DCMAKE_C_FLAGS=-g1 -DCMAKE_CXX_FLAGS=-g1' || '' }}
       - name: make
         working-directory: bin
         run : make -j2 deb
@@ -2481,6 +2553,11 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: bin/clementine_*.deb
+      # Debug symbols for Sentry, as in build_bookworm_64.
+      - *deb_symbols_setup_uv
+      - *deb_symbols_check
+      - *deb_symbols_artifact
+      - *deb_symbols_upload
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,

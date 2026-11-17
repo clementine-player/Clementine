@@ -4,7 +4,9 @@
 Crash reports from the macOS and Windows builds (see src/core/crashreporting.h)
 are minidumps: addresses, not function names. Sentry turns them into names and
 lines with debug files matched by debug ID: a dSYM for each Mach-O executable,
-a PDB for each .exe. all.yml collects them into a directory for each build.
+a PDB for each .exe, and for each ELF executable in a Debian or Ubuntu package
+the debug file from its -dbgsym package, ready for when the Linux builds send
+crash reports too. all.yml collects them into a directory for each build.
 
 Usage:
 
