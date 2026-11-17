@@ -16,6 +16,7 @@ workflows:
         - 'google-github-actions/setup-gcloud@v3.0.1'
         - 'msys2/setup-msys2@v2.33.0'
         - 'ruby/setup-ruby@v1.338.0'
+        - 'signpath/github-action-submit-signing-request@v3.0'
         - 'softprops/action-gh-release@v3.0.4'
         - 'supplypike/setup-bin@v5'
     '.github/workflows/distro-watch.yml':
@@ -99,6 +100,11 @@ dependencies:
         commit: 'sha1-b3aaceaef7e0ee231b499e7b5f49c03fc1d32199'
         owner_id: 210414
         repo_id: 231208785
+    'signpath/github-action-submit-signing-request@v3.0':
+        ref: 'v3.0'
+        commit: 'sha1-f6d04783b4569d051e0c80105fe66e82819d0092'
+        owner_id: 34448643
+        repo_id: 784627273
     'softprops/action-gh-release@v3.0.4':
         ref: 'v3.0.4'
         commit: 'sha1-8a0cd651e5b2365bd640854a3fa5dfc70e4875f3'

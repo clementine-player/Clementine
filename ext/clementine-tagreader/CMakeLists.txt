@@ -18,8 +18,10 @@ qt6_wrap_cpp(MOC ${HEADERS})
 qt6_add_resources(QRC data/data.qrc)
 
 if(WIN32)
+  configure_file(${CMAKE_SOURCE_DIR}/dist/windows/clementine-tagreader.rc.in
+                 ${CMAKE_CURRENT_BINARY_DIR}/clementine-tagreader.rc)
   set(TAGREADER-WIN32-RESOURCES
-      ${CMAKE_SOURCE_DIR}/dist/windows/clementine-tagreader.rc)
+      ${CMAKE_CURRENT_BINARY_DIR}/clementine-tagreader.rc)
 endif(WIN32)
 
 add_executable(clementine-tagreader
