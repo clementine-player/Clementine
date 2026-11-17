@@ -39,6 +39,7 @@ MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
                       first_time),
       loader_thread_(new QThread(this)),
       loader_(nullptr) {
+  loader_thread_->setObjectName("MTP loader");
   if (!sInitialisedLibMTP) {
     LIBMTP_Init();
     sInitialisedLibMTP = true;

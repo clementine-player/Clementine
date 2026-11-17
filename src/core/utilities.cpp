@@ -62,6 +62,7 @@
 #endif
 
 #if defined(Q_OS_UNIX)
+#include <pthread.h>
 #include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
 #include <windows.h>
@@ -714,6 +715,20 @@ int SetThreadIOPriority(IoPriority priority) {
                      priority == IOPRIO_CLASS_IDLE ? PRIO_DARWIN_BG : 0);
 #else
   return 0;
+#endif
+}
+
+void SetCurrentThreadName(const QString& name) {
+#ifdef Q_OS_LINUX
+  // Linux allows 15 bytes, and fails rather than truncating.
+  pthread_setname_np(pthread_self(), name.toUtf8().left(15).constData());
+#elif defined(Q_OS_DARWIN)
+  pthread_setname_np(name.toUtf8().constData());
+#elif defined(Q_OS_WIN32)
+  SetThreadDescription(GetCurrentThread(),
+                       reinterpret_cast<const wchar_t*>(name.utf16()));
+#else
+  Q_UNUSED(name);
 #endif
 }
 

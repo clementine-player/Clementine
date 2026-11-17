@@ -126,6 +126,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   // one thread, the PLAYING after buffering could run before the PAUSED that
   // started it, and leave the pipeline paused.
   set_state_threadpool_.setMaxThreadCount(1);
+  set_state_threadpool_.setObjectName("GStreamer state");
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
@@ -666,22 +667,35 @@ void GstEnginePipeline::StreamStatusMessageReceived(GstMessage* msg) {
     const GValue* val = gst_message_get_stream_status_object(msg);
     if (G_VALUE_TYPE(val) == GST_TYPE_TASK) {
       GstTask* task = static_cast<GstTask*>(g_value_get_object(val));
+
+      // A task names its thread after itself when it starts, so crash reports
+      // can tell which element's streaming thread is which.  GStreamer names
+      // a pad's task like this from its own enter callback, but on macOS ours
+      // replaces it.
+      GstObject* src = GST_MESSAGE_SRC(msg);
+      gchar* name = GST_IS_PAD(src)
+                        ? g_strdup_printf("%s:%s", GST_DEBUG_PAD_NAME(src))
+                        : g_strdup(GST_OBJECT_NAME(src));
+      gst_object_set_name(GST_OBJECT(task), name);
+      g_free(name);
+
+#ifdef Q_OS_DARWIN
       gst_task_set_enter_callback(task, &TaskEnterCallback, this, NULL);
+#endif
     }
   }
 }
 
-void GstEnginePipeline::TaskEnterCallback(GstTask*, GThread*, gpointer) {
-  // Bump the priority of the thread only on OS X
-
 #ifdef Q_OS_DARWIN
+void GstEnginePipeline::TaskEnterCallback(GstTask*, GThread*, gpointer) {
+  // Bump the priority of streaming threads on macOS.
   sched_param param;
   memset(&param, 0, sizeof(param));
 
   param.sched_priority = 99;
   pthread_setschedparam(pthread_self(), SCHED_RR, &param);
-#endif
 }
+#endif
 
 void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
   const GstStructure* structure = gst_message_get_structure(msg);

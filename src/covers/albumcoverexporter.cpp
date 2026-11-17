@@ -34,6 +34,7 @@ AlbumCoverExporter::AlbumCoverExporter(QObject* parent)
       skipped_(0),
       all_(0) {
   thread_pool_->setMaxThreadCount(kMaxConcurrentRequests);
+  thread_pool_->setObjectName("Cover exporter");
 }
 
 void AlbumCoverExporter::SetDialogResult(

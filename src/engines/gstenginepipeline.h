@@ -140,7 +140,9 @@ class GstEnginePipeline : public GstPipelineBase {
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
                                   gpointer);
+#ifdef Q_OS_DARWIN
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);
+#endif
 
   static QByteArray GstUriFromUrl(const QUrl& url);
 

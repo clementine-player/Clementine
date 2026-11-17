@@ -259,8 +259,10 @@ Application::~Application() {
 
 void Application::MoveToNewThread(QObject* object) {
   QThread* thread = new QThread(this);
-  if (!object->objectName().isEmpty())
-    thread->setObjectName(object->objectName() + " thread");
+  const QString name = object->objectName().isEmpty()
+                           ? object->metaObject()->className()
+                           : object->objectName();
+  thread->setObjectName(name + " thread");
 
   MoveToThread(object, thread);
 

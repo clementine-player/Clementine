@@ -74,6 +74,7 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
       not_connected_overlay_(
           IconLoader::Load("edit-delete", IconLoader::Base)) {
   thread_pool_.setMaxThreadCount(1);
+  thread_pool_.setObjectName("Device manager");
   connect(app_->task_manager(), SIGNAL(TasksChanged()), SLOT(TasksChanged()));
 
   // Create the backend in the database thread

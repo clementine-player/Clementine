@@ -36,6 +36,7 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
                       first_time),
       watcher_(new LibraryWatcher),
       watcher_thread_(new QThread(this)) {
+  watcher_thread_->setObjectName("Device watcher");
   watcher_->moveToThread(watcher_thread_);
   watcher_thread_->start(QThread::IdlePriority);
 

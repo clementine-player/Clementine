@@ -73,6 +73,7 @@ void Organise::Start() {
   task_manager_->SetTaskBlocksLibraryScans(task_id_);
 
   thread_ = new QThread;
+  thread_->setObjectName("Organise files");
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
   connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
           SLOT(FileTranscoded(QUrl, QString, bool)));

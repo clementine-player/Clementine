@@ -43,6 +43,7 @@ MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
       kMaxActiveRequests(qMax(1, QThread::idealThreadCount() / 2)),
       save_alongside_originals_(false),
       disable_moodbar_calculation_(false) {
+  thread_->setObjectName("Moodbar loader");
   cache_->setCacheDirectory(
       Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
   cache_->setMaximumCacheSize(60 * 1024 *

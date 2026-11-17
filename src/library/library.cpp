@@ -153,6 +153,7 @@ Library::~Library() {
 void Library::Init() {
   watcher_ = new LibraryWatcher;
   watcher_thread_ = new Thread(this);
+  watcher_thread_->setObjectName("Library watcher");
   watcher_thread_->SetIoPriority(Utilities::IOPRIO_CLASS_IDLE);
 
   watcher_->moveToThread(watcher_thread_);
