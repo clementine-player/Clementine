@@ -225,12 +225,11 @@ find_package(sentry CONFIG QUIET)
 optional_component(SENTRY OFF "Crash reporting (Sentry)"
   DEPENDS "sentry-native" sentry_FOUND
 )
-# Where crash reports go: Clementine's Sentry project. A DSN only lets you send
-# events, so it isn't secret. Set it to empty to build with ENABLE_SENTRY but
-# never start crash reporting.
-set(SENTRY_DSN
-    "https://655f8ef3c58fb344dd15e72df0d50f95@o4512210144526336.ingest.de.sentry.io/4512210147606608"
-    CACHE STRING "Sentry DSN that crash reports are sent to")
+# Where crash reports go. Empty, the default, builds crash reporting in but
+# never starts it, so builds made by anyone else don't send reports to a
+# project that has none of their symbols. Clementine's own packages set it to
+# Clementine's Sentry project (see SENTRY_DSN in .github/workflows/all.yml).
+set(SENTRY_DSN "" CACHE STRING "Sentry DSN that crash reports are sent to")
 if(HAVE_SENTRY)
   # Installed alongside sentry-native by its Crashpad backend.
   find_program(SENTRY_CRASHPAD_HANDLER crashpad_handler
@@ -245,6 +244,11 @@ if(HAVE_SENTRY)
     set(CRASHPAD_HANDLER_INSTALL_DIR "${CMAKE_INSTALL_LIBEXECDIR}/clementine")
     set(INSTALLED_CRASHPAD_HANDLER
       "${CMAKE_INSTALL_FULL_LIBEXECDIR}/clementine/crashpad_handler")
+    # The same, from the executable: packages that install into a staging
+    # directory rather than with DESTDIR (debian/rules) have a prefix that
+    # only exists while they're built.
+    file(RELATIVE_PATH RELATIVE_CRASHPAD_HANDLER
+      "${CMAKE_INSTALL_FULL_BINDIR}" "${INSTALLED_CRASHPAD_HANDLER}")
   endif()
 endif()
 
