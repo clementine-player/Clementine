@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Checks and uploads the debug symbols Sentry needs for Clementine's crashes.
 
-Crash reports from the macOS, Windows and deb builds (see
+Crash reports from the macOS, Windows, deb and RPM builds (see
 src/core/crashreporting.h) are minidumps: addresses, not function names. Sentry
 turns them into names and lines with debug files matched by debug ID: a dSYM
 for each Mach-O executable, a PDB for each .exe, and for each ELF executable in
-a Debian or Ubuntu package the debug file from its -dbgsym package. all.yml
-collects them into a directory for each build.
+a Debian, Ubuntu or Fedora package the debug file from its -dbgsym or
+-debuginfo package. all.yml collects them into a directory for each build.
 
 Usage:
 

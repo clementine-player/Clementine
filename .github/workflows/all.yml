@@ -18,9 +18,9 @@ on:
 # tool and the smoke tests warn that Qt is switching to C.UTF-8.
 env:
   LANG: C.UTF-8
-  # Crash reporting, in the macOS, Windows and deb builds: the sentry-native
-  # they're built with, and where their reports go, Clementine's Sentry
-  # project. A DSN only lets you send events, so it isn't secret. Builds made
+  # Crash reporting, in the macOS, Windows, deb and RPM builds: the
+  # sentry-native they're built with, and where their reports go,
+  # Clementine's Sentry project. A DSN only lets you send events, so it isn't secret. Builds made
   # elsewhere leave it empty, the default, so they never send reports to a
   # project that has none of their symbols.
   SENTRY_NATIVE_VERSION: 0.17.6
@@ -778,6 +778,7 @@ jobs:
           libappstream-glib
           libcdio-devel
           libchromaprint-devel
+          libcurl-devel
           libgpod-devel
           libmtp-devel
           libnotify-devel
@@ -802,6 +803,8 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
+          unzip
+          zlib-devel
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
@@ -824,9 +827,17 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
-      - name: cmake
+      # The spec builds crash reporting in when it's given a DSN, with the
+      # sentry-native release it's given, whose source it bundles: COPR,
+      # which rebuilds the source RPM, builds offline.
+      - &rpm_cmake
+        name: cmake
         working-directory: bin
-        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+        run: >
+          cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On
+          "-DSENTRY_DSN=$SENTRY_DSN"
+          "-DSENTRY_NATIVE_VERSION=$SENTRY_NATIVE_VERSION"
+          ..
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
@@ -835,6 +846,9 @@ jobs:
       - name: Move source tarball
         working-directory: bin
         run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - &rpm_sentry_download
+        name: Download sentry-native
+        run: spectool --get-files --directory ~/rpmbuild/SOURCES dist/clementine.spec
       - name: Build RPM
         working-directory: bin
         # Pull requests leave out two slow parts of the build that only
@@ -875,11 +889,80 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+      # --crash crashes on purpose once the window is up. Crashpad's handler,
+      # found from the installed executable, should write a minidump, kept
+      # for asking the user about on the next start. Nothing is sent. Only
+      # a build with a DSN starts crash reporting, so this checks that too.
+      - &rpm_crash_test
+        name: Smoke test - crash report
+        timeout-minutes: 5
+        shell: bash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          reports="$HOME/.config/Clementine/crashreports"
+          if clementine --crash; then
+            echo "::error::clementine --crash didn't crash"
+            exit 1
+          fi
+          if ! find "$reports" -name '*.dmp' | grep .; then
+            echo "::error::No minidump in $reports"
+            ls -laR "$reports" || true
+            exit 1
+          fi
 
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      # For crash reports, which need these to name functions and lines:
+      # the RPM's stripped executables, and the debug files find-debuginfo
+      # put in the clementine-debuginfo package, matched by build ID. Pull
+      # requests build no debuginfo package (see Build RPM), so only the
+      # builds that are published check and upload them. The Fedora 44 and
+      # 45 jobs reuse these steps.
+      - &rpm_symbols_setup_uv
+        uses: astral-sh/setup-uv@v10.3.3
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+      - &rpm_symbols_check
+        name: Check debug symbols
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -e
+          rpm="$RUNNER_TEMP/rpm"
+          mkdir -p "$rpm" symbols
+          for package in ~/rpmbuild/RPMS/*/clementine-[0-9]*.rpm \
+              ~/rpmbuild/RPMS/*/clementine-debuginfo-*.rpm; do
+            rpm2archive - < "$package" | tar -xz -C "$rpm"
+          done
+          binaries=(
+            "$rpm/usr/bin/clementine"
+            "$rpm/usr/bin/clementine-tagreader"
+            "$rpm/usr/libexec/clementine/crashpad_handler"
+          )
+          # Not /usr/lib/debug/.build-id, whose links point at files
+          # outside the package.
+          cp -r "$rpm/usr/lib/debug/usr" symbols/debug
+          cp "${binaries[@]}" symbols/
+          uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
+      - &rpm_symbols_artifact
+        uses: actions/upload-artifact@v7.0.2
+        if: github.event_name != 'pull_request'
+        with:
+          name: symbols-${{ matrix.artifact }}
+          path: symbols/
+      - &rpm_symbols_upload
+        name: Upload debug symbols to Sentry
+        timeout-minutes: 30
+        if: github.event_name != 'pull_request'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -959,6 +1042,7 @@ jobs:
           libappstream-glib
           libcdio-devel
           libchromaprint-devel
+          libcurl-devel
           libgpod-devel
           libmtp-devel
           libnotify-devel
@@ -983,6 +1067,8 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
+          unzip
+          zlib-devel
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
@@ -1005,9 +1091,7 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
-      - name: cmake
-        working-directory: bin
-        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+      - *rpm_cmake
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
@@ -1016,6 +1100,7 @@ jobs:
       - name: Move source tarball
         working-directory: bin
         run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - *rpm_sentry_download
       - name: Build RPM
         working-directory: bin
         # See the Fedora 43 job for what pull requests leave out.
@@ -1051,11 +1136,16 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+      - *rpm_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      - *rpm_symbols_setup_uv
+      - *rpm_symbols_check
+      - *rpm_symbols_artifact
+      - *rpm_symbols_upload
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -1135,6 +1225,7 @@ jobs:
           libappstream-glib
           libcdio-devel
           libchromaprint-devel
+          libcurl-devel
           libgpod-devel
           libmtp-devel
           libnotify-devel
@@ -1159,6 +1250,8 @@ jobs:
           sqlite-devel
           taglib-devel
           tar
+          unzip
+          zlib-devel
           # liblastfm isn't a dependency any more (see the note in
           # push_translations above), and the QCA qt5 plugins were unused
           # dead weight in this list already.
@@ -1181,9 +1274,7 @@ jobs:
       # added to every earlier one's.
       - name: Reset ccache statistics
         run: ccache --zero-stats
-      - name: cmake
-        working-directory: bin
-        run: cmake -DUSE_SYSTEM_QTSINGLEAPPLICATION=On ..
+      - *rpm_cmake
       - name: Build source tarball
         working-directory: bin
         run: ../dist/maketarball.sh
@@ -1192,6 +1283,7 @@ jobs:
       - name: Move source tarball
         working-directory: bin
         run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - *rpm_sentry_download
       - name: Build RPM
         working-directory: bin
         # See the Fedora 43 job for what pull requests leave out.
@@ -1227,11 +1319,16 @@ jobs:
         run: >
           clementine --play-and-exit 30
           https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/tests/data/beep.ogg
+      - *rpm_crash_test
 
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: ${{ matrix.artifact }}
           path: ~/rpmbuild/RPMS/*/clementine-*.rpm
+      - *rpm_symbols_setup_uv
+      - *rpm_symbols_check
+      - *rpm_symbols_artifact
+      - *rpm_symbols_upload
       # Builds this commit in COPR, which rebuilds the source RPM for each
       # Fedora release and architecture the project has, then signs and
       # hosts them: dnf copr enable <COPR_PROJECT>. One source RPM builds for

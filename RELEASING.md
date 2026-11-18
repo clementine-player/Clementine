@@ -76,20 +76,22 @@ workflow from*, *Tags*, and the release. It builds and publishes it again.
 
 ## Crash reports
 
-The macOS and Windows builds, and the Debian and Ubuntu packages built here,
-offer to send crash reports to Clementine's Sentry project (see
-`src/core/crashreporting.h`), whose DSN they're built with: `SENTRY_DSN` in
-`all.yml`. Builds made elsewhere, such as distributions' own packages, have
-no DSN, so they never send any. A report is a minidump, so Sentry needs each
-build's debug symbols to show function names and lines: dSYMs on macOS, PDBs
-on Windows, and the -dbgsym packages' debug files for the debs. The builds
-collect them, check that they match what's shipped
-(`dist/sentry_symbols.py check`), and keep them as the run's `symbols-*`
-artifacts. Development builds and numbered releases also upload them to
-Sentry; pull requests don't. The macOS and Windows builds upload the
-libraries they bundle too (Qt, GStreamer and the rest, from Homebrew and
-MSYS2): those have no debug info, but Sentry can still name their functions
-and walk the stack through them.
+The macOS and Windows builds, and the Debian, Ubuntu and Fedora packages
+built here and in COPR, offer to send crash reports to Clementine's Sentry
+project (see `src/core/crashreporting.h`), whose DSN they're built with:
+`SENTRY_DSN` in `all.yml`. Builds made elsewhere, such as distributions' own
+packages, have no DSN, so they never send any. The RPM spec, given a DSN,
+builds the sentry-native release in `SENTRY_NATIVE_VERSION` from the source
+archive it bundles, since Fedora doesn't package it. A report is a minidump,
+so Sentry needs each build's debug symbols to show function names and lines:
+dSYMs on macOS, PDBs on Windows, and the debug files from the debs' -dbgsym
+packages and the RPMs' -debuginfo packages. The builds collect them, check
+that they match what's shipped (`dist/sentry_symbols.py check`), and keep
+them as the run's `symbols-*` artifacts. Development builds and numbered
+releases also upload them to Sentry; pull requests don't. The macOS and
+Windows builds upload the libraries they bundle too (Qt, GStreamer and the
+rest, from Homebrew and MSYS2): those have no debug info, but Sentry can
+still name their functions and walk the stack through them.
 
 ### One-time setup
 
