@@ -20,7 +20,11 @@
 #include "core/closure.h"
 
 _MessageReplyBase::_MessageReplyBase(QObject* parent)
-    : QObject(parent), finished_(false), success_(false) {}
+    : QObject(parent),
+      finished_(false),
+      success_(false),
+      notified_(false),
+      abandoned_(false) {}
 
 bool _MessageReplyBase::WaitForFinished() {
   qLog(Debug) << "Waiting on ID" << id();
@@ -38,7 +42,34 @@ void _MessageReplyBase::Abort() {
   NotifyFinished();
 }
 
+void _MessageReplyBase::Abandon() {
+  {
+    QMutexLocker l(&mutex_);
+    if (!notified_) {
+      // NotifyFinished will delete it.
+      abandoned_ = true;
+      return;
+    }
+  }
+  // It's finished, and releasing the semaphore is the last thing the handler
+  // does with it.
+  semaphore_.acquire();
+  deleteLater();
+}
+
 void _MessageReplyBase::NotifyFinished() {
+  bool abandoned;
+  {
+    QMutexLocker l(&mutex_);
+    notified_ = true;
+    abandoned = abandoned_;
+  }
+  if (abandoned) {
+    // Nobody is waiting or listening, and nothing else touches it now.
+    deleteLater();
+    return;
+  }
+
   // Whoever is notified may delete this straight away: a WaitForFinished
   // caller as soon as the semaphore is released, and a Finished receiver as
   // soon as it's emitted. So Finished is queued to this object's thread

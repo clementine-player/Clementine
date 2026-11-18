@@ -18,6 +18,7 @@
 #include "core/messagereply.h"
 
 #include <QCoreApplication>
+#include <QPointer>
 #include <QSignalSpy>
 #include <thread>
 
@@ -104,6 +105,38 @@ TEST(MessageReplyTest, DeletingItDropsAFinishedNotYetDelivered) {
 
   QCoreApplication::processEvents();
   EXPECT_FALSE(finished);
+}
+
+// Runs the deleteLaters posted to this thread.
+void RunDeferredDeletes() {
+  QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+}
+
+TEST(MessageReplyTest, AbandoningItBeforeTheReplyLetsTheHandlerFinishIt) {
+  // What the library scanner does with tags it no longer needs, which the
+  // tag reader might still be reading. Deleting the reply instead left the
+  // handler a dangling pointer to set the reply on.
+  QPointer<Reply> reply(NewReply(1));
+  reply->Abandon();
+  RunDeferredDeletes();
+  ASSERT_FALSE(reply.isNull());
+
+  Reply* raw = reply.data();
+  std::thread handler([raw]() { raw->SetReply(Response(1)); });
+  handler.join();
+  RunDeferredDeletes();
+  EXPECT_TRUE(reply.isNull());
+}
+
+TEST(MessageReplyTest, AbandoningItAfterTheReplyDeletesIt) {
+  QPointer<Reply> reply(NewReply(1));
+  Reply* raw = reply.data();
+  std::thread handler([raw]() { raw->SetReply(Response(1)); });
+  handler.join();
+
+  reply->Abandon();
+  RunDeferredDeletes();
+  EXPECT_TRUE(reply.isNull());
 }
 
 }  // namespace

@@ -18,6 +18,7 @@
 #ifndef MESSAGEREPLY_H
 #define MESSAGEREPLY_H
 
+#include <QMutex>
 #include <QObject>
 #include <QSemaphore>
 
@@ -43,6 +44,13 @@ class _MessageReplyBase : public QObject {
 
   void Abort();
 
+  // For a caller that no longer wants the result, instead of deleting it: a
+  // handler may still hold an unfinished reply, and would set the reply on
+  // freed memory. The reply deletes itself (later, on its own thread) once
+  // it's finished, or now if it already is. Don't use it afterwards, don't
+  // call this after WaitForFinished, and don't count on Finished.
+  void Abandon();
+
  signals:
   // Emitted on this object's own thread, which needs an event loop.
   void Finished(bool success);
@@ -53,6 +61,12 @@ class _MessageReplyBase : public QObject {
 
   bool finished_;
   bool success_;
+
+  // Guards notified_ and abandoned_, which NotifyFinished on the handler's
+  // thread and Abandon on the caller's both use.
+  QMutex mutex_;
+  bool notified_;
+  bool abandoned_;
 
   QSemaphore semaphore_;
 };
