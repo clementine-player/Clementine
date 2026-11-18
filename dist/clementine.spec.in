@@ -7,6 +7,35 @@ License:        GPLv3
 URL:            http://www.clementine-player.org/
 Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.xz
 
+# Crash reporting. Clementine's own packages, built by its CI and COPR, are
+# configured with the DSN of Clementine's Sentry project (SENTRY_DSN and
+# SENTRY_NATIVE_VERSION in .github/workflows/all.yml), and offer to send a
+# report after a crash. Anyone else's build has no DSN and leaves crash
+# reporting out, so it never sends reports to a project that has none of its
+# symbols. Fedora doesn't package sentry-native, so the spec builds the
+# release it's given, static, from its source archive: COPR builds offline.
+%global sentry_dsn %{nil}@SENTRY_DSN@
+%global sentry_native_version %{nil}@SENTRY_NATIVE_VERSION@
+%if "%{sentry_dsn}" != ""
+%if "%{sentry_native_version}" == ""
+%{error:A Sentry DSN needs SENTRY_NATIVE_VERSION, the sentry-native release to build}
+%endif
+# The release's archive, unlike GitHub's own, has its submodules: Crashpad.
+Source1:        https://github.com/getsentry/sentry-native/releases/download/%{sentry_native_version}/sentry-native.zip
+Provides:       bundled(sentry-native) = %{sentry_native_version}
+BuildRequires:  unzip
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(zlib)
+# Sentry is sent the debug files of every build, so they keep to function
+# names and line tables, which is what crash reports need, as the debs do.
+%global optflags %{optflags} -g1
+%endif
+
+# Sentry reads the debuginfo package's files to name functions and lines in
+# crash reports, but can't follow DWARF that dwz moves out into a file
+# shared between executables, as it may now that there are three.
+%global _find_debuginfo_dwz_opts %{nil}
+
 BuildRequires:  cmake
 BuildRequires:  make
 BuildRequires:  git
@@ -107,11 +136,36 @@ Features include:
 # is called to /usr/src/debug/<name>-<version>-<release>.<arch>, so the
 # debuginfo and debugsource packages come out the same.
 %setup -q -n %{name} -C
+%if "%{sentry_dsn}" != ""
+mkdir sentry-native
+unzip -q %{SOURCE1} -d sentry-native
+%endif
 
 
 %build
+%if "%{sentry_dsn}" != ""
+# sentry-native with its Crashpad backend, static, built with Fedora's flags
+# and installed in the build directory: only crashpad_handler is packaged,
+# by Clementine's own install.
+%set_build_flags
+cmake -S sentry-native -B sentry-build \
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+  -DCMAKE_INSTALL_PREFIX="$PWD/sentry-install" \
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+  -DSENTRY_BACKEND=crashpad \
+  -DSENTRY_BUILD_SHARED_LIBS=OFF \
+  -DSENTRY_BUILD_TESTS=OFF \
+  -DSENTRY_BUILD_EXAMPLES=OFF
+cmake --build sentry-build --parallel %{_smp_build_ncpus}
+cmake --install sentry-build
+sentry_prefix="$PWD/sentry-install"
+%endif
 cd bin
-%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DFORCE_GIT_REVISION=@GIT_REV_LONG@
+%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DFORCE_GIT_REVISION=@GIT_REV_LONG@ \
+%if "%{sentry_dsn}" != ""
+  -DENABLE_SENTRY=ON -DCMAKE_PREFIX_PATH="$sentry_prefix" "-DSENTRY_DSN=%{sentry_dsn}" \
+%endif
+  %{nil}
 %{cmake_build}
 
 %install
@@ -125,6 +179,10 @@ rm -f $RPM_BUILD_ROOT/usr/share/icons/ubuntu-mono-{dark,light}/apps/24/clementin
 %doc
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
+%if "%{sentry_dsn}" != ""
+%dir %{_libexecdir}/clementine
+%{_libexecdir}/clementine/crashpad_handler
+%endif
 %dir %{_datadir}/metainfo/
 %{_datadir}/metainfo/org.clementine_player.Clementine.appdata.xml
 %{_datadir}/applications/org.clementine_player.Clementine.desktop

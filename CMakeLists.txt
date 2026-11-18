@@ -230,6 +230,10 @@ optional_component(SENTRY OFF "Crash reporting (Sentry)"
 # project that has none of their symbols. Clementine's own packages set it to
 # Clementine's Sentry project (see SENTRY_DSN in .github/workflows/all.yml).
 set(SENTRY_DSN "" CACHE STRING "Sentry DSN that crash reports are sent to")
+# The sentry-native release the RPM spec builds crash reporting from, when it's
+# given a DSN: Fedora doesn't package sentry-native.
+set(SENTRY_NATIVE_VERSION "" CACHE STRING
+    "sentry-native release that the RPM spec bundles, with SENTRY_DSN")
 if(HAVE_SENTRY)
   # Installed alongside sentry-native by its Crashpad backend.
   find_program(SENTRY_CRASHPAD_HANDLER crashpad_handler
