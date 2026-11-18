@@ -83,7 +83,8 @@ void TagReaderClientPrefetchReader::Finish(int id, const QString& file,
 }
 
 void TagReaderClientPrefetchReader::Cancel(int id) {
-  replies_.take(id)->deleteLater();
+  // The tag reader may still be reading it.
+  replies_.take(id)->Abandon();
 }
 
 void TagReaderClientPrefetchReader::ReadNow(const QString& file, Song* song) {
