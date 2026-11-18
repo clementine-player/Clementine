@@ -88,7 +88,9 @@ dSYMs on macOS, PDBs on Windows, and the debug files from the debs' -dbgsym
 packages and the RPMs' -debuginfo packages. The builds collect them, check
 that they match what's shipped (`dist/sentry_symbols.py check`), and keep
 them as the run's `symbols-*` artifacts. Development builds and numbered
-releases also upload them to Sentry; pull requests don't. The macOS and
+releases also upload them to Sentry; pull requests don't. COPR builds its
+packages again from the source RPM, so the COPR job waits for its builds
+and uploads their debug files too, which can take hours. The macOS and
 Windows builds upload the libraries they bundle too (Qt, GStreamer and the
 rest, from Homebrew and MSYS2): those have no debug info, but Sentry can
 still name their functions and walk the stack through them.

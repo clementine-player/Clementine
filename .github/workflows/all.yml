@@ -1329,33 +1329,15 @@ jobs:
       - *rpm_symbols_check
       - *rpm_symbols_artifact
       - *rpm_symbols_upload
-      # Builds this commit in COPR, which rebuilds the source RPM for each
-      # Fedora release and architecture the project has, then signs and
-      # hosts them: dnf copr enable <COPR_PROJECT>. One source RPM builds for
-      # all of them, so only this job sends it. Needs:
-      #   variable COPR_PROJECT, the project as owner/name;
-      #   secret COPR_CONFIG, the config file COPR's API page shows
-      #   (https://copr.fedorainfracloud.org/api/).
-      # COPR's tokens expire, so this only warns when it fails: the release
-      # waits on this job.
-      - name: Build in COPR
+      # The source RPM, for the COPR job.
+      - name: Keep the source RPM for COPR
         if: >
           github.event_name == 'push' && github.ref == 'refs/heads/master'
           && matrix.artifact == 'release_fedora_45' && vars.COPR_PROJECT != ''
-        continue-on-error: true
-        env:
-          COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
-          COPR_PROJECT: ${{ vars.COPR_PROJECT }}
-        run: |
-          dnf install --assumeyes copr-cli
-          mkdir -p ~/.config
-          trap 'rm -f ~/.config/copr' EXIT
-          printf '%s\n' "$COPR_CONFIG" > ~/.config/copr
-          # --nowait: COPR takes a while, and its own page shows the result.
-          if ! copr-cli build "$COPR_PROJECT" ~/rpmbuild/SRPMS/clementine-*.src.rpm --nowait; then
-            echo "::warning::Couldn't start the COPR build: has the COPR_CONFIG token expired?"
-            exit 1
-          fi
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: srpm
+          path: ~/rpmbuild/SRPMS/clementine-*.src.rpm
       - name: ccache statistics
         if: always()
         # Tolerant: if the job failed before the packages were installed,
@@ -1373,6 +1355,104 @@ jobs:
           path: /ccache
           key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
 
+
+  # Builds this commit in COPR, which rebuilds the source RPM for each
+  # Fedora release and architecture the project has, then signs and hosts
+  # them: dnf copr enable <COPR_PROJECT>. One source RPM builds for all of
+  # them. Needs:
+  #   variable COPR_PROJECT, the project as owner/name;
+  #   secret COPR_CONFIG, the config file COPR's API page shows
+  #   (https://copr.fedorainfracloud.org/api/).
+  # COPR's builds are its own, with their own debug IDs, so this waits for
+  # them and uploads their -debuginfo packages' files to Sentry, as the
+  # Fedora jobs do for theirs. Nothing waits on this job: COPR can take
+  # hours to get to a build, and its tokens expire.
+  copr:
+    name: Build in COPR
+    needs:
+      - build_fedora_45
+    if: >
+      github.event_name == 'push' && github.ref == 'refs/heads/master'
+      && vars.COPR_PROJECT != ''
+    runs-on: ubuntu-24.04
+    container:
+      image: fedora:45
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: srpm
+          path: srpm
+      - name: Install copr-cli
+        run: dnf install --assumeyes copr-cli
+      - name: Build in COPR
+        env:
+          COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
+          COPR_PROJECT: ${{ vars.COPR_PROJECT }}
+        shell: bash
+        run: |
+          mkdir -p ~/.config
+          trap 'rm -f ~/.config/copr' EXIT
+          printf '%s\n' "$COPR_CONFIG" > ~/.config/copr
+          if ! copr-cli build "$COPR_PROJECT" srpm/clementine-*.src.rpm --nowait \
+              | tee copr.log; then
+            echo "::warning::Couldn't start the COPR build: has the COPR_CONFIG token expired?"
+            exit 1
+          fi
+          build=$(sed -n 's/^Created builds: //p' copr.log)
+          echo "https://copr.fedorainfracloud.org/coprs/build/$build"
+          # Fails if the build fails for any release or architecture.
+          copr-cli watch-build "$build"
+          copr-cli download-build "$build" --dest copr
+      - uses: astral-sh/setup-uv@v10.3.3
+        timeout-minutes: 5
+      # As in the Fedora jobs, for each release and architecture COPR
+      # built for: the shipped executables, and the debug files from the
+      # -debuginfo package.
+      - name: Check debug symbols
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          set -e
+          shopt -s nullglob
+          debuginfos=(copr/*/clementine-debuginfo-[0-9]*.rpm)
+          if [ ${#debuginfos[@]} = 0 ]; then
+            echo "::error::COPR built no clementine-debuginfo packages"
+            exit 1
+          fi
+          for debuginfo in "${debuginfos[@]}"; do
+            dir=$(dirname "$debuginfo")
+            chroot=$(basename "$dir")
+            rpm="$RUNNER_TEMP/rpm/$chroot"
+            mkdir -p "$rpm" "symbols/$chroot"
+            for package in "$dir"/clementine-[0-9]*.rpm "$debuginfo"; do
+              case "$package" in
+                *.src.rpm) ;;
+                *) rpm2archive - < "$package" | tar -xz -C "$rpm" ;;
+              esac
+            done
+            binaries=(
+              "$rpm/usr/bin/clementine"
+              "$rpm/usr/bin/clementine-tagreader"
+              "$rpm/usr/libexec/clementine/crashpad_handler"
+            )
+            cp -r "$rpm/usr/lib/debug/usr" "symbols/$chroot/debug"
+            cp "${binaries[@]}" "symbols/$chroot/"
+            uv run --only-group sentry dist/sentry_symbols.py check \
+              "symbols/$chroot" "${binaries[@]}"
+          done
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: symbols-copr
+          path: symbols/
+      - name: Upload debug symbols to Sentry
+        timeout-minutes: 60
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: uv run --only-group sentry dist/sentry_symbols.py upload symbols
   build_mingw:
     name: Build Windows Installer
     needs:
