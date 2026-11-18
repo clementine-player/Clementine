@@ -24,6 +24,11 @@ After committing, check that git sees it:
 
     git log -1 --format='%(trailers:key=Release-note,valueonly)'
 
+A commit that fixes a crash reported to Sentry names the issue in its
+message, such as `Fixes CLEMENTINE-123`. Sentry resolves the issue when the
+first release with the commit is built, and reopens it if it crashes again in
+a later one.
+
 ## C++ style
 
 Follow the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html),

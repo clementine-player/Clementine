@@ -577,6 +577,34 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.tag_name.outputs.version }}
         run: gh release edit "$VERSION" --draft=false
+      # The same release in Sentry, named as the app names it in its crash
+      # reports (src/core/crashreporting.cpp), with the commits it adds since
+      # the previous one. A commit whose message says "Fixes CLEMENTINE-123"
+      # then resolves that issue in the first release that has the commit,
+      # and Sentry reopens it as a regression if it crashes again in a later
+      # one. With Sentry's GitHub integration, it also shows the commits that
+      # might have caused each issue; without it, sentry-cli reads the
+      # commits from this checkout instead. Builds without the repository's
+      # secrets skip this.
+      - name: Create the release in Sentry
+        if: steps.releasable.outputs.skip != 'true'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+          VERSION: ${{ steps.tag_name.outputs.version }}
+        run: |
+          if [ -z "$SENTRY_AUTH_TOKEN" ] || [ -z "$SENTRY_PROJECT" ]; then
+            echo "::notice::No Sentry token or project, so no release in Sentry."
+            exit 0
+          fi
+          release="clementine@$VERSION"
+          sentry() { uv run --only-group sentry sentry-cli "$@"; }
+          sentry releases new "$release"
+          # --ignore-missing: if the previous release's commit isn't in this
+          # history any more, take the last 20 commits rather than fail.
+          sentry releases set-commits "$release" --auto --ignore-missing
+          sentry releases finalize "$release"
 
   build_source:
     name: Build source tarball
