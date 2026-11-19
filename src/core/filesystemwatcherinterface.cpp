@@ -29,13 +29,9 @@ FileSystemWatcherInterface::FileSystemWatcherInterface(QObject* parent)
 
 FileSystemWatcherInterface* FileSystemWatcherInterface::Create(
     QObject* parent) {
-  FileSystemWatcherInterface* ret;
 #ifdef Q_OS_DARWIN
-  ret = new MacFSListener(parent);
+  return new MacFSListener(parent);
 #else
-  ret = new QtFSListener(parent);
+  return new QtFSListener(parent);
 #endif
-
-  ret->Init();
-  return ret;
 }

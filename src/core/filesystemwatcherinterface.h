@@ -26,7 +26,6 @@ class FileSystemWatcherInterface : public QObject {
   Q_OBJECT
  public:
   explicit FileSystemWatcherInterface(QObject* parent = nullptr);
-  virtual void Init() {}
   virtual bool AddPath(const QString& path) = 0;
   virtual void RemovePath(const QString& path) = 0;
   virtual void Clear() = 0;

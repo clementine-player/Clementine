@@ -21,6 +21,7 @@
 #define CORE_MACFSLISTENER_H_
 
 #include <CoreServices/CoreServices.h>
+#include <dispatch/dispatch.h>
 
 #include <QObject>
 #include <QSet>
@@ -34,7 +35,8 @@ class MacFSListener : public FileSystemWatcherInterface {
 
  public:
   explicit MacFSListener(QObject* parent = nullptr);
-  void Init();
+  ~MacFSListener();
+
   bool AddPath(const QString& path);
   void RemovePath(const QString& path);
   void Clear();
@@ -47,13 +49,16 @@ class MacFSListener : public FileSystemWatcherInterface {
 
  private:
   void UpdateStreamAsync();
+  void StopStream();
 
   static void EventStreamCallback(ConstFSEventStreamRef stream, void* user_data,
                                   size_t num_events, void* event_paths,
                                   const FSEventStreamEventFlags event_flags[],
                                   const FSEventStreamEventId event_ids[]);
 
-  CFRunLoopRef run_loop_;
+  // FSEvents calls EventStreamCallback on this queue, not on the listener's
+  // thread.
+  dispatch_queue_t queue_;
   FSEventStreamRef stream_;
 
   QSet<QString> paths_;
