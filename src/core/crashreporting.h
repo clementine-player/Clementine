@@ -20,6 +20,7 @@
 #ifndef CORE_CRASHREPORTING_H_
 #define CORE_CRASHREPORTING_H_
 
+#include <QList>
 #include <QString>
 
 class QWidget;
@@ -34,11 +35,28 @@ class QWidget;
 // next start the minidumps are set aside, and AskToSendPendingReports() asks
 // the user whether to send them.
 //
+// A report is sent with what the current run knows, not what the crashed one
+// did, so anything Sentry should know about the crash has to be kept on disk
+// beside its minidump until then. Crashes made with --crash are kept apart
+// that way, and sent tagged with kCrashTypeTag set to kCrashTypeForced.
+//
 // Builds without ENABLE_SENTRY, or with an empty SENTRY_DSN, get no-op stubs.
 class CrashReporting {
  public:
   static const char* kSettingsGroup;
   static const char* kAskAfterCrash;
+
+  // The Sentry tag, and its value, that crashes made with --crash have.
+  static const char* kCrashTypeTag;
+  static const char* kCrashTypeForced;
+
+  enum class CrashType { kUnexpected, kForced };
+
+  // A crash's minidump, waiting for the user to say whether to send it.
+  struct PendingReport {
+    QString minidump_path;
+    CrashType type;
+  };
 
   CrashReporting();
   ~CrashReporting();
@@ -56,9 +74,22 @@ class CrashReporting {
   static void SetEnabled(bool enabled);
 
   // Crashes Clementine on purpose, for --crash. It always crashes here, with a
-  // write to a null pointer, so the reports it makes can be told apart in
-  // Sentry by this function's name.
+  // write to a null pointer, and the report is tagged as forced (see
+  // kCrashTypeTag), so the reports it makes can be told apart in Sentry.
   [[noreturn]] static void CrashForTesting();
+
+  // The steps that keep reports in database_path, the directory given to
+  // Crashpad, for the user to be asked about. Public for tests.
+  //
+  // Records that the next crash is a forced one.
+  static void MarkNextCrashForced(const QString& database_path);
+  // Moves the minidumps Crashpad saved since the last start out of its
+  // database, where sentry_init() would delete them after two days, keeping
+  // apart the forced ones. Run before sentry_init(), while no handler is using
+  // the database.
+  static void CollectNewReports(const QString& database_path);
+  // The reports that CollectNewReports() has kept so far.
+  static QList<PendingReport> PendingReports(const QString& database_path);
 
  private:
   Q_DISABLE_COPY(CrashReporting)

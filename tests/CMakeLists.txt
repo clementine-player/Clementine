@@ -160,6 +160,7 @@ add_test_file(castmediaplayer_test.cpp false)
 add_test_file(upnp_test.cpp false)
 add_test_file(closure_test.cpp false)
 add_test_file(concurrentrun_test.cpp false)
+add_test_file(crashreporting_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
 add_test_file(sqlite_test.cpp false)
 
