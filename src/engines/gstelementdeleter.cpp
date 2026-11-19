@@ -22,8 +22,11 @@
 GstElementDeleter::GstElementDeleter(QObject* parent) : QObject(parent) {}
 
 void GstElementDeleter::DeleteElementLater(GstElement* element) {
-  metaObject()->invokeMethod(this, "DeleteElement", Qt::QueuedConnection,
-                             Q_ARG(GstElement*, element));
+  // Queued as a functor, which unlike a call by name doesn't need
+  // GstElement* registered as a metatype.
+  QMetaObject::invokeMethod(
+      this, [this, element]() { DeleteElement(element); },
+      Qt::QueuedConnection);
 }
 
 void GstElementDeleter::DeleteElement(GstElement* element) {

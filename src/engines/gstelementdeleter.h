@@ -38,7 +38,7 @@ class GstElementDeleter : public QObject {
   // deleted later regardless.
   void DeleteElementLater(GstElement* element);
 
- private slots:
+ private:
   void DeleteElement(GstElement* element);
 };
 
