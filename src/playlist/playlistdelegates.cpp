@@ -357,16 +357,9 @@ QString RatingItemDelegate::displayText(const QVariant& value,
   return QString::number(rating, 'f', 1);
 }
 
-TagCompletionModel::TagCompletionModel(LibraryBackend* backend,
-                                       Playlist::Column column)
-    : QStringListModel() {
-  QString col = database_column(column);
-  if (!col.isEmpty()) {
-    setStringList(backend->GetAll(col));
-  }
-}
+namespace {
 
-QString TagCompletionModel::database_column(Playlist::Column column) {
+QString DatabaseColumn(Playlist::Column column) {
   switch (column) {
     case Playlist::Column_Artist:
       return "artist";
@@ -388,23 +381,27 @@ QString TagCompletionModel::database_column(Playlist::Column column) {
   }
 }
 
-static TagCompletionModel* InitCompletionModel(LibraryBackend* backend,
-                                               Playlist::Column column) {
-  return new TagCompletionModel(backend, column);
+QStringList GetTagValues(LibraryBackend* backend, Playlist::Column column) {
+  const QString database_column = DatabaseColumn(column);
+  if (database_column.isEmpty()) return QStringList();
+  return backend->GetAll(database_column);
 }
 
+}  // namespace
+
+// The values are looked up on another thread, but the model is made here, on
+// the completer's, and belongs to the completer. The editor can be closed,
+// deleting the completer, before they arrive: then they're never used.
 TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column,
                            QLineEdit* editor)
     : QCompleter(editor), editor_(editor) {
-  QFuture<TagCompletionModel*> future =
-      QtConcurrent::run(&InitCompletionModel, backend, column);
-  NewClosure(future, this, &TagCompleter::ModelReady);
+  QFuture<QStringList> future =
+      QtConcurrent::run(&GetTagValues, backend, column);
+  NewClosure(future, this, &TagCompleter::ValuesReady);
 }
 
-TagCompleter::~TagCompleter() { model()->deleteLater(); }
-
-void TagCompleter::ModelReady(TagCompletionModel* model) {
-  setModel(model);
+void TagCompleter::ValuesReady(const QStringList& values) {
+  setModel(new QStringListModel(values, this));
   setCaseSensitivity(Qt::CaseInsensitive);
   editor_->setCompleter(this);
 }
