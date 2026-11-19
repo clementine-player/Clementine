@@ -1389,10 +1389,12 @@ TEST(AirPlaySessionTest, SendsNowPlayingInfoWithAirPlay2) {
   EXPECT_FALSE(first_item.toString().isEmpty());
 
   // As an iPhone starts: no commands, then those it takes.
-  ASSERT_EQ(2, receiver.supported_commands().size());
-  EXPECT_TRUE(receiver.supported_commands()[0].isEmpty());
+  // supported_commands() returns a copy, so keep it for the loop below.
+  const QList<QVariantList> supported_commands = receiver.supported_commands();
+  ASSERT_EQ(2, supported_commands.size());
+  EXPECT_TRUE(supported_commands[0].isEmpty());
   QList<int> commands;
-  for (const QVariant& command : receiver.supported_commands()[1]) {
+  for (const QVariant& command : supported_commands[1]) {
     QVariant decoded;
     ASSERT_TRUE(airplay::bplist::Read(command.toByteArray(), &decoded));
     commands << decoded.toMap().value("kCommandInfoCommandKey").toInt();
