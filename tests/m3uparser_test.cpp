@@ -18,6 +18,7 @@
 #include "playlistparsers/m3uparser.h"
 
 #include <QBuffer>
+#include <QFileInfo>
 #include <QTemporaryFile>
 
 #include "core/timeconstants.h"
@@ -53,7 +54,10 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   QString line(temp.fileName());
   Song song;
   parser_.LoadSong(line, 0, QDir(), &song);
-  ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
+  // The parser keeps the canonical path, which on macOS is under
+  // /private/var rather than the temporary directory's /var.
+  ASSERT_EQ(QUrl::fromLocalFile(QFileInfo(temp).canonicalFilePath()),
+            song.url());
 
   // Read from the file's tags.
   EXPECT_EQ("Beep mp3", song.title());
@@ -66,7 +70,7 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   QString line(info.fileName());
   Song song;
   parser.LoadSong(line, 0, info.dir(), &song);
-  ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
+  ASSERT_EQ(QUrl::fromLocalFile(info.canonicalFilePath()), song.url());
   EXPECT_EQ("Beep mp3", song.title());
 }
 
