@@ -14,6 +14,19 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
 set(CMAKE_CXX_STANDARD 20)
 
+# Every test executable links clementine_lib. Statically, each one carries a
+# whole copy of it, which is fine normally but runs to hundreds of megabytes a
+# test with sanitizers on. Shared, the tests share one copy. Only for builds
+# that run from the build tree: nothing installs the library.
+option(CLEMENTINE_LIB_SHARED "Build clementine_lib as a shared library" OFF)
+if (CLEMENTINE_LIB_SHARED)
+  set(CLEMENTINE_LIB_TYPE SHARED)
+  # The static libraries it takes in go into it too.
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+else ()
+  set(CLEMENTINE_LIB_TYPE STATIC)
+endif ()
+
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_COMPILER_IS_CLANGXX 1)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")

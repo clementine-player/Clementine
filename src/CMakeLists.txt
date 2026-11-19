@@ -1361,7 +1361,7 @@ if(HAVE_TRANSLATIONS)
   )
 endif(HAVE_TRANSLATIONS)
 
-add_library(clementine_lib STATIC
+add_library(clementine_lib ${CLEMENTINE_LIB_TYPE}
   ${SOURCES}
   ${MOC}
   ${UIC}
