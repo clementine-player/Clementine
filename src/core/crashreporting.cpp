@@ -38,7 +38,81 @@
 
 const char* CrashReporting::kSettingsGroup = "CrashReporting";
 const char* CrashReporting::kAskAfterCrash = "ask_after_crash";
+const char* CrashReporting::kCrashTypeTag = "crash_type";
+const char* CrashReporting::kCrashTypeForced = "forced";
 bool CrashReporting::sInitialised = false;
+
+namespace {
+
+// Reports waiting for the user to be asked about them.
+QString UnsentPath(const QString& database_path) {
+  return database_path + "/unsent";
+}
+
+// The same, for forced crashes.
+QString UnsentForcedPath(const QString& database_path) {
+  return UnsentPath(database_path) + "/forced";
+}
+
+// Left by a run that's about to crash on purpose.
+QString ForcedCrashMarkerPath(const QString& database_path) {
+  return database_path + "/next-crash-forced";
+}
+
+QFileInfoList Minidumps(const QString& path) {
+  return QDir(path).entryInfoList(QStringList() << "*.dmp", QDir::Files,
+                                  QDir::Name);
+}
+
+}  // namespace
+
+void CrashReporting::MarkNextCrashForced(const QString& database_path) {
+  QFile marker(ForcedCrashMarkerPath(database_path));
+  if (!QDir().mkpath(database_path) || !marker.open(QIODevice::WriteOnly)) {
+    qLog(Warning) << "Couldn't mark the crash as forced:"
+                  << marker.errorString();
+  }
+}
+
+void CrashReporting::CollectNewReports(const QString& database_path) {
+  // Only one run, the last one, can have crashed since the last start, so if
+  // it left the marker, all of them are from the forced crash.
+  QFile marker(ForcedCrashMarkerPath(database_path));
+  const bool forced = marker.exists();
+  QDir unsent(forced ? UnsentForcedPath(database_path)
+                     : UnsentPath(database_path));
+
+  // Crashpad keeps reports in "pending" and "completed" on Linux and macOS,
+  // and all of them in "reports" on Windows.
+  for (const char* subdir : {"pending", "completed", "reports"}) {
+    for (const QFileInfo& info :
+         Minidumps(database_path + "/" + QString::fromLatin1(subdir))) {
+      if (!unsent.mkpath(".") ||
+          !QFile::rename(info.absoluteFilePath(),
+                         unsent.filePath(info.fileName()))) {
+        qLog(Warning) << "Couldn't keep crash report"
+                      << info.absoluteFilePath();
+      }
+    }
+  }
+
+  // Whether or not that run made a report, the next crash is a new one.
+  if (forced && !marker.remove()) {
+    qLog(Warning) << "Couldn't remove" << marker.fileName();
+  }
+}
+
+QList<CrashReporting::PendingReport> CrashReporting::PendingReports(
+    const QString& database_path) {
+  QList<PendingReport> reports;
+  for (const QFileInfo& info : Minidumps(UnsentPath(database_path))) {
+    reports << PendingReport{info.absoluteFilePath(), CrashType::kUnexpected};
+  }
+  for (const QFileInfo& info : Minidumps(UnsentForcedPath(database_path))) {
+    reports << PendingReport{info.absoluteFilePath(), CrashType::kForced};
+  }
+  return reports;
+}
 
 QString CrashReporting::DatabasePath() {
   // With the rest of Clementine's files, so portable installs keep it in their
@@ -79,31 +153,6 @@ sentry_uuid_t CaptureMinidump(const QString& path) {
   return sentry_capture_minidump(QFile::encodeName(path).constData());
 }
 #endif
-
-QString UnsentPath(const QString& database_path) {
-  return database_path + "/unsent";
-}
-
-// Moves the minidumps of crashes since the last start out of Crashpad's
-// database, where sentry_init() would delete them after two days, to wait for
-// the user to say whether to send them. Run before sentry_init(), while no
-// handler is using the database. Crashpad keeps reports in "pending" and
-// "completed" on Linux and macOS, and all of them in "reports" on Windows.
-void CollectNewReports(const QString& database_path) {
-  QDir unsent(UnsentPath(database_path));
-  for (const char* subdir : {"pending", "completed", "reports"}) {
-    QDir dir(database_path + "/" + QString::fromLatin1(subdir));
-    for (const QFileInfo& info :
-         dir.entryInfoList(QStringList() << "*.dmp", QDir::Files)) {
-      if (!unsent.mkpath(".") ||
-          !QFile::rename(info.absoluteFilePath(),
-                         unsent.filePath(info.fileName()))) {
-        qLog(Warning) << "Couldn't keep crash report"
-                      << info.absoluteFilePath();
-      }
-    }
-  }
-}
 
 }  // namespace
 
@@ -184,9 +233,7 @@ bool CrashReporting::IsAvailable() {
 void CrashReporting::AskToSendPendingReports(QWidget* parent) {
   if (!sInitialised) return;
 
-  QDir unsent(UnsentPath(DatabasePath()));
-  const QFileInfoList reports =
-      unsent.entryInfoList(QStringList() << "*.dmp", QDir::Files);
+  const QList<PendingReport> reports = PendingReports(DatabasePath());
   if (reports.isEmpty()) return;
 
   QMessageBox box(QMessageBox::Question,
@@ -211,14 +258,22 @@ void CrashReporting::AskToSendPendingReports(QWidget* parent) {
     // the minidump is read in when it's queued, so it's only given for long
     // enough to queue these ones.
     sentry_user_consent_give();
-    for (const QFileInfo& info : reports) {
-      CaptureMinidump(info.absoluteFilePath());
+    for (const PendingReport& report : reports) {
+      // The event is made from the scope when it's queued, so the tag is only
+      // set for this one.
+      if (report.type == CrashType::kForced) {
+        sentry_set_tag(kCrashTypeTag, kCrashTypeForced);
+      }
+      CaptureMinidump(report.minidump_path);
+      if (report.type == CrashType::kForced) {
+        sentry_remove_tag(kCrashTypeTag);
+      }
     }
     sentry_user_consent_revoke();
   }
 
-  for (const QFileInfo& info : reports) {
-    QFile::remove(info.absoluteFilePath());
+  for (const PendingReport& report : reports) {
+    QFile::remove(report.minidump_path);
   }
 }
 
@@ -236,6 +291,7 @@ void CrashReporting::AskToSendPendingReports(QWidget*) {}
 
 __attribute__((noinline)) void CrashReporting::CrashForTesting() {
   qLog(Error) << "Crashing on purpose because of --crash";
+  if (sInitialised) MarkNextCrashForced(DatabasePath());
   // Both volatile: the pointer so the compiler can't tell it's null, and what
   // it points to so the write isn't dropped as dead before the abort() below.
   volatile int* volatile null_pointer = nullptr;
