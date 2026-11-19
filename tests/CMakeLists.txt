@@ -164,6 +164,12 @@ add_test_file(concurrentrun_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
 add_test_file(sqlite_test.cpp false)
 
+if(APPLE)
+  # A GUI test: QApplication runs the main thread's Cocoa run loop, as the
+  # app does, so the test works the same whichever thread FSEvents uses.
+  add_test_file(macfslistener_test.cpp true)
+endif(APPLE)
+
 if(HAVE_DBUS)
   add_test_file(portalglobalshortcutbackend_test.cpp true)
 endif(HAVE_DBUS)

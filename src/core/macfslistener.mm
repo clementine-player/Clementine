@@ -29,7 +29,8 @@
 
 MacFSListener::MacFSListener(QObject* parent)
     : FileSystemWatcherInterface(parent),
-      run_loop_(nullptr),
+      queue_(dispatch_queue_create("org.clementine-player.fslistener",
+                                   DISPATCH_QUEUE_SERIAL)),
       stream_(nullptr),
       update_timer_(new QTimer(this)) {
   update_timer_->setSingleShot(true);
@@ -37,7 +38,10 @@ MacFSListener::MacFSListener(QObject* parent)
   connect(update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
 }
 
-void MacFSListener::Init() { run_loop_ = CFRunLoopGetCurrent(); }
+MacFSListener::~MacFSListener() {
+  StopStream();
+  dispatch_release(queue_);
+}
 
 void MacFSListener::EventStreamCallback(ConstFSEventStreamRef stream, void* user_data,
                                         size_t num_events, void* event_paths,
@@ -56,14 +60,12 @@ void MacFSListener::EventStreamCallback(ConstFSEventStreamRef stream, void* user
 }
 
 bool MacFSListener::AddPath(const QString& path) {
-  Q_ASSERT(run_loop_);
   paths_.insert(path);
   UpdateStreamAsync();
   return true;
 }
 
 void MacFSListener::RemovePath(const QString& path) {
-  Q_ASSERT(run_loop_);
   paths_.remove(path);
   UpdateStreamAsync();
 }
@@ -75,13 +77,24 @@ void MacFSListener::Clear() {
 
 void MacFSListener::UpdateStreamAsync() { update_timer_->start(); }
 
+// The stream's callback is handed this listener, so once this returns, the
+// callback mustn't be running or be called again.
+void MacFSListener::StopStream() {
+  if (!stream_) return;
+
+  FSEventStreamStop(stream_);
+  FSEventStreamInvalidate(stream_);
+  FSEventStreamRelease(stream_);
+  stream_ = nullptr;
+
+  // Stopping the stream stops new callbacks, but one can already be running
+  // on the queue. The queue is serial, so this waits for it to finish.
+  dispatch_sync(queue_, ^{
+  });
+}
+
 void MacFSListener::UpdateStream() {
-  if (stream_) {
-    FSEventStreamStop(stream_);
-    FSEventStreamInvalidate(stream_);
-    FSEventStreamRelease(stream_);
-    stream_ = nullptr;
-  }
+  StopStream();
 
   if (paths_.empty()) {
     return;
@@ -105,6 +118,6 @@ void MacFSListener::UpdateStream() {
                           reinterpret_cast<CFArrayRef>(array.get()), kFSEventStreamEventIdSinceNow,
                           latency, kFSEventStreamCreateFlagNone);
 
-  FSEventStreamScheduleWithRunLoop(stream_, run_loop_, kCFRunLoopDefaultMode);
+  FSEventStreamSetDispatchQueue(stream_, queue_);
   FSEventStreamStart(stream_);
 }
