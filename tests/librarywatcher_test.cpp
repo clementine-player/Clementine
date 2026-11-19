@@ -31,6 +31,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMap>
 #include <QSettings>
 #include <QTemporaryDir>
@@ -99,7 +100,9 @@ class LibraryWatcherTest : public ::testing::Test {
 
   void SetUp() {
     ASSERT_TRUE(library_dir_.isValid());
-    root_ = library_dir_.path();
+    // The library keeps canonical paths, and on macOS the temporary
+    // directory is under /var, a symlink to /private/var.
+    root_ = QFileInfo(library_dir_.path()).canonicalFilePath();
 
     database_.reset(new MemoryDatabase(nullptr));
     backend_.reset(new LibraryBackend);
