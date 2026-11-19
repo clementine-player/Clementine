@@ -11,6 +11,14 @@ a Debian, Ubuntu or Fedora package the debug file from its -dbgsym or
 Usage:
 
   uv run --only-group sentry dist/sentry_symbols.py \\
+      collect DEBUG SYMBOLS BINARY...
+
+    Copies each ELF BINARY into SYMBOLS, with its debug file from DEBUG, a
+    -dbgsym or -debuginfo package's /usr/lib/debug, as NAME.debug beside it.
+    Packages keep these under .build-id/ by build ID, but Sentry lists files by
+    the name they're uploaded with, so they're renamed after their binaries.
+
+  uv run --only-group sentry dist/sentry_symbols.py \\
       check SYMBOLS BINARY...
 
     Fails unless every BINARY, as shipped, has a file in SYMBOLS with debug
@@ -38,6 +46,7 @@ import argparse
 import json
 import os
 import pathlib
+import shutil
 import subprocess
 import sys
 from collections.abc import Iterable
@@ -52,6 +61,8 @@ class DebugFile:
     debug_ids: frozenset[str]
     has_debug_info: bool
     features: frozenset[str] = frozenset()
+    # For ELF files, their build IDs.
+    code_ids: frozenset[str] = frozenset()
 
 
 def parse_check(path: str, output: str) -> DebugFile:
@@ -63,6 +74,9 @@ def parse_check(path: str, output: str) -> DebugFile:
         debug_ids=frozenset(v["debug_id"] for v in data.get("variants", [])),
         has_debug_info=bool(data.get("is_usable")) and "debug" in features,
         features=frozenset(f for f in features if f),
+        code_ids=frozenset(
+            v["code_id"] for v in data.get("variants", []) if v.get("code_id")
+        ),
     )
 
 
@@ -96,6 +110,11 @@ def missing_symbols(
     return problems
 
 
+def build_id_path(code_id: str) -> pathlib.PurePath:
+    """Where /usr/lib/debug keeps the debug file for a build ID."""
+    return pathlib.PurePath(".build-id", code_id[:2], f"{code_id[2:]}.debug")
+
+
 def library_summary(libraries: Iterable[DebugFile]) -> list[str]:
     """How many libraries have function names, and unwind info, for Sentry."""
     libraries = list(libraries)
@@ -112,6 +131,27 @@ def library_summary(libraries: Iterable[DebugFile]) -> list[str]:
 
 def files_under(directory: pathlib.Path) -> list[pathlib.Path]:
     return sorted(p for p in directory.rglob("*") if p.is_file())
+
+
+def collect(
+    debug_dir: pathlib.Path, symbols_dir: pathlib.Path, binary_paths: list[pathlib.Path]
+) -> int:
+    symbols_dir.mkdir(parents=True, exist_ok=True)
+    for path in binary_paths:
+        binary = check_file(path)
+        if binary is None or len(binary.code_ids) != 1:
+            print(f"::error::{path} has no build ID")
+            return 1
+        (code_id,) = binary.code_ids
+        debug_file = debug_dir / build_id_path(code_id)
+        if not debug_file.exists():
+            print(f"::error::{path}: no {debug_file}")
+            return 1
+        shutil.copyfile(path, symbols_dir / path.name)
+        # Follows the link, which RPMs have there, to the file itself.
+        shutil.copyfile(debug_file, symbols_dir / f"{path.name}.debug")
+        print(f"{path}: {debug_file} -> {path.name}.debug")
+    return 0
 
 
 def check(symbols_dir: pathlib.Path, binary_paths: list[pathlib.Path]) -> int:
@@ -168,6 +208,10 @@ def upload(symbols_dir: pathlib.Path, library_dirs: list[pathlib.Path]) -> int:
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
+    collect_parser = commands.add_parser("collect")
+    collect_parser.add_argument("debug", type=pathlib.Path)
+    collect_parser.add_argument("symbols", type=pathlib.Path)
+    collect_parser.add_argument("binaries", type=pathlib.Path, nargs="+")
     check_parser = commands.add_parser("check")
     check_parser.add_argument("symbols", type=pathlib.Path)
     check_parser.add_argument("binaries", type=pathlib.Path, nargs="+")
@@ -177,6 +221,8 @@ def main(argv: list[str]) -> int:
     upload_parser.add_argument("symbols", type=pathlib.Path)
     upload_parser.add_argument("libraries", type=pathlib.Path, nargs="*")
     args = parser.parse_args(argv)
+    if args.command == "collect":
+        return collect(args.debug, args.symbols, args.binaries)
     if args.command == "check":
         return check(args.symbols, args.binaries)
     if args.command == "libraries":

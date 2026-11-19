@@ -1,9 +1,16 @@
 import json
+import pathlib
 
 import pytest
 
 import sentry_symbols
-from sentry_symbols import DebugFile, library_summary, missing_symbols, parse_check
+from sentry_symbols import (
+    DebugFile,
+    build_id_path,
+    library_summary,
+    missing_symbols,
+    parse_check,
+)
 
 
 def check_output(debug_ids: list[str], features: str, usable: bool = True) -> str:
@@ -39,6 +46,119 @@ def test_parse_check_no_features() -> None:
     assert parse_check("a.exe", output) == DebugFile(
         "a.exe", frozenset(), False, frozenset()
     )
+
+
+def test_parse_check_build_id() -> None:
+    output = json.dumps(
+        {
+            "type": "elf",
+            "variants": [{"debug_id": "id1", "code_id": "abcdef", "arch": "x86_64"}],
+            "features": "symtab, unwind",
+            "is_usable": True,
+        }
+    )
+    assert parse_check("clementine", output).code_ids == frozenset({"abcdef"})
+
+
+def test_build_id_path() -> None:
+    assert build_id_path("776dd5066a82") == pathlib.PurePath(
+        ".build-id/77/6dd5066a82.debug"
+    )
+
+
+def fake_check_file(monkeypatch: pytest.MonkeyPatch, code_ids: dict[str, str]) -> None:
+    def check_file(path: pathlib.Path) -> DebugFile:
+        code_id = code_ids.get(path.name)
+        return DebugFile(
+            str(path),
+            frozenset({"id"}),
+            False,
+            code_ids=frozenset({code_id}) if code_id else frozenset(),
+        )
+
+    monkeypatch.setattr(sentry_symbols, "check_file", check_file)
+
+
+def test_collect_names_debug_files_after_binaries(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: pathlib.Path
+) -> None:
+    fake_check_file(monkeypatch, {"clementine": "aabbcc", "tagreader": "ddeeff"})
+    package = tmp_path / "package"
+    (package / "usr/bin").mkdir(parents=True)
+    (package / "usr/bin/clementine").write_text("clementine")
+    (package / "usr/bin/tagreader").write_text("tagreader")
+    debug = package / "usr/lib/debug"
+    # As a deb has it: the file itself.
+    (debug / ".build-id/aa").mkdir(parents=True)
+    (debug / ".build-id/aa/bbcc.debug").write_text("clementine debug")
+    # As an RPM has it: a link to the file under its path.
+    (debug / "usr/bin").mkdir(parents=True)
+    (debug / "usr/bin/tagreader-1.0.debug").write_text("tagreader debug")
+    (debug / ".build-id/dd").mkdir()
+    (debug / ".build-id/dd/eeff.debug").symlink_to("../../usr/bin/tagreader-1.0.debug")
+    symbols = tmp_path / "symbols"
+
+    assert (
+        sentry_symbols.main(
+            [
+                "collect",
+                str(debug),
+                str(symbols),
+                str(package / "usr/bin/clementine"),
+                str(package / "usr/bin/tagreader"),
+            ]
+        )
+        == 0
+    )
+    assert {p.name: p.read_text() for p in symbols.iterdir()} == {
+        "clementine": "clementine",
+        "clementine.debug": "clementine debug",
+        "tagreader": "tagreader",
+        "tagreader.debug": "tagreader debug",
+    }
+    assert not (symbols / "tagreader.debug").is_symlink()
+
+
+def test_collect_without_debug_file(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: pathlib.Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    fake_check_file(monkeypatch, {"clementine": "aabbcc"})
+    (tmp_path / "clementine").write_text("clementine")
+    assert (
+        sentry_symbols.main(
+            [
+                "collect",
+                str(tmp_path / "debug"),
+                str(tmp_path / "symbols"),
+                str(tmp_path / "clementine"),
+            ]
+        )
+        == 1
+    )
+    assert "aa/bbcc.debug" in capsys.readouterr().out
+
+
+def test_collect_without_build_id(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: pathlib.Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    fake_check_file(monkeypatch, {})
+    (tmp_path / "clementine").write_text("clementine")
+    assert (
+        sentry_symbols.main(
+            [
+                "collect",
+                str(tmp_path),
+                str(tmp_path / "symbols"),
+                str(tmp_path / "clementine"),
+            ]
+        )
+        == 1
+    )
+    assert "has no build ID" in capsys.readouterr().out
 
 
 def test_binaries_with_symbols() -> None:
