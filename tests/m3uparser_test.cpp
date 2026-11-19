@@ -56,7 +56,7 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   parser_.LoadSong(line, 0, QDir(), &song);
   // The parser keeps the canonical path, which on macOS is under
   // /private/var rather than the temporary directory's /var.
-  ASSERT_EQ(QUrl::fromLocalFile(QFileInfo(temp).canonicalFilePath()),
+  ASSERT_EQ(QUrl::fromLocalFile(QFileInfo(temp.fileName()).canonicalFilePath()),
             song.url());
 
   // Read from the file's tags.
@@ -65,7 +65,7 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
 
 TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   TemporaryResource temp(":/testdata/beep.mp3");
-  QFileInfo info(temp);
+  QFileInfo info(temp.fileName());
   M3UParser parser(nullptr);
   QString line(info.fileName());
   Song song;

@@ -60,9 +60,22 @@ void PrintTo(const ::QHostAddress& address, std::ostream& os);
 
 Q_DECLARE_METATYPE(QModelIndex);
 
-class TemporaryResource : public QTemporaryFile {
+// A copy of a resource in a temporary file, which is deleted with this.
+// Unlike a QTemporaryFile, it isn't held open: QTemporaryFile keeps its
+// handle until it's destroyed, even once it's closed, and on Windows TagLib
+// can't open a file that's open for writing.
+class TemporaryResource {
  public:
-  TemporaryResource(const QString& filename);
+  explicit TemporaryResource(const QString& resource);
+  ~TemporaryResource();
+
+  TemporaryResource(const TemporaryResource&) = delete;
+  TemporaryResource& operator=(const TemporaryResource&) = delete;
+
+  const QString& fileName() const { return file_name_; }
+
+ private:
+  QString file_name_;
 };
 
 class TestQObject : public QObject {

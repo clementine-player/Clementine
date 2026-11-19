@@ -18,6 +18,7 @@
 #include "test_utils.h"
 
 #include <QDir>
+#include <QFile>
 #include <QHostAddress>
 #include <QNetworkRequest>
 #include <QString>
@@ -66,17 +67,20 @@ void PrintTo(const ::QHostAddress& address, std::ostream& os) {
   os << address.toString().toStdString();
 }
 
-TemporaryResource::TemporaryResource(const QString& filename) {
-  setFileTemplate(QDir::tempPath() + "/clementine_test-XXXXXX." +
-                  filename.section('.', -1, -1));
-  EXPECT_TRUE(open());
+TemporaryResource::TemporaryResource(const QString& resource) {
+  QTemporaryFile file(QDir::tempPath() + "/clementine_test-XXXXXX." +
+                      resource.section('.', -1, -1));
+  EXPECT_TRUE(file.open());
+  file.setAutoRemove(false);
+  file_name_ = file.fileName();
 
-  QFile resource(filename);
-  EXPECT_TRUE(resource.open(QIODevice::ReadOnly));
-  write(resource.readAll());
-
-  reset();
+  QFile source(resource);
+  EXPECT_TRUE(source.open(QIODevice::ReadOnly));
+  file.write(source.readAll());
+  // Destroying |file| closes it.
 }
+
+TemporaryResource::~TemporaryResource() { QFile::remove(file_name_); }
 
 TestQObject::TestQObject(QObject* parent)
     : QObject(parent), invoked_(0), number_(0) {}

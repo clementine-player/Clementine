@@ -126,7 +126,14 @@ void AirPlayRtspConnection::Close(const QByteArray& last_method) {
   old->setParent(nullptr);
   connect(old, &QAbstractSocket::disconnected, old, &QObject::deleteLater);
   old->flush();
-  old->disconnectFromHost();
+  // Closed a little later, reading and dropping whatever the receiver
+  // sends meanwhile, such as replies to requests still in flight. A socket
+  // closed with replies it hasn't read resets the connection, and on
+  // Windows the receiver then loses what it hasn't read yet, which can be
+  // the TEARDOWN.
+  connect(old, &QIODevice::readyRead, old, [old]() { old->readAll(); });
+  QTimer::singleShot(kCloseGraceMsec, old,
+                     [old]() { old->disconnectFromHost(); });
   NewSocket();
 }
 

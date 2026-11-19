@@ -56,6 +56,9 @@ class SleepInhibitorTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
     settings_dir_ = new QTemporaryDir;
+    // In an INI file there rather than, on Windows, the registry, which
+    // setPath() doesn't move and which this test has no name in.
+    QSettings::setDefaultFormat(QSettings::IniFormat);
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope,
                        settings_dir_->path());
     QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,

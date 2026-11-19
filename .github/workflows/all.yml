@@ -1563,6 +1563,7 @@ jobs:
             mingw-w64-clang-x86_64-gst-plugins-bad
             mingw-w64-clang-x86_64-gst-plugins-ugly
             mingw-w64-clang-x86_64-gst-libav
+            mingw-w64-clang-x86_64-gtest
 
       # These aren't confirmed to exist as MSYS2 clang64 packages (libmtp in
       # particular). Failing softly here just means CMake's optional_component
@@ -1682,6 +1683,33 @@ jobs:
       - name: build
         working-directory: bin
         run: cmake --build .
+
+      # The same tests as the Test job, built with this job's clang64
+      # toolchain, so the Windows-only code is tested too. They come after
+      # the app so a test that breaks here still leaves a build to look at,
+      # and before anything is packaged or signed. MSYS2's shell has
+      # /clang64/bin on PATH, so the tests find their DLLs, and Qt's
+      # offscreen plugin, there.
+      - name: Build tests
+        working-directory: bin
+        run: |
+          set -e
+          # Without googletest, CMake leaves the tests out quietly.
+          grep -q '^GTest_DIR:PATH=' CMakeCache.txt
+          cmake --build . --target build_tests
+      - name: Run tests
+        working-directory: bin/tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          status=0
+          for test in $(find . -maxdepth 1 -type f -name '*_test.exe' | sort); do
+            echo "::group::${test#./}"
+            # A test that hangs fails, and the rest still run.
+            timeout 10m ./"${test}" || status=1
+            echo "::endgroup::"
+          done
+          exit ${status}
 
       - name: Copy build outputs
         working-directory: dist/windows

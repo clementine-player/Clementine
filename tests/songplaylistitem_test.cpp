@@ -33,6 +33,11 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
   SongPlaylistItemTest() : temp_file_(GetParam()) {}
 
   void SetUp() {
+#ifdef Q_OS_WIN
+    if (QString(GetParam()).contains('?')) {
+      GTEST_SKIP() << "Windows doesn't allow '?' in file names";
+    }
+#endif
     // SongPlaylistItem::Url() checks if the file exists, so we need a real file
     ASSERT_TRUE(temp_file_.open());
 

@@ -26,8 +26,6 @@
 
 #include "library/librarywatcher.h"
 
-#include <utime.h>
-
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
@@ -37,6 +35,8 @@
 #include <QTemporaryDir>
 #include <QTest>
 #include <QThread>
+#include <chrono>
+#include <filesystem>
 #include <functional>
 #include <memory>
 
@@ -48,6 +48,7 @@
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarytagprefetcher.h"
+#include "tagreader_env.h"
 #include "test_utils.h"
 
 namespace {
@@ -66,6 +67,9 @@ class LibraryWatcherTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
     sSettingsDir = new QTemporaryDir;
+    // In an INI file there rather than, on Windows, the registry, which
+    // setPath() doesn't move and which this test has no name in.
+    QSettings::setDefaultFormat(QSettings::IniFormat);
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope,
                        sSettingsDir->path());
     QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,
@@ -79,8 +83,7 @@ class LibraryWatcherTest : public ::testing::Test {
       s.setValue("Player/max_numprocs_tagclients", 4);
     }
 
-    // The workers are found on $PATH.
-    qputenv("PATH", QByteArray(TAGREADER_DIR) + ":" + qgetenv("PATH"));
+    PutTagReaderOnPath();
     sTagReaderThread = new QThread;
     sTagReaderThread->start();
     sTagReader = new TagReaderClient;
@@ -214,11 +217,16 @@ class LibraryWatcherTest : public ::testing::Test {
 
   // Moves a directory's mtime on. A rescan only looks inside directories
   // whose mtime, in whole seconds, changed, and a test is quicker than that.
+  // With std::filesystem: on Windows, utime() can't set a directory's.
   void TouchDirectory(const QString& path) {
-    const time_t later =
-        QDateTime::currentDateTime().addSecs(10).toSecsSinceEpoch();
-    utimbuf times{later, later};
-    ASSERT_EQ(0, utime(QFile::encodeName(path).constData(), &times));
+    const std::filesystem::path dir(path.toStdU16String());
+    std::error_code error;
+    const std::filesystem::file_time_type mtime =
+        std::filesystem::last_write_time(dir, error);
+    ASSERT_FALSE(error) << error.message();
+    std::filesystem::last_write_time(dir, mtime + std::chrono::seconds(10),
+                                     error);
+    ASSERT_FALSE(error) << error.message();
   }
 
   QTemporaryDir library_dir_;

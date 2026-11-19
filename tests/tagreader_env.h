@@ -19,6 +19,7 @@
 
 #include <gtest/gtest.h>
 
+#include <QDir>
 #include <QMetaObject>
 #include <QThread>
 
@@ -36,11 +37,17 @@
 //
 // The client gets a thread of its own, because its blocking calls, which the
 // tests make, wait for replies that arrive on the client's thread.
+// The workers are found on $PATH, whose separator is ';' on Windows.
+inline void PutTagReaderOnPath() {
+  qputenv("PATH", (QDir::toNativeSeparators(TAGREADER_DIR) +
+                   QDir::listSeparator() + qEnvironmentVariable("PATH"))
+                      .toLocal8Bit());
+}
+
 class TagReaderEnvironment : public ::testing::Environment {
  public:
   void SetUp() {
-    // The workers are found on $PATH.
-    qputenv("PATH", QByteArray(TAGREADER_DIR) + ":" + qgetenv("PATH"));
+    PutTagReaderOnPath();
     thread_ = new QThread;
     thread_->start();
     client_ = new TagReaderClient;

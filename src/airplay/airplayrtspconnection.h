@@ -58,6 +58,8 @@ class AirPlayRtspConnection : public QObject {
   // asleep never accepts the connection.
   static const int kConnectTimeoutMsec = 5000;
   static const int kTimeoutMsec = 10000;
+  // How long a closed connection's socket still reads before it closes.
+  static const int kCloseGraceMsec = 1000;
 
   explicit AirPlayRtspConnection(QObject* parent = nullptr);
   ~AirPlayRtspConnection();
