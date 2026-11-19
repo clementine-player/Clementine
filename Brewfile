@@ -11,11 +11,9 @@ brew 'glew'
 brew 'glib'
 brew 'google-sparsehash'
 brew 'googletest'
-brew 'gst-libav'
-brew 'gst-plugins-bad'
-brew 'gst-plugins-base'
-brew 'gst-plugins-good'
-brew 'gst-plugins-ugly'
+# Every GStreamer plugin set (base, good, bad, ugly, libav and the rest)
+# is in this one formula: Homebrew folded the gst-* formulae into it, and
+# their names are only renames now, which it drops after a few years.
 brew 'gstreamer'
 brew 'gtk-doc'
 brew 'intltool'
