@@ -36,7 +36,9 @@ bool IsWithin(const QDir& root, const QFileInfo& file) {
 
 bool MayAdd(const QUrl& url, const QString& files_root,
             const std::function<bool(const QUrl&)>& in_library) {
-  if (url.scheme().isEmpty()) return false;
+  // A path, not a URL. QUrl takes a Windows path's drive letter for the
+  // scheme, and no real scheme has one letter.
+  if (url.scheme().size() <= 1) return false;
   if (!url.isLocalFile()) return true;
 
   if (!files_root.isEmpty()) {

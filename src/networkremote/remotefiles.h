@@ -42,7 +42,8 @@ bool IsWithin(const QDir& root, const QFileInfo& file);
 // remotes whatever is on its playlists, so a client that could add any file
 // could read any file. `in_library` says whether a file's URL is in the
 // library. URLs that aren't files, such as streams, may be added. A URL
-// without a scheme is refused, since it would be taken as a path.
+// without a scheme is refused, since it would be taken as a path, as is a
+// Windows path, whose drive letter QUrl takes for a scheme.
 bool MayAdd(const QUrl& url, const QString& files_root,
             const std::function<bool(const QUrl&)>& in_library);
 

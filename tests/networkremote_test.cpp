@@ -447,6 +447,8 @@ TEST(NetworkRemoteTest, OnlyFilesFromTheLibraryOrTheFilesTabCanBeAdded) {
   // A path without a scheme.
   EXPECT_FALSE(
       RemoteFiles::MayAdd(QUrl(base.filePath("secret")), root, library));
+  // A Windows path, whose drive letter QUrl takes for the scheme.
+  EXPECT_FALSE(RemoteFiles::MayAdd(QUrl("C:/secret"), root, library));
   // Streams aren't files on this computer.
   EXPECT_TRUE(RemoteFiles::MayAdd(QUrl("http://radio.example/stream.mp3"), root,
                                   library));

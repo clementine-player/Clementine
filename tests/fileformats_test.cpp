@@ -20,7 +20,6 @@
 
 #include <QDir>
 #include <QFile>
-#include <QTemporaryFile>
 
 #include "core/song.h"
 #include "core/tagreaderclient.h"
@@ -50,12 +49,7 @@ TEST_P(FileformatsTest, Exists) {
 
 TEST_P(FileformatsTest, LoadsTags) {
   // With the format's extension, which the tag reader goes by.
-  QTemporaryFile temp(QDir::tempPath() + "/fileformatstest-XXXXXX." + format_);
-  ASSERT_TRUE(temp.open());
-  QFile resource(resource_filename_);
-  ASSERT_TRUE(resource.open(QIODevice::ReadOnly));
-  temp.write(resource.readAll());
-  temp.flush();
+  TemporaryResource temp(resource_filename_);
 
   Song song;
   TagReaderClient::Instance()->ReadFileBlocking(temp.fileName(), &song);
