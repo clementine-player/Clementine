@@ -377,6 +377,9 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   } clear_prefetcher{&prefetcher_};
 
   QSet<QString> cues_processed;
+  // Files that went away after being listed. Taken out of |files_on_disk|
+  // after the loop below, which mustn't change the list it's going through.
+  QStringList vanished_files;
 
   // Now compare the list from the database with the list of files on disk
   for (const QString& file : files_on_disk) {
@@ -396,7 +399,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       if (!file_info.exists()) {
         // Partially fixes race condition - if file was removed between being
         // added to the list and now.
-        files_on_disk.removeAll(file);
+        vanished_files << file;
         continue;
       }
 
@@ -462,6 +465,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       }
     }
   }
+
+  for (const QString& file : vanished_files) files_on_disk.removeAll(file);
 
   // Done reading tags; drop any requests the loop didn't use before scanning
   // subdirectories, which have prefetchers of their own.

@@ -63,6 +63,24 @@ QTemporaryDir* sSettingsDir = nullptr;
 QThread* sTagReaderThread = nullptr;
 TagReaderClient* sTagReader = nullptr;
 
+// Runs a test's hook when the watcher asks for a directory's songs, which a
+// scan does after listing the first subdirectory it looks in and before going
+// through its files.
+class HookedLibraryBackend : public LibraryBackend {
+ public:
+  SongList FindSongsInDirectory(int id) override {
+    if (before_find_songs_) {
+      // Once: the hook is the test's, not every scan's.
+      std::function<void()> hook;
+      hook.swap(before_find_songs_);
+      hook();
+    }
+    return LibraryBackend::FindSongsInDirectory(id);
+  }
+
+  std::function<void()> before_find_songs_;
+};
+
 class LibraryWatcherTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
@@ -108,7 +126,7 @@ class LibraryWatcherTest : public ::testing::Test {
     root_ = QFileInfo(library_dir_.path()).canonicalFilePath();
 
     database_.reset(new MemoryDatabase(nullptr));
-    backend_.reset(new LibraryBackend);
+    backend_.reset(new HookedLibraryBackend);
     backend_->Init(database_.get(), Library::kSongsTable, Library::kDirsTable,
                    Library::kSubdirsTable, Library::kFtsTable);
 
@@ -232,7 +250,7 @@ class LibraryWatcherTest : public ::testing::Test {
   QTemporaryDir library_dir_;
   QString root_;
   std::unique_ptr<Database> database_;
-  std::unique_ptr<LibraryBackend> backend_;
+  std::unique_ptr<HookedLibraryBackend> backend_;
   TaskManager task_manager_;
   std::unique_ptr<LibraryWatcher> watcher_;
 };
@@ -288,6 +306,26 @@ TEST_F(LibraryWatcherTest, RescanPicksUpChangedAddedAndDeletedFiles) {
   EXPECT_EQ(3 + kManyFiles + 2, songs.size());
   EXPECT_TRUE(songs.contains(root_ + "/Formats/beep.ogg#0"));
   EXPECT_NE("Retagged", SongAt(ManyFile(11)).title());
+}
+
+// Files can go between the scan listing a directory and reading them, such
+// as when they're moved while it runs.
+TEST_F(LibraryWatcherTest, RescanCopesWithFilesDeletedAsItRuns) {
+  ScanLibrary();
+
+  // Only Many/ has changed, so it's the first directory the rescan lists.
+  TouchDirectory(root_ + "/Many");
+  backend_->before_find_songs_ = [this]() {
+    for (int i = 0; i < kManyFiles; ++i) QFile::remove(ManyFile(i));
+  };
+
+  watcher_->IncrementalScanAsync();
+  ASSERT_TRUE(WaitFor([this]() { return Songs().size() == 3 + 2; }))
+      << Songs().size() << " songs left";
+  EXPECT_FALSE(backend_->before_find_songs_);
+  for (int i = 0; i < kManyFiles; ++i) {
+    EXPECT_FALSE(SongAt(ManyFile(i)).is_valid()) << ManyFile(i).toStdString();
+  }
 }
 
 TEST_F(LibraryWatcherTest, FullRescanRereadsUnchangedDirectories) {
