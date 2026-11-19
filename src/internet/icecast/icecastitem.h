@@ -35,7 +35,7 @@ class IcecastItem : public SimpleTreeItem<IcecastItem> {
   explicit IcecastItem(SimpleTreeModel<IcecastItem>* model)
       : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
   explicit IcecastItem(Type type, IcecastItem* parent = nullptr)
-      : SimpleTreeItem<IcecastItem>(type, parent) {}
+      : SimpleTreeItem<IcecastItem>(this, type, parent) {}
 
   IcecastBackend::Station station;
 };

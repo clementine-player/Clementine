@@ -59,7 +59,7 @@ class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
         task_percentage_(-1) {}
 
   DeviceInfo(Type type, DeviceInfo* parent = nullptr)
-      : SimpleTreeItem<DeviceInfo>(type, parent),
+      : SimpleTreeItem<DeviceInfo>(this, type, parent),
         database_id_(-1),
         size_(0),
         transcode_mode_(MusicStorage::Transcode_Unsupported),
