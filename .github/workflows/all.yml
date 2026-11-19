@@ -3295,6 +3295,30 @@ jobs:
         working-directory: bin
         run: make -j$(sysctl -n hw.ncpu)
 
+      # The same tests as the Test job, built against this job's Homebrew
+      # Qt, so the macOS-only code (and its tests, such as
+      # macfslistener_test) is tested too. They come after the app so a
+      # test that breaks here still leaves a build to look at, and before
+      # anything is notarized or uploaded.
+      - name: Build tests
+        working-directory: bin
+        run: |
+          # Without googletest, CMake leaves the tests out quietly.
+          grep -q '^GTest_DIR:PATH=/' CMakeCache.txt
+          make -j$(sysctl -n hw.ncpu) build_tests
+      - name: Run tests
+        working-directory: bin/tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          status=0
+          for test in $(find . -maxdepth 1 -type f -perm -u+x -name '*_test' | sort); do
+            echo "::group::${test#./}"
+            ./"${test}" || status=1
+            echo "::endgroup::"
+          done
+          exit ${status}
+
       - name: Copy icon files and resources
         working-directory: bin
         run: make install

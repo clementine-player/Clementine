@@ -431,7 +431,8 @@ TEST(AirPlaySessionTest, Pairs) {
   ASSERT_TRUE(receiver.Listen());
   receiver.set_ask_to_allow(false);
 
-  const Result result = Pair(receiver.device(), FastOptions());
+  AirPlaySession session(FastOptions());
+  const Result result = Open(&session, receiver.device());
   EXPECT_TRUE(result.set_up) << result.error;
   EXPECT_TRUE(receiver.paired());
   // pair-pin-start would make it show a PIN, which transient pairing doesn't
@@ -440,6 +441,9 @@ TEST(AirPlaySessionTest, Pairs) {
                 {"GET /info", "POST /pair-setup", "POST /pair-setup", "SETUP"}),
             receiver.requests().mid(0, 4));
   EXPECT_EQ(QStringList(), receiver.errors());
+  // The receiver asks for the time as the session is set up, but doesn't
+  // wait for the answer before saying it is, so the answer can come after.
+  WaitFor([&receiver]() { return receiver.timing_replies() >= 1; });
   EXPECT_GE(receiver.timing_replies(), 1);
   EXPECT_EQ(QSet<QString>({"Clementine on test"}), receiver.client_names());
 }
@@ -865,6 +869,10 @@ TEST(AirPlaySessionTest, PairsPersistentlyThenVerifies) {
                      });
     EXPECT_TRUE(Open(&session, receiver.device()).set_up);
   }
+  // The first session's last requests reach the receiver after it's gone.
+  WaitFor([&receiver]() { return receiver.requests().endsWith("TEARDOWN"); });
+  ASSERT_TRUE(receiver.requests().endsWith("TEARDOWN"))
+      << receiver.requests().join(",").toStdString();
   EXPECT_EQ(FakeAirPlayReceiver::PairingId(), receiver_id);
   EXPECT_EQ(FakeAirPlayReceiver::PublicKey(), receiver_key);
   EXPECT_EQ(Ed25519PublicKey(options.identity_seed),
