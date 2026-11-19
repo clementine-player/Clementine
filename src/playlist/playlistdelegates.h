@@ -143,24 +143,18 @@ class RatingItemDelegate : public PlaylistDelegateBase {
   QModelIndexList selected_indexes_;
 };
 
-class TagCompletionModel : public QStringListModel {
- public:
-  TagCompletionModel(LibraryBackend* backend, Playlist::Column column);
-
- private:
-  static QString database_column(Playlist::Column column);
-};
-
+// Offers the values a column already has in the library as completions for
+// an editor. The values are looked up in the background, and the completer
+// is set on the editor once they arrive.
 class TagCompleter : public QCompleter {
   Q_OBJECT
 
  public:
   TagCompleter(LibraryBackend* backend, Playlist::Column column,
                QLineEdit* editor);
-  ~TagCompleter();
 
  private slots:
-  void ModelReady(TagCompletionModel* model);
+  void ValuesReady(const QStringList& values);
 
  private:
   QLineEdit* editor_;
