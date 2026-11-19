@@ -971,10 +971,8 @@ jobs:
             "$rpm/usr/bin/clementine-tagreader"
             "$rpm/usr/libexec/clementine/crashpad_handler"
           )
-          # Not /usr/lib/debug/.build-id, whose links point at files
-          # outside the package.
-          cp -r "$rpm/usr/lib/debug/usr" symbols/debug
-          cp "${binaries[@]}" symbols/
+          uv run --only-group sentry dist/sentry_symbols.py collect \
+            "$rpm/usr/lib/debug" symbols "${binaries[@]}"
           uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
       - &rpm_symbols_artifact
         uses: actions/upload-artifact@v7.0.2
@@ -1465,8 +1463,8 @@ jobs:
               "$rpm/usr/bin/clementine-tagreader"
               "$rpm/usr/libexec/clementine/crashpad_handler"
             )
-            cp -r "$rpm/usr/lib/debug/usr" "symbols/$chroot/debug"
-            cp "${binaries[@]}" "symbols/$chroot/"
+            uv run --only-group sentry dist/sentry_symbols.py collect \
+              "$rpm/usr/lib/debug" "symbols/$chroot" "${binaries[@]}"
             uv run --only-group sentry dist/sentry_symbols.py check \
               "symbols/$chroot" "${binaries[@]}"
           done
@@ -2301,7 +2299,8 @@ jobs:
             "$deb/usr/bin/clementine-tagreader"
             "$deb/usr/libexec/clementine/crashpad_handler"
           )
-          cp -r "$deb/usr/lib/debug" "${binaries[@]}" symbols/
+          uv run --only-group sentry dist/sentry_symbols.py collect \
+            "$deb/usr/lib/debug" symbols "${binaries[@]}"
           uv run --only-group sentry dist/sentry_symbols.py check symbols "${binaries[@]}"
       - &deb_symbols_artifact
         uses: actions/upload-artifact@v7.0.2
