@@ -29,8 +29,10 @@ template <typename T>
 class SimpleTreeItem {
  public:
   SimpleTreeItem(int _type, SimpleTreeModel<T>* _model);  // For the root item
-  SimpleTreeItem(int _type, const QString& _key, T* _parent = nullptr);
-  explicit SimpleTreeItem(int _type, T* _parent = nullptr);
+  // self is the item being constructed: T's constructor passes this. Casting
+  // this to T* here instead would be undefined, as the T isn't made yet.
+  SimpleTreeItem(T* self, int _type, const QString& _key, T* _parent = nullptr);
+  SimpleTreeItem(T* self, int _type, T* _parent = nullptr);
   virtual ~SimpleTreeItem();
 
   void InsertNotify(T* _parent);
@@ -71,7 +73,8 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, SimpleTreeModel<T>* _model)
       model(_model) {}
 
 template <typename T>
-SimpleTreeItem<T>::SimpleTreeItem(int _type, const QString& _key, T* _parent)
+SimpleTreeItem<T>::SimpleTreeItem(T* self, int _type, const QString& _key,
+                                  T* _parent)
     : type(_type),
       key(_key),
       lazy_loaded(false),
@@ -80,12 +83,12 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, const QString& _key, T* _parent)
       model(_parent ? _parent->model : nullptr) {
   if (parent) {
     row = parent->children.count();
-    parent->children << static_cast<T*>(this);
+    parent->children << self;
   }
 }
 
 template <typename T>
-SimpleTreeItem<T>::SimpleTreeItem(int _type, T* _parent)
+SimpleTreeItem<T>::SimpleTreeItem(T* self, int _type, T* _parent)
     : type(_type),
       lazy_loaded(false),
       parent(_parent),
@@ -93,7 +96,7 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, T* _parent)
       model(_parent ? _parent->model : nullptr) {
   if (parent) {
     row = parent->children.count();
-    parent->children << static_cast<T*>(this);
+    parent->children << self;
   }
 }
 

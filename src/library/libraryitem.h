@@ -42,7 +42,7 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
         compilation_artist_node_(nullptr) {}
 
   LibraryItem(Type type, LibraryItem* parent = nullptr)
-      : SimpleTreeItem<LibraryItem>(type, parent),
+      : SimpleTreeItem<LibraryItem>(this, type, parent),
         container_level(-1),
         compilation_artist_node_(nullptr) {}
 
