@@ -110,6 +110,7 @@ void Queue::SourceLayoutChanged() {
 }
 
 QModelIndex Queue::index(int row, int column, const QModelIndex& parent) const {
+  if (!hasIndex(row, column, parent)) return QModelIndex();
   return createIndex(row, column);
 }
 
@@ -170,6 +171,10 @@ void Queue::ToggleTracks(const QModelIndexList& source_indexes) {
 }
 
 void Queue::InsertFirst(const QModelIndexList& source_indexes) {
+  // "Play next" with nothing selected, such as from the playlist's context
+  // menu opened on empty space, has nothing to insert.
+  if (source_indexes.isEmpty()) return;
+
   for (const QModelIndex& source_index : source_indexes) {
     QModelIndex proxy_index = mapFromSource(source_index);
     if (proxy_index.isValid()) {

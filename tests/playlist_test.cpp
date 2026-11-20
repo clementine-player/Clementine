@@ -25,6 +25,7 @@
 #include "library/libraryplaylistitem.h"
 #include "mock_playlistitem.h"
 #include "mock_settingsprovider.h"
+#include "playlist/queue.h"
 #include "test_utils.h"
 
 using std::shared_ptr;
@@ -548,6 +549,48 @@ TEST_F(PlaylistTest, LibraryIdMapMulti) {
   playlist_.removeRow(0);  // item_one
   EXPECT_EQ(0, playlist_.library_items_by_id(1).count());
   EXPECT_EQ(0, playlist_.library_items_by_id(2).count());
+}
+
+TEST_F(PlaylistTest, PlayNextWithNothingSelected) {
+  // Choosing "Play next" from the context menu on an empty part of the
+  // playlist asks the queue to insert no tracks. With the queue empty too,
+  // this used to read past the end of it and crash (CLEMENTINE-9).
+  Queue* queue = playlist_.queue();
+  ASSERT_EQ(0, queue->rowCount(QModelIndex()));
+
+  queue->InsertFirst(QModelIndexList());
+  EXPECT_EQ(0, queue->rowCount(QModelIndex()));
+
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  queue->InsertFirst(QModelIndexList());
+  EXPECT_EQ(0, queue->rowCount(QModelIndex()));
+}
+
+TEST_F(PlaylistTest, PlayNextInsertsAtFrontOfQueue) {
+  playlist_.InsertItems(PlaylistItemList()
+                        << MakeMockItemP("One") << MakeMockItemP("Two")
+                        << MakeMockItemP("Three"));
+  Queue* queue = playlist_.queue();
+  queue->ToggleTracks(QModelIndexList() << playlist_.index(0, 0));
+  queue->InsertFirst(QModelIndexList()
+                     << playlist_.index(2, 0) << playlist_.index(1, 0));
+
+  ASSERT_EQ(3, queue->rowCount(QModelIndex()));
+  EXPECT_EQ(2, queue->mapToSource(queue->index(0, 0)).row());
+  EXPECT_EQ(1, queue->mapToSource(queue->index(1, 0)).row());
+  EXPECT_EQ(0, queue->mapToSource(queue->index(2, 0)).row());
+}
+
+TEST_F(PlaylistTest, QueueHasNoIndexesPastItsEnd) {
+  Queue* queue = playlist_.queue();
+  EXPECT_FALSE(queue->index(0, 0).isValid());
+  EXPECT_FALSE(queue->mapToSource(queue->index(0, 0)).isValid());
+
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  queue->ToggleTracks(QModelIndexList() << playlist_.index(0, 0));
+  EXPECT_TRUE(queue->index(0, 0).isValid());
+  EXPECT_FALSE(queue->index(1, 0).isValid());
+  EXPECT_FALSE(queue->index(-1, 0).isValid());
 }
 
 }  // namespace
