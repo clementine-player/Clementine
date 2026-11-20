@@ -1,0 +1,13 @@
+# LeakSanitizer suppressions for the sanitizer CI job (see "ASan and UBSan"
+# in .github/workflows/all.yml). Only for leaks inside system libraries that
+# Clementine can't free; fix leaks in Clementine's own code instead.
+
+# libproxy, which Qt asks for the system's proxy before it connects a
+# socket, keeps what it reads about the proxy configuration until exit.
+leak:libpxbackend-1.0.so
+leak:libproxy.so
+
+# QtDBus keeps the bookkeeping for an object registered on a connection
+# that has since been disconnected (portalglobalshortcutbackend_test
+# registers its fake portal on a connection of its own for each test).
+leak:QDBusConnection::registerObject
