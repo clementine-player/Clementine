@@ -160,7 +160,9 @@ TEST_F(SleepInhibitorTest, LetsGoWhenDeleted) {
 
   hold = inhibitor_->Acquire(Activity::FullScreenVisualizations);
   // A hold mustn't outlive its inhibitor, so let go of it without telling it.
-  hold.release();
+  // Kept where LeakSanitizer can see it, since it can't be deleted now.
+  static SleepInhibitor::Hold* volatile abandoned;
+  abandoned = hold.release();
   inhibitor_.reset();
   EXPECT_EQ("Inhibit DisplayOn, Uninhibit DisplayOn", Calls());
 }

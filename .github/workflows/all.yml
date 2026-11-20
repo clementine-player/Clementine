@@ -136,7 +136,8 @@ jobs:
       CMAKE_C_COMPILER_LAUNCHER: ccache
       CMAKE_CXX_COMPILER_LAUNCHER: ccache
     steps:
-      - name: Install dependencies
+      - &test_dependencies
+        name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
         # The same set as the Resolute build below, minus the Debian
@@ -288,6 +289,94 @@ jobs:
       # evicted master's: a pull request, and the next push to master,
       # then compiled everything from scratch. A pull request's entries
       # only ever served later pushes to the same pull request.
+      - name: Save ccache
+        if: >
+          always() && github.event_name == 'push'
+          && github.ref == 'refs/heads/master'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+
+  # The test suite again, built with AddressSanitizer and
+  # UndefinedBehaviorSanitizer: use after free, buffer overflows, leaks and
+  # undefined behaviour, which the plain build only finds when they happen
+  # to crash. Any report fails the job. Not one of the builds' needs: the
+  # Test job already gates them, and this one is slower.
+  #
+  # clementine_lib is built shared, so the test binaries share one
+  # sanitized copy of it: linked statically, each carries its own, and the
+  # build no longer fits on the runner.
+  sanitizers:
+    name: ASan and UBSan
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:resolute
+    env:
+      CCACHE_DIR: /ccache
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_MAXSIZE: 500M
+      CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime
+      CMAKE_C_COMPILER_LAUNCHER: ccache
+      CMAKE_CXX_COMPILER_LAUNCHER: ccache
+    steps:
+      - *test_dependencies
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: git hackery
+        run: git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      - name: Restore ccache
+        uses: actions/cache/restore@v6.1.0
+        with:
+          path: /ccache
+          key: ccache-${{ github.job }}-${{ runner.arch }}-${{ github.sha }}
+          restore-keys: ccache-${{ github.job }}-${{ runner.arch }}-
+      - name: Reset ccache statistics
+        run: ccache --zero-stats
+      - name: cmake
+        working-directory: bin
+        # -O1 keeps the tests quick without losing the stack traces;
+        # -fno-sanitize-recover makes UBSan stop at its first report, as
+        # ASan does, rather than print it and carry on.
+        env:
+          SANITIZE: -fsanitize=address,undefined -fno-sanitize-recover=all
+        run: |
+          flags="-O1 -g -fno-omit-frame-pointer ${SANITIZE}"
+          cmake .. \
+            -DCLEMENTINE_LIB_SHARED=ON \
+            -DCMAKE_C_FLAGS="${flags}" \
+            -DCMAKE_CXX_FLAGS="${flags}" \
+            -DCMAKE_EXE_LINKER_FLAGS="${SANITIZE}" \
+            -DCMAKE_SHARED_LINKER_FLAGS="${SANITIZE}"
+      - name: Build tests
+        working-directory: bin
+        run: make -j$(nproc) build_tests
+      - name: Run tests
+        working-directory: bin/tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+          ASAN_OPTIONS: detect_leaks=1:detect_stack_use_after_return=1
+          UBSAN_OPTIONS: print_stacktrace=1
+        run: |
+          # Leaks inside the libraries the tests use, which Clementine can't
+          # free; see the file for each. From the shell: in a container,
+          # github.workspace is the path on the host.
+          export LSAN_OPTIONS="suppressions=${GITHUB_WORKSPACE}/tests/sanitizers/lsan.supp:print_suppressions=0"
+          status=0
+          for test in $(find . -maxdepth 1 -type f -executable -name '*_test' | sort); do
+            echo "::group::${test#./}"
+            if ! ./"${test}"; then
+              echo "::error::${test#./} failed or a sanitizer reported an error"
+              status=1
+            fi
+            echo "::endgroup::"
+          done
+          exit ${status}
+      - name: ccache statistics
+        if: always()
+        run: ccache --show-stats || true
+      # Only master's runs save, as in the Test job.
       - name: Save ccache
         if: >
           always() && github.event_name == 'push'
@@ -3735,6 +3824,7 @@ jobs:
       - python
       - protos
       - test
+      - sanitizers
       - build_source
       - build_bookworm_64
       - build_trixie_64

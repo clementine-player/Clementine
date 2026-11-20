@@ -17,6 +17,7 @@
 
 #include "airplayrtspconnection.h"
 
+#include <QCoreApplication>
 #include <QCryptographicHash>
 #include <QRandomGenerator>
 #include <QRegularExpression>
@@ -120,10 +121,13 @@ void AirPlayRtspConnection::Close(const QByteArray& last_method) {
   // Whatever was written, such as a TEARDOWN, still goes, and the next
   // connection gets a socket of its own.
   // It's written out now, and the socket outlives this connection, which may
-  // be closing because Clementine is quitting.
+  // be closing because Clementine is quitting. The application takes it
+  // instead, so that one still waiting to close when the event loop stops
+  // is deleted with the application rather than leaked.
   QTcpSocket* old = socket_;
   old->disconnect(this);
-  old->setParent(nullptr);
+  QCoreApplication* app = QCoreApplication::instance();
+  old->setParent(app && app->thread() == old->thread() ? app : nullptr);
   connect(old, &QAbstractSocket::disconnected, old, &QObject::deleteLater);
   old->flush();
   // Closed a little later, reading and dropping whatever the receiver
