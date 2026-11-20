@@ -21,8 +21,8 @@
 
 #include <QMessageBox>
 
-#include "core/closure.h"
 #include "core/network.h"
+#include "gpodderclient.h"
 #include "gpoddertoptagsmodel.h"
 #include "ui/iconloader.h"
 
@@ -31,15 +31,15 @@ const int GPodderTopTagsPage::kMaxTagCount = 100;
 GPodderTopTagsPage::GPodderTopTagsPage(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),
       network_(new NetworkAccessManager(this)),
-      api_(new mygpo::ApiRequest(network_)),
+      client_(new GPodderClient(network_, this)),
       done_initial_load_(false) {
   setWindowTitle(tr("gpodder.net directory"));
   setWindowIcon(IconLoader::Load("mygpo", IconLoader::Provider));
 
-  SetModel(new GPodderTopTagsModel(api_, app, this));
+  SetModel(new GPodderTopTagsModel(client_, app, this));
 }
 
-GPodderTopTagsPage::~GPodderTopTagsPage() { delete api_; }
+GPodderTopTagsPage::~GPodderTopTagsPage() {}
 
 void GPodderTopTagsPage::Show() {
   if (!done_initial_load_) {
@@ -47,27 +47,21 @@ void GPodderTopTagsPage::Show() {
     emit Busy(true);
     done_initial_load_ = true;
 
-    mygpo::TagListPtr tag_list(api_->topTags(kMaxTagCount));
-    NewClosure(tag_list.data(), &mygpo::TagList::finished, this,
-               &GPodderTopTagsPage::TagListLoaded, tag_list);
-    NewClosure(tag_list.data(), &mygpo::TagList::parseError, this,
-               &GPodderTopTagsPage::TagListFailed, tag_list);
-    NewClosure(tag_list.data(), &mygpo::TagList::requestError, this,
-               [this, tag_list](QNetworkReply::NetworkError) {
-                 TagListFailed(tag_list);
-               });
+    client_->TopTags(
+        kMaxTagCount, [this](const QStringList& tags) { TagListLoaded(tags); },
+        [this](const QString&) { TagListFailed(); });
   }
 }
 
-void GPodderTopTagsPage::TagListLoaded(mygpo::TagListPtr tag_list) {
+void GPodderTopTagsPage::TagListLoaded(const QStringList& tags) {
   emit Busy(false);
 
-  for (mygpo::TagPtr tag : tag_list->list()) {
-    model()->appendRow(model()->CreateFolder(tag->tag()));
+  for (const QString& tag : tags) {
+    model()->appendRow(model()->CreateFolder(tag));
   }
 }
 
-void GPodderTopTagsPage::TagListFailed(mygpo::TagListPtr list) {
+void GPodderTopTagsPage::TagListFailed() {
   emit Busy(false);
   done_initial_load_ = false;
 

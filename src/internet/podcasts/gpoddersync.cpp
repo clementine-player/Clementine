@@ -45,6 +45,7 @@ GPodderSync::GPodderSync(Application* app, QObject* parent)
     : QObject(parent),
       app_(app),
       network_(new NetworkAccessManager(kRequestTimeout, this)),
+      client_(new GPodderClient(network_, this)),
       backend_(app_->podcast_backend()),
       loader_(new PodcastUrlLoader(this)),
       get_updates_timer_(new QTimer(this)),
@@ -87,7 +88,7 @@ QString GPodderSync::DefaultDeviceName() {
 }
 
 bool GPodderSync::is_logged_in() const {
-  return !username_.isEmpty() && !password_.isEmpty() && api_;
+  return !username_.isEmpty() && !password_.isEmpty();
 }
 
 void GPodderSync::ReloadSettings() {
@@ -98,41 +99,33 @@ void GPodderSync::ReloadSettings() {
   password_ = s.value("gpodder_password").toString();
   last_successful_get_ = s.value("gpodder_last_get").toDateTime();
 
-  if (!username_.isEmpty() && !password_.isEmpty()) {
-    api_.reset(new mygpo::ApiRequest(username_, password_, network_));
-  }
+  client_->SetCredentials(username_, password_);
 }
 
 void GPodderSync::Login(const QString& username, const QString& password,
                         const QString& device_name) {
-  api_.reset(new mygpo::ApiRequest(username, password, network_));
+  client_->SetCredentials(username, password);
+  client_->UpdateDevice(
+      DeviceId(), device_name,
+      Utilities::IsLaptop() ? GPodderClient::DeviceType::kLaptop
+                            : GPodderClient::DeviceType::kDesktop,
+      [this, username, password]() {
+        username_ = username;
+        password_ = password;
 
-  QNetworkReply* reply = api_->renameDevice(
-      username, DeviceId(), device_name,
-      Utilities::IsLaptop() ? mygpo::Device::LAPTOP : mygpo::Device::DESKTOP);
-  NewClosure(reply, &QNetworkReply::finished, this, &GPodderSync::LoginFinished,
-             reply, username, password);
-}
+        QSettings s;
+        s.beginGroup(kSettingsGroup);
+        s.setValue("gpodder_username", username);
+        s.setValue("gpodder_password", password);
 
-void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
-                                const QString& password) {
-  reply->deleteLater();
-
-  if (reply->error() == QNetworkReply::NoError) {
-    username_ = username;
-    password_ = password;
-
-    QSettings s;
-    s.beginGroup(kSettingsGroup);
-    s.setValue("gpodder_username", username);
-    s.setValue("gpodder_password", password);
-
-    DoInitialSync();
-    emit LoginSuccess();
-  } else {
-    api_.reset();
-    emit LoginFailure(reply->errorString());
-  }
+        DoInitialSync();
+        emit LoginSuccess();
+      },
+      [this](const QString& error) {
+        // Go back to the account we had, if any.
+        client_->SetCredentials(username_, password_);
+        emit LoginFailure(error);
+      });
 }
 
 void GPodderSync::Logout() {
@@ -142,7 +135,9 @@ void GPodderSync::Logout() {
   s.remove("gpodder_password");
   s.remove("gpodder_last_get");
 
-  api_.reset();
+  username_.clear();
+  password_.clear();
+  client_->SetCredentials(QString(), QString());
 
   // Remove session cookies. QNetworkAccessManager takes ownership of the new
   // object and frees the previous.
@@ -157,33 +152,27 @@ void GPodderSync::GetUpdatesNow() {
     timestamp = last_successful_get_.toSecsSinceEpoch();
   }
 
-  mygpo::DeviceUpdatesPtr reply(
-      api_->deviceUpdates(username_, DeviceId(), timestamp));
-  NewClosure(reply.data(), &mygpo::DeviceUpdates::finished, this,
-             &GPodderSync::DeviceUpdatesFinished, reply);
-  connect(reply.data(), SIGNAL(parseError()), SLOT(DeviceUpdatesParseError()));
-  connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
-          SLOT(DeviceUpdatesRequestError(QNetworkReply::NetworkError)));
+  client_->GetDeviceUpdates(
+      DeviceId(), timestamp,
+      [this](const GPodderClient::DeviceUpdates& updates) {
+        DeviceUpdatesFinished(updates);
+      },
+      [](const QString& error) {
+        qLog(Warning) << "Failed to get gpodder device updates:" << error;
+      });
 }
 
-void GPodderSync::DeviceUpdatesParseError() {
-  qLog(Warning) << "Failed to get gpodder device updates: parse error";
-}
-
-void GPodderSync::DeviceUpdatesRequestError(QNetworkReply::NetworkError error) {
-  qLog(Warning) << "Failed to get gpodder device updates:" << error;
-}
-
-void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
+void GPodderSync::DeviceUpdatesFinished(
+    const GPodderClient::DeviceUpdates& updates) {
   // Remember episode actions for each podcast, so when we add a new podcast
   // we can apply the actions immediately.
-  QMap<QUrl, QList<mygpo::EpisodePtr>> episodes_by_podcast;
-  for (mygpo::EpisodePtr episode : reply->updateList()) {
-    episodes_by_podcast[episode->podcastUrl()].append(episode);
+  QMap<QUrl, QList<GPodderClient::EpisodeAction>> episodes_by_podcast;
+  for (const GPodderClient::EpisodeAction& action : updates.updates) {
+    episodes_by_podcast[action.podcast_url].append(action);
   }
 
-  for (mygpo::PodcastPtr podcast : reply->addList()) {
-    const QUrl url(podcast->url());
+  for (const Podcast& podcast : updates.add) {
+    const QUrl& url = podcast.url();
 
     // Are we subscribed to this podcast already?
     Podcast existing_podcast = backend_->GetSubscriptionByUrl(url);
@@ -204,7 +193,7 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   }
 
   // Unsubscribe from podcasts that were removed.
-  for (const QUrl& url : reply->removeList()) {
+  for (const QUrl& url : updates.remove) {
     backend_->Unsubscribe(backend_->GetSubscriptionByUrl(url));
   }
 
@@ -215,9 +204,9 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   s.setValue("gpodder_last_get", last_successful_get_);
 }
 
-void GPodderSync::NewPodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
-                                   const QUrl& url,
-                                   const QList<mygpo::EpisodePtr>& actions) {
+void GPodderSync::NewPodcastLoaded(
+    bool success, PodcastUrlLoaderReply* reply, const QUrl& url,
+    const QList<GPodderClient::EpisodeAction>& actions) {
   reply->deleteLater();
 
   if (!success) {
@@ -241,17 +230,17 @@ void GPodderSync::NewPodcastLoaded(bool success, PodcastUrlLoaderReply* reply,
 }
 
 void GPodderSync::ApplyActions(
-    const QList<QSharedPointer<mygpo::Episode>>& actions,
+    const QList<GPodderClient::EpisodeAction>& actions,
     PodcastEpisodeList* episodes) {
   for (PodcastEpisodeList::iterator it = episodes->begin();
        it != episodes->end(); ++it) {
     // Find an action for this episode
-    for (mygpo::EpisodePtr action : actions) {
-      if (action->url() != it->url()) continue;
+    for (const GPodderClient::EpisodeAction& action : actions) {
+      if (action.url != it->url()) continue;
 
-      switch (action->status()) {
-        case mygpo::Episode::PLAY:
-        case mygpo::Episode::DOWNLOAD:
+      switch (action.status) {
+        case GPodderClient::EpisodeAction::Status::kPlayed:
+        case GPodderClient::EpisodeAction::Status::kDownloaded:
           it->set_listened(true);
           break;
 
@@ -341,31 +330,20 @@ void GPodderSync::FlushUpdateQueue() {
   if (all_urls.isEmpty()) return;
 
   flushing_queue_ = true;
-  mygpo::AddRemoveResultPtr reply(api_->addRemoveSubscriptions(
-      username_, DeviceId(), queued_add_subscriptions_.values(),
-      queued_remove_subscriptions_.values()));
-
   qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
 
-  NewClosure(reply.data(), &mygpo::AddRemoveResult::finished, this,
-             &GPodderSync::AddRemoveFinished, reply, all_urls.values());
-  connect(reply.data(), SIGNAL(parseError()), SLOT(AddRemoveParseError()));
-  connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
-          SLOT(AddRemoveRequestError(QNetworkReply::NetworkError)));
+  const QList<QUrl> affected_urls = all_urls.values();
+  client_->AddRemoveSubscriptions(
+      DeviceId(), queued_add_subscriptions_.values(),
+      queued_remove_subscriptions_.values(),
+      [this, affected_urls]() { AddRemoveFinished(affected_urls); },
+      [this](const QString& error) {
+        flushing_queue_ = false;
+        qLog(Warning) << "Failed to update gpodder subscriptions:" << error;
+      });
 }
 
-void GPodderSync::AddRemoveParseError() {
-  flushing_queue_ = false;
-  qLog(Warning) << "Failed to update gpodder subscriptions: parse error";
-}
-
-void GPodderSync::AddRemoveRequestError(QNetworkReply::NetworkError err) {
-  flushing_queue_ = false;
-  qLog(Warning) << "Failed to update gpodder subscriptions:" << err;
-}
-
-void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
-                                    const QList<QUrl>& affected_urls) {
+void GPodderSync::AddRemoveFinished(const QList<QUrl>& affected_urls) {
   flushing_queue_ = false;
 
   // Remove the URLs from the queue.

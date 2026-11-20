@@ -27,10 +27,6 @@
 
 #include "podcastepisode.h"
 
-namespace mygpo {
-class Podcast;
-}
-
 class Podcast {
  public:
   Podcast();
@@ -44,7 +40,6 @@ class Podcast {
   static const QString kUpdateSpec;
 
   void InitFromQuery(const QSqlQuery& query);
-  void InitFromGpo(const mygpo::Podcast* podcast);
 
   void BindToQuery(QSqlQuery* query) const;
 
