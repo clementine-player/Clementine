@@ -30,6 +30,7 @@
 #include "core/logging.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+#include "engines/gstdecodeaudioonly.h"
 
 #ifdef HAVE_AUDIOCD
 #include "devices/cddadevice.h"
@@ -500,6 +501,7 @@ bool Transcoder::StartJob(const Job& job) {
     gst_element_link_many(convert, resample, muxer, sink, nullptr);
 
   // Set properties
+  GstDecodeAudioOnly(decode);
   g_object_set(decode, "uri", job.input.toString().toUtf8().constData(),
                nullptr);
   g_object_set(sink, "location", job.output.toUtf8().constData(), nullptr);

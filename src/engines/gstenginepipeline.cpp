@@ -33,6 +33,7 @@
 #include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+#include "gstdecodeaudioonly.h"
 #include "gstelementdeleter.h"
 #include "gstengine.h"
 #ifdef HAVE_AUDIOCD
@@ -196,6 +197,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
   QByteArray uri = GstUriFromUrl(url);
   new_bin = engine_->CreateElement("uridecodebin");
   if (!new_bin) return nullptr;
+  GstDecodeAudioOnly(new_bin);
   g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
   CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback, this);
   CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);

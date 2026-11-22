@@ -164,6 +164,7 @@ set(SOURCES
   engines/devicefinder.cpp
   engines/enginebase.cpp
   engines/enginerouter.cpp
+  engines/gstdecodeaudioonly.cpp
   engines/gstengine.cpp
   engines/gstenginedebug.cpp
   engines/gstenginepipeline.cpp
