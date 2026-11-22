@@ -25,6 +25,7 @@
 #include "core/signalchecker.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "engines/gstdecodeaudioonly.h"
 #include "gst/moodbar/gstfastspectrum.h"
 #include "moodbar/moodbarbuilder.h"
 
@@ -103,6 +104,7 @@ void MoodbarPipeline::Start() {
 
   // Set properties
   QByteArray uri = Utilities::GetUriForGstreamer(local_filename_);
+  GstDecodeAudioOnly(decodebin);
   g_object_set(decodebin, "uri", uri.constData(), nullptr);
   g_object_set(spectrum, "bands", kBands, nullptr);
 

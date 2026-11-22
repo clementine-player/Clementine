@@ -28,6 +28,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "engines/gstdecodeaudioonly.h"
 
 #ifndef u_int32_t
 typedef unsigned int u_int32_t;
@@ -74,6 +75,7 @@ QString Chromaprinter::CreateFingerprint() {
   }
 
   convert_element_ = convert;
+  GstDecodeAudioOnly(decode);
 
   // Connect the elements
   gst_element_link_many(src, decode, nullptr);
