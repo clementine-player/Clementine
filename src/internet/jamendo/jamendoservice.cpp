@@ -116,7 +116,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
 
   search_box_->setPlaceholderText(tr("Search Jamendo"));
   search_box_->setClearButtonEnabled(true);
-  connect(search_box_, &QLineEdit::returnPressed, this,
+  connect(search_box_.data(), &QLineEdit::returnPressed, this,
           &JamendoService::Search);
 }
 
