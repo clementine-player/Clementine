@@ -27,6 +27,7 @@
 
 #include <QJsonArray>
 #include <QPersistentModelIndex>
+#include <QPointer>
 #include <QUrlQuery>
 #include <memory>
 
@@ -111,7 +112,10 @@ class JamendoService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_results_;
-  QLineEdit* search_box_;
+  // The sidebar takes this as its header and parents it to its own widget,
+  // which may be deleted before this service is. Until then it has no
+  // parent, and this service deletes it.
+  QPointer<QLineEdit> search_box_;
 
   std::unique_ptr<QMenu> context_menu_;
   QAction* open_share_url_;
