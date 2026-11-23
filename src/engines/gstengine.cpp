@@ -1029,8 +1029,9 @@ void GstEngine::BackgroundStreamFinished() {
 }
 
 void GstEngine::SetBackgroundStreamVolume(int id, int volume) {
-  shared_ptr<GstEnginePipeline> pipeline = background_streams_[id];
-  Q_ASSERT(pipeline);
+  // The stream may have failed to start, and been removed.
+  shared_ptr<GstEnginePipeline> pipeline = background_streams_.value(id);
+  if (!pipeline) return;
   pipeline->SetVolume(volume);
 }
 
