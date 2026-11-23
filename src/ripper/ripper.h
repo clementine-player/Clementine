@@ -20,7 +20,6 @@
 
 #include <cdio/cdio.h>
 
-#include <QMutex>
 #include <QObject>
 #include <QTimer>
 
@@ -122,7 +121,6 @@ class Ripper : public QObject {
   int track_count_;
   Transcoder* transcoder_;
   bool cancel_requested_;
-  QMutex mutex_;
   int finished_success_;
   int finished_failed_;
   int files_tagged_;

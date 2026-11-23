@@ -21,6 +21,7 @@
 #include <gst/app/gstappsink.h>
 #include <gst/gst.h>
 
+#include <QMutex>
 #include <QObject>
 #include <QUrl>
 #include <memory>
@@ -34,8 +35,6 @@ class MoodbarPipeline : public QObject {
  public:
   MoodbarPipeline(const QUrl& local_filename);
   ~MoodbarPipeline();
-
-  static bool IsAvailable();
 
   bool success() const { return success_; }
   const QByteArray& data() const { return data_; }
@@ -60,13 +59,14 @@ class MoodbarPipeline : public QObject {
                                          gpointer data);
 
  private:
-  static bool sIsAvailable;
   static const int kBands;
 
   QUrl local_filename_;
   GstElement* pipeline_;
   GstElement* convert_element_;
 
+  // Guards running_ and builder_ between GStreamer threads and thread_.
+  QMutex mutex_;
   std::unique_ptr<MoodbarBuilder> builder_;
 
   bool success_;

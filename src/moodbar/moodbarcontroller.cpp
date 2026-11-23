@@ -65,9 +65,9 @@ void MoodbarController::PlaybackStopped() {
 void MoodbarController::AsyncLoadComplete(bool success,
                                           MoodbarPipeline* pipeline,
                                           const QUrl& url) {
-  // Is this song still playing?
+  // Is this song still playing? Also bail if playback stopped (null item).
   PlaylistItemPtr current_item = app_->player()->GetCurrentItem();
-  if (current_item && current_item->Url() != url) {
+  if (!current_item || current_item->Url() != url) {
     return;
   }
   // Did we stop the song?
@@ -81,5 +81,6 @@ void MoodbarController::AsyncLoadComplete(bool success,
       break;
   }
 
-  emit CurrentMoodbarDataChanged(pipeline->data());
+  // Emit empty data on failure so the slider reverts from moodbar mode.
+  emit CurrentMoodbarDataChanged(success ? pipeline->data() : QByteArray());
 }

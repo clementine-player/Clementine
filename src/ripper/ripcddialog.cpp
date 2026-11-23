@@ -25,6 +25,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QSettings>
+#include <QTimer>
 #include <QUrl>
 #include <algorithm>
 
@@ -165,11 +166,69 @@ void RipCDDialog::closeEvent(QCloseEvent* event) {
 }
 
 void RipCDDialog::showEvent(QShowEvent* event) {
-  // No need to refresh track list here anymore. On first open this is initiated
-  // by InitializeDevices(). Afterwards track list is always updates when a disc
-  // change is detected due to working through CddaDevice
+  QDialog::showEvent(event);
   if (!working_) {
     ui_->progress_group->hide();
+    // Refresh device pointers only if CD drives changed while hidden;
+    // cdda_devices_ caches raw DeviceInfo* values from DeviceManager.
+    const QList<DeviceInfo*> refreshed =
+        device_manager_->FindDevicesByUrlSchemes(CddaDevice::url_schemes());
+    bool devices_changed = (refreshed.size() != cdda_devices_.size());
+    if (!devices_changed) {
+      for (int i = 0; i < refreshed.size(); ++i) {
+        if (refreshed[i] != cdda_devices_[i]) {
+          devices_changed = true;
+          break;
+        }
+      }
+    }
+    if (!devices_changed) {
+      return;
+    }
+
+    cdda_devices_ = refreshed;
+    // Suppress currentIndexChanged while repopulating so intermediate indices
+    // do not trigger DeviceSelected().
+    const bool had_signals = ui_->cd_drive_selection->blockSignals(true);
+    ui_->cd_drive_selection->clear();
+    for (const DeviceInfo* device_info : cdda_devices_) {
+      ui_->cd_drive_selection->addItem(device_info->friendly_name_);
+    }
+    ui_->cd_drive_selection->setCurrentIndex(-1);
+    ui_->cd_drive_selection->blockSignals(had_signals);
+    if (cdda_device_) {
+      for (int i = 0; i < cdda_devices_.size(); ++i) {
+        if (cdda_devices_[i]->device_ == cdda_device_) {
+          const bool blocked = ui_->cd_drive_selection->blockSignals(true);
+          ui_->cd_drive_selection->setCurrentIndex(i);
+          ui_->cd_drive_selection->blockSignals(blocked);
+          return;
+        }
+      }
+      // Previously selected device was removed while hidden.
+      disconnect(cdda_device_.get(), nullptr, this, nullptr);
+      cdda_device_.reset();
+      ResetDialog();
+      EnableIfPossible();
+    }
+    if (!cdda_devices_.isEmpty()) {
+      // Defer selection out of showEvent() so DeviceSelected() never opens a
+      // modal error dialog synchronously inside showEvent().
+      QTimer::singleShot(0, this, [this]() {
+        // Re-check state in case the selection changed before this runs.
+        if (cdda_device_ || cdda_devices_.isEmpty() ||
+            ui_->cd_drive_selection->currentIndex() != -1) {
+          return;
+        }
+        for (int i = 0; i < cdda_devices_.size(); ++i) {
+          if (cdda_devices_[i]->device_) {
+            ui_->cd_drive_selection->setCurrentIndex(i);
+            return;
+          }
+        }
+        ui_->cd_drive_selection->setCurrentIndex(0);
+      });
+    }
   }
 }
 
@@ -326,10 +385,10 @@ void RipCDDialog::DeviceSelected(int device_index) {
 
   ResetDialog();
   EnableIfPossible();
-  if (device_index < 0)
+  // Guard against stale or out-of-range combo indices during drive refreshes.
+  if (device_index < 0 || device_index >= cdda_devices_.size()) {
     return;  // Invalid selection, probably no devices around
-
-  Q_ASSERT(device_index < cdda_devices_.size());
+  }
 
   DeviceInfo* device_info = cdda_devices_[device_index];
   std::shared_ptr<ConnectedDevice> device =
@@ -447,6 +506,8 @@ void RipCDDialog::SetWorking(bool working) {
 
 void RipCDDialog::ResetDialog() {
   songs_.clear();
+  // setRowCount(0) deletes the cell QCheckBox widgets; drop dangling pointers.
+  checkboxes_.clear();
   ui_->tableWidget->setRowCount(0);
   ui_->albumLineEdit->clear();
   ui_->artistLineEdit->clear();

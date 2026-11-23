@@ -22,6 +22,7 @@
 #include <QFile>
 #include <QGraphicsView>
 #include <QMessageBox>
+#include <QMutexLocker>
 #include <QPaintEngine>
 #include <QPainter>
 #include <QResource>
@@ -53,7 +54,6 @@ ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
       preset_model_(nullptr),
       mode_(Random),
       duration_(15),
-      texture_size_(512),
       pixel_ratio_(container->devicePixelRatio()),
       container_(container) {
   connect(this, SIGNAL(sceneRectChanged(QRectF)),
@@ -61,6 +61,8 @@ ProjectMVisualisation::ProjectMVisualisation(VisualisationContainer* container)
 }
 
 ProjectMVisualisation::~ProjectMVisualisation() {
+  // Synchronize with GStreamer's ConsumeBuffer() thread before destroying.
+  QMutexLocker l(&mutex_);
   if (playlist_) {
     projectm_playlist_destroy(playlist_);
     playlist_ = nullptr;
@@ -115,25 +117,31 @@ void ProjectMVisualisation::InitProjectM() {
     break;
   }
 
-  // Create projectM instance
-  projectm_ = projectm_create();
-  if (!projectm_) {
+  // Create and configure a local handle before publishing projectm_ under
+  // mutex_ so ConsumeBuffer() cannot read a partially initialized instance.
+  projectm_handle pm = projectm_create();
+  if (!pm) {
     qWarning("Failed to create projectM instance");
     return;
   }
 
   // Configure rendering parameters
-  projectm_set_mesh_size(projectm_, 32, 24);
-  projectm_set_fps(projectm_, 35);
-  projectm_set_soft_cut_duration(projectm_, 5.0);
-  projectm_set_preset_duration(projectm_, static_cast<double>(duration_));
-  projectm_set_hard_cut_enabled(projectm_, false);
+  projectm_set_mesh_size(pm, 32, 24);
+  projectm_set_fps(pm, 35);
+  projectm_set_soft_cut_duration(pm, 5.0);
+  projectm_set_preset_duration(pm, static_cast<double>(duration_));
+  projectm_set_hard_cut_enabled(pm, false);
 
   size_t w = static_cast<size_t>(sceneRect().width() * pixel_ratio_);
   size_t h = static_cast<size_t>(sceneRect().height() * pixel_ratio_);
   if (w == 0) w = 512;
   if (h == 0) h = 512;
-  projectm_set_window_size(projectm_, w, h);
+  projectm_set_window_size(pm, w, h);
+
+  {
+    QMutexLocker l(&mutex_);
+    projectm_ = pm;
+  }
 
   // Create playlist manager
   playlist_ = projectm_playlist_create(projectm_);
@@ -179,6 +187,8 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
     // A QOpenGLWidget doesn't draw to FBO 0, so plain
     // projectm_opengl_render_frame() would composite somewhere never shown.
     // Needs projectM >= 4.2.0.
+    // projectm_ lifetime is confined to the GUI thread, and libprojectM's PCM
+    // ring buffer uses its own internal mutex, so we don't hold mutex_ here.
     projectm_opengl_render_frame_fbo(projectm_,
                                      container_->CurrentFramebufferObject());
   }
@@ -226,11 +236,6 @@ void ProjectMVisualisation::SceneRectChanged(const QRectF& rect) {
   }
 }
 
-void ProjectMVisualisation::SetTextureSize(int size) {
-  texture_size_ = size;
-  // projectM 4.x manages texture sizes internally
-}
-
 void ProjectMVisualisation::SetDuration(int seconds) {
   duration_ = seconds;
 
@@ -242,16 +247,21 @@ void ProjectMVisualisation::SetDuration(int seconds) {
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
   GstMapInfo map;
-  gst_buffer_map(buffer, &map, GST_MAP_READ);
-  const unsigned int samples_per_channel = map.size / sizeof(int16_t) / 2;
-  const int16_t* data = reinterpret_cast<const int16_t*>(map.data);
+  // Only unmap when gst_buffer_map() succeeds, but always unref the buffer.
+  if (gst_buffer_map(buffer, &map, GST_MAP_READ)) {
+    const unsigned int samples_per_channel =
+        static_cast<unsigned int>(map.size / sizeof(int16_t) / 2);
+    const int16_t* data = reinterpret_cast<const int16_t*>(map.data);
 
-  if (projectm_) {
-    projectm_pcm_add_int16(projectm_, data, samples_per_channel,
-                           PROJECTM_STEREO);
+    // Runs on GStreamer's streaming thread; lock against InitProjectM/dtor.
+    QMutexLocker l(&mutex_);
+    if (projectm_) {
+      projectm_pcm_add_int16(projectm_, data, samples_per_channel,
+                             PROJECTM_STEREO);
+    }
+
+    gst_buffer_unmap(buffer, &map);
   }
-
-  gst_buffer_unmap(buffer, &map);
   gst_buffer_unref(buffer);
 }
 
@@ -328,6 +338,8 @@ void ProjectMVisualisation::Load() {
 }
 
 void ProjectMVisualisation::Save() {
+  // preset_model_ is created lazily in InitProjectM() on first GL render.
+  if (!preset_model_) return;
   QStringList keys;
 
   for (const ProjectMPresetModel::Preset& preset :

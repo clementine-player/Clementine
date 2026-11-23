@@ -63,8 +63,11 @@ void BarAnalyzer::resizeEvent(QResizeEvent* e) { init(); }
 
 void BarAnalyzer::init() {
   const double MAX_AMPLITUDE = 1.0;
+  // Clamp before computing F so height() <= 2 does not produce negative log
+  // scale values that wrap when cast to uint in lvlMapper_.
+  const int effective_height = qMax(1, height() - 2);
   const double F =
-      static_cast<double>(height() - 2) / (log10(255) * MAX_AMPLITUDE);
+      static_cast<double>(effective_height) / (log10(255) * MAX_AMPLITUDE);
 
   band_count_ = width() / 5;
   max_down_ = static_cast<int>(0 - (qMax(1, height() / 50)));
@@ -129,7 +132,8 @@ void BarAnalyzer::psychedelicModeChanged(bool enabled) {
 }
 
 void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame || engine_->state() == Engine::Paused) {
+  // demo() invokes analyze() while engine_ is nullptr.
+  if (!new_frame || (engine_ && engine_->state() == Engine::Paused)) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }

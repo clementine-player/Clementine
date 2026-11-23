@@ -18,6 +18,7 @@
 #include "moodbarpipeline.h"
 
 #include <QCoreApplication>
+#include <QMutexLocker>
 #include <QThread>
 #include <QUrl>
 
@@ -28,7 +29,6 @@
 #include "gst/moodbar/gstfastspectrum.h"
 #include "moodbar/moodbarbuilder.h"
 
-bool MoodbarPipeline::sIsAvailable = false;
 const int MoodbarPipeline::kBands = 128;
 
 MoodbarPipeline::MoodbarPipeline(const QUrl& local_filename)
@@ -40,20 +40,6 @@ MoodbarPipeline::MoodbarPipeline(const QUrl& local_filename)
       running_(false) {}
 
 MoodbarPipeline::~MoodbarPipeline() { Cleanup(); }
-
-bool MoodbarPipeline::IsAvailable() {
-  if (!sIsAvailable) {
-    GstElementFactory* factory = gst_element_factory_find("fftwspectrum");
-    if (!factory) {
-      return false;
-    }
-    gst_object_unref(factory);
-
-    sIsAvailable = true;
-  }
-
-  return sIsAvailable;
-}
 
 GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
   GstElement* ret =
@@ -78,6 +64,10 @@ void MoodbarPipeline::Start() {
   }
 
   pipeline_ = gst_pipeline_new("moodbar-pipeline");
+  if (!pipeline_) {
+    emit Finished(false);
+    return;
+  }
 
   GstElement* decodebin = CreateElement("uridecodebin");
   convert_element_ = CreateElement("audioconvert");
@@ -85,6 +75,8 @@ void MoodbarPipeline::Start() {
   GstElement* fakesink = CreateElement("fakesink");
 
   if (!decodebin || !convert_element_ || !spectrum || !fakesink) {
+    // CreateElement() already added partial elements to pipeline_; unref it.
+    gst_object_unref(pipeline_);
     pipeline_ = nullptr;
     emit Finished(false);
     return;
@@ -94,12 +86,19 @@ void MoodbarPipeline::Start() {
   if (!gst_element_link(convert_element_, spectrum) ||
       !gst_element_link(spectrum, fakesink)) {
     qLog(Error) << "Failed to link elements";
+    gst_object_unref(pipeline_);
     pipeline_ = nullptr;
     emit Finished(false);
     return;
   }
 
-  builder_.reset(new MoodbarBuilder);
+  {
+    // Publish builder_ and running_ under mutex_ before starting the pipeline
+    // so GStreamer streaming callbacks cannot observe half-initialized state.
+    QMutexLocker l(&mutex_);
+    builder_.reset(new MoodbarBuilder);
+    running_ = true;
+  }
 
   // Set properties
   QByteArray uri = Utilities::GetUriForGstreamer(local_filename_);
@@ -108,7 +107,10 @@ void MoodbarPipeline::Start() {
 
   GstFastSpectrum* fast_spectrum = GST_FASTSPECTRUM(spectrum);
   fast_spectrum->output_callback = [this](double* magnitudes, int size) {
-    builder_->AddFrame(magnitudes, size);
+    QMutexLocker l(&mutex_);
+    if (running_ && builder_) {
+      builder_->AddFrame(magnitudes, size);
+    }
   };
 
   // Connect signals
@@ -118,19 +120,19 @@ void MoodbarPipeline::Start() {
   gst_object_unref(bus);
 
   // Start playing
-  running_ = true;
   gst_element_set_state(pipeline_, GST_STATE_PLAYING);
 }
 
 void MoodbarPipeline::ReportError(GstMessage* msg) {
-  GError* error;
-  gchar* debugs;
+  // Initialize out-pointers and use g_free() to match GLib's allocator.
+  GError* error = nullptr;
+  gchar* debugs = nullptr;
 
   gst_message_parse_error(msg, &error, &debugs);
-  QString message = QString::fromLocal8Bit(error->message);
+  QString message = error ? QString::fromLocal8Bit(error->message) : QString();
 
-  g_error_free(error);
-  free(debugs);
+  g_clear_error(&error);
+  g_free(debugs);
 
   qLog(Error) << "Error processing" << local_filename_ << ":" << message;
 }
@@ -138,9 +140,32 @@ void MoodbarPipeline::ReportError(GstMessage* msg) {
 void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
 
-  if (!self->running_) {
-    qLog(Warning) << "Received gstreamer callback after pipeline has stopped.";
-    return;
+  // Ignore non-audio pads (e.g., embedded cover art) so they do not unlink
+  // the active audio stream.
+  GstCaps* caps = gst_pad_get_current_caps(pad);
+  if (!caps) caps = gst_pad_query_caps(pad, nullptr);
+  bool is_audio = false;
+  int rate = 0;
+  if (caps && gst_caps_get_size(caps) > 0) {
+    GstStructure* structure = gst_caps_get_structure(caps, 0);
+    if (structure) {
+      const gchar* name = gst_structure_get_name(structure);
+      is_audio = name && g_str_has_prefix(name, "audio/");
+      if (is_audio) {
+        gst_structure_get_int(structure, "rate", &rate);
+      }
+    }
+  }
+  if (caps) gst_caps_unref(caps);
+  if (!is_audio) return;
+
+  {
+    QMutexLocker l(&self->mutex_);
+    if (!self->running_) {
+      qLog(Warning)
+          << "Received gstreamer callback after pipeline has stopped.";
+      return;
+    }
   }
 
   GstPad* const audiopad =
@@ -148,22 +173,20 @@ void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << "audiopad is already linked, unlinking old pad";
-    gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
+    // gst_pad_unlink() takes (src, sink): upstream peer first, then audiopad.
+    GstPad* peer = GST_PAD_PEER(audiopad);
+    if (peer) gst_pad_unlink(peer, audiopad);
   }
 
   gst_pad_link(pad, audiopad);
   gst_object_unref(audiopad);
 
-  int rate = 0;
-  GstCaps* caps = gst_pad_get_current_caps(pad);
-  GstStructure* structure = gst_caps_get_structure(caps, 0);
-  gst_structure_get_int(structure, "rate", &rate);
-  gst_caps_unref(caps);
-
-  if (self->builder_ != nullptr)
+  QMutexLocker l(&self->mutex_);
+  if (self->running_ && self->builder_ != nullptr) {
     self->builder_->Init(kBands, rate);
-  else
+  } else {
     qLog(Error) << "Builder does not exist";
+  }
 }
 
 GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg,
@@ -187,28 +210,45 @@ GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg,
 }
 
 void MoodbarPipeline::Stop(bool success) {
-  success_ = success;
-  running_ = false;
-  if (builder_ != nullptr) {
-    data_ = builder_->Finish(1000);
-    builder_.reset();
+  QByteArray result;
+  {
+    QMutexLocker l(&mutex_);
+    // Guard against duplicate Stop() calls (e.g. ERROR + EOS or Cleanup()).
+    if (!running_) return;
+    running_ = false;
+    if (builder_ != nullptr) {
+      result = builder_->Finish(1000);
+      builder_.reset();
+    }
   }
+  data_ = result;
+  // Treat empty output (e.g. no audio frames) as failure so nothing caches
+  // an empty moodbar.
+  success_ = success && !data_.isEmpty();
 
-  emit Finished(success);
+  emit Finished(success_);
 }
 
 void MoodbarPipeline::Cleanup() {
   Q_ASSERT(QThread::currentThread() == thread());
   Q_ASSERT(QThread::currentThread() != qApp->thread());
 
-  running_ = false;
+  {
+    // Stop callbacks before releasing mutex_ so gst_element_set_state() can
+    // join streaming threads without deadlocking on mutex_.
+    QMutexLocker l(&mutex_);
+    running_ = false;
+  }
   if (pipeline_) {
     GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
     gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
     gst_object_unref(bus);
 
+    // Join streaming threads in GST_STATE_NULL before resetting builder_.
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
     pipeline_ = nullptr;
   }
+  QMutexLocker l(&mutex_);
+  builder_.reset();
 }

@@ -115,8 +115,10 @@ void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::* member) {
       }
     }
   }
-  avgu /= tu;
-  avgb /= tb;
+  // Constant/silent tracks skip every frame (value == mini == maxi), so tu
+  // or tb can stay 0 and would otherwise produce NaN.
+  if (tu > 0) avgu /= tu;
+  if (tb > 0) avgb /= tb;
 
   tu = 0;
   tb = 0;
@@ -134,8 +136,8 @@ void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::* member) {
       }
     }
   }
-  avguu /= tu;
-  avgbb /= tb;
+  if (tu > 0) avguu /= tu;
+  if (tb > 0) avgbb /= tb;
 
   mini = std::max(avg + (avgb - avg) * 2, avgbb);
   maxi = std::min(avg + (avgu - avg) * 2, avguu);
@@ -152,10 +154,12 @@ void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::* member) {
 }
 
 QByteArray MoodbarBuilder::Finish(int width) {
-  QByteArray ret;
-  ret.resize(width * 3);
+  // Return empty rather than uninitialized bytes when no frames were decoded
+  // (e.g., silent/invalid audio), and zero-initialize ret.
+  if (width <= 0 || frames_.isEmpty()) return QByteArray();
+
+  QByteArray ret(width * 3, 0);
   char* data = ret.data();
-  if (frames_.count() == 0) return ret;
 
   Normalize(&frames_, &Rgb::r);
   Normalize(&frames_, &Rgb::g);
@@ -163,11 +167,16 @@ QByteArray MoodbarBuilder::Finish(int width) {
 
   for (int i = 0; i < width; ++i) {
     Rgb rgb;
-    int start = i * frames_.count() / width;
-    int end = (i + 1) * frames_.count() / width;
+    // Widen to qint64 so (i + 1) * frames_.count() cannot overflow 32-bit int
+    // on long tracks, and clamp end to keep frames_[j] in bounds.
+    int start =
+        static_cast<int>(static_cast<qint64>(i) * frames_.count() / width);
+    int end =
+        static_cast<int>(static_cast<qint64>(i + 1) * frames_.count() / width);
     if (start == end) {
       end = start + 1;
     }
+    end = qMin(end, static_cast<int>(frames_.count()));
 
     for (int j = start; j < end; j++) {
       const Rgb& frame = frames_[j];

@@ -23,6 +23,7 @@
 
 #include <QBasicTimer>
 #include <QGraphicsScene>
+#include <QMutex>
 #include <QSet>
 
 #include "engines/bufferconsumer.h"
@@ -52,7 +53,6 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   void ConsumeBuffer(GstBuffer* buffer, int);
 
  public slots:
-  void SetTextureSize(int size);
   void SetDuration(int seconds);
 
   void SetSelected(const QStringList& paths, bool selected);
@@ -97,13 +97,14 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   // in the viewport's context.
   QString pending_preset_;
 
-  int texture_size_;
   // As of version 5.6, Qt supports automatic scaling for high-DPI displays. We
   // need to know the pixel ratio so that we can convert coordinates for
   // projectM.
   // https://doc.qt.io/qt-5/highdpi.html
   qreal pixel_ratio_;
   VisualisationContainer* container_;
+  // Guards projectm_ lifetime between the GUI thread and ConsumeBuffer().
+  QMutex mutex_;
 };
 
 #endif  // PROJECTMVISUALISATION_H

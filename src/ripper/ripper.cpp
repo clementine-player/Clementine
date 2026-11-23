@@ -18,9 +18,8 @@
 #include "ripper.h"
 
 #include <QFile>
-#include <QMutexLocker>
+#include <QMetaObject>
 #include <QUrl>
-#include <QtConcurrentRun>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -85,20 +84,16 @@ int Ripper::AddedTracks() const { return tracks_.length(); }
 void Ripper::ClearTracks() { tracks_.clear(); }
 
 void Ripper::Start() {
-  {
-    QMutexLocker l(&mutex_);
-    cancel_requested_ = false;
-  }
+  cancel_requested_ = false;
 
   qLog(Debug) << "Ripping" << AddedTracks() << "tracks.";
-  (void)QtConcurrent::run(&Ripper::Rip, this);
+  // Transcoder is a main-thread QObject that already runs GStreamer jobs
+  // asynchronously; call Rip() on this thread to preserve thread affinity.
+  Rip();
 }
 
 void Ripper::Cancel() {
-  {
-    QMutexLocker l(&mutex_);
-    cancel_requested_ = true;
-  }
+  cancel_requested_ = true;
   transcoder_->Cancel();
   emit(Cancelled());
 }
@@ -130,7 +125,9 @@ void Ripper::LogLine(const QString& message) { qLog(Debug) << message; }
 
 void Ripper::Rip() {
   if (tracks_.isEmpty()) {
-    emit Finished();
+    // Defer Finished() so callers (e.g. RipCDDialog) finish starting their
+    // progress timer before Finished() stops it and calls deleteLater().
+    QMetaObject::invokeMethod(this, "Finished", Qt::QueuedConnection);
     return;
   }
 

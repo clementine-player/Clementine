@@ -483,8 +483,12 @@ static QColor ensureContrast(const QColor& bg, const QColor& fg,
     if (static_cast<int>(_amount) > 0) adjustToLimits(bs, fs, _amount);
 
     // see if we need to adjust the hue
-    if (static_cast<int>(_amount) > 0)
-      fh += static_cast<int>(_amount);  // cycles around;
+    if (static_cast<int>(_amount) > 0) {
+      // Achromatic colors yield hue -1; wrap into [0, 359] for
+      // QColor::fromHsv().
+      if (fh < 0) fh = 0;
+      fh = (fh + static_cast<int>(_amount)) % 360;  // cycles around;
+    }
 
     return QColor::fromHsv(fh, fs, fv);
   }

@@ -21,6 +21,7 @@
 #include <QHash>
 #include <QMultiMap>
 #include <QObject>
+#include <QSet>
 #include <QXmlStreamReader>
 
 class NetworkTimeouts;
@@ -43,6 +44,7 @@ class MusicBrainzClient : public QObject {
   // is not transferred.
   MusicBrainzClient(QObject* parent = nullptr,
                     QNetworkAccessManager* network = nullptr);
+  ~MusicBrainzClient() override;
 
   struct Result {
     Result() : duration_msec_(0), track_(0), year_(-1) {}
@@ -182,6 +184,8 @@ class MusicBrainzClient : public QObject {
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;
   QMultiMap<int, QNetworkReply*> requests_;
+  // Tracks DiscID lookups (which have no caller id) for CancelAll().
+  QSet<QNetworkReply*> discid_requests_;
   // Results we received so far, kept here until all the replies are finished
   QMap<int, QList<PendingResults>> pending_results_;
 };
