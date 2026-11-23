@@ -32,7 +32,11 @@ class DeviceDatabaseBackend : public QObject {
   Q_INVOKABLE DeviceDatabaseBackend(QObject* parent = nullptr);
 
   struct Device {
-    Device() : id_(-1) {}
+    Device()
+        : id_(-1),
+          size_(0),
+          transcode_mode_(MusicStorage::Transcode_Unsupported),
+          transcode_format_(Song::Type_Unknown) {}
 
     int id_;
     QString unique_id_;
@@ -62,5 +66,9 @@ class DeviceDatabaseBackend : public QObject {
  private:
   Database* db_;
 };
+
+// Registered so DeviceManager::LoadAllDevices() can pass Device values across
+// queued thread boundaries instead of mutating model trees off-thread.
+Q_DECLARE_METATYPE(DeviceDatabaseBackend::Device)
 
 #endif  // DEVICEDATABASEBACKEND_H

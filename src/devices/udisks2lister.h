@@ -105,9 +105,7 @@ class Udisks2Lister : public DeviceLister {
   PartitionData ReadPartitionData(const QDBusObjectPath& path);
   void HandleFinishedMountJob(
       const Udisks2Lister::PartitionData& partition_data);
-  void HandleFinishedUnmountJob(
-      const Udisks2Lister::PartitionData& partition_data,
-      const QDBusObjectPath& mounted_object);
+  void HandleFinishedUnmountJob(const QDBusObjectPath& mounted_object);
 
   QReadWriteLock device_data_lock_;
   QMap<QString, PartitionData> device_data_;

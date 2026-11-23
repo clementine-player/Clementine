@@ -85,7 +85,7 @@ class CddaSongLoader : public QObject {
   void MusicBrainzDiscIdLoaded(const QString& musicbrainz_discid);
 
  private slots:
-  void LoadAudioCDTags(const QString& musicbrainz_discid) const;
+  void LoadAudioCDTags(const QString& musicbrainz_discid);
   void ProcessMusicBrainzResponse(const QString& artist, const QString& album,
                                   const MusicBrainzClient::ResultList& results);
   void SetDiscTracks(const SongList& songs, bool has_titles);
@@ -97,7 +97,7 @@ class CddaSongLoader : public QObject {
   // Returns true if any tags were read, updates the Song object in songs
   // accordingly, and returns the zero-based track index via the track_no
   // argument.
-  bool ParseSongTags(SongList& songs, GstTagList* tags, gint* track_no);
+  bool ParseSongTags(SongList* songs, GstTagList* tags, gint* track_no);
 
   struct Disc {
     SongList tracks;

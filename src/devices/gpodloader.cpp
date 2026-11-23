@@ -62,7 +62,11 @@ void GPodLoader::LoadDatabase() {
       emit Error(tr("An error occurred loading the iTunes database"));
     }
 
+    // Restore original thread affinity so deleteLater() in GPodDevice runs on
+    // its event loop, and emit LoadFinished(nullptr) to wake StartCopy().
+    moveToThread(original_thread_);
     task_manager_->SetTaskFinished(task_id);
+    emit LoadFinished(nullptr);
     return;
   }
 

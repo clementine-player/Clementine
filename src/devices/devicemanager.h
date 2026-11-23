@@ -104,7 +104,9 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
  signals:
   void DeviceConnected(QModelIndex idx);
   void DeviceDisconnected(QModelIndex idx);
-  void DeviceCreatedFromDb(DeviceInfo* info);
+  // Passes plain DB data across threads so DeviceInfo and QPixmap
+  // construction happen exclusively on the GUI thread.
+  void DeviceCreatedFromDb(const DeviceDatabaseBackend::Device& device);
 
  private slots:
   void PhysicalDeviceAdded(const QString& id);
@@ -115,7 +117,7 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   void DeviceSongCountUpdated(int count);
   void LoadAllDevices();
   void DeviceConnectFinished(const QString& id, bool success);
-  void AddDeviceFromDb(DeviceInfo* info);
+  void AddDeviceFromDb(const DeviceDatabaseBackend::Device& device);
 
  protected:
   void LazyPopulate(DeviceInfo* item) { LazyPopulate(item, true); }

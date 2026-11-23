@@ -82,8 +82,11 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
 
-  connect(this, SIGNAL(DeviceCreatedFromDb(DeviceInfo*)),
-          SLOT(AddDeviceFromDb(DeviceInfo*)));
+  // Needed for queued delivery from LoadAllDevices() on thread_pool_.
+  qRegisterMetaType<DeviceDatabaseBackend::Device>(
+      "DeviceDatabaseBackend::Device");
+  connect(this, SIGNAL(DeviceCreatedFromDb(DeviceDatabaseBackend::Device)),
+          SLOT(AddDeviceFromDb(DeviceDatabaseBackend::Device)));
   // This reads from the database and contends on the database mutex, which can
   // be very slow on startup.
   ConcurrentRun::Run<void>(&thread_pool_,
@@ -123,6 +126,9 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
 }
 
 DeviceManager::~DeviceManager() {
+  // Drain LoadAllDevices() before destroying listers_, backend_, and root_.
+  thread_pool_.waitForDone();
+
   for (DeviceLister* lister : listers_) {
     lister->ShutDown();
     delete lister;
@@ -137,39 +143,39 @@ void DeviceManager::LoadAllDevices() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
   DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
   for (const DeviceDatabaseBackend::Device& device : devices) {
-    DeviceInfo* info = new DeviceInfo(DeviceInfo::Type_Device, root_);
-    info->InitFromDb(device);
-    // Use of QPixMap and device insertion should only be done on the main
-    // thread. Send a signal to finish the device addition.
-    emit DeviceCreatedFromDb(info);
+    // DeviceInfo construction (which mutates root_), QPixmap loading, and
+    // model insertion must stay on the main thread; pass value data instead.
+    emit DeviceCreatedFromDb(device);
   }
 }
 
-void DeviceManager::AddDeviceFromDb(DeviceInfo* info) {
-  // At this point, icon_name_ contains the value from the database where the
-  // value is allowed to be a comma delimited list.
-  QStringList icon_names = info->icon_name_.split(',');
+void DeviceManager::AddDeviceFromDb(
+    const DeviceDatabaseBackend::Device& device) {
+  DeviceInfo* existing = nullptr;
+  for (const QString& id : device.unique_id_.split(',')) {
+    existing = FindDeviceById(id);
+    if (existing) break;
+  }
+
+  QStringList icon_names = device.icon_name_.split(',');
   QVariantList icons;
   for (const QString& icon_name : icon_names) {
     icons << icon_name;
   }
-  info->LoadIcon(icons, info->friendly_name_);
 
-  DeviceInfo* existing = FindEquivalentDevice(info);
   if (existing) {
-    qLog(Info) << "Found existing device: " << info->friendly_name_;
+    qLog(Info) << "Found existing device: " << device.friendly_name_;
     // Update user configuration from the database.
-    existing->icon_name_ = info->icon_name_;
-    existing->icon_ = info->icon_;
+    existing->icon_name_ = device.icon_name_;
+    existing->LoadIcon(icons, device.friendly_name_);
     QModelIndex idx = ItemToIndex(existing);
     if (idx.isValid()) emit dataChanged(idx, idx);
-
-    // Discard the info loaded from the database. This doesn't use
-    // begin/endRemoveRows, but beginInsertRows has not yet been called to
-    // notify listeners of the existence.
-    root_->Delete(info->row);
   } else {
-    qLog(Info) << "Device added from database: " << info->friendly_name_;
+    qLog(Info) << "Device added from database: " << device.friendly_name_;
+    DeviceInfo* info = new DeviceInfo(DeviceInfo::Type_Device, root_);
+    info->InitFromDb(device);
+    info->LoadIcon(icons, info->friendly_name_);
+
     beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
     devices_ << info;
     endInsertRows();

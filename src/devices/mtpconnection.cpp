@@ -46,23 +46,25 @@ MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   }
 
   if (url_query.hasQueryItem("vendor")) {
-    LIBMTP_raw_device_t* raw_device =
-        (LIBMTP_raw_device_t*)malloc(sizeof(LIBMTP_raw_device_t));
-    raw_device->device_entry.vendor =
-        url_query.queryItemValue("vendor").toLatin1().data();
-    raw_device->device_entry.product =
-        url_query.queryItemValue("product").toLatin1().data();
-    raw_device->device_entry.vendor_id =
+    // Keep vendor/product QByteArrays alive across LIBMTP_Open_Raw_Device()
+    // since device_entry holds raw char* pointers into them, and stack-allocate
+    // raw_device (zero-initialized) to avoid leaking a heap struct.
+    QByteArray vendor = url_query.queryItemValue("vendor").toLatin1();
+    QByteArray product = url_query.queryItemValue("product").toLatin1();
+    LIBMTP_raw_device_t raw_device = {};
+    raw_device.device_entry.vendor = vendor.data();
+    raw_device.device_entry.product = product.data();
+    raw_device.device_entry.vendor_id =
         url_query.queryItemValue("vendor_id").toUShort();
-    raw_device->device_entry.product_id =
+    raw_device.device_entry.product_id =
         url_query.queryItemValue("product_id").toUShort();
-    raw_device->device_entry.device_flags =
+    raw_device.device_entry.device_flags =
         url_query.queryItemValue("quirks").toUInt();
 
-    raw_device->bus_location = bus_location;
-    raw_device->devnum = device_num;
+    raw_device.bus_location = bus_location;
+    raw_device.devnum = device_num;
 
-    device_ = LIBMTP_Open_Raw_Device(raw_device);
+    device_ = LIBMTP_Open_Raw_Device(&raw_device);
     return;
   }
 

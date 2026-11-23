@@ -36,10 +36,8 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
                       first_time),
       watcher_(new LibraryWatcher),
       watcher_thread_(new QThread(this)) {
-  watcher_thread_->setObjectName("Device watcher");
-  watcher_->moveToThread(watcher_thread_);
-  watcher_thread_->start(QThread::IdlePriority);
-
+  // Populate watcher_ properties before moveToThread()/start() so the worker
+  // thread observes initialized state without locking.
   watcher_->set_device_name(
       manager
           ->data(manager->ItemToIndex(manager->FindDeviceById(unique_id)),
@@ -47,6 +45,10 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
           .toString());
   watcher_->set_backend(backend_.get());
   watcher_->set_task_manager(app_->task_manager());
+
+  watcher_thread_->setObjectName("Device watcher");
+  watcher_->moveToThread(watcher_thread_);
+  watcher_thread_->start(QThread::IdlePriority);
 
   connect(backend_.get(),
           SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), watcher_,

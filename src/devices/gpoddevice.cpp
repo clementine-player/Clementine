@@ -59,31 +59,59 @@ bool GPodDevice::Init() {
   return true;
 }
 
-GPodDevice::~GPodDevice() {}
+GPodDevice::~GPodDevice() {
+  // Stop and join loader_thread_ before ~QObject tears down a running
+  // child QThread, then release the parsed libgpod database.
+  if (loader_thread_) {
+    loader_thread_->quit();
+    loader_thread_->wait();
+  }
+  if (db_) {
+    itdb_free(db_);
+    db_ = nullptr;
+  }
+}
 
 void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
-  QMutexLocker l(&db_mutex_);
-  db_ = db;
-  db_wait_cond_.wakeAll();
+  // Wake any StartCopy() waiter via load_finished_ even when db is nullptr.
+  {
+    QMutexLocker l(&db_mutex_);
+    db_ = db;
+    load_finished_ = true;
+    db_wait_cond_.wakeAll();
+  }
 
-  loader_thread_->quit();
-  loader_thread_->wait(1000);
-  loader_thread_->deleteLater();
-  loader_thread_ = nullptr;
+  if (loader_thread_) {
+    loader_thread_->quit();
+    // Wait without timeout so loader_thread_ has exited before deleteLater().
+    loader_thread_->wait();
+    loader_thread_->deleteLater();
+    loader_thread_ = nullptr;
+  }
 
-  loader_->deleteLater();
-  loader_ = nullptr;
+  if (loader_) {
+    loader_->deleteLater();
+    loader_ = nullptr;
+  }
 }
 
 bool GPodDevice::StartCopy(QList<Song::FileType>* supported_filetypes) {
   {
     // Wait for the database to be loaded
     QMutexLocker l(&db_mutex_);
-    if (!db_) db_wait_cond_.wait(&db_mutex_);
+    // Wait on load_finished_ (not db_) so failed itdb_parse() returns false
+    // instead of blocking forever.
+    while (!load_finished_) {
+      db_wait_cond_.wait(&db_mutex_);
+    }
+    if (!db_) {
+      return false;
+    }
   }
 
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
+  db_busy_locked_ = true;
 
   if (supported_filetypes) GetSupportedFiletypes(supported_filetypes);
   return true;
@@ -112,21 +140,30 @@ void GPodDevice::AddTrackToModel(Itdb_Track* track, const QString& prefix) {
 }
 
 bool GPodDevice::CopyToStorage(const CopyJob& job) {
-  Q_ASSERT(db_);
+  if (!db_) return false;
 
   Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
 
   // Copy the file
   GError* error = nullptr;
-  itdb_cp_track_to_ipod(
+  const bool copied = itdb_cp_track_to_ipod(
       track, QDir::toNativeSeparators(job.source_).toLocal8Bit().constData(),
       &error);
-  if (error) {
-    qLog(Error) << "copying failed:" << QString::fromUtf8(error->message);
-    app_->AddError(QString::fromUtf8(error->message));
-    g_error_free(error);
+  // itdb_cp_track_to_ipod() can return false without setting error.
+  if (!copied || error) {
+    if (error) {
+      qLog(Error) << "copying failed:" << QString::fromUtf8(error->message);
+      app_->AddError(QString::fromUtf8(error->message));
+      g_error_free(error);
+    }
 
-    // Need to remove the track from the db again
+    // AddTrackToITunesDb() inserted track into the master playlist (mpl);
+    // unlink it from mpl before itdb_track_remove() frees track, or
+    // itdb_write() will dereference a dangling entry.
+    Itdb_Playlist* mpl = itdb_playlist_mpl(db_);
+    if (mpl && itdb_playlist_contains_track(mpl, track)) {
+      itdb_playlist_remove_track(mpl, track);
+    }
     itdb_track_remove(track);
     return false;
   }
@@ -142,7 +179,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
 }
 
 void GPodDevice::WriteDatabase(bool success) {
-  if (success) {
+  if (success && db_) {
     // Write the itunes database
     GError* error = nullptr;
     itdb_write(db_, &error);
@@ -162,7 +199,10 @@ void GPodDevice::WriteDatabase(bool success) {
 
   songs_to_add_.clear();
   songs_to_remove_.clear();
-  db_busy_.unlock();
+  // Only unlock if db_busy_ is held, avoiding UB if StartCopy() failed.
+  if (db_busy_locked_.exchange(false)) {
+    db_busy_.unlock();
+  }
 }
 
 void GPodDevice::FinishCopy(bool success) {
@@ -214,7 +254,7 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path,
 }
 
 bool GPodDevice::DeleteFromStorage(const DeleteJob& job) {
-  Q_ASSERT(db_);
+  if (!db_) return false;
 
   if (!RemoveTrackFromITunesDb(job.metadata_.url().toLocalFile(), url_.path()))
     return false;

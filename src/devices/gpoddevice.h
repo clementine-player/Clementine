@@ -22,6 +22,7 @@
 
 #include <QMutex>
 #include <QWaitCondition>
+#include <atomic>
 
 #include "connecteddevice.h"
 #include "core/musicstorage.h"
@@ -72,8 +73,14 @@ class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
   QWaitCondition db_wait_cond_;
   QMutex db_mutex_;
   Itdb_iTunesDB* db_;
+  // Tracks completion separately from db_ != nullptr because failed parses set
+  // db_ to nullptr; guards against spurious wakeups in StartCopy().
+  bool load_finished_ = false;
 
   QMutex db_busy_;
+  // Tracks whether this instance currently owns db_busy_ so WriteDatabase()
+  // never double-unlocks if FinishCopy() runs after a failed StartCopy().
+  std::atomic<bool> db_busy_locked_{false};
   SongList songs_to_add_;
   SongList songs_to_remove_;
 };
