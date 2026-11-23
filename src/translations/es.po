@@ -1810,7 +1810,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "No se pudo conectar con Subsonic; compruebe el URL del servidor. Ejemplo: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:68
+#: transcoder/transcoder.cpp:69
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1864,14 +1864,14 @@ msgstr "No se pudo descifrar lo que envió el receptor AirPlay"
 msgid "Couldn't fetch your Plex servers: %1"
 msgstr "No se pudieron recuperar sus servidores Plex: %1"
 
-#: transcoder/transcoder.cpp:488
+#: transcoder/transcoder.cpp:489
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "No se pudo encontrar un muxer para %1, compruebe que tiene instalados los complementos correctos de GStreamer"
 
-#: transcoder/transcoder.cpp:481
+#: transcoder/transcoder.cpp:482
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2587,7 +2587,7 @@ msgstr "Error al cargar %1"
 msgid "Error loading di.fm playlist"
 msgstr "Error al cargar la lista de reproducción de di.fm"
 
-#: transcoder/transcoder.cpp:453
+#: transcoder/transcoder.cpp:454
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Error al procesar %1: %2"
@@ -2678,7 +2678,7 @@ msgstr "F32LE (32 bits)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:285
+#: core/song.cpp:420 transcoder/transcoder.cpp:286
 #: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:171
@@ -3646,11 +3646,11 @@ msgstr "Letra de LRCLIB"
 msgid "Lyrics from the file's tags"
 msgstr "Letra de las etiquetas del archivo"
 
-#: transcoder/transcoder.cpp:287
+#: transcoder/transcoder.cpp:288
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:426 transcoder/transcoder.cpp:290
+#: core/song.cpp:426 transcoder/transcoder.cpp:291
 #: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
@@ -4072,19 +4072,19 @@ msgstr ""
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:295
+#: transcoder/transcoder.cpp:296
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:434 transcoder/transcoder.cpp:301
+#: core/song.cpp:434 transcoder/transcoder.cpp:302
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:298
+#: core/song.cpp:430 transcoder/transcoder.cpp:299
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:432 transcoder/transcoder.cpp:292
+#: core/song.cpp:432 transcoder/transcoder.cpp:293
 #: ../bin/src/ui_magnatunedownloaddialog.h:137
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -5617,7 +5617,7 @@ msgstr "Iniciar la lista de reproducción actualmente en reproducción"
 msgid "Start transcoding"
 msgstr "Iniciar la conversión"
 
-#: transcoder/transcoder.cpp:460
+#: transcoder/transcoder.cpp:461
 #, qt-format
 msgid "Starting %1"
 msgstr "Iniciando %1"
@@ -5703,7 +5703,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "¡Listo!"
 
-#: transcoder/transcoder.cpp:214
+#: transcoder/transcoder.cpp:215
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 se ha escrito correctamente"
@@ -5712,7 +5712,7 @@ msgstr "%1 se ha escrito correctamente"
 msgid "Suggested tags"
 msgstr "Etiquetas sugeridas"
 
-#: transcoder/transcoder.cpp:159
+#: transcoder/transcoder.cpp:160
 msgid "Suitable element not found"
 msgstr "No se encontró un elemento adecuado"
 
@@ -6069,7 +6069,7 @@ msgstr "Detalles del conversor"
 msgid "Transcoding"
 msgstr "Conversión"
 
-#: transcoder/transcoder.cpp:367
+#: transcoder/transcoder.cpp:368
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Convirtiendo %1 archivos usando %2 procesos"
@@ -6418,7 +6418,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Atención: este nivel de compresión se sale del subconjunto retransmisible. Es posible que el descodificador no pueda iniciar la reproducción a mitad de la emisión o que se vea afectado el rendimiento de los descodificadores físicos."
 
-#: core/song.cpp:438 transcoder/transcoder.cpp:307
+#: core/song.cpp:438 transcoder/transcoder.cpp:308
 msgid "Wav"
 msgstr "Wav"
 
@@ -6544,7 +6544,7 @@ msgstr "Windows Media a 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media a 64k"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:304
+#: core/song.cpp:418 transcoder/transcoder.cpp:305
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
 
