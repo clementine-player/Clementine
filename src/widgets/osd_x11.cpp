@@ -61,10 +61,11 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image) {
   arg << i.width();
   arg << i.height();
   arg << static_cast<int>(i.bytesPerLine());
-  arg << i.hasAlphaChannel();
-  int channels = i.isGrayscale() ? 1 : (i.hasAlphaChannel() ? 4 : 3);
-  arg << i.depth() / channels;
-  arg << channels;
+  // scaled was converted to ARGB32 (4 bytes/px), so report 4x8-bit RGBA
+  // even when isGrayscale() is true per freedesktop Notifications spec.
+  arg << true;  // ARGB32 always carries an alpha channel
+  arg << 8;     // 8 bits per sample
+  arg << 4;     // 4 RGBA channels regardless of image content
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
   arg << QByteArray(reinterpret_cast<const char*>(i.bits()), i.sizeInBytes());
 #else
@@ -139,7 +140,8 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
 
 #ifdef HAVE_DBUS
 void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
-  std::unique_ptr<QDBusPendingCallWatcher> w(watcher);
+  // Defer deletion: watcher is the signal sender currently on the stack.
+  watcher->deleteLater();
 
   QDBusPendingReply<uint> reply = *watcher;
   if (reply.isError()) {

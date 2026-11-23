@@ -224,47 +224,55 @@ void QtSystemTrayIcon::UpdateIcon() {
 void QtSystemTrayIcon::SetPaused() {
   SystemTrayIcon::SetPaused();
 
-  action_stop_->setEnabled(true);
-  action_stop_after_this_track_->setEnabled(true);
-  action_play_pause_->setIcon(
-      IconLoader::Load("media-playback-start", IconLoader::Base));
-  action_play_pause_->setText(tr("Play"));
-
-  action_play_pause_->setEnabled(true);
+  // Actions remain null until SetupMenu() populates the context menu.
+  if (action_stop_) action_stop_->setEnabled(true);
+  if (action_stop_after_this_track_)
+    action_stop_after_this_track_->setEnabled(true);
+  if (action_play_pause_) {
+    action_play_pause_->setIcon(
+        IconLoader::Load("media-playback-start", IconLoader::Base));
+    action_play_pause_->setText(tr("Play"));
+    action_play_pause_->setEnabled(true);
+  }
 }
 
 void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
   SystemTrayIcon::SetPlaying();
 
-  action_stop_->setEnabled(true);
-  action_stop_after_this_track_->setEnabled(true);
-  action_play_pause_->setIcon(
-      IconLoader::Load("media-playback-pause", IconLoader::Base));
-  action_play_pause_->setText(tr("Pause"));
-  action_play_pause_->setEnabled(enable_play_pause);
-  action_love_->setEnabled(enable_love);
+  if (action_stop_) action_stop_->setEnabled(true);
+  if (action_stop_after_this_track_)
+    action_stop_after_this_track_->setEnabled(true);
+  if (action_play_pause_) {
+    action_play_pause_->setIcon(
+        IconLoader::Load("media-playback-pause", IconLoader::Base));
+    action_play_pause_->setText(tr("Pause"));
+    action_play_pause_->setEnabled(enable_play_pause);
+  }
+  if (action_love_) action_love_->setEnabled(enable_love);
 }
 
 void QtSystemTrayIcon::SetStopped() {
   SystemTrayIcon::SetStopped();
 
-  action_stop_->setEnabled(false);
-  action_stop_after_this_track_->setEnabled(false);
-  action_play_pause_->setIcon(
-      IconLoader::Load("media-playback-start", IconLoader::Base));
-  action_play_pause_->setText(tr("Play"));
+  if (action_stop_) action_stop_->setEnabled(false);
+  if (action_stop_after_this_track_)
+    action_stop_after_this_track_->setEnabled(false);
+  if (action_play_pause_) {
+    action_play_pause_->setIcon(
+        IconLoader::Load("media-playback-start", IconLoader::Base));
+    action_play_pause_->setText(tr("Play"));
+    action_play_pause_->setEnabled(true);
+  }
 
-  action_play_pause_->setEnabled(true);
-
-  action_love_->setEnabled(false);
+  if (action_love_) action_love_->setEnabled(false);
 }
 
 void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
-  action_love_->setVisible(value);
+  if (action_love_) action_love_->setVisible(value);
 }
 
 void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
-  action_love_->setEnabled(value);
+  if (action_love_) action_love_->setEnabled(value);
 }
 
 void QtSystemTrayIcon::MuteButtonStateChanged(bool value) {

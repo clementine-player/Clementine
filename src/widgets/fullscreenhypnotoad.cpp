@@ -19,8 +19,9 @@
 
 #include <QMovie>
 
+// Parent the movie to `this` so it isn't leaked when Hypnotoad closes.
 FullscreenHypnotoad::FullscreenHypnotoad()
-    : movie_(new QMovie(":/hypnotoad.gif")) {
+    : movie_(new QMovie(":/hypnotoad.gif", QByteArray(), this)) {
   setMovie(movie_);
   setScaledContents(true);
 

@@ -377,8 +377,12 @@ void OSDPretty::Reposition() {
 #ifndef Q_OS_WIN32
     // windows needs negative coordinates for monitors
     // to the left or above the primary
-    x = qBound(0, x, geometry.right() - width());
-    y = qBound(0, y, geometry.bottom() - height());
+    // Clamp to geometry.left()/top() for negative multi-monitor offsets,
+    // and use qMax so narrow screens don't violate qBound(min <= max).
+    x = qBound(geometry.left(), x,
+               qMax(geometry.left(), geometry.right() - width()));
+    y = qBound(geometry.top(), y,
+               qMax(geometry.top(), geometry.bottom() - height()));
 #endif
     move(x, y);
   }
@@ -439,10 +443,11 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
     if (!screen) return;
     QRect geometry = screen->availableGeometry();
 
-    new_pos.setX(
-        qBound(geometry.left(), new_pos.x(), geometry.right() - width()));
-    new_pos.setY(
-        qBound(geometry.top(), new_pos.y(), geometry.bottom() - height()));
+    // Clamp with qMax so screens narrower than the OSD don't assert.
+    new_pos.setX(qBound(geometry.left(), new_pos.x(),
+                        qMax(geometry.left(), geometry.right() - width())));
+    new_pos.setY(qBound(geometry.top(), new_pos.y(),
+                        qMax(geometry.top(), geometry.bottom() - height())));
 
     // Snap to center
     int snap_x = geometry.center().x() - width() / 2;

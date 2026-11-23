@@ -148,7 +148,12 @@ QImage AlbumCoverSearcher::Exec(const QString& artist, const QString& album) {
   QIcon icon = selected.data(Qt::DecorationRole).value<QIcon>();
   if (icon.cacheKey() == no_cover_icon_.cacheKey()) return QImage();
 
-  return icon.pixmap(icon.availableSizes()[0]).toImage();
+  // Invalid or non-pixmap icons can report no discrete sizes, so guard before
+  // indexing sizes[0].
+  const QList<QSize> sizes = icon.availableSizes();
+  if (sizes.isEmpty()) return QImage();
+
+  return icon.pixmap(sizes[0]).toImage();
 }
 
 void AlbumCoverSearcher::Search() {

@@ -19,6 +19,7 @@
 #define TRACKSELECTIONDIALOG_H
 
 #include <QDialog>
+#include <QFuture>
 
 #include "config.h"
 #include "core/song.h"
@@ -79,6 +80,8 @@ class TrackSelectionDialog : public QDialog {
 
  private:
   QList<Data> data_;
+  // Tracked so ~TrackSelectionDialog() can wait for background SaveData.
+  QFuture<void> save_future_;
 
   QPushButton* previous_button_;
   QPushButton* next_button_;

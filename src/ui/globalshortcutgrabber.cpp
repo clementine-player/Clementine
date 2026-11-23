@@ -23,14 +23,21 @@
 #include "ui_globalshortcutgrabber.h"
 
 GlobalShortcutGrabber::GlobalShortcutGrabber(QWidget* parent)
-    : QDialog(parent), ui_(new Ui::GlobalShortcutGrabber) {
+    : QDialog(parent), ui_(new Ui::GlobalShortcutGrabber), wrapper_(nullptr) {
   ui_->setupUi(this);
 
   modifier_keys_ << Qt::Key_Shift << Qt::Key_Control << Qt::Key_Meta
                  << Qt::Key_Alt << Qt::Key_AltGr;
 }
 
-GlobalShortcutGrabber::~GlobalShortcutGrabber() { delete ui_; }
+GlobalShortcutGrabber::~GlobalShortcutGrabber() {
+#ifdef Q_OS_DARWIN
+  // Remove the AppKit monitor (whose block captures `this`) even if the
+  // dialog is destroyed without a matching hideEvent().
+  TeardownMacEventHandler();
+#endif
+  delete ui_;
+}
 
 QKeySequence GlobalShortcutGrabber::GetKey(const QString& name) {
   ui_->label->setText(tr("Press a key combination to use for %1...").arg(name));

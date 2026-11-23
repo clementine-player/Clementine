@@ -19,6 +19,7 @@
 #define OSDPRETTY_H
 
 #include <QMap>
+#include <QPointer>
 #include <QWidget>
 
 class Ui_OSDPretty;
@@ -124,7 +125,8 @@ class OSDPretty : public QWidget {
   float background_opacity_;
   QString popup_screen_name_;
   QPoint popup_pos_;
-  QScreen* popup_screen_;
+  // Guarded with QPointer in case the QScreen is removed while hidden.
+  QPointer<QScreen> popup_screen_;
   QFont font_;
   // The OSD is kept always on top until you click (no timer)
   bool disable_duration_;

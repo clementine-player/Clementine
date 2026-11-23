@@ -175,6 +175,10 @@ void Equalizer::PresetChanged(int index) {
 }
 
 void Equalizer::PresetChanged(const QString& name) {
+  // Removing the last preset triggers currentIndexChanged(-1) with an empty
+  // name; bail out before QMap::operator[] inserts a bogus "" preset entry.
+  if (!presets_.contains(name)) return;
+
   if (presets_.contains(last_preset_)) {
     if (presets_[last_preset_] != current_params()) {
       SaveCurrentPreset();
@@ -182,7 +186,7 @@ void Equalizer::PresetChanged(const QString& name) {
   }
   last_preset_ = name;
 
-  Params& p = presets_[name];
+  const Params& p = presets_[name];
 
   loading_ = true;
   preamp_->set_value(p.preamp);
@@ -295,12 +299,16 @@ void Equalizer::Save() {
 }
 
 void Equalizer::closeEvent(QCloseEvent* e) {
-  QString name = ui_->preset->currentText();
-  if (!presets_.contains(name)) return;
-
-  if (presets_[name] == current_params()) return;
-
-  SavePreset();
+  // presets_ is keyed by canonical itemData(), not localized currentText();
+  // always chain to QDialog::closeEvent(e) so Qt completes closing normally.
+  const int index = ui_->preset->currentIndex();
+  if (index >= 0) {
+    const QString name = ui_->preset->itemData(index).toString();
+    if (presets_.contains(name) && presets_[name] != current_params()) {
+      SavePreset();
+    }
+  }
+  QDialog::closeEvent(e);
 }
 
 Equalizer::Params::Params() : preamp(0) {

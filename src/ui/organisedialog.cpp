@@ -64,7 +64,15 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager,
           SLOT(UpdatePreviews()));
 }
 
-OrganiseDialog::~OrganiseDialog() { delete ui_; }
+OrganiseDialog::~OrganiseDialog() {
+  // LoadSongsBlocking runs via QtConcurrent::run with raw `this`; cancel and
+  // wait before destroying the dialog and `ui_` to avoid a use-after-free.
+  if (songs_future_.isRunning()) {
+    songs_future_.cancel();
+    songs_future_.waitForFinished();
+  }
+  delete ui_;
+}
 
 void OrganiseDialog::SetDestinationModel(QAbstractItemModel* model,
                                          bool devices) {

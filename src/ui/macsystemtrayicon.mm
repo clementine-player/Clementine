@@ -23,6 +23,8 @@
 #include <QAction>
 #include <QApplication>
 #include <QIcon>
+#include <QList>
+#include <QPointer>
 
 #include <QtDebug>
 
@@ -31,10 +33,14 @@
 #include <QImage>
 #include <QStyleHints>
 
+// Target may outlive MacSystemTrayIconPrivate or its QActions while AppKit
+// holds menu item references; QPointer + invalidate avoid dangling QAction*
+// dereferences on late validateMenuItem:/clicked callbacks.
 @interface Target : NSObject {
-  QAction* action_;
+  QPointer<QAction> action_;
 }
 - (id)initWithQAction:(QAction*)action;
+- (void)invalidate;
 - (void)clicked;
 @end
 
@@ -44,17 +50,27 @@
 }
 
 - (id)initWithQAction:(QAction*)action {
-  action_ = action;
+  self = [super init];
+  if (self) {
+    action_ = action;
+  }
   return self;
 }
 
+- (void)invalidate {
+  action_ = nullptr;
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem {
+  Q_UNUSED(menuItem);
   // This is called when the menu is shown.
-  return action_->isEnabled();
+  return action_ && action_->isEnabled();
 }
 
 - (void)clicked {
-  action_->trigger();
+  if (action_) {
+    action_->trigger();
+  }
 }
 @end
 
@@ -64,7 +80,7 @@ class MacSystemTrayIconPrivate {
     dock_menu_ = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 
     QString title = QT_TR_NOOP("Now Playing");
-    NSString* t = [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
+    NSString* t = [NSString stringWithUTF8String:title.toUtf8().constData()];
     now_playing_ = [[NSMenuItem alloc] initWithTitle:t action:nullptr keyEquivalent:@""];
 
     now_playing_artist_ = [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
@@ -86,13 +102,35 @@ class MacSystemTrayIconPrivate {
     ClearNowPlaying();
   }
 
+  ~MacSystemTrayIconPrivate() {
+    // Detach the dock menu before releasing Cocoa objects so AppKit cannot
+    // query a destroyed NSMenu during shutdown.
+    if (NSApp && [[NSApp delegate] respondsToSelector:@selector(setDockMenu:)]) {
+      [(AppDelegate*)([NSApp delegate]) setDockMenu:nil];
+    }
+    // Invalidate each Target before releasing our MRC reference in case AppKit
+    // still holds a retained reference past teardown.
+    for (Target* target : targets_) {
+      [target invalidate];
+      [target release];
+    }
+    targets_.clear();
+    actions_.clear();
+    [dock_menu_ release];
+    [now_playing_ release];
+    [now_playing_artist_ release];
+    [now_playing_title_ release];
+  }
+
   void AddMenuItem(QAction* action) {
-    // Strip accelarators from name.
+    // Strip accelerators from name.
     QString text = action->text().remove("&");
-    NSString* title = [[NSString alloc] initWithUTF8String:text.toUtf8().constData()];
-    // Create an object that can receive user clicks and pass them on to the
-    // QAction.
+    // Autoreleased under MRC; NSMenuItem retains/copies its title string.
+    NSString* title = [NSString stringWithUTF8String:text.toUtf8().constData()];
+    // NSMenuItem's target property is unretained under MRC, so keep ownership
+    // in targets_ until ~MacSystemTrayIconPrivate().
     Target* target = [[Target alloc] initWithQAction:action];
+    targets_.append(target);
     NSMenuItem* item = [[[NSMenuItem alloc] initWithTitle:title
                                                    action:@selector(clicked)
                                             keyEquivalent:@""] autorelease];
@@ -102,10 +140,23 @@ class MacSystemTrayIconPrivate {
     actions_[action] = item;
   }
 
+  void RemoveMenuItem(QAction* action) {
+    NSMenuItem* item = actions_.take(action);
+    // NSMenu removeItem: throws an exception if the item is not in the menu.
+    if (item && [dock_menu_ indexOfItem:item] != -1) {
+      [dock_menu_ removeItem:item];
+    }
+  }
+
   void ActionChanged(QAction* action) {
-    NSMenuItem* item = actions_[action];
-    NSString* title = [[NSString alloc] initWithUTF8String:action->text().toUtf8().constData()];
+    if (!action) return;
+    // Use value() so unknown or removed actions don't insert a nil entry.
+    NSMenuItem* item = actions_.value(action, nil);
+    if (!item) return;
+    QString text = action->text().remove("&");
+    NSString* title = [NSString stringWithUTF8String:text.toUtf8().constData()];
     [item setTitle:title];
+    [item setEnabled:action->isEnabled()];
   }
 
   void AddSeparator() {
@@ -115,9 +166,8 @@ class MacSystemTrayIconPrivate {
 
   void ShowNowPlaying(const QString& artist, const QString& title) {
     ClearNowPlaying();  // Makes sure the order is consistent.
-    [now_playing_artist_
-        setTitle:[[NSString alloc] initWithUTF8String:artist.toUtf8().constData()]];
-    [now_playing_title_ setTitle:[[NSString alloc] initWithUTF8String:title.toUtf8().constData()]];
+    [now_playing_artist_ setTitle:[NSString stringWithUTF8String:artist.toUtf8().constData()]];
+    [now_playing_title_ setTitle:[NSString stringWithUTF8String:title.toUtf8().constData()]];
     title.isEmpty() ? HideItem(now_playing_title_) : ShowItem(now_playing_title_);
     artist.isEmpty() ? HideItem(now_playing_artist_) : ShowItem(now_playing_artist_);
     artist.isEmpty() && title.isEmpty() ? HideItem(now_playing_) : ShowItem(now_playing_);
@@ -144,6 +194,7 @@ class MacSystemTrayIconPrivate {
   }
 
   QMap<QAction*, NSMenuItem*> actions_;
+  QList<Target*> targets_;
 
   NSMenu* dock_menu_;
   NSMenuItem* now_playing_;
@@ -164,12 +215,15 @@ const int kDockIconSize = 256;
 QPixmap AddPlaybackBadge(const QPixmap& icon, bool playing, bool dark) {
   QImage image = icon.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
   const CGFloat size = image.width();
+  if (image.isNull() || size <= 0) return icon;
 
   CGColorSpaceRef color_space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
   CGContextRef context = CGBitmapContextCreate(
       image.bits(), image.width(), image.height(), 8, image.bytesPerLine(), color_space,
       kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little);
   CGColorSpaceRelease(color_space);
+  // CGBitmapContextCreate returns NULL for empty/unsupported backing buffers.
+  if (!context) return icon;
 
   [NSGraphicsContext saveGraphicsState];
   [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithCGContext:context
@@ -200,11 +254,14 @@ QPixmap AddPlaybackBadge(const QPixmap& icon, bool playing, bool dark) {
                                                configurationWithPaletteColors:@[ glyph_color ]]];
   NSImage* glyph = [[NSImage imageWithSystemSymbolName:playing ? @"play.fill" : @"pause.fill"
                               accessibilityDescription:nil] imageWithSymbolConfiguration:config];
+  // SF Symbols can return nil on older macOS or missing symbol lookups.
   // The play triangle's weight is left of its centre, so nudge it right.
-  const CGFloat nudge = playing ? diameter * 0.025 : 0;
-  [glyph drawInRect:NSMakeRect(NSMidX(badge) - glyph.size.width / 2 + nudge,
-                               NSMidY(badge) - glyph.size.height / 2, glyph.size.width,
-                               glyph.size.height)];
+  if (glyph) {
+    const CGFloat nudge = playing ? diameter * 0.025 : 0;
+    [glyph drawInRect:NSMakeRect(NSMidX(badge) - glyph.size.width / 2 + nudge,
+                                 NSMidY(badge) - glyph.size.height / 2, glyph.size.width,
+                                 glyph.size.height)];
+  }
 
   [NSGraphicsContext restoreGraphicsState];
   CGContextRelease(context);
@@ -248,8 +305,14 @@ void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play, QAction* sto
 }
 
 void MacSystemTrayIcon::SetupMenuItem(QAction* action) {
+  if (!action || !p_) return;
   p_->AddMenuItem(action);
   connect(action, SIGNAL(changed()), SLOT(ActionChanged()));
+  // MainWindow owns the QActions; remove the item if an action dies first so
+  // actions_ doesn't keep a dangling key or stale dock_menu_ entry.
+  connect(action, &QObject::destroyed, this, [this, action]() {
+    if (p_) p_->RemoveMenuItem(action);
+  });
 }
 
 void MacSystemTrayIcon::UpdateIcon() {
@@ -262,12 +325,20 @@ void MacSystemTrayIcon::UpdateIcon() {
 }
 
 void MacSystemTrayIcon::ActionChanged() {
+  // p_ is created lazily in SetupMenu(); callers may invoke these before then.
+  if (!p_) return;
   QAction* action = qobject_cast<QAction*>(sender());
+  if (!action) return;
   p_->ActionChanged(action);
 }
 
-void MacSystemTrayIcon::ClearNowPlaying() { p_->ClearNowPlaying(); }
+void MacSystemTrayIcon::ClearNowPlaying() {
+  if (!p_) return;
+  p_->ClearNowPlaying();
+}
 
 void MacSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path) {
+  Q_UNUSED(image_path);
+  if (!p_) return;
   p_->ShowNowPlaying(song.artist(), song.PrettyTitle());
 }

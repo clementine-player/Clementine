@@ -286,7 +286,8 @@ void SettingsDialog::OpenAtPage(Page page) {
 }
 
 void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
-  if (!(item->flags() & Qt::ItemIsSelectable)) {
+  // item can be null when the tree selection is cleared or reset.
+  if (!item || !(item->flags() & Qt::ItemIsSelectable)) {
     return;
   }
 

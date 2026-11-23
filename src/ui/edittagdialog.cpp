@@ -210,7 +210,13 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
                    ui_->grouping);
 }
 
-EditTagDialog::~EditTagDialog() { delete ui_; }
+EditTagDialog::~EditTagDialog() {
+  // LoadData/SaveData run via QtConcurrent::run with raw `this` (and SaveData
+  // emits signals). Wait for in-flight tasks before destroying `this` and ui_.
+  if (load_future_.isRunning()) load_future_.waitForFinished();
+  if (save_future_.isRunning()) save_future_.waitForFinished();
+  delete ui_;
+}
 
 bool EditTagDialog::SetLoading(const QString& message) {
   const bool loading = !message.isEmpty();
@@ -256,9 +262,8 @@ void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
   ui_->song_list->clear();
 
   // Reload tags in the background
-  QFuture<QList<Data>> future =
-      QtConcurrent::run(&EditTagDialog::LoadData, this, s);
-  NewClosure(future, this, &EditTagDialog::SetSongsFinished);
+  load_future_ = QtConcurrent::run(&EditTagDialog::LoadData, this, s);
+  NewClosure(load_future_, this, &EditTagDialog::SetSongsFinished);
 }
 
 void EditTagDialog::SetSongsFinished(const QList<Data>& data) {
@@ -713,9 +718,8 @@ void EditTagDialog::accept() {
   if (!SetLoading(tr("Saving tracks") + "...")) return;
 
   // Save tags in the background
-  QFuture<void> future =
-      QtConcurrent::run(&EditTagDialog::SaveData, this, data_);
-  NewClosure(future, this, &EditTagDialog::AcceptFinished);
+  save_future_ = QtConcurrent::run(&EditTagDialog::SaveData, this, data_);
+  NewClosure(save_future_, this, &EditTagDialog::AcceptFinished);
 }
 
 void EditTagDialog::AcceptFinished() {
@@ -744,6 +748,8 @@ bool EditTagDialog::eventFilter(QObject* o, QEvent* e) {
         const QModelIndexList sel =
             ui_->song_list->selectionModel()->selectedIndexes();
         Song* song = GetFirstSelected();
+        // Drops can arrive when no row is selected (e.g., all non-editable).
+        if (!song) break;
 
         const QString cover =
             album_cover_choice_controller_->SaveCover(song, event);

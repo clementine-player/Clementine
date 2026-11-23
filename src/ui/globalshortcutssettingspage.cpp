@@ -153,8 +153,18 @@ void GlobalShortcutsSettingsPage::Save() {
 }
 
 void GlobalShortcutsSettingsPage::CurrentItemChanged(QTreeWidgetItem* item) {
+  // Selection clearing passes nullptr, and group header items have no entry
+  // in shortcuts_; return before QMap::operator[] inserts an empty Shortcut.
+  if (!item) {
+    ui_->shortcut_options->setEnabled(false);
+    return;
+  }
   current_id_ = item->data(0, Qt::UserRole).toString();
-  Shortcut& shortcut = shortcuts_[current_id_];
+  if (!shortcuts_.contains(current_id_)) {
+    ui_->shortcut_options->setEnabled(false);
+    return;
+  }
+  const Shortcut& shortcut = shortcuts_[current_id_];
 
   // Enable options
   ui_->shortcut_options->setEnabled(true);
