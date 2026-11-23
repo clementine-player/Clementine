@@ -55,23 +55,59 @@ void _MessageHandlerBase::SetDevice(QIODevice* device) {
 }
 
 void _MessageHandlerBase::DeviceReadyRead() {
+  // Cap incoming frames at 64 MiB to prevent corrupt or malicious length
+  // prefixes from triggering unbounded allocations.
+  static constexpr quint32 kMaxMessageLength = 64 * 1024 * 1024;
+
   while (device_->bytesAvailable()) {
     if (!reading_protobuf_) {
+      // Check there are at least 4 bytes available to read expected_length_.
+      // Otherwise a short read yields 0 and desynchronizes frame boundaries.
+      if (device_->bytesAvailable() < static_cast<qint64>(sizeof(quint32))) {
+        return;
+      }
+
       // Read the length of the next message
       QDataStream s(device_);
       s >> expected_length_;
+      // Reset framing state before closing so an unreadable or oversized
+      // header leaves no stale partial frame on the stream.
+      if (s.status() != QDataStream::Ok ||
+          expected_length_ > kMaxMessageLength) {
+        qLog(Error) << "Invalid protobuf message length:" << expected_length_;
+        buffer_.close();
+        buffer_.setData(QByteArray());
+        reading_protobuf_ = false;
+        device_->close();
+        return;
+      }
 
       reading_protobuf_ = true;
     }
 
-    // Read some of the message
-    buffer_.write(device_->read(expected_length_ - buffer_.size()));
+    // Only read when payload bytes remain: a 0-byte message skips read(0)
+    // and completes immediately, while an empty read waits for readyRead
+    // instead of spinning.
+    const qint64 remaining =
+        static_cast<qint64>(expected_length_) - buffer_.size();
+    if (remaining > 0) {
+      const QByteArray chunk = device_->read(remaining);
+      if (chunk.isEmpty()) {
+        return;
+      }
+      buffer_.write(chunk);
+    }
 
     // Did we get everything?
-    if (buffer_.size() == expected_length_) {
+    if (buffer_.size() == static_cast<qint64>(expected_length_)) {
       // Parse the message
       if (!RawMessageArrived(buffer_.data())) {
+        // Clear framing state before closing so corrupt protobuf payloads
+        // cannot leave partial buffered data or desynchronize future reads.
         qLog(Error) << "Malformed protobuf message";
+        buffer_.close();
+        buffer_.setData(QByteArray());
+        reading_protobuf_ = false;
         device_->close();
         return;
       }

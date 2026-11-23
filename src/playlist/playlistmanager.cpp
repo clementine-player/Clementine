@@ -128,6 +128,7 @@ int PlaylistManager::SetActiveToPlaylistOf(const QModelIndex& index) {
 
 QItemSelection PlaylistManager::selection(int id) const {
   QMap<int, Data>::const_iterator it = playlists_.find(id);
+  if (it == playlists_.constEnd()) return QItemSelection();
   return it->selection;
 }
 
@@ -296,7 +297,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
 }
 
 void PlaylistManager::Rename(int id, const QString& new_name) {
-  Q_ASSERT(playlists_.contains(id));
+  if (!playlists_.contains(id)) return;
 
   playlist_backend_->RenamePlaylist(id, new_name);
   playlists_[id].name = new_name;
@@ -311,7 +312,7 @@ void PlaylistManager::Favorite(int id, bool favorite) {
     playlist_backend_->FavoritePlaylist(id, favorite);
     playlists_[id].p->set_favorite(favorite);
   } else {
-    Q_ASSERT(!favorite);
+    if (favorite) return;
     // Otherwise it means user wants to remove this playlist from the left
     // panel,
     // while it's not visible in the playlist tabbar either, because it has been
@@ -322,7 +323,8 @@ void PlaylistManager::Favorite(int id, bool favorite) {
 }
 
 void PlaylistManager::Clear(int id) {
-  if (playlists_.count() <= 1 || !playlists_.contains(id)) return;
+  // Allow clearing even when only one playlist is open (unlike Close()).
+  if (!playlists_.contains(id)) return;
   playlists_[id].p->Clear();
 }
 
@@ -368,14 +370,16 @@ void PlaylistManager::OneOfPlaylistsChanged() {
 }
 
 void PlaylistManager::SetCurrentPlaylist(int id) {
-  Q_ASSERT(playlists_.contains(id));
+  // Ignore unknown IDs (e.g., stale remote requests) before QMap::operator[]
+  // can default-insert a null Data entry.
+  if (!playlists_.contains(id)) return;
   current_ = id;
   emit CurrentChanged(current());
   UpdateSummaryText();
 }
 
 void PlaylistManager::SetActivePlaylist(int id) {
-  Q_ASSERT(playlists_.contains(id));
+  if (!playlists_.contains(id)) return;
 
   // Kinda a hack: unset the current item from the old active playlist before
   // setting the new one
@@ -433,12 +437,18 @@ void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
 }
 
 void PlaylistManager::Enque(int id, int i) {
+  // Validate both playlist ID and row index against untrusted remote input.
+  if (!playlists_.contains(id)) return;
+
+  Playlist* p = playlist(id);
+  if (i < 0 || i >= p->rowCount()) return;
+
+  const QModelIndex idx = p->index(i, 0);
+  if (!idx.isValid()) return;
+
   QModelIndexList dummyIndexList;
-
-  Q_ASSERT(playlists_.contains(id));
-
-  dummyIndexList.append(playlist(id)->index(i, 0));
-  playlist(id)->queue()->ToggleTracks(dummyIndexList);
+  dummyIndexList.append(idx);
+  p->queue()->ToggleTracks(dummyIndexList);
 }
 
 void PlaylistManager::UpdateSummaryText() {
@@ -520,7 +530,7 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
 void PlaylistManager::InsertUrls(int id, const QList<QUrl>& urls, int pos,
                                  bool play_now, bool enqueue,
                                  bool enqueue_next) {
-  Q_ASSERT(playlists_.contains(id));
+  if (!playlists_.contains(id)) return;
 
   if (play_now && active_ != id) SetActivePlaylist(id);
   playlists_[id].p->InsertUrls(urls, pos, play_now, enqueue, enqueue_next);
@@ -529,17 +539,43 @@ void PlaylistManager::InsertUrls(int id, const QList<QUrl>& urls, int pos,
 void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
                                   bool play_now, bool enqueue,
                                   bool enqueue_next) {
-  Q_ASSERT(playlists_.contains(id));
+  if (!playlists_.contains(id)) return;
 
   if (play_now && active_ != id) SetActivePlaylist(id);
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue, enqueue_next);
 }
 
+void PlaylistManager::InsertSongsInNewPlaylist(const QString& name,
+                                               const SongList& songs, int pos,
+                                               bool play_now, bool enqueue,
+                                               bool enqueue_next) {
+  // Single slot for remote requests creating a new playlist and inserting
+  // songs without racing two separate queued calls.
+  const int id = New(name);
+  if (playlists_.contains(id) && !songs.isEmpty()) {
+    InsertSongs(id, songs, pos, play_now, enqueue, enqueue_next);
+  }
+}
+
 void PlaylistManager::RemoveItemsWithoutUndo(int id,
                                              const QList<int>& indices) {
-  Q_ASSERT(playlists_.contains(id));
+  if (!playlists_.contains(id)) return;
 
-  playlists_[id].p->RemoveItemsWithoutUndo(indices);
+  // Filter out-of-range and duplicate row indices from remote callers before
+  // passing them to Playlist::RemoveItemsWithoutUndo.
+  const int count = playlists_[id].p->rowCount();
+  QSet<int> seen;
+  QList<int> valid_indices;
+  valid_indices.reserve(indices.size());
+  for (int idx : indices) {
+    if (idx >= 0 && idx < count && !seen.contains(idx)) {
+      seen.insert(idx);
+      valid_indices.append(idx);
+    }
+  }
+  if (valid_indices.isEmpty()) return;
+
+  playlists_[id].p->RemoveItemsWithoutUndo(valid_indices);
 }
 
 void PlaylistManager::RemoveCurrentSong() {
@@ -606,7 +642,9 @@ void PlaylistManager::Open(int id) {
 
 void PlaylistManager::SetCurrentOrOpen(int id) {
   Open(id);
-  SetCurrentPlaylist(id);
+  if (playlists_.contains(id)) {
+    SetCurrentPlaylist(id);
+  }
 }
 
 bool PlaylistManager::IsPlaylistOpen(int id) { return playlists_.contains(id); }

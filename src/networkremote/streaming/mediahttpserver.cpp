@@ -43,6 +43,19 @@ namespace {
 
 const int kMaxHeadSize = 8 * 1024;
 const int kHeadTimeoutMsec = 10000;
+
+// Aborts stalled direct responses once kHandledProperty exempts them from
+// HandleConnection()'s header timeout, resetting whenever bytes drain.
+void ArmSocketTimeout(QTcpSocket* socket, int msec) {
+  QTimer* timer = new QTimer(socket);
+  timer->setInterval(msec);
+  timer->setSingleShot(true);
+  QObject::connect(timer, &QTimer::timeout, socket,
+                   [socket]() { socket->abort(); });
+  QObject::connect(socket, &QIODevice::bytesWritten, timer,
+                   [timer]() { timer->start(); });
+  timer->start();
+}
 const char* kHandledProperty = "clementine_http_handled";
 
 }  // namespace
@@ -134,6 +147,23 @@ int MediaHttpServer::CountPendingRequests() const {
     if (!socket->property(kHandledProperty).toBool()) ++count;
   }
   return count;
+}
+
+int MediaHttpServer::CountDirectResponses() const {
+  int count = 0;
+  for (const QTcpSocket* socket :
+       findChildren<QTcpSocket*>(QString(), Qt::FindDirectChildrenOnly)) {
+    if (socket->property(kHandledProperty).toBool()) ++count;
+  }
+  return count;
+}
+
+bool MediaHttpServer::AtResponseLimit() const {
+  // ReadyRead sets kHandledProperty on the current socket before Dispatch, so
+  // exclude it from the direct response count.
+  return qMax(0, CountDirectResponses() - 1) +
+             CountResponders(nullptr, false) >=
+         kMaxResponses;
 }
 
 void MediaHttpServer::HandleConnection(QTcpSocket* socket) {
@@ -261,6 +291,10 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
       WriteError(socket, 405, "Method Not Allowed");
       return;
     }
+    if (AtResponseLimit()) {
+      WriteError(socket, 503, "Service Unavailable");
+      return;
+    }
     ReadEvent(socket, request, path.token);
     return;
   }
@@ -299,6 +333,10 @@ void MediaHttpServer::Dispatch(QTcpSocket* socket, const HttpRequest& request) {
   }
 
   if (path.kind == MediaPath::Kind::Cover) {
+    if (AtResponseLimit()) {
+      WriteError(socket, 503, "Service Unavailable");
+      return;
+    }
     WriteCover(socket, item, head_only);
     return;
   }
@@ -393,56 +431,112 @@ void MediaHttpServer::ReadEvent(QTcpSocket* socket, const HttpRequest& request,
     return;
   }
 
-  // The body may still be on its way.
+  // The body may still be on its way. Guard with finished and bind readyRead
+  // to socket so neither re-entrant reads nor timeouts deliver twice.
   auto body = std::make_shared<QByteArray>();
   auto connection = std::make_shared<QMetaObject::Connection>();
-  auto read = [this, socket, token, length, body, connection]() {
-    *body += socket->read(length - body->size());
+  auto finished = std::make_shared<bool>(false);
+  auto read = [this, socket, token, length, body, connection, finished]() {
+    if (*finished) return;
+    const qint64 remaining = length - body->size();
+    if (remaining > 0) *body += socket->read(remaining);
     if (body->size() < length) return;
+    *finished = true;
     disconnect(*connection);
 
     if (!events_->Deliver(token, *body)) {
       WriteError(socket, 404, "Not Found");
       return;
     }
+    // Keep an idle timeout on the 200 OK write until disconnect finishes.
+    ArmSocketTimeout(socket, kHeadTimeoutMsec);
     socket->write(
         "HTTP/1.1 200 OK\r\n"
         "Content-Length: 0\r\n"
         "Connection: close\r\n\r\n");
     socket->disconnectFromHost();
   };
-  *connection = connect(socket, &QTcpSocket::readyRead, this, read);
-  QTimer::singleShot(kHeadTimeoutMsec, socket, [socket, body, length]() {
-    if (body->size() < length) socket->abort();
+  *connection = connect(socket, &QTcpSocket::readyRead, socket, read);
+  QTimer::singleShot(kHeadTimeoutMsec, socket, [socket, finished]() {
+    if (!*finished) socket->abort();
   });
   read();
 }
 
 void MediaHttpServer::WriteCover(QTcpSocket* socket, const StreamItem& item,
                                  bool head_only) {
-  QByteArray data = item.cover;
-  QByteArray type = "image/jpeg";
-  if (data.isEmpty() && !item.cover_file.isEmpty()) {
-    QFile file(item.cover_file);
-    if (file.open(QIODevice::ReadOnly) && file.size() <= kMaxCoverFileSize) {
-      data = file.readAll();
-      type = QMimeDatabase().mimeTypeForData(data).name().toLatin1();
-    }
+  static constexpr qint64 kCoverChunkSize = 64 * 1024;
+  static constexpr qint64 kMaxCoverBuffered = 128 * 1024;
+
+  if (!item.cover.isEmpty()) {
+    const QByteArray& data = item.cover;
+    qLog(Debug) << "Serving the cover of item" << item.id << "to"
+                << socket->peerAddress() << "," << data.size() << "bytes";
+    QByteArray head = "HTTP/1.1 200 OK\r\n";
+    head += "Content-Type: image/jpeg\r\n";
+    head += "Content-Length: " + QByteArray::number(data.size()) + "\r\n";
+    head += "Cache-Control: no-store\r\n";
+    head += "Connection: close\r\n\r\n";
+    ArmSocketTimeout(socket, kHeadTimeoutMsec);
+    socket->write(head);
+    if (!head_only) socket->write(data);
+    socket->disconnectFromHost();
+    return;
   }
-  qLog(Debug) << "Serving the cover of item" << item.id << "to"
-              << socket->peerAddress() << "," << data.size() << "bytes";
-  if (data.isEmpty() || !type.startsWith("image/")) {
+
+  if (item.cover_file.isEmpty()) {
     WriteError(socket, 404, "Not Found");
     return;
   }
+
+  // Stream cover files in bounded chunks and sniff the header first so files
+  // up to kMaxCoverFileSize never buffer synchronously in RAM or socket
+  // queues.
+  QFile* file = new QFile(item.cover_file, socket);
+  if (!file->open(QIODevice::ReadOnly) || file->size() <= 0 ||
+      file->size() > kMaxCoverFileSize) {
+    WriteError(socket, 404, "Not Found");
+    return;
+  }
+
+  const QByteArray sniff = file->peek(4096);
+  const QByteArray type =
+      QMimeDatabase().mimeTypeForData(sniff).name().toLatin1();
+  if (!type.startsWith("image/")) {
+    WriteError(socket, 404, "Not Found");
+    return;
+  }
+
+  const qint64 size = file->size();
+  qLog(Debug) << "Serving the cover of item" << item.id << "to"
+              << socket->peerAddress() << "," << size << "bytes";
   QByteArray head = "HTTP/1.1 200 OK\r\n";
   head += "Content-Type: " + type + "\r\n";
-  head += "Content-Length: " + QByteArray::number(data.size()) + "\r\n";
+  head += "Content-Length: " + QByteArray::number(size) + "\r\n";
   head += "Cache-Control: no-store\r\n";
   head += "Connection: close\r\n\r\n";
+  ArmSocketTimeout(socket, kHeadTimeoutMsec);
   socket->write(head);
-  if (!head_only) socket->write(data);
-  socket->disconnectFromHost();
+  if (head_only) {
+    file->close();
+    socket->disconnectFromHost();
+    return;
+  }
+
+  auto pump = [socket, file]() {
+    while (file->isOpen() && !file->atEnd() &&
+           socket->bytesToWrite() < kMaxCoverBuffered) {
+      const QByteArray chunk = file->read(kCoverChunkSize);
+      if (chunk.isEmpty()) break;
+      socket->write(chunk);
+    }
+    if (!file->isOpen() || file->atEnd()) {
+      file->close();
+      socket->disconnectFromHost();
+    }
+  };
+  connect(socket, &QIODevice::bytesWritten, file, pump);
+  pump();
 }
 
 QByteArray MediaHttpServer::DlnaHeaders(const StreamItem& item,
@@ -464,6 +558,7 @@ QByteArray MediaHttpServer::DlnaHeaders(const StreamItem& item,
 
 void MediaHttpServer::WriteError(QTcpSocket* socket, int code,
                                  const char* reason) {
+  ArmSocketTimeout(socket, kHeadTimeoutMsec);
   const QByteArray body = QByteArray(reason) + "\n";
   socket->write(QString("HTTP/1.1 %1 %2\r\n"
                         "Content-Type: text/plain\r\n"

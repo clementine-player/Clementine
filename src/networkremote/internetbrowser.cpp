@@ -262,22 +262,25 @@ QByteArray InternetBrowser::Describe(Client* client) {
   // Ids already issued under this node, by where their nodes are now. Ids of
   // nodes that have gone are forgotten.
   QHash<QModelIndex, QString> existing;
-  QStringList& siblings = client->children[client->watched_id];
-  for (auto it = siblings.begin(); it != siblings.end();) {
+  QStringList* siblings = &client->children[client->watched_id];
+  for (auto it = siblings->begin(); it != siblings->end();) {
     const QModelIndex current = client->nodes.value(*it).index;
     if (current.isValid()) {
       existing[current] = *it;
       ++it;
     } else {
       client->nodes.remove(*it);
-      it = siblings.erase(it);
+      it = siblings->erase(it);
     }
   }
 
-  response->set_offset(client->offset);
+  // Bound offset and subtract before qMin so shrinking lists or large client
+  // limits cannot overflow signed int or read past children.size().
+  const int offset = qBound(0, client->offset, children.size());
+  response->set_offset(offset);
   response->set_total_count(children.size());
-  const int end = qMin(children.size(), client->offset + client->limit);
-  for (int i = client->offset; i < end; ++i) {
+  const int end = offset + qMin(children.size() - offset, client->limit);
+  for (int i = offset; i < end; ++i) {
     cpb::remote::BrowseNode* node = response->add_nodes();
     node->set_node_id(IdFor(client, client->watched_id, children[i], &existing)
                           .toStdString());

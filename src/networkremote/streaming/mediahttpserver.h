@@ -157,6 +157,8 @@ class MediaHttpServer : public QObject {
   // Live responders, all of them or only those for |token|; pipelines only
   // with |pipelines|.
   int CountResponders(const QByteArray* token, bool pipelines) const;
+  int CountDirectResponses() const;
+  bool AtResponseLimit() const;
   int CountPendingRequests() const;
   void KeepAwake(StreamResponder* responder);
 

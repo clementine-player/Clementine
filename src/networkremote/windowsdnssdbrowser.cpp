@@ -78,7 +78,6 @@ QString FromWide(PCWSTR text) {
 struct WindowsDnsSdBrowser::Shared {
   QMutex mutex;
   WindowsDnsSdBrowser* owner = nullptr;
-  QString service_type;
 
   // Runs |f| on the main thread, unless the browser is gone by then.
   void Post(std::function<void(WindowsDnsSdBrowser*)> f) {

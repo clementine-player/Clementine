@@ -24,6 +24,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <limits>
 
 #include "core/logging.h"
 
@@ -56,7 +57,14 @@ bool CloudStream::CheckCache(int start, int end) {
 }
 
 void CloudStream::FillCache(int start, TagLib::ByteVector data) {
-  for (int i = 0; i < static_cast<int>(data.size()); ++i) {
+  // Clamp to length_ so an out-of-range start or oversized reply never writes
+  // past the end of the fixed-size cache_ sparsetable.
+  if (start < 0 || static_cast<ulong>(start) >= length_) {
+    return;
+  }
+  const int max_count = static_cast<int>(
+      qMin<ulong>(data.size(), length_ - static_cast<ulong>(start)));
+  for (int i = 0; i < max_count; ++i) {
     cache_.set(start + i, data[i]);
   }
 }
@@ -98,8 +106,16 @@ TagLib::ByteVector CloudStream::readBlock(size_t length) {
 #else
 TagLib::ByteVector CloudStream::readBlock(ulong length) {
 #endif
-  const uint start = cursor_;
-  const uint end = qMin((size_t)(cursor_ + length - 1), (size_t)(length_ - 1));
+  // Bail out before computing end = start + clamped_len - 1 so an empty
+  // stream, zero-length read, or EOF cursor cannot underflow size_t.
+  if (length_ == 0 || length == 0 || cursor_ < 0 ||
+      static_cast<ulong>(cursor_) >= length_) {
+    return TagLib::ByteVector();
+  }
+  const size_t start = static_cast<size_t>(cursor_);
+  const size_t avail = static_cast<size_t>(length_) - start;
+  const size_t clamped_len = qMin(static_cast<size_t>(length), avail);
+  const size_t end = start + clamped_len - 1;
 
   if (end < start) {
     return TagLib::ByteVector();
@@ -133,16 +149,25 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
   reply->deleteLater();
 
   int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-  if (code >= 400) {
-    qLog(Debug) << "Error retrieving url to tag:" << url_;
+  // Require 206 Partial Content for nonzero offsets: servers that ignore Range
+  // return 200 OK starting at byte 0, which would corrupt cursor_ and cache_.
+  if (reply->error() != QNetworkReply::NoError || code >= 400 ||
+      (start > 0 && code != 206)) {
+    qLog(Debug) << "Error retrieving url to tag:" << url_ << "HTTP" << code;
     return TagLib::ByteVector();
   }
 
   QByteArray data = reply->readAll();
+  // Truncate oversized bodies to the requested byte window before advancing
+  // cursor_ or populating cache_.
+  const qint64 max_bytes = static_cast<qint64>(end - start + 1);
+  if (data.size() > max_bytes) {
+    data.truncate(static_cast<int>(max_bytes));
+  }
   TagLib::ByteVector bytes(data.data(), data.size());
   cursor_ += data.size();
 
-  FillCache(start, bytes);
+  FillCache(static_cast<int>(start), bytes);
   return bytes;
 }
 
@@ -178,20 +203,26 @@ void CloudStream::seek(TagLib::offset_t offset, TagLib::IOStream::Position p) {
 #else
 void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
 #endif
+  qint64 target = 0;
   switch (p) {
     case TagLib::IOStream::Beginning:
-      cursor_ = offset;
+      target = static_cast<qint64>(offset);
       break;
 
     case TagLib::IOStream::Current:
-      cursor_ = qMin(ulong(cursor_ + offset), length_);
+      target = static_cast<qint64>(cursor_) + static_cast<qint64>(offset);
       break;
 
     case TagLib::IOStream::End:
       // This should really not have qAbs(), but OGG reading needs it.
-      cursor_ = qMax(0UL, (unsigned long)(length_ - qAbs(offset)));
+      target = static_cast<qint64>(length_) - qAbs(static_cast<qint64>(offset));
       break;
   }
+  // Compute in signed 64-bit math and clamp to [0, min(length_, INT_MAX)] so
+  // seeking from End on files smaller than offset cannot underflow unsigned.
+  const qint64 max_cursor = qMin<qint64>(static_cast<qint64>(length_),
+                                         std::numeric_limits<int>::max());
+  cursor_ = static_cast<int>(qBound<qint64>(0, target, max_cursor));
 }
 
 void CloudStream::clear() { cursor_ = 0; }

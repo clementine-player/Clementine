@@ -43,6 +43,9 @@ const CodecInfo kCodecs[] = {
      "vorbisparse ! oggmux", "audio/ogg; codecs=vorbis"},
     {Song::Type_OggOpus, "audio/ogg; codecs=opus", "audio/x-opus",
      "opusparse ! oggmux", "audio/ogg; codecs=opus"},
+    // Note: Song::Type_Mp4 is container-level in TagReader/Song (both AAC and
+    // ALAC use Type_Mp4; passthrough assumes AAC ADTS and both mobile clients
+    // advertise generic "audio/mp4").
     {Song::Type_Mp4, "audio/mp4", "audio/mpeg, mpegversion=(int)4",
      "aacparse ! audio/mpeg, stream-format=(string)adts", "audio/aac"},
     {Song::Type_OggFlac, "audio/ogg; codecs=flac", "", "", ""},
@@ -85,6 +88,44 @@ void SplitMime(const QString& mime, QString* type, QString* codecs) {
   }
 }
 
+void FormatsFromProto(const google::protobuf::RepeatedPtrField<
+                          cpb::remote::AudioFormat>& pb_formats,
+                      QList<RendererCaps::Format>* out) {
+  int scanned = 0;
+  // Cap both accepted formats and total entries scanned so a flood of
+  // invalid AudioFormat entries cannot spin CPU.
+  for (const cpb::remote::AudioFormat& pb_format : pb_formats) {
+    if (out->size() >= RendererCaps::kMaxFormats ||
+        scanned >= RendererCaps::kMaxFormats * 4) {
+      break;
+    }
+    ++scanned;
+    if (pb_format.mime_type().empty() ||
+        pb_format.mime_type().size() >
+            size_t(RendererCaps::kMaxMimeTypeLength)) {
+      continue;
+    }
+
+    RendererCaps::Format format;
+    format.mime_type = QString::fromStdString(pb_format.mime_type());
+    for (int hz : pb_format.sample_rates_hz()) {
+      if (format.sample_rates_hz.size() >= RendererCaps::kMaxSampleRates) break;
+      if (hz > 0 && hz <= RendererCaps::kMaxSampleRateHz) {
+        format.sample_rates_hz << hz;
+      }
+    }
+    // An empty list means any rate, so a format whose rates were all invalid
+    // must not become one that accepts everything.
+    if (pb_format.sample_rates_hz_size() > 0 &&
+        format.sample_rates_hz.isEmpty()) {
+      continue;
+    }
+    format.max_channels =
+        qBound(0, pb_format.max_channels(), RendererCaps::kMaxChannels);
+    *out << format;
+  }
+}
+
 }  // namespace
 
 const int RendererCaps::kMaxFormats = 32;
@@ -96,28 +137,7 @@ const int RendererCaps::kMaxChannels = 64;
 RendererCaps RendererCaps::FromProto(
     const cpb::remote::RendererCapabilities& pb) {
   RendererCaps caps;
-  for (const cpb::remote::AudioFormat& pb_format : pb.formats()) {
-    if (caps.formats.size() >= kMaxFormats) break;
-    if (pb_format.mime_type().empty() ||
-        pb_format.mime_type().size() > size_t(kMaxMimeTypeLength)) {
-      continue;
-    }
-
-    Format format;
-    format.mime_type = QString::fromStdString(pb_format.mime_type());
-    for (int hz : pb_format.sample_rates_hz()) {
-      if (format.sample_rates_hz.size() >= kMaxSampleRates) break;
-      if (hz > 0 && hz <= kMaxSampleRateHz) format.sample_rates_hz << hz;
-    }
-    // An empty list means any rate, so a format whose rates were all invalid
-    // must not become one that accepts everything.
-    if (pb_format.sample_rates_hz_size() > 0 &&
-        format.sample_rates_hz.isEmpty()) {
-      continue;
-    }
-    format.max_channels = qBound(0, pb_format.max_channels(), kMaxChannels);
-    caps.formats << format;
-  }
+  FormatsFromProto(pb.formats(), &caps.formats);
   caps.max_bitrate_kbps = qMax(0, pb.max_bitrate_kbps());
   for (int feature : pb.features()) {
     switch (feature) {
@@ -134,6 +154,13 @@ RendererCaps RendererCaps::FromProto(
         break;
     }
   }
+  return caps;
+}
+
+RendererCaps RendererCaps::FromSyncManifest(
+    const cpb::remote::RequestSyncManifest& pb) {
+  RendererCaps caps;
+  FormatsFromProto(pb.supported_formats(), &caps.formats);
   return caps;
 }
 

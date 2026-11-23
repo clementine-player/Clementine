@@ -36,6 +36,8 @@
 
 IncomingDataParser::IncomingDataParser(Application* app)
     : app_(app),
+      doubleclick_playlist_addmode_(MainWindow::PlaylistAddBehaviour_Play),
+      streaming_enabled_(false),
       song_loader_(
           new RemoteSongLoader(app->library_backend(), app->player())) {
   // load settings initially and sign up for updates
@@ -59,11 +61,7 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)), player,
           SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
   connect(this, SIGNAL(SeekTo(int)), player, SLOT(SeekTo(int)));
-  connect(this, SIGNAL(Enque(int, int)), playlist_manager,
-          SLOT(Enque(int, int)));
 
-  connect(this, SIGNAL(SetActivePlaylist(int)), playlist_manager,
-          SLOT(SetActivePlaylist(int)));
   connect(this, SIGNAL(ShuffleCurrent()), playlist_manager,
           SLOT(ShuffleCurrent()));
   connect(this, SIGNAL(SetRepeatMode(PlaylistSequence::RepeatMode)),
@@ -76,6 +74,12 @@ IncomingDataParser::IncomingDataParser(Application* app)
           SIGNAL(InsertSongs(int, const SongList&, int, bool, bool, bool)),
           playlist_manager,
           SLOT(InsertSongs(int, const SongList&, int, bool, bool, bool)));
+  connect(this,
+          SIGNAL(InsertSongsInNewPlaylist(const QString&, const SongList&, int,
+                                          bool, bool, bool)),
+          playlist_manager,
+          SLOT(InsertSongsInNewPlaylist(const QString&, const SongList&, int,
+                                        bool, bool, bool)));
   connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)), playlist_manager,
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
   connect(this, SIGNAL(New(const QString&)), playlist_manager,
@@ -107,25 +111,21 @@ void IncomingDataParser::ReloadSettings() {
           .toInt());
 }
 
-bool IncomingDataParser::close_connection() { return close_connection_; }
-
 void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
-  close_connection_ = false;
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
+  // Drop queued Parse signals arriving after a client started closing.
+  if (!client || client->is_closing()) return;
 
   // Now check what's to do
   switch (msg.type()) {
     case cpb::remote::CONNECT:
       ClientConnect(msg, client);
       break;
-    case cpb::remote::DISCONNECT:
-      close_connection_ = true;
-      break;
     case cpb::remote::REQUEST_PLAYLISTS:
-      SendPlaylists(msg);
+      SendPlaylists(client, msg);
       break;
     case cpb::remote::REQUEST_PLAYLIST_SONGS:
-      GetPlaylistSongs(msg);
+      GetPlaylistSongs(client, msg);
       break;
     case cpb::remote::SET_VOLUME:
       emit SetVolume(msg.request_set_volume().volume());
@@ -184,21 +184,22 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
     case cpb::remote::LOVE:
       emit Love();
       break;
-    case cpb::remote::BAN:
-      emit Ban();
-      break;
     case cpb::remote::GET_LYRICS:
-      emit GetLyrics();
+      emit GetLyrics(client->id());
       break;
-    case cpb::remote::DOWNLOAD_SONGS:
-      client->song_sender()->SendSongs(msg.request_download_songs());
+    case cpb::remote::DOWNLOAD_SONGS: {
+      // Snapshot current song and playlist state on the main thread first.
+      const std::string data = msg.request_download_songs().SerializeAsString();
+      emit DownloadSongsRequested(client->id(),
+                                  QByteArray(data.data(), data.size()));
       break;
+    }
     case cpb::remote::SONG_OFFER_RESPONSE:
       client->song_sender()->ResponseSongOffer(
           msg.response_song_offer().accepted());
       break;
     case cpb::remote::GET_LIBRARY:
-      emit SendLibrary(client);
+      emit SendLibrary(client->id());
       break;
     case cpb::remote::RATE_SONG:
       RateSong(msg);
@@ -209,13 +210,13 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
     case cpb::remote::REQUEST_FILES:
       emit SendListFiles(
           QString::fromStdString(msg.request_list_files().relative_path()),
-          client);
+          client->id());
       break;
     case cpb::remote::APPEND_FILES:
       AppendFilesToPlaylist(msg);
       break;
     case cpb::remote::REQUEST_SAVED_RADIOS:
-      emit SendSavedRadios(client);
+      emit SendSavedRadios(client->id());
       break;
 
     case cpb::remote::RENDERER_STATUS:
@@ -259,34 +260,17 @@ void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
   }
 }
 
-void IncomingDataParser::GetPlaylistSongs(const cpb::remote::Message& msg) {
-  emit SendPlaylistSongs(msg.request_playlist_songs().id());
+void IncomingDataParser::GetPlaylistSongs(RemoteClient* client,
+                                          const cpb::remote::Message& msg) {
+  emit SendPlaylistSongs(client->id(), msg.request_playlist_songs().id());
 }
 
 void IncomingDataParser::ChangeSong(const cpb::remote::Message& msg) {
-  // Get the first entry and check if there is a song
   const cpb::remote::RequestChangeSong& request = msg.request_change_song();
-
-  // Check if we need to change the playlist
-  if (request.playlist_id() != app_->playlist_manager()->active_id()) {
-    emit SetActivePlaylist(request.playlist_id());
-  }
-
-  switch (doubleclick_playlist_addmode_) {
-    // Play the selected song
-    case MainWindow::PlaylistAddBehaviour_Play:
-      emit PlayAt(request.song_index(), Engine::Manual, false);
-      break;
-
-    // Enque the selected song
-    case MainWindow::PlaylistAddBehaviour_Enqueue:
-      emit Enque(request.playlist_id(), request.song_index());
-      if (app_->player()->GetState() != Engine::Playing) {
-        emit PlayAt(request.song_index(), Engine::Manual, false);
-      }
-
-      break;
-  }
+  const bool enqueue_mode =
+      doubleclick_playlist_addmode_ == MainWindow::PlaylistAddBehaviour_Enqueue;
+  emit ChangeSongRequested(request.playlist_id(), request.song_index(),
+                           enqueue_mode);
 }
 
 void IncomingDataParser::SetRepeatMode(const cpb::remote::Repeat& repeat) {
@@ -302,6 +286,12 @@ void IncomingDataParser::SetRepeatMode(const cpb::remote::Repeat& repeat) {
       break;
     case cpb::remote::Repeat_Playlist:
       emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
+      break;
+    case cpb::remote::Repeat_OneByOne:
+      emit SetRepeatMode(PlaylistSequence::Repeat_OneByOne);
+      break;
+    case cpb::remote::Repeat_Intro:
+      emit SetRepeatMode(PlaylistSequence::Repeat_Intro);
       break;
     default:
       break;
@@ -329,79 +319,86 @@ void IncomingDataParser::SetShuffleMode(const cpb::remote::Shuffle& shuffle) {
 
 void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
   const cpb::remote::RequestInsertUrls& request = msg.request_insert_urls();
-  int playlist_id = request.playlist_id();
+  const int playlist_id = request.playlist_id();
+  const bool has_new_playlist = request.has_new_playlist_name();
+  const QString new_playlist_name =
+      QString::fromStdString(request.new_playlist_name());
 
-  // Insert plain urls without metadata
-  if (!request.urls().empty()) {
-    QList<QUrl> urls;
-    for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-      const QUrl url(QString::fromStdString(*it));
-      if (MayAdd(url)) urls << url;
-    }
-
-    if (request.has_new_playlist_name())
-      playlist_id =
-          app_->playlist_manager()->New(request.new_playlist_name().c_str());
-
-    // A URL can be a folder or a playlist file, so the songs it names are
-    // loaded and checked here, before they're added.
-    if (!urls.isEmpty()) {
-      PlaylistManager* manager = app_->playlist_manager();
-      const int pos = request.position();
-      const bool play_now = request.play_now();
-      const bool enqueue = request.enqueue();
-      const bool enqueue_next = request.enqueue_next();
-      song_loader_->Load(urls, AcceptSong(), manager,
-                         [manager, playlist_id, pos, play_now, enqueue,
-                          enqueue_next](const SongList& songs) {
-                           Playlist* playlist = manager->playlist(playlist_id);
-                           if (!playlist || songs.isEmpty()) return;
-                           if (play_now && manager->active_id() != playlist_id)
-                             manager->SetActivePlaylist(playlist_id);
-                           playlist->InsertSongsOrLibraryItems(
-                               songs, pos, play_now, enqueue, enqueue_next);
-                         });
-    }
+  QList<QUrl> urls;
+  for (const std::string& raw : request.urls()) {
+    const QUrl url = RemoteFiles::ParseUrl(raw);
+    if (MayAdd(url)) urls << url;
   }
 
-  // Add songs with metadata if present
-  if (!request.songs().empty()) {
-    SongList songs;
-    for (int i = 0; i < request.songs().size(); i++) {
-      Song song = CreateSongFromProtobuf(request.songs(i));
-      if (!MayAdd(song.url())) continue;
-      TrustCoverFromLibrary(&song);
-      songs << song;
+  SongList inline_songs;
+  for (int i = 0; i < request.songs().size(); i++) {
+    Song song = CreateSongFromProtobuf(request.songs(i));
+    if (!MayAdd(song.url())) continue;
+    TrustCoverFromLibrary(&song);
+    inline_songs << song;
+  }
+
+  // Load any plain URLs asynchronously and combine them with any inline songs
+  // so new_playlist_name creates at most one playlist.
+  if (!urls.isEmpty()) {
+    PlaylistManager* manager = app_->playlist_manager();
+    const int pos = request.position();
+    const bool play_now = request.play_now();
+    const bool enqueue = request.enqueue();
+    const bool enqueue_next = request.enqueue_next();
+    // Pass manager as the callback context so RemoteSongLoader posts
+    // insertion onto the main thread instead of mutating playlists off-thread.
+    song_loader_->Load(urls, AcceptSong(), manager,
+                       [manager, playlist_id, has_new_playlist,
+                        new_playlist_name, pos, play_now, enqueue, enqueue_next,
+                        inline_songs](const SongList& loaded) {
+                         SongList all = loaded;
+                         all.append(inline_songs);
+                         if (all.isEmpty()) return;
+                         const int target_id =
+                             has_new_playlist ? manager->New(new_playlist_name)
+                                              : playlist_id;
+                         Playlist* playlist = manager->playlist(target_id);
+                         if (!playlist) return;
+                         if (play_now && manager->active_id() != target_id) {
+                           manager->SetActivePlaylist(target_id);
+                         }
+                         playlist->InsertSongsOrLibraryItems(
+                             all, pos, play_now, enqueue, enqueue_next);
+                       });
+    return;
+  }
+
+  if (!inline_songs.isEmpty()) {
+    // Marshal inline-only inserts onto the main thread via queued signals.
+    if (has_new_playlist) {
+      emit InsertSongsInNewPlaylist(new_playlist_name, inline_songs,
+                                    request.position(), request.play_now(),
+                                    request.enqueue(), request.enqueue_next());
+    } else {
+      emit InsertSongs(playlist_id, inline_songs, request.position(),
+                       request.play_now(), request.enqueue(),
+                       request.enqueue_next());
     }
-
-    // create a new playlist if required and not already done above by
-    // InsertUrls
-    if (request.has_new_playlist_name() && playlist_id == request.playlist_id())
-      playlist_id =
-          app_->playlist_manager()->New(request.new_playlist_name().c_str());
-
-    emit InsertSongs(playlist_id, songs, request.position(), request.play_now(),
-                     request.enqueue(), request.enqueue_next());
   }
 }
 
 void IncomingDataParser::RemoveSongs(const cpb::remote::Message& msg) {
   const cpb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
 
-  // Extract urls
+  // Extract indices
   QList<int> songs;
   for (int i = 0; i < request.songs().size(); i++) {
     songs.append(request.songs(i));
   }
 
-  // Insert the urls
   emit RemoveSongs(request.playlist_id(), songs);
 }
 
 void IncomingDataParser::ClientConnect(const cpb::remote::Message& msg,
                                        RemoteClient* client) {
-  // Always sned the Clementine infos
-  emit SendClementineInfo();
+  // Always send the Clementine info
+  emit SendClementineInfo(client->id());
 
   if (streaming_enabled_ && msg.request_connect().has_renderer()) {
     const std::string caps =
@@ -416,20 +413,18 @@ void IncomingDataParser::ClientConnect(const cpb::remote::Message& msg,
   if (!client->isDownloader()) {
     if (!msg.request_connect().has_send_playlist_songs()  // legacy
         || msg.request_connect().send_playlist_songs()) {
-      emit SendFirstData(true);
+      emit SendFirstData(client->id(), true);
     } else {
-      emit SendFirstData(false);
+      emit SendFirstData(client->id(), false);
     }
   }
 }
 
-void IncomingDataParser::SendPlaylists(const cpb::remote::Message& msg) {
-  if (!msg.has_request_playlists() ||
-      !msg.request_playlists().include_closed()) {
-    emit SendAllActivePlaylists();
-  } else {
-    emit SendAllPlaylists();
-  }
+void IncomingDataParser::SendPlaylists(RemoteClient* client,
+                                       const cpb::remote::Message& msg) {
+  const bool include_closed =
+      msg.has_request_playlists() && msg.request_playlists().include_closed();
+  emit SendPlaylistsRequested(client->id(), include_closed);
 }
 
 void IncomingDataParser::OpenPlaylist(const cpb::remote::Message& msg) {
@@ -446,8 +441,8 @@ void IncomingDataParser::UpdatePlaylist(const cpb::remote::Message& msg) {
   if (req_update.has_create_new_playlist() &&
       req_update.create_new_playlist()) {
     emit New(req_update.has_new_playlist_name()
-                 ? req_update.new_playlist_name().c_str()
-                 : "New Playlist");
+                 ? QString::fromStdString(req_update.new_playlist_name())
+                 : tr("New Playlist"));
     return;
   }
   if (req_update.has_clear_playlist() && req_update.clear_playlist()) {
@@ -455,9 +450,9 @@ void IncomingDataParser::UpdatePlaylist(const cpb::remote::Message& msg) {
     return;
   }
   if (req_update.has_new_playlist_name() &&
-      req_update.new_playlist_name().size())
+      !req_update.new_playlist_name().empty())
     emit Rename(req_update.playlist_id(),
-                req_update.new_playlist_name().c_str());
+                QString::fromStdString(req_update.new_playlist_name()));
   if (req_update.has_favorite())
     emit Favorite(req_update.playlist_id(), req_update.favorite());
 }
@@ -469,8 +464,8 @@ void IncomingDataParser::RateSong(const cpb::remote::Message& msg) {
 
 void IncomingDataParser::GlobalSearch(RemoteClient* client,
                                       const cpb::remote::Message& msg) {
-  emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
-                      client);
+  emit DoGlobalSearch(
+      client->id(), QStringFromStdString(msg.request_global_search().query()));
 }
 
 bool IncomingDataParser::MayAdd(const QUrl& url) const {
@@ -507,7 +502,7 @@ Song IncomingDataParser::CreateSongFromProtobuf(
   song.set_year(QStringFromStdString(pb.pretty_year()).toInt());
   song.set_track(pb.track());
   song.set_disc(pb.disc());
-  song.set_url(QUrl(QStringFromStdString(pb.url())));
+  song.set_url(RemoteFiles::ParseUrl(pb.url()));
   song.set_filesize(pb.file_size());
   song.set_rating(pb.rating());
   song.set_basefilename(QStringFromStdString(pb.filename()));
@@ -520,54 +515,33 @@ Song IncomingDataParser::CreateSongFromProtobuf(
 
 void IncomingDataParser::AppendFilesToPlaylist(
     const cpb::remote::Message& msg) {
-  if (files_root_folder_.isEmpty()) {  // should never happen...
-    qLog(Warning) << "Remote root dir is not set although receiving "
-                     "APPEND_FILES request...";
-    return;
-  }
-  QDir root_dir(files_root_folder_);
-  if (!root_dir.exists()) {
-    qLog(Warning) << "Remote root dir doesn't exist...";
-    return;
-  }
-
   const cpb::remote::RequestAppendFiles& req_append =
       msg.request_append_files();
-  QString relative_path = QString::fromStdString(req_append.relative_path());
-  if (relative_path.startsWith("/")) relative_path.remove(0, 1);
-
-  QFileInfo fi_folder(root_dir, relative_path);
-  if (!fi_folder.exists()) {
-    qLog(Warning) << "Remote relative path " << relative_path
-                  << " doesn't exist...";
-    return;
-  } else if (!fi_folder.isDir()) {
-    qLog(Warning) << "Remote relative path " << relative_path
-                  << " is not a directory...";
-    return;
-  } else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
-                 .startsWith("../")) {
-    qLog(Warning) << "Remote relative path " << relative_path
-                  << " should not be accessed...";
+  const QString relative_path =
+      QString::fromStdString(req_append.relative_path());
+  const RemoteFiles::DirResult dir =
+      RemoteFiles::ResolveDir(files_root_folder_, relative_path);
+  if (!dir.ok()) {
+    qLog(Warning) << "Cannot append files from remote relative path"
+                  << relative_path;
     return;
   }
 
   QList<QUrl> urls;
-  QDir dir(fi_folder.absoluteFilePath());
   for (const auto& file : req_append.files()) {
-    QFileInfo fi(dir, file.c_str());
-    if (fi.exists() && RemoteFiles::IsWithin(root_dir, fi))
-      urls << QUrl::fromLocalFile(fi.canonicalFilePath());
+    QFileInfo fi(dir.dir, QString::fromStdString(file));
+    // Use absoluteFilePath() rather than canonicalFilePath() so symlinks under
+    // files_root follow consistently with IsWithin() and MayAdd() (containment
+    // is checked on the unresolved path).
+    if (fi.exists() && RemoteFiles::IsWithin(dir.root, fi))
+      urls << QUrl::fromLocalFile(fi.absoluteFilePath());
   }
   if (urls.isEmpty()) return;
 
   // A file can be a playlist file, whose entries are checked as they're
   // loaded.
-  const bool playing = app_->player()->GetState() == Engine::Playing;
-  if (!req_append.has_new_playlist_name() && req_append.has_playlist_id() &&
-      !playing) {
-    // as me may play the song, we change the current playlist
-    emit SetCurrentPlaylist(req_append.playlist_id());
+  if (!req_append.has_new_playlist_name() && req_append.has_playlist_id()) {
+    emit SetCurrentPlaylistIfNotPlaying(req_append.playlist_id());
   }
   song_loader_->Load(urls, AcceptSong(), this,
                      [this, req_append](const SongList& songs) {

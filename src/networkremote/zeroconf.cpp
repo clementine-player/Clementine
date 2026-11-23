@@ -15,7 +15,6 @@
 #endif
 
 #include <QNetworkInterface>
-#include <QTextCodec>
 
 Zeroconf* Zeroconf::sInstance = nullptr;
 
@@ -40,18 +39,21 @@ Zeroconf* Zeroconf::GetZeroconf() {
 }
 
 QByteArray Zeroconf::TruncateName(const QString& name) {
-  QTextCodec* codec = QTextCodec::codecForName("UTF-8");
-  QByteArray truncated_utf8;
-  for (QChar c : name) {
-    QByteArray rendered = codec->fromUnicode(&c, 1, nullptr);
-    if (truncated_utf8.size() + rendered.size() >= 63) {
-      break;
+  QByteArray utf8 = name.toUtf8();
+  // Truncate to 62 bytes plus an explicit trailing NUL so the name stays
+  // within the 63-byte DNS label limit.
+  if (utf8.size() > 62) {
+    int len = 62;
+    // Back up across UTF-8 continuation bytes so we never split a codepoint.
+    while (len > 0 &&
+           (static_cast<unsigned char>(utf8.at(len)) & 0xC0) == 0x80) {
+      --len;
     }
-    truncated_utf8 += rendered;
+    utf8.truncate(len);
   }
   // NULL-terminate the string.
-  truncated_utf8.append('\0');
-  return truncated_utf8;
+  utf8.append('\0');
+  return utf8;
 }
 
 void Zeroconf::Publish(const QString& domain, const QString& type,

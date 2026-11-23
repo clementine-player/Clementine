@@ -232,6 +232,12 @@ class PlaylistManager : public PlaylistManagerInterface {
   void InsertSongs(int id, const SongList& songs, int pos = -1,
                    bool play_now = false, bool enqueue = false,
                    bool enqueue_next = false);
+  // Creates a playlist and inserts songs in one slot so remote callers do not
+  // race two separate queued calls.
+  void InsertSongsInNewPlaylist(const QString& name, const SongList& songs,
+                                int pos = -1, bool play_now = false,
+                                bool enqueue = false,
+                                bool enqueue_next = false);
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);

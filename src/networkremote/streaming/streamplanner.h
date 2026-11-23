@@ -28,7 +28,8 @@
 namespace cpb {
 namespace remote {
 class RendererCapabilities;
-}
+class RequestSyncManifest;
+}  // namespace remote
 }  // namespace cpb
 
 // What a renderer said it can play, in a form the planner can use without
@@ -64,6 +65,8 @@ struct RendererCaps {
   // past kMaxFormats or with an unusable MIME type, sample rates past
   // kMaxSampleRates or not in 1..kMaxSampleRateHz, and negative limits.
   static RendererCaps FromProto(const cpb::remote::RendererCapabilities& pb);
+  static RendererCaps FromSyncManifest(
+      const cpb::remote::RequestSyncManifest& pb);
 
   // The format that accepts |mime_type|, or nullptr. An entry without a
   // codecs= parameter accepts any codec in that container.
