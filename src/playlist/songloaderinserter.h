@@ -20,6 +20,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QPointer>
 #include <QUrl>
 
 #include "core/song.h"
@@ -61,7 +62,9 @@ class SongLoaderInserter : public QObject {
  private:
   TaskManager* task_manager_;
 
-  Playlist* destination_;
+  // Guarded with QPointer because the user can close the playlist tab while
+  // async loading or MusicBrainz CD lookups are in flight.
+  QPointer<Playlist> destination_;
   int row_;
   bool play_now_;
   bool enqueue_;

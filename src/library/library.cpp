@@ -146,26 +146,31 @@ Library::Library(Application* app, QObject* parent)
 Library::~Library() { StopWatcher(); }
 
 void Library::StopWatcher() {
-  if (!watcher_) return;
-
-  watcher_->Stop();
-  watcher_->deleteLater();
-  watcher_ = nullptr;
-  watcher_thread_->exit();
-  watcher_thread_->wait(5000 /* five seconds */);
+  // Library() calls ReloadSettings() and may be destroyed before Init() runs.
+  if (watcher_) {
+    watcher_->Stop();
+    watcher_->deleteLater();
+    watcher_ = nullptr;
+  }
+  if (watcher_thread_) {
+    watcher_thread_->exit();
+    watcher_thread_->wait(5000 /* five seconds */);
+  }
 }
 
 void Library::Init() {
   watcher_ = new LibraryWatcher;
+  // Wire dependencies before moving watcher_ to watcher_thread_ and starting
+  // it so watcher slots never observe half-initialized pointers.
+  watcher_->set_backend(backend_.get());
+  watcher_->set_task_manager(app_->task_manager());
+
   watcher_thread_ = new Thread(this);
   watcher_thread_->setObjectName("Library watcher");
   watcher_thread_->SetIoPriority(Utilities::IOPRIO_CLASS_IDLE);
 
   watcher_->moveToThread(watcher_thread_);
   watcher_thread_->start(QThread::IdlePriority);
-
-  watcher_->set_backend(backend_.get());
-  watcher_->set_task_manager(app_->task_manager());
 
   connect(backend_.get(),
           SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), watcher_,
@@ -217,6 +222,7 @@ void Library::ResumeWatcher() {
 }
 
 void Library::ReloadSettings() {
+  // Library() invokes ReloadSettings() before Init() creates watcher_.
   if (watcher_) watcher_->ReloadSettingsAsync();
 
   // These don't belong in LibraryBackend's group but it's too late to change
@@ -248,21 +254,54 @@ void Library::WriteAllSongsStatisticsToFiles() {
 void Library::Stopped() { CurrentSongChanged(Song()); }
 
 void Library::CurrentSongChanged(const Song& song) {
-  TagReaderReply* reply = nullptr;
-  if (queued_rating_.is_valid()) {
-    reply = app_->tag_reader_client()->UpdateSongRating(queued_rating_);
-    queued_rating_ = Song();
-  } else if (queued_statistics_.is_valid()) {
-    reply = app_->tag_reader_client()->UpdateSongStatistics(queued_statistics_);
-    queued_statistics_ = Song();
+  // Snapshot and clear both pending WMA updates before dispatching so
+  // both rating and statistics are saved and re-entrancy can't double-send.
+  const Song rating_song = queued_rating_;
+  const Song stats_song = queued_statistics_;
+  queued_rating_ = Song();
+  queued_statistics_ = Song();
+
+  auto send_statistics = [this](const Song& stats) {
+    if (!stats.is_valid()) return;
+    TagReaderReply* reply =
+        app_->tag_reader_client()->UpdateSongStatistics(stats);
+    if (reply) {
+      connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+    }
+  };
+
+  if (rating_song.is_valid()) {
+    TagReaderReply* reply =
+        app_->tag_reader_client()->UpdateSongRating(rating_song);
+    if (reply) {
+      connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+      // Chain statistics after rating finishes instead of running both
+      // concurrently so two workers don't race writing the same WMA file.
+      if (stats_song.is_valid()) {
+        connect(
+            reply, &_MessageReplyBase::Finished, this,
+            [this, stats_song](bool) {
+              TagReaderReply* stats_reply =
+                  app_->tag_reader_client()->UpdateSongStatistics(stats_song);
+              if (stats_reply) {
+                connect(stats_reply, SIGNAL(Finished(bool)), stats_reply,
+                        SLOT(deleteLater()));
+              }
+            });
+      }
+    } else {
+      send_statistics(stats_song);
+    }
+  } else {
+    send_statistics(stats_song);
   }
 
-  if (reply) {
-    connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
-  }
-
+  // Clear current_wma_song_url_ when playing a non-WMA track or stopping
+  // so future edits to the previous WMA file aren't deferred indefinitely.
   if (song.filetype() == Song::Type_Asf) {
     current_wma_song_url_ = song.url();
+  } else {
+    current_wma_song_url_.clear();
   }
 }
 

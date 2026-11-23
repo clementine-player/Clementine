@@ -141,7 +141,11 @@ SongList PlaylistParser::LoadFromFile(const QString& filename) const {
 
   // Open the file
   QFile file(filename);
-  (void)file.open(QIODevice::ReadOnly);
+  if (!file.open(QIODevice::ReadOnly)) {
+    emit Error(tr("Could not open playlist %1").arg(filename));
+    qLog(Warning) << "Could not open playlist for reading:" << filename;
+    return SongList();
+  }
 
   return parser->Load(&file, filename, info.absolutePath());
 }
@@ -172,7 +176,11 @@ void PlaylistParser::Save(const SongList& songs, const QString& filename,
 
   // Open the file
   QFile file(filename);
-  (void)file.open(QIODevice::WriteOnly);
+  if (!file.open(QIODevice::WriteOnly)) {
+    emit Error(tr("Could not open playlist %1").arg(filename));
+    qLog(Warning) << "Could not open playlist for writing:" << filename;
+    return;
+  }
 
   return parser->Save(songs, &file, info.absolutePath(), path_type);
 }

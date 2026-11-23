@@ -214,9 +214,15 @@ QSqlDatabase Database::Connect() {
     UpdateDatabaseSchema(0, db);
   }
 
-  // Attach external databases
-  for (const QString& key : attached_databases_.keys()) {
-    QString filename = attached_databases_[key].filename_;
+  // Snapshot attached_databases_ so the leaf lock isn't held across SQL
+  // queries and concurrent attach/detach calls can't invalidate iteration.
+  QMap<QString, AttachedDatabase> attached_dbs_copy;
+  {
+    QMutexLocker l(&attached_databases_mutex_);
+    attached_dbs_copy = attached_databases_;
+  }
+  for (const QString& key : attached_dbs_copy.keys()) {
+    QString filename = attached_dbs_copy[key].filename_;
 
     if (!injected_database_name_.isNull()) filename = injected_database_name_;
 
@@ -237,9 +243,9 @@ QSqlDatabase Database::Connect() {
 
   // We might have to initialise the schema in some attached databases now, if
   // they were deleted and don't match up with the main schema version.
-  for (const QString& key : attached_databases_.keys()) {
-    if (attached_databases_[key].is_temporary_ &&
-        attached_databases_[key].schema_.isEmpty())
+  for (const QString& key : attached_dbs_copy.keys()) {
+    if (attached_dbs_copy[key].is_temporary_ &&
+        attached_dbs_copy[key].schema_.isEmpty())
       continue;
     // Find out if there are any tables in this database
     QSqlQuery q(db);
@@ -248,7 +254,7 @@ QSqlDatabase Database::Connect() {
                   .arg(key));
     if (!q.exec() || !q.next()) {
       q.finish();
-      ExecSchemaCommandsFromFile(db, attached_databases_[key].schema_, 0);
+      ExecSchemaCommandsFromFile(db, attached_dbs_copy[key].schema_, 0);
     }
   }
 
@@ -286,12 +292,17 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
 }
 
 void Database::RecreateAttachedDb(const QString& database_name) {
-  if (!attached_databases_.contains(database_name)) {
-    qLog(Warning) << "Attached database does not exist:" << database_name;
-    return;
+  // Release attached_databases_mutex_ before locking mutex_ to preserve leaf
+  // lock ordering (mutex_ -> connect_mutex_ -> attached_databases_mutex_).
+  QString filename;
+  {
+    QMutexLocker l(&attached_databases_mutex_);
+    if (!attached_databases_.contains(database_name)) {
+      qLog(Warning) << "Attached database does not exist:" << database_name;
+      return;
+    }
+    filename = attached_databases_[database_name].filename_;
   }
-
-  const QString filename = attached_databases_[database_name].filename_;
 
   QMutexLocker l(&mutex_);
   {
@@ -320,6 +331,7 @@ void Database::RecreateAttachedDb(const QString& database_name) {
 
 void Database::AttachDatabase(const QString& database_name,
                               const AttachedDatabase& database) {
+  QMutexLocker l(&attached_databases_mutex_);
   attached_databases_[database_name] = database;
 }
 
@@ -340,7 +352,7 @@ void Database::AttachDatabaseOnDbConnection(const QString& database_name,
 }
 
 void Database::DetachDatabase(const QString& database_name) {
-  QMutexLocker l(&mutex_);
+  QMutexLocker lock(&mutex_);
   {
     QSqlDatabase db(Connect());
 
@@ -353,6 +365,9 @@ void Database::DetachDatabase(const QString& database_name) {
     }
   }
 
+  // Remove from attached_databases_ only after DETACH succeeds, keeping
+  // attached_databases_mutex_ as a leaf lock after Connect() completes.
+  QMutexLocker l(&attached_databases_mutex_);
   attached_databases_.remove(database_name);
 }
 
@@ -548,12 +563,19 @@ QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
     if (table == "songs" || table.endsWith("_songs")) ret << table;
   }
 
-  // look for the tables in attached dbs
-  for (const QString& key : attached_databases_.keys()) {
+  // Copy keys before querying so attached_databases_mutex_ stays a leaf lock.
+  QStringList attached_keys;
+  {
+    QMutexLocker l(&attached_databases_mutex_);
+    attached_keys = attached_databases_.keys();
+  }
+  for (const QString& key : attached_keys) {
     QSqlQuery q(db);
+    // Parenthesize the OR: SQL AND binds tighter than OR, which otherwise
+    // matched non-table sqlite_master rows (indexes/views) ending in "songs".
     q.prepare(
         QString("SELECT NAME FROM %1.sqlite_master"
-                " WHERE type='table' AND name='songs' OR name LIKE '%songs'")
+                " WHERE type='table' AND (name='songs' OR name LIKE '%songs')")
             .arg(key));
     if (q.exec()) {
       while (q.next()) {
@@ -680,15 +702,25 @@ void Database::BackupFile(const QString& filename) {
   }
 
   int ret = SQLITE_OK;
+  int busy_retries = 0;
+  constexpr int kMaxBusyRetries = 100;
   do {
     ret = sqlite3_backup_step(backup, 16);
     const int page_count = sqlite3_backup_pagecount(backup);
     app_->task_manager()->SetTaskProgress(
         task_id, page_count - sqlite3_backup_remaining(backup), page_count);
-  } while (ret == SQLITE_OK);
+    // Retry transient contention from other connections; reset on progress
+    // so large DBs only abort after kMaxBusyRetries consecutive stalls.
+    if (ret == SQLITE_BUSY || ret == SQLITE_LOCKED) {
+      if (++busy_retries > kMaxBusyRetries) break;
+      sqlite3_sleep(50);
+    } else {
+      busy_retries = 0;
+    }
+  } while (ret == SQLITE_OK || ret == SQLITE_BUSY || ret == SQLITE_LOCKED);
 
   if (ret != SQLITE_DONE) {
-    qLog(Error) << "Database backup failed";
+    qLog(Error) << "Database backup failed with sqlite code:" << ret;
   }
 
   sqlite3_backup_finish(backup);

@@ -123,20 +123,26 @@ SuitableElement Transcoder::FindBestElementForMimeType(
         if (pad_template->direction != GST_PAD_SRC) continue;
 
         // Does this pad support the mime type we want?
+        // gst_static_pad_template_get_caps() returns a new ref that must
+        // be unreffed.
         GstCaps* caps = gst_static_pad_template_get_caps(pad_template);
-        GstCaps* intersection = gst_caps_intersect(caps, target_caps);
+        if (caps) {
+          GstCaps* intersection = gst_caps_intersect(caps, target_caps);
+          gst_caps_unref(caps);
 
-        if (intersection) {
-          if (!gst_caps_is_empty(intersection)) {
-            int rank = gst_plugin_feature_get_rank(GST_PLUGIN_FEATURE(factory));
-            QString name = GST_OBJECT_NAME(factory);
+          if (intersection) {
+            if (!gst_caps_is_empty(intersection)) {
+              int rank =
+                  gst_plugin_feature_get_rank(GST_PLUGIN_FEATURE(factory));
+              QString name = GST_OBJECT_NAME(factory);
 
-            if (name.startsWith("ffmux") || name.startsWith("ffenc"))
-              rank = -1;  // ffmpeg usually sucks
+              if (name.startsWith("ffmux") || name.startsWith("ffenc"))
+                rank = -1;  // ffmpeg usually sucks
 
-            suitable_elements_ << SuitableElement(name, rank);
+              suitable_elements_ << SuitableElement(name, rank);
+            }
+            gst_caps_unref(intersection);
           }
-          gst_caps_unref(intersection);
         }
       }
     }
@@ -243,6 +249,10 @@ Transcoder::Transcoder(QObject* parent, const QString& settings_postfix)
     s.setValue("cbr", true);
   }
 }
+
+// Tear down GStreamer bus sync handlers and pipelines before destruction
+// so streaming threads cannot post events or touch freed JobStates.
+Transcoder::~Transcoder() { Cancel(); }
 
 QList<TranscoderPreset> Transcoder::GetAllPresets() {
   QList<TranscoderPreset> ret;
@@ -409,7 +419,13 @@ void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Debug) << "audiopad is already linked, unlinking old pad";
-    gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
+    // Use thread-safe gst_pad_get_peer() (not unlocked GST_PAD_PEER) and
+    // pass (src, sink) to gst_pad_unlink().
+    GstPad* peer = gst_pad_get_peer(audiopad);
+    if (peer) {
+      gst_pad_unlink(peer, audiopad);
+      gst_object_unref(peer);
+    }
   }
 
   gst_pad_link(pad, audiopad);
@@ -432,18 +448,22 @@ GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg,
     default:
       break;
   }
-  return GST_BUS_PASS;
+  // No async bus watch drains this bus, so drop and unref messages here
+  // instead of returning GST_BUS_PASS and leaking them on the bus queue.
+  gst_message_unref(msg);
+  return GST_BUS_DROP;
 }
 
 void Transcoder::JobState::ReportError(GstMessage* msg) {
-  GError* error;
-  gchar* debugs;
+  GError* error = nullptr;
+  gchar* debugs = nullptr;
 
   gst_message_parse_error(msg, &error, &debugs);
-  QString message = QString::fromLocal8Bit(error->message);
+  QString message = error ? QString::fromLocal8Bit(error->message) : QString();
 
-  g_error_free(error);
-  free(debugs);
+  if (error) g_error_free(error);
+  // debugs is allocated by GLib and must be freed with g_free().
+  g_free(debugs);
 
   // clean up output file if it was already created
   if (QFile::exists(job_.output)) {
@@ -475,7 +495,7 @@ bool Transcoder::StartJob(const Job& job) {
       "Codec/Muxer", job.preset.muxer_mimetype_, state->Pipeline());
   GstElement* sink = CreateElement("filesink", state->Pipeline());
 
-  if (!decode || !convert || !sink) return false;
+  if (!decode || !convert || !resample || !sink) return false;
 
   if (!codec && !job.preset.codec_mimetype_.isEmpty()) {
     emit LogLine(
@@ -502,8 +522,8 @@ bool Transcoder::StartJob(const Job& job) {
 
   // Set properties
   GstDecodeAudioOnly(decode);
-  g_object_set(decode, "uri", job.input.toString().toUtf8().constData(),
-               nullptr);
+  g_object_set(decode, "uri",
+               Utilities::GetUriForGstreamer(job.input).constData(), nullptr);
   g_object_set(sink, "location", job.output.toUtf8().constData(), nullptr);
 
   // Create target directory, if it does not exist
@@ -517,9 +537,11 @@ bool Transcoder::StartJob(const Job& job) {
 #ifdef HAVE_AUDIOCD
   CHECKED_GCONNECT(decode, "source-setup", &SourceSetupCallback, state.get());
 #endif
-  gst_bus_set_sync_handler(
-      gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline())), BusCallbackSync,
-      state.get(), nullptr);
+  // gst_pipeline_get_bus() returns a new ref that must be unreffed.
+  if (GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline()))) {
+    gst_bus_set_sync_handler(bus, BusCallbackSync, state.get(), nullptr);
+    gst_object_unref(bus);
+  }
 
   // Start the pipeline
   gst_element_set_state(state->Pipeline(), GST_STATE_PLAYING);
@@ -554,9 +576,11 @@ bool Transcoder::event(QEvent* e) {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->Pipeline())),
-        nullptr, nullptr, nullptr);
+    if (GstBus* bus = gst_pipeline_get_bus(
+            GST_PIPELINE(finished_event->state_->Pipeline()))) {
+      gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
+      gst_object_unref(bus);
+    }
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
     model_->RemovePipeline((*it)->id());
@@ -585,9 +609,10 @@ void Transcoder::Cancel() {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline())), nullptr, nullptr,
-        nullptr);
+    if (GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline()))) {
+      gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
+      gst_object_unref(bus);
+    }
 
     // Stop the pipeline
     if (gst_element_set_state(state->Pipeline(), GST_STATE_NULL) ==
@@ -621,10 +646,18 @@ QMap<QUrl, float> Transcoder::GetProgress() const {
     gint64 position = 0;
     gint64 duration = 0;
 
-    gst_element_query_position(state->Pipeline(), GST_FORMAT_TIME, &position);
-    gst_element_query_duration(state->Pipeline(), GST_FORMAT_TIME, &duration);
-
-    ret[state->job_.input] = float(position) / duration;
+    // Guard against un-prerolled pipelines or live streams where queries
+    // fail or duration <= 0 (which would produce NaN/Inf progress).
+    if (gst_element_query_position(state->Pipeline(), GST_FORMAT_TIME,
+                                   &position) &&
+        gst_element_query_duration(state->Pipeline(), GST_FORMAT_TIME,
+                                   &duration) &&
+        duration > 0 && position >= 0) {
+      ret[state->job_.input] =
+          qBound(0.0f, static_cast<float>(position) / duration, 1.0f);
+    } else {
+      ret[state->job_.input] = 0.0f;
+    }
   }
 
   return ret;
@@ -638,7 +671,7 @@ void Transcoder::SetElementProperties(const QString& name, GObject* object) {
   GParamSpec** properties = g_object_class_list_properties(
       G_OBJECT_GET_CLASS(object), &properties_count);
 
-  for (int i = 0; i < properties_count; ++i) {
+  for (guint i = 0; i < properties_count; ++i) {
     GParamSpec* property = properties[i];
 
     const QVariant value = s.value(property->name);
@@ -647,19 +680,48 @@ void Transcoder::SetElementProperties(const QString& name, GObject* object) {
     emit LogLine(QString("Setting %1 property: %2 = %3")
                      .arg(name, property->name, value.toString()));
 
-    switch (property->value_type) {
+    // Dispatch on G_TYPE_FUNDAMENTAL so GEnum/GFlags subtypes match, use
+    // toBool() for INI booleans (toInt() reads "true" as 0), and cast each
+    // value to the exact C varargs width expected by g_object_set().
+    switch (G_TYPE_FUNDAMENTAL(property->value_type)) {
       case G_TYPE_DOUBLE:
+      case G_TYPE_FLOAT:
         g_object_set(object, property->name, value.toDouble(), nullptr);
         break;
-      case G_TYPE_FLOAT:
-        g_object_set(object, property->name, value.toFloat(), nullptr);
-        break;
       case G_TYPE_BOOLEAN:
-        g_object_set(object, property->name, value.toInt(), nullptr);
+        g_object_set(object, property->name, value.toBool() ? TRUE : FALSE,
+                     nullptr);
         break;
+      case G_TYPE_UINT:
+        g_object_set(object, property->name, static_cast<guint>(value.toUInt()),
+                     nullptr);
+        break;
+      case G_TYPE_LONG:
+        g_object_set(object, property->name,
+                     static_cast<glong>(value.toLongLong()), nullptr);
+        break;
+      case G_TYPE_ULONG:
+        g_object_set(object, property->name,
+                     static_cast<gulong>(value.toULongLong()), nullptr);
+        break;
+      case G_TYPE_INT64:
+        g_object_set(object, property->name,
+                     static_cast<gint64>(value.toLongLong()), nullptr);
+        break;
+      case G_TYPE_UINT64:
+        g_object_set(object, property->name,
+                     static_cast<guint64>(value.toULongLong()), nullptr);
+        break;
+      case G_TYPE_STRING:
+        g_object_set(object, property->name,
+                     value.toString().toUtf8().constData(), nullptr);
+        break;
+      case G_TYPE_ENUM:
+      case G_TYPE_FLAGS:
       case G_TYPE_INT:
       default:
-        g_object_set(object, property->name, value.toInt(), nullptr);
+        g_object_set(object, property->name, static_cast<gint>(value.toInt()),
+                     nullptr);
         break;
     }
   }

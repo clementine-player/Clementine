@@ -20,6 +20,7 @@
 
 #include <QFuture>
 #include <QObject>
+#include <QPointer>
 
 #include "generator_fwd.h"
 #include "playlist/playlist.h"
@@ -56,7 +57,9 @@ class GeneratorInserter : public QObject {
   LibraryBackend* library_;
   int task_id_;
 
-  Playlist* destination_;
+  // Guarded with QPointer because the user can close the playlist tab while
+  // async smart-playlist generation runs in QtConcurrent.
+  QPointer<Playlist> destination_;
   int row_;
   bool play_now_;
   bool enqueue_;

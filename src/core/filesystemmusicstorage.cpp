@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QFile>
 #include <QUrl>
+#include <QUuid>
 
 #include "core/logging.h"
 #include "core/utilities.h"
@@ -46,14 +47,34 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
     return false;
   }
 
-  // Remove the destination file if it exists and we want to overwrite
-  if (job.overwrite_ && dest.exists()) QFile::remove(dest.absoluteFilePath());
+  const QString dest_path = dest.absoluteFilePath();
+  if (dest.exists() && !job.overwrite_) {
+    return false;
+  }
+
+  // Back up the destination file before replacing so cross-FS or disk errors
+  // don't destroy the existing file.
+  QString backup_path;
+  if (job.overwrite_ && dest.exists()) {
+    backup_path = dest_path + ".bak-" +
+                  QUuid::createUuid().toString(QUuid::WithoutBraces);
+    if (!QFile::rename(dest_path, backup_path)) {
+      qLog(Warning) << "Failed to back up existing file" << dest_path;
+      return false;
+    }
+  }
 
   // Copy or move
-  if (job.remove_original_)
-    return QFile::rename(src.absoluteFilePath(), dest.absoluteFilePath());
-  else
-    return QFile::copy(src.absoluteFilePath(), dest.absoluteFilePath());
+  const bool ok = job.remove_original_
+                      ? QFile::rename(src.absoluteFilePath(), dest_path)
+                      : QFile::copy(src.absoluteFilePath(), dest_path);
+  if (ok) {
+    if (!backup_path.isEmpty()) QFile::remove(backup_path);
+    return true;
+  }
+
+  if (!backup_path.isEmpty()) QFile::rename(backup_path, dest_path);
+  return false;
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {

@@ -62,12 +62,15 @@ void GeneratorInserter::Load(Playlist* destination, int row, bool play_now,
 }
 
 void GeneratorInserter::Finished(PlaylistItemList items) {
-  if (items.isEmpty()) {
-    if (is_dynamic_) {
-      destination_->TurnOffDynamicPlaylist();
+  if (destination_) {
+    if (items.isEmpty()) {
+      if (is_dynamic_) {
+        destination_->TurnOffDynamicPlaylist();
+      }
+    } else {
+      destination_->InsertItems(items, row_, play_now_, enqueue_,
+                                enqueue_next_);
     }
-  } else {
-    destination_->InsertItems(items, row_, play_now_, enqueue_);
   }
 
   task_manager_->SetTaskFinished(task_id_);

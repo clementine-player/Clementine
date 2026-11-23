@@ -37,7 +37,10 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
 
   QString filename = filename_or_url;
 
-  if (filename_or_url.contains(QRegularExpression("^[a-z]{2,}:"))) {
+  // Require >= 2 scheme characters ('+' not '*') so Windows drive letters
+  // like "C:" aren't misclassified as URL schemes.
+  if (filename_or_url.contains(
+          QRegularExpression("^[a-zA-Z][a-zA-Z0-9+.-]+:"))) {
     QUrl url(filename_or_url);
     if (url.scheme() == "file") {
       filename = url.toLocalFile();

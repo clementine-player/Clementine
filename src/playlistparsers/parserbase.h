@@ -32,6 +32,8 @@ class ParserBase : public QObject {
  public:
   ParserBase(LibraryBackendInterface* library, QObject* parent = nullptr);
 
+  void set_library(LibraryBackendInterface* library) { library_ = library; }
+
   virtual QString name() const = 0;
   virtual QStringList file_extensions() const = 0;
   virtual QString mime_type() const { return QString(); }

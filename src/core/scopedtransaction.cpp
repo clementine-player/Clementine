@@ -24,21 +24,26 @@
 
 #include "core/logging.h"
 
+// Only track pending_ when db->transaction() succeeds: SQLite doesn't support
+// nested transactions, so a nested ScopedTransaction must not commit or roll
+// back an outer caller's active transaction.
 ScopedTransaction::ScopedTransaction(QSqlDatabase* db)
-    : db_(db), pending_(true) {
-  db->transaction();
+    : db_(db), pending_(db ? db->transaction() : false) {
+  if (!pending_) {
+    qLog(Warning) << "Failed to open database transaction";
+  }
 }
 
 ScopedTransaction::~ScopedTransaction() {
-  if (pending_) {
+  if (pending_ && db_) {
     qLog(Warning) << "Rolling back transaction";
     db_->rollback();
   }
 }
 
 void ScopedTransaction::Commit() {
-  if (!pending_) {
-    qLog(Warning) << "Tried to commit a ScopedTransaction twice";
+  if (!pending_ || !db_) {
+    qLog(Warning) << "Tried to commit an inactive ScopedTransaction";
     return;
   }
 

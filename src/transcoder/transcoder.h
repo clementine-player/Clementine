@@ -62,6 +62,8 @@ class Transcoder : public QObject {
   };
 
   Transcoder(QObject* parent = nullptr, const QString& settings_postfix = "");
+  // Cancels active GStreamer pipelines before members are destroyed.
+  ~Transcoder();
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();

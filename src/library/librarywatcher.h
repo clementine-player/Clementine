@@ -23,6 +23,7 @@
 #include <QMutex>
 #include <QObject>
 #include <QStringList>
+#include <atomic>
 #include <memory>
 
 #include "core/song.h"
@@ -47,7 +48,7 @@ class LibraryWatcher : public QObject {
 
   static const char* kSettingsGroup;
 
-  void set_backend(LibraryBackend* backend) { backend_ = backend; }
+  void set_backend(LibraryBackend* backend);
   void set_task_manager(TaskManager* task_manager) {
     task_manager_ = task_manager;
   }
@@ -87,10 +88,19 @@ class LibraryWatcher : public QObject {
  private:
   class WatchedDir : public Directory {
    public:
-    WatchedDir() : active_(true) {}
-    WatchedDir(const Directory& dir) : Directory(dir), active_(true) {}
+    WatchedDir() : active_(std::make_shared<std::atomic<bool>>(true)) {}
+    WatchedDir(const Directory& dir)
+        : Directory(dir), active_(std::make_shared<std::atomic<bool>>(true)) {}
 
-    bool active_;
+    bool is_active() const { return active_ && active_->load(); }
+    void stop() {
+      if (active_) active_->store(false);
+    }
+
+   private:
+    // Shared atomic flag lets Stop()/StopAll() abort in-flight scans even
+    // though WatchList returns WatchedDir copies to avoid holding mutex_.
+    std::shared_ptr<std::atomic<bool>> active_;
   };
 
   // This class encapsulates a full or partial scan of a directory.
@@ -122,7 +132,7 @@ class LibraryWatcher : public QObject {
     bool is_incremental() const { return incremental_; }
     bool ignores_mtime() const { return ignores_mtime_; }
 
-    bool aborted() { return !dir_.active_; }
+    bool aborted() { return !dir_.is_active(); }
 
     SongList deleted_songs;
     SongList readded_songs;
@@ -179,7 +189,7 @@ class LibraryWatcher : public QObject {
                        ScanTransaction* t);
   void AddWatch(const Directory& dir, const QString& path);
   void RemoveWatch(const Directory& dir, const Subdirectory& subdir);
-  uint GetMtimeForCue(const QString& cue_path);
+  qint64 GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
 
   // Updates the sections of a cue associated and altered (according to mtime)
@@ -238,16 +248,19 @@ class LibraryWatcher : public QObject {
     // These may be called from a different thread.
     void StopAll();
     void Stop(int dir_id);
+    bool TryGet(int dir_id, WatchedDir* out) const;
+    QList<WatchedDir> Values() const;
 
     // This should only be called on the watcher thread.
     void Remove(int id);
 
     void Add(const Directory& dir);
 
-    QMap<int, WatchedDir> list_;
-
    private:
-    QMutex mutex_;
+    // Kept private behind mutex_ so cross-thread readers use TryGet/Values
+    // instead of racing on QMap or auto-inserting via operator[].
+    QMap<int, WatchedDir> list_;
+    mutable QMutex mutex_;
   };
 
   WatchList watched_dirs_;

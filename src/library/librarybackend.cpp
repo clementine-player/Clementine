@@ -125,29 +125,34 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
   q.exec();
   if (db_->CheckErrors(q)) return;
 
-  const QByteArray old_url = QUrl::fromLocalFile(old_path).toEncoded();
+  const QString old_url =
+      QString::fromUtf8(QUrl::fromLocalFile(old_path).toEncoded());
   const QByteArray new_url = QUrl::fromLocalFile(new_path).toEncoded();
 
-  const int path_len = old_url.length();
-
+  // subdirs stores local filesystem paths while songs stores encoded URLs.
+  // SQLite's substr() is 1-based and counts Unicode code points (like SQLite
+  // length()), whereas QString::length() counts UTF-16 code units and
+  // QByteArray::length() counts UTF-8 bytes.
   // Do the subdirs table
   q = QSqlQuery(db);
-  q.prepare(QString("UPDATE %1 SET path=:path || substr(path, %2)"
-                    " WHERE directory=:id")
-                .arg(subdirs_table_)
-                .arg(path_len));
-  q.bindValue(":path", new_url);
+  q.prepare(
+      QString("UPDATE %1 SET path=:path || substr(path, length(:old_path) + 1)"
+              " WHERE directory=:id")
+          .arg(subdirs_table_));
+  q.bindValue(":path", new_path);
+  q.bindValue(":old_path", old_path);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   // Do the songs table
   q = QSqlQuery(db);
-  q.prepare(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
+  q.prepare(QString("UPDATE %1 SET filename=:path || substr(filename, "
+                    "length(:old_url) + 1)"
                     " WHERE directory=:id")
-                .arg(songs_table_)
-                .arg(path_len));
+                .arg(songs_table_));
   q.bindValue(":path", new_url);
+  q.bindValue(":old_url", old_url);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -517,7 +522,19 @@ void LibraryBackend::MarkSongsUnavailable(const SongList& songs,
   }
   transaction.Commit();
 
-  emit SongsDeleted(songs);
+  // Re-enabled songs (unavailable == false) must be announced via
+  // SongsDiscovered rather than SongsDeleted so models re-add them.
+  if (unavailable) {
+    emit SongsDeleted(songs);
+  } else {
+    SongList available_songs;
+    available_songs.reserve(songs.size());
+    for (Song song : songs) {
+      song.set_unavailable(false);
+      available_songs << song;
+    }
+    emit SongsDiscovered(available_songs);
+  }
   UpdateTotalSongCountAsync();
 }
 
@@ -708,6 +725,9 @@ Song LibraryBackend::GetSongByUrl(const QUrl& url, qint64 beginning) {
   query.AddWhere("beginning", beginning);
 
   Song song;
+  // ExecQuery uses the caller thread's connection without locking; hold
+  // db_->Mutex() to serialize against concurrent library writes.
+  QMutexLocker l(db_->Mutex());
   if (ExecQuery(&query) && query.Next()) {
     song.InitFromQuery(query, true);
   }
@@ -720,6 +740,9 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
   query.AddWhere("filename", url.toEncoded());
 
   SongList songlist;
+  // ExecQuery uses the caller thread's connection without locking; hold
+  // db_->Mutex() to serialize against concurrent library writes.
+  QMutexLocker l(db_->Mutex());
   if (ExecQuery(&query)) {
     while (query.Next()) {
       Song song;
@@ -1055,14 +1078,16 @@ void LibraryBackend::ForceCompilation(const QString& album,
             ":forced_compilation_on) AND NOT :forced_compilation_off) + 0"
             " WHERE album = :album AND unavailable = 0")
             .arg(songs_table_));
-    if (!artist.isEmpty()) sql += " AND artist = :artist";
+    // Use isNull() to match the LibraryQuery above: a non-null empty string
+    // filters for artist='', whereas null means all artists on the album.
+    if (!artist.isNull()) sql += " AND artist = :artist";
 
     QSqlQuery q(db);
     q.prepare(sql);
     q.bindValue(":forced_compilation_on", on ? 1 : 0);
     q.bindValue(":forced_compilation_off", on ? 0 : 1);
     q.bindValue(":album", album);
-    if (!artist.isEmpty()) q.bindValue(":artist", artist);
+    if (!artist.isNull()) q.bindValue(":artist", artist);
 
     q.exec();
     db_->CheckErrors(q);

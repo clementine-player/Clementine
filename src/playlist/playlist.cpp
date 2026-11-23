@@ -25,6 +25,7 @@
 #include <QLinkedList>
 #include <QMimeData>
 #include <QMutableListIterator>
+#include <QPointer>
 #include <QSortFilterProxyModel>
 #include <QUndoStack>
 #include <QtConcurrentRun>
@@ -829,15 +830,25 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
 
     std::stable_sort(source_rows.begin(),
                      source_rows.end());  // Make sure we take them in order
+    // Deduplicate row indices so MoveAction doesn't double-remove or shift
+    // into out-of-bounds positions.
+    source_rows.erase(std::unique(source_rows.begin(), source_rows.end()),
+                      source_rows.end());
 
     if (source_playlist == this) {
       // Dragged from this playlist - rearrange the items
       undo_stack_->push(
           new PlaylistUndoCommands::MoveItems(this, source_rows, row));
-    } else if (pid == own_pid) {
+    } else if (pid == own_pid && source_playlist) {
       // Drag from a different playlist
       PlaylistItemList items;
-      for (int row : source_rows) items << source_playlist->item_at(row);
+      QList<int> valid_rows;
+      for (int source_row : source_rows) {
+        if (source_playlist->has_item_at(source_row)) {
+          items << source_playlist->item_at(source_row);
+          valid_rows << source_row;
+        }
+      }
 
       if (items.count() > kUndoItemLimit) {
         // Too big to keep in the undo stack. Also clear the stack because it
@@ -849,11 +860,13 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
             new PlaylistUndoCommands::InsertItems(this, items, row));
       }
 
-      // Remove the items from the source playlist if it was a move event
+      // Remove the items from the source playlist in descending order if it was
+      // a move event so earlier removals do not shift later row indices.
       if (action == Qt::MoveAction) {
-        for (int row : source_rows) {
+        for (int i = valid_rows.size() - 1; i >= 0; --i) {
           source_playlist->undo_stack()->push(
-              new PlaylistUndoCommands::RemoveItems(source_playlist, row, 1));
+              new PlaylistUndoCommands::RemoveItems(source_playlist,
+                                                    valid_rows[i], 1));
         }
       }
     }
@@ -1624,7 +1637,7 @@ void Playlist::ItemsLoaded(PlaylistItemList items) {
 
   // should we gray out deleted songs asynchronously on startup?
   if (s.value("greyoutdeleted", false).toBool()) {
-    (void)QtConcurrent::run(&Playlist::InvalidateDeletedSongs, this);
+    InvalidateDeletedSongs();
   }
 }
 
@@ -1799,7 +1812,7 @@ bool Playlist::stop_after_current() const {
 PlaylistItemPtr Playlist::current_item() const {
   // QList[] runs in constant time, so no need to cache current_item
   if (current_item_index_.isValid() &&
-      current_item_index_.row() <= items_.length())
+      current_item_index_.row() < items_.length())
     return items_[current_item_index_.row()];
   return PlaylistItemPtr();
 }
@@ -1962,6 +1975,7 @@ void Playlist::RemoveItemsNotInQueue() {
 
 void Playlist::ReloadItems(const QList<int>& rows) {
   for (int row : rows) {
+    if (!has_item_at(row)) continue;
     PlaylistItemPtr item = item_at(row);
 
     item->Reload();
@@ -2105,7 +2119,9 @@ void Playlist::ReshuffleIndices() {
       // If the user is currently playing a song, force its album to be first
       // Or if the song was not playing but it was selected, force its album
       // to be first.
-      if (current_virtual_index_ != -1 || current_row() != -1) {
+      // Check current_row() directly rather than current_virtual_index_;
+      // current_row() can still be -1 when nothing is selected/playing.
+      if (has_item_at(current_row())) {
         const QString key = items_[current_row()]->Metadata().AlbumKey();
         const int pos = shuffled_album_keys.indexOf(key);
         if (pos >= 1) {
@@ -2152,8 +2168,9 @@ PlaylistItemList Playlist::GetAllItems() const { return items_; }
 quint64 Playlist::GetTotalLength() const {
   quint64 ret = 0;
   for (PlaylistItemPtr item : items_) {
-    quint64 length = item->Metadata().length_nanosec();
-    if (length > 0) ret += length;
+    // Unknown lengths use -1; skip before casting to quint64 (~584 years).
+    const qint64 length = item->Metadata().length_nanosec();
+    if (length > 0) ret += static_cast<quint64>(length);
   }
   return ret;
 }
@@ -2214,27 +2231,70 @@ void Playlist::InformOfCurrentSongChange() {
 }
 
 void Playlist::InvalidateDeletedSongs() {
-  QList<int> invalidated_rows;
+  struct CheckItem {
+    PlaylistItemPtr item;
+    QString local_file;
+  };
 
-  for (int row = 0; row < items_.count(); ++row) {
-    PlaylistItemPtr item = items_[row];
-    Song song = item->Metadata();
-
+  // Snapshot paths and shared item pointers on the GUI thread so the
+  // background QFile::exists() pass never reads items_ or mutates UI
+  // state off-thread.
+  QList<CheckItem> snapshot;
+  snapshot.reserve(items_.count());
+  for (const PlaylistItemPtr& item : items_) {
+    const Song song = item->Metadata();
     if (!song.is_stream()) {
-      bool exists = QFile::exists(song.url().toLocalFile());
-
-      if (!exists && !item->HasForegroundColor(kInvalidSongPriority)) {
-        // gray out the song if it's not there
-        item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
-        invalidated_rows.append(row);
-      } else if (exists && item->HasForegroundColor(kInvalidSongPriority)) {
-        item->RemoveForegroundColor(kInvalidSongPriority);
-        invalidated_rows.append(row);
+      const QString local_file = song.url().toLocalFile();
+      if (!local_file.isEmpty()) {
+        snapshot.append({item, local_file});
       }
     }
   }
+  if (snapshot.isEmpty()) return;
 
-  ReloadItems(invalidated_rows);
+  QPointer<Playlist> self(this);
+  (void)QtConcurrent::run([self, snapshot = std::move(snapshot)]() {
+    QList<QPair<PlaylistItemPtr, bool>> results;
+    results.reserve(snapshot.size());
+    for (const CheckItem& entry : snapshot) {
+      results.append({entry.item, QFile::exists(entry.local_file)});
+    }
+    // Post via QCoreApplication so the callback runs on the main thread
+    // and can safely check QPointer<Playlist>; remap items_ by pointer
+    // because rows may have shifted or been removed while checking disk.
+    QCoreApplication* app = QCoreApplication::instance();
+    if (!app) return;
+    QMetaObject::invokeMethod(
+        app,
+        [self, results = std::move(results)]() {
+          if (!self) return;
+          QHash<PlaylistItem*, int> row_by_item;
+          row_by_item.reserve(self->items_.size());
+          for (int r = 0; r < self->items_.size(); ++r) {
+            row_by_item.insert(self->items_[r].get(), r);
+          }
+          QList<int> invalidated_rows;
+          for (const auto& entry : results) {
+            const int row = row_by_item.value(entry.first.get(), -1);
+            if (row == -1) continue;
+            if (!entry.second &&
+                !entry.first->HasForegroundColor(kInvalidSongPriority)) {
+              // gray out the song if it's not there
+              entry.first->SetForegroundColor(kInvalidSongPriority,
+                                              kInvalidSongColor);
+              invalidated_rows.append(row);
+            } else if (entry.second &&
+                       entry.first->HasForegroundColor(kInvalidSongPriority)) {
+              entry.first->RemoveForegroundColor(kInvalidSongPriority);
+              invalidated_rows.append(row);
+            }
+          }
+          if (!invalidated_rows.isEmpty()) {
+            self->ReloadItems(invalidated_rows);
+          }
+        },
+        Qt::QueuedConnection);
+  });
 }
 
 void Playlist::RemoveDeletedSongs() {

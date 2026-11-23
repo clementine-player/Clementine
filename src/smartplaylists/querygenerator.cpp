@@ -67,10 +67,18 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
 
   if (search_copy.sort_type_ != Search::Sort_Random) {
     search_copy.first_item_ = current_pos_;
-    current_pos_ += search_copy.limit_;
   }
 
   SongList songs = backend_->FindSongs(search_copy);
+  // Advance current_pos_ after querying: limit_ == -1 means unlimited, so
+  // adding it before or unconditionally would set current_pos_ = -1.
+  if (search_copy.sort_type_ != Search::Sort_Random) {
+    if (search_copy.limit_ > 0) {
+      current_pos_ += search_copy.limit_;
+    } else {
+      current_pos_ += songs.size();
+    }
+  }
   PlaylistItemList items;
   for (const Song& song : songs) {
     items << PlaylistItemPtr(

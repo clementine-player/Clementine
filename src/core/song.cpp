@@ -209,9 +209,11 @@ struct Song::Private : public QSharedData {
   int directory_id_;
   QUrl url_;
   QString basefilename_;
-  int mtime_;
-  int ctime_;
-  int filesize_;
+  // 64-bit so >2 GiB files, post-2038 timestamps, and -1 sentinels don't
+  // overflow.
+  qint64 mtime_;
+  qint64 ctime_;
+  qint64 filesize_;
   FileType filetype_;
 
   // If the song has a CUE, this contains it's path.
@@ -329,9 +331,9 @@ int Song::samplerate() const { return d->samplerate_; }
 int Song::directory_id() const { return d->directory_id_; }
 const QUrl& Song::url() const { return d->url_; }
 const QString& Song::basefilename() const { return d->basefilename_; }
-uint Song::mtime() const { return d->mtime_; }
-uint Song::ctime() const { return d->ctime_; }
-int Song::filesize() const { return d->filesize_; }
+qint64 Song::mtime() const { return d->mtime_; }
+qint64 Song::ctime() const { return d->ctime_; }
+qint64 Song::filesize() const { return d->filesize_; }
 Song::FileType Song::filetype() const { return d->filetype_; }
 bool Song::is_stream() const { return d->filetype_ == Type_Stream; }
 bool Song::is_cdda() const { return d->filetype_ == Type_Cdda; }
@@ -375,9 +377,9 @@ void Song::set_end_nanosec(qint64 v) { d->end_ = v; }
 void Song::set_length_nanosec(qint64 v) { d->end_ = d->beginning_ + v; }
 void Song::set_bitrate(int v) { d->bitrate_ = v; }
 void Song::set_samplerate(int v) { d->samplerate_ = v; }
-void Song::set_mtime(int v) { d->mtime_ = v; }
-void Song::set_ctime(int v) { d->ctime_ = v; }
-void Song::set_filesize(int v) { d->filesize_ = v; }
+void Song::set_mtime(qint64 v) { d->mtime_ = v; }
+void Song::set_ctime(qint64 v) { d->ctime_ = v; }
+void Song::set_filesize(qint64 v) { d->filesize_ = v; }
 void Song::set_filetype(FileType v) { d->filetype_ = v; }
 void Song::set_art_automatic(const QString& v) { d->art_automatic_ = v; }
 void Song::set_art_manual(const QString& v) { d->art_manual_ = v; }
@@ -634,9 +636,9 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->directory_id_ = toint(col + 15);
   set_url(QUrl::fromEncoded(tostr(col + 16).toUtf8()));
   d->basefilename_ = QFileInfo(d->url_.toLocalFile()).fileName();
-  d->mtime_ = toint(col + 17);
-  d->ctime_ = toint(col + 18);
-  d->filesize_ = toint(col + 19);
+  d->mtime_ = tolonglong(col + 17);
+  d->ctime_ = tolonglong(col + 18);
+  d->filesize_ = tolonglong(col + 19);
 
   d->sampler_ = q.value(col + 20).toBool();
 
@@ -666,7 +668,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->unavailable_ = q.value(col + 35).toBool();
 
   // effective_albumartist = 36
-  // etag = 37
+  d->etag_ = tostr(col + 37);
 
   d->performer_ = tostr(col + 38);
   d->grouping_ = tostr(col + 39);
@@ -757,32 +759,34 @@ void Song::InitFromItdb(const Itdb_Track* track, const QString& prefix) {
 }
 
 void Song::ToItdb(Itdb_Track* track) const {
-  track->title = strdup(d->title_.toUtf8().constData());
-  track->album = strdup(d->album_.toUtf8().constData());
-  track->artist = strdup(d->artist_.toUtf8().constData());
-  track->albumartist = strdup(d->albumartist_.toUtf8().constData());
-  track->composer = strdup(d->composer_.toUtf8().constData());
-  track->grouping = strdup(d->grouping_.toUtf8().constData());
-  track->track_nr = d->track_;
-  track->cd_nr = d->disc_;
-  track->BPM = d->bpm_;
-  track->year = d->year_;
-  track->genre = strdup(d->genre_.toUtf8().constData());
-  track->comment = strdup(d->comment_.toUtf8().constData());
+  // libgpod frees track strings with g_free() and stores unsigned fields where
+  // Song's -1 sentinels would wrap, so use g_strdup() and clamp to >= 0.
+  track->title = g_strdup(d->title_.toUtf8().constData());
+  track->album = g_strdup(d->album_.toUtf8().constData());
+  track->artist = g_strdup(d->artist_.toUtf8().constData());
+  track->albumartist = g_strdup(d->albumartist_.toUtf8().constData());
+  track->composer = g_strdup(d->composer_.toUtf8().constData());
+  track->grouping = g_strdup(d->grouping_.toUtf8().constData());
+  track->track_nr = qMax(0, d->track_);
+  track->cd_nr = qMax(0, d->disc_);
+  track->BPM = d->bpm_ > 0 ? d->bpm_ : 0;
+  track->year = qMax(0, d->year_);
+  track->genre = g_strdup(d->genre_.toUtf8().constData());
+  track->comment = g_strdup(d->comment_.toUtf8().constData());
   track->compilation = d->compilation_;
-  track->tracklen = length_nanosec() / kNsecPerMsec;
-  track->bitrate = d->bitrate_;
-  track->samplerate = d->samplerate_;
-  track->time_modified = d->mtime_;
-  track->time_added = d->ctime_;
-  track->size = d->filesize_;
+  track->tracklen = length_nanosec() > 0 ? length_nanosec() / kNsecPerMsec : 0;
+  track->bitrate = qMax(0, d->bitrate_);
+  track->samplerate = qMax(0, d->samplerate_);
+  track->time_modified = qMax<qint64>(0, d->mtime_);
+  track->time_added = qMax<qint64>(0, d->ctime_);
+  track->size = qMax<qint64>(0, d->filesize_);
   track->type1 = 0;
   track->type2 = d->filetype_ == Type_Mp4 ? 0 : 1;
-  track->mediatype = 1;              // Audio
-  track->rating = d->rating_ * 100;  // 100 = 20 * 5 stars
-  track->playcount = d->playcount_;
-  track->skipcount = d->skipcount_;
-  track->time_played = d->lastplayed_;
+  track->mediatype = 1;                                   // Audio
+  track->rating = d->rating_ > 0 ? d->rating_ * 100 : 0;  // 100 = 20 * 5 stars
+  track->playcount = qMax(0, d->playcount_);
+  track->skipcount = qMax(0, d->skipcount_);
+  track->time_played = qMax(0, d->lastplayed_);
 }
 #endif
 
@@ -795,11 +799,15 @@ void Song::InitFromMTP(const LIBMTP_track_t* track, const QString& host) {
   d->album_ = QString::fromUtf8(track->album);
   d->composer_ = QString::fromUtf8(track->composer);
   d->genre_ = QString::fromUtf8(track->genre);
-  d->url_ = QUrl(QString("mtp://%1/%2").arg(host, track->item_id));
+  // Chain .arg() calls: the two-arg QString::arg(QString, int) treats item_id
+  // as a field width rather than the %2 placeholder.
+  d->url_ = QUrl(QString("mtp://%1/%2").arg(host).arg(track->item_id));
   d->basefilename_ = QString::number(track->item_id);
 
   d->track_ = track->tracknumber;
-  set_length_nanosec(track->duration * kNsecPerMsec);
+  // Widen uint32_t milliseconds before multiplying so long tracks don't
+  // overflow.
+  set_length_nanosec(static_cast<qint64>(track->duration) * kNsecPerMsec);
   d->samplerate_ = track->samplerate;
   d->bitrate_ = track->bitrate;
   d->filesize_ = track->filesize;
@@ -853,22 +861,22 @@ void Song::ToMTP(LIBMTP_track_t* track) const {
   track->album = strdup(d->album_.toUtf8().constData());
   track->composer = strdup(d->composer_.toUtf8().constData());
   track->genre = strdup(d->genre_.toUtf8().constData());
-  track->title = strdup(d->title_.toUtf8().constData());
   track->date = nullptr;
 
   track->filename = strdup(d->basefilename_.toUtf8().constData());
 
-  track->tracknumber = d->track_;
-  track->duration = length_nanosec() / kNsecPerMsec;
-  track->samplerate = d->samplerate_;
+  // Clamp Song's -1 sentinels to 0 because LIBMTP_track_t fields are unsigned.
+  track->tracknumber = qMax(0, d->track_);
+  track->duration = length_nanosec() > 0 ? length_nanosec() / kNsecPerMsec : 0;
+  track->samplerate = qMax(0, d->samplerate_);
   track->nochannels = 0;
   track->wavecodec = 0;
-  track->bitrate = d->bitrate_;
+  track->bitrate = qMax(0, d->bitrate_);
   track->bitratetype = 0;
-  track->rating = d->rating_ * 100;
-  track->usecount = d->playcount_;
-  track->filesize = d->filesize_;
-  track->modificationdate = d->mtime_;
+  track->rating = d->rating_ > 0 ? d->rating_ * 100 : 0;
+  track->usecount = qMax(0, d->playcount_);
+  track->filesize = qMax<qint64>(0, d->filesize_);
+  track->modificationdate = qMax<qint64>(0, d->mtime_);
 
   switch (d->filetype_) {
     case Type_Asf:
