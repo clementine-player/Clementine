@@ -35,7 +35,10 @@ const char* BackgroundStreams::kEnterpriseUrl = "enterprise:///";
 BackgroundStreams::BackgroundStreams(EngineBase* engine, QObject* parent)
     : QObject(parent), engine_(engine) {}
 
-BackgroundStreams::~BackgroundStreams() { SaveStreams(); }
+BackgroundStreams::~BackgroundStreams() {
+  SaveStreams();
+  qDeleteAll(streams_);
+}
 
 void BackgroundStreams::LoadStreams() {
   QSettings s;
@@ -120,6 +123,13 @@ void BackgroundStreams::SetStreamVolume(const QString& name, int volume) {
 
 void BackgroundStreams::PlayStream(Stream* stream) {
   stream->id = engine_->AddBackgroundStream(stream->url);
+  if (stream->id == -1) {
+    qLog(Warning) << "Couldn't play the background stream" << stream->name;
+    if (stream->action) {
+      stream->action->setChecked(false);
+    }
+    return;
+  }
   engine_->SetBackgroundStreamVolume(stream->id, stream->volume);
   emit StreamStarted(stream->name);
 
