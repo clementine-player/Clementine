@@ -29,7 +29,9 @@ Each signing request waits in a job of its own (`sign_binaries_mingw`, then
 `installer_mingw` builds the installer, then `sign_installer_mingw`). Which
 policy signs, if any, depends on what's being built:
 
-- Releases use `release-signing`: Windows trusts its certificate, and each
+- Releases use the policy the `SIGNPATH_RELEASE_POLICY` variable names,
+  `release-signing`, and aren't signed while it's unset: Windows trusts its
+  certificate, and each
   request waits until an approver approves it on SignPath, so each release
   needs two approvals, one for each request. Each request waits on an Ubuntu
   runner for up to the six hours GitHub gives a job (a little less: 5 hours
@@ -70,6 +72,9 @@ On GitHub, in the repository's Settings, Secrets and variables, Actions:
 - Variable `SIGNPATH_PROJECT_SLUG`: the project's slug.
 - Variable `SIGNPATH_ORGANIZATION_ID`: the organization's ID, from its
   settings. Nothing is signed until this is set.
+- Variable `SIGNPATH_RELEASE_POLICY`: `release-signing`, the policy releases
+  are signed with. Leave it unset to release without signing, while that
+  policy isn't working, say; pull requests are still test-signed.
 
 To check the setup, open a pull request from a branch in this repository.
 Its run signs with `test-signing`: the "Sign the Windows binaries" and "Sign

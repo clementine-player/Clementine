@@ -1966,8 +1966,10 @@ jobs:
           }
           Remove-Item WriteUninstaller.exe
 
-      # Numbered releases are signed with release-signing, which waits for a
-      # maintainer to approve each request on SignPath. Pull requests from
+      # Numbered releases are signed with the policy the
+      # SIGNPATH_RELEASE_POLICY variable names (release-signing), which waits
+      # for a maintainer to approve each request on SignPath; with it unset,
+      # releases aren't signed. Pull requests from
       # branches in this repository are signed with test-signing, which signs
       # straight away with a certificate nobody trusts, so the signing steps
       # are tested before they reach master. Development builds from master
@@ -1992,8 +1994,8 @@ jobs:
         env:
           ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
           POLICY: >-
-            ${{ inputs.release && 'release-signing'
-              || github.event_name == 'pull_request'
+            ${{ inputs.release && vars.SIGNPATH_RELEASE_POLICY
+              || !inputs.release && github.event_name == 'pull_request'
                 && github.event.pull_request.head.repo.full_name == github.repository
                 && 'test-signing'
               || '' }}

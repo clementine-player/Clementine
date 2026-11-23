@@ -70,7 +70,8 @@ workflow from*, *Tags*, and the release. It builds and publishes it again.
 ### One-time setup
 
 - **Windows signing:** see `dist/windows/signpath/README.md`. Until it's set
-  up, releases have an unsigned installer.
+  up, and while the `SIGNPATH_RELEASE_POLICY` variable is unset, releases
+  have an unsigned installer.
 - If tags get a repository ruleset, let GitHub Actions bypass it for numbered
   tags: the workflow pushes them.
 
