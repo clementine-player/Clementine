@@ -24,6 +24,7 @@
 #include <QMutex>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QPointer>
 
 class QNetworkDiskCache;
 
@@ -42,8 +43,10 @@ class ThreadSafeNetworkDiskCache : public QAbstractNetworkCache {
   void clear();
 
  private:
+  // Serializes disk access to the shared cache directory across threads.
   static QMutex sMutex;
-  static QNetworkDiskCache* sCache;
+  // Owned per instance so QObject thread affinity matches the caller's NAM.
+  QNetworkDiskCache* cache_;
 };
 
 class NetworkAccessManager : public QNetworkAccessManager {
@@ -64,23 +67,34 @@ class RedirectFollower : public QObject {
 
  public:
   explicit RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
+  ~RedirectFollower();
 
   bool hit_redirect_limit() const { return redirects_remaining_ < 0; }
-  QNetworkReply* reply() const { return current_reply_; }
+  QNetworkReply* reply() const { return current_reply_.data(); }
 
   // These are all forwarded to the current reply.
-  QNetworkReply::NetworkError error() const { return current_reply_->error(); }
-  QString errorString() const { return current_reply_->errorString(); }
+  QNetworkReply::NetworkError error() const {
+    return current_reply_ ? current_reply_->error() : QNetworkReply::NoError;
+  }
+  QString errorString() const {
+    return current_reply_ ? current_reply_->errorString() : QString();
+  }
   QVariant attribute(QNetworkRequest::Attribute code) const {
-    return current_reply_->attribute(code);
+    return current_reply_ ? current_reply_->attribute(code) : QVariant();
   }
   QVariant header(QNetworkRequest::KnownHeaders header) const {
-    return current_reply_->header(header);
+    return current_reply_ ? current_reply_->header(header) : QVariant();
   }
-  qint64 bytesAvailable() const { return current_reply_->bytesAvailable(); }
-  QUrl url() const { return current_reply_->url(); }
-  QByteArray readAll() { return current_reply_->readAll(); }
-  void abort() { current_reply_->abort(); }
+  qint64 bytesAvailable() const {
+    return current_reply_ ? current_reply_->bytesAvailable() : 0;
+  }
+  QUrl url() const { return current_reply_ ? current_reply_->url() : QUrl(); }
+  QByteArray readAll() {
+    return current_reply_ ? current_reply_->readAll() : QByteArray();
+  }
+  void abort() {
+    if (current_reply_) current_reply_->abort();
+  }
 
  signals:
   // These are all forwarded from the current reply.
@@ -100,7 +114,9 @@ class RedirectFollower : public QObject {
   void ConnectReply(QNetworkReply* reply);
 
  private:
-  QNetworkReply* current_reply_;
+  // Guarded with QPointer because QNetworkAccessManager or callers can delete
+  // the reply externally.
+  QPointer<QNetworkReply> current_reply_;
   int redirects_remaining_;
 };
 

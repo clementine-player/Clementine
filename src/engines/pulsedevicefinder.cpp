@@ -17,6 +17,8 @@
 
 #include "engines/pulsedevicefinder.h"
 
+#include <QScopeGuard>
+
 #include "core/logging.h"
 
 PulseDeviceFinder::PulseDeviceFinder()
@@ -47,6 +49,9 @@ bool PulseDeviceFinder::Reconnect() {
 
   if (pa_context_connect(context_, nullptr, PA_CONTEXT_NOFLAGS, nullptr) < 0) {
     qLog(Warning) << "Failed to connect pulseaudio context";
+    // Drop the unconnected context so callers don't disconnect or reuse it.
+    pa_context_unref(context_);
+    context_ = nullptr;
     return false;
   }
 
@@ -62,41 +67,81 @@ bool PulseDeviceFinder::Reconnect() {
       return true;
     }
 
-    pa_mainloop_iterate(mainloop_, true, nullptr);
+    // Bail out if the mainloop errors instead of spinning forever.
+    if (pa_mainloop_iterate(mainloop_, true, nullptr) < 0) {
+      qLog(Warning) << "Pulseaudio mainloop failed while connecting";
+      return false;
+    }
   }
 }
 
 QList<DeviceFinder::Device> PulseDeviceFinder::ListDevices() {
-  if (!context_ || pa_context_get_state(context_) != PA_CONTEXT_READY) {
+  if (!mainloop_) {
     return QList<Device>();
   }
+  // Reconnect lazily if Initialise() failed or PulseAudio restarted since then.
+  if (!context_ || pa_context_get_state(context_) != PA_CONTEXT_READY) {
+    if (!Reconnect()) {
+      return QList<Device>();
+    }
+  }
 
-retry:
-  ListDevicesState state;
-  pa_context_get_sink_info_list(
-      context_, &PulseDeviceFinder::GetSinkInfoCallback, &state);
-
-  forever {
-    if (state.finished) {
+  // Cap at one reconnect retry so a persistently failing daemon cannot loop
+  // forever.
+  for (int attempt = 0; attempt < 2; ++attempt) {
+    ListDevicesState state;
+    pa_operation* op = pa_context_get_sink_info_list(
+        context_, &PulseDeviceFinder::GetSinkInfoCallback, &state);
+    if (!op) {
+      if (attempt == 0 && Reconnect()) {
+        continue;
+      }
       return state.devices;
     }
 
-    switch (pa_context_get_state(context_)) {
-      case PA_CONTEXT_READY:
+    // Cancel an incomplete operation before stack-allocated `state` unwinds,
+    // and always unref pa_operation to avoid leaking it.
+    auto cleanup_op = qScopeGuard([op, &state]() {
+      if (!state.finished) {
+        pa_operation_cancel(op);
+      }
+      pa_operation_unref(op);
+    });
+
+    bool should_retry = false;
+    forever {
+      if (state.finished) {
+        return state.devices;
+      }
+
+      switch (pa_context_get_state(context_)) {
+        case PA_CONTEXT_READY:
+          break;
+        case PA_CONTEXT_FAILED:
+        case PA_CONTEXT_TERMINATED:
+          // Maybe pulseaudio died.  Try reconnecting once.
+          should_retry = (attempt == 0);
+          break;
+        default:
+          return state.devices;
+      }
+
+      if (should_retry) {
         break;
-      case PA_CONTEXT_FAILED:
-      case PA_CONTEXT_TERMINATED:
-        // Maybe pulseaudio died.  Try reconnecting.
-        if (Reconnect()) {
-          goto retry;
-        }
+      }
+
+      // Bail out if the mainloop errors instead of spinning forever.
+      if (pa_mainloop_iterate(mainloop_, true, nullptr) < 0) {
         return state.devices;
-      default:
-        return state.devices;
+      }
     }
 
-    pa_mainloop_iterate(mainloop_, true, nullptr);
+    if (!should_retry || !Reconnect()) {
+      return state.devices;
+    }
   }
+
+  return QList<Device>();
 }
 
 void PulseDeviceFinder::GetSinkInfoCallback(pa_context* c,
@@ -108,8 +153,11 @@ void PulseDeviceFinder::GetSinkInfoCallback(pa_context* c,
     Device dev;
     dev.device_property_value = QString::fromUtf8(info->name);
     dev.description = QString::fromUtf8(info->description);
-    dev.icon_name =
-        QString::fromUtf8(pa_proplist_gets(info->proplist, "device.icon_name"));
+    // proplist or the icon property may be null on virtual/minimal sinks.
+    const char* icon_name =
+        info->proplist ? pa_proplist_gets(info->proplist, "device.icon_name")
+                       : nullptr;
+    dev.icon_name = icon_name ? QString::fromUtf8(icon_name) : QString();
 
     state->devices.append(dev);
   }

@@ -21,6 +21,7 @@
 
 #include <QAction>
 #include <QSettings>
+#include <QSignalBlocker>
 #include <QtDebug>
 
 #include "core/logging.h"
@@ -38,6 +39,8 @@ BackgroundStreams::BackgroundStreams(EngineBase* engine, QObject* parent)
 BackgroundStreams::~BackgroundStreams() {
   SaveStreams();
   qDeleteAll(streams_);
+  // Clear deleted Stream* entries so late QAction signals cannot UAF.
+  streams_.clear();
 }
 
 void BackgroundStreams::LoadStreams() {
@@ -114,7 +117,12 @@ void BackgroundStreams::EnableStream(const QString& name, bool enable) {
 }
 
 void BackgroundStreams::SetStreamVolume(const QString& name, int volume) {
-  Stream* stream = streams_[name];
+  // Avoid operator[], which inserts a null Stream* for unknown names.
+  Stream* stream = streams_.value(name);
+  if (!stream) {
+    qLog(Warning) << "Tried to set volume for unknown stream" << name;
+    return;
+  }
   stream->volume = volume;
   if (stream->id != -1) {
     engine_->SetBackgroundStreamVolume(stream->id, stream->volume);
@@ -124,8 +132,11 @@ void BackgroundStreams::SetStreamVolume(const QString& name, int volume) {
 void BackgroundStreams::PlayStream(Stream* stream) {
   stream->id = engine_->AddBackgroundStream(stream->url);
   if (stream->id == -1) {
-    qLog(Warning) << "Couldn't play the background stream" << stream->name;
+    qLog(Warning) << "Failed to start background stream" << stream->name;
     if (stream->action) {
+      // Block signals so resetting the action doesn't re-trigger
+      // StreamActionToggled.
+      const QSignalBlocker blocker(stream->action);
       stream->action->setChecked(false);
     }
     return;
@@ -149,11 +160,14 @@ void BackgroundStreams::StopStream(Stream* stream) {
 }
 
 int BackgroundStreams::GetStreamVolume(const QString& name) const {
-  return streams_[name]->volume;
+  // value() avoids QMap::operator[] const returning nullptr to dereference.
+  const Stream* stream = streams_.value(name);
+  return stream ? stream->volume : 0;
 }
 
 bool BackgroundStreams::IsPlaying(const QString& name) const {
-  return streams_[name]->id != -1;
+  const Stream* stream = streams_.value(name);
+  return stream && stream->id != -1;
 }
 
 void BackgroundStreams::AddAction(const QString& name, QAction* action) {

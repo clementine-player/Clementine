@@ -25,6 +25,7 @@
 #include <QThreadPool>
 #include <QTimeLine>
 #include <QUrl>
+#include <atomic>
 #include <memory>
 
 #include "engine_fwd.h"
@@ -84,10 +85,16 @@ class GstEnginePipeline : public GstPipelineBase {
   // for gapless playback
   void SetNextReq(const MediaPlaybackRequest& req, qint64 beginning_nanosec,
                   qint64 end_nanosec);
-  bool has_next_valid_url() const { return next_.url_.isValid(); }
+  bool has_next_valid_url() const {
+    QMutexLocker l(&req_mutex_);
+    return next_.url_.isValid();
+  }
 
   // Get information about the music playback
-  QUrl url() const { return current_.url_; }
+  QUrl url() const {
+    QMutexLocker l(&req_mutex_);
+    return current_.url_;
+  }
   bool is_valid() const { return valid_; }
   // Please note that this method (unlike GstEngine's.position()) is
   // multiple-section media unaware.
@@ -98,7 +105,6 @@ class GstEnginePipeline : public GstPipelineBase {
   // Returns this pipeline's state. May return GST_STATE_NULL if the state check
   // timed out. The timeout value is a reasonable default.
   GstState state() const;
-  qint64 segment_start() const { return segment_start_; }
 
   // Don't allow the user to change the playback state (playing/paused) while
   // the pipeline is buffering.
@@ -106,7 +112,10 @@ class GstEnginePipeline : public GstPipelineBase {
 
   QUrl redirect_url() const { return redirect_url_; }
 
-  QString source_device() const { return source_device_; }
+  QString source_device() const {
+    QMutexLocker l(&req_mutex_);
+    return source_device_;
+  }
 
  public slots:
   void SetVolumeModifier(qreal mod);
@@ -131,7 +140,6 @@ class GstEnginePipeline : public GstPipelineBase {
   // Static callbacks.  The GstEnginePipeline instance is passed in the last
   // argument.
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
-  static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static GstPadProbeReturn HandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
   static GstPadProbeReturn EventHandoffCallback(GstPad*, GstPadProbeInfo*,
@@ -163,7 +171,7 @@ class GstEnginePipeline : public GstPipelineBase {
   void UpdateEqualizer();
   void UpdateStereoBalance();
   void SetOutputFormat(const QString& format);
-  bool ReplaceDecodeBin(GstElement* new_bin);
+  void ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
 
   void TransitionToNext();
@@ -199,10 +207,8 @@ class GstEnginePipeline : public GstPipelineBase {
   // These get called when there is a new audio buffer available
   QList<BufferConsumer*> buffer_consumers_;
   QMutex buffer_consumers_mutex_;
-  qint64 segment_start_;
-  bool segment_start_received_;
-  bool emit_track_ended_on_stream_start_;
-  bool emit_track_ended_on_time_discontinuity_;
+  std::atomic<bool> emit_track_ended_on_stream_start_;
+  std::atomic<bool> emit_track_ended_on_time_discontinuity_;
   qint64 last_buffer_offset_;
 
   // Equalizer
@@ -224,16 +230,28 @@ class GstEnginePipeline : public GstPipelineBase {
   // Buffering
   quint64 buffer_duration_nanosec_;
   int buffer_min_fill_;
-  bool buffering_;
+  std::atomic<bool> buffering_;
 
   bool mono_playback_;
   int sample_rate_;
   QString format_;
 
+  // Protects current_, next_, end_offset_nanosec_, next_*_offset_nanosec_, and
+  // source_device_ across main & GStreamer threads.
+  mutable QMutex req_mutex_;
+  // Serializes decodebin replacement in TransitionToNext().
+  QMutex transition_mutex_;
+  // Protects last_decodebin_segment_ and current_segment_ across pad probes &
+  // RestartAudioSinkNow.
+  QMutex segment_mutex_;
+
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.
   MediaPlaybackRequest current_;
   MediaPlaybackRequest next_;
+  // Incremented on SetNextReq() so TransitionToNext() won't clear a newer
+  // preload queued while CreateDecodeBinFromUrl() was running.
+  quint64 next_generation_ = 0;
 
   // If this is > 0 then the pipeline will be forced to stop when playback goes
   // past this position.
@@ -247,11 +265,11 @@ class GstEnginePipeline : public GstPipelineBase {
 
   // Set temporarily when moving to the next contiguous section in a multi-part
   // file.
-  bool ignore_next_seek_;
+  std::atomic<bool> ignore_next_seek_;
 
   // Set temporarily when switching out the decode bin, so metadata doesn't
   // get sent while the Player still thinks it's playing the last song
-  bool ignore_tags_;
+  std::atomic<bool> ignore_tags_;
 
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.
@@ -263,9 +281,9 @@ class GstEnginePipeline : public GstPipelineBase {
   // Seeking while the pipeline is in the READY state doesn't work, so we have
   // to wait until it goes to PAUSED or PLAYING.
   // Also we have to wait for the decodebin to be connected.
-  bool pipeline_is_initialised_;
-  bool pipeline_is_connected_;
-  qint64 pending_seek_nanosec_;
+  std::atomic<bool> pipeline_is_initialised_;
+  std::atomic<bool> pipeline_is_connected_;
+  std::atomic<qint64> pending_seek_nanosec_;
 
   // We can only use gst_element_query_position() when the pipeline is in
   // PAUSED nor PLAYING state. Whenever we get a new position (e.g. after a
@@ -308,6 +326,7 @@ class GstEnginePipeline : public GstPipelineBase {
   QThreadPool set_state_threadpool_;
 
   GstSegment last_decodebin_segment_;
+  GstSegment current_segment_;
 };
 
 #endif  // GSTENGINEPIPELINE_H

@@ -38,6 +38,10 @@ Engine::Base::Base()
       crossfade_enabled_(true),
       autocrossfade_enabled_(false),
       crossfade_same_album_(false),
+      // Initialize fadeout-pause fields before ReloadSettings() runs so
+      // early Pause() calls never read indeterminate values.
+      fadeout_pause_enabled_(false),
+      fadeout_pause_duration_nanosec_(250 * kNsecPerMsec),
       about_to_end_emitted_(false) {}
 
 Engine::Base::~Base() {}
@@ -63,8 +67,11 @@ void Engine::Base::SetVolume(uint value) {
 
 uint Engine::Base::MakeVolumeLogarithmic(uint volume) {
   // We're using a logarithmic function to make the volume ramp more natural.
-  return static_cast<uint>(100 -
-                           100.0 * std::log10((100 - volume) * 0.09 + 1.0));
+  // Clamp unsigned input before (100.0 - clamped) to avoid uint underflow and
+  // out-of-range log10 results if volume > 100 is passed.
+  const double clamped = qMin(volume, 100u);
+  return static_cast<uint>(qBound(
+      0.0, 100.0 - 100.0 * std::log10((100.0 - clamped) * 0.09 + 1.0), 100.0));
 }
 
 void Engine::Base::ReloadSettings() {

@@ -149,66 +149,101 @@ void Player::ReloadSettings() {
 }
 
 void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
+  // Empty URLs could otherwise match a cleared loading_async_ or
+  // preloading_async_.
+  if (result.original_url_.isEmpty()) return;
+
   // Might've been an async load, so check we're still on the same item
   shared_ptr<PlaylistItem> item =
       app_->playlist_manager()->active()->current_item();
-  if (!item) {
-    loading_async_ = QUrl();
+  if (item && item->Url() == result.original_url_) {
+    // If this track became current before its preload callback arrived, clear
+    // the preload marker so it isn't handled again below.
+    if (result.original_url_ == preloading_async_) {
+      preloading_async_ = QUrl();
+    }
+
+    switch (result.type_) {
+      case UrlHandler::LoadResult::NoMoreTracks:
+        qLog(Debug) << "URL handler for" << result.original_url_
+                    << "said no more tracks";
+
+        loading_async_ = QUrl();
+        NextItem(stream_change_type_);
+        break;
+
+      case UrlHandler::LoadResult::TrackAvailable: {
+        // The media URL may contain an auth token.
+        qLog(Debug) << "URL handler for" << result.original_url_ << "returned"
+                    << result.media_url_.toString(QUrl::RemoveQuery)
+                    << "(query removed)";
+
+        // If there was no length info in song's metadata, use the one provided
+        // by URL handler, if there is one
+        if (item->Metadata().length_nanosec() <= 0 &&
+            result.length_nanosec_ != -1) {
+          Song song = item->Metadata();
+          song.set_length_nanosec(result.length_nanosec_);
+          item->SetTemporaryMetadata(song);
+          app_->playlist_manager()->active()->InformOfCurrentSongChange();
+        }
+        MediaPlaybackRequest req(result.original_url_, result.media_url_);
+        if (!result.auth_header_.isEmpty())
+          req.headers_["Authorization"] = result.auth_header_;
+        engine_->Play(req, stream_change_type_, item->Metadata().has_cue(),
+                      item->Metadata().beginning_nanosec(),
+                      item->Metadata().end_nanosec());
+
+        current_item_ = item;
+        loading_async_ = QUrl();
+        break;
+      }
+
+      case UrlHandler::LoadResult::WillLoadAsynchronously:
+        qLog(Debug) << "URL handler for" << result.original_url_
+                    << "is loading asynchronously";
+
+        // We'll get called again later with either NoMoreTracks or
+        // TrackAvailable
+        loading_async_ = result.original_url_;
+        break;
+
+      case UrlHandler::LoadResult::Error:
+        qLog(Debug) << "URL handler error for" << result.original_url_;
+        nb_errors_received_++;
+        loading_async_ = QUrl();
+        HandleInvalidItem(result.original_url_);
+        break;
+    }
     return;
   }
 
-  if (item->Url() != result.original_url_) return;
-
-  switch (result.type_) {
-    case UrlHandler::LoadResult::NoMoreTracks:
-      qLog(Debug) << "URL handler for" << result.original_url_
-                  << "said no more tracks";
-
-      loading_async_ = QUrl();
-      NextItem(stream_change_type_);
-      break;
-
-    case UrlHandler::LoadResult::TrackAvailable: {
-      // The media URL may contain an auth token.
-      qLog(Debug) << "URL handler for" << result.original_url_ << "returned"
-                  << result.media_url_.toString(QUrl::RemoveQuery)
-                  << "(query removed)";
-
-      // If there was no length info in song's metadata, use the one provided by
-      // URL handler, if there is one
-      if (item->Metadata().length_nanosec() <= 0 &&
-          result.length_nanosec_ != -1) {
-        Song song = item->Metadata();
-        song.set_length_nanosec(result.length_nanosec_);
-        item->SetTemporaryMetadata(song);
-        app_->playlist_manager()->active()->InformOfCurrentSongChange();
+  if (result.original_url_ == preloading_async_) {
+    // Result arrived while the previous track is still playing; forward it to
+    // StartPreloading only if next_row still points to the same URL.
+    preloading_async_ = QUrl();
+    if (result.type_ == UrlHandler::LoadResult::TrackAvailable) {
+      const int next_row = app_->playlist_manager()->active()->next_row();
+      if (next_row != -1) {
+        PlaylistItemPtr next_item =
+            app_->playlist_manager()->active()->item_at(next_row);
+        if (next_item && next_item->Url() == result.original_url_) {
+          MediaPlaybackRequest req(result.original_url_, result.media_url_);
+          // Preserve auth headers for gapless playback of authenticated URLs.
+          if (!result.auth_header_.isEmpty())
+            req.headers_["Authorization"] = result.auth_header_;
+          engine_->StartPreloading(req, next_item->Metadata().has_cue(),
+                                   next_item->Metadata().beginning_nanosec(),
+                                   next_item->Metadata().end_nanosec());
+        }
       }
-      MediaPlaybackRequest req(result.original_url_, result.media_url_);
-      if (!result.auth_header_.isEmpty())
-        req.headers_["Authorization"] = result.auth_header_;
-      engine_->Play(req, stream_change_type_, item->Metadata().has_cue(),
-                    item->Metadata().beginning_nanosec(),
-                    item->Metadata().end_nanosec());
-
-      current_item_ = item;
-      loading_async_ = QUrl();
-      break;
     }
+    return;
+  }
 
-    case UrlHandler::LoadResult::WillLoadAsynchronously:
-      qLog(Debug) << "URL handler for" << result.original_url_
-                  << "is loading asynchronously";
-
-      // We'll get called again later with either NoMoreTracks or TrackAvailable
-      loading_async_ = result.original_url_;
-      break;
-
-    case UrlHandler::LoadResult::Error:
-      qLog(Debug) << "URL handler error for" << result.original_url_;
-      nb_errors_received_++;
-      loading_async_ = QUrl();
-      HandleInvalidItem(result.original_url_);
-      break;
+  if (!item) {
+    // Clear stale async state if playback stopped while loading.
+    loading_async_ = QUrl();
   }
 }
 
@@ -367,7 +402,10 @@ void Player::PlayPause() {
       // Stopping seems like a reasonable thing to do (especially on mac where
       // there
       // is no media key for stop).
-      if (current_item_->options() & PlaylistItem::PauseDisabled) {
+      // Check current_item_ since the engine can still report Playing briefly
+      // while current_item_ is cleared during transitions/stop.
+      if (current_item_ &&
+          (current_item_->options() & PlaylistItem::PauseDisabled)) {
         Stop();
       } else {
         engine_->Pause();
@@ -404,6 +442,10 @@ void Player::Stop(bool stop_after) {
   engine_->Stop(stop_after);
   app_->playlist_manager()->active()->set_current_row(-1);
   current_item_.reset();
+  // Drop in-flight async markers so late handler results won't start playback
+  // or preload after stopping.
+  loading_async_ = QUrl();
+  preloading_async_ = QUrl();
 }
 
 void Player::StopAfterCurrent() {
@@ -530,16 +572,26 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change,
   }
 
   current_item_ = app_->playlist_manager()->active()->current_item();
+  if (!current_item_) return;
   const QUrl url = current_item_->Url();
 
   if (url_handlers_.contains(url.scheme())) {
     // It's already loading
     if (url == loading_async_) return;
+    if (url == preloading_async_) {
+      // Promote the already-in-flight preload instead of calling StartLoading()
+      // twice; HandleLoadResult will start Play() when it arrives.
+      loading_async_ = url;
+      preloading_async_ = QUrl();
+      stream_change_type_ = change;
+      return;
+    }
 
     stream_change_type_ = change;
     HandleLoadResult(url_handlers_[url.scheme()]->StartLoading(url));
   } else {
     loading_async_ = QUrl();
+    preloading_async_ = QUrl();
     MediaPlaybackRequest req(current_item_->Url());
     engine_->Play(req, change, current_item_->Metadata().has_cue(),
                   current_item_->Metadata().beginning_nanosec(),
@@ -691,7 +743,10 @@ void Player::TrackAboutToEnd() {
     // If the next track is on the same album (or same cue file), and the
     // user doesn't want to crossfade between tracks on the same album, then
     // don't do this automatic crossfading.
+    // Guard current_item_ in case TrackAboutToEnd fires after Stop() or an
+    // invalid track cleared it.
     if (engine_->crossfade_same_album() || !has_next_row || !next_item ||
+        !current_item_ ||
         !current_item_->Metadata().IsOnSameAlbum(next_item->Metadata())) {
       TrackEnded();
       return;
@@ -714,11 +769,16 @@ void Player::TrackAboutToEnd() {
         return;
 
       case UrlHandler::LoadResult::WillLoadAsynchronously:
-        loading_async_ = req.RequestUrl();
+        // Track as preloading_async_ (not loading_async_) so the response can
+        // still be routed to StartPreloading while the current song plays.
+        preloading_async_ = req.RequestUrl();
         return;
 
       case UrlHandler::LoadResult::TrackAvailable:
         req.SetMediaUrl(result.media_url_);
+        // Forward auth headers so gaplessly preloaded streams authenticate.
+        if (!result.auth_header_.isEmpty())
+          req.headers_["Authorization"] = result.auth_header_;
         break;
     }
   }

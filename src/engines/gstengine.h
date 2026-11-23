@@ -196,15 +196,22 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StartTimers();
   void StopTimers();
 
-  std::shared_ptr<GstEnginePipeline> CreatePipeline();
+  // Background streams pass attach_consumers = false so ambient audio isn't
+  // routed into scope/visualiser consumers.
   std::shared_ptr<GstEnginePipeline> CreatePipeline(
-      const MediaPlaybackRequest& req, qint64 end_nanosec);
+      bool attach_consumers = true);
+  std::shared_ptr<GstEnginePipeline> CreatePipeline(
+      const MediaPlaybackRequest& req, qint64 end_nanosec,
+      bool attach_consumers = true);
 
   void UpdateScope(int chunk_length);
 
   int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
   bool IsCurrentPipeline(int id);
+  // Finishes buffering_task_id_ unconditionally (unlike BufferingFinished(),
+  // which ignores signals from non-current pipelines).
+  void FinishBufferingTask();
 
  private:
   static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec;  // 1s

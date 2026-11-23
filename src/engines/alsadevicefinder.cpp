@@ -74,7 +74,9 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
       if (result < 0) {
         qLog(Error) << "Unable to get PCM for card" << card << ":"
                     << snd_strerror(result);
-        continue;
+        // Break rather than continuing; dev isn't reset on error, which would
+        // spin forever on this card.
+        break;
       }
       if (dev < 0) break;
 
@@ -100,7 +102,7 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     }
   }
 
-  snd_config_update_free_global();
-
+  // Intentionally omit snd_config_update_free_global(): ALSA's global config
+  // cache is not thread-safe while GStreamer's alsasink is running.
   return ret;
 }
