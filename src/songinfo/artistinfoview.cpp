@@ -41,7 +41,12 @@ bool ArtistInfoView::NeedsUpdate(const Song& old_metadata,
 
 void ArtistInfoView::InfoResultReady(int id,
                                      const CollapsibleInfoPane::Data& data) {
-  if (id != current_request_id_) return;
+  if (id != current_request_id_) {
+    // Providers create contents_ unparented; normally CollapsibleInfoPane
+    // adopts it, so delete it here when discarding stale results.
+    delete data.contents_;
+    return;
+  }
 
   AddSection(new CollapsibleInfoPane(data, this));
   CollapseSections();

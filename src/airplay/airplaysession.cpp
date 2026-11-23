@@ -90,6 +90,7 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
       event_socket_(new QTcpSocket(this)),
       event_port_(0),
       event_attempts_(0),
+      event_retry_timer_(new QTimer(this)),
       stream_(nullptr),
       volume_(-1),
       have_now_playing_(false),
@@ -129,6 +130,9 @@ AirPlaySession::AirPlaySession(const Options& options, QObject* parent)
   connect(event_socket_, SIGNAL(errorOccurred(QAbstractSocket::SocketError)),
           SLOT(EventError()));
   connect(event_socket_, SIGNAL(readyRead()), SLOT(EventReadyRead()));
+  event_retry_timer_->setSingleShot(true);
+  event_retry_timer_->setInterval(1000);
+  connect(event_retry_timer_, SIGNAL(timeout()), SLOT(ConnectEventChannel()));
 }
 
 // Tears the session down even when Clementine quits: a Mac asks its user
@@ -206,6 +210,7 @@ void AirPlaySession::Close() {
   sync_timer_->stop();
   feedback_timer_->stop();
   now_playing_info_timer_->stop();
+  event_retry_timer_->stop();
   connection_->Close(teardown ? "TEARDOWN" : QByteArray());
   event_socket_->abort();
   event_cipher_.reset();
@@ -364,15 +369,24 @@ void AirPlaySession::PairM3(const QByteArray& response) {
 
   const airplay::SrpClient::Result srp =
       airplay::SrpClient().Process(Pin(), salt, b_public);
+  // SrpClient rejects degenerate receiver keys (B mod N == 0) with empty key.
+  if (srp.key.isEmpty()) {
+    Fail(tr("%1 didn't pair as AirPlay receivers do").arg(device_.name));
+    return;
+  }
   const QByteArray m3 = tlv8::Write({
       {tlv8::kSeqNo, QByteArray(1, 3)},
       {tlv8::kPublicKey, srp.public_key},
       {tlv8::kProof, srp.proof},
   });
+  // HAP M4 returns the server proof M2 = H(A || M1 || K); verify it so an
+  // unauthenticated MITM cannot skip proof of the shared SRP key.
+  const QByteArray expected_m2 =
+      airplay::Sha512(srp.public_key + srp.proof + srp.key);
   const QByteArray key = srp.key;
   connection_->Post(
       "/pair-setup", Headers(), m3,
-      [this, key](const AirPlayRtspConnection::Response& r) {
+      [this, key, expected_m2](const AirPlayRtspConnection::Response& r) {
         const tlv8::Items m4 = tlv8::Read(r.body);
         if (r.code == 200 && tlv8::Get(m4, tlv8::kError) == QByteArray(1, 2)) {
           // The PIN or password didn't match.
@@ -385,6 +399,10 @@ void AirPlaySession::PairM3(const QByteArray& response) {
         }
         if (r.code != 200 || !tlv8::Get(m4, tlv8::kError).isNull()) {
           Fail(PairingError(r.code, m4));
+          return;
+        }
+        if (tlv8::Get(m4, tlv8::kProof) != expected_m2) {
+          Fail(tr("%1 didn't prove who it is").arg(device_.name));
           return;
         }
         if (persistent()) {
@@ -584,12 +602,16 @@ bool AirPlaySession::Check(const QByteArray& what, int code) {
 }
 
 void AirPlaySession::ConnectEventChannel() {
+  event_retry_timer_->stop();
   if (state_ != State::SetUp) return;
   ++event_attempts_;
   event_socket_->connectToHost(device_.address, event_port_);
 }
 
-void AirPlaySession::EventConnected() { SetupStream(); }
+void AirPlaySession::EventConnected() {
+  event_retry_timer_->stop();
+  SetupStream();
+}
 
 void AirPlaySession::EventError() {
   if (state_ != State::SetUp) return;
@@ -600,7 +622,9 @@ void AirPlaySession::EventError() {
   }
   qLog(Debug) << "AirPlay event channel:" << event_socket_->errorString();
   event_socket_->abort();
-  QTimer::singleShot(1000, this, SLOT(ConnectEventChannel()));
+  // Use a cancellable member timer rather than singleShot() so Close() or a
+  // fresh connection cannot be hit by a stale retry callback.
+  event_retry_timer_->start();
 }
 
 // The receiver sends RTSP requests on the event channel; each gets 200 OK, as
@@ -612,10 +636,13 @@ void AirPlaySession::EventReadyRead() {
     event_socket_->abort();
     return;
   }
-  while (true) {
+  // HandleEvent() can synchronously trigger Close() (e.g. via RemoteCommand
+  // Stop), resetting event_cipher_ and state_; re-check on every frame.
+  while (event_cipher_ && state_ != State::Closed) {
     const int end = event_buffer_.indexOf("\r\n\r\n");
     if (end < 0) return;
     int length = 0;
+    bool invalid_length = false;
     QByteArray cseq;
     const QList<QByteArray> lines = event_buffer_.left(end).split('\n');
     for (const QByteArray& line : lines) {
@@ -623,12 +650,30 @@ void AirPlaySession::EventReadyRead() {
       if (colon < 0) continue;
       const QByteArray key = line.left(colon).trimmed().toLower();
       const QByteArray value = line.mid(colon + 1).trimmed();
-      if (key == "content-length") length = value.toInt();
+      if (key == "content-length") {
+        bool ok = false;
+        length = value.toInt(&ok);
+        if (!ok || length < 0) invalid_length = true;
+      }
       if (key == "cseq") cseq = value;
     }
-    if (event_buffer_.size() < end + 4 + length) return;
+    // Abort on malformed/negative Content-Length so we don't spin or misframe.
+    if (invalid_length) {
+      qLog(Warning) << "Invalid Content-Length on AirPlay event channel";
+      event_buffer_.clear();
+      event_socket_->abort();
+      return;
+    }
+    // Subtract instead of adding (end + 4 + length) to avoid signed overflow.
+    if (length > event_buffer_.size() - (end + 4)) return;
     const QByteArray body = event_buffer_.mid(end + 4, length);
     event_buffer_.remove(0, end + 4 + length);
+    // Reply before HandleEvent(), which can synchronously Close() the session
+    // and reset event_cipher_ (e.g. on a remote stop command).
+    event_socket_->write(event_cipher_->Encrypt(
+        QByteArray("RTSP/1.0 200 OK\r\nContent-Length: 0\r\n"
+                   "Audio-Latency: 0\r\nCSeq: ") +
+        cseq + "\r\n\r\n"));
     QVariant plist;
     if (body.startsWith("bplist00") && airplay::bplist::Read(body, &plist)) {
       qLog(Debug) << "AirPlay event:" << lines << plist;
@@ -636,10 +681,6 @@ void AirPlaySession::EventReadyRead() {
     } else {
       qLog(Debug) << "AirPlay event:" << lines << body.left(512);
     }
-    event_socket_->write(event_cipher_->Encrypt(
-        QByteArray("RTSP/1.0 200 OK\r\nContent-Length: 0\r\n"
-                   "Audio-Latency: 0\r\nCSeq: ") +
-        cseq + "\r\n\r\n"));
   }
 }
 
@@ -1137,6 +1178,9 @@ void AirPlaySession::PairM5(const QByteArray& srp_key) {
         options_.receiver_pairing_id = id;
         options_.receiver_public_key = public_key;
         emit PairedPersistently(id, public_key);
+        // Slots on PairedPersistently (e.g. idle UI pairing) may Close() the
+        // session synchronously; don't start PairVerify() on a closed session.
+        if (state_ == State::Closed) return;
         // Long-term keys are then used as on every later connection.
         PairVerify();
       });
@@ -1146,6 +1190,7 @@ void AirPlaySession::PairM5(const QByteArray& srp_key) {
 // key, which gives the connection's keys without a PIN (HomeKit Accessory
 // Protocol specification, "Pair Verify").
 void AirPlaySession::PairVerify() {
+  if (state_ == State::Closed) return;
   namespace tlv8 = airplay::tlv8;
   const QByteArray secret = airplay::RandomKey();
   const QByteArray our_public = airplay::X25519PublicKey(secret);

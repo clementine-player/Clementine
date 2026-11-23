@@ -97,6 +97,8 @@ void GlobalSearch::DoSearchAsync(int id, const QString& query) {
   int timer_id = -1;
 
   if (url_provider_->LooksLikeUrl(query)) {
+    // SearchFinishedSlot decrements this count to detect completion.
+    pending_search_providers_[id]++;
     url_provider_->SearchAsync(id, query);
   } else {
     for (SearchProvider* provider : providers_.keys()) {
@@ -119,6 +121,8 @@ void GlobalSearch::DoSearchAsync(int id, const QString& query) {
 }
 
 void GlobalSearch::CancelSearch(int id) {
+  // Drop tracking so late provider completions do not emit SearchFinished.
+  pending_search_providers_.remove(id);
   QMap<int, DelayedSearch>::iterator it;
   for (it = delayed_searches_.begin(); it != delayed_searches_.end(); ++it) {
     if (it.value().id_ == id) {
@@ -132,10 +136,16 @@ void GlobalSearch::CancelSearch(int id) {
 void GlobalSearch::timerEvent(QTimerEvent* e) {
   QMap<int, DelayedSearch>::iterator it = delayed_searches_.find(e->timerId());
   if (it != delayed_searches_.end()) {
-    for (SearchProvider* provider : it.value().providers_) {
-      provider->SearchAsync(it.value().id_, it.value().query_);
-    }
+    // startTimer() is repeating; kill it and pop the entry before invoking
+    // SearchAsync(), which may re-enter or destroy providers mid-loop.
+    killTimer(e->timerId());
+    DelayedSearch search = it.value();
     delayed_searches_.erase(it);
+    for (SearchProvider* provider : search.providers_) {
+      if (providers_.contains(provider) || provider == url_provider_) {
+        provider->SearchAsync(search.id_, search.query_);
+      }
+    }
     return;
   }
 
@@ -185,6 +195,18 @@ void GlobalSearch::SearchFinishedSlot(int id) {
 
 void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
   SearchProvider* provider = static_cast<SearchProvider*>(object);
+  // Scrub the destroyed pointer from queued delayed searches before timerEvent
+  // can dereference it.
+  for (auto it = delayed_searches_.begin(); it != delayed_searches_.end();) {
+    it->providers_.removeAll(provider);
+    if (it->providers_.isEmpty()) {
+      killTimer(it.key());
+      it = delayed_searches_.erase(it);
+    } else {
+      ++it;
+    }
+  }
+
   if (!providers_.contains(provider)) return;
 
   providers_.remove(provider);
@@ -207,9 +229,15 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
 
   pending_art_searches_[id] = result.pixmap_cache_key_;
 
-  if (providers_.contains(result.provider_) &&
-      !is_provider_usable(result.provider_)) {
+  // Guard against a null/destroyed provider and clean up pending_art_searches_
+  // on early return.
+  if (!result.provider_ ||
+      (!providers_.contains(result.provider_) &&
+       result.provider_ != url_provider_) ||
+      (providers_.contains(result.provider_) &&
+       !is_provider_usable(result.provider_))) {
     emit ArtLoaded(id, QPixmap());
+    pending_art_searches_.remove(id);
     return id;
   }
 
@@ -288,6 +316,11 @@ MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
   }
 
   SearchProvider* first_provider = results[0].provider_;
+  // Guard against a null or already-destroyed provider.
+  if (!first_provider || (!providers_.contains(first_provider) &&
+                          first_provider != url_provider_)) {
+    return nullptr;
+  }
   SearchProvider::ResultList results_copy;
   for (const SearchProvider::Result& result : results) {
     if (result.provider_ == first_provider) {
@@ -295,7 +328,8 @@ MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
     }
   }
 
-  return first_provider->LoadTracks(results);
+  // Pass only first_provider's items rather than mixed-provider results.
+  return first_provider->LoadTracks(results_copy);
 }
 
 bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,

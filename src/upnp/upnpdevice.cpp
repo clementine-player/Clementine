@@ -80,7 +80,8 @@ QString StripUuid(const QString& udn) {
 
 }  // namespace
 
-bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
+bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location,
+                                  const QHostAddress& fallback_address) {
   QList<DescribedDevice> open;
   QList<DescribedDevice> devices;
   QString url_base;
@@ -163,7 +164,14 @@ bool UpnpDevice::ParseDescription(const QByteArray& xml, const QUrl& location) {
                                            : renderer->friendly_name;
   model = renderer->model.isEmpty() ? root.model : renderer->model;
   dlna = renderer->dlna || root.dlna;
+  // QHostAddress(QString) only parses IP literals; when LOCATION uses a
+  // hostname, fall back to the SSDP/DNS address so reachability and HTTP
+  // peer checks have a concrete IP.
   address = QHostAddress(location.host());
+  if (address.isNull() && !fallback_address.isNull()) {
+    address = fallback_address;
+  }
+  if (address.isNull()) return false;
   av_transport = new_av_transport;
   rendering_control = resolved(renderer->Find("RenderingControl"));
   connection_manager = resolved(renderer->Find("ConnectionManager"));

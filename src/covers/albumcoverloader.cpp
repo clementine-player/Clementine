@@ -168,10 +168,11 @@ void AlbumCoverLoader::NextState(Task* task) {
 
 AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     const Task& task) {
-  // An image embedded in the song itself takes priority
+  // An image embedded in the song itself takes priority. Return it unscaled:
+  // ProcessTask() applies ScaleAndPad() once and forwards the raw original via
+  // the 3-argument ImageLoaded signal.
   if (!task.embedded_image.isNull())
-    return TryLoadResult(false, true,
-                         ScaleAndPad(task.options, task.embedded_image));
+    return TryLoadResult(false, true, task.embedded_image);
 
   QString filename;
   switch (task.state) {
@@ -191,9 +192,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
         TagReaderClient::Instance()->LoadEmbeddedArtBlocking(
             task.song_filename);
 
-    if (!taglib_image.isNull())
-      return TryLoadResult(false, true,
-                           ScaleAndPad(task.options, taglib_image));
+    // Leave unscaled; ProcessTask() applies ScaleAndPad() (see above).
+    if (!taglib_image.isNull()) return TryLoadResult(false, true, taglib_image);
   }
 
   if (filename.toLower().startsWith("http://") ||
@@ -227,10 +227,14 @@ void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
       reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (redirect.isValid()) {
     if (++task.redirects > kMaxRedirects) {
+      // Advance state so the task falls back or emits the default cover
+      // instead of dropping the request without emitting ImageLoaded.
+      NextState(&task);
       return;  // Give up.
     }
     QNetworkRequest request = reply->request();
-    request.setUrl(redirect.toUrl());
+    // Resolve against reply->url() so relative Location redirects work.
+    request.setUrl(reply->url().resolved(redirect.toUrl()));
     QNetworkReply* redirected_reply = network_->get(request);
     NewClosure(redirected_reply, &QNetworkReply::finished, this,
                &AlbumCoverLoader::RemoteFetchFinished, redirected_reply);

@@ -27,16 +27,26 @@ StreamDiscoverer::StreamDiscoverer() : QObject(nullptr) {
 }
 
 StreamDiscoverer::~StreamDiscoverer() {
-  gst_discoverer_stop(discoverer_);
-  g_object_unref(discoverer_);
+  if (discoverer_) {
+    gst_discoverer_stop(discoverer_);
+    g_object_unref(discoverer_);
+    discoverer_ = nullptr;
+  }
 }
 
 void StreamDiscoverer::Discover(const QString& url) {
+  // Always emit Error() on failure so callers waiting for DataReady/Error do
+  // not hang indefinitely.
+  if (!discoverer_) {
+    emit Error(tr("Stream discoverer failed to initialise"));
+    return;
+  }
   // Adding the request to discover the url given as a parameter:
   qLog(Debug) << "Discover" << url;
   if (!gst_discoverer_discover_uri_async(discoverer_,
                                          url.toStdString().c_str())) {
     qLog(Error) << "Failed to start discovering" << url;
+    emit Error(tr("Failed to start discovering %1").arg(url));
     return;
   }
   WaitForSignal(this, SIGNAL(DiscoverFinished()));
@@ -46,8 +56,15 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
                                     GstDiscovererInfo* info, GError* err,
                                     gpointer self) {
   StreamDiscoverer* instance = reinterpret_cast<StreamDiscoverer*>(self);
+  // GStreamer may invoke "discovered" with a null info, URI, or stream caps
+  // on certain discovery failures.
+  if (!info) {
+    emit instance->Error(tr("Failed to discover stream"));
+    return;
+  }
 
-  QString discovered_url(gst_discoverer_info_get_uri(info));
+  const gchar* raw_uri = gst_discoverer_info_get_uri(info);
+  QString discovered_url = raw_uri ? QString::fromUtf8(raw_uri) : QString();
 
   GstDiscovererResult result = gst_discoverer_info_get_result(info);
   if (result != GST_DISCOVERER_OK) {
@@ -83,12 +100,12 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
     GstCaps* stream_caps =
         gst_discoverer_stream_info_get_caps(stream_audio_info);
     gchar* decoder_description =
-        gst_pb_utils_get_codec_description(stream_caps);
-    stream_details.format = (decoder_description == NULL)
+        stream_caps ? gst_pb_utils_get_codec_description(stream_caps) : nullptr;
+    stream_details.format = (decoder_description == nullptr)
                                 ? QString(tr("Unknown"))
-                                : QString(decoder_description);
+                                : QString::fromUtf8(decoder_description);
 
-    gst_caps_unref(stream_caps);
+    if (stream_caps) gst_caps_unref(stream_caps);
     g_free(decoder_description);
 
     emit instance->DataReady(stream_details);
@@ -98,7 +115,9 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
         tr("Could not detect an audio stream in %1").arg(discovered_url));
   }
 
-  gst_discoverer_stream_info_list_free(audio_streams);
+  if (audio_streams) {
+    gst_discoverer_stream_info_list_free(audio_streams);
+  }
 }
 
 void StreamDiscoverer::OnFinished(GstDiscoverer* discoverer, gpointer self) {

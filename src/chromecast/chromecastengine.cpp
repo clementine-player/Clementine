@@ -101,7 +101,12 @@ void ChromecastEngine::SetDevice(const CastDevice& device) {
 
   // The token is only for the old address, and the connection's to it.
   PublishItems();
-  if (channel_.is_open()) channel_.Close();
+  if (channel_.is_open()) {
+    // CastChannel::Close() does not emit Closed(), so reset player_ here to
+    // clear the previous device's transport_id_ and session state.
+    channel_.Close();
+    player_.Reset();
+  }
 }
 
 void ChromecastEngine::PublishItems() {
@@ -206,7 +211,11 @@ void ChromecastEngine::SendLoad(qint64 start_ms, bool playing) {
         registry_->ReachFor(device_.address), device_.name);
     qLog(Warning) << message;
     current_sent_ = false;
-    QTimer::singleShot(0, this, [this, message]() {
+    // Guard with item_id in case another Load() or Stop() changes current_
+    // before the queued callback runs.
+    const int item_id = current_.id;
+    QTimer::singleShot(0, this, [this, item_id, message]() {
+      if (current_.id != item_id) return;
       emit Error(message);
       emit DeviceFailed();
     });
@@ -260,8 +269,12 @@ bool ChromecastEngine::Load(const MediaPlaybackRequest& req,
   if (current_.plan.mode == StreamPlan::Unplayable) {
     const QString message = tr("%1 can't play this track: %2")
                                 .arg(device_.name, current_.plan.reason);
-    // Let the caller finish before the Player skips to the next track.
-    QTimer::singleShot(0, this, [this, message]() { FailItem(message); });
+    const int item_id = current_.id;
+    // Let the caller finish before the Player skips to the next track; check
+    // item_id in case a newer Load() or Stop() replaces current_ first.
+    QTimer::singleShot(0, this, [this, item_id, message]() {
+      if (current_.id == item_id) FailItem(message);
+    });
     return false;
   }
   return true;

@@ -82,8 +82,10 @@ struct UpnpDevice {
 
   // Fills in everything but the caps from a device description fetched from
   // |location|. Returns false if it doesn't describe a MediaRenderer with an
-  // AVTransport.
-  bool ParseDescription(const QByteArray& xml, const QUrl& location);
+  // AVTransport. If |location| has a hostname rather than an IP address,
+  // |fallback_address| (or DNS resolution) provides the device's address.
+  bool ParseDescription(const QByteArray& xml, const QUrl& location,
+                        const QHostAddress& fallback_address = QHostAddress());
   // Fills in the caps from GetProtocolInfo's Sink: protocolInfo entries
   // separated by commas, eg. "http-get:*:audio/mpeg:*,...". Only those over
   // HTTP, in formats the planner knows, are used, but any video format over
@@ -103,6 +105,8 @@ struct UpnpSsdpResponse {
   // The MediaRenderer's UDN, from the USN, without "uuid:".
   QString id;
   QUrl location;
+  // Source IP of the SSDP packet; fallback if |location| has a hostname.
+  QHostAddress sender_address;
 
   // Returns false if |datagram| isn't a MediaRenderer's response.
   bool Parse(const QByteArray& datagram);

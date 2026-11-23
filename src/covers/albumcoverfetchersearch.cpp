@@ -175,6 +175,8 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
 void AlbumCoverFetcherSearch::ProviderCoverFetchFinished(
     RedirectFollower* reply) {
   reply->deleteLater();
+  // Ignore replies already removed by Cancel() or a duplicate finished signal.
+  if (!pending_image_loads_.contains(reply)) return;
   const QString provider = pending_image_loads_.take(reply);
 
   statistics_.bytes_transferred_ += reply->bytesAvailable();
@@ -226,9 +228,10 @@ float AlbumCoverFetcherSearch::ScoreImage(const QImage& image) const {
       std::sqrt(static_cast<float>(image.width() * image.height())) /
       kTargetSize;
 
-  // A 1:1 image scores 1.0, anything else scores less
+  // A 1:1 image scores 1.0, anything else scores less (use std::abs so wide
+  // landscape images do not get a negative penalty and score above 1.0).
   const float aspect_score =
-      1.0 - static_cast<float>(image.height() - image.width()) /
+      1.0 - static_cast<float>(std::abs(image.height() - image.width())) /
                 std::max(image.height(), image.width());
 
   return size_score + aspect_score;

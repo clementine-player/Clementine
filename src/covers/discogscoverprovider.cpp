@@ -65,10 +65,24 @@ bool DiscogsCoverProvider::StartSearch(const QString& artist,
 
 void DiscogsCoverProvider::CancelSearch(int id) {
   delete requests_search_.take(id);
+  // Also drop pending release contexts for this search so late replies no-op
+  // and nothing leaks if replies never complete.
+  for (auto it = requests_release_.begin(); it != requests_release_.end();) {
+    if (it.key().first == id) {
+      delete it.value();
+      it = requests_release_.erase(it);
+    } else {
+      ++it;
+    }
+  }
 }
 
 bool DiscogsCoverProvider::StartRelease(DiscogsCoverSearchContext* s_ctx,
                                         int r_id, QString resource_url) {
+  // Deduplicate within the same search so r_count stays balanced.
+  const QPair<int, int> release_key(s_ctx->id, r_id);
+  if (requests_release_.contains(release_key)) return false;
+
   DiscogsCoverReleaseContext* r_ctx = new DiscogsCoverReleaseContext;
 
   s_ctx->r_count++;
@@ -78,7 +92,7 @@ bool DiscogsCoverProvider::StartRelease(DiscogsCoverSearchContext* s_ctx,
 
   r_ctx->s_id = s_ctx->id;
 
-  requests_release_.insert(r_id, r_ctx);
+  requests_release_.insert(release_key, r_ctx);
   SendReleaseRequest(s_ctx, r_ctx);
 
   return true;
@@ -229,8 +243,9 @@ void DiscogsCoverProvider::HandleReleaseReply(QNetworkReply* reply, int s_id,
                                               int r_id) {
   reply->deleteLater();
 
-  if (!requests_release_.contains(r_id)) return;
-  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(r_id);
+  const QPair<int, int> release_key(s_id, r_id);
+  if (!requests_release_.contains(release_key)) return;
+  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(release_key);
 
   if (!requests_search_.contains(s_id)) {
     EndSearch(r_ctx);
@@ -289,8 +304,9 @@ void DiscogsCoverProvider::SearchRequestError(QNetworkReply::NetworkError error,
 void DiscogsCoverProvider::ReleaseRequestError(
     QNetworkReply::NetworkError error, QNetworkReply* reply, int s_id,
     int r_id) {
-  if (!requests_release_.contains(r_id)) return;
-  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(r_id);
+  const QPair<int, int> release_key(s_id, r_id);
+  if (!requests_release_.contains(release_key)) return;
+  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(release_key);
 
   if (!requests_search_.contains(s_id)) {
     EndSearch(r_ctx);
@@ -302,7 +318,7 @@ void DiscogsCoverProvider::ReleaseRequestError(
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* s_ctx,
                                      DiscogsCoverReleaseContext* r_ctx) {
-  delete requests_release_.take(r_ctx->id);
+  delete requests_release_.take(QPair<int, int>(r_ctx->s_id, r_ctx->id));
 
   s_ctx->r_count--;
 
@@ -316,5 +332,5 @@ void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* s_ctx) {
 }
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverReleaseContext* r_ctx) {
-  delete requests_release_.take(r_ctx->id);
+  delete requests_release_.take(QPair<int, int>(r_ctx->s_id, r_ctx->id));
 }
