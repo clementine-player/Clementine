@@ -129,9 +129,10 @@ QMetaObject::Connection NewClosure(Sender* sender,
 //     -> Loaded(SongList, int)
 //
 // A QFuture<void> has no result to report, so those receivers take only the
-// bound arguments. To reach the future itself - to check whether it was
-// cancelled, or to read more than its first result - use the callable
-// overload and capture it in a lambda.
+// bound arguments. A future that finishes without a result, such as one
+// cancelled before its task reported it, calls nothing. To reach the future
+// itself - to check whether it was cancelled, or to read more than its first
+// result - use the callable overload and capture it in a lambda.
 template <typename T, typename Receiver, typename Slot, typename... BoundArgs>
   requires std::is_member_function_pointer_v<Slot>
 QMetaObject::Connection NewClosure(QFuture<T> future, Receiver* receiver,
@@ -155,7 +156,7 @@ QMetaObject::Connection NewClosure(QFuture<T> future, Receiver* receiver,
       [receiver, slot, future, bound...]() {
         if constexpr (std::is_void_v<T>) {
           (receiver->*slot)(bound...);
-        } else {
+        } else if (future.resultCount() > 0) {
           (receiver->*slot)(future.result(), bound...);
         }
       },
@@ -176,7 +177,7 @@ QMetaObject::Connection NewClosure(QFuture<T> future, QObject* context,
       [func, future, bound...]() {
         if constexpr (std::is_void_v<T>) {
           func(bound...);
-        } else {
+        } else if (future.resultCount() > 0) {
           func(future.result(), bound...);
         }
       },

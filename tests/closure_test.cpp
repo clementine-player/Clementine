@@ -5,6 +5,7 @@
 #include <QDeadlineTimer>
 #include <QEventLoop>
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QPromise>
 #include <QString>
 #include <QThread>
@@ -185,6 +186,35 @@ TEST(ClosureTest, PassesFutureResultBeforeBoundArguments) {
   SpinUntil(done);
   EXPECT_EQ(42, receiver.number());
   EXPECT_EQ("bound", receiver.text());
+}
+
+// A future cancelled before it reported a result has none to pass on, so
+// neither the receiver nor the callable is called.
+TEST(ClosureTest, CancelledFutureWithoutResultCallsNothing) {
+  TestQObject receiver;
+  QPromise<int> promise;
+  QFuture<int> future = promise.future();
+
+  bool called = false;
+  NewClosure(future, &receiver, [&called](int) { called = true; });
+  NewClosure(future, &receiver, &TestQObject::InvokeWithArgs, QString("bound"));
+
+  // Watches the same future, set up after the closures: its finished signal
+  // is delivered after theirs.
+  QFutureWatcher<int> watcher;
+  bool finished = false;
+  QObject::connect(&watcher, &QFutureWatcherBase::finished,
+                   [&finished]() { finished = true; });
+  watcher.setFuture(future);
+
+  promise.start();
+  future.cancel();
+  promise.finish();
+
+  SpinUntil(finished);
+  ASSERT_TRUE(finished);
+  EXPECT_FALSE(called);
+  EXPECT_EQ(0, receiver.invoked());
 }
 
 TEST(ClosureTest, VoidFuturePassesOnlyBoundArguments) {
