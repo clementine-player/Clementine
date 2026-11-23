@@ -88,8 +88,12 @@ class SeafileTree : public QObject {
     TreeItem(const Entry& entry = Entry(),
              const QList<TreeItem*>& children = QList<TreeItem*>())
         : entry_(entry), children_(children) {}
-    TreeItem(const TreeItem& copy)
-        : entry_(copy.entry()), children_(copy.children()) {}
+    TreeItem(const TreeItem& copy) : entry_(copy.entry()) {
+      // Deep-copy children so ~TreeItem()'s qDeleteAll() cannot double-free.
+      for (const TreeItem* child : copy.children()) {
+        children_.append(new TreeItem(*child));
+      }
+    }
     ~TreeItem();
 
     TreeItem* child(int i) const;

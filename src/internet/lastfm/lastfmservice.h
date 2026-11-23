@@ -94,6 +94,7 @@ class LastFMService : public Scrobbler {
  private:
   LastFmTrack last_track_;
   bool already_cached_to_scrobble_{false};
+  bool scrobbling_in_flight_{false};
 
   bool scrobbling_enabled_;
   bool buttons_visible_;

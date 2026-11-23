@@ -28,7 +28,10 @@ SubsonicUrlHandler::SubsonicUrlHandler(SubsonicService* service,
     : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
-  if (service_->login_state() != SubsonicService::LoginState_Loggedin)
+  // subsonic://cover?... URIs are resolved by AlbumCoverLoader, not
+  // playable audio streams.
+  if (url.host() == "cover" ||
+      service_->login_state() != SubsonicService::LoginState_Loggedin)
     return LoadResult(url, LoadResult::Error);
 
   QUrlQuery id(url.query());

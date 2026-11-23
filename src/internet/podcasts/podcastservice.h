@@ -21,6 +21,7 @@
 #ifndef INTERNET_PODCASTS_PODCASTSERVICE_H_
 #define INTERNET_PODCASTS_PODCASTSERVICE_H_
 
+#include <QFuture>
 #include <QScopedPointer>
 #include <memory>
 
@@ -168,6 +169,7 @@ class PodcastService : public InternetService {
 
   std::unique_ptr<AddPodcastDialog> add_podcast_dialog_;
   std::unique_ptr<PodcastInfoDialog> podcast_info_dialog_;
+  QList<QFuture<void>> pending_listened_futures_;
 };
 
 #endif  // INTERNET_PODCASTS_PODCASTSERVICE_H_

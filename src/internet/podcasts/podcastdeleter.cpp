@@ -23,6 +23,7 @@
 #include <QNetworkReply>
 #include <QSettings>
 #include <QTimer>
+#include <limits>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -103,10 +104,14 @@ void PodcastDeleter::AutoDelete() {
 
   timeout_ms = QDateTime::currentDateTime().toMSecsSinceEpoch();
   timeout_ms -= oldest_episode_time.toMSecsSinceEpoch();
-  timeout_ms = (delete_after_secs_ * kMsecPerSec) - timeout_ms;
+  // Multiply in qint64 (25+ day settings overflow 32-bit int) and clamp to
+  // INT_MAX for QTimer::setInterval(int); AutoDelete re-arms when it fires.
+  timeout_ms =
+      (static_cast<qint64>(delete_after_secs_) * kMsecPerSec) - timeout_ms;
   qLog(Info) << "Timeout for autodelete set to:" << timeout_ms << "ms";
   if (timeout_ms >= 0) {
-    auto_delete_timer_->setInterval(timeout_ms);
+    auto_delete_timer_->setInterval(static_cast<int>(
+        qMin<qint64>(timeout_ms, std::numeric_limits<int>::max())));
   } else {
     auto_delete_timer_->setInterval(kAutoDeleteCheckIntervalMsec);
   }

@@ -263,6 +263,8 @@ void LastFMService::CacheSong(int scrobble_point) {
 
 void LastFMService::Scrobble() {
   if (!IsAuthenticated() || !IsScrobblingEnabled()) return;
+  // Prevent overlapping batches from double-submitting cached tracks.
+  if (scrobbling_in_flight_) return;
 
   LastFmScrobbleCache cache(LastFmWs::username);
   qLog(Debug) << "There are" << cache.tracks().count()
@@ -296,6 +298,7 @@ void LastFMService::Scrobble() {
         track.source == LastFmTrack::Player ? "1" : "0";
   }
 
+  scrobbling_in_flight_ = true;
   QNetworkReply* reply = LastFmWs::Post(params);
   NewClosure(reply, &QNetworkReply::finished, this,
              &LastFMService::ScrobbleReplyFinished, reply, batch_size);
@@ -304,18 +307,28 @@ void LastFMService::Scrobble() {
 void LastFMService::ScrobbleReplyFinished(QNetworkReply* reply,
                                           int submitted_count) {
   reply->deleteLater();
+  scrobbling_in_flight_ = false;
 
   LastFmXmlQuery lfm;
   if (lfm.Parse(reply->readAll())) {
-    LastFmScrobbleCache(LastFmWs::username).RemoveFirst(submitted_count);
+    LastFmScrobbleCache cache(LastFmWs::username);
+    cache.RemoveFirst(submitted_count);
     emit ScrobbleSubmitted();
+    // Continue draining if > 50 tracks or new tracks arrived mid-flight.
+    if (!cache.isEmpty()) {
+      Scrobble();
+    }
   } else {
     emit ScrobbleError(-1);
   }
 }
 
 void LastFMService::Love() {
-  if (!IsAuthenticated()) ShowConfig();
+  if (!IsAuthenticated()) {
+    ShowConfig();
+    // Avoid sending an unauthenticated request while configuring.
+    return;
+  }
 
   QMap<QString, QString> params;
   params["method"] = "track.love";
@@ -326,7 +339,11 @@ void LastFMService::Love() {
 }
 
 void LastFMService::Ban() {
-  if (!IsAuthenticated()) ShowConfig();
+  if (!IsAuthenticated()) {
+    ShowConfig();
+    // Avoid sending an unauthenticated request while configuring.
+    return;
+  }
 
   QMap<QString, QString> params;
   params["method"] = "track.ban";

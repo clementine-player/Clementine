@@ -22,6 +22,7 @@
 #include <QDesktopServices>
 #include <QEventLoop>
 #include <QMenu>
+#include <QPointer>
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
 #include <QUrlQuery>
@@ -330,8 +331,11 @@ void GoogleDriveService::ConnectFinished(
   // Save the refresh token
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("refresh_token", response->refresh_token());
-  s.setValue("scope_version", kScopeVersion);
+  // Refresh responses omit refresh_token; keep the previously saved token.
+  if (!response->refresh_token().isEmpty()) {
+    s.setValue("refresh_token", response->refresh_token());
+    s.setValue("scope_version", kScopeVersion);
+  }
 
   if (!response->user_email().isEmpty()) {
     // We only fetch the user's email address the first time we authenticate.
@@ -339,6 +343,11 @@ void GoogleDriveService::ConnectFinished(
   }
 
   emit Connected();
+
+  // Skip syncing if auth or refresh failed (Connected() already unblocked).
+  if (!client_->is_authenticated()) {
+    return;
+  }
 
   // Find all the changes since the last check.
   CheckForUpdates();
@@ -356,9 +365,13 @@ void GoogleDriveService::EnsureConnected() {
     return;
   }
 
+  QPointer<GoogleDriveService> guard(this);
   QEventLoop loop;
   connect(client_, SIGNAL(Authenticated()), &loop, SLOT(quit()));
   Connect();
+  // Connect() can destroy |this| or emit Authenticated() synchronously before
+  // loop.exec() starts (entering loop.exec() afterwards would hang forever).
+  if (!guard || client_->is_authenticated()) return;
   loop.exec();
 }
 
@@ -408,12 +421,20 @@ void GoogleDriveService::FilesDeleted(const QList<QUrl>& files) {
 }
 
 QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
+  // Guard |this| across both nested event loops in case teardown happens.
+  QPointer<GoogleDriveService> guard(this);
   EnsureConnected();
+  if (!guard || !client_->is_authenticated()) {
+    return QUrl();
+  }
   QScopedPointer<google_drive::GetFileResponse> response(client_->GetFile(id));
 
   QEventLoop loop;
   connect(response.data(), SIGNAL(Finished()), &loop, SLOT(quit()));
   loop.exec();
+  if (!guard) {
+    return QUrl();
+  }
 
   if (response->had_error()) {
     app_->AddError(tr("Could not find Google Drive file."));
@@ -469,8 +490,10 @@ void GoogleDriveService::OpenWithDrive() {
 
   // Ask the library for the songs for these indexes.
   for (const Song& song : library_model_->GetChildSongs(library_indexes)) {
-    QDesktopServices::openUrl(
-        QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
+    // URLs are stored as googledrive:/<id>; strip the leading '/' for Drive.
+    QString file_id = song.url().path();
+    if (file_id.startsWith('/')) file_id.remove(0, 1);
+    QDesktopServices::openUrl(QUrl(QString(kDriveEditFileUrl).arg(file_id)));
   }
 }
 

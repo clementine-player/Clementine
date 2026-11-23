@@ -98,16 +98,18 @@ void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   // otherwise corrupt a later split(',') on this value.
   picked_file_ids_ =
       request_query.queryItemValue("picked_file_ids", QUrl::FullyDecoded);
-  RequestAccessToken(request_query.queryItemValue("code").toUtf8(), url);
-}
-
-QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
-  QList<QByteArray> split = request.split('\r');
-  const QByteArray& request_line = split[0];
-  QByteArray path = request_line.split(' ')[1];
-  QByteArray code = path.split('=')[1];
-
-  return code;
+  const QByteArray code = request_query.queryItemValue("code").toUtf8();
+  // Clear stale tokens and unblock WaitForSignal callers if authorization
+  // failed or the callback omitted the code.
+  if (code.isEmpty() || request_query.hasQueryItem("error")) {
+    qLog(Error) << "OAuth redirect missing authorisation code:"
+                << request_query.queryItemValue("error");
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    emit Finished();
+    return;
+  }
+  RequestAccessToken(code, url);
 }
 
 void OAuthenticator::RequestAccessToken(const QByteArray& code,
@@ -129,7 +131,6 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
         p.first, QString(QUrl::toPercentEncoding(p.second))));
   }
   QString post_data = params.join("&");
-  qLog(Debug) << post_data;
 
   QNetworkRequest request = QNetworkRequest(QUrl(token_endpoint_));
   request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -147,6 +148,11 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
     qLog(Error) << "Failed to get access token" << reply->readAll();
+    // Always clear tokens and emit Finished() so WaitForSignal callers do
+    // not hang when token exchange fails.
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    emit Finished();
     return;
   }
 
@@ -156,6 +162,9 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
 
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to parse oauth reply";
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    emit Finished();
     return;
   }
 
@@ -195,6 +204,11 @@ void OAuthenticator::RefreshAuthorisation(const QString& token_endpoint,
 }
 
 void OAuthenticator::SetExpiryTime(int expires_in_seconds) {
+  // An empty token or non-positive TTL cannot yield a valid expiry time.
+  if (access_token_.isEmpty() || expires_in_seconds <= 0) {
+    expiry_time_ = QDateTime();
+    return;
+  }
   // Set the expiry time with two minutes' grace.
   expiry_time_ = QDateTime::currentDateTime().addSecs(expires_in_seconds - 120);
   qLog(Debug) << "Current oauth access token expires at:" << expiry_time_;
@@ -203,7 +217,28 @@ void OAuthenticator::SetExpiryTime(int expires_in_seconds) {
 void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJsonObject json_result = QJsonDocument::fromJson(reply->readAll()).object();
+  // Always clear tokens and emit Finished() so WaitForSignal callers do not
+  // hang when token refresh fails.
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
+    qLog(Error) << "Failed to refresh access token" << reply->readAll();
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    emit Finished();
+    return;
+  }
+
+  QJsonParseError error;
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
+    qLog(Error) << "Failed to parse oauth refresh reply";
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    emit Finished();
+    return;
+  }
+
+  QJsonObject json_result = json_document.object();
 
   access_token_ = json_result["access_token"].toString();
   if (json_result.contains("refresh_token")) {

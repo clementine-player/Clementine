@@ -68,7 +68,9 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
       new IcecastSearchProvider(backend_, app_, this));
 }
 
-IcecastService::~IcecastService() {}
+// filter_ starts unparented and is reparented by InternetViewContainer if
+// opened; QPointer clears if the sidebar destroys it first.
+IcecastService::~IcecastService() { delete filter_.data(); }
 
 QStandardItem* IcecastService::CreateRootItem() {
   root_ = new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm),
@@ -129,8 +131,13 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
     return;
   }
 
+  // Drain and dispose of the QNetworkReply on the main thread before
+  // parsing off-thread; QNetworkReply is not thread-safe.
+  const QByteArray data = reply->readAll();
+  reply->deleteLater();
+
   QFuture<IcecastBackend::StationList> future =
-      QtConcurrent::run(&IcecastService::ParseDirectory, this, reply);
+      QtConcurrent::run(&IcecastService::ParseDirectory, data);
   NewClosure(future, this, &IcecastService::ParseDirectoryFinished, task_id);
 }
 
@@ -228,9 +235,10 @@ void IcecastService::ParseDirectoryFinished(
   app_->task_manager()->SetTaskFinished(task_id);
 }
 
+// Static so background XML parsing never touches |this| off the main thread.
 IcecastBackend::StationList IcecastService::ParseDirectory(
-    QIODevice* device) const {
-  QXmlStreamReader reader(device);
+    const QByteArray& data) {
+  QXmlStreamReader reader(data);
   IcecastBackend::StationList stations;
   while (!reader.atEnd()) {
     reader.readNext();
@@ -239,12 +247,10 @@ IcecastBackend::StationList IcecastService::ParseDirectory(
       stations << ReadStation(&reader);
     }
   }
-  device->deleteLater();
   return stations;
 }
 
-IcecastBackend::Station IcecastService::ReadStation(
-    QXmlStreamReader* reader) const {
+IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader) {
   IcecastBackend::Station station;
   while (!reader->atEnd()) {
     reader->readNext();
@@ -262,8 +268,11 @@ IcecastBackend::Station IcecastService::ReadStation(
       if (name == QLatin1String("channels")) station.channels = value.toInt();
       if (name == QLatin1String("samplerate"))
         station.samplerate = value.toInt();
-      if (name == QLatin1String("genre"))
-        station.genre = FilterGenres(value.split(' ', Qt::SkipEmptyParts))[0];
+      if (name == QLatin1String("genre")) {
+        const QStringList filtered =
+            FilterGenres(value.split(' ', Qt::SkipEmptyParts));
+        if (!filtered.isEmpty()) station.genre = filtered[0];
+      }
     }
   }
 

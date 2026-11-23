@@ -57,14 +57,7 @@
       <item row="0" column="1" colspan="3">
        <widget class="QLineEdit" name="server"/>
       </item>
-      <item row="3" column="1">
-       <widget class="QCheckBox" name="usesslv3">
-        <property name="text">
-         <string>Use SSLv3</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
+      <item row="3" column="1" colspan="2">
        <widget class="QCheckBox" name="verifycert">
         <property name="text">
          <string>Verify Server certificate</string>
@@ -111,7 +104,7 @@
   <tabstop>server</tabstop>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
-  <tabstop>usesslv3</tabstop>
+  <tabstop>verifycert</tabstop>
   <tabstop>login</tabstop>
  </tabstops>
  <resources/>

@@ -46,7 +46,7 @@ class LocalRedirectServer : public QObject {
 
  private slots:
   void NewConnection();
-  void ReadyRead(QTcpSocket* socket, QByteArray buffer);
+  void ReadyRead(QTcpSocket* socket);
 
  private:
   void WriteTemplate(QTcpSocket* socket) const;
@@ -56,6 +56,7 @@ class LocalRedirectServer : public QObject {
   QTcpServer* server_;
   QUrl url_;
   QUrl request_url_;
+  QByteArray buffer_;
 };
 
 #endif  // INTERNET_CORE_LOCALREDIRECTSERVER_H_

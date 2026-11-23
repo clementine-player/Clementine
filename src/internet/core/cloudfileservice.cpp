@@ -117,8 +117,10 @@ void CloudFileService::ShowCoverManager() {
 }
 
 void CloudFileService::AddToPlaylist(QMimeData* mime) {
-  playlist_manager_->current()->dropMimeData(mime, Qt::CopyAction, -1, 0,
-                                             QModelIndex());
+  // No current playlist may exist if the user has closed all playlists.
+  if (Playlist* playlist = playlist_manager_->current()) {
+    playlist->dropMimeData(mime, Qt::CopyAction, -1, 0, QModelIndex());
+  }
 }
 
 void CloudFileService::ShowConfig() {
@@ -190,7 +192,8 @@ void CloudFileService::ReadTagsFinished(bool success,
 
   const cpb::tagreader::ReadCloudFileResponse& message =
       reply->message().read_cloud_file_response();
-  if (!message.has_metadata() || !message.metadata().filesize()) {
+  // Verify RPC success explicitly; failed replies can still hold metadata.
+  if (!success || !message.has_metadata() || !message.metadata().filesize()) {
     qLog(Debug) << "Failed to tag:" << metadata.url();
     return;
   }
@@ -219,7 +222,8 @@ QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
     return "audio/mpeg";
   } else if (filename.endsWith(".m4a", Qt::CaseInsensitive) ||
              filename.endsWith(".m4b", Qt::CaseInsensitive)) {
-    return "audio/mpeg";
+    // M4A/M4B use the MP4 container, not MPEG audio.
+    return "audio/mp4";
   } else if (filename.endsWith(".ogg", Qt::CaseInsensitive) ||
              filename.endsWith(".opus", Qt::CaseInsensitive)) {
     return "application/ogg";
@@ -235,9 +239,15 @@ void CloudFileService::AbortReadTagsReplies() {
   qLog(Debug) << "Aborting the read tags replies";
   pending_tagreader_replies_.clear();
 
-  task_manager_->SetTaskFinished(indexing_task_id_);
-  indexing_task_id_ = -1;
-  emit AllIndexingTasksFinished();
+  // Reset progress counters even when idle, and avoid passing -1 to
+  // TaskManager when no indexing task is currently active.
+  indexing_task_progress_ = 0;
+  indexing_task_max_ = 0;
+  if (indexing_task_id_ != -1) {
+    task_manager_->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    emit AllIndexingTasksFinished();
+  }
 }
 
 void CloudFileService::FullRescanRequested() {

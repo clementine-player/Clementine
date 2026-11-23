@@ -21,6 +21,7 @@
 #ifndef INTERNET_ICECAST_ICECASTSERVICE_H_
 #define INTERNET_ICECAST_ICECASTSERVICE_H_
 
+#include <QPointer>
 #include <QXmlStreamReader>
 #include <memory>
 
@@ -73,15 +74,15 @@ class IcecastService : public InternetService {
  private:
   void RequestDirectory(const QUrl& url, int task_id);
   void EnsureMenuCreated();
-  IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
-  IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
+  static IcecastBackend::StationList ParseDirectory(const QByteArray& data);
+  static IcecastBackend::Station ReadStation(QXmlStreamReader* reader);
 
   QStandardItem* root_;
   NetworkAccessManager* network_;
 
   std::shared_ptr<IcecastBackend> backend_;
   IcecastModel* model_;
-  IcecastFilterWidget* filter_;
+  QPointer<IcecastFilterWidget> filter_;
 };
 
 #endif  // INTERNET_ICECAST_ICECASTSERVICE_H_

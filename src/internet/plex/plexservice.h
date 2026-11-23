@@ -21,6 +21,7 @@
 #include <QDateTime>
 #include <QHash>
 #include <QMutex>
+#include <QPointer>
 #include <QUrlQuery>
 #include <memory>
 
@@ -140,7 +141,7 @@ class PlexService : public InternetService {
   QStandardItem* root_;
   std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
-  LibraryFilterWidget* library_filter_;
+  QPointer<LibraryFilterWidget> library_filter_;
   QSortFilterProxyModel* library_sort_model_;
   int sync_task_id_;
 

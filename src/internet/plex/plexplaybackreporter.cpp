@@ -124,6 +124,9 @@ void PlexPlaybackReporter::Update(const QString& state) {
 }
 
 void PlexPlaybackReporter::SendTimeline(const QString& state) {
+  // Stopped() or track changes can fire after signing out.
+  if (service_->login_state() != PlexService::LoginState_LoggedIn) return;
+
   QUrlQuery query;
   query.addQueryItem("ratingKey", rating_key_);
   query.addQueryItem("key", "/library/metadata/" + rating_key_);
@@ -140,7 +143,8 @@ void PlexPlaybackReporter::MaybeScrobble(qint64 position_nanosec) {
 
   // Same rule as the local library's play counts.
   Playlist* playlist = app_->playlist_manager()->active();
-  if (position_nanosec < playlist->play_count_point_nanosec() ||
+  // Active playlist may be null if no playlist is open.
+  if (!playlist || position_nanosec < playlist->play_count_point_nanosec() ||
       playlist->get_lastfm_status() == Playlist::LastFM_Seeked) {
     return;
   }

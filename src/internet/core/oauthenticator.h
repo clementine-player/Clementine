@@ -84,7 +84,6 @@ class OAuthenticator : public QObject {
  private:
   static const char* kRemoteURL;
 
-  QByteArray ParseHttpRequest(const QByteArray& request) const;
   void RequestAccessToken(const QByteArray& code, const QUrl& redirect_url);
   void SetExpiryTime(int expires_in_seconds);
 

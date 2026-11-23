@@ -217,7 +217,6 @@ set(SOURCES
   internet/magnatune/magnatuneurlhandler.cpp
   internet/core/oauthenticator.cpp
   internet/internetradio/savedradio.cpp
-  internet/core/searchboxwidget.cpp
   internet/somafm/somafmservice.cpp
   internet/somafm/somafmurlhandler.cpp
   internet/intergalacticfm/intergalacticfmservice.cpp
@@ -589,7 +588,6 @@ set(HEADERS
   internet/core/oauthenticator.h
   internet/internetradio/savedradio.h
   internet/core/scrobbler.h
-  internet/core/searchboxwidget.h
   internet/somafm/somafmservice.h
   internet/somafm/somafmurlhandler.h
   internet/intergalacticfm/intergalacticfmservice.h
@@ -827,7 +825,6 @@ set(UI
   internet/core/internetviewcontainer.ui
   internet/magnatune/magnatunedownloaddialog.ui
   internet/magnatune/magnatunesettingspage.ui
-  internet/core/searchboxwidget.ui
   internet/plex/plexsettingspage.ui
   internet/subsonic/subsonicsettingspage.ui
   internet/radiobrowser/radiobrowsersettingspage.ui

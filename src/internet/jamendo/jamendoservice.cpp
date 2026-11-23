@@ -232,6 +232,7 @@ void JamendoService::RequestFinished(QNetworkReply* reply,
   // The list might have been refreshed or searched again since.
   if (!index.isValid()) return;
   QStandardItem* item = model()->itemFromIndex(index);
+  if (!item) return;
 
   QJsonDocument document = ParseJsonReply(reply);
   if (document.isNull()) return;
@@ -260,7 +261,10 @@ void JamendoService::RequestFinished(QNetworkReply* reply,
       AddAlbums(item, results);
       break;
     case Type_Album:
-      AddTracks(item, AlbumTracks(results.first().toObject()), false);
+      // Results can still be empty once retries are exhausted.
+      if (!results.isEmpty()) {
+        AddTracks(item, AlbumTracks(results.first().toObject()), false);
+      }
       break;
   }
 }

@@ -88,7 +88,12 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
           SLOT(FileCopied(int)));
 }
 
-PodcastService::~PodcastService() {}
+PodcastService::~PodcastService() {
+  // Wait for background DB updates that capture |this| to complete.
+  for (QFuture<void> future : pending_listened_futures_) {
+    future.waitForFinished();
+  }
+}
 
 PodcastSortProxyModel::PodcastSortProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent) {}
@@ -223,10 +228,12 @@ void PodcastService::LazyPopulate(QStandardItem* parent) {
 
 void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   // Do this here since the downloader won't be created yet in the ctor.
+  // UniqueConnection avoids duplicate slots across repeated expansions.
   connect(app_->podcast_downloader(),
           SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownload::State, int)),
           SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State,
-                                       int)));
+                                       int)),
+          Qt::UniqueConnection);
 
   if (default_icon_.isNull()) {
     default_icon_ = IconLoader::Load("podcast", IconLoader::Provider);
@@ -238,6 +245,10 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
 }
 
 void PodcastService::ClearPodcastList(QStandardItem* parent) {
+  // Clear ID -> QStandardItem* maps before removing rows from the model
+  // so they never retain dangling pointers.
+  podcasts_by_database_id_.clear();
+  episodes_by_database_id_.clear();
   parent->removeRows(0, parent->rowCount());
 }
 
@@ -396,6 +407,13 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
 }
 
 void PodcastService::RemovePodcastItem(QStandardItem* item) {
+  if (!item) return;
+
+  // Unmap both the podcast and its episodes before removeRow() destroys them.
+  const int podcast_id =
+      item->data(Role_Podcast).value<Podcast>().database_id();
+  podcasts_by_database_id_.remove(podcast_id);
+
   // Remove any episode ID -> item mappings for the episodes in this podcast.
   for (int i = 0; i < item->rowCount(); ++i) {
     QStandardItem* episode_item = item->child(i);
@@ -751,8 +769,11 @@ void PodcastService::ShowConfig() {
 void PodcastService::CurrentSongChanged(const Song& metadata) {
   // This does two db queries, and we are called on every song change, so run
   // this off the main thread.
-  (void)QtConcurrent::run(&PodcastService::UpdatePodcastListenedStateAsync,
-                          this, metadata);
+  // Track non-finished futures so ~PodcastService() can join them.
+  pending_listened_futures_.removeIf(
+      [](const QFuture<void>& f) { return f.isFinished(); });
+  pending_listened_futures_ << QtConcurrent::run(
+      &PodcastService::UpdatePodcastListenedStateAsync, this, metadata);
 }
 
 void PodcastService::UpdatePodcastListenedStateAsync(const Song& metadata) {
@@ -843,7 +864,8 @@ void PodcastService::SubscribeAndShow(const QVariant& podcast_or_opml) {
     // Lazy load the root item if it hasn't been already
     LazyLoadRoot();
 
-    QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
+    // Use .value() so missing IDs do not insert null entries into the map.
+    QStandardItem* item = podcasts_by_database_id_.value(podcast.database_id());
     if (item) {
       // There will be an item already if this podcast was already there,
       // otherwise it'll be scrolled to when the item is created.
@@ -860,7 +882,8 @@ void PodcastService::ReloadPodcast(const Podcast& podcast) {
   if (!(hide_listened_ || (show_episodes_ > 0))) {
     return;
   }
-  QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
+  // Use .value() so missing IDs do not insert null entries into the map.
+  QStandardItem* item = podcasts_by_database_id_.value(podcast.database_id());
 
   RemovePodcastItem(item);
   model_->invisibleRootItem()->appendRow(CreatePodcastItem(podcast));

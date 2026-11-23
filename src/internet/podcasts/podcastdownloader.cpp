@@ -55,6 +55,8 @@ Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
 PodcastEpisode Task::episode() const { return episode_; }
 
 void Task::reading() {
+  // Guard against reads arriving after cancel/close or null redirect reply.
+  if (!repl || !repl->reply() || !file_ || !file_->isOpen()) return;
   qint64 bytes = 0;
   forever {
     bytes = repl->bytesAvailable();
@@ -67,9 +69,16 @@ void Task::finishedPublic() {
   disconnect(repl.get(), SIGNAL(readyRead()), 0, 0);
   disconnect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)), 0, 0);
   disconnect(repl.get(), SIGNAL(finished()), 0, 0);
+  // Abort the active reply before closing and deleting the partial file.
+  if (repl && repl->reply()) {
+    repl->reply()->abort();
+  }
   emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
-  // Delete the file
-  file_->remove();
+  // Close before removing the partial file.
+  if (file_) {
+    file_->close();
+    file_->remove();
+  }
   emit finished(this);
 }
 
@@ -77,10 +86,21 @@ void Task::finishedInternal() {
   if (repl->error() != QNetworkReply::NoError) {
     qLog(Warning) << "Error downloading episode:" << repl->errorString();
     emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
-    // Delete the file
-    file_->remove();
+    // Close before removing the partial file.
+    if (file_) {
+      file_->close();
+      file_->remove();
+    }
     emit finished(this);
     return;
+  }
+
+  // Drain remaining buffered bytes and close the file handle before
+  // SaveFileBlocking() writes tags to the same path.
+  reading();
+  if (file_) {
+    file_->flush();
+    file_->close();
   }
 
   qLog(Info) << "Download of" << file_->fileName() << "finished";
@@ -150,6 +170,9 @@ void PodcastDownloader::ReloadSettings() {
 QString PodcastDownloader::FilenameForEpisode(
     const QString& directory, const PodcastEpisode& episode) const {
   const QString file_extension = QFileInfo(episode.url().path()).suffix();
+  // Omit the '.' separator when the episode URL has no file extension.
+  const QString extension_suffix =
+      file_extension.isEmpty() ? QString() : ("." + file_extension);
   int count = 0;
 
   // The file name contains the publication date and episode title
@@ -164,11 +187,11 @@ QString PodcastDownloader::FilenameForEpisode(
 
     if (count == 0) {
       filename =
-          QString("%1/%2.%3").arg(directory, base_filename, file_extension);
+          QString("%1/%2%3").arg(directory, base_filename, extension_suffix);
     } else {
-      filename = QString("%1/%2 (%3).%4")
+      filename = QString("%1/%2 (%3)%4")
                      .arg(directory, base_filename, QString::number(count),
-                          file_extension);
+                          extension_suffix);
     }
 
     if (!QFile::exists(filename)) {
@@ -202,6 +225,7 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
   QFile* file = new QFile(filepath);
   if (!file->open(QIODevice::WriteOnly)) {
     qLog(Warning) << "Could not open the file" << filepath << "for writing";
+    delete file;
     return;
   }
 
@@ -217,9 +241,23 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
                                  int)));
 }
 
+PodcastDownloader::~PodcastDownloader() {
+  // Snapshot and clear list_tasks_ and disconnect before deleting so
+  // Task::finished() cannot re-enter ReplyFinished() during teardown.
+  const QList<Task*> remaining = list_tasks_;
+  list_tasks_.clear();
+  for (Task* task : remaining) {
+    disconnect(task, nullptr, this, nullptr);
+    task->finishedPublic();
+    delete task;
+  }
+}
+
 void PodcastDownloader::ReplyFinished(Task* task) {
   list_tasks_.removeAll(task);
-  delete task;
+  // Use deleteLater(): ReplyFinished runs synchronously inside Task's
+  // finished() emission, so immediate delete would cause UAF.
+  task->deleteLater();
 }
 
 QString PodcastDownloader::SanitiseFilenameComponent(
@@ -264,7 +302,9 @@ void PodcastDownloader::cancelDownload(const PodcastEpisodeList& episodes) {
     }
   }
   for (Task* tas : ta) {
-    tas->finishedPublic();
+    // Remove from list_tasks_ before finishedPublic() in case it triggers
+    // teardown or re-checks active tasks synchronously.
     list_tasks_.removeAll(tas);
+    tas->finishedPublic();
   }
 }

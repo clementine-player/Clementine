@@ -46,6 +46,21 @@ void PlexLibraryScanner::Scan(const QStringList& section_keys) {
   NextSection();
 }
 
+void PlexLibraryScanner::Cancel() {
+  if (!scanning_) return;
+  // Clear scanning_ first so an abort() finishing asynchronously cannot
+  // re-enter PageFinished() and advance the scan.
+  scanning_ = false;
+  pending_sections_.clear();
+  songs_.clear();
+  done_ = 0;
+  total_ = 0;
+  if (current_reply_) {
+    current_reply_->abort();
+    current_reply_ = nullptr;
+  }
+}
+
 void PlexLibraryScanner::NextSection() {
   if (pending_sections_.isEmpty()) {
     Finish(true);
@@ -66,14 +81,17 @@ void PlexLibraryScanner::RequestPage(int offset) {
   query.addQueryItem("X-Plex-Container-Start", QString::number(offset));
   query.addQueryItem("X-Plex-Container-Size", QString::number(kPageSize));
 
-  QNetworkReply* reply = service_->Get(
+  current_reply_ = service_->Get(
       QString("/library/sections/%1/all").arg(current_section_), query);
-  NewClosure(reply, &QNetworkReply::finished, this,
-             &PlexLibraryScanner::PageFinished, reply, offset);
+  NewClosure(current_reply_.data(), &QNetworkReply::finished, this,
+             &PlexLibraryScanner::PageFinished, current_reply_.data(), offset);
 }
 
 void PlexLibraryScanner::PageFinished(QNetworkReply* reply, int offset) {
   reply->deleteLater();
+  if (reply == current_reply_) current_reply_ = nullptr;
+  // Bail out after deleteLater() if ReloadSettings() cancelled the scan.
+  if (!scanning_) return;
 
   if (reply->error() != QNetworkReply::NoError) {
     qLog(Warning) << "Plex section" << current_section_

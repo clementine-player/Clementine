@@ -43,6 +43,8 @@ void IcecastModel::Init() {
 }
 
 void IcecastModel::Reset() {
+  // Notify views before deleting root_ so proxies never see dangling nodes.
+  beginResetModel();
   delete root_;
 
   root_ = new IcecastItem(this);
@@ -50,7 +52,6 @@ void IcecastModel::Reset() {
 
   LazyPopulate(root_);
 
-  beginResetModel();
   endResetModel();
 }
 

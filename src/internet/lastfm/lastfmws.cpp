@@ -80,8 +80,12 @@ QNetworkReply* Post(QMap<QString, QString> params) {
   QNetworkRequest request((QUrl(kEndpoint)));
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/x-www-form-urlencoded");
-  return g_network->post(request,
-                         ToQuery(params).toString(QUrl::FullyEncoded).toUtf8());
+  // application/x-www-form-urlencoded turns literal '+' into space on the
+  // server; RFC 3986 FullyEncoded leaves '+' unencoded, breaking api_sig.
+  return g_network->post(request, ToQuery(params)
+                                      .toString(QUrl::FullyEncoded)
+                                      .toUtf8()
+                                      .replace('+', "%2B"));
 }
 
 }  // namespace LastFmWs

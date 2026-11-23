@@ -147,6 +147,9 @@ PlexService::PlexService(Application* app, InternetModel* parent)
 PlexService::~PlexService() {
   AlbumCoverLoader::SetCoverUrlResolver(kServiceName,
                                         AlbumCoverLoader::CoverUrlResolver());
+  // library_filter_ starts unparented and is reparented by
+  // InternetViewContainer if opened; QPointer clears if destroyed first.
+  delete library_filter_.data();
 }
 
 void PlexService::SetCoverServer(const CoverServer& server) {
@@ -238,6 +241,12 @@ void PlexService::ReloadSettings() {
     return;
   }
 
+  // Cancel any active scan and close its task before clearing server state.
+  scanner_->Cancel();
+  if (sync_task_id_) {
+    app_->task_manager()->SetTaskFinished(sync_task_id_);
+    sync_task_id_ = 0;
+  }
   listener_->Stop();
   base_url_ = QUrl();
   SetCoverServer(CoverServer());

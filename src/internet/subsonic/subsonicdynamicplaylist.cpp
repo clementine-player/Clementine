@@ -64,19 +64,15 @@ QByteArray SubsonicDynamicPlaylist::Save() const {
 }
 
 // copied from SubsonicService
-QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
-                                             const QUrl& url,
-                                             const bool usesslv3) {
+QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager* network,
+                                             const QUrl& url) {
   QNetworkRequest request(url);
   // Don't try and check the authenticity of the SSL certificate - it'll almost
   // certainly be self-signed.
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
-  // QSsl::SslV3 was removed in Qt6 (SSLv3 is broken and unsupported by
-  // any modern TLS stack); usesslv3 is kept as a settable option but has
-  // no effect any more.
   request.setSslConfiguration(sslconfig);
-  QNetworkReply* reply = network.get(request);
+  QNetworkReply* reply = network->get(request);
   return reply;
 }
 
@@ -108,14 +104,16 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 
   PlaylistItemList items;
 
-  QNetworkReply* reply = Send(network, url, service_->usesslv3_);
+  QNetworkReply* reply = Send(&network, url);
   WaitForSignal(reply, SIGNAL(finished()));
 
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
+    // Strip query parameters so Subsonic credentials are not logged.
     qLog(Warning) << "HTTP error returned from Subsonic:"
-                  << reply->errorString() << ", url:" << url.toString();
+                  << reply->errorString()
+                  << ", url:" << url.toString(QUrl::RemoveQuery);
     return items;  // empty
   }
 
@@ -176,14 +174,16 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
   PlaylistItemList items;
 
-  QNetworkReply* reply = Send(network, url, service_->usesslv3_);
+  QNetworkReply* reply = Send(&network, url);
   WaitForSignal(reply, SIGNAL(finished()));
 
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
+    // Strip query parameters so Subsonic credentials are not logged.
     qLog(Warning) << "HTTP error returned from Subsonic:"
-                  << reply->errorString() << ", url:" << url.toString();
+                  << reply->errorString()
+                  << ", url:" << url.toString(QUrl::RemoveQuery);
     return items;  // empty
   }
 
@@ -218,17 +218,16 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
     qLog(Debug) << "Getting album: "
                 << reader.attributes().value("album").toString();
-    GetAlbum(items, reader.attributes().value("id").toString(), network,
-             service_->usesslv3_);
+    GetAlbum(&items, reader.attributes().value("id").toString(), &network);
     reader.skipCurrentElement();
   }
   offset_ += count;
   return items;
 }
 
-void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
-                                       QNetworkAccessManager& network,
-                                       const bool usesslv3) {
+void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList* list,
+                                       const QString& id,
+                                       QNetworkAccessManager* network) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
   QUrlQuery url_query(url.query());
   url_query.addQueryItem("id", id);
@@ -236,13 +235,14 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
     url_query.addQueryItem("ampache", "1");
   }
   url.setQuery(url_query);
-  QNetworkReply* reply = Send(network, url, usesslv3);
+  QNetworkReply* reply = Send(network, url);
   WaitForSignal(reply, SIGNAL(finished()));
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
     qLog(Warning) << "HTTP error returned from Subsonic:"
-                  << reply->errorString() << ", url:" << url.toString();
+                  << reply->errorString()
+                  << ", url:" << url.toString(QUrl::RemoveQuery);
     return;
   }
 
@@ -279,7 +279,7 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
     Song song = service_->ReadSong(reader);
     song.set_albumartist(album_artist);
 
-    list << std::shared_ptr<PlaylistItem>(
+    *list << std::shared_ptr<PlaylistItem>(
         new InternetPlaylistItem(service_, song));
 
     reader.skipCurrentElement();

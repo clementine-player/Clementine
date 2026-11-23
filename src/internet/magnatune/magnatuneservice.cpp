@@ -109,7 +109,9 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
       IconLoader::Load("magnatune", IconLoader::Provider), true, app_, this));
 }
 
-MagnatuneService::~MagnatuneService() {}
+// library_filter_ starts unparented and is reparented by
+// InternetViewContainer if opened; QPointer clears if destroyed first.
+MagnatuneService::~MagnatuneService() { delete library_filter_.data(); }
 
 void MagnatuneService::ReloadSettings() {
   QSettings s;
@@ -162,6 +164,8 @@ void MagnatuneService::ReloadDatabase() {
 
 void MagnatuneService::ReloadDatabaseFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply) return;
+  reply->deleteLater();
 
   app_->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
@@ -331,8 +335,12 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
 
   // And remove the commercial
   QString path = ret.path();
-  path.insert(path.lastIndexOf('.'), "_nospeech");
-  ret.setPath(path);
+  // Guard against extensionless paths so insert(-1, ...) is never called.
+  const int last_dot = path.lastIndexOf('.');
+  if (last_dot != -1) {
+    path.insert(last_dot, "_nospeech");
+    ret.setPath(path);
+  }
 
   return ret;
 }

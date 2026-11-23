@@ -69,8 +69,15 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
 }
 
 MagnatuneDownloadDialog::~MagnatuneDownloadDialog() {
+  if (current_reply_) {
+    // Disconnect and deleteLater() instead of raw delete so in-flight reply
+    // signals cannot fire synchronously into a half-destroyed dialog.
+    current_reply_->disconnect(this);
+    current_reply_->abort();
+    current_reply_->deleteLater();
+    current_reply_ = nullptr;
+  }
   delete ui_;
-  delete current_reply_;
 }
 
 void MagnatuneDownloadDialog::Show(const SongList& songs) {
@@ -146,7 +153,9 @@ void MagnatuneDownloadDialog::DownloadNext() {
 
 void MagnatuneDownloadDialog::Error(QNetworkReply::NetworkError e) {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  reply->deleteLater();
+  if (!reply) return;
+  // Leave reply->deleteLater() and current_reply_ clearing to the finished()
+  // slot, which always fires right after errorOccurred().
 
   QUrl url = reply->url();
   url.setPassword(QString());
@@ -162,7 +171,11 @@ void MagnatuneDownloadDialog::Error(QNetworkReply::NetworkError e) {
 
 void MagnatuneDownloadDialog::MetadataFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply) return;
   reply->deleteLater();
+  if (reply == current_reply_) current_reply_ = nullptr;
+  // Error() already displayed the failure dialog for failed replies.
+  if (reply->error() != QNetworkReply::NoError) return;
 
   // The reply isn't valid XML so we can't use QtXML to parse it :(
   QString data = QString::fromUtf8(reply->readAll());
@@ -201,6 +214,19 @@ void MagnatuneDownloadDialog::MetadataFinished() {
     return;
   }
 
+  // Close any open file
+  download_file_.reset();
+
+  // Open the output file before issuing the GET so readyRead() cannot race
+  // ahead or leave an orphaned download if opening fails.
+  QString output_filename = GetOutputFilename();
+  download_file_.reset(new QFile(output_filename));
+  if (!download_file_->open(QIODevice::WriteOnly)) {
+    download_file_.reset();
+    ShowError(tr("Couldn't open output file %1").arg(output_filename));
+    return;
+  }
+
   // Munge the URL a bit
   QString url_text = Utilities::DecodeHtmlEntities(match.captured(1));
 
@@ -208,7 +234,8 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   url.setUserName(service_->username());
   url.setPassword(service_->password());
 
-  qLog(Debug) << "Downloading" << url;
+  // Strip credentials from the URL before logging.
+  qLog(Debug) << "Downloading" << url.toString(QUrl::RemovePassword);
 
   // Start the actual download
   current_reply_ = network_->get(QNetworkRequest(url));
@@ -219,32 +246,34 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   connect(current_reply_, SIGNAL(downloadProgress(qint64, qint64)),
           SLOT(DownloadProgress(qint64, qint64)));
   connect(current_reply_, SIGNAL(readyRead()), SLOT(DownloadReadyRead()));
-
-  // Close any open file
-  download_file_.reset();
-
-  // Open the output file
-  QString output_filename = GetOutputFilename();
-  download_file_.reset(new QFile(output_filename));
-  if (!download_file_->open(QIODevice::WriteOnly)) {
-    ShowError(tr("Couldn't open output file %1").arg(output_filename));
-  }
 }
 
 void MagnatuneDownloadDialog::DownloadFinished() {
-  current_reply_->deleteLater();
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply) return;
+  reply->deleteLater();
+  if (reply == current_reply_) current_reply_ = nullptr;
+
+  download_file_.reset();
+  if (reply->error() != QNetworkReply::NoError) return;
 
   next_row_++;
   DownloadNext();
 }
 
 void MagnatuneDownloadDialog::DownloadProgress(qint64 received, qint64 total) {
+  // Servers that omit Content-Length report total == -1 (avoid div-by-zero).
+  if (total <= 0) return;
+  QTreeWidgetItem* item = ui_->albums->topLevelItem(next_row_);
+  if (!item) return;
+
   int percent = static_cast<float>(received) / total * 100;
-  ui_->albums->topLevelItem(next_row_)->setData(1, Qt::DisplayRole, percent);
+  item->setData(1, Qt::DisplayRole, percent);
 }
 
 void MagnatuneDownloadDialog::DownloadReadyRead() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply || !download_file_ || !download_file_->isOpen()) return;
   download_file_->write(reply->readAll());
 }
 

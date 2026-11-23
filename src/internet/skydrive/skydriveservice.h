@@ -60,6 +60,7 @@ class SkydriveService : public CloudFileService {
 
  private:
   QString refresh_token() const;
+  bool is_authenticated() const;
   void AddAuthorizationHeader(QNetworkRequest* request);
   void FetchUserInfo();
   void ListFiles();

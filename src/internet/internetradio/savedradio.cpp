@@ -132,6 +132,7 @@ void SavedRadio::ShowContextMenu(const QPoint& global_pos) {
 void SavedRadio::Remove() {
   QStandardItem* context_item =
       model()->itemFromIndex(model()->current_index());
+  if (!context_item || !context_item->parent()) return;
 
   streams_.removeAll(
       Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
@@ -142,27 +143,39 @@ void SavedRadio::Remove() {
 void SavedRadio::Edit() {
   QStandardItem* context_item =
       model()->itemFromIndex(model()->current_index());
+  if (!context_item) return;
 
   if (!edit_dialog_) {
     edit_dialog_.reset(new AddStreamDialog);
     edit_dialog_->set_save_visible(false);
   }
 
-  int i = streams_.indexOf(
-      Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
-  Stream* stream = &streams_[i];
+  const QUrl original_url = context_item->data(InternetModel::Role_Url).toUrl();
+  const int i = streams_.indexOf(Stream(original_url));
+  if (i == -1) return;
 
+  // Re-locate by URL and persistent index after exec(): the nested event loop
+  // allows streams_ or the model tree to change while the dialog is open.
+  const QPersistentModelIndex item_index(context_item->index());
   edit_dialog_->set_name(context_item->text());
-  edit_dialog_->set_url(context_item->data(InternetModel::Role_Url).toUrl());
-  edit_dialog_->set_url_logo(stream->url_logo_);
+  edit_dialog_->set_url(original_url);
+  edit_dialog_->set_url_logo(streams_[i].url_logo_);
   if (edit_dialog_->exec() == QDialog::Rejected) return;
 
-  stream->name_ = edit_dialog_->name();
-  stream->url_ = edit_dialog_->url();
-  stream->url_logo_ = edit_dialog_->url_logo();
+  const int updated_i = streams_.indexOf(Stream(original_url));
+  if (updated_i != -1) {
+    streams_[updated_i].name_ = edit_dialog_->name();
+    streams_[updated_i].url_ = edit_dialog_->url();
+    streams_[updated_i].url_logo_ = edit_dialog_->url_logo();
+  }
 
-  context_item->setText(stream->name_);
-  context_item->setData(stream->url_, InternetModel::Role_Url);
+  if (item_index.isValid()) {
+    QStandardItem* item = model()->itemFromIndex(item_index);
+    if (item) {
+      item->setText(edit_dialog_->name());
+      item->setData(edit_dialog_->url(), InternetModel::Role_Url);
+    }
+  }
 
   SaveStreams();
 }
