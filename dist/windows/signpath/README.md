@@ -39,7 +39,9 @@ policy signs, if any, depends on what's being built:
 - Pull requests from branches in this repository use `test-signing`, which
   signs straight away with a certificate Windows doesn't trust, so the signing
   steps are tested before they reach `master`.
-- Development builds from `master`, and fork pull requests, aren't signed.
+- Development builds from `master` aren't signed, and nor is anything that
+  runs without the `SIGNPATH_API_TOKEN` secret: pull requests from forks, and
+  Dependabot's, which get only the repository's Dependabot secrets.
 
 Every signed file must carry the product name `Clementine` and the build's
 version, which the configurations check. `dist/windows/windres.rc.in`,

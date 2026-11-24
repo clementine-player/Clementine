@@ -1973,8 +1973,9 @@ jobs:
       # branches in this repository are signed with test-signing, which signs
       # straight away with a certificate nobody trusts, so the signing steps
       # are tested before they reach master. Development builds from master
-      # and pull requests from forks, which can't use the token, aren't
-      # signed. See dist/windows/signpath/README.md.
+      # aren't signed, and nor is anything run without the token: pull
+      # requests from forks, which get no secrets, and Dependabot's, which
+      # get only Dependabot's secrets. See dist/windows/signpath/README.md.
       #
       # What's signed is uploaded as an artifact of this run, and SignPath
       # fetches it from here and checks it was built here. The signed files
@@ -1993,6 +1994,9 @@ jobs:
         shell: bash
         env:
           ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          # A step can't read secrets in its condition, so this says whether
+          # the token is set.
+          HAS_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN != '' }}
           POLICY: >-
             ${{ inputs.release && vars.SIGNPATH_RELEASE_POLICY
               || !inputs.release && github.event_name == 'pull_request'
@@ -2000,8 +2004,8 @@ jobs:
                 && 'test-signing'
               || '' }}
         run: |
-          # Nothing is signed until SignPath is set up.
-          if [[ -z "$ORGANIZATION_ID" ]]; then
+          # Nothing is signed until SignPath is set up, or without the token.
+          if [[ -z "$ORGANIZATION_ID" || "$HAS_TOKEN" != true ]]; then
             POLICY=
           fi
           echo "policy=$POLICY" >> "$GITHUB_OUTPUT"
