@@ -17,8 +17,13 @@
 
 #include "core/database.h"
 
+#include <sqlite3.h>
+
+#include <QFile>
+#include <QScopeGuard>
 #include <QSqlQuery>
 #include <QTemporaryDir>
+#include <QThread>
 #include <QVariant>
 #include <memory>
 
@@ -236,4 +241,49 @@ TEST(DatabaseMigrationTest, RebuildsFts3TablesAsFts5) {
       db);
   ASSERT_TRUE(device_search.next());
   EXPECT_EQ(1, device_search.value(0).toInt());
+}
+
+// A new connection reads the schema with its first statement, which fails
+// while another connection holds an exclusive lock on the file, as one does
+// while it commits. That connection has to come back closed, not abort or
+// create the schema afresh, and work on the thread's next Connect().
+TEST(DatabaseConnectTest, NewConnectionCopesWithLockedDatabase) {
+  QTemporaryDir dir;
+  ASSERT_TRUE(dir.isValid());
+  const QString filename = dir.filePath("clementine.db");
+
+  Database database(nullptr, nullptr, filename);
+  {
+    QSqlDatabase db = database.Connect();
+    ASSERT_TRUE(db.isOpen());
+    QSqlQuery("INSERT INTO directories (path, subdirs) VALUES ('/music', 1)",
+              db);
+  }
+
+  sqlite3* writer = nullptr;
+  ASSERT_EQ(SQLITE_OK,
+            sqlite3_open(QFile::encodeName(filename).constData(), &writer));
+  auto close_writer = qScopeGuard([writer] { sqlite3_close(writer); });
+  ASSERT_EQ(SQLITE_OK,
+            sqlite3_exec(writer, "BEGIN EXCLUSIVE", nullptr, nullptr, nullptr));
+
+  bool open_while_locked = true;
+  bool open_after_unlock = false;
+  int directories_after_unlock = -1;
+  std::unique_ptr<QThread> thread(QThread::create([&] {
+    open_while_locked = database.Connect().isOpen();
+
+    sqlite3_exec(writer, "ROLLBACK", nullptr, nullptr, nullptr);
+
+    QSqlDatabase db = database.Connect();
+    open_after_unlock = db.isOpen();
+    QSqlQuery q("SELECT COUNT(*) FROM directories", db);
+    if (q.next()) directories_after_unlock = q.value(0).toInt();
+  }));
+  thread->start();
+  ASSERT_TRUE(thread->wait());
+
+  EXPECT_FALSE(open_while_locked);
+  EXPECT_TRUE(open_after_unlock);
+  EXPECT_EQ(1, directories_after_unlock);
 }
