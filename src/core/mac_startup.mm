@@ -65,6 +65,7 @@
 #include <QFile>
 #include <QSet>
 #include <QSettings>
+#include <QThread>
 #include <QWidget>
 
 #include <QtDebug>
@@ -153,6 +154,16 @@ QDebug operator<<(QDebug dbg, NSObject* object) {
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender {
+  // Qt quits by asking AppKit to terminate, and the Dock's Quit and logging
+  // out ask too. Terminating now makes AppKit call exit() from inside the
+  // event loop, which runs static destructors while QApplication and its
+  // windows are still alive, and crashes deleting them. Qt's own delegate,
+  // which this one replaces, cancels termination and leaves the event loop
+  // instead, so that main() returns and shuts down in order: do the same.
+  if (QCoreApplication::instance() && QThread::currentThread()->loopLevel() > 0) {
+    QCoreApplication::exit(0);
+    return NSTerminateCancel;
+  }
   return NSTerminateNow;
 }
 
