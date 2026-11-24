@@ -83,6 +83,7 @@ class Database : public QObject {
   void DoBackup();
 
  private:
+  void ReportConnectionError(const QSqlError& error);
   void UpdateMainSchema(QSqlDatabase* db);
 
   void ExecSchemaCommandsFromFile(QSqlDatabase& db, const QString& filename,

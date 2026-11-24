@@ -87,13 +87,18 @@ QSqlDatabase Database::Connect() {
           .arg(connection_id_)
           .arg(reinterpret_cast<quint64>(QThread::currentThread()));
 
-  // Try to find an existing connection for this thread
-  QSqlDatabase db = QSqlDatabase::database(connection_id);
-  if (db.isOpen()) {
-    return db;
+  // Try to find an existing connection for this thread. One that isn't open
+  // is one whose setup failed below, so it's set up again from the start,
+  // not just reopened as database() would by default.
+  {
+    QSqlDatabase existing = QSqlDatabase::database(connection_id, false);
+    if (existing.isOpen()) {
+      return existing;
+    }
   }
+  QSqlDatabase::removeDatabase(connection_id);
 
-  db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
+  QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
 
   if (!injected_database_name_.isNull())
     db.setDatabaseName(injected_database_name_);
@@ -101,8 +106,28 @@ QSqlDatabase Database::Connect() {
     db.setDatabaseName(directory_ + "/" + kDatabaseFilename);
 
   if (!db.open()) {
-    app_->AddError("Database: " + db.lastError().text());
+    ReportConnectionError(db.lastError());
     return db;
+  }
+
+  // Read the schema first. A new connection reads it with its first
+  // statement, which needs a shared lock on the file, so that statement fails
+  // with "database is locked" while another connection holds an exclusive
+  // lock for longer than the busy timeout, as it can while committing. Which
+  // statement reads it depends on the SQLite: macOS's 3.54 reads it even for
+  // SELECT sqlite_version(), Ubuntu 24.04's 3.45 only for one that names a
+  // table. So give up on this connection here, where it's clear why, and the
+  // next Connect() on this thread sets it up again.
+  int table_count = 0;
+  {
+    QSqlQuery tables_query(
+        "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'", db);
+    if (!tables_query.next()) {
+      ReportConnectionError(tables_query.lastError());
+      db.close();
+      return db;
+    }
+    table_count = tables_query.value(0).toInt();
   }
 
   {
@@ -120,9 +145,13 @@ QSqlDatabase Database::Connect() {
     QString driver_sqlite_version;
     {
       QSqlQuery version_query("SELECT sqlite_version()", db);
-      if (version_query.next()) {
-        driver_sqlite_version = version_query.value(0).toString();
+      if (!version_query.next()) {
+        // That's a connection that doesn't work, not a different SQLite.
+        ReportConnectionError(version_query.lastError());
+        db.close();
+        return db;
       }
+      driver_sqlite_version = version_query.value(0).toString();
     }
     if (driver_sqlite_version != QLatin1String(sqlite3_libversion())) {
       qLog(Fatal) << "Qt's SQLite driver uses SQLite" << driver_sqlite_version
@@ -179,7 +208,7 @@ QSqlDatabase Database::Connect() {
     // to release any remaining database locks!
   }
 
-  if (db.tables().count() == 0) {
+  if (table_count == 0) {
     // Set up initial schema
     qLog(Info) << "Creating initial database schema";
     UpdateDatabaseSchema(0, db);
@@ -224,6 +253,11 @@ QSqlDatabase Database::Connect() {
   }
 
   return db;
+}
+
+void Database::ReportConnectionError(const QSqlError& error) {
+  qLog(Error) << "Couldn't set up a database connection:" << error;
+  if (app_) app_->AddError("Database: " + error.text());
 }
 
 void Database::UpdateMainSchema(QSqlDatabase* db) {
