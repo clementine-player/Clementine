@@ -171,6 +171,7 @@ if(APPLE)
   # A GUI test: QApplication runs the main thread's Cocoa run loop, as the
   # app does, so the test works the same whichever thread FSEvents uses.
   add_test_file(macfslistener_test.cpp true)
+  add_test_file(mac_delegate_test.mm true)
 endif(APPLE)
 
 if(HAVE_DBUS)
