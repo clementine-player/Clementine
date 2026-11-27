@@ -22,7 +22,6 @@
 #include <QUrl>
 #include <QtConcurrentRun>
 
-#include "core/closure.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
@@ -175,14 +174,13 @@ void Ripper::TagFiles() {
     song.set_disc(album_.disc);
     song.set_filetype(album_.type);
 
-    TagReaderReply* reply =
-        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
-    NewClosure(reply, &TagReaderReply::Finished, this, &Ripper::FileTagged,
-               reply);
+    TagReaderClient::Instance()
+        ->SaveFile(song.url().toLocalFile(), song)
+        .then(this, [this](bool) { FileTagged(); });
   }
 }
 
-void Ripper::FileTagged(bool success, TagReaderReply* reply) {
+void Ripper::FileTagged() {
   files_tagged_++;
   qLog(Debug) << "Tagged" << files_tagged_ << "of" << tracks_.length()
               << "files";
@@ -190,6 +188,4 @@ void Ripper::FileTagged(bool success, TagReaderReply* reply) {
     qLog(Debug) << "CD ripper finished.";
     emit Finished();
   }
-
-  reply->deleteLater();
 }
