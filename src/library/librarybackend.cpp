@@ -63,8 +63,9 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   subdirs_table_ = subdirs_table;
 }
 
-void LibraryBackend::LoadDirectoriesAsync() {
-  metaObject()->invokeMethod(this, "LoadDirectories", Qt::QueuedConnection);
+void LibraryBackend::LoadDirectoriesAsync(DirectoryManager* directory_manager) {
+  metaObject()->invokeMethod(this, "LoadDirectories", Qt::QueuedConnection,
+                             Q_ARG(DirectoryManager*, directory_manager));
 }
 
 void LibraryBackend::UpdateTotalSongCountAsync() {
@@ -99,8 +100,8 @@ void LibraryBackend::UpdateSongsRatingAsync(const QList<int>& ids,
                              Q_ARG(float, rating));
 }
 
-void LibraryBackend::LoadDirectories() {
-  DirectoryList dirs = GetAllDirectories();
+void LibraryBackend::LoadDirectories(DirectoryManager* info) {
+  DirectoryList dirs = GetAllDirectories(info);
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
@@ -155,7 +156,9 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
   t.Commit();
 }
 
-DirectoryList LibraryBackend::GetAllDirectories() {
+DirectoryList LibraryBackend::GetAllDirectories(
+    DirectoryManager* directory_manager) {
+  Q_ASSERT(directory_manager);
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -167,9 +170,8 @@ DirectoryList LibraryBackend::GetAllDirectories() {
   if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
-    Directory dir;
+    Directory dir = directory_manager->GetDirectory(q.value(1).toString());
     dir.id = q.value(0).toInt();
-    dir.path = q.value(1).toString();
 
     ret << dir;
   }
@@ -217,7 +219,9 @@ void LibraryBackend::UpdateTotalSongCount() {
   emit TotalSongCountUpdated(q.value(0).toInt());
 }
 
-void LibraryBackend::AddDirectory(const QString& path) {
+void LibraryBackend::AddDirectory(DirectoryManager* directory_manager,
+                                  const QString& path) {
+  Q_ASSERT(directory_manager);
   QString canonical_path = QFileInfo(path).canonicalFilePath();
   QString db_path = canonical_path;
 
@@ -238,8 +242,7 @@ void LibraryBackend::AddDirectory(const QString& path) {
   q.exec();
   if (db_->CheckErrors(q)) return;
 
-  Directory dir;
-  dir.path = canonical_path;
+  Directory dir = directory_manager->GetDirectory(canonical_path);
   dir.id = q.lastInsertId().toInt();
 
   emit DirectoryDiscovered(dir, SubdirectoryList());
