@@ -332,7 +332,7 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
   int playlist_id = request.playlist_id();
 
   // Insert plain urls without metadata
-  if (!request.urls().empty()) {
+  if (request.urls().size() > 0) {
     QList<QUrl> urls;
     for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
       const QUrl url(QString::fromStdString(*it));
@@ -365,7 +365,7 @@ void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
   }
 
   // Add songs with metadata if present
-  if (!request.songs().empty()) {
+  if (request.songs().size() > 0) {
     SongList songs;
     for (int i = 0; i < request.songs().size(); i++) {
       Song song = CreateSongFromProtobuf(request.songs(i));
