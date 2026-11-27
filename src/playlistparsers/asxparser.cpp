@@ -39,29 +39,51 @@ SongList ASXParser::Load(QIODevice* device, const QString& playlist_path,
   // (thanks Amarok...)
   // ASX looks a lot like xml, but doesn't require tags to be case sensitive,
   // meaning we have to accept things like: <Abstract>...</abstract>
-  // We use a dirty way to achieve this: we make all tags lower case
-  QRegularExpression ex("(<[/]?[^>]*[A-Z]+[^>]*>)",
-                        QRegularExpression::CaseInsensitiveOption);
-  int index = 0;
-  QRegularExpressionMatch match;
-  while ((match = ex.match(data, index)).hasMatch()) {
-    data.replace(match.captured(1).toLocal8Bit(),
-                 match.captured(1).toLower().toLocal8Bit());
-    index = match.capturedStart() + match.capturedLength();
+  // Round-trip through Latin-1 so non-UTF-8 bytes (e.g. windows-1252) are
+  // preserved unchanged while unquoted ASCII markup inside <...> is lowercased
+  // in a single pass (preserving case-sensitive URLs inside quotes).
+  QString text = QString::fromLatin1(data);
+  bool in_tag = false;
+  char quote_char = 0;
+  for (qsizetype i = 0; i < text.size(); ++i) {
+    const char16_t code = text[i].unicode();
+    if (!in_tag) {
+      if (code == u'<') in_tag = true;
+    } else if (quote_char != 0) {
+      if (code == static_cast<unsigned char>(quote_char)) quote_char = 0;
+    } else if (code == u'"' || code == u'\'') {
+      quote_char = static_cast<char>(code);
+    } else {
+      if (code == u'>') in_tag = false;
+      if (code >= u'A' && code <= u'Z') {
+        text[i] = QChar::fromLatin1(static_cast<char>(code - u'A' + u'a'));
+      }
+    }
   }
 
-  // Some playlists have unescaped & characters in URLs :(
-  ex.setPattern("(href\\s*=\\s*\")([^\"]+)\"");
-  index = 0;
-  while ((match = ex.match(data, index)).hasMatch()) {
+  // Some playlists have unescaped & characters in URLs :(  Match href="..."
+  // with a word-boundary lookbehind and copy in one O(N) pass so repeated
+  // in-place replacements don't go quadratic or corrupt offsets.
+  static const QRegularExpression kHrefRe(
+      "(?<![a-z0-9_-])(href\\s*=\\s*\")([^\"]*)\"");
+  static const QRegularExpression kUnescapedAmpRe(
+      "&(?!amp;|quot;|apos;|lt;|gt;)");
+  QString escaped;
+  escaped.reserve(text.size());
+  qsizetype pos = 0;
+  QRegularExpressionMatchIterator it = kHrefRe.globalMatch(text);
+  while (it.hasNext()) {
+    const QRegularExpressionMatch match = it.next();
+    escaped.append(QStringView(text).sliced(pos, match.capturedStart() - pos));
+    escaped.append(match.capturedView(1));
     QString url = match.captured(2);
-    url.replace(QRegularExpression("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
-
-    QByteArray replacement =
-        QString(match.captured(1) + url + "\"").toLocal8Bit();
-    data.replace(match.captured(0).toLocal8Bit(), replacement);
-    index += replacement.length();
+    url.replace(kUnescapedAmpRe, "&amp;");
+    escaped.append(url);
+    escaped.append('"');
+    pos = match.capturedEnd();
   }
+  escaped.append(QStringView(text).sliced(pos));
+  data = escaped.toLatin1();
 
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);

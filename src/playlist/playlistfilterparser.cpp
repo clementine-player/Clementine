@@ -453,10 +453,8 @@ FilterTree* FilterParser::createSearchTermTreeNode(
   // here comes a mess :/
   // well, not that much of a mess, but so many options -_-
   SearchTermComparator* cmp = nullptr;
-  if (prefix == "!=" || prefix == "<>") {
-    cmp = new NeComparator(search);
-  } else if (!col.isEmpty() && columns_.contains(col) &&
-             numerical_columns_.contains(columns_[col])) {
+  if (!col.isEmpty() && columns_.contains(col) &&
+      numerical_columns_.contains(columns_[col])) {
     // the length column contains the time in seconds (nano seconds, actually -
     //  the "nano" part is handled by the DropTailComparatorDecorator,  though).
     int search_value;
@@ -468,7 +466,11 @@ FilterTree* FilterParser::createSearchTermTreeNode(
       search_value = search.toInt();
     }
     // alright, back to deciding which comparator we'll use
-    if (prefix == ">") {
+    // Handle !=/<> after normalizing search_value so length and rating use
+    // the same scaled units as =/</>.
+    if (prefix == "!=" || prefix == "<>") {
+      cmp = new NeComparator(QString::number(search_value));
+    } else if (prefix == ">") {
       cmp = new GtComparator(search_value);
     } else if (prefix == ">=") {
       cmp = new GeComparator(search_value);
@@ -481,7 +483,9 @@ FilterTree* FilterParser::createSearchTermTreeNode(
       cmp = new EqComparator(QString::number(search_value));
     }
   } else {
-    if (prefix == "=") {
+    if (prefix == "!=" || prefix == "<>") {
+      cmp = new NeComparator(search);
+    } else if (prefix == "=") {
       cmp = new EqComparator(search);
     } else if (prefix == ">") {
       cmp = new LexicalGtComparator(search);

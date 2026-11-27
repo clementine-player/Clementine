@@ -111,8 +111,10 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
         // REM
       } else if (line_name == kRem) {
+        // Ignore bare/two-token REM lines instead of breaking out of the
+        // header loop prematurely.
         if (splitted.size() < 3) {
-          break;
+          continue;
         }
 
         // REM GENRE
@@ -232,8 +234,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
     // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
     if (cue_mtime.isValid()) {
-      song.set_mtime(
-          qMax(static_cast<uint>(cue_mtime.toSecsSinceEpoch()), song.mtime()));
+      song.set_mtime(qMax(cue_mtime.toSecsSinceEpoch(), song.mtime()));
     }
     song.set_cue_path(playlist_path);
 

@@ -46,7 +46,7 @@ class Queue : public QAbstractProxyModel {
   void Move(const QList<int>& proxy_rows, int pos);
   void MoveUp(int row);
   void MoveDown(int row);
-  void Remove(QList<int>& proxy_rows);
+  void Remove(const QList<int>& proxy_rows);
 
   // QAbstractProxyModel
   void setSourceModel(QAbstractItemModel* source_model);

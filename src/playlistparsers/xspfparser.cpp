@@ -72,8 +72,10 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
         } else if (name == QLatin1String("duration")) {  // in milliseconds.
           const QString duration = reader->readElementText();
           bool ok = false;
-          nanosec = duration.toInt(&ok) * kNsecPerMsec;
-          if (!ok) {
+          // Parse as 64-bit to avoid int overflow on long durations and reject
+          // negative values.
+          nanosec = duration.toLongLong(&ok) * kNsecPerMsec;
+          if (!ok || nanosec < 0) {
             nanosec = -1;
           }
         } else if (name == QLatin1String("trackNum")) {
@@ -164,9 +166,10 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
         if (!art_filename.isEmpty() && !(art_filename == "(embedded)")) {
           // Make this filename relative to the directory we're saving the
           // playlist.
-          QUrl url = QUrl(art_filename);
-          url.setScheme("file");  // Need to explicitly set this.
-          art_filename = URLOrFilename(url, dir, path_type).toUtf8();
+          // Use fromLocalFile() so #, ?, %, and Windows drives aren't parsed
+          // as URL syntax, and avoid double-encoding via .toUtf8().
+          QUrl url = QUrl::fromLocalFile(art_filename);
+          art_filename = URLOrFilename(url, dir, path_type);
         } else {
           // Just use whatever URL was in the Song.
           art_filename = art;

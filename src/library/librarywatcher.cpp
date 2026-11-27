@@ -87,6 +87,12 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
 
 LibraryWatcher::~LibraryWatcher() {}
 
+void LibraryWatcher::set_backend(LibraryBackend* backend) {
+  backend_ = backend;
+  // Propagate backend_ to cue_parser_, which is constructed before Init().
+  cue_parser_->set_library(backend_);
+}
+
 // Holding a reference to a directory is safe because a ScanTransaction object
 // is only created on a stack and the removal of a directory from the watch
 // list only occurs as a result of a signal and happens on the  watcher's
@@ -194,8 +200,9 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetImmediateSubdirs(
 
   SubdirectoryList ret;
   for (const Subdirectory& subdir : known_subdirs_) {
-    if (subdir.path.left(subdir.path.lastIndexOf(QDir::separator())) == path &&
-        subdir.mtime != 0) {
+    // Subdir paths always use '/' separators even on Windows where
+    // QDir::separator() is '\\'.
+    if (DirectoryPart(subdir.path) == path && subdir.mtime != 0) {
       ret << subdir;
     }
   }
@@ -212,15 +219,28 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetAllSubdirs() {
 void LibraryWatcher::WatchList::StopAll() {
   QMutexLocker l(&mutex_);
   for (WatchedDir& wdir : list_) {
-    wdir.active_ = false;
+    wdir.stop();
   }
 }
 
 void LibraryWatcher::WatchList::Stop(int dir_id) {
   QMutexLocker l(&mutex_);
   if (list_.contains(dir_id)) {
-    list_[dir_id].active_ = false;
+    list_[dir_id].stop();
   }
+}
+
+bool LibraryWatcher::WatchList::TryGet(int dir_id, WatchedDir* out) const {
+  QMutexLocker l(&mutex_);
+  auto it = list_.constFind(dir_id);
+  if (it == list_.constEnd()) return false;
+  if (out) *out = it.value();
+  return true;
+}
+
+QList<LibraryWatcher::WatchedDir> LibraryWatcher::WatchList::Values() const {
+  QMutexLocker l(&mutex_);
+  return list_.values();
 }
 
 void LibraryWatcher::WatchList::Remove(int id) {
@@ -239,7 +259,8 @@ void LibraryWatcher::AddDirectory(const Directory& dir,
                                   const SubdirectoryList& subdirs) {
   qLog(Debug) << "Add directory" << dir.GetPath();
   watched_dirs_.Add(dir);
-  const WatchedDir& new_dir = watched_dirs_.list_[dir.id];
+  WatchedDir new_dir;
+  if (!watched_dirs_.TryGet(dir.id, &new_dir)) return;
 
   if (subdirs.isEmpty()) {
     // This is a new directory that we've never seen before.
@@ -276,7 +297,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
     QString real_path = path_info.symLinkTarget();
-    for (const Directory& dir : watched_dirs_.list_) {
+    for (const WatchedDir& dir : watched_dirs_.Values()) {
       if (real_path.startsWith(dir.path)) {
         t->AddToProgress(1);
         return;
@@ -390,7 +411,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
     Song matching_song;
     if (FindSongByPath(songs_in_db, file, &matching_song)) {
-      uint matching_cue_mtime = GetMtimeForCue(matching_cue);
+      qint64 matching_cue_mtime = GetMtimeForCue(matching_cue);
 
       // The song is in the database and still on disk.
       // Check the mtime to see if it's been changed since it was added.
@@ -405,7 +426,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
       // cue sheet's path from library (if any)
       QString song_cue = matching_song.cue_path();
-      uint song_cue_mtime = GetMtimeForCue(song_cue);
+      qint64 song_cue_mtime = GetMtimeForCue(song_cue);
 
       bool cue_deleted = song_cue_mtime == 0 && matching_song.has_cue();
       bool cue_added = matching_cue_mtime != 0 && !matching_song.has_cue();
@@ -414,8 +435,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       // qMax(media_file_mtime, cue_sheet_mtime)
       bool changed =
           (matching_song.mtime() !=
-           qMax(static_cast<uint>(file_info.lastModified().toSecsSinceEpoch()),
-                song_cue_mtime)) ||
+           qMax(file_info.lastModified().toSecsSinceEpoch(), song_cue_mtime)) ||
           cue_deleted || cue_added;
 
       // Also want to look to see whether the album art has changed
@@ -657,7 +677,7 @@ void LibraryWatcher::PreserveUserSetData(const QString& file,
   }
 }
 
-uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
+qint64 LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
   // slight optimisation
   if (cue_path.isEmpty()) {
     return 0;
@@ -732,7 +752,9 @@ void LibraryWatcher::RemoveDirectory(int dir_id) {
 void LibraryWatcher::DoRemoveDirectory(int dir_id) {
   rescan_queue_.remove(dir_id);
 
-  const WatchedDir& dir = watched_dirs_.list_[dir_id];
+  WatchedDir dir;
+  if (!watched_dirs_.TryGet(dir_id, &dir)) return;
+
   // Stop watching the directory's subdirectories
   for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
     if (fs_watcher_) fs_watcher_->RemovePath(subdir_path);
@@ -773,13 +795,13 @@ void LibraryWatcher::DirectoryChanged(const QString& subdir) {
 
 void LibraryWatcher::RescanPathsNow() {
   for (int id : rescan_queue_.keys()) {
-    if (!watched_dirs_.list_.contains(id)) {
+    WatchedDir dir;
+    if (!watched_dirs_.TryGet(id, &dir)) {
       qLog(Warning) << "Rescan id" << id << "not in watch list.";
       continue;
     }
-    const WatchedDir& dir = watched_dirs_.list_[id];
 
-    if (!dir.active_) continue;
+    if (!dir.is_active()) continue;
 
     ScanTransaction transaction(this, dir, false);
     transaction.AddToProgressMax(rescan_queue_[id].count());
@@ -904,7 +926,7 @@ void LibraryWatcher::ReloadSettings() {
     if (fs_watcher_) fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
-    for (const Directory& dir : watched_dirs_.list_.values()) {
+    for (const Directory& dir : watched_dirs_.Values()) {
       SubdirectoryList subdirs = backend_->SubdirsInDirectory(dir.id);
       for (const Subdirectory& subdir : subdirs) {
         AddWatch(dir, subdir.path);
@@ -936,7 +958,8 @@ void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
-  for (const WatchedDir& dir : watched_dirs_.list_.values()) {
+  for (const WatchedDir& dir : watched_dirs_.Values()) {
+    if (!dir.is_active()) continue;
     qLog(Debug) << "Scanning library directory" << dir.GetPath();
     ScanTransaction transaction(this, dir, incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());

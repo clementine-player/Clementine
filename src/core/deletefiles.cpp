@@ -53,6 +53,8 @@ void DeleteFiles::Start(const SongList& songs) {
   thread_ = new QThread;
   thread_->setObjectName("Delete files");
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
+  // thread_ has no QObject parent, so delete it once its event loop exits.
+  connect(thread_, &QThread::finished, thread_, &QObject::deleteLater);
 
   moveToThread(thread_);
   thread_->start();

@@ -75,6 +75,8 @@ void Organise::Start() {
   thread_ = new QThread;
   thread_->setObjectName("Organise files");
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
+  // thread_ has no QObject parent, so delete it once its event loop exits.
+  connect(thread_, &QThread::finished, thread_, &QObject::deleteLater);
   connect(transcoder_, SIGNAL(JobComplete(QUrl, QString, bool)),
           SLOT(FileTranscoded(QUrl, QString, bool)));
 
@@ -171,7 +173,10 @@ void Organise::ProcessSomeFiles() {
                                     QString::number(transcode_suffix_++);
         task.new_extension_ = preset.extension_;
         task.new_filetype_ = dest_type;
-        tasks_transcoding_[task.song_info_.song_.url().toLocalFile()] = task;
+        // Key by the unique temp output path rather than input filename so
+        // multiple CUE tracks or duplicate selections from one file don't
+        // overwrite each other in tasks_transcoding_.
+        tasks_transcoding_[task.transcoded_filename_] = task;
 
         qLog(Debug) << "Transcoding to" << task.transcoded_filename_;
 
@@ -262,13 +267,15 @@ void Organise::SetSongProgress(float progress, bool transcoded) {
 void Organise::UpdateProgress() {
   const int total = task_count_ * 100;
 
-  // Update transcoding progress
+  // Transcoder::GetProgress() is keyed by input URL, while tasks_transcoding_
+  // is keyed by the unique output path.
   QMap<QUrl, float> transcode_progress = transcoder_->GetProgress();
-  for (const QUrl& fileurl : transcode_progress.keys()) {
-    QString filename = fileurl.toLocalFile();
-    if (!tasks_transcoding_.contains(filename)) continue;
-    tasks_transcoding_[filename].transcode_progress_ =
-        transcode_progress[fileurl];
+  for (auto it = tasks_transcoding_.begin(); it != tasks_transcoding_.end();
+       ++it) {
+    const QUrl& url = it->song_info_.song_.url();
+    if (transcode_progress.contains(url)) {
+      it->transcode_progress_ = transcode_progress.value(url);
+    }
   }
 
   // Count the progress of all tasks that are in the queue.  Files that need
@@ -297,7 +304,10 @@ void Organise::FileTranscoded(const QUrl& input, const QString& output,
   qLog(Info) << "File finished" << input_file_path << success;
   transcode_progress_timer_.stop();
 
-  Task task = tasks_transcoding_.take(input_file_path);
+  // Guard against stale/untracked completions so QMap::take() doesn't
+  // synthesize a default Task for an unknown output path.
+  if (!tasks_transcoding_.contains(output)) return;
+  Task task = tasks_transcoding_.take(output);
   if (!success) {
     files_with_errors_ << input_file_path;
   } else {

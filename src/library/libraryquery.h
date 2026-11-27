@@ -96,7 +96,7 @@ class LibraryQuery {
   static const QStringList kNumericCompOperators;
 
  private:
-  int GetSecondsFromToken(QString& val) const;
+  int GetSecondsFromToken(const QString& val) const;
   QString GetInnerQuery();
 
   bool include_unavailable_;

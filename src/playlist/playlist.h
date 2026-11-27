@@ -20,6 +20,7 @@
 
 #include <QAbstractItemModel>
 #include <QList>
+#include <QPointer>
 
 #include "core/song.h"
 #include "core/tagreaderclient.h"

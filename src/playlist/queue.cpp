@@ -210,13 +210,15 @@ quint64 Queue::GetTotalLength() const { return total_length_ns_; }
 void Queue::UpdateTotalLength() {
   quint64 total = 0;
 
-  for (QPersistentModelIndex row : source_indexes_) {
+  // Skip persistent indexes invalidated by concurrent playlist edits, and
+  // ignore -1 unknown-length sentinels before adding to quint64.
+  for (const QPersistentModelIndex& row : source_indexes_) {
+    if (!row.isValid()) continue;
     int id = row.row();
+    if (!playlist_->has_item_at(id)) continue;
 
-    Q_ASSERT(playlist_->has_item_at(id));
-
-    quint64 length = playlist_->item_at(id)->Metadata().length_nanosec();
-    if (length > 0) total += length;
+    const qint64 length = playlist_->item_at(id)->Metadata().length_nanosec();
+    if (length > 0) total += static_cast<quint64>(length);
   }
 
   total_length_ns_ = total;
@@ -247,37 +249,51 @@ void Queue::Clear() {
 }
 
 void Queue::Move(const QList<int>& proxy_rows, int pos) {
+  if (proxy_rows.isEmpty()) return;
+
+  // Drop stale/out-of-bounds row indices and clamp pos to avoid crashing
+  // takeAt()/insert(), and track persistent indexes against valid_rows.
+  QList<int> valid_rows;
+  for (int row : proxy_rows) {
+    if (row >= 0 && row < source_indexes_.count()) {
+      valid_rows << row;
+    }
+  }
+  if (valid_rows.isEmpty()) return;
+
   emit layoutAboutToBeChanged();
   QList<QPersistentModelIndex> moved_items;
 
   // Take the items out of the list first, keeping track of whether the
   // insertion point changes
   int offset = 0;
-  for (int row : proxy_rows) {
+  for (int row : valid_rows) {
     moved_items << source_indexes_.takeAt(row - offset);
     if (pos != -1 && pos >= row) pos--;
     offset++;
   }
 
   // Put the items back in
-  const int start = pos == -1 ? source_indexes_.count() : pos;
+  const int start = (pos == -1 || pos > source_indexes_.count())
+                        ? source_indexes_.count()
+                        : qMax(0, pos);
   for (int i = start; i < start + moved_items.count(); ++i) {
     source_indexes_.insert(i, moved_items[i - start]);
   }
 
   // Update persistent indexes
   for (const QModelIndex& pidx : persistentIndexList()) {
-    const int dest_offset = proxy_rows.indexOf(pidx.row());
+    const int dest_offset = valid_rows.indexOf(pidx.row());
     if (dest_offset != -1) {
       // This index was moved
       changePersistentIndex(
           pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
     } else {
       int d = 0;
-      for (int row : proxy_rows) {
+      for (int row : valid_rows) {
         if (pidx.row() > row) d--;
       }
-      if (pidx.row() + d >= start) d += proxy_rows.count();
+      if (pidx.row() + d >= start) d += valid_rows.count();
 
       changePersistentIndex(
           pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
@@ -287,9 +303,16 @@ void Queue::Move(const QList<int>& proxy_rows, int pos) {
   emit layoutChanged();
 }
 
-void Queue::MoveUp(int row) { Move(QList<int>() << row, row - 1); }
+void Queue::MoveUp(int row) {
+  // Moving row 0 up would pass pos = -1 to Move(), sending it to the end.
+  if (row <= 0 || row >= source_indexes_.count()) return;
+  Move(QList<int>() << row, row - 1);
+}
 
-void Queue::MoveDown(int row) { Move(QList<int>() << row, row + 2); }
+void Queue::MoveDown(int row) {
+  if (row < 0 || row + 1 >= source_indexes_.count()) return;
+  Move(QList<int>() << row, row + 2);
+}
 
 QStringList Queue::mimeTypes() const {
   return QStringList() << kRowsMimetype << Playlist::kRowsMimetype;
@@ -341,11 +364,15 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
     QList<int> source_rows;
     QDataStream stream(data->data(Playlist::kRowsMimetype));
     stream.readRawData(reinterpret_cast<char*>(&playlist), sizeof(playlist));
+    // Ignore drops dragged from a different Playlist rather than indexing
+    // this Queue's playlist_ with foreign row numbers.
+    if (playlist != playlist_) return false;
     stream >> source_rows;
 
     QModelIndexList source_indexes;
     for (int source_row : source_rows) {
       const QModelIndex source_index = sourceModel()->index(source_row, 0);
+      if (!source_index.isValid()) continue;
       const QModelIndex proxy_index = mapFromSource(source_index);
       if (proxy_index.isValid()) {
         // This row was already in the queue, so no need to add it again
@@ -400,22 +427,21 @@ QVariant Queue::headerData(int section, Qt::Orientation orientation,
   return QVariant();
 }
 
-void Queue::Remove(QList<int>& proxy_rows) {
+void Queue::Remove(const QList<int>& proxy_rows) {
+  QList<int> sorted_rows = proxy_rows;
   // order the rows
-  std::stable_sort(proxy_rows.begin(), proxy_rows.end());
+  std::stable_sort(sorted_rows.begin(), sorted_rows.end());
 
-  // reflects immediately changes in the playlist
-  emit layoutAboutToBeChanged();
-
+  // Notify only via beginRemoveRows/endRemoveRows (not layoutChanged) so
+  // QAbstractProxyModel persistent indexes stay consistent.
   int removed_rows = 0;
-  for (int row : proxy_rows) {
+  for (int row : sorted_rows) {
     // after the first row, the row number needs to be updated
     const int real_row = row - removed_rows;
+    if (real_row < 0 || real_row >= source_indexes_.count()) continue;
     beginRemoveRows(QModelIndex(), real_row, real_row);
     source_indexes_.removeAt(real_row);
     endRemoveRows();
     removed_rows++;
   }
-
-  emit layoutChanged();
 }

@@ -51,10 +51,13 @@ QString Search::ToSql(const QString& songs_table) const {
   QStringList where_clauses;
   QStringList term_where_clauses;
   for (const SearchTerm& term : terms_) {
-    term_where_clauses << term.ToSql();
+    // Deserialized out-of-range fields return empty SQL; skip them so we
+    // don't emit malformed "()" clauses.
+    const QString sql = term.ToSql();
+    if (!sql.isEmpty()) term_where_clauses << sql;
   }
 
-  if (!terms_.isEmpty() && search_type_ != Type_All) {
+  if (!term_where_clauses.isEmpty() && search_type_ != Type_All) {
     QString boolean_op = search_type_ == Type_And ? " AND " : " OR ";
     where_clauses << "(" + term_where_clauses.join(boolean_op) + ")";
   }
@@ -81,12 +84,16 @@ QString Search::ToSql(const QString& songs_table) const {
   if (sort_type_ == Sort_Random) {
     sql += " ORDER BY random()";
   } else {
-    sql += " ORDER BY " + SearchTerm::FieldColumnName(sort_field_) +
+    QString sort_col = SearchTerm::FieldColumnName(sort_field_);
+    // Fall back when a deserialized sort_field_ is out of range.
+    if (sort_col.isEmpty()) sort_col = "title";
+    sql += " ORDER BY " + sort_col +
            (sort_type_ == Sort_FieldAsc ? " ASC" : " DESC");
   }
 
   // Add limit
-  if (first_item_) {
+  // Ignore negative offsets (e.g. from unvalidated inputs).
+  if (first_item_ > 0) {
     sql += QString(" LIMIT %1 OFFSET %2").arg(limit_).arg(first_item_);
   } else if (limit_ != -1) {
     sql += " LIMIT " + QString::number(limit_);

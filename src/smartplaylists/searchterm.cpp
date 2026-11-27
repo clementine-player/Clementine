@@ -31,68 +31,94 @@ static QString Escape(QString term) {
   return term.replace(QRegularExpression("([%_#])"), "#\\1");
 }
 
-SearchTerm::SearchTerm() : field_(Field_Title), operator_(Op_Equals) {}
+// Initialize date_ explicitly because ToSql() passes it to DateName().
+SearchTerm::SearchTerm()
+    : field_(Field_Title), operator_(Op_Equals), date_(Date_Day) {}
 
 SearchTerm::SearchTerm(Field field, Operator op, const QVariant& value)
-    : field_(field), operator_(op), value_(value) {}
+    : field_(field), operator_(op), value_(value), date_(Date_Day) {}
 
 QString SearchTerm::ToSql() const {
   QString col = FieldColumnName(field_);
   QString date = DateName(date_, true);
+  // operator>> deserializes raw quint8s into field_/date_; reject
+  // out-of-range values before interpolating column or unit names into SQL.
+  if (col.isEmpty()) return QString();
+
   QString value = value_.toString();
-  value.replace('\'', "''");
 
   QString second_value;
 
-  bool special_date_query = (operator_ == SearchTerm::Op_NumericDate ||
-                             operator_ == SearchTerm::Op_NumericDateNot ||
-                             operator_ == SearchTerm::Op_RelativeDate);
+  const bool special_date_query = (operator_ == SearchTerm::Op_NumericDate ||
+                                   operator_ == SearchTerm::Op_NumericDateNot ||
+                                   operator_ == SearchTerm::Op_RelativeDate);
+  if (special_date_query && date.isEmpty()) return QString();
 
+  const Type type = TypeOf(field_);
+
+  // Format numeric, rating, time, and date operands via QString::number()
+  // rather than raw QVariant strings: operands are interpolated unquoted
+  // into SQL and QDataStream can deserialize arbitrary string QVariants.
+  //
   // Floating point problems...
   // Theoretically 0.0 == 0 stars, 0.1 == 0.5 star, 0.2 == 1 star etc.
   // but in reality we need to consider anything from [0.05, 0.15) range
   // to be 0.5 star etc.
   // To make this simple, I transform the ranges to integeres and then
   // operate on ints: [0.0, 0.05) -> 0, [0.05, 0.15) -> 1 etc.
-  if (TypeOf(field_) == Type_Rating) {
-    col = "CAST ((" + col + " + 0.05) * 10 AS INTEGER)";
-    value = "CAST ((" + value + " + 0.05) * 10 AS INTEGER)";
-  } else if (TypeOf(field_) == Type_Date) {
-    if (!special_date_query) {
-      // We have the exact date
-      // The calendar widget specifies no time so ditch the possible time part
-      // from integers representing the dates.
-      col = "DATE(" + col + ", 'unixepoch', 'localtime')";
-      value = "DATE(" + value + ", 'unixepoch', 'localtime')";
-    } else {
-      // We have a numeric date, consider also the time for more precision
-      col = "DATETIME(" + col + ", 'unixepoch', 'localtime')";
-      second_value = second_value_.toString();
-      second_value.replace('\'', "''");
-      if (date == "weeks") {
-        // Sqlite doesn't know weeks, transform them to days
-        date = "days";
-        value = QString::number(value_.toInt() * 7);
-        second_value = QString::number(second_value_.toInt() * 7);
-      }
+  if (special_date_query) {
+    // We have a numeric date, consider also the time for more precision
+    col = "DATETIME(" + col + ", 'unixepoch', 'localtime')";
+    qlonglong val = value_.toLongLong();
+    qlonglong val2 = second_value_.toLongLong();
+    if (date == "weeks") {
+      // Sqlite doesn't know weeks, transform them to days
+      date = "days";
+      val *= 7;
+      val2 *= 7;
     }
-  } else if (TypeOf(field_) == Type_Time) {
+    value = QString::number(val);
+    second_value = QString::number(val2);
+  } else if (type == Type_Rating) {
+    col = "CAST ((" + col + " + 0.05) * 10 AS INTEGER)";
+    value = "CAST ((" + QString::number(value_.toDouble(), 'f', 6) +
+            " + 0.05) * 10 AS INTEGER)";
+  } else if (type == Type_Date) {
+    // We have the exact date
+    // The calendar widget specifies no time so ditch the possible time part
+    // from integers representing the dates.
+    col = "DATE(" + col + ", 'unixepoch', 'localtime')";
+    value = "DATE(" + QString::number(value_.toLongLong()) +
+            ", 'unixepoch', 'localtime')";
+  } else if (type == Type_Time) {
     // Convert seconds to nanoseconds
-    value = "CAST (" + value + " *1000000000 AS INTEGER)";
-  }
-
-  // File paths need some extra processing since they are stored as
-  // encoded urls in the database. In some versions of sqlite, the
-  // LIKE function doesn't handle the blob form, so cast it to TEXT.
-  if (field_ == Field_Filepath) {
+    value = "CAST (" + QString::number(value_.toLongLong()) +
+            " * 1000000000 AS INTEGER)";
+  } else if (type == Type_Number) {
+    if (field_ == Field_BPM) {
+      value = QString::number(value_.toDouble(), 'g', 6);
+    } else {
+      value = QString::number(value_.toLongLong());
+    }
+  } else if (field_ == Field_Filepath) {
+    // File paths need some extra processing since they are stored as
+    // encoded urls in the database. In some versions of sqlite, the
+    // LIKE function doesn't handle the blob form, so cast it to TEXT.
     col = "CAST (" + col + " AS TEXT)";
     if (operator_ == Op_StartsWith || operator_ == Op_Equals) {
       value = QUrl::fromLocalFile(value).toEncoded();
     } else {
       value = QUrl(value).toEncoded();
     }
+    // Escape single quotes after toEncoded() so percent-encoding isn't
+    // altered.
+    value.replace('\'', "''");
+  } else {
+    value.replace('\'', "''");
   }
 
+  // Quote only Type_Text operands (which includes Field_Filepath); numeric
+  // and date types are validated/formatted above.
   switch (operator_) {
     case Op_Contains:
       return col + " LIKE '%" + Escape(value) + "%'" + kEscClause;
@@ -103,25 +129,20 @@ QString SearchTerm::ToSql() const {
     case Op_EndsWith:
       return col + " LIKE '%" + Escape(value) + "'" + kEscClause;
     case Op_Equals:
-      if (TypeOf(field_) == Type_Text)
+      if (type == Type_Text)
         return col + " LIKE '" + Escape(value) + "'" + kEscClause;
-      else if (TypeOf(field_) == Type_Rating || TypeOf(field_) == Type_Date ||
-               TypeOf(field_) == Type_Time)
+      else
         return col + " = " + value;
-      else
-        return col + " = '" + value + "'";
     case Op_GreaterThan:
-      if (TypeOf(field_) == Type_Rating || TypeOf(field_) == Type_Date ||
-          TypeOf(field_) == Type_Time)
-        return col + " > " + value;
-      else
+      if (type == Type_Text)
         return col + " > '" + value + "'";
-    case Op_LessThan:
-      if (TypeOf(field_) == Type_Rating || TypeOf(field_) == Type_Date ||
-          TypeOf(field_) == Type_Time)
-        return col + " < " + value;
       else
+        return col + " > " + value;
+    case Op_LessThan:
+      if (type == Type_Text)
         return col + " < '" + value + "'";
+      else
+        return col + " < " + value;
     case Op_NumericDate:
       return col + " > " + "DATETIME('now', '-" + value + " " + date +
              "', 'localtime')";
@@ -134,7 +155,7 @@ QString SearchTerm::ToSql() const {
              "', 'localtime') AND " + col + " > " + "DATETIME('now', '-" +
              second_value + " " + date + "', 'localtime'))";
     case Op_NotEquals:
-      if (TypeOf(field_) == Type_Text) {
+      if (type == Type_Text) {
         return col + " <> '" + value + "'";
       } else {
         return col + " <> " + value;
@@ -149,8 +170,10 @@ QString SearchTerm::ToSql() const {
 }
 
 bool SearchTerm::is_valid() const {
-  // We can accept also a zero value in these cases
-  if (operator_ == SearchTerm::Op_NumericDate) {
+  // We can accept also a zero value in these cases ("in the last" and
+  // "not in the last").
+  if (operator_ == SearchTerm::Op_NumericDate ||
+      operator_ == SearchTerm::Op_NumericDateNot) {
     return value_.toInt() >= 0;
   } else if (operator_ == SearchTerm::Op_RelativeDate) {
     return (value_.toInt() >= 0 && value_.toInt() < second_value_.toInt());

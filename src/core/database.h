@@ -107,7 +107,11 @@ class Database : public QObject {
 
   QString directory_;
   QMutex connect_mutex_;
-  QRecursiveMutex mutex_;
+  // Leaf lock protecting attached_databases_; acquire no other locks under it.
+  // Lock order when multiple are held: mutex_ -> connect_mutex_ ->
+  // attached_databases_mutex_.
+  mutable QMutex attached_databases_mutex_;
+  mutable QRecursiveMutex mutex_;
 
   // This ID makes the QSqlDatabase name unique to the object as well as the
   // thread

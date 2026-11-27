@@ -203,9 +203,9 @@ class Song {
   int directory_id() const;
   const QUrl& url() const;
   const QString& basefilename() const;
-  uint mtime() const;
-  uint ctime() const;
-  int filesize() const;
+  qint64 mtime() const;
+  qint64 ctime() const;
+  qint64 filesize() const;
   FileType filetype() const;
   bool is_stream() const;
   bool is_cdda() const;
@@ -270,9 +270,9 @@ class Song {
   void set_length_nanosec(qint64 v);
   void set_bitrate(int v);
   void set_samplerate(int v);
-  void set_mtime(int v);
-  void set_ctime(int v);
-  void set_filesize(int v);
+  void set_mtime(qint64 v);
+  void set_ctime(qint64 v);
+  void set_filesize(qint64 v);
   void set_filetype(FileType v);
   void set_art_automatic(const QString& v);
   void set_art_manual(const QString& v);

@@ -92,17 +92,18 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
 
       if (token.contains(':')) {
         QString columntoken = token.section(':', 0, 0);
+        // Normalize column names once: filter tokens may be mixed-case (e.g.
+        // Rating:>4, FileType:FLAC), while column sets and FTS5 are lowercase.
+        const QString lower_column = columntoken.toLower();
         QString subtoken = token.section(':', 1, -1);
         subtoken.replace(":", " ");
         subtoken = subtoken.trimmed();
 
-        if (Song::kFtsColumns.contains(
-                "fts" + columntoken,
-                Qt::CaseInsensitive)) {  // Is it a FTS column?
+        if (Song::kFtsColumns.contains("fts" + lower_column)) {
           if (!subtoken.isEmpty()) {
-            query += "fts" + columntoken + ":" + FtsPrefixTerm(subtoken) + " ";
+            query += "fts" + lower_column + ":" + FtsPrefixTerm(subtoken) + " ";
           }
-        } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
+        } else if (Song::kColumns.contains(lower_column)) {
           // We need to extract the operator and the value from the subtoken
           QRegularExpression operatorRe("^(" + kNumericCompOperators.join("|") +
                                         ")(.*)");
@@ -115,35 +116,37 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
             val = operator_match.captured(2);
           }
 
-          if (Song::kIntColumns.contains(columntoken)) {
+          if (Song::kIntColumns.contains(lower_column)) {
             bool ok;
             int intVal = val.toInt(&ok);
             if (ok) {
-              AddWhere(columntoken, intVal, op);
+              AddWhere(lower_column, intVal, op);
             }
-          } else if (Song::kFloatColumns.contains(columntoken)) {
+          } else if (Song::kFloatColumns.contains(lower_column)) {
             bool ok;
             double doubleVal = val.toDouble(&ok);
             if (ok) {
-              AddWhere(columntoken, doubleVal, op);
+              AddWhere(lower_column, doubleVal, op);
             }
-          } else if (columntoken == "length") {
+          } else if (lower_column == "length") {
             qint64 seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
               qint64 nanoseconds = seconds * kNsecPerSec;
-              AddWhere(columntoken, nanoseconds, op);
+              AddWhere(lower_column, nanoseconds, op);
             }
-          } else if (columntoken == "filetype") {
-            AddWhere(columntoken, kFiletypeId[val]);
-          } else if (Song::kDateColumns.contains(columntoken)) {
+          } else if (lower_column == "filetype") {
+            AddWhere(lower_column,
+                     kFiletypeId.value(val.toLower(), Song::Type_Unknown));
+          } else if (Song::kDateColumns.contains(lower_column)) {
             int seconds = GetSecondsFromToken(val);
             if (seconds > 0) {
-              int now = QDateTime::currentDateTime().toSecsSinceEpoch();
-              QString dt = QString("(%1-%2)").arg(now).arg(columntoken);
+              // Use 64-bit epoch seconds to avoid 2038 overflow.
+              qint64 now = QDateTime::currentDateTime().toSecsSinceEpoch();
+              QString dt = QString("(%1-%2)").arg(now).arg(lower_column);
               AddWhere(dt, seconds, op);
             }
           } else {
-            AddWhere(columntoken, val, op);
+            AddWhere(lower_column, val, op);
           }
         } else {  // We did't recognize this as a column
           token.replace(":", " ");
@@ -164,7 +167,8 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   }
 
   if (options.max_age() != -1) {
-    int cutoff =
+    // 64-bit epoch cutoff matches Song::ctime() and avoids 2038 overflow.
+    qint64 cutoff =
         QDateTime::currentDateTime().toSecsSinceEpoch() - options.max_age();
 
     where_clauses_ << "ctime > ?";
@@ -189,7 +193,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   }
 }
 
-int LibraryQuery::GetSecondsFromToken(QString& val) const {
+int LibraryQuery::GetSecondsFromToken(const QString& val) const {
   int seconds = 0;
   QString tmp = "";
   for (QChar c : val) {
@@ -305,7 +309,7 @@ QVariant LibraryQuery::Value(int column) const { return query_.value(column); }
 
 bool QueryOptions::Matches(const Song& song) const {
   if (max_age_ != -1) {
-    const uint cutoff =
+    const qint64 cutoff =
         QDateTime::currentDateTime().toSecsSinceEpoch() - max_age_;
     if (song.ctime() <= cutoff) return false;
   }

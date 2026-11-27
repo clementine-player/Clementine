@@ -89,6 +89,12 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   enqueue_ = enqueue;
   enqueue_next_ = enqueue_next;
 
+  if (!destination) {
+    deleteLater();
+    return;
+  }
+  connect(destination, SIGNAL(destroyed()), SLOT(DestinationDestroyed()));
+
   SongLoader* loader = new SongLoader(library_, player_, this);
   NewClosure(loader, &SongLoader::AudioCDTracksLoaded, this,
              &SongLoaderInserter::AudioCDTracksLoaded, loader);
@@ -99,6 +105,7 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   if (ret == SongLoader::Error) {
     emit Error(tr("Error while loading audio CD"));
     delete loader;
+    deleteLater();
   }
   // Songs will be loaded later: see AudioCDTracksLoaded and AudioCDTagsLoaded
   // slots
@@ -113,12 +120,13 @@ void SongLoaderInserter::AudioCDTracksLoaded(SongLoader* loader) {
 
 void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
-  if (!loader || !destination_) return;
-
-  if (success)
-    destination_->UpdateItems(loader->songs());
-  else
-    qLog(Error) << "Error while getting audio CD metadata from MusicBrainz";
+  // Always call deleteLater() even if destination_ closed during lookup.
+  if (loader && destination_) {
+    if (success)
+      destination_->UpdateItems(loader->songs());
+    else
+      qLog(Error) << "Error while getting audio CD metadata from MusicBrainz";
+  }
   deleteLater();
 }
 

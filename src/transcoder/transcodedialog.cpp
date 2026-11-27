@@ -23,6 +23,7 @@
 #include <QFileDialog>
 #include <QPushButton>
 #include <QSettings>
+#include <QUuid>
 #include <algorithm>
 
 #include "core/application.h"
@@ -217,14 +218,30 @@ void TranscodeDialog::JobComplete(const QUrl& input, const QString& output,
     QFileInfo input_fileinfo(input.toLocalFile());
     QFileInfo output_fileinfo(output);
 
-    bool same_extension = input_fileinfo.suffix() == output_fileinfo.suffix();
-    bool same_path =
-        input_fileinfo.absolutePath() == output_fileinfo.absolutePath();
+    // Only remove/replace the original after verifying a distinct output
+    // file exists. For in-place replacement, back up the original first
+    // and rename to absoluteFilePath() (not relative fileName() into CWD).
+    if (output_fileinfo.exists() && input_fileinfo != output_fileinfo) {
+      bool same_extension = input_fileinfo.suffix() == output_fileinfo.suffix();
+      bool same_path =
+          input_fileinfo.absolutePath() == output_fileinfo.absolutePath();
 
-    QFile(input_fileinfo.absoluteFilePath()).remove();
-    if (same_path && same_extension) {
-      QFile(output_fileinfo.absoluteFilePath())
-          .rename(input_fileinfo.fileName());
+      const QString input_path = input_fileinfo.absoluteFilePath();
+      const QString output_path = output_fileinfo.absoluteFilePath();
+      if (same_path && same_extension) {
+        const QString backup_path =
+            input_path + ".bak-" +
+            QUuid::createUuid().toString(QUuid::WithoutBraces);
+        if (QFile::rename(input_path, backup_path)) {
+          if (QFile::rename(output_path, input_path)) {
+            QFile::remove(backup_path);
+          } else {
+            QFile::rename(backup_path, input_path);
+          }
+        }
+      } else {
+        QFile::remove(input_path);
+      }
     }
   }
 }
