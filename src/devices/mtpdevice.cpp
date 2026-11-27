@@ -46,7 +46,13 @@ MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
   }
 }
 
-MtpDevice::~MtpDevice() {}
+MtpDevice::~MtpDevice() {
+  // Join loader_thread_ before ~QObject tears down a running child QThread.
+  if (loader_thread_) {
+    loader_thread_->quit();
+    loader_thread_->wait();
+  }
+}
 
 bool MtpDevice::Init() {
   InitBackendDirectory("/", first_time_, false);
@@ -66,13 +72,18 @@ bool MtpDevice::Init() {
 
 void MtpDevice::ConnectAsync() {
   db_busy_.lock();
+  db_busy_locked_ = true;
   loader_thread_->start();
 }
 
 void MtpDevice::LoadFinished(bool success) {
-  loader_->deleteLater();
-  loader_ = nullptr;
-  db_busy_.unlock();
+  if (loader_) {
+    loader_->deleteLater();
+    loader_ = nullptr;
+  }
+  if (db_busy_locked_.exchange(false)) {
+    db_busy_.unlock();
+  }
   loader_thread_->quit();
   emit ConnectFinished(unique_id_, success);
 }
@@ -82,14 +93,27 @@ void MtpDevice::LoaderError(const QString& message) { app_->AddError(message); }
 bool MtpDevice::StartCopy(QList<Song::FileType>* supported_types) {
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
+  db_busy_locked_ = true;
 
   // Connect to the device
+  // Release connection_ and db_busy_ via db_busy_locked_ on failure so a
+  // caller that still invokes FinishCopy(false) will not double-unlock.
   connection_.reset(new MtpConnection(url_));
+  if (!connection_->is_valid()) {
+    connection_.reset();
+    if (db_busy_locked_.exchange(false)) {
+      db_busy_.unlock();
+    }
+    return false;
+  }
 
   // Did the caller want a list of supported types?
   if (supported_types) {
     if (!GetSupportedFiletypes(supported_types, connection_->device())) {
-      FinishCopy(false);
+      connection_.reset();
+      if (db_busy_locked_.exchange(false)) {
+        db_busy_.unlock();
+      }
       return false;
     }
   }
@@ -101,27 +125,32 @@ static int ProgressCallback(uint64_t const sent, uint64_t const total,
                             void const* const data) {
   const MusicStorage::CopyJob* job =
       reinterpret_cast<const MusicStorage::CopyJob*>(data);
-  job->progress_(float(sent) / total);
+  // Guard against division by zero if libmtp reports total == 0.
+  job->progress_(total > 0 ? float(sent) / total : 0.0f);
 
   return 0;
 }
 
 bool MtpDevice::CopyToStorage(const CopyJob& job) {
-  if (!connection_->is_valid()) return false;
+  if (!connection_ || !connection_->is_valid()) return false;
 
   // Convert metadata
-  LIBMTP_track_t track;
-  job.metadata_.ToMTP(&track);
+  // ToMTP() populates track string fields with strdup(); LIBMTP_new_track_t()
+  // zero-initializes the struct and LIBMTP_destroy_track_t() frees them all.
+  std::unique_ptr<LIBMTP_track_t, decltype(&LIBMTP_destroy_track_t)> track(
+      LIBMTP_new_track_t(), &LIBMTP_destroy_track_t);
+  if (!track) return false;
+  job.metadata_.ToMTP(track.get());
 
   // Send the file
   int ret = LIBMTP_Send_Track_From_File(connection_->device(),
                                         job.source_.toUtf8().constData(),
-                                        &track, ProgressCallback, &job);
+                                        track.get(), ProgressCallback, &job);
   if (ret != 0) return false;
 
   // Add it to our LibraryModel
   Song metadata_on_device;
-  metadata_on_device.InitFromMTP(&track, url_.host());
+  metadata_on_device.InitFromMTP(track.get(), url_.host());
   metadata_on_device.set_directory_id(1);
   songs_to_add_ << metadata_on_device;
 
@@ -144,7 +173,10 @@ void MtpDevice::FinishCopy(bool success) {
 
   connection_.reset();
 
-  db_busy_.unlock();
+  // Guard unlock because StartCopy() may have already released db_busy_.
+  if (db_busy_locked_.exchange(false)) {
+    db_busy_.unlock();
+  }
 
   ConnectedDevice::FinishCopy(success);
 }
@@ -152,6 +184,8 @@ void MtpDevice::FinishCopy(bool success) {
 void MtpDevice::StartDelete() { StartCopy(nullptr); }
 
 bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
+  if (!connection_ || !connection_->is_valid()) return false;
+
   // Extract the ID from the song's URL
   QString filename = job.metadata_.url().path();
   filename.remove('/');

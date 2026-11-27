@@ -75,7 +75,7 @@ void CddaSongLoader::LoadSongs() {
   }
 }
 
-bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags,
+bool CddaSongLoader::ParseSongTags(SongList* songs, GstTagList* tags,
                                    gint* track_no) {
   //// cdiocddasrc reads cd-text with following mapping from cdio
   ///
@@ -88,15 +88,20 @@ bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags,
   /// CDTEXT_FIELD_PERFORMER -> GST_TAG_ARTIST
   /// CDTEXT_FIELD_TITLE -> GST_TAG_TITLE
 
-  guint track_number;
+  guint track_number = 0;
   if (!gst_tag_list_get_uint(tags, GST_TAG_TRACK_NUMBER, &track_number)) {
     qLog(Error) << "Track tags do not contain track number!";
     return false;
   }
 
-  Q_ASSERT(track_number != 0u);
-  Q_ASSERT(static_cast<int>(track_number) <= songs.size());
-  Song& song = songs[static_cast<int>(track_number - 1)];
+  // Track numbers from CD-TEXT or GStreamer tags may be 0 or exceed the audio
+  // track count (e.g., malformed tags or non-audio/lead-out tracks).
+  if (track_number == 0u || static_cast<int>(track_number) > songs->size()) {
+    qLog(Warning) << "CDDA track number out of bounds:" << track_number
+                  << "for track count:" << songs->size();
+    return false;
+  }
+  Song* song = &(*songs)[static_cast<int>(track_number - 1)];
   *track_no = static_cast<gint>(track_number) - 1;
 
   // qLog(Debug) << gst_tag_list_to_string(tags);
@@ -106,47 +111,47 @@ bool CddaSongLoader::ParseSongTags(SongList& songs, GstTagList* tags,
   gchar* buffer = nullptr;
   if (gst_tag_list_get_string(tags, GST_TAG_ALBUM, &buffer)) {
     has_loaded_tags = true;
-    song.set_album(QString::fromUtf8(buffer));
+    song->set_album(QString::fromUtf8(buffer));
     g_free(buffer);
   }
 
   if (gst_tag_list_get_string(tags, GST_TAG_ALBUM_ARTIST, &buffer)) {
     has_loaded_tags = true;
-    song.set_albumartist(QString::fromUtf8(buffer));
+    song->set_albumartist(QString::fromUtf8(buffer));
     g_free(buffer);
   }
 
   if (gst_tag_list_get_string(tags, GST_TAG_GENRE, &buffer)) {
     has_loaded_tags = true;
-    song.set_genre(QString::fromUtf8(buffer));
+    song->set_genre(QString::fromUtf8(buffer));
     g_free(buffer);
   }
 
   if (gst_tag_list_get_string(tags, GST_TAG_ARTIST, &buffer)) {
     has_loaded_tags = true;
-    song.set_artist(QString::fromUtf8(buffer));
+    song->set_artist(QString::fromUtf8(buffer));
     g_free(buffer);
   }
 
   if (gst_tag_list_get_string(tags, GST_TAG_TITLE, &buffer)) {
     has_loaded_tags = true;
-    song.set_title(QString::fromUtf8(buffer));
+    song->set_title(QString::fromUtf8(buffer));
     g_free(buffer);
   }
 
   // cdiocddasrc gives every track a duration, CD-TEXT or not, so it doesn't
   // count as a loaded tag: otherwise the disc would always seem to have
   // titles, and MusicBrainz's would never be used.
-  guint64 duration;
+  guint64 duration = 0;
   if (gst_tag_list_get_uint64(tags, GST_TAG_DURATION, &duration)) {
-    song.set_length_nanosec(duration);
+    song->set_length_nanosec(duration);
   }
 
-  song.set_track(track_number);
-  song.set_id(track_number);
-  song.set_filetype(Song::Type_Cdda);
-  song.set_valid(true);
-  song.set_url(GetUrlFromTrack(track_number));
+  song->set_track(track_number);
+  song->set_id(track_number);
+  song->set_filetype(Song::Type_Cdda);
+  song->set_valid(true);
+  song->set_url(GetUrlFromTrack(track_number));
   return has_loaded_tags;
 }
 
@@ -155,26 +160,21 @@ void CddaSongLoader::LoadSongsFromCdda() {
 
   if (!may_load_) return;
   // Create gstreamer cdda element
-  GError* error = nullptr;
-  GstElement* cdda_ = gst_element_factory_make("cdiocddasrc", nullptr);
-  if (error) {
-    qLog(Error) << error->code << QString::fromLocal8Bit(error->message);
-  }
-  if (cdda_ == nullptr) {
+  GstElement* cdda = gst_element_factory_make("cdiocddasrc", nullptr);
+  if (cdda == nullptr) {
     emit SongsLoaded(initial_song_list);
     emit Finished();
     return;
   }
 
   if (url_.path().isEmpty()) {
-    CddaDevice::SetDefaultDrive(cdda_);
+    CddaDevice::SetDefaultDrive(cdda);
   } else {
-    g_object_set(cdda_, "device", url_.path().toLocal8Bit().constData(),
+    g_object_set(cdda, "device", url_.path().toLocal8Bit().constData(),
                  nullptr);
   }
-  if (g_object_class_find_property(G_OBJECT_GET_CLASS(cdda_),
-                                   "paranoia-mode")) {
-    g_object_set(cdda_, "paranoia-mode", 0, nullptr);
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(cdda), "paranoia-mode")) {
+    g_object_set(cdda, "paranoia-mode", 0, nullptr);
   }
 
   gst_tag_register_musicbrainz_tags();
@@ -184,14 +184,14 @@ void CddaSongLoader::LoadSongsFromCdda() {
   // "not-linked" and never sends the TOC and tags read below.
   GstElement* pipeline = gst_pipeline_new("pipeline");
   GstElement* sink = gst_element_factory_make("fakesink", nullptr);
-  gst_bin_add_many(GST_BIN(pipeline), cdda_, sink, nullptr);
-  if (!gst_element_link(cdda_, sink) ||
+  gst_bin_add_many(GST_BIN(pipeline), cdda, sink, nullptr);
+  if (!gst_element_link(cdda, sink) ||
       gst_element_set_state(pipeline, GST_STATE_PAUSED) ==
           GST_STATE_CHANGE_FAILURE ||
       gst_element_get_state(pipeline, nullptr, nullptr, 10 * GST_SECOND) ==
           GST_STATE_CHANGE_FAILURE) {
     gst_element_set_state(pipeline, GST_STATE_NULL);
-    // This will also cause cdda_ to be unref'd.
+    // This will also cause cdda to be unref'd.
     gst_object_unref(pipeline);
 
     emit SongsLoaded(initial_song_list);
@@ -202,7 +202,7 @@ void CddaSongLoader::LoadSongsFromCdda() {
   // Get number of tracks
   GstFormat track_fmt = gst_format_get_by_nick("track");
   gint64 num_tracks = 0;
-  if (!gst_element_query_duration(cdda_, track_fmt, &num_tracks)) {
+  if (!gst_element_query_duration(cdda, track_fmt, &num_tracks)) {
     qLog(Error) << "Error while querying cdda GstElement for track count";
     gst_element_set_state(pipeline, GST_STATE_NULL);
     gst_object_unref(pipeline);
@@ -233,23 +233,33 @@ void CddaSongLoader::LoadSongsFromCdda() {
       static_cast<GstMessageType>(GST_MESSAGE_TOC | GST_MESSAGE_TAG);
   QString musicbrainz_discid;
   bool loaded_cd_tags = false;
+  int seek_mismatch_retries = 0;
+  const int max_seek_mismatch_retries = static_cast<int>(num_tracks) * 2 + 4;
   while (may_load_ && msg_filter &&
          (msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
                                            10 * GST_SECOND, msg_filter))) {
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
       // Handle TOC message: get tracks duration
-      GstToc* toc;
+      GstToc* toc = nullptr;
       gst_message_parse_toc(msg, &toc, nullptr);
       if (toc) {
         GList* entries = gst_toc_get_entries(toc);
         if (entries && initial_song_list.size() <= g_list_length(entries)) {
           int i = 0;
-          for (GList* node = entries; node != nullptr; node = node->next) {
+          // Entries may include extra non-audio/lead-out entries beyond
+          // initial_song_list, and signed stop <= start would underflow
+          // quint64.
+          for (GList* node = entries;
+               node != nullptr && i < initial_song_list.size();
+               node = node->next) {
             GstTocEntry* entry = static_cast<GstTocEntry*>(node->data);
             quint64 duration = 0;
-            gint64 start, stop;
-            if (gst_toc_entry_get_start_stop_times(entry, &start, &stop))
+            gint64 start = 0;
+            gint64 stop = 0;
+            if (gst_toc_entry_get_start_stop_times(entry, &start, &stop) &&
+                stop > start) {
               duration = stop - start;
+            }
             initial_song_list[i++].set_length_nanosec(duration);
           }
           emit SongsDurationLoaded(initial_song_list);
@@ -262,14 +272,14 @@ void CddaSongLoader::LoadSongsFromCdda() {
       // Handle TAG message: generate MusicBrainz DiscId and read CD-TEXT if
       // present
 
-      gint64
-          track_number_from_query;  // track number gstreamer thinks we are at
-      gst_element_query_position(cdda_, track_fmt, &track_number_from_query);
+      gint64 track_number_from_query = 0;
+      const gboolean query_ok =
+          gst_element_query_position(cdda, track_fmt, &track_number_from_query);
 
       GstTagList* tags = nullptr;
       gst_message_parse_tag(msg, &tags);
       char* string_mb = nullptr;
-      if (musicbrainz_discid.isEmpty() &&
+      if (musicbrainz_discid.isEmpty() && tags &&
           gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
                                   &string_mb)) {
         musicbrainz_discid = QString::fromUtf8(string_mb);
@@ -277,23 +287,27 @@ void CddaSongLoader::LoadSongsFromCdda() {
         qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
       }
 
-      gint track_number_from_tags;  // track number contained in the tag message
-      loaded_cd_tags |=
-          ParseSongTags(tagged_song_list, tags, &track_number_from_tags);
-      gst_tag_list_free(tags);
+      gint track_number_from_tags = -1;
+      if (tags) {
+        loaded_cd_tags |=
+            ParseSongTags(&tagged_song_list, tags, &track_number_from_tags);
+        gst_tag_list_free(tags);
+      }
+
+      if (track_number_from_tags < 0) {
+        // Unref the popped GstMessage before skipping invalid/unindexed tags.
+        gst_message_unref(msg);
+        continue;
+      }
 
       // We may receive a tag message for a track we have already seen, not for
       // the track we seeked to previously, i.e., track_number_from_tags and
-      // track_number_from_query do not agree. If we would just wait now,
-      // nothing else would happen: It seems, gstreamer will for some reason not
-      // pass the tag message for the song we seeked to in this case or it gets
-      // lost somewhere. We can't seek again to the track we want to see,
-      // because gstreamer thinks we are already there and will do nothing. We
-      // therefore seek to the previous track and resume from there.
-      // note(lumip): There's a slight risk of an infinite loop here where if
-      // the above behavior repeats consistently, but in my tests this does not
-      // happen.
-      if (track_number_from_tags < track_number_from_query) {
+      // track_number_from_query do not agree.
+      // Require a valid position query and cap retries so persistently
+      // mismatched tag messages from a drive cannot cause an infinite loop.
+      if (query_ok && track_number_from_tags < track_number_from_query &&
+          seek_mismatch_retries < max_seek_mismatch_retries) {
+        ++seek_mismatch_retries;
         qLog(Debug) << "message query mismatch! : " << track_number_from_tags
                     << " vs " << track_number_from_query;
         gst_element_seek_simple(
@@ -301,6 +315,7 @@ void CddaSongLoader::LoadSongsFromCdda() {
             static_cast<GstSeekFlags>(GST_SEEK_FLAG_FLUSH |
                                       GST_SEEK_FLAG_TRICKMODE),
             track_number_from_tags);
+        gst_message_unref(msg);
         continue;
       }
       gint next_track_number = track_number_from_tags + 1;
@@ -329,12 +344,12 @@ void CddaSongLoader::LoadSongsFromCdda() {
 
   // cleanup
   gst_element_set_state(pipeline, GST_STATE_NULL);
-  // This will also cause cdda_ to be unref'd.
+  // This will also cause cdda to be unref'd.
   gst_object_unref(pipeline);
 }
 
-void CddaSongLoader::LoadAudioCDTags(const QString& musicbrainz_discid) const {
-  MusicBrainzClient* musicbrainz_client = new MusicBrainzClient;
+void CddaSongLoader::LoadAudioCDTags(const QString& musicbrainz_discid) {
+  MusicBrainzClient* musicbrainz_client = new MusicBrainzClient(this);
   connect(musicbrainz_client,
           SIGNAL(Finished(const QString&, const QString&,
                           MusicBrainzClient::ResultList)),
@@ -349,13 +364,14 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
     const MusicBrainzClient::ResultList& results) {
   MusicBrainzClient* musicbrainz_client =
       qobject_cast<MusicBrainzClient*>(sender());
-  musicbrainz_client->deleteLater();
+  if (musicbrainz_client) musicbrainz_client->deleteLater();
   if (results.empty()) {
     // no real update; signal that no further updates will follow now
     emit Finished();
     return;
   }
 
+  SongList updated_tracks;
   {
     QMutexLocker lock(&disc_mutex_);
 
@@ -363,35 +379,43 @@ void CddaSongLoader::ProcessMusicBrainzResponse(
       qLog(Warning) << "Number of tracks in metadata does not match number of "
                        "songs on disc!";
       // no idea how to recover; signal that no further updates will follow now
+      // Unlock before emitting Finished() so connected slots cannot deadlock on
+      // disc_mutex_.
+      lock.unlock();
       emit Finished();
       return;
     }
 
     for (int i = 0; i < results.length(); ++i) {
       const MusicBrainzClient::Result& new_song_info = results[i];
-      Song& song = disc_.tracks[i];
+      Song* song = &disc_.tracks[i];
 
-      if (!disc_.has_titles) song.set_title(new_song_info.title_);
-      if (song.album().isEmpty()) song.set_album(album);
-      if (song.artist().isEmpty()) song.set_artist(artist);
+      if (!disc_.has_titles) song->set_title(new_song_info.title_);
+      if (song->album().isEmpty()) song->set_album(album);
+      if (song->artist().isEmpty()) song->set_artist(artist);
 
-      if (song.length_nanosec() == -1)
-        song.set_length_nanosec(new_song_info.duration_msec_ * kNsecPerMsec);
-      if (song.track() < 1) song.set_track(new_song_info.track_);
-      if (song.year() == -1) song.set_year(new_song_info.year_);
+      if (song->length_nanosec() == -1)
+        song->set_length_nanosec(new_song_info.duration_msec_ * kNsecPerMsec);
+      if (song->track() < 1) song->set_track(new_song_info.track_);
+      if (song->year() == -1) song->set_year(new_song_info.year_);
     }
     disc_.has_titles = true;
+    // Snapshot tracks under disc_mutex_ so the signal is emitted unlocked.
+    updated_tracks = disc_.tracks;
   }
 
-  emit SongsMetadataLoaded(disc_.tracks);
+  emit SongsMetadataLoaded(updated_tracks);
   emit Finished();  // no further updates will follow
 }
 
 void CddaSongLoader::SetDiscTracks(const SongList& songs, bool has_titles) {
-  QMutexLocker lock(&disc_mutex_);
-  disc_.tracks = songs;
-  disc_.has_titles = has_titles;
-  emit SongsUpdated(disc_.tracks);
+  // Release disc_mutex_ before emitting SongsUpdated() to avoid lock inversion.
+  {
+    QMutexLocker lock(&disc_mutex_);
+    disc_.tracks = songs;
+    disc_.has_titles = has_titles;
+  }
+  emit SongsUpdated(songs);
 }
 
 SongList CddaSongLoader::cached_tracks() const {

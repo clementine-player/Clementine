@@ -38,7 +38,8 @@ QVariantList CddaLister::DeviceIcons(const QString&) {
 
 QString CddaLister::DeviceManufacturer(const QString& id) {
   CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
-  cdio_hwinfo_t cd_info;
+  if (!cdio) return QString();
+  cdio_hwinfo_t cd_info = {};
   if (cdio_get_hwinfo(cdio, &cd_info)) {
     cdio_destroy(cdio);
     return QString(cd_info.psz_vendor);
@@ -49,7 +50,8 @@ QString CddaLister::DeviceManufacturer(const QString& id) {
 
 QString CddaLister::DeviceModel(const QString& id) {
   CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
-  cdio_hwinfo_t cd_info;
+  if (!cdio) return QString();
+  cdio_hwinfo_t cd_info = {};
   if (cdio_get_hwinfo(cdio, &cd_info)) {
     cdio_destroy(cdio);
     return QString(cd_info.psz_model);
@@ -68,12 +70,14 @@ QVariantMap CddaLister::DeviceHardwareInfo(const QString&) {
 
 QString CddaLister::MakeFriendlyName(const QString& id) {
   CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
-  cdio_hwinfo_t cd_info;
-  if (cdio_get_hwinfo(cdio, &cd_info)) {
+  if (cdio) {
+    cdio_hwinfo_t cd_info = {};
+    if (cdio_get_hwinfo(cdio, &cd_info)) {
+      cdio_destroy(cdio);
+      return QString(cd_info.psz_model);
+    }
     cdio_destroy(cdio);
-    return QString(cd_info.psz_model);
   }
-  cdio_destroy(cdio);
   return QString("CD (") + id + ")";
 }
 
@@ -99,8 +103,10 @@ void CddaLister::Init() {
     qLog(Debug) << "No CD devices found";
     return;
   }
-  for (; *devices != nullptr; ++devices) {
-    QString device(*devices);
+  // Keep devices pointing at the list head so cdio_free_device_list() can
+  // free the entire array after iteration.
+  for (char** p = devices; *p != nullptr; ++p) {
+    QString device(*p);
     QFileInfo device_info(device);
     if (device_info.isSymLink()) {
       device = device_info.symLinkTarget();
@@ -118,4 +124,5 @@ void CddaLister::Init() {
       emit DeviceAdded(device);
     }
   }
+  cdio_free_device_list(devices);
 }

@@ -20,6 +20,7 @@
 
 #include <QMutex>
 #include <QWaitCondition>
+#include <atomic>
 #include <memory>
 
 #include "connecteddevice.h"
@@ -75,6 +76,9 @@ class MtpDevice : public ConnectedDevice {
   MtpLoader* loader_;
 
   QMutex db_busy_;
+  // Tracks db_busy_ ownership so FinishCopy() does not double-unlock if
+  // StartCopy() failed and already released the mutex.
+  std::atomic<bool> db_busy_locked_{false};
   SongList songs_to_add_;
   SongList songs_to_remove_;
 

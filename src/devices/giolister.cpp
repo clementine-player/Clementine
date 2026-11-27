@@ -123,6 +123,9 @@ void GioLister::Init() {
 }
 
 GioLister::~GioLister() {
+  // monitor_ is created asynchronously in Init(); it can be null if destroyed
+  // before the lister thread finishes starting.
+  if (!monitor_) return;
   for (gulong signal : signals_) {
     g_signal_handler_disconnect(monitor_, signal);
   }
@@ -191,6 +194,9 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
   QString unix_device;
   {
     QMutexLocker l(&mutex_);
+    // Guard with contains() so a concurrent removal does not default-insert an
+    // empty DeviceInfo entry via operator[].
+    if (!devices_.contains(id)) return QList<QUrl>();
     mount_point = devices_[id].mount_path;
     uri = devices_[id].mount_uri;
     unix_device = devices_[id].volume_unix_device;
@@ -306,6 +312,7 @@ void GioLister::MountAdded(GMount* mount) {
   }
 
   QString old_id;
+  QString removed_id;
   {
     QMutexLocker l(&mutex_);
 
@@ -321,12 +328,16 @@ void GioLister::MountAdded(GMount* mount) {
       // If the ID has changed (for example, after it's been mounted), we need
       // to remove the old device.
       devices_.remove(old_id);
-      emit DeviceRemoved(old_id);
+      removed_id = old_id;
 
       old_id = QString();
     }
     devices_[info.unique_id()] = info;
   }
+
+  // Emit signals after releasing mutex_ so slots querying GioLister do not
+  // deadlock on this non-recursive mutex.
+  if (!removed_id.isEmpty()) emit DeviceRemoved(removed_id);
 
   if (!old_id.isEmpty())
     emit DeviceChanged(old_id);
@@ -397,15 +408,21 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Get the icon name(s)
   mount_icon_names.clear();
   GIcon* icon = g_mount_get_icon(mount);
-  if (G_IS_THEMED_ICON(icon)) {
-    const char* const* icons = g_themed_icon_get_names(G_THEMED_ICON(icon));
-    for (const char* const* p = icons; *p; ++p) {
-      mount_icon_names << QString::fromUtf8(*p);
+  if (icon) {
+    if (G_IS_THEMED_ICON(icon)) {
+      const char* const* icons = g_themed_icon_get_names(G_THEMED_ICON(icon));
+      for (const char* const* p = icons; *p; ++p) {
+        mount_icon_names << QString::fromUtf8(*p);
+      }
     }
+    g_object_unref(icon);
   }
-  g_object_unref(icon);
 
   GFile* root = g_mount_get_root(mount);
+  if (!root) {
+    invalid_enclosing_mount = true;
+    return;
+  }
 
   // Get the mount path
   mount_path = ConvertAndFree(g_file_get_path(root));
@@ -416,10 +433,13 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // and we end up reading information about the / filesystem by mistake.
   GError* error = nullptr;
   GMount* actual_mount = g_file_find_enclosing_mount(root, nullptr, &error);
+  // Either error or a null actual_mount can occur independently during
+  // teardown, so free/unref each non-null pointer safely.
   if (error || !actual_mount) {
-    g_error_free(error);
+    if (error) g_error_free(error);
+    if (actual_mount) g_object_unref(actual_mount);
     invalid_enclosing_mount = true;
-  } else if (actual_mount) {
+  } else {
     g_object_unref(actual_mount);
   }
 
@@ -433,7 +453,8 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   if (error) {
     qLog(Warning) << QString::fromLocal8Bit(error->message);
     g_error_free(error);
-  } else {
+  } else if (info) {
+    // GIO can return a null GFileInfo even when error is unset.
     filesystem_size = g_file_info_get_attribute_uint64(
         info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
     filesystem_free = g_file_info_get_attribute_uint64(
@@ -452,7 +473,7 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   if (error) {
     qLog(Warning) << QString::fromLocal8Bit(error->message);
     g_error_free(error);
-  } else {
+  } else if (info) {
     is_mountpoint = g_file_info_get_attribute_boolean(
         info, G_FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT);
 
@@ -478,7 +499,7 @@ void GioLister::DeviceInfo::ReadVolumeInfo(GVolume* volume) {
 
   GFile* root = g_volume_get_activation_root(volume);
   if (root) {
-    volume_root_uri = g_file_get_uri(root);
+    volume_root_uri = ConvertAndFree(g_file_get_uri(root));
     g_object_unref(root);
   }
 }
@@ -527,29 +548,37 @@ void GioLister::MountUnmountFinished(GObject* object, GAsyncResult* result,
 }
 
 void GioLister::UnmountDevice(const QString& id) {
-  QMutexLocker l(&mutex_);
-  if (!devices_.contains(id)) return;
+  // Ref GVolume/GMount under mutex_ and release the lock before calling GIO so
+  // concurrent removals cannot free them mid-call or deadlock callbacks.
+  ScopedGObject<GVolume> volume;
+  ScopedGObject<GMount> mount;
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id)) return;
 
-  const DeviceInfo& info = devices_[id];
+    const DeviceInfo& info = devices_[id];
+    if (!info.mount_) return;
 
-  if (!info.mount_) return;
+    volume = info.volume_;
+    mount = info.mount_;
+  }
 
-  if (info.volume_) {
-    if (g_volume_can_eject(info.volume_)) {
+  if (volume) {
+    if (g_volume_can_eject(volume)) {
       g_volume_eject_with_operation(
-          info.volume_, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
+          volume, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
           (GAsyncReadyCallback)VolumeEjectFinished, nullptr);
       return;
     }
   }
 
-  if (g_mount_can_eject(info.mount_)) {
-    g_mount_eject_with_operation(
-        info.mount_, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
-        (GAsyncReadyCallback)MountEjectFinished, nullptr);
-  } else if (g_mount_can_unmount(info.mount_)) {
+  if (g_mount_can_eject(mount)) {
+    g_mount_eject_with_operation(mount, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
+                                 (GAsyncReadyCallback)MountEjectFinished,
+                                 nullptr);
+  } else if (g_mount_can_unmount(mount)) {
     g_mount_unmount_with_operation(
-        info.mount_, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
+        mount, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
         (GAsyncReadyCallback)MountUnmountFinished, nullptr);
   }
 }
@@ -559,9 +588,12 @@ void GioLister::UpdateDeviceFreeSpace(const QString& id) {
     QMutexLocker l(&mutex_);
     if (!devices_.contains(id)) return;
 
-    DeviceInfo& device_info = devices_[id];
+    DeviceInfo* device_info = &devices_[id];
+    // Unmounted volumes live in devices_ with mount_ == nullptr.
+    if (!device_info->mount_) return;
 
-    GFile* root = g_mount_get_root(device_info.mount_);
+    GFile* root = g_mount_get_root(device_info->mount_);
+    if (!root) return;
 
     GError* error = nullptr;
     GFileInfo* info = g_file_query_filesystem_info(
@@ -569,8 +601,8 @@ void GioLister::UpdateDeviceFreeSpace(const QString& id) {
     if (error) {
       qLog(Warning) << QString::fromLocal8Bit(error->message);
       g_error_free(error);
-    } else {
-      device_info.filesystem_free = g_file_info_get_attribute_uint64(
+    } else if (info) {
+      device_info->filesystem_free = g_file_info_get_attribute_uint64(
           info, G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
       g_object_unref(info);
     }
@@ -594,20 +626,34 @@ int GioLister::MountDevice(const QString& id) {
 }
 
 void GioLister::DoMountDevice(const QString& id, int request_id) {
-  QMutexLocker l(&mutex_);
-  if (!devices_.contains(id)) {
-    emit DeviceMounted(id, request_id, false);
-    return;
+  // Hold an extra GVolume ref and unlock mutex_ before mounting or emitting
+  // DeviceMounted() so callbacks/slots cannot deadlock or hit a freed volume.
+  ScopedGObject<GVolume> volume;
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id)) {
+      l.unlock();
+      emit DeviceMounted(id, request_id, false);
+      return;
+    }
+
+    const DeviceInfo& info = devices_[id];
+    if (info.mount_) {
+      // Already mounted
+      l.unlock();
+      emit DeviceMounted(id, request_id, true);
+      return;
+    }
+
+    if (!info.volume_) {
+      l.unlock();
+      emit DeviceMounted(id, request_id, false);
+      return;
+    }
+    volume = info.volume_;
   }
 
-  const DeviceInfo& info = devices_[id];
-  if (info.mount_) {
-    // Already mounted
-    emit DeviceMounted(id, request_id, true);
-    return;
-  }
-
-  g_volume_mount(info.volume_, G_MOUNT_MOUNT_NONE, nullptr, nullptr,
+  g_volume_mount(volume, G_MOUNT_MOUNT_NONE, nullptr, nullptr,
                  VolumeMountFinished, nullptr);
   emit DeviceMounted(id, request_id, true);
 }

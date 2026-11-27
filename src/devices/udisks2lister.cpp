@@ -18,6 +18,7 @@
 #include "udisks2lister.h"
 
 #include <QDBusConnection>
+#include <QTimer>
 
 #include "core/logging.h"
 #include "core/utilities.h"
@@ -39,12 +40,28 @@ QStringList Udisks2Lister::DeviceUniqueIDs() {
 }
 
 QVariantList Udisks2Lister::DeviceIcons(const QString& id) {
-  QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id)) return QVariantList();
-  QString path = device_data_[id].mount_paths.at(0);
-  return QVariantList() << GuessIconForPath(path)
-                        << GuessIconForModel(DeviceManufacturer(id),
-                                             DeviceModel(id));
+  // Copy vendor/model under one QReadLocker instead of calling
+  // DeviceManufacturer()/DeviceModel(), which would recursively re-lock a
+  // non-recursive QReadWriteLock and deadlock against a pending writer.
+  QString path;
+  QString vendor;
+  QString model;
+  {
+    QReadLocker locker(&device_data_lock_);
+    if (!device_data_.contains(id)) return QVariantList();
+    const PartitionData& data = device_data_[id];
+    if (!data.mount_paths.isEmpty()) {
+      path = data.mount_paths.at(0);
+    }
+    vendor = data.vendor;
+    model = data.model;
+  }
+  QVariantList icons;
+  if (!path.isEmpty()) {
+    icons << GuessIconForPath(path);
+  }
+  icons << GuessIconForModel(vendor, model);
+  return icons;
 }
 
 QString Udisks2Lister::DeviceManufacturer(const QString& id) {
@@ -95,18 +112,27 @@ QString Udisks2Lister::MakeFriendlyName(const QString& id) {
 
 QList<QUrl> Udisks2Lister::MakeDeviceUrls(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id)) return QList<QUrl>();
+  if (!device_data_.contains(id) || device_data_[id].mount_paths.isEmpty()) {
+    return QList<QUrl>();
+  }
   return QList<QUrl>() << MakeUrlFromLocalPath(
              device_data_[id].mount_paths.at(0));
 }
 
 void Udisks2Lister::UnmountDevice(const QString& id) {
-  QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id)) return;
+  // Copy D-Bus paths under QReadLocker, run blocking D-Bus unmount/eject calls
+  // unlocked, then acquire QWriteLocker to remove the entry before emitting.
+  QString dbus_path;
+  QString dbus_drive_path;
+  {
+    QReadLocker locker(&device_data_lock_);
+    if (!device_data_.contains(id)) return;
+    dbus_path = device_data_[id].dbus_path;
+    dbus_drive_path = device_data_[id].dbus_drive_path;
+  }
 
   OrgFreedesktopUDisks2FilesystemInterface filesystem(
-      udisks2_service_, device_data_[id].dbus_path,
-      QDBusConnection::systemBus());
+      udisks2_service_, dbus_path, QDBusConnection::systemBus());
 
   if (filesystem.isValid()) {
     auto unmount_result = filesystem.Unmount(QVariantMap());
@@ -118,8 +144,7 @@ void Udisks2Lister::UnmountDevice(const QString& id) {
       return;
     }
 
-    OrgFreedesktopUDisks2DriveInterface drive(udisks2_service_,
-                                              device_data_[id].dbus_drive_path,
+    OrgFreedesktopUDisks2DriveInterface drive(udisks2_service_, dbus_drive_path,
                                               QDBusConnection::systemBus());
 
     if (drive.isValid()) {
@@ -131,15 +156,31 @@ void Udisks2Lister::UnmountDevice(const QString& id) {
                       << eject_result.error();
     }
 
-    device_data_.remove(id);
+    {
+      QWriteLocker locker(&device_data_lock_);
+      device_data_.remove(id);
+    }
     emit DeviceRemoved(id);
   }
 }
 
 void Udisks2Lister::UpdateDeviceFreeSpace(const QString& id) {
-  QWriteLocker locker(&device_data_lock_);
-  device_data_[id].free_space =
-      Utilities::FileSystemFreeSpace(device_data_[id].mount_paths.at(0));
+  // Stat the filesystem outside the lock, then re-verify id before writing.
+  QString mount_path;
+  {
+    QReadLocker locker(&device_data_lock_);
+    if (!device_data_.contains(id) || device_data_[id].mount_paths.isEmpty()) {
+      return;
+    }
+    mount_path = device_data_[id].mount_paths.at(0);
+  }
+
+  const quint64 free_space = Utilities::FileSystemFreeSpace(mount_path);
+  {
+    QWriteLocker locker(&device_data_lock_);
+    if (!device_data_.contains(id)) return;
+    device_data_[id].free_space = free_space;
+  }
 
   emit DeviceChanged(id);
 }
@@ -169,7 +210,13 @@ void Udisks2Lister::Init() {
     }
   }
 
-  for (const auto& id : device_data_.keys()) {
+  // Snapshot IDs so DeviceAdded() is emitted without holding device_data_lock_.
+  QStringList added_ids;
+  {
+    QReadLocker locker(&device_data_lock_);
+    added_ids = device_data_.keys();
+  }
+  for (const auto& id : added_ids) {
     emit DeviceAdded(id);
   }
 
@@ -238,19 +285,22 @@ bool Udisks2Lister::isPendingJob(const QDBusObjectPath& job_path) {
 }
 
 void Udisks2Lister::RemoveDevice(const QDBusObjectPath& device_path) {
-  QWriteLocker locker(&device_data_lock_);
   QString id;
-  for (const auto& data : device_data_) {
-    if (data.dbus_path == device_path.path()) {
-      id = data.unique_id();
-      break;
+  {
+    QWriteLocker locker(&device_data_lock_);
+    for (const auto& data : device_data_) {
+      if (data.dbus_path == device_path.path()) {
+        id = data.unique_id();
+        break;
+      }
     }
+
+    if (id.isEmpty()) return;
+
+    qLog(Debug) << "UDisks2 device removed: " << device_path.path();
+    device_data_.remove(id);
   }
-
-  if (id.isEmpty()) return;
-
-  qLog(Debug) << "UDisks2 device removed: " << device_path.path();
-  device_data_.remove(id);
+  // Emit after releasing device_data_lock_ so slots can query Udisks2Lister.
   emit DeviceRemoved(id);
 }
 
@@ -271,22 +321,40 @@ QList<QDBusObjectPath> Udisks2Lister::GetMountedPartitionsFromDBusArgument(
 
 void Udisks2Lister::JobCompleted(bool success, const QString& message) {
   auto job = qobject_cast<OrgFreedesktopUDisks2JobInterface*>(sender());
+  if (!job) return;
   QDBusObjectPath jobPath(job->path());
 
-  if (!job->isValid() || !success || !mounting_jobs_.contains(jobPath)) return;
+  // Take the job under jobs_lock_ so D-Bus reads/removal run unlocked.
+  Udisks2Job job_info;
+  {
+    QMutexLocker locker(&jobs_lock_);
+    if (!job->isValid() || !mounting_jobs_.contains(jobPath)) {
+      return;
+    }
+    job_info = mounting_jobs_.take(jobPath);
+  }
 
   qLog(Debug) << "Pending Job Completed | Path = " << job->path()
-              << " | Mount? = " << mounting_jobs_[jobPath].is_mount
+              << " | Mount? = " << job_info.is_mount
               << " | Success = " << success;
 
-  for (const auto& mounted_object :
-       mounting_jobs_[jobPath].mounted_partitions) {
-    auto partition_data = ReadPartitionData(mounted_object);
-    if (partition_data.dbus_path.isEmpty()) continue;
+  // Defer destroying the job interface (sender()) past this slot so Qt's
+  // signal dispatch finishes cleanly even when success is false.
+  if (job_info.dbus_interface) {
+    auto held_job = std::move(job_info.dbus_interface);
+    QTimer::singleShot(0, this, [held_job]() mutable { held_job.reset(); });
+  }
+  if (!success) return;
 
-    mounting_jobs_[jobPath].is_mount
-        ? HandleFinishedMountJob(partition_data)
-        : HandleFinishedUnmountJob(partition_data, mounted_object);
+  for (const auto& mounted_object : job_info.mounted_partitions) {
+    if (job_info.is_mount) {
+      auto partition_data = ReadPartitionData(mounted_object);
+      if (!partition_data.dbus_path.isEmpty()) {
+        HandleFinishedMountJob(partition_data);
+      }
+    } else {
+      HandleFinishedUnmountJob(mounted_object);
+    }
   }
 }
 
@@ -295,32 +363,55 @@ void Udisks2Lister::HandleFinishedMountJob(
   qLog(Debug) << "UDisks2 mount job finished: Drive = "
               << partition_data.dbus_drive_path
               << " | Partition = " << partition_data.dbus_path;
-  QWriteLocker locker(&device_data_lock_);
-  device_data_[partition_data.unique_id()] = partition_data;
-  emit DeviceAdded(partition_data.unique_id());
+  // Release device_data_lock_ before emitting DeviceAdded().
+  const QString id = partition_data.unique_id();
+  {
+    QWriteLocker locker(&device_data_lock_);
+    device_data_[id] = partition_data;
+  }
+  emit DeviceAdded(id);
 }
 
 void Udisks2Lister::HandleFinishedUnmountJob(
-    const Udisks2Lister::PartitionData& partition_data,
     const QDBusObjectPath& mounted_object) {
-  QWriteLocker locker(&device_data_lock_);
-  QString id;
-  for (auto& data : device_data_) {
-    if (data.mount_paths.contains(mounted_object.path())) {
-      qLog(Debug)
-          << "UDisks2 umount job finished, found corresponding device: Drive = "
-          << data.dbus_drive_path << " | Partition = " << data.dbus_path;
-      data.mount_paths.removeOne(mounted_object.path());
-      if (data.mount_paths.empty()) id = data.unique_id();
-      break;
+  // Query remaining mount points unlocked; mounted_object is the partition's
+  // UDisks2 D-Bus object path (matching data->dbus_path, not mount_paths).
+  QStringList remaining_mounts;
+  OrgFreedesktopUDisks2FilesystemInterface filesystem(
+      udisks2_service_, mounted_object.path(), QDBusConnection::systemBus());
+  if (filesystem.isValid()) {
+    for (const auto& path : filesystem.mountPoints()) {
+      remaining_mounts.push_back(path);
     }
   }
 
-  if (!id.isEmpty()) {
-    qLog(Debug) << "Partition " << partition_data.dbus_path
-                << " has no more mount points, removing it from device list";
-    device_data_.remove(id);
-    emit DeviceRemoved(id);
+  QString removed_id;
+  {
+    QWriteLocker locker(&device_data_lock_);
+    for (auto it = device_data_.begin(); it != device_data_.end(); ++it) {
+      PartitionData* data = &it.value();
+      if (data->dbus_path == mounted_object.path()) {
+        qLog(Debug) << "UDisks2 umount job finished, found corresponding "
+                       "device: Drive = "
+                    << data->dbus_drive_path
+                    << " | Partition = " << data->dbus_path;
+        data->mount_paths = remaining_mounts;
+        if (data->mount_paths.isEmpty()) {
+          removed_id = data->unique_id();
+        }
+        break;
+      }
+    }
+
+    if (!removed_id.isEmpty()) {
+      qLog(Debug) << "Partition " << mounted_object.path()
+                  << " has no more mount points, removing it from device list";
+      device_data_.remove(removed_id);
+    }
+  }
+
+  if (!removed_id.isEmpty()) {
+    emit DeviceRemoved(removed_id);
   }
 }
 

@@ -68,9 +68,14 @@ class MacDeviceLister : public DeviceLister {
 
   bool IsCDDevice(const QString& serial) const;
 
-  DASessionRef loop_session_;
-  CFRunLoopRef run_loop_;
+  DASessionRef loop_session_ = nullptr;
+  // Guards run_loop_ and stop_requested_ across Init() and ShutDown().
+  QMutex run_loop_mutex_;
+  CFRunLoopRef run_loop_ = nullptr;
+  bool stop_requested_ = false;
 
+  // Guards current_devices_, mtp_devices_, and cd_devices_ across threads.
+  mutable QMutex devices_mutex_;
   QMap<QString, QString> current_devices_;
   QMap<QString, MTPDevice> mtp_devices_;
   QSet<QString> cd_devices_;
