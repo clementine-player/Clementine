@@ -19,17 +19,16 @@
 
 #include "gpoddertoptagsmodel.h"
 
-#include <ApiRequest.h>
-
 #include <QMessageBox>
+#include <QPersistentModelIndex>
 
-#include "core/closure.h"
+#include "gpodderclient.h"
 #include "gpoddertoptagspage.h"
 #include "podcast.h"
 
-GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api,
+GPodderTopTagsModel::GPodderTopTagsModel(GPodderClient* client,
                                          Application* app, QObject* parent)
-    : PodcastDiscoveryModel(app, parent), api_(api) {}
+    : PodcastDiscoveryModel(app, parent), client_(client) {}
 
 bool GPodderTopTagsModel::hasChildren(const QModelIndex& parent) const {
   if (parent.isValid() && parent.data(Role_Type).toInt() == Type_Folder) {
@@ -58,21 +57,18 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   // Create a little Loading... item.
   itemFromIndex(parent)->appendRow(CreateLoadingIndicator());
 
-  mygpo::PodcastListPtr list(api_->podcastsOfTag(
-      GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
-
-  NewClosure(list.data(), &mygpo::PodcastList::finished, this,
-             &GPodderTopTagsModel::PodcastsOfTagFinished, parent, list.data());
-  NewClosure(list.data(), &mygpo::PodcastList::parseError, this,
-             &GPodderTopTagsModel::PodcastsOfTagFailed, parent, list.data());
-  NewClosure(list.data(), &mygpo::PodcastList::requestError, this,
-             [this, parent, list](QNetworkReply::NetworkError) {
-               PodcastsOfTagFailed(parent, list.data());
-             });
+  // The tag's row can move or go while the request is out.
+  const QPersistentModelIndex tag_index(parent);
+  client_->PodcastsOfTag(
+      parent.data().toString(), GPodderTopTagsPage::kMaxTagCount,
+      [this, tag_index](const QList<Podcast>& podcasts) {
+        PodcastsOfTagFinished(tag_index, podcasts);
+      },
+      [this, tag_index](const QString&) { PodcastsOfTagFailed(tag_index); });
 }
 
-void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
-                                                mygpo::PodcastList* list) {
+void GPodderTopTagsModel::PodcastsOfTagFinished(
+    const QModelIndex& parent, const QList<Podcast>& podcasts) {
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item) return;
 
@@ -81,16 +77,12 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
     parent_item->removeRow(0);
   }
 
-  for (mygpo::PodcastPtr gpo_podcast : list->list()) {
-    Podcast podcast;
-    podcast.InitFromGpo(gpo_podcast.data());
-
+  for (const Podcast& podcast : podcasts) {
     parent_item->appendRow(CreatePodcastItem(podcast));
   }
 }
 
-void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent,
-                                              mygpo::PodcastList* list) {
+void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent) {
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item) return;
 

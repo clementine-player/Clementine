@@ -103,8 +103,7 @@ QNetworkReply* NetworkAccessManager::createRequest(
                               .toUtf8();
 
   if (request.hasRawHeader("User-Agent")) {
-    // Append the existing user-agent set by a client library (such as
-    // libmygpo-qt).
+    // Append the existing user-agent set by a client library.
     user_agent += " " + request.rawHeader("User-Agent");
   }
 

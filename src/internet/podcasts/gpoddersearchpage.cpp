@@ -21,8 +21,8 @@
 
 #include <QMessageBox>
 
-#include "core/closure.h"
 #include "core/network.h"
+#include "gpodderclient.h"
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "ui/iconloader.h"
@@ -32,43 +32,34 @@ GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),
       ui_(new Ui_GPodderSearchPage),
       network_(new NetworkAccessManager(this)),
-      api_(new mygpo::ApiRequest(network_)) {
+      client_(new GPodderClient(network_, this)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
   setWindowIcon(IconLoader::Load("mygpo", IconLoader::Provider));
 }
 
-GPodderSearchPage::~GPodderSearchPage() {
-  delete ui_;
-  delete api_;
-}
+GPodderSearchPage::~GPodderSearchPage() { delete ui_; }
 
 void GPodderSearchPage::SearchClicked() {
   emit Busy(true);
 
-  mygpo::PodcastListPtr list(api_->search(ui_->query->text()));
-  NewClosure(list.data(), &mygpo::PodcastList::finished, this,
-             &GPodderSearchPage::SearchFinished, list);
-  NewClosure(list.data(), &mygpo::PodcastList::parseError, this,
-             &GPodderSearchPage::SearchFailed, list);
-  NewClosure(list.data(), &mygpo::PodcastList::requestError, this,
-             [this, list](QNetworkReply::NetworkError) { SearchFailed(list); });
+  client_->Search(
+      ui_->query->text(),
+      [this](const QList<Podcast>& podcasts) { SearchFinished(podcasts); },
+      [this](const QString&) { SearchFailed(); });
 }
 
-void GPodderSearchPage::SearchFinished(mygpo::PodcastListPtr list) {
+void GPodderSearchPage::SearchFinished(const QList<Podcast>& podcasts) {
   emit Busy(false);
 
   model()->clear();
 
-  for (mygpo::PodcastPtr gpo_podcast : list->list()) {
-    Podcast podcast;
-    podcast.InitFromGpo(gpo_podcast.data());
-
+  for (const Podcast& podcast : podcasts) {
     model()->appendRow(model()->CreatePodcastItem(podcast));
   }
 }
 
-void GPodderSearchPage::SearchFailed(mygpo::PodcastListPtr list) {
+void GPodderSearchPage::SearchFailed() {
   emit Busy(false);
 
   model()->clear();

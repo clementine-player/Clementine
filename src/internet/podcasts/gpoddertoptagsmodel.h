@@ -20,18 +20,16 @@
 #ifndef INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_
 #define INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_
 
+#include "podcast.h"
 #include "podcastdiscoverymodel.h"
 
-namespace mygpo {
-class ApiRequest;
-class PodcastList;
-}  // namespace mygpo
+class GPodderClient;
 
 class GPodderTopTagsModel : public PodcastDiscoveryModel {
   Q_OBJECT
 
  public:
-  GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
+  GPodderTopTagsModel(GPodderClient* client, Application* app,
                       QObject* parent = nullptr);
 
   enum Role {
@@ -45,11 +43,11 @@ class GPodderTopTagsModel : public PodcastDiscoveryModel {
 
  private slots:
   void PodcastsOfTagFinished(const QModelIndex& parent,
-                             mygpo::PodcastList* list);
-  void PodcastsOfTagFailed(const QModelIndex& parent, mygpo::PodcastList* list);
+                             const QList<Podcast>& podcasts);
+  void PodcastsOfTagFailed(const QModelIndex& parent);
 
  private:
-  mygpo::ApiRequest* api_;
+  GPodderClient* client_;
 };
 
 #endif  // INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_
