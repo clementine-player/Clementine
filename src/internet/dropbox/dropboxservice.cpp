@@ -135,6 +135,9 @@ void DropboxService::AccessTokenFinished(OAuthenticator* oauth) {
 
   if (oauth->access_token().isEmpty()) {
     qLog(Error) << "Couldn't get a Dropbox access token";
+    // Clear cached tokens so is_authenticated() turns false on failure.
+    access_token_.clear();
+    expiry_time_ = QDateTime();
     return;
   }
 
@@ -199,7 +202,8 @@ void DropboxService::RequestFileList() {
 
     QJsonDocument document(json);
     QNetworkReply* reply = network_->post(request, document.toJson());
-    connect(reply, &QNetworkReply::finished,
+    // Pass |this| as receiver so Qt disconnects if the service is destroyed.
+    connect(reply, &QNetworkReply::finished, this,
             [=, this] { this->RequestFileListFinished(reply); });
   } else {
     QUrl url = QUrl(kListFolderContinueEndpoint);
@@ -210,7 +214,7 @@ void DropboxService::RequestFileList() {
     request.setRawHeader("Authorization", GenerateAuthorisationHeader());
     request.setRawHeader("Content-Type", "application/json; charset=utf-8");
     QNetworkReply* reply = network_->post(request, document.toJson());
-    connect(reply, &QNetworkReply::finished,
+    connect(reply, &QNetworkReply::finished, this,
             [=, this] { this->RequestFileListFinished(reply); });
   }
 }
@@ -268,10 +272,14 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
     }
 
     if (ShouldIndexFile(url, GuessMimeTypeForFile(url.toString()))) {
-      QNetworkReply* reply = FetchContentUrl(url);
-      connect(reply, &QNetworkReply::finished, [=, this] {
-        this->FetchContentUrlFinished(reply, item.toVariantMap());
-      });
+      // Capture content_reply explicitly so the lambda does not hold the
+      // outer |reply| pointer that is already marked for deleteLater().
+      QNetworkReply* content_reply = FetchContentUrl(url);
+      connect(content_reply, &QNetworkReply::finished, this,
+              [this, content_reply, item] {
+                this->FetchContentUrlFinished(content_reply,
+                                              item.toVariantMap());
+              });
     }
   }
 
@@ -303,7 +311,7 @@ void DropboxService::LongPollDelta() {
   request.setRawHeader("Content-Type", "application/json; charset=utf-8");
   QJsonDocument document(json);
   QNetworkReply* reply = network_->post(request, document.toJson());
-  connect(reply, &QNetworkReply::finished,
+  connect(reply, &QNetworkReply::finished, this,
           [=, this] { this->LongPollFinished(reply); });
 }
 
@@ -321,7 +329,8 @@ void DropboxService::LongPollFinished(QNetworkReply* reply) {
   } else {
     bool ok = false;
     int backoff_secs = json_response["backoff"].toString().toInt(&ok);
-    backoff_secs = ok ? backoff_secs : 0;
+    // Clamp backoff to [0, 86400]s so large values cannot overflow ms.
+    backoff_secs = ok ? qBound(0, backoff_secs, 86400) : 0;
 
     QTimer::singleShot(backoff_secs * 1000, this, SLOT(LongPollDelta()));
   }
@@ -359,7 +368,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
       QDateTime::fromString(data["server_modified"].toString(), Qt::ISODate)
           .toSecsSinceEpoch());
   song.set_title(info.fileName());
-  song.set_filesize(data["size"].toInt());
+  song.set_filesize(data["size"].toLongLong());
   song.set_ctime(0);
 
   MaybeAddFileToDatabase(
@@ -372,6 +381,8 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
   EnsureConnected();
   QNetworkReply* reply = FetchContentUrl(url);
   WaitForSignal(reply, SIGNAL(finished()));
+  // FetchContentUrl() returns an unowned reply; clean it up after waiting.
+  reply->deleteLater();
 
   QJsonDocument document = ParseJsonReply(reply);
   if (document.isNull()) return QUrl();

@@ -27,7 +27,10 @@ SeafileTree::SeafileTree(QObject* parent) : QObject(parent) {}
 
 SeafileTree::SeafileTree(const SeafileTree& copy, QObject* parent)
     : QObject(parent) {
-  libraries_ = copy.libraries();
+  // Deep-copy TreeItem nodes because ~SeafileTree() owns and deletes them.
+  for (const TreeItem* item : copy.libraries()) {
+    libraries_.append(new TreeItem(*item));
+  }
 }
 
 QList<SeafileTree::TreeItem*> SeafileTree::libraries() const {
@@ -49,7 +52,8 @@ void SeafileTree::AddLibrary(const QString& name, const QString& id) {
 void SeafileTree::DeleteLibrary(const QString& id) {
   for (int i = 0; i < libraries_.size(); ++i) {
     if (libraries_.at(i)->entry().id() == id) {
-      libraries_.removeAt(i);
+      // SeafileTree owns each TreeItem subtree; delete it when removing.
+      delete libraries_.takeAt(i);
       return;
     }
   }
@@ -103,8 +107,12 @@ void SeafileTree::CheckEntries(const Entries& server_entries,
         if (local_entry.id() != server_entry.id()) {
           emit ToUpdate(library.id(), path, server_entry);
 
-          // Set the new id to the local entry
-          local_entry.set_id(server_entry.id());
+          // local_entry is a value copy; update the stored TreeItem node.
+          if (TreeItem* child = local_item->FindChild(local_entry.name())) {
+            Entry updated = child->entry();
+            updated.set_id(server_entry.id());
+            child->set_entry(updated);
+          }
         }
 
         // local_entries could be named "local_entries_to_proceed"
@@ -217,7 +225,7 @@ QList<QPair<QString, SeafileTree::Entry>> SeafileTree::GetRecursiveFilesOfDir(
   return files;
 }
 
-SeafileTree::~SeafileTree() {}
+SeafileTree::~SeafileTree() { Clear(); }
 
 /* ################################# Entry ################################# */
 
@@ -380,6 +388,8 @@ QDataStream& operator<<(QDataStream& out, const SeafileTree& tree) {
 }
 
 QDataStream& operator>>(QDataStream& in, SeafileTree& tree) {
+  // Clear existing items first so streaming into a populated tree doesn't leak.
+  tree.Clear();
   in >> tree.libraries_;
 
   return in;

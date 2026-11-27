@@ -44,7 +44,6 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialField(ui_->server);
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
-  ui_->login_state->AddCredentialField(ui_->usesslv3);
   ui_->login_state->AddCredentialField(ui_->verifycert);
   ui_->login_state->AddCredentialGroup(ui_->server_group);
 
@@ -63,7 +62,6 @@ void SubsonicSettingsPage::Load() {
   ui_->server->setText(s.value("server").toString());
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
-  ui_->usesslv3->setChecked(s.value("usesslv3").toBool());
   ui_->verifycert->setChecked(s.value("verifycert", true).toBool());
 
   // If the settings are complete, SubsonicService will have used them already
@@ -81,7 +79,6 @@ void SubsonicSettingsPage::Save() {
   s.setValue("server", ui_->server->text());
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
-  s.setValue("usesslv3", ui_->usesslv3->isChecked());
   s.setValue("verifycert", ui_->verifycert->isChecked());
 }
 
@@ -147,8 +144,7 @@ void SubsonicSettingsPage::LoginStateChanged(
 
     case SubsonicService::LoginState_SslError:
       ui_->login_state->SetAccountTypeText(
-          tr("SSL handshake error, verify server configuration. "
-             "SSLv3 option below may workaround some issues."));
+          tr("SSL handshake error, verify server configuration."));
       break;
 
     case SubsonicService::LoginState_IncompleteCredentials:
@@ -193,8 +189,7 @@ void SubsonicSettingsPage::ServerEditingFinished() {
 void SubsonicSettingsPage::Login() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
   service_->Login(ui_->server->text(), ui_->username->text(),
-                  ui_->password->text(), ui_->usesslv3->isChecked(),
-                  ui_->verifycert->isChecked());
+                  ui_->password->text(), ui_->verifycert->isChecked());
 }
 
 void SubsonicSettingsPage::Logout() {

@@ -44,7 +44,8 @@ static const char* kOAuthTokenEndpoint = "https://api.box.com/oauth2/token";
 
 static const char* kUserInfo = "https://api.box.com/2.0/users/me";
 static const char* kFolderItems = "https://api.box.com/2.0/folders/%1/items";
-static const int kRootFolderId = 0;
+// Box folder IDs are JSON strings; "0" is the root folder.
+static const char* kRootFolderId = "0";
 
 static const char* kFileContent = "https://api.box.com/2.0/files/%1/content";
 
@@ -76,6 +77,12 @@ void BoxService::EnsureConnected() {
   if (is_authenticated()) {
     return;
   }
+  // Without a refresh token, Connect() would open browser OAuth and hang
+  // WaitForSignal during unattended playback.
+  if (!has_credentials()) {
+    qLog(Warning) << "Box: cannot ensure connection, not linked yet";
+    return;
+  }
 
   Connect();
   WaitForSignal(this, SIGNAL(Connected()));
@@ -97,9 +104,22 @@ void BoxService::Connect() {
 void BoxService::ConnectFinished(OAuthenticator* oauth) {
   oauth->deleteLater();
 
+  if (oauth->access_token().isEmpty()) {
+    qLog(Error) << "Box authentication failed";
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    // Emit Connected() even on failure so WaitForSignal in EnsureConnected()
+    // unblocks.
+    emit Connected();
+    return;
+  }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("refresh_token", oauth->refresh_token());
+  // Refresh responses may omit refresh_token; keep the saved one.
+  if (!oauth->refresh_token().isEmpty()) {
+    s.setValue("refresh_token", oauth->refresh_token());
+  }
 
   access_token_ = oauth->access_token();
   expiry_time_ = oauth->expiry_time();
@@ -140,6 +160,10 @@ void BoxService::FetchUserInfoFinished(QNetworkReply* reply) {
 }
 
 void BoxService::ForgetCredentials() {
+  // Clear cached tokens too so is_authenticated() immediately turns false.
+  access_token_.clear();
+  expiry_time_ = QDateTime();
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
@@ -185,7 +209,7 @@ void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   }
 }
 
-void BoxService::FetchRecursiveFolderItems(const int folder_id,
+void BoxService::FetchRecursiveFolderItems(const QString& folder_id,
                                            const int offset) {
   QUrl url(QString(kFolderItems).arg(folder_id));
   QStringList fields;
@@ -208,8 +232,13 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id,
 }
 
 void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
-                                          const int folder_id) {
+                                          const QString& folder_id) {
   reply->deleteLater();
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "Failed to fetch Box folder" << folder_id
+                  << reply->errorString();
+    return;
+  }
 
   QJsonObject json_response =
       QJsonDocument::fromJson(reply->readAll()).object();
@@ -217,7 +246,9 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
   QJsonArray entries = json_response["entries"].toArray();
   const int total_entries = json_response["total_count"].toInt();
   const int offset = json_response["offset"].toInt();
-  if (entries.size() + offset < total_entries) {
+  // Guard !entries.isEmpty() so an empty page with stale total_count
+  // cannot loop forever at the same offset.
+  if (!entries.isEmpty() && entries.size() + offset < total_entries) {
     // Fetch the next page if necessary.
     FetchRecursiveFolderItems(folder_id, offset + entries.size());
   }
@@ -225,7 +256,12 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
   for (const QJsonValue& e : entries) {
     QJsonObject entry = e.toObject();
     if (entry["type"].toString() == "folder") {
-      FetchRecursiveFolderItems(entry["id"].toInt());
+      // Folder IDs are JSON strings; .toInt() returned 0 and re-fetched
+      // root infinitely.
+      const QString subfolder_id = entry["id"].toString();
+      if (!subfolder_id.isEmpty()) {
+        FetchRecursiveFolderItems(subfolder_id);
+      }
     } else {
       MaybeAddFileEntry(entry);
     }
@@ -244,7 +280,7 @@ void BoxService::MaybeAddFileEntry(const QJsonObject& entry) {
       QDateTime::fromString(entry["created_at"].toString()).toSecsSinceEpoch());
   song.set_mtime(QDateTime::fromString(entry["modified_at"].toString())
                      .toSecsSinceEpoch());
-  song.set_filesize(entry["size"].toInt());
+  song.set_filesize(entry["size"].toInteger());
   song.set_title(entry["name"].toString());
 
   // This is actually a redirect. Follow it now.
@@ -323,6 +359,8 @@ void BoxService::FetchEventsFinished(QNetworkReply* reply) {
 
 QUrl BoxService::GetStreamingUrlFromSongId(const QString& id) {
   EnsureConnected();
+  // EnsureConnected() returns without auth if unlinked or refresh failed.
+  if (!is_authenticated()) return QUrl();
   QNetworkReply* reply = FetchContentUrlForFile(id);
   WaitForSignal(reply, SIGNAL(finished()));
   reply->deleteLater();

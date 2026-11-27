@@ -23,6 +23,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QPointer>
 #include <QTimer>
 #include <QUrlQuery>
 #include <cmath>
@@ -287,6 +288,9 @@ void SeafileService::UpdateLibrariesInProgress(
   if (indexing_task_max_ == 0) {
     app_->task_manager()->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
+    // Reset progress counters so a later update starts from clean state.
+    indexing_task_progress_ = 0;
+    indexing_task_max_ = 0;
     UpdatingLibrariesFinishedSignal();
   }
 }
@@ -462,8 +466,8 @@ void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
   Song song;
   song.set_url(url);
   song.set_ctime(0);
-  song.set_mtime(json_entry_detail["mtime"].toInt());
-  song.set_filesize(json_entry_detail["size"].toInt());
+  song.set_mtime(json_entry_detail["mtime"].toInteger());
+  song.set_filesize(json_entry_detail["size"].toInteger());
   song.set_title(json_entry_detail["name"].toString());
 
   // Get the download url of the entry
@@ -606,10 +610,12 @@ void SeafileService::DeleteEntry(const QString& library, const QString& path,
 }
 
 bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
-  if (!(*reply)) {
+  // Always null *reply after deleteLater() so callers never reuse it.
+  if (!reply || !(*reply)) {
     return false;
   } else if (tries > kMaxTries) {
     (*reply)->deleteLater();
+    *reply = nullptr;
     return false;
   }
 
@@ -623,23 +629,40 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
     } else if (status_code == TOO_MANY_REQUESTS) {
       qLog(Debug) << "Too many requests, wait...";
 
-      int seconds_to_wait;
+      // Clamp retry backoff to [1, 3600]s to avoid negative or overflowing ms.
+      int wait_secs = 0;
       if ((*reply)->hasRawHeader("X-Throttle-Wait-Seconds")) {
-        seconds_to_wait =
-            ((*reply)->rawHeader("X-Throttle-Wait-Seconds").toInt() + 1) * 1000;
+        bool ok = false;
+        const int header_secs =
+            (*reply)->rawHeader("X-Throttle-Wait-Seconds").toInt(&ok);
+        wait_secs = ok ? qBound(1, header_secs + 1, 3600)
+                       : qBound(1, tries * tries, 3600);
       } else {
-        seconds_to_wait = std::pow(tries, 2) * 1000;
+        wait_secs = qBound(1, tries * tries, 3600);
       }
 
-      QTimer timer;
-      timer.start(seconds_to_wait);
-      WaitForSignal(&timer, SIGNAL(timeout()));
-
+      // Copy the request before deleting |*reply| and spinning the event loop.
+      const QNetworkRequest retry_request = (*reply)->request();
       (*reply)->deleteLater();
+      *reply = nullptr;
 
-      // We execute the reply again
-      *reply = network_->get((*reply)->request());
+      // Keep the timer single-shot and guard |this| across nested event loops.
+      QPointer<SeafileService> guard(this);
+      QTimer timer;
+      timer.setSingleShot(true);
+      timer.start(wait_secs * 1000);
+      WaitForSignal(&timer, SIGNAL(timeout()));
+      if (!guard) return false;
+
+      // Execute the GET request again
+      *reply = network_->get(retry_request);
       WaitForSignal(*reply, SIGNAL(finished()));
+      // |this| may have been destroyed while awaiting the retry response.
+      if (!guard) {
+        if (*reply) (*reply)->deleteLater();
+        *reply = nullptr;
+        return false;
+      }
 
       return CheckReply(reply, ++tries);
     }
@@ -647,6 +670,7 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
 
   // Unknown, 404 ...
   (*reply)->deleteLater();
+  *reply = nullptr;
   qLog(Warning) << "Error with the reply : " << status_code_variant.toInt();
   return false;
 }
@@ -659,9 +683,12 @@ void SeafileService::StartTaskInProgress() {
 
 void SeafileService::FinishedTaskInProgress() {
   indexing_task_progress_++;
-  if (indexing_task_progress_ == indexing_task_max_) {
+  // Use >= and reset counters so mismatched callbacks cannot wedge the task.
+  if (indexing_task_progress_ >= indexing_task_max_) {
     task_manager_->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
+    indexing_task_progress_ = 0;
+    indexing_task_max_ = 0;
     UpdatingLibrariesFinishedSignal();
   } else {
     task_manager_->SetTaskProgress(indexing_task_id_, indexing_task_progress_,

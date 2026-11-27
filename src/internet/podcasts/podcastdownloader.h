@@ -81,6 +81,7 @@ class PodcastDownloader : public QObject {
 
  public:
   explicit PodcastDownloader(Application* app, QObject* parent = nullptr);
+  ~PodcastDownloader() override;
 
   static const char* kSettingsGroup;
   PodcastEpisodeList EpisodesDownloading(const PodcastEpisodeList& episodes);

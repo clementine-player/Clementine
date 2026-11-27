@@ -22,6 +22,8 @@
 #ifndef INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 #define INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 
+#include <QMutex>
+#include <QPointer>
 #include <QQueue>
 #include <memory>
 
@@ -98,8 +100,7 @@ class SubsonicService : public InternetService {
 
   void Login();
   void Login(const QString& server, const QString& username,
-             const QString& password, const bool& usesslv3,
-             const bool& verifycert);
+             const QString& password, bool verifycert);
 
   LoginState login_state() const { return login_state_; }
 
@@ -151,16 +152,17 @@ class SubsonicService : public InternetService {
 
   std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
-  LibraryFilterWidget* library_filter_;
+  QPointer<LibraryFilterWidget> library_filter_;
   QSortFilterProxyModel* library_sort_model_;
   int total_song_count_;
 
   // Configuration
   // The server that shows up in the GUI (use UpdateServer() to update)
+  // Guards server/credential fields read from AlbumCoverLoader's thread.
+  mutable QMutex config_mutex_;
   QString configured_server_;
   QString username_;
   QString password_;
-  bool usesslv3_;
   bool verifycert_;
 
   LoginState login_state_;
@@ -187,6 +189,8 @@ class SubsonicLibraryScanner : public QObject {
   ~SubsonicLibraryScanner() override;
 
   void Scan();
+  void Cancel();
+  bool has_failed() const { return failed_; }
   const SongList& GetSongs() const { return songs_; }
 
   static const int kAlbumChunkSize;
@@ -209,6 +213,7 @@ class SubsonicLibraryScanner : public QObject {
 
   SubsonicService* service_;
   bool scanning_;
+  bool failed_;
   QQueue<QString> album_queue_;
   QSet<QNetworkReply*> pending_requests_;
   SongList songs_;

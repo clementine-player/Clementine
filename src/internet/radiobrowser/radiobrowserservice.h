@@ -20,6 +20,7 @@
 
 #include <QJsonObject>
 #include <QMenu>
+#include <QPersistentModelIndex>
 
 #include "core/cachedlist.h"
 #include "internet/core/internetmodel.h"
@@ -95,7 +96,7 @@ class RadioBrowserService : public InternetService {
   void RefreshCategoryItem(QStandardItem* item);
   void RefreshTop100(QStandardItem* item);
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id,
-                              QStandardItem* item);
+                              const QPersistentModelIndex& index);
   void Homepage();
   void ShowConfig() override;
   void AddToSavedRadio(bool checked);

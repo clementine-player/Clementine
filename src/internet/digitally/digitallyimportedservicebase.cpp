@@ -111,9 +111,21 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
+  // Preserve the cached channel list on network errors or empty replies.
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "Failed to get" << name()
+                  << "channel list:" << reply->errorString();
+    return;
+  }
+
   // Parse the list and sort by name
   DigitallyImportedClient::ChannelList channels =
       api_client_->ParseChannelList(reply);
+  if (channels.isEmpty()) {
+    qLog(Warning) << "Received empty" << name()
+                  << "channel list; keeping cached streams";
+    return;
+  }
   std::sort(channels.begin(), channels.end());
 
   saved_channels_.Update(channels);
@@ -164,6 +176,13 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   premium_audio_type_ = s.value("premium_audio_type", 2).toInt();
+  // ReloadSettings() also runs in the ctor before premium_playlists_ is
+  // populated, so only clamp here once the templates are initialized.
+  if (!premium_playlists_.isEmpty() &&
+      (premium_audio_type_ < 0 ||
+       premium_audio_type_ >= premium_playlists_.size())) {
+    premium_audio_type_ = 2;
+  }
   username_ = s.value("username").toString();
   listen_hash_ = s.value("listen_hash").toString();
   saved_channels_.Load();
@@ -218,15 +237,21 @@ DigitallyImportedClient::ChannelList DigitallyImportedServiceBase::Channels() {
 }
 
 void DigitallyImportedServiceBase::LoadStation(const QString& key) {
-  QUrl playlist_url;
+  // Defensively clamp against corrupted or pre-init settings.
+  const int audio_type = (premium_audio_type_ >= 0 &&
+                          premium_audio_type_ < premium_playlists_.size())
+                             ? premium_audio_type_
+                             : 2;
 
   // Replace "www." with "listen." in the hostname.
   const QString host = "listen." + homepage_url_.host().remove("www.");
 
-  playlist_url = QUrl(
-      premium_playlists_[premium_audio_type_].arg(host, key, listen_hash_));
+  const QUrl playlist_url(
+      premium_playlists_[audio_type].arg(host, key, listen_hash_));
 
-  qLog(Debug) << "Getting playlist URL" << playlist_url;
+  // Strip the query string so listen_hash_ is not written to logs.
+  qLog(Debug) << "Getting playlist URL"
+              << playlist_url.toString(QUrl::RemoveQuery);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(playlist_url));
   NewClosure(reply, &QNetworkReply::finished, this,

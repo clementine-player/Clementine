@@ -46,6 +46,7 @@ class InternetModel : public QStandardItemModel {
 
  public:
   explicit InternetModel(Application* app, QObject* parent = nullptr);
+  ~InternetModel() override;
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -179,10 +180,10 @@ class InternetModel : public QStandardItemModel {
   void ScrollToIndex(const QModelIndex& index);
 
  private slots:
-  void ServiceDeleted();
   void RowsAboutToBeRemoved(const QModelIndex& parent, int first, int last);
 
  private:
+  void ServiceDeleted(InternetService* service, const QString& name);
   // Index is about to be removed from the merged model
   void IndexAboutToBeRemoved(const QModelIndex& index);
   // Determine if d or one of its ancestors is equal to a.

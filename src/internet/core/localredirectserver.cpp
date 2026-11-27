@@ -26,8 +26,6 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-#include "core/closure.h"
-
 LocalRedirectServer::LocalRedirectServer(QObject* parent)
     : QObject(parent), server_(new QTcpServer(this)) {}
 
@@ -43,24 +41,30 @@ void LocalRedirectServer::Listen() {
 }
 
 void LocalRedirectServer::NewConnection() {
+  // Accept only one redirect connection; guard against spurious null
+  // sockets. Accumulate reads in buffer_ via a persistent connection rather
+  // than re-arming one-shot closures with copied buffers.
   QTcpSocket* socket = server_->nextPendingConnection();
   server_->close();
+  if (!socket) return;
 
-  QByteArray buffer;
-  NewClosure(socket, &QTcpSocket::readyRead, this,
-             &LocalRedirectServer::ReadyRead, socket, buffer);
+  buffer_.clear();
+  connect(socket, &QTcpSocket::readyRead, this,
+          [this, socket]() { ReadyRead(socket); });
 }
 
-void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
-  buffer.append(socket->readAll());
-  if (socket->atEnd() || buffer.endsWith("\r\n\r\n")) {
+void LocalRedirectServer::ReadyRead(QTcpSocket* socket) {
+  buffer_.append(socket->readAll());
+  // Wait for the HTTP header terminator or peer close, then disconnect before
+  // replying so trailing packets cannot re-emit Finished().
+  if (buffer_.contains("\r\n\r\n") || buffer_.contains("\n\n") ||
+      socket->state() == QAbstractSocket::UnconnectedState) {
+    socket->disconnect(this);
     WriteTemplate(socket);
     socket->deleteLater();
-    request_url_ = ParseUrlFromRequest(buffer);
+    request_url_ = ParseUrlFromRequest(buffer_);
+    buffer_.clear();
     emit Finished();
-  } else {
-    NewClosure(socket, &QTcpSocket::readyRead, this,
-               &LocalRedirectServer::ReadyRead, socket, buffer);
   }
 }
 
@@ -99,10 +103,15 @@ void LocalRedirectServer::WriteTemplate(QTcpSocket* socket) const {
 }
 
 QUrl LocalRedirectServer::ParseUrlFromRequest(const QByteArray& request) const {
-  QList<QByteArray> lines = request.split('\r');
-  const QByteArray& request_line = lines[0];
-  QByteArray path = request_line.split(' ')[1];
-  QUrl base_url = url();
-  QUrl request_url(base_url.toString() + path.mid(1), QUrl::StrictMode);
+  // Guard against truncated or malformed requests missing a target path.
+  const QList<QByteArray> lines = request.split('\r');
+  if (lines.isEmpty()) return QUrl();
+  const QList<QByteArray> parts = lines[0].split(' ');
+  if (parts.size() < 2) return QUrl();
+  const QByteArray& path = parts[1];
+  // url() already ends with '/'; strip at most one leading '/' from path.
+  const QString relative =
+      QString::fromUtf8(path.startsWith('/') ? path.mid(1) : path);
+  QUrl request_url(url().toString() + relative, QUrl::StrictMode);
   return request_url;
 }

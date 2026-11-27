@@ -38,8 +38,6 @@
 #include "radiobrowserurlhandler.h"
 #include "ui/iconloader.h"
 
-Q_DECLARE_METATYPE(QStandardItem*)
-
 namespace {
 struct Branch {
   QString name;
@@ -200,6 +198,9 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
     return;
   }
 
+  // Track the row with QPersistentModelIndex (and pass |this| as receiver)
+  // because ReloadSettings() can remove rows while the reply is in flight.
+  const QPersistentModelIndex index(item->index());
   QString determined_url = item->data(RadioBrowserService::Role_ListUrl)
                                .toString()
                                .arg(main_server_url_);
@@ -208,7 +209,7 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished, [=, this] {
+  connect(reply, &QNetworkReply::finished, this, [this, reply, task_id, index] {
     app_->task_manager()->SetTaskFinished(task_id);
     reply->deleteLater();
     QJsonDocument document = ParseJsonReply(reply);
@@ -217,15 +218,19 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
       return;
     }
 
+    if (!index.isValid()) return;
+    QStandardItem* target_item = model()->itemFromIndex(index);
+    if (!target_item) return;
+
     QStringList list;
     QJsonArray contents = document.array();
     qLog(Debug) << "RadioBrowser station list found:" << contents.size();
     for (const QJsonValue& c : contents) {
-      QJsonObject item = c.toObject();
-      list << item["name"].toString();
+      QJsonObject obj = c.toObject();
+      list << obj["name"].toString();
     }
 
-    PopulateCategory(item, list);
+    PopulateCategory(target_item, list);
   });
 }
 
@@ -235,17 +240,24 @@ void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
     return;
   }
 
+  // Guard against row removal mid-request (see RefreshCategory).
+  const QPersistentModelIndex index(item->index());
   QStandardItem* parent = item->parent();
+  if (!parent) return;
+  // Percent-encode item->text() so '/', '?', '#', etc. stay in the segment.
+  const QString encoded_item =
+      QString::fromUtf8(QUrl::toPercentEncoding(item->text()));
   QString determined_url = parent->data(RadioBrowserService::Role_ItemsUrl)
                                .toString()
-                               .arg(main_server_url_, item->text());
+                               .arg(main_server_url_, encoded_item);
   QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished,
-          [=, this] { this->RefreshStreamsFinished(reply, task_id, item); });
+  connect(reply, &QNetworkReply::finished, this, [this, reply, task_id, index] {
+    this->RefreshStreamsFinished(reply, task_id, index);
+  });
 }
 
 void RadioBrowserService::RefreshTop100(QStandardItem* item) {
@@ -254,6 +266,8 @@ void RadioBrowserService::RefreshTop100(QStandardItem* item) {
     return;
   }
 
+  // Guard against row removal mid-request (see RefreshCategory).
+  const QPersistentModelIndex index(item->index());
   QString determined_url = item->data(RadioBrowserService::Role_ItemsUrl)
                                .toString()
                                .arg(main_server_url_);
@@ -262,8 +276,9 @@ void RadioBrowserService::RefreshTop100(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished,
-          [=, this] { this->RefreshStreamsFinished(reply, task_id, item); });
+  connect(reply, &QNetworkReply::finished, this, [this, reply, task_id, index] {
+    this->RefreshStreamsFinished(reply, task_id, index);
+  });
 }
 
 void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
@@ -311,13 +326,14 @@ QMenu* RadioBrowserService::GetStationMenu(QStandardItem* item) {
             &RadioBrowserService::AddToSavedRadio);
     station_menu_->addAction(add_to_saved_radio_action_.get());
   }
-  add_to_saved_radio_action_->setData(QVariant::fromValue(item));
+  // Store QPersistentModelIndex so deleting rows before trigger is safe.
+  add_to_saved_radio_action_->setData(
+      QVariant::fromValue(QPersistentModelIndex(item->index())));
   return station_menu_.get();
 }
 
-void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
-                                                 int task_id,
-                                                 QStandardItem* item) {
+void RadioBrowserService::RefreshStreamsFinished(
+    QNetworkReply* reply, int task_id, const QPersistentModelIndex& index) {
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
   QJsonDocument document = ParseJsonReply(reply);
@@ -325,6 +341,10 @@ void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
     LastRequestFailed();
     return;
   }
+
+  if (!index.isValid()) return;
+  QStandardItem* item = model()->itemFromIndex(index);
+  if (!item) return;
 
   StreamList list;
   QJsonArray contents = document.array();
@@ -386,60 +406,73 @@ void RadioBrowserService::ShowConfig() {
 
 void RadioBrowserService::Search(int search_id, const QString& query,
                                  const int limit) {
-  QString determined_url = SearchUrl.arg(main_server_url_, query).arg(limit);
+  // Percent-encode query and format all args in one .arg() call so any %N
+  // inside encoded_query is not expanded by |limit|.
+  const QString encoded_query =
+      QString::fromUtf8(QUrl::toPercentEncoding(query));
+  QString determined_url =
+      SearchUrl.arg(main_server_url_, encoded_query, QString::number(limit));
   QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  connect(reply, &QNetworkReply::finished, [=, this] {
-    app_->task_manager()->SetTaskFinished(task_id);
-    reply->deleteLater();
-    QJsonDocument document = ParseJsonReply(reply);
+  connect(
+      reply, &QNetworkReply::finished, this, [this, reply, task_id, search_id] {
+        app_->task_manager()->SetTaskFinished(task_id);
+        reply->deleteLater();
+        QJsonDocument document = ParseJsonReply(reply);
 
-    StreamList list;
-    QJsonArray contents = document.array();
-    qLog(Debug) << "RadioBrowser station list found:" << contents.size();
-    for (const QJsonValue& c : contents) {
-      QJsonObject item = c.toObject();
-      ReadStation(item, &list, url_handler_);
-    }
+        StreamList list;
+        QJsonArray contents = document.array();
+        qLog(Debug) << "RadioBrowser station list found:" << contents.size();
+        for (const QJsonValue& c : contents) {
+          QJsonObject item = c.toObject();
+          ReadStation(item, &list, url_handler_);
+        }
 
-    emit SearchFinished(search_id, list);
-  });
+        emit SearchFinished(search_id, list);
+      });
 }
 
 void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
+  const QString encoded_path =
+      QString::fromUtf8(QUrl::toPercentEncoding(original_url.path()));
   QString determined_url =
-      StationDetailsUrl.arg(main_server_url_, original_url.path());
+      StationDetailsUrl.arg(main_server_url_, encoded_path);
   QUrl url(determined_url);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting station"));
 
-  connect(reply, &QNetworkReply::finished, [=, this] {
-    app_->task_manager()->SetTaskFinished(task_id);
-    reply->deleteLater();
-    QJsonDocument document = ParseJsonReply(reply);
+  connect(reply, &QNetworkReply::finished, this,
+          [this, reply, task_id, original_url] {
+            app_->task_manager()->SetTaskFinished(task_id);
+            reply->deleteLater();
+            QJsonDocument document = ParseJsonReply(reply);
 
-    StreamList list;
-    QJsonArray contents = document.array();
-    QJsonObject item = contents.first().toObject();
-    if (item.isEmpty()) {
-      emit StationUrlResolveFailed(original_url);
-      return;
-    }
+            QJsonArray contents = document.array();
+            // Guard empty arrays before .first() on unknown station IDs.
+            if (contents.isEmpty()) {
+              emit StationUrlResolveFailed(original_url);
+              return;
+            }
+            QJsonObject item = contents.first().toObject();
+            if (item.isEmpty()) {
+              emit StationUrlResolveFailed(original_url);
+              return;
+            }
 
-    Song ret;
-    ret.set_valid(true);
-    ret.set_title(item["name"].toString());
-    QUrl url(item["url_resolved"].toString());
-    if (url.isEmpty()) url.setUrl(item["url"].toString());
-    ret.set_url(url);
-    ret.set_art_automatic(item["favicon"].toString());
+            Song ret;
+            ret.set_valid(true);
+            ret.set_title(item["name"].toString());
+            QUrl url(item["url_resolved"].toString());
+            if (url.isEmpty()) url.setUrl(item["url"].toString());
+            ret.set_url(url);
+            ret.set_art_automatic(item["favicon"].toString());
 
-    emit StreamMetadataFound(original_url, ret);
-  });
+            emit StreamMetadataFound(original_url, ret);
+          });
 }
 
 void RadioBrowserService::SongChangeRequestProcessed(const QUrl& url,
@@ -447,11 +480,14 @@ void RadioBrowserService::SongChangeRequestProcessed(const QUrl& url,
   if (!valid || url.scheme() != url_handler_->scheme()) return;
 
   // inform the server that the station is playing
-  QString determined_url = PlayClickUrl.arg(main_server_url_, url.path());
+  const QString encoded_path =
+      QString::fromUtf8(QUrl::toPercentEncoding(url.path()));
+  QString determined_url = PlayClickUrl.arg(main_server_url_, encoded_path);
   QUrl playUrl(determined_url);
   QNetworkReply* playReply = network_->get(QNetworkRequest(playUrl));
-  connect(playReply, &QNetworkReply::finished,
-          [=] { playReply->deleteLater(); });
+  // Parent deleteLater() to playReply so cleanup works after |this| goes.
+  connect(playReply, &QNetworkReply::finished, playReply,
+          &QObject::deleteLater);
 }
 
 void RadioBrowserService::AddToSavedRadio(bool checked) {
@@ -459,7 +495,10 @@ void RadioBrowserService::AddToSavedRadio(bool checked) {
   QAction* action = qobject_cast<QAction*>(sender());
   if (!action) return;
 
-  QStandardItem* item = action->data().value<QStandardItem*>();
+  const QPersistentModelIndex index =
+      action->data().value<QPersistentModelIndex>();
+  if (!index.isValid()) return;
+  QStandardItem* item = model()->itemFromIndex(index);
   if (!item) return;
 
   Song station = item->data(InternetModel::Role_SongMetadata).value<Song>();

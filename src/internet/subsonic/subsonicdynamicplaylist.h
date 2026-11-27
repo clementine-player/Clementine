@@ -68,11 +68,10 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   static const int kDefaultOffset;
 
  private:
-  void GetAlbum(PlaylistItemList& list, QString id,
-                QNetworkAccessManager& network, const bool usesslv3);
+  void GetAlbum(PlaylistItemList* list, const QString& id,
+                QNetworkAccessManager* network);
   // need our own one since we run in a different thread from service
-  QNetworkReply* Send(QNetworkAccessManager& network, const QUrl& url,
-                      const bool usesslv3);
+  QNetworkReply* Send(QNetworkAccessManager* network, const QUrl& url);
   QString GetTypeString() const {
     switch (stat_) {
       case QueryStat::QueryStat_Newest:

@@ -40,6 +40,7 @@
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "covers/albumcoverloader.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/core/internetmodel.h"
@@ -153,9 +154,33 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_.get(), tr("Subsonic"), "subsonic",
       IconLoader::Load("subsonic", IconLoader::Provider), true, app_, this));
+
+  // Resolve subsonic://cover?id=... dynamically so credentials are never
+  // persisted into SQLite art_automatic; runs on AlbumCoverLoader's thread.
+  AlbumCoverLoader::SetCoverUrlResolver(
+      kServiceName, [this](const QString& art) {
+        const QUrl url(art);
+        if (url.scheme() != "subsonic" || url.host() != "cover") {
+          return QUrl();
+        }
+        const QString cover_id = QUrlQuery(url.query()).queryItemValue("id");
+        if (cover_id.isEmpty()) return QUrl();
+        QUrl resolved = BuildRequestUrl("getCoverArt");
+        if (!resolved.isValid()) return QUrl();
+        QUrlQuery query(resolved.query());
+        query.addQueryItem("id", cover_id);
+        resolved.setQuery(query);
+        return resolved;
+      });
 }
 
-SubsonicService::~SubsonicService() {}
+SubsonicService::~SubsonicService() {
+  // Unregister the resolver before |this| is destroyed, and delete
+  // library_filter_ only if InternetViewContainer has not already.
+  AlbumCoverLoader::SetCoverUrlResolver(kServiceName,
+                                        AlbumCoverLoader::CoverUrlResolver());
+  delete library_filter_.data();
+}
 
 QStandardItem* SubsonicService::CreateRootItem() {
   root_ = new QStandardItem(IconLoader::Load("subsonic", IconLoader::Provider),
@@ -198,15 +223,18 @@ void SubsonicService::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   UpdateServer(s.value("server").toString());
-  username_ = s.value("username").toString();
-  password_ = s.value("password").toString();
-  usesslv3_ = s.value("usesslv3").toBool();
+  {
+    QMutexLocker l(&config_mutex_);
+    username_ = s.value("username").toString();
+    password_ = s.value("password").toString();
+  }
   verifycert_ = s.value("verifycert", true).toBool();
 
   Login();
 }
 
 bool SubsonicService::IsConfigured() const {
+  QMutexLocker l(&config_mutex_);
   return !configured_server_.isEmpty() && !username_.isEmpty() &&
          !password_.isEmpty();
 }
@@ -214,6 +242,13 @@ bool SubsonicService::IsConfigured() const {
 bool SubsonicService::IsAmpache() const { return is_ampache_; }
 
 void SubsonicService::Login() {
+  // Cancel any in-flight scan and task before replacing network_.
+  scanner_->Cancel();
+  if (load_database_task_id_) {
+    app_->task_manager()->SetTaskFinished(load_database_task_id_);
+    load_database_task_id_ = 0;
+  }
+
   // Recreate fresh network state, otherwise old HTTPS settings seem to get
   // reused
   network_->deleteLater();
@@ -232,12 +267,13 @@ void SubsonicService::Login() {
 }
 
 void SubsonicService::Login(const QString& server, const QString& username,
-                            const QString& password, const bool& usesslv3,
-                            const bool& verifycert) {
+                            const QString& password, bool verifycert) {
   UpdateServer(server);
-  username_ = username;
-  password_ = password;
-  usesslv3_ = usesslv3;
+  {
+    QMutexLocker l(&config_mutex_);
+    username_ = username;
+    password_ = password;
+  }
   verifycert_ = verifycert;
   Login();
 }
@@ -249,6 +285,9 @@ void SubsonicService::Ping() {
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
+  // Lock because AlbumCoverLoader calls this from its background thread.
+  QMutexLocker l(&config_mutex_);
+  if (working_server_.isEmpty()) return QUrl();
   QUrl url(working_server_ + "/rest/" + view + ".view");
   QUrlQuery url_query;
   url_query.addQueryItem("v", kApiVersion);
@@ -276,9 +315,6 @@ QNetworkReply* SubsonicService::Send(const QUrl& url) {
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(verifycert_ ? QSslSocket::VerifyPeer
                                           : QSslSocket::VerifyNone);
-  // QSsl::SslV3 was removed in Qt6 (SSLv3 is broken and unsupported by
-  // any modern TLS stack); usesslv3_ is kept as a settable option but has
-  // no effect any more.
   request.setSslConfiguration(sslconfig);
   QNetworkReply* reply = network_->get(request);
   return reply;
@@ -299,6 +335,12 @@ void SubsonicService::ReloadDatabase() {
 void SubsonicService::ReloadDatabaseFinished() {
   app_->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
+
+  // Keep the existing cached library if the scan failed or was cancelled.
+  if (scanner_->has_failed()) {
+    qLog(Warning) << "Subsonic scan failed; keeping the existing library";
+    return;
+  }
 
   library_backend_->DeleteAll();
   library_backend_->AddOrUpdateSongs(scanner_->GetSongs());
@@ -360,7 +402,11 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
                     << redirect_url.toString(QUrl::RemoveQuery)
                     << ", current redirect count is " << redirect_count_;
         if (redirect_count_ <= kMaxRedirects) {
-          working_server_ = ScrubUrl(redirect_url).toString(QUrl::RemoveQuery);
+          {
+            QMutexLocker l(&config_mutex_);
+            working_server_ =
+                ScrubUrl(redirect_url).toString(QUrl::RemoveQuery);
+          }
           Ping();
           // To avoid the LoginStateChanged, as it will come from the recursive
           // request.
@@ -409,6 +455,7 @@ void SubsonicService::ShowConfig() {
 }
 
 void SubsonicService::UpdateServer(const QString& server) {
+  QMutexLocker l(&config_mutex_);
   configured_server_ = server;
   working_server_ = server;
   redirect_count_ = 0;
@@ -420,7 +467,7 @@ const int SubsonicLibraryScanner::kCoverArtSize = 1024;
 
 SubsonicLibraryScanner::SubsonicLibraryScanner(SubsonicService* service,
                                                QObject* parent)
-    : QObject(parent), service_(service), scanning_(false) {}
+    : QObject(parent), service_(service), scanning_(false), failed_(false) {}
 
 SubsonicLibraryScanner::~SubsonicLibraryScanner() {}
 
@@ -432,13 +479,34 @@ void SubsonicLibraryScanner::Scan() {
   album_queue_.clear();
   pending_requests_.clear();
   songs_.clear();
+  failed_ = false;
   scanning_ = true;
   GetAlbumList(0);
+}
+
+void SubsonicLibraryScanner::Cancel() {
+  if (!scanning_) return;
+  scanning_ = false;
+  failed_ = true;
+  album_queue_.clear();
+  // Copy and clear pending_requests_ before abort() because abort() can
+  // synchronously emit finished() -> OnGetAlbumFinished() and mutate it.
+  const QSet<QNetworkReply*> replies = pending_requests_;
+  pending_requests_.clear();
+  for (QNetworkReply* reply : replies) {
+    reply->abort();
+  }
 }
 
 void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
                                                     int offset) {
   reply->deleteLater();
+  // Bail out after deleteLater() if Cancel() or ParsingError() already ran.
+  if (!scanning_) return;
+  if (reply->error() != QNetworkReply::NoError) {
+    ParsingError(reply->errorString());
+    return;
+  }
 
   bool skip_read_albums = false;
 
@@ -507,6 +575,12 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
 void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   reply->deleteLater();
   pending_requests_.remove(reply);
+  // Bail out after deleteLater() if Cancel() or ParsingError() already ran.
+  if (!scanning_) return;
+  if (reply->error() != QNetworkReply::NoError) {
+    ParsingError(reply->errorString());
+    return;
+  }
 
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
@@ -517,7 +591,7 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   }
 
   if (reader.attributes().value("status") != QLatin1String("ok")) {
-    // TODO(Alan Briolat): error handling
+    ParsingError("Response status not ok. Aborting scan.");
     return;
   }
 
@@ -590,7 +664,15 @@ void SubsonicLibraryScanner::GetAlbum(const QString& id) {
 
 void SubsonicLibraryScanner::ParsingError(const QString& message) {
   qLog(Warning) << "Subsonic parsing error: " << message;
+  failed_ = true;
   scanning_ = false;
+  album_queue_.clear();
+  // Copy and clear pending_requests_ before abort() (see Cancel()).
+  const QSet<QNetworkReply*> replies = pending_requests_;
+  pending_requests_.clear();
+  for (QNetworkReply* reply : replies) {
+    reply->abort();
+  }
   emit ScanFinished();
 }
 
@@ -614,11 +696,16 @@ Song SubsonicService::ReadSong(QXmlStreamReader& reader) {
   song_query.addQueryItem("id", id);
   url.setQuery(song_query);
 
-  QUrl cover_url = BuildRequestUrl("getCoverArt");
-  QUrlQuery cover_url_query(cover_url.query());
-  cover_url_query.addQueryItem("id", cover_art_id);
-  cover_url.setQuery(cover_url_query);
-  song.set_art_automatic(cover_url.toEncoded());
+  // Store credential-free cover URIs; AlbumCoverLoader resolves them.
+  if (!cover_art_id.isEmpty()) {
+    QUrl cover_url;
+    cover_url.setScheme("subsonic");
+    cover_url.setHost("cover");
+    QUrlQuery cover_url_query;
+    cover_url_query.addQueryItem("id", cover_art_id);
+    cover_url.setQuery(cover_url_query);
+    song.set_art_automatic(cover_url.toEncoded());
+  }
 
   song.set_url(url);
   song.set_filesize(reader.attributes().value("size").toString().toInt());

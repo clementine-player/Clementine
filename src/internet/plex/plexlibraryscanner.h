@@ -20,6 +20,7 @@
 
 #include <QMap>
 #include <QObject>
+#include <QPointer>
 #include <QStringList>
 
 #include "core/song.h"
@@ -39,6 +40,7 @@ class PlexLibraryScanner : public QObject {
   bool is_scanning() const { return scanning_; }
 
   void Scan(const QStringList& section_keys);
+  void Cancel();
 
  signals:
   void Progress(int done, int total);
@@ -56,6 +58,7 @@ class PlexLibraryScanner : public QObject {
   void Finish(bool ok);
 
   PlexService* service_;
+  QPointer<QNetworkReply> current_reply_;
   bool scanning_;
   QStringList pending_sections_;
   QString current_section_;

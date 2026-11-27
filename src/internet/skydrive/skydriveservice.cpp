@@ -93,9 +93,21 @@ void SkydriveService::Connect() {
 void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
   oauth->deleteLater();
 
+  if (oauth->access_token().isEmpty()) {
+    qLog(Error) << "OneDrive authentication failed";
+    access_token_.clear();
+    expiry_time_ = QDateTime();
+    // Emit Connected() on failure so WaitForSignal in EnsureConnected() exits.
+    emit Connected();
+    return;
+  }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("refresh_token", oauth->refresh_token());
+  // Refresh responses may omit refresh_token; preserve the stored one.
+  if (!oauth->refresh_token().isEmpty()) {
+    s.setValue("refresh_token", oauth->refresh_token());
+  }
 
   access_token_ = oauth->access_token();
   expiry_time_ = oauth->expiry_time();
@@ -125,7 +137,11 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   QJsonDocument document = ParseJsonReply(reply);
-  if (document.isNull()) return;
+  if (document.isNull()) {
+    // Still emit Connected() so EnsureConnected() does not hang on error.
+    emit Connected();
+    return;
+  }
 
   QJsonObject json_response = document.object();
 
@@ -187,7 +203,7 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
                          item["lastModifiedDateTime"].toString(), Qt::ISODate)
                          .toSecsSinceEpoch());
       song.set_comment(item["description"].toString());
-      song.set_filesize(item["size"].toInt());
+      song.set_filesize(item["size"].toInteger());
       song.set_title(name);
 
       QUrl download_url = ItemUrl(id, "content");
@@ -226,8 +242,19 @@ void SkydriveService::UpdateContextMenu() {
   full_rescan_action_->setEnabled(!is_indexing());
 }
 
+bool SkydriveService::is_authenticated() const {
+  // Check expiry as well as presence so expired tokens trigger refresh.
+  return !access_token_.isEmpty() &&
+         QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
+}
+
 void SkydriveService::EnsureConnected() {
-  if (!access_token_.isEmpty()) {
+  if (is_authenticated()) {
+    return;
+  }
+  // Do not start interactive browser OAuth during unattended playback.
+  if (!has_credentials()) {
+    qLog(Warning) << "OneDrive: cannot ensure connection, not linked yet";
     return;
   }
 
@@ -236,6 +263,10 @@ void SkydriveService::EnsureConnected() {
 }
 
 void SkydriveService::ForgetCredentials() {
+  // Clear in-memory tokens too so is_authenticated() turns false at once.
+  access_token_.clear();
+  expiry_time_ = QDateTime();
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
 

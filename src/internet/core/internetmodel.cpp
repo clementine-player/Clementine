@@ -118,6 +118,23 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   UpdateServices();
 }
 
+InternetModel::~InternetModel() {
+  // Disconnect services before QObject child destruction so ~QObject() does
+  // not invoke ServiceDeleted() during teardown, and free hidden root
+  // items that HideService() took out of invisibleRootItem().
+  for (auto it = shown_services_.begin(); it != shown_services_.end(); ++it) {
+    InternetService* service = it.key();
+    disconnect(service, 0, this, 0);
+    if (sServices && sServices->value(service->name()) == service) {
+      sServices->remove(service->name());
+    }
+    if (!it.value().shown) {
+      delete it.value().item;
+    }
+  }
+  shown_services_.clear();
+}
+
 void InternetModel::AddService(InternetService* service) {
   QStandardItem* root = service->CreateRootItem();
   if (!root) {
@@ -146,7 +163,12 @@ void InternetModel::AddService(InternetService* service) {
           SIGNAL(AddToPlaylist(QMimeData*)));
   connect(service, SIGNAL(ScrollToIndex(QModelIndex)),
           SIGNAL(ScrollToIndex(QModelIndex)));
-  connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
+  // Capture pointers and names upfront: inside QObject::destroyed, the
+  // subclass destructor has already run so qobject_cast/name() would fail.
+  const QString service_name = service->name();
+  connect(service, &QObject::destroyed, this, [this, service, service_name]() {
+    ServiceDeleted(service, service_name);
+  });
 
   if (service->has_initial_load_settings()) {
     service->InitialLoadSettings();
@@ -156,7 +178,7 @@ void InternetModel::AddService(InternetService* service) {
 }
 
 void InternetModel::RemoveService(InternetService* service) {
-  if (!sServices->contains(service->name())) return;
+  if (!service || !sServices->contains(service->name())) return;
 
   // Find and remove the root item that this service created
   for (int i = 0; i < invisibleRootItem()->rowCount(); ++i) {
@@ -168,19 +190,45 @@ void InternetModel::RemoveService(InternetService* service) {
     }
   }
 
-  // Remove the service from the list
-  sServices->remove(service->name());
+  // Delete the detached root item if the service is currently hidden.
+  if (shown_services_.contains(service)) {
+    const ServiceItem service_item = shown_services_.take(service);
+    if (!service_item.shown) {
+      delete service_item.item;
+    }
+  }
 
-  // Don't forget to delete from shown_services too
-  shown_services_.remove(service);
+  // Guard against replacing a newer instance registered under the same name.
+  if (sServices->value(service->name()) == service) {
+    sServices->remove(service->name());
+  }
 
   // Disconnect the service
   disconnect(service, 0, this, 0);
 }
 
-void InternetModel::ServiceDeleted() {
-  InternetService* service = qobject_cast<InternetService*>(sender());
-  if (service) RemoveService(service);
+void InternetModel::ServiceDeleted(InternetService* service,
+                                   const QString& name) {
+  // |service| is already destroyed; compare it only as an opaque pointer.
+  for (int i = 0; i < invisibleRootItem()->rowCount(); ++i) {
+    QStandardItem* item = invisibleRootItem()->child(i);
+    if (item && item->data(Role_Service).value<InternetService*>() == service) {
+      invisibleRootItem()->removeRow(i);
+      break;
+    }
+  }
+
+  if (shown_services_.contains(service)) {
+    const ServiceItem service_item = shown_services_.take(service);
+    // Hidden services own detached root items outside invisibleRootItem().
+    if (!service_item.shown) {
+      delete service_item.item;
+    }
+  }
+
+  if (sServices && sServices->value(name) == service) {
+    sServices->remove(name);
+  }
 }
 
 InternetService* InternetModel::ServiceByName(const QString& name) {
@@ -237,9 +285,9 @@ int InternetModel::rowCount(const QModelIndex& parent) const {
 void InternetModel::RowsAboutToBeRemoved(const QModelIndex& parent, int first,
                                          int last) {
   for (int i = first; i <= last; i++) {
-    // Assuming we're always looking at column 0
+    // Map each removed row i (not just first) from merged_model_ to source.
     QModelIndex removing =
-        merged_model_->mapToSource(merged_model_->index(first, 0, parent));
+        merged_model_->mapToSource(merged_model_->index(i, 0, parent));
     IndexAboutToBeRemoved(removing);
   }
 }
@@ -292,8 +340,10 @@ QStringList InternetModel::mimeTypes() const {
 QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   if (indexes.count() == 1 &&
       indexes[0].data(Role_Type).toInt() == Type_SmartPlaylist) {
-    GeneratorPtr generator = InternetModel::ServiceForIndex(indexes[0])
-                                 ->CreateGenerator(itemFromIndex(indexes[0]));
+    InternetService* service = InternetModel::ServiceForIndex(indexes[0]);
+    if (!service) return nullptr;
+    GeneratorPtr generator =
+        service->CreateGenerator(itemFromIndex(indexes[0]));
     if (!generator) return nullptr;
     GeneratorMimeData* data = new GeneratorMimeData(generator);
     data->setData(LibraryModel::kSmartPlaylistsMimeType, QByteArray());
@@ -317,22 +367,25 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       while (child.isValid()) {
         new_indexes << child;
         urls << child.data(Role_Url).toUrl();
-        QModelIndex child_prev = child;
-        child = index.model()->index(++row, column, child_prev);
+        // Step across siblings under |index|, not nested under |child|.
+        child = index.model()->index(++row, column, index);
       }
     } else {
-      new_indexes = indexes;
+      // Append each non-container item without clobbering earlier items.
+      new_indexes << index;
       urls << index.data(Role_Url).toUrl();
     }
   }
 
-  if (urls.isEmpty()) return nullptr;
+  // None of the selected indexes were playable or owned by a service.
+  if (urls.isEmpty() || !last_valid_index.isValid()) return nullptr;
+  InternetService* service = InternetModel::ServiceForIndex(last_valid_index);
+  if (!service) return nullptr;
 
   InternetMimeData* data = new InternetMimeData(this);
   data->setUrls(urls);
   data->indexes = new_indexes;
-  data->name_for_new_playlist_ =
-      InternetModel::ServiceForIndex(last_valid_index)->name();
+  data->name_for_new_playlist_ = service->name();
 
   return data;
 }
@@ -345,7 +398,9 @@ bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
   }
   if (parent.data(Role_CanBeModified).toBool() ||
       parent.parent().data(Role_CanBeModified).toBool()) {
-    InternetModel::ServiceForIndex(parent)->DropMimeData(data, parent);
+    InternetService* service = InternetModel::ServiceForIndex(parent);
+    if (!service) return false;
+    service->DropMimeData(data, parent);
   }
 
   return true;

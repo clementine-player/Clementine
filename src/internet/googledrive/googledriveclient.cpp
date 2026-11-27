@@ -127,6 +127,14 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   response->picked_file_ids_ =
       oauth->picked_file_ids().split(',', Qt::SkipEmptyParts);
 
+  // Emit response->Finished() and Authenticated() immediately on auth failure
+  // instead of querying tokeninfo with an empty token.
+  if (access_token_.isEmpty()) {
+    emit response->Finished();
+    emit Authenticated();
+    return;
+  }
+
   // Introspect the token to get the user's email.
   QUrl url(kGoogleTokenInfoEndpoint);
   QUrlQuery url_query;
@@ -145,12 +153,13 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
   } else {
     QJsonParseError error;
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+    // Always emit Finished() and Authenticated() below so ConnectResponse
+    // does not leak and EnsureConnected() does not hang on parse failure.
     if (error.error != QJsonParseError::NoError) {
       qLog(Error) << "Failed to parse token info reply";
-      return;
+    } else {
+      response->user_email_ = document.object()["email"].toString();
     }
-
-    response->user_email_ = document.object()["email"].toString();
   }
   emit response->Finished();
   emit Authenticated();

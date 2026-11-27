@@ -20,6 +20,7 @@
 #ifndef INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 #define INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 
+#include <QPointer>
 #include <QXmlStreamReader>
 #include <memory>
 
@@ -114,7 +115,7 @@ class MagnatuneService : public InternetService {
 
   std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
-  LibraryFilterWidget* library_filter_;
+  QPointer<LibraryFilterWidget> library_filter_;
   QSortFilterProxyModel* library_sort_model_;
   int load_database_task_id_;
 
