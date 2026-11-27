@@ -37,7 +37,10 @@ const int MoodbarProxyStyle::kArrowWidth = 17;
 const int MoodbarProxyStyle::kArrowHeight = 13;
 
 MoodbarProxyStyle::MoodbarProxyStyle(Application* app, QSlider* slider)
-    : QProxyStyle(slider->style()),
+    // Do not pass slider->style() to QProxyStyle: it takes ownership of a
+    // non-null base style, which would reparent and destroy qApp->style().
+    // Default-constructing delegates to the application style dynamically.
+    : QProxyStyle(),
       app_(app),
       slider_(slider),
       enabled_(true),
@@ -76,7 +79,7 @@ void MoodbarProxyStyle::ReloadSettings() {
   if (new_style != moodbar_style_) {
     moodbar_style_ = new_style;
     moodbar_colors_dirty_ = true;
-    slider_->update();
+    if (slider_) slider_->update();
   }
 }
 
@@ -98,6 +101,7 @@ void MoodbarProxyStyle::SetMoodbarEnabled(bool enabled) {
 }
 
 void MoodbarProxyStyle::NextState() {
+  if (!slider_) return;
   const bool visible = enabled_ && !data_.isEmpty();
 
   // While the regular slider should stay at the standard size (Fixed),
@@ -137,7 +141,9 @@ void MoodbarProxyStyle::NextState() {
   state_ = visible ? FadingToOn : FadingToOff;
 }
 
-void MoodbarProxyStyle::FaderValueChanged(qreal value) { slider_->update(); }
+void MoodbarProxyStyle::FaderValueChanged(qreal value) {
+  if (slider_) slider_->update();
+}
 
 bool MoodbarProxyStyle::eventFilter(QObject* object, QEvent* event) {
   if (object == slider_) {

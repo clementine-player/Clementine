@@ -48,7 +48,6 @@ const char* VisualisationContainer::kSettingsGroup = "Visualisations";
 const int VisualisationContainer::kDefaultWidth = 828;
 const int VisualisationContainer::kDefaultHeight = 512;
 const int VisualisationContainer::kDefaultFps = kHighFramerate;
-const int VisualisationContainer::kDefaultTextureSize = 512;
 
 VisualisationContainer::VisualisationContainer(SleepInhibitor* sleep_inhibitor,
                                                QWidget* parent)
@@ -61,7 +60,6 @@ VisualisationContainer::VisualisationContainer(SleepInhibitor* sleep_inhibitor,
       overlay_proxy_(nullptr),
       menu_(new QMenu(this)),
       fps_(kDefaultFps),
-      size_(kDefaultTextureSize),
       sleep_inhibitor_(sleep_inhibitor) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -69,12 +67,18 @@ VisualisationContainer::VisualisationContainer(SleepInhibitor* sleep_inhibitor,
     resize(kDefaultWidth, kDefaultHeight);
   }
   fps_ = s.value("fps", kDefaultFps).toInt();
-  size_ = s.value("size", kDefaultTextureSize).toInt();
 
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
 
   setMinimumSize(64, 64);
+}
+
+VisualisationContainer::~VisualisationContainer() {
+  // Unregister vis_ before child destruction so audio callbacks cannot fire
+  // into a dying scene; also free overlay_ if Init() never added it to scene.
+  if (engine_) engine_->RemoveBufferConsumer(vis_);
+  if (!overlay_proxy_) delete overlay_;
 }
 
 void VisualisationContainer::Init() {
@@ -97,7 +101,6 @@ void VisualisationContainer::Init() {
   connect(overlay_, SIGNAL(ShowPopupMenu(QPoint)), SLOT(ShowPopupMenu(QPoint)));
   ChangeOverlayOpacity(0.0);
 
-  vis_->SetTextureSize(size_);
   SizeChanged();
 
   // Selector
@@ -119,14 +122,6 @@ void VisualisationContainer::Init() {
                        kSuperHighFramerate, fps_, fps_group);
   fps_menu->addActions(fps_group->actions());
 
-  QMenu* quality_menu = menu_->addMenu(tr("Quality", "Visualisation quality"));
-  QActionGroup* quality_group = new QActionGroup(this);
-  AddQualityMenuItem(tr("Low (256x256)"), 256, size_, quality_group);
-  AddQualityMenuItem(tr("Medium (512x512)"), 512, size_, quality_group);
-  AddQualityMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group);
-  AddQualityMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group);
-  quality_menu->addActions(quality_group->actions());
-
   menu_->addAction(tr("Select visualizations..."), selector_, SLOT(show()));
 
   menu_->addSeparator();
@@ -141,14 +136,6 @@ void VisualisationContainer::AddFramerateMenuItem(const QString& name,
   action->setCheckable(true);
   action->setChecked(value == def);
   connect(action, &QAction::triggered, [this, value]() { SetFps(value); });
-}
-
-void VisualisationContainer::AddQualityMenuItem(const QString& name, int value,
-                                                int def, QActionGroup* group) {
-  QAction* action = group->addAction(name);
-  action->setCheckable(true);
-  action->setChecked(value == def);
-  connect(action, &QAction::triggered, [this, value]() { SetQuality(value); });
 }
 
 uint32_t VisualisationContainer::CurrentFramebufferObject() const {
@@ -320,15 +307,4 @@ void VisualisationContainer::SetFps(int fps) {
 
 void VisualisationContainer::ShowPopupMenu(const QPoint& global_pos) {
   menu_->popup(global_pos);
-}
-
-void VisualisationContainer::SetQuality(int size) {
-  size_ = size;
-
-  // Save settings
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("size", size_);
-
-  vis_->SetTextureSize(size_);
 }

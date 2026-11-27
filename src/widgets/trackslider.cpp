@@ -55,10 +55,28 @@ TrackSlider::TrackSlider(QWidget* parent)
   connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
-TrackSlider::~TrackSlider() { delete ui_; }
+TrackSlider::~TrackSlider() {
+#ifdef HAVE_MOODBAR
+  // QWidget::setStyle() does not take ownership of moodbar_style_; detach and
+  // unpolish it before deletion so ~QSlider() never sees a dangling QStyle*.
+  if (moodbar_style_) {
+    ui_->slider->setStyle(nullptr);
+    delete moodbar_style_;
+    moodbar_style_ = nullptr;
+  }
+#endif
+  delete ui_;
+}
 
 void TrackSlider::SetApplication(Application* app) {
 #ifdef HAVE_MOODBAR
+  // Detach before deleting so constructing the replacement MoodbarProxyStyle
+  // (which calls slider->setStyle(this)) does not unpolish a freed style.
+  if (moodbar_style_) {
+    ui_->slider->setStyle(nullptr);
+    delete moodbar_style_;
+    moodbar_style_ = nullptr;
+  }
   moodbar_style_ = new MoodbarProxyStyle(app, ui_->slider);
 #endif
 }
@@ -160,7 +178,8 @@ bool TrackSlider::event(QEvent* e) {
     default:
       break;
   }
-  return false;
+  // Delegate unhandled events to QWidget so paint, resize, and polish run.
+  return QWidget::event(e);
 }
 
 void TrackSlider::ToggleTimeDisplay() {

@@ -54,8 +54,26 @@ MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
 }
 
 MoodbarLoader::~MoodbarLoader() {
-  thread_->quit();
-  thread_->wait(1000);
+  // MoodbarPipeline lives on thread_ and its ~MoodbarPipeline() asserts that
+  // it runs on thread_ (not the main thread). Delete any surviving pipelines on
+  // thread_ before quitting its event loop.
+  for (const QPointer<MoodbarPipeline>& pipeline : pipelines_) {
+    if (pipeline) {
+      pipeline->disconnect(this);
+      if (thread_->isRunning()) {
+        QMetaObject::invokeMethod(
+            pipeline.data(), [raw = pipeline.data()]() { delete raw; },
+            Qt::BlockingQueuedConnection);
+      } else {
+        delete pipeline.data();
+      }
+    }
+  }
+  pipelines_.clear();
+  if (thread_->isRunning()) {
+    thread_->quit();
+    thread_->wait(1000);
+  }
 }
 
 void MoodbarLoader::ReloadSettings() {
@@ -123,6 +141,10 @@ MoodbarLoader::Result MoodbarLoader::Load(const QUrl& url, QByteArray* data,
   NewClosure(pipeline, &MoodbarPipeline::Finished, this,
              &MoodbarLoader::RequestFinished, pipeline, url);
 
+  // Track active pipelines with QPointer so ~MoodbarLoader() can clean up any
+  // that have not finished deferred deletion yet.
+  pipelines_.removeIf([](const QPointer<MoodbarPipeline>& p) { return !p; });
+  pipelines_ << pipeline;
   requests_[url] = pipeline;
   queued_requests_ << url;
 
@@ -186,11 +208,19 @@ void MoodbarLoader::RequestFinished(bool success, MoodbarPipeline* request,
     }
   }
 
-  // Remove the request from the active list and delete it
+  // Remove the request from the active list and delete it after other
+  // queued Finished() listeners on the main thread have read request->data().
+  // Because request lives on thread_, bouncing through a queued invoke on
+  // `this` ensures deleteLater() is only posted after main-thread listeners.
   requests_.remove(url);
   active_requests_.remove(url);
 
-  QTimer::singleShot(1000, request, SLOT(deleteLater()));
+  QMetaObject::invokeMethod(
+      this,
+      [p = QPointer<MoodbarPipeline>(request)]() {
+        if (p) p->deleteLater();
+      },
+      Qt::QueuedConnection);
 
   MaybeTakeNextRequest();
 }

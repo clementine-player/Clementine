@@ -35,7 +35,10 @@ const char* TurbineAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Turbine");
 
 void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
-  if (!new_frame || engine_->state() == Engine::Paused) {
+  // demo() invokes analyze() with engine_ == nullptr, and hd2 - 1 underflows
+  // kMaxHeight (uint) when height() < 2.
+  if (!new_frame || (engine_ && engine_->state() == Engine::Paused) ||
+      height() < 2) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }

@@ -39,6 +39,7 @@ class VisualisationContainer : public QGraphicsView {
  public:
   explicit VisualisationContainer(SleepInhibitor* sleep_inhibitor,
                                   QWidget* parent = nullptr);
+  ~VisualisationContainer() override;
 
   static const int kLowFramerate;
   static const int kMediumFramerate;
@@ -49,7 +50,6 @@ class VisualisationContainer : public QGraphicsView {
   static const int kDefaultWidth;
   static const int kDefaultHeight;
   static const int kDefaultFps;
-  static const int kDefaultTextureSize;
 
   void SetEngine(GstEngine* engine);
 
@@ -85,15 +85,12 @@ class VisualisationContainer : public QGraphicsView {
   void SizeChanged();
   void AddFramerateMenuItem(const QString& name, int value, int def,
                             QActionGroup* group);
-  void AddQualityMenuItem(const QString& name, int value, int def,
-                          QActionGroup* group);
 
  private slots:
   void ChangeOverlayOpacity(qreal value);
   void ShowPopupMenu(const QPoint& global_pos);
   void ToggleFullscreen();
   void SetFps(int fps);
-  void SetQuality(int size);
 
  private:
   bool initialised_;
@@ -110,7 +107,6 @@ class VisualisationContainer : public QGraphicsView {
   QMenu* menu_;
 
   int fps_;
-  int size_;
 
   SleepInhibitor* sleep_inhibitor_;
   std::unique_ptr<SleepInhibitor::Hold> sleep_hold_;

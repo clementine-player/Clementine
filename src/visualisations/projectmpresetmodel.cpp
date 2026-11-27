@@ -66,6 +66,11 @@ QModelIndex ProjectMPresetModel::parent(const QModelIndex& child) const {
 }
 
 QVariant ProjectMPresetModel::data(const QModelIndex& index, int role) const {
+  // Guard invalid indices (e.g., row() == -1 when selection clears).
+  if (!index.isValid() || index.row() < 0 ||
+      index.row() >= all_presets_.count()) {
+    return QVariant();
+  }
   switch (role) {
     case Qt::DisplayRole:
       return all_presets_[index.row()].name_;
@@ -81,13 +86,20 @@ QVariant ProjectMPresetModel::data(const QModelIndex& index, int role) const {
 }
 
 Qt::ItemFlags ProjectMPresetModel::flags(const QModelIndex& index) const {
-  if (!index.isValid()) return QAbstractItemModel::flags(index);
+  if (!index.isValid() || index.row() < 0 ||
+      index.row() >= all_presets_.count()) {
+    return QAbstractItemModel::flags(index);
+  }
   return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable |
          Qt::ItemIsEnabled;
 }
 
 bool ProjectMPresetModel::setData(const QModelIndex& index,
                                   const QVariant& value, int role) {
+  if (!index.isValid() || index.row() < 0 ||
+      index.row() >= all_presets_.count()) {
+    return false;
+  }
   if (role == Qt::CheckStateRole) {
     all_presets_[index.row()].selected_ = value.toBool();
     vis_->SetSelected(QStringList() << all_presets_[index.row()].path_,
@@ -98,6 +110,10 @@ bool ProjectMPresetModel::setData(const QModelIndex& index,
 }
 
 void ProjectMPresetModel::SetImmediatePreset(const QModelIndex& index) {
+  if (!index.isValid() || index.row() < 0 ||
+      index.row() >= all_presets_.count()) {
+    return;
+  }
   vis_->SetImmediatePreset(all_presets_[index.row()].path_);
 }
 
@@ -109,7 +125,10 @@ void ProjectMPresetModel::SelectAll() {
   }
   vis_->SetSelected(paths, true);
 
-  emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
+  // Emitting dataChanged with rowCount() - 1 == -1 is invalid when empty.
+  if (!all_presets_.isEmpty()) {
+    emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
+  }
 }
 
 void ProjectMPresetModel::SelectNone() {
@@ -118,7 +137,10 @@ void ProjectMPresetModel::SelectNone() {
     all_presets_[i].selected_ = false;
   }
 
-  emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
+  // Emitting dataChanged with rowCount() - 1 == -1 is invalid when empty.
+  if (!all_presets_.isEmpty()) {
+    emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
+  }
 }
 
 void ProjectMPresetModel::MarkSelected(const QString& path, bool selected) {

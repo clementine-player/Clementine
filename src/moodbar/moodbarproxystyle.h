@@ -18,6 +18,7 @@
 #ifndef MOODBARPROXYSTYLE_H
 #define MOODBARPROXYSTYLE_H
 
+#include <QPointer>
 #include <QProxyStyle>
 
 #include "moodbarrenderer.h"
@@ -80,7 +81,8 @@ class MoodbarProxyStyle : public QProxyStyle {
 
  private:
   Application* app_;
-  QSlider* slider_;
+  // Unowned by slider_; guard against signals arriving after slider teardown.
+  QPointer<QSlider> slider_;
 
   bool enabled_;
   QByteArray data_;

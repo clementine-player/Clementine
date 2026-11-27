@@ -64,6 +64,7 @@ QString Chromaprinter::CreateFingerprint() {
   buffer_.open(QIODevice::WriteOnly);
 
   GstElement* pipeline = gst_pipeline_new("pipeline");
+  if (!pipeline) return QString();
   GstElement* src = CreateElement("filesrc", pipeline);
   GstElement* decode = CreateElement("decodebin", pipeline);
   GstElement* convert = CreateElement("audioconvert", pipeline);
@@ -71,6 +72,8 @@ QString Chromaprinter::CreateFingerprint() {
   GstElement* sink = CreateElement("appsink", pipeline);
 
   if (!src || !decode || !convert || !resample || !sink) {
+    // CreateElement() already added any created elements to pipeline.
+    gst_object_unref(pipeline);
     return QString();
   }
 
@@ -124,20 +127,28 @@ QString Chromaprinter::CreateFingerprint() {
 
   if (msg != nullptr) {
     if (msg->type == GST_MESSAGE_ERROR) {
-      // Report error
+      // Report error; initialize out-pointers and match GLib's g_free().
       GError* error = nullptr;
       gchar* debugs = nullptr;
 
       gst_message_parse_error(msg, &error, &debugs);
-      QString message = QString::fromLocal8Bit(error->message);
+      QString message =
+          error ? QString::fromLocal8Bit(error->message) : QString();
 
-      g_error_free(error);
-      free(debugs);
+      g_clear_error(&error);
+      g_free(debugs);
 
       qLog(Debug) << "Error processing" << filename_ << ":" << message;
     }
     gst_message_unref(msg);
   }
+
+  // Stop the pipeline (even after a bus timeout) before touching buffer_ so
+  // NewBufferCallback cannot race with buffer_.close() / buffer_.data().
+  callbacks.new_sample = nullptr;
+  gst_object_unref(bus);
+  gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref(pipeline);
 
   int decode_time = time.restart();
 
@@ -148,14 +159,20 @@ QString Chromaprinter::CreateFingerprint() {
 
   ChromaprintContext* chromaprint =
       chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT);
+  if (!chromaprint) return QString();
   chromaprint_start(chromaprint, kDecodeRate, kDecodeChannels);
-  chromaprint_feed(chromaprint, reinterpret_cast<int16_t*>(data.data()),
-                   data.size() / 2);
+  // chromaprint_feed() reads 16-bit samples; skip empty or 1-byte buffers.
+  if (data.size() >= 2) {
+    chromaprint_feed(chromaprint, reinterpret_cast<int16_t*>(data.data()),
+                     data.size() / 2);
+  }
   chromaprint_finish(chromaprint);
 
   int size = 0;
 
-#if CHROMAPRINT_VERSION_MAJOR >= 1 && CHROMAPRINT_VERSION_MINOR >= 4
+// Check > 1 explicitly so Chromaprint 2.0 (MINOR == 0) uses the 1.4+ API.
+#if CHROMAPRINT_VERSION_MAJOR > 1 || \
+    (CHROMAPRINT_VERSION_MAJOR == 1 && CHROMAPRINT_VERSION_MINOR >= 4)
   u_int32_t* fprint = nullptr;
   char* encoded = nullptr;
 #else
@@ -182,23 +199,34 @@ QString Chromaprinter::CreateFingerprint() {
   qLog(Debug) << "Decode time:" << decode_time
               << "Codegen time:" << codegen_time;
 
-  // Cleanup
-  callbacks.new_sample = nullptr;
-  gst_object_unref(bus);
-  gst_element_set_state(pipeline, GST_STATE_NULL);
-  gst_object_unref(pipeline);
-
   return fingerprint;
 }
 
 void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
+  // Ignore non-audio pads (e.g., embedded cover art) so they do not unlink
+  // the active audio stream.
+  GstCaps* caps = gst_pad_get_current_caps(pad);
+  if (!caps) caps = gst_pad_query_caps(pad, nullptr);
+  bool is_audio = false;
+  if (caps && gst_caps_get_size(caps) > 0) {
+    const GstStructure* structure = gst_caps_get_structure(caps, 0);
+    if (structure) {
+      const gchar* name = gst_structure_get_name(structure);
+      is_audio = name && g_str_has_prefix(name, "audio/");
+    }
+  }
+  if (caps) gst_caps_unref(caps);
+  if (!is_audio) return;
+
   GstPad* const audiopad =
       gst_element_get_static_pad(instance->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << "audiopad is already linked, unlinking old pad";
-    gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
+    // gst_pad_unlink() takes (src, sink): upstream peer first, then audiopad.
+    GstPad* peer = GST_PAD_PEER(audiopad);
+    if (peer) gst_pad_unlink(peer, audiopad);
   }
 
   gst_pad_link(pad, audiopad);

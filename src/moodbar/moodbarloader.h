@@ -20,6 +20,7 @@
 
 #include <QMap>
 #include <QObject>
+#include <QPointer>
 #include <QSet>
 
 class QNetworkDiskCache;
@@ -70,6 +71,8 @@ class MoodbarLoader : public QObject {
   QMap<QUrl, MoodbarPipeline*> requests_;
   QList<QUrl> queued_requests_;
   QSet<QUrl> active_requests_;
+  // Tracks live pipelines so ~MoodbarLoader() can delete them on thread_.
+  QList<QPointer<MoodbarPipeline>> pipelines_;
 
   bool save_alongside_originals_;
   bool disable_moodbar_calculation_;

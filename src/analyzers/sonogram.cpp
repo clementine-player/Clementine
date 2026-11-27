@@ -55,7 +55,10 @@ void Sonogram::psychedelicModeChanged(bool enabled) {
 }
 
 void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame || engine_->state() == Engine::Paused) {
+  // demo() invokes analyze() with engine_ == nullptr; skip empty sizes so
+  // width() - 1 stays valid and the y > 0 loops below cannot wrap.
+  if (!new_frame || (engine_ && engine_->state() == Engine::Paused) ||
+      height() <= 0 || width() <= 0) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
@@ -74,7 +77,7 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
 
   if (psychedelic_enabled_) {
     c = getPsychedelicColor(s, 20, 100);
-    for (int y = height() - 1; y;) {
+    for (int y = height() - 1; y > 0;) {
       if (it >= end || *it < .005) {
         c = palette().color(QPalette::Window);
       } else if (*it < .05) {
@@ -91,7 +94,7 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
       if (it < end) ++it;
     }
   } else {
-    for (int y = height() - 1; y;) {
+    for (int y = height() - 1; y > 0;) {
       if (it >= end || *it < .005)
         c = palette().color(QPalette::Window);
       else if (*it < .05)

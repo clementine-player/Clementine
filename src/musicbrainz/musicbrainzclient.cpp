@@ -44,6 +44,9 @@ MusicBrainzClient::MusicBrainzClient(QObject* parent,
       network_(network ? network : new NetworkAccessManager(this)),
       timeouts_(new NetworkTimeouts(kDefaultTimeout, this)) {}
 
+// Abort and disconnect in-flight replies so late signals never reach `this`.
+MusicBrainzClient::~MusicBrainzClient() { CancelAll(); }
+
 void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
   typedef QPair<QString, QString> Param;
 
@@ -85,21 +88,50 @@ void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
+  discid_requests_.insert(reply);
   NewClosure(reply, &QNetworkReply::finished, this,
              &MusicBrainzClient::DiscIdRequestFinished, discid, reply);
 
   timeouts_->AddReply(reply);
 }
 
-void MusicBrainzClient::Cancel(int id) { delete requests_.take(id); }
+void MusicBrainzClient::Cancel(int id) {
+  // Remove all replies for `id` (up to kMaxRequestPerTrack in the QMultiMap)
+  // and drop partial results. Disconnect before abort() so synchronous
+  // finished() signals cannot re-enter RequestFinished or emit Finished().
+  const QList<QNetworkReply*> replies = requests_.values(id);
+  requests_.remove(id);
+  pending_results_.remove(id);
+  for (QNetworkReply* reply : replies) {
+    reply->disconnect(this);
+    reply->abort();
+    reply->deleteLater();
+  }
+}
 
 void MusicBrainzClient::CancelAll() {
-  qDeleteAll(requests_.values());
+  // Clear maps and disconnect before abort() so synchronous finished()
+  // signals cannot re-enter finish handlers, then defer reply deletion.
+  const QList<QNetworkReply*> replies = requests_.values();
   requests_.clear();
+  pending_results_.clear();
+  for (QNetworkReply* reply : replies) {
+    reply->disconnect(this);
+    reply->abort();
+    reply->deleteLater();
+  }
+  const QList<QNetworkReply*> discid_replies = discid_requests_.values();
+  discid_requests_.clear();
+  for (QNetworkReply* reply : discid_replies) {
+    reply->disconnect(this);
+    reply->abort();
+    reply->deleteLater();
+  }
 }
 
 void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
                                               QNetworkReply* reply) {
+  discid_requests_.remove(reply);
   reply->deleteLater();
 
   ResultList ret;

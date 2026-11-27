@@ -65,7 +65,8 @@ void BoomAnalyzer::changeF_peakSpeed(int newValue) {
 void BoomAnalyzer::resizeEvent(QResizeEvent* e) {
   QWidget::resizeEvent(e);
 
-  const uint HEIGHT = height() - 2;
+  // Clamp before casting to uint so height() <= 2 does not underflow.
+  const uint HEIGHT = static_cast<uint>(qMax(1, height() - 2));
   const double h = 1.2 / HEIGHT;
 
   bands_ = qMin(
@@ -102,12 +103,15 @@ void BoomAnalyzer::transform(Scope& s) {
 }
 
 void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
-  if (!new_frame || engine_->state() == Engine::Paused) {
+  // demo() invokes analyze() with engine_ == nullptr; skip drawing when too
+  // short so MAX_HEIGHT and bar heights cannot underflow.
+  if (!new_frame || (engine_ && engine_->state() == Engine::Paused) ||
+      height() < 2) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
   float h;
-  const uint MAX_HEIGHT = height() - 1;
+  const uint MAX_HEIGHT = static_cast<uint>(qMax(1, height() - 1));
 
   QPainter canvas_painter(&canvas_);
   canvas_.fill(palette().color(QPalette::Window));

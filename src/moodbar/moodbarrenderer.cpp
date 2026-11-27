@@ -112,6 +112,8 @@ ColorVector MoodbarRenderer::Colors(const QByteArray& data, MoodbarStyle style,
 
 void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p,
                              const QRect& rect) {
+  if (rect.width() <= 0 || rect.height() <= 0) return;
+
   // Sample the colors and map them to screen pixels.
   ColorVector screen_colors;
   for (int x = 0; x < rect.width(); ++x) {
@@ -139,8 +141,10 @@ void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p,
     int h, s, v;
     screen_colors[x].getHsv(&h, &s, &v);
 
+    // Avoid 0.0f / 0.0f NaN when rect.height() == 1 (rect.height() / 2 == 0).
+    const int half_height = qMax(1, rect.height() / 2);
     for (int y = 0; y <= rect.height() / 2; y++) {
-      float coeff = float(y) / float(rect.height() / 2);
+      float coeff = float(y) / float(half_height);
       float coeff2 = 1.0f - ((1.0f - coeff) * (1.0f - coeff));
       coeff = 1.0f - (1.0f - coeff) / 2.0f;
       coeff2 = 1.f - (1.f - coeff2) / 2.0f;
