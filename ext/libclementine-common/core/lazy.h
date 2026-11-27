@@ -54,8 +54,8 @@ class Lazy {
 
   T* operator->() const { return get(); }
 
-  // Returns true if the object is not yet initialised.
-  explicit operator bool() const { return ptr_; }
+  // Returns true if the object has been initialised.
+  explicit operator bool() const { return static_cast<bool>(ptr_); }
 
   // Deletes the underlying object and will re-run the initialisation function
   // if the object is requested again.

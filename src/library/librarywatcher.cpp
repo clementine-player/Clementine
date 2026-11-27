@@ -60,7 +60,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     : QObject(parent),
       backend_(nullptr),
       task_manager_(nullptr),
-      fs_watcher_(FileSystemWatcherInterface::Create(this)),
+      fs_watcher_(nullptr),
       scan_on_startup_(true),
       monitor_(true),
       rescan_timer_(new QTimer(this)),
@@ -677,8 +677,16 @@ void LibraryWatcher::AddWatch(const Directory& dir, const QString& path) {
   QFileInfo info(path);
   if (!info.exists() || !info.isReadable()) return;
 
-  connect(fs_watcher_, SIGNAL(PathChanged(const QString&)), this,
-          SLOT(DirectoryChanged(const QString&)), Qt::UniqueConnection);
+  if (!fs_watcher_) {
+    // Made here, in the watcher's thread, rather than in the constructor, so
+    // it's made in the thread it's deleted in. On Windows, QFileSystemWatcher
+    // adds a native event filter to the event dispatcher of the thread it's
+    // made in, and removes it from that of the thread it's deleted in; made
+    // anywhere else, the filter it leaves behind is called after it's gone.
+    fs_watcher_ = FileSystemWatcherInterface::Create(this);
+    connect(fs_watcher_, SIGNAL(PathChanged(const QString&)), this,
+            SLOT(DirectoryChanged(const QString&)));
+  }
   if (!fs_watcher_->AddPath(path)) {
     // Since this may be a system error, don't spam the user.
     static int errCount = 0;
@@ -709,7 +717,7 @@ void LibraryWatcher::RemoveWatch(const Directory& dir,
                                  const Subdirectory& subdir) {
   for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
     if (subdir_path != subdir.path) continue;
-    fs_watcher_->RemovePath(subdir_path);
+    if (fs_watcher_) fs_watcher_->RemovePath(subdir_path);
     subdir_mapping_.remove(subdir_path);
     break;
   }
@@ -727,7 +735,7 @@ void LibraryWatcher::DoRemoveDirectory(int dir_id) {
   const WatchedDir& dir = watched_dirs_.list_[dir_id];
   // Stop watching the directory's subdirectories
   for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
-    fs_watcher_->RemovePath(subdir_path);
+    if (fs_watcher_) fs_watcher_->RemovePath(subdir_path);
     subdir_mapping_.remove(subdir_path);
   }
   watched_dirs_.Remove(dir_id);
@@ -893,7 +901,7 @@ void LibraryWatcher::ReloadSettings() {
   }
 
   if (!monitor_ && was_monitoring_before) {
-    fs_watcher_->Clear();
+    if (fs_watcher_) fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
     for (const Directory& dir : watched_dirs_.list_.values()) {

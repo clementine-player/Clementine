@@ -41,6 +41,10 @@ class Library : public QObject {
   Library(Application* app, QObject* parent);
   ~Library();
 
+  // Stops the watcher's scan and its thread. A scan waits for the tag reader,
+  // so this has to happen while the tag reader's thread is still running.
+  void StopWatcher();
+
   static const char* kSongsTable;
   static const char* kDirsTable;
   static const char* kSubdirsTable;

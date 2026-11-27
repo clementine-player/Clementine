@@ -143,9 +143,14 @@ Library::Library(Application* app, QObject* parent)
   ReloadSettings();
 }
 
-Library::~Library() {
+Library::~Library() { StopWatcher(); }
+
+void Library::StopWatcher() {
+  if (!watcher_) return;
+
   watcher_->Stop();
   watcher_->deleteLater();
+  watcher_ = nullptr;
   watcher_thread_->exit();
   watcher_thread_->wait(5000 /* five seconds */);
 }
@@ -195,16 +200,24 @@ void Library::Init() {
   backend_->LoadDirectoriesAsync();
 }
 
-void Library::IncrementalScan() { watcher_->IncrementalScanAsync(); }
+void Library::IncrementalScan() {
+  if (watcher_) watcher_->IncrementalScanAsync();
+}
 
-void Library::FullScan() { watcher_->FullScanAsync(); }
+void Library::FullScan() {
+  if (watcher_) watcher_->FullScanAsync();
+}
 
-void Library::PauseWatcher() { watcher_->SetRescanPausedAsync(true); }
+void Library::PauseWatcher() {
+  if (watcher_) watcher_->SetRescanPausedAsync(true);
+}
 
-void Library::ResumeWatcher() { watcher_->SetRescanPausedAsync(false); }
+void Library::ResumeWatcher() {
+  if (watcher_) watcher_->SetRescanPausedAsync(false);
+}
 
 void Library::ReloadSettings() {
-  watcher_->ReloadSettingsAsync();
+  if (watcher_) watcher_->ReloadSettingsAsync();
 
   // These don't belong in LibraryBackend's group but it's too late to change
   // now.
