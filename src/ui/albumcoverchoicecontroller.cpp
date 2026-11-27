@@ -256,23 +256,28 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
       (window() && window()->windowHandle() ? window()->windowHandle()->screen()
                                             : QGuiApplication::primaryScreen());
 #endif
+  // Fall back to the primary screen if the widget isn't on one yet, and guard
+  // against headless environments where even primaryScreen() is null.
+  if (!screen) screen = QGuiApplication::primaryScreen();
 
-  QRect screenGeometry = screen->availableGeometry();
-  int desktop_height = screenGeometry.height();
-  int desktop_width = screenGeometry.width();
+  if (screen) {
+    QRect screenGeometry = screen->availableGeometry();
+    int desktop_height = screenGeometry.height();
+    int desktop_width = screenGeometry.width();
 
-  // resize differently if monitor is in portrait mode
-  if (desktop_width < desktop_height) {
-    const int new_width = (double)desktop_width * 0.95;
-    if (new_width < label->pixmap().width()) {
-      label->setPixmap(
-          label->pixmap().scaledToWidth(new_width, Qt::SmoothTransformation));
-    }
-  } else {
-    const int new_height = (double)desktop_height * 0.85;
-    if (new_height < label->pixmap().height()) {
-      label->setPixmap(
-          label->pixmap().scaledToHeight(new_height, Qt::SmoothTransformation));
+    // resize differently if monitor is in portrait mode
+    if (desktop_width < desktop_height) {
+      const int new_width = (double)desktop_width * 0.95;
+      if (new_width < label->pixmap().width()) {
+        label->setPixmap(
+            label->pixmap().scaledToWidth(new_width, Qt::SmoothTransformation));
+      }
+    } else {
+      const int new_height = (double)desktop_height * 0.85;
+      if (new_height < label->pixmap().height()) {
+        label->setPixmap(label->pixmap().scaledToHeight(
+            new_height, Qt::SmoothTransformation));
+      }
     }
   }
 
@@ -302,7 +307,11 @@ void AlbumCoverChoiceController::AlbumCoverFetched(
 
   if (!image.isNull()) {
     QString cover = SaveCoverInCache(song.artist(), song.album(), image);
-    SaveCover(&song, cover);
+    // Only update the song if caching succeeded; SaveCoverInCache returns empty
+    // on write failure so we don't store a nonexistent path.
+    if (!cover.isEmpty()) {
+      SaveCover(&song, cover);
+    }
   }
 
   emit AutomaticCoverSearchDone();
@@ -327,12 +336,14 @@ QString AlbumCoverChoiceController::SaveCoverInCache(const QString& artist,
   QString filename(Utilities::Sha1CoverHash(artist, album).toHex() + ".jpg");
   QString path(AlbumCoverLoader::ImageCacheDir() + "/" + filename);
 
-  // Make sure this directory exists first
+  // Create any missing parent directories in the cache path.
   QDir dir;
-  dir.mkdir(AlbumCoverLoader::ImageCacheDir());
+  dir.mkpath(AlbumCoverLoader::ImageCacheDir());
 
   // Save the image to disk
-  image.save(path, "JPG");
+  if (!image.save(path, "JPG")) {
+    return QString();
+  }
 
   return path;
 }

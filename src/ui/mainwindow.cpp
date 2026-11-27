@@ -1304,8 +1304,8 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
   // when you reshow the buttons
   if (value) {
     // check if the song was scrobbled
-    if (app_->playlist_manager()->active()->get_lastfm_status() ==
-        Playlist::LastFM_Scrobbled) {
+    Playlist* active = app_->playlist_manager()->active();
+    if (active && active->get_lastfm_status() == Playlist::LastFM_Scrobbled) {
       ui_->action_toggle_scrobbling->setIcon(
           IconLoader::Load("as", IconLoader::Lastfm));
     } else {
@@ -1323,6 +1323,7 @@ void MainWindow::SaveSettings(QSettings* settings) {
 }
 
 void MainWindow::changeEvent(QEvent* e) {
+  QMainWindow::changeEvent(e);
   if (e && e->type() == QEvent::PaletteChange) {
     // The sidebar paints itself from a base colour derived from the palette
     // rather than going through the style, and StyleHelper caches that colour,
@@ -1332,8 +1333,12 @@ void MainWindow::changeEvent(QEvent* e) {
     StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
     ui_->tabs->update();
   }
-  dirty_geometry_ = true;
-  app_->DirtySettings();
+  if (e && e->type() == QEvent::WindowStateChange) {
+    // Only window-state changes (maximize/minimize) affect saved geometry;
+    // marking dirty on focus/activation events caused needless disk writes.
+    dirty_geometry_ = true;
+    app_->DirtySettings();
+  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
@@ -1427,31 +1432,33 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
 void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
   if (!index.isValid()) return;
 
-  int row = index.row();
-  if (index.model() == app_->playlist_manager()->current()->proxy()) {
+  Playlist* current = app_->playlist_manager()->current();
+  if (!current) return;
+
+  QModelIndex source_index = index;
+  if (index.model() == current->proxy()) {
     // The index was in the proxy model (might've been filtered), so we need
     // to get the actual row in the source model.
-    row =
-        app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+    source_index = current->proxy()->mapToSource(index);
   }
+  if (!source_index.isValid()) return;
 
   QModelIndexList dummyIndexList;
 
   switch (doubleclick_playlist_addmode_) {
     case PlaylistAddBehaviour_Play:
       app_->playlist_manager()->SetActiveToCurrent();
-      app_->player()->PlayAt(row, Engine::Manual, true);
+      app_->player()->PlayAt(source_index.row(), Engine::Manual, true);
       break;
 
     case PlaylistAddBehaviour_Enqueue:
-      dummyIndexList.append(index);
-      app_->playlist_manager()->current()->queue()->ToggleTracks(
-          dummyIndexList);
+      // Queue expects source-model indexes, not filtered/sorted proxy indexes.
+      dummyIndexList.append(source_index);
+      current->queue()->ToggleTracks(dummyIndexList);
       if (app_->player()->GetState() != Engine::Playing) {
         app_->playlist_manager()->SetActiveToCurrent();
-        app_->player()->PlayAt(
-            app_->playlist_manager()->current()->queue()->TakeNext(),
-            Engine::Manual, true);
+        app_->player()->PlayAt(current->queue()->TakeNext(), Engine::Manual,
+                               true);
       }
       break;
   }
@@ -1527,11 +1534,15 @@ void MainWindow::FilePathChanged(const QString& path) {
 }
 
 void MainWindow::Seeked(qlonglong microseconds) {
-  const int position = microseconds / kUsecPerSec;
-  const int length =
-      app_->player()->GetCurrentItem()->Metadata().length_nanosec() /
-      kNsecPerSec;
-  if (tray_icon_) tray_icon_->SetProgress(double(position) / length * 100);
+  PlaylistItemPtr item = app_->player()->GetCurrentItem();
+  if (item) {
+    const qint64 length = item->Metadata().length_nanosec() / kNsecPerSec;
+    // Streams/unknown-length items have length <= 0; skip to avoid / 0.
+    if (length > 0 && tray_icon_) {
+      const qint64 position = microseconds / kUsecPerSec;
+      tray_icon_->SetProgress(double(position) / length * 100);
+    }
+  }
 
   // if we seeked, scrobbling is canceled, update the icon
   if (ui_->action_toggle_scrobbling->isVisible()) SetToggleScrobblingIcon(true);
@@ -1543,8 +1554,9 @@ void MainWindow::Seeked(qlonglong microseconds) {
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   Playlist* playlist = app_->playlist_manager()->active();
-
   PlaylistItemPtr item(app_->player()->GetCurrentItem());
+  if (!playlist || !item) return;
+
   const int position = std::floor(
       float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
   const int length = app_->player()->engine()->length_nanosec() / kNsecPerSec;
@@ -1767,7 +1779,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   playlist_menu_index_ = source_index;
 
   // Is this song currently playing?
-  if (app_->playlist_manager()->current()->current_row() ==
+  if (source_index.isValid() &&
+      app_->playlist_manager()->current()->current_row() ==
           source_index.row() &&
       app_->player()->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
@@ -1958,7 +1971,11 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   // previously created
   if (playlist_add_to_another_ != nullptr) {
     playlist_menu_->removeAction(playlist_add_to_another_);
-    delete playlist_add_to_another_;
+    // playlist_add_to_another_ is only the submenu's menuAction(); deleting
+    // the QMenu frees the menu, menuAction(), and child actions parented to it,
+    // whereas deleting the action alone leaked the QMenu on every right-click.
+    delete playlist_add_to_another_->menu();
+    playlist_add_to_another_ = nullptr;
   }
 
   // create the playlist submenu
@@ -1969,7 +1986,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
        app_->playlist_backend()->GetAllOpenPlaylists()) {
     // don't add the current playlist
     if (playlist.id != app_->playlist_manager()->current()->id()) {
-      QAction* existing_playlist = new QAction(this);
+      QAction* existing_playlist = new QAction(add_to_another_menu);
       existing_playlist->setText(playlist.name);
       existing_playlist->setData(playlist.id);
       add_to_another_menu->addAction(existing_playlist);
@@ -1978,7 +1995,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
 
   add_to_another_menu->addSeparator();
   // add to a new playlist
-  QAction* new_playlist = new QAction(this);
+  QAction* new_playlist = new QAction(add_to_another_menu);
   new_playlist->setText(tr("New playlist"));
   new_playlist->setData(-1);  // fake id
   add_to_another_menu->addAction(new_playlist);
@@ -1992,6 +2009,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
 }
 
 void MainWindow::PlaylistPlay() {
+  if (!playlist_menu_index_.isValid()) return;
   if (app_->playlist_manager()->current()->current_row() ==
       playlist_menu_index_.row()) {
     app_->player()->PlayPause();
@@ -2001,6 +2019,7 @@ void MainWindow::PlaylistPlay() {
 }
 
 void MainWindow::PlaylistStopAfter() {
+  if (!playlist_menu_index_.isValid()) return;
   app_->playlist_manager()->current()->StopAfter(playlist_menu_index_.row());
 }
 
@@ -2038,8 +2057,11 @@ void MainWindow::EditTagDialogAccepted() {
 }
 
 void MainWindow::DiscoverStreamDetails() {
+  if (!playlist_menu_index_.isValid()) return;
   int row = playlist_menu_index_.row();
-  Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
+  PlaylistItemPtr item = app_->playlist_manager()->current()->item_at(row);
+  if (!item) return;
+  Song song = item->Metadata();
 
   QString url = song.url().toString();
   stream_discoverer_->Discover(url);
@@ -2059,30 +2081,37 @@ void MainWindow::ShowStreamDetails(const StreamDetails& details) {
 }
 
 void MainWindow::RenumberTracks() {
+  Playlist* current = app_->playlist_manager()->current();
+  if (!current) return;
+
   QModelIndexList indexes =
       ui_->playlist->view()->selectionModel()->selection().indexes();
   int track = 1;
 
-  // Get the index list in order
+  // Get the index list in visual (proxy) order
   std::stable_sort(indexes.begin(), indexes.end());
 
-  // if first selected song has a track number set, start from that offset
-  if (!indexes.isEmpty()) {
-    const Song first_song = app_->playlist_manager()
-                                ->current()
-                                ->item_at(indexes[0].row())
-                                ->Metadata();
+  // Sort while still in proxy order so numbering follows what the user sees,
+  // then map column-0 rows to source indexes before calling item_at().
+  QModelIndexList source_indexes;
+  for (const QModelIndex& index : indexes) {
+    if (index.column() != 0) continue;
+    const QModelIndex source_index = current->proxy()->mapToSource(index);
+    if (source_index.isValid()) source_indexes << source_index;
+  }
+  if (source_indexes.isEmpty()) return;
 
+  // if first selected song has a track number set, start from that offset
+  if (PlaylistItemPtr first_item = current->item_at(source_indexes[0].row())) {
+    const Song first_song = first_item->Metadata();
     if (first_song.track() > 0) track = first_song.track();
   }
 
-  for (const QModelIndex& index : indexes) {
-    if (index.column() != 0) continue;
-
-    const QModelIndex source_index =
-        app_->playlist_manager()->current()->proxy()->mapToSource(index);
+  for (const QModelIndex& source_index : source_indexes) {
     int row = source_index.row();
-    Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
+    PlaylistItemPtr item = current->item_at(row);
+    if (!item) continue;
+    Song song = item->Metadata();
 
     if (song.IsEditable()) {
       song.set_track(track);
@@ -2423,8 +2452,18 @@ void MainWindow::CheckForUpdates() {
 }
 
 void MainWindow::PlaylistUndoRedoChanged(QAction* undo, QAction* redo) {
-  playlist_menu_->insertAction(playlist_undoredo_, undo);
-  playlist_menu_->insertAction(playlist_undoredo_, redo);
+  // Remove the previous playlist's actions before inserting the new ones so
+  // tab switches don't accumulate stale entries in playlist_menu_.
+  if (playlist_undo_) {
+    playlist_menu_->removeAction(playlist_undo_);
+  }
+  if (playlist_redo_) {
+    playlist_menu_->removeAction(playlist_redo_);
+  }
+  playlist_undo_ = undo;
+  playlist_redo_ = redo;
+  if (undo) playlist_menu_->insertAction(playlist_undoredo_, undo);
+  if (redo) playlist_menu_->insertAction(playlist_undoredo_, redo);
 }
 
 void MainWindow::AddFilesToTranscoder() {
@@ -2563,10 +2602,15 @@ void MainWindow::PlaylistDelete() {
     if (app_->playlist_manager()->current()->rowCount() ==
         selected_songs.length()) {
       app_->player()->Stop();
-    } else {
-      for (Song x : selected_songs) {
-        if (x == app_->player()->GetCurrentItem()->Metadata()) {
+    } else if (PlaylistItemPtr current_item =
+                   app_->player()->GetCurrentItem()) {
+      // Snapshot current_song and break after Next(): advancing past the end
+      // of the playlist can stop playback and make GetCurrentItem() null.
+      const Song current_song = current_item->Metadata();
+      for (const Song& x : selected_songs) {
+        if (x == current_song) {
           app_->player()->Next();
+          break;
         }
       }
     }
@@ -2600,7 +2644,7 @@ void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
   if (songs_with_errors.isEmpty()) {
     qLog(Debug) << "Finished deleting songs";
     Playlist* activePlaylist = app_->playlist_manager()->active();
-    if (activePlaylist->id() != -1) {
+    if (activePlaylist && activePlaylist->id() != -1) {
       activePlaylist->RemoveUnavailableSongs();
       qLog(Debug) << "Found active playlist and removed unavailable songs";
     }
@@ -2887,9 +2931,15 @@ void MainWindow::Raise() {
 }
 
 #ifdef Q_OS_WIN32
-bool MainWindow::winEvent(MSG* msg, long*) {
-  thumbbar_->HandleWinEvent(msg);
-  return false;
+bool MainWindow::nativeEvent(const QByteArray& eventType, void* message,
+                             qintptr* result) {
+  // Qt 6 replaced QWidget::winEvent() with nativeEvent(); only Win32
+  // message event types pass a MSG* payload in `message`.
+  if (thumbbar_ && (eventType == "windows_generic_MSG" ||
+                    eventType == "windows_dispatcher_MSG")) {
+    thumbbar_->HandleWinEvent(static_cast<MSG*>(message));
+  }
+  return QMainWindow::nativeEvent(eventType, message, result);
 }
 #endif  // Q_OS_WIN32
 
@@ -2898,8 +2948,10 @@ void MainWindow::Exit() {
   dirty_playback_ = true;
   settings_.setValue("show_sidebar",
                      ui_->action_toggle_show_sidebar->isChecked());
-  settings_.endGroup();
-  SaveSettings(&settings_);
+  // MainWindow keeps kSettingsGroup open on settings_; save directly instead
+  // of calling SaveSettings() (which pops the group) before fadeout returns.
+  if (dirty_geometry_) SaveGeometry(&settings_);
+  if (dirty_playback_) SavePlaybackStatus(&settings_);
   settings_.sync();
 
   if (app_->player()->engine()->is_fadeout_enabled()) {

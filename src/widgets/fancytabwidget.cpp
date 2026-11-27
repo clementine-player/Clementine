@@ -262,10 +262,14 @@ void FancyTabWidget::setBackgroundPixmap(const QPixmap& pixmap) {
 }
 
 void FancyTabWidget::setCurrentIndex(int index) {
+  // currentPage is null on out-of-range index; spacer tabs have no layout.
   QWidget* currentPage = widget(index);
+  if (!currentPage) return;
 
   QLayout* layout = currentPage->layout();
-  if (bottom_widget_ != nullptr) layout->addWidget(bottom_widget_);
+  if (bottom_widget_ != nullptr && layout != nullptr) {
+    layout->addWidget(bottom_widget_);
+  }
 
   QTabWidget::setCurrentIndex(index);
 }
@@ -284,10 +288,14 @@ void FancyTabWidget::setCurrentWidget(QWidget* page) {
 
 // Slot
 void FancyTabWidget::currentTabChanged(int index) {
+  // currentWidget() can be null on empty tab bar; spacers lack a layout.
   QWidget* currentPage = currentWidget();
-
-  QLayout* layout = currentPage->layout();
-  if (bottom_widget_ != nullptr) layout->addWidget(bottom_widget_);
+  if (currentPage) {
+    QLayout* layout = currentPage->layout();
+    if (bottom_widget_ != nullptr && layout != nullptr) {
+      layout->addWidget(bottom_widget_);
+    }
+  }
   emit CurrentChanged(index);
 }
 
@@ -307,16 +315,19 @@ FancyTabWidget::FancyTabWidget(QWidget* parent)
 }
 
 void FancyTabWidget::loadSettings(const QSettings& settings) {
+  // Remove hidden tabs in reverse order first so shifting indices don't
+  // skip subsequent tabs, then reorder surviving tabs in a second pass.
+  for (int i = count() - 1; i >= 0; --i) {
+    int originalIndex = tabBar()->tabData(i).toInt();
+    QString k = "tab_index_" + QString::number(originalIndex);
+    int newIndex = settings.value(k, i).toInt();
+    if (newIndex < 0) removeTab(i);  // Does not delete page
+  }
   for (int i = 0; i < count(); i++) {
     int originalIndex = tabBar()->tabData(i).toInt();
     QString k = "tab_index_" + QString::number(originalIndex);
-
     int newIndex = settings.value(k, i).toInt();
-
-    if (newIndex >= 0)
-      tabBar()->moveTab(i, newIndex);
-    else
-      removeTab(i);  // Does not delete page
+    if (newIndex >= 0) tabBar()->moveTab(i, newIndex);
   }
 }
 

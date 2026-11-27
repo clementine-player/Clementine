@@ -32,6 +32,7 @@ class Windows7ThumbBar : public QObject {
   // Creates a list of buttons in the taskbar icon for this window.  Does
   // nothing and is safe to use on other operating systems too.
   Windows7ThumbBar(QWidget* widget = 0);
+  ~Windows7ThumbBar() override;
 
   static const int kIconSize;
   static const int kMaxButtonCount;
@@ -40,7 +41,7 @@ class Windows7ThumbBar : public QObject {
   // to the event loop.  If an action is nullptr it becomes a spacer.
   void SetActions(const QList<QAction*>& actions);
 
-  // Call this from the parent's winEvent() function.
+  // Call this from the parent's nativeEvent() function.
   void HandleWinEvent(MSG* msg);
 
  private slots:

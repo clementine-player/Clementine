@@ -39,10 +39,9 @@ NSString* const kNotificationIdentifier = @"org.clementine-player.now-playing";
 UNNotificationAttachment* CoverAttachment(const QImage& image) {
   if (image.isNull()) return nil;
 
-  const QString path =
-      QDir(QString::fromNSString(NSTemporaryDirectory()))
-          .filePath(QString("clementine-cover-%1.png")
-                        .arg(QUuid::createUuid().toString(QUuid::WithoutBraces)));
+  const QString path = QDir(QString::fromNSString(NSTemporaryDirectory()))
+                           .filePath(QString("clementine-cover-%1.png")
+                                         .arg(QUuid::createUuid().toString(QUuid::WithoutBraces)));
   if (!image.save(path, "PNG")) return nil;
 
   NSError* error = nil;
@@ -59,8 +58,10 @@ UNNotificationAttachment* CoverAttachment(const QImage& image) {
   return attachment;
 }
 
-void Deliver(NSString* title, NSString* body, UNNotificationAttachment* cover) {
+void Deliver(NSString* title, NSString* body, const QImage& image) {
   UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+  // Copy QImage by value so the async block never captures a stack reference.
+  const QImage cover_image = image;
 
   // Asking again once the person has answered returns their answer without
   // asking them, so this only prompts before the first notification.
@@ -70,8 +71,7 @@ void Deliver(NSString* title, NSString* body, UNNotificationAttachment* cover) {
                             // A build that isn't signed can end up here too.
                             if (error) {
                               qLog(Warning) << "Can't show notifications:"
-                                            << QString::fromNSString(
-                                                   error.localizedDescription);
+                                            << QString::fromNSString(error.localizedDescription);
                             }
                             return;
                           }
@@ -80,6 +80,10 @@ void Deliver(NSString* title, NSString* body, UNNotificationAttachment* cover) {
                               [[[UNMutableNotificationContent alloc] init] autorelease];
                           content.title = title;
                           content.body = body;
+                          // Create the temp PNG only after authorization
+                          // succeeds so denied/unsigned runs don't leak
+                          // orphaned files in NSTemporaryDirectory().
+                          UNNotificationAttachment* cover = CoverAttachment(cover_image);
                           if (cover) content.attachments = @[ cover ];
 
                           UNNotificationRequest* request =
@@ -89,9 +93,9 @@ void Deliver(NSString* title, NSString* body, UNNotificationAttachment* cover) {
                           [center addNotificationRequest:request
                                    withCompletionHandler:^(NSError* add_error) {
                                      if (add_error) {
-                                       qLog(Warning) << "Couldn't show a notification:"
-                                                     << QString::fromNSString(
-                                                            add_error.localizedDescription);
+                                       qLog(Warning)
+                                           << "Couldn't show a notification:"
+                                           << QString::fromNSString(add_error.localizedDescription);
                                      }
                                    }];
                         }];
@@ -108,5 +112,5 @@ bool OSD::SupportsTrayPopups() { return false; }
 void OSD::ShowMessageNative(const QString& summary, const QString& message, const QString& icon,
                             const QImage& image) {
   Q_UNUSED(icon);
-  Deliver(summary.toNSString(), message.toNSString(), CoverAttachment(image));
+  Deliver(summary.toNSString(), message.toNSString(), image);
 }

@@ -85,8 +85,10 @@ void PrettyImageView::mouseReleaseEvent(QMouseEvent* e) {
   if (!widget) return;
 
   // Get the index of that image
+  // layout_ has 2 flanking 200px spacers ([spacer, images..., spacer]), so
+  // layout_->count() - 2 is the image count; ignore clicks on spacers.
   const int index = layout_->indexOf(widget) - 1;
-  if (index == -1) return;
+  if (index < 0 || index >= layout_->count() - 2) return;
 
   if (index == current_index_) {
     // Show the image fullsize
@@ -101,6 +103,13 @@ void PrettyImageView::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 void PrettyImageView::ScrollTo(int index, bool smooth) {
+  // Bail when only the 2 spacers exist so qBound(0, index, -1) won't
+  // trigger Q_ASSERT(min <= max).
+  if (layout_->count() <= 2) {
+    current_index_ = -1;
+    return;
+  }
+
   current_index_ = qBound(0, index, layout_->count() - 3);
   const int layout_index = current_index_ + 1;
 

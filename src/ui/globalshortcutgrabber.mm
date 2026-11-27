@@ -28,9 +28,16 @@
 
 class MacMonitorWrapper {
  public:
-  explicit MacMonitorWrapper(id monitor) : local_monitor_(monitor) {}
+  // Under MRC, retain the autoreleased monitor returned by NSEvent so it
+  // outlives the current autorelease pool drain until removed in ~Wrapper.
+  explicit MacMonitorWrapper(id monitor) : local_monitor_([monitor retain]) {}
 
-  ~MacMonitorWrapper() { [NSEvent removeMonitor:local_monitor_]; }
+  ~MacMonitorWrapper() {
+    if (local_monitor_) {
+      [NSEvent removeMonitor:local_monitor_];
+      [local_monitor_ release];
+    }
+  }
 
  private:
   id local_monitor_;
@@ -48,6 +55,8 @@ bool GlobalShortcutGrabber::HandleMacEvent(NSEvent* event) {
 }
 
 void GlobalShortcutGrabber::SetupMacEventHandler() {
+  // Tear down any existing monitor first in case showEvent() fires twice.
+  TeardownMacEventHandler();
   id monitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
                                                      handler:^(NSEvent* event) {
                                                        return HandleMacEvent(event) ? event : nil;
@@ -55,4 +64,9 @@ void GlobalShortcutGrabber::SetupMacEventHandler() {
   wrapper_ = new MacMonitorWrapper(monitor);
 }
 
-void GlobalShortcutGrabber::TeardownMacEventHandler() { delete wrapper_; }
+void GlobalShortcutGrabber::TeardownMacEventHandler() {
+  // Clear wrapper_ before deleting to prevent double-free on re-entry.
+  MacMonitorWrapper* wrapper = wrapper_;
+  wrapper_ = nullptr;
+  delete wrapper;
+}

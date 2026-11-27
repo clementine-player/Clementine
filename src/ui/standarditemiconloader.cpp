@@ -33,16 +33,20 @@ StandardItemIconLoader::StandardItemIconLoader(AlbumCoverLoader* cover_loader,
 }
 
 void StandardItemIconLoader::SetModel(QStandardItemModel* model) {
+  // Cancel pending tasks and disconnect from the previous model so stale
+  // QStandardItem* pointers cannot fire ImageLoaded after switching models.
+  ModelReset();
   if (model_) {
-    disconnect(model_, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
-               this, SLOT(RowsAboutToBeRemoved(QModelIndex, int, int)));
+    disconnect(model_, nullptr, this, nullptr);
   }
 
   model_ = model;
 
-  connect(model_, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
-          SLOT(RowsAboutToBeRemoved(QModelIndex, int, int)));
-  connect(model_, SIGNAL(modelAboutToBeReset()), SLOT(ModelReset()));
+  if (model_) {
+    connect(model_, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
+            SLOT(RowsAboutToBeRemoved(QModelIndex, int, int)));
+    connect(model_, SIGNAL(modelAboutToBeReset()), SLOT(ModelReset()));
+  }
 }
 
 void StandardItemIconLoader::LoadIcon(const QString& art_automatic,
@@ -67,12 +71,23 @@ void StandardItemIconLoader::RowsAboutToBeRemoved(const QModelIndex& parent,
 
   for (QMap<quint64, QStandardItem*>::iterator it = pending_covers_.begin();
        it != pending_covers_.end();) {
-    const QStandardItem* item = it.value();
-    const QStandardItem* item_parent = item->parent();
+    // rowsAboutToBeRemoved only notifies for the removed parent row range,
+    // not recursively for descendants. Walk up each pending item's ancestor
+    // chain so deleting a parent node cancels covers for its entire subtree.
+    bool will_be_removed = false;
+    for (const QStandardItem* cur = it.value(); cur != nullptr;
+         cur = cur->parent()) {
+      const QStandardItem* cur_parent = cur->parent();
+      const bool matches_parent =
+          (is_top && cur_parent == nullptr) ||
+          (cur_parent != nullptr && cur_parent->index() == parent);
+      if (matches_parent && cur->row() >= begin && cur->row() <= end) {
+        will_be_removed = true;
+        break;
+      }
+    }
 
-    if (((is_top && item_parent == nullptr) ||
-         (item_parent != nullptr && item_parent->index() == parent)) &&
-        item->index().row() >= begin && item->index().row() <= end) {
+    if (will_be_removed) {
       cover_loader_->CancelTask(it.key());
       it = pending_covers_.erase(it);
     } else {

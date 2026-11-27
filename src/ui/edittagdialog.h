@@ -19,6 +19,7 @@
 #define EDITTAGDIALOG_H
 
 #include <QDialog>
+#include <QFuture>
 #include <QModelIndexList>
 
 #include "config.h"
@@ -153,6 +154,9 @@ class EditTagDialog : public QDialog {
   PlaylistItemList playlist_items_;
   QList<Data> data_;
   QList<FieldData> fields_;
+  // Tracked so ~EditTagDialog() can wait for background LoadData/SaveData.
+  QFuture<QList<Data>> load_future_;
+  QFuture<void> save_future_;
 
   bool ignore_edits_;
 

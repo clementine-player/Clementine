@@ -65,6 +65,8 @@ void PrettyImage::LazyLoad() {
   // Start fetching the image
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
   RedirectFollower* follower = new RedirectFollower(reply);
+  // Parent to `this` so an in-flight request isn't leaked if destroyed.
+  follower->setParent(this);
   state_ = State_Fetching;
   NewClosure(follower, &RedirectFollower::finished, this,
              &PrettyImage::ImageFetched, follower);
@@ -248,5 +250,6 @@ void PrettyImage::SaveAs() {
 
   image_.save(filename);
 
-  s.setValue("last_save_dir", last_save_dir);
+  // Persist the newly selected directory rather than the previous value.
+  s.setValue("last_save_dir", QFileInfo(filename).absolutePath());
 }

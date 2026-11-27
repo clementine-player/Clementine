@@ -173,7 +173,12 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
           this, SLOT(AutomaticCoverSearchDone()));
 }
 
-NowPlayingWidget::~NowPlayingWidget() {}
+NowPlayingWidget::~NowPlayingWidget() {
+  // kittens_ lives on its own worker thread; schedule deletion there.
+  if (kittens_) {
+    kittens_->deleteLater();
+  }
+}
 
 void NowPlayingWidget::SetApplication(Application* app) {
   app_ = app;
@@ -617,7 +622,9 @@ void NowPlayingWidget::AllHail(bool hypnotoad) {
 
 void NowPlayingWidget::EnableKittens(bool aww) {
   if (!kittens_ && aww) {
-    kittens_ = new KittenLoader(this);
+    // Create parentless so MoveToNewThread() (QObject::moveToThread)
+    // actually moves KittenLoader off the GUI thread.
+    kittens_ = new KittenLoader();
     app_->MoveToNewThread(kittens_);
     connect(kittens_, SIGNAL(ImageLoaded(quint64, QImage)),
             SLOT(KittenLoaded(quint64, QImage)));

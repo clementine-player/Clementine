@@ -68,7 +68,12 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget* parent)
   ui_->results->setColumnWidth(4, 160);  // Album column
 }
 
-TrackSelectionDialog::~TrackSelectionDialog() { delete ui_; }
+TrackSelectionDialog::~TrackSelectionDialog() {
+  // SaveData runs via QtConcurrent::run with raw `this` and emits Error;
+  // wait for completion before tearing down `this` and `ui_`.
+  if (save_future_.isRunning()) save_future_.waitForFinished();
+  delete ui_;
+}
 
 void TrackSelectionDialog::Init(const SongList& songs) {
   ui_->song_list->clear();
@@ -211,7 +216,7 @@ void TrackSelectionDialog::ResultSelected() {
   if (!ui_->results->currentItem()) return;
 
   const int song_row = ui_->song_list->currentRow();
-  if (song_row == -1) return;
+  if (song_row < 0 || song_row >= data_.count()) return;
 
   const int result_index =
       ui_->results->currentItem()->data(0, Qt::UserRole).toInt();
@@ -255,9 +260,9 @@ void TrackSelectionDialog::accept() {
     SetLoading(tr("Saving tracks") + "...");
 
     // Save tags in the background
-    QFuture<void> future =
+    save_future_ =
         QtConcurrent::run(&TrackSelectionDialog::SaveData, this, data_);
-    NewClosure(future, this, &TrackSelectionDialog::AcceptFinished);
+    NewClosure(save_future_, this, &TrackSelectionDialog::AcceptFinished);
     return;
   }
 
@@ -279,12 +284,17 @@ void TrackSelectionDialog::AcceptFinished() {
 }
 
 void TrackSelectionDialog::NextSong() {
-  int row = (ui_->song_list->currentRow() + 1) % ui_->song_list->count();
+  // Guard against empty song_list so shortcuts don't divide by zero (% 0).
+  const int count = ui_->song_list->count();
+  if (count == 0) return;
+  int row = (ui_->song_list->currentRow() + 1) % count;
   ui_->song_list->setCurrentRow(row);
 }
 
 void TrackSelectionDialog::PreviousSong() {
-  int row = (ui_->song_list->currentRow() - 1 + ui_->song_list->count()) %
-            ui_->song_list->count();
+  // Guard against empty song_list so shortcuts don't divide by zero (% 0).
+  const int count = ui_->song_list->count();
+  if (count == 0) return;
+  int row = (ui_->song_list->currentRow() - 1 + count) % count;
   ui_->song_list->setCurrentRow(row);
 }

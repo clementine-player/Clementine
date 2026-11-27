@@ -19,6 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPointer>
 #include <QSettings>
 #include <QSystemTrayIcon>
 #include <memory>
@@ -139,7 +140,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void showEvent(QShowEvent*);
 
 #ifdef Q_OS_WIN32
-  bool winEvent(MSG* message, long* result);
+  bool nativeEvent(const QByteArray& eventType, void* message,
+                   qintptr* result) override;
 #endif
 
   // PlatformInterface
@@ -377,6 +379,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_queue_play_next_;
   QAction* playlist_skip_;
   QAction* playlist_add_to_another_;
+  // QPointer clears if the owning Playlist is closed before the next switch.
+  QPointer<QAction> playlist_undo_;
+  QPointer<QAction> playlist_redo_;
   QList<QAction*> playlistitem_actions_;
   QAction* playlistitem_actions_separator_;
   QModelIndex playlist_menu_index_;

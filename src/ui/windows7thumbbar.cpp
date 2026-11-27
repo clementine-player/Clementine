@@ -43,6 +43,16 @@ Windows7ThumbBar::Windows7ThumbBar(QWidget* widget)
       button_created_message_id_(0),
       taskbar_list_(nullptr) {}
 
+Windows7ThumbBar::~Windows7ThumbBar() {
+#ifdef Q_OS_WIN32
+  // Release the COM interface acquired when TaskbarButtonCreated arrived.
+  if (taskbar_list_) {
+    reinterpret_cast<ITaskbarList3*>(taskbar_list_)->Release();
+    taskbar_list_ = nullptr;
+  }
+#endif
+}
+
 void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 #ifdef Q_OS_WIN32
   qLog(Debug) << "Setting actions";
@@ -60,6 +70,10 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 
 #ifdef Q_OS_WIN32
 
+#ifndef THBN_CLICKED
+#define THBN_CLICKED 0x1800
+#endif
+
 static void SetupButton(const QAction* action, THUMBBUTTON* button) {
   if (action) {
     // qt_pixmapToWinHICON() was an undocumented private Qt5 symbol; QImage
@@ -67,9 +81,10 @@ static void SetupButton(const QAction* action, THUMBBUTTON* button) {
     button->hIcon =
         action->icon().pixmap(Windows7ThumbBar::kIconSize).toImage().toHICON();
     button->dwFlags = action->isEnabled() ? THBF_ENABLED : THBF_DISABLED;
-    // This is unsafe - doesn't obey 260-char restriction
-    action->text().toWCharArray(button->szTip);
-    button->szTip[action->text().count()] = L'\0';
+    // THUMBBUTTON::szTip is WCHAR[260]; clamp to 259 chars plus NUL.
+    const QString text = action->text().left(259);
+    const int len = text.toWCharArray(button->szTip);
+    button->szTip[len] = L'\0';
 
     if (!action->isVisible()) {
       button->dwFlags = THUMBBUTTONFLAGS(button->dwFlags | THBF_HIDDEN);
@@ -86,6 +101,7 @@ static void SetupButton(const QAction* action, THUMBBUTTON* button) {
 
 void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
 #ifdef Q_OS_WIN32
+  if (!msg) return;
   if (button_created_message_id_ == 0) {
     // Compute the value for the TaskbarButtonCreated message
     button_created_message_id_ = RegisterWindowMessage(L"TaskbarButtonCreated");
@@ -129,10 +145,12 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
       return;
     }
 
-    // Add the buttons
-    qLog(Debug) << "Initialising" << actions_.count() << "buttons";
-    THUMBBUTTON buttons[kMaxButtonCount];
-    for (int i = 0; i < actions_.count(); ++i) {
+    // Add the buttons (Windows caps a thumbbar at kMaxButtonCount = 7).
+    const int count =
+        static_cast<int>(qMin<qsizetype>(actions_.count(), kMaxButtonCount));
+    qLog(Debug) << "Initialising" << count << "buttons";
+    THUMBBUTTON buttons[kMaxButtonCount] = {};
+    for (int i = 0; i < count; ++i) {
       const QAction* action = actions_[i];
       THUMBBUTTON* button = &buttons[i];
       button->iId = i;
@@ -140,14 +158,17 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     }
 
     qLog(Debug) << "Adding buttons";
-    hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(),
-                                          actions_.count(), buttons);
+    hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(), count,
+                                          buttons);
     if (hr != S_OK)
       qLog(Debug) << "Failed to add buttons" << Qt::hex << DWORD(hr);
-    for (int i = 0; i < actions_.count(); i++) {
+    for (int i = 0; i < count; i++) {
       if (buttons[i].hIcon != 0) DestroyIcon(buttons[i].hIcon);
     }
-  } else if (msg->message == WM_COMMAND) {
+  } else if (msg->message == WM_COMMAND &&
+             HIWORD(msg->wParam) == THBN_CLICKED) {
+    // WM_COMMAND also carries menu/control commands; check THBN_CLICKED so
+    // unrelated command IDs 0..6 don't trigger thumbbar buttons.
     const int button_id = LOWORD(msg->wParam);
 
     if (button_id >= 0 && button_id < actions_.count()) {
@@ -165,17 +186,21 @@ void Windows7ThumbBar::ActionChanged() {
   if (!taskbar_list_) return;
   ITaskbarList3* taskbar_list = reinterpret_cast<ITaskbarList3*>(taskbar_list_);
 
-  THUMBBUTTON buttons[kMaxButtonCount];
-  for (int i = 0; i < actions_.count(); ++i) {
+  const int count =
+      static_cast<int>(qMin<qsizetype>(actions_.count(), kMaxButtonCount));
+  THUMBBUTTON buttons[kMaxButtonCount] = {};
+  for (int i = 0; i < count; ++i) {
     const QAction* action = actions_[i];
     THUMBBUTTON* button = &buttons[i];
 
     button->iId = i;
     SetupButton(action, button);
-    if (buttons->hIcon != 0) DestroyIcon(buttons->hIcon);
   }
 
-  taskbar_list->ThumbBarUpdateButtons((HWND)widget_->winId(), actions_.count(),
-                                      buttons);
+  taskbar_list->ThumbBarUpdateButtons((HWND)widget_->winId(), count, buttons);
+  // Destroy each HICON only after ThumbBarUpdateButtons has copied them.
+  for (int i = 0; i < count; ++i) {
+    if (buttons[i].hIcon != 0) DestroyIcon(buttons[i].hIcon);
+  }
 #endif  // Q_OS_WIN32
 }

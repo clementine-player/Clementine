@@ -73,11 +73,14 @@ QIcon OutputButton::Glyph(const QString& name) const {
 }
 
 QString OutputButton::OutputName(Engine::Base* engine) const {
+  // outputs() can be empty during router startup or teardown.
+  if (!router_ || router_->outputs().isEmpty()) return QString();
   if (engine == router_->outputs().first()) return tr("This computer");
-  return engine->output_name();
+  return engine ? engine->output_name() : QString();
 }
 
 QIcon OutputButton::OutputIcon(Engine::Base* engine) const {
+  if (!router_ || router_->outputs().isEmpty() || !engine) return QIcon();
   if (engine == router_->outputs().first()) return Glyph("computer");
   const QString icon = engine->output_icon();
   if (icon == "cast") {
@@ -93,6 +96,11 @@ QIcon OutputButton::OutputIcon(Engine::Base* engine) const {
 void OutputButton::OutputsChanged() {
   if (!router_) return;
   const QList<Engine::Base*> outputs = router_->outputs();
+  if (outputs.isEmpty()) {
+    menu_->clear();
+    setVisible(false);
+    return;
+  }
 
   menu_->clear();
   for (Engine::Base* engine : outputs) {
@@ -109,10 +117,13 @@ void OutputButton::OutputsChanged() {
     if (engine == outputs.first() && outputs.size() > 1) menu_->addSeparator();
   }
   // Then what can be done with the one playing.
-  const QList<QAction*> actions = router_->active_engine()->output_actions();
-  if (!actions.isEmpty()) {
-    menu_->addSeparator();
-    menu_->addActions(actions);
+  // active_engine() can be null while outputs are torn down.
+  if (router_->active_engine()) {
+    const QList<QAction*> actions = router_->active_engine()->output_actions();
+    if (!actions.isEmpty()) {
+      menu_->addSeparator();
+      menu_->addActions(actions);
+    }
   }
 
   const bool local = router_->is_local();
@@ -138,6 +149,7 @@ void OutputButton::OutputChosen(QAction* action) {
 }
 
 void OutputButton::PlayOn(Engine::Base* engine) {
+  if (!engine || !router_) return;
   const RendererRegistry::Reach reach =
       registry_ ? registry_->ReachFor(engine)
                 : RendererRegistry::Reach::Reachable;
@@ -146,10 +158,18 @@ void OutputButton::PlayOn(Engine::Base* engine) {
     return;
   }
 
+  // Ask() runs a modal dialog event loop during which remote/cast
+  // devices can disconnect and destroy `engine`; re-verify membership.
+  const QPointer<Engine::Base> safe_engine(engine);
   const QString name = OutputName(engine);
-  switch (Ask(name, registry_->ReachMessage(reach, name), reach)) {
+  const Answer answer = Ask(name, registry_->ReachMessage(reach, name), reach);
+  if (!safe_engine || !router_ ||
+      !router_->outputs().contains(safe_engine.data())) {
+    return;
+  }
+  switch (answer) {
     case Answer::TurnOn:
-      pending_ = engine;
+      pending_ = safe_engine;
       emit TurnOnNetworkRemote();
       break;
     case Answer::Settings:
