@@ -20,6 +20,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QTimerEvent>
+#include <limits>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -51,12 +52,26 @@ RemoteEngine::RemoteEngine(Application* app, const RendererEndpoint& endpoint,
       next_item_id_(1),
       current_sent_(false),
       current_retried_(false),
+      transient_retries_(0),
+      transient_retry_item_id_(0),
+      transient_retry_timer_(new QTimer(this)),
       state_(Engine::Empty),
       valid_emitted_(false),
       position_ms_(0),
       timer_id_(startTimer(kTimerIntervalMsec)) {
   setParent(parent);
   if (display_name_.isEmpty()) display_name_ = renderer_id_;
+
+  transient_retry_timer_->setSingleShot(true);
+  // Guard with transient_retry_item_id_ so a stopped or skipped track is
+  // never reloaded by an earlier retry timer.
+  connect(transient_retry_timer_, &QTimer::timeout, this, [this]() {
+    if (current_.id != 0 && current_.id == transient_retry_item_id_ &&
+        state_ != Engine::Empty) {
+      SendLoad(current_, position_nanosec() / kNsecPerMsec,
+               state_ != Engine::Paused);
+    }
+  });
 
   QSettings s;
   s.beginGroup(NetworkRemote::kSettingsGroup);
@@ -80,12 +95,14 @@ Song RemoteEngine::SongForRequest(const MediaPlaybackRequest& req,
   // The engine interface only carries URLs, so find the song the Player is
   // playing (or about to play) to plan with its metadata.
   PlaylistItemPtr item;
-  if (next) {
-    Playlist* playlist = app_->playlist_manager()->active();
-    const int row = playlist->next_row();
-    if (row != -1) item = playlist->item_at(row);
-  } else {
-    item = app_->player()->GetCurrentItem();
+  if (app_) {
+    if (next) {
+      Playlist* playlist = app_->playlist_manager()->active();
+      const int row = playlist->next_row();
+      if (row != -1) item = playlist->item_at(row);
+    } else {
+      item = app_->player()->GetCurrentItem();
+    }
   }
 
   if (item && item->Url() == req.RequestUrl()) return item->Metadata();
@@ -166,6 +183,7 @@ void RemoteEngine::Send(cpb::remote::MsgType type, cpb::remote::Message* msg) {
 
 void RemoteEngine::SendLoad(const StreamItem& item, qint64 start_ms,
                             bool playing) {
+  start_ms = qMax<qint64>(0, start_ms);
   cpb::remote::Message msg;
   cpb::remote::RequestRenderLoad* load = msg.mutable_request_render_load();
   FillRenderItem(item, load->mutable_item());
@@ -224,12 +242,20 @@ bool RemoteEngine::Load(const MediaPlaybackRequest& req,
   Engine::Base::Load(req, change, force_stop_at_end, beginning_nanosec,
                      end_nanosec);
 
-  // After a gapless transition the renderer is already playing this.
+  // After a gapless transition the renderer is already playing this. Also match
+  // boundaries so consecutive cue-sheet tracks sharing a media URL aren't
+  // skipped.
   if (change & Engine::Auto && current_sent_ && current_.id != 0 &&
-      current_.req.MediaUrl() == req.MediaUrl()) {
+      current_.req.MediaUrl() == req.MediaUrl() &&
+      static_cast<qint64>(beginning_nanosec) ==
+          current_.plan.beginning_nanosec &&
+      end_nanosec == current_.plan.end_nanosec) {
     return true;
   }
 
+  transient_retry_timer_->stop();
+  transient_retries_ = 0;
+  transient_retry_item_id_ = 0;
   preloaded_ = StreamItem();
   current_ = MakeItem(req, SongForRequest(req, false), false);
   current_sent_ = false;
@@ -241,8 +267,12 @@ bool RemoteEngine::Load(const MediaPlaybackRequest& req,
   if (current_.plan.mode == StreamPlan::Unplayable) {
     const QString message = tr("%1 can't play this track: %2")
                                 .arg(display_name_, current_.plan.reason);
+    const int failed_id = current_.id;
+    // Capture failed_id so deferred failure cannot kill a newer track.
     // Let the caller finish before the Player skips to the next track.
-    QTimer::singleShot(0, this, [this, message]() { FailItem(message); });
+    QTimer::singleShot(0, this, [this, failed_id, message]() {
+      if (current_.id == failed_id) FailItem(message);
+    });
     return false;
   }
   return true;
@@ -265,6 +295,9 @@ bool RemoteEngine::Play(quint64 offset_nanosec) {
 
 void RemoteEngine::Stop(bool) {
   Send(cpb::remote::RENDER_STOP);
+  transient_retry_timer_->stop();
+  transient_retries_ = 0;
+  transient_retry_item_id_ = 0;
   current_ = StreamItem();
   preloaded_ = StreamItem();
   current_sent_ = false;
@@ -307,12 +340,19 @@ void RemoteEngine::Seek(quint64 offset_nanosec) {
 }
 
 qint64 RemoteEngine::position_nanosec() const {
-  qint64 ms = position_ms_;
+  // Guard against negative or overflowing timestamps from remote status.
+  qint64 ms = qMax<qint64>(0, position_ms_);
   if (state_ == Engine::Playing && position_clock_.isValid()) {
-    ms += position_clock_.elapsed();
+    const qint64 elapsed = qMax<qint64>(0, position_clock_.elapsed());
+    if (ms <= std::numeric_limits<qint64>::max() - elapsed) {
+      ms += elapsed;
+    } else {
+      ms = std::numeric_limits<qint64>::max();
+    }
   }
   const qint64 length = length_nanosec();
-  const qint64 nanosec = ms * kNsecPerMsec;
+  const qint64 max_ms = std::numeric_limits<qint64>::max() / kNsecPerMsec;
+  const qint64 nanosec = qMin(ms, max_ms) * kNsecPerMsec;
   return length > 0 ? qMin(nanosec, length) : nanosec;
 }
 
@@ -360,7 +400,11 @@ void RemoteEngine::HandleStatus(const cpb::remote::RendererStatus& status) {
   // Reports about an older item can arrive after a track change.
   if (current_.id == 0 || status.item_id() != current_.id) return;
 
-  position_ms_ = status.position_ms();
+  position_ms_ = qMax<qint64>(0, status.position_ms());
+  const qint64 length = length_nanosec();
+  if (length > 0) {
+    position_ms_ = qMin(position_ms_, length / kNsecPerMsec);
+  }
   position_clock_.start();
 
   switch (status.state()) {
@@ -368,10 +412,16 @@ void RemoteEngine::HandleStatus(const cpb::remote::RendererStatus& status) {
     case cpb::remote::RENDERER_STATE_BUFFERING:
     case cpb::remote::RENDERER_STATE_PLAYING:
       SetState(Engine::Playing);
-      if (status.state() == cpb::remote::RENDERER_STATE_PLAYING &&
-          !valid_emitted_) {
-        valid_emitted_ = true;
-        emit ValidMediaRequested(current_.req);
+      // Reset transient retries only once actual playback starts so repeated
+      // BUFFERING/LOADING errors cannot re-arm an infinite retry loop.
+      if (status.state() == cpb::remote::RENDERER_STATE_PLAYING) {
+        transient_retries_ = 0;
+        transient_retry_item_id_ = 0;
+        transient_retry_timer_->stop();
+        if (!valid_emitted_) {
+          valid_emitted_ = true;
+          emit ValidMediaRequested(current_.req);
+        }
       }
       break;
     case cpb::remote::RENDERER_STATE_PAUSED:
@@ -387,6 +437,10 @@ void RemoteEngine::HandleStatus(const cpb::remote::RendererStatus& status) {
 
 void RemoteEngine::HandleTrackEnded(int item_id) {
   if (current_.id == 0 || item_id != current_.id) return;
+
+  transient_retry_timer_->stop();
+  transient_retries_ = 0;
+  transient_retry_item_id_ = 0;
 
   if (preloaded_.id != 0) {
     // The renderer has moved on to the preloaded item without a gap.
@@ -406,6 +460,9 @@ void RemoteEngine::HandleTrackEnded(int item_id) {
 }
 
 void RemoteEngine::HandleError(const cpb::remote::RendererError& error) {
+  static constexpr int kMaxTransientRetries = 2;
+  static constexpr int kTransientRetryDelayMsec = 500;
+
   const QString message = QString::fromStdString(error.message());
   qLog(Warning) << "Renderer" << display_name_ << "error on item"
                 << error.item_id() << ":" << message;
@@ -416,11 +473,16 @@ void RemoteEngine::HandleError(const cpb::remote::RendererError& error) {
       return;
 
     case cpb::remote::RENDERER_ERROR_SCOPE_TRANSIENT:
-      if (current_.id != 0 && error.item_id() == current_.id) {
-        SendLoad(current_, position_nanosec() / kNsecPerMsec,
-                 state_ == Engine::Playing);
+      // Retry transient errors a bounded number of times with backoff
+      // before falling back to force_encode / FailItem.
+      if (current_.id != 0 && error.item_id() == current_.id &&
+          transient_retries_ < kMaxTransientRetries) {
+        ++transient_retries_;
+        transient_retry_item_id_ = current_.id;
+        transient_retry_timer_->start(kTransientRetryDelayMsec);
+        return;
       }
-      return;
+      break;
 
     default:
       break;
@@ -439,6 +501,8 @@ void RemoteEngine::HandleError(const cpb::remote::RendererError& error) {
     if (retry.plan.mode != StreamPlan::Unplayable) {
       current_ = retry;
       current_retried_ = true;
+      transient_retries_ = 0;
+      transient_retry_timer_->stop();
       PublishItems();
       SendLoad(current_, position_ms, state_ != Engine::Paused);
       return;

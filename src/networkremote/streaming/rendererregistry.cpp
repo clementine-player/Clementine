@@ -307,7 +307,10 @@ void RendererRegistry::RegisterRenderer(int client_id, const QByteArray& data,
   if (!caps.ParseFromArray(data.constData(), data.size())) return;
 
   const QString id = QString::fromStdString(caps.renderer_id());
-  if (id.isEmpty() || id == kLocalOutputId ||
+  // Reject reserved device-output prefixes since SetOutput() searches
+  // remote engines before Cast/UPnP/AirPlay devices.
+  if (id.isEmpty() || id == kLocalOutputId || id.startsWith("cast:") ||
+      id.startsWith("upnp:") || id.startsWith("airplay:") ||
       id.size() > kMaxRendererIdLength) {
     qLog(Warning) << "Ignoring a renderer without a usable renderer_id";
     return;
@@ -325,11 +328,13 @@ void RendererRegistry::RegisterRenderer(int client_id, const QByteArray& data,
   endpoint.local_port = local_port;
   endpoint.peer_address = QHostAddress(peer_address);
 
+  // Remove any previous engine for this client first so peer validation always
+  // inspects every other active renderer.
+  if (RemoteEngine* existing = EngineForClient(client_id)) {
+    Remove(existing);
+  }
+
   for (RemoteEngine* engine : engines_) {
-    if (engine->client_id() == client_id) {
-      Remove(engine);
-      break;
-    }
     if (engine->renderer_id() != id) continue;
 
     // A renderer reconnecting from the same address replaces its old
@@ -502,6 +507,14 @@ void RendererRegistry::SetServing(const Serving& serving) {
   emit ServingChanged();
 }
 
+void RendererRegistry::ClearRenderers() {
+  // Snapshot engines_ because Remove() mutates it.
+  const QList<RemoteEngine*> current = engines_;
+  for (RemoteEngine* engine : current) {
+    Remove(engine);
+  }
+}
+
 namespace {
 
 QList<QNetworkAddressEntry> UpInterfaces() {
@@ -563,17 +576,23 @@ QString RendererRegistry::ReachMessage(Reach reach, const QString& name) const {
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which is turned off.")
           .arg(name);
-    case Reach::NotListening:
+    case Reach::NotListening: {
+      // Report configured_port when port is 0 (bind failed), falling back to
+      // the default only if none is configured.
+
       // TRANSLATORS: Shown when a Chromecast or other device the user picks
       // can't get its music from Clementine's network remote: the remote is
       // on, but couldn't open its port, usually because another program has
       // it. %1 is the device's name; %2 is the port number, such as 5500.
+      const quint16 failed_port = serving_.configured_port != 0
+                                      ? serving_.configured_port
+                                      : NetworkRemote::kDefaultServerPort;
       return tr("%1 gets its music from Clementine through the network "
                 "remote, which couldn't listen on port %2. Another program "
                 "may be using it.")
           .arg(name)
-          .arg(serving_.port == 0 ? NetworkRemote::kDefaultServerPort
-                                  : serving_.port);
+          .arg(serving_.port == 0 ? failed_port : serving_.port);
+    }
     case Reach::NotOnNetwork:
       // TRANSLATORS: Shown when a Chromecast or other device the user picks
       // can't get its music from Clementine's network remote: the remote only

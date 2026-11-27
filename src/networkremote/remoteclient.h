@@ -23,14 +23,19 @@ class RemoteClient : public QObject {
 
   // This method checks if client is authenticated before sending the data
   void SendData(cpb::remote::Message* msg);
+  void SendRaw(const QByteArray& serialized_proto);
   QAbstractSocket::SocketState State();
+  bool is_closing() const { return closing_; }
+  bool is_authenticated() const { return authenticated_; }
+  qint64 bytesToWrite() const { return client_->bytesToWrite(); }
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
   // |retry_after_msec| is sent, rounded up to seconds, if it's set.
   void DisconnectClient(cpb::remote::ReasonDisconnect reason,
                         qint64 retry_after_msec = 0);
+  void FlushBeforeDelete(int timeout_ms = 200);
 
-  SongSender* song_sender() { return song_sender_; }
+  SongSender* song_sender() { return song_sender_.get(); }
   const QString& files_root_folder() const { return files_root_folder_; }
   const QStringList& files_music_extensions() const {
     return files_music_extensions_;
@@ -51,12 +56,14 @@ class RemoteClient : public QObject {
  signals:
   void Parse(const cpb::remote::Message& msg);
   void Disconnected(int id);
+  void BytesWritten(qint64 bytes);
 
  private:
   void ParseMessage(const QByteArray& data);
 
   // Sends data to client without check if authenticated
   void SendDataToClient(cpb::remote::Message* msg);
+  void WriteFramedBytes(const char* data, qint64 length);
 
   static std::atomic<int> sNextId;
 
@@ -69,6 +76,8 @@ class RemoteClient : public QObject {
   bool authenticated_;
   bool allow_downloads_;
   bool downloader_;
+  bool closing_;
+  bool disconnected_emitted_;
   // Keeps the computer awake while a downloader's connected.
   std::unique_ptr<SleepInhibitor::Hold> download_hold_;
 
@@ -76,7 +85,7 @@ class RemoteClient : public QObject {
   bool reading_protobuf_;
   quint32 expected_length_;
   QByteArray buffer_;
-  SongSender* song_sender_;
+  std::unique_ptr<SongSender> song_sender_;
 
   QString files_root_folder_;
   QStringList files_music_extensions_;

@@ -28,6 +28,7 @@
 #include "streamplanner.h"
 
 class Application;
+class QTimer;
 
 // Where a renderer's control connection is. RemoteClients live on the
 // network remote's thread, so engines on the main thread only keep these
@@ -126,6 +127,9 @@ class RemoteEngine : public Engine::Base {
   // Whether RENDER_LOAD has been sent for current_.
   bool current_sent_;
   bool current_retried_;
+  int transient_retries_;
+  int transient_retry_item_id_;
+  QTimer* transient_retry_timer_;
   StreamItem preloaded_;
 
   Engine::State state_;

@@ -49,7 +49,8 @@ QString Encode(const QString& part) {
 }
 
 QString Decode(const QString& part) {
-  return QUrl::fromPercentEncoding(part.toLatin1());
+  // Decode as UTF-8 so non-ASCII characters aren't lost via Latin-1.
+  return QUrl::fromPercentEncoding(part.toUtf8());
 }
 
 }  // namespace
@@ -107,7 +108,8 @@ SyncSourceId SyncSourceId::Parse(const QString& source_id) {
       bool ok = false;
       const int id = parts[0].toInt(&ok);
       // Only the form ToString writes, so each source has one id.
-      if (!ok || id < 0 || QString::number(id) != parts[0]) {
+      // Compare against raw encoded[0] to reject percent-encoded digits.
+      if (!ok || id < 0 || QString::number(id) != encoded[0]) {
         return SyncSourceId();
       }
       return SyncSourceId(prefix.kind, id, {});

@@ -90,6 +90,8 @@ class RendererRegistry : public QObject {
     bool enabled = false;
     // The port it listens on, or 0 if it couldn't listen anywhere.
     quint16 port = 0;
+    // The configured listening port, used when |port| is 0.
+    quint16 configured_port = 0;
     // The addresses it listens on, or empty for every address.
     QList<QHostAddress> addresses;
     // Whether it only allows connections from the local network.
@@ -150,6 +152,7 @@ class RendererRegistry : public QObject {
   // A renderer or output message from a client, serialized.
   void HandleMessage(int client_id, const QByteArray& data);
   void ClientDisconnected(int client_id);
+  void ClearRenderers();
 
  signals:
   // A serialized cpb::remote::Message for one client, or for all of them.

@@ -44,8 +44,16 @@ QByteArray StreamItemTable::NewToken() {
 
 void StreamItemTable::Set(const QByteArray& token, const QHostAddress& peer,
                           const QList<StreamItem>& items) {
+  // Build the entry and its id hash before locking mutex_ so the lock is held
+  // only for the map insert/move.
+  Entry entry;
+  entry.peer = peer;
+  entry.items.reserve(items.size());
+  for (const StreamItem& item : items) {
+    entry.items.insert(item.id, item);
+  }
   QMutexLocker l(&mutex_);
-  entries_[token] = Entry{peer, items};
+  entries_[token] = std::move(entry);
 }
 
 void StreamItemTable::Remove(const QByteArray& token) {
@@ -59,12 +67,9 @@ bool StreamItemTable::Find(const QByteArray& token, int id, StreamItem* item,
   auto it = entries_.constFind(token);
   if (it == entries_.constEnd()) return false;
 
-  for (const StreamItem& candidate : it->items) {
-    if (candidate.id == id) {
-      *item = candidate;
-      *peer = it->peer;
-      return true;
-    }
-  }
-  return false;
+  auto item_it = it->items.constFind(id);
+  if (item_it == it->items.constEnd()) return false;
+  *item = *item_it;
+  *peer = it->peer;
+  return true;
 }

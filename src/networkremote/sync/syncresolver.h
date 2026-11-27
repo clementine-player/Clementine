@@ -63,7 +63,8 @@ class SyncResolver {
   SyncResolver(LibraryBackend* library, const Playlists& playlists,
                const SmartPlaylists& smart_playlists = SmartPlaylists());
 
-  Result Resolve(const SyncSourceId& source) const;
+  Result Resolve(const SyncSourceId& source, bool has_seed = false,
+                 qint64 seed = 0) const;
 
  private:
   Result Library(const SyncSourceId& source) const;

@@ -1,32 +1,120 @@
 #ifndef NETWORKREMOTE_H
 #define NETWORKREMOTE_H
 
+#include <QHostAddress>
+#include <QImage>
 #include <QList>
+#include <QMetaObject>
 #include <QNetworkAddressEntry>
 #include <QObject>
+#include <QPointer>
+#include <QSet>
 #include <QStringList>
 #include <memory>
 #include <vector>
 
+#include "core/song.h"
+#include "engines/enginebase.h"
+#include "globalsearch/searchprovider.h"
 #include "networkremote/protocolsniffer.h"
+#include "playlist/playlistsequence.h"
 #include "remotecontrolmessages.pb.h"
 
 class Application;
 class AuthAttemptLimiter;
 class IncomingDataParser;
 class InternetBrowser;
+class Playlist;
 class RemoteSmartPlaylists;
 class MediaSync;
 class MediaHttpServer;
 class OutgoingDataCreator;
 class RendererRegistry;
-class QHostAddress;
-class QImage;
 class QTcpServer;
 class QTcpSocket;
 class QTimer;
 class RemoteClient;
 class QMimeData;
+
+// Bridges Application objects on the main thread to NetworkRemote's worker
+// thread using queued signals and value snapshots.
+class RemoteBridge : public QObject {
+  Q_OBJECT
+ public:
+  explicit RemoteBridge(Application* app, QObject* parent = nullptr);
+  ~RemoteBridge() override;
+
+ public slots:
+  void Init();
+  void Shutdown();
+  void SetHasClients(bool has_clients);
+  void QueryClementineInfo(int client_id);
+  void QueryFirstData(int client_id, bool send_playlist_songs);
+  void QueryPlaylists(int client_id, bool include_closed);
+  void QueryPlaylistSongs(int client_id, int playlist_id);
+  void QueryTrackPosition();
+  void StartGlobalSearch(int client_id, const QString& query);
+  void QuerySavedRadios(int client_id);
+  void HandleChangeSong(int playlist_id, int song_index, bool enqueue_mode);
+  void SetCurrentPlaylistIfNotPlaying(int playlist_id);
+  void PrepareDownloadSongs(int client_id,
+                            const QByteArray& serialized_request);
+
+ private slots:
+  void OnActiveChanged(Playlist* playlist);
+  void OnPlaylistChanged(Playlist* playlist);
+  void FlushPlaylistUpdates();
+  void OnPlaylistsListChanged();
+  void OnArtLoaded(const Song& song, const QString& uri, const QImage& image);
+  void OnGlobalSearchResults(int id, const SearchProvider::ResultList& results);
+  void OnGlobalSearchFinished(int id);
+
+ signals:
+  void EngineStateChanged(Engine::State state);
+  void VolumeChanged(int volume);
+  void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
+  void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
+  void CurrentSongChanged(const Song& song, const QString& uri,
+                          const QImage& image, int current_row,
+                          int downloadability);
+  void ClementineInfoStateReady(int client_id, Engine::State state);
+  void FirstDataReady(int client_id, const Song& current_song, int current_row,
+                      int current_downloadability, Engine::State state,
+                      int volume, qint64 position_nanosec,
+                      const QByteArray& playlists_pb,
+                      const QByteArray& playlist_songs_pb,
+                      PlaylistSequence::RepeatMode repeat_mode,
+                      PlaylistSequence::ShuffleMode shuffle_mode);
+  void SendRawToClient(int client_id, const QByteArray& data);
+  void SendRawToAllClients(const QByteArray& data);
+  void TrackPositionReady(qint64 position_nanosec);
+  void PreparedDownloadSongs(int client_id,
+                             const QByteArray& serialized_request,
+                             const Song& current_song, int current_row,
+                             const SongList& playlist_songs);
+
+ private:
+  struct GlobalSearchEntry {
+    int client_id = 0;
+    QString query;
+  };
+
+  QByteArray BuildPlaylistsProto(bool include_closed) const;
+  QByteArray BuildPlaylistSongsProto(int id) const;
+  int DownloadabilityOf(const Song& song) const;
+  int ActiveCurrentRow() const;
+  void DisconnectAll();
+
+  QPointer<Application> app_;
+  bool has_clients_;
+  Song current_song_;
+  QString current_uri_;
+  QImage current_image_;
+  QHash<int, GlobalSearchEntry> global_searches_;
+  QSet<int> dirty_playlists_;
+  QTimer* playlist_update_timer_;
+  QList<QMetaObject::Connection> connections_;
+};
 
 class NetworkRemote : public QObject {
   Q_OBJECT
@@ -115,6 +203,11 @@ class NetworkRemote : public QObject {
   // Serialized messages from the RendererRegistry on the main thread.
   void SendToClient(int client_id, const QByteArray& data);
   void SendToAllClients(const QByteArray& data);
+  void OnClientDisconnected(int client_id);
+  void HandlePreparedDownload(int client_id,
+                              const QByteArray& serialized_request,
+                              const Song& current_song, int current_row,
+                              const SongList& playlist_songs);
   // Listens on the chosen networks' addresses that have appeared since the
   // last time, such as after a new DHCP lease, and stops listening on the
   // ones that have gone.
@@ -124,9 +217,8 @@ class NetworkRemote : public QObject {
   // Lists and plays the library's smart playlists for remotes.
   void SetupSmartPlaylists();
 
-  // One per address listened on since the server started. Ones for
-  // addresses that have gone are closed rather than deleted, since the
-  // sockets they accepted are their children.
+  // One per active listening address. Sockets are reparented on accept so
+  // closed servers can be erased safely.
   std::vector<std::unique_ptr<QTcpServer>> servers_;
   // Whether the server's started, listening on anything or not.
   bool running_;
@@ -138,6 +230,8 @@ class NetworkRemote : public QObject {
   QTimer* address_check_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
+  // Bridges main-thread Application objects to the remote worker thread.
+  QPointer<RemoteBridge> bridge_;
   // The Application's, from when the server first starts. It lives on the
   // main thread with the Player. Remotes only talk to it while streaming is
   // allowed.
@@ -158,7 +252,6 @@ class NetworkRemote : public QObject {
   bool listen_on_all_addresses_;
   bool allow_streaming_;
   QStringList listen_networks_;
-  bool signals_connected_;
   Application* app_;
 
   QList<RemoteClient*> clients_;

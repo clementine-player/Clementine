@@ -17,21 +17,27 @@
 
 #include "networkremote.h"
 
+#include <QBuffer>
+#include <QCoreApplication>
 #include <QDataStream>
 #include <QHostInfo>
 #include <QNetworkInterface>
 #include <QNetworkProxy>
 #include <QSettings>
 #include <QTcpServer>
+#include <QThread>
 #include <QTimer>
 
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "core/player.h"
 #include "covers/currentartloader.h"
 #include "engines/enginerouter.h"
+#include "globalsearch/globalsearch.h"
 #include "internet/core/internetmodel.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/librarymodel.h"
 #include "networkremote/authattemptlimiter.h"
 #include "networkremote/incomingdataparser.h"
@@ -57,6 +63,10 @@ namespace {
 const int kFirstByteTimeoutMsec = 10000;
 // How often to check whether the chosen networks' addresses have changed.
 const int kAddressCheckMsec = 30000;
+const int kMaxPendingSockets = 32;
+const int kMaxRemoteClients = 32;
+const int kPlaylistUpdateCoalesceMsec = 50;
+const int kMaxPendingGlobalSearches = 256;
 const char* kSniffedProperty = "clementine_sniffed";
 // Set on a connection that isn't from the local network when only those are
 // allowed. It's told why once it's said which protocol it speaks.
@@ -84,7 +94,435 @@ bool InSharedSubnet(const QHostAddress& address) {
   }
   return false;
 }
+
+QByteArray SerializeRemoteMessage(cpb::remote::Message* msg) {
+  msg->set_version(msg->default_instance().version());
+  const std::string data = msg->SerializeAsString();
+  return QByteArray(data.data(), static_cast<int>(data.size()));
+}
 }  // namespace
+
+RemoteBridge::RemoteBridge(Application* app, QObject* parent)
+    : QObject(parent),
+      app_(app),
+      has_clients_(false),
+      playlist_update_timer_(new QTimer(this)) {
+  qRegisterMetaType<Engine::State>("Engine::State");
+  qRegisterMetaType<PlaylistSequence::RepeatMode>(
+      "PlaylistSequence::RepeatMode");
+  qRegisterMetaType<PlaylistSequence::ShuffleMode>(
+      "PlaylistSequence::ShuffleMode");
+  qRegisterMetaType<Song>("Song");
+  qRegisterMetaType<SongList>("SongList");
+
+  playlist_update_timer_->setSingleShot(true);
+  playlist_update_timer_->setInterval(kPlaylistUpdateCoalesceMsec);
+  connect(playlist_update_timer_, &QTimer::timeout, this,
+          &RemoteBridge::FlushPlaylistUpdates);
+}
+
+RemoteBridge::~RemoteBridge() { DisconnectAll(); }
+
+void RemoteBridge::DisconnectAll() {
+  for (const QMetaObject::Connection& conn : connections_) {
+    disconnect(conn);
+  }
+  connections_.clear();
+}
+
+void RemoteBridge::Shutdown() {
+  // Disconnect all signal edges before clearing app_ and scheduling deletion
+  // so pending main-thread signals cannot fire into a dying NetworkRemote.
+  playlist_update_timer_->stop();
+  dirty_playlists_.clear();
+  DisconnectAll();
+  disconnect();
+  app_.clear();
+  has_clients_ = false;
+  deleteLater();
+}
+
+void RemoteBridge::Init() {
+  if (!app_) return;
+  // RemoteBridge is constructed on the remote thread; parent it to app_ once
+  // moved to the main thread so ~Application() can clean up stray bridges.
+  if (!parent() && QThread::currentThread() == app_->thread()) {
+    setParent(app_);
+  }
+  DisconnectAll();
+
+  PlaylistManager* playlists = app_->playlist_manager();
+  Player* player = app_->player();
+
+  connections_ << connect(playlists, &PlaylistManager::ActiveChanged, this,
+                          &RemoteBridge::OnActiveChanged);
+  connections_ << connect(playlists, &PlaylistManager::PlaylistChanged, this,
+                          &RemoteBridge::OnPlaylistChanged);
+  connections_ << connect(playlists, &PlaylistManager::PlaylistAdded, this,
+                          &RemoteBridge::OnPlaylistsListChanged);
+  connections_ << connect(playlists, &PlaylistManager::PlaylistDeleted, this,
+                          &RemoteBridge::OnPlaylistsListChanged);
+  connections_ << connect(playlists, &PlaylistManager::PlaylistClosed, this,
+                          &RemoteBridge::OnPlaylistsListChanged);
+  connections_ << connect(playlists, &PlaylistManager::PlaylistRenamed, this,
+                          &RemoteBridge::OnPlaylistsListChanged);
+
+  connections_ << connect(playlists->sequence(),
+                          &PlaylistSequence::RepeatModeChanged, this,
+                          &RemoteBridge::RepeatModeChanged);
+  connections_ << connect(playlists->sequence(),
+                          &PlaylistSequence::ShuffleModeChanged, this,
+                          &RemoteBridge::ShuffleModeChanged);
+
+  connections_ << connect(player, &Player::VolumeChanged, this,
+                          &RemoteBridge::VolumeChanged);
+  connections_ << connect(player->engine(), &Engine::Base::StateChanged, this,
+                          &RemoteBridge::EngineStateChanged);
+  connections_ << connect(app_->current_art_loader(),
+                          &CurrentArtLoader::ArtLoaded, this,
+                          &RemoteBridge::OnArtLoaded);
+
+  if (GlobalSearch* gs = app_->global_search()) {
+    gs->ReloadSettings();
+    connections_ << connect(gs, &GlobalSearch::ResultsAvailable, this,
+                            &RemoteBridge::OnGlobalSearchResults);
+    connections_ << connect(gs, &GlobalSearch::SearchFinished, this,
+                            &RemoteBridge::OnGlobalSearchFinished);
+  }
+
+  emit EngineStateChanged(player->engine()->state());
+  if (PlaylistItemPtr item = player->GetCurrentItem()) {
+    current_song_ = item->Metadata();
+    emit CurrentSongChanged(current_song_, QString(), QImage(),
+                            ActiveCurrentRow(),
+                            DownloadabilityOf(current_song_));
+  }
+}
+
+void RemoteBridge::SetHasClients(bool has_clients) {
+  has_clients_ = has_clients;
+}
+
+int RemoteBridge::ActiveCurrentRow() const {
+  if (!app_) return -1;
+  Playlist* active = app_->playlist_manager()->active();
+  return active ? active->current_row() : -1;
+}
+
+int RemoteBridge::DownloadabilityOf(const Song& song) const {
+  if (!app_ || !NetworkRemote::MediaSyncEnabled()) {
+    return cpb::remote::DOWNLOADABILITY_UNSPECIFIED;
+  }
+  return OutgoingDataCreator::DownloadabilityOf(
+      song, app_->player()->HandlerForUrl(song.url()));
+}
+
+void RemoteBridge::OnArtLoaded(const Song& song, const QString& uri,
+                               const QImage& image) {
+  current_song_ = song;
+  current_uri_ = uri;
+  current_image_ = image;
+  emit CurrentSongChanged(song, uri, image, ActiveCurrentRow(),
+                          DownloadabilityOf(song));
+}
+
+void RemoteBridge::QueryClementineInfo(int client_id) {
+  const Engine::State state = app_ ? app_->player()->GetState() : Engine::Empty;
+  emit ClementineInfoStateReady(client_id, state);
+}
+
+void RemoteBridge::QueryFirstData(int client_id, bool send_playlist_songs) {
+  if (!app_) return;
+  Player* player = app_->player();
+  PlaylistManager* pm = app_->playlist_manager();
+  Song current_song = current_song_;
+  if (PlaylistItemPtr item = player->GetCurrentItem()) {
+    current_song = item->Metadata();
+  }
+  const int row = ActiveCurrentRow();
+  const int dl = DownloadabilityOf(current_song);
+  const Engine::State state = player->GetState();
+  const int volume = player->GetVolume();
+  const qint64 position_nanosec = player->engine()->position_nanosec();
+  const QByteArray playlists_pb = BuildPlaylistsProto(false);
+  const QByteArray playlist_songs_pb =
+      send_playlist_songs ? BuildPlaylistSongsProto(pm->active_id())
+                          : QByteArray();
+  const PlaylistSequence::RepeatMode repeat = pm->sequence()->repeat_mode();
+  const PlaylistSequence::ShuffleMode shuffle = pm->sequence()->shuffle_mode();
+
+  emit FirstDataReady(client_id, current_song, row, dl, state, volume,
+                      position_nanosec, playlists_pb, playlist_songs_pb, repeat,
+                      shuffle);
+}
+
+QByteArray RemoteBridge::BuildPlaylistsProto(bool include_closed) const {
+  if (!app_) return QByteArray();
+  PlaylistManager* playlist_manager = app_->playlist_manager();
+  const int active_playlist = playlist_manager->active_id();
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::PLAYLISTS);
+  cpb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+
+  if (include_closed) {
+    playlists->set_include_closed(true);
+    for (const PlaylistBackend::Playlist& p :
+         app_->playlist_backend()->GetAllPlaylists()) {
+      const bool playlist_open = playlist_manager->IsPlaylistOpen(p.id);
+      const int item_count =
+          playlist_open ? playlist_manager->playlist(p.id)->rowCount() : 0;
+
+      cpb::remote::Playlist* pb_pl = playlists->add_playlist();
+      pb_pl->set_name(DataCommaSizeFromQString(p.name));
+      pb_pl->set_id(p.id);
+      pb_pl->set_active(p.id == active_playlist);
+      pb_pl->set_item_count(item_count);
+      pb_pl->set_closed(!playlist_open);
+      pb_pl->set_favorite(p.favorite);
+    }
+  } else {
+    for (Playlist* p : playlist_manager->GetAllPlaylists()) {
+      const QString playlist_name = playlist_manager->GetPlaylistName(p->id());
+      cpb::remote::Playlist* pb_pl = playlists->add_playlist();
+      pb_pl->set_name(DataCommaSizeFromQString(playlist_name));
+      pb_pl->set_id(p->id());
+      pb_pl->set_active(p->id() == active_playlist);
+      pb_pl->set_item_count(p->rowCount());
+      pb_pl->set_closed(false);
+      pb_pl->set_favorite(p->is_favorite());
+    }
+  }
+
+  return SerializeRemoteMessage(&msg);
+}
+
+QByteArray RemoteBridge::BuildPlaylistSongsProto(int id) const {
+  if (!app_) return QByteArray();
+  Playlist* playlist = app_->playlist_manager()->playlist(id);
+  if (!playlist) {
+    qLog(Info) << "Could not find playlist with id =" << id;
+    return QByteArray();
+  }
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::PLAYLIST_SONGS);
+  cpb::remote::ResponsePlaylistSongs* pb_response =
+      msg.mutable_response_playlist_songs();
+  pb_response->mutable_requested_playlist()->set_id(id);
+
+  int index = 0;
+  QImage null_img;
+  for (const Song& song : playlist->GetAllSongs()) {
+    cpb::remote::SongMetadata* pb_song = pb_response->add_songs();
+    OutgoingDataCreator::CreateSong(song, null_img, index, pb_song);
+    if (NetworkRemote::MediaSyncEnabled() && pb_song->has_id()) {
+      pb_song->set_downloadable(
+          static_cast<cpb::remote::Downloadability>(DownloadabilityOf(song)));
+    }
+    ++index;
+  }
+  return SerializeRemoteMessage(&msg);
+}
+
+void RemoteBridge::QueryPlaylists(int client_id, bool include_closed) {
+  const QByteArray data = BuildPlaylistsProto(include_closed);
+  if (!data.isEmpty()) emit SendRawToClient(client_id, data);
+}
+
+void RemoteBridge::QueryPlaylistSongs(int client_id, int playlist_id) {
+  const QByteArray data = BuildPlaylistSongsProto(playlist_id);
+  if (!data.isEmpty()) emit SendRawToClient(client_id, data);
+}
+
+void RemoteBridge::OnActiveChanged(Playlist* playlist) {
+  if (!has_clients_ || !playlist) return;
+  // Drop any pending coalesced update for this playlist; its songs are sent
+  // immediately below.
+  dirty_playlists_.remove(playlist->id());
+  const QByteArray songs = BuildPlaylistSongsProto(playlist->id());
+  if (!songs.isEmpty()) emit SendRawToAllClients(songs);
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::ACTIVE_PLAYLIST_CHANGED);
+  msg.mutable_response_active_changed()->set_id(playlist->id());
+  emit SendRawToAllClients(SerializeRemoteMessage(&msg));
+}
+
+void RemoteBridge::OnPlaylistChanged(Playlist* playlist) {
+  if (!has_clients_ || !playlist) return;
+  // Coalesce burst edits into one PLAYLIST_SONGS snapshot per playlist.
+  dirty_playlists_.insert(playlist->id());
+  if (!playlist_update_timer_->isActive()) {
+    playlist_update_timer_->start();
+  }
+}
+
+void RemoteBridge::FlushPlaylistUpdates() {
+  if (!has_clients_ || dirty_playlists_.isEmpty()) {
+    dirty_playlists_.clear();
+    return;
+  }
+  const QSet<int> ids = dirty_playlists_;
+  dirty_playlists_.clear();
+  for (int id : ids) {
+    const QByteArray songs = BuildPlaylistSongsProto(id);
+    if (!songs.isEmpty()) emit SendRawToAllClients(songs);
+  }
+}
+
+void RemoteBridge::OnPlaylistsListChanged() {
+  if (!has_clients_) return;
+  const QByteArray data = BuildPlaylistsProto(false);
+  if (!data.isEmpty()) emit SendRawToAllClients(data);
+}
+
+void RemoteBridge::QueryTrackPosition() {
+  if (!app_) return;
+  emit TrackPositionReady(app_->player()->engine()->position_nanosec());
+}
+
+void RemoteBridge::StartGlobalSearch(int client_id, const QString& query) {
+  if (!app_) return;
+  const int id = app_->global_search()->SearchAsync(query);
+  // Bound the table if search providers never emit SearchFinished.
+  if (global_searches_.size() >= kMaxPendingGlobalSearches) {
+    global_searches_.clear();
+  }
+  global_searches_.insert(id, GlobalSearchEntry{client_id, query});
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_STATUS);
+  cpb::remote::ResponseGlobalSearchStatus* status =
+      msg.mutable_response_global_search_status();
+  status->set_id(id);
+  status->set_query(DataCommaSizeFromQString(query));
+  status->set_status(cpb::remote::GlobalSearchStarted);
+  emit SendRawToClient(client_id, SerializeRemoteMessage(&msg));
+}
+
+void RemoteBridge::OnGlobalSearchResults(
+    int id, const SearchProvider::ResultList& results) {
+  if (!global_searches_.contains(id) || results.isEmpty()) return;
+  if (!results.first().provider_) return;
+
+  const GlobalSearchEntry search_request = global_searches_.value(id);
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_RESULT);
+  cpb::remote::ResponseGlobalSearch* response =
+      msg.mutable_response_global_search();
+  response->set_id(id);
+  response->set_query(DataCommaSizeFromQString(search_request.query));
+  response->set_search_provider(
+      DataCommaSizeFromQString(results.first().provider_->name()));
+
+  const QImage icon_image(results.first().provider_->icon_as_image());
+  QByteArray byte_array;
+  QBuffer buf(&byte_array);
+  buf.open(QIODevice::WriteOnly);
+  icon_image.save(&buf, "PNG");
+  response->set_search_provider_icon(byte_array.constData(), byte_array.size());
+
+  QImage null_img;
+  for (const SearchProvider::Result& result : results) {
+    cpb::remote::SongMetadata* pb_song = response->add_song_metadata();
+    OutgoingDataCreator::CreateSong(result.metadata_, null_img, 0, pb_song);
+    if (NetworkRemote::MediaSyncEnabled() && pb_song->has_id()) {
+      pb_song->set_downloadable(static_cast<cpb::remote::Downloadability>(
+          DownloadabilityOf(result.metadata_)));
+    }
+  }
+  emit SendRawToClient(search_request.client_id, SerializeRemoteMessage(&msg));
+}
+
+void RemoteBridge::OnGlobalSearchFinished(int id) {
+  if (!global_searches_.contains(id)) return;
+  const GlobalSearchEntry req = global_searches_.take(id);
+
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_STATUS);
+  cpb::remote::ResponseGlobalSearchStatus* status =
+      msg.mutable_response_global_search_status();
+  status->set_id(id);
+  status->set_query(DataCommaSizeFromQString(req.query));
+  status->set_status(cpb::remote::GlobalSearchFinished);
+  emit SendRawToClient(req.client_id, SerializeRemoteMessage(&msg));
+}
+
+void RemoteBridge::QuerySavedRadios(int client_id) {
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::REQUEST_SAVED_RADIOS);
+
+  SavedRadio* radio_service = static_cast<SavedRadio*>(
+      InternetModel::ServiceByName(SavedRadio::kServiceName));
+  if (radio_service) {
+    cpb::remote::ResponseSavedRadios* radios =
+        msg.mutable_response_saved_radios();
+    for (const auto& stream : radio_service->Streams()) {
+      cpb::remote::Stream* pb_stream = radios->add_streams();
+      pb_stream->set_name(stream.name_.toStdString());
+      pb_stream->set_url(stream.url_.toString().toStdString());
+      if (!stream.url_logo_.isEmpty())
+        pb_stream->set_url_logo(stream.url_logo_.toString().toStdString());
+    }
+  }
+  emit SendRawToClient(client_id, SerializeRemoteMessage(&msg));
+}
+
+void RemoteBridge::HandleChangeSong(int playlist_id, int song_index,
+                                    bool enqueue_mode) {
+  if (!app_) return;
+  PlaylistManager* pm = app_->playlist_manager();
+  if (!pm->IsPlaylistOpen(playlist_id)) return;
+  Playlist* pl = pm->playlist(playlist_id);
+  if (!pl || song_index < 0 || song_index >= pl->rowCount()) return;
+
+  if (pm->active_id() != playlist_id) {
+    pm->SetActivePlaylist(playlist_id);
+  }
+
+  if (!enqueue_mode) {
+    app_->player()->PlayAt(song_index, Engine::Manual, false);
+  } else {
+    pm->Enque(playlist_id, song_index);
+    if (app_->player()->GetState() != Engine::Playing) {
+      app_->player()->PlayAt(song_index, Engine::Manual, false);
+    }
+  }
+}
+
+void RemoteBridge::SetCurrentPlaylistIfNotPlaying(int playlist_id) {
+  if (!app_) return;
+  if (app_->player()->GetState() != Engine::Playing) {
+    app_->playlist_manager()->SetCurrentPlaylist(playlist_id);
+  }
+}
+
+void RemoteBridge::PrepareDownloadSongs(int client_id,
+                                        const QByteArray& serialized_request) {
+  if (!app_) return;
+  cpb::remote::RequestDownloadSongs request;
+  if (!request.ParseFromArray(serialized_request.constData(),
+                              serialized_request.size())) {
+    return;
+  }
+
+  Song current_song;
+  if (PlaylistItemPtr item = app_->player()->GetCurrentItem()) {
+    current_song = item->Metadata();
+  }
+  const int current_row = ActiveCurrentRow();
+  SongList playlist_songs;
+  if (request.download_item() == cpb::remote::APlaylist) {
+    if (Playlist* playlist =
+            app_->playlist_manager()->playlist(request.playlist_id())) {
+      playlist_songs = playlist->GetAllSongs();
+    }
+  }
+  emit PreparedDownloadSongs(client_id, serialized_request, current_song,
+                             current_row, playlist_songs);
+}
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
     : QObject(parent),
@@ -95,7 +533,6 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
       smart_playlists_(nullptr),
       media_sync_(nullptr),
       allow_streaming_(false),
-      signals_connected_(false),
       app_(app),
       auth_limiter_(new AuthAttemptLimiter) {
   setObjectName("Network remote");
@@ -106,6 +543,11 @@ NetworkRemote::NetworkRemote(Application* app, QObject* parent)
 
 NetworkRemote::~NetworkRemote() {
   StopServer();
+  // Main-thread helpers must be torn down on their own event loop.
+  if (bridge_) {
+    PostTo(bridge_.data(), &RemoteBridge::Shutdown);
+    bridge_.clear();
+  }
   if (internet_browser_) internet_browser_->deleteLater();
   if (smart_playlists_) smart_playlists_->deleteLater();
   if (media_sync_) media_sync_->deleteLater();
@@ -257,20 +699,101 @@ QStringList NetworkRemote::NetworksOfAddresses(
 }
 
 void NetworkRemote::SetupServer() {
+  // Retire any prior main-thread helpers on their thread before replacing.
+  if (bridge_) {
+    PostTo(bridge_.data(), &RemoteBridge::Shutdown);
+    bridge_.clear();
+  }
+  if (internet_browser_) {
+    internet_browser_->deleteLater();
+    internet_browser_ = nullptr;
+  }
+  if (smart_playlists_) {
+    smart_playlists_->deleteLater();
+    smart_playlists_ = nullptr;
+  }
+  if (media_sync_) {
+    media_sync_->deleteLater();
+    media_sync_ = nullptr;
+  }
+
   incoming_data_parser_.reset(new IncomingDataParser(app_));
   outgoing_data_creator_.reset(new OutgoingDataCreator(app_));
 
   outgoing_data_creator_->SetClients(&clients_);
 
-  connect(app_->current_art_loader(),
-          SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+  RemoteBridge* bridge = new RemoteBridge(app_);
+  bridge->moveToThread(QCoreApplication::instance()->thread());
+  bridge_ = bridge;
+
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendClementineInfo,
+          bridge, &RemoteBridge::QueryClementineInfo);
+  connect(bridge, &RemoteBridge::ClementineInfoStateReady,
           outgoing_data_creator_.get(),
-          SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
+          &OutgoingDataCreator::SendClementineInfo);
+
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendFirstData,
+          bridge, &RemoteBridge::QueryFirstData);
+  connect(bridge, &RemoteBridge::FirstDataReady, outgoing_data_creator_.get(),
+          &OutgoingDataCreator::SendFirstData);
+
+  connect(incoming_data_parser_.get(),
+          &IncomingDataParser::SendPlaylistsRequested, bridge,
+          &RemoteBridge::QueryPlaylists);
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendPlaylistSongs,
+          bridge, &RemoteBridge::QueryPlaylistSongs);
+  connect(bridge, &RemoteBridge::SendRawToClient, outgoing_data_creator_.get(),
+          &OutgoingDataCreator::SendRawToClient);
+  connect(bridge, &RemoteBridge::SendRawToAllClients,
+          outgoing_data_creator_.get(),
+          &OutgoingDataCreator::SendRawToAllClients);
+
+  connect(bridge, &RemoteBridge::EngineStateChanged,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::StateChanged);
+  connect(bridge, &RemoteBridge::VolumeChanged, outgoing_data_creator_.get(),
+          &OutgoingDataCreator::VolumeChanged);
+  connect(bridge, &RemoteBridge::RepeatModeChanged,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::SendRepeatMode);
+  connect(bridge, &RemoteBridge::ShuffleModeChanged,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::SendShuffleMode);
+  connect(bridge, &RemoteBridge::CurrentSongChanged,
+          outgoing_data_creator_.get(),
+          &OutgoingDataCreator::CurrentSongChanged);
+
+  connect(outgoing_data_creator_.get(),
+          &OutgoingDataCreator::RequestTrackPosition, bridge,
+          &RemoteBridge::QueryTrackPosition);
+  connect(bridge, &RemoteBridge::TrackPositionReady,
+          outgoing_data_creator_.get(),
+          &OutgoingDataCreator::SendTrackPosition);
+
+  connect(incoming_data_parser_.get(), &IncomingDataParser::GetLyrics,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::GetLyrics);
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendLibrary,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::SendLibrary);
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendListFiles,
+          outgoing_data_creator_.get(), &OutgoingDataCreator::SendListFiles);
+
+  connect(incoming_data_parser_.get(), &IncomingDataParser::DoGlobalSearch,
+          bridge, &RemoteBridge::StartGlobalSearch);
+  connect(incoming_data_parser_.get(), &IncomingDataParser::SendSavedRadios,
+          bridge, &RemoteBridge::QuerySavedRadios);
+
+  connect(incoming_data_parser_.get(), &IncomingDataParser::ChangeSongRequested,
+          bridge, &RemoteBridge::HandleChangeSong);
+  connect(incoming_data_parser_.get(),
+          &IncomingDataParser::SetCurrentPlaylistIfNotPlaying, bridge,
+          &RemoteBridge::SetCurrentPlaylistIfNotPlaying);
+
+  connect(incoming_data_parser_.get(),
+          &IncomingDataParser::DownloadSongsRequested, bridge,
+          &RemoteBridge::PrepareDownloadSongs);
+  connect(bridge, &RemoteBridge::PreparedDownloadSongs, this,
+          &NetworkRemote::HandlePreparedDownload);
+  PostTo(bridge, &RemoteBridge::Init);
 
   connect(incoming_data_parser_.get(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
-  connect(incoming_data_parser_.get(), SIGNAL(SetCurrentPlaylist(int)),
-          SIGNAL(SetCurrentPlaylist(int)));
 
   // Browsing the Internet sidebar. The browser works on the sidebar's model,
   // so it lives on the main thread, and gets the model there.
@@ -468,15 +991,21 @@ bool NetworkRemote::Bind() {
 
   bool changed = false;
   QList<QHostAddress> bound;
-  for (const std::unique_ptr<QTcpServer>& server : servers_) {
-    if (!server->isListening()) continue;
+  for (auto it = servers_.begin(); it != servers_.end();) {
+    QTcpServer* server = it->get();
+    if (!server->isListening()) {
+      it = servers_.erase(it);
+      continue;
+    }
     if (wanted.contains(server->serverAddress())) {
       bound << server->serverAddress();
+      ++it;
       continue;
     }
     qLog(Info) << "No longer listening on" << server->serverAddress().toString()
                << "port" << port_;
     server->close();
+    it = servers_.erase(it);
     changed = true;
   }
 
@@ -548,8 +1077,19 @@ void NetworkRemote::StopServer() {
   servers_.clear();
   listening_.clear();
   wanted_.clear();
-  qDeleteAll(clients_);
+  // Snapshot and clear clients_ before notifying downstream listeners so
+  // re-entrant callbacks cannot observe deleted clients, and emit
+  // ClientDisconnected explicitly before StopStreaming() disconnects slots.
+  const QList<RemoteClient*> old_clients = clients_;
   clients_.clear();
+  for (RemoteClient* client : old_clients) {
+    emit ClientDisconnected(client->id());
+    // Give the Server_Shutdown disconnect frame a brief window to flush.
+    client->FlushBeforeDelete(200);
+    delete client;
+  }
+  if (media_sync_) PostTo(media_sync_, &MediaSync::ClearClients);
+  if (bridge_) PostTo(bridge_.data(), &RemoteBridge::SetHasClients, false);
   StopStreaming();
   media_http_server_.reset();
   PublishServing(QList<QHostAddress>());
@@ -561,6 +1101,7 @@ void NetworkRemote::PublishServing(const QList<QHostAddress>& listening) {
   RendererRegistry::Serving serving;
   serving.enabled = running_;
   serving.port = listening.isEmpty() ? 0 : port_;
+  serving.configured_port = running_ ? port_ : 0;
   if (!listen_on_all_addresses_) serving.addresses = listening;
   serving.only_local = only_non_public_ip_;
 
@@ -597,7 +1138,9 @@ void NetworkRemote::StopStreaming() {
   }
   if (renderer_registry_) {
     // The registry stays, since it offers Cast devices and the like whether
-    // or not the remote's on, but remotes no longer hear about it.
+    // or not the remote's on, but remotes no longer hear about it and any
+    // previously connected phone renderers are removed.
+    PostTo(renderer_registry_, &RendererRegistry::ClearRenderers);
     disconnect(renderer_registry_, nullptr, this, nullptr);
     disconnect(this, SIGNAL(ClientDisconnected(int)), renderer_registry_,
                nullptr);
@@ -613,7 +1156,7 @@ void NetworkRemote::SendToClient(int client_id, const QByteArray& data) {
   if (!msg.ParseFromArray(data.constData(), data.size())) return;
   for (RemoteClient* client : clients_) {
     if (client->id() == client_id) {
-      client->SendData(&msg);
+      if (!client->is_closing()) client->SendData(&msg);
       return;
     }
   }
@@ -625,102 +1168,93 @@ void NetworkRemote::SendToAllClients(const QByteArray& data) {
   if (outgoing_data_creator_) outgoing_data_creator_->SendDataToClients(&msg);
 }
 
+void NetworkRemote::OnClientDisconnected(int client_id) {
+  for (int i = 0; i < clients_.size(); ++i) {
+    if (clients_[i]->id() == client_id) {
+      RemoteClient* client = clients_.takeAt(i);
+      // Defer deletion because this runs inside SocketDisconnected() handlers.
+      client->deleteLater();
+      break;
+    }
+  }
+  if (clients_.isEmpty() && bridge_) {
+    PostTo(bridge_.data(), &RemoteBridge::SetHasClients, false);
+  }
+  emit ClientDisconnected(client_id);
+}
+
+void NetworkRemote::HandlePreparedDownload(int client_id,
+                                           const QByteArray& serialized_request,
+                                           const Song& current_song,
+                                           int current_row,
+                                           const SongList& playlist_songs) {
+  cpb::remote::RequestDownloadSongs request;
+  if (!request.ParseFromArray(serialized_request.constData(),
+                              serialized_request.size())) {
+    return;
+  }
+  for (RemoteClient* client : clients_) {
+    if (client->id() == client_id) {
+      if (!client->is_closing()) {
+        client->song_sender()->SendSongs(request, current_song, current_row,
+                                         playlist_songs);
+      }
+      return;
+    }
+  }
+}
+
 void NetworkRemote::ReloadSettings() {
   StopServer();
   StartServer();
 }
 
 void NetworkRemote::AcceptConnection() {
-  if (!signals_connected_) {
-    signals_connected_ = true;
-
-    // Setting up the signals, but only once
-    connect(incoming_data_parser_.get(), SIGNAL(SendClementineInfo()),
-            outgoing_data_creator_.get(), SLOT(SendClementineInfo()));
-    connect(incoming_data_parser_.get(), SIGNAL(SendFirstData(bool)),
-            outgoing_data_creator_.get(), SLOT(SendFirstData(bool)));
-    connect(incoming_data_parser_.get(), SIGNAL(SendAllPlaylists()),
-            outgoing_data_creator_.get(), SLOT(SendAllPlaylists()));
-    connect(incoming_data_parser_.get(), SIGNAL(SendAllActivePlaylists()),
-            outgoing_data_creator_.get(), SLOT(SendAllActivePlaylists()));
-    connect(incoming_data_parser_.get(), SIGNAL(SendPlaylistSongs(int)),
-            outgoing_data_creator_.get(), SLOT(SendPlaylistSongs(int)));
-
-    connect(app_->playlist_manager(), SIGNAL(ActiveChanged(Playlist*)),
-            outgoing_data_creator_.get(), SLOT(ActiveChanged(Playlist*)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
-            outgoing_data_creator_.get(), SLOT(PlaylistChanged(Playlist*)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistAdded(int, QString, bool)),
-            outgoing_data_creator_.get(),
-            SLOT(PlaylistAdded(int, QString, bool)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistRenamed(int, QString)),
-            outgoing_data_creator_.get(), SLOT(PlaylistRenamed(int, QString)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistClosed(int)),
-            outgoing_data_creator_.get(), SLOT(PlaylistClosed(int)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistDeleted(int)),
-            outgoing_data_creator_.get(), SLOT(PlaylistDeleted(int)));
-
-    connect(app_->player(), SIGNAL(VolumeChanged(int)),
-            outgoing_data_creator_.get(), SLOT(VolumeChanged(int)));
-    connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
-            outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
-
-    connect(app_->playlist_manager()->sequence(),
-            SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
-            outgoing_data_creator_.get(),
-            SLOT(SendRepeatMode(PlaylistSequence::RepeatMode)));
-    connect(app_->playlist_manager()->sequence(),
-            SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
-            outgoing_data_creator_.get(),
-            SLOT(SendShuffleMode(PlaylistSequence::ShuffleMode)));
-
-    connect(incoming_data_parser_.get(), SIGNAL(GetLyrics()),
-            outgoing_data_creator_.get(), SLOT(GetLyrics()));
-
-    connect(incoming_data_parser_.get(), SIGNAL(SendLibrary(RemoteClient*)),
-            outgoing_data_creator_.get(), SLOT(SendLibrary(RemoteClient*)));
-
-    connect(incoming_data_parser_.get(),
-            SIGNAL(DoGlobalSearch(QString, RemoteClient*)),
-            outgoing_data_creator_.get(),
-            SLOT(DoGlobalSearch(QString, RemoteClient*)));
-
-    connect(incoming_data_parser_.get(),
-            SIGNAL(SendListFiles(QString, RemoteClient*)),
-            outgoing_data_creator_.get(),
-            SLOT(SendListFiles(QString, RemoteClient*)));
-    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRadios(RemoteClient*)),
-            outgoing_data_creator_.get(), SLOT(SendSavedRadios(RemoteClient*)));
-  }
-
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
-  QTcpSocket* client_socket = server->nextPendingConnection();
-  // Check if our ip is in private scope
-  if (only_non_public_ip_ &&
-      !IsLocalClient(client_socket->peerAddress(),
-                     client_socket->localAddress(),
-                     listen_on_all_addresses_ ? Listening::OnAllAddresses
-                                              : Listening::OnChosenAddress)) {
-    qLog(Warning) << "Refusing a connection from"
-                  << client_socket->peerAddress().toString() << "to"
-                  << client_socket->localAddress().toString()
-                  << "because only connections from the local network are "
-                     "allowed";
-    client_socket->setProperty(kRefusedProperty, true);
-  }
+  if (!server) return;
 
-  // Drop connections that never say anything. Once the socket has been
-  // handed on, its new owner is responsible for it.
-  QTimer::singleShot(kFirstByteTimeoutMsec, client_socket, [client_socket]() {
-    if (client_socket->property(kSniffedProperty).toBool()) return;
-    qLog(Debug) << "Dropping a silent connection from"
-                << client_socket->peerAddress().toString();
-    client_socket->abort();
-    client_socket->deleteLater();
-  });
-  connect(client_socket, &QTcpSocket::readyRead, this,
-          [this, client_socket]() { SniffProtocol(client_socket); });
-  if (client_socket->bytesAvailable() > 0) SniffProtocol(client_socket);
+  while (QTcpSocket* client_socket = server->nextPendingConnection()) {
+    // Cap pre-sniff sockets to bound FD/memory use from silent peers.
+    const int pending =
+        findChildren<QTcpSocket*>(QString(), Qt::FindDirectChildrenOnly).size();
+    if (pending >= kMaxPendingSockets) {
+      qLog(Warning) << "Too many pending connections; dropping connection from"
+                    << client_socket->peerAddress().toString();
+      client_socket->abort();
+      client_socket->deleteLater();
+      continue;
+    }
+
+    // Reparent immediately from QTcpServer so closed servers can be freed.
+    client_socket->setParent(this);
+
+    // Check if our ip is in private scope
+    if (only_non_public_ip_ &&
+        !IsLocalClient(client_socket->peerAddress(),
+                       client_socket->localAddress(),
+                       listen_on_all_addresses_ ? Listening::OnAllAddresses
+                                                : Listening::OnChosenAddress)) {
+      qLog(Warning) << "Refusing a connection from"
+                    << client_socket->peerAddress().toString() << "to"
+                    << client_socket->localAddress().toString()
+                    << "because only connections from the local network are "
+                       "allowed";
+      client_socket->setProperty(kRefusedProperty, true);
+    }
+
+    // Drop connections that never say anything. Once the socket has been
+    // handed on, its new owner is responsible for it.
+    QTimer::singleShot(kFirstByteTimeoutMsec, client_socket, [client_socket]() {
+      if (client_socket->property(kSniffedProperty).toBool()) return;
+      qLog(Debug) << "Dropping a silent connection from"
+                  << client_socket->peerAddress().toString();
+      client_socket->abort();
+      client_socket->deleteLater();
+    });
+    connect(client_socket, &QTcpSocket::readyRead, this,
+            [this, client_socket]() { SniffProtocol(client_socket); });
+    if (client_socket->bytesAvailable() > 0) SniffProtocol(client_socket);
+  }
 }
 
 void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
@@ -741,6 +1275,28 @@ void NetworkRemote::SniffProtocol(QTcpSocket* socket) {
 
   switch (protocol) {
     case ProtocolSniffer::Remote: {
+      // Evict the oldest unauthenticated client before rejecting new peers so
+      // idle unauthenticated sockets cannot starve real remotes.
+      if (clients_.size() >= kMaxRemoteClients) {
+        for (int i = 0; i < clients_.size(); ++i) {
+          if (!clients_[i]->is_authenticated()) {
+            RemoteClient* evicted = clients_.takeAt(i);
+            // Disconnect signals first so DisconnectClient() cannot re-enter
+            // OnClientDisconnected() on an already-removed client.
+            evicted->disconnect(this);
+            evicted->DisconnectClient(cpb::remote::Not_Authenticated);
+            evicted->FlushBeforeDelete(50);
+            emit ClientDisconnected(evicted->id());
+            evicted->deleteLater();
+            break;
+          }
+        }
+      }
+      if (clients_.size() >= kMaxRemoteClients) {
+        qLog(Warning) << "Max remote client limit reached; closing"
+                      << socket->peerAddress().toString();
+        break;
+      }
       CreateRemoteClient(socket);
       // The first message is already waiting, and readyRead won't be emitted
       // again for it.
@@ -861,6 +1417,7 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     RemoteClient* client =
         new RemoteClient(app_, client_socket, auth_limiter_.get());
     clients_.push_back(client);
+    if (bridge_) PostTo(bridge_.data(), &RemoteBridge::SetHasClients, true);
 
     // Update the Remote Root Files for the latest Client
     outgoing_data_creator_->SetMusicExtensions(
@@ -873,7 +1430,8 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(cpb::remote::Message)),
             incoming_data_parser_.get(), SLOT(Parse(cpb::remote::Message)));
-    connect(client, SIGNAL(Disconnected(int)), SIGNAL(ClientDisconnected(int)));
+    connect(client, &RemoteClient::Disconnected, this,
+            &NetworkRemote::OnClientDisconnected);
   }
 }
 

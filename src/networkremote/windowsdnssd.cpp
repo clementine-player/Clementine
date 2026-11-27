@@ -8,15 +8,14 @@
 
 #include <QHostInfo>
 #include <QMap>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QtEndian>
+#include <memory>
 
 #include "core/logging.h"
 
 namespace {
-
-// How long to wait for Windows to finish a registration or deregistration.
-// It probes the name on the network first, which takes about a second.
-const DWORD kCompletionTimeoutMs = 5000;
 
 // Loaded at runtime so Clementine still starts on versions of Windows older
 // than 10 1809, which don't have them.
@@ -66,34 +65,80 @@ QString EscapeInstanceLabel(const QString& name) {
 // Windows reads the request and instance until the registration is
 // withdrawn, so they live here until then.
 struct WindowsDnsSd::Registration {
+  enum class State {
+    Registering,
+    Registered,
+    Failed,
+    Deregistering,
+    Done,
+  };
+
+  QMutex mutex;
+  State state = State::Registering;
+  // Coordinate deletion across threads: Windows may read &request until both
+  // deregister_service returns and the completion callback finishes.
+  bool deregister_requested = false;
+  bool deregister_returned = false;
+  bool deregister_callback_done = false;
   DNS_SERVICE_REGISTER_REQUEST request = {};
   PDNS_SERVICE_INSTANCE instance = nullptr;
   IP4_ADDRESS ipv4 = 0;
   IP6_ADDRESS ipv6 = {};
 
-  // Signalled by Completed each time Windows finishes with the request.
-  HANDLE completed = CreateEventW(nullptr, FALSE, FALSE, nullptr);
-  DWORD status = ERROR_SUCCESS;
-  // Whether Windows hadn't finished registering when we stopped waiting.
-  bool pending = false;
-
   static VOID WINAPI Completed(DWORD status, PVOID context,
                                PDNS_SERVICE_INSTANCE instance) {
-    Registration* self = static_cast<Registration*>(context);
-    self->status = status;
     // Windows hands over a copy of the instance, which is ours to free.
     if (instance) Api().free_instance(instance);
-    SetEvent(self->completed);
-  }
 
-  bool WaitForCompletion() {
-    return WaitForSingleObject(completed, kCompletionTimeoutMs) ==
-           WAIT_OBJECT_0;
+    Registration* self = static_cast<Registration*>(context);
+    bool call_deregister = false;
+    bool should_delete = false;
+    {
+      QMutexLocker l(&self->mutex);
+      if (self->state == State::Registering) {
+        if (status == ERROR_SUCCESS) {
+          if (self->deregister_requested) {
+            self->state = State::Deregistering;
+            self->deregister_returned = false;
+            self->deregister_callback_done = false;
+            call_deregister = true;
+          } else {
+            self->state = State::Registered;
+          }
+        } else {
+          qLog(Warning) << "Windows couldn't advertise the remote, error"
+                        << status;
+          self->state = State::Failed;
+          if (self->deregister_requested) {
+            self->state = State::Done;
+            should_delete = true;
+          }
+        }
+      } else if (self->state == State::Deregistering) {
+        self->state = State::Done;
+        self->deregister_callback_done = true;
+        should_delete = self->deregister_returned;
+      }
+    }
+
+    // Call deregister_service outside mutex so a synchronous or re-entrant
+    // completion callback cannot deadlock on self->mutex.
+    if (call_deregister) {
+      const DWORD err = Api().deregister_service(&self->request, nullptr);
+      {
+        QMutexLocker l(&self->mutex);
+        self->deregister_returned = true;
+        should_delete =
+            (err != DNS_REQUEST_PENDING) || self->deregister_callback_done;
+      }
+    }
+    if (should_delete) {
+      delete self;
+    }
   }
 
   ~Registration() {
     if (instance) Api().free_instance(instance);
-    CloseHandle(completed);
   }
 };
 
@@ -166,55 +211,78 @@ bool WindowsDnsSd::Register(const QString& instance_name, const QString& host,
     return false;
   }
 
-  DNS_SERVICE_REGISTER_REQUEST& request = registration->request;
-  request.Version = DNS_QUERY_REQUEST_VERSION1;
-  request.InterfaceIndex = iface;
-  request.pServiceInstance = registration->instance;
-  request.pRegisterCompletionCallback = &Registration::Completed;
-  request.pQueryContext = registration.get();
+  DNS_SERVICE_REGISTER_REQUEST* request = &registration->request;
+  request->Version = DNS_QUERY_REQUEST_VERSION1;
+  request->InterfaceIndex = iface;
+  request->pServiceInstance = registration->instance;
+  request->pRegisterCompletionCallback = &Registration::Completed;
+  request->pQueryContext = registration.get();
 
-  DWORD status = Api().register_service(&request, nullptr);
+  // Hold the registration before calling register_service so an immediate
+  // callback on another thread cannot race ahead of insertion.
+  Registration* raw = registration.release();
+  registrations_ << raw;
+
+  const DWORD status = Api().register_service(&raw->request, nullptr);
   if (status != DNS_REQUEST_PENDING) {
     qLog(Warning) << "Windows refused to advertise the remote, error" << status;
+    registrations_.removeOne(raw);
+    delete raw;
     return false;
   }
 
-  if (!registration->WaitForCompletion()) {
-    // It may still finish, and Windows would then write to the
-    // registration, so it has to outlive this.
-    qLog(Warning) << "Windows is taking a while to advertise the remote";
-    registration->pending = true;
-  } else if (registration->status != ERROR_SUCCESS) {
-    qLog(Warning) << "Windows couldn't advertise the remote, error"
-                  << registration->status;
-    return false;
-  } else {
-    qLog(Debug) << "Publishing" << instance_name << "on interface" << iface;
-  }
-
-  registrations_ << registration.release();
+  qLog(Debug) << "Publishing" << instance_name << "on interface" << iface;
   return true;
 }
 
 void WindowsDnsSd::UnpublishInternal() { DeregisterAll(); }
 
 void WindowsDnsSd::DeregisterAll() {
-  for (Registration* registration : registrations_) {
-    // Deregistering signals the same event, so first let an unfinished
-    // registration finish.
-    if (registration->pending && !registration->WaitForCompletion()) {
-      qLog(Warning) << "Windows is still advertising the remote";
-      continue;
-    }
-    const DWORD status =
-        Api().deregister_service(&registration->request, nullptr);
-    if (status == DNS_REQUEST_PENDING && !registration->WaitForCompletion()) {
-      // Windows still has the registration, so it can't be freed.
-      qLog(Warning) << "Windows is taking a while to stop advertising the"
-                    << "remote";
-      continue;
-    }
-    delete registration;
-  }
+  const QList<Registration*> pending = registrations_;
   registrations_.clear();
+
+  for (Registration* registration : pending) {
+    bool call_deregister = false;
+    bool should_delete = false;
+    {
+      QMutexLocker l(&registration->mutex);
+      switch (registration->state) {
+        case Registration::State::Registering:
+          // Defer deregistration (or deletion if registration fails) to the
+          // completion callback so we never deregister a failed or in-flight
+          // registration or block the NetworkRemote thread.
+          registration->deregister_requested = true;
+          break;
+        case Registration::State::Registered:
+          registration->state = Registration::State::Deregistering;
+          registration->deregister_returned = false;
+          registration->deregister_callback_done = false;
+          call_deregister = true;
+          break;
+        case Registration::State::Failed:
+        case Registration::State::Done:
+          registration->state = Registration::State::Done;
+          should_delete = true;
+          break;
+        case Registration::State::Deregistering:
+          break;
+      }
+    }
+
+    // Invoke deregister_service unlocked, then free only after both this
+    // call returns and any pending completion callback has fired.
+    if (call_deregister) {
+      const DWORD err =
+          Api().deregister_service(&registration->request, nullptr);
+      {
+        QMutexLocker l(&registration->mutex);
+        registration->deregister_returned = true;
+        should_delete = (err != DNS_REQUEST_PENDING) ||
+                        registration->deregister_callback_done;
+      }
+    }
+    if (should_delete) {
+      delete registration;
+    }
+  }
 }

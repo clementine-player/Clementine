@@ -17,10 +17,14 @@
 
 #include "syncresolver.h"
 
+#include <algorithm>
+
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "playlist/playlistitem.h"
 #include "smartplaylists/generator.h"
+#include "smartplaylists/querygenerator.h"
+#include "smartplaylists/search.h"
 
 SyncResolver::SyncResolver(LibraryBackend* library, const Playlists& playlists,
                            const SmartPlaylists& smart_playlists)
@@ -28,7 +32,8 @@ SyncResolver::SyncResolver(LibraryBackend* library, const Playlists& playlists,
       playlists_(playlists),
       smart_playlists_(smart_playlists) {}
 
-SyncResolver::Result SyncResolver::Resolve(const SyncSourceId& source) const {
+SyncResolver::Result SyncResolver::Resolve(const SyncSourceId& source,
+                                           bool has_seed, qint64 seed) const {
   Result result;
   switch (source.kind()) {
     case SyncSourceId::Kind::Song:
@@ -52,8 +57,44 @@ SyncResolver::Result SyncResolver::Resolve(const SyncSourceId& source) const {
       smart_playlists::GeneratorPtr generator =
           smart_playlists_.generator(source.parts()[0], source.parts()[1]);
       if (!generator) return result;
-      for (const PlaylistItemPtr& item : generator->Generate()) {
-        result.songs << item->Metadata();
+      auto* query_gen =
+          dynamic_cast<smart_playlists::QueryGenerator*>(generator.get());
+      if (has_seed && query_gen && library_ &&
+          query_gen->search().sort_type_ ==
+              smart_playlists::Search::Sort_Random) {
+        // For random smart playlists with a seed, sort deterministically by
+        // song ID and run SplitMix64 Fisher-Yates before slicing limit so
+        // resumed syncs get a reproducible track subset.
+        smart_playlists::Search search = query_gen->search();
+        const int limit = search.limit_;
+        search.sort_type_ = smart_playlists::Search::Sort_FieldAsc;
+        search.sort_field_ = smart_playlists::SearchTerm::Field_Title;
+        search.limit_ = -1;
+        search.first_item_ = 0;
+        SongList songs = library_->FindSongs(search);
+        std::sort(songs.begin(), songs.end(),
+                  [](const Song& a, const Song& b) { return a.id() < b.id(); });
+        quint64 state = static_cast<quint64>(seed);
+        auto next_u64 = [&state]() {
+          state += 0x9e3779b97f4a7c15ULL;
+          quint64 z = state;
+          z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9ULL;
+          z = (z ^ (z >> 27)) * 0x94d049bb133111ebULL;
+          return z ^ (z >> 31);
+        };
+        for (int i = songs.size() - 1; i > 0; --i) {
+          const int j =
+              static_cast<int>(next_u64() % static_cast<quint64>(i + 1));
+          if (i != j) songs.swapItemsAt(i, j);
+        }
+        if (limit >= 0 && songs.size() > limit) {
+          songs = songs.mid(0, limit);
+        }
+        result.songs = songs;
+      } else {
+        for (const PlaylistItemPtr& item : generator->Generate()) {
+          result.songs << item->Metadata();
+        }
       }
       result.state = State::Ready;
       return result;

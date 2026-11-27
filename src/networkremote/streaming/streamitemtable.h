@@ -19,6 +19,7 @@
 #define NETWORKREMOTE_STREAMING_STREAMITEMTABLE_H_
 
 #include <QByteArray>
+#include <QHash>
 #include <QHostAddress>
 #include <QList>
 #include <QMap>
@@ -90,7 +91,7 @@ class StreamItemTable {
  private:
   struct Entry {
     QHostAddress peer;
-    QList<StreamItem> items;
+    QHash<int, StreamItem> items;
   };
 
   mutable QMutex mutex_;

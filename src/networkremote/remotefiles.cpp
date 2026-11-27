@@ -25,6 +25,70 @@
 
 namespace RemoteFiles {
 
+DirResult ResolveDir(const QString& files_root, const QString& relative_path) {
+  DirResult result;
+  if (files_root.isEmpty()) {
+    result.status = DirStatus::RootNotSet;
+    return result;
+  }
+
+  const QDir raw_root(files_root);
+  if (!raw_root.exists()) {
+    result.status = DirStatus::RootNotSet;
+    return result;
+  }
+
+  const QDir root(QDir::cleanPath(raw_root.absolutePath()));
+  QString rel = relative_path;
+  // Strip remote leading '/' (relative to root), then block drive/UNC paths.
+  while (rel.startsWith('/')) rel.remove(0, 1);
+  if (QDir::isAbsolutePath(rel)) {
+    result.status = DirStatus::NotAccessible;
+    return result;
+  }
+
+  const QString target_path =
+      rel.isEmpty() ? root.absolutePath() : QDir::cleanPath(root.filePath(rel));
+  const QString normalized_rel = root.relativeFilePath(target_path);
+  // Check normalized_rel == ".." explicitly: "/.." resolves to ".." without
+  // a trailing slash, and reject paths jumping to another drive.
+  if (normalized_rel == ".." || normalized_rel.startsWith("../") ||
+      QDir::isAbsolutePath(normalized_rel)) {
+    result.status = DirStatus::NotAccessible;
+    return result;
+  }
+
+  const QFileInfo fi_folder(target_path);
+  if (!fi_folder.exists() || !fi_folder.isDir()) {
+    result.status = DirStatus::NotExist;
+    return result;
+  }
+
+  result.status = DirStatus::Ok;
+  result.root = root;
+  // Keep absoluteFilePath() rather than canonicalFilePath() so symlinks under
+  // files_root follow consistently with IsWithin() and MayAdd() (containment
+  // is checked on the unresolved path).
+  result.dir = QDir(fi_folder.absoluteFilePath());
+  result.relative_path = normalized_rel;
+  return result;
+}
+
+QUrl ParseUrl(const std::string& raw) {
+  if (raw.empty()) return QUrl();
+  const QByteArray encoded = QByteArray::fromStdString(raw);
+  // Preserve strict percent-encoding (e.g. %23/%3F in filenames) first, then
+  // fall back to relaxed parsing for legacy unencoded client strings.
+  QUrl url = QUrl::fromEncoded(encoded, QUrl::StrictMode);
+  if (!url.isValid() || url.scheme().isEmpty()) {
+    url = QUrl::fromEncoded(encoded);
+  }
+  if (!url.isValid()) {
+    url = QUrl(QString::fromStdString(raw));
+  }
+  return url;
+}
+
 bool IsWithin(const QDir& root, const QFileInfo& file) {
   // Relative to the root, a path outside it starts with "..", or stays
   // absolute when it's on another drive.

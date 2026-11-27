@@ -17,18 +17,44 @@
 #ifndef NETWORKREMOTE_REMOTEFILES_H
 #define NETWORKREMOTE_REMOTEFILES_H
 
+#include <QDir>
+#include <QString>
 #include <functional>
+#include <string>
 
 class LibraryBackendInterface;
-class QDir;
 class Song;
 class QFileInfo;
-class QString;
 class QUrl;
 
 // The network remote's Files tab shows what's under one root folder, and a
 // client may add to the playlist or download only files from there.
 namespace RemoteFiles {
+
+enum class DirStatus {
+  Ok,
+  RootNotSet,
+  NotExist,
+  NotAccessible,
+};
+
+struct DirResult {
+  DirStatus status = DirStatus::NotAccessible;
+  QDir root;
+  QDir dir;
+  QString relative_path;
+
+  bool ok() const { return status == DirStatus::Ok; }
+};
+
+// Resolves `relative_path` under `files_root`, preventing traversal outside the
+// root folder before checking existence on disk.
+DirResult ResolveDir(const QString& files_root, const QString& relative_path);
+
+// Parses a URL sent over the remote protobuf wire format, preserving strict
+// percent-encoding when valid and falling back gracefully for unencoded
+// strings.
+QUrl ParseUrl(const std::string& raw);
 
 // Whether `file` is within `root`. The file names a client sends are joined
 // to a folder within the root, so a name with "..", or an absolute path,

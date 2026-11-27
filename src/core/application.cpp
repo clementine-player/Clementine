@@ -22,8 +22,10 @@
 
 #include "application.h"
 
+#include <QSemaphore>
 #include <QSettings>
 #include <QTimer>
+#include <memory>
 
 #include "config.h"
 #include "core/appearance.h"
@@ -251,6 +253,40 @@ Application::~Application() {
   // A library scan waits for the tag reader, which can't answer once its
   // thread has stopped, so the scan has to stop first.
   if (p_->library_) p_->library_->StopWatcher();
+
+  // NetworkRemote lives on its own thread and its Lazy deleter uses
+  // deleteLater(); destroy it while that thread's event loop is still running.
+  if (p_->network_remote_) {
+    NetworkRemote* remote = p_->network_remote_.get();
+    QThread* remote_thread = remote->thread();
+    if (remote_thread && remote_thread->isRunning() &&
+        remote_thread != QThread::currentThread()) {
+      auto destroyed = std::make_shared<QSemaphore>(0);
+      // Connect with DirectConnection because this thread blocks in tryAcquire.
+      // Watch both destroyed and finished so an early thread exit cannot hang.
+      QObject::connect(
+          remote, &QObject::destroyed, remote,
+          [destroyed]() { destroyed->release(); }, Qt::DirectConnection);
+      QObject::connect(
+          remote_thread, &QThread::finished, remote_thread,
+          [destroyed]() { destroyed->release(); }, Qt::DirectConnection);
+      p_->network_remote_.reset();
+      if (!destroyed->tryAcquire(1, 5000)) {
+        qLog(Warning) << "Timed out waiting for NetworkRemote thread shutdown";
+      } else {
+        // NetworkRemote's queued Shutdown() calls (and their deleteLater())
+        // cannot run on the main loop during ~Application(); delete the
+        // bridges directly now that NetworkRemote has stopped posting to them.
+        const QList<RemoteBridge*> bridges =
+            findChildren<RemoteBridge*>(QString(), Qt::FindDirectChildrenOnly);
+        for (RemoteBridge* bridge : bridges) {
+          delete bridge;
+        }
+      }
+    } else {
+      p_->network_remote_.reset();
+    }
+  }
 
   for (QThread* thread : threads_) {
     thread->quit();

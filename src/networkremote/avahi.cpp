@@ -101,20 +101,21 @@ void Avahi::AddServices(int generation, const QString& domain,
   // D-Bus delivers calls from one connection in order, so Avahi has every
   // service before the commit.
   for (const QPair<int, int>& target : targets) {
-    LogIfFailed(
-        group->AddService(target.first,   // Interface
-                          target.second,  // Protocol
-                          0,              // Flags
-                          // Service name, eg. Clementine
-                          QString::fromUtf8(name.constData(), name.size()),
-                          type,       // Service type, eg. _clementine._tcp
-                          domain,     // Domain, eg. local
-                          QString(),  // Hostname (filled in by Avahi)
-                          port,       // Port our service is running on
-                          QList<QByteArray>()),  // TXT record
-        QString("add the service on interface %1, protocol %2")
-            .arg(target.first)
-            .arg(target.second));
+    LogIfFailed(group->AddService(target.first,   // Interface
+                                  target.second,  // Protocol
+                                  0,              // Flags
+                                  // Service name, eg. Clementine; omit size()
+                                  // so TruncateName's trailing NUL is not
+                                  // embedded in the D-Bus string.
+                                  QString::fromUtf8(name.constData()),
+                                  type,    // Service type, eg. _clementine._tcp
+                                  domain,  // Domain, eg. local
+                                  QString(),  // Hostname (filled in by Avahi)
+                                  port,       // Port our service is running on
+                                  QList<QByteArray>()),  // TXT record
+                QString("add the service on interface %1, protocol %2")
+                    .arg(target.first)
+                    .arg(target.second));
   }
   LogIfFailed(group->Commit(), "publish the remote");
 }

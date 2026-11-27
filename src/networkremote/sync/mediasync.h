@@ -24,6 +24,7 @@
 #include <QHostAddress>
 #include <QList>
 #include <QObject>
+#include <QSet>
 #include <functional>
 #include <memory>
 
@@ -71,6 +72,7 @@ class MediaSync : public QObject {
   void HandleMessage(int client_id, const QString& peer_address,
                      const QByteArray& data);
   void ClientDisconnected(int client_id);
+  void ClearClients();
 
  signals:
   void SendToClient(int client_id, const QByteArray& data);
@@ -79,9 +81,14 @@ class MediaSync : public QObject {
   struct Client {
     QByteArray token;
     QHostAddress peer;
-    QList<StreamItem> items;
-    // Item keys and versions on offer, to their ids.
+    QHash<int, StreamItem> items;
+    // Item keys and versions on offer, to their ids, and the reverse map.
     QHash<QString, int> ids;
+    QHash<int, QString> keys;
+    // Active item ids per source_id and how many active sources keep each id.
+    QHash<QString, QSet<int>> source_items;
+    QHash<int, int> ref_counts;
+    int next_id = 1;
   };
 
   // A cover file's key, as SyncArt.key has it.
@@ -96,9 +103,14 @@ class MediaSync : public QObject {
   // The SHA-256 of the file at |path|, in hex, or empty if it can't be read.
   // Kept until the file changes, as many songs share each cover.
   QString CoverKeyOf(const QString& path);
-  // The id of |item| in |client|'s offer, adding it if need be. 0 when the
-  // offer is full.
-  int Offer(Client* client, const QString& key, const StreamItem& item);
+  // The id of |item| in |client|'s offer, adding it if need be (evicting stale
+  // exclusive items from |old_ids| first). Returns 0 when the offer is full.
+  int Offer(Client* client, const QString& source_id, const QString& key,
+            const StreamItem& item, QSet<int>* old_ids, QSet<int>* new_ids,
+            QSet<int>* added_ids);
+  void ReleaseItem(Client* client, int id);
+  void ReleaseSource(Client* client, const QString& source_id);
+  void ClearClientOffers(Client* client);
 
   LibraryBackend* library_;
   Hooks hooks_;
