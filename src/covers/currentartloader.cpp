@@ -36,8 +36,11 @@ CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
   options_.scale_output_image_ = false;
   options_.pad_output_image_ = false;
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
+  // availableSizes() may be empty for SVG-only or missing icon themes.
+  const QList<QSize> sizes = nocover.availableSizes();
   options_.default_output_image_ =
-      nocover.pixmap(nocover.availableSizes().last()).toImage();
+      nocover.pixmap(sizes.isEmpty() ? QSize(128, 128) : sizes.last())
+          .toImage();
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(TempArtLoaded(quint64, QImage)));
@@ -64,19 +67,23 @@ void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
   if (image != options_.default_output_image_) {
     temp_art_.reset(new QTemporaryFile(temp_file_pattern_));
     temp_art_->setAutoRemove(true);
-    (void)temp_art_->open();
-    image.save(temp_art_->fileName(), "JPEG");
+    // Only emit a URI if the temp file opened; use fromLocalFile() so
+    // Windows drive paths become valid file:/// URLs.
+    if (temp_art_->open()) {
+      image.save(temp_art_->fileName(), "JPEG");
+      uri = QUrl::fromLocalFile(temp_art_->fileName()).toString();
+    }
 
     // Scale the image down to make a thumbnail.  It's a bit crap doing it here
     // since it's the GUI thread, but the alternative is hard.
     temp_art_thumbnail_.reset(new QTemporaryFile(temp_file_pattern_));
-    (void)temp_art_thumbnail_->open();
     temp_art_thumbnail_->setAutoRemove(true);
-    thumbnail = image.scaledToHeight(120, Qt::SmoothTransformation);
-    thumbnail.save(temp_art_thumbnail_->fileName(), "JPEG");
-
-    uri = "file://" + temp_art_->fileName();
-    thumbnail_uri = "file://" + temp_art_thumbnail_->fileName();
+    if (temp_art_thumbnail_->open()) {
+      thumbnail = image.scaledToHeight(120, Qt::SmoothTransformation);
+      thumbnail.save(temp_art_thumbnail_->fileName(), "JPEG");
+      thumbnail_uri =
+          QUrl::fromLocalFile(temp_art_thumbnail_->fileName()).toString();
+    }
   }
 
   emit ArtLoaded(last_song_, uri, image);

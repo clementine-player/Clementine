@@ -17,6 +17,7 @@
 
 #include "upnpdiscovery.h"
 
+#include <QHostInfo>
 #include <QNetworkAccessManager>
 #include <QNetworkDatagram>
 #include <QNetworkInterface>
@@ -116,15 +117,22 @@ void UpnpDiscovery::Search() {
 
 void UpnpDiscovery::ReadDatagrams() {
   while (socket_->hasPendingDatagrams()) {
-    const QByteArray datagram = socket_->receiveDatagram().data();
+    const QNetworkDatagram datagram = socket_->receiveDatagram();
     UpnpSsdpResponse response;
-    if (response.Parse(datagram)) ResponseReceived(response);
+    if (response.Parse(datagram.data())) {
+      // Keep the SSDP sender IP in case LOCATION contains a hostname.
+      response.sender_address = datagram.senderAddress();
+      ResponseReceived(response);
+    }
   }
 }
 
 void UpnpDiscovery::ResponseReceived(const UpnpSsdpResponse& response) {
   Renderer& renderer = renderers_[response.id];
   renderer.last_seen.start();
+  if (!response.sender_address.isNull()) {
+    renderer.sender_address = response.sender_address;
+  }
 
   if (renderer.location != response.location) {
     // New, or moved: describe it again.
@@ -152,31 +160,71 @@ void UpnpDiscovery::FetchDescription(const QString& id) {
   Renderer& renderer = renderers_[id];
   renderer.fetching = true;
   const QUrl location = renderer.location;
+  const QHostAddress sender_address = renderer.sender_address;
 
   QNetworkRequest request(location);
   request.setTransferTimeout(kDescriptionTimeoutMsec);
   QNetworkReply* reply = network_->get(request);
-  connect(reply, &QNetworkReply::finished, this, [this, reply, id, location]() {
-    reply->deleteLater();
-    auto it = renderers_.find(id);
-    if (it == renderers_.end() || it->location != location) return;
-    it->fetching = false;
+  connect(
+      reply, &QNetworkReply::finished, this,
+      [this, reply, id, location, sender_address]() {
+        reply->deleteLater();
+        auto it = renderers_.find(id);
+        if (it == renderers_.end() || it->location != location) return;
+        it->fetching = false;
 
-    if (reply->error() != QNetworkReply::NoError) {
-      // The next search tries again.
-      qLog(Debug) << "No UPnP description from" << location << ":"
-                  << reply->errorString();
-      return;
-    }
-    UpnpDevice device;
-    if (!device.ParseDescription(reply->read(kMaxDescriptionBytes), location)) {
-      qLog(Debug) << "Not a renderer that can play URLs:" << location;
-      it->ignored = true;
-      return;
-    }
-    it->device = device;
-    FetchProtocolInfo(id);
-  });
+        if (reply->error() != QNetworkReply::NoError) {
+          // The next search tries again.
+          qLog(Debug) << "No UPnP description from" << location << ":"
+                      << reply->errorString();
+          return;
+        }
+        const QByteArray description = reply->read(kMaxDescriptionBytes);
+        auto complete_parse = [this, id, location](
+                                  const QByteArray& xml,
+                                  const QHostAddress& fallback) {
+          auto renderer_it = renderers_.find(id);
+          if (renderer_it == renderers_.end() ||
+              renderer_it->location != location) {
+            return;
+          }
+          renderer_it->fetching = false;
+          UpnpDevice device;
+          if (!device.ParseDescription(xml, location, fallback)) {
+            qLog(Debug) << "Not a renderer that can play URLs:" << location;
+            renderer_it->ignored = true;
+            return;
+          }
+          renderer_it->device = device;
+          FetchProtocolInfo(id);
+        };
+        // LOCATION may carry a hostname that QHostAddress() cannot parse; if
+        // no SSDP sender IP was captured, resolve via DNS while keeping
+        // fetching = true so periodic SSDP replies don't re-enter.
+        if (QHostAddress(location.host()).isNull() && sender_address.isNull() &&
+            !location.host().isEmpty()) {
+          it->fetching = true;
+          QHostInfo::lookupHost(
+              location.host(), this,
+              [complete_parse, description](const QHostInfo& host_info) {
+                // Prefer IPv4 to match SSDP discovery and typical renderer
+                // media-server connections.
+                QHostAddress resolved;
+                for (const QHostAddress& candidate : host_info.addresses()) {
+                  if (candidate.protocol() == QAbstractSocket::IPv4Protocol) {
+                    resolved = candidate;
+                    break;
+                  }
+                }
+                if (resolved.isNull() && !host_info.addresses().isEmpty()) {
+                  resolved = host_info.addresses().first();
+                }
+                complete_parse(description, resolved);
+              });
+          return;
+        }
+        complete_parse(description, sender_address);
+      });
 }
 
 void UpnpDiscovery::FetchProtocolInfo(const QString& id) {

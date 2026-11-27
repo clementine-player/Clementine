@@ -40,7 +40,10 @@ void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
 
 void LastfmTrackInfoProvider::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply)) return;
+  if (!reply) return;
+  // Always schedule deletion even if the request is no longer tracked.
+  reply->deleteLater();
+  if (!requests_.contains(reply)) return;
 
   const int id = requests_.take(reply);
 

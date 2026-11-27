@@ -22,6 +22,7 @@
 #include <QNetworkRequest>
 #include <QTimer>
 #include <QXmlStreamReader>
+#include <limits>
 
 #include "core/logging.h"
 #include "networkremote/streaming/eventcallbacktable.h"
@@ -54,6 +55,12 @@ UpnpSubscription::UpnpSubscription(
 }
 
 UpnpSubscription::~UpnpSubscription() {
+  // Abort any in-flight SUBSCRIBE; its deleteLater is wired to reply itself
+  // so teardown doesn't leave the network_-owned reply leaked.
+  if (pending_reply_) {
+    pending_reply_->disconnect(this);
+    pending_reply_->abort();
+  }
   callbacks_->Remove(token_);
   Unsubscribe();
 }
@@ -67,6 +74,12 @@ void UpnpSubscription::Start(const QUrl& base) {
 void UpnpSubscription::Renew() { Subscribe(true); }
 
 void UpnpSubscription::Subscribe(bool renewing) {
+  // Cancel any overlapping SUBSCRIBE/renewal before starting a new one.
+  if (pending_reply_) {
+    pending_reply_->disconnect(this);
+    pending_reply_->abort();
+    pending_reply_ = nullptr;
+  }
   QNetworkRequest request(event_url_);
   request.setTransferTimeout(kRequestTimeoutMsec);
   if (renewing) {
@@ -82,8 +95,12 @@ void UpnpSubscription::Subscribe(bool renewing) {
   request.setRawHeader("TIMEOUT", "Second-" + QByteArray::number(kTimeoutSec));
 
   QNetworkReply* reply = network_->sendCustomRequest(request, "SUBSCRIBE");
+  pending_reply_ = reply;
+  // Tie deleteLater to reply rather than this so destructor teardown can't
+  // disconnect cleanup.
+  connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
   connect(reply, &QNetworkReply::finished, this, [this, reply, renewing]() {
-    reply->deleteLater();
+    if (pending_reply_ == reply) pending_reply_ = nullptr;
     SubscribeFinished(reply, renewing);
   });
 }
@@ -111,11 +128,16 @@ void UpnpSubscription::SubscribeFinished(QNetworkReply* reply, bool renewing) {
   // "Second-1800", or "infinite".
   const QByteArray timeout = reply->rawHeader("TIMEOUT").toLower();
   bool ok = false;
-  qint64 timeout_msec =
-      timeout.startsWith("second-") ? timeout.mid(7).toLongLong(&ok) * 1000 : 0;
-  if (!ok || timeout_msec <= 0) timeout_msec = kTimeoutSec * 1000ll;
-  renew_timer_->start(timeout_msec -
-                      qMin<qint64>(kRenewMarginMsec, timeout_msec / 5));
+  qint64 timeout_sec =
+      timeout.startsWith("second-") ? timeout.mid(7).toLongLong(&ok) : 0;
+  if (!ok || timeout_sec <= 0) timeout_sec = kTimeoutSec;
+  // Clamp seconds before multiplying by 1000 so large TIMEOUT headers neither
+  // overflow qint64 nor truncate when passed to QTimer::start(int).
+  const qint64 max_sec = std::numeric_limits<int>::max() / 1000;
+  const qint64 timeout_msec = qMin(timeout_sec, max_sec) * 1000;
+  const int interval = static_cast<int>(
+      timeout_msec - qMin<qint64>(kRenewMarginMsec, timeout_msec / 5));
+  renew_timer_->start(interval);
 
   if (!renewing) {
     qLog(Debug) << "Subscribed to" << event_url_ << "as" << sid_;

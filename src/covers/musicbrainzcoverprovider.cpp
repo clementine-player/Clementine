@@ -61,6 +61,16 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
                                                      int id) {
   reply->deleteLater();
 
+  // Search may have been cancelled while the release query was in flight.
+  if (!cover_names_.contains(id)) return;
+
+  // Always emit SearchFinished on error/empty so the fetcher doesn't stall 10s.
+  if (reply->error() != QNetworkReply::NoError) {
+    cover_names_.remove(id);
+    emit SearchFinished(id, QList<CoverSearchResult>());
+    return;
+  }
+
   QList<QString> releases;
 
   QXmlStreamReader reader(reply);
@@ -75,6 +85,12 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
     }
   }
 
+  if (releases.isEmpty()) {
+    cover_names_.remove(id);
+    emit SearchFinished(id, QList<CoverSearchResult>());
+    return;
+  }
+
   for (const QString& release_id : releases) {
     QUrl url(QString(kAlbumCoverUrl).arg(release_id));
     QNetworkReply* reply = network_->head(QNetworkRequest(url));
@@ -86,6 +102,10 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
 
 void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
+  // Bail out if CancelSearch() already cleared this search.
+  if (replies.isEmpty() || !cover_names_.contains(id)) {
+    return;
+  }
   int finished_count =
       std::count_if(replies.constBegin(), replies.constEnd(),
                     [](QNetworkReply* reply) { return reply->isFinished(); });
@@ -94,8 +114,10 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
     QList<CoverSearchResult> results;
     for (QNetworkReply* reply : replies) {
       reply->deleteLater();
-      if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <
-          400) {
+      // Require NoError: failed requests have HTTP status 0 (< 400).
+      if (reply->error() == QNetworkReply::NoError &&
+          reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <
+              400) {
         CoverSearchResult result;
         result.description = cover_name;
         result.image_url = reply->url();
@@ -108,10 +130,13 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
 }
 
 void MusicbrainzCoverProvider::CancelSearch(int id) {
+  // Remove tracking state before abort(), which may synchronously emit
+  // finished() and re-enter ImageCheckFinished().
+  cover_names_.remove(id);
   QList<QNetworkReply*> replies = image_checks_.values(id);
+  image_checks_.remove(id);
   for (QNetworkReply* reply : replies) {
     reply->abort();
     reply->deleteLater();
   }
-  image_checks_.remove(id);
 }

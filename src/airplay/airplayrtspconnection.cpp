@@ -251,7 +251,8 @@ void AirPlayRtspConnection::ReadyRead() {
   }
 
   Response response;
-  while (in_flight_ && ParseResponse(&response)) {
+  bool invalid = false;
+  while (in_flight_ && ParseResponse(&response, &invalid)) {
     timeout_->stop();
     qLog(Debug) << "<<" << response.code << Describe(response.headers)
                 << response.body.size() << "byte body";
@@ -266,9 +267,14 @@ void AirPlayRtspConnection::ReadyRead() {
     if (pending.callback) pending.callback(response);
     SendNext();
   }
+  if (invalid) {
+    Close();
+    emit Failed(tr("Invalid response from the AirPlay receiver"));
+  }
 }
 
-bool AirPlayRtspConnection::ParseResponse(Response* response) {
+bool AirPlayRtspConnection::ParseResponse(Response* response, bool* invalid) {
+  *invalid = false;
   const int header_end = buffer_.indexOf("\r\n\r\n");
   if (header_end < 0) return false;
   const QList<QByteArray> lines = buffer_.left(header_end).split('\n');
@@ -281,9 +287,21 @@ bool AirPlayRtspConnection::ParseResponse(Response* response) {
     r.headers.append(
         {lines[i].left(colon).trimmed(), lines[i].mid(colon + 1).trimmed()});
   }
-  const int length = r.Header("Content-Length").toInt();
+  const QByteArray cl = r.Header("Content-Length");
+  int length = 0;
+  if (!cl.isEmpty()) {
+    bool ok = false;
+    length = cl.toInt(&ok);
+    // Reject non-numeric or negative Content-Length explicitly via *invalid so
+    // ReadyRead() closes the connection rather than misframing or spinning.
+    if (!ok || length < 0) {
+      *invalid = true;
+      return false;
+    }
+  }
   const int start = header_end + 4;
-  if (buffer_.size() < start + length) return false;
+  // Subtract start rather than adding start + length to avoid signed overflow.
+  if (length > buffer_.size() - start) return false;
   r.body = buffer_.mid(start, length);
   buffer_.remove(0, start + length);
   *response = r;

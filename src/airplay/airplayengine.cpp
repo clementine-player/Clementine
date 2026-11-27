@@ -84,15 +84,22 @@ class AirPlayEngine::Target : public AirPlaySinkTarget {
   }
 
   void Flushed() override {
-    {
-      QMutexLocker l(&mutex_);
-      if (!stream_) return;
-    }
+    // Hold mutex_ across invokeMethod so ~AirPlayEngine() (via ClearEngine())
+    // cannot tear down engine_ mid-call from GStreamer's streaming thread;
+    // a raw pointer also avoids QPointer's non-thread-safe weak-ref access.
+    QMutexLocker l(&mutex_);
+    if (!stream_ || !engine_) return;
     QMetaObject::invokeMethod(engine_, "StreamFlushed", Qt::QueuedConnection);
   }
 
+  void ClearEngine() {
+    QMutexLocker l(&mutex_);
+    stream_ = nullptr;
+    engine_ = nullptr;
+  }
+
  private:
-  QPointer<AirPlayEngine> engine_;
+  AirPlayEngine* engine_;
   QMutex mutex_;
   AirPlayStream* stream_;
 };
@@ -147,7 +154,8 @@ AirPlayEngine::AirPlayEngine(Application* app, const AirPlayDevice& device,
 
 AirPlayEngine::~AirPlayEngine() {
   CloseDialog();
-  target_->SetStream(nullptr);
+  // Null engine_ under mutex_ before ~QObject tears down its event queue.
+  target_->ClearEngine();
 }
 
 void AirPlayEngine::SetDevice(const AirPlayDevice& device) {

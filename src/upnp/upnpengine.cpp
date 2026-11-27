@@ -238,7 +238,11 @@ void UpnpEngine::SendLoad(qint64 start_ms, bool playing) {
         registry_->ReachFor(device_.address), device_.name);
     qLog(Warning) << message;
     current_sent_ = false;
-    QTimer::singleShot(0, this, [this, message]() {
+    // Guard with item_id in case another Load() or Stop() changes current_
+    // before the queued callback runs.
+    const int item_id = current_.id;
+    QTimer::singleShot(0, this, [this, item_id, message]() {
+      if (current_.id != item_id) return;
       emit Error(message);
       emit DeviceFailed();
     });
@@ -296,8 +300,12 @@ bool UpnpEngine::Load(const MediaPlaybackRequest& req,
   if (current_.plan.mode == StreamPlan::Unplayable) {
     const QString message = tr("%1 can't play this track: %2")
                                 .arg(device_.name, current_.plan.reason);
-    // Let the caller finish before the Player skips to the next track.
-    QTimer::singleShot(0, this, [this, message]() { FailItem(message); });
+    const int item_id = current_.id;
+    // Let the caller finish before the Player skips to the next track; check
+    // item_id in case a newer Load() or Stop() replaces current_ first.
+    QTimer::singleShot(0, this, [this, item_id, message]() {
+      if (current_.id == item_id) FailItem(message);
+    });
     return false;
   }
   return true;
@@ -387,11 +395,15 @@ void UpnpEngine::SetVolumeSW(uint) {
 
 void UpnpEngine::PlayerVolumeChanged(int volume) {
   renderer_volume_ = volume;
+  // Don't move Clementine's slider while we aren't actively controlling this
+  // renderer (e.g. before Play() or after Stop() switched outputs).
+  if (!in_control_) return;
   if (volume_set_.isValid() && volume_set_.elapsed() < kOwnVolumeMsec) {
     // Once that's past, whatever it's settled on, if that isn't where the
     // slider is: someone else may have changed it meanwhile.
     QTimer::singleShot(kOwnVolumeMsec - volume_set_.elapsed(), this, [this]() {
-      if (volume_set_.elapsed() < kOwnVolumeMsec) return;
+      // Re-check in_control_ in case Stop() switched outputs during the delay.
+      if (!in_control_ || volume_set_.elapsed() < kOwnVolumeMsec) return;
       if (renderer_volume_ != static_cast<int>(volume_)) {
         emit OutputVolumeChanged(renderer_volume_);
       }

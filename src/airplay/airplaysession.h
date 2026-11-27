@@ -276,6 +276,8 @@ class AirPlaySession : public QObject {
   QByteArray event_buffer_;
   quint16 event_port_;
   int event_attempts_;
+  // Cancels pending reconnects on Close() or EventConnected().
+  QTimer* event_retry_timer_;
 
   QByteArray audio_key_;
   AirPlayStream* stream_;

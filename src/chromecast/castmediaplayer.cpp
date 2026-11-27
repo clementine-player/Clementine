@@ -51,6 +51,20 @@ CastMediaPlayer::CastMediaPlayer(CastChannel* channel, QObject* parent)
       muted_(false) {
   connect(channel_, SIGNAL(MessageReceived(QString, QString, QJsonObject)),
           SLOT(MessageReceived(QString, QString, QJsonObject)));
+  // Clear transport_id_/session state on disconnect so is_ready() becomes
+  // false and subsequent playback relaunches the receiver app instead of
+  // sending to a dead transport.
+  connect(channel_, SIGNAL(Closed(QString)), SLOT(Reset()));
+}
+
+void CastMediaPlayer::Reset() {
+  session_id_.clear();
+  transport_id_.clear();
+  media_session_id_ = 0;
+  load_request_id_ = 0;
+  idle_media_session_id_ = 0;
+  launching_ = false;
+  SetState(Idle);
 }
 
 void CastMediaPlayer::Launch() {
@@ -229,6 +243,8 @@ void CastMediaPlayer::ReceiverStatus(const QJsonObject& status) {
     session_id_ = session_id;
     transport_id_ = app["transportId"].toString();
     media_session_id_ = 0;
+    // A restarted receiver app reuses low mediaSessionIds; don't ignore them.
+    idle_media_session_id_ = 0;
     launching_ = false;
     qLog(Debug) << "Cast media app running, session" << session_id_;
     // Find out whether it's already playing something.
@@ -298,11 +314,6 @@ void CastMediaPlayer::SetState(State state) {
 }
 
 void CastMediaPlayer::AppGone() {
-  session_id_.clear();
-  transport_id_.clear();
-  media_session_id_ = 0;
-  load_request_id_ = 0;
-  launching_ = false;
-  SetState(Idle);
+  Reset();
   emit AppStopped();
 }

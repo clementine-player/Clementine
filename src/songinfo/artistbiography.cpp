@@ -53,7 +53,7 @@ QString GetLocale() {
 
 }  // namespace
 
-ArtistBiography::ArtistBiography() : network_(new NetworkAccessManager) {}
+ArtistBiography::ArtistBiography() : network_(new NetworkAccessManager(this)) {}
 
 ArtistBiography::~ArtistBiography() {}
 
@@ -83,13 +83,21 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
     QString body = response["articleBody"].toString();
     QString url = response["url"].toString();
 
-    CountdownLatch* latch = new CountdownLatch;
+    // Hold an extra Wait() count and connect Done before launching subtasks so
+    // synchronous early bailouts cannot drop the count to zero before
+    // NewClosure is connected; parent to this to avoid leaks on teardown.
+    CountdownLatch* latch = new CountdownLatch();
+    latch->setParent(this);
+    latch->Wait();
+    NewClosure(latch, &CountdownLatch::Done, this, [this, id, latch]() {
+      latch->deleteLater();
+      emit Finished(id);
+    });
 
     if (url.contains("wikipedia.org")) {
       FetchWikipediaImages(id, url, latch);
       FetchWikipediaArticle(id, url, latch);
     } else {
-      latch->Wait();
       // Use the simple article body from KG.
       if (!body.isEmpty()) {
         CollapsibleInfoPane::Data data;
@@ -107,13 +115,8 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
         data.contents_ = editor;
         emit InfoReady(id, data);
       }
-      latch->CountDown();
     }
-
-    NewClosure(latch, &CountdownLatch::Done, this, [this, id, latch]() {
-      latch->deleteLater();
-      emit Finished(id);
-    });
+    latch->CountDown();
   });
 }
 
@@ -151,6 +154,7 @@ QUrl ExtractImageUrl(const QJsonObject& json) {
       }
     } else if (it.key() == "imageinfo") {
       QJsonArray imageinfos = it.value().toArray();
+      if (imageinfos.isEmpty()) continue;
       QJsonObject imageinfo = imageinfos.first().toObject();
       int width = imageinfo["width"].toInt();
       int height = imageinfo["height"].toInt();
@@ -186,7 +190,8 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
   static const QRegularExpression regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   const QRegularExpressionMatch match = regex.match(wikipedia_url);
   if (!match.hasMatch()) {
-    emit Finished(id);
+    // Release the Wait() acquired above so Done/Finished isn't stalled.
+    latch->CountDown();
     return;
   }
   QString wiki_title = QUrl::fromPercentEncoding(match.captured(2).toUtf8());
@@ -246,7 +251,8 @@ void ArtistBiography::FetchWikipediaArticle(int id,
   static const QRegularExpression regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   const QRegularExpressionMatch match = regex.match(wikipedia_url);
   if (!match.hasMatch()) {
-    emit Finished(id);
+    // Release the Wait() acquired above so Done/Finished isn't stalled.
+    latch->CountDown();
     return;
   }
   QString wiki_title = QUrl::fromPercentEncoding(match.captured(2).toUtf8());

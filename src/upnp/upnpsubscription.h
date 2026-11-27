@@ -22,6 +22,7 @@
 #include <QHostAddress>
 #include <QMap>
 #include <QObject>
+#include <QPointer>
 #include <QUrl>
 #include <memory>
 
@@ -87,6 +88,8 @@ class UpnpSubscription : public QObject {
   const QByteArray token_;
   QUrl base_;
   QTimer* renew_timer_;
+  // Tracked so ~UpnpSubscription() and Subscribe() can abort it early.
+  QPointer<QNetworkReply> pending_reply_;
 
   QByteArray sid_;
 };

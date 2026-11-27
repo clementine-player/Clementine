@@ -69,6 +69,8 @@ class UpnpDiscovery : public QObject {
  private:
   struct Renderer {
     QUrl location;
+    // Source IP of the SSDP response, used if location uses a hostname.
+    QHostAddress sender_address;
     QElapsedTimer last_seen;
     bool fetching = false;
     // Described, and its protocol info known.

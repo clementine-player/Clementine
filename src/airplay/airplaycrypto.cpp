@@ -155,6 +155,13 @@ QByteArray X25519Shared(const QByteArray& secret,
   if (their_public.size() != 32) return QByteArray();
   QByteArray shared(32, '\0');
   crypto_x25519(Bytes(&shared), Bytes(secret), Bytes(their_public));
+  // Reject low-order peer keys per RFC 7748: X25519 yields an all-zero shared
+  // secret for them, which would force a predictable key.
+  unsigned char nonzero = 0;
+  for (char c : shared) {
+    nonzero |= static_cast<unsigned char>(c);
+  }
+  if (nonzero == 0) return QByteArray();
   return shared;
 }
 

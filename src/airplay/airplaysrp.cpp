@@ -102,6 +102,13 @@ SrpClient::Result SrpClient::Process(const QString& pin,
   mpz_powm(a_pub.get(), g.get(), a.get(), n.get());
 
   BigInt b(b_public);
+  // RFC 5054 / SRP-6a requires aborting if B mod N == 0, which would yield a
+  // predictable shared secret S.
+  BigInt b_mod_n;
+  mpz_mod(b_mod_n.get(), b.get(), n.get());
+  if (mpz_cmp_ui(b_mod_n.get(), 0) == 0) {
+    return Result();
+  }
   // srptools hashes the salt as an integer, so drops its leading zeros.
   const QByteArray salt = BigInt(salt_bytes).Bytes();
 

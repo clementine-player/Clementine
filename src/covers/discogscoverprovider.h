@@ -19,7 +19,9 @@
 #ifndef COVERS_DISCOGSCOVERPROVIDER_H
 #define COVERS_DISCOGSCOVERPROVIDER_H
 
+#include <QHash>
 #include <QNetworkReply>
+#include <QPair>
 #include <QXmlStreamReader>
 
 #include "coverprovider.h"
@@ -77,7 +79,9 @@ class DiscogsCoverProvider : public CoverProvider {
 
   QNetworkAccessManager* network_;
   QHash<int, DiscogsCoverSearchContext*> requests_search_;
-  QHash<int, DiscogsCoverReleaseContext*> requests_release_;
+  // Keyed by (search_id, release_id) so concurrent searches hitting the same
+  // Discogs release do not overwrite each other's release context.
+  QHash<QPair<int, int>, DiscogsCoverReleaseContext*> requests_release_;
 
   bool StartRelease(DiscogsCoverSearchContext* s_ctx, int r_id,
                     QString resource_url);

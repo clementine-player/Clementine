@@ -63,6 +63,8 @@ class CastMediaPlayer : public QObject {
   void Launch();
   // Stops the app on the device.
   void StopApp();
+  // Resets session and media tracking state (e.g. when the channel closes).
+  void Reset();
   bool is_ready() const { return !transport_id_.isEmpty(); }
 
   void Load(const CastMediaInfo& info, qint64 start_ms, bool autoplay);

@@ -190,8 +190,10 @@ class Reader {
         !UInt(end_ + 24, 8, &table_)) {
       return false;
     }
+    // Bound via division after table_ <= end_ so count_ * offset_size_ cannot
+    // overflow quint64 on malformed trailers.
     if (count_ > quint64(end_) || table_ > quint64(end_) ||
-        table_ + count_ * offset_size_ > quint64(end_)) {
+        count_ > (quint64(end_) - table_) / quint64(offset_size_)) {
       return false;
     }
     return Object(top, 0, root);
@@ -199,7 +201,11 @@ class Reader {
 
  private:
   bool UInt(quint64 pos, int size, quint64* value) const {
-    if (pos + size > quint64(data_.size())) return false;
+    // Subtract instead of pos + size so large offsets cannot wrap quint64.
+    if (pos > quint64(data_.size()) ||
+        quint64(size) > quint64(data_.size()) - pos) {
+      return false;
+    }
     *value = 0;
     for (int i = 0; i < size; ++i) {
       *value = (*value << 8) | quint8(data_[int(pos) + i]);
@@ -282,8 +288,12 @@ class Reader {
       case 0x6: {
         quint64 count, start;
         if (!Count(pos, info, &count, &start)) return false;
+        if (start > quint64(end_)) return false;
+        const quint64 avail = quint64(end_) - start;
+        // Check against remaining bytes before multiplying (UTF-16 uses 2 bytes
+        // per code unit) so count * 2 and start + bytes cannot overflow.
+        if (type == 0x6 ? (count > avail / 2) : (count > avail)) return false;
         const quint64 bytes = type == 0x6 ? count * 2 : count;
-        if (start + bytes > quint64(end_)) return false;
         const QByteArray raw = data_.mid(int(start), int(bytes));
         if (type == 0x4) {
           *out = raw;
@@ -308,8 +318,14 @@ class Reader {
       case 0xD: {
         quint64 count, start;
         if (!Count(pos, info, &count, &start)) return false;
+        if (start > quint64(end_)) return false;
+        const quint64 max_refs = (quint64(end_) - start) / quint64(ref_size_);
+        // Dicts (0xD) hold 2 * count refs of ref_size_ bytes; divide remaining
+        // space first so count * 2 and refs * ref_size_ cannot overflow.
+        if (type == 0xD ? (count > max_refs / 2) : (count > max_refs)) {
+          return false;
+        }
         const quint64 refs = type == 0xD ? count * 2 : count;
-        if (start + refs * ref_size_ > quint64(end_)) return false;
         QList<QVariant> items;
         for (quint64 i = 0; i < refs; ++i) {
           quint64 ref;

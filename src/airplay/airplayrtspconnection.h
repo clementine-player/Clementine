@@ -137,7 +137,9 @@ class AirPlayRtspConnection : public QObject {
 
   void NewSocket();
   void SendNext();
-  bool ParseResponse(Response* response);
+  // Returns false both when more bytes are needed and when framing is invalid;
+  // sets *invalid in the latter case so ReadyRead() aborts the connection.
+  bool ParseResponse(Response* response, bool* invalid);
   // Takes the realm and nonce from a 401's WWW-Authenticate. False if it
   // isn't a Digest challenge, or there's no password to answer it with.
   bool TakeChallenge(const Response& response);
