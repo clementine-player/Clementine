@@ -108,6 +108,10 @@ GstEngine::GstEngine(Application* app)
       buffering_task_id_(-1),
       latest_buffer_(nullptr),
       equalizer_enabled_(false),
+      equalizer_preamp_(0),
+      // Pre-size 10 bands matching kEqBandCount in case Load() runs before
+      // SetEqualizerParameters().
+      equalizer_gains_(10, 0),
       stereo_balance_(0.0f),
       rg_enabled_(false),
       rg_mode_(0),
@@ -117,13 +121,18 @@ GstEngine::GstEngine(Application* app)
       buffer_min_fill_(33),
       mono_playback_(false),
       sample_rate_(kAutoSampleRate),
+      can_decode_success_(false),
+      can_decode_last_(false),
       seek_timer_(new QTimer(this)),
+      waiting_to_seek_(false),
+      seek_pos_(0),
       timer_id_(-1),
       next_element_id_(0),
       is_fading_out_to_pause_(false),
       has_faded_out_(false),
       scope_chunk_(0),
-      have_new_buffer_(false) {
+      have_new_buffer_(false),
+      scope_chunks_(0) {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
@@ -183,7 +192,17 @@ GTlsDatabase* GstEngine::MacTlsDatabase() {
 GstEngine::~GstEngine() {
   EnsureInitialised();
 
+  // Destroy all pipelines before tls_database_ and ~GstEngine() tear down,
+  // since pipeline callbacks and elements dereference `this` and tls_database_.
   current_pipeline_.reset();
+  fadeout_pipeline_.reset();
+  fadeout_pause_pipeline_.reset();
+  background_streams_.clear();
+
+  if (latest_buffer_) {
+    gst_buffer_unref(latest_buffer_);
+    latest_buffer_ = nullptr;
+  }
 
   qDeleteAll(device_finders_);
 
@@ -406,6 +425,10 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
 }
 
 const Engine::Scope& GstEngine::scope(int chunk_length) {
+  if (chunk_length <= 0) {
+    return scope_;
+  }
+
   // the new buffer could have a different size
   if (have_new_buffer_) {
     if (latest_buffer_ != nullptr) {
@@ -432,48 +455,58 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
 void GstEngine::UpdateScope(int chunk_length) {
   typedef Engine::Scope::value_type sample_type;
 
+  if (chunk_length <= 0) return;
+
   // prevent dbz or invalid chunk size
-  if (!GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
-  if (GST_BUFFER_DURATION(latest_buffer_) == 0) return;
+  const GstClockTime duration = GST_BUFFER_DURATION(latest_buffer_);
+  if (!GST_CLOCK_TIME_IS_VALID(duration) || duration == 0) return;
 
   GstMapInfo map;
-  gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
+  if (!gst_buffer_map(latest_buffer_, &map, GST_MAP_READ)) return;
 
-  // determine where to split the buffer
-  int chunk_density =
-      (map.size * kNsecPerMsec) / GST_BUFFER_DURATION(latest_buffer_);
-
-  int chunk_size = chunk_length * chunk_density;
+  // Compute byte offsets in 64-bit: map.size * kNsecPerMsec overflows 32-bit
+  // int even for small audio buffers.
+  const quint64 chunk_density =
+      (static_cast<quint64>(map.size) * kNsecPerMsec) / duration;
+  const quint64 chunk_size = static_cast<quint64>(chunk_length) * chunk_density;
 
   // in case a buffer doesn't arrive in time
-  if (scope_chunk_ >= scope_chunks_) {
+  if (scope_chunk_ < 0 || scope_chunk_ >= scope_chunks_ || chunk_size == 0) {
     scope_chunk_ = 0;
     gst_buffer_unmap(latest_buffer_, &map);
     return;
   }
 
-  const sample_type* source = reinterpret_cast<sample_type*>(map.data);
-  sample_type* dest = scope_.data();
-  source += (chunk_size / sizeof(sample_type)) * scope_chunk_;
-
-  int bytes = 0;
-
-  // make sure we don't go beyond the end of the buffer
-  if (scope_chunk_ == scope_chunks_ - 1) {
-    bytes = qMin(static_cast<Engine::Scope::size_type>(
-                     map.size - (chunk_size * scope_chunk_)),
-                 scope_.size() * sizeof(sample_type));
-  } else {
-    bytes = qMin(static_cast<Engine::Scope::size_type>(chunk_size),
-                 scope_.size() * sizeof(sample_type));
+  // Clamp both source offset and copy size to map.size and scope_.size() so
+  // short or odd-sized buffers cannot read or write out of bounds.
+  const quint64 offset_bytes = chunk_size * static_cast<quint64>(scope_chunk_);
+  if (offset_bytes >= map.size) {
+    scope_chunk_ = 0;
+    gst_buffer_unmap(latest_buffer_, &map);
+    return;
   }
 
+  const gsize max_scope_bytes = scope_.size() * sizeof(sample_type);
+  const gsize remaining_bytes = map.size - offset_bytes;
+  const gsize bytes =
+      (scope_chunk_ == scope_chunks_ - 1)
+          ? qMin(remaining_bytes, max_scope_bytes)
+          : qMin<gsize>(remaining_bytes,
+                        qMin<gsize>(chunk_size, max_scope_bytes));
+
+  const sample_type* source =
+      reinterpret_cast<const sample_type*>(map.data + offset_bytes);
+  sample_type* dest = scope_.data();
+
   scope_chunk_++;
-  memcpy(dest, source, bytes);
+  if (bytes > 0) {
+    memcpy(dest, source, bytes);
+  }
 
   gst_buffer_unmap(latest_buffer_, &map);
 
-  if (scope_chunk_ == scope_chunks_) {
+  // Use >= so any overshoot still unrefs and releases latest_buffer_.
+  if (scope_chunk_ >= scope_chunks_) {
     gst_buffer_unref(latest_buffer_);
     latest_buffer_ = nullptr;
   }
@@ -522,7 +555,7 @@ bool GstEngine::Load(const MediaPlaybackRequest& req,
 
   if (crossfade) StartFadeout();
 
-  BufferingFinished();
+  FinishBufferingTask();
   current_pipeline_ = pipeline;
 
   SetVolume(volume_);
@@ -539,7 +572,7 @@ bool GstEngine::Load(const MediaPlaybackRequest& req,
 }
 
 void GstEngine::StartFadeout() {
-  if (is_fading_out_to_pause_) return;
+  if (is_fading_out_to_pause_ || !current_pipeline_) return;
 
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
@@ -551,6 +584,8 @@ void GstEngine::StartFadeout() {
 }
 
 void GstEngine::StartFadeoutPause() {
+  if (!current_pipeline_) return;
+
   fadeout_pause_pipeline_ = current_pipeline_;
   disconnect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
 
@@ -597,6 +632,20 @@ void GstEngine::PlayDone(GstStateChangeReturn ret, const quint64 offset_nanosec,
       MediaPlaybackRequest new_req = playback_req_;
       new_req.url_ = redirect_url;
       current_pipeline_ = CreatePipeline(new_req, end_nanosec_);
+      if (!current_pipeline_) {
+        qLog(Warning) << "Could not create pipeline for redirect"
+                      << redirect_url;
+        FinishBufferingTask();
+        emit StateChanged(Engine::Error);
+        emit InvalidMediaRequested(playback_req_);
+        return;
+      }
+      // Re-apply audio settings because CreatePipeline creates a fresh
+      // pipeline with default volume, EQ, and balance values.
+      SetVolume(volume_);
+      SetEqualizerEnabled(equalizer_enabled_);
+      SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+      SetStereoBalance(stereo_balance_);
       Play(offset_nanosec);
       return;
     }
@@ -604,7 +653,7 @@ void GstEngine::PlayDone(GstStateChangeReturn ret, const quint64 offset_nanosec,
     // Failure - give up
     qLog(Warning) << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
-    BufferingFinished();
+    FinishBufferingTask();
     return;
   }
 
@@ -630,7 +679,14 @@ void GstEngine::Stop(bool stop_after) {
   // Check if we started a fade out. If it isn't finished yet and the user
   // pressed stop, we cancel the fader and just stop the playback.
   if (is_fading_out_to_pause_) {
-    disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    // Disconnect both pipelines because fadeout_pause_pipeline_ may still be
+    // active or distinct when current_pipeline_ has changed or been cleared.
+    if (fadeout_pause_pipeline_) {
+      disconnect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    }
+    if (current_pipeline_) {
+      disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    }
     is_fading_out_to_pause_ = false;
     has_faded_out_ = true;
 
@@ -641,7 +697,7 @@ void GstEngine::Stop(bool stop_after) {
   if (fadeout_enabled_ && current_pipeline_ && !stop_after) StartFadeout();
 
   current_pipeline_.reset();
-  BufferingFinished();
+  FinishBufferingTask();
   emit StateChanged(Engine::Empty);
 }
 
@@ -651,8 +707,12 @@ void GstEngine::FadeoutFinished() {
 }
 
 void GstEngine::FadeoutPauseFinished() {
-  fadeout_pause_pipeline_->SetState(GST_STATE_PAUSED);
-  current_pipeline_->SetState(GST_STATE_PAUSED);
+  if (fadeout_pause_pipeline_) {
+    fadeout_pause_pipeline_->SetState(GST_STATE_PAUSED);
+  }
+  if (current_pipeline_) {
+    current_pipeline_->SetState(GST_STATE_PAUSED);
+  }
   emit StateChanged(Engine::Paused);
   StopTimers();
 
@@ -670,12 +730,18 @@ void GstEngine::Pause() {
   // Check if we started a fade out. If it isn't finished yet and the user
   // pressed play, we inverse the fader and resume the playback.
   if (is_fading_out_to_pause_) {
+    // Cancel fadeout_pause_pipeline_ too so its FaderFinished() cannot pause
+    // playback after resuming.
+    if (fadeout_pause_pipeline_) {
+      disconnect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    }
     disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
     current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
                                   QTimeLine::Forward, QEasingCurve::InOutQuad,
                                   false);
     is_fading_out_to_pause_ = false;
     has_faded_out_ = false;
+    fadeout_pause_pipeline_.reset();
     emit StateChanged(Engine::Playing);
     return;
   }
@@ -825,7 +891,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   current_pipeline_.reset();
 
-  BufferingFinished();
+  FinishBufferingTask();
   emit StateChanged(Engine::Error);
   // Unable to play this media request
   emit InvalidMediaRequested(playback_req_);
@@ -851,7 +917,7 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
 
   if (!has_next_track) {
     current_pipeline_.reset();
-    BufferingFinished();
+    FinishBufferingTask();
   }
   emit TrackEnded();
 }
@@ -909,7 +975,7 @@ GstEngine::PluginDetailsList GstEngine::GetPluginList(
   return ret;
 }
 
-shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
+shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(bool attach_consumers) {
   EnsureInitialised();
 
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
@@ -935,9 +1001,11 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_sample_rate(sample_rate_);
   ret->set_format(format_);
 
-  ret->AddBufferConsumer(this);
-  for (BufferConsumer* consumer : buffer_consumers_) {
-    ret->AddBufferConsumer(consumer);
+  if (attach_consumers) {
+    ret->AddBufferConsumer(this);
+    for (BufferConsumer* consumer : buffer_consumers_) {
+      ret->AddBufferConsumer(consumer);
+    }
   }
 
   connect(ret.get(), SIGNAL(EndOfStreamReached(int, bool)),
@@ -955,8 +1023,9 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
 }
 
 shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(
-    const MediaPlaybackRequest& req, qint64 end_nanosec) {
-  shared_ptr<GstEnginePipeline> ret = CreatePipeline();
+    const MediaPlaybackRequest& req, qint64 end_nanosec,
+    bool attach_consumers) {
+  shared_ptr<GstEnginePipeline> ret = CreatePipeline(attach_consumers);
 
   if (req.url_.scheme() == "hypnotoad") {
     if (!ret->InitFromString(kHypnotoadPipeline)) {
@@ -982,7 +1051,15 @@ void GstEngine::AddBufferConsumer(BufferConsumer* consumer) {
 
 void GstEngine::RemoveBufferConsumer(BufferConsumer* consumer) {
   buffer_consumers_.removeAll(consumer);
+  // Also detach from draining fadeout and background pipelines so GStreamer
+  // streaming threads cannot invoke ConsumeBuffer() on a destroyed consumer.
   if (current_pipeline_) current_pipeline_->RemoveBufferConsumer(consumer);
+  if (fadeout_pipeline_) fadeout_pipeline_->RemoveBufferConsumer(consumer);
+  if (fadeout_pause_pipeline_)
+    fadeout_pause_pipeline_->RemoveBufferConsumer(consumer);
+  for (const shared_ptr<GstEnginePipeline>& pipeline : background_streams_) {
+    if (pipeline) pipeline->RemoveBufferConsumer(consumer);
+  }
 }
 
 int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
@@ -1010,7 +1087,7 @@ void GstEngine::BackgroundStreamPlayDone(GstStateChangeReturn ret,
 }
 
 int GstEngine::AddBackgroundStream(const QUrl& url) {
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url, 0);
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url, 0, false);
   if (!pipeline) {
     return -1;
   }
@@ -1025,6 +1102,7 @@ void GstEngine::StopBackgroundStream(int id) {
 
 void GstEngine::BackgroundStreamFinished() {
   GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
+  if (!pipeline) return;
   pipeline->SetNextReq(pipeline->url(), 0, 0);
 }
 
@@ -1036,6 +1114,10 @@ void GstEngine::SetBackgroundStreamVolume(int id, int volume) {
 }
 
 void GstEngine::BufferingStarted() {
+  // Ignore buffering signals from crossfading, background, or old pipelines
+  // so they don't overwrite or prematurely close current_pipeline_'s task.
+  if (sender() && sender() != current_pipeline_.get()) return;
+
   if (buffering_task_id_ != -1) {
     task_manager_->SetTaskFinished(buffering_task_id_);
   }
@@ -1045,10 +1127,20 @@ void GstEngine::BufferingStarted() {
 }
 
 void GstEngine::BufferingProgress(int percent) {
+  if (sender() && sender() != current_pipeline_.get()) return;
+  // GStreamer can emit late progress after the buffering task finished.
+  if (buffering_task_id_ == -1) return;
+
   task_manager_->SetTaskProgress(buffering_task_id_, percent, 100);
 }
 
 void GstEngine::BufferingFinished() {
+  if (sender() && sender() != current_pipeline_.get()) return;
+
+  FinishBufferingTask();
+}
+
+void GstEngine::FinishBufferingTask() {
   if (buffering_task_id_ != -1) {
     task_manager_->SetTaskFinished(buffering_task_id_);
     buffering_task_id_ = -1;

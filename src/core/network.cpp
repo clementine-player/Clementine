@@ -30,58 +30,55 @@
 #include "utilities.h"
 
 QMutex ThreadSafeNetworkDiskCache::sMutex;
-QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = nullptr;
 
 ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent)
-    : QAbstractNetworkCache(parent) {
-  QMutexLocker l(&sMutex);
-  if (!sCache) {
-    sCache = new QNetworkDiskCache;
-    sCache->setCacheDirectory(
-        Utilities::GetConfigPath(Utilities::Path_NetworkCache));
-  }
+    : QAbstractNetworkCache(parent), cache_(new QNetworkDiskCache(this)) {
+  // Each instance owns a QNetworkDiskCache on its own thread instead of
+  // sharing one cross-thread QObject; sMutex still guards the shared disk dir.
+  cache_->setCacheDirectory(
+      Utilities::GetConfigPath(Utilities::Path_NetworkCache));
 }
 
 qint64 ThreadSafeNetworkDiskCache::cacheSize() const {
   QMutexLocker l(&sMutex);
-  return sCache->cacheSize();
+  return cache_->cacheSize();
 }
 
 QIODevice* ThreadSafeNetworkDiskCache::data(const QUrl& url) {
   QMutexLocker l(&sMutex);
-  return sCache->data(url);
+  return cache_->data(url);
 }
 
 void ThreadSafeNetworkDiskCache::insert(QIODevice* device) {
   QMutexLocker l(&sMutex);
-  sCache->insert(device);
+  cache_->insert(device);
 }
 
 QNetworkCacheMetaData ThreadSafeNetworkDiskCache::metaData(const QUrl& url) {
   QMutexLocker l(&sMutex);
-  return sCache->metaData(url);
+  return cache_->metaData(url);
 }
 
 QIODevice* ThreadSafeNetworkDiskCache::prepare(
     const QNetworkCacheMetaData& metaData) {
   QMutexLocker l(&sMutex);
-  return sCache->prepare(metaData);
+  return cache_->prepare(metaData);
 }
 
 bool ThreadSafeNetworkDiskCache::remove(const QUrl& url) {
   QMutexLocker l(&sMutex);
-  return sCache->remove(url);
+  return cache_->remove(url);
 }
 
 void ThreadSafeNetworkDiskCache::updateMetaData(
     const QNetworkCacheMetaData& metaData) {
   QMutexLocker l(&sMutex);
-  sCache->updateMetaData(metaData);
+  cache_->updateMetaData(metaData);
 }
 
 void ThreadSafeNetworkDiskCache::clear() {
   QMutexLocker l(&sMutex);
-  sCache->clear();
+  cache_->clear();
 }
 
 NetworkAccessManager::NetworkAccessManager(QObject* parent)
@@ -188,7 +185,22 @@ RedirectFollower::RedirectFollower(QNetworkReply* first_reply,
     : QObject(nullptr),
       current_reply_(first_reply),
       redirects_remaining_(max_redirects) {
-  ConnectReply(first_reply);
+  if (first_reply) {
+    ConnectReply(first_reply);
+  }
+}
+
+RedirectFollower::~RedirectFollower() {
+  if (current_reply_) {
+    // Disconnect first so abort() cannot trigger slots during destruction,
+    // and defer reply deletion in case NAM or callers still hold references.
+    current_reply_->disconnect(this);
+    if (current_reply_->isRunning()) {
+      current_reply_->abort();
+    }
+    current_reply_->deleteLater();
+    current_reply_.clear();
+  }
 }
 
 void RedirectFollower::ConnectReply(QNetworkReply* reply) {
@@ -203,6 +215,8 @@ void RedirectFollower::ConnectReply(QNetworkReply* reply) {
 }
 
 void RedirectFollower::ReadyRead() {
+  if (!current_reply_) return;
+
   // Don't re-emit this signal for redirect replies.
   if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
           .isValid()) {
@@ -213,25 +227,41 @@ void RedirectFollower::ReadyRead() {
 }
 
 void RedirectFollower::ReplyFinished() {
-  current_reply_->deleteLater();
+  // Snapshot and disconnect before scheduling deletion or issuing a redirect,
+  // so re-entrant signals cannot replace current_reply_ mid-method or fire
+  // stale handlers on the completed reply.
+  QNetworkReply* old_reply = current_reply_.data();
+  if (!old_reply) return;
 
-  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
-          .isValid()) {
+  old_reply->disconnect(this);
+  old_reply->deleteLater();
+
+  const QVariant redirect_target =
+      old_reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  if (redirect_target.isValid()) {
     if (redirects_remaining_-- == 0) {
       emit finished();
       return;
     }
 
-    const QUrl next_url = current_reply_->url().resolved(
-        current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
-            .toUrl());
+    const QUrl next_url = old_reply->url().resolved(redirect_target.toUrl());
 
-    QNetworkRequest req(current_reply_->request());
+    QNetworkRequest req(old_reply->request());
     req.setUrl(next_url);
 
-    current_reply_ = current_reply_->manager()->get(req);
-    ConnectReply(current_reply_);
-    return;
+    QNetworkAccessManager* manager = old_reply->manager();
+    if (!manager) {
+      // Emit finished() so callers don't hang if the NAM was already destroyed.
+      emit finished();
+      return;
+    }
+
+    current_reply_ = manager->get(req);
+    if (current_reply_) {
+      ConnectReply(current_reply_);
+      return;
+    }
+    // Fall through to emit finished() if get() failed to create a reply.
   }
 
   emit finished();

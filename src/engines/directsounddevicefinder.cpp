@@ -41,7 +41,8 @@ BOOL DirectSoundDeviceFinder::EnumerateCallback(LPGUID guid, LPCSTR description,
 
   if (guid) {
     Device dev;
-    dev.description = QString::fromUtf8(description);
+    // DirectSoundEnumerateA provides ANSI strings in the system code page.
+    dev.description = QString::fromLocal8Bit(description);
     dev.device_property_value = QUuid(*guid).toByteArray();
     dev.icon_name = GuessIconName(dev.description);
     state->devices.append(dev);

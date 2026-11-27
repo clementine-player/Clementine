@@ -19,6 +19,7 @@
 
 #include <CoreAudio/AudioHardware.h>
 
+#include <cstdlib>
 #include <memory>
 
 #include "core/logging.h"
@@ -26,25 +27,41 @@
 
 namespace {
 
+// CoreAudio properties with trailing arrays are allocated with std::malloc,
+// so unique_ptr must release them with std::free instead of delete.
+struct FreeDeleter {
+  void operator()(void* ptr) const { std::free(ptr); }
+};
+
 template <typename T>
-std::unique_ptr<T> GetProperty(const AudioDeviceID& device_id,
-                               const AudioObjectPropertyAddress& address,
-                               UInt32* size_bytes_out = nullptr) {
+using MallocPtr = std::unique_ptr<T, FreeDeleter>;
+
+template <typename T>
+MallocPtr<T> GetProperty(const AudioDeviceID& device_id,
+                         const AudioObjectPropertyAddress& address,
+                         UInt32* size_bytes_out = nullptr) {
   UInt32 size_bytes = 0;
   OSStatus status =
       AudioObjectGetPropertyDataSize(device_id, &address, 0, NULL, &size_bytes);
-  if (status != kAudioHardwareNoError) {
-    qLog(Warning) << "AudioObjectGetPropertyDataSize failed:" << status;
-    return std::unique_ptr<T>();
+  if (status != kAudioHardwareNoError || size_bytes == 0) {
+    // size_bytes == 0 occurs for devices without the queried scope (e.g.,
+    // input-only devices) and would make malloc(0)/header reads invalid.
+    if (status != kAudioHardwareNoError) {
+      qLog(Warning) << "AudioObjectGetPropertyDataSize failed:" << status;
+    }
+    return nullptr;
   }
 
-  std::unique_ptr<T> ret(reinterpret_cast<T*>(malloc(size_bytes)));
+  MallocPtr<T> ret(reinterpret_cast<T*>(std::malloc(size_bytes)));
+  if (!ret) {
+    return nullptr;
+  }
 
   status = AudioObjectGetPropertyData(device_id, &address, 0, NULL, &size_bytes,
                                       ret.get());
   if (status != kAudioHardwareNoError) {
     qLog(Warning) << "AudioObjectGetPropertyData failed:" << status;
-    return std::unique_ptr<T>();
+    return nullptr;
   }
 
   if (size_bytes_out) {
@@ -143,7 +160,7 @@ QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
                                         kAudioObjectPropertyElementMaster};
 
   UInt32 device_size_bytes = 0;
-  std::unique_ptr<AudioDeviceID> devices = GetProperty<AudioDeviceID>(
+  MallocPtr<AudioDeviceID> devices = GetProperty<AudioDeviceID>(
       kAudioObjectSystemObject, address, &device_size_bytes);
   if (!devices.get()) {
     return ret;
@@ -157,9 +174,12 @@ QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
     // Determine if the device is an output device (it is an output device if
     // it has output channels)
     address.mSelector = kAudioDevicePropertyStreamConfiguration;
-    std::unique_ptr<AudioBufferList> buffer_list =
-        GetProperty<AudioBufferList>(id, address);
-    if (!buffer_list.get() || buffer_list->mNumberBuffers == 0) {
+    UInt32 buffer_list_size = 0;
+    MallocPtr<AudioBufferList> buffer_list =
+        GetProperty<AudioBufferList>(id, address, &buffer_list_size);
+    // Verify the buffer actually holds mNumberBuffers before dereferencing it.
+    if (!buffer_list.get() || buffer_list_size < sizeof(UInt32) ||
+        buffer_list->mNumberBuffers == 0) {
       continue;
     }
 

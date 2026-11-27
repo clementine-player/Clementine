@@ -25,6 +25,7 @@
 #include <QBuffer>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QScopeGuard>
 #include <QTimer>
 #include <QUrl>
 #include <QtDebug>
@@ -63,6 +64,8 @@ using std::placeholders::_1;
 
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
+// 50 MiB accommodates large podcast feeds without unbounded remote buffering.
+const int SongLoader::kMaxRemotePlaylistSize = 50 * 1024 * 1024;
 
 SongLoader::SongLoader(LibraryBackendInterface* library, const Player* player,
                        QObject* parent)
@@ -76,6 +79,7 @@ SongLoader::SongLoader(LibraryBackendInterface* library, const Player* player,
       success_(false),
       parser_(nullptr),
       is_podcast_(false),
+      remote_finished_(false),
       library_(library),
       player_(player) {
   if (sRawUriSchemes.isEmpty()) {
@@ -96,9 +100,22 @@ SongLoader::SongLoader(LibraryBackendInterface* library, const Player* player,
 }
 
 SongLoader::~SongLoader() {
-  if (pipeline_) {
+  std::shared_ptr<GstElement> pipeline;
+  {
+    // Move pipeline_ out and mark Finished under mutex_, then detach the bus
+    // handler and stop GStreamer outside mutex_ so callbacks cannot deadlock.
+    QMutexLocker l(&mutex_);
     state_ = Finished;
-    gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
+    pipeline = std::move(pipeline_);
+  }
+
+  if (pipeline) {
+    GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
+    if (bus) {
+      gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
+      gst_object_unref(bus);
+    }
+    gst_element_set_state(pipeline.get(), GST_STATE_NULL);
   }
 
   delete podcast_parser_;
@@ -155,10 +172,12 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 
 SongLoader::Result SongLoader::LoadAudioCD() {
 #ifdef HAVE_AUDIOCD
-  CddaSongLoader* cdda_song_loader = new CddaSongLoader;
+  // Parent the loader and pass `this` as the lambda receiver so destroying
+  // SongLoader early disconnects the signal and avoids a dangling `this`.
+  CddaSongLoader* cdda_song_loader = new CddaSongLoader(QUrl(), this);
   connect(cdda_song_loader, &CddaSongLoader::SongsUpdated, this,
           &SongLoader::AudioCDTracksLoadedSlot);
-  connect(cdda_song_loader, &CddaSongLoader::Finished,
+  connect(cdda_song_loader, &CddaSongLoader::Finished, this,
           [this, cdda_song_loader]() {
             cdda_song_loader->deleteLater();
             emit LoadAudioCDFinished(true);
@@ -246,14 +265,17 @@ SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   if (QFile::exists(matching_cue)) {
     // it's a cue - create virtual tracks
     QFile cue(matching_cue);
-    (void)cue.open(QIODevice::ReadOnly);
-
-    SongList song_list = cue_parser_->Load(&cue, matching_cue,
-                                           QDir(filename.section('/', 0, -2)));
-    for (const Song& song : song_list) {
-      if (song.is_valid()) songs_ << song;
+    if (!cue.open(QIODevice::ReadOnly)) {
+      // Fall through to load the raw audio file if the CUE cannot be opened.
+      qLog(Warning) << "Failed to open CUE sheet" << matching_cue;
+    } else {
+      // Use info.dir() instead of splitting '/' so Windows paths work.
+      SongList song_list = cue_parser_->Load(&cue, matching_cue, info.dir());
+      for (const Song& song : song_list) {
+        if (song.is_valid()) songs_ << song;
+      }
+      return Success;
     }
-    return Success;
   }
 
   // Assume it's just a normal file
@@ -335,32 +357,59 @@ void SongLoader::AddAsRawStream() {
 
 void SongLoader::Timeout() {
   qLog(Warning) << "Timed out loading" << url_.toString();
-  state_ = Finished;
-  success_ = false;
-  StopTypefind();
+  bool should_stop = false;
+  {
+    QMutexLocker l(&mutex_);
+    should_stop = StopTypefindAsyncLocked(false);
+  }
+  if (should_stop) {
+    StopTypefind();
+  }
 }
 
 void SongLoader::StopTypefind() {
-  // Destroy the pipeline
-  if (pipeline_) {
-    gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
-    pipeline_.reset();
+  std::shared_ptr<GstElement> pipeline;
+  bool success = false;
+  ParserBase* parser = nullptr;
+  bool is_podcast = false;
+  QByteArray buffer;
+  QUrl url;
+
+  {
+    QMutexLocker l(&mutex_);
+    pipeline = std::move(pipeline_);
+    success = success_;
+    parser = parser_;
+    is_podcast = is_podcast_;
+    buffer = buffer_;
+    url = url_;
+  }
+
+  // Clear the bus sync handler and stop GStreamer outside mutex_ to prevent
+  // lock-order deadlocks with callbacks holding GStreamer stream locks.
+  if (pipeline) {
+    GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
+    if (bus) {
+      gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
+      gst_object_unref(bus);
+    }
+    gst_element_set_state(pipeline.get(), GST_STATE_NULL);
   }
   timeout_timer_->stop();
 
-  if (success_ && parser_) {
-    qLog(Debug) << "Parsing" << url_ << "with" << parser_->name();
+  if (success && parser) {
+    qLog(Debug) << "Parsing" << url << "with" << parser->name();
 
     // Parse the playlist
-    QBuffer buf(&buffer_);
+    QBuffer buf(&buffer);
     buf.open(QIODevice::ReadOnly);
-    songs_ = parser_->Load(&buf);
-  } else if (success_ && is_podcast_) {
-    qLog(Debug) << "Parsing" << url_ << "as a podcast";
+    songs_ = parser->Load(&buf);
+  } else if (success && is_podcast) {
+    qLog(Debug) << "Parsing" << url << "as a podcast";
 
-    QBuffer buf(&buffer_);
+    QBuffer buf(&buffer);
     buf.open(QIODevice::ReadOnly);
-    QVariant result = podcast_parser_->Load(&buf, url_);
+    QVariant result = podcast_parser_->Load(&buf, url);
 
     if (result.isNull()) {
       qLog(Warning) << "Failed to parse podcast";
@@ -371,13 +420,18 @@ void SongLoader::StopTypefind() {
       CallOn(service, &PodcastService::SubscribeAndShow, result);
     }
 
-  } else if (success_) {
-    qLog(Debug) << "Loading" << url_ << "as raw stream";
+  } else if (success) {
+    qLog(Debug) << "Loading" << url << "as raw stream";
 
     // It wasn't a playlist - just put the URL in as a stream
     AddAsRawStream();
   }
 
+  {
+    QMutexLocker l(&mutex_);
+    // Set before emitting so LoadRemote() won't enter loop.exec() and miss it.
+    remote_finished_ = true;
+  }
   emit LoadRemoteFinished();
 }
 
@@ -438,98 +492,148 @@ SongLoader::Result SongLoader::LoadRemote() {
   // Connect callbacks
   GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
   CHECKED_GCONNECT(typefind, "have-type", &TypeFound, this);
-  gst_bus_set_sync_handler(bus, BusCallbackSync, this, NULL);
-  gst_bus_add_watch(bus, BusCallback, this);
+  // Handle messages only in the sync handler (dropping them there) instead of
+  // a GLib bus watch, which could outlive teardown and double-handle errors.
+  gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
   gst_object_unref(bus);
 
   // Add a probe to the sink so we can capture the data if it's a playlist
   GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
-  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, nullptr);
   gst_object_unref(pad);
 
   QEventLoop loop;
   loop.connect(this, SIGNAL(LoadRemoteFinished()), SLOT(quit()));
+
+  {
+    QMutexLocker l(&mutex_);
+    state_ = WaitingForType;
+    success_ = false;
+    parser_ = nullptr;
+    is_podcast_ = false;
+    mime_type_.clear();
+    buffer_.clear();
+    remote_finished_ = false;
+    pipeline_ = pipeline;
+  }
 
   // This runs on a worker thread, and a timer can only be started from the
   // thread it belongs to. StopTypefind() stops it there too, and is queued
   // after this.
   PostTo(timeout_timer_, qOverload<int>(&QTimer::start), timeout_);
 
-  // Start "playing"
-  gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
-  pipeline_ = pipeline;
+  // Publish pipeline_ under mutex_ before PLAYING so IsPipelinePlaying() and
+  // streaming callbacks immediately see it, and fail fast if PLAYING fails.
+  if (gst_element_set_state(pipeline.get(), GST_STATE_PLAYING) ==
+      GST_STATE_CHANGE_FAILURE) {
+    StopTypefindAsync(false);
+  }
 
   // Wait until loading is finished
-  loop.exec();
+  {
+    QMutexLocker l(&mutex_);
+    // Check remote_finished_ before exec() in case StopTypefind() already ran.
+    if (!remote_finished_) {
+      l.unlock();
+      loop.exec();
+    }
+  }
 
-  // success_ is what StopTypefindAsync() recorded for how the pipeline
-  // actually ended. Returning Success unconditionally here hid every remote
-  // failure - a load that errored out leaves songs_ empty, so the caller
-  // inserted nothing and never learned why. Report it so SongLoaderInserter
-  // emits Error() and the message reaches the UI (and --play-and-exit).
+  QMutexLocker l(&mutex_);
   return success_ ? Success : Error;
 }
 
 void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   SongLoader* instance = static_cast<SongLoader*>(self);
 
-  if (instance->state_ != WaitingForType) return;
+  bool should_stop = false;
+  {
+    QMutexLocker l(&instance->mutex_);
+    if (instance->state_ != WaitingForType) return;
 
-  // Check the mimetype
-  instance->mime_type_ =
-      gst_structure_get_name(gst_caps_get_structure(caps, 0));
-  qLog(Debug) << "Mime type is" << instance->mime_type_;
-  if (instance->mime_type_ == "text/plain" ||
-      instance->mime_type_ == "text/uri-list" ||
-      instance->podcast_parser_->supported_mime_types().contains(
-          instance->mime_type_)) {
-    // Yeah it might be a playlist, let's get some data and have a better look
-    instance->state_ = WaitingForMagic;
-    return;
+    // Check the mimetype
+    instance->mime_type_ =
+        gst_structure_get_name(gst_caps_get_structure(caps, 0));
+    qLog(Debug) << "Mime type is" << instance->mime_type_;
+    if (instance->mime_type_ == "text/plain" ||
+        instance->mime_type_ == "text/uri-list" ||
+        instance->podcast_parser_->supported_mime_types().contains(
+            instance->mime_type_)) {
+      // Yeah it might be a playlist, let's get some data and have a better look
+      instance->state_ = WaitingForMagic;
+      return;
+    }
+
+    // Nope, not a playlist - we're done
+    should_stop = instance->StopTypefindAsyncLocked(true);
   }
-
-  // Nope, not a playlist - we're done
-  instance->StopTypefindAsync(true);
+  if (should_stop) PostTo(instance, &SongLoader::StopTypefind);
 }
 
 GstPadProbeReturn SongLoader::DataReady(GstPad*, GstPadProbeInfo* info,
                                         gpointer self) {
   SongLoader* instance = reinterpret_cast<SongLoader*>(self);
 
-  if (instance->state_ == Finished) return GST_PAD_PROBE_OK;
-
   GstBuffer* buffer = gst_pad_probe_info_get_buffer(info);
-  GstMapInfo map;
-  gst_buffer_map(buffer, &map, GST_MAP_READ);
+  if (!buffer) return GST_PAD_PROBE_OK;
 
-  // Append the data to the buffer
-  instance->buffer_.append(reinterpret_cast<const char*>(map.data), map.size);
-  qLog(Debug) << "Received total" << instance->buffer_.size() << "bytes";
+  GstMapInfo map;
+  if (!gst_buffer_map(buffer, &map, GST_MAP_READ)) {
+    return GST_PAD_PROBE_OK;
+  }
+
+  bool check_magic = false;
+  bool hit_buffer_limit = false;
+  bool should_stop = false;
+  State current_state = Finished;
+  int current_size = 0;
+
+  {
+    QMutexLocker l(&instance->mutex_);
+    if (instance->state_ == Finished) {
+      // Unlock before gst_buffer_unmap to keep lock nesting minimal.
+      l.unlock();
+      gst_buffer_unmap(buffer, &map);
+      return GST_PAD_PROBE_OK;
+    }
+
+    // Cap buffered bytes so non-audio streams can't grow buffer_ unboundedly.
+    const int remaining = kMaxRemotePlaylistSize - instance->buffer_.size();
+    if (remaining > 0) {
+      const int to_copy = qMin(static_cast<int>(map.size), remaining);
+      instance->buffer_.append(reinterpret_cast<const char*>(map.data),
+                               to_copy);
+      qLog(Debug) << "Received total" << instance->buffer_.size() << "bytes";
+    }
+
+    current_state = instance->state_;
+    current_size = instance->buffer_.size();
+    if (current_size >= kMaxRemotePlaylistSize) {
+      hit_buffer_limit = true;
+      should_stop = instance->StopTypefindAsyncLocked(false);
+    } else if (current_state == WaitingForMagic &&
+               current_size >= PlaylistParser::kMagicSize) {
+      check_magic = true;
+    }
+  }
   gst_buffer_unmap(buffer, &map);
 
-  if (instance->state_ == WaitingForMagic &&
-      (instance->buffer_.size() >= PlaylistParser::kMagicSize ||
-       !instance->IsPipelinePlaying())) {
+  if (hit_buffer_limit) {
+    qLog(Warning) << "Remote buffer limit exceeded for"
+                  << instance->url_.toString();
+    if (should_stop) PostTo(instance, &SongLoader::StopTypefind);
+    return GST_PAD_PROBE_OK;
+  }
+
+  // Query pipeline state and inspect magic outside mutex_ to avoid lock-order
+  // inversion with GStreamer locks.
+  if (check_magic ||
+      (current_state == WaitingForMagic && !instance->IsPipelinePlaying())) {
     // Got enough that we can test the magic
     instance->MagicReady();
   }
 
   return GST_PAD_PROBE_OK;
-}
-
-gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
-  SongLoader* instance = reinterpret_cast<SongLoader*>(self);
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR:
-      instance->ErrorMessageReceived(msg);
-      break;
-
-    default:
-      break;
-  }
-
-  return TRUE;
 }
 
 GstBusSyncReply SongLoader::BusCallbackSync(GstBus*, GstMessage* msg,
@@ -548,61 +652,100 @@ GstBusSyncReply SongLoader::BusCallbackSync(GstBus*, GstMessage* msg,
     default:
       break;
   }
-  return GST_BUS_PASS;
+  // Unref and drop every message here because we have no GLib bus watch;
+  // GST_BUS_PASS would queue messages onto the bus indefinitely.
+  gst_message_unref(msg);
+  return GST_BUS_DROP;
 }
 
 void SongLoader::ErrorMessageReceived(GstMessage* msg) {
-  if (state_ == Finished) return;
-
-  GError* error;
-  gchar* debugs;
+  GError* error = nullptr;
+  gchar* debugs = nullptr;
 
   gst_message_parse_error(msg, &error, &debugs);
-  qLog(Error) << QString::fromLocal8Bit(error->message);
-  qLog(Error) << QString::fromLocal8Bit(debugs);
-
-  QString message_str = error->message;
-
-  g_error_free(error);
-  free(debugs);
-
-  if (state_ == WaitingForType &&
-      message_str == gst_error_get_message(GST_STREAM_ERROR,
-                                           GST_STREAM_ERROR_TYPE_NOT_FOUND)) {
-    // Don't give up - assume it's a playlist and see if one of our parsers can
-    // read it.
-    state_ = WaitingForMagic;
-    return;
+  QString message_str;
+  if (error) {
+    qLog(Error) << QString::fromLocal8Bit(error->message);
+    message_str = QString::fromLocal8Bit(error->message);
+    g_error_free(error);
+  }
+  if (debugs) {
+    qLog(Error) << QString::fromLocal8Bit(debugs);
+    // GStreamer allocates debug/error strings via GLib; free with g_free().
+    g_free(debugs);
   }
 
-  StopTypefindAsync(false);
+  bool should_stop = false;
+  {
+    QMutexLocker l(&mutex_);
+    if (state_ == Finished) return;
+
+    if (state_ == WaitingForType) {
+      gchar* type_not_found = gst_error_get_message(
+          GST_STREAM_ERROR, GST_STREAM_ERROR_TYPE_NOT_FOUND);
+      const bool is_type_not_found =
+          type_not_found && message_str == type_not_found;
+      g_free(type_not_found);
+      if (is_type_not_found) {
+        // Don't give up - assume it's a playlist and see if one of our parsers
+        // can read it.
+        state_ = WaitingForMagic;
+        return;
+      }
+    }
+
+    should_stop = StopTypefindAsyncLocked(false);
+  }
+  if (should_stop) PostTo(this, &SongLoader::StopTypefind);
 }
 
 void SongLoader::EndOfStreamReached() {
-  qLog(Debug) << Q_FUNC_INFO << state_;
-  switch (state_) {
-    case Finished:
-      break;
+  bool run_magic = false;
+  bool should_stop = false;
 
-    case WaitingForMagic:
-      // Do the magic on the data we have already
-      MagicReady();
-      if (state_ == Finished) break;
-    // It looks like a playlist, so parse it
+  {
+    QMutexLocker l(&mutex_);
+    qLog(Debug) << Q_FUNC_INFO << state_;
+    switch (state_) {
+      case Finished:
+        break;
 
-    // fallthrough
-    case WaitingForData:
-      // It's a playlist and we've got all the data - finish and parse it
-      StopTypefindAsync(true);
-      break;
+      case WaitingForMagic:
+        run_magic = true;
+        break;
 
-    case WaitingForType:
-      StopTypefindAsync(false);
-      break;
+      case WaitingForData:
+        // It's a playlist and we've got all the data - finish and parse it
+        should_stop = StopTypefindAsyncLocked(true);
+        break;
+
+      case WaitingForType:
+        should_stop = StopTypefindAsyncLocked(false);
+        break;
+    }
   }
+
+  if (run_magic) {
+    bool still_waiting = false;
+    {
+      QMutexLocker l(&mutex_);
+      if (state_ == Finished) return;
+      should_stop = MagicReadyLocked(&still_waiting);
+      // EOS already arrived, so if magic recognized a playlist (WaitingForData)
+      // parse whatever bytes we buffered instead of waiting for more data.
+      if (!should_stop && state_ == WaitingForData) {
+        should_stop = StopTypefindAsyncLocked(true);
+      }
+    }
+  }
+
+  if (should_stop) PostTo(this, &SongLoader::StopTypefind);
 }
 
-void SongLoader::MagicReady() {
+// Runs with mutex_ held; returns true if loading finished and the caller must
+// post StopTypefind() once mutex_ is released.
+bool SongLoader::MagicReadyLocked(bool* still_waiting_for_data) {
+  *still_waiting_for_data = false;
   qLog(Debug) << Q_FUNC_INFO;
   parser_ = playlist_parser_->ParserForMagic(buffer_, mime_type_);
   is_podcast_ = false;
@@ -616,8 +759,7 @@ void SongLoader::MagicReady() {
       qLog(Warning) << url_.toString()
                     << "is text, but not a recognised playlist";
       // It doesn't look like a playlist, so just finish
-      StopTypefindAsync(false);
-      return;
+      return StopTypefindAsyncLocked(false);
     }
   }
 
@@ -631,22 +773,47 @@ void SongLoader::MagicReady() {
       // HTTP makes it playable.
       parser_ = nullptr;
       url_.setScheme("mms");
-      StopTypefindAsync(true);
+      return StopTypefindAsyncLocked(true);
     }
   }
 
   state_ = WaitingForData;
+  *still_waiting_for_data = true;
+  return false;
+}
 
-  if (!IsPipelinePlaying()) {
+void SongLoader::MagicReady() {
+  bool still_waiting = false;
+  bool should_stop = false;
+  {
+    QMutexLocker l(&mutex_);
+    if (state_ == Finished) return;
+    should_stop = MagicReadyLocked(&still_waiting);
+  }
+  if (should_stop) {
+    PostTo(this, &SongLoader::StopTypefind);
+    return;
+  }
+
+  // Query pipeline state outside mutex_ to avoid lock inversion with GStreamer;
+  // if the stream already stopped, parse the buffered data immediately.
+  if (still_waiting && !IsPipelinePlaying()) {
     EndOfStreamReached();
   }
 }
 
 bool SongLoader::IsPipelinePlaying() {
+  std::shared_ptr<GstElement> pipeline;
+  {
+    QMutexLocker l(&mutex_);
+    pipeline = pipeline_;
+  }
+  if (!pipeline) return false;
+
   GstState state = GST_STATE_NULL;
   GstState pending_state = GST_STATE_NULL;
-  GstStateChangeReturn ret = gst_element_get_state(pipeline_.get(), &state,
-                                                   &pending_state, GST_SECOND);
+  GstStateChangeReturn ret =
+      gst_element_get_state(pipeline.get(), &state, &pending_state, GST_SECOND);
 
   if (ret == GST_STATE_CHANGE_ASYNC && pending_state == GST_STATE_PLAYING) {
     // We're still on the way to playing
@@ -655,11 +822,21 @@ bool SongLoader::IsPipelinePlaying() {
   return state == GST_STATE_PLAYING;
 }
 
-void SongLoader::StopTypefindAsync(bool success) {
+bool SongLoader::StopTypefindAsyncLocked(bool success) {
+  // Ensure StopTypefind() is posted at most once across concurrent callbacks.
+  if (state_ == Finished) return false;
   state_ = Finished;
   success_ = success;
+  return true;
+}
 
-  PostTo(this, &SongLoader::StopTypefind);
+void SongLoader::StopTypefindAsync(bool success) {
+  bool should_stop = false;
+  {
+    QMutexLocker l(&mutex_);
+    should_stop = StopTypefindAsyncLocked(success);
+  }
+  if (should_stop) PostTo(this, &SongLoader::StopTypefind);
 }
 
 bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
@@ -673,6 +850,9 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
 
   // Getting headers:
   QNetworkReply* const headers_reply = manager.head(req);
+  // Delete replies on return since QNetworkAccessManager retains ownership.
+  auto cleanup_headers =
+      qScopeGuard([headers_reply] { headers_reply->deleteLater(); });
   WaitForSignal(headers_reply, SIGNAL(finished()));
 
   if (headers_reply->error() != QNetworkReply::NoError) {
@@ -693,6 +873,7 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
   // We know it is a playlist!
   // Getting its contents:
   QNetworkReply* const data_reply = manager.get(req);
+  auto cleanup_data = qScopeGuard([data_reply] { data_reply->deleteLater(); });
   WaitForSignal(data_reply, SIGNAL(finished()));
 
   if (data_reply->error() != QNetworkReply::NoError) {

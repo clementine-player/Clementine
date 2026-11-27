@@ -231,6 +231,9 @@ class Player : public PlayerInterface {
   QMap<QString, UrlHandler*> url_handlers_;
 
   QUrl loading_async_;
+  // Kept separate from loading_async_ so async preloads finishing during the
+  // prior track aren't dropped or treated as blocking manual PlayAt() calls.
+  QUrl preloading_async_;
 
   int volume_before_mute_;
 

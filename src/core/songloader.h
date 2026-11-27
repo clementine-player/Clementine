@@ -25,6 +25,7 @@
 
 #include <gst/gst.h>
 
+#include <QMutex>
 #include <QObject>
 #include <QThreadPool>
 #include <QUrl>
@@ -115,16 +116,18 @@ class SongLoader : public QObject {
   static GstPadProbeReturn DataReady(GstPad*, GstPadProbeInfo* buf,
                                      gpointer self);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
-  static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
 
   void StopTypefindAsync(bool success);
+  bool StopTypefindAsyncLocked(bool success);
   void ErrorMessageReceived(GstMessage* msg);
   void EndOfStreamReached();
+  bool MagicReadyLocked(bool* still_waiting_for_data);
   void MagicReady();
   bool IsPipelinePlaying();
 
  private:
   static QSet<QString> sRawUriSchemes;
+  static const int kMaxRemotePlaylistSize;
 
   QUrl url_;
   SongList songs_;
@@ -137,12 +140,19 @@ class SongLoader : public QObject {
   // For async loads
   std::function<Result()> preload_func_;
   int timeout_;
+  // Guards async remote-typefind state shared across caller, owner, and
+  // GStreamer threads: state_, success_, parser_, is_podcast_, mime_type_,
+  // buffer_, remote_finished_, and pipeline_.
+  mutable QMutex mutex_;
   State state_;
   bool success_;
   ParserBase* parser_;
   QString mime_type_;
   bool is_podcast_;
   QByteArray buffer_;
+  // Prevents LoadRemote()'s event loop from missing LoadRemoteFinished() if
+  // StopTypefind() completes before loop.exec() starts.
+  bool remote_finished_;
   LibraryBackendInterface* library_;
   const Player* player_;
 
