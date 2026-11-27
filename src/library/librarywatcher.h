@@ -213,6 +213,7 @@ class LibraryWatcher : public QObject {
   TaskManager* task_manager_;
   QString device_name_;
 
+  // Made when the first path is watched. See AddWatch().
   FileSystemWatcherInterface* fs_watcher_;
   QHash<QString, Directory> subdir_mapping_;
 

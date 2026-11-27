@@ -248,6 +248,10 @@ Application::~Application() {
   // thread, including some device library backends.
   p_->device_manager_.reset();
 
+  // A library scan waits for the tag reader, which can't answer once its
+  // thread has stopped, so the scan has to stop first.
+  if (p_->library_) p_->library_->StopWatcher();
+
   for (QThread* thread : threads_) {
     thread->quit();
   }
